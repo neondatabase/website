@@ -44,10 +44,10 @@ const Hero = () => (
       <div className="col-span-10 col-start-2 lg:col-span-full lg:col-start-1">
         <h1 className="font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl sm:text-3xl">
           <span className="text-green-45">Serverless showcase:</span>
-          <br /> unleashing the power of Neon
+          <br /> build with Neon
         </h1>
         <p className="lg:text-4 mt-5 text-xl font-light leading-snug lg:text-xl md:text-base">
-          Explore interactive demos unveiling cutting-edge apps in the serverless era.
+          Explore interactive demos from the community and the Neon team.
         </p>
         <div className="mt-20 lg:mt-16 md:mt-10">
           <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-green-45">

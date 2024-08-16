@@ -3,12 +3,10 @@ title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.556Z'
+updatedOn: '2024-08-07T21:36:52.656Z'
 ---
 
-<LRNotice/>
-
-Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform. 
+Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
 
 With logical replication, you can copy some or all of your data to a different location and continue sending updates from your source database in real-time, allowing you to maintain up-to-date copies of your data in different locations.
 
@@ -35,7 +33,7 @@ You can verify that logical replication is enabled by running the following quer
 
 ```sql
 SHOW wal_level;
- wal_level 
+ wal_level
 -----------
  logical
 ```
@@ -48,7 +46,7 @@ The Postgres documentation describes a [publication](https://www.postgresql.org/
 
 A particular table can be included in multiple publications if necessary. Currently, publications can only include tables within a single schema.
 
-Publications can specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, publications replicate all of these operation types. 
+Publications can specify the types of changes they replicate, which can include `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations. By default, publications replicate all of these operation types.
 
 You can create a publication for one or more on the "publisher" database using [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) syntax. For example, this command creates a publication named `users_publication` that tracks changes made to a `users` table.
 
@@ -58,15 +56,15 @@ CREATE PUBLICATION users_publication FOR TABLE users;
 
 ## Subscriptions
 
-A subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies the publication it intends to subscribe to. 
+A subscription represents the downstream side of logical replication. It establishes a connection to the publisher and identifies the publication it intends to subscribe to.
 
-A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher. 
+A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
 You can create a subscription on a "susbcriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
 
 ```sql
-CREATE SUBSCRIPTION users_subscription 
-CONNECTION 'postgres://username:password@host:port/dbname' 
+CREATE SUBSCRIPTION users_subscription
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION users_publication;
 ```
 
@@ -120,7 +118,7 @@ For for more information about this alternative decoder plugin and how top use i
 
 ### WAL senders
 
-WAL senders are processes on the publisher database that read the WAL and send the relevant data to the subscriber. 
+WAL senders are processes on the publisher database that read the WAL and send the relevant data to the subscriber.
 
 The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes that are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication.
 

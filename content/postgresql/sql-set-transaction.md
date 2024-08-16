@@ -28,15 +28,15 @@ The available transaction characteristics are the transaction isolation level, t
 
 The isolation level of a transaction determines what data the transaction can see when other transactions are running concurrently:
 
-* `READ COMMITTED`
+- `READ COMMITTED`
 
   A statement can only see rows committed before it began. This is the default.
 
-* `REPEATABLE READ`
+- `REPEATABLE READ`
 
   All statements of the current transaction can only see rows committed before the first query or data-modification statement was executed in this transaction.
 
-* `SERIALIZABLE`
+- `SERIALIZABLE`
 
   All statements of the current transaction can only see rows committed before the first query or data-modification statement was executed in this transaction. If a pattern of reads and writes among concurrent serializable transactions would create a situation which could not have occurred for any serial (one-at-a-time) execution of those transactions, one of them will be rolled back with a `serialization_failure` error.
 
@@ -48,7 +48,7 @@ The transaction access mode determines whether the transaction is read/write or 
 
 The `DEFERRABLE` transaction property has no effect unless the transaction is also `SERIALIZABLE` and `READ ONLY`. When all three of these properties are selected for a transaction, the transaction may block when first acquiring its snapshot, after which it is able to run without the normal overhead of a `SERIALIZABLE` transaction and without any risk of contributing to or being canceled by a serialization failure. This mode is well suited for long-running reports or backups.
 
-The `SET TRANSACTION SNAPSHOT` command allows a new transaction to run with the same *snapshot* as an existing transaction. The pre-existing transaction must have exported its snapshot with the `pg_export_snapshot` function (see [Section 9.27.5](functions-admin#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION)). That function returns a snapshot identifier, which must be given to `SET TRANSACTION SNAPSHOT` to specify which snapshot is to be imported. The identifier must be written as a string literal in this command, for example `'00000003-0000001B-1'`. `SET TRANSACTION SNAPSHOT` can only be executed at the start of a transaction, before the first query or data-modification statement (`SELECT`, `INSERT`, `DELETE`, `UPDATE`, `MERGE`, `FETCH`, or `COPY`) of the transaction. Furthermore, the transaction must already be set to `SERIALIZABLE` or `REPEATABLE READ` isolation level (otherwise, the snapshot would be discarded immediately, since `READ COMMITTED` mode takes a new snapshot for each command). If the importing transaction uses `SERIALIZABLE` isolation level, then the transaction that exported the snapshot must also use that isolation level. Also, a non-read-only serializable transaction cannot import a snapshot from a read-only transaction.
+The `SET TRANSACTION SNAPSHOT` command allows a new transaction to run with the same _snapshot_ as an existing transaction. The pre-existing transaction must have exported its snapshot with the `pg_export_snapshot` function (see [Section 9.27.5](functions-admin#FUNCTIONS-SNAPSHOT-SYNCHRONIZATION)). That function returns a snapshot identifier, which must be given to `SET TRANSACTION SNAPSHOT` to specify which snapshot is to be imported. The identifier must be written as a string literal in this command, for example `'00000003-0000001B-1'`. `SET TRANSACTION SNAPSHOT` can only be executed at the start of a transaction, before the first query or data-modification statement (`SELECT`, `INSERT`, `DELETE`, `UPDATE`, `MERGE`, `FETCH`, or `COPY`) of the transaction. Furthermore, the transaction must already be set to `SERIALIZABLE` or `REPEATABLE READ` isolation level (otherwise, the snapshot would be discarded immediately, since `READ COMMITTED` mode takes a new snapshot for each command). If the importing transaction uses `SERIALIZABLE` isolation level, then the transaction that exported the snapshot must also use that isolation level. Also, a non-read-only serializable transaction cannot import a snapshot from a read-only transaction.
 
 [#id](#id-1.9.3.178.9)
 
@@ -56,11 +56,11 @@ The `SET TRANSACTION SNAPSHOT` command allows a new transaction to run with the 
 
 If `SET TRANSACTION` is executed without a prior `START TRANSACTION` or `BEGIN`, it emits a warning and otherwise has no effect.
 
-It is possible to dispense with `SET TRANSACTION` by instead specifying the desired *`transaction_modes`* in `BEGIN` or `START TRANSACTION`. But that option is not available for `SET TRANSACTION SNAPSHOT`.
+It is possible to dispense with `SET TRANSACTION` by instead specifying the desired _`transaction_modes`_ in `BEGIN` or `START TRANSACTION`. But that option is not available for `SET TRANSACTION SNAPSHOT`.
 
-The session default transaction modes can also be set or examined via the configuration parameters [default\_transaction\_isolation](runtime-config-client#GUC-DEFAULT-TRANSACTION-ISOLATION), [default\_transaction\_read\_only](runtime-config-client#GUC-DEFAULT-TRANSACTION-READ-ONLY), and [default\_transaction\_deferrable](runtime-config-client#GUC-DEFAULT-TRANSACTION-DEFERRABLE). (In fact `SET SESSION CHARACTERISTICS` is just a verbose equivalent for setting these variables with `SET`.) This means the defaults can be set in the configuration file, via `ALTER DATABASE`, etc. Consult [Chapter 20](runtime-config) for more information.
+The session default transaction modes can also be set or examined via the configuration parameters [default_transaction_isolation](runtime-config-client#GUC-DEFAULT-TRANSACTION-ISOLATION), [default_transaction_read_only](runtime-config-client#GUC-DEFAULT-TRANSACTION-READ-ONLY), and [default_transaction_deferrable](runtime-config-client#GUC-DEFAULT-TRANSACTION-DEFERRABLE). (In fact `SET SESSION CHARACTERISTICS` is just a verbose equivalent for setting these variables with `SET`.) This means the defaults can be set in the configuration file, via `ALTER DATABASE`, etc. Consult [Chapter 20](runtime-config) for more information.
 
-The current transaction's modes can similarly be set or examined via the configuration parameters [transaction\_isolation](runtime-config-client#GUC-TRANSACTION-ISOLATION), [transaction\_read\_only](runtime-config-client#GUC-TRANSACTION-READ-ONLY), and [transaction\_deferrable](runtime-config-client#GUC-TRANSACTION-DEFERRABLE). Setting one of these parameters acts the same as the corresponding `SET TRANSACTION` option, with the same restrictions on when it can be done. However, these parameters cannot be set in the configuration file, or from any source other than live SQL.
+The current transaction's modes can similarly be set or examined via the configuration parameters [transaction_isolation](runtime-config-client#GUC-TRANSACTION-ISOLATION), [transaction_read_only](runtime-config-client#GUC-TRANSACTION-READ-ONLY), and [transaction_deferrable](runtime-config-client#GUC-TRANSACTION-DEFERRABLE). Setting one of these parameters acts the same as the corresponding `SET TRANSACTION` option, with the same restrictions on when it can be done. However, these parameters cannot be set in the configuration file, or from any source other than live SQL.
 
 [#id](#id-1.9.3.178.10)
 
@@ -94,4 +94,4 @@ These commands are defined in the SQL standard, except for the `DEFERRABLE` tran
 
 In the SQL standard, there is one other transaction characteristic that can be set with these commands: the size of the diagnostics area. This concept is specific to embedded SQL, and therefore is not implemented in the PostgreSQL server.
 
-The SQL standard requires commas between successive *`transaction_modes`*, but for historical reasons PostgreSQL allows the commas to be omitted.
+The SQL standard requires commas between successive _`transaction_modes`_, but for historical reasons PostgreSQL allows the commas to be omitted.

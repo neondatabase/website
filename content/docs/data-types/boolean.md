@@ -2,10 +2,10 @@
 title: Postgres Boolean data type
 subtitle: Represent truth values in Postgres
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.383Z'
+updatedOn: '2024-06-14T07:55:54.365Z'
 ---
 
-In Postgres, the Boolean datatype is designed to store truth values. A Boolean column can hold one of three states: `true`, `false`, or `NULL` representing unknown or missing values. 
+In Postgres, the Boolean datatype is designed to store truth values. A Boolean column can hold one of three states: `true`, `false`, or `NULL` representing unknown or missing values.
 
 For instance, Boolean values can be used in a dataset to represent the status of an order, whether a user is active, or whether a product is in stock. A Boolean value could also be produced as a result of comparisons or logical operations.
 
@@ -18,11 +18,11 @@ In SQL statements, Boolean values are represented by the keywords `TRUE`, `FALSE
 - `TRUE` can also be represented as `t`, `true`, `y`, `yes`, `on`, `1`.
 - `FALSE` can also be represented as `f`, `false`, `n`, `no`, `off`, `0`.
 
-A boolean value is stored as a single byte. 
+A boolean value is stored as a single byte.
 
 ## Example usage
 
-Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not. 
+Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not.
 
 The query below creates a `users` table and inserts some sample data:
 
@@ -35,7 +35,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, is_active, has_paid_subscription)
-VALUES 
+VALUES
     ('alice', TRUE, TRUE),
     ('bob', TRUE, FALSE),
     ('charlie', FALSE, TRUE),
@@ -64,9 +64,9 @@ This query returns the following:
 
 ### Conditional logic
 
-Boolean data types are commonly used in conditional statements like `WHERE`, `IF`, and `CASE`. For example, the `CASE` statement is a control flow structure that allows you to perform `IF-THEN-ELSE` logic in SQL. 
+Boolean data types are commonly used in conditional statements like `WHERE`, `IF`, and `CASE`. For example, the `CASE` statement is a control flow structure that allows you to perform `IF-THEN-ELSE` logic in SQL.
 
-In the query below, we categorize users based on their activity and account type. 
+In the query below, we categorize users based on their activity and account type.
 
 ```sql
 SELECT username,
@@ -94,7 +94,7 @@ This query returns the following:
 
 ### Boolean expressions
 
-Boolean expressions combine multiple boolean values using operators like `AND`, `OR`, and `NOT`. These expressions return boolean values and are crucial in complex SQL queries. 
+Boolean expressions combine multiple boolean values using operators like `AND`, `OR`, and `NOT`. These expressions return boolean values and are crucial in complex SQL queries.
 
 For example, we can use a Boolean expression to find all the users who are active but don't have a paid subscription yet.
 
@@ -114,9 +114,9 @@ This query returns the following:
 
 ### Boolean aggregations
 
-Postgres also supports aggregating over a set of Boolean values, using functions like `bool_and()` and `bool_or()`. 
+Postgres also supports aggregating over a set of Boolean values, using functions like `bool_and()` and `bool_or()`.
 
-For example, we can query to check that no inactive users have a paid subscription. 
+For example, we can query to check that no inactive users have a paid subscription.
 
 ```sql
 SELECT bool_or(has_paid_subscription) AS inactive_paid_users
@@ -132,13 +132,13 @@ This query returns the following:
 | t                   |
 ```
 
-This indicates there is at least one inactive user with an ongoing subscription. We should probably email them a reminder to log in. 
+This indicates there is at least one inactive user with an ongoing subscription. We should probably email them a reminder to log in.
 
 ### Boolean in join conditions
 
-Booleans can be effectively used in the `JOIN` clause to match rows across tables. 
+Booleans can be effectively used in the `JOIN` clause to match rows across tables.
 
-In the query below, we join the `users` table with the table containing contact information to send a promotional email to all active users. 
+In the query below, we join the `users` table with the table containing contact information to send a promotional email to all active users.
 
 ```sql
 WITH contacts (user_id, email) AS (
@@ -167,7 +167,7 @@ This query returns the following:
 
 - **NULL**: `NULL` in boolean terms indicates an unknown state, which is neither `TRUE` nor `FALSE`. In conditional statements, `NULL` values will not equate to `FALSE`.
 - **Type Casting**: Be mindful when converting Booleans to other data types. For instance, casting a Boolean to an integer results in `1` for `TRUE` and `0` for `FALSE`. This behavior is useful in aggregations or mathematical operations.
-- **Indexing**: Using Booleans in indexing might not always be efficient, especially if the distribution of true and false values is uneven. 
+- **Indexing**: Using Booleans in indexing might not always be efficient, especially if the distribution of true and false values is uneven.
 
 ## Resources
 

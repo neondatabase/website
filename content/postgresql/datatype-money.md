@@ -2,7 +2,7 @@
 
 ## 8.2. Monetary Types [#](#DATATYPE-MONEY)
 
-The `money` type stores a currency amount with a fixed fractional precision; see [Table 8.3](datatype-money#DATATYPE-MONEY-TABLE). The fractional precision is determined by the database's [lc\_monetary](runtime-config-client#GUC-LC-MONETARY) setting. The range shown in the table assumes there are two fractional digits. Input is accepted in a variety of formats, including integer and floating-point literals, as well as typical currency formatting, such as `'$1,000.00'`. Output is generally in the latter form but depends on the locale.
+The `money` type stores a currency amount with a fixed fractional precision; see [Table 8.3](datatype-money#DATATYPE-MONEY-TABLE). The fractional precision is determined by the database's [lc_monetary](runtime-config-client#GUC-LC-MONETARY) setting. The range shown in the table assumes there are two fractional digits. Input is accepted in a variety of formats, including integer and floating-point literals, as well as typical currency formatting, such as `'$1,000.00'`. Output is generally in the latter form but depends on the locale.
 
 [#id](#DATATYPE-MONEY-TABLE)
 
@@ -11,7 +11,6 @@ The `money` type stores a currency amount with a fixed fractional precision; see
 | Name    | Storage Size | Description     | Range                                          |
 | ------- | ------------ | --------------- | ---------------------------------------------- |
 | `money` | 8 bytes      | currency amount | -92233720368547758.08 to +92233720368547758.07 |
-
 
 Since the output of this data type is locale-sensitive, it might not work to load `money` data into a database that has a different setting of `lc_monetary`. To avoid problems, before restoring a dump into a new database make sure `lc_monetary` has the same or equivalent value as in the database that was dumped.
 

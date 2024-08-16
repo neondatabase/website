@@ -25,23 +25,23 @@ To alter the server you must be the owner of the server. Additionally to alter t
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing server.
 
-* *`new_version`*
+- _`new_version`_
 
   New server version.
 
-* `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
+- `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
 
   Change options for the server. `ADD`, `SET`, and `DROP` specify the action to be performed. `ADD` is assumed if no operation is explicitly specified. Option names must be unique; names and values are also validated using the server's foreign-data wrapper library.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The user name of the new owner of the foreign server.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the foreign server.
 

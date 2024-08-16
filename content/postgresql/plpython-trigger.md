@@ -2,43 +2,41 @@
 
 ## 46.5. Trigger Functions [#](#PLPYTHON-TRIGGER)
 
-
-
 When a function is used as a trigger, the dictionary `TD` contains trigger-related values:
 
-* `TD["event"]`
+- `TD["event"]`
 
   contains the event as a string: `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`.
 
-* `TD["when"]`
+- `TD["when"]`
 
   contains one of `BEFORE`, `AFTER`, or `INSTEAD OF`.
 
-* `TD["level"]`
+- `TD["level"]`
 
   contains `ROW` or `STATEMENT`.
 
-* `TD["new"]``TD["old"]`
+- `TD["new"]``TD["old"]`
 
   For a row-level trigger, one or both of these fields contain the respective trigger rows, depending on the trigger event.
 
-* `TD["name"]`
+- `TD["name"]`
 
   contains the trigger name.
 
-* `TD["table_name"]`
+- `TD["table_name"]`
 
   contains the name of the table on which the trigger occurred.
 
-* `TD["table_schema"]`
+- `TD["table_schema"]`
 
   contains the schema of the table on which the trigger occurred.
 
-* `TD["relid"]`
+- `TD["relid"]`
 
   contains the OID of the table on which the trigger occurred.
 
-* `TD["args"]`
+- `TD["args"]`
 
   If the `CREATE TRIGGER` command included arguments, they are available in `TD["args"][0]` to `TD["args"][n-1]`.
 

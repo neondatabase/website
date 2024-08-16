@@ -20,13 +20,11 @@ COMMIT [ WORK | TRANSACTION ] [ AND [ NO ] CHAIN ]
 
 ## Parameters
 
-
-
-* `WORK``TRANSACTION` [#](#SQL-COMMIT-TRANSACTION)
+- `WORK``TRANSACTION` [#](#SQL-COMMIT-TRANSACTION)
 
   Optional key words. They have no effect.
 
-* `AND CHAIN` [#](#SQL-COMMIT-CHAIN)
+- `AND CHAIN` [#](#SQL-COMMIT-CHAIN)
 
   If `AND CHAIN` is specified, a new transaction is immediately started with the same transaction characteristics (see [SET TRANSACTION](sql-set-transaction)) as the just finished one. Otherwise, no new transaction is started.
 

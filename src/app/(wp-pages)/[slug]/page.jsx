@@ -1,13 +1,16 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
+import Azure from 'components/pages/landing/azure';
 import Hero from 'components/pages/landing/hero';
-import CTA from 'components/pages/pricing/cta';
+import PricingCTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
+import SharedCTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import replicasIcon from 'icons/landing/replica.svg';
@@ -49,6 +52,8 @@ const DynamicPage = async ({ params, searchParams }) => {
 
   if (!page) return notFound();
 
+  const isAzurePage = params.slug === 'neon-on-azure';
+
   const {
     title,
     content,
@@ -60,6 +65,9 @@ const DynamicPage = async ({ params, searchParams }) => {
     {
       landinghero: async ({ hubspotFormId, ...restProps }) => {
         const formData = await getHubspotFormData(hubspotFormId);
+        if (isAzurePage) {
+          return <Azure formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+        }
         return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
       },
       landingfeatures: ({ features, ...restProps }) => {
@@ -73,7 +81,11 @@ const DynamicPage = async ({ params, searchParams }) => {
 
         return (
           <SplitViewGrid
-            className="mx-auto mb-32 mt-16 max-w-[1265px] lg:my-14"
+            className={clsx(
+              'mx-auto mt-16 max-w-[1265px]',
+              isAzurePage ? 'mb-14' : 'mb-32',
+              'lg:my-14'
+            )}
             {...restProps}
             items={items}
             size="sm"
@@ -81,7 +93,17 @@ const DynamicPage = async ({ params, searchParams }) => {
           />
         );
       },
-      landingcta: CTA,
+      landingcta: ({ ...props }) => {
+        if (isAzurePage) {
+          return (
+            <SharedCTA
+              className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
+              {...props}
+            />
+          );
+        }
+        return <PricingCTA {...props} />;
+      },
     },
     true
   );
@@ -151,7 +173,7 @@ export async function generateMetadata({ params }) {
     keywords: metaKeywords,
     robotsNoindex: metaRobotsNoindex,
     pathname: `/${params.slug}`,
-    imagePath: twitterImage.mediaItemUrl,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 

@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.283Z'
+updatedOn: '2024-08-07T21:36:52.654Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -37,25 +37,25 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
 
-    ```sql
-    -- Creating the `authors` table
-    CREATE TABLE authors (
-        author_id SERIAL PRIMARY KEY,
-        first_name VARCHAR(100),
-        last_name VARCHAR(100),
-        email VARCHAR(255) UNIQUE NOT NULL,
-        bio TEXT
-    );
+   ```sql
+   -- Creating the `authors` table
+   CREATE TABLE authors (
+       author_id SERIAL PRIMARY KEY,
+       first_name VARCHAR(100),
+       last_name VARCHAR(100),
+       email VARCHAR(255) UNIQUE NOT NULL,
+       bio TEXT
+   );
 
-    -- Creating the `posts` table
-    CREATE TABLE posts (
-        post_id SERIAL PRIMARY KEY,
-        author_id INTEGER REFERENCES authors(author_id),
-        title VARCHAR(255) NOT NULL,
-        content TEXT,
-        published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-    ```
+   -- Creating the `posts` table
+   CREATE TABLE posts (
+       post_id SERIAL PRIMARY KEY,
+       author_id INTEGER REFERENCES authors(author_id),
+       title VARCHAR(255) NOT NULL,
+       content TEXT,
+       published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
 
 ## Prepare a development database
 
@@ -64,11 +64,11 @@ Now, let's prepare a development database in Neon by creating a development bran
 To create a branch:
 
 1. In the Neon Console, select **Branches**. You will see your `main` branch, where you just created your `blog` database and tables.
-3. Click **New Branch** to open the branch creation dialog.
-4. Enter a name for the branch. Let's call it `dev1`.
-5. Leave `main` selected as the parent branch. This is where you created the `blog` database.
-6. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute endpoint is required to connect to the database on the branch.
-8. Click **Create Branch** to create your branch.
+2. Click **New Branch** to open the branch creation dialog.
+3. Enter a name for the branch. Let's call it `dev1`.
+4. Leave `main` selected as the parent branch. This is where you created the `blog` database.
+5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute is required to connect to the database on the branch.
+6. Click **Create Branch** to create your branch.
 
 ## Retrieve your Neon database connection strings
 
@@ -80,15 +80,15 @@ The target database is the database on your `dev1` branch where you will will do
 
 1. Select the `dev1` branch, the `blog` database, and copy the connection string.
 
-    ```bash
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
-    ```
+   ```bash
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
+   ```
 
 2. Select the `main` branch, the `blog` database, and copy the connection string.
 
-    ```bash
-    postgres://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
-    ```
+   ```bash
+   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
+   ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a separate instance of Postgres, hosted on its own compute.
 
@@ -100,31 +100,31 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
 2. Change the `changeLogFile` setting as shown:
 
-    ```bash
-    changeLogFile=dbchangelog.xml
-    ``````
+   ```bash
+   changeLogFile=dbchangelog.xml
+   ```
 
-    The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
+   The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
 
 3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    ```bash shouldWrap
-    liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
+   ```bash shouldWrap
+   liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
-    liquibase.command.username: alex
+   liquibase.command.username: alex
 
-    liquibase.command.password: AbC123dEf
-    ```
+   liquibase.command.password: AbC123dEf
+   ```
 
 4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `dev1` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
-    ```bash shouldWrap
-    liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+   ```bash shouldWrap
+   liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
-    liquibase.command.referenceUsername: alex
+   liquibase.command.referenceUsername: alex
 
-    liquibase.command.referencePassword: AbC123dEf
-    ```
+   liquibase.command.referencePassword: AbC123dEf
+   ```
 
 ## Take a snapshot of your target database
 
@@ -191,38 +191,38 @@ Now, you can start making database schema changes by creating [changesets](https
 
 1. Create the changelog file where you will add your schema changes:
 
-    ```bash
-    cd ~/blogdb
-    touch dbchangelog.xml
-    ```
+   ```bash
+   cd ~/blogdb
+   touch dbchangelog.xml
+   ```
 
 2. Add the following changeset to the `dbchangelog.xml` file, which adds a `comments` table to your database:
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <databaseChangeLog  
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"  
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-        <changeSet author="alex" id="myIDNumber1234">
-            <createTable tableName="comments">
-                <column autoIncrement="true" name="comment_id" type="INTEGER">
-                    <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
-                </column>
-                <column name="post_id" type="INTEGER">
-                    <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
-                </column>
-                <column name="author_id" type="INTEGER">
-                    <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
-                </column>
-                <column name="comment" type="TEXT"/>
-                <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            </createTable>
-        </changeSet>
-    </databaseChangeLog>
-    ```
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <databaseChangeLog
+   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+       <changeSet author="alex" id="myIDNumber1234">
+           <createTable tableName="comments">
+               <column autoIncrement="true" name="comment_id" type="INTEGER">
+                   <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
+               </column>
+               <column name="post_id" type="INTEGER">
+                   <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
+               </column>
+               <column name="author_id" type="INTEGER">
+                   <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
+               </column>
+               <column name="comment" type="TEXT"/>
+               <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+           </createTable>
+       </changeSet>
+   </databaseChangeLog>
+   ```
 
 ### Deploy the schema change
 
@@ -371,7 +371,7 @@ Missing Catalog(s): NONE
 Unexpected Catalog(s): NONE
 Changed Catalog(s): NONE
 Missing Column(s): NONE
-Unexpected Column(s): 
+Unexpected Column(s):
      public.comments.author_id
      public.comments.comment
      public.comments.comment_id
@@ -379,16 +379,16 @@ Unexpected Column(s):
      public.comments.post_id
 Changed Column(s): NONE
 Missing Foreign Key(s): NONE
-Unexpected Foreign Key(s): 
+Unexpected Foreign Key(s):
      fk_comments_author_id(comments[author_id] -> authors[author_id])
      fk_comments_post_id(comments[post_id] -> posts[post_id])
 Changed Foreign Key(s): NONE
 Missing Index(s): NONE
-Unexpected Index(s): 
+Unexpected Index(s):
      comments_pkey UNIQUE  ON public.comments(comment_id)
 Changed Index(s): NONE
 Missing Primary Key(s): NONE
-Unexpected Primary Key(s): 
+Unexpected Primary Key(s):
      comments_pkey on public.comments(comment_id)
 Changed Primary Key(s): NONE
 Missing Schema(s): NONE
@@ -398,7 +398,7 @@ Missing Sequence(s): NONE
 Unexpected Sequence(s): NONE
 Changed Sequence(s): NONE
 Missing Table(s): NONE
-Unexpected Table(s): 
+Unexpected Table(s):
      comments
 Changed Table(s): NONE
 Missing Unique Constraint(s): NONE
@@ -418,7 +418,7 @@ When you are satisfied with the changes that will be applied, save your changelo
 
 ### Apply the changeset to your source database
 
-Apply the new changesets to the source database on your primary branch:
+Apply the new changesets to the source database on your default branch:
 
 ```bash shouldWrap
 liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update

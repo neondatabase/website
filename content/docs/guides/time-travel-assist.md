@@ -2,6 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
+updatedOn: '2024-08-07T21:36:52.666Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
@@ -14,9 +15,9 @@ You can use Time Travel from two places in the Neon Console, and from the Neon C
 
 ## How Time Travel works
 
-Time Travel leverages Neon's instant branching capability to create a temporary branch and compute endpoint at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The compute endpoints are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
-However, you can see the history of operations related to the creation and deletion of branches and ephemeral compute endpoints on the **Operations** page:
+However, you can see the history of operations related to the creation and deletion of branches and ephemeral computes on the **Operations** page:
 
 - start_compute
 - create_branch
@@ -25,11 +26,11 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral endpoint remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral compute remains active for as long as you keep running queries against it. After 10 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ### History retention
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Tier users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
+You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Plan users, up to 7 days for Launch plan users, and up to 30 days for Scale plan users.
 
 You cannot select a time outside your current retention window.
 
@@ -39,9 +40,9 @@ To change your retention period, see [Configure history retention](/docs/manage/
 
 Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
 
-![time travel error message](/docs/guides/time_travel_error.png "no-border")
+![time travel error message](/docs/guides/time_travel_error.png 'no-border')
 
-### Time Travel with the SQL editor
+### Time Travel with the SQL Editor
 
 Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
 
@@ -77,10 +78,11 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 1. In the Neon Console, open the **SQL Editor**.
 1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
 
-    ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
+   ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
 
 1. Use the Date & Time selector to choose a point within your history retention window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
+
 </TabItem>
 
 <TabItem>
@@ -88,21 +90,21 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 1. In the Neon Console, go to **Restore**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
-    ![time travel selection](/docs/guides/time_travel_restore_select.png "no-border")
+   ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
 
-    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL editor show the **branch** and **timestamp** you just selected.
+   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
 
-    ![Time travel assist](/docs/guides/time_travel_show_selected.png)
+   ![Time travel assist](/docs/guides/time_travel_show_selected.png)
 
-1. Check that you have the right database selected to run your query against. Use the database selector under the SQL editor to switch to a different database for querying against.
+1. Check that you have the right database selected to run your query against. Use the database selector under the SQL Editor to switch to a different database for querying against.
 
-    ![time travel select db](/docs/guides/time_travel_db_select.png)
+   ![time travel select db](/docs/guides/time_travel_db_select.png)
 
 1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
-    If your query is successful, you will see a table of results under the editor.
+   If your query is successful, you will see a table of results under the editor.
 
-    ![time travel results](/docs/guides/time_travel_results.png)
+   ![time travel results](/docs/guides/time_travel_results.png)
 
 </TabItem>
 
@@ -111,16 +113,16 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 Using the Neon CLI, you can establish a connection to a specific point in your branch's history. To get the connection string, use the following command:
 
 ```bash
-neonctl connection-string <branch>@<timestamp|LSN>
+neon connection-string <branch>@<timestamp|LSN>
 ```
 
-In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your primary branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
+In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
 
 Example:
 
 ```bash
-neonctl connetion-string main@2024-04-21T00:00:00Z       
-postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+neon connetion-string main@2024-04-21T00:00:00Z
+postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
 ### Connect directly with psql
@@ -128,7 +130,7 @@ postgres://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?s
 Appending `--psql` to the command for a one-step psql connection. For example, to connect to `main` at its state on Jan 1st, 2024:
 
 ```bash
-neonctl connection-string main@2024-01-01T00:00:00Z --psql
+neon connection-string main@2024-01-01T00:00:00Z --psql
 ```
 
 Here is the same command using aliases:
@@ -154,10 +156,11 @@ This retrieves the connection string for querying the 'main' branch at a specifi
 If you are working with multiple Neon projects, specify the project ID to target the correct project:
 
 ```bash
-neonctl connection-string <branch>@<timestamp|LSN> --project-id <project id>
+neon connection-string <branch>@<timestamp|LSN> --project-id <project id>
 ```
 
 Example:
+
 ```bash
 neon cs main@2024-01-01T00:00:00Z --project-id noisy-pond-12345678
 ```

@@ -2,8 +2,6 @@
 
 ## F.44. tcn — a trigger function to notify listeners of changes to table content [#](#TCN)
 
-
-
 The `tcn` module provides a trigger function that notifies listeners of changes to any table on which it is attached. It must be used as an `AFTER` trigger `FOR EACH ROW`.
 
 This module is considered “trusted”, that is, it can be installed by non-superusers who have `CREATE` privilege on the current database.

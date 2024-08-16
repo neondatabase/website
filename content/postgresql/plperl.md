@@ -4,23 +4,21 @@
 
 **Table of Contents**
 
-  * [45.1. PL/Perl Functions and Arguments](plperl-funcs)
-  * [45.2. Data Values in PL/Perl](plperl-data)
-  * [45.3. Built-in Functions](plperl-builtins)
+- [45.1. PL/Perl Functions and Arguments](plperl-funcs)
+- [45.2. Data Values in PL/Perl](plperl-data)
+- [45.3. Built-in Functions](plperl-builtins)
 
-    - [45.3.1. Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
-    - [45.3.2. Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
+  - [45.3.1. Database Access from PL/Perl](plperl-builtins#PLPERL-DATABASE)
+  - [45.3.2. Utility Functions in PL/Perl](plperl-builtins#PLPERL-UTILITY-FUNCTIONS)
 
-  * [45.4. Global Values in PL/Perl](plperl-global)
-  * [45.5. Trusted and Untrusted PL/Perl](plperl-trusted)
-  * [45.6. PL/Perl Triggers](plperl-triggers)
-  * [45.7. PL/Perl Event Triggers](plperl-event-triggers)
-  * [45.8. PL/Perl Under the Hood](plperl-under-the-hood)
+- [45.4. Global Values in PL/Perl](plperl-global)
+- [45.5. Trusted and Untrusted PL/Perl](plperl-trusted)
+- [45.6. PL/Perl Triggers](plperl-triggers)
+- [45.7. PL/Perl Event Triggers](plperl-event-triggers)
+- [45.8. PL/Perl Under the Hood](plperl-under-the-hood)
 
-    - [45.8.1. Configuration](plperl-under-the-hood#PLPERL-CONFIG)
-    - [45.8.2. Limitations and Missing Features](plperl-under-the-hood#PLPERL-MISSING)
-
-
+  - [45.8.1. Configuration](plperl-under-the-hood#PLPERL-CONFIG)
+  - [45.8.2. Limitations and Missing Features](plperl-under-the-hood#PLPERL-MISSING)
 
 PL/Perl is a loadable procedural language that enables you to write PostgreSQL functions and procedures in the [Perl programming language](https://www.perl.org).
 

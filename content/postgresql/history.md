@@ -2,9 +2,9 @@
 
 ## 2. A Brief History of PostgreSQL [#](#HISTORY)
 
-* [2.1. The Berkeley POSTGRES Project](history#HISTORY-BERKELEY)
-* [2.2. Postgres95](history#HISTORY-POSTGRES95)
-* [2.3. PostgreSQL](history#HISTORY-POSTGRESQL)
+- [2.1. The Berkeley POSTGRES Project](history#HISTORY-BERKELEY)
+- [2.2. Postgres95](history#HISTORY-POSTGRES95)
+- [2.3. PostgreSQL](history#HISTORY-POSTGRESQL)
 
 The object-relational database management system now known as PostgreSQL is derived from the POSTGRES package written at the University of California at Berkeley. With decades of development behind it, PostgreSQL is now the most advanced open-source database available anywhere.
 
@@ -28,19 +28,19 @@ In 1994, Andrew Yu and Jolly Chen added an SQL language interpreter to POSTGRES.
 
 Postgres95 code was completely ANSI C and trimmed in size by 25%. Many internal changes improved performance and maintainability. Postgres95 release 1.0.x ran about 30–50% faster on the Wisconsin Benchmark compared to POSTGRES, Version 4.2. Apart from bug fixes, the following were the major enhancements:
 
-* The query language PostQUEL was replaced with SQL (implemented in the server). (Interface library [libpq](libpq) was named after PostQUEL.) Subqueries were not supported until PostgreSQL (see below), but they could be imitated in Postgres95 with user-defined SQL functions. Aggregate functions were re-implemented. Support for the `GROUP BY` query clause was also added.
+- The query language PostQUEL was replaced with SQL (implemented in the server). (Interface library [libpq](libpq) was named after PostQUEL.) Subqueries were not supported until PostgreSQL (see below), but they could be imitated in Postgres95 with user-defined SQL functions. Aggregate functions were re-implemented. Support for the `GROUP BY` query clause was also added.
 
-* A new program (psql) was provided for interactive SQL queries, which used GNU Readline. This largely superseded the old monitor program.
+- A new program (psql) was provided for interactive SQL queries, which used GNU Readline. This largely superseded the old monitor program.
 
-* A new front-end library, `libpgtcl`, supported Tcl-based clients. A sample shell, `pgtclsh`, provided new Tcl commands to interface Tcl programs with the Postgres95 server.
+- A new front-end library, `libpgtcl`, supported Tcl-based clients. A sample shell, `pgtclsh`, provided new Tcl commands to interface Tcl programs with the Postgres95 server.
 
-* The large-object interface was overhauled. The inversion large objects were the only mechanism for storing large objects. (The inversion file system was removed.)
+- The large-object interface was overhauled. The inversion large objects were the only mechanism for storing large objects. (The inversion file system was removed.)
 
-* The instance-level rule system was removed. Rules were still available as rewrite rules.
+- The instance-level rule system was removed. Rules were still available as rewrite rules.
 
-* A short tutorial introducing regular SQL features as well as those of Postgres95 was distributed with the source code
+- A short tutorial introducing regular SQL features as well as those of Postgres95 was distributed with the source code
 
-* GNU make (instead of BSD make) was used for the build. Also, Postgres95 could be compiled with an unpatched GCC (data alignment of doubles was fixed).
+- GNU make (instead of BSD make) was used for the build. Also, Postgres95 could be compiled with an unpatched GCC (data alignment of doubles was fixed).
 
 [#id](#HISTORY-POSTGRESQL)
 

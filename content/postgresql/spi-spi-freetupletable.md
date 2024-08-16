@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-FREETUPLETABLE)
 
-## SPI\_freetuptable
+## SPI_freetuptable
 
-SPI\_freetuptable — free a row set created by `SPI_execute` or a similar function
+SPI_freetuptable — free a row set created by `SPI_execute` or a similar function
 
 ## Synopsis
 
@@ -24,6 +24,6 @@ Beginning in PostgreSQL 9.3, `SPI_freetuptable` contains guard logic to protect 
 
 ## Arguments
 
-* `SPITupleTable * tuptable`
+- `SPITupleTable * tuptable`
 
   pointer to row set to free, or NULL to do nothing

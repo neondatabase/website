@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETARGTYPEID)
 
-## SPI\_getargtypeid
+## SPI_getargtypeid
 
-SPI\_getargtypeid — return the data type OID for an argument of a statement prepared by `SPI_prepare`
+SPI_getargtypeid — return the data type OID for an argument of a statement prepared by `SPI_prepare`
 
 ## Synopsis
 
@@ -14,17 +14,17 @@ Oid SPI_getargtypeid(SPIPlanPtr plan, int argIndex)
 
 ## Description
 
-`SPI_getargtypeid` returns the OID representing the type for the *`argIndex`*'th argument of a statement prepared by `SPI_prepare`. First argument is at index zero.
+`SPI_getargtypeid` returns the OID representing the type for the _`argIndex`_'th argument of a statement prepared by `SPI_prepare`. First argument is at index zero.
 
 [#id](#id-1.8.12.8.13.6)
 
 ## Arguments
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   prepared statement (returned by `SPI_prepare`)
 
-* `int argIndex`
+- `int argIndex`
 
   zero based index of the argument
 
@@ -32,4 +32,4 @@ Oid SPI_getargtypeid(SPIPlanPtr plan, int argIndex)
 
 ## Return Value
 
-The type OID of the argument at the given index. If the *`plan`* is `NULL` or invalid, or *`argIndex`* is less than 0 or not less than the number of arguments declared for the *`plan`*, `SPI_result` is set to `SPI_ERROR_ARGUMENT` and `InvalidOid` is returned.
+The type OID of the argument at the given index. If the _`plan`_ is `NULL` or invalid, or _`argIndex`_ is less than 0 or not less than the number of arguments declared for the _`plan`_, `SPI_result` is set to `SPI_ERROR_ARGUMENT` and `InvalidOid` is returned.

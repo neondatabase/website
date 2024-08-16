@@ -31,27 +31,27 @@ If a schema name is given (for example, `CREATE STATISTICS myschema.mystat ...`)
 
 ## Parameters
 
-* `IF NOT EXISTS`
+- `IF NOT EXISTS`
 
   Do not throw an error if a statistics object with the same name already exists. A notice is issued in this case. Note that only the name of the statistics object is considered here, not the details of its definition. Statistics name is required when `IF NOT EXISTS` is specified.
 
-* *`statistics_name`*
+- _`statistics_name`_
 
   The name (optionally schema-qualified) of the statistics object to be created. If the name is omitted, PostgreSQL chooses a suitable name based on the parent table's name and the defined column name(s) and/or expression(s).
 
-* *`statistics_kind`*
+- _`statistics_kind`_
 
   A multivariate statistics kind to be computed in this statistics object. Currently supported kinds are `ndistinct`, which enables n-distinct statistics, `dependencies`, which enables functional dependency statistics, and `mcv` which enables most-common values lists. If this clause is omitted, all supported statistics kinds are included in the statistics object. Univariate expression statistics are built automatically if the statistics definition includes any complex expressions rather than just simple column references. For more information, see [Section 14.2.2](planner-stats#PLANNER-STATS-EXTENDED) and [Section 76.2](multivariate-statistics-examples).
 
-* *`column_name`*
+- _`column_name`_
 
   The name of a table column to be covered by the computed statistics. This is only allowed when building multivariate statistics. At least two column names or expressions must be specified, and their order is not significant.
 
-* *`expression`*
+- _`expression`_
 
   An expression to be covered by the computed statistics. This may be used to build univariate statistics on a single expression, or as part of a list of multiple column names and/or expressions to build multivariate statistics. In the latter case, separate univariate statistics are built automatically for each expression in the list.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table containing the column(s) the statistics are computed on; see [ANALYZE](sql-analyze) for an explanation of the handling of inheritance and partitions.
 

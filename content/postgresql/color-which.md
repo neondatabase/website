@@ -6,19 +6,19 @@ The actual colors to be used are configured using the environment variable `PG_C
 
 The following keys are currently in use:
 
-* `error`
+- `error`
 
   used to highlight the text “error” in error messages
 
-* `warning`
+- `warning`
 
   used to highlight the text “warning” in warning messages
 
-* `note`
+- `note`
 
   used to highlight the text “detail” and “hint” in such messages
 
-* `locus`
+- `locus`
 
   used to highlight location information (e.g., program name and file name) in messages
 

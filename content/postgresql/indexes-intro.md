@@ -31,7 +31,7 @@ The name `test1_id_index` can be chosen freely, but you should pick something th
 
 To remove an index, use the `DROP INDEX` command. Indexes can be added to and removed from tables at any time.
 
-Once an index is created, no further intervention is required: the system will update the index when the table is modified, and it will use the index in queries when it thinks doing so would be more efficient than a sequential table scan. But you might have to run the `ANALYZE` command regularly to update statistics to allow the query planner to make educated decisions. See [Chapter 14](performance-tips) for information about how to find out whether an index is used and when and why the planner might choose *not* to use an index.
+Once an index is created, no further intervention is required: the system will update the index when the table is modified, and it will use the index in queries when it thinks doing so would be more efficient than a sequential table scan. But you might have to run the `ANALYZE` command regularly to update statistics to allow the query planner to make educated decisions. See [Chapter 14](performance-tips) for information about how to find out whether an index is used and when and why the planner might choose _not_ to use an index.
 
 Indexes can also benefit `UPDATE` and `DELETE` commands with search conditions. Indexes can moreover be used in join searches. Thus, an index defined on a column that is part of a join condition can also significantly speed up queries with joins.
 

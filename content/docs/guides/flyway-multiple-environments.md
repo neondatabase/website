@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.282Z'
+updatedOn: '2024-07-25T12:53:42.426Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -50,7 +50,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 <TabItem>
 
 ```bash showLineNumbers
-neonctl branches create --name development
+neon branches create --name development
 ```
 
 </TabItem>
@@ -87,25 +87,25 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 From the Neon **Dashboard**, retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connection Details** widget. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
-Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
+Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 
 - **main**
 
-    ```bash shouldWrap
-    jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
+  ```bash shouldWrap
+  jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 - **development**
 
-    ```bash shouldWrap
-    jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
+  ```bash shouldWrap
+  jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 - **staging**
 
-    ```bash shouldWrap
-    jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
+  ```bash shouldWrap
+  jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 ## Configure flyway to connect each environment
 
@@ -117,29 +117,29 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
 1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
 
-    ```bash
-    cd ~/flyway-x.y.z/conf
-    cp flyway.conf env_dev.conf
-    cp flyway.conf env_staging.conf
-    cp flyway.conf env_prod.conf
-    ```
+   ```bash
+   cd ~/flyway-x.y.z/conf
+   cp flyway.conf env_dev.conf
+   cp flyway.conf env_staging.conf
+   cp flyway.conf env_prod.conf
+   ```
 
 2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
-    ```bash shouldWrap
-    flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
+   ```bash shouldWrap
+   flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
-    flyway.user=alex
+   flyway.user=alex
 
-    flyway.password=AbC123dEf
+   flyway.password=AbC123dEf
 
-    flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
+   flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 
-    flyway.baselineOnMigrate=true
-    ```
+   flyway.baselineOnMigrate=true
+   ```
 
-    - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
-    - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
+   - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
+   - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
 
 ## Create a migration
 

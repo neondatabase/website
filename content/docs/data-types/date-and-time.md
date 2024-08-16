@@ -2,12 +2,12 @@
 title: Postgres Date and Time data types
 subtitle: Work with date and time values in Postgres
 enableTableOfContents: true
-updatedOn: '2024-02-04T17:39:41.493Z'
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
-Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them. 
+Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them.
 
-Modeling date and time enables precise timestamping, duration calculations, and is essential in various use cases related to finance, logistics, events logging, and so on. 
+Modeling date and time enables precise timestamping, duration calculations, and is essential in various use cases related to finance, logistics, events logging, and so on.
 
 <CTA />
 
@@ -19,12 +19,12 @@ There are 5 primary date/time types in Postgres:
 - `TIME` - represents a time-of-day value, stored as 8 bytes. Resolution is 1 microsecond.
 - `TIMESTAMP` - represents a combined date and time value, stored as 8 bytes. Resolution is 1 microsecond.
 - `TIMESTAMPTZ` - represents a combined date and time value, along with time zone information, stored as 8 bytes. Resolution is 1 microsecond. It is stored internally as a UTC value, but is displayed in the timezone set by the client.
-- `INTERVAL` - represents a duration of time, stored as 16 bytes. Resolution is 1 microsecond. Optionally, you can restrict the set of values stored to a larger unit of time (e.g., `INTERVAL MONTH`). 
+- `INTERVAL` - represents a duration of time, stored as 16 bytes. Resolution is 1 microsecond. Optionally, you can restrict the set of values stored to a larger unit of time (e.g., `INTERVAL MONTH`).
 
 Date/time values are specified as string literals. Postgres accepts most of the standard datetime formats. For example:
 
 ```sql
-SELECT 
+SELECT
     '2024-01-01'::DATE AS date_value,
     '09:00:00'::TIME AS time_value,
     '2024-01-01 09:00:00'::TIMESTAMP AS timestamp_value,
@@ -41,7 +41,7 @@ There are also some special date/time literals that can be used in queries. Some
 
 ## Example usage
 
-Consider a conference event management system that tracks schedules for planned sessions. 
+Consider a conference event management system that tracks schedules for planned sessions.
 
 The query below creates a table to store all the sessions and inserts some sample data.
 
@@ -56,7 +56,7 @@ CREATE TABLE conference_sessions (
 );
 
 INSERT INTO conference_sessions (session_title, session_date, start_time, planned_duration, finish_time)
-VALUES 
+VALUES
     ('Keynote Speech', '2024-05-15', '2024-05-15 09:00:00+00', '2 hours', '2024-05-15 11:30:00+00'),
     ('Data Science Workshop', '2024-05-16', '2024-05-16 11:00:00+00', '3 hours', '2024-05-16 14:00:00+00'),
     ('AI Panel Discussion', '2024-05-17', '2024-05-17 14:00:00+00', '1.5 hours', '2024-05-17 15:20:00+00');
@@ -88,7 +88,7 @@ You can write a query like this to find sessions that went over the planned dura
 SELECT session_title, planned_duration, finish_time - start_time AS actual_duration
 FROM conference_sessions
 WHERE finish_time - start_time > planned_duration;
-``` 
+```
 
 The query returns the following values:
 
@@ -121,10 +121,10 @@ The query returns the following value:
 
 Postgres offers a variety of functions for manipulating date and time values, such as `EXTRACT`, `AGE`, `OVERLAPS`, and more.
 
-For example, you can run this query to see if the times for any two sessions overlapped: 
+For example, you can run this query to see if the times for any two sessions overlapped:
 
 ```sql
-SELECT 
+SELECT
     a.session_title AS session_a,
     b.session_title AS session_b,
     a.start_time as session_a_start,
@@ -138,12 +138,12 @@ This query returns no rows, indicating that there are no overlapping sessions.
 
 ### Handling time zones
 
-Postgres supports adding time zone information to both time-of-day (`TIME WITH TIME ZONE`) and moment-in-time (`TIMESTAMP WITH TIME ZONE` / `TIMESTAMPTZ`) values. 
+Postgres supports adding time zone information to both time-of-day (`TIME WITH TIME ZONE`) and moment-in-time (`TIMESTAMP WITH TIME ZONE` / `TIMESTAMPTZ`) values.
 
-- If you use a time zone unaware type (e.g., `TIME` or `TIMESTAMP`), Postgres ignores any time zone information provided in the input string. 
-- If you use a time-zone-aware type (e.g., `TIMETZ` or `TIMESTAMPTZ`), Postgres converts the input string to UTC and stores it internally. It then displays the value in the `current time zone` set for the session. 
+- If you use a time zone unaware type (e.g., `TIME` or `TIMESTAMP`), Postgres ignores any time zone information provided in the input string.
+- If you use a time-zone-aware type (e.g., `TIMETZ` or `TIMESTAMPTZ`), Postgres converts the input string to UTC and stores it internally. It then displays the value in the `current time zone` set for the session.
 
-To illustrate this, you can create a table with both time-zone aware and unaware columns, and insert a sample row: 
+To illustrate this, you can create a table with both time-zone aware and unaware columns, and insert a sample row:
 
 ```sql
 CREATE TABLE time_example (
@@ -153,7 +153,7 @@ CREATE TABLE time_example (
 );
 
 INSERT INTO time_example (ts, tstz_utc, tstz_pst)
-VALUES 
+VALUES
     ('2024-01-01 09:00:00-08', '2024-01-01 09:00:00+00', '2024-01-01 09:00:00-08');
 ```
 
@@ -182,7 +182,7 @@ Postgres ignores the timezone information for the first column and returns the s
 
 ## Additional considerations
 
-- **Indexing**: Date/time values often involve range queries and sorting. Indexing date/time columns can thus significantly improve query performance. 
+- **Indexing**: Date/time values often involve range queries and sorting. Indexing date/time columns can thus significantly improve query performance.
 - **Daylight Saving Time**: Working with time zones can be tricky, especially when dealing with daylight savings time. For additional details, refer to the [PostgreSQL Date/Time Types documentation](https://www.postgresql.org/docs/current/datatype-datetime.html).
 
 ## Resources

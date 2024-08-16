@@ -2,12 +2,10 @@
 
 ## 9.18. Conditional Expressions [#](#FUNCTIONS-CONDITIONAL)
 
-  * [9.18.1. `CASE`](functions-conditional#FUNCTIONS-CASE)
-  * [9.18.2. `COALESCE`](functions-conditional#FUNCTIONS-COALESCE-NVL-IFNULL)
-  * [9.18.3. `NULLIF`](functions-conditional#FUNCTIONS-NULLIF)
-  * [9.18.4. `GREATEST` and `LEAST`](functions-conditional#FUNCTIONS-GREATEST-LEAST)
-
-
+- [9.18.1. `CASE`](functions-conditional#FUNCTIONS-CASE)
+- [9.18.2. `COALESCE`](functions-conditional#FUNCTIONS-COALESCE-NVL-IFNULL)
+- [9.18.3. `NULLIF`](functions-conditional#FUNCTIONS-NULLIF)
+- [9.18.4. `GREATEST` and `LEAST`](functions-conditional#FUNCTIONS-GREATEST-LEAST)
 
 This section describes the SQL-compliant conditional expressions available in PostgreSQL.
 
@@ -33,7 +31,7 @@ CASE WHEN condition THEN result
 END
 ```
 
-`CASE` clauses can be used wherever an expression is valid. Each *`condition`* is an expression that returns a `boolean` result. If the condition's result is true, the value of the `CASE` expression is the *`result`* that follows the condition, and the remainder of the `CASE` expression is not processed. If the condition's result is not true, any subsequent `WHEN` clauses are examined in the same manner. If no `WHEN` *`condition`* yields true, the value of the `CASE` expression is the *`result`* of the `ELSE` clause. If the `ELSE` clause is omitted and no condition is true, the result is null.
+`CASE` clauses can be used wherever an expression is valid. Each _`condition`_ is an expression that returns a `boolean` result. If the condition's result is true, the value of the `CASE` expression is the _`result`_ that follows the condition, and the remainder of the `CASE` expression is not processed. If the condition's result is not true, any subsequent `WHEN` clauses are examined in the same manner. If no `WHEN` _`condition`_ yields true, the value of the `CASE` expression is the _`result`_ of the `ELSE` clause. If the `ELSE` clause is omitted and no condition is true, the result is null.
 
 An example:
 
@@ -62,7 +60,7 @@ SELECT a,
  3 | other
 ```
 
-The data types of all the *`result`* expressions must be convertible to a single output type. See [Section 10.5](typeconv-union-case) for more details.
+The data types of all the _`result`_ expressions must be convertible to a single output type. See [Section 10.5](typeconv-union-case) for more details.
 
 There is a “simple” form of `CASE` expression that is a variant of the general form above:
 
@@ -75,7 +73,7 @@ CASE expression
 END
 ```
 
-The first *`expression`* is computed, then compared to each of the *`value`* expressions in the `WHEN` clauses until one is found that is equal to it. If no match is found, the *`result`* of the `ELSE` clause (or a null value) is returned. This is similar to the `switch` statement in C.
+The first _`expression`_ is computed, then compared to each of the _`value`_ expressions in the `WHEN` clauses until one is found that is equal to it. If no match is found, the _`result`_ of the `ELSE` clause (or a null value) is returned. This is similar to the `switch` statement in C.
 
 The example above can be written using the simple `CASE` syntax:
 
@@ -110,8 +108,6 @@ As described in [Section 4.2.14](sql-expressions#SYNTAX-EXPRESS-EVAL), there ar
 
 ### 9.18.2. `COALESCE` [#](#FUNCTIONS-COALESCE-NVL-IFNULL)
 
-
-
 ```
 
 COALESCE(value [, ...])
@@ -134,14 +130,12 @@ Like a `CASE` expression, `COALESCE` only evaluates the arguments that are neede
 
 ### 9.18.3. `NULLIF` [#](#FUNCTIONS-NULLIF)
 
-
-
 ```
 
 NULLIF(value1, value2)
 ```
 
-The `NULLIF` function returns a null value if *`value1`* equals *`value2`*; otherwise it returns *`value1`*. This can be used to perform the inverse operation of the `COALESCE` example given above:
+The `NULLIF` function returns a null value if _`value1`_ equals _`value2`_; otherwise it returns _`value1`_. This can be used to perform the inverse operation of the `COALESCE` example given above:
 
 ```
 
@@ -157,8 +151,6 @@ The result has the same type as the first argument — but there is a subtlety. 
 [#id](#FUNCTIONS-GREATEST-LEAST)
 
 ### 9.18.4. `GREATEST` and `LEAST` [#](#FUNCTIONS-GREATEST-LEAST)
-
-
 
 ```
 

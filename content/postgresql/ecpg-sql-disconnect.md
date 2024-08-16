@@ -24,19 +24,19 @@ DISCONNECT ALL
 
 ## Parameters
 
-* *`connection_name`* [#](#ECPG-SQL-DISCONNECT-CONNECTION-NAME)
+- _`connection_name`_ [#](#ECPG-SQL-DISCONNECT-CONNECTION-NAME)
 
   A database connection name established by the `CONNECT` command.
 
-* `CURRENT` [#](#ECPG-SQL-DISCONNECT-CURRENT)
+- `CURRENT` [#](#ECPG-SQL-DISCONNECT-CURRENT)
 
   Close the “current” connection, which is either the most recently opened connection, or the connection set by the `SET CONNECTION` command. This is also the default if no argument is given to the `DISCONNECT` command.
 
-* `DEFAULT` [#](#ECPG-SQL-DISCONNECT-DEFAULT)
+- `DEFAULT` [#](#ECPG-SQL-DISCONNECT-DEFAULT)
 
   Close the default connection.
 
-* `ALL` [#](#ECPG-SQL-DISCONNECT-ALL)
+- `ALL` [#](#ECPG-SQL-DISCONNECT-ALL)
 
   Close all open connections.
 

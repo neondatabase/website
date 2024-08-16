@@ -2,12 +2,12 @@
 title: Postgres JSON data types
 subtitle: Model JSON data in Postgres
 enableTableOfContents: true
-updatedOn: '2024-02-04T13:56:31.612Z'
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
-Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance. 
+Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance.
 
-`JSON` and `JSONB` are ideal for storing data that doesn't fit neatly into a traditional relational model, since new fields can be added without altering the database schema. Additionally, they can also be used to model document-like data typically stored in NoSQL databases. 
+`JSON` and `JSONB` are ideal for storing data that doesn't fit neatly into a traditional relational model, since new fields can be added without altering the database schema. Additionally, they can also be used to model document-like data typically stored in NoSQL databases.
 
 <CTA />
 
@@ -17,13 +17,13 @@ Postgres supports JSON (JavaScript Object Notation) data types, providing a flex
 
 - The `JSON` data type stores `JSON` data in text format.
 - It preserves an exact copy of the original `JSON` input, including whitespace and ordering of object keys.
-- An advantage over storing `JSON` data in a `TEXT` column is that Postgres validates the `JSON` data at ingestion time, ensuring it is well-formed. 
+- An advantage over storing `JSON` data in a `TEXT` column is that Postgres validates the `JSON` data at ingestion time, ensuring it is well-formed.
 
 ### JSONB
 
 - The `JSONB` (JSON Binary) data type stores `JSON` data in a decomposed binary format.
-- Unlike `JSON`, `JSONB` does not preserve whitespace or the order of object keys. For duplicate keys, only the last value is stored. 
-- `JSONB` is more efficient for querying, as it doesn't require re-parsing the `JSON` data every time it is accessed. 
+- Unlike `JSON`, `JSONB` does not preserve whitespace or the order of object keys. For duplicate keys, only the last value is stored.
+- `JSONB` is more efficient for querying, as it doesn't require re-parsing the `JSON` data every time it is accessed.
 
 `JSON` values can be created from string literals by casting. For example:
 
@@ -43,7 +43,7 @@ This query returns the following:
 
 ## Example usage
 
-Consider the case of managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case. 
+Consider the case of managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case.
 
 Using the query below, we can create a table to store user profiles:
 
@@ -63,9 +63,9 @@ VALUES
 With `JSONB`, we can directly query and manipulate elements within the `JSON` structure. For example, to find all the users interested in music, we can run the query:
 
 ```sql
-SELECT 
-    id, 
-    profile -> 'name' as name, 
+SELECT
+    id,
+    profile -> 'name' as name,
     profile -> 'interests' as interests
 FROM user_profiles
 WHERE profile @> '{"interests":["music"]}'::JSONB;
@@ -85,8 +85,8 @@ This query returns the following:
 Note that the `name` values returned are still in `JSON` format. To extract the value as text, we can use the `->>` operator instead:
 
 ```sql
-SELECT 
-    id, 
+SELECT
+    id,
     profile ->> 'name' as name
 FROM user_profiles;
 ```
@@ -117,16 +117,16 @@ Postgres implements several functions and operators for querying and manipulatin
 
 For additional `JSON` operators and functions, refer to the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/functions-json.html)
 
-### Nested data 
+### Nested data
 
-Postgres supports storing nested `JSON` values. For example, in the user profile table, the `settings` field is a `JSON` object itself. The nested values can be extracted by chaining the `->` operator. 
+Postgres supports storing nested `JSON` values. For example, in the user profile table, the `settings` field is a `JSON` object itself. The nested values can be extracted by chaining the `->` operator.
 
 For example, to access the `privacy` setting for all users, you can run the query:
 
 ```sql
-SELECT 
-    id, 
-    profile -> 'name' as name, 
+SELECT
+    id,
+    profile -> 'name' as name,
     profile -> 'settings' ->> 'privacy' as privacy
 FROM user_profiles;
 ```
@@ -163,7 +163,7 @@ Postgres supports GIN (Generalized Inverted Index) indexes for `JSONB` data, whi
 CREATE INDEX idxgin ON user_profiles USING GIN (profile);
 ```
 
-This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient. For example, the query to fetch all users who have music as an interest can leverage this index. 
+This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient. For example, the query to fetch all users who have music as an interest can leverage this index.
 
 ```sql
 SELECT *
@@ -179,7 +179,7 @@ WHERE profile @> '{"interests":["music"]}';
 
 - **Indexing**: `JSONB` allows for the creation of GIN (Generalized Inverted Index) indexes, which makes searching within `JSONB` columns faster.
 - **Performance**: `JSONB` binary format is more efficient for querying and manipulating, as it doesn't require re-parsing the `JSON` data for each access. It also supports in-place updates to individual fields.
-- **Data integrity**: `JSONB` ensures that keys in an object are unique. 
+- **Data integrity**: `JSONB` ensures that keys in an object are unique.
 
 There might be some legacy use cases where preserving the exact format of the `JSON` data is important. In such cases, the `JSON` data type can be used.
 

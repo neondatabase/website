@@ -2,13 +2,13 @@
 
 ## 8.8. Geometric Types [#](#DATATYPE-GEOMETRIC)
 
-* [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
-* [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
-* [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
-* [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
-* [8.8.5. Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
-* [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
-* [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
+- [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
+- [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
+- [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
+- [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
+- [8.8.5. Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
+- [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
+- [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
 
 Geometric data types represent two-dimensional spatial objects. [Table 8.20](datatype-geometric#DATATYPE-GEO-TABLE) shows the geometric types available in PostgreSQL.
 
@@ -16,14 +16,14 @@ Geometric data types represent two-dimensional spatial objects. [Table 8.20](da
 
 **Table 8.20. Geometric Types**
 
-| Name      | Storage Size | Description                      | Representation                      |
-| --------- | ------------ | -------------------------------- | ----------------------------------- |
+| Name      | Storage Size | Description                      | Representation                        |
+| --------- | ------------ | -------------------------------- | ------------------------------------- |
 | `point`   | 16 bytes     | Point on a plane                 | `(x,y)`                               |
 | `line`    | 32 bytes     | Infinite line                    | `{A,B,C}`                             |
 | `lseg`    | 32 bytes     | Finite line segment              | `((x1,y1),(x2,y2))`                   |
 | `box`     | 32 bytes     | Rectangular box                  | `((x1,y1),(x2,y2))`                   |
 | `path`    | 16+16n bytes | Closed path (similar to polygon) | `((x1,y1),...)`                       |
-| `path`    | 16+16n bytes | Open path                        | `[(x1,y1),...]`                      |
+| `path`    | 16+16n bytes | Open path                        | `[(x1,y1),...]`                       |
 | `polygon` | 40+16n bytes | Polygon (similar to closed path) | `((x1,y1),...)`                       |
 | `circle`  | 24 bytes     | Circle                           | `<(x,y),r>` (center point and radius) |
 
@@ -41,7 +41,7 @@ Points are the fundamental two-dimensional building block for geometric types. V
   x , y
 ```
 
-where *`x`* and *`y`* are the respective coordinates, as floating-point numbers.
+where _`x`_ and _`y`_ are the respective coordinates, as floating-point numbers.
 
 Points are output using the first syntax.
 
@@ -49,7 +49,7 @@ Points are output using the first syntax.
 
 ### 8.8.2. Lines [#](#DATATYPE-LINE)
 
-Lines are represented by the linear equation *`A`*x + *`B`*y + *`C`* = 0, where *`A`* and *`B`* are not both zero. Values of type `line` are input and output in the following form:
+Lines are represented by the linear equation *`A`*x + *`B`*y + _`C`_ = 0, where _`A`_ and _`B`_ are not both zero. Values of type `line` are input and output in the following form:
 
 ```
 
@@ -109,7 +109,7 @@ Any two opposite corners can be supplied on input, but the values will be reorde
 
 ### 8.8.5. Paths [#](#DATATYPE-GEOMETRIC-PATHS)
 
-Paths are represented by lists of connected points. Paths can be *open*, where the first and last points in the list are considered not connected, or *closed*, where the first and last points are considered connected.
+Paths are represented by lists of connected points. Paths can be _open_, where the first and last points in the list are considered not connected, or _closed_, where the first and last points are considered connected.
 
 Values of type `path` are specified using any of the following syntaxes:
 
@@ -160,6 +160,6 @@ Circles are represented by a center point and radius. Values of type `circle` ar
     x , y   , r
 ```
 
-where `(x,y)` is the center point and *`r`* is the radius of the circle.
+where `(x,y)` is the center point and _`r`_ is the radius of the circle.
 
 Circles are output using the first syntax.

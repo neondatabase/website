@@ -2,11 +2,9 @@
 
 ## 21.2. User Name Maps [#](#AUTH-USERNAME-MAPS)
 
+When using an external authentication system such as Ident or GSSAPI, the name of the operating system user that initiated the connection might not be the same as the database user (role) that is to be used. In this case, a user name map can be applied to map the operating system user name to a database user. To use user name mapping, specify `map`=_`map-name`_ in the options field in `pg_hba.conf`. This option is supported for all authentication methods that receive external user names. Since different mappings might be needed for different connections, the name of the map to be used is specified in the _`map-name`_ parameter in `pg_hba.conf` to indicate which map to use for each individual connection.
 
-
-When using an external authentication system such as Ident or GSSAPI, the name of the operating system user that initiated the connection might not be the same as the database user (role) that is to be used. In this case, a user name map can be applied to map the operating system user name to a database user. To use user name mapping, specify `map`=*`map-name`* in the options field in `pg_hba.conf`. This option is supported for all authentication methods that receive external user names. Since different mappings might be needed for different connections, the name of the map to be used is specified in the *`map-name`* parameter in `pg_hba.conf` to indicate which map to use for each individual connection.
-
-User name maps are defined in the ident map file, which by default is named `pg_ident.conf` and is stored in the cluster's data directory. (It is possible to place the map file elsewhere, however; see the [ident\_file](runtime-config-file-locations#GUC-IDENT-FILE) configuration parameter.) The ident map file contains lines of the general forms:
+User name maps are defined in the ident map file, which by default is named `pg_ident.conf` and is stored in the cluster's data directory. (It is possible to place the map file elsewhere, however; see the [ident_file](runtime-config-file-locations#GUC-IDENT-FILE) configuration parameter.) The ident map file contains lines of the general forms:
 
 ```
 
@@ -16,15 +14,15 @@ include_if_exists file
 include_dir directory
 ```
 
-Comments, whitespace and line continuations are handled in the same way as in `pg_hba.conf`. The *`map-name`* is an arbitrary name that will be used to refer to this mapping in `pg_hba.conf`. The other two fields specify an operating system user name and a matching database user name. The same *`map-name`* can be used repeatedly to specify multiple user-mappings within a single map.
+Comments, whitespace and line continuations are handled in the same way as in `pg_hba.conf`. The _`map-name`_ is an arbitrary name that will be used to refer to this mapping in `pg_hba.conf`. The other two fields specify an operating system user name and a matching database user name. The same _`map-name`_ can be used repeatedly to specify multiple user-mappings within a single map.
 
 As for `pg_hba.conf`, the lines in this file can be include directives, following the same rules.
 
-There is no restriction regarding how many database users a given operating system user can correspond to, nor vice versa. Thus, entries in a map should be thought of as meaning “this operating system user is allowed to connect as this database user”, rather than implying that they are equivalent. The connection will be allowed if there is any map entry that pairs the user name obtained from the external authentication system with the database user name that the user has requested to connect as. The value `all` can be used as the *`database-username`* to specify that if the *`system-user`* matches, then this user is allowed to log in as any of the existing database users. Quoting `all` makes the keyword lose its special meaning.
+There is no restriction regarding how many database users a given operating system user can correspond to, nor vice versa. Thus, entries in a map should be thought of as meaning “this operating system user is allowed to connect as this database user”, rather than implying that they are equivalent. The connection will be allowed if there is any map entry that pairs the user name obtained from the external authentication system with the database user name that the user has requested to connect as. The value `all` can be used as the _`database-username`_ to specify that if the _`system-user`_ matches, then this user is allowed to log in as any of the existing database users. Quoting `all` makes the keyword lose its special meaning.
 
-If the *`database-username`* begins with a `+` character, then the operating system user can login as any user belonging to that role, similarly to how user names beginning with `+` are treated in `pg_hba.conf`. Thus, a `+` mark means “match any of the roles that are directly or indirectly members of this role”, while a name without a `+` mark matches only that specific role. Quoting a username starting with a `+` makes the `+` lose its special meaning.
+If the _`database-username`_ begins with a `+` character, then the operating system user can login as any user belonging to that role, similarly to how user names beginning with `+` are treated in `pg_hba.conf`. Thus, a `+` mark means “match any of the roles that are directly or indirectly members of this role”, while a name without a `+` mark matches only that specific role. Quoting a username starting with a `+` makes the `+` lose its special meaning.
 
-If the *`system-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression. (See [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS) for details of PostgreSQL's regular expression syntax.) The regular expression can include a single capture, or parenthesized subexpression, which can then be referenced in the *`database-username`* field as `\1` (backslash-one). This allows the mapping of multiple user names in a single line, which is particularly useful for simple syntax substitutions. For example, these entries
+If the _`system-username`_ field starts with a slash (`/`), the remainder of the field is treated as a regular expression. (See [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS) for details of PostgreSQL's regular expression syntax.) The regular expression can include a single capture, or parenthesized subexpression, which can then be referenced in the _`database-username`_ field as `\1` (backslash-one). This allows the mapping of multiple user names in a single line, which is particularly useful for simple syntax substitutions. For example, these entries
 
 ```
 
@@ -32,9 +30,9 @@ mymap   /^(.*)@mydomain\.com$      \1
 mymap   /^(.*)@otherdomain\.com$   guest
 ```
 
-will remove the domain part for users with system user names that end with `@mydomain.com`, and allow any user whose system name ends with `@otherdomain.com` to log in as `guest`. Quoting a *`database-username`* containing `\1` *does not* make `\1` lose its special meaning.
+will remove the domain part for users with system user names that end with `@mydomain.com`, and allow any user whose system name ends with `@otherdomain.com` to log in as `guest`. Quoting a _`database-username`_ containing `\1` _does not_ make `\1` lose its special meaning.
 
-If the *`database-username`* field starts with a slash (`/`), the remainder of the field is treated as a regular expression (see [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS) for details of PostgreSQL's regular expression syntax. It is not possible to use `\1` to use a capture from regular expression on *`system-username`* for a regular expression on *`database-username`*.
+If the _`database-username`_ field starts with a slash (`/`), the remainder of the field is treated as a regular expression (see [Section 9.7.3.1](functions-matching#POSIX-SYNTAX-DETAILS) for details of PostgreSQL's regular expression syntax. It is not possible to use `\1` to use a capture from regular expression on _`system-username`_ for a regular expression on _`database-username`_.
 
 ### Tip
 

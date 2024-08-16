@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Entity Framework
 subtitle: Set up Neon Postgres and run migrations for your Entity Framework project
 enableTableOfContents: true
-updatedOn: '2024-03-04T14:30:00.000Z'
+updatedOn: '2024-08-07T21:36:52.651Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
@@ -14,7 +14,7 @@ This guide demonstrates how to use Entity Framework with the Neon Postgres datab
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A recent version of the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet) installed on your local machine. This guide uses .NET 8.0, which is the current Long-Term Support (LTS) version. 
+- A recent version of the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet) installed on your local machine. This guide uses .NET 8.0, which is the current Long-Term Support (LTS) version.
 
 ## Setting up your Neon database
 
@@ -28,7 +28,7 @@ To follow along with this guide, you will need:
 On the Neon project dashboard, navigate to the **Connection Details** section in your project dashboard to find your database connection URI. It should be in the format below:
 
 ```
-postgres://username:password@hostname/dbname?sslmode=require
+postgresql://username:password@hostname/dbname?sslmode=require
 ```
 
 The Postgres client library we use in this guide requires the connection string to be in the following format:
@@ -37,7 +37,7 @@ The Postgres client library we use in this guide requires the connection string 
 Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLMode=Require
 ```
 
-Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use. 
+Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use.
 
 ## Setting up the Entity Framework project
 
@@ -62,7 +62,7 @@ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 dotnet add package dotenv.net
 ```
 
-These packages include the Entity Framework Core libraries, the design-time components for migrations, and the Npgsql provider for PostgreSQL. 
+These packages include the Entity Framework Core libraries, the design-time components for migrations, and the Npgsql provider for PostgreSQL.
 
 We will also need the `EF Core` tools to generate and run migrations. Install the `dotnet-ef` tool globally:
 
@@ -113,7 +113,7 @@ namespace NeonEFMigrations
 }
 ```
 
-This code defines two entities: `Author` and `Book`. The `Author` entity represents an author with properties for name, bio, and created timestamp. The `Book` entity represents a book with properties for title, author (as a foreign key to the `Author` entity), and created timestamp. 
+This code defines two entities: `Author` and `Book`. The `Author` entity represents an author with properties for name, bio, and created timestamp. The `Book` entity represents a book with properties for title, author (as a foreign key to the `Author` entity), and created timestamp.
 
 Also, create a new file named `ApplicationDbContext.cs` in the project directory and add the following code:
 
@@ -154,7 +154,7 @@ namespace GuideNeonEF
 }
 ```
 
-The `ApplicationDbContext` class derives from `DbContext` and represents the database context. It includes the method where we configure the database connection and seed the database at initialization. We also set default values for the `CreatedAt` properties of the `Author` and `Book` entities. 
+The `ApplicationDbContext` class derives from `DbContext` and represents the database context. It includes the method where we configure the database connection and seed the database at initialization. We also set default values for the `CreatedAt` properties of the `Author` and `Book` entities.
 
 ### Add seeding script
 
@@ -178,7 +178,7 @@ namespace GuideNeonEF
                 new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States"},
                 new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom"}
             };
-            modelBuilder.Entity<Author>().HasData(authors);            
+            modelBuilder.Entity<Author>().HasData(authors);
 
             var books = new[]
             {
@@ -206,7 +206,7 @@ To generate migration files based on the defined models, run the following comma
 dotnet ef migrations add InitialCreate
 ```
 
-This command detects the new `Author` and `Book` entities and generates migration files in the `Migrations` directory to create the corresponding tables in the database. 
+This command detects the new `Author` and `Book` entities and generates migration files in the `Migrations` directory to create the corresponding tables in the database.
 
 ### Apply the migration
 
@@ -216,7 +216,7 @@ To apply the migration and create the tables in the Neon Postgres database, run 
 dotnet ef database update
 ```
 
-This command executes the migration file and creates the necessary tables in the database. It will also seed the database with the initial data defined in the `Seed` method. 
+This command executes the migration file and creates the necessary tables in the database. It will also seed the database with the initial data defined in the `Seed` method.
 
 ## Creating the web application
 
@@ -265,7 +265,7 @@ curl http://localhost:5000/books/1
 
 ## Applying schema changes
 
-We'll see how to handle schema changes by adding a new property `Country` to the `Author` entity to store the author's country of origin. 
+We'll see how to handle schema changes by adding a new property `Country` to the `Author` entity to store the author's country of origin.
 
 ### Update the data model
 

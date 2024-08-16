@@ -27,27 +27,27 @@ You must be the owner of the dictionary to use `ALTER TEXT SEARCH DICTIONARY`.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing text search dictionary.
 
-* *`option`*
+- _`option`_
 
   The name of a template-specific option to be set for this dictionary.
 
-* *`value`*
+- _`value`_
 
   The new value to use for a template-specific option. If the equal sign and value are omitted, then any previous setting for the option is removed from the dictionary, allowing the default to be used.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the text search dictionary.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the text search dictionary.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the text search dictionary.
 

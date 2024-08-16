@@ -24,23 +24,23 @@ This command has two forms: The first form applies to the descriptor “header�
 
 ## Parameters
 
-* *`descriptor_name`* [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-NAME)
+- _`descriptor_name`_ [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-NAME)
 
   A descriptor name.
 
-* *`descriptor_header_item`* [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-HEADER-ITEM)
+- _`descriptor_header_item`_ [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-HEADER-ITEM)
 
   A token identifying which header information item to set. Only `COUNT`, to set the number of descriptor items, is currently supported.
 
-* *`number`* [#](#ECPG-SQL-SET-DESCRIPTOR-NUMBER)
+- _`number`_ [#](#ECPG-SQL-SET-DESCRIPTOR-NUMBER)
 
   The number of the descriptor item to set. The count starts at 1.
 
-* *`descriptor_item`* [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-ITEM)
+- _`descriptor_item`_ [#](#ECPG-SQL-SET-DESCRIPTOR-DESCRIPTOR-ITEM)
 
   A token identifying which item of information to set in the descriptor. See [Section 36.7.1](ecpg-descriptors#ECPG-NAMED-DESCRIPTORS) for a list of supported items.
 
-* *`value`* [#](#ECPG-SQL-SET-DESCRIPTOR-VALUE)
+- _`value`_ [#](#ECPG-SQL-SET-DESCRIPTOR-VALUE)
 
   A value to store into the descriptor item. This can be an SQL constant or a host variable.
 

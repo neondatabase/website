@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.282Z'
+updatedOn: '2024-08-07T21:36:52.649Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -28,7 +28,7 @@ Retrieve your database connection string from the **Connection Details** widget 
 Your connection string should look something like this:
 
 ```bash shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
 
 You'll need the connection string a little later in the setup.
@@ -48,9 +48,9 @@ Next, create the `server.ts` script on your local machine.
 ```ts
 // server.ts
 
-import * as postgres from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import * as postgres from 'https://deno.land/x/postgres@v0.17.0/mod.ts';
 
-const databaseUrl = Deno.env.get("DATABASE_URL")!;
+const databaseUrl = Deno.env.get('DATABASE_URL')!;
 
 const pool = new postgres.Pool(databaseUrl, 3, true);
 
@@ -85,22 +85,22 @@ try {
 
 Deno.serve(async (req) => {
   const url = new URL(req.url);
-  if (url.pathname !== "/books") {
-    return new Response("Not Found", { status: 404 });
+  if (url.pathname !== '/books') {
+    return new Response('Not Found', { status: 404 });
   }
 
   const connection = await pool.connect();
   try {
     switch (req.method) {
-      case "GET": {
+      case 'GET': {
         const result = await connection.queryObject`SELECT * FROM books`;
         const body = JSON.stringify(result.rows, null, 2);
         return new Response(body, {
-          headers: { "content-type": "application/json" },
+          headers: { 'content-type': 'application/json' },
         });
       }
       default:
-        return new Response("Method Not Allowed", { status: 405 });
+        return new Response('Method Not Allowed', { status: 405 });
     }
   } catch (err) {
     console.error(err);
@@ -156,7 +156,7 @@ The `cURL` command should return the following data:
     "title": "The Little Prince",
     "author": "Antoine de Saint-Exupéry"
   }
-]%                                     
+]%
 ```
 
 ## Deploy your application with Deno Deploy
@@ -172,9 +172,9 @@ Deno Deploy is a globally distributed platform for serverless JavaScript applica
 1. Click the `Settings` button and add a `DATABASE_URL` environment variable. Set the value to your Neon connection string and click **Save**.
 1. To authenticate `deployctl` from the terminal, you will need an access token for your Deno Deploy account. Navigate back to your [Deno dashboard](https://dash.deno.com/account#access-tokens) and create a new access token. Copy the token value and set the `DENO_DEPLOY_TOKEN` environment variable on your local machine by running this command from your terminal:
 
-    ```bash
-    export DENO_DEPLOY_TOKEN=YOUR_ACCESS_TOKEN
-    ```
+   ```bash
+   export DENO_DEPLOY_TOKEN=YOUR_ACCESS_TOKEN
+   ```
 
 ### Deploy using deployctl
 
@@ -244,6 +244,14 @@ To delete the example application on Deno Deploy, follow these steps:
 1. In the **Danger Zone** section, click **Delete** and follow the instructions.
 
 To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project).
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-deno" description="Connect a Neon Postgres database to your Deno Deploy application" icon="github">Use Neon with Deno Deploy</a>
+</DetailIconCards>
 
 ## Resources
 

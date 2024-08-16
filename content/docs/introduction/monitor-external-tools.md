@@ -1,7 +1,9 @@
 ---
 title: Monitoring Neon with external tools
-subtitle: Monitor your Neon Postgres database with external tools such as PgAdmin or PgHero
+subtitle: Monitor your Neon Postgres database with external tools such as PgAdmin or
+  PgHero
 enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.413Z'
 ---
 
 There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
@@ -57,7 +59,7 @@ Then visit http://localhost:8080 in your browser to open the PgHero Dashboard.
 
 ## pgAdmin
 
-pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics. 
+pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics.
 
 ![PgAdmin monitoring dashboard](/docs/introduction/pgadmin_monitor.png)
 

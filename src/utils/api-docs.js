@@ -10,6 +10,7 @@ const getExcerpt = require('./get-excerpt');
 
 const DOCS_DIR_PATH = 'content/docs';
 const FLOW_DIR_PATH = 'content/flow';
+const VARIABLE_DIR_PATH = 'content/variable';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -61,8 +62,11 @@ const getBreadcrumbs = (slug, flatSidebar) => {
   const arr = [];
   if (path) {
     path.reduce((prev, cur) => {
-      const current = prev[cur] || prev.items[cur];
-      arr.push({ title: current.title, slug: current.slug });
+      const current =
+        prev[cur] || prev.items?.[cur] || prev.items?.find((item) => item.slug === cur);
+      if (current && !current.section) {
+        arr.push({ title: current.title, slug: current.slug });
+      }
       return current;
     }, getSidebar());
 
@@ -124,5 +128,6 @@ module.exports = {
   getAllPosts,
   DOCS_DIR_PATH,
   FLOW_DIR_PATH,
+  VARIABLE_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

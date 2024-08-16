@@ -6,7 +6,7 @@ dropuser — remove a PostgreSQL user account
 
 ## Synopsis
 
-`dropuser` \[*`connection-option`*...] \[*`option`*...] \[*`username`*]
+`dropuser` \[_`connection-option`_...] \[_`option`_...] \[_`username`_]
 
 [#id](#id-1.9.4.7.5)
 
@@ -22,49 +22,49 @@ dropuser is a wrapper around the SQL command [`DROP ROLE`](sql-droprole). There 
 
 dropuser accepts the following command-line arguments:
 
-* *`username`*
+- _`username`_
 
   Specifies the name of the PostgreSQL user to be removed. You will be prompted for a name if none is specified on the command line and the `-i`/`--interactive` option is used.
 
-* `-e``--echo`
+- `-e``--echo`
 
   Echo the commands that dropuser generates and sends to the server.
 
-* `-i``--interactive`
+- `-i``--interactive`
 
   Prompt for confirmation before actually removing the user, and prompt for the user name if none is specified on the command line.
 
-* `-V``--version`
+- `-V``--version`
 
   Print the dropuser version and exit.
 
-* `--if-exists`
+- `--if-exists`
 
   Do not throw an error if the user does not exist. A notice is issued in this case.
 
-* `-?``--help`
+- `-?``--help`
 
   Show help about dropuser command line arguments, and exit.
 
 dropuser also accepts the following command-line arguments for connection parameters:
 
-* `-h host``--host=host`
+- `-h host``--host=host`
 
   Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket.
 
-* `-p port``--port=port`
+- `-p port``--port=port`
 
   Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections.
 
-* `-U username``--username=username`
+- `-U username``--username=username`
 
   User name to connect as (not the user name to drop).
 
-* `-w``--no-password`
+- `-w``--no-password`
 
   Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-* `-W``--password`
+- `-W``--password`
 
   Force dropuser to prompt for a password before connecting to a database.
 
@@ -74,11 +74,11 @@ dropuser also accepts the following command-line arguments for connection parame
 
 ## Environment
 
-* `PGHOST``PGPORT``PGUSER`
+- `PGHOST``PGPORT``PGUSER`
 
   Default connection parameters
 
-* `PG_COLOR`
+- `PG_COLOR`
 
   Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

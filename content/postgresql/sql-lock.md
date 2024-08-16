@@ -35,19 +35,19 @@ More information about the lock modes and locking strategies can be found in [Se
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing table to lock. If `ONLY` is specified before the table name, only that table is locked. If `ONLY` is not specified, the table and all its descendant tables (if any) are locked. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
   The command `LOCK TABLE a, b;` is equivalent to `LOCK TABLE a; LOCK TABLE b;`. The tables are locked one-by-one in the order specified in the `LOCK TABLE` command.
 
-* *`lockmode`*
+- _`lockmode`_
 
   The lock mode specifies which locks this lock conflicts with. Lock modes are described in [Section 13.3](explicit-locking).
 
   If no lock mode is specified, then `ACCESS EXCLUSIVE`, the most restrictive mode, is used.
 
-* `NOWAIT`
+- `NOWAIT`
 
   Specifies that `LOCK TABLE` should not wait for any conflicting locks to be released: if the specified lock(s) cannot be acquired immediately without waiting, the transaction is aborted.
 
@@ -55,7 +55,7 @@ More information about the lock modes and locking strategies can be found in [Se
 
 ## Notes
 
-To lock a table, the user must have the right privilege for the specified *`lockmode`*, or be the table's owner or a superuser. If the user has `UPDATE`, `DELETE`, or `TRUNCATE` privileges on the table, any *`lockmode`* is permitted. If the user has `INSERT` privileges on the table, `ROW EXCLUSIVE MODE` (or a less-conflicting mode as described in [Section 13.3](explicit-locking)) is permitted. If a user has `SELECT` privileges on the table, `ACCESS SHARE MODE` is permitted.
+To lock a table, the user must have the right privilege for the specified _`lockmode`_, or be the table's owner or a superuser. If the user has `UPDATE`, `DELETE`, or `TRUNCATE` privileges on the table, any _`lockmode`_ is permitted. If the user has `INSERT` privileges on the table, `ROW EXCLUSIVE MODE` (or a less-conflicting mode as described in [Section 13.3](explicit-locking)) is permitted. If a user has `SELECT` privileges on the table, `ACCESS SHARE MODE` is permitted.
 
 The user performing the lock on the view must have the corresponding privilege on the view. In addition, by default, the view's owner must have the relevant privileges on the underlying base relations, whereas the user performing the lock does not need any permissions on the underlying base relations. However, if the view has `security_invoker` set to `true` (see [`CREATE VIEW`](sql-createview)), the user performing the lock, rather than the view owner, must have the relevant privileges on the underlying base relations.
 

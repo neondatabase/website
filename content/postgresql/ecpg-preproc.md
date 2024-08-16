@@ -2,9 +2,9 @@
 
 ## 36.9. Preprocessor Directives [#](#ECPG-PREPROC)
 
-  * [36.9.1. Including Files](ecpg-preproc#ECPG-INCLUDE)
-  * [36.9.2. The define and undef Directives](ecpg-preproc#ECPG-DEFINE)
-  * [36.9.3. ifdef, ifndef, elif, else, and endif Directives](ecpg-preproc#ECPG-IFDEF)
+- [36.9.1. Including Files](ecpg-preproc#ECPG-INCLUDE)
+- [36.9.2. The define and undef Directives](ecpg-preproc#ECPG-DEFINE)
+- [36.9.3. ifdef, ifndef, elif, else, and endif Directives](ecpg-preproc#ECPG-IFDEF)
 
 Several preprocessor directives are available that modify how the `ecpg` preprocessor parses and processes a file.
 
@@ -25,16 +25,16 @@ The embedded SQL preprocessor will look for a file named `filename.h`, preproces
 
 The `ecpg` preprocessor will search a file at several directories in following order:
 
-* current directory
-* `/usr/local/include`
-* PostgreSQL include directory, defined at build time (e.g., `/usr/local/pgsql/include`)
-* `/usr/include`
+- current directory
+- `/usr/local/include`
+- PostgreSQL include directory, defined at build time (e.g., `/usr/local/pgsql/include`)
+- `/usr/include`
 
 But when `EXEC SQL INCLUDE "filename"` is used, only the current directory is searched.
 
 In each directory, the preprocessor will first look for the file name as given, and if not found will append `.h` to the file name and try again (unless the specified file name already has that suffix).
 
-Note that `EXEC SQL INCLUDE` is *not* the same as:
+Note that `EXEC SQL INCLUDE` is _not_ the same as:
 
 ```
 
@@ -98,23 +98,23 @@ then `ecpg` will already do the substitution and your C compiler will never see 
 
 You can use the following directives to compile code sections conditionally:
 
-* `EXEC SQL ifdef name;` [#](#ECPG-IFDEF-IFDEF)
+- `EXEC SQL ifdef name;` [#](#ECPG-IFDEF-IFDEF)
 
-  Checks a *`name`* and processes subsequent lines if *`name`* has been defined via `EXEC SQL define name`.
+  Checks a _`name`_ and processes subsequent lines if _`name`_ has been defined via `EXEC SQL define name`.
 
-* `EXEC SQL ifndef name;` [#](#ECPG-IFDEF-IFNDEF)
+- `EXEC SQL ifndef name;` [#](#ECPG-IFDEF-IFNDEF)
 
-  Checks a *`name`* and processes subsequent lines if *`name`* has *not* been defined via `EXEC SQL define name`.
+  Checks a _`name`_ and processes subsequent lines if _`name`_ has _not_ been defined via `EXEC SQL define name`.
 
-* `EXEC SQL elif name;` [#](#ECPG-IFDEF-ELIF)
+- `EXEC SQL elif name;` [#](#ECPG-IFDEF-ELIF)
 
-  Begins an optional alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Any number of `elif` sections can appear. Lines following an `elif` will be processed if *`name`* has been defined *and* no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
+  Begins an optional alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Any number of `elif` sections can appear. Lines following an `elif` will be processed if _`name`_ has been defined _and_ no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
 
-* `EXEC SQL else;` [#](#ECPG-IFDEF-ELSE)
+- `EXEC SQL else;` [#](#ECPG-IFDEF-ELSE)
 
   Begins an optional, final alternative section after an `EXEC SQL ifdef name` or `EXEC SQL ifndef name` directive. Subsequent lines will be processed if no previous section of the same `ifdef`/`ifndef`...`endif` construct has been processed.
 
-* `EXEC SQL endif;` [#](#ECPG-IFDEF-ENDIF)
+- `EXEC SQL endif;` [#](#ECPG-IFDEF-ENDIF)
 
   Ends an `ifdef`/`ifndef`...`endif` construct. Subsequent lines are processed normally.
 

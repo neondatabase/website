@@ -4,6 +4,5 @@
 
 **Table of Contents**
 
-  * [72.1. Overview](hash-intro)
-  * [72.2. Implementation](hash-implementation)
-
+- [72.1. Overview](hash-intro)
+- [72.2. Implementation](hash-implementation)

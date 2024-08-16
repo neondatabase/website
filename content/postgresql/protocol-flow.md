@@ -2,17 +2,17 @@
 
 ## 55.2. Message Flow [#](#PROTOCOL-FLOW)
 
-  * [55.2.1. Start-up](protocol-flow#PROTOCOL-FLOW-START-UP)
-  * [55.2.2. Simple Query](protocol-flow#PROTOCOL-FLOW-SIMPLE-QUERY)
-  * [55.2.3. Extended Query](protocol-flow#PROTOCOL-FLOW-EXT-QUERY)
-  * [55.2.4. Pipelining](protocol-flow#PROTOCOL-FLOW-PIPELINING)
-  * [55.2.5. Function Call](protocol-flow#PROTOCOL-FLOW-FUNCTION-CALL)
-  * [55.2.6. COPY Operations](protocol-flow#PROTOCOL-COPY)
-  * [55.2.7. Asynchronous Operations](protocol-flow#PROTOCOL-ASYNC)
-  * [55.2.8. Canceling Requests in Progress](protocol-flow#PROTOCOL-FLOW-CANCELING-REQUESTS)
-  * [55.2.9. Termination](protocol-flow#PROTOCOL-FLOW-TERMINATION)
-  * [55.2.10. SSL Session Encryption](protocol-flow#PROTOCOL-FLOW-SSL)
-  * [55.2.11. GSSAPI Session Encryption](protocol-flow#PROTOCOL-FLOW-GSSAPI)
+- [55.2.1. Start-up](protocol-flow#PROTOCOL-FLOW-START-UP)
+- [55.2.2. Simple Query](protocol-flow#PROTOCOL-FLOW-SIMPLE-QUERY)
+- [55.2.3. Extended Query](protocol-flow#PROTOCOL-FLOW-EXT-QUERY)
+- [55.2.4. Pipelining](protocol-flow#PROTOCOL-FLOW-PIPELINING)
+- [55.2.5. Function Call](protocol-flow#PROTOCOL-FLOW-FUNCTION-CALL)
+- [55.2.6. COPY Operations](protocol-flow#PROTOCOL-COPY)
+- [55.2.7. Asynchronous Operations](protocol-flow#PROTOCOL-ASYNC)
+- [55.2.8. Canceling Requests in Progress](protocol-flow#PROTOCOL-FLOW-CANCELING-REQUESTS)
+- [55.2.9. Termination](protocol-flow#PROTOCOL-FLOW-TERMINATION)
+- [55.2.10. SSL Session Encryption](protocol-flow#PROTOCOL-FLOW-SSL)
+- [55.2.11. GSSAPI Session Encryption](protocol-flow#PROTOCOL-FLOW-GSSAPI)
 
 This section describes the message flow and the semantics of each message type. (Details of the exact representation of each message appear in [Section 55.7](protocol-message-formats).) There are several different sub-protocols depending on the state of the connection: start-up, query, function call, `COPY`, and termination. There are also special provisions for asynchronous operations (including notification responses and command cancellation), which can occur at any time after the start-up phase.
 
@@ -28,51 +28,51 @@ The authentication cycle ends with the server either rejecting the connection at
 
 The possible messages from the server in this phase are:
 
-* ErrorResponse
+- ErrorResponse
 
   The connection attempt has been rejected. The server then immediately closes the connection.
 
-* AuthenticationOk
+- AuthenticationOk
 
   The authentication exchange is successfully completed.
 
-* AuthenticationKerberosV5
+- AuthenticationKerberosV5
 
   The frontend must now take part in a Kerberos V5 authentication dialog (not described here, part of the Kerberos specification) with the server. If this is successful, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. This is no longer supported.
 
-* AuthenticationCleartextPassword
+- AuthenticationCleartextPassword
 
   The frontend must now send a PasswordMessage containing the password in clear-text form. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse.
 
-* AuthenticationMD5Password
+- AuthenticationMD5Password
 
   The frontend must now send a PasswordMessage containing the password (with user name) encrypted via MD5, then encrypted again using the 4-byte random salt specified in the AuthenticationMD5Password message. If this is the correct password, the server responds with an AuthenticationOk, otherwise it responds with an ErrorResponse. The actual PasswordMessage can be computed in SQL as `concat('md5', md5(concat(md5(concat(password, username)), random-salt)))`. (Keep in mind the `md5()` function returns its result as a hex string.)
 
-* AuthenticationGSS
+- AuthenticationGSS
 
   The frontend must now initiate a GSSAPI negotiation. The frontend will send a GSSResponse message with the first part of the GSSAPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
-* AuthenticationSSPI
+- AuthenticationSSPI
 
   The frontend must now initiate an SSPI negotiation. The frontend will send a GSSResponse with the first part of the SSPI data stream in response to this. If further messages are needed, the server will respond with AuthenticationGSSContinue.
 
-* AuthenticationGSSContinue
+- AuthenticationGSSContinue
 
   This message contains the response data from the previous step of GSSAPI or SSPI negotiation (AuthenticationGSS, AuthenticationSSPI or a previous AuthenticationGSSContinue). If the GSSAPI or SSPI data in this message indicates more data is needed to complete the authentication, the frontend must send that data as another GSSResponse message. If GSSAPI or SSPI authentication is completed by this message, the server will next send AuthenticationOk to indicate successful authentication or ErrorResponse to indicate failure.
 
-* AuthenticationSASL
+- AuthenticationSASL
 
   The frontend must now initiate a SASL negotiation, using one of the SASL mechanisms listed in the message. The frontend will send a SASLInitialResponse with the name of the selected mechanism, and the first part of the SASL data stream in response to this. If further messages are needed, the server will respond with AuthenticationSASLContinue. See [Section 55.3](sasl-authentication) for details.
 
-* AuthenticationSASLContinue
+- AuthenticationSASLContinue
 
   This message contains challenge data from the previous step of SASL negotiation (AuthenticationSASL, or a previous AuthenticationSASLContinue). The frontend must respond with a SASLResponse message.
 
-* AuthenticationSASLFinal
+- AuthenticationSASLFinal
 
   SASL authentication has completed with additional mechanism-specific data for the client. The server will next send AuthenticationOk to indicate successful authentication, or an ErrorResponse to indicate failure. This message is sent only if the SASL mechanism specifies additional data to be sent from server to client at completion.
 
-* NegotiateProtocolVersion
+- NegotiateProtocolVersion
 
   The server does not support the minor protocol version requested by the client, but does support an earlier version of the protocol; this message indicates the highest supported minor version. This message will also be sent if the client requested unsupported protocol options (i.e., beginning with `_pq_.`) in the startup packet. This message will be followed by an ErrorResponse or a message indicating the success or failure of authentication.
 
@@ -84,23 +84,23 @@ During this phase the backend will attempt to apply any additional run-time para
 
 The possible messages from the backend in this phase are:
 
-* BackendKeyData
+- BackendKeyData
 
   This message provides secret-key data that the frontend must save if it wants to be able to issue cancel requests later. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
-* ParameterStatus
+- ParameterStatus
 
-  This message informs the frontend about the current (initial) setting of backend parameters, such as [client\_encoding](runtime-config-client#GUC-CLIENT-ENCODING) or [DateStyle](runtime-config-client#GUC-DATESTYLE). The frontend can ignore this message, or record the settings for its future use; see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC) for more details. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
+  This message informs the frontend about the current (initial) setting of backend parameters, such as [client_encoding](runtime-config-client#GUC-CLIENT-ENCODING) or [DateStyle](runtime-config-client#GUC-DATESTYLE). The frontend can ignore this message, or record the settings for its future use; see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC) for more details. The frontend should not respond to this message, but should continue listening for a ReadyForQuery message.
 
-* ReadyForQuery
+- ReadyForQuery
 
   Start-up is completed. The frontend can now issue commands.
 
-* ErrorResponse
+- ErrorResponse
 
   Start-up failed. The connection is closed after sending this message.
 
-* NoticeResponse
+- NoticeResponse
 
   A warning message has been issued. The frontend should display the message but continue listening for ReadyForQuery or ErrorResponse.
 
@@ -114,39 +114,39 @@ A simple query cycle is initiated by the frontend sending a Query message to the
 
 The possible response messages from the backend are:
 
-* CommandComplete
+- CommandComplete
 
   An SQL command completed normally.
 
-* CopyInResponse
+- CopyInResponse
 
   The backend is ready to copy data from the frontend to a table; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY).
 
-* CopyOutResponse
+- CopyOutResponse
 
   The backend is ready to copy data from a table to the frontend; see [Section 55.2.6](protocol-flow#PROTOCOL-COPY).
 
-* RowDescription
+- RowDescription
 
   Indicates that rows are about to be returned in response to a `SELECT`, `FETCH`, etc. query. The contents of this message describe the column layout of the rows. This will be followed by a DataRow message for each row being returned to the frontend.
 
-* DataRow
+- DataRow
 
   One of the set of rows returned by a `SELECT`, `FETCH`, etc. query.
 
-* EmptyQueryResponse
+- EmptyQueryResponse
 
   An empty query string was recognized.
 
-* ErrorResponse
+- ErrorResponse
 
   An error has occurred.
 
-* ReadyForQuery
+- ReadyForQuery
 
   Processing of the query string is complete. A separate message is sent to indicate this because the query string might contain multiple SQL commands. (CommandComplete marks the end of processing one SQL command, not the whole string.) ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
-* NoticeResponse
+- NoticeResponse
 
   A warning message has been issued in relation to the query. Notices are in addition to other responses, i.e., the backend will continue processing the command.
 
@@ -190,7 +190,7 @@ SELECT 1/0;
 
 then the first `INSERT` is committed by the explicit `COMMIT` command. The second `INSERT` and the `SELECT` are still treated as a single transaction, so that the divide-by-zero failure will roll back the second `INSERT`, but not the first one.
 
-This behavior is implemented by running the statements in a multi-statement Query message in an *implicit transaction block* unless there is some explicit transaction block for them to run in. The main difference between an implicit transaction block and a regular one is that an implicit block is closed automatically at the end of the Query message, either by an implicit commit if there was no error, or an implicit rollback if there was an error. This is similar to the implicit commit or rollback that happens for a statement executed by itself (when not in a transaction block).
+This behavior is implemented by running the statements in a multi-statement Query message in an _implicit transaction block_ unless there is some explicit transaction block for them to run in. The main difference between an implicit transaction block and a regular one is that an implicit block is closed automatically at the end of the Query message, either by an implicit commit if there was no error, or an implicit rollback if there was an error. This is similar to the implicit commit or rollback that happens for a statement executed by itself (when not in a transaction block).
 
 If the session is already in a transaction block, as a result of a `BEGIN` in some previous message, then the Query message simply continues that transaction block, whether the message contains one statement or several. However, if the Query message contains a `COMMIT` or `ROLLBACK` closing the existing transaction block, then any following statements are executed in an implicit transaction block. Conversely, if a `BEGIN` appears in a multi-statement Query message, then it starts a regular transaction block that will only be terminated by an explicit `COMMIT` or `ROLLBACK`, whether that appears in this Query message or a later one. If the `BEGIN` follows some statements that were executed as an implicit transaction block, those statements are not immediately committed; in effect, they are retroactively included into the new regular transaction block.
 
@@ -230,7 +230,7 @@ In the extended protocol, the frontend first sends a Parse message, which contai
 
 ### Note
 
-A parameter data type can be left unspecified by setting it to zero, or by making the array of parameter type OIDs shorter than the number of parameter symbols (`$`*`n`*) used in the query string. Another special case is that a parameter's type can be specified as `void` (that is, the OID of the `void` pseudo-type). This is meant to allow parameter symbols to be used for function parameters that are actually OUT parameters. Ordinarily there is no context in which a `void` parameter could be used, but if such a parameter symbol appears in a function's parameter list, it is effectively ignored. For example, a function call such as `foo($1,$2,$3,$4)` could match a function with two IN and two OUT arguments, if `$3` and `$4` are specified as having type `void`.
+A parameter data type can be left unspecified by setting it to zero, or by making the array of parameter type OIDs shorter than the number of parameter symbols (`$`_`n`_) used in the query string. Another special case is that a parameter's type can be specified as `void` (that is, the OID of the `void` pseudo-type). This is meant to allow parameter symbols to be used for function parameters that are actually OUT parameters. Ordinarily there is no context in which a `void` parameter could be used, but if such a parameter symbol appears in a function's parameter list, it is effectively ignored. For example, a function call such as `foo($1,$2,$3,$4)` could match a function with two IN and two OUT arguments, if `$3` and `$4` are specified as having type `void`.
 
 ### Note
 
@@ -252,7 +252,7 @@ Once a portal exists, it can be executed using an Execute message. The Execute m
 
 If Execute terminates before completing the execution of a portal (due to reaching a nonzero result-row count), it will send a PortalSuspended message; the appearance of this message tells the frontend that another Execute should be issued against the same portal to complete the operation. The CommandComplete message indicating completion of the source SQL command is not sent until the portal's execution is completed. Therefore, an Execute phase is always terminated by the appearance of exactly one of these messages: CommandComplete, EmptyQueryResponse (if the portal was created from an empty query string), ErrorResponse, or PortalSuspended.
 
-At completion of each series of extended-query messages, the frontend should issue a Sync message. This parameterless message causes the backend to close the current transaction if it's not inside a `BEGIN`/`COMMIT` transaction block (“close” meaning to commit if no error, or roll back if error). Then a ReadyForQuery response is issued. The purpose of Sync is to provide a resynchronization point for error recovery. When an error is detected while processing any extended-query message, the backend issues ErrorResponse, then reads and discards messages until a Sync is reached, then issues ReadyForQuery and returns to normal message processing. (But note that no skipping occurs if an error is detected *while* processing Sync — this ensures that there is one and only one ReadyForQuery sent for each Sync.)
+At completion of each series of extended-query messages, the frontend should issue a Sync message. This parameterless message causes the backend to close the current transaction if it's not inside a `BEGIN`/`COMMIT` transaction block (“close” meaning to commit if no error, or roll back if error). Then a ReadyForQuery response is issued. The purpose of Sync is to provide a resynchronization point for error recovery. When an error is detected while processing any extended-query message, the backend issues ErrorResponse, then reads and discards messages until a Sync is reached, then issues ReadyForQuery and returns to normal message processing. (But note that no skipping occurs if an error is detected _while_ processing Sync — this ensures that there is one and only one ReadyForQuery sent for each Sync.)
 
 ### Note
 
@@ -280,9 +280,7 @@ The simple Query message is approximately equivalent to the series Parse, Bind, 
 
 ### 55.2.4. Pipelining [#](#PROTOCOL-FLOW-PIPELINING)
 
-
-
-Use of the extended query protocol allows *pipelining*, which means sending a series of queries without waiting for earlier ones to complete. This reduces the number of network round trips needed to complete a given series of operations. However, the user must carefully consider the required behavior if one of the steps fails, since later queries will already be in flight to the server.
+Use of the extended query protocol allows _pipelining_, which means sending a series of queries without waiting for earlier ones to complete. This reduces the number of network round trips needed to complete a given series of operations. However, the user must carefully consider the required behavior if one of the steps fails, since later queries will already be in flight to the server.
 
 One way to deal with that is to make the whole query series be a single transaction, that is wrap it in `BEGIN` ... `COMMIT`. However, this does not help if one wishes for some of the commands to commit independently of others.
 
@@ -306,19 +304,19 @@ A Function Call cycle is initiated by the frontend sending a FunctionCall messag
 
 The possible response messages from the backend are:
 
-* ErrorResponse
+- ErrorResponse
 
   An error has occurred.
 
-* FunctionCallResponse
+- FunctionCallResponse
 
   The function call was completed and returned the result given in the message. (Note that the Function Call protocol can only handle a single scalar result, not a row type or set of results.)
 
-* ReadyForQuery
+- ReadyForQuery
 
   Processing of the function call is complete. ReadyForQuery will always be sent, whether processing terminates successfully or with an error.
 
-* NoticeResponse
+- NoticeResponse
 
   A warning message has been issued in relation to the function call. Notices are in addition to other responses, i.e., the backend will continue processing the command.
 
@@ -340,7 +338,7 @@ In the event of a backend-detected error during copy-out mode, the backend will 
 
 It is possible for NoticeResponse and ParameterStatus messages to be interspersed between CopyData messages; frontends must handle these cases, and should be prepared for other asynchronous message types as well (see [Section 55.2.7](protocol-flow#PROTOCOL-ASYNC)). Otherwise, any message type other than CopyData or CopyDone may be treated as terminating copy-out mode.
 
-There is another Copy-related mode called copy-both, which allows high-speed bulk data transfer to *and* from the server. Copy-both mode is initiated when a backend in walsender mode executes a `START_REPLICATION` statement. The backend sends a CopyBothResponse message to the frontend. Both the backend and the frontend may then send CopyData messages until either end sends a CopyDone message. After the client sends a CopyDone message, the connection goes from copy-both mode to copy-out mode, and the client may not send any more CopyData messages. Similarly, when the server sends a CopyDone message, the connection goes into copy-in mode, and the server may not send any more CopyData messages. After both sides have sent a CopyDone message, the copy mode is terminated, and the backend reverts to the command-processing mode. In the event of a backend-detected error during copy-both mode, the backend will issue an ErrorResponse message, discard frontend messages until a Sync message is received, and then issue ReadyForQuery and return to normal processing. The frontend should treat receipt of ErrorResponse as terminating the copy in both directions; no CopyDone should be sent in this case. See [Section 55.4](protocol-replication) for more information on the subprotocol transmitted over copy-both mode.
+There is another Copy-related mode called copy-both, which allows high-speed bulk data transfer to _and_ from the server. Copy-both mode is initiated when a backend in walsender mode executes a `START_REPLICATION` statement. The backend sends a CopyBothResponse message to the frontend. Both the backend and the frontend may then send CopyData messages until either end sends a CopyDone message. After the client sends a CopyDone message, the connection goes from copy-both mode to copy-out mode, and the client may not send any more CopyData messages. Similarly, when the server sends a CopyDone message, the connection goes into copy-in mode, and the server may not send any more CopyData messages. After both sides have sent a CopyDone message, the copy mode is terminated, and the backend reverts to the command-processing mode. In the event of a backend-detected error during copy-both mode, the backend will issue an ErrorResponse message, discard frontend messages until a Sync message is received, and then issue ReadyForQuery and return to normal processing. The frontend should treat receipt of ErrorResponse as terminating the copy in both directions; no CopyDone should be sent in this case. See [Section 55.4](protocol-replication) for more information on the subprotocol transmitted over copy-both mode.
 
 The CopyInResponse, CopyOutResponse and CopyBothResponse messages include fields that inform the frontend of the number of columns per row and the format codes being used for each column. (As of the present implementation, all columns in a given `COPY` operation will use the same format, but the message design does not assume this.)
 

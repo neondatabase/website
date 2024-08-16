@@ -32,7 +32,6 @@ const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => 
     <Tooltip
       className="w-sm z-20 !bg-gray-new-15"
       id={`info-icon-${tooltipId}`}
-      positionStrategy="fixed"
       place={tooltipPlace}
       arrowColor="#242628"
     />

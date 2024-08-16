@@ -2,9 +2,7 @@
 
 ## 22.3. Role Membership [#](#ROLE-MEMBERSHIP)
 
-
-
-It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole. In PostgreSQL this is done by creating a role that represents the group, and then granting *membership* in the group role to individual user roles.
+It is frequently convenient to group users together to ease management of privileges: that way, privileges can be granted to, or revoked from, a group as a whole. In PostgreSQL this is done by creating a role that represents the group, and then granting _membership_ in the group role to individual user roles.
 
 To set up a group role, first create the role:
 

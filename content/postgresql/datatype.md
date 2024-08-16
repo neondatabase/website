@@ -4,114 +4,112 @@
 
 **Table of Contents**
 
-* [8.1. Numeric Types](datatype-numeric)
+- [8.1. Numeric Types](datatype-numeric)
 
-    * [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
-    * [8.1.2. Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
-    * [8.1.3. Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
-    * [8.1.4. Serial Types](datatype-numeric#DATATYPE-SERIAL)
+  - [8.1.1. Integer Types](datatype-numeric#DATATYPE-INT)
+  - [8.1.2. Arbitrary Precision Numbers](datatype-numeric#DATATYPE-NUMERIC-DECIMAL)
+  - [8.1.3. Floating-Point Types](datatype-numeric#DATATYPE-FLOAT)
+  - [8.1.4. Serial Types](datatype-numeric#DATATYPE-SERIAL)
 
-  * [8.2. Monetary Types](datatype-money)
-  * [8.3. Character Types](datatype-character)
-  * [8.4. Binary Data Types](datatype-binary)
+  - [8.2. Monetary Types](datatype-money)
+  - [8.3. Character Types](datatype-character)
+  - [8.4. Binary Data Types](datatype-binary)
 
     - [8.4.1. `bytea` Hex Format](datatype-binary#DATATYPE-BINARY-BYTEA-HEX-FORMAT)
     - [8.4.2. `bytea` Escape Format](datatype-binary#DATATYPE-BINARY-BYTEA-ESCAPE-FORMAT)
 
-* [8.5. Date/Time Types](datatype-datetime)
+- [8.5. Date/Time Types](datatype-datetime)
 
-    * [8.5.1. Date/Time Input](datatype-datetime#DATATYPE-DATETIME-INPUT)
-    * [8.5.2. Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
-    * [8.5.3. Time Zones](datatype-datetime#DATATYPE-TIMEZONES)
-    * [8.5.4. Interval Input](datatype-datetime#DATATYPE-INTERVAL-INPUT)
-    * [8.5.5. Interval Output](datatype-datetime#DATATYPE-INTERVAL-OUTPUT)
+  - [8.5.1. Date/Time Input](datatype-datetime#DATATYPE-DATETIME-INPUT)
+  - [8.5.2. Date/Time Output](datatype-datetime#DATATYPE-DATETIME-OUTPUT)
+  - [8.5.3. Time Zones](datatype-datetime#DATATYPE-TIMEZONES)
+  - [8.5.4. Interval Input](datatype-datetime#DATATYPE-INTERVAL-INPUT)
+  - [8.5.5. Interval Output](datatype-datetime#DATATYPE-INTERVAL-OUTPUT)
 
-  * [8.6. Boolean Type](datatype-boolean)
-  * [8.7. Enumerated Types](datatype-enum)
+  - [8.6. Boolean Type](datatype-boolean)
+  - [8.7. Enumerated Types](datatype-enum)
 
     - [8.7.1. Declaration of Enumerated Types](datatype-enum#DATATYPE-ENUM-DECLARATION)
     - [8.7.2. Ordering](datatype-enum#DATATYPE-ENUM-ORDERING)
     - [8.7.3. Type Safety](datatype-enum#DATATYPE-ENUM-TYPE-SAFETY)
     - [8.7.4. Implementation Details](datatype-enum#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)
 
-* [8.8. Geometric Types](datatype-geometric)
+- [8.8. Geometric Types](datatype-geometric)
 
-    * [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
-    * [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
-    * [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
-    * [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
-    * [8.8.5. Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
-    * [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
-    * [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
+  - [8.8.1. Points](datatype-geometric#DATATYPE-GEOMETRIC-POINTS)
+  - [8.8.2. Lines](datatype-geometric#DATATYPE-LINE)
+  - [8.8.3. Line Segments](datatype-geometric#DATATYPE-LSEG)
+  - [8.8.4. Boxes](datatype-geometric#DATATYPE-GEOMETRIC-BOXES)
+  - [8.8.5. Paths](datatype-geometric#DATATYPE-GEOMETRIC-PATHS)
+  - [8.8.6. Polygons](datatype-geometric#DATATYPE-POLYGON)
+  - [8.8.7. Circles](datatype-geometric#DATATYPE-CIRCLE)
 
-* [8.9. Network Address Types](datatype-net-types)
+- [8.9. Network Address Types](datatype-net-types)
 
-    * [8.9.1. `inet`](datatype-net-types#DATATYPE-INET)
-    * [8.9.2. `cidr`](datatype-net-types#DATATYPE-CIDR)
-    * [8.9.3. `inet` vs. `cidr`](datatype-net-types#DATATYPE-INET-VS-CIDR)
-    * [8.9.4. `macaddr`](datatype-net-types#DATATYPE-MACADDR)
-    * [8.9.5. `macaddr8`](datatype-net-types#DATATYPE-MACADDR8)
+  - [8.9.1. `inet`](datatype-net-types#DATATYPE-INET)
+  - [8.9.2. `cidr`](datatype-net-types#DATATYPE-CIDR)
+  - [8.9.3. `inet` vs. `cidr`](datatype-net-types#DATATYPE-INET-VS-CIDR)
+  - [8.9.4. `macaddr`](datatype-net-types#DATATYPE-MACADDR)
+  - [8.9.5. `macaddr8`](datatype-net-types#DATATYPE-MACADDR8)
 
-  * [8.10. Bit String Types](datatype-bit)
-  * [8.11. Text Search Types](datatype-textsearch)
+  - [8.10. Bit String Types](datatype-bit)
+  - [8.11. Text Search Types](datatype-textsearch)
 
     - [8.11.1. `tsvector`](datatype-textsearch#DATATYPE-TSVECTOR)
     - [8.11.2. `tsquery`](datatype-textsearch#DATATYPE-TSQUERY)
 
-  * [8.12. UUID Type](datatype-uuid)
-  * [8.13. XML Type](datatype-xml)
+  - [8.12. UUID Type](datatype-uuid)
+  - [8.13. XML Type](datatype-xml)
 
     - [8.13.1. Creating XML Values](datatype-xml#DATATYPE-XML-CREATING)
     - [8.13.2. Encoding Handling](datatype-xml#DATATYPE-XML-ENCODING-HANDLING)
     - [8.13.3. Accessing XML Values](datatype-xml#DATATYPE-XML-ACCESSING-XML-VALUES)
 
-* [8.14. JSON Types](datatype-json)
+- [8.14. JSON Types](datatype-json)
 
-    * [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
-    * [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
-    * [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
-    * [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)
-    * [8.14.5. `jsonb` Subscripting](datatype-json#JSONB-SUBSCRIPTING)
-    * [8.14.6. Transforms](datatype-json#DATATYPE-JSON-TRANSFORMS)
-    * [8.14.7. jsonpath Type](datatype-json#DATATYPE-JSONPATH)
+  - [8.14.1. JSON Input and Output Syntax](datatype-json#JSON-KEYS-ELEMENTS)
+  - [8.14.2. Designing JSON Documents](datatype-json#JSON-DOC-DESIGN)
+  - [8.14.3. `jsonb` Containment and Existence](datatype-json#JSON-CONTAINMENT)
+  - [8.14.4. `jsonb` Indexing](datatype-json#JSON-INDEXING)
+  - [8.14.5. `jsonb` Subscripting](datatype-json#JSONB-SUBSCRIPTING)
+  - [8.14.6. Transforms](datatype-json#DATATYPE-JSON-TRANSFORMS)
+  - [8.14.7. jsonpath Type](datatype-json#DATATYPE-JSONPATH)
 
-* [8.15. Arrays](arrays)
+- [8.15. Arrays](arrays)
 
-    * [8.15.1. Declaration of Array Types](arrays#ARRAYS-DECLARATION)
-    * [8.15.2. Array Value Input](arrays#ARRAYS-INPUT)
-    * [8.15.3. Accessing Arrays](arrays#ARRAYS-ACCESSING)
-    * [8.15.4. Modifying Arrays](arrays#ARRAYS-MODIFYING)
-    * [8.15.5. Searching in Arrays](arrays#ARRAYS-SEARCHING)
-    * [8.15.6. Array Input and Output Syntax](arrays#ARRAYS-IO)
+  - [8.15.1. Declaration of Array Types](arrays#ARRAYS-DECLARATION)
+  - [8.15.2. Array Value Input](arrays#ARRAYS-INPUT)
+  - [8.15.3. Accessing Arrays](arrays#ARRAYS-ACCESSING)
+  - [8.15.4. Modifying Arrays](arrays#ARRAYS-MODIFYING)
+  - [8.15.5. Searching in Arrays](arrays#ARRAYS-SEARCHING)
+  - [8.15.6. Array Input and Output Syntax](arrays#ARRAYS-IO)
 
-* [8.16. Composite Types](rowtypes)
+- [8.16. Composite Types](rowtypes)
 
-    * [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
-    * [8.16.2. Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
-    * [8.16.3. Accessing Composite Types](rowtypes#ROWTYPES-ACCESSING)
-    * [8.16.4. Modifying Composite Types](rowtypes#ROWTYPES-MODIFYING)
-    * [8.16.5. Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
-    * [8.16.6. Composite Type Input and Output Syntax](rowtypes#ROWTYPES-IO-SYNTAX)
+  - [8.16.1. Declaration of Composite Types](rowtypes#ROWTYPES-DECLARING)
+  - [8.16.2. Constructing Composite Values](rowtypes#ROWTYPES-CONSTRUCTING)
+  - [8.16.3. Accessing Composite Types](rowtypes#ROWTYPES-ACCESSING)
+  - [8.16.4. Modifying Composite Types](rowtypes#ROWTYPES-MODIFYING)
+  - [8.16.5. Using Composite Types in Queries](rowtypes#ROWTYPES-USAGE)
+  - [8.16.6. Composite Type Input and Output Syntax](rowtypes#ROWTYPES-IO-SYNTAX)
 
-* [8.17. Range Types](rangetypes)
+- [8.17. Range Types](rangetypes)
 
-    * [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
-    * [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
-    * [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
-    * [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)
-    * [8.17.5. Range Input/Output](rangetypes#RANGETYPES-IO)
-    * [8.17.6. Constructing Ranges and Multiranges](rangetypes#RANGETYPES-CONSTRUCT)
-    * [8.17.7. Discrete Range Types](rangetypes#RANGETYPES-DISCRETE)
-    * [8.17.8. Defining New Range Types](rangetypes#RANGETYPES-DEFINING)
-    * [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
-    * [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
+  - [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
+  - [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
+  - [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
+  - [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)
+  - [8.17.5. Range Input/Output](rangetypes#RANGETYPES-IO)
+  - [8.17.6. Constructing Ranges and Multiranges](rangetypes#RANGETYPES-CONSTRUCT)
+  - [8.17.7. Discrete Range Types](rangetypes#RANGETYPES-DISCRETE)
+  - [8.17.8. Defining New Range Types](rangetypes#RANGETYPES-DEFINING)
+  - [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
+  - [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
 
-  * [8.18. Domain Types](domains)
-  * [8.19. Object Identifier Types](datatype-oid)
-  * [8.20. `pg_lsn` Type](datatype-pg-lsn)
-  * [8.21. Pseudo-Types](datatype-pseudo)
-
-
+  - [8.18. Domain Types](domains)
+  - [8.19. Object Identifier Types](datatype-oid)
+  - [8.20. `pg_lsn` Type](datatype-pg-lsn)
+  - [8.21. Pseudo-Types](datatype-pseudo)
 
 PostgreSQL has a rich set of native data types available to users. Users can add new types to PostgreSQL using the [CREATE TYPE](sql-createtype) command.
 
@@ -166,7 +164,6 @@ PostgreSQL has a rich set of native data types available to users. Users can add
 | `txid_snapshot`                           |                      | user-level transaction ID snapshot (deprecated; see `pg_snapshot`) |
 | `uuid`                                    |                      | universally unique identifier                                      |
 | `xml`                                     |                      | XML data                                                           |
-
 
 ### Compatibility
 

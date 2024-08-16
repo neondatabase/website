@@ -2,8 +2,6 @@
 
 ## 7.5. Sorting Rows (`ORDER BY`) [#](#QUERIES-ORDER)
 
-
-
 After a query has produced an output table (after the select list has been processed) it can optionally be sorted. If sorting is not chosen, the rows will be returned in an unspecified order. The actual order in that case will depend on the scan and join plan types and the order on disk, but it must not be relied on. A particular output ordering can only be guaranteed if the sort step is explicitly chosen.
 
 The `ORDER BY` clause specifies the sort order:
@@ -27,14 +25,14 @@ The `NULLS FIRST` and `NULLS LAST` options can be used to determine whether null
 
 Note that the ordering options are considered independently for each sort column. For example `ORDER BY x, y DESC` means `ORDER BY x ASC, y DESC`, which is not the same as `ORDER BY x DESC, y DESC`.
 
-A *`sort_expression`* can also be the column label or number of an output column, as in:
+A _`sort_expression`_ can also be the column label or number of an output column, as in:
 
 ```
 SELECT a + b AS sum, c FROM table1 ORDER BY sum;
 SELECT a, max(b) FROM table1 GROUP BY a ORDER BY 1;
 ```
 
-both of which sort by the first output column. Note that an output column name has to stand alone, that is, it cannot be used in an expression — for example, this is *not* correct:
+both of which sort by the first output column. Note that an output column name has to stand alone, that is, it cannot be used in an expression — for example, this is _not_ correct:
 
 ```
 SELECT a + b AS sum, c FROM table1 ORDER BY sum + c;          -- wrong

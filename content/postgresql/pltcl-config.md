@@ -4,7 +4,7 @@
 
 This section lists configuration parameters that affect PL/Tcl.
 
-* `pltcl.start_proc` (`string`) [#](#GUC-PLTCL-START-PROC)
+- `pltcl.start_proc` (`string`) [#](#GUC-PLTCL-START-PROC)
 
   This parameter, if set to a nonempty string, specifies the name (possibly schema-qualified) of a parameterless PL/Tcl function that is to be executed whenever a new Tcl interpreter is created for PL/Tcl. Such a function can perform per-session initialization, such as loading additional Tcl code. A new Tcl interpreter is created when a PL/Tcl function is first executed in a database session, or when an additional interpreter has to be created because a PL/Tcl function is called by a new SQL role.
 
@@ -14,6 +14,6 @@ This section lists configuration parameters that affect PL/Tcl.
 
   Only superusers can change this setting. Although this setting can be changed within a session, such changes will not affect Tcl interpreters that have already been created.
 
-* `pltclu.start_proc` (`string`) [#](#GUC-PLTCLU-START-PROC)
+- `pltclu.start_proc` (`string`) [#](#GUC-PLTCLU-START-PROC)
 
   This parameter is exactly like `pltcl.start_proc`, except that it applies to PL/TclU. The referenced function must be written in the `pltclu` language.

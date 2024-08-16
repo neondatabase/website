@@ -9,6 +9,7 @@ module.exports = {
     '/all-things-open-2023',
     '/stackoverflow',
     '/cfe',
+    '/devs',
     '/github',
     '/youtube',
     '/education',
@@ -20,6 +21,7 @@ module.exports = {
     '/blog/*',
   ],
   generateRobotsTxt: true,
+  additionalPaths: async (config) => [await config.transform(config, '/')],
   robotsTxtOptions: {
     policies: [
       {
@@ -38,6 +40,8 @@ module.exports = {
           '/docs/postgres*',
           '/thank-you$',
           '/cfe$',
+          '/devs$',
+          '/home$',
         ],
       },
     ],

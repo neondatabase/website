@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Ruby on Rails
 subtitle: Set up Neon Postgres and run migrations for your Rails project
 enableTableOfContents: true
-updatedOn: '2024-03-04T14:30:00.000Z'
+updatedOn: '2024-08-07T21:36:52.662Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.
@@ -15,13 +15,13 @@ To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 
-- [Ruby](https://www.ruby-lang.org/) installed on your local machine. 
+- [Ruby](https://www.ruby-lang.org/) installed on your local machine.
 
-    You can install Ruby using the instructions provided on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/). We recommend using a newer version of Ruby, 3.0 or higher.
+  You can install Ruby using the instructions provided on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/). We recommend using a newer version of Ruby, 3.0 or higher.
 
-- [Rails](https://rubyonrails.org/) installed on your local machine. You can install Rails by running `gem install rails`. 
+- [Rails](https://rubyonrails.org/) installed on your local machine. You can install Rails by running `gem install rails`.
 
-    We recommend using Rails 6 or higher. This project uses `Rails 7.1.3.2`. 
+  We recommend using Rails 6 or higher. This project uses `Rails 7.1.3.2`.
 
 ## Setting up your Neon database
 
@@ -35,7 +35,7 @@ To follow along with this guide, you will need:
 On your project dashboard in Neon, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -70,9 +70,9 @@ For Rails to load the environment variables automatically from the `.env` file, 
 gem 'dotenv-rails', groups: [:development, :test]
 ```
 
-Then, run `bundle install` to install the gem. 
+Then, run `bundle install` to install the gem.
 
-Finally, we open the `config/database.yml` file in your project directory and update the `default` section so that Rails uses the `DATABASE_URL` environment variable to connect to the `Neon` database. 
+Finally, we open the `config/database.yml` file in your project directory and update the `default` section so that Rails uses the `DATABASE_URL` environment variable to connect to the `Neon` database.
 
 ```yaml
 # database.yml
@@ -114,7 +114,7 @@ To run the migrations and create the corresponding tables in the Neon Postgres d
 rails db:migrate
 ```
 
-This command executes the migration files and creates the `authors` and `books` tables in the database. Additionally, it also creates some tables for its internal bookkeeping. 
+This command executes the migration files and creates the `authors` and `books` tables in the database. Additionally, it also creates some tables for its internal bookkeeping.
 
 ### Seed the database
 
@@ -282,7 +282,7 @@ To run the migration and apply the schema change, run the following command:
 rails db:migrate
 ```
 
-This command executes the migration file and adds the `country` column to the `authors` table in the database. 
+This command executes the migration file and adds the `country` column to the `authors` table in the database.
 
 ### Update the existing records
 

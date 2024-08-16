@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-IS-BUSY)
 
-## dblink\_is\_busy
+## dblink_is_busy
 
-dblink\_is\_busy — checks if connection is busy with an async query
+dblink_is_busy — checks if connection is busy with an async query
 
 ## Synopsis
 
@@ -21,7 +21,7 @@ dblink_is_busy(text connname) returns int
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   Name of the connection to check.
 

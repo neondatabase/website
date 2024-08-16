@@ -66,49 +66,49 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
 ## Parameters
 
-* `IF NOT EXISTS`
+- `IF NOT EXISTS`
 
   Do not throw an error if a relation with the same name already exists. A notice is issued in this case. Note that there is no guarantee that the existing relation is anything like the one that would have been created.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table to be created.
 
-* *`column_name`*
+- _`column_name`_
 
   The name of a column to be created in the new table.
 
-* *`data_type`*
+- _`data_type`_
 
   The data type of the column. This can include array specifiers. For more information on the data types supported by PostgreSQL, refer to [Chapter 8](datatype).
 
-* `COLLATE collation`
+- `COLLATE collation`
 
   The `COLLATE` clause assigns a collation to the column (which must be of a collatable data type). If not specified, the column data type's default collation is used.
 
-* `INHERITS ( parent_table [, ... ] )`
+- `INHERITS ( parent_table [, ... ] )`
 
   The optional `INHERITS` clause specifies a list of tables from which the new foreign table automatically inherits all columns. Parent tables can be plain tables or foreign tables. See the similar form of [`CREATE TABLE`](sql-createtable) for more details.
 
-* `PARTITION OF parent_table { FOR VALUES partition_bound_spec | DEFAULT }`
+- `PARTITION OF parent_table { FOR VALUES partition_bound_spec | DEFAULT }`
 
   This form can be used to create the foreign table as partition of the given parent table with specified partition bound values. See the similar form of [`CREATE TABLE`](sql-createtable) for more details. Note that it is currently not allowed to create the foreign table as a partition of the parent table if there are `UNIQUE` indexes on the parent table. (See also [`ALTER TABLE ATTACH PARTITION`](sql-altertable).)
 
-* `CONSTRAINT constraint_name`
+- `CONSTRAINT constraint_name`
 
   An optional name for a column or table constraint. If the constraint is violated, the constraint name is present in error messages, so constraint names like `col must be positive` can be used to communicate helpful constraint information to client applications. (Double-quotes are needed to specify constraint names that contain spaces.) If a constraint name is not specified, the system generates a name.
 
-* `NOT NULL`
+- `NOT NULL`
 
   The column is not allowed to contain null values.
 
-* `NULL`
+- `NULL`
 
   The column is allowed to contain null values. This is the default.
 
   This clause is only provided for compatibility with non-standard SQL databases. Its use is discouraged in new applications.
 
-* `CHECK ( expression ) [ NO INHERIT ]`
+- `CHECK ( expression ) [ NO INHERIT ]`
 
   The `CHECK` clause specifies an expression producing a Boolean result which each row in the foreign table is expected to satisfy; that is, the expression should produce TRUE or UNKNOWN, never FALSE, for all rows in the foreign table. A check constraint specified as a column constraint should reference that column's value only, while an expression appearing in a table constraint can reference multiple columns.
 
@@ -116,25 +116,25 @@ To be able to create a foreign table, you must have `USAGE` privilege on the for
 
   A constraint marked with `NO INHERIT` will not propagate to child tables.
 
-* `DEFAULT default_expr`
+- `DEFAULT default_expr`
 
   The `DEFAULT` clause assigns a default data value for the column whose column definition it appears within. The value is any variable-free expression (subqueries and cross-references to other columns in the current table are not allowed). The data type of the default expression must match the data type of the column.
 
   The default expression will be used in any insert operation that does not specify a value for the column. If there is no default for a column, then the default is null.
 
-* `GENERATED ALWAYS AS ( generation_expr ) STORED`
+- `GENERATED ALWAYS AS ( generation_expr ) STORED`
 
-  This clause creates the column as a *generated column*. The column cannot be written to, and when read the result of the specified expression will be returned.
+  This clause creates the column as a _generated column_. The column cannot be written to, and when read the result of the specified expression will be returned.
 
   The keyword `STORED` is required to signify that the column will be computed on write. (The computed value will be presented to the foreign-data wrapper for storage and must be returned on reading.)
 
   The generation expression can refer to other columns in the table, but not other generated columns. Any functions and operators used must be immutable. References to other tables are not allowed.
 
-* *`server_name`*
+- _`server_name`_
 
   The name of an existing foreign server to use for the foreign table. For details on defining a server, see [CREATE SERVER](sql-createserver).
 
-* `OPTIONS ( option 'value' [, ...] )`
+- `OPTIONS ( option 'value' [, ...] )`
 
   Options to be associated with the new foreign table or one of its columns. The allowed option names and values are specific to each foreign data wrapper and are validated using the foreign-data wrapper's validator function. Duplicate option names are not allowed (although it's OK for a table option and a column option to have the same name).
 

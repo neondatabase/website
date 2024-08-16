@@ -2,7 +2,7 @@
 
 ## 61.3. Executing Custom Scans [#](#CUSTOM-SCAN-EXECUTION)
 
-* [61.3.1. Custom Scan Execution Callbacks](custom-scan-execution#CUSTOM-SCAN-EXECUTION-CALLBACKS)
+- [61.3.1. Custom Scan Execution Callbacks](custom-scan-execution#CUSTOM-SCAN-EXECUTION-CALLBACKS)
 
 When a `CustomScan` is executed, its execution state is represented by a `CustomScanState`, which is declared as follows:
 

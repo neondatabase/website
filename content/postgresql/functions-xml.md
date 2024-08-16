@@ -2,10 +2,10 @@
 
 ## 9.15. XML Functions [#](#FUNCTIONS-XML)
 
-* [9.15.1. Producing XML Content](functions-xml#FUNCTIONS-PRODUCING-XML)
-* [9.15.2. XML Predicates](functions-xml#FUNCTIONS-XML-PREDICATES)
-* [9.15.3. Processing XML](functions-xml#FUNCTIONS-XML-PROCESSING)
-* [9.15.4. Mapping Tables to XML](functions-xml#FUNCTIONS-XML-MAPPING)
+- [9.15.1. Producing XML Content](functions-xml#FUNCTIONS-PRODUCING-XML)
+- [9.15.2. XML Predicates](functions-xml#FUNCTIONS-XML-PREDICATES)
+- [9.15.3. Processing XML](functions-xml#FUNCTIONS-XML-PROCESSING)
+- [9.15.4. Mapping Tables to XML](functions-xml#FUNCTIONS-XML-MAPPING)
 
 The functions and function-like expressions described in this section operate on values of type `xml`. See [Section 8.13](datatype-xml) for information about the `xml` type. The function-like expressions `xmlparse` and `xmlserialize` for converting to and from type `xml` are documented there, not in this section.
 
@@ -83,7 +83,7 @@ SELECT xmlconcat('<?xml version="1.1"?><foo/>', '<?xml version="1.1" standalone=
 xmlelement ( NAME name [, XMLATTRIBUTES ( attvalue [ AS attname ] [, ...] ) ] [, content [, ...]] ) → xml
 ```
 
-The `xmlelement` expression produces an XML element with the given name, attributes, and content. The *`name`* and *`attname`* items shown in the syntax are simple identifiers, not values. The *`attvalue`* and *`content`* items are expressions, which can yield any PostgreSQL data type. The argument(s) within `XMLATTRIBUTES` generate attributes of the XML element; the *`content`* value(s) are concatenated to form its content.
+The `xmlelement` expression produces an XML element with the given name, attributes, and content. The _`name`_ and _`attname`_ items shown in the syntax are simple identifiers, not values. The _`attvalue`_ and _`content`_ items are expressions, which can yield any PostgreSQL data type. The argument(s) within `XMLATTRIBUTES` generate attributes of the XML element; the _`content`_ value(s) are concatenated to form its content.
 
 Examples:
 
@@ -108,7 +108,7 @@ SELECT xmlelement(name foo, xmlattributes(current_date as bar), 'cont', 'ent');
  <foo bar="2007-01-26">content</foo>
 ```
 
-Element and attribute names that are not valid XML names are escaped by replacing the offending characters by the sequence `_xHHHH_`, where *`HHHH`* is the character's Unicode codepoint in hexadecimal notation. For example:
+Element and attribute names that are not valid XML names are escaped by replacing the offending characters by the sequence `_xHHHH_`, where _`HHHH`_ is the character's Unicode codepoint in hexadecimal notation. For example:
 
 ```
 
@@ -160,7 +160,7 @@ Content of other types will be formatted into valid XML character data. This mea
 xmlforest ( content [ AS name ] [, ...] ) → xml
 ```
 
-The `xmlforest` expression produces an XML forest (sequence) of elements using the given names and content. As for `xmlelement`, each *`name`* must be a simple identifier, while the *`content`* expressions can have any data type.
+The `xmlforest` expression produces an XML forest (sequence) of elements using the given names and content. As for `xmlelement`, each _`name`_ must be a simple identifier, while the _`content`_ expressions can have any data type.
 
 Examples:
 
@@ -200,7 +200,7 @@ Note that XML forests are not valid XML documents if they consist of more than o
 xmlpi ( NAME name [, content ] ) → xml
 ```
 
-The `xmlpi` expression creates an XML processing instruction. As for `xmlelement`, the *`name`* must be a simple identifier, while the *`content`* expression can have any data type. The *`content`*, if present, must not contain the character sequence `?>`.
+The `xmlpi` expression creates an XML processing instruction. As for `xmlelement`, the _`name`_ must be a simple identifier, while the _`content`_ expression can have any data type. The _`content`_, if present, must not contain the character sequence `?>`.
 
 Example:
 
@@ -401,11 +401,11 @@ To process values of data type `xml`, PostgreSQL offers the functions `xpath` an
 xpath ( xpath text, xml xml [, nsarray text[] ] ) → xml[]
 ```
 
-The function `xpath` evaluates the XPath 1.0 expression *`xpath`* (given as text) against the XML value *`xml`*. It returns an array of XML values corresponding to the node-set produced by the XPath expression. If the XPath expression returns a scalar value rather than a node-set, a single-element array is returned.
+The function `xpath` evaluates the XPath 1.0 expression _`xpath`_ (given as text) against the XML value _`xml`_. It returns an array of XML values corresponding to the node-set produced by the XPath expression. If the XPath expression returns a scalar value rather than a node-set, a single-element array is returned.
 
 The second argument must be a well formed XML document. In particular, it must have a single root node element.
 
-The optional third argument of the function is an array of namespace mappings. This array should be a two-dimensional `text` array with the length of the second axis being equal to 2 (i.e., it should be an array of arrays, each of which consists of exactly 2 elements). The first element of each array entry is the namespace name (alias), the second the namespace URI. It is not required that aliases provided in this array be the same as those being used in the XML document itself (in other words, both in the XML document and in the `xpath` function context, aliases are *local*).
+The optional third argument of the function is an array of namespace mappings. This array should be a two-dimensional `text` array with the length of the second axis being equal to 2 (i.e., it should be an array of arrays, each of which consists of exactly 2 elements). The first element of each array entry is the namespace name (alias), the second the namespace URI. It is not required that aliases provided in this array be the same as those being used in the XML document itself (in other words, both in the XML document and in the `xpath` function context, aliases are _local_).
 
 Example:
 
@@ -474,23 +474,23 @@ XMLTABLE (
 
 The `xmltable` expression produces a table based on an XML value, an XPath filter to extract rows, and a set of column definitions. Although it syntactically resembles a function, it can only appear as a table in a query's `FROM` clause.
 
-The optional `XMLNAMESPACES` clause gives a comma-separated list of namespace definitions, where each *`namespace_uri`* is a `text` expression and each *`namespace_name`* is a simple identifier. It specifies the XML namespaces used in the document and their aliases. A default namespace specification is not currently supported.
+The optional `XMLNAMESPACES` clause gives a comma-separated list of namespace definitions, where each _`namespace_uri`_ is a `text` expression and each _`namespace_name`_ is a simple identifier. It specifies the XML namespaces used in the document and their aliases. A default namespace specification is not currently supported.
 
-The required *`row_expression`* argument is an XPath 1.0 expression (given as `text`) that is evaluated, passing the XML value *`document_expression`* as its context item, to obtain a set of XML nodes. These nodes are what `xmltable` transforms into output rows. No rows will be produced if the *`document_expression`* is null, nor if the *`row_expression`* produces an empty node-set or any value other than a node-set.
+The required _`row_expression`_ argument is an XPath 1.0 expression (given as `text`) that is evaluated, passing the XML value _`document_expression`_ as its context item, to obtain a set of XML nodes. These nodes are what `xmltable` transforms into output rows. No rows will be produced if the _`document_expression`_ is null, nor if the _`row_expression`_ produces an empty node-set or any value other than a node-set.
 
-*`document_expression`* provides the context item for the *`row_expression`*. It must be a well-formed XML document; fragments/forests are not accepted. The `BY REF` and `BY VALUE` clauses are accepted but ignored, as discussed in [Section D.3.2](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL).
+_`document_expression`_ provides the context item for the _`row_expression`_. It must be a well-formed XML document; fragments/forests are not accepted. The `BY REF` and `BY VALUE` clauses are accepted but ignored, as discussed in [Section D.3.2](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL).
 
 In the SQL standard, the `xmltable` function evaluates expressions in the XML Query language, but PostgreSQL allows only XPath 1.0 expressions, as discussed in [Section D.3.1](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1).
 
 The required `COLUMNS` clause specifies the column(s) that will be produced in the output table. See the syntax summary above for the format. A name is required for each column, as is a data type (unless `FOR ORDINALITY` is specified, in which case type `integer` is implicit). The path, default and nullability clauses are optional.
 
-A column marked `FOR ORDINALITY` will be populated with row numbers, starting with 1, in the order of nodes retrieved from the *`row_expression`*'s result node-set. At most one column may be marked `FOR ORDINALITY`.
+A column marked `FOR ORDINALITY` will be populated with row numbers, starting with 1, in the order of nodes retrieved from the _`row_expression`_'s result node-set. At most one column may be marked `FOR ORDINALITY`.
 
 ### Note
 
 XPath 1.0 does not specify an order for nodes in a node-set, so code that relies on a particular order of the results will be implementation-dependent. Details can be found in [Section D.3.1.2](xml-limits-conformance#XML-XPATH-1-SPECIFICS).
 
-The *`column_expression`* for a column is an XPath 1.0 expression that is evaluated for each row, with the current node from the *`row_expression`* result as its context item, to find the value of the column. If no *`column_expression`* is given, then the column name is used as an implicit path.
+The _`column_expression`_ for a column is an XPath 1.0 expression that is evaluated for each row, with the current node from the _`row_expression`_ result as its context item, to find the value of the column. If no _`column_expression`_ is given, then the column name is used as an implicit path.
 
 If a column's XPath expression returns a non-XML value (which is limited to string, boolean, or double in XPath 1.0) and the column has a PostgreSQL type other than `xml`, the column will be set as if by assigning the value's string representation to the PostgreSQL type. (If the value is a boolean, its string representation is taken to be `1` or `0` if the output column's type category is numeric, otherwise `true` or `false`.)
 
@@ -502,11 +502,11 @@ The string value of an XML element is the concatenation, in document order, of a
 
 The conversion rules presented here are not exactly those of the SQL standard, as discussed in [Section D.3.1.3](xml-limits-conformance#FUNCTIONS-XML-LIMITS-CASTS).
 
-If the path expression returns an empty node-set (typically, when it does not match) for a given row, the column will be set to `NULL`, unless a *`default_expression`* is specified; then the value resulting from evaluating that expression is used.
+If the path expression returns an empty node-set (typically, when it does not match) for a given row, the column will be set to `NULL`, unless a _`default_expression`_ is specified; then the value resulting from evaluating that expression is used.
 
-A *`default_expression`*, rather than being evaluated immediately when `xmltable` is called, is evaluated each time a default is needed for the column. If the expression qualifies as stable or immutable, the repeat evaluation may be skipped. This means that you can usefully use volatile functions like `nextval` in *`default_expression`*.
+A _`default_expression`_, rather than being evaluated immediately when `xmltable` is called, is evaluated each time a default is needed for the column. If the expression qualifies as stable or immutable, the repeat evaluation may be skipped. This means that you can usefully use volatile functions like `nextval` in _`default_expression`_.
 
-Columns may be marked `NOT NULL`. If the *`column_expression`* for a `NOT NULL` column does not match anything and there is no `DEFAULT` or the *`default_expression`* also evaluates to null, an error is reported.
+Columns may be marked `NOT NULL`. If the _`column_expression`_ for a `NOT NULL` column does not match anything and there is no `DEFAULT` or the _`default_expression`_ also evaluates to null, an error is reported.
 
 Examples:
 
@@ -613,9 +613,9 @@ cursor_to_xml ( cursor refcursor, count integer, nulls boolean,
                 tableforest boolean, targetns text ) → xml
 ```
 
-`table_to_xml` maps the content of the named table, passed as parameter *`table`*. The `regclass` type accepts strings identifying tables using the usual notation, including optional schema qualification and double quotes (see [Section 8.19](datatype-oid) for details). `query_to_xml` executes the query whose text is passed as parameter *`query`* and maps the result set. `cursor_to_xml` fetches the indicated number of rows from the cursor specified by the parameter *`cursor`*. This variant is recommended if large tables have to be mapped, because the result value is built up in memory by each function.
+`table_to_xml` maps the content of the named table, passed as parameter _`table`_. The `regclass` type accepts strings identifying tables using the usual notation, including optional schema qualification and double quotes (see [Section 8.19](datatype-oid) for details). `query_to_xml` executes the query whose text is passed as parameter _`query`_ and maps the result set. `cursor_to_xml` fetches the indicated number of rows from the cursor specified by the parameter _`cursor`_. This variant is recommended if large tables have to be mapped, because the result value is built up in memory by each function.
 
-If *`tableforest`* is false, then the resulting XML document looks like this:
+If _`tableforest`_ is false, then the resulting XML document looks like this:
 
 ```
 
@@ -633,7 +633,7 @@ If *`tableforest`* is false, then the resulting XML document looks like this:
 </tablename>
 ```
 
-If *`tableforest`* is true, the result is an XML content fragment that looks like this:
+If _`tableforest`_ is true, the result is an XML content fragment that looks like this:
 
 ```
 
@@ -655,7 +655,7 @@ The choice between these formats is up to the user. The first format is a proper
 
 The data values are mapped in the same way as described for the function `xmlelement` above.
 
-The parameter *`nulls`* determines whether null values should be included in the output. If true, null values in columns are represented as:
+The parameter _`nulls`_ determines whether null values should be included in the output. If true, null values in columns are represented as:
 
 ```
 
@@ -664,7 +664,7 @@ The parameter *`nulls`* determines whether null values should be included in the
 
 where `xsi` is the XML namespace prefix for XML Schema Instance. An appropriate namespace declaration will be added to the result value. If false, columns containing null values are simply omitted from the output.
 
-The parameter *`targetns`* specifies the desired XML namespace of the result. If no particular namespace is wanted, an empty string should be passed.
+The parameter _`targetns`_ specifies the desired XML namespace of the result. If no particular namespace is wanted, an empty string should be passed.
 
 The following functions return XML Schema documents describing the mappings performed by the corresponding functions above:
 
@@ -728,7 +728,7 @@ table2-mapping
 </schemaname>
 ```
 
-where the format of a table mapping depends on the *`tableforest`* parameter as explained above.
+where the format of a table mapping depends on the _`tableforest`_ parameter as explained above.
 
 The result of a database content mapping looks like this:
 

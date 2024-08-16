@@ -2,8 +2,6 @@
 
 ## 44.9. Explicit Subtransactions in PL/Tcl [#](#PLTCL-SUBTRANSACTIONS)
 
-
-
 Recovering from errors caused by database access as described in [Section 44.8](pltcl-error-handling) can lead to an undesirable situation where some operations succeed before one of them fails, and after recovering from that error the data is left in an inconsistent state. PL/Tcl offers a solution to this problem in the form of explicit subtransactions.
 
 Consider a function that implements a transfer between two accounts:

@@ -40,85 +40,85 @@ By default, the new database will be created by cloning the standard system data
 
 ## Parameters
 
-* *`name`* [#](#CREATE-DATABASE-NAME)
+- _`name`_ [#](#CREATE-DATABASE-NAME)
 
   The name of a database to create.
 
-* *`user_name`* [#](#CREATE-DATABASE-USER-NAME)
+- _`user_name`_ [#](#CREATE-DATABASE-USER-NAME)
 
   The role name of the user who will own the new database, or `DEFAULT` to use the default (namely, the user executing the command). To create a database owned by another role, you must be able to `SET ROLE` to that role.
 
-* *`template`* [#](#CREATE-DATABASE-TEMPLATE)
+- _`template`_ [#](#CREATE-DATABASE-TEMPLATE)
 
   The name of the template from which to create the new database, or `DEFAULT` to use the default template (`template1`).
 
-* *`encoding`* [#](#CREATE-DATABASE-ENCODING)
+- _`encoding`_ [#](#CREATE-DATABASE-ENCODING)
 
   Character set encoding to use in the new database. Specify a string constant (e.g., `'SQL_ASCII'`), or an integer encoding number, or `DEFAULT` to use the default encoding (namely, the encoding of the template database). The character sets supported by the PostgreSQL server are described in [Section 24.3.1](multibyte#MULTIBYTE-CHARSET-SUPPORTED). See below for additional restrictions.
 
-* *`strategy`* [#](#CREATE-DATABASE-STRATEGY)
+- _`strategy`_ [#](#CREATE-DATABASE-STRATEGY)
 
   Strategy to be used in creating the new database. If the `WAL_LOG` strategy is used, the database will be copied block by block and each block will be separately written to the write-ahead log. This is the most efficient strategy in cases where the template database is small, and therefore it is the default. The older `FILE_COPY` strategy is also available. This strategy writes a small record to the write-ahead log for each tablespace used by the target database. Each such record represents copying an entire directory to a new location at the filesystem level. While this does reduce the write-ahead log volume substantially, especially if the template database is large, it also forces the system to perform a checkpoint both before and after the creation of the new database. In some situations, this may have a noticeable negative impact on overall system performance.
 
-* *`locale`* [#](#CREATE-DATABASE-LOCALE)
+- _`locale`_ [#](#CREATE-DATABASE-LOCALE)
 
   Sets the default collation order and character classification in the new database. Collation affects the sort order applied to strings, e.g., in queries with `ORDER BY`, as well as the order used in indexes on text columns. Character classification affects the categorization of characters, e.g., lower, upper, and digit. Also sets the associated aspects of the operating system environment, `LC_COLLATE` and `LC_CTYPE`. The default is the same setting as the template database. See [Section 24.2.2.3.1](collation#COLLATION-MANAGING-CREATE-LIBC) and [Section 24.2.2.3.2](collation#COLLATION-MANAGING-CREATE-ICU) for details.
 
-  Can be overridden by setting [*`lc_collate`*](sql-createdatabase#CREATE-DATABASE-LC-COLLATE), [*`lc_ctype`*](sql-createdatabase#CREATE-DATABASE-LC-CTYPE), or [*`icu_locale`*](sql-createdatabase#CREATE-DATABASE-ICU-LOCALE) individually.
+  Can be overridden by setting [_`lc_collate`_](sql-createdatabase#CREATE-DATABASE-LC-COLLATE), [_`lc_ctype`_](sql-createdatabase#CREATE-DATABASE-LC-CTYPE), or [_`icu_locale`_](sql-createdatabase#CREATE-DATABASE-ICU-LOCALE) individually.
 
   ### Tip
 
-  The other locale settings [lc\_messages](runtime-config-client#GUC-LC-MESSAGES), [lc\_monetary](runtime-config-client#GUC-LC-MONETARY), [lc\_numeric](runtime-config-client#GUC-LC-NUMERIC), and [lc\_time](runtime-config-client#GUC-LC-TIME) are not fixed per database and are not set by this command. If you want to make them the default for a specific database, you can use `ALTER DATABASE ... SET`.
+  The other locale settings [lc_messages](runtime-config-client#GUC-LC-MESSAGES), [lc_monetary](runtime-config-client#GUC-LC-MONETARY), [lc_numeric](runtime-config-client#GUC-LC-NUMERIC), and [lc_time](runtime-config-client#GUC-LC-TIME) are not fixed per database and are not set by this command. If you want to make them the default for a specific database, you can use `ALTER DATABASE ... SET`.
 
-* *`lc_collate`* [#](#CREATE-DATABASE-LC-COLLATE)
+- _`lc_collate`_ [#](#CREATE-DATABASE-LC-COLLATE)
 
-  Sets `LC_COLLATE` in the database server's operating system environment. The default is the setting of [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified, otherwise the same setting as the template database. See below for additional restrictions.
+  Sets `LC_COLLATE` in the database server's operating system environment. The default is the setting of [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified, otherwise the same setting as the template database. See below for additional restrictions.
 
-  If [*`locale_provider`*](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) is `libc`, also sets the default collation order to use in the new database, overriding the setting [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE).
+  If [_`locale_provider`_](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) is `libc`, also sets the default collation order to use in the new database, overriding the setting [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE).
 
-* *`lc_ctype`* [#](#CREATE-DATABASE-LC-CTYPE)
+- _`lc_ctype`_ [#](#CREATE-DATABASE-LC-CTYPE)
 
-  Sets `LC_CTYPE` in the database server's operating system environment. The default is the setting of [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified, otherwise the same setting as the template database. See below for additional restrictions.
+  Sets `LC_CTYPE` in the database server's operating system environment. The default is the setting of [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified, otherwise the same setting as the template database. See below for additional restrictions.
 
-  If [*`locale_provider`*](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) is `libc`, also sets the default character classification to use in the new database, overriding the setting [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE).
+  If [_`locale_provider`_](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) is `libc`, also sets the default character classification to use in the new database, overriding the setting [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE).
 
-* *`icu_locale`* [#](#CREATE-DATABASE-ICU-LOCALE)
+- _`icu_locale`_ [#](#CREATE-DATABASE-ICU-LOCALE)
 
-  Specifies the ICU locale (see [Section 24.2.2.3.2](collation#COLLATION-MANAGING-CREATE-ICU)) for the database default collation order and character classification, overriding the setting [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE). The [locale provider](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) must be ICU. The default is the setting of [*`locale`*](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified; otherwise the same setting as the template database.
+  Specifies the ICU locale (see [Section 24.2.2.3.2](collation#COLLATION-MANAGING-CREATE-ICU)) for the database default collation order and character classification, overriding the setting [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE). The [locale provider](sql-createdatabase#CREATE-DATABASE-LOCALE-PROVIDER) must be ICU. The default is the setting of [_`locale`_](sql-createdatabase#CREATE-DATABASE-LOCALE) if specified; otherwise the same setting as the template database.
 
-* *`icu_rules`* [#](#CREATE-DATABASE-ICU-RULES)
+- _`icu_rules`_ [#](#CREATE-DATABASE-ICU-RULES)
 
   Specifies additional collation rules to customize the behavior of the default collation of this database. This is supported for ICU only. See [Section 24.2.3.4](collation#ICU-TAILORING-RULES) for details.
 
-* *`locale_provider`* [#](#CREATE-DATABASE-LOCALE-PROVIDER)
+- _`locale_provider`_ [#](#CREATE-DATABASE-LOCALE-PROVIDER)
 
-  Specifies the provider to use for the default collation in this database. Possible values are `icu` (if the server was built with ICU support) or `libc`. By default, the provider is the same as that of the [*`template`*](sql-createdatabase#CREATE-DATABASE-TEMPLATE). See [Section 24.1.4](locale#LOCALE-PROVIDERS) for details.
+  Specifies the provider to use for the default collation in this database. Possible values are `icu` (if the server was built with ICU support) or `libc`. By default, the provider is the same as that of the [_`template`_](sql-createdatabase#CREATE-DATABASE-TEMPLATE). See [Section 24.1.4](locale#LOCALE-PROVIDERS) for details.
 
-* *`collation_version`* [#](#CREATE-DATABASE-COLLATION-VERSION)
+- _`collation_version`_ [#](#CREATE-DATABASE-COLLATION-VERSION)
 
   Specifies the collation version string to store with the database. Normally, this should be omitted, which will cause the version to be computed from the actual version of the database collation as provided by the operating system. This option is intended to be used by `pg_upgrade` for copying the version from an existing installation.
 
   See also [ALTER DATABASE](sql-alterdatabase) for how to handle database collation version mismatches.
 
-* *`tablespace_name`* [#](#CREATE-DATABASE-TABLESPACE-NAME)
+- _`tablespace_name`_ [#](#CREATE-DATABASE-TABLESPACE-NAME)
 
   The name of the tablespace that will be associated with the new database, or `DEFAULT` to use the template database's tablespace. This tablespace will be the default tablespace used for objects created in this database. See [CREATE TABLESPACE](sql-createtablespace) for more information.
 
-* *`allowconn`* [#](#CREATE-DATABASE-ALLOWCONN)
+- _`allowconn`_ [#](#CREATE-DATABASE-ALLOWCONN)
 
   If false then no one can connect to this database. The default is true, allowing connections (except as restricted by other mechanisms, such as `GRANT`/`REVOKE CONNECT`).
 
-* *`connlimit`* [#](#CREATE-DATABASE-CONNLIMIT)
+- _`connlimit`_ [#](#CREATE-DATABASE-CONNLIMIT)
 
   How many concurrent connections can be made to this database. -1 (the default) means no limit.
 
-* *`istemplate`* [#](#CREATE-DATABASE-ISTEMPLATE)
+- _`istemplate`_ [#](#CREATE-DATABASE-ISTEMPLATE)
 
   If true, then this database can be cloned by any user with `CREATEDB` privileges; if false (the default), then only superusers or the owner of the database can clone it.
 
-* *`oid`* [#](#CREATE-DATABASE-OID)
+- _`oid`_ [#](#CREATE-DATABASE-OID)
 
-  The object identifier to be used for the new database. If this parameter is not specified, PostgreSQL will choose a suitable OID automatically. This parameter is primarily intended for internal use by pg\_upgrade, and only pg\_upgrade can specify a value less than 16384.
+  The object identifier to be used for the new database. If this parameter is not specified, PostgreSQL will choose a suitable OID automatically. This parameter is primarily intended for internal use by pg_upgrade, and only pg_upgrade can specify a value less than 16384.
 
 Optional parameters can be written in any order, not only the order illustrated above.
 

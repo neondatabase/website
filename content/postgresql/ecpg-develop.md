@@ -14,27 +14,27 @@ The most important function in the library is `ECPGdo`, which takes care of exec
 
 The arguments are:
 
-* A line number [#](#ECPG-DEVELOP-LINE-NUMBER)
+- A line number [#](#ECPG-DEVELOP-LINE-NUMBER)
 
   This is the line number of the original line; used in error messages only.
 
-* A string [#](#ECPG-DEVELOP-STRING)
+- A string [#](#ECPG-DEVELOP-STRING)
 
   This is the SQL command that is to be issued. It is modified by the input variables, i.e., the variables that where not known at compile time but are to be entered in the command. Where the variables should go the string contains `?`.
 
-* Input variables [#](#ECPG-DEVELOP-INPUT-VARIABLES)
+- Input variables [#](#ECPG-DEVELOP-INPUT-VARIABLES)
 
   Every input variable causes ten arguments to be created. (See below.)
 
-* *`ECPGt_EOIT`* [#](#ECPG-DEVELOP-ECPGT-EOIT)
+- _`ECPGt_EOIT`_ [#](#ECPG-DEVELOP-ECPGT-EOIT)
 
   An `enum` telling that there are no more input variables.
 
-* Output variables [#](#ECPG-DEVELOP-OUTPUT-VARIABLES)
+- Output variables [#](#ECPG-DEVELOP-OUTPUT-VARIABLES)
 
   Every output variable causes ten arguments to be created. (See below.) These variables are filled by the function.
 
-* *`ECPGt_EORT`* [#](#ECPG-DEVELOP-ECPGT-EORT)
+- _`ECPGt_EORT`_ [#](#ECPG-DEVELOP-ECPGT-EORT)
 
   An `enum` telling that there are no more variables.
 

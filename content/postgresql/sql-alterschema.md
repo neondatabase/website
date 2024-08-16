@@ -23,15 +23,15 @@ You must own the schema to use `ALTER SCHEMA`. To rename a schema you must also 
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing schema.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the schema. The new name cannot begin with `pg_`, as such names are reserved for system schemas.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the schema.
 

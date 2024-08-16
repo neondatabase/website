@@ -2,7 +2,7 @@
 title: Postgres Decimal data types
 subtitle: Work with exact numerical values in Postgres
 enableTableOfContents: true
-updatedOn: '2024-02-03T16:07:31.864Z'
+updatedOn: '2024-06-14T07:55:54.366Z'
 ---
 
 In Postgres, decimal data types are used to represent numbers with arbitrarily high precision. They are crucial in financial applications and scientific computation, where exact precision is required for numerical calculations.
@@ -14,6 +14,7 @@ In Postgres, decimal data types are used to represent numbers with arbitrarily h
 Postgres provides a single decimal/numeric type referred to as `DECIMAL` or `NUMERIC`. It offers user-defined precision and can represent numbers exactly up to a certain number of digits.
 
 The syntax for defining a decimal column is `DECIMAL(precision, scale)` or `NUMERIC(precision, scale)`, where:
+
 - `precision` is the total count of significant digits in the number (both to the left and right of the decimal point).
 - `scale` is the count of decimal digits in the fractional part.
 
@@ -72,6 +73,7 @@ FROM portfolios;
 ```
 
 This query yields the following output:
+
 ```text
 total_value
 --------------
@@ -87,7 +89,6 @@ It's important to differentiate `DECIMAL`/`NUMERIC` from floating-point types (`
 
 - **Precision**: `DECIMAL`/`NUMERIC` types maintain exact precision, while floating-point types are approximate and can introduce rounding errors.
 - **Performance**: Operations on `DECIMAL`/`NUMERIC` types are generally slower than floating-point types due to the precision and complexity of calculations.
-
 
 ## Additional considerations
 

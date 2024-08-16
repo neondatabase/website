@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.284Z'
+updatedOn: '2024-06-14T07:55:54.396Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -21,21 +21,21 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 2. Extract the Liquibase files. For example:
 
-    ```bash
-    cd ~/Downloads
-    mkdir ~/liquibase
-    tar -xzvf liquibase-x.yy.z.tar.gz -C ~/liquibase/
-    ```
+   ```bash
+   cd ~/Downloads
+   mkdir ~/liquibase
+   tar -xzvf liquibase-x.yy.z.tar.gz -C ~/liquibase/
+   ```
 
 3. Open a command prompt to view the contents of your Liquibase installation:
 
-    ```bash
-    cd ~/liquibase
-    ls
-    ABOUT.txt      GETTING_STARTED.txt  licenses     liquibase.bat
-    changelog.txt  internal             LICENSE.txt  README.txt
-    examples       lib                  liquibase    UNINSTALL.txt
-    ```
+   ```bash
+   cd ~/liquibase
+   ls
+   ABOUT.txt      GETTING_STARTED.txt  licenses     liquibase.bat
+   changelog.txt  internal             LICENSE.txt  README.txt
+   examples       lib                  liquibase    UNINSTALL.txt
+   ```
 
 ## Set your path variable
 
@@ -80,25 +80,25 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
 
-    ```sql
-    -- Creating the `authors` table
-    CREATE TABLE authors (
-        author_id SERIAL PRIMARY KEY,
-        first_name VARCHAR(100),
-        last_name VARCHAR(100),
-        email VARCHAR(255) UNIQUE NOT NULL,
-        bio TEXT
-    );
+   ```sql
+   -- Creating the `authors` table
+   CREATE TABLE authors (
+       author_id SERIAL PRIMARY KEY,
+       first_name VARCHAR(100),
+       last_name VARCHAR(100),
+       email VARCHAR(255) UNIQUE NOT NULL,
+       bio TEXT
+   );
 
-    -- Creating the `posts` table
-    CREATE TABLE posts (
-        post_id SERIAL PRIMARY KEY,
-        author_id INTEGER REFERENCES authors(author_id),
-        title VARCHAR(255) NOT NULL,
-        content TEXT,
-        published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-    ```
+   -- Creating the `posts` table
+   CREATE TABLE posts (
+       post_id SERIAL PRIMARY KEY,
+       author_id INTEGER REFERENCES authors(author_id),
+       title VARCHAR(255) NOT NULL,
+       content TEXT,
+       published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
 
 ## Retrieve your Neon database connection string
 
@@ -114,23 +114,23 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
 1. Create a directory for your Liquibase project. For example:
 
-    ```bash
-    mkdir blogdb
-    ```
+   ```bash
+   mkdir blogdb
+   ```
 
 2. Change to your project directory and create a `liquibase.properties` file.
 
-    ```bash
-    cd blogdb
-    touch liquibase.properties
-    ```
+   ```bash
+   cd blogdb
+   touch liquibase.properties
+   ```
 
 3. Open the the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
 
-    ```bash shouldWrap
-    changeLogFile:dbchangelog.xml  
-    url: jdbc:postgresql://ep-floral-poetry-66238369.us-east-2.aws.neon.tech/blog?user=alex&password=4GfNAqycba8P&sslmode=require
-    ```
+   ```bash shouldWrap
+   changeLogFile:dbchangelog.xml
+   url: jdbc:postgresql://ep-floral-poetry-66238369.us-east-2.aws.neon.tech/blog?user=alex&password=4GfNAqycba8P&sslmode=require
+   ```
 
 ## Take a snapshot of your database
 
@@ -186,38 +186,38 @@ Now, you can start making database schema changes by creating [changesets](https
 
 1. Create the changelog file where you will add your schema changes:
 
-    ```bash
-    cd ~/blogdb
-    touch dbchangelog.xml
-    ```
+   ```bash
+   cd ~/blogdb
+   touch dbchangelog.xml
+   ```
 
 2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from your changelog file, described in the previous step.
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>  
-    <databaseChangeLog  
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro"  
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-        <changeSet author="alex" id="myIDNumber1234">
-            <createTable tableName="comments">
-                <column autoIncrement="true" name="comment_id" type="INTEGER">
-                    <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
-                </column>
-                <column name="post_id" type="INTEGER">
-                    <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
-                </column>
-                <column name="author_id" type="INTEGER">
-                    <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
-                </column>
-                <column name="comment" type="TEXT"/>
-                <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            </createTable>
-        </changeSet>
-    </databaseChangeLog>
-    ```
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <databaseChangeLog
+   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+       <changeSet author="alex" id="myIDNumber1234">
+           <createTable tableName="comments">
+               <column autoIncrement="true" name="comment_id" type="INTEGER">
+                   <constraints nullable="false" primaryKey="true" primaryKeyName="comments_pkey"/>
+               </column>
+               <column name="post_id" type="INTEGER">
+                   <constraints nullable="false" foreignKeyName="fk_comments_post_id" referencedTableName="posts" referencedColumnNames="post_id"/>
+               </column>
+               <column name="author_id" type="INTEGER">
+                   <constraints nullable="false" foreignKeyName="fk_comments_author_id" referencedTableName="authors" referencedColumnNames="author_id"/>
+               </column>
+               <column name="comment" type="TEXT"/>
+               <column name="commented_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+           </createTable>
+       </changeSet>
+   </databaseChangeLog>
+   ```
 
 ## Deploy your change
 

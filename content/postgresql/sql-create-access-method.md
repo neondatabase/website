@@ -26,17 +26,17 @@ Only superusers can define new access methods.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the access method to be created.
 
-* *`access_method_type`*
+- _`access_method_type`_
 
   This clause specifies the type of access method to define. Only `TABLE` and `INDEX` are supported at present.
 
-* *`handler_function`*
+- _`handler_function`_
 
-  *`handler_function`* is the name (possibly schema-qualified) of a previously registered function that represents the access method. The handler function must be declared to take a single argument of type `internal`, and its return type depends on the type of access method; for `TABLE` access methods, it must be `table_am_handler` and for `INDEX` access methods, it must be `index_am_handler`. The C-level API that the handler function must implement varies depending on the type of access method. The table access method API is described in [Chapter 63](tableam) and the index access method API is described in [Chapter 64](indexam).
+  _`handler_function`_ is the name (possibly schema-qualified) of a previously registered function that represents the access method. The handler function must be declared to take a single argument of type `internal`, and its return type depends on the type of access method; for `TABLE` access methods, it must be `table_am_handler` and for `INDEX` access methods, it must be `index_am_handler`. The C-level API that the handler function must implement varies depending on the type of access method. The table access method API is described in [Chapter 63](tableam) and the index access method API is described in [Chapter 64](indexam).
 
 [#id](#id-1.9.3.56.7)
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how extra usage works in Neon's pricing plans
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-02-22T14:29:54.384Z'
+updatedOn: '2024-08-06T15:23:10.952Z'
 ---
 
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
@@ -13,12 +13,12 @@ Neon plans are structured around **Allowances** and **Extra usage**. Allowances 
 
 This table provides an overview of plan fees with allowances for storage, compute, and projects:
 
-| Plan       | Monthly Fee       | Storage Allowance | Compute Allowance | Project Allowance     |
-|------------|-------------------|-------------------|-------------------|-----------------------|
-| Free Tier  | $0                | 0.5 GiB           | Always-available primary branch compute, 5 compute hours (20 _active hours_)/month on branch computes                 | 1 project             |
-| Launch     | $19               | 10 GiB            | 300 compute hours (1,200 _active hours_)/month        | 10 projects           |
-| Scale      | $69               | 50 GiB            | 750 compute hours (3,000 _active hours_)/month         | 50 projects           |
-| Enterprise | Custom | Custom        | Custom            | Custom               |
+| Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                     | Project Allowance |
+| ---------- | ----------- | ----------------- | ----------------------------------------------------------------------------------------------------- | ----------------- |
+| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes | 1 project         |
+| Launch     | $19         | 10 GiB            | 300 compute hours (1,200 _active hours_)/month                                                        | 10 projects       |
+| Scale      | $69         | 50 GiB            | 750 compute hours (3,000 _active hours_)/month                                                        | 50 projects       |
+| Enterprise | Custom      | Custom            | Custom                                                                                                | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
 
@@ -45,11 +45,10 @@ The Launch plan supports extra **Storage** and **Compute** usage. If you need ex
 - **Extra Storage**: If you exceed 10 GiB, extra storage is allocated in units of 2 GiB at $3.50 per unit.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/compute hour.
 
-| Resource | Unit         | Price     |
-|----------|--------------|-----------|
-| Extra Storage  | 2 GiB        | $3.50 per unit      |
-| Extra Compute  | Compute hour | $0.16     |
-
+| Resource      | Unit         | Price          |
+| ------------- | ------------ | -------------- |
+| Extra Storage | 2 GiB        | $3.50 per unit |
+| Extra Compute | Compute hour | $0.16          |
 
 ### Scale plan
 
@@ -59,11 +58,11 @@ The Scale plan supports extra **Storage**, **Compute**, and **Project** usage.
 - **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/compute hour.
 - **Extra Projects**: If you exceed 50 projects, extra projects are allocated in units of 10 projects at $50 per unit.
 
-| Resource | Unit         | Price     |
-|----------|--------------|-----------|
-| Extra Storage  | 10 GiB        | $15.00 per unit     |
-| Extra Compute  | Compute hour | $0.16     |
-| Extra Projects  | 10 | $50.00 per unit    |
+| Resource       | Unit         | Price           |
+| -------------- | ------------ | --------------- |
+| Extra Storage  | 10 GiB       | $15.00 per unit |
+| Extra Compute  | Compute hour | $0.16           |
+| Extra Projects | 10           | $50.00 per unit |
 
 ## How does extra usage work?
 
@@ -87,6 +86,7 @@ The proration formula for calculating the cost of extra storage or projects allo
 ```plaintext
 Cost = Units x (Unit Price/Days in Month) x Days Left in Month
 ```
+
 ​
 Where:
 
@@ -115,11 +115,11 @@ This example illustrates how a steady amount of extra storage is billed.
 **Period:** June 1st – June 30th  
 **Usage:** Steady at 55 GiB throughout the month
 
-| Item          | Details                            |
-|---------------|------------------------------------|
-| Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15    |
-| **Total**| $84                 |
+| Item          | Details                                                                |
+| ------------- | ---------------------------------------------------------------------- |
+| Plan Fee      | 1 month = $69                                                          |
+| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15 |
+| **Total**     | $84                                                                    |
 
 ### Example 2: Storage exceeds the limit at the start of the month
 
@@ -130,29 +130,35 @@ This example illustrates how extra storage is billed from the date the extra sto
 **Usage:** 55 GiB  
 **Change:** On June 16th, usage decreased to 45 GiB until the end of the month
 
-| Item          | Details                            |
-|---------------|------------------------------------|
-| Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15    |
-| **Total**| $84                 |
+| Item          | Details                                                                |
+| ------------- | ---------------------------------------------------------------------- |
+| Plan Fee      | 1 month = $69                                                          |
+| Extra Storage | 10 GiB extra storage unit at $15/month from June 1st – June 30th = $15 |
+| **Total**     | $84                                                                    |
 
 <Admonition type="note">
 If usage remained at 45 GiB through to the end of July, no extra storage would be needed, and July's total would be $69 for the Scale plan.
-</Admonition> 
+</Admonition>
 
 ### Example 3: Storage spikes briefly at the end of the month
 
 This example illustrates a prorated charge for extra storage that was allocated toward the end of the billing period. The charge is prorated from the date the extra storage usage was allocated.
 
 **Plan**: Scale
-**Period:** 
+**Period:**
+
 - **June 1st – June 27th:** Usage up to 49 GiB
 - **June 28th:** Usage increased to 55 GiB
 - **June 29th:** Usage decreased back to 45 GiB and remained so until the end of the month
 
-| Item          | Details                            |
-|---------------|------------------------------------|
-| Plan Fee      | 1 month = $69                                |
-| Extra Storage | 10 GiB extra storage unit at $15/month prorated for 3 days (June 28th – June 30th) = $1.50    |
-| **Total**| $70.50                 |
+| Item          | Details                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| Plan Fee      | 1 month = $69                                                                              |
+| Extra Storage | 10 GiB extra storage unit at $15/month prorated for 3 days (June 28th – June 30th) = $1.50 |
+| **Total**     | $70.50                                                                                     |
 
+## Feedback
+
+We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+
+<NeedHelp/>

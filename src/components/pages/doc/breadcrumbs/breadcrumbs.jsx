@@ -5,10 +5,10 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs }) => (
-  <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-new-40 dark:text-gray-new-80">
+  <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-new-40 dark:text-gray-new-80 lg:hidden">
     {breadcrumbs.map(({ title, slug }, index) => (
       <Fragment key={index}>
-        {index !== 0 && <span>/</span>}
+        {index > 0 && <span>/</span>}
         {slug ? (
           <Link
             className="transition-colors duration-200 hover:text-black dark:hover:text-gray-new-94"

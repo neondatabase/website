@@ -3,10 +3,8 @@ title: Manage logical replication in Neon
 subtitle: Learn how to manage logical replication in Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.558Z'
+updatedOn: '2024-08-07T21:36:52.658Z'
 ---
-
-<LRNotice/>
 
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
 
@@ -88,8 +86,8 @@ This section outlines how to manage **subscriptions** in your replication setup.
 Building on the `my_publication` example in the preceding section, here’s how you can create a subscription:
 
 ```sql
-CREATE SUBSCRIPTION my_subscription 
-CONNECTION 'postgres://username:password@host:port/dbname' 
+CREATE SUBSCRIPTION my_subscription
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication;
 ```
 
@@ -102,20 +100,20 @@ In the example above, `my_subscription` is the name of the subscription that con
 This command creates a subscription that receives data from two publications:
 
 ```sql
-CREATE SUBSCRIPTION my_subscription 
-CONNECTION 'postgres://username:password@host:port/dbname' 
+CREATE SUBSCRIPTION my_subscription
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication, sales_publication;
 ```
 
-A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher. 
+A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
 ### Create a subscription to be enabled later
 
 This command creates a subscription with `enabled = false` so that you can enable the scription at a later time:
 
 ```sql
-CREATE SUBSCRIPTION my_subscription 
-CONNECTION 'postgres://username:password@host:port/dbname' 
+CREATE SUBSCRIPTION my_subscription
+CONNECTION 'postgresql://username:password@host:port/dbname'
 PUBLICATION my_publication
 WITH (enabled = false);
 ```
@@ -201,6 +199,7 @@ To ensure that your logical replication setup is running as expected, you should
 ```sql
 SELECT * FROM pg_stat_replication;
 ```
+
 It provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
 Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
@@ -224,22 +223,30 @@ Once you enable logical replication in Neon, the setting cannot be reverted. Ena
 In Neon, logical replication is enabled from the console, by following these steps:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
 ```sql
 SHOW wal_level;
-wal_level 
+wal_level
 -----------
 logical
 ```
 
 ### Logical replication and autosuspend
 
-By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute instance that has an active connection from a logical replication subscriber. In other words, a compute instance with an active subscriber remains active at all times.
+By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
+
+```sql
+SELECT *
+FROM pg_stat_replication
+WHERE application_name != 'walproposer';
+```
+
+If the count is greater than 0, a Neon compute where the publishing Postgres instance runs will not ber suspended.
 
 ### Replication roles
 
@@ -255,9 +262,9 @@ To create a replication role in the Neon Console:
 2. Select a project.
 3. Select **Roles**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created, and you are provided with the password for the role.
+5. Click **New Role**.
+6. In the role creation dialog, specify a role name.
+7. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -266,7 +273,7 @@ To create a replication role in the Neon Console:
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
 ```bash
-neonctl roles create --name <role>
+neon roles create --name <role>
 ```
 
 </TabItem>
@@ -294,8 +301,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 You can verify that your role has the `REPLICATION` privilege by running the follow query:
 
 ```sql
-SELECT rolname, rolreplication 
-FROM pg_roles 
+SELECT rolname, rolreplication
+FROM pg_roles
 WHERE rolname = '<role_name>';
 ```
 
@@ -312,8 +319,8 @@ If you use Neon's **IP Allow** feature:
 
 Neon supports both `pgoutput` and `wal2json` replication output decoder plugins.
 
-- `pgoutput`: This is the default logical replication output plugin for Postgres. Specifically, it's part of the Postgres built-in logical replication system, designed to read changes from the database's write-ahead log (WAL) and output them in a format suitable for logical replication. 
-- `wal2json`: This is also a logical replication output plugin for Postgres, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating Postgres with systems and applications that work with `JSON` data. For usage information, see [wal2json](https://github.com/eulerto/wal2json).
+- `pgoutput`: This is the default logical replication output plugin for Postgres. Specifically, it's part of the Postgres built-in logical replication system, designed to read changes from the database's write-ahead log (WAL) and output them in a format suitable for logical replication.
+- `wal2json`: This is also a logical replication output plugin for Postgres, but it differs from `pgoutput` in that it converts WAL data into `JSON` format. This makes it useful for integrating Postgres with systems and applications that work with `JSON` data. For usage information, see [The wal2json plugin](/docs/extensions/wal2json).
 
 ### Dedicated replication slots
 
@@ -336,18 +343,18 @@ max_wal_senders = 10
 max_replication_slots = 10
 ```
 
-- The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes that are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication. 
+- The `max_wal_senders` parameter defines the maximum number of concurrent WAL sender processes that are responsible for streaming WAL data to subscribers. In most cases, you should have one WAL sender process for each subscriber or replication slot to ensure efficient and consistent data replication.
 - The `max_replication_slots` defines the maximum number of replication slots which are used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 
 If you require different values for these parameters, please contact Neon support.
 
 ### Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. Removal occurs after 75 minutes. 
+To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. Removal occurs after 75 minutes.
 
 If you have only one replication slot, and that slot becomes inactive, it is not removed due to inactivity because a single replication slot does not bloat storage. If you find that your single replication slot has been removed, please contact [Neon Support](/docs/introduction/support).
 
-#### What causes a replication slot to become inactive? 
+#### What causes a replication slot to become inactive?
 
 An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for an extended period. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 

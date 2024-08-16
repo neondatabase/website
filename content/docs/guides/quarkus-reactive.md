@@ -2,7 +2,7 @@
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.289Z'
+updatedOn: '2024-08-07T21:36:52.662Z'
 ---
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.
@@ -42,7 +42,7 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 
 ```shell shouldWrap
 # Note that "?sslmode=require" is appended to the Neon connection string
-QUARKUS_DATASOURCE_REACTIVE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
 <Admonition type="note">

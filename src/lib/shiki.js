@@ -44,7 +44,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
   let language = lang.toLocaleLowerCase();
 
   // check if language is supported
-  if (!Object.keys(bundledLanguages).includes(lang)) {
+  if (!Object.keys(bundledLanguages).includes(lang) && lang !== 'text') {
     language = 'bash';
   }
 

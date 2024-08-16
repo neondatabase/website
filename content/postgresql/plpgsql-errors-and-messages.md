@@ -2,14 +2,12 @@
 
 ## 43.9. Errors and Messages [#](#PLPGSQL-ERRORS-AND-MESSAGES)
 
-  * [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
-  * [43.9.2. Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
+- [43.9.1. Reporting Errors and Messages](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-RAISE)
+- [43.9.2. Checking Assertions](plpgsql-errors-and-messages#PLPGSQL-STATEMENTS-ASSERT)
 
 [#id](#PLPGSQL-STATEMENTS-RAISE)
 
 ### 43.9.1. Reporting Errors and Messages [#](#PLPGSQL-STATEMENTS-RAISE)
-
-
 
 Use the `RAISE` statement to report messages and raise errors.
 
@@ -21,9 +19,9 @@ RAISE [ level ] USING option = expression [, ... ];
 RAISE ;
 ```
 
-The *`level`* option specifies the error severity. Allowed levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `EXCEPTION`, with `EXCEPTION` being the default. `EXCEPTION` raises an error (which normally aborts the current transaction); the other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log\_min\_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) and [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config) for more information.
+The _`level`_ option specifies the error severity. Allowed levels are `DEBUG`, `LOG`, `INFO`, `NOTICE`, `WARNING`, and `EXCEPTION`, with `EXCEPTION` being the default. `EXCEPTION` raises an error (which normally aborts the current transaction); the other levels only generate messages of different priority levels. Whether messages of a particular priority are reported to the client, written to the server log, or both is controlled by the [log_min_messages](runtime-config-logging#GUC-LOG-MIN-MESSAGES) and [client_min_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) configuration variables. See [Chapter 20](runtime-config) for more information.
 
-After *`level`* if any, you can specify a *`format`* string (which must be a simple string literal, not an expression). The format string specifies the error message text to be reported. The format string can be followed by optional argument expressions to be inserted into the message. Inside the format string, `%` is replaced by the string representation of the next optional argument's value. Write `%%` to emit a literal `%`. The number of arguments must match the number of `%` placeholders in the format string, or an error is raised during the compilation of the function.
+After _`level`_ if any, you can specify a _`format`_ string (which must be a simple string literal, not an expression). The format string specifies the error message text to be reported. The format string can be followed by optional argument expressions to be inserted into the message. Inside the format string, `%` is replaced by the string representation of the next optional argument's value. Write `%%` to emit a literal `%`. The number of arguments must match the number of `%` placeholders in the format string, or an error is raised during the compilation of the function.
 
 In this example, the value of `v_job_id` will replace the `%` in the string:
 
@@ -31,27 +29,27 @@ In this example, the value of `v_job_id` will replace the `%` in the string:
 RAISE NOTICE 'Calling cs_create_job(%)', v_job_id;
 ```
 
-You can attach additional information to the error report by writing `USING` followed by *`option`* = *`expression`* items. Each *`expression`* can be any string-valued expression. The allowed *`option`* key words are:
+You can attach additional information to the error report by writing `USING` followed by _`option`_ = _`expression`_ items. Each _`expression`_ can be any string-valued expression. The allowed _`option`_ key words are:
 
 [#id](#RAISE-USING-OPTIONS)
 
-* `MESSAGE` [#](#RAISE-USING-OPTION-MESSAGE)
+- `MESSAGE` [#](#RAISE-USING-OPTION-MESSAGE)
 
   Sets the error message text. This option can't be used in the form of `RAISE` that includes a format string before `USING`.
 
-* `DETAIL` [#](#RAISE-USING-OPTION-DETAIL)
+- `DETAIL` [#](#RAISE-USING-OPTION-DETAIL)
 
   Supplies an error detail message.
 
-* `HINT` [#](#RAISE-USING-OPTION-HINT)
+- `HINT` [#](#RAISE-USING-OPTION-HINT)
 
   Supplies a hint message.
 
-* `ERRCODE` [#](#RAISE-USING-OPTION-ERRCODE)
+- `ERRCODE` [#](#RAISE-USING-OPTION-ERRCODE)
 
   Specifies the error code (SQLSTATE) to report, either by condition name, as shown in [Appendix A](errcodes-appendix), or directly as a five-character SQLSTATE code.
 
-* `COLUMN``CONSTRAINT``DATATYPE``TABLE``SCHEMA` [#](#RAISE-USING-OPTION-COLUMN)
+- `COLUMN``CONSTRAINT``DATATYPE``TABLE``SCHEMA` [#](#RAISE-USING-OPTION-COLUMN)
 
   Supplies the name of a related object.
 
@@ -100,17 +98,15 @@ When specifying an error code by SQLSTATE code, you are not limited to the prede
 
 ### 43.9.2. Checking Assertions [#](#PLPGSQL-STATEMENTS-ASSERT)
 
-
-
 The `ASSERT` statement is a convenient shorthand for inserting debugging checks into PL/pgSQL functions.
 
 ```
 ASSERT condition [ , message ];
 ```
 
-The *`condition`* is a Boolean expression that is expected to always evaluate to true; if it does, the `ASSERT` statement does nothing further. If the result is false or null, then an `ASSERT_FAILURE` exception is raised. (If an error occurs while evaluating the *`condition`*, it is reported as a normal error.)
+The _`condition`_ is a Boolean expression that is expected to always evaluate to true; if it does, the `ASSERT` statement does nothing further. If the result is false or null, then an `ASSERT_FAILURE` exception is raised. (If an error occurs while evaluating the _`condition`_, it is reported as a normal error.)
 
-If the optional *`message`* is provided, it is an expression whose result (if not null) replaces the default error message text “assertion failed”, should the *`condition`* fail. The *`message`* expression is not evaluated in the normal case where the assertion succeeds.
+If the optional _`message`_ is provided, it is an expression whose result (if not null) replaces the default error message text “assertion failed”, should the _`condition`_ fail. The _`message`_ expression is not evaluated in the normal case where the assertion succeeds.
 
 Testing of assertions can be enabled or disabled via the configuration parameter `plpgsql.check_asserts`, which takes a Boolean value; the default is `on`. If this parameter is `off` then `ASSERT` statements do nothing.
 

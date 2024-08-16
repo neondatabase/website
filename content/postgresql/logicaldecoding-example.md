@@ -4,7 +4,7 @@
 
 The following example demonstrates controlling logical decoding using the SQL interface.
 
-Before you can use logical decoding, you must set [wal\_level](runtime-config-wal#GUC-WAL-LEVEL) to `logical` and [max\_replication\_slots](runtime-config-replication#GUC-MAX-REPLICATION-SLOTS) to at least 1. Then, you should connect to the target database (in the example below, `postgres`) as a superuser.
+Before you can use logical decoding, you must set [wal_level](runtime-config-wal#GUC-WAL-LEVEL) to `logical` and [max_replication_slots](runtime-config-replication#GUC-MAX-REPLICATION-SLOTS) to at least 1. Then, you should connect to the target database (in the example below, `postgres`) as a superuser.
 
 ```
 postgres=# -- Create a slot named 'regression_slot' using the output plugin 'test_decoding'
@@ -96,7 +96,7 @@ postgres=# SELECT pg_drop_replication_slot('regression_slot');
 (1 row)
 ```
 
-The following examples shows how logical decoding is controlled over the streaming replication protocol, using the program [pg\_recvlogical](app-pgrecvlogical) included in the PostgreSQL distribution. This requires that client authentication is set up to allow replication connections (see [Section 27.2.5.1](warm-standby#STREAMING-REPLICATION-AUTHENTICATION)) and that `max_wal_senders` is set sufficiently high to allow an additional connection. The second example shows how to stream two-phase transactions. Before you use two-phase commands, you must set [max\_prepared\_transactions](runtime-config-resource#GUC-MAX-PREPARED-TRANSACTIONS) to at least 1.
+The following examples shows how logical decoding is controlled over the streaming replication protocol, using the program [pg_recvlogical](app-pgrecvlogical) included in the PostgreSQL distribution. This requires that client authentication is set up to allow replication connections (see [Section 27.2.5.1](warm-standby#STREAMING-REPLICATION-AUTHENTICATION)) and that `max_wal_senders` is set sufficiently high to allow an additional connection. The second example shows how to stream two-phase transactions. Before you use two-phase commands, you must set [max_prepared_transactions](runtime-config-resource#GUC-MAX-PREPARED-TRANSACTIONS) to at least 1.
 
 ```
 Example 1:

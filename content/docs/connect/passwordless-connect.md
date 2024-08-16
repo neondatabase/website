@@ -2,7 +2,7 @@
 title: Passwordless auth
 subtitle: Learn how to connect to Neon without a password
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.745Z'
+updatedOn: '2024-07-25T12:53:42.418Z'
 ---
 
 Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.
@@ -25,7 +25,7 @@ To connect using Neon's `psql` passwordless auth feature:
        https://console.neon.tech/psql_session/6d32af5ef8215b62
    ```
 
-2. In your browser, navigate to the provided link. Log in to Neon if you are not already logged in. You are asked to select a Neon project to connect to. If your project has more than one compute endpoint, you are also asked to select one.
+2. In your browser, navigate to the provided link. Log in to Neon if you are not already logged in. You are asked to select a Neon project to connect to. If your project has more than one compute, you are also asked to select one.
 
    After making your selections, you are advised that you can return to your terminal or command window where information similar to the following is displayed:
 
@@ -44,9 +44,9 @@ To connect using Neon's `psql` passwordless auth feature:
     current_database
    ------------------
     neondb
-    ```
+   ```
 
-    Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless auth authentication process to authenticate a connection to the new database.
+   Switching databases from the `psql` prompt (using `\c <database_name>`, for example) after you have authenticated restarts the passwordless auth authentication process to authenticate a connection to the new database.
 
 ## Running queries
 

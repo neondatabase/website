@@ -2,14 +2,14 @@
 
 ## 36.6. pgtypes Library [#](#ECPG-PGTYPES)
 
-  * [36.6.1. Character Strings](ecpg-pgtypes#ECPG-PGTYPES-CSTRINGS)
-  * [36.6.2. The numeric Type](ecpg-pgtypes#ECPG-PGTYPES-NUMERIC)
-  * [36.6.3. The date Type](ecpg-pgtypes#ECPG-PGTYPES-DATE)
-  * [36.6.4. The timestamp Type](ecpg-pgtypes#ECPG-PGTYPES-TIMESTAMP)
-  * [36.6.5. The interval Type](ecpg-pgtypes#ECPG-PGTYPES-INTERVAL)
-  * [36.6.6. The decimal Type](ecpg-pgtypes#ECPG-PGTYPES-DECIMAL)
-  * [36.6.7. errno Values of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-ERRNO)
-  * [36.6.8. Special Constants of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-CONSTANTS)
+- [36.6.1. Character Strings](ecpg-pgtypes#ECPG-PGTYPES-CSTRINGS)
+- [36.6.2. The numeric Type](ecpg-pgtypes#ECPG-PGTYPES-NUMERIC)
+- [36.6.3. The date Type](ecpg-pgtypes#ECPG-PGTYPES-DATE)
+- [36.6.4. The timestamp Type](ecpg-pgtypes#ECPG-PGTYPES-TIMESTAMP)
+- [36.6.5. The interval Type](ecpg-pgtypes#ECPG-PGTYPES-INTERVAL)
+- [36.6.6. The decimal Type](ecpg-pgtypes#ECPG-PGTYPES-DECIMAL)
+- [36.6.7. errno Values of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-ERRNO)
+- [36.6.8. Special Constants of pgtypeslib](ecpg-pgtypes#ECPG-PGTYPES-CONSTANTS)
 
 The pgtypes library maps PostgreSQL database types to C equivalents that can be used in C programs. It also offers functions to do basic calculations with those types within C, i.e., without the help of the PostgreSQL server. See the following example:
 
@@ -44,7 +44,7 @@ The numeric type offers to do calculations with arbitrary precision. See [Sectio
 
 The following functions can be used to work with the numeric type:
 
-* `PGTYPESnumeric_new` [#](#ECPG-PGTYPES-NUMERIC-NEW)
+- `PGTYPESnumeric_new` [#](#ECPG-PGTYPES-NUMERIC-NEW)
 
   Request a pointer to a newly allocated numeric variable.
 
@@ -53,7 +53,7 @@ The following functions can be used to work with the numeric type:
   numeric *PGTYPESnumeric_new(void);
   ```
 
-* `PGTYPESnumeric_free` [#](#ECPG-PGTYPES-NUMERIC-FREE)
+- `PGTYPESnumeric_free` [#](#ECPG-PGTYPES-NUMERIC-FREE)
 
   Free a numeric type, release all of its memory.
 
@@ -62,7 +62,7 @@ The following functions can be used to work with the numeric type:
   void PGTYPESnumeric_free(numeric *var);
   ```
 
-* `PGTYPESnumeric_from_asc` [#](#ECPG-PGTYPES-NUMERIC-FROM-ASC)
+- `PGTYPESnumeric_from_asc` [#](#ECPG-PGTYPES-NUMERIC-FROM-ASC)
 
   Parse a numeric type from its string notation.
 
@@ -73,7 +73,7 @@ The following functions can be used to work with the numeric type:
 
   Valid formats are for example: `-2`, `.794`, `+3.44`, `592.49E07` or `-32.84e-4`. If the value could be parsed successfully, a valid pointer is returned, else the NULL pointer. At the moment ECPG always parses the complete string and so it currently does not support to store the address of the first invalid character in `*endptr`. You can safely set `endptr` to NULL.
 
-* `PGTYPESnumeric_to_asc` [#](#ECPG-PGTYPES-NUMERIC-TO-ASC)
+- `PGTYPESnumeric_to_asc` [#](#ECPG-PGTYPES-NUMERIC-TO-ASC)
 
   Returns a pointer to a string allocated by `malloc` that contains the string representation of the numeric type `num`.
 
@@ -84,7 +84,7 @@ The following functions can be used to work with the numeric type:
 
   The numeric value will be printed with `dscale` decimal digits, with rounding applied if necessary. The result must be freed with `PGTYPESchar_free()`.
 
-* `PGTYPESnumeric_add` [#](#ECPG-PGTYPES-NUMERIC-ADD)
+- `PGTYPESnumeric_add` [#](#ECPG-PGTYPES-NUMERIC-ADD)
 
   Add two numeric variables into a third one.
 
@@ -95,7 +95,7 @@ The following functions can be used to work with the numeric type:
 
   The function adds the variables `var1` and `var2` into the result variable `result`. The function returns 0 on success and -1 in case of error.
 
-* `PGTYPESnumeric_sub` [#](#ECPG-PGTYPES-NUMERIC-SUB)
+- `PGTYPESnumeric_sub` [#](#ECPG-PGTYPES-NUMERIC-SUB)
 
   Subtract two numeric variables and return the result in a third one.
 
@@ -106,7 +106,7 @@ The following functions can be used to work with the numeric type:
 
   The function subtracts the variable `var2` from the variable `var1`. The result of the operation is stored in the variable `result`. The function returns 0 on success and -1 in case of error.
 
-* `PGTYPESnumeric_mul` [#](#ECPG-PGTYPES-NUMERIC-MUL)
+- `PGTYPESnumeric_mul` [#](#ECPG-PGTYPES-NUMERIC-MUL)
 
   Multiply two numeric variables and return the result in a third one.
 
@@ -117,7 +117,7 @@ The following functions can be used to work with the numeric type:
 
   The function multiplies the variables `var1` and `var2`. The result of the operation is stored in the variable `result`. The function returns 0 on success and -1 in case of error.
 
-* `PGTYPESnumeric_div` [#](#ECPG-PGTYPES-NUMERIC-DIV)
+- `PGTYPESnumeric_div` [#](#ECPG-PGTYPES-NUMERIC-DIV)
 
   Divide two numeric variables and return the result in a third one.
 
@@ -128,7 +128,7 @@ The following functions can be used to work with the numeric type:
 
   The function divides the variables `var1` by `var2`. The result of the operation is stored in the variable `result`. The function returns 0 on success and -1 in case of error.
 
-* `PGTYPESnumeric_cmp` [#](#ECPG-PGTYPES-NUMERIC-CMP)
+- `PGTYPESnumeric_cmp` [#](#ECPG-PGTYPES-NUMERIC-CMP)
 
   Compare two numeric variables.
 
@@ -139,13 +139,13 @@ The following functions can be used to work with the numeric type:
 
   This function compares two numeric variables. In case of error, `INT_MAX` is returned. On success, the function returns one of three possible results:
 
-  * 1, if `var1` is bigger than `var2`
+  - 1, if `var1` is bigger than `var2`
 
-  * -1, if `var1` is smaller than `var2`
+  - -1, if `var1` is smaller than `var2`
 
-  * 0, if `var1` and `var2` are equal
+  - 0, if `var1` and `var2` are equal
 
-* `PGTYPESnumeric_from_int` [#](#ECPG-PGTYPES-NUMERIC-FROM-INT)
+- `PGTYPESnumeric_from_int` [#](#ECPG-PGTYPES-NUMERIC-FROM-INT)
 
   Convert an int variable to a numeric variable.
 
@@ -156,7 +156,7 @@ The following functions can be used to work with the numeric type:
 
   This function accepts a variable of type signed int and stores it in the numeric variable `var`. Upon success, 0 is returned and -1 in case of a failure.
 
-* `PGTYPESnumeric_from_long` [#](#ECPG-PGTYPES-NUMERIC-FROM-LONG)
+- `PGTYPESnumeric_from_long` [#](#ECPG-PGTYPES-NUMERIC-FROM-LONG)
 
   Convert a long int variable to a numeric variable.
 
@@ -167,7 +167,7 @@ The following functions can be used to work with the numeric type:
 
   This function accepts a variable of type signed long int and stores it in the numeric variable `var`. Upon success, 0 is returned and -1 in case of a failure.
 
-* `PGTYPESnumeric_copy` [#](#ECPG-PGTYPES-NUMERIC-COPY)
+- `PGTYPESnumeric_copy` [#](#ECPG-PGTYPES-NUMERIC-COPY)
 
   Copy over one numeric variable into another one.
 
@@ -178,7 +178,7 @@ The following functions can be used to work with the numeric type:
 
   This function copies over the value of the variable that `src` points to into the variable that `dst` points to. It returns 0 on success and -1 if an error occurs.
 
-* `PGTYPESnumeric_from_double` [#](#ECPG-PGTYPES-NUMERIC-FROM-DOUBLE)
+- `PGTYPESnumeric_from_double` [#](#ECPG-PGTYPES-NUMERIC-FROM-DOUBLE)
 
   Convert a variable of type double to a numeric.
 
@@ -189,7 +189,7 @@ The following functions can be used to work with the numeric type:
 
   This function accepts a variable of type double and stores the result in the variable that `dst` points to. It returns 0 on success and -1 if an error occurs.
 
-* `PGTYPESnumeric_to_double` [#](#ECPG-PGTYPES-NUMERIC-TO-DOUBLE)
+- `PGTYPESnumeric_to_double` [#](#ECPG-PGTYPES-NUMERIC-TO-DOUBLE)
 
   Convert a variable of type numeric to double.
 
@@ -200,7 +200,7 @@ The following functions can be used to work with the numeric type:
 
   The function converts the numeric value from the variable that `nv` points to into the double variable that `dp` points to. It returns 0 on success and -1 if an error occurs, including overflow. On overflow, the global variable `errno` will be set to `PGTYPES_NUM_OVERFLOW` additionally.
 
-* `PGTYPESnumeric_to_int` [#](#ECPG-PGTYPES-NUMERIC-TO-INT)
+- `PGTYPESnumeric_to_int` [#](#ECPG-PGTYPES-NUMERIC-TO-INT)
 
   Convert a variable of type numeric to int.
 
@@ -211,7 +211,7 @@ The following functions can be used to work with the numeric type:
 
   The function converts the numeric value from the variable that `nv` points to into the integer variable that `ip` points to. It returns 0 on success and -1 if an error occurs, including overflow. On overflow, the global variable `errno` will be set to `PGTYPES_NUM_OVERFLOW` additionally.
 
-* `PGTYPESnumeric_to_long` [#](#ECPG-PGTYPES-NUMERIC-TO-LONG)
+- `PGTYPESnumeric_to_long` [#](#ECPG-PGTYPES-NUMERIC-TO-LONG)
 
   Convert a variable of type numeric to long.
 
@@ -222,7 +222,7 @@ The following functions can be used to work with the numeric type:
 
   The function converts the numeric value from the variable that `nv` points to into the long integer variable that `lp` points to. It returns 0 on success and -1 if an error occurs, including overflow. On overflow, the global variable `errno` will be set to `PGTYPES_NUM_OVERFLOW` additionally.
 
-* `PGTYPESnumeric_to_decimal` [#](#ECPG-PGTYPES-NUMERIC-TO-DECIMAL)
+- `PGTYPESnumeric_to_decimal` [#](#ECPG-PGTYPES-NUMERIC-TO-DECIMAL)
 
   Convert a variable of type numeric to decimal.
 
@@ -233,7 +233,7 @@ The following functions can be used to work with the numeric type:
 
   The function converts the numeric value from the variable that `src` points to into the decimal variable that `dst` points to. It returns 0 on success and -1 if an error occurs, including overflow. On overflow, the global variable `errno` will be set to `PGTYPES_NUM_OVERFLOW` additionally.
 
-* `PGTYPESnumeric_from_decimal` [#](#ECPG-PGTYPES-NUMERIC-FROM-DECIMAL)
+- `PGTYPESnumeric_from_decimal` [#](#ECPG-PGTYPES-NUMERIC-FROM-DECIMAL)
 
   Convert a variable of type decimal to numeric.
 
@@ -252,7 +252,7 @@ The date type in C enables your programs to deal with data of the SQL type date.
 
 The following functions can be used to work with the date type:
 
-* `PGTYPESdate_from_timestamp` [#](#PGTYPESDATEFROMTIMESTAMP)
+- `PGTYPESdate_from_timestamp` [#](#PGTYPESDATEFROMTIMESTAMP)
 
   Extract the date part from a timestamp.
 
@@ -263,7 +263,7 @@ The following functions can be used to work with the date type:
 
   The function receives a timestamp as its only argument and returns the extracted date part from this timestamp.
 
-* `PGTYPESdate_from_asc` [#](#PGTYPESDATEFROMASC)
+- `PGTYPESdate_from_asc` [#](#PGTYPESDATEFROMASC)
 
   Parse a date from its textual representation.
 
@@ -302,7 +302,7 @@ The following functions can be used to work with the date type:
   | `J2451187`         | `Julian day`                    |
   | `January 8, 99 BC` | `year 99 before the Common Era` |
 
-* `PGTYPESdate_to_asc` [#](#PGTYPESDATETOASC)
+- `PGTYPESdate_to_asc` [#](#PGTYPESDATETOASC)
 
   Return the textual representation of a date variable.
 
@@ -313,7 +313,7 @@ The following functions can be used to work with the date type:
 
   The function receives the date `dDate` as its only parameter. It will output the date in the form `1999-01-18`, i.e., in the `YYYY-MM-DD` format. The result must be freed with `PGTYPESchar_free()`.
 
-* `PGTYPESdate_julmdy` [#](#PGTYPESDATEJULMDY)
+- `PGTYPESdate_julmdy` [#](#PGTYPESDATEJULMDY)
 
   Extract the values for the day, the month and the year from a variable of type date.
 
@@ -324,7 +324,7 @@ The following functions can be used to work with the date type:
 
   The function receives the date `d` and a pointer to an array of 3 integer values `mdy`. The variable name indicates the sequential order: `mdy[0]` will be set to contain the number of the month, `mdy[1]` will be set to the value of the day and `mdy[2]` will contain the year.
 
-* `PGTYPESdate_mdyjul` [#](#PGTYPESDATEMDYJUL)
+- `PGTYPESdate_mdyjul` [#](#PGTYPESDATEMDYJUL)
 
   Create a date value from an array of 3 integers that specify the day, the month and the year of the date.
 
@@ -335,7 +335,7 @@ The following functions can be used to work with the date type:
 
   The function receives the array of the 3 integers (`mdy`) as its first argument and as its second argument a pointer to a variable of type date that should hold the result of the operation.
 
-* `PGTYPESdate_dayofweek` [#](#PGTYPESDATEDAYOFWEEK)
+- `PGTYPESdate_dayofweek` [#](#PGTYPESDATEDAYOFWEEK)
 
   Return a number representing the day of the week for a date value.
 
@@ -346,21 +346,21 @@ The following functions can be used to work with the date type:
 
   The function receives the date variable `d` as its only argument and returns an integer that indicates the day of the week for this date.
 
-  * 0 - Sunday
+  - 0 - Sunday
 
-  * 1 - Monday
+  - 1 - Monday
 
-  * 2 - Tuesday
+  - 2 - Tuesday
 
-  * 3 - Wednesday
+  - 3 - Wednesday
 
-  * 4 - Thursday
+  - 4 - Thursday
 
-  * 5 - Friday
+  - 5 - Friday
 
-  * 6 - Saturday
+  - 6 - Saturday
 
-* `PGTYPESdate_today` [#](#PGTYPESDATETODAY)
+- `PGTYPESdate_today` [#](#PGTYPESDATETODAY)
 
   Get the current date.
 
@@ -371,7 +371,7 @@ The following functions can be used to work with the date type:
 
   The function receives a pointer to a date variable (`d`) that it sets to the current date.
 
-* `PGTYPESdate_fmt_asc` [#](#PGTYPESDATEFMTASC)
+- `PGTYPESdate_fmt_asc` [#](#PGTYPESDATEFMTASC)
 
   Convert a variable of type date to its textual representation using a format mask.
 
@@ -386,17 +386,17 @@ The following functions can be used to work with the date type:
 
   The following literals are the field specifiers you can use:
 
-  * `dd` - The number of the day of the month.
+  - `dd` - The number of the day of the month.
 
-  * `mm` - The number of the month of the year.
+  - `mm` - The number of the month of the year.
 
-  * `yy` - The number of the year as a two digit number.
+  - `yy` - The number of the year as a two digit number.
 
-  * `yyyy` - The number of the year as a four digit number.
+  - `yyyy` - The number of the year as a four digit number.
 
-  * `ddd` - The name of the day (abbreviated).
+  - `ddd` - The name of the day (abbreviated).
 
-  * `mmm` - The name of the month (abbreviated).
+  - `mmm` - The name of the month (abbreviated).
 
   All other characters are copied 1:1 to the output string.
 
@@ -421,7 +421,7 @@ The following functions can be used to work with the date type:
   | `ddd, mmm. dd, yyyy`  | `Mon, Nov. 23, 1959`  |
   | `(ddd) mmm. dd, yyyy` | `(Mon) Nov. 23, 1959` |
 
-* `PGTYPESdate_defmt_asc` [#](#PGTYPESDATEDEFMTASC)
+- `PGTYPESdate_defmt_asc` [#](#PGTYPESDATEDEFMTASC)
 
   Use a format mask to convert a C `char*` string to a value of type date.
 
@@ -462,7 +462,7 @@ The timestamp type in C enables your programs to deal with data of the SQL type 
 
 The following functions can be used to work with the timestamp type:
 
-* `PGTYPEStimestamp_from_asc` [#](#PGTYPESTIMESTAMPFROMASC)
+- `PGTYPEStimestamp_from_asc` [#](#PGTYPESTIMESTAMPFROMASC)
 
   Parse a timestamp from its textual representation into a timestamp variable.
 
@@ -490,7 +490,7 @@ The following functions can be used to work with the timestamp type:
   | `1999-Jan-08 04:05:06.789-8`  | `1999-01-08 04:05:06.789 (time zone specifier ignored)` |
   | `J2451187 04:05-08:00`        | `1999-01-08 04:05:00 (time zone specifier ignored)`     |
 
-* `PGTYPEStimestamp_to_asc` [#](#PGTYPESTIMESTAMPTOASC)
+- `PGTYPEStimestamp_to_asc` [#](#PGTYPESTIMESTAMPTOASC)
 
   Converts a date to a C char\* string.
 
@@ -501,7 +501,7 @@ The following functions can be used to work with the timestamp type:
 
   The function receives the timestamp `tstamp` as its only argument and returns an allocated string that contains the textual representation of the timestamp. The result must be freed with `PGTYPESchar_free()`.
 
-* `PGTYPEStimestamp_current` [#](#PGTYPESTIMESTAMPCURRENT)
+- `PGTYPEStimestamp_current` [#](#PGTYPESTIMESTAMPCURRENT)
 
   Retrieve the current timestamp.
 
@@ -512,7 +512,7 @@ The following functions can be used to work with the timestamp type:
 
   The function retrieves the current timestamp and saves it into the timestamp variable that `ts` points to.
 
-* `PGTYPEStimestamp_fmt_asc` [#](#PGTYPESTIMESTAMPFMTASC)
+- `PGTYPEStimestamp_fmt_asc` [#](#PGTYPESTIMESTAMPFMTASC)
 
   Convert a timestamp variable to a C char\* using a format mask.
 
@@ -527,103 +527,103 @@ The following functions can be used to work with the timestamp type:
 
   You can use the following format specifiers for the format mask. The format specifiers are the same ones that are used in the `strftime` function in libc. Any non-format specifier will be copied into the output buffer.
 
-  * `%A` - is replaced by national representation of the full weekday name.
+  - `%A` - is replaced by national representation of the full weekday name.
 
-  * `%a` - is replaced by national representation of the abbreviated weekday name.
+  - `%a` - is replaced by national representation of the abbreviated weekday name.
 
-  * `%B` - is replaced by national representation of the full month name.
+  - `%B` - is replaced by national representation of the full month name.
 
-  * `%b` - is replaced by national representation of the abbreviated month name.
+  - `%b` - is replaced by national representation of the abbreviated month name.
 
-  * `%C` - is replaced by (year / 100) as decimal number; single digits are preceded by a zero.
+  - `%C` - is replaced by (year / 100) as decimal number; single digits are preceded by a zero.
 
-  * `%c` - is replaced by national representation of time and date.
+  - `%c` - is replaced by national representation of time and date.
 
-  * `%D` - is equivalent to `%m/%d/%y`.
+  - `%D` - is equivalent to `%m/%d/%y`.
 
-  * `%d` - is replaced by the day of the month as a decimal number (01–31).
+  - `%d` - is replaced by the day of the month as a decimal number (01–31).
 
-  * `%E*` `%O*` - POSIX locale extensions. The sequences `%Ec` `%EC` `%Ex` `%EX` `%Ey` `%EY` `%Od` `%Oe` `%OH` `%OI` `%Om` `%OM` `%OS` `%Ou` `%OU` `%OV` `%Ow` `%OW` `%Oy` are supposed to provide alternative representations.
+  - `%E*` `%O*` - POSIX locale extensions. The sequences `%Ec` `%EC` `%Ex` `%EX` `%Ey` `%EY` `%Od` `%Oe` `%OH` `%OI` `%Om` `%OM` `%OS` `%Ou` `%OU` `%OV` `%Ow` `%OW` `%Oy` are supposed to provide alternative representations.
 
     Additionally `%OB` implemented to represent alternative months names (used standalone, without day mentioned).
 
-  * `%e` - is replaced by the day of month as a decimal number (1–31); single digits are preceded by a blank.
+  - `%e` - is replaced by the day of month as a decimal number (1–31); single digits are preceded by a blank.
 
-  * `%F` - is equivalent to `%Y-%m-%d`.
+  - `%F` - is equivalent to `%Y-%m-%d`.
 
-  * `%G` - is replaced by a year as a decimal number with century. This year is the one that contains the greater part of the week (Monday as the first day of the week).
+  - `%G` - is replaced by a year as a decimal number with century. This year is the one that contains the greater part of the week (Monday as the first day of the week).
 
-  * `%g` - is replaced by the same year as in `%G`, but as a decimal number without century (00–99).
+  - `%g` - is replaced by the same year as in `%G`, but as a decimal number without century (00–99).
 
-  * `%H` - is replaced by the hour (24-hour clock) as a decimal number (00–23).
+  - `%H` - is replaced by the hour (24-hour clock) as a decimal number (00–23).
 
-  * `%h` - the same as `%b`.
+  - `%h` - the same as `%b`.
 
-  * `%I` - is replaced by the hour (12-hour clock) as a decimal number (01–12).
+  - `%I` - is replaced by the hour (12-hour clock) as a decimal number (01–12).
 
-  * `%j` - is replaced by the day of the year as a decimal number (001–366).
+  - `%j` - is replaced by the day of the year as a decimal number (001–366).
 
-  * `%k` - is replaced by the hour (24-hour clock) as a decimal number (0–23); single digits are preceded by a blank.
+  - `%k` - is replaced by the hour (24-hour clock) as a decimal number (0–23); single digits are preceded by a blank.
 
-  * `%l` - is replaced by the hour (12-hour clock) as a decimal number (1–12); single digits are preceded by a blank.
+  - `%l` - is replaced by the hour (12-hour clock) as a decimal number (1–12); single digits are preceded by a blank.
 
-  * `%M` - is replaced by the minute as a decimal number (00–59).
+  - `%M` - is replaced by the minute as a decimal number (00–59).
 
-  * `%m` - is replaced by the month as a decimal number (01–12).
+  - `%m` - is replaced by the month as a decimal number (01–12).
 
-  * `%n` - is replaced by a newline.
+  - `%n` - is replaced by a newline.
 
-  * `%O*` - the same as `%E*`.
+  - `%O*` - the same as `%E*`.
 
-  * `%p` - is replaced by national representation of either “ante meridiem” or “post meridiem” as appropriate.
+  - `%p` - is replaced by national representation of either “ante meridiem” or “post meridiem” as appropriate.
 
-  * `%R` - is equivalent to `%H:%M`.
+  - `%R` - is equivalent to `%H:%M`.
 
-  * `%r` - is equivalent to `%I:%M:%S %p`.
+  - `%r` - is equivalent to `%I:%M:%S %p`.
 
-  * `%S` - is replaced by the second as a decimal number (00–60).
+  - `%S` - is replaced by the second as a decimal number (00–60).
 
-  * `%s` - is replaced by the number of seconds since the Epoch, UTC.
+  - `%s` - is replaced by the number of seconds since the Epoch, UTC.
 
-  * `%T` - is equivalent to `%H:%M:%S`
+  - `%T` - is equivalent to `%H:%M:%S`
 
-  * `%t` - is replaced by a tab.
+  - `%t` - is replaced by a tab.
 
-  * `%U` - is replaced by the week number of the year (Sunday as the first day of the week) as a decimal number (00–53).
+  - `%U` - is replaced by the week number of the year (Sunday as the first day of the week) as a decimal number (00–53).
 
-  * `%u` - is replaced by the weekday (Monday as the first day of the week) as a decimal number (1–7).
+  - `%u` - is replaced by the weekday (Monday as the first day of the week) as a decimal number (1–7).
 
-  * `%V` - is replaced by the week number of the year (Monday as the first day of the week) as a decimal number (01–53). If the week containing January 1 has four or more days in the new year, then it is week 1; otherwise it is the last week of the previous year, and the next week is week 1.
+  - `%V` - is replaced by the week number of the year (Monday as the first day of the week) as a decimal number (01–53). If the week containing January 1 has four or more days in the new year, then it is week 1; otherwise it is the last week of the previous year, and the next week is week 1.
 
-  * `%v` - is equivalent to `%e-%b-%Y`.
+  - `%v` - is equivalent to `%e-%b-%Y`.
 
-  * `%W` - is replaced by the week number of the year (Monday as the first day of the week) as a decimal number (00–53).
+  - `%W` - is replaced by the week number of the year (Monday as the first day of the week) as a decimal number (00–53).
 
-  * `%w` - is replaced by the weekday (Sunday as the first day of the week) as a decimal number (0–6).
+  - `%w` - is replaced by the weekday (Sunday as the first day of the week) as a decimal number (0–6).
 
-  * `%X` - is replaced by national representation of the time.
+  - `%X` - is replaced by national representation of the time.
 
-  * `%x` - is replaced by national representation of the date.
+  - `%x` - is replaced by national representation of the date.
 
-  * `%Y` - is replaced by the year with century as a decimal number.
+  - `%Y` - is replaced by the year with century as a decimal number.
 
-  * `%y` - is replaced by the year without century as a decimal number (00–99).
+  - `%y` - is replaced by the year without century as a decimal number (00–99).
 
-  * `%Z` - is replaced by the time zone name.
+  - `%Z` - is replaced by the time zone name.
 
-  * `%z` - is replaced by the time zone offset from UTC; a leading plus sign stands for east of UTC, a minus sign for west of UTC, hours and minutes follow with two digits each and no delimiter between them (common form for [RFC 822](https://tools.ietf.org/html/rfc822) date headers).
+  - `%z` - is replaced by the time zone offset from UTC; a leading plus sign stands for east of UTC, a minus sign for west of UTC, hours and minutes follow with two digits each and no delimiter between them (common form for [RFC 822](https://tools.ietf.org/html/rfc822) date headers).
 
-  * `%+` - is replaced by national representation of the date and time.
+  - `%+` - is replaced by national representation of the date and time.
 
-  * `%-*` - GNU libc extension. Do not do any padding when performing numerical outputs.
+  - `%-*` - GNU libc extension. Do not do any padding when performing numerical outputs.
 
-  * $\_\* - GNU libc extension. Explicitly specify space for padding.
+  - $\_\* - GNU libc extension. Explicitly specify space for padding.
 
-  * `%0*` - GNU libc extension. Explicitly specify zero for padding.
+  - `%0*` - GNU libc extension. Explicitly specify zero for padding.
 
-  * `%%` - is replaced by `%`.
+  - `%%` - is replaced by `%`.
 
-* `PGTYPEStimestamp_sub` [#](#PGTYPESTIMESTAMPSUB)
+- `PGTYPEStimestamp_sub` [#](#PGTYPESTIMESTAMPSUB)
 
   Subtract one timestamp from another one and save the result in a variable of type interval.
 
@@ -636,7 +636,7 @@ The following functions can be used to work with the timestamp type:
 
   Upon success, the function returns 0 and a negative value if an error occurred.
 
-* `PGTYPEStimestamp_defmt_asc` [#](#PGTYPESTIMESTAMPDEFMTASC)
+- `PGTYPEStimestamp_defmt_asc` [#](#PGTYPESTIMESTAMPDEFMTASC)
 
   Parse a timestamp value from its textual representation using a formatting mask.
 
@@ -651,7 +651,7 @@ The following functions can be used to work with the timestamp type:
 
   This is the reverse function to [`PGTYPEStimestamp_fmt_asc`](ecpg-pgtypes#PGTYPESTIMESTAMPFMTASC). See the documentation there in order to find out about the possible formatting mask entries.
 
-* `PGTYPEStimestamp_add_interval` [#](#PGTYPESTIMESTAMPADDINTERVAL)
+- `PGTYPEStimestamp_add_interval` [#](#PGTYPESTIMESTAMPADDINTERVAL)
 
   Add an interval variable to a timestamp variable.
 
@@ -664,7 +664,7 @@ The following functions can be used to work with the timestamp type:
 
   Upon success, the function returns 0 and a negative value if an error occurred.
 
-* `PGTYPEStimestamp_sub_interval` [#](#PGTYPESTIMESTAMPSUBINTERVAL)
+- `PGTYPEStimestamp_sub_interval` [#](#PGTYPESTIMESTAMPSUBINTERVAL)
 
   Subtract an interval variable from a timestamp variable.
 
@@ -685,7 +685,7 @@ The interval type in C enables your programs to deal with data of the SQL type i
 
 The following functions can be used to work with the interval type:
 
-* `PGTYPESinterval_new` [#](#PGTYPESINTERVALNEW)
+- `PGTYPESinterval_new` [#](#PGTYPESINTERVALNEW)
 
   Return a pointer to a newly allocated interval variable.
 
@@ -694,7 +694,7 @@ The following functions can be used to work with the interval type:
   interval *PGTYPESinterval_new(void);
   ```
 
-* `PGTYPESinterval_free` [#](#PGTYPESINTERVALFREE)
+- `PGTYPESinterval_free` [#](#PGTYPESINTERVALFREE)
 
   Release the memory of a previously allocated interval variable.
 
@@ -703,7 +703,7 @@ The following functions can be used to work with the interval type:
   void PGTYPESinterval_free(interval *intvl);
   ```
 
-* `PGTYPESinterval_from_asc` [#](#PGTYPESINTERVALFROMASC)
+- `PGTYPESinterval_from_asc` [#](#PGTYPESINTERVALFROMASC)
 
   Parse an interval from its textual representation.
 
@@ -714,7 +714,7 @@ The following functions can be used to work with the interval type:
 
   The function parses the input string `str` and returns a pointer to an allocated interval variable. At the moment ECPG always parses the complete string and so it currently does not support to store the address of the first invalid character in `*endptr`. You can safely set `endptr` to NULL.
 
-* `PGTYPESinterval_to_asc` [#](#PGTYPESINTERVALTOASC)
+- `PGTYPESinterval_to_asc` [#](#PGTYPESINTERVALTOASC)
 
   Convert a variable of type interval to its textual representation.
 
@@ -725,7 +725,7 @@ The following functions can be used to work with the interval type:
 
   The function converts the interval variable that `span` points to into a C char\*. The output looks like this example: `@ 1 day 12 hours 59 mins 10 secs`. The result must be freed with `PGTYPESchar_free()`.
 
-* `PGTYPESinterval_copy` [#](#PGTYPESINTERVALCOPY)
+- `PGTYPESinterval_copy` [#](#PGTYPESINTERVALCOPY)
 
   Copy a variable of type interval.
 
@@ -744,7 +744,7 @@ The decimal type is similar to the numeric type. However it is limited to a maxi
 
 The following functions can be used to work with the decimal type and are not only contained in the `libcompat` library.
 
-* `PGTYPESdecimal_new` [#](#ECPG-PGTYPES-DECIMAL-NEW)
+- `PGTYPESdecimal_new` [#](#ECPG-PGTYPES-DECIMAL-NEW)
 
   Request a pointer to a newly allocated decimal variable.
 
@@ -753,7 +753,7 @@ The following functions can be used to work with the decimal type and are not on
   decimal *PGTYPESdecimal_new(void);
   ```
 
-* `PGTYPESdecimal_free` [#](#ECPG-PGTYPES-DECIMAL-FREE)
+- `PGTYPESdecimal_free` [#](#ECPG-PGTYPES-DECIMAL-FREE)
 
   Free a decimal type, release all of its memory.
 
@@ -766,55 +766,55 @@ The following functions can be used to work with the decimal type and are not on
 
 ### 36.6.7. errno Values of pgtypeslib [#](#ECPG-PGTYPES-ERRNO)
 
-* `PGTYPES_NUM_BAD_NUMERIC` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-BAD-NUMERIC)
+- `PGTYPES_NUM_BAD_NUMERIC` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-BAD-NUMERIC)
 
   An argument should contain a numeric variable (or point to a numeric variable) but in fact its in-memory representation was invalid.
 
-* `PGTYPES_NUM_OVERFLOW` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-OVERFLOW)
+- `PGTYPES_NUM_OVERFLOW` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-OVERFLOW)
 
   An overflow occurred. Since the numeric type can deal with almost arbitrary precision, converting a numeric variable into other types might cause overflow.
 
-* `PGTYPES_NUM_UNDERFLOW` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-UNDERFLOW)
+- `PGTYPES_NUM_UNDERFLOW` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-UNDERFLOW)
 
   An underflow occurred. Since the numeric type can deal with almost arbitrary precision, converting a numeric variable into other types might cause underflow.
 
-* `PGTYPES_NUM_DIVIDE_ZERO` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-DIVIDE-ZERO)
+- `PGTYPES_NUM_DIVIDE_ZERO` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-NUM-DIVIDE-ZERO)
 
   A division by zero has been attempted.
 
-* `PGTYPES_DATE_BAD_DATE` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-DATE)
+- `PGTYPES_DATE_BAD_DATE` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-DATE)
 
   An invalid date string was passed to the `PGTYPESdate_from_asc` function.
 
-* `PGTYPES_DATE_ERR_EARGS` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-EARGS)
+- `PGTYPES_DATE_ERR_EARGS` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-EARGS)
 
   Invalid arguments were passed to the `PGTYPESdate_defmt_asc` function.
 
-* `PGTYPES_DATE_ERR_ENOSHORTDATE` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-ENOSHORTDATE)
+- `PGTYPES_DATE_ERR_ENOSHORTDATE` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-ENOSHORTDATE)
 
   An invalid token in the input string was found by the `PGTYPESdate_defmt_asc` function.
 
-* `PGTYPES_INTVL_BAD_INTERVAL` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-INTVL-BAD-INTERVAL)
+- `PGTYPES_INTVL_BAD_INTERVAL` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-INTVL-BAD-INTERVAL)
 
   An invalid interval string was passed to the `PGTYPESinterval_from_asc` function, or an invalid interval value was passed to the `PGTYPESinterval_to_asc` function.
 
-* `PGTYPES_DATE_ERR_ENOTDMY` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-ENOTDMY)
+- `PGTYPES_DATE_ERR_ENOTDMY` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-ERR-ENOTDMY)
 
   There was a mismatch in the day/month/year assignment in the `PGTYPESdate_defmt_asc` function.
 
-* `PGTYPES_DATE_BAD_DAY` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-DAY)
+- `PGTYPES_DATE_BAD_DAY` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-DAY)
 
   An invalid day of the month value was found by the `PGTYPESdate_defmt_asc` function.
 
-* `PGTYPES_DATE_BAD_MONTH` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-MONTH)
+- `PGTYPES_DATE_BAD_MONTH` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-DATE-BAD-MONTH)
 
   An invalid month value was found by the `PGTYPESdate_defmt_asc` function.
 
-* `PGTYPES_TS_BAD_TIMESTAMP` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-TS-BAD-TIMESTAMP)
+- `PGTYPES_TS_BAD_TIMESTAMP` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-TS-BAD-TIMESTAMP)
 
   An invalid timestamp string pass passed to the `PGTYPEStimestamp_from_asc` function, or an invalid timestamp value was passed to the `PGTYPEStimestamp_to_asc` function.
 
-* `PGTYPES_TS_ERR_EINFTIME` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-TS-ERR-EINFTIME)
+- `PGTYPES_TS_ERR_EINFTIME` [#](#ECPG-PGTYPES-ERRNO-PGTYPES-TS-ERR-EINFTIME)
 
   An infinite timestamp value was encountered in a context that cannot handle it.
 
@@ -822,6 +822,6 @@ The following functions can be used to work with the decimal type and are not on
 
 ### 36.6.8. Special Constants of pgtypeslib [#](#ECPG-PGTYPES-CONSTANTS)
 
-* `PGTYPESInvalidTimestamp` [#](#PGTYPESINVALIDTIMESTAMP)
+- `PGTYPESInvalidTimestamp` [#](#PGTYPESINVALIDTIMESTAMP)
 
   A value of type timestamp representing an invalid time stamp. This is returned by the function `PGTYPEStimestamp_from_asc` on parse error. Note that due to the internal representation of the `timestamp` data type, `PGTYPESInvalidTimestamp` is also a valid timestamp at the same time. It is set to `1899-12-31 23:59:59`. In order to detect errors, make sure that your application does not only test for `PGTYPESInvalidTimestamp` but also for `errno != 0` after each call to `PGTYPEStimestamp_from_asc`.

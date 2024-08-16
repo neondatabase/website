@@ -40,31 +40,31 @@ Adding/Setting any schema when the publication also publishes a table with a col
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing publication whose definition is to be altered.
 
-* *`table_name`*
+- _`table_name`_
 
   Name of an existing table. If `ONLY` is specified before the table name, only that table is affected. If `ONLY` is not specified, the table and all its descendant tables (if any) are affected. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
   Optionally, a column list can be specified. See [CREATE PUBLICATION](sql-createpublication) for details. Note that a subscription having several publications in which the same table has been published with different column lists is not supported. See [Warning: Combining Column Lists from Multiple Publications](logical-replication-col-lists#LOGICAL-REPLICATION-COL-LIST-COMBINING) for details of potential problems when altering column lists.
 
-  If the optional `WHERE` clause is specified, rows for which the *`expression`* evaluates to false or null will not be published. Note that parentheses are required around the expression. The *`expression`* is evaluated with the role used for the replication connection.
+  If the optional `WHERE` clause is specified, rows for which the _`expression`_ evaluates to false or null will not be published. Note that parentheses are required around the expression. The _`expression`_ is evaluated with the role used for the replication connection.
 
-* *`schema_name`*
+- _`schema_name`_
 
   Name of an existing schema.
 
-* `SET ( publication_parameter [= value] [, ... ] )`
+- `SET ( publication_parameter [= value] [, ... ] )`
 
   This clause alters publication parameters originally set by [CREATE PUBLICATION](sql-createpublication). See there for more information.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The user name of the new owner of the publication.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the publication.
 

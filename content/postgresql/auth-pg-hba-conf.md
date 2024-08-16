@@ -2,9 +2,7 @@
 
 ## 21.1. The `pg_hba.conf` File [#](#AUTH-PG-HBA-CONF)
 
-
-
-Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb). It is possible to place the authentication configuration file elsewhere, however; see the [hba\_file](runtime-config-file-locations#GUC-HBA-FILE) configuration parameter.
+Client authentication is controlled by a configuration file, which traditionally is named `pg_hba.conf` and is stored in the database cluster's data directory. (HBA stands for host-based authentication.) A default `pg_hba.conf` file is installed when the data directory is initialized by [initdb](app-initdb). It is possible to place the authentication configuration file elsewhere, however; see the [hba_file](runtime-config-file-locations#GUC-HBA-FILE) configuration parameter.
 
 The general format of the `pg_hba.conf` file is a set of records, one per line. Blank lines are ignored, as is any text after the `#` comment character. A record can be continued onto the next line by ending the line with a backslash. (Backslashes are not special except at the end of a line.) A record is made up of a number of fields which are separated by spaces and/or tabs. Fields can contain white space if the field value is double-quoted. Quoting one of the keywords in a database, user, or address field (e.g., `all` or `replication`) makes the word lose its special meaning, and just match a database, user, or host with that name. Backslash line continuation applies even within quoted text or comments.
 
@@ -34,39 +32,39 @@ include_dir         directory
 
 The meaning of the fields is as follows:
 
-* `local`
+- `local`
 
   This record matches connection attempts using Unix-domain sockets. Without a record of this type, Unix-domain socket connections are disallowed.
 
-* `host`
+- `host`
 
   This record matches connection attempts made using TCP/IP. `host` records match SSL or non-SSL connection attempts as well as GSSAPI encrypted or non-GSSAPI encrypted connection attempts.
 
   ### Note
 
-  Remote TCP/IP connections will not be possible unless the server is started with an appropriate value for the [listen\_addresses](runtime-config-connection#GUC-LISTEN-ADDRESSES) configuration parameter, since the default behavior is to listen for TCP/IP connections only on the local loopback address `localhost`.
+  Remote TCP/IP connections will not be possible unless the server is started with an appropriate value for the [listen_addresses](runtime-config-connection#GUC-LISTEN-ADDRESSES) configuration parameter, since the default behavior is to listen for TCP/IP connections only on the local loopback address `localhost`.
 
-* `hostssl`
+- `hostssl`
 
   This record matches connection attempts made using TCP/IP, but only when the connection is made with SSL encryption.
 
   To make use of this option the server must be built with SSL support. Furthermore, SSL must be enabled by setting the [ssl](runtime-config-connection#GUC-SSL) configuration parameter (see [Section 19.9](ssl-tcp) for more information). Otherwise, the `hostssl` record is ignored except for logging a warning that it cannot match any connections.
 
-* `hostnossl`
+- `hostnossl`
 
   This record type has the opposite behavior of `hostssl`; it only matches connection attempts made over TCP/IP that do not use SSL.
 
-* `hostgssenc`
+- `hostgssenc`
 
   This record matches connection attempts made using TCP/IP, but only when the connection is made with GSSAPI encryption.
 
   To make use of this option the server must be built with GSSAPI support. Otherwise, the `hostgssenc` record is ignored except for logging a warning that it cannot match any connections.
 
-* `hostnogssenc`
+- `hostnogssenc`
 
   This record type has the opposite behavior of `hostgssenc`; it only matches connection attempts made over TCP/IP that do not use GSSAPI encryption.
 
-* *`database`*
+- _`database`_
 
   Specifies which database name(s) this record matches. The value `all` specifies that it matches all databases. The value `sameuser` specifies that the record matches if the requested database has the same name as the requested user. The value `samerole` specifies that the requested user must be a member of the role with the same name as the requested database. (`samegroup` is an obsolete but still accepted spelling of `samerole`.) Superusers are not considered to be members of a role for the purposes of `samerole` unless they are explicitly members of the role, directly or indirectly, and not just by virtue of being a superuser. The value `replication` specifies that the record matches if a physical replication connection is requested, however, it doesn't match with logical replication connections. Note that physical replication connections do not specify any particular database whereas logical replication connections do specify it. Otherwise, this is the name of a specific PostgreSQL database or a regular expression. Multiple database names and/or regular expressions can be supplied by separating them with commas.
 
@@ -74,7 +72,7 @@ The meaning of the fields is as follows:
 
   A separate file containing database names and/or regular expressions can be specified by preceding the file name with `@`.
 
-* *`user`*
+- _`user`_
 
   Specifies which database user name(s) this record matches. The value `all` specifies that it matches all users. Otherwise, this is either the name of a specific database user, a regular expression (when starting with a slash (`/`), or a group name preceded by `+`. (Recall that there is no real distinction between users and groups in PostgreSQL; a `+` mark really means “match any of the roles that are directly or indirectly members of this role”, while a name without a `+` mark matches only that specific role.) For this purpose, a superuser is only considered to be a member of a role if they are explicitly a member of the role, directly or indirectly, and not just by virtue of being a superuser. Multiple user names and/or regular expressions can be supplied by separating them with commas.
 
@@ -82,7 +80,7 @@ The meaning of the fields is as follows:
 
   A separate file containing user names and/or regular expressions can be specified by preceding the file name with `@`.
 
-* *`address`*
+- _`address`_
 
   Specifies the client machine address(es) that this record matches. This field can contain either a host name, an IP address range, or one of the special key words mentioned below.
 
@@ -110,75 +108,75 @@ The meaning of the fields is as follows:
 
   Note that this behavior is consistent with other popular implementations of host name-based access control, such as the Apache HTTP Server and TCP Wrappers.
 
-* *`IP-address`**`IP-mask`*
+- _`IP-address`\*\*`IP-mask`_
 
-  These two fields can be used as an alternative to the *`IP-address`*`/`*`mask-length`* notation. Instead of specifying the mask length, the actual mask is specified in a separate column. For example, `255.0.0.0` represents an IPv4 CIDR mask length of 8, and `255.255.255.255` represents a CIDR mask length of 32.
+  These two fields can be used as an alternative to the _`IP-address`_`/`_`mask-length`_ notation. Instead of specifying the mask length, the actual mask is specified in a separate column. For example, `255.0.0.0` represents an IPv4 CIDR mask length of 8, and `255.255.255.255` represents a CIDR mask length of 32.
 
   These fields do not apply to `local` records.
 
-* *`auth-method`*
+- _`auth-method`_
 
   Specifies the authentication method to use when a connection matches this record. The possible choices are summarized here; details are in [Section 21.3](auth-methods). All the options are lower case and treated case sensitively, so even acronyms like `ldap` must be specified as lower case.
 
-  * `trust`
+  - `trust`
 
     Allow the connection unconditionally. This method allows anyone that can connect to the PostgreSQL database server to login as any PostgreSQL user they wish, without the need for a password or any other authentication. See [Section 21.4](auth-trust) for details.
 
-  * `reject`
+  - `reject`
 
     Reject the connection unconditionally. This is useful for “filtering out” certain hosts from a group, for example a `reject` line could block a specific host from connecting, while a later line allows the remaining hosts in a specific network to connect.
 
-  * `scram-sha-256`
+  - `scram-sha-256`
 
     Perform SCRAM-SHA-256 authentication to verify the user's password. See [Section 21.5](auth-password) for details.
 
-  * `md5`
+  - `md5`
 
     Perform SCRAM-SHA-256 or MD5 authentication to verify the user's password. See [Section 21.5](auth-password) for details.
 
-  * `password`
+  - `password`
 
     Require the client to supply an unencrypted password for authentication. Since the password is sent in clear text over the network, this should not be used on untrusted networks. See [Section 21.5](auth-password) for details.
 
-  * `gss`
+  - `gss`
 
     Use GSSAPI to authenticate the user. This is only available for TCP/IP connections. See [Section 21.6](gssapi-auth) for details. It can be used in conjunction with GSSAPI encryption.
 
-  * `sspi`
+  - `sspi`
 
     Use SSPI to authenticate the user. This is only available on Windows. See [Section 21.7](sspi-auth) for details.
 
-  * `ident`
+  - `ident`
 
     Obtain the operating system user name of the client by contacting the ident server on the client and check if it matches the requested database user name. Ident authentication can only be used on TCP/IP connections. When specified for local connections, peer authentication will be used instead. See [Section 21.8](auth-ident) for details.
 
-  * `peer`
+  - `peer`
 
     Obtain the client's operating system user name from the operating system and check if it matches the requested database user name. This is only available for local connections. See [Section 21.9](auth-peer) for details.
 
-  * `ldap`
+  - `ldap`
 
     Authenticate using an LDAP server. See [Section 21.10](auth-ldap) for details.
 
-  * `radius`
+  - `radius`
 
     Authenticate using a RADIUS server. See [Section 21.11](auth-radius) for details.
 
-  * `cert`
+  - `cert`
 
     Authenticate using SSL client certificates. See [Section 21.12](auth-cert) for details.
 
-  * `pam`
+  - `pam`
 
     Authenticate using the Pluggable Authentication Modules (PAM) service provided by the operating system. See [Section 21.13](auth-pam) for details.
 
-  * `bsd`
+  - `bsd`
 
     Authenticate using the BSD Authentication service provided by the operating system. See [Section 21.14](auth-bsd) for details.
 
-* *`auth-options`*
+- _`auth-options`_
 
-  After the *`auth-method`* field, there can be field(s) of the form *`name`*`=`*`value`* that specify options for the authentication method. Details about which options are available for which authentication methods appear below.
+  After the _`auth-method`_ field, there can be field(s) of the form _`name`_`=`_`value`_ that specify options for the authentication method. Details about which options are available for which authentication methods appear below.
 
   In addition to the method-specific options listed below, there is a method-independent authentication option `clientcert`, which can be specified in any `hostssl` record. This option can be set to `verify-ca` or `verify-full`. Both options require the client to present a valid (trusted) SSL certificate, while `verify-full` additionally enforces that the `cn` (Common Name) in the certificate matches the username or an applicable mapping. This behavior is similar to the `cert` authentication method (see [Section 21.12](auth-cert)) but enables pairing the verification of client certificates with any authentication method that supports `hostssl` entries.
 
@@ -191,15 +189,15 @@ The meaning of the fields is as follows:
 
   Care needs to be taken when using this option, especially when using regular expression matching against the `DN`.
 
-* `include`
+- `include`
 
   This line will be replaced by the contents of the given file.
 
-* `include_if_exists`
+- `include_if_exists`
 
   This line will be replaced by the content of the given file if the file exists. Otherwise, a message is logged to indicate that the file has been skipped.
 
-* `include_dir`
+- `include_dir`
 
   This line will be replaced by the contents of all the files found in the directory, if they don't start with a `.` and end with `.conf`, processed in file name order (according to C locale rules, i.e., numbers before letters, and uppercase letters before lowercase ones).
 

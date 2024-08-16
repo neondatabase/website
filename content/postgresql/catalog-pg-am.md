@@ -8,12 +8,12 @@ The catalog `pg_am` stores information about relation access methods. There is o
 
 **Table 53.3. `pg_am` Columns**
 
-| Column TypeDescription                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `oid` `oid`Row identifier                                                                                                                                                 |
-| `amname` `name`Name of the access method                                                                                                                                  |
+| Column TypeDescription                                                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `oid` `oid`Row identifier                                                                                                                                            |
+| `amname` `name`Name of the access method                                                                                                                             |
 | `amhandler` `regproc` (references [`pg_proc`](catalog-pg-proc).`oid`)OID of a handler function that is responsible for supplying information about the access method |
-| `amtype` `char``t` = table (including materialized views), `i` = index.                                                                                                   |
+| `amtype` `char``t` = table (including materialized views), `i` = index.                                                                                              |
 
 ### Note
 

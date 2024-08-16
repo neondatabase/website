@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2024-02-08T15:20:54.298Z'
+updatedOn: '2024-08-07T21:36:52.679Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -24,11 +24,11 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
 ```text shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
 <Admonition type="info">
-A Neon project is created with a default Postgres role named for your account, and a ready-to-use database named `neondb`. This guide uses the `neondb` database as the primary database.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This guide uses a `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate
@@ -44,7 +44,7 @@ For cloud-hosted databases like Neon, you must create the shadow database manual
 The connection string for this database should be the same as the connection string for your `neondb` database except for the database name:
 
 ```text shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
 ```
 
 ## Set up your Prisma project
@@ -96,12 +96,12 @@ In this step, you will update your project's `.env` file with the connection str
 When you are finished, your `.env` file should have entries similar to the following:
 
 ```text shouldWrap
-DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
-SHADOW_DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
+DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
+SHADOW_DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
 ```
 
 <Admonition type="note">
-A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
+A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
 </Admonition>
 
 ## Add a model to your schema.prisma file

@@ -1,7 +1,8 @@
 ---
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
-enableTableOfContents: true
+enableTableOfContents: false
+updatedOn: '2024-08-15T17:23:10.557Z'
 ---
 
 ### Autoscaling
@@ -48,7 +49,7 @@ Branch data the same way you branch your code.
 
 <a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
 
-<a href="/docs/guides/branch-promote" description="Promote a branch to primary with the the Neon API" icon="split-branch">Promote a branch to primary</a>
+<a href="/docs/guides/branch-promote" description="Promote a branch to default with the the Neon API" icon="split-branch">Promote a branch to default</a>
 
 </DetailIconCards>
 
@@ -135,8 +136,3 @@ Protect your production or sensitive data.
 <a href="/docs/guides/protected-branches" description="Learn how to use Neon's protected branches feature to secure access to critical data" icon="respond-arrow">Configure protected branches</a>
 
 </DetailIconCards>
-
-
-
-
-

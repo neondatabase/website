@@ -2,12 +2,12 @@
 
 ## 43.3. Declarations [#](#PLPGSQL-DECLARATIONS)
 
-  * [43.3.1. Declaring Function Parameters](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS)
-  * [43.3.2. `ALIAS`](plpgsql-declarations#PLPGSQL-DECLARATION-ALIAS)
-  * [43.3.3. Copying Types](plpgsql-declarations#PLPGSQL-DECLARATION-TYPE)
-  * [43.3.4. Row Types](plpgsql-declarations#PLPGSQL-DECLARATION-ROWTYPES)
-  * [43.3.5. Record Types](plpgsql-declarations#PLPGSQL-DECLARATION-RECORDS)
-  * [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION)
+- [43.3.1. Declaring Function Parameters](plpgsql-declarations#PLPGSQL-DECLARATION-PARAMETERS)
+- [43.3.2. `ALIAS`](plpgsql-declarations#PLPGSQL-DECLARATION-ALIAS)
+- [43.3.3. Copying Types](plpgsql-declarations#PLPGSQL-DECLARATION-TYPE)
+- [43.3.4. Row Types](plpgsql-declarations#PLPGSQL-DECLARATION-ROWTYPES)
+- [43.3.5. Record Types](plpgsql-declarations#PLPGSQL-DECLARATION-RECORDS)
+- [43.3.6. Collation of PL/pgSQL Variables](plpgsql-declarations#PLPGSQL-DECLARATION-COLLATION)
 
 All variables used in a block must be declared in the declarations section of the block. (The only exceptions are that the loop variable of a `FOR` loop iterating over a range of integer values is automatically declared as an integer variable, and likewise the loop variable of a `FOR` loop iterating over a cursor's result is automatically declared as a record variable.)
 
@@ -272,9 +272,9 @@ name table_name%ROWTYPE;
 name composite_type_name;
 ```
 
-A variable of a composite type is called a *row* variable (or *row-type* variable). Such a variable can hold a whole row of a `SELECT` or `FOR` query result, so long as that query's column set matches the declared type of the variable. The individual fields of the row value are accessed using the usual dot notation, for example `rowvar.field`.
+A variable of a composite type is called a _row_ variable (or _row-type_ variable). Such a variable can hold a whole row of a `SELECT` or `FOR` query result, so long as that query's column set matches the declared type of the variable. The individual fields of the row value are accessed using the usual dot notation, for example `rowvar.field`.
 
-A row variable can be declared to have the same type as the rows of an existing table or view, by using the *`table_name`*`%ROWTYPE` notation; or it can be declared by giving a composite type's name. (Since every table has an associated composite type of the same name, it actually does not matter in PostgreSQL whether you write `%ROWTYPE` or not. But the form with `%ROWTYPE` is more portable.)
+A row variable can be declared to have the same type as the rows of an existing table or view, by using the _`table_name`_`%ROWTYPE` notation; or it can be declared by giving a composite type's name. (Since every table has an associated composite type of the same name, it actually does not matter in PostgreSQL whether you write `%ROWTYPE` or not. But the form with `%ROWTYPE` is more portable.)
 
 Parameters to a function can be composite types (complete table rows). In that case, the corresponding identifier `$n` will be a row variable, and fields can be selected from it, for example `$1.user_id`.
 
@@ -308,8 +308,6 @@ Note that `RECORD` is not a true data type, only a placeholder. One should also 
 [#id](#PLPGSQL-DECLARATION-COLLATION)
 
 ### 43.3.6. Collation of PL/pgSQL Variables [#](#PLPGSQL-DECLARATION-COLLATION)
-
-
 
 When a PL/pgSQL function has one or more parameters of collatable data types, a collation is identified for each function call depending on the collations assigned to the actual arguments, as described in [Section 24.2](collation). If a collation is successfully identified (i.e., there are no conflicts of implicit collations among the arguments) then all the collatable parameters are treated as having that collation implicitly. This will affect the behavior of collation-sensitive operations within the function. For example, consider
 

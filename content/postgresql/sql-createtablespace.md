@@ -21,7 +21,7 @@ CREATE TABLESPACE tablespace_name
 
 A tablespace allows superusers to define an alternative location on the file system where the data files containing database objects (such as tables and indexes) can reside.
 
-A user with appropriate privileges can pass *`tablespace_name`* to `CREATE DATABASE`, `CREATE TABLE`, `CREATE INDEX` or `ADD CONSTRAINT` to have the data files for these objects stored within the specified tablespace.
+A user with appropriate privileges can pass _`tablespace_name`_ to `CREATE DATABASE`, `CREATE TABLE`, `CREATE INDEX` or `ADD CONSTRAINT` to have the data files for these objects stored within the specified tablespace.
 
 ### Warning
 
@@ -31,21 +31,21 @@ A tablespace cannot be used independently of the cluster in which it is defined;
 
 ## Parameters
 
-* *`tablespace_name`*
+- _`tablespace_name`_
 
   The name of a tablespace to be created. The name cannot begin with `pg_`, as such names are reserved for system tablespaces.
 
-* *`user_name`*
+- _`user_name`_
 
   The name of the user who will own the tablespace. If omitted, defaults to the user executing the command. Only superusers can create tablespaces, but they can assign ownership of tablespaces to non-superusers.
 
-* *`directory`*
+- _`directory`_
 
   The directory that will be used for the tablespace. The directory must exist (`CREATE TABLESPACE` will not create it), should be empty, and must be owned by the PostgreSQL system user. The directory must be specified by an absolute path name.
 
-* *`tablespace_option`*
+- _`tablespace_option`_
 
-  A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq\_page\_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random\_page\_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective\_io\_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance\_io\_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
+  A tablespace parameter to be set or reset. Currently, the only available parameters are `seq_page_cost`, `random_page_cost`, `effective_io_concurrency` and `maintenance_io_concurrency`. Setting these values for a particular tablespace will override the planner's usual estimate of the cost of reading pages from tables in that tablespace, and the executor's prefetching behavior, as established by the configuration parameters of the same name (see [seq_page_cost](runtime-config-query#GUC-SEQ-PAGE-COST), [random_page_cost](runtime-config-query#GUC-RANDOM-PAGE-COST), [effective_io_concurrency](runtime-config-resource#GUC-EFFECTIVE-IO-CONCURRENCY), [maintenance_io_concurrency](runtime-config-resource#GUC-MAINTENANCE-IO-CONCURRENCY)). This may be useful if one tablespace is located on a disk which is faster or slower than the remainder of the I/O subsystem.
 
 [#id](#id-1.9.3.87.7)
 

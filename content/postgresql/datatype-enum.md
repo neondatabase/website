@@ -2,12 +2,10 @@
 
 ## 8.7. Enumerated Types [#](#DATATYPE-ENUM)
 
-  * [8.7.1. Declaration of Enumerated Types](datatype-enum#DATATYPE-ENUM-DECLARATION)
-  * [8.7.2. Ordering](datatype-enum#DATATYPE-ENUM-ORDERING)
-  * [8.7.3. Type Safety](datatype-enum#DATATYPE-ENUM-TYPE-SAFETY)
-  * [8.7.4. Implementation Details](datatype-enum#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)
-
-
+- [8.7.1. Declaration of Enumerated Types](datatype-enum#DATATYPE-ENUM-DECLARATION)
+- [8.7.2. Ordering](datatype-enum#DATATYPE-ENUM-ORDERING)
+- [8.7.3. Type Safety](datatype-enum#DATATYPE-ENUM-TYPE-SAFETY)
+- [8.7.4. Implementation Details](datatype-enum#DATATYPE-ENUM-IMPLEMENTATION-DETAILS)
 
 Enumerated (enum) types are data types that comprise a static, ordered set of values. They are equivalent to the `enum` types supported in a number of programming languages. An example of an enum type might be the days of the week, or a set of status values for a piece of data.
 

@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-KEEPPLAN)
 
-## SPI\_keepplan
+## SPI_keepplan
 
-SPI\_keepplan — save a prepared statement
+SPI_keepplan — save a prepared statement
 
 ## Synopsis
 
@@ -20,7 +20,7 @@ int SPI_keepplan(SPIPlanPtr plan)
 
 ## Arguments
 
-* `SPIPlanPtr plan`
+- `SPIPlanPtr plan`
 
   the prepared statement to be saved
 
@@ -28,7 +28,7 @@ int SPI_keepplan(SPIPlanPtr plan)
 
 ## Return Value
 
-0 on success; `SPI_ERROR_ARGUMENT` if *`plan`* is `NULL` or invalid
+0 on success; `SPI_ERROR_ARGUMENT` if _`plan`_ is `NULL` or invalid
 
 [#id](#id-1.8.12.8.29.8)
 

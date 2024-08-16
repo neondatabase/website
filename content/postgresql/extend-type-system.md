@@ -2,13 +2,11 @@
 
 ## 38.2. The PostgreSQL Type System [#](#EXTEND-TYPE-SYSTEM)
 
-  * [38.2.1. Base Types](extend-type-system#EXTEND-TYPE-SYSTEM-BASE)
-  * [38.2.2. Container Types](extend-type-system#EXTEND-TYPE-SYSTEM-CONTAINER)
-  * [38.2.3. Domains](extend-type-system#EXTEND-TYPE-SYSTEM-DOMAINS)
-  * [38.2.4. Pseudo-Types](extend-type-system#EXTEND-TYPE-SYSTEM-PSEUDO)
-  * [38.2.5. Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
-
-
+- [38.2.1. Base Types](extend-type-system#EXTEND-TYPE-SYSTEM-BASE)
+- [38.2.2. Container Types](extend-type-system#EXTEND-TYPE-SYSTEM-CONTAINER)
+- [38.2.3. Domains](extend-type-system#EXTEND-TYPE-SYSTEM-DOMAINS)
+- [38.2.4. Pseudo-Types](extend-type-system#EXTEND-TYPE-SYSTEM-PSEUDO)
+- [38.2.5. Polymorphic Types](extend-type-system#EXTEND-TYPES-POLYMORPHIC)
 
 PostgreSQL data types can be divided into base types, container types, domains, and pseudo-types.
 
@@ -48,9 +46,7 @@ There are a few “pseudo-types” for special purposes. Pseudo-types cannot app
 
 ### 38.2.5. Polymorphic Types [#](#EXTEND-TYPES-POLYMORPHIC)
 
-
-
-Some pseudo-types of special interest are the *polymorphic types*, which are used to declare *polymorphic functions*. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system#EXTEND-TYPES-POLYMORPHIC-TABLE). Some examples of their use appear in [Section 38.5.11](xfunc-sql#XFUNC-SQL-POLYMORPHIC-FUNCTIONS).
+Some pseudo-types of special interest are the _polymorphic types_, which are used to declare _polymorphic functions_. This powerful feature allows a single function definition to operate on many different data types, with the specific data type(s) being determined by the data types actually passed to it in a particular call. The polymorphic types are shown in [Table 38.1](extend-type-system#EXTEND-TYPES-POLYMORPHIC-TABLE). Some examples of their use appear in [Section 38.5.11](xfunc-sql#XFUNC-SQL-POLYMORPHIC-FUNCTIONS).
 
 [#id](#EXTEND-TYPES-POLYMORPHIC-TABLE)
 
@@ -61,21 +57,20 @@ Some pseudo-types of special interest are the *polymorphic types*, which are use
 | `anyelement`              | Simple | Indicates that a function accepts any data type                                                                                  |
 | `anyarray`                | Simple | Indicates that a function accepts any array data type                                                                            |
 | `anynonarray`             | Simple | Indicates that a function accepts any non-array data type                                                                        |
-| `anyenum`                 | Simple | Indicates that a function accepts any enum data type (see [Section 8.7](datatype-enum))                                     |
-| `anyrange`                | Simple | Indicates that a function accepts any range data type (see [Section 8.17](rangetypes))                                      |
-| `anymultirange`           | Simple | Indicates that a function accepts any multirange data type (see [Section 8.17](rangetypes))                                 |
+| `anyenum`                 | Simple | Indicates that a function accepts any enum data type (see [Section 8.7](datatype-enum))                                          |
+| `anyrange`                | Simple | Indicates that a function accepts any range data type (see [Section 8.17](rangetypes))                                           |
+| `anymultirange`           | Simple | Indicates that a function accepts any multirange data type (see [Section 8.17](rangetypes))                                      |
 | `anycompatible`           | Common | Indicates that a function accepts any data type, with automatic promotion of multiple arguments to a common data type            |
 | `anycompatiblearray`      | Common | Indicates that a function accepts any array data type, with automatic promotion of multiple arguments to a common data type      |
 | `anycompatiblenonarray`   | Common | Indicates that a function accepts any non-array data type, with automatic promotion of multiple arguments to a common data type  |
 | `anycompatiblerange`      | Common | Indicates that a function accepts any range data type, with automatic promotion of multiple arguments to a common data type      |
 | `anycompatiblemultirange` | Common | Indicates that a function accepts any multirange data type, with automatic promotion of multiple arguments to a common data type |
 
-
 Polymorphic arguments and results are tied to each other and are resolved to specific data types when a query calling a polymorphic function is parsed. When there is more than one polymorphic argument, the actual data types of the input values must match up as described below. If the function's result type is polymorphic, or it has output parameters of polymorphic types, the types of those results are deduced from the actual types of the polymorphic inputs as described below.
 
 For the “simple” family of polymorphic types, the matching and deduction rules work like this:
 
-Each position (either argument or return value) declared as `anyelement` is allowed to have any specific actual data type, but in any given call they must all be the *same* actual type. Each position declared as `anyarray` can have any array data type, but similarly they must all be the same type. And similarly, positions declared as `anyrange` must all be the same range type. Likewise for `anymultirange`.
+Each position (either argument or return value) declared as `anyelement` is allowed to have any specific actual data type, but in any given call they must all be the _same_ actual type. Each position declared as `anyarray` can have any array data type, but similarly they must all be the same type. And similarly, positions declared as `anyrange` must all be the same range type. Likewise for `anymultirange`.
 
 Furthermore, if there are positions declared `anyarray` and others declared `anyelement`, the actual array type in the `anyarray` positions must be an array whose elements are the same type appearing in the `anyelement` positions. `anynonarray` is treated exactly the same as `anyelement`, but adds the additional constraint that the actual type must not be an array type. `anyenum` is treated exactly the same as `anyelement`, but adds the additional constraint that the actual type must be an enum type.
 

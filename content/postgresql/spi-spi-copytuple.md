@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-COPYTUPLE)
 
-## SPI\_copytuple
+## SPI_copytuple
 
-SPI\_copytuple — make a copy of a row in the upper executor context
+SPI_copytuple — make a copy of a row in the upper executor context
 
 ## Synopsis
 
@@ -22,7 +22,7 @@ This function can only be used while connected to SPI. Otherwise, it returns NUL
 
 ## Arguments
 
-* `HeapTuple row`
+- `HeapTuple row`
 
   row to be copied
 

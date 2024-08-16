@@ -2,33 +2,33 @@
 title: Schema migration with Neon Postgres and Django
 subtitle: Set up Neon Postgres and run migrations for your Django project
 enableTableOfContents: true
-updatedOn: '2024-03-04T14:30:00.000Z'
+updatedOn: '2024-08-07T21:36:52.649Z'
 ---
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
-This guide demonstrates how to use Django with a Neon Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes. 
+This guide demonstrates how to use Django with a Neon Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- [Python](https://www.python.org/) installed on your local machine. We recommend using a newer version of Python, 3.8 or higher. 
+- [Python](https://www.python.org/) installed on your local machine. We recommend using a newer version of Python, 3.8 or higher.
 
 ## Setting up your Neon database
 
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select a project or click the `New Project` button to create a new one. 
+2. Select a project or click the `New Project` button to create a new one.
 
 ### Retrieve your Neon database connection string
 
 On your Neon project dashboard, navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -37,7 +37,7 @@ Keep your connection string handy for later use.
 
 ### Set up the Python environment
 
-To manage our Django project dependencies, we create a new Python virtual environment. Run the following commands in your terminal to set it up.  
+To manage our Django project dependencies, we create a new Python virtual environment. Run the following commands in your terminal to set it up.
 
 ```bash
 python -m venv myenv
@@ -72,7 +72,7 @@ Run the following command to create a new Django project in the current director
 django-admin startproject guide_neon_django .
 ```
 
-This command creates a new Django project named `guide_neon_django` in the current directory. 
+This command creates a new Django project named `guide_neon_django` in the current directory.
 
 ### Set up the Database configuration
 
@@ -110,7 +110,7 @@ Inside your project directory, run the following command to create a new Django 
 python manage.py startapp catalog
 ```
 
-This command creates a new app named `catalog` inside the Django project. 
+This command creates a new app named `catalog` inside the Django project.
 
 ## Defining data models and running migrations
 
@@ -140,7 +140,7 @@ class Book(models.Model):
         return self.title
 ```
 
-This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for `name`, `bio`, and a `created_at` timestamp. The `Book` model represents a book with fields for `title`, `author` (as a foreign key to the `Author` model), and a `created_at` timestamp. Django automatically creates an `id` field for each model as the primary key. 
+This code defines two models: `Author` and `Book`. The `Author` model represents an author with fields for `name`, `bio`, and a `created_at` timestamp. The `Book` model represents a book with fields for `title`, `author` (as a foreign key to the `Author` model), and a `created_at` timestamp. Django automatically creates an `id` field for each model as the primary key.
 
 ### Generate migration files
 
@@ -166,7 +166,7 @@ To generate migration files based on the defined models, run the following comma
 python manage.py makemigrations
 ```
 
-This command detects the new `Author` and `Book` models that were added and generates migration files in the `catalog/migrations` directory. 
+This command detects the new `Author` and `Book` models that were added and generates migration files in the `catalog/migrations` directory.
 
 ### Apply the migration
 
@@ -178,9 +178,9 @@ python manage.py migrate
 
 This command executes the migration files and creates the necessary tables in the database. Note that Django creates multiple other tables, such as `django_migrations` and `auth_user` for its internal usage.
 
-### Seed the database 
+### Seed the database
 
-To populate the database with some initial data, we can create a custom management command for our app. Create a new file named `populate.py` in the `catalog/management/commands` directory.  
+To populate the database with some initial data, we can create a custom management command for our app. Create a new file named `populate.py` in the `catalog/management/commands` directory.
 
 ```bash
 mkdir -p catalog/management/commands
@@ -200,15 +200,15 @@ class Command(BaseCommand):
         # Create authors
         authors = [
             Author(
-                name="J.R.R. Tolkien", 
+                name="J.R.R. Tolkien",
                 bio="The creator of Middle-earth and author of The Lord of the Rings."
             ),
             Author(
-                name="George R.R. Martin", 
+                name="George R.R. Martin",
                 bio="The author of the epic fantasy series A Song of Ice and Fire."
             ),
             Author(
-                name="J.K. Rowling", 
+                name="J.K. Rowling",
                 bio="The creator of the Harry Potter series."
             ),
         ]
@@ -342,13 +342,13 @@ python manage.py migrate
 
 ### Test the schema change
 
-Restart the Django development server. 
+Restart the Django development server.
 
 ```bash
 python manage.py runserver
 ```
 
-Navigate to the url `http://localhost:8000/catalog/authors` to view the list of authors. You should see the new `country` field included and set to empty for each author entry, reflecting the schema change. 
+Navigate to the url `http://localhost:8000/catalog/authors` to view the list of authors. You should see the new `country` field included and set to empty for each author entry, reflecting the schema change.
 
 ## Conclusion
 
@@ -365,6 +365,7 @@ You can find the source code for the application described in this guide on GitH
 ## Resources
 
 For more information on the tools and concepts used in this guide, refer to the following resources:
+
 - [Django Documentation](https://docs.djangoproject.com/)
 - [Neon Postgres](https://neon.tech/docs/introduction)
 

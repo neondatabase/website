@@ -34,11 +34,11 @@ It is common for a client that executes `NOTIFY` to be listening on the same not
 
 ## Parameters
 
-* *`channel`*
+- _`channel`_
 
   Name of the notification channel to be signaled (any identifier).
 
-* *`payload`*
+- _`payload`_
 
   The “payload” string to be communicated along with the notification. This must be specified as a simple string literal. In the default configuration it must be shorter than 8000 bytes. (If binary data or large amounts of information need to be communicated, it's best to put it in a database table and send the key of the record.)
 
@@ -54,9 +54,7 @@ A transaction that has executed `NOTIFY` cannot be prepared for two-phase commit
 
 [#id](#id-1.9.3.158.7.5)
 
-### pg\_notify
-
-
+### pg_notify
 
 To send a notification you can also use the function `pg_notify(text, text)`. The function takes the channel name as the first argument and the payload as the second. The function is much easier to use than the `NOTIFY` command if you need to work with non-constant channel names and payloads.
 

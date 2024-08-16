@@ -37,61 +37,61 @@ If row-level security is enabled for a table, but no applicable policies exist, 
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the policy to be created. This must be distinct from the name of any other policy for the table.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table the policy applies to.
 
-* `PERMISSIVE`
+- `PERMISSIVE`
 
   Specify that the policy is to be created as a permissive policy. All permissive policies which are applicable to a given query will be combined together using the Boolean “OR” operator. By creating permissive policies, administrators can add to the set of records which can be accessed. Policies are permissive by default.
 
-* `RESTRICTIVE`
+- `RESTRICTIVE`
 
   Specify that the policy is to be created as a restrictive policy. All restrictive policies which are applicable to a given query will be combined together using the Boolean “AND” operator. By creating restrictive policies, administrators can reduce the set of records which can be accessed as all restrictive policies must be passed for each record.
 
   Note that there needs to be at least one permissive policy to grant access to records before restrictive policies can be usefully used to reduce that access. If only restrictive policies exist, then no records will be accessible. When a mix of permissive and restrictive policies are present, a record is only accessible if at least one of the permissive policies passes, in addition to all the restrictive policies.
 
-* *`command`*
+- _`command`_
 
   The command to which the policy applies. Valid options are `ALL`, `SELECT`, `INSERT`, `UPDATE`, and `DELETE`. `ALL` is the default. See below for specifics regarding how these are applied.
 
-* *`role_name`*
+- _`role_name`_
 
   The role(s) to which the policy is to be applied. The default is `PUBLIC`, which will apply the policy to all roles.
 
-* *`using_expression`*
+- _`using_expression`_
 
   Any SQL conditional expression (returning `boolean`). The conditional expression cannot contain any aggregate or window functions. This expression will be added to queries that refer to the table if row-level security is enabled. Rows for which the expression returns true will be visible. Any rows for which the expression returns false or null will not be visible to the user (in a `SELECT`), and will not be available for modification (in an `UPDATE` or `DELETE`). Such rows are silently suppressed; no error is reported.
 
-* *`check_expression`*
+- _`check_expression`_
 
-  Any SQL conditional expression (returning `boolean`). The conditional expression cannot contain any aggregate or window functions. This expression will be used in `INSERT` and `UPDATE` queries against the table if row-level security is enabled. Only rows for which the expression evaluates to true will be allowed. An error will be thrown if the expression evaluates to false or null for any of the records inserted or any of the records that result from the update. Note that the *`check_expression`* is evaluated against the proposed new contents of the row, not the original contents.
+  Any SQL conditional expression (returning `boolean`). The conditional expression cannot contain any aggregate or window functions. This expression will be used in `INSERT` and `UPDATE` queries against the table if row-level security is enabled. Only rows for which the expression evaluates to true will be allowed. An error will be thrown if the expression evaluates to false or null for any of the records inserted or any of the records that result from the update. Note that the _`check_expression`_ is evaluated against the proposed new contents of the row, not the original contents.
 
 [#id](#id-1.9.3.75.6.3)
 
 ### Per-Command Policies
 
-* `ALL` [#](#SQL-CREATEPOLICY-ALL)
+- `ALL` [#](#SQL-CREATEPOLICY-ALL)
 
   Using `ALL` for a policy means that it will apply to all commands, regardless of the type of command. If an `ALL` policy exists and more specific policies exist, then both the `ALL` policy and the more specific policy (or policies) will be applied. Additionally, `ALL` policies will be applied to both the selection side of a query and the modification side, using the `USING` expression for both cases if only a `USING` expression has been defined.
 
   As an example, if an `UPDATE` is issued, then the `ALL` policy will be applicable both to what the `UPDATE` will be able to select as rows to be updated (applying the `USING` expression), and to the resulting updated rows, to check if they are permitted to be added to the table (applying the `WITH CHECK` expression, if defined, and the `USING` expression otherwise). If an `INSERT` or `UPDATE` command attempts to add rows to the table that do not pass the `ALL` policy's `WITH CHECK` expression, the entire command will be aborted.
 
-* `SELECT` [#](#SQL-CREATEPOLICY-SELECT)
+- `SELECT` [#](#SQL-CREATEPOLICY-SELECT)
 
   Using `SELECT` for a policy means that it will apply to `SELECT` queries and whenever `SELECT` permissions are required on the relation the policy is defined for. The result is that only those records from the relation that pass the `SELECT` policy will be returned during a `SELECT` query, and that queries that require `SELECT` permissions, such as `UPDATE`, will also only see those records that are allowed by the `SELECT` policy. A `SELECT` policy cannot have a `WITH CHECK` expression, as it only applies in cases where records are being retrieved from the relation.
 
-* `INSERT` [#](#SQL-CREATEPOLICY-INSERT)
+- `INSERT` [#](#SQL-CREATEPOLICY-INSERT)
 
   Using `INSERT` for a policy means that it will apply to `INSERT` commands and `MERGE` commands that contain `INSERT` actions. Rows being inserted that do not pass this policy will result in a policy violation error, and the entire `INSERT` command will be aborted. An `INSERT` policy cannot have a `USING` expression, as it only applies in cases where records are being added to the relation.
 
   Note that `INSERT` with `ON CONFLICT DO UPDATE` checks `INSERT` policies' `WITH CHECK` expressions only for rows appended to the relation by the `INSERT` path.
 
-* `UPDATE` [#](#SQL-CREATEPOLICY-UPDATE)
+- `UPDATE` [#](#SQL-CREATEPOLICY-UPDATE)
 
   Using `UPDATE` for a policy means that it will apply to `UPDATE`, `SELECT FOR UPDATE` and `SELECT FOR SHARE` commands, as well as auxiliary `ON CONFLICT DO UPDATE` clauses of `INSERT` commands. `MERGE` commands containing `UPDATE` actions are affected as well. Since `UPDATE` involves pulling an existing record and replacing it with a new modified record, `UPDATE` policies accept both a `USING` expression and a `WITH CHECK` expression. The `USING` expression determines which records the `UPDATE` command will see to operate against, while the `WITH CHECK` expression defines which modified rows are allowed to be stored back into the relation.
 
@@ -99,9 +99,9 @@ If row-level security is enabled for a table, but no applicable policies exist, 
 
   Typically an `UPDATE` command also needs to read data from columns in the relation being updated (e.g., in a `WHERE` clause or a `RETURNING` clause, or in an expression on the right hand side of the `SET` clause). In this case, `SELECT` rights are also required on the relation being updated, and the appropriate `SELECT` or `ALL` policies will be applied in addition to the `UPDATE` policies. Thus the user must have access to the row(s) being updated through a `SELECT` or `ALL` policy in addition to being granted permission to update the row(s) via an `UPDATE` or `ALL` policy.
 
-  When an `INSERT` command has an auxiliary `ON CONFLICT DO UPDATE` clause, if the `UPDATE` path is taken, the row to be updated is first checked against the `USING` expressions of any `UPDATE` policies, and then the new updated row is checked against the `WITH CHECK` expressions. Note, however, that unlike a standalone `UPDATE` command, if the existing row does not pass the `USING` expressions, an error will be thrown (the `UPDATE` path will *never* be silently avoided).
+  When an `INSERT` command has an auxiliary `ON CONFLICT DO UPDATE` clause, if the `UPDATE` path is taken, the row to be updated is first checked against the `USING` expressions of any `UPDATE` policies, and then the new updated row is checked against the `WITH CHECK` expressions. Note, however, that unlike a standalone `UPDATE` command, if the existing row does not pass the `USING` expressions, an error will be thrown (the `UPDATE` path will _never_ be silently avoided).
 
-* `DELETE` [#](#SQL-CREATEPOLICY-DELETE)
+- `DELETE` [#](#SQL-CREATEPOLICY-DELETE)
 
   Using `DELETE` for a policy means that it will apply to `DELETE` commands. Only rows that pass this policy will be seen by a `DELETE` command. There can be rows that are visible through a `SELECT` that are not available for deletion, if they do not pass the `USING` expression for the `DELETE` policy.
 
@@ -113,17 +113,17 @@ If row-level security is enabled for a table, but no applicable policies exist, 
 
 **Table 292. Policies Applied by Command Type**
 
-| Command                                                                                                                                                                                               | `SELECT/ALL policy`                                                    | `INSERT/ALL policy` | `UPDATE/ALL policy`     | `DELETE/ALL policy` |              |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------- | ----------------------- | ------------------- | ------------ |
-| `USING expression`                                                                                                                                                                                    | `WITH CHECK expression`                                                | `USING expression`  | `WITH CHECK expression` | `USING expression`  |              |
-| `SELECT`                                                                                                                                                                                              | Existing row                                                           | —                   | —                       | —                   | —            |
-| `SELECT FOR UPDATE/SHARE`                                                                                                                                                                             | Existing row                                                           | —                   | Existing row            | —                   | —            |
-| `INSERT` / `MERGE ... THEN INSERT`                                                                                                                                                                    | —                                                                      | New row             | —                       | —                   | —            |
-| `INSERT ... RETURNING`                                                                                                                                                                                | New row [\[a\]](#ftn.RLS-SELECT-PRIV)                                  | New row             | —                       | —                   | —            |
-| `UPDATE` / `MERGE ... THEN UPDATE`                                                                                                                                                                    | Existing & new rows [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV) | —                   | Existing row            | New row             | —            |
-| `DELETE`                                                                                                                                                                                              | Existing row [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV)        | —                   | —                       | —                   | Existing row |
-| `ON CONFLICT DO UPDATE`                                                                                                                                                                               | Existing & new rows                                                    | —                   | Existing row            | New row             | —            |
-| [#id](#ftn.RLS-SELECT-PRIV)[\[a\] ](#RLS-SELECT-PRIV)If read access is required to the existing or new row (for example, a `WHERE` or `RETURNING` clause that refers to columns from the relation). |                                                                        |                     |                         |                     |              |
+| Command                                                                                                                                                                                             | `SELECT/ALL policy`                                               | `INSERT/ALL policy` | `UPDATE/ALL policy`     | `DELETE/ALL policy` |              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------- | ----------------------- | ------------------- | ------------ |
+| `USING expression`                                                                                                                                                                                  | `WITH CHECK expression`                                           | `USING expression`  | `WITH CHECK expression` | `USING expression`  |              |
+| `SELECT`                                                                                                                                                                                            | Existing row                                                      | —                   | —                       | —                   | —            |
+| `SELECT FOR UPDATE/SHARE`                                                                                                                                                                           | Existing row                                                      | —                   | Existing row            | —                   | —            |
+| `INSERT` / `MERGE ... THEN INSERT`                                                                                                                                                                  | —                                                                 | New row             | —                       | —                   | —            |
+| `INSERT ... RETURNING`                                                                                                                                                                              | New row [\[a\]](#ftn.RLS-SELECT-PRIV)                             | New row             | —                       | —                   | —            |
+| `UPDATE` / `MERGE ... THEN UPDATE`                                                                                                                                                                  | Existing & new rows [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV) | —                   | Existing row            | New row             | —            |
+| `DELETE`                                                                                                                                                                                            | Existing row [\[a\]](sql-createpolicy#ftn.RLS-SELECT-PRIV)        | —                   | —                       | —                   | Existing row |
+| `ON CONFLICT DO UPDATE`                                                                                                                                                                             | Existing & new rows                                               | —                   | Existing row            | New row             | —            |
+| [#id](#ftn.RLS-SELECT-PRIV)[\[a\] ](#RLS-SELECT-PRIV)If read access is required to the existing or new row (for example, a `WHERE` or `RETURNING` clause that refers to columns from the relation). |                                                                   |                     |                         |                     |              |
 
 [#id](#id-1.9.3.75.6.4)
 

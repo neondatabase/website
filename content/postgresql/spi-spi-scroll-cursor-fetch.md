@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-SCROLL-CURSOR-FETCH)
 
-## SPI\_scroll\_cursor\_fetch
+## SPI_scroll_cursor_fetch
 
-SPI\_scroll\_cursor\_fetch — fetch some rows from a cursor
+SPI_scroll_cursor_fetch — fetch some rows from a cursor
 
 ## Synopsis
 
@@ -21,15 +21,15 @@ void SPI_scroll_cursor_fetch(Portal portal, FetchDirection direction,
 
 ## Arguments
 
-* `Portal portal`
+- `Portal portal`
 
   portal containing the cursor
 
-* `FetchDirection direction`
+- `FetchDirection direction`
 
   one of `FETCH_FORWARD`, `FETCH_BACKWARD`, `FETCH_ABSOLUTE` or `FETCH_RELATIVE`
 
-* `long count`
+- `long count`
 
   number of rows to fetch for `FETCH_FORWARD` or `FETCH_BACKWARD`; absolute row number to fetch for `FETCH_ABSOLUTE`; or relative row number to fetch for `FETCH_RELATIVE`
 
@@ -43,6 +43,6 @@ void SPI_scroll_cursor_fetch(Portal portal, FetchDirection direction,
 
 ## Notes
 
-See the SQL [FETCH](sql-fetch) command for details of the interpretation of the *`direction`* and *`count`* parameters.
+See the SQL [FETCH](sql-fetch) command for details of the interpretation of the _`direction`_ and _`count`_ parameters.
 
 Direction values other than `FETCH_FORWARD` may fail if the cursor's plan was not created with the `CURSOR_OPT_SCROLL` option.

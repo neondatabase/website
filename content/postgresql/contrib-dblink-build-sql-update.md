@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-BUILD-SQL-UPDATE)
 
-## dblink\_build\_sql\_update
+## dblink_build_sql_update
 
-dblink\_build\_sql\_update — builds an UPDATE statement using a local tuple, replacing the primary key field values with alternative supplied values
+dblink_build_sql_update — builds an UPDATE statement using a local tuple, replacing the primary key field values with alternative supplied values
 
 ## Synopsis
 
@@ -25,23 +25,23 @@ dblink_build_sql_update(text relname,
 
 ## Arguments
 
-* *`relname`*
+- _`relname`_
 
   Name of a local relation, for example `foo` or `myschema.mytab`. Include double quotes if the name is mixed-case or contains special characters, for example `"FooBar"`; without quotes, the string will be folded to lower case.
 
-* *`primary_key_attnums`*
+- _`primary_key_attnums`_
 
   Attribute numbers (1-based) of the primary key fields, for example `1 2`.
 
-* *`num_primary_key_atts`*
+- _`num_primary_key_atts`_
 
   The number of primary key fields.
 
-* *`src_pk_att_vals_array`*
+- _`src_pk_att_vals_array`_
 
   Values of the primary key fields to be used to look up the local tuple. Each field is represented in text form. An error is thrown if there is no local row with these primary key values.
 
-* *`tgt_pk_att_vals_array`*
+- _`tgt_pk_att_vals_array`_
 
   Values of the primary key fields to be placed in the resulting `UPDATE` command. Each field is represented in text form.
 
@@ -55,7 +55,7 @@ Returns the requested SQL statement as text.
 
 ## Notes
 
-As of PostgreSQL 9.0, the attribute numbers in *`primary_key_attnums`* are interpreted as logical column numbers, corresponding to the column's position in `SELECT * FROM relname`. Previous versions interpreted the numbers as physical column positions. There is a difference if any column(s) to the left of the indicated column have been dropped during the lifetime of the table.
+As of PostgreSQL 9.0, the attribute numbers in _`primary_key_attnums`_ are interpreted as logical column numbers, corresponding to the column's position in `SELECT * FROM relname`. Previous versions interpreted the numbers as physical column positions. There is a difference if any column(s) to the left of the indicated column have been dropped during the lifetime of the table.
 
 [#id](#id-1.11.7.22.23.9)
 

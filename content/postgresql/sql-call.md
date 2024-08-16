@@ -22,11 +22,11 @@ If the procedure has any output parameters, then a result row will be returned, 
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of the procedure.
 
-* *`argument`*
+- _`argument`_
 
   An argument expression for the procedure call.
 

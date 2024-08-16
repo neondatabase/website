@@ -20,7 +20,7 @@ CREATE OPERATOR name (
 
 ## Description
 
-`CREATE OPERATOR` defines a new operator, *`name`*. The user who defines an operator becomes its owner. If a schema name is given then the operator is created in the specified schema. Otherwise it is created in the current schema.
+`CREATE OPERATOR` defines a new operator, _`name`_. The user who defines an operator becomes its owner. If a schema name is given then the operator is created in the specified schema. Otherwise it is created in the current schema.
 
 The operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) characters from the following list:
 
@@ -28,19 +28,19 @@ The operator name is a sequence of up to `NAMEDATALEN`-1 (63 by default) charact
 
 There are a few restrictions on your choice of name:
 
-* `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
+- `--` and `/*` cannot appear anywhere in an operator name, since they will be taken as the start of a comment.
 
-* A multicharacter operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
+- A multicharacter operator name cannot end in `+` or `-`, unless the name also contains at least one of these characters:
 
   ``\~ ! @ # % ^ & | \` ?``
 
   For example, `@-` is an allowed operator name, but `*-` is not. This restriction allows PostgreSQL to parse SQL-compliant commands without requiring spaces between tokens.
 
-* The use of `=>` as an operator name is deprecated. It may be disallowed altogether in a future release.
+- The use of `=>` as an operator name is deprecated. It may be disallowed altogether in a future release.
 
 The operator `!=` is mapped to `<>` on input, so these two names are always equivalent.
 
-For binary operators, both `LEFTARG` and `RIGHTARG` must be defined. For prefix operators only `RIGHTARG` should be defined. The *`function_name`* function must have been previously defined using `CREATE FUNCTION` and must be defined to accept the correct number of arguments (either one or two) of the indicated types.
+For binary operators, both `LEFTARG` and `RIGHTARG` must be defined. For prefix operators only `RIGHTARG` should be defined. The _`function_name`_ function must have been previously defined using `CREATE FUNCTION` and must be defined to accept the correct number of arguments (either one or two) of the indicated types.
 
 In the syntax of `CREATE OPERATOR`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
 
@@ -52,47 +52,47 @@ To be able to create an operator, you must have `USAGE` privilege on the argumen
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
-  The name of the operator to be defined. See above for allowable characters. The name can be schema-qualified, for example `CREATE OPERATOR myschema.+ (...)`. If not, then the operator is created in the current schema. Two operators in the same schema can have the same name if they operate on different data types. This is called *overloading*.
+  The name of the operator to be defined. See above for allowable characters. The name can be schema-qualified, for example `CREATE OPERATOR myschema.+ (...)`. If not, then the operator is created in the current schema. Two operators in the same schema can have the same name if they operate on different data types. This is called _overloading_.
 
-* *`function_name`*
+- _`function_name`_
 
   The function used to implement this operator.
 
-* *`left_type`*
+- _`left_type`_
 
   The data type of the operator's left operand, if any. This option would be omitted for a prefix operator.
 
-* *`right_type`*
+- _`right_type`_
 
   The data type of the operator's right operand.
 
-* *`com_op`*
+- _`com_op`_
 
   The commutator of this operator.
 
-* *`neg_op`*
+- _`neg_op`_
 
   The negator of this operator.
 
-* *`res_proc`*
+- _`res_proc`_
 
   The restriction selectivity estimator function for this operator.
 
-* *`join_proc`*
+- _`join_proc`_
 
   The join selectivity estimator function for this operator.
 
-* `HASHES`
+- `HASHES`
 
   Indicates this operator can support a hash join.
 
-* `MERGES`
+- `MERGES`
 
   Indicates this operator can support a merge join.
 
-To give a schema-qualified operator name in *`com_op`* or the other optional arguments, use the `OPERATOR()` syntax, for example:
+To give a schema-qualified operator name in _`com_op`_ or the other optional arguments, use the `OPERATOR()` syntax, for example:
 
 ```
 COMMUTATOR = OPERATOR(myschema.===) ,

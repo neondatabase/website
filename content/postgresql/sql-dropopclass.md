@@ -22,23 +22,23 @@ DROP OPERATOR CLASS [ IF EXISTS ] name USING index_method [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the operator class does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing operator class.
 
-* *`index_method`*
+- _`index_method`_
 
   The name of the index access method the operator class is for.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the operator class (such as indexes), and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the operator class if any objects depend on it. This is the default.
 

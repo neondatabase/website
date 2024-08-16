@@ -2,15 +2,13 @@
 
 ## 38.12. User-Defined Aggregates [#](#XAGGR)
 
-  * [38.12.1. Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
-  * [38.12.2. Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
-  * [38.12.3. Ordered-Set Aggregates](xaggr#XAGGR-ORDERED-SET-AGGREGATES)
-  * [38.12.4. Partial Aggregation](xaggr#XAGGR-PARTIAL-AGGREGATES)
-  * [38.12.5. Support Functions for Aggregates](xaggr#XAGGR-SUPPORT-FUNCTIONS)
+- [38.12.1. Moving-Aggregate Mode](xaggr#XAGGR-MOVING-AGGREGATES)
+- [38.12.2. Polymorphic and Variadic Aggregates](xaggr#XAGGR-POLYMORPHIC-AGGREGATES)
+- [38.12.3. Ordered-Set Aggregates](xaggr#XAGGR-ORDERED-SET-AGGREGATES)
+- [38.12.4. Partial Aggregation](xaggr#XAGGR-PARTIAL-AGGREGATES)
+- [38.12.5. Support Functions for Aggregates](xaggr#XAGGR-SUPPORT-FUNCTIONS)
 
-
-
-Aggregate functions in PostgreSQL are defined in terms of *state values* and *state transition functions*. That is, an aggregate operates using a state value that is updated as each successive input row is processed. To define a new aggregate function, one selects a data type for the state value, an initial value for the state, and a state transition function. The state transition function takes the previous state value and the aggregate's input value(s) for the current row, and returns a new state value. A *final function* can also be specified, in case the desired result of the aggregate is different from the data that needs to be kept in the running state value. The final function takes the ending state value and returns whatever is wanted as the aggregate result. In principle, the transition and final functions are just ordinary functions that could also be used outside the context of the aggregate. (In practice, it's often helpful for performance reasons to create specialized transition functions that can only work when called as part of an aggregate.)
+Aggregate functions in PostgreSQL are defined in terms of _state values_ and _state transition functions_. That is, an aggregate operates using a state value that is updated as each successive input row is processed. To define a new aggregate function, one selects a data type for the state value, an initial value for the state, and a state transition function. The state transition function takes the previous state value and the aggregate's input value(s) for the current row, and returns a new state value. A _final function_ can also be specified, in case the desired result of the aggregate is different from the data that needs to be kept in the running state value. The final function takes the ending state value and returns whatever is wanted as the aggregate result. In principle, the transition and final functions are just ordinary functions that could also be used outside the context of the aggregate. (In practice, it's often helpful for performance reasons to create specialized transition functions that can only work when called as part of an aggregate.)
 
 Thus, in addition to the argument and result data types seen by a user of the aggregate, there is an internal state-value data type that might be different from both the argument and result types.
 
@@ -65,9 +63,7 @@ For further details see the [CREATE AGGREGATE](sql-createaggregate) command.
 
 ### 38.12.1. Moving-Aggregate Mode [#](#XAGGR-MOVING-AGGREGATES)
 
-
-
-Aggregate functions can optionally support *moving-aggregate mode*, which allows substantially faster execution of aggregate functions within windows with moving frame starting points. (See [Section 3.5](tutorial-window) and [Section 4.2.8](sql-expressions#SYNTAX-WINDOW-FUNCTIONS) for information about use of aggregate functions as window functions.) The basic idea is that in addition to a normal “forward” transition function, the aggregate provides an *inverse transition function*, which allows rows to be removed from the aggregate's running state value when they exit the window frame. For example a `sum` aggregate, which uses addition as the forward transition function, would use subtraction as the inverse transition function. Without an inverse transition function, the window function mechanism must recalculate the aggregate from scratch each time the frame starting point moves, resulting in run time proportional to the number of input rows times the average frame length. With an inverse transition function, the run time is only proportional to the number of input rows.
+Aggregate functions can optionally support _moving-aggregate mode_, which allows substantially faster execution of aggregate functions within windows with moving frame starting points. (See [Section 3.5](tutorial-window) and [Section 4.2.8](sql-expressions#SYNTAX-WINDOW-FUNCTIONS) for information about use of aggregate functions as window functions.) The basic idea is that in addition to a normal “forward” transition function, the aggregate provides an _inverse transition function_, which allows rows to be removed from the aggregate's running state value when they exit the window frame. For example a `sum` aggregate, which uses addition as the forward transition function, would use subtraction as the inverse transition function. Without an inverse transition function, the window function mechanism must recalculate the aggregate from scratch each time the frame starting point moves, resulting in run time proportional to the number of input rows times the average frame length. With an inverse transition function, the run time is only proportional to the number of input rows.
 
 The inverse transition function is passed the current state value and the aggregate input value(s) for the earliest row included in the current state. It must reconstruct what the state value would have been if the given input row had never been aggregated, but only the rows following it. This sometimes requires that the forward transition function keep more state than is needed for plain aggregation mode. Therefore, the moving-aggregate mode uses a completely separate implementation from the plain mode: it has its own state data type, its own forward transition function, and its own final function if needed. These can be the same as the plain mode's data type and functions, if there is no need for extra state.
 
@@ -117,8 +113,6 @@ This query returns `0` as its second result, rather than the expected answer of 
 [#id](#XAGGR-POLYMORPHIC-AGGREGATES)
 
 ### 38.12.2. Polymorphic and Variadic Aggregates [#](#XAGGR-POLYMORPHIC-AGGREGATES)
-
-
 
 Aggregate functions can use polymorphic state transition functions or final functions, so that the same functions can be used to implement multiple aggregates. See [Section 38.2.5](extend-type-system#EXTEND-TYPES-POLYMORPHIC) for an explanation of polymorphic functions. Going a step further, the aggregate function itself can be specified with polymorphic input type(s) and state type, allowing a single aggregate definition to serve for multiple input data types. Here is an example of a polymorphic aggregate:
 
@@ -200,9 +194,7 @@ For the same reason, it's wise to think twice before creating aggregate function
 
 ### 38.12.3. Ordered-Set Aggregates [#](#XAGGR-ORDERED-SET-AGGREGATES)
 
-
-
-The aggregates we have been describing so far are “normal” aggregates. PostgreSQL also supports *ordered-set aggregates*, which differ from normal aggregates in two key ways. First, in addition to ordinary aggregated arguments that are evaluated once per input row, an ordered-set aggregate can have “direct” arguments that are evaluated only once per aggregation operation. Second, the syntax for the ordinary aggregated arguments specifies a sort ordering for them explicitly. An ordered-set aggregate is usually used to implement a computation that depends on a specific row ordering, for instance rank or percentile, so that the sort ordering is a required aspect of any call. For example, the built-in definition of `percentile_disc` is equivalent to:
+The aggregates we have been describing so far are “normal” aggregates. PostgreSQL also supports _ordered-set aggregates_, which differ from normal aggregates in two key ways. First, in addition to ordinary aggregated arguments that are evaluated once per input row, an ordered-set aggregate can have “direct” arguments that are evaluated only once per aggregation operation. Second, the syntax for the ordinary aggregated arguments specifies a sort ordering for them explicitly. An ordered-set aggregate is usually used to implement a computation that depends on a specific row ordering, for instance rank or percentile, so that the sort ordering is a required aspect of any call. For example, the built-in definition of `percentile_disc` is equivalent to:
 
 ```
 CREATE FUNCTION ordered_set_transition(internal, anyelement)
@@ -230,7 +222,7 @@ SELECT percentile_disc(0.5) WITHIN GROUP (ORDER BY income) FROM households;
 
 Here, `0.5` is a direct argument; it would make no sense for the percentile fraction to be a value varying across rows.
 
-Unlike the case for normal aggregates, the sorting of input rows for an ordered-set aggregate is *not* done behind the scenes, but is the responsibility of the aggregate's support functions. The typical implementation approach is to keep a reference to a “tuplesort” object in the aggregate's state value, feed the incoming rows into that object, and then complete the sorting and read out the data in the final function. This design allows the final function to perform special operations such as injecting additional “hypothetical” rows into the data to be sorted. While normal aggregates can often be implemented with support functions written in PL/pgSQL or another PL language, ordered-set aggregates generally have to be written in C, since their state values aren't definable as any SQL data type. (In the above example, notice that the state value is declared as type `internal` — this is typical.) Also, because the final function performs the sort, it is not possible to continue adding input rows by executing the transition function again later. This means the final function is not `READ_ONLY`; it must be declared in [`CREATE AGGREGATE`](sql-createaggregate) as `READ_WRITE`, or as `SHAREABLE` if it's possible for additional final-function calls to make use of the already-sorted state.
+Unlike the case for normal aggregates, the sorting of input rows for an ordered-set aggregate is _not_ done behind the scenes, but is the responsibility of the aggregate's support functions. The typical implementation approach is to keep a reference to a “tuplesort” object in the aggregate's state value, feed the incoming rows into that object, and then complete the sorting and read out the data in the final function. This design allows the final function to perform special operations such as injecting additional “hypothetical” rows into the data to be sorted. While normal aggregates can often be implemented with support functions written in PL/pgSQL or another PL language, ordered-set aggregates generally have to be written in C, since their state values aren't definable as any SQL data type. (In the above example, notice that the state value is declared as type `internal` — this is typical.) Also, because the final function performs the sort, it is not possible to continue adding input rows by executing the transition function again later. This means the final function is not `READ_ONLY`; it must be declared in [`CREATE AGGREGATE`](sql-createaggregate) as `READ_WRITE`, or as `SHAREABLE` if it's possible for additional final-function calls to make use of the already-sorted state.
 
 The state transition function for an ordered-set aggregate receives the current state value plus the aggregated input values for each row, and returns the updated state value. This is the same definition as for normal aggregates, but note that the direct arguments (if any) are not provided. The final function receives the last state value, the values of the direct arguments if any, and (if `finalfunc_extra` is specified) null values corresponding to the aggregated input(s). As with normal aggregates, `finalfunc_extra` is only really useful if the aggregate is polymorphic; then the extra dummy argument(s) are needed to connect the final function's result type to the aggregate's input type(s).
 
@@ -240,11 +232,9 @@ Currently, ordered-set aggregates cannot be used as window functions, and theref
 
 ### 38.12.4. Partial Aggregation [#](#XAGGR-PARTIAL-AGGREGATES)
 
+Optionally, an aggregate function can support _partial aggregation_. The idea of partial aggregation is to run the aggregate's state transition function over different subsets of the input data independently, and then to combine the state values resulting from those subsets to produce the same state value that would have resulted from scanning all the input in a single operation. This mode can be used for parallel aggregation by having different worker processes scan different portions of a table. Each worker produces a partial state value, and at the end those state values are combined to produce a final state value. (In the future this mode might also be used for purposes such as combining aggregations over local and remote tables; but that is not implemented yet.)
 
-
-Optionally, an aggregate function can support *partial aggregation*. The idea of partial aggregation is to run the aggregate's state transition function over different subsets of the input data independently, and then to combine the state values resulting from those subsets to produce the same state value that would have resulted from scanning all the input in a single operation. This mode can be used for parallel aggregation by having different worker processes scan different portions of a table. Each worker produces a partial state value, and at the end those state values are combined to produce a final state value. (In the future this mode might also be used for purposes such as combining aggregations over local and remote tables; but that is not implemented yet.)
-
-To support partial aggregation, the aggregate definition must provide a *combine function*, which takes two values of the aggregate's state type (representing the results of aggregating over two subsets of the input rows) and produces a new value of the state type, representing what the state would have been after aggregating over the combination of those sets of rows. It is unspecified what the relative order of the input rows from the two sets would have been. This means that it's usually impossible to define a useful combine function for aggregates that are sensitive to input row order.
+To support partial aggregation, the aggregate definition must provide a _combine function_, which takes two values of the aggregate's state type (representing the results of aggregating over two subsets of the input rows) and produces a new value of the state type, representing what the state would have been after aggregating over the combination of those sets of rows. It is unspecified what the relative order of the input rows from the two sets would have been. This means that it's usually impossible to define a useful combine function for aggregates that are sensitive to input row order.
 
 As simple examples, `MAX` and `MIN` aggregates can be made to support partial aggregation by specifying the combine function as the same greater-of-two or lesser-of-two comparison function that is used as their transition function. `SUM` aggregates just need an addition function as combine function. (Again, this is the same as their transition function, unless the state value is wider than the input data type.)
 
@@ -252,7 +242,7 @@ The combine function is treated much like a transition function that happens to 
 
 If the aggregate's state type is declared as `internal`, it is the combine function's responsibility that its result is allocated in the correct memory context for aggregate state values. This means in particular that when the first input is `NULL` it's invalid to simply return the second input, as that value will be in the wrong context and will not have sufficient lifespan.
 
-When the aggregate's state type is declared as `internal`, it is usually also appropriate for the aggregate definition to provide a *serialization function* and a *deserialization function*, which allow such a state value to be copied from one process to another. Without these functions, parallel aggregation cannot be performed, and future applications such as local/remote aggregation will probably not work either.
+When the aggregate's state type is declared as `internal`, it is usually also appropriate for the aggregate definition to provide a _serialization function_ and a _deserialization function_, which allow such a state value to be copied from one process to another. Without these functions, parallel aggregation cannot be performed, and future applications such as local/remote aggregation will probably not work either.
 
 A serialization function must take a single argument of type `internal` and return a result of type `bytea`, which represents the state value packaged up into a flat blob of bytes. Conversely, a deserialization function reverses that conversion. It must take two arguments of types `bytea` and `internal`, and return a result of type `internal`. (The second argument is unused and is always zero, but it is required for type-safety reasons.) The result of the deserialization function should simply be allocated in the current memory context, as unlike the combine function's result, it is not long-lived.
 
@@ -261,8 +251,6 @@ Worth noting also is that for an aggregate to be executed in parallel, the aggre
 [#id](#XAGGR-SUPPORT-FUNCTIONS)
 
 ### 38.12.5. Support Functions for Aggregates [#](#XAGGR-SUPPORT-FUNCTIONS)
-
-
 
 A function written in C can detect that it is being called as an aggregate support function by calling `AggCheckCallContext`, for example:
 

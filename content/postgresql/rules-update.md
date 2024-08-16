@@ -2,22 +2,20 @@
 
 ## 41.4. Rules on `INSERT`, `UPDATE`, and `DELETE` [#](#RULES-UPDATE)
 
-  * [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
-  * [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
-
-
+- [41.4.1. How Update Rules Work](rules-update#RULES-UPDATE-HOW)
+- [41.4.2. Cooperation with Views](rules-update#RULES-UPDATE-VIEWS)
 
 Rules that are defined on `INSERT`, `UPDATE`, and `DELETE` are significantly different from the view rules described in the previous sections. First, their `CREATE RULE` command allows more:
 
-* They are allowed to have no action.
+- They are allowed to have no action.
 
-* They can have multiple actions.
+- They can have multiple actions.
 
-* They can be `INSTEAD` or `ALSO` (the default).
+- They can be `INSTEAD` or `ALSO` (the default).
 
-* The pseudorelations `NEW` and `OLD` become useful.
+- The pseudorelations `NEW` and `OLD` become useful.
 
-* They can have rule qualifications.
+- They can have rule qualifications.
 
 Second, they don't modify the query tree in place. Instead they create zero or more new query trees and can throw away the original one.
 
@@ -39,7 +37,7 @@ CREATE [ OR REPLACE ] RULE name AS ON event
     DO [ ALSO | INSTEAD ] { NOTHING | command | ( command ; command ... ) }
 ```
 
-in mind. In the following, *update rules* means rules that are defined on `INSERT`, `UPDATE`, or `DELETE`.
+in mind. In the following, _update rules_ means rules that are defined on `INSERT`, `UPDATE`, or `DELETE`.
 
 Update rules get applied by the rule system when the result relation and the command type of a query tree are equal to the object and event given in the `CREATE RULE` command. For update rules, the rule system creates a list of query trees. Initially the query-tree list is empty. There can be zero (`NOTHING` key word), one, or multiple actions. To simplify, we will look at a rule with one action. This rule can have a qualification or not and it can be `INSTEAD` or `ALSO` (the default).
 
@@ -47,15 +45,15 @@ What is a rule qualification? It is a restriction that tells when the actions of
 
 So we have three cases that produce the following query trees for a one-action rule.
 
-* No qualification, with either `ALSO` or `INSTEAD`
+- No qualification, with either `ALSO` or `INSTEAD`
 
   the query tree from the rule action with the original query tree's qualification added
 
-* Qualification given and `ALSO`
+- Qualification given and `ALSO`
 
   the query tree from the rule action with the rule qualification and the original query tree's qualification added
 
-* Qualification given and `INSTEAD`
+- Qualification given and `INSTEAD`
 
   the query tree from the rule action with the rule qualification and the original query tree's qualification; and the original query tree with the negated rule qualification added
 
@@ -255,8 +253,6 @@ Here we can see why it is important that the original query tree is executed las
 [#id](#RULES-UPDATE-VIEWS)
 
 ### 41.4.2. Cooperation with Views [#](#RULES-UPDATE-VIEWS)
-
-
 
 A simple way to protect view relations from the mentioned possibility that someone can try to run `INSERT`, `UPDATE`, or `DELETE` on them is to let those query trees get thrown away. So we could create the rules:
 

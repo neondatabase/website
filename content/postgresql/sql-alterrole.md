@@ -57,33 +57,33 @@ Superusers can change anyone's session defaults. Roles having `CREATEROLE` privi
 
 ## Parameters
 
-* *`name`* [#](#SQL-ALTERROLE-PARAMS-NAME)
+- _`name`_ [#](#SQL-ALTERROLE-PARAMS-NAME)
 
   The name of the role whose attributes are to be altered.
 
-* `CURRENT_ROLE``CURRENT_USER` [#](#SQL-ALTERROLE-PARAMS-CURRENT-ROLE)
+- `CURRENT_ROLE``CURRENT_USER` [#](#SQL-ALTERROLE-PARAMS-CURRENT-ROLE)
 
   Alter the current user instead of an explicitly identified role.
 
-* `SESSION_USER` [#](#SQL-ALTERROLE-PARAMS-SESSION-USER)
+- `SESSION_USER` [#](#SQL-ALTERROLE-PARAMS-SESSION-USER)
 
   Alter the current session user instead of an explicitly identified role.
 
-* `SUPERUSER``NOSUPERUSER``CREATEDB``NOCREATEDB``CREATEROLE``NOCREATEROLE``INHERIT``NOINHERIT``LOGIN``NOLOGIN``REPLICATION``NOREPLICATION``BYPASSRLS``NOBYPASSRLS``CONNECTION LIMIT` *`connlimit`*\[ `ENCRYPTED` ] `PASSWORD` '*`password`*'`PASSWORD NULL``VALID UNTIL` '*`timestamp`*' [#](#SQL-ALTERROLE-PARAMS-SUPERUSER)
+- `SUPERUSER``NOSUPERUSER``CREATEDB``NOCREATEDB``CREATEROLE``NOCREATEROLE``INHERIT``NOINHERIT``LOGIN``NOLOGIN``REPLICATION``NOREPLICATION``BYPASSRLS``NOBYPASSRLS``CONNECTION LIMIT` _`connlimit`_\[ `ENCRYPTED` ] `PASSWORD` '_`password`_'`PASSWORD NULL``VALID UNTIL` '_`timestamp`_' [#](#SQL-ALTERROLE-PARAMS-SUPERUSER)
 
   These clauses alter attributes originally set by [`CREATE ROLE`](sql-createrole). For more information, see the `CREATE ROLE` reference page.
 
-* *`new_name`* [#](#SQL-ALTERROLE-PARAMS-NEW-NAME)
+- _`new_name`_ [#](#SQL-ALTERROLE-PARAMS-NEW-NAME)
 
   The new name of the role.
 
-* *`database_name`* [#](#SQL-ALTERROLE-PARAMS-DATABASE-NAME)
+- _`database_name`_ [#](#SQL-ALTERROLE-PARAMS-DATABASE-NAME)
 
   The name of the database the configuration variable should be set in.
 
-* *`configuration_parameter`**`value`* [#](#SQL-ALTERROLE-PARAMS-CONFIGURATION-PARAMETER)
+- _`configuration_parameter`\*\*`value`_ [#](#SQL-ALTERROLE-PARAMS-CONFIGURATION-PARAMETER)
 
-  Set this role's session default for the specified configuration parameter to the given value. If *`value`* is `DEFAULT` or, equivalently, `RESET` is used, the role-specific variable setting is removed, so the role will inherit the system-wide default setting in new sessions. Use `RESET ALL` to clear all role-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the role-specific value. If `IN DATABASE` is specified, the configuration parameter is set or removed for the given role and database only.
+  Set this role's session default for the specified configuration parameter to the given value. If _`value`_ is `DEFAULT` or, equivalently, `RESET` is used, the role-specific variable setting is removed, so the role will inherit the system-wide default setting in new sessions. Use `RESET ALL` to clear all role-specific settings. `SET FROM CURRENT` saves the session's current value of the parameter as the role-specific value. If `IN DATABASE` is specified, the configuration parameter is set or removed for the given role and database only.
 
   Role-specific variable settings take effect only at login; [`SET ROLE`](sql-set-role) and [`SET SESSION AUTHORIZATION`](sql-set-session-authorization) do not process role-specific variable settings.
 
@@ -135,13 +135,13 @@ Give a role the ability to manage other roles and create new databases:
 ALTER ROLE miriam CREATEROLE CREATEDB;
 ```
 
-Give a role a non-default setting of the [maintenance\_work\_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) parameter:
+Give a role a non-default setting of the [maintenance_work_mem](runtime-config-resource#GUC-MAINTENANCE-WORK-MEM) parameter:
 
 ```
 ALTER ROLE worker_bee SET maintenance_work_mem = 100000;
 ```
 
-Give a role a non-default, database-specific setting of the [client\_min\_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) parameter:
+Give a role a non-default, database-specific setting of the [client_min_messages](runtime-config-client#GUC-CLIENT-MIN-MESSAGES) parameter:
 
 ```
 ALTER ROLE fred IN DATABASE devel SET client_min_messages = DEBUG;

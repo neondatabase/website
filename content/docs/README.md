@@ -1,6 +1,7 @@
 ---
-updatedOn: '2024-02-20T13:24:36.612Z'
+updatedOn: '2024-06-30T18:09:08.264Z'
 ---
+
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -158,10 +159,10 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
+
   - Single line highlight
 
     ````md
-
     ```c++ {1}
     #include <iostream>
 
@@ -170,13 +171,11 @@ You can use fenced code blocks with three backticks (```) on the lines before an
         return 0;
     }
     ```
-
     ````
 
   - Multiple lines
 
     ````md
-
     ```c++ {1,2,5}
     #include <iostream>
 
@@ -185,13 +184,11 @@ You can use fenced code blocks with three backticks (```) on the lines before an
         return 0;
     }
     ```
-
     ````
 
   - Range of code lines
 
     ````md
-
     ```c++ {1-3,5}
     #include <iostream>
 
@@ -200,32 +197,31 @@ You can use fenced code blocks with three backticks (```) on the lines before an
         return 0;
     }
     ```
-
     ````
 
 - use `[!code highlight]` to highlight a line.
 
   ```ts
   export function foo() {
-    console.log('Highlighted') // [!code highlight]
+    console.log('Highlighted'); // [!code highlight]
   }
   ```
 
 - use `[!code word:xxx]` to highlight a word.
 
   ```ts
-  export function foo() { // [!code word:Hello]
-    const msg = 'Hello World'
-    console.log(msg) // prints Hello World
+  export function foo() {
+    // [!code word:Hello]
+    const msg = 'Hello World';
+    console.log(msg); // prints Hello World
   }
   ```
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
-  
+
   Example:
 
   ````md
-
   ```c++ showLineNumbers
   #include <iostream>
 
@@ -234,20 +230,17 @@ You can use fenced code blocks with three backticks (```) on the lines before an
       return 0;
   }
   ```
-
   ````
 
 - `shouldWrap` - flag to enable code wrapping in the code block.
 
   Example:
 
-    ````md
-
-    ```powershell shouldWrap
-    powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
-    ```
-
-    ````
+  ````md
+  ```powershell shouldWrap
+  powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+  ```
+  ````
 
 ## Code Tabs
 
@@ -313,7 +306,6 @@ To display the tabs with content as image, video, code block, .etc, wrap the `Ta
 <TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
-
 ```bash showLineNumbers
 - name: <db_name>
   kind: postgres
@@ -328,7 +320,6 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
-
 
 Apply the Metadata by running:
 
@@ -400,9 +391,7 @@ Example:
 This is a simple block with title, description text and one CTA button that accomplish certain actions.
 
 ```md
-
 <CTA />
-
 ```
 
 Check the example for default data of CTA block
@@ -417,9 +406,7 @@ Check the example for default data of CTA block
 To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
 
 ```md
-
-<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
-
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
 
 ## Images
@@ -431,12 +418,12 @@ Example file structure:
 ```md
 ├── public
 │ ├── docs
-│   ├── conceptual-guides
-│   ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│ │ ├── conceptual-guides
+│ │ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
-│   ├── conceptual-guides
-│   ├── architecture-overview.md
+│ │ ├── conceptual-guides
+│ │ ├── architecture-overview.md
 ```
 
 To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
@@ -448,7 +435,7 @@ To display images using Markdown syntax, use the following syntax: `![alt text](
 If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
 
 ```md
-![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png "no-border")
+![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
@@ -460,10 +447,10 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/* other content here */}
+[comment]: <> (other content here)
 
 <DefinitionList>
-{/* required new line */}
+[comment]: <> (required new line)
 Scenario executor
 : First definition
 : Second definition
@@ -480,10 +467,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/* other content here */}
+[comment]: <> (other content here)
 </DefinitionList>
 
-{/* other content here */}
+[comment]: <> (other content here)
 ```
 
 ### Acceptable markup for term
@@ -549,7 +536,6 @@ Insert a shared markdown and render inline.
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
-
 ```
 
 ## Contributing

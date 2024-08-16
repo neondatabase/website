@@ -55,39 +55,39 @@ The label provider determines whether a given label is valid and whether it is p
 
 ## Parameters
 
-* *`object_name`**`table_name.column_name`**`aggregate_name`**`function_name`**`procedure_name`**`routine_name`*
+- _`object_name`**`table_name.column_name`**`aggregate_name`**`function_name`**`procedure_name`\*\*`routine_name`_
 
   The name of the object to be labeled. Names of objects that reside in schemas (tables, functions, etc.) can be schema-qualified.
 
-* *`provider`*
+- _`provider`_
 
   The name of the provider with which this label is to be associated. The named provider must be loaded and must consent to the proposed labeling operation. If exactly one provider is loaded, the provider name may be omitted for brevity.
 
-* *`argmode`*
+- _`argmode`_
 
   The mode of a function, procedure, or aggregate argument: `IN`, `OUT`, `INOUT`, or `VARIADIC`. If omitted, the default is `IN`. Note that `SECURITY LABEL` does not actually pay any attention to `OUT` arguments, since only the input arguments are needed to determine the function's identity. So it is sufficient to list the `IN`, `INOUT`, and `VARIADIC` arguments.
 
-* *`argname`*
+- _`argname`_
 
   The name of a function, procedure, or aggregate argument. Note that `SECURITY LABEL` does not actually pay any attention to argument names, since only the argument data types are needed to determine the function's identity.
 
-* *`argtype`*
+- _`argtype`_
 
   The data type of a function, procedure, or aggregate argument.
 
-* *`large_object_oid`*
+- _`large_object_oid`_
 
   The OID of the large object.
 
-* `PROCEDURAL`
+- `PROCEDURAL`
 
   This is a noise word.
 
-* *`string_literal`*
+- _`string_literal`_
 
   The new setting of the security label, written as a string literal.
 
-* `NULL`
+- `NULL`
 
   Write `NULL` to drop the security label.
 

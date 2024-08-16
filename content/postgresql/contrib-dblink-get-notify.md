@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-GET-NOTIFY)
 
-## dblink\_get\_notify
+## dblink_get_notify
 
-dblink\_get\_notify — retrieve async notifications on a connection
+dblink_get_notify — retrieve async notifications on a connection
 
 ## Synopsis
 
@@ -22,7 +22,7 @@ dblink_get_notify(text connname) returns setof (notify_name text, be_pid int, ex
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   The name of a named connection to get notifications on.
 

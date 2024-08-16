@@ -1,11 +1,12 @@
 ---
 title: Schema migration with Neon Postgres and Sequelize
-subtitle: Set up Neon Postgres and run migrations for your Javascript project using Sequelize ORM
+subtitle: Set up Neon Postgres and run migrations for your Javascript project using
+  Sequelize ORM
 enableTableOfContents: true
-updatedOn: '2024-03-06T10:15:00.000Z'
+updatedOn: '2024-08-07T21:36:52.665Z'
 ---
 
-[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project. 
+[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.
 
 We'll create a Node.js application, configure `Sequelize`, and show how to set up and run migrations with `Sequelize`.
 
@@ -14,24 +15,24 @@ We'll create a Node.js application, configure `Sequelize`, and show how to set u
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally. 
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
 ## Setting up your Neon database
 
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
-2. Select an existing project or click the `New Project` button to create a new one. 
+2. Select an existing project or click the `New Project` button to create a new one.
 
 ### Retrieve your Neon database connection string
 
 Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Keep your connection string handy for later use. 
+Keep your connection string handy for later use.
 
 ## Setting Up the Node application
 
@@ -41,7 +42,7 @@ We'll create a simple catalog with API endpoints that query the database for aut
 
 ```bash
 mkdir neon-sequelize-guide && cd neon-sequelize-guide
-npm init -y && touch .env index.js 
+npm init -y && touch .env index.js
 npm install express dotenv
 ```
 
@@ -67,7 +68,7 @@ Run the following command to initialize the `sequelize` configuration:
 npx sequelize init
 ```
 
-This command creates `config`, `migrations`, `models`, and `seeders` directories at the project root. 
+This command creates `config`, `migrations`, `models`, and `seeders` directories at the project root.
 
 The `config` directory contains the `config.json` file, which holds the database configuration. We want to have the database URL read as an environment variable, so we replace it with a `config.js` file. Create a `config.js` file in your `config/` directory and add the following code:
 
@@ -81,12 +82,12 @@ module.exports = {
   development: {
     url: process.env.DATABASE_URL,
     dialect: 'postgres',
-    dialectOptions: { ssl: { require: true } }
-  }
+    dialectOptions: { ssl: { require: true } },
+  },
 };
 ```
 
-To make the `sequelize` CLI aware of the path to the new configuration file, we need to create a `.sequelizerc` file at the project root and add the following code: 
+To make the `sequelize` CLI aware of the path to the new configuration file, we need to create a `.sequelizerc` file at the project root and add the following code:
 
 ```javascript
 // .sequelizerc
@@ -94,7 +95,7 @@ To make the `sequelize` CLI aware of the path to the new configuration file, we 
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('config', 'config.js')
+  config: path.resolve('config', 'config.js'),
 };
 ```
 
@@ -107,7 +108,7 @@ npx sequelize model:generate --name Author --attributes name:string,bio:string
 npx sequelize model:generate --name Book --attributes title:string
 ```
 
-Sequelize creates a new file for each model in the `models/` directory and a corresponding migration file in the `migrations/` directory. Sequelize automatically adds an `id` field as the primary key for each model, and `createdAt` and `updatedAt` fields to track the creation and update times of each record. 
+Sequelize creates a new file for each model in the `models/` directory and a corresponding migration file in the `migrations/` directory. Sequelize automatically adds an `id` field as the primary key for each model, and `createdAt` and `updatedAt` fields to track the creation and update times of each record.
 
 We still need to define the relationships between the `Author` and `Book` models. Update the `book.js` file with the following code:
 
@@ -123,22 +124,25 @@ module.exports = (sequelize, DataTypes) => {
       Book.belongsTo(models.Author, {
         foreignKey: 'authorId',
         as: 'author',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       });
     }
   }
-  Book.init({
-    title: { type: DataTypes.STRING, allowNull: false },
-    authorId: { type: DataTypes.INTEGER, allowNull: false },
-  }, {
-    sequelize,
-    modelName: 'Book',
-  });
+  Book.init(
+    {
+      title: { type: DataTypes.STRING, allowNull: false },
+      authorId: { type: DataTypes.INTEGER, allowNull: false },
+    },
+    {
+      sequelize,
+      modelName: 'Book',
+    }
+  );
   return Book;
 };
 ```
 
-Sequelize does not automatically regenerate the migration files when you update the models. So, we need to manually update the migration files to add the foreign key constraint. 
+Sequelize does not automatically regenerate the migration files when you update the models. So, we need to manually update the migration files to add the foreign key constraint.
 
 Update the migration file corresponding to the `Book` model with the following code:
 
@@ -152,18 +156,18 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       authorId: {
         type: Sequelize.INTEGER,
@@ -171,13 +175,13 @@ module.exports = {
         references: {
           model: 'Authors',
           key: 'id',
-        }
-      }
+        },
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Books');
-  }
+  },
 };
 ```
 
@@ -187,7 +191,7 @@ Run the following command to apply the migrations and create the tables in the d
 npx sequelize db:migrate
 ```
 
-If `Sequlize` successfully connects to the database and runs the migrations, you should see a success message in the terminal. 
+If `Sequlize` successfully connects to the database and runs the migrations, you should see a success message in the terminal.
 
 ### Add sample data to the database
 
@@ -196,43 +200,46 @@ We'll add some sample data to the database using the `Sequelize` ORM. Create a n
 ```javascript
 // seed.js
 
-const { Sequelize, DataTypes } = require("sequelize");
-const { config } = require("dotenv");
+const { Sequelize, DataTypes } = require('sequelize');
+const { config } = require('dotenv');
 
 config();
 if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set");
+  throw new Error('DATABASE_URL is not set');
 }
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
     ssl: {
-      require: true
-    }
-  }
+      require: true,
+    },
+  },
 });
 
 const Author = require('./models/author')(sequelize, DataTypes);
 const Book = require('./models/book')(sequelize, DataTypes);
 
 const seedDatabase = async () => {
-  const author = await Author.create(
-    { name: 'J.K. Rowling', bio: 'The creator of the Harry Potter series' }
-  );
-  await Book.create({ title: 'Harry Potter and the Philosopher\'s Stone', authorId: author.id });
+  const author = await Author.create({
+    name: 'J.K. Rowling',
+    bio: 'The creator of the Harry Potter series',
+  });
+  await Book.create({ title: "Harry Potter and the Philosopher's Stone", authorId: author.id });
   await Book.create({ title: 'Harry Potter and the Chamber of Secrets', authorId: author.id });
 
-  const author2 = await Author.create(
-    { name: 'J.R.R. Tolkien', bio: 'The creator of Middle-earth and author of The Lord of the Rings.' }
-  );
+  const author2 = await Author.create({
+    name: 'J.R.R. Tolkien',
+    bio: 'The creator of Middle-earth and author of The Lord of the Rings.',
+  });
   await Book.create({ title: 'The Hobbit', authorId: author2.id });
   await Book.create({ title: 'The Fellowship of the Ring', authorId: author2.id });
   await Book.create({ title: 'The Two Towers', authorId: author2.id });
   await Book.create({ title: 'The Return of the King', authorId: author2.id });
 
-  const author3 = await Author.create(
-    { name: 'George R.R. Martin', bio: 'The author of the epic fantasy series A Song of Ice and Fire.' }
-  );
+  const author3 = await Author.create({
+    name: 'George R.R. Martin',
+    bio: 'The author of the epic fantasy series A Song of Ice and Fire.',
+  });
   await Book.create({ title: 'A Game of Thrones', authorId: author3.id });
   await Book.create({ title: 'A Clash of Kings', authorId: author3.id });
 
@@ -252,24 +259,24 @@ Sequelize will print logs to the terminal as it connects to the database and add
 
 ### Create API endpoints
 
-Now that the database is set up and populated with data, we can implement the API to query the authors and their books. We'll use [Express](https://expressjs.com/), which is a minimal web application framework for Node.js. 
+Now that the database is set up and populated with data, we can implement the API to query the authors and their books. We'll use [Express](https://expressjs.com/), which is a minimal web application framework for Node.js.
 
 Create an `index.js` file at the project root, and add the following code to set up your Express server:
 
 ```javascript
 // index.js
 
-const express = require("express");
-const { Sequelize, DataTypes } = require("sequelize");
-const { config } = require("dotenv");
+const express = require('express');
+const { Sequelize, DataTypes } = require('sequelize');
+const { config } = require('dotenv');
 
 config();
 if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set");
+  throw new Error('DATABASE_URL is not set');
 }
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: { ssl: { require: true } }
+  dialectOptions: { ssl: { require: true } },
 });
 
 // Set up the models
@@ -280,32 +287,32 @@ const Book = require('./models/book')(sequelize, DataTypes);
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/", async (req, res) => {
-  res.send("Hello World! This is a book catalog.");
+app.get('/', async (req, res) => {
+  res.send('Hello World! This is a book catalog.');
 });
 
-app.get("/authors", async (req, res) => {
+app.get('/authors', async (req, res) => {
   try {
     const authors = await Author.findAll();
     res.json(authors);
   } catch (error) {
-    console.error("Error fetching authors:", error);
-    res.status(500).send("Error fetching authors");
+    console.error('Error fetching authors:', error);
+    res.status(500).send('Error fetching authors');
   }
 });
 
-app.get("/books/:author_id", async (req, res) => {
+app.get('/books/:author_id', async (req, res) => {
   const authorId = parseInt(req.params.author_id);
   try {
     const books = await Book.findAll({
       where: {
-        authorId: authorId
-      }
+        authorId: authorId,
+      },
     });
     res.json(books);
   } catch (error) {
-    console.error("Error fetching books for author:", error);
-    res.status(500).send("Error fetching books for author");
+    console.error('Error fetching books for author:', error);
+    res.status(500).send('Error fetching books for author');
   }
 });
 
@@ -315,7 +322,7 @@ app.listen(port, () => {
 });
 ```
 
-This code sets up a simple API with two endpoints: `/authors` and `/books/:authorId`. The `/authors` endpoint returns a list of all the authors, and the `/books/:authorId` endpoint returns a list of books written by the specific author for the given `authorId`. 
+This code sets up a simple API with two endpoints: `/authors` and `/books/:authorId`. The `/authors` endpoint returns a list of all the authors, and the `/books/:authorId` endpoint returns a list of books written by the specific author for the given `authorId`.
 
 Run the application using the following command:
 
@@ -323,7 +330,7 @@ Run the application using the following command:
 node index.js
 ```
 
-This will start the server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check that the API works as expected. 
+This will start the server at `http://localhost:3000`. Navigate to `http://localhost:3000/authors` and `http://localhost:3000/books/1` in your browser to check that the API works as expected.
 
 ## Conclusion
 

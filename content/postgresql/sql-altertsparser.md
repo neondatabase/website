@@ -23,15 +23,15 @@ You must be a superuser to use `ALTER TEXT SEARCH PARSER`.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing text search parser.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the text search parser.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the text search parser.
 

@@ -2,44 +2,40 @@
 
 ## 5.6. Modifying Tables [#](#DDL-ALTER)
 
-  * [5.6.1. Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
-  * [5.6.2. Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
-  * [5.6.3. Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
-  * [5.6.4. Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)
-  * [5.6.5. Changing a Column's Default Value](ddl-alter#DDL-ALTER-COLUMN-DEFAULT)
-  * [5.6.6. Changing a Column's Data Type](ddl-alter#DDL-ALTER-COLUMN-TYPE)
-  * [5.6.7. Renaming a Column](ddl-alter#DDL-ALTER-RENAMING-COLUMN)
-  * [5.6.8. Renaming a Table](ddl-alter#DDL-ALTER-RENAMING-TABLE)
-
-
+- [5.6.1. Adding a Column](ddl-alter#DDL-ALTER-ADDING-A-COLUMN)
+- [5.6.2. Removing a Column](ddl-alter#DDL-ALTER-REMOVING-A-COLUMN)
+- [5.6.3. Adding a Constraint](ddl-alter#DDL-ALTER-ADDING-A-CONSTRAINT)
+- [5.6.4. Removing a Constraint](ddl-alter#DDL-ALTER-REMOVING-A-CONSTRAINT)
+- [5.6.5. Changing a Column's Default Value](ddl-alter#DDL-ALTER-COLUMN-DEFAULT)
+- [5.6.6. Changing a Column's Data Type](ddl-alter#DDL-ALTER-COLUMN-TYPE)
+- [5.6.7. Renaming a Column](ddl-alter#DDL-ALTER-RENAMING-COLUMN)
+- [5.6.8. Renaming a Table](ddl-alter#DDL-ALTER-RENAMING-TABLE)
 
 When you create a table and you realize that you made a mistake, or the requirements of the application change, you can drop the table and create it again. But this is not a convenient option if the table is already filled with data, or if the table is referenced by other database objects (for instance a foreign key constraint). Therefore PostgreSQL provides a family of commands to make modifications to existing tables. Note that this is conceptually distinct from altering the data contained in the table: here we are interested in altering the definition, or structure, of the table.
 
 You can:
 
-* Add columns
+- Add columns
 
-* Remove columns
+- Remove columns
 
-* Add constraints
+- Add constraints
 
-* Remove constraints
+- Remove constraints
 
-* Change default values
+- Change default values
 
-* Change column data types
+- Change column data types
 
-* Rename columns
+- Rename columns
 
-* Rename tables
+- Rename tables
 
 All these actions are performed using the [ALTER TABLE](sql-altertable) command, whose reference page contains details beyond those given here.
 
 [#id](#DDL-ALTER-ADDING-A-COLUMN)
 
 ### 5.6.1. Adding a Column [#](#DDL-ALTER-ADDING-A-COLUMN)
-
-
 
 To add a column, use a command like:
 
@@ -69,8 +65,6 @@ In fact all the options that can be applied to a column description in `CREATE T
 
 ### 5.6.2. Removing a Column [#](#DDL-ALTER-REMOVING-A-COLUMN)
 
-
-
 To remove a column, use a command like:
 
 ```
@@ -90,8 +84,6 @@ See [Section 5.14](ddl-depend) for a description of the general mechanism behin
 [#id](#DDL-ALTER-ADDING-A-CONSTRAINT)
 
 ### 5.6.3. Adding a Constraint [#](#DDL-ALTER-ADDING-A-CONSTRAINT)
-
-
 
 To add a constraint, the table constraint syntax is used. For example:
 
@@ -114,8 +106,6 @@ The constraint will be checked immediately, so the table data must satisfy the c
 [#id](#DDL-ALTER-REMOVING-A-CONSTRAINT)
 
 ### 5.6.4. Removing a Constraint [#](#DDL-ALTER-REMOVING-A-CONSTRAINT)
-
-
 
 To remove a constraint you need to know its name. If you gave it a name then that's easy. Otherwise the system assigned a generated name, which you need to find out. The psql command `\d tablename` can be helpful here; other interfaces might also provide a way to inspect table details. Then the command is:
 
@@ -141,8 +131,6 @@ ALTER TABLE products ALTER COLUMN product_no DROP NOT NULL;
 
 ### 5.6.5. Changing a Column's Default Value [#](#DDL-ALTER-COLUMN-DEFAULT)
 
-
-
 To set a new default for a column, use a command like:
 
 ```
@@ -165,8 +153,6 @@ This is effectively the same as setting the default to null. As a consequence, i
 
 ### 5.6.6. Changing a Column's Data Type [#](#DDL-ALTER-COLUMN-TYPE)
 
-
-
 To convert a column to a different data type, use a command like:
 
 ```
@@ -182,8 +168,6 @@ PostgreSQL will attempt to convert the column's default value (if any) to the ne
 
 ### 5.6.7. Renaming a Column [#](#DDL-ALTER-RENAMING-COLUMN)
 
-
-
 To rename a column:
 
 ```
@@ -194,8 +178,6 @@ ALTER TABLE products RENAME COLUMN product_no TO product_number;
 [#id](#DDL-ALTER-RENAMING-TABLE)
 
 ### 5.6.8. Renaming a Table [#](#DDL-ALTER-RENAMING-TABLE)
-
-
 
 To rename a table:
 

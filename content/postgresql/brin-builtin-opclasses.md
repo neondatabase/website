@@ -2,11 +2,11 @@
 
 ## 71.2. Built-in Operator Classes [#](#BRIN-BUILTIN-OPCLASSES)
 
-* [71.2.1. Operator Class Parameters](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
+- [71.2.1. Operator Class Parameters](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES--PARAMETERS)
 
 The core PostgreSQL distribution includes the BRIN operator classes shown in [Table 71.1](brin-builtin-opclasses#BRIN-BUILTIN-OPCLASSES-TABLE).
 
-The *minmax* operator classes store the minimum and the maximum values appearing in the indexed column within the range. The *inclusion* operator classes store a value which includes the values in the indexed column within the range. The *bloom* operator classes build a Bloom filter for all values in the range. The *minmax-multi* operator classes store multiple minimum and maximum values, representing values appearing in the indexed column within the range.
+The _minmax_ operator classes store the minimum and the maximum values appearing in the indexed column within the range. The _inclusion_ operator classes store a value which includes the values in the indexed column within the range. The _bloom_ operator classes build a Bloom filter for all values in the range. The _minmax-multi_ operator classes store multiple minimum and maximum values, representing values appearing in the indexed column within the range.
 
 [#id](#BRIN-BUILTIN-OPCLASSES-TABLE)
 
@@ -305,16 +305,16 @@ Some of the built-in operator classes allow specifying parameters affecting beha
 
 bloom operator classes accept these parameters:
 
-* `n_distinct_per_range`
+- `n_distinct_per_range`
 
   Defines the estimated number of distinct non-null values in the block range, used by BRIN bloom indexes for sizing of the Bloom filter. It behaves similarly to `n_distinct` option for [ALTER TABLE](sql-altertable). When set to a positive value, each block range is assumed to contain this number of distinct non-null values. When set to a negative value, which must be greater than or equal to -1, the number of distinct non-null values is assumed to grow linearly with the maximum possible number of tuples in the block range (about 290 rows per block). The default value is `-0.1`, and the minimum number of distinct non-null values is `16`.
 
-* `false_positive_rate`
+- `false_positive_rate`
 
   Defines the desired false positive rate used by BRIN bloom indexes for sizing of the Bloom filter. The values must be between 0.0001 and 0.25. The default value is 0.01, which is 1% false positive rate.
 
 minmax-multi operator classes accept these parameters:
 
-* `values_per_range`
+- `values_per_range`
 
   Defines the maximum number of values stored by BRIN minmax indexes to summarize a block range. Each value may represent either a point, or a boundary of an interval. Values must be between 8 and 256, and the default value is 32.

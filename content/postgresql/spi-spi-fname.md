@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-FNAME)
 
-## SPI\_fname
+## SPI_fname
 
-SPI\_fname — determine the column name for the specified column number
+SPI_fname — determine the column name for the specified column number
 
 ## Synopsis
 
@@ -20,11 +20,11 @@ char * SPI_fname(TupleDesc rowdesc, int colnumber)
 
 ## Arguments
 
-* `TupleDesc rowdesc`
+- `TupleDesc rowdesc`
 
   input row description
 
-* `int colnumber`
+- `int colnumber`
 
   column number (count starts at 1)
 
@@ -32,4 +32,4 @@ char * SPI_fname(TupleDesc rowdesc, int colnumber)
 
 ## Return Value
 
-The column name; `NULL` if *`colnumber`* is out of range. `SPI_result` set to `SPI_ERROR_NOATTRIBUTE` on error.
+The column name; `NULL` if _`colnumber`_ is out of range. `SPI_result` set to `SPI_ERROR_NOATTRIBUTE` on error.

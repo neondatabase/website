@@ -25,29 +25,29 @@ This page describes usage of cursors at the SQL command level. If you are trying
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the cursor to be created. This must be different from any other active cursor name in the session.
 
-* `BINARY`
+- `BINARY`
 
   Causes the cursor to return data in binary rather than in text format.
 
-* `ASENSITIVE``INSENSITIVE`
+- `ASENSITIVE``INSENSITIVE`
 
   Cursor sensitivity determines whether changes to the data underlying the cursor, done in the same transaction, after the cursor has been declared, are visible in the cursor. `INSENSITIVE` means they are not visible, `ASENSITIVE` means the behavior is implementation-dependent. A third behavior, `SENSITIVE`, meaning that such changes are visible in the cursor, is not available in PostgreSQL. In PostgreSQL, all cursors are insensitive; so these key words have no effect and are only accepted for compatibility with the SQL standard.
 
   Specifying `INSENSITIVE` together with `FOR UPDATE` or `FOR SHARE` is an error.
 
-* `SCROLL``NO SCROLL`
+- `SCROLL``NO SCROLL`
 
   `SCROLL` specifies that the cursor can be used to retrieve rows in a nonsequential fashion (e.g., backward). Depending upon the complexity of the query's execution plan, specifying `SCROLL` might impose a performance penalty on the query's execution time. `NO SCROLL` specifies that the cursor cannot be used to retrieve rows in a nonsequential fashion. The default is to allow scrolling in some cases; this is not the same as specifying `SCROLL`. See [Notes](sql-declare#SQL-DECLARE-NOTES) below for details.
 
-* `WITH HOLD``WITHOUT HOLD`
+- `WITH HOLD``WITHOUT HOLD`
 
   `WITH HOLD` specifies that the cursor can continue to be used after the transaction that created it successfully commits. `WITHOUT HOLD` specifies that the cursor cannot be used outside of the transaction that created it. If neither `WITHOUT HOLD` nor `WITH HOLD` is specified, `WITHOUT HOLD` is the default.
 
-* *`query`*
+- _`query`_
 
   A [`SELECT`](sql-select) or [`VALUES`](sql-values) command which will provide the rows to be returned by the cursor.
 
@@ -91,7 +91,7 @@ The main reason not to use `FOR UPDATE` with `WHERE CURRENT OF` is if you need t
 
 The SQL standard only makes provisions for cursors in embedded SQL. The PostgreSQL server does not implement an `OPEN` statement for cursors; a cursor is considered to be open when it is declared. However, ECPG, the embedded SQL preprocessor for PostgreSQL, supports the standard SQL cursor conventions, including those involving `DECLARE` and `OPEN` statements.
 
-The server data structure underlying an open cursor is called a *portal*. Portal names are exposed in the client protocol: a client can fetch rows directly from an open portal, if it knows the portal name. When creating a cursor with `DECLARE`, the portal name is the same as the cursor name.
+The server data structure underlying an open cursor is called a _portal_. Portal names are exposed in the client protocol: a client can fetch rows directly from an open portal, if it knows the portal name. When creating a cursor with `DECLARE`, the portal name is the same as the cursor name.
 
 You can see all available cursors by querying the [`pg_cursors`](view-pg-cursors) system view.
 

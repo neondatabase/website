@@ -3,7 +3,7 @@ title: Connect a Python application to Neon using Psycopg
 subtitle: Set up a Neon project in seconds and connect from a Python application using
   Psycopg
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.288Z'
+updatedOn: '2024-08-07T21:36:52.661Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a simple Python application using [Psycopg (psycopg2)](https://pypi.org/project/psycopg2/), a popular Postgres database adapter for the Python programming language. The application connects to Neon and retrieves the current time and Postgres version.
@@ -49,17 +49,17 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 4. Install the following dependencies in your project's root directory for synchronous and asynchronous code, respectively. You can install them using `pip`:
 
-<CodeTabs labels={["synchronous", "asynchronous"]}>
+   <CodeTabs labels={["synchronous", "asynchronous"]}>
 
-    ```bash
-    pip install psycopg2-binary python-dotenv
-    ```
+   ```bash
+   pip install psycopg2-binary python-dotenv
+   ```
 
-    ```bash
-    pip install asyncpg python-dotenv
-    ```
-    
-</CodeTabs>
+   ```bash
+   pip install asyncpg python-dotenv
+   ```
+
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -70,7 +70,7 @@ You can find all of the connection details listed above in the **Connection Deta
 Your connection string will look something like this:
 
 ```shell shouldWrap
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
 ## Configure your python script
@@ -182,9 +182,9 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
-  <a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
 
-  <a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
 
 </DetailIconCards>
 

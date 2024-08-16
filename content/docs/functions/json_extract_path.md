@@ -2,7 +2,7 @@
 title: Postgres json_extract_path() function
 subtitle: Extracts a JSON sub-object at the specified path
 enableTableOfContents: true
-updatedOn: '2024-02-06T14:40:40.247Z'
+updatedOn: '2024-06-14T07:55:54.374Z'
 ---
 
 You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
@@ -135,7 +135,7 @@ This query returns the following values:
 
 ### Use `json_extract_path` in Joins
 
-Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below. 
+Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSON` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSON` column. The table schemas and data used in this example are shown below.
 
 **departments**
 
@@ -220,12 +220,13 @@ Indexing `JSON` documents can also significantly improve `json_extract_path` que
 
 - [json_extract_path_text](/docs/functions/json_extract_path_text) - The regular `json_extract_path` function returns the extracted value as a `JSON` object or array, preserving its `JSON` structure, whereas the alternative `json_extract_path_text` function returns the extracted value as a plain text string, casting any `JSON` objects or arrays to their string representations.
 
-    Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
+  Use the regular `json_extract_path` function when you need to apply `JSON`-specific functions or operators to the extracted value, requiring `JSON` data types. The alternative `json_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
 
 - `jsonb_extract_path` - The `jsonb_extract_path` function works with the `jsonb` data type, which offers a binary representation of `JSON` data. This alternative function is generally faster than `json_extract_path` for most operations, as it's optimized for the binary `jsonb` format. This difference in performance is often more pronounced with larger `JSON` structures and frequent path extractions.
 
 {/*
 This example does not work. It returns empty values.
+
 ### Invalid paths
 
 `json_extract_path` handles an invalid path by returning `NULL`, as in the following example:
@@ -246,6 +247,7 @@ The query above, which specifies an invalid path (`'speks'` instead of `'specs'`
 |  2 |   (null)     |
 |  3 |   (null)     |
 ```
+
 */}
 
 ## Resources

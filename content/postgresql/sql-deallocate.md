@@ -22,15 +22,15 @@ For more information on prepared statements, see [PREPARE](sql-prepare).
 
 ## Parameters
 
-* `PREPARE`
+- `PREPARE`
 
   This key word is ignored.
 
-* *`name`*
+- _`name`_
 
   The name of the prepared statement to deallocate.
 
-* `ALL`
+- `ALL`
 
   Deallocate all prepared statements.
 

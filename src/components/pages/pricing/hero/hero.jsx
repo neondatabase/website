@@ -18,16 +18,17 @@ import AWSIcon from './images/aws.inline.svg';
 
 const items = [
   {
-    type: 'Free Tier',
+    type: 'Free Plan',
     price: '$0 <span>/month</span>',
-    description: 'Generous always-available free tier, no credit card required.',
+    description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '24/7 for your main compute', info: 'Plus 20h of usage for branches' },
+      { title: '24/7 for your main database', info: 'Plus 20h of usage for additional branches' },
       { title: 'Community support' },
       { title: 'Fixed capacity at 0.25 vCPU' },
-      { title: 'Instant Read Replicas', disabled: true },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'Point-in-time restore (24 h)' },
+      { title: 'Organization accounts', disabled: true },
+      { title: 'IP Allow rules', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -52,8 +53,9 @@ const items = [
       },
       { title: 'Standard support' },
       { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules', disabled: true },
+      { title: 'Point-in-time restore (7 days)' },
+      { title: 'Organization accounts' },
+      { title: 'IP Allow rules', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -66,7 +68,7 @@ const items = [
     type: 'Scale',
     price:
       '<em class="absolute block xl:-top-1 -top-6 text-base not-italic font-light tracking-tight text-gray-new-50 xl:relative xl:-mt-4 md:mt-0">From</em> $69 <span>/month</span>',
-    description: 'Full platform and support access, designed for scaling production workloads.',
+    description: 'Full platform access for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
@@ -74,9 +76,10 @@ const items = [
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Priority support' },
-      { title: 'Autoscaling up to 8 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
-      { title: 'Instant Read Replicas' },
-      { title: 'IP Allow Rules' },
+      { title: 'Autoscaling up to 10 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Point-in-time restore (30 days)' },
+      { title: 'Organization accounts' },
+      { title: 'IP Allow rules' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -90,12 +93,11 @@ const items = [
     price: 'Custom',
     description: 'Custom plans for large datasets and database fleets.',
     features: [
-      { title: 'Storage discounts' },
       { title: 'Higher resource limits' },
-      { title: 'Thousands of databases' },
-      { title: 'Enterprise support w/SLAs' },
-      { title: 'Audit logging' },
-      { title: 'SOC 2 compliance' },
+      { title: 'Thousands of projects' },
+      { title: '99.95% SLA' },
+      { title: '24x7 customer support' },
+      { title: 'Dedicated Slack channel' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,

@@ -2,14 +2,12 @@
 
 ## 43.7. Cursors [#](#PLPGSQL-CURSORS)
 
-  * [43.7.1. Declaring Cursor Variables](plpgsql-cursors#PLPGSQL-CURSOR-DECLARATIONS)
-  * [43.7.2. Opening Cursors](plpgsql-cursors#PLPGSQL-CURSOR-OPENING)
-  * [43.7.3. Using Cursors](plpgsql-cursors#PLPGSQL-CURSOR-USING)
-  * [43.7.4. Looping through a Cursor's Result](plpgsql-cursors#PLPGSQL-CURSOR-FOR-LOOP)
+- [43.7.1. Declaring Cursor Variables](plpgsql-cursors#PLPGSQL-CURSOR-DECLARATIONS)
+- [43.7.2. Opening Cursors](plpgsql-cursors#PLPGSQL-CURSOR-OPENING)
+- [43.7.3. Using Cursors](plpgsql-cursors#PLPGSQL-CURSOR-USING)
+- [43.7.4. Looping through a Cursor's Result](plpgsql-cursors#PLPGSQL-CURSOR-FOR-LOOP)
 
-
-
-Rather than executing a whole query at once, it is possible to set up a *cursor* that encapsulates the query, and then read the query result a few rows at a time. One reason for doing this is to avoid memory overrun when the result contains a large number of rows. (However, PL/pgSQL users do not normally need to worry about that, since `FOR` loops automatically use a cursor internally to avoid memory problems.) A more interesting usage is to return a reference to a cursor that a function has created, allowing the caller to read the rows. This provides an efficient way to return large row sets from functions.
+Rather than executing a whole query at once, it is possible to set up a _cursor_ that encapsulates the query, and then read the query result a few rows at a time. One reason for doing this is to avoid memory overrun when the result contains a large number of rows. (However, PL/pgSQL users do not normally need to worry about that, since `FOR` loops automatically use a cursor internally to avoid memory problems.) A more interesting usage is to return a reference to a cursor that a function has created, allowing the caller to read the rows. This provides an efficient way to return large row sets from functions.
 
 [#id](#PLPGSQL-CURSOR-DECLARATIONS)
 
@@ -21,7 +19,7 @@ All access to cursors in PL/pgSQL goes through cursor variables, which are alway
 name [ [ NO ] SCROLL ] CURSOR [ ( arguments ) ] FOR query;
 ```
 
-(`FOR` can be replaced by `IS` for Oracle compatibility.) If `SCROLL` is specified, the cursor will be capable of scrolling backward; if `NO SCROLL` is specified, backward fetches will be rejected; if neither specification appears, it is query-dependent whether backward fetches will be allowed. *`arguments`*, if specified, is a comma-separated list of pairs `name datatype` that define names to be replaced by parameter values in the given query. The actual values to substitute for these names will be specified later, when the cursor is opened.
+(`FOR` can be replaced by `IS` for Oracle compatibility.) If `SCROLL` is specified, the cursor will be capable of scrolling backward; if `NO SCROLL` is specified, backward fetches will be rejected; if neither specification appears, it is query-dependent whether backward fetches will be allowed. _`arguments`_, if specified, is a comma-separated list of pairs `name datatype` that define names to be replaced by parameter values in the given query. The actual values to substitute for these names will be specified later, when the cursor is opened.
 
 Some examples:
 
@@ -32,7 +30,7 @@ DECLARE
     curs3 CURSOR (key integer) FOR SELECT * FROM tenk1 WHERE unique1 = key;
 ```
 
-All three of these variables have the data type `refcursor`, but the first can be used with any query, while the second has a fully specified query already *bound* to it, and the last has a parameterized query bound to it. (`key` will be replaced by an integer parameter value when the cursor is opened.) The variable `curs1` is said to be *unbound* since it is not bound to any particular query.
+All three of these variables have the data type `refcursor`, but the first can be used with any query, while the second has a fully specified query already _bound_ to it, and the last has a parameterized query bound to it. (`key` will be replaced by an integer parameter value when the cursor is opened.) The variable `curs1` is said to be _unbound_ since it is not bound to any particular query.
 
 The `SCROLL` option cannot be used when the cursor's query uses `FOR UPDATE/SHARE`. Also, it is best to use `NO SCROLL` with a query that involves volatile functions. The implementation of `SCROLL` assumes that re-reading the query's output will give consistent results, which a volatile function might not do.
 
@@ -40,19 +38,17 @@ The `SCROLL` option cannot be used when the cursor's query uses `FOR UPDATE/SHAR
 
 ### 43.7.2. Opening Cursors [#](#PLPGSQL-CURSOR-OPENING)
 
-Before a cursor can be used to retrieve rows, it must be *opened*. (This is the equivalent action to the SQL command [`DECLARE CURSOR`](sql-declare).) PL/pgSQL has three forms of the `OPEN` statement, two of which use unbound cursor variables while the third uses a bound cursor variable.
+Before a cursor can be used to retrieve rows, it must be _opened_. (This is the equivalent action to the SQL command [`DECLARE CURSOR`](sql-declare).) PL/pgSQL has three forms of the `OPEN` statement, two of which use unbound cursor variables while the third uses a bound cursor variable.
 
 ### Note
 
 Bound cursor variables can also be used without explicitly opening the cursor, via the `FOR` statement described in [Section 43.7.4](plpgsql-cursors#PLPGSQL-CURSOR-FOR-LOOP). A `FOR` loop will open the cursor and then close it again when the loop completes.
 
-
-
-Opening a cursor involves creating a server-internal data structure called a *portal*, which holds the execution state for the cursor's query. A portal has a name, which must be unique within the session for the duration of the portal's existence. By default, PL/pgSQL will assign a unique name to each portal it creates. However, if you assign a non-null string value to a cursor variable, that string will be used as its portal name. This feature can be used as described in [Section 43.7.3.5](plpgsql-cursors#PLPGSQL-CURSOR-RETURNING).
+Opening a cursor involves creating a server-internal data structure called a _portal_, which holds the execution state for the cursor's query. A portal has a name, which must be unique within the session for the duration of the portal's existence. By default, PL/pgSQL will assign a unique name to each portal it creates. However, if you assign a non-null string value to a cursor variable, that string will be used as its portal name. This feature can be used as described in [Section 43.7.3.5](plpgsql-cursors#PLPGSQL-CURSOR-RETURNING).
 
 [#id](#PLPGSQL-CURSOR-OPENING-OPEN-FOR-QUERY)
 
-#### 43.7.2.1. `OPEN FOR` *`query`* [#](#PLPGSQL-CURSOR-OPENING-OPEN-FOR-QUERY)
+#### 43.7.2.1. `OPEN FOR` _`query`_ [#](#PLPGSQL-CURSOR-OPENING-OPEN-FOR-QUERY)
 
 ```
 OPEN unbound_cursorvar [ [ NO ] SCROLL ] FOR query;
@@ -97,7 +93,7 @@ This form of `OPEN` is used to open a cursor variable whose query was bound to i
 
 The query plan for a bound cursor is always considered cacheable; there is no equivalent of `EXECUTE` in this case. Notice that `SCROLL` and `NO SCROLL` cannot be specified in `OPEN`, as the cursor's scrolling behavior was already determined.
 
-Argument values can be passed using either *positional* or *named* notation. In positional notation, all arguments are specified in order. In named notation, each argument's name is specified using `:=` to separate it from the argument expression. Similar to calling functions, described in [Section 4.3](sql-syntax-calling-funcs), it is also allowed to mix positional and named notation.
+Argument values can be passed using either _positional_ or _named_ notation. In positional notation, all arguments are specified in order. In named notation, each argument's name is specified using `:=` to separate it from the argument expression. Similar to calling functions, described in [Section 4.3](sql-syntax-calling-funcs), it is also allowed to mix positional and named notation.
 
 Examples (these use the cursor declaration examples above):
 
@@ -138,9 +134,9 @@ FETCH [ direction { FROM | IN } ] cursor INTO target;
 
 `FETCH` retrieves the next row from the cursor into a target, which might be a row variable, a record variable, or a comma-separated list of simple variables, just like `SELECT INTO`. If there is no next row, the target is set to NULL(s). As with `SELECT INTO`, the special variable `FOUND` can be checked to see whether a row was obtained or not.
 
-The *`direction`* clause can be any of the variants allowed in the SQL [FETCH](sql-fetch) command except the ones that can fetch more than one row; namely, it can be `NEXT`, `PRIOR`, `FIRST`, `LAST`, `ABSOLUTE` *`count`*, `RELATIVE` *`count`*, `FORWARD`, or `BACKWARD`. Omitting *`direction`* is the same as specifying `NEXT`. In the forms using a *`count`*, the *`count`* can be any integer-valued expression (unlike the SQL `FETCH` command, which only allows an integer constant). *`direction`* values that require moving backward are likely to fail unless the cursor was declared or opened with the `SCROLL` option.
+The _`direction`_ clause can be any of the variants allowed in the SQL [FETCH](sql-fetch) command except the ones that can fetch more than one row; namely, it can be `NEXT`, `PRIOR`, `FIRST`, `LAST`, `ABSOLUTE` _`count`_, `RELATIVE` _`count`_, `FORWARD`, or `BACKWARD`. Omitting _`direction`_ is the same as specifying `NEXT`. In the forms using a _`count`_, the _`count`_ can be any integer-valued expression (unlike the SQL `FETCH` command, which only allows an integer constant). _`direction`_ values that require moving backward are likely to fail unless the cursor was declared or opened with the `SCROLL` option.
 
-*`cursor`* must be the name of a `refcursor` variable that references an open cursor portal.
+_`cursor`_ must be the name of a `refcursor` variable that references an open cursor portal.
 
 Examples:
 
@@ -294,6 +290,6 @@ FOR recordvar IN bound_cursorvar [ ( [ argument_name := ] argument_value [, ...]
 END LOOP [ label ];
 ```
 
-The cursor variable must have been bound to some query when it was declared, and it *cannot* be open already. The `FOR` statement automatically opens the cursor, and it closes the cursor again when the loop exits. A list of actual argument value expressions must appear if and only if the cursor was declared to take arguments. These values will be substituted in the query, in just the same way as during an `OPEN` (see [Section 43.7.2.3](plpgsql-cursors#PLPGSQL-OPEN-BOUND-CURSOR)).
+The cursor variable must have been bound to some query when it was declared, and it _cannot_ be open already. The `FOR` statement automatically opens the cursor, and it closes the cursor again when the loop exits. A list of actual argument value expressions must appear if and only if the cursor was declared to take arguments. These values will be substituted in the query, in just the same way as during an `OPEN` (see [Section 43.7.2.3](plpgsql-cursors#PLPGSQL-OPEN-BOUND-CURSOR)).
 
-The variable *`recordvar`* is automatically defined as type `record` and exists only inside the loop (any existing definition of the variable name is ignored within the loop). Each row returned by the cursor is successively assigned to this record variable and the loop body is executed.
+The variable _`recordvar`_ is automatically defined as type `record` and exists only inside the loop (any existing definition of the variable name is ignored within the loop). Each row returned by the cursor is successively assigned to this record variable and the loop body is executed.

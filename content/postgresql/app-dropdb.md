@@ -6,7 +6,7 @@ dropdb — remove a PostgreSQL database
 
 ## Synopsis
 
-`dropdb` \[*`connection-option`*...] \[*`option`*...] *`dbname`*
+`dropdb` \[_`connection-option`_...] \[_`option`_...] _`dbname`_
 
 [#id](#id-1.9.4.6.5)
 
@@ -22,59 +22,59 @@ dropdb is a wrapper around the SQL command [`DROP DATABASE`](sql-dropdatabase). 
 
 dropdb accepts the following command-line arguments:
 
-* *`dbname`*
+- _`dbname`_
 
   Specifies the name of the database to be removed.
 
-* `-e``--echo`
+- `-e``--echo`
 
   Echo the commands that dropdb generates and sends to the server.
 
-* `-f``--force`
+- `-f``--force`
 
   Attempt to terminate all existing connections to the target database before dropping it. See [DROP DATABASE](sql-dropdatabase) for more information on this option.
 
-* `-i``--interactive`
+- `-i``--interactive`
 
   Issues a verification prompt before doing anything destructive.
 
-* `-V``--version`
+- `-V``--version`
 
   Print the dropdb version and exit.
 
-* `--if-exists`
+- `--if-exists`
 
   Do not throw an error if the database does not exist. A notice is issued in this case.
 
-* `-?``--help`
+- `-?``--help`
 
   Show help about dropdb command line arguments, and exit.
 
 dropdb also accepts the following command-line arguments for connection parameters:
 
-* `-h host``--host=host`
+- `-h host``--host=host`
 
   Specifies the host name of the machine on which the server is running. If the value begins with a slash, it is used as the directory for the Unix domain socket.
 
-* `-p port``--port=port`
+- `-p port``--port=port`
 
   Specifies the TCP port or local Unix domain socket file extension on which the server is listening for connections.
 
-* `-U username``--username=username`
+- `-U username``--username=username`
 
   User name to connect as.
 
-* `-w``--no-password`
+- `-w``--no-password`
 
   Never issue a password prompt. If the server requires password authentication and a password is not available by other means such as a `.pgpass` file, the connection attempt will fail. This option can be useful in batch jobs and scripts where no user is present to enter a password.
 
-* `-W``--password`
+- `-W``--password`
 
   Force dropdb to prompt for a password before connecting to a database.
 
   This option is never essential, since dropdb will automatically prompt for a password if the server demands password authentication. However, dropdb will waste a connection attempt finding out that the server wants a password. In some cases it is worth typing `-W` to avoid the extra connection attempt.
 
-* `--maintenance-db=dbname`
+- `--maintenance-db=dbname`
 
   Specifies the name of the database to connect to in order to drop the target database. If not specified, the `postgres` database will be used; if that does not exist (or is the database being dropped), `template1` will be used. This can be a [connection string](libpq-connect#LIBPQ-CONNSTRING). If so, connection string parameters will override any conflicting command line options.
 
@@ -82,11 +82,11 @@ dropdb also accepts the following command-line arguments for connection paramete
 
 ## Environment
 
-* `PGHOST``PGPORT``PGUSER`
+- `PGHOST``PGPORT``PGUSER`
 
   Default connection parameters
 
-* `PG_COLOR`
+- `PG_COLOR`
 
   Specifies whether to use color in diagnostic messages. Possible values are `always`, `auto` and `never`.
 

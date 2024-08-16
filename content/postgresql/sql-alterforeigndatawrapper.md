@@ -27,39 +27,39 @@ Only superusers can alter foreign-data wrappers. Additionally, only superusers c
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of an existing foreign-data wrapper.
 
-* `HANDLER handler_function`
+- `HANDLER handler_function`
 
   Specifies a new handler function for the foreign-data wrapper.
 
-* `NO HANDLER`
+- `NO HANDLER`
 
   This is used to specify that the foreign-data wrapper should no longer have a handler function.
 
   Note that foreign tables that use a foreign-data wrapper with no handler cannot be accessed.
 
-* `VALIDATOR validator_function`
+- `VALIDATOR validator_function`
 
   Specifies a new validator function for the foreign-data wrapper.
 
   Note that it is possible that pre-existing options of the foreign-data wrapper, or of dependent servers, user mappings, or foreign tables, are invalid according to the new validator. PostgreSQL does not check for this. It is up to the user to make sure that these options are correct before using the modified foreign-data wrapper. However, any options specified in this `ALTER FOREIGN DATA WRAPPER` command will be checked using the new validator.
 
-* `NO VALIDATOR`
+- `NO VALIDATOR`
 
   This is used to specify that the foreign-data wrapper should no longer have a validator function.
 
-* `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
+- `OPTIONS ( [ ADD | SET | DROP ] option ['value'] [, ... ] )`
 
   Change options for the foreign-data wrapper. `ADD`, `SET`, and `DROP` specify the action to be performed. `ADD` is assumed if no operation is explicitly specified. Option names must be unique; names and values are also validated using the foreign data wrapper's validator function, if any.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The user name of the new owner of the foreign-data wrapper.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name for the foreign-data wrapper.
 

@@ -1,46 +1,44 @@
 [#id](#FILE-FDW)
 
-## F.16. file\_fdw — access data files in the server's file system [#](#FILE-FDW)
-
-
+## F.16. file_fdw — access data files in the server's file system [#](#FILE-FDW)
 
 The `file_fdw` module provides the foreign-data wrapper `file_fdw`, which can be used to access data files in the server's file system, or to execute programs on the server and read their output. The data file or program output must be in a format that can be read by `COPY FROM`; see [COPY](sql-copy) for details. Access to data files is currently read-only.
 
 A foreign table created using this wrapper can have the following options:
 
-* `filename`
+- `filename`
 
   Specifies the file to be read. Relative paths are relative to the data directory. Either `filename` or `program` must be specified, but not both.
 
-* `program`
+- `program`
 
   Specifies the command to be executed. The standard output of this command will be read as though `COPY FROM PROGRAM` were used. Either `program` or `filename` must be specified, but not both.
 
-* `format`
+- `format`
 
   Specifies the data format, the same as `COPY`'s `FORMAT` option.
 
-* `header`
+- `header`
 
   Specifies whether the data has a header line, the same as `COPY`'s `HEADER` option.
 
-* `delimiter`
+- `delimiter`
 
   Specifies the data delimiter character, the same as `COPY`'s `DELIMITER` option.
 
-* `quote`
+- `quote`
 
   Specifies the data quote character, the same as `COPY`'s `QUOTE` option.
 
-* `escape`
+- `escape`
 
   Specifies the data escape character, the same as `COPY`'s `ESCAPE` option.
 
-* `null`
+- `null`
 
   Specifies the data null string, the same as `COPY`'s `NULL` option.
 
-* `encoding`
+- `encoding`
 
   Specifies the data encoding, the same as `COPY`'s `ENCODING` option.
 
@@ -48,11 +46,11 @@ Note that while `COPY` allows options such as `HEADER` to be specified without a
 
 A column of a foreign table created using this wrapper can have the following options:
 
-* `force_not_null`
+- `force_not_null`
 
   This is a Boolean option. If true, it specifies that values of the column should not be matched against the null string (that is, the table-level `null` option). This has the same effect as listing the column in `COPY`'s `FORCE_NOT_NULL` option.
 
-* `force_null`
+- `force_null`
 
   This is a Boolean option. If true, it specifies that values of the column which match the null string are returned as `NULL` even if the value is quoted. Without this option, only unquoted values matching the null string are returned as `NULL`. This has the same effect as listing the column in `COPY`'s `FORCE_NULL` option.
 

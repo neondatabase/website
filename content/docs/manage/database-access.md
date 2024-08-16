@@ -4,12 +4,12 @@ subtitle: Learn how to manage user access to databases in your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2023-09-15T13:00:43Z'
+updatedOn: '2024-08-07T21:36:52.671Z'
 ---
 
-Each Neon project is created with a default Postgres role that takes its name from your Neon account (the account you registered with). For example, if a user named "Alex" signs up for Neon, the project is created with a default role named `alex`.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
 
-The default Postgres role is automatically assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, and sequences. Any user created with the Neon Console, Neon API, or Neon CLI is also assigned the `neon_superuser` role.
+This Postgres role is automatically assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, and sequences. Any user created with the Neon Console, Neon API, or Neon CLI is also assigned the `neon_superuser` role.
 
 It is good practice to reserve `neon_superuser` roles for database administration tasks like creating roles and databases. For other users, we recommend creating roles with specific sets of permissions based on application and access requirements. Then, assign the appropriate roles to your users. The roles you create should adhere to a _least privilege_ model, granting only the permissions required to accomplish their tasks.
 
@@ -29,7 +29,7 @@ You can create roles with limited access via SQL. Roles created with SQL are cre
 
 The recommended approach to creating roles with limited access is as follows:
 
-1. Use your  default Neon role or another role with `neon_superuser` privileges to create roles for each application or use case via SQL. For example, create `readonly` and `readwrite` roles.
+1. Use your Neon role to create roles for each application or use case via SQL. For example, create `readonly` and `readwrite` roles.
 2. Grant privileges to those roles to allow access to database objects. For example, grant the `SELECT` privilege to a `readonly` role, or grant `SELECT`, `INSERT`, `UPDATE`, and `DELETE` privileges to a `readwrite` role.
 3. Create your database users. For example, create users named `readonly_user1` and `readwrite_user1`.
 4. Assign the `readonly` or `readwrite` role to those users to grant them the privileges associated with those roles. For example, assign the `readonly` role to `readonly_user1`, and the `readwrite` role to `readwrite_user1`.
@@ -52,52 +52,52 @@ To create a read-only role:
 
 2. Create a `readonly` role using the following statement. A password is required.
 
-    ```sql
-    CREATE ROLE readonly PASSWORD '<password>';
-    ```
-  
-    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+   ```sql
+   CREATE ROLE readonly PASSWORD '<password>';
+   ```
+
+   The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
-    ```sql
-    -- Grant permission to connect to the database
-    GRANT CONNECT ON DATABASE <database> TO readonly;
+   ```sql
+   -- Grant permission to connect to the database
+   GRANT CONNECT ON DATABASE <database> TO readonly;
 
-    -- Grant USAGE on the schema 
-    GRANT USAGE ON SCHEMA <schema> TO readonly;
+   -- Grant USAGE on the schema
+   GRANT USAGE ON SCHEMA <schema> TO readonly;
 
-    -- Grant SELECT on all existing tables in the schema
-    GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly; 
+   -- Grant SELECT on all existing tables in the schema
+   GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO readonly;
 
-    -- Grant SELECT on all tables added in the future
-    ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
-    ```
+   -- Grant SELECT on all tables added in the future
+   ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT ON TABLES TO readonly;
+   ```
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
-    ```sql
-    CREATE ROLE readonly_user1 WITH LOGIN PASSWORD '<password>';
-    ```
+   ```sql
+   CREATE ROLE readonly_user1 WITH LOGIN PASSWORD '<password>';
+   ```
 
 5. Assign the `readonly` role to `readonly_user1`:
 
-    ```sql
-    GRANT readonly TO readonly_user1;
-    ```
+   ```sql
+   GRANT readonly TO readonly_user1;
+   ```
 
-    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
+   The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
 
-    ```bash
-    psql postgres://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
-    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
-    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
-    Type "help" for help.
+   ```bash
+   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
+   SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+   Type "help" for help.
 
-    dbname=> SELECT * FROM <schema>.<table_name>;
-    ```
+   dbname=> SELECT * FROM <schema>.<table_name>;
+   ```
 
-    If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
+   If the user attempts to perform an `INSERT`, `UPDATE`, or `DELETE` operation, a `permission denied` error is returned.
 
 ### SQL statement summary
 
@@ -128,56 +128,56 @@ To create a read-write role:
 
 2. Create a `readwrite` role using the following statement. A password is required.
 
-    ```sql
-    CREATE ROLE readwrite PASSWORD '<password>';
-    ```
+   ```sql
+   CREATE ROLE readwrite PASSWORD '<password>';
+   ```
 
-    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+   The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readwrite` role read-write privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
-     ```sql
-    -- Grant permission to connect to the database
-    GRANT CONNECT ON DATABASE <database> TO readwrite;
+   ```sql
+   -- Grant permission to connect to the database
+   GRANT CONNECT ON DATABASE <database> TO readwrite;
 
-    -- Grant USAGE and CREATE on the schema
-    GRANT USAGE, CREATE ON SCHEMA <schema> TO readwrite;
+   -- Grant USAGE and CREATE on the schema
+   GRANT USAGE, CREATE ON SCHEMA <schema> TO readwrite;
 
-    -- Grant SELECT, INSERT, UPDATE, DELETE on all existing tables in the schema
-     GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA <schema> TO readwrite; 
+   -- Grant SELECT, INSERT, UPDATE, DELETE on all existing tables in the schema
+   GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA <schema> TO readwrite;
 
-    -- grant SELECT on all tables added in the future
-    ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO readwrite;
+   -- grant SELECT on all tables added in the future
+   ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO readwrite;
 
-    -- Grant USAGE on all sequences in the schema
-    GRANT USAGE ON ALL SEQUENCES IN SCHEMA <schema> TO readwrite;
+   -- Grant USAGE on all sequences in the schema
+   GRANT USAGE ON ALL SEQUENCES IN SCHEMA <schema> TO readwrite;
 
-    -- Grant USAGE on all sequences added in the future
-    ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
-    ```
+   -- Grant USAGE on all sequences added in the future
+   ALTER DEFAULT PRIVILEGES IN SCHEMA <schema> GRANT USAGE ON SEQUENCES TO readwrite;
+   ```
 
 4. Create a database user. The password requirements mentioned above apply here as well.
 
-    ```sql
-    CREATE ROLE readwrite_user1 WITH LOGIN PASSWORD '<password>';
-    ```
+   ```sql
+   CREATE ROLE readwrite_user1 WITH LOGIN PASSWORD '<password>';
+   ```
 
 5. Assign the `readwrite` role to `readwrite_user1`:
 
-    ```sql
-    GRANT readwrite TO readwrite_user1;
-    ```
+   ```sql
+   GRANT readwrite TO readwrite_user1;
+   ```
 
-    The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
+   The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
-    ```bash
-    psql postgres://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
-    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
-    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
-    Type "help" for help.
+   ```bash
+   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
+   SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+   Type "help" for help.
 
-    dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
-    ```
+   dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
+   ```
 
 ### SQL statement summary
 
@@ -212,60 +212,60 @@ To get started:
 
 2. Use your default Neon role or another role with `neon_superuser` privileges to create a developer role **on the parent branch**. For example, create a role named `dev_users`.
 
-    ```sql
-    CREATE ROLE dev_users PASSWORD '<password>';
-    ```
+   ```sql
+   CREATE ROLE dev_users PASSWORD '<password>';
+   ```
 
-    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+   The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
-2. Grant the `dev_users` role privileges on the database:
+3. Grant the `dev_users` role privileges on the database:
 
-    ```sql
-    GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
-    ```
+   ```sql
+   GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
+   ```
 
-    You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
+   You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
-    <Admonition type="note">
-    The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
+   <Admonition type="note">
+   The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
 
-    For example, to grant all privileges on all tables in a schema:
+   For example, to grant all privileges on all tables in a schema:
 
-    ```sql
-    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
-    ```
+   ```sql
+   GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
+   ```
 
-    Similarly, you'd grant privileges for sequences and other objects as needed.
+   Similarly, you'd grant privileges for sequences and other objects as needed.
 
-    That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
-    </Admonition>
+   That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
+   </Admonition>
 
-3. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
+4. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
-4. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
+5. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-4. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
+6. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
 
-    ```sql
-    CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
-    ```
+   ```sql
+   CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
+   ```
 
-5. Assign the `dev_users` role to the `dev_user1` user:
+7. Assign the `dev_users` role to the `dev_user1` user:
 
-    ```sql
-    GRANT dev_users TO dev_user1;
-    ```
+   ```sql
+   GRANT dev_users TO dev_user1;
+   ```
 
-    The `dev_user1` user can now connect to the database on your development branch and start using the database with full privileges.
+   The `dev_user1` user can now connect to the database on your development branch and start using the database with full privileges.
 
-    ```bash
-    psql postgres://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
-    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
-    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
-    Type "help" for help.
+   ```bash
+   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
+   SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
+   Type "help" for help.
 
-    dbname=> 
-    ```
+   dbname=>
+   ```
 
 ### SQL statement summary
 

@@ -29,15 +29,15 @@ Refer to [Chapter 12](textsearch) for further information.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the text search template to be created. The name can be schema-qualified.
 
-* *`init_function`*
+- _`init_function`_
 
   The name of the init function for the template.
 
-* *`lexize_function`*
+- _`lexize_function`_
 
   The name of the lexize function for the template.
 

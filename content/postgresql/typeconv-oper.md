@@ -2,8 +2,6 @@
 
 ## 10.2. Operators [#](#TYPECONV-OPER)
 
-
-
 The specific operator that is referenced by an operator expression is determined using the following procedure. Note that this procedure is indirectly affected by the precedence of the operators involved, since that will determine which sub-expressions are taken to be the inputs of which operators. See [Section 4.1.6](sql-syntax-lexical#SQL-PRECEDENCE) for more information.
 
 [#id](#id-1.5.9.7.4)
@@ -56,7 +54,6 @@ So the parser does a type conversion on the operand and the query is equivalent 
 SELECT |/ CAST(40 AS double precision) AS "square root of 40";
 ```
 
-
 [#id](#id-1.5.9.7.7)
 
 **Example 10.2. String Concatenation Operator Type Resolution**
@@ -88,7 +85,6 @@ SELECT 'abc' || 'def' AS "unspecified";
 ```
 
 In this case there is no initial hint for which type to use, since no types are specified in the query. So, the parser looks for all candidate operators and finds that there are candidates accepting both string-category and bit-string-category inputs. Since string category is preferred when available, that category is selected, and then the preferred type for strings, `text`, is used as the specific type to resolve the unknown-type literals as.
-
 
 [#id](#id-1.5.9.7.8)
 
@@ -133,7 +129,6 @@ SELECT ~ CAST('20' AS int8) AS "negation";
 (1 row)
 ```
 
-
 [#id](#id-1.5.9.7.9)
 
 **Example 10.4. Array Inclusion Operator Type Resolution**
@@ -150,7 +145,6 @@ SELECT array[1,2] <@ '{1,2,3}' as "is subset";
 ```
 
 The PostgreSQL operator catalog has several entries for the infix operator `<@`, but the only two that could possibly accept an integer array on the left-hand side are array inclusion (`anyarray` `<@` `anyarray`) and range inclusion (`anyelement` `<@` `anyrange`). Since none of these polymorphic pseudo-types (see [Section 8.21](datatype-pseudo)) are considered preferred, the parser cannot resolve the ambiguity on that basis. However, [Step 3.f](typeconv-oper#OP-RESOL-LAST-UNKNOWN) tells it to assume that the unknown-type literal is of the same type as the other input, that is, integer array. Now only one of the two operators can match, so array inclusion is selected. (Had range inclusion been selected, we would have gotten an error, because the string does not have the right format to be a range literal.)
-
 
 [#id](#id-1.5.9.7.10)
 

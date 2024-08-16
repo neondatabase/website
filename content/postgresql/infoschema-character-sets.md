@@ -6,15 +6,15 @@ The view `character_sets` identifies the character sets available in the current
 
 Take note of how the following terms are used in the SQL standard:
 
-* character repertoire
+- character repertoire
 
   An abstract collection of characters, for example `UNICODE`, `UCS`, or `LATIN1`. Not exposed as an SQL object, but visible in this view.
 
-* character encoding form
+- character encoding form
 
   An encoding of some character repertoire. Most older character repertoires only use one encoding form, and so there are no separate names for them (e.g., `LATIN1` is an encoding form applicable to the `LATIN1` repertoire). But for example Unicode has the encoding forms `UTF8`, `UTF16`, etc. (not all supported by PostgreSQL). Encoding forms are not exposed as an SQL object, but are visible in this view.
 
-* character set
+- character set
 
   A named SQL object that identifies a character repertoire, a character encoding, and a default collation. A predefined character set would typically have the same name as an encoding form, but users could define other names. For example, the character set `UTF8` would typically identify the character repertoire `UCS`, encoding form `UTF8`, and some default collation.
 

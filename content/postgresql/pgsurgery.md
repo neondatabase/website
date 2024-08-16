@@ -1,11 +1,9 @@
 [#id](#PGSURGERY)
 
-## F.34. pg\_surgery — perform low-level surgery on relation data [#](#PGSURGERY)
+## F.34. pg_surgery — perform low-level surgery on relation data [#](#PGSURGERY)
 
-  * [F.34.1. Functions](pgsurgery#PGSURGERY-FUNCS)
-  * [F.34.2. Authors](pgsurgery#PGSURGERY-AUTHORS)
-
-
+- [F.34.1. Functions](pgsurgery#PGSURGERY-FUNCS)
+- [F.34.2. Authors](pgsurgery#PGSURGERY-AUTHORS)
 
 The `pg_surgery` module provides various functions to perform surgery on a damaged relation. These functions are unsafe by design and using them may corrupt (or further corrupt) your database. For example, these functions can easily be used to make a table inconsistent with its own indexes, to cause `UNIQUE` or `FOREIGN KEY` constraint violations, or even to make tuples visible which, when read, will cause a database server crash. They should be used with great caution and only as a last resort.
 
@@ -13,7 +11,7 @@ The `pg_surgery` module provides various functions to perform surgery on a damag
 
 ### F.34.1. Functions [#](#PGSURGERY-FUNCS)
 
-* `heap_force_kill(regclass, tid[]) returns void`
+- `heap_force_kill(regclass, tid[]) returns void`
 
   `heap_force_kill` marks “used” line pointers as “dead” without examining the tuples. The intended use of this function is to forcibly remove tuples that are not otherwise accessible. For example:
 
@@ -32,7 +30,7 @@ The `pg_surgery` module provides various functions to perform surgery on a damag
   (0 rows)
   ```
 
-* `heap_force_freeze(regclass, tid[]) returns void`
+- `heap_force_freeze(regclass, tid[]) returns void`
 
   `heap_force_freeze` marks tuples as frozen without examining the tuple data. The intended use of this function is to make accessible tuples which are inaccessible due to corrupted visibility information, or which prevent the table from being successfully vacuumed due to corrupted visibility information. For example:
 

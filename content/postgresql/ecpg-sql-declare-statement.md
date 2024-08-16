@@ -21,13 +21,13 @@ EXEC SQL [ AT connection_name ] DECLARE statement_name STATEMENT
 
 ## Parameters
 
-* *`connection_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-CONNECTION-NAME)
+- _`connection_name`_ [#](#ECPG-SQL-DECLARE-STATEMENT-CONNECTION-NAME)
 
   A database connection name established by the `CONNECT` command.
 
   AT clause can be omitted, but such statement has no meaning.
 
-- *`statement_name`* [#](#ECPG-SQL-DECLARE-STATEMENT-STATEMENT-NAME)
+* _`statement_name`_ [#](#ECPG-SQL-DECLARE-STATEMENT-STATEMENT-NAME)
 
   The name of an SQL statement identifier, either as an SQL identifier or a host variable.
 

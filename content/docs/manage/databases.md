@@ -2,12 +2,12 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-01-08T20:02:33.926Z'
+updatedOn: '2024-08-13T15:31:30.510Z'
 ---
 
-A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is no limit on the number of databases you can create.
+A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. While there is no strict limit on the number of databases you can create, we recommend keeping it under 500 per branch.
 
-A Neon project's primary branch is created with a ready-to-use database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's primary branch or in a child branch.
+If you do not specify your own database name when creating a project, your project's default branch is created with a database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's default branch or in a child branch.
 
 All databases in Neon are created with a `public` schema. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
 
@@ -28,7 +28,7 @@ Neon supports creating and managing databases from the following interfaces:
 
 This section describes how to create, view, and delete databases in the Neon Console.
 
-The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Consoles. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
+The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
 ### Create a database
 
@@ -36,9 +36,10 @@ To create a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases** from the sidebar.
+1. Select **Branches** from the sidebar.
 1. Select the branch where you want to create the database.
-1. Click **New Database**.
+1. Select the **Roles** & **Databases** tab.
+1. Click **Add Database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
@@ -52,8 +53,9 @@ To view databases:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases** from the sidebar.
-1. Select a branch to view the databases in the branch.
+1. Select **Branches** from the sidebar.
+1. Select the branch where you want to view databases.
+1. Select the **Roles** & **Databases** tab.
 
 ### Delete a database
 
@@ -79,7 +81,7 @@ Database actions performed in the Neon Console can also be also performed using 
 In Neon, a database belongs to a branch, which means that when you create a database, it is created in a branch. Database-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).

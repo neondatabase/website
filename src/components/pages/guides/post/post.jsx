@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
-import LastUpdatedDate from 'components/shared/last-updated-date';
 import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 import { GUIDES_BASE_PATH } from 'constants/guides';
@@ -35,7 +35,6 @@ const Post = ({
         )}
         {author && <Author data={author} className="mt-5 hidden lg:block" />}
         <Content className="mt-5" content={content} />
-        {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
       </article>
 
       <NavigationLinks
@@ -43,14 +42,24 @@ const Post = ({
         nextLink={nextLink}
         basePath={GUIDES_BASE_PATH}
       />
-      <DocFooter fileOriginPath={fileOriginPath} slug={slug} />
+      <DocFooter updatedOn={updatedOn} slug={slug} />
     </div>
 
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        <div
+          className={clsx(
+            enableTableOfContents &&
+              'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+          )}
+        >
+          <EditOnGithub fileOriginPath={fileOriginPath} />
+        </div>
         {author && (
-          <Author data={author} className={clsx('lg:hidden', enableTableOfContents && 'mt-14')} />
+          <div className="mt-4 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:hidden">
+            <Author data={author} />
+          </div>
         )}
       </nav>
     </div>

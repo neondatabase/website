@@ -1,7 +1,9 @@
 ---
 title: Database branching workflow primer
-subtitle: An introduction to integrating Postgres branching into your development workflow
+subtitle: An introduction to integrating Postgres branching into your development
+  workflow
 enableTableOfContents: true
+updatedOn: '2024-08-07T21:36:52.644Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
@@ -17,13 +19,13 @@ Every Neon branch has a unique Postgres connection string, so they're completely
 
 ```bash
 # Branch 1
-postgres://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname
 
 # Branch 2
-postgres://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname
 ```
 
-You can create all of your branches from the primary branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
+You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
 
 ![database workflow A B](/docs/get-started-with-neon/database_workflow_AB.jpg)
 
@@ -39,13 +41,13 @@ And here are the key CLI actions you can use:
 
 ```bash
 # Create branch
-neonctl branches create [options]
-    
+neon branches create [options]
+
 # Get Connection string
-neonctl connection-string [branch] [options]
-    
+neon connection-string [branch] [options]
+
 # Delete branch
-neonctl branches delete <id|name> [options]
+neon branches delete <id|name> [options]
 ```
 
 For more information, see:
@@ -83,6 +85,7 @@ jobs:
   - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
   - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
 ```
+
 </TabItem>
 
 <TabItem>
@@ -102,8 +105,9 @@ jobs:
     with:
       project_id: rapid-haze-373089
       branch: br-long-forest-224191
-      api_key: {{ secrets.NEON_API_KEY }}
+      api_key: { { secrets.NEON_API_KEY } }
 ```
+
 </TabItem>
 </Tabs>
 
@@ -132,9 +136,9 @@ To easily identify branches dedicated to development, we recommend prefixing the
 
 <br/>Examples:
 
- ```bash
- dev/alice             dev/new-onboarding
- ```
+```bash
+dev/alice             dev/new-onboarding
+```
 
 </Admonition>
 

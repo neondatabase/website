@@ -2,12 +2,12 @@
 
 ## 33.1. Running the Tests [#](#REGRESS-RUN)
 
-  * [33.1.1. Running the Tests Against a Temporary Installation](regress-run#REGRESS-RUN-TEMP-INST)
-  * [33.1.2. Running the Tests Against an Existing Installation](regress-run#REGRESS-RUN-EXISTING-INST)
-  * [33.1.3. Additional Test Suites](regress-run#REGRESS-ADDITIONAL)
-  * [33.1.4. Locale and Encoding](regress-run#REGRESS-RUN-LOCALE)
-  * [33.1.5. Custom Server Settings](regress-run#REGRESS-RUN-CUSTOM-SETTINGS)
-  * [33.1.6. Extra Tests](regress-run#REGRESS-RUN-EXTRA-TESTS)
+- [33.1.1. Running the Tests Against a Temporary Installation](regress-run#REGRESS-RUN-TEMP-INST)
+- [33.1.2. Running the Tests Against an Existing Installation](regress-run#REGRESS-RUN-EXISTING-INST)
+- [33.1.3. Additional Test Suites](regress-run#REGRESS-ADDITIONAL)
+- [33.1.4. Locale and Encoding](regress-run#REGRESS-RUN-LOCALE)
+- [33.1.5. Custom Server Settings](regress-run#REGRESS-RUN-CUSTOM-SETTINGS)
+- [33.1.6. Extra Tests](regress-run#REGRESS-RUN-EXTRA-TESTS)
 
 The regression tests can be run against an already installed and running server, or using a temporary installation within the build tree. Furthermore, there is a “parallel” and a “sequential” mode for running the tests. The sequential method runs each test script alone, while the parallel method starts up multiple server processes to run groups of tests in parallel. Parallel testing adds confidence that interprocess communication and locking are working correctly. Some tests may run sequentially even in the “parallel” mode in case this is required by the test.
 
@@ -89,21 +89,21 @@ Alternatively, you can run individual test suites by typing `make check` or `mak
 
 The additional tests that can be invoked this way include:
 
-* Regression tests for optional procedural languages. These are located under `src/pl`.
+- Regression tests for optional procedural languages. These are located under `src/pl`.
 
-* Regression tests for `contrib` modules, located under `contrib`. Not all `contrib` modules have tests.
+- Regression tests for `contrib` modules, located under `contrib`. Not all `contrib` modules have tests.
 
-* Regression tests for the interface libraries, located in `src/interfaces/libpq/test` and `src/interfaces/ecpg/test`.
+- Regression tests for the interface libraries, located in `src/interfaces/libpq/test` and `src/interfaces/ecpg/test`.
 
-* Tests for core-supported authentication methods, located in `src/test/authentication`. (See below for additional authentication-related tests.)
+- Tests for core-supported authentication methods, located in `src/test/authentication`. (See below for additional authentication-related tests.)
 
-* Tests stressing behavior of concurrent sessions, located in `src/test/isolation`.
+- Tests stressing behavior of concurrent sessions, located in `src/test/isolation`.
 
-* Tests for crash recovery and physical replication, located in `src/test/recovery`.
+- Tests for crash recovery and physical replication, located in `src/test/recovery`.
 
-* Tests for logical replication, located in `src/test/subscription`.
+- Tests for logical replication, located in `src/test/subscription`.
 
-* Tests of client programs, located under `src/bin`.
+- Tests of client programs, located under `src/bin`.
 
 When using `installcheck` mode, these tests will create and destroy test databases whose names include `regression`, for example `pl_regression` or `contrib_regression`. Beware of using `installcheck` mode with an installation that has any non-test databases named that way.
 
@@ -117,23 +117,23 @@ make check-world PG_TEST_EXTRA='kerberos ldap ssl load_balance'
 
 The following values are currently supported:
 
-* `kerberos`
+- `kerberos`
 
   Runs the test suite under `src/test/kerberos`. This requires an MIT Kerberos installation and opens TCP/IP listen sockets.
 
-* `ldap`
+- `ldap`
 
   Runs the test suite under `src/test/ldap`. This requires an OpenLDAP installation and opens TCP/IP listen sockets.
 
-* `ssl`
+- `ssl`
 
   Runs the test suite under `src/test/ssl`. This opens TCP/IP listen sockets.
 
-* `load_balance`
+- `load_balance`
 
   Runs the test `src/interfaces/libpq/t/004_load_balance_dns.pl`. This requires editing the system `hosts` file and opens TCP/IP listen sockets.
 
-* `wal_consistency_checking`
+- `wal_consistency_checking`
 
   Uses `wal_consistency_checking=all` while running certain tests under `src/test/recovery`. Not enabled by default because it is resource intensive.
 
@@ -184,7 +184,7 @@ echo 'work_mem = 50MB' >> test_postgresql.conf
 make check EXTRA_REGRESS_OPTS="--temp-config=test_postgresql.conf"
 ```
 
-This can be useful to enable additional logging, adjust resource limits, or enable extra run-time checks such as [debug\_discard\_caches](runtime-config-developer#GUC-DEBUG-DISCARD-CACHES).
+This can be useful to enable additional logging, adjust resource limits, or enable extra run-time checks such as [debug_discard_caches](runtime-config-developer#GUC-DEBUG-DISCARD-CACHES).
 
 [#id](#REGRESS-RUN-EXTRA-TESTS)
 

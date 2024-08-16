@@ -29,19 +29,19 @@ Refer to [Chapter 12](textsearch) for further information.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of the text search dictionary to be created. The name can be schema-qualified.
 
-* *`template`*
+- _`template`_
 
   The name of the text search template that will define the basic behavior of this dictionary.
 
-* *`option`*
+- _`option`_
 
   The name of a template-specific option to be set for this dictionary.
 
-* *`value`*
+- _`value`_
 
   The value to use for a template-specific option. If the value is not a simple identifier or number, it must be quoted (but you can always quote it, if you wish).
 

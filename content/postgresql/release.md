@@ -4,14 +4,14 @@
 
 **Table of Contents**
 
-* [E.1. Release 16](release-16)
+- [E.1. Release 16](release-16)
 
-    * [E.1.1. Overview](release-16#RELEASE-16-HIGHLIGHTS)
-    * [E.1.2. Migration to Version 16](release-16#RELEASE-16-MIGRATION)
-    * [E.1.3. Changes](release-16#RELEASE-16-CHANGES)
-    * [E.1.4. Acknowledgments](release-16#RELEASE-16-ACKNOWLEDGEMENTS)
+  - [E.1.1. Overview](release-16#RELEASE-16-HIGHLIGHTS)
+  - [E.1.2. Migration to Version 16](release-16#RELEASE-16-MIGRATION)
+  - [E.1.3. Changes](release-16#RELEASE-16-CHANGES)
+  - [E.1.4. Acknowledgments](release-16#RELEASE-16-ACKNOWLEDGEMENTS)
 
-* [E.2. Prior Releases](release-prior)
+- [E.2. Prior Releases](release-prior)
 
 The release notes contain the significant changes in each PostgreSQL release, with major features and migration issues listed at the top. The release notes do not contain changes that affect only a few users or changes that are internal and therefore not user-visible. For example, the optimizer is improved in almost every release, but the improvements are usually observed by users as simply faster queries.
 

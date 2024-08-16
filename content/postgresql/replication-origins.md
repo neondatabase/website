@@ -2,13 +2,11 @@
 
 ## Chapter 50. Replication Progress Tracking
 
-
-
 Replication origins are intended to make it easier to implement logical replication solutions on top of [logical decoding](logicaldecoding). They provide a solution to two common problems:
 
-* How to safely keep track of replication progress
+- How to safely keep track of replication progress
 
-* How to change replication behavior based on the origin of a row; for example, to prevent loops in bi-directional replication setups
+- How to change replication behavior based on the origin of a row; for example, to prevent loops in bi-directional replication setups
 
 Replication origins have just two properties, a name and an ID. The name, which is what should be used to refer to the origin across systems, is free-form `text`. It should be used in a way that makes conflicts between replication origins created by different replication solutions unlikely; e.g., by prefixing the replication solution's name to it. The ID is used only to avoid having to store the long version in situations where space efficiency is important. It should never be shared across systems.
 

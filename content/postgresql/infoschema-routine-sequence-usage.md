@@ -12,7 +12,7 @@ The view `routine_sequence_usage` is meant to identify all sequences that are us
 | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `specific_catalog` `sql_identifier`Name of the database containing the function (always the current database)                               |
 | `specific_schema` `sql_identifier`Name of the schema containing the function                                                                |
-| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines) for more information.    |
+| `specific_name` `sql_identifier`The “specific name” of the function. See [Section 37.45](infoschema-routines) for more information.         |
 | `routine_catalog` `sql_identifier`Name of the database containing the function (always the current database)                                |
 | `routine_schema` `sql_identifier`Name of the schema containing the function                                                                 |
 | `routine_name` `sql_identifier`Name of the function (might be duplicated in case of overloading)                                            |

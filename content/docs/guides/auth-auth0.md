@@ -1,18 +1,19 @@
 ---
 title: Authenticate Neon Postgres application users with Auth0
-subtitle: Learn how to add authentication to a Neon Postgres database application using Auth0
+subtitle: Learn how to add authentication to a Neon Postgres database application using
+  Auth0
 enableTableOfContents: true
-updatedOn: '2024-03-04T11:30:00.000Z'
+updatedOn: '2024-08-07T21:36:52.646Z'
 ---
 
-User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations. 
+User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
 
-[Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a Neon Postgres database. 
+[Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a Neon Postgres database.
 
 In this guide, we'll walk through setting up a simple Next.js application using Neon Postgres as the database, and add user authentication using [Auth0](https://auth0.com/). We will cover how to:
 
 - Set up a Next.js project with Auth0 for authentication
-- Create a Neon Postgres database and connect it to your application  
+- Create a Neon Postgres database and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Auth0 user IDs
 
@@ -21,7 +22,7 @@ In this guide, we'll walk through setting up a simple Next.js application using 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free tier to get started.
+- An [Auth0](https://auth0.com/) account for user authentication. Auth0 provides a free plan to get started.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
 ## Initialize your Next.js project
@@ -44,7 +45,7 @@ We use the `@neondatabase/serverless` package as the Postgres client, and `drizz
 
 Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Auth0 connection parameters:
 
-```bash 
+```bash
 touch .env.local
 ```
 
@@ -54,11 +55,12 @@ At the time of this post, the `@auth0/nextjs-auth0` package caused import errors
 ```js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { esmExternals: "loose" },
+  experimental: { esmExternals: 'loose' },
 };
 
 export default nextConfig;
 ```
+
 </Admonition>
 
 Now, we can start building the application.
@@ -67,7 +69,7 @@ Now, we can start building the application.
 
 ### Initialize a new project
 
-1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section. 
+1. Log in to the Neon console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select an existing project or click the **New Project** button to create a new one.
 3. Choose the desired region and Postgres version for your project, then click **Create Project**.
 
@@ -76,7 +78,7 @@ Now, we can start building the application.
 Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Add this connection string to the `.env.local` file in your Next.js project.
@@ -97,11 +99,11 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 ### Configure Auth0 application settings
 
 1. In the `Settings` tab of your Auth0 application, scroll down to the `Application URIs` section.
-2. Set the `Allowed Callback URLs` to `http://localhost:3000/api/auth/callback` for local development. 
+2. Set the `Allowed Callback URLs` to `http://localhost:3000/api/auth/callback` for local development.
 3. Set the `Allowed Logout URLs` to `http://localhost:3000`.
 4. Click `Save Changes` at the bottom of the page.
 
-### Retrieve your Auth0 domain and client ID 
+### Retrieve your Auth0 domain and client ID
 
 From the `Settings` tab of your Auth0 application, copy the `Domain` and `Client ID` values. Add these to the `.env.local` file in your Next.js project:
 
@@ -115,7 +117,7 @@ AUTH0_CLIENT_ID='YOUR_AUTH0_CLIENT_ID'
 AUTH0_CLIENT_SECRET='YOUR_AUTH0_CLIENT_SECRET'
 ```
 
-Replace `YOUR_AUTH0_DOMAIN`, `YOUR_AUTH0_CLIENT_ID` and `YOUR_AUTH0_CLIENT_SECRET` with the actual values from your Auth0 application settings. 
+Replace `YOUR_AUTH0_DOMAIN`, `YOUR_AUTH0_CLIENT_ID` and `YOUR_AUTH0_CLIENT_SECRET` with the actual values from your Auth0 application settings.
 
 Run the following command in your terminal to generate a random 32-byte value for the `AUTH0_SECRET` variable:
 
@@ -127,19 +129,19 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 
 ### Define your database connection and schema
 
-Create a `db` folder inside the `app/` directory. This is where we'll define the database schema and connection code. 
+Create a `db` folder inside the `app/` directory. This is where we'll define the database schema and connection code.
 
 Now, add the file `app/db/index.ts` with the following content:
 
 ```typescript
 /// app/db/index.ts
 
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
-import { UserMessages } from "./schema";
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { UserMessages } from './schema';
 
 if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL must be a Neon postgres connection string");
+  throw new Error('DATABASE_URL must be a Neon postgres connection string');
 }
 
 const sql = neon(process.env.DATABASE_URL);
@@ -156,12 +158,12 @@ Next, create a `schema.ts` file inside the `app/db` directory to define the data
 ```typescript
 /// app/db/schema.ts
 
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const UserMessages = pgTable("user_messages", {
-  user_id: text("user_id").primaryKey().notNull(),
-  createTs: timestamp("create_ts").defaultNow().notNull(),
-  message: text("message").notNull(),
+export const UserMessages = pgTable('user_messages', {
+  user_id: text('user_id').primaryKey().notNull(),
+  createTs: timestamp('create_ts').defaultNow().notNull(),
+  message: text('message').notNull(),
 });
 ```
 
@@ -174,18 +176,17 @@ We'll use the `drizzle-kit` CLI tool to generate migrations for the schema we de
 ```typescript
 /// drizzle.config.ts
 
-import type { Config } from "drizzle-kit";
-import * as dotenv from "dotenv";
+import type { Config } from 'drizzle-kit';
+import * as dotenv from 'dotenv';
 
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: '.env.local' });
 
-if (!process.env.DATABASE_URL)
-  throw new Error("DATABASE_URL not found in environment");
+if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in environment');
 
 export default {
-  schema: "./app/db/schema.ts",
-  out: "./drizzle",
-  driver: "pg",
+  schema: './app/db/schema.ts',
+  out: './drizzle',
+  driver: 'pg',
   dbCredentials: {
     connectionString: process.env.DATABASE_URL,
   },
@@ -214,7 +215,7 @@ We create a `dynamic route` to handle the Auth0 authentication flow. Create a ne
 ```typescript
 /// app/api/auth/[auth0]/route.ts
 
-import { handleAuth, handleLogin } from "@auth0/nextjs-auth0";
+import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
 
 export default handleAuth({
   login: handleLogin(),
@@ -228,17 +229,17 @@ Next, we will wrap the application with the `UserProvider` component from `@auth
 ```tsx
 /// app/layout.tsx
 
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { getSession } from "@auth0/nextjs-auth0";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { getSession } from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Neon-Next-Auth0 guide",
-  description: "Generated by create next app",
+  title: 'Neon-Next-Auth0 guide',
+  description: 'Generated by create next app',
 };
 
 async function UserInfoBar() {
@@ -249,9 +250,9 @@ async function UserInfoBar() {
 
   const { user } = session;
   return (
-    <div className="bg-gray-100 py-2 px-4">
+    <div className="bg-gray-100 px-4 py-2">
       <span className="text-gray-800">
-        Welcome, {user.name}!{" "}
+        Welcome, {user.name}!{' '}
         <a href="/api/auth/logout" className="text-blue-600 hover:underline">
           Logout
         </a>
@@ -287,34 +288,34 @@ Create a new file at `app/actions.ts` with the following content:
 ```typescript
 /// app/actions.ts
 
-"use server";
+'use server';
 
-import { getSession } from "@auth0/nextjs-auth0/edge";
-import { UserMessages } from "./db/schema";
-import { db } from "./db";
-import { redirect } from "next/navigation";
-import { eq } from "drizzle-orm";
+import { getSession } from '@auth0/nextjs-auth0/edge';
+import { UserMessages } from './db/schema';
+import { db } from './db';
+import { redirect } from 'next/navigation';
+import { eq } from 'drizzle-orm';
 
 export async function createUserMessage(formData: FormData) {
   const session = await getSession();
-  if (!session) throw new Error("User not authenticated");
+  if (!session) throw new Error('User not authenticated');
 
-  const message = formData.get("message") as string;
+  const message = formData.get('message') as string;
 
   await db.insert(UserMessages).values({
     user_id: session.user.sub,
     message,
   });
 
-  redirect("/");
+  redirect('/');
 }
 
 export async function deleteUserMessage() {
   const session = await getSession();
-  if (!session) throw new Error("User not authenticated");
+  if (!session) throw new Error('User not authenticated');
 
   await db.delete(UserMessages).where(eq(UserMessages.user_id, session.user.sub));
-  redirect("/");
+  redirect('/');
 }
 ```
 
@@ -325,9 +326,9 @@ Next, we implement a minimal UI to interact with these functions. Replace the co
 ```tsx
 /// app/page.tsx
 
-import { createUserMessage, deleteUserMessage } from "./actions";
-import { db } from "./db";
-import { getSession } from "@auth0/nextjs-auth0/edge";
+import { createUserMessage, deleteUserMessage } from './actions';
+import { db } from './db';
+import { getSession } from '@auth0/nextjs-auth0/edge';
 
 async function getUserMessage() {
   const session = await getSession();
@@ -343,7 +344,7 @@ function LoginBox() {
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <a
         href="/api/auth/login"
-        className="rounded-md bg-[#00E699] px-3.5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm hover:bg-[#00e5BF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00E699]"
+        className="text-gray-800 rounded-md bg-[#00E699] px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-[#00e5BF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00E699]"
       >
         Log in
       </a>
@@ -362,45 +363,40 @@ export default async function Home() {
   const ui = existingMessage ? (
     <div className="w-2/3 text-center">
       <h1 className="text-3xl">{existingMessage.message}</h1>
-      <form
-        action={deleteUserMessage}
-        className="w-full rounded px-8 pt-6 pb-8 mb-4"
-      >
+      <form action={deleteUserMessage} className="mb-4 w-full rounded px-8 pb-8 pt-6">
         <div className="w-full text-center">
           <input
             type="submit"
-            value={"Delete Quote"}
-            className="bg-[#00E699] transition-colors hover:bg-[#00e5BF] text-gray-800 font-semibold py-2 px-4 rounded focus:outline-none cursor-pointer"
+            value={'Delete Quote'}
+            className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
           />
         </div>
       </form>
     </div>
   ) : (
-    <form action={createUserMessage} className="shadow-md w-2/3 rounded px-8">
+    <form action={createUserMessage} className="w-2/3 rounded px-8 shadow-md">
       <div className="mb-6">
         <input
           type="text"
           name="message"
           placeholder="Mistakes are the portals of discovery - James Joyce"
-          className="text-center appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:outline-none"
+          className="text-gray-700 w-full appearance-none rounded border p-3 text-center leading-tight focus:outline-none"
         />
       </div>
       <div className="w-full text-center">
         <input
           type="submit"
-          value={"Save Quote"}
-          className="bg-[#00E699] cursor-pointer transition-colors hover:bg-[#00e5BF] text-gray-800 font-semibold py-2 px-4 rounded focus:outline-none"
+          value={'Save Quote'}
+          className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
         />
       </div>
     </form>
   );
 
   return (
-    <main className="flex -mt-16 min-h-screen flex-col align-center justify-center items-center px-24">
-      <h2 className="text-2xl pb-6 text-gray-400">
-        {existingMessage
-          ? "Your quote is wonderful..."
-          : "Save an inspiring quote for yourself..."}
+    <main className="align-center -mt-16 flex min-h-screen flex-col items-center justify-center px-24">
+      <h2 className="text-gray-400 pb-6 text-2xl">
+        {existingMessage ? 'Your quote is wonderful...' : 'Save an inspiring quote for yourself...'}
       </h2>
       {ui}
     </main>
@@ -418,7 +414,7 @@ To start the application, run the following command:
 
 ```bash
 npm run dev
-``` 
+```
 
 This will start the Next.js development server. Open your browser and navigate to `http://localhost:3000` to see the application in action. When running for the first time, you'll be prompted to log in with Auth0. By default, Auth0 provides email and Google account as login options.
 
@@ -430,7 +426,7 @@ In this guide, we walked through setting up a simple Next.js application with us
 
 Next, we can add more routes and features to the application. The `UserProvider` component from `@auth0/nextjs-auth0` provides the user context to each page, allowing you to conditionally render content based on the user's authentication state.
 
-To view and manage the users who authenticated with your application, you can navigate to the [Auth0 Dashboard](https://manage.auth0.com/) and click on **User Management > Users** in the sidebar. Here, you can see the list of users who have logged in and perform any necessary actions for those users. 
+To view and manage the users who authenticated with your application, you can navigate to the [Auth0 Dashboard](https://manage.auth0.com/) and click on **User Management > Users** in the sidebar. Here, you can see the list of users who have logged in and perform any necessary actions for those users.
 
 ## Source code
 
@@ -443,6 +439,7 @@ You can find the source code for the application described in this guide on GitH
 ## Resources
 
 For more information on the tools used in this guide, refer to the following documentation:
+
 - [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Drizzle ORM](https://orm.drizzle.team/)

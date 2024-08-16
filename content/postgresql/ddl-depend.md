@@ -2,8 +2,6 @@
 
 ## 5.14. Dependency Tracking [#](#DDL-DEPEND)
 
-
-
 When you create complex database structures involving many tables with foreign key constraints, views, triggers, functions, etc. you implicitly create a net of dependencies between the objects. For instance, a table with a foreign key constraint depends on the table it references.
 
 To ensure the integrity of the entire database structure, PostgreSQL makes sure that you cannot drop objects that other objects still depend on. For example, attempting to drop the products table we considered in [Section 5.4.5](ddl-constraints#DDL-CONSTRAINTS-FK), with the orders table depending on it, would result in an error message like this:
@@ -34,7 +32,7 @@ According to the SQL standard, specifying either `RESTRICT` or `CASCADE` is requ
 
 If a `DROP` command lists multiple objects, `CASCADE` is only required when there are dependencies outside the specified group. For example, when saying `DROP TABLE tab1, tab2` the existence of a foreign key referencing `tab1` from `tab2` would not mean that `CASCADE` is needed to succeed.
 
-For a user-defined function or procedure whose body is defined as a string literal, PostgreSQL tracks dependencies associated with the function's externally-visible properties, such as its argument and result types, but *not* dependencies that could only be known by examining the function body. As an example, consider this situation:
+For a user-defined function or procedure whose body is defined as a string literal, PostgreSQL tracks dependencies associated with the function's externally-visible properties, such as its argument and result types, but _not_ dependencies that could only be known by examining the function body. As an example, consider this situation:
 
 ```
 

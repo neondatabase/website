@@ -2,9 +2,9 @@
 
 ## 32.1. What Is JIT compilation? [#](#JIT-REASON)
 
-  * [32.1.1. JIT Accelerated Operations](jit-reason#JIT-ACCELERATED-OPERATIONS)
-  * [32.1.2. Inlining](jit-reason#JIT-INLINING)
-  * [32.1.3. Optimization](jit-reason#JIT-OPTIMIZATION)
+- [32.1.1. JIT Accelerated Operations](jit-reason#JIT-ACCELERATED-OPERATIONS)
+- [32.1.2. Inlining](jit-reason#JIT-INLINING)
+- [32.1.3. Optimization](jit-reason#JIT-OPTIMIZATION)
 
 Just-in-Time (JIT) compilation is the process of turning some form of interpreted program evaluation into a native program, and doing so at run time. For example, instead of using general-purpose code that can evaluate arbitrary SQL expressions to evaluate a particular SQL predicate like `WHERE a.col = 3`, it is possible to generate a function that is specific to that expression and can be natively executed by the CPU, yielding a speedup.
 

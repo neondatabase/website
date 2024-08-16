@@ -804,19 +804,32 @@ const getAllWpCaseStudiesPosts = async () => {
       caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
         nodes {
           caseStudyPost {
-            description
-            isInternal
-            externalUrl
-            post {
-              ... on Post {
-                slug
-              }
-            }
+            isFeatured
             logo {
               mediaItemUrl
               mediaDetails {
                 width
                 height
+              }
+            }
+            image {
+              mediaItemUrl
+              mediaDetails {
+                width
+                height
+              }
+            }
+            description
+            quote
+            author {
+              name
+              post
+            }
+            isInternal
+            externalUrl
+            post {
+              ... on Post {
+                slug
               }
             }
           }

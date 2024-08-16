@@ -4,6 +4,7 @@ subtitle: Learn about strategies for optimizing Postgres query performance
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
+updatedOn: '2024-08-07T21:36:52.673Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -25,7 +26,7 @@ Strategies in this category include:
 
 Gathering query statistics can aid in identifying performance issues and opportunities for optimization. Neon supports the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension for monitoring and analyzing SQL query performance.
 
-The [pg_stat_statements](/docs/extensions/pg_stat_statements) extension provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and more. 
+The [pg_stat_statements](/docs/extensions/pg_stat_statements) extension provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and more.
 
 This extension isn’t installed by default, so your first step is to install it and then allow some time for statistics collection. To install the extension, run the following `CREATE EXTENSION` statement.
 
@@ -40,27 +41,27 @@ neondb=> \d pg_stat_statements
 
                       View "public.pg_stat_statements"
 
-         Column         |       Type       | Collation | Nullable | Default 
+         Column         |       Type       | Collation | Nullable | Default
 ------------------------+------------------+-----------+----------+---------
- userid                 | oid              |           |          | 
- dbid                   | oid              |           |          | 
- toplevel               | boolean          |           |          | 
- queryid                | bigint           |           |          | 
- query                  | text             |           |          | 
- plans                  | bigint           |           |          | 
- total_plan_time        | double precision |           |          | 
- min_plan_time          | double precision |           |          | 
- max_plan_time          | double precision |           |          | 
- mean_plan_time         | double precision |           |          | 
- stddev_plan_time       | double precision |           |          | 
- calls                  | bigint           |           |          | 
- total_exec_time        | double precision |           |          | 
- min_exec_time          | double precision |           |          | 
- max_exec_time          | double precision |           |          | 
- mean_exec_time         | double precision |           |          | 
- stddev_exec_time       | double precision |           |          | 
- rows                   | bigint           |           |          | 
- ... 
+ userid                 | oid              |           |          |
+ dbid                   | oid              |           |          |
+ toplevel               | boolean          |           |          |
+ queryid                | bigint           |           |          |
+ query                  | text             |           |          |
+ plans                  | bigint           |           |          |
+ total_plan_time        | double precision |           |          |
+ min_plan_time          | double precision |           |          |
+ max_plan_time          | double precision |           |          |
+ mean_plan_time         | double precision |           |          |
+ stddev_plan_time       | double precision |           |          |
+ calls                  | bigint           |           |          |
+ total_exec_time        | double precision |           |          |
+ min_exec_time          | double precision |           |          |
+ max_exec_time          | double precision |           |          |
+ mean_exec_time         | double precision |           |          |
+ stddev_exec_time       | double precision |           |          |
+ rows                   | bigint           |           |          |
+ ...
 ```
 
 For a description of each metric, refer to the official Postgres documentation: [The pg_stat_statements View](https://www.postgresql.org/docs/current/pgstatstatements.html#PGSTATSTATEMENTS-PG-STAT-STATEMENTS).
@@ -92,14 +93,14 @@ LIMIT 100;
 This query identifies the top 100 queries with the longest average execution time across all users, including execution frequency and the executing user's ID.
 
 ```sql
-SELECT 
+SELECT
     userid,
     query,
-    calls, 
+    calls,
     mean_exec_time
-FROM 
+FROM
     pg_stat_statements
-ORDER BY 
+ORDER BY
     mean_exec_time DESC
 LIMIT 100;
 ```
@@ -109,15 +110,15 @@ LIMIT 100;
 This query showcases the top 100 queries that return the most rows, ordered by the number of rows returned. It includes the average execution time for each query.
 
 ```sql
-SELECT 
-    query, 
-    rows, 
+SELECT
+    query,
+    rows,
     mean_exec_time
-FROM 
+FROM
     pg_stat_statements
-ORDER BY 
+ORDER BY
     rows DESC
-LIMIT 
+LIMIT
     100;
 ```
 
@@ -160,7 +161,7 @@ The following example demonstrates running `EXPLAIN ANALYZE` on a simple `SELECT
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM users WHERE id = '1';
-                                                       QUERY PLAN                                                       
+                                                       QUERY PLAN
 ------------------------------------------------------------------------------------------------------------------------
  Gather  (cost=1000.00..59375.93 rows=1 width=9) (actual time=0.404..6479.494 rows=1 loops=1)
    Workers Planned: 2
@@ -181,14 +182,14 @@ Interpreting `EXPLAIN` output can be a little daunting at first, but you can lea
 There are numerous other resources you can draw upon to learn more about leveraging `EXPLAIN` to optimize queries. Here are a few to get you started:
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
-- [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN). 
+- [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN).
 - [PostgreSQL EXPLAIN tutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
 
 <Admonition type="tip" title="Tips">
 - The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 - You can run the `ANALYZE` command on your database to updates statistics. This helps Postgres produce better query plans. The Postgres `autovacuum` process, which is enabled in Neon, automatically issues the `ANALYZE` command whenever the content of a table has changed sufficiently, but if you're working with large tables, this may not happen as often as expected. For a query that shows when vacuum or autovacuum
  was last run, see [VACUUM and ANALYZE statistics](/docs/postgresql/query-reference#vacuum-and-analyze-statistics).
-</Admonition> 
+</Admonition>
 
 ## Query and database design
 
@@ -225,7 +226,7 @@ To see if an index was used or to compare execution times with and without an in
 
 #### View table indexes
 
-You can use the following query to view the indexes defined on a table. You should at least have an index defined on your primary key, and if you know the columns used in your queries, consider adding indexes to those too. However, note that indexes are best suited for columns with high cardinality (a high number of unique values). Postgres might ignore indexes defined on low-cardinality columns, in which case you would be consuming storage space unnecessarily.  
+You can use the following query to view the indexes defined on a table. You should at least have an index defined on your primary key, and if you know the columns used in your queries, consider adding indexes to those too. However, note that indexes are best suited for columns with high cardinality (a high number of unique values). Postgres might ignore indexes defined on low-cardinality columns, in which case you would be consuming storage space unnecessarily.
 
 ```sql
 SELECT
@@ -262,7 +263,7 @@ LIMIT 10; -- Adjust as necessary for the number of results
 A "Check indexes" recommendation appears similar to the following:
 
 ```sql
- table_name | recommendation 
+ table_name | recommendation
 ------------+----------------
  users      | Check indexes
 ```
@@ -275,7 +276,7 @@ The `PgHero` utility also supports identifying missing indexes. See [PgHero](/do
 
 ### Use efficient data types
 
-Generally, you should avoid using a data type that is larger than necessary. 
+Generally, you should avoid using a data type that is larger than necessary.
 
 Postgres offers a range of numeric types, including `INTEGER`, `NUMERIC`, `REAL`, and `DOUBLE PRECISION`. Each has its use case, but `INTEGER` types are often sufficient for counts and identifiers and use less space than floating-point types.
 
@@ -291,11 +292,9 @@ This change decreases the memory footprint for storing `age` data, potentially i
 
 For an overview of common Postgres data types, refer to our [data types](/docs/data-types/introduction) guide.
 
-
-
 ### Use prepared statements
 
-Prepared statements are another way you can optimize query performance. They let you prepare a query plan once and use it multiple times, which minimizes processing time for repetitive query execution. 
+Prepared statements are another way you can optimize query performance. They let you prepare a query plan once and use it multiple times, which minimizes processing time for repetitive query execution.
 
 For example, imagine you need to fetch all users from a database with a given name:
 
@@ -342,7 +341,7 @@ Strategies in this category include:
 
 ### Right-size your compute
 
-The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues. 
+The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
 For information about right-sizing your compute in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
@@ -350,7 +349,7 @@ For information about right-sizing your compute in Neon, see [How to size your c
 
 A cache hit ratio tells you the percentage of queries served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
-In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute instance). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits.
+In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon extends Postgres shared buffers with a local file cache (local to your Neon compute). To query your cache hit ratio in Neon, you need to look at local file cache hits instead of shared buffer hits.
 
 To enable querying local file cache statistics, Neon provides a [neon_stat_file_cache](/docs/extensions/neon#the-neonstatfilecache-view) view. To access this view, you need to install the [neon](/docs/extensions/neon) extension:
 
@@ -389,12 +388,12 @@ The cache hit ratio query is based on statistics that represent the lifetime of 
 
 ### Use connection pooling
 
-Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to provide connection pooling support, enabling up to 10,000 concurrent connections. 
+Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to provide connection pooling support, enabling up to 10,000 concurrent connections.
 
 Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to the Neon hostname), as shown here:
 
 ```plaintext
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 
 Alternatively, you can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard.
@@ -403,7 +402,7 @@ For more information about connection pooling in Neon, see [Connection pooling](
 
 ### Check for table or index bloat
 
-If there is some issue with Postgres [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM), this can lead to table and index bloat. 
+If there is some issue with Postgres [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM), this can lead to table and index bloat.
 
 Bloat refers to the condition where tables and indexes occupy more space on disk than is necessary for storing the data. Bloat can occur over time due to the way Postgres handles updates and deletes.
 
@@ -428,7 +427,7 @@ There are SQL queries you can run to check for table and index bloat. There are 
 
 #### Reducing bloat
 
-To reduce table bloat, you can run the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) command. `VACUUM` cleans up these obsolete records and makes space available for reuse within the table. 
+To reduce table bloat, you can run the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) command. `VACUUM` cleans up these obsolete records and makes space available for reuse within the table.
 
 ```sql
 VACUUM your_table_name;
@@ -444,5 +443,4 @@ This command rebuilds all indexes on the specified table:
 REINDEX TABLE your_table_name;
 ```
 
-Generally, you’ll want to perform vacuum and reindex operations when they will have the least impact, or you’ll want to plan some maintenance downtime to run them. 
-
+Generally, you’ll want to perform vacuum and reindex operations when they will have the least impact, or you’ll want to plan some maintenance downtime to run them.

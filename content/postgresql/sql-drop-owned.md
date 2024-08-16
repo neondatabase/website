@@ -20,15 +20,15 @@ DROP OWNED BY { name | CURRENT_ROLE | CURRENT_USER | SESSION_USER } [, ...] [ CA
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name of a role whose objects will be dropped, and whose privileges will be revoked.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the affected objects, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the objects owned by a role if any other database objects depend on one of the affected objects. This is the default.
 

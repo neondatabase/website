@@ -2,7 +2,7 @@
 
 ## J.5. Documentation Authoring [#](#DOCGUIDE-AUTHORING)
 
-* [J.5.1. Emacs](docguide-authoring#DOCGUIDE-AUTHORING-EMACS)
+- [J.5.1. Emacs](docguide-authoring#DOCGUIDE-AUTHORING-EMACS)
 
 The documentation sources are most conveniently modified with an editor that has a mode for editing XML, and even more so if it has some awareness of XML schema languages so that it can know about DocBook syntax specifically.
 

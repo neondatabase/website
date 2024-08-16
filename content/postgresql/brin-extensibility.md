@@ -8,7 +8,7 @@ All it takes to get a BRIN access method working is to implement a few user-defi
 
 There are four methods that an operator class for BRIN must provide:
 
-* `BrinOpcInfo *opcInfo(Oid type_oid)`
+- `BrinOpcInfo *opcInfo(Oid type_oid)`
 
   Returns internal information about the indexed columns' summary data. The return value must point to a palloc'd `BrinOpcInfo`, which has this definition:
 
@@ -29,25 +29,25 @@ There are four methods that an operator class for BRIN must provide:
 
   `BrinOpcInfo`.`oi_opaque` can be used by the operator class routines to pass information between support functions during an index scan.
 
-* `bool consistent(BrinDesc *bdesc, BrinValues *column, ScanKey *keys, int nkeys)`
+- `bool consistent(BrinDesc *bdesc, BrinValues *column, ScanKey *keys, int nkeys)`
 
   Returns whether all the ScanKey entries are consistent with the given indexed values for a range. The attribute number to use is passed as part of the scan key. Multiple scan keys for the same attribute may be passed at once; the number of entries is determined by the `nkeys` parameter.
 
-* `bool consistent(BrinDesc *bdesc, BrinValues *column, ScanKey key)`
+- `bool consistent(BrinDesc *bdesc, BrinValues *column, ScanKey key)`
 
   Returns whether the ScanKey is consistent with the given indexed values for a range. The attribute number to use is passed as part of the scan key. This is an older backward-compatible variant of the consistent function.
 
-* `bool addValue(BrinDesc *bdesc, BrinValues *column, Datum newval, bool isnull)`
+- `bool addValue(BrinDesc *bdesc, BrinValues *column, Datum newval, bool isnull)`
 
   Given an index tuple and an indexed value, modifies the indicated attribute of the tuple so that it additionally represents the new value. If any modification was done to the tuple, `true` is returned.
 
-* `bool unionTuples(BrinDesc *bdesc, BrinValues *a, BrinValues *b)`
+- `bool unionTuples(BrinDesc *bdesc, BrinValues *a, BrinValues *b)`
 
   Consolidates two index tuples. Given two index tuples, modifies the indicated attribute of the first of them so that it represents both tuples. The second tuple is not modified.
 
 An operator class for BRIN can optionally specify the following method:
 
-* `void options(local_relopts *relopts)`
+- `void options(local_relopts *relopts)`
 
   Defines a set of user-visible parameters that control operator class behavior.
 
@@ -76,7 +76,6 @@ To write an operator class for a data type that implements a totally ordered set
 | Operator Strategy 3   | operator equal-to                            |
 | Operator Strategy 4   | operator greater-than-or-equal-to            |
 | Operator Strategy 5   | operator greater-than                        |
-
 
 To write an operator class for a complex data type which has values included within another type, it's possible to use the inclusion support functions alongside the corresponding operators, as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE). It requires only a single additional function, which can be written in any language. More functions can be defined for additional functionality. All operators are optional. Some operators require other operators, as shown as dependencies on the table.
 
@@ -111,7 +110,6 @@ To write an operator class for a complex data type which has values included wit
 | Operator Strategy 22            | operator greater-than                                                | Operator Strategy 1  |
 | Operator Strategy 23            | operator greater-than-or-equal-to                                    | Operator Strategy 1  |
 
-
 Support function numbers 1 through 10 are reserved for the BRIN internal functions, so the SQL level functions start with number 11. Support function number 11 is the main function required to build the index. It should accept two arguments with the same data type as the operator class, and return the union of them. The inclusion operator class can store union values with different data types if it is defined with the `STORAGE` parameter. The return value of the union function should match the `STORAGE` data type.
 
 Support function numbers 12 and 14 are provided to support irregularities of built-in data types. Function number 12 is used to support network addresses from different families which are not mergeable. Function number 14 is used to support empty ranges. Function number 13 is an optional but recommended one, which allows the new value to be checked before it is passed to the union function. As the BRIN framework can shortcut some operations when the union is not changed, using this function can improve index performance.
@@ -131,7 +129,6 @@ To write an operator class for a data type that implements only an equality oper
 | Support Procedure 5   | internal function `brin_bloom_options()`    |
 | Support Procedure 11  | function to compute hash of an element      |
 | Operator Strategy 1   | operator equal-to                           |
-
 
 Support procedure numbers 1-10 are reserved for the BRIN internal functions, so the SQL level functions start with number 11. Support function number 11 is the main function required to build the index. It should accept one argument with the same data type as the operator class, and return a hash of the value.
 
@@ -154,6 +151,5 @@ The minmax-multi operator class is also intended for data types implementing a t
 | Operator Strategy 3   | operator equal-to                                                   |
 | Operator Strategy 4   | operator greater-than-or-equal-to                                   |
 | Operator Strategy 5   | operator greater-than                                               |
-
 
 Both minmax and inclusion operator classes support cross-data-type operators, though with these the dependencies become more complicated. The minmax operator class requires a full set of operators to be defined with both arguments having the same data type. It allows additional data types to be supported by defining extra sets of operators. Inclusion operator class operator strategies are dependent on another operator strategy as shown in [Table 71.3](brin-extensibility#BRIN-EXTENSIBILITY-INCLUSION-TABLE), or the same operator strategy as themselves. They require the dependency operator to be defined with the `STORAGE` data type as the left-hand-side argument and the other supported data type to be the right-hand-side argument of the supported operator. See `float4_minmax_ops` as an example of minmax, and `box_inclusion_ops` as an example of inclusion.

@@ -1,13 +1,13 @@
 ---
-title: Import data from Postgres
+title: Import data from Postgres with pg_dump and pg_restore
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2024-02-08T15:20:54.293Z'
+updatedOn: '2024-08-07T21:36:52.669Z'
 ---
 
-This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore` command line utilities.
+This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore`.
 
 <Admonition type="important">
 Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
@@ -17,16 +17,16 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 
 ## Before you begin
 
-- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`
+- Neon supports PostgreSQL 14, 15, and 16. We recommend that clients are the same version as source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 - Retrieve the connection parameters or connection string for your source Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
-   ```bash shouldWrap
-   postgres://[user]:[password]@[neon_hostname]/[dbname]
-   ```
+  ```bash shouldWrap
+  postgresql://[user]:[password]@[neon_hostname]/[dbname]
+  ```
 
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
 - If your database is small, you can pipe `pg_dump` output directly to `pg_restore` to save time. See [Pipe pg_dump to pg_restore](#pipe-pgdump-to-pgrestore).
@@ -36,7 +36,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 Export your data from the source database with `pg_dump`:
 
 ```bash shouldWrap
-pg_dump -Fc -v -d <source_database_connection_string> -f <dump_file_name> 
+pg_dump -Fc -v -d <source_database_connection_string> -f <dump_file_name>
 ```
 
 The `pg_dump` command above includes these arguments:
@@ -74,12 +74,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak 
+~/mydump$ pg_dump -Fc -v -d postgresql://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
+~/mydump$ pg_restore -v -d postgresql://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 ## Pipe pg_dump to pg_restore
@@ -115,7 +115,7 @@ Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds
 To avoid the non-fatal errors, you can ignore database object ownership statements when restoring data by specifying the `-O, --no-owner` option in your `pg_restore` command:
 
 ```bash shouldWrap
-pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak 
+pg_restore -v -O -d postgresql://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 The Neon role performing the restore operation becomes the owner of all database objects.
@@ -128,7 +128,7 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 
 - `-Z`: Defines the compression level to use when using a compressible format. 0 means no compression, while 9 means maximum compression. In general, we recommend a setting of 1. A higher compression level slows the dump and restore process but also uses less disk space.
 - `--lock-wait-timeout=20s`: Error out early in the dump process instead of waiting for an unknown amount of time if there is lock contention.
-Do not wait forever to acquire shared table locks at the beginning of the dump. Instead fail if unable to lock a table within the specified timeout.`
+  Do not wait forever to acquire shared table locks at the beginning of the dump. Instead fail if unable to lock a table within the specified timeout.`
 - `-j <njobs>`: Consider this option for large databases to dump tables in parallel. Set `<njobs>` to the number of available CPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only make sense for Neon paid plan users who can configure computes with >1 vCPU.
 - `--no-blobs`: Excludes large objects from your dump. See [Data migration notes](#data-migration-notes).
 

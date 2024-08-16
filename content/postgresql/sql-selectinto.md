@@ -34,15 +34,15 @@ SELECT [ ALL | DISTINCT [ ON ( expression [, ...] ) ] ]
 
 ## Parameters
 
-* `TEMPORARY` or `TEMP`
+- `TEMPORARY` or `TEMP`
 
   If specified, the table is created as a temporary table. Refer to [CREATE TABLE](sql-createtable) for details.
 
-* `UNLOGGED`
+- `UNLOGGED`
 
   If specified, the table is created as an unlogged table. Refer to [CREATE TABLE](sql-createtable) for details.
 
-* *`new_table`*
+- _`new_table`_
 
   The name (optionally schema-qualified) of the table to be created.
 
@@ -54,7 +54,7 @@ All other parameters are described in detail under [SELECT](sql-select).
 
 [`CREATE TABLE AS`](sql-createtableas) is functionally similar to `SELECT INTO`. `CREATE TABLE AS` is the recommended syntax, since this form of `SELECT INTO` is not available in ECPG or PL/pgSQL, because they interpret the `INTO` clause differently. Furthermore, `CREATE TABLE AS` offers a superset of the functionality provided by `SELECT INTO`.
 
-In contrast to `CREATE TABLE AS`, `SELECT INTO` does not allow specifying properties like a table's access method with [`USING method`](sql-createtable#SQL-CREATETABLE-METHOD) or the table's tablespace with [`TABLESPACE tablespace_name`](sql-createtable#SQL-CREATETABLE-TABLESPACE). Use `CREATE TABLE AS` if necessary. Therefore, the default table access method is chosen for the new table. See [default\_table\_access\_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
+In contrast to `CREATE TABLE AS`, `SELECT INTO` does not allow specifying properties like a table's access method with [`USING method`](sql-createtable#SQL-CREATETABLE-METHOD) or the table's tablespace with [`TABLESPACE tablespace_name`](sql-createtable#SQL-CREATETABLE-TABLESPACE). Use `CREATE TABLE AS` if necessary. Therefore, the default table access method is chosen for the new table. See [default_table_access_method](runtime-config-client#GUC-DEFAULT-TABLE-ACCESS-METHOD) for more information.
 
 [#id](#id-1.9.3.173.8)
 

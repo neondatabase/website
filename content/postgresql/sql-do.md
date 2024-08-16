@@ -24,11 +24,11 @@ The optional `LANGUAGE` clause can be written either before or after the code bl
 
 ## Parameters
 
-* *`code`*
+- _`code`_
 
   The procedural language code to be executed. This must be specified as a string literal, just as in `CREATE FUNCTION`. Use of a dollar-quoted literal is recommended.
 
-* *`lang_name`*
+- _`lang_name`_
 
   The name of the procedural language the code is written in. If omitted, the default is `plpgsql`.
 

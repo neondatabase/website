@@ -2,7 +2,7 @@
 title: The pg_embedding extension (Support Discontinued)
 subtitle: null
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.278Z'
+updatedOn: '2024-06-14T07:55:54.369Z'
 ---
 
 <Admonition type="warning">
@@ -37,29 +37,29 @@ To migrate to `pgvector` without altering the `embeddings` column type, and cast
 
 1. Drop the `pg_embedding` extension:
 
-    ```sql
-    DROP EXTENSION embedding CASCADE;
-    ```
+   ```sql
+   DROP EXTENSION embedding CASCADE;
+   ```
 
-    The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
+   The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
 
 2. Create the `pgvector` extension:
 
-    ```sql
-    CREATE EXTENSION vector;
-    ```
+   ```sql
+   CREATE EXTENSION vector;
+   ```
 
 3. Update your queries to cast embeddings data from `real[]` to `vector`. For example, the following query casts embeddings data stored in the `embedding` column, defined as a `real[]`, to `vector`.
 
-    ```sql
-    SELECT * FROM documents ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
-    ```
+   ```sql
+   SELECT * FROM documents ORDER BY embedding::vector <-> '[3,1,2]' LIMIT 5;
+   ```
 
 4. Recreate your index, casting the `real[]` type column to `vector`, as shown:
 
-    ```sql
-    CREATE INDEX ON documents USING hnsw ((embedding::vector(3)) vector_cosine_ops);
-    ```
+   ```sql
+   CREATE INDEX ON documents USING hnsw ((embedding::vector(3)) vector_cosine_ops);
+   ```
 
 ### Migration option 2: Use the vector type
 
@@ -67,54 +67,54 @@ To migrate to `pgvector`, changing your `embeddings` column type from `real[]` t
 
 1. Drop the `pg_embedding` extension:
 
-    ```sql
-    DROP EXTENSION embedding CASCADE;
-    ```
+   ```sql
+   DROP EXTENSION embedding CASCADE;
+   ```
 
-    The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
+   The `CASCADE` clause removes the HNSW index that you defined with `pg_embedding`, which means that search queries fall back to using sequential scans until you install `pgvector` and recreate your index.
 
 2. Create the `pgvector` extension:
 
-    ```sql
-    CREATE EXTENSION vector;
-    ```
+   ```sql
+   CREATE EXTENSION vector;
+   ```
 
 3. Create a new table with the `vector` type:
 
-    ```sql
-    CREATE TABLE new_documents (id BIGSERIAL PRIMARY KEY, embedding vector(3));
-    ```
+   ```sql
+   CREATE TABLE new_documents (id BIGSERIAL PRIMARY KEY, embedding vector(3));
+   ```
 
 4. Copy data over from your old table:
 
-    ```sql
-    INSERT INTO new_documents (id, embedding)
-    SELECT id, embedding::vector(3) FROM documents;
-    ```
+   ```sql
+   INSERT INTO new_documents (id, embedding)
+   SELECT id, embedding::vector(3) FROM documents;
+   ```
 
 5. Drop the old table:
 
-    ```sql
-    DROP TABLE documents;
-    ```
+   ```sql
+   DROP TABLE documents;
+   ```
 
 6. Rename the new table to the name of the old table:
 
-    ```sql
-    ALTER TABLE new_documents RENAME TO documents;
-    ```
+   ```sql
+   ALTER TABLE new_documents RENAME TO documents;
+   ```
 
 7. Recreate your index. For example:
 
-    ```sql
-    CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops);
-    ```
+   ```sql
+   CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops);
+   ```
 
 8. Optionally, run a test query:
 
-    ```sql
-    SELECT * FROM documents ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
-    ```
+   ```sql
+   SELECT * FROM documents ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
+   ```
 
 ## About pg_embedding
 
@@ -233,7 +233,7 @@ SELECT id FROM documents ORDER BY embedding <~> array[3,3,3] LIMIT 1;
 
 The following options allow you to tune the HNSW algorithm when creating an index:
 
-- `dims`: Defines the number of dimensions in your vector data.  This is a required parameter.
+- `dims`: Defines the number of dimensions in your vector data. This is a required parameter.
 - `m`: Defines the maximum number of links or "edges" created for each node during graph construction. A higher value increases accuracy (recall) but also increases the size of the index in memory and index construction time.
 - `efconstruction`: Influences the trade-off between index quality and construction speed. A high `efconstruction` value creates a higher quality graph, enabling more accurate search results, but a higher value also means that index construction takes longer.
 - `efsearch`: Influences the trade-off between query accuracy (recall) and speed. A higher `efsearch` value increases accuracy at the cost of speed. This value should be equal to or larger than `k`, which is the number of nearest neighbors you want your search to return (defined by the `LIMIT` clause in your `SELECT` query).

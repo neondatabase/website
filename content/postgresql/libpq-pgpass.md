@@ -2,8 +2,6 @@
 
 ## 34.16. The Password File [#](#LIBPQ-PGPASS)
 
-
-
 The file `.pgpass` in a user's home directory can contain passwords to be used if the connection requires a password (and no password has been specified otherwise). On Microsoft Windows the file is named `%APPDATA%\postgresql\pgpass.conf` (where `%APPDATA%` refers to the Application Data subdirectory in the user's profile). Alternatively, the password file to use can be specified using the connection parameter [passfile](libpq-connect#LIBPQ-CONNECT-PASSFILE) or the environment variable `PGPASSFILE`.
 
 This file should contain lines of the following format:

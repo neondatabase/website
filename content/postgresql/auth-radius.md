@@ -2,8 +2,6 @@
 
 ## 21.11. RADIUS Authentication [#](#AUTH-RADIUS)
 
-
-
 This authentication method operates similarly to `password` except that it uses RADIUS as the password verification method. RADIUS is used only to validate the user name/password pairs. Therefore the user must already exist in the database before RADIUS can be used for authentication.
 
 When using RADIUS authentication, an Access Request message will be sent to the configured RADIUS server. This request will be of type `Authenticate Only`, and include parameters for `user name`, `password` (encrypted) and `NAS Identifier`. The request will be encrypted using a secret shared with the server. The RADIUS server will respond to this request with either `Access Accept` or `Access Reject`. There is no support for RADIUS accounting.
@@ -12,11 +10,11 @@ Multiple RADIUS servers can be specified, in which case they will be tried seque
 
 The following configuration options are supported for RADIUS:
 
-* `radiusservers`
+- `radiusservers`
 
   The DNS names or IP addresses of the RADIUS servers to connect to. This parameter is required.
 
-* `radiussecrets`
+- `radiussecrets`
 
   The shared secrets used when talking securely to the RADIUS servers. This must have exactly the same value on the PostgreSQL and RADIUS servers. It is recommended that this be a string of at least 16 characters. This parameter is required.
 
@@ -24,11 +22,11 @@ The following configuration options are supported for RADIUS:
 
   The encryption vector used will only be cryptographically strong if PostgreSQL is built with support for OpenSSL. In other cases, the transmission to the RADIUS server should only be considered obfuscated, not secured, and external security measures should be applied if necessary.
 
-* `radiusports`
+- `radiusports`
 
   The port numbers to connect to on the RADIUS servers. If no port is specified, the default RADIUS port (`1812`) will be used.
 
-* `radiusidentifiers`
+- `radiusidentifiers`
 
   The strings to be used as `NAS Identifier` in the RADIUS requests. This parameter can be used, for example, to identify which database cluster the user is attempting to connect to, which can be useful for policy matching on the RADIUS server. If no identifier is specified, the default `postgresql` will be used.
 

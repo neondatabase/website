@@ -22,15 +22,15 @@ The owner of a foreign server can drop user mappings for that server for any use
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the user mapping does not exist. A notice is issued in this case.
 
-* *`user_name`*
+- _`user_name`_
 
   User name of the mapping. `CURRENT_ROLE`, `CURRENT_USER`, and `USER` match the name of the current user. `PUBLIC` is used to match all present and future user names in the system.
 
-* *`server_name`*
+- _`server_name`_
 
   Server name of the user mapping.
 

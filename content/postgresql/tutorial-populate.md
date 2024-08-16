@@ -2,8 +2,6 @@
 
 ## 2.4. Populating a Table With Rows [#](#TUTORIAL-POPULATE)
 
-
-
 The `INSERT` statement is used to populate a table with rows:
 
 ```

@@ -2,12 +2,12 @@
 title: Schema migration with Neon Postgres and SQLAlchemy
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
 enableTableOfContents: true
-updatedOn: '2024-03-04T14:30:00.000Z'
+updatedOn: '2024-08-07T21:36:52.665Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
 
-This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migrations for a Neon Postgres database. We create a simple API using the [FastAPI](https://fastapi.tiangolo.com/) web framework and define database models using SQLAlchemy. We then generate and run migrations to manage schema changes over time. 
+This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migrations for a Neon Postgres database. We create a simple API using the [FastAPI](https://fastapi.tiangolo.com/) web framework and define database models using SQLAlchemy. We then generate and run migrations to manage schema changes over time.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ To follow along with this guide, you will need:
 Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -62,7 +62,7 @@ pip install fastapi uvicorn python-dotenv
 pip freeze > requirements.txt
 ```
 
-We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We the installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment. 
+We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We the installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Set up the Database configuration
 
@@ -73,7 +73,7 @@ Create a `.env` file in the project root directory and add the `DATABASE_URL` en
 DATABASE_URL=NEON_POSTGRES_CONNECTION_STRING
 ```
 
-We create an `app` directory at the project root to store the database models and configuration files. 
+We create an `app` directory at the project root to store the database models and configuration files.
 
 ```bash
 mkdir app
@@ -290,7 +290,7 @@ if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
 ```
 
-This code defines endpoints for creating and retrieving authors and books. It uses SQLAlchemy's `Session` to interact with the database and Pydantic models (`schemas`) for request and response data validation and serialization. 
+This code defines endpoints for creating and retrieving authors and books. It uses SQLAlchemy's `Session` to interact with the database and Pydantic models (`schemas`) for request and response data validation and serialization.
 
 ### Run the FastAPI server
 
@@ -300,7 +300,7 @@ To start the FastAPI server using `uvicorn` and test the application, run the fo
 python main.py
 ```
 
-Now, you can navigate to `http://localhost:8000/authors` in your browser to view the list of authors. To view the books by a specific author, navigate to `http://localhost:8000/books/{author_id}` where `{author_id}` is the ID of the author. 
+Now, you can navigate to `http://localhost:8000/authors` in your browser to view the list of authors. To view the books by a specific author, navigate to `http://localhost:8000/books/{author_id}` where `{author_id}` is the ID of the author.
 
 ## Applying schema changes
 
@@ -348,7 +348,7 @@ Restart the FastAPI development server.
 python main.py
 ```
 
-Navigate to `http://localhost:8000/authors` in your browser to view the list of authors. You should see the new `country` field included in each author's record, reflecting the schema change. 
+Navigate to `http://localhost:8000/authors` in your browser to view the list of authors. You should see the new `country` field included in each author's record, reflecting the schema change.
 
 ## Conclusion
 

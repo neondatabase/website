@@ -20,19 +20,19 @@ DROP EVENT TRIGGER [ IF EXISTS ] name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the event trigger does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the event trigger to remove.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the trigger, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the trigger if any objects depend on it. This is the default.
 

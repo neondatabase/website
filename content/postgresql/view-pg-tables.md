@@ -2,16 +2,14 @@
 
 ## 54.30. `pg_tables` [#](#VIEW-PG-TABLES)
 
-
-
 The view `pg_tables` provides access to useful information about each table in the database.
 
 [#id](#id-1.10.5.34.4)
 
 **Table 54.30. `pg_tables` Columns**
 
-| Column TypeDescription                                                                                                                                     |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Column TypeDescription                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `schemaname` `name` (references [`pg_namespace`](catalog-pg-namespace).`nspname`)Name of schema containing table                                      |
 | `tablename` `name` (references [`pg_class`](catalog-pg-class).`relname`)Name of table                                                                 |
 | `tableowner` `name` (references [`pg_authid`](catalog-pg-authid).`rolname`)Name of table's owner                                                      |

@@ -2,14 +2,12 @@
 
 ## 5.11. Table Partitioning [#](#DDL-PARTITIONING)
 
-  * [5.11.1. Overview](ddl-partitioning#DDL-PARTITIONING-OVERVIEW)
-  * [5.11.2. Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE)
-  * [5.11.3. Partitioning Using Inheritance](ddl-partitioning#DDL-PARTITIONING-USING-INHERITANCE)
-  * [5.11.4. Partition Pruning](ddl-partitioning#DDL-PARTITION-PRUNING)
-  * [5.11.5. Partitioning and Constraint Exclusion](ddl-partitioning#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
-  * [5.11.6. Best Practices for Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
-
-
+- [5.11.1. Overview](ddl-partitioning#DDL-PARTITIONING-OVERVIEW)
+- [5.11.2. Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE)
+- [5.11.3. Partitioning Using Inheritance](ddl-partitioning#DDL-PARTITIONING-USING-INHERITANCE)
+- [5.11.4. Partition Pruning](ddl-partitioning#DDL-PARTITION-PRUNING)
+- [5.11.5. Partitioning and Constraint Exclusion](ddl-partitioning#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
+- [5.11.6. Best Practices for Declarative Partitioning](ddl-partitioning#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
 
 PostgreSQL supports basic table partitioning. This section describes why and how to implement partitioning as part of your database design.
 
@@ -19,27 +17,27 @@ PostgreSQL supports basic table partitioning. This section describes why and how
 
 Partitioning refers to splitting what is logically one large table into smaller physical pieces. Partitioning can provide several benefits:
 
-* Query performance can be improved dramatically in certain situations, particularly when most of the heavily accessed rows of the table are in a single partition or a small number of partitions. Partitioning effectively substitutes for the upper tree levels of indexes, making it more likely that the heavily-used parts of the indexes fit in memory.
+- Query performance can be improved dramatically in certain situations, particularly when most of the heavily accessed rows of the table are in a single partition or a small number of partitions. Partitioning effectively substitutes for the upper tree levels of indexes, making it more likely that the heavily-used parts of the indexes fit in memory.
 
-* When queries or updates access a large percentage of a single partition, performance can be improved by using a sequential scan of that partition instead of using an index, which would require random-access reads scattered across the whole table.
+- When queries or updates access a large percentage of a single partition, performance can be improved by using a sequential scan of that partition instead of using an index, which would require random-access reads scattered across the whole table.
 
-* Bulk loads and deletes can be accomplished by adding or removing partitions, if the usage pattern is accounted for in the partitioning design. Dropping an individual partition using `DROP TABLE`, or doing `ALTER TABLE DETACH PARTITION`, is far faster than a bulk operation. These commands also entirely avoid the `VACUUM` overhead caused by a bulk `DELETE`.
+- Bulk loads and deletes can be accomplished by adding or removing partitions, if the usage pattern is accounted for in the partitioning design. Dropping an individual partition using `DROP TABLE`, or doing `ALTER TABLE DETACH PARTITION`, is far faster than a bulk operation. These commands also entirely avoid the `VACUUM` overhead caused by a bulk `DELETE`.
 
-* Seldom-used data can be migrated to cheaper and slower storage media.
+- Seldom-used data can be migrated to cheaper and slower storage media.
 
 These benefits will normally be worthwhile only when a table would otherwise be very large. The exact point at which a table will benefit from partitioning depends on the application, although a rule of thumb is that the size of the table should exceed the physical memory of the database server.
 
 PostgreSQL offers built-in support for the following forms of partitioning:
 
-* Range Partitioning [#](#DDL-PARTITIONING-OVERVIEW-RANGE)
+- Range Partitioning [#](#DDL-PARTITIONING-OVERVIEW-RANGE)
 
   The table is partitioned into “ranges” defined by a key column or set of columns, with no overlap between the ranges of values assigned to different partitions. For example, one might partition by date ranges, or by ranges of identifiers for particular business objects. Each range's bounds are understood as being inclusive at the lower end and exclusive at the upper end. For example, if one partition's range is from `1` to `10`, and the next one's range is from `10` to `20`, then value `10` belongs to the second partition not the first.
 
-* List Partitioning [#](#DDL-PARTITIONING-OVERVIEW-LIST)
+- List Partitioning [#](#DDL-PARTITIONING-OVERVIEW-LIST)
 
   The table is partitioned by explicitly listing which key value(s) appear in each partition.
 
-* Hash Partitioning [#](#DDL-PARTITIONING-OVERVIEW-HASH)
+- Hash Partitioning [#](#DDL-PARTITIONING-OVERVIEW-HASH)
 
   The table is partitioned by specifying a modulus and a remainder for each partition. Each partition will hold the rows for which the hash value of the partition key divided by the specified modulus will produce the specified remainder.
 
@@ -49,11 +47,11 @@ If your application needs to use other forms of partitioning not listed above, a
 
 ### 5.11.2. Declarative Partitioning [#](#DDL-PARTITIONING-DECLARATIVE)
 
-PostgreSQL allows you to declare that a table is divided into partitions. The table that is divided is referred to as a *partitioned table*. The declaration includes the *partitioning method* as described above, plus a list of columns or expressions to be used as the *partition key*.
+PostgreSQL allows you to declare that a table is divided into partitions. The table that is divided is referred to as a _partitioned table_. The declaration includes the _partitioning method_ as described above, plus a list of columns or expressions to be used as the _partition key_.
 
-The partitioned table itself is a “virtual” table having no storage of its own. Instead, the storage belongs to *partitions*, which are otherwise-ordinary tables associated with the partitioned table. Each partition stores a subset of the data as defined by its *partition bounds*. All rows inserted into a partitioned table will be routed to the appropriate one of the partitions based on the values of the partition key column(s). Updating the partition key of a row will cause it to be moved into a different partition if it no longer satisfies the partition bounds of its original partition.
+The partitioned table itself is a “virtual” table having no storage of its own. Instead, the storage belongs to _partitions_, which are otherwise-ordinary tables associated with the partitioned table. Each partition stores a subset of the data as defined by its _partition bounds_. All rows inserted into a partitioned table will be routed to the appropriate one of the partitions based on the values of the partition key column(s). Updating the partition key of a row will cause it to be moved into a different partition if it no longer satisfies the partition bounds of its original partition.
 
-Partitions may themselves be defined as partitioned tables, resulting in *sub-partitioning*. Although all partitions must have the same columns as their partitioned parent, partitions may have their own indexes, constraints and default values, distinct from those of other partitions. See [CREATE TABLE](sql-createtable) for more details on creating partitioned tables and partitions.
+Partitions may themselves be defined as partitioned tables, resulting in _sub-partitioning_. Although all partitions must have the same columns as their partitioned parent, partitions may have their own indexes, constraints and default values, distinct from those of other partitions. See [CREATE TABLE](sql-createtable) for more details on creating partitioned tables and partitions.
 
 It is not possible to turn a regular table into a partitioned table or vice versa. However, it is possible to add an existing regular or partitioned table as a partition of a partitioned table, or remove a partition from a partitioned table turning it into a standalone table; this can simplify and speed up many maintenance processes. See [ALTER TABLE](sql-altertable) to learn more about the `ATTACH PARTITION` and `DETACH PARTITION` sub-commands.
 
@@ -143,7 +141,7 @@ To use declarative partitioning in this case, use the following steps:
    CREATE INDEX ON measurement (logdate);
    ```
 
-4. Ensure that the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter is not disabled in `postgresql.conf`. If it is, queries will not be optimized as desired.
+4. Ensure that the [enable_partition_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter is not disabled in `postgresql.conf`. If it is, queries will not be optimized as desired.
 
 In the above example we would be creating a new partition each month, so it might be wise to write a script that generates the required DDL automatically.
 
@@ -170,7 +168,7 @@ ALTER TABLE measurement DETACH PARTITION measurement_y2006m02;
 ALTER TABLE measurement DETACH PARTITION measurement_y2006m02 CONCURRENTLY;
 ```
 
-These allow further operations to be performed on the data before it is dropped. For example, this is often a useful time to back up the data using `COPY`, pg\_dump, or similar tools. It might also be a useful time to aggregate data into smaller formats, perform other data manipulations, or run reports. The first form of the command requires an `ACCESS EXCLUSIVE` lock on the parent table. Adding the `CONCURRENTLY` qualifier as in the second form allows the detach operation to require only `SHARE UPDATE EXCLUSIVE` lock on the parent table, but see [`ALTER TABLE ... DETACH PARTITION`](sql-altertable#SQL-ALTERTABLE-DETACH-PARTITION) for details on the restrictions.
+These allow further operations to be performed on the data before it is dropped. For example, this is often a useful time to back up the data using `COPY`, pg_dump, or similar tools. It might also be a useful time to aggregate data into smaller formats, perform other data manipulations, or run reports. The first form of the command requires an `ACCESS EXCLUSIVE` lock on the parent table. Adding the `CONCURRENTLY` qualifier as in the second form allows the detach operation to require only `SHARE UPDATE EXCLUSIVE` lock on the parent table, but see [`ALTER TABLE ... DETACH PARTITION`](sql-altertable#SQL-ALTERTABLE-DETACH-PARTITION) for details on the restrictions.
 
 Similarly we can add a new partition to handle new data. We can create an empty partition in the partitioned table just as the original partitions were created above:
 
@@ -203,7 +201,7 @@ Before running the `ATTACH PARTITION` command, it is recommended to create a `CH
 
 Similarly, if the partitioned table has a `DEFAULT` partition, it is recommended to create a `CHECK` constraint which excludes the to-be-attached partition's constraint. If this is not done then the `DEFAULT` partition will be scanned to verify that it contains no records which should be located in the partition being attached. This operation will be performed whilst holding an `ACCESS EXCLUSIVE` lock on the `DEFAULT` partition. If the `DEFAULT` partition is itself a partitioned table, then each of its partitions will be recursively checked in the same way as the table being attached, as mentioned above.
 
-As explained above, it is possible to create indexes on partitioned tables so that they are applied automatically to the entire hierarchy. This is very convenient, as not only will the existing partitions become indexed, but also any partitions that are created in the future will. One limitation is that it's not possible to use the `CONCURRENTLY` qualifier when creating such a partitioned index. To avoid long lock times, it is possible to use `CREATE INDEX ON ONLY` the partitioned table; such an index is marked invalid, and the partitions do not get the index applied automatically. The indexes on partitions can be created individually using `CONCURRENTLY`, and then *attached* to the index on the parent using `ALTER INDEX .. ATTACH PARTITION`. Once indexes for all partitions are attached to the parent index, the parent index is marked valid automatically. Example:
+As explained above, it is possible to create indexes on partitioned tables so that they are applied automatically to the entire hierarchy. This is very convenient, as not only will the existing partitions become indexed, but also any partitions that are created in the future will. One limitation is that it's not possible to use the `CONCURRENTLY` qualifier when creating such a partitioned index. To avoid long lock times, it is possible to use `CREATE INDEX ON ONLY` the partitioned table; such an index is marked invalid, and the partitions do not get the index applied automatically. The indexes on partitions can be created individually using `CONCURRENTLY`, and then _attached_ to the index on the parent using `ALTER INDEX .. ATTACH PARTITION`. Once indexes for all partitions are attached to the parent index, the parent index is marked valid automatically. Example:
 
 ```
 
@@ -234,25 +232,25 @@ ALTER INDEX measurement_city_id_logdate_key
 
 The following limitations apply to partitioned tables:
 
-* To create a unique or primary key constraint on a partitioned table, the partition keys must not include any expressions or function calls and the constraint's columns must include all of the partition key columns. This limitation exists because the individual indexes making up the constraint can only directly enforce uniqueness within their own partitions; therefore, the partition structure itself must guarantee that there are not duplicates in different partitions.
+- To create a unique or primary key constraint on a partitioned table, the partition keys must not include any expressions or function calls and the constraint's columns must include all of the partition key columns. This limitation exists because the individual indexes making up the constraint can only directly enforce uniqueness within their own partitions; therefore, the partition structure itself must guarantee that there are not duplicates in different partitions.
 
-* There is no way to create an exclusion constraint spanning the whole partitioned table. It is only possible to put such a constraint on each leaf partition individually. Again, this limitation stems from not being able to enforce cross-partition restrictions.
+- There is no way to create an exclusion constraint spanning the whole partitioned table. It is only possible to put such a constraint on each leaf partition individually. Again, this limitation stems from not being able to enforce cross-partition restrictions.
 
-* `BEFORE ROW` triggers on `INSERT` cannot change which partition is the final destination for a new row.
+- `BEFORE ROW` triggers on `INSERT` cannot change which partition is the final destination for a new row.
 
-* Mixing temporary and permanent relations in the same partition tree is not allowed. Hence, if the partitioned table is permanent, so must be its partitions and likewise if the partitioned table is temporary. When using temporary relations, all members of the partition tree have to be from the same session.
+- Mixing temporary and permanent relations in the same partition tree is not allowed. Hence, if the partitioned table is permanent, so must be its partitions and likewise if the partitioned table is temporary. When using temporary relations, all members of the partition tree have to be from the same session.
 
 Individual partitions are linked to their partitioned table using inheritance behind-the-scenes. However, it is not possible to use all of the generic features of inheritance with declaratively partitioned tables or their partitions, as discussed below. Notably, a partition cannot have any parents other than the partitioned table it is a partition of, nor can a table inherit from both a partitioned table and a regular table. That means partitioned tables and their partitions never share an inheritance hierarchy with regular tables.
 
 Since a partition hierarchy consisting of the partitioned table and its partitions is still an inheritance hierarchy, `tableoid` and all the normal rules of inheritance apply as described in [Section 5.10](ddl-inherit), with a few exceptions:
 
-* Partitions cannot have columns that are not present in the parent. It is not possible to specify columns when creating partitions with `CREATE TABLE`, nor is it possible to add columns to partitions after-the-fact using `ALTER TABLE`. Tables may be added as a partition with `ALTER TABLE ... ATTACH PARTITION` only if their columns exactly match the parent.
+- Partitions cannot have columns that are not present in the parent. It is not possible to specify columns when creating partitions with `CREATE TABLE`, nor is it possible to add columns to partitions after-the-fact using `ALTER TABLE`. Tables may be added as a partition with `ALTER TABLE ... ATTACH PARTITION` only if their columns exactly match the parent.
 
-* Both `CHECK` and `NOT NULL` constraints of a partitioned table are always inherited by all its partitions. `CHECK` constraints that are marked `NO INHERIT` are not allowed to be created on partitioned tables. You cannot drop a `NOT NULL` constraint on a partition's column if the same constraint is present in the parent table.
+- Both `CHECK` and `NOT NULL` constraints of a partitioned table are always inherited by all its partitions. `CHECK` constraints that are marked `NO INHERIT` are not allowed to be created on partitioned tables. You cannot drop a `NOT NULL` constraint on a partition's column if the same constraint is present in the parent table.
 
-* Using `ONLY` to add or drop a constraint on only the partitioned table is supported as long as there are no partitions. Once partitions exist, using `ONLY` will result in an error. Instead, constraints on the partitions themselves can be added and (if they are not present in the parent table) dropped.
+- Using `ONLY` to add or drop a constraint on only the partitioned table is supported as long as there are no partitions. Once partitions exist, using `ONLY` will result in an error. Instead, constraints on the partitions themselves can be added and (if they are not present in the parent table) dropped.
 
-* As a partitioned table does not have any data itself, attempts to use `TRUNCATE` `ONLY` on a partitioned table will always return an error.
+- As a partitioned table does not have any data itself, attempts to use `TRUNCATE` `ONLY` on a partitioned table will always return an error.
 
 [#id](#DDL-PARTITIONING-USING-INHERITANCE)
 
@@ -260,11 +258,11 @@ Since a partition hierarchy consisting of the partitioned table and its partitio
 
 While the built-in declarative partitioning is suitable for most common use cases, there are some circumstances where a more flexible approach may be useful. Partitioning can be implemented using table inheritance, which allows for several features not supported by declarative partitioning, such as:
 
-* For declarative partitioning, partitions must have exactly the same set of columns as the partitioned table, whereas with table inheritance, child tables may have extra columns not present in the parent.
+- For declarative partitioning, partitions must have exactly the same set of columns as the partitioned table, whereas with table inheritance, child tables may have extra columns not present in the parent.
 
-* Table inheritance allows for multiple inheritance.
+- Table inheritance allows for multiple inheritance.
 
-* Declarative partitioning only supports range, list and hash partitioning, whereas table inheritance allows data to be divided in a manner of the user's choosing. (Note, however, that if constraint exclusion is unable to prune child tables effectively, query performance might be poor.)
+- Declarative partitioning only supports range, list and hash partitioning, whereas table inheritance allows data to be divided in a manner of the user's choosing. (Note, however, that if constraint exclusion is unable to prune child tables effectively, query performance might be poor.)
 
 [#id](#DDL-PARTITIONING-INHERITANCE-EXAMPLE)
 
@@ -434,7 +432,7 @@ This example builds a partitioning structure equivalent to the declarative parti
 
    Another disadvantage of the rule approach is that there is no simple way to force an error if the set of rules doesn't cover the insertion date; the data will silently go into the root table instead.
 
-6. Ensure that the [constraint\_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) configuration parameter is not disabled in `postgresql.conf`; otherwise child tables may be accessed unnecessarily.
+6. Ensure that the [constraint_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) configuration parameter is not disabled in `postgresql.conf`; otherwise child tables may be accessed unnecessarily.
 
 As we can see, a complex table hierarchy could require a substantial amount of DDL. In the above example we would be creating a new child table each month, so it might be wise to write a script that generates the required DDL automatically.
 
@@ -484,13 +482,13 @@ ALTER TABLE measurement_y2008m02 INHERIT measurement;
 
 The following caveats apply to partitioning implemented using inheritance:
 
-* There is no automatic way to verify that all of the `CHECK` constraints are mutually exclusive. It is safer to create code that generates child tables and creates and/or modifies associated objects than to write each by hand.
+- There is no automatic way to verify that all of the `CHECK` constraints are mutually exclusive. It is safer to create code that generates child tables and creates and/or modifies associated objects than to write each by hand.
 
-* Indexes and foreign key constraints apply to single tables and not to their inheritance children, hence they have some [caveats](ddl-inherit#DDL-INHERIT-CAVEATS) to be aware of.
+- Indexes and foreign key constraints apply to single tables and not to their inheritance children, hence they have some [caveats](ddl-inherit#DDL-INHERIT-CAVEATS) to be aware of.
 
-* The schemes shown here assume that the values of a row's key column(s) never change, or at least do not change enough to require it to move to another partition. An `UPDATE` that attempts to do that will fail because of the `CHECK` constraints. If you need to handle such cases, you can put suitable update triggers on the child tables, but it makes management of the structure much more complicated.
+- The schemes shown here assume that the values of a row's key column(s) never change, or at least do not change enough to require it to move to another partition. An `UPDATE` that attempts to do that will fail because of the `CHECK` constraints. If you need to handle such cases, you can put suitable update triggers on the child tables, but it makes management of the structure much more complicated.
 
-* If you are using manual `VACUUM` or `ANALYZE` commands, don't forget that you need to run them on each child table individually. A command like:
+- If you are using manual `VACUUM` or `ANALYZE` commands, don't forget that you need to run them on each child table individually. A command like:
 
   ```
 
@@ -499,17 +497,15 @@ The following caveats apply to partitioning implemented using inheritance:
 
   will only process the root table.
 
-* `INSERT` statements with `ON CONFLICT` clauses are unlikely to work as expected, as the `ON CONFLICT` action is only taken in case of unique violations on the specified target relation, not its child relations.
+- `INSERT` statements with `ON CONFLICT` clauses are unlikely to work as expected, as the `ON CONFLICT` action is only taken in case of unique violations on the specified target relation, not its child relations.
 
-* Triggers or rules will be needed to route rows to the desired child table, unless the application is explicitly aware of the partitioning scheme. Triggers may be complicated to write, and will be much slower than the tuple routing performed internally by declarative partitioning.
+- Triggers or rules will be needed to route rows to the desired child table, unless the application is explicitly aware of the partitioning scheme. Triggers may be complicated to write, and will be much slower than the tuple routing performed internally by declarative partitioning.
 
 [#id](#DDL-PARTITION-PRUNING)
 
 ### 5.11.4. Partition Pruning [#](#DDL-PARTITION-PRUNING)
 
-
-
-*Partition pruning* is a query optimization technique that improves performance for declaratively partitioned tables. As an example:
+_Partition pruning_ is a query optimization technique that improves performance for declaratively partitioned tables. As an example:
 
 ```
 
@@ -517,9 +513,9 @@ SET enable_partition_pruning = on;                 -- the default
 SELECT count(*) FROM measurement WHERE logdate >= DATE '2008-01-01';
 ```
 
-Without partition pruning, the above query would scan each of the partitions of the `measurement` table. With partition pruning enabled, the planner will examine the definition of each partition and prove that the partition need not be scanned because it could not contain any rows meeting the query's `WHERE` clause. When the planner can prove this, it excludes (*prunes*) the partition from the query plan.
+Without partition pruning, the above query would scan each of the partitions of the `measurement` table. With partition pruning enabled, the planner will examine the definition of each partition and prove that the partition need not be scanned because it could not contain any rows meeting the query's `WHERE` clause. When the planner can prove this, it excludes (_prunes_) the partition from the query plan.
 
-By using the EXPLAIN command and the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter, it's possible to show the difference between a plan for which partitions have been pruned and one for which they have not. A typical unoptimized plan for this type of table setup is:
+By using the EXPLAIN command and the [enable_partition_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) configuration parameter, it's possible to show the difference between a plan for which partitions have been pruned and one for which they have not. A typical unoptimized plan for this type of table setup is:
 
 ```
 
@@ -559,35 +555,33 @@ Note that partition pruning is driven only by the constraints defined implicitly
 
 Partition pruning can be performed not only during the planning of a given query, but also during its execution. This is useful as it can allow more partitions to be pruned when clauses contain expressions whose values are not known at query planning time, for example, parameters defined in a `PREPARE` statement, using a value obtained from a subquery, or using a parameterized value on the inner side of a nested loop join. Partition pruning during execution can be performed at any of the following times:
 
-* During initialization of the query plan. Partition pruning can be performed here for parameter values which are known during the initialization phase of execution. Partitions which are pruned during this stage will not show up in the query's `EXPLAIN` or `EXPLAIN ANALYZE`. It is possible to determine the number of partitions which were removed during this phase by observing the “Subplans Removed” property in the `EXPLAIN` output.
+- During initialization of the query plan. Partition pruning can be performed here for parameter values which are known during the initialization phase of execution. Partitions which are pruned during this stage will not show up in the query's `EXPLAIN` or `EXPLAIN ANALYZE`. It is possible to determine the number of partitions which were removed during this phase by observing the “Subplans Removed” property in the `EXPLAIN` output.
 
-* During actual execution of the query plan. Partition pruning may also be performed here to remove partitions using values which are only known during actual query execution. This includes values from subqueries and values from execution-time parameters such as those from parameterized nested loop joins. Since the value of these parameters may change many times during the execution of the query, partition pruning is performed whenever one of the execution parameters being used by partition pruning changes. Determining if partitions were pruned during this phase requires careful inspection of the `loops` property in the `EXPLAIN ANALYZE` output. Subplans corresponding to different partitions may have different values for it depending on how many times each of them was pruned during execution. Some may be shown as `(never executed)` if they were pruned every time.
+- During actual execution of the query plan. Partition pruning may also be performed here to remove partitions using values which are only known during actual query execution. This includes values from subqueries and values from execution-time parameters such as those from parameterized nested loop joins. Since the value of these parameters may change many times during the execution of the query, partition pruning is performed whenever one of the execution parameters being used by partition pruning changes. Determining if partitions were pruned during this phase requires careful inspection of the `loops` property in the `EXPLAIN ANALYZE` output. Subplans corresponding to different partitions may have different values for it depending on how many times each of them was pruned during execution. Some may be shown as `(never executed)` if they were pruned every time.
 
-Partition pruning can be disabled using the [enable\_partition\_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) setting.
+Partition pruning can be disabled using the [enable_partition_pruning](runtime-config-query#GUC-ENABLE-PARTITION-PRUNING) setting.
 
 [#id](#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
 
 ### 5.11.5. Partitioning and Constraint Exclusion [#](#DDL-PARTITIONING-CONSTRAINT-EXCLUSION)
 
-
-
-*Constraint exclusion* is a query optimization technique similar to partition pruning. While it is primarily used for partitioning implemented using the legacy inheritance method, it can be used for other purposes, including with declarative partitioning.
+_Constraint exclusion_ is a query optimization technique similar to partition pruning. While it is primarily used for partitioning implemented using the legacy inheritance method, it can be used for other purposes, including with declarative partitioning.
 
 Constraint exclusion works in a very similar way to partition pruning, except that it uses each table's `CHECK` constraints — which gives it its name — whereas partition pruning uses the table's partition bounds, which exist only in the case of declarative partitioning. Another difference is that constraint exclusion is only applied at plan time; there is no attempt to remove partitions at execution time.
 
 The fact that constraint exclusion uses `CHECK` constraints, which makes it slow compared to partition pruning, can sometimes be used as an advantage: because constraints can be defined even on declaratively-partitioned tables, in addition to their internal partition bounds, constraint exclusion may be able to elide additional partitions from the query plan.
 
-The default (and recommended) setting of [constraint\_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) is neither `on` nor `off`, but an intermediate setting called `partition`, which causes the technique to be applied only to queries that are likely to be working on inheritance partitioned tables. The `on` setting causes the planner to examine `CHECK` constraints in all queries, even simple ones that are unlikely to benefit.
+The default (and recommended) setting of [constraint_exclusion](runtime-config-query#GUC-CONSTRAINT-EXCLUSION) is neither `on` nor `off`, but an intermediate setting called `partition`, which causes the technique to be applied only to queries that are likely to be working on inheritance partitioned tables. The `on` setting causes the planner to examine `CHECK` constraints in all queries, even simple ones that are unlikely to benefit.
 
 The following caveats apply to constraint exclusion:
 
-* Constraint exclusion is only applied during query planning, unlike partition pruning, which can also be applied during query execution.
+- Constraint exclusion is only applied during query planning, unlike partition pruning, which can also be applied during query execution.
 
-* Constraint exclusion only works when the query's `WHERE` clause contains constants (or externally supplied parameters). For example, a comparison against a non-immutable function such as `CURRENT_TIMESTAMP` cannot be optimized, since the planner cannot know which child table the function's value might fall into at run time.
+- Constraint exclusion only works when the query's `WHERE` clause contains constants (or externally supplied parameters). For example, a comparison against a non-immutable function such as `CURRENT_TIMESTAMP` cannot be optimized, since the planner cannot know which child table the function's value might fall into at run time.
 
-* Keep the partitioning constraints simple, else the planner may not be able to prove that child tables might not need to be visited. Use simple equality conditions for list partitioning, or simple range tests for range partitioning, as illustrated in the preceding examples. A good rule of thumb is that partitioning constraints should contain only comparisons of the partitioning column(s) to constants using B-tree-indexable operators, because only B-tree-indexable column(s) are allowed in the partition key.
+- Keep the partitioning constraints simple, else the planner may not be able to prove that child tables might not need to be visited. Use simple equality conditions for list partitioning, or simple range tests for range partitioning, as illustrated in the preceding examples. A good rule of thumb is that partitioning constraints should contain only comparisons of the partitioning column(s) to constants using B-tree-indexable operators, because only B-tree-indexable column(s) are allowed in the partition key.
 
-* All constraints on all children of the parent table are examined during constraint exclusion, so large numbers of children are likely to increase query planning time considerably. So the legacy inheritance based partitioning will work well with up to perhaps a hundred child tables; don't try to use many thousands of children.
+- All constraints on all children of the parent table are examined during constraint exclusion, so large numbers of children are likely to increase query planning time considerably. So the legacy inheritance based partitioning will work well with up to perhaps a hundred child tables; don't try to use many thousands of children.
 
 [#id](#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES)
 

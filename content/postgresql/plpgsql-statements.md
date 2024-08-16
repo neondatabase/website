@@ -2,12 +2,12 @@
 
 ## 43.5. Basic Statements [#](#PLPGSQL-STATEMENTS)
 
-  * [43.5.1. Assignment](plpgsql-statements#PLPGSQL-STATEMENTS-ASSIGNMENT)
-  * [43.5.2. Executing SQL Commands](plpgsql-statements#PLPGSQL-STATEMENTS-GENERAL-SQL)
-  * [43.5.3. Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
-  * [43.5.4. Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
-  * [43.5.5. Obtaining the Result Status](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)
-  * [43.5.6. Doing Nothing At All](plpgsql-statements#PLPGSQL-STATEMENTS-NULL)
+- [43.5.1. Assignment](plpgsql-statements#PLPGSQL-STATEMENTS-ASSIGNMENT)
+- [43.5.2. Executing SQL Commands](plpgsql-statements#PLPGSQL-STATEMENTS-GENERAL-SQL)
+- [43.5.3. Executing a Command with a Single-Row Result](plpgsql-statements#PLPGSQL-STATEMENTS-SQL-ONEROW)
+- [43.5.4. Executing Dynamic Commands](plpgsql-statements#PLPGSQL-STATEMENTS-EXECUTING-DYN)
+- [43.5.5. Obtaining the Result Status](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)
+- [43.5.6. Doing Nothing At All](plpgsql-statements#PLPGSQL-STATEMENTS-NULL)
 
 In this section and the following ones, we describe all the statement types that are explicitly understood by PL/pgSQL. Anything not recognized as one of these statement types is presumed to be an SQL command and is sent to the main database engine to execute, as described in [Section 43.5.2](plpgsql-statements#PLPGSQL-STATEMENTS-GENERAL-SQL).
 
@@ -64,7 +64,7 @@ Sometimes it is useful to evaluate an expression or `SELECT` query but discard t
 PERFORM query;
 ```
 
-This executes *`query`* and discards the result. Write the *`query`* the same way you would write an SQL `SELECT` command, but replace the initial keyword `SELECT` with `PERFORM`. For `WITH` queries, use `PERFORM` and then place the query in parentheses. (In this case, the query can only return one row.) PL/pgSQL variables will be substituted into the query just as described above, and the plan is cached in the same way. Also, the special variable `FOUND` is set to true if the query produced at least one row, or false if it produced no rows (see [Section 43.5.5](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)).
+This executes _`query`_ and discards the result. Write the _`query`_ the same way you would write an SQL `SELECT` command, but replace the initial keyword `SELECT` with `PERFORM`. For `WITH` queries, use `PERFORM` and then place the query in parentheses. (In this case, the query can only return one row.) PL/pgSQL variables will be substituted into the query just as described above, and the plan is cached in the same way. Also, the special variable `FOUND` is set to true if the query produced at least one row, or false if it produced no rows (see [Section 43.5.5](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)).
 
 ### Note
 
@@ -80,8 +80,6 @@ PERFORM create_mv('cs_session_page_requests_mv', my_query);
 
 ### 43.5.3. Executing a Command with a Single-Row Result [#](#PLPGSQL-STATEMENTS-SQL-ONEROW)
 
-
-
 The result of an SQL command yielding a single row (possibly of multiple columns) can be assigned to a record variable, row-type variable, or list of scalar variables. This is done by writing the base SQL command and adding an `INTO` clause. For example,
 
 ```
@@ -91,7 +89,7 @@ UPDATE ... RETURNING expressions INTO [STRICT] target;
 DELETE ... RETURNING expressions INTO [STRICT] target;
 ```
 
-where *`target`* can be a record variable, a row variable, or a comma-separated list of simple variables and record/row fields. PL/pgSQL variables will be substituted into the rest of the command (that is, everything but the `INTO` clause) just as described above, and the plan is cached in the same way. This works for `SELECT`, `INSERT`/`UPDATE`/`DELETE` with `RETURNING`, and certain utility commands that return row sets, such as `EXPLAIN`. Except for the `INTO` clause, the SQL command is the same as it would be written outside PL/pgSQL.
+where _`target`_ can be a record variable, a row variable, or a comma-separated list of simple variables and record/row fields. PL/pgSQL variables will be substituted into the rest of the command (that is, everything but the `INTO` clause) just as described above, and the plan is cached in the same way. This works for `SELECT`, `INSERT`/`UPDATE`/`DELETE` with `RETURNING`, and certain utility commands that return row sets, such as `EXPLAIN`. Except for the `INTO` clause, the SQL command is the same as it would be written outside PL/pgSQL.
 
 ### Tip
 
@@ -99,9 +97,9 @@ Note that this interpretation of `SELECT` with `INTO` is quite different from Po
 
 If a row variable or a variable list is used as target, the command's result columns must exactly match the structure of the target as to number and data types, or else a run-time error occurs. When a record variable is the target, it automatically configures itself to the row type of the command's result columns.
 
-The `INTO` clause can appear almost anywhere in the SQL command. Customarily it is written either just before or just after the list of *`select_expressions`* in a `SELECT` command, or at the end of the command for other command types. It is recommended that you follow this convention in case the PL/pgSQL parser becomes stricter in future versions.
+The `INTO` clause can appear almost anywhere in the SQL command. Customarily it is written either just before or just after the list of _`select_expressions`_ in a `SELECT` command, or at the end of the command for other command types. It is recommended that you follow this convention in case the PL/pgSQL parser becomes stricter in future versions.
 
-If `STRICT` is not specified in the `INTO` clause, then *`target`* will be set to the first row returned by the command, or to nulls if the command returned no rows. (Note that “the first row” is not well-defined unless you've used `ORDER BY`.) Any result rows after the first row are discarded. You can check the special `FOUND` variable (see [Section 43.5.5](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)) to determine whether a row was returned:
+If `STRICT` is not specified in the `INTO` clause, then _`target`_ will be set to the first row returned by the command, or to nulls if the command returned no rows. (Note that “the first row” is not well-defined unless you've used `ORDER BY`.) Any result rows after the first row are discarded. You can check the special `FOUND` variable (see [Section 43.5.5](plpgsql-statements#PLPGSQL-STATEMENTS-DIAGNOSTICS)) to determine whether a row was returned:
 
 ```
 SELECT * INTO myrec FROM emp WHERE empname = myname;
@@ -165,7 +163,7 @@ Oftentimes you will want to generate dynamic commands inside your PL/pgSQL funct
 EXECUTE command-string [ INTO [STRICT] target ] [ USING expression [, ... ] ];
 ```
 
-where *`command-string`* is an expression yielding a string (of type `text`) containing the command to be executed. The optional *`target`* is a record variable, a row variable, or a comma-separated list of simple variables and record/row fields, into which the results of the command will be stored. The optional `USING` expressions supply values to be inserted into the command.
+where _`command-string`_ is an expression yielding a string (of type `text`) containing the command to be executed. The optional _`target`_ is a record variable, a row variable, or a comma-separated list of simple variables and record/row fields, into which the results of the command will be stored. The optional `USING` expressions supply values to be inserted into the command.
 
 No substitution of PL/pgSQL variables is done on the computed command string. Any required variable values must be inserted in the command string as it is constructed; or you can use parameters as described below.
 
@@ -217,8 +215,6 @@ The PL/pgSQL `EXECUTE` statement is not related to the [`EXECUTE`](sql-execute) 
 [#id](#PLPGSQL-QUOTE-LITERAL-EXAMPLE)
 
 **Example 43.1. Quoting Values in Dynamic Queries**
-
-
 
 When working with dynamic commands you will often have to handle escaping of single quotes. The recommended method for quoting fixed text in your function body is dollar quoting. (If you have legacy code that does not use dollar quoting, please refer to the overview in [Section 43.12.1](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS), which can save you some effort when translating said code to a more reasonable scheme.)
 
@@ -280,7 +276,7 @@ EXECUTE 'UPDATE tbl SET '
         || quote_literal(keyvalue);
 ```
 
-because it would break if the contents of `newvalue` happened to contain `$$`. The same objection would apply to any other dollar-quoting delimiter you might pick. So, to safely quote text that is not known in advance, you *must* use `quote_literal`, `quote_nullable`, or `quote_ident`, as appropriate.
+because it would break if the contents of `newvalue` happened to contain `$$`. The same objection would apply to any other dollar-quoting delimiter you might pick. So, to safely quote text that is not known in advance, you _must_ use `quote_literal`, `quote_nullable`, or `quote_ident`, as appropriate.
 
 Dynamic SQL statements can also be safely constructed using the `format` function (see [Section 9.4.1](functions-string#FUNCTIONS-STRING-FORMAT)). For example:
 
@@ -298,7 +294,6 @@ EXECUTE format('UPDATE tbl SET %I = $1 WHERE key = $2', colname)
 
 This form is better because the variables are handled in their native data type format, rather than unconditionally converting them to text and quoting them via `%L`. It is also more efficient.
 
-
 A much larger example of a dynamic command and `EXECUTE` can be seen in [Example 43.10](plpgsql-porting#PLPGSQL-PORTING-EX2), which builds and executes a `CREATE FUNCTION` command to define a new function.
 
 [#id](#PLPGSQL-STATEMENTS-DIAGNOSTICS)
@@ -311,7 +306,7 @@ There are several ways to determine the effect of a command. The first method is
 GET [ CURRENT ] DIAGNOSTICS variable { = | := } item [ , ... ];
 ```
 
-This command allows retrieval of system status indicators. `CURRENT` is a noise word (but see also `GET STACKED DIAGNOSTICS` in [Section 43.6.8.1](plpgsql-control-structures#PLPGSQL-EXCEPTION-DIAGNOSTICS)). Each *`item`* is a key word identifying a status value to be assigned to the specified *`variable`* (which should be of the right data type to receive it). The currently available status items are shown in [Table 43.1](plpgsql-statements#PLPGSQL-CURRENT-DIAGNOSTICS-VALUES). Colon-equal (`:=`) can be used instead of the SQL-standard `=` token. An example:
+This command allows retrieval of system status indicators. `CURRENT` is a noise word (but see also `GET STACKED DIAGNOSTICS` in [Section 43.6.8.1](plpgsql-control-structures#PLPGSQL-EXCEPTION-DIAGNOSTICS)). Each _`item`_ is a key word identifying a status value to be assigned to the specified _`variable`_ (which should be of the right data type to receive it). The currently available status items are shown in [Table 43.1](plpgsql-statements#PLPGSQL-CURRENT-DIAGNOSTICS-VALUES). Colon-equal (`:=`) can be used instead of the SQL-standard `=` token. An example:
 
 ```
 GET DIAGNOSTICS integer_var = ROW_COUNT;
@@ -321,28 +316,27 @@ GET DIAGNOSTICS integer_var = ROW_COUNT;
 
 **Table 43.1. Available Diagnostics Items**
 
-| Name             | Type     | Description                                                                                                                  |
-| ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `ROW_COUNT`      | `bigint` | the number of rows processed by the most recent SQL command                                                                  |
+| Name             | Type     | Description                                                                                                             |
+| ---------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `ROW_COUNT`      | `bigint` | the number of rows processed by the most recent SQL command                                                             |
 | `PG_CONTEXT`     | `text`   | line(s) of text describing the current call stack (see [Section 43.6.9](plpgsql-control-structures#PLPGSQL-CALL-STACK)) |
-| `PG_ROUTINE_OID` | `oid`    | OID of the current function                                                                                                  |
-
+| `PG_ROUTINE_OID` | `oid`    | OID of the current function                                                                                             |
 
 The second method to determine the effects of a command is to check the special variable named `FOUND`, which is of type `boolean`. `FOUND` starts out false within each PL/pgSQL function call. It is set by each of the following types of statements:
 
-* A `SELECT INTO` statement sets `FOUND` true if a row is assigned, false if no row is returned.
+- A `SELECT INTO` statement sets `FOUND` true if a row is assigned, false if no row is returned.
 
-* A `PERFORM` statement sets `FOUND` true if it produces (and discards) one or more rows, false if no row is produced.
+- A `PERFORM` statement sets `FOUND` true if it produces (and discards) one or more rows, false if no row is produced.
 
-* `UPDATE`, `INSERT`, `DELETE`, and `MERGE` statements set `FOUND` true if at least one row is affected, false if no row is affected.
+- `UPDATE`, `INSERT`, `DELETE`, and `MERGE` statements set `FOUND` true if at least one row is affected, false if no row is affected.
 
-* A `FETCH` statement sets `FOUND` true if it returns a row, false if no row is returned.
+- A `FETCH` statement sets `FOUND` true if it returns a row, false if no row is returned.
 
-* A `MOVE` statement sets `FOUND` true if it successfully repositions the cursor, false otherwise.
+- A `MOVE` statement sets `FOUND` true if it successfully repositions the cursor, false otherwise.
 
-* A `FOR` or `FOREACH` statement sets `FOUND` true if it iterates one or more times, else false. `FOUND` is set this way when the loop exits; inside the execution of the loop, `FOUND` is not modified by the loop statement, although it might be changed by the execution of other statements within the loop body.
+- A `FOR` or `FOREACH` statement sets `FOUND` true if it iterates one or more times, else false. `FOUND` is set this way when the loop exits; inside the execution of the loop, `FOUND` is not modified by the loop statement, although it might be changed by the execution of other statements within the loop body.
 
-* `RETURN QUERY` and `RETURN QUERY EXECUTE` statements set `FOUND` true if the query returns at least one row, false if no row is returned.
+- `RETURN QUERY` and `RETURN QUERY EXECUTE` statements set `FOUND` true if the query returns at least one row, false if no row is returned.
 
 Other PL/pgSQL statements do not change the state of `FOUND`. Note in particular that `EXECUTE` changes the output of `GET DIAGNOSTICS`, but does not change `FOUND`.
 
@@ -381,4 +375,4 @@ Which is preferable is a matter of taste.
 
 ### Note
 
-In Oracle's PL/SQL, empty statement lists are not allowed, and so `NULL` statements are *required* for situations such as this. PL/pgSQL allows you to just write nothing, instead.
+In Oracle's PL/SQL, empty statement lists are not allowed, and so `NULL` statements are _required_ for situations such as this. PL/pgSQL allows you to just write nothing, instead.

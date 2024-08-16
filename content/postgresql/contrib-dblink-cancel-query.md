@@ -1,8 +1,8 @@
 [#id](#CONTRIB-DBLINK-CANCEL-QUERY)
 
-## dblink\_cancel\_query
+## dblink_cancel_query
 
-dblink\_cancel\_query — cancels any active query on the named connection
+dblink_cancel_query — cancels any active query on the named connection
 
 ## Synopsis
 
@@ -21,7 +21,7 @@ dblink_cancel_query(text connname) returns text
 
 ## Arguments
 
-* *`connname`*
+- _`connname`_
 
   Name of the connection to use.
 

@@ -4,10 +4,10 @@
 
 The following resources contain additional information about genetic algorithms:
 
-* [The Hitch-Hiker's Guide to Evolutionary Computation](http://www.faqs.org/faqs/ai-faq/genetic/part1/), (FAQ for [news://comp.ai.genetic]())
+- [The Hitch-Hiker's Guide to Evolutionary Computation](http://www.faqs.org/faqs/ai-faq/genetic/part1/), (FAQ for [news://comp.ai.genetic]())
 
-* [Evolutionary Computation and its application to art and design](https://www.red3d.com/cwr/evolve.html), by Craig Reynolds
+- [Evolutionary Computation and its application to art and design](https://www.red3d.com/cwr/evolve.html), by Craig Reynolds
 
-* [\[elma04\]](biblio#ELMA04)
+- [\[elma04\]](biblio#ELMA04)
 
-* [\[fong\]](biblio#FONG)
+- [\[fong\]](biblio#FONG)

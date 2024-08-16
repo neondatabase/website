@@ -2,7 +2,7 @@
 title: Postgres jsonb_extract_path() function
 subtitle: Extracts a JSONB sub-object at the specified path
 enableTableOfContents: true
-updatedOn: '2024-02-06T12:36:51.919Z'
+updatedOn: '2024-06-14T07:55:54.376Z'
 ---
 
 You can use the `jsonb_extract_path` function to extract the value at a specified path within a `JSONB` document. This approach is more performant compared to querying the entire `JSONB` payload and processing it on the application side. It is particularly useful when dealing with nested `JSONB` structures.
@@ -27,7 +27,7 @@ CREATE TABLE books (
     info JSONB
 );
 
-INSERT INTO books (id, info) 
+INSERT INTO books (id, info)
 VALUES
     (1, '{"title": "The Catcher in the Rye", "author": "J.D. Salinger", "year": 1951}'),
     (2, '{"title": "To Kill a Mockingbird", "author": "Harper Lee", "year": 1960}'),
@@ -45,7 +45,7 @@ VALUES
 Now, let's use the `jsonb_extract_path` function to extract the `title` and `author` of each book:
 
 ```sql
-SELECT 
+SELECT
     id,
     jsonb_extract_path(info, 'title') as title,
     jsonb_extract_path(info, 'author') as author
@@ -74,7 +74,7 @@ CREATE TABLE products (
     attributes JSONB
 );
 
-INSERT INTO products (id, attributes) 
+INSERT INTO products (id, attributes)
 VALUES
     (1, '{"name": "Laptop", "specs": {"brand": "Dell", "RAM": "16GB", "storage": {"type": "SSD", "capacity": "512GB"}}, "tags": ["pc"]}'),
     (2, '{"name": "Smartphone", "specs": {"brand": "Google", "RAM": "8GB", "storage": {"type": "UFS", "capacity": "256GB"}}, "tags": ["android",
@@ -138,9 +138,9 @@ This query returns the following values:
 
 ### Joining data with values extracted using `jsonb_extract_path`
 
-Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSONB` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSONB` column. 
+Let's say you have two tables, `employees` and `departments`, and the `employees` table has a `JSONB` column named `details` that contains information about each employee's department. You want to join these tables based on the department information stored in the `JSONB` column.
 
-The table schemas and data used in this example are shown below. 
+The table schemas and data used in this example are shown below.
 
 **departments**
 
@@ -150,7 +150,7 @@ CREATE TABLE departments (
     department_name VARCHAR(255)
 );
 
-INSERT INTO departments (department_name) 
+INSERT INTO departments (department_name)
 VALUES
     ('IT'),
     ('HR'),
@@ -174,7 +174,7 @@ CREATE TABLE employees (
     details JSONB
 );
 
-INSERT INTO employees (employee_name, details) 
+INSERT INTO employees (employee_name, details)
 VALUES
     ('John Doe', '{"department": "IT"}'),
     ('Jane Smith', '{"department": "HR"}'),
@@ -244,11 +244,11 @@ Indexing `JSONB` documents can also significantly improve `jsonb_extract_path` q
 
 ### Alternative functions
 
-* [jsonb_extract_path_text](/docs/functions/jsonb_extract_path_text) - The regular `jsonb_extract_path` function returns the extracted value as a `JSONB` object or array, preserving its `JSON` structure, whereas the alternative `jsonb_extract_path_text` function returns the extracted value as a plain text string, casting any `JSONB` objects or arrays to their string representations.
+- [jsonb_extract_path_text](/docs/functions/jsonb_extract_path_text) - The regular `jsonb_extract_path` function returns the extracted value as a `JSONB` object or array, preserving its `JSON` structure, whereas the alternative `jsonb_extract_path_text` function returns the extracted value as a plain text string, casting any `JSONB` objects or arrays to their string representations.
 
-    Use the regular `jsonb_extract_path` function when you need to apply `JSONB`-specific functions or operators to the extracted value, requiring `JSONB` data types. The alternative `jsonb_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
+  Use the regular `jsonb_extract_path` function when you need to apply `JSONB`-specific functions or operators to the extracted value, requiring `JSONB` data types. The alternative `jsonb_extract_path_text` function is preferable if you need to work directly with the extracted value as a string, for text processing, concatenation, or comparison.
 
-* [json_extract_path](/docs/functions/json_extract_path) - The `jsonb_extract_path` function works with the `JSONB` data type, which offers a binary representation of `JSON` data, whereas `json_extract_path` takes a `JSON` value as an input and returns `JSON` too. The `JSONB` variant is typically more performant at query time, which is even more pronounced with larger `JSON` data payloads and frequent path extractions.
+- [json_extract_path](/docs/functions/json_extract_path) - The `jsonb_extract_path` function works with the `JSONB` data type, which offers a binary representation of `JSON` data, whereas `json_extract_path` takes a `JSON` value as an input and returns `JSON` too. The `JSONB` variant is typically more performant at query time, which is even more pronounced with larger `JSON` data payloads and frequent path extractions.
 
 ## Resources
 

@@ -23,15 +23,15 @@ DESCRIBE [ OUTPUT ] prepared_name INTO sqlda_name
 
 ## Parameters
 
-* *`prepared_name`* [#](#ECPG-SQL-DESCRIBE-PREPARED-NAME)
+- _`prepared_name`_ [#](#ECPG-SQL-DESCRIBE-PREPARED-NAME)
 
   The name of a prepared statement. This can be an SQL identifier or a host variable.
 
-* *`descriptor_name`* [#](#ECPG-SQL-DESCRIBE-DESCRIPTOR-NAME)
+- _`descriptor_name`_ [#](#ECPG-SQL-DESCRIBE-DESCRIPTOR-NAME)
 
   A descriptor name. It is case sensitive. It can be an SQL identifier or a host variable.
 
-* *`sqlda_name`* [#](#ECPG-SQL-DESCRIBE-SQLDA-NAME)
+- _`sqlda_name`_ [#](#ECPG-SQL-DESCRIBE-SQLDA-NAME)
 
   The name of an SQLDA variable.
 

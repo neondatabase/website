@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
 enableTableOfContents: true
-updatedOn: '2024-02-21T23:59:47.048Z'
+updatedOn: '2024-08-07T21:36:52.649Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -27,24 +27,24 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 2. From the Neon **Dashboard**, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
-    ```sql
-    CREATE TABLE books_to_read (
-        id SERIAL PRIMARY KEY,
-        title TEXT,
-        author TEXT
-    );
-    ```
+   ```sql
+   CREATE TABLE books_to_read (
+       id SERIAL PRIMARY KEY,
+       title TEXT,
+       author TEXT
+   );
+   ```
 
-    Next, insert some sample data into the `books_to_read` table so that you can query it later:
+   Next, insert some sample data into the `books_to_read` table so that you can query it later:
 
-    ```sql
-    INSERT INTO books_to_read (title, author)
-    VALUES
-        ('The Way of Kings', 'Brandon Sanderson'),
-        ('The Name of the Wind', 'Patrick Rothfuss'),
-        ('Coders at Work', 'Peter Seibel'),
-        ('1984', 'George Orwell');
-    ```
+   ```sql
+   INSERT INTO books_to_read (title, author)
+   VALUES
+       ('The Way of Kings', 'Brandon Sanderson'),
+       ('The Name of the Wind', 'Patrick Rothfuss'),
+       ('Coders at Work', 'Peter Seibel'),
+       ('1984', 'George Orwell');
+   ```
 
 ### Retrieve your Neon database connection string
 
@@ -53,7 +53,7 @@ Log in to the Neon Console and navigate to the **Connection Details** section to
 Your pooled connection string should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -69,6 +69,7 @@ npm create cloudflare@latest
 ```
 
 This initiates an interactive CLI prompt to generate a new project. To follow along with this guide, you can use the following settings:
+
 ```bash
 ├ In which directory do you want to create your application?
 │ dir ./my-neon-worker
@@ -103,8 +104,8 @@ export default {
     await client.connect();
     const { rows } = await client.query('SELECT * FROM books_to_read;');
     return new Response(JSON.stringify(rows));
-  }
-}
+  },
+};
 ```
 
 The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.
@@ -191,6 +192,14 @@ Current Deployment ID: de8841dd-46e4-436d-b2c4-569e91f54c72
 To delete your Worker, you can use the Cloudflare dashboard or run `wrangler delete` from your project directory, specifying your project name. Refer to the [Wrangler documentation](https://developers.cloudflare.com/workers/wrangler/commands/#delete-3) for more details.
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-workers" description="Connect a Neon Postgres database to your Cloudflare Workers application" icon="github">Use Neon with Cloudflare Workers</a>
+</DetailIconCards>
 
 ## Resources
 

@@ -16,12 +16,12 @@ const partners = [
   {
     logo: { icon: retool, alt: 'Retool', width: 141, height: 40 },
     description: `“Our users spend less time on setup and more time on building: they can <span>turn spreadsheet-based processes into secure and scalable apps</span> all in just a few minutes”`,
-    linkUrl: `${LINKS.blog}/neon-postgres-on-vercel`,
+    linkUrl: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
   },
   {
     logo: { icon: vercel, alt: 'Vercel', width: 154, height: 40 },
     description: `“By partnering with Neon, Vercel’s frontend platform is now <span>the end-to-end serverless solution</span> for building on the Web”`,
-    linkUrl: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
+    linkUrl: `${LINKS.blog}/neon-postgres-on-vercel`,
   },
   {
     logo: { icon: koyeb, alt: 'Koyeb', width: 138, height: 40 },

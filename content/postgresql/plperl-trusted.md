@@ -2,8 +2,6 @@
 
 ## 45.5. Trusted and Untrusted PL/Perl [#](#PLPERL-TRUSTED)
 
-
-
 Normally, PL/Perl is installed as a “trusted” programming language named `plperl`. In this setup, certain Perl operations are disabled to preserve security. In general, the operations that are restricted are those that interact with the environment. This includes file handle operations, `require`, and `use` (for external modules). There is no way to access internals of the database server process or to gain OS-level access with the permissions of the server process, as a C function can do. Thus, any unprivileged database user can be permitted to use this language.
 
 Here is an example of a function that will not work because file system operations are not allowed for security reasons:

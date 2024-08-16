@@ -1,15 +1,15 @@
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 export const preferredRegion = 'auto';
 
 export async function GET(request) {
-  const fontMedium = fetch(
-    new URL('../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-medium.ttf', import.meta.url)
+  const fontTitle = fetch(
+    new URL('../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const fontNormal = fetch(
-    new URL('../../../../public/fonts/ibm-plex-sans/ibm-plex-sans-regular.ttf', import.meta.url)
-  ).then((res) => res.arrayBuffer());
+  const fontText = fetch(new URL('../../../fonts/inter/Inter-Regular.ttf', import.meta.url)).then(
+    (res) => res.arrayBuffer()
+  );
   const logo = fetch(new URL('../../../../public/images/og-image/logo.png', import.meta.url)).then(
     (res) => res.arrayBuffer()
   );
@@ -17,9 +17,9 @@ export async function GET(request) {
     new URL('../../../../public/images/og-image/background.png', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  const [fontDataMedium, fontDataNormal, logoData, backgroundData] = await Promise.all([
-    fontMedium,
-    fontNormal,
+  const [fontDataEsbuild, fontDataInter, logoData, backgroundData] = await Promise.all([
+    fontTitle,
+    fontText,
     logo,
     background,
   ]);
@@ -62,6 +62,7 @@ export async function GET(request) {
             <div
               style={{
                 fontSize: 76,
+                fontFamily: 'ESBuild',
                 fontWeight: 500,
                 color: 'white',
                 lineHeight: 1,
@@ -75,6 +76,7 @@ export async function GET(request) {
             </div>
             <div
               style={{
+                fontFamily: 'Inter',
                 fontSize: 30,
                 lineHeight: 1.25,
                 marginTop: 28,
@@ -93,14 +95,14 @@ export async function GET(request) {
         height: 630,
         fonts: [
           {
-            name: 'IBM Plex Sans',
-            data: fontDataMedium,
+            name: 'ESBuild',
+            data: fontDataEsbuild,
             style: 'normal',
             weight: 500,
           },
           {
-            name: 'IBM Plex Sans',
-            data: fontDataNormal,
+            name: 'Inter',
+            data: fontDataInter,
             style: 'normal',
             weight: 400,
           },

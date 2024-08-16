@@ -20,19 +20,19 @@ DROP POLICY [ IF EXISTS ] name ON table_name [ CASCADE | RESTRICT ]
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the policy does not exist. A notice is issued in this case.
 
-* *`name`*
+- _`name`_
 
   The name of the policy to drop.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table that the policy is on.
 
-* `CASCADE``RESTRICT`
+- `CASCADE``RESTRICT`
 
   These key words do not have any effect, since there are no dependencies on policies.
 

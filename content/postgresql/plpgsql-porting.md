@@ -2,31 +2,29 @@
 
 ## 43.13. Porting from Oracle PL/SQL [#](#PLPGSQL-PORTING)
 
-  * [43.13.1. Porting Examples](plpgsql-porting#PLPGSQL-PORTING-EXAMPLES)
-  * [43.13.2. Other Things to Watch For](plpgsql-porting#PLPGSQL-PORTING-OTHER)
-  * [43.13.3. Appendix](plpgsql-porting#PLPGSQL-PORTING-APPENDIX)
-
-
+- [43.13.1. Porting Examples](plpgsql-porting#PLPGSQL-PORTING-EXAMPLES)
+- [43.13.2. Other Things to Watch For](plpgsql-porting#PLPGSQL-PORTING-OTHER)
+- [43.13.3. Appendix](plpgsql-porting#PLPGSQL-PORTING-APPENDIX)
 
 This section explains differences between PostgreSQL's PL/pgSQL language and Oracle's PL/SQL language, to help developers who port applications from Oracle® to PostgreSQL.
 
 PL/pgSQL is similar to PL/SQL in many aspects. It is a block-structured, imperative language, and all variables have to be declared. Assignments, loops, and conditionals are similar. The main differences you should keep in mind when porting from PL/SQL to PL/pgSQL are:
 
-* If a name used in an SQL command could be either a column name of a table used in the command or a reference to a variable of the function, PL/SQL treats it as a column name. By default, PL/pgSQL will throw an error complaining that the name is ambiguous. You can specify `plpgsql.variable_conflict` = `use_column` to change this behavior to match PL/SQL, as explained in [Section 43.11.1](plpgsql-implementation#PLPGSQL-VAR-SUBST). It's often best to avoid such ambiguities in the first place, but if you have to port a large amount of code that depends on this behavior, setting `variable_conflict` may be the best solution.
+- If a name used in an SQL command could be either a column name of a table used in the command or a reference to a variable of the function, PL/SQL treats it as a column name. By default, PL/pgSQL will throw an error complaining that the name is ambiguous. You can specify `plpgsql.variable_conflict` = `use_column` to change this behavior to match PL/SQL, as explained in [Section 43.11.1](plpgsql-implementation#PLPGSQL-VAR-SUBST). It's often best to avoid such ambiguities in the first place, but if you have to port a large amount of code that depends on this behavior, setting `variable_conflict` may be the best solution.
 
-* In PostgreSQL the function body must be written as a string literal. Therefore you need to use dollar quoting or escape single quotes in the function body. (See [Section 43.12.1](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS).)
+- In PostgreSQL the function body must be written as a string literal. Therefore you need to use dollar quoting or escape single quotes in the function body. (See [Section 43.12.1](plpgsql-development-tips#PLPGSQL-QUOTE-TIPS).)
 
-* Data type names often need translation. For example, in Oracle string values are commonly declared as being of type `varchar2`, which is a non-SQL-standard type. In PostgreSQL, use type `varchar` or `text` instead. Similarly, replace type `number` with `numeric`, or use some other numeric data type if there's a more appropriate one.
+- Data type names often need translation. For example, in Oracle string values are commonly declared as being of type `varchar2`, which is a non-SQL-standard type. In PostgreSQL, use type `varchar` or `text` instead. Similarly, replace type `number` with `numeric`, or use some other numeric data type if there's a more appropriate one.
 
-* Instead of packages, use schemas to organize your functions into groups.
+- Instead of packages, use schemas to organize your functions into groups.
 
-* Since there are no packages, there are no package-level variables either. This is somewhat annoying. You can keep per-session state in temporary tables instead.
+- Since there are no packages, there are no package-level variables either. This is somewhat annoying. You can keep per-session state in temporary tables instead.
 
-* Integer `FOR` loops with `REVERSE` work differently: PL/SQL counts down from the second number to the first, while PL/pgSQL counts down from the first number to the second, requiring the loop bounds to be swapped when porting. This incompatibility is unfortunate but is unlikely to be changed. (See [Section 43.6.5.5](plpgsql-control-structures#PLPGSQL-INTEGER-FOR).)
+- Integer `FOR` loops with `REVERSE` work differently: PL/SQL counts down from the second number to the first, while PL/pgSQL counts down from the first number to the second, requiring the loop bounds to be swapped when porting. This incompatibility is unfortunate but is unlikely to be changed. (See [Section 43.6.5.5](plpgsql-control-structures#PLPGSQL-INTEGER-FOR).)
 
-* `FOR` loops over queries (other than cursors) also work differently: the target variable(s) must have been declared, whereas PL/SQL always declares them implicitly. An advantage of this is that the variable values are still accessible after the loop exits.
+- `FOR` loops over queries (other than cursors) also work differently: the target variable(s) must have been declared, whereas PL/SQL always declares them implicitly. An advantage of this is that the variable values are still accessible after the loop exits.
 
-* There are various notational differences for the use of cursor variables.
+- There are various notational differences for the use of cursor variables.
 
 [#id](#PLPGSQL-PORTING-EXAMPLES)
 
@@ -56,13 +54,13 @@ show errors;
 
 Let's go through this function and see the differences compared to PL/pgSQL:
 
-* The type name `varchar2` has to be changed to `varchar` or `text`. In the examples in this section, we'll use `varchar`, but `text` is often a better choice if you do not need specific string length limits.
+- The type name `varchar2` has to be changed to `varchar` or `text`. In the examples in this section, we'll use `varchar`, but `text` is often a better choice if you do not need specific string length limits.
 
-* The `RETURN` key word in the function prototype (not the function body) becomes `RETURNS` in PostgreSQL. Also, `IS` becomes `AS`, and you need to add a `LANGUAGE` clause because PL/pgSQL is not the only possible function language.
+- The `RETURN` key word in the function prototype (not the function body) becomes `RETURNS` in PostgreSQL. Also, `IS` becomes `AS`, and you need to add a `LANGUAGE` clause because PL/pgSQL is not the only possible function language.
 
-* In PostgreSQL, the function body is considered to be a string literal, so you need to use quote marks or dollar quotes around it. This substitutes for the terminating `/` in the Oracle approach.
+- In PostgreSQL, the function body is considered to be a string literal, so you need to use quote marks or dollar quotes around it. This substitutes for the terminating `/` in the Oracle approach.
 
-* The `show errors` command does not exist in PostgreSQL, and is not needed since errors are reported automatically.
+- The `show errors` command does not exist in PostgreSQL, and is not needed since errors are reported automatically.
 
 This is how this function would look when ported to PostgreSQL:
 
@@ -78,7 +76,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-
 
 [Example 43.10](plpgsql-porting#PLPGSQL-PORTING-EX2) shows how to port a function that creates another function and how to handle the ensuing quoting problems.
 
@@ -153,7 +150,6 @@ $func$ LANGUAGE plpgsql;
 ```
 
 Notice how the body of the function is built separately and passed through `quote_literal` to double any quote marks in it. This technique is needed because we cannot safely use dollar quoting for defining the new function: we do not know for sure what strings will be interpolated from the `referrer_key.key_string` field. (We are assuming here that `referrer_key.kind` can be trusted to always be `host`, `domain`, or `url`, but `referrer_key.key_string` might be anything, in particular it might contain dollar signs.) This function is actually an improvement on the Oracle original, because it will not generate broken code when `referrer_key.key_string` or `referrer_key.referrer_type` contain quote marks.
-
 
 [Example 43.11](plpgsql-porting#PLPGSQL-PORTING-EX3) shows how to port a function with `OUT` parameters and string manipulation. PostgreSQL does not have a built-in `instr` function, but you can create one using a combination of other functions. In [Section 43.13.3](plpgsql-porting#PLPGSQL-PORTING-APPENDIX) there is a PL/pgSQL implementation of `instr` that you can use to make your porting easier.
 
@@ -253,7 +249,6 @@ This function could be used like this:
 SELECT * FROM cs_parse_url('http://foobar.com/query.cgi?baz');
 ```
 
-
 [Example 43.12](plpgsql-porting#PLPGSQL-PORTING-EX4) shows how to port a procedure that uses numerous features that are specific to Oracle.
 
 [#id](#PLPGSQL-PORTING-EX4)
@@ -320,9 +315,9 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-|                                      |                                                                                                                                                                                                                                                                                                         |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [(1)](#co.plpgsql-porting-raise)     | The syntax of `RAISE` is considerably different from Oracle's statement, although the basic case `RAISE` *`exception_name`* works similarly.                                                                                                                                                            |
+|                                      |                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [(1)](#co.plpgsql-porting-raise)     | The syntax of `RAISE` is considerably different from Oracle's statement, although the basic case `RAISE` _`exception_name`_ works similarly.                                                                                                                                                       |
 | [(2)](#co.plpgsql-porting-exception) | The exception names supported by PL/pgSQL are different from Oracle's. The set of built-in exception names is much larger (see [Appendix A](errcodes-appendix)). There is not currently a way to declare user-defined exception names, although you can throw user-chosen SQLSTATE values instead. |
 
 [#id](#PLPGSQL-PORTING-OTHER)
@@ -378,8 +373,6 @@ $$ LANGUAGE plpgsql STRICT IMMUTABLE;
 ### 43.13.3. Appendix [#](#PLPGSQL-PORTING-APPENDIX)
 
 This section contains the code for a set of Oracle-compatible `instr` functions that you can use to simplify your porting efforts.
-
-
 
 ```
 --

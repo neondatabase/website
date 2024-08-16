@@ -24,19 +24,19 @@ You must own the conversion to use `ALTER CONVERSION`. To alter the owner, you m
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of an existing conversion.
 
-* *`new_name`*
+- _`new_name`_
 
   The new name of the conversion.
 
-* *`new_owner`*
+- _`new_owner`_
 
   The new owner of the conversion.
 
-* *`new_schema`*
+- _`new_schema`_
 
   The new schema for the conversion.
 

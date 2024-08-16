@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2024-02-08T15:20:54.286Z'
+updatedOn: '2024-06-14T07:55:54.402Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
@@ -42,21 +42,21 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-    <CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
+   <CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
 
-      ```shell
-      npm install @neondatabase/serverless dotenv
-      ```
+   ```shell
+   npm install @neondatabase/serverless dotenv
+   ```
 
-      ```shell
-      npm install pg dotenv
-      ```
+   ```shell
+   npm install pg dotenv
+   ```
 
-      ```shell
-      npm install postgres dotenv
-      ```
+   ```shell
+   npm install postgres dotenv
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -81,80 +81,135 @@ To ensure the security of your data, never expose your Neon credentials to the b
 ## Configure the Postgres client
 
 Add an `app.js` file to your project directory and add the following code snippet to connect to your Neon database:
-  
+
 <CodeTabs labels={["Neon serverless driver", "node-postgres", "postgres.js"]}>
 
-  ```javascript
-  require('dotenv').config();
+```javascript
+require('dotenv').config();
 
-  const { neon } = require('@neondatabase/serverless');
+const { neon } = require('@neondatabase/serverless');
 
-  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-  const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`)
+const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
 
-  async function getPgVersion() {
-      const result = await sql`SELECT version()`;
-      console.log(result[0]);
+async function getPgVersion() {
+  const result = await sql`SELECT version()`;
+  console.log(result[0]);
+}
+
+getPgVersion();
+```
+
+```javascript
+require('dotenv').config();
+
+const { Pool } = require('pg');
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const pool = new Pool({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: {
+    require: true,
+  },
+});
+
+async function getPgVersion() {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT version()');
+    console.log(result.rows[0]);
+  } finally {
+    client.release();
   }
+}
 
-  getPgVersion();
-  ```
+getPgVersion();
+```
 
-  ```javascript
-  require('dotenv').config();
+```javascript
+require('dotenv').config();
 
-  const { Pool } = require('pg');
+const postgres = require('postgres');
 
-  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-  const pool = new Pool({
-    host: PGHOST,
-    database: PGDATABASE,
-    username: PGUSER,
-    password: PGPASSWORD,
-    port: 5432,
-    ssl: {
-      require: true,
-    },
-  });
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+});
 
-  async function getPgVersion() {
-    const client = await pool.connect();
-    try {
-      const result = await client.query('SELECT version()');
-      console.log(result.rows[0]);
-    } finally {
-      client.release();
-    }
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result[0]);
+}
+
+getPgVersion();
+```
+
+```javascript
+require('dotenv').config();
+
+const { Pool } = require('pg');
+
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const pool = new Pool({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: {
+    require: true,
+  },
+});
+
+async function getPgVersion() {
+  const client = await pool.connect();
+  try {
+    const result = await client.query('SELECT version()');
+    console.log(result.rows[0]);
+  } finally {
+    client.release();
   }
+}
 
-  getPgVersion();
-  ```
+getPgVersion();
+```
 
-  ```javascript
-  require('dotenv').config();
+```javascript
+require('dotenv').config();
 
-  const postgres = require('postgres');
+const postgres = require('postgres');
 
-  const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-  const sql = postgres({
-    host: PGHOST,
-    database: PGDATABASE,
-    username: PGUSER,
-    password: PGPASSWORD,
-    port: 5432,
-    ssl: 'require',
-  });
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: 'require',
+});
 
-  async function getPgVersion() {
-    const result = await sql`select version()`;
-    console.log(result[0]);
-  }
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result[0]);
+}
 
-  getPgVersion();
-  ```
+getPgVersion();
+```
 
 </CodeTabs>
 

@@ -85,17 +85,17 @@ Default privileges that are specified per-schema are added to whatever the globa
 
 ### Parameters
 
-* *`target_role`*
+- _`target_role`_
 
   The name of an existing role of which the current role is a member. If `FOR ROLE` is omitted, the current role is assumed.
 
-* *`schema_name`*
+- _`schema_name`_
 
   The name of an existing schema. If specified, the default privileges are altered for objects later created in that schema. If `IN SCHEMA` is omitted, the global default privileges are altered. `IN SCHEMA` is not allowed when setting privileges for schemas, since schemas can't be nested.
 
-* *`role_name`*
+- _`role_name`_
 
-  The name of an existing role to grant or revoke privileges for. This parameter, and all the other parameters in *`abbreviated_grant_or_revoke`*, act as described under [GRANT](sql-grant) or [REVOKE](sql-revoke), except that one is setting permissions for a whole class of objects rather than specific named objects.
+  The name of an existing role to grant or revoke privileges for. This parameter, and all the other parameters in _`abbreviated_grant_or_revoke`_, act as described under [GRANT](sql-grant) or [REVOKE](sql-revoke), except that one is setting permissions for a whole class of objects rather than specific named objects.
 
 [#id](#SQL-ALTERDEFAULTPRIVILEGES-NOTES)
 
@@ -129,7 +129,7 @@ Remove the public EXECUTE permission that is normally granted on functions, for 
 ALTER DEFAULT PRIVILEGES FOR ROLE admin REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
 ```
 
-Note however that you *cannot* accomplish that effect with a command limited to a single schema. This command has no effect, unless it is undoing a matching `GRANT`:
+Note however that you _cannot_ accomplish that effect with a command limited to a single schema. This command has no effect, unless it is undoing a matching `GRANT`:
 
 ```
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;

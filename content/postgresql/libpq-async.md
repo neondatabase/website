@@ -2,21 +2,19 @@
 
 ## 34.4. Asynchronous Command Processing [#](#LIBPQ-ASYNC)
 
-
-
 The [`PQexec`](libpq-exec#LIBPQ-PQEXEC) function is adequate for submitting commands in normal, synchronous applications. It has a few deficiencies, however, that can be of importance to some users:
 
-* [`PQexec`](libpq-exec#LIBPQ-PQEXEC) waits for the command to be completed. The application might have other work to do (such as maintaining a user interface), in which case it won't want to block waiting for the response.
+- [`PQexec`](libpq-exec#LIBPQ-PQEXEC) waits for the command to be completed. The application might have other work to do (such as maintaining a user interface), in which case it won't want to block waiting for the response.
 
-* Since the execution of the client application is suspended while it waits for the result, it is hard for the application to decide that it would like to try to cancel the ongoing command. (It can be done from a signal handler, but not otherwise.)
+- Since the execution of the client application is suspended while it waits for the result, it is hard for the application to decide that it would like to try to cancel the ongoing command. (It can be done from a signal handler, but not otherwise.)
 
-* [`PQexec`](libpq-exec#LIBPQ-PQEXEC) can return only one `PGresult` structure. If the submitted command string contains multiple SQL commands, all but the last `PGresult` are discarded by [`PQexec`](libpq-exec#LIBPQ-PQEXEC).
+- [`PQexec`](libpq-exec#LIBPQ-PQEXEC) can return only one `PGresult` structure. If the submitted command string contains multiple SQL commands, all but the last `PGresult` are discarded by [`PQexec`](libpq-exec#LIBPQ-PQEXEC).
 
-* [`PQexec`](libpq-exec#LIBPQ-PQEXEC) always collects the command's entire result, buffering it in a single `PGresult`. While this simplifies error-handling logic for the application, it can be impractical for results containing many rows.
+- [`PQexec`](libpq-exec#LIBPQ-PQEXEC) always collects the command's entire result, buffering it in a single `PGresult`. While this simplifies error-handling logic for the application, it can be impractical for results containing many rows.
 
 Applications that do not like these limitations can instead use the underlying functions that [`PQexec`](libpq-exec#LIBPQ-PQEXEC) is built from: [`PQsendQuery`](libpq-async#LIBPQ-PQSENDQUERY) and [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT). There are also [`PQsendQueryParams`](libpq-async#LIBPQ-PQSENDQUERYPARAMS), [`PQsendPrepare`](libpq-async#LIBPQ-PQSENDPREPARE), [`PQsendQueryPrepared`](libpq-async#LIBPQ-PQSENDQUERYPREPARED), [`PQsendDescribePrepared`](libpq-async#LIBPQ-PQSENDDESCRIBEPREPARED), and [`PQsendDescribePortal`](libpq-async#LIBPQ-PQSENDDESCRIBEPORTAL), which can be used with [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) to duplicate the functionality of [`PQexecParams`](libpq-exec#LIBPQ-PQEXECPARAMS), [`PQprepare`](libpq-exec#LIBPQ-PQPREPARE), [`PQexecPrepared`](libpq-exec#LIBPQ-PQEXECPREPARED), [`PQdescribePrepared`](libpq-exec#LIBPQ-PQDESCRIBEPREPARED), and [`PQdescribePortal`](libpq-exec#LIBPQ-PQDESCRIBEPORTAL) respectively.
 
-* `PQsendQuery` [#](#LIBPQ-PQSENDQUERY)
+- `PQsendQuery` [#](#LIBPQ-PQSENDQUERY)
 
   Submits a command to the server without waiting for the result(s). 1 is returned if the command was successfully dispatched and 0 if not (in which case, use [`PQerrorMessage`](libpq-status#LIBPQ-PQERRORMESSAGE) to get more information about the failure).
 
@@ -28,7 +26,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   In pipeline mode, this function is disallowed.
 
-* `PQsendQueryParams` [#](#LIBPQ-PQSENDQUERYPARAMS)
+- `PQsendQueryParams` [#](#LIBPQ-PQSENDQUERYPARAMS)
 
   Submits a command and separate parameters to the server without waiting for the result(s).
 
@@ -45,7 +43,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   This is equivalent to [`PQsendQuery`](libpq-async#LIBPQ-PQSENDQUERY) except that query parameters can be specified separately from the query string. The function's parameters are handled identically to [`PQexecParams`](libpq-exec#LIBPQ-PQEXECPARAMS). Like [`PQexecParams`](libpq-exec#LIBPQ-PQEXECPARAMS), it allows only one command in the query string.
 
-* `PQsendPrepare` [#](#LIBPQ-PQSENDPREPARE)
+- `PQsendPrepare` [#](#LIBPQ-PQSENDPREPARE)
 
   Sends a request to create a prepared statement with the given parameters, without waiting for completion.
 
@@ -59,7 +57,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   This is an asynchronous version of [`PQprepare`](libpq-exec#LIBPQ-PQPREPARE): it returns 1 if it was able to dispatch the request, and 0 if not. After a successful call, call [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) to determine whether the server successfully created the prepared statement. The function's parameters are handled identically to [`PQprepare`](libpq-exec#LIBPQ-PQPREPARE).
 
-* `PQsendQueryPrepared` [#](#LIBPQ-PQSENDQUERYPREPARED)
+- `PQsendQueryPrepared` [#](#LIBPQ-PQSENDQUERYPREPARED)
 
   Sends a request to execute a prepared statement with given parameters, without waiting for the result(s).
 
@@ -75,7 +73,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   This is similar to [`PQsendQueryParams`](libpq-async#LIBPQ-PQSENDQUERYPARAMS), but the command to be executed is specified by naming a previously-prepared statement, instead of giving a query string. The function's parameters are handled identically to [`PQexecPrepared`](libpq-exec#LIBPQ-PQEXECPREPARED).
 
-* `PQsendDescribePrepared` [#](#LIBPQ-PQSENDDESCRIBEPREPARED)
+- `PQsendDescribePrepared` [#](#LIBPQ-PQSENDDESCRIBEPREPARED)
 
   Submits a request to obtain information about the specified prepared statement, without waiting for completion.
 
@@ -85,7 +83,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   This is an asynchronous version of [`PQdescribePrepared`](libpq-exec#LIBPQ-PQDESCRIBEPREPARED): it returns 1 if it was able to dispatch the request, and 0 if not. After a successful call, call [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) to obtain the results. The function's parameters are handled identically to [`PQdescribePrepared`](libpq-exec#LIBPQ-PQDESCRIBEPREPARED).
 
-* `PQsendDescribePortal` [#](#LIBPQ-PQSENDDESCRIBEPORTAL)
+- `PQsendDescribePortal` [#](#LIBPQ-PQSENDDESCRIBEPORTAL)
 
   Submits a request to obtain information about the specified portal, without waiting for completion.
 
@@ -95,7 +93,7 @@ Applications that do not like these limitations can instead use the underlying f
 
   This is an asynchronous version of [`PQdescribePortal`](libpq-exec#LIBPQ-PQDESCRIBEPORTAL): it returns 1 if it was able to dispatch the request, and 0 if not. After a successful call, call [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) to obtain the results. The function's parameters are handled identically to [`PQdescribePortal`](libpq-exec#LIBPQ-PQDESCRIBEPORTAL).
 
-* `PQgetResult` [#](#LIBPQ-PQGETRESULT)
+- `PQgetResult` [#](#LIBPQ-PQGETRESULT)
 
   Waits for the next result from a prior [`PQsendQuery`](libpq-async#LIBPQ-PQSENDQUERY), [`PQsendQueryParams`](libpq-async#LIBPQ-PQSENDQUERYPARAMS), [`PQsendPrepare`](libpq-async#LIBPQ-PQSENDPREPARE), [`PQsendQueryPrepared`](libpq-async#LIBPQ-PQSENDQUERYPREPARED), [`PQsendDescribePrepared`](libpq-async#LIBPQ-PQSENDDESCRIBEPREPARED), [`PQsendDescribePortal`](libpq-async#LIBPQ-PQSENDDESCRIBEPORTAL), or [`PQpipelineSync`](libpq-pipeline-mode#LIBPQ-PQPIPELINESYNC) call, and returns it. A null pointer is returned when the command is complete and there will be no more results.
 
@@ -117,7 +115,7 @@ Another frequently-desired feature that can be obtained with [`PQsendQuery`](lib
 
 By itself, calling [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) will still cause the client to block until the server completes the next SQL command. This can be avoided by proper use of two more functions:
 
-* `PQconsumeInput` [#](#LIBPQ-PQCONSUMEINPUT)
+- `PQconsumeInput` [#](#LIBPQ-PQCONSUMEINPUT)
 
   If input is available from the server, consume it.
 
@@ -129,7 +127,7 @@ By itself, calling [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) will still cau
 
   [`PQconsumeInput` ](libpq-async#LIBPQ-PQCONSUMEINPUT)can be called even if the application is not prepared to deal with a result or notification just yet. The function will read available data and save it in a buffer, thereby causing a `select()` read-ready indication to go away. The application can thus use [`PQconsumeInput` ](libpq-async#LIBPQ-PQCONSUMEINPUT)to clear the `select()` condition immediately, and then examine the results at leisure.
 
-* `PQisBusy` [#](#LIBPQ-PQISBUSY)
+- `PQisBusy` [#](#LIBPQ-PQISBUSY)
 
   Returns 1 if a command is busy, that is, [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) would block waiting for input. A 0 return indicates that [`PQgetResult`](libpq-async#LIBPQ-PQGETRESULT) can be called with assurance of not blocking.
 
@@ -145,7 +143,7 @@ A client that uses [`PQsendQuery`](libpq-async#LIBPQ-PQSENDQUERY)/[`PQgetResult`
 
 By using the functions described above, it is possible to avoid blocking while waiting for input from the database server. However, it is still possible that the application will block waiting to send output to the server. This is relatively uncommon but can happen if very long SQL commands or data values are sent. (It is much more probable if the application sends data via `COPY IN`, however.) To prevent this possibility and achieve completely nonblocking database operation, the following additional functions can be used.
 
-* `PQsetnonblocking` [#](#LIBPQ-PQSETNONBLOCKING)
+- `PQsetnonblocking` [#](#LIBPQ-PQSETNONBLOCKING)
 
   Sets the nonblocking status of the connection.
 
@@ -153,13 +151,13 @@ By using the functions described above, it is possible to avoid blocking while w
   int PQsetnonblocking(PGconn *conn, int arg);
   ```
 
-  Sets the state of the connection to nonblocking if *`arg`* is 1, or blocking if *`arg`* is 0. Returns 0 if OK, -1 if error.
+  Sets the state of the connection to nonblocking if _`arg`_ is 1, or blocking if _`arg`_ is 0. Returns 0 if OK, -1 if error.
 
   In the nonblocking state, calls to [`PQsendQuery`](libpq-async#LIBPQ-PQSENDQUERY), [`PQputline`](libpq-copy#LIBPQ-PQPUTLINE), [`PQputnbytes`](libpq-copy#LIBPQ-PQPUTNBYTES), [`PQputCopyData`](libpq-copy#LIBPQ-PQPUTCOPYDATA), and [`PQendcopy`](libpq-copy#LIBPQ-PQENDCOPY) will not block but instead return an error if they need to be called again.
 
   Note that [`PQexec`](libpq-exec#LIBPQ-PQEXEC) does not honor nonblocking mode; if it is called, it will act in blocking fashion anyway.
 
-* `PQisnonblocking` [#](#LIBPQ-PQISNONBLOCKING)
+- `PQisnonblocking` [#](#LIBPQ-PQISNONBLOCKING)
 
   Returns the blocking status of the database connection.
 
@@ -169,7 +167,7 @@ By using the functions described above, it is possible to avoid blocking while w
 
   Returns 1 if the connection is set to nonblocking mode and 0 if blocking.
 
-* `PQflush` [#](#LIBPQ-PQFLUSH)
+- `PQflush` [#](#LIBPQ-PQFLUSH)
 
   Attempts to flush any queued output data to the server. Returns 0 if successful (or if the send queue is empty), -1 if it failed for some reason, or 1 if it was unable to send all the data in the send queue yet (this case can only occur if the connection is nonblocking).
 

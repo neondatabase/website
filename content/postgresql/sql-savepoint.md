@@ -22,7 +22,7 @@ A savepoint is a special mark inside a transaction that allows all commands that
 
 ## Parameters
 
-* *`savepoint_name`*
+- _`savepoint_name`_
 
   The name to give to the new savepoint. If savepoints with the same name already exist, they will be inaccessible until newer identically-named savepoints are released.
 

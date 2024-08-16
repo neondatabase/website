@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
-import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
@@ -42,11 +41,14 @@ import Hourglass from './images/hourglass.inline.svg';
 import Import from './images/import.inline.svg';
 import Invert from './images/invert.inline.svg';
 import Ladder from './images/ladder.inline.svg';
+import LangChain from './images/langchain.inline.svg';
 import Laptop from './images/laptop.inline.svg';
+import LlamaIndex from './images/llamaindex.inline.svg';
 import LockLandscape from './images/lock-landscape.inline.svg';
 import Metrics from './images/metrics.inline.svg';
 import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
+import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
 import Perfomance from './images/perfomance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
@@ -116,10 +118,13 @@ const icons = {
   invert: Invert,
   ladder: Ladder,
   laptop: Laptop,
+  langchain: LangChain,
+  llamaindex: LlamaIndex,
   'lock-landscape': LockLandscape,
   metrics: Metrics,
   neon: Neon,
   network: Network,
+  ollama: Ollama,
   openai: OpenAI,
   perfomance: Perfomance,
   postgres: Postgres,
@@ -151,82 +156,73 @@ const icons = {
   x: X,
 };
 
-const DetailIconCards = ({ children = null, withBorderWrapper = false }) => (
-  <ul
-    className={clsx(
-      'not-prose grid grid-cols-2 sm:grid-cols-1',
-      withBorderWrapper
-        ? 'relative !mb-10 !mt-6 gap-6 rounded-[10px] border border-gray-new-94 bg-white !p-6 duration-200 dark:border-gray-new-15 dark:bg-[#0A0A0A] sm:!p-3'
-        : '!my-10 gap-5 !p-0'
-    )}
-  >
-    {React.Children.map(children, (child, index) => {
-      const { children, href, description, icon } = child.props ?? {};
-      const Icon = icons[icon];
+const DetailIconCards = ({ children = null, withNumbers = false }) => {
+  const ListComponent = withNumbers ? 'ol' : 'ul';
 
-      return (
-        <li className="!m-0 flex before:hidden" key={index}>
-          <Link
-            className={clsx(
-              'relative flex w-full items-start',
-              withBorderWrapper
-                ? 'group gap-x-3'
-                : 'gap-x-3.5 rounded-[10px] border border-gray-new-94 px-6 py-5 transition-colors duration-200 before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200 hover:border-gray-new-80 hover:before:opacity-100 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
-            )}
-            to={href}
-          >
-            <div
+  return (
+    <ListComponent className="not-prose !my-10 grid auto-rows-fr grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+      {React.Children.map(children, (child, index) => {
+        const { children, href, description, icon } = child.props ?? {};
+        const Icon = icons[icon];
+
+        return (
+          <li className="!m-0 flex before:hidden" key={index}>
+            <Link
               className={clsx(
-                'relative z-10 shrink-0',
-                withBorderWrapper
-                  ? 'h-6 w-6 rounded border border-gray-new-94 bg-gradient-to-b from-white to-gray-new-98 p-[5px] dark:border-none dark:from-white/20 dark:to-white/[1%] dark:p-px'
-                  : 'mt-0.5 h-4 w-4 text-secondary-8 dark:text-green-45'
+                'relative flex w-full items-start rounded-[10px] border border-gray-new-94 py-5 transition-colors duration-200',
+                withNumbers ? 'gap-x-0.5 px-5' : 'gap-x-3.5 px-6',
+                'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
+                'hover:border-gray-new-80 hover:before:opacity-100',
+                'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
               )}
+              to={href}
             >
               <div
                 className={clsx(
-                  'h-full w-full',
-                  withBorderWrapper &&
-                    'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
+                  'relative z-10 shrink-0 text-secondary-8 dark:text-green-45',
+                  withNumbers
+                    ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
+                    : 'mt-0.5 h-4 w-4'
                 )}
               >
-                <Icon className="h-full w-full" />
+                {withNumbers ? (
+                  <span>{index + 1}.</span>
+                ) : (
+                  <div
+                    className={clsx(
+                      'h-full w-full',
+                      withNumbers &&
+                        'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
+                    )}
+                  >
+                    <Icon className="h-full w-full" />
+                  </div>
+                )}
               </div>
-            </div>
-            <div
-              className={clsx(
-                'relative z-10 flex flex-col gap-x-2.5',
-                withBorderWrapper && 'pt-0.5'
-              )}
-            >
-              <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white [&_span]:text-gray-new-30 dark:[&_span]:text-gray-new-80">
-                {children}
-              </h3>
-              <p
-                className={clsx(
-                  'text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
-                  withBorderWrapper ? 'mt-1 max-w-[280px] sm:max-w-full' : 'mt-2.5'
-                )}
-              >
-                {description}
-              </p>
-              {withBorderWrapper && (
-                <span className="mt-1.5 inline-flex items-center text-sm font-medium text-secondary-8 transition-colors duration-200 group-hover:text-secondary-7 dark:text-green-45 dark:group-hover:text-[#00FFAA] 2xl:text-sm lg:text-base sm:text-sm">
-                  <span>Learn more</span>
-                  <ArrowRightIcon className="ml-1.5" />
-                </span>
-              )}
-            </div>
-          </Link>
-        </li>
-      );
-    })}
-  </ul>
-);
+              <div className="relative z-10 flex flex-col gap-x-2.5">
+                <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
+                  {children}
+                </h3>
+                <p
+                  className={clsx(
+                    'text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
+                    withNumbers ? 'mt-1' : 'mt-2.5'
+                  )}
+                >
+                  {description}
+                </p>
+              </div>
+            </Link>
+          </li>
+        );
+      })}
+    </ListComponent>
+  );
+};
 
 DetailIconCards.propTypes = {
   children: PropTypes.node,
-  withBorderWrapper: PropTypes.bool,
+  withNumbers: PropTypes.bool,
 };
 
 export default DetailIconCards;

@@ -2,8 +2,6 @@
 
 ## 1.3. Creating a Database [#](#TUTORIAL-CREATEDB)
 
-
-
 The first test to see whether you can access the database server is to try to create a database. A running PostgreSQL server can manage many databases. Typically, a separate database is used for each project or for each user.
 
 Possibly, your site administrator has already created a database for your use. In that case you can omit this step and skip ahead to the next section.

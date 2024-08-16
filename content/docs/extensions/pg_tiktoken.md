@@ -3,7 +3,7 @@ title: The pg_tiktoken extension
 subtitle: Efficiently tokenize data in your Postgres database using OpenAI's `tiktoken`
   library
 enableTableOfContents: true
-updatedOn: '2024-01-23T19:40:04.085Z'
+updatedOn: '2024-06-14T07:55:54.371Z'
 ---
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
@@ -42,7 +42,7 @@ The `tiktoken_encode` function tokenizes text input and returns a tokenized outp
 ```sql
 SELECT tiktoken_encode('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
 
-tiktoken_encode 
+tiktoken_encode
 --------------------------------------------------------------------------------
  {464,6881,318,257,5909,290,3144,39438,10715,11,4953,284,307,18782,290,7247,13}
 (1 row)
@@ -57,7 +57,7 @@ The `tiktoken_count` function counts the number of tokens in a text. The functio
 ```sql
 neondb=> SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and captivating mystery, waiting to be explored and understood.');
 
- tiktoken_count 
+ tiktoken_count
 ----------------
              17
 (1 row)
@@ -73,12 +73,12 @@ tiktoken_count(<encoding or model>,<text>)
 
 The following models are supported:
 
-| Encoding name      | OpenAI model                                      |
-|:-------------------|:---------------------------------------------------|
-| cl100k_base        | ChatGPT models, text-embedding-ada-002            |
-| p50k_base          | Code models, text-davinci-002, text-davinci-003    |
-| p50k_edit          | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
-| r50k_base (or gpt2)| GPT-3 models like davinci                         |
+| Encoding name       | OpenAI model                                                          |
+| :------------------ | :-------------------------------------------------------------------- |
+| cl100k_base         | ChatGPT models, text-embedding-ada-002                                |
+| p50k_base           | Code models, text-davinci-002, text-davinci-003                       |
+| p50k_edit           | Use for edit models like text-davinci-edit-001, code-davinci-edit-001 |
+| r50k_base (or gpt2) | GPT-3 models like davinci                                             |
 
 ## Integrate `pg_tiktoken` with ChatGPT models
 
@@ -101,10 +101,10 @@ The [gpt-3.5-turbo chat model](https://platform.openai.com/docs/guides/chat/intr
 {
   "model": "gpt-3.5-turbo",
   "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who won the world series in 2020?"},
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."}
-    ]
+    { "role": "system", "content": "You are a helpful assistant." },
+    { "role": "user", "content": "Who won the world series in 2020?" },
+    { "role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020." }
+  ]
 }
 ```
 
@@ -161,7 +161,7 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
          .
          .
          {"role": "user", "content": "Great! Have a great day."}  // MAX_HISTORY_TOKENS = 4000
-    ] 
+    ]
 }
 ```
 

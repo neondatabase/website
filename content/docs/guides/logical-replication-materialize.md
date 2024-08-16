@@ -3,10 +3,8 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-02-19T18:57:12.558Z'
+updatedOn: '2024-08-12T21:44:27.444Z'
 ---
-
-<LRNotice/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -32,16 +30,16 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 
 To enable logical replication in Neon:
 
-1. Select your project in the [Neon Console](https://console.neon.tech/app/projects).
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
+1. Select your project in the Neon Console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
 
 ```sql
 SHOW wal_level;
- wal_level 
+ wal_level
 -----------
  logical
 ```
@@ -52,29 +50,39 @@ After logical replication is enabled in Neon, the next step is to create a publi
 
 1. From a `psql` client connected to your Neon database or from the **Neon SQL Editor**, set the [replica identity](https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY) to `FULL` for each table that you want to replicate to Materialize:
 
-    ```sql
-    ALTER TABLE <table1> REPLICA IDENTITY FULL;
-    ```
+   ```sql
+   ALTER TABLE <table1> REPLICA IDENTITY FULL;
+   ```
 
-    `REPLICA IDENTITY FULL` ensures that the replication stream includes the previous data of changed rows, in the case of `UPDATE` and `DELETE` operations. This setting allows Materialize to ingest Postgres data with minimal in-memory state.
+   `REPLICA IDENTITY FULL` ensures that the replication stream includes the previous data of changed rows, in the case of `UPDATE` and `DELETE` operations. This setting allows Materialize to ingest Postgres data with minimal in-memory state.
 
 2. Create a [publication](https://www.postgresql.org/docs/current/logical-replication-publication.html) with the tables you want to replicate:
 
-    For specific tables:
+   For specific tables:
 
-    ```sql
-    CREATE PUBLICATION mz_source FOR TABLE <table1>, <table2>;
-    ```
+   ```sql
+   CREATE PUBLICATION mz_source FOR TABLE <table1>, <table2>;
+   ```
 
-    The `mz_source` publication will contain the set of change events generated from the specified tables and will later be used to ingest the replication stream.
+   The `mz_source` publication will contain the set of change events generated from the specified tables and will later be used to ingest the replication stream.
 
-    Be sure to include only the tables you need. If the publication includes additional tables, Materialize wastes resources on ingesting and then immediately discarding the data from those tables.
+   Be sure to include only the tables you need. If the publication includes additional tables, Materialize wastes resources on ingesting and then immediately discarding the data from those tables.
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["Neon Console", "CLI", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neon roles create --name alex
+```
+
+</TabItem>
 
 <TabItem>
 
@@ -82,21 +90,12 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
+3. Select **Branches**.
 4. Select the branch where you want to create the role.
-4. Click **New Role**.
-5. In the role creation dialog, specify a role name.
-6. Click **Create**. The role is created and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neonctl roles create --name <role>
-```
+5. Select the **Roles & Databases** tab.
+6. Click **Add Role**.
+7. In the role creation dialog, specify a role name.
+8. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -122,12 +121,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. Run these commands for each schema:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:
 
 ```sql
-GRANT USAGE ON SCHEMA <schema_name> TO <role_name>;
-GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <role_name>;
-ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <role_name>;
+GRANT USAGE ON SCHEMA public TO alex;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
@@ -138,9 +137,9 @@ If you use Neon's **IP Allow** feature to limit IP addresses that can connect to
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, run this command to find the static egress IP addresses for the Materialize region you are running in:
 
-    ```sql
-    SELECT * FROM mz_egress_ips;
-    ```
+   ```sql
+   SELECT * FROM mz_egress_ips;
+   ```
 
 2. In your Neon project, add the IPs to your **IP Allow** list, which you can find in your project's settings. For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
@@ -164,48 +163,48 @@ Now that you’ve configured your database network and created an ingestion clus
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [CREATE SECRET](https://materialize.com/docs/sql/create-secret/) command to securely store the password for the Postgres role you created earlier:
 
-    ```sql
-    CREATE SECRET pgpass AS '<PASSWORD>';
-    ```
+   ```sql
+   CREATE SECRET pgpass AS '<PASSWORD>';
+   ```
 
-    You can access the password for your Neon Postgres role from the **Connection Details** widget on the Neon **Dashboard**.
+   You can access the password for your Neon Postgres role from the **Connection Details** widget on the Neon **Dashboard**.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
-    ```sql
-    CREATE CONNECTION pg_connection TO POSTGRES (
-    HOST '<host>',
-    PORT 5432,
-    USER '<role_name>',
-    PASSWORD SECRET pgpass,
-    SSL MODE 'require',
-    DATABASE '<database>'
-    );
-    ```
+   ```sql
+   CREATE CONNECTION pg_connection TO POSTGRES (
+   HOST '<host>',
+   PORT 5432,
+   USER '<role_name>',
+   PASSWORD SECRET pgpass,
+   SSL MODE 'require',
+   DATABASE '<database>'
+   );
+   ```
 
-    You can find the connection details for your replication role in the **Connection Details** widget on the Neon **Dashboard**. A Neon connection string looks like this:
+   You can find the connection details for your replication role in the **Connection Details** widget on the Neon **Dashboard**. A Neon connection string looks like this:
 
-    ```text shouldWrap
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-    ```
+   ```text shouldWrap
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   ```
 
-    - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
-    - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
-    - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
+   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+   - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
+   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
 
 3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
 
-    ```sql
-    CREATE SOURCE mz_source
-    IN CLUSTER ingest_postgres
-    FROM POSTGRES CONNECTION pg_connection (PUBLICATION 'mz_source')
-    FOR ALL TABLES;
-    ```
+   ```sql
+   CREATE SOURCE mz_source
+   IN CLUSTER ingest_postgres
+   FROM POSTGRES CONNECTION pg_connection (PUBLICATION 'mz_source')
+   FOR ALL TABLES;
+   ```
 
-    <Admonition type="tip" title="Tips">
-    - To ingest data from specific schemas or tables in your publication, you can use `FOR SCHEMAS (<schema1>,<schema2>)` or `FOR TABLES (<table1>, <table2>)` instead of `FOR ALL TABLES`.
-    - After creating a source, you can incorporate upstream schema changes for specific replicated tables using the `ALTER SOURCE...{ADD | DROP} SUBSOURCE` syntax.
-    </Admonition>
+   <Admonition type="tip" title="Tips">
+   - To ingest data from specific schemas or tables in your publication, you can use `FOR SCHEMAS (<schema1>,<schema2>)` or `FOR TABLES (<table1>, <table2>)` instead of `FOR ALL TABLES`.
+   - After creating a source, you can incorporate upstream schema changes for specific replicated tables using the `ALTER SOURCE...{ADD | DROP} SUBSOURCE` syntax.
+   </Admonition>
 
 ## Check the ingestion status
 
@@ -213,7 +212,7 @@ Before Materialize starts consuming a replication stream, it takes a snapshot of
 
 In this step, you’ll verify that the source is running and then check the status of the snapshotting process.
 
-1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [mz_source_statuses](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statuses) table to check the overall status of your source:
+1.  From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [mz_source_statuses](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statuses) table to check the overall status of your source:
 
         ```sql
         WITH
@@ -236,7 +235,7 @@ In this step, you’ll verify that the source is running and then check the stat
 
         For each subsource, make sure the status is running. If you see stalled or failed, there’s likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
 
-2. Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
+2.  Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
 
         ```sql
         WITH
@@ -268,7 +267,7 @@ In this step, you’ll verify that the source is running and then check the stat
 
 After the snapshotting phase, Materialize starts ingesting change events from the Postgres replication stream. For this work, Materialize generally performs well with an `xsmall` replica, so you can resize the cluster accordingly.
 
-1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [ALTER CLUSTER](https://materialize.com/docs/sql/alter-cluster/) command to downsize the cluster to `xsmall`:
+1.  From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [ALTER CLUSTER](https://materialize.com/docs/sql/alter-cluster/) command to downsize the cluster to `xsmall`:
 
     ```sql
     ALTER CLUSTER ingest_postgres SET (SIZE 'xsmall');
@@ -276,7 +275,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
 
     Behind the scenes, this command adds a new `xsmall` replica and removes the `medium` replica.
 
-2. Use the [SHOW CLUSTER REPLICAS](https://materialize.com/docs/sql/show-cluster-replicas/) command to check the status of the new replica:
+2.  Use the [SHOW CLUSTER REPLICAS](https://materialize.com/docs/sql/show-cluster-replicas/) command to check the status of the new replica:
 
     ```sql
     SHOW CLUSTER REPLICAS WHERE cluster = 'ingest_postgres';
@@ -286,7 +285,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
     (1 row)
     ```
 
-3. Going forward, you can verify that your new replica size is sufficient as follows:
+3.  Going forward, you can verify that your new replica size is sufficient as follows:
 
     a. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, get the replication slot name associated with your Postgres source from the [mz_internal.mz_postgres_sources](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_postgres_sources) table:
 

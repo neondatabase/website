@@ -45,7 +45,7 @@ On successful completion, a `MOVE` command returns a command tag of the form
 MOVE count
 ```
 
-The *`count`* is the number of rows that a `FETCH` command with the same parameters would have returned (possibly zero).
+The _`count`_ is the number of rows that a `FETCH` command with the same parameters would have returned (possibly zero).
 
 [#id](#id-1.9.3.157.8)
 

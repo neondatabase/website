@@ -1,5 +1,5 @@
 ---
-title:  An Overview of Laravel and Postgres on Neon
+title: An Overview of Laravel and Postgres on Neon
 subtitle: Learn how to integrate Laravel with Postgres on Neon, leveraging Laravel's Eloquent ORM and migrations for efficient database management.
 author: bobbyiliev
 enableTableOfContents: true

@@ -2,17 +2,13 @@
 
 ## 9.30. Statistics Information Functions [#](#FUNCTIONS-STATISTICS)
 
-* [9.30.1. Inspecting MCV Lists](functions-statistics#FUNCTIONS-STATISTICS-MCV)
-
-
+- [9.30.1. Inspecting MCV Lists](functions-statistics#FUNCTIONS-STATISTICS-MCV)
 
 PostgreSQL provides a function to inspect complex statistics defined using the `CREATE STATISTICS` command.
 
 [#id](#FUNCTIONS-STATISTICS-MCV)
 
 ### 9.30.1. Inspecting MCV Lists [#](#FUNCTIONS-STATISTICS-MCV)
-
-
 
 ```
 

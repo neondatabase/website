@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-EXEC)
 
-## SPI\_exec
+## SPI_exec
 
-SPI\_exec — execute a read/write command
+SPI_exec — execute a read/write command
 
 ## Synopsis
 
@@ -14,17 +14,17 @@ int SPI_exec(const char * command, long count)
 
 ## Description
 
-`SPI_exec` is the same as `SPI_execute`, with the latter's *`read_only`* parameter always taken as `false`.
+`SPI_exec` is the same as `SPI_execute`, with the latter's _`read_only`_ parameter always taken as `false`.
 
 [#id](#id-1.8.12.8.5.6)
 
 ## Arguments
 
-* `const char * command`
+- `const char * command`
 
   string containing command to execute
 
-* `long count`
+- `long count`
 
   maximum number of rows to return, or `0` for no limit
 

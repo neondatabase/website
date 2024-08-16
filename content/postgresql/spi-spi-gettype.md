@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-GETTYPE)
 
-## SPI\_gettype
+## SPI_gettype
 
-SPI\_gettype — return the data type name of the specified column
+SPI_gettype — return the data type name of the specified column
 
 ## Synopsis
 
@@ -20,11 +20,11 @@ char * SPI_gettype(TupleDesc rowdesc, int colnumber)
 
 ## Arguments
 
-* `TupleDesc rowdesc`
+- `TupleDesc rowdesc`
 
   input row description
 
-* `int colnumber`
+- `int colnumber`
 
   column number (count starts at 1)
 

@@ -2,12 +2,10 @@
 
 ## 41.2. Views and the Rule System [#](#RULES-VIEWS)
 
-  * [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
-  * [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
-  * [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
-  * [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)
-
-
+- [41.2.1. How `SELECT` Rules Work](rules-views#RULES-SELECT)
+- [41.2.2. View Rules in Non-`SELECT` Statements](rules-views#RULES-VIEWS-NON-SELECT)
+- [41.2.3. The Power of Views in PostgreSQL](rules-views#RULES-VIEWS-POWER)
+- [41.2.4. Updating a View](rules-views#RULES-VIEWS-UPDATE)
 
 Views in PostgreSQL are implemented using the rule system. A view is basically an empty table (having no actual storage) with an `ON SELECT DO INSTEAD` rule. Conventionally, that rule is named `_RETURN`. So a view like
 
@@ -30,8 +28,6 @@ A view can also have other kinds of `DO INSTEAD` rules, allowing `INSERT`, `UPDA
 [#id](#RULES-SELECT)
 
 ### 41.2.1. How `SELECT` Rules Work [#](#RULES-SELECT)
-
-
 
 Rules `ON SELECT` are applied to all queries as the last step, even if the command given is an `INSERT`, `UPDATE` or `DELETE`. And they have different semantics from rules on the other command types in that they modify the query tree in place instead of creating a new one. So `SELECT` rules are described first.
 
@@ -279,13 +275,13 @@ UPDATE t1 SET b = t2.b FROM t2 WHERE t1.a = t2.a;
 
 are nearly identical. In particular:
 
-* The range tables contain entries for the tables `t1` and `t2`.
+- The range tables contain entries for the tables `t1` and `t2`.
 
-* The target lists contain one variable that points to column `b` of the range table entry for table `t2`.
+- The target lists contain one variable that points to column `b` of the range table entry for table `t2`.
 
-* The qualification expressions compare the columns `a` of both range-table entries for equality.
+- The qualification expressions compare the columns `a` of both range-table entries for equality.
 
-* The join trees show a simple join between `t1` and `t2`.
+- The join trees show a simple join between `t1` and `t2`.
 
 The consequence is, that both query trees result in similar execution plans: They are both joins over the two tables. For the `UPDATE` the missing columns from `t1` are added to the target list by the planner and the final query tree will read as:
 
@@ -325,7 +321,7 @@ The benefit of implementing views with the rule system is that the planner has a
 
 What happens if a view is named as the target relation for an `INSERT`, `UPDATE`, or `DELETE`? Doing the substitutions described above would give a query tree in which the result relation points at a subquery range-table entry, which will not work. There are several ways in which PostgreSQL can support the appearance of updating a view, however. In order of user-experienced complexity those are: automatically substitute in the underlying table for the view, execute a user-defined trigger, or rewrite the query per a user-defined rule. These options are discussed below.
 
-If the subquery selects from a single base relation and is simple enough, the rewriter can automatically replace the subquery with the underlying base relation so that the `INSERT`, `UPDATE`, or `DELETE` is applied to the base relation in the appropriate way. Views that are “simple enough” for this are called *automatically updatable*. For detailed information on the kinds of view that can be automatically updated, see [CREATE VIEW](sql-createview).
+If the subquery selects from a single base relation and is simple enough, the rewriter can automatically replace the subquery with the underlying base relation so that the `INSERT`, `UPDATE`, or `DELETE` is applied to the base relation in the appropriate way. Views that are “simple enough” for this are called _automatically updatable_. For detailed information on the kinds of view that can be automatically updated, see [CREATE VIEW](sql-createview).
 
 Alternatively, the operation may be handled by a user-provided `INSTEAD OF` trigger on the view (see [CREATE TRIGGER](sql-createtrigger)). Rewriting works slightly differently in this case. For `INSERT`, the rewriter does nothing at all with the view, leaving it as the result relation for the query. For `UPDATE` and `DELETE`, it's still necessary to expand the view query to produce the “old” rows that the command will attempt to update or delete. So the view is expanded as normal, but another unexpanded range-table entry is added to the query to represent the view in its capacity as the result relation.
 

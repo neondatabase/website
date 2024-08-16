@@ -4,7 +4,7 @@ subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
-updatedOn: '2023-11-24T11:25:06.748Z'
+updatedOn: '2024-07-19T15:46:08.348Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -24,7 +24,7 @@ To use the SQL Editor:
 You can use the following query to try the SQL Editor. The query creates a table, adds data, and retrieves the data from the table.
 
 ```sql
-CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
 SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 SELECT * FROM playing_with_neon;
@@ -69,9 +69,10 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [history retention window](/docs/manage/projects#configure-history-retention).
 
-![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png "no-border")
+![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png 'no-border')
 
 For more details about using Time Travel queries, see:
+
 - [Time Travel](/docs/guides/time-travel-assist)
 - [Time Travel tutorial](/docs/guides/time-travel-tutorial)
 
@@ -79,7 +80,7 @@ For more details about using Time Travel queries, see:
 
 The Neon SQL Editor supports exporting your data to `JSON`, `CSV` and `XLSX`. You can access the download button from the bottom right corner of the **SQL Editor** page. The download button only appears when there is a result set to download.
 
-##  Expand results section of the SQL Editor window
+## Expand results section of the SQL Editor window
 
 You can expand the results section of the SQL Editor window by selecting the expand window button from the bottom right corner of the **SQL Editor** page. There must be query results to display, otherwise the expanded results section will appear blank.
 
@@ -174,7 +175,7 @@ To use a meta-command in the SQL Editor:
 1. Enter the meta-command in the editor, just like you would a SQL query.
 1. Press **Run**. The result of the meta-command will be displayed in the output pane, similar to how SQL query results are shown.
 
-    For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
+   For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
 
    ![metacommand example](/docs/get-started-with-neon/sql_editor_metacommand.png)
 

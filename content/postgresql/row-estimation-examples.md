@@ -2,8 +2,6 @@
 
 ## 76.1. Row Estimation Examples [#](#ROW-ESTIMATION-EXAMPLES)
 
-
-
 The examples shown below use tables in the PostgreSQL regression test database. The outputs shown are taken from version 8.3. The behavior of earlier (or later) versions might vary. Note also that since `ANALYZE` uses random sampling while producing statistics, the results will change slightly after any new `ANALYZE`.
 
 Let's start with a very simple query:
@@ -52,7 +50,7 @@ WHERE tablename='tenk1' AND attname='unique1';
  {0,993,1997,3050,4040,5036,5957,7057,8029,9016,9995}
 ```
 
-Next the fraction of the histogram occupied by “< 1000” is worked out. This is the selectivity. The histogram divides the range into equal frequency buckets, so all we have to do is locate the bucket that our value is in and count *part* of it and *all* of the ones before. The value 1000 is clearly in the second bucket (993–1997). Assuming a linear distribution of values inside each bucket, we can calculate the selectivity as:
+Next the fraction of the histogram occupied by “< 1000” is worked out. This is the selectivity. The histogram divides the range into equal frequency buckets, so all we have to do is locate the bucket that our value is in and count _part_ of it and _all_ of the ones before. The value 1000 is clearly in the second bucket (993–1997). Assuming a linear distribution of values inside each bucket, we can calculate the selectivity as:
 
 ```
 selectivity = (1 + (1000 - bucket[2].min)/(bucket[2].max - bucket[2].min))/num_buckets
@@ -79,7 +77,7 @@ EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'CRAAAA';
    Filter: (stringu1 = 'CRAAAA'::name)
 ```
 
-Again the planner examines the `WHERE` clause condition and looks up the selectivity function for `=`, which is `eqsel`. For equality estimation the histogram is not useful; instead the list of *most common values* (MCVs) is used to determine the selectivity. Let's have a look at the MCVs, with some additional columns that will be useful later:
+Again the planner examines the `WHERE` clause condition and looks up the selectivity function for `=`, which is `eqsel`. For equality estimation the histogram is not useful; instead the list of _most common values_ (MCVs) is used to determine the selectivity. Let's have a look at the MCVs, with some additional columns that will be useful later:
 
 ```
 SELECT null_frac, n_distinct, most_common_vals, most_common_freqs FROM pg_stats
@@ -116,7 +114,7 @@ EXPLAIN SELECT * FROM tenk1 WHERE stringu1 = 'xxx';
    Filter: (stringu1 = 'xxx'::name)
 ```
 
-This is quite a different problem: how to estimate the selectivity when the value is *not* in the MCV list. The approach is to use the fact that the value is not in the list, combined with the knowledge of the frequencies for all of the MCVs:
+This is quite a different problem: how to estimate the selectivity when the value is _not_ in the MCV list. The approach is to use the fact that the value is not in the list, combined with the knowledge of the frequencies for all of the MCVs:
 
 ```
 selectivity = (1 - sum(mcv_freqs))/(num_distinct - num_mcv)
@@ -125,14 +123,14 @@ selectivity = (1 - sum(mcv_freqs))/(num_distinct - num_mcv)
             = 0.0014559
 ```
 
-That is, add up all the frequencies for the MCVs and subtract them from one, then divide by the number of *other* distinct values. This amounts to assuming that the fraction of the column that is not any of the MCVs is evenly distributed among all the other distinct values. Notice that there are no null values so we don't have to worry about those (otherwise we'd subtract the null fraction from the numerator as well). The estimated number of rows is then calculated as usual:
+That is, add up all the frequencies for the MCVs and subtract them from one, then divide by the number of _other_ distinct values. This amounts to assuming that the fraction of the column that is not any of the MCVs is evenly distributed among all the other distinct values. Notice that there are no null values so we don't have to worry about those (otherwise we'd subtract the null fraction from the numerator as well). The estimated number of rows is then calculated as usual:
 
 ```
 rows = 10000 * 0.0014559
      = 15  (rounding off)
 ```
 
-The previous example with `unique1 < 1000` was an oversimplification of what `scalarltsel` really does; now that we have seen an example of the use of MCVs, we can fill in some more detail. The example was correct as far as it went, because since `unique1` is a unique column it has no MCVs (obviously, no value is any more common than any other value). For a non-unique column, there will normally be both a histogram and an MCV list, and *the histogram does not include the portion of the column population represented by the MCVs*. We do things this way because it allows more precise estimation. In this situation `scalarltsel` directly applies the condition (e.g., “< 1000”) to each value of the MCV list, and adds up the frequencies of the MCVs for which the condition is true. This gives an exact estimate of the selectivity within the portion of the table that is MCVs. The histogram is then used in the same way as above to estimate the selectivity in the portion of the table that is not MCVs, and then the two numbers are combined to estimate the overall selectivity. For example, consider
+The previous example with `unique1 < 1000` was an oversimplification of what `scalarltsel` really does; now that we have seen an example of the use of MCVs, we can fill in some more detail. The example was correct as far as it went, because since `unique1` is a unique column it has no MCVs (obviously, no value is any more common than any other value). For a non-unique column, there will normally be both a histogram and an MCV list, and _the histogram does not include the portion of the column population represented by the MCVs_. We do things this way because it allows more precise estimation. In this situation `scalarltsel` directly applies the condition (e.g., “< 1000”) to each value of the MCV list, and adds up the frequencies of the MCVs for which the condition is true. This gives an exact estimate of the selectivity within the portion of the table that is MCVs. The histogram is then used in the same way as above to estimate the selectivity in the portion of the table that is not MCVs, and then the two numbers are combined to estimate the overall selectivity. For example, consider
 
 ```
 EXPLAIN SELECT * FROM tenk1 WHERE stringu1 < 'IAAAAA';

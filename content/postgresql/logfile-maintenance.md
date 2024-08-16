@@ -2,15 +2,13 @@
 
 ## 25.3. Log File Maintenance [#](#LOGFILE-MAINTENANCE)
 
-
-
 It is a good idea to save the database server's log output somewhere, rather than just discarding it via `/dev/null`. The log output is invaluable when diagnosing problems.
 
 ### Note
 
 The server log can contain sensitive information and needs to be protected, no matter how or where it is stored, or the destination to which it is routed. For example, some DDL statements might contain plaintext passwords or other authentication details. Logged statements at the `ERROR` level might show the SQL source code for applications and might also contain some parts of data rows. Recording data, events and related information is the intended function of this facility, so this is not a leakage or a bug. Please ensure the server logs are visible only to appropriately authorized people.
 
-Log output tends to be voluminous (especially at higher debug levels) so you won't want to save it indefinitely. You need to *rotate* the log files so that new log files are started and old ones removed after a reasonable period of time.
+Log output tends to be voluminous (especially at higher debug levels) so you won't want to save it indefinitely. You need to _rotate_ the log files so that new log files are started and old ones removed after a reasonable period of time.
 
 If you simply direct the stderr of `postgres` into a file, you will have log output, but the only way to truncate the log file is to stop and restart the server. This might be acceptable if you are using PostgreSQL in a development environment, but few production servers would find this behavior acceptable.
 
@@ -34,4 +32,4 @@ On many systems, however, syslog is not very reliable, particularly with large l
 
 Note that all the solutions described above take care of starting new log files at configurable intervals, but they do not handle deletion of old, no-longer-useful log files. You will probably want to set up a batch job to periodically delete old log files. Another possibility is to configure the rotation program so that old log files are overwritten cyclically.
 
-[pgBadger](https://pgbadger.darold.net/) is an external project that does sophisticated log file analysis. [check\_postgres](https://bucardo.org/check_postgres/) provides Nagios alerts when important messages appear in the log files, as well as detection of many other extraordinary conditions.
+[pgBadger](https://pgbadger.darold.net/) is an external project that does sophisticated log file analysis. [check_postgres](https://bucardo.org/check_postgres/) provides Nagios alerts when important messages appear in the log files, as well as detection of many other extraordinary conditions.

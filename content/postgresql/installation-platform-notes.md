@@ -2,11 +2,11 @@
 
 ## 17.7. Platform-Specific Notes [#](#INSTALLATION-PLATFORM-NOTES)
 
-* [17.7.1. AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
-* [17.7.2. Cygwin](installation-platform-notes#INSTALLATION-NOTES-CYGWIN)
-* [17.7.3. macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
-* [17.7.4. MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
-* [17.7.5. Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
+- [17.7.1. AIX](installation-platform-notes#INSTALLATION-NOTES-AIX)
+- [17.7.2. Cygwin](installation-platform-notes#INSTALLATION-NOTES-CYGWIN)
+- [17.7.3. macOS](installation-platform-notes#INSTALLATION-NOTES-MACOS)
+- [17.7.4. MinGW/Native Windows](installation-platform-notes#INSTALLATION-NOTES-MINGW)
+- [17.7.5. Solaris](installation-platform-notes#INSTALLATION-NOTES-SOLARIS)
 
 This section documents additional platform-specific issues regarding the installation and setup of PostgreSQL. Be sure to read the installation instructions, and in particular [Section 17.1](install-requirements) as well. Also, check [Chapter 33](regress) regarding the interpretation of regression test results.
 
@@ -60,19 +60,19 @@ PostgreSQL can be built using Cygwin, a Linux-like environment for Windows, but 
 
 When building from source, proceed according to the Unix-style installation procedure (i.e., `./configure; make`; etc.), noting the following Cygwin-specific differences:
 
-* Set your path to use the Cygwin bin directory before the Windows utilities. This will help prevent problems with compilation.
+- Set your path to use the Cygwin bin directory before the Windows utilities. This will help prevent problems with compilation.
 
-* The `adduser` command is not supported; use the appropriate user management application on Windows. Otherwise, skip this step.
+- The `adduser` command is not supported; use the appropriate user management application on Windows. Otherwise, skip this step.
 
-* The `su` command is not supported; use ssh to simulate su on Windows. Otherwise, skip this step.
+- The `su` command is not supported; use ssh to simulate su on Windows. Otherwise, skip this step.
 
-* OpenSSL is not supported.
+- OpenSSL is not supported.
 
-* Start `cygserver` for shared memory support. To do this, enter the command `/usr/sbin/cygserver &`. This program needs to be running anytime you start the PostgreSQL server or initialize a database cluster (`initdb`). The default `cygserver` configuration may need to be changed (e.g., increase `SEMMNS`) to prevent PostgreSQL from failing due to a lack of system resources.
+- Start `cygserver` for shared memory support. To do this, enter the command `/usr/sbin/cygserver &`. This program needs to be running anytime you start the PostgreSQL server or initialize a database cluster (`initdb`). The default `cygserver` configuration may need to be changed (e.g., increase `SEMMNS`) to prevent PostgreSQL from failing due to a lack of system resources.
 
-* Building might fail on some systems where a locale other than C is in use. To fix this, set the locale to C by doing `export LANG=C.utf8` before building, and then setting it back to the previous setting after you have installed PostgreSQL.
+- Building might fail on some systems where a locale other than C is in use. To fix this, set the locale to C by doing `export LANG=C.utf8` before building, and then setting it back to the previous setting after you have installed PostgreSQL.
 
-* The parallel regression tests (`make check`) can generate spurious regression test failures due to overflowing the `listen()` backlog queue which causes connection refused errors or hangs. You can limit the number of connections using the make variable `MAX_CONNECTIONS` thus:
+- The parallel regression tests (`make check`) can generate spurious regression test failures due to overflowing the `listen()` backlog queue which causes connection refused errors or hangs. You can limit the number of connections using the make variable `MAX_CONNECTIONS` thus:
 
   ```
   make MAX_CONNECTIONS=5 check

@@ -22,23 +22,23 @@ To be able to drop a transform, you must own the type and the language. These ar
 
 ## Parameters
 
-* `IF EXISTS`
+- `IF EXISTS`
 
   Do not throw an error if the transform does not exist. A notice is issued in this case.
 
-* *`type_name`*
+- _`type_name`_
 
   The name of the data type of the transform.
 
-* *`lang_name`*
+- _`lang_name`_
 
   The name of the language of the transform.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically drop objects that depend on the transform, and in turn all objects that depend on those objects (see [Section 5.14](ddl-depend)).
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to drop the transform if any objects depend on it. This is the default.
 

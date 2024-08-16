@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2023-11-24T11:25:06.751Z'
+updatedOn: '2024-08-07T21:36:52.652Z'
 ---
 
 To connect to Neon from a Go application:
@@ -44,13 +44,13 @@ import (
 )
 
 func main() {
-    connStr := "postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)
     }
     defer db.Close()
-    
+
     var version string
     if err := db.QueryRow("select version()").Scan(&version); err != nil {
         panic(err)
@@ -59,7 +59,6 @@ func main() {
     fmt.Printf("version=%s\n", version)
 }
 ```
-
 
 You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 

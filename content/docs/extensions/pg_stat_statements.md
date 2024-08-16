@@ -2,7 +2,7 @@
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
 enableTableOfContents: true
-updatedOn: '2024-01-30T00:50:58.828Z'
+updatedOn: '2024-07-25T12:53:42.421Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
@@ -19,13 +19,17 @@ This guide covers:
 `pg_stat_statements` is an open-source extension for Postgres that can be installed on any Neon project using the instructions below.
 </Admonition>
 
-###  Version availability
+### Version availability
 
 The version of `pg_stat_statements` available on Neon depends on the version of Postgres you select for your Neon project.
 
 - Postgres 14 - `pg_stat_statements` 1.9
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
+
+### Data persistence
+
+In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute restarts. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's autosuspend behavior, see [Autosuspend](/docs/introduction/auto-suspend).
 
 ## Enable the `pg_stat_statements` extension
 
@@ -63,7 +67,7 @@ Let's explore some example usage patterns.
 
 ### Find the most frequently executed queries
 
-The most frequently run queries are often critical paths and optimization candidates. 
+The most frequently run queries are often critical paths and optimization candidates.
 
 This query retrieves details about the most frequently executed queries, ordered by the number of calls. Only the top 10 rows are returned (`LIMIT 10`):
 
@@ -86,15 +90,15 @@ A high average runtime can indicate an inefficient query.
 The query below uses the `query`, `mean_exec_time` (average execution time per call), and `calls` columns. The condition `WHERE mean_exec_time > 1` filters out queries with an average execution time greater than 1 unit (you may adjust this threshold as needed).
 
 ```sql
-SELECT 
-    query, 
-    mean_exec_time, 
+SELECT
+    query,
+    mean_exec_time,
     calls
-FROM 
+FROM
     pg_stat_statements
-WHERE 
+WHERE
     mean_exec_time > 1
-ORDER BY 
+ORDER BY
     mean_exec_time DESC;
 ```
 
@@ -110,20 +114,20 @@ This query retrieves the top 10 queries with the highest average execution time,
 
 ```sql
 WITH statements AS (
-    SELECT * 
+    SELECT *
     FROM pg_stat_statements pss
     JOIN pg_roles pr ON (pss.userid = pr.oid)
     WHERE pr.rolname = current_user
 )
-SELECT 
-    calls, 
-    mean_exec_time, 
+SELECT
+    calls,
+    mean_exec_time,
     query
 FROM statements
-WHERE 
+WHERE
     calls > 500
     AND shared_blks_hit > 0
-ORDER BY 
+ORDER BY
     mean_exec_time DESC
 LIMIT 10;
 ```
@@ -132,23 +136,23 @@ This query returns the 10 longest-running queries for the current user, focusing
 
 ```sql
 WITH statements AS (
-    SELECT * 
+    SELECT *
     FROM pg_stat_statements pss
     JOIN pg_roles pr ON (pss.userid = pr.oid)
     WHERE pr.rolname = current_user
 )
-SELECT 
-    calls, 
+SELECT
+    calls,
     shared_blks_hit,
     shared_blks_read,
     shared_blks_hit / (shared_blks_hit + shared_blks_read)::NUMERIC * 100 AS hit_cache_ratio,
     query
 FROM statements
-WHERE 
+WHERE
     calls > 500
     AND shared_blks_hit > 0
-ORDER BY 
-    calls DESC, 
+ORDER BY
+    calls DESC,
     hit_cache_ratio ASC
 LIMIT 10;
 ```
@@ -157,15 +161,15 @@ This query retrieves the top 10 longest-running queries (in terms of mean execut
 
 ```sql
 WITH statements AS (
-    SELECT * 
+    SELECT *
     FROM pg_stat_statements pss
     JOIN pg_roles pr ON (userid = oid)
     WHERE rolname = current_user
 )
-SELECT 
-    calls, 
+SELECT
+    calls,
     min_exec_time,
-    max_exec_time, 
+    max_exec_time,
     mean_exec_time,
     stddev_exec_time,
     (stddev_exec_time / mean_exec_time) AS coeff_of_variance,
@@ -181,14 +185,14 @@ ORDER BY mean_exec_time DESC
 To identify queries that return a lot of rows, you can select the `query` and `rows` columns, representing the SQL statement and the number of rows returned by each statement, respectively.
 
 ```sql
-SELECT 
-    query, 
+SELECT
+    query,
     rows
-FROM 
+FROM
     pg_stat_statements
-ORDER BY 
+ORDER BY
     rows DESC
-LIMIT 
+LIMIT
     10;
 ```
 
@@ -205,7 +209,6 @@ This query returns results similar to the following:
 ### Find the most time-consuming queries
 
 The following query returns details about the most time-consuming queries, ordered by execution time.
-
 
 ```sql
 SELECT

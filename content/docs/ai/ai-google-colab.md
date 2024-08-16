@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.272Z'
+updatedOn: '2024-08-07T21:36:52.637Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -34,37 +34,37 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
-    ```python shouldWrap
-    import os
-    import psycopg2
+   ```python shouldWrap
+   import os
+   import psycopg2
 
-    # Provide your Neon connection string
-    connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
+   # Provide your Neon connection string
+   connection_string = "postgresql://[user]:[password]@[neon_hostname]/[dbname]"
 
-    # Connect using the connection string
-    connection = psycopg2.connect(connection_string)
+   # Connect using the connection string
+   connection = psycopg2.connect(connection_string)
 
-    # Create a new cursor object
-    cursor = connection.cursor()
-    ```
+   # Create a new cursor object
+   cursor = connection.cursor()
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
 3. Add a code block for testing the database connection.
 
-    ```python
-    # Execute this query to test the database connection
-    cursor.execute("SELECT 1;")
-    result = cursor.fetchone()
+   ```python
+   # Execute this query to test the database connection
+   cursor.execute("SELECT 1;")
+   result = cursor.fetchone()
 
-    # Check the query result
-    if result == (1,):
-        print("Your database connection was successful!")
-    else:
-        print("Your connection failed.")
-    ```
+   # Check the query result
+   if result == (1,):
+       print("Your database connection was successful!")
+   else:
+       print("Your connection failed.")
+   ```
 
 4. Execute the code block (**Ctrl** + **Enter**).
 
@@ -72,10 +72,10 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Create a codeblock to install the `pgvector` extension to enable your Neon database as a vector store:
 
-    ```python
-    # Execute this query to install the pgvector extension
-    cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
-    ```
+   ```python
+   # Execute this query to install the pgvector extension
+   cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
@@ -83,26 +83,26 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Add a code block to create a table and insert data:
 
-    ```python shouldWrap
-    create_table_sql = '''
-    CREATE TABLE items (
-    id BIGSERIAL PRIMARY KEY,
-    embedding VECTOR(3)
-    );
-    '''
+   ```python shouldWrap
+   create_table_sql = '''
+   CREATE TABLE items (
+   id BIGSERIAL PRIMARY KEY,
+   embedding VECTOR(3)
+   );
+   '''
 
-    # Insert data
-    insert_data_sql = '''
-    INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]'), ('[7,8,9]');
-    '''
+   # Insert data
+   insert_data_sql = '''
+   INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]'), ('[7,8,9]');
+   '''
 
-    # Execute the SQL statements
-    cursor.execute(create_table_sql)
-    cursor.execute(insert_data_sql)
+   # Execute the SQL statements
+   cursor.execute(create_table_sql)
+   cursor.execute(insert_data_sql)
 
-    # Commit the changes
-    connection.commit()
-    ```
+   # Commit the changes
+   connection.commit()
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
@@ -110,11 +110,11 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Add a codeblock to perform a vector similarity search.
 
-    ```python shouldWrap
-    cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
-    all_data = cursor.fetchall()
-    print(all_data)
-    ```
+   ```python shouldWrap
+   cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
+   all_data = cursor.fetchall()
+   print(all_data)
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 

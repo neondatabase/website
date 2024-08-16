@@ -2,20 +2,18 @@
 
 ## 8.17. Range Types [#](#RANGETYPES)
 
-  * [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
-  * [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
-  * [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
-  * [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)
-  * [8.17.5. Range Input/Output](rangetypes#RANGETYPES-IO)
-  * [8.17.6. Constructing Ranges and Multiranges](rangetypes#RANGETYPES-CONSTRUCT)
-  * [8.17.7. Discrete Range Types](rangetypes#RANGETYPES-DISCRETE)
-  * [8.17.8. Defining New Range Types](rangetypes#RANGETYPES-DEFINING)
-  * [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
-  * [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
+- [8.17.1. Built-in Range and Multirange Types](rangetypes#RANGETYPES-BUILTIN)
+- [8.17.2. Examples](rangetypes#RANGETYPES-EXAMPLES)
+- [8.17.3. Inclusive and Exclusive Bounds](rangetypes#RANGETYPES-INCLUSIVITY)
+- [8.17.4. Infinite (Unbounded) Ranges](rangetypes#RANGETYPES-INFINITE)
+- [8.17.5. Range Input/Output](rangetypes#RANGETYPES-IO)
+- [8.17.6. Constructing Ranges and Multiranges](rangetypes#RANGETYPES-CONSTRUCT)
+- [8.17.7. Discrete Range Types](rangetypes#RANGETYPES-DISCRETE)
+- [8.17.8. Defining New Range Types](rangetypes#RANGETYPES-DEFINING)
+- [8.17.9. Indexing](rangetypes#RANGETYPES-INDEXING)
+- [8.17.10. Constraints on Ranges](rangetypes#RANGETYPES-CONSTRAINT)
 
-
-
-Range types are data types representing a range of values of some element type (called the range's *subtype*). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
+Range types are data types representing a range of values of some element type (called the range's _subtype_). For instance, ranges of `timestamp` might be used to represent the ranges of time that a meeting room is reserved. In this case the data type is `tsrange` (short for “timestamp range”), and `timestamp` is the subtype. The subtype must have a total order so that it is well-defined whether element values are within, before, or after a range of values.
 
 Range types are useful because they represent many element values in a single range value, and because concepts such as overlapping ranges can be expressed clearly. The use of time and date ranges for scheduling purposes is the clearest example; but price ranges, measurement ranges from an instrument, and so forth can also be useful.
 
@@ -27,17 +25,17 @@ Every range type has a corresponding multirange type. A multirange is an ordered
 
 PostgreSQL comes with the following built-in range types:
 
-* `int4range` — Range of `integer`, `int4multirange` — corresponding Multirange
+- `int4range` — Range of `integer`, `int4multirange` — corresponding Multirange
 
-* `int8range` — Range of `bigint`, `int8multirange` — corresponding Multirange
+- `int8range` — Range of `bigint`, `int8multirange` — corresponding Multirange
 
-* `numrange` — Range of `numeric`, `nummultirange` — corresponding Multirange
+- `numrange` — Range of `numeric`, `nummultirange` — corresponding Multirange
 
-* `tsrange` — Range of `timestamp without time zone`, `tsmultirange` — corresponding Multirange
+- `tsrange` — Range of `timestamp without time zone`, `tsmultirange` — corresponding Multirange
 
-* `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
+- `tstzrange` — Range of `timestamp with time zone`, `tstzmultirange` — corresponding Multirange
 
-* `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
+- `daterange` — Range of `date`, `datemultirange` — corresponding Multirange
 
 In addition, you can define your own range types; see [CREATE TYPE](sql-createtype) for more information.
 
@@ -104,7 +102,7 @@ empty
 
 The parentheses or brackets indicate whether the lower and upper bounds are exclusive or inclusive, as described previously. Notice that the final pattern is `empty`, which represents an empty range (a range that contains no points).
 
-The *`lower-bound`* may be either a string that is valid input for the subtype, or empty to indicate no lower bound. Likewise, *`upper-bound`* may be either a string that is valid input for the subtype, or empty to indicate no upper bound.
+The _`lower-bound`_ may be either a string that is valid input for the subtype, or empty to indicate no lower bound. Likewise, _`upper-bound`_ may be either a string that is valid input for the subtype, or empty to indicate no upper bound.
 
 Each bound value can be quoted using `"` (double quote) characters. This is necessary if the bound value contains parentheses, brackets, commas, double quotes, or backslashes, since these characters would otherwise be taken as part of the range syntax. To put a double quote or backslash in a quoted bound value, precede it with a backslash. (Also, a pair of double quotes within a double-quoted bound value is taken to represent a double quote character, analogously to the rules for single quotes in SQL literal strings.) Alternatively, you can avoid quoting and use backslash-escaping to protect all data characters that would otherwise be taken as range syntax. Also, to write a bound value that is an empty string, write `""`, since writing nothing means an infinite bound.
 
@@ -178,7 +176,7 @@ A discrete range is one whose element type has a well-defined “step”, such a
 
 Another way to think about a discrete range type is that there is a clear idea of a “next” or “previous” value for each element value. Knowing that, it is possible to convert between inclusive and exclusive representations of a range's bounds, by choosing the next or previous element value instead of the one originally given. For example, in an integer range type `[4,8]` and `(3,9)` denote the same set of values; but this would not be so for a range over numeric.
 
-A discrete range type should have a *canonicalization* function that is aware of the desired step size for the element type. The canonicalization function is charged with converting equivalent values of the range type to have identical representations, in particular consistently inclusive or exclusive bounds. If a canonicalization function is not specified, then ranges with different formatting will always be treated as unequal, even though they might represent the same set of values in reality.
+A discrete range type should have a _canonicalization_ function that is aware of the desired step size for the element type. The canonicalization function is charged with converting equivalent values of the range type to have identical representations, in particular consistently inclusive or exclusive bounds. If a canonicalization function is not specified, then ranges with different formatting will always be treated as unequal, even though they might represent the same set of values in reality.
 
 The built-in range types `int4range`, `int8range`, and `daterange` all use a canonical form that includes the lower bound and excludes the upper bound; that is, `[)`. User-defined range types can use other conventions, however.
 
@@ -205,7 +203,7 @@ Defining your own range type also allows you to specify a different subtype B-tr
 
 If the subtype is considered to have discrete rather than continuous values, the `CREATE TYPE` command should specify a `canonical` function. The canonicalization function takes an input range value, and must return an equivalent range value that may have different bounds and formatting. The canonical output for two ranges that represent the same set of values, for example the integer ranges `[1, 7]` and `[1, 8)`, must be identical. It doesn't matter which representation you choose to be the canonical one, so long as two equivalent values with different formattings are always mapped to the same value with the same formatting. In addition to adjusting the inclusive/exclusive bounds format, a canonicalization function might round off boundary values, in case the desired step size is larger than what the subtype is capable of storing. For instance, a range type over `timestamp` could be defined to have a step size of an hour, in which case the canonicalization function would need to round off bounds that weren't a multiple of an hour, or perhaps throw an error instead.
 
-In addition, any range type that is meant to be used with GiST or SP-GiST indexes should define a subtype difference, or `subtype_diff`, function. (The index will still work without `subtype_diff`, but it is likely to be considerably less efficient than if a difference function is provided.) The subtype difference function takes two input values of the subtype, and returns their difference (i.e., *`X`* minus *`Y`*) represented as a `float8` value. In our example above, the function `float8mi` that underlies the regular `float8` minus operator can be used; but for any other subtype, some type conversion would be necessary. Some creative thought about how to represent differences as numbers might be needed, too. To the greatest extent possible, the `subtype_diff` function should agree with the sort ordering implied by the selected operator class and collation; that is, its result should be positive whenever its first argument is greater than its second according to the sort ordering.
+In addition, any range type that is meant to be used with GiST or SP-GiST indexes should define a subtype difference, or `subtype_diff`, function. (The index will still work without `subtype_diff`, but it is likely to be considerably less efficient than if a difference function is provided.) The subtype difference function takes two input values of the subtype, and returns their difference (i.e., _`X`_ minus _`Y`_) represented as a `float8` value. In our example above, the function `float8mi` that underlies the regular `float8` minus operator can be used; but for any other subtype, some type conversion would be necessary. Some creative thought about how to represent differences as numbers might be needed, too. To the greatest extent possible, the `subtype_diff` function should agree with the sort ordering implied by the selected operator class and collation; that is, its result should be positive whenever its first argument is greater than its second according to the sort ordering.
 
 A less-oversimplified example of a `subtype_diff` function is:
 
@@ -227,8 +225,6 @@ See [CREATE TYPE](sql-createtype) for more information about creating range type
 
 ### 8.17.9. Indexing [#](#RANGETYPES-INDEXING)
 
-
-
 GiST and SP-GiST indexes can be created for table columns of range types. GiST indexes can be also created for table columns of multirange types. For instance, to create a GiST index:
 
 ```
@@ -242,8 +238,6 @@ In addition, B-tree and hash indexes can be created for table columns of range t
 [#id](#RANGETYPES-CONSTRAINT)
 
 ### 8.17.10. Constraints on Ranges [#](#RANGETYPES-CONSTRAINT)
-
-
 
 While `UNIQUE` is a natural constraint for scalar values, it is usually unsuitable for range types. Instead, an exclusion constraint is often more appropriate (see [CREATE TABLE ... CONSTRAINT ... EXCLUDE](sql-createtable#SQL-CREATETABLE-EXCLUDE)). Exclusion constraints allow the specification of constraints such as “non-overlapping” on a range type. For example:
 

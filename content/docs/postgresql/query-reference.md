@@ -1,9 +1,11 @@
 ---
 title: Postgres query reference
-subtitle: Find examples of commonly-used Postgres queries for basic to advanced operations
+subtitle: Find examples of commonly-used Postgres queries for basic to advanced
+  operations
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
+updatedOn: '2024-07-19T21:48:31.743Z'
 ---
 
 <CTA />
@@ -51,7 +53,6 @@ DELETE FROM users WHERE user_id = 1;
 
 See [INSERT](https://www.postgresql.org/docs/current/sql-insert.html), [UPDATE](https://www.postgresql.org/docs/current/sql-update.html), and [DELETE](https://www.postgresql.org/docs/current/sql-delete.html) for more information.
 
-
 ## SELECT queries
 
 These Postgres `SELECT` query examples cover a number of common use cases.
@@ -79,13 +80,13 @@ See [SELECT](https://www.postgresql.org/docs/current/sql-select.html) for more i
 
 These Postgres `WHERE` clause examples showcase various filtering scenarios.
 
-{/* 
+{/*
 
 CREATE TABLE orders (
-    order_id SERIAL PRIMARY KEY,
-    customer_id INT NOT NULL,
-    order_date DATE NOT NULL,
-    total_amount DECIMAL NOT NULL
+order_id SERIAL PRIMARY KEY,
+customer_id INT NOT NULL,
+order_date DATE NOT NULL,
+total_amount DECIMAL NOT NULL
 );
 
 INSERT INTO orders (customer_id, order_date, total_amount) VALUES
@@ -94,10 +95,10 @@ INSERT INTO orders (customer_id, order_date, total_amount) VALUES
 (3, '2023-02-05', 200.75);
 
 CREATE TABLE products (
-    product_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    category_id INT NOT NULL,
-    price DECIMAL NOT NULL
+product_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+category_id INT NOT NULL,
+price DECIMAL NOT NULL
 );
 
 INSERT INTO products (name, category_id, price) VALUES
@@ -106,9 +107,9 @@ INSERT INTO products (name, category_id, price) VALUES
 ('Headphones', 5, 150.00);
 
 CREATE TABLE employees (
-    employee_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    department_id INT NOT NULL
+employee_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+department_id INT NOT NULL
 );
 
 INSERT INTO employees (name, department_id) VALUES
@@ -117,10 +118,10 @@ INSERT INTO employees (name, department_id) VALUES
 ('Alice Johnson', 3);
 
 CREATE TABLE customers (
-    customer_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    country VARCHAR(50) NOT NULL
+customer_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+country VARCHAR(50) NOT NULL
 );
 
 INSERT INTO customers (name, email, country) VALUES
@@ -128,11 +129,10 @@ INSERT INTO customers (name, email, country) VALUES
 ('Customer Two', 'two@otherdomain.com', 'France'),
 ('Customer Three', 'three@domain.com', 'Spain');
 
-
 CREATE TABLE sales (
-    sale_id SERIAL PRIMARY KEY,
-    amount DECIMAL NOT NULL,
-    sales_date DATE NOT NULL
+sale_id SERIAL PRIMARY KEY,
+amount DECIMAL NOT NULL,
+sales_date DATE NOT NULL
 );
 
 INSERT INTO sales (amount, sales_date) VALUES
@@ -141,9 +141,9 @@ INSERT INTO sales (amount, sales_date) VALUES
 (600.00, '2023-01-25');
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    last_login DATE
+user_id SERIAL PRIMARY KEY,
+username VARCHAR(50) NOT NULL,
+last_login DATE
 );
 
 INSERT INTO users (username, last_login) VALUES
@@ -151,7 +151,7 @@ INSERT INTO users (username, last_login) VALUES
 ('dana', '2023-01-01'),
 ('pat', NULL);
 
- */}
+*/}
 
 ```sql
 -- Filter by an exact match
@@ -185,13 +185,13 @@ See [WHERE clause](https://www.postgresql.org/docs/7.1/queries.html#QUERIES-WHER
 
 These sorting examples demonstrate various ways to order your query results.
 
-{/* 
+{/*
 
 CREATE TABLE orders (
-    order_id SERIAL PRIMARY KEY,
-    customer_id INT,
-    status VARCHAR(50),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+order_id SERIAL PRIMARY KEY,
+customer_id INT,
+status VARCHAR(50),
+created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO orders (customer_id, status, created_at) VALUES
@@ -200,9 +200,9 @@ INSERT INTO orders (customer_id, status, created_at) VALUES
 (3, 'completed', '2023-03-19 09:45:00');
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+user_id SERIAL PRIMARY KEY,
+username VARCHAR(50) NOT NULL,
+created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO users (username, created_at) VALUES
@@ -211,9 +211,9 @@ INSERT INTO users (username, created_at) VALUES
 ('alice_jones', '2023-02-11 16:30:00');
 
 CREATE TABLE tasks (
-    task_id SERIAL PRIMARY KEY,
-    description TEXT,
-    due_date DATE NULL
+task_id SERIAL PRIMARY KEY,
+description TEXT,
+due_date DATE NULL
 );
 
 INSERT INTO tasks (description, due_date) VALUES
@@ -221,7 +221,7 @@ INSERT INTO tasks (description, due_date) VALUES
 ('Prepare for presentation', NULL),
 ('Update website', '2023-03-25');
 
- */}
+*/}
 
 ```sql
 -- Sort results in ascending order by a single column
@@ -253,13 +253,13 @@ For additional information, see [Sorting Rows](https://www.postgresql.org/docs/c
 
 These examples illustrate different ways to join tables in Postgres for queries involving data that spans multiple tables.
 
-{/* 
+{/*
 
 CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    department_id INT,
-    manager_id INT REFERENCES employees(id)
+id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+department_id INT,
+manager_id INT REFERENCES employees(id)
 );
 
 -- Sample inserts
@@ -268,11 +268,10 @@ INSERT INTO employees (name, department_id, manager_id) VALUES
 ('Jane Smith', 1, 1),
 ('Alice Johnson', 2, NULL); -- Assuming Alice Johnson is a manager
 
-
 CREATE TABLE departments (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    office_id INT -- This will reference `offices` table
+id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+office_id INT -- This will reference `offices` table
 );
 
 -- Sample inserts
@@ -281,8 +280,8 @@ INSERT INTO departments (name, office_id) VALUES
 ('Marketing', 2);
 
 CREATE TABLE projects (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL
+id SERIAL PRIMARY KEY,
+title VARCHAR(255) NOT NULL
 );
 
 -- Sample inserts (Optional for CROSS JOIN, but provides context)
@@ -291,8 +290,8 @@ INSERT INTO projects (title) VALUES
 ('Project Beta');
 
 CREATE TABLE offices (
-    id SERIAL PRIMARY KEY,
-    location VARCHAR(255) NOT NULL
+id SERIAL PRIMARY KEY,
+location VARCHAR(255) NOT NULL
 );
 
 -- Sample inserts
@@ -303,15 +302,15 @@ INSERT INTO offices (location) VALUES
 -- Last join
 
 CREATE TABLE departments (
-    department_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+department_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+department_id INT,
+FOREIGN KEY (department_id) REFERENCES departments(department_id)
 );
 
 -- Insert into departments
@@ -325,7 +324,7 @@ SELECT employees.name, departments.name AS department_name
 FROM employees
 JOIN departments USING(department_id);
 
- */}
+*/}
 
 ```sql
 -- INNER JOIN to select rows that have matching values in both tables
@@ -376,21 +375,20 @@ For additional examples and information, see [Joins between tables](https://www.
 
 Transactions in Postgres ensure that a sequence of operations is executed as a single unit of work, either completely succeeding or failing together. Here are basic examples demonstrating how to use transactions in Postgres:
 
-{/* 
+{/*
 
 CREATE TABLE accounts (
-    account_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
-    balance DECIMAL NOT NULL
+account_id SERIAL PRIMARY KEY,
+user_id INT NOT NULL,
+balance DECIMAL NOT NULL
 );
 
 INSERT INTO accounts (user_id, balance) VALUES
-(1, 1000),  -- Initial balance for user 1
-(2, 500),   -- Initial balance for user 2
-(3, 200);   -- Initial balance for user 3
+(1, 1000), -- Initial balance for user 1
+(2, 500), -- Initial balance for user 2
+(3, 200); -- Initial balance for user 3
 
- */}
-
+*/}
 
 ```sql
 -- Start a transaction
@@ -435,14 +433,14 @@ For additional information, see [Transactions](https://www.postgresql.org/docs/c
 
 Creating and managing indexes is crucial for improving query performance in Postgres. Here are some basic examples of how to work with indexes:
 
-{/* 
+{/*
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    active BOOLEAN NOT NULL,
-    preferences JSONB
+user_id SERIAL PRIMARY KEY,
+email VARCHAR(255) NOT NULL,
+username VARCHAR(50) NOT NULL UNIQUE,
+active BOOLEAN NOT NULL,
+preferences JSONB
 );
 
 -- Sample inserts
@@ -451,9 +449,9 @@ INSERT INTO users (email, username, active, preferences) VALUES
 ('jane.doe@example.com', 'janedoe', FALSE, '{"theme": "light", "notifications": "disabled"}');
 
 CREATE TABLE events (
-    event_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    event_date DATE NOT NULL
+event_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+event_date DATE NOT NULL
 );
 
 -- Sample inserts
@@ -461,7 +459,7 @@ INSERT INTO events (name, event_date) VALUES
 ('Product Launch', '2023-05-15'),
 ('Annual Meeting', '2023-12-20');
 
- */}
+*/}
 
 ```sql
 -- Create a basic index on a single column
@@ -498,16 +496,16 @@ For more information about indexes in Postgres, see [Indexes](https://www.postgr
 
 These examples demonstrate how to work with views in Postgres, which can help simplify complex queries, provide a level of abstraction, or secure data access.
 
-{/* 
+{/*
 
 CREATE TABLE employees (
-    employee_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    department VARCHAR(100) NOT NULL,
-    position VARCHAR(100) NOT NULL,
-    active BOOLEAN NOT NULL,
-    hire_date DATE NOT NULL,
-    salary DECIMAL(10, 2) NOT NULL
+employee_id SERIAL PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+department VARCHAR(100) NOT NULL,
+position VARCHAR(100) NOT NULL,
+active BOOLEAN NOT NULL,
+hire_date DATE NOT NULL,
+salary DECIMAL(10, 2) NOT NULL
 );
 
 -- Inserting sample data into the employees table
@@ -517,8 +515,7 @@ INSERT INTO employees (name, department, position, active, hire_date, salary) VA
 ('Jim Brown', 'Engineering', 'DevOps Specialist', false, '2020-08-20', 95000.00),
 ('Emily White', 'Sales', 'Sales Representative', true, '2021-09-23', 65000.00);
 
- */}
-
+*/}
 
 ```sql
 -- Creating a view
@@ -566,18 +563,18 @@ For more information about views in Postgres, see [Views](https://www.postgresql
 
 Stored procedures in Postgres are used for performing actions that do not necessarily return a result set, such as modifying data or working with transaction control statements like `COMMIT` and `ROLLBACK`.
 
-{/* 
+{/*
 
 CREATE TABLE accounts (
-    account_id SERIAL PRIMARY KEY,
-    balance DECIMAL(10, 2) NOT NULL
+account_id SERIAL PRIMARY KEY,
+balance DECIMAL(10, 2) NOT NULL
 );
 
 INSERT INTO accounts (account_id, balance) VALUES
 (1, 1000.00),
 (2, 500.00);
 
- */}
+*/}
 
 ```sql
 -- Creating a stored procedure
@@ -586,10 +583,10 @@ LANGUAGE plpgsql AS $$
 BEGIN
   -- Subtracting amount from source account
   UPDATE accounts SET balance = balance - transfer_amount WHERE account_id = source_acc;
-  
+
   -- Adding amount to destination account
   UPDATE accounts SET balance = balance + transfer_amount WHERE account_id = dest_acc;
-  
+
   COMMIT;
 END;
 $$;
@@ -607,12 +604,12 @@ For additional information and syntax, see [CREATE PROCEDURE](https://www.postgr
 
 Functions in Postgres can return a single value, a record, or a set of records.
 
-{/* 
+{/*
 
 CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    department VARCHAR(100)
+id SERIAL PRIMARY KEY,
+name VARCHAR(255),
+department VARCHAR(100)
 );
 
 INSERT INTO employees (name, department) VALUES
@@ -621,8 +618,7 @@ INSERT INTO employees (name, department) VALUES
 ('Alice Johnson', 'Human Resources'),
 ('Bob Brown', 'Engineering');
 
-
- */}
+*/}
 
 ```sql
 -- Creating a simple function
@@ -699,7 +695,7 @@ EXPLAIN ANALYZE SELECT * FROM employees WHERE department_id = 1;
 
 For more information, refer to the [EXPLAIN](/docs/postgresql/query-performance#use-explain) section in our query optimization guide.
 
-### Index metrics 
+### Index metrics
 
 This query lists the number of index scans performed for all user-defined indexes.
 
@@ -759,7 +755,7 @@ ORDER BY duration DESC;
 This query checks for locks that are currently waiting to be granted, which can be a sign of potential performance issues or deadlocks.
 
 ```sql
-SELECT pg_locks.pid, relation::regclass, mode, query 
+SELECT pg_locks.pid, relation::regclass, mode, query
 FROM pg_locks
 JOIN pg_stat_activity ON pg_locks.pid = pg_stat_activity.pid
 WHERE NOT granted;
@@ -778,18 +774,18 @@ SELECT datname, deadlocks FROM pg_stat_database;
 This query counts the number of locks per lock mode and table in a Postgres database, excluding system tables prefixed with `pg_`.
 
 ```sql
-SELECT 
-    mode, 
-    pg_class.relname, 
+SELECT
+    mode,
+    pg_class.relname,
     COUNT(*)
-FROM 
+FROM
     pg_locks
     JOIN pg_class ON pg_locks.relation = pg_class.oid
-WHERE 
+WHERE
     pg_locks.mode IS NOT NULL
-    AND pg_class.relname NOT LIKE 'pg\_%' ESCAPE '\'
-GROUP BY 
-    pg_class.relname, 
+    AND pg_class.relname NOT LIKE 'pg_%' ESCAPE '\'
+GROUP BY
+    pg_class.relname,
     mode;
 ```
 
@@ -840,15 +836,15 @@ SELECT relname, n_dead_tup FROM pg_stat_user_tables;
 This query calculates the percentage of dead rows compared to the total number of rows (alive and dead) in each user table within a Postgres database, helping identify potential table bloat and optimization opportunities. For related information, see [Check for table or index bloat](/docs/postgresql/query-performance#check-for-table-or-index-bloat).
 
 ```sql
-SELECT 
-    relname, 
+SELECT
+    relname,
     n_dead_tup,
     (CASE WHEN (n_live_tup + n_dead_tup) > 0 THEN
         ROUND((n_dead_tup::FLOAT / (n_live_tup + n_dead_tup))::numeric, 2)
     ELSE
         0
     END) AS dead_rows_percentage
-FROM 
+FROM
     pg_stat_user_tables;
 ```
 
@@ -870,11 +866,11 @@ Get the maximum number of connections for your Postgres instance.
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-limits-without-connection-pooling). 
+The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 
 <Admonition type="tip">
 You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
-</Admonition> 
+</Admonition>
 
 ### Get the percentage of maximum connections in use
 
@@ -953,7 +949,7 @@ SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
-Alternatively, you can check the `Data size` value on the **Branches** widget in the Neon Console. 
+Alternatively, you can check the **Data size** value on the **Branches** page in the Neon Console, which gives you the data size for the databases on that branch.
 
 <Admonition type="note">
 Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like point-in-time restore.

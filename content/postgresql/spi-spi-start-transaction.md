@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-START-TRANSACTION)
 
-## SPI\_start\_transaction
+## SPI_start_transaction
 
-SPI\_start\_transaction — obsolete function
+SPI_start_transaction — obsolete function
 
 ## Synopsis
 

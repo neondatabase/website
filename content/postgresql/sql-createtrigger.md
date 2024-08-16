@@ -28,7 +28,7 @@ where event can be one of:
 
 ## Description
 
-`CREATE TRIGGER` creates a new trigger. `CREATE OR REPLACE TRIGGER` will either create a new trigger, or replace an existing trigger. The trigger will be associated with the specified table, view, or foreign table and will execute the specified function *`function_name`* when certain operations are performed on that table.
+`CREATE TRIGGER` creates a new trigger. `CREATE OR REPLACE TRIGGER` will either create a new trigger, or replace an existing trigger. The trigger will be associated with the specified table, view, or foreign table and will execute the specified function _`function_name`_ when certain operations are performed on that table.
 
 To replace the current definition of an existing trigger, use `CREATE OR REPLACE TRIGGER`, specifying the existing trigger's name and parent table. All other properties are replaced.
 
@@ -57,9 +57,9 @@ Also, a trigger definition can specify a Boolean `WHEN` condition, which will be
 
 If multiple triggers of the same kind are defined for the same event, they will be fired in alphabetical order by name.
 
-When the `CONSTRAINT` option is specified, this command creates a *constraint trigger*. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be *deferred*. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
+When the `CONSTRAINT` option is specified, this command creates a _constraint trigger_. This is the same as a regular trigger except that the timing of the trigger firing can be adjusted using [`SET CONSTRAINTS`](sql-set-constraints). Constraint triggers must be `AFTER ROW` triggers on plain tables (not foreign tables). They can be fired either at the end of the statement causing the triggering event, or at the end of the containing transaction; in the latter case they are said to be _deferred_. A pending deferred-trigger firing can also be forced to happen immediately by using `SET CONSTRAINTS`. Constraint triggers are expected to raise an exception when the constraints they implement are violated.
 
-The `REFERENCING` option enables collection of *transition relations*, which are row sets that include all of the rows inserted, deleted, or modified by the current SQL statement. This feature lets the trigger see a global view of what the statement did, not just one row at a time. This option is only allowed for an `AFTER` trigger that is not a constraint trigger; also, if the trigger is an `UPDATE` trigger, it must not specify a *`column_name`* list. `OLD TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `DELETE`; it creates a transition relation containing the *before-images* of all rows updated or deleted by the statement. Similarly, `NEW TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `INSERT`; it creates a transition relation containing the *after-images* of all rows updated or inserted by the statement.
+The `REFERENCING` option enables collection of _transition relations_, which are row sets that include all of the rows inserted, deleted, or modified by the current SQL statement. This feature lets the trigger see a global view of what the statement did, not just one row at a time. This option is only allowed for an `AFTER` trigger that is not a constraint trigger; also, if the trigger is an `UPDATE` trigger, it must not specify a _`column_name`_ list. `OLD TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `DELETE`; it creates a transition relation containing the _before-images_ of all rows updated or deleted by the statement. Similarly, `NEW TABLE` may only be specified once, and only for a trigger that can fire on `UPDATE` or `INSERT`; it creates a transition relation containing the _after-images_ of all rows updated or inserted by the statement.
 
 `SELECT` does not modify any rows so you cannot create `SELECT` triggers. Rules and views may provide workable solutions to problems that seem to need `SELECT` triggers.
 
@@ -69,15 +69,15 @@ Refer to [Chapter 39](triggers) for more information about triggers.
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name to give the new trigger. This must be distinct from the name of any other trigger for the same table. The name cannot be schema-qualified — the trigger inherits the schema of its table. For a constraint trigger, this is also the name to use when modifying the trigger's behavior using `SET CONSTRAINTS`.
 
-* `BEFORE``AFTER``INSTEAD OF`
+- `BEFORE``AFTER``INSTEAD OF`
 
   Determines whether the function is called before, after, or instead of the event. A constraint trigger can only be specified as `AFTER`.
 
-* *`event`*
+- _`event`_
 
   One of `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`; this specifies the event that will fire the trigger. Multiple events can be specified using `OR`, except when transition relations are requested.
 
@@ -91,37 +91,37 @@ Refer to [Chapter 39](triggers) for more information about triggers.
 
   `INSTEAD OF UPDATE` events do not allow a list of columns. A column list cannot be specified when requesting transition relations, either.
 
-* *`table_name`*
+- _`table_name`_
 
   The name (optionally schema-qualified) of the table, view, or foreign table the trigger is for.
 
-* *`referenced_table_name`*
+- _`referenced_table_name`_
 
   The (possibly schema-qualified) name of another table referenced by the constraint. This option is used for foreign-key constraints and is not recommended for general use. This can only be specified for constraint triggers.
 
-* `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
+- `DEFERRABLE``NOT DEFERRABLE``INITIALLY IMMEDIATE``INITIALLY DEFERRED`
 
   The default timing of the trigger. See the [CREATE TABLE](sql-createtable) documentation for details of these constraint options. This can only be specified for constraint triggers.
 
-* `REFERENCING`
+- `REFERENCING`
 
   This keyword immediately precedes the declaration of one or two relation names that provide access to the transition relations of the triggering statement.
 
-* `OLD TABLE``NEW TABLE`
+- `OLD TABLE``NEW TABLE`
 
   This clause indicates whether the following relation name is for the before-image transition relation or the after-image transition relation.
 
-* *`transition_relation_name`*
+- _`transition_relation_name`_
 
   The (unqualified) name to be used within the trigger for this transition relation.
 
-* `FOR EACH ROW``FOR EACH STATEMENT`
+- `FOR EACH ROW``FOR EACH STATEMENT`
 
   This specifies whether the trigger function should be fired once for every row affected by the trigger event, or just once per SQL statement. If neither is specified, `FOR EACH STATEMENT` is the default. Constraint triggers can only be specified `FOR EACH ROW`.
 
-* *`condition`*
+- _`condition`_
 
-  A Boolean expression that determines whether the trigger function will actually be executed. If `WHEN` is specified, the function will only be called if the *`condition`* returns `true`. In `FOR EACH ROW` triggers, the `WHEN` condition can refer to columns of the old and/or new row values by writing `OLD.column_name` or `NEW.column_name` respectively. Of course, `INSERT` triggers cannot refer to `OLD` and `DELETE` triggers cannot refer to `NEW`.
+  A Boolean expression that determines whether the trigger function will actually be executed. If `WHEN` is specified, the function will only be called if the _`condition`_ returns `true`. In `FOR EACH ROW` triggers, the `WHEN` condition can refer to columns of the old and/or new row values by writing `OLD.column_name` or `NEW.column_name` respectively. Of course, `INSERT` triggers cannot refer to `OLD` and `DELETE` triggers cannot refer to `NEW`.
 
   `INSTEAD OF` triggers do not support `WHEN` conditions.
 
@@ -129,13 +129,13 @@ Refer to [Chapter 39](triggers) for more information about triggers.
 
   Note that for constraint triggers, evaluation of the `WHEN` condition is not deferred, but occurs immediately after the row update operation is performed. If the condition does not evaluate to true then the trigger is not queued for deferred execution.
 
-* *`function_name`*
+- _`function_name`_
 
   A user-supplied function that is declared as taking no arguments and returning type `trigger`, which is executed when the trigger fires.
 
   In the syntax of `CREATE TRIGGER`, the keywords `FUNCTION` and `PROCEDURE` are equivalent, but the referenced function must in any case be a function, not a procedure. The use of the keyword `PROCEDURE` here is historical and deprecated.
 
-* *`arguments`*
+- _`arguments`_
 
   An optional comma-separated list of arguments to be provided to the function when the trigger is executed. The arguments are literal string constants. Simple names and numeric constants can be written here, too, but they will all be converted to strings. Please check the description of the implementation language of the trigger function to find out how these arguments can be accessed within the function; it might be different from normal function arguments.
 
@@ -250,15 +250,15 @@ CREATE TRIGGER paired_items_update
 
 The `CREATE TRIGGER` statement in PostgreSQL implements a subset of the SQL standard. The following functionalities are currently missing:
 
-* While transition table names for `AFTER` triggers are specified using the `REFERENCING` clause in the standard way, the row variables used in `FOR EACH ROW` triggers may not be specified in a `REFERENCING` clause. They are available in a manner that is dependent on the language in which the trigger function is written, but is fixed for any one language. Some languages effectively behave as though there is a `REFERENCING` clause containing `OLD ROW AS OLD NEW ROW AS NEW`.
+- While transition table names for `AFTER` triggers are specified using the `REFERENCING` clause in the standard way, the row variables used in `FOR EACH ROW` triggers may not be specified in a `REFERENCING` clause. They are available in a manner that is dependent on the language in which the trigger function is written, but is fixed for any one language. Some languages effectively behave as though there is a `REFERENCING` clause containing `OLD ROW AS OLD NEW ROW AS NEW`.
 
-* The standard allows transition tables to be used with column-specific `UPDATE` triggers, but then the set of rows that should be visible in the transition tables depends on the trigger's column list. This is not currently implemented by PostgreSQL.
+- The standard allows transition tables to be used with column-specific `UPDATE` triggers, but then the set of rows that should be visible in the transition tables depends on the trigger's column list. This is not currently implemented by PostgreSQL.
 
-* PostgreSQL only allows the execution of a user-defined function for the triggered action. The standard allows the execution of a number of other SQL commands, such as `CREATE TABLE`, as the triggered action. This limitation is not hard to work around by creating a user-defined function that executes the desired commands.
+- PostgreSQL only allows the execution of a user-defined function for the triggered action. The standard allows the execution of a number of other SQL commands, such as `CREATE TABLE`, as the triggered action. This limitation is not hard to work around by creating a user-defined function that executes the desired commands.
 
 SQL specifies that multiple triggers should be fired in time-of-creation order. PostgreSQL uses name order, which was judged to be more convenient.
 
-SQL specifies that `BEFORE DELETE` triggers on cascaded deletes fire *after* the cascaded `DELETE` completes. The PostgreSQL behavior is for `BEFORE DELETE` to always fire before the delete action, even a cascading one. This is considered more consistent. There is also nonstandard behavior if `BEFORE` triggers modify rows or prevent updates during an update that is caused by a referential action. This can lead to constraint violations or stored data that does not honor the referential constraint.
+SQL specifies that `BEFORE DELETE` triggers on cascaded deletes fire _after_ the cascaded `DELETE` completes. The PostgreSQL behavior is for `BEFORE DELETE` to always fire before the delete action, even a cascading one. This is considered more consistent. There is also nonstandard behavior if `BEFORE` triggers modify rows or prevent updates during an update that is caused by a referential action. This can lead to constraint violations or stored data that does not honor the referential constraint.
 
 The ability to specify multiple actions for a single trigger using `OR` is a PostgreSQL extension of the SQL standard.
 

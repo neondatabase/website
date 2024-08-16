@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-02-16T18:37:19.445Z'
+updatedOn: '2024-08-06T15:23:10.945Z'
 ---
 
 This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
@@ -28,12 +28,13 @@ After signing up, you'll start with a `main` branch and the empty database `neon
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
-        
-    Sign up with your email, Github, Google, or other partner account. 
-    
+
+    Sign up with your email, Github, Google, or other partner account.
+
     For information about what's included with the free plan, see
-    [Neon Free Tier](/docs/introduction/plans#free-tier). For information about Neon's paid options, see
+    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
     [Neon Plans](/docs/introduction/plans).
+
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
     ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
@@ -61,7 +62,7 @@ The steps should be self-explanatory, but it's important to understand a few key
 
 - **We create your default branch `main` for you**
 
-  `main` is the default (primary) branch and hosts your database, role, and a compute endpoint that you can connect your application to.
+  `main` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to.
 
 - **Use the project _Quickstart_ or this tutorial**
 
@@ -84,7 +85,7 @@ For this tutorial, go ahead and create this sample table: click **Run**.
 Or if you want to add the table from the command line and you already have `psql` installed:
 
 ```sql shouldWrap
-CREATE TABLE playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 ```
@@ -93,13 +94,15 @@ Your default branch `main` now has a table with some data.
 
 ## Step 4 - View and modify data in the console
 
-Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats. 
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
 ![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
 
+For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
+
 ## Step 5 - Create a dedicated development branch
 
-In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`. 
+In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`.
 
 Again, we recommend creating a long-lived development branch for every member of your team. This lets you work on feature development, including schema changes, in isolation from your default branch, while maintaining a stable connection string in your application. Reset your branch to `main` at the start of every new feature.
 
@@ -107,41 +110,41 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 1. **Install CLI with Brew or NPM**
 
-    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
+   Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
 
-    - For macOS using Homebrew:
-    
-      ```bash
-      brew install neonctl
-      ```
+   - For macOS using Homebrew:
 
-    - Using NPM (applicable for all platforms that support Node.js):
-    
-      ```bash
-      npm install -g neonctl
-      ```
+     ```bash
+     brew install neonctl
+     ```
+
+   - Using NPM (applicable for all platforms that support Node.js):
+
+     ```bash
+     npm install -g neonctl
+     ```
 
 1. **Authenticate with Neon**
 
-     Launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   Launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
-    ```bash
-    neonctl auth
-    ```
- 
-    ![neonctl auth](/docs/get-started-with-neon/neonctl_auth.png "no-border")
+   ```bash
+   neon auth
+   ```
+
+   ![neon auth](/docs/get-started-with-neon/neonctl_auth.png 'no-border')
 
 1. **Create your development branch**
 
-    We recommend the naming convention `dev/developer_name` for all your development branches.
+   We recommend the naming convention `dev/developer_name` for all your development branches.
 
-    Example:
+   Example:
 
-    ```branch
-    neonctl branches create --name dev/alex
-    ```
+   ```branch
+   neon branches create --name dev/alex
+   ```
 
-    The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
+   The command output provides details about your new branch, including the branch ID, compute ID, and the connection URI that you can use to connect to this branch's database.
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 
@@ -184,58 +187,60 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
 
 1. **Connect to your database**
 
-    Get the connection string to your branch and connect to it directly via `psql`:
-    
-    ```bash shouldWrap
-    neonctl connection-string dev/developer_name --database-name neondb --psql
-    ```
+   Get the connection string to your branch and connect to it directly via `psql`:
 
-    This command establishes the psql terminal connection to the `neondb` database on your dev branch.
+   ```bash shouldWrap
+   neon connection-string dev/developer_name --database-name neondb --psql
+   ```
+
+   This command establishes the psql terminal connection to the `neondb` database on your dev branch.
 
 1. **Modify the schema**
 
-    Add a new column `description` and index it:
+   Add a new column `description` and index it:
 
-    ```sql shouldWrap
-    ALTER TABLE playing_with_neon
-    ADD COLUMN description TEXT;
+   ```sql shouldWrap
+   ALTER TABLE playing_with_neon
+   ADD COLUMN description TEXT;
 
-    CREATE INDEX idx_playing_with_neon_description ON playing_with_neon (description);
-    ```
+   CREATE INDEX idx_playing_with_neon_description ON playing_with_neon (description);
+   ```
+
 1. **Insert new data**
 
-    Add new data that will be exclusive to the dev branch.
+   Add new data that will be exclusive to the dev branch.
 
-    ```sql shouldWrap
-    INSERT INTO playing_with_neon (name, description) 
-    VALUES ('Your dev branch', 'Exploring schema changes in the dev branch');
-    ```
+   ```sql shouldWrap
+   INSERT INTO playing_with_neon (name, description)
+   VALUES ('Your dev branch', 'Exploring schema changes in the dev branch');
+   ```
 
 1. **Verify the schema changes**
 
-    Query the table to verify your schema changes:
+   Query the table to verify your schema changes:
 
-    ```sql
-    SELECT * FROM playing_with_neon;
-    ```
-    Your response should include the new description column and a new row where name = `Your dev branch` and description = `Exploring schema changes in the dev branch`:
+   ```sql
+   SELECT * FROM playing_with_neon;
+   ```
 
-    ```sql {1,13}
-     id |        name        |    value    |                description
-    ----+--------------------+-------------+--------------------------------------------
-      1 | c4ca4238a0         |   0.5315024 | 
-      2 | c81e728d9d         |  0.17189825 | 
-      3 | eccbc87e4b         |  0.21428405 | 
-      4 | a87ff679a2         |   0.9721639 | 
-      5 | e4da3b7fbb         |   0.8649301 | 
-      6 | 1679091c5a         |  0.48413596 | 
-      7 | 8f14e45fce         |  0.82630277 | 
-      8 | c9f0f895fb         |  0.99945337 | 
-      9 | 45c48cce2e         | 0.054623786 | 
-     10 | d3d9446802         |  0.36634886 | 
-     11 | Your dev branch    |             | Exploring schema changes in the dev branch
-    (11 rows)
-    ```
+   Your response should include the new description column and a new row where name = `Your dev branch` and description = `Exploring schema changes in the dev branch`:
+
+   ```sql {1,13}
+    id |        name        |    value    |                description
+   ----+--------------------+-------------+--------------------------------------------
+     1 | c4ca4238a0         |   0.5315024 |
+     2 | c81e728d9d         |  0.17189825 |
+     3 | eccbc87e4b         |  0.21428405 |
+     4 | a87ff679a2         |   0.9721639 |
+     5 | e4da3b7fbb         |   0.8649301 |
+     6 | 1679091c5a         |  0.48413596 |
+     7 | 8f14e45fce         |  0.82630277 |
+     8 | c9f0f895fb         |  0.99945337 |
+     9 | 45c48cce2e         | 0.054623786 |
+    10 | d3d9446802         |  0.36634886 |
+    11 | Your dev branch    |             | Exploring schema changes in the dev branch
+   (11 rows)
+   ```
 
 ## Step 7 - Check your changes with Schema Diff
 
@@ -248,11 +253,11 @@ From the **Branches** page in the Neon Console:
 1. Open the detailed view for your development branch (`dev/alex`) and click **Open schema diff**.
 1. Verify the right branches are selected and click **Compare**. You can see the schema changes we added to our dev branch highlighted in green under Branch 2 `dev/alex`.
 
-    ![Schema diff from branches page](/docs/get-started-with-neon/getting_started_schema_diff.png)
+   ![Schema diff from branches page](/docs/get-started-with-neon/getting_started_schema_diff.png)
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools,  you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
 ## Step 8 - Reset your dev branch to main
 
@@ -268,7 +273,7 @@ Use the following command to reset your `dev/development_name` branch to the sta
 
     Example:
     ```bash
-    neonctl branches reset dev/alex --parent
+    neon branches reset dev/alex --parent
     ```
 
 If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:
@@ -281,14 +286,15 @@ Depending on your development workflow, you can use branch reset:
 
 - **After a feature is completed and merged**
 
-    Once your changes are merged into `main`, reset the development branch to start on the next feature.
+  Once your changes are merged into `main`, reset the development branch to start on the next feature.
 
 - **When you need to abandon changes**
 
-     If a project direction changes or if experimental changes are no longer needed, resetting the branch quickly reverts to a known good state.
+  If a project direction changes or if experimental changes are no longer needed, resetting the branch quickly reverts to a known good state.
+
 - **As part of your CI/CD automation**
 
-    With the Neon CLI, you can include branch reset as an enforced part of your CI/CD automation, automatically resetting a branch when a feature is closed or started.
+  With the Neon CLI, you can include branch reset as an enforced part of your CI/CD automation, automatically resetting a branch when a feature is closed or started.
 
 Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
 

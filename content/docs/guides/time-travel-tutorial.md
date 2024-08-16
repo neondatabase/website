@@ -2,6 +2,7 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.409Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -9,37 +10,39 @@ This guide demonstrates how you could use Time Travel to address a common develo
 In this scenario, your team has recently introduced a streamlined checkout process, managed by a `new_checkout_process` feature flag. Soon after this flag was enabled, customer support started receiving complaints related to the new feature. As a developer, you're tasked with investigating the issues to confirm whether they are directly linked to the feature's activation.
 
 ## Before You Start
+
 To follow this tutorial, you'll need:
+
 - A Neon account. [Sign up here](/docs/get-started-with-neon/signing-up).
 - A [history retention](/docs/manage/projects#configure-history-retention) period that covers the timeframe of interest, allowing for effective use of Time Travel.
 
-
 ## Step 1: Preparing Your Database
+
 To simulate this scenario, create a `feature_flags` table used for controlling new feature availability.
 
 1. **Create `project_db` Database:**
-   
+
    In the **Neon Console**, create a new database named `project_db`.
 
 2. **Initialize `feature_flags` Table:**
-   
+
    Execute the following in the **SQL Editor**, with `product_db` selected as the database:
 
-    ```sql
-    CREATE TABLE feature_flags (
-        feature_name TEXT PRIMARY KEY,
-        enabled BOOLEAN NOT NULL
-    );
-    ```
+   ```sql
+   CREATE TABLE feature_flags (
+       feature_name TEXT PRIMARY KEY,
+       enabled BOOLEAN NOT NULL
+   );
+   ```
 
 3. **Insert Sample Data:**
-   
+
    Populate the table with an initial feature flag:
 
-    ```sql
-    INSERT INTO feature_flags (feature_name, enabled)
-    VALUES ('new_checkout_process', FALSE);
-    ```
+   ```sql
+   INSERT INTO feature_flags (feature_name, enabled)
+   VALUES ('new_checkout_process', FALSE);
+   ```
 
 This setup reflects a typical development stage: the feature is integrated and deployment-ready but remains inactive, awaiting activation.
 
@@ -77,15 +80,15 @@ Let's confirm that the feature was indeed disabled just before the feature flag'
 
 1. Enter a time period just before the identified activation timestamp.
 
-    For our purposes, we'll select `2023-04-09 at 18:10 PM EST`, which is one minute before our activation time.
+   For our purposes, we'll select `2023-04-09 at 18:10 PM EST`, which is one minute before our activation time.
 
-    ```sql
-    SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
-    ```
+   ```sql
+   SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
+   ```
 
-    We'll see the feature flag shows as `f` for false, as expected.
+   We'll see the feature flag shows as `f` for false, as expected.
 
-    ![check pre-activation](/docs/guides/time_travel_tutorial_before.png)
+   ![check pre-activation](/docs/guides/time_travel_tutorial_before.png)
 
 ## Step 5: Analyzing Post-Activation State
 
@@ -93,7 +96,7 @@ With the pre-activation state confirmed, now check the feature flag's status imm
 
 ### Adjust Time Selector to Post-Activation:
 
- Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2023-04-09 at 6:12 PM EST`. Re-execute the query.
+Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2023-04-09 at 6:12 PM EST`. Re-execute the query.
 
 ```sql
 SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
@@ -101,4 +104,4 @@ SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
 
 ![check post-activation](/docs/guides/time_travel_tutorial_after.png)
 
- Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.
+Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.

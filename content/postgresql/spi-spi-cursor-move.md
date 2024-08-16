@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-CURSOR-MOVE)
 
-## SPI\_cursor\_move
+## SPI_cursor_move
 
-SPI\_cursor\_move — move a cursor
+SPI_cursor_move — move a cursor
 
 ## Synopsis
 
@@ -20,15 +20,15 @@ void SPI_cursor_move(Portal portal, bool forward, long count)
 
 ## Arguments
 
-* `Portal portal`
+- `Portal portal`
 
   portal containing the cursor
 
-* `bool forward`
+- `bool forward`
 
   true for move forward, false for move backward
 
-* `long count`
+- `long count`
 
   maximum number of rows to move
 

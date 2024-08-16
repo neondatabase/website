@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-PALLOC)
 
-## SPI\_palloc
+## SPI_palloc
 
-SPI\_palloc — allocate memory in the upper executor context
+SPI_palloc — allocate memory in the upper executor context
 
 ## Synopsis
 
@@ -22,7 +22,7 @@ This function can only be used while connected to SPI. Otherwise, it throws an e
 
 ## Arguments
 
-* `Size size`
+- `Size size`
 
   size in bytes of storage to allocate
 

@@ -2,8 +2,6 @@
 
 ## 29.1. Determining Disk Usage [#](#DISK-USAGE)
 
-
-
 Each table has a primary heap disk file where most of the data is stored. If the table has any columns with potentially-wide values, there also might be a TOAST file associated with the table, which is used to store values too wide to fit comfortably in the main table (see [Section 73.2](storage-toast)). There will be one valid index on the TOAST table, if present. There also might be indexes associated with the base table. Each table and index is stored in a separate disk file — possibly more than one file, if the file would exceed one gigabyte. Naming conventions for these files are described in [Section 73.1](storage-file-layout).
 
 You can monitor disk space in three ways: using the SQL functions listed in [Table 9.96](functions-admin#FUNCTIONS-ADMIN-DBSIZE), using the [oid2name](oid2name) module, or using manual inspection of the system catalogs. The SQL functions are the easiest to use and are generally recommended. The remainder of this section shows how to do it by inspection of the system catalogs.

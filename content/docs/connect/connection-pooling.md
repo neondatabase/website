@@ -1,20 +1,20 @@
 ---
-title: Connection pooling
-subtitle: Learn how to enable connection pooling in Neon
+title: About Connection pooling
+subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-02-09T16:27:39.008Z'
+updatedOn: '2024-08-09T17:57:28.406Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
 
 ## How to use connection pooling
 
-To use connection pooling with Neon, use a pooled connection string instead of a regular connection string. A pooled connection string adds the `-pooler` option to your compute endpoint ID, as shown below: 
+To use connection pooling with Neon, use a pooled connection string instead of a regular connection string. A pooled connection string adds the `-pooler` option to your compute ID, as shown below:
 
 ```text shouldWrap
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string for you. You can copy a pooled connection string from the **Dashboard** or manually add the `-pooler` option to the endpoint ID in an existing connection string.
@@ -23,14 +23,14 @@ The **Connection Details** widget on the Neon **Dashboard** provides **Pooled co
 
 <Admonition type="info">
 The `-pooler` option routes the connection to a connection pooling port at the Neon Proxy.
-</Admonition>  
+</Admonition>
 
 ## Connection limits without connection pooling
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
 
 | Compute Size (CU) | vCPU | RAM   | max_connections |
-|:------------------|:-----|:------|:----------------|
+| :---------------- | :--- | :---- | :-------------- |
 | 0.25              | 0.25 | 1 GB  | 112             |
 | 0.50              | 0.50 | 2 GB  | 225             |
 | 1                 | 1    | 4 GB  | 450             |
@@ -40,9 +40,11 @@ Each Postgres connection creates a new process in the operating system, which co
 | 5                 | 5    | 20 GB | 2253            |
 | 6                 | 6    | 24 GB | 2703            |
 | 7                 | 7    | 28 GB | 3154            |
-| 8                 | 8    | 32 GB | 3604           |
+| 8                 | 8    | 32 GB | 3604            |
+| 9                 | 9    | 36 GB | 4000            |
+| 10                | 10   | 40 GB | 4000            |
 
-The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Tier compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
@@ -54,17 +56,28 @@ Four connections are reserved for the Neon-managed Postgres `superuser` account.
 ```sql
 SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
 ```
+
 </Admonition>
 
-Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Tier](/docs/introduction/plans#free-tier), support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Plan](/docs/introduction/plans#free-plan), support connection pooling.
 
 ## Connection pooling
 
-Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections.
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections through the -pooler endpoint.
+
+The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal PostgreSQL endpoint, so they still consume some connections to the main Postgres instance.
+
+To ensure that direct access to Postgres is still possible for e.g. administrative tasks, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. I.e., there can be only 64 active connections by `john` to the `neondb` database through the pooler. All other connections by `john` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
+At the same time, a user `mike` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough `minCU` setting to be configured with a high enough `max_connections` setting to support those 128 concurrent connections from those two users.  
+Similarly, even if the user `john` has 64 concurrently active transactions through the pooler to the `neondb` database, that user can still start up to 64 concurrent transactions in the `john_db` database when connected through the pooler; but again, only if Postgres' `max_connections` limit has the capacity for the connections that are managed by the pooler.
+
+For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-Connection pooling supports up to 10,000 concurrent connections when multiple Postgres users are connecting to multiple Postgres databases. For a single user connecting to a single database, the maximum number of concurrent connections is 64. This limit is controlled by the PgBouncer `default_pool_size` parameter, which defines the default number of server connections per user/database pair. See [Neon PgBouncer configuration settings](#neon-pgbouncer-configuration-settings). If your application connects to your database using a single Postgres role, expect to encounter this limit when exceeding the 64 concurrent connection limit. For information about creating additional Postgres roles, see [Manage roles](/docs/manage/roles#manage-roles-with-sql). Roles can created via the Neon Console, CLI, API, and SQL.
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume some connections on the main endpoint: PgBouncer forwards operations from the user's connections through its own pool of connnections to Postgres, and adaptively adds more connections to PostgreSQL as and when needed by more concurrently active user connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and/or short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
 </Admonition>
+
+## PgBouncer
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
 
@@ -72,7 +85,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Neon PgBouncer configuration settings
 
-Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support). 
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support).
 
 ```ini
 [pgbouncer]
@@ -101,7 +114,7 @@ Protocol-level prepared statements are supported with Neon and PgBouncer as of t
 
 ### Understanding prepared statements
 
-A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
+A prepared statement in Postgres allows for the optimization of an SQL query by defining its structure once and executing it multiple times with varied parameters. Here's an SQL-level example to illustrate. Note that direct SQL-level `PREPARE` and `EXECUTE` are not supported with PgBouncer (see [below](#use-prepared-statements-with-pgbouncer)), so you can't use this query from the SQL Editor. It is meant to give you a clear idea of how a prepared statement works. Refer to the protocol-level samples below to see how this SQL-level example translates to different protocol-level examples.
 
 ```sql
 PREPARE fetch_plan (TEXT) AS
@@ -127,12 +140,12 @@ Since pgBouncer supports protocol-level prepared statements only, you must rely 
 
 ```javascript
 const query = {
-   // give the query a unique name
-   name: 'fetch-plan',
-      text: 'SELECT * FROM users WHERE username = $1',
-      values: ['alice'],
-  };
-  client.query(query);
+  // give the query a unique name
+  name: 'fetch-plan',
+  text: 'SELECT * FROM users WHERE username = $1',
+  values: ['alice'],
+};
+client.query(query);
 ```
 
 ```python

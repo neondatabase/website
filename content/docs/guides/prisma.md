@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2024-02-23T20:32:29.800Z'
+updatedOn: '2024-08-07T21:36:52.661Z'
 ---
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -24,8 +24,8 @@ Prisma is an open-source, next-generation ORM that lets you to manage and intera
 To establish a basic connection from Prisma to Neon, perform the following steps:
 
 1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-  ![Connection details widget](/docs/connect/connection_details.png)
-  The connection string includes the user name, password, hostname, and database name.
+   ![Connection details widget](/docs/connect/connection_details.png)
+   The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
 
@@ -41,7 +41,7 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    Your setting will appear similar to the following:
 
    ```text shouldWrap
-   DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
 <Admonition type="important">
@@ -54,7 +54,7 @@ Serverless functions can require a large number of database connections as deman
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
@@ -71,7 +71,7 @@ Error querying the database: db error: ERROR: prepared statement
 
 To avoid this issue, you can define a direct connection to the database for Prisma Migrate or you can upgrade Prisma ORM to 5.10 or higher.
 
-#### Using a direct connection to the database 
+#### Using a direct connection to the database
 
 You can configure a direct connection while allowing applications to use Prisma Client with a pooled connection by adding a `directUrl` property to the datasource block in your `schema.prisma` file. For example:
 
@@ -96,10 +96,10 @@ When you finish updating your `.env` file, your variable settings should appear 
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 
 # Unpooled Neon connection string
-DIRECT_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DIRECT_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 #### Using a pooled connection with Prisma Migrate
@@ -117,10 +117,9 @@ datasource db {
 
 `.env` file:
 
-
 ```ini
 # Pooled Neon connection string
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 ## Use the Neon serverless driver with Prisma
@@ -161,19 +160,19 @@ npm install --save-dev @types/ws
 Update your Prisma Client instance:
 
 ```javascript
-import { Pool, neonConfig } from '@neondatabase/serverless'
-import { PrismaNeon } from '@prisma/adapter-neon'
-import { PrismaClient } from '@prisma/client'
-import dotenv from 'dotenv'
-import ws from 'ws'
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import dotenv from 'dotenv';
+import ws from 'ws';
 
-dotenv.config()
-neonConfig.webSocketConstructor = ws
-const connectionString = `${process.env.DATABASE_URL}`
+dotenv.config();
+neonConfig.webSocketConstructor = ws;
+const connectionString = `${process.env.DATABASE_URL}`;
 
-const pool = new Pool({ connectionString })
-const adapter = new PrismaNeon(pool)
-const prisma = new PrismaClient({ adapter })
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
 ```
 
 You can now use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined by the `DATABASE_URL` variable in your `schema.prisma` file.
@@ -184,6 +183,7 @@ If you encounter a `TypeError: bufferUtil.mask is not a function` error when bui
 ```shell
 npm i bufferutil --save-dev
 ```
+
 </Admonition>
 
 ## Connection timeouts
@@ -202,7 +202,7 @@ A Neon compute has two main states: _Active_ and _Idle_. Active means that the c
 When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, you can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
 
 ```text shouldWrap
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10"
 ```
 
 <Admonition type="note">
@@ -213,10 +213,10 @@ A `connect_timeout` setting of 0 means no timeout.
 
 Another possible cause of timeouts is [Prisma's connection pool](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/). The Prisma query engine manages a pool of connections. The pool is instantiated when a Prisma Client opens a first connection to the database. For an explanation of how this connection pool functions, read [How the connection pool works](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#how-the-connection-pool-works), in the _Prisma documentation_.
 
-The default size of the Prisma connection pool is determined by the following formula: `num_physical_cpus * 2 + 1`,  where `num_physical_cpus` represents the number of physical CPUs on the machine where your application runs. For example, if your machine has four physical CPUs, your connection pool will contain nine connections (4 * 2 + 1 = 9). As mentioned in the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#default-connection-pool-size), this formula is a good starting point, but the recommended connection limit also depends on your deployment paradigm — particularly if you are using serverless. You can specify the number of connections explicitly by setting the `connection_limit` parameter in your database connection URL. For example:
+The default size of the Prisma connection pool is determined by the following formula: `num_physical_cpus * 2 + 1`, where `num_physical_cpus` represents the number of physical CPUs on the machine where your application runs. For example, if your machine has four physical CPUs, your connection pool will contain nine connections (4 \* 2 + 1 = 9). As mentioned in the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#default-connection-pool-size), this formula is a good starting point, but the recommended connection limit also depends on your deployment paradigm — particularly if you are using serverless. You can specify the number of connections explicitly by setting the `connection_limit` parameter in your database connection URL. For example:
 
 ```text shouldWrap
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20"
 ```
 
 For configuration guidance, refer to Prisma's [Recommended connection pool size guide](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#recommended-connection-pool-size).
@@ -224,7 +224,7 @@ For configuration guidance, refer to Prisma's [Recommended connection pool size 
 In addition to pool size, you can configure a `pool_timeout` setting. This setting defines the amount of time the Prisma Client query engine has to process a query before it throws an exception and moves on to the next query in the queue. The default `pool_timeout` setting is 10 seconds. If you still experience timeouts after increasing `connection_limit` setting, you can try setting the `pool_timeout` parameter to a value larger than the default (10 seconds). For configuration guidance, refer to [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout), in the _Prisma documentation_.
 
 ```text shouldWrap
-DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15"
 ```
 
 You can disable pool timeouts by setting `pool_timeout=0`.

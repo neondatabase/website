@@ -10,7 +10,7 @@ Values to be inserted into a table are converted to the destination column's dat
 
 1. Check for an exact match with the target.
 
-2. Otherwise, try to convert the expression to the target type. This is possible if an *assignment cast* between the two types is registered in the `pg_cast` catalog (see [CREATE CAST](sql-createcast)). Alternatively, if the expression is an unknown-type literal, the contents of the literal string will be fed to the input conversion routine for the target type.
+2. Otherwise, try to convert the expression to the target type. This is possible if an _assignment cast_ between the two types is registered in the `pg_cast` catalog (see [CREATE CAST](sql-createcast)). Alternatively, if the expression is an unknown-type literal, the contents of the literal string will be fed to the input conversion routine for the target type.
 
 3. Check to see if there is a sizing cast for the target type. A sizing cast is a cast from that type to itself. If one is found in the `pg_cast` catalog, apply it to the expression before storing into the destination column. The implementation function for such a cast always takes an extra parameter of type `integer`, which receives the destination column's `atttypmod` value (typically its declared length, although the interpretation of `atttypmod` varies for different data types), and it may take a third `boolean` parameter that says whether the cast is explicit or implicit. The cast function is responsible for applying any length-dependent semantics such as size checking or truncation.
 

@@ -98,15 +98,22 @@ const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
                 <li className="group flex" key={index}>
                   <Link className="flex w-full gap-x-3 py-2 leading-none" to={to}>
                     <img
-                      className={clsx(
-                        'h-[17px] w-[17px] shrink dark:opacity-100 dark:invert-0',
-                        !isDarkTheme && 'opacity-90 invert'
-                      )}
-                      src={icon}
+                      className="h-[17px] w-[17px] shrink dark:hidden"
+                      src={icon.light}
                       width={17}
                       height={17}
-                      alt=""
                       loading="lazy"
+                      alt=""
+                      aria-hidden
+                    />
+                    <img
+                      className="hidden h-[17px] w-[17px] shrink dark:block"
+                      src={icon.dark}
+                      width={17}
+                      height={17}
+                      loading="lazy"
+                      alt=""
+                      aria-hidden
                     />
                     <span className="flex flex-col gap-y-1">
                       <span
@@ -171,7 +178,7 @@ const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
 
   return (
     <>
-      <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex md:right-4">
+      <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
         {searchIndexName && (
           <Search className="mobile-search" indexName={searchIndexName} isBlog={isBlogPage} />
         )}

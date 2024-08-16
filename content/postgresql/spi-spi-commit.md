@@ -1,8 +1,8 @@
 [#id](#SPI-SPI-COMMIT)
 
-## SPI\_commit
+## SPI_commit
 
-SPI\_commit, SPI\_commit\_and\_chain — commit the current transaction
+SPI_commit, SPI_commit_and_chain — commit the current transaction
 
 ## Synopsis
 

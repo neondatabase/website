@@ -5,6 +5,7 @@ subtitle: Learn about Neon's pricing plans and billing
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
+updatedOn: '2024-06-14T07:55:54.412Z'
 ---
 
 Find all the information you need about Neon's plans and how to manage your monthly bill.
@@ -32,7 +33,6 @@ Find out how billing works and learn more about Neon's usage metrics.
 <a href="/docs/introduction/extra-usage" description="Learn about plan allowances and how extra usage works" icon="wallet">Extra usage</a>
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
-
 
 </DetailIconCards>
 

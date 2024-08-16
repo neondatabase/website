@@ -3,14 +3,14 @@ title: Use Neon with Cloudflare Hyperdrive
 subtitle: Connect Cloudflare Hyperdrive to your Neon Postgres database for faster
   queries
 enableTableOfContents: true
-updatedOn: '2024-02-21T23:59:47.044Z'
+updatedOn: '2024-08-07T21:36:52.648Z'
 ---
 
-[Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection. 
+[Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.
 
 This is specifically useful for serverless applications that cannot maintain a persistent database connection and need to establish a new connection for each request. Hyperdrive can significantly reduce the latency of these queries for your application users.
 
-This guide demonstrates how to configure a Hyperdrive service to connect to your Neon Postgres database. It demonstrates how to implement a regular `Workers` application that connects to Neon directly and then replace that connection with a `Hyperdrive` connection to achieve performance improvements. 
+This guide demonstrates how to configure a Hyperdrive service to connect to your Neon Postgres database. It demonstrates how to implement a regular `Workers` application that connects to Neon directly and then replace that connection with a `Hyperdrive` connection to achieve performance improvements.
 
 ## Prerequisites
 
@@ -18,11 +18,11 @@ To follow along with this guide, you require:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 
-- A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started. 
+- A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started.
 
-    **NOTE**: You need to be on Cloudflare Workers' paid subscription plan to use Hyperdrive.
+  **NOTE**: You need to be on Cloudflare Workers' paid subscription plan to use Hyperdrive.
 
-- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy our Workers application. 
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy our Workers application.
 
 ## Setting up your Neon database
 
@@ -34,31 +34,31 @@ To follow along with this guide, you require:
 
 3. From your project dashboard, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
-    ```sql
-    CREATE TABLE books_to_read (
-        id SERIAL PRIMARY KEY,
-        title TEXT,
-        author TEXT
-    );
-    ```
+   ```sql
+   CREATE TABLE books_to_read (
+       id SERIAL PRIMARY KEY,
+       title TEXT,
+       author TEXT
+   );
+   ```
 
-    Next, we insert some sample data into the `books_to_read` table, so we can query it later:
+   Next, we insert some sample data into the `books_to_read` table, so we can query it later:
 
-    ```sql
-    INSERT INTO books_to_read (title, author)
-    VALUES
-        ('The Way of Kings', 'Brandon Sanderson'),
-        ('The Name of the Wind', 'Patrick Rothfuss'),
-        ('Coders at Work', 'Peter Seibel'),
-        ('1984', 'George Orwell');
-    ```
+   ```sql
+   INSERT INTO books_to_read (title, author)
+   VALUES
+       ('The Way of Kings', 'Brandon Sanderson'),
+       ('The Name of the Wind', 'Patrick Rothfuss'),
+       ('Coders at Work', 'Peter Seibel'),
+       ('1984', 'George Orwell');
+   ```
 
 ### Retrieve your Neon database connection string
 
 Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -74,6 +74,7 @@ npm create cloudflare@latest
 ```
 
 This initiates an interactive CLI prompt to generate a new project. To follow along with this guide, you can use the following settings:
+
 ```bash
 ├ In which directory do you want to create your application?
 │ dir ./neon-hyperdrive-guide
@@ -87,7 +88,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 
 When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to the Cloudflare Workers platform.
 
-The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, we need to add the following entry to the `wrangler.toml` file. 
+The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, we need to add the following entry to the `wrangler.toml` file.
 
 ```toml
 node_compat=true
@@ -109,16 +110,16 @@ import pkg from 'pg';
 const { Client } = pkg;
 
 export default {
-	async fetch(request, env, ctx) {
-		const client = new Client({ connectionString: env.DATABASE_URL });
-		await client.connect();
-		const { rows } = await client.query('SELECT * FROM books_to_read;');
-		return new Response(JSON.stringify(rows));
-	},
+  async fetch(request, env, ctx) {
+    const client = new Client({ connectionString: env.DATABASE_URL });
+    await client.connect();
+    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    return new Response(JSON.stringify(rows));
+  },
 };
 ```
 
-The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list. 
+The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.
 
 ### Test the worker application locally
 
@@ -134,11 +135,11 @@ Now, to test the worker application locally, you can use the `wrangler` CLI whic
 npx wrangler dev
 ```
 
-This command starts a local server and simulates the Cloudflare Workers environment. You can visit the printed URL in your browser to test the worker application. It should return a JSON response with the list of books from the `books_to_read` table. 
+This command starts a local server and simulates the Cloudflare Workers environment. You can visit the printed URL in your browser to test the worker application. It should return a JSON response with the list of books from the `books_to_read` table.
 
 ## Setting up Cloudflare Hyperdrive
 
-With our Workers application able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries. 
+With our Workers application able to query the Neon database, we will now set up Cloudflare Hyperdrive to connect to Neon and accelerate the database queries.
 
 ### Create a new Hyperdrive service
 
@@ -148,13 +149,13 @@ You can use the `Wrangler` CLI to create a new Hyperdrive service, using your Ne
 npx wrangler hyperdrive create neon-guide-drive --connection-string=$NEON_DATABASE_CONNECTION_STRING
 ```
 
-This command creates a new Hyperdrive service named `neon-guide-drive` and outputs its configuration details. Copy the `id` field from the output, which we will use next. 
+This command creates a new Hyperdrive service named `neon-guide-drive` and outputs its configuration details. Copy the `id` field from the output, which we will use next.
 
 ### Bind the Worker project to Hyperdrive
 
-Cloudflare workers uses `Bindings` to interact with other resources on the Cloudflare platform. We will update the `wrangler.toml` file in the project directory to bind our Worker project to the Hyperdrive service. 
+Cloudflare workers uses `Bindings` to interact with other resources on the Cloudflare platform. We will update the `wrangler.toml` file in the project directory to bind our Worker project to the Hyperdrive service.
 
-Add the following lines to the `wrangler.toml` file. This lets us access the Hyperdrive service from our Worker application using the `HYPERDRIVE` binding. 
+Add the following lines to the `wrangler.toml` file. This lets us access the Hyperdrive service from our Worker application using the `HYPERDRIVE` binding.
 
 ```toml
 [[hyperdrive]]
@@ -164,7 +165,7 @@ id = $id-from-previous-step
 
 ### Update the Worker script to use Hyperdrive
 
-Now, you can update the `src/index.js` file in the project directory to query the Neon database, through the Hyperdrive service. 
+Now, you can update the `src/index.js` file in the project directory to query the Neon database, through the Hyperdrive service.
 
 ```javascript
 import pkg from 'pg';
@@ -172,17 +173,17 @@ import pkg from 'pg';
 const { Client } = pkg;
 
 export default {
-    async fetch(request, env, ctx) {
-        // We replace the direct database connection with the Hyperdrive service
-        const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
-        await client.connect();
-        const { rows } = await client.query('SELECT * FROM books_to_read;');
-        return new Response(JSON.stringify(rows));
-  }
-}
+  async fetch(request, env, ctx) {
+    // We replace the direct database connection with the Hyperdrive service
+    const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
+    await client.connect();
+    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    return new Response(JSON.stringify(rows));
+  },
+};
 ```
 
-### Deploy the updated Worker 
+### Deploy the updated Worker
 
 Now that we have updated the Worker script to use the Hyperdrive service, we can deploy the updated Worker to the Cloudflare Workers platform:
 
@@ -190,7 +191,7 @@ Now that we have updated the Worker script to use the Hyperdrive service, we can
 npx wrangler deploy
 ```
 
-This command uploads the updated Worker script to the Cloudflare Workers platform and makes it available at a public URL. You can visit the URL in your browser to test that the application works. 
+This command uploads the updated Worker script to the Cloudflare Workers platform and makes it available at a public URL. You can visit the URL in your browser to test that the application works.
 
 ## Removing the example application and Neon project
 

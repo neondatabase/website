@@ -2,9 +2,7 @@
 
 ## 19.10. Secure TCP/IP Connections with GSSAPI Encryption [#](#GSSAPI-ENC)
 
-* [19.10.1. Basic Setup](gssapi-enc#GSSAPI-SETUP)
-
-
+- [19.10.1. Basic Setup](gssapi-enc#GSSAPI-SETUP)
 
 PostgreSQL also has native support for using GSSAPI to encrypt client/server communications for increased security. Support requires that a GSSAPI implementation (such as MIT Kerberos) is installed on both client and server systems, and that support in PostgreSQL is enabled at build time (see [Chapter 17](installation)).
 

@@ -1,8 +1,8 @@
 ---
 title: Anonymize data with Neosync
-subtitle: Learn how to anonymize sensitive data in Neon with Neosync 
+subtitle: Learn how to anonymize sensitive data in Neon with Neosync
 enableTableOfContents: true
-tag: new
+updatedOn: '2024-07-09T20:55:06.492Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create anonymized data and sync it across all of your database environments for better security, privacy, and development.
@@ -19,11 +19,11 @@ To complete the steps in this guide, you require the following:
 
 ## Neon setup
 
-Anonymizing data requires source and destination databases. This section describes the source database and how to set up a destination database branch in Neon where you will sync anonymized data using Neosync. 
+Anonymizing data requires source and destination databases. This section describes the source database and how to set up a destination database branch in Neon where you will sync anonymized data using Neosync.
 
 <Admonition type="info">
 A Neon branch is an isolated copy of your database environment that you can use for development and testing.
-</Admonition> 
+</Admonition>
 
 ### The source database
 
@@ -68,13 +68,13 @@ The Neosync setup involves setting up a connection to the destination database a
 
 3. Paste the Neon database connection string for the branch in the **Connection URL** field and click **Test Connection** to verify that the connection works.
 
-    ![Test Neosync Neon destination database connection](/docs/guides/neosync_anon_test_connection.png)
+   ![Test Neosync Neon destination database connection](/docs/guides/neosync_anon_test_connection.png)
 
 4. Click **Submit** to save the connection configuration.
 
 ### Create a data synchronization job
 
-To generate anonymized data, we need to create a **Job** in Neosync. 
+To generate anonymized data, we need to create a **Job** in Neosync.
 
 1. In Neonsync, click on **Jobs** and then click **New Job**. You are presented with a few job types. Since you are anonymizing existing data, select the **Data Synchronization** job type and click **Next**.
 
@@ -82,37 +82,38 @@ To generate anonymized data, we need to create a **Job** in Neosync.
 
 2. Give the job a name (e.g. `anonymize-user-data`) and set **Initiate Job Run** to **Yes**.
 
-    ![Define Neosync job definition](/docs/guides/neosync_anon_job_definition.png)
+   ![Define Neosync job definition](/docs/guides/neosync_anon_job_definition.png)
 
-3. Click **Next** to move to the **Connect** page. 
-    - Select the location of the source data set from the dropdown. In this example, the location is the `neon-neosync` connection to the database on your `main` branch.
-    - Select the location of the destination database where the data should be synced. In this example, the destination location is the `neosync-destination` connection to the database on your destination branch.
-    - We'll also enable the **Truncate Before Insert** option to truncate the table before inserting data. This will replace the data that was copied when you created the destination branch and refresh the data each time you run the job. 
+3. Click **Next** to move to the **Connect** page.
 
-    ![Define Neosync job connection](/docs/guides/neosync_anon_job_connect.png)
+   - Select the location of the source data set from the dropdown. In this example, the location is the `neon-neosync` connection to the database on your `main` branch.
+   - Select the location of the destination database where the data should be synced. In this example, the destination location is the `neosync-destination` connection to the database on your destination branch.
+   - We'll also enable the **Truncate Before Insert** option to truncate the table before inserting data. This will replace the data that was copied when you created the destination branch and refresh the data each time you run the job.
 
-    Click **Next**.
+   ![Define Neosync job connection](/docs/guides/neosync_anon_job_connect.png)
 
-5. On the **Schema** page:
+   Click **Next**.
 
-    - Under **Table Selection**, select the schema and table (`public.users` in this example) and move it from the source to the destination table.
-    - Under **Transformer Mapping**, select all of the columns and choose a **Transfomer** to define the type of data you want to generate for each column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
+4. On the **Schema** page:
 
-    ![Define Neosync job schema](/docs/guides/neosync_anon_job_schema.png)
+   - Under **Table Selection**, select the schema and table (`public.users` in this example) and move it from the source to the destination table.
+   - Under **Transformer Mapping**, select all of the columns and choose a **Transfomer** to define the type of data you want to generate for each column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
 
-7. Click **Next** to go to the **Subset** page. The subset feature allows you to automatically subset data for child tables by defining SQL filters. Since we're only anonymizing data for a single table in this guide, we'll just click **Save** to create the job and start the first run.
+   ![Define Neosync job schema](/docs/guides/neosync_anon_job_schema.png)
 
-    <Admonition type="note">
-    To learn more about Neosync's subset feature, see [Subsetting with referential integrity](https://www.neosync.dev/blog/subset-referential-integrity).
-    </Admonition>
+5. Click **Next** to go to the **Subset** page. The subset feature allows you to automatically subset data for child tables by defining SQL filters. Since we're only anonymizing data for a single table in this guide, we'll just click **Save** to create the job and start the first run.
 
-    You can see that the job ran successfully, and in just a few seconds, it copied, anonymized, and moved data from your source database to your destination database in Neon.
+   <Admonition type="note">
+   To learn more about Neosync's subset feature, see [Subsetting with referential integrity](https://www.neosync.dev/blog/subset-referential-integrity).
+   </Admonition>
 
-    ![Neosync job status](/docs/guides/neosync_anon_job_status.png)
+   You can see that the job ran successfully, and in just a few seconds, it copied, anonymized, and moved data from your source database to your destination database in Neon.
 
-8. You can verify that the anonymized data was generated in your destination branch by navigating to the Neon Console, selecting **Tables** from the sidebar, and selecting the `neosync-destination` branch from the breadcrumb selector at the top of the page. Your anaonymized data should be visible in `public.users` table.
+   ![Neosync job status](/docs/guides/neosync_anon_job_status.png)
 
-    ![Verify data in Neon](/docs/guides/neosync_verify_anon_data.png)
+6. You can verify that the anonymized data was generated in your destination branch by navigating to the Neon Console, selecting **Tables** from the sidebar, and selecting the `neosync-destination` branch from the breadcrumb selector at the top of the page. Your anaonymized data should be visible in `public.users` table.
+
+   ![Verify data in Neon](/docs/guides/neosync_verify_anon_data.png)
 
 ## Conclusion
 
@@ -120,7 +121,7 @@ In this guide, we stepped through how to sync and anonymize sensitive data betwe
 
 <Admonition type="note">
 Neosync supports any Postgres database. You can also sync and anonymize data from Neon to RDS or from RDS to Neon, for example.
-</Admonition> 
+</Admonition>
 
 This was a small test with only 1000 rows of data, but you can follow the same procedure to branch and anonymize millions of rows of data, and Neosync can manage any referential integrity constraints for you.
 

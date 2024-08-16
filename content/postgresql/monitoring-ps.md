@@ -2,8 +2,6 @@
 
 ## 28.1. Standard Unix Tools [#](#MONITORING-PS)
 
-
-
 On most Unix platforms, PostgreSQL modifies its command title as reported by `ps`, so that individual server processes can readily be identified. A sample display is
 
 ```
@@ -26,7 +24,7 @@ postgres: user database host activity
 
 The user, database, and (client) host items remain the same for the life of the client connection, but the activity indicator changes. The activity can be `idle` (i.e., waiting for a client command), `idle in transaction` (waiting for client inside a `BEGIN` block), or a command type name such as `SELECT`. Also, `waiting` is appended if the server process is presently waiting on a lock held by another session. In the above example we can infer that process 15606 is waiting for process 15610 to complete its transaction and thereby release some lock. (Process 15610 must be the blocker, because there is no other active session. In more complicated cases it would be necessary to look into the [`pg_locks`](view-pg-locks) system view to determine who is blocking whom.)
 
-If [cluster\_name](runtime-config-logging#GUC-CLUSTER-NAME) has been configured the cluster name will also be shown in `ps` output:
+If [cluster_name](runtime-config-logging#GUC-CLUSTER-NAME) has been configured the cluster name will also be shown in `ps` output:
 
 ```
 $ psql -c 'SHOW cluster_name'
@@ -40,7 +38,7 @@ postgres   27093  0.0  0.0  30096  2752 ?        Ss   11:34   0:00 postgres: ser
 ...
 ```
 
-If you have turned off [update\_process\_title](runtime-config-logging#GUC-UPDATE-PROCESS-TITLE) then the activity indicator is not updated; the process title is set only once when a new process is launched. On some platforms this saves a measurable amount of per-command overhead; on others it's insignificant.
+If you have turned off [update_process_title](runtime-config-logging#GUC-UPDATE-PROCESS-TITLE) then the activity indicator is not updated; the process title is set only once when a new process is launched. On some platforms this saves a measurable amount of per-command overhead; on others it's insignificant.
 
 ### Tip
 

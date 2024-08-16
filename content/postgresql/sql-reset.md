@@ -31,11 +31,11 @@ The transactional behavior of `RESET` is the same as `SET`: its effects will be 
 
 ## Parameters
 
-* *`configuration_parameter`*
+- _`configuration_parameter`_
 
   Name of a settable run-time parameter. Available parameters are documented in [Chapter 20](runtime-config) and on the [SET](sql-set) reference page.
 
-* `ALL`
+- `ALL`
 
   Resets all settable run-time parameters to default values.
 

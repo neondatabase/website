@@ -21,23 +21,23 @@ TRUNCATE [ TABLE ] [ ONLY ] name [ * ] [, ... ]
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of a table to truncate. If `ONLY` is specified before the table name, only that table is truncated. If `ONLY` is not specified, the table and all its descendant tables (if any) are truncated. Optionally, `*` can be specified after the table name to explicitly indicate that descendant tables are included.
 
-* `RESTART IDENTITY`
+- `RESTART IDENTITY`
 
   Automatically restart sequences owned by columns of the truncated table(s).
 
-* `CONTINUE IDENTITY`
+- `CONTINUE IDENTITY`
 
   Do not change the values of sequences. This is the default.
 
-* `CASCADE`
+- `CASCADE`
 
   Automatically truncate all tables that have foreign-key references to any of the named tables, or to any tables added to the group due to `CASCADE`.
 
-* `RESTRICT`
+- `RESTRICT`
 
   Refuse to truncate if any of the tables have foreign-key references from tables that are not listed in the command. This is the default.
 
@@ -59,7 +59,7 @@ You must have the `TRUNCATE` privilege on a table to truncate it.
 
 When `RESTART IDENTITY` is specified, the implied `ALTER SEQUENCE RESTART` operations are also done transactionally; that is, they will be rolled back if the surrounding transaction does not commit. Be aware that if any additional sequence operations are done on the restarted sequences before the transaction rolls back, the effects of these operations on the sequences will be rolled back, but not their effects on `currval()`; that is, after the transaction `currval()` will continue to reflect the last sequence value obtained inside the failed transaction, even though the sequence itself may no longer be consistent with that. This is similar to the usual behavior of `currval()` after a failed transaction.
 
-`TRUNCATE` can be used for foreign tables if supported by the foreign data wrapper, for instance, see [postgres\_fdw](postgres-fdw).
+`TRUNCATE` can be used for foreign tables if supported by the foreign data wrapper, for instance, see [postgres_fdw](postgres-fdw).
 
 [#id](#id-1.9.3.181.8)
 

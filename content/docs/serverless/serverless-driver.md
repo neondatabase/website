@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-02-21T23:59:47.049Z'
+updatedOn: '2024-08-07T21:36:52.677Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -35,7 +35,7 @@ The Neon serverless driver is also available as a [JavaScript Registry (JSR)](ht
 You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file.
@@ -68,7 +68,7 @@ export default async () => {
   const db = drizzle(sql);
   const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
   return new Response(JSON.stringify({ post: onePost }));
-}
+};
 ```
 
 ```javascript
@@ -88,14 +88,11 @@ export const config = {
 ```ts
 import { neon } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
- 
-export default async function handler(
-  request: NextApiRequest,
-  res: NextApiResponse,
-) {
+
+export default async function handler(request: NextApiRequest, res: NextApiResponse) {
   const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
- 
+
   return res.status(500).send(post);
 }
 ```
@@ -152,7 +149,7 @@ However, you can customize the return format of the query function using the con
   // -> [[12, "My post", ...]]
   ```
 
-- `fullResults: boolean` 
+- `fullResults: boolean`
 
   The default `fullResults` value is `false`. When it is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
 
@@ -181,7 +178,6 @@ However, you can customize the return format of the query function using the con
   const sql = neon(process.env.DATABASE_URL);
   const results = await sql('SELECT * FROM posts WHERE id = $1', [postId], { fullResults: true });
   // -> { ... same as above ... }
- 
   ```
 
 - `fetchOptions: Record<string, any>`
@@ -203,10 +199,9 @@ However, you can customize the return format of the query function using the con
   const sql = neon(process.env.DATABASE_URL);
   const abortController = new AbortController();
   const timeout = setTimeout(() => abortController.abort('timed out'), 10000);
-  const rows = await sql(
-    'SELECT * FROM posts WHERE id = $1', [postId], 
-    { fetchOptions: { signal: abortController.signal } }
-  );  // throws an error if no result received within 10s
+  const rows = await sql('SELECT * FROM posts WHERE id = $1', [postId], {
+    fetchOptions: { signal: abortController.signal },
+  }); // throws an error if no result received within 10s
   clearTimeout(timeout);
   ```
 
@@ -225,23 +220,22 @@ import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 const showLatestN = 10;
 
-const [posts, tags] = await sql.transaction([
-  sql`SELECT * FROM posts ORDER BY posted_at DESC LIMIT ${showLatestN}`,
-  sql`SELECT * FROM tags`,
-], { 
-  isolationLevel: 'RepeatableRead',
-  readOnly: true, 
-});
+const [posts, tags] = await sql.transaction(
+  [sql`SELECT * FROM posts ORDER BY posted_at DESC LIMIT ${showLatestN}`, sql`SELECT * FROM tags`],
+  {
+    isolationLevel: 'RepeatableRead',
+    readOnly: true,
+  }
+);
 ```
 
 Or as an example of the function case:
 
 ```javascript
-const [authors, tags] = await neon(process.env.DATABASE_URL)
-  .transaction(txn => [
-    txn`SELECT * FROM authors`,
-    txn`SELECT * FROM tags`,
-  ]);
+const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) => [
+  txn`SELECT * FROM authors`,
+  txn`SELECT * FROM tags`,
+]);
 ```
 
 The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function -- `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
@@ -253,7 +247,7 @@ Note that options **cannot** be supplied for individual queries within a transac
   This option selects a Postgres [transaction isolation mode](https://www.postgresql.org/docs/current/transaction-iso.html). If present, it must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
 
 - `readOnly`
-  
+
   If `true`, this option ensures that a `READ ONLY` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
 - `deferrable`
@@ -285,7 +279,7 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 ```javascript
 import { Pool } from '@neondatabase/serverless';
 
-const pool = new Pool({connectionString: process.env.DATABASE_URL});
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
 pool.end();
 ```
@@ -297,7 +291,7 @@ import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import ws from 'ws';
 
-dotenv.config()
+dotenv.config();
 neonConfig.webSocketConstructor = ws;
 const connectionString = `${process.env.DATABASE_URL}`;
 
@@ -305,11 +299,11 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
 
-async function main(){
-  const posts = await prisma.post.findMany()
+async function main() {
+  const posts = await prisma.post.findMany();
 }
 
-main()
+main();
 ```
 
 ```typescript
@@ -320,15 +314,14 @@ import { posts } from './schema';
 
 export default async () => {
   const postId = 12;
-  const pool = new Pool({connectionString: process.env.DATABASE_URL});
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const db = drizzle(pool);
   const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
-  
-  ctx.waitUntil(pool.end())
-  
-  return new Response(JSON.stringify({ post: onePost }));
-}
 
+  ctx.waitUntil(pool.end());
+
+  return new Response(JSON.stringify({ post: onePost }));
+};
 ```
 
 ```javascript
@@ -339,10 +332,10 @@ export default async (req: Request, ctx: any) => {
   await pool.connect();
 
   const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  
+
   ctx.waitUntil(pool.end());
 
-  return new Response(JSON.stringify(post), { 
+  return new Response(JSON.stringify(post), {
     headers: { 'content-type': 'application/json' }
   });
 }
@@ -355,14 +348,11 @@ export const config = {
 ```ts
 import { Pool } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
- 
-export default async function handler(
-  request: NextApiRequest,
-  res: NextApiResponse,
-) {
-  const pool = new Pool({connectionString: process.env.DATABASE_URL});
+
+export default async function handler(request: NextApiRequest, res: NextApiResponse) {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  
+
   await pool.end();
 
   return res.status(500).send(post);
@@ -380,6 +370,7 @@ export default async function handler(
   import ws from 'ws';
   neonConfig.webSocketConstructor = ws;
   ```
+
 - In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 
 For examples that demonstrate these points, see [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client).

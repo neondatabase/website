@@ -222,7 +222,7 @@ The `.env` file should contain the following keys:
 
 ```bash
 # .env
- 
+
 STRAPI_API_TOKEN="..."
 ```
 
@@ -250,12 +250,12 @@ To load pre-configured styles for your HTML (rendered from markdown), update you
 ```tsx
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	theme: {
-		extend: {},
-	},
-	plugins: [require('@tailwindcss/typography')], // [!code ++]
-}
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [require('@tailwindcss/typography')], // [!code ++]
+};
 ```
 
 ## Create dynamic blog routes in Astro

@@ -34,39 +34,39 @@ To be able to create a domain, you must have `USAGE` privilege on the underlying
 
 ## Parameters
 
-* *`name`*
+- _`name`_
 
   The name (optionally schema-qualified) of a domain to be created.
 
-* *`data_type`*
+- _`data_type`_
 
   The underlying data type of the domain. This can include array specifiers.
 
-* *`collation`*
+- _`collation`_
 
   An optional collation for the domain. If no collation is specified, the domain has the same collation behavior as its underlying data type. The underlying type must be collatable if `COLLATE` is specified.
 
-* `DEFAULT expression`
+- `DEFAULT expression`
 
   The `DEFAULT` clause specifies a default value for columns of the domain data type. The value is any variable-free expression (but subqueries are not allowed). The data type of the default expression must match the data type of the domain. If no default value is specified, then the default value is the null value.
 
   The default expression will be used in any insert operation that does not specify a value for the column. If a default value is defined for a particular column, it overrides any default associated with the domain. In turn, the domain default overrides any default value associated with the underlying data type.
 
-* `CONSTRAINT constraint_name`
+- `CONSTRAINT constraint_name`
 
   An optional name for a constraint. If not specified, the system generates a name.
 
-* `NOT NULL`
+- `NOT NULL`
 
   Values of this domain are prevented from being null (but see notes below).
 
-* `NULL`
+- `NULL`
 
   Values of this domain are allowed to be null. This is the default.
 
   This clause is only intended for compatibility with nonstandard SQL databases. Its use is discouraged in new applications.
 
-* `CHECK (expression)`
+- `CHECK (expression)`
 
   `CHECK` clauses specify integrity constraints or tests which values of the domain must satisfy. Each constraint must be an expression producing a Boolean result. It should use the key word `VALUE` to refer to the value being tested. Expressions evaluating to TRUE or UNKNOWN succeed. If the expression produces a FALSE result, an error is reported and the value is not allowed to be converted to the domain type.
 

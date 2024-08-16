@@ -2,8 +2,6 @@
 
 ## 23.6. Tablespaces [#](#MANAGE-AG-TABLESPACES)
 
-
-
 Tablespaces in PostgreSQL allow database administrators to define locations in the file system where the files representing database objects can be stored. Once created, a tablespace can be referred to by name when creating database objects.
 
 By using tablespaces, an administrator can control the disk layout of a PostgreSQL installation. This is useful in at least two ways. First, if the partition or volume on which the cluster was initialized runs out of space and cannot be extended, a tablespace can be created on a different partition and used until the system can be reconfigured.
@@ -12,7 +10,7 @@ Second, tablespaces allow an administrator to use knowledge of the usage pattern
 
 ### Warning
 
-Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and *cannot* be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
+Even though located outside the main PostgreSQL data directory, tablespaces are an integral part of the database cluster and _cannot_ be treated as an autonomous collection of data files. They are dependent on metadata contained in the main data directory, and therefore cannot be attached to a different database cluster or backed up individually. Similarly, if you lose a tablespace (file deletion, disk failure, etc.), the database cluster might become unreadable or unable to start. Placing a tablespace on a temporary file system like a RAM disk risks the reliability of the entire cluster.
 
 To define a tablespace, use the [CREATE TABLESPACE](sql-createtablespace) command, for example::
 
@@ -34,7 +32,7 @@ Tables, indexes, and entire databases can be assigned to particular tablespaces.
 CREATE TABLE foo(i int) TABLESPACE space1;
 ```
 
-Alternatively, use the [default\_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) parameter:
+Alternatively, use the [default_tablespace](runtime-config-client#GUC-DEFAULT-TABLESPACE) parameter:
 
 ```
 SET default_tablespace = space1;
@@ -43,7 +41,7 @@ CREATE TABLE foo(i int);
 
 When `default_tablespace` is set to anything but an empty string, it supplies an implicit `TABLESPACE` clause for `CREATE TABLE` and `CREATE INDEX` commands that do not have an explicit one.
 
-There is also a [temp\_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) parameter, which determines the placement of temporary tables and indexes, as well as temporary files that are used for purposes such as sorting large data sets. This can be a list of tablespace names, rather than only one, so that the load associated with temporary objects can be spread over multiple tablespaces. A random member of the list is picked each time a temporary object is to be created.
+There is also a [temp_tablespaces](runtime-config-client#GUC-TEMP-TABLESPACES) parameter, which determines the placement of temporary tables and indexes, as well as temporary files that are used for purposes such as sorting large data sets. This can be a list of tablespace names, rather than only one, so that the load associated with temporary objects can be spread over multiple tablespaces. A random member of the list is picked each time a temporary object is to be created.
 
 The tablespace associated with a database is used to store the system catalogs of that database. Furthermore, it is the default tablespace used for tables, indexes, and temporary files created within the database, if no `TABLESPACE` clause is given and no other selection is specified by `default_tablespace` or `temp_tablespaces` (as appropriate). If a database is created without specifying a tablespace for it, it uses the same tablespace as the template database it is copied from.
 

@@ -2,7 +2,7 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2023-11-02T10:54:40.454Z'
+updatedOn: '2024-08-10T13:58:01.048Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
@@ -15,13 +15,29 @@ Learn how to establish a connection to Neon from any application.
 
 <DetailIconCards>
 
+<a href="/docs/connect/choose-connection" description="How to select the right driver and connection type for your application" icon="network">Choose a driver and connection type</a>
+
 <a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
+
+<a href="/docs/serverless/serverless-driver" description="Connect to Neon from serverless environments over HTTP or WebSockets" icon="audio-jack">Neon serverless driver</a>
 
 <a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="gui">Connect a GUI application</a>
 
 <a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="cli">Connect with psql</a>
 
 <a href="/docs/connect/passwordless-connect" description="Connect without a password using Neon's psql passwordless auth feature" icon="unlock">Passwordless auth</a>
+
+</DetailIconCards>
+
+## Connect from frameworks and languages
+
+Learn how to connect to Neon from different frameworks and languages.
+
+<DetailIconCards>
+
+<a href="/docs/get-started-with-neon/frameworks" description="Find detailed instructions for connecting to Neon from various frameworks" icon="gamepad">Connect from various frameworks</a>
+
+<a href="/docs/get-started-with-neon/languages" description="Find detailed instructions for connecting to Neon from various languages" icon="gui">Connect from various languages</a>
 
 </DetailIconCards>
 

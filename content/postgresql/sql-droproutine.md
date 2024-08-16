@@ -21,7 +21,7 @@ DROP ROUTINE [ IF EXISTS ] name [ ( [ [ argmode ] [ argname ] argtype [, ...] ] 
 
 ## Notes
 
-The lookup rules used by `DROP ROUTINE` are fundamentally the same as for `DROP PROCEDURE`; in particular, `DROP ROUTINE` shares that command's behavior of considering an argument list that has no *`argmode`* markers to be possibly using the SQL standard's definition that `OUT` arguments are included in the list. (`DROP AGGREGATE` and `DROP FUNCTION` do not do that.)
+The lookup rules used by `DROP ROUTINE` are fundamentally the same as for `DROP PROCEDURE`; in particular, `DROP ROUTINE` shares that command's behavior of considering an argument list that has no _`argmode`_ markers to be possibly using the SQL standard's definition that `OUT` arguments are included in the list. (`DROP AGGREGATE` and `DROP FUNCTION` do not do that.)
 
 In some cases where the same name is shared by routines of different kinds, it is possible for `DROP ROUTINE` to fail with an ambiguity error when a more specific command (`DROP FUNCTION`, etc.) would work. Specifying the argument type list more carefully will also resolve such problems.
 
@@ -45,13 +45,13 @@ This command will work independent of whether `foo` is an aggregate, function, o
 
 This command conforms to the SQL standard, with these PostgreSQL extensions:
 
-* The standard only allows one routine to be dropped per command.
+- The standard only allows one routine to be dropped per command.
 
-* The `IF EXISTS` option is an extension.
+- The `IF EXISTS` option is an extension.
 
-* The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
+- The ability to specify argument modes and names is an extension, and the lookup rules differ when modes are given.
 
-* User-definable aggregate functions are an extension.
+- User-definable aggregate functions are an extension.
 
 [#id](#id-1.9.3.127.9)
 

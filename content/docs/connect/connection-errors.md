@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-02-08T15:20:54.276Z'
+updatedOn: '2024-08-07T21:36:52.640Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -17,6 +17,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Error undefined: Database error](#error-undefined-database-error)
 - [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
 - [Unsupported startup parameter](#unsupported-startup-parameter)
+- [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -32,7 +33,7 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses computet IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -40,10 +41,10 @@ If a library or application upgrade does not help, there are several workarounds
 
 ### A. Pass the endpoint ID as an option
 
-Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
+Neon supports a connection option named `endpoint`, which you can use to identify the compute you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 <Admonition type="note">
@@ -78,10 +79,10 @@ or
 endpoint=<endpoint_id>$<password>
 ```
 
-Example: 
+Example:
 
 ```txt
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
@@ -96,21 +97,21 @@ Clients on the [list of drivers](https://wiki.postgresql.org/wiki/List_of_driver
 
 Neon has tested the following drivers for SNI support:
 
-| Driver            | Language    | SNI Support | Notes                                                                                                                                             |
-| ----------------- | ----------- | -------------|-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npgsql            | C#          | &check;      |                                                                                                                                                   |
-| Postgrex          | Elixir      | &check;      | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
-| github.com/lib/pq | Go          | &check;      | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
-| pgx               | Go          | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                            |
-| go-pg             | Go          | &check;      | requires `verify-full` mode                                                                                                                       |
-| JDBC              | Java        | &check;      |                                                                                                                                                   |
-| node-postgres     | JavaScript  | &check;      | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
-| postgres.js       | JavaScript  | &check;      | Requires the `ssl: 'require'` option                                                                                                              |
-| asyncpg           | Python      | &check;      |                                                                                                                                                   |
-| pg8000            | Python      | &check;      | Requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher |
-| PostgresClientKit | Swift       | &#x2717;     |                                                                                                                                                   |
-| PostgresNIO       | Swift       | &check;      |                                                                                                                                                   |
-| postgresql-client | TypeScript  | &check;      |                                                                                                                                                   |
+| Driver            | Language   | SNI Support | Notes                                                                                                                                             |
+| ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npgsql            | C#         | &check;     |                                                                                                                                                   |
+| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
+| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
+| pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
+| go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
+| JDBC              | Java       | &check;     |                                                                                                                                                   |
+| node-postgres     | JavaScript | &check;     | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
+| postgres.js       | JavaScript | &check;     | Requires the `ssl: 'require'` option                                                                                                              |
+| asyncpg           | Python     | &check;     |                                                                                                                                                   |
+| pg8000            | Python     | &check;     | Requires [scramp >= v1.4.3](https://pypi.org/project/scramp/), which is included in [pg8000 v1.29.3](https://pypi.org/project/pg8000/) and higher |
+| PostgresClientKit | Swift      | &#x2717;    |                                                                                                                                                   |
+| PostgresNIO       | Swift      | &check;     |                                                                                                                                                   |
+| postgresql-client | TypeScript | &check;     |                                                                                                                                                   |
 
 ## Password authentication failed for user
 
@@ -123,7 +124,7 @@ ERROR:  password authentication failed for user '<user_name>' connection to serv
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
 
 ```text shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
@@ -176,9 +177,9 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 ## Terminating connection due to administrator command
 
-The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
+The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).  [Neon Free Tier](/docs/introduction/plans#free-tier) users cannot modify the default 5 minute autosuspend setting.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot modify the default 5 minute autosuspend setting.
 
 ## Unsupported startup parameter
 
@@ -193,5 +194,11 @@ unsupported startup parameter in options: <...>
 ```
 
 The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets. These include: `client_encoding`, `datestyle`, `timezone`, `standard_conforming_strings`, and `application_name`. See **track_extra_parameters**, in the [PgBouncer documentation](https://www.pgbouncer.org/config.html#track_extra_parameters). To resolve this error, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+
+## You have exceeded the limit of concurrently active endpoints
+
+This error can also appear as: `active endpoints limit exceeded`.
+
+Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage. The compute associated with the default branch is exempt from this limit, ensuring that it is always available. When you exceed the limit, any compute associated with a non-default branch will remain suspended and you will see this error when attempting to connect to it. You can suspend computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a limit increase.
 
 <NeedHelp/>

@@ -2,10 +2,10 @@
 title: Postgres UUID data type
 subtitle: Work with UUIDs in Postgres
 enableTableOfContents: true
-updatedOn: '2024-01-28T13:46:59.385Z'
+updatedOn: '2024-06-14T07:55:54.367Z'
 ---
 
-`UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases. 
+`UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases.
 
 In Postgres, the UUID data type is ideal for assigning unique identifiers to entities such as users, orders, or products. They are particularly useful in distributed scenarios, where the system is spread across different databases or services, and unique keys need to be generated independently.
 
@@ -18,11 +18,11 @@ UUIDs are stored as 128-bit values, represented as a sequence of hexadecimal dig
 - `123e4567-e89b-12d3-a456-426655440000`, or
 - `a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11`
 
-Postgres accepts UUID values in the above format, while also allowing uppercase letters and missing hyphen separators. You can also generate them using functions like `gen_random_uuid()` which is available natively in Postgres, or the `uuid_generate_v4()` function which requires the `uuid-ossp` extension. 
+Postgres accepts UUID values in the above format, while also allowing uppercase letters and missing hyphen separators. You can also generate them using functions like `gen_random_uuid()` which is available natively in Postgres, or the `uuid_generate_v4()` function which requires the `uuid-ossp` extension.
 
 ## Example usage
 
-Consider a scenario where we track user sessions in a web application. UUIDs are commonly used to identify sessions due to their uniqueness. 
+Consider a scenario where we track user sessions in a web application. UUIDs are commonly used to identify sessions due to their uniqueness.
 
 The query below creates a table and inserts some sample session data:
 
@@ -34,7 +34,7 @@ CREATE TABLE sessions (
 );
 
 INSERT INTO sessions (user_id, activity)
-VALUES 
+VALUES
     (1, 'login'),
     (2, 'view'),
     (1, 'view'),
@@ -64,6 +64,7 @@ WHERE session_id = 'e817b187-aba3-4b0d-a34e-a1d82319627c';
 ```
 
 This query returns the following:
+
 ```text
 | session_id                             | user_id | activity |
 |----------------------------------------|---------|----------|
@@ -74,9 +75,9 @@ This query returns the following:
 
 ### Using UUID column as primary key
 
-Using UUIDs as primary keys is common since the likelihood of the same UUID value being generated twice is very small. This is helpful in distributed systems or when merging data from different sources. 
+Using UUIDs as primary keys is common since the likelihood of the same UUID value being generated twice is very small. This is helpful in distributed systems or when merging data from different sources.
 
-For example, we can create a table to store products and use a UUID column as the primary key. 
+For example, we can create a table to store products and use a UUID column as the primary key.
 
 ```sql
 CREATE TABLE products (
@@ -86,7 +87,7 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (name, price)
-VALUES 
+VALUES
     ('Apple', 1.99),
     ('Banana', 2.99),
     ('Orange', 3.99)
@@ -94,6 +95,7 @@ RETURNING *;
 ```
 
 This query returns the following:
+
 ```text
 | product_id                             | name   | price |
 |----------------------------------------|--------|-------|
@@ -102,9 +104,9 @@ This query returns the following:
 | f303866d-d08a-48a7-81c3-c30486149d87   | Orange | 3.99  |
 ```
 
-### Avoiding data leakage 
+### Avoiding data leakage
 
-In systems where data security is a concern, using non-sequential IDs like UUIDs can help obscure the total number of records, preventing potential information leaks. This is in contrast to the sequential IDs provided by the `SERIAL` data type, which can inadvertently reveal information about the number of users, orders, etc. 
+In systems where data security is a concern, using non-sequential IDs like UUIDs can help obscure the total number of records, preventing potential information leaks. This is in contrast to the sequential IDs provided by the `SERIAL` data type, which can inadvertently reveal information about the number of users, orders, etc.
 
 For example, the query below creates a table that tracks users of an API with some sample data:
 
@@ -116,7 +118,7 @@ CREATE TABLE api_users (
 );
 
 INSERT INTO api_users (username)
-VALUES 
+VALUES
     ('user1'),
     ('user2'),
     ('user3')
@@ -133,13 +135,13 @@ This query returns the following:
 | 3         | 108eb93a-071e-4407-8b78-a73aabd9e803 | user3    |
 ```
 
-Notice that the `serial_id` column hints at the number of rows already present in the table. 
+Notice that the `serial_id` column hints at the number of rows already present in the table.
 
 ## Additional considerations
 
 - **Randomness and uniqueness**: UUIDs are designed to be globally unique, but there's an extremely small probability of generating a duplicate UUID. If you're automatically generating UUIDs at insertion, and a duplicate UUID is generated, the insertion will fail. In the rare event that a collision occurs, applications that generate UUIDs should implement a retry mechanism.
 - **Performance and indexing**: UUIDs are larger than traditional integer IDs, requiring more storage space. Index structures on UUID columns therefore consume more storage as well. However, in terms of performance for read-heavy workloads, leveraging indexed UUID columns for filtering or sorting can significantly improve query performance. In this context, you have to evaluate the tradeoff between storage efficiency and query performance.
-- **Readability**: UUIDs are not human-readable, which can make debugging or manual inspection of data more challenging. 
+- **Readability**: UUIDs are not human-readable, which can make debugging or manual inspection of data more challenging.
 
 ## Resources
 

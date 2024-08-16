@@ -2,7 +2,7 @@
 title: Postgres Array data type
 subtitle: Manage collections of elements using arrays
 enableTableOfContents: true
-updatedOn: '2024-02-03T13:30:12.163Z'
+updatedOn: '2024-06-14T07:55:54.365Z'
 ---
 
 In Postgres, the `ARRAY` data type is used to store and manipulate collections of elements in a single column. An array can have variable length and one or more dimensions, but must hold elements of the same data type. Postgres provides a variety of functions and operators for working with arrays.
@@ -14,21 +14,24 @@ Arrays are particularly useful when dealing with multiple values that are logica
 ## Storage and syntax
 
 Arrays in Postgres are declared by specifying the element type followed by square brackets. For example,
+
 - `INTEGER[]` defines an array of integers.
 - `TEXT[][]` defines a two-dimensional array of text values.
 - `NUMERIC[3]` defines an array of three numeric values. However, note that Postgres doesn't enforce the specified size of an array.
 
 Array literals in Postgres are written within curly braces `{}` and separated by commas. For instance,
+
 - An array of integers might look like `{1, 2, 3}`.
 - Multidimensional arrays use nested curly braces, like `{{1, 2, 3}, {4, 5, 6}}`.
 
 The `ARRAY` constructor syntax can also be used to create arrays. For example,
+
 - `ARRAY[1, 2, 3]` creates an array of integers.
 - `ARRAY[[1, 2, 3], [4, 5, 6]]` creates a two-dimensional array.
 
 ## Example usage
 
-Consider the case of maintaining a product catalog for an online store. The same product may belong to multiple categories. For example,  an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
+Consider the case of maintaining a product catalog for an online store. The same product may belong to multiple categories. For example, an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
 
 First, let's create a `products` table with some sample data:
 
@@ -262,22 +265,22 @@ This query returns the following result:
 
 ## Additional considerations
 
-- **Performance and UX**: While arrays provide flexibility, they can be less performant than normalized data structures for large datasets. Compared to a set of rows, arrays can also be more tedious to work with for complex queries. 
+- **Performance and UX**: While arrays provide flexibility, they can be less performant than normalized data structures for large datasets. Compared to a set of rows, arrays can also be more tedious to work with for complex queries.
 
 - **Indexing**: Postgres lets you create indexes on array elements for faster searches. Specifically, an inverted index like `GIN` creates an entry for each element in the array. This allows for fast lookups but can be expensive to maintain for large arrays.
 
 - **No type enforcement**: Postgres supports defining the size of an array or the number of dimensions in the schema. However, Postgres does not enforce these definitions. For example, the query below works successfully:
 
-    ```sql
-    CREATE TABLE test_size (
-      id SERIAL PRIMARY KEY,
-      arr1 INTEGER[3]
-    );
-    INSERT INTO test_size (arr1)
-    VALUES (ARRAY[1,2,3]), (ARRAY[1,2]);
-    ```
+  ```sql
+  CREATE TABLE test_size (
+    id SERIAL PRIMARY KEY,
+    arr1 INTEGER[3]
+  );
+  INSERT INTO test_size (arr1)
+  VALUES (ARRAY[1,2,3]), (ARRAY[1,2]);
+  ```
 
-    It is therefore up to the application to ensure data integrity.
+  It is therefore up to the application to ensure data integrity.
 
 ## Resources
 

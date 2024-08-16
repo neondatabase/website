@@ -4,12 +4,12 @@
 
 **Table of Contents**
 
-  * [D.1. Supported Features](features-sql-standard)
-  * [D.2. Unsupported Features](unsupported-features-sql-standard)
-  * [D.3. XML Limits and Conformance to SQL/XML](xml-limits-conformance)
+- [D.1. Supported Features](features-sql-standard)
+- [D.2. Unsupported Features](unsupported-features-sql-standard)
+- [D.3. XML Limits and Conformance to SQL/XML](xml-limits-conformance)
 
-    - [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1)
-    - [D.3.2. Incidental Limits of the Implementation](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL)
+  - [D.3.1. Queries Are Restricted to XPath 1.0](xml-limits-conformance#FUNCTIONS-XML-LIMITS-XPATH1)
+  - [D.3.2. Incidental Limits of the Implementation](xml-limits-conformance#FUNCTIONS-XML-LIMITS-POSTGRESQL)
 
 This section attempts to outline to what extent PostgreSQL conforms to the current SQL standard. The following information is not a full statement of conformance, but it presents the main topics in as much detail as is both reasonable and useful for users.
 
@@ -21,49 +21,27 @@ Starting with SQL:1999, the SQL standard defines a large set of individual featu
 
 The standard is split into a number of parts, each also known by a shorthand name:
 
-* ISO/IEC 9075-1 Framework (SQL/Framework)
+- ISO/IEC 9075-1 Framework (SQL/Framework)
 
-  
+- ISO/IEC 9075-2 Foundation (SQL/Foundation)
 
-* ISO/IEC 9075-2 Foundation (SQL/Foundation)
+- ISO/IEC 9075-3 Call Level Interface (SQL/CLI)
 
-  
+- ISO/IEC 9075-4 Persistent Stored Modules (SQL/PSM)
 
-* ISO/IEC 9075-3 Call Level Interface (SQL/CLI)
+- ISO/IEC 9075-9 Management of External Data (SQL/MED)
 
-  
+- ISO/IEC 9075-10 Object Language Bindings (SQL/OLB)
 
-* ISO/IEC 9075-4 Persistent Stored Modules (SQL/PSM)
+- ISO/IEC 9075-11 Information and Definition Schemas (SQL/Schemata)
 
-  
+- ISO/IEC 9075-13 Routines and Types using the Java Language (SQL/JRT)
 
-* ISO/IEC 9075-9 Management of External Data (SQL/MED)
+- ISO/IEC 9075-14 XML-related specifications (SQL/XML)
 
-  
+- ISO/IEC 9075-15 Multi-dimensional arrays (SQL/MDA)
 
-* ISO/IEC 9075-10 Object Language Bindings (SQL/OLB)
-
-  
-
-* ISO/IEC 9075-11 Information and Definition Schemas (SQL/Schemata)
-
-  
-
-* ISO/IEC 9075-13 Routines and Types using the Java Language (SQL/JRT)
-
-  
-
-* ISO/IEC 9075-14 XML-related specifications (SQL/XML)
-
-  
-
-* ISO/IEC 9075-15 Multi-dimensional arrays (SQL/MDA)
-
-  
-
-* ISO/IEC 9075-16 Property Graph Queries (SQL/PGQ)
-
-  
+- ISO/IEC 9075-16 Property Graph Queries (SQL/PGQ)
 
 Note that some part numbers are not (or no longer) used.
 
