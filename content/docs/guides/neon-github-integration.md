@@ -198,6 +198,8 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 
 <DetailIconCards>
 
+<a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
+
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
