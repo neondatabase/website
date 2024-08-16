@@ -1,14 +1,22 @@
 ---
 title: Enable Autoscaling in Neon
-subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
-  resources on demand
 enableTableOfContents: true
 updatedOn: '2024-07-25T12:53:42.424Z'
 ---
 
-Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Enable autoscaling for new and existing projects</p>
+<p>Monitor and optimize your autoscaling settings</p>
+</DocsList>
 
-_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute. Autoscaling is supported with primary read-write computes and read replica computes.
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/autoscaling">About autoscaling</a>
+<a href="/docs/guides/autoscaling-algorithm">How the algorithm works</a>
+</DocsList>
+</InfoBlock>
+
+This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
 ## Enable autoscaling for a new project
 

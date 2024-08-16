@@ -1,6 +1,6 @@
 ---
 title: Understanding Neon’s autoscaling algorithm
-subtitle: Learn how our autoscaling algorithm dynamically adjusts compute resources to match your workload
+subtitle: How Neon’s algorithm scales resources to match your workload
 enableTableOfContents: true
 ---
 
