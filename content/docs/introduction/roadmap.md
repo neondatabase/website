@@ -1,6 +1,7 @@
 ---
 title: Roadmap
 enableTableOfContents: true
+tag: updated
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap

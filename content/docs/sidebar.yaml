@@ -94,6 +94,7 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
+          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -424,7 +425,7 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: coming soon
+              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -762,9 +763,11 @@
     - title: Neon roadmap
       slug: introduction/roadmap
       icon: roadmap
+      tag: updated
       items:
         - title: Neon roadmap
           slug: introduction/roadmap
+          tag: updated
 - section: noname
   items:
     - title: Community
