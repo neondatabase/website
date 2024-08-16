@@ -5,10 +5,17 @@ enableTableOfContents: true
 updatedOn: '2024-07-25T12:53:42.430Z'
 ---
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Benefits</p>
+<p>Architecture</p>
+</DocsList>
+
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/guides/autoscaling-guide">Enabling autoscaling</a>
 <a href="/docs/guides/autoscaling-algorithm">How the algorithm works</a>
 </DocsList>
+</InfoBlock>
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention.
 

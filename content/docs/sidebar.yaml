@@ -147,6 +147,8 @@
       items:
         - title: Overview
           slug: introduction/architecture-overview
+        - title: Autoscaling
+          slug: introduction/autoscaling
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
     - title: Features
