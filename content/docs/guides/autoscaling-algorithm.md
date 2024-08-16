@@ -24,7 +24,7 @@ That said, it can be helpful to understand exactly when and under what circumsta
 
 ## How the algorithm works
 
-Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-informant) and the [autoscaler-agent](/docs/introduction/autoscaling#the-autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your Local File Cache (LFC). These metrics determine how your compute resources — the virtual machine that powers your database — should be scaled to maintain performance and efficiency.
+Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/introduction/autoscaling#the-autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your Local File Cache (LFC). These metrics determine how your compute resources — the virtual machine that powers your database — should be scaled to maintain performance and efficiency.
 
 ### The Formula
 
