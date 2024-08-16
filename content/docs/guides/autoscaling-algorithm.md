@@ -4,6 +4,18 @@ subtitle: Learn how our autoscaling algorithm dynamically adjusts compute resour
 enableTableOfContents: true
 ---
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Key metrics that drive autoscaling decisions</p>
+<p>How often the algorithm checks these metrics</p>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/autoscaling">About autoscaling</a>
+<a href="/docs/guides/autoscaling-guide">Enabling autoscaling</a>
+</DocsList>
+</InfoBlock>
+
 The key concept behind autoscaling is that compute resizing happens _automatically_ — once you set up your minimum and maximum [compute sizes](/docs/manage/endpoints#how-to-size-your-compute), there’s no action required on your part other than [monitoring](/docs/introduction/monitoring-page) your usage metrics to see if adjustments are needed.
 
 That said, it can be helpful to understand exactly when and under what circumstances the algorithm optimizes your database on two key fronts — **performance** and **efficiency**. In a nutshell, the algorithm automatically **scales up** your compute to ensure optimal performance and **scales down** to maximize efficiency.
@@ -58,9 +70,9 @@ Every 20 seconds, the autoscaler-agent checks the working set size across a vari
 If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GiB database can comfortably fit within a compute size of 2 vCPU with 8 GB of RAM (where the LFC can use up to 80% of the available RAM).
 </Admonition>
 
-## How often metrics are polled
+## How often the metrics are polled
 
-To give you a sense of the algorithm's responnsivness, he's a summary of how often the metrics are polled:
+To give you a sense of the algorithm's responsiveness, here's a summary of how often the metrics are polled:
 
 - **Every 5 seconds** → the autoscaler-agent fetches load metrics from the VM, including CPU usage and overall memory usage.
 - **Every 20 seconds** → the autoscaler-agent checks the Local File Cache (LFC) metrics, including the working set size across various time windows: 1 minute, 2 minutes, up to 60 minutes.
