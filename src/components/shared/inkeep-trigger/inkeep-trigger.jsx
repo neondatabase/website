@@ -85,7 +85,7 @@ const InkeepTrigger = ({ className }) => {
         aria-label="Open Neon AI"
         onClick={handleClick}
       >
-        <SparksIcon className="relative z-10 h-3 w-3" />
+        <SparksIcon className="relative z-10 h-3 w-3 lg:h-[18px] lg:w-[18px]" />
         <span className="block text-[13px] font-medium leading-none lg:text-sm lg:font-normal lg:leading-tight">
           <span className="block">Ask Neon AI</span>
           <span className="hidden text-gray-new-20 dark:text-gray-new-90 " aria-hidden>
