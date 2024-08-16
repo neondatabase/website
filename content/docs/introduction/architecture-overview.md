@@ -23,4 +23,4 @@ Safekeepers can be thought of as an ultra-reliable write buffer that holds the l
 
 ## Durability
 
-Durability is at the core of Neon's architecture. Neon stores multiple copies of your data across Pageservers, multiple availability zones in a [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)) cluster, and on [S3](https://aws.amazon.com/s3/) (99.999999999% durability) where it's [encrypted at rest](/docs/reference/glossary#data-at-rest-encryption).
+Durability is at the core of Neon's architecture. Neon stores multiple copies of your data across Pageservers, multiple availability zones in a [Paxos](<https://en.wikipedia.org/wiki/Paxos_(computer_science)>) cluster, and on [S3](https://aws.amazon.com/s3/) (99.999999999% durability) where it's [encrypted at rest](/docs/reference/glossary#data-at-rest-encryption).
