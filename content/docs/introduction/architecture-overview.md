@@ -21,6 +21,6 @@ Pageservers are responsible for serving read requests. To do that, Pageservers p
 
 Safekeepers can be thought of as an ultra-reliable write buffer that holds the latest data until it is processed and uploaded to cloud storage. Safekeepers implement the Paxos protocol for reliability. Pageservers also function as a read cache for cloud storage, providing fast random access to data pages.
 
-At the core of this architecture is durability. Neon stores 6 copies of your data across Pageservers, three different availability zones in a Paxos cluster, and on S3 (99.999999% durability).
+At the core of this architecture is durability. Neon stores 6 copies of your data across Pageservers, different availability zones in a Paxos cluster, and on S3 (99.999999% durability).
 
 The data stored on S3 is [encrypted at rest](/docs/reference/glossary#data-at-rest-encryption).
