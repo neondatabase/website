@@ -11,11 +11,10 @@ import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
+import Link from 'components/shared/link/link';
 import { FORM_STATES } from 'constants/forms';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
-
-import Link from '../../../shared/link/link';
 
 import ErrorMessage from './error-message';
 import FormField from './form-field';
