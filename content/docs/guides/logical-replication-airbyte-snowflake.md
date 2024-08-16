@@ -3,7 +3,7 @@ title: Replicate data to Snowflake with Airbyte
 subtitle: Learn how to replicate data from Neon to Snowflake with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.655Z'
+updatedOn: '2024-08-12T21:44:27.438Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
@@ -69,11 +69,12 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
+3. Select **Branches**.
 4. Select the branch where you want to create the role.
-5. Click **New Role**.
-6. In the role creation dialog, specify a role name.
-7. Click **Create**. The role is created, and you are provided with the password for the role.
+5. Select the **Roles & Databases** tab.
+6. Click **Add Role**.
+7. In the role creation dialog, specify a role name.
+8. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 

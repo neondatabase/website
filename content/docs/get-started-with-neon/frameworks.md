@@ -1,44 +1,44 @@
 ---
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
-enableTableOfContents: true
-updatedOn: '2024-08-02T19:37:20.077Z'
+enableTableOfContents: false
+updatedOn: '2024-08-15T17:23:10.552Z'
 ---
 
 <TechnologyNavigation open>
 
-<img src="/images/technology-logos/nodejs-logo.svg" width="33" height="36" alt="Node.js" href="/docs/guides/node" title="Connect a Node.js application to Neon" />
+<a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
-<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
-<img src="/images/technology-logos/nestjs-logo.svg" width="36" height="36" alt="NestJS" href="/docs/guides/nestjs" title="Connect a NestJS application to Neon" />
+<a href="/docs/guides/nestjs" title="NestJS" description="Connect a NestJS application to Neon" icon="nest-js"></a>
 
-<img src="/images/technology-logos/astro-logo.svg" width="36" height="36" alt="Astro" href="/docs/guides/astro" title="Connect an Astro site or app to Neon" />
+<a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
-<img src="/images/technology-logos/django-logo.svg" width="33" height="36" alt="Django" href="/docs/guides/django" title="Connect a Django application to Neon" />
+<a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<img src="/images/technology-logos/laravel-logo.svg" width="33" height="36" alt="Laravel" href="/docs/guides/laravel" title="Connect a Laravel application to Neon" />
+<a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
-<img src="/images/technology-logos/oauth-logo.svg" width="36" height="36" alt="OAuth" href="/docs/guides/oauth-integration" title="Integrate with Neon using OAuth" />
+<a href="/docs/guides/oauth-integration" title="OAuth" description="Integrate with Neon using OAuth" icon="oauth"></a>
 
-<img src="/images/technology-logos/phoenix-logo.svg" width="36" height="36" alt="Phoenix" href="/docs/guides/phoenix" title="Connect a Phoenix site or app to Neon" />
+<a href="/docs/guides/phoenix" title="Phoenix" description="Connect a Phoenix site or app to Neon" icon="phoenix"></a>
 
-<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-jdbc" title="Connect Quarkus (JDBC) to Neon" />
+<a href="/docs/guides/quarkus-jdbc" title="Quarkus" description="Connect Quarkus (JDBC) to Neon" icon="quarkus"></a>
 
-<img src="/images/technology-logos/quarkus-logo.svg" width="36" height="36" alt="Quarkus" href="/docs/guides/quarkus-reactive" title="Connect Quarkus (Reactive) to Neon" />
+<a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
 
-<img src="/images/technology-logos/rails-logo.svg" width="36" height="36" alt="Rails" href="/docs/guides/ruby-on-rails" title="Connect a Rails application to Neon" />
+<a href="/docs/guides/ruby-on-rails" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
 
-<img src="/images/technology-logos/react-logo.svg" width="36" height="36" alt="React" href="/docs/guides/react" title="Connect a React application to Neon" />
+<a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
 
-<img src="/images/technology-logos/reflex-logo.svg" width="100" height="36" alt="Reflex" href="/docs/guides/reflex" title="Build Python Apps with Reflex and Neon" />
+<a href="/docs/guides/reflex" title="Reflex" description="Build Python Apps with Reflex and Neon" icon="reflex"></a>
 
-<img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
+<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
-<img src="/images/technology-logos/sqlalchemy-logo.svg" width="36" height="36" alt="SQLAlchemy" href="/docs/guides/sqlalchemy" title="Connect a SQLAlchemy application to Neon" />
+<a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
-<img src="/images/technology-logos/symfony-logo.svg" width="36" height="36" alt="Symfony" href="/docs/guides/symfony" title="Connect from Symfony with Doctrine to Neon" />
+<a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
-<img src="/images/technology-logos/solid-logo.svg" width="36" height="36" alt="SolidStart" href="/docs/guides/solid-start" title="Connect a SolidStart site or app to Neon" />
+<a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solid"></a>
 
 </TechnologyNavigation>

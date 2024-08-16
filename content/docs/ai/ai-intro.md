@@ -2,7 +2,7 @@
 title: AI & Embeddings
 subtitle: Build AI applications with Neon Postgres as your vector database
 enableTableOfContents: true
-updatedOn: '2024-07-15T16:00:39.125Z'
+updatedOn: '2024-08-16T14:55:52.653Z'
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
@@ -95,6 +95,8 @@ Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/9
 </Admonition>
 
 <DetailIconCards>
+
+<a href="https://github.com/neondatabase/ai-vector-db-per-tenant" description="Deploy an AI vector database per-tenant architecture with Neon" icon="github">AI vector database per tenant</a>
 
 <a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Guide: Build a RAG chatbot</a>
 

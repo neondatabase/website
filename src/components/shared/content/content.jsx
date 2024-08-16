@@ -6,12 +6,13 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
-
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
+import InfoBlock from 'components/pages/doc/info-block';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -25,7 +26,7 @@ import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
-import ImageZoom from '../image-zoom'
+import ImageZoom from '../image-zoom';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -126,6 +127,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   CommunityBanner,
   Tabs,
   TabItem,
+  InfoBlock,
+  DocsList,
   CTA: DocCta,
   ...sharedComponents,
 });

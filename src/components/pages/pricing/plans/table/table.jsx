@@ -102,6 +102,12 @@ const Table = () => {
   const [tableRows, setTableRows] = useState(tableData.cols.slice(0, DEFAULT_ROWS_TO_SHOW));
 
   useEffect(() => {
+    if (window.location.hash === '#plans') {
+      setTableRows(tableData.cols);
+    }
+  }, []);
+
+  useEffect(() => {
     const cells = document.querySelectorAll(`[data-row-id]`);
 
     cells.forEach((cell) => {
