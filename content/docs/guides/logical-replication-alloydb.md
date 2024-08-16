@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
-The guide describes how to replicate data from AlloyDB Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google AlloyDB documentation.
+The guide describes how to replicate data from AlloyDB Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the _Google AlloyDB documentation_.
 
 ## Prerequisites
 
@@ -18,10 +18,6 @@ The guide describes how to replicate data from AlloyDB Postgres using native Pos
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-  <Admonition type="note">
-  This guide uses the default `postgres` data and `public` schema in the AlloyDB Postgres instance. Your database and schema may differ, but the same steps should apply.
-  </Admonition>
-
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your AlloyDB source database
@@ -30,14 +26,14 @@ This section describes how to prepare your source AlloyDB Postgres instance (the
 
 ### Enable logical replication
 
-The first step is to enable logical replication at the source Postgres instance. In AlloyDB, you can enable logical replication for your Postgres instance by setting the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags to `on`. This action will set the Postgres `wal_level` parameter to `logical`.
+Your first step is to enable logical replication at the source Postgres instance. In AlloyDB, you enable logical replication for your Postgres instance by setting the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags to `on`. This will set the Postgres `wal_level` parameter to `logical`.
 
 To enable these flags:
 
 1. In the Google Cloud console, navigate to your [AlloyDB Clusters](https://console.cloud.google.com/alloydb/clusters) page.
 2. From the **Actions** menu for your Primary instance, select **Edit**.
 3. Scroll down to the **Advanced Configurations Options** > **Flags** section.
-4. If these flags have not been set on the instance before, click **Add a Database Flag**, and set the value to `on` for the `alloydb.enable_pglogical` and `alloydb.logical_decoding` flags.
+4. If the flags have not been set on the instance before, click **Add a Database Flag**, and set the value to `on` for the `alloydb.enable_pglogical` and `alloydb.logical_decoding`.
 5. Click **Update instance** to save your changes.
 6. Confirm your selections.
 
