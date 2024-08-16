@@ -15,6 +15,8 @@ import { FORM_STATES } from 'constants/forms';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
+import Link from '../../../shared/link/link';
+
 import ErrorMessage from './error-message';
 import FormField from './form-field';
 import FormFooter from './form-footer';
@@ -228,6 +230,16 @@ const Form = ({
           )}
           {errorMessage && <ErrorMessage text={errorMessage} />}
         </div>
+        {isAzurePage && (
+          <p className="-mx-1 mt-3 text-center text-xs text-white xl:mx-0">
+            Neon will contact you at the information above with relevant content, products, and
+            services. You may unsubscribe at any time. For more info, see our{' '}
+            <Link className="whitespace-nowrap" to="/privacy-policy" theme="white-underlined">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        )}
         {greenMode && (
           <LinesIllustration
             className="-top-[25%] !h-[450px] !w-[145%]"
