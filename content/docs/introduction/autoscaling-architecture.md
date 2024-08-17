@@ -1,5 +1,5 @@
 ---
-title: Autoscaling Architecture
+title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
 enableTableOfContents: true
 ---
