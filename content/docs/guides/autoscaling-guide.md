@@ -11,7 +11,7 @@ updatedOn: '2024-07-25T12:53:42.424Z'
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="/docs/guides/autoscaling">About autoscaling</a>
+<a href="/docs/introduction/autoscaling">About autoscaling</a>
 <a href="/docs/guides/autoscaling-algorithm">How the algorithm works</a>
 </DocsList>
 </InfoBlock>
