@@ -23,7 +23,7 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 - A [Neon account](https://console.neon.tech/)
 - A [Prisma Data Platform account](https://pris.ly/pdp)
 
-## **Enable logical replication in Neon**
+## Enable logical replication in Neon
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
@@ -131,7 +131,7 @@ Just received an event: {
 }
 ```
 
-## What next?
+## What's next?
 
 - [Set up real-time triggers for your Inngest workflows](https://github.com/prisma/prisma-examples/tree/latest/pulse/inngest-router)
 - [Re-index your TypeSense search instantly when data changes](https://github.com/prisma/prisma-examples/tree/latest/pulse/product-search-with-typesense)
