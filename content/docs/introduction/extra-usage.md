@@ -13,12 +13,12 @@ Neon plans are structured around **Allowances** and **Extra usage**. Allowances 
 
 This table provides an overview of plan fees with allowances for storage, compute, and projects:
 
-| Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                     | Project Allowance |
-| ---------- | ----------- | ----------------- | ----------------------------------------------------------------------------------------------------- | ----------------- |
-| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes | 1 project         |
-| Launch     | $19         | 10 GiB            | 300 compute hours (1,200 _active hours_)/month                                                        | 10 projects       |
-| Scale      | $69         | 50 GiB            | 750 compute hours (3,000 _active hours_)/month                                                        | 50 projects       |
-| Enterprise | Custom      | Custom            | Custom                                                                                                | Custom            |
+| Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                   | Project Allowance |
+| ---------- | ----------- | ----------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
+| Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours (24/7 at 0.25 CU), includes up to 5 hours/month for non-default branch computes | 1 project         |
+| Launch     | $19         | 10 GiB            | 300 compute hours (1,200 _active hours_)/month                                                      | 10 projects       |
+| Scale      | $69         | 50 GiB            | 750 compute hours (3,000 _active hours_)/month                                                      | 50 projects       |
+| Enterprise | Custom      | Custom            | Custom                                                                                              | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
 
