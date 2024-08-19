@@ -138,7 +138,7 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. 
 
 For [Neon Free Plan](/docs/introduction/plans#free-plan) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
-Users on paid plans have the flexibility to choose a compute size for each branch's compute individually. By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
+By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 
 To reset the default compute size, go to **Project settings** > **Compute**.
 

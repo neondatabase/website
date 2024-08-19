@@ -49,7 +49,7 @@ To create an endpoint:
 
 ## Edit a compute
 
-Neon paid plan users can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [Autosuspend](#auto-suspend-configuration) configuration.
+You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [Autosuspend](#auto-suspend-configuration) configuration.
 
 To edit a compute:
 
@@ -132,10 +132,6 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 8                      | 8    | 32 GB | 25.6 GB  | 3604            |
 | 9                      | 9    | 36 GB | 28.8 GB  | 4000            |
 | 10                     | 10   | 40 GB | 32 GB    | 4000            |
-
-<Admonition type="note">
-Users on paid plans can configure the size of their computes. The compute size for Free Plan users is set at .25 CU (.25 vCPU and 1 GB RAM).
-</Admonition>
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
