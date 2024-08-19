@@ -15,27 +15,27 @@ import Testimonial from '../testimonial';
 const items = [
   {
     icon: autoscaleIcon,
-    text: '<strong>Neon autoscales according to traffic,</strong> dynamically adjusting CPU and memory as needed.',
+    text: 'Neon autoscales according to traffic, dynamically adjusting CPU and memory as needed.',
   },
   {
     icon: costIcon,
-    text: '<strong>Costs are controlled</strong> by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>, avoiding unexpected charges.',
+    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>, avoiding unexpected charges.',
   },
   {
     icon: performanceIcon,
-    text: '<strong>Fast performance in production without overpaying.</strong> In a typical compute bill, <a href="https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20" target="_blank" rel="noopener noreferrer">60% of costs go towards unused resources</a>. ',
+    text: 'Fast performance in production without overpaying. In a typical compute bill, <a href="https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20" target="_blank" rel="noopener noreferrer">60% of costs go towards unused resources</a>. ',
   },
   {
     icon: resizeIcon,
-    text: '<strong>No manual resizes or downtimes.</strong> Neon scales up and down smoothly and immediately. ',
+    text: 'No manual resizes or downtimes. Neon scales up and down smoothly and immediately. ',
   },
   {
     icon: databaseIcon,
-    text: '<strong>Non-prod databases scale to zero when inactive.</strong> Instead of paying for compute 24/7, you skim the costs of your supporting databases to a minimum.',
+    text: 'Non-prod databases scale to zero when inactive. Instead of paying for compute 24/7, you skim the costs of your supporting databases to a minimum.',
   },
   {
     icon: openSourceIcon,
-    text: '<strong>Transparency with open-source architecture.</strong> <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;Github</a>.',
+    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;Github</a>.',
   },
 ];
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-07-25T12:53:42.432Z'
+updatedOn: '2024-08-07T21:36:52.671Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -22,28 +22,28 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
-- For Neon Free Tier users, the compute associated with the default branch is always available.
+- For Neon Free Plan users, the compute associated with the default branch is always available.
 - For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Tier users, computes associated with non-default branches are suspended if you exceed the Neon Free Tier _active hours_ limit of 20 hours per month.
+- For Neon Free Plan users, computes associated with non-default branches are suspended if you exceed the Neon Free Plan _active hours_ limit of 20 hours per month.
 - For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a computes associated with a non-default branch remains suspended.
 
 ## Protected branch
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. The following retsrictions also apply to protected branches:
+Neon's protected branches feature implements a series of protections:
 
 - Protected branches cannot be deleted.
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches.
+- With additional configuration steps, you can apply IP restrictions to protected branches only.
 
-You have to remove branch protection before you can perfom these actions. See [Remove branch protection](#remove-branch-protection).
-
-Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. For information about how to configure a protected branch, see [Set a branch as protected](#set-a-branch-as-protected).
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -133,16 +133,9 @@ To set a branch as the default branch:
 
 ## Set a branch as protected
 
-"Protected" is a status assigned to a branch that limits access based on IP addresses. Only IPs listed in the project’s IP allowlist can access this branch. This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
+This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
 
-For the protected status to have any effect, you must:
-
-1. Define an IP allowlist.
-2. Select the **Restrict IP access to protected branches only** option.
-
-For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
-
-To designate a branch as protected:
+To set a branch as protected:
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
@@ -150,7 +143,7 @@ To designate a branch as protected:
 4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
-For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Connect to a branch
 
@@ -167,7 +160,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 4. Connect with `psql` as shown below.
 
 ```bash shouldWrap
-psql postgres://[user]:[password]@[neon_hostname]/[dbname]
+psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">

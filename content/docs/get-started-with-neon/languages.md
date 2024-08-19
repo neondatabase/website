@@ -4,21 +4,21 @@ subtitle: Find detailed instructions for connecting to Neon from various languag
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/guides-intro
-updatedOn: '2024-07-03T10:49:43.703Z'
+updatedOn: '2024-08-15T17:23:10.555Z'
 ---
 
 <TechnologyNavigation open>
 
-<img src="/images/technology-logos/elixir-logo.svg" width="36" height="36" alt="Elixir" href="/docs/guides/elixir-ecto" title="Connect from Elixir with Ecto to Neon" />
+<a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 
-<img src="/images/technology-logos/go-logo.svg" width="36" height="36" alt="Go" href="/docs/guides/go" title="Connect a Go application to Neon" />
+<a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
 
-<img src="/images/technology-logos/java-logo.svg" width="27" height="36" alt="Java" href="/docs/guides/java" title="Connect a Java application to Neon" />
+<a href="/docs/guides/java" title="Java" description="Connect a Java application to Neon" icon="java"></a>
 
-<img src="/images/technology-logos/javascript-logo.svg" width="33" height="36" alt="JavaScript" href="/docs/guides/javascript" title="Connect a JavaScript application to Neon" />
+<a href="/docs/guides/javascript" title="JavaScript" description="Connect a JavaScript application to Neon" icon="javascript"></a>
 
-<img src="/images/technology-logos/python-logo.svg" width="33" height="36" alt="Python" href="/docs/guides/python" title="Connect a Python application to Neon" />
+<a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
 
-<img src="/images/technology-logos/rust-logo.svg" width="36" height="36" alt="Rust" href="/docs/guides/rust" title="Connect a Rust application to Neon" />
+<a href="/docs/guides/rust" title="Rust" description="Connect a Rust application to Neon" icon="rust"></a>
 
 </TechnologyNavigation>

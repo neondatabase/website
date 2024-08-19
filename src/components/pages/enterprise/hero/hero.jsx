@@ -18,11 +18,11 @@ const Hero = () => (
     <Container className="relative z-10 flex flex-col items-center text-center" size="medium">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-pure blur-[30px] lg:w-full" />
       <h1 className="mx-auto font-title text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
-        Fleets of Postgres
+        Neon for Enterprises
       </h1>
       <p className="mt-5 text-xl font-light leading-snug xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
-        Enterprises use Neon to operate hundreds of thousands of Postgres databases: <br />
-        Automated, instant provisioning of the world's most popular database.
+        Enterprises use Neon to operate hundreds of thousands of Postgres databases <br />
+        with full compliance and security.
       </p>
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"

@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-07-01T10:49:07.567Z'
+updatedOn: '2024-08-06T15:23:10.955Z'
 ---
 
 Neon's Community, Standard, Priority, and Enterprise support plans are outlined below. Support plans are mapped to Neon's pricing plans. See [Upgrading your support plan](#upgrading-your-support-plan).
@@ -15,9 +15,13 @@ Neon's Community, Standard, Priority, and Enterprise support plans are outlined 
 | Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
 | SLAs                            |     -     |    -     |          |  &check;   |
 
+<Admonition type="important">
+The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neon users but is not an official Neon Support channel. If you are a paid plan user and require assistance from the Neon Support team, please open a support ticket, as described in [Standard support](#standard-support).
+</Admonition>
+
 ## Community support
 
-Neon's [Free Tier](/docs/introduction/plans#free-tier) includes **Community** support.
+Neon's [Free Plan](/docs/introduction/plans#free-plan) includes **Community** support.
 
 Community support is provided through the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
 
@@ -55,7 +59,7 @@ Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans)
 
 | Support plan | Pricing plan                                           |
 | :----------- | :----------------------------------------------------- |
-| Community    | [Free Tier](/docs/introduction/plans#free-tier)        |
+| Community    | [Free Plan](/docs/introduction/plans#free-plan)        |
 | Standard     | [Launch plan](/docs/introduction/plans#launch)         |
 | Priority     | [Scale plan](/docs/introduction/plans#scale)           |
 | Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise) |

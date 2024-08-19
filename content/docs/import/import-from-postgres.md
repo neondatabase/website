@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
-updatedOn: '2024-06-14T07:55:54.410Z'
+updatedOn: '2024-08-07T21:36:52.669Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `pg_dump` and `pg_restore`.
@@ -25,7 +25,7 @@ Repeat the `pg_dump` and `pg_restore` process for each database you want to migr
 - Retrieve the connection string for your Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
 
   ```bash shouldWrap
-  postgres://[user]:[password]@[neon_hostname]/[dbname]
+  postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
 - Consider running a test migration first to ensure your actual migration goes smoothly. See [Run a test migration](#run-a-test-migration).
@@ -74,12 +74,12 @@ The following example shows how data from a `pagila` source database is dumped a
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d postgres://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak
+~/mydump$ pg_dump -Fc -v -d postgresql://[user]:[password]@[neon_hostname]/pagila -f mydumpfile.bak
 
 ~/mydump$ ls
 mydumpfile.bak
 
-~/mydump$ pg_restore -v -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
+~/mydump$ pg_restore -v -d postgresql://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 ## Pipe pg_dump to pg_restore
@@ -115,7 +115,7 @@ Regardless of `ALTER OWNER` statement errors, a restore operation still succeeds
 To avoid the non-fatal errors, you can ignore database object ownership statements when restoring data by specifying the `-O, --no-owner` option in your `pg_restore` command:
 
 ```bash shouldWrap
-pg_restore -v -O -d postgres://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
+pg_restore -v -O -d postgresql://[user]:[password]@[neon_hostname]/pagila mydumpfile.bak
 ```
 
 The Neon role performing the restore operation becomes the owner of all database objects.

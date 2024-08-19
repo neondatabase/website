@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-07-25T12:53:42.437Z'
+updatedOn: '2024-08-14T19:53:13.331Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -34,7 +34,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a session context, but if you are a paid plan user and require a different setting, you can contact [Neon Support](/docs/introduction/support) to see if a different setting can be supported.
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported.
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                          |
@@ -89,9 +89,9 @@ Of the parameter settings listed above, the `maintenance_work_mem`, `max_connect
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-### Configuring Postgres parameters in a session context
+### Configuring Postgres parameters for a session, database, or role
 
-Neon permits configuring parameters that have a `user` context, meaning that the parameter can be set by a connected user within a specific session using a [SET](https://www.postgresql.org/docs/current/sql-set.html) command. These parameters are also referred to as "run-time parameters". You can identify Postgres parameters with a `user` context by running the following command:
+Neon permits configuring parameters that have a `user` context, meaning that these parameters can be set for a session, database, or role. You can identify Postgres parameters with a `user` context by running the following query:
 
 ```sql
 SELECT name
@@ -99,10 +99,22 @@ FROM pg_settings
 WHERE context = 'user';
 ```
 
+To set a parameter for a specific session, use a [SET](https://www.postgresql.org/docs/current/sql-set.html) command.
+
 For example, the `maintenance_work_mem` parameter supports a `user` context, which lets you set it for the current session with a `SET` command:
 
 ```sql
 SET maintenance_work_mem='1 GB';
+```
+
+To set parameters for a database or role:
+
+```sql
+ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
+```
+
+```sql
+ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
 ## Postgres server logs
@@ -123,7 +135,7 @@ Temporary tables, which are stored in compute local storage, are limited by comp
 
 ## Session context
 
-The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends.
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends. To avoid losing session-level contexts in Neon, you can disable Neon's [autosuspend](/docs/guides/auto-suspend-guide) feature, which is possible on any of Neon's paid plans. However, disabling autosuspend also means that your compute will run 24/7. You can't disable autosuspend on Neon's Free plan, where your compute always autosuspends after 5 minutes of inactivity.
 
 ## Statistics collection
 
@@ -131,19 +143,72 @@ Statistics collected by the Postgres [cumulative statistics system](https://www.
 
 ## Database encoding
 
-Neon does not currently support changing the database encoding. However, Neon does support [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS), which lets you define collation objects using ICU as the collation provider. For example:
+Neon supports UTF8 encoding (Unicode, 8-bit variable-width encoding). This is the most widely used and recommended encoding for Postgres.
+
+To view the encoding and collation for your database, you can run the following query:
 
 ```sql
-CREATE COLLATION german (provider = icu, locale = 'de');
-CREATE TABLE books (id int, title text COLLATE "german");
+SELECT
+    pg_database.datname AS database_name,
+    pg_encoding_to_char(pg_database.encoding) AS encoding,
+    pg_database.datcollate AS collation,
+    pg_database.datctype AS ctype
+FROM
+    pg_database
+WHERE
+    pg_database.datname = 'your_database_name';
 ```
 
-or
+You can also issue this command from [psql](/docs/connect/query-with-psql-editor) or the Neon SQL Editor:
+
+```bash
+\l
+```
+
+<Admonition type="note">
+In Postgres, you cannot change a database's encoding or collation after it has been created.
+</Admonition>
+
+## Collation support
+
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters.
+
+The `C.UTF-8` collation is also available. While the `C` collation is strictly binary and limited to ASCII characters, `C.UTF-8` supports the full range of UTF-8 encoded characters. To create a database with that collation, you can use the following syntax:
 
 ```sql
-CREATE COLLATION arabic (provider = icu, locale = 'ar');
-CREATE TABLE books (id int, title text COLLATE "arabic");
+CREATE DATABASE my_database
+ENCODING 'UTF8'
+LC_COLLATE 'C.UTF-8'
+LC_CTYPE 'C.UTF-8'
+template template0;
 ```
+
+Another provider supported by Neon is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited compared to what you might find in a locally installed Postgres instance where there's typically a wider range of locales provided by libraries installed on your operating system. For this reason, Neon provides a full series of [predefined icu locales](https://www.postgresql.org/docs/current/collation.html#COLLATION-MANAGING-PREDEFINED-ICU) in case you require locale-specific sorting or case conversions.
+
+To view all of the predefined locales available to you, use the query `SELECT * FROM pg_collation`, or the command `\dOS+` from the [Neon SQL Editor](/docs/connect/query-with-psql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+
+To create a database with a predefined `icu` locale, you can issue a query similar to this one with your preferred locale:
+
+```sql
+CREATE DATABASE my_arabic_db
+LOCALE_PROVIDER icu
+icu_locale 'ar-x-icu'
+template template0;
+```
+
+To specify the locale for individual columns, you can use this syntax:
+
+```sql
+CREATE TABLE my_ru_table (
+    id serial PRIMARY KEY,
+    russian_text_column text COLLATE "ru-x-icu",
+    description text
+);
+```
+
+ICU also supports creating custom collations. For more information, see [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS).
+
+For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
 
 ## Event triggers
 

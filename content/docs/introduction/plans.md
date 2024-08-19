@@ -11,14 +11,14 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-07-25T20:35:44.881Z'
+updatedOn: '2024-08-06T15:23:10.954Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
 
 Neon offers four plans:
 
-- [Free Tier](#free-tier)
+- [Free Plan](#free-plan)
 - [Launch](#launch)
 - [Scale](#scale)
 - [Enterprise](#enterprise)
@@ -27,13 +27,13 @@ Neon offers four plans:
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase [extra usage](/docs/introduction/extra-usage) in set increments for when you need to go over your allowance.
 </Admonition>
 
-## Free Tier
+## Free Plan
 
-Neon's Free Tier plan is best for hobby projects, prototypes, and learning Neon.
+Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
 
-### Free Tier allowances
+### Free Plan allowances
 
-The Free Tier includes the following usage allowances:
+The Free Plan includes the following usage allowances:
 
 | Usage type                 | Plan allowance                                                                                                                                                                                                                             |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -56,7 +56,7 @@ The Free Tier includes the following usage allowances:
 
 </Admonition>
 
-### Free Tier features
+### Free Plan features
 
 - Autosuspend (after 5 minutes of inactivity)
 - All supported regions
@@ -67,7 +67,7 @@ The Free Tier includes the following usage allowances:
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
-<Admonition type="tip" title="Free Tier Compute Allowances">
+<Admonition type="tip" title="Free Pan Compute Allowances">
 On the Free Tier, your default branch compute can run 24/7 at 0.25 vCPU with 1 GB of RAM. If you enable autoscaling, your compute can scale up to 2 vCPU with 8 GB of RAM, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Tier includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Tier in January, your compute allowance resets on February 1st.
 </Admonition>
 

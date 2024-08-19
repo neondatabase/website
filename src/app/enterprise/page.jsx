@@ -17,24 +17,23 @@ export const metadata = getMetadata(SEO_DATA.enterprise);
 const items = [
   {
     icon: socIcon,
-    title: 'SOC 2 Compliant',
-    description: 'Neon has achieved SOC 2 Compliance.',
+    title: 'Compliant and secure',
+    description: 'With SOC 2 Compliance. All actions are logged and auditable.',
   },
   {
     icon: auditIcon,
-    title: 'Audit Logging',
-    description: 'All actions are logged and auditable for compliance and security purposes.',
+    title: 'Direct support',
+    description: 'Submit issues via ticketing and get help from a dedicated team of engineers.',
   },
   {
     icon: ipIcon,
-    title: 'IP Allow Rules',
-    description: 'Lock down access to databases by IP address.',
+    title: 'Restrict access',
+    description: 'Lock down access to production databases by IP address.',
   },
   {
     icon: s3Icon,
-    title: 'Bring your Own S3',
-    description:
-      'Enterprise customers can control data sovereignty by bringing their own object storage.',
+    title: 'For dev and prod',
+    description: 'Reduce the costs of your entire deployment via scale-to-zero and autoscaling .',
   },
 ];
 
@@ -68,8 +67,8 @@ const EnterprisePage = () => (
     <SplitViewGrid
       className="mt-[136px] xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Security"
-      title="Secure and Compliant"
-      description="Neon is built to meet the most stringent security and compliance requirements."
+      title="Built for teams"
+      description="Improve your database efficiency while satisfying your security and compliance requirements."
       items={items}
     />
     <Apply />

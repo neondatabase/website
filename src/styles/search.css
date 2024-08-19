@@ -3,8 +3,12 @@
 }
 
 .DocSearch-Button {
-  @apply flex max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat p-[7px] pl-9 text-left leading-none text-gray-new-70 outline-none transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none dark:border-gray-new-10 dark:bg-black-pure dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-20;
-  @apply lg:mr-6 lg:h-5 lg:w-5 lg:items-start lg:border-0 lg:bg-transparent lg:bg-[top] lg:p-0 dark:lg:bg-transparent md:m-0;
+  @apply flex h-8 max-w-full shrink-0 grow basis-[230px] items-center overflow-x-auto rounded p-[6px] pl-9 text-left leading-none text-gray-new-70 outline-none;
+  @apply border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat;
+  @apply transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none;
+  @apply dark:border-[#1D1E20] dark:bg-[#0F1010] dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-20;
+  @apply lg:mr-6 lg:h-6 lg:w-6 lg:items-start lg:border-0 lg:bg-transparent lg:bg-[url('/images/search-black.svg')] lg:bg-contain lg:bg-[top] lg:p-0 md:m-0 md:-mt-0.5;
+  @apply lg:dark:bg-transparent lg:dark:bg-[url('/images/search-white.svg')];
 
   .DocSearch-Search-Icon {
     @apply hidden;
@@ -15,10 +19,10 @@
   }
 
   .DocSearch-Button-Keys {
-    @apply ml-auto flex h-5 min-w-[33px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-80 lg:hidden lg:border-none;
+    @apply ml-auto flex h-[18px] min-w-[30px] items-center justify-center gap-x-1 rounded-sm border border-gray-new-80 bg-gray-new-98 py-1 text-gray-new-30 dark:border-[#303236] dark:bg-[#18191B] dark:text-gray-new-80 lg:hidden lg:border-none;
 
     .DocSearch-Button-Key {
-      @apply relative top-0 m-0 flex items-center justify-center text-[10px] font-medium leading-none shadow-none first:text-xs first:font-semibold first:leading-none lg:hidden;
+      @apply relative top-0 m-0 flex items-center justify-center leading-none leading-none shadow-none first:font-semibold last:text-xs lg:hidden;
 
       svg {
         @apply h-3.5 w-auto text-gray-new-30 dark:text-gray-new-80;
