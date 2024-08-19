@@ -1,6 +1,7 @@
 ---
 title: Connect from Knex to Neon
 subtitle: Learn how to connect to Neon from Knex
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-08-07T21:36:52.653Z'
 ---
