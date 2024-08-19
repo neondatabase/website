@@ -10,7 +10,7 @@ Neon's Logical Replication feature enables you to subscribe to changes in your d
 
 [Prisma Pulse](https://www.prisma.io/data-platform/pulse) is a fully managed, production-ready service that connects to your Neon Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm).
 
-In this guide you will learn how to set up Prisma Pulse with your Neon database, and create your first event stream.
+In this guide, you will learn how to set up Prisma Pulse with your Neon database and create your first event stream.
 
 <Admonition type="tip">
 What can you make with database event-driven architecture?
