@@ -9,7 +9,7 @@ Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources
 
 The following visualization shows how Neon’s autoscaling works throughout a typical day. The compute resources scale up or down based on demand, ensuring that your database has the necessary compute resources when it needs them, while conserving resources during off-peak times.
 
-![visualization for autoscaling](/docs/introduction/visualization_autoscaling.jpg)
+![visualization for autoscaling](/docs/introduction/autoscaling_intro.png)
 
 ## Autoscaling benefits
 
