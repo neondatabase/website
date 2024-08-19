@@ -11,7 +11,7 @@ enableTableOfContents: true
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="/docs/guides/autoscaling">About autoscaling</a>
+<a href="/docs/introduction/autoscaling">Introduction to autoscaling</a>
 <a href="/docs/guides/autoscaling-guide">Enabling autoscaling</a>
 </DocsList>
 </InfoBlock>
