@@ -11,6 +11,7 @@ import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 import LinesIllustration from 'components/shared/lines-illustration';
+import Link from 'components/shared/link/link';
 import { FORM_STATES } from 'constants/forms';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
@@ -228,6 +229,16 @@ const Form = ({
           )}
           {errorMessage && <ErrorMessage text={errorMessage} />}
         </div>
+        {isAzurePage && (
+          <p className="mt-4 px-8 text-[13px] font-light text-gray-new-60 lg:px-1">
+            Neon will contact you at the information above with relevant content, products, and
+            services. You may unsubscribe at any time. For more info, see our{' '}
+            <Link className="whitespace-nowrap" to="/privacy-policy" theme="green-underlined">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        )}
         {greenMode && (
           <LinesIllustration
             className="-top-[25%] !h-[450px] !w-[145%]"

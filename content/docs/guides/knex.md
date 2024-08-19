@@ -1,8 +1,9 @@
 ---
 title: Connect from Knex to Neon
 subtitle: Learn how to connect to Neon from Knex
+tag: new
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.653Z'
+updatedOn: '2024-08-19T11:54:54.453Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:

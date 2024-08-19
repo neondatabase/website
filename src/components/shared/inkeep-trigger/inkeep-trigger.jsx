@@ -6,6 +6,8 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
+import useBodyLockScroll from 'hooks/use-body-lock-scroll';
+
 import closeIcon from './images/close.svg';
 import SparksIcon from './images/sparks.inline.svg';
 
@@ -67,6 +69,8 @@ const InkeepTrigger = ({ className }) => {
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
+  useBodyLockScroll(isOpen);
 
   return (
     <>
