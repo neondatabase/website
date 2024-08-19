@@ -104,6 +104,8 @@ updatedOn: '2024-07-11T12:52:17.602Z'
 
 <img src="/images/technology-logos/postgresql-logo.svg" width="36" height="36" alt="Postgres" href="/docs/guides/logical-replication-postgres" title="Replicate data from Neon to PostgreSQL" />
 
+<img src="/images/technology-logos/prisma-logo.svg" width="36" height="36" alt="Prisma Pulse" href="/docs/guides/logical-replication-prisma-pulse" title="Stream database changes in real-time with Prisma Pulse" />
+
 <img src="/images/technology-logos/sequin-logo.svg" width="29" height="36" alt="Sequin" href="/docs/guides/sequin" title="Sync data from APIs to Neon in real time" />
 
 </TechnologyNavigation>
