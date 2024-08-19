@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import ArrowExternalIcon from 'icons/docs/sidebar/arrow-external.inline.svg';
+import ArrowExternalIcon from 'icons/docs/arrow-external.inline.svg';
 
 import Tag from '../../tag';
 import Icon from '../icon';
@@ -58,9 +58,7 @@ const Item = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
-        {externalSlug && (
-          <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
-        )}
+        {externalSlug && <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15" />}
       </LinkTag>
       {children}
     </li>
