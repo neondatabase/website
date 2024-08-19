@@ -51,7 +51,7 @@ Postgres memory consumption can escalate rapidly in specific scenarios. Fortunat
 
 ## Local File Cache
 
-To expedite queries, the autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [local file cache](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-monitor adjusts the local file cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
+To expedite queries, the autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-monitor adjusts the LFC size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
 
 ## Autoscaling source code
 
