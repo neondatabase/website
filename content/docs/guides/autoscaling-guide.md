@@ -1,71 +1,61 @@
 ---
 title: Enable Autoscaling in Neon
-subtitle: Learn how to enable Neon's Autoscaling feature to automatically scale compute
-  resources on demand
 enableTableOfContents: true
 updatedOn: '2024-07-25T12:53:42.424Z'
 ---
 
-Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current workload, eliminating the need for manual intervention. This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Enable autoscaling for a compute</p>
+<p>Configure autoscaling defaults for your project</p>
+</DocsList>
 
-_Autoscaling_ is a paid plan feature. Users on paid plans can enable autoscaling for a new project, for an existing project, or for an individual compute. Autoscaling is supported with primary read-write computes and read replica computes.
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/introduction/autoscaling">About autoscaling</a>
+<a href="/docs/guides/autoscaling-algorithm">How the algorithm works</a>
+</DocsList>
+</InfoBlock>
 
-## Enable autoscaling for a new project
-
-Enabling autoscaling when you create a project allows you to set autoscaling default settings for all computes created in your project. You can adjust autoscaling settings for individual computes afterward, but setting defaults when creating a project saves you from having to configure the settings for each compute later on.
-
-To enable autoscaling when you first create your project:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-3. Specify a name, a Postgres version, and a region.
-4. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
-   ![Autoscaling](/docs/guides/autoscaling_project_creation.png)
-
-<Admonition type="note">
-You can configure the autosuspend setting for your compute at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. This feature is also referred to as "scale-to-zero".
-</Admonition>
-
-5. Click **Create Project**. Your initial compute is created with the specified settings. All future computes that you create will use this setting.
-
-## Enable autoscaling for an existing project
-
-Configuring autoscaling for an existing project sets the project's default, which is applied to all computes created from that point forward. Existing computes are unaffected. You can adjust autoscaling default or configure the setting for individual computes later, as necessary.
-
-To configure autoscaling default settings for an existing project:
-
-1. Select a project in the Neon Console.
-1. On the Neon **Dashboard**, select **Project settings**.
-1. Select **Compute** and click **Change**.
-1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
-   ![Autoscaling](/docs/guides/autoscaling_existing_project.png)
-
-<Admonition type="note">
-You can configure the autosuspend setting for your compute at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. This feature is also referred to as "scale-to-zero".
-</Admonition>
-
-1. Click **Save**.
+This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
 ## Enable autoscaling for a compute
 
-Users on paid plans can edit an individual compute to alter the compute configuration, which includes autoscaling.
+You can edit an individual compute to alter the compute configuration, which includes autoscaling.
 
 To edit a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click on the compute you want to edit.
+1. On the **Compute** tab, identify the compute you want to configure and click **Edit**.
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
-1. Under **Compute size**, use the slider to specify a minimum and maximum compute size.
-   ![Autoscaling edit settings](/docs/guides/autoscaling_edit_settings.png)
+1. On the **Edit compute** settings drawer, toggle **Enable autoscaling** to enable it and use the slider to specify a minimum and maximum compute size.
+   ![Autoscaling edit settings](/docs/introduction/autoscaling_config.png)
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 10 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs.
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 10 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
    <Admonition type="note">
-   You can configure the autosuspend setting for your compute at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. This feature is also referred to as "scale-to-zero".
+   You can configure the autosuspend setting for your compute at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute scales to zero. For more, see [Autosuspend](/docs/introduction/auto-suspend).
    </Admonition>
 
 1. Click **Save**.
+
+## Configure autoscaling defaults for your project
+
+You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This will save your from having to configure autoscaling each time, assuming you want the same settings for all of your computes.
+
+<Admonition type="note">
+Changing your autoscaling default settings does not alter the autoscaling configuration for existing computes.
+</Admonition>
+
+To configure autoscaling defaults:
+
+1. Navigate to your Project Dashboard and select **Settings** from the sidebar.
+2. Select **Compute**.
+3. Select **Change** to open the **Change default compute settings** modal.
+   ![Edit autoscaling defaults](/docs/guides/autoscaling_defaults.png)
+4. Use the slider to specify a minimum and maximum compute size and **Save** your changes.
+
+The next time you create a compute, these settings will be applied to it.
 
 ## Monitor autoscaling
 
@@ -97,7 +87,7 @@ Ideally, for smaller datasets, you want to keep as much of your dataset in memor
 
 If your autoscaling graphs show regular spikes that hit your maximum setting, consider increasing your maximum. However, because these spikes plateau at the maximum setting, it can be difficult to determine your actual demand.
 
-Another approach is to set a higher threshold than you need and monitor usage spikes to get a sense of where your typical maximum demand reaches; you can then throttle the maximum setting down closer to anticipated/historical demand. Either way, with autoscaling you only pay for what you use; a higher setting does not translate to higher costs unless the demand is there to increase usage.
+Another approach is to set a higher threshold than you need and monitor usage spikes to get a sense of where your typical maximum demand reaches; you can then throttle the maximum setting down closer to anticipated/historical demand. Either way, with autoscaling you only use what's necessary; a higher setting does not translate to increased usage unless there's demand for it.
 
 ### The neon_utils extension
 

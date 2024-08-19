@@ -149,6 +149,8 @@
       items:
         - title: Overview
           slug: introduction/architecture-overview
+        - title: Autoscaling
+          slug: introduction/autoscaling-architecture
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
     - title: Features
@@ -158,8 +160,14 @@
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
-            - title: Autoscaling guide
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+            - title: Enable autoscaling
               slug: guides/autoscaling-guide
+            - title: How the algorithm works
+              slug: guides/autoscaling-algorithm
         - title: Autosuspend
           slug: introduction/auto-suspend
           items:
