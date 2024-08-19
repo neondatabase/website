@@ -1,6 +1,6 @@
 ---
 title: Stream database changes in real-time with Prisma Pulse
-subtitle: Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database.
+subtitle: Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-19T21:44:27.443Z'
@@ -29,7 +29,6 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
 </Admonition>
 
-`
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
@@ -48,14 +47,14 @@ SHOW wal_level;
 
 ## Connect Prisma Pulse
 
-1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp)
+1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp).
 2. In the [Prisma Data Platform Console](https://console.prisma.io) create a new project by clicking the **New project** button.
-3. In the **New project** configuration, select **Pulse** as your starting point
-4. Copy your database connection string from Neon in to the database connection input field on the Platform Console
-5. Choose a region that is closest to your Neon database
-6. Click **Create project**
-7. We recommend leaving **Event persistence** switched **on** (default). This means Prisma Pulse will automatically store events in the case your server goes down, allowing you to resume again with zero data loss
-8. Click **Enable Pulse**
+3. In the **New project** configuration, select **Pulse** as your starting point.
+4. Copy your database connection string from Neon into the database connection input field on the Platform Console.
+5. Choose a region that is closest to your Neon database.
+6. Click **Create project**.
+7. We recommend leaving **Event persistence** switched **on** (default). This means Prisma Pulse will automatically store events in the case your server goes down, allowing you to resume again with zero data loss.
+8. Click **Enable Pulse**.
 9. After Pulse has been enabled (this may take a moment), generate an API key by clicking **Generate API key**. Save this for later.
 
 ## Your first stream
@@ -87,7 +86,9 @@ import { withPulse } from '@prisma/extension-pulse';
 const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
 ```
 
-Note: for a real production use case, you should consider moving sensitive values like your API key into environment variables.
+<Admonition type="note">
+For a real production use case, you should consider moving sensitive values like your API key into environment variables.
+</Admonition> 
 
 ### Create your first Pulse stream
 
