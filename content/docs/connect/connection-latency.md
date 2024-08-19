@@ -169,6 +169,11 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
+### Connection retry references
+
+- [SQL Alchemy: Dealing with disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)
+- [Fast API blog post: Recycling connections for Neon's autosuspend](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
+
 ### Use application-level caching
 
 Implement a caching system like [Redis](https://redis.io/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
