@@ -2,7 +2,7 @@
 title: Stream database changes in real-time with Prisma Pulse
 subtitle: Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database.
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 updatedOn: '2024-08-19T21:44:27.443Z'
 ---
 
@@ -132,6 +132,6 @@ Just received an event: {
 
 ## What next?
 
-- [Set up real-time triggers for your Inngest workflows](https://github.com/prisma/...)
+- [Set up real-time triggers for your Inngest workflows](https://github.com/prisma/prisma-examples/tree/latest/pulse/inngest-router)
 - [Re-index your TypeSense search instantly when data changes](https://github.com/prisma/prisma-examples/tree/latest/pulse/product-search-with-typesense)
 - [Automatically send onboarding emails with Resend when a new user is created](https://github.com/prisma/prisma-examples/tree/latest/pulse/email-with-resend)
