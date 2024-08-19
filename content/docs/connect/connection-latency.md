@@ -171,7 +171,7 @@ However, this example is a simplification. In a production application, you migh
 
 ### Connection retry references
 
-- [SQL Alchemy: Dealing with disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)
+- [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's autosuspend](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
 ### Use application-level caching
