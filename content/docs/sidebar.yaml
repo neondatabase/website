@@ -122,25 +122,47 @@
             - title: Latency and timeouts
               slug: connect/connection-latency
     - title: Import data
-      slug: import/import-intro
       icon: roadmap
+      slug: import/import-intro
       items:
-        - title: Import from Postgres with pg_dump and pg_restore
-          slug: import/import-from-postgres
-        - title: Import from Postgres with pg-import
-          slug: import/import-from-postgres-pg-import
-        - title: Import from a Neon project
-          slug: import/import-from-neon
-        - title: Import from CSV
-          slug: import/import-from-csv
-        - title: Import from Heroku
-          slug: import/import-from-heroku
-        - title: Migrate data with AWS DMS
-          slug: import/migrate-aws-dms
-        - title: Migrate from MySQL to Postgres
-          slug: import/migrate-mysql
-        - title: Sample data
-          slug: import/import-sample-data
+        - section: Import utilities
+          items:
+            - title: Import from Postgres with pg_dump and pg_restore
+              slug: import/import-from-postgres
+            - title: Import from Postgres with pg-import
+              slug: import/import-from-postgres-pg-import
+            - title: Import from a Neon project
+              slug: import/import-from-neon
+            - title: Import from Heroku
+              slug: import/import-from-heroku
+            - title: Import from MySQL
+              slug: import/migrate-mysql
+        - section: Logical replication
+          items:
+            - title: Replicate from AlloyDB
+              slug: guides/logical-replication-alloydb
+            - title: Replicate from Aurora
+              slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Cloud SQL
+              slug: guides/logical-replication-cloud-sql
+            - title: Replicate from Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
+            - title: Replicate from Postgres
+              slug: guides/logical-replication-postgres-to-neon
+            - title: Replicate from RDS
+              slug: guides/logical-replication-rds-to-neon
+        - section: Data migration services
+          items:
+            - title: AWS Data Migration Service (DMS)
+              slug: import/migrate-aws-dms
+        - section: CSV
+          items:
+            - title: Import from CSV
+              slug: import/import-from-csv
+        - section: Sample data
+          items:
+            - title: Postgres sample data
+              slug: import/import-sample-data
 - section: Platform
   items:
     - title: Architecture
