@@ -46,5 +46,3 @@ Postgres logical replication in Neon provides an efficient way to migrate data f
 <a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 </TechnologyNavigation>
-
-
