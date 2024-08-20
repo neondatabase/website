@@ -36,7 +36,7 @@ To learn more about Postgres logical replication, see the following topics.
 
 To get started, jump into one of our step-by-step logical replication guides.
 
-## Replicate from Neon
+## Replicate data from Neon
 
 <TechnologyNavigation open>
 
@@ -62,7 +62,7 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 </TechnologyNavigation>
 
-## Replicate to Neon
+## Replicate data to Neon
 
 <TechnologyNavigation open>
 

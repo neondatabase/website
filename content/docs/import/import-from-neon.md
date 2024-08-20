@@ -9,6 +9,10 @@ This guide describes how to migrate a database from one Neon project to another 
 - Import a database from a Neon project created in one region to a project created in another region.
 - Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
+<Admonition type="tip">
+You can also use **logical replication** to move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+</Admonition>
+
 ## Important considerations
 
 - **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications. We also recommend familiarizing yourself with the changes in the new version of Postgres, especially those affecting compatibility. For information about those changes, please refer to the official Postgres [Release 15](https://www.postgresql.org/docs/release/15.0/) or [Release 16](https://www.postgresql.org/docs/16/release-16.html) documentation.

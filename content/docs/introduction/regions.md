@@ -51,16 +51,26 @@ If you are unsure of your project's region, you can find this information in the
 
 ## Move project data to a new region
 
-If you need to move your data to a different region, the following steps are recommended:
+Moving a project to a differ region requires moving your data using one of the following methods:
+
+### Dump and restore
+
+Using the dump and restore method involves the following steps:
 
 1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
 1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
+
+Moving data to a new Neon project using this method may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
 <Admonition type="note">
 Neon Free Plan users are limited to a single project. In this case, you can export your data using `pg_dump`, remove your existing project, create a new project in the desired region, and import your data into the new project.
 </Admonition>
 
-Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
+### Logical replication
+
+As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+
+## Requesting new regions
 
 Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 

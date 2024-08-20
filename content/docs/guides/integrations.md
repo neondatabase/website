@@ -84,7 +84,7 @@ updatedOn: '2024-08-20T16:32:38.909Z'
 
 </TechnologyNavigation>
 
-## Replicate from Neon
+## Replicate data from Neon
 
 <TechnologyNavigation open>
 
@@ -110,7 +110,7 @@ updatedOn: '2024-08-20T16:32:38.909Z'
 
 </TechnologyNavigation>
 
-## Replicate to Neon
+## Replicate data to Neon
 
 <TechnologyNavigation open>
 
@@ -127,6 +127,7 @@ updatedOn: '2024-08-20T16:32:38.909Z'
 <a href="/docs/guides/sequin" title="Sequin" description="Stream data from platforms like Stripe, Linear, and GitHub to Neon" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
+
 <a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
 
 <a href="/docs/guides/sequin" title="Sequin" description="Sync data from APIs to Neon in real time" icon="sequin"></a>
