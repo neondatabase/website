@@ -89,7 +89,7 @@ const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API 
 
 <Admonition type="note">
 For a real production use case, you should consider moving sensitive values like your API key into environment variables.
-</Admonition> 
+</Admonition>
 
 ### Create your first Pulse stream
 
