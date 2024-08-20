@@ -52,8 +52,6 @@ const Hero = () => {
               </div>
             ) : (
               <div
-                // className="group absolute left-1/2 top-1/2 z-30 h-[378px] w-[672px] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-[10px] lg:aspect-video lg:w-[580px]"
-                // className="group absolute inset-2.5 z-30 w-[672px] cursor-pointer overflow-hidden rounded-[10px] lg:aspect-video lg:h-auto lg:w-full"
                 className="group absolute inset-2.5 z-30 cursor-pointer overflow-hidden rounded-[10px] md:inset-[9px] sm:inset-1.5 sm:rounded-[6px] xs:inset-1"
                 role="button"
                 tabIndex={0}
