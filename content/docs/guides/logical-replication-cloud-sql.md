@@ -85,7 +85,6 @@ If you do not use a public IP address, you'll need to configure access via a pri
 
 ![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
-
 ### Create a Postgres role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever role name you want to use.

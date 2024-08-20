@@ -19,7 +19,7 @@ Neon's logical replication feature allows you to replicate data from a local Pos
   INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
- 
+
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source Postgres database
@@ -34,17 +34,17 @@ Enabling logical replication requires changing the Postgres `wal_level` configur
 
 1. Locate your `postgresql.conf` file. This is usually found in the PostgreSQL data directory. The data directory path can be identified by running the following query in your PostgreSQL database:
 
-     ```sql
-     SHOW data_directory;
-     ```
+   ```sql
+   SHOW data_directory;
+   ```
 
 2. Open the `postgresql.conf` file in a text editor. Find the `wal_level` setting in the file. If it is not present, you can add it manually. Set `wal_level` to `logical` as shown below:
 
-     ```ini
-     wal_level = logical
-     ```
+   ```ini
+   wal_level = logical
+   ```
 
-3. After saving the changes to `postgresql.conf`, you need to reload or restart PostgreSQL for the changes to take effect. 
+3. After saving the changes to `postgresql.conf`, you need to reload or restart PostgreSQL for the changes to take effect.
 
 4. Confirm the change by running the following query in your PostgreSQL database:
 

@@ -199,5 +199,4 @@ After the replication operation is complete, you can switch your application ove
 
 You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-
 <NeedHelp/>
