@@ -121,7 +121,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
 
 ```sql
-GGRANT USAGE ON SCHEMA public TO replication_user;
+GRANT USAGE ON SCHEMA public TO replication_user;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
 ```

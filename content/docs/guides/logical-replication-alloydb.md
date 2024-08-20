@@ -6,11 +6,11 @@ isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
-The guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The steps in this guide follow those described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the _Google AlloyDB documentation_.
+This guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The steps in this guide follow those described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the _Google AlloyDB documentation_.
 
 ## Prerequisites
 
-- An AlloyDB Postgres instance containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data.
+- An AlloyDB Postgres instance containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data.
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -48,13 +48,13 @@ You need to allow connections to your AlloyDB Postgres instance from Neon. To do
 2. Scroll down to the **Instances in your cluster** section.
 3. Click **Edit Primary**.
 4. Select the **Enable public IP** checkbox to allow connections over the public internet.
-5. Under **Authorized external networks**, enter the Neon IP addresses you want to allow. Add an entry for each of NAT gateway IP addresses associated with your Neon project's region. Neon has 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+5. Under **Authorized external networks**, enter the Neon IP addresses you want to allow. Add an entry for each of the NAT gateway IP addresses associated with your Neon project's region. Neon has 3 to 6 IP addresses per region, corresponding to each availability zone. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the IP addresses.
 
    <Admonition type="note">
-   AlloyDB requires that addresses are specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
+   AlloyDB requires addresses to be specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
    </Admonition>
 
-   In the example shown below, you can see that three addresses were added in CIDR format by appending adding `/32`.
+   In the example shown below, you can see that three addresses were added in CIDR format by appending `/32`.
 
    ![AlloyDB network configuration](/docs/guides/alloydb_network_config.png)
 
@@ -66,7 +66,7 @@ You need to allow connections to your AlloyDB Postgres instance from Neon. To do
 Record the public IP address of your AlloyDB Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your AlloyDB instance's **Overview** page, under **Instances in your cluster** > **Connectivity**.
 
 <Admonition type="note">
-If you do not use a public IP address, you'll need to configure allow Neon access via private IP. See [Private IP overview](https://cloud.google.com/alloydb/docs/private-ip), in the AlloyDB documentation.
+If you do not use a public IP address, you'll need to configure access via a private IP. See [Private IP overview](https://cloud.google.com/alloydb/docs/private-ip), in the AlloyDB documentation.
 </Admonition>
 
 ![AlloyDB public IP address](/docs/guides/alloydb_public_ip.png)
@@ -93,7 +93,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They allow you to define the tables for which changes will be replicated to subscribers.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
 
 Run this command to create a publication for all tables in your source database:
 
@@ -117,7 +117,7 @@ This section describes how to prepare your source Neon Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables defined in your publication on the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and reload it on your destination database.
+When configuring logical replication in Postgres, the tables defined in your publication on the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 ### Create a subscription
 
-After defining a publication on the source database, you need to define a subscription on your Neon destination database.
+After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
 1. Create the subscription using the using a `CREATE SUBSCRIPTION` statement:
 
@@ -138,7 +138,7 @@ After defining a publication on the source database, you need to define a subscr
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source AlloyDB database, where you defined the publication. For the `<primary_ip>`, use the IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
+   - `connection_string`: The connection string for the source AlloyDB database where you defined the publication. For the `<primary_ip>`, use the IP address of your AlloyDB Postgres instance that you noted earlier, and specify the name and password of your replication role. If you're replicating from a database other than `postgres`, be sure to specify that database name.
    - `publication_name`: The name of the publication you created on the source Neon database.
 
 2. Verify the subscription was created by running the following command:
@@ -147,7 +147,7 @@ After defining a publication on the source database, you need to define a subscr
    SELECT * FROM pg_stat_subscription;
    ```
 
-   The subscription (`my_subscription`) should be listed, confirming that your subscription has been successfully created.
+   The subscription (`my_subscription`) should be listed, confirming that your subscription has been created successfully.
 
 ## Test the replication
 

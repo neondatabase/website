@@ -14,7 +14,7 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 
 ## Prerequisites
 
-- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you need some data to play with, you run the following statements from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
+- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you run the following statements from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -25,7 +25,11 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 - An [Airbyte account](https://airbyte.com/)
 - A [Snowflake account](https://www.snowflake.com/)
 
-## Enable logical replication in Neon
+## Prepare your source Neon database
+
+This section describes how to prepare your source Neon database (the publisher) for replicating data.
+
+### Enable logical replication in Neon
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
@@ -47,7 +51,7 @@ SHOW wal_level;
  logical
 ```
 
-## Create a Postgres role for replication
+### Create a Postgres role for replication
 
 It's recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
@@ -98,7 +102,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 </Tabs>
 
-## Grant schema access to your Postgres role
+### Grant schema access to your Postgres role
 
 If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
 
@@ -110,7 +114,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
-## Create a replication slot
+### Create a replication slot
 
 Airbyte requires a dedicated replication slot. Only one source should be configured to use this replication slot.
 
@@ -126,7 +130,7 @@ SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
 To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
-## Create a publication
+### Create a publication
 
 Perform the following steps for each table you want to replicate data from:
 

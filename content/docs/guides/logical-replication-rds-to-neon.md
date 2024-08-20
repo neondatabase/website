@@ -6,11 +6,11 @@ isDraft: false
 updatedOn: '2024-08-02T17:25:18.435Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon. The steps described can be used for a near-zero downtime migration.
+Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon.
 
 ## Prerequisites
 
-- A source database in Amazon RDS for PostgreSQL containing the data you want to replicate. If you need some data to play with, you can use the following statements to create a table with sample data:
+- A source database in Amazon RDS for PostgreSQL containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -21,6 +21,8 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source database
+
+This section describes how to prepare your source Amazon RDS Postgres instance (the publisher) for replicating data to Neon.
 
 ### Enable logical replication in the source Amazon RDS PostgreSQL instance
 
@@ -67,7 +69,7 @@ You need to allow inbound connections to your AWS RDS Postgres instance from Neo
 3. From the **Actions** menu, select **Edit inbound rules**.
 4. Add rules that allow traffic from each of the IP addresses for your Neon project's region.
 
-   Neon uses 3 to 6 IP addresses per region for outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses by region.
+   Neon uses 3 to 6 IP addresses per region for outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
 5. When you're finished, click **Save rules**.
 
@@ -77,7 +79,7 @@ You need to allow inbound connections to your AWS RDS Postgres instance from Neo
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They allow you to define the database changes to be replicated to subscribers.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
 
 To create a publication for all tables in your source database, run the following query. You can use a publication name of your choice.
 
@@ -88,7 +90,7 @@ CREATE PUBLICATION my_publication FOR ALL TABLES;
 <Admonition type="note">
 It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
 
-```sql
+```sql shouldWrap
 CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 ```
 
@@ -101,7 +103,7 @@ This section describes how to prepare your source Neon Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database that you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use a utility like `pg_dump` to dump the schema from your source database.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
@@ -111,9 +113,9 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 ### Create a subscription
 
-After defining a publication on the source database, you need to define a subscription on your Neon destination database.
+After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
-1. Use `psql` or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
    ```sql shouldWrap
@@ -121,7 +123,7 @@ After defining a publication on the source database, you need to define a subscr
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source AWS RDS Postgres database, where you defined the publication.
+   - `connection_string`: The connection string for the source AWS RDS Postgres database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source AWS RDS Postgres database.
 
 3. Verify the subscription was created by running the following command:
@@ -138,37 +140,16 @@ After defining a publication on the source database, you need to define a subscr
 
 ## Test the replication
 
-Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database. You can do this in three steps:
+Testing your logical replication setup ensures that data is being replicated correctly from the publisher to the subscriber database.
 
-1. Run some data modifying queries on the source database (inserts, updates, or deletes). If you're using the `playing_with_neon` database, you can use this statement to insert 10 rows:
+1. Run some data modifying queries on the source database (inserts, updates, or deletes). If you're using the `playing_with_neon` database, you can use this statement to insert some rows:
 
    ```sql
    INSERT INTO playing_with_neon(name, value)
    SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
    ```
 
-2. On the source database in Amazon RDS, check the current Write-Ahead Log (WAL) LSN:
-
-   ```sql
-   SELECT pg_current_wal_lsn();
-
-   pg_current_wal_lsn
-   --------------------
-   0/340010F0
-   (1 row)
-   ```
-
-3. Connect to your destination database in Neon and run the following query to view the `received_lsn`, `latest_end_lsn`, and `last_msg_receipt_time`. The LSN values should match the `pg_current_wal_lsn` value on the source database and the the `last_msg_receipt_time` should be recent.
-
-   ```sql
-   SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time from pg_catalog.pg_stat_subscription;
-      subname     | received_lsn | latest_end_lsn |     last_msg_receipt_time
-   -----------------+--------------+----------------+-------------------------------
-   my_subscription | 0/340010F0   | 0/340010F0     | 2024-08-13 20:29:37.783165+00
-   (1 row)
-   ```
-
-4. As an extra check, you can also perform a row count on the source and destination to make sure the result matches.
+2. Perform a row count on the source and destination databases to make sure the result matches.
 
    ```sql
    SELECT COUNT(*) FROM playing_with_neon;

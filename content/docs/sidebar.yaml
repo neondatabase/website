@@ -480,7 +480,7 @@
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
-              slug: guides/logical-replication-postgres
+              slug: guides/logical-replication-postgres-to-neon
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
             - title: Sequin

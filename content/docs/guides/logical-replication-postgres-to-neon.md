@@ -1,60 +1,78 @@
 ---
-title: Replicate data from one Neon project to another
-subtitle: Use logical replication to migrate data to a different Neon project, account, Postgres version, or region
+title: Replicate data from Postgres to Neon
+subtitle: Learn how to replicate data from a local Postgres instance or another Postgres provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-02T17:25:18.435Z'
+updatedOn: '2024-08-12T21:44:27.444Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
-
-- **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 15 to one that runs Postgres 16.
-- **Region migration**: Moving data from one region to another; for example, from a Neon project in one region to a Neon project in a different region.
-- **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account.
-
-These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
+Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ## Prerequisites
 
-- A Neon project with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
+- A local Postgres instance or Postgres instance hosted on another provider containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
   INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
+ 
+- A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-- A destination Neon project.
+## Prepare your source Postgres database
 
-For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-
-## Prepare your source Neon database
-
-This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).
+This section describes how to prepare your source Postgres database (the publisher) for replicating data to your destination Neon database (the subscriber).
 
 ### Enable logical replication in the source Neon project
 
-In the Neon project containing your source database, enable logical replication. You only need to perform this step on the source Neon project.
+On your source database, enable logical replication. The typical steps for a local Postgres instance are shown below. If you run Postgres on a provider, the steps may differ. Refer to your provider's documentation.
 
 <Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
-</Admonition>
+Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical`. 
 
-To enable logical replication:
+1. Locate your `postgresql.conf` file. This is usually found in the PostgreSQL data directory. The data directory path can be identified by running the following query in your PostgreSQL database:
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
-4. Click **Enable** to enable logical replication.
+     ```sql
+     SHOW data_directory;
+     ```
 
-You can verify that logical replication is enabled by running the following query:
+2. Open the `postgresql.conf` file in a text editor. Find the `wal_level` setting in the file. If it is not present, you can add it manually. Set `wal_level` to `logical` as shown below:
+
+     ```ini
+     wal_level = logical
+     ```
+
+3. After saving the changes to `postgresql.conf`, you need to reload or restart PostgreSQL for the changes to take effect. 
+
+4. Confirm the change by running the following query in your PostgreSQL database:
+
+   ```sql
+   SHOW wal_level;
+   wal_level
+   -----------
+   logical
+   ```
+
+### Create a Postgres role for replication
+
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. For example:
 
 ```sql
-SHOW wal_level;
- wal_level
------------
- logical
+CREATE ROLE replication_user WITH REPLICATION LOGIN PASSWORD 'your_secure_password';
 ```
+
+### Grant schema access to your Postgres role
+
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
+
+```sql
+GRANT USAGE ON SCHEMA public TO replication_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
+```
+
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
 ### Create a publication on the source database
 
@@ -98,13 +116,13 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'host=<host-address-or-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `connection_string`: The connection string for the source Postgres database where you defined the publication.
+   - `publication_name`: The name of the publication you created on the source Postgres database.
 
 3. Verify the subscription was created by running the following command:
 
@@ -141,3 +159,5 @@ Testing your logical replication setup ensures that data is being replicated cor
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
 You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+<NeedHelp/>

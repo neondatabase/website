@@ -125,10 +125,6 @@ Alternatively, you also can create a publication `FOR ALL TABLES`.
 Upon start-up, the Decodable connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres.
 The slot's name will be prefixed with `decodable_`, followed by a unique identifier.
 
-<Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-</Admonition>
-
 ## Allow inbound traffic
 
 If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Decodable's IP addresses.
