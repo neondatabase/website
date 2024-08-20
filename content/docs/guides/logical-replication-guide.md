@@ -8,9 +8,7 @@ redirectFrom:
 updatedOn: '2024-08-07T11:38:14.263Z'
 ---
 
-<Admonition type="note">
-Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
-</Admonition>
+<LRBeta/>
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 

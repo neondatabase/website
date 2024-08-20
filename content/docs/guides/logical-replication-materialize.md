@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-08-12T21:44:27.444Z'
 ---
 
+<LRBeta/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. You can use it to process data at speeds and scales not possible in traditional databases, but without the cost, complexity, or development time of most streaming engines.

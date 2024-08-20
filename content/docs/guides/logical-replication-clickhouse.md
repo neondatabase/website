@@ -6,9 +6,7 @@ isDraft: false
 updatedOn: '2024-08-12T21:44:27.441Z'
 ---
 
-<Admonition type="tip">
-Even when logical replication isn't available on the Neon side, you can schedule DoubleCloud Transfer to copy incremental data from Postgres to ClickHouse at a given interval by enabling periodic snapshots.
-</Admonition>
+<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 

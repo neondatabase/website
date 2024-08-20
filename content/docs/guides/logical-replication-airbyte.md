@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-08-12T21:44:27.441Z'
 ---
 
+<LRBeta/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
@@ -122,10 +124,6 @@ SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
 ```
 
 `airbyte_slot` is the name assigned to the replication slot. You will need to provide this name when you set up your Airbyte source.
-
-<Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-</Admonition>
 
 ### Create a publication
 

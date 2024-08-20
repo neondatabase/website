@@ -6,6 +6,8 @@ enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.408Z'
 ---
 
+<LRBeta/>
+
 Sequin streams data from platforms like Stripe, Linear, and GitHub into your Neon database in real time. The moment a new subscription is created, a ticket is closed, or a PR is merged, a row in your database will reflect the change.
 
 With data from these services in your database, you can build integrations fast. For instance, you can quickly query for a customer’s subscription status or display the comments from a user’s support ticket.
@@ -16,8 +18,6 @@ In this guide, you’ll learn how to stream data to Neon Postgres via Sequin by:
 - Creating a Sequin Postgres consumer that streams to Neon
 - Querying your API data in Neon Postgres
 - Creating views to make querying easier
-
-<LRBeta/>
 
 ## Prerequisites
 

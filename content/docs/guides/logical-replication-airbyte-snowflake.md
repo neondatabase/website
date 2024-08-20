@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-08-12T21:44:27.438Z'
 ---
 
+<LRBeta/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
