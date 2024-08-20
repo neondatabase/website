@@ -1,9 +1,10 @@
 ---
 title: Stream database changes in real-time with Prisma Pulse
-subtitle: Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database
+subtitle: Learn how to create event-driven flows on your backend triggered by changes in
+  your Neon Postgres database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-19T21:44:27.443Z'
+updatedOn: '2024-08-20T13:58:00.660Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.

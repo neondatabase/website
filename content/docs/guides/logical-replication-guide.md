@@ -3,7 +3,7 @@ title: Get started with logical replication
 subtitle: Learn how to stream data from Neon to external data platforms and services
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-15T17:23:10.557Z'
+updatedOn: '2024-08-20T13:58:00.659Z'
 ---
 
 <Admonition type="note">
