@@ -6,13 +6,11 @@ isDraft: false
 updatedOn: '2024-08-07T21:36:52.658Z'
 ---
 
+<LRBeta/>
+
 This topic provides commands for managing publications, subscriptions, and replication slots. It also includes information about logical replication specific to Neon, including [known limitations](#known-limitations).
 
 For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
-
-<Admonition type="note">
-Logical replication in Neon is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://t.co/kORvEuCUpJ).
-</Admonition>
 
 ## Publications
 
@@ -289,7 +287,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
-    "name": "alex"
+    "name": "replication_user"
   }
 }' | jq
 ```
@@ -298,7 +296,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 </Tabs>
 
-You can verify that your role has the `REPLICATION` privilege by running the follow query:
+You can verify that your role has the `REPLICATION` privilege by running the following query:
 
 ```sql
 SELECT rolname, rolreplication

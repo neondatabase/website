@@ -122,25 +122,47 @@
             - title: Latency and timeouts
               slug: connect/connection-latency
     - title: Import data
-      slug: import/import-intro
       icon: roadmap
+      slug: import/import-intro
       items:
-        - title: Import from Postgres with pg_dump and pg_restore
-          slug: import/import-from-postgres
-        - title: Import from Postgres with pg-import
-          slug: import/import-from-postgres-pg-import
-        - title: Import from a Neon project
-          slug: import/import-from-neon
-        - title: Import from CSV
-          slug: import/import-from-csv
-        - title: Import from Heroku
-          slug: import/import-from-heroku
-        - title: Migrate data with AWS DMS
-          slug: import/migrate-aws-dms
-        - title: Migrate from MySQL to Postgres
-          slug: import/migrate-mysql
-        - title: Sample data
-          slug: import/import-sample-data
+        - section: Import utilities
+          items:
+            - title: Import from Postgres with pg_dump and pg_restore
+              slug: import/import-from-postgres
+            - title: Import from Postgres with pg-import
+              slug: import/import-from-postgres-pg-import
+            - title: Import from a Neon project
+              slug: import/import-from-neon
+            - title: Import from Heroku
+              slug: import/import-from-heroku
+            - title: Import from MySQL
+              slug: import/migrate-mysql
+        - section: Logical replication
+          items:
+            - title: Replicate from AlloyDB
+              slug: guides/logical-replication-alloydb
+            - title: Replicate from Aurora
+              slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Cloud SQL
+              slug: guides/logical-replication-cloud-sql
+            - title: Replicate from Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
+            - title: Replicate from Postgres
+              slug: guides/logical-replication-postgres-to-neon
+            - title: Replicate from RDS
+              slug: guides/logical-replication-rds-to-neon
+        - section: Data migration services
+          items:
+            - title: AWS Data Migration Service (DMS)
+              slug: import/migrate-aws-dms
+        - section: CSV
+          items:
+            - title: Import from CSV
+              slug: import/import-from-csv
+        - section: Sample data
+          items:
+            - title: Postgres sample data
+              slug: import/import-sample-data
 - section: Platform
   items:
     - title: Architecture
@@ -196,7 +218,7 @@
             - title: Promote a branch with the Neon API
               slug: guides/branch-promote
         - title: Logical replication
-          slug: introduction/logical-replication
+          slug: guides/logical-replication-guide
           items:
             - title: Concepts
               slug: guides/logical-replication-concepts
@@ -447,7 +469,7 @@
             - title: Knex
               slug: guides/knex
               tag: new
-        - section: Replicate
+        - section: Replicate from Neon
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
@@ -463,14 +485,30 @@
               slug: guides/logical-replication-fivetran
             - title: Materialize
               slug: guides/logical-replication-materialize
+            - title: Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres
+            - title: Snowflake
+              slug: guides/logical-replication-airbyte-snowflake
+        - section: Replicate to Neon
+          items:
+            - title: AlloyDB
+              slug: guides/logical-replication-alloydb
+            - title: Aurora
+              slug: guides/logical-replication-aurora-to-neon
+            - title: Cloud SQL
+              slug: guides/logical-replication-cloud-sql
+            - title: Neon to Neon
+              slug: guides/logical-replication-neon-to-neon
+            - title: Postgres
+              slug: guides/logical-replication-postgres-to-neon
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
             - title: Sequin
               slug: guides/sequin
-            - title: Snowflake
-              slug: guides/logical-replication-airbyte-snowflake
+            - title: AWS RDS
+              slug: guides/logical-replication-rds-to-neon
         - section: Schema Migration
           items:
             - title: Django

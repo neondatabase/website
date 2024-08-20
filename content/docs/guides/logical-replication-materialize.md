@@ -6,6 +6,8 @@ isDraft: false
 updatedOn: '2024-08-12T21:44:27.444Z'
 ---
 
+<LRBeta/>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. You can use it to process data at speeds and scales not possible in traditional databases, but without the cost, complexity, or development time of most streaming engines.
@@ -18,9 +20,10 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 - A [Neon account](https://console.neon.tech/)
 - Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 
-<Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-</Admonition>
+## Important notices
+
+- Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
+- To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 
 ## Enable logical replication
 
@@ -79,7 +82,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
 ```bash
-neon roles create --name alex
+neon roles create --name replication_user
 ```
 
 </TabItem>
@@ -110,7 +113,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
-    "name": "alex"
+    "name": "replication_user"
   }
 }' | jq
 ```
@@ -121,12 +124,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
 
 ```sql
-GRANT USAGE ON SCHEMA public TO alex;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
+GRANT USAGE ON SCHEMA public TO replication_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.

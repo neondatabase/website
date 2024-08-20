@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-13T20:09:36.713Z'
 ---
 
-Find instructions for importing data from Postgres, CSV, other Neon projects, and more. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
+Find instructions for importing data from Postgres, CSV, other Neon projects, and other Postgres providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
 
 ## Data import guides
 
@@ -28,3 +28,21 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 <a href="/docs/import/migrate-mysql" description="Learn how to migrate your MySQL database to Neon Postgres using pgloader." icon="sql">Migrate from MySQL</a>
 
 </DetailIconCards>
+
+## Use logical replication for near-zero downtime data migrations
+
+Postgres logical replication in Neon provides an efficient way to migrate data from other Postgres providers with minimal downtime. By replicating data in real-time, this method allows you to transition your applications to Neon without interrupting your services. Please refer to our logical replication guides for instructions.
+
+<TechnologyNavigation open>
+
+<a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
+
+<a href="/docs/guides/logical-replication-aurora-to-neon" title="Aurora" description="Replicate data from Aurora to Neon" icon="aws-rds"></a>
+
+<a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
+
+<a href="/docs/guides/logical-replication-postgres-to-neon" title="PostgreSQL to Neon" description="Replicate data from PostgreSQL to Neon" icon="postgresql"></a>
+
+<a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
+
+</TechnologyNavigation>

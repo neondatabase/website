@@ -7,6 +7,8 @@ isDraft: false
 updatedOn: '2024-08-07T21:36:52.647Z'
 ---
 
+<LRBeta/>
+
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
 Designed with simplicity and non-invasiveness in mind, Bemi doesn't require alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
@@ -17,6 +19,11 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 
 - A [Bemi account](https://bemi.io/)
 - A [Neon account](https://console.neon.tech/)
+
+## Important notices
+
+- Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
+- To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 
 ## Enable logical replication in Neon
 
