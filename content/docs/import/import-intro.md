@@ -2,7 +2,7 @@
 title: Neon data import guides
 subtitle: Learn how to import data from different sources or load sample data
 enableTableOfContents: true
-updatedOn: '2024-06-13T20:09:36.713Z'
+updatedOn: '2024-08-20T23:55:48.551Z'
 ---
 
 Find instructions for importing data from Postgres, CSV, other Neon projects, and other Postgres providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.

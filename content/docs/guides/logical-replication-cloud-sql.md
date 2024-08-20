@@ -3,7 +3,7 @@ title: Replicate data from Cloud SQL Postgres
 subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-02T17:25:18.435Z'
+updatedOn: '2024-08-20T23:55:48.544Z'
 ---
 
 <LRBeta/>

@@ -1,9 +1,10 @@
 ---
 title: Replicate data from one Neon project to another
-subtitle: Use logical replication to migrate data to a different Neon project, account, Postgres version, or region
+subtitle: Use logical replication to migrate data to a different Neon project, account,
+  Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-02T17:25:18.435Z'
+updatedOn: '2024-08-20T23:55:48.548Z'
 ---
 
 <LRBeta/>

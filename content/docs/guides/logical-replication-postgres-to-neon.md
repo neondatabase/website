@@ -1,9 +1,10 @@
 ---
 title: Replicate data from Postgres to Neon
-subtitle: Learn how to replicate data from a local Postgres instance or another Postgres provider to Neon
+subtitle: Learn how to replicate data from a local Postgres instance or another Postgres
+  provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-12T21:44:27.444Z'
+updatedOn: '2024-08-20T23:55:48.549Z'
 ---
 
 <LRBeta/>

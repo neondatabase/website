@@ -4,7 +4,7 @@ subtitle: Learn how to create an automatic audit trail for your Postgres databas
   Bemi
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.647Z'
+updatedOn: '2024-08-20T23:55:48.538Z'
 ---
 
 <LRBeta/>

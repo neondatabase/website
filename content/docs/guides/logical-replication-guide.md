@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
-updatedOn: '2024-08-07T11:38:14.263Z'
+updatedOn: '2024-08-20T23:55:48.546Z'
 ---
 
 <LRBeta/>

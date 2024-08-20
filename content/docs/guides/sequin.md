@@ -3,7 +3,7 @@ title: Stream data to Neon with Sequin
 subtitle: Learn how to sync data from platforms like Stripe, Linear, and GitHub into
   your Neon database in real time
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.408Z'
+updatedOn: '2024-08-20T23:55:48.550Z'
 ---
 
 <LRBeta/>

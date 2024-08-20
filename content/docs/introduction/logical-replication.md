@@ -2,7 +2,7 @@
 title: Logical replication
 subtitle: Replicate data to and from your Neon Postgres database
 enableTableOfContents: true
-updatedOn: '2024-01-05T19:45:09.629Z'
+updatedOn: '2024-08-20T23:55:48.551Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:

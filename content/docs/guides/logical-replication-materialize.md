@@ -3,7 +3,7 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-12T21:44:27.444Z'
+updatedOn: '2024-08-20T23:55:48.547Z'
 ---
 
 <LRBeta/>
