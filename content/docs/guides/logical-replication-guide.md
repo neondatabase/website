@@ -3,7 +3,7 @@ title: Get started with logical replication
 subtitle: Learn how to stream data from Neon to external data platforms and services
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-15T17:23:10.557Z'
+updatedOn: '2024-08-20T13:58:00.659Z'
 ---
 
 <Admonition type="note">
@@ -37,6 +37,8 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Kafka" description="Replicate data from Neon with Kafka (Confluent)" icon="kafka"></a>
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
+
+<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
 
 <a href="/docs/guides/logical-replication-postgres" title="Postgres" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
 
