@@ -21,6 +21,11 @@ Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://
 - A [Confluent Cloud](https://www.confluent.io/confluent-cloud) account
 - A [Neon account](https://console.neon.tech/)
 
+## Important notices
+
+- Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
+- To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+
 ## Enable logical replication in Neon
 
 <Admonition type="important">
@@ -140,10 +145,6 @@ SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 
 - `debezium` is the name assigned to the replication slot. You will need to provide the slot name when you set up your source connector in Confluent.
 - `pgoutput` is the logical decoder plugin used in this example. Neon supports both `pgoutput` and `wal2json` decoder plugins.
-
-<Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-</Admonition>
 
 ## Set up a Kafka cluster in Confluent Cloud
 
