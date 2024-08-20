@@ -209,7 +209,7 @@ If you're noticing an unexpectedly high number of compute hours, consider the fo
 
 - **Check your compute size:** Compute sizes range from 0.25 CU to 10 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
 - **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from auto-suspending. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
-  
+
   To investigate database activity, you can run the following query to check connections:
 
   ```sql
@@ -226,7 +226,6 @@ If you're noticing an unexpectedly high number of compute hours, consider the fo
   ```
 
 This query displays the IP addresses connected to the database, the number of connections, and the most recent connection time.
-
 
 </details>
 
@@ -245,8 +244,8 @@ Each of [Neon's plans](/docs/introduction/plans) includes a certain number of co
 <summary>**Where can I monitor compute hour usage?**</summary>
 
 You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](https://neon.tech/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
-</details>
 
+</details>
 
 <details>
 <summary>**What happens when I go over my plan's compute hour allowance?**</summary>
@@ -254,6 +253,7 @@ You can monitor compute hour usage for a Neon project on the [Project Dashboard]
 On the Free Plan, if you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 
 On the Launch and Scale plans, you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
+
 </details>
 
 <details>
