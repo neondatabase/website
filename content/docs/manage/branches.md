@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-08-07T21:36:52.671Z'
+updatedOn: '2024-08-19T14:53:19.395Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -22,15 +22,15 @@ When working with branches, it is important to remove old and unused branches. B
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
 
-- For Neon Free Plan users, the compute associated with the default branch is always available.
+- For Neon Free Plan users, the compute associated with the default branch has 24/7 availability at 0.25 vCPU with 1 GB RAM.
 - For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Plan users, computes associated with non-default branches are suspended if you exceed the Neon Free Plan _active hours_ limit of 20 hours per month.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a computes associated with a non-default branch remains suspended.
+- For Neon Free Plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free Plan 5 hours per month for **non-default branches**.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
 
 ## Protected branch
 

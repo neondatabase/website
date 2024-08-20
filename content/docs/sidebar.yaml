@@ -94,6 +94,7 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
+          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -148,6 +149,8 @@
       items:
         - title: Overview
           slug: introduction/architecture-overview
+        - title: Autoscaling
+          slug: introduction/autoscaling-architecture
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
     - title: Features
@@ -157,8 +160,14 @@
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
-            - title: Autoscaling guide
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+            - title: Enable autoscaling
               slug: guides/autoscaling-guide
+            - title: How the algorithm works
+              slug: guides/autoscaling-algorithm
         - title: Autosuspend
           slug: introduction/auto-suspend
           items:
@@ -424,7 +433,7 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: coming soon
+              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -444,7 +453,7 @@
               slug: guides/logical-replication-airbyte
             - title: Bemi
               slug: guides/bemi
-            - title: ClickHouse (DoubleCloud)
+            - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
@@ -472,6 +481,8 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres
+            - title: Prisma Pulse
+              slug: guides/logical-replication-prisma-pulse
             - title: Sequin
               slug: guides/sequin
             - title: AWS RDS
@@ -778,9 +789,11 @@
     - title: Neon roadmap
       slug: introduction/roadmap
       icon: roadmap
+      tag: updated
       items:
         - title: Neon roadmap
           slug: introduction/roadmap
+          tag: updated
 - section: noname
   items:
     - title: Community

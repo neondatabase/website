@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.640Z'
+updatedOn: '2024-08-19T15:30:04.034Z'
 ---
 
 Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state takes anywhere from 500 ms to a few seconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -168,6 +168,11 @@ In the example above, the `operation.attempt` function initiates the connection 
 The randomize option adds a degree of randomness to the delay to prevent a large number of retries from potentially overwhelming the server. The `minTimeout` option defines the minimum time between retries in milliseconds.
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
+
+### Connection retry references
+
+- [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
+- [Fast API blog post: Recycling connections for Neon's autosuspend](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
 ### Use application-level caching
 

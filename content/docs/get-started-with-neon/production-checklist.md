@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.643Z'
+updatedOn: '2024-08-19T14:53:19.391Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -40,7 +40,7 @@ In a development environment, your application may function perfectly with a sma
 
 In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 10 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
 
-- **Free Plan**: 0.25 CUs (0.25 vCPU, 1 GB RAM)
+- **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
 - **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-08-09T20:21:45.352Z'
+updatedOn: '2024-08-20T16:50:55.557Z'
 ---
 
 ## access token
@@ -141,7 +141,7 @@ A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active 
 To calculate compute hour usage, you would use the following formula:
 
 ```
-compute hours = active hours x compute size
+compute hours = compute size * active hours
 ```
 
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).
@@ -515,7 +515,7 @@ A Neon feature that lets you connect to any selected point in time within your h
 
 See [Neon user](#neon-user) and [Postgres role](#postgresql-role).
 
-## vm-informant
+## vm-monitor
 
 A program that runs inside the VM alongside Postgres, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
 
