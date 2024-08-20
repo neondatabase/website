@@ -104,6 +104,8 @@ updatedOn: '2024-08-15T17:23:10.555Z'
 
 <a href="/docs/guides/logical-replication-postgres" title="Postgres" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
 
+<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
+
 <a href="/docs/guides/sequin" title="Sequin" description="Sync data from APIs to Neon in real time" icon="sequin"></a>
 
 </TechnologyNavigation>

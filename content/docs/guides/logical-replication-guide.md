@@ -38,6 +38,8 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
 
+<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
+
 <a href="/docs/guides/logical-replication-postgres" title="Postgres" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
 
 </TechnologyNavigation>
