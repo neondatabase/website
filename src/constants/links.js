@@ -56,4 +56,5 @@ export default {
   variable: '/variable',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
+  scalableArchitecture: '/scalable-architecture',
 };

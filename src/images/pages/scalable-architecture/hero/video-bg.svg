@@ -1,0 +1,47 @@
+<svg width="692" height="398" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#a)">
+        <rect width="692" height="398" rx="14" fill="#fff" fill-opacity=".07" />
+    </g>
+    <g style="mix-blend-mode:overlay" opacity=".7">
+        <rect x=".5" y=".5" width="691" height="397" rx="13.5" fill="#fff" fill-opacity=".07" />
+        <rect x=".5" y=".5" width="691" height="397" rx="13.5" stroke="#fff" stroke-opacity=".2" />
+    </g>
+    <rect opacity=".3" width="692" height="398" rx="14" fill="url(#b)" />
+    <g filter="url(#c)">
+        <rect x="10" y="10" width="672" height="378" rx="10" fill="#0A0B0B" />
+        <rect x="9.5" y="9.5" width="673" height="379" rx="10.5" stroke="#fff" stroke-opacity=".1"
+            style="mix-blend-mode:overlay" />
+    </g>
+    <g style="mix-blend-mode:overlay" filter="url(#d)">
+        <rect x="9.5" y="9.5" width="673" height="379" rx="10.5" stroke="#fff" stroke-opacity=".1"
+            style="mix-blend-mode:hard-light" />
+    </g>
+    <defs>
+        <filter id="a" x="-10" y="-10" width="712" height="418" filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feGaussianBlur in="BackgroundImageFix" stdDeviation="5" />
+            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_511_689" />
+            <feBlend in="SourceGraphic" in2="effect1_backgroundBlur_511_689" result="shape" />
+        </filter>
+        <filter id="c" x="5" y="5" width="682" height="388" filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feGaussianBlur in="BackgroundImageFix" stdDeviation="2" />
+            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_511_689" />
+            <feBlend in="SourceGraphic" in2="effect1_backgroundBlur_511_689" result="shape" />
+        </filter>
+        <filter id="d" x="5" y="5" width="682" height="388" filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feGaussianBlur in="BackgroundImageFix" stdDeviation="2" />
+            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_511_689" />
+            <feBlend in="SourceGraphic" in2="effect1_backgroundBlur_511_689" result="shape" />
+        </filter>
+        <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+            gradientTransform="matrix(55.49997 132.99957 -92.82146 38.73387 108 0)">
+            <stop stop-color="#E3E3EE" />
+            <stop offset="1" stop-color="#E3E3EE" stop-opacity="0" />
+        </radialGradient>
+    </defs>
+</svg>
