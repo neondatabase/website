@@ -8,7 +8,7 @@ updatedOn: '2024-08-19T21:44:27.443Z'
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
 
-[Prisma Pulse](https://www.prisma.io/data-platform/pulse) is a fully managed, production-ready service that connects to your Neon Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm).
+[Prisma Pulse](https://www.prisma.io/data-platform/pulse?utm_source=neon&utm_medium=pulse-guide) is a fully managed, production-ready service that connects to your Neon Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm?utm_source=neon&utm_medium=pulse-guide).
 
 In this guide, you will learn how to set up Prisma Pulse with your Neon database and create your first event stream.
 
@@ -21,7 +21,7 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 ## Prerequisites
 
 - A [Neon account](https://console.neon.tech/)
-- A [Prisma Data Platform account](https://pris.ly/pdp)
+- A [Prisma Data Platform account](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide)
 
 ## Enable logical replication in Neon
 
@@ -47,8 +47,8 @@ SHOW wal_level;
 
 ## Connect Prisma Pulse
 
-1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp).
-2. In the [Prisma Data Platform Console](https://console.prisma.io) create a new project by clicking the **New project** button.
+1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide).
+2. In the [Prisma Data Platform Console](https://console.prisma.io?utm_source=neon&utm_medium=pulse-guide) create a new project by clicking the **New project** button.
 3. In the **New project** configuration, select **Pulse** as your starting point.
 4. Copy your database connection string from Neon into the database connection input field on the Platform Console.
 5. Choose a region that is closest to your Neon database.
@@ -133,6 +133,6 @@ Just received an event: {
 
 ## What's next?
 
-- [Set up real-time triggers for your Inngest workflows](https://github.com/prisma/prisma-examples/tree/latest/pulse/inngest-router)
-- [Re-index your TypeSense search instantly when data changes](https://github.com/prisma/prisma-examples/tree/latest/pulse/product-search-with-typesense)
-- [Automatically send onboarding emails with Resend when a new user is created](https://github.com/prisma/prisma-examples/tree/latest/pulse/email-with-resend)
+- [Set up real-time triggers for your Inngest workflows](https://pris.ly/pulse-inngest-router?utm_source=neon&utm_medium=pulse-guide)
+- [Re-index your TypeSense search instantly when data changes](https://pris.ly/pulse-typesense?utm_source=neon&utm_medium=pulse-guide)
+- [Automatically send onboarding emails with Resend when a new user is created](https://pris.ly/pulse-resend?utm_source=neon&utm_medium=pulse-guide)
