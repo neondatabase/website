@@ -8,6 +8,8 @@ updatedOn: '2024-08-02T17:25:18.435Z'
 
 Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon.
 
+<LRBeta/>
+
 ## Prerequisites
 
 - A source database in Amazon RDS for PostgreSQL containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:

@@ -8,6 +8,8 @@ updatedOn: '2024-08-12T21:44:27.444Z'
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
+<LRBeta/>
+
 ## Prerequisites
 
 - A local Postgres instance or Postgres instance hosted on another provider containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
@@ -28,8 +30,7 @@ This section describes how to prepare your source Postgres database (the publish
 
 On your source database, enable logical replication. The typical steps for a local Postgres instance are shown below. If you run Postgres on a provider, the steps may differ. Refer to your provider's documentation.
 
-<Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical`. 
+Enabling logical replication requires changing the Postgres `wal_level` configuration parameter from `replica` to `logical`.
 
 1. Locate your `postgresql.conf` file. This is usually found in the PostgreSQL data directory. The data directory path can be identified by running the following query in your PostgreSQL database:
 

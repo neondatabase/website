@@ -8,6 +8,8 @@ updatedOn: '2024-08-02T17:25:18.435Z'
 
 This guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
 
+<LRBeta/>
+
 ## Prerequisites
 
 - A Cloud SQL Postgres instance containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data. Your database and schema may differ.
