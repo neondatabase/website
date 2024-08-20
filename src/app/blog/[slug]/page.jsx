@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { draftMode } from 'next/headers';
+
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -9,26 +9,17 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
-import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
-import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
+import { getAllWpPosts, getWpPostBySlug } from 'utils/api-posts';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params, searchParams }) => {
-  const { isEnabled: isDraftModeEnabled } = draftMode();
-
-  let postResult;
-
-  if (isDraftModeEnabled) {
-    postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
-  } else {
-    postResult = await getWpPostBySlug(params?.slug);
-  }
+const BlogPage = async ({ params }) => {
+  const postResult = await getWpPostBySlug(params?.slug);
 
   const { post, relatedPosts } = postResult;
 
@@ -108,7 +99,6 @@ const BlogPage = async ({ params, searchParams }) => {
           />
         </article>
       </div>
-      {isDraftModeEnabled && <PreviewWarning />}
     </>
   );
 };

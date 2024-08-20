@@ -2,7 +2,7 @@
 title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
 enableTableOfContents: true
-updatedOn: '2024-07-02T18:04:04.917Z'
+updatedOn: '2024-08-15T17:23:10.558Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
@@ -15,9 +15,9 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 
 <TechnologyNavigation open>
 
-<img src="/images/technology-logos/nextjs-logo.svg" width="36" height="36" alt="Next.js" href="/docs/guides/nextjs" title="Connect a Next.js application to Neon" />
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
-<img src="/images/technology-logos/remix-logo.svg" width="36" height="36" alt="Remix" href="/docs/guides/remix" title="Connect a Remix application to Neon" />
+<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
 </TechnologyNavigation>
 

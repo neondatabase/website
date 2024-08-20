@@ -7,6 +7,7 @@
   items:
     - title: Why Neon?
       icon: why-neon
+      slug: get-started-with-neon/why-neon
       items:
         - title: Our mission
           slug: get-started-with-neon/why-neon
@@ -93,6 +94,7 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
+          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -147,6 +149,8 @@
       items:
         - title: Overview
           slug: introduction/architecture-overview
+        - title: Autoscaling
+          slug: introduction/autoscaling-architecture
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
     - title: Features
@@ -156,8 +160,14 @@
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
-            - title: Autoscaling guide
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+            - title: Enable autoscaling
               slug: guides/autoscaling-guide
+            - title: How the algorithm works
+              slug: guides/autoscaling-algorithm
         - title: Autosuspend
           slug: introduction/auto-suspend
           items:
@@ -251,8 +261,9 @@
             - title: Integrations
               slug: manage/integrations
         - section: Monitoring
-          slug: introduction/monitoring
           items:
+            - title: Overview
+              slug: introduction/monitoring
             - title: Monitoring dashboard
               slug: introduction/monitoring-page
             - title: System operations
@@ -316,7 +327,6 @@
     - title: Frameworks
       slug: get-started-with-neon/frameworks
       icon: frameworks
-      enableTableOfContents: true
       items:
         - title: Astro
           slug: guides/astro
@@ -423,7 +433,7 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: coming soon
+              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -761,9 +771,11 @@
     - title: Neon roadmap
       slug: introduction/roadmap
       icon: roadmap
+      tag: updated
       items:
         - title: Neon roadmap
           slug: introduction/roadmap
+          tag: updated
 - section: noname
   items:
     - title: Community

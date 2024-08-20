@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-08-06T15:23:10.954Z'
+updatedOn: '2024-08-19T14:53:19.394Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -35,14 +35,14 @@ Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Plan includes the following usage allowances:
 
-| Usage type                 | Plan allowance                                                                                                                                         |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Projects**               | 1 Neon project                                                                                                                                         |
-| **Branches**               | 10 branches                                                                                                                                            |
-| **Databases**              | Unlimited                                                                                                                                              |
-| **Storage**                | 0.5 GiB                                                                                                                                                |
-| **Compute**                | Always-available default branch compute, 5 compute hours (20 _active hours_)/month on branch computes. Free Plan computes have 0.25 vCPU with 1GB RAM. |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                         |
+| Usage type                 | Plan allowance                                                                                                                                                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Projects**               | 1 Neon project                                                                                                                                                                                                                             |
+| **Branches**               | 10 branches                                                                                                                                                                                                                                |
+| **Databases**              | Unlimited                                                                                                                                                                                                                                  |
+| **Storage**                | 0.5 GiB                                                                                                                                                                                                                                    |
+| **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
+| **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
 
 <Admonition type="tip" title="What are active hours and compute hours?">
 
@@ -68,7 +68,7 @@ The Free Plan includes the following usage allowances:
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Plan Compute Allowances">
-On the Free Plan, your default branch compute is always available — it will never be suspended, which means you can always access the data on the default branch in your Neon project. Branch computes have 20 [active hours](/docs/reference/glossary#active-time) (5 [compute hours](/docs/reference/glossary#compute-hour)) per month. If your branch computes exceed this allowance, they are suspended until the allowance resets at the beginning of the month. You can monitor branch compute hours on the [Billing page](/docs/introduction/manage-billing#view-the-billing-page) in the Neon Console. The compute hour allowance for branch computes resets at the beginning of each month. For instance, if you enrolled in the Neon Free Plan in January, the allowance for branch computes resets on February 1st.
+On the Free Plan, your default branch compute can run 24/7 at 0.25 vCPU with 1 GB of RAM. If you enable autoscaling, your compute can scale up to 2 vCPU with 8 GB of RAM, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Plan includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Plan in January, your compute allowance resets on February 1st.
 </Admonition>
 
 ## Launch

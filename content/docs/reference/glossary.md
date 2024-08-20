@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-08-09T20:21:45.352Z'
+updatedOn: '2024-08-19T14:50:59.586Z'
 ---
 
 ## access token
@@ -515,7 +515,7 @@ A Neon feature that lets you connect to any selected point in time within your h
 
 See [Neon user](#neon-user) and [Postgres role](#postgresql-role).
 
-## vm-informant
+## vm-monitor
 
 A program that runs inside the VM alongside Postgres, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
 
