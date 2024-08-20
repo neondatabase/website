@@ -141,7 +141,7 @@ A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active 
 To calculate compute hour usage, you would use the following formula:
 
 ```
-compute hours = active hours x compute size
+compute hours = compute size * active hours
 ```
 
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).
