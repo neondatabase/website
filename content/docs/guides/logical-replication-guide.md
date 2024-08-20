@@ -30,7 +30,7 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
-<a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse (DoubleCloud)" icon="clickhouse"></a>
+<a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to DoubleCloud (ClickHouse)" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 

@@ -453,7 +453,7 @@
               slug: guides/logical-replication-airbyte
             - title: Bemi
               slug: guides/bemi
-            - title: ClickHouse (DoubleCloud)
+            - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
@@ -465,6 +465,8 @@
               slug: guides/logical-replication-materialize
             - title: Postgres
               slug: guides/logical-replication-postgres
+            - title: Prisma Pulse
+              slug: guides/logical-replication-prisma-pulse
             - title: Sequin
               slug: guides/sequin
             - title: Snowflake
