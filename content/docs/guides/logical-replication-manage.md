@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-08-20T23:55:48.548Z'
 ---
 
-This topic provides commands for managing publications, subscriptions, and replication slots. 
+This topic provides commands for managing publications, subscriptions, and replication slots.
 
 For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
 
