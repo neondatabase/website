@@ -475,6 +475,10 @@
               slug: guides/logical-replication-airbyte
             - title: Bemi
               slug: guides/bemi
+            - title: ClickHouse CDC with PeerDB
+              slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
+            - title: ClickHouse PeerDB replication
+              slug: https://docs.peerdb.io/connect/postgres/neon_postgres
             - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
             - title: Confluent
