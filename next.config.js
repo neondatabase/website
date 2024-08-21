@@ -236,6 +236,14 @@ const defaultConfig = {
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
       },
       {
+        source: '/demos/branching',
+        destination: 'https://neon-demos-branching.vercel.app',
+      },
+      {
+        source: '/demos/twin-thing/:path*',
+        destination: 'https://neon-demos-branching.vercel.app/:path*',
+      },
+      {
         source: '/demos/twin-thing',
         destination: 'https://twin-thing.vercel.app/demos/twin-thing',
       },
