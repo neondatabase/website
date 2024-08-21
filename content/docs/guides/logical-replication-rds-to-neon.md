@@ -21,6 +21,7 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
   ```
 
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Prepare your source database
 

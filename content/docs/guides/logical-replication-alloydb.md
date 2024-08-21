@@ -21,6 +21,7 @@ This guide describes how to replicate data from AlloyDB Postgres to Neon using n
   ```
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Prepare your AlloyDB source database
 

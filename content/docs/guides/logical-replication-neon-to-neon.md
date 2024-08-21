@@ -28,13 +28,9 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
   ```
 
 - A destination Neon project.
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-
-## Important notices
-
-- Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
-- To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 
 ## Prepare your source Neon database
 

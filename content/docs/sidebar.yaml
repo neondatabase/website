@@ -222,7 +222,9 @@
           items:
             - title: Concepts
               slug: guides/logical-replication-concepts
-            - title: Manage
+            - title: Commands
+              slug: guides/logical-replication-manage
+            - title: Neon specifics
               slug: guides/logical-replication-neon
         - title: Read replicas
           slug: introduction/read-replicas

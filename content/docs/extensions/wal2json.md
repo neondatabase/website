@@ -290,6 +290,6 @@ The `wal2json` plugin is a powerful tool for capturing and processing database c
 
 - [wal2json GitHub Repository](https://github.com/eulerto/wal2json)
 - [PostgreSQL Logical Decoding](https://www.postgresql.org/docs/current/logicaldecoding.html)
-- [Manage logical replication in Neon - Decoder plugins](/docs/guides/logical-replication-neon#decoder-plugins)
+- [Manage logical replication in Neon - Decoder plugins](/docs/guides/logical-replication-manage#decoder-plugins)
 
 <NeedHelp/>
