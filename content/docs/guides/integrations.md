@@ -92,7 +92,11 @@ updatedOn: '2024-08-20T23:55:48.541Z'
 
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
-<a href="/docs/guides/logical-replication-clickhouse" title="DoubleCloud" description="Replicate data from Neon to a ClickHouse database with DoubleCloud" icon="clickhouse"></a>
+<a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
+
+<a href="https://docs.peerdb.io/connect/postgres/neon_postgres" title="ClickHouse" description="Create a Neon Postgres peer for replication with PeerDB (PeerDB docs)" icon="clickhouse"></a>
+
+<a href="/docs/guides/logical-replication-clickhouse" title="DoubleCloud" description="Replicate data from Neon to ClickHouse with DoubleCloud" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
 
