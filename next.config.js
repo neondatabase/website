@@ -240,7 +240,7 @@ const defaultConfig = {
         destination: 'https://neon-demos-branching.vercel.app',
       },
       {
-        source: '/demos/twin-thing/:path*',
+        source: '/demos/branching/:path*',
         destination: 'https://neon-demos-branching.vercel.app/:path*',
       },
       {
