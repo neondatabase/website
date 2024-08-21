@@ -96,6 +96,8 @@ updatedOn: '2024-08-15T17:23:10.555Z'
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
+<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
+
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Kafka" description="Replicate data from Neon with Kafka (Confluent)" icon="kafka"></a>
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
