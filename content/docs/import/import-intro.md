@@ -17,6 +17,8 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/import-from-neon" description="Import data from another Neon project for Postgres version upgrades or region migration" icon="neon">Import from a Neon project</a>
 
+<a href="/docs/import/import-schema-only" description="Import only the schema from a Postgres database with pg_dump and pg_restore" icon="neon">Import schema only</a>
+
 <a href="/docs/import/import-from-csv" description="Import data from a CSV file using the psql command-line utility" icon="csv">Import data from CSV</a>
 
 <a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to a Neon Postgres database" icon="heroku">Import from Heroku</a>

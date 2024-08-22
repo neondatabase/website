@@ -133,6 +133,8 @@
               slug: import/import-from-postgres-pg-import
             - title: Import from a Neon project
               slug: import/import-from-neon
+            - title: Import schema only
+              slug: import/import-schema-only
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL

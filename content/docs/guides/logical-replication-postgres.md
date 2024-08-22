@@ -141,7 +141,7 @@ This section describes how to prepare your destination Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
