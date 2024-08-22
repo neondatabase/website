@@ -27,11 +27,11 @@ const Hero = () => {
           &&nbsp;AWS. Elevate your database management with expert insights in this video.
         </p>
         <div className="relative col-span-8 col-start-3 flex h-fit justify-center lg:col-span-10 lg:col-start-2 sm:col-span-12 sm:col-start-1">
-          <div className="relative mt-[82px] xl:mt-16 lg:mt-14 sm:mt-12">
+          <div className="relative mt-[82px] rounded-[18px] xl:mt-16 lt:rounded-[16px] lg:mt-14 lg:rounded-xl md:rounded-lg sm:mt-12 sm:rounded-md">
             {isVideoActive ? (
-              <div className="absolute inset-1.5 z-30 lt:inset-1 lg:inset-1 sm:inset-0.5 xs:inset-px">
+              <div className="absolute inset-1.5 z-30 lt:inset-1 lg:inset-1 sm:inset-1 xs:inset-[5px]">
                 <iframe
-                  className="inset-0 h-full w-full rounded-[13px] bg-black lt:rounded-[11px] lg:rounded-[10px] md:rounded-lg sm:rounded-md"
+                  className="inset-0 h-full w-full rounded-[14px] bg-black lt:rounded-[13px] lg:rounded-[10px] md:rounded-[5px] sm:rounded-[3px]"
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/R0-o4TDcb84?autoplay=1"
@@ -44,7 +44,7 @@ const Hero = () => {
               </div>
             ) : (
               <div
-                className="group absolute inset-1.5 z-30 cursor-pointer overflow-hidden rounded-[13px] lt:inset-1 lt:rounded-[11px] lg:inset-1 lg:rounded-[10px] md:rounded-lg sm:inset-0.5 sm:rounded-md xs:inset-px"
+                className="group absolute inset-1.5 z-30 cursor-pointer overflow-hidden rounded-[14px] ring-[1px] ring-white/10 lt:inset-1 lt:rounded-[13px] lg:inset-1 lg:rounded-[9px] md:rounded-[5px] sm:inset-1 sm:rounded-[3px] xs:inset-[5px]"
                 role="button"
                 tabIndex={0}
                 aria-label="Play video"
@@ -75,8 +75,9 @@ const Hero = () => {
                 </button>
               </div>
             )}
+            <span className="absolute inset-0 rounded-[inherit] border-image-azure-form-border" />
             <Image
-              className="relative z-20"
+              className="relative z-20 rounded-[inherit]"
               src={videoBg}
               width={844}
               height={480}
