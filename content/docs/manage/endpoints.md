@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-19T14:53:19.395Z'
+updatedOn: '2024-08-22T16:01:18.423Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -55,7 +55,7 @@ To edit a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, select **Edit** for the compute you wnat to edit.
+1. From the **Compute** tab, select **Edit** for the compute you want to edit.
 
    The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
 
