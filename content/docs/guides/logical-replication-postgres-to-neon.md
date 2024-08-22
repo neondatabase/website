@@ -1,6 +1,7 @@
 ---
-title: Replicate data to an external Postgres instance
-subtitle: Learn how to replicate data from Neon to an external Postgres instance
+title: Replicate data from Postgres to Neon
+subtitle: Learn how to replicate data from a local Postgres instance or another Postgres
+  provider to Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-22T02:18:02.653Z'
@@ -8,11 +9,11 @@ updatedOn: '2024-08-22T02:18:02.653Z'
 
 <LRBeta/>
 
-Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ## Prerequisites
 
-- A Neon project with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
+- A local Postgres instance or Postgres instance hosted on another provider containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -20,89 +21,49 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-  For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-
-- A destination Postgres instance other than Neon.
+- A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
-## Prepare your source Neon database
+## Prepare your source Postgres database
 
-This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).
+This section describes how to prepare your source Postgres database (the publisher) for replicating data to your destination Neon database (the subscriber).
 
 ### Enable logical replication in the source Neon project
 
-In the Neon project containing your source database, enable logical replication. You only need to perform this step on the source Neon project.
+On your source database, enable logical replication. The typical steps for a local Postgres instance are shown below. If you run Postgres on a provider, the steps may differ. Refer to your provider's documentation.
 
-<Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
-</Admonition>
+Enabling logical replication requires changing the Postgres `wal_level` configuration parameter from `replica` to `logical`.
 
-To enable logical replication:
+1. Locate your `postgresql.conf` file. This is usually found in the PostgreSQL data directory. The data directory path can be identified by running the following query in your PostgreSQL database:
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
-4. Click **Enable** to enable logical replication.
+   ```sql
+   SHOW data_directory;
+   ```
 
-You can verify that logical replication is enabled by running the following query:
+2. Open the `postgresql.conf` file in a text editor. Find the `wal_level` setting in the file. If it is not present, you can add it manually. Set `wal_level` to `logical` as shown below:
 
-```sql
-SHOW wal_level;
- wal_level
------------
- logical
-```
+   ```ini
+   wal_level = logical
+   ```
+
+3. After saving the changes to `postgresql.conf`, you need to reload or restart PostgreSQL for the changes to take effect.
+
+4. Confirm the change by running the following query in your PostgreSQL database:
+
+   ```sql
+   SHOW wal_level;
+   wal_level
+   -----------
+   logical
+   ```
 
 ### Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. For example:
 
-<Tabs labels={["CLI", "Console", "API"]}>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neon roles create --name replication_user
+```sql
+CREATE ROLE replication_user WITH REPLICATION LOGIN PASSWORD 'your_secure_password';
 ```
-
-</TabItem>
-
-<TabItem>
-
-To create a role in the Neon Console:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. Select the **Roles & Databases** tab.
-6. Click **Add Role**.
-7. In the role creation dialog, specify a role name.
-8. Click **Create**. The role is created, and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "role": {
-    "name": "replication_user"
-  }
-}' | jq
-```
-
-</TabItem>
-
-</Tabs>
 
 ### Grant schema access to your Postgres role
 
@@ -135,9 +96,9 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
-## Prepare your destination database
+## Prepare your Neon destination database
 
-This section describes how to prepare your destination Postgres database (the subscriber) to receive replicated data.
+This section describes how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data.
 
 ### Prepare your database schema
 
@@ -158,13 +119,13 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'host=<host-address-or-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database where you defined the publication.
-   - `publication_name`: The name of the publication you created on the source Neon database.
+   - `connection_string`: The connection string for the source Postgres database where you defined the publication.
+   - `publication_name`: The name of the publication you created on the source Postgres database.
 
 3. Verify the subscription was created by running the following command:
 

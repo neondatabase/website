@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-08-19T14:50:59.586Z'
+updatedOn: '2024-08-20T16:50:55.557Z'
 ---
 
 ## access token
@@ -141,7 +141,7 @@ A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active 
 To calculate compute hour usage, you would use the following formula:
 
 ```
-compute hours = active hours x compute size
+compute hours = compute size * active hours
 ```
 
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).

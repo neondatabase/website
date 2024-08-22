@@ -1,10 +1,12 @@
 ---
 title: Stream data to Neon with Sequin
 subtitle: Learn how to sync data from platforms like Stripe, Linear, and GitHub into
-  your Neon database in real time.
+  your Neon database in real time
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.408Z'
+updatedOn: '2024-08-22T02:18:02.654Z'
 ---
+
+<LRBeta/>
 
 Sequin streams data from platforms like Stripe, Linear, and GitHub into your Neon database in real time. The moment a new subscription is created, a ticket is closed, or a PR is merged, a row in your database will reflect the change.
 
@@ -22,6 +24,7 @@ In this guide, you’ll learn how to stream data to Neon Postgres via Sequin by:
 - A [Sequin account](https://sequin.io/signup)
 - A [Neon account](https://console.neon.tech/)
 - An [API Source](https://sequin.io/integrations) you want to sync
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Create a schema and table for Sequin
 
@@ -60,27 +63,27 @@ Create a user for Sequin to use when connecting to your Neon database. This user
 
 1. In the Neon SQL Editor, run the following create statement:
 
-```sql
-create user sequin with password 'generate-a-strong-password-here';
-```
+   ```sql
+   create user sequin with password 'generate-a-strong-password-here';
+   ```
 
 2. Then, grant the `sequin` user the necessary privileges by running the following statements:
 
-```sql
-grant usage on schema sequin to sequin;
-grant select, insert, update, delete on all tables in schema sequin to sequin;
-alter default privileges in schema sequin grant select, insert, update, delete on tables to sequin;
-```
+   ```sql
+   grant usage on schema sequin to sequin;
+   grant select, insert, update, delete on all tables in schema sequin to sequin;
+   alter default privileges in schema sequin grant select, insert, update, delete on tables to sequin;
+   ```
 
-These statements do the following:
+   These statements do the following:
 
-- Grants the `sequin` user usage permissions on the `sequin` schema.
-- Grants the `sequin` user `select`, `insert`, `update`, and `delete` permissions on all existing tables in the `sequin` schema.
-- Sets default privileges so that the `sequin` user will have `select`, `insert`, `update`, and `delete` permissions on any new tables created in the `sequin` schema.
+   - Grants the `sequin` user usage permissions on the `sequin` schema.
+   - Grants the `sequin` user `select`, `insert`, `update`, and `delete` permissions on all existing tables in the `sequin` schema.
+   - Sets default privileges so that the `sequin` user will have `select`, `insert`, `update`, and `delete` permissions on any new tables created in the `sequin` schema.
 
-With this user, Sequin will only have access to the tables it needs and will not be able to modify any other data in your database.
+   With this user, Sequin will only have access to the tables it needs and will not be able to modify any other data in your database.
 
-With your `sequin` schema and `records` table in your Neon database, you’ll now configure Sequin to authenticate with your API source, create a sync, and stream data to your database.
+   With your `sequin` schema and `records` table in your Neon database, you’ll now configure Sequin to authenticate with your API source, create a sync, and stream data to your database.
 
 ## Connect Sequin to an API source
 

@@ -1,14 +1,21 @@
 ---
-title: Replicate data to an external Postgres instance
-subtitle: Learn how to replicate data from Neon to an external Postgres instance
+title: Replicate data from one Neon project to another
+subtitle: Use logical replication to migrate data to a different Neon project, account,
+  Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.653Z'
+updatedOn: '2024-08-22T02:18:02.652Z'
 ---
 
 <LRBeta/>
 
-Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
+
+- **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 15 to one that runs Postgres 16.
+- **Region migration**: Moving data from one region to another; for example, from a Neon project in one region to a Neon project in a different region.
+- **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account.
+
+These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
 
 ## Prerequisites
 
@@ -20,10 +27,10 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-  For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-
-- A destination Postgres instance other than Neon.
+- A destination Neon project.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+
+For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 ## Prepare your source Neon database
 
@@ -53,69 +60,6 @@ SHOW wal_level;
  logical
 ```
 
-### Create a Postgres role for replication
-
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
-
-<Tabs labels={["CLI", "Console", "API"]}>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neon roles create --name replication_user
-```
-
-</TabItem>
-
-<TabItem>
-
-To create a role in the Neon Console:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. Select the **Roles & Databases** tab.
-6. Click **Add Role**.
-7. In the role creation dialog, specify a role name.
-8. Click **Create**. The role is created, and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "role": {
-    "name": "replication_user"
-  }
-}' | jq
-```
-
-</TabItem>
-
-</Tabs>
-
-### Grant schema access to your Postgres role
-
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
-
-```sql
-GRANT USAGE ON SCHEMA public TO replication_user;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
-```
-
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
-
 ### Create a publication on the source database
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
@@ -135,9 +79,9 @@ CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
 For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
-## Prepare your destination database
+## Prepare your Neon destination database
 
-This section describes how to prepare your destination Postgres database (the subscriber) to receive replicated data.
+This section describes how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data.
 
 ### Prepare your database schema
 
@@ -201,5 +145,3 @@ Testing your logical replication setup ensures that data is being replicated cor
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
 You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
-
-<NeedHelp/>

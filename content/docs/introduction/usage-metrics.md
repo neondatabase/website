@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-08-09T20:21:45.348Z'
+updatedOn: '2024-08-20T16:50:55.555Z'
 ---
 
 This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -186,6 +186,103 @@ To estimate what your compute hour usage might be per month:
    To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
 
    </Admonition>
+
+### Compute FAQs
+
+<details>
+<summary>**What is a compute hour?**</summary>
+
+It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+
+To calculate compute hour usage, you would use the following formula:
+
+```
+compute hours = compute size * active hours
+```
+
+</details>
+
+<details>
+<summary>**I used a lot of compute hours, but I don't use the compute that often. Where is the usage coming from?**</summary>
+
+If you're noticing an unexpectedly high number of compute hours, consider the following steps:
+
+- **Check your compute size:** Compute sizes range from 0.25 CU to 10 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
+- **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from auto-suspending. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
+
+  To investigate database activity, you can run the following query to check connections:
+
+  ```sql
+  SELECT
+      client_addr,
+      COUNT(*) AS connection_count,
+      MAX(backend_start) AS last_connection_time
+  FROM
+      pg_stat_activity
+  GROUP BY
+      client_addr
+  ORDER BY
+      connection_count DESC;
+  ```
+
+This query displays the IP addresses connected to the database, the number of connections, and the most recent connection time.
+
+</details>
+
+<details>
+<summary>**How many compute hours do I get with my plan?**</summary>
+
+Each of [Neon's plans](/docs/introduction/plans) includes a certain number of compute hours per month:
+
+- **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute non-stop. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
+- **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
+- **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed for compute hours at $0.16 per hour.
+
+</details>
+
+<details>
+<summary>**Where can I monitor compute hour usage?**</summary>
+
+You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](https://neon.tech/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
+
+</details>
+
+<details>
+<summary>**What happens when I go over my plan's compute hour allowance?**</summary>
+
+On the Free Plan, if you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
+
+On the Launch and Scale plans, you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
+
+</details>
+
+<details>
+<summary>**Can I purchase more compute hours?**</summary>
+
+On the Free Plan, no. You'll have to upgrade to a paid plan. On the Launch and Scale plans, you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
+
+</details>
+
+<details>
+<summary>**How does autoscaling affect my compute hour usage?**</summary>
+
+The formula for compute hour usage is: `compute hours = compute size * active hours`. You will use more compute hours when your compute scales up in size to meet demand. When you enable autoscaling, you define a max compute size, which acts as a limit on your maximum potential compute usage. See [Configuring autoscaling](/docs/introduction/autoscaling#configuring-autoscaling).
+
+</details>
+
+<details>
+<summary>**How does compute size affect my compute hour usage?**</summary>
+
+The formula for compute hour usage is: `compute hours = compute size * active hours`. If you increase your compute size for more vCPU and RAM to improve performance, you will use more compute hours.
+
+</details>
+
+<details>
+<summary>**How does autosuspend (scale to zero) affect my compute hour usage?**</summary>
+
+Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](docs/introduction/auto-suspend).
+
+</details>
 
 ## Data Transfer
 
