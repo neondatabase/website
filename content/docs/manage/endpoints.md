@@ -55,7 +55,7 @@ To edit a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, select **Edit** for the compute you wnat to edit.
+1. From the **Compute** tab, select **Edit** for the compute you want to edit.
 
    The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
 

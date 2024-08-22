@@ -21,7 +21,7 @@ In this guide, you’ll learn how to stream data to Neon Postgres via Sequin by:
 
 ## Prerequisites
 
-- A [Sequin account](https://sequin.io/signup)
+- A [Sequin account](https://console.sequin.io/signup)
 - A [Neon account](https://console.neon.tech/)
 - An [API Source](https://sequin.io/integrations) you want to sync
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
