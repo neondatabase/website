@@ -117,7 +117,7 @@ def fetch_all_projects():
         url = PROJECTS_API_URL
         if cursor:
             url += f"&cursor={cursor}"
-        
+
         response = requests.get(url, headers=HEADERS)
         if response.status_code != 200:
             raise Exception(f"Failed to fetch projects: {response.text}")
@@ -128,7 +128,7 @@ def fetch_all_projects():
         cursor = data.get("pagination").get("cursor")
         if not cursor:
             break
-    
+
     return projects
 
 def transfer_projects(project_ids):
