@@ -7,7 +7,7 @@ updatedOn: '2024-08-06T15:23:10.957Z'
 
 <EarlyAccess/>
 
-Build your team in Neon with Organizations. Manage all of your team's projects under a single account &#8212; with billing, role management, and project transfer capabilities in one accessible location.
+Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project transfer capabilities in one accessible location.
 
 ## About Neon Organizations
 
@@ -38,11 +38,39 @@ Here's a breakdown of what actions each role can take:
 | [Manage billing](/docs/manage/orgs-manage#billing)                               |   ✅   |   ❌   |   ❌  |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)           |   ✅   |   ❌   |   ❌  |
 
-## Create an Organization
+## Create an organization
 
-TBD
+To get started, click **Create organization** from the breadcrumb dropdown.
 
-![Create organization](/docs/manage/orgs_create.png)
+![create organization button](/docs/manage/orgs_create_button.png)
+
+You'll be asked to select a plan and confirm your billing details. After confirming billing, you'll be directed to your organization's billing page, where you can take steps like inviting [members](/docs/manage/orgs-manage#invite-members) and [transferring projects](/docs/manage/orgs-project-transfer).
+
+![getting started with new org](/docs/manage/orgs_create_next.png)
+
+## What's next?
+
+After creating the organization, your next actions depend on your particular scenario. Here are a couple example scenarios.
+
+### Scenario 1 &#8212; Moving an existing team to a new organization
+
+If you’re currently on a paid plan, using project sharing to work with your team on your Personal account projects, and you intend to work intend to work primarily from your new Organization account:
+
+- [Transfer your existing projects](/docs/manage/orgs-project-transfer#transfer-projects-in-bulk) from your personal account to the new organization. You can leave one project behind, since that's the Free Plan limit.
+- Downgrade your personal account to the [Free Plan](/docs/introduction/manage-billing#change-your-plan) once all projects are transferred. This shifts all billing to the Organization.
+- [Invite](/docs/manage/orgs-manage#invite-members) your team members to join the organization.
+
+### Scenario 2 &#8212; Starting a new organization from scratch
+
+In this scenario you've been using Neon for personal projects for some time, and you now want to bring Neon to your company, but still keep your personal projects separate. You might instead:
+
+- [Invite](/docs/manage/orgs-manage#invite-members) someone to your new organization and delegate billing to them: set their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**. They can then revise the billing details and handle invoices for the organization.
+- Start creating new projects within the new organization.
+- Keep your personal projects on your existing paid plan. No need to transfer or downgrade.
+
+## Request conversion from support
+
+If you want us to handle this conversion for you, you can contact our [Customer Success](mailto:customer-success@neon.tech) team to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
 
 ## Limitations
 

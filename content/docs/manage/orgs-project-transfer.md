@@ -29,7 +29,7 @@ Make sure you're in your personal account. Find the project you want to transfer
 
 ### Transfer projects in bulk
 
-Navigate to the Organization you want to import projects into. In the **Billing** section, find **Transfer projects** in the list of "Get Started with your paid plan" actions. From this action, you can choose the projects you want to transfer &#8212; either all of them or a selection. The available projects are listed from your personal account.
+Navigate to the Organization you want to import projects into. In the **Billing** section, find **Transfer projects** in the list of "Get Started with your paid plan" actions. From this action, you can choose the projects you want to transfer &#8212; either all of them or a selection. The list of available projects is taken from existing projects in your personal account.
 
 ![transfer projects in bulk](/docs/manage/transfer_bulk.gif)
 
@@ -90,19 +90,20 @@ When your number of projects exceeds the Console transfer limit of 200 (or the A
 1. **Replace placeholders**: Update the script with your actual API key and organization ID.
    - Your API key belongs to your Personal Account. See [API actions](/docs/manage/orgs-api#using-the-api-key) to learn more.
    - To find your organization ID, see [Finding your org_id](/docs/manage/orgs-api#finding-your-orgid).
-2. **Set up your environment**: Ensure Python is installed, along with the `requests` library (`pip install requests`).
-3. **Run the script**: Execute the script locally to transfer projects.
+1. **Run the script**: Execute the script locally to transfer projects.
 
 The script will efficiently handle large project transfers by splitting them into manageable batches of 400 projects at a time.
+<Tabs labels={["Python", "Bash"]}>
 
-```python
+<TabItem>
+```python shouldWrap
 import requests
 
 # Configuration
 API_KEY = "your_api_key_here"
 ORG_ID = "org-dry-haze-00120778"
 TRANSFER_API_URL = "https://console.neon.tech/api/v2/users/me/projects/transfer"
-PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=10&org_id={ORG_ID}"
+PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=400&org_id={ORG_ID}"
 HEADERS = {
     "accept": "application/json",
     "Authorization": f"Bearer {API_KEY}"
@@ -124,7 +125,7 @@ def fetch_all_projects():
         data = response.json()
         projects.extend(data.get("projects", []))
         
-        cursor = data.get("next_cursor")
+        cursor = data.get("pagination").get("cursor")
         if not cursor:
             break
     
@@ -141,6 +142,8 @@ def transfer_projects(project_ids):
         print(f"Successfully transferred projects: {project_ids}")
     elif response.status_code == 406:
         print("Transfer failed due to insufficient organization limits.")
+    elif response.status_code == 501:
+        print("Transfer failed because one 1 more projects have integration linked.")
     else:
         print(f"Transfer failed: {response.text}")
 
@@ -158,3 +161,95 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+</TabItem>
+
+<TabItem>
+
+```bash shouldWrap
+#!/bin/bash
+
+# Configuration
+API_KEY="your_api_key_here"
+ORG_ID="org-dry-haze-00120778"
+TRANSFER_API_URL="https://console.neon.tech/api/v2/users/me/projects/transfer"
+PROJECTS_API_URL="https://console.neon.tech/api/v2/projects?limit=400&org_id=$ORG_ID"
+HEADERS=(
+    "-H" "accept: application/json"
+    "-H" "Authorization: Bearer $API_KEY"
+)
+
+# Function to fetch all projects
+fetch_all_projects() {
+    local projects=()
+    local cursor=""
+    
+    while :; do
+        local url="$PROJECTS_API_URL"
+        if [[ -n "$cursor" ]]; then
+            url="${url}&cursor=$cursor"
+        fi
+
+        local response
+        response=$(curl -s "${HEADERS[@]}" "$url")
+        
+        if [[ $(echo "$response" | jq -r '.status_code') != 200 && $(echo "$response" | jq -r '.status_code') != null ]]; then
+            echo "Failed to fetch projects: $(echo "$response" | jq -r '.message')"
+            exit 1
+        fi
+
+        projects+=($(echo "$response" | jq -r '.projects[].id'))
+        cursor=$(echo "$response" | jq -r '.pagination.cursor')
+        
+        if [[ -z "$cursor" || "$cursor" == "null" ]]; then
+            break
+        fi
+    done
+
+    echo "${projects[@]}"
+}
+
+# Function to transfer projects
+transfer_projects() {
+    local project_ids=("$@")
+    local payload
+    payload=$(jq -n \
+        --argjson project_ids "$(printf '%s\n' "${project_ids[@]}" | jq -R . | jq -s .)" \
+        --arg destination_org_id "$ORG_ID" \
+        '{project_ids: $project_ids, destination_org_id: $destination_org_id}')
+
+    local response
+    response=$(curl -s -X POST "${HEADERS[@]}" -d "$payload" "$TRANSFER_API_URL")
+
+    local status_code
+    status_code=$(echo "$response" | jq -r '.status_code')
+
+    if [[ "$status_code" == 200 ]]; then
+        echo "Successfully transferred projects: ${project_ids[*]}"
+    elif [[ "$status_code" == 406 ]]; then
+        echo "Transfer failed due to insufficient organization limits."
+    elif [[ "$status_code" == 501 ]]; then
+        echo "Transfer failed because one or more projects have integration linked."
+    else
+        echo "Transfer failed: $(echo "$response" | jq -r '.message')"
+    fi
+}
+
+# Main function
+main() {
+    all_projects=($(fetch_all_projects))
+    echo "Fetched ${#all_projects[@]} projects."
+
+    # Split the projects into batches of 400 for transfer
+    local batch_size=400
+    for ((i = 0; i < ${#all_projects[@]}; i += batch_size)); do
+        batch=("${all_projects[@]:i:batch_size}")
+        transfer_projects "${batch[@]}"
+    done
+}
+
+main
+```
+
+</TabItem>
+</Tabs>
