@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-08-07T21:36:52.667Z'
 ---
 
-This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities. 
+This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.
 
 A schema-only migration may be necessary in certain scenarios. For example, when replicating data between two Postgres instances, the tables defined in your publication on the source database must also exist in the destination database, and they must have the same table names and columns. A schema dump and reload in this case may be faster than trying to manually create the required schema on the destination database.
 
@@ -29,7 +29,7 @@ When you're dumping or restoring on Neon, you can input your Neon connection str
 
 ## Review and modify the dumped schema
 
-After dumping a schema to an `.sql` file, review it for statements that you don't want to replicate or that won't be supported on your destination database, and comment them out. For example, when dumping a schema from AlloyDB, you might see some statements like these, which you can comment out if you're loading the schema into Neon, where they won't be supported: 
+After dumping a schema to an `.sql` file, review it for statements that you don't want to replicate or that won't be supported on your destination database, and comment them out. For example, when dumping a schema from AlloyDB, you might see some statements like these, which you can comment out if you're loading the schema into Neon, where they won't be supported:
 
 ```sql
 - ALTER SCHEMA public OWNER TO alloydbsuperuser;
@@ -54,4 +54,3 @@ After you've loaded the schema, you can view the result with this `psql` command
 ```sql
 \dt
 ```
-
