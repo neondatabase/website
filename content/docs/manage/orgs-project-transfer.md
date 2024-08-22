@@ -100,18 +100,19 @@ The script will efficiently handle large project transfers by splitting them int
 import requests
 
 # Configuration
+
 API_KEY = "your_api_key_here"
 ORG_ID = "org-dry-haze-00120778"
 TRANSFER_API_URL = "https://console.neon.tech/api/v2/users/me/projects/transfer"
 PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=400&org_id={ORG_ID}"
 HEADERS = {
-    "accept": "application/json",
-    "Authorization": f"Bearer {API_KEY}"
+"accept": "application/json",
+"Authorization": f"Bearer {API_KEY}"
 }
 
 def fetch_all_projects():
-    projects = []
-    cursor = None
+projects = []
+cursor = None
 
     while True:
         url = PROJECTS_API_URL
@@ -124,7 +125,7 @@ def fetch_all_projects():
 
         data = response.json()
         projects.extend(data.get("projects", []))
-        
+
         cursor = data.get("pagination").get("cursor")
         if not cursor:
             break
@@ -132,10 +133,10 @@ def fetch_all_projects():
     return projects
 
 def transfer_projects(project_ids):
-    payload = {
-        "project_ids": project_ids,
-        "destination_org_id": ORG_ID
-    }
+payload = {
+"project_ids": project_ids,
+"destination_org_id": ORG_ID
+}
 
     response = requests.post(TRANSFER_API_URL, json=payload, headers=HEADERS)
     if response.status_code == 200:
@@ -148,8 +149,8 @@ def transfer_projects(project_ids):
         print(f"Transfer failed: {response.text}")
 
 def main():
-    all_projects = fetch_all_projects()
-    print(f"Fetched {len(all_projects)} projects.")
+all_projects = fetch_all_projects()
+print(f"Fetched {len(all_projects)} projects.")
 
     # Split the projects into batches of 400 for transfer
     batch_size = 400
@@ -158,9 +159,10 @@ def main():
         project_ids = [project["id"] for project in batch]
         transfer_projects(project_ids)
 
-if __name__ == "__main__":
-    main()
-```
+if **name** == "**main**":
+main()
+
+````
 
 </TabItem>
 
@@ -183,7 +185,7 @@ HEADERS=(
 fetch_all_projects() {
     local projects=()
     local cursor=""
-    
+
     while :; do
         local url="$PROJECTS_API_URL"
         if [[ -n "$cursor" ]]; then
@@ -192,7 +194,7 @@ fetch_all_projects() {
 
         local response
         response=$(curl -s "${HEADERS[@]}" "$url")
-        
+
         if [[ $(echo "$response" | jq -r '.status_code') != 200 && $(echo "$response" | jq -r '.status_code') != null ]]; then
             echo "Failed to fetch projects: $(echo "$response" | jq -r '.message')"
             exit 1
@@ -200,7 +202,7 @@ fetch_all_projects() {
 
         projects+=($(echo "$response" | jq -r '.projects[].id'))
         cursor=$(echo "$response" | jq -r '.pagination.cursor')
-        
+
         if [[ -z "$cursor" || "$cursor" == "null" ]]; then
             break
         fi
@@ -249,7 +251,7 @@ main() {
 }
 
 main
-```
+````
 
 </TabItem>
 </Tabs>
