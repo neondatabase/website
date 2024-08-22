@@ -42,7 +42,7 @@ Here's a breakdown of what actions each role can take:
 
 TBD
 
-![Create organization](/docs/manage/create_org.png)
+![Create organization](/docs/manage/orgs_create.png)
 
 ## Limitations
 

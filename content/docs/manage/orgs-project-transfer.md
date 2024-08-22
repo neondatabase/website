@@ -19,7 +19,7 @@ A few important points to keep in mind:
 
 ## Transfer from the Neon Console
 
-You can transfer indivual projects by selecting each project to transfer from your personal account, or you can transfer in bulk by starting from the destination Organization.
+You can transfer individual projects by selecting each project to transfer from your personal account, or you can transfer in bulk by starting from the destination Organization.
 
 ### Transfer a single project
 
