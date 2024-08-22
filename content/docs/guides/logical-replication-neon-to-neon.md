@@ -4,7 +4,7 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
   Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-20T23:55:48.548Z'
+updatedOn: '2024-08-22T02:18:02.652Z'
 ---
 
 <LRBeta/>

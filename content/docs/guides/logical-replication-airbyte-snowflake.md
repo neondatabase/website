@@ -3,7 +3,7 @@ title: Replicate data to Snowflake with Airbyte
 subtitle: Learn how to replicate data from Neon to Snowflake with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-20T23:55:48.542Z'
+updatedOn: '2024-08-22T02:18:02.645Z'
 ---
 
 <LRBeta/>
