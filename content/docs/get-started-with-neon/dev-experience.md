@@ -13,7 +13,7 @@ Discover how Neon's features can streamline your development process, reduce ris
 
 Neon's branching feature lets you branch your data like you branch code. Neon branches are full database copies, including both schema and data. You can instantly create database branches for integration with your development workflows.
 
-![Branching workflows](/docs/get-started-with-neon/branching_workflow.jpg)
+![Neon Postgres database branching workflow](/docs/get-started-with-neon/branching_workflow.jpg)
 
 You can build your database branching workflows using the Neon CLI, Neon API, or GitHub Actions. For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
@@ -53,7 +53,7 @@ To help you find the correct restore point, Neon provides a [Time Travel Assist]
 
 The [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), which currently has over [100K weekly downloads](https://www.npmjs.com/package/@neondatabase/serverless), is a low-latency Postgres driver designed for JavaScript and TypeScript applications. It enables you to query data from edge and serverless environments like **Vercel Edge Functions** or **Cloudflare Workers** over HTTP or WebSockets instead of TCP. This capability is particularly useful for achieving reduced query latencies, with the potential to achieve [sub-10ms Postgres query times](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) when querying from Edge or serverless functions. But don't take our word for it. Try it for yourself with Vercel's [Functions + Database Latency app](https://db-latency.vercel.app/). This graph shows latencies for Neon's serverless driver:
 
-![Vercel's Functions Database Latency app](/docs/get-started-with-neon/latency_distribution_graph.png)
+![Vercel's Functions Database Latency graph displaying latency distribution for Neon database queries](/docs/get-started-with-neon/latency_distribution_graph.png)
 
 ## Postgres extension support
 
