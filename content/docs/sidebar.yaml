@@ -230,16 +230,29 @@
       items:
         - section: Access control
           items:
-            - title: E-mail signup
-              slug: manage/email-signup
+            - title: Accounts
+              slug: manage/accounts
             - title: Organizations
               slug: manage/organizations
+              items:
+                - title: Getting started
+                  slug: manage/organizations
+                - title: Manage Organizations
+                  slug: manage/orgs-manage
+                - title: Transfer projects
+                  slug: manage/orgs-project-transfer
+                - title: API actions
+                  slug: manage/orgs-api
+                - title: CLI actions
+                  slug: manage/orgs-cli
             - title: Project access
               slug: manage/project-access
             - title: Project sharing
               slug: guides/project-sharing-guide
             - title: Database access
               slug: manage/database-access
+            - title: E-mail signup
+              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
         - section: Projects
