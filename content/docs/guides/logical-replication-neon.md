@@ -27,17 +27,17 @@ This notice applies when replicating data to Neon:
 
 - **Duplicate subscriptions when branching from a subscriber**: When a child branch is created, restored, or reset from a parent branch that is a subscriber in a logical replication configuration, any subscription defined on the parent branch is duplicated on the child branch. This duplicate subscription will attempt to establish a connection to the same publisher, potentially leading to "slot already used" errors. Additionally, if the parent branch's compute is suspended, the child branch might take over as the subscriber, which can result in a replication gap on the parent branch as updates are directed to the child branch.
 
-To avoid interruptions and inconsistencies, it’s strongly recommended to disable and drop the duplicate subscriptions on child branches using the following commands:
+  To avoid interruptions and inconsistencies, it’s strongly recommended to disable and drop the duplicate subscriptions on child branches using the following commands:
 
-```sql
-ALTER SUBSCRIPTION subscription_name DISABLE;
-ALTER SUBSCRIPTION subscription_name SET (slot_name = NONE);
-DROP SUBSCRIPTION subscription_name;
-```
+  ```sql
+  ALTER SUBSCRIPTION subscription_name DISABLE;
+  ALTER SUBSCRIPTION subscription_name SET (slot_name = NONE);
+  DROP SUBSCRIPTION subscription_name;
+  ```
 
-Even with this workaround, the replication gap issue can still occur if the parent branch is suspended before the duplicate subscription on a child branch is disabled. Therefore, we encourage you to take this action promptly on newly created, restored, or reset child branches.
+  Even with this workaround, the replication gap issue can still occur if the parent branch is suspended before the duplicate subscription on a child branch is disabled. Therefore, we encourage you to take this action promptly on newly created, restored, or reset child branches.
 
-This issue will be addressed in an upcoming release.
+  This issue will be addressed in an upcoming release.
 
 ## Logical replication and autosuspend
 
