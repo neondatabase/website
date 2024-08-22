@@ -11,6 +11,8 @@ The following visualization shows how Neon’s autoscaling works throughout a ty
 
 ![visualization for autoscaling](/docs/introduction/autoscaling_intro.png)
 
+To dive deeper into how Neon's autoscaling algorithm operates, visit [Understanding Neon’s autoscaling algorithm](/docs/guides/autoscaling-algorithm).
+
 ## Autoscaling benefits
 
 Neon's Autoscaling feature offers the following benefits:
