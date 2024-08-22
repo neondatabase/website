@@ -30,7 +30,9 @@ To learn more about Postgres logical replication, see the following topics.
 
 <a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
 
-<a href="/docs/guides/logical-replication-neon" description="Learn how to manage logical replication in Neon" icon="screen">Manage logical replication</a>
+<a href="/docs/guides/logical-replication-manage" description="Commands for managing your logical replication configuration" icon="cli">Logical replication commands</a>
+
+<a href="/docs/guides/logical-replication-neon" description="Information about logical replication specific to Neon" icon="screen">Logical replication in Neon</a>
 
 </DetailIconCards>
 
@@ -45,8 +47,6 @@ To get started, jump into one of our step-by-step logical replication guides.
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
 <a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
-
-<a href="https://docs.peerdb.io/connect/postgres/neon_postgres" title="ClickHouse" description="Create a Neon Postgres peer for replication with PeerDB (PeerDB docs)" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-clickhouse" title="DoubleCloud" description="Replicate data from Neon to ClickHouse with DoubleCloud" icon="neon"></a>
 

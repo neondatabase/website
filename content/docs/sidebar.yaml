@@ -133,6 +133,8 @@
               slug: import/import-from-postgres-pg-import
             - title: Import from a Neon project
               slug: import/import-from-neon
+            - title: Import schema only
+              slug: import/import-schema-only
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL
@@ -222,7 +224,9 @@
           items:
             - title: Concepts
               slug: guides/logical-replication-concepts
-            - title: Manage
+            - title: Commands
+              slug: guides/logical-replication-manage
+            - title: Neon specifics
               slug: guides/logical-replication-neon
         - title: Read replicas
           slug: introduction/read-replicas
@@ -475,10 +479,8 @@
               slug: guides/logical-replication-airbyte
             - title: Bemi
               slug: guides/bemi
-            - title: ClickHouse CDC with PeerDB
+            - title: ClickHouse
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
-            - title: ClickHouse PeerDB replication
-              slug: https://docs.peerdb.io/connect/postgres/neon_postgres
             - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
             - title: Confluent
