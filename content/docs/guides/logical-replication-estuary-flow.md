@@ -8,8 +8,6 @@ updatedOn: '2024-08-19T15:50:00.000Z'
 
 ---
 
-<LRNotice/>
-
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Estuary Flow](https://estuary.dev/) is a real-time data streaming platform that allows you to connect, transform, and move data from various sources to destinations with sub-100ms latency.
@@ -20,6 +18,7 @@ In this guide, you will learn how to configure a Postgres source connector in Es
 
 - An [Estuary Flow account](https://dashboard.estuary.dev/register) (start free, no credit card required)
 - A [Neon account](https://console.neon.tech/)
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Enable Logical Replication in Neon
 
@@ -47,7 +46,17 @@ SHOW wal_level;
 
 It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon Console, CLI, or API are granted membership in the [neon_superuser](https://docs.neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["Neon Console", "CLI", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+
+<TabItem>
+
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+
+```bash
+neon roles create --name cdc_role
+```
+
+</TabItem>
 
 <TabItem>
 
@@ -55,21 +64,12 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Roles**.
+3. Select **Branches**.
 4. Select the branch where you want to create the role.
-5. Click **New Role**.
-6. In the role creation dialog, specify a role name.
-7. Click **Create**. The role is created and you are provided with the password for the role.
-
-</TabItem>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
-
-```bash
-neon roles create --name <role>
-```
+5. Select the **Roles & Databases** tab.
+6. Click **Add Role**.
+7. In the role creation dialog, specify a role name (e.g., `cdc_role`).
+8. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
@@ -115,7 +115,7 @@ CREATE PUBLICATION estuary_publication FOR TABLE <tbl1, tbl2, tbl3>;
 
 Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication. Alternatively, you also can create a publication `FOR ALL TABLES`.
 
-Upon start-up, the Estuary Flow connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres. The slot's name will be prefixed with `estuary_`, followed by a unique identifier.
+Upon startup, the Estuary Flow connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres. The slot's name will be prefixed with `estuary_`, followed by a unique identifier.
 
 <Admonition type="important">
 To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](https://docs.neon.tech/docs/logical-replication-neon#unused-replication-slots) to learn more.
@@ -141,7 +141,7 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
    
-   - **Name: **: Name of the Capture connector
+   - **Name:**: Name of the Capture connector
    - **Server Address**: ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432
    - **User**: cdc_role
    - **Password**: Click **Add a new secret...**, then specify a name for that secret and `AbC123dEf` as its value
@@ -149,7 +149,7 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
    ![Configuring Neon capture in Estuary Flow](/docs/guides/estuary_flow_configure_neon_capture.png)
 
-3. Click **Next**. Estuary Flow will now scan the source database for all the tables that can be replicated. Select one or more table(s) by checking the checkbox next to their name.
+3. Click **Next**. Estuary Flow will now scan the source database for all the tables that can be replicated. Select one or more tables by checking the checkbox next to their name.
 Optionally, you can change the name of the destination name for each table. You can also take a look at the schema of each stream by clicking on the **Collection** tab.
 
    ![Selecting collections for replication in Estuary Flow](/docs/guides/estuary_flow_configure_collections.png)

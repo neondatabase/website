@@ -32,6 +32,8 @@ To learn more about Postgres logical replication, see [Learn about logical repli
 
 <a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse (DoubleCloud)" icon="clickhouse"></a>
 
+<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
+
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Kafka" description="Replicate data from Neon with Kafka (Confluent)" icon="kafka"></a>
