@@ -24,7 +24,7 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 
 ## Enabling logical replication
 
-In Neon, you can enable logical replication from the Neon Console. This only necessary if your Neon Postgres instance is acting as a publisher, replicating data to another Postgres instance, data service, or platform. 
+In Neon, you can enable logical replication from the Neon Console. This only necessary if your Neon Postgres instance is acting as a publisher, replicating data to another Postgres instance, data service, or platform.
 
 To enable logical replication:
 
