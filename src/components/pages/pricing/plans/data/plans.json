@@ -366,6 +366,16 @@
       "launch": true,
       "scale": true,
       "enterprise": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Custom domain proxy"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "enterprise": true
     }
   ]
 }
