@@ -1,6 +1,7 @@
 ---
 title: Manage Organizations using the Neon CLI
 enableTableOfContents: true
+updatedOn: '2024-08-23T13:51:17.454Z'
 ---
 
 <EarlyAccess/>
