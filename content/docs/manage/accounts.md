@@ -26,7 +26,7 @@ If you want to work with other people on this project, your options are:
 
 <EarlyAccess/>
 
-Any Neon user in our Early Access Program can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows for sharing projects across the various members that make up your team. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to.
+Any Neon user in our Early Access Program can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows you to share projects with your team members. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to.
 
 From the Neon Console, you can navigate to your Organization dashboard, where you'll find all projects in the organization and be able to take any actions that your permissions allow.
 
