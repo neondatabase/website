@@ -151,8 +151,8 @@ def transfer_projects(project_ids):
         print(f"Transfer failed: {response.text}")
 
 def main():
-all_projects = fetch_all_projects()
-print(f"Fetched {len(all_projects)} projects.")
+   all_projects = fetch_all_projects()
+   print(f"Fetched {len(all_projects)} projects.")
 
     # Split the projects into batches of 400 for transfer
     batch_size = 400
