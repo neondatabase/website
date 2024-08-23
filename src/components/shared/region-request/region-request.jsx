@@ -1,6 +1,5 @@
 'use client';
 
-
 import {
   Combobox,
   ComboboxButton,
@@ -213,7 +212,7 @@ const RegionRequest = ({
               onChange={(value) => setSelected(value)}
               onClose={() => setQuery('')}
             >
-              <div className="relative ">
+              <div className="relative">
                 <ComboboxInput
                   className={clsx(
                     'w-full rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6 text-black',
@@ -221,18 +220,19 @@ const RegionRequest = ({
                   )}
                   displayValue={(option) => option?.name}
                   autoComplete="off"
+                  placeholder="Select a region"
                   onChange={(event) => setQuery(event.target.value)}
                 />
                 <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
                   <ChevronIcon className="size-4 stroke-black/60 group-data-[hover]:stroke-black" />
                 </ComboboxButton>
               </div>
-
               <ComboboxOptions
                 anchor="bottom"
+                portal={false}
                 className={clsx(
-                  'max-h-64 w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible',
-                  'max-h-64 transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
+                  'w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
+                  'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
                 )}
                 transition
               >
@@ -243,9 +243,7 @@ const RegionRequest = ({
                     className="group flex cursor-default select-none items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-black/10"
                   >
                     <CheckIcon className="invisible size-4 fill-black group-data-[selected]:visible" />
-                    <div className="text-sm/6 text-black">
-                      {option.name} <code className="bg-gray-8 px-1">{option.id}</code>
-                    </div>
+                    <div className="text-sm/6 text-black">{option.name}</div>
                   </ComboboxOption>
                 ))}
               </ComboboxOptions>
