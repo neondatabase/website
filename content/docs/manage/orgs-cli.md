@@ -35,7 +35,7 @@ See [Orgs - CLI](/docs/reference/cli-orgs) to learn more.
 
 ## Manage projects within an Organization
 
-The Neon CLI `projects` command now supports an `--org-id` option. This allows you to list or create projects within a specified organization.
+The Neon CLI `projects` command supports an `--org-id` option. This allows you to list or create projects within a specified organization.
 
 Example: Listing all projects in an organization:
 
