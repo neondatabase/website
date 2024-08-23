@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2024-08-22T02:18:02.649Z'
 ---
 
-<LRBeta/>
-
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can then manage directly from your browser. Fivetran extracts your data and loads it into your data destination.

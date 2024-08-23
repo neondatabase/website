@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2024-08-22T02:18:02.649Z'
 ---
 
-<LRBeta/>
-
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 [Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing,

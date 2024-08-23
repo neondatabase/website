@@ -7,8 +7,6 @@ isDraft: false
 updatedOn: '2024-08-22T02:18:02.643Z'
 ---
 
-<LRBeta/>
-
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
 Designed with simplicity and non-invasiveness in mind, Bemi doesn't require alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
