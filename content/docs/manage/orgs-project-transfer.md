@@ -100,12 +100,10 @@ The script will efficiently handle large project transfers by splitting them int
 ```python shouldWrap
 import requests
 
-# Configuration
-
 API_KEY = "your_api_key_here"
-ORG_ID = "org-dry-haze-00120778"
+ORG_ID = "your_org_id_here"
 TRANSFER_API_URL = "https://console.neon.tech/api/v2/users/me/projects/transfer"
-PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=400&org_id={ORG_ID}"
+PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=400"
 HEADERS = {
 "accept": "application/json",
 "Authorization": f"Bearer {API_KEY}"
@@ -126,9 +124,11 @@ cursor = None
 
         data = response.json()
         projects.extend(data.get("projects", []))
+        if len(projects) == 0:
+            break
 
-        cursor = data.get("pagination").get("cursor")
-        if not cursor:
+        cursor = data.get("pagination", {}).get("cursor")
+        if cursor == projects[-1].get("id"):
             break
 
     return projects
@@ -136,7 +136,7 @@ cursor = None
 def transfer_projects(project_ids):
 payload = {
 "project_ids": project_ids,
-"destination_org_id": ORG_ID
+"org_id": ORG_ID
 }
 
     response = requests.post(TRANSFER_API_URL, json=payload, headers=HEADERS)
@@ -145,7 +145,7 @@ payload = {
     elif response.status_code == 406:
         print("Transfer failed due to insufficient organization limits.")
     elif response.status_code == 501:
-        print("Transfer failed because one 1 more projects have integration linked.")
+        print("Transfer failed because one or more projects have integration linked.")
     else:
         print(f"Transfer failed: {response.text}")
 
@@ -174,84 +174,90 @@ main()
 
 # Configuration
 API_KEY="your_api_key_here"
-ORG_ID="org-dry-haze-00120778"
+ORG_ID="your_org_id_here"
 TRANSFER_API_URL="https://console.neon.tech/api/v2/users/me/projects/transfer"
-PROJECTS_API_URL="https://console.neon.tech/api/v2/projects?limit=400&org_id=$ORG_ID"
-HEADERS=(
-    "-H" "accept: application/json"
-    "-H" "Authorization: Bearer $API_KEY"
-)
+PROJECTS_API_URL="https://console.neon.tech/api/v2/projects?limit=400"
+HEADERS=(-H "Content-Type: application/json" -H "Authorization: Bearer $API_KEY")
 
-# Function to fetch all projects
 fetch_all_projects() {
-    local projects=()
-    local cursor=""
+  local projects=()
+  local cursor=""
+  local response=""
+  local data=""
+  local next_cursor=""
 
-    while :; do
-        local url="$PROJECTS_API_URL"
-        if [[ -n "$cursor" ]]; then
-            url="${url}&cursor=$cursor"
-        fi
-
-        local response
-        response=$(curl -s "${HEADERS[@]}" "$url")
-
-        if [[ $(echo "$response" | jq -r '.status_code') != 200 && $(echo "$response" | jq -r '.status_code') != null ]]; then
-            echo "Failed to fetch projects: $(echo "$response" | jq -r '.message')"
-            exit 1
-        fi
-
-        projects+=($(echo "$response" | jq -r '.projects[].id'))
-        cursor=$(echo "$response" | jq -r '.pagination.cursor')
-
-        if [[ -z "$cursor" || "$cursor" == "null" ]]; then
-            break
-        fi
-    done
-
-    echo "${projects[@]}"
-}
-
-# Function to transfer projects
-transfer_projects() {
-    local project_ids=("$@")
-    local payload
-    payload=$(jq -n \
-        --argjson project_ids "$(printf '%s\n' "${project_ids[@]}" | jq -R . | jq -s .)" \
-        --arg destination_org_id "$ORG_ID" \
-        '{project_ids: $project_ids, destination_org_id: $destination_org_id}')
-
-    local response
-    response=$(curl -s -X POST "${HEADERS[@]}" -d "$payload" "$TRANSFER_API_URL")
-
-    local status_code
-    status_code=$(echo "$response" | jq -r '.status_code')
-
-    if [[ "$status_code" == 200 ]]; then
-        echo "Successfully transferred projects: ${project_ids[*]}"
-    elif [[ "$status_code" == 406 ]]; then
-        echo "Transfer failed due to insufficient organization limits."
-    elif [[ "$status_code" == 501 ]]; then
-        echo "Transfer failed because one or more projects have integration linked."
+  while true; do
+    if [ -n "$cursor" ]; then
+      response=$(curl -s "${HEADERS[@]}" "${PROJECTS_API_URL}&cursor=$cursor")
     else
-        echo "Transfer failed: $(echo "$response" | jq -r '.message')"
+      response=$(curl -s "${HEADERS[@]}" "$PROJECTS_API_URL")
     fi
+
+    if [ $? -ne 0 ]; then
+      echo "Failed to fetch projects: $response" >&2
+      exit 1
+    fi
+
+    data=$(echo "$response" | jq '.projects')
+    projects+=($(echo "$data" | jq -r '.[] | .id'))
+
+    if [ ${#projects[@]} -eq 0 ]; then
+      break
+    fi
+
+    next_cursor=$(echo "$response" | jq -r '.pagination.cursor // ""')
+
+    # Check if we have reached the last cursor
+    last_project_id="${projects[${#projects[@]} - 1]]}"
+    if [ -z "$next_cursor" ] || [ "$next_cursor" == "$last_project_id" ]; then
+      break
+    fi
+
+    cursor=$next_cursor
+  done
+
+  echo "${projects[@]}"
 }
 
-# Main function
-main() {
-    all_projects=($(fetch_all_projects))
-    echo "Fetched ${#all_projects[@]} projects."
+transfer_projects() {
+  local project_ids=("$@")
+  local project_ids_json=$(printf '%s\n' "${project_ids[@]}" | jq -R . | jq -s)
+  local payload='{"org_id": "'"${ORG_ID}"'", "project_ids": '"${project_ids_json}"'}'
 
-    # Split the projects into batches of 400 for transfer
-    local batch_size=400
-    for ((i = 0; i < ${#all_projects[@]}; i += batch_size)); do
-        batch=("${all_projects[@]:i:batch_size}")
-        transfer_projects "${batch[@]}"
-    done
+  local response=$(curl -s -o /dev/stderr -w "%{http_code}" -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $API_KEY" \
+    -d "$payload" \
+    "$TRANSFER_API_URL")
+
+  local status_code=$(echo "$response" | sed -n '$p')
+  local response_body=$(echo "$response" | sed '$d')
+
+  if [ "$status_code" == "200" ]; then
+    echo "Successfully transferred projects: ${project_ids[*]}"
+  elif [ "$status_code" == "406" ]; then
+    echo "Transfer failed due to insufficient organization limits."
+  elif [ "$status_code" == "501" ]; then
+    echo "Transfer failed because one or more projects have integration linked."
+  else
+    echo "Transfer failed: $response_body"
+  fi
+}
+
+main() {
+  local all_projects=($(fetch_all_projects))
+  echo "Fetched ${#all_projects[@]} projects."
+
+  # Split projects into batches of 400 for transfer
+  local batch_size=400
+  for ((i = 0; i < ${#all_projects[@]}; i += batch_size)); do
+    batch=("${all_projects[@]:i:batch_size}")
+    transfer_projects "${batch[@]}"
+  done
 }
 
 main
+
 ````
 
 </TabItem>
