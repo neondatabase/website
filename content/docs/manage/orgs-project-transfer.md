@@ -224,11 +224,14 @@ transfer_projects() {
   local project_ids_json=$(printf '%s\n' "${project_ids[@]}" | jq -R . | jq -s)
   local payload='{"org_id": "'"${ORG_ID}"'", "project_ids": '"${project_ids_json}"'}'
 
-  echo "${payload}"
-  echo "${TRANSFER_API_URL}"
-  echo "${HEADERS[@]}"
-  local response=$(curl -s -X POST "${HEADERS[@]}" -d "$payload" "$TRANSFER_API_URL")
-  local status_code=$(echo "$response" | jq -r '.status_code // empty')
+  local response=$(curl -s -o /dev/stderr -w "%{http_code}" -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $API_KEY" \
+    -d "$payload" \
+    "$TRANSFER_API_URL")
+
+  local status_code=$(echo "$response" | sed -n '$p')
+  local response_body=$(echo "$response" | sed '$d')
 
   if [ "$status_code" == "200" ]; then
     echo "Successfully transferred projects: ${project_ids[*]}"
@@ -237,7 +240,7 @@ transfer_projects() {
   elif [ "$status_code" == "501" ]; then
     echo "Transfer failed because one or more projects have integration linked."
   else
-    echo "Transfer failed: $response"
+    echo "Transfer failed: $response_body"
   fi
 }
 
@@ -254,6 +257,7 @@ main() {
 }
 
 main
+
 ````
 
 </TabItem>
