@@ -14,12 +14,11 @@ Learn how to manage your organization's projects, invite Members and Guests, rev
       <li><a href="#invite-members">Invite Member</a></li>
       <li><a href="#invite-guests">Invite Guests</a></li>
       <li><a href="#set-permissions" style={{ cursor: 'pointer' }} >Set permissions</a></li>
-      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
     </ul>
   </div>
   <div style={{ flex: 1 }}>
     <ul>
-      <li><a href="#share-projects">Share projects</a></li>
+      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
       <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
       <li><a href="#delete-an-organization">Delete an organization</a></li>
       <li><a href="#billing">Billing</a></li>
@@ -57,22 +56,18 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Invite Guests
 
-Admins can also invite external Guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization itself but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with Me**.
-
-<Admonition type="note">
-Any users you've already shared projects with will appear as Guests on the **Guests** page if those projects were transferred during the organization conversion.
-</Admonition>
+All members can invite external Guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with Me**.
 
 ![organization guests](/docs/manage/org_guests.png)
 
-To invite new Guests, click **Invite guests** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to.
+To invite new Guests, click **Invite guests** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to. These users will receive an email inviting them to the project.
 
 ### Manage Guests
 
 Click the kebab menu next to the row in the **Guests** table to manage Guest access. You have two options:
 
-- **Convert to member** — promote the Guest to a full Member, granting access to all projects in the organization.
-- **Remove from project** — revoke the Guest's access to the shared project.
+- **Convert to member** — Admins can promote the Guest to a full Member, granting access to all projects in the organization.
+- **Remove from project** — All members can revoke the Guest's access to the shared project.
 
   ![guests kebab](/docs/manage/orgs_guests_kebab.png 'no-border')
 
@@ -85,18 +80,6 @@ Members have different capabilities based on their roles:
 - Any Member can create a project under the organization's ownership.
 - Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
 - Admins can delete any project within the organization.
-
-## Share projects
-
-All members can share projects with external collaborators &#8212; and revoke that sharing at any point. You can do this from the **Guests** tab under the **People** page.
-
-![invite guests to project](/docs/manage/orgs_sharing.png)
-
-First, you select the project you want to share, then enter a comma-separated list of emails for people you want to share the project with. These recipients won't have access to the Organization dashboard, just to the individual shared project. It will show as a [shared project](/docs/guides/project-sharing-guide) on their personal account projects page. 
-
-Once created, all members then remove sharing for that person. Admins can also choose to convert a Guest to a Member at any point. Use the kebab next to that person's name in the Guest list. Here's an example of an Admin view, with both options available.
-
-![revoke sharing (admin view)](/docs/manage/orgs_revoke_sharing.png)
 
 ## Passwordless authentication
 
