@@ -53,7 +53,7 @@ export default {
   termsOfService: '/terms-of-service',
   thankYou: '/thank-you',
   trust: 'https://trust.neon.tech',
-  variable: '/variable',
+  variableLoad: '/variable-load',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
 };
