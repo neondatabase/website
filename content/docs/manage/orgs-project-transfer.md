@@ -110,8 +110,8 @@ HEADERS = {
 }
 
 def fetch_all_projects():
-projects = []
-cursor = None
+   projects = []
+   cursor = None
 
     while True:
         url = PROJECTS_API_URL
@@ -134,10 +134,10 @@ cursor = None
     return projects
 
 def transfer_projects(project_ids):
-payload = {
-"project_ids": project_ids,
-"org_id": ORG_ID
-}
+   payload = {
+   "project_ids": project_ids,
+   "org_id": ORG_ID
+   }
 
     response = requests.post(TRANSFER_API_URL, json=payload, headers=HEADERS)
     if response.status_code == 200:
@@ -150,8 +150,8 @@ payload = {
         print(f"Transfer failed: {response.text}")
 
 def main():
-all_projects = fetch_all_projects()
-print(f"Fetched {len(all_projects)} projects.")
+   all_projects = fetch_all_projects()
+   print(f"Fetched {len(all_projects)} projects.")
 
     # Split the projects into batches of 400 for transfer
     batch_size = 400
@@ -160,8 +160,8 @@ print(f"Fetched {len(all_projects)} projects.")
         project_ids = [project["id"] for project in batch]
         transfer_projects(project_ids)
 
-if **name** == "**main**":
-main()
+if __name__ == "__main__":
+   main()
 
 ````
 
