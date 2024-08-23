@@ -10,7 +10,7 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 Neon is serverless Postgres. We take the world’s most loved database and deliver it as a serverless platform designed to help you build and scale SaaS applications faster thanks to features like instant provisioning, autoscaling, and database branching.
 
 - **Prototype for free.** You can get a Postgres database ready in less than a second with the [Neon Free tier](https://console.neon.tech/signup), with enough compute to run it 24/7.
-- **Iterate and ship faster.** Once you’re ready to build new features, take advantage of [database branches](/cases/development-velocity) to onboard engineers quickly. Integrate Neon with your CI/CD pipelines via [database branching workflows](/cases/development-velocity).
+- **Iterate and ship faster.** Once you’re ready to build new features, take advantage of [database branches](/flow) to onboard engineers quickly. Integrate Neon with your CI/CD pipelines via [database branching workflows](/flow).
 - **Scale as you go.** Once in production, [enable autoscaling to scale up resources in response to your workload](/variable-load), and watch your compute scale down automatically when you no longer need it to save costs.
 - **Grow your user base.** The Neon API enables you to serve +100K users without big teams or big budgets, even [when you need a database-per-user architecture](/cases/database-per-user).
 
@@ -18,25 +18,20 @@ Neon is serverless Postgres. We take the world’s most loved database and deliv
 
 The word serverless is thrown away with different meanings in the database world. For Neon, serverless means:
 
-✔️ Usage-based pricing. You are charged for the amount of compute and storage consumed by your workload, without overprovisioning.
-
-✔️ No server management. You don’t need to provision, maintain, or administer servers.
-
-✔️ Autoscaling. We automatically scale resources up or down based on demand, without requiring manual intervention.
-
-✔️ Managed infrastructure. The cloud provider (us) handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
-
-✔️ Focus on business logic. You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
-
-✔️ Built-in availability and fault tolerance.
+<div className="not-prose">
+- ✔️ Usage-based pricing. You are charged for the amount of compute and storage consumed by your workload, without overprovisioning.
+- ✔️ No server management. You don’t need to provision, maintain, or administer servers.
+- ✔️ Autoscaling. We automatically scale resources up or down based on demand, without requiring manual intervention.
+- ✔️ Managed infrastructure. The cloud provider (us) handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
+- ✔️ Focus on business logic. You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
+- ✔️ Built-in availability and fault tolerance.
+</div>
 
 To us, serverless does NOT mean…
 
-❌ Neon only works with Serverless architectures. While Neon works great with serverless tooling, it is 100% Postgrs—everything that works with Postgres works with Neon: Django, Rails, some bash script running in your basement, everything.
-
-❌ Pay per query. In Neon, there are two main billing metrics at the end of the month: compute and storage. You could run billions of queries for $19 month if they don’t need more resources than what is allotted in the [launch plan](/pricing).
-
-❌A bad actor or heavy traffic to your site could run your Neon bill from $19 to $19k in a month. You always define a maximum compute autoscaling limit, and you can always check what your maximum compute cost could theoretically be. Storage grows more slowly, and we always reach out to you if your storage usage is rising to make sure everything’s working as expected.
+- ❌ Neon only works with Serverless architectures. While Neon works great with serverless tooling, it is 100% Postgrs—everything that works with Postgres works with Neon: Django, Rails, some bash script running in your basement, everything.
+- ❌ Pay per query. In Neon, there are two main billing metrics at the end of the month: compute and storage. You could run billions of queries for $19 month if they don’t need more resources than what is allotted in the [launch plan](/pricing).
+- ❌ A bad actor or heavy traffic to your site could run your Neon bill from $19 to $19k in a month. You always define a maximum compute autoscaling limit, and you can always check what your maximum compute cost could theoretically be. Storage grows more slowly, and we always reach out to you if your storage usage is rising to make sure everything’s working as expected.
 
 ## Kickstart your SaaS project
 

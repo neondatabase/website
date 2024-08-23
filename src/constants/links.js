@@ -19,6 +19,7 @@ export default {
   contactSales: '/contact-sales',
   cookiePolicy: '/cookie-policy',
   creators: '/creators',
+  flow: '/flow',
   dashboard: 'https://console.neon.tech/sign_in',
   demos: '/demos',
   developerDays1: '/developer-days-1',

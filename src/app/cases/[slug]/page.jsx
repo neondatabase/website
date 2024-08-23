@@ -9,7 +9,7 @@ import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
-  const seoSlug = currentSlug.replace(/_/g, '-');
+  const seoSlug = `case${currentSlug.replace(/_/g, '-')}`;
   return getMetadata({ ...SEO_DATA[seoSlug], pathname: `/cases/${currentSlug}`, type: 'article' });
 }
 

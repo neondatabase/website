@@ -26,7 +26,7 @@ Traditionally, database deployments are _instance-based_, with each environment 
 - **Testing branches**: Temporary branches dedicated to automated testing.
 - **Development branches**: Where developers experiment and iterate on new features.
 
-![Adopting branch-based deployments](/cases/development-velocity/deployments.jpg)
+![Adopting branch-based deployments](/flow/deployments.jpg)
 
 ## Database Branching Workflows
 
@@ -43,7 +43,7 @@ To illustrate how a branch-based deployment model can be achieved in practice, w
    2. Each developer gets instant access to an isolated “copy” of production-like data.
    3. When the work is done, a developer can reset their development environment to the current state of `main` (both data and schema).
 
-![Database branching workflows](/cases/development-velocity/branching-workflows.jpg)
+![Database branching workflows](/flow/branching-workflows.jpg)
 
 ### Preview Environment Workflow
 

@@ -33,7 +33,7 @@ No more time-consuming restore operations when you need a fresh database copy.
 
 You can use branching with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own branching workflow, you can use the [Neon Vercel integration](https://vercel.com/integrations/neon) to set one up in just a few clicks.
 
-To learn more, read [Database Branching Workflows](https://neon.tech/cases/development-velocity), and the [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
+To learn more, read [Database Branching Workflows](https://neon.tech/flow), and the [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 
 <Admonition type="tip" title="Compare database branches with Schema Diff">
 Neon's Schema Diff tool lets you compare the schemas for two selected branches in a side-by-side view. For more, see [Schema Diff](/docs/guides/schema-diff).
