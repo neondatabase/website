@@ -2,15 +2,24 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import SEO_DATA from 'constants/seo-data';
+import LINKS from 'constants/links';
 import { CASES_DIR_PATH, getPostBySlug } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
-  const seoSlug = `case${currentSlug.replace(/_/g, '-')}`;
-  return getMetadata({ ...SEO_DATA[seoSlug], pathname: `/cases/${currentSlug}`, type: 'article' });
+
+  const post = getPostBySlug(currentSlug, CASES_DIR_PATH);
+
+  if (!post) return notFound();
+
+  return getMetadata({
+    title: post?.data?.title,
+    description: post?.data?.subtitle,
+    pathname: `${LINKS.cases}/${currentSlug}`,
+    type: 'article',
+  });
 }
 
 const CasePage = async ({ params }) => {
