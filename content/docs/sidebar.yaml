@@ -500,6 +500,8 @@
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
               slug: guides/logical-replication-decodable
+            - title: Estuary Flow
+              slug: guides/logical-replication-estuary-flow
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
