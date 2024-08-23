@@ -163,7 +163,7 @@ def main():
 
 if _name_ == "_main_":
 main()
-````
+```
 
 </TabItem>
 
@@ -257,7 +257,7 @@ main() {
 }
 
 main
-````
+```
 
 </TabItem>
 </Tabs>
