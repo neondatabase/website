@@ -7,7 +7,7 @@ enableTableOfContents: true
 
 Learn how to manage Neon Organizations using the Neon API, including creating projects, transferring projects, and retrieving consumption metrics.
 
-The `org_id` is your organization's unique identifier, used to makke sure your API requests are scoped to the right organization.
+The `org_id` is your organization's unique identifier, used to make sure your API requests are scoped to the right organization.
 
 ## Finding your org_id
 
