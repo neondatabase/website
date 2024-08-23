@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { notFound } from 'next/navigation';
+
 import Post from 'components/pages/doc/post';
 import SEO_DATA from 'constants/seo-data';
 import { CASES_DIR_PATH, getPostBySlug } from 'utils/api-docs';
@@ -13,7 +15,10 @@ export async function generateMetadata({ params }) {
 const CasePage = async ({ params }) => {
   const { slug: currentSlug } = params;
 
-  const { data, content } = getPostBySlug(currentSlug, CASES_DIR_PATH);
+  const post = getPostBySlug(currentSlug, CASES_DIR_PATH);
+  if (!post) return notFound();
+
+  const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
   const fileOriginPath = `${process.env.NEXT_PUBLIC_CASES_GITHUB_PATH}${currentSlug}.md`;
 
