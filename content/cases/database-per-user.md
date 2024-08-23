@@ -85,4 +85,4 @@ We know that your database is the most critical part of your stack. We also know
 - [Point-in-Time Recovery in Postgres](https://neon.tech/blog/point-in-time-recovery-in-postgres)
 - [Scaling Database-per-Tenant Architectures: Comparing Costs in RDS and Neon](https://medium.com/@carlotasotos/scaling-database-per-tenant-architectures-comparing-costs-in-rds-and-neon-abc8c55210e5)
 
-<CTA text="Questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />

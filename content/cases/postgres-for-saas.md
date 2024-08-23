@@ -18,20 +18,22 @@ Neon is serverless Postgres. We take the world’s most loved database and deliv
 
 The word serverless is thrown away with different meanings in the database world. For Neon, serverless means:
 
-<div className="not-prose">
-- ✔️ Usage-based pricing. You are charged for the amount of compute and storage consumed by your workload, without overprovisioning.
-- ✔️ No server management. You don’t need to provision, maintain, or administer servers.
-- ✔️ Autoscaling. We automatically scale resources up or down based on demand, without requiring manual intervention.
-- ✔️ Managed infrastructure. The cloud provider (us) handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
-- ✔️ Focus on business logic. You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
-- ✔️ Built-in availability and fault tolerance.
-</div>
+<CaseList theme="pros">
+- Usage-based pricing. You are charged for the amount of compute and storage consumed by your workload, without overprovisioning.
+- No server management. You don’t need to provision, maintain, or administer servers.
+- Autoscaling. We automatically scale resources up or down based on demand, without requiring manual intervention.
+- Managed infrastructure. The cloud provider (us) handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
+- Focus on business logic. You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
+- Built-in availability and fault tolerance.
+</CaseList>
 
 To us, serverless does NOT mean…
 
-- ❌ Neon only works with Serverless architectures. While Neon works great with serverless tooling, it is 100% Postgrs—everything that works with Postgres works with Neon: Django, Rails, some bash script running in your basement, everything.
-- ❌ Pay per query. In Neon, there are two main billing metrics at the end of the month: compute and storage. You could run billions of queries for $19 month if they don’t need more resources than what is allotted in the [launch plan](/pricing).
-- ❌ A bad actor or heavy traffic to your site could run your Neon bill from $19 to $19k in a month. You always define a maximum compute autoscaling limit, and you can always check what your maximum compute cost could theoretically be. Storage grows more slowly, and we always reach out to you if your storage usage is rising to make sure everything’s working as expected.
+<CaseList theme="cons">
+- Neon only works with Serverless architectures. While Neon works great with serverless tooling, it is 100% Postgrs—everything that works with Postgres works with Neon: Django, Rails, some bash script running in your basement, everything.
+- Pay per query. In Neon, there are two main billing metrics at the end of the month: compute and storage. You could run billions of queries for $19 month if they don’t need more resources than what is allotted in the [launch plan](/pricing).
+- A bad actor or heavy traffic to your site could run your Neon bill from $19 to $19k in a month. You always define a maximum compute autoscaling limit, and you can always check what your maximum compute cost could theoretically be. Storage grows more slowly, and we always reach out to you if your storage usage is rising to make sure everything’s working as expected.
+</CaseList>
 
 ## Kickstart your SaaS project
 
@@ -86,7 +88,7 @@ author={{
 />
 
 <div align="center">
-  [Read more →](/cases/database-per-user)
+  [Why database-per-user?](/cases/database-per-user)
 </div>
 
 ## Additional Resources
@@ -99,4 +101,4 @@ author={{
 - [Build a Full-stack E-Commerce app using React Native, Express, Zustand, Drizzle and Neon](https://www.youtube.com/watch?v=9pCsyBlpmrc)
 - [Let’s build an Intercom Clone with NEXT.JS 14! (Neon PostgreSQL, Clerk, AI Agent, OpenAI, IBM)](https://www.youtube.com/watch?v=6XezQQJGdjI)
 
-<CTA text="Questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />

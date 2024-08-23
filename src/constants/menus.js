@@ -14,16 +14,16 @@ import careersDarkIcon from 'icons/header/careers-dark.svg';
 import careersIcon from 'icons/header/careers.svg';
 import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
 import caseDatabaseIcon from 'icons/header/case-database.svg';
-import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
-import caseDevIcon from 'icons/header/case-dev.svg';
+// import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
+// import caseDevIcon from 'icons/header/case-dev.svg';
 import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
 import caseSaasIcon from 'icons/header/case-saas.svg';
 import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
 import caseVariableDarkIcon from 'icons/header/case-variable-dark.svg';
 import caseVariableIcon from 'icons/header/case-variable.svg';
-import caseVelocityDarkIcon from 'icons/header/case-velocity-dark.svg';
-import caseVelocityIcon from 'icons/header/case-velocity.svg';
+// import caseVelocityDarkIcon from 'icons/header/case-velocity-dark.svg';
+// import caseVelocityIcon from 'icons/header/case-velocity.svg';
 import changelogDarkIcon from 'icons/header/changelog-dark.svg';
 import changelogIcon from 'icons/header/changelog.svg';
 import cliDarkIcon from 'icons/header/cli-dark.svg';
@@ -124,15 +124,15 @@ export default {
           description: 'Autoscale according to load',
           to: LINKS.variableLoad,
         },
-        {
-          icon: {
-            light: caseDevIcon,
-            dark: caseDevDarkIcon,
-          },
-          text: 'Dev/Stage/Test',
-          description: 'Build and test on Neon',
-          to: `${LINKS.cases}/dev-stage-test`,
-        },
+        // {
+        //   icon: {
+        //     light: caseDevIcon,
+        //     dark: caseDevDarkIcon,
+        //   },
+        //   text: 'Dev/Stage/Test',
+        //   description: 'Build and test on Neon',
+        //   to: `${LINKS.cases}/dev-stage-test`,
+        // },
         {
           icon: {
             light: caseDatabaseIcon,
@@ -142,15 +142,15 @@ export default {
           description: 'Database-per-User',
           to: `${LINKS.cases}/database-per-user`,
         },
-        {
-          icon: {
-            light: caseVelocityIcon,
-            dark: caseVelocityDarkIcon,
-          },
-          text: 'Development Velocity',
-          description: 'Ship faster than ever',
-          to: `${LINKS.cases}/development-velocity`,
-        },
+        // {
+        //   icon: {
+        //     light: caseVelocityIcon,
+        //     dark: caseVelocityDarkIcon,
+        //   },
+        //   text: 'Development Velocity',
+        //   description: 'Ship faster than ever',
+        //   to: `${LINKS.cases}/development-velocity`,
+        // },
       ],
     },
     {

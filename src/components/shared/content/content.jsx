@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import CaseCta from 'components/pages/case/case-cta';
+import CaseList from 'components/pages/case/case-list';
 import Testimonial from 'components/pages/case/testimonial';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
@@ -133,6 +134,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isCase) 
   DocsList,
   CTA: isCase ? CaseCta : DocCta,
   Testimonial,
+  CaseList,
   ...sharedComponents,
 });
 
