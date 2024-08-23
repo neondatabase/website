@@ -21,6 +21,7 @@ Neon offers four plans:
 - [Free Plan](#free-plan)
 - [Launch](#launch)
 - [Scale](#scale)
+- [Business](#business)
 - [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
@@ -139,6 +140,46 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 - [Priority support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+
+## Business
+
+The Business plan is designed for mid-to-large enterprises requiring higher compute capacity and advanced security and compliance features.
+
+### Business plan allowances
+
+The Business plan includes the following usage allowances:
+
+| Usage type             | Plan allowance                                                                                      |
+|------------------------|-----------------------------------------------------------------------------------------------------|
+| **Projects**           | 50 Neon projects (additional projects at $5 each)                                                   |
+| **Branches**           | 500 per project                                                                                    |
+| **Databases**          | Unlimited                                                                                           |
+| **Storage**            | 500 GiB included, additional storage billed at $1.50 per GiB                                        |
+| **Compute**            | 1,000 compute hours included, additional compute billed at $0.16 per hour                          |
+| **Allowed IPs**        | Up to 100 IPs                                                                                      |
+| **Service SLA**        | 99.95% uptime                                                                                      |
+
+### Business plan extra usage
+
+Business plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which are allocated and billed automatically when plan allowances are exceeded.
+
+| Extra usage type   | Cost                                                                  |
+| ------------------ | --------------------------------------------------------------------- |
+| **Extra Storage**  | Billed for in units of 10 GiB at $1.50 per unit, prorated for the month |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
+| **Extra Projects** | Billed for in units of 10 at $5 per unit                              |
+
+### Business plan features
+
+- Compute scalability up to 10 vCPUs and 40 GB RAM, with autoscaling enabled for up to 10 compute units (CU).
+- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions.
+- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more.
+- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
+- Priority support ensuring faster response times and dedicated assistance.
+
+The Business plan is priced at $700 per month, with additional usage billed according to the rates listed in the allowances section.
+
+For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 ## Enterprise
 
