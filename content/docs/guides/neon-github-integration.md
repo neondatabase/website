@@ -296,7 +296,7 @@ To remove the GitHub integration:
 
 - [Creating GitHub Actions](https://docs.github.com/en/actions/creating-actions)
 - [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart)
-- [Database Branching Workflows](https://neon.tech/cases/flow)
+- [Database Branching Workflows](https://neon.tech/cases/development-velocity)
 - [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers)
 
 ## Feedback and future improvements

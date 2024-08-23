@@ -115,10 +115,10 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
-  flow: {
+  caseDevelopmentVelocity: {
     title: 'Database Branching Workflows - Neon',
     description: 'Boost development velocity by adding data to your existing GitHub workflows',
-    imagePath: '/images/social-previews/cases/flow.jpg',
+    imagePath: '/images/social-previews/cases/development-velocity.jpg',
     type: 'article',
   },
   404: {

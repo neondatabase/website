@@ -21,7 +21,7 @@ const items = [
     text: 'Neon uses transparent compute units, vs the ACU abstraction in&nbsp;Aurora&nbsp;Serverless.',
   },
   {
-    text: 'Neon supports database branching with data and schema via copy-on-write, <a href="/flow">improving development workflows.</a>',
+    text: 'Neon supports database branching with data and schema via copy-on-write, <a href="/content/development-velocity">improving development workflows.</a>',
   },
   {
     text: 'Neon&apos;s read replicas don&apos;t require storage redundancy, differently than Aurora&apos;s.',
