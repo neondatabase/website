@@ -92,7 +92,7 @@ All members can share projects with external collaborators &#8212; and revoke th
 
 ![invite guests to project](/docs/manage/orgs_sharing.png)
 
-First, you select the project you want to share, then enter a comma-separated list of emails for people you want to share the project with. These recipients won't have access to the Organization dashboard, just to the individual shared project. It will show as a [shared project](/docs/guides/project-sharing-guide) on their personal account projects page. 
+First, you select the project you want to share, then enter a comma-separated list of emails for people you want to share the project with. These recipients won't have access to the Organization dashboard, just to the individual shared project. It will show as a [shared project](/docs/guides/project-sharing-guide) on their personal account projects page.
 
 Once created, all members then remove sharing for that person. Admins can also choose to convert a Guest to a Member at any point. Use the kebab next to that person's name in the Guest list. Here's an example of an Admin view, with both options available.
 
