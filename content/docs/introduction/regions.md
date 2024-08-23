@@ -72,5 +72,4 @@ Neon Free Plan users are limited to a single project. In this case, you can expo
 
 As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
-
 <NeedHelp/>
