@@ -1,13 +1,18 @@
+/* eslint-disable react/prop-types */
 import Post from 'components/pages/doc/post';
 import SEO_DATA from 'constants/seo-data';
 import { CASES_DIR_PATH, getPostBySlug } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
-export const metadata = getMetadata(SEO_DATA.flow);
+export async function generateMetadata({ params }) {
+  const { slug: currentSlug } = params;
+  return getMetadata({ ...SEO_DATA[currentSlug], pathname: `/cases/${currentSlug}` });
+}
 
-const FlowPage = async () => {
-  const currentSlug = 'flow';
+const CasePage = async ({ params }) => {
+  const { slug: currentSlug } = params;
+
   const { data, content } = getPostBySlug(currentSlug, CASES_DIR_PATH);
   const tableOfContents = getTableOfContents(content);
   const fileOriginPath = `${process.env.NEXT_PUBLIC_CASES_GITHUB_PATH}${currentSlug}.md`;
@@ -26,4 +31,4 @@ const FlowPage = async () => {
   );
 };
 
-export default FlowPage;
+export default CasePage;

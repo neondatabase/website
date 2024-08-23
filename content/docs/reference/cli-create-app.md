@@ -177,7 +177,7 @@ Whether you created a new Neon project or selected an existing one, the `create-
 
 ![Neon project branches page](/docs/reference/create_app_neon_project_branches.png)
 
-To get acquainted with Neon's database branching feature and how you can use branching in your development workflow, see [Database Branching Workflows](https://neon.tech/flow).
+To get acquainted with Neon's database branching feature and how you can use branching in your development workflow, see [Database Branching Workflows](https://neon.tech/cases/flow).
 
 ## Your local app directory
 
