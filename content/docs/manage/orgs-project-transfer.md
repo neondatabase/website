@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2024-08-23T20:19:31.631Z'
+updatedOn: '2024-08-23T20:22:25.269Z'
 ---
 
 <EarlyAccess/>
