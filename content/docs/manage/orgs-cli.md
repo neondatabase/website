@@ -62,6 +62,6 @@ See [Projects - CLI](/docs/reference/cli-projects) to learn more.
 
 ## Setting Organization Context
 
-To simplify your workflow, the Neon CLI `set-context` command now supports setting an organization context. This means you don't have to specify an organization ID every time you run a CLI command.
+To simplify your workflow, the Neon CLI `set-context` command supports setting an organization context. This means you don't have to specify an organization ID every time you run a CLI command.
 
 Sees [set-context - CLI](/docs/reference/cli-set-context) to learn more.
