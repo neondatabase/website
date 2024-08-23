@@ -31,9 +31,10 @@ Here's a breakdown of what actions each role can take:
 
 | Action                                                                                                         | Admin | Member | Guest |
 | -------------------------------------------------------------------------------------------------------------- | :---: | :----: | :---: |
-| [Create projects](/docs/manage/orgs-manage#manage-projects)                                                    |  ✅   |   ✅   |  ❌   |
-| [Delete projects](/docs/manage/orgs-manage#manage-projects)                                                    |  ✅   |   ❌   |  ❌   |
+| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                    |  ✅   |   ✅   |  ❌   |
+| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                    |  ✅   |   ❌   |  ❌   |
 | Invite [members](/docs/manage/orgs-manage#invite-members) and [guests](/docs/manage/orgs-manage#invite-guests) |  ✅   |   ❌   |  ❌   |
+| [Share projects](/docs/manage/orgs-manage#share-projects)                                                    |  ✅   |   ✅   |  ❌   |
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)                                                    |  ✅   |   ❌   |  ❌   |
 | [Manage billing](/docs/manage/orgs-manage#billing)                                                             |  ✅   |   ❌   |  ❌   |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                                         |  ✅   |   ❌   |  ❌   |
@@ -76,9 +77,9 @@ If you want us to handle this conversion for you, you can contact our [Customer 
 
 As we continue to refine our Organizations feature during this Early Access phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
-- **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects. However, existing integrations will continue to work on projects transferred from personal to the organization account.
+- **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects.
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
-- **Project transfer restrictions** — Currently, you cannot transfer projects using either the Vercel or the GitHub integration.
+- **Project transfer restrictions** — Currently, you cannot transfer projects using either the Vercel, Outerbase, or the GitHub integrations.
 - **Permissions and roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
 
 ## Feedback

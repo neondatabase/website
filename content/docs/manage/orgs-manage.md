@@ -14,11 +14,12 @@ Learn how to manage your organization's projects, invite Members and Guests, rev
       <li><a href="#invite-members">Invite Member</a></li>
       <li><a href="#invite-guests">Invite Guests</a></li>
       <li><a href="#set-permissions" style={{ cursor: 'pointer' }} >Set permissions</a></li>
+      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
     </ul>
   </div>
   <div style={{ flex: 1 }}>
     <ul>
-      <li><a href="#set-permissions">Manage projects</a></li>
+      <li><a href="#share-projects">Share projects</a></li>
       <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
       <li><a href="#delete-an-organization">Delete an organization</a></li>
       <li><a href="#billing">Billing</a></li>
@@ -75,7 +76,7 @@ Click the kebab menu next to the row in the **Guests** table to manage Guest acc
 
   ![guests kebab](/docs/manage/orgs_guests_kebab.png 'no-border')
 
-## Manage projects
+## Create and delete projects
 
 All Members can create new projects from the Organization's **Projects** page; however, the organization itself retains ownership of these projects, not the individual user.
 
@@ -84,6 +85,18 @@ Members have different capabilities based on their roles:
 - Any Member can create a project under the organization's ownership.
 - Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
 - Admins can delete any project within the organization.
+
+## Share projects
+
+All members can share projects with external collaborators &#8212; and revoke that sharing at any point. You can do this from the **Guests** tab under the **People** page.
+
+![invite guests to project](/docs/manage/orgs_sharing.png)
+
+First, you select the project you want to share, then enter a comma-separated list of emails for people you want to share the project with. These recipients won't have access to the Organization dashboard, just to the individual shared project. It will show as a [shared project](/docs/guides/project-sharing-guide) on their personal account projects page. 
+
+Once created, all members then remove sharing for that person. Admins can also choose to convert a Guest to a Member at any point. Use the kebab next to that person's name in the Guest list. Here's an example of an Admin view, with both options available.
+
+![revoke sharing (admin view)](/docs/manage/orgs_revoke_sharing.png)
 
 ## Passwordless authentication
 
@@ -115,7 +128,7 @@ alexlopez=>
 
 Only Admins can delete an Organization. Before doing so, make sure all projects within the Organization are removed.
 
-In your Organization's **Settings** page, under the **General** tab, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be remove, you'll see:
+In your Organization's **Settings** page, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be remove, you'll see:
 
 ![delete organization](/docs/manage/orgs_delete.png)
 
