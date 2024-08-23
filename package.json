@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@docsearch/react": "^3.6.0",
-    "@headlessui/react": "^1.7.19",
+    "@headlessui/react": "^2.1.2",
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",
     "@inkeep/widgets": "^0.2.275",
