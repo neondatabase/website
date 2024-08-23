@@ -105,13 +105,13 @@ ORG_ID = "your_org_id_here"
 TRANSFER_API_URL = "https://console.neon.tech/api/v2/users/me/projects/transfer"
 PROJECTS_API_URL = f"https://console.neon.tech/api/v2/projects?limit=400"
 HEADERS = {
-   "accept": "application/json",
-   "Authorization": f"Bearer {API_KEY}"
+"accept": "application/json",
+"Authorization": f"Bearer {API_KEY}"
 }
 
 def fetch_all_projects():
-   projects = []
-   cursor = None
+projects = []
+cursor = None
 
     while True:
         url = PROJECTS_API_URL
@@ -134,10 +134,10 @@ def fetch_all_projects():
     return projects
 
 def transfer_projects(project_ids):
-   payload = {
-   "project_ids": project_ids,
-   "org_id": ORG_ID
-   }
+payload = {
+"project_ids": project_ids,
+"org_id": ORG_ID
+}
 
     response = requests.post(TRANSFER_API_URL, json=payload, headers=HEADERS)
     if response.status_code == 200:
@@ -150,8 +150,8 @@ def transfer_projects(project_ids):
         print(f"Transfer failed: {response.text}")
 
 def main():
-   all_projects = fetch_all_projects()
-   print(f"Fetched {len(all_projects)} projects.")
+all_projects = fetch_all_projects()
+print(f"Fetched {len(all_projects)} projects.")
 
     # Split the projects into batches of 400 for transfer
     batch_size = 400
@@ -160,8 +160,8 @@ def main():
         project_ids = [project["id"] for project in batch]
         transfer_projects(project_ids)
 
-if __name__ == "__main__":
-   main()
+if **name** == "**main**":
+main()
 
 ````
 
@@ -208,7 +208,7 @@ fetch_all_projects() {
     next_cursor=$(echo "$response" | jq -r '.pagination.cursor // ""')
 
     # Check if we have reached the last cursor
-    last_project_id="${projects[${#projects[@]} - 1]]}" 
+    last_project_id="${projects[${#projects[@]} - 1]]}"
     if [ -z "$next_cursor" ] || [ "$next_cursor" == "$last_project_id" ]; then
       break
     fi
