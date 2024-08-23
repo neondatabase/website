@@ -130,11 +130,11 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    ```bash shouldWrap
    postgres://cdc_role:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
-   
+
    ![Creating a Neon capture connector in Estuary Flow](/docs/guides/estuary_flow_create_neon_capture.png)
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-   
+
    - **Name:**: Name of the Capture connector
    - **Server Address**: ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432
    - **User**: cdc_role
@@ -143,15 +143,15 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
    ![Configuring Neon capture in Estuary Flow](/docs/guides/estuary_flow_configure_neon_capture.png)
 
-3. Click **Next**. Estuary Flow will now scan the source database for all the tables that can be replicated. Select one or more tables by checking the checkbox next to their name.
-Optionally, you can change the name of the destination name for each table. You can also take a look at the schema of each stream by clicking on the **Collection** tab.
+4. Click **Next**. Estuary Flow will now scan the source database for all the tables that can be replicated. Select one or more tables by checking the checkbox next to their name.
+   Optionally, you can change the name of the destination name for each table. You can also take a look at the schema of each stream by clicking on the **Collection** tab.
 
    ![Selecting collections for replication in Estuary Flow](/docs/guides/estuary_flow_configure_collections.png)
 
-4. Click **Save and Publish** to provision the connector and kick off the automated backfill process.
+5. Click **Save and Publish** to provision the connector and kick off the automated backfill process.
 
 ## Previewing the Data
 
 Once the connector is up and running state, navigate to the Collections page in the Estuary Flow dashboard and click on the collection being filled by your capture.
 
-   ![Preview data in Estuary Flow](/docs/guides/estuary_flow_preview_collections.png)
+![Preview data in Estuary Flow](/docs/guides/estuary_flow_preview_collections.png)

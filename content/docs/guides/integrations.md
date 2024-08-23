@@ -134,8 +134,6 @@ updatedOn: '2024-08-23T17:56:41.364Z'
 
 <a href="/docs/guides/logical-replication-rds-to-neon" title="RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
-
-
 </TechnologyNavigation>
 
 ## Schema Migration
