@@ -3,12 +3,10 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-12T21:44:27.441Z'
+updatedOn: '2024-08-22T02:18:02.647Z'
 ---
 
-<Admonition type="tip">
-Even when logical replication isn't available on the Neon side, you can schedule DoubleCloud Transfer to copy incremental data from Postgres to ClickHouse at a given interval by enabling periodic snapshots.
-</Admonition>
+<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -25,6 +23,7 @@ With Transfer, you can replicate your data to both managed ClickHouse clusters o
 
 - A [DoubleCloud account](https://console.double.cloud/)
 - A [Neon account](https://console.neon.tech/)
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable logical replication in Neon
 
@@ -90,7 +89,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   -H 'Content-Type: application/json' \
   -d '{
   "role": {
-    "name": "alex"
+    "name": "replication_user"
   }
 }' | jq
 ```
@@ -101,12 +100,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ## Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `alex`:
+If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
 
 ```sql
-GRANT USAGE ON SCHEMA public TO alex;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO alex;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO alex;
+GRANT USAGE ON SCHEMA public TO replication_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
 ```
 
 Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.

@@ -4,8 +4,10 @@ subtitle: Learn how to create an automatic audit trail for your Postgres databas
   Bemi
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.647Z'
+updatedOn: '2024-08-22T02:18:02.643Z'
 ---
+
+<LRBeta/>
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
@@ -17,6 +19,7 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 
 - A [Bemi account](https://bemi.io/)
 - A [Neon account](https://console.neon.tech/)
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable logical replication in Neon
 

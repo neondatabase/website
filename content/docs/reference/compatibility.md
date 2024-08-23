@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-08-14T19:53:13.331Z'
+updatedOn: '2024-08-19T15:59:15.070Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -135,7 +135,7 @@ Temporary tables, which are stored in compute local storage, are limited by comp
 
 ## Session context
 
-The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/14/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/14/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends. To avoid losing session-level contexts in Neon, you can disable Neon's [autosuspend](/docs/guides/auto-suspend-guide) feature, which is possible on any of Neon's paid plans. However, disabling autosuspend also means that your compute will run 24/7. You can't disable autosuspend on Neon's Free plan, where your compute always autosuspends after 5 minutes of inactivity.
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, parameters set for a specific session, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/current/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/current/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends. To avoid losing session-level contexts in Neon, you can disable Neon's [autosuspend](/docs/guides/auto-suspend-guide) feature, which is possible on any of Neon's paid plans. However, disabling autosuspend also means that your compute will run 24/7. You can't disable autosuspend on Neon's Free plan, where your compute always autosuspends after 5 minutes of inactivity.
 
 ## Statistics collection
 

@@ -3,7 +3,7 @@ title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2024-08-01T12:09:36.119Z'
+updatedOn: '2024-08-19T15:59:15.069Z'
 ---
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
@@ -34,8 +34,8 @@ In the **Branches** widget on your **Project Dashboard**, you can check if a com
 
 ![Compute state](/docs/introduction/compute_state.png)
 
-## Compute configuration
+## Session context considerations
 
-Neon only supports modifying session-level configuration parameters. Parameters are reset when the session terminates, such as when the compute suspends due to inactivity.
+When connections are closed due to a compute being suspended, anything that exists within a session context is forgotten and must be recreated before being used again. For example, Postgres parameters set for a specific session, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using `NOTIFY/LISTEN` commands only exist for the duration of the current session and are lost when the session ends.
 
-For information about Neon's Postgres server configuration, see [Neon Postgres parameter settings](/docs/reference/compatibility#neon-postgres-parameter-settings).
+For more, see [Session context](/docs/reference/compatibility#session-context).

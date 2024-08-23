@@ -3,7 +3,7 @@ title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-08-19T11:54:54.450Z'
+updatedOn: '2024-08-19T17:51:25.926Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -47,11 +47,11 @@ We are working on automatic switching between HTTP and WebSocket as needed. Chec
 
 ### Next, choose your connection type: direct or pooled
 
-You then need to decide whether to use direct connections or pooled connections (using PgBouncer for application-side pooling):
+You then need to decide whether to use direct connections or pooled connections (using PgBouncer for Neon-side pooling):
 
 - **In general, use pooled connections whenever you can**
 
-  Pooled connections can efficiently manage high numbers of concurrent client connections, up to 10,000. This 10K ceiling works best for serverless applications and application-side connection pools that have many open connections, but infrequent and/or short transactions.
+  Pooled connections can efficiently manage high numbers of concurrent client connections, up to 10,000. This 10K ceiling works best for serverless applications and Neon-side connection pools that have many open connections, but infrequent and/or short transactions.
 
 - **Use direct (unpooled) connections if you need persistent connections**
 
@@ -71,7 +71,7 @@ For more information on these choices, see:
 Here are some key points to help you navigate potential issues.
 | Issue | Description |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Double pooling | **Application-side pooling** uses PgBouncer to manage connections between your application and Postgres.<br /><br /> **Client-side pooling** occurs within the client library before connections are passed to PgBouncer.<br /><br />If you're using a pooled Neon connection (supported by PgBouncer), it's best to avoid client-side pooling. Let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure that connections are released back to the pool promptly to avoid conflicts with PgBouncer. |
+| Double pooling | **Neon-side pooling** uses PgBouncer to manage connections between your application and Postgres.<br /><br /> **Client-side pooling** occurs within the client library before connections are passed to PgBouncer.<br /><br />If you're using a pooled Neon connection (supported by PgBouncer), it's best to avoid client-side pooling. Let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure that connections are released back to the pool promptly to avoid conflicts with PgBouncer. |
 | Double pooling | **Application-side pooling** refers to using PgBouncer to manage connections between the application and PostgreSQL.<br /><br /> **Client-side pooling** happens within the client library itself before connections are passed to PgBouncer.<br /><br />Avoid using client-side pooling if you're using a pooled Neon connection (supported by PgBouncer). Just let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure connections are released back to the client-side pool early enough to avoid conflicts with PgBouncer. |
 | Understanding limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by Postgres and is determined by your [Neon compute size](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).<br /><br />`default_pool_size` is the maximum number of backend connections or transactions that PgBouncer supports per user/database pair, which is set to 64 by default.<br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact [Support](/docs/introduction/support). |
 | Use request handlers | In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means Pool or Client objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.|

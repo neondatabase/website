@@ -3,7 +3,7 @@ title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
-updatedOn: '2024-08-16T19:39:10.826Z'
+updatedOn: '2024-08-19T15:59:15.067Z'
 ---
 
 Neon architecture is based on the separation of compute and storage and is orchestrated by the Neon Control Plane, which manages cloud resources across both storage and compute.
@@ -23,4 +23,4 @@ Safekeepers can be thought of as an ultra-reliable write buffer that holds the l
 
 ## Durability
 
-Durability is at the core of Neon's architecture. Neon stores multiple copies of your data across Pageservers, multiple availability zones in a [Paxos](<https://en.wikipedia.org/wiki/Paxos_(computer_science)>) cluster, and on [S3](https://aws.amazon.com/s3/) (99.999999999% durability) where it's [encrypted at rest](/docs/reference/glossary#data-at-rest-encryption).
+Durability is at the core of Neon's architecture. As described earlier, incoming WAL data is initially stored across multiple availability zones in a [Paxos](<https://en.wikipedia.org/wiki/Paxos_(computer_science)>) cluster before being uploaded to [S3](https://aws.amazon.com/s3/) (99.999999999% durability), both in raw WAL and materialized form. Additional copies are maintained across Pageservers to enhance the read performance of frequently accessed data. Consequently, there are always multiple copies of your data in Neon, ensuring durability.

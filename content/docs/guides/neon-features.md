@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: false
-updatedOn: '2024-08-15T17:23:10.557Z'
+updatedOn: '2024-08-22T02:18:02.654Z'
 ---
 
 ### Autoscaling
@@ -63,7 +63,9 @@ Replicate data from Neon to external data platforms and services.
 
 <a href="/docs/guides/logical-replication-concepts" description="Learn about Postgres logical replication concepts" icon="scale-up">Logical replication concepts</a>
 
-<a href="/docs/guides/logical-replication-neon" description="Learn how to manage logical replication in Neon" icon="screen">Manage logical replication</a>
+<a href="/docs/guides/logical-replication-manage" description="Commands for managing your logical replication configuration" icon="cli">Logical replication commands</a>
+
+<a href="/docs/guides/logical-replication-neon" description="Information about logical replication specific to Neon" icon="screen">Logical replication in Neon</a>
 
 </DetailIconCards>
 
