@@ -119,7 +119,6 @@ export default {
     title: 'Database Branching Workflows - Neon',
     description: 'Boost development velocity by adding data to your existing GitHub workflows',
     imagePath: '/images/social-previews/cases/development-velocity.jpg',
-    type: 'article',
   },
   404: {
     title: 'Page Not Found — Neon',

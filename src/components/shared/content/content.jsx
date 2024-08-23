@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import CaseCta from 'components/pages/case/case-cta';
+import Testimonial from 'components/pages/case/testimonial';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -51,7 +53,7 @@ const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isCase) => ({
   h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
   h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
   h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
@@ -129,7 +131,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   TabItem,
   InfoBlock,
   DocsList,
-  CTA: DocCta,
+  CTA: isCase ? CaseCta : DocCta,
+  Testimonial,
   ...sharedComponents,
 });
 
@@ -141,13 +144,14 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
+  isCase = false,
 }) => (
   <div className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}>
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isCase)}
         source={content}
         options={{
           mdxOptions: {

@@ -9,7 +9,8 @@ import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateMetadata({ params }) {
   const { slug: currentSlug } = params;
-  return getMetadata({ ...SEO_DATA[currentSlug], pathname: `/cases/${currentSlug}` });
+  const seoSlug = currentSlug.replace(/_/g, '-');
+  return getMetadata({ ...SEO_DATA[seoSlug], pathname: `/cases/${currentSlug}`, type: 'article' });
 }
 
 const CasePage = async ({ params }) => {
@@ -31,7 +32,7 @@ const CasePage = async ({ params }) => {
       currentSlug={currentSlug}
       fileOriginPath={fileOriginPath}
       tableOfContents={tableOfContents}
-      isTextPage
+      isCase
     />
   );
 };

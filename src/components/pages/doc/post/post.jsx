@@ -44,7 +44,7 @@ const Post = ({
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
   isChangelog = false,
-  isTextPage = false,
+  isCase = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -54,7 +54,7 @@ const Post = ({
     <div
       className={clsx(
         'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-        isTextPage
+        isCase
           ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-9 xl:col-start-3'
           : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
       )}
@@ -78,7 +78,7 @@ const Post = ({
               {subtitle}
             </p>
           )}
-          <Content className="mt-5" content={content} />
+          <Content className="mt-5" content={content} isCase={isCase} />
         </article>
       )}
 
@@ -95,7 +95,7 @@ const Post = ({
     <div
       className={clsx(
         'col-span-2 col-start-11 -ml-12 h-full max-w-64 xl:hidden',
-        isTextPage
+        isCase
           ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
           : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
       )}
@@ -130,7 +130,7 @@ Post.propTypes = {
     nextLink: PropTypes.shape({}),
   }).isRequired,
   isChangelog: PropTypes.bool,
-  isTextPage: PropTypes.bool,
+  isCase: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
