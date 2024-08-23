@@ -65,9 +65,9 @@ Once your foundation is built, rely on Neon's serverless features to rapidly gro
 <Testimonial
 text="In GCP, we had to constantly think about provisioning new instances and migrating data, which added operational overhead. With Neon, we can start small and scale up. We don’t have to think about some level of operational stuff. That’s awesome."
 author={{
-    name: 'Paul Dlug',
-    company: 'CTO of Comigo.ai',
-  }}
+  name: 'Paul Dlug',
+  company: 'CTO of Comigo.ai',
+}}
 />
 
 <div align="center">
@@ -85,16 +85,14 @@ If your SaaS project could benefit from multitenancy, Neon makes it simple to cr
 <Testimonial
 text="The ability to spawn databases that can scale down to zero is incredibly helpful and a model fits well with our one database per customer architecture"
 author={{
-    name: 'Guido Marucci',
-    company: 'co-founder at Cedalio',
-  }}
+  name: 'Guido Marucci',
+  company: 'co-founder at Cedalio',
+}}
 />
 
 <div align="center">
   [Read more →](/cases/database-per-user)
 </div>
-
-<CTA text="Questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
 
 ## Additional Resources
 
@@ -105,3 +103,5 @@ author={{
 - [SaasS AI Chatbot - Email Marketing, Nextjs15, Clerk, Neon, Uploadcare, Cloudways, Bun, Stripe, Pusher](https://www.youtube.com/watch?v=9pCsyBlpmrc)
 - [Build a Full-stack E-Commerce app using React Native, Express, Zustand, Drizzle and Neon](https://www.youtube.com/watch?v=9pCsyBlpmrc)
 - [Let’s build an Intercom Clone with NEXT.JS 14! (Neon PostgreSQL, Clerk, AI Agent, OpenAI, IBM)](https://www.youtube.com/watch?v=6XezQQJGdjI)
+
+<CTA text="Questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
