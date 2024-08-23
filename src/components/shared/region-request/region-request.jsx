@@ -1,5 +1,6 @@
 'use client';
 
+
 import {
   Combobox,
   ComboboxButton,
@@ -8,6 +9,7 @@ import {
   ComboboxOptions,
 } from '@headlessui/react';
 import clsx from 'clsx';
+import { useCookies } from 'next-client-cookies';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -177,8 +179,8 @@ const RegionRequest = ({
   buttonText = DEFAULT_DATA.buttonText,
   options = DEFAULT_DATA.regions,
 }) => {
-  const isLoggedIn = document.cookie.indexOf('ajs_user_id=') > -1;
-
+  const cookies = useCookies();
+  const isRecognized = !!cookies.get('ajs_user_id');
   const [selected, setSelected] = useState();
   const [email, setEmail] = useState();
   const [requestComplete, setRequestComplete] = useState(false);
@@ -187,10 +189,11 @@ const RegionRequest = ({
   const filteredOptions =
     query === ''
       ? options
-      : options.filter((option) => (
+      : options.filter(
+          (option) =>
             option.name.toLowerCase().includes(query.toLowerCase()) ||
             option.id.toLowerCase().includes(query.toLowerCase())
-          ));
+        );
 
   return (
     <figure className="doc-cta not-prose my-5 rounded-[10px] border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] px-7 py-6 dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)] sm:p-6">
@@ -248,7 +251,7 @@ const RegionRequest = ({
               </ComboboxOptions>
             </Combobox>
           </div>
-          {!isLoggedIn && (
+          {!isRecognized && (
             <input
               type="email"
               value={email}
@@ -265,7 +268,7 @@ const RegionRequest = ({
             onClick={() => {
               if (selected) {
                 if (window.zaraz) {
-                  if (!isLoggedIn && email) {
+                  if (!isRecognized && email) {
                     window.zaraz.track('identify', { email });
                   }
                   window.zaraz.track('Region Requested', {
