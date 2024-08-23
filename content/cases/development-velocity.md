@@ -2,7 +2,7 @@
 title: 'Database Branching Workflows'
 subtitle: Boost development velocity by adding data to your existing GitHub workflows
 enableTableOfContents: true
-updatedOn: '2024-05-09T14:37:51.432Z'
+updatedOn: '2024-08-23T09:00:00.000Z'
 ---
 
 Git revolutionized how we develop software, but the story is quite different when databases are involved. Rapid development cycles that include databases remain elusive as they continue to stubbornly resist the agile tooling that has become standard in other parts of our tech stack.
