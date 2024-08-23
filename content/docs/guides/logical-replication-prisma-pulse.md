@@ -4,7 +4,7 @@ subtitle: Learn how to create event-driven flows on your backend triggered by ch
   your Neon Postgres database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.653Z'
+updatedOn: '2024-08-23T17:19:28.789Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
