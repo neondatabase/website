@@ -12,7 +12,6 @@ import { useCookies } from 'next-client-cookies';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import Button from '../button';
@@ -205,10 +204,11 @@ const RegionRequest = ({
           <em>Request logged. We appreciate your feedback!</em>
         </p>
       ) : (
-        <div className="mt-4 flex items-end gap-x-8  md:flex-col md:items-start">
+        <div className="mt-4 flex items-end gap-x-4 md:flex-col md:items-start">
           <div className="flex-1">
             <Combobox
               value={selected}
+              immediate
               onChange={(value) => setSelected(value)}
               onClose={() => setQuery('')}
             >
@@ -229,7 +229,6 @@ const RegionRequest = ({
               </div>
               <ComboboxOptions
                 anchor="bottom"
-                portal={false}
                 className={clsx(
                   'w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
                   'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
@@ -240,10 +239,11 @@ const RegionRequest = ({
                   <ComboboxOption
                     key={option.id}
                     value={option}
-                    className="group flex cursor-default select-none items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-black/10"
+                    className="group flex cursor-default select-none items-center gap-2 rounded-lg px-2 py-1.5 data-[focus]:bg-black/10"
                   >
-                    <CheckIcon className="invisible size-4 fill-black group-data-[selected]:visible" />
-                    <div className="text-sm/6 text-black">{option.name}</div>
+                    <div className="text-sm text-sm/6 text-black">
+                      {option.name} <code className="bg-gray-8 px-1 text-xs">{option.id}</code>
+                    </div>
                   </ComboboxOption>
                 ))}
               </ComboboxOptions>
