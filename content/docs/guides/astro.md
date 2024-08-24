@@ -148,7 +148,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringiify(data), { headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
 }
 ```
 
@@ -160,7 +160,7 @@ import postgres from 'postgres';
 export async function GET() {
   const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
@@ -174,7 +174,7 @@ import { neon } from '@neondatabase/serverless';
 export async function GET() {
   const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
