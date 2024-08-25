@@ -54,8 +54,8 @@
         "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "190 /month <span>Main branch</span>",
-        "info": "Additional branches limited to 5 compute hours"
+        "title": "190 /month",
+        "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       "launch": {
         "title": "300 /month",
@@ -109,7 +109,7 @@
         "title": "Max compute size"
       },
       "free": {
-        "title": "2 CU <span>With autoscaling</span>",
+        "title": "2 CU",
         "info": "2 CU = 2 vCPU, 8 GB RAM"
       },
       "launch": {
