@@ -106,10 +106,10 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Max. compute size"
+        "title": "Max compute size"
       },
       "free": {
-        "title": "2 CU",
+        "title": "2 CU <span>With autoscaling</span>",
         "info": "2 CU = 2 vCPU, 8 GB RAM"
       },
       "launch": {
@@ -128,7 +128,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Instant Read Replicas"
+        "title": "Read Replicas"
       },
       "free": false,
       "launch": true,
@@ -248,6 +248,7 @@
       "rows": "1",
       "feature": {
         "title": "Branch Protection"
+        "subtitle": "Via IP Allowlist"
       },
       "free": false,
       "launch": false,
