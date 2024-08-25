@@ -54,7 +54,7 @@
         "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "190 /month",
+        "title": "190 /month <span>Main branch</span>",
         "info": "Additional branches limited to 5 compute hours"
       },
       "launch": {
