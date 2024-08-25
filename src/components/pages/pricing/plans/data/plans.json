@@ -248,7 +248,6 @@
       "rows": "1",
       "feature": {
         "title": "Branch Protection"
-        "subtitle": "Via IP Allowlist"
       },
       "free": false,
       "launch": false,
