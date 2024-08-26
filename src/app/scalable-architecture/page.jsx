@@ -5,7 +5,7 @@ import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.scalableArchitecture);
+export const metadata = getMetadata({ ...SEO_DATA.scalableArchitecture, robotsNoindex: 'noindex' });
 
 const ScalableArchitecturePage = () => (
   <Layout>
