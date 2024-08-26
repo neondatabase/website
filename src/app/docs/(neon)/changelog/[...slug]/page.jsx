@@ -101,7 +101,7 @@ const ChangelogPost = async ({ currentSlug }) => {
         />
       )}
 
-      <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] flex-col 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col 3xl:col-span-10 3xl:col-start-2 3xl:ml-0 2xl:col-span-11 2xl:col-start-1 xl:max-w-[calc(100vw-366px)] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
           className="flex justify-center lg:pt-16 md:py-10 sm:py-7"
           date={label}
