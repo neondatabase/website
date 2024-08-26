@@ -36,6 +36,13 @@ const items = [
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
+      {
+        title: 'Preview branches with Fly.io and Neon',
+        // TODO: Replace this placeholder
+        description: 'This is a placeholder. It should be replaced.',
+        demoLink: '#',
+        sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
+      },
     ],
   },
   {
@@ -142,9 +149,35 @@ const items = [
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb',
       },
+      {
+        title: 'Semantic Search Chatbot (OpenAI + LangChain)',
+        // TODO: Replace this placeholder
+        description: 'This is a placeholder. It should be replaced.',
+        demoLink: '#',
+        sourceLink:
+          'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
+      },
+      {
+        title: 'AI Chatbot (OpenAI + LangChain)',
+        // TODO: Replace this placeholder
+        description: 'This is a placeholder. It should be replaced.',
+        demoLink: '#',
+        sourceLink:
+          'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
+      },
     ],
   },
 ];
+
+// TODO: add this demo to corresponding category
+// {
+//   title: 'Neon with Next.js and Prisma',
+//   // TODO: Replace this placeholder
+//   description: 'This is a placeholder. It should be replaced.',
+//   demoLink: '#',
+//   sourceLink:
+//     'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
+// },
 
 const DemoList = () => (
   <section className="demo-list safe-paddings my-20 lg:my-16 md:my-10">
@@ -171,7 +204,7 @@ const DemoList = () => (
                   key={index}
                 >
                   <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">
-                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
+                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight -tracking-[0.05em] lg:text-xl">
                       {title}
                     </h3>
                     <p

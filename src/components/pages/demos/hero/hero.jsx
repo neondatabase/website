@@ -5,36 +5,36 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
 
-import chatbotIllustration from './images/chatbot.jpg';
-import playgroundIllustration from './images/playground.jpg';
-import semanticSearchIllustration from './images/semantic-search.jpg';
+import databaseCopyIllustration from './images/database-copy.jpg';
+import provisioningIllustration from './images/provisioning.jpg';
+import trackingLatencyIllustration from './images/tracking-latency.jpg';
 
 const items = [
   {
-    image: chatbotIllustration,
+    image: provisioningIllustration,
     imageWidth: 716,
-    imageHeight: 512,
-    title: 'Chatbot: Search your own knowledge base by semantic similarity',
-    demoLink: '#',
-    sourceLink: 'https://github.com/neondatabase/ask-neon',
+    imageHeight: 548,
+    title: 'Postgres in under a second: Instantly provison a Postgres database on Neon',
+    demoLink: '/demos/instant-postgres',
+    sourceLink: 'https://github.com/neondatabase/instant-postgres',
   },
   {
-    image: semanticSearchIllustration,
+    image: trackingLatencyIllustration,
     imageWidth: 464,
     imageHeight: 216,
     title:
-      'Semantic search: Submit your idea and get a list of similar ideas that YCombinator has invested in before',
-    demoLink: 'https://yc-idea-matcher.vercel.app/',
-    sourceLink: 'https://github.com/neondatabase/yc-idea-matcher',
+      "Tracking the latency between cloud hosting platforms and Neon's Postgres database regions",
+    demoLink: '/demos/regional-latency',
+    sourceLink: 'https://github.com/neondatabase/regional-latency',
   },
   {
-    image: playgroundIllustration,
+    image: databaseCopyIllustration,
     imageWidth: 464,
-    imageHeight: 234,
+    imageHeight: 216,
     title:
-      'Postgres AI Playground: an SQL playground for Postgres where you can use AI to generate queries using natural language',
-    demoLink: '/demos/playground',
-    sourceLink: 'https://github.com/neondatabase/postgres-ai-playground',
+      'Create a copy of your database, make changes to it, and restore it to the original state in milliseconds',
+    demoLink: 'https://neon-demos-branching.vercel.app/',
+    sourceLink: 'https://github.com/neondatabase/branching-demo',
   },
 ];
 
@@ -46,7 +46,7 @@ const Hero = () => (
           <span className="text-green-45">Serverless showcase:</span>
           <br /> build with Neon
         </h1>
-        <p className="lg:text-4 mt-5 text-xl font-light leading-snug lg:text-xl md:text-base">
+        <p className="mt-5 text-xl font-light leading-snug -tracking-[0.015em] lg:text-xl md:text-base">
           Explore interactive demos from the community and the Neon team.
         </p>
         <div className="mt-20 lg:mt-16 md:mt-10">
@@ -76,15 +76,15 @@ const Hero = () => (
                       ? '(min-width: 1023px) 100vw, 716px'
                       : '(min-width: 1023px) 50vw, (min-width: 767px) 100vw, 464px'
                   }
-                  quality={90}
+                  quality={95}
                   priority
                 />
                 <h3
                   className={clsx(
                     'font-medium tracking-tighter',
                     index === 0
-                      ? 'mt-[38px] max-w-[630px] text-[28px] leading-dense xl:text-2xl'
-                      : 'mt-5 text-lg leading-tight',
+                      ? 'mt-9 max-w-[630px] text-[28px] leading-dense xl:text-2xl'
+                      : 'mt-[21px] text-lg leading-tight -tracking-[0.018em]',
                     'md:text-xl'
                   )}
                 >
