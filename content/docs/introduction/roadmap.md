@@ -13,25 +13,24 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 ## What we've just launched
 
-For the latest features and fixes, check our [Changelog](/docs/changelog), updated every Friday. Or watch for our Changelog email, also sent regularly on Fridays. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
+- **Organizations**: We're happy to report that **Organization Accounts** is now available to Early Access users. Create a new organization, transfer over your projects, invite your team and get started collaborating. Join our [Early Access Program](https://console.neon.tech/app/settings/early-access) to get a first look at Neon Organizations. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
+- **Autoscaling GA**: One of our defining features, [Autoscaling](/docs/introduction/autoscaling), is now GA. Read the announcement: [Neon Autoscaling is Generally Available](https://neon.tech/blog/neon-autoscaling-is-generally-available).
+- **Autoscaling on the Free Plan**: Users on the Free Plan are now able to try Neon's Autoscaling feature, within reasonable Free Plan limits. [Learn how](/docs/guides/autoscaling-guide).
+
+For more of the latest features and fixes, check our [Changelog](/docs/changelog), published weekly. Or watch for our Changelog email, also sent out weekly. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
 ## What we're working on now
 
 Here's a snapshot of what we're working on now:
 
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
-- **Autoscaling GA**: One of our defining features, Autoscaling, is soon going GA. Look for an announcement with details coming out soon!
-- **Autoscaling on the Free Plan**: Users on the Free Plan will soon be able to try Neon's Autoscaling feature, within reasonable Free Plan limits.
 - **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released.
 - **Support for exporting metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable metrics.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
 - **Migrations**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
 - **Plans & Billing**: We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see changes in this area, including:
-
   - A new plan tailored to business needs, with key features and usage allowances that better fit business-focused development teams.
   - Storage-related billing optimizations.
-
-- **Organizations**: We're thankful to our private preview customers for the feedback they've given us so far &#8212; and happy to say that **Organization Accounts** are on track for Early Access users soon.
 - **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
 - **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
 
