@@ -39,7 +39,7 @@ You can expect an initial response time of 2 business days, from 6am to 6pm Paci
 
 ## Priority support
 
-Neon's [Scale plan](/docs/introduction/plans#scale) includes **Priority** support.
+Neon's [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans includes **Priority** support.
 
 With Priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
@@ -61,5 +61,5 @@ Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans)
 | :----------- | :----------------------------------------------------- |
 | Community    | [Free Plan](/docs/introduction/plans#free-plan)        |
 | Standard     | [Launch plan](/docs/introduction/plans#launch)         |
-| Priority     | [Scale plan](/docs/introduction/plans#scale)           |
+| Priority     | [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans      |
 | Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise) |

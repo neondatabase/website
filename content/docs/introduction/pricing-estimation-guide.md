@@ -51,7 +51,7 @@ Based on your usage estimates, calculate the fees for extra storage units, compu
 
 ### For the Launch plan:
 
-The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale plan.
+The Launch plan supports extra **Storage** and **Compute**. If you need extra projects, you'll need to move up to the Scale or Business plan.
 
 - **Extra Storage**: If you exceed 10 GiB, extra storage is allocated in units of 2 GiB at $3.50 per unit.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/hour.
