@@ -226,11 +226,11 @@ curl --request GET \
 
 You can use the Neon API to retrieve three types of consumption metrics for your organization:
 
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale and Business plans only   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale and Business plans only   |
-| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans         |
+| Metric                                                                                           | Description                                                                              | Plan Availability             |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale and Business plans only |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale and Business plans only |
+| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans                     |
 
 #### Account-level metrics
 
