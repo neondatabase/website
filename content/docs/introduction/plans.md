@@ -45,9 +45,9 @@ The Free Plan includes the following usage allowances:
 | **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
 
-<Admonition type="tip" title="What are active hours and compute hours?">
+<Admonition type="tip" title="What is a compute hours?">
 
-- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 - **Compute hours formula**
 
@@ -86,7 +86,7 @@ The Launch plan includes the following usage allowances:
 | **Branches**  | 500                                                                             |
 | **Databases** | Unlimited                                                                       |
 | **Storage**   | 10 GiB of data storage                                                          |
-| **Compute**   | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
+| **Compute**   | 300 compute hours a month for all computes across all projects |
 
 ### Launch plan extra usage
 
@@ -120,7 +120,7 @@ The Scale plan includes the following usage allowances:
 | **Branches**  | 500                                                                             |
 | **Databases** | Unlimited                                                                       |
 | **Storage**   | 50 GiB of data storage                                                          |
-| **Compute**   | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
+| **Compute**   | 750 compute hours a month month for all computes across all projects |
 
 ### Scale plan extra usage
 
@@ -151,13 +151,11 @@ The Business plan includes the following usage allowances:
 
 | Usage type             | Plan allowance                                                                                      |
 |------------------------|-----------------------------------------------------------------------------------------------------|
-| **Projects**           | 50 Neon projects (additional projects at $5 each)                                                   |
-| **Branches**           | 500 per project                                                                                    |
+| **Projects**           | 50 Neon projects                                                   |
+| **Branches**           | 500                                                                                    |
 | **Databases**          | Unlimited                                                                                           |
-| **Storage**            | 500 GiB included, additional storage billed at $1.50 per GiB                                        |
-| **Compute**            | 1,000 compute hours included, additional compute billed at $0.16 per hour                          |
-| **Allowed IPs**        | Up to 100 IPs                                                                                      |
-| **Service SLA**        | 99.95% uptime                                                                                      |
+| **Storage**            | 500 GiB of data storage                                        |
+| **Compute**            | 1,000 compute hours for all computes across all projects                          |
 
 ### Business plan extra usage
 
@@ -171,13 +169,13 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 
 ### Business plan features
 
-- Compute scalability up to 10 vCPUs and 40 GB RAM, with autoscaling enabled for up to 10 compute units (CU).
-- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions.
-- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more.
+- Compute up to 10 vCPUs and 40 GB RAM, with autoscaling enabled for up to 10 compute units (CU)
+- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
+- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
-- Priority support ensuring faster response times and dedicated assistance.
-
-The Business plan is priced at $700 per month, with additional usage billed according to the rates listed in the allowances section.
+- [Priority support](/docs/introduction/support)
+- Up to 100 allows IPs
+- Service SLA of 99.95% uptime
 
 For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
