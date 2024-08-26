@@ -20,7 +20,7 @@
 ```bash
 git clone git@github.com:neondatabase/website.git
 ```
-
+*This also works for other respitories (But change the url).
 2. Install dependencies
 
 ```bash
