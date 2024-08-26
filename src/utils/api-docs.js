@@ -86,7 +86,9 @@ const getFlatSidebar = (sidebar, path = []) =>
   }, []);
 
 const getNavigationLinks = (slug, flatSidebar) => {
-  const posts = flatSidebar.filter((item) => item.slug !== undefined);
+  const posts = [
+    ...new Map(flatSidebar.filter((item) => item.slug).map((item) => [item.slug, item])).values(),
+  ];
   const currentItemIndex = posts.findIndex((item) => item.slug === slug);
 
   const previousItem = posts[currentItemIndex - 1];
