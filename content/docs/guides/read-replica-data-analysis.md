@@ -74,8 +74,6 @@ curl --request POST \
 ' | jq
 ```
 
-
-
 </CodeTabs>
 
 ## Connect to the read replica
