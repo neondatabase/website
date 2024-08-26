@@ -90,7 +90,7 @@ For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-
 
 </Tabs>
 
-## Integrating branch resets in CI/CD workflos
+## Integrating branch resets in CI/CD workflows
 
 You can include resetting database branches as part of your CI/CD workflow. For example, when **starting a new feature** or **refreshing staging**.
 
