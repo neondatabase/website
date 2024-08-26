@@ -80,12 +80,12 @@ The Launch plan provides all of the resources, features, and support you need to
 
 The Launch plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                                  |
-| ------------- | ------------------------------------------------------------------------------- |
-| **Projects**  | 10 Neon projects                                                                |
-| **Branches**  | 500                                                                             |
-| **Databases** | Unlimited                                                                       |
-| **Storage**   | 10 GiB of data storage                                                          |
+| Usage type    | Plan allowance                                                 |
+| ------------- | -------------------------------------------------------------- |
+| **Projects**  | 10 Neon projects                                               |
+| **Branches**  | 500                                                            |
+| **Databases** | Unlimited                                                      |
+| **Storage**   | 10 GiB of data storage                                         |
 | **Compute**   | 300 compute hours a month for all computes across all projects |
 
 ### Launch plan extra usage
@@ -114,12 +114,12 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                                  |
-| ------------- | ------------------------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                                                |
-| **Branches**  | 500                                                                             |
-| **Databases** | Unlimited                                                                       |
-| **Storage**   | 50 GiB of data storage                                                          |
+| Usage type    | Plan allowance                                                       |
+| ------------- | -------------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                                     |
+| **Branches**  | 500                                                                  |
+| **Databases** | Unlimited                                                            |
+| **Storage**   | 50 GiB of data storage                                               |
 | **Compute**   | 750 compute hours a month month for all computes across all projects |
 
 ### Scale plan extra usage
@@ -149,23 +149,23 @@ The Business plan is designed for mid-to-large enterprises requiring higher comp
 
 The Business plan includes the following usage allowances:
 
-| Usage type             | Plan allowance                                                                                      |
-|------------------------|-----------------------------------------------------------------------------------------------------|
-| **Projects**           | 100 Neon projects                                                   |
-| **Branches**           | 1000 per project                                                                                   |
-| **Databases**          | Unlimited                                                                                           |
-| **Storage**            | 500 GiB of data storage                                        |
-| **Compute**            | 1,000 compute hours for all computes across all projects                          |
+| Usage type    | Plan allowance                                           |
+| ------------- | -------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                         |
+| **Branches**  | 500                                                      |
+| **Databases** | Unlimited                                                |
+| **Storage**   | 500 GiB of data storage                                  |
+| **Compute**   | 1,000 compute hours for all computes across all projects |
 
 ### Business plan extra usage
 
 Business plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which are allocated and billed automatically when plan allowances are exceeded.
 
-| Extra usage type   | Cost                                                                  |
-| ------------------ | --------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $0.75 per unit, prorated for the month |
-| **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
-| **Extra Projects** | Billed for in units of 10 at $5 per unit                              |
+| Extra usage type   | Cost                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **Extra Storage**  | Billed for in units of 10 GiB at $1.50 per unit, prorated for the month |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                                |
+| **Extra Projects** | Billed for in units of 10 at $5 per unit                                |
 
 ### Business plan features
 
