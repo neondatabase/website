@@ -117,7 +117,7 @@ The Scale plan includes the following usage allowances:
 | Usage type    | Plan allowance                                                       |
 | ------------- | -------------------------------------------------------------------- |
 | **Projects**  | 50 Neon projects                                                     |
-| **Branches**  | 500                                                                  |
+| **Branches**  | 500 per project                                                                 |
 | **Databases** | Unlimited                                                            |
 | **Storage**   | 50 GiB of data storage                                               |
 | **Compute**   | 750 compute hours a month month for all computes across all projects |
@@ -152,7 +152,7 @@ The Business plan includes the following usage allowances:
 | Usage type    | Plan allowance                                           |
 | ------------- | -------------------------------------------------------- |
 | **Projects**  | 50 Neon projects                                         |
-| **Branches**  | 500                                                      |
+| **Branches**  | 1000 per project                                                      |
 | **Databases** | Unlimited                                                |
 | **Storage**   | 500 GiB of data storage                                  |
 | **Compute**   | 1,000 compute hours for all computes across all projects |
@@ -163,7 +163,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 
 | Extra usage type   | Cost                                                                    |
 | ------------------ | ----------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $1.50 per unit, prorated for the month |
+| **Extra Storage**  | Billed for in units of 10 GiB at $0.75 per unit, prorated for the month |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                                |
 | **Extra Projects** | Billed for in units of 10 at $5 per unit                                |
 
