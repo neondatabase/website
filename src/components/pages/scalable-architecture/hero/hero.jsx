@@ -43,16 +43,14 @@ const Hero = () => {
                 />
               </div>
             ) : (
-              <div
+              <button
                 className="group absolute inset-1.5 z-30 cursor-pointer overflow-hidden rounded-[14px] ring-[1px] ring-white/10 lt:inset-1 lt:rounded-[13px] lg:inset-1 lg:rounded-[9px] md:rounded-[5px] sm:inset-1 sm:rounded-[3px] xs:inset-[5px]"
-                role="button"
-                tabIndex={0}
+                type="button"
                 aria-label="Play video"
                 onClick={() => setIsVideoActive(true)}
-                onKeyDown={(e) => e.key === 'Enter' && setIsVideoActive(true)}
               >
                 <Image src={interfaceCover} width={832} height={468} quality={95} alt="" priority />
-                <button
+                <div
                   className={clsx(
                     'absolute left-1/2 top-1/2 flex w-auto -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-1.5 overflow-hidden whitespace-nowrap rounded-[60px] bg-[linear-gradient(138.95deg,_#70A1C1_14.15%,_#2D5182_50.3%,_#31407C_85.04%)] py-3.5 pl-[30px] pr-6 text-lg font-semibold tracking-tighter text-white shadow-[0px_4px_30px_0px_#00000066,0px_4px_50px_0px_#00000066] transition-shadow duration-500 group-hover:shadow-[0px_4px_30px_0px_#0000004D,0px_4px_50px_0px_#0000004D]',
                     'after:absolute after:-left-[5%] after:-top-[30%] after:h-[55px] after:w-[200px] after:-rotate-[6deg] after:bg-[radial-gradient(47.49%_169.64%_at_18.14%_-69.64%,#264D69_0%,rgba(28,57,78,0)_100%)] after:opacity-100 after:blur-lg after:transition-all after:duration-500 group-hover:after:left-[50%] group-hover:after:opacity-0',
@@ -72,8 +70,8 @@ const Hero = () => {
                       priority
                     />
                   </span>
-                </button>
-              </div>
+                </div>
+              </button>
             )}
             <span className="absolute inset-0 rounded-[inherit] border-image-azure-form-border" />
             <Image
