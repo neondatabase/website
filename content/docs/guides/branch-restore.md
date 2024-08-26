@@ -46,7 +46,6 @@ In the meantime, if you're certain you no longer need a backup branch, you can f
 If backup branches clutter your **Branches** page, consider renaming them. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 </Admonition>
 
-
 This backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
