@@ -122,6 +122,14 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
+  // TODO: Add REAL SEO data for scalable architecture page
+  scalableArchitecture: {
+    title: 'Neon Scalable Architecture — Neon',
+    description:
+      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
+    // imagePath: '',
+    pathname: LINKS.scalableArchitecture,
+  },
   404: {
     title: 'Page Not Found — Neon',
   },
