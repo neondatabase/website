@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon’s autoscaling is now GA. No more manually resizing your Postgres database
+      DBs in the Free plan can now autoscale up to 2 CPU. More performance without manual resizes
     </span>
     <ChevronIcon
       className={clsx(
