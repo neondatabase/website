@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const CasePage = async ({ params }) => {
+const CasePage = ({ params }) => {
   const { slug: currentSlug } = params;
 
   const post = getPostBySlug(currentSlug, CASES_DIR_PATH);
