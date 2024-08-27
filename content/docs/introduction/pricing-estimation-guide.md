@@ -25,6 +25,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 | Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 1 project         |
 | Launch     | $19         | 10 GiB            | 300 compute hours                                                            | 10 projects       |
 | Scale      | $69         | 50 GiB            | 750 compute hours                                                            | 50 projects       |
+| Business      | $700         | 500 GiB            | 1000 compute hours                                                            | 100 projects       |
 | Enterprise | Custom      | Custom            | Custom                                                                       | Custom            |
 
 <Admonition type="note" title="Notes">
@@ -75,6 +76,20 @@ The Scale plan supports extra **Storage**, **Compute**, and **Projects**.
 | Extra Compute  | Compute hour | $0.16  |
 | Extra Projects | 10           | $50.00 |
 
+### For the Business plan:
+
+The Business plan supports extra **Storage**, **Compute**, and **Projects**.
+
+- **Extra Storage**: If you exceed 500 GiB, extra storage is allocated in increments of 10 GiB at $7.50 per increment.
+- **Extra Compute**: If you exceed 1,000 compute hours, extra compute is billed at $0.16/hour.
+- **Extra Projects**: If you exceed 100 projects, extra projects are allocated in units of 10 projects at $50 per unit.
+
+| Resource       | Unit         | Price  |
+| -------------- | ------------ | ------ |
+| Extra Storage  | 10 GiB       | $15.00 |
+| Extra Compute  | Compute hour | $0.16  |
+| Extra Projects | 10           | $50.00 |
+
 ## Step 4: Total monthly estimate
 
 Add up your plan's monthly fee and extra usage fees to estimate your total monthly bill.
@@ -99,8 +114,18 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Compute Fee + Extra Projec
 | Plan Fee           | $69                                 |
 | Storage Usage      | 60 GiB (10 GiB over, $15 extra)     |
 | Compute Usage      | 800 hours (50 hours over, $8 extra) |
-| Project Usage      | 55 projects (5 over, $50 extra)     |
+| Project Usage      | 55 projects (5 over, $50 extra for 10 pack)     |
 | **Total Estimate** | $142 per month                      |
+
+### Business plan example
+
+| Item               | Details                                    |
+| ------------------ | ------------------------------------------ |
+| Plan Fee           | $700                                       |
+| Storage Usage      | 510 GiB (20 GiB over, $15 extra)          |
+| Compute Usage      | 1,150 hours (150 hours over, $24 extra)      |
+| Project Usage      | 108 projects (8 over, $50 extra for 10 pack)           |
+| **Total Estimate** | $789 per month                           |
 
 For examples illustrating extra usage incurred mid-month, usage fluctuations during the billing period, and prorated charges, see [Extra usage](/docs/introduction/extra-usage).
 

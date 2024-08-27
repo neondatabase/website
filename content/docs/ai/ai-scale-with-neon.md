@@ -24,7 +24,7 @@ In Neon, scaling vertically is a matter of selecting the desired compute size. N
 | 9                  | 9    | 36 GB | 604 MB               |
 | 10                 | 10   | 40 GB | 671 MB               |
 
-See [Edit a compute](/docs/manage/endpoints#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale plan. See [Neon plans](/docs/introduction/plans).
+See [Edit a compute](/docs/manage/endpoints#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale and Business plans. See [Neon plans](/docs/introduction/plans).
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to this:
 
@@ -46,7 +46,7 @@ To learn more about Neon's autoscaling feature and how to enable it, refer to ou
 
 ## Storage
 
-Neon's data storage allowances differ by plan. The Free plan offers 512 MB of storage. The Launch and Scale plans support larger data sizes and purchasing additional units of storage. See [Neon plans](/docs/introduction/plans).
+Neon's data storage allowances differ by plan. The Free plan offers 512 MB of storage. The Launch, Scale, and Business plans support larger data sizes and purchasing additional units of storage. See [Neon plans](/docs/introduction/plans).
 
 ## Read replicas
 

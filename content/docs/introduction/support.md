@@ -60,6 +60,6 @@ Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans)
 | Support plan | Pricing plan                                                                                    |
 | :----------- | :---------------------------------------------------------------------------------------------- |
 | Community    | [Free Plan](/docs/introduction/plans#free-plan)                                                 |
-| Standard     | [Launch plan](/docs/introduction/plans#launch)                                                  |
-| Priority     | [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans |
+| Standard     | [Launch](/docs/introduction/plans#launch) and  [Scale](/docs/introduction/plans#scale)   plans                                            |
+| Priority     | [Business plan](/docs/introduction/plans#business) |
 | Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise)                                          |
