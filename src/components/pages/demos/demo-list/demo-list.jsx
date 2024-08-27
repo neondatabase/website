@@ -190,7 +190,7 @@ const DemoList = () => (
           >
             <h2
               className={clsx(
-                'flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+                'flex items-center text-xs font-semibold uppercase leading-none tracking-extra-tight',
                 categoryTextColor
               )}
             >

@@ -46,11 +46,11 @@ const Hero = () => (
           <span className="text-green-45">Serverless showcase:</span>
           <br /> build with Neon
         </h1>
-        <p className="mt-5 text-xl font-light leading-snug -tracking-[0.015em] lg:text-xl md:text-base">
+        <p className="mt-5 text-xl font-light leading-snug tracking-extra-tight lg:text-xl md:text-base">
           Explore interactive demos from the community and the Neon team.
         </p>
         <div className="mt-20 lg:mt-16 md:mt-10">
-          <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-green-45">
+          <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none -tracking-extra-tight text-green-45">
             <span>Featured</span>
             <span className="ml-2 h-px grow bg-gray-new-20" />
           </h2>
@@ -81,10 +81,10 @@ const Hero = () => (
                 />
                 <h3
                   className={clsx(
-                    'font-medium tracking-tighter',
+                    'font-medium',
                     index === 0
-                      ? 'mt-9 max-w-[630px] text-[28px] leading-dense xl:text-2xl'
-                      : 'mt-[21px] text-lg leading-tight -tracking-[0.018em]',
+                      ? 'mt-9 max-w-[630px] text-[28px] leading-dense tracking-tighter xl:text-2xl'
+                      : 'mt-[21px] text-lg leading-tight tracking-extra-tight',
                     'md:text-xl'
                   )}
                 >
@@ -103,11 +103,12 @@ const Hero = () => (
                     </Link>
                   )}
                   <Link
-                    className="text-[15px] leading-none"
+                    className="flex items-center text-[15px] leading-none"
                     to={sourceLink}
                     target="_blank"
                     theme="gray-80"
                     rel="noopener noreferrer"
+                    withArrow
                   >
                     Source
                   </Link>
