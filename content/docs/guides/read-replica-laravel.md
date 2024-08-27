@@ -10,7 +10,7 @@ By distributing read requests across one or more read replicas, you can signific
 
 For more information about Neon's read replica feature, see Read replicas.
 
-In this guide, we’ll show you how to integrate Neon read replicas into a Laravel application, leveraging [Laravel's built-in support for read/write database connections](https://laravel.com/docs/4.2/database#read-write-connections).
+In this guide, we’ll show you how to integrate Neon read replicas into a Laravel application, leveraging [Laravel's built-in support for read/write database connections](https://laravel.com/docs/11.x/database#using-multiple-database-connections).
 
 ## Prerequisites
 
@@ -90,7 +90,7 @@ DB_READ_PASSWORD=AbC123dEf
 
 ## Configure Laravel to use read replicas
 
-Laravel provides [built-in support for read/write database connections](https://laravel.com/docs/4.2/database#read-write-connections). To configure Laravel to use a read replica, update your `config/database.php` file as follows:
+Laravel provides [built-in support for read/write database connections](https://laravel.com/docs/11.x/database#using-multiple-database-connections). To configure Laravel to use a read replica, update your `config/database.php` file as follows:
 
 ```php'pgsql' => [
     'driver'   => 'pgsql',
