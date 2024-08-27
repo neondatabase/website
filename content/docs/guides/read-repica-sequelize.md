@@ -105,16 +105,16 @@ const sequelize = new Sequelize({
         username: replicaConfig.user,
         password: replicaConfig.password,
         database: replicaConfig.database,
-      }
+      },
     ],
     write: {
       host: primaryConfig.host,
       username: primaryConfig.user,
       password: primaryConfig.password,
       database: primaryConfig.database,
-    }
+    },
   },
-  pool: { max: 20, idle: 30000 }
+  pool: { max: 20, idle: 30000 },
 });
 ```
 
