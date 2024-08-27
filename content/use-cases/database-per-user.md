@@ -24,7 +24,6 @@ Scale to Zero
 
 **The result:** Small teams can build flexible database-per-tenant architectures on Neon without operational burden or infra cost overhead.
 
-
 <Testimonial
 text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
 author={{
@@ -60,7 +59,6 @@ Neon is Postgres with serverless architecture. With rapid provisioning, scale-to
 - **There’s no need to provision infrastructure in advance.** You can scale your architecture progressively, from a few tenants to hundreds of thousands, without breaking the bank.
 - **Databases are ready in milliseconds via APIs.** An API call can create a project every time your end user needs a database, without causing delays.
 - **You only pay for the instances that are running.** Thanks to scale-to-zero, creating instances doesn’t incur compute costs unless they’re actually in use.
-
 
 ## Neon for B2B SaaS: Data isolation with easy scalability
 

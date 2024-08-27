@@ -55,29 +55,28 @@ Serverless (HTTP) Driver
 : Unlock access from serverless environments like AWS Lambda and Cloudflare Workers with the Neon serverless driver. It uses an HTTP API to query from edge/serverless with lower latency.
 </DefinitionList>
 
-
 ### Performance
 
 - **Similar Latency Characteristics to RDS Postgres**
-  
+
   Prisma recently published [performance benchmarks](https://benchmarks.prisma.io/?dbprovider=pg-rds) showing similar latency between AWS RDS and Neon.
 
 - **Self-Serve Autoscaling from zero to 10 CPU, 40GB RAM**
-  
-  Configure 
-  
+
+  Configure
+
 - **Storage up to 2TB**
-  Storage on Neon is 
+  Storage on Neon is
 
 - **Instant Read Replicas**
-  Storage on Neon is 
+  Storage on Neon is
 
 ### Security
 
 <DefinitionList bulletType="check">
 
 SOC 2 Type 2 Compliant
-: Neon is 
+: Neon is
 
 IP Allow List
 : Scale Plan accounts can lock down database access to specific IP addresses or ranges.
@@ -97,7 +96,6 @@ Pay through AWS Marketplace
 : If your business is already active on AWS, you may be able to save hassle and budgets by paying for Neon via AWS Marketplace.
 
 </DefinitionList>
-
 
 ## Differentiated Features
 
@@ -124,6 +122,5 @@ author={{
 <div align="center">
   [Why database-per-user?](/cases/database-per-user)
 </div>
-
 
 <CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
