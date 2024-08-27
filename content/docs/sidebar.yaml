@@ -326,21 +326,12 @@
     - title: Regions
       slug: introduction/regions
       icon: regions
-      items: 
-        - title: Neon Regions
-          slug: introduction/regions
     - title: Support
       slug: introduction/support
       icon: support
-      items: 
-        - title: Neon Support
-          slug: introduction/support
     - title: Status
       slug: introduction/status
       icon: status
-      items: 
-        - title: Neon Status
-          slug: introduction/status
     - title: Plans and billing
       slug: introduction/about-billing
       icon: billing
@@ -833,10 +824,6 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-      items:
-        - title: Neon roadmap
-          slug: introduction/roadmap
-          tag: updated
 - section: noname
   items:
     - title: Community
