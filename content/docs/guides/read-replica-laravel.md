@@ -59,7 +59,6 @@ curl --request POST \
 neon branches add-compute mybranch --type read_only
 ```
 
-
 ## Retrieve the connection string for your read replica
 
 Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
@@ -71,7 +70,6 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
    ```bash shouldWrap
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
-
 
 ## Update your environment variables
 
