@@ -19,7 +19,7 @@ Regardless of the application, the steps for creating, configuring, and connecti
 ## Prerequisites
 
 - A Neon paid plan account
-- A [Neon project](/docs/manage/projects#create-a-project).
+- A [Neon project](/docs/manage/projects#create-a-project)
 
 ## Create a read replica
 
@@ -34,13 +34,13 @@ To create a read replica from the Neon Console:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your compute is automatically suspended. The default setting is 5 minutes.
+5. Specify the **Compute size settings**. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
    </Admonition>
 6. When you finish making your selections, click **Create**.
 
-In a few moments, your read replica is provisioned and appears on the **Computes** tab on the **Branches** page. The following section describes how to connect to your read replica.
+In a few seconds, your read replica is provisioned and appears on the **Computes** tab on the **Branches** page. The following section describes how to connect to your read replica.
 </TabItem>
 
 <TabItem>

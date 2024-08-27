@@ -42,7 +42,7 @@ You can add a read replica compute- to any branch in your Neon project by follow
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size** options. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure an **Autosuspend time** setting, which is the amount of idle time after which a compute suspends due to inactivity. The default setting is 5 minutes.
+5. Specify the **Compute size settings**. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure an **Autosuspend time** setting, which is the amount of idle time after which a compute suspends due to inactivity. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
    </Admonition>
@@ -50,9 +50,13 @@ You can add a read replica compute- to any branch in your Neon project by follow
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
+Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
-<CodeTabs labels={["API", "CLI"]}>
+<CodeTabs labels={["CLI", "API"]}>
+
+```bash
+neon branches add-compute mybranch --type read_only
+```
 
 ```bash
 curl --request POST \
@@ -68,10 +72,6 @@ curl --request POST \
   }
 }
 ' | jq
-```
-
-```bash
-neon branches add-compute mybranch --type read_only
 ```
 
 </CodeTabs>
