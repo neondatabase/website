@@ -76,7 +76,6 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 
 ## Update your database.yml file
 
-
 In your `config/database.yml` file, configure both the primary database and the read replicas. Here’s an example configuration:
 
 ```yaml
@@ -125,11 +124,12 @@ end
 - Automatic Switching: Rails will automatically route read queries to the replica and write queries to the primary database. You can control the delay before switching back to the primary after a write operation using the delay option.
 - Manual Control: If you need to manually force a query to go to the primary database, use the use_primary method:
 
-  ```ruby
-  ActiveRecord::Base.connected_to(role: :writing) do
-    User.first
-  end
-  ```
+```ruby
+ActiveRecord::Base.connected_to(role: :writing) do
+  User.first
+end
+```
+
 </Admonition>
 
 ## Testing and monitoring
