@@ -30,7 +30,8 @@ const items = [
       { title: 'Community support' },
       { title: 'Organization accounts', disabled: true },
       { title: 'Branch protection', disabled: true },
-      { title: 'SOC 2, 99.95% SLA', disabled: true },
+      { title: 'SOC 2', disabled: true },
+      { title: 'SLA (99.95%)', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -59,7 +60,8 @@ const items = [
       { title: 'Standard support' },
       { title: 'Organization accounts' },
       { title: 'Branch protection', disabled: true },
-      { title: 'SOC 2, 99.95% SLA', disabled: true },
+      { title: 'SOC 2', disabled: true },
+      { title: 'SLA (99.95%)', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -85,7 +87,8 @@ const items = [
       { title: 'Standard support' },
       { title: 'Organization accounts' },
       { title: 'Branch protection', disabled: true },
-      { title: 'SOC 2, 99.95% SLA', disabled: true },
+      { title: 'SOC 2', disabled: true },
+      { title: 'SLA (99.95%)', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -111,7 +114,8 @@ const items = [
       { title: 'Priority support' },
       { title: 'Organization accounts' },
       { title: 'Branch protection' },
-      { title: 'SOC 2, 99.95% SLA' },
+      { title: 'SOC 2' },
+      { title: 'SLA (99.95%)' },
     ],
     button: {
       url: `${LINKS.enterprise}#request-trial`,
