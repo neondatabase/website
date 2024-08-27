@@ -60,6 +60,7 @@ The Free Plan includes the following usage allowances:
 ### Free Plan features
 
 - Autosuspend (after 5 minutes of inactivity)
+- Monitoring with 1 day of historical data
 - All supported regions
 - Project sharing
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
@@ -99,7 +100,8 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 ### Launch plan features
 
-- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
+- Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
+- Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
@@ -134,10 +136,11 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Scale plan features
 
-- Compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Autoscaling compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
-- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
-- [Priority support](/docs/introduction/support)
+- Neon features such as branching, point-in-time restore up to **14 days** in the past, time travel connections, and more
+- [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
@@ -151,11 +154,11 @@ The Business plan includes the following usage allowances:
 
 | Usage type    | Plan allowance                                           |
 | ------------- | -------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                         |
+| **Projects**  | 100 Neon projects                                         |
 | **Branches**  | 1000 per project                                         |
 | **Databases** | Unlimited                                                |
 | **Storage**   | 500 GiB of data storage                                  |
-| **Compute**   | 1,000 compute hours for all computes across all projects |
+| **Compute**   | 1,000 compute hours a month for all computes across all projects |
 
 ### Business plan extra usage
 
@@ -163,13 +166,14 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 
 | Extra usage type   | Cost                                                                    |
 | ------------------ | ----------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $0.75 per unit, prorated for the month |
+| **Extra Storage**  | Billed for in units of 10 GiB at $7.50 per unit, prorated for the month |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                                |
 | **Extra Projects** | Billed for in units of 10 at $5 per unit                                |
 
 ### Business plan features
 
-- Compute up to 10 vCPUs and 40 GB RAM, with autoscaling enabled for up to 10 compute units (CU)
+- Autoscaling compute up to 10 vCPUs and 40 GB RAM
+- Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
