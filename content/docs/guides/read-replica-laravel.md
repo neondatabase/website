@@ -1,6 +1,6 @@
 ---
 title: Use Neon read replicas with Laravel Database Manager
-subtitle: Scale your application with Neon read replicas with Laravel Database Manager
+subtitle: Scale your application with Neon read replicas and Laravel Database Manager
 enableTableOfContents: true
 ---
 
@@ -92,7 +92,7 @@ DB_READ_PASSWORD=AbC123dEf
 
 ## Configure Laravel to use read replicas
 
-Laravel provides built-in support for read/write database connections. To configure Laravel to use a read replica, update your `config/database.php` file as follows:
+Laravel provides [built-in support for read/write database connections](https://laravel.com/docs/4.2/database#read-write-connections). To configure Laravel to use a read replica, update your `config/database.php` file as follows:
 
 ```php'pgsql' => [
     'driver'   => 'pgsql',
@@ -104,7 +104,7 @@ Laravel provides built-in support for read/write database connections. To config
     'charset'  => 'utf8',
     'prefix'   => '',
     'schema'   => 'public',
-    'sslmode'  => 'prefer',
+    'sslmode'  => 'require',
     'options'  => extension_loaded('pdo_pgsql') ? array_filter([
         PDO::PGSQL_ATTR_SSL_CA => env('DB_SSL_CA'),
     ]) : [],
