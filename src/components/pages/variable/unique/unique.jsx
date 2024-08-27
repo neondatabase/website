@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import Testimonial from 'components/pages/case/testimonial';
+import Testimonial from 'components/pages/use-case/testimonial';
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable-load/testimonials/andrea-levinge.jpg';
 

@@ -9,7 +9,7 @@ export default {
   branching: '/branching',
   businessInformation: '/business-info',
   careers: '/careers',
-  cases: '/cases',
+  useCases: '/use-cases',
   caseStudies: '/case-studies',
   changelog: '/docs/changelog',
   cli: '/cli',

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import BgDecor from 'components/pages/case/bg-decor';
+import BgDecor from 'components/pages/use-case/bg-decor';
 
 import Calculator from '../calculator';
 

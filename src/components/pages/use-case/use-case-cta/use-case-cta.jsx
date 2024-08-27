@@ -10,7 +10,7 @@ import blueGlow from './images/blue-glow.png';
 import greenGlowMobile from './images/green-glow-mobile.png';
 import greenGlow from './images/green-glow.png';
 
-const CaseCta = ({ text, buttonText, buttonUrl }) => (
+const UseCaseCta = ({ text, buttonText, buttonUrl }) => (
   <div className="not-prose relative mt-10 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 xl:mt-9 lg:mt-8 lg:pr-10 sm:mt-6 sm:p-6">
     <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
       <h3 className="mb-1 max-w-sm text-2xl font-medium leading-dense tracking-tighter sm:mb-1 sm:text-center sm:text-xl">
@@ -57,10 +57,10 @@ const CaseCta = ({ text, buttonText, buttonUrl }) => (
   </div>
 );
 
-CaseCta.propTypes = {
+UseCaseCta.propTypes = {
   text: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
 };
 
-export default CaseCta;
+export default UseCaseCta;

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
-import BgDecor from 'components/pages/case/bg-decor';
+import BgDecor from 'components/pages/use-case/bg-decor';
 import Link from 'components/shared/link';
 
 const Testimonial = ({ text, author, url }) => (

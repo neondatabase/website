@@ -6,9 +6,6 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
-import CaseCta from 'components/pages/case/case-cta';
-import CaseList from 'components/pages/case/case-list';
-import Testimonial from 'components/pages/case/testimonial';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -20,6 +17,10 @@ import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import Testimonial from 'components/pages/use-case/testimonial';
+import UseCaseContext from 'components/pages/use-case/use-case-context';
+import UseCaseCta from 'components/pages/use-case/use-case-cta';
+import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
@@ -54,7 +55,7 @@ const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isCase) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
   h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
   h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
   h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
@@ -132,9 +133,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isCase) 
   TabItem,
   InfoBlock,
   DocsList,
-  CTA: isCase ? CaseCta : DocCta,
+  CTA: isUseCase ? UseCaseCta : DocCta,
   Testimonial,
-  CaseList,
+  UseCaseList,
+  UseCaseContext,
   ...sharedComponents,
 });
 
@@ -146,14 +148,14 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
-  isCase = false,
+  isUseCase = false,
 }) => (
   <div className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}>
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isCase)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase)}
         source={content}
         options={{
           mdxOptions: {

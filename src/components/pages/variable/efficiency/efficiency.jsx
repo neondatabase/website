@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import Testimonial from 'components/pages/case/testimonial';
+import Testimonial from 'components/pages/use-case/testimonial';
 import autoscaleIcon from 'icons/variable/autoscale.svg';
 import costIcon from 'icons/variable/cost.svg';
 import databaseIcon from 'icons/variable/database.svg';

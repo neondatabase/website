@@ -113,7 +113,7 @@ export default {
           },
           text: 'Postgres for SaaS',
           description: 'Postgres for SaaS',
-          to: `${LINKS.cases}/postgres-for-saas`,
+          to: `${LINKS.useCases}/postgres-for-saas`,
         },
         {
           icon: {
@@ -131,7 +131,7 @@ export default {
         //   },
         //   text: 'Dev/Stage/Test',
         //   description: 'Build and test on Neon',
-        //   to: `${LINKS.cases}/dev-stage-test`,
+        //   to: `${LINKS.useCases}/dev-stage-test`,
         // },
         {
           icon: {
@@ -140,7 +140,7 @@ export default {
           },
           text: 'Database-per-User',
           description: 'Database-per-User',
-          to: `${LINKS.cases}/database-per-user`,
+          to: `${LINKS.useCases}/database-per-user`,
         },
         // {
         //   icon: {
@@ -149,7 +149,7 @@ export default {
         //   },
         //   text: 'Development Velocity',
         //   description: 'Ship faster than ever',
-        //   to: `${LINKS.cases}/development-velocity`,
+        //   to: `${LINKS.useCases}/development-velocity`,
         // },
       ],
     },

@@ -9,7 +9,7 @@ const { CHANGELOG_DIR_PATH } = require('../constants/docs');
 const getExcerpt = require('./get-excerpt');
 
 const DOCS_DIR_PATH = 'content/docs';
-const CASES_DIR_PATH = 'content/cases';
+const USE_CASES_DIR_PATH = 'content/use-cases';
 const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
@@ -127,7 +127,7 @@ module.exports = {
   getAllChangelogPosts,
   getAllPosts,
   DOCS_DIR_PATH,
-  CASES_DIR_PATH,
+  USE_CASES_DIR_PATH,
   FLOW_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

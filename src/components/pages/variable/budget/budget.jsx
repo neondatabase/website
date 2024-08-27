@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 
 import LINKS from 'constants/links';
 
-import CaseCta from '../../case/case-cta';
+import UseCaseCta from '../../use-case/use-case-cta';
 import Example from '../example';
 import List from '../list';
 import Section from '../section';
@@ -33,7 +33,7 @@ const Budget = ({ title }) => (
       </p>
       <List items={items} />
     </div>
-    <CaseCta
+    <UseCaseCta
       text="Want a price estimation for your particular use case?"
       buttonText="Reach out to us"
       buttonUrl={LINKS.contactSales}
