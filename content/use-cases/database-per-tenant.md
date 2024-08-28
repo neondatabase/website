@@ -87,6 +87,7 @@ author={{
 Differentiated features are great, but what about the basics... Does Neon meet the requirements for your use case?
 
 ### Compatibility
+
 ---
 
 <DefinitionList bulletType="check">
@@ -107,25 +108,27 @@ Serverless (HTTP) Driver
 </DefinitionList>
 
 ### Performance and Scale
+
 ---
 
 - **Similar Latency Characteristics to RDS Postgres**
-  
+
   Prisma recently published <a href="https://benchmarks.prisma.io/?dbprovider=pg-rds" target="_blank">performance benchmarks</a> showing similar latency between AWS RDS and Neon.
 
 - **Self-Serve Autoscaling from zero to 10 CU**
-  
+
   Configure Neon to autoscale up to 10 CPU, 40GB RAM. [Contact our team](/contact-sales) to unlock larger computes.
-  
+
 - **Storage up to 2TB**
-  
+
   Storage scales seamlessly based on usage. [Contact our team](/contact-sales) for custom rates on 2tb+ storage.
 
 - **Instant Read Replicas**
-  
+
   Read replicas on Neon are faster to create, and only add compute (not storage) making them a cost efficient means of separating workloads.
 
 ### Security and Compliance
+
 ---
 
 <DefinitionList >
@@ -142,6 +145,7 @@ HIPAA compliance in-progress
 </DefinitionList>
 
 ### Cost
+
 ---
 
 <DefinitionList bulletType="check">
