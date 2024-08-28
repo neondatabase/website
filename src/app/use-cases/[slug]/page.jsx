@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import LINKS from 'constants/links';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { USE_CASES_DIR_PATH, getPostBySlug } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }) {
     description: post?.data?.subtitle,
     pathname: `${LINKS.useCases}/${currentSlug}`,
     type: 'article',
-    imagePath: post?.data?.image,
+    imagePath: post?.data?.image || DEFAULT_IMAGE_PATH,
   });
 }
 
