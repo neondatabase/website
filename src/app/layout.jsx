@@ -4,11 +4,10 @@ import Script from 'next/script';
 
 import 'swiper/css';
 
-import { PreviousUrlProvider } from 'components/pages/use-case/use-case-context/PreviousUrlContext';
-
 import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';
+import { PreviousUrlProvider } from './previous-url-context';
 import ThemeProvider from './provider';
 
 export const preferredRegion = 'edge';

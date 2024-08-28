@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePreviousUrl } from 'app/previous-url-context';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-import { usePreviousUrl } from './PreviousUrlContext';
-
 const UseCaseContext = ({}) => {
   const [showContext, setShowContext] = useState(false);
+  // TODO: try to fing alternative solution to get previous url (using server actions, for example)
   const previousUrl = usePreviousUrl();
 
   useEffect(() => {

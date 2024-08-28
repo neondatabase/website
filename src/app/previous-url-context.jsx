@@ -1,5 +1,6 @@
 'use client';
 
+// TODO: try to fing alternative solution to get previous url (using server actions, for example)
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import React, { createContext, useContext, useEffect, useRef } from 'react';
