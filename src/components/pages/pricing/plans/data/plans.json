@@ -126,8 +126,8 @@
         "info": "4 CU = 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "8 CU",
-        "info": "8 CU = 8 vCPU, 32 GB RAM"
+        "title": "10 CU",
+        "info": "10 CU = 10 vCPU, 40 GB RAM"
       },
       "business": {
         "title": "10 CU",
@@ -151,7 +151,7 @@
       },
       "free": "Up to 2 CU",
       "launch": "Up to 4 CU",
-      "scale": "Up to 8 CU",
+      "scale": "Up to 10 CU",
       "business": "Up to 10 CU"
     },
     {
@@ -162,7 +162,7 @@
       "free": "Fixed <span>5 minutes</span>",
       "launch": "Configurable <span>5 min+ or never</span>",
       "scale": "Configurable <span>1 min+ or never</span>",
-      "business": "Fully Configurable"
+      "business": "Configurable <span>1 min+ or never</span>"
     },
     {
       "rows": "1",
@@ -254,16 +254,6 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Branch Protection"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
         "title": "SLA"
       },
       "free": false,
@@ -287,6 +277,16 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Branch Protection"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Point-in-time Restore"
       },
       "free": "Up to 24 hours",
@@ -301,7 +301,7 @@
       },
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
-      "scale": "Up to 7 days",
+      "scale": "Up to 14 days",
       "business": "Up to 14 days"
     },
     {
