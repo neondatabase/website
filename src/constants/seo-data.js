@@ -80,13 +80,6 @@ export default {
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
-  flow: {
-    title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
-    imagePath: '/images/social-previews/flow.jpg',
-    type: 'article',
-    pathname: LINKS.flow,
-  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
@@ -121,6 +114,13 @@ export default {
       'Run thousands of Postgres databases for a fraction of the cost with Neon. Great for building your free tier.',
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
+  },
+  flow: {
+    title: 'Database Branching Workflows - Neon',
+    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    imagePath: '/images/social-previews/flow.jpg',
+    pathname: LINKS.flow,
+    type: 'article',
   },
   // TODO: Add REAL SEO data for scalable architecture page
   scalableArchitecture: {
