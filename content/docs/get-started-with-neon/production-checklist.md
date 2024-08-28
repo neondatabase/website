@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-08-19T14:53:19.391Z'
+updatedOn: '2024-08-27T20:56:03.443Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -79,7 +79,7 @@ The Postgres `max_connections` setting defines your basic maximum simultaneous c
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connectin Details** widget on your project's **Dashboard** in the Neon Console. Select the **Pooled connection** option. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Select the **Pooled connection** option. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Configure your history retention period
 

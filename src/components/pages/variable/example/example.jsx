@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import BgDecor from '../bg-decor';
+import BgDecor from 'components/pages/use-case/bg-decor';
+
 import Calculator from '../calculator';
 
 import leftGlowMobile from './images/left-glow-mobile.png';

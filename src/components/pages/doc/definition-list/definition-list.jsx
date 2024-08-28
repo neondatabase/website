@@ -56,7 +56,7 @@ const buildRenderContent = ({ delimiterRegEx, delimiterVariations }, jsx) => {
   return store;
 };
 
-const DefinitionList = ({ children }) => {
+const DefinitionList = ({ bulletType = 'dash', children }) => {
   let content = children;
   if (!Array.isArray(children)) {
     content = [children];
@@ -89,7 +89,9 @@ const DefinitionList = ({ children }) => {
                   id={!termIdx ? anchorMold : termIdx}
                   key={termIdx}
                 >
-                  <span className="mr-2.5">—</span>
+                  <span className="mr-2.5">
+                    {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
+                  </span>
                   {term}
                   {!termIdx && (
                     <a
@@ -115,6 +117,7 @@ const DefinitionList = ({ children }) => {
 };
 
 DefinitionList.propTypes = {
+  bulletType: PropTypes.oneOf(['dash', 'check', 'x']),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
