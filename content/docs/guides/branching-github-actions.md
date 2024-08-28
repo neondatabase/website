@@ -37,20 +37,21 @@ name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
   Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v5
-    with:
-      project_id: rapid-haze-373089
-      # optional (defaults to your project's default branch)
-      parent: dev
-      # optional (defaults to neondb)
-      database: my-database
-      branch_name: from_action_reusable
-      username: db_user_for_url
-      api_key: ${{ secrets.NEON_API_KEY }}
-    id: create-branch
-  - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
-  - run: echo host ${{ steps.create-branch.outputs.host }}
-  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
+  steps:
+    - uses: neondatabase/create-branch-action@v5
+      with:
+        project_id: rapid-haze-373089
+        # optional (defaults to your project's default branch)
+        parent: dev
+        # optional (defaults to neondb)
+        database: my-database
+        branch_name: from_action_reusable
+        username: db_user_for_url
+        api_key: ${{ secrets.NEON_API_KEY }}
+        id: create-branch
+    - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
+    - run: echo host ${{ steps.create-branch.outputs.host }}
+    - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
 ```
 
 ### Input variables
@@ -76,10 +77,10 @@ inputs:
     description: 'Use prisma or not'
     default: 'false'
   parent:
-    description: 'The parent branch name or id or LSN or timestamp. By default the default branch is used'
+    description: 'The parent branch name or id or LSN or timestamp. By default the primary branch is used'
   suspend_timeout:
     description: >
-      Duration of inactivity in seconds after which the compute is
+      Duration of inactivity in seconds after which the compute endpoint is
       For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
     default: '0'
   ssl:
@@ -139,11 +140,12 @@ run-name: Delete a Neon Branch 🚀
 on: [push]
 jobs:
   delete-neon-branch:
-    uses: neondatabase/delete-branch-action@v3
-    with:
-      project_id: rapid-haze-373089
-      branch: br-long-forest-224191
-      api_key: { { secrets.NEON_API_KEY } }
+    steps:
+      uses: neondatabase/delete-branch-action@v3
+      with:
+        project_id: rapid-haze-373089
+        branch: br-long-forest-224191
+        api_key: {{ secrets.NEON_API_KEY }}
 ```
 
 ### Input variables
@@ -152,15 +154,15 @@ jobs:
 inputs:
   project_id:
     required: true
-    description: 'The Neon project id'
+    description: "The Neon project id"
   branch_id:
-    description: 'The Neon branch id'
-    deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
+    description: "The Neon branch id"
+    deprecationMessage: "The `branch_id` input is deprecated in favor of `branch`"
   api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
+    description: "The Neon API key, read more at https://neon.tech/docs/manage/api-keys"
     required: true
   branch:
-    description: 'The Neon branch name or id'
+    description: "The Neon branch name or id"
 ```
 
 ### Outputs
@@ -171,8 +173,10 @@ This Action has no outputs.
 
 This GitHub Action resets a child branch with the latest data from its parent branch.
 
-> **Info**
-> The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
+<Admonition type="info">
+The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
+</Admonition>
+
 
 ### Prerequisites
 
@@ -192,33 +196,31 @@ name: Reset Neon Branch with GitHub Actions Demo
 run-name: Reset a Neon Branch 🚀
 jobs:
   Reset-Neon-Branch:
-    uses: neondatabase/reset-branch-action@v1
-    with:
-      project_id: rapid-haze-373089
-      parent: true
-      branch: child_branch
-      api_key: {{ secrets.NEON_API_KEY }}
-    id: reset-branch
-  - run: echo branch_id ${{ steps.reset-branch.outputs.branch_id }}
+    steps:
+      - uses: neondatabase/reset-branch-action@v1
+        with:
+          project_id: rapid-haze-373089
+          parent: true
+          branch: child_branch
+          api_key: ${{ secrets.NEON_API_KEY }}
+        id: reset-branch
+      - run: echo branch_id ${{ steps.reset-branch.outputs.branch_id }}
 ```
 
 ### Input variables
 
-```yaml
-inputs:
-  project_id:
-    required: true
-    description: 'The project id'
-  branch:
-    required: true
-    description: 'The branch name or id to reset'
-  api_key:
-    description: 'The Neon API key'
-    required: true
-  parent:
-    description: 'If specified, the branch will be reset to the parent branch'
-    required: false
-```
+- `project_id`: The ID of your Neon project. Find this value in the Neon Console on the Settings page.
+- `parent`: If specified, the branch will be reset to the latest (HEAD) of parent branch.
+- `branch`: The name or id of the branch to reset.
+- `api_key`: An API key created in your Neon account. See How to set up the NEON_API_KEY for instructions.
+
+The action provides a connection string as an output. You can configure the connection string with these optional `cs_*` inputs:
+
+- `cs_role_name`: The output connection string db role name.
+- `cs_database`: The output connection string database name.
+- `cs_prisma`: Use Prisma in output connection string or not. The default is 'false'.
+- `cs_ssl`: Add `sslmode` to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit". The default is - 'require'.
+
 
 ### Outputs
 
@@ -227,7 +229,30 @@ outputs:
   branch_id:
     description: 'Reset branch id'
     value: ${{ steps.reset-branch.outputs.branch_id }}
+  db_url:
+    description: 'DATABASE_URL of the branch after the reset'
+    value: ${{ steps.reset-branch.outputs.db_url }}
+  db_url_with_pooler:
+    description: 'DATABASE_URL with pooler of the branch after the reset'
+    value: ${{ steps.reset-branch.outputs.db_url_with_pooler }}
+  host:
+    description: 'Branch host after reset'
+    value: ${{ steps.reset-branch.outputs.host }}
+  host_with_pooler:
+    description: 'Branch host with pooling enabled after reset'
+    value: ${{ steps.reset-branch.outputs.host_with_pooler }}
+  password:
+    description: 'Password for connecting to the branch database after reset'
+    value: ${{ steps.reset-branch.outputs.password }}
 ```
+
+- `branch_id`: The ID of the newly reset branch.
+- `db_url`: Database connection string to the branch after the reset.
+- `db_url_with_pooler`: Database pooled connection string to the branch after the reset.
+- `host`: Branch host after reset.
+- `host_with_pooler`: Branch host with pooling enabled after reset.
+- `password`: Password for connecting to the branch database after reset.
+
 
 ## Example applications
 
