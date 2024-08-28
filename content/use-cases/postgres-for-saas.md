@@ -35,8 +35,6 @@ author={{
 
 ## Key Features
 
-A deep dive into the features that differentiate Neon from other Postgres database services when it comes to building SaaS applications.
-
 ### Database Branching
 
 ---
