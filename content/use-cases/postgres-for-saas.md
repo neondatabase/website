@@ -35,8 +35,8 @@ author={{
 
 ## Key Features
 
-
 ---
+
 ### Database Branching
 
 ![Database Branching](/use-cases/branching.jpg?branching)
@@ -63,6 +63,7 @@ Better Testing and CI/CD
 </DefinitionList>
 
 ---
+
 ### Autoscaling
 
 ![Neon Autoscaling](/use-cases/autoscaling.jpg)
@@ -83,6 +84,7 @@ Reduce chance of database outages
 </DefinitionList>
 
 ---
+
 ### Serverless Operating Model
 
 Neon abstracts away the concept of servers so that customers can focus on building their SaaS application, not managing their database:
@@ -93,6 +95,7 @@ Neon abstracts away the concept of servers so that customers can focus on buildi
 - Focus on business logic: You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
 
 ---
+
 ## Database-per-Tenant Architectures
 
 If your SaaS project could benefit from multitenancy, Neon makes it simple to create a dedicated database for each user:
