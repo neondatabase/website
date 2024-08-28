@@ -66,7 +66,9 @@ const Post = ({
         <article>
           <h1
             className={clsx(
-              'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
+              isUseCase
+                ? 'mt-12 text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
               tag && 'inline'
             )}
           >

@@ -138,8 +138,8 @@ export default {
             light: caseDatabaseIcon,
             dark: caseDatabaseDarkIcon,
           },
-          text: 'Database-per-User',
-          description: 'Database-per-User',
+          text: 'Database per Tenant',
+          description: 'DB-per-User Archictectures',
           to: `${LINKS.useCases}/database-per-user`,
         },
         // {

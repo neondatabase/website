@@ -1,6 +1,6 @@
 ---
-title: 'One Postgres database per user'
-subtitle: Neon allows you to manage thousands of Postgres databases without management or cost overhead. Provision databases in milliseconds and manage them effortlessly via APIs.
+title: 'Database per Tenant on Postgres'
+subtitle: Scale to zero and instant provisioning via a comprehensive management API make DB-per-user architectures easy and cost-efficient on Neon.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 ---
@@ -9,17 +9,17 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 ## Summary
 
-Database-per-user architectures were once associated with high costs and operational overhead. But today, companies like Retool use Neon to manage fleets of hundreds of thousands of databases with part of a single engineer's time. How? In short:
+Three features make database-per-user architectures on Neon possible to the extent that today, companies are able to manage fleets of hundreds of thousands of databases with a single engineer.
 
 <DefinitionList>
 Management API
-: Create isolated environments with production-like copies of your data and schema for testing, development, and CI/CD workflows.
+: Use the API to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics. [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 
 Instant Provisioning
-: CPU, Memory, and Storage scale up and down to match your workload. No more paying for resources you dont need. Less stress about outages caused by hitting fixed resource limits.
+: P99 database provisioning time is less than 1 second.
 
 Scale to Zero
-: Never touch a `pg_hba.conf`, nowhere to SSH into, no manual configuration of retention policies. In Neon, operational work is either abstracted away or presented in an intuitive UI + API.
+: Idle databases scale compute to zero automatically, and instantly come back online when needed. This means you're not paying a fixed cost for every database you onboard.
 </DefinitionList>
 
 **The result:** Small teams can build flexible database-per-tenant architectures on Neon without operational burden or infra cost overhead.
@@ -82,13 +82,75 @@ author={{
 [Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
 </div>
 
-## Earning your trust
+## Table Stakes
 
-We know that your database is the most critical part of your stack. We also know that anyone can say _“We take uptime/data retention/security seriously”_ — instead of doing that, here’s a list of verifiable facts about Neon’s approach.
+Differentiated features are great, but what about the basics... Does Neon meet the requirements for your use case?
 
-- **Uptime.** Neon operates databases by running a distributed system on high-reliability cloud providers, who guarantee instance SLAs of 99.99% ([AWS](https://aws.amazon.com/compute/sla/)) and 99.9% ([Azure](https://azure.microsoft.com/files/Features/Reliability/AzureResiliencyInfographic.pdf)).
-- **Data-loss prevention.** Neon keeps 6 copies of your dataset: three copies across three availability zones, two in S3, and one in compute. Neon also retains every change to the database within your set retention window.
-- **Security.** [Neon is SOC2 Type 2 compliant](https://neon.tech/docs/security/security-overview#soc-2-compliance), and [all inbound/outbound database connections must use SSL/TLS](https://neon.tech/docs/security/security-overview#data-at-rest-encryption).
-- **Continuity of service.** Neon is not going anywhere: [we’ve raised $130.6mm in funding](https://techcrunch.com/2024/08/07/database-startup-neon-nabs-a-microsoft-investment/), we have [thousands of customers](https://neon.tech/case-studies), and [our tech is open source using the Apache 2.0 license](https://github.com/neondatabase/neon/blob/main/LICENSE).
+### Compatibility
+---
+
+<DefinitionList bulletType="check">
+It's Just Postgres
+: Deploy Postgres 14, 15, 16 on Neon. There is no lock-in, no proprietary syntax to learn.
+
+Integrates with any language/framework
+: Anything that has a Postgres driver or integration works with Neon.
+
+70+ Postgres extensions
+: `pgvector`, `postGIS`, `timescaledb` and [66 other extensions](/docs/extensions/pg-extensions) are supported on Neon
+
+Logical Replication
+: Inbound (Neon as subscriber) and outbound (Neon as publisher) logical replication supported.
+
+Serverless (HTTP) Driver
+: Unlock access from serverless environments like AWS Lambda and Cloudflare Workers with the Neon serverless driver. It uses an HTTP API to query from edge/serverless with lower latency.
+</DefinitionList>
+
+### Performance and Scale
+---
+
+- **Similar Latency Characteristics to RDS Postgres**
+  
+  Prisma recently published <a href="https://benchmarks.prisma.io/?dbprovider=pg-rds" target="_blank">performance benchmarks</a> showing similar latency between AWS RDS and Neon.
+
+- **Self-Serve Autoscaling from zero to 10 CU**
+  
+  Configure Neon to autoscale up to 10 CPU, 40GB RAM. [Contact our team](/contact-sales) to unlock larger computes.
+  
+- **Storage up to 2TB**
+  
+  Storage scales seamlessly based on usage. [Contact our team](/contact-sales) for custom rates on 2tb+ storage.
+
+- **Instant Read Replicas**
+  
+  Read replicas on Neon are faster to create, and only add compute (not storage) making them a cost efficient means of separating workloads.
+
+### Security and Compliance
+---
+
+<DefinitionList >
+
+IP Allow List
+: Scale Plan accounts can lock down database access to specific IP addresses or ranges.
+
+SOC 2 Type 2 Compliant
+: Neon has been SOC 2 Type 2 Compliant since Dec 2, 2023. View full compliance details in the [Trust Center](https://trust.neon.tech/).
+
+HIPAA compliance in-progress
+: Neon is actively pursuing attaining HIPAA compliance. [Contact our team](/contact-sales) to get notified of updates.
+
+</DefinitionList>
+
+### Cost
+---
+
+<DefinitionList bulletType="check">
+Usage-Based Billing
+: Paid plans start at $19 for an allotment of Compute and Storage resources, and scale up predictably as your workload grows.
+
+Pay via AWS Marketplace
+: If your business is already active on AWS, you may be able to save hassle and budgets by paying for Neon via AWS Marketplace.
+
+</DefinitionList>
 
 <CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
