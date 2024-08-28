@@ -4,6 +4,8 @@ import Script from 'next/script';
 
 import 'swiper/css';
 
+import { PreviousUrlProvider } from 'components/pages/use-case/use-case-context/PreviousUrlContext';
+
 import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';
@@ -29,7 +31,9 @@ const RootLayout = ({ children }) => (
     </head>
     <body>
       <ThemeProvider>
-        <ActiveLabelProvider>{children}</ActiveLabelProvider>
+        <PreviousUrlProvider>
+          <ActiveLabelProvider>{children}</ActiveLabelProvider>
+        </PreviousUrlProvider>
       </ThemeProvider>
     </body>
   </html>
