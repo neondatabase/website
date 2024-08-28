@@ -140,7 +140,7 @@ export default {
           },
           text: 'Database per Tenant',
           description: 'DB-per-User Archictectures',
-          to: `${LINKS.useCases}/database-per-user`,
+          to: `${LINKS.useCases}/database-per-tenant`,
         },
         // {
         //   icon: {
