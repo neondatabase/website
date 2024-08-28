@@ -159,7 +159,6 @@ Serverless (HTTP) Driver
 
 - **Instant Read Replicas**
   Read replicas on Neon are faster to create, and only add compute (not storage) making them a cost efficient means of separating workloads.
-  > > > > > > > Stashed changes
 
 ### Security and Compliance
 
