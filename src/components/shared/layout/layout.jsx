@@ -18,6 +18,7 @@ const Layout = ({
   isHeaderStickyOverlay = false,
   isDocPage = false,
   isBlogPage = false,
+  hasThemesSupport = false,
 }) => (
   <>
     <Topbar isDarkTheme={headerTheme === 'dark'} />
@@ -38,7 +39,7 @@ const Layout = ({
       >
         {children}
       </main>
-      <Footer isDocPage={isDocPage} theme={footerTheme} />
+      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
       <CookieConsent />
     </div>
   </>
@@ -56,6 +57,7 @@ Layout.propTypes = {
   headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isBlogPage: PropTypes.bool,
+  hasThemesSupport: PropTypes.bool,
 };
 
 export default Layout;
