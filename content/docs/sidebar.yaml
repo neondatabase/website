@@ -256,16 +256,29 @@
       items:
         - section: Access control
           items:
-            - title: E-mail signup
-              slug: manage/email-signup
+            - title: Accounts
+              slug: manage/accounts
             - title: Organizations
               slug: manage/organizations
+              items:
+                - title: Getting started
+                  slug: manage/organizations
+                - title: Manage Organizations
+                  slug: manage/orgs-manage
+                - title: Transfer projects
+                  slug: manage/orgs-project-transfer
+                - title: API actions
+                  slug: manage/orgs-api
+                - title: CLI actions
+                  slug: manage/orgs-cli
             - title: Project access
               slug: manage/project-access
             - title: Project sharing
               slug: guides/project-sharing-guide
             - title: Database access
               slug: manage/database-access
+            - title: E-mail signup
+              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
         - section: Projects
@@ -313,21 +326,12 @@
     - title: Regions
       slug: introduction/regions
       icon: regions
-      items: 
-        - title: Neon Regions
-          slug: introduction/regions
     - title: Support
       slug: introduction/support
       icon: support
-      items: 
-        - title: Neon Support
-          slug: introduction/support
     - title: Status
       slug: introduction/status
       icon: status
-      items: 
-        - title: Neon Status
-          slug: introduction/status
     - title: Plans and billing
       slug: introduction/about-billing
       icon: billing
@@ -487,6 +491,8 @@
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
               slug: guides/logical-replication-decodable
+            - title: Estuary Flow
+              slug: guides/logical-replication-estuary-flow
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -818,10 +824,6 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-      items:
-        - title: Neon roadmap
-          slug: introduction/roadmap
-          tag: updated
 - section: noname
   items:
     - title: Community

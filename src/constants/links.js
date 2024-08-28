@@ -45,6 +45,7 @@ export default {
   privacy: '/privacy-policy',
   privacyGuide: '/privacy-guide',
   privacyPolicy: '/privacy-policy',
+  scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
   security: '/docs/security/security-overview',
   signup: 'https://console.neon.tech/signup',
