@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import { GUIDES_BASE_PATH } from 'constants/guides';
-import RSSLogo from 'images/rss.inline.svg';
+import RSSLogo from 'icons/rss.inline.svg';
 
 const Search = dynamic(() => import('components/shared/search/search'));
 
@@ -15,7 +15,7 @@ const Sidebar = () => (
             indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
           />
           <a
-            className="flex size-8 shrink-0 items-center justify-center rounded-[4px] bg-gray-new-94 text-gray-new-60 transition-colors duration-200 hover:text-primary-1 dark:bg-gray-new-10 dark:text-gray-new-70 dark:hover:text-primary-1"
+            className="flex size-8 shrink-0 items-center justify-center rounded-[4px] bg-gray-new-94 text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:bg-gray-new-10 dark:text-gray-new-70 dark:hover:text-primary-1"
             href={`${GUIDES_BASE_PATH}rss.xml`}
             aria-label="Guides RSS Feed"
           >

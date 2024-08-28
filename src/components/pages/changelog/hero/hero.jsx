@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import RSSLogo from 'images/rss.inline.svg';
+import RSSLogo from 'icons/rss.inline.svg';
 
 const TITLE = 'Changelog';
 const DESCRIPTION = 'The latest product updates from Neon';
