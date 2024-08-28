@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
     description: post?.data?.subtitle,
     pathname: `${LINKS.useCases}/${currentSlug}`,
     type: 'article',
+    imagePath: post?.data?.image,
   });
 }
 
