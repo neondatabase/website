@@ -82,11 +82,11 @@ const items = [
         title: '750 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
-      { title: 'Point-in-time restore (14 days)' },
+      { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 32 GB RAM' },
+      { title: 'Point-in-time restore (30 days)' },
       { title: 'Standard support' },
       { title: 'Organization accounts' },
-      { title: 'Branch protection', disabled: true },
+      { title: 'Branch protection' },
       { title: 'SOC 2', disabled: true },
       { title: 'SLA (99.95%)', disabled: true },
     ],
@@ -209,7 +209,7 @@ const Hero = () => {
           <span>Neon Pricing</span>
         </Heading>
         <p className="mx-auto mt-5 max-w-[680px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Start free, launch with predictable costs, and scale efficiently.
+          Pricing plans that grow with you. From prototype to Enterprise.
         </p>
         <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
