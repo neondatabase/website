@@ -16,9 +16,9 @@ This table provides an overview of plan fees with allowances for storage, comput
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                   | Project Allowance |
 | ---------- | ----------- | ----------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
 | Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours (24/7 at 0.25 CU), includes up to 5 hours/month for non-default branch computes | 1 project         |
-| Launch     | $19         | 10 GiB            | 300 compute hours amonth                                                      | 10 projects       |
-| Scale      | $69         | 50 GiB            | 750 compute hours a month                                                      | 50 projects       |
-| Business      | $700        | 500 GiB            | 1000 compute hours a month                                                      | 100 projects       |
+| Launch     | $19         | 10 GiB            | 300 compute hours amonth                                                                            | 10 projects       |
+| Scale      | $69         | 50 GiB            | 750 compute hours a month                                                                           | 50 projects       |
+| Business   | $700        | 500 GiB           | 1000 compute hours a month                                                                          | 100 projects      |
 | Enterprise | Custom      | Custom            | Custom                                                                                              | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
