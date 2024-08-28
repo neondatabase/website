@@ -8,6 +8,7 @@ import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
+import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
@@ -110,7 +111,7 @@ const Post = ({
               'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
           )}
         >
-          <EditOnGithub fileOriginPath={fileOriginPath} />
+          {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
         </div>
       </nav>
     </div>
