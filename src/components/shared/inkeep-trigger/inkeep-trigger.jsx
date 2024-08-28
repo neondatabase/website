@@ -78,7 +78,9 @@ const InkeepTrigger = ({ className }) => {
         className={clsx(
           'chat-widget group flex h-8 items-center justify-center gap-1 rounded border border-gray-new-90 bg-gradient-to-b from-white to-gray-new-98 p-2.5 hover:border-gray-new-70 focus:outline-none',
           'dark:border-[#272727] dark:from-[#1A1C1E] dark:to-[#0F1010] dark:hover:border-gray-new-20',
-          'lg:absolute lg:right-2 lg:top-1 lg:z-10 lg:h-auto lg:items-center lg:space-x-1 lg:rounded-none lg:border-0 lg:bg-transparent lg:bg-none lg:p-2 lg:text-secondary-8 lg:dark:text-green-45',
+          'lg:fixed lg:bottom-10 lg:right-10 lg:z-10',
+          'sm:bottom-7 sm:right-7',
+          'xs:bottom-5 xs:right-5',
           className
         )}
         type="button"
@@ -86,14 +88,9 @@ const InkeepTrigger = ({ className }) => {
         onClick={handleClick}
       >
         <SparksIcon className="relative z-10 h-3 w-3" />
-        <span
-          className={clsx(
-            'block text-[13px] font-medium leading-none',
-            'lg:border-b lg:border-secondary-8/50 lg:transition-colors lg:duration-200 lg:group-hover:border-transparent lg:dark:border-green-45/50'
-          )}
-        >
+        <span className={clsx('block text-[13px] font-medium leading-none')}>
           <span className="block">Ask Neon AI</span>
-          <span className="hidden text-gray-new-20 dark:text-gray-new-90 " aria-hidden>
+          <span className="hidden text-gray-new-20 dark:text-gray-new-90" aria-hidden>
             Ask Neon AI instead
           </span>
         </span>
