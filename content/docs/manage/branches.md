@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-08-19T14:53:19.395Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Tier limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -43,7 +43,7 @@ Neon's protected branches feature implements a series of protections:
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
 - With additional configuration steps, you can apply IP restrictions to protected branches only.
 
-Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) plan, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Business](/docs/introduction/plans#business) plan, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -133,7 +133,7 @@ To set a branch as the default branch:
 
 ## Set a branch as protected
 
-This feature is available on Neon's [Scale](/docs/introduction/plans#scale) plan, which supports up to five protected branches.
+This feature is available on Neon's [Business](/docs/introduction/plans#business) plan, which supports up to five protected branches.
 
 To set a branch as protected:
 

@@ -86,7 +86,7 @@ The Business plan supports extra **Storage**, **Compute**, and **Projects**.
 
 | Resource       | Unit         | Price  |
 | -------------- | ------------ | ------ |
-| Extra Storage  | 10 GiB       | $15.00 |
+| Extra Storage  | 10 GiB       | $7.50 |
 | Extra Compute  | Compute hour | $0.16  |
 | Extra Projects | 10           | $50.00 |
 

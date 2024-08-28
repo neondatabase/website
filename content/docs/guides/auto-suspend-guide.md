@@ -23,7 +23,8 @@ The autosuspend limits differ by [Neon plan](/docs/introduction/plans). The limi
 | Free Plan  | 5 minutes           |                  |
 | Launch     | 5 minutes to 7 days | &check;          |
 | Scale      | 1 minute to 7 days  | &check;          |
-| Enterprise | 0 up to 7 days      | &check;          |
+| Business   | 1 minute to 7 days  | &check;          |
+| Enterprise | 0 seconds up to 7 days      | &check;          |
 
 ### Configure the autosuspend setting for a new project
 

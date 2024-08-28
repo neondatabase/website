@@ -84,7 +84,7 @@ The Launch plan includes the following usage allowances:
 | Usage type    | Plan allowance                                                 |
 | ------------- | -------------------------------------------------------------- |
 | **Projects**  | 10 Neon projects                                               |
-| **Branches**  | 500                                                            |
+| **Branches**  | 500 per project                                                |
 | **Databases** | Unlimited                                                      |
 | **Storage**   | 10 GiB of data storage                                         |
 | **Compute**   | 300 compute hours a month for all computes across all projects |
@@ -155,7 +155,7 @@ The Business plan includes the following usage allowances:
 | Usage type    | Plan allowance                                           |
 | ------------- | -------------------------------------------------------- |
 | **Projects**  | 100 Neon projects                                         |
-| **Branches**  | 1000 per project                                         |
+| **Branches**  | 500 per project                                         |
 | **Databases** | Unlimited                                                |
 | **Storage**   | 500 GiB of data storage                                  |
 | **Compute**   | 1,000 compute hours a month for all computes across all projects |
