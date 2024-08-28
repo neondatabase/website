@@ -112,7 +112,7 @@ export default {
             dark: caseSaasDarkIcon,
           },
           text: 'Postgres for SaaS',
-          description: 'Postgres for SaaS',
+          description: 'Build Apps faster on Neon',
           to: `${LINKS.useCases}/postgres-for-saas`,
         },
         {
