@@ -11,6 +11,10 @@ Neon provides the following GitHub Actions for working with Neon branches, which
 - [Delete branch action](#delete-branch-action)
 - [Reset from parent action](#reset-from-parent-action)
 
+<Admonition type="tip">
+Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's [Create branch](#create-branch-action) and [Delete branch](#delete-branch-action) actions. See [Neon GitHub integration](/docs/guides/neon-github-integration) for more.
+</Admonition>
+
 ## Create branch action
 
 This GitHub Action creates a new branch in your Neon project.
@@ -208,17 +212,48 @@ jobs:
 
 ### Input variables
 
+```yaml
+inputs:
+  project_id:
+    required: true
+    description: 'The project id'
+  branch:
+    required: true
+    description: 'The branch name or id to reset'
+  api_key:
+    description: 'The Neon API key'
+    required: true
+  parent:
+    description: 'If specified, the branch will be reset to the parent branch'
+    required: false
+  cs_role_name:
+    description: 'The output connection string db role name'
+    required: false
+  cs_database:
+    description: 'The output connection string database name'
+    required: false
+  cs_prisma:
+    description: 'Use prisma in output connection string or not'
+    required: false
+    default: 'false'
+  cs_ssl:
+    description: >
+      Add sslmode to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit".
+    required: false
+    default: 'require'
+```
+
 - `project_id`: The ID of your Neon project. Find this value in the Neon Console on the Settings page.
-- `parent`: If specified, the branch will be reset to the latest (HEAD) of parent branch.
+- `parent`: If specified, the branch will be reset to the latest state of the parent branch.
 - `branch`: The name or id of the branch to reset.
-- `api_key`: An API key created in your Neon account. See How to set up the NEON_API_KEY for instructions.
+- `api_key`: An API key created in your Neon account.
 
-The action provides a connection string as an output. You can configure the connection string with these optional `cs_*` inputs:
+The action outputs a connection string. You can modify the connection string with these optional connection string (`cs_*`) inputs:
 
-- `cs_role_name`: The output connection string db role name.
+- `cs_role_name`: The output connection string database role name.
 - `cs_database`: The output connection string database name.
 - `cs_prisma`: Use Prisma in output connection string or not. The default is 'false'.
-- `cs_ssl`: Add `sslmode` to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit". The default is - 'require'.
+- `cs_ssl`: Add `sslmode` to the connection string. Supported values are: `"require"`, `"verify-ca"`, `"verify-full"`, `"omit"`. The default is `"require"`.
 
 ### Outputs
 
@@ -245,17 +280,19 @@ outputs:
 ```
 
 - `branch_id`: The ID of the newly reset branch.
-- `db_url`: Database connection string to the branch after the reset.
-- `db_url_with_pooler`: Database pooled connection string to the branch after the reset.
-- `host`: Branch host after reset.
-- `host_with_pooler`: Branch host with pooling enabled after reset.
-- `password`: Password for connecting to the branch database after reset.
+- `db_url`: Database connection string for the branch after the reset.
+- `db_url_with_pooler`: The pooled database connection string for the branch after the reset.
+- `host`: The branch host after the reset.
+- `host_with_pooler`: The branch host with pooling after the reset.
+- `password`: The password for connecting to the branch database after the reset.
 
 ## Example applications
 
 The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
 <DetailIconCards>
+
+<a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
