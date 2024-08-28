@@ -145,7 +145,7 @@ jobs:
       with:
         project_id: rapid-haze-373089
         branch: br-long-forest-224191
-        api_key: {{ secrets.NEON_API_KEY }}
+        api_key: { { secrets.NEON_API_KEY } }
 ```
 
 ### Input variables
@@ -154,15 +154,15 @@ jobs:
 inputs:
   project_id:
     required: true
-    description: "The Neon project id"
+    description: 'The Neon project id'
   branch_id:
-    description: "The Neon branch id"
-    deprecationMessage: "The `branch_id` input is deprecated in favor of `branch`"
+    description: 'The Neon branch id'
+    deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: "The Neon API key, read more at https://neon.tech/docs/manage/api-keys"
+    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
     required: true
   branch:
-    description: "The Neon branch name or id"
+    description: 'The Neon branch name or id'
 ```
 
 ### Outputs
@@ -176,7 +176,6 @@ This GitHub Action resets a child branch with the latest data from its parent br
 <Admonition type="info">
 The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
 </Admonition>
-
 
 ### Prerequisites
 
@@ -221,7 +220,6 @@ The action provides a connection string as an output. You can configure the conn
 - `cs_prisma`: Use Prisma in output connection string or not. The default is 'false'.
 - `cs_ssl`: Add `sslmode` to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit". The default is - 'require'.
 
-
 ### Outputs
 
 ```yaml
@@ -252,7 +250,6 @@ outputs:
 - `host`: Branch host after reset.
 - `host_with_pooler`: Branch host with pooling enabled after reset.
 - `password`: Password for connecting to the branch database after reset.
-
 
 ## Example applications
 
