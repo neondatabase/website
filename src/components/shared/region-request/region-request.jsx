@@ -270,9 +270,10 @@ const RegionRequest = ({
           {!isRecognized && (
             <input
               type="email"
+              name="email"
               value={email}
               className={clsx(
-                'rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6  md:w-full',
+                'remove-autocomplete-styles rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6  md:w-full',
                 'focus:outline-2 focus:-outline-offset-2 focus:outline-black/20',
                 'dark:bg-white/5 dark:focus:outline-white/20'
               )}
