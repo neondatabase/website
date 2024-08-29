@@ -40,11 +40,13 @@ From its beginning as a [DARPA-sponsored project at Berkeley](https://www.postgr
 
 **A serverless architecture built for performance, reliability, manageability, and cost efficiency**
 
-Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like [Autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling) and [Autosuspend](/docs/get-started-with-neon/production-readiness##scale-to-zero).
+Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [autosuspend](/docs/get-started-with-neon/production-readiness##scale-to-zero), and more.
 
 Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data (except for what's cached in memory) resides on Neon's storage layer.
 
 Separation of compute and storage enables scalability as these resources can be scaled independently. You can adjust for processing power or storage capacity as needed without affecting the other. This approach is also cost-efficient. The ability to scale resources independently means you can benefit from the lower cost of storage compared to compute or avoid paying for additional storage when you only require extra processing power. Decoupling compute and storage also improves availability and durability, as data remains accessible and safe even if a compute fails.
+
+[Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, and database branching workflows.
 
 ## Neon is fully managed
 
