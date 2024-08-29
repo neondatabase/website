@@ -33,7 +33,7 @@ _That Neon only works with serverless architectures_. Neon is fully compatible w
 
 _That you have to pay per query_. Your charges are based on compute and storage usage, not the number of queries. For example, you could run billions of queries for as little as $19 a month if they fit within the resources allotted in the [Launch plan](/docs/introduction/plans#launch). The CPU allowance is ample for running sites 24/7 with low CPU requirements.
 
-_That you’ll get unpredictable costs due to traffic spikes_. We provide transparency in your potential costs. You always set a maximum autoscaling limit to avoid unpredictable bills, and you can always check your consumption. We send you notifications if your storage usage grows quickly. 
+_That you’ll get unpredictable costs due to traffic spikes_. We provide transparency in your potential costs. You always set a maximum autoscaling limit to avoid unpredictable bills, and you can always check your consumption. We send you notifications if your storage usage grows quickly.
 
 ## Learn more
 
@@ -43,4 +43,3 @@ _That you’ll get unpredictable costs due to traffic spikes_. We provide transp
 - [Database-per-tenant use cases](https://neon.tech/use-cases/database-per-tenant)
 - [Variable workload use cases](https://neon.tech/variable-load)
 - [Postgres for SaaS use cases](https://neon.tech/use-cases/postgres-for-saas)
-
