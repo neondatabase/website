@@ -34,7 +34,7 @@ const Budget = ({ title }) => (
       <List items={items} />
     </div>
     <UseCaseCta
-      text="Want a price estimation for your particular use case?"
+      title="Want a price estimation for your particular use case?"
       buttonText="Reach out to us"
       buttonUrl={LINKS.contactSales}
     />

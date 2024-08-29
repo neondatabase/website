@@ -5,6 +5,7 @@ import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
+import UseCaseCta from 'components/pages/use-case/use-case-cta';
 import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -335,6 +336,13 @@ const Hero = () => {
           </Button>
           .
         </p>
+        <UseCaseCta
+          className="!mt-20 max-w-[716px] sm:!mt-10"
+          title="Custom Enterprise Plans"
+          description="Connect with our team for larger instance sizes, dedicated requirements, and annual contracts."
+          buttonText="Talk to Sales"
+          buttonUrl={LINKS.contactSales}
+        />
       </Container>
     </section>
   );
