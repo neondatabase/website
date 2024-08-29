@@ -194,7 +194,12 @@ const RegionRequest = ({
         );
 
   return (
-    <figure className="doc-cta not-prose my-5 rounded-[10px] border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] px-7 py-6 dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)] sm:p-6">
+    <figure
+      className={clsx(
+        'doc-cta not-prose my-5 rounded-[10px] border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] px-7 py-6 sm:p-6',
+        'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28%,#131415_74%)]'
+      )}
+    >
       <h2 className="!my-0 font-title text-2xl font-medium leading-dense">{title}</h2>
       <p className="mt-2 text-sm font-light text-gray-new-20 dark:text-gray-new-80">
         {description}
@@ -204,8 +209,8 @@ const RegionRequest = ({
           <em>Request logged. We appreciate your feedback!</em>
         </p>
       ) : (
-        <div className="mt-4 flex items-end gap-x-4 md:flex-col md:items-start">
-          <div className="flex-1">
+        <div className="mt-4 flex items-end gap-4 md:flex-col md:items-start">
+          <div className="flex-1 md:w-full">
             <Combobox
               value={selected}
               immediate
@@ -215,8 +220,9 @@ const RegionRequest = ({
               <div className="relative">
                 <ComboboxInput
                   className={clsx(
-                    'w-full rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6 text-black',
-                    'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/25'
+                    'w-full rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6',
+                    'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/20',
+                    'dark:bg-white/5 dark:data-[focus]:outline-white/20'
                   )}
                   displayValue={(option) => option?.name}
                   autoComplete="off"
@@ -230,8 +236,9 @@ const RegionRequest = ({
               <ComboboxOptions
                 anchor="bottom"
                 className={clsx(
-                  'w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
-                  'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
+                  'z-50 w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
+                  'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
+                  'dark:border-white/5 dark:bg-gray-new-10 dark:text-white'
                 )}
                 transition
               >
@@ -239,10 +246,21 @@ const RegionRequest = ({
                   <ComboboxOption
                     key={option.id}
                     value={option}
-                    className="group flex cursor-default select-none items-center gap-2 rounded-lg px-2 py-1.5 data-[focus]:bg-black/10"
+                    className={clsx(
+                      'group flex cursor-pointer select-none items-center gap-2 rounded-lg px-2 py-1.5 data-[focus]:bg-black/10',
+                      'dark:data-[focus]:bg-white/10'
+                    )}
                   >
-                    <div className="text-sm text-sm/6 text-black">
-                      {option.name} <code className="bg-gray-8 px-1 text-xs">{option.id}</code>
+                    <div className="text-sm text-sm/6">
+                      {option.name}{' '}
+                      <code
+                        className={clsx(
+                          'whitespace-nowrap bg-gray-8 px-1 text-xs',
+                          'dark:bg-gray-new-15'
+                        )}
+                      >
+                        {option.id}
+                      </code>
                     </div>
                   </ComboboxOption>
                 ))}
@@ -253,15 +271,22 @@ const RegionRequest = ({
             <input
               type="email"
               value={email}
-              className="mt-2 rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6 text-black focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/25"
+              className={clsx(
+                'rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6  md:w-full',
+                'focus:outline-2 focus:-outline-offset-2 focus:outline-black/20',
+                'dark:bg-white/5 dark:focus:outline-white/20'
+              )}
               placeholder="Email (optional)"
               onChange={(e) => setEmail(e.target.value)}
             />
           )}
 
           <Button
-            className="px-6 py-3 font-semibold leading-none md:mt-4"
-            theme={selected ? 'primary' : 'disabled'}
+            className={clsx(
+              'px-6 py-3 font-semibold leading-none md:w-full',
+              !selected && 'pointer-events-none opacity-70'
+            )}
+            theme="primary"
             disabled={!selected}
             onClick={() => {
               if (selected) {

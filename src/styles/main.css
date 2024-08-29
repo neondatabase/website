@@ -1,4 +1,8 @@
 @layer base {
+  html {
+    @apply !overflow-visible !p-0;
+  }
+
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
