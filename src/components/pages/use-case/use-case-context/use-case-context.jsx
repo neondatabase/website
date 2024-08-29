@@ -13,9 +13,14 @@ const UseCaseContext = ({}) => {
 
   useEffect(() => {
     const hasSeenContext = localStorage.getItem('hasSeenUseCaseContext');
+    const hasVisitedHomepage = localStorage.getItem('hasVisitedHomepage');
     const isFromHomepage = previousUrl === '/';
 
-    if (!hasSeenContext && !isFromHomepage) {
+    if (isFromHomepage) {
+      localStorage.setItem('hasVisitedHomepage', 'true');
+    }
+
+    if (!hasSeenContext && !hasVisitedHomepage && !isFromHomepage) {
       setShowContext(true);
       localStorage.setItem('hasSeenUseCaseContext', 'true');
     }
