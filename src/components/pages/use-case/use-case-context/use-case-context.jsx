@@ -2,29 +2,22 @@
 
 import { useEffect, useState } from 'react';
 
-import { usePreviousUrls } from 'app/previous-urls-context';
+import { useHomepageVisit } from 'app/homepage-visit-context';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 const UseCaseContext = ({}) => {
   const [showContext, setShowContext] = useState(false);
-  // TODO: try to fing alternative solution to get previous url (using server actions, for example)
-  const previousUrls = usePreviousUrls();
+  const hasVisitedHomepage = useHomepageVisit();
 
   useEffect(() => {
-    const hasSeenContext = localStorage.getItem('hasSeenUseCaseContext');
-    const hasVisitedHomepage = localStorage.getItem('hasVisitedHomepage');
-    const isFromHomepage = previousUrls.includes('/');
+    const hasSeenContext = localStorage.getItem('hasSeenUseCaseContext') === 'true';
 
-    if (isFromHomepage) {
-      localStorage.setItem('hasVisitedHomepage', 'true');
-    }
-
-    if (!hasSeenContext && !hasVisitedHomepage && !isFromHomepage) {
-      setShowContext(true);
+    if (hasVisitedHomepage || !hasSeenContext) {
       localStorage.setItem('hasSeenUseCaseContext', 'true');
+      setShowContext(!hasVisitedHomepage && !hasSeenContext);
     }
-  }, [previousUrls]);
+  }, [hasVisitedHomepage]);
 
   if (!showContext) return null;
 
