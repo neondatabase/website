@@ -43,4 +43,3 @@ _That you’ll get unpredictable costs due to traffic spikes_. We provide transp
 - [Database-per-tenant use cases](https://neon.tech/use-cases/database-per-tenant)
 - [Variable workload use cases](https://neon.tech/variable-load)
 - [Postgres for SaaS use cases](https://neon.tech/use-cases/postgres-for-saas)
-
