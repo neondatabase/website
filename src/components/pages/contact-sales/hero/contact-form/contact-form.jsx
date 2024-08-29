@@ -19,6 +19,10 @@ const schema = yup
       .string()
       .email('Please enter a valid email')
       .required('Email address is a required field'),
+    companySize: yup
+      .string()
+      .notOneOf(['hidden'], 'Please select a company size')
+      .required('Company size is a required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
@@ -45,7 +49,6 @@ const ContactForm = ({ formState, setFormState }) => {
     e.preventDefault();
     const { name, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
-
     setFormError('');
     setFormState(FORM_STATES.LOADING);
 
@@ -133,10 +136,11 @@ const ContactForm = ({ formState, setFormState }) => {
         <Field
           className="grow"
           name="companySize"
-          label="Company size"
+          label="Company size *"
           tag="select"
           defaultValue="hidden"
           isDisabled={formState === FORM_STATES.LOADING}
+          error={errors.companySize?.message}
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
