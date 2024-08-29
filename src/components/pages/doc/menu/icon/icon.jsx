@@ -10,15 +10,19 @@ import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
 import ConnectIcon from 'icons/docs/sidebar/connect.inline.svg';
 import DocsIcon from 'icons/docs/sidebar/docs.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
+import FeedsIcon from 'icons/docs/sidebar/feeds.inline.svg';
 import FrameworksIcon from 'icons/docs/sidebar/frameworks.inline.svg';
 import GetStartedIcon from 'icons/docs/sidebar/get-started.inline.svg';
 import GlossaryIcon from 'icons/docs/sidebar/glossary.inline.svg';
 import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
+import ImportIcon from 'icons/docs/sidebar/import.inline.svg';
 import IntegrationsIcon from 'icons/docs/sidebar/integrations.inline.svg';
+import LanguagesIcon from 'icons/docs/sidebar/languages.inline.svg';
 import ManagementIcon from 'icons/docs/sidebar/management.inline.svg';
 import PartnerGuideIcon from 'icons/docs/sidebar/partner-guide.inline.svg';
 import PostgresGuidesIcon from 'icons/docs/sidebar/postgres-guides.inline.svg';
 import RegionsIcon from 'icons/docs/sidebar/regions.inline.svg';
+import ReplicationsIcon from 'icons/docs/sidebar/replications.inline.svg';
 import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import StatusIcon from 'icons/docs/sidebar/status.inline.svg';
@@ -36,15 +40,19 @@ const icons = {
   connect: ConnectIcon,
   docs: DocsIcon,
   features: FeaturesIcon,
+  feeds: FeedsIcon,
   frameworks: FrameworksIcon,
   'get-started': GetStartedIcon,
   glossary: GlossaryIcon,
   home: HomeIcon,
+  import: ImportIcon,
   integrations: IntegrationsIcon,
+  languages: LanguagesIcon,
   management: ManagementIcon,
   'partner-guide': PartnerGuideIcon,
   'postgres-guides': PostgresGuidesIcon,
   regions: RegionsIcon,
+  replications: ReplicationsIcon,
   roadmap: RoadmapIcon,
   sdk: SdkIcon,
   status: StatusIcon,
