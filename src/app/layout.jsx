@@ -7,7 +7,7 @@ import 'swiper/css';
 import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';
-import { PreviousUrlProvider } from './previous-url-context';
+import { PreviousUrlsProvider } from './previous-urls-context';
 import ThemeProvider from './provider';
 
 export const preferredRegion = 'edge';
@@ -30,9 +30,9 @@ const RootLayout = ({ children }) => (
     </head>
     <body>
       <ThemeProvider>
-        <PreviousUrlProvider>
+        <PreviousUrlsProvider>
           <ActiveLabelProvider>{children}</ActiveLabelProvider>
-        </PreviousUrlProvider>
+        </PreviousUrlsProvider>
       </ThemeProvider>
     </body>
   </html>
