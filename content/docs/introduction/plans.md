@@ -136,11 +136,12 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Scale plan features
 
-- Autoscaling compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
-- Monitoring with 7 days of historical data
+- Autoscaling compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
-- Neon features such as branching, point-in-time restore up to **14 days** in the past, time travel connections, and more
-- [Standard support](/docs/introduction/support)
+- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
+- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
+- [Priority support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
