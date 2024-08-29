@@ -42,7 +42,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
 };
 
-const InkeepTrigger = ({ className }) => {
+const InkeepTrigger = ({ className, topOffset }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
 
@@ -76,13 +76,12 @@ const InkeepTrigger = ({ className }) => {
     <>
       <button
         className={clsx(
-          'chat-widget group flex h-8 items-center justify-center gap-1 rounded border border-gray-new-90 bg-gradient-to-b from-white to-gray-new-98 p-2.5 hover:border-gray-new-70 focus:outline-none',
+          'chat-widget group flex h-8 items-center justify-center gap-1 rounded border border-gray-new-90 bg-gradient-to-b from-white to-gray-new-98 p-2.5 transition-all duration-200 hover:border-gray-new-70 focus:outline-none',
           'dark:border-[#272727] dark:from-[#1A1C1E] dark:to-[#0F1010] dark:hover:border-gray-new-20',
-          'lg:fixed lg:bottom-10 lg:right-10 lg:z-10',
-          'sm:bottom-7 sm:right-7',
-          'xs:bottom-5 xs:right-5',
+          'lg:sticky lg:z-10 lg:-mt-8 lg:ml-auto lg:mr-5 sm:-mt-9 sm:h-9',
           className
         )}
+        style={{ top: topOffset - 56 || 0 }}
         type="button"
         aria-label="Open Neon AI"
         onClick={handleClick}
@@ -102,6 +101,7 @@ const InkeepTrigger = ({ className }) => {
 
 InkeepTrigger.propTypes = {
   className: PropTypes.string,
+  topOffset: PropTypes.number,
 };
 
 export default InkeepTrigger;
