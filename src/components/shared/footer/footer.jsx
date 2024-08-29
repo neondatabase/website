@@ -9,7 +9,7 @@ import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 
 // TODO: add responsive styles for black-pure theme, fix logo size
-const Footer = ({ isDocPage = false, theme = null }) => {
+const Footer = ({ hasThemesSupport = false, theme = null }) => {
   const isDarkTheme = theme === 'dark';
 
   return (
@@ -40,8 +40,8 @@ const Footer = ({ isDocPage = false, theme = null }) => {
                   height={32}
                 />
               </Link>
-              <StatusBadge isDocPage={isDocPage} isDarkTheme={isDarkTheme} />
-              {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
+              <StatusBadge hasThemesSupport={hasThemesSupport} isDarkTheme={isDarkTheme} />
+              {hasThemesSupport && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
           </div>
           <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
@@ -98,7 +98,7 @@ const Footer = ({ isDocPage = false, theme = null }) => {
 };
 
 Footer.propTypes = {
-  isDocPage: PropTypes.bool,
+  hasThemesSupport: PropTypes.bool,
   theme: PropTypes.oneOf(['light', 'dark']),
 };
 

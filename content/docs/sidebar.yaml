@@ -181,6 +181,8 @@
       slug: guides/neon-features
       icon: features
       items:
+        - title: Serverless
+          slug: introduction/serverless
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
