@@ -1,6 +1,6 @@
 ---
 title: Serverless
-subtitle: Postgres with instant provisioning, no server management, and pay-per-usage billing 
+subtitle: Postgres with instant provisioning, no server management, and pay-per-usage billing
 enableTableOfContents: true
 ---
 
@@ -16,17 +16,18 @@ Read our [Architecture](https://neon.tech/docs/introduction/architecture-overvie
 
 ## What “serverless” means to us
 
-At Neon, we interpret “serverless” not only as the absence of servers to manage but as a set of principles and features designed to streamline your development process and optimize operational efficiency for your database. 
+At Neon, we interpret “serverless” not only as the absence of servers to manage but as a set of principles and features designed to streamline your development process and optimize operational efficiency for your database.
 
 To us, serverless means:
-- **Instant provisioning**: Neon allows you to spin up Postgres databases in seconds, eliminating the long setup times traditionally associated with database provisioning. 
+
+- **Instant provisioning**: Neon allows you to spin up Postgres databases in seconds, eliminating the long setup times traditionally associated with database provisioning.
 - **No server management**: You don’t have to deal with the complexities of provisioning, maintaining, and administering servers. Neon handles it all, so you can focus on your application.
 - **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention.
 - **Usage-based pricing**: Your costs are directly tied to the resources your workload consumes—both compute and storage. There's no need to over-provision or pay for idle capacity.
 - **Built-in availability and fault tolerance**: We’ve designed our architecture for high availability and resilience, ensuring your data is safe and your applications are always accessible.
 - **Focus on business logic**: With the heavy lifting of infrastructure management handled by Neon, you can dedicate your time and effort to writing code and delivering value to your users.
 
-## To us, serverless does not mean… 
+## To us, serverless does not mean…
 
 _That Neon only works with serverless architectures_. Neon is fully compatible with the entire PostgreSQL ecosystem. Whether you're using [Django](/docs/guides/django), [Rails](/docs/guides/ruby-on-rails), or even a bash script in your basement, if it works with Postgres, it works with Neon.
 
