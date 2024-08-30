@@ -69,7 +69,7 @@
         "info": "Extra usage at $0.16 per compute hour"
       },
       "business": {
-        "title": "1000 /month",
+        "title": "1,000 /month",
         "info": "Extra usage at $0.16 per compute hour"
       }
     },
@@ -126,8 +126,8 @@
         "info": "4 CU = 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "10 CU",
-        "info": "10 CU = 10 vCPU, 40 GB RAM"
+        "title": "8 CU",
+        "info": "8 CU = 8 vCPU, 32 GB RAM"
       },
       "business": {
         "title": "10 CU",
@@ -151,7 +151,7 @@
       },
       "free": "Up to 2 CU",
       "launch": "Up to 4 CU",
-      "scale": "Up to 10 CU",
+      "scale": "Up to 8 CU",
       "business": "Up to 10 CU"
     },
     {
@@ -238,7 +238,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": false,
+      "scale": true,
       "business": true
     },
     {
