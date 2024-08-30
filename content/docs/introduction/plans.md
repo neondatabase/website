@@ -128,11 +128,11 @@ The Scale plan includes the following usage allowances:
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-| Extra usage type   | Cost                                                                  |
-| ------------------ | --------------------------------------------------------------------- |
+| Extra usage type   | Cost                                                              |
+| ------------------ | ----------------------------------------------------------------- |
 | **Extra Storage**  | Billed in units of 10 GiB at $15 per unit, prorated for the month |
-| **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
-| **Extra Projects** | Billed for in units of 10 at $50 per unit                             |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                          |
+| **Extra Projects** | Billed for in units of 10 at $50 per unit                         |
 
 ### Scale plan features
 
