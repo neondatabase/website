@@ -45,10 +45,10 @@ The Free Plan includes the following usage allowances:
 | **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
 
-<Admonition type="tip" title="What is a compute hours?">
+<Admonition type="tip" title="What is a compute hour?">
 
-- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute hours formula**
 
   ```
@@ -130,7 +130,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 | Extra usage type   | Cost                                                                  |
 | ------------------ | --------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $15 per unit, prorated for the month |
+| **Extra Storage**  | Billed in units of 10 GiB at $15 per unit, prorated for the month |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
 | **Extra Projects** | Billed for in units of 10 at $50 per unit                             |
 

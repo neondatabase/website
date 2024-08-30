@@ -101,7 +101,7 @@ Once an extra unit of storage or projects is allocated, you are billed for that 
 
 **Compute**
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale) plans and is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16). Since extra compute usage is per hour, prorated billing does not apply.
+Extra compute usage is available with the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), and [Business](/docs/introduction/plans#business) plans and is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16). Since extra compute usage is per hour, prorated billing does not apply.
 
 ## Extra usage examples
 
