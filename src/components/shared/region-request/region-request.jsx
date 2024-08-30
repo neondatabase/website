@@ -20,7 +20,7 @@ import Button from '../button';
 const DEFAULT_DATA = {
   title: 'Request a new Provider / Region',
   description:
-    "Need Neon in another provider or region? Select it here and we'll notify you when it's available.",
+    "Looking for Neon in a different cloud provider or region? Select your preference below, and we'll notify you as soon as it's available.",
   buttonText: 'Request',
   regions: [
     { id: 'af-south-1', name: 'AWS - Africa (Cape Town)' },
