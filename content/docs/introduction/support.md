@@ -22,13 +22,13 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 
 ## Support channels
 
-| Support channels                | Community | Standard | Priority | Enterprise |
-| :------------------------------ | :-------: | :------: | :------: | :--------: |
-| Neon Discord Server             |  &check;  | &check;  | &check;  |  &check;   |
-| Support tickets                 |     -     | &check;  | &check;  |  &check;   |
-| Prioritized supported tickets   |     -     |    -     | &check;  |  &check;   |
-| Video chat*                     |     -     |    -     | *        |  *         |
-| SLAs                            |     -     |    -     |          |  &check;   |
+| Support channels              | Community | Standard | Priority | Enterprise |
+| :---------------------------- | :-------: | :------: | :------: | :--------: |
+| Neon Discord Server           |  &check;  | &check;  | &check;  |  &check;   |
+| Support tickets               |     -     | &check;  | &check;  |  &check;   |
+| Prioritized supported tickets |     -     |    -     | &check;  |  &check;   |
+| Video chat\*                  |     -     |    -     |    \*    |     \*     |
+| SLAs                          |     -     |    -     |          |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup> Video chats may be scheduled on a case-by-case basis.</small>
