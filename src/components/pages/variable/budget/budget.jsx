@@ -1,8 +1,8 @@
 import { PropTypes } from 'prop-types';
 
+import CtaBlock from 'components/shared/cta-block';
 import LINKS from 'constants/links';
 
-import UseCaseCta from '../../use-case/use-case-cta';
 import Example from '../example';
 import List from '../list';
 import Section from '../section';
@@ -33,7 +33,7 @@ const Budget = ({ title }) => (
       </p>
       <List items={items} />
     </div>
-    <UseCaseCta
+    <CtaBlock
       title="Want a price estimation for your particular use case?"
       buttonText="Reach out to us"
       buttonUrl={LINKS.contactSales}

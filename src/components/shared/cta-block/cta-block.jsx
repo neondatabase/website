@@ -4,14 +4,14 @@ import { PropTypes } from 'prop-types';
 
 import Button from 'components/shared/button';
 
-import BgDecor from '../bg-decor';
+import BgDecor from '../../pages/use-case/bg-decor';
 
 import blueGlowMobile from './images/blue-glow-mobile.png';
 import blueGlow from './images/blue-glow.png';
 import greenGlowMobile from './images/green-glow-mobile.png';
 import greenGlow from './images/green-glow.png';
 
-const UseCaseCta = ({ className, title, description, buttonText, buttonUrl }) => (
+const CtaBlock = ({ className, title, description, buttonText, buttonUrl }) => (
   <div
     className={clsx(
       'not-prose relative mt-10 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 xl:mt-9 lg:mt-8 lg:pr-10 sm:mt-6 sm:p-6',
@@ -68,7 +68,7 @@ const UseCaseCta = ({ className, title, description, buttonText, buttonUrl }) =>
   </div>
 );
 
-UseCaseCta.propTypes = {
+CtaBlock.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
@@ -76,4 +76,4 @@ UseCaseCta.propTypes = {
   buttonUrl: PropTypes.string.isRequired,
 };
 
-export default UseCaseCta;
+export default CtaBlock;

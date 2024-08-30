@@ -5,10 +5,10 @@ import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-import UseCaseCta from 'components/pages/use-case/use-case-cta';
 import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import InfoIcon from 'components/shared/info-icon';
 import LINKS from 'constants/links';
@@ -318,13 +318,12 @@ const Hero = () => {
             )}
           </ul>
         </div>
-        <p className="mt-16 text-center text-lg font-light leading-snug text-gray-new-80">
+        <p className="mb-10 mt-16 text-center text-lg font-light leading-snug text-gray-new-80 sm:mb-4">
           Not sure which plan is right for you?
           <br />
           Explore the{' '}
           <Button
-            className="inline-block !font-light decoration-1 underline-offset-4 hover:!decoration-green-45/0"
-            theme="green-underlined"
+            className="inline-block !font-light text-green-45 transition-colors duration-200 hover:text-[#00FFAA]"
             onClick={() => {
               document?.getElementById('plans')?.scrollIntoView({
                 behavior: 'smooth',
@@ -336,8 +335,8 @@ const Hero = () => {
           </Button>
           .
         </p>
-        <UseCaseCta
-          className="!mt-20 max-w-[716px] sm:!mt-10"
+        <CtaBlock
+          className="max-w-[716px]"
           title="Custom Enterprise Plans"
           description="Connect with our team for larger instance sizes, dedicated requirements, and annual contracts."
           buttonText="Talk to Sales"
