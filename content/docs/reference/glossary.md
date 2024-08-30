@@ -409,7 +409,7 @@ Random Access Memory, a type of computer memory used to store data that is being
 
 ## region
 
-The geographic location where Neon project resources are located. Neon supports creating projects in several Amazon Web Services (AWS) regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
+The geographic location where Neon project resources are located. Neon supports creating projects in Amazon Web Services (AWS) and Azure regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
 
 ## replication slot
 
