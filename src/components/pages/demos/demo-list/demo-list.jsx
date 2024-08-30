@@ -37,9 +37,8 @@ const items = [
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
       {
-        title: 'Preview branches with Fly.io and Neon',
-        // TODO: Replace this placeholder
-        description: 'This is a placeholder. It should be replaced.',
+        title: 'Preview branches with Fly.io, Neon, and Github Actions',
+        description: 'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations. ',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
       },
@@ -151,16 +150,14 @@ const items = [
       },
       {
         title: 'Semantic Search Chatbot (OpenAI + LangChain)',
-        // TODO: Replace this placeholder
-        description: 'This is a placeholder. It should be replaced.',
+        description: 'A starter application for an AI-powered Semantic Search chatbot with Next.js, pgvector, OpenAI, and LangChain.',
         demoLink: '#',
         sourceLink:
           'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
       },
       {
         title: 'AI Chatbot (OpenAI + LangChain)',
-        // TODO: Replace this placeholder
-        description: 'This is a placeholder. It should be replaced.',
+        description: 'A starter application for an AI-powered chatbot with Next.js, pgvector, OpenAI, and LangChain',
         demoLink: '#',
         sourceLink:
           'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
