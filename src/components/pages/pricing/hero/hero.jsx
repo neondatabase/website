@@ -106,7 +106,7 @@ const items = [
     features: [
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
       {
-        title: '1000 <a href="#compute-hour">compute hours</a> included',
+        title: '1,000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 40 GB RAM' },
@@ -338,7 +338,7 @@ const Hero = () => {
         <CtaBlock
           className="max-w-[716px]"
           title="Custom Enterprise Plans"
-          description="Connect with our team for larger instance sizes, dedicated requirements, and annual contracts."
+          description="Connect with our team for larger compute sizes, dedicated requirements, and annual contracts."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
         />
