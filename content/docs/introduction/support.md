@@ -6,7 +6,7 @@ updatedOn: '2024-08-06T15:23:10.955Z'
 
 ## General Support Policy
 
-Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to the Neon Launch, Scale, Business, or Enterprise [plans](https://neon.tech/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free tier](https://neon.tech/docs/introduction/free-tier) users is provided through [Discord](https://neon.tech/discord). See Neon [plans](https://neon.tech/docs/introduction/plans) and [pricing](https://neon.tech/pricing) for information on available subscriptions.
+Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to the Neon Launch, Scale, Business, or Enterprise [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free tier](/docs/introduction/free-tier) users is provided through [Discord](https://neon.tech/discord). See Neon [plans](/docs/introduction/plans) and [pricing](https://neon.tech/pricing) for information on available subscriptions.
 
 Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](https://neon.tech/terms-of-service).
 
@@ -61,7 +61,7 @@ Neon's [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction
 
 With Priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
-## Enterprise support
+### Enterprise support
 
 Neon's [Enterprise plan](/docs/introduction/plans#launch) includes **Enterprise** support.
 
@@ -87,13 +87,13 @@ These times relate to the time it takes Neon to respond to the Customer’s init
 | Severity 3 (Normal) | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 | Severity 4 (Low)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 
-# Severity Levels
+## Severity Levels
 
 When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below.  Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers.  Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **Critical and High-priority levels should not be used for low-impact issues or general questions\!**
 
 A detailed explanation of each severity level, including several examples, is provided below.
 
-## Severity 1 (Critical)
+### Severity 1 (Critical)
 
 * Catastrophic problems in the Customer’s production system leading to loss of service or impact on the Customer’s business  
 * Unavailability of the service   
@@ -106,11 +106,11 @@ Examples:
 1. A complete outage of the service provided by Neon  
 2. Security breaches  
 3. Error impacting the project as a whole (all endpoints/db affected)  
-4. Error impacting multiple projects  
+4. Error impacting multifple projects  
 5. EP/Branch/DB unreachable  
 6. Data corruption/Data loss
 
-## Severity 2 (High)
+### Severity 2 (High)
 
 Means a high-impact problem in a customer’s production systems. Essential operations are seriously disrupted, but a workaround exists that allows for continued essential operations.
 
@@ -128,7 +128,7 @@ Examples:
 2. Any use case that would require a high load of manual work on the customer side to mitigate an issue on our end  
 3. Any use case which massively and negatively affects the customer's business
 
-## Severity 3 (Normal)
+### Severity 3 (Normal)
 
 A medium-impact problem on a production or non-production system that involves:
 
@@ -146,7 +146,7 @@ Examples:
 5. Poor performing queries/ingestion  
 6. Billing issues
 
-## Severity 4 (Low)
+### Severity 4 (Low)
 
 * A general usage question; here is no impact on the product's quality, performance, or functionality in a production or non-production system  
 * Any request for information, enhancement, or documentation clarification regarding the platform
