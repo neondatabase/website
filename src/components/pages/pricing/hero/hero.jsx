@@ -83,8 +83,8 @@ const items = [
         title: '750 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 32 GB RAM' },
-      { title: 'Point-in-time restore (30 days)' },
+      { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
+      { title: 'Point-in-time restore (14 days)' },
       { title: 'Standard support' },
       { title: 'Organization accounts' },
       { title: 'Branch protection' },
@@ -106,7 +106,7 @@ const items = [
     features: [
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
       {
-        title: '1,000 <a href="#compute-hour">compute hours</a> included',
+        title: '1000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 40 GB RAM' },
