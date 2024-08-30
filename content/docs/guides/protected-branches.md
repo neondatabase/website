@@ -54,8 +54,9 @@ This behavior is designed to prevent the exposure of passwords that could be use
 <Admonition type="important" title="Feature notes">
 - This feature was released on July, 31, 2024. If you have existing CI scripts that create branches from protected branches, please be aware that passwords for Postgres roles on those newly created branches will now differ. If you depend on those passwords being the same, you'll need to make adjustments to get the correct connection details for those branches.
     - After a branch is created, the up-to-date connection string is returned in the output of the [Create Branch GitHub Action](/docs/guides/branching-github-actions#create-branch-action).
-    - After resetting a branch from its parent, you can get the connection details for the branch using the Neon CLI [connection-string](/docs/reference/cli-connection-string) command.
-- Resetting a child branch from a protected parent branch currently restores Postgres role passwords on the child branch to those used on the protected parent branch. This issue will be addressed in an upcoming release. See [reset from parent](/docs/manage/branches#reset-a-branch-from-parent) to understand how Neon's branch reset feature works.
+    - The [Reset Branch GitHub Action](/docs/guides/branching-github-actions#reset-from-parent-action) also outputs connection string values, in case you are using this action in your workflows.
+    - The Neon CLI supports a [connection-string](/docs/reference/cli-connection-string) command for retrieving a branch's connection string.
+- Resetting or restoring a child branch from a protected parent branch currently restores Postgres role passwords on the child branch to those used on the protected parent branch. This issue will be addressed in an upcoming release. See [reset from parent](/docs/introduction/point-in-time-restore) to understand how Neon's branch reset and restore features work.
 </Admonition>
 
 ## How to apply IP restrictions to protected branches
