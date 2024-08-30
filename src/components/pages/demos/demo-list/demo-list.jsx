@@ -6,8 +6,21 @@ import ChevronIcon from 'icons/chevron.inline.svg';
 
 const items = [
   {
-    category: 'Branching',
+    category: 'DB-per-user',
     categoryTextColor: 'text-pink-90',
+    items: [
+      {
+        title: 'AI app architecture: vector database per tenant',
+        description:
+          "An AI app where each user gets it's own database instance. Uses Neon + pgvector.",
+        demoLink: 'https://ai-vector-db-per-tenant.pages.dev/',
+        sourceLink: 'https://github.com/neondatabase/ai-vector-db-per-tenant',
+      },
+    ],
+  },
+  {
+    category: 'Branching',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Neon Twitter',
@@ -38,7 +51,8 @@ const items = [
       },
       {
         title: 'Preview branches with Fly.io, Neon, and Github Actions',
-        description: 'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations. ',
+        description:
+          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
       },
@@ -46,7 +60,7 @@ const items = [
   },
   {
     category: 'Data Recovery with branching',
-    categoryTextColor: 'text-blue-80',
+    categoryTextColor: 'text-brown-70',
     items: [
       {
         title: 'Time travel bisect script demo',
@@ -59,7 +73,7 @@ const items = [
   },
   {
     category: 'Read replicas example',
-    categoryTextColor: 'text-brown-70',
+    categoryTextColor: 'text-pink-90',
     items: [
       {
         title: 'Read replicas example',
@@ -72,7 +86,7 @@ const items = [
   },
   {
     category: 'Languages and Frameworks',
-    categoryTextColor: 'text-pink-90',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Neon Ecto Getting Started',
@@ -86,11 +100,18 @@ const items = [
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-edge-analytics-astro-sample',
       },
+      {
+        title: 'Neon with Next.js and Prisma',
+        // TODO: Replace this placeholder
+        description: 'This is a placeholder. It should be replaced.',
+        demoLink: '#',
+        sourceLink: 'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
+      },
     ],
   },
   {
     category: 'Serverless driver',
-    categoryTextColor: 'text-blue-80',
+    categoryTextColor: 'text-brown-70',
     items: [
       {
         title: 'Ping Thing',
@@ -110,7 +131,7 @@ const items = [
   },
   {
     category: 'OAuth',
-    categoryTextColor: 'text-brown-70',
+    categoryTextColor: 'text-pink-90',
     items: [
       {
         title: 'Neon branch visualizer',
@@ -123,7 +144,7 @@ const items = [
   },
   {
     category: 'AI',
-    categoryTextColor: 'text-pink-90',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Vercel Postgres pgvector starter',
@@ -150,14 +171,16 @@ const items = [
       },
       {
         title: 'Semantic Search Chatbot (OpenAI + LangChain)',
-        description: 'A starter application for an AI-powered Semantic Search chatbot with Next.js, pgvector, OpenAI, and LangChain.',
+        description:
+          'A starter application for an AI-powered Semantic Search chatbot with Next.js, pgvector, OpenAI, and LangChain.',
         demoLink: '#',
         sourceLink:
           'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
       },
       {
         title: 'AI Chatbot (OpenAI + LangChain)',
-        description: 'A starter application for an AI-powered chatbot with Next.js, pgvector, OpenAI, and LangChain',
+        description:
+          'A starter application for an AI-powered chatbot with Next.js, pgvector, OpenAI, and LangChain',
         demoLink: '#',
         sourceLink:
           'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
@@ -165,16 +188,6 @@ const items = [
     ],
   },
 ];
-
-// TODO: add this demo to corresponding category
-// {
-//   title: 'Neon with Next.js and Prisma',
-//   // TODO: Replace this placeholder
-//   description: 'This is a placeholder. It should be replaced.',
-//   demoLink: '#',
-//   sourceLink:
-//     'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
-// },
 
 const DemoList = () => (
   <section className="demo-list safe-paddings my-20 lg:my-16 md:my-10">
