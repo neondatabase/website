@@ -12,6 +12,7 @@ import { useCookies } from 'next-client-cookies';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import Button from '../button';
@@ -196,20 +197,23 @@ const RegionRequest = ({
   return (
     <figure
       className={clsx(
-        'doc-cta not-prose my-5 rounded-[10px] border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] px-7 py-6 sm:p-6',
-        'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28%,#131415_74%)]'
+        'doc-cta not-prose my-5 rounded-[10px] border border-gray-new-94 bg-gray-new-98 px-7 py-6 sm:p-6',
+        'dark:border-gray-new-15 dark:bg-gray-new-10'
       )}
     >
-      <h2 className="!my-0 font-title text-2xl font-medium leading-dense">{title}</h2>
-      <p className="mt-2 text-sm font-light text-gray-new-20 dark:text-gray-new-80">
+      <h2 className="!my-0 font-title text-2xl font-medium leading-dense tracking-extra-tight">
+        {title}
+      </h2>
+      <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
       {requestComplete ? (
-        <p className="mt-4">
-          <em>Request logged. We appreciate your feedback!</em>
-        </p>
+        <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
+          <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
+          <p className="text-[17px] font-light">Request logged. We appreciate your feedback!</p>
+        </div>
       ) : (
-        <div className="mt-4 flex items-end gap-4 md:flex-col md:items-start">
+        <div className="mt-6 flex items-end gap-4 md:flex-col md:items-start">
           <div className="flex-1 md:w-full">
             <Combobox
               value={selected}
@@ -220,9 +224,9 @@ const RegionRequest = ({
               <div className="relative">
                 <ComboboxInput
                   className={clsx(
-                    'w-full rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6',
-                    'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/20',
-                    'dark:bg-white/5 dark:data-[focus]:outline-white/20'
+                    'h-10 w-full rounded border-none bg-gray-new-94 py-3 pl-4 pr-8 xl:text-sm',
+                    'focus:outline-none data-[focus]:outline-1 data-[focus]:-outline-offset-1 data-[focus]:outline-gray-new-70',
+                    'dark:bg-gray-new-15 dark:data-[focus]:outline-gray-new-30'
                   )}
                   displayValue={(option) => option?.name}
                   autoComplete="off"
@@ -230,15 +234,16 @@ const RegionRequest = ({
                   onChange={(event) => setQuery(event.target.value)}
                 />
                 <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
-                  <ChevronIcon className="size-4 stroke-black/60 group-data-[hover]:stroke-black" />
+                  <ChevronIcon className="size-4 stroke-black-new dark:stroke-white" />
                 </ComboboxButton>
               </div>
               <ComboboxOptions
                 anchor="bottom"
                 className={clsx(
-                  'z-50 w-[var(--input-width)] rounded-xl border border-black/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
+                  'z-50 !max-h-[200px] w-[var(--input-width)] rounded border border-gray-new-94 bg-gray-new-98',
+                  '[--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
                   'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
-                  'dark:border-white/5 dark:bg-gray-new-10 dark:text-white'
+                  'dark:border-gray-new-15 dark:bg-gray-new-10 dark:text-white'
                 )}
                 transition
               >
@@ -247,21 +252,19 @@ const RegionRequest = ({
                     key={option.id}
                     value={option}
                     className={clsx(
-                      'group flex cursor-pointer select-none items-center gap-2 rounded-lg px-2 py-1.5 data-[focus]:bg-black/10',
-                      'dark:data-[focus]:bg-white/10'
+                      'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
+                      'dark:data-[focus]:bg-gray-new-15'
                     )}
                   >
-                    <div className="text-sm text-sm/6">
-                      {option.name}{' '}
-                      <code
-                        className={clsx(
-                          'whitespace-nowrap bg-gray-8 px-1 text-xs',
-                          'dark:bg-gray-new-15'
-                        )}
-                      >
-                        {option.id}
-                      </code>
-                    </div>
+                    {option.name}{' '}
+                    <code
+                      className={clsx(
+                        'whitespace-nowrap rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none',
+                        'dark:bg-gray-new-20'
+                      )}
+                    >
+                      {option.id}
+                    </code>
                   </ComboboxOption>
                 ))}
               </ComboboxOptions>
@@ -273,9 +276,10 @@ const RegionRequest = ({
               name="email"
               value={email}
               className={clsx(
-                'remove-autocomplete-styles rounded-lg border-none bg-black/5 py-1.5 pl-3 pr-8 text-sm/6  md:w-full',
-                'focus:outline-2 focus:-outline-offset-2 focus:outline-black/20',
-                'dark:bg-white/5 dark:focus:outline-white/20'
+                'remove-autocomplete-styles h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 md:w-full',
+                '2xl:min-w-52 xl:min-w-40 xl:text-sm',
+                'focus:outline-1 focus:-outline-offset-1 focus:outline-gray-new-70',
+                'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
               )}
               placeholder="Email (optional)"
               onChange={(e) => setEmail(e.target.value)}
