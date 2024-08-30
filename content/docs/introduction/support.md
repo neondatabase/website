@@ -27,9 +27,12 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 | Neon Discord Server             |  &check;  | &check;  | &check;  |  &check;   |
 | Support tickets                 |     -     | &check;  | &check;  |  &check;   |
 | Prioritized supported tickets   |     -     |    -     | &check;  |  &check;   |
-| Video chat                      |     -     |    -     | &check;  |  &check;   |
-| Dedicated Customer Success Team |     -     |    -     |          |  &check;   |
+| Video chat*                     |     -     |    -     | *        |  *         |
 | SLAs                            |     -     |    -     |          |  &check;   |
+
+<div style={{margin: '-30px 0 30px 0'}}>
+<small><sup>*</sup> Video chats may be scheduled on a case-by-case basis.</small>
+</div>
 
 <Admonition type="important">
 The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neon users but is not an official Neon Support channel. If you are a paid plan user and require assistance from the Neon Support team, please open a support ticket, as described in [Standard support](#standard-support).
@@ -53,7 +56,7 @@ You can open support tickets in the Neon Console. Look for the **Support** link 
 
 ![Support ticket modal](/docs/introduction/neon_support_modal.png)
 
-You can expect an initial response time of 2 business days, from 6am to 6pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
+You can expect an initial response time of 3 business days, Monday through Friday, excluding public holidays. For custom support solutions, please contact [Sales](https://neon.tech/contact-sales).
 
 ### Priority support
 
@@ -73,7 +76,7 @@ If you are a Launch, Scale, Business, or Enterprise user and are unable to acces
 
 ## Response Times
 
-Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and Severity of their issue. We only commit to responding to Customers with an Enterprise subscription using the target response time guidelines below.
+Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue. We only commit to responding to Customers with an Enterprise subscription using the target response time guidelines below.
 
 ## Enterprise target response times
 
