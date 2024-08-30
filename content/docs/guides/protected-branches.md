@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-08-02T17:09:55.515Z'
+updatedOn: '2024-08-30T16:58:37.260Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
