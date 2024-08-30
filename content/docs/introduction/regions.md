@@ -9,7 +9,7 @@ updatedOn: '2024-08-20T23:55:48.552Z'
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
 
-## Available regions
+## AWS regions
 
 Neon currently supports the following AWS regions:
 
@@ -19,6 +19,14 @@ Neon currently supports the following AWS regions:
 - Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+
+## Azure regions
+
+- East US 2 region &mdash; `azure-us-east-2`
+
+<Admonition type="note">
+The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects.
+</Admonition>
 
 ## Select a region for your Neon project
 
@@ -38,7 +46,7 @@ A NAT gateway has a public IP address that external systems see when private res
 
 If you are unsure of your project's region, you can find this information in the **Project settings** widget on the **Project Dashboard**.
 
-### NAT Gateway IP Addresses by region
+### AWS NAT Gateway IP Addresses by region
 
 | Region                                        | NAT Gateway IP Addresses                                                               |
 | :-------------------------------------------- | :------------------------------------------------------------------------------------- |
@@ -48,6 +56,10 @@ If you are unsure of your project's region, you can find this information in the
 | Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
 | Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+
+<Admonition type="note">
+NAT Gateway IP addresses are not yet available for Azure regions. Support will be introduced in a future release. Workarounds include opening connections to all IPs (0.0.0.0/0), which is not considered secure, or requesting a specific IP address from [Neon Support](/docs/introduction/support) to use with setups and configurations that require it.
+</Admonition>
 
 ## Move project data to a new region
 
