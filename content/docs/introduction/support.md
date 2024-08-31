@@ -22,13 +22,13 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 
 ## Support channels
 
-| Support channels              | Community | Standard | Priority | Enterprise |
-| :---------------------------- | :-------: | :------: | :------: | :--------: |
-| Neon Discord Server           |  &check;  | &check;  | &check;  |  &check;   |
-| Support tickets               |     -     | &check;  | &check;  |  &check;   |
+| Support channels            | Community | Standard | Priority | Enterprise |
+| :-------------------------- | :-------: | :------: | :------: | :--------: |
+| Neon Discord Server         |  &check;  | &check;  | &check;  |  &check;   |
+| Support tickets             |     -     | &check;  | &check;  |  &check;   |
 | Prioritized support tickets |     -     |    -     | &check;  |  &check;   |
-| Video chat\*                  |     -     |    -     |    \*    |     \*     |
-| SLAs                          |     -     |    -     |          |  &check;   |
+| Video chat\*                |     -     |    -     |    \*    |     \*     |
+| SLAs                        |     -     |    -     |          |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup> Video chats may be scheduled on a case-by-case basis.</small>
@@ -167,12 +167,12 @@ Examples:
 
 Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans), as outlined in the following table. Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
 
-| Support plan | Pricing plan                                                                                         |
-| :----------- | :--------------------------------------------------------------------------------------------------- |
-| Community    | [Free Plan](/docs/introduction/plans#free-plan)                                                      |
-| Standard     | [Launch](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale)                                                            |
-| Priority     |  [Business plan](/docs/introduction/plans#business) |
-| Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise)                                               |
+| Support plan | Pricing plan                                                                          |
+| :----------- | :------------------------------------------------------------------------------------ |
+| Community    | [Free Plan](/docs/introduction/plans#free-plan)                                       |
+| Standard     | [Launch](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale) |
+| Priority     | [Business plan](/docs/introduction/plans#business)                                    |
+| Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise)                                |
 
 ## Etiquette
 
