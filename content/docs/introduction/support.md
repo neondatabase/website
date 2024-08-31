@@ -102,7 +102,9 @@ A detailed explanation of each severity level, including several examples, is pr
 - Unavailability of the service
 - Security breaches that compromise the confidentiality, integrity, or availability of the database or its data.
 
-**Note**: If Critical is selected during the case creation, the customer will be asked to provide in-depth details on the business impact the issue has caused.
+<Admonition type="note">
+If Critical is selected during the case creation, the customer will be asked to provide in-depth details on the business impact the issue has caused.
+</Admonition>
 
 Examples:
 
