@@ -141,7 +141,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
 - Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
-- [Priority support](/docs/introduction/support)
+- [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 

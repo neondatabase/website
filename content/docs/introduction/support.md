@@ -6,7 +6,7 @@ updatedOn: '2024-08-06T15:23:10.955Z'
 
 ## General Support Policy
 
-Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to the Neon Launch, Scale, Business, or Enterprise [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free tier](/docs/introduction/free-tier) users is provided through [Discord](https://neon.tech/discord). See Neon [plans](/docs/introduction/plans) and [pricing](https://neon.tech/pricing) for information on available subscriptions.
+Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale, Business, or Enterprise. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free tier](/docs/introduction/free-tier) users is provided through [Discord](https://neon.tech/discord). See Neon [plans](/docs/introduction/plans) and [pricing](https://neon.tech/pricing) for information on available subscriptions.
 
 Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](https://neon.tech/terms-of-service).
 
@@ -26,7 +26,7 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 | :---------------------------- | :-------: | :------: | :------: | :--------: |
 | Neon Discord Server           |  &check;  | &check;  | &check;  |  &check;   |
 | Support tickets               |     -     | &check;  | &check;  |  &check;   |
-| Prioritized supported tickets |     -     |    -     | &check;  |  &check;   |
+| Prioritized support tickets |     -     |    -     | &check;  |  &check;   |
 | Video chat\*                  |     -     |    -     |    \*    |     \*     |
 | SLAs                          |     -     |    -     |          |  &check;   |
 
@@ -48,7 +48,7 @@ Community support is provided through the [Neon Discord Server](https://discord.
 
 ### Standard support
 
-Neon's [Launch plan](/docs/introduction/plans#launch) includes **Standard** support.
+Neon's [Launch plan](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale) plans include **Standard** support.
 
 Standard support includes access to the Neon Support team via support tickets.
 
@@ -60,13 +60,13 @@ You can expect an initial response time of 3 business days, Monday through Frida
 
 ### Priority support
 
-Neon's [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans includes **Priority** support.
+Neon's [Business](/docs/introduction/plans#business) plan includes **Priority** support.
 
 With Priority support, your support tickets are given priority by the Neon Support team and you can request a video chat. Requests for video chat should be submitted via a support ticket.
 
 ### Enterprise support
 
-Neon's [Enterprise plan](/docs/introduction/plans#launch) includes **Enterprise** support.
+Neon's [Enterprise plan](/docs/introduction/plans#enterprise) includes **Enterprise** support.
 
 With Enterprise support, you have everything offered with the Priority plan plus dedicated Customer Success Team support, and SLAs.
 
@@ -128,7 +128,8 @@ Examples:
 
 1. Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
    - Cannot create a new branch
-   - Cannot PITR
+   - Cannot execute a branch [restore](/docs/guides/branch-restore)
+   - Cannot peform PITR
    - Etc.
 2. Any use case that would require a high load of manual work on the customer side to mitigate an issue on our end
 3. Any use case which massively and negatively affects the customer's business
@@ -169,13 +170,13 @@ Neon's support plans are mapped to our [pricing plans](/docs/introduction/plans)
 | Support plan | Pricing plan                                                                                         |
 | :----------- | :--------------------------------------------------------------------------------------------------- |
 | Community    | [Free Plan](/docs/introduction/plans#free-plan)                                                      |
-| Standard     | [Launch](/docs/introduction/plans#launch)                                                            |
-| Priority     | [Scale](/docs/introduction/plans#scale) and [Business plan](/docs/introduction/plans#business) plans |
+| Standard     | [Launch](/docs/introduction/plans#launch) and [Scale](/docs/introduction/plans#scale)                                                            |
+| Priority     |  [Business plan](/docs/introduction/plans#business) |
 | Enterprise   | [Enterprise plan](/docs/introduction/plans#enterprise)                                               |
 
 ## Etiquette
 
-Regardless of the method or location through which Neon provides Support, the Customer must communicate professionally and respectfully. Any communication that is deemed objectionable by Neon staff is not tolerated. This includes but is not limited to, any communication that is abusive or contains profane language. Neon reserves the right to terminate Support Services if the Customer engages in any such objectionable communication.
+Regardless of the method or location through which Neon provides Support, the Customer must communicate professionally and respectfully. Any communication that is deemed objectionable by Neon staff is not tolerated. This includes but is not limited to any communication that is abusive or contains profane language. Neon reserves the right to terminate Support Services if the Customer engages in any such objectionable communication.
 
 ## Customer Responsibilities
 
