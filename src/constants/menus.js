@@ -69,7 +69,7 @@ export default {
             dark: autoscalingDarkIcon,
           },
           text: 'Autoscaling',
-          description: 'Automatic instance sizin',
+          description: 'Automatic instance sizing',
           to: LINKS.autoscaling,
         },
         {
