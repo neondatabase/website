@@ -25,6 +25,7 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
+      { title: '10 branches', info: 'All within 1 project' },
       {
         title: '24/7 database at 0.25 CU',
         info: 'Plus 20h of usage for additional branches. 0.25 CU = 0.25 vCPU, 1 GB RAM',
@@ -82,6 +83,10 @@ const items = [
     description: 'Full platform access for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
+      {
+        title: '500 branches per project',
+        info: '50 projects included. Additional 10 projects: $50/month',
+      },
       {
         title: '750 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',

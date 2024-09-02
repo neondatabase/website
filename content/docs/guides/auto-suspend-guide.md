@@ -3,7 +3,7 @@ title: Configuring Autosuspend for Neon computes
 subtitle: Learn how to configure Neon's Autosuspend feature to control when your compute
   scales to zero
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.947Z'
+updatedOn: '2024-09-02T13:42:56.653Z'
 ---
 
 Neon's [Autosuspend](/docs/introduction/auto-suspend) feature controls when a Neon compute transitions to an `Idle` state (scales to zero) due to inactivity. For example, if your autosuspend setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable autosuspension entirely, depending on your requirements.
@@ -18,12 +18,13 @@ This guide demonstrates how to configure the autosuspend setting for a new proje
 
 The autosuspend limits differ by [Neon plan](/docs/introduction/plans). The limits for each plan are outlined below. The initial default setting for all plans is 5 minutes.
 
-| Plan       | Autosuspend delay   | Can be disabled? |
-| :--------- | :------------------ | :--------------- |
-| Free Plan  | 5 minutes           |                  |
-| Launch     | 5 minutes to 7 days | &check;          |
-| Scale      | 1 minute to 7 days  | &check;          |
-| Enterprise | 0 up to 7 days      | &check;          |
+| Plan       | Autosuspend delay      | Can be disabled? |
+| :--------- | :--------------------- | :--------------- |
+| Free Plan  | 5 minutes              |                  |
+| Launch     | 5 minutes to 7 days    | &check;          |
+| Scale      | 1 minute to 7 days     | &check;          |
+| Business   | 1 minute to 7 days     | &check;          |
+| Enterprise | 0 seconds up to 7 days | &check;          |
 
 ### Configure the autosuspend setting for a new project
 
