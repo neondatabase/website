@@ -68,7 +68,7 @@ With Priority support, your support tickets are given priority by the Neon Suppo
 
 Neon's [Enterprise plan](/docs/introduction/plans#enterprise) includes **Enterprise** support.
 
-With Enterprise support, you have everything offered with the Priority plan plus dedicated Customer Success Team support, and SLAs.
+With Enterprise support, you have everything offered with the Priority plan plus Enterprise [response times](#enterprise-target-response-times).
 
 <Admonition type="note">
 If you are a Launch, Scale, Business, or Enterprise user and are unable to access the support ticket form in the Neon Console, you can use the following email address as a fallback: `support@neon.tech`
