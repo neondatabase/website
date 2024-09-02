@@ -6,8 +6,21 @@ import ChevronIcon from 'icons/chevron.inline.svg';
 
 const items = [
   {
-    category: 'Branching',
+    category: 'DB-per-user',
     categoryTextColor: 'text-pink-90',
+    items: [
+      {
+        title: 'AI app architecture: vector database per tenant',
+        description:
+          "An AI app where each user gets it's own database instance. Uses Neon + pgvector.",
+        demoLink: 'https://ai-vector-db-per-tenant.pages.dev/',
+        sourceLink: 'https://github.com/neondatabase/ai-vector-db-per-tenant',
+      },
+    ],
+  },
+  {
+    category: 'Branching',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Neon Twitter',
@@ -36,11 +49,18 @@ const items = [
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
+      {
+        title: 'Preview branches with Fly.io, Neon, and Github Actions',
+        description:
+          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
+        demoLink: '#',
+        sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
+      },
     ],
   },
   {
     category: 'Data Recovery with branching',
-    categoryTextColor: 'text-blue-80',
+    categoryTextColor: 'text-brown-70',
     items: [
       {
         title: 'Time travel bisect script demo',
@@ -53,7 +73,7 @@ const items = [
   },
   {
     category: 'Read replicas example',
-    categoryTextColor: 'text-brown-70',
+    categoryTextColor: 'text-pink-90',
     items: [
       {
         title: 'Read replicas example',
@@ -66,7 +86,7 @@ const items = [
   },
   {
     category: 'Languages and Frameworks',
-    categoryTextColor: 'text-pink-90',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Neon Ecto Getting Started',
@@ -80,11 +100,18 @@ const items = [
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-edge-analytics-astro-sample',
       },
+      {
+        title: 'Neon with Next.js and Prisma',
+        description:
+          'Example code using Next.js as the full stack framework, Prisma as the ORM, and Neon as the Postgres database.',
+        demoLink: '#',
+        sourceLink: 'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
+      },
     ],
   },
   {
     category: 'Serverless driver',
-    categoryTextColor: 'text-blue-80',
+    categoryTextColor: 'text-brown-70',
     items: [
       {
         title: 'Ping Thing',
@@ -104,7 +131,7 @@ const items = [
   },
   {
     category: 'OAuth',
-    categoryTextColor: 'text-brown-70',
+    categoryTextColor: 'text-pink-90',
     items: [
       {
         title: 'Neon branch visualizer',
@@ -117,7 +144,7 @@ const items = [
   },
   {
     category: 'AI',
-    categoryTextColor: 'text-pink-90',
+    categoryTextColor: 'text-blue-80',
     items: [
       {
         title: 'Vercel Postgres pgvector starter',
@@ -142,6 +169,22 @@ const items = [
         sourceLink:
           'https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/chat_with_your_database_using_langchain.ipynb',
       },
+      {
+        title: 'Semantic Search Chatbot (OpenAI + LangChain)',
+        description:
+          'A starter application for an AI-powered Semantic Search chatbot with Next.js, pgvector, OpenAI, and LangChain.',
+        demoLink: '#',
+        sourceLink:
+          'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
+      },
+      {
+        title: 'AI Chatbot (OpenAI + LangChain)',
+        description:
+          'A starter application for an AI-powered chatbot with Next.js, pgvector, OpenAI, and LangChain',
+        demoLink: '#',
+        sourceLink:
+          'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
+      },
     ],
   },
 ];
@@ -157,7 +200,7 @@ const DemoList = () => (
           >
             <h2
               className={clsx(
-                'flex items-center text-xs font-semibold uppercase leading-none tracking-[0.02em]',
+                'flex items-center text-xs font-semibold uppercase leading-none tracking-extra-tight',
                 categoryTextColor
               )}
             >
@@ -171,7 +214,7 @@ const DemoList = () => (
                   key={index}
                 >
                   <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">
-                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight tracking-extra-tight lg:text-xl">
+                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight -tracking-[0.05em] lg:text-xl">
                       {title}
                     </h3>
                     <p
