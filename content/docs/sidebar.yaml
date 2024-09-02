@@ -559,6 +559,8 @@
           items:
             - title: Auth0
               slug: guides/auth-auth0
+            - title: Auth.js
+              slug: guides/auth-authjs
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
