@@ -1,59 +1,71 @@
 ---
-title: Neon feeds
-subtitle: Stay updated with the latest information and announcements from Neon
+title: Neon RSS feeds
+subtitle: Stay updated with the latest news from Neon
 enableTableOfContents: true
 ---
 
-Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelogs, and blog posts, and Neon status updates through your preferred RSS reader or Slack channel.
+Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelog, and blog posts, and Neon status updates through your preferred RSS reader or [Slack channel](#subscribe-to-feeds-in-slack).
 
-# Neon Changelog
+## Changelog
 
-Keep track of all updates and changes to Neon by subscribing to the changelog RSS feed.
+Keep track of new features, improvements, and fixes by subscribing to the [Neon Changelog](https://neon.tech/docs/changelog) RSS feed.
 
-```http
+```bash
 https://neon.tech/docs/changelog/rss.xml
 ```
 
-## 3. Neon Blog
+## Blog
 
-Stay informed on the latest articles, tutorials, and news by following the Neon blog RSS feed.
+Stay informed on the latest articles and news by following the [Neon blog](https://neon.tech/blog) RSS feed.
 
-```http
+```bash
 https://neon.tech/blog/rss.xml
 ```
 
-## Neon Status page
+## Status
 
-Monitor the operational status of Neon services across different regions by subscribing to the appropriate RSS feed. 
+Monitor the operational status of Neon across different regions by subscribing to the appropriate [Neon Status](https://neonstatus.com/) RSS feed. 
 
-- **AWS US East (N. Virginia)**: 
+- **AWS US East (N. Virginia)**
 
-  https://neonstatus.com/aws-us-east-n-virginia/slack.rss
+    ```bash
+    https://neonstatus.com/aws-us-east-n-virginia/slack.rss
+    ``` 
 
-- **AWS US East (Ohio)**: 
+- **AWS US East (Ohio)**
 
-  [RSS Feed](https://neonstatus.com/aws-us-east-ohio/feed.rss)
+    ```bash
+    https://neonstatus.com/aws-us-east-ohio/feed.rss
+    ``` 
 
-- **AWS US West (Oregon)**:
+- **AWS US West (Oregon)**
 
-  [RSS Feed](https://neonstatus.com/aws-us-west-oregon/feed.rss)
+    ```bash
+    https://neonstatus.com/aws-us-west-oregon/feed.rss
+    ``` 
 
-- **AWS Europe (Frankfurt)**:
+- **AWS Europe (Frankfurt)**
 
-  [RSS Feed](https://neonstatus.com/aws-europe-frankfurt/feed.rss)
+    ```bash
+    https://neonstatus.com/aws-europe-frankfurt/feed.rss
+    ``` 
 
-- **AWS Asia Pacific (Singapore)**: 
+- **AWS Asia Pacific (Singapore)**
 
-  [RSS Feed](https://neonstatus.com/aws-asia-pacific-singapore/feed.rss)
+    ```bash
+    https://neonstatus.com/aws-asia-pacific-singapore/feed.rss
+    ``` 
 
-- **AWS Asia Pacific (Sydney)**: 
+- **AWS Asia Pacific (Sydney)**
 
-  [RSS Feed](https://neonstatus.com/aws-asia-pacific-sydney/feed.rss)
+    ```bash
+    https://neonstatus.com/aws-asia-pacific-sydney/feed.rss
+    ``` 
 
 
-### Subscribe to feeds in Slack
+## Subscribe to feeds in Slack
 
-To receive updates in Slack, you can paste the following command with the desired RSS feed link into your Slack channel:
+To receive updates in Slack, you can paste the following command with the desired RSS feed into your Slack channel:
 
 ```bash
 /feed subscribe https://neon.tech/docs/changelog/rss.xml
