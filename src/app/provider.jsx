@@ -19,14 +19,13 @@ const whiteThemePages = [
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isWhiteThemePage = whiteThemePages.some((page) => pathname.startsWith(page));
-  const isDocPage =
-    pathname.startsWith('/docs') || pathname.startsWith('/guides') || pathname.startsWith('/flow');
+  const hasThemesSupport = pathname.startsWith('/docs') || pathname.startsWith('/guides');
   const forcedTheme = isWhiteThemePage ? 'light' : 'dark';
 
   return (
     <PreferredProvider
       attribute="class"
-      forcedTheme={isDocPage ? null : forcedTheme}
+      forcedTheme={hasThemesSupport ? null : forcedTheme}
       storageKey="neon-theme"
       disableTransitionOnChange
     >

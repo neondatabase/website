@@ -16,6 +16,7 @@ const PostgresDocsLayout = async ({ children }) => {
       isDocPage
       isHeaderSticky
       headerWithBorder
+      hasThemesSupport
     >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
         <MobileNav

@@ -3,7 +3,7 @@ title: Stream data to Neon with Sequin
 subtitle: Learn how to sync data from platforms like Stripe, Linear, and GitHub into
   your Neon database in real time
 enableTableOfContents: true
-updatedOn: '2024-08-20T23:55:48.550Z'
+updatedOn: '2024-08-22T16:01:18.419Z'
 ---
 
 <LRBeta/>
@@ -21,9 +21,10 @@ In this guide, you’ll learn how to stream data to Neon Postgres via Sequin by:
 
 ## Prerequisites
 
-- A [Sequin account](https://sequin.io/signup)
+- A [Sequin account](https://console.sequin.io/signup)
 - A [Neon account](https://console.neon.tech/)
 - An [API Source](https://sequin.io/integrations) you want to sync
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Create a schema and table for Sequin
 

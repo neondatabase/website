@@ -50,20 +50,20 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute (monthly)",
-        "subtitle": "Compute hrs = CPU size x active hrs"
+        "title": "Compute hours",
+        "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "24/7 for primary compute",
-        "info": "+20h of usage for branches"
+        "title": "190 /month",
+        "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       "launch": {
-        "title": "300 compute hours",
-        "info": "Extra at $0.16 per compute hour"
+        "title": "300 /month",
+        "info": "Extra usage at $0.16 per compute hour"
       },
       "scale": {
-        "title": "750 compute hours",
-        "info": "Extra at $0.16 per compute hour"
+        "title": "750 /month",
+        "info": "Extra usage at $0.16 per compute hour"
       },
       "enterprise": "Custom"
     },
@@ -106,16 +106,19 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute size"
+        "title": "Max compute size"
       },
       "free": {
-        "title": "0.25 vCPU, 1 GB RAM"
+        "title": "2 CU",
+        "info": "2 CU = 2 vCPU, 8 GB RAM"
       },
       "launch": {
-        "title": "Up to 4 vCPU, 16 GB RAM"
+        "title": "4 CU",
+        "info": "4 CU = 4 vCPU, 16 GB RAM"
       },
       "scale": {
-        "title": "Up to 10 vCPU, 40 GB RAM"
+        "title": "10 CU",
+        "info": "10 CU = 10 vCPU, 40 GB RAM"
       },
       "enterprise": {
         "title": "Larger sizes",
@@ -125,7 +128,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Instant Read Replicas"
+        "title": "Read Replicas"
       },
       "free": false,
       "launch": true,
@@ -137,10 +140,10 @@
       "feature": {
         "title": "Autoscaling"
       },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "enterprise": true
+      "free": "Up to 2 CU",
+      "launch": "Up to 4 CU",
+      "scale": "Up to 10 CU",
+      "enterprise": "Up to +10 CU"
     },
     {
       "rows": "2",
@@ -244,7 +247,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Protected Branch"
+        "title": "Branch Protection"
       },
       "free": false,
       "launch": false,
@@ -361,6 +364,16 @@
       },
       "free": "5 GB /month",
       "launch": true,
+      "scale": true,
+      "enterprise": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Custom domain proxy"
+      },
+      "free": false,
+      "launch": false,
       "scale": true,
       "enterprise": true
     }

@@ -3,10 +3,8 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-20T23:55:48.545Z'
+updatedOn: '2024-08-23T17:19:28.787Z'
 ---
-
-<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -20,11 +18,7 @@ optionally processing the data with SQL or custom Flink jobs.
 
 - A [Decodable account](https://www.decodable.co/) ([start free](https://app.decodable.co/-/accounts/create), no credit card required)
 - A [Neon account](https://console.neon.tech/)
-
-## Important notices
-
-- Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
-- To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable logical replication in Neon
 

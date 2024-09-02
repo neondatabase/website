@@ -41,7 +41,7 @@ const fetchStatus = async () => {
   return 'UP';
 };
 
-const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
+const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
@@ -64,7 +64,7 @@ const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
       rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
-        isDocPage ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
+        hasThemesSupport ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
       )}
       ref={ref}
     >
@@ -86,6 +86,6 @@ const StatusBadge = ({ isDocPage = false, isDarkTheme = true }) => {
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, isDarkTheme: PropTypes.bool };
+StatusBadge.propTypes = { hasThemesSupport: PropTypes.bool, isDarkTheme: PropTypes.bool };
 
 export default StatusBadge;

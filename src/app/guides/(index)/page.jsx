@@ -22,7 +22,7 @@ const GuidesPage = async () => {
   if (!posts) return <div className="text-18">No guides yet</div>;
 
   return (
-    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
+    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <Container
           className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"

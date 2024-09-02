@@ -3,7 +3,7 @@ title: Replicate data from Cloud SQL Postgres
 subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-20T23:55:48.544Z'
+updatedOn: '2024-08-22T02:18:02.648Z'
 ---
 
 <LRBeta/>
@@ -21,6 +21,7 @@ This guide describes how to replicate data from Cloud SQL Postgres using native 
   ```
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Prepare your Cloud SQL source database
 
@@ -132,7 +133,7 @@ This section describes how to prepare your source Neon Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 

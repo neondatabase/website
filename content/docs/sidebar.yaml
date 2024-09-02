@@ -49,7 +49,7 @@
             - title: Rust
               slug: guides/rust
         - section: Framework quickstarts
-          items: 
+          items:
             - title: Quick list
               slug: get-started-with-neon/frameworks
             - title: Astro
@@ -122,7 +122,7 @@
             - title: Latency and timeouts
               slug: connect/connection-latency
     - title: Import data
-      icon: roadmap
+      icon: import
       slug: import/import-intro
       items:
         - section: Import utilities
@@ -133,6 +133,8 @@
               slug: import/import-from-postgres-pg-import
             - title: Import from a Neon project
               slug: import/import-from-neon
+            - title: Import schema only
+              slug: import/import-schema-only
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL
@@ -179,6 +181,8 @@
       slug: guides/neon-features
       icon: features
       items:
+        - title: Serverless
+          slug: introduction/serverless
         - title: Autoscaling
           slug: introduction/autoscaling
           items:
@@ -222,7 +226,9 @@
           items:
             - title: Concepts
               slug: guides/logical-replication-concepts
-            - title: Manage
+            - title: Commands
+              slug: guides/logical-replication-manage
+            - title: Neon specifics
               slug: guides/logical-replication-neon
         - title: Read replicas
           slug: introduction/read-replicas
@@ -252,16 +258,29 @@
       items:
         - section: Access control
           items:
-            - title: E-mail signup
-              slug: manage/email-signup
+            - title: Accounts
+              slug: manage/accounts
             - title: Organizations
               slug: manage/organizations
+              items:
+                - title: Getting started
+                  slug: manage/organizations
+                - title: Manage Organizations
+                  slug: manage/orgs-manage
+                - title: Transfer projects
+                  slug: manage/orgs-project-transfer
+                - title: API actions
+                  slug: manage/orgs-api
+                - title: CLI actions
+                  slug: manage/orgs-cli
             - title: Project access
               slug: manage/project-access
             - title: Project sharing
               slug: guides/project-sharing-guide
             - title: Database access
               slug: manage/database-access
+            - title: E-mail signup
+              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
         - section: Projects
@@ -309,21 +328,12 @@
     - title: Regions
       slug: introduction/regions
       icon: regions
-      items: 
-        - title: Neon Regions
-          slug: introduction/regions
     - title: Support
       slug: introduction/support
       icon: support
-      items: 
-        - title: Neon Support
-          slug: introduction/support
     - title: Status
       slug: introduction/status
       icon: status
-      items: 
-        - title: Neon Status
-          slug: introduction/status
     - title: Plans and billing
       slug: introduction/about-billing
       icon: billing
@@ -475,12 +485,16 @@
               slug: guides/logical-replication-airbyte
             - title: Bemi
               slug: guides/bemi
+            - title: ClickHouse
+              slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
             - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
               slug: guides/logical-replication-decodable
+            - title: Estuary Flow
+              slug: guides/logical-replication-estuary-flow
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -489,6 +503,8 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres
+            - title: Prisma Pulse
+              slug: guides/logical-replication-prisma-pulse
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Replicate to Neon
@@ -503,8 +519,6 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
-            - title: Prisma Pulse
-              slug: guides/logical-replication-prisma-pulse
             - title: Sequin
               slug: guides/sequin
             - title: AWS RDS
@@ -558,7 +572,7 @@
         - title: The pgvector extension
           slug: extensions/pgvector
         - title: AI integrations
-          items: 
+          items:
             - title: LangChain
               slug: ai/langchain
             - title: LlamaIndex
@@ -613,7 +627,7 @@
     - title: SDKs
       slug: reference/sdk
       icon: sdk
-      items: 
+      items:
         - title: Neon SDKs
           slug: reference/sdk
 - section: Postgres
@@ -812,10 +826,6 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-      items:
-        - title: Neon roadmap
-          slug: introduction/roadmap
-          tag: updated
 - section: noname
   items:
     - title: Community
@@ -823,7 +833,7 @@
       icon: community
       items:
         - title: Docs Contribution Guide
-          slug: community/contribution-guide 
+          slug: community/contribution-guide
     - title: Changelog
       slug: changelog
       icon: changelog
