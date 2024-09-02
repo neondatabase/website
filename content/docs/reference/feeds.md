@@ -62,7 +62,6 @@ Monitor the operational status of Neon across different regions by subscribing t
     https://neonstatus.com/aws-asia-pacific-sydney/feed.rss
     ``` 
 
-
 ## Subscribe to feeds in Slack
 
 To receive updates in Slack, you can paste the following command with the desired RSS feed into your Slack channel:
