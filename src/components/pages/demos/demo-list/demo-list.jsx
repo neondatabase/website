@@ -102,8 +102,8 @@ const items = [
       },
       {
         title: 'Neon with Next.js and Prisma',
-        // TODO: Replace this placeholder
-        description: 'This is a placeholder. It should be replaced.',
+        description:
+          'Example code using Next.js as the full stack framework, Prisma as the ORM, and Neon as the Postgres database.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
       },
