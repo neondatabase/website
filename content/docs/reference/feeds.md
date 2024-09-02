@@ -17,7 +17,7 @@ https://neon.tech/docs/changelog/rss.xml
 
 ## Blog
 
-Stay informed on the latest articles and news by following the [Neon blog](https://neon.tech/blog) RSS feed.
+Stay informed on the latest articles and news by following the [Neon Blog](https://neon.tech/blog) RSS feed.
 
 ```bash
 https://neon.tech/blog/rss.xml
@@ -30,7 +30,7 @@ Monitor the operational status of Neon across different regions by subscribing t
 - **AWS US East (N. Virginia)**
 
   ```bash
-  https://neonstatus.com/aws-us-east-n-virginia/slack.rss
+  https://neonstatus.com/aws-us-east-n-virginia/feed.rss
   ```
 
 - **AWS US East (Ohio)**
@@ -65,7 +65,7 @@ Monitor the operational status of Neon across different regions by subscribing t
 
 ## Subscribe to feeds in Slack
 
-To receive updates in Slack, you can paste the following command with the desired RSS feed into your Slack channel:
+To receive updates in Slack, enter the `/feed subscribe` command with the desired RSS feed into your Slack channel:
 
 ```bash
 /feed subscribe https://neon.tech/docs/changelog/rss.xml
