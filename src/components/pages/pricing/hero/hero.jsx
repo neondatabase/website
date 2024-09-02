@@ -21,6 +21,7 @@ const items = [
   {
     type: 'Free Plan',
     price: 0,
+    isMarketplaceAvailable: false,
     description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
@@ -47,6 +48,7 @@ const items = [
     type: 'Launch',
     price: 19,
     priceFrom: true,
+    isMarketplaceAvailable: true,
     description: 'All the resources, features and support you need to launch.',
     features: [
       {
@@ -76,6 +78,7 @@ const items = [
     type: 'Scale',
     price: 69,
     priceFrom: true,
+    isMarketplaceAvailable: true,
     description: 'Full platform access for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
@@ -102,6 +105,7 @@ const items = [
     type: 'Business',
     price: 700,
     priceFrom: true,
+    isMarketplaceAvailable: false,
     description: 'For existing workloads with larger storage/compute requirements.',
     features: [
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
@@ -215,7 +219,18 @@ const Hero = () => {
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(
-              ({ type, price, priceFrom = false, description, features, button }, index) => {
+              (
+                {
+                  type,
+                  price,
+                  priceFrom = false,
+                  isMarketplaceAvailable,
+                  description,
+                  features,
+                  button,
+                },
+                index
+              ) => {
                 const isScalePlan = type === 'Scale';
 
                 return (
@@ -231,7 +246,7 @@ const Hero = () => {
                       }
                     }}
                   >
-                    {price !== 0 && (
+                    {isMarketplaceAvailable && (
                       <a
                         className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
                         href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
