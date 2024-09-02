@@ -33,7 +33,7 @@ LogoLink.propTypes = themePropTypes;
 
 const Navigation = async ({ isDarkTheme }) => (
   <nav>
-    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
+    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
       {MENUS.header.map(({ to, text, items }, index) => {
         const Tag = to ? Link : 'button';
         return (
