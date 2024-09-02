@@ -4,6 +4,8 @@ import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
 import aiDarkIcon from 'icons/header/ai-dark.svg';
 import aiIcon from 'icons/header/ai.svg';
+import apiDarkIcon from 'icons/header/api-dark.svg';
+import apiIcon from 'icons/header/api.svg';
 import autoscalingDarkIcon from 'icons/header/autoscaling-dark.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
 import blogDarkIcon from 'icons/header/blog-dark.svg';
@@ -26,8 +28,10 @@ import caseVariableIcon from 'icons/header/case-variable.svg';
 // import caseVelocityIcon from 'icons/header/case-velocity.svg';
 import changelogDarkIcon from 'icons/header/changelog-dark.svg';
 import changelogIcon from 'icons/header/changelog.svg';
-import cliDarkIcon from 'icons/header/cli-dark.svg';
-import cliIcon from 'icons/header/cli.svg';
+import connectionPoolerDarkIcon from 'icons/header/connection-pooler-dark.svg';
+import connectionPoolerIcon from 'icons/header/connection-pooler.svg';
+import consoleDarkIcon from 'icons/header/console-dark.svg';
+import consoleIcon from 'icons/header/console.svg';
 import demosDarkIcon from 'icons/header/demos-dark.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordDarkIcon from 'icons/header/discord-dark.svg';
@@ -36,8 +40,10 @@ import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
 import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersDarkIcon from 'icons/header/partners-dark.svg';
 import partnersIcon from 'icons/header/partners.svg';
-import onDemandStorageDarkIcon from 'icons/header/storage-dark.svg';
-import onDemandStorageIcon from 'icons/header/storage.svg';
+import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
+import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
+import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
+import serverlessIcon from 'icons/header/serverless.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
@@ -50,12 +56,12 @@ export default {
       items: [
         {
           icon: {
-            light: branchingIcon,
-            dark: branchingDarkIcon,
+            light: serverlessIcon,
+            dark: serverlessDarkIcon,
           },
-          text: 'Branching',
-          description: 'Work with data like code',
-          to: LINKS.branching,
+          text: 'Serverless',
+          description: 'Built for the cloud',
+          to: LINKS.serverless,
         },
         {
           icon: {
@@ -63,26 +69,53 @@ export default {
             dark: autoscalingDarkIcon,
           },
           text: 'Autoscaling',
-          description: 'Scale compute on demand',
+          description: 'Automatic instance sizin',
           to: LINKS.autoscaling,
         },
         {
           icon: {
-            light: cliIcon,
-            dark: cliDarkIcon,
+            light: branchingIcon,
+            dark: branchingDarkIcon,
           },
-          text: 'CLI',
-          description: 'Neon in your terminal',
-          to: LINKS.cli,
+          text: 'Branching',
+          description: 'Copy schema + data',
+          to: LINKS.flow,
         },
         {
           icon: {
-            light: onDemandStorageIcon,
-            dark: onDemandStorageDarkIcon,
+            light: scaleToZeroIcon,
+            dark: scaleToZeroDarkIcon,
           },
-          text: 'On-demand storage',
-          description: 'Custom-built for the cloud',
-          to: LINKS.onDemandStorage,
+          text: 'Scale-to-zero',
+          description: 'Lower costs for dev/test',
+          to: LINKS.scaleToZero,
+        },
+        {
+          icon: {
+            light: apiIcon,
+            dark: apiDarkIcon,
+          },
+          text: 'API',
+          description: 'Less management work',
+          to: LINKS.api,
+        },
+        {
+          icon: {
+            light: connectionPoolerIcon,
+            dark: connectionPoolerDarkIcon,
+          },
+          text: 'Connection pooler',
+          description: ' Thousands of connections',
+          to: LINKS.connectionPooling,
+        },
+        {
+          icon: {
+            light: consoleIcon,
+            dark: consoleDarkIcon,
+          },
+          text: 'Console',
+          description: 'UI for data management',
+          to: LINKS.consoleTables,
         },
         {
           icon: {
@@ -90,7 +123,7 @@ export default {
             dark: aiDarkIcon,
           },
           text: 'AI',
-          description: 'Neon as your vector store',
+          description: 'Powered by pgvector',
           to: LINKS.ai,
         },
       ],
