@@ -13,7 +13,6 @@ import useClickOutside from 'hooks/use-click-outside';
 import useWindowSize from 'hooks/use-window-size';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
-import InkeepTrigger from '../inkeep-trigger';
 import { sidebarPropTypes } from '../sidebar/sidebar';
 
 const ANIMATION_DURATION = 0.2;
@@ -118,23 +117,20 @@ const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) 
           style={{ height: containerHeight }}
         >
           {!isPostgres && (
-            <>
-              <InkeepTrigger isSidebar />
-              <ul className="mb-7">
-                {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-                  <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-                    <Link className="group flex items-center space-x-3" to={slug}>
-                      <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                        <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                      </span>
-                      <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                        {title}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
+            <ul className="mb-7">
+              {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
+                <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
+                  <Link className="group flex items-center space-x-3" to={slug}>
+                    <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
+                      <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
+                    </span>
+                    <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+                      {title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           )}
           <ul className={clsx({ 'mt-2.5': isPostgres })}>
             {sidebar.map((item, index) => (

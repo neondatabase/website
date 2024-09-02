@@ -10,8 +10,10 @@ import { useCallback, useState } from 'react';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const InkeepCustomTrigger = dynamic(
-  () => import('@inkeep/widgets').then((mod) => mod.InkeepCustomTrigger),
-  { ssr: false }
+  () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
+  {
+    ssr: false,
+  }
 );
 
 const baseSettings = {
@@ -20,6 +22,21 @@ const baseSettings = {
   organizationId: process.env.INKEEP_ORGANIZATION_ID,
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
+};
+
+const aiChatSettings = {
+  botName: 'Neon AI',
+  placeholder: 'How can I help you?',
+  quickQuestionsLabel: 'Examples',
+  quickQuestions: [
+    'What’s Neon?',
+    'How do I sign up for Neon?',
+    'How to create a project?',
+    'How to get started with the Neon API?',
+  ],
+  botAvatarSrcUrl: '/inkeep/images/example.svg',
+  botAvatarDarkSrcUrl: '/inkeep/images/example.svg',
+  userAvatarSrcUrl: '/inkeep/images/user.svg',
 };
 
 const Search = ({ className = null, isBlog = false }) => {
@@ -49,11 +66,11 @@ const Search = ({ className = null, isBlog = false }) => {
     },
     modalSettings: {
       defaultView: 'SEARCH',
-      // isModeSwitchingEnabled: false,
     },
     searchSettings: {
       searchMode: 'KEYWORD',
     },
+    aiChatSettings,
   };
 
   return (

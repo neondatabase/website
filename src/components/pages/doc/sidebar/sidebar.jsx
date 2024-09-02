@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus';
 
-import InkeepTrigger from '../inkeep-trigger';
-
 import Item from './item';
 
 const Search = dynamic(() => import('components/shared/search/search'));
@@ -52,10 +50,7 @@ const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = 
         {isPostgres ? (
           <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
         ) : (
-          <>
-            <InkeepTrigger isSidebar />
-            <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
-          </>
+          <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
         )}
         <ul className={clsx({ 'mt-14': !isPostgres })}>
           {sidebar.map((item, index) => (
