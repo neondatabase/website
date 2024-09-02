@@ -43,6 +43,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 - **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
 - **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
+- **Business**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
@@ -84,7 +85,7 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries among other development-focussed features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
 
-The history retention limit is 24 hours for Neon Free Plan users, 7 days for Launch plan users, and 30 days for Scale plan users. Before going into production, select a history retention period that suits your operational requirements.
+The history retention limit is 24 hours for Neon Free Plan users, 7 days for Launch plan users, and 30 days for Scale and Business plan users. Before going into production, select a history retention period that suits your operational requirements.
 
 ![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
 
@@ -94,7 +95,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 

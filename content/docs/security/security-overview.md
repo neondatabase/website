@@ -19,7 +19,7 @@ In addition, Neon requires a 60-bit entropy password for all PostgreSQL roles. T
 
 ## IP allowlist support
 
-Neon's IP Allow feature, available with the [Scale](/docs/introduction/plans#scale) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+Neon's IP Allow feature, available with the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Protected branches
 
@@ -32,7 +32,7 @@ You can designate any branch as a "protected branch", which implements a series 
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
 - With additional configuration steps, you can apply IP restrictions to protected branches only.
 
-The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) plan. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Data-at-rest encryption
 

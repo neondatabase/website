@@ -15,7 +15,7 @@ Neon's protected branches feature implements a series of protections:
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
 - With additional configuration steps, you can apply IP restrictions to protected branches only. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 
-The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) plan.
+The protected branches feature is available with the Neon [Business](/docs/introduction/plans#business) plan.
 
 ## Set a branch as protected
 

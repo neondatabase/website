@@ -25,7 +25,7 @@ To add the Outerbase integration to your Neon project:
 7. You are directed to an **Authorize Outerbase** dialog. Click **Authorize** to give Outerbase permission to access your Neon account.
 8. You are directed to a **Connect to your Neon database** page. If you have more than one Neon project, select the project you want to connect to from the **Select a database** drop-down menu.
    <Admonition type="note">
-   If you use Neon's [IP Allow](/docs/introduction/ip-allow) feature, be sure to copy the provided Outerbase IP addresses from this page and add them to your Neon IP allowlist. See [Configure IP Allow](/docs/manage/projects#configure-ip-allow) for instructions. IP Allow is a Neon [Scale](/docs/introduction/plans#scale) plan feature.
+   If you use Neon's [IP Allow](/docs/introduction/ip-allow) feature, be sure to copy the provided Outerbase IP addresses from this page and add them to your Neon IP allowlist. See [Configure IP Allow](/docs/manage/projects#configure-ip-allow) for instructions. IP Allow is a Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan feature.
    </Admonition>
 9. Select **Connect to Database**.
    <Admonition type="important">

@@ -36,7 +36,7 @@ If you use Neon's branching feature, you should be aware that it can also affect
 The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account.
 
 <Admonition type="note">
-Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiB of storage. The Scale plan has an allowance of 50 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
+Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiB of storage, the Scale plan has an allowance of 50 GiB, while the Business plan supports up to 500 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
 </Admonition>
 
 ### Storage FAQs
@@ -93,7 +93,7 @@ Here are some strategies to consider:
 Your storage limit varies depending on your Neon plan.
 
 - **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GiB), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
-- **Launch and Scale Plans**: For users on Launch and Scale plans, exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage). The amount of extra usage is based on the maximum size your storage reaches. Charges are prorated based on when in the month your storage size increased.
+- **Launch, Scale, and Business Plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage). The amount of extra usage is based on the maximum size your storage reaches. Charges are prorated based on when in the month your storage size increased.
 
 </details>
 
@@ -236,7 +236,8 @@ Each of [Neon's plans](/docs/introduction/plans) includes a certain number of co
 
 - **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute non-stop. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
 - **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
-- **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed for compute hours at $0.16 per hour.
+- **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
+- **Business Plan**: This plan inclues 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
 
 </details>
 
@@ -252,14 +253,14 @@ You can monitor compute hour usage for a Neon project on the [Project Dashboard]
 
 On the Free Plan, if you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 
-On the Launch and Scale plans, you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
+On our paid plans (Launch, Scale, and Business), you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
 
 </details>
 
 <details>
 <summary>**Can I purchase more compute hours?**</summary>
 
-On the Free Plan, no. You'll have to upgrade to a paid plan. On the Launch and Scale plans, you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
+On the Free Plan, no. You'll have to upgrade to a paid plan. On the Launch, Scale, and Business plans, you are billed automatically for any compute hours over your monthly allowance: 300 compute hours on Launch, 750 compute hours on Scale, and 1000 hours on Business. The billing rate is $0.16 per compute hour.
 
 </details>
 
@@ -307,10 +308,11 @@ The following table outlines project allowances for each Neon plan.
 | Free Plan  | 1         |
 | Launch     | 10        |
 | Scale      | 50        |
+| Business   | 100       |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch) or [Scale](/docs/introduction/plans#scale) plan, which offers allowances of 10 and 50 projects, respectively.
-- Extra projects are available with the [Scale](/docs/introduction/plans#scale) plan in units of 10 for $50 each.
+- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), or [Business](/docs/introduction/plans#business) plan, which offers allowances of 10, 50, and 100 projects, respectively.
+- Extra projects are available on both the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans in units of 10 for $50 each.
 
 ## Feedback
 
