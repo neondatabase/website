@@ -399,6 +399,22 @@
           slug: guides/sqlalchemy
         - title: Symfony
           slug: guides/symfony
+    - title: Languages
+      slug: get-started-with-neon/languages
+      icon: languages
+      items:
+        - title: Elixir
+          slug: guides/elixir-ecto
+        - title: Go
+          slug: guides/go
+        - title: Java
+          slug: guides/java
+        - title: JavaScript
+          slug: guides/javascript
+        - title: Python
+          slug: guides/python
+        - title: Rust
+          slug: guides/rust
     - title: Integrations
       icon: integrations
       slug: guides/integrations
