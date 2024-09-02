@@ -1,8 +1,4 @@
 @layer base {
-  html {
-    @apply !overflow-visible !p-0;
-  }
-
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
@@ -95,20 +91,6 @@
 }
 
 @layer utilities {
-  /*
-    Handy CSS class to prevent Input background color becomes yellow in Chrome on autofill.
-    Works as well with inputs with transparent background.
-
-    https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
-  */
-  .remove-autocomplete-styles:-webkit-autofill,
-  .remove-autocomplete-styles:-webkit-autofill:hover,
-  .remove-autocomplete-styles:-webkit-autofill:focus {
-    transition:
-      color 5000s,
-      background-color 5000s;
-  }
-
   .with-link-primary {
     a {
       @apply text-green-45 transition-colors duration-200 hover:text-[#00FFAA];

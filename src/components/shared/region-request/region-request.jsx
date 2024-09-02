@@ -245,6 +245,7 @@ const RegionRequest = ({
                   'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
                   'dark:border-gray-new-15 dark:bg-gray-new-10 dark:text-white'
                 )}
+                modal={false}
                 transition
               >
                 {filteredOptions.map((option) => (
