@@ -837,3 +837,6 @@
     - title: Changelog
       slug: changelog
       icon: changelog
+    - title: RSS feeds
+      slug: reference/feeds
+      icon: feeds
