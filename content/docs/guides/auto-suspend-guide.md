@@ -3,7 +3,7 @@ title: Configuring Autosuspend for Neon computes
 subtitle: Learn how to configure Neon's Autosuspend feature to control when your compute
   scales to zero
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.947Z'
+updatedOn: '2024-09-02T13:42:56.653Z'
 ---
 
 Neon's [Autosuspend](/docs/introduction/auto-suspend) feature controls when a Neon compute transitions to an `Idle` state (scales to zero) due to inactivity. For example, if your autosuspend setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable autosuspension entirely, depending on your requirements.

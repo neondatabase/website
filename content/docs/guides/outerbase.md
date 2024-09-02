@@ -2,7 +2,7 @@
 title: Connect Outerbase to Neon
 subtitle: Connect Outerbase to your Neon project with the Neon Outerbase integration
 enableTableOfContents: true
-updatedOn: '2024-08-08T18:06:25.262Z'
+updatedOn: '2024-09-02T13:42:56.655Z'
 ---
 
 Outerbase is an AI-powered interface for your database that allows you and your team to view, query, visualize, and edit your data using the power of AI. Outserbase supports both SQL and natural language. To learn more, see [What is Outerbase?](https://docs.outerbase.com/introduction/what-is-outerbase)

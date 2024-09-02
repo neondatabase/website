@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-08-19T14:53:19.396Z'
+updatedOn: '2024-09-02T13:42:56.663Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Plan limits you to one project per Neon account.

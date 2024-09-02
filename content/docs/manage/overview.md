@@ -2,7 +2,7 @@
 title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-13T15:31:30.510Z'
+updatedOn: '2024-09-02T13:42:56.663Z'
 ---
 
 Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of each object.

@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.955Z'
+updatedOn: '2024-09-02T13:42:56.661Z'
 ---
 
 ## General Support Policy

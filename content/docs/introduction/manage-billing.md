@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.953Z'
+updatedOn: '2024-09-02T13:42:56.658Z'
 ---
 
 A Neon account can view and manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
