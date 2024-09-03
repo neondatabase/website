@@ -426,7 +426,7 @@ To view and manage the users who authenticated with your application, you can qu
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/auth/guide-neon-next-authjs" description="Authenticate users of your Neon application with Auth.js" icon="github">Authentication flow with Auth.js</a>
+<a href="https://github.com/neondatabase/examples/tree/main/auth/with-authjs-next" description="Authenticate users of your Neon application with Auth.js" icon="github">Authentication flow with Auth.js</a>
 </DetailIconCards>
 
 ## Resources
