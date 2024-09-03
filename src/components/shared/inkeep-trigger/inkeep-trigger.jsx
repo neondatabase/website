@@ -16,7 +16,12 @@ const InkeepCustomTrigger = dynamic(
   { ssr: false }
 );
 
-const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) => {
+const InkeepTrigger = ({
+  className = null,
+  isNotFoundPage = false,
+  topOffset,
+  showAIButton = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
   const [defaultModalView, setDefaultModalView] = useState('SEARCH');
@@ -52,7 +57,11 @@ const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) =>
 
   return (
     <>
-      <InkeepSearch className={clsx('lg:w-auto', className)} handleClick={handleClick} />
+      <InkeepSearch
+        className={clsx('lg:w-auto', className)}
+        handleClick={handleClick}
+        isNotFoundPage={isNotFoundPage}
+      />
       {showAIButton && <InkeepAIButton handleClick={handleClick} topOffset={topOffset} />}
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
@@ -63,6 +72,7 @@ InkeepTrigger.propTypes = {
   className: PropTypes.string,
   topOffset: PropTypes.number,
   showAIButton: PropTypes.bool,
+  isNotFoundPage: PropTypes.bool,
 };
 
 export default InkeepTrigger;

@@ -15,7 +15,7 @@ import illustration from './images/illustration.png';
 const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
-      <InkeepTrigger className="my-8" />
+      <InkeepTrigger className="my-8 w-full" isNotFoundPage />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>
