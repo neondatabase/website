@@ -2,7 +2,7 @@
 title: Neon RSS feeds
 subtitle: Stay updated with the latest news from Neon
 enableTableOfContents: true
-updatedOn: '2024-09-02T12:09:19.091Z'
+updatedOn: '2024-09-03T16:21:24.950Z'
 ---
 
 Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelog, and blog posts, and Neon status updates through your preferred RSS reader or [Slack channel](#subscribe-to-feeds-in-slack).
