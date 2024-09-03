@@ -16,7 +16,7 @@ const InkeepCustomTrigger = dynamic(
   { ssr: false }
 );
 
-const InkeepTrigger = ({ topOffset, isBlog = false }) => {
+const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
   const [trigger, setTrigger] = useState('search');
@@ -52,24 +52,17 @@ const InkeepTrigger = ({ topOffset, isBlog = false }) => {
 
   return (
     <>
-      <InkeepSearch
-        className={clsx(
-          'lg:w-auto',
-          isBlog
-            ? 'dark relative z-30 flex max-w-[152px] items-center justify-between lt:order-1 lt:w-full lg:hidden'
-            : 'w-[272px]'
-        )}
-        handleClick={handleClick}
-      />
-      {!isBlog && <InkeepAIButton handleClick={handleClick} topOffset={topOffset} />}
+      <InkeepSearch className={clsx('lg:w-auto', className)} handleClick={handleClick} />
+      {showAIButton && <InkeepAIButton handleClick={handleClick} topOffset={topOffset} />}
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
 };
 
 InkeepTrigger.propTypes = {
+  className: PropTypes.string,
   topOffset: PropTypes.number,
-  isBlog: PropTypes.bool,
+  showAIButton: PropTypes.bool,
 };
 
 export default InkeepTrigger;

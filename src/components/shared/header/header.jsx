@@ -224,7 +224,7 @@ const Header = async ({
                 <LogoLink isDarkTheme={isDarkTheme} />
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <InkeepTrigger />
+                <InkeepTrigger className="w-[272px]" showAIButton />
               </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar />
