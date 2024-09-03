@@ -83,4 +83,4 @@ author={{
 [Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
 </div>
 
-<CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA title="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
