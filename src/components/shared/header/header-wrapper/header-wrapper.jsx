@@ -41,8 +41,13 @@ const HeaderWrapper = ({
         isStickyOverlay ? '-mb-16' : bg,
         isSticky && isStickied && `${bg}`,
         withBorder &&
-          'relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-94 after:opacity-0 after:transition-opacity after:duration-200 after:dark:bg-gray-new-10',
-        withBorder && isStickied && 'after:opacity-100',
+          clsx(
+            'relative',
+            'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px',
+            'after:bg-gray-new-94 after:dark:bg-gray-new-10',
+            'after:transition-opacity after:duration-200',
+            isStickied ? 'after:opacity-100' : 'after:opacity-0'
+          ),
         className
       )}
       ref={headerRef}

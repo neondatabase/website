@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH, HOME_MENU_ITEM } from 'constants/docs';
