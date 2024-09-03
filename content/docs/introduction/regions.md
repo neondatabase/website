@@ -20,6 +20,8 @@ Neon currently supports the following AWS regions:
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
 
+<RegionRequest />
+
 ## Select a region for your Neon project
 
 You can select the region for your Neon project during project creation. See [Create a project](/docs/manage/projects#create-a-project).
@@ -69,9 +71,5 @@ Neon Free Plan users are limited to a single project. In this case, you can expo
 ### Logical replication
 
 As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
-
-## Requesting new regions
-
-Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 
 <NeedHelp/>

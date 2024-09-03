@@ -31,6 +31,7 @@ import getCodeProps from 'lib/rehype-code-props';
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
 import ImageZoom from '../image-zoom';
+import RegionRequest from '../region-request';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -133,6 +134,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   TabItem,
   InfoBlock,
   DocsList,
+  RegionRequest,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   UseCaseList,
