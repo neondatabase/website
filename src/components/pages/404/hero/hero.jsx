@@ -12,7 +12,7 @@ import Link from 'components/shared/link';
 
 import illustration from './images/illustration.png';
 
-const Search = dynamic(() => import('components/shared/search'), { ssr: false });
+const Search = dynamic(() => import('components/shared/inkeep-search'), { ssr: false });
 
 const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (

@@ -8,11 +8,12 @@ import { useState } from 'react';
 import Button from 'components/shared/button';
 import Burger from 'components/shared/header/burger';
 import Link from 'components/shared/link';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+import InkeepTrigger from '../inkeep-trigger/inkeep-trigger';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -168,20 +169,13 @@ const mobileMenuItems = [
 // TODO: need to refactor this component
 const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
-  let searchIndexName = null;
-  if (isBlogPage) {
-    searchIndexName = process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
-  }
-  if (isDocPage) {
-    searchIndexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
-  }
+
+  console.log(isBlogPage);
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {searchIndexName && (
-          <Search className="mobile-search" indexName={searchIndexName} isBlog={isBlogPage} />
-        )}
+        {(isBlogPage || isDocPage) && <InkeepTrigger className="mobile-search" />}
         <Burger
           className={clsx(
             'relative flex',

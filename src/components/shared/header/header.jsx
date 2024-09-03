@@ -5,16 +5,16 @@ import { Suspense } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
+
+import InkeepTrigger from '../inkeep-trigger/inkeep-trigger';
 
 import HeaderWrapper from './header-wrapper';
 
@@ -224,10 +224,6 @@ const Header = async ({
                 <LogoLink isDarkTheme={isDarkTheme} />
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <Search
-                  className="w-[272px]"
-                  indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-                />
                 <InkeepTrigger />
               </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
