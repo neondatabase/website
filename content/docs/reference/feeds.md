@@ -23,6 +23,14 @@ Stay informed on the latest articles and news by following the [Neon Blog](https
 https://neon.tech/blog/rss.xml
 ```
 
+## Community Guides
+
+Get the latest tips, tutorials, and best practices by subscribing to the [Neon Community Guides](https://neon.tech/guides) RSS feed.
+
+```bash
+https://neon.tech/guides/rss.xml
+```
+
 ## Status
 
 Monitor the operational status of Neon across different regions by subscribing to the appropriate [Neon Status](https://neonstatus.com/) RSS feed.
