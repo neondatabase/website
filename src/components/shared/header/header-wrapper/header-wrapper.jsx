@@ -40,7 +40,9 @@ const HeaderWrapper = ({
         isSticky ? 'sticky transition-[padding,background-color] duration-200' : 'absolute',
         isStickyOverlay ? '-mb-16' : bg,
         isSticky && isStickied && `${bg}`,
-        withBorder && 'border-b border-gray-new-94 dark:border-gray-new-10',
+        withBorder &&
+          'relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-94 after:opacity-0 after:transition-opacity after:duration-200 after:dark:bg-gray-new-10',
+        withBorder && isStickied && 'after:opacity-100',
         className
       )}
       ref={headerRef}
