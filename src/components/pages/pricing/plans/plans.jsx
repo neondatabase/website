@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 import Heading from 'components/shared/heading';
+import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import Table from './table';
 
@@ -20,7 +22,11 @@ const Plans = ({ className }) => (
           Detailed plan comparison
         </Heading>
         <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">
-          Find the plan that fits your needs.
+          Find the plan that fits your needs, or{' '}
+          <Link className="" theme="green" to={LINKS.contactSales}>
+            reach out to us
+          </Link>{' '}
+          for custom Enterprise plans.
         </p>
       </div>
     </Container>
