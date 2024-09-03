@@ -87,7 +87,7 @@ AUTH_RESEND_KEY="YOUR_RESEND_API_KEY"
 
 4. [Optional] Resend requires verification of ownership for the domain you use to send emails from. If you own a domain, you can follow the instructions [here](https://resend.com/docs/dashboard/domains/introduction) to verify ownership.
 
-   For this example, we'll use the test email address (`onboarding@resend.dev`) to send emails. However, this only works for the email address you use to sign up for a Resend account, so you won't be able to sign in from other email accounts.
+    For this example, we'll use the test email address (`onboarding@resend.dev`) to send emails. However, this only works for the email address you use to sign up for a Resend account, so you won't be able to sign in from other email accounts.
 
 ### Configure Auth.js
 
@@ -232,9 +232,9 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
   const toggleTodo = async (id: number) => {
     const response = await fetch(`/api/todos/${id}`, { method: 'PATCH' });
     if (response.ok) {
-      setTodos(
-        todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
-      );
+      setTodos(todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      ))
     }
   };
 
@@ -367,7 +367,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 
   try {
     const { rows } = await pool.query(
@@ -413,7 +413,7 @@ To view and manage the users who authenticated with your application, you can qu
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-next-authjs" description="Authenticate users of your Neon application with Auth.js" icon="github">Authentication flow with Auth.js</a>
+<a href="https://github.com/neondatabase/examples/tree/main/auth/guide-neon-next-authjs" description="Authenticate users of your Neon application with Auth.js" icon="github">Authentication flow with Auth.js</a>
 </DetailIconCards>
 
 ## Resources
