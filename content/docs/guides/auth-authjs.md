@@ -1,5 +1,5 @@
 ---
-title: Implement authentication with Auth.js and Neon Postgres database
+title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database application using Auth.js and Resend
 enableTableOfContents: true
 updatedOn: '2024-08-10T18:42:30.123Z'
@@ -30,18 +30,18 @@ To follow along with this guide, you will need:
 Run the following command in your terminal to create a new Next.js project:
 
 ```bash
-npx create-next-app neon-authjs-magic-link --typescript --eslint --tailwind --use-npm --no-src-dir --app --import-alias "@/*"
+npx create-next-app guide-neon-next-authjs --typescript --eslint --tailwind --use-npm --no-src-dir --app --import-alias "@/*"
 ```
 
 Now, navigate to the project directory and install the required dependencies:
 
 ```bash
-cd neon-authjs-magic-link
+cd guide-neon-next-authjs
 npm install next-auth@beta
 npm install @auth/pg-adapter @neondatabase/serverless
 ```
 
-For authentication, we'll use the `auth.js` library (aliased as v5 of the `next-auth` package), which provides a simple way to add authentication to Next.js applications. It comes with built-in support for Resend as an authentication provider. We use the `@neondatabase/serverless` package as the Postgres client for the Auth.js database adapter. 
+For authentication, we'll use the `Auth.js` library (aliased as v5 of the `next-auth` package), which provides a simple way to add authentication to Next.js applications. It comes with built-in support for Resend as an authentication provider. We use the `@neondatabase/serverless` package as the Postgres client for the `Auth.js` database adapter. 
 
 Also, add a `.env` file to the root of your project, which we'll use to store the Neon connection string and the Resend API key:
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS todos (
 );
 ```
 
-This schema defines all the tables required for the `auth.js` library to work, and also the `todos` table that we'll use to store the todo list for each user.
+This schema defines all the tables required for the `Auth.js` library to work, and also the `todos` table that we'll use to store the todo list for each user.
 
 To apply this schema to your Neon database, you can use the Neon SQL Editor in the web console or a database management tool like `psql`.
 
@@ -422,6 +422,14 @@ In this guide, we demonstrated how to set up a Next.js application with Auth.js 
 Next, we can add more routes and features to the application. The `auth` method can be used in the Next.js API routes or middleware to protect endpoints that require authentication.
 
 To view and manage the users who authenticated with your application, you can query the `users` table of your Neon project. Similarly, all the magic link token generated are logged in the `verification_token` table, making it easy to audit and revoke access to your application. 
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/guide-neon-next-authjs" description="Authenticate users of your Neon application with Auth.js" icon="github">Authentication flow with Auth.js</a>
+</DetailIconCards>
 
 ## Resources
 
