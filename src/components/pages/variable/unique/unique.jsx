@@ -1,11 +1,11 @@
 import { PropTypes } from 'prop-types';
 
+import Testimonial from 'components/pages/use-case/testimonial';
 import LINKS from 'constants/links';
 import andreaLevingeAvatar from 'images/pages/variable-load/testimonials/andrea-levinge.jpg';
 
 import List from '../list';
 import Section from '../section';
-import Testimonial from '../testimonial';
 
 const items = [
   {
@@ -21,7 +21,7 @@ const items = [
     text: 'Neon uses transparent compute units, vs the ACU abstraction in&nbsp;Aurora&nbsp;Serverless.',
   },
   {
-    text: 'Neon supports database branching with data and schema via copy-on-write, <a href="/flow">improving development workflows.</a>',
+    text: 'Neon supports database branching with data and schema via copy-on-write, <a href="/content/development-velocity">improving development workflows.</a>',
   },
   {
     text: 'Neon&apos;s read replicas don&apos;t require storage redundancy, differently than Aurora&apos;s.',

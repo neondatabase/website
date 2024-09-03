@@ -8,6 +8,7 @@ import 'swiper/css';
 import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';
+import { HomepageVisitProvider } from './homepage-visit-context';
 import ThemeProvider from './provider';
 
 export const preferredRegion = 'edge';
@@ -31,7 +32,9 @@ const RootLayout = ({ children }) => (
     <body>
       <CookiesProvider>
         <ThemeProvider>
-          <ActiveLabelProvider>{children}</ActiveLabelProvider>
+          <HomepageVisitProvider>
+            <ActiveLabelProvider>{children}</ActiveLabelProvider>
+          </HomepageVisitProvider>
         </ThemeProvider>
       </CookiesProvider>
     </body>

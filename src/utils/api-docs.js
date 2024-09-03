@@ -9,8 +9,8 @@ const { CHANGELOG_DIR_PATH } = require('../constants/docs');
 const getExcerpt = require('./get-excerpt');
 
 const DOCS_DIR_PATH = 'content/docs';
+const USE_CASES_DIR_PATH = 'content/use-cases';
 const FLOW_DIR_PATH = 'content/flow';
-const VARIABLE_DIR_PATH = 'content/variable';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -86,7 +86,9 @@ const getFlatSidebar = (sidebar, path = []) =>
   }, []);
 
 const getNavigationLinks = (slug, flatSidebar) => {
-  const posts = flatSidebar.filter((item) => item.slug !== undefined);
+  const posts = [
+    ...new Map(flatSidebar.filter((item) => item.slug).map((item) => [item.slug, item])).values(),
+  ];
   const currentItemIndex = posts.findIndex((item) => item.slug === slug);
 
   const previousItem = posts[currentItemIndex - 1];
@@ -127,7 +129,7 @@ module.exports = {
   getAllChangelogPosts,
   getAllPosts,
   DOCS_DIR_PATH,
+  USE_CASES_DIR_PATH,
   FLOW_DIR_PATH,
-  VARIABLE_DIR_PATH,
   CHANGELOG_DIR_PATH,
 };

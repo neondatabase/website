@@ -1,8 +1,8 @@
 import { PropTypes } from 'prop-types';
 
+import CtaBlock from 'components/shared/cta-block';
 import LINKS from 'constants/links';
 
-import Cta from '../cta';
 import Example from '../example';
 import List from '../list';
 import Section from '../section';
@@ -33,9 +33,10 @@ const Budget = ({ title }) => (
       </p>
       <List items={items} />
     </div>
-    <Cta
-      text="Want a price estimation for your particular use case?"
-      button={{ title: 'Reach out to us', url: LINKS.contactSales }}
+    <CtaBlock
+      title="Want a price estimation for your particular use case?"
+      buttonText="Reach out to us"
+      buttonUrl={LINKS.contactSales}
     />
   </Section>
 );

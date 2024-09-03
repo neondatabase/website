@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
-updatedOn: '2024-08-22T15:15:07.639Z'
+updatedOn: '2024-08-23T17:56:41.368Z'
 ---
 
 <LRBeta/>
@@ -13,7 +13,7 @@ updatedOn: '2024-08-22T15:15:07.639Z'
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
 - Perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL &#8212; or any platform that runs Postgres.
-- Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others.
+- Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others.
 - Replicate data from one Neon project to another for Neon project, account, Postgres version, or region migration.
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_publishers_subscribers.jpg)
@@ -54,6 +54,8 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
+<a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
+
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
@@ -84,6 +86,6 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 <a href="/docs/guides/sequin" title="Sequin" description="Stream data from platforms like Stripe, Linear, and GitHub to Neon" icon="sequin"></a>
 
-<a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
+<a href="/docs/guides/logical-replication-rds-to-neon" title="RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 </TechnologyNavigation>

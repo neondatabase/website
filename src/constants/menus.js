@@ -4,6 +4,8 @@ import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
 import aiDarkIcon from 'icons/header/ai-dark.svg';
 import aiIcon from 'icons/header/ai.svg';
+import apiDarkIcon from 'icons/header/api-dark.svg';
+import apiIcon from 'icons/header/api.svg';
 import autoscalingDarkIcon from 'icons/header/autoscaling-dark.svg';
 import autoscalingIcon from 'icons/header/autoscaling.svg';
 import blogDarkIcon from 'icons/header/blog-dark.svg';
@@ -12,12 +14,24 @@ import branchingDarkIcon from 'icons/header/branching-dark.svg';
 import branchingIcon from 'icons/header/branching.svg';
 import careersDarkIcon from 'icons/header/careers-dark.svg';
 import careersIcon from 'icons/header/careers.svg';
+import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
+import caseDatabaseIcon from 'icons/header/case-database.svg';
+// import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
+// import caseDevIcon from 'icons/header/case-dev.svg';
+import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
+import caseSaasIcon from 'icons/header/case-saas.svg';
 import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
+import caseVariableDarkIcon from 'icons/header/case-variable-dark.svg';
+import caseVariableIcon from 'icons/header/case-variable.svg';
+// import caseVelocityDarkIcon from 'icons/header/case-velocity-dark.svg';
+// import caseVelocityIcon from 'icons/header/case-velocity.svg';
 import changelogDarkIcon from 'icons/header/changelog-dark.svg';
 import changelogIcon from 'icons/header/changelog.svg';
-import cliDarkIcon from 'icons/header/cli-dark.svg';
-import cliIcon from 'icons/header/cli.svg';
+import connectionPoolerDarkIcon from 'icons/header/connection-pooler-dark.svg';
+import connectionPoolerIcon from 'icons/header/connection-pooler.svg';
+import consoleDarkIcon from 'icons/header/console-dark.svg';
+import consoleIcon from 'icons/header/console.svg';
 import demosDarkIcon from 'icons/header/demos-dark.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordDarkIcon from 'icons/header/discord-dark.svg';
@@ -26,8 +40,10 @@ import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
 import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersDarkIcon from 'icons/header/partners-dark.svg';
 import partnersIcon from 'icons/header/partners.svg';
-import onDemandStorageDarkIcon from 'icons/header/storage-dark.svg';
-import onDemandStorageIcon from 'icons/header/storage.svg';
+import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
+import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
+import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
+import serverlessIcon from 'icons/header/serverless.svg';
 import PostgresDocsIcon from 'icons/postgres.inline.svg';
 import TransactionsIcon from 'icons/transactions.inline.svg';
 
@@ -40,12 +56,12 @@ export default {
       items: [
         {
           icon: {
-            light: branchingIcon,
-            dark: branchingDarkIcon,
+            light: serverlessIcon,
+            dark: serverlessDarkIcon,
           },
-          text: 'Branching',
-          description: 'Work with data like code',
-          to: LINKS.branching,
+          text: 'Serverless',
+          description: 'Built for the cloud',
+          to: LINKS.serverless,
         },
         {
           icon: {
@@ -53,26 +69,53 @@ export default {
             dark: autoscalingDarkIcon,
           },
           text: 'Autoscaling',
-          description: 'Scale compute on demand',
+          description: 'Automatic instance sizing',
           to: LINKS.autoscaling,
         },
         {
           icon: {
-            light: cliIcon,
-            dark: cliDarkIcon,
+            light: branchingIcon,
+            dark: branchingDarkIcon,
           },
-          text: 'CLI',
-          description: 'Neon in your terminal',
-          to: LINKS.cli,
+          text: 'Branching',
+          description: 'Copy schema + data',
+          to: LINKS.flow,
         },
         {
           icon: {
-            light: onDemandStorageIcon,
-            dark: onDemandStorageDarkIcon,
+            light: scaleToZeroIcon,
+            dark: scaleToZeroDarkIcon,
           },
-          text: 'On-demand storage',
-          description: 'Custom-built for the cloud',
-          to: LINKS.onDemandStorage,
+          text: 'Scale-to-zero',
+          description: 'Lower costs for dev/test',
+          to: LINKS.scaleToZero,
+        },
+        {
+          icon: {
+            light: apiIcon,
+            dark: apiDarkIcon,
+          },
+          text: 'API',
+          description: 'Less management work',
+          to: LINKS.api,
+        },
+        {
+          icon: {
+            light: connectionPoolerIcon,
+            dark: connectionPoolerDarkIcon,
+          },
+          text: 'Connection pooler',
+          description: ' Thousands of connections',
+          to: LINKS.connectionPooling,
+        },
+        {
+          icon: {
+            light: consoleIcon,
+            dark: consoleDarkIcon,
+          },
+          text: 'Console',
+          description: 'UI for data management',
+          to: LINKS.consoleTables,
         },
         {
           icon: {
@@ -80,7 +123,7 @@ export default {
             dark: aiDarkIcon,
           },
           text: 'AI',
-          description: 'Neon as your vector store',
+          description: 'Powered by pgvector',
           to: LINKS.ai,
         },
       ],
@@ -92,6 +135,56 @@ export default {
     {
       text: 'Docs',
       to: LINKS.docs,
+    },
+    {
+      text: 'Use cases',
+      items: [
+        {
+          icon: {
+            light: caseSaasIcon,
+            dark: caseSaasDarkIcon,
+          },
+          text: 'Postgres for SaaS',
+          description: 'Build Apps faster on Neon',
+          to: `${LINKS.useCases}/postgres-for-saas`,
+        },
+        {
+          icon: {
+            light: caseVariableIcon,
+            dark: caseVariableDarkIcon,
+          },
+          text: 'Variable Workloads',
+          description: 'Autoscale according to load',
+          to: LINKS.variableLoad,
+        },
+        // {
+        //   icon: {
+        //     light: caseDevIcon,
+        //     dark: caseDevDarkIcon,
+        //   },
+        //   text: 'Dev/Stage/Test',
+        //   description: 'Build and test on Neon',
+        //   to: `${LINKS.useCases}/dev-stage-test`,
+        // },
+        {
+          icon: {
+            light: caseDatabaseIcon,
+            dark: caseDatabaseDarkIcon,
+          },
+          text: 'Database per Tenant',
+          description: 'DB-per-User Archictectures',
+          to: `${LINKS.useCases}/database-per-tenant`,
+        },
+        // {
+        //   icon: {
+        //     light: caseVelocityIcon,
+        //     dark: caseVelocityDarkIcon,
+        //   },
+        //   text: 'Development Velocity',
+        //   description: 'Ship faster than ever',
+        //   to: `${LINKS.useCases}/development-velocity`,
+        // },
+      ],
     },
     {
       text: 'Resources',

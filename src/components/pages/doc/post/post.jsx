@@ -8,6 +8,7 @@ import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
+import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
@@ -44,7 +45,7 @@ const Post = ({
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
   isChangelog = false,
-  isFlowPage = false,
+  isUseCase = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -54,8 +55,8 @@ const Post = ({
     <div
       className={clsx(
         'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-        isFlowPage
-          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-9 xl:col-start-3'
+        isUseCase
+          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
           : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
       )}
     >
@@ -66,7 +67,9 @@ const Post = ({
         <article>
           <h1
             className={clsx(
-              'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
+              isUseCase
+                ? 'mt-12 text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
               tag && 'inline'
             )}
           >
@@ -78,7 +81,7 @@ const Post = ({
               {subtitle}
             </p>
           )}
-          <Content className="mt-5" content={content} />
+          <Content className="mt-5" content={content} isUseCase={isUseCase} />
         </article>
       )}
 
@@ -95,7 +98,7 @@ const Post = ({
     <div
       className={clsx(
         'col-span-2 col-start-11 -ml-12 h-full max-w-64 xl:hidden',
-        isFlowPage
+        isUseCase
           ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
           : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
       )}
@@ -108,7 +111,7 @@ const Post = ({
               'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
           )}
         >
-          <EditOnGithub fileOriginPath={fileOriginPath} />
+          {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
         </div>
       </nav>
     </div>
@@ -130,7 +133,7 @@ Post.propTypes = {
     nextLink: PropTypes.shape({}),
   }).isRequired,
   isChangelog: PropTypes.bool,
-  isFlowPage: PropTypes.bool,
+  isUseCase: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

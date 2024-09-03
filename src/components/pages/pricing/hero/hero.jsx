@@ -23,12 +23,16 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '24/7 for your main database', info: 'Plus 20h of usage for additional branches' },
-      { title: 'Community support' },
-      { title: 'Fixed capacity at 0.25 vCPU' },
+      { title: '10 branches', info: 'All within 1 project' },
+      {
+        title: '24/7 database at 0.25 CU',
+        info: 'Plus 20h of usage for additional branches. 0.25 CU = 0.25 vCPU, 1 GB RAM',
+      },
+      { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
       { title: 'Point-in-time restore (24 h)' },
+      { title: 'Community support' },
       { title: 'Organization accounts', disabled: true },
-      { title: 'IP Allow rules', disabled: true },
+      { title: 'Branch protection', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -47,15 +51,16 @@ const items = [
         title: '10 GiB storage included',
         info: 'Additional storage: $3.5 per 2 GiB',
       },
+      { title: '500 branches per project', info: 'Max 10 projects' },
       {
         title: '300 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Standard support' },
-      { title: 'Autoscaling up to 4 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
       { title: 'Point-in-time restore (7 days)' },
+      { title: 'Standard support' },
       { title: 'Organization accounts' },
-      { title: 'IP Allow rules', disabled: true },
+      { title: 'Branch protection', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -72,14 +77,18 @@ const items = [
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
+        title: '500 branches per project',
+        info: '50 projects included. Additional 10 projects: $50/month',
+      },
+      {
         title: '750 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Priority support' },
-      { title: 'Autoscaling up to 10 CU', info: '1 CU = 1 vCPU, 4 GB RAM' },
+      { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 40 GB RAM' },
       { title: 'Point-in-time restore (30 days)' },
+      { title: 'Priority support' },
       { title: 'Organization accounts' },
-      { title: 'IP Allow rules' },
+      { title: 'Branch protection' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,

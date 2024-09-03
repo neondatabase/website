@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how extra usage works in Neon's pricing plans
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-08-19T14:53:19.392Z'
+updatedOn: '2024-09-02T13:42:56.658Z'
 ---
 
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
@@ -16,8 +16,9 @@ This table provides an overview of plan fees with allowances for storage, comput
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                   | Project Allowance |
 | ---------- | ----------- | ----------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
 | Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours (24/7 at 0.25 CU), includes up to 5 hours/month for non-default branch computes | 1 project         |
-| Launch     | $19         | 10 GiB            | 300 compute hours (1,200 _active hours_)/month                                                      | 10 projects       |
-| Scale      | $69         | 50 GiB            | 750 compute hours (3,000 _active hours_)/month                                                      | 50 projects       |
+| Launch     | $19         | 10 GiB            | 300 compute hours amonth                                                                            | 10 projects       |
+| Scale      | $69         | 50 GiB            | 750 compute hours a month                                                                           | 50 projects       |
+| Business   | $700        | 500 GiB           | 1000 compute hours a month                                                                          | 100 projects      |
 | Enterprise | Custom      | Custom            | Custom                                                                                              | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
@@ -36,11 +37,11 @@ The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable
 
 ## Extra usage
 
-The [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
+The [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
 
 ### Launch plan
 
-The Launch plan supports extra **Storage** and **Compute** usage. If you need extra projects, you'll need to move up to the Scale plan.
+The Launch plan supports extra **Storage** and **Compute** usage. If you need extra projects, you'll need to move up to the Scale or Business plan.
 
 - **Extra Storage**: If you exceed 10 GiB, extra storage is allocated in units of 2 GiB at $3.50 per unit.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16/compute hour.
@@ -50,13 +51,13 @@ The Launch plan supports extra **Storage** and **Compute** usage. If you need ex
 | Extra Storage | 2 GiB        | $3.50 per unit |
 | Extra Compute | Compute hour | $0.16          |
 
-### Scale plan
+### Scale and Business plan
 
-The Scale plan supports extra **Storage**, **Compute**, and **Project** usage.
+Both the Scale and Business plans supports extra **Storage**, **Compute**, and **Project** usage.
 
-- **Extra Storage**: If you exceed 50 GiB, extra storage is allocated in units of 10 GiB at $15 per unit.
-- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16/compute hour.
-- **Extra Projects**: If you exceed 50 projects, extra projects are allocated in units of 10 projects at $50 per unit.
+- **Extra Storage**: If you exceed 50 GiB on Scale or 500 GiB on Business, extra storage is allocated in units of 10 GiB at $15 per unit.
+- **Extra Compute**: If you exceed 750 compute hours on Scale or 1000 compute hours on Business, extra compute is billed at $0.16/compute hour.
+- **Extra Projects**: If you exceed 50 projects on Scale or 100 projects on Business, extra projects are allocated in units of 10 projects at $50 per unit.
 
 | Resource       | Unit         | Price           |
 | -------------- | ------------ | --------------- |
@@ -70,7 +71,7 @@ Taking advantage of extra usage requires no user action. Extra usage, if support
 
 **Storage**
 
-For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically allocated an extra storage unit of 2 GiB at $3.50 per unit. If you exceed 12 GiB, you are allocated 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale plan, but with 10 GiB units of storage at $15 per unit. However, the extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra storage units were allocated partway through the month.
+For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically allocated an extra storage unit of 2 GiB at $3.50 per unit. If you exceed 12 GiB, you are allocated 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale and Business plans, but with 10 GiB units of storage at $15 per unit for Scale and $7.50 per unit for Business. However, the extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra storage units were allocated partway through the month.
 
 <Admonition type="note">
 In the context of billing, allocation of extra storage refers to an increases in the storage allowance rather than physical storage allocation.
@@ -78,7 +79,7 @@ In the context of billing, allocation of extra storage refers to an increases in
 
 **Projects**
 
-Billing for extra projects, which are available with the [Scale](/docs/introduction/plans##scale) plan, works in the same way as storage. Extra projects are allocated in units of 10. For example, the Scale plan has an allowance of 50 projects. If you use more than 50 projects, you are automatically allocated an extra unit of 10 projects at $50 per unit. For example, if you use 51 projects, you are allocated 1 unit of 10 projects (an extra $50). If you use 61 projects, you are allocated 2 units of 10 projects (an extra $100), and so on. The extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra project units are allocated partway through the month.
+Billing for extra projects, which are available with the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, works in the same way as storage. Extra projects are allocated in units of 10. For example, the Scale plan has an allowance of 50 projects. If you use more than 50 projects, you are automatically allocated an extra unit of 10 projects at $50 per unit. For example, if you use 51 projects, you are allocated 1 unit of 10 projects (an extra $50). If you use 61 projects, you are allocated 2 units of 10 projects (an extra $100), and so on. The extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra project units are allocated partway through the month.
 
 <Admonition type="note" title="How extra storage and project charges are prorated">
 The proration formula for calculating the cost of extra storage or projects allocated during a monthly billing period is:
@@ -87,7 +88,6 @@ The proration formula for calculating the cost of extra storage or projects allo
 Cost = Units x (Unit Price/Days in Month) x Days Left in Month
 ```
 
-​
 Where:
 
 - **Cost** is the amount charged for an extra unit of storage or projects
@@ -101,7 +101,7 @@ Once an extra unit of storage or projects is allocated, you are billed for that 
 
 **Compute**
 
-Extra compute usage is available with the [Launch](/docs/introduction/plans##launch) and [Scale](/docs/introduction/plans##scale) plans and is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16). Since extra compute usage is per hour, prorated billing does not apply.
+Extra compute usage is available with the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), and [Business](/docs/introduction/plans#business) plans and is billed by _compute hour_ at $0.16 per hour. For example, the Launch plan has an allowance of 300 compute hours included in the plan's monthly fee. If you use 100 additional compute hours over the billing period, you are billed an extra $16 (100 x $0.16). Since extra compute usage is per hour, prorated billing does not apply.
 
 ## Extra usage examples
 
