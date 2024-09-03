@@ -4,6 +4,7 @@ import GuideCard from 'components/pages/guides/guide-card';
 import Sidebar from 'components/pages/guides/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
+import { GUIDES_BASE_PATH } from 'constants/guides';
 import { getAllPosts } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
@@ -13,6 +14,7 @@ export async function generateMetadata() {
     title: 'Neon guides',
     // description: '',
     // type: '',
+    rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
 }
 
