@@ -179,7 +179,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
 - Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
 - [Priority support](/docs/introduction/support)
-- [Service SLA of 99.95% uptime](https://neon.tech/wp-draft-post-preview-page?id=6904&status=draft)
+- [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
 
 For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
