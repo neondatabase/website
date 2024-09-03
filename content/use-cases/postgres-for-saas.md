@@ -189,4 +189,4 @@ Pay via AWS Marketplace
 
 </DefinitionList>
 
-<CTA text="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA title="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
