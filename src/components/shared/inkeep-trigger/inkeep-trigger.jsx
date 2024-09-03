@@ -45,6 +45,8 @@ const InkeepTrigger = ({
     modalSettings: {
       defaultView: defaultModalView,
       askAILabel: 'Ask Neon AI',
+      openShortcutKey: 'k',
+      isShortcutKeyEnabled: true,
     },
     searchSettings,
     aiChatSettings,
