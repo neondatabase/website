@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { aiChatSettings, baseSettings, searchSettings } from 'lib/inkeep-settings';
 
@@ -32,6 +32,20 @@ const InkeepTrigger = ({
 
   const themeMode = theme === 'system' ? systemTheme : theme;
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'k' && event.metaKey) {
+      setIsOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
@@ -45,8 +59,6 @@ const InkeepTrigger = ({
     modalSettings: {
       defaultView: defaultModalView,
       askAILabel: 'Ask Neon AI',
-      openShortcutKey: 'k',
-      isShortcutKeyEnabled: true,
     },
     searchSettings,
     aiChatSettings,
