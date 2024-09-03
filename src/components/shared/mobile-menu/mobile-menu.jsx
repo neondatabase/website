@@ -170,12 +170,12 @@ const mobileMenuItems = [
 const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
-  console.log(isBlogPage);
+  const showInkeepTrigger = isBlogPage || isDocPage;
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {(isBlogPage || isDocPage) && <InkeepTrigger className="mobile-search" />}
+        {showInkeepTrigger && <InkeepTrigger className="mobile-search" />}
         <Burger
           className={clsx(
             'relative flex',

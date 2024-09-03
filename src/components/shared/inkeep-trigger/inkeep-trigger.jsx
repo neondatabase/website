@@ -16,7 +16,7 @@ const InkeepCustomTrigger = dynamic(
   { ssr: false }
 );
 
-const InkeepTrigger = ({ topOffset, isBlog }) => {
+const InkeepTrigger = ({ topOffset, isBlog = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
   const [trigger, setTrigger] = useState('search');
@@ -25,6 +25,8 @@ const InkeepTrigger = ({ topOffset, isBlog }) => {
     setIsOpen(false);
   }, []);
 
+  const themeMode = theme === 'system' ? systemTheme : theme;
+
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
@@ -32,7 +34,7 @@ const InkeepTrigger = ({ topOffset, isBlog }) => {
     baseSettings: {
       ...baseSettings,
       colorMode: {
-        forcedColorMode: theme === 'system' ? systemTheme : theme,
+        forcedColorMode: themeMode,
       },
     },
     modalSettings: {
