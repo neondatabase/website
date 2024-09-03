@@ -198,7 +198,7 @@ const Header = async ({
   theme = null,
   isSticky = false,
   isStickyOverlay = false,
-  isBlogPage = false,
+  showSearchInput = false,
   isDocPage = false,
   withBorder = false,
 }) => {
@@ -241,7 +241,7 @@ const Header = async ({
           </Container>
         )}
       </HeaderWrapper>
-      <MobileMenu isDarkTheme={isDarkTheme} isBlogPage={isBlogPage} isDocPage={isDocPage} />
+      <MobileMenu isDarkTheme={isDarkTheme} showSearchInput={showSearchInput} />
     </>
   );
 };
@@ -251,7 +251,7 @@ Header.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
+  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,
 };

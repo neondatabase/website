@@ -13,6 +13,7 @@ const NeonDocsLayout = async ({ children }) => {
     <Layout
       headerClassName="lg:border-none"
       burgerWithoutBorder
+      showSearchInput
       isDocPage
       isHeaderSticky
       headerWithBorder

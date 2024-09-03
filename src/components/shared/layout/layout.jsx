@@ -13,12 +13,12 @@ const Layout = ({
   footerTheme = null,
   withOverflowHidden = false,
   children,
-  headerWithBorder = false,
+  // headerWithBorder = false,
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
-  isDocPage = false,
-  isBlogPage = false,
   hasThemesSupport = false,
+  showSearchInput = false,
+  isDocPage = false,
 }) => (
   <>
     <Topbar isDarkTheme={headerTheme === 'dark'} />
@@ -30,9 +30,9 @@ const Layout = ({
         isDarkTheme={headerTheme === 'dark'}
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
+        hasThemesSupport={hasThemesSupport}
+        showSearchInput={showSearchInput}
         isDocPage={isDocPage}
-        isBlogPage={isBlogPage}
-        withBorder={headerWithBorder}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
@@ -55,8 +55,8 @@ Layout.propTypes = {
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
   headerWithBorder: PropTypes.bool,
+  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
 };
 

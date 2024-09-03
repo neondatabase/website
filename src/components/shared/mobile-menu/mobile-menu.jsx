@@ -167,15 +167,13 @@ const mobileMenuItems = [
 ];
 
 // TODO: need to refactor this component
-const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
+const MobileMenu = ({ isDarkTheme, showSearchInput = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
-
-  const showInkeepTrigger = isBlogPage || isDocPage;
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {showInkeepTrigger && <InkeepTrigger className="mobile-search" />}
+        {showSearchInput && <InkeepTrigger className="mobile-search" />}
         <Burger
           className={clsx(
             'relative flex',
@@ -241,8 +239,7 @@ const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
 
 MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
-  isDocPage: PropTypes.bool,
+  showSearchInput: PropTypes.bool,
 };
 
 export default MobileMenu;
