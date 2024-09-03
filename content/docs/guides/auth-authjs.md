@@ -114,6 +114,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
 
 This file sets up Auth.js with the Neon Postgres adapter and configures the Email provider for magic link authentication.
 
+Additionally, `Auth.js` also requires setting up an `AUTH_SECRET` environment variable, which is used to encrypt cookies and magic tokens. You can use the `Auth.js` CLI to generate one:
+
+```bash
+npx auth secret
+```
+
+Add the generated secret to your `.env` file:
+
+```bash
+# .env
+AUTH_SECRET="YOUR_AUTH_SECRET"
+```
+
 ### Implement authentication routes
 
 Create a new dynamic route at `app/api/auth/[...nextauth]/route.ts` with the following content:
