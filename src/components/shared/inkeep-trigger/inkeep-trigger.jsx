@@ -19,7 +19,7 @@ const InkeepCustomTrigger = dynamic(
 const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-  const [trigger, setTrigger] = useState('search');
+  const [defaultModalView, setDefaultModalView] = useState('SEARCH');
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -38,7 +38,7 @@ const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) =>
       },
     },
     modalSettings: {
-      defaultView: trigger === 'search' ? 'SEARCH' : 'AI_CHAT',
+      defaultView: defaultModalView,
       askAILabel: 'Ask Neon AI',
     },
     searchSettings,
@@ -46,7 +46,7 @@ const InkeepTrigger = ({ className = null, topOffset, showAIButton = false }) =>
   };
 
   const handleClick = (type) => {
-    setTrigger(type);
+    setDefaultModalView(type);
     setIsOpen(!isOpen);
   };
 
