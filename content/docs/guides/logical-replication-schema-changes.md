@@ -26,15 +26,15 @@ Additive changes, such as adding a new column or creating an index, should be ap
 
 - **Add a new column on the subscriber:**
 
-    ```sql
-    ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
-    ```
+  ```sql
+  ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
+  ```
 
 - **Add the same column on the publisher:**
 
-    ```sql
-    ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
-    ```
+  ```sql
+  ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
+  ```
 
 By doing this, you prevent replication errors caused by the subscriber not recognizing the new column in incoming data.
 
@@ -42,13 +42,13 @@ By doing this, you prevent replication errors caused by the subscriber not recog
 
 Non-additive changes, such as dropping a column or altering a column's data type, require more careful handling. In some cases, you might need to temporarily pause write activity on the publisher to safely apply schema changes. This step can help avoid issues during the schema change process:
 
-- **Pause Writes:** Minimize or stop writes on the publisher. Stopping writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or  revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment. For example, if you have the required privileges, you could place your Postgres publisher instance into read-only mode. This is not supported on Neon, but may be supported on a local Postgres instance or other Postgres providers.
+- **Pause Writes:** Minimize or stop writes on the publisher. Stopping writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment. For example, if you have the required privileges, you could place your Postgres publisher instance into read-only mode. This is not supported on Neon, but may be supported on a local Postgres instance or other Postgres providers.
 - **Apply Schema Changes:** Make the necessary changes to both the subscriber and the publisher.
 - **Resume Writes:** Once the changes are complete and verified, resume normal write operations.
 
 ### 3. Monitor and verify replication consistency
 
-After applying schema changes and resuming replication, verify that data is being replicated between the publisher and subscriber. 
+After applying schema changes and resuming replication, verify that data is being replicated between the publisher and subscriber.
 
 To do this, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is very recent and later than the time replication resumed.
 
@@ -58,9 +58,9 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 You might also perform a row count on the source and destination databases to make sure results are as expected.
 
-   ```sql
-   SELECT COUNT(*) FROM your_table_name;
-   ```
+```sql
+SELECT COUNT(*) FROM your_table_name;
+```
 
 ## References
 
