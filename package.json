@@ -24,7 +24,6 @@
     "test": "npx cypress open"
   },
   "dependencies": {
-    "@docsearch/react": "^3.6.0",
     "@headlessui/react": "^1.7.19",
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",

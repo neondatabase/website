@@ -32,7 +32,6 @@ const NeonDocsLayout = async ({ children }) => {
           sidebar={sidebar}
           slug="introduction"
           basePath={DOCS_BASE_PATH}
-          indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
         />
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
