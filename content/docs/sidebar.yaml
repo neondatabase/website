@@ -230,6 +230,8 @@
               slug: guides/logical-replication-manage
             - title: Neon specifics
               slug: guides/logical-replication-neon
+            - title: Schema management
+              slug: guides/logical-replication-schema-changes
         - title: Read replicas
           slug: introduction/read-replicas
           items:

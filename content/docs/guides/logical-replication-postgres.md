@@ -194,6 +194,12 @@ Testing your logical replication setup ensures that data is being replicated cor
    (1 row)
    ```
 
+Alternatively, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is as expected. For example, if you just ran an insert option on the publisher, the `last_msg_receipt_time` should reflect the time of that operation.
+
+```sql
+SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
+```
+
 ## Switch over your application
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
