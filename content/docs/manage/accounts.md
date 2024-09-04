@@ -40,3 +40,23 @@ See [Organizations](/docs/manage/organizations) to learn more.
 Easily switch between your personal account and any organization you are a Member of using the navigation breadcrumb.
 
 ![Switch between personal and organization](/docs/manage/switch_to_org.png 'no-border')
+
+## Deleting your account
+
+Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
+
+To protect your data, each resource must be removed individually &#8212; nothing is deleted in bulk. The **Delete** action will stay disabled until all conditions are met.
+
+![Alt text](/docs/manage/delete_account.png)
+
+Here's where to go in the Neon Console to complete these actions:
+
+| **Action**                   | **Instructions**                                                                                                                                 |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Leave all organizations**   | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the kebab. If you're the only Admin, you'll have to promote another Member to Admin first before you can leave. <br/> ![leave organization](/docs/manage/leave_org.png) |
+| **Delete all projects**       | Go to the **Projects** page and manually [delete](docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                    |
+| **Downgrade your account**    | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)     |
+
+Once all conditions are met and all your checkmarks show green, you can safely delete. You'll get a confirmation email soon afterwards. And if you change your mind, just log back in to restore your account with your personal info intact.
+
+For deleting an organization, a similar process ensures that all resources are deliberately removed before you can delete the organization itself. See [Delete an organization](/docs/manage/orgs-manage#delete-an-organization) for more detail.
