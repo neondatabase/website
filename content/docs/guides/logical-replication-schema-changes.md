@@ -26,15 +26,15 @@ Additive changes, such as adding a new column or creating an index, should be ap
 
 - **Add a new column on the subscriber:**
 
-    ```sql
-    ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
-    ```
+  ```sql
+  ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
+  ```
 
 - **Add the same column on the publisher:**
 
-    ```sql
-    ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
-    ```
+  ```sql
+  ALTER TABLE your_table_name ADD COLUMN new_column_name data_type;
+  ```
 
 By doing this, you prevent replication errors caused by the subscriber not recognizing the new column in incoming data.
 
@@ -58,9 +58,9 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 You can also perform a row count on the publisher and subscriber databases to make sure results are the same or close if replication is actively adding rows.
 
-   ```sql
-   SELECT COUNT(*) FROM your_table_name;
-   ```
+```sql
+SELECT COUNT(*) FROM your_table_name;
+```
 
 ## References
 
