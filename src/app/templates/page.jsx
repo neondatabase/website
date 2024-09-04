@@ -13,7 +13,7 @@ const TemplatesPage = () => (
           <h1 className="font-title text-4xl font-medium leading-none tracking-extra-tight">
             Find your Template
           </h1>
-          <p className="mt-2.5 max-w-[558px] text-lg font-light leading-snug tracking-extra-tight dark:text-gray-new-80">
+          <p className="mt-2.5 max-w-[558px] text-lg font-light leading-snug tracking-extra-tight text-gray-new-20 dark:text-gray-new-80">
             Jumpstart your app development process with pre-built solutions from Neon and our
             community.
           </p>
