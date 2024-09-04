@@ -1,6 +1,7 @@
 ---
 updatedOn: '2024-09-04T18:53:01.156Z'
 ---
+
 ## Logical replication tips
 
 The following tips are based on actual customer data migrations to Neon using logical replication:
