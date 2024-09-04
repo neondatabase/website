@@ -105,6 +105,10 @@ To delete a project:
 5. Click **Delete project.**
 6. On the confirmation dialog, click **Delete**.
 
+<Admonition type="important">
+If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+</Admonition>
+
 ### Share a project
 
 Neon's project sharing feature allows you to share your project with other Neon accounts.
