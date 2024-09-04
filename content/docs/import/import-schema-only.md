@@ -23,8 +23,10 @@ pg_dump --schema-only \
 - With the the `--schema-only` option, only object definitions are dumped. Data is excluded.
 - The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
 
-<Admonition type="tip">
-When you're dumping or restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your connection string on the **Connection Details** widget on the Neon Project Dashboard.
+
+<Admonition type="tip" title="tips">
+- When you're dumping or restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your connection string on the **Connection Details** widget on the Neon Project Dashboard.
+- If you are replicating a large dataset, consider removing any `CREATE INDEX` statements from the resulting dump file to avoid creating indexes when loading the schema on the destination database (the subscriber). Taking indexes out of the equation can substantially reduce the time required for initial data load performed when starting logical replication. Save the `CREATE INDEX` statements that you remove. You can add the indexes back after the initial data copy is completed.
 </Admonition>
 
 ## Review and modify the dumped schema

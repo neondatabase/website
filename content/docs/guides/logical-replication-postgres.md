@@ -22,6 +22,7 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
 
 - A destination Postgres instance other than Neon.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 ## Prepare your source Neon database
 

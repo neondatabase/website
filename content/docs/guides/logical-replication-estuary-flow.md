@@ -16,7 +16,7 @@ In this guide, you will learn how to configure a Postgres source connector in Es
 
 - An [Estuary Flow account](https://dashboard.estuary.dev/register) (start free, no credit card required)
 - A [Neon account](https://console.neon.tech/)
-- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable Logical Replication in Neon
 

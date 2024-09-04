@@ -22,6 +22,7 @@ This guide describes how to replicate data from Cloud SQL Postgres using native 
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 ## Prepare your Cloud SQL source database
 
