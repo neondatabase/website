@@ -5,7 +5,7 @@ subtitle: Monitor billing and usage metrics for your account and projects from t
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2024-08-19T14:53:19.393Z'
+updatedOn: '2024-09-02T13:42:56.659Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
@@ -50,11 +50,11 @@ The peak usage triangle indicates the highest usage level reached for that metri
   On the Free Plan, [default branch](/docs/reference/glossary#default-branch) compute starts at 0.25 vCPU with 1 GB RAM and can run 24/7. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times; note that autoscaling can affect 24/7 availability depending on your usage patterns. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches.
   </Admonition>
 
-- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, and the Scale plan supports up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, and the Scale and Business plans up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 - **What about extra usage?**
 
-  The Launch plan supports extra storage and compute usage. The Scale plan supports extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you purchased an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page. Extra storage and projects reset at the beginning of the next month based on current usage. See [Extra usage](/docs/introduction/extra-usage) to learn more.
+  The Launch plan supports extra storage and compute usage. The Scale and Business plans support extra storage, compute, and project usage. Any extra usage allowance is automatically added (and billed for) when you exceed the allowances included in your plan's base fee. If extra usage occurs, it is reflected in your monthly allowance on the **Billing** page. For example, if you purchased an extra 10 GiB of storage when you exceed your 50 GiB storage allowance on the Scale plan, the extra 10 GiB is added to your **Storage** allowance on the **Billing** page. Extra storage and projects reset at the beginning of the next month based on current usage. See [Extra usage](/docs/introduction/extra-usage) to learn more.
 
 ### Project Dashboard
 

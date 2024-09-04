@@ -1,7 +1,7 @@
 ---
 title: Import data from Postgres with the @neondatabase/pg-import CLI
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.669Z'
+updatedOn: '2024-09-02T13:42:56.657Z'
 ---
 
 This topic describes migrating data from another Postgres database to Neon using the `@neondatabase/pg-import` CLI. This tool is built on top of the Postgres `pg_dump` and `pg_restore` client utilities. It is intended to simplify data migrations for smaller, less complex databases compared to using the `pg_dump` and `pg_restore` client utilities directly, as described in [Import data from Postgres](/docs/import/import-from-postgres).
@@ -14,7 +14,7 @@ The`@neondatabase/pg-import` utility supports all Neon Postgres versions.
 
 ## Before you begin
 
-- Make sure your Neon plan supports your database size. The Neon Free Plan offers 0.5 GiB of storage. For larger data sizes, upgrade to the Launch or Scale plan. See Neon plans. If you are on the Neon Launch or Scale plan, you can optimize for the migration by configuring a larger compute size or enabling [autoscaling](/docs/guides/autoscaling-guide) for additional CPU and RAM. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Make sure your Neon plan supports your database size. The Neon Free Plan offers 0.5 GiB of storage. For larger data sizes, upgrade to one of our paid plans: Launch, Scale, or Business. See Neon [plans](/docs/introduction/plans). If you are on a Neon paid plan, you can optimize for the migration by configuring a larger compute size or enabling [autoscaling](/docs/guides/autoscaling-guide) for additional CPU and RAM. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 - Retrieve the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your source Postgres database.
 - Optionally, [create a role in Neon](/docs/manage/roles#manage-roles-in-the-neon-console) to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).

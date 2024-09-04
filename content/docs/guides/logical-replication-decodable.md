@@ -3,10 +3,8 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.649Z'
+updatedOn: '2024-08-23T17:19:28.787Z'
 ---
-
-<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 

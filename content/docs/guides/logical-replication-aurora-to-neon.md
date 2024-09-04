@@ -3,7 +3,7 @@ title: Replicate data from Aurora PostgreSQL
 subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.647Z'
+updatedOn: '2024-09-04T14:11:03.956Z'
 ---
 
 <LRBeta/>
@@ -177,6 +177,12 @@ Testing your logical replication setup ensures that data is being replicated cor
    30
    (1 row)
    ```
+
+Alternatively, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is as expected. For example, if you just ran an insert option on the publisher, the `last_msg_receipt_time` should reflect the time of that operation.
+
+```sql
+SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
+```
 
 ## Switch over your application
 

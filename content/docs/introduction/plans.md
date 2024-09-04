@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-08-19T14:53:19.394Z'
+updatedOn: '2024-09-03T17:21:56.628Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -21,6 +21,7 @@ Neon offers four plans:
 - [Free Plan](#free-plan)
 - [Launch](#launch)
 - [Scale](#scale)
+- [Business](#business)
 - [Enterprise](#enterprise)
 
 <Admonition type="tip" title="Plan Allowances and Extra Usage">
@@ -44,10 +45,10 @@ The Free Plan includes the following usage allowances:
 | **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
 
-<Admonition type="tip" title="What are active hours and compute hours?">
+<Admonition type="tip" title="What is a compute hour?">
 
-- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. In the table above, _active hours_ are based on a 0.25 vCPU compute size.
 - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute hours formula**
 
   ```
@@ -59,6 +60,7 @@ The Free Plan includes the following usage allowances:
 ### Free Plan features
 
 - Autosuspend (after 5 minutes of inactivity)
+- Monitoring with 1 day of historical data
 - All supported regions
 - Project sharing
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
@@ -79,13 +81,13 @@ The Launch plan provides all of the resources, features, and support you need to
 
 The Launch plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                                  |
-| ------------- | ------------------------------------------------------------------------------- |
-| **Projects**  | 10 Neon projects                                                                |
-| **Branches**  | 500                                                                             |
-| **Databases** | Unlimited                                                                       |
-| **Storage**   | 10 GiB of data storage                                                          |
-| **Compute**   | 300 compute hours (1,200 _active hours_)/month for all computes in all projects |
+| Usage type    | Plan allowance                                                 |
+| ------------- | -------------------------------------------------------------- |
+| **Projects**  | 10 Neon projects                                               |
+| **Branches**  | 500 per project                                                |
+| **Databases** | Unlimited                                                      |
+| **Storage**   | 10 GiB of data storage                                         |
+| **Compute**   | 300 compute hours a month for all computes across all projects |
 
 ### Launch plan extra usage
 
@@ -98,7 +100,8 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 ### Launch plan features
 
-- Compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
+- Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
+- Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
@@ -113,32 +116,72 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                                  |
-| ------------- | ------------------------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                                                |
-| **Branches**  | 500                                                                             |
-| **Databases** | Unlimited                                                                       |
-| **Storage**   | 50 GiB of data storage                                                          |
-| **Compute**   | 750 compute hours (3,000 _active hours_)/month for all computes in all projects |
+| Usage type    | Plan allowance                                                       |
+| ------------- | -------------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                                     |
+| **Branches**  | 500 per project                                                      |
+| **Databases** | Unlimited                                                            |
+| **Storage**   | 50 GiB of data storage                                               |
+| **Compute**   | 750 compute hours a month month for all computes across all projects |
 
 ### Scale plan extra usage
 
 Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-| Extra usage type   | Cost                                                                  |
-| ------------------ | --------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $15 per unit, prorated for the month |
-| **Extra Compute**  | Billed by compute hour at $0.16 per hour                              |
-| **Extra Projects** | Billed for in units of 10 at $50 per unit                             |
+| Extra usage type   | Cost                                                              |
+| ------------------ | ----------------------------------------------------------------- |
+| **Extra Storage**  | Billed in units of 10 GiB at $15 per unit, prorated for the month |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                          |
+| **Extra Projects** | Billed for in units of 10 at $50 per unit                         |
 
 ### Scale plan features
 
-- Compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Autoscaling compute up to 10 vCPUs and 40 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions
+- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
-- [Priority support](/docs/introduction/support)
+- [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+
+## Business
+
+The Business plan is designed for mid-to-large enterprises requiring higher compute capacity and advanced security and compliance features.
+
+### Business plan allowances
+
+The Business plan includes the following usage allowances:
+
+| Usage type    | Plan allowance                                                   |
+| ------------- | ---------------------------------------------------------------- |
+| **Projects**  | 100 Neon projects                                                |
+| **Branches**  | 500 per project                                                  |
+| **Databases** | Unlimited                                                        |
+| **Storage**   | 500 GiB of data storage                                          |
+| **Compute**   | 1,000 compute hours a month for all computes across all projects |
+
+### Business plan extra usage
+
+Business plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which are allocated and billed automatically when plan allowances are exceeded.
+
+| Extra usage type   | Cost                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **Extra Storage**  | Billed for in units of 10 GiB at $7.50 per unit, prorated for the month |
+| **Extra Compute**  | Billed by compute hour at $0.16 per hour                                |
+| **Extra Projects** | Billed for in units of 10 at $5 per unit                                |
+
+### Business plan features
+
+- Autoscaling compute up to 10 vCPUs and 40 GB RAM
+- Monitoring with 14 days of historical data
+- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
+- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
+- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
+- [Priority support](/docs/introduction/support)
+- [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
+
+For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 ## Enterprise
 

@@ -3,7 +3,7 @@ title: Connect an Astro site or application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect to your Postgres database from an
   Astro site or application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.645Z'
+updatedOn: '2024-08-24T10:00:34.195Z'
 ---
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
@@ -148,7 +148,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringiify(data), { headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
 }
 ```
 
@@ -160,7 +160,7 @@ import postgres from 'postgres';
 export async function GET() {
   const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
@@ -174,7 +174,7 @@ import { neon } from '@neondatabase/serverless';
 export async function GET() {
   const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }

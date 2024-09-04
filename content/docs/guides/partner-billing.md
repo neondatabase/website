@@ -3,7 +3,7 @@ title: Manage billing with consumption limits
 subtitle: Learn how to set usage quotas per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-06T15:23:10.949Z'
+updatedOn: '2024-09-02T13:42:56.656Z'
 ---
 
 When setting up your billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -76,14 +76,14 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. The Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch and Scale plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
+These limits are not directly configurable. The Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch, Scale, and Business plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can [request large database support](https://console.neon.tech/app/projects?modal=request_large_db).
 
 The Neon Free Plan logical data size limit is approximately 512 MiB:
 
 - `branch_logical_size_limit`: 512
 - `branch_logical_size_limit_bytes`: 536870912
 
-The Neon Launch and Scale plan failsafe limit is 200 GiB:
+The Neon Launch, Scale, and Business plan failsafe limit is 200 GiB:
 
 - `branch_logical_size_limit`: 204800
 - `branch_logical_size_limit_bytes`: 214748364800
@@ -165,12 +165,12 @@ curl --request PATCH \
 
 You can use the Neon API to retrieve consumption metrics for your organization and projects through various endpoints:
 
-| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](metrics-api#get-account-level-aggregated-metrics)                                                |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics for the account](metrics-api#get-granular-project-level-metrics-for-your-account)                   |
-| [Billing period metrics per project](https://api-docs.neon.tech/reference/listprojectsconsumption)   | Offers consumption metrics for each project in an account for the current billing period                                 | All plans         | [Get project-level metrics for the account by billing period](metrics-api#get-project-level-metrics-for-your-account-by-billing-period) |
-| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                            | Retrieves detailed metrics and quota information for a specific project                                                  | All plans         | [Get metrics for a single specified project](metrics-api#get-metrics-for-a-single-specified-project)                                    |
+| Endpoint                                                                                             | Description                                                                                                              | Plan Availability            | Docs                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](metrics-api#get-account-level-aggregated-metrics)                                                |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](metrics-api#get-granular-project-level-metrics-for-your-account)                   |
+| [Billing period metrics per project](https://api-docs.neon.tech/reference/listprojectsconsumption)   | Offers consumption metrics for each project in an account for the current billing period                                 | All plans                    | [Get project-level metrics for the account by billing period](metrics-api#get-project-level-metrics-for-your-account-by-billing-period) |
+| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                            | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    | [Get metrics for a single specified project](metrics-api#get-metrics-for-a-single-specified-project)                                    |
 
 ## Resetting a project after suspend
 

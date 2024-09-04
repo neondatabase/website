@@ -60,7 +60,7 @@ const Leadership = () => (
       </Heading>
       <p className="mt-7 max-w-[740px] text-xl leading-snug tracking-extra-tight text-gray-new-50 xl:mt-5 xl:max-w-xl lg:mt-[18px] lg:max-w-lg lg:text-lg md:mt-3.5 md:text-base">
         Neon was founded by a team of{' '}
-        <span className="text-white">database builders and Postgres hackers.</span>.
+        <span className="text-white">database builders and Postgres hackers</span>.
       </p>
       <ul className="mt-16 grid grid-cols-7 gap-x-[42px] gap-y-10 xl:mt-14 xl:gap-x-[38px] lg:mt-12 lg:grid-cols-5 lg:pr-8 md:grid-cols-3 md:pr-7 sm:mt-8 sm:grid-cols-2 sm:gap-x-9">
         {ITEMS.map(({ image, name, role }, index) => (

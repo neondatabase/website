@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.430Z'
+updatedOn: '2024-08-28T20:38:34.584Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and creates a database branch for each preview deployment.
@@ -123,7 +123,7 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
-   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `/preview` prefix.
+   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix.
      ![Neon preview deployment branch](/docs/guides/vercel_neon_app_update.png)
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)

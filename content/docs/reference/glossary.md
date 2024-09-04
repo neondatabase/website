@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-08-20T16:50:55.557Z'
+updatedOn: '2024-09-02T13:42:56.664Z'
 ---
 
 ## access token
@@ -68,6 +68,10 @@ Connecting to a database on a branch requires connecting via a compute attached 
 ## Branching
 
 A Neon feature that allows you to create an isolated copy of your data for parallel database development, testing, and other purposes, similar to branching in Git. See [Branch](#branch).
+
+### Business plan
+
+A paid plan offered by Neon designed for mid-to-large enterprises that require higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans).
 
 ## check_availability
 
@@ -222,7 +226,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale and Business plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -393,7 +397,7 @@ You can designate any Neon branch as a "protected branch", which implements a se
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
 - With additional configuration steps, you can apply IP restrictions to protected branches only.
 
-The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) plan. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Publisher
 

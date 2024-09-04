@@ -4,6 +4,7 @@ import GuideCard from 'components/pages/guides/guide-card';
 import Sidebar from 'components/pages/guides/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
+import { GUIDES_BASE_PATH } from 'constants/guides';
 import { getAllPosts } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
@@ -13,6 +14,7 @@ export async function generateMetadata() {
     title: 'Neon guides',
     // description: '',
     // type: '',
+    rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
 }
 
@@ -22,7 +24,7 @@ const GuidesPage = async () => {
   if (!posts) return <div className="text-18">No guides yet</div>;
 
   return (
-    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
+    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <Container
           className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"
