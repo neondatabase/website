@@ -2,7 +2,7 @@
 title: Import a database schema
 subtitle: Perform a schema-only import with pg_dump and pg_restore
 enableTableOfContents: true
-updatedOn: '2024-08-22T02:18:02.655Z'
+updatedOn: '2024-09-04T18:53:01.156Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.

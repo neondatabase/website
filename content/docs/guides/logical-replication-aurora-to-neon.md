@@ -3,7 +3,7 @@ title: Replicate data from Aurora PostgreSQL
 subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-04T14:11:03.956Z'
+updatedOn: '2024-09-04T18:53:01.151Z'
 ---
 
 <LRBeta/>
