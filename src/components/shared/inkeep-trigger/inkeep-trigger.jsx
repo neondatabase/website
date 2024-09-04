@@ -19,6 +19,7 @@ const InkeepCustomTrigger = dynamic(
 const InkeepTrigger = ({
   className = null,
   isNotFoundPage = false,
+  isDarkTheme = false,
   topOffset,
   showAIButton = false,
 }) => {
@@ -30,7 +31,17 @@ const InkeepTrigger = ({
     setIsOpen(false);
   }, []);
 
-  const themeMode = theme === 'system' ? systemTheme : theme;
+  let themeMode;
+  switch (true) {
+    case isDarkTheme:
+      themeMode = 'dark';
+      break;
+    case theme === 'system':
+      themeMode = systemTheme;
+      break;
+    default:
+      themeMode = theme;
+  }
 
   const handleKeyDown = (event) => {
     if (event.key === 'k' && event.metaKey) {
@@ -87,6 +98,7 @@ InkeepTrigger.propTypes = {
   topOffset: PropTypes.number,
   showAIButton: PropTypes.bool,
   isNotFoundPage: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
 };
 
 export default InkeepTrigger;

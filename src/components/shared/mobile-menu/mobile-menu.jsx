@@ -173,7 +173,7 @@ const MobileMenu = ({ isDarkTheme, showSearchInput = false }) => {
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {showSearchInput && <InkeepTrigger className="mobile-search" />}
+        {showSearchInput && <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />}
         <Burger
           className={clsx(
             'relative flex',
