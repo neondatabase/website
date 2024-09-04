@@ -8,11 +8,11 @@ updatedOn: '2024-08-22T02:18:02.650Z'
 
 When working with Postgres logical replication, managing schema changes is a task that requires careful planning. As stated in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-restrictions.html):
 
-"_The database schema and DDL commands are not replicated. The initial schema can be copied by hand using pg_dump --schema-only`. Subsequent schema changes would need to be kept in sync manually. (Note, however, that there is no need for the schemas to be absolutely the same on both sides.) Logical replication is robust when schema definitions change in a live database: When the schema is changed on the publisher and replicated data starts arriving at the subscriber but does not fit into the table schema, replication will error until the schema is updated. In many cases, intermittent errors can be avoided by applying additive schema changes to the subscriber first._"
+"_The database schema and DDL commands are not replicated. The initial schema can be copied by hand using `pg_dump --schema-only`. Subsequent schema changes would need to be kept in sync manually. (Note, however, that there is no need for the schemas to be absolutely the same on both sides.) Logical replication is robust when schema definitions change in a live database: When the schema is changed on the publisher and replicated data starts arriving at the subscriber but does not fit into the table schema, replication will error until the schema is updated. In many cases, intermittent errors can be avoided by applying additive schema changes to the subscriber first._"
 
 This guidance highlights key considerations and best practices for handling schema changes in a logical replication setup.
 
-## Understanding schema replication in Postgres
+## Schema management in a logical replication context
 
 Logical replication in Postgres is designed to replicate data changes (inserts, updates, and deletes) but not schema changes (DDL commands). This means that any modifications to the database schema, such as adding or dropping columns, need to be manually applied to both the publisher and the subscriber databases.
 
@@ -42,21 +42,21 @@ By doing this, you prevent replication errors caused by the subscriber not recog
 
 Non-additive changes, such as dropping a column or altering a column's data type, require more careful handling. In some cases, you might need to temporarily pause write activity on the publisher to safely apply schema changes. This step can help avoid issues during the schema change process:
 
-- **Pause Writes:** Minimize or stop writes on the publisher. Stopping writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or  revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment. For example, if you have the required privileges, you could place your Postgres publisher instance into read-only mode. This is not supported on Neon, but may be supported on a local Postgres instance or other Postgres providers.
-- **Apply Schema Changes:** Make the necessary changes to both the subscriber and the publisher.
-- **Resume Writes:** Once the changes are complete and verified, resume normal write operations.
+- **Pause writes:** Pausing writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or  revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment.
+- **Apply your schema changes:** Make the necessary changes to both the subscriber and the publisher.
+- **Resume writes:** Once the changes are complete and verified, resume normal write operations.
 
-### 3. Monitor and verify replication consistency
+### 3. Monitor and verify replication
 
-After applying schema changes and resuming replication, verify that data is being replicated between the publisher and subscriber. 
+After applying schema changes and resuming writes if they were paused, it's important to verify that data is being replicated between the publisher and subscriber. 
 
-To do this, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is very recent and later than the time replication resumed.
+To do this, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is very recent and as expected based on the write activity on the publisher.
 
-```sql
+```sql shouldWrap
 SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
 ```
 
-You might also perform a row count on the source and destination databases to make sure results are as expected.
+You can also perform a row count on the publisher and subscriber databases to make sure results are the same or close if replication is actively adding rows.
 
    ```sql
    SELECT COUNT(*) FROM your_table_name;

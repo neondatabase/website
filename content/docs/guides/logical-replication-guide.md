@@ -34,7 +34,7 @@ To learn more about Postgres logical replication, see the following topics.
 
 <a href="/docs/guides/logical-replication-neon" description="Information about logical replication specific to Neon" icon="screen">Logical replication in Neon</a>
 
-<a href="/docs/guides/logical-replication-neon" description="Learn about managing schema changes in a logical replication setup" icon="screen">Managing schema changes</a>
+<a href="/docs/guides/logical-replication-schema-changes" description="Learn about managing schema changes in a logical replication setup" icon="screen">Managing schema changes</a>
 
 </DetailIconCards>
 
