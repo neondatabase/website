@@ -7,13 +7,12 @@ import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Burger from 'components/shared/header/burger';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-
-import InkeepTrigger from '../inkeep-trigger/inkeep-trigger';
 
 const ANIMATION_DURATION = 0.2;
 

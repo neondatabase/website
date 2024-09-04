@@ -10,10 +10,10 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
   <div className={clsx('relative flex items-center justify-between', className)}>
     <button
       className={clsx(
-        'flex w-full items-center justify-between border-gray-new-90 bg-white transition-colors duration-200 hover:border-gray-new-70 dark:border-[#1D1E20] dark:bg-[#0F1010] dark:hover:border-gray-new-20',
+        'flex w-full items-center justify-between border-gray-new-90 bg-white transition-colors duration-200 hover:border-gray-new-70 dark:border-[#1D1E20] dark:bg-[#0F1010] dark:hover:border-gray-new-20 dark:lg:bg-transparent',
         isNotFoundPage
-          ? ' h-16 max-w-[488px] rounded-[110px] border-2 bg-[length:20px_20px] bg-[left_1.5rem_center] px-6 pl-6 lg:border-2'
-          : ' h-8 rounded border p-[7px] lg:items-start lg:border-none lg:px-3 lg:py-0'
+          ? 'h-16 max-w-[488px] rounded-full border-2 bg-[length:20px_20px] bg-[left_1.5rem_center] px-6 pl-6 lg:border-2'
+          : 'h-8 rounded border p-[7px] lg:items-start lg:border-none  lg:px-3 lg:py-0'
       )}
       type="button"
       onClick={() => handleClick('SEARCH')}

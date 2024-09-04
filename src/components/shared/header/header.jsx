@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
@@ -13,8 +14,6 @@ import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
-
-import InkeepTrigger from '../inkeep-trigger/inkeep-trigger';
 
 import HeaderWrapper from './header-wrapper';
 

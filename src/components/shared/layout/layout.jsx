@@ -13,7 +13,7 @@ const Layout = ({
   footerTheme = null,
   withOverflowHidden = false,
   children,
-  // headerWithBorder = false,
+  headerWithBorder = false,
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
@@ -33,6 +33,7 @@ const Layout = ({
         hasThemesSupport={hasThemesSupport}
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
+        withBorder={headerWithBorder}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}

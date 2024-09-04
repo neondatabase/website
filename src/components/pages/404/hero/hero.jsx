@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import InkeepTrigger from 'components/shared/inkeep-trigger/inkeep-trigger';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 
 import illustration from './images/illustration.png';
