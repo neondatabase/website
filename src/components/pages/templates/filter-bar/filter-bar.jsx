@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 const filters = [
   {
-    type: 'Types',
+    type: 'Type',
     items: [
       { name: 'Starter', value: 'starter' },
       { name: 'Chatbot', value: 'chatbot' },
@@ -11,9 +11,9 @@ const filters = [
     ],
   },
   {
-    type: 'Frameworks',
+    type: 'Framework',
     items: [
-      { name: 'Next.js', value: 'nextjs' },
+      { name: 'Next.js', value: 'next.js' },
       { name: 'LlamaIndex', value: 'llamaindex' },
       { name: 'LangChain', value: 'langchain' },
       { name: 'Astro', value: 'astro' },
@@ -29,7 +29,7 @@ const filters = [
       { name: 'Waku', value: 'waku' },
       { name: 'Angular', value: 'angular' },
       { name: 'Wasp', value: 'wasp' },
-      { name: 'Analog', value: 'Analog' },
+      { name: 'Analog', value: 'analog' },
     ],
   },
   {
@@ -46,8 +46,8 @@ const FilterBar = ({ templates, filteredTemplates, setFilteredTemplates }) => {
         (template) =>
           template.title.toLowerCase().includes(searchTerm) ||
           template.description.toLowerCase().includes(searchTerm) ||
-          template.types.some((tag) => tag.toLowerCase().includes(searchTerm)) ||
-          template.frameworks.some((tag) => tag.toLowerCase().includes(searchTerm)) ||
+          template.type.some((tag) => tag.toLowerCase().includes(searchTerm)) ||
+          template.framework.some((tag) => tag.toLowerCase().includes(searchTerm)) ||
           template.css.some((tag) => tag.toLowerCase().includes(searchTerm))
       );
       setFilteredTemplates((prevState) => ({ ...prevState, items: filteredItems }));
@@ -73,7 +73,10 @@ const FilterBar = ({ templates, filteredTemplates, setFilteredTemplates }) => {
         const filteredItems = templates.filter((template) =>
           Object.entries(updatedFilters).every(([filterType, filterValues]) => {
             if (filterValues.length === 0) return true;
-            return filterValues.some((value) => template[filterType].includes(value));
+            return filterValues.some((value) => {
+              const values = template[filterType].map((t) => t.toLowerCase());
+              return values.includes(value);
+            });
           })
         );
 
