@@ -62,6 +62,15 @@ You can also perform a row count on the publisher and subscriber databases to ma
 SELECT COUNT(*) FROM your_table_name;
 ```
 
+## Schema migration tools
+
+Tools like [Flyway](https://flywaydb.org/) and [Liquibase](https://www.liquibase.org/) can assist in managing schema changes by applying them consistently across multiple databases. They track the history of each schema change, ensuring that updates are applied in the correct sequence. Integrating such a tool into your workflow could improve the reliability and organization of your schema migrations, although it may require significant adjustments to your existing process.
+
+If you're not familiar with these tools, checkout these getting started guides for an introduction to using them with Neon:
+
+- [Get started with Flyway and Neon](/docs/guides/flyway)
+- [Get started with Liquibase and Neon](/docs/guides/liquibase)
+
 ## References
 
 - [PostgreSQL logical replication restrictions](https://www.postgresql.org/docs/current/logical-replication-restrictions.html)
