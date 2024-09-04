@@ -42,13 +42,13 @@ By doing this, you prevent replication errors caused by the subscriber not recog
 
 Non-additive changes, such as dropping a column or altering a column's data type, require more careful handling. In some cases, you might need to temporarily pause write activity on the publisher to safely apply schema changes. This step can help avoid issues during the schema change process:
 
-- **Pause writes:** Pausing writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or  revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment.
+- **Pause writes:** Pausing writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment.
 - **Apply your schema changes:** Make the necessary changes to both the subscriber and the publisher.
 - **Resume writes:** Once the changes are complete and verified, resume normal write operations.
 
 ### 3. Monitor and verify replication
 
-After applying schema changes and resuming writes if they were paused, it's important to verify that data is being replicated between the publisher and subscriber. 
+After applying schema changes and resuming writes if they were paused, it's important to verify that data is being replicated between the publisher and subscriber.
 
 To do this, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is very recent and as expected based on the write activity on the publisher.
 
