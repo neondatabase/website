@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-09-02T13:42:56.664Z'
+updatedOn: '2024-09-05T17:14:45.247Z'
 ---
 
 ## access token
@@ -226,7 +226,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Scale and Business plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a Business plan feature that can be used to control access to the branch where your database resides. The allowlist can be applied to all branches (the default) or the [default branch](#default-branch) only. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 

@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.652Z'
+updatedOn: '2024-09-05T17:14:45.238Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -42,7 +42,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 
 - **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
-- **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
+- **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
 - **Business**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes
 
@@ -95,7 +95,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
