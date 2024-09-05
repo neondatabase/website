@@ -7,7 +7,7 @@ const TemplatesList = ({ className, templates }) => (
   <ul className={clsx('divide-y divide-gray-new-80/80 dark:divide-gray-new-15/80', className)}>
     {templates.map(({ name, description, slug, githubUrl }) => (
       <li className="pb-6 pt-6 first:pt-0 last:pb-0" key={githubUrl}>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between md:flex-col md:items-start md:gap-y-3">
           <Link className="group" to={`/templates/${slug}`}>
             <h2 className="text-lg font-semibold leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1">
               {name}

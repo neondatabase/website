@@ -167,7 +167,7 @@ const DropdownFilterBar = ({
   setFilteredTemplates,
   handleFilterChange,
 }) => (
-  <div className={clsx(className, 'grid grid-cols-3 gap-x-4')}>
+  <div className={clsx(className, 'md: grid grid-cols-3 gap-x-4 md:grid-cols-1 md:gap-y-3.5')}>
     {filters.map((filter) => (
       <DropdownFilter
         key={filter.type}
