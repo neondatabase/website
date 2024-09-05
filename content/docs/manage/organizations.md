@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-08-23T13:51:17.453Z'
+updatedOn: '2024-09-05T19:51:39.865Z'
 ---
 
 <EarlyAccess/>
