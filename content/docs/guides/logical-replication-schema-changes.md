@@ -40,11 +40,18 @@ By doing this, you prevent replication errors caused by the subscriber not recog
 
 ### 2. Handle non-additive schema changes with caution
 
-Non-additive changes, such as dropping a column or altering a column's data type, require more careful handling. In some cases, you might need to temporarily pause write activity on the publisher to safely apply schema changes. This step can help avoid issues during the schema change process:
+Non-additive changes, such as dropping a column or altering a column's data type, require careful handling. When performing a non-additive schema change like dropping a column, apply the change on the publisher first, then on the subscriber. These changes are typically feasible if applied in the correct order (publisher first).
 
-- **Pause writes:** Pausing writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment.
-- **Apply your schema changes:** Make the necessary changes to both the subscriber and the publisher.
-- **Resume writes:** Once the changes are complete and verified, resume normal write operations.
+However, always carefully assess how the schema change will impact replication to the subscriber. Will writes still succeed on the subscriber after the change on the publisher? It’s best practice to test schema changes before implementing them in production. For example, test whether writes to the modified publisher schema still execute successfully on the unmodified subscriber schema.
+
+Mistakes in the schema update process could disrupt replication on the subscriber, requiring troubleshooting and reestablishing replication.
+
+For an added degree of safety or complex schema changes, consider temporarily pausing write activity on the publisher before applying schema changes. The steps in this approach involve:
+
+- **Pausing writes on the publisher:** Pause writes on the publisher by stopping or pausing the application that handles inserts, updates, and deletes, or by revoking write permissions on the roles that write to the database. Other methods may also be available depending on your environment.
+- **Applying schema changes on the publisher:** Apply the necessary schema changes to the publisher.
+- **Applying schema changes on the subscriber:** Once the publisher changes are complete, apply the schema changes to the subscriber.
+- **Resuming writes:** After verifying that the changes are successful, resume normal write operations.
 
 ### 3. Monitor and verify replication
 
@@ -64,12 +71,23 @@ SELECT COUNT(*) FROM your_table_name;
 
 ## Schema migration tools
 
-Tools like [Flyway](https://flywaydb.org/) and [Liquibase](https://www.liquibase.org/) can assist in managing schema changes by applying them consistently across multiple databases. They track the history of each schema change, ensuring that updates are applied in the correct sequence. Integrating such a tool into your workflow could improve the reliability and organization of your schema migrations, although it may require significant adjustments to your existing process.
+Tools like [Flyway](https://flywaydb.org/) and [Liquibase](https://www.liquibase.org/) can assist in managing schema changes by ensuring they are applied consistently across multiple databases. These tools track the history of each change and ensure updates are applied in the correct sequence. Integrating such tools into your workflow can improve the reliability and organization of your schema migrations, though it may require adjustments to your existing process.
 
-If you're not familiar with these tools, checkout these getting started guides for an introduction to using them with Neon:
+If you're unfamiliar with these tools, check out the following guides to get started with Neon:
 
 - [Get started with Flyway and Neon](/docs/guides/flyway)
 - [Get started with Liquibase and Neon](/docs/guides/liquibase)
+
+For guidance on managing schemas across multiple databases, see:
+
+- [Flyway: A simple way to manage multiple environment deployments](https://www.red-gate.com/blog/a-simple-way-to-manage-multi-environment-deployments)
+- [How to set up Liquibase with an Existing Project and Multiple Environments](https://docs.liquibase.com/workflows/liquibase-community/existing-project.html)
+
+Some Object Relational Mappers (ORMs) also support schema migration management across multiple database environments. For example, with Prisma ORM, you can configure multiple `.env` files. Learn more at [Using multiple .env files](https://www.prisma.io/docs/orm/more/development-environment/environment-variables/using-multiple-env-files).
+
+Regardless of the schema management tool you choose, ensure that changes adhere to the guidelines for [additive](#1-apply-additive-schema-changes-to-the-subscriber-first) and [non-additive](#2-handle-non-additive-schema-changes-with-caution) schema changes. These can be applied manually or through automated scripts.
+
+If you have suggestions, tips, or requests regarding schema management in a replication setup, please let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or through our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 
 ## References
 
