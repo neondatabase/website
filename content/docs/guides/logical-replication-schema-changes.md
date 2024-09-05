@@ -40,11 +40,14 @@ By doing this, you prevent replication errors caused by the subscriber not recog
 
 ### 2. Handle non-additive schema changes with caution
 
-Non-additive changes, such as dropping a column or altering a column's data type, require more careful handling. In some cases, you might need to temporarily pause write activity on the publisher to safely apply schema changes. This step can help avoid issues during the schema change process:
+Non-additive changes, such as dropping a column or altering a column's data type, require careful handling. When performing a simple non-additive schema change like dropping a column, apply the schema change on the publisher first, followed by the subscriber. Generally, such changes are feasible if done in the correct order (publisher first).. However, always consider carefully how your schema change on the publisher will affect replication of writes on the subscriber. Will writes still succeed on the subscriber after the change on the publisher?  It's good practice to verify schema changes before implementing them in production. For example, test writes on both the unaltered and altered versions of your schema to ensure they succeed. Mistakes in this process could halt replication on the subscriber.
 
-- **Pause writes:** Pausing writes on the publisher can be achieved in a number of ways such as stopping or pausing the application that handles writes (inserts, updates, and deletes) or revoking write permissions on the database roles that are writing to the database. Other methods may be available to you depending on your environment.
-- **Apply your schema changes:** Make the necessary changes to both the subscriber and the publisher.
-- **Resume writes:** Once the changes are complete and verified, resume normal write operations.
+For an added degree of safety or complex schema changes, consider temporarily pausing write activity on the publisher before applying schema changes. The steps in this approach look like this:
+
+- **Pausing writes:** Pause writes on the publisher by stopping or pausing the application that handles inserts, updates, and deletes, or by revoking write permissions on the roles that write to the database. Other methods may also be available depending on your environment.
+- **Applying schema changes on the publisher:** Apply the necessary schema changes to the publisher.
+- **Applying schema changes on the subscriber:** Once the publisher changes are complete, apply the schema changes to the subscriber.
+- **Resuming writes:** After verifying that the changes are successful, resume normal write operations.
 
 ### 3. Monitor and verify replication
 
