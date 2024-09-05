@@ -33,8 +33,8 @@ Here's a breakdown of what actions each role can take:
 | ------------------------------------------------------------------------ | :---: | :----: | :---: |
 | [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ✅   |  ❌   |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ❌   |  ❌   |
-| Invite [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
-| Invite [guests](/docs/manage/orgs-manage#invite-guests) (share projects) |  ✅   |   ✅   |  ❌   |
+| Manage [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
+| Manage [guests](/docs/manage/orgs-manage#invite-guests) (share projects) |  ✅   |   ✅   |  ✅   |
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)              |  ✅   |   ❌   |  ❌   |
 | [Manage billing](/docs/manage/orgs-manage#billing)                       |  ✅   |   ❌   |  ❌   |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)   |  ✅   |   ❌   |  ❌   |
