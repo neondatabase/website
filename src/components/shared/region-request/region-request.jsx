@@ -8,7 +8,6 @@ import {
   ComboboxOptions,
 } from '@headlessui/react';
 import clsx from 'clsx';
-import { useCookies } from 'next-client-cookies';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -172,14 +171,21 @@ const DEFAULT_DATA = {
   ],
 };
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 const RegionRequest = ({
   title = DEFAULT_DATA.title,
   description = DEFAULT_DATA.description,
   buttonText = DEFAULT_DATA.buttonText,
   options = DEFAULT_DATA.regions,
 }) => {
-  const cookies = useCookies();
-  const isRecognized = !!cookies.get('ajs_user_id');
+  const isRecognized = !!getCookie('ajs_user_id');
+
   const [selected, setSelected] = useState();
   const [email, setEmail] = useState();
   const [requestComplete, setRequestComplete] = useState(false);
