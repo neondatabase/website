@@ -40,7 +40,7 @@ Applying additive schema changes in this order will help prevent replication err
 
 ### 2. Handle non-additive schema changes with caution
 
-Non-additive changes, such as dropping a column or altering a column's data type, require careful handling. When performing a non-additive schema change like dropping a column, apply the change on the publisher first, then on the subscriber. 
+Non-additive changes, such as dropping a column or altering a column's data type, require careful handling. When performing a non-additive schema change like dropping a column, apply the change on the publisher first, then on the subscriber.
 
 Non-additive changes are often feasible if applied in the correct order (publisher first). However, always carefully assess how the schema change will impact replication to the subscriber. Will writes still succeed on the subscriber after the change on the publisher? It’s best practice to test schema changes before implementing them in production. For example, test whether writes to the modified publisher schema still execute successfully on the unmodified subscriber schema.
 
