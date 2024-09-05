@@ -6,7 +6,7 @@ const TemplatesPage = () => (
   <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
     <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
       <Container
-        className="grid w-full flex-1 grid-cols-5 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"
+        className="grid w-full flex-1 grid-cols-5 pb-[104px] pt-12 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"
         size="960"
       >
         <div className="col-span-4 col-start-1 max-w-[703px]">

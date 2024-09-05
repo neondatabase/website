@@ -106,7 +106,7 @@ const FilterBar = ({ templates, filteredTemplates, setFilteredTemplates }) => {
               <div className="mt mt-4 flex flex-col gap-y-3">
                 {items.map(({ name, value }) => (
                   <label
-                    className="flex items-center gap-2.5 text-gray-new-10 dark:text-gray-new-90"
+                    className="flex items-center gap-2.5 text-sm leading-tight text-gray-new-10 dark:text-gray-new-90"
                     key={value}
                   >
                     <input
