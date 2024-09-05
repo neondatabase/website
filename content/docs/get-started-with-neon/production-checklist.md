@@ -83,13 +83,13 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 ## Configure your history retention period
 
-Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries among other development-focussed features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
+Neon retains a history of changes for all branches, enabling features like: point-in-time restore, time travel queries, and no-cost branching. This history is invaluable for recovering lost data, investigating issues, viewing the past state of your database, and adding database branching to developer workflows. It can also function as part of your database backup strategy.
 
-The history retention limit is 24 hours for Neon Free Plan users, 7 days for Launch plan users, and 30 days for Scale and Business plan users. Before going into production, select a history retention period that suits your operational requirements.
+By default, Neon's history retention window is set to **1 day** across all plans to help you avoid unexpected storage costs.
+
+If you choose to extend your retention window beyond the default &#8212; to take full advantage of the features that this history enables &#8212; keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches. Make sure you select a history retention period that aligns with your goals.
 
 ![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
-
-A longer history retention period expands your point-in-time restore and time travel query horizons at the cost of increased storage usage.
 
 For more, see [Branch reset and restore](/docs/introduction/point-in-time-restore).
 
