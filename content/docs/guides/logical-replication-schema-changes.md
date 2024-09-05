@@ -79,7 +79,7 @@ For guidance on managing schemas across multiple databases, see:
 - [Flyway: A simple way to manage multiple environment deployments](https://www.red-gate.com/blog/a-simple-way-to-manage-multi-environment-deployments)
 - [How to set up Liquibase with an Existing Project and Multiple Environments](https://docs.liquibase.com/workflows/liquibase-community/existing-project.html)
 
-Some Object Relational Mappers (ORMs) also offer schema migration management across multiple database environments. For example, with Prisma ORM, you can configure multiple `.env` files. Learn more at [Using multiple .env files](https://www.prisma.io/docs/orm/more/development-environment/environment-variables/using-multiple-env-files).
+Some Object Relational Mappers (ORMs) also support schema migration management across multiple database environments. For example, with Prisma ORM, you can configure multiple `.env` files. Learn more at [Using multiple .env files](https://www.prisma.io/docs/orm/more/development-environment/environment-variables/using-multiple-env-files).
 
 Regardless of the schema management tool you choose, ensure that changes adhere to the guidelines for [additive](#1-apply-additive-schema-changes-to-the-subscriber-first) and [non-additive](#2-handle-non-additive-schema-changes-with-caution) schema changes. These can be applied manually or through automated scripts.
 
