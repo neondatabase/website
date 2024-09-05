@@ -159,8 +159,8 @@ _Example: default minimum and maximum autoscale settings_
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
-- [Database branching](/docs/guides/branching-intro), a fundamental Neon feature that lets you integrate your database into developer workflows, create isolated environments for your team, among other use cases
-- [Time Travel](/docs/guides/time-travel-assist) queries and [Point-in-time restore](/docs/introduction/point-in-time-restore) for investingating issues and recovering lost data
+- [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
+- [Time Travel](/docs/guides/time-travel-assist) queries for investingating data issues
 
 The default retention window is **1 day** across all plans to help manage storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 

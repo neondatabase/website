@@ -83,7 +83,7 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 ## Configure your history retention period
 
-Neon retains a history of changes for all branches, enabling features like: point-in-time restore, time travel queries, and no-cost branching. This history is invaluable for recovering lost data, investigating issues, viewing the past state of your database, and adding database branching to developer workflows. It can also function as part of your database backup strategy.
+Neon retains a history of changes for all branches, enabling features like point-in-time restore and time travel queries. It can also function as part of your database backup strategy.
 
 By default, Neon's history retention window is set to **1 day** across all plans to help you avoid unexpected storage costs.
 
