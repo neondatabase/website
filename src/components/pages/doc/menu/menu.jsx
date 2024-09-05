@@ -10,7 +10,6 @@ import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
 import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
 
-import Icon from './icon';
 import Item from './item';
 
 const Section = ({
@@ -92,7 +91,6 @@ const Menu = ({
   title,
   slug,
   basePath,
-  icon = null,
   parentMenu = null,
   items = null,
   closeMobileMenu = null,
@@ -160,7 +158,8 @@ const Menu = ({
             initial={false}
             animate={animateState}
             exit="close"
-            transition={{ ease: 'easeIn', duration: 0.3 }}
+            // NOTE: duration: 0 is needed to prevent the menu from animating out
+            transition={{ ease: 'easeIn', duration: 0 }}
             variants={{
               close: { opacity: 0 },
               open: { opacity: 1 },
@@ -199,10 +198,9 @@ const Menu = ({
                 </div>
 
                 <LinkTag
-                  className="mt-4 flex w-full items-start gap-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
+                  className="mt-4 flex w-full items-start gap-1.5 pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
                   to={slug ? `${basePath}${slug}` : undefined}
                 >
-                  {icon && <Icon title={icon} className="size-5" />}
                   {title}
                 </LinkTag>
               </>

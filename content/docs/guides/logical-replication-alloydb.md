@@ -3,7 +3,7 @@ title: Replicate data from AlloyDB
 subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.646Z'
+updatedOn: '2024-09-04T18:53:01.148Z'
 ---
 
 <LRBeta/>
@@ -22,6 +22,7 @@ This guide describes how to replicate data from AlloyDB Postgres to Neon using n
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 ## Prepare your AlloyDB source database
 
@@ -173,6 +174,12 @@ Testing your logical replication setup ensures that data is being replicated cor
    30
    (1 row)
    ```
+
+Alternatively, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is as expected. For example, if you just ran an insert option on the publisher, the `last_msg_receipt_time` should reflect the time of that operation.
+
+```sql
+SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
+```
 
 ## Switch over your application
 
