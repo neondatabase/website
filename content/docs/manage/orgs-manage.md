@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-08-23T13:51:17.454Z'
+updatedOn: '2024-09-05T19:52:37.922Z'
 ---
 
 <EarlyAccess/>
