@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.659Z'
+updatedOn: '2024-09-05T17:14:45.244Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:

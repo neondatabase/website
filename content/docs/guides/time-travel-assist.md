@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.657Z'
+updatedOn: '2024-09-05T17:14:45.243Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
