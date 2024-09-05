@@ -80,6 +80,10 @@ If you are downgrading your plan, you will be required to remove any projects, b
 
 To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
+## How to prevent further monthly charges to your account
+
+If you are on any of Neon's paid plans, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects from your account will not stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free. For example, if you are on the [Launch](/docs/introduction/plans#launch) plan, which has a base monthly fee of $19 per month, you will continue to be charged $19 a month until you downgrade to the Free plan.
+
 ## Delete your account
 
 To delete your Neon account, please initiate an account deletion request through the Neon support team. If you're a Launch, Scale, or Business plan subscriber, you can generate a support ticket directly from the Neon Console. Navigate to the **Support** link located in the Neon Console sidebar to open the **Create support ticket** modal. Here, you can formally request the deletion of your account. For direct access to this modal, [click here](https://console.neon.tech/app/projects?modal=support). If you are a Free Plan user and do not have access to the **Create support ticket** modal in the Neon Console, please direct your request to `support@neon.tech`.
