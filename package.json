@@ -24,11 +24,10 @@
     "test": "npx cypress open"
   },
   "dependencies": {
-    "@docsearch/react": "^3.6.0",
     "@headlessui/react": "^2.1.2",
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",
-    "@inkeep/widgets": "^0.2.275",
+    "@inkeep/uikit": "^0.3.8",
     "@next/bundle-analyzer": "^14.2.2",
     "@octokit/core": "^6.1.2",
     "@radix-ui/react-dialog": "^1.0.5",
