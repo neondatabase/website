@@ -100,7 +100,7 @@ const Content = () => {
   return (
     <>
       <TemplatesList
-        className="col-span-4 max-w-[703px] lg:order-1 lg:mt-8 sm:mt-6"
+        className="col-span-4 max-w-[703px] lg:order-1 lg:mt-8 lg:max-w-full sm:mt-6"
         templates={filteredTemplates.items}
       />
       <aside className="col-span-1">
