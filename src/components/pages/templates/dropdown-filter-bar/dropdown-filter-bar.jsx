@@ -87,7 +87,7 @@ const DropdownFilter = ({
         <AnimatePresence initial={false}>
           {isOpen && (
             <m.div
-              className="absolute left-0 right-0 top-full mt-1.5 rounded border border-gray-new-94 bg-white p-4 dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,0.50)]"
+              className="absolute left-0 right-0 top-full z-10 mt-1.5 rounded border border-gray-new-94 bg-white p-4 dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,0.50)]"
               initial="closed"
               animate="open"
               exit="closed"
