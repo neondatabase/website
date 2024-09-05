@@ -162,7 +162,7 @@ By default, Neon retains a history of changes for all branches in your project, 
 - [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investingating data issues
 
-The default retention window is **1 day** across all plans to help manage storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
+The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 
 Also note that adjusting the history retention period affects _all_ branches in your project.
 
