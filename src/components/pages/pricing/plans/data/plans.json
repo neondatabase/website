@@ -238,7 +238,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": true,
+      "scale": false,
       "business": true
     },
     {
