@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 
 import useClickOutside from 'hooks/use-click-outside';
 
+import { filterTemplates } from '../content/content';
+
 import ChevronDownIcon from './images/chevron.inline.svg';
 import CloseIcon from './images/close.inline.svg';
 
@@ -36,6 +38,7 @@ function getButtonText(filter, filteredTemplates) {
 
 const DropdownFilter = ({
   filter,
+  templates,
   filteredTemplates,
   setFilteredTemplates,
   handleFilterChange,
@@ -53,12 +56,16 @@ const DropdownFilter = ({
   };
 
   const clearFilters = () => {
-    setFilteredTemplates({
-      filters: {
-        ...filteredTemplates.filters,
-        [filter.type.toLowerCase()]: [],
-      },
-      items: filteredTemplates.items,
+    setFilteredTemplates((prevState) => {
+      const updatedFilters = { ...prevState.filters };
+      updatedFilters[filter.type.toLowerCase()] = [];
+
+      const filteredItems = filterTemplates(templates, updatedFilters);
+
+      return {
+        filters: updatedFilters,
+        items: filteredItems,
+      };
     });
   };
 
@@ -155,6 +162,7 @@ const DropdownFilter = ({
 
 DropdownFilter.propTypes = {
   filter: PropTypes.object.isRequired,
+  templates: PropTypes.array.isRequired,
   filteredTemplates: PropTypes.object.isRequired,
   handleFilterChange: PropTypes.func.isRequired,
   setFilteredTemplates: PropTypes.func.isRequired,
@@ -163,6 +171,7 @@ DropdownFilter.propTypes = {
 const DropdownFilterBar = ({
   className,
   filters,
+  templates,
   filteredTemplates,
   setFilteredTemplates,
   handleFilterChange,
@@ -172,6 +181,7 @@ const DropdownFilterBar = ({
       <DropdownFilter
         key={filter.type}
         filter={filter}
+        templates={templates}
         filteredTemplates={filteredTemplates}
         handleFilterChange={handleFilterChange}
         setFilteredTemplates={setFilteredTemplates}
@@ -183,6 +193,7 @@ const DropdownFilterBar = ({
 DropdownFilterBar.propTypes = {
   className: PropTypes.string,
   filters: PropTypes.array.isRequired,
+  templates: PropTypes.array.isRequired,
   filteredTemplates: PropTypes.object.isRequired,
   handleFilterChange: PropTypes.func.isRequired,
   setFilteredTemplates: PropTypes.func.isRequired,

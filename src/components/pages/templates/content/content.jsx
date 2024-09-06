@@ -51,7 +51,7 @@ const updateFilters = (prevFilters, type, value, isChecked) => ({
     : (prevFilters[type] || []).filter((v) => v !== value),
 });
 
-const filterTemplates = (templates, filters) =>
+export const filterTemplates = (templates, filters) =>
   templates.filter((template) =>
     Object.entries(filters).every(
       ([type, values]) =>
@@ -107,6 +107,7 @@ const Content = () => {
         <DropdownFilterBar
           className="hidden lg:grid"
           filters={filters}
+          templates={templates}
           filteredTemplates={filteredTemplates}
           setFilteredTemplates={setFilteredTemplates}
           handleSearch={handleSearch}
