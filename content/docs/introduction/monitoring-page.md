@@ -122,6 +122,10 @@ Tracking rows inserted, updated, and deleted over time provides insights into yo
 
 The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
+![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
+
 ### Replication delay seconds 
 
 The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+
+![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)
