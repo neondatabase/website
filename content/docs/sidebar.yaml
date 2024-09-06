@@ -525,6 +525,8 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
+            - title: Sequin
+              slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Replicate to Neon
@@ -539,8 +541,6 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
-            - title: Sequin
-              slug: guides/sequin
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
         - section: Schema Migration
