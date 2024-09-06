@@ -157,7 +157,14 @@ _Example: default minimum and maximum autoscale settings_
 
 ### Configure history retention
 
-By default, Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/usage-metrics#storage).
+By default, Neon retains a history of changes for all branches in your project, enabling features like:
+
+- [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
+- [Time Travel](/docs/guides/time-travel-assist) queries for investingating data issues
+
+The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
+
+Also note that adjusting the history retention period affects _all_ branches in your project.
 
 To configure the history retention period for a project:
 
@@ -167,6 +174,8 @@ To configure the history retention period for a project:
    ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
 5. Click **Save**.
+
+For more information about available plan limits, see [Neon plans](/docs/introduction/plans).
 
 ## Enable logical replication
 
