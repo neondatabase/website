@@ -47,7 +47,7 @@ Before deleting your account, you must take deliberate steps to remove your reso
 
 To protect your data, each resource must be removed individually &#8212; nothing is deleted in bulk. The **Delete** action will stay disabled until all conditions are met.
 
-![Alt text](/docs/manage/delete_account.png)
+![delete personal account](/docs/manage/delete_account.png)
 
 Here's where to go in the Neon Console to complete these actions:
 
