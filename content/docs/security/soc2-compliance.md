@@ -1,7 +1,7 @@
 ---
 title: SOC 2 compliance
 enableTableOfContents: false
-updatedOn: '2024-01-18T12:13:39.430Z'
+updatedOn: '2024-09-02T13:42:56.664Z'
 ---
 
 Neon has successfully achieved both SOC 2 Type 1 and Type 2 compliance, demonstrating our commitment to data security and privacy. These compliance milestones, validated by independent auditors, affirm our adherence to the criteria set forth by the American Institute of Certified Public Accountants (AICPA) in the areas of security, availability, processing integrity, confidentiality, and privacy.
@@ -13,5 +13,5 @@ The **SOC 2 Type 2 Compliance** audit assessed the operational effectiveness of 
 Achieving SOC 2 Type 1 and Type 2 compliance underscores Neon's ongoing commitment to safeguarding customer data and maintaining a high level of security. We will continue to invest in regular audits and adhere to industry best practices to ensure the security, integrity, and privacy of the data you entrust us with.
 
 <Admonition type="note">
-Neon [Scale](/docs/introduction/plans#scale) plan users can request SOC 2 audit reports through our [Trust Center](https://trust.neon.tech/). If you have other security questions or concerns, please contact us at [security@neon.tech](mailto:security@neon.tech).
+Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan users can request SOC 2 audit reports through our [Trust Center](https://trust.neon.tech/). If you have other security questions or concerns, please contact us at [security@neon.tech](mailto:security@neon.tech).
 </Admonition>

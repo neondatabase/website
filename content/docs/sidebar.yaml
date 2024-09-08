@@ -230,6 +230,10 @@
               slug: guides/logical-replication-manage
             - title: Neon specifics
               slug: guides/logical-replication-neon
+            - title: Schema management
+              slug: guides/logical-replication-schema-changes
+            - title: Logical replication tips
+              slug: guides/logical-replication-tips
         - title: Read replicas
           slug: introduction/read-replicas
           items:
@@ -399,6 +403,22 @@
           slug: guides/sqlalchemy
         - title: Symfony
           slug: guides/symfony
+    - title: Languages
+      slug: get-started-with-neon/languages
+      icon: languages
+      items:
+        - title: Elixir
+          slug: guides/elixir-ecto
+        - title: Go
+          slug: guides/go
+        - title: Java
+          slug: guides/java
+        - title: JavaScript
+          slug: guides/javascript
+        - title: Python
+          slug: guides/python
+        - title: Rust
+          slug: guides/rust
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -559,6 +579,8 @@
           items:
             - title: Auth0
               slug: guides/auth-auth0
+            - title: Auth.js
+              slug: guides/auth-authjs
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -837,3 +859,6 @@
     - title: Changelog
       slug: changelog
       icon: changelog
+    - title: RSS feeds
+      slug: reference/feeds
+      icon: feeds

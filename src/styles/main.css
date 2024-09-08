@@ -84,10 +84,6 @@
   inkeep-portal {
     @apply relative z-50;
   }
-
-  [data-docsearch-fixed] {
-    @apply sr-only;
-  }
 }
 
 @layer utilities {

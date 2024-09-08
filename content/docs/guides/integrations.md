@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-08-23T18:00:32.992Z'
+updatedOn: '2024-09-08T10:35:13.813Z'
 ---
 
 ## Deploy
@@ -167,6 +167,8 @@ updatedOn: '2024-08-23T18:00:32.992Z'
 <TechnologyNavigation open>
 
 <a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
+
+<a href="/docs/guides/auth-authjs" title="Auth.js" description="Authenticate Neon Postgres application users with Auth.js" icon="auth0"></a>
 
 <a href="/docs/guides/auth-clerk" title="Clerk" description="Authenticate Neon Postgres application users with Clerk" icon="clerk"></a>
 

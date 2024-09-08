@@ -19,6 +19,7 @@ module.exports = {
     '/docs/postgres*',
     '/blog-sitemap.xml',
     '/blog/*',
+    '/guides/rss.xml',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],

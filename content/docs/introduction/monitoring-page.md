@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.953Z'
+updatedOn: '2024-09-06T18:23:43.942Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -12,6 +12,8 @@ The **Monitoring** dashboard in the Neon console provides several graphs for mon
 - [Database size](#database-size)
 - [Deadlocks](#deadlocks)
 - [Rows](#rows)
+- [Replication delay bytes](#replication-delay-bytes)
+- [Replication delay seconds](#replication-delay-seconds)
 
 Your Neon plan defines the range of data you can view.
 
@@ -19,7 +21,8 @@ Your Neon plan defines the range of data you can view.
 | ----------------------------------------------- | ------------------------ |
 | [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
-| [Scale](/docs/introduction/plans#scale)         | Last 14 days (336 hours) |
+| [Scale](/docs/introduction/plans#scale)         | Last 7 days (168 hours) |
+| [Business](/docs/introduction/plans#business)         | Last 14 days (336 hours) |
 
 A shorter or custom period can be selected within the permitted range by selecting the desired option from the **Other** menu on the dashboard.
 
@@ -114,3 +117,15 @@ The **Rows** graph shows the number of rows deleted, updated, and inserted over 
 Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can use this data to identify trends or irregularities, such as insert spikes or an unusual number of deletions.
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.jpg)
+
+### Replication delay bytes 
+
+The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+
+![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
+
+### Replication delay seconds 
+
+The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+
+![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)

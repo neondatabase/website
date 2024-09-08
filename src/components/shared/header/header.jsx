@@ -9,7 +9,6 @@ import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -33,7 +32,7 @@ LogoLink.propTypes = themePropTypes;
 
 const Navigation = async ({ isDarkTheme }) => (
   <nav>
-    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden">
+    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
       {MENUS.header.map(({ to, text, items }, index) => {
         const Tag = to ? Link : 'button';
         return (
@@ -198,7 +197,7 @@ const Header = async ({
   theme = null,
   isSticky = false,
   isStickyOverlay = false,
-  isBlogPage = false,
+  showSearchInput = false,
   isDocPage = false,
   withBorder = false,
 }) => {
@@ -224,11 +223,7 @@ const Header = async ({
                 <LogoLink isDarkTheme={isDarkTheme} />
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <Search
-                  className="w-[272px]"
-                  indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-                />
-                <InkeepTrigger />
+                <InkeepTrigger className="w-[272px]" showAIButton />
               </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar />
@@ -245,7 +240,7 @@ const Header = async ({
           </Container>
         )}
       </HeaderWrapper>
-      <MobileMenu isDarkTheme={isDarkTheme} isBlogPage={isBlogPage} isDocPage={isDocPage} />
+      <MobileMenu isDarkTheme={isDarkTheme} showSearchInput={showSearchInput} />
     </>
   );
 };
@@ -255,7 +250,7 @@ Header.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
+  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,
 };

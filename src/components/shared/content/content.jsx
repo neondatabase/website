@@ -19,11 +19,11 @@ import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import Testimonial from 'components/pages/use-case/testimonial';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
-import UseCaseCta from 'components/pages/use-case/use-case-cta';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
+import CtaBlock from 'components/shared/cta-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import getCodeProps from 'lib/rehype-code-props';
@@ -31,6 +31,7 @@ import getCodeProps from 'lib/rehype-code-props';
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
 import ImageZoom from '../image-zoom';
+import RegionRequest from '../region-request';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
@@ -133,7 +134,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   TabItem,
   InfoBlock,
   DocsList,
-  CTA: isUseCase ? UseCaseCta : DocCta,
+  RegionRequest,
+  CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   UseCaseList,
   UseCaseContext,

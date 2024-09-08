@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-08-20T23:55:48.552Z'
+updatedOn: '2024-09-03T14:54:52.675Z'
 ---
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
@@ -27,6 +27,8 @@ Neon currently supports the following AWS regions:
 <Admonition type="note">
 The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects.
 </Admonition>
+
+<RegionRequest />
 
 ## Select a region for your Neon project
 
@@ -81,9 +83,5 @@ Neon Free Plan users are limited to a single project. In this case, you can expo
 ### Logical replication
 
 As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
-
-## Requesting new regions
-
-Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 
 <NeedHelp/>
