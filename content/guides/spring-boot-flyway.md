@@ -27,6 +27,7 @@ Instead of Maven, you can use Gradle for dependency management. The steps will b
 ## Setting up the Project
 
 Let's create a new Spring Boot project using [Spring Initializr](https://start.spring.io/) with the following dependencies:
+
 - Spring Web
 - Spring Data JPA
 - PostgreSQL Driver
@@ -91,6 +92,7 @@ Flyway uses SQL scripts for migrations. These scripts should be placed in the `s
 Unlike other migration tools, Flyway uses a version-based naming convention for migration scripts so that it can track the order in which they should be applied. This ensures that migrations are applied in the correct order and only once, but you need to be careful when renaming or modifying existing scripts.
 
 Naming convention for migration scripts:
+
 - `V<VERSION>__<DESCRIPTION>.sql`
 - Example: `V2__Create_users_table.sql`
 

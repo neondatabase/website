@@ -25,6 +25,7 @@ Before we begin, ensure you have:
 ## Setting up the Project
 
 1. Create a new Spring Boot project using [Spring Initializr](https://start.spring.io/) with the following dependencies:
+
    - Spring Web
    - Spring Data JPA
    - PostgreSQL Driver
@@ -97,10 +98,12 @@ spring.jpa.hibernate.ddl-auto=update
 This allows Hibernate to automatically update the schema based on your entity classes.
 
 **Pros:**
+
 - Easy to use during development
 - Automatically reflects changes in entity classes
 
 **Cons:**
+
 - Not suitable for production use due to potential data loss or corruption
 - Doesn't provide fine-grained control over schema changes
 
@@ -125,10 +128,12 @@ spring.jpa.properties.javax.persistence.schema-generation.scripts.create-source=
 This generates a `create.sql` file in your project root, which you can then manually review and apply to your database.
 
 **Pros:**
+
 - Provides a SQL script that you can review and modify
 - Allows for version control of schema changes
 
 **Cons:**
+
 - Requires manual application of scripts
 - Doesn't handle incremental updates well
 
@@ -139,10 +144,12 @@ You can use Hibernate's `SchemaManagementTool` for more control over schema upda
 You can call this method on application startup or trigger it manually when needed.
 
 **Pros:**
+
 - Provides programmatic control over schema updates
 - Can be integrated into your application's lifecycle
 
 **Cons:**
+
 - Requires careful management to avoid unintended schema changes
 - May not handle all types of schema changes smoothly
 
@@ -162,11 +169,13 @@ To use Flyway, add the dependency to your `pom.xml`:
 Then create migration scripts in `src/main/resources/db/migration` following Flyway's naming convention (e.g., `V1__Create_user_table.sql`).
 
 **Pros:**
+
 - Provides fine-grained control over schema changes
 - Supports versioning and rollbacks
 - Works well in production environments
 
 **Cons:**
+
 - Requires manual creation of migration scripts
 - Adds complexity to the development process
 
