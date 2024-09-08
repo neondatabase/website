@@ -3,7 +3,6 @@ title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
 updatedOn: '2024-07-02T09:17:55.465Z'
-tag: new
 ---
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.

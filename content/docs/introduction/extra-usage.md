@@ -37,7 +37,7 @@ The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable
 
 ## Extra usage
 
-The [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
+The [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), and [Business](/docs/introduction/plans#business) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
 
 ### Launch plan
 

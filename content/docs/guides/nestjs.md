@@ -2,7 +2,6 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 enableTableOfContents: true
-tag: new
 updatedOn: '2024-08-07T21:36:52.660Z'
 ---
 
