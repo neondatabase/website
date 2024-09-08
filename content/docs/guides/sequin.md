@@ -91,14 +91,17 @@ Set up a consumer in Sequin to stream changes from your database.
 3. Define any filters for the changes you want to capture. For example, you might want to only process orders with a value greater than a certain amount, or accounts with a certain status.
 
 4. Choose whether you want your consumer to process [rows or changes](https://sequinstream.com/docs/core-concepts#rows-and-changes):
+
    - **Rows**: Captures the latest state of records when a row is inserted or updated.
    - **Changes**: Captures every `insert`, `update`, and `delete`, including `OLD` values for updates and deletes.
 
 5. Select your preferred method for [receiving changes](https://sequinstream.com/docs/core-concepts#consumption):
+
    - **HTTP Push** (Webhooks): Sequin sends changes to your specified endpoint.
    - **HTTP Pull** (similar to SQS): Your application pulls changes from Sequin.
 
 6. Enter the final details for your consumer:
+
    - Give your consumer a name (e.g., `neon-changes-consumer`).
    - If using HTTP Push, provide the endpoint URL where Sequin should send the changes. You can also provide encrypted headers.
    - Optionally, set a timeout and add an endpoint path.
@@ -111,9 +114,9 @@ Your consumer is now created and will start processing changes from your Neon da
 
 You're now using Sequin with Neon to capture and stream changes from your database. From here, you can tailor your implementation for your use case:
 
-* Use Sequin to trigger workflows in tools like Inngest or trigger.dev, activate side-effects in your app, setup audit logs, or generate denormalized views.
-* Tailor your consumer's [filtering](https://sequinstream.com/docs/core-concepts#filtering) and settings to meet your requirements.
-* Try a [pull consumer](https://sequinstream.com/docs/core-concepts#pull-consumers) with [our SDKs](https://sequinstream.com/docs/sdks) to completely manage how you retrieve changes at scale.
-* Use Sequins [observability and monitoring](https://console.sequinstream.com/consumers) to debug and keep production humming.
+- Use Sequin to trigger workflows in tools like Inngest or trigger.dev, activate side-effects in your app, setup audit logs, or generate denormalized views.
+- Tailor your consumer's [filtering](https://sequinstream.com/docs/core-concepts#filtering) and settings to meet your requirements.
+- Try a [pull consumer](https://sequinstream.com/docs/core-concepts#pull-consumers) with [our SDKs](https://sequinstream.com/docs/sdks) to completely manage how you retrieve changes at scale.
+- Use Sequins [observability and monitoring](https://console.sequinstream.com/consumers) to debug and keep production humming.
 
 Learn more in our [docs](https://sequinstream.com/docs/introduction). And if you need anything, Sequin is open source - just open an issue or reach out to us: <a href="mailto:founders@sequinstream.com">founders@sequinstream.com</a>.
