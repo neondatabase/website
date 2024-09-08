@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2024-09-08T11:01:35.765Z'
+updatedOn: '2024-09-08T11:05:11.784Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
