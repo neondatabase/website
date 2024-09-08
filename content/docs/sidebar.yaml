@@ -62,7 +62,6 @@
               slug: guides/laravel
             - title: NestJS
               slug: guides/nestjs
-              tag: new
             - title: Next.js
               slug: guides/nextjs
             - title: Node.js
@@ -73,17 +72,14 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
-              tag: new
             - title: Reflex
               slug: guides/reflex
-              tag: new
             - title: Remix
               slug: guides/remix
             - title: Ruby on Rails
               slug: guides/ruby-on-rails
             - title: SolidStart
               slug: guides/solid-start
-              tag: new
             - title: SQLAlchemy
               slug: guides/sqlalchemy
             - title: Symfony
@@ -94,7 +90,6 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
-          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -374,31 +369,26 @@
           slug: guides/laravel
         - title: NestJS
           slug: guides/nestjs
-          tag: new
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
         - title: Phoenix
           slug: guides/phoenix
-          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
         - title: React
           slug: guides/react
-          tag: new
         - title: Reflex
           slug: guides/reflex
-          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
         - title: SolidStart
           slug: guides/solid-start
-          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -485,7 +475,6 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -498,7 +487,6 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
-              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -515,6 +503,7 @@
               slug: guides/logical-replication-decodable
             - title: Estuary Flow
               slug: guides/logical-replication-estuary-flow
+              tag: new
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -525,24 +514,29 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
+              tag: new
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Replicate to Neon
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
+              tag: new
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
             - title: Cloud SQL
+              tag: new
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
+              tag: new
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
             - title: Sequin
               slug: guides/sequin
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
+              tag: new
         - section: Schema Migration
           items:
             - title: Django
@@ -581,6 +575,7 @@
               slug: guides/auth-auth0
             - title: Auth.js
               slug: guides/auth-authjs
+              tag: new
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -861,4 +856,5 @@
       icon: changelog
     - title: RSS feeds
       slug: reference/feeds
+      tag: new
       icon: feeds

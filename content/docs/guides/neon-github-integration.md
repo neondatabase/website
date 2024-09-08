@@ -5,7 +5,6 @@ subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-tag: new
 updatedOn: '2024-08-19T11:54:54.454Z'
 ---
 
