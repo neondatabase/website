@@ -22,7 +22,7 @@ Neon currently supports the following AWS regions:
 
 ## Azure regions
 
-- East US 2 region &mdash; `azure-us-east-2`
+- East US 2 region &mdash; `azure-eastus2`
 
 <Admonition type="note">
 The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects.
