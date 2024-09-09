@@ -73,7 +73,7 @@ const TemplatePage = ({ params }) => {
         </Link>
 
         <div className="mx-auto max-w-[512px] lg:mt-5">
-          <h1 className="text-[44px] font-medium leading-none tracking-extra-tight xl:text-4xl lg:text-[32px] sm:text-[28px]">
+          <h1 className="font-title text-[44px] font-medium leading-none tracking-extra-tight xl:text-4xl lg:text-[32px] sm:text-[28px]">
             {name}
           </h1>
           <p className="mt-3 text-lg font-light leading-snug tracking-extra-tight text-gray-new-20 dark:text-gray-new-80 sm:mt-2 sm:text-base">
