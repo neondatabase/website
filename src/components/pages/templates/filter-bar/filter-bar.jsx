@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useWindowSize } from 'react-use';
 
 import ChevronRightIcon from './images/chevron-right.inline.svg';
 
@@ -12,6 +13,7 @@ const FilterGroup = ({
   handleFilterChange,
   toggleDropdown,
   isOpen,
+  isDesktop,
 }) => {
   const [filterCount, setFilterCount] = useState(0);
 
@@ -41,13 +43,16 @@ const FilterGroup = ({
     >
       <fieldset>
         <button
-          className="flex w-full items-center justify-between"
+          className="flex w-full cursor-default items-center justify-between lg:cursor-pointer"
           type="button"
           onClick={() => toggleDropdown(type)}
         >
           <div className="flex items-center gap-3">
             <ChevronRightIcon
-              className={clsx('h-5 w-5 transition-transform duration-200', isOpen && 'rotate-90')}
+              className={clsx(
+                'hidden h-5 w-5 transition-transform duration-200 lg:block',
+                isOpen && 'rotate-90'
+              )}
             />
             <legend className="block font-medium leading-tight tracking-extra-tight lg:text-sm">
               {type}
@@ -60,12 +65,12 @@ const FilterGroup = ({
           )}
         </button>
         <LazyMotion features={domAnimation}>
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {isOpen && (
               <m.div
-                initial="closed"
+                initial={isDesktop ? 'open' : 'closed'}
                 animate="open"
-                exit="closed"
+                exit={isDesktop ? 'open' : 'closed'}
                 variants={variants}
                 onMouseDown={(e) => e.preventDefault()}
               >
@@ -117,6 +122,7 @@ FilterGroup.propTypes = {
   handleFilterChange: PropTypes.func.isRequired,
   toggleDropdown: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  isDesktop: PropTypes.bool.isRequired,
 };
 
 const FilterBar = ({
@@ -128,15 +134,20 @@ const FilterBar = ({
   handleClearAll,
 }) => {
   const [openGroup, setOpenGroup] = useState(null);
+  const { width } = useWindowSize();
+
+  const isDesktop = width > 1024;
 
   const toggleDropdown = (type) => {
-    setOpenGroup(openGroup === type ? null : type);
+    if (!isDesktop) {
+      setOpenGroup(openGroup === type ? null : type);
+    }
   };
 
   return (
     <form className={className}>
       <input
-        className="h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight text-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] lg:w-full"
+        className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40 lg:w-full"
         type="search"
         placeholder="Search"
         onChange={handleSearch}
@@ -162,7 +173,8 @@ const FilterBar = ({
             filteredTemplates={filteredTemplates}
             handleFilterChange={handleFilterChange}
             toggleDropdown={toggleDropdown}
-            isOpen={openGroup === type}
+            isOpen={isDesktop || openGroup === type}
+            isDesktop={isDesktop}
           />
         ))}
       </ul>
