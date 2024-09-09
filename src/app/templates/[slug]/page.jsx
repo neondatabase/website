@@ -91,7 +91,7 @@ const TemplatePage = ({ params }) => {
                       {item.label}
                     </span>
                     <span className="leading-tight tracking-extra-tight text-gray-new-30 dark:text-gray-new-70">
-                      {item.value}
+                      {typeof item.value === 'string' ? item.value : item.value.join(', ')}
                     </span>
                   </li>
                 )
