@@ -116,13 +116,13 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                       |
-| ------------- | -------------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                                     |
-| **Branches**  | 500 per project                                                      |
-| **Databases** | Unlimited                                                            |
-| **Storage**   | 50 GiB of data storage                                               |
-| **Compute**   | 750 compute hours a month for all computes across all projects       |
+| Usage type    | Plan allowance                                                 |
+| ------------- | -------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                               |
+| **Branches**  | 500 per project                                                |
+| **Databases** | Unlimited                                                      |
+| **Storage**   | 50 GiB of data storage                                         |
+| **Compute**   | 750 compute hours a month for all computes across all projects |
 
 ### Scale plan extra usage
 
