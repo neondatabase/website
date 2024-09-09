@@ -97,6 +97,10 @@ const Content = () => {
     [setFilteredTemplates]
   );
 
+  const handleClearAll = () => {
+    setFilteredTemplates((prevState) => ({ ...prevState, filters: {}, items: templates }));
+  };
+
   return (
     <>
       <TemplatesList
@@ -119,6 +123,7 @@ const Content = () => {
           filteredTemplates={filteredTemplates}
           handleSearch={handleSearch}
           handleFilterChange={handleFilterChange}
+          handleClearAll={handleClearAll}
         />
       </aside>
     </>
