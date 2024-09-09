@@ -647,6 +647,9 @@
       items:
         - title: Neon SDKs
           slug: reference/sdk
+    - title: Terraform
+      slug: https://github.com/kislerdm/terraform-provider-neon
+      icon: management
 - section: Postgres
   items:
     - title: PostgreSQL docs
