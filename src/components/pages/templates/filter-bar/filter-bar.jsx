@@ -5,9 +5,15 @@ import { useEffect, useState } from 'react';
 
 import ChevronRightIcon from './images/chevron-right.inline.svg';
 
-const FilterGroup = ({ type, items, filteredTemplates, handleFilterChange }) => {
+const FilterGroup = ({
+  type,
+  items,
+  filteredTemplates,
+  handleFilterChange,
+  toggleDropdown,
+  isOpen,
+}) => {
   const [filterCount, setFilterCount] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
 
   const variants = {
     open: {
@@ -21,10 +27,6 @@ const FilterGroup = ({ type, items, filteredTemplates, handleFilterChange }) => 
       opacity: 0,
       height: 0,
     },
-  };
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const FilterGroup = ({ type, items, filteredTemplates, handleFilterChange }) => 
         <button
           className="flex w-full items-center justify-between"
           type="button"
-          onClick={toggleDropdown}
+          onClick={() => toggleDropdown(type)}
         >
           <div className="flex items-center gap-3">
             <ChevronRightIcon
@@ -113,6 +115,8 @@ FilterGroup.propTypes = {
     items: PropTypes.array.isRequired,
   }).isRequired,
   handleFilterChange: PropTypes.func.isRequired,
+  toggleDropdown: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 const FilterBar = ({
@@ -122,39 +126,49 @@ const FilterBar = ({
   handleSearch,
   handleFilterChange,
   handleClearAll,
-}) => (
-  <form className={className}>
-    <input
-      className="h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight text-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] lg:w-full"
-      type="search"
-      placeholder="Search"
-      onChange={handleSearch}
-    />
-    <div className="mt-[26px] flex items-center justify-between">
-      <span className="font-semibold leading-tight tracking-extra-tight">Filters</span>
-      {Object.keys(filteredTemplates.filters).length > 0 && (
-        <button
-          className="text-sm leading-none tracking-tighter text-gray-new-30 dark:text-gray-new-70"
-          type="button"
-          onClick={handleClearAll}
-        >
-          Clear all
-        </button>
-      )}
-    </div>
-    <ul className="mt-5 flex flex-col lg:mt-4">
-      {filters.map(({ type, items }) => (
-        <FilterGroup
-          key={type}
-          type={type}
-          items={items}
-          filteredTemplates={filteredTemplates}
-          handleFilterChange={handleFilterChange}
-        />
-      ))}
-    </ul>
-  </form>
-);
+}) => {
+  const [openGroup, setOpenGroup] = useState(null);
+
+  const toggleDropdown = (type) => {
+    setOpenGroup(openGroup === type ? null : type);
+  };
+
+  return (
+    <form className={className}>
+      <input
+        className="h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight text-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] lg:w-full"
+        type="search"
+        placeholder="Search"
+        onChange={handleSearch}
+      />
+      <div className="mt-[26px] flex items-center justify-between">
+        <span className="font-semibold leading-tight tracking-extra-tight">Filters</span>
+        {Object.keys(filteredTemplates.filters).length > 0 && (
+          <button
+            className="text-sm leading-none tracking-tighter text-gray-new-30 dark:text-gray-new-70"
+            type="button"
+            onClick={handleClearAll}
+          >
+            Clear all
+          </button>
+        )}
+      </div>
+      <ul className="mt-5 flex flex-col lg:mt-4">
+        {filters.map(({ type, items }) => (
+          <FilterGroup
+            key={type}
+            type={type}
+            items={items}
+            filteredTemplates={filteredTemplates}
+            handleFilterChange={handleFilterChange}
+            toggleDropdown={toggleDropdown}
+            isOpen={openGroup === type}
+          />
+        ))}
+      </ul>
+    </form>
+  );
+};
 
 FilterBar.propTypes = {
   className: PropTypes.string,
