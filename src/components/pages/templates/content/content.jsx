@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react';
 
-import DropdownFilterBar from 'components/pages/templates/dropdown-filter-bar';
 import FilterBar from 'components/pages/templates/filter-bar';
 import TemplatesList from 'components/pages/templates/templates-list';
 import templates from 'utils/data/templates';
@@ -108,17 +107,7 @@ const Content = () => {
         templates={filteredTemplates.items}
       />
       <aside className="col-span-1">
-        <DropdownFilterBar
-          className="hidden lg:grid"
-          filters={filters}
-          templates={templates}
-          filteredTemplates={filteredTemplates}
-          setFilteredTemplates={setFilteredTemplates}
-          handleSearch={handleSearch}
-          handleFilterChange={handleFilterChange}
-        />
         <FilterBar
-          className="lg:hidden"
           filters={filters}
           filteredTemplates={filteredTemplates}
           handleSearch={handleSearch}
