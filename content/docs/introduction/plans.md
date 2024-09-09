@@ -122,7 +122,7 @@ The Scale plan includes the following usage allowances:
 | **Branches**  | 500 per project                                                      |
 | **Databases** | Unlimited                                                            |
 | **Storage**   | 50 GiB of data storage                                               |
-| **Compute**   | 750 compute hours a month month for all computes across all projects |
+| **Compute**   | 750 compute hours a month for all computes across all projects       |
 
 ### Scale plan extra usage
 
