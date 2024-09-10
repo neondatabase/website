@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
+import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import LINKS from 'constants/links';
+import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import BackIcon from 'images/pages/templates/back.inline.svg';
 import GitHubIcon from 'images/pages/templates/github.inline.svg';
 import NetlifyIcon from 'images/pages/templates/netlify.inline.svg';
@@ -19,9 +21,15 @@ export async function generateMetadata({ params }) {
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
   const { name, description } = template;
+  const encodedTitle = Buffer.from(name).toString('base64');
+
   return getMetadata({
     title: `${name} - Neon Templates`,
     description,
+    imagePath:
+      name.length < MAX_TITLE_LENGTH
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}&breadcrumb=${btoa('Templates')}`
+        : DEFAULT_IMAGE_PATH,
   });
 }
 export async function generateStaticParams() {
