@@ -71,7 +71,7 @@ In this scenario you've been using Neon for personal projects for some time, and
 
 ## Request conversion from support
 
-If you want us to handle this conversion for you, you can contact our [Customer Success](mailto:customer-success@neon.tech) team to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
+If you want us to handle this conversion for you, you can contact [Neon Support](https://neon.tech/docs/introduction/support#support-channels) to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
 
 ## Limitations
 

@@ -226,7 +226,7 @@ Now that you have the `Product` entity, let's add a new column to the `products`
    }
    ```
 
-Run your application, and Hibernate will automatically add the `description` column to the `products` table. Quite convenient for development!
+2. Run your application, and Hibernate will automatically add the `description` column to the `products` table. Quite convenient for development!
 
 ### Renaming and Dropping Columns
 
