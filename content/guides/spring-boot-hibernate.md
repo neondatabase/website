@@ -32,23 +32,23 @@ Before we begin, ensure you have:
 
 2. If you're using Maven, your `pom.xml` should include these dependencies:
 
-    ```xml
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
-    ```
+   ```xml
+   <dependencies>
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-data-jpa</artifactId>
+       </dependency>
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+       <dependency>
+           <groupId>org.postgresql</groupId>
+           <artifactId>postgresql</artifactId>
+           <scope>runtime</scope>
+       </dependency>
+   </dependencies>
+   ```
 
 3. Extract the project and open it in your favorite IDE.
 
@@ -216,15 +216,15 @@ Now that you have the `Product` entity, let's add a new column to the `products`
 
 1. Add the new field to your entity class:
 
-    ```java
-    @Entity
-    public class Product {
-        // ...existing fields
+   ```java
+   @Entity
+   public class Product {
+       // ...existing fields
 
-        @Column(name = "description")
-        private String description;
-    }
-    ```
+       @Column(name = "description")
+       private String description;
+   }
+   ```
 
 Run your application, and Hibernate will automatically add the `description` column to the `products` table. Quite convenient for development!
 
@@ -234,16 +234,16 @@ When using `update`, Hibernate doesn't handle column rename or drop operations a
 
 1. Update the `@Column` annotation in your entity:
 
-    ```java
-    @Column(name = "new_column_name")
-    private String oldColumnName;
-    ```
+   ```java
+   @Column(name = "new_column_name")
+   private String oldColumnName;
+   ```
 
 2. Create a migration script to rename the column:
 
-    ```sql
-    ALTER TABLE users RENAME COLUMN old_column_name TO new_column_name;
-    ```
+   ```sql
+   ALTER TABLE users RENAME COLUMN old_column_name TO new_column_name;
+   ```
 
 The same applies to dropping columns, where you'll need to create a migration script to drop the column from the table:
 
