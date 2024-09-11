@@ -94,7 +94,7 @@ For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-
 
 You can include resetting database branches as part of your CI/CD workflow. For example, when **starting a new feature** or **refreshing staging**.
 
-### For New features
+### For new features
 
 Initiate feature development by resetting your development branch to align with staging or production, ensuring a fresh starting point. Use the command:
 
