@@ -66,6 +66,12 @@ export default {
     pathname: LINKS.demos,
     imagePath: '/images/social-previews/demos.jpg',
   },
+  deploy: {
+    title: 'Neon Deploy — Neon',
+    description: 'Join us at 10:00 AM PT, October 1st for presentations about Neon Deploy.',
+    pathname: LINKS.deploy,
+    imagePath: '/images/social-previews/deploy.jpg',
+  },
   developerDays1: {
     title: 'Neon Developer Days — Neon',
     description:
@@ -79,6 +85,12 @@ export default {
       'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
+  },
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
