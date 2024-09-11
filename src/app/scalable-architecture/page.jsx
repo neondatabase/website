@@ -1,3 +1,4 @@
+import ContactUs from 'components/pages/scalable-architecture/contact-us';
 import Hero from 'components/pages/scalable-architecture/hero';
 import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
@@ -10,11 +11,13 @@ export const metadata = getMetadata({ ...SEO_DATA.scalableArchitecture, robotsNo
 const ScalableArchitecturePage = () => (
   <Layout>
     <Hero />
+    <ContactUs />
     <Cta
-      className="pb-[234px] pt-[350px] xl:py-[230px] lg:pb-[156px] lg:pt-[200px] sm:pb-[110px] sm:pt-[116px]"
+      className="pb-[245px] pt-[350px] xl:py-[230px] lg:pb-[156px] lg:pt-[200px] sm:pb-[110px] sm:pt-[116px]"
       title="Get started with Neon"
-      buttonClassName="mt-9 h-12 w-[188px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
-      buttonText="Request a free trial"
+      titleClassName="!text-[56px]"
+      buttonClassName="mt-11 h-12 w-[188px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
+      buttonText="Create an account"
       buttonUrl={LINKS.scaleTrial}
     />
   </Layout>

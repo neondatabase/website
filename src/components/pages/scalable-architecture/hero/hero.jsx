@@ -16,13 +16,13 @@ const Hero = () => {
     <section className="hero safe-paddings pb-[94px] pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:overflow-hidden md:pt-[40px] sm:pb-[80px]">
       <Container className="grid-gap-x grid grid-cols-12" size="medium">
         <Heading
-          className="z-20 col-span-6 col-start-4 text-center text-[56px] font-medium leading-none -tracking-[0.02em] xl:col-span-10 xl:col-start-2 lg:text-4xl sm:col-span-12 sm:col-start-1 sm:text-[36px]"
+          className="z-20 col-span-6 col-start-4 text-center text-[56px] font-medium leading-none tracking-extra-tight xl:col-span-10 xl:col-start-2 lg:text-4xl sm:col-span-12 sm:col-start-1 sm:text-[36px]"
           tag="h2"
           theme="white"
         >
-          Scalable SaaS architecture in Postgres with Neon & AWS
+          Scalable SAAS architecture in Postgres with Neon & AWS
         </Heading>
-        <p className="z-20 col-span-6 col-start-4 mt-[18px] flex flex-col gap-5 text-center text-lg font-light leading-snug -tracking-[0.016em] text-[#898D95] xl:col-span-10 xl:col-start-2 xl:mt-6 xl:max-w-none xl:gap-4 lg:text-lg sm:col-span-12 sm:col-start-1">
+        <p className="z-20 col-span-6 col-start-4 mt-[18px] flex flex-col gap-5 text-center text-lg font-light leading-snug tracking-extra-tight text-gray-new-80 xl:col-span-10 xl:col-start-2 xl:mt-6 xl:max-w-none xl:gap-4 lg:text-lg sm:col-span-12 sm:col-start-1">
           Discover how to build and optimize scalable SaaS architectures in Postgres with Neon
           &&nbsp;AWS. Elevate your database management with expert insights in this video.
         </p>
