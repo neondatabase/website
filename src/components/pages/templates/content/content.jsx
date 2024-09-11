@@ -5,43 +5,9 @@ import { useCallback, useState } from 'react';
 import FilterBar from 'components/pages/templates/filter-bar';
 import TemplatesList from 'components/pages/templates/templates-list';
 import templates from 'utils/data/templates';
+import { generateFilters } from 'utils/generate-filters';
 
-const filters = [
-  {
-    type: 'Type',
-    items: [
-      { name: 'Starter', value: 'starter' },
-      { name: 'Chatbot', value: 'chatbot' },
-      { name: 'Engine', value: 'engine' },
-    ],
-  },
-  {
-    type: 'Framework',
-    items: [
-      { name: 'Next.js', value: 'next.js' },
-      { name: 'LlamaIndex', value: 'llamaindex' },
-      { name: 'LangChain', value: 'langchain' },
-      { name: 'Astro', value: 'astro' },
-      { name: 'Express', value: 'express' },
-      { name: 'Fastify', value: 'fastify' },
-      { name: 'Hono', value: 'hono' },
-      { name: 'Nest.js', value: 'nestjs' },
-      { name: 'Node.js', value: 'nodejs' },
-      { name: 'Python', value: 'python' },
-      { name: 'Remix', value: 'remix' },
-      { name: 'Solid Start', value: 'solidstart' },
-      { name: 'SvelteKit', value: 'sveltekit' },
-      { name: 'Waku', value: 'waku' },
-      { name: 'Angular', value: 'angular' },
-      { name: 'Wasp', value: 'wasp' },
-      { name: 'Analog', value: 'analog' },
-    ],
-  },
-  {
-    type: 'CSS',
-    items: [{ name: 'TailwindCSS', value: 'tailwindcss' }],
-  },
-];
+const filters = generateFilters(templates);
 
 const updateFilters = (prevFilters, type, value, isChecked) => ({
   ...prevFilters,
@@ -103,7 +69,7 @@ const Content = () => {
   return (
     <>
       <TemplatesList
-        className="col-span-4 max-w-[703px] lg:order-1 lg:mt-8 lg:max-w-full sm:mt-6"
+        className="col-span-4 max-w-[703px] lg:order-1 lg:mt-8 lg:max-w-full"
         templates={filteredTemplates.items}
       />
       <aside className="col-span-1">

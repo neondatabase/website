@@ -126,7 +126,6 @@ FilterGroup.propTypes = {
 };
 
 const FilterBar = ({
-  className,
   filters,
   filteredTemplates,
   handleSearch,
@@ -145,7 +144,7 @@ const FilterBar = ({
   };
 
   return (
-    <form className={className}>
+    <form>
       <input
         className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40 lg:w-full"
         type="search"
@@ -154,7 +153,7 @@ const FilterBar = ({
       />
       <div className="mt-[26px] flex items-center justify-between">
         <span className="font-semibold leading-tight tracking-extra-tight">Filters</span>
-        {Object.keys(filteredTemplates.filters).length > 0 && (
+        {Object.values(filteredTemplates.filters).some((filters) => filters.length > 0) && (
           <button
             className="text-sm leading-none tracking-tighter text-gray-new-30 dark:text-gray-new-70"
             type="button"

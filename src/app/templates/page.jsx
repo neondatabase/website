@@ -13,7 +13,7 @@ export async function generateMetadata() {
 
 const TemplatesPage = () => (
   <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
-    <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
+    <section className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
       <Container
         className="grid w-full flex-1 grid-cols-5 pb-[104px] pt-12 xl:gap-x-7 xl:pb-24 lg:block lg:gap-x-5 lg:pb-20 lg:pt-9 md:pb-[72px] sm:pt-6"
         size="960"
@@ -31,7 +31,7 @@ const TemplatesPage = () => (
           <Content />
         </div>
       </Container>
-    </div>
+    </section>
   </Layout>
 );
 
