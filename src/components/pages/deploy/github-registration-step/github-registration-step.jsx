@@ -24,13 +24,13 @@ const GithubRegistrationStep = () => {
           You’re invited. <br />
           Grab the ticket.
         </h2>
-        <p className="1xl:max-w-[420px] mt-5 font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+        <p className="mt-5 font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
           Generate a unique ticket image with your GitHub profile and participate in Neon's giveaway
           right after the conference.
         </p>
         <div className="mt-11 flex items-center xl:mt-10 xl:flex-col lg:mt-8 md:mt-6">
           <Button
-            className="relative px-11 py-[22px] text-xl tracking-[-0.02em] xl:px-9 lg:px-8"
+            className="relative z-30 px-11 py-[22px] text-xl tracking-[-0.02em] xl:px-9 lg:px-8"
             theme="with-icon"
             rel="noopener noreferrer"
             target="_blank"
@@ -90,7 +90,7 @@ const GithubRegistrationStep = () => {
           </span>
         </div>
       </div>
-      <div className="1xl:-ml-10 col-span-6 col-start-6 self-center 2xl:col-start-6 xl:col-span-full xl:ml-0 xl:mr-0 xl:self-start">
+      <div className="col-span-6 col-start-5 self-center 2xl:col-start-6 xl:col-span-full xl:-ml-10 xl:ml-0 xl:mr-0 xl:self-start">
         <DynamicTicket
           userData={{
             id: 0,

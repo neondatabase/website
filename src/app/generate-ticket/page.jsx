@@ -8,6 +8,7 @@ export const metadata = getMetadata(SEO_DATA.generateTicket);
 
 const GenerateTicketPage = () => (
   <Layout>
+    <link rel="preload" crossOrigin="anonymous" href="/images/deploy/deploy-0.jpg" as="image" />
     <link
       rel="preload"
       crossOrigin="anonymous"
@@ -15,12 +16,14 @@ const GenerateTicketPage = () => (
       as="font"
       type="font/woff2"
     />
-    <Container
-      className="relative mx-auto grid flex-grow grid-cols-12 gap-10 py-20 2xl:px-14 xl:h-[-webkit-fill-available] xl:grid-cols-1 xl:px-11 xl:py-11 lg:gap-y-8 lg:px-8 lg:py-9 md:gap-y-7 md:px-4 md:pb-20 md:pt-5"
-      size="1344"
-    >
-      <GithubRegistrationStep />
-    </Container>
+    <section className="overflow-hidden">
+      <Container
+        className="relative mx-auto grid flex-grow grid-cols-12 gap-10 py-20 xl:h-[-webkit-fill-available] xl:grid-cols-1 xl:pb-11 xl:pt-28 lg:gap-y-8 lg:pb-9 lg:pt-10 md:gap-y-7 md:pb-20 md:pt-6"
+        size="1344"
+      >
+        <GithubRegistrationStep />
+      </Container>
+    </section>
   </Layout>
 );
 

@@ -139,6 +139,7 @@ module.exports = {
       },
       boxShadow: {
         tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
+        social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
       },
       backgroundImage: ({ theme }) => ({
         'button-overlay': 'linear-gradient(0deg, rgba(12,13,13,0) 0%, rgba(12,13,13,1) 100%);',

@@ -145,6 +145,17 @@ export default {
   404: {
     title: 'Page Not Found — Neon',
   },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+  },
+  ticket({ name, login: githubHandle }) {
+    const userName = name || githubHandle;
+
+    return {
+      title: `${userName}'s ticket for Neon Deploy - Neon`,
+      description: `Join ${userName} virtually at Deploy on October 1st to learn about Neon and how to build better with Serverless Postgres`,
+    };
+  },
 };
 
 export const getBlogCategoryDescription = (category) => {
