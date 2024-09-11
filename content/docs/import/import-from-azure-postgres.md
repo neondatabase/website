@@ -7,16 +7,16 @@ updatedOn: '2024-09-04T18:53:01.153Z'
 
 <LRBeta/>
 
-This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication. 
+This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
 
-Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements. This allows for minimal downtime during the migration process, since all the records don't need to be copied at once. 
+Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements. This allows for minimal downtime during the migration process, since all the records don't need to be copied at once.
 
 ## Prerequisites
 
 - An Azure Database for PostgreSQL instance containing the data you want to migrate.
-- A Neon project to move the data to. 
+- A Neon project to move the data to.
 
-    For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Azure PostgreSQL deployment. 
+  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Azure PostgreSQL deployment.
 
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
@@ -25,7 +25,7 @@ Logical replication for Postgres transfers data from a source Postgres database 
 
 This section describes how to prepare your Azure PostgreSQL database (the publisher) for replicating data to your destination Neon database (the subscriber).
 
-To illustrate the migration workflow, we set up the [AdventureWorks sample database](https://wiki.postgresql.org/wiki/Sample_Databases) on an Azure Database for PostgreSQL deployment. This database contains data corresponding to a fictionaly bicycle parts company, organized across 5 schemas and almost 70 tables. 
+To illustrate the migration workflow, we set up the [AdventureWorks sample database](https://wiki.postgresql.org/wiki/Sample_Databases) on an Azure Database for PostgreSQL deployment. This database contains data corresponding to a fictionaly bicycle parts company, organized across 5 schemas and almost 70 tables.
 
 ### Enable logical replication in Azure PostgreSQL
 
@@ -56,9 +56,9 @@ GRANT SELECT ON ALL TABLES IN SCHEMA sales TO replication_user;
 ALTER DEFAULT PRIVILEGES IN SCHEMA sales GRANT SELECT ON TABLES TO replication_user;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication. 
+Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
 
-If you have data split across multiple schemas, you can run a similar command for each schema, or use a PL/pgSQL function to dynamically grant access to all schemas in the database. 
+If you have data split across multiple schemas, you can run a similar command for each schema, or use a PL/pgSQL function to dynamically grant access to all schemas in the database.
 
 ```sql
 -- Thanks to this Stackoverflow answer - https://dba.stackexchange.com/a/241266
@@ -67,13 +67,13 @@ DO $do$
 DECLARE
     sch text;
 BEGIN
-    FOR sch IN SELECT nspname FROM pg_namespace 
-    where 
+    FOR sch IN SELECT nspname FROM pg_namespace
+    where
         -- Exclude system schemas
-        nspname != 'pg_toast' 
-        and nspname != 'pg_temp_1' 
+        nspname != 'pg_toast'
+        and nspname != 'pg_temp_1'
         and nspname != 'pg_toast_temp_1'
-        and nspname != 'pg_statistic' 
+        and nspname != 'pg_statistic'
         and nspname != 'pg_catalog'
         and nspname != 'information_schema'
     LOOP
@@ -97,15 +97,15 @@ This command creates a publication named `azure_publication` that includes all t
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data. 
+This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
 
 You can find the connection details for the Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Create the Neon database
 
-Each neon project comes with a default database named `neondb` that you can use. Though, to keep parity with the Azure PostgreSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information. 
+Each neon project comes with a default database named `neondb` that you can use. Though, to keep parity with the Azure PostgreSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
 
-For this example, we run the following query to create a new database named `AdventureWorks` in the Neon project. 
+For this example, we run the following query to create a new database named `AdventureWorks` in the Neon project.
 
 ```sql
 CREATE DATABASE "AdventureWorks";
@@ -158,7 +158,7 @@ To ensure that data is being replicated correctly:
    ```
 
    This query should return an output similar to the following:
-   
+
    ```text shouldWrap
     subid |      subname      | pid | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time
     -------+-------------------+-----+------------+-------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------
@@ -166,9 +166,9 @@ To ensure that data is being replicated correctly:
     (1 row)
    ```
 
-   - An active `pid` indicates that the subscription is active and running. 
-   - The `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively. 
-   - In this example, they have the same value, which means that all the data has been successfully replicated from Azure to Neon. 
+   - An active `pid` indicates that the subscription is active and running.
+   - The `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively.
+   - In this example, they have the same value, which means that all the data has been successfully replicated from Azure to Neon.
 
 2. To sanity check, that the data has been replicated correctly, compare row counts between Azure PostgreSQL and Neon for some key tables. For example, to check the number of rows in the `addresses` table, you can run the following query:
 
@@ -185,17 +185,17 @@ To ensure that data is being replicated correctly:
     (1 row)
    ```
 
-3. Additionally, you can run some common queries from your application against the Neon database, and verify that it produces the same output as the Azure instance. 
+3. Additionally, you can run some common queries from your application against the Neon database, and verify that it produces the same output as the Azure instance.
 
 ## Complete the migration
 
 Once the initial data sync is complete and you've verified that ongoing changes are being replicated:
 
-1. Stop writes to your Azure PostgreSQL database. 
+1. Stop writes to your Azure PostgreSQL database.
 2. Wait for any final transactions to be replicated to Neon.
 3. Update your application's connection string to point to your Neon database.
 
-This ensures a much smaller downtime for the application, since we only need to wait for the last few transactions to be replicated. 
+This ensures a much smaller downtime for the application, since we only need to wait for the last few transactions to be replicated.
 
 <Admonition type="note">
 Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon.
