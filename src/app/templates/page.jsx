@@ -3,13 +3,11 @@ import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata() {
-  return getMetadata({
-    title: 'Neon templates',
-    description:
-      'Jumpstart your app development process with pre-built solutions from Neon and our community.',
-  });
-}
+export const metadata = getMetadata({
+  title: 'Neon templates',
+  description:
+    'Jumpstart your app development process with pre-built solutions from Neon and our community.',
+});
 
 const TemplatesPage = () => (
   <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
