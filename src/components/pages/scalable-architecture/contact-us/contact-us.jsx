@@ -2,9 +2,8 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Logos from 'components/shared/logos';
 
-import Testimonial from '../testimonial';
-
 import ContactUsForm from './contact-us-form';
+import Testimonial from './testimonial';
 
 const logos = [
   'bunnyshell',
@@ -30,24 +29,31 @@ const testimonial = {
 };
 
 const ContactUs = () => (
-  <section className="contact-us safe-paddings pb-[30px] pt-[104px] 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:overflow-hidden md:pt-[40px] sm:pb-[80px]">
-    <Container className="grid-gap-x grid grid-flow-dense grid-cols-12" size="1152">
-      <div className="col-span-5 col-start-1">
-        <Heading
-          className="z-20 text-[52px] font-medium leading-none tracking-extra-tight"
-          tag="h2"
-          theme="white"
-        >
-          Contact Us
-        </Heading>
-        <p className="z-20 mt-3 flex flex-col gap-5 text-lg font-light leading-snug tracking-[0.008em] text-gray-new-80">
-          Reach out to the Neon team to ask about your own use case. Build and scale your
-          database-per user-architecture.
-        </p>
-        <Testimonial {...testimonial} />
-        <Logos className="mt-14" logos={logos} />
-      </div>
-      <ContactUsForm className="col-span-7 col-start-6 ml-auto max-w-[576px]" />
+  <section className="contact-us safe-paddings pb-[30px] pt-[104px] xl:pt-0 lg:pb-[54px] sm:pb-[58px]">
+    <Container
+      className="grid-gap-x grid grid-flow-dense grid-cols-12 xl:max-w-[960px] xl:gap-x-[38px] lg:max-w-[576px] md:max-w-none md:gap-x-0 md:px-10 sm:px-8 xs:px-5"
+      size="1152"
+    >
+      <Heading
+        className="col-span-5 col-start-1 text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:order-1 lg:col-span-12 lg:text-center lg:text-4xl lg:tracking-tighter xs:text-left xs:text-[32px]"
+        tag="h2"
+        theme="white"
+      >
+        Contact Us
+      </Heading>
+      <p className="col-span-5 col-start-1 mt-3 text-lg font-light leading-snug tracking-[0.008em] text-gray-new-80 xl:mt-2.5 lg:order-2 lg:col-span-12 lg:mx-auto lg:max-w-[488px] lg:text-center lg:text-base md:max-w-full xs:text-left">
+        Reach out to the Neon team to ask about your own use case. Build and scale your database-per
+        user-architecture.
+      </p>
+      <Testimonial
+        className="col-span-5 col-start-1 mt-16 max-w-[464px] lg:order-4 lg:col-span-12 lg:mx-auto lg:mt-[46px] lg:max-w-[512px] md:max-w-full xs:mt-6"
+        {...testimonial}
+      />
+      <Logos
+        className="col-span-5 col-start-1 mt-14 lg:order-5 lg:col-span-12 lg:mt-11 xs:mt-10"
+        logos={logos}
+      />
+      <ContactUsForm className="col-span-7 col-start-6 row-span-5 -mt-1 ml-auto max-w-[576px] xl:mt-px lg:order-3 lg:col-span-12 lg:col-start-1 lg:mr-auto lg:mt-8 lg:max-w-[512px] md:max-w-full xs:mt-6" />
     </Container>
   </section>
 );

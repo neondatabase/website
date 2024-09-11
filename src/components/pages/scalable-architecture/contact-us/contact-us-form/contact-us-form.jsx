@@ -30,7 +30,12 @@ const schema = yup
   })
   .required();
 
-const ContactUsForm = ({ className = null, formState, setFormState }) => {
+const ContactUsForm = ({ className = null }) => {
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+  const [hubspotutk] = useCookie('hubspotutk');
+  const { href } = useLocation();
+  const [formError, setFormError] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -38,10 +43,6 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
-  const [formError, setFormError] = useState('');
 
   const context = {
     hutk: hubspotutk,
@@ -108,7 +109,7 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
   return (
     <form
       className={clsx(
-        'relative z-10 -mt-1 grid gap-x-[20px] gap-y-6 rounded-xl border border-gray-new-10 bg-[radial-gradient(128.16%_100%_at_38.89%_0%,#18191B80_0%,#18191B4D_47.96%,#18191B00_100%)] p-9',
+        'relative z-10 grid gap-x-[20px] gap-y-6 rounded-xl border border-gray-new-10 bg-[radial-gradient(128.16%_100%_at_38.89%_0%,#18191B80_0%,#18191B4D_47.96%,#18191B00_100%)] p-9 xl:p-6 xs:p-5',
         className
       )}
       method="POST"
@@ -137,7 +138,7 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex space-x-10 2xl:space-x-6 md:grid md:gap-y-5 md:space-x-0">
+      <div className="flex space-x-10 2xl:space-x-6 sm:grid sm:gap-y-5 sm:space-x-0">
         <Field
           className="shrink-0 basis-[54%] font-ibm-plex-sans 2xl:basis-[45%] lg:basis-[49%]"
           labelClassName="text-sm text-gray-new-90"
@@ -181,7 +182,7 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
         error={errors.message?.message}
         {...register('message')}
       />
-      <div className="relative mt-2.5 flex items-center 2xl:mt-1 md:mt-0 md:flex-col md:items-start">
+      <div className="relative mt-2.5 flex items-center xl:-mt-1.5 lg:-mt-1.5 md:flex-col">
         <p className="text-left text-sm font-light leading-snug text-gray-new-70">
           By submitting, you agree to{' '}
           <Link
@@ -195,7 +196,7 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
           .
         </p>
         <Button
-          className="w-[168px] shrink-0 !px-9 !py-6 !text-base !font-medium !tracking-tighter md:order-1 md:mt-6 md:w-full"
+          className="w-[168px] shrink-0 !px-9 !py-6 !text-base !font-medium !tracking-tighter lg:!py-5 md:order-1 md:mt-6 md:w-full xs:!h-10 xs:!text-sm"
           type="submit"
           theme="primary"
           size="lg"
@@ -218,8 +219,6 @@ const ContactUsForm = ({ className = null, formState, setFormState }) => {
 
 ContactUsForm.propTypes = {
   className: PropTypes.string,
-  formState: PropTypes.oneOf(Object.values(FORM_STATES)).isRequired,
-  setFormState: PropTypes.func.isRequired,
 };
 
 export default ContactUsForm;

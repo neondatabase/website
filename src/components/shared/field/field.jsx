@@ -80,7 +80,8 @@ const Field = forwardRef(
       {error && (
         <p
           className={clsx(
-            'absolute right-0 top-[calc(100%+0.5rem)] z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
+            'absolute right-0 z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
+            Tag === FIELD_TAGS.TEXTAREA ? 'top-full' : 'top-[calc(100%+0.5rem)]',
             errorClassName
           )}
           data-test="error-field-message"
