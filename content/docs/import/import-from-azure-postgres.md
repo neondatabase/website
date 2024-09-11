@@ -7,7 +7,9 @@ updatedOn: '2024-09-04T18:53:01.153Z'
 
 <LRBeta/>
 
-This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication. This method allows for minimal downtime during the migration process, since all the records don't need to be copied at once. Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements.
+This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication. 
+
+Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements. This allows for minimal downtime during the migration process, since all the records don't need to be copied at once. 
 
 ## Prerequisites
 
@@ -98,7 +100,7 @@ You can find the connection details for the Neon database on the **Connection De
 
 ### Create the Neon database
 
-Each neon project comes with a default database named `neondb` that you can use. To keep parity with the Azure PostgreSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information. 
+Each neon project comes with a default database named `neondb` that you can use. Though, to keep parity with the Azure PostgreSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information. 
 
 For this example, we run the following query to create a new database named `AdventureWorks` in the Neon project. 
 
@@ -161,7 +163,9 @@ To ensure that data is being replicated correctly:
     (1 row)
    ```
 
-   An active `pid` indicates that the subscription is active and running. Additionally, the `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively. In this example, they have the same value here, which means that all the data has been replicated successfully. 
+   - An active `pid` indicates that the subscription is active and running. 
+   - The `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively. 
+   - In this example, they have the same value, which means that all the data has been successfully replicated from Azure to Neon. 
 
 2. To sanity check, that the data has been replicated correctly, compare row counts between Azure PostgreSQL and Neon for some key tables. For example, to check the number of rows in the `addresses` table, you can run the following query:
 
