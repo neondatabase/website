@@ -25,20 +25,20 @@ const TicketPage = async ({ params }) => {
     <Layout>
       <section className="overflow-hidden">
         <Container
-          className="relative z-10 grid flex-grow grid-cols-12 gap-10 pb-20 pt-40 xl:grid-cols-1 xl:gap-0 xl:pb-11 xl:pt-28 lg:py-9 md:py-4 md:pb-20 md:pt-5"
+          className="relative z-10 grid flex-grow grid-cols-12 gap-10 pb-[176px] pt-40 xl:grid-cols-1 xl:gap-0 xl:pb-[120px] xl:pt-28 lg:py-9 lg:pb-[104px] md:py-4 md:pb-20 md:pt-5"
           size="1344"
         >
           <div className="pointer-events-none relative z-10 col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
-            <h1 className="relative z-50 text-[62px] font-semibold leading-none tracking-[-0.05em] text-white xl:mx-auto xl:max-w-[420px] xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
+            <h1 className="relative z-50 text-[62px] font-semibold leading-none tracking-[-0.05em] text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[610px] font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[500px] xl:mx-auto xl:max-w-[420px] xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[610px] font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-01T17:00:00Z">October 1st, 10 a.m. PT</time>
             </p>
             <Link
-              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 lg:justify-center lg:text-base"
+              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
               href="/stage"
             >
               <span>Watch the event live</span>

@@ -21,7 +21,10 @@
     "lint:md:fix": "markdownlint --fix --ignore-path .gitignore .",
     "check:broken-links": "linkinator --config linkinator.config.json",
     "prepare": "husky install",
-    "test": "npx cypress open"
+    "test": "npx cypress open",
+    "migrate": "npx prisma migrate dev",
+    "studio": "npx prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",

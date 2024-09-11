@@ -26,11 +26,11 @@ const TicketEditPage = async ({ params }) => {
     <Layout>
       <section className="overflow-hidden">
         <Container
-          className="relative z-10 grid flex-grow grid-cols-12 gap-10 pb-20 pt-40 xl:grid-cols-1 xl:gap-0 xl:pb-11 xl:pt-28 lg:py-9 md:py-4 md:pb-20 md:pt-5"
+          className="relative z-10 grid flex-grow grid-cols-12 gap-10 pb-[176px] pt-40 xl:grid-cols-1 xl:gap-0 xl:pb-[120px] xl:pt-28 lg:py-9 lg:pb-[104px] md:py-4 md:pb-20 md:pt-5"
           size="1344"
         >
           <div className="pointer-events-none relative z-10 col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
-            <h1 className="relative z-50 text-[62px] font-semibold leading-none tracking-[-0.05em] text-white xl:mx-auto xl:max-w-[420px] xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
+            <h1 className="relative z-50 text-[62px] font-semibold leading-none tracking-[-0.05em] text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
