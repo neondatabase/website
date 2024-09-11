@@ -14,7 +14,10 @@ Logical replication for Postgres transfers data from a source Postgres database 
 ## Prerequisites
 
 - An Azure Database for PostgreSQL instance containing the data you want to migrate.
-- A Neon project to move the data to. For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+- A Neon project to move the data to. 
+
+    For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Azure PostgreSQL deployment. 
+
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
