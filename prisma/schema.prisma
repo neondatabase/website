@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  url               = env("DEPLOY_DATABASE_URL")
+  shadowDatabaseUrl = env("DEPLOY_SHADOW_DATABASE_URL")
 }
 
 model Account {
