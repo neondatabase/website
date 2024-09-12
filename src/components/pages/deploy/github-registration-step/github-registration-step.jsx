@@ -90,7 +90,7 @@ const GithubRegistrationStep = () => {
           </span>
         </div>
       </div>
-      <div className="col-span-6 col-start-5 self-center 2xl:col-start-6 xl:col-span-full xl:-ml-10 xl:ml-0 xl:mr-0 xl:self-start">
+      <div className="col-span-6 col-start-6 self-center 2xl:-ml-10 xl:col-span-full xl:mr-0 xl:self-start lg:ml-0">
         <DynamicTicket
           userData={{
             id: 0,

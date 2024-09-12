@@ -55,7 +55,7 @@ const TicketPage = async ({ params }) => {
               Grab yours
             </Button>
           </div>
-          <div className="col-span-6 col-start-6 self-center 2xl:col-start-6 2xl:-ml-10 2xl:-ml-10 xl:col-span-full xl:ml-0 xl:self-start lg:ml-0">
+          <div className="col-span-6 col-start-6 self-center 2xl:col-start-6 2xl:-ml-10 xl:col-span-full xl:self-start lg:ml-0">
             <DynamicTicket userData={userData} />
           </div>
         </Container>

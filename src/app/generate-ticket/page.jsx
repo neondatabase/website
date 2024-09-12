@@ -18,7 +18,7 @@ const GenerateTicketPage = () => (
     />
     <section className="overflow-hidden">
       <Container
-        className="relative mx-auto grid flex-grow grid-cols-12 gap-10 py-20 xl:h-[-webkit-fill-available] xl:grid-cols-1 xl:pb-11 xl:pt-28 lg:gap-y-8 lg:pb-9 lg:pt-10 md:gap-y-7 md:pb-20 md:pt-6"
+        className="relative mx-auto grid flex-grow grid-cols-12 gap-10 pb-[176px] pt-40 xl:h-[-webkit-fill-available] xl:grid-cols-1 xl:pb-11 xl:pt-28 lg:gap-y-8 lg:pb-9 lg:pt-10 md:gap-y-7 md:pb-20 md:pt-6"
         size="1344"
       >
         <GithubRegistrationStep />
