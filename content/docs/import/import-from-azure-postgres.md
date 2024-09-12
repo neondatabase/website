@@ -42,7 +42,7 @@ Changing the `wal_level` parameter requires a server restart. This may cause a b
 
 It is recommended that you create a dedicated Postgres role for replicating data. Connect to your Azure PostgreSQL database using a tool like `psql` or Azure Data Studio, then create a new role with `REPLICATION` privileges:
 
-```sql
+```sql shouldWrap
 CREATE ROLE replication_user WITH REPLICATION LOGIN PASSWORD 'your_secure_password';
 ```
 
@@ -103,7 +103,7 @@ You can find the connection details for the Neon database on the **Connection De
 
 ### Create the Neon database
 
-Each neon project comes with a default database named `neondb` that you can use. Though, to keep parity with the Azure PostgreSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
+To keep parity with the Azure PostgreSQL deployment, create a new database with the same name. See [Create a database](/docs/manage/databases#create-a-database) for more information.
 
 For this example, we run the following query to create a new database named `AdventureWorks` in the Neon project.
 
@@ -185,7 +185,7 @@ To ensure that data is being replicated correctly:
     (1 row)
    ```
 
-3. Additionally, you can run some common queries from your application against the Neon database, and verify that it produces the same output as the Azure instance.
+3. Additionally, you can run some common queries from your application against the Neon database and verify that it produces the same output as the Azure instance.
 
 ## Complete the migration
 
@@ -195,7 +195,7 @@ Once the initial data sync is complete and you've verified that ongoing changes 
 2. Wait for any final transactions to be replicated to Neon.
 3. Update your application's connection string to point to your Neon database.
 
-This ensures a much smaller downtime for the application, since we only need to wait for the last few transactions to be replicated.
+This ensures a much shorter downtime for the application, since we only need to wait for the last few transactions to be replicated.
 
 <Admonition type="note">
 Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon.
@@ -203,7 +203,7 @@ Remember to update any Azure-specific configurations or extensions in your appli
 
 ## Clean up
 
-After successfully migrating and verifying your data on Neon:
+After successfully migrating and verifying your data on Neon, you can:
 
 1. Drop the subscription on the Neon database:
 
@@ -237,7 +237,7 @@ Table-level data migration (using CSV files, for example) does not preserve data
 
 ## Reference
 
-For more information on Logical replication, and the Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
+For more information on logical replication, and the Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
