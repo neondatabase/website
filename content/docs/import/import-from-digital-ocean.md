@@ -40,7 +40,7 @@ To illustrate the migration workflow, we populate the Digital Ocean database wit
    - Username
    - Password (you may need to reset it if you don't have it)
 
-You'll need these details to construct the connection string for `pg_dump`. Alternatively, you can toggle to the `Connection string` option to get the `postgresql://` connection string, which can be used directly with postgres CLI tools. 
+You'll need these details to construct the connection string for `pg_dump`. Alternatively, you can toggle to the `Connection string` option to get the `postgresql://` connection string, which can be used directly with postgres CLI tools.
 
 ## Export data with pg_dump
 
@@ -50,7 +50,7 @@ Now that you have the Digital Ocean connection details, you can export your data
 pg_dump -Fc -v -d postgresql://[username]:[password]@[host]:[port]/[database] -f digitalocean_dump.bak
 ```
 
-Replace `[username]`, `[password]`, `[host]`, `[port]`, and `[database]` with your Digital Ocean connection details. 
+Replace `[username]`, `[password]`, `[host]`, `[port]`, and `[database]` with your Digital Ocean connection details.
 
 This command includes these arguments:
 
@@ -147,7 +147,7 @@ After the restore process completes, you should verify that your data has been s
 1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the `LEGO` database, you can run the following:
-   
+
    ```sql shouldWrap
    SELECT is_trans AS is_transparent, COUNT(*) FROM lego_colors GROUP BY is_trans;
    SELECT * FROM lego_sets ORDER BY num_parts DESC LIMIT 5;
