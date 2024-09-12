@@ -32,8 +32,8 @@ To illustrate the migration workflow, we use the [LEGO Database](https://neon.te
 ### Retrieve Render connection details
 
 1. Log in to your Render account and navigate to your project dashboard.
-2. From the overview page, select the service (of the type `PostgreSQL`) corresponding to your database. 
-3. From the left sidebar, click on **Info** and under the **Connections** section, you'll find the connection parameters in different formats. 
+2. From the overview page, select the service (of the type `PostgreSQL`) corresponding to your database.
+3. From the left sidebar, click on **Info** and under the **Connections** section, you'll find the connection parameters in different formats.
 4. Copy the value for the `External Database URL` field.
 
 You'll need this connection string for `pg_dump` to connect to the Render database.
@@ -146,6 +146,7 @@ After the restore process completes, you should verify that your data has been s
 1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
+
    ```sql
    SELECT * FROM lego_inventory_parts ORDER BY quantity DESC LIMIT 5;
    SELECT parent_id, COUNT(name) FROM lego_themes GROUP BY parent_id;
