@@ -132,6 +132,8 @@
               slug: import/import-schema-only
             - title: Import from Heroku
               slug: import/import-from-heroku
+            - title: Import from Supabase
+              slug: import/import-from-supabase
             - title: Import from MySQL
               slug: import/migrate-mysql
         - section: Logical replication
