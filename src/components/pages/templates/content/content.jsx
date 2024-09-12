@@ -21,7 +21,11 @@ export const filterTemplates = (templates, filters) =>
     Object.entries(filters).every(
       ([type, values]) =>
         values.length === 0 ||
-        values.some((value) => template[type].some((t) => t.toLowerCase().includes(value)))
+        values.some((value) =>
+          template[type].some((t) =>
+            t.toLowerCase().replace(/\s+/g, '').includes(value.toLowerCase().replace(/\s+/g, ''))
+          )
+        )
     )
   );
 
