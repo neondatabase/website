@@ -13,7 +13,7 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - An MSSQL instance containing the data you want to migrate.
 
-  For this guide, we use `Azure SQL`, which is a managed cloud-based offering of Micrsoft SQL server. We set up an Azure SQL Database and populate it with the [Northwind sample dataset](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs). This dataset contains sales data corresponding to a fictional company that imports and exports food products, organized across multiple tables.
+  For this guide, we use `Azure SQL`, which is a managed cloud-based offering of Microsoft SQL server. We set up an Azure SQL Database and populate it with the [Northwind sample dataset](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs). This dataset contains sales data corresponding to a fictional company that imports and exports food products, organized across multiple tables.
 
 - A Neon project to move the data to.
 
@@ -44,7 +44,7 @@ This section describes how to prepare your destination Neon PostgreSQL database 
 
 Each Neon project comes with a default database named `neondb` that you can use. However, to maintain parity with the MSSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
 
-For this example, we'll create a new database named `Northwind` in the Neon project. Use `psql` to connect to your Neon project (alternatively, you can use the `Query editor` in the Neon console) and run the following query:
+For this example, we will create a new database named `Northwind` in the Neon project. Use `psql` to connect to your Neon project (alternatively, you can use the `Query editor` in the Neon console) and run the following query:
 
 ```sql
 CREATE DATABASE "Northwind";
