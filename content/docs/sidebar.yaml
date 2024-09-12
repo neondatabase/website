@@ -134,6 +134,8 @@
               slug: import/import-from-heroku
             - title: Import from MySQL
               slug: import/migrate-mysql
+            - title: Import from MSSQL
+              slug: import/migrate-mssql
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
