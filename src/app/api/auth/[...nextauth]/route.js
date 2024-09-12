@@ -3,7 +3,7 @@ import GitHubProvider from 'next-auth/providers/github';
 
 import prisma, { PrismaAdapter } from 'utils/prisma';
 
-const createOptions = (req) => ({
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GitHubProvider({
@@ -27,12 +27,11 @@ const createOptions = (req) => ({
         session.userId = token.uid;
         session.githubHandle = token.githubHandle;
       }
-
       return session;
     },
-    async jwt({ user, account, token, profile }) {
-      if (req.query?.colorSchema) {
-        token.colorSchema = req.query.colorSchema;
+    async jwt({ user, account, token, profile, trigger, session }) {
+      if (trigger === 'update' && session?.colorSchema) {
+        token.colorSchema = session.colorSchema;
       }
 
       if (user) {
@@ -53,6 +52,8 @@ const createOptions = (req) => ({
   session: {
     strategy: 'jwt',
   },
-});
+};
 
-export default async (req, res) => NextAuth(req, res, createOptions(req));
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
