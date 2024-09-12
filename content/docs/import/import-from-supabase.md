@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-11T14:30:00.000Z'
 ---
 
-This guide describes how to migrate a database from Supabase to Neon Postgres. 
+This guide describes how to migrate a database from Supabase to Neon Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
@@ -13,13 +13,13 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 - A Supabase project containing the data you want to migrate.
 
-- A Neon project to move the data to. 
+- A Neon project to move the data to.
 
-    For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Supabase deployment.
+  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Supabase deployment.
 
 - `pg_dump` and `pg_restore` utilities installed on your local machine. These typically come with a Postgres installation.
 
-    We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
+  We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
 - Review our guide on [Importing data from Postgres](/docs/import/import-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
@@ -58,7 +58,7 @@ This command includes these arguments:
 - `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor the dump operation.
 - `-d`: Specifies the connection string for your Supabase database.
 - `-f`: Specifies the output file name.
-- `--schema=public`: Specifies the schema to dump. In this case, we only want to back up tables in the `public` schema. 
+- `--schema=public`: Specifies the schema to dump. In this case, we only want to back up tables in the `public` schema.
 
 Supabase projects may also store data corresponding to authentication, storage and other services under different schemas. If necessary, you can specify additional schemas to dump by adding the `--schema` option multiple times.
 
@@ -157,7 +157,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`. 
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 
@@ -170,7 +170,7 @@ After the restore process completes, you should verify that your data has been s
 
 ## Clean up
 
-After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup for some time. 
+After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup for some time.
 
 ## Other migration options
 
