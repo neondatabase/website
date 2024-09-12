@@ -1,6 +1,6 @@
 ---
-title: Migrate from Azure SQL Database to Neon Postgres
-subtitle: Learn how to migrate your database from Microsoft SQL Server to Neon using pgloader
+title: Migrate from MSSQL to Neon Postgres
+subtitle: Learn how to migrate a Microsoft SQL Server database to Neon using pgloader
 enableTableOfContents: true
 updatedOn: '2024-09-15T14:30:00.000Z'
 ---
