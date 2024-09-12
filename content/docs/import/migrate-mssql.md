@@ -13,11 +13,11 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - An MSSQL instance containing the data you want to migrate.
 
-    For this guide, we use `Azure SQL`, which is a managed cloud-based offering of Micrsoft SQL server. We set up an Azure SQL Database and populate it with the [Northwind sample dataset](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs). This dataset contains sales data corresponding to a fictional company that imports and exports food products, organized across multiple tables. 
+  For this guide, we use `Azure SQL`, which is a managed cloud-based offering of Micrsoft SQL server. We set up an Azure SQL Database and populate it with the [Northwind sample dataset](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs). This dataset contains sales data corresponding to a fictional company that imports and exports food products, organized across multiple tables.
 
-- A Neon project to move the data to. 
+- A Neon project to move the data to.
 
-    For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
 - Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
@@ -27,7 +27,7 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 Before starting the migration process, collect your MSSQL database credentials. If you are using Azure SQL, you can use the following steps to retrieve them:
 
-1. Log into the Azure portal and navigate to your Azure SQL Database resource. 
+1. Log into the Azure portal and navigate to your Azure SQL Database resource.
 2. Navigate to the **Connection strings** tab under the `Settings` section and identify the connection string for your database. Make note of the following details:
    - Server
    - Database
@@ -87,7 +87,7 @@ Here's how you can set up `pgloader` for your database migration:
         FROM mssql://migration_user:password@host:port/AdventureWorks
         INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
-   
+
    Make sure to replace the connection string values with your own MSSQL and Neon credentials.
 
 ## Run the migration with pgloader
@@ -172,11 +172,12 @@ After successfully migrating and verifying your data on Neon:
 
 2. Update your application code to make SQL queries using the Postgres dialect.
 
-3. Update your application's connection strings to point to your new Neon database. 
+3. Update your application's connection strings to point to your new Neon database.
 
 ## Other migration options
 
 While this guide focuses on using `pgloader`, you might need more manual adjustments to ensure:
+
 - There are no unintended changes to the application behavior. For example, all MSSQL data types don't translate one-to-one to Postgres data types.
 - The application code is compatible with Neon Postgres.
 
@@ -186,23 +187,23 @@ For complex migrations or when you need more control over the migration process,
 
 - `Pgloader` automatically detects table schemas and indexes/constraints, but depending on the input table schemas, you might need to specify manual overrides in the configuration file. Refer to the [Command clauses](https://pgloader.readthedocs.io/en/latest/command.html#common-clauses) section of the `pgloader` documentation for more information.
 
-- With Azure SQL database, `pgloader` often runs into connection errors. To solve them, you might need to manually specify the FreeTDS driver configuration (which `pgloader` uses to connect to MSSQL). Please refer to the related [Github issues](https://github.com/dimitri/pgloader/) for more information. 
+- With Azure SQL database, `pgloader` often runs into connection errors. To solve them, you might need to manually specify the FreeTDS driver configuration (which `pgloader` uses to connect to MSSQL). Please refer to the related [Github issues](https://github.com/dimitri/pgloader/) for more information.
 
-    Below is the section I needed to add to make `pgloader` work, at the time of writing. Replace the values with your own Azure SQL database credentials.
+  Below is the section I needed to add to make `pgloader` work, at the time of writing. Replace the values with your own Azure SQL database credentials.
 
-    ```plaintext
-    # /etc/freetds/freetds.conf
+  ```plaintext
+  # /etc/freetds/freetds.conf
 
-    ...
+  ...
 
-    [host-name]
-    tds version = 7.4
-    client charset = UTF-8
-    encrypt = require
-    host = ...
-    port = 1433
-    database = ...
-    ```
+  [host-name]
+  tds version = 7.4
+  client charset = UTF-8
+  encrypt = require
+  host = ...
+  port = 1433
+  database = ...
+  ```
 
 ## Reference
 
