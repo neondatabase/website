@@ -116,7 +116,6 @@ const ContactUsForm = ({ className = null }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
-        className="font-ibm-plex-sans"
         labelClassName="text-sm text-gray-new-90"
         theme="transparent"
         name="name"
@@ -127,7 +126,6 @@ const ContactUsForm = ({ className = null }) => {
         {...register('name')}
       />
       <Field
-        className="font-ibm-plex-sans"
         labelClassName="text-sm text-gray-new-90"
         theme="transparent"
         name="email"
@@ -140,7 +138,7 @@ const ContactUsForm = ({ className = null }) => {
       />
       <div className="flex space-x-10 2xl:space-x-6 sm:grid sm:gap-y-5 sm:space-x-0">
         <Field
-          className="shrink-0 basis-[54%] font-ibm-plex-sans 2xl:basis-[45%] lg:basis-[49%]"
+          className="shrink-0 basis-[54%] 2xl:basis-[45%] lg:basis-[49%]"
           labelClassName="text-sm text-gray-new-90"
           theme="transparent"
           name="companyWebsite"
@@ -149,7 +147,7 @@ const ContactUsForm = ({ className = null }) => {
           {...register('companyWebsite')}
         />
         <Field
-          className="grow font-ibm-plex-sans"
+          className="grow"
           labelClassName="text-sm text-gray-new-90"
           theme="transparent"
           name="companySize"
@@ -171,7 +169,6 @@ const ContactUsForm = ({ className = null }) => {
         </Field>
       </div>
       <Field
-        className="font-ibm-plex-sans"
         labelClassName="text-sm text-gray-new-90"
         inputClassName="!min-h-16 !h-16"
         theme="transparent"
