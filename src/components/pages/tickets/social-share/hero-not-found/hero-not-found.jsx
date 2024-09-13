@@ -1,7 +1,7 @@
 'use client';
 
+import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 
 const HeroNotFound = () => (

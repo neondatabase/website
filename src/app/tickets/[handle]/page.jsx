@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import Button from 'components/shared/button/button';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
@@ -39,6 +39,7 @@ const TicketPage = async ({ params }) => {
             </p>
             <Link
               className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
+              // TODO: add link to the event
               href="/stage"
             >
               <span>Watch the event live</span>

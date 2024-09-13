@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
+import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import Button from 'components/shared/button';
 import GithubIcon from 'components/shared/header/images/header-github.inline.svg';
 
 const appearAndExitAnimationVariants = {
@@ -30,7 +30,7 @@ const GithubRegistrationStep = () => {
         </p>
         <div className="mt-11 flex items-center xl:mt-10 xl:flex-col lg:mt-8 md:mt-6">
           <Button
-            className="relative z-30 px-11 py-[22px] text-xl tracking-[-0.02em] xl:px-9 lg:px-8"
+            size="md"
             theme="with-icon"
             rel="noopener noreferrer"
             target="_blank"
