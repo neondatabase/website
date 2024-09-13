@@ -25,6 +25,8 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="aws">Migrate with AWS DMS</a>
 
+<a href="/docs/import/import-from-azure-postgres" description="Migrate data from an Azure Database for PostgreSQL deployment to Neon" icon="aws">Migrate from Azure PostgreSQL</a>
+
 <a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="download">Load sample data</a>
 
 <a href="/docs/import/migrate-mysql" description="Learn how to migrate your MySQL database to Neon Postgres using pgloader." icon="sql">Migrate from MySQL</a>
