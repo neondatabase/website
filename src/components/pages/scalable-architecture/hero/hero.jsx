@@ -20,7 +20,7 @@ const Hero = () => {
           tag="h2"
           theme="white"
         >
-          Scalable SAAS architecture in Postgres with Neon & AWS
+          Scalable SaaS architecture in Postgres with Neon & AWS
         </Heading>
         <p
           className={clsx(
@@ -28,7 +28,7 @@ const Hero = () => {
             'xl:col-span-10 xl:col-start-2 xl:mx-auto xl:mt-4 xl:max-w-[700px] xl:gap-4 lg:col-span-12 lg:col-start-1 lg:max-w-[626px] lg:text-base sm:mt-3'
           )}
         >
-          Discover how to build and optimize scalable SAAS architectures in Postgres with Neon
+          Discover how to build and optimize scalable SaaS architectures in Postgres with Neon
           &&nbsp;AWS. Elevate your database management with expert insights in this video.
         </p>
         <div className="relative col-span-8 col-start-3 flex h-fit justify-center xl:col-span-10 xl:col-start-2 xl:px-2 lg:px-[3px] sm:col-span-12 sm:col-start-1">
