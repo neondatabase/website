@@ -50,10 +50,10 @@ const ContactUs = () => (
         {...testimonial}
       />
       <Logos
-        className="col-span-5 col-start-1 mt-14 lg:order-5 lg:col-span-12 lg:mt-11 xs:mt-10"
+        className="col-span-5 col-start-1 mt-14 lg:order-5 lg:col-span-12 lg:mt-11 xs:mt-10 [&>div>div>ul]:gap-x-10 lg:[&>div>div>ul]:gap-x-20"
         logos={logos}
       />
-      <ContactUsForm className="col-span-7 col-start-6 row-span-5 -mt-1 ml-auto max-w-[576px] xl:mt-px lg:order-3 lg:col-span-12 lg:col-start-1 lg:mr-auto lg:mt-8 lg:max-w-[512px] md:max-w-full xs:mt-6" />
+      <ContactUsForm className="col-span-7 col-start-6 row-span-5 -mt-1 ml-auto max-w-[576px] xl:mt-px lg:order-3 lg:col-span-12 lg:col-start-1 lg:mr-auto lg:mt-8 lg:max-w-[512px] md:w-full md:max-w-full xs:mt-6" />
     </Container>
   </section>
 );

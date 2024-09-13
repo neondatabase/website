@@ -182,21 +182,21 @@ const ContactUsForm = ({ className = null }) => {
         error={errors.message?.message}
         {...register('message')}
       />
-      <div className="relative mt-2.5 flex items-center xl:-mt-1.5 lg:-mt-1.5 md:flex-col">
+      <div className="relative mt-2.5 flex items-center justify-between gap-5 xl:-mt-1.5 lg:-mt-1.5 sm:flex-col">
         <p className="text-left text-sm font-light leading-snug text-gray-new-70">
           By submitting, you agree to{' '}
           <Link
-            className="pb-1 !text-base 2xl:!text-base md:!inline"
+            className="pb-1 !text-sm 2xl:!text-sm md:!inline"
             to="/privacy-policy"
             theme="white-underlined"
             size="xs"
           >
-            Neon’s Privacy Policy
+            Neon’s&nbsp;Privacy&nbsp;Policy
           </Link>
           .
         </p>
         <Button
-          className="w-[168px] shrink-0 !px-9 !py-6 !text-base !font-medium !tracking-tighter lg:!py-5 md:order-1 md:mt-6 md:w-full xs:!h-10 xs:!text-sm"
+          className="w-[168px] shrink-0 !px-9 !py-6 !text-base !font-medium !tracking-tighter lg:!py-5 md:order-1 sm:mt-6 sm:w-full xs:!h-10 xs:!text-sm"
           type="submit"
           theme="primary"
           size="lg"
