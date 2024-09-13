@@ -12,11 +12,15 @@ import getShortName from 'utils/get-short-name';
 
 const appearAndExitGradientVariants = {
   initial: {
-    display: 'none',
+    opacity: 0,
     translateX: '-100%',
+    transition: {
+      duration: 0.15,
+      ease: 'linear',
+    },
   },
   almost: {
-    display: 'block',
+    opacity: 1,
     translateX: '0%',
     transition: {
       duration: 0.3,
