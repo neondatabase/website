@@ -130,6 +130,10 @@
               slug: import/import-from-neon
             - title: Import schema only
               slug: import/import-schema-only
+            - title: Import from Azure
+              slug: import/import-from-azure-postgres
+            - title: Import from Digital Ocean
+              slug: import/import-from-digital-ocean
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL
@@ -152,8 +156,6 @@
           items:
             - title: AWS Data Migration Service (DMS)
               slug: import/migrate-aws-dms
-            - title: Migrate from Azure Database for PostgreSQL
-              slug: import/import-from-azure-postgres
         - section: CSV
           items:
             - title: Import from CSV

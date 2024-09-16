@@ -35,13 +35,13 @@ To illustrate the migration workflow, we set up the [AdventureWorks sample datab
 3. Search for the `wal_level` parameter and set its value to `LOGICAL`.
 4. Click **Save** to apply the changes.
 
-<Admonition type="note">
-Changing the `wal_level` parameter requires a server restart. This may cause a brief interruption to your database service.
-</Admonition>
+   <Admonition type="note">
+   Changing the `wal_level` parameter on Azure requires a server restart. This may cause a brief interruption to your database service.
+   </Admonition>
 
 ### Create a PostgreSQL role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. Connect to your Azure PostgreSQL database using a tool like `psql` or Azure Data Studio, then create a new role with `REPLICATION` privileges:
+It is recommended that you create a dedicated Postgres role for replicating data. Connect to your Azure PostgreSQL database using a tool like [psql](https://www.postgresql.org/docs/current/app-psql.html) or [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/?view=sql-server-ver15), then create a new role with `REPLICATION` privileges:
 
 ```sql shouldWrap
 CREATE ROLE replication_user WITH REPLICATION LOGIN PASSWORD 'your_secure_password';
@@ -118,7 +118,7 @@ To ensure that the Neon `AdventureWorks` database has the same schema as the Azu
 
 1. Export the schema from Azure PostgreSQL:
 
-   ```shell
+   ```shell shouldWrap
    pg_dump --schema-only --no-owner --no-privileges -h <azure-host> -U <azure-user> -d <azure-database> > schema.sql
    ```
 
@@ -132,7 +132,7 @@ To ensure that the Neon `AdventureWorks` database has the same schema as the Azu
 
 After importing the schema, create a subscription on the Neon database:
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your Neon database.
+1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or another SQL client to connect to your Neon database.
 
 2. Create the subscription using the `CREATE SUBSCRIPTION` statement:
 
@@ -160,7 +160,7 @@ To ensure that data is being replicated correctly:
 
    This query should return an output similar to the following:
 
-   ```text shouldWrap
+   ```text
     subid |      subname      | pid | leader_pid | relid | received_lsn |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time
     -------+-------------------+-----+------------+-------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------
     24576 | neon_subscription | 540 |            |       | 1/3D0020A8   | 2024-09-11 11:34:24.841807+00 | 2024-09-11 11:34:24.869991+00 | 1/3D0020A8     | 2024-09-11 11:34:24.841807+00
@@ -171,7 +171,7 @@ To ensure that data is being replicated correctly:
    - The `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively.
    - In this example, they have the same value, which means that all the data has been successfully replicated from Azure to Neon.
 
-2. To sanity check, that the data has been replicated correctly, compare row counts between Azure PostgreSQL and Neon for some key tables. For example, to check the number of rows in the `addresses` table, you can run the following query:
+2. To verify that the data has been replicated correctly, compare row counts between Azure PostgreSQL and Neon for some key tables. For example, you can run the following query to check the number of rows in the `addresses` table:
 
    ```sql
    SELECT COUNT(*) FROM person.address;
@@ -186,7 +186,7 @@ To ensure that data is being replicated correctly:
     (1 row)
    ```
 
-3. Additionally, you can run some common queries from your application against the Neon database and verify that it produces the same output as the Azure instance.
+3. Optionally, you can run some queries from your application against the Neon database to verify that it returns the same output as the Azure instance.
 
 ## Complete the migration
 
@@ -196,10 +196,10 @@ Once the initial data sync is complete and you've verified that ongoing changes 
 2. Wait for any final transactions to be replicated to Neon.
 3. Update your application's connection string to point to your Neon database.
 
-This ensures a much shorter downtime for the application, since we only need to wait for the last few transactions to be replicated.
+This ensures a much shorter downtime for the application, as you only need to wait for the last few transactions to be replicated before switching the application over to the Neon database.
 
 <Admonition type="note">
-Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon.
+Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon. For Neon Postgres parameter settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings). For Postgres extensions supported by Neon, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 </Admonition>
 
 ## Clean up
@@ -224,26 +224,26 @@ After successfully migrating and verifying your data on Neon, you can:
 
 This section discusses migration options other than using logical replication.
 
-### `pg_dump` and `pg_restore`
+- **pg_dump and pg_restore**
 
-If your database size is not large, you can use the `pg_dump` utility to create a dump file of your database, and then use `pg_restore` to restore the dump file to Neon. Please refer to the [Import from Postgres](/docs/import/import-from-postgres) guide for more information on this method.
+  If your database size is not large, you can use the `pg_dump` utility to create a dump file of your database, and then use `pg_restore` to restore the dump file to Neon. Please refer to the [Import from Postgres](/docs/import/import-from-postgres) guide for more information on this method.
 
-### Postgres GUI clients
+- **Postgres GUI clients**
 
-Some Postgres clients offer backup and restore capabilities. These include [pgAdmin](https://www.pgadmin.org/docs/pgadmin4/latest/backup_and_restore.html) and [phppgadmin](https://github.com/phppgadmin/phppgadmin/releases), among others. We have not tested migrations using these clients, but if you are uncomfortable using command-line utilities, they may provide an alternative.
+  Some Postgres clients offer backup and restore capabilities. These include [pgAdmin](https://www.pgadmin.org/docs/pgadmin4/latest/backup_and_restore.html) and [phppgadmin](https://github.com/phppgadmin/phppgadmin/releases), among others. We have not tested migrations using these clients, but if you are uncomfortable using command-line utilities, they may provide an alternative.
 
-### Table-level data migration
+- **Table-level data migration using CSV files**
 
-Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
+  Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
 
 ## Reference
 
-For more information on logical replication, and the Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
+For more information about logical replication and Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
 - [Postgres - Logical replication](https://www.postgresql.org/docs/current/logical-replication.html)
-- [Neon guide - Logical replication](https://neon.tech/docs/guides/logical-replication-guide)
+- [Neon logical replication guide](https://neon.tech/docs/guides/logical-replication-guide)
 
 <NeedHelp/>
