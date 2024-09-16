@@ -64,13 +64,13 @@ const getBreadcrumbs = (slug, flatSidebar) => {
     path.reduce((prev, cur) => {
       const current =
         prev[cur] || prev.items?.[cur] || prev.items?.find((item) => item.slug === cur);
-      if (current && !current.section) {
+      if (current && !current.section && current.title !== 'Home') {
         arr.push({ title: current.title, slug: current.slug });
       }
       return current;
     }, getSidebar());
 
-    return arr.slice(0, -1);
+    return arr;
   }
 
   return [];
