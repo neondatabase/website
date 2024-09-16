@@ -117,7 +117,7 @@ const items = [
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Priority support' },
       { title: 'Team accounts' },
-      { title: 'Branch protection' },
+      { title: 'Branch protection', info: 'Restrict access to prod / prevent accidental deletion' },
       {
         title: 'Migration assistance',
         info: 'With 0 migration fees—we will waive them',
