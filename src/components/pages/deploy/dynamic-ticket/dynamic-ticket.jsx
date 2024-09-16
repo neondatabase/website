@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-import usePrevious from 'hooks/use-previous';
+import usePreviousValue from 'hooks/use-previous-value';
 import getShortName from 'utils/get-short-name';
 
 const appearAndExitGradientVariants = {
@@ -88,7 +88,7 @@ const DynamicTicket = ({
 }) => {
   const { data, status } = useSession();
   const [selectedColorSchema, setSelectedColorSchema] = useState(null);
-  const prevColor = usePrevious(selectedColorSchema);
+  const prevColor = usePreviousValue(selectedColorSchema);
   const currentColorSchema = selectedColorSchema || colorSchema || '1';
   const [elephantColorSchema, setElephantColorSchema] = useState(currentColorSchema);
   const gradientControls = useAnimationControls();

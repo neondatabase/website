@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useCookie, useLocation } from 'react-use';
 
 import Button from 'components/shared/button';
+import LINKS from 'constants/links';
 import useLocalStorage from 'hooks/use-local-storage';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
@@ -56,7 +57,7 @@ const SubscriptionForm = ({
   const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
 
   const handleSubmitSuccess = () => {
-    router.push('/generate-ticket');
+    router.push(LINKS.generateTicket);
   };
 
   const context = {
@@ -69,7 +70,9 @@ const SubscriptionForm = ({
 
     const loadingAnimationStartedTime = Date.now();
 
-    if (!email) {
+    console.log('submit', typeof email, errorMessage);
+
+    if (!email && email !== '') {
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
@@ -149,8 +152,8 @@ const SubscriptionForm = ({
     >
       <input
         className={clsx(
-          'remove-autocomplete-styles relative z-20 block w-full rounded-full border-white/30 bg-black pr-[150px] font-semibold leading-none text-white placeholder-gray-5 outline-none transition-colors duration-200 placeholder:font-normal xl:placeholder:text-base',
-          errorMessage && 'border-secondary-1',
+          'remove-autocomplete-styles relative z-20 block w-full rounded-full bg-black pr-[150px] font-semibold leading-none text-white placeholder-gray-5 outline-none transition-colors duration-200 placeholder:font-normal xl:placeholder:text-base',
+          errorMessage ? 'border-secondary-1' : ' border-white/30',
           sizeClassNames[size].input
         )}
         name="email"
@@ -162,13 +165,11 @@ const SubscriptionForm = ({
         onChange={handleInputChange}
       />
 
-      {/* <RiveComponent className="pointer-events-none absolute -top-8 left-1/2 z-10 w-[120%] -translate-x-1/2 [&>*]:!min-h-[360px]" /> */}
-
       {/* Error message */}
       <AnimatePresence>
         {errorMessage && (
           <motion.span
-            className="t-base absolute -bottom-5 left-1/2 z-10 w-full -translate-x-1/2 translate-y-full text-center font-semibold !leading-snug text-secondary-1 xl:-bottom-4"
+            className="absolute -bottom-4 left-1/2 z-10 w-full -translate-x-1/2 translate-y-full text-center text-sm font-semibold !leading-snug text-secondary-1 xl:-bottom-4"
             initial="initial"
             animate="animate"
             exit="exit"

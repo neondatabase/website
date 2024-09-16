@@ -77,7 +77,7 @@ const EmailRegistrationStep = () => (
         inView
       />
     </div>
-    <div className="relative z-10 -mt-[204px] flex w-full max-w-[512px] flex-col items-center justify-center text-center lg:-mt-[184px] md:-mt-36 xs:-mt-[84px]">
+    <div className="relative z-10 -mt-[204px] flex w-full max-w-[512px] flex-col items-center justify-center pb-12 text-center lg:-mt-[184px] lg:pb-8 md:-mt-36 xs:-mt-[84px]">
       <div className="relative flex flex-col items-center">
         <CountdownTimer />
         <div className="relative mt-3.5 overflow-hidden sm:mt-2.5">
