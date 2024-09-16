@@ -43,6 +43,8 @@ Easily switch between your personal account and any organization you are a Membe
 
 ## Deleting your account
 
+Deleting your account is a two-step process: first you deactivate your account, which is reversible. Then, after 180 days, your account is permanently deleted.
+
 Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
 
 To protect your data, each resource must be removed individually &#8212; nothing is deleted in bulk. The **Delete** action will stay disabled until all conditions are met.
