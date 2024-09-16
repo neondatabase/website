@@ -122,6 +122,7 @@ const ContactUsForm = ({ className = null }) => {
         label="Your name *"
         autoComplete="name"
         error={errors.name?.message}
+        errorClassName="left-0"
         isDisabled={formState === FORM_STATES.LOADING}
         {...register('name')}
       />
@@ -134,9 +135,10 @@ const ContactUsForm = ({ className = null }) => {
         autoComplete="email"
         isDisabled={formState === FORM_STATES.LOADING}
         error={errors.email?.message}
+        errorClassName="left-0"
         {...register('email')}
       />
-      <div className="flex space-x-10 2xl:space-x-6 sm:grid sm:gap-y-5 sm:space-x-0">
+      <div className="flex space-x-6 sm:grid sm:gap-y-5 sm:space-x-0">
         <Field
           className="shrink-0 basis-[54%] 2xl:basis-[45%] lg:basis-[49%]"
           labelClassName="text-sm text-gray-new-90"
@@ -156,6 +158,7 @@ const ContactUsForm = ({ className = null }) => {
           defaultValue="hidden"
           isDisabled={formState === FORM_STATES.LOADING}
           error={errors.companySize?.message}
+          errorClassName="left-0"
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
@@ -170,13 +173,14 @@ const ContactUsForm = ({ className = null }) => {
       </div>
       <Field
         labelClassName="text-sm text-gray-new-90"
-        inputClassName="!min-h-16 !h-16"
+        inputClassName="!min-h-16 h-16"
         theme="transparent"
         name="message"
         label="Message *"
         tag="textarea"
         isDisabled={formState === FORM_STATES.LOADING}
         error={errors.message?.message}
+        errorClassName="left-0"
         {...register('message')}
       />
       <div className="relative mt-2.5 flex items-center justify-between gap-5 xl:-mt-1.5 lg:-mt-1.5 sm:flex-col">
@@ -193,10 +197,10 @@ const ContactUsForm = ({ className = null }) => {
           .
         </p>
         <Button
-          className="w-[168px] shrink-0 !px-9 !py-6 !text-base !font-medium !tracking-tighter lg:!py-5 md:order-1 sm:mt-6 sm:w-full xs:!h-10 xs:!text-sm"
+          className="w-[168px] shrink-0  md:order-1 sm:mt-6 sm:w-full"
           type="submit"
           theme="primary"
-          size="lg"
+          size="new-md-2"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
           {formState === FORM_STATES.SUCCESS ? 'Submitted' : 'Submit'}
