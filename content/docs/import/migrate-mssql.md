@@ -7,7 +7,7 @@ updatedOn: '2024-09-15T14:30:00.000Z'
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
-The `pgloader` utility transforms data to a Postgres-compatible format as it reads from your MSSQL database. It uses the `COPY` Postgres protocol to stream the data into your Postgres database.
+The `pgloader` utility transforms data to a Postgres-compatible format as it reads from your MSSQL database. It uses the Postgres `COPY` protocol to stream the data into your Postgres database.
 
 ## Prerequisites
 
@@ -21,7 +21,9 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
-- We also recommend reviewing the [Pgloader MSSQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mssql.html) guide in detail. It will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
+- Review the [Pgloader MSSQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mssql.html) guide. It will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
+
+- See [Pgloader configuration](#pgloader-configuration) for a `pgloader` configuration file update that may be required to connect to MSSQL from `pgloader`.
 
 ## Retrieve Your MSSQL database credentials
 
@@ -42,7 +44,7 @@ This section describes how to prepare your destination Neon PostgreSQL database 
 
 ### Create the Neon database
 
-Each Neon project comes with a default database named `neondb` that you can use. However, to maintain parity with the MSSQL deployment, you might want to create a new database with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
+To maintain parity with the MSSQL deployment, you might want to create a new database in Neon with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
 
 For this example, we will create a new database named `Northwind` in the Neon project. Use `psql` to connect to your Neon project (alternatively, you can use the `Query editor` in the Neon console) and run the following query:
 
@@ -185,11 +187,11 @@ For complex migrations or when you need more control over the migration process,
 
 ## Pgloader configuration
 
-- `Pgloader` automatically detects table schemas and indexes/constraints, but depending on the input table schemas, you might need to specify manual overrides in the configuration file. Refer to the [Command clauses](https://pgloader.readthedocs.io/en/latest/command.html#common-clauses) section of the `pgloader` documentation for more information.
+- `Pgloader` automatically detects table schemas, indexes, and constraints, but depending on the input table schemas, you might need to specify manual overrides in the configuration file. Refer to the [Command clauses](https://pgloader.readthedocs.io/en/latest/command.html#common-clauses) section of the `pgloader` documentation for more information.
 
-- With Azure SQL database, `pgloader` often runs into connection errors. To solve them, you might need to manually specify the FreeTDS driver configuration (which `pgloader` uses to connect to MSSQL). Please refer to the related [Github issues](https://github.com/dimitri/pgloader/) for more information.
+- With Azure SQL database, `pgloader` often runs into connection errors. To solve them, you might need to manually specify the FreeTDS driver configuration (which `pgloader` uses to connect to MSSQL). Please refer to the related issues in the [PGLoader GitHub repository](https://github.com/dimitri/pgloader/) for more information.
 
-  Below is the section I needed to add to make `pgloader` work, at the time of writing. Replace the values with your own Azure SQL database credentials.
+  Below is the section required to make `pgloader` work, at the time of writing. Replace the values with your own Azure SQL database credentials.
 
   ```plaintext
   # /etc/freetds/freetds.conf
