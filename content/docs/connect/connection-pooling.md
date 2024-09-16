@@ -74,7 +74,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
