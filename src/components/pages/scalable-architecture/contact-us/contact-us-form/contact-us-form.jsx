@@ -207,7 +207,7 @@ const ContactUsForm = ({ className = null }) => {
         </Button>
         {formError && (
           <span
-            className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1"
+            className="absolute left-1/2 top-[calc(100%+0.5rem)] -translate-x-1/2 text-sm leading-none text-secondary-1"
             data-test="error-message"
           >
             {formError}
