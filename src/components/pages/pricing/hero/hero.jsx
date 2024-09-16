@@ -35,8 +35,7 @@ const items = [
       { title: 'Team accounts', disabled: true },
       { title: 'Branch protection', disabled: true },
       { title: 'Migration assistance', disabled: true },
-      { title: 'Advice on DB design', disabled: true },
-      { title: 'SOC 2 + SLA', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -66,8 +65,7 @@ const items = [
       { title: 'Team accounts' },
       { title: 'Branch protection', disabled: true },
       { title: 'Migration assistance', disabled: true },
-      { title: 'Advice on DB design', disabled: true },
-      { title: 'SOC 2 + SLA', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -94,8 +92,7 @@ const items = [
       { title: 'Team accounts' },
       { title: 'Branch protection' },
       { title: 'Migration assistance', disabled: true },
-      { title: 'Advice on DB design', disabled: true },
-      { title: 'SOC 2 + SLA', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -125,11 +122,7 @@ const items = [
         title: 'Migration assistance',
         info: 'With 0 migration fees—we will waive them',
       },
-      {
-        title: 'Advice on DB design',
-        info: 'We help with Neon/Postgres architecture + config',
-      },
-      { title: 'SOC 2 + SLA' },
+      { title: 'SOC 2 + 99.95% SLA' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=business`,
@@ -363,7 +356,7 @@ const Hero = () => {
         <CtaBlock
           className="max-w-[716px]"
           title="Custom Enterprise Plans"
-          description="Connect with our team for larger compute sizes, dedicated requirements, and annual contracts."
+          description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
         />
