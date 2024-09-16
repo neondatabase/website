@@ -347,7 +347,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Usage Limits via API"
+        "title": "Usage Limits via API",
         "subtitle": "For DB-per-tenant architectures"
       },
       "free": false,
@@ -405,7 +405,7 @@
       "launch": false,
       "scale": false,
       "business": true
-    }
+    },
     {
       "rows": "2",
       "feature": {
