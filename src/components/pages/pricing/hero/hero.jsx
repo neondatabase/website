@@ -126,7 +126,7 @@ const items = [
       },
       {
         title: 'Solutions advice',
-        info: 'We work with you on Postgres architecture + config',
+        info: 'We work with you on Postgres architecture and config',
       },
       { title: 'SOC 2' },
       { title: 'SLA (99.95%)' },
