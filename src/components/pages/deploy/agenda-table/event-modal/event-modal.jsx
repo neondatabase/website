@@ -20,7 +20,11 @@ const EventModal = ({
   closeModal,
 }) => (
   <div className="relative z-10 rounded-[10px] bg-black px-6 pb-7 pt-6">
-    <button className="absolute right-6 top-6" type="button" onClick={closeModal}>
+    <button
+      className="absolute right-6 top-6 text-gray-new-80 transition-colors duration-200 hover:text-gray-new-90"
+      type="button"
+      onClick={closeModal}
+    >
       <CloseIcon className="h-6 w-6" />
       <span className="sr-only">Close modal</span>
     </button>
@@ -48,7 +52,7 @@ const EventModal = ({
       <div className="mt-4 flex gap-x-5 text-white">
         {xUrl && (
           <Link
-            className="hover:text-primary-4 transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-green-45"
             href={xUrl}
             rel="noreferrer noopener"
             target="_blank"
@@ -58,7 +62,7 @@ const EventModal = ({
         )}
         {linkedinUrl && (
           <Link
-            className="hover:text-primary-4 transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-green-45"
             href={linkedinUrl}
             rel="noreferrer noopener"
             target="_blank"
@@ -68,7 +72,7 @@ const EventModal = ({
         )}
         {githubUrl && (
           <Link
-            className="hover:text-primary-4 transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-green-45"
             href={githubUrl}
             rel="noreferrer noopener"
             target="_blank"
