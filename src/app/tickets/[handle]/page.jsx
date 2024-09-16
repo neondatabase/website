@@ -29,11 +29,11 @@ const TicketPage = async ({ params }) => {
           size="1344"
         >
           <div className="pointer-events-none relative z-10 col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
-            <h1 className="relative z-50 text-[62px] font-semibold leading-none tracking-[-0.05em] text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
+            <h1 className="relative z-50 font-title text-[62px] font-medium leading-none tracking-[-0.06em] text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[610px] font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[610px] text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-01T17:00:00Z">October 1st, 10 a.m. PT</time>
             </p>

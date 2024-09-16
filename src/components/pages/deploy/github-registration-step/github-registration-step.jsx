@@ -20,11 +20,11 @@ const GithubRegistrationStep = () => {
   return (
     <>
       <div className="col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
-        <h2 className="text-[62px] font-semibold leading-none tracking-[-0.05em] text-white xl:mx-auto xl:max-w-[420px] xl:text-center md:text-[52px]">
+        <h2 className="font-title text-[62px] font-medium leading-none tracking-[-0.06em] text-white xl:mx-auto xl:max-w-[420px] xl:text-center md:text-[52px]">
           You’re invited. <br />
           Grab the ticket.
         </h2>
-        <p className="mt-5 font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+        <p className="mt-5 text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
           Generate a unique ticket image with your GitHub profile and participate in Neon's giveaway
           right after the conference.
         </p>
@@ -85,7 +85,7 @@ const GithubRegistrationStep = () => {
             </AnimatePresence>
             <span>Generate with GitHub</span>
           </Button>
-          <span className="relative z-10 ml-5 max-w-[140px] shrink-0 text-sm leading-[1.375] tracking-[0.04em] text-gray-5 xl:ml-0 xl:mt-3 xl:max-w-full sm:mt-2">
+          <span className="relative z-10 ml-5 max-w-[140px] shrink-0 text-sm leading-snug tracking-wider text-gray-5 xl:ml-0 xl:mt-3 xl:max-w-full sm:mt-2">
             Only public data <br className="xl:hidden" /> is going to be used.
           </span>
         </div>
