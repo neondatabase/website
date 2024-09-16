@@ -51,7 +51,7 @@ SHOW max_connections;
 ```
 
 <Admonition type="note">
-Four connections are reserved for the Neon-managed Postgres `superuser` account. For example, for a 0.25 compute size, 4/112 connections are reserved, so you would only have 108 available connections. If you are running queries from the Neon SQL Editor, that will also use a connection. To view the currently open connections, you can run the following query:
+Seven connections are reserved for the Neon-managed Postgres `superuser` account. For example, for a 0.25 compute size, 7/112 connections are reserved, so you would only have 105 available connections. If you are running queries from the Neon SQL Editor, that will also use a connection. To view connections that are currently open, you can run the following query:
 
 ```sql
 SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
@@ -63,18 +63,18 @@ Even with the largest compute size, the `max_connections` limit may not be suffi
 
 ## Connection pooling
 
-Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections through the -pooler endpoint.
+Some applications open numerous connections, with most eventually becoming inactive. This behavior can often be attributed to database driver limitations, running many instances of an application, or applications with serverless functions. With regular Postgres, new connections are rejected when reaching the `max_connections` limit. To overcome this limitation, Neon supports connection pooling using [PgBouncer](https://www.pgbouncer.org/), which allows Neon to support up to 10,000 concurrent connections to the pooler endpoint.
 
-The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal PostgreSQL endpoint, so they still consume some connections to the main Postgres instance.
+The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal Postgres endpoint, so they still consume some connections to the main Postgres instance.
 
-To ensure that direct access to Postgres is still possible for e.g. administrative tasks, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. I.e., there can be only 64 active connections by `john` to the `neondb` database through the pooler. All other connections by `john` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
-At the same time, a user `mike` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough `minCU` setting to be configured with a high enough `max_connections` setting to support those 128 concurrent connections from those two users.  
-Similarly, even if the user `john` has 64 concurrently active transactions through the pooler to the `neondb` database, that user can still start up to 64 concurrent transactions in the `john_db` database when connected through the pooler; but again, only if Postgres' `max_connections` limit has the capacity for the connections that are managed by the pooler.
+To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
+At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough minimum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.  
+Similarly, even if role `alex` has 64 concurrently active transactions through the pooler to the `neondb` database, that role can still start up to 64 concurrent transactions in the `alex_db` database (a different database) when connected through the pooler; but again, only if the Postgres `max_connections` limit can support the number of connections managed by the pooler.
 
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume some connections on the main endpoint: PgBouncer forwards operations from the user's connections through its own pool of connnections to Postgres, and adaptively adds more connections to PostgreSQL as and when needed by more concurrently active user connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections, but infrequent and/or short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
@@ -85,7 +85,7 @@ Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `tr
 
 ## Neon PgBouncer configuration settings
 
-Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support).
+Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support). For example, Neon sometimes raises the `default_pool_size` setting for users who support a large number of concurrent connections and repeatedly hit PgBouncer's pool size limit.
 
 ```ini
 [pgbouncer]
