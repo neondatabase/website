@@ -144,22 +144,41 @@
 
     &.ticket-front-variant-0 {
       background-image: url('/images/deploy/deploy-0.jpg');
+
+      @media screen(md) {
+        background-image: url('/images/deploy/deploy-0-md.jpg');
+      }
     }
 
     &.ticket-front-variant-1 {
       background-image: url('/images/deploy/deploy-1.jpg');
+
+      @media screen(md) {
+        background-image: url('/images/deploy/deploy-1-md.jpg');
+      }
     }
 
     &.ticket-front-variant-2 {
       background-image: url('/images/deploy/deploy-2.jpg');
+      @media screen(md) {
+        background-image: url('/images/deploy/deploy-2-md.jpg');
+      }
     }
 
     &.ticket-front-variant-3 {
       background-image: url('/images/deploy/deploy-3.jpg');
+
+      @media screen(md) {
+        background-image: url('/images/deploy/deploy-3-md.jpg');
+      }
     }
 
     &.ticket-front-variant-4 {
       background-image: url('/images/deploy/deploy-4.jpg');
+
+      @media screen(md) {
+        background-image: url('/images/deploy/deploy-4-md.jpg');
+      }
     }
   }
 
