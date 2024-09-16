@@ -15,6 +15,7 @@ This guide describes how to migrate a Postgres database from Digital Ocean to Ne
 - `pg_dump` and `pg_restore` utilities installed on your local machine. These typically come with a Postgres installation.
 
   We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
+
 - Review our guide on [Importing data from Postgres](/docs/import/import-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
 ## Prepare your Digital Ocean database
