@@ -104,10 +104,10 @@
       "feature": {
         "title": "Databases"
       },
-      "free": "Unlimited",
-      "launch": "Unlimited",
-      "scale": "Unlimited",
-      "business": "Unlimited"
+      "free": "500 per branch",
+      "launch": "500 per branch",
+      "scale": "500 per branch",
+      "business": "500 per branch"
     },
     {
       "feature": "Compute Features"
