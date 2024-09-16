@@ -50,7 +50,7 @@ const items = [
     price: 19,
     priceFrom: true,
     isMarketplaceAvailable: true,
-    description: 'All the resources, features and support you need to launch.',
+    description: 'The resources, features, and support you need to launch.',
     features: [
       {
         title: '10 GiB storage included',
@@ -81,7 +81,7 @@ const items = [
     price: 69,
     priceFrom: true,
     isMarketplaceAvailable: true,
-    description: 'Full platform access for scaling production workloads.',
+    description: 'For scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
@@ -109,14 +109,14 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For existing workloads with larger storage/compute requirements.',
+    description: 'For business workloads with larger storage/compute requirements.',
     features: [
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
       {
         title: '1000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 40 GB RAM' },
+      { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Priority support' },
       { title: 'Team accounts' },
