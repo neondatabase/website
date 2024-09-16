@@ -51,11 +51,11 @@ To protect your data, each resource must be removed individually &#8212; nothing
 
 Here's where to go in the Neon Console to complete these actions:
 
-| **Action**                  | **Instructions**                                                                                                                                                                                                                                          |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Action**                  | **Instructions**                                                                                                                                                                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Leave all organizations** | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the more options menu. If you're the only Admin, promote another Member to Admin first. <br/> ![leave organization](/docs/manage/leave_org.png) |
-| **Delete all projects**     | Go to the **Projects** page and manually [delete](docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                         |
-| **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                |
+| **Delete all projects**     | Go to the **Projects** page and manually [delete](docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                                |
+| **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                       |
 
 Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
