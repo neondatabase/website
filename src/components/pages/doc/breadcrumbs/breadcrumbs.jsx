@@ -11,13 +11,13 @@ const Breadcrumbs = ({ breadcrumbs }) => (
         {index > 0 && <span>/</span>}
         {slug ? (
           <Link
-            className="transition-colors duration-200 last:text-black hover:text-black dark:last:text-white dark:hover:text-white"
+            className="transition-colors duration-200 hover:text-black dark:hover:text-white"
             to={DOCS_BASE_PATH + slug}
           >
             {title}
           </Link>
         ) : (
-          <span>{title}</span>
+          <span className="text-black dark:text-white">{title}</span>
         )}
       </Fragment>
     ))}

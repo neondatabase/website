@@ -61,11 +61,14 @@ const getBreadcrumbs = (slug, flatSidebar) => {
   const path = flatSidebar.find((item) => item.slug === slug)?.path;
   const arr = [];
   if (path) {
-    path.reduce((prev, cur) => {
+    path.reduce((prev, cur, index, array) => {
       const current =
         prev[cur] || prev.items?.[cur] || prev.items?.find((item) => item.slug === cur);
       if (current && !current.section && current.title !== 'Home') {
-        arr.push({ title: current.title, slug: current.slug });
+        arr.push({
+          title: current.title,
+          ...(index !== array.length - 1 && { slug: current.slug }),
+        });
       }
       return current;
     }, getSidebar());
