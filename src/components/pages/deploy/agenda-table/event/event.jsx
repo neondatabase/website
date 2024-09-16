@@ -25,7 +25,7 @@ const Event = ({
       role={bio ? 'button' : 'row'}
       onClick={openModal}
     >
-      <td className="py-4 pr-4 sm:mt-3.5 sm:flex sm:items-center sm:justify-between sm:py-0 sm:pr-0 xs:items-center">
+      <td className="py-4 pr-4 sm:mt-3.5 sm:flex sm:items-baseline sm:justify-between sm:py-0 sm:pr-0">
         <div
           className={clsx(
             'group flex items-center gap-x-2.5 sm:w-full',
@@ -51,7 +51,10 @@ const Event = ({
             )}
           </div>
         </div>
-        <span className="hidden whitespace-pre text-gray-new-80 sm:block" aria-hidden>
+        <span
+          className="hidden whitespace-pre text-gray-new-80 sm:block sm:text-[15px]"
+          aria-hidden
+        >
           {time}
         </span>
       </td>
@@ -63,7 +66,7 @@ const Event = ({
       >
         {event}
       </td>
-      <td className="whitespace-pre py-4 text-lg font-semibold leading-dense text-gray-new-80 lg:text-base sm:hidden">
+      <td className="whitespace-pre py-4 text-lg leading-dense text-gray-new-80 lg:text-base sm:hidden">
         {time}
       </td>
     </tr>

@@ -99,7 +99,7 @@ const EmailRegistrationStep = () => (
           </time>
         </div>
       </div>
-      <p className="text-gray-60 mt-3 max-w-[448px] text-lg font-light leading-[1.3] sm:text-base xs:max-w-[320px]">
+      <p className="mt-3 max-w-[448px] text-lg font-light leading-[1.3] text-gray-new-60 sm:text-base xs:max-w-[320px]">
         Join us for presentations about Postgres, scalability, AI, and using Neon with modern
         developer tools.
       </p>
