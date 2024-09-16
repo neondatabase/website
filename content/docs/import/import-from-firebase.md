@@ -17,12 +17,13 @@ We'll use a custom Python script to export data from Firestore to a local file, 
 
   For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-- Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to Neon Postgres database. 
+- Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to Neon Postgres database.
 
-    You can install them using pip:
-    ```bash
-    pip install firebase-admin "psycopg[binary,pool]"
-    ```
+  You can install them using pip:
+
+  ```bash
+  pip install firebase-admin "psycopg[binary,pool]"
+  ```
 
 ## Retrieve Firebase credentials
 
@@ -33,7 +34,7 @@ This section describes how to fetch the credentials to connect to your Firebase 
 3. Under the **Service Accounts** tab, click **Generate new private key**. This will download a JSON file containing your credentials.
 4. Save this JSON file securely on your local machine. We'll use it in our Python script.
 
-For more information, please consult the [Firebase documentation](https://firebase.google.com/docs/admin/setup#initialize_the_sdk_in_non-google_environments). 
+For more information, please consult the [Firebase documentation](https://firebase.google.com/docs/admin/setup#initialize_the_sdk_in_non-google_environments).
 
 ## Export data from Firestore
 
@@ -132,8 +133,6 @@ Save this script as `firebase-download.py`. To run the script, you need to provi
 ```bash
 python firebase-download.py --credentials path/to/your/firebase-credentials.json --output firestore_data
 ```
-
-
 
 For each unique collection id, this script creates a line-delimited JSON file, and all documents in that collection (spanning different top-level documents) are saved to it. For example, if you have a collection with the following structure:
 
@@ -288,21 +287,22 @@ After running both the Firestore export and the Neon import scripts, you should 
 1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. List all tables in your database:
+
    ```sql
    \dt
    ```
 
 3. Run some sample queries to check that the data has been successfully imported. For example, the following query fetches all orders made by the first two customers:
-   
-    ```sql
-    SELECT data FROM orders
-    WHERE parent_id IN (
-        SELECT id FROM customers
-        LIMIT 2
-    )
-    ```
 
-    Compare the results with those from your Firestore database to ensure data integrity. Note that using the `parent_id` field, we can navigate through the hierarchical structure of the original data. 
+   ```sql
+   SELECT data FROM orders
+   WHERE parent_id IN (
+       SELECT id FROM customers
+       LIMIT 2
+   )
+   ```
+
+   Compare the results with those from your Firestore database to ensure data integrity. Note that using the `parent_id` field, we can navigate through the hierarchical structure of the original data.
 
 ## Other migration options
 
@@ -310,11 +310,11 @@ While this guide focuses on using a custom Python script, there are other migrat
 
 ### Firestore managed export/import
 
-If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://cloud.google.com/firestore/docs/export-import-data). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon. 
+If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://cloud.google.com/firestore/docs/export-import-data). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon.
 
 ### Open source utilities
 
-There are also a number of open source utilities available that can help export data from Firestore to local files. 
+There are also a number of open source utilities available that can help export data from Firestore to local files.
 
 - [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
 - [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
