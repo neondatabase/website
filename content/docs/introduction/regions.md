@@ -11,8 +11,6 @@ Neon supports project deployment in several regions. We recommended that you sel
 
 ## AWS regions
 
-Neon currently supports the following AWS regions:
-
 - US East (N. Virginia) &mdash; `aws-us-east-1`
 - US East (Ohio) &mdash; `aws-us-east-2`
 - US West (Oregon) &mdash; `aws-us-west-2`
