@@ -82,10 +82,10 @@ DATABASE_URL="YOUR_NEON_CONNECTION_STRING"
 2. In the Resend dashboard, create an API key.
 3. Add the API key to your `.env` file:
 
-    ```bash
-    # .env
-    AUTH_RESEND_KEY="YOUR_RESEND_API_KEY"
-    ```
+   ```bash
+   # .env
+   AUTH_RESEND_KEY="YOUR_RESEND_API_KEY"
+   ```
 
 4. Optional: Resend requires verification of ownership for the domain you use to send emails from. If you own a domain, you can follow the instructions [here](https://resend.com/docs/dashboard/domains/introduction) to verify ownership.
 
