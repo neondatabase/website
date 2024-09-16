@@ -4,7 +4,7 @@ subtitle: Learn how to add passwordless authentication to your Neon Postgres dat
   application using Auth.js and Resend
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.897Z'
+updatedOn: '2024-09-16T13:02:12.674Z'
 ---
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (e.g., Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
