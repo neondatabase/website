@@ -53,12 +53,12 @@ Here's where to go in the Neon Console to complete these actions:
 
 | **Action**                  | **Instructions**                                                                                                                                                                                                                                          |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Leave all organizations** | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the kebab menu. If you're the only Admin, promote another Member to Admin first. <br/> ![leave organization](/docs/manage/leave_org.png) |
+| **Leave all organizations** | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the more options menu. If you're the only Admin, promote another Member to Admin first. <br/> ![leave organization](/docs/manage/leave_org.png) |
 | **Delete all projects**     | Go to the **Projects** page and manually [delete](docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                         |
 | **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                |
 
-Once all conditions are met and all your checkmarks show green, you can safely delete. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 30 days to restore your account with your personal info intact.
+Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
-After 30 days, your account will be permanetly removed.
+After 180 days, your account will be permanetly removed.
 
 For deleting an organization, a similar process ensures that all resources are deliberately removed before you can delete the organization itself. See [Delete an organization](/docs/manage/orgs-manage#delete-an-organization) for more detail.
