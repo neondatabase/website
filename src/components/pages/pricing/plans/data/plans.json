@@ -399,7 +399,7 @@
       "rows": "2",
       "feature": {
         "title": "Migration Assistance",
-        "subtitle": "Includes waived migration fees"
+        "subtitle": "With waived migration fees"
       },
       "free": false,
       "launch": false,
@@ -409,7 +409,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Solutions Architect consultation"
+        "title": "Solutions Architect"
       },
       "free": false,
       "launch": false,
