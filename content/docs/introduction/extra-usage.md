@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how extra usage works in Neon's pricing plans
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-09-02T13:42:56.658Z'
+updatedOn: '2024-09-08T12:44:00.905Z'
 ---
 
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
@@ -37,7 +37,7 @@ The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable
 
 ## Extra usage
 
-The [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
+The [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), and [Business](/docs/introduction/plans#business) plans permit extra usage beyond the allowances included with the monthly fee. The extra usage types that are available differ by plan.
 
 ### Launch plan
 

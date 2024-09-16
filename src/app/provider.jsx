@@ -16,10 +16,13 @@ const whiteThemePages = [
   '/cookie-policy',
   '/business-info',
 ];
+
+const themesSupportPages = ['/docs', '/guides', '/templates'];
+
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isWhiteThemePage = whiteThemePages.some((page) => pathname.startsWith(page));
-  const hasThemesSupport = pathname.startsWith('/docs') || pathname.startsWith('/guides');
+  const hasThemesSupport = themesSupportPages.some((page) => pathname.startsWith(page));
   const forcedTheme = isWhiteThemePage ? 'light' : 'dark';
 
   return (

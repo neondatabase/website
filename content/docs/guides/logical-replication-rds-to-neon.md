@@ -3,7 +3,8 @@ title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-04T14:11:03.959Z'
+tag: new
+updatedOn: '2024-09-08T12:44:00.902Z'
 ---
 
 <LRBeta/>
@@ -22,6 +23,7 @@ Neon's logical replication feature allows you to replicate data from Amazon RDS 
 
 - A destination Neon project. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 ## Prepare your source database
 

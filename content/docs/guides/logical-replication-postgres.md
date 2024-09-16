@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-04T14:11:03.959Z'
+updatedOn: '2024-09-04T18:53:01.154Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -22,6 +22,7 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
 
 - A destination Postgres instance other than Neon.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 ## Prepare your source Neon database
 

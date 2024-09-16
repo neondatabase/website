@@ -3,7 +3,8 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-23T18:00:32.996Z'
+tag: new
+updatedOn: '2024-09-08T12:44:00.901Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -16,7 +17,7 @@ In this guide, you will learn how to configure a Postgres source connector in Es
 
 - An [Estuary Flow account](https://dashboard.estuary.dev/register) (start free, no credit card required)
 - A [Neon account](https://console.neon.tech/)
-- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable Logical Replication in Neon
 

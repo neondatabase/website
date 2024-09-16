@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.658Z'
+updatedOn: '2024-09-05T13:33:27.999Z'
 ---
 
 A Neon account can view and manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
@@ -79,6 +79,10 @@ Changing your plan to one with lower usage allowances may affect the performance
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
 To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+
+## How to prevent further monthly charges to your account
+
+If you are on any of Neon's paid plans, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects from your account will not stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free. For example, if you are on the [Launch](/docs/introduction/plans#launch) plan, which has a base monthly fee of $19 per month, you will continue to be charged $19 a month until you downgrade to the Free plan.
 
 ## Delete your account
 

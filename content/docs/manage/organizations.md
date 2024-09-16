@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-08-23T13:51:17.453Z'
+updatedOn: '2024-09-10T21:01:06.532Z'
 ---
 
 <EarlyAccess/>
@@ -33,8 +33,8 @@ Here's a breakdown of what actions each role can take:
 | ------------------------------------------------------------------------ | :---: | :----: | :---: |
 | [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ✅   |  ❌   |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ❌   |  ❌   |
-| Invite [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
-| Invite [guests](/docs/manage/orgs-manage#invite-guests) (share projects) |  ✅   |   ✅   |  ❌   |
+| Manage [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
+| Manage [guests](/docs/manage/orgs-manage#invite-guests) (share projects) |  ✅   |   ✅   |  ✅   |
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)              |  ✅   |   ❌   |  ❌   |
 | [Manage billing](/docs/manage/orgs-manage#billing)                       |  ✅   |   ❌   |  ❌   |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)   |  ✅   |   ❌   |  ❌   |
@@ -71,7 +71,7 @@ In this scenario you've been using Neon for personal projects for some time, and
 
 ## Request conversion from support
 
-If you want us to handle this conversion for you, you can contact our [Customer Success](mailto:customer-success@neon.tech) team to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
+If you want us to handle this conversion for you, you can contact [Neon Support](https://neon.tech/docs/introduction/support#support-channels) to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
 
 ## Limitations
 

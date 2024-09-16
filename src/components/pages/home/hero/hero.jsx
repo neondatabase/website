@@ -54,7 +54,7 @@ const ITEMS = [
     description:
       'Instantly branch your data and schema to access isolated DB copies for development, CI/CD, and schema migrations with copy-on-write storage.',
     linkLabel: 'Explore Branching',
-    linkUrl: LINKS.branching,
+    linkUrl: LINKS.docsBranching,
   },
 ];
 

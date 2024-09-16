@@ -1,3 +1,3 @@
-import InkeepTrigger from './inkeep-trigger';
+import InkeepSearch from './inkeep-trigger';
 
-export default InkeepTrigger;
+export default InkeepSearch;

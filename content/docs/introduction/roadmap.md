@@ -6,16 +6,19 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-08-26T18:37:36.231Z'
+updatedOn: '2024-09-08T12:44:00.905Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peak at some of the upcoming features we'll be taking on next.
 
 ## What we've just launched
 
-- **Organizations**: We're happy to report that **Organization Accounts** is now available to Early Access users. Create a new organization, transfer over your projects, invite your team and get started collaborating. Join our [Early Access Program](https://console.neon.tech/app/settings/early-access) to get a first look at Neon Organizations. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
+- **A new Business plan with more compute and storage**: This new plan provides higher storage and compute allowances (500 GiB of storage and 1,000 compute hours) in addition to all of Neon's advanced features. It also offers potential cost savings for customers requiring more storage than our Scale plan provides. To learn more, please refer to our [Pricing](https://neon.tech/pricing) page and [Plans](/docs/introduction/plans) documentation.
+- **Data migration support with inbound logical replication**: We've introduced inbound logical replication as the first step toward enabling seamless, low-downtime migrations from your current database provider to Neon. This feature allows you to use Neon as your development environment, taking advantage of developer-friendly tools like branching and our [GitHub integration](/docs/guides/neon-github-integration), even if you keep production with your existing provider. To get started, explore our guides for replicating data from AlloyDB, Aurora, CloudSQL, and RDS. See [Replicate data to Neon](/docs/guides/logical-replication-guide#replicate-data-to-neon). Inbound logical replication also supports migrating data between Neon projects, useful for version, region, or account migrations. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+- **Organizations**: Organization Accounts are now available to Early Access users. Create a new organization, transfer over your projects, invite your team and get started collaborating. Join our [Early Access Program](https://console.neon.tech/app/settings/early-access) to get a first look at Neon Organizations. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
 - **Autoscaling GA**: One of our defining features, [Autoscaling](/docs/introduction/autoscaling), is now GA. Read the announcement: [Neon Autoscaling is Generally Available](https://neon.tech/blog/neon-autoscaling-is-generally-available).
 - **Autoscaling on the Free Plan**: Users on the Free Plan are now able to try Neon's Autoscaling feature, within reasonable Free Plan limits. [Learn how](/docs/guides/autoscaling-guide).
+- **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
 
 For more of the latest features and fixes, check our [Changelog](/docs/changelog), published weekly. Or watch for our Changelog email, also sent out weekly. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
 
@@ -27,11 +30,6 @@ Here's a snapshot of what we're working on now:
 - **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released.
 - **Support for exporting metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable metrics.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
-- **Migrations**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
-- **Plans & Billing**: We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. You can expect to see changes in this area, including:
-  - A new plan tailored to business needs, with key features and usage allowances that better fit business-focused development teams.
-  - Storage-related billing optimizations.
-- **Neon CLI**: We've recently added a [create-app](/docs/reference/cli-create-app) command that lets you bootstrap your application with common dev stacks. `create-app` is maturing fast, with new frameworks, ORMs, and features coming out regularly.
 - **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
