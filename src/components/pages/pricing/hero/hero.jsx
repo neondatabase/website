@@ -123,7 +123,7 @@ const items = [
       { title: 'Branch protection' },
       {
         title: 'Migration assistance',
-        info: 'With 0 migration fees (we'll waive them)',
+        info: 'With 0 migration fees. We'll waive them.',
       },
       { title: 'SOC 2' },
       { title: 'SLA (99.95%)' },
