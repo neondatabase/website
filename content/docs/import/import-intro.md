@@ -2,7 +2,7 @@
 title: Neon data import guides
 subtitle: Learn how to import data from different sources or load sample data
 enableTableOfContents: true
-updatedOn: '2024-08-22T02:18:02.655Z'
+updatedOn: '2024-09-13T08:32:10.939Z'
 ---
 
 Find instructions for importing data from Postgres, CSV, other Neon projects, and other Postgres providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
@@ -24,6 +24,8 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 <a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to a Neon Postgres database" icon="heroku">Import from Heroku</a>
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="aws">Migrate with AWS DMS</a>
+
+<a href="/docs/import/import-from-azure-postgres" description="Migrate data from an Azure Database for PostgreSQL deployment to Neon" icon="aws">Migrate from Azure PostgreSQL</a>
 
 <a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="download">Load sample data</a>
 

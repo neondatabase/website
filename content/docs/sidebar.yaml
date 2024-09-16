@@ -154,6 +154,8 @@
           items:
             - title: AWS Data Migration Service (DMS)
               slug: import/migrate-aws-dms
+            - title: Migrate from Azure Database for PostgreSQL
+              slug: import/import-from-azure-postgres
         - section: CSV
           items:
             - title: Import from CSV
