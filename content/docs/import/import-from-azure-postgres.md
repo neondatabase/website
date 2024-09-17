@@ -130,7 +130,6 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 5. CLick `Save` at the bottom to make sure all changes are saved.
 
-
 ## Prepare your Neon destination database
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
