@@ -58,6 +58,7 @@ export default {
   signup: 'https://console.neon.tech/signup',
   subprocessors: '/subprocessors',
   support: '/docs/introduction/support',
+  stage: '/stage',
   terms: '/terms-of-service',
   termsOfService: '/terms-of-service',
   thankYou: '/thank-you',
