@@ -96,6 +96,24 @@ CREATE PUBLICATION azure_publication FOR ALL TABLES;
 
 This command creates a publication named `azure_publication` that includes all tables in the `public` schema, since we want to copy all the data. For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
+<Admonition type="important">
+Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
+
+To create a publication for a specific table, you can use the following syntax:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
+```
+
+To create a publication for multiple tables, provide a comma-separated list of tables:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE users, departments;
+```
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+</Admonition>
+
 ## Prepare your Neon destination database
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
