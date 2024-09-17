@@ -337,7 +337,6 @@ const Hero = () => {
           </ul>
         </div>
         <p className="mb-10 mt-16 text-center text-lg font-light leading-snug text-gray-new-80 sm:mb-4">
-          Not sure which plan is right for you?
           <br />
           Explore the{' '}
           <Button
