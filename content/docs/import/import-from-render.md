@@ -1,8 +1,9 @@
 ---
 title: Migrate from Render to Neon Postgres
-subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump and pg_restore
+subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
+  and pg_restore
 enableTableOfContents: true
-updatedOn: '2024-09-15T10:00:00.000Z'
+updatedOn: '2024-09-17T17:41:32.479Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.
