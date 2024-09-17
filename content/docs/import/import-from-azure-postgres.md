@@ -108,7 +108,9 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
    Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
-4. CLick `Save` at the bottom to make sure all changes are saved.
+4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
+
+5. CLick `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 
