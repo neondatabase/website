@@ -26,7 +26,9 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - See [Pgloader configuration](#pgloader-configuration) for a `pgloader` configuration file update that may be required to connect to MSSQL from `pgloader`.
 
-## Retrieve Your MSSQL database credentials
+## Prepare your MSSQL database
+
+### Retrieve Your MSSQL database credentials
 
 Before starting the migration process, collect your MSSQL database credentials. If you are using Azure SQL, you can use the following steps to retrieve them:
 
@@ -38,6 +40,18 @@ Before starting the migration process, collect your MSSQL database credentials. 
    - Password (Not displayed in the Azure portal)
 
 Keep the database connection details handy for later use.
+
+### Allow inbound traffic from Neon
+
+If you are using Azure SQL, you need to allow inbound traffic from your local machine, so `pgloader` can connect to your database. To do this, follow these steps:
+
+1. Log into the Azure portal and navigate to your Azure SQL Server resource.
+
+2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab.
+
+3. Click on the `Add your Client IPv4 address` option, which will automatically create a new rule with the IP address of your local machine. If you are running `pgloader` elsewhere, replace both the `Start IP` and `End IP` fields with the IP address of that machine.
+
+4. CLick `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

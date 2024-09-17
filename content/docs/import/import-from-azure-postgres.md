@@ -114,6 +114,22 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
+### Allow inbound traffic from Neon
+
+You need to allow inbound traffic from Neon Postgres servers so it can connect to your Azure database. To do this, follow these steps:
+
+1. Log into the Azure portal and navigate to your Azure Postgres Server resource.
+
+2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab.
+
+3. Click on `Add a Firewall Rule`, which generates a modal to add the range of IP addresses from which we want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. For each IP address, create a new rule and fill both the `Start IP` and `End IP` fields with the IP address.
+
+   Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
+
+4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
+
+5. CLick `Save` at the bottom to make sure all changes are saved.
+
 ## Prepare your Neon destination database
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
