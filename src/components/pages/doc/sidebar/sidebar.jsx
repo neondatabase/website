@@ -96,10 +96,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
           className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-x-hidden overflow-y-scroll pt-[46px]"
           ref={menuWrapperRef}
         >
-          <div
-            className="relative w-full overflow-hidden transition-[height] duration-300"
-            style={{ height: menuHeight }}
-          >
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
               title="Home"

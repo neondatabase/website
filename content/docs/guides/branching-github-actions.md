@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-08-28T21:00:06.070Z'
+updatedOn: '2024-09-13T11:02:49.006Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -43,6 +43,7 @@ jobs:
   Create-Neon-Branch:
   steps:
     - uses: neondatabase/create-branch-action@v5
+      id: create-branch
       with:
         project_id: rapid-haze-373089
         # optional (defaults to your project's default branch)
@@ -52,7 +53,6 @@ jobs:
         branch_name: from_action_reusable
         username: db_user_for_url
         api_key: ${{ secrets.NEON_API_KEY }}
-        id: create-branch
     - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
     - run: echo host ${{ steps.create-branch.outputs.host }}
     - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
@@ -149,7 +149,7 @@ jobs:
       with:
         project_id: rapid-haze-373089
         branch: br-long-forest-224191
-        api_key: { { secrets.NEON_API_KEY } }
+        api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
 ### Input variables
@@ -201,12 +201,12 @@ jobs:
   Reset-Neon-Branch:
     steps:
       - uses: neondatabase/reset-branch-action@v1
+        id: reset-branch
         with:
           project_id: rapid-haze-373089
           parent: true
           branch: child_branch
           api_key: ${{ secrets.NEON_API_KEY }}
-        id: reset-branch
       - run: echo branch_id ${{ steps.reset-branch.outputs.branch_id }}
 ```
 

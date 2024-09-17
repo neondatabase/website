@@ -12,8 +12,10 @@ const styles = {
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
-    sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8',
     'new-md': 't-base py-[11px] px-[26px]',
+    'new-md-2':
+      'text-base px-9 h-12 font-medium tracking-tighter lg:h-11 lg:px-11 xs:h-10 xs:text-sm',
+    sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8',
     xs: 't-base py-[14px] px-[26px]',
     xxs: 'h-8 px-4 text-sm tracking-extra-tight',
   },
