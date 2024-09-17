@@ -310,16 +310,16 @@ While this guide focuses on using a custom Python script, there are other migrat
 
 - **Firestore managed export/import**
 
-    If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://firebase.google.com/docs/firestore/manage-data/export-import). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon.
+  If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://firebase.google.com/docs/firestore/manage-data/export-import). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon.
 
 - **Open source utilities**
 
-    There are also a number of open source utilities available that can help export data from Firestore to local files.
+  There are also a number of open source utilities available that can help export data from Firestore to local files.
 
-    - [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
-    - [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
+  - [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
+  - [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
 
-    However, these utilities are not as robust as the managed export/import service. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
+  However, these utilities are not as robust as the managed export/import service. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
 
 ## Reference
 
