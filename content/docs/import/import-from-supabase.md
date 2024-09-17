@@ -46,7 +46,7 @@ You'll need these details to construct your connection string for `pg_dump`.
 
 Now that you have your Supabase connection details, you can export your data using `pg_dump`:
 
-```bash
+```bash shouldWrap
 pg_dump -Fc -v -d postgresql://[user]:[password]@[supabase_host]:[port]/[database] --schema=public -f supabase_dump.bak
 ```
 
@@ -91,9 +91,9 @@ This section describes how to prepare your destination Neon Postgres database to
 
 ### Create the Neon database
 
-Each Neon project comes with a default database named `neondb`. However, to maintain consistency with your Supabase setup, you might want to create a new database with the same name.
+To maintain consistency with your Supabase setup, you can create a new database in Neon with the same database name you used in Supabase.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like `psql`.
+1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like [psql](/docs/connect/query-with-psql-editor).
 
 2. Create a new database. For example, if your Supabase database was named `lego`, run:
 
@@ -170,7 +170,7 @@ After the restore process completes, you should verify that your data has been s
 
 ## Clean up
 
-After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup for some time.
+After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup until you've verified that the migration was successful.
 
 ## Other migration options
 
