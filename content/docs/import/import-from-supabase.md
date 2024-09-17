@@ -1,8 +1,9 @@
 ---
 title: Migrate from Supabase to Neon Postgres
-subtitle: Learn how to migrate your database from Supabase to Neon Postgres using pg_dump and pg_restore
+subtitle: Learn how to migrate your database from Supabase to Neon Postgres using
+  pg_dump and pg_restore
 enableTableOfContents: true
-updatedOn: '2024-09-11T14:30:00.000Z'
+updatedOn: '2024-09-17T16:14:42.837Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
