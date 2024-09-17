@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { memo } from 'react';
 
 import { getHighlightedCodeArray } from 'lib/shiki';
 
@@ -161,17 +160,12 @@ func main() {
   },
 ];
 
-const MemoizedNavigation = memo(Navigation);
-
 const CodeTabs = async ({ className = null }) => {
   const highlightedCodeSnippets = await getHighlightedCodeArray(codeSnippets);
 
   return (
     <div className={clsx(className, 'rounded-[10px] bg-black-new')}>
-      <MemoizedNavigation
-        codeSnippets={codeSnippets}
-        highlightedCodeSnippets={highlightedCodeSnippets}
-      />
+      <Navigation codeSnippets={codeSnippets} highlightedCodeSnippets={highlightedCodeSnippets} />
     </div>
   );
 };
