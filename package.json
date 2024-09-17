@@ -52,6 +52,7 @@
     "hls.js": "^1.5.8",
     "html-react-parser": "^5.1.10",
     "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "lodash.isboolean": "^3.0.3",
     "lodash.isempty": "^4.4.0",

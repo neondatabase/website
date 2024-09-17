@@ -3,7 +3,7 @@
 import { Alignment, Fit, Layout, useRive, useStateMachineInput } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import useIsTouchDevice from 'hooks/use-is-touch-device';
@@ -30,15 +30,21 @@ const DotsAnimation = ({
   });
   const [animationRef, isVisible] = useInView({ threshold: 0.2 });
 
+  const layout = useMemo(
+    () =>
+      new Layout({
+        fit: Fit[fit],
+        alignment: Alignment[alignment],
+      }),
+    [fit, alignment]
+  );
+
   const { rive, RiveComponent } = useRive({
     src,
     artboard,
     autoplay,
     stateMachines,
-    layout: new Layout({
-      fit: Fit[fit],
-      alignment: Alignment[alignment],
-    }),
+    layout,
     onLoad: () => {
       rive?.resizeDrawingSurfaceToCanvas();
       onLoad?.();
@@ -48,34 +54,22 @@ const DotsAnimation = ({
   const tabInput = useStateMachineInput(rive, stateMachines, 'tab', 1);
   const changeInput = useStateMachineInput(rive, stateMachines, 'change');
 
-  useEffect(
-    () => {
-      if (!rive) {
-        return;
-      }
+  useEffect(() => {
+    if (!rive) return;
 
-      if (isVisible) {
-        rive.play();
-      } else {
-        rive.pause();
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible]
-  );
+    if (isVisible) {
+      rive.play();
+    } else {
+      rive.pause();
+    }
+  }, [rive, isVisible]);
 
-  useEffect(
-    () => {
-      if (!rive || !tabInput || !changeInput) {
-        return;
-      }
+  useEffect(() => {
+    if (!rive || !tabInput || !changeInput) return;
 
-      tabInput.value = activeTab + 1;
-      changeInput.fire();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible, activeTab]
-  );
+    tabInput.value = activeTab + 1;
+    changeInput.fire();
+  }, [rive, tabInput, changeInput, activeTab]);
 
   return (
     <>
