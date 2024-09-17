@@ -76,6 +76,8 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
 
+   Defining specific tables lets you add or remove tables from the publication later, which you cannot do if you've created a publication with `FOR ALL TABLES`.
+
 5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
 
 With these steps completed, your Neon database is now connected to Sequin via a replication slot and publication. Sequin is now detecting changes to your tables.
