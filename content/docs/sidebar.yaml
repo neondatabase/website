@@ -141,7 +141,7 @@
             - title: Import from MSSQL
               slug: import/migrate-mssql
             - title: Import from Render
-              slug: import/migrate-render
+              slug: import/import-from-render
             - title: Import from Supabase
               slug: import/import-from-supabase
         - section: Logical replication
