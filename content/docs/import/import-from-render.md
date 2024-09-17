@@ -1,11 +1,11 @@
 ---
 title: Migrate from Render to Neon Postgres
-subtitle: Learn how to migrate your database from Render PostgreSQL to Neon Postgres using pg_dump and pg_restore
+subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump and pg_restore
 enableTableOfContents: true
 updatedOn: '2024-09-15T10:00:00.000Z'
 ---
 
-This guide describes how to migrate a database from Render Postgres to Neon Postgres.
+This guide describes how to migrate a database from Render to Neon Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
@@ -42,7 +42,7 @@ You'll need this connection string for `pg_dump` to connect to the Render databa
 
 Now that you have your Render connection details, you can export your data using `pg_dump`:
 
-```bash
+```bash shouldWrap
 pg_dump -Fc -v -d <render_external_database_url> --schema=public -f render_dump.bak
 ```
 
@@ -85,7 +85,7 @@ This section describes how to prepare your destination Neon Postgres database to
 
 ### Create the Neon database
 
-Each Neon project comes with a default database named `neondb`. However, to maintain consistency with your Render setup, you might want to create a new database with the same name.
+To maintain consistency with your Render setup, you might want to create a new database in Neon with the same database name used in Render.
 
 1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like `psql`.
 
@@ -156,7 +156,7 @@ After the restore process completes, you should verify that your data has been s
 
 ## Clean up
 
-After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Render database dump file (`render_dump.bak`) as a backup for some time.
+After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Render database dump file (`render_dump.bak`) as a backup until you've verified that the migration was successful.
 
 ## Other migration options
 
