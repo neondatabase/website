@@ -7,7 +7,7 @@ updatedOn: '2024-09-15T10:00:00.000Z'
 
 This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
 
-We'll use a custom Python script to export data from Firestore to a local file, and then import it into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
+We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ We'll use a custom Python script to export data from Firestore to a local file, 
 
 - Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to Neon Postgres database.
 
-  You can install them using pip:
+  You can install them using `pip`:
 
   ```bash
   pip install firebase-admin "psycopg[binary,pool]"
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
 Save this script as `firebase-download.py`. To run the script, you need to provide the path to your Firebase credentials JSON file and the output directory for the downloaded data. Run the following command in your terminal:
 
-```bash
+```bash shouldWrap
 python firebase-download.py --credentials path/to/your/firebase-credentials.json --output firestore_data
 ```
 
@@ -274,7 +274,7 @@ if __name__ == "__main__":
 
 Save this script as `neon-import.py`. To run the script, you need to provide the path to the input directory containing the JSON files and the Neon connection string. Run the following command in your terminal:
 
-```bash
+```bash shouldWrap
 python neon-import.py --input firestore_data --postgres "<neon-connection-string>"
 ```
 
@@ -308,18 +308,18 @@ After running both the Firestore export and the Neon import scripts, you should 
 
 While this guide focuses on using a custom Python script, there are other migration options available:
 
-### Firestore managed export/import
+- **Firestore managed export/import**
 
-If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://cloud.google.com/firestore/docs/export-import-data). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon.
+    If you have a large volume of data to migrate, you can use the [Google Cloud Firestore managed export and import service](https://firebase.google.com/docs/firestore/manage-data/export-import). It allows you to export your Firestore data to a Google Cloud Storage bucket, from where you can download and ingest it into Neon.
 
-### Open source utilities
+- **Open source utilities**
 
-There are also a number of open source utilities available that can help export data from Firestore to local files.
+    There are also a number of open source utilities available that can help export data from Firestore to local files.
 
-- [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
-- [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
+    - [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
+    - [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
 
-However, these utilities are not as robust as the managed export/import service, and often unmaintained. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
+    However, these utilities are not as robust as the managed export/import service. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
 
 ## Reference
 

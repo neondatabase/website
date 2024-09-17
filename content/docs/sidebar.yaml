@@ -130,10 +130,10 @@
               slug: import/import-from-neon
             - title: Import schema only
               slug: import/import-schema-only
-            - title: Import from Azure
-              slug: import/import-from-azure-postgres
             - title: Import from Digital Ocean
               slug: import/import-from-digital-ocean
+            - title: Import from Firebase
+              slug: import/import-from-firebase
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL
@@ -150,6 +150,8 @@
               slug: guides/logical-replication-alloydb
             - title: Replicate from Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/import-from-azure-postgres
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
