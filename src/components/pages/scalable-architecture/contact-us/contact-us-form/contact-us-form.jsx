@@ -13,6 +13,7 @@ import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
+import LINKS from 'constants/links';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
@@ -109,7 +110,7 @@ const ContactUsForm = ({ className = null }) => {
   return (
     <form
       className={clsx(
-        'relative z-10 grid gap-x-[20px] gap-y-6 rounded-xl border border-gray-new-10 bg-[radial-gradient(128.16%_100%_at_38.89%_0%,#18191B80_0%,#18191B4D_47.96%,#18191B00_100%)] p-9 xl:p-6 xs:p-5',
+        'relative z-10 grid gap-x-5 gap-y-6 rounded-xl border border-gray-new-10 bg-[radial-gradient(128.16%_100%_at_38.89%_0%,#18191B80_0%,#18191B4D_47.96%,#18191B00_100%)] p-9 xl:p-6 xs:p-5',
         className
       )}
       method="POST"
@@ -186,12 +187,7 @@ const ContactUsForm = ({ className = null }) => {
       <div className="relative mt-2.5 flex items-center justify-between gap-5 xl:-mt-1.5 lg:-mt-1.5 sm:flex-col">
         <p className="text-left text-sm font-light leading-snug text-gray-new-70">
           By submitting, you agree to{' '}
-          <Link
-            className="pb-1 !text-sm 2xl:!text-sm md:!inline"
-            to="/privacy-policy"
-            theme="white-underlined"
-            size="xs"
-          >
+          <Link className="pb-1" to={LINKS.privacyPolicy} theme="white-underlined" size="2xs">
             Neon’s&nbsp;Privacy&nbsp;Policy
           </Link>
           .
