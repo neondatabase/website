@@ -27,7 +27,7 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 This section describes how to prepare your Render database for exporting data.
 
-To illustrate the migration workflow, we use the [LEGO Database](https://neon.tech/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes. We load the LEGO database into Render using the `psql` command line tool.
+To illustrate the migration workflow, we use the [LEGO Database](https://neon.tech/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes. We load the LEGO database into Render using the [psql](/docs/connect/query-with-psql-editor) command-line tool.
 
 ### Retrieve Render connection details
 
@@ -143,7 +143,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or [psql](/docs/connect/query-with-psql-editor).
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 
@@ -162,13 +162,13 @@ After successfully migrating and verifying your data on Neon, you can update you
 
 While this guide focuses on using `pg_dump` and `pg_restore`, there are other migration options available:
 
-### Logical replication
+- **Logical replication**
 
-For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
+   For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
 
-### CSV export/import
+- **CSV export/import**
 
-For smaller datasets or specific tables, you might consider exporting to CSV from Render and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
+   For smaller datasets or specific tables, you might consider exporting to CSV from Render and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
 
 ## Reference
 

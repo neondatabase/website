@@ -136,14 +136,14 @@
               slug: import/import-from-digital-ocean
             - title: Import from Heroku
               slug: import/import-from-heroku
-            - title: Import from Supabase
-              slug: import/import-from-supabase
             - title: Import from MySQL
               slug: import/migrate-mysql
             - title: Import from MSSQL
               slug: import/migrate-mssql
             - title: Import from Render
               slug: import/migrate-render
+            - title: Import from Supabase
+              slug: import/import-from-supabase
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB

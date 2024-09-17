@@ -33,6 +33,8 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/migrate-mysql" description="Learn how to migrate your MySQL data to Neon Postgres using pgloader." icon="sql">Import from MySQL</a>
 
+<a href="/docs/import/import-from-render" description="Import data from Render to Neon Postgres with pg_dump and pg_restore" icon="sql">Import from Render</a>
+
 <a href="/docs/import/import-from-supabase" description="Import data from Supabase to Neon Postgres with pg_dump and pg_restore" icon="sql">Import from Supabase</a>
 
 </DetailIconCards>
