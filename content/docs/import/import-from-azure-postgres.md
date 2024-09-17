@@ -3,7 +3,7 @@ title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
 enableTableOfContents: true
-updatedOn: '2024-09-16T13:02:12.679Z'
+updatedOn: '2024-09-17T15:08:05.549Z'
 ---
 
 <LRBeta/>
@@ -96,6 +96,24 @@ CREATE PUBLICATION azure_publication FOR ALL TABLES;
 
 This command creates a publication named `azure_publication` that includes all tables in the `public` schema, since we want to copy all the data. For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
+<Admonition type="important">
+Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
+
+To create a publication for a specific table, you can use the following syntax:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
+```
+
+To create a publication for multiple tables, provide a comma-separated list of tables:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE users, departments;
+```
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+</Admonition>
+
 ### Allow inbound traffic from Neon
 
 You need to allow inbound traffic from Neon Postgres servers so it can connect to your Azure database. To do this, follow these steps:
@@ -111,6 +129,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
 
 5. CLick `Save` at the bottom to make sure all changes are saved.
+
 
 ## Prepare your Neon destination database
 

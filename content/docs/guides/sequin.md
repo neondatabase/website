@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2024-09-08T11:05:11.784Z'
+updatedOn: '2024-09-17T15:08:05.548Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -75,6 +75,8 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
    ```sql
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
+
+   Defining specific tables lets you add or remove tables from the publication later, which you cannot do if you've created a publication with `FOR ALL TABLES`.
 
 5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
 
