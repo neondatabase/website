@@ -21,17 +21,19 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/import-from-csv" description="Import data from a CSV file using the psql command-line utility" icon="csv">Import data from CSV</a>
 
-<a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to a Neon Postgres database" icon="heroku">Import from Heroku</a>
+<a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to a Neon Postgres database" icon="heroku">Import from Heroku using the Heroku CLI</a>
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="aws">Migrate with AWS DMS</a>
 
-<a href="/docs/import/import-from-azure-postgres" description="Import from an Azure Database for PostgreSQL to Neon Postgres" icon="aws">Import from Azure</a>
+<a href="/docs/import/import-from-azure-postgres" description="Import from an Azure Database for PostgreSQL to Neon Postgres" icon="import">Import from Azure</a>
 
-<a href="/docs/import/import-from-digital-ocean" description="Import data from Digital Ocean Postgres to Neon Postgres" icon="aws">Import from Digital Ocean</a>
+<a href="/docs/import/import-from-digital-ocean" description="Import data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore" icon="aws">Import from Digital Ocean</a>
 
 <a href="/docs/import/import-sample-data" description="Load one of several sample datasets for exploration and testing" icon="download">Load sample data</a>
 
 <a href="/docs/import/migrate-mysql" description="Learn how to migrate your MySQL data to Neon Postgres using pgloader." icon="sql">Import from MySQL</a>
+
+<a href="/docs/import/import-from-supabase" description="Import data from Supabase to Neon Postgres with pg_dump and pg_restore" icon="sql">Import from Supabase</a>
 
 </DetailIconCards>
 
