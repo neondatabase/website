@@ -178,11 +178,11 @@ While this guide focuses on using `pg_dump` and `pg_restore`, there are other mi
 
 - **Logical replication**
 
-   For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
+  For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
 
 - **CSV export/import**
 
-   For smaller datasets or specific tables, you might consider exporting to CSV from Supabase and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
+  For smaller datasets or specific tables, you might consider exporting to CSV from Supabase and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
 
 ## Reference
 
