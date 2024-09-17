@@ -8,6 +8,7 @@ import LINKS from 'constants/links';
 
 const Cta = ({
   title = 'Features of tomorrow.<br /> Available today.',
+  titleClassName,
   className = 'pb-[307px] pt-[445px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
   description = null,
   buttonText = 'Get Started',
@@ -32,7 +33,8 @@ const Cta = ({
         <h2
           className={clsx(
             'relative text-center font-title text-[68px] font-medium leading-[0.9] -tracking-[0.03em] text-white',
-            'xl:text-[56px] xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]'
+            'xl:text-[56px] xl:tracking-extra-tight lg:text-[44px] sm:text-[32px]',
+            titleClassName
           )}
           dangerouslySetInnerHTML={{ __html: title }}
         />
@@ -61,6 +63,7 @@ const Cta = ({
 
 Cta.propTypes = {
   title: PropTypes.string,
+  titleClassName: PropTypes.string,
   className: PropTypes.string,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
