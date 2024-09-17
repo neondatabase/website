@@ -79,7 +79,7 @@ const items = [
     price: 69,
     priceFrom: true,
     isMarketplaceAvailable: true,
-    description: 'For scaling production workloads right after launch.',
+    description: 'More capacity and functionality for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
