@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2024-09-08T12:44:00.899Z'
+updatedOn: '2024-09-17T15:08:05.541Z'
 ---
 
 <LRBeta/>
