@@ -21,7 +21,9 @@ Find instructions for importing data from Postgres, CSV, other Neon projects, an
 
 <a href="/docs/import/import-from-csv" description="Import data from a CSV file using the psql command-line utility" icon="csv">Import data from CSV</a>
 
-<a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to a Neon Postgres database" icon="heroku">Import from Heroku using the Heroku CLI</a>
+<a href="/docs/import/import-from-firebase" description="Import data from Firebase Firestore to Neon Postgres using a custom Python script" icon="import">Import from Firebase Firestore</a>
+
+<a href="/docs/import/import-from-heroku" description="Import data from a Heroku Postgres database to Neon Postgres using the Heroku CLI" icon="heroku">Import from Heroku</a>
 
 <a href="/docs/import/migrate-aws-dms" description="Migrate data from another database source to Neon using the AWS Data Migration Service" icon="aws">Migrate with AWS DMS</a>
 
