@@ -47,11 +47,11 @@ If you are using Azure SQL, you need to allow inbound traffic from your local ma
 
 1. Log into the Azure portal and navigate to your Azure SQL Server resource.
 
-2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab. 
+2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab.
 
-3. Click on the `Add your Client IPv4 address` option, which will automatically create a new rule with the IP address of your local machine. If you are running `pgloader` elsewhere, replace both the `Start IP` and `End IP` fields with the IP address of that machine. 
+3. Click on the `Add your Client IPv4 address` option, which will automatically create a new rule with the IP address of your local machine. If you are running `pgloader` elsewhere, replace both the `Start IP` and `End IP` fields with the IP address of that machine.
 
-4. CLick `Save` at the bottom to make sure all changes are saved. 
+4. CLick `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

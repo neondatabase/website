@@ -102,11 +102,11 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 1. Log into the Azure portal and navigate to your Azure Postgres Server resource.
 
-2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab. 
+2. Click on the **Networking** option under the `Settings` section in the sidebar. Navigate to the **Firewall Rules** section under the `Public access` tab.
 
-3. Click on `Add a Firewall Rule`, which generates a modal to add the range of IP addresses from which we want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. For each IP address, create a new rule and fill both the `Start IP` and `End IP` fields with the IP address. 
+3. Click on `Add a Firewall Rule`, which generates a modal to add the range of IP addresses from which we want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. For each IP address, create a new rule and fill both the `Start IP` and `End IP` fields with the IP address.
 
-    Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
+   Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
 4. CLick `Save` at the bottom to make sure all changes are saved.
 
