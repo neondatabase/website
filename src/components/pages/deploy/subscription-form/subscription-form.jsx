@@ -153,7 +153,7 @@ const SubscriptionForm = ({
     >
       <input
         className={clsx(
-          'remove-autocomplete-styles relative z-20 block w-full rounded-full bg-gray-new-8 pr-[150px] font-semibold leading-none text-white placeholder-gray-new-40 outline-none transition-colors duration-200 placeholder:font-normal xl:placeholder:text-base',
+          'remove-autocomplete-styles relative z-20 block w-full rounded-full bg-gray-new-8 pr-[150px] leading-none text-white placeholder-gray-new-40 outline-none transition-colors duration-200 placeholder:font-normal xl:placeholder:text-base',
           errorMessage ? 'border-secondary-1' : ' border-gray-new-30',
           sizeClassNames[size].input
         )}
