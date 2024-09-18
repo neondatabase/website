@@ -3,6 +3,8 @@ title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
 tag: new
+redirectFrom:
+  - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
 updatedOn: '2024-09-18T09:52:58.422Z'
 ---
@@ -261,7 +263,7 @@ This section discusses migration options other than using logical replication.
 
 - **pg_dump and pg_restore**
 
-  If your database size is not large, you can use the `pg_dump` utility to create a dump file of your database, and then use `pg_restore` to restore the dump file to Neon. Please refer to the [Import from Postgres](/docs/import/import-from-postgres) guide for more information on this method.
+  If your database size is not large, you can use the `pg_dump` utility to create a dump file of your database, and then use `pg_restore` to restore the dump file to Neon. Please refer to the [Migrate from Postgres](/docs/import/migrate-from-postgres) guide for more information on this method.
 
 - **Postgres GUI clients**
 

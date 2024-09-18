@@ -22,7 +22,7 @@ Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/con
 
 This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
 
-To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
+To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate from Postgres](/docs/import/migrate-from-postgres) guide.
 
 ## Backups with @neondatabase/pg-import
 

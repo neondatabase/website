@@ -281,7 +281,7 @@ The formula for compute hour usage is: `compute hours = compute size * active ho
 <details>
 <summary>**How does autosuspend (scale to zero) affect my compute hour usage?**</summary>
 
-Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](docs/introduction/auto-suspend).
+Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](/docs/introduction/auto-suspend).
 
 </details>
 

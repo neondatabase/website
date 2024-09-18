@@ -78,7 +78,7 @@ Neon currently does not support the `system_stats` extension required to use the
 
 ### How to install pgAdmin
 
-Pre-compiled and configured installation packages for pgAdmin 4 are available for different desktop environments. For installation instructions, refer to the [pgAdmin deployment documentation](https://www.pgadmin.org/docs/pgadmin4/8.4/deployment.html). Downloads can be found on the [PgAdmin Downloads](https://www.pgadmin.org/download/) page.
+Pre-compiled and configured installation packages for pgAdmin 4 are available for different desktop environments. For installation instructions, refer to the [pgAdmin deployment documentation](https://www.pgadmin.org/docs/pgadmin4/latest/deployment.html). Downloads can be found on the [PgAdmin Downloads](https://www.pgadmin.org/download/) page.
 
 ### How to connect to your database from pgAdmin
 
