@@ -139,7 +139,7 @@ However, there are some trade-offs:
 - **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
 - **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-usage). If the table is large, this could push you over your plan's limit, trigging extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
 
-In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also cause a a temporary extra usage charges for the current billing period.
+In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
 
 **Recommendations**
 
