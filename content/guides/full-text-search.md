@@ -192,7 +192,7 @@ BEGIN
 END $$;
 ```
 
-Next, you can run an `EXPLAIN ANALYZE` query (or just click the "Explain" button in the Neon SQL Editor) to confirm that Postgres is using your GIN index.
+Next, you can run an `EXPLAIN ANALYZE` query (or just click the **Explain** button in the Neon SQL Editor) to confirm that Postgres is using your GIN index.
 
 ```sql
 EXPLAIN ANALYZE
