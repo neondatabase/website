@@ -118,7 +118,7 @@ If you're looking to control your storage costs, you might start by deleting old
 
 **Why no reduction?**
 
-In Postgres, [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) doesn't reduce your storage size. Intead, it marks the deleted space in the table for reuse, meaning future data can fill that space without increasing data size. While, `VACUUM` by itself won't make the data size smaller, it is good practice to run it periodically, and it does not impact availability of your data.
+In Postgres, [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) doesn't reduce your storage size. Instead, it marks the deleted space in the table for reuse, meaning future data can fill that space without increasing data size. While, `VACUUM` by itself won't make the data size smaller, it is good practice to run it periodically, and it does not impact availability of your data.
 
 ```sql
 VACUUM your_table_name;
