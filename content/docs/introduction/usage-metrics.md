@@ -111,6 +111,45 @@ Also, make sure you don't have old branches lying around. If you created a bunch
 
 </details>
 
+<details>
+<summary>**How does running `VACUUM` or `VACUUM FULL` affect my storage costs?**</summary>
+
+If you're looking to control your storage costs, you might start by deleting old data from your tables, which reduces the data size you're billed for going forward. Since, in typical Postgres operations, deleted tuples are not physically removed until a vacuum is performed, you might then run `VACUUM`, expecting to see a further reduction in the `Data size` reported in the Console &#8212; but you don't see the expected decrease.
+
+### Why no reduction?
+
+In Postgres, `VACUUM` doesn't reduce your storage size. Intead, it marks the deleted space in the table for reuse, meaning future data can fill that space without increasing data size. While, `VACUUM` by itself won't make the data size smaller, it is good practice to run it periodically, and it does not impact availability of your data.
+
+```sql
+VACUUM your_table_name;
+```
+
+### Use VACUUM FULL to reclaim space
+
+Running `VACUUM FULL` _does_ reclaim physical storage space by rewriting the table, removing empty spaces, and shrinking the table size. This can help lower the **Data size** part of your storage costs.
+
+To reclaim space, you can run the following command:
+
+```sql
+VACUUM FULL your_table_name;
+```
+
+However, there are some trade-offs:
+
+- **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-storage). If the table is large, this could push you over your plan's limit, trigging extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+
+In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also cause a a temporary extra usage charges for the current billing period.
+
+### Recommendations
+
+- **Set a reasonable history window** &#8212; We recommend setting your history retention period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it costs more.
+- **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is significant amount of space to be reclaimed.
+_ **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
+- **Manual VACUUM for autosuspend users** — If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` rather than rely on [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) to avoid issues caused by losing statistics when the endpoint is suspended.
+
+</details>
+
 ## Compute
 
 Compute hour usage is calculated by multiplying compute size by _active hours_.

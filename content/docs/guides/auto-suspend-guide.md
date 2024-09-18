@@ -92,3 +92,7 @@ The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/star
 </Admonition>
 
 You can try any of these methods and watch the status of your compute as it transitions from an **Idle** to an **Active** state.
+
+## Considerations
+
+When a compute autosuspends and later restarts, the [session context](/docs/reference/compatibility#session-context) resets. This includes in-memory statistics, temporary tables, prepared statements, and autovacuum thresholds, among other session-specific data. If your workflow requires persistent session data, consider disabling autosuspend on a paid plan to keep your compute active continuously. On the Free plan, autosuspend is always enabled and automatically suspends after 5 minutes of inactivity.
