@@ -144,7 +144,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 **Recommendations**
 
 - **Set a reasonable history window** &#8212; We recommend setting your history retention period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it costs more.
-- **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is significant amount of space to be reclaimed.
+- **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
   \_ **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
 - **Manual VACUUM for autosuspend users** — If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` rather than rely on [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) to avoid issues caused by losing statistics when the endpoint is suspended.
 
