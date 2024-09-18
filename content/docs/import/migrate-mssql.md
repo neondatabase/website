@@ -4,7 +4,7 @@ subtitle: Learn how to migrate a Microsoft SQL Server database to Neon Postgres 
   pgloader
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-09-17T16:21:02.686Z'
+updatedOn: '2024-09-18T09:52:58.427Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

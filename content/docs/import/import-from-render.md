@@ -4,7 +4,7 @@ subtitle: Learn how to migrate your database from Render to Neon Postgres using 
   and pg_restore
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-09-17T17:41:32.479Z'
+updatedOn: '2024-09-18T09:52:58.426Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.

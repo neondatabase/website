@@ -4,7 +4,7 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
   replication
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-09-17T16:21:02.683Z'
+updatedOn: '2024-09-18T09:52:58.422Z'
 ---
 
 <LRBeta/>
