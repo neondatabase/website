@@ -60,7 +60,7 @@ Moving a project to a differ region requires moving your data using one of the f
 Using the dump and restore method involves the following steps:
 
 1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
-1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
+1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/migrate-from-postgres).
 
 Moving data to a new Neon project using this method may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 

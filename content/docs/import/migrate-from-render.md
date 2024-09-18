@@ -3,6 +3,8 @@ title: Migrate from Render to Neon Postgres
 subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
   and pg_restore
 tag: new
+redirectFrom:
+  - /docs/import/import-from-render
 enableTableOfContents: true
 updatedOn: '2024-09-18T09:52:58.426Z'
 ---
@@ -23,7 +25,7 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
   We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
-- Review our guide on [Importing data from Postgres](/docs/import/import-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
+- Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
 ## Prepare your Render database
 
@@ -126,7 +128,7 @@ This command includes these arguments:
 - `--no-owner`: Skips setting the ownership of objects as in the original database.
 - `--no-acl`: Skips restoring access privileges for objects as in the original database.
 
-We recommend using the `--no-owner` and `--no-acl` options to skip restoring ownership and access control settings from Render. After migrating the data, review and configure the appropriate roles and privileges for all objects, as needed. For more information, refer to the section on [Database object ownership considerations](/docs/import/import-from-postgres#database-object-ownership-considerations).
+We recommend using the `--no-owner` and `--no-acl` options to skip restoring ownership and access control settings from Render. After migrating the data, review and configure the appropriate roles and privileges for all objects, as needed. For more information, refer to the section on [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
 
 If the command was successful, you'll see output similar to the following:
 
@@ -178,6 +180,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Importing data to Neon](https://neon.tech/docs/import/import-from-postgres)
+- [Migrating data to Neon](https://neon.tech/docs/import/migrate-from-postgres)
 
 <NeedHelp/>

@@ -54,7 +54,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 
 ### Place your application and database in the same region
 
-A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For information about moving your database to a different region, see [Import data from another Neon project](/docs/import/import-from-neon).
+A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For information about moving your database to a different region, see [Import data from another Neon project](/docs/import/migrate-from-neon).
 
 ### Increase your connection timeout
 

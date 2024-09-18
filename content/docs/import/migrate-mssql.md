@@ -1,5 +1,5 @@
 ---
-title: Migrate from Microsoft SQL Server (MSSQL) to Neon
+title: Migrate from Microsoft SQL Server to Neon Postgres
 subtitle: Learn how to migrate a Microsoft SQL Server database to Neon Postgres using
   pgloader
 tag: new
