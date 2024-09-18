@@ -120,7 +120,7 @@ SELECT
 
 ## Rank the results
 
-Postgres also provides two functions for ranking the results, allowing you to sort by which results are the best match. The following statement sorts rows that match "searching text" using the `ts_rank()` function, which counts the number of tokens that match.
+Postgres provides two functions for ranking the results, allowing you to sort by which results are the best match. The following statement sorts rows that match "searching text" using the `ts_rank()` function, which counts the number of tokens that match.
 
 ```sql
 SELECT
