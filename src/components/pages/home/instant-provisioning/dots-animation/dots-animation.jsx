@@ -66,7 +66,7 @@ const DotsAnimation = ({
 
   useEffect(
     () => {
-      if (!rive || !tabInput || !changeInput) {
+      if (!rive || !tabInput || !changeInput || isTouch) {
         return;
       }
 
@@ -74,7 +74,7 @@ const DotsAnimation = ({
       changeInput.fire();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [rive, isVisible, activeTab]
+    [rive, isVisible, activeTab, isTouch]
   );
 
   return (

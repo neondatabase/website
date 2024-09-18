@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-09-05T19:52:37.922Z'
+updatedOn: '2024-09-18T16:25:02.711Z'
 ---
 
 <EarlyAccess/>
@@ -65,12 +65,12 @@ To invite new Guests, click **Invite guests** and select the project you want to
 
 ### Manage Guests
 
-Click the kebab menu next to the row in the **Guests** table to manage Guest access. You have two options:
+Click the more options menu next to the row in the **Guests** table to manage Guest access. You have two options:
 
 - **Convert to member** — Admins can promote the Guest to a full Member, granting access to all projects in the organization.
 - **Remove from project** — All members can revoke the Guest's access to the shared project.
 
-  ![guests kebab](/docs/manage/orgs_guests_kebab.png 'no-border')
+  ![guests more options menu](/docs/manage/orgs_guests_kebab.png 'no-border')
 
 ## Create and delete projects
 

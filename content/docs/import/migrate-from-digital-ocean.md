@@ -2,8 +2,11 @@
 title: Migrate from Digital Ocean Postgres to Neon
 subtitle: Learn how to migrate your Postgres database from Digital Ocean to Neon using
   pg_dump and pg_restore
+tag: new
+redirectFrom:
+  - /docs/import/import-from-digital-ocean
 enableTableOfContents: true
-updatedOn: '2024-09-16T13:02:12.679Z'
+updatedOn: '2024-09-18T09:52:58.425Z'
 ---
 
 This guide describes how to migrate a Postgres database from Digital Ocean to Neon using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
@@ -17,7 +20,7 @@ This guide describes how to migrate a Postgres database from Digital Ocean to Ne
 
   We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
-- Review our guide on [Importing data from Postgres](/docs/import/import-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
+- Review our guide on [Importing data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
 ## Prepare your Digital Ocean database
 
@@ -159,13 +162,13 @@ After successfully migrating and verifying your data on Neon, you can update you
 
 While this guide focuses on using `pg_dump` and `pg_restore`, there are other migration options available:
 
-### Logical replication
+- **Logical replication**
 
-For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
+  For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
 
-### CSV export/import
+- **CSV export/import**
 
-For smaller datasets or specific tables, you might consider exporting to CSV from Digital Ocean and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
+  For smaller datasets or specific tables, you might consider exporting to CSV from Digital Ocean and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
 
 ## Reference
 
@@ -173,6 +176,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Importing data to Neon](https://neon.tech/docs/import/import-from-postgres)
+- [Migrating data to Neon](https://neon.tech/docs/import/migrate-from-postgres)
 
 <NeedHelp/>

@@ -2,12 +2,10 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import PauseableVideo from 'components/shared/pauseable-video';
-import useIsSafari from 'hooks/use-is-safari';
 import phoneCameraIllustration from 'images/pages/home/lightning/phone-camera.png';
 
 import useLightningAnimation from './use-lightning-animation';
@@ -42,16 +40,6 @@ const VIDEO_PATHS = {
 const Lightning = () => {
   const { videoContainerRef, videoActiveRef, videoIdleRef, isVideoActive } =
     useLightningAnimation();
-  const isSafari = useIsSafari();
-  const [isClientSideSafariOnIPad, setIsClientSideSafariOnIPad] = useState(false);
-
-  useEffect(() => {
-    const { userAgent } = navigator;
-    const isIPad =
-      /iPad/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-    setIsClientSideSafariOnIPad(isSafari && isIPad);
-  }, [isSafari]);
 
   return (
     <section className="lightning safe-paddings mt-56 xl:mt-32 lg:mt-[76px] sm:mt-20">
@@ -62,13 +50,10 @@ const Lightning = () => {
         <h2
           className={clsx(
             'relative z-20 inline-block max-w-[790px] bg-home-lightning-title bg-clip-text pb-6 font-title text-[128px] font-medium leading-[0.95] -tracking-wider text-transparent [mask-image:radial-gradient(80px_80px_at_77.8%_86%,transparent_50%,transparent_94%,black_90%)]',
-            'xl:max-w-2xl xl:text-[96px]',
-            'lg:max-w-lg lg:text-[72px]',
+            'xl:max-w-2xl xl:bg-home-lightning-title-xl xl:text-[96px]',
+            'lg:max-w-lg lg:bg-home-lightning-title-lg lg:text-[72px]',
             'md:max-w-md md:bg-home-lightning-title-md md:text-[72px] md:[mask-image:radial-gradient(40px_68px_at_78.1%_82%,transparent_100%,black)]',
-            'sm:min-w-[320px] sm:max-w-xs sm:bg-home-lightning-title-sm sm:text-[52px] sm:[mask-image:radial-gradient(49px_55px_at_93.6%_73%,transparent_97%,black)]',
-            isClientSideSafariOnIPad
-              ? 'xl:bg-home-lightning-title-xl-ipad xl:[mask-image:none] lg:bg-home-lightning-title-lg-ipad'
-              : 'xl:bg-home-lightning-title-xl xl:[mask-image:radial-gradient(39px_71px_at_67.9%_84%,transparent_100%,black)] lg:bg-home-lightning-title-lg lg:[mask-image:radial-gradient(34px_55px_at_68.6%_76%,transparent_100%,black)]'
+            'sm:min-w-[320px] sm:max-w-xs sm:bg-home-lightning-title-sm sm:text-[52px] sm:[mask-image:radial-gradient(49px_55px_at_93.6%_73%,transparent_97%,black)]'
           )}
         >
           Lightning fast. Edge&nbsp;ready.
