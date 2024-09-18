@@ -18,7 +18,7 @@ const TopBar = ({ isDarkTheme }) => (
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/blog/dynamically-estimating-and-scaling-postgres-working-set-size"
+    to="https://neon.tech/neon-on-azure"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Learn how Neon's autoscaling works - it estimates Postgres' working set size and keeps it in memory. Engineering post here   
+      Azure regions are coming to Neon very soon. Sign up for the waitlist to get early access     
     </span>
     <ChevronIcon
       className={clsx(
