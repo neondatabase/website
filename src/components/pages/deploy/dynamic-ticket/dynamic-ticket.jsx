@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 import usePreviousValue from 'hooks/use-previous-value';
-import getShortName from 'utils/get-short-name';
 
 const appearAndExitGradientVariants = {
   initial: {
@@ -226,12 +225,10 @@ const DynamicTicket = ({
                   ) : (
                     <span className="row-start-1 row-end-3 h-[56px] w-[56px] rounded-full border border-white lg:h-[48px] lg:w-[48px]" />
                   )}
-                  <b className="font-sans text-[26px] font-semibold leading-none text-white lg:text-xl md:hidden">
+                  <b className="font-sans text-[26px] font-semibold leading-none text-white lg:text-xl">
                     {name || githubHandle}
                   </b>
-                  <b className="hidden font-sans text-[26px] font-semibold leading-none text-white lg:text-xl md:block">
-                    {getShortName(name) || githubHandle}
-                  </b>
+
                   <span className="col-start-2 font-mono text-base font-normal leading-none text-white lg:text-sm">
                     @{githubHandle}
                   </span>
