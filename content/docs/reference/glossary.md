@@ -328,7 +328,7 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 ## peak usage
 
-Peak usage is the highest amount of a resource (like storage or compute) you’ve used during the current billing period. If you go over your plan’s limit, extra charges are added in set increments. You’re charged for these extra units from the date you went over the limit, with the charges prorated for the rest of the month.
+Peak usage is the highest amount of a resource (like storage or projects) you’ve used during the current billing period. If you go over your plan’s limit, extra charges are added in set increments. You’re charged for these extra units from the date you went over the limit, with the charges prorated for the rest of the month.
 
 ## point-in-time restore
 
