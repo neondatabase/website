@@ -22,7 +22,7 @@ const SocialShare = ({ className = null, url }) => {
         <TwitterShareButton
           className="social-share shadow-social"
           url={url}
-          shareText="Just got my ticket to @neondatabase Developer Days. Claim yours!"
+          shareText="Just got my ticket to @neondatabase Deploy. Claim yours!"
         >
           Post
         </TwitterShareButton>
