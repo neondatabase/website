@@ -59,7 +59,7 @@ Internally, `to_tsvector()` uses a parser to break the text content into tokens 
 
 ## Execute your first full text search
 
-You can execute a full text search query using a `WHERE` clause with `@@ to_tsquery('english', 'content here')` as follows. The following query will return the "mashed potatoes" row because, although the word "flavorful" does not appear in that row's text content, the word "flavor" does. And "flavor" matches "flavorful".
+You can execute a full text search query using a `WHERE` clause with `@@ to_tsquery('english', 'content here')` as shown below. The following query returns the "mashed potatoes" row because, although the word "flavorful" does not appear in that row's text content, the word "flavor" does. And "flavor" matches "flavorful".
 
 ```sql
 SELECT
