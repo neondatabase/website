@@ -132,18 +132,23 @@
               slug: import/import-schema-only
             - title: Import from Digital Ocean
               slug: import/import-from-digital-ocean
+              tag: new
             - title: Import from Firebase
               slug: import/import-from-firebase
+              tag: new
             - title: Import from Heroku
               slug: import/import-from-heroku
             - title: Import from MySQL
               slug: import/migrate-mysql
             - title: Import from MSSQL
               slug: import/migrate-mssql
+              tag: new
             - title: Import from Render
               slug: import/import-from-render
+              tag: new
             - title: Import from Supabase
               slug: import/import-from-supabase
+              tag: new
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
@@ -152,6 +157,7 @@
               slug: guides/logical-replication-aurora-to-neon
             - title: Replicate from Azure
               slug: import/import-from-azure-postgres
+              tag: new
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -836,6 +842,9 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
+    - title: Extensions
+      slug: extensions/extensions-intro
+      icon: frameworks
 - section: Resources
   items:
     - title: Partner guide

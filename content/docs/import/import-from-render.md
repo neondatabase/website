@@ -2,6 +2,7 @@
 title: Migrate from Render to Neon Postgres
 subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
   and pg_restore
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-09-17T17:41:32.479Z'
 ---

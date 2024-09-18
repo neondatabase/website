@@ -2,6 +2,7 @@
 title: Migrate from Digital Ocean Postgres to Neon
 subtitle: Learn how to migrate your Postgres database from Digital Ocean to Neon using
   pg_dump and pg_restore
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-09-17T16:14:42.834Z'
 ---

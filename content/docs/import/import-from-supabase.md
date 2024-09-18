@@ -2,6 +2,7 @@
 title: Migrate from Supabase to Neon Postgres
 subtitle: Learn how to migrate your database from Supabase to Neon Postgres using
   pg_dump and pg_restore
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-09-17T16:14:42.837Z'
 ---
