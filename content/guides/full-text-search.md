@@ -31,7 +31,7 @@ CREATE TABLE documents (
 );
 ```
 
-Next, insert two new rows into the `documents` table. The [`to_tsvector()` function](https://www.postgresql.org/docs/current/textsearch-controls.html) takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
+Next, insert two new rows into the `documents` table. The [to_tsvector()] (https://www.postgresql.org/docs/current/textsearch-controls.html) function takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
 
 ```sql
 INSERT INTO documents (title, body, searchable)
