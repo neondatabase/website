@@ -132,7 +132,7 @@ SELECT
   ORDER BY rank DESC;
 ```
 
-To see how sorting works in practice, insert two more rows as follows. The first row contains 6 tokens that match "search" and "text", so it should show up first.
+To see how sorting works in practice, insert two more rows as follows. The first row contains 6 tokens that match "search" and "text", so that row should show up first.
 
 ```sql
 INSERT INTO documents (title, body, searchable)
