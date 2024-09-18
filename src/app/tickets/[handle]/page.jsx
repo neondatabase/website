@@ -39,8 +39,7 @@ const TicketPage = async ({ params }) => {
             </p>
             <Link
               className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
-              // TODO: add link to the event
-              href="/stage"
+              href={LINKS.stage}
             >
               <span>Watch the event live</span>
               <ArrowLeftIcon className="ml-2.5 h-auto w-[18px] rotate-180" />

@@ -153,6 +153,7 @@ export default {
   },
   '404-ticket': {
     title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
   },
   ticket({ name, login: githubHandle }) {
     const userName = name || githubHandle;
