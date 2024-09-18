@@ -8,7 +8,7 @@ updatedOn: '2024-09-17T13:24:36.612Z'
 ---
 
 
-The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search allows you to search text content in a more flexible way than using `LIKE`: full text search also supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
+The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search allows you to search text content in a more flexible way than using `LIKE`. Full text search also supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
 
 ## Steps
 
