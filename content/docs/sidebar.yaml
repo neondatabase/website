@@ -136,7 +136,7 @@
             - title: Migrate from Firebase
               slug: import/migrate-from-firebase
               tag: new
-            - title: Migratet from Heroku
+            - title: Migrate from Heroku
               slug: import/migrate-from-heroku
             - title: Migrate from MySQL
               slug: import/migrate-mysql
