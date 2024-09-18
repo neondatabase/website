@@ -54,7 +54,10 @@ const SubscriptionForm = ({
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
 
-  const handleInputChange = (event) => setEmail(event.currentTarget.value.trim());
+  const handleInputChange = (event) => {
+    setEmail(event.currentTarget.value.trim());
+    setErrorMessage('');
+  };
 
   const handleSubmitSuccess = () => {
     router.push(LINKS.generateTicket);
@@ -70,9 +73,7 @@ const SubscriptionForm = ({
 
     const loadingAnimationStartedTime = Date.now();
 
-    console.log('submit', typeof email, errorMessage);
-
-    if (!email && email !== '') {
+    if (!email) {
       setErrorMessage('Please enter your email');
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
