@@ -13,7 +13,7 @@ Managing your Neon project requires an understanding of the Neon object hierarch
 
 This is the Neon account or Neon organization you signed up with. Neon supports signing up with an email, GitHub, Google, or partner account.
 
-## API keys
+### API keys
 
 API keys are global and belong to the Neon account. API keys are used with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create and manage Neon projects or objects within a Neon project. While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account. For more about API keys, see [Manage API keys](/docs/manage/api-keys).
 
