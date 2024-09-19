@@ -9,9 +9,9 @@ Managing your Neon project requires an understanding of the Neon object hierarch
 
 ![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)
 
-## Neon account
+## Neon account or organization
 
-This is the account you used to sign up with Neon. Neon supports signing up with an email, GitHub, Google, or partner account.
+This is the Neon account or Neon organization you signed up with. Neon supports signing up with an email, GitHub, Google, or partner account.
 
 ## API keys
 
