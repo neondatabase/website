@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-08-23T13:51:17.454Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
 Learn how to manage Neon Organizations using the Neon API, including creating projects, transferring projects, and retrieving consumption metrics.
 

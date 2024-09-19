@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-18T16:25:02.711Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
 Learn how to manage your organization's projects, invite Members and Guests, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
