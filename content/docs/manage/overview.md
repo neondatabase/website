@@ -31,8 +31,12 @@ A compute is a virtualized computing resource that includes vCPU and memory for 
 
 ## Roles
 
-In Neon, roles are Postgres roles. A role is required to create and access a database. A role belongs to a branch. While there is no strict limit on the number of roles you can create, we recommend keeping it under 500 per branch. The default branch of a Neon project is created with a role named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role is the owner of the database. Any role created via the Neon Console, CLI, or API is created with [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) privileges. For more information, see [Manage roles](/docs/manage/roles).
+In Neon, roles are Postgres roles. A role is required to create and access a database. A role belongs to a branch. There is a limit of 500 roles per branch. The default branch of a Neon project is created with a role named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role is the owner of the database. Any role created via the Neon Console, CLI, or API is created with [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) privileges. For more information, see [Manage roles](/docs/manage/roles).
 
 ## Databases
 
-As with any standalone instance of Postgres, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. If you do not specify your own database name when creating a project, the default branch of your project is created with a ready-to-use database named `neondb`. While there is no strict limit on the number of databases you can create, we recommend keeping it under 500 per branch. For more information, see [Manage databases](/docs/manage/databases).
+As with any standalone instance of Postgres, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. If you do not specify your own database name when creating a project, the default branch of your project is created with a ready-to-use database named `neondb`. There is a limit of 500 databases per branch. For more information, see [Manage databases](/docs/manage/databases).
+
+## Schemas
+
+All databases in Neon are created with a `public` schema, which is the default behavior for any standard PostgreSQL instance. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
