@@ -15,10 +15,6 @@ In the Neon Console, the Organizations page provides a centralized view of all y
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
-### Early Access Program
-
-Neon Organizations are currently available through our [Early Access program](https://neon.tech/early-access). Join now to start using Organizations for your team. You'll also gain access to all upcoming features, connect with the Neon team in a private community, and receive regular updates on what's coming next.
-
 ## User roles and permissions
 
 Each organization is made up of three types of users:
