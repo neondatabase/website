@@ -247,6 +247,8 @@
               slug: guides/logical-replication-schema-changes
             - title: Logical replication tips
               slug: guides/logical-replication-tips
+        - title: Organizations
+          slug: manage/organizations
         - title: Project sharing
           slug: guides/project-sharing-guide
         - title: Read replicas
