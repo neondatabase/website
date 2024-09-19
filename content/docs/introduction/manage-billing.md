@@ -86,4 +86,4 @@ If you are on any of Neon's paid plans, you need to downgrade to the Free plan t
 
 ## Delete your account
 
-For Neon account deletion instructions, please refer to the steps describe here: [Deleting your account](/docs/manage/accounts#deleting-your-account).
+If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#deleting-your-account).
