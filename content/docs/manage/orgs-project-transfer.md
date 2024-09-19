@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2024-08-23T20:22:25.269Z'
+updatedOn: '2024-09-19T14:13:04.118Z'
 ---
 
 <FeatureBeta/>
