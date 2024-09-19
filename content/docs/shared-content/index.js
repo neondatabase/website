@@ -6,6 +6,7 @@ const sharedMdxComponents = {
   ComingSoon: 'shared-content/coming-soon',
   EarlyAccess: 'shared-content/early-access',
   LRBeta: 'shared-content/lr-inbound-beta',
+  FeatureBeta: 'shared-content/feature-beta',
 };
 
 module.exports = sharedMdxComponents;

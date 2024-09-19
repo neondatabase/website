@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-18T16:25:02.711Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
 Learn how to manage your organization's projects, invite Members and Guests, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
@@ -57,7 +57,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Invite Guests
 
-All members can invite external Guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with Me**. Guests can invite additional Guests to the project and remove existing Guests from the project.
+All members can invite external Guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Guests can invite additional Guests to the project and remove existing Guests from the project.
 
 ![organization guests](/docs/manage/org_guests.png)
 
