@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-10T21:01:06.532Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project transfer capabilities in one accessible location.
 
