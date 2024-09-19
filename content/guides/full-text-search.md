@@ -7,16 +7,15 @@ createdAt: '2024-09-17T13:24:36.612Z'
 updatedOn: '2024-09-17T13:24:36.612Z'
 ---
 
-
 The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search allows you to search text content in a more flexible way than using `LIKE`. Full text search also supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
 
 ## Steps
 
-* Set up a table with a `tsvector` column
-* Execute your first full text search
-* Search for multiple words
-* Rank the results
-* Create a GIN index
+- Set up a table with a `tsvector` column
+- Execute your first full text search
+- Search for multiple words
+- Rank the results
+- Create a GIN index
 
 ## Set up a table with a `tsvector` column
 
@@ -143,7 +142,7 @@ INSERT INTO documents (title, body, searchable)
   );
 ```
 
-Running the `ts_rank()` `SELECT` statement with these two new rows outputs rows in the following order. "PostgreSQL Text Search" appears first because it has the most occurrences of tokens that match "search" and "text". 
+Running the `ts_rank()` `SELECT` statement with these two new rows outputs rows in the following order. "PostgreSQL Text Search" appears first because it has the most occurrences of tokens that match "search" and "text".
 
 ```sql
 2	PostgreSQL Text Search	0.34941113
@@ -166,7 +165,6 @@ SELECT
 1	PostgreSQL Full-Text Search	0.21666667
 2	PostgreSQL Text Search	0.21428572
 ```
-
 
 ## Create a GIN index
 
@@ -196,7 +194,7 @@ Next, you can run an `EXPLAIN ANALYZE` query (or just click the **Explain** butt
 
 ```sql
 EXPLAIN ANALYZE
-SELECT 
+SELECT
     id, title
   FROM documents
 WHERE searchable @@ to_tsquery('english', 'search');
