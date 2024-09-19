@@ -328,6 +328,10 @@ export default {
           to: LINKS.blog,
         },
         {
+          text: 'Branding',
+          to: LINKS.branding,
+        },
+        {
           text: 'Docs',
           to: LINKS.docs,
         },
