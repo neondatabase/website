@@ -25,7 +25,7 @@ const Hero = () => (
         </h1>
         <p className="mt-3 max-w-[512px] font-light leading-snug tracking-extra-tight text-gray-new-80">
           We’ve created some guidelines to help you use our brands and assets, including our logo,
-          content and trademarks
+          content and trademarks.
         </p>
         <a
           className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-5 py-3 text-center text-base font-semibold leading-none tracking-tighter text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
