@@ -1,6 +1,8 @@
 ---
-title: Import a database schema
-subtitle: Perform a schema-only import with pg_dump and pg_restore
+title: Migrate a database schema
+subtitle: Perform a schema-only migration with pg_dump and pg_restore
+redirectFrom:
+  - /docs/import/import-schema-only
 enableTableOfContents: true
 updatedOn: '2024-09-04T18:53:01.156Z'
 ---

@@ -2,7 +2,7 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-08-23T13:51:17.450Z'
+updatedOn: '2024-09-18T16:25:02.710Z'
 ---
 
 Neon offers two account types for you to choose from:
@@ -40,3 +40,27 @@ See [Organizations](/docs/manage/organizations) to learn more.
 Easily switch between your personal account and any organization you are a Member of using the navigation breadcrumb.
 
 ![Switch between personal and organization](/docs/manage/switch_to_org.png 'no-border')
+
+## Deleting your account
+
+Deleting your account is a two-step process: first you deactivate your account, which is reversible. Then, after 180 days, your account is permanently deleted.
+
+Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
+
+To protect your data, each resource must be removed individually &#8212; nothing is deleted in bulk. The **Delete** action will stay disabled until all conditions are met.
+
+![delete personal account](/docs/manage/delete_account.png)
+
+Here's where to go in the Neon Console to complete these actions:
+
+| **Action**                  | **Instructions**                                                                                                                                                                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Leave all organizations** | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the more options menu. If you're the only Admin, promote another Member to Admin first. <br/> ![leave organization](/docs/manage/leave_org.png) |
+| **Delete all projects**     | Go to the **Projects** page and manually [delete](docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                                |
+| **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                       |
+
+Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
+
+After 180 days, your account will be permanetly removed.
+
+For deleting an organization, a similar process ensures that all resources are deliberately removed before you can delete the organization itself. See [Delete an organization](/docs/manage/orgs-manage#delete-an-organization) for more detail.
