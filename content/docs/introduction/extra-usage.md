@@ -74,7 +74,7 @@ Taking advantage of extra usage requires no user action. Extra usage, if support
 For example, the Launch plan includes an allowance of 10 GiB in the plan's monthly fee. If you exceed 10 GiB of storage at any point during the month, you are automatically allocated an extra storage unit of 2 GiB at $3.50 per unit. If you exceed 12 GiB, you are allocated 2 units of 2 GiB (an extra $7), and so on. It works the same way on the Scale and Business plans, but with 10 GiB units of storage at $15 per unit for Scale and $7.50 per unit for Business. However, the extra charge is prorated from the date the extra usage was allocated, meaning that you are not billed the full amount if extra storage units were allocated partway through the month.
 
 <Admonition type="note">
-In the context of billing, allocation of extra storage refers to an increases in the storage allowance rather than physical storage allocation.
+In the context of billing, allocation of extra storage refers to an increase in the storage allowance rather than physical storage allocation.
 </Admonition>
 
 **Projects**
