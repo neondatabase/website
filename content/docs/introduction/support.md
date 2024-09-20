@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-02T13:42:56.661Z'
 ---
 
-This page describes Neon support plans, channels, and policies.
+This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
 
 ## Support plans
 
@@ -41,17 +41,13 @@ The support channels you can access differ according to your [Support Plan](#sup
 
 ### Neon Discord Server
 
-{<Admonition type="note">
-The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon Support channel.
-</Admonition>}
-
 All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
 
-### Neon AI Chat
-
-<Admonition type="note">
-Neon AI chat is not an official Neon Support channel.
+<Admonition type="important">
+The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon Support channel.
 </Admonition>
+
+### Neon AI Chat
 
 Neon AI chat is available to all Neon users. You can access Neon AI chat from the following locations:
 
@@ -61,7 +57,11 @@ Neon AI chat is available to all Neon users. You can access Neon AI chat from th
 
 ![Ask Neon AI](/docs/introduction/ask_neon_ai.png)
 
-Neon AI Chat sources include the Neon Discord server, the Neon Documentation, the Neon Blog, the Neon API Reference, and GitHub repositories for Neon, the Neon CLI, and the Neon Serverless driver. Source content is updated daily to ensure that responses reflect the latest information.
+Neon AI Chat sources include the Neon Discord Server, the Neon Documentation, the Neon Blog, the Neon API Reference, PostgreSQL documentation, and GitHub repositories for Neon, the Neon CLI, and the Neon Serverless driver. Neon AI chat sources are updated daily to ensure that responses reflect the latest information.
+
+<Admonition type="important">
+Neon AI chat is not an official Neon Support channel.
+</Admonition>
 
 ### Support tickets
 
@@ -83,11 +83,11 @@ Support tickets opened by Priority and Enterprise support plan customers are giv
 
 ### Video chat
 
-Video chat is available to Priority and Enterprise plan customers and may be scheduled on a case-by-case basis through the [support tickets](#support-tickets) process.
+Video chat is available to Priority and Enterprise support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
 
 ### SLAs
 
-Support Level Agreements (SLAs) are available to Enterprise plan customers. If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
+Support Level Agreements (SLAs) are available to Enterprise support plan customers. If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
 
 ## General support policy
 
