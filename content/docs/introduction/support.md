@@ -13,10 +13,10 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 | Neon Pricing Plan                             | Support Plan |
 | :-------------------------------------------- | :----------- |
 | [Free Plan](/docs/introduction/plans#free-plan) | Community    |
-| [Launch Plan](/docs/introduction/plans#launch) | Standard Support     |
-| [Scale Plan](/docs/introduction/plans#scale)   | Standard Support     |
-| [Business Plan](/docs/introduction/plans#business) | Priority Support  |
-| [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise Support |
+| [Launch Plan](/docs/introduction/plans#launch) | Standard     |
+| [Scale Plan](/docs/introduction/plans#scale)   | Standard     |
+| [Business Plan](/docs/introduction/plans#business) | Priority  |
+| [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
@@ -24,7 +24,7 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 ## Support channels
 
-The support channels you can access differ by [Support Plan](#support-plans).
+The support channels you can access differ according to your [Support Plan](#support-plans).
 
 | Support channels            | Community | Standard | Priority | Enterprise |
 | :-------------------------- | :-------: | :------: | :------: | :--------: |
@@ -41,9 +41,11 @@ The support channels you can access differ by [Support Plan](#support-plans).
 
 ### Neon Discord Server
 
-The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is available to all Neon users **but is not an official Neon Support channel**. If you are a paid plan user and require assistance from the Neon Support team, please open a support ticket, as described in [Standard support](#standard-support).
+{<Admonition type="note">
+The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon Support channel.
+</Admonition>}
 
-where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged in our Discord Server.
+All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
 
 ### Neon AI Chat
 
@@ -58,7 +60,7 @@ Neon AI chat is available to all Neon users. You can access Neon AI chat from th
 
 ![Ask Neon AI](/docs/introduction/ask_neon_ai.png)
 
-Neon AI Chat sources include the Neon Discord server, the Neon Documentation, the Neon API Reference, and GitHub repositories for Neon, the Neon CLI, and the Neon Serverless driver. Source content is updated daily to ensure that responses reflect the latest information.
+Neon AI Chat sources include the Neon Discord server, the Neon Documentation, the Neon Blog, the Neon API Reference, and GitHub repositories for Neon, the Neon CLI, and the Neon Serverless driver. Source content is updated daily to ensure that responses reflect the latest information.
 
 ### Support tickets
 
