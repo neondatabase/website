@@ -10,13 +10,13 @@ This page describes Neon support plans, channels, and policies.
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan                             | Support Plan |
-| :-------------------------------------------- | :----------- |
-| [Free Plan](/docs/introduction/plans#free-plan) | Community    |
-| [Launch Plan](/docs/introduction/plans#launch) | Standard     |
-| [Scale Plan](/docs/introduction/plans#scale)   | Standard     |
-| [Business Plan](/docs/introduction/plans#business) | Priority  |
-| [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise |
+| Neon Pricing Plan                                      | Support Plan |
+| :----------------------------------------------------- | :----------- |
+| [Free Plan](/docs/introduction/plans#free-plan)        | Community    |
+| [Launch Plan](/docs/introduction/plans#launch)         | Standard     |
+| [Scale Plan](/docs/introduction/plans#scale)           | Standard     |
+| [Business Plan](/docs/introduction/plans#business)     | Priority     |
+| [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise   |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
