@@ -8,14 +8,14 @@ This page describes Neon support plans, channels, and policies.
 
 ## Support plans
 
-Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table. 
+Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan                             | Support Plan |
-| :-------------------------------------------- | :----------- |
-| [Free Plan](/docs/introduction/plans#free-plan) | Community    |
-| [Launch Plan](/docs/introduction/plans#launch) | Standard Support     |
-| [Scale Plan](/docs/introduction/plans#scale)   | Standard Support     |
-| [Business Plan](/docs/introduction/plans#business) | Priority Support  |
+| Neon Pricing Plan                                      | Support Plan       |
+| :----------------------------------------------------- | :----------------- |
+| [Free Plan](/docs/introduction/plans#free-plan)        | Community          |
+| [Launch Plan](/docs/introduction/plans#launch)         | Standard Support   |
+| [Scale Plan](/docs/introduction/plans#scale)           | Standard Support   |
+| [Business Plan](/docs/introduction/plans#business)     | Priority Support   |
 | [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise Support |
 
 <Admonition type="note">
@@ -26,14 +26,14 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 The support channels you can access differ by [Support Plan](#support-plans).
 
-| Support channels            | Community | Standard | Priority | Enterprise |
-| :-------------------------- | :-------: | :------: | :------: | :--------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon AI Chat](#neon-ai-chat) (not an official channel)              |  &check;  | &check;  | &check;  |  &check;   |
-| [Support tickets](#support-tickets)             |     -     | &check;  | &check;  |  &check;   |
-| [Prioritized support tickets](#prioritized-support-tickets) |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                  |     -     |    -     |    \*    |     \*     |
-| [SLAs](#slas)                        |     -     |    -     |          |  &check;   |
+| Support channels                                                      | Community | Standard | Priority | Enterprise |
+| :-------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon AI Chat](#neon-ai-chat) (not an official channel)               |  &check;  | &check;  | &check;  |  &check;   |
+| [Support tickets](#support-tickets)                                   |     -     | &check;  | &check;  |  &check;   |
+| [Prioritized support tickets](#prioritized-support-tickets)           |     -     |    -     | &check;  |  &check;   |
+| [Video chat](#video-chat)                                             |     -     |    -     |    \*    |     \*     |
+| [SLAs](#slas)                                                         |     -     |    -     |          |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
@@ -52,6 +52,7 @@ Neon AI chat is not an official Neon Support channel.
 </Admonition>
 
 Neon AI chat is available to all Neon users. You can access Neon AI chat from the following locations:
+
 - The **Search** bar at the top of the [Neon Console](https://console.neon.tech/app/projects)
 - The **Search** bar in the [Neon Documentation](https://neon.tech/docs/introduction)
 - The **#gpt-help** channel on the [Neon Discord Server](https://discord.gg/92vNTzKDGp)
@@ -62,7 +63,7 @@ Neon AI Chat sources include the Neon Discord server, the Neon Documentation, th
 
 ### Support tickets
 
-Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue. 
+Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
 
 To access the modal directly, click here: [Open Support Ticket](https://console.neon.tech/app/projects?modal=support).
 
@@ -194,7 +195,7 @@ Examples:
 
 ### Etiquette
 
-Regardless of the method or location through which Neon provides Support,  communication should be professional and respectful. Any communication that is deemed objectionable by Neon staff is not tolerated. This includes but is not limited to any communication that is abusive or contains profane language. Neon reserves the right to terminate Support Services in the event of any such objectionable communication.
+Regardless of the method or location through which Neon provides Support, communication should be professional and respectful. Any communication that is deemed objectionable by Neon staff is not tolerated. This includes but is not limited to any communication that is abusive or contains profane language. Neon reserves the right to terminate Support Services in the event of any such objectionable communication.
 
 ### Customer responsibilities
 
