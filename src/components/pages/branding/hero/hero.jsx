@@ -29,8 +29,8 @@ const Hero = () => (
         </p>
         <a
           className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-primary-1 px-5 py-3 text-center text-base font-semibold leading-none tracking-tighter text-black outline-none transition-colors duration-200 hover:bg-[#00e5bf]"
-          href="/neon-logo.zip"
-          download="neon-logo.zip"
+          href="/neon-brand-assets.zip"
+          download="neon-brand-assets.zip"
         >
           Download brand assets
         </a>
