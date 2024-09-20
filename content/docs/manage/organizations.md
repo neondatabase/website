@@ -71,7 +71,7 @@ If you want us to handle this conversion for you, you can contact [Neon Support]
 
 ## Limitations
 
-As we continue to refine our Organizations feature during this Early Access phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
+As we continue to refine our Organizations feature during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
 - **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects.
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
