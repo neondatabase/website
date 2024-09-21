@@ -1,10 +1,12 @@
 ---
-title: Import data from Postgres with the @neondatabase/pg-import CLI
+title: Migrate data from Postgres with the @neondatabase/pg-import CLI
+redirectFrom:
+  - /docs/how-to-guides/import-from-firebase
 enableTableOfContents: true
 updatedOn: '2024-09-02T13:42:56.657Z'
 ---
 
-This topic describes migrating data from another Postgres database to Neon using the `@neondatabase/pg-import` CLI. This tool is built on top of the Postgres `pg_dump` and `pg_restore` client utilities. It is intended to simplify data migrations for smaller, less complex databases compared to using the `pg_dump` and `pg_restore` client utilities directly, as described in [Import data from Postgres](/docs/import/import-from-postgres).
+This topic describes migrating data from another Postgres database to Neon using the `@neondatabase/pg-import` CLI. This tool is built on top of the Postgres `pg_dump` and `pg_restore` client utilities. It is intended to simplify data migrations for smaller, less complex databases compared to using the `pg_dump` and `pg_restore` client utilities directly, as described in [Import data from Postgres](/docs/import/migrate-from-postgres).
 
 <Admonition type="important">
 The `@neondatabase/pg-import` CLI is experimental. There may be bugs, and the API is subject to change.
@@ -32,7 +34,7 @@ The`@neondatabase/pg-import` utility supports all Neon Postgres versions.
   - `CREATE EVENT TRIGGER` statements
   - Any statement requiring the PostgreSQL superuser privilege or a privilege not held by the role running the migration.
 
-  `ALTER OWNER` warnings can be ignored (see [Database object ownership considerations](/docs/import/import-from-postgres#database-object-ownership-considerations)). `CREATE EVENT TRIGGER` or other statements requiring a privilege not held by the role performing the restore operation may require that you exclude those statements from the dump file.
+  `ALTER OWNER` warnings can be ignored (see [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations)). `CREATE EVENT TRIGGER` or other statements requiring a privilege not held by the role performing the restore operation may require that you exclude those statements from the dump file.
 
 ## Export data with @neondatabase/pg-import
 

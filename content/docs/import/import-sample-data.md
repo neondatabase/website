@@ -1,6 +1,6 @@
 ---
 title: Postgres sample data
-subtitle: 'Download sample data for learning, testing, and exploring Neon'
+subtitle: Import sample data for learning, testing, and exploring Neon
 enableTableOfContents: true
 updatedOn: '2024-08-22T02:18:02.655Z'
 ---

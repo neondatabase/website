@@ -104,10 +104,10 @@
       "feature": {
         "title": "Databases"
       },
-      "free": "Unlimited",
-      "launch": "Unlimited",
-      "scale": "Unlimited",
-      "business": "Unlimited"
+      "free": "500 per branch",
+      "launch": "500 per branch",
+      "scale": "500 per branch",
+      "business": "500 per branch"
     },
     {
       "feature": "Compute Features"
@@ -183,16 +183,6 @@
       "launch": "10,000",
       "scale": "10,000",
       "business": "10,000"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Tenant Isolation"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": false
     },
     {
       "feature": "Advanced Postgres Features"
@@ -357,6 +347,17 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Usage Limits via API",
+        "subtitle": "For DB-per-tenant architectures"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Project Sharing"
       },
       "free": true,
@@ -367,17 +368,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Support"
-      },
-      "free": "Community Support",
-      "launch": "Standard Support",
-      "scale": "Standard Support",
-      "business": "Priority Support"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Data transfer"
+        "title": "Data Transfer"
       },
       "free": "5 GB /month",
       "launch": true,
@@ -387,12 +378,43 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Custom domain proxy"
+        "title": "Custom Domain Proxy"
       },
       "free": false,
       "launch": false,
       "scale": false,
       "business": true
-    }
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Technical Support"
+      },
+      "free": "Community Support",
+      "launch": "Standard Support",
+      "scale": "Standard Support",
+      "business": "Priority Support"
+    },    
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Migration Assistance",
+        "subtitle": "With waived migration fees"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Solutions Architect"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    }  
   ]
 }

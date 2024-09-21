@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-09-05T13:33:27.999Z'
+updatedOn: '2024-09-19T14:13:04.115Z'
 ---
 
 A Neon account can view and manage billing from the **Billing** page in the Neon Console. On the **Billing** page, you can:
@@ -86,8 +86,4 @@ If you are on any of Neon's paid plans, you need to downgrade to the Free plan t
 
 ## Delete your account
 
-To delete your Neon account, please initiate an account deletion request through the Neon support team. If you're a Launch, Scale, or Business plan subscriber, you can generate a support ticket directly from the Neon Console. Navigate to the **Support** link located in the Neon Console sidebar to open the **Create support ticket** modal. Here, you can formally request the deletion of your account. For direct access to this modal, [click here](https://console.neon.tech/app/projects?modal=support). If you are a Free Plan user and do not have access to the **Create support ticket** modal in the Neon Console, please direct your request to `support@neon.tech`.
-
-<Admonition type="important">
-Before Neon can proceed with deleting your account, it is necessary to ensure all active projects have been deleted. To learn how to delete your projects, please refer to [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
-</Admonition>
+If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#deleting-your-account).

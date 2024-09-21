@@ -10,6 +10,7 @@ import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
+import LINKS from 'constants/links';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
@@ -176,7 +177,7 @@ const ContactForm = ({ formState, setFormState }) => {
           By submitting, you agree to{' '}
           <Link
             className="pb-1 !text-base 2xl:!text-base md:!inline"
-            to="/privacy-policy"
+            to={LINKS.privacyPolicy}
             theme="underline-primary-1"
             size="xs"
           >
