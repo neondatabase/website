@@ -14,7 +14,7 @@ To understand [Neon's Postgres Version Support Policy](#neon-version-support-pol
 
 - The PostgreSQL Global Development Group releases a new major version approximately once a year.
 - Each major version is supported for 5 years from its initial release.
-- After 5 years, a final minor version is released, and the major version becomes unsupported (end-of-life).
+- After 5 years, a final minor version is released and the major version becomes unsupported (end-of-life).
 - Major version upgrades require data migration
 
 ### Minor releases
@@ -81,13 +81,13 @@ Each Neon project is bound to a particular PostgreSQL major version. Upgrading t
 
 - **Small databases**
 
-  For smaller and less complex databases, you can try piping data from one Neon project to another for a simpler migration process. These methods require fewer steps but may be prone to failures due to database complexities or longer data copying operations.
+  For smaller databases, you can try piping data from one Neon project to another for a simpler migration process. These methods require fewer steps but we recommend them only for smaller databases, as any failure during the data copy operation will require restarting the operation from scratch, in which case it's often more efficient to perform dump and restore operations separately.
 
   - [Migrate data with the @neondatabase/pg-import CLI](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
   - [Migrate data from another Neon project](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
 
 <Admonition type="note" title="How to upgrade to a new Postgres version as a Free Plan user">
-Free Plan users can only create a single Neon project. Due to this limit, migrating to a new Neon project requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new Neon project with the desired Postgres version, and restoring your data to the new Neon project using `pg_restore`. Please refer to the procedure described here: [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) for `pg_dump` and `pg_restore` instructions.
+Free Plan users can only create a single Neon project. Due to this limitation, migrating to a Neon project with a new Postgres major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new Neon project with the desired Postgres version, and restoring your data to the new Neon project using `pg_restore`. Please refer to the procedure described here: [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) for `pg_dump` and `pg_restore` instructions.
 </Admonition>
 
 Neon intends to provide more advanced support for major version upgrades in the future.

@@ -845,6 +845,9 @@
     - title: Extensions
       slug: extensions/extensions-intro
       icon: frameworks
+    - title: Version support
+      slug: postgresql/postgres-version-policy
+      icon: why-neon
 - section: Resources
   items:
     - title: Partner guide
