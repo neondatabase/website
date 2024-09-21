@@ -41,7 +41,7 @@ To check the minor PostgreSQL version, you can issue the following query:
 
 ```sql
 neondb=> SELECT version();
-                                              version                                     
+                                              version
 ------------------------------------------------------------------------------------------
  PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110
 ```
@@ -58,7 +58,7 @@ Skipping minor releases or downgrade to a previous minor release is not supporte
 
 #### Manual actions after minor release upgrades
 
-If there are extra manual steps that need to be taken after a minor release upgrade, how does Neon handle them? 
+If there are extra manual steps that need to be taken after a minor release upgrade, how does Neon handle them?
 
 As a managed service, Neon makes every effort to manage changes like this automatically and not burden users with maintenance tasks. However, some security fixes, for example, might require decisions that depend on the application or cannot be fully automated.
 
@@ -74,17 +74,17 @@ Each Neon project is bound to a particular PostgreSQL major version. Upgrading t
 
 - **Large databases**
 
-    For large databases, we recommend using `pg_dump` and `pg_restore` or Logical Replication.
+  For large databases, we recommend using `pg_dump` and `pg_restore` or Logical Replication.
 
-    - [Logical Replication](https://neon.tech/docs/guides/logical-replication-neon-to-neon)
-    - [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres)
+  - [Logical Replication](https://neon.tech/docs/guides/logical-replication-neon-to-neon)
+  - [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres)
 
 - **Small databases**
 
-    For smaller and less complex databases, you can try piping data from one Neon project to another for a simpler migration process. These methods require fewer steps but may be prone to failures due to database complexities or longer data copying operations. 
+  For smaller and less complex databases, you can try piping data from one Neon project to another for a simpler migration process. These methods require fewer steps but may be prone to failures due to database complexities or longer data copying operations.
 
-    - [Migrate data with the @neondatabase/pg-import CLI](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
-    - [Migrate data from another Neon project](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
+  - [Migrate data with the @neondatabase/pg-import CLI](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
+  - [Migrate data from another Neon project](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
 
 <Admonition type="note" title="How to upgrade to a new Postgres version as a Free Plan user">
 Free Plan users can only create a single Neon project. Due to this limit, migrating to a new Neon project requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new Neon project with the desired Postgres version, and restoring your data to the new Neon project using `pg_restore`. Please refer to the procedure described here: [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) for `pg_dump` and `pg_restore` instructions.
