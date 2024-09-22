@@ -74,15 +74,15 @@ Each Neon project is tied to a specific PostgreSQL major version. Upgrading to a
 
   For large databases, we recommend using `pg_dump` and `pg_restore` or Logical Replication.
 
-  - [Logical Replication](https://neon.tech/docs/guides/logical-replication-neon-to-neon)
-  - [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres)
+  - [Logical Replication](/docs/guides/logical-replication-neon-to-neon)
+  - [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
 
 - **Small databases**
 
   For smaller databases, you can pipe data from one Neon project to another for a simpler migration process. These methods involve fewer steps but are recommended only for smaller databases, as any failure during the data copy will require restarting the operation from the beginning. In such cases, dump and restore operations are often more efficient.
 
-  - [Migrate data with the @neondatabase/pg-import CLI](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
-  - [Migrate data from another Neon project](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
+  - [Migrate data with the @neondatabase/pg-import CLI](docs/import/migrate-from-postgres-pg-import)
+  - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
 <Admonition type="note">
 Neon plans to provide advanced support for major version upgrades in the future.
