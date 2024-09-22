@@ -31,7 +31,7 @@ To better understand [Neon's Postgres Version Support Policy](#neon-version-supp
 
 ## Neon Version Support Policy
 
-Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen PostgreSQL version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates, which are announced in the [Neon Changelog](https://neon.tech/docs/changelog). 
+Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen PostgreSQL version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates, which are announced in the [Neon Changelog](https://neon.tech/docs/changelog).
 
 You can view your Postgres major version in the **Project Settings** widget on the Neon Project Dashboard.
 
@@ -52,7 +52,7 @@ In Neon, an instance of PostgreSQL runs on each compute. You may have multiple c
 
 Once a new minor version is available on Neon, it is applied the next time a compute restarts for any reason.
 
-Neon only supports the latest minor release for each major PostgreSQL version. For example, when 16.4 is the latest minor release of PostgreSQL version 16, it is no longer possible run a Neon compute with version 16.3. 
+Neon only supports the latest minor release for each major PostgreSQL version. For example, when 16.4 is the latest minor release of PostgreSQL version 16, it is no longer possible run a Neon compute with version 16.3.
 
 Skipping minor releases or downgrading to a previous minor release is not supported in Neon.
 
