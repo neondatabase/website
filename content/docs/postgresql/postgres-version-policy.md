@@ -8,36 +8,36 @@ This topic outlines [Neon's Postgres Version Support Policy](#neon-version-suppo
 
 ## The official PostgreSQL versioning policy
 
-To understand [Neon's Postgres Version Support Policy](#neon-version-support-policy), it helps to have a basic understanding the official PostgreSQL versioning policy and numbering system. You can find that information in the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation, but here's a condensed version:
+To better understand [Neon's Postgres Version Support Policy](#neon-version-support-policy), it's useful to first grasp the official PostgreSQL versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
-- The PostgreSQL Global Development Group releases a new major version approximately once a year.
-- Each major version is supported for 5 years from its initial release.
-- After 5 years, a final minor version is released and the major version becomes unsupported (end-of-life).
-- Major version upgrades require data migration
+- The PostgreSQL Global Development Group releases a new major version approximately once per year.
+- Each major version is supported for five years from its initial release.
+- After five years, a final minor version is released, and the major version reaches end-of-life (EOL) and is no longer supported.
 
 ### Minor releases
 
-- Minor releases contain bug fixes and security patches only, and are issued _at least_ once every three months. They do not contain new features.
-- The minor release schedule can be viewed in the [official PostgreSQL roadmap](https://www.postgresql.org/developer/roadmap/).
-- Critical bugs or security issues may lead to an unscheduled release outside of the regular minor release roadmap if the issue is deemed too important to wait.
-- A minor release is provided for all supported major versions at the same time.
-- Upgrading to a new minor release involves replacing the binary and restarting PostgreSQL. Data migration is not required.
-- Manual actions are sometimes required after an upgrade. The PostgreSQL Global Development Group tries to avoid these situations, but they happen occasionally. Any exceptions, required manual steps, or incompatibilities that occur in minor releases are listed in the [PostgreSQL release notes](https://www.postgresql.org/docs/release/).
+- Minor releases include only bug fixes and security patches, and are issued _at least_ once every three months. They do not introduce new features.
+- The minor release schedule is available in the [official PostgreSQL roadmap](https://www.postgresql.org/developer/roadmap/).
+- Critical bugs or security issues may result in an unscheduled release outside the regular minor release roadmap if the issue is deemed too urgent to delay.
+- A minor release is issued for all supported major versions simultaneously.
+- Occasionally, manual actions are necessary after a minor version upgrade. The PostgreSQL Global Development Group strives to minimize these situations, but they do occur. Any exceptions, required manual steps, or incompatibilities introduced in minor releases are detailed in the [PostgreSQL release notes](https://www.postgresql.org/docs/release/).
 
 ### PostgreSQL version numbering
 
-- A major version is indicated by the first part of the version, e.g. the "16" in "16.1".
-- A minor release is indicated by the last part of the version number, e.g. the "1" in "16.1".
+- The major version is indicated by the first part of the version number, such as the "16" in "16.1".
+- The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
 
 ## Neon Version Support Policy
 
-Neon aims to provide stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon takes care of upgrading your project to the latest PostgreSQL minor release soon after it becomes available. Typically, no user action is required for minor version upgrades, which we announce in the [Neon Changelog](https://neon.tech/docs/changelog). You can check your Postgres major version in the **Project Settings** widget on the Neon Project Dashboard.
+Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen PostgreSQL version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates, which are announced in the [Neon Changelog](https://neon.tech/docs/changelog). 
+
+You can view your Postgres major version in the **Project Settings** widget on the Neon Project Dashboard.
 
 ![Postgres major version](/docs/postgres/postgres_major_version.png 'no-border')
 
-To check the minor PostgreSQL version, you can issue the following query:
+To check the your PostgreSQL minor version, you can run the following query from the Neon SQL Editor or any SQL client connection to your database:
 
 ```sql
 neondb=> SELECT version();
@@ -48,29 +48,27 @@ neondb=> SELECT version();
 
 ### Minor releases
 
-When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your compute image to include it. We strive to make the new image available at the same time as the PostgreSQL release, but these minor version updates often occur a few days later than the official PostgreSQL release date. Neon's rollout of new minor versions is staged, one region at a time, like any new Neon compute release.
+In Neon, an instance of PostgreSQL runs on each compute. You may have multiple computes in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the PostgreSQL release, these updates may occur a few days later than the official release date.
 
-Once the image has been made available in a region, all new computes will use the new version. Neon only supports the latest minor release of each major version. For example, when 16.4 is the latest minor release of of PostgreSQL version 16, it is no longer possible to start a compute with version 16.3. However, you will continue to use the old version until your compute is restarted (for any reason).
+Once a new minor version is available on Neon, it is applied the next time a compute restarts for any reason.
 
-Neon automatically restarts computes that have not been restarted for other reasons after about a month.
+Neon only supports the latest minor release for each major PostgreSQL version. For example, when 16.4 is the latest minor release of PostgreSQL version 16, it is no longer possible run a Neon compute with version 16.3. 
 
-Skipping minor releases or downgrade to a previous minor release is not supported in Neon. As a managed Postgres service, Neon takes care of minor release upgrades for you automatically.
+Skipping minor releases or downgrading to a previous minor release is not supported in Neon.
 
 #### Manual actions after minor release upgrades
 
-If there are extra manual steps that need to be taken after a minor release upgrade, how does Neon handle them?
+As a managed service, Neon strives to manage all minor version updates automatically, minimizing the need for user intervention. However, certain updates, such as security fixes, may require decisions that depend on your application and cannot be fully automated.
 
-As a managed service, Neon makes every effort to manage changes like this automatically and not burden users with maintenance tasks. However, some security fixes, for example, might require decisions that depend on the application or cannot be fully automated.
-
-As a result, your action may be required from time to time. In this occurs, which is not too often, we'll let you know via appropriate communication channels to ensure that you are aware of any required actions.
+In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequent &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
 ### Major versions
 
-Neon currently supports PostgreSQL 14, 15, and 16, and we'll soon add support for PostgreSQL 17. In the future, Neon intends to **support the five latest major PostgreSQL versions, the same as the PostgreSQL community.**
+Neon currently supports PostgreSQL 14, 15, and 16, and we plan to support PostgreSQL 17 as soon as it is released. In the future, Neon intends to **support the five latest major PostgreSQL versions, in alignment with the official PostgreSQL version support policy.**
 
 ### Major version upgrades
 
-Each Neon project is bound to a particular PostgreSQL major version. Upgrading to a newer major version requires creating a new Neon project with the desired PostgreSQL version and migrating your data to the new project using one of the methods listed below.
+Each Neon project is tied to a specific PostgreSQL major version. Upgrading to a newer major version requires [creating a new Neon project](/docs/manage/projects#create-a-project) with the desired PostgreSQL version and migrating your data using one of the methods listed below.
 
 - **Large databases**
 
@@ -81,15 +79,15 @@ Each Neon project is bound to a particular PostgreSQL major version. Upgrading t
 
 - **Small databases**
 
-  For smaller databases, you can try piping data from one Neon project to another for a simpler migration process. These methods require fewer steps but we recommend them only for smaller databases, as any failure during the data copy operation will require restarting the operation from scratch, in which case it's often more efficient to perform dump and restore operations separately.
+  For smaller databases, you can pipe data from one Neon project to another for a simpler migration process. These methods involve fewer steps but are recommended only for smaller databases, as any failure during the data copy will require restarting the operation from the beginning. In such cases, dump and restore operations are often more efficient.
 
   - [Migrate data with the @neondatabase/pg-import CLI](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
   - [Migrate data from another Neon project](https://neon.tech/docs/import/migrate-from-postgres-pg-import)
 
 <Admonition type="note">
-Neon intends to provide more advanced support for major version upgrades in the future.
+Neon plans to provide advanced support for major version upgrades in the future.
 </Admonition>
 
 ### Major version upgrades as a Free Plan user
 
-Free Plan users can only create a single Neon project. Due to this limitation, migrating to a Neon project with a new Postgres major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new Neon project with the desired Postgres version, and restoring your data to the new Neon project using `pg_restore`. Please refer to the procedure described here: [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) for `pg_dump` and `pg_restore` instructions.
+Free Plan users can only create a single Neon project. Due to this limitation, migrating to a Neon project with a new PostgreSQL major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new project with the desired PostgreSQL version, and restoring your data using `pg_restore`. For detailed instructions, please refer to the procedure described here: [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres).
