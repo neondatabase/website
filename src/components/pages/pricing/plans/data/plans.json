@@ -267,10 +267,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Branch Protection"
+        "title": "Branch Protection",
+        "subtitle": "Restrict access & actions"
       },
       "free": false,
-      "launch": false,
+      "launch": "Up to 2 branches"
       "scale": true,
       "business": true
     },
