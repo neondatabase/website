@@ -87,7 +87,7 @@ Here’s a simplified view of how the Storage Controller manages Pageserver fail
 In this architecture:
 
 - **Storage Controller**: The Storage Controller monitors Pageservers through a heartbeat mechanism. When a Pageserver fails, the Storage Controller detects this failure and triggers the automatic failover process.
-- **Automatic failover**: Once the failure is detected, the Storage Controller reassigns the project to a healthy Pageserver, which uses the WAL stream from teh Safekeepers to reconstruct the state of the database. This failover is typically fast and happens without manual intervention.
+- **Automatic failover**: Once the failure is detected, the Storage Controller reassigns the project to a healthy Pageserver, which uses the WAL stream from the Safekeepers to reconstruct the state of the database. This failover is typically fast and happens without manual intervention.
 
 #### Sample failover
 
