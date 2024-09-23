@@ -65,6 +65,6 @@ Neon currently supports Postgres 14, 15, and 16, and we plan to support Postgres
 
 ### Major version upgrades
 
-Each Neon project is created with a specific Postgres major version. Upgrading to a newer major version requires [creating a new Neon project](/docs/manage/projects#create-a-project) with the desired Postgres version and migrating your data using one of the methods listed below. For more information, see [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade).
+Each Neon project is created with a specific Postgres major version. Upgrading to a newer major version requires [creating a new Neon project](/docs/manage/projects#create-a-project) with the desired Postgres version and migrating your data to the new Neon project. For more information, see [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade).
 
 <NeedHelp/>
