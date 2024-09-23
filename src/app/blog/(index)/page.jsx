@@ -26,6 +26,7 @@ const BlogPage = async () => {
   const featuredChangelogPosts = changelogPosts.slice(0, 4);
   const {
     featuredPosts,
+    workflowsFeaturedPosts,
     companyFeaturedPosts,
     communityFeaturedPosts,
     videos,
@@ -39,6 +40,7 @@ const BlogPage = async () => {
     <>
       <h1 className="sr-only">Blog</h1>
       <FeaturedPostsList posts={featuredPosts} />
+      <PostsList title="Workflows" posts={workflowsFeaturedPosts} alignment="right" />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
       <PostsList title="Postgres" posts={postgresFeaturedPosts} alignment="left" />
       <VideoList videos={videos} />
