@@ -26,4 +26,6 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 
 <a href="/docs/postgresql/postgres-version-policy" description="Read about Neon's policy for Postgres version support and maintenance" icon="trend-up">Neon Postgres Version Support</a>
 
+<a href="/docs/postgresql/postgres-upgrade" description="Learn how to upgrade your Postgres version in Neon" icon="trend-up">Upgrade Postgres</a>
+
 </DetailIconCards>
