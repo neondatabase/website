@@ -32,6 +32,10 @@ On the Neon project dashboard, navigate to the **Connection Details** section to
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
+<Admonition type="note">
+We recommend using a direct (non-pooled) connection string when performing migrations. Using a pooled connection string for migrations can be prone to errors.
+</Admonition>
+
 Keep your connection string handy for later use.
 
 ## Setting up the Laravel project

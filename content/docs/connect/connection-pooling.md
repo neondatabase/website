@@ -68,7 +68,8 @@ Some applications open numerous connections, with most eventually becoming inact
 The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal Postgres endpoint, so they still consume some connections to the main Postgres instance.
 
 To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
-At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough minimum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.  
+At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough minimum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.
+
 Similarly, even if role `alex` has 64 concurrently active transactions through the pooler to the `neondb` database, that role can still start up to 64 concurrent transactions in the `alex_db` database (a different database) when connected through the pooler; but again, only if the Postgres `max_connections` limit can support the number of connections managed by the pooler.
 
 For further information, see [PgBouncer](#pgbouncer).
@@ -106,7 +107,8 @@ The following list describes each setting. For a full explanation of each parame
 
 ## Connection pooling notes
 
-Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+- Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+- We generally recommend using a direct (non-pooled) connection string when performing migrations. With the exception of recent versions of [Prisma ORM, which supports a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
 
 ## Optimize queries with PgBouncer and prepared statements
 
