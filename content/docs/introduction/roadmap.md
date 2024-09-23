@@ -9,7 +9,7 @@ redirectFrom:
 updatedOn: '2024-09-22T10:36:04.266Z'
 ---
 
-Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peak at some of the upcoming features we'll be taking on next.
+Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peek at some of the upcoming features we'll be taking on next.
 
 ## What we've just launched
 
