@@ -16,8 +16,9 @@ import logoSpacing from './images/logo-spacing.svg';
 
 const logos = [logo1, logo2, logo3, logo4];
 const logosSm = [logoSm1, logoSm2, logoSm3, logoSm4];
+
 const Hero = () => (
-  <section className="pb-40 pt-36 xl:pb-28 xl:pt-32 lg:pb-[88px] lg:pt-11 md:pb-[72px] md:pt-8">
+  <section className="hero pb-40 pt-36 xl:pb-28 xl:pt-32 lg:pb-[88px] lg:pt-11 md:pb-[72px] md:pt-8">
     <Container className="flex flex-col gap-y-[104px] xl:gap-y-20 lg:gap-y-16" size="768">
       <div>
         <h1 className="font-title text-[56px] leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
@@ -50,9 +51,9 @@ const Hero = () => (
               <a
                 className="group/link relative flex h-[180px] items-center justify-center"
                 href={logo}
-                download="neon-logo.svg"
+                download={`neon-logo-${index + 1}.svg`}
               >
-                <Image src={logo} alt="Neon logo" width={158} height={44} pri />
+                <Image src={logo} alt="Neon logo" width={158} height={44} priority />
                 <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded border opacity-0 transition-opacity duration-300 group-odd:border-gray-new-80 group-odd:text-gray-new-30 group-even:border-gray-new-20 group-even:text-gray-new-94 group-hover/link:opacity-100">
                   <DownloadIcon />
                 </span>
@@ -78,7 +79,7 @@ const Hero = () => (
               <a
                 className="group/link relative flex h-[200px] items-center justify-center lg:h-[164px] md:h-[152px]"
                 href={logo}
-                download="neon-logo-sm.svg"
+                download={`neon-logo-sm-${index + 1}.svg`}
               >
                 <Image
                   className="lg:h-auto lg:w-[52px]"
@@ -104,7 +105,7 @@ const Hero = () => (
         </p>
         <div className="mt-10 flex gap-x-14 rounded-md bg-black-new px-14 pb-[54px] pt-[26px] xl:mt-9 lg:mt-8 lg:gap-x-[76px] lg:pb-[67px] lg:pl-[49px] lg:pt-10 md:mt-7 md:flex-col md:justify-center md:gap-y-6 md:p-6">
           <Image
-            className="lg:h-[190px] lg:w-auto md:mx-auto md:h-[160px] md:w-[166px]"
+            className="lg:h-[190px] lg:w-auto md:mx-auto md:h-40 md:w-[166px]"
             src={logoSpacingSm}
             alt="Logo spacing"
             width={225}
