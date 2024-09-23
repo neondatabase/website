@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-09-06T12:09:44.678Z'
+updatedOn: '2024-09-23T19:07:35.840Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
