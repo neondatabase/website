@@ -83,7 +83,6 @@ For additional information about Django project settings, see [Django Settings: 
   - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the autosuspend setting configured for your compute.
   - Alternatively, enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
 
-
   For information configuring Neon's Autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
 ## Schema migration with Django
