@@ -1,0 +1,79 @@
+---
+title: Upgrading your Postgres version
+subtitle: Learn how upgrade to a new major Postgres version in Neon
+enableTableOfContents: true
+updatedOn: '2024-08-07T21:36:52.673Z'
+---
+
+This topic describes how to upgrade your Neon project from one **major** PostgreSQL version to a newer one.
+
+Postgres version numbers consist of a **major** and a **minor** version number. For example, in the version number 16.1, 16 is the major version number and the 1 is the minor version number. 
+
+Neon manages **minor** PostgreSQL version upgrades for you, as per the [Neon Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major PostgreSQL version is a manual task that must be performed by you.
+
+Each Neon project is tied to a specific PostgreSQL major version, which you select when creating a Neon project. 
+
+You can check your current Neon project's PostgreSQL version in the **Project settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+
+```sql
+SELECT version();
+```
+
+## Before you begin
+
+- Review the [PostgreSQL Release Notes](https://www.postgresql.org/docs/current/release.html) for the new PostgreSQL version. New major PostgreSQL versions typically introduce some user-visible incompatibilities. Review the release notes for these changes. Although you can upgrade from one major Postgres version to another without upgrading to intervening versions, be sure to review the release notes for intervening versions should you decide to skip a version.
+- Optionally, you may want to run some performance tests of your current database to set a benchmark for post-upgrade comparison.
+
+## Performing the upgrade
+
+### 1. Create a Neon project with the new PostgreSQL version
+
+Start by creating a new Neon project with the desired PostgreSQL version. For instructions, see [creating a new Neon project](/docs/manage/projects#create-a-project).
+
+<Admonition type="note">
+The Neon [Free Plan](https://neon.tech/docs/introduction/plans#free-plan) has a limit of one project per user, which means a Neon Free Plan user cannot have two projects simultaneously. Due to this limitation, migrating to a Neon project with a new PostgreSQL major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new project with the desired PostgreSQL version, and restoring your data using `pg_restore`. For instructions, please refer to the [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) method.
+</Admonition>
+
+At this time, you may also also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to duplicate in your new Neon project:
+
+- [Compute size](/docs/manage/endpoints#edit-a-compute)
+- [Autoscaling](/docs/guides/autoscaling-guide)
+- [Autosuspend](/docs/guides/auto-suspend-guide)
+- [Protected branches](/docs/guides/protected-branches)
+- [IP Allow](/docs/introduction/ip-allow)
+
+### 2. Migrate your data using one of the following methods
+
+**Dump and Restore**
+
+Neon supports the following dump and restore options:
+
+- [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
+
+    This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`.
+ 
+- [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
+
+    If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy migration operations.
+ 
+- [Migrate data with the @neondatabase/pg-import CLI](docs/import/migrate-from-postgres-pg-import)
+
+    This experimental CLI utility is built on top of the piping method described above.
+
+**Logical Replication**
+
+The logical replication method can be used to achieve a near-zero downtime migration. Once the data in the new Neon project his synced with the data in the Neon project running the older version of PostgreSQL, you can quickly switch your applications to the database. This method is recommended for active databases that cannot afford much downtime. For instructions, see [Logical Replication](/docs/guides/logical-replication-neon-to-neon).
+
+<Admonition type="note" title="Notes">
+- Neon does not support the `pg_dumpall` utility. If upgrading via dump and restore, dumps must be performed one database at a time using `pg_dump`.
+- Neon does not yet support upgrading using `pg_upgrade`. Support for this utility is being considered for a future release.
+- If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous PostgreSQL versions supported by Neon.
+</Admonition>
+
+### 3. Switch over your applications
+
+After the migration is complete and you have verified that your new database is working as expected, you can switch your application over to the database in your new Neon project by swapping out your current database connection details for your new database connection details.
+
+You can find the connection details for your new Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+<NeedHelp/>
