@@ -2,7 +2,7 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-09-20T18:01:57.361Z'
+updatedOn: '2024-09-23T19:06:42.278Z'
 ---
 
 Neon offers two account types for you to choose from:
