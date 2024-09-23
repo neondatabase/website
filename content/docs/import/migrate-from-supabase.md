@@ -6,7 +6,7 @@ tag: new
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2024-09-18T09:52:58.427Z'
+updatedOn: '2024-09-23T22:07:20.574Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
