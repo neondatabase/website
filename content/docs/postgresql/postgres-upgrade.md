@@ -21,7 +21,7 @@ SELECT version();
 
 ## Before you begin
 
-- Review the [PostgreSQL Release Notes](https://www.postgresql.org/docs/current/release.html) for the new Postgres version. New major Postgres versions typically introduce some user-visible incompatibilities. Review the release notes for these changes. Although you can upgrade from one major Postgres version to another without upgrading to intervening versions, be sure to review the release notes for intervening versions should you decide to skip a version.
+- Review the [PostgreSQL Release Notes](https://www.postgresql.org/docs/current/release.html) for the new Postgres version. Major Postgres versions often introduce user-visible incompatibilities, so review the release notes for these changes. While you can upgrade directly to a new major Postgres version without going through each intermediate version, make sure you review the release notes for any skipped versions, as they may contain changes relevant to your upgrade.
 - Optionally, you may want to run some performance tests of your current database to set a benchmark for post-upgrade comparison.
 
 ## Performing the upgrade
