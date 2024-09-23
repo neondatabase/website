@@ -16,7 +16,7 @@ const ChangelogList = ({ items }) => (
         to={LINKS.changelog}
         withArrow
       >
-        All release notes
+        All changelogs
       </Link>
     </div>
     <ul className="mt-12 grid grid-cols-4 gap-x-[88px] 2xl:gap-x-[50px] xl:grid-cols-3 lg:mt-6 lg:grid-cols-2 md:mt-5 md:grid-cols-1 md:gap-y-7 md:pt-6">

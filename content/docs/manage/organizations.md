@@ -2,10 +2,10 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-09-10T21:01:06.532Z'
+updatedOn: '2024-09-20T16:07:37.866Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project transfer capabilities in one accessible location.
 
@@ -15,17 +15,13 @@ In the Neon Console, the Organizations page provides a centralized view of all y
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
-### Early Access Program
-
-Neon Organizations are currently available through our [Early Access program](https://neon.tech/early-access). Join now to start using Organizations for your team. You'll also gain access to all upcoming features, connect with the Neon team in a private community, and receive regular updates on what's coming next.
-
 ## User roles and permissions
 
 Each organization is made up of three types of users:
 
 - **Admin** &#8212; Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
 - **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
-- **Guests** &#8212; Guests are people given limited access to particular projects, using [project sharing](/docs/guides/project-sharing-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with me** grouping in their personal account.
+- **Guests** &#8212; Guests are people given limited access to particular projects, using [project sharing](/docs/guides/project-sharing-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
 
 Here's a breakdown of what actions each role can take:
 
@@ -55,7 +51,7 @@ After creating the organization, your next actions depend on your particular sce
 
 ### Scenario 1 &#8212; Moving an existing team to a new organization
 
-If you’re currently on a paid plan, using project sharing to work with your team on your Personal account projects, and you intend to work intend to work primarily from your new Organization account:
+If you’re currently on a paid plan, using project sharing to work with your team on your Personal account projects, and you intend to work primarily from your new Organization account:
 
 - [Transfer your existing projects](/docs/manage/orgs-project-transfer#transfer-projects-in-bulk) from your personal account to the new organization. You can leave one project behind, since that's the Free Plan limit.
 - Downgrade your personal account to the [Free Plan](/docs/introduction/manage-billing#change-your-plan) once all projects are transferred. This shifts all billing to the Organization.
@@ -75,7 +71,7 @@ If you want us to handle this conversion for you, you can contact [Neon Support]
 
 ## Limitations
 
-As we continue to refine our Organizations feature during this Early Access phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
+As we continue to refine our Organizations feature during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
 - **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects.
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.

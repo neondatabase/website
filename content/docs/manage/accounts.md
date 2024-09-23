@@ -2,7 +2,7 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-09-18T16:25:02.710Z'
+updatedOn: '2024-09-20T18:01:57.361Z'
 ---
 
 Neon offers two account types for you to choose from:
@@ -25,9 +25,9 @@ If you want to work with other people on this project, your options are:
 
 ## Organization accounts
 
-<EarlyAccess/>
+<FeatureBeta/>
 
-Any Neon user in our Early Access Program can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows you to share projects with your team members. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to.
+Any Neon paid account user can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows you to share projects with your team members. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to.
 
 From the Neon Console, you can navigate to your Organization dashboard, where you'll find all the projects in the organization and can take any actions that your permissions allow.
 

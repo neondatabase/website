@@ -5,6 +5,7 @@ export default {
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   autoscaling: '/docs/introduction/autoscaling',
   awsIsrael: '/partners/aws-israel',
+  azure: '/neon-on-azure',
   billing: '/docs/introduction/about-billing',
   blog: '/blog',
   branching: '/branching',
