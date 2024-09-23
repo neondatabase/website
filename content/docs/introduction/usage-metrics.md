@@ -148,6 +148,14 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
   \_ **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
 - **Manual VACUUM for autosuspend users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
 
+  To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
+
+  ```sql
+  VACUUM (VERBOSE, ANALYZE) playing_with_neon;
+  ```
+
+  See [VACUUM and ANALYZE statistic](https://neon.tech/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
+
 </details>
 
 ## Compute
