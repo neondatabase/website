@@ -74,7 +74,7 @@ In this architecture:
 
 - **Object storage**
 
-  The primary, durable copy of your data resides in **cloud object storage** (e.g., S3), with **99.999999999%** durability to safeguard against any permanent data loss in event of Pageserver or Safekeeper failure.
+  The primary, durable copy of your data resides in **cloud object storage** (e.g., S3), with **99.999999999%** durability to safeguard against any permanent data loss in the event of Pageserver or Safekeeper failure.
 
 ### Storage controller for automatic failover
 
@@ -97,4 +97,4 @@ The chart below shows the impact of a Pageserver failure (the truncated green li
 
 ## Limitations
 
-_No cross-region replication._ Neon's HA architecture is designed to mitigate failures within a single region by replicating data across multiple AZs. However, we currently do not support real-time replication across different cloud regions. This means that in the event of a region-wide outage, your data is not automatically replicated to another region and availability is limited to the scope of the affected region.
+_No cross-region replication._ Neon's HA architecture is designed to mitigate failures within a single region by replicating data across multiple AZs. However, we currently do not support real-time replication across different cloud regions. In the event of a region-wide outage, your data is not automatically replicated to another region, and availability depends on the cloud provider restoring service to the affected region. While region-wide outages are rare, a reminder that your long-term data remains safe in durable cloud storage (such as S3).
