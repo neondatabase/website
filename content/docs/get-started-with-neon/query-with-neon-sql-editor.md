@@ -4,7 +4,7 @@ subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
-updatedOn: '2024-08-16T16:57:59.924Z'
+updatedOn: '2024-09-18T16:25:02.707Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -50,7 +50,7 @@ To save a query:
 
 The query is added to the **Saved** list in the left pane of the SQL Editor. You can rerun a query by selecting it from the **Saved** list.
 
-You can rename or delete a saved query by selecting **Rename** or **Delete** from the kebab menu associated with the saved query.
+You can rename or delete a saved query by selecting **Rename** or **Delete** from the more options menu associated with the saved query.
 
 ## View the query history
 

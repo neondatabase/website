@@ -1,7 +1,6 @@
 import 'styles/globals.css';
 
 import Script from 'next/script';
-import { CookiesProvider } from 'next-client-cookies/server';
 
 import 'swiper/css';
 
@@ -30,13 +29,11 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      <CookiesProvider>
-        <ThemeProvider>
-          <HomepageVisitProvider>
-            <ActiveLabelProvider>{children}</ActiveLabelProvider>
-          </HomepageVisitProvider>
-        </ThemeProvider>
-      </CookiesProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <ActiveLabelProvider>{children}</ActiveLabelProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );

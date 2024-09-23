@@ -25,7 +25,6 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       { title: '0.5 GiB storage' },
-      { title: '10 branches', info: 'All within 1 project' },
       {
         title: '24/7 database at 0.25 CU',
         info: 'Plus 20h of usage for additional branches. 0.25 CU = 0.25 vCPU, 1 GB RAM',
@@ -33,10 +32,10 @@ const items = [
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
       { title: 'Point-in-time restore (24 h)' },
       { title: 'Community support' },
-      { title: 'Organization accounts', disabled: true },
+      { title: 'Team accounts', disabled: true },
       { title: 'Branch protection', disabled: true },
-      { title: 'SOC 2', disabled: true },
-      { title: 'SLA (99.95%)', disabled: true },
+      { title: 'Migration assistance', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: LINKS.signup,
@@ -47,10 +46,11 @@ const items = [
   },
   {
     type: 'Launch',
+    highlighted: true,
     price: 19,
     priceFrom: true,
     isMarketplaceAvailable: true,
-    description: 'All the resources, features and support you need to launch.',
+    description: 'The resources, features, and support you need to launch.',
     features: [
       {
         title: '10 GiB storage included',
@@ -63,10 +63,10 @@ const items = [
       { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
       { title: 'Point-in-time restore (7 days)' },
       { title: 'Standard support' },
-      { title: 'Organization accounts' },
+      { title: 'Team accounts' },
       { title: 'Branch protection', disabled: true },
-      { title: 'SOC 2', disabled: true },
-      { title: 'SLA (99.95%)', disabled: true },
+      { title: 'Migration assistance', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -80,13 +80,9 @@ const items = [
     price: 69,
     priceFrom: true,
     isMarketplaceAvailable: true,
-    description: 'Full platform access for scaling production workloads.',
+    description: 'More capacity and functionality for scaling production workloads.',
     features: [
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
-      {
-        title: '500 branches per project',
-        info: '50 projects included. Additional 10 projects: $50/month',
-      },
       {
         title: '750 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
@@ -94,10 +90,10 @@ const items = [
       { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
       { title: 'Point-in-time restore (14 days)' },
       { title: 'Standard support' },
-      { title: 'Organization accounts' },
+      { title: 'Team accounts' },
       { title: 'Branch protection' },
-      { title: 'SOC 2', disabled: true },
-      { title: 'SLA (99.95%)', disabled: true },
+      { title: 'Migration assistance', disabled: true },
+      { title: 'SOC 2 + 99.95% SLA', disabled: true },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -111,20 +107,23 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For existing workloads with larger storage/compute requirements.',
+    description: 'For business workloads with larger storage/compute requirements.',
     features: [
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
       {
         title: '1000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
       },
-      { title: 'Autoscaling up to 10 CU', info: '10 CU = 10 vCPU, 40 GB RAM' },
+      { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Priority support' },
-      { title: 'Organization accounts' },
-      { title: 'Branch protection' },
-      { title: 'SOC 2' },
-      { title: 'SLA (99.95%)' },
+      { title: 'Team accounts' },
+      { title: 'Branch protection', info: 'Restrict access to prod / prevent accidental deletion' },
+      {
+        title: 'Migration assistance',
+        info: 'With 0 migration fees—we will waive them',
+      },
+      { title: 'SOC 2 + 99.95% SLA' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=business`,
@@ -151,11 +150,11 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Feature = ({ title, info, disabled, type, index }) => (
+const Feature = ({ title, info, disabled, type, highlighted, index }) => (
   <li
     className={clsx(
       disabled ? 'text-gray-new-30 opacity-80' : 'text-gray-new-70',
-      !disabled && type === 'Scale' && 'text-white',
+      !disabled && highlighted && 'text-white',
       'relative pl-6 leading-tight tracking-tight'
     )}
   >
@@ -167,7 +166,7 @@ const Feature = ({ title, info, disabled, type, index }) => (
     ) : (
       <CheckIcon
         className={clsx(
-          type === 'Scale' || type === 'Business' ? 'text-green-45' : 'text-gray-new-70',
+          highlighted ? 'text-green-45' : 'text-gray-new-70',
           'absolute left-0 top-[2px] h-4 w-4'
         )}
         aria-hidden
@@ -192,6 +191,7 @@ Feature.propTypes = {
   info: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
+  highlighted: PropTypes.bool,
   index: PropTypes.number,
 };
 
@@ -227,6 +227,7 @@ const Hero = () => {
               (
                 {
                   type,
+                  highlighted = false,
                   price,
                   priceFrom = false,
                   isMarketplaceAvailable,
@@ -235,111 +236,112 @@ const Hero = () => {
                   button,
                 },
                 index
-              ) => {
-                const isScalePlan = type === 'Scale';
-
-                return (
-                  <li
-                    className={clsx(
-                      'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
-                      !isScalePlan && 'border border-transparent bg-black-new'
-                    )}
-                    key={index}
-                    onPointerEnter={() => {
-                      if (isScalePlan) {
-                        controls.start('to');
-                      }
-                    }}
-                  >
-                    {isMarketplaceAvailable && (
-                      <a
-                        className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
-                        href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
-                          Pay via marketplace
-                        </span>
-                        <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
-                      </a>
-                    )}
-                    <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
-                      <h3
-                        className={clsx(
-                          isScalePlan && 'text-green-45',
-                          'text-xl font-medium leading-none tracking-tight text-gray-new-70 xl:text-lg'
-                        )}
-                      >
-                        {type}
-                      </h3>
-                      <p className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4">
-                        {priceFrom && (
-                          <em className="absolute -top-6 block text-base font-light not-italic tracking-tight text-gray-new-50 xl:relative xl:-top-1 xl:-mt-4 md:mt-0">
-                            From
-                          </em>
-                        )}
-                        ${price}{' '}
-                        <span className="text-[28px] font-light -tracking-[0.06em] text-gray-new-50">
-                          /month
-                        </span>
-                      </p>
-                      {isScalePlan ? (
-                        <AnimatedButton
-                          className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
-                          animationColor="#00e599"
-                          theme="primary"
-                          size="sm"
-                          to={button.url}
-                          tag_name={button.event}
-                          isAnimated
-                        >
-                          {button.text}
-                        </AnimatedButton>
-                      ) : (
-                        <Button
-                          className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
-                          size="sm"
-                          to={button.url}
-                          tag_name={button.event}
-                        >
-                          {button.text}
-                        </Button>
+              ) => (
+                <li
+                  className={clsx(
+                    'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
+                    !highlighted && 'border border-transparent bg-black-new'
+                  )}
+                  key={index}
+                  onPointerEnter={() => {
+                    if (highlighted) {
+                      controls.start('to');
+                    }
+                  }}
+                >
+                  {isMarketplaceAvailable && (
+                    <a
+                      className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
+                      href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
+                        Pay via marketplace
+                      </span>
+                      <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
+                    </a>
+                  )}
+                  <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
+                    <h3
+                      className={clsx(
+                        highlighted && 'text-green-45',
+                        'text-xl font-medium leading-none tracking-tight text-gray-new-70 xl:text-lg'
                       )}
-                      <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
-                        {description}
-                      </p>
-                    </div>
-                    {isScalePlan && (
-                      <LazyMotion features={domAnimation}>
-                        <m.span
-                          className={clsx(
-                            'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45 transition-colors duration-300 md:!opacity-100',
-                            isLoad && '!opacity-100'
-                          )}
-                          initial="from"
-                          exit="exit"
-                          variants={scaleCardBorderVariants}
-                          animate={controls}
-                          aria-hidden
-                        />
-                      </LazyMotion>
+                    >
+                      {type}
+                    </h3>
+                    <p className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4">
+                      {priceFrom && (
+                        <em className="absolute -top-6 block text-base font-light not-italic tracking-tight text-gray-new-50 xl:relative xl:-top-1 xl:-mt-4 md:mt-0">
+                          From
+                        </em>
+                      )}
+                      ${price}{' '}
+                      <span className="text-[28px] font-light -tracking-[0.06em] text-gray-new-50">
+                        /month
+                      </span>
+                    </p>
+                    {highlighted ? (
+                      <AnimatedButton
+                        className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
+                        animationColor="#00e599"
+                        theme="primary"
+                        size="sm"
+                        to={button.url}
+                        tag_name={button.event}
+                        isAnimated
+                      >
+                        {button.text}
+                      </AnimatedButton>
+                    ) : (
+                      <Button
+                        className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
+                        size="sm"
+                        to={button.url}
+                        tag_name={button.event}
+                      >
+                        {button.text}
+                      </Button>
                     )}
-                    <div className="mt-auto flex grow flex-col">
-                      <ul className="flex flex-col flex-wrap gap-y-4">
-                        {features.map((feature, index) => (
-                          <Feature {...feature} type={type} index={index} key={index} />
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                );
-              }
+                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
+                      {description}
+                    </p>
+                  </div>
+                  {highlighted && (
+                    <LazyMotion features={domAnimation}>
+                      <m.span
+                        className={clsx(
+                          'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45 transition-colors duration-300 md:!opacity-100',
+                          isLoad && '!opacity-100'
+                        )}
+                        initial="from"
+                        exit="exit"
+                        variants={scaleCardBorderVariants}
+                        animate={controls}
+                        aria-hidden
+                      />
+                    </LazyMotion>
+                  )}
+                  <div className="mt-auto flex grow flex-col">
+                    <ul className="flex flex-col flex-wrap gap-y-4">
+                      {features.map((feature, index) => (
+                        <Feature
+                          {...feature}
+                          type={type}
+                          highlighted={highlighted}
+                          index={index}
+                          key={index}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              )
             )}
           </ul>
         </div>
         <p className="mb-10 mt-16 text-center text-lg font-light leading-snug text-gray-new-80 sm:mb-4">
-          Not sure which plan is right for you?
           <br />
           Explore the{' '}
           <Button
@@ -358,7 +360,7 @@ const Hero = () => {
         <CtaBlock
           className="max-w-[716px]"
           title="Custom Enterprise Plans"
-          description="Connect with our team for larger compute sizes, dedicated requirements, and annual contracts."
+          description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
         />

@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
@@ -8,19 +7,15 @@ import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 
 import illustration from './images/illustration.png';
 
-const Search = dynamic(() => import('components/shared/search'), { ssr: false });
-
 const CTA = ({ isDocsPage = false }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
-      <Search
-        className="DocSearch-notFound my-8"
-        indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}
-      />
+      <InkeepTrigger className="my-8 w-full" isNotFoundPage />
       <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
         Back to home
       </Link>

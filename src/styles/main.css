@@ -81,12 +81,20 @@
     }
   }
 
-  inkeep-portal {
-    @apply relative z-50;
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    background-image: url(/images/templates/close-light-mode.svg);
+    cursor: pointer;
   }
 
-  [data-docsearch-fixed] {
-    @apply sr-only;
+  .dark input[type='search']::-webkit-search-cancel-button {
+    background-image: url(/images/templates/close-dark-mode.svg);
+  }
+
+  inkeep-portal {
+    @apply relative z-50;
   }
 }
 
