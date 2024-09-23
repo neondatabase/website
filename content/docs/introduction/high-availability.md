@@ -74,7 +74,7 @@ In this architecture:
 
 - **Object storage**
 
-  The primary, durable copy of your data resides in **cloud object storage** (e.g., S3), with **99.999999999%** durability to safeguard against any permanent data loss in even of Pageserver or Safekeeper failure.
+  The primary, durable copy of your data resides in **cloud object storage** (e.g., S3), with **99.999999999%** durability to safeguard against any permanent data loss in event of Pageserver or Safekeeper failure.
 
 ### Storage controller for automatic failover
 
