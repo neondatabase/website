@@ -41,8 +41,8 @@ const BlogPage = async () => {
       <h1 className="sr-only">Blog</h1>
       <FeaturedPostsList posts={featuredPosts} />
       <PostsList title="Workflows" posts={workflowsFeaturedPosts} alignment="right" />
-      <PostsList title="Community" posts={communityFeaturedPosts} alignment="right" />
-      <PostsList title="Postgres" posts={postgresFeaturedPosts} alignment="left" />
+      <PostsList title="Community" posts={communityFeaturedPosts} alignment="left" />
+      <PostsList title="Postgres" posts={postgresFeaturedPosts} alignment="right" />
       <VideoList videos={videos} />
       <PostsList title="AI" posts={aiFeaturedPosts} alignment="right" />
       <PostsList title="Company" posts={companyFeaturedPosts} alignment="left" />
