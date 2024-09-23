@@ -7,11 +7,11 @@ updatedOn: '2024-08-07T21:36:52.673Z'
 
 This topic describes how to upgrade your Neon project from one **major** PostgreSQL version to a newer one.
 
-Postgres version numbers consist of a **major** and a **minor** version number. For example, in the version number 16.1, 16 is the major version number and the 1 is the minor version number. 
+Postgres version numbers consist of a **major** and a **minor** version number. For example, in the version number 16.1, 16 is the major version number and the 1 is the minor version number.
 
 Neon manages **minor** PostgreSQL version upgrades for you, as per the [Neon Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major PostgreSQL version is a manual task that must be performed by you.
 
-Each Neon project is tied to a specific PostgreSQL major version, which you select when creating a Neon project. 
+Each Neon project is tied to a specific PostgreSQL major version, which you select when creating a Neon project.
 
 You can check your current Neon project's PostgreSQL version in the **Project settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
 
@@ -50,15 +50,15 @@ Neon supports the following dump and restore options:
 
 - [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
 
-    This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`.
- 
+  This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`.
+
 - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
-    If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy migration operations.
- 
+  If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy migration operations.
+
 - [Migrate data with the @neondatabase/pg-import CLI](docs/import/migrate-from-postgres-pg-import)
 
-    This experimental CLI utility is built on top of the piping method described above.
+  This experimental CLI utility is built on top of the piping method described above.
 
 **Logical Replication**
 
