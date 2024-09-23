@@ -79,7 +79,10 @@ For additional information about Django project settings, see [Django Settings: 
   ```
 
   The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
-- If you encounter an `SSL SYSCALL error: EOF detected` error when trying to connect to the database, this is typically due to an application attempting to reuse a connection after the Neon compute has been suspended due to inactivity. To avoid this issue, try setting your Django [CONNECT_MAX_AGE](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the autosuspend setting configured for your compute. Alternatively, you can try setting the SQLAlchemy [CONN_HEALTH_CHECKS](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) setting to `true`. This option forces a health check to ensure the connection is alive before trying to execute a query. 
+- If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
+  - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the autosuspend setting configured for your compute.
+  - Alternatively, enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
+
 
   For information configuring Neon's Autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 

@@ -100,9 +100,12 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 ## SQLAlchemy connection errors
 
 - SQLAlchemy versions prior to 2.0.33 may reuse idle connections, leading to connection errors. If this occurs, you could encounter an `SSL connection has been closed unexpectedly` error. To resolve this, upgrade to SQLAlchemy 2.0.33 or later. For more details, see the [SQLAlchemy 2.0.33 changelog](https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html#change-2.0.33-postgresql).
-- If you encounter an `SSL SYSCALL error: EOF detected` error when trying to connect to the database, this is typically due to an application attempting to reuse a connection after the Neon compute has been suspended due to inactivity. To avoid this issue, try setting your SQLAlchemy `pool_recycle` parameter to a value less than or equal to the autosuspend setting configured for your compute. Alternatively, you can try setting the SQLAlchemy `pool_pre_ping` parameter to `true`. This option ensures that your engine first checks to see if the connection is still alive before executing your query. 
+- If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically happens because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
+  - Set the SQLAlchemy `pool_recycle` parameter to a value less than or equal to the autosuspend setting configured for your compute.
+  - Alternatively, set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
 
-  For information about the `pool_recycle` and `pool_pre_ping` parameters, see [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration), and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information configuring Neon's Autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+  For more details on the `pool_recycle` and `pool_pre_ping` parameters, refer to [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration) and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information on configuring Neon's autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+
 
 ## Schema migration with SQLAlchemy
 
