@@ -23,7 +23,7 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 - `pg_dump` and `pg_restore` utilities installed on your local machine. These typically come with a Postgres installation.
 
-  We recommend using clients with the same version as the source Postgres instance. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
+  We recommended that you use the `pg_dump` and `pg_restore` programs from the latest version of Postgres, to take advantage of enhancements that might have been made in these programs. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
 - Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
