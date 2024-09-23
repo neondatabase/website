@@ -7,16 +7,16 @@ import logoSpacingSm from './images/logo-spacing-sm.svg';
 import logoSpacing from './images/logo-spacing.svg';
 
 const logos = [
-  { src: '/branding/logo-1.svg', name: 'neon-logo-light-color.svg' },
-  { src: '/branding/logo-2.svg', name: 'neon-logo-dark-color.svg' },
-  { src: '/branding/logo-3.svg', name: 'neon-logo-light-mono.svg' },
-  { src: '/branding/logo-4.svg', name: 'neon-logo-dark-mono.svg' },
+  { src: '/branding/neon-logo-light-color.svg', name: 'neon-logo-light-color.svg' },
+  { src: '/branding/neon-logo-dark-color.svg', name: 'neon-logo-dark-color.svg' },
+  { src: '/branding/neon-logo-light-mono.svg', name: 'neon-logo-light-mono.svg' },
+  { src: '/branding/neon-logo-dark-mono.svg', name: 'neon-logo-dark-mono.svg' },
 ];
 const logosSm = [
-  { src: '/branding/logo-sm-1.svg', name: 'neon-logomark-light-color.svg' },
-  { src: '/branding/logo-sm-2.svg', name: 'neon-logomark-light-mono.svg' },
-  { src: '/branding/logo-sm-3.svg', name: 'neon-logomark-dark-color.svg' },
-  { src: '/branding/logo-sm-4.svg', name: 'neon-logomark-dark-mono.svg' },
+  { src: '/branding/neon-logomark-light-color.svg', name: 'neon-logomark-light-color.svg' },
+  { src: '/branding/neon-logomark-light-mono.svg', name: 'neon-logomark-light-mono.svg' },
+  { src: '/branding/neon-logomark-dark-color.svg', name: 'neon-logomark-dark-color.svg' },
+  { src: '/branding/neon-logomark-dark-mono.svg', name: 'neon-logomark-dark-mono.svg' },
 ];
 
 const Logos = () => (
