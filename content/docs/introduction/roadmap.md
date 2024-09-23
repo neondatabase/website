@@ -25,6 +25,7 @@ Here's a snapshot of what we're working on now:
 
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
 - **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released.
+- **Storage controller**: This new service monitors Pageserver health and automatically fails over to a healthy Pageserver if one becomes unavailable. Currently available for databases over 64 GB, with plans to roll out to all databases soon. See [High Availability](/docs/introduction/high-availability) for details.
 - **Support for exporting metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable metrics.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
 - **Migrations**: We’re adding inbound logical replication as a first step towards offering seamless, low-downtime migrations from your current database provider to Neon. Inbound replication can also help you use Neon as your staging environment, letting you take advantage of developer-friendly features like branching and our GitHub Integration, even if you decide to keep production with your current provider.
