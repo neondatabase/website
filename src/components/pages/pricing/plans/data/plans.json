@@ -271,7 +271,7 @@
         "subtitle": "Restrict access & actions"
       },
       "free": false,
-      "launch": "Up to 2 branches"
+      "launch": "Up to 2 branches",
       "scale": true,
       "business": true
     },
