@@ -41,9 +41,9 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP restrictions to protected branches only.
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. IP Allow is only available on Neon's Business plan.
 
-Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans, where you can designate up to 5 protected branches. See [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -133,7 +133,7 @@ To set a branch as the default branch:
 
 ## Set a branch as protected
 
-This feature is available on Neon's [Business](/docs/introduction/plans#business) plan, which supports up to five protected branches.
+This feature is available on all Neon's paid plans, which supports up to five protected branches.
 
 To set a branch as protected:
 
