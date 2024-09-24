@@ -16,9 +16,9 @@ This table provides an overview of plan fees with allowances for storage, comput
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                   | Project Allowance |
 | ---------- | ----------- | ----------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
 | Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours (24/7 at 0.25 CU), includes up to 5 hours/month for non-default branch computes | 1 project         |
-| Launch     | $19         | 10 GiB            | 300 compute hours a month                                                                           | 100 projects      |
-| Scale      | $69         | 50 GiB            | 750 compute hours a month                                                                           | 1000 projects     |
-| Business   | $700        | 500 GiB           | 1000 compute hours a month                                                                          | 5000 projects     |
+| Launch     | $19         | 10 GiB            | 300 compute hours per month                                                                         | 100 projects      |
+| Scale      | $69         | 50 GiB            | 750 compute hours per month                                                                         | 1000 projects     |
+| Business   | $700        | 500 GiB           | 1000 compute hours per month                                                                        | 5000 projects     |
 | Enterprise | Custom      | Custom            | Custom                                                                                              | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
@@ -65,6 +65,7 @@ The Scale plans supports extra **Storage**, **Compute**, and **Project** usage.
 | Extra Compute  | Compute hour | $0.16           |
 | Extra Projects | 500          | $50.00 per unit |
 
+
 ### Business plan
 
 Both the Scale and Business plans supports extra **Storage**, **Compute**, and **Project** usage.
@@ -75,7 +76,7 @@ Both the Scale and Business plans supports extra **Storage**, **Compute**, and *
 
 | Resource       | Unit         | Price           |
 | -------------- | ------------ | --------------- |
-| Extra Storage  | 10 GiB       | $5.00 per unit  |
+| Extra Storage  | 10 GiB       | $5.00 per unit |
 | Extra Compute  | Compute hour | $0.16           |
 | Extra Projects | 5000         | $50.00 per unit |
 

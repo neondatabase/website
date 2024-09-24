@@ -161,7 +161,7 @@ The Business plan includes the following usage allowances:
 | **Branches**  | 500 per project                                                  |
 | **Databases** | Unlimited                                                        |
 | **Storage**   | 500 GiB of data storage                                          |
-| **Compute**   | 1,000 compute hours a month for all computes across all projects |
+| **Compute**   | 1,000 compute hours per month for all computes across all projects |
 
 ### Business plan extra usage
 
