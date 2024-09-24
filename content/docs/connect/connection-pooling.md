@@ -106,7 +106,7 @@ The following list describes each setting. For a full explanation of each parame
 ## Connection pooling notes
 
 - Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-- We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs). With the exception of recent versions of [Prisma ORM, which supports using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
+- We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs). With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
 
 ## Optimize queries with PgBouncer and prepared statements
 
