@@ -87,7 +87,7 @@ The Launch plan includes the following usage allowances:
 | **Branches**  | 500 per project                                                |
 | **Databases** | Unlimited                                                      |
 | **Storage**   | 10 GiB of data storage                                         |
-| **Compute**   | 300 compute hours a month for all computes across all projects |
+| **Compute**   | 300 compute hours per month for all computes across all projects |
 
 ### Launch plan extra usage
 
