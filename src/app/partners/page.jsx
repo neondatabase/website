@@ -45,6 +45,7 @@ const logos = [
   'bunnyshell',
   'hasura',
   'replit',
+  'shakudo',
   'vercel',
   'retool',
   'illa',
