@@ -27,7 +27,7 @@ For more of the latest features and fixes, check our [Changelog](/docs/changelog
 Here's a snapshot of what we're working on now:
 
 - **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
-- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 the day it's released.
+- **Postgres 17**: We've been at work on this for a while now. We plan to support Postgres 17 soon after it's released.
 - **Support for exporting metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable metrics.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
 - **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
