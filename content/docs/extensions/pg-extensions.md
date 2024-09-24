@@ -6,7 +6,7 @@ redirectFrom:
 updatedOn: '2024-08-16T16:57:59.921Z'
 ---
 
-Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version.
+Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (-) indicates that an extension is not yet supported.
 
 <a id="default-extensions/"></a>
 
