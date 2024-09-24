@@ -27,13 +27,13 @@ const BlogPage = async () => {
   const {
     featuredPosts,
     workflowsFeaturedPosts,
-    companyFeaturedPosts,
     communityFeaturedPosts,
+    postgresFeaturedPosts,
     videos,
+    aiFeaturedPosts,
+    companyFeaturedPosts,
     appearances,
     engineeringFeaturedPosts,
-    aiFeaturedPosts,
-    postgresFeaturedPosts,
   } = await getWpBlogPage();
 
   return (
