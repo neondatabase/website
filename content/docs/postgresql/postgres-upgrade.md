@@ -11,9 +11,9 @@ Postgres version numbers consist of a **major** and a **minor** version number. 
 
 Neon manages **minor** Postgres version upgrades for you, as per the [Neon Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major Postgres version is a manual task that must be performed by you.
 
-Each Neon project is tied to a specific Postgres major version, which you select when creating a Neon project.
+Each Neon project is tied to a specific Postgres major version, which you selected when creating your Neon project.
 
-You can check your current Neon project's Postgres version in the **Project settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+You can check your Neon project's Postgres version in the **Project settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
@@ -34,13 +34,15 @@ Start by creating a new Neon project with the desired Postgres version. For inst
 The Neon [Free Plan](https://neon.tech/docs/introduction/plans#free-plan) has a limit of one project per user, which means a Neon Free Plan user cannot have two projects simultaneously. Due to this limitation, migrating to a Neon project with a new Postgres major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new project with the desired Postgres version, and restoring your data using `pg_restore`. For instructions, please refer to the [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) method.
 </Admonition>
 
-At this time, you may also also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to duplicate in your new Neon project:
+At this time, you may also also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to implement in your new Neon project:
 
 - [Compute size](/docs/manage/endpoints#edit-a-compute)
 - [Autoscaling](/docs/guides/autoscaling-guide)
 - [Autosuspend](/docs/guides/auto-suspend-guide)
 - [Protected branches](/docs/guides/protected-branches)
 - [IP Allow](/docs/introduction/ip-allow)
+
+Alternatively, you can apply these configurations after migrating your data.
 
 ### 2. Migrate your data using one of the following methods
 
@@ -50,11 +52,11 @@ Neon supports the following dump and restore options:
 
 - [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
 
-  This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`.
+  This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`. Some downtime will be required between the dump and restore operations.
 
 - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
-  If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy migration operations.
+  If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
 
 - [Migrate data with the @neondatabase/pg-import CLI](docs/import/migrate-from-postgres-pg-import)
 
