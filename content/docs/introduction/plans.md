@@ -169,7 +169,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 
 | Extra usage type   | Cost                                                                    |
 | ------------------ | ----------------------------------------------------------------------- |
-| **Extra Storage**  | Billed for in units of 10 GiB at $7.50 per unit, prorated for the month |
+| **Extra Storage**  | Billed for in units of 10 GiB at $5.00 per unit, prorated for the month |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                                |
 | **Extra Projects** | Billed for in units of 10 at $5 per unit                                |
 
