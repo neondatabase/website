@@ -103,6 +103,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
 - Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
+- Branch protection (up to 5 branches)
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
@@ -178,7 +179,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
-- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
+- Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
 - [Priority support](/docs/introduction/support)
 - [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
 
