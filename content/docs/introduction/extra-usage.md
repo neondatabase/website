@@ -65,7 +65,6 @@ The Scale plans supports extra **Storage**, **Compute**, and **Project** usage.
 | Extra Compute  | Compute hour | $0.16           |
 | Extra Projects | 500          | $50.00 per unit |
 
-
 ### Business plan
 
 Both the Scale and Business plans supports extra **Storage**, **Compute**, and **Project** usage.
@@ -76,7 +75,7 @@ Both the Scale and Business plans supports extra **Storage**, **Compute**, and *
 
 | Resource       | Unit         | Price           |
 | -------------- | ------------ | --------------- |
-| Extra Storage  | 10 GiB       | $5.00 per unit |
+| Extra Storage  | 10 GiB       | $5.00 per unit  |
 | Extra Compute  | Compute hour | $0.16           |
 | Extra Projects | 5000         | $50.00 per unit |
 
