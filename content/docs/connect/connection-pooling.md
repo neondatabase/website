@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-09-23T22:33:41.221Z'
+updatedOn: '2024-09-24T08:34:04.209Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -82,8 +82,6 @@ You will not be able to get interactive results from all 10,000 connections at t
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.
 
-Neon uses `PgBouncer` in `transaction mode`. For limitations associated with `transaction mode`, see [Connection pooling notes and limitations](#connection-pooling-notes). For more information about `PgBouncer`, refer to [https://www.pgbouncer.org/](https://www.pgbouncer.org/).
-
 ## Neon PgBouncer configuration settings
 
 Neon's PgBouncer configuration is shown below. The settings are not user-configurable, but if you are a paid plan user and require a different setting, please contact [Neon Support](/docs/introduction/support). For example, Neon sometimes raises the `default_pool_size` setting for users who support a large number of concurrent connections and repeatedly hit PgBouncer's pool size limit.
@@ -108,7 +106,7 @@ The following list describes each setting. For a full explanation of each parame
 ## Connection pooling notes
 
 - Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-- We generally recommend using a direct (non-pooled) connection string when performing migrations. With the exception of recent versions of [Prisma ORM, which supports pooled connections with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
+- We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs). With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
 
 ## Optimize queries with PgBouncer and prepared statements
 

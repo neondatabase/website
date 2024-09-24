@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2024-09-23T22:33:41.224Z'
+updatedOn: '2024-09-24T08:34:04.216Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -103,7 +103,7 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically happens because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
 
   - Set the SQLAlchemy `pool_recycle` parameter to a value less than or equal to the autosuspend setting configured for your compute.
-  - Alternatively, set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
+  - Set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
 
   For more details on the `pool_recycle` and `pool_pre_ping` parameters, refer to [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration) and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information on configuring Neon's autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 

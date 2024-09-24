@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2024-09-23T22:33:41.223Z'
+updatedOn: '2024-09-24T08:34:04.212Z'
 ---
 
 To connect to Neon from a Django application:
@@ -83,7 +83,7 @@ For additional information about Django project settings, see [Django Settings: 
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
 
   - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the autosuspend setting configured for your compute.
-  - Alternatively, enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
+  - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
 
   For information configuring Neon's Autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 

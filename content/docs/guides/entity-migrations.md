@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Entity Framework
 subtitle: Set up Neon Postgres and run migrations for your Entity Framework project
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.651Z'
+updatedOn: '2024-09-24T08:34:04.214Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
@@ -38,6 +38,10 @@ Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLM
 ```
 
 Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use.
+
+<Admonition type="note">
+Neon supports both direct and pooled database connection strings, which can be copied from the **Connection Details** widget on your Neon Project Dashboard. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Setting up the Entity Framework project
 
