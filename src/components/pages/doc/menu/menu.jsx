@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH, HOME_MENU_ITEM } from 'constants/docs';
+import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
-import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
-import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
+import ChevronBackIcon from 'icons/docs/sidebar/chevron.inline.svg';
 
 import Item from './item';
 
@@ -106,7 +105,6 @@ const Menu = ({
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
   const isLastActive = activeMenuList[lastDepth]?.title === title;
 
-  const BackLinkTag = parentMenu?.slug ? Link : 'button';
   const LinkTag = slug ? Link : 'div';
 
   const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
@@ -133,10 +131,6 @@ const Menu = ({
   const handleClose = () => {
     setActiveMenuList((prevList) => prevList.filter((item) => item.title !== title));
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
-  };
-
-  const handleClickHome = () => {
-    setActiveMenuList([HOME_MENU_ITEM]);
   };
 
   const animateState = () => {
@@ -169,41 +163,14 @@ const Menu = ({
           >
             {/* breadcrumbs, menu title and home link */}
             {!isRootMenu && (
-              <>
-                <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-                  {depth > 0 && (
-                    <BackLinkTag
-                      className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
-                      type={parentMenu.slug ? undefined : 'button'}
-                      to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
-                      onClick={handleClose}
-                    >
-                      <ChevronBackIcon className="size-4.5" />
-                      Back to {parentMenu.title}
-                    </BackLinkTag>
-                  )}
-                  {depth !== 1 && (
-                    <Link
-                      className={clsx(
-                        'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                        'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
-                      )}
-                      to={homePath}
-                      onClick={handleClickHome}
-                    >
-                      <HomeIcon className="size-4.5" />
-                      Home
-                    </Link>
-                  )}
-                </div>
-
-                <LinkTag
-                  className="mt-4 flex w-full items-start gap-1.5 pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
-                  to={slug ? `${basePath}${slug}` : undefined}
-                >
-                  {title}
-                </LinkTag>
-              </>
+              <LinkTag
+                className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
+                to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
+                onClick={handleClose}
+              >
+                <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-94 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
+                {title}
+              </LinkTag>
             )}
 
             {/* menu sections and items */}
