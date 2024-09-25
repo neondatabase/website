@@ -53,11 +53,11 @@ If the count is greater than 0, a Neon compute where the publishing Postgres ins
 
 ## Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes inactive replication slots after 75 minutes of inactivity if you have other active replication slots**.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**.
 
 If you have only one replication slot, and that slot becomes inactive, it will not be dropped because a single replication slot does not cause storage bloat.
 
-An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for an extended period. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
+An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for more than 75 minutes. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 
 An _inactive_ replication slot can be the result of a dead subscriber, where the replication slot has not been removed after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a long replication delay configured on the subscriber. For example, subscribers like Fivetran or Airbyte let you to configure the replication frequency or set a replication delay to minimize usage.
 
