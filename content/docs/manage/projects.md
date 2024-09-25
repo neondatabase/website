@@ -213,7 +213,7 @@ Optionally, you can allow unrestricted access to your project's [non-default bra
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
-Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
+Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon project provisioned on Azure currently on support IPv4.
 </Admonition>
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
@@ -314,7 +314,11 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   203.0.113.0/24
   ```
 
-- **Use IPv6 addresses**: Neon also supports specifying IPv6 addresses. For example:
+- **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
+
+  <Admonition type="note">
+  IPv6 is not yet supported for projects provisioned on on Azure.
+  </Admonition>
 
   ```text
   2001:DB8:5432::/48
