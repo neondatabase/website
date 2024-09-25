@@ -19,7 +19,7 @@ To avoid potential issues, please review the following notices carefully before 
 These notices apply when replicating data from Neon:
 
 - **Autosuspend**: Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**. If you plan to have more than one subscriber to your Neon database, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 
 ### Neon as a subscriber
 
@@ -53,21 +53,21 @@ If the count is greater than 0, a Neon compute where the publishing Postgres ins
 
 ## Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes an _inactive_ replication slot if you have other _active_ replication slots**. Removal occurs after 75 minutes.
+To prevent storage bloat, **Neon automatically removes inactive replication slots after 75 minutes of inactivity if you have other active replication slots**.
 
-If you have only one replication slot, and that slot becomes inactive, it is not removed due to inactivity because a single replication slot does not bloat storage. If you find that your single replication slot has been removed, please contact [Neon Support](/docs/introduction/support).
-
-### What causes a replication slot to become inactive?
+If you have only one replication slot, and that slot becomes inactive, it will not be dropped because a single replication slot does not cause storage bloat.
 
 An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for an extended period. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 
-An _inactive_ replication slot is often the result of a _dead subscriber_, where the replication slot is not dropped after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a replication delay configured on the subscriber. For example, some subscribers allow you to configure the replication frequency or set a replication delay to minimize usage.
+An _inactive_ replication slot can be the result of a dead subscriber, where the replication slot has not been removed after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a long replication delay configured on the subscriber. For example, subscribers like Fivetran or Airbyte let you to configure the replication frequency or set a replication delay to minimize usage.
 
-### How to avoid removal of inactive replication slots
+### How to avoid removal of replication slots
 
-To avoid having "inactive" replication slots removed, ensure that your subscriber reports `flush_lsn` progress regularly and that your replication connection doesn't disappear for more than 75 minutes. If the 75-minute limit is not sufficient for your replication setup, please contact [Neon Support](/docs/introduction/support) to discuss a limit extension.
+- If replication frequency configured on the subscriber is more than 75 minutes, you can prevent replication slots from being dropped by changing the replication frequency to every 60 minutes, for example. 
 
-If using Debezium, ensure that [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) is set to `true` to allow WAL logs on the source to be cleared. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
+  This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 75 minutes. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
+
+- If using Debezium, set [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) to `true` to ensure that `flush_lsn` progress is being reported. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
 ### What to do if your replication slot is removed
 
