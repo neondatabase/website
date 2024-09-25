@@ -85,24 +85,24 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
     >
       <div
         className={clsx(
-          'sticky top-0 pt-[18px] xl:px-8',
+          'sticky top-0 pt-[18px]',
           'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
         )}
       >
-        <div className="flex items-center gap-x-7 px-[52px]" to="/">
+        <div className="flex items-center gap-x-7 px-[52px] xl:px-8" to="/">
           <Link to="/">
             <span className="sr-only">Neon</span>
             <Logo className="h-7" width={102} height={28} priority />
           </Link>
           <Link
-            className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-94 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-94 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-10 dark:hover:text-white"
+            className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-94 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-94 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
             to={LINKS.docs}
           >
             Docs
           </Link>
         </div>
         <nav
-          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-y-scroll px-[52px] pt-[46px]"
+          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-y-scroll px-[52px] pt-[46px] xl:px-8"
           ref={menuWrapperRef}
         >
           <div

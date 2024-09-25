@@ -102,10 +102,10 @@ const Menu = ({
   const menuRef = useRef(null);
   const lastDepth = activeMenuList.length - 1;
 
+  const BackLinkTag = parentMenu?.slug ? Link : 'button';
+
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
   const isLastActive = activeMenuList[lastDepth]?.title === title;
-
-  const LinkTag = slug ? Link : 'div';
 
   const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
   const docsHomePath = LINKS.docsHome;
@@ -163,14 +163,14 @@ const Menu = ({
           >
             {/* breadcrumbs, menu title and home link */}
             {!isRootMenu && (
-              <LinkTag
-                className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
-                to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
+              <BackLinkTag
+                className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
+                to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
                 onClick={handleClose}
               >
                 <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-94 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
                 {title}
-              </LinkTag>
+              </BackLinkTag>
             )}
 
             {/* menu sections and items */}

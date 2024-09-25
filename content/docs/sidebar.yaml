@@ -1,10 +1,5 @@
 - section: noname
   items:
-    - title: Home
-      slug: introduction
-      icon: home
-- section: noname
-  items:
     - title: Why Neon?
       icon: why-neon
       slug: get-started-with-neon/why-neon

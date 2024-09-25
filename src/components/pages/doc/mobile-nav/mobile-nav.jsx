@@ -112,11 +112,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         ref={buttonRef}
         onClick={toggleMenu}
       >
-        <span className="text-ellipsis">
-          {activeMenuList[activeMenuList.length - 1].title === 'Home'
-            ? 'Documentation menu'
-            : activeMenuList[activeMenuList.length - 1].title}
-        </span>
+        <span className="text-ellipsis">Documentation menu</span>
         <ChevronRight
           className={clsx(
             'absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 transition-transform duration-200 md:right-5',
