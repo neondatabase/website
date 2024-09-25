@@ -5,7 +5,7 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2024-09-17T15:08:05.545Z'
+updatedOn: '2024-09-25T23:29:08.589Z'
 ---
 
 <LRBeta/>
