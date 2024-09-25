@@ -6,7 +6,7 @@ redirectFrom:
 updatedOn: '2024-08-20T23:55:48.551Z'
 ---
 
-This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`. 
+This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`.
 
 <Admonition type="important">
 Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
