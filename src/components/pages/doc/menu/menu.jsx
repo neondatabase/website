@@ -168,7 +168,7 @@ const Menu = ({
                 to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
                 onClick={handleClose}
               >
-                <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-94 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
+                <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
                 {title}
               </BackLinkTag>
             )}
