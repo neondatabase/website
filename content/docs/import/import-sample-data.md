@@ -491,7 +491,7 @@ An airport database containing information about airports, aircraft, bookings, p
 4. Connect to the `postgres_air` database:
 
    ```bash
-   psql postgresql://[user]:[password]@[neon_hostname]/wikipedia
+   psql postgresql://[user]:[password]@[neon_hostname]/postgres_air
    ```
 
 5. Find the aircraft type with the most flights:
