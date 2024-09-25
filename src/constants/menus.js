@@ -328,7 +328,7 @@ export default {
           to: LINKS.blog,
         },
         {
-          text: 'brand',
+          text: 'Brand',
           to: LINKS.brand,
         },
         {
