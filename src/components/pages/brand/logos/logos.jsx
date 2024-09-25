@@ -7,16 +7,16 @@ import logoSpacingSm from './images/logo-spacing-sm.svg';
 import logoSpacing from './images/logo-spacing.svg';
 
 const logos = [
-  { src: '/branding/neon-logo-light-color.svg', name: 'neon-logo-light-color.svg' },
-  { src: '/branding/neon-logo-dark-color.svg', name: 'neon-logo-dark-color.svg' },
-  { src: '/branding/neon-logo-light-mono.svg', name: 'neon-logo-light-mono.svg' },
-  { src: '/branding/neon-logo-dark-mono.svg', name: 'neon-logo-dark-mono.svg' },
+  { src: '/brand/neon-logo-light-color.svg', name: 'neon-logo-light-color.svg' },
+  { src: '/brand/neon-logo-dark-color.svg', name: 'neon-logo-dark-color.svg' },
+  { src: '/brand/neon-logo-light-mono.svg', name: 'neon-logo-light-mono.svg' },
+  { src: '/brand/neon-logo-dark-mono.svg', name: 'neon-logo-dark-mono.svg' },
 ];
 const logosSm = [
-  { src: '/branding/neon-logomark-light-color.svg', name: 'neon-logomark-light-color.svg' },
-  { src: '/branding/neon-logomark-light-mono.svg', name: 'neon-logomark-light-mono.svg' },
-  { src: '/branding/neon-logomark-dark-color.svg', name: 'neon-logomark-dark-color.svg' },
-  { src: '/branding/neon-logomark-dark-mono.svg', name: 'neon-logomark-dark-mono.svg' },
+  { src: '/brand/neon-logomark-light-color.svg', name: 'neon-logomark-light-color.svg' },
+  { src: '/brand/neon-logomark-light-mono.svg', name: 'neon-logomark-light-mono.svg' },
+  { src: '/brand/neon-logomark-dark-color.svg', name: 'neon-logomark-dark-color.svg' },
+  { src: '/brand/neon-logomark-dark-mono.svg', name: 'neon-logomark-dark-mono.svg' },
 ];
 
 const Logos = () => (
@@ -27,9 +27,8 @@ const Logos = () => (
           Logo
         </h2>
         <p className="mt-3.5 max-w-[512px] font-light leading-snug tracking-extra-tight text-gray-new-80 lg:mt-2.5 md:mt-2">
-          Logo is a crucial part of our brand and one of our most valuable assets. We must ensure
-          its proper usage. Please do not edit, change, distort, recolor, or reconfigure the Neon
-          logo.
+          Default to using the complete full-color logo below. Use the monochrome version when the
+          context requires it. Do not edit, change, distort, recolor, or reconfigure the Neon logo.
         </p>
         <ul className="mt-10 grid auto-cols-fr grid-cols-2 gap-4 xl:mt-9 lg:mt-8 md:mt-7 md:grid-cols-1">
           {logos.map((logo, index) => (
