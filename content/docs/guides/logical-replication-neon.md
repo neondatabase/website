@@ -63,7 +63,7 @@ An _inactive_ replication slot can be the result of a dead subscriber, where the
 
 ### How to avoid removal of replication slots
 
-- If replication frequency configured on the subscriber is more than 75 minutes, you can prevent replication slots from being dropped by changing the replication frequency to every 60 minutes, for example. 
+- If replication frequency configured on the subscriber is more than 75 minutes, you can prevent replication slots from being dropped by changing the replication frequency to every 60 minutes, for example.
 
   This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 75 minutes. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
 
