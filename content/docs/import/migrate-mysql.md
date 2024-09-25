@@ -1,5 +1,5 @@
 ---
-title: Migrate your MySQL database to Neon Postgres
+title: Migrate from MySQL to Neon Postgres
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-08-07T21:36:52.670Z'

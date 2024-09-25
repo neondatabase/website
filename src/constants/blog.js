@@ -7,6 +7,7 @@ const CATEGORY_COLORS = {
   community: 'text-yellow-70',
   ai: 'text-blue-80',
   'case-study': 'text-pink-90',
+  workflows: 'text-blue-80',
 };
 
 const CATEGORY_BG_COLORS = {
@@ -15,6 +16,7 @@ const CATEGORY_BG_COLORS = {
   community: 'bg-yellow-70/10',
   ai: 'bg-blue-80/10',
   'case-study': 'bg-pink-90/10',
+  workflows: 'bg-blue-80/10',
 };
 
 export {

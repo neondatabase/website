@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-09-06T18:23:43.939Z'
+updatedOn: '2024-09-24T15:13:52.995Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -13,9 +13,9 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP restrictions to protected branches only. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Business](/docs/introduction/plans#business) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 
-The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans.
+The protected branches feature is available on all Neon paid plans.
 
 ## Set a branch as protected
 
@@ -63,7 +63,7 @@ Please note that resetting or restoring a child branch from a protected parent b
 
 ## How to apply IP restrictions to protected branches
 
-The protected branches feature works in combination with Neon's [IP Allow](/docs/introduction/ip-allow) feature to allow you to apply IP access restrictions to protected branches only. The basic setup steps are:
+On Neon's [Business](/docs/introduction/plans#business) plan, you can use the protected branches feature in combination with Neon's [IP Allow](/docs/introduction/ip-allow) feature to apply IP access restrictions to protected branches only. The basic setup steps are:
 
 1. [Define an IP allowlist for your project](#define-an-ip-allowlist-for-your-project)
 2. [Restrict IP access to protected branches only](#restrict-ip-access-to-protected-branches-only)
@@ -146,7 +146,7 @@ curl -X PATCH \
 
 For details about specifying IP addresses, see [How to specify IP addresses](/docs/manage/projects#how-to-specify-ip-addresses).
 
-## Restrict IP access to protected branches only
+### Restrict IP access to protected branches only
 
 After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
 

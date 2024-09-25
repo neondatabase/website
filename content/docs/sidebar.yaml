@@ -62,7 +62,6 @@
               slug: guides/laravel
             - title: NestJS
               slug: guides/nestjs
-              tag: new
             - title: Next.js
               slug: guides/nextjs
             - title: Node.js
@@ -73,17 +72,14 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
-              tag: new
             - title: Reflex
               slug: guides/reflex
-              tag: new
             - title: Remix
               slug: guides/remix
             - title: Ruby on Rails
               slug: guides/ruby-on-rails
             - title: SolidStart
               slug: guides/solid-start
-              tag: new
             - title: SQLAlchemy
               slug: guides/sqlalchemy
             - title: Symfony
@@ -94,7 +90,6 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
-          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -121,30 +116,48 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
-    - title: Import data
+    - title: Migrate to Neon
       icon: import
-      slug: import/import-intro
+      slug: import/migrate-intro
       items:
         - section: Import utilities
           items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import schema only
-              slug: import/import-schema-only
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Import from MySQL
+            - title: Migrate from Postgres with pg_dump and pg_restore
+              slug: import/migrate-from-postgres
+            - title: Migrate from Postgres with pg-import
+              slug: import/migrate-from-postgres-pg-import
+            - title: Migrate from a Neon project
+              slug: import/migrate-from-neon
+            - title: Migrate schema only
+              slug: import/migrate-schema-only
+            - title: Migrate from Digital Ocean
+              slug: import/migrate-from-digital-ocean
+              tag: new
+            - title: Migrate from Firebase
+              slug: import/migrate-from-firebase
+              tag: new
+            - title: Migrate from Heroku
+              slug: import/migrate-from-heroku
+            - title: Migrate from MySQL
               slug: import/migrate-mysql
+            - title: Migrate from MSSQL
+              slug: import/migrate-mssql
+              tag: new
+            - title: Migrate from Render
+              slug: import/migrate-from-render
+              tag: new
+            - title: Migrate from Supabase
+              slug: import/migrate-from-supabase
+              tag: new
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Replicate from Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/migrate-from-azure-postgres
+              tag: new
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -163,7 +176,7 @@
               slug: import/import-from-csv
         - section: Sample data
           items:
-            - title: Postgres sample data
+            - title: Sample data
               slug: import/import-sample-data
 - section: Platform
   items:
@@ -374,31 +387,26 @@
           slug: guides/laravel
         - title: NestJS
           slug: guides/nestjs
-          tag: new
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
         - title: Phoenix
           slug: guides/phoenix
-          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
         - title: React
           slug: guides/react
-          tag: new
         - title: Reflex
           slug: guides/reflex
-          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
         - title: SolidStart
           slug: guides/solid-start
-          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -485,7 +493,6 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -498,7 +505,6 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
-              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -515,6 +521,7 @@
               slug: guides/logical-replication-decodable
             - title: Estuary Flow
               slug: guides/logical-replication-estuary-flow
+              tag: new
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -525,24 +532,29 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
+              tag: new
+            - title: Sequin
+              slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Replicate to Neon
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
+              tag: new
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
             - title: Cloud SQL
+              tag: new
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
+              tag: new
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
-            - title: Sequin
-              slug: guides/sequin
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
+              tag: new
         - section: Schema Migration
           items:
             - title: Django
@@ -581,6 +593,7 @@
               slug: guides/auth-auth0
             - title: Auth.js
               slug: guides/auth-authjs
+              tag: new
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -652,6 +665,9 @@
       items:
         - title: Neon SDKs
           slug: reference/sdk
+    - title: Terraform
+      slug: https://github.com/kislerdm/terraform-provider-neon
+      icon: management
 - section: Postgres
   items:
     - title: PostgreSQL docs
@@ -826,6 +842,15 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
+    - title: Extensions
+      slug: extensions/extensions-intro
+      icon: frameworks
+    - title: Version support
+      slug: postgresql/postgres-version-policy
+      icon: why-neon
+    - title: Upgrade
+      slug: postgresql/postgres-upgrade
+      icon: import
 - section: Resources
   items:
     - title: Partner guide
@@ -861,4 +886,5 @@
       icon: changelog
     - title: RSS feeds
       slug: reference/feeds
+      tag: new
       icon: feeds

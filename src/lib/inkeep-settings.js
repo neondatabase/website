@@ -13,6 +13,7 @@ const baseSettings = {
 
 const searchSettings = {
   searchMode: 'KEYWORD',
+  placeholder: 'Search',
 };
 
 const aiChatSettings = {

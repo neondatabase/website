@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-09-05T17:14:45.245Z'
+updatedOn: '2024-09-24T15:13:52.996Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -103,6 +103,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
 - Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
+- Branch protection (up to 5 branches)
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
@@ -116,13 +117,13 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                       |
-| ------------- | -------------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                                     |
-| **Branches**  | 500 per project                                                      |
-| **Databases** | Unlimited                                                            |
-| **Storage**   | 50 GiB of data storage                                               |
-| **Compute**   | 750 compute hours a month month for all computes across all projects |
+| Usage type    | Plan allowance                                                 |
+| ------------- | -------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                               |
+| **Branches**  | 500 per project                                                |
+| **Databases** | Unlimited                                                      |
+| **Storage**   | 50 GiB of data storage                                         |
+| **Compute**   | 750 compute hours a month for all computes across all projects |
 
 ### Scale plan extra usage
 
@@ -178,7 +179,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
-- Enhanced security features including SOC 2 compliance, Branch Protection, and allowed IP configurations.
+- Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
 - [Priority support](/docs/introduction/support)
 - [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
 
@@ -205,7 +206,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 - _Autosuspend_ (disabled entirely or up to **7 days**)
 - Customer-owned S3
 
-Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus retail customer support, Customer Success Team support, and SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 If you are interested in exploring an _Enterprise_ plan with Neon, you can [request an enterprise trial](/enterprise#request-trial) or [get in touch with our sales team](/contact-sales).
 

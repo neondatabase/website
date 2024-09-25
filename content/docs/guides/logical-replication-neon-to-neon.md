@@ -4,7 +4,8 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
   Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-04T14:11:03.957Z'
+tag: new
+updatedOn: '2024-09-17T15:08:05.545Z'
 ---
 
 <LRBeta/>
@@ -69,14 +70,22 @@ To create a publication for all tables in your database:
 CREATE PUBLICATION my_publication FOR ALL TABLES;
 ```
 
-<Admonition type="note">
-It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
+<Admonition type="important">
+Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
+
+To create a publication for a specific table, you can use the following syntax:
 
 ```sql shouldWrap
-CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
+CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
 ```
 
-For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+To create a publication for multiple tables, provide a comma-separated list of tables:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE users, departments;
+```
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
 ## Prepare your Neon destination database

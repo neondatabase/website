@@ -209,6 +209,36 @@ const getWpBlogPage = cache(async () => {
                   }
                 }
               }
+              workflowsFeaturedPosts {
+                post {
+                  ... on Post {
+                    title(format: RENDERED)
+                    slug
+                    date
+                    pageBlogPost {
+                      largeCover {
+                        altText
+                        mediaItemUrl
+                      }
+                      authors {
+                        author {
+                          ... on PostAuthor {
+                            title
+                            postAuthor {
+                              role
+                              url
+                              image {
+                                altText
+                                mediaItemUrl
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
               companyFeaturedPosts {
                 post {
                   ... on Post {
