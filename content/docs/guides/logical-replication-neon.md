@@ -19,7 +19,7 @@ To avoid potential issues, please review the following notices carefully before 
 These notices apply when replicating data from Neon:
 
 - **Autosuspend**: Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots if there are other _active_ replication slots**. If you will have more than one replication slot, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**. If you plan to have more than one subscriber to your Neon database, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 
 ### Neon as a subscriber
 
@@ -50,10 +50,6 @@ WHERE application_name != 'walproposer';
 ```
 
 If the count is greater than 0, a Neon compute where the publishing Postgres instance runs will not be suspended.
-
-<Admonition type="important">
-If you have more than one subscriber to your Neon database, and one of those subscribers remains **inactive** for more than 75 minutes, it will be considered a "dead subscriber" and will be removed after 75 minutes. To learn more, see [Unused replication slots](#unused-replication-slots).
-</Admonition>
 
 ## Unused replication slots
 
