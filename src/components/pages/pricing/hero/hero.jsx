@@ -104,13 +104,13 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For larger workloads, database-per-tenant at scale, BaaS/dev platforms, and AI agents.',
+    description: 'For larger workloads, database fleets, BaaS/dev platforms, AI agents.',
     features: [
       {
         title: '5,000 projects',
         info: '$50 per 5,000 extra projects',
       }, 
-      { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
+      { title: '500 GiB storage included', info: 'Additional storage: $0.5 per GiB' },
       {
         title: '1000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
@@ -118,10 +118,9 @@ const items = [
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
       {
-        title: 'API management',
-        info: 'Set usage limits and config settings via API in large DB-per-user fleets',
+        title: 'Full API management',
+        info: 'Manage usage+config settings via API in large DB-per-user fleets',
       }, 
-      { title: 'Team accounts' },
       { title: 'Private Link' },
       { title: 'Metrics export' },
       {
