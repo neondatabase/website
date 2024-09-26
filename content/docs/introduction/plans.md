@@ -40,7 +40,7 @@ The Free Plan includes the following usage allowances:
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Projects**               | 1 Neon project                                                                                                                                                                                                                             |
 | **Branches**               | 10 branches                                                                                                                                                                                                                                |
-| **Databases**              | 500 per branch                                                                                                                                                                                                                                  |
+| **Databases**              | 500 per branch                                                                                                                                                                                                                             |
 | **Storage**                | 0.5 GiB                                                                                                                                                                                                                                    |
 | **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
@@ -159,7 +159,7 @@ The Business plan includes the following usage allowances:
 | ------------- | ---------------------------------------------------------------- |
 | **Projects**  | 100 Neon projects                                                |
 | **Branches**  | 500 per project                                                  |
-| **Databases** | 500 per branch                                                        |
+| **Databases** | 500 per branch                                                   |
 | **Storage**   | 500 GiB of data storage                                          |
 | **Compute**   | 1,000 compute hours a month for all computes across all projects |
 
