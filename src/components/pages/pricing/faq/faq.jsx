@@ -38,6 +38,10 @@ const items = [
     question: 'Why are we limited to 500 branches per project?',
     answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
   },
+  {
+    question: 'Who needs the Business plan?',
+    answer: `The Business plan is our most affordable and feature-complete option for teams with existing production workloads. This plan is designed to fit all the production use cases that are popular among our customers, including large production applications with variable traffic, SaaS with database-per-user at scale, developer/BaaS platforms, dev/test workflows, and AI Agents. Explore our <a href="/case-studies">Case Studies</a> to learn more. We also do Enterprise contracts to accomodate unique requirements—<a href="/contact-sales">reach out to us</a> to inquire about it.   `,
+  },
 ];
 
 const Faq = () => (
