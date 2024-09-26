@@ -24,17 +24,13 @@ const items = [
     isMarketplaceAvailable: false,
     description: 'Always-available free tier, no credit card required.',
     features: [
-      { title: '0.5 GiB storage' },
       {
-        title: '24/7 database at 0.25 CU',
-        info: 'Plus 20h of usage for additional branches. 0.25 CU = 0.25 vCPU, 1 GB RAM',
+        title: '1 project',
+        info: '10 branches',
       },
+      { title: '0.5 GiB storage' },
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
-      { title: 'Point-in-time restore (24 h)' },
-      { title: 'Community support' },
-      { title: 'Team accounts', disabled: true },
-      { title: 'Migration assistance', disabled: true },
-      { title: 'SOC 2 + 99.95% SLA', disabled: true },
+      { title: 'Community Support' }
     ],
     button: {
       url: LINKS.signup,
@@ -52,6 +48,10 @@ const items = [
     description: 'The resources, features, and support you need to launch.',
     features: [
       {
+        title: '100 projects',
+        info: '500 branches per project',
+      },      
+      {
         title: '10 GiB storage included',
         info: 'Additional storage: $3.5 per 2 GiB',
       },
@@ -61,10 +61,8 @@ const items = [
       },
       { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
       { title: 'Point-in-time restore (7 days)' },
-      { title: 'Standard support' },
       { title: 'Team accounts' },
-      { title: 'Migration assistance', disabled: true },
-      { title: 'SOC 2 + 99.95% SLA', disabled: true },
+      { title: 'Standard Support' }
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -80,6 +78,10 @@ const items = [
     isMarketplaceAvailable: true,
     description: 'More capacity and functionality for scaling production workloads.',
     features: [
+      {
+        title: '1,000 projects',
+        info: '500 branches per project',
+      },    
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
         title: '750 <a href="#compute-hour">compute hours</a> included',
@@ -87,10 +89,8 @@ const items = [
       },
       { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
       { title: 'Point-in-time restore (14 days)' },
-      { title: 'Standard support' },
       { title: 'Team accounts' },
-      { title: 'Migration assistance', disabled: true },
-      { title: 'SOC 2 + 99.95% SLA', disabled: true },
+      { title: 'Standard support' }
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -104,8 +104,12 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For business workloads with larger storage/compute requirements.',
+    description: 'For larger workloads, database-per-tenant at scale, BaaS/dev platforms, and AI agents.',
     features: [
+      {
+        title: '5,000 projects',
+        info: '$50 per 5,000 extra projects',
+      }, 
       { title: '500 GiB storage included', info: 'Additional storage: $0.75 per GiB' },
       {
         title: '1000 <a href="#compute-hour">compute hours</a> included',
@@ -113,13 +117,19 @@ const items = [
       },
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
-      { title: 'Priority support' },
+      {
+        title: 'API management',
+        info: 'Set usage limits and config settings via API in large DB-per-user fleets',
+      }, 
       { title: 'Team accounts' },
+      { title: 'Private Link' },
+      { title: 'Metrics export' },
       {
         title: 'Migration assistance',
         info: 'With 0 migration fees—we will waive them',
       },
       { title: 'SOC 2 + 99.95% SLA' },
+      { title: 'Priority support' }
     ],
     button: {
       url: `${LINKS.console}/?upgrade=business`,
