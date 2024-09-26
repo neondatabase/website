@@ -110,8 +110,6 @@ Hackable, fully-featured, pre-built [starter apps](https://github.com/neondataba
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LangChain" icon="github">Semantic search chatbot (OpenAI + LangChain)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs" description="A Next.js Reverse Image Search Engine starter app built with OpenAI and LangChain" icon="github">Reverse image search (OpenAI + LangChain)</a>
-
 <a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs" description="A Next.js Chat with PDF chatbot starter app built with OpenAI and LangChain" icon="github">Chat with PDF (OpenAI + LangChain)</a>
 
 </DetailIconCards>

@@ -132,10 +132,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
           style={{ height: wrapperHeight }}
         >
           <InkeepTrigger className="lg:hidden" topOffset={wrapperHeight || menuHeight} />
-          <div
-            className="relative w-full overflow-hidden transition-[height] duration-300"
-            style={{ height: menuHeight }}
-          >
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
               title="Home"

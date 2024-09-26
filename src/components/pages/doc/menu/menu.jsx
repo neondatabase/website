@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
@@ -114,18 +113,10 @@ const Menu = ({
 
   // update menu height and scroll menu to top
   useEffect(() => {
-    let timeout;
-
     if (isLastActive && menuRef.current && menuRef.current.scrollHeight > 0 && setMenuHeight) {
-      timeout = setTimeout(() => {
-        setMenuHeight(menuRef.current.scrollHeight);
-        menuWrapperRef.current?.scrollTo(0, 0);
-      }, 200);
+      setMenuHeight(menuRef.current.scrollHeight);
+      menuWrapperRef.current?.scrollTo(0, 0);
     }
-
-    return () => {
-      clearTimeout(timeout);
-    };
   }, [isLastActive, setMenuHeight, menuWrapperRef]);
 
   const handleClose = () => {
@@ -133,112 +124,97 @@ const Menu = ({
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
-  const animateState = () => {
-    if (isRootMenu) return 'moveMenu';
-    return isActive ? 'open' : 'close';
-  };
+  if (!isRootMenu && !isActive) return null;
 
   return (
-    <LazyMotion features={domAnimation}>
-      <AnimatePresence initial={false}>
-        {(isRootMenu || isActive) && (
-          <m.div
-            className={clsx(
-              'absolute left-0 top-0 w-full pb-16',
-              !isActive && 'pointer-events-none',
-              !isRootMenu && 'translate-x-full',
-              'lg:px-8 lg:pb-8 lg:pt-4 md:px-5'
-            )}
-            initial={false}
-            animate={animateState}
-            exit="close"
-            // NOTE: duration: 0 is needed to prevent the menu from animating out
-            transition={{ ease: 'easeIn', duration: 0 }}
-            variants={{
-              close: { opacity: 0 },
-              open: { opacity: 1 },
-              moveMenu: { opacity: 1, x: `${lastDepth * -100}%` },
-            }}
-            ref={menuRef}
-          >
-            {/* breadcrumbs, menu title and home link */}
-            {!isRootMenu && (
-              <BackLinkTag
-                className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
-                to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
-                onClick={handleClose}
-              >
-                <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
-                {title}
-              </BackLinkTag>
-            )}
+    <div
+      className={clsx(
+        'absolute left-0 top-0 w-full px-[52px] pb-16 xl:px-8',
+        !isActive && 'pointer-events-none',
+        !isRootMenu && 'translate-x-full',
+        'lg:px-8 lg:pb-8 lg:pt-4 md:px-5',
+        (isActive || isRootMenu) && 'opacity-100'
+      )}
+      style={isRootMenu ? { transform: `translateX(${lastDepth * -100}%)` } : undefined}
+      ref={menuRef}
+    >
+      {/* breadcrumbs, menu title and home link */}
+      {!isRootMenu && (
+        <BackLinkTag
+          className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
+          to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
+          onClick={handleClose}
+        >
+          <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
+          {title}
+        </BackLinkTag>
+      )}
 
-            {/* menu sections and items */}
-            <ul className={clsx('w-full', !isRootMenu && 'py-2.5')}>
-              {items.map((item, index) =>
-                item.section ? (
-                  <Section
-                    key={index}
-                    depth={depth}
-                    {...item}
-                    title={title}
-                    slug={slug}
-                    basePath={basePath}
-                    closeMobileMenu={closeMobileMenu}
-                    setMenuHeight={setMenuHeight}
-                    menuWrapperRef={menuWrapperRef}
-                    activeMenuList={activeMenuList}
-                    setActiveMenuList={setActiveMenuList}
-                  />
-                ) : (
-                  <Item
-                    key={index}
-                    {...item}
-                    basePath={basePath}
-                    activeMenuList={activeMenuList}
-                    setActiveMenuList={setActiveMenuList}
-                    closeMobileMenu={closeMobileMenu}
-                  >
-                    {item.items && (
-                      <Menu
-                        depth={depth + 1}
-                        title={item.title}
-                        slug={item.slug}
-                        icon={item.icon}
-                        items={item.items}
-                        basePath={basePath}
-                        parentMenu={{ title, slug }}
-                        setMenuHeight={setMenuHeight}
-                        menuWrapperRef={menuWrapperRef}
-                        activeMenuList={activeMenuList}
-                        setActiveMenuList={setActiveMenuList}
-                        closeMobileMenu={closeMobileMenu}
-                      />
-                    )}
-                  </Item>
-                )
+      {/* menu sections and items */}
+      <ul
+        className={clsx('w-full', !isRootMenu && 'py-2.5', !isActive ? 'opacity-0' : 'opacity-100')}
+      >
+        {items.map((item, index) =>
+          item.section ? (
+            <Section
+              key={index}
+              depth={depth}
+              {...item}
+              title={title}
+              slug={slug}
+              basePath={basePath}
+              closeMobileMenu={closeMobileMenu}
+              setMenuHeight={setMenuHeight}
+              menuWrapperRef={menuWrapperRef}
+              activeMenuList={activeMenuList}
+              setActiveMenuList={setActiveMenuList}
+            />
+          ) : (
+            <Item
+              key={index}
+              {...item}
+              basePath={basePath}
+              activeMenuList={activeMenuList}
+              setActiveMenuList={setActiveMenuList}
+              closeMobileMenu={closeMobileMenu}
+            >
+              {item.items && (
+                <Menu
+                  depth={depth + 1}
+                  title={item.title}
+                  slug={item.slug}
+                  icon={item.icon}
+                  items={item.items}
+                  basePath={basePath}
+                  parentMenu={{ title, slug }}
+                  setMenuHeight={setMenuHeight}
+                  menuWrapperRef={menuWrapperRef}
+                  activeMenuList={activeMenuList}
+                  setActiveMenuList={setActiveMenuList}
+                  closeMobileMenu={closeMobileMenu}
+                />
               )}
-            </ul>
-
-            {/* back to docs link */}
-            {isRootMenu && basePath !== DOCS_BASE_PATH && (
-              <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
-                <Link
-                  className={clsx(
-                    'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                    'text-gray-new-60 hover:text-black-new dark:hover:text-white'
-                  )}
-                  to={isRootMenu ? backLinkPath : homePath}
-                >
-                  <ArrowBackIcon className="size-4.5" />
-                  Back to docs
-                </Link>
-              </div>
-            )}
-          </m.div>
+            </Item>
+          )
         )}
-      </AnimatePresence>
-    </LazyMotion>
+      </ul>
+
+      {/* back to docs link */}
+      {isRootMenu && basePath !== DOCS_BASE_PATH && (
+        <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
+          <Link
+            className={clsx(
+              'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+              'text-gray-new-60 hover:text-black-new dark:hover:text-white'
+            )}
+            to={isRootMenu ? backLinkPath : homePath}
+          >
+            <ArrowBackIcon className="size-4.5" />
+            Back to docs
+          </Link>
+        </div>
+      )}
+    </div>
   );
 };
 

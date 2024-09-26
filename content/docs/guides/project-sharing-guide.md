@@ -2,7 +2,7 @@
 title: Project sharing
 subtitle: Learn how to share your Neon project with others
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.949Z'
+updatedOn: '2024-09-19T14:13:04.113Z'
 ---
 
 You can share a Neon project with other users, giving them access to your Neon project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
@@ -31,7 +31,7 @@ To share your project:
 
    The Neon account associated with the email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When the user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
 
-   ![Project shared with me](/docs/guides/shared_with_me.png)
+   ![Project shared with you](/docs/guides/shared_with_you.png)
 
    An email is also sent to the email address informing the user that a project has been shared with them. The email includes an **Open project** link the user can click on to log in to Neon. After logging in, the user is directed to the **Dashboard** for the shared project in the Neon Console.
 
