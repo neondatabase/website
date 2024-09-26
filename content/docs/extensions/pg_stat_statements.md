@@ -26,6 +26,7 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 - Postgres 14 - `pg_stat_statements` 1.9
 - Postgres 15 - `pg_stat_statements` 1.10
 - Postgres 16 - `pg_stat_statements` 1.10
+- Postgres 17 - `pg_stat_statements` 1.11
 
 ### Data persistence
 
