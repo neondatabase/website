@@ -23,15 +23,16 @@ Neon supports project deployment in several regions. We recommended that you sel
 - East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
-The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects. As a Beta release, there may be occasional updates that require downtime. 
+The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects. As a Beta release, there may be occasional updates that require downtime.
 
 During this Beta period, lasting until **November 30, 2024**:
+
 - Anyone can create a Neon project in the Azure region.
 - Neon [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) apply. There is no difference from Free Plan accounts created on AWS.
 - If you are a Neon Launch, Scale, or Business plan user, compute and storage usage in Azure-hosted projects is not counted toward your [Neon plan allowances](/docs/introduction/plans). However, project allowances still apply and [extra project units](/docs/introduction/extra-usage) are still billed for.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but SLAs for Business plan users are not yet supported.
 
-To stay up to date with the latest information about Neon on Azure, please [sign up here](tbd). Additionally, Neon will soon be available as a native integration from the Azure Marketplace. If you would like to participate in the public preview, please join the [Neon on Azure Public Preview Waitlist](tbd). 
+To stay up to date with the latest information about Neon on Azure, please [sign up here](tbd). Additionally, Neon will soon be available as a native integration from the Azure Marketplace. If you would like to participate in the public preview, please join the [Neon on Azure Public Preview Waitlist](tbd).
 </Admonition>
 
 ## Request a region
