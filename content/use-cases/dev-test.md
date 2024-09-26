@@ -19,6 +19,8 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 ## AWS RDS is fine for prod, but terrible for dev
 
+---
+
 **The DX is not there: you need many instances, and costs slowly raise**
 
 <Testimonial
@@ -42,6 +44,8 @@ Databases like AWS RDS are widely used for a reason: they’re robust, reliable,
 **These problems get worse over time, not better**. As your fleet of RDS instances grows, the manual setup and configuration work grows too, as do the cost inefficiencies. It just gets worse.
 
 ## How Neon can help: FAQ
+
+---
 
 **Build on Neon while keeping production in AWS RDS**
 
@@ -70,8 +74,8 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 - 10 development and test instances (db.m5.large: 2 vCPUs, 8 GB RAM) with 50 GB storage allocated in each instance
 - They’re active 4 hours/day on average
 - RDS monthly costs: $1,356.90
-  - Compute costs: $0.178/hour * 730 hours *10 instances = $1,299.40 /month
-  - Storage costs: 50 GB _ $0.115 GB-month _ 10 instances = $57.50
+  - Compute costs: $0.178/hour \* 730 hours \* 10 instances = $1,299.40 /month
+  - Storage costs: 50 GB \* $0.115 GB-month \* 10 instances = $57.50
 
 **Equivalent non-prod deployment in Neon:**
 
@@ -79,9 +83,9 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 - Includes 50 GB of shared storage between 10 branches - equivalent to the 10 instances in RDS
 - Includes 750 compute hours, additional compute hours billed at $0.16 per CU
 - **Neon monthly costs: $338.12**
-  - Compute hours per branch per month: 2 CU _4 hours_ 30.4 days/month = 243.2
-  - Total compute hours: 243.2 \_ 10 branches = 2432
-  - Cost of additional compute hours: [2432 - 750]\_$0.16 = $269.12 /month
+  - Compute hours per branch per month: 2 CU \* 4 hours \* 30.4 days/month = 243.2
+  - Total compute hours: 243.2 \* 10 branches = 2432
+  - Cost of additional compute hours: [2432 - 750] \* $0.16 = $269.12 /month
 
 In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings, together with streamlined development workflows, improved collaboration, and fewer operational complexities.
 
@@ -94,6 +98,8 @@ Yes. Overprovisioning is a big problem—we see this daily while talking to cust
 <CTA title="Learn more about our Business plan" description="Our most cost-effective plan for hosting all your workloads—production, dev, test, and staging." buttonText="Learn more" buttonUrl="/pricing" />
 
 ## Getting started
+
+---
 
 We have self-serve resources, and can also help you 1:1
 
