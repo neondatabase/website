@@ -21,6 +21,14 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 **The DX is not there: you need many instances, and costs slowly raise**
 
+<Testimonial
+text="The RDS developer experience is not quite there. The AWS console and APIs are quite convoluted and require extensive setup and configuration to achieve even basic tasks"
+author={{
+  name: 'Guido Marucci',
+  company: 'Co-founder at Cedalio',
+}}
+/>
+
 Databases like AWS RDS are widely used for a reason: they’re robust, reliable, and offer many instance types in all regions… But in terms of developer experience, they are decades behind. They also use resources inefficiently, which leads to high bills.
 
 **Provisioning RDS instances is slow, and once live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
