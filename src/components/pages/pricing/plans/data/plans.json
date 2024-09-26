@@ -21,7 +21,7 @@
     },
     "business": {
       "label": "Business",
-      "price": "<span>$700</span>",
+      "price": "<span>From</span> $700</span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
@@ -47,7 +47,7 @@
       },
       "business": {
         "title": "500 GiB",
-        "info": "Extra at $0.75 per GiB"
+        "info": "Extra at $0.5 per GiB"
       }
     },
     {
@@ -79,14 +79,14 @@
         "title": "Projects"
       },
       "free": "1",
-      "launch": "10",
+      "launch": "100",
       "scale": {
-        "title": "50",
+        "title": "1,000",
         "info": "Extra at $50 per 10 projects"
       },
       "business": {
-        "title": "100",
-        "info": "Extra at $50 per 10 projects"
+        "title": "5,000",
+        "info": "Extra at $50 per 5,000 projects"
       }
     },
     {
@@ -288,12 +288,32 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Private Link"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },    
+    {
+      "rows": "1",
+      "feature": {
         "title": "Monitoring"
       },
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
       "scale": "Up to 7 days",
       "business": "Up to 14 days"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Metrics export"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
     },
     {
       "rows": "1",
