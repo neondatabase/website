@@ -13,7 +13,8 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 ## What we've just launched
 
-- **Postgres 17**: We were excited to add support for Postgres 17 on Neon the same day it was released. [Read the announcement](https://neon.tech/blog/postgres-17).
+- **Postgres 17**: We were excited to add support for Postgres 17 the same day it was released. [Read the announcement](https://neon.tech/blog/postgres-17).
+- **SQL Editor AI features**: We added AI features to the Neon SQL Editor, including SQL generation, AI-generated query names, and an AI assistant that will fix your queries. Currently available for Early Access users. [Learn more](/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
 - **A new Business plan with more compute and storage**: This new plan provides higher storage and compute allowances (500 GiB of storage and 1,000 compute hours) in addition to all of Neon's advanced features. It also offers potential cost savings for customers requiring more storage than our Scale plan provides. To learn more, please refer to our [Pricing](https://neon.tech/pricing) page and [Plans](/docs/introduction/plans) documentation.
 - **Data migration support with inbound logical replication**: We've introduced inbound logical replication as the first step toward enabling seamless, low-downtime migrations from your current database provider to Neon. This feature allows you to use Neon as your development environment, taking advantage of developer-friendly tools like branching and our [GitHub integration](/docs/guides/neon-github-integration), even if you keep production with your existing provider. To get started, explore our guides for replicating data from AlloyDB, Aurora, CloudSQL, and RDS. See [Replicate data to Neon](/docs/guides/logical-replication-guide#replicate-data-to-neon). Inbound logical replication also supports migrating data between Neon projects, useful for version, region, or account migrations. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 - **Organizations**: Organization Accounts are now available in Beta. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
@@ -42,7 +43,6 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Larger computes**: We are working on adding support for ever-larger compute sizes.
 - **New authentication method:** We're working on a new authentication method for Postgres that will enable simplified application -> database connections, as well as allow for Neon to be integrated into various marketplaces.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
-- **SQL Editor improvements**: Stay tuned for interesting updates we have planned for our SQL Editor.
 - **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable logs and traces.
 - **Private access**: Private and secure access to your compute resources without traversing public networks.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
