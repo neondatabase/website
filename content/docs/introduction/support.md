@@ -33,7 +33,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Support tickets](#support-tickets)                                   |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)           |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                             |     -     |    -     |    \*    |     \*     |
-| [SLAs](#slas)                                                         |     -     |    -     |     &check;      |  &check;   |
+| [SLAs](#slas)                                                         |     -     |    -     | &check;  |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
