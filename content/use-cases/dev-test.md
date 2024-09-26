@@ -19,7 +19,7 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 ## AWS RDS is fine for prod, but terrible for dev
 
-The DX is not there: you need many instances, and costs slowly raise
+**The DX is not there: you need many instances, and costs slowly raise**
 
 Databases like AWS RDS are widely used for a reason: they’re robust, reliable, and offer many instance types in all regions… But in terms of developer experience, they are decades behind. They also use resources inefficiently, which leads to high bills.
 
@@ -35,7 +35,7 @@ Databases like AWS RDS are widely used for a reason: they’re robust, reliable,
 
 ## How Neon can help: FAQ
 
-Build on Neon while keeping production in AWS RDS
+**Build on Neon while keeping production in AWS RDS**
 
 Migrating a production database is a big project: even when your current Postgres provider doesn’t spark joy, your team might not be ready for a full production migration just yet. However, you can enjoy a better experience for your development workflows by moving your non-prod environments to Neon.
 
