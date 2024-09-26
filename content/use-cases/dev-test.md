@@ -23,13 +23,45 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 **The DX is not there: you need many instances, and costs slowly raise**
 
+<TestimonialsWrapper>
+
 <Testimonial
-text="The RDS developer experience is not quite there. The AWS console and APIs are quite convoluted and require extensive setup and configuration to achieve even basic tasks"
+text="The RDS developer experience is not quite there. The AWS console and APIs are quite convoluted and require extensive setup and configuration to achieve even basic tasks."
 author={{
   name: 'Guido Marucci',
   company: 'Co-founder at Cedalio',
 }}
+url="/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow"
 />
+
+<Testimonial
+text="When we used a shared RDS instance for development, it was hard to properly test new features and changes without impacting the work of other teammates."
+author={{
+  name: 'Camelia Smeria',
+  company: 'Lead Engineer at Proposales',
+}}
+url="/blog/frictionless-development-experience-with-neon-branching"
+/>
+
+<Testimonial
+text="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
+author={{
+  name: 'Léonard Henriquez',
+  company: 'Co-founder and CTO, Topo.io',
+}}
+url="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
+/>
+
+<Testimonial
+text="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
+author={{
+  name: 'Joey Teunissen',
+  company: 'CTO at OpusFlow',
+}}
+url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers"
+/>
+
+</TestimonialsWrapper>
 
 Databases like AWS RDS are widely used for a reason: they’re robust, reliable, and offer many instance types in all regions… But in terms of developer experience, they are decades behind. They also use resources inefficiently, which leads to high bills.
 

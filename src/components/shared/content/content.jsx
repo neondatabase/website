@@ -18,6 +18,7 @@ import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import Testimonial from 'components/pages/use-case/testimonial';
+import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
@@ -137,6 +138,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   RegionRequest,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
+  TestimonialsWrapper,
   UseCaseList,
   UseCaseContext,
   ...sharedComponents,
