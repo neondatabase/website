@@ -9,6 +9,7 @@ export default {
   billing: '/docs/introduction/about-billing',
   blog: '/blog',
   branching: '/branching',
+  brand: '/brand',
   businessInformation: '/business-info',
   careers: '/careers',
   useCases: '/use-cases',
