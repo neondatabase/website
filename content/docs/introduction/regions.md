@@ -23,18 +23,18 @@ Neon supports project deployment in several regions. We recommended that you sel
 - East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
-The Neon on Azure Beta is limited to the Azure East US 2 region and may not be suitable for business-critical projects. As a Beta release, there may be occasional updates that require downtime.
+The Neon on Azure Beta is currently limited to the Azure East US 2 region and may not be suitable for business-critical projects. As a Beta release, occasional updates may require downtime.
 
 During this Beta period:
 
 - Anyone can create a Neon project in the Azure region.
-- Neon [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) apply. There is no difference from Free Plan accounts created on AWS.
-- If you are a Neon Launch, Scale, or Business plan user, compute and storage usage in Azure-hosted projects is not counted toward your [Neon plan allowances](/docs/introduction/plans). However, project allowances still apply and [extra project units](/docs/introduction/extra-usage) are still billed for.
-- [Support](/docs/introduction/support) is available for Neon projects on Azure, but SLAs for Business plan users are not yet supported.
+- The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan accounts created on AWS.
+- For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will not be counted toward your [Neon plan allowances](/docs/introduction/plans), though project allowances still apply, and [extra project units](/docs/introduction/extra-usage) will be billed accordingly.
+- [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
 
-Users with Neon projects created in the Azure region will be notified before the Beta period ends and usage in those projects starts to be counted toward your [Neon plan allowances](/docs/introduction/plans).
+Users with Neon projects in the Azure region will be notified before the Beta period ends, at which point usage in these projects will begin to count toward your [Neon plan allowances](/docs/introduction/plans).
 
-To stay up to date with the latest information about Neon on Azure, please [sign up here](tbd). Additionally, Neon will soon be available from the Azure Marketplace. If you would like to participate in the public preview, please join the [Neon on Azure Public Preview Waitlist](https://neon.tech/neon-on-azure).
+To stay informed about the latest developments for Neon on Azure, please [sign up here](tbd). Neon will also be available soon through the Azure Marketplace. If you're interested in joining the public preview, sign up for the [Neon on Azure Public Preview Waitlist](https://neon.tech/neon-on-azure).
 </Admonition>
 
 ## Request a region
