@@ -141,11 +141,11 @@ const Menu = ({
       {/* breadcrumbs, menu title and home link */}
       {!isRootMenu && (
         <BackLinkTag
-          className="group relative z-50 flex w-full items-center pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
+          className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
           to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
           onClick={handleClose}
         >
-          <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white" />
+          <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white xs:-left-4" />
           {title}
         </BackLinkTag>
       )}

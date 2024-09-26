@@ -6,8 +6,13 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs }) => (
-  <div className="mb-4 flex space-x-2 text-sm leading-none text-gray-new-40 dark:text-gray-new-60 lg:hidden">
-    <Link to={DOCS_BASE_PATH}>Docs</Link>
+  <div className="mb-4 flex flex-wrap space-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
+    <Link
+      className="transition-colors duration-200 hover:text-black dark:hover:text-white"
+      to={DOCS_BASE_PATH}
+    >
+      Docs
+    </Link>
     <span>/</span>
 
     {breadcrumbs.map(({ title, slug }, index) => {
