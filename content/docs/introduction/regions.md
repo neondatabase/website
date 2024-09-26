@@ -32,6 +32,8 @@ During this Beta period:
 - If you are a Neon Launch, Scale, or Business plan user, compute and storage usage in Azure-hosted projects is not counted toward your [Neon plan allowances](/docs/introduction/plans). However, project allowances still apply and [extra project units](/docs/introduction/extra-usage) are still billed for.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but SLAs for Business plan users are not yet supported.
 
+Users with Neon projects created in the Azure region will be notified before the Beta period ends and usage in those projects starts to be counted toward your [Neon plan allowances](/docs/introduction/plans).
+
 To stay up to date with the latest information about Neon on Azure, please [sign up here](tbd). Additionally, Neon will soon be available from the Azure Marketplace. If you would like to participate in the public preview, please join the [Neon on Azure Public Preview Waitlist](https://neon.tech/neon-on-azure).
 </Admonition>
 
