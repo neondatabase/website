@@ -190,11 +190,11 @@ To use a meta-command in the SQL Editor:
 The Neon SQL Editor offers three AI-driven features:
 
 - **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
-  ![SQL generation](/docs/relnotes/sql_editor_ai.png)
+  ![SQL generation](/docs/get-started-with-neon/sql_editor_ai.png)
 - **Fix with AI**: If your query returns an error, simply click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor so you can run the query again.
-  ![Fix withn AI](/docs/relnotes/fix_with_ai.png)
+  ![Fix withn AI](/docs/get-started-with-neon/fix_with_ai.png)
 - **AI-generated query names**: Descriptive names are automatically assigned to your queries in the Neon SQL Editor's **History**. This feature helps you quickly identify and reuse previously executed queries.
-  ![AI-generated query names](/docs/relnotes/query_names.png)
+  ![AI-generated query names](/docs/get-started-with-neon/query_names.png)
 
 <Admonition type="important">
 To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
