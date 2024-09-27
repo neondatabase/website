@@ -20,11 +20,10 @@ const Hero = () => (
     <Container className="relative z-10 flex flex-col items-center text-center" size="medium">
       <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-pure blur-[30px] lg:w-full" />
       <h1 className="mx-auto font-title text-[72px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
-        Sell serverless Postgres
+        Bring Neon to Your Users
       </h1>
       <p className="mt-5 max-w-4xl text-xl font-light leading-snug xl:max-w-3xl xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
-        Developers love Postgres, and offering it to them has never been easier. Partner with Neon
-        and&nbsp;provide an end-to-end developer experience to your users.
+        Let your end-users create isolated Postgres databases by integrating Neon into your product. Follow the steps of Vercel, Replit, Retool, and many others. For developers and agents. 
       </p>
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"
