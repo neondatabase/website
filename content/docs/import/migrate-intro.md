@@ -1,10 +1,11 @@
 ---
 title: Neon data migration guides
-subtitle: Learn how to migrate data to Neon Postgres from different database providers and sources
+subtitle: Learn how to migrate data to Neon Postgres from different database providers
+  and sources
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2024-09-17T19:00:39.119Z'
+updatedOn: '2024-09-27T20:02:08.039Z'
 ---
 
 Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
