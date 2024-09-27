@@ -102,7 +102,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
   return (
     <section
       className={clsx(
-        'subscribe-form safe-paddings overflow-hidden',
+        'subscribe-form safe-paddings scroll-mt-20 overflow-hidden',
         {
           'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
             size === 'lg',
@@ -114,6 +114,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
         },
         className
       )}
+      id={dataTest}
     >
       {size === 'sm' && (
         <Image
