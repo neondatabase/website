@@ -3,7 +3,7 @@ title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-12T08:11:32.640Z'
+updatedOn: '2024-09-27T18:08:38.284Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
