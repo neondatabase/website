@@ -1,5 +1,5 @@
 ---
-title: IP Allow and protected branches
+title: IP Allow
 subtitle: Limit database access to trusted IP addresses
 enableTableOfContents: true
 updatedOn: '2024-09-05T17:14:45.243Z'
@@ -11,6 +11,6 @@ You can configure **IP Allow** in your Neon project's settings. To get started, 
 
 ![IP Allow configuration](/docs/manage/ip_allow.png)
 
-## Protected branches
+## IP Allow together with Protected Branches
 
-You can apply IP restrictions more precisely by designating specific branches in your Neon project as protected and enabling the **Restrict IP access to protected branches only** option. This will apply your IP allowlist to protected branches only with no IP restrictions on other branches in your project. Typically, the protected branches feature is used with branches that contain production or sensitive data. For step-by-step instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+You can apply IP restrictions more precisely by designating specific branches in your Neon project as protected and enabling the **Restrict IP access to protected branches only** option. This will apply your IP allowlist to protected branches only with no IP restrictions on other branches in your project. Typically, the protected branches feature is used with branches that contain production or sensitive data. For step-by-step instructions, refer to our [Protected Branches guide](/docs/guides/protected-branches).

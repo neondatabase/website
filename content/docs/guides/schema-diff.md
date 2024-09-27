@@ -97,7 +97,3 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 ## Tutorial
 
 For a step-by-step guide showing you how to compare two development branches using Schema Diff, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
-
-## Limitations
-
-Schema Diff is currently unable to compare branches that are protected under an IP Allow list. If you need to compare a protected branch, consider temporarily removing the IP Allow list to allow the Schema Diff comparison. Alternatively, if you are comparing non-default branches, you can temporarily enable "Allow unrestricted access to non-default branches" in the [IP Allow](/docs/manage/projects#configure-ip-allow) settings.
