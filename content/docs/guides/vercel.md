@@ -142,16 +142,16 @@ The integration supports automatic deletion of obsolete preview branches when th
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Check **Automatically delete obsolete Neon branches**.
 
-<Admonition type="warning" title="Please avoid manually rename branches when using automatic branch deletion">
+<Admonition type="warning" title="Avoid manually renaming branches when using automatic branch deletion">
 The integration determines whether a preview branch created in Neon is obsolete by looking at its name and asking Vercel if a Git branch with the same exists.
 
 - If either the Neon branch or Git branch is renamed, the name matching logic no longer functions as intended.
 - If a Neon branch no longer has a matching Git branch, the Neon branch will be considered obsolete.
 - If a Neon branch is considered obsolete, it will be deleted if automatic branch deletion is enabled.
 
-In effect, renaming a preview branch in Neon or the corresponding Git branch can result in deletion of the preview branch in Neon and the loss of changes on that branch.
+In effect, renaming a preview branch in Neon or the corresponding Git branch can result in deletion of the preview branch in Neon and the loss of data on that branch.
 
-The integration will never automatically remove a branch named `vercel-dev`. This is the optional development branch created in your Neon project when you first installed the integration. See [Add the Vercel integration](#add-the-neon-vercel-integration) for more information about this branch.
+The integration will never automatically remove a branch named `vercel-dev`. This is the name of the optional development branch created in your Neon project when you first install the integration. See [Add the Vercel integration](#add-the-neon-vercel-integration) for information about this branch.
 </Admonition>
 
 ### Manual deletion from the Vercel integration drawer
