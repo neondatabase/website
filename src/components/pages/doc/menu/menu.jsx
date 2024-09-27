@@ -6,7 +6,6 @@ import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
-import ChevronBackIcon from 'icons/docs/sidebar/chevron.inline.svg';
 
 import Item from './item';
 
@@ -145,7 +144,6 @@ const Menu = ({
           to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
           onClick={handleClose}
         >
-          <ChevronBackIcon className="absolute -left-5 top-0 text-gray-new-60 transition-colors duration-200 group-hover:text-black-new dark:text-gray-new-50 dark:group-hover:text-white xs:-left-4" />
           {title}
         </BackLinkTag>
       )}
