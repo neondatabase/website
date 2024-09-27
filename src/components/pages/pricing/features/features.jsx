@@ -14,12 +14,12 @@ const storageItems = [
   {
     icon: branchingIcon,
     title: 'Branches = copies of data + schema',
-    text: 'Database branches in Neon feel like "database copies", but they are ready instantly and they don't cost you extra storage'.,
+    text: 'Database branches in Neon feel like "database copies", but they are ready instantly and they do not cost you extra storage.',
   },
   {
     icon: storageIcon,
     title: 'Thousands of branches, same storage cost',
-    text: 'All branches in a project share the same storage. 100 GB in Neon feels like a lot more—you can "copy" that dataset hundreds of times for testing, dev...',
+    text: 'All branches in a project share the same storage. 100 GB in Neon feels like a lot more—you can "copy" that dataset hundreds of times, e.g. for dev & test.',
   },
 ];
 
@@ -27,7 +27,7 @@ const computeItems = [
   {
     icon: compatibilityIcon,
     title: 'You only pay for the compute you use',
-    text: 'Compute size is measured in <span class="font-medium text-white underline decoration-dotted underline-offset-4" data-tooltip-id="cu-icon" data-tooltip-html="1 CU = 1 vCPU, 4 GB RAM">CUs</span>. Database branches autoscale from 0.25 to 10 CU based on load and down to zero when inactive.',
+    text: 'Neon databases autoscale in response to your workload—you get more capacity when you need it, and pay less when traffic is slower. Your dev/test databases scale down to zero when inactive to save you money.',
   },
   {
     icon: timerIcon,
