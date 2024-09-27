@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.888Z'
+updatedOn: '2024-09-27T18:08:38.285Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -97,7 +97,3 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 ## Tutorial
 
 For a step-by-step guide showing you how to compare two development branches using Schema Diff, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
-
-## Limitations
-
-Schema Diff is currently unable to compare branches that are protected under an IP Allow list. If you need to compare a protected branch, consider temporarily removing the IP Allow list to allow the Schema Diff comparison. Alternatively, if you are comparing non-default branches, you can temporarily enable "Allow unrestricted access to non-default branches" in the [IP Allow](/docs/manage/projects#configure-ip-allow) settings.

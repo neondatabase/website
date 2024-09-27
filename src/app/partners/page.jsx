@@ -2,7 +2,6 @@ import Apply from 'components/pages/partners/apply';
 import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
-import Plans from 'components/pages/partners/plans';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
@@ -72,7 +71,6 @@ const PartnersPage = () => (
     />
     <Collaboration />
     <Apply />
-    <Plans className="mt-40 scroll-mt-5 px-safe 2xl:mt-36 xl:mt-32 lg:mt-28 md:mt-20" />
     <Integration />
     <Testimonial
       className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"

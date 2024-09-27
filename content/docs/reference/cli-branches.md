@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.674Z'
+updatedOn: '2024-09-27T18:08:38.286Z'
 ---
 
 ## Before you begin
@@ -133,6 +133,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
+
+<Admonition type="note">
+When creating a branch from a protected parent branch, role passwords on the child branch are changed. For more information about this Protected Branches feature, see [New passwords generated for Postgres roles on child branches](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
+</Admonition>
 
 #### Examples
 
