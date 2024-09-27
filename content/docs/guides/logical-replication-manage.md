@@ -196,7 +196,7 @@ To ensure that your logical replication setup is running as expected, you should
 SELECT * FROM pg_stat_replication;
 ```
 
-It provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
+The view provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
 Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
 
