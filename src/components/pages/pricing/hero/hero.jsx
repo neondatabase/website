@@ -100,7 +100,7 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For larger workloads, best compliance/observability, and partners., ',
+    description: 'For larger DBs, <a href="/partners">partners</a>, & compliance needs, ',
     features: [
       {
         title: '5,000 projects',
