@@ -23,6 +23,16 @@ const sliderItemsAnimationProps = {
   },
 };
 
+const handleOnDragEnd = (info, setActiveSliderItemIndex, children, setDirection) => {
+  if (info.offset.x > 0) {
+    setActiveSliderItemIndex((itemIndex) => (itemIndex + children.length - 1) % children.length);
+    setDirection('left');
+  } else {
+    setActiveSliderItemIndex((itemIndex) => (itemIndex + 1) % children.length);
+    setDirection('right');
+  }
+};
+
 const TestimonialsWrapper = ({ children }) => {
   const [activeSliderItemIndex, setActiveSliderItemIndex] = useState(0);
   const [direction, setDirection] = useState('right');
@@ -40,17 +50,9 @@ const TestimonialsWrapper = ({ children }) => {
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={1}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x > 0) {
-                    setActiveSliderItemIndex(
-                      (itemIndex) => (itemIndex + children.length - 1) % children.length
-                    );
-                    setDirection('left');
-                  } else {
-                    setActiveSliderItemIndex((itemIndex) => (itemIndex + 1) % children.length);
-                    setDirection('right');
-                  }
-                }}
+                onDragEnd={(_, info) =>
+                  handleOnDragEnd(info, setActiveSliderItemIndex, children, setDirection)
+                }
                 {...sliderItemsAnimationProps}
               >
                 {child}
