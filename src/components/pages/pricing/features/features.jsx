@@ -13,26 +13,26 @@ import Row from './row';
 const storageItems = [
   {
     icon: branchingIcon,
-    title: 'Branch-based Postgres',
-    text: 'Databases in Neon are brancheable (both schema and data). Think of code branches, but for your data.',
+    title: 'Branches = copies of data + schema',
+    text: 'Database branches in Neon feel like "database copies", but they are ready instantly and they don't cost you extra storage'.,
   },
   {
     icon: storageIcon,
-    title: 'Branches share storage',
-    text: 'When you branch a database, the new branch won&apos;t add to your storage bill. Branches are ready instantly, no matter how large the dataset.',
+    title: 'Thousands of branches, same storage cost',
+    text: 'All branches in a project share the same storage. 100 GB in Neon feels like a lot more—you can "copy" that dataset hundreds of times for testing, dev...',
   },
 ];
 
 const computeItems = [
   {
     icon: compatibilityIcon,
-    title: 'Serverless compute',
+    title: 'You only pay for the compute you use',
     text: 'Compute size is measured in <span class="font-medium text-white underline decoration-dotted underline-offset-4" data-tooltip-id="cu-icon" data-tooltip-html="1 CU = 1 vCPU, 4 GB RAM">CUs</span>. Database branches autoscale from 0.25 to 10 CU based on load and down to zero when inactive.',
   },
   {
     icon: timerIcon,
-    title: 'Compute usage is measured in compute hours',
-    text: 'Example: a 4 CU compute running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
+    title: '"Compute you use" = "compute hours"',
+    text: '"Compute hours" is how we measure compute usage. Example: 4 CU compute (4 CPU, 16 GiB RAM) running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
   },
 ];
 
