@@ -27,12 +27,12 @@ const computeItems = [
   {
     icon: compatibilityIcon,
     title: 'You only pay for the compute you use',
-    text: 'Neon databases autoscale in response to your workload—you get more capacity when you need it, and pay less when traffic is slower. Your dev/test databases scale down to zero when inactive to save you money.',
+    text: 'Neon databases autoscale in response to your workload—you get more capacity when you need it, and pay less when traffic is slower. Your dev/test databases scale down to zero to save you money.',
   },
   {
     icon: timerIcon,
     title: '"Compute you use" = "compute hours"',
-    text: '"Compute hours" is how we measure compute usage. Example: 4 CU compute (4 CPU, 16 GiB RAM) running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
+    text: '<Compute hours> is how we measure compute usage. Example: 4 CU compute running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
   },
 ];
 
