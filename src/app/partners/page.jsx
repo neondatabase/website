@@ -20,23 +20,23 @@ export const metadata = getMetadata(SEO_DATA.partners);
 const items = [
   {
     icon: compatibilityIcon,
-    title: 'Supercharge your platform',
+    title: 'Complete your platform with a DB',
     description: 'Offer managed Postgres, the most-loved relational database by developers.',
   },
   {
     icon: currencyIcon,
-    title: 'Scale as you go',
-    description: 'Pay only for what you use, with scale to zero and usage-based pricing.',
+    title: 'Budget-friendly',
+    description: 'Neon is the most cost-efficient managed Postgres due to scale-to-zero. Empty databases cost you pennies.',
   },
   {
     icon: userIcon,
-    title: 'Accelerate onboarding',
-    description: 'Reduce friction for your users so they can start building instantly.',
+    title: 'On your terms',
+    description: 'Integrate Neon as a third-party via OAuth or build your own product on top of it.',
   },
   {
     icon: speedIcon,
-    title: 'Easy management',
-    description: 'Give dedicated URLs to your users and handle all database tasks via an API.',
+    title: 'Let us do the work',
+    description: 'We host Postgres, you build. Handle all database tasks via an API.',
   },
 ];
 
@@ -64,8 +64,8 @@ const PartnersPage = () => (
     <SplitViewGrid
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
-      title="Why become a partner?"
-      description="Follow the lead of Vercel, Retool, Replit, Koyeb, and many more."
+      title="Why become a Neon partner?"
+      description="Our partners integrate Neon tightly into their platforms, enabling developers and AI agents to create their own isolated Postgres databases."
       items={items}
       isGradientLabel
     />
@@ -75,7 +75,7 @@ const PartnersPage = () => (
     <Testimonial
       className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
-      quote="We’ve been able to automate virtually all database tasks via the Neon API. This saved us a tremendous amount of time and engineering effort."
+      quote="We’ve built RetoolDB while virtually automating all database tasks. This saved us a tremendous amount of time and engineering effort."
       name="Himanshu Bhandoh"
       position="Software Engineer at Retool"
     />
@@ -83,8 +83,8 @@ const PartnersPage = () => (
       className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
       titleClassName="-mr-10 sm:max-w-[300px]"
       buttonClassName="px-[77px] xl:px-10 lg:px-9 sm:px-14"
-      title="Ready to get started with Neon?"
-      description="The fully managed multi-cloud Postgres with a generous free tier. We separated storage and compute to offer autoscaling, branching, and bottomless storage."
+      title="Don't know Neon? Try it first"
+      description="Start by creating a Free account to get a feel for the platform."
       buttonText="Sign up"
       buttonUrl={LINKS.signup}
     />
