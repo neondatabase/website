@@ -60,8 +60,6 @@ const items = [
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
-      { title: 'Point-in-time restore (7 days)' },
-      { title: 'Team accounts' },
       { title: 'Standard Support' }
     ],
     button: {
@@ -88,8 +86,6 @@ const items = [
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
-      { title: 'Point-in-time restore (14 days)' },
-      { title: 'Team accounts' },
       { title: 'Standard support' }
     ],
     button: {
@@ -104,7 +100,7 @@ const items = [
     price: 700,
     priceFrom: true,
     isMarketplaceAvailable: false,
-    description: 'For larger workloads, database fleets, BaaS/dev platforms, AI agents.',
+    description: 'Companies and partners with larger workloads. Best compliance and observability., ',
     features: [
       {
         title: '5,000 projects',
@@ -117,10 +113,6 @@ const items = [
       },
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
-      {
-        title: 'Full API management',
-        info: 'Manage usage+config settings via API in large DB-per-user fleets',
-      }, 
       { title: 'Private Link' },
       { title: 'Metrics export' },
       {
