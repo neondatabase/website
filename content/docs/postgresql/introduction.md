@@ -3,7 +3,7 @@ title: Postgres guides
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/postgres-intro
-updatedOn: '2024-08-09T20:46:35.872Z'
+updatedOn: '2024-09-23T22:07:20.574Z'
 ---
 
 Explore Postgres features with Neon's Postgres guides. Learn about data types, extensions, functions, and optimizing query performance. Remember, **Neon is Postgres**, so you're encouraged to reference both the Neon documentation and the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/).
@@ -23,5 +23,9 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 <a href="/docs/postgresql/query-reference" description="Find examples of commonly-used Postgres queries for basic to advanced operations" icon="research">Query reference</a>
 
 <a href="/docs/reference/compatibility" description="Learn about Neon as a managed Postgres service" icon="puzzle">Compatibility</a>
+
+<a href="/docs/postgresql/postgres-version-policy" description="Read about Neon's policy for Postgres version support and maintenance" icon="trend-up">Neon Postgres Version Support</a>
+
+<a href="/docs/postgresql/postgres-upgrade" description="Learn how to upgrade your Postgres version in Neon" icon="trend-up">Upgrade Postgres</a>
 
 </DetailIconCards>

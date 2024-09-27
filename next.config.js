@@ -236,14 +236,6 @@ const defaultConfig = {
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
       },
       {
-        source: '/demos/twin-thing',
-        destination: 'https://twin-thing.vercel.app/demos/twin-thing',
-      },
-      {
-        source: '/demos/twin-thing/:path*',
-        destination: 'https://twin-thing.vercel.app/demos/twin-thing/:path*',
-      },
-      {
         source: '/demos/ping-thing',
         destination: 'https://ping-thing.vercel.app/demos/ping-thing',
       },
@@ -278,6 +270,14 @@ const defaultConfig = {
       {
         source: '/demos/regional-latency/:asset*',
         destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
+      },
+      {
+        source: '/dev-for-rds',
+        destination: 'https://dev-for-rds.vercel.app/dev-for-rds',
+      },
+      {
+        source: '/dev-for-rds/:path*',
+        destination: 'https://dev-for-rds.vercel.app/dev-for-rds/:path*',
       },
     ];
   },

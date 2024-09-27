@@ -12,7 +12,10 @@ import s3Icon from 'icons/enterprise/s3.svg';
 import socIcon from 'icons/enterprise/soc-2.svg';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.enterprise);
+export const metadata = getMetadata({
+  ...SEO_DATA.enterprise,
+  robotsNoindex: 'noindex',
+});
 
 const items = [
   {

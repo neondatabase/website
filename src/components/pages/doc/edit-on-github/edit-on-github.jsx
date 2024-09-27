@@ -16,7 +16,7 @@ const EditOnGithub = ({ fileOriginPath }) => (
     rel="noopener noreferrer"
   >
     <GitHubIcon className="h-3.5 w-3.5" />
-    <span className="text-sm leading-tight tracking-tight">Edit this page on Github</span>
+    <span className="text-sm leading-tight tracking-tight">Edit this page on GitHub</span>
     <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
   </Link>
 );
