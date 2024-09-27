@@ -23,7 +23,7 @@ Neon supports project deployment in several regions. We recommended that you sel
 - East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
-The Neon on Azure Beta is currently limited to the Azure East US 2 region and is not recommended for business-critical projects. As a Beta release, occasional updates may require downtime.
+The Neon on Azure Beta is currently limited to the Azure East US 2 region and is currently not recommended for business-critical workloads. As a Beta release, occasional updates may require downtime.
 
 During this Beta period:
 
