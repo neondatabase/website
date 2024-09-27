@@ -111,7 +111,7 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 
 **Equivalent non-prod deployment in Neon:**
 
-- Scale pricing plan: $69 /month
+- [Scale pricing plan](/pricing): $69 /month
 - Includes 50 GB of shared storage between 10 branches - equivalent to the 10 instances in RDS
 - Includes 750 compute hours, additional compute hours billed at $0.16 per CU
 - **Neon monthly costs: $338.12**
