@@ -114,7 +114,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
         },
         className
       )}
-      id={dataTest}
+      id="subscribe-form"
     >
       {size === 'sm' && (
         <Image
