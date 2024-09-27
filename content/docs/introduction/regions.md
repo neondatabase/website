@@ -23,7 +23,7 @@ Neon supports project deployment in several regions. We recommended that you sel
 - East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
-The Neon on Azure Beta is currently limited to the Azure East US 2 region and may not be suitable for business-critical projects. As a Beta release, occasional updates may require downtime.
+The Neon on Azure Beta is currently limited to the Azure East US 2 region and is not recommended for business-critical projects. As a Beta release, occasional updates may require downtime.
 
 During this Beta period:
 
@@ -34,7 +34,7 @@ During this Beta period:
 
 Users with Neon projects in the Azure region will be notified before the Beta period ends, at which point usage in these projects will begin to count toward your [Neon plan allowances](/docs/introduction/plans).
 
-To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](tbd). Neon will also be available soon through the Azure Marketplace. If you're interested in joining the public preview, sign up for the [Neon on Azure Public Preview Waitlist](https://neon.tech/neon-on-azure).
+To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](https://neon.tech/blog#subscribe-form). Neon will also be available soon through the Azure Marketplace. If you're interested in joining the public preview, sign up for the [Neon on Azure Public Preview Waitlist](https://neon.tech/neon-on-azure).
 
 If you have any feedback about your experience with Neon on Azure, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 </Admonition>
