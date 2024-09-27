@@ -36,8 +36,8 @@ import demosDarkIcon from 'icons/header/demos-dark.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordDarkIcon from 'icons/header/discord-dark.svg';
 import discordIcon from 'icons/header/discord.svg';
-import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
-import enterpriseIcon from 'icons/header/enterprise.svg';
+// import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
+// import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersDarkIcon from 'icons/header/partners-dark.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
@@ -266,15 +266,15 @@ export default {
           description: 'Explore customer stories',
           to: LINKS.caseStudies,
         },
-        {
-          icon: {
-            light: enterpriseIcon,
-            dark: enterpriseDarkIcon,
-          },
-          text: 'Enterprise',
-          description: 'Scale & grow',
-          to: LINKS.enterprise,
-        },
+        // {
+        //   icon: {
+        //     light: enterpriseIcon,
+        //     dark: enterpriseDarkIcon,
+        //   },
+        //   text: 'Enterprise',
+        //   description: 'Scale & grow',
+        //   to: LINKS.enterprise,
+        // },
       ],
     },
   ],
