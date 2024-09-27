@@ -74,8 +74,8 @@ If you are unsure of your project's region, you can find this information in the
 
 ### Azure NAT Gateway IP Addresses
 
-| Region                               | NAT Gateway IP Addresses                                                               |
-| :----------------------------------- | :------------------------------------------------------------------------------------- |
+| Region                               | NAT Gateway IP Addresses                       |
+| :----------------------------------- | :--------------------------------------------- |
 | East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
 
 ## Move project data to a new region
