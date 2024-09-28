@@ -20,13 +20,13 @@ export const metadata = getMetadata(SEO_DATA.partners);
 const items = [
   {
     icon: compatibilityIcon,
-    title: 'Complete your platform with a DB',
-    description: 'Offer managed Postgres, the most-loved relational database by developers.',
+    title: 'Level up your platform',
+    description: 'Start offering managed Postgres, the most-loved database by developers.',
   },
   {
     icon: currencyIcon,
     title: 'Budget-friendly',
-    description: 'Neon is the most cost-efficient managed Postgres due to scale-to-zero. Empty databases cost you pennies.',
+    description: 'Thanks to scale-to-zero, empty databases cost you pennies. Pay for what you use.',
   },
   {
     icon: userIcon,
@@ -64,14 +64,11 @@ const PartnersPage = () => (
     <SplitViewGrid
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
-      title="Why become a Neon partner?"
-      description="Our partners integrate Neon tightly into their platforms, enabling developers and AI agents to create their own isolated Postgres databases."
+      title="Why partnering with Neon?"
+      description="Our partners integrate Neon tightly into their platforms, enabling end-users to create their own isolated Postgres databases."
       items={items}
       isGradientLabel
     />
-    <Collaboration />
-    <Apply />
-    <Integration />
     <Testimonial
       className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
@@ -79,6 +76,9 @@ const PartnersPage = () => (
       name="Himanshu Bhandoh"
       position="Software Engineer at Retool"
     />
+    <Collaboration />
+    <Apply />
+    <Integration />
     <CTAWithElephant
       className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
       titleClassName="-mr-10 sm:max-w-[300px]"
