@@ -36,14 +36,14 @@ Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Plan includes the following usage allowances:
 
-| Usage type                 | Plan allowance                                                                                                                                                                                                                             |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Projects**               | 1 Neon project                                                                                                                                                                                                                             |
-| **Branches**               | 10 branches                                                                                                                                                                                                                                |
-| **Databases**              | 500 per branch                                                                                                                                                                                                                             |
-| **Storage**                | 0.5 GiB                                                                                                                                                                                                                                    |
-| **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
+| Usage type                 | Plan allowance                                                                                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Projects**               | 1 Neon project                                                                                                                                           |
+| **Branches**               | 10 branches                                                                                                                                              |
+| **Databases**              | 500 per branch                                                                                                                                           |
+| **Storage**                | 0.5 GiB                                                                                                                                                  |
+| **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
+| **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
 
 <Admonition type="tip" title="What is a compute hour?">
 
@@ -70,7 +70,9 @@ The Free Plan includes the following usage allowances:
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Plan Compute Allowances">
-On the Free Plan, your default branch compute can run 24/7 at 0.25 vCPU with 1 GB of RAM. If you enable autoscaling, your compute can scale up to 2 vCPU with 8 GB of RAM, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Plan includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Plan in January, your compute allowance resets on February 1st.
+On the Free Plan, you get 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
+
+If you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 </Admonition>
 
 ## Launch
@@ -81,13 +83,13 @@ The Launch plan provides all of the resources, features, and support you need to
 
 The Launch plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                 |
-| ------------- | -------------------------------------------------------------- |
-| **Projects**  | 10 Neon projects                                               |
-| **Branches**  | 500 per project                                                |
-| **Databases** | 500 per branch                                                 |
-| **Storage**   | 10 GiB of data storage                                         |
-| **Compute**   | 300 compute hours a month for all computes across all projects |
+| Usage type    | Plan allowance                                                   |
+| ------------- | ---------------------------------------------------------------- |
+| **Projects**  | 10 Neon projects                                                 |
+| **Branches**  | 500 per project                                                  |
+| **Databases** | 500 per branch                                                   |
+| **Storage**   | 10 GiB of data storage                                           |
+| **Compute**   | 300 compute hours per month for all computes across all projects |
 
 ### Launch plan extra usage
 
@@ -117,13 +119,13 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                 |
-| ------------- | -------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                               |
-| **Branches**  | 500 per project                                                |
-| **Databases** | 500 per branch                                                 |
-| **Storage**   | 50 GiB of data storage                                         |
-| **Compute**   | 750 compute hours a month for all computes across all projects |
+| Usage type    | Plan allowance                                                   |
+| ------------- | ---------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                                 |
+| **Branches**  | 500 per project                                                  |
+| **Databases** | 500 per branch                                                   |
+| **Storage**   | 50 GiB of data storage                                           |
+| **Compute**   | 750 compute hours per month for all computes across all projects |
 
 ### Scale plan extra usage
 
@@ -155,13 +157,13 @@ The Business plan is designed for mid-to-large enterprises requiring higher comp
 
 The Business plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                   |
-| ------------- | ---------------------------------------------------------------- |
-| **Projects**  | 100 Neon projects                                                |
-| **Branches**  | 500 per project                                                  |
-| **Databases** | 500 per branch                                                   |
-| **Storage**   | 500 GiB of data storage                                          |
-| **Compute**   | 1,000 compute hours a month for all computes across all projects |
+| Usage type    | Plan allowance                                                     |
+| ------------- | ------------------------------------------------------------------ |
+| **Projects**  | 100 Neon projects                                                  |
+| **Branches**  | 500 per project                                                    |
+| **Databases** | 500 per branch                                                     |
+| **Storage**   | 500 GiB of data storage                                            |
+| **Compute**   | 1,000 compute hours per month for all computes across all projects |
 
 ### Business plan extra usage
 
