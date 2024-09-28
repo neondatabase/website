@@ -19,17 +19,17 @@ const Integration = () => (
       </p>
       <div className="mt-20 flex flex-col gap-y-[88px] 2xl:gap-y-20 xl:mt-16 xl:gap-y-16 lg:mt-12 lg:gap-y-12 md:mt-8 md:gap-y-8">
         <Row
-          title="Instant databases"
-          description="Neon databases are ready within seconds, with dedicated URLs."
-          linkText="How is it possible?"
-          linkUrl='https://neon.tech/docs/introduction/serverless'
+          title="Instant Postgres databases"
+          description="Neon databases are ready within seconds. With dedicated URLs."
+          linkText="Learn more"
+          linkUrl={`${LINKS.docs}/introduction/serverless`}
           image={databaseTable}
         />
         <Row
-          title="Grow your fleet, not your $$"
-          description="With scale-to-zero, you only pay for the resources your users actually use."
-          linkText="Read more"
-          linkUrl='https://neon.tech/docs/introduction/auto-suspend'
+          title="Large fleet, small bill"
+          description="With Neon’s scale-to-zero, you only pay for the resources your customers actually use."
+          linkText="Learn more"
+          linkUrl={`${LINKS.docs}/introduction/auto-suspend`}
           image={autoscalingChart}
           imagePosition="left"
         />
