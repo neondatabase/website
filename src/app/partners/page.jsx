@@ -65,7 +65,7 @@ const PartnersPage = () => (
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
       label="Benefits"
       title="Why partnering with Neon?"
-      description="Our partners integrate Neon tightly into their platforms, enabling end-users to create their own isolated Postgres databases."
+      description="Let your end-users create isolated Postgres databases—while we handle the database management for you."
       items={items}
       isGradientLabel
     />
