@@ -26,7 +26,7 @@ const partners = [
   {
     logo: { icon: replit, alt: 'Replit', width: 153, height: 40 },
     description:
-      'Replit Agents are deploying thousands of Postgres databases powered by Neon, which is a perfect DB for agents',
+      'Replit Agents are deploying thousands of Postgres databases powered by Neon, which is a perfect DB for agents.',
     linkUrl: 'https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/',
   },
   {
