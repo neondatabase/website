@@ -3,7 +3,7 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 enableTableOfContents: true
-updatedOn: '2024-08-29T10:48:38.733Z'
+updatedOn: '2024-09-28T10:31:46.951Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.

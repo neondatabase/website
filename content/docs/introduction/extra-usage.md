@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Learn how extra usage works in Neon's pricing plans
 redirectFrom:
   - /docs/introduction/billing-overview
-updatedOn: '2024-09-20T16:07:37.863Z'
+updatedOn: '2024-09-28T10:31:46.946Z'
 ---
 
 Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase extra usage in set increments for when you need to go over your allowance.
