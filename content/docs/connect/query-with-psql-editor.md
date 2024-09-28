@@ -172,17 +172,18 @@ Informational
   \sf[+]  FUNCNAME       show a function's definition
   \sv[+]  VIEWNAME       show a view's definition
   \z[S]   [PATTERN]      same as \dp
-  ```
+```
+
 For more information about meta-commands, see [psql Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS).
 
 ## Running psql from the Neon CLI
 
-If you have `psql` and the [Neon CLI](/docs/reference/neon-cli) installed, you can run `psql` commands directly from the Neon CLI using the `connection-string` command with the `--psql` option. 
+If you have `psql` and the [Neon CLI](/docs/reference/neon-cli) installed, you can run `psql` commands directly from the Neon CLI using the `connection-string` command with the `--psql` option.
 
-  ```bash
-  neon connection-string --psql -- -c "SELECT version()"
-  ```
+```bash
+neon connection-string --psql -- -c "SELECT version()"
+```
 
-For more examples, see [Neon CLI commands — connection-string](/docs/reference/cli-connection-string). 
+For more examples, see [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
 
 <NeedHelp/>
