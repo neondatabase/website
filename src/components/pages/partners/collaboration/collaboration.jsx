@@ -15,24 +15,25 @@ import vercel from './images/vercel.svg';
 const partners = [
   {
     logo: { icon: retool, alt: 'Retool', width: 141, height: 40 },
-    description: `“Our users spend less time on setup and more time on building: they can <span>turn spreadsheet-based processes into secure and scalable apps</span> all in just a few minutes”`,
+    description: `Retool uses Neon to manage a massive database fleet with a small team. They run 300k databases with 1 engineer. `,
     linkUrl: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
   },
   {
     logo: { icon: vercel, alt: 'Vercel', width: 154, height: 40 },
-    description: `“By partnering with Neon, Vercel’s frontend platform is now <span>the end-to-end serverless solution</span> for building on the Web”`,
+    description: `Vercel choose Neon to power Vercel Postgres, their integrated Postgres storage.`,
     linkUrl: `${LINKS.blog}/neon-postgres-on-vercel`,
-  },
-  {
-    logo: { icon: koyeb, alt: 'Koyeb', width: 138, height: 40 },
-    description: `“Our users can now <span>build, run, and scale their full stack apps</span> and manage their databases on a single platform with a unified experience”`,
-    linkUrl: 'https://www.koyeb.com/blog/serverless-postgres-public-preview',
   },
   {
     logo: { icon: replit, alt: 'Replit', width: 153, height: 40 },
     description:
-      '“We want to make it seamless to develop applications on Replit. Our users can now <span>create and instantly begin to use Postgres databases</span> from within the Replit workspace”',
-    linkUrl: `${LINKS.blog}/neon-replit-integration`,
+      'Replit Agents are deploying thousands of Postgres databases powered by Neon, which is a perfect DB for agents',
+    linkUrl: 'https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/',
+  },
+  {
+    logo: { icon: koyeb, alt: 'Koyeb', width: 138, height: 40 },
+    description:
+      'Neon powers Koyeb Serverless Postgres, allowing Koyeb users to build apps end-to-end without leaving the platform.',
+    linkUrl: 'https://www.koyeb.com/blog/serverless-postgres-public-preview',
   },
 ];
 
@@ -42,10 +43,10 @@ const Collaboration = () => (
       <div className="col-span-8 col-start-3 flex flex-col items-center xl:col-span-10 xl:col-start-2 lg:col-span-full lg:col-start-1">
         <GradientLabel>Case studies</GradientLabel>
         <h2 className="mt-4 text-center font-title text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
-          Success stories
+          Tell me more
         </h2>
         <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">
-          Learn the benefits directly from our partners.
+          Dive deeper into our partners' stories
         </p>
 
         {/* cards */}
