@@ -22,14 +22,14 @@ const Integration = () => (
           title="Instant databases"
           description="Neon databases are ready within seconds, with dedicated URLs."
           linkText="How is it possible?"
-          linkUrl={`https://neon.tech/docs/introduction/serverless`}
+          linkUrl='https://neon.tech/docs/introduction/serverless'
           image={databaseTable}
         />
         <Row
           title="Grow your fleet, not your $$"
           description="With scale-to-zero, you only pay for the resources your users actually use."
           linkText="Read more"
-          linkUrl={`https://neon.tech/docs/introduction/auto-suspend`}
+          linkUrl='https://neon.tech/docs/introduction/auto-suspend'
           image={autoscalingChart}
           imagePosition="left"
         />
