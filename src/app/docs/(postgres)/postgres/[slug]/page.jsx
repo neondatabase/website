@@ -15,9 +15,8 @@ import {
   getNavigationLinks,
   getPostBySlug,
   getSidebar,
-  getFlatSidebar,
-  getBreadcrumbs,
 } from 'utils/api-postgres';
+import { getBreadcrumbs, getFlatSidebar } from 'utils/get-breadcrumbs';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {
@@ -53,8 +52,9 @@ function findH1(content) {
 const PostgresPage = async ({ params }) => {
   const { slug: currentSlug } = params;
 
-  const flatSidebar = getFlatSidebar(getSidebar()['0'].items);
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const sidebar = getSidebar()['0'].items;
+  const flatSidebar = getFlatSidebar(sidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
 
   const post = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
 

@@ -121,9 +121,6 @@ const Menu = ({
   if (!isRootMenu && !isActive) return null;
 
   const handleClose = () => {
-    if (!slug) {
-      setActiveMenuList((prevList) => prevList.filter((item) => item.title !== title));
-    }
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -143,7 +140,7 @@ const Menu = ({
       {!isRootMenu && (
         <BackLinkTag
           className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
-          to={slug ? `${basePath}${slug}` : LINKS.docsHome}
+          to={`${basePath}${slug}`}
           onClick={handleClose}
         >
           {title}

@@ -69,6 +69,21 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
 
   useClickOutside([wrapperRef], onOutsideClick);
 
+  const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
+    const activeMenu = activeMenuList[activeMenuList.length - 1];
+    const isSlugActiveMenu = activeMenu.slug === currentSlug;
+
+    const isSlugInActiveMenu = (items) =>
+      items.some(
+        (item) =>
+          (item.title === activeMenu.title &&
+            item.items?.some((subItem) => subItem.slug === currentSlug)) ||
+          (item.items && isSlugInActiveMenu(item.items))
+      );
+
+    return isSlugActiveMenu || isSlugInActiveMenu(items);
+  };
+
   useEffect(() => {
     const onScroll = () => {
       if (isOpen) {
@@ -97,6 +112,13 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       controls.start('from');
     }
   }, [controls, isOpen]);
+
+  useEffect(() => {
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSlug]);
 
   return (
     <nav
