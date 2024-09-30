@@ -8,7 +8,7 @@ At Neon, our serverless architecture is resilient by default, with the separatio
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
 
-The diagram shows this separation of compute (Postgres endpoints) from storage (Safekeepers, Pageservers, and object storage in S3). Reliability on the compute side is handled largely by our ability to spin up near-instant computes, while redundancy on the storage side involves replication of data across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) within a region.
+The diagram highlights the separation of compute (Postgres endpoints) from storage (Safekeepers, Pageservers, and cloud object storage). Compute reliability is maintained by our ability to spin up near-instant computes, while storage redundancy involves replication of data across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) within a region.
 
 ## What high availability means to us
 
@@ -16,41 +16,37 @@ Based on the separation of storage from compute, we can break HA into two main p
 
 - **Compute resiliency** &#8212; _Keeping your application continuously connected_
 
-  Our serverless compute architecture scales to handle traffic spikes and automatically fails over if an endpoint becomes unavailable.
+  Our serverless architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
 
 - **Storage redundancy** &#8212; _Protecting both your long-term and active data_
 
-  On the storage side, durable data is backed by S3 for long-term safety, while Pageserver and Safekeeper services are distributed across Availability Zones to provide redundancy for the cached data used by compute. For databases larger than 64 GB — and coming to all databases [soon](/docs/introduction/roadmap#what-were-working-on-now) — the Storage Controller service manages automatic failover of failed Pageservers to healthy ones. For smaller databases, failover requires manual intervention that Neon handles.
-
-## To us, high availability does not mean...
-
-_Multi-node active/standby configuration._ We do not support a traditional multi-node active/standby setup for compute endpoints. Instead, when a compute endpoint fails, a new endpoint is spun up quickly, eliminating the need for synchronization with a standby mode. This architecture reduces the need for a traditional active/standby model.
+On the storage side, all data is backed by cloud object storage for long-term safety, while Pageserver and Safekeeper services are distributed across Availability Zones to provide redundancy for the cached data used by compute. Our systems monitor the health of these Pageservers and manage the automatic switch of failed Pageservers to healthy ones.
 
 ## Compute resiliency
 
-Here is an illustration of the key steps involved in a compute failover, including detecting a failure, spinning up a new compute endpoint, and reconnecting to the storage layer.
+Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
 
-![compute failover process](/docs/introduction/HA-compute-failover.png)
+### Compute endpoints are metadata
 
-### Failover time
+To understand how connections are maintained, think of your compute endpoint as metadata — with your connection string being the core element. The endpoint is not permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon creates a new VM in a Kubernetes node and attaches your compute endpoint (which includes the connection string and related metadata) to this VM.
 
-The entire process typically takes a few seconds. While some steps, like activating a new endpoint, may take only milliseconds, the full failover process involves additional actions such as connection routing and cache rebuilding, which extends the overall time to seconds.
+Postgres runs inside the VM. The most common failure scenario is Postgres crashing. In this case, the VM detects the crash and restarts Postgres automatically, typically within a few seconds.
 
-In rare cases, such as when storage services (like Pageservers) experience a complex failure, or there is a system-wide load, failovers may take longer and require manual intervention. However, these extended times generally relate to storage service failover, not compute.
+![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
 
-### What are the impacts on my application performance after a failover
+Less frequently, the VM itself may fail. If this happens, Neon immediately spins up a new VM and reattaches your compute endpoint. This process takes slightly longer than restarting Postgres but still typically happens within seconds. It's similar to what happens during an [Autosuspend](/docs/guides/auto-suspend-guide) restart: when a compute has been inactive for a set period, the VM is torn down, and when it's needed again, Neon spins up a new VM and reattaches the endpoint, just as it would after a failover.
 
-The main impacts of a failover are:
+![VM restarting after failure](/docs/introduction/vm_fails.png)
 
-- _Dropped connections_
+### What are the impacts on session data after a failure?
 
-  During a failover, all active connections to the old compute endpoint are dropped, which can cause application errors unless your application is designed to handle reconnections smoothly. If your app has robust retry or reconnection logic, you might experience minimal or no disruption.
+While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
 
-- _Loss of session context_
+### What about node-level failures?
 
-  When an endpoint fails, its [session context](/docs/reference/compatibility#session-context) is lost; the context does not persist to the new endpoint. Session context can include Postgres parameters, temporary tables, prepared statements, and other session-specific data, including the Local File Cache (LFC), which stores frequently accessed data. This can lead to slower query performance until the cache is rebuilt.
+The majority of failures are resolved at the Postgres or VM level. In the rare instance of a node-level failure — which can affect many users — recovery involves restarting and reassigning multiple VMs. These incidents can take longer to recover from, though again, your data remains safe throughout. Other issues, for example, if VM performance degrades but does not fail, detection and recovery can also take longer to resolve.
 
-Additionally, after a failover, Postgres memory buffers will be cold, causing initial queries to run more slowly until the buffers are warmed up.
+For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
 
 ## Storage redundancy
 
@@ -70,31 +66,12 @@ In this architecture:
 
 - **Pageservers**
 
-  Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. In case of a Pageserver failure, data remains safe in S3, but impacted projects may become temporarily unavailable until reassigned to a new Pageserver by the Control Plane. For databases over 64 GB, this is an automatic process managed by the Storage Controller. For databases under 64 GB, this requires manual intervention on the Neon side (alerts and migration strategies).
+  Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. In case of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a healthy Pageserver. The system continuously monitors the health of Pageservers using a heartbeat mechanism to ensure timely detection and failover.
 
 - **Object storage**
 
-  The primary, durable copy of your data resides in **cloud object storage** (e.g., S3), with **99.999999999%** durability to safeguard against any permanent data loss in the event of Pageserver or Safekeeper failure.
-
-### Storage controller for automatic failover
-
-For larger databases (64 GB or more), Neon leverages the **Storage Controller** to handle **automatic failover** across Pageservers. The Storage Controller continuously monitors Pageservers using a heartbeat mechanism and automatically triggers failover when a Pageserver becomes unavailable. This process ensures that your database remains operational without manual intervention.
-
-Here’s a simplified view of how the Storage Controller manages Pageserver failover:
-
-![HA storage controller](/docs/introduction/HA-storage-controller.png)
-
-In this architecture:
-
-- **Storage Controller**: The Storage Controller monitors Pageservers through a heartbeat mechanism. When a Pageserver fails, the Storage Controller detects this failure and triggers the automatic failover process.
-- **Automatic failover**: Once the failure is detected, the Storage Controller reassigns the project to a healthy Pageserver, which uses the WAL stream from the Safekeepers to reconstruct the state of the database. This failover is typically fast and happens without manual intervention.
-
-#### Sample failover
-
-The chart below shows the impact of a Pageserver failure (the truncated green line). When a Pageserver fails, the projects it was handled are automatically reassigned to other healthy Pageservers. This migration starts immediately, proceeds without human intervention, and typically completes within seconds. By the next metric scrape interval, the system is fully operational again.
-
-![chart showing pageserver failover via storage controller](/docs/introduction/HA-storage-failover-chart.png)
+  The primary, long-term copy of your data resides in **cloud object storage**, with **99.999999999%** durability, ensuring protection against permanent data loss in the event of Pageserver or Safekeeper failure.
 
 ## Limitations
 
-_No cross-region replication._ Neon's HA architecture is designed to mitigate failures within a single region by replicating data across multiple AZs. However, we currently do not support real-time replication across different cloud regions. In the event of a region-wide outage, your data is not automatically replicated to another region, and availability depends on the cloud provider restoring service to the affected region. While region-wide outages are rare, a reminder that your long-term data remains safe in durable cloud storage (such as S3).
+_No cross-region replication._ Neon's HA architecture is designed to mitigate failures within a single region by replicating data across multiple AZs. However, we currently do not support real-time replication across different cloud regions. In the event of a region-wide outage, your data is not automatically replicated to another region, and availability depends on the cloud provider restoring service to the affected region. While region-wide outages are rare, a reminder that your long-term data remains safe in durable cloud object storage.
