@@ -31,7 +31,8 @@ const items = [
   {
     icon: userIcon,
     title: 'On your terms',
-    description: 'Integrate Neon as a third-party via OAuth or build your own product on top of it.',
+    description:
+      'Integrate Neon as a third-party via OAuth or build your own product on top of it.',
   },
   {
     icon: speedIcon,
@@ -63,6 +64,7 @@ const PartnersPage = () => (
     <Logos logos={logos} withGreenFade />
     <SplitViewGrid
       className="mt-36 xl:mt-[104px] lg:mt-20 md:mt-16"
+      titleClassName="!max-w-[380px] 2xl:text-5xl xl:!max-w-none"
       label="Benefits"
       title="Why partnering with Neon?"
       description="Let your end-users create isolated Postgres databases—while we handle the database management for you."
