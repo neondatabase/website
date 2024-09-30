@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
+import { DOCS_BASE_PATH, POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
 
-const Breadcrumbs = ({ breadcrumbs }) => (
+const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
   <div className="mb-4 flex flex-wrap space-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
     <Link
       className="transition-colors duration-200 hover:text-black dark:hover:text-white"
@@ -14,6 +14,17 @@ const Breadcrumbs = ({ breadcrumbs }) => (
       Docs
     </Link>
     <span>/</span>
+    {isPostgresPost && (
+      <>
+        <Link
+          className="transition-colors duration-200 hover:text-black dark:hover:text-white"
+          to={POSTGRES_DOCS_BASE_PATH}
+        >
+          Postgres
+        </Link>
+        <span>/</span>
+      </>
+    )}
 
     {breadcrumbs.map(({ title, slug }, index) => {
       const isLast = index === breadcrumbs.length - 1;
@@ -49,6 +60,7 @@ Breadcrumbs.propTypes = {
       slug: PropTypes.string,
     })
   ).isRequired,
+  isPostgresPost: PropTypes.bool,
 };
 
 export default Breadcrumbs;
