@@ -28,13 +28,13 @@ To understand how connections are maintained, think of your compute endpoint as 
 
 #### Postgres failure
 
-Postgres runs inside the VM. If Postgres crashes, the VM detects the issue and restarts Postgres automatically, typically within a few seconds. This is the most common failure scenario.
+Postgres runs inside the VM. If Postgres crashes, the VM detects the issue and restarts Postgres automatically, typically within a few seconds.
 
 ![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
 
 #### VM failure
 
-Less frequently, the VM itself may fail. If this happens, Neon immediately spins up a new VM and reattaches your compute endpoint. This process takes slightly longer than restarting Postgres but still typically happens within seconds. It's similar to what happens during an [Autosuspend](/docs/guides/auto-suspend-guide) restart: when a compute has been inactive for a set period, the VM is torn down, and when it's needed again, Neon spins up a new VM and reattaches the endpoint, just as it would after a failover.
+In rarer cases, the VM itself may fail. If this happens, Neon immediately spins up a new VM and reattaches your compute endpoint. This process takes slightly longer than restarting Postgres but still typically happens within seconds. It's similar to what happens during an [Autosuspend](/docs/guides/auto-suspend-guide) restart: when a compute has been inactive for a set period, the VM is torn down, and when it's needed again, Neon spins up a new VM and reattaches the endpoint, just as it would after a failover.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
