@@ -8,11 +8,11 @@ At Neon, our serverless architecture is resilient by default, with the separatio
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
 
-Based on this separation of storage from compute, we can break HA into two main parts:
+Based on this separation, we can break HA into two main parts:
 
 - **Compute resiliency** &#8212; _Keeping your application continuously connected_
 
-  Our serverless architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
+  Our architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
 
 - **Storage redundancy** &#8212; _Protecting both your long-term and active data_
 
