@@ -138,7 +138,8 @@ If you're just using the sample `playing_with_neon` table, you can create the sa
 ```sql shouldWrap
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 ```
-</Admonition> 
+
+</Admonition>
 
 #### Dump the schema
 
