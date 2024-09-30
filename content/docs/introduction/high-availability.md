@@ -8,11 +8,7 @@ At Neon, our serverless architecture is resilient by default, with the separatio
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
 
-The diagram highlights the separation of compute (Postgres endpoints) from storage (Safekeepers, Pageservers, and cloud object storage). Compute reliability is maintained by our ability to spin up near-instant computes, while storage redundancy involves replication of data across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) within a region.
-
-## What high availability means to us
-
-Based on the separation of storage from compute, we can break HA into two main parts:
+Based on this separation of storage from compute, we can break HA into two main parts:
 
 - **Compute resiliency** &#8212; _Keeping your application continuously connected_
 
@@ -20,7 +16,7 @@ Based on the separation of storage from compute, we can break HA into two main p
 
 - **Storage redundancy** &#8212; _Protecting both your long-term and active data_
 
-On the storage side, all data is backed by cloud object storage for long-term safety, while Pageserver and Safekeeper services are distributed across Availability Zones to provide redundancy for the cached data used by compute. Our systems monitor the health of these Pageservers and manage the automatic switch of failed Pageservers to healthy ones.
+  On the storage side, all data is backed by cloud object storage for long-term safety, while Pageserver and Safekeeper services are distributed across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) to provide redundancy for the cached data used by compute.
 
 ## Compute resiliency
 
@@ -28,11 +24,15 @@ Neon compute is stateless, meaning failures do not affect your data. In the most
 
 ### Compute endpoints are metadata
 
-To understand how connections are maintained, think of your compute endpoint as metadata — with your connection string being the core element. The endpoint is not permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon creates a new VM in a Kubernetes node and attaches your compute endpoint (which includes the connection string and related metadata) to this VM.
+To understand how connections are maintained, think of your compute endpoint as metadata — with your connection string being the core element. The endpoint is not permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon creates a new VM in a Kubernetes node and attaches your compute endpoint to this VM.
 
-Postgres runs inside the VM. The most common failure scenario is Postgres crashing. In this case, the VM detects the crash and restarts Postgres automatically, typically within a few seconds.
+#### Postgres failure
+
+Postgres runs inside the VM. If Postgres crashes, the VM detects the issue and restarts Postgres automatically, typically within a few seconds. This is the most common failure scenario.
 
 ![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
+
+#### VM failure
 
 Less frequently, the VM itself may fail. If this happens, Neon immediately spins up a new VM and reattaches your compute endpoint. This process takes slightly longer than restarting Postgres but still typically happens within seconds. It's similar to what happens during an [Autosuspend](/docs/guides/auto-suspend-guide) restart: when a compute has been inactive for a set period, the VM is torn down, and when it's needed again, Neon spins up a new VM and reattaches the endpoint, just as it would after a failover.
 
