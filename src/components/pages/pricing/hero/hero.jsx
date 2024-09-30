@@ -108,7 +108,7 @@ const items = [
         title: '5,000 projects',
         info: '$50 per 5,000 extra projects',
       }, 
-      { title: '500 GiB storage included', info: 'Additional storage: $0.5 per GiB' },
+      { title: '500 GiB storage included', info: 'Additional storage: $5 per 10 GiB' },
       {
         title: '1000 <a href="#compute-hour">compute hours</a> included',
         info: 'Additional usage: $0.16 per compute hour',
