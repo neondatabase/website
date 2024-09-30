@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-09-20T19:10:25.308Z'
+updatedOn: '2024-09-26T21:28:36.971Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -33,7 +33,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Support tickets](#support-tickets)                                   |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)           |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                             |     -     |    -     |    \*    |     \*     |
-| [SLAs](#slas)                                                         |     -     |    -     |          |  &check;   |
+| [SLAs](#slas)                                                         |     -     |    -     | &check;  |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
@@ -87,7 +87,7 @@ Video chat is available to Priority and Enterprise support plan customers and ma
 
 ### SLAs
 
-Support Level Agreements (SLAs) are available to Enterprise support plan customers. If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
+Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](https://neon.tech/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
 
 ## General support policy
 

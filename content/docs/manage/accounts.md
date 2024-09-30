@@ -2,13 +2,13 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-09-23T19:06:42.278Z'
+updatedOn: '2024-09-26T21:28:36.972Z'
 ---
 
 Neon offers two account types for you to choose from:
 
 - **Personal account**
-- **Organization account** (Early Access)
+- **Organization account** (beta)
 
 ## Personal accounts
 
@@ -61,4 +61,4 @@ Here's where to go in the Neon Console to complete these actions:
 
 Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
-After 180 days, your account will be permanetly removed.
+After 180 days, your account will be permanently removed.

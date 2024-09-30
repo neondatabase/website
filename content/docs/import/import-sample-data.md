@@ -1,8 +1,8 @@
 ---
 title: Postgres sample data
-subtitle: Import sample data for learning, testing, and exploring Neon
+subtitle: 'Import sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-08-22T02:18:02.655Z'
+updatedOn: '2024-09-25T16:51:08.903Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -491,7 +491,7 @@ An airport database containing information about airports, aircraft, bookings, p
 4. Connect to the `postgres_air` database:
 
    ```bash
-   psql postgresql://[user]:[password]@[neon_hostname]/wikipedia
+   psql postgresql://[user]:[password]@[neon_hostname]/postgres_air
    ```
 
 5. Find the aircraft type with the most flights:

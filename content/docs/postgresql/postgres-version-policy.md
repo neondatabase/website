@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2024-09-24T09:39:48.636Z'
+updatedOn: '2024-09-26T13:33:08.732Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -61,7 +61,7 @@ In such cases, your action may occasionally be required. When this occurs &#8212
 
 ### Major versions
 
-Neon currently supports Postgres 14, 15, and 16, and we plan to support Postgres 17 as soon as it is released. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
+Neon currently supports Postgres 14, 15, 16, and 17. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
 
 ### Major version upgrades
 

@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-09-24T15:13:52.996Z'
+updatedOn: '2024-09-30T15:27:16.600Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -36,14 +36,14 @@ Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
 
 The Free Plan includes the following usage allowances:
 
-| Usage type                 | Plan allowance                                                                                                                                                                                                                             |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Projects**               | 1 Neon project                                                                                                                                                                                                                             |
-| **Branches**               | 10 branches                                                                                                                                                                                                                                |
-| **Databases**              | Unlimited                                                                                                                                                                                                                                  |
-| **Storage**                | 0.5 GiB                                                                                                                                                                                                                                    |
-| **Compute**                | 24/7 availability at 0.25 vCPU with 1 GB RAM on your default branch. Autoscaling up to 2 vCPU with 8 GB RAM available. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches. |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                                                                                                             |
+| Usage type                 | Plan allowance                                                                                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Projects**               | 1 Neon project                                                                                                                                           |
+| **Branches**               | 10 branches                                                                                                                                              |
+| **Databases**              | 500 per branch                                                                                                                                           |
+| **Storage**                | 0.5 GiB                                                                                                                                                  |
+| **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
+| **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
 
 <Admonition type="tip" title="What is a compute hour?">
 
@@ -70,7 +70,9 @@ The Free Plan includes the following usage allowances:
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
 <Admonition type="tip" title="Free Plan Compute Allowances">
-On the Free Plan, your default branch compute can run 24/7 at 0.25 vCPU with 1 GB of RAM. If you enable autoscaling, your compute can scale up to 2 vCPU with 8 GB of RAM, providing additional resources to meet peak demand. Note that enabling autoscaling may affect 24/7 availability depending on your usage patterns. The Free Plan includes 191.9 compute hours per month, with up to 5 of those compute hours per month available to non-default branches. If you go over the 5 compute hours allowance, non-default branch computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month. For example, if you signed up for the Free Plan in January, your compute allowance resets on February 1st.
+On the Free Plan, you get 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
+
+If you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 </Admonition>
 
 ## Launch
@@ -85,7 +87,7 @@ The Launch plan includes the following usage allowances:
 | ------------- | ---------------------------------------------------------------- |
 | **Projects**  | 10 Neon projects                                                 |
 | **Branches**  | 500 per project                                                  |
-| **Databases** | Unlimited                                                        |
+| **Databases** | 500 per branch                                                   |
 | **Storage**   | 10 GiB of data storage                                           |
 | **Compute**   | 300 compute hours per month for all computes across all projects |
 
@@ -117,13 +119,13 @@ The Scale plan provides full platform and support access and is designed for sca
 
 The Scale plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                 |
-| ------------- | -------------------------------------------------------------- |
-| **Projects**  | 50 Neon projects                                               |
-| **Branches**  | 500 per project                                                |
-| **Databases** | Unlimited                                                      |
-| **Storage**   | 50 GiB of data storage                                         |
-| **Compute**   | 750 compute hours a month for all computes across all projects |
+| Usage type    | Plan allowance                                                   |
+| ------------- | ---------------------------------------------------------------- |
+| **Projects**  | 50 Neon projects                                                 |
+| **Branches**  | 500 per project                                                  |
+| **Databases** | 500 per branch                                                   |
+| **Storage**   | 50 GiB of data storage                                           |
+| **Compute**   | 750 compute hours per month for all computes across all projects |
 
 ### Scale plan extra usage
 
@@ -159,7 +161,7 @@ The Business plan includes the following usage allowances:
 | ------------- | ------------------------------------------------------------------ |
 | **Projects**  | 100 Neon projects                                                  |
 | **Branches**  | 500 per project                                                    |
-| **Databases** | Unlimited                                                          |
+| **Databases** | 500 per branch                                                     |
 | **Storage**   | 500 GiB of data storage                                            |
 | **Compute**   | 1,000 compute hours per month for all computes across all projects |
 
@@ -193,9 +195,9 @@ Enterprise plan usage is entirely customizable and can support large data sizes.
 
 | Usage type    | Plan allowance   |
 | ------------- | ---------------- |
-| **Projects**  | Unlimited        |
+| **Projects**  | Custom           |
 | **Branches**  | Custom           |
-| **Databases** | Unlimited        |
+| **Databases** | Custom           |
 | **Storage**   | Large data sizes |
 | **Compute**   | Custom           |
 
@@ -204,9 +206,8 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, and compute
 - _Autosuspend_ (disabled entirely or up to **7 days**)
-- Customer-owned S3
 
-Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
+Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus Enterprise-level SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 
 If you are interested in exploring an _Enterprise_ plan with Neon, you can [request an enterprise trial](/enterprise#request-trial) or [get in touch with our sales team](/contact-sales).
 
