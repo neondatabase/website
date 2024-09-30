@@ -253,8 +253,8 @@ export default {
             light: partnersIcon,
             dark: partnersDarkIcon,
           },
-          text: 'Neon for platforms',
-          description: 'Postgres for your users',
+          text: 'Partners',
+          description: 'Add Neon to your platform',
           to: LINKS.partners,
         },
         {
