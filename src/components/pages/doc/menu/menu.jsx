@@ -118,11 +118,6 @@ const Menu = ({
     }
   }, [isLastActive, setMenuHeight, menuWrapperRef]);
 
-  const handleClose = () => {
-    setActiveMenuList((prevList) => prevList.filter((item) => item.title !== title));
-    if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
-  };
-
   if (!isRootMenu && !isActive) return null;
 
   return (
@@ -141,8 +136,7 @@ const Menu = ({
       {!isRootMenu && (
         <BackLinkTag
           className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
-          to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : LINKS.docs}
-          onClick={handleClose}
+          to={DOCS_BASE_PATH + slug}
         >
           {title}
         </BackLinkTag>
