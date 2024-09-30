@@ -116,7 +116,7 @@ const items = [
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
       { title: 'Point-in-time restore (30 days)' },
       { title: 'Private Link' },
-      { title: 'Metrics export' },
+      { title: 'Datadog integration' },
       {
         title: 'Migration assistance',
         info: 'With 0 migration fees—we will waive them',
