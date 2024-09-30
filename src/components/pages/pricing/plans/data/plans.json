@@ -308,7 +308,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Metrics export"
+        "title": "Datadog Integration"
       },
       "free": false,
       "launch": false,
