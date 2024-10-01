@@ -24,7 +24,7 @@ The Neon Datadog integration lets you monitor Neon database performance, resourc
 The integration leverages a [list of metrics](#available-metrics) that Neon makes available for export to third-party services. By configuring the integration with your Datadog API key, Neon automatically sends metrics from your project to your selected Datadog site. Some of the key metrics include:
 
 - **Connection counts** &#8212; Tracks active and idle database connections.
-- **Database size** &#8212;  Monitors total size of all databases in bytes.
+- **Database size** &#8212; Monitors total size of all databases in bytes.
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
 
