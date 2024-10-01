@@ -11,17 +11,34 @@ import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import InfoIcon from 'components/shared/info-icon';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
 
-import AWSIcon from './images/aws.inline.svg';
+const smoothScroll = (e, id) => {
+  e.preventDefault();
+  document?.getElementById(id)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+
+  // changing hash without default jumps to anchor
+  // eslint-disable-next-line no-restricted-globals
+  if (history.pushState) {
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState(null, '', `#${id}`);
+  } else {
+    // old browser support
+    window.location.hash = `#${id}`;
+  }
+};
 
 const items = [
   {
     type: 'Free Plan',
     price: 0,
-    isMarketplaceAvailable: false,
+    headerLink: undefined,
     description: 'Always-available free tier, no credit card required.',
     features: [
       {
@@ -30,7 +47,7 @@ const items = [
       },
       { title: '0.5 GiB storage' },
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
-      { title: 'Community Support' }
+      { title: 'Community Support' },
     ],
     button: {
       url: LINKS.signup,
@@ -44,24 +61,38 @@ const items = [
     highlighted: true,
     price: 19,
     priceFrom: true,
-    isMarketplaceAvailable: true,
+    headerLink: {
+      url: 'https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa',
+      text: 'Pay via marketplace AWS',
+    },
     description: 'The resources, features, and support you need to launch.',
     features: [
       {
         title: '100 projects',
         info: '500 branches per project',
-      },      
+      },
       {
         title: '10 GiB storage included',
         info: 'Additional storage: $3.5 per 2 GiB',
       },
       {
-        title: '300 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '300 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
       { title: 'Point-in-time restore (7 days)' },
-      { title: 'Standard Support' }
+      { title: 'Standard Support' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=launch`,
@@ -74,21 +105,35 @@ const items = [
     type: 'Scale',
     price: 69,
     priceFrom: true,
-    isMarketplaceAvailable: true,
+    headerLink: {
+      url: 'https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa',
+      text: 'Pay via marketplace AWS',
+    },
     description: 'More capacity and functionality for scaling production workloads.',
     features: [
       {
         title: '1,000 projects',
         info: '500 branches per project',
-      },    
+      },
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
-        title: '750 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '750 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
       { title: 'Point-in-time restore (14 days)' },
-      { title: 'Standard support' }
+      { title: 'Standard support' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=scale`,
@@ -101,16 +146,40 @@ const items = [
     type: 'Business',
     price: 700,
     priceFrom: true,
-    isMarketplaceAvailable: false,
-    description: 'For larger workloads, partners, and best compliance/security. ',
+    headerLink: {
+      url: '/migration-assistance',
+      text: 'Get migration help',
+    },
+    description: [
+      'For larger workloads, partners, and best compliance/security. ',
+      {
+        type: 'link',
+        text: 'Who is this for?',
+        href: '#business-plan',
+        onClick: (e) => {
+          smoothScroll(e, 'business-plan');
+        },
+      },
+    ],
     features: [
       {
         title: '5,000 projects',
         info: '$50 per 5,000 extra projects',
-      }, 
+      },
       { title: '500 GiB storage included', info: 'Additional storage: $5 per 10 GiB' },
       {
-        title: '1000 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '1000 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
@@ -122,7 +191,7 @@ const items = [
         info: 'With 0 migration fees—we will waive them',
       },
       { title: 'SOC 2 + 99.95% SLA' },
-      { title: 'Priority support' }
+      { title: 'Priority support' },
     ],
     button: {
       url: `${LINKS.console}/?upgrade=business`,
@@ -158,20 +227,29 @@ const Feature = ({ title, info, disabled, type, highlighted, index }) => (
     )}
   >
     {disabled ? (
-      <CrossIcon
-        className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
-        aria-hidden
-      />
+      <CrossIcon className={clsx('absolute left-0 top-0.5 h-4 w-4 text-gray-new-30')} aria-hidden />
     ) : (
       <CheckIcon
         className={clsx(
           highlighted ? 'text-green-45' : 'text-gray-new-70',
-          'absolute left-0 top-[2px] h-4 w-4'
+          'absolute left-0 top-0.5 h-4 w-4'
         )}
         aria-hidden
       />
     )}
-    <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
+    <span className="with-link-primary">
+      {Array.isArray(title)
+        ? title.map((part, i) =>
+            typeof part === 'string' ? (
+              part
+            ) : (
+              <Link key={i} to={part.href} onClick={part.onClick}>
+                {part.text}
+              </Link>
+            )
+          )
+        : title}
+    </span>
     {info && (
       <span className="whitespace-nowrap">
         &nbsp;
@@ -207,8 +285,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-      <Container className="flex flex-col items-center" size="1344">
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
+      <Container className="flex flex-col items-center" size="1472">
         <Heading
           className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
           tag="h1"
@@ -221,7 +299,7 @@ const Hero = () => {
         </p>
         <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-10 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {items.map(
               (
                 {
@@ -229,7 +307,7 @@ const Hero = () => {
                   highlighted = false,
                   price,
                   priceFrom = false,
-                  isMarketplaceAvailable,
+                  headerLink,
                   description,
                   features,
                   button,
@@ -248,17 +326,16 @@ const Hero = () => {
                     }
                   }}
                 >
-                  {isMarketplaceAvailable && (
+                  {headerLink && (
                     <a
                       className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
-                      href="https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa"
+                      href={headerLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
-                        Pay via marketplace
+                        {headerLink.text}
                       </span>
-                      <AWSIcon className="text-gray-new-50 transition-colors duration-200 group-hover/aws:text-gray-new-60" />
                     </a>
                   )}
                   <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
@@ -270,9 +347,9 @@ const Hero = () => {
                     >
                       {type}
                     </h3>
-                    <p className="relative mt-14 text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4">
+                    <p className="relative mt-[51px] text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4">
                       {priceFrom && (
-                        <em className="absolute -top-6 block text-base font-light not-italic tracking-tight text-gray-new-50 xl:relative xl:-top-1 xl:-mt-4 md:mt-0">
+                        <em className="absolute -top-5 block text-base font-light not-italic tracking-tight text-gray-new-50 xl:relative xl:-top-1 xl:-mt-4 md:mt-0">
                           From
                         </em>
                       )}
@@ -303,8 +380,18 @@ const Hero = () => {
                         {button.text}
                       </Button>
                     )}
-                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max">
-                      {description}
+                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-11 lg:min-h-max [&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent">
+                      {Array.isArray(description)
+                        ? description.map((part, i) =>
+                            typeof part === 'string' ? (
+                              part
+                            ) : (
+                              <Link key={i} to={part.href} onClick={part.onClick}>
+                                {part.text}
+                              </Link>
+                            )
+                          )
+                        : description}
                     </p>
                   </div>
                   {highlighted && (
@@ -345,12 +432,7 @@ const Hero = () => {
           Explore the{' '}
           <Button
             className="inline-block !font-light text-green-45 transition-colors duration-200 hover:text-[#00FFAA]"
-            onClick={() => {
-              document?.getElementById('plans')?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }}
+            onClick={(e) => smoothScroll(e, 'plans')}
           >
             detailed plan comparison
           </Button>
