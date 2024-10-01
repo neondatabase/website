@@ -150,17 +150,7 @@ const items = [
       url: '/migration-assistance',
       text: 'Get migration help',
     },
-    description: [
-      'For larger workloads, partners, and best compliance/security. ',
-      {
-        type: 'link',
-        text: 'Who is this for?',
-        href: '#business-plan',
-        onClick: (e) => {
-          smoothScroll(e, 'business-plan');
-        },
-      },
-    ],
+    description: 'For larger workloads, partners, and best compliance/security. ',
     features: [
       {
         title: '5,000 projects',
