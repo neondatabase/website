@@ -16,7 +16,7 @@ enableTableOfContents: true
 </DocsList>
 </InfoBlock>
 
-The Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
+Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
 <ComingSoon/>
 
@@ -28,10 +28,6 @@ The integration leverages a [list of metrics](#available-metrics) that Neon make
 - **Database size** &#8212; Monitors total size of all databases in bytes.
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
-
-## Match the Datadog site to your project region
-
-When you configure the integration, you'll be asked to choose your Datadog site. Choosing a site in the same region as your Neon project helps reduce latency and meet compliance requirements, if those are applicable.
 
 ## Prerequisites
 
@@ -47,7 +43,7 @@ Before getting started, ensure the following:
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **Datadog** card and click **Add**.
 3. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization.
-4. Select the **Datadog site** that best corresponds to your Neon project's region.
+4. Select the **Datadog site** that you used when setting up your Datadog account.
 5. Click **Confirm** to complete the integration.
 
 Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
@@ -81,7 +77,6 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 | ---------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | connection_counts                        | sql-metrics          | Connection counts. The `state` label is reported as `state` from the `pg_stat_activity` Postgres view. Example values: `state="active"`, `state="idle"`. |
 | db_total_size                            | sql-metrics          | Size of all databases for the project, measured in bytes.                                                                                                |
-| lfc_approximate_working_set_size         | sql-metrics          | (DEPRECATED) Approximate working set size in pages of 8192 bytes.                                                                                        |
 | lfc_approximate_working_set_size_windows | sql-metrics          | Approximate working set size in pages of 8192 bytes. Duration values: `duration="5m"`, `duration="15m"`, `duration="1h"`.                                |
 | lfc_cache_size_limit                     | sql-metrics          | LFC cache size limit in bytes.                                                                                                                           |
 | lfc_hits                                 | sql-metrics          | Number of cache hits in the LFC.                                                                                                                         |
