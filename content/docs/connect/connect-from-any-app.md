@@ -2,7 +2,7 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.638Z'
+updatedOn: '2024-10-01T16:52:01.966Z'
 ---
 
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
