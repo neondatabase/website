@@ -11,9 +11,18 @@ import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import InfoIcon from 'components/shared/info-icon';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import CheckIcon from 'icons/check.inline.svg';
 import CrossIcon from 'icons/cross.inline.svg';
+
+const smoothScroll = (e, id) => {
+  e.preventDefault();
+  document?.getElementById(id)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+};
 
 const items = [
   {
@@ -57,7 +66,18 @@ const items = [
         info: 'Additional storage: $3.5 per 2 GiB',
       },
       {
-        title: '300 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '300 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
@@ -87,7 +107,18 @@ const items = [
       },
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {
-        title: '750 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '750 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
@@ -109,8 +140,17 @@ const items = [
       url: '/migration-assistance',
       text: 'Get migration help',
     },
-    description:
-      'For larger workloads, partners, and best compliance/security. <a href="#business-plan">Who is this for?</a>',
+    description: [
+      'For larger workloads, partners, and best compliance/security. ',
+      {
+        type: 'link',
+        text: 'Who is this for?',
+        href: '#business-plan',
+        onClick: (e) => {
+          smoothScroll(e, 'business-plan');
+        },
+      },
+    ],
     features: [
       {
         title: '5,000 projects',
@@ -118,7 +158,18 @@ const items = [
       },
       { title: '500 GiB storage included', info: 'Additional storage: $5 per 10 GiB' },
       {
-        title: '1000 <a href="#compute-hour">compute hours</a> included',
+        title: [
+          '1000 ',
+          {
+            type: 'link',
+            text: 'compute hours',
+            href: '#compute-hour',
+            onClick: (e) => {
+              smoothScroll(e, 'compute-hour');
+            },
+          },
+          ' included',
+        ],
         info: 'Additional usage: $0.16 per compute hour',
       },
       { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
@@ -166,20 +217,29 @@ const Feature = ({ title, info, disabled, type, highlighted, index }) => (
     )}
   >
     {disabled ? (
-      <CrossIcon
-        className={clsx('absolute left-0 top-[2px] h-4 w-4 text-gray-new-30')}
-        aria-hidden
-      />
+      <CrossIcon className={clsx('absolute left-0 top-0.5 h-4 w-4 text-gray-new-30')} aria-hidden />
     ) : (
       <CheckIcon
         className={clsx(
           highlighted ? 'text-green-45' : 'text-gray-new-70',
-          'absolute left-0 top-[2px] h-4 w-4'
+          'absolute left-0 top-0.5 h-4 w-4'
         )}
         aria-hidden
       />
     )}
-    <span className="with-link-primary" dangerouslySetInnerHTML={{ __html: title }} />
+    <span className="with-link-primary">
+      {Array.isArray(title)
+        ? title.map((part, i) =>
+            typeof part === 'string' ? (
+              part
+            ) : (
+              <Link key={i} to={part.href} onClick={part.onClick}>
+                {part.text}
+              </Link>
+            )
+          )
+        : title}
+    </span>
     {info && (
       <span className="whitespace-nowrap">
         &nbsp;
@@ -215,7 +275,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
       <Container className="flex flex-col items-center" size="1472">
         <Heading
           className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
@@ -310,10 +370,19 @@ const Hero = () => {
                         {button.text}
                       </Button>
                     )}
-                    <p
-                      className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-[44px] lg:min-h-max [&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent"
-                      dangerouslySetInnerHTML={{ __html: description }}
-                    />
+                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-11 lg:min-h-max [&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent">
+                      {Array.isArray(description)
+                        ? description.map((part, i) =>
+                            typeof part === 'string' ? (
+                              part
+                            ) : (
+                              <Link key={i} to={part.href} onClick={part.onClick}>
+                                {part.text}
+                              </Link>
+                            )
+                          )
+                        : description}
+                    </p>
                   </div>
                   {highlighted && (
                     <LazyMotion features={domAnimation}>
@@ -353,12 +422,7 @@ const Hero = () => {
           Explore the{' '}
           <Button
             className="inline-block !font-light text-green-45 transition-colors duration-200 hover:text-[#00FFAA]"
-            onClick={() => {
-              document?.getElementById('plans')?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }}
+            onClick={(e) => smoothScroll(e, 'plans')}
           >
             detailed plan comparison
           </Button>
