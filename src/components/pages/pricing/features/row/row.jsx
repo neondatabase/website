@@ -18,7 +18,7 @@ const Row = ({ title, items, image, imagePosition = 'left' }) => (
       </h3>
       <ul className="mt-6 flex flex-col gap-y-6">
         {items.map(({ icon, title, text }) => (
-          <li className="flex items-start gap-x-3">
+          <li className="flex items-start gap-x-3" key={title}>
             <Image className="shrink-0" src={icon} width={24} height={24} alt="" />
             <div>
               <h4 className="text-[22px] font-medium leading-none tracking-tight">{title}</h4>
