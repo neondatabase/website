@@ -42,7 +42,7 @@ Before getting started, ensure the following:
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **Datadog** card and click **Add**.
 3. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization.
-4. Select the **Datadog site** that you used when setting up your Datadog account.
+4. Select the Datadog **site** that you used when setting up your Datadog account.
 5. Click **Confirm** to complete the integration.
 
 Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
