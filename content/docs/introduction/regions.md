@@ -9,9 +9,7 @@ updatedOn: '2024-09-03T14:54:52.675Z'
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
 
-## Available regions
-
-Neon currently supports the following AWS regions:
+## AWS regions
 
 - US East (N. Virginia) &mdash; `aws-us-east-1`
 - US East (Ohio) &mdash; `aws-us-east-2`
@@ -19,6 +17,29 @@ Neon currently supports the following AWS regions:
 - Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+
+## Azure regions
+
+- East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
+
+<Admonition type="note" title="About the Neon on Azure Beta">
+The Neon on Azure Beta is limited to the Azure East US 2 region and is not currently recommended for business-critical workloads. As a Beta release, occasional updates may require downtime.
+
+During this Beta period:
+
+- Anyone can create a Neon project in the Azure region.
+- The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
+- For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will not be counted toward your [Neon plan allowances](/docs/introduction/plans), though project allowances still apply, and [extra project units](/docs/introduction/extra-usage) will be billed accordingly.
+- [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
+
+Users with Neon projects in the Azure region will be notified before the Beta period ends, at which point usage in these projects will begin to count toward your [Neon plan allowances](/docs/introduction/plans).
+
+To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](https://neon.tech/blog#subscribe-form). Neon will soon be available through the Azure Marketplace. To be notified as soon as it's live, join our [Neon in the Azure Marketplace Waitlist](https://neon.tech/azure-marketplace).
+
+If you have any feedback about your experience with Neon on Azure, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
+</Admonition>
+
+## Request a region
 
 <RegionRequest />
 
@@ -40,7 +61,7 @@ A NAT gateway has a public IP address that external systems see when private res
 
 If you are unsure of your project's region, you can find this information in the **Project settings** widget on the **Project Dashboard**.
 
-### NAT Gateway IP Addresses by region
+### AWS NAT Gateway IP Addresses
 
 | Region                                        | NAT Gateway IP Addresses                                                               |
 | :-------------------------------------------- | :------------------------------------------------------------------------------------- |
@@ -50,6 +71,12 @@ If you are unsure of your project's region, you can find this information in the
 | Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
 | Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+
+### Azure NAT Gateway IP Addresses
+
+| Region                               | NAT Gateway IP Addresses                       |
+| :----------------------------------- | :--------------------------------------------- |
+| East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
 
 ## Move project data to a new region
 

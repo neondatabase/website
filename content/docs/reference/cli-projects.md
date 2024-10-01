@@ -105,17 +105,17 @@ neon projects create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                                                      | Type    | Required |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                   | string  |          |
-| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                             | string  |          |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string  |          |
-| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                  | string  |          |
-| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                               | boolean |          |
-| `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                     | string  |          |
-| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                             | string  |          |
-| `--set-context`  | Set the current context to the new project.                                                                                                                                                      | boolean |          |
-| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                     | string  |          |
+| Option           | Description                                                                                                                                                                                                       | Type    | Required |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                                    | string  |          |
+| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
+| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                                   | string  |          |
+| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
+| `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
+| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
+| `--set-context`  | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
+| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
 #### Examples
 
