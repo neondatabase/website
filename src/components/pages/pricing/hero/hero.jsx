@@ -22,6 +22,16 @@ const smoothScroll = (e, id) => {
     behavior: 'smooth',
     block: 'start',
   });
+
+  // changing hash without default jumps to anchor
+  // eslint-disable-next-line no-restricted-globals
+  if (history.pushState) {
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState(null, '', `#${id}`);
+  } else {
+    // old browser support
+    window.location.hash = `#${id}`;
+  }
 };
 
 const items = [
