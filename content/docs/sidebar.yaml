@@ -509,8 +509,6 @@
               slug: guides/bemi
             - title: ClickHouse
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
-            - title: DoubleCloud
-              slug: guides/logical-replication-clickhouse
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
