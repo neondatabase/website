@@ -157,13 +157,13 @@ The Business plan is designed for mid-to-large enterprises requiring higher comp
 
 The Business plan includes the following usage allowances:
 
-| Usage type    | Plan allowance                                                     |
-| ------------- | ------------------------------------------------------------------ |
-| **Projects**  | 5000 Neon projects                                                 |
-| **Branches**  | 500 per project                                                    |
-| **Databases** | 500 per branch                                                     |
-| **Storage**   | 500 GiB of data storage                                            |
-| **Compute**   | 1000 compute hours per month for all computes across all projects  |
+| Usage type    | Plan allowance                                                    |
+| ------------- | ----------------------------------------------------------------- |
+| **Projects**  | 5000 Neon projects                                                |
+| **Branches**  | 500 per project                                                   |
+| **Databases** | 500 per branch                                                    |
+| **Storage**   | 500 GiB of data storage                                           |
+| **Compute**   | 1000 compute hours per month for all computes across all projects |
 
 ### Business plan extra usage
 
