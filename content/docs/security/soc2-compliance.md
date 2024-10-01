@@ -1,7 +1,7 @@
 ---
 title: SOC 2 compliance
 enableTableOfContents: false
-updatedOn: '2024-09-02T13:42:56.664Z'
+updatedOn: '2024-10-01T22:13:33.461Z'
 ---
 
 Neon has successfully achieved both SOC 2 Type 1 and Type 2 compliance, demonstrating our commitment to data security and privacy. These compliance milestones, validated by independent auditors, affirm our adherence to the criteria set forth by the American Institute of Certified Public Accountants (AICPA) in the areas of security, availability, processing integrity, confidentiality, and privacy.
