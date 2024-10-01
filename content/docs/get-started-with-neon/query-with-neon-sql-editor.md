@@ -185,7 +185,9 @@ To use a meta-command in the SQL Editor:
 
 ## AI features
 
-<EarlyAccess/>
+<Admonition type="note">
+This feature is currently available for Neon paid plan and [Early Access](/docs/introduction/roadmap#join-the-neon-early-access-program) users.
+</Admonition>
 
 The Neon SQL Editor offers three AI-driven features:
 
