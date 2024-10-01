@@ -34,7 +34,7 @@ During this Beta period:
 
 Users with Neon projects in the Azure region will be notified before the Beta period ends, at which point usage in these projects will begin to count toward your [Neon plan allowances](/docs/introduction/plans).
 
-To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](https://neon.tech/blog#subscribe-form). Neon will soon be available through the Azure Marketplace. To be notified as soon as it's live, join our [Neon in Azure Marketplace Waitlist](https://neon.tech/azure-marketplace).
+To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](https://neon.tech/blog#subscribe-form). Neon will soon be available through the Azure Marketplace. To be notified as soon as it's live, join our [Neon in the Azure Marketplace Waitlist](https://neon.tech/azure-marketplace).
 
 If you have any feedback about your experience with Neon on Azure, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
 </Admonition>
