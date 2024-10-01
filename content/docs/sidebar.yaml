@@ -1,10 +1,5 @@
 - section: noname
   items:
-    - title: Home
-      slug: introduction
-      icon: home
-- section: noname
-  items:
     - title: Why Neon?
       icon: why-neon
       slug: get-started-with-neon/why-neon
@@ -272,6 +267,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
+      slug: manage/accounts
       items:
         - section: Access control
           items:

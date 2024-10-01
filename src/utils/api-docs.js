@@ -57,34 +57,6 @@ const getAllPosts = async () => {
 const getSidebar = () =>
   jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`, 'utf8'));
 
-const getBreadcrumbs = (slug, flatSidebar) => {
-  const path = flatSidebar.find((item) => item.slug === slug)?.path;
-  const arr = [];
-  if (path) {
-    path.reduce((prev, cur) => {
-      const current =
-        prev[cur] || prev.items?.[cur] || prev.items?.find((item) => item.slug === cur);
-      if (current && !current.section) {
-        arr.push({ title: current.title, slug: current.slug });
-      }
-      return current;
-    }, getSidebar());
-
-    return arr.slice(0, -1);
-  }
-
-  return [];
-};
-
-const getFlatSidebar = (sidebar, path = []) =>
-  sidebar.reduce((acc, item, index) => {
-    const current = { title: item.title, slug: item.slug, path: [...path, index] };
-    if (item.items) {
-      return [...acc, current, ...getFlatSidebar(item.items, current.path)];
-    }
-    return [...acc, { ...item, path: [...path, index] }];
-  }, []);
-
 const getNavigationLinks = (slug, flatSidebar) => {
   const posts = [
     ...new Map(flatSidebar.filter((item) => item.slug).map((item) => [item.slug, item])).values(),
@@ -123,8 +95,6 @@ module.exports = {
   getPostSlugs,
   getPostBySlug,
   getSidebar,
-  getBreadcrumbs,
-  getFlatSidebar,
   getNavigationLinks,
   getAllChangelogPosts,
   getAllPosts,
