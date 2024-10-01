@@ -13,7 +13,8 @@ import {
   getPostBySlug,
   getSidebar,
 } from 'utils/api-docs';
-import { getBreadcrumbs, getFlatSidebar } from 'utils/get-breadcrumbs';
+import { getBreadcrumbs } from 'utils/get-breadcrumbs';
+import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 

@@ -16,7 +16,8 @@ import {
   getPostBySlug,
   getSidebar,
 } from 'utils/api-postgres';
-import { getBreadcrumbs, getFlatSidebar } from 'utils/get-breadcrumbs';
+import { getBreadcrumbs } from 'utils/get-breadcrumbs';
+import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {
