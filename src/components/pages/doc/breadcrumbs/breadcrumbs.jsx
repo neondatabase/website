@@ -7,19 +7,13 @@ import { DOCS_BASE_PATH, POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
 
 const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
   <div className="mb-4 flex flex-wrap space-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
-    <Link
-      className="transition-colors duration-200 hover:text-black dark:hover:text-white"
-      to={DOCS_BASE_PATH}
-    >
+    <Link theme="black-white-hover" to={DOCS_BASE_PATH}>
       Docs
     </Link>
     <span>/</span>
     {isPostgresPost && (
       <>
-        <Link
-          className="transition-colors duration-200 hover:text-black dark:hover:text-white"
-          to={POSTGRES_DOCS_BASE_PATH}
-        >
+        <Link theme="black-white-hover" to={POSTGRES_DOCS_BASE_PATH}>
           Postgres
         </Link>
         <span>/</span>
@@ -33,8 +27,8 @@ const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
           {index > 0 && <span>/</span>}
           {slug ? (
             <Link
-              className="transition-colors duration-200 hover:text-black dark:hover:text-white"
-              to={DOCS_BASE_PATH + slug}
+              theme="black-white-hover"
+              to={isPostgresPost ? `${POSTGRES_DOCS_BASE_PATH}${slug}` : `${DOCS_BASE_PATH}${slug}`}
             >
               {title}
             </Link>
