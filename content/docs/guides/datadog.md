@@ -35,8 +35,7 @@ Before getting started, ensure the following:
 
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a Datadog account, your Datadog agent is set up, and you have the appropriate permissions to create an API key.
-- You know the region you selected for your Datadog account. Here's how to check: [Find your Datadog region](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
-)
+- You know the region you selected for your Datadog account. Here's how to check: [Find your Datadog region](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site)
 
 ## Steps to integrate Datadog with Neon
 
