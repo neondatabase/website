@@ -427,6 +427,10 @@
       icon: integrations
       slug: guides/integrations
       items:
+        - section: Monitor
+          items: 
+            - title: Datadog Integration
+              slug: guides/datadog
         - section: Deploy
           items:
             - title: Vercel
