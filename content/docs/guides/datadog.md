@@ -12,6 +12,7 @@ enableTableOfContents: true
 
 <DocsList title="External docs" theme="docs">
 <a href="https://docs.datadoghq.com/account_management/api-app-keys/">Datadog API and Application Keys</a>
+<a href="https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site/">Identify Datadog site</a>
 </DocsList>
 </InfoBlock>
 
@@ -38,13 +39,15 @@ Before getting started, ensure the following:
 
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a Datadog account, your Datadog agent is set up, and you have the appropriate permissions to create an API key.
+- You know the region you selected for your Datadog account. Here's how to check: [Find your Datadog region](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+)
 
 ## Steps to integrate Datadog with Neon
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **Datadog** card and click **Add**.
 3. Enter your **Datadog API key**. You can generate or retrieve these from retrieve from [API Keys](https://app.datadoghq.com/organization-settings/api-keys) your Datadog organization.
-4. Select the **Datadog site** that best corresponds to your Neon project's region.
+4. Select the **Datadog site** you used when creating your Datadog account.
 5. Click **Confirm** to complete the integration.
 
 Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
@@ -78,7 +81,6 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 |------------------------------------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | connection_counts                  | sql-metrics          | Connection counts. The `state` label is reported as `state` from the `pg_stat_activity` Postgres view. Example values: `state="active"`, `state="idle"`.|
 | db_total_size                      | sql-metrics          | Size of all databases for the project, measured in bytes.|
-| lfc_approximate_working_set_size   | sql-metrics          | (DEPRECATED) Approximate working set size in pages of 8192 bytes.|
 | lfc_approximate_working_set_size_windows | sql-metrics    | Approximate working set size in pages of 8192 bytes. Duration values: `duration="5m"`, `duration="15m"`, `duration="1h"`.|
 | lfc_cache_size_limit               | sql-metrics          | LFC cache size limit in bytes.|
 | lfc_hits                           | sql-metrics          | Number of cache hits in the LFC.|
