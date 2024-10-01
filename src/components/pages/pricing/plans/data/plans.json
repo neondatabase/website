@@ -21,7 +21,7 @@
     },
     "business": {
       "label": "Business",
-      "price": "<span>From</span> $700</span>/month</span>",
+      "price": "<span>From</span> $700<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
@@ -294,7 +294,7 @@
       "launch": false,
       "scale": false,
       "business": true
-    },    
+    },
     {
       "rows": "1",
       "feature": {
@@ -415,7 +415,7 @@
       "launch": "Standard Support",
       "scale": "Standard Support",
       "business": "Priority Support"
-    },    
+    },
     {
       "rows": "2",
       "feature": {
@@ -436,6 +436,6 @@
       "launch": false,
       "scale": false,
       "business": true
-    }  
+    }
   ]
 }
