@@ -12,7 +12,7 @@ Neon supports project deployment in several regions. We recommended that you sel
 ## AWS regions
 
 - AWS US East (N. Virginia) &mdash; `aws-us-east-1`
-- AWS  US East (Ohio) &mdash; `aws-us-east-2`
+- AWS US East (Ohio) &mdash; `aws-us-east-2`
 - AWS US West (Oregon) &mdash; `aws-us-west-2`
 - AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
 - AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
@@ -63,8 +63,8 @@ If you are unsure of your project's region, you can find this information in the
 
 ### AWS NAT Gateway IP Addresses
 
-| Region                                        | NAT Gateway IP Addresses                                                               |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------- |
+| Region                                            | NAT Gateway IP Addresses                                                               |
+| :------------------------------------------------ | :------------------------------------------------------------------------------------- |
 | AWS US East (N. Virginia) — aws-us-east-1         | 23.23.0.232, 3.222.32.110, 35.168.244.148, 54.160.39.37, 54.205.208.153, 54.88.155.118 |
 | AWS US East (Ohio) — aws-us-east-2                | 18.217.181.229, 3.129.145.179, 3.139.195.115                                           |
 | AWS US West (Oregon) — aws-us-west-2              | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
@@ -74,8 +74,8 @@ If you are unsure of your project's region, you can find this information in the
 
 ### Azure NAT Gateway IP Addresses
 
-| Region                               | NAT Gateway IP Addresses                       |
-| :----------------------------------- | :--------------------------------------------- |
+| Region                                     | NAT Gateway IP Addresses                       |
+| :----------------------------------------- | :--------------------------------------------- |
 | Azure East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
 
 ## Move project data to a new region
