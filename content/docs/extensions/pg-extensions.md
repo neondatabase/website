@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-09-26T13:33:08.727Z'
+updatedOn: '2024-09-30T21:23:25.539Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (-) indicates that an extension is not yet supported.
@@ -73,6 +73,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [refint (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                         |    1.0 |    1.0 |    1.0 |   1.0 |                                                                                                                                                                           |
 | [rum](https://github.com/postgrespro/rum)                                                        |    1.3 |    1.3 |    1.3 |     - |                                                                                                                                                                           |
 | [seg](https://www.postgresql.org/docs/16/seg.html)                                               |    1.4 |    1.4 |    1.4 |   1.4 |                                                                                                                                                                           |
+| [semver](https://pgxn.org/dist/semver)                                                           | 0.32.1 | 0.32.1 | 0.32.1 |     - |                                                                                                                                                                           |
 | [tablefunc](https://www.postgresql.org/docs/16/tablefunc.html)                                   |    1.0 |    1.0 |    1.0 |   1.0 |                                                                                                                                                                           |
 | [tcn](https://www.postgresql.org/docs/16/tcn.html)                                               |    1.0 |    1.0 |    1.0 |   1.0 |                                                                                                                                                                           |
 | [timescaledb](/docs/extensions/timescaledb)                                                      | 2.10.1 | 2.10.1 | 2.13.0 |     - | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                              |
