@@ -67,7 +67,7 @@ All metrics include the following labels:
 Here's an example of the metric `db_total_size` with all labels:
 
 ```json shouldWrap
-db_total_size{project_id="square-daffodil-12345678", endpoint_id="54321", compute_id="ep-shrill-blaze-b4hry7fg", job="sql-metrics"} = 10485760
+db_total_size{project_id="square-daffodil-12345678", endpoint_id="ep-aged-art-260862", compute_id="compute-shrill-blaze-b4hry7fg", job="sql-metrics"} 10485760
 ```
 
 <Admonition type="note">
