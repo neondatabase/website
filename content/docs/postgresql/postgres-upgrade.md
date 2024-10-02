@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2024-09-24T09:39:48.635Z'
+updatedOn: '2024-10-01T20:18:22.320Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -58,7 +58,7 @@ Neon supports the following dump and restore options:
 
   If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
 
-- [Migrate data with the @neondatabase/pg-import CLI](docs/import/migrate-from-postgres-pg-import)
+- [Migrate data with the @neondatabase/pg-import CLI](/docs/import/migrate-from-postgres-pg-import)
 
   This experimental CLI utility is built on top of the piping method described above.
 
