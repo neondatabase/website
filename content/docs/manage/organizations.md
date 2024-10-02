@@ -25,15 +25,15 @@ Each organization is made up of three types of users:
 
 Here's a breakdown of what actions each role can take:
 
-| Action                                                                   | Admin | Member | Collaborator |
-| ------------------------------------------------------------------------ | :---: | :----: | :---: |
-| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ✅   |  ❌   |
-| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ❌   |  ❌   |
-| Manage [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
-| Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |  ✅   |
-| [Set permissions](/docs/manage/orgs-manage#set-permissions)              |  ✅   |   ❌   |  ❌   |
-| [Manage billing](/docs/manage/orgs-manage#billing)                       |  ✅   |   ❌   |  ❌   |
-| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)   |  ✅   |   ❌   |  ❌   |
+| Action                                                                                 | Admin | Member | Collaborator |
+| -------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
+| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ✅   |      ❌      |
+| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ❌   |      ❌      |
+| Manage [members](/docs/manage/orgs-manage#invite-members)                              |  ✅   |   ❌   |      ❌      |
+| Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |      ✅      |
+| [Set permissions](/docs/manage/orgs-manage#set-permissions)                            |  ✅   |   ❌   |      ❌      |
+| [Manage billing](/docs/manage/orgs-manage#billing)                                     |  ✅   |   ❌   |      ❌      |
+| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                 |  ✅   |   ❌   |      ❌      |
 
 ## Create an organization
 
