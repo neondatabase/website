@@ -92,7 +92,7 @@ Neon is a Postgres provider that offers a much more modern developer experience 
 
 ### How much savings are we talking about?
 
-By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs by 70%**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
+By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs up to 75%**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
 
 ### Show me a real use case example
 
@@ -128,6 +128,6 @@ We’ve built tutorials that teach you **how to run a nightly dump from RDS to N
 
 - [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
 - [Learn how to deploy a change tested in Neon to prod in RDS](/blog/neon-twin-deploy-workflow)
-- [Use this app to easily build your dump/restore workflows](/dev-for-rds) (scroll down until you see `Neon Twin`)
+- [Use this app to easily build your dump/restore workflows](/dev-for-rds) (click and scroll down until you see `Neon Twin`)
 
 <CTA title="Get 1:1 help" description="We’re also running a pilot program where we offer close assistance to help you set up your non-prod environments in Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
