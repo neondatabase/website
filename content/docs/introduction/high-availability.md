@@ -10,43 +10,13 @@ At Neon, our serverless architecture is resilient by default, with the separatio
 
 Based on this separation, we can break HA into two main parts:
 
-- **Compute resiliency** &#8212; _Keeping your application continuously connected_
-
-  Our architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
-
 - **Storage redundancy** &#8212; _Protecting both your long-term and active data_
 
   On the storage side, all data is backed by cloud object storage for long-term safety, while Pageserver and Safekeeper services are distributed across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) to provide redundancy for the cached data used by compute.
 
-## Compute resiliency
+- **Compute resiliency** &#8212; _Keeping your application continuously connected_
 
-Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
-
-### Compute endpoints are metadata
-
-To understand how connections are maintained, think of your compute endpoint as metadata — with your connection string being the core element. The endpoint is not permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon creates a new VM in a Kubernetes node and attaches your compute endpoint to this VM.
-
-#### Postgres failure
-
-Postgres runs inside the VM. If Postgres crashes, the VM detects the issue and restarts Postgres automatically, typically within a few seconds.
-
-![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
-
-#### VM failure
-
-In rarer cases, the VM itself may fail. If this happens, Neon immediately spins up a new VM and reattaches your compute endpoint. This process takes slightly longer than restarting Postgres but still typically happens within seconds. It's similar to what happens during an [Autosuspend](/docs/guides/auto-suspend-guide) restart: when a compute has been inactive for a set period, the VM is torn down, and when it's needed again, Neon spins up a new VM and reattaches the endpoint, just as it would after a failover.
-
-![VM restarting after failure](/docs/introduction/vm_fails.png)
-
-### What are the impacts on session data after a failure?
-
-While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
-
-### What about node-level failures?
-
-The majority of failures are resolved at the Postgres or VM level. In the rare instance of a node-level failure — which can affect many users — recovery involves restarting and reassigning multiple VMs. These incidents can take longer to recover from, though again, your data remains safe throughout. Other issues, for example, if VM performance degrades but does not fail, detection and recovery can also take longer to resolve.
-
-For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
+  Our architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
 
 ## Storage redundancy
 
@@ -71,6 +41,44 @@ In this architecture:
 - **Object storage**
 
   The primary, long-term copy of your data resides in **cloud object storage**, with **99.999999999%** durability, ensuring protection against permanent data loss in the event of Pageserver or Safekeeper failure.
+
+## Compute resiliency
+
+While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
+
+### Compute endpoints as metadata
+
+Think of your compute endpoint as metadata — with your connection string being the core element. The endpoint isn't permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon reassigns to a pre-created VM and attaches your compute endpoint to this VM.
+
+#### Postgres failure
+
+Postgres runs inside the VM. If Postgres crashes, an internal Neon process detects the issue and autoatically restarts Postgres. This recovery process typically completes within a few seconds.
+
+![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
+
+#### VM failure
+
+In rarer cases, the VM itself may fail due to issue like a kernel panic or being terminated by the host. When this happens, Neon recreates the same VMand reattaches your compute endpoint. This process may take a little longer than restarting Postgres but still typically resolves in seconds.
+
+Note that during a VM failure recovery, we don't use pre-created VMs from the pool as we do during normal restarts (like after an [autosuspend](/docs/guides/auto-suspend-guide). Instead, we recreate the same VM.
+
+![VM restarting after failure](/docs/introduction/vm_fails.png)
+
+### Impact on session data after a failure?
+
+While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
+
+### What about node-level failures?
+
+Most failures are resolved at the Postgres or VM level. In the rare case of a node-level failure — which can affect multiple users — recovery involves restarting and reassigning multiple VMs. These incidents can take longer to recover from compared to individual VM or Postgres failures, but your data remains safe in cloud object storage.
+
+Performance degradation without a complete failure is also a potential risk. Detecting and recovering from these issues can also take longer to resolve.
+
+<Admonition type="note">
+Neon is actively working to reduce recovery times for node-level failures and performance degradation issues to enhance overall system resiliency.
+</Admonition>
+
+For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
 
 ## Limitations
 
