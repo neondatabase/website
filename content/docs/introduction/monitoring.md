@@ -21,6 +21,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party client tools like PgHero and PgAdmin" icon="wrench">External tools</a>
 
+<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Export metrics to Datadog</a>
+
 </DetailIconCards>
 
 ## Feedback and future improvements
