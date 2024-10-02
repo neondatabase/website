@@ -8,13 +8,12 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 **TL:DR**
 
 - [Neon](/) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
-- There are many advantages of using Neon for production, but we know it—migrating a production database is a pain. But there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
-- What we’re talking about:
-  - You keep your production DB in your current Postgres, e.g. RDS;
-  - You migrate your non-prod environments to Neon;
-  - To build / test / debug in Neon, you create branches instantly via copy-on-write instead of configuring instances; you integrate them with your CI/CD; you sync datasets in one click.
-  - Once the changes are tested, you apply them to prod in RDS.
-- You not only gain in terms of developer experience—Neon can also save you up to 75% vs AWS RDS in your non-prod costs. Why: in Neon, you only pay for storage once (all branches share the same storage), and you only pay for compute when your DBs are actually running.
+- Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
+  - You can keep your production DB in your current Postgres, e.g. RDS;
+  - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily);
+  - To build / test / debug in Neon.
+  - Once the changes are tested, you apply them back to prod. 
+- What you get: more developer velocity with up to 75% less costs.
 - You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
 
 ## AWS RDS is fine for prod, but terrible for dev
