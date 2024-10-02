@@ -35,7 +35,7 @@ The integration leverages a [list of metrics](#available-metrics) that Neon make
 Before getting started, ensure the following:
 
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
-- You have a Datadog account, your Datadog agent is set up, and you have the appropriate permissions to create an API key.
+- You have a Datadog account and API key.
 - You know the region you selected for your Datadog account. Here's how to check: [Find your Datadog region](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site)
 
 ## Steps to integrate Datadog with Neon
@@ -47,6 +47,10 @@ Before getting started, ensure the following:
 5. Click **Confirm** to complete the integration.
 
 Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
+
+<Admonition type="note">
+Your Neon compute must be active in order to send metrics.
+</Admonition>
 
 ## Example usage in Datadog
 
