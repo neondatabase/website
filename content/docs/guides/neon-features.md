@@ -109,13 +109,13 @@ Compare your database branches.
 
 </DetailIconCards>
 
-### Project sharing
+### Project collaboration
 
-Share your Neon project with anyone.
+Invite others to collaborate on your Neon project.
 
 <DetailIconCards>
 
-<a href="/docs/guides/project-sharing-guide" description="Give other users access to your project from the Neon Console, API, and CLI" icon="respond-arrow">Share your Neon project with others</a>
+<a href="/docs/guides/project-collaboration-guide" description="Give other users access to your project from the Neon Console, API, and CLI" icon="respond-arrow">Collaborate on your Neon project</a>
 
 </DetailIconCards>
 

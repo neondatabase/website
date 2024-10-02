@@ -2,6 +2,8 @@
 title: Project collaboration
 subtitle: Learn how to invite people to collaborate on your Neon project
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/project-sharing-guide
 updatedOn: '2024-09-19T14:13:04.113Z'
 ---
 

@@ -378,9 +378,9 @@ A collection of branches, databases, roles, and other project resources and sett
 
 A string that identifies your Neon project. Neon Project IDs are generated Heroku-like memorable random names, similar to `cool-forest-86753099`. You can find your project ID by navigating to your project in the Neon Console and selecting **Settings** from the sidebar. The project ID is also visible in the Neon Console URL after navigating to a project: `https://console.neon.tech/app/projects/cool-forest-86753099`
 
-## Project Sharing
+## Project Collaboration
 
-A feature that allows you to share Neon projects with other Neon users. See [Share a project](/docs/manage/projects#share-a-project) for more information.
+A feature that allows you to invite other Neon users to collaborate on your Neon projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
 
 ## Project storage
 
