@@ -94,8 +94,6 @@ updatedOn: '2024-09-16T13:02:12.677Z'
 
 <a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
 
-<a href="/docs/guides/logical-replication-clickhouse" title="DoubleCloud" description="Replicate data from Neon to ClickHouse with DoubleCloud" icon="doublecloud"></a>
-
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>

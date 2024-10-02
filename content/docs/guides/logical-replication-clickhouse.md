@@ -6,6 +6,12 @@ isDraft: false
 updatedOn: '2024-08-23T17:19:28.787Z'
 ---
 
+<Admonition type="warning">
+**DoubleCloud is winding down operations**. Please see the [DoubleCloud announcement](https://double.cloud/blog/posts/2024/10/doublecloud-final-update/) for details. DoubleCloud will stop creating new accounts on October 1st, and existing DoubleCloud clients will have an opportunity to transition from DoubleCloud until March 1st, 2025.
+
+Neon will remove DoubleCloud documentation from our site in the near future.
+</Admonition>
+
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
 ClickHouse is an open-source column-oriented database that allows you to query billions of rows in milliseconds.
