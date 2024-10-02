@@ -1,10 +1,5 @@
 - section: noname
   items:
-    - title: Home
-      slug: introduction
-      icon: home
-- section: noname
-  items:
     - title: Why Neon?
       icon: why-neon
       slug: get-started-with-neon/why-neon
@@ -274,6 +269,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
+      slug: manage/accounts
       items:
         - section: Access control
           items:
@@ -292,10 +288,8 @@
                   slug: manage/orgs-api
                 - title: CLI actions
                   slug: manage/orgs-cli
-            - title: Project access
-              slug: manage/project-access
-            - title: Project sharing
-              slug: guides/project-sharing-guide
+            - title: Project collaboration
+              slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
             - title: E-mail signup
@@ -433,6 +427,10 @@
       icon: integrations
       slug: guides/integrations
       items:
+        - section: Monitor
+          items: 
+            - title: Datadog Integration
+              slug: guides/datadog
         - section: Deploy
           items:
             - title: Vercel
@@ -847,6 +845,12 @@
     - title: Extensions
       slug: extensions/extensions-intro
       icon: frameworks
+    - title: Version support
+      slug: postgresql/postgres-version-policy
+      icon: why-neon
+    - title: Upgrade
+      slug: postgresql/postgres-upgrade
+      icon: import
 - section: Resources
   items:
     - title: Partner guide

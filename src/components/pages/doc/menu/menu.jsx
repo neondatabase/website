@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH, HOME_MENU_ITEM } from 'constants/docs';
+import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
-import ChevronBackIcon from 'icons/docs/sidebar/chevron-back.inline.svg';
-import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
 
 import Item from './item';
 
@@ -102,11 +100,10 @@ const Menu = ({
   const menuRef = useRef(null);
   const lastDepth = activeMenuList.length - 1;
 
+  const BackLinkTag = parentMenu?.slug ? Link : 'button';
+
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
   const isLastActive = activeMenuList[lastDepth]?.title === title;
-
-  const BackLinkTag = parentMenu?.slug ? Link : 'button';
-  const LinkTag = slug ? Link : 'div';
 
   const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
   const docsHomePath = LINKS.docsHome;
@@ -121,70 +118,39 @@ const Menu = ({
     }
   }, [isLastActive, setMenuHeight, menuWrapperRef]);
 
+  if (!isRootMenu && !isActive) return null;
+
   const handleClose = () => {
-    setActiveMenuList((prevList) => prevList.filter((item) => item.title !== title));
     if (parentMenu?.slug && closeMobileMenu) closeMobileMenu();
   };
-
-  const handleClickHome = () => {
-    setActiveMenuList([HOME_MENU_ITEM]);
-  };
-
-  if (!isRootMenu && !isActive) return null;
 
   return (
     <div
       className={clsx(
-        'absolute left-0 top-0 w-full pb-16',
+        'absolute left-0 top-0 w-full px-[52px] pb-16 xl:px-8',
         !isActive && 'pointer-events-none',
         !isRootMenu && 'translate-x-full',
         'lg:px-8 lg:pb-8 lg:pt-4 md:px-5',
-        (isActive || isRootMenu) && 'opacity-1'
+        (isActive || isRootMenu) && 'opacity-100'
       )}
       style={isRootMenu ? { transform: `translateX(${lastDepth * -100}%)` } : undefined}
       ref={menuRef}
     >
       {/* breadcrumbs, menu title and home link */}
       {!isRootMenu && (
-        <>
-          <div className="flex flex-col gap-7 border-b border-gray-new-94 pb-4 dark:border-gray-new-10 md:pb-3.5">
-            {depth > 0 && (
-              <BackLinkTag
-                className="flex items-center gap-2 text-sm font-medium leading-tight tracking-extra-tight text-secondary-8 dark:text-green-45"
-                type={parentMenu.slug ? undefined : 'button'}
-                to={parentMenu.slug ? `${basePath}${parentMenu.slug}` : undefined}
-                onClick={handleClose}
-              >
-                <ChevronBackIcon className="size-4.5" />
-                Back to {parentMenu.title}
-              </BackLinkTag>
-            )}
-            {depth !== 1 && (
-              <Link
-                className={clsx(
-                  'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-                  'text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
-                )}
-                to={homePath}
-                onClick={handleClickHome}
-              >
-                <HomeIcon className="size-4.5" />
-                Home
-              </Link>
-            )}
-          </div>
-
-          <LinkTag
-            className="mt-4 flex w-full items-start gap-1.5 pb-2.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white md:hidden"
-            to={slug ? `${basePath}${slug}` : undefined}
-          >
-            {title}
-          </LinkTag>
-        </>
+        <BackLinkTag
+          className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
+          to={`${basePath}${slug}`}
+          onClick={handleClose}
+        >
+          {title}
+        </BackLinkTag>
       )}
 
       {/* menu sections and items */}
-      <ul className={clsx('w-full', !isRootMenu && 'py-2.5')}>
+      <ul
+        className={clsx('w-full', !isRootMenu && 'py-2.5', !isActive ? 'opacity-0' : 'opacity-100')}
+      >
         {items.map((item, index) =>
           item.section ? (
             <Section

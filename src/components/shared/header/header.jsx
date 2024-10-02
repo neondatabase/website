@@ -219,8 +219,14 @@ const Header = async ({
               className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5"
               size="1408"
             >
-              <div className="hidden lg:block">
+              <div className="hidden lg:flex lg:items-center lg:gap-x-7">
                 <LogoLink isDarkTheme={isDarkTheme} />
+                <Link
+                  className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
+                  to={LINKS.docs}
+                >
+                  Docs
+                </Link>
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
                 <InkeepTrigger className="w-[272px]" showAIButton />

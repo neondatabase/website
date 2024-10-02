@@ -4,7 +4,7 @@ subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
-updatedOn: '2024-09-18T16:25:02.707Z'
+updatedOn: '2024-10-01T11:27:34.801Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -182,5 +182,24 @@ To use a meta-command in the SQL Editor:
    For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
 
    ![metacommand example](/docs/get-started-with-neon/sql_editor_metacommand.png)
+
+## AI features
+
+<Admonition type="note">
+This feature is currently available for Neon paid plan and [Early Access](/docs/introduction/roadmap#join-the-neon-early-access-program) users.
+</Admonition>
+
+The Neon SQL Editor offers three AI-driven features:
+
+- **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
+  ![SQL generation](/docs/get-started-with-neon/sql_editor_ai.png)
+- **Fix with AI**: If your query returns an error, simply click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor so you can run the query again.
+  ![Fix withn AI](/docs/get-started-with-neon/fix_with_ai.png)
+- **AI-generated query names**: Descriptive names are automatically assigned to your queries in the Neon SQL Editor's **History**. This feature helps you quickly identify and reuse previously executed queries.
+  ![AI-generated query names](/docs/get-started-with-neon/query_names.png)
+
+<Admonition type="important">
+To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
+</Admonition>
 
 <NeedHelp/>

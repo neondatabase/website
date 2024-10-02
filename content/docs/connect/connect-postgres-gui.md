@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2024-09-17T11:22:14.657Z'
+updatedOn: '2024-09-28T12:00:21.723Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -88,6 +88,7 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [TablePlus](https://tableplus.com/)                                                                                           | SNI support on macOS since build 436, and on Windows since build 202. No SNI support on Linux currently. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field).                                                                                                                                 |
 | [Segment](https://segment.com/)                                                                                               | Requires [SNI workaround D](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field)                                                                                                                                                                                                                                                            |
 | [Skyvia](https://skyvia.com/)                                                                                                 | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2. The other SSL fields are not required for **SSL Mode**: `Require`.                                                                                                                                                                                                              |
+| [Zoho Analytics](https://www.zoho.com/analytics/)                                                                             | Requires selecting **Other Cloud Services** as the Cloud Service Provider, and the **Connect directly using IP address** and **Use SSL** options when configuring a PostgreSQL connection.                                                                                                                                                                              |
 
 ## Connection issues
 

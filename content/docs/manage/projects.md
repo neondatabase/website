@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-09-06T12:09:44.681Z'
+updatedOn: '2024-10-01T16:52:01.971Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Plan limits you to one project per Neon account.
@@ -49,7 +49,7 @@ Here are some basic actions you can take to add or manage projects:
 - [View projects](#view-projects)
 - [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
 - [Delete a project](#delete-a-project)
-- [Share a project](#share-a-project)
+- [Invite collaborators to a project](#invite-collaborators-to-a-project)
 
 ### Create a project
 
@@ -59,14 +59,15 @@ To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
    - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
 
-4. Click **Create Project**.
+4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
+5. Click **Create Project**.
 
-After creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
+After creating a project, you are presented with a dialog that provides your connection details for your database. The connection details include your password.
 
 <Admonition type="tip">
 Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken straight to the **Create project** page where you can create your new project.
@@ -109,23 +110,23 @@ To delete a project:
 If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
-### Share a project
+### Invite collaborators to a project
 
-Neon's project sharing feature allows you to share your project with other Neon accounts.
+Neon's project collaboration feature allows you to invite other Neon accounts to collaborate on a Neon project.
 
-To share a project:
+To invite collaborators to a Neon project:
 
 1. In the Neon Console, select a project.
 1. Select **Project settings**.
-1. Select **Sharing**.
-1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
-1. Click **Grant access**.
+1. Select **Collaborators**.
+1. Select **Invite** and enter the email address of the account you want to collaborate with.
+1. Click **Invite**.
 
-The email you specify is added to the list of **Users with access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also invite other Neon users to a project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page, under **Shared with you**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
-For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
+For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
 ## Advanced settings
 
@@ -212,7 +213,7 @@ Optionally, you can allow unrestricted access to your project's [non-default bra
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
-Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
+Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon project provisioned on Azure currently on support IPv4.
 </Admonition>
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
@@ -313,7 +314,11 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   203.0.113.0/24
   ```
 
-- **Use IPv6 addresses**: Neon also supports specifying IPv6 addresses. For example:
+- **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
+
+  <Admonition type="note">
+  IPv6 is not yet supported for projects provisioned on on Azure.
+  </Admonition>
 
   ```text
   2001:DB8:5432::/48

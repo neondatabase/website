@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-09-06T12:09:44.678Z'
+updatedOn: '2024-09-23T19:07:35.840Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -127,7 +127,7 @@ To learn more about monitoring resources and metrics in Neon, check out our [Mon
 
 ## Create staging or test branches
 
-With Neon branching, you can easily create an isolated copy of your production database for est schema changes and application updates before deploying to production. To get an idea of how easily you can create a branch for testing, see our [Branching — Testing queries](/docs/guides/branching-test-queries) guide.
+With Neon branching, you can easily create an isolated copy of your production database for test schema changes and application updates before deploying to production. To get an idea of how easily you can create a branch for testing, see our [Branching — Testing queries](/docs/guides/branching-test-queries) guide.
 
 The [Neon CLI](/docs/reference/neon-cli) and [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) enable you to automate testing and build CI/CD pipelines to streamline your testing processes.
 

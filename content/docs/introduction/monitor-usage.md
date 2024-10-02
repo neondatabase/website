@@ -5,7 +5,7 @@ subtitle: Monitor billing and usage metrics for your account and projects from t
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2024-09-05T17:14:45.244Z'
+updatedOn: '2024-09-28T10:31:46.950Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
@@ -47,7 +47,7 @@ The peak usage triangle indicates the highest usage level reached for that metri
 - **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 
   <Admonition type="note">
-  On the Free Plan, [default branch](/docs/reference/glossary#default-branch) compute starts at 0.25 vCPU with 1 GB RAM and can run 24/7. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times; note that autoscaling can affect 24/7 availability depending on your usage patterns. Your account includes 191.9 compute hours per month, with up to 5 of those hours available to non-default branches.
+  On the Free Plan, you get 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
   </Admonition>
 
 - **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, the Scale plan allows up to 14 days, and the Business plan offers up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).

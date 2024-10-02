@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
+import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
+import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Admonition from 'components/shared/admonition';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
@@ -12,7 +14,10 @@ import {
   getAllPosts,
   getNavigationLinks,
   getPostBySlug,
+  getSidebar,
 } from 'utils/api-postgres';
+import { getBreadcrumbs } from 'utils/get-breadcrumbs';
+import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {
@@ -48,6 +53,10 @@ function findH1(content) {
 const PostgresPage = async ({ params }) => {
   const { slug: currentSlug } = params;
 
+  const sidebar = getSidebar()['0'].items;
+  const flatSidebar = getFlatSidebar(sidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
+
   const post = await getPostBySlug(`/${currentSlug}`, POSTGRES_DIR_PATH);
 
   if (!post) return notFound();
@@ -59,7 +68,10 @@ const PostgresPage = async ({ params }) => {
 
   return (
     <div className="col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 lg:max-w-none">
-      <article className="-mt-5 lg:mt-0">
+      {breadcrumbs.length > 0 && (
+        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} isPostgresPost />
+      )}
+      <article className={clsx('lg:mt-0', { '-mt-5': breadcrumbs.length === 0 })}>
         {!hasH1 && <h1 className="sr-only">{title}</h1>}
         <Admonition type="note">
           This mirror of{' '}

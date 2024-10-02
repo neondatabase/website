@@ -60,7 +60,9 @@ const Post = ({
           : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
       )}
     >
-      {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      {breadcrumbs.length > 0 && (
+        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
+      )}
       {isChangelog ? (
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
       ) : (

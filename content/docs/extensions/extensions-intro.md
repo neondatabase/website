@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-07-30T20:25:11.763Z'
+updatedOn: '2024-09-30T21:23:25.537Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -80,6 +80,8 @@ Explore supported Postgres extensions by category. Also see:
 <a href="https://github.com/pksunkara/pgx_ulid" description="A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers)" icon="data">pgx_ulid</a>
 
 <a href="https://www.postgresql.org/docs/16/seg.html" description="Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications" icon="data">seg</a>
+
+<a href="https://pgxn.org/dist/semver" description="A Postgres data type for the Semantic Version format with support for btree and hash indexing" icon="data">semver</a>
 
 <a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically" icon="data">tablefunc</a>
 
