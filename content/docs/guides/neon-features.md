@@ -111,7 +111,7 @@ Compare your database branches.
 
 ### Project collaboration
 
-Invite others to collaborate on your Neon project.
+Invite other users to collaborate on your Neon project.
 
 <DetailIconCards>
 
