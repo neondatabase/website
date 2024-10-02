@@ -30,7 +30,7 @@ You can select different periods or a custom period within the permitted range f
 
 The dashboard displays metrics for the selected **Branch** and **Compute**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
 
-If your compute was idle or there has not been much activity, charts may display this message: `There is no data to display. Try a different time period or check back later`. In this case, try selecting a different time period or returning later after more usage data has been collected.
+If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display. Try a different time period or check back later`. In this case, try selecting a different time period or returning later after more usage data has been collected.
 
 <Admonition type="note">
 The values and plotted lines in your graphs display `0` during periods when your compute is inactive. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute autosuspends due to inactivity. The information displayed when hovering over a graph will indicate that the endpoint is inactive, meaning there was no activity on the compute. Inactive periods are also represented in a graph by a background with a diagonal line pattern.
@@ -48,7 +48,7 @@ RAM is allocated according to the size of your compute or your [autoscaling](/do
 
 **Used**: The amount of RAM used.
 
-The chart plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 **Cached**: The amount of data cached in memory.
 
@@ -114,30 +114,30 @@ Tracking rows inserted, updated, and deleted over time provides insights into yo
 
 ![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
 
-The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
 ### Replication delay seconds
 
 ![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)
 
-The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This chart is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
 ### Local file cache hit rate
 
-![local file cache hit rate chart](/docs/introduction/local_file_cache_hit_rate.png)
+![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
 The **Local file cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). 
-Queries not served from either Postgres shared buffers (128 MB on all Neon computes) or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+Queries not served from either Postgres shared buffers (128 MB on all Neon computes) or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ### Working set size
 
-![working set size chart](/docs/introduction/working_set_size.png)
+![working set size graph](/docs/introduction/working_set_size.png)
 
-Your working set is recently accessed data and indexes stored in memory (in Neon's [Local File Cache](/docs/extensions/neon#what-is-the-local-file-cache)) for quick access.
+Your working set is recently accessed data and indexes stored in memory&#8212;in Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** chart provides a visual representation of how much data is being accessed in memory over different time intervals. Here’s how to interpret each part of the chart:
+The **Working set size** graph provides a visual representation of how much data is being accessed from the LFC over different time intervals. Here’s how to interpret the graph:
 
 - **5m** (5 minutes): This line shows how much data has been accessed from the cache in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed from the cache over the last 15 minutes.
-- **1h** (1 hour): This line represents the amount of data actively accessed from the cache in the last hour.
-- **Local file cache size**: This is the size of the the Local File Cache (LFC), which is determined by the size of your compute. If you have enabled autoscaling, the size will likely change over time as the compute size scales up and down. Larger computes offer larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- **1h** (1 hour): This line represents the amount of data accessed from the cache in the last hour.
+- **Local file cache size**: This is the size of the the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).

@@ -23,7 +23,7 @@ When data is requested, Postgres checks shared buffers first, then the LFC. If t
 
 ## Monitoring Local File Cache usage
 
-You can monitor Local File Cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](/docs/) view or by monitoring the [Local file cache hit rate](/docs/introduction/monitoring-page) graph on the **Monitoring** page in the Neon console.
+You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](/docs/) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console.
 
 ## neon_stat_file_cache view
 
