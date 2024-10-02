@@ -3,7 +3,7 @@ title: Replicate data to a ClickHouse database on DoubleCloud
 subtitle: Learn how to replicate data from Neon to a ClickHouse database on DoubleCloud
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-23T17:19:28.787Z'
+updatedOn: '2024-10-02T13:57:11.420Z'
 ---
 
 <Admonition type="warning">
