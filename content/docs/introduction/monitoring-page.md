@@ -126,7 +126,8 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![local file cache hit rate chart](/docs/introduction/local_file_cache_hit_rate.png)
 
-The **Local file cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). Queries not served from memory retrieve data from storage, which is more costly and can result in slower query performance. For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. To learn more, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+The **Local file cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). 
+Queries not served from either Postgres shared buffers (128 MB on all Neon computes) or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ### Working set size
 

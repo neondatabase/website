@@ -13,15 +13,19 @@ The `neon` extension provides functions and views designed to gather Neon-specif
 
 ## The neon_stat_file_cache view
 
-The `neon_stat_file_cache` view provides insights into how effectively the Local File Cache (LFC) is being used.
+The `neon_stat_file_cache` view provides insights into how effectively your Neon compute's Local File Cache (LFC) is being used.
 
-### What is the Local File Cache?
+## What is the Local File Cache?
 
-Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage (the [Pageserver](/docs/reference/glossary#pageserver)) repeatedly. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter is always set to 128 MB, regardless of compute size. The LFC extends the cache memory to approximately 80% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter is always set to 128 MB, regardless of compute size. The LFC extends the cache memory to approximately 80% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
-When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most frequently or most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
+When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
 
-### neon_stat_file_cache metrics
+## Monitoring Local File Cache usage
+
+You can monitor Local File Cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](/docs/) view or by monitoring the [Local file cache hit rate](/docs/introduction/monitoring-page) graph on the **Monitoring** page in the Neon console.
+
+## neon_stat_file_cache view
 
 The `neon_stat_file_cache` view includes the following metrics:
 
@@ -47,16 +51,16 @@ To install the extension on a database:
 CREATE EXTENSION neon;
 ```
 
-To connect to the Neon-managed `postgres` database instead:
+To connect to your database. You can find a connection string for yoru database on the Neon Dashboard.
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
 
 ```shell
-\c postgres
+\c dbname
 ```
 
 Issue the following query to view LFC usage data for your compute:
@@ -70,9 +74,11 @@ SELECT * FROM neon_stat_file_cache;
 
 <Admonition type="note">
 Local File Cache statistics represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
+
+Remember that Postgres checks shared buffers first before it checks your compute's Local File Cache. If you are only working with a small amount of data, queries may be served entirely from the shared buffers, resulting in no LFC hits.
 </Admonition>
 
-### View LFC metrics with EXPLAIN ANALYZE
+## View LFC metrics with EXPLAIN ANALYZE
 
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `noen` extension is not required. For example:
 
