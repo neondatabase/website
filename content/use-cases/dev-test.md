@@ -12,7 +12,7 @@ updatedOn: '2024-08-23T09:00:00.000Z'
   - You can keep your production DB in your current Postgres, e.g. RDS;
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily);
   - To build / test / debug in Neon.
-  - Once the changes are tested, you apply them back to prod. 
+  - Once the changes are tested, you apply them back to prod.
 - What you get: more developer velocity with up to 75% less costs.
 - You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
 
