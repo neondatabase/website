@@ -36,7 +36,9 @@ In this architecture:
 
 - **Pageservers**
 
-  Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. In case of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a healthy Pageserver. The system continuously monitors the health of Pageservers using a heartbeat mechanism to ensure timely detection and failover.
+ Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. To ensure high availability, Neon employs secondary Pageservers that maintain up-to-date copies of project data.
+
+ In the event of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a secondary Pageserver. The system continuously monitors Pageserver health using a heartbeat mechanism to ensure timely detection and failover.
 
 - **Object storage**
 
@@ -52,31 +54,21 @@ Think of your compute endpoint as metadata — with your connection string being
 
 #### Postgres failure
 
-Postgres runs inside the VM. If Postgres crashes, an internal Neon process detects the issue and autoatically restarts Postgres. This recovery process typically completes within a few seconds.
+Postgres runs inside the VM. If Postgres crashes, an internal Neon process detects the issue and automatically restarts Postgres. This recovery process typically completes within a few seconds.
 
 ![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
 
 #### VM failure
 
-In rarer cases, the VM itself may fail due to issue like a kernel panic or being terminated by the host. When this happens, Neon recreates the same VMand reattaches your compute endpoint. This process may take a little longer than restarting Postgres but still typically resolves in seconds.
+In rarer cases, the VM itself may fail due to issues like kernel panic or the host's termination. When this happens, Neon recreates the same VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
 
-Note that during a VM failure recovery, we don't use pre-created VMs from the pool as we do during normal restarts (like after an [autosuspend](/docs/guides/auto-suspend-guide). Instead, we recreate the same VM.
+Note that during a VM failure recovery, we don't use pre-created VMs from the pool as we do during regular restarts (like after an [autosuspend](/docs/guides/auto-suspend-guide). Instead, we recreate the same VM.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
 ### Impact on session data after a failure?
 
 While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
-
-### What about node-level failures?
-
-Most failures are resolved at the Postgres or VM level. In the rare case of a node-level failure — which can affect multiple users — recovery involves restarting and reassigning multiple VMs. These incidents can take longer to recover from compared to individual VM or Postgres failures, but your data remains safe in cloud object storage.
-
-Performance degradation without a complete failure is also a potential risk. Detecting and recovering from these issues can also take longer to resolve.
-
-<Admonition type="note">
-Neon is actively working to reduce recovery times for node-level failures and performance degradation issues to enhance overall system resiliency.
-</Admonition>
 
 For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
 
