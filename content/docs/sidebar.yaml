@@ -286,10 +286,8 @@
                   slug: manage/orgs-api
                 - title: CLI actions
                   slug: manage/orgs-cli
-            - title: Project access
-              slug: manage/project-access
-            - title: Project sharing
-              slug: guides/project-sharing-guide
+            - title: Project collaboration
+              slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
             - title: E-mail signup

@@ -62,7 +62,7 @@ The Free Plan includes the following usage allowances:
 - Autosuspend (after 5 minutes of inactivity)
 - Monitoring with 1 day of historical data
 - All supported regions
-- Project sharing
+- Project collaboration
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)

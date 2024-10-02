@@ -7,7 +7,7 @@ updatedOn: '2024-09-26T18:14:38.441Z'
 
 <FeatureBeta/>
 
-Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project sharing capabilities in one accessible location.
+Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
 
 ## About Neon Organizations
 
@@ -21,19 +21,19 @@ Each organization is made up of three types of users:
 
 - **Admin** &#8212; Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
 - **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
-- **Guests** &#8212; Guests are people given limited access to particular projects, using [project sharing](/docs/guides/project-sharing-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
+- **Collaborators** &#8212; Collaborators are people given limited access to particular projects. See [Collaborators](/docs/guides/project-collaboration-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
 
 Here's a breakdown of what actions each role can take:
 
-| Action                                                                   | Admin | Member | Guest |
-| ------------------------------------------------------------------------ | :---: | :----: | :---: |
-| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ✅   |  ❌   |
-| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)   |  ✅   |   ❌   |  ❌   |
-| Manage [members](/docs/manage/orgs-manage#invite-members)                |  ✅   |   ❌   |  ❌   |
-| Manage [guests](/docs/manage/orgs-manage#invite-guests) (share projects) |  ✅   |   ✅   |  ✅   |
-| [Set permissions](/docs/manage/orgs-manage#set-permissions)              |  ✅   |   ❌   |  ❌   |
-| [Manage billing](/docs/manage/orgs-manage#billing)                       |  ✅   |   ❌   |  ❌   |
-| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)   |  ✅   |   ❌   |  ❌   |
+| Action                                                                                 | Admin | Member | Collaborator |
+| -------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
+| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ✅   |      ❌      |
+| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ❌   |      ❌      |
+| Manage [members](/docs/manage/orgs-manage#invite-members)                              |  ✅   |   ❌   |      ❌      |
+| Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |      ✅      |
+| [Set permissions](/docs/manage/orgs-manage#set-permissions)                            |  ✅   |   ❌   |      ❌      |
+| [Manage billing](/docs/manage/orgs-manage#billing)                                     |  ✅   |   ❌   |      ❌      |
+| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                 |  ✅   |   ❌   |      ❌      |
 
 ## Create an organization
 
@@ -51,7 +51,7 @@ After creating the organization, your next actions depend on your particular sce
 
 ### Scenario 1 &#8212; Moving an existing team to a new organization
 
-If you’re currently on a paid plan, using project sharing to work with your team on your Personal account projects, and you intend to work primarily from your new Organization account:
+If you’re currently on a paid plan, using project collaboration to work with your team on your Personal account projects, and you intend to work primarily from your new Organization account:
 
 - [Transfer your existing projects](/docs/manage/orgs-project-transfer#transfer-projects-in-bulk) from your personal account to the new organization. You can leave one project behind, since that's the Free Plan limit.
 - Downgrade your personal account to the [Free Plan](/docs/introduction/manage-billing#change-your-plan) once all projects are transferred. This shifts all billing to the Organization.

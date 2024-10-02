@@ -49,7 +49,7 @@ Here are some basic actions you can take to add or manage projects:
 - [View projects](#view-projects)
 - [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
 - [Delete a project](#delete-a-project)
-- [Share a project](#share-a-project)
+- [Invite collaborators to a project](#invite-collaborators-to-a-project)
 
 ### Create a project
 
@@ -110,23 +110,23 @@ To delete a project:
 If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
-### Share a project
+### Invite collaborators to a project
 
-Neon's project sharing feature allows you to share your project with other Neon accounts.
+Neon's project collaboration feature allows you to invite other Neon accounts to collaborate on a Neon project.
 
-To share a project:
+To invite collaborators to a Neon project:
 
 1. In the Neon Console, select a project.
 1. Select **Project settings**.
-1. Select **Sharing**.
-1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
-1. Click **Grant access**.
+1. Select **Collaborators**.
+1. Select **Invite** and enter the email address of the account you want to collaborate with.
+1. Click **Invite**.
 
-The email you specify is added to the list of **Users with access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also invite other Neon users to a project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page, under **Shared with you**.
 
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with a projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
-For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
+For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
 ## Advanced settings
 
