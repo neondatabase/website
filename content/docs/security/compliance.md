@@ -18,7 +18,7 @@ The SOC 3 report is a public-facing version of the SOC 2 report, providing assur
 
 ## ISO 27001
 
-ISO 27001 is an internationally recognized standard for information security management systems (ISMS). Our certification demonstrates that we follow a systematic and risk-based approach to managing sensitive information, ensuring its security.
+ISO 27001 is an internationally recognized standard for information security management systems (ISMS). Our compliance with this standard demonstrates that we follow a systematic and risk-based approach to managing sensitive information, ensuring its security.
 
 ## ISO 27701
 
@@ -34,7 +34,7 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 ## HIPAA
 
-Neon is not yet HIPAA compliant. However, we are actively working towards achieving HIPAA readiness, with a target completion by the end of Q2 2025. Once certified, we will be able to support applications that require HIPAA compliance, including those that process Protected Health Information (PHI).
+Neon is not yet HIPAA compliant. However, we are actively working towards achieving HIPAA readiness, with a target completion by the end of Q2 2025. Once compliant, we will be able to support applications that require HIPAA compliance, including those that process Protected Health Information (PHI).
 
 ## Questions?
 
