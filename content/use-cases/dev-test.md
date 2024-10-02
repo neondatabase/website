@@ -125,16 +125,10 @@ Yes. Overprovisioning is a big problem—we see this daily while talking to cust
 
 ## Getting started
 
----
-
-We have self-serve resources, and can also help you 1:1
-
-### Do it yourself
-
 We’ve built tutorials that teach you **how to run a nightly dump from RDS to Neon** so you can sync your non-prod environment. We also cover how to apply changes back to production once you’ve tested them in Neon.
 
 - [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
 - [Learn how to deploy a change tested in Neon to prod in RDS](/blog/neon-twin-deploy-workflow)
 - [Use this app to easily build your dump/restore workflows](/dev-for-rds) (scroll down until you see `Neon Twin`)
 
-<CTA title="Reach out to us" description="We’re running a pilot program where we offer close assistance to help you set up your non-prod environments in Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
+<CTA title="Get 1:1 help" description="We’re also running a pilot program where we offer close assistance to help you set up your non-prod environments in Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
