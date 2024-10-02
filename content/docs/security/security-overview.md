@@ -46,11 +46,11 @@ Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon
 
 The Microsoft cloud data centers that power Azure focus on high reliability, operational excellence, cost-effectiveness, and a trustworthy online experience for Microsoft customers and partners worldwide. Microsoft regularly tests data center security through both internal and third-party audits. To learn more, refer to [Microsoft's Datacenter security overview](https://learn.microsoft.com/en-us/compliance/assurance/assurance-datacenter-security).
 
-## SOC 2 compliance
+## Compliance
 
-Neon has successfully completed SOC 2 Type 1 and Type 2 audits. For more information, see [SOC 2 compliance](soc2-compliance).
+Neon has successfully completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA regulations. See [Compliance](/docs/security/compliance).
 
-You can request access to our SOC 2 report or directly download the public-facing SOC 3 compliance report on our [Neon Trust Center](https://trust.neon.tech/).
+To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
 ## Security reporting
 
