@@ -28,8 +28,8 @@ After a user has provided you with the email address associated with their Neon 
 
    ![Invite collaborators](/docs/guides/sharing_grant_access.png)
 
-5. Click **Invite**. In the modal that pops up, enter the email address of the person you'd like to invite. You can enter multiple emails separated by commas.
-6. Click **Invite** in the modal to confirm; the specified email(s) will be added to the list of **Collaborators**.
+4. Click **Invite**. In the modal that pops up, enter the email address of the person you'd like to invite. You can enter multiple emails separated by commas.
+5. Click **Invite** in the modal to confirm; the specified email(s) will be added to the list of **Collaborators**.
 6. Review the list of collaborators to verify the user was successfully added.
 
 The invited users will be granted access to the project, but they will not have privileges to delete the project. They can also invite other users to join the collaboration. When they log into Neon, the project will appear under the **Projects** section, listed as **Shared with me**.
