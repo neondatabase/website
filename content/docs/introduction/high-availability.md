@@ -36,9 +36,9 @@ In this architecture:
 
 - **Pageservers**
 
- Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. To ensure high availability, Neon employs secondary Pageservers that maintain up-to-date copies of project data.
+Pageservers act as a local disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. To ensure high availability, Neon employs secondary Pageservers that maintain up-to-date copies of project data.
 
- In the event of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a secondary Pageserver. The system continuously monitors Pageserver health using a heartbeat mechanism to ensure timely detection and failover.
+In the event of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a secondary Pageserver. The system continuously monitors Pageserver health using a heartbeat mechanism to ensure timely detection and failover.
 
 - **Object storage**
 
