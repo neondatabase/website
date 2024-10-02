@@ -38,9 +38,9 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 Neon is not yet HIPAA compliant. However, we are actively working towards achieving HIPAA readiness, with a target completion by the end of Q2 2025. Once certified, we will be able to support applications that require HIPAA compliance, including those that process Protected Health Information (PHI).
 
-To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/), where you can also request and download audit reports.
-
 ## Questions?
+
+To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/), where you can also request and download audit reports.
 
 - For security inquiries, contact us at [security@neon.tech](mailto: security@neon.tech).
 - For privacy-related questions, reach out to [privacy@neon.tech](mailto: privacy@neon.tech).
