@@ -76,7 +76,7 @@ If you need to move data, you won't have to tear apart your application to remov
 
 Neon is designed for a wide range of users, from individual developers to enterprises, seeking modern, serverless Postgres capabilities. It caters to those who need a fully managed, scalable, and cost-effective database solution. Key users include:
 
-- **Individual developers** looking for a fast and easy way to set up a Postgres database without the hassle of installation or configuration. Neon's Free Plan makes it easy to get started. [Free Plan](/docs/introduction/plans#free-plan) users get access to all regions and features like connection pooling, project sharing, and branching. When you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
+- **Individual developers** looking for a fast and easy way to set up a Postgres database without the hassle of installation or configuration. Neon's Free Plan makes it easy to get started. [Free Plan](/docs/introduction/plans#free-plan) users get access to all regions and features like connection pooling, project collaboration, and branching. When you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
 
   <Admonition type="tip" title="Neon's Free Plan is here to stay">
   Neon's Free Plan is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Plan. You can build your personal project or PoC with confidence, knowing that our Free Plan is here to stay. [Learn more about our Free Plan from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).

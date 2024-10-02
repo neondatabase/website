@@ -286,9 +286,7 @@
                   slug: manage/orgs-api
                 - title: CLI actions
                   slug: manage/orgs-cli
-            - title: Project access
-              slug: manage/project-access
-            - title: Project sharing
+            - title: Project collaboration
               slug: guides/project-sharing-guide
             - title: Database access
               slug: manage/database-access

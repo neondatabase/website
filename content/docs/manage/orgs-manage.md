@@ -57,7 +57,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Invite Collaborators
 
-All members can invite external Collaborators to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
+All members can invite external users to collaborate on specific projects through [project collaboration](/docs/guides/project-sharing-guide). Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
 
 ![organization collaborators](/docs/manage/org_collaborators.png)
 
