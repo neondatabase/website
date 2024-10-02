@@ -132,17 +132,11 @@ The **Local file cache hit rate** graph shows the percentage of read requests se
 
 ![working set size chart](/docs/introduction/working_set_size.png)
 
-Your working set is the frequently accessed or recently used data and indexes that are held in memory (in the [Local File Cache](/docs/extensions/neon#what-is-the-local-file-cache)) for quick access.
+Your working set is recently accessed data and indexes stored in memory (in Neon's [Local File Cache](/docs/extensions/neon#what-is-the-local-file-cache)) for quick access.
 
-The **Working set size** chart provides a visual representation of how much data from the database is being actively used in memory within different time intervals. Here’s how to interpret each part of the chart:
+The **Working set size** chart provides a visual representation of how much data is being accessed in memory over different time intervals. Here’s how to interpret each part of the chart:
 
-- **5m** (5 minutes): This line shows how much data has been accessed from the cache in the last 5 minutes. In the chart shown above, the value is 0, meaning no data has been actively accessed or loaded from the cache during this short window.
-- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data usage in the last 15 minutes. In the chart shown above, the value is 0, indicating that no significant database activity occurred in this interval.
-- **1h** (1 hour): This line represents the amount of data actively accessed from the cache in the last hour. In the chart shown above, the working set size is 325.68 MiB, meaning that during the past hour, this much data has been used from the cache.
-- **Local file cache size**: This is the size of the the cache, which is determined by the size of your compute. If you have enabled autoscaling, the size will like change over time as the compute size scales up and down.
-
-A low value indicates periods of low database usage within that timeframe.
-
-A high value suggests that more data has been accessed within that timeframe.
-
-Ideally, interval values should remain below or close to the Local File Cache size.
+- **5m** (5 minutes): This line shows how much data has been accessed from the cache in the last 5 minutes.
+- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed from the cache over the last 15 minutes.
+- **1h** (1 hour): This line represents the amount of data actively accessed from the cache in the last hour.
+- **Local file cache size**: This is the size of the the Local File Cache (LFC), which is determined by the size of your compute. If you have enabled autoscaling, the size will likely change over time as the compute size scales up and down. Larger computes offer larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).

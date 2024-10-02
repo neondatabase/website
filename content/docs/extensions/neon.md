@@ -35,7 +35,7 @@ The `neon_stat_file_cache` view includes the following metrics:
   file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
   ```
 
-  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective.
+  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. If you find that your cache hit ration is quite low, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 ### Using the neon_stat_file_cache view
 
@@ -68,6 +68,10 @@ SELECT * FROM neon_stat_file_cache;
            2133643 |       108999742 |             607 |          10767410 |                98.08
 ```
 
+<Admonition type="note">
+Local File Cache statistics represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
+</Admonition>
+
 ### View LFC metrics with EXPLAIN ANALYZE
 
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `noen` extension is not required. For example:
@@ -95,10 +99,6 @@ EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accoun
                      Prefetch: hits=0 misses=1865 expired=0 duplicates=0
                      File cache: hits=141826 misses=1865
 ```
-
-<Admonition type="info">
-LFC statistics are for the lifetime of your compute, from the last time the compute started until the time you ran the query. Statistics are lost when your compute stops, and gathered again from scratch when your compute restarts. Also, keep in mind that your compute runs an instance of Postgres, which may contain multiple databases and tables. LFC statistics are for your entire compute, not specific databases or tables.
-</Admonition>
 
 ## Views for Neon internal use
 
