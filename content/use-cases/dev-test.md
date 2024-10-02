@@ -21,8 +21,6 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 
 ---
 
-**The DX is not there: you need many instances, and costs slowly raise**
-
 <TestimonialsWrapper>
 
 <Testimonial
@@ -79,8 +77,6 @@ Databases like AWS RDS are widely used for a reason: they’re robust, reliable,
 
 ---
 
-**Build on Neon while keeping production in AWS RDS**
-
 Migrating a production database is a big project: even when your current Postgres provider doesn’t spark joy, your team might not be ready for a full production migration just yet. However, you can enjoy a better experience for your development workflows by moving your non-prod environments to Neon.
 
 ### What do I gain by moving my dev databases to Neon?
@@ -126,8 +122,6 @@ In this case, migrating non-production environments from AWS RDS to Neon meant 7
 ### Can Neon also help lower the costs of my production database?
 
 Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling), and don’t hesitate to ask us about the migration assistance we offer. **We not only help you move production safely but also waive all migration-related fees.**
-
-<CTA title="Learn more about our Business plan" description="Our most cost-effective plan for hosting all your workloads—production, dev, test, and staging." buttonText="Learn more" buttonUrl="/pricing" />
 
 ## Getting started
 

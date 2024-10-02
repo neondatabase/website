@@ -104,7 +104,7 @@ const Post = ({
       )}
     >
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
         <div
           className={clsx(
             enableTableOfContents &&
