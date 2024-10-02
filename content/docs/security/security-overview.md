@@ -48,7 +48,7 @@ The Microsoft cloud data centers that power Azure focus on high reliability, ope
 
 ## Compliance
 
-Neon has successfully completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA regulations. See [Compliance](/docs/security/compliance).
+Neon has successfully completed audits for SOC 2 Type 1 and Type 2, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA regulations. See [Compliance](/docs/security/compliance).
 
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
