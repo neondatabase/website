@@ -1,0 +1,37 @@
+---
+title: Neon Terraform providers
+enableTableOfContents: true
+updatedOn: '2024-06-14T07:55:54.425Z'
+---
+
+The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
+
+<Admonition type="note">
+Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about these providers, please contact the the project maintainers.
+</Admonition>
+
+-  **Terraform Provider Neon — Maintainer: Dmitry Kisler**
+    - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
+    - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
+    - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
+
+-  **Terraform Neon Provider — Maintainer: Pavan Kumar Sunkara**
+    - [GitHub repository](https://github.com/terraform-community-providers/terraform-provider-neon)
+    - [Terraform Registry](https://registry.terraform.io/providers/terraform-community-providers/neon/latest)
+    - [Terraform Registry Documentation](https://registry.terraform.io/providers/terraform-community-providers/neon/latest/docs)
+
+## Important usage notes
+
+- **Upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
+
+    To avoid issues like resource re-creation:
+
+    - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
+    - Review the provider’s changelog for any breaking changes that might affect your resources during upgrades.
+    - Run `terraform plan` before applying any changes to detect potential differences and review the behavior of resource updates.
+
+## Resources
+
+- [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
+- [Initialize Terraform configuration](https://developer.hashicorp.com/terraform/tutorials/cli/init)
+- [Terraform plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
