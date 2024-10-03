@@ -162,6 +162,21 @@ values: [1, 2, 3, 5, 8],
 ],
 },
 ]}
+values={[
+{
+name: 'wasted_money',
+title: 'Dollars overpaid',
+valueClassName: 'bg-variable-value-1',
+period: 'month',
+},
+{
+name: 'saved_money',
+title: 'Bill that could be saved',
+period: 'month',
+valueClassName: 'bg-variable-value-2',
+text: 'With scale to zero',
+},
+]}
 />
 
 <CTA title="Reach out to us for an exact quote" description="Tell us more about your use case and we’ll send you back detailed information on how much you could save with Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
