@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
@@ -10,60 +11,6 @@ const instancePrices = {
   testing: 0.0376,
   dev: 0.016,
 };
-
-const values = [
-  {
-    name: 'wasted_money',
-    title: 'Dollars overpaid',
-    valueClassName: 'bg-variable-value-1',
-    period: 'month',
-  },
-  {
-    name: 'saved_money',
-    title: 'Bill that could be saved',
-    period: 'month',
-    valueClassName: 'bg-variable-value-2',
-    text: 'With scale to zero and autoscaling',
-  },
-];
-
-const inputParamsBlock = [
-  {
-    title: 'Deployment',
-    items: [
-      {
-        name: 'test_databases_num',
-        title: 'Number of test databases',
-        values: [1, 3, 5, 10],
-      },
-      {
-        name: 'dev_databases_num',
-        title: 'Number of dev databases',
-        values: [1, 3, 5, 10],
-      },
-    ],
-  },
-  {
-    title: 'Usage',
-    items: [
-      {
-        name: 'test_databases_daily_hrs',
-        title: 'How many hrs/day are test databases&nbsp;running?',
-        values: [1, 2, 3, 5, 8],
-      },
-      {
-        name: 'dev_databases_daily_hrs',
-        title: 'How many hrs/day are dev databases&nbsp;running?',
-        values: [1, 2, 3, 5, 8],
-      },
-      {
-        name: 'peak_traffic_hrs',
-        title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic?',
-        values: [0.5, 1, 3, 5],
-      },
-    ],
-  },
-];
 
 const DashedBorder = () => (
   <>
@@ -78,7 +25,7 @@ const DashedBorder = () => (
   </>
 );
 
-const Calculator = () => {
+const Calculator = ({ inputParamsBlock, values }) => {
   const [inputParams, setInputParams] = useState({
     test_databases_num: 10,
     dev_databases_num: 10,
@@ -224,6 +171,11 @@ const Calculator = () => {
       </div>
     </>
   );
+};
+
+Calculator.propTypes = {
+  inputParamsBlock: PropTypes.array.isRequired,
+  values: PropTypes.array.isRequired,
 };
 
 export default Calculator;

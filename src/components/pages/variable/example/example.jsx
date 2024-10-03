@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
 
@@ -9,7 +10,7 @@ import leftGlow from './images/left-glow.png';
 import rightGlowMobile from './images/right-glow-mobile.png';
 import rightGlow from './images/right-glow.png';
 
-const databases = [
+const DEFAULT_DATABASES = [
   {
     type: '1 production database',
     instance: 'db.r6g.8xlarge',
@@ -27,8 +28,66 @@ const databases = [
   },
 ];
 
-const Example = () => (
-  <div className="relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6">
+const DEFAULT_VALUES = [
+  {
+    name: 'wasted_money',
+    title: 'Dollars overpaid',
+    valueClassName: 'bg-variable-value-1',
+    period: 'month',
+  },
+  {
+    name: 'saved_money',
+    title: 'Bill that could be saved',
+    period: 'month',
+    valueClassName: 'bg-variable-value-2',
+    text: 'With scale to zero and autoscaling',
+  },
+];
+
+const DEFAULT_INPUT_PARAMS_BLOCK = [
+  {
+    title: 'Deployment',
+    items: [
+      {
+        name: 'test_databases_num',
+        title: 'Number of test databases',
+        values: [1, 3, 5, 10],
+      },
+      {
+        name: 'dev_databases_num',
+        title: 'Number of dev databases',
+        values: [1, 3, 5, 10],
+      },
+    ],
+  },
+  {
+    title: 'Usage',
+    items: [
+      {
+        name: 'test_databases_daily_hrs',
+        title: 'How many hrs/day are test databases&nbsp;running?',
+        values: [1, 2, 3, 5, 8],
+      },
+      {
+        name: 'dev_databases_daily_hrs',
+        title: 'How many hrs/day are dev databases&nbsp;running?',
+        values: [1, 2, 3, 5, 8],
+      },
+      {
+        name: 'peak_traffic_hrs',
+        title: 'How many hrs/ day do you hit&nbsp;peak&nbsp;traffic?',
+        values: [0.5, 1, 3, 5],
+      },
+    ],
+  },
+];
+
+const Example = ({
+  databases = DEFAULT_DATABASES,
+  values = DEFAULT_VALUES,
+  inputParamsBlock = DEFAULT_INPUT_PARAMS_BLOCK,
+}) => (
+  <div className="not-prose relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
@@ -46,7 +105,7 @@ const Example = () => (
         ))}
       </ul>
     </div>
-    <Calculator />
+    <Calculator inputParamsBlock={inputParamsBlock} values={values} />
     <BgDecor hasBorder hasNoise hasPattern>
       <Image
         className="absolute right-0 top-0 h-[776px] w-[617px] sm:hidden"
@@ -79,5 +138,17 @@ const Example = () => (
     </BgDecor>
   </div>
 );
+
+Example.propTypes = {
+  databases: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      instance: PropTypes.string.isRequired,
+      usage: PropTypes.string.isRequired,
+    })
+  ),
+  values: PropTypes.array,
+  inputParamsBlock: PropTypes.array,
+};
 
 export default Example;
