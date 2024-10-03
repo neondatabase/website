@@ -666,6 +666,7 @@
           slug: reference/sdk
     - title: Terraform
       slug: reference/terraform
+      tag: community
       icon: management
 - section: Postgres
   items:

@@ -1,6 +1,7 @@
 ---
 title: Neon Terraform providers
 enableTableOfContents: true
+tag: community
 updatedOn: '2024-06-14T07:55:54.425Z'
 ---
 
@@ -14,10 +15,6 @@ Community Terraform providers are not maintained or officially supported by Neon
     - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
     - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
     - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
-
-  - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
-  - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
-  - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
 
 - **Terraform Neon Provider — Maintainer: Pavan Kumar Sunkara**
   - [GitHub repository](https://github.com/terraform-community-providers/terraform-provider-neon)
