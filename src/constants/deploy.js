@@ -14,7 +14,7 @@ const DEPLOY_AGENDA = [
     timestamp: '300',
   },
   {
-    event: 'Integrating Auth with Postgres',
+    event: 'New Feature Demo',
     company: 'Neon',
     time: '11:45 AM', // Example time, adjust as needed
     speaker: {
@@ -28,7 +28,7 @@ const DEPLOY_AGENDA = [
     timestamp: '6300', // Example timestamp, adjust as needed
   },
   {
-    event: 'Retrieval Augmented Generation (RAG) & Postgres',
+    event: 'New Postgres Extension',
     company: 'Neon',
     time: '12:00 PM', // Example time, adjust as needed
     speaker: {
