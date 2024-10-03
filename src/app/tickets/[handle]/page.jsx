@@ -35,7 +35,7 @@ const TicketPage = async ({ params }) => {
             </h1>
             <p className="relative z-50 mt-5 max-w-[610px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
-              <time dateTime="2024-10-01T17:00:00Z">October 1st, 10 a.m. PT</time>
+              <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
             <Link
               className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"

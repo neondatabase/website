@@ -146,7 +146,7 @@ export default {
   stage: {
     title: 'Neon Deploy Stage — Neon',
     description:
-      'Join us at 10:00 AM PT, October 1st for presentations about Postgres, scalability, AI, and using Neon with modern developer tools.',
+      'Join us at 10:00 AM PT, October 30th for presentations about Postgres, scalability, AI, and using Neon with modern developer tools.',
     pathname: LINKS.stage,
   },
   404: {
@@ -161,7 +161,7 @@ export default {
 
     return {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
-      description: `Join ${userName} virtually at Deploy on October 1st to learn about Neon and how to build better with Serverless Postgres`,
+      description: `Join ${userName} virtually at Deploy on October 30th to learn about Neon and how to build better with Serverless Postgres`,
     };
   },
 };
