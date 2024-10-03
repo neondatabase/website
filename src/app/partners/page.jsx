@@ -1,14 +1,13 @@
 import Apply from 'components/pages/partners/apply';
+import Calculator from 'components/pages/partners/calculator';
 import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
-import Container from 'components/shared/container';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
-import UseCaseCalculator from 'components/shared/use-case-calculator';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import compatibilityIcon from 'icons/ai/compatibility.svg';
@@ -83,11 +82,7 @@ const PartnersPage = () => (
     <Collaboration />
     <Apply />
     <Integration />
-    <section className="calculator safe-paddings mt-36 lg:mt-20 md:mt-12">
-      <Container size="xxs">
-        <UseCaseCalculator />
-      </Container>
-    </section>
+    <Calculator />
     <CTAWithElephant
       className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
       titleClassName="-mr-10 sm:max-w-[300px]"
