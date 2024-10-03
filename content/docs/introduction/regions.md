@@ -27,7 +27,7 @@ The Neon on Azure Beta is limited to the Azure East US 2 region and is not curre
 
 During this Beta period:
 
-- Anyone in [Neon's Early Access program](https://neon.tech/early-access-program) can create a Neon project in the Azure region.
+- Anyone can create a Neon project in the Azure region.
 - The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
 - For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will not be counted toward your [Neon plan allowances](/docs/introduction/plans), though project allowances still apply, and [extra project units](/docs/introduction/extra-usage) will be billed accordingly.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
