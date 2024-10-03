@@ -161,7 +161,7 @@ export default {
 
     return {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
-      description: `Join ${userName} virtually at Deploy on October 30th to learn about Neon and how to build better with Serverless Postgres`,
+      description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
     };
   },
 };
