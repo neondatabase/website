@@ -98,9 +98,12 @@ const ComputeCalculator = ({
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
       </h3>
-      <ul className="space-y-2 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
+      <ul className="space-y-2 !pl-0 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
         {databases.map(({ type, instance, usage }) => (
-          <li key={type} className="flex items-center gap-2 sm:flex-col sm:items-start sm:gap-0">
+          <li
+            key={type}
+            className="flex items-center gap-2 before:hidden sm:flex-col sm:items-start sm:gap-0"
+          >
             <span>
               <span className="font-medium text-gray-new-90">{type}</span>{' '}
               <span className="text-gray-new-70">({instance})</span>

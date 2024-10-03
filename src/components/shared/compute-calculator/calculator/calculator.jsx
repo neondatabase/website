@@ -113,10 +113,10 @@ const Calculator = ({ inputParamsBlock, values }) => {
               <p className="mb-3.5 font-medium uppercase leading-none tracking-extra-tight text-gray-new-40 sm:text-sm">
                 {title}
               </p>
-              <ul className="space-y-1.5 sm:space-y-4">
+              <ul className="space-y-1.5 !pl-0 sm:space-y-4">
                 {items.map(({ name, title, values }) => (
                   <li
-                    className="flex items-center justify-between gap-2 sm:flex-col sm:items-start"
+                    className="flex items-center justify-between gap-2 before:hidden sm:flex-col sm:items-start"
                     key={title}
                   >
                     <p
