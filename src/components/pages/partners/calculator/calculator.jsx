@@ -7,7 +7,7 @@ const Calculator = () => (
     <Container className="flex flex-col items-center justify-center" size="xxs">
       <GradientLabel>Calculator</GradientLabel>
       <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
-        Estimate your savings
+        Platform Builder
       </h2>
       <UseCaseCalculator />
     </Container>
