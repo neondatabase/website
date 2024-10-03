@@ -83,8 +83,8 @@ const PartnersPage = () => (
     <Collaboration />
     <Apply />
     <Integration />
-    <section className="calculator safe-paddings mt-36 lg:mt-28 md:mt-20">
-      <Container size="768">
+    <section className="calculator safe-paddings mt-36 lg:mt-20 md:mt-12">
+      <Container size="xxs">
         <UseCaseCalculator />
       </Container>
     </section>
