@@ -68,7 +68,8 @@ export default {
   },
   deploy: {
     title: 'Neon Deploy — Neon',
-    description: 'Join us at 10:00 AM PT, October 1st for presentations about Neon Deploy.',
+    description:
+      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.deploy,
     imagePath: '/images/social-previews/deploy.jpg',
   },
