@@ -5,13 +5,23 @@ import PropTypes from 'prop-types';
 const linkClassName =
   'py-1.5 block text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
 
-const Item = ({ title, level, id, items, currentAnchor, isUserScrolling, setIsUserScrolling }) => {
+const Item = ({
+  title,
+  level,
+  id,
+  items,
+  currentAnchor,
+  isUserScrolling,
+  setIsUserScrolling,
+  isUseCase,
+}) => {
   const href = `#${id}`;
   const shouldRenderSubItems =
     !!items?.length &&
-    (currentAnchor === id || items.some(({ id }) => currentAnchor === id)) &&
-    isUserScrolling &&
-    level < 2; // render only 1 level of sub-items
+    (isUseCase ||
+      ((currentAnchor === id || items.some(({ id }) => currentAnchor === id)) &&
+        isUserScrolling &&
+        level < 2)); // render only 1 level of sub-items
 
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
@@ -91,6 +101,7 @@ Item.propTypes = {
   currentAnchor: PropTypes.string,
   setIsUserScrolling: PropTypes.func.isRequired,
   isUserScrolling: PropTypes.bool.isRequired,
+  isUseCase: PropTypes.bool,
 };
 
 export default Item;

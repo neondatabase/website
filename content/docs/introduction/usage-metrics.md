@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.662Z'
+updatedOn: '2024-10-01T16:17:23.385Z'
 ---
 
 This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -108,6 +108,53 @@ These factors could be contributing to your high storage consumption:
 To mitigate this issue, consider adjusting your [history retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) setting. Perhaps you can do with a shorter window for point-in-time restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your history retention window, that could also explain why your storage is so large.
+
+</details>
+
+<details>
+<summary>**How does running `VACUUM` or `VACUUM FULL` affect my storage costs?**</summary>
+
+If you're looking to control your storage costs, you might start by deleting old data from your tables, which reduces the data size you're billed for going forward. Since, in typical Postgres operations, deleted tuples are not physically removed until a vacuum is performed, you might then run `VACUUM`, expecting to see a further reduction in the `Data size` reported in the Console &#8212; but you don't see the expected decrease.
+
+**Why no reduction?**
+
+In Postgres, [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) doesn't reduce your storage size. Instead, it marks the deleted space in the table for reuse, meaning future data can fill that space without increasing data size. While, `VACUUM` by itself won't make the data size smaller, it is good practice to run it periodically, and it does not impact availability of your data.
+
+```sql
+VACUUM your_table_name;
+```
+
+**Use VACUUM FULL to reclaim space**
+
+Running `VACUUM FULL` _does_ reclaim physical storage space by rewriting the table, removing empty spaces, and shrinking the table size. This can help lower the **Data size** part of your storage costs. It’s recommended to use `VACUUM FULL` when a table has accumulated a lot of unused space, which can happen after heavy updates or deletions. For smaller tables or less frequent updates, a regular `VACUUM` is usually enough.
+
+To reclaim space using `VACUUM FULL`, you can run the following command per table you want to vacuum:
+
+```sql
+VACUUM FULL your_table_name;
+```
+
+However, there are some trade-offs:
+
+- **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-usage). If the table is large, this could push you over your plan's limit, trigging extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+
+In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
+
+**Recommendations**
+
+- **Set a reasonable history window** &#8212; We recommend setting your history retention period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
+- **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
+  \_ **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
+- **Manual VACUUM for autosuspend users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
+
+  To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
+
+  ```sql
+  VACUUM (VERBOSE, ANALYZE) playing_with_neon;
+  ```
+
+  See [VACUUM and ANALYZE statistic](https://neon.tech/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
 
 </details>
 
@@ -234,10 +281,10 @@ This query displays the IP addresses connected to the database, the number of co
 
 Each of [Neon's plans](/docs/introduction/plans) includes a certain number of compute hours per month:
 
-- **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute non-stop. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
+- **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
 - **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
 - **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
-- **Business Plan**: This plan inclues 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
+- **Business Plan**: This plan includes 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
 
 </details>
 
@@ -281,7 +328,7 @@ The formula for compute hour usage is: `compute hours = compute size * active ho
 <details>
 <summary>**How does autosuspend (scale to zero) affect my compute hour usage?**</summary>
 
-Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](docs/introduction/auto-suspend).
+Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](/docs/introduction/auto-suspend).
 
 </details>
 
@@ -306,13 +353,13 @@ The following table outlines project allowances for each Neon plan.
 | Plan       | Projects  |
 | ---------- | --------- |
 | Free Plan  | 1         |
-| Launch     | 10        |
-| Scale      | 50        |
-| Business   | 100       |
+| Launch     | 100       |
+| Scale      | 1000      |
+| Business   | 5000      |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), or [Business](/docs/introduction/plans#business) plan, which offers allowances of 10, 50, and 100 projects, respectively.
-- Extra projects are available on both the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans in units of 10 for $50 each.
+- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), or [Business](/docs/introduction/plans#business) plan, which offer allowances of 100, 1000, and 5000 projects, respectively.
+- Extra projects are available on both the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans in units of 1000 and 5000, respectively, for $50 per unit.
 
 ## Feedback
 

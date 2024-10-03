@@ -69,6 +69,21 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
 
   useClickOutside([wrapperRef], onOutsideClick);
 
+  const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
+    const activeMenu = activeMenuList[activeMenuList.length - 1];
+    const isSlugActiveMenu = activeMenu.slug === currentSlug;
+
+    const isSlugInActiveMenu = (items) =>
+      items.some(
+        (item) =>
+          (item.title === activeMenu.title &&
+            item.items?.some((subItem) => subItem.slug === currentSlug)) ||
+          (item.items && isSlugInActiveMenu(item.items))
+      );
+
+    return isSlugActiveMenu || isSlugInActiveMenu(items);
+  };
+
   useEffect(() => {
     const onScroll = () => {
       if (isOpen) {
@@ -98,6 +113,13 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
     }
   }, [controls, isOpen]);
 
+  useEffect(() => {
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSlug]);
+
   return (
     <nav
       className={clsx(
@@ -112,11 +134,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         ref={buttonRef}
         onClick={toggleMenu}
       >
-        <span className="text-ellipsis">
-          {activeMenuList[activeMenuList.length - 1].title === 'Home'
-            ? 'Documentation menu'
-            : activeMenuList[activeMenuList.length - 1].title}
-        </span>
+        <span className="text-ellipsis">Documentation menu</span>
         <ChevronRight
           className={clsx(
             'absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 transition-transform duration-200 md:right-5',
@@ -136,10 +154,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
           style={{ height: wrapperHeight }}
         >
           <InkeepTrigger className="lg:hidden" topOffset={wrapperHeight || menuHeight} />
-          <div
-            className="relative w-full overflow-hidden transition-[height] duration-300"
-            style={{ height: menuHeight }}
-          >
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
               title="Home"

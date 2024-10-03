@@ -60,7 +60,9 @@ const Post = ({
           : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
       )}
     >
-      {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      {breadcrumbs.length > 0 && (
+        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
+      )}
       {isChangelog ? (
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
       ) : (
@@ -68,7 +70,7 @@ const Post = ({
           <h1
             className={clsx(
               isUseCase
-                ? 'mt-12 text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                ? 'text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
                 : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
               tag && 'inline'
             )}
@@ -104,7 +106,7 @@ const Post = ({
       )}
     >
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
         <div
           className={clsx(
             enableTableOfContents &&

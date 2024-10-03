@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2024-09-05T17:14:45.247Z'
+updatedOn: '2024-10-01T16:52:01.973Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -30,9 +30,9 @@ You can designate any branch as a "protected branch", which implements a series 
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP restrictions to protected branches only.
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The IP Allow feature is only available on Neon's [Business](/docs/introduction/plans#business) plan.
 
-The protected branches feature is available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
 ## Data-at-rest encryption
 
@@ -40,13 +40,17 @@ Data-at-rest encryption is a method of storing inactive data that converts plain
 
 ## Secure data centers
 
-Neon’s infrastructure is hosted and managed within Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
+Neon’s infrastructure is hosted and managed within either Amazon's or Azure's secure data centers, depending on the cloud service provider you select when setting up your project.
 
-## SOC 2 compliance
+Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon.com/security/). Amazon continually manages risk and undergoes recurring assessments to ensure compliance with industry standards. For information about AWS data center compliance programs, refer to [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/).
 
-Neon has successfully completed SOC 2 Type 1 and Type 2 audits. For more information, see [SOC 2 compliance](soc2-compliance).
+The Microsoft cloud data centers that power Azure focus on high reliability, operational excellence, cost-effectiveness, and a trustworthy online experience for Microsoft customers and partners worldwide. Microsoft regularly tests data center security through both internal and third-party audits. To learn more, refer to [Microsoft's Datacenter security overview](https://learn.microsoft.com/en-us/compliance/assurance/assurance-datacenter-security).
 
-You can request access to our SOC 2 report or directly download the public-facing SOC 3 compliance report on our [Neon Trust Center](https://trust.neon.tech/).
+## Compliance
+
+Neon has successfully completed audits for SOC 2 Type 1 and Type 2, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA regulations. See [Compliance](/docs/security/compliance).
+
+To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
 ## Security reporting
 

@@ -1,10 +1,5 @@
 - section: noname
   items:
-    - title: Home
-      slug: introduction
-      icon: home
-- section: noname
-  items:
     - title: Why Neon?
       icon: why-neon
       slug: get-started-with-neon/why-neon
@@ -116,30 +111,48 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
-    - title: Import data
+    - title: Migrate to Neon
       icon: import
-      slug: import/import-intro
+      slug: import/migrate-intro
       items:
         - section: Import utilities
           items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import schema only
-              slug: import/import-schema-only
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Import from MySQL
+            - title: Migrate from Postgres with pg_dump and pg_restore
+              slug: import/migrate-from-postgres
+            - title: Migrate from Postgres with pg-import
+              slug: import/migrate-from-postgres-pg-import
+            - title: Migrate from a Neon project
+              slug: import/migrate-from-neon
+            - title: Migrate schema only
+              slug: import/migrate-schema-only
+            - title: Migrate from Digital Ocean
+              slug: import/migrate-from-digital-ocean
+              tag: new
+            - title: Migrate from Firebase
+              slug: import/migrate-from-firebase
+              tag: new
+            - title: Migrate from Heroku
+              slug: import/migrate-from-heroku
+            - title: Migrate from MySQL
               slug: import/migrate-mysql
+            - title: Migrate from MSSQL
+              slug: import/migrate-mssql
+              tag: new
+            - title: Migrate from Render
+              slug: import/migrate-from-render
+              tag: new
+            - title: Migrate from Supabase
+              slug: import/migrate-from-supabase
+              tag: new
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Replicate from Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/migrate-from-azure-postgres
+              tag: new
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -158,7 +171,7 @@
               slug: import/import-from-csv
         - section: Sample data
           items:
-            - title: Postgres sample data
+            - title: Sample data
               slug: import/import-sample-data
 - section: Platform
   items:
@@ -254,6 +267,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
+      slug: manage/accounts
       items:
         - section: Access control
           items:
@@ -272,10 +286,8 @@
                   slug: manage/orgs-api
                 - title: CLI actions
                   slug: manage/orgs-cli
-            - title: Project access
-              slug: manage/project-access
-            - title: Project sharing
-              slug: guides/project-sharing-guide
+            - title: Project collaboration
+              slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
             - title: E-mail signup
@@ -316,8 +328,8 @@
               slug: security/security-overview
             - title: Security reporting
               slug: security/security-reporting
-            - title: SOC 2 compliance
-              slug: security/soc2-compliance
+            - title: Compliance
+              slug: security/compliance
             - title: Acceptable Use Policy
               slug: security/acceptable-use-policy
         - section:
@@ -413,6 +425,10 @@
       icon: integrations
       slug: guides/integrations
       items:
+        - section: Monitor
+          items: 
+            - title: Datadog Integration
+              slug: guides/datadog
         - section: Deploy
           items:
             - title: Vercel
@@ -497,6 +513,7 @@
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
             - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
+              tag: deprecated
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
@@ -824,6 +841,15 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
+    - title: Extensions
+      slug: extensions/extensions-intro
+      icon: frameworks
+    - title: Version support
+      slug: postgresql/postgres-version-policy
+      icon: why-neon
+    - title: Upgrade
+      slug: postgresql/postgres-upgrade
+      icon: import
 - section: Resources
   items:
     - title: Partner guide

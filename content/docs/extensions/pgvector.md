@@ -63,7 +63,7 @@ After generating embeddings using a service like [OpenAI’s Embeddings API](htt
   ```
 
    <Admonition type="tip">
-   For a Python script that loads embeddings in bulk, see [bulk_loading.py](https://github.com/pgvector/pgvector-python/blob/master/examples/bulk_loading.py).
+   For a Python script that loads embeddings in bulk, refer to this [Bulk loading with COPY](https://github.com/pgvector/pgvector-python/blob/master/examples/loading/example.py) example provided in the `pgvector` GitHub repository.
    </Admonition>
 
 - Upsert vectors:

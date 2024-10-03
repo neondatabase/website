@@ -156,6 +156,8 @@ const icons = {
   x: X,
 };
 
+const monochromeIcons = ['github'];
+
 const DetailIconCards = ({ children = null, withNumbers = false }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
@@ -179,7 +181,10 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
             >
               <div
                 className={clsx(
-                  'relative z-10 shrink-0 text-secondary-8 dark:text-green-45',
+                  'relative z-10 shrink-0',
+                  monochromeIcons.includes(icon)
+                    ? 'text-black-new dark:text-white'
+                    : 'text-secondary-8 dark:text-green-45',
                   withNumbers
                     ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
                     : 'mt-0.5 h-4 w-4'
@@ -200,12 +205,12 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
                 )}
               </div>
               <div className="relative z-10 flex flex-col gap-x-2.5">
-                <h3 className="text-lg font-semibold leading-tight text-black-new dark:text-white">
+                <h3 className="text-balance text-lg font-semibold leading-tight text-black-new dark:text-white">
                   {children}
                 </h3>
                 <p
                   className={clsx(
-                    'text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
+                    'text-balance text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
                     withNumbers ? 'mt-1' : 'mt-2.5'
                   )}
                 >

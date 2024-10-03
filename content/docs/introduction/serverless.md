@@ -3,7 +3,7 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 enableTableOfContents: true
-updatedOn: '2024-08-29T10:48:38.733Z'
+updatedOn: '2024-09-28T10:31:46.951Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
@@ -33,7 +33,7 @@ To us, serverless means:
 
 _That Neon only works with serverless architectures_. Neon is fully compatible with the entire PostgreSQL ecosystem. Whether you're using [Django](/docs/guides/django), [Rails](/docs/guides/ruby-on-rails), or even a bash script in your basement, if it works with Postgres, it works with Neon.
 
-_That you have to pay per query_. Your charges are based on compute and storage usage, not the number of queries. For example, you could run billions of queries for as little as $19 a month if they fit within the resources allotted in the [Launch plan](/docs/introduction/plans#launch). The CPU allowance is ample for running sites 24/7 with low CPU requirements.
+_That you have to pay per query_. Your charges are based on compute and storage usage, not the number of queries. For example, you could run billions of queries for as little as $19 per month if they fit within the resources allotted in the [Launch plan](/docs/introduction/plans#launch). The CPU allowance is ample for running sites 24/7 with low CPU requirements.
 
 _That you’ll get unpredictable costs due to traffic spikes_. We provide transparency in your potential costs. You always set a maximum autoscaling limit to avoid unpredictable bills, and you can always [check your consumption](/docs/introduction/monitor-usage). We send you notifications if your storage usage grows quickly.
 

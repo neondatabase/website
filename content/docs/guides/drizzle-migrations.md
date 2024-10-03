@@ -3,7 +3,7 @@ title: Schema migration with Neon Postgres and Drizzle ORM
 subtitle: Set up Neon Postgres and run migrations for your TypeScript project using
   Drizzle ORM
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.650Z'
+updatedOn: '2024-09-24T08:34:04.213Z'
 ---
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
@@ -33,6 +33,10 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 ```
 
 Keep your connection string handy for later use.
+
+<Admonition type="note">
+Neon supports both direct and pooled database connection strings, which can be copied from the **Connection Details** widget on your Neon Project Dashboard. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can lead to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Setting up the TypeScript application
 

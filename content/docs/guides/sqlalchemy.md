@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2023-11-24T11:25:06.755Z'
+updatedOn: '2024-09-24T08:34:04.216Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -96,6 +96,16 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
+
+## SQLAlchemy connection errors
+
+- SQLAlchemy versions prior to 2.0.33 may reuse idle connections, leading to connection errors. If this occurs, you could encounter an `SSL connection has been closed unexpectedly` error. To resolve this, upgrade to SQLAlchemy 2.0.33 or later. For more details, see the [SQLAlchemy 2.0.33 changelog](https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html#change-2.0.33-postgresql).
+- If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically happens because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
+
+  - Set the SQLAlchemy `pool_recycle` parameter to a value less than or equal to the autosuspend setting configured for your compute.
+  - Set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
+
+  For more details on the `pool_recycle` and `pool_pre_ping` parameters, refer to [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration) and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information on configuring Neon's autosuspend setting, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
 ## Schema migration with SQLAlchemy
 

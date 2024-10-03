@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2024-09-08T12:44:00.899Z'
+updatedOn: '2024-09-30T11:41:25.022Z'
 ---
 
 <LRBeta/>
@@ -106,14 +106,22 @@ Run this command to create a publication for all tables in your source database:
 CREATE PUBLICATION my_publication FOR ALL TABLES;
 ```
 
-<Admonition type="note">
-It's also possible to create a publication for specific tables; for example, to create a publication for the `playing_with_neon` table, you can use the following syntax:
+<Admonition type="important">
+Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
+
+To create a publication for a specific table, you can use the following syntax:
 
 ```sql shouldWrap
-CREATE PUBLICATION playing_with_neon_publication FOR TABLE playing_with_neon;
+CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
 ```
 
-For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+To create a publication for multiple tables, provide a comma-separated list of tables:
+
+```sql shouldWrap
+CREATE PUBLICATION my_publication FOR TABLE users, departments;
+```
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 </Admonition>
 
 ## Prepare your Neon destination database
@@ -122,12 +130,78 @@ This section describes how to prepare your source Neon Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables defined in your publication on the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables defined in your publication on the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database.
 
-If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
+<Admonition type="note">
+If you're just using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
 ```sql shouldWrap
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+```
+
+</Admonition>
+
+#### Dump the schema
+
+To dump only the schema from a database, you can run a `pg_dump` command similar to the following to create an `.sql` dump file with the schema only:
+
+```sql
+pg_dump --schema-only \
+	--no-privileges \
+	"postgresql://role:password@hostname:5432/dbname" \
+	> schema_dump.sql
+```
+
+- With the the `--schema-only` option, only object definitions are dumped. Data is excluded.
+- The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
+
+#### Review and modify the dumped schema
+
+After dumping a schema to an `.sql` file, review it for statements that you don't want to replicate or that won't be supported on your destination database, and comment them out. For example, when dumping a schema from AlloyDB, you'll see the statements shown below, which you'll need to comment out because they won't be supported in Neon. Generally, you should remove any parameters configured on another Postgres provider and rely on Neon's default Postgres settings.
+
+If you are replicating a large dataset, also consider removing any `CREATE INDEX` statements from the resulting dump file to avoid creating indexes when loading the schema on the destination database (the subscriber). Taking indexes out of the equation can substantially reduce the time required for initial data load performed when starting logical replication. Save the `CREATE INDEX` statements that you remove. You can add the indexes back after the initial data copy is completed.
+
+<Admonition type="note">
+To comment out a single line, you can use `--` at the beginning of the line.
+</Admonition>
+
+```sql
+-- SET statement_timeout = 0;
+-- SET lock_timeout = 0;
+-- SET idle_in_transaction_session_timeout = 0;
+-- SET client_encoding = 'UTF8';
+-- SET standard_conforming_strings = on;
+-- SELECT pg_catalog.set_config('search_path', '', false);
+-- SET check_function_bodies = false;
+-- SET xmloption = content;
+-- SET client_min_messages = warning;
+-- SET row_security = off;
+
+-- ALTER SCHEMA public OWNER TO alloydbsuperuser;
+
+-- CREATE EXTENSION IF NOT EXISTS google_columnar_engine WITH SCHEMA public;
+
+-- CREATE EXTENSION IF NOT EXISTS google_db_advisor WITH SCHEMA public;
+```
+
+#### Load the schema
+
+After making any necessary modifications to the dump file, load the dumped schema using `pg_restore`.
+
+<Admonition type="tip">
+When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your connection string on the **Connection Details** widget on the Neon Project Dashboard.
+</Admonition>
+
+```sql
+psql \
+	"postgresql://role:password@hostname:5432/dbname" \
+	< schema_dump.sql
+```
+
+After you've loaded the schema, you can view the result with this `psql` command:
+
+```sql
+\dt
 ```
 
 ### Create a subscription
@@ -178,7 +252,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
 Alternatively, you can run the following query on the subscriber to make sure the `last_msg_receipt_time` is as expected. For example, if you just ran an insert option on the publisher, the `last_msg_receipt_time` should reflect the time of that operation.
 
-```sql
+```sql shouldWrap
 SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_catalog.pg_stat_subscription;
 ```
 

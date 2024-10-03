@@ -9,7 +9,7 @@ import Item from './item';
 
 const CURRENT_ANCHOR_GAP_PX = 100;
 
-const TableOfContents = ({ items }) => {
+const TableOfContents = ({ items, isUseCase }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
   const [isUserScrolling, setIsUserScrolling] = useState(true);
@@ -77,6 +77,7 @@ const TableOfContents = ({ items }) => {
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
+              isUseCase={isUseCase}
               {...item}
             />
           </li>
@@ -94,6 +95,7 @@ TableOfContents.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isUseCase: PropTypes.bool,
 };
 
 export default TableOfContents;

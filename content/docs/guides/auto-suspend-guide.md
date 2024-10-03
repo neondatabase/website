@@ -3,7 +3,7 @@ title: Configuring Autosuspend for Neon computes
 subtitle: Learn how to configure Neon's Autosuspend feature to control when your compute
   scales to zero
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.653Z'
+updatedOn: '2024-09-23T18:40:25.913Z'
 ---
 
 Neon's [Autosuspend](/docs/introduction/auto-suspend) feature controls when a Neon compute transitions to an `Idle` state (scales to zero) due to inactivity. For example, if your autosuspend setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable autosuspension entirely, depending on your requirements.
@@ -92,3 +92,7 @@ The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/star
 </Admonition>
 
 You can try any of these methods and watch the status of your compute as it transitions from an **Idle** to an **Active** state.
+
+## Considerations
+
+When a compute autosuspends and later restarts, the [session context](/docs/reference/compatibility#session-context) resets. This includes in-memory statistics, temporary tables, prepared statements, and autovacuum thresholds, among other session-specific data. If your workflow requires persistent session data, consider disabling autosuspend on a paid plan to keep your compute active continuously. On the Free plan, autosuspend is always enabled and automatically suspends after 5 minutes of inactivity.
