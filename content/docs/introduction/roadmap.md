@@ -38,7 +38,7 @@ Here's a snapshot of what we're working on now:
 - **Private network access**: Private and secure network access to your compute resources without traversing public networks.
 - **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
 - **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
-- **HIPAA compliance**: We are actively working towards achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
+- **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
 
