@@ -70,7 +70,7 @@ const Post = ({
           <h1
             className={clsx(
               isUseCase
-                ? 'mt-12 text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                ? 'text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
                 : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
               tag && 'inline'
             )}
@@ -106,7 +106,7 @@ const Post = ({
       )}
     >
       <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
         <div
           className={clsx(
             enableTableOfContents &&
