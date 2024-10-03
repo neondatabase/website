@@ -30,6 +30,10 @@ The integration leverages a [list of metrics](#available-metrics) that Neon make
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
 
+<Admonition type="note"> 
+Metrics are sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics will be collected and sent for each compute. 
+</Admonition>
+
 ## Prerequisites
 
 Before getting started, ensure the following:
@@ -48,8 +52,10 @@ Before getting started, ensure the following:
 
 Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
 
-<Admonition type="note">
-Your Neon compute must be active in order to send metrics.
+<Admonition type="note"> 
+Neon computes only send metrics when they are active. If the [Autosuspend](/docs/introduction/auto-suspend) feature is enabled and a compute is suspended due to inactivity, no metrics will be sent during the suspension. This may result in gaps in your Datadog metrics. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
+
+Additionally, if you are setting up Neon’s Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute. 
 </Admonition>
 
 ## Example usage in Datadog
