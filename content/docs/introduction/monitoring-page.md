@@ -139,7 +139,7 @@ The **Working set size** graph provides a visual representation of how much data
 
 - **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed from the cache over the last 15 minutes.
-- **1h** (1 hour): This line represents the amount of data accessed from the cache in the last hour.
+- **1h** (1 hour): This line represents the amount of data accessed in the last hour.
 - **Local file cache size**: This is the size of the the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 For optimal performance the local file cache should be larger than your working set size for a given time interval.
 If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
