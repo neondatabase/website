@@ -16,8 +16,8 @@ import careersDarkIcon from 'icons/header/careers-dark.svg';
 import careersIcon from 'icons/header/careers.svg';
 import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
 import caseDatabaseIcon from 'icons/header/case-database.svg';
-// import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
-// import caseDevIcon from 'icons/header/case-dev.svg';
+import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
+import caseDevIcon from 'icons/header/case-dev.svg';
 import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
 import caseSaasIcon from 'icons/header/case-saas.svg';
 import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
@@ -174,6 +174,15 @@ export default {
           text: 'Database per Tenant',
           description: 'DB-per-User Archictectures',
           to: `${LINKS.useCases}/database-per-tenant`,
+        },
+        {
+          icon: {
+            light: caseDevIcon,
+            dark: caseDevDarkIcon,
+          },
+          text: 'Dev/Test',
+          description: 'Non-prod environments',
+          to: `${LINKS.useCases}/dev-test`,
         },
         // {
         //   icon: {
