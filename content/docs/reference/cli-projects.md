@@ -236,10 +236,10 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option              | Description                                                                                   | Type    | Required |
-| ------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
-| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
-| `--name`            | The project name. The value cannot be empty.                                                  | string  | &check;  |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| `--name`         | The project name. The value cannot be empty.                                                  | string | &check;  |
 
 #### Examples
 
