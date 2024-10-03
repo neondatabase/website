@@ -146,7 +146,7 @@ export default {
   stage: {
     title: 'Neon Deploy Stage — Neon',
     description:
-      'Join us at 10:00 AM PT, October 30th for presentations about Postgres, scalability, AI, and using Neon with modern developer tools.',
+      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
   },
   404: {
