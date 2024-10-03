@@ -236,9 +236,9 @@
       "feature": {
         "title": "GDPR"
       },
-      "free": false,
-      "launch": false,
-      "scale": false,
+      "free": true,
+      "launch": true,
+      "scale": true,
       "business": true
     },    
     {
