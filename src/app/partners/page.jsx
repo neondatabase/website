@@ -2,11 +2,13 @@ import Apply from 'components/pages/partners/apply';
 import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
+import Container from 'components/shared/container';
 import CTAWithElephant from 'components/shared/cta-with-elephant';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
+import UseCaseCalculator from 'components/shared/use-case-calculator';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import compatibilityIcon from 'icons/ai/compatibility.svg';
@@ -72,7 +74,7 @@ const PartnersPage = () => (
       isGradientLabel
     />
     <Testimonial
-      className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
+      className="mt-44 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
       quote="We’ve built RetoolDB while virtually automating all database tasks. This saved us a tremendous amount of time and engineering effort."
       name="Himanshu Bhandoh"
@@ -81,6 +83,11 @@ const PartnersPage = () => (
     <Collaboration />
     <Apply />
     <Integration />
+    <section className="calculator safe-paddings mt-36 lg:mt-28 md:mt-20">
+      <Container size="768">
+        <UseCaseCalculator />
+      </Container>
+    </section>
     <CTAWithElephant
       className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
       titleClassName="-mr-10 sm:max-w-[300px]"
