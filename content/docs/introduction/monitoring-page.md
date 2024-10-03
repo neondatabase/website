@@ -135,7 +135,7 @@ Queries not served from either Postgres shared buffers (128 MB on all Neon compu
 
 Your working set is recently accessed data and indexes stored in memory&#8212;in Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** graph provides a visual representation of how much data is being accessed from the LFC over different time intervals. Here’s how to interpret the graph:
+The **Working set size** graph provides a visual representation of how much data has being accessed over different time intervals. Here’s how to interpret the graph:
 
 - **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed over the last 15 minutes.
