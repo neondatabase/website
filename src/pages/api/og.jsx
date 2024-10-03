@@ -130,7 +130,7 @@ export default async function handler(req) {
               }}
             >
               <span>10AM PT,</span>
-              <span>Oct 1, 2024</span>
+              <span>Oct 30, 2024</span>
             </p>
           </div>
         </div>

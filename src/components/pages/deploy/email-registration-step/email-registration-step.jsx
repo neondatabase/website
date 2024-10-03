@@ -41,7 +41,7 @@ const CountdownTimer = () => {
     setMounted(true);
   }, []);
 
-  const targetDate = new Date('2024-10-01T17:00:00Z').getTime();
+  const targetDate = new Date('2024-10-30T17:00:00Z').getTime();
   const now = new Date().getTime();
   const difference = targetDate - now;
 
@@ -95,13 +95,13 @@ const EmailRegistrationStep = () => (
               maskPosition: 'center',
             }}
           >
-            <span>October 1st, 2024</span> <span>10:00 AM PT</span>
+            <span>October 30th, 2024</span> <span>10:00 AM PT</span>
           </time>
         </div>
       </div>
-      <p className="mt-3 max-w-[448px] text-lg font-light leading-[1.3] text-gray-new-60 sm:text-base xs:max-w-[320px]">
-        Join us for presentations about Postgres, scalability, AI, and using Neon with modern
-        developer tools.
+      <p className="mt-3 max-w-[448px] text-lg font-light leading-[1.3] text-gray-new-60 sm:text-base xs:max-w-[448px]">
+        Learn how Neon empowers developers to ship faster with Postgres. Tune in for Product updates
+        and technical deep dives.
       </p>
       <SubscriptionForm
         className="mt-8 lg:mt-6"

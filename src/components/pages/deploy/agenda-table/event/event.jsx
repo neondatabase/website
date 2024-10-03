@@ -46,7 +46,7 @@ const Event = ({
             {role && (
               <span className="mt-0.5 text-[13px] font-light text-gray-new-80">
                 <span className="tracking-[-0.02em]">{role}</span>
-                <span>, {company}</span>
+                {/* <span>, {company}</span> */}
               </span>
             )}
           </div>
@@ -66,9 +66,9 @@ const Event = ({
       >
         {event}
       </td>
-      <td className="whitespace-pre py-4 text-lg leading-dense text-gray-new-80 lg:text-base sm:hidden">
+      {/* <td className="whitespace-pre py-4 text-lg leading-dense text-gray-new-80 lg:text-base sm:hidden">
         {time}
-      </td>
+      </td> */}
     </tr>
   );
 };
