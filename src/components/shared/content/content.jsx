@@ -21,10 +21,10 @@ import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
-import Example from 'components/pages/variable/example';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
+import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
@@ -142,7 +142,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   TestimonialsWrapper,
   UseCaseList,
   UseCaseContext,
-  Example,
+  ComputeCalculator,
   ...sharedComponents,
 });
 

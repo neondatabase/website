@@ -116,7 +116,8 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 
 In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings, together with streamlined development workflows, improved collaboration, and fewer operational complexities.
 
-<Example
+<ComputeCalculator
+className="mt-10"
 databases={[
 {
 type: 'Dev databases',

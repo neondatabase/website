@@ -1,10 +1,10 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
 
-import Calculator from '../calculator';
-
+import Calculator from './calculator';
 import leftGlowMobile from './images/left-glow-mobile.png';
 import leftGlow from './images/left-glow.png';
 import rightGlowMobile from './images/right-glow-mobile.png';
@@ -82,12 +82,18 @@ const DEFAULT_INPUT_PARAMS_BLOCK = [
   },
 ];
 
-const Example = ({
+const ComputeCalculator = ({
+  className,
   databases = DEFAULT_DATABASES,
   values = DEFAULT_VALUES,
   inputParamsBlock = DEFAULT_INPUT_PARAMS_BLOCK,
 }) => (
-  <div className="not-prose relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6">
+  <div
+    className={clsx(
+      'not-prose relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6',
+      className
+    )}
+  >
     <div className="relative z-10 pb-[18px]">
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
@@ -139,7 +145,8 @@ const Example = ({
   </div>
 );
 
-Example.propTypes = {
+ComputeCalculator.propTypes = {
+  className: PropTypes.string,
   databases: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string.isRequired,
@@ -151,4 +158,4 @@ Example.propTypes = {
   inputParamsBlock: PropTypes.array,
 };
 
-export default Example;
+export default ComputeCalculator;

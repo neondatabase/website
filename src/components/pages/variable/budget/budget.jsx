@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import CtaBlock from 'components/shared/cta-block';
 import LINKS from 'constants/links';
 
-import Example from '../example';
+import Example from '../../../shared/compute-calculator';
 import List from '../list';
 import Section from '../section';
 
