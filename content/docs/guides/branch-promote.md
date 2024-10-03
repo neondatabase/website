@@ -320,7 +320,7 @@ curl --request POST \
 </details>
 
 <Admonition type="note">
-Promoting a branch to default can also be performed using the Neon Console or CLI. See [Set a branch as primary](/docs/manage/branches#set-a-branch-as-default) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-primary) for CLI instructions.
+Promoting a branch to default can also be performed using the Neon Console or CLI. See [Set a branch as default](/docs/manage/branches#set-a-branch-as-default) for Neon Console instructions. See [Neon CLI commands — branches](/docs/reference/cli-branches#set-default) for CLI instructions.
 </Admonition>
 
 You should now have a new default branch, and because you moved the compute from your old default branch to the new one, you do not need to change the connection details in your applications. Once you have validated the change, consider deleting your old default branch to save storage space. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).

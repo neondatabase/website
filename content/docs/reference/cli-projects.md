@@ -240,8 +240,6 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
 | `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
 | `--name`            | The project name. The value cannot be empty.                                                  | string  | &check;  |
-| `--ip-allow`        | A list of IP addresses that are allowed to connect to the endpoint                            | string  |          |
-| `--ip-primary-only` | If true, the list will be applied only to the default branch. The deafault value is `false`.  | boolean |          |
 
 #### Examples
 
@@ -254,28 +252,6 @@ neon projects update muddy-wood-859533 --name dev_project_1
 ├───────────────────┼───────────────┼───────────────┼──────────────────────┤
 │ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
-```
-
-Update the IP allowlist. Multiple values are specified as a list without a delimiter.
-
-```bash
-neon projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2
-┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                      │ Name      │ Region Id     │ Created At           │
-├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
-└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
-```
-
-Apply the IP allowlist to the default branch only:
-
-```bash
-neon projects update withered-dream-91802149 --ip-only-primary
-┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                      │ Name      │ Region Id     │ Created At           │
-├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
-└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
 ### delete
