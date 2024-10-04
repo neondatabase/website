@@ -1,8 +1,7 @@
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import UseCaseCalculator from 'components/shared/use-case-calculator';
 import LINKS from 'constants/links';
-
-import Example from '../example';
 
 const Hero = () => (
   <section className="hero safe-paddings relative overflow-hidden pt-[88px] xl:pt-14 lg:pt-11 md:pt-8">
@@ -41,7 +40,7 @@ const Hero = () => (
         </p>
       </div>
 
-      <Example />
+      <UseCaseCalculator />
     </Container>
   </section>
 );

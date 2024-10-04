@@ -8,7 +8,7 @@ import databaseTable from './images/database-table.svg';
 import Row from './row';
 
 const Integration = () => (
-  <section className="integration safe-paddings mt-[192px] 2xl:mt-36 lg:mt-28 md:mt-20">
+  <section className="integration safe-paddings mt-48 2xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="flex flex-col items-center" size="medium">
       <GradientLabel>Features</GradientLabel>
       <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">

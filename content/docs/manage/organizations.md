@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-09-26T18:14:38.441Z'
+updatedOn: '2024-10-04T10:08:26.119Z'
 ---
 
 <FeatureBeta/>
@@ -64,10 +64,6 @@ In this scenario you've been using Neon for personal projects for some time, and
 - [Invite](/docs/manage/orgs-manage#invite-members) someone to your new organization and delegate billing to them: set their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**. They can then revise the billing details and handle invoices for the organization.
 - Start creating new projects within the new organization.
 - Keep your personal projects on your existing paid plan. No need to transfer or downgrade.
-
-## Request conversion from support
-
-If you want us to handle this conversion for you, you can contact [Neon Support](https://neon.tech/docs/introduction/support#support-channels) to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
 
 ## Limitations
 

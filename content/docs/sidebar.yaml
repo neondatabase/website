@@ -332,7 +332,7 @@
               slug: security/compliance
             - title: Acceptable Use Policy
               slug: security/acceptable-use-policy
-        - section:
+        - section: Backups
           items:
             - title: Backups
               slug: manage/backups
@@ -665,7 +665,8 @@
         - title: Neon SDKs
           slug: reference/sdk
     - title: Terraform
-      slug: https://github.com/kislerdm/terraform-provider-neon
+      slug: reference/terraform
+      tag: community
       icon: management
 - section: Postgres
   items:
