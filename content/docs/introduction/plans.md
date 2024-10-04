@@ -38,7 +38,7 @@ The Free Plan includes the following usage allowances:
 
 | Usage type                 | Plan allowance                                                                                                                                           |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Projects**               | 10 Neon projects                                                                                                                                           |
+| **Projects**               | 10 Neon projects                                                                                                                                         |
 | **Branches**               | 10 branches                                                                                                                                              |
 | **Databases**              | 500 per branch                                                                                                                                           |
 | **Storage**                | 0.5 GiB                                                                                                                                                  |
