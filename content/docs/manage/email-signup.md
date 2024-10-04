@@ -29,6 +29,10 @@ Or follow this direct link:
 
 After you make the change, you'll receive a notification at this new email address asking you to confirm. Once confirmed, you'll be logged out of Neon. Log back in with your new email, and use this email going forward.
 
+<Admonition type="note">
+If your email address is greyed-out and you can't update it, try logging out and then logging back into the console.
+</Admonition>
+
 ## Removing email as a login method
 
 Removing an email account as a login method is currently not supported via the Neon Console. If you need to remove this login method in favor of a Google or GitHub social account login, please contact [Support](/docs/introduction/support) for assistance. If you are looking to remove your Neon account entirely, see [Delete your account](/docs/introduction/manage-billing#delete-your-account) for instructions.
