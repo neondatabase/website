@@ -50,7 +50,7 @@ While the compute layer doesn’t provide traditional high availability, it’s 
 
 ### Compute endpoints as metadata
 
-Think of your compute endpoint as metadata — with your connection string being the core element. The endpoint isn't permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon reassigns to a pre-created VM and attaches your compute endpoint to this VM.
+Think of your compute endpoint as metadata — with your connection string being the core element. The endpoint isn't permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon assigns a pre-created VM from a pool and attaches your compute endpoint to this VM.
 
 #### Postgres failure
 
