@@ -71,7 +71,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Achieves ISO 27001 and ISO 27701 Compliance - Read more >
+      Neon Achieves ISO 27001 and ISO 27701 Compliance - Read more &gt;
     </span>
     <ChevronIcon
       className={clsx(
