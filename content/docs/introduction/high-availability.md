@@ -46,7 +46,7 @@ In the event of a Pageserver failure, data remains safe in cloud object storage,
 
 ## Compute resiliency
 
-While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
+While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
 
 ### Compute endpoints as metadata
 
@@ -60,7 +60,7 @@ Postgres runs inside the VM. If Postgres crashes, an internal Neon process detec
 
 #### VM failure
 
-In rarer cases, the VM itself may fail due to issues like kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
+In rarer cases, the VM itself may fail due to issues like a kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
