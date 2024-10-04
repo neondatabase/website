@@ -28,7 +28,6 @@ neon branches <subcommand> [options]
 | [restore](#restore)         | Restore a branch to a selected point in time |
 | [rename](#rename)           | Rename a branch                              |
 | [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-primary](#set-primary) | Set a default branch (Deprecated)            |
 | [set-default](#set-default) | Set a default branch                         |
 | [add-compute](#add-compute) | Add replica to a branch                      |
 | [delete](#delete)           | Delete a branch                              |
@@ -545,42 +544,6 @@ This command compares the schema of the `main` branch to the state of the `dev/j
 
 ```bash
 neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
-```
-
-## set-primary
-
-<Admonition type="warning">
-The `set-primary` subcommand is deprecated. It will be removed in a future release. Use [set-default](#set-default) instead.
-</Admonition>
-
-This subcommand allows you to set a branch as the default branch in your Neon project.
-
-#### Usage
-
-```bash
-neon branches set-primary <id|name> [options]
-```
-
-`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
-
-#### Options
-
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-primary` subcommand supports this option:
-
-| Option           | Description                                                                                   | Type   |                      Required                       |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
-| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
-
-#### Example
-
-```bash
-neon branches set-primary mybranch
-┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                 │ Name     │ Primary │ Created At           │ Updated At           │
-├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
-└────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
 ## set-default
