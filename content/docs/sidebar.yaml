@@ -185,6 +185,8 @@
           slug: introduction/autoscaling-architecture
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
+        - title: High availability
+          slug: introduction/high-availability
     - title: Features
       slug: guides/neon-features
       icon: features
