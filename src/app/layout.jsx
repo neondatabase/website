@@ -9,6 +9,7 @@ import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsC
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import ThemeProvider from './provider';
+import SessionProvider from './session-provider';
 
 export const preferredRegion = 'edge';
 
@@ -29,11 +30,13 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      <ThemeProvider>
-        <HomepageVisitProvider>
-          <ActiveLabelProvider>{children}</ActiveLabelProvider>
-        </HomepageVisitProvider>
-      </ThemeProvider>
+      <SessionProvider>
+        <ThemeProvider>
+          <HomepageVisitProvider>
+            <ActiveLabelProvider>{children}</ActiveLabelProvider>
+          </HomepageVisitProvider>
+        </ThemeProvider>
+      </SessionProvider>
     </body>
   </html>
 );

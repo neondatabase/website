@@ -180,7 +180,8 @@ const items = [
         title: 'Migration assistance',
         info: 'With 0 migration fees—we will waive them',
       },
-      { title: 'SOC 2 + 99.95% SLA' },
+      { title: 'Compliance (GDPR, SOC 2, ISO)' },
+      { title: '99.95% SLA' },
       { title: 'Priority support' },
     ],
     button: {
