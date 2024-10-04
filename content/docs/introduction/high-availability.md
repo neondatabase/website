@@ -46,7 +46,7 @@ In the event of a Pageserver failure, data remains safe in cloud object storage,
 
 ## Compute resiliency
 
-While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
+While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
 
 ### Compute endpoints as metadata
 
