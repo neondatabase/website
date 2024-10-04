@@ -5,7 +5,6 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
