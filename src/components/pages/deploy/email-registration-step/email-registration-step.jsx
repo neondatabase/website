@@ -83,7 +83,7 @@ const EmailRegistrationStep = () => (
         <div className="relative mt-3.5 overflow-hidden sm:mt-2.5">
           <time
             className="relative flex flex-col bg-white bg-clip-text text-[32px] leading-[1.2] tracking-tight text-transparent sm:text-[28px]"
-            dateTime="2024-10-01T17:00:00Z"
+            dateTime="2024-10-30T17:00:00Z"
             style={{
               backgroundImage: 'url(/images/deploy/ellipse.svg)',
               backgroundSize: '294px 63px',

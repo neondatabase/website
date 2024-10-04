@@ -51,9 +51,9 @@ const GithubRegistrationStep = () => {
                   variants={appearAndExitAnimationVariants}
                   aria-hidden
                 >
-                  <div className="h-[40px] w-[40px] rounded-full" />
+                  <div className="h-10 w-10 rounded-full" />
                   <svg
-                    className="absolute left-1/2 top-1/2 h-[40px] w-[40px]"
+                    className="absolute left-1/2 top-1/2 h-10 w-10"
                     width="58"
                     height="58"
                     viewBox="0 0 58 58"

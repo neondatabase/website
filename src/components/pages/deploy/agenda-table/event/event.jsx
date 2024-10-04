@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Event = ({
   speaker,
   company,
-  time,
+  // time,
   event,
   description = null,
   setShowModal,
@@ -51,12 +51,12 @@ const Event = ({
             )}
           </div>
         </div>
-        <span
+        {/* <span
           className="hidden whitespace-pre text-gray-new-80 sm:block sm:text-[15px]"
           aria-hidden
         >
           {time}
-        </span>
+        </span> */}
       </td>
       <td
         className={clsx(
