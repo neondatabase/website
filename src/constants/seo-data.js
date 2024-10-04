@@ -66,6 +66,13 @@ export default {
     pathname: LINKS.demos,
     imagePath: '/images/social-previews/demos.jpg',
   },
+  deploy: {
+    title: 'Neon Deploy — Neon',
+    description:
+      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
+    pathname: LINKS.deploy,
+    imagePath: '/images/social-previews/deploy.jpg',
+  },
   developerDays1: {
     title: 'Neon Developer Days — Neon',
     description:
@@ -79,6 +86,12 @@ export default {
       'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
+  },
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
@@ -130,8 +143,27 @@ export default {
     // imagePath: '',
     pathname: LINKS.scalableArchitecture,
   },
+  stage: {
+    title: 'Neon Deploy Stage — Neon',
+    description:
+      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
+    pathname: LINKS.stage,
+    robotsNoindex: 'noindex',
+  },
   404: {
     title: 'Page Not Found — Neon',
+  },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  },
+  ticket({ name, login: githubHandle }) {
+    const userName = name || githubHandle;
+
+    return {
+      title: `${userName}'s ticket for Neon Deploy - Neon`,
+      description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
+    };
   },
 };
 
