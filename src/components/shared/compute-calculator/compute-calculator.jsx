@@ -87,6 +87,7 @@ const ComputeCalculator = ({
   databases = DEFAULT_DATABASES,
   values = DEFAULT_VALUES,
   inputParamsBlock = DEFAULT_INPUT_PARAMS_BLOCK,
+  textSize = 'lg',
 }) => (
   <div
     className={clsx(
@@ -98,7 +99,12 @@ const ComputeCalculator = ({
       <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
       </h3>
-      <ul className="space-y-2 !pl-0 text-lg tracking-extra-tight sm:text-sm sm:leading-snug">
+      <ul
+        className={clsx(
+          'space-y-2 !pl-0 tracking-extra-tight sm:text-sm sm:leading-snug',
+          textSize === 'lg' ? 'text-lg' : 'text-base'
+        )}
+      >
         {databases.map(({ type, instance, usage }) => (
           <li
             key={type}
@@ -114,7 +120,7 @@ const ComputeCalculator = ({
         ))}
       </ul>
     </div>
-    <Calculator inputParamsBlock={inputParamsBlock} values={values} />
+    <Calculator inputParamsBlock={inputParamsBlock} values={values} textSize={textSize} />
     <BgDecor hasBorder hasNoise hasPattern>
       <Image
         className="absolute right-0 top-0 h-[776px] w-[617px] sm:hidden"
@@ -159,6 +165,7 @@ ComputeCalculator.propTypes = {
   ),
   values: PropTypes.array,
   inputParamsBlock: PropTypes.array,
+  textSize: PropTypes.oneOf(['lg', 'md']),
 };
 
 export default ComputeCalculator;

@@ -25,7 +25,7 @@ const DashedBorder = () => (
   </>
 );
 
-const Calculator = ({ inputParamsBlock, values }) => {
+const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
   const [inputParams, setInputParams] = useState({
     test_databases_num: 10,
     dev_databases_num: 10,
@@ -120,7 +120,10 @@ const Calculator = ({ inputParamsBlock, values }) => {
                     key={title}
                   >
                     <p
-                      className="text-lg leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight"
+                      className={clsx(
+                        'leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight',
+                        textSize === 'lg' ? 'text-lg' : 'text-base'
+                      )}
                       dangerouslySetInnerHTML={{ __html: title }}
                     />
                     <Field
@@ -176,6 +179,7 @@ const Calculator = ({ inputParamsBlock, values }) => {
 Calculator.propTypes = {
   inputParamsBlock: PropTypes.array.isRequired,
   values: PropTypes.array.isRequired,
+  textSize: PropTypes.oneOf(['lg', 'md']),
 };
 
 export default Calculator;

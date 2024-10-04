@@ -177,6 +177,7 @@ valueClassName: 'bg-variable-value-2',
 text: 'With scale to zero',
 },
 ]}
+textSize="md"
 />
 
 <CTA title="Reach out to us for an exact quote" description="Tell us more about your use case and we’ll send you back detailed information on how much you could save with Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
