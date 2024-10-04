@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
@@ -6,7 +6,7 @@ import SocialShare from 'components/pages/tickets/social-share';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
-import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
+// import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
 import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
 import prisma from 'utils/prisma';
@@ -34,17 +34,17 @@ const TicketEditPage = async ({ params }) => {
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[610px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
               Choose the ticket color and gather a watch party for the upcoming Neon Deploy! See you
               on <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
-            <Link
+            {/* <Link
               className="pointer-events-auto mt-[18px] inline-flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 lg:text-base"
               href="/stage"
             >
               <span>Watch the event live</span>
               <ArrowLeftIcon className="ml-2.5 h-auto w-[18px] rotate-180" />
-            </Link>
+            </Link> */}
             <SocialShare className="pointer-events-auto mt-11 lg:mt-8 sm:mt-6" url={shareUrl} />
           </div>
           <div className="col-span-6 col-start-6 self-center 2xl:-ml-10 xl:col-span-full xl:self-start lg:ml-0">

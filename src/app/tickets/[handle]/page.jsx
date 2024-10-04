@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import Button from 'components/pages/deploy/button';
@@ -7,7 +7,7 @@ import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
+// import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
 import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
 import prisma from 'utils/prisma';
@@ -29,21 +29,21 @@ const TicketPage = async ({ params }) => {
           size="1344"
         >
           <div className="pointer-events-none relative z-10 col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
-            <h1 className="relative z-50 font-title text-[62px] font-medium leading-none tracking-[-0.06em] text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
+            <h1 className="relative z-50 font-title text-[62px] font-medium leading-none tracking-[-0.06em] text-white xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[610px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[420px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
-            <Link
+            {/* <Link
               className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
               href={LINKS.stage}
             >
               <span>Watch the event live</span>
               <ArrowLeftIcon className="ml-2.5 h-auto w-[18px] rotate-180" />
-            </Link>
+            </Link> */}
 
             <Button
               className="pointer-events-auto mt-11"
