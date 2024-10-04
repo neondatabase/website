@@ -18,6 +18,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
 - [Unsupported startup parameter](#unsupported-startup-parameter)
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
+- [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -200,5 +201,17 @@ The error occurs when using a pooled Neon connection string with startup options
 This error can also appear as: `active endpoints limit exceeded`.
 
 Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage. The compute associated with the default branch is exempt from this limit, ensuring that it is always available. When you exceed the limit, any compute associated with a non-default branch will remain suspended and you will see this error when attempting to connect to it. You can suspend computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a limit increase.
+
+## Remaining connection slots are reserved for roles with the SUPERUSER attribute
+
+This error occurs when the maximum number of simultaneous database connections, defined by the Postgres `max_connections` setting, is reached.
+
+To resolve this issue, you have several options:
+
+- Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
+- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Enable [connection pooling](https://neon.tech/docs/connect/connection-pooling).
+
+If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
 
 <NeedHelp/>
