@@ -6,7 +6,11 @@ redirectFrom:
 updatedOn: '2024-10-01T16:52:01.968Z'
 ---
 
-Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (-) indicates that an extension is not yet supported.
+Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
+
+<Admonition type="note" title="Postgres 17 extension support">
+Postgres 17, released in September 2024, currently lacks support for several extensions. These extensions will become available once maintainers add Postgres 17 compatibility and after Neon completes validation testing. Newly supported extensions are announced in the [Neon Changelog](https://neon.tech/docs/changelog), which is published weekly.
+</Admonition>
 
 <a id="default-extensions/"></a>
 
