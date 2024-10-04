@@ -5,6 +5,7 @@ import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 // import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
@@ -29,6 +30,9 @@ const TicketPage = async ({ params }) => {
           size="1344"
         >
           <div className="pointer-events-none relative z-10 col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
+            <Link to={LINKS.deploy} theme="green" size="sm" className="mb-2 font-semibold">
+              Neon Deploy
+            </Link>
             <h1 className="relative z-50 font-title text-[62px] font-medium leading-none tracking-[-0.06em] text-white xl:mx-auto xl:max-w-[579px] md:max-w-[500px] md:text-[52px]">
               {userName}&apos;s <br className="hidden md:block" />
               Ticket

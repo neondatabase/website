@@ -71,7 +71,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Deploy: Learn how Neon empowers developers to ship faster with Postgres. Grab your ticket
+      Neon Deploy: Learn how Neon helps developers ship faster with Postgres. Grab your ticket
     </span>
     <ChevronIcon
       className={clsx(
