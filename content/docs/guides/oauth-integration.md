@@ -16,9 +16,11 @@ To set up the integration and create a Neon OAuth application, you can apply on 
    `https://yourapplication.com/api/oauth/callback`
 
    `http://localhost:3000/api/oauth/callback`
-3. Scopes, defining the type of access you want to request. We provide scopes for managing both projects and organizations. 
+
+3. Scopes, defining the type of access you want to request. We provide scopes for managing both projects and organizations.
 
    For a list of all available scopes, see [Supported OAuth Scopes](#supported-oauth-scopes).
+
 4. Whether or not you will make API calls from a backend.
 5. A logo to be displayed on Neon's OAuth consent dialog when users authorize your application to access their Neon account.
 
@@ -98,21 +100,21 @@ Depending on the OpenID client you’re using, you might not need to explicitly 
 
 The following OAuth scopes allow varying degrees of access to Neon resources:
 
-| **Project scopes**             | **Scope Name**                           |
-|:---------------------|:--------------------------------------|
-| Create Projects      | `urn:neoncloud:projects:create`      |
-| Read Projects        | `urn:neoncloud:projects:read`        |
-| Modify Projects      | `urn:neoncloud:projects:update`      |
-| Delete Projects      | `urn:neoncloud:projects:delete`      |
-| Manage Projects      | `urn:neoncloud:projects:permission`  |
+| **Project scopes** | **Scope Name**                      |
+| :----------------- | :---------------------------------- |
+| Create Projects    | `urn:neoncloud:projects:create`     |
+| Read Projects      | `urn:neoncloud:projects:read`       |
+| Modify Projects    | `urn:neoncloud:projects:update`     |
+| Delete Projects    | `urn:neoncloud:projects:delete`     |
+| Manage Projects    | `urn:neoncloud:projects:permission` |
 
-| **Organization scopes**                        | **Scope Name**                           |
-|:----------------------------------|:--------------------------------------|
-| Create Organizations             | `urn:neoncloud:orgs:create`          |
-| Read Organizations               | `urn:neoncloud:orgs:read`            |
-| Update Organizations             | `urn:neoncloud:orgs:update`          |
-| Delete Organizations             | `urn:neoncloud:orgs:delete`          |
-| Manage Organization Permissions  | `urn:neoncloud:orgs:permission`      |
+| **Organization scopes**         | **Scope Name**                  |
+| :------------------------------ | :------------------------------ |
+| Create Organizations            | `urn:neoncloud:orgs:create`     |
+| Read Organizations              | `urn:neoncloud:orgs:read`       |
+| Update Organizations            | `urn:neoncloud:orgs:update`     |
+| Delete Organizations            | `urn:neoncloud:orgs:delete`     |
+| Manage Organization Permissions | `urn:neoncloud:orgs:permission` |
 
 You must choose from these predefined scopes when requesting access; custom scopes are not supported.
 
