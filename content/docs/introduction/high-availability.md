@@ -60,7 +60,7 @@ Postgres runs inside the VM. If Postgres crashes, an internal Neon process detec
 
 #### VM failure
 
-In rarer cases, the VM itself may fail due to issues like kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
+In rarer cases, the VM itself may fail due to issues like a kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
