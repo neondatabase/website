@@ -3,6 +3,7 @@
 import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 const HeroNotFound = () => (
@@ -12,6 +13,9 @@ const HeroNotFound = () => (
       size="1344"
     >
       <div className="col-span-4 col-start-1 self-center 2xl:col-start-1 xl:col-span-full xl:self-end xl:text-center">
+        <Link to={LINKS.deploy} theme="green" size="sm" className="mb-2 font-semibold">
+          Neon Deploy
+        </Link>
         <h1 className="text-[62px] font-semibold leading-none tracking-[-0.05em] text-white xl:mx-auto xl:text-center md:text-[52px]">
           Ooops!
           <br /> Ticket not found...
