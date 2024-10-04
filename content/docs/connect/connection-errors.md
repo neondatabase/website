@@ -208,11 +208,10 @@ This error occurs when the maximum number of simultaneous database connections, 
 
 To resolve this issue, you have several options:
 
-- Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections). 
+- Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 - Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 - Enable [connection pooling](https://neon.tech/docs/connect/connection-pooling).
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
 
 <NeedHelp/>
-
