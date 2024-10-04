@@ -1,12 +1,11 @@
 import Image from 'next/image';
 
-import BgDecor from '../bg-decor';
-import Calculator from '../calculator';
-
+import BgDecor from './bg-decor';
+import Calculator from './calculator';
 import rightGlowMobile from './images/right-glow-mobile.png';
 import rightGlow from './images/right-glow.png';
 
-const Example = () => (
+const UseCaseCalculator = () => (
   <div className="relative mt-11 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 xl:mt-10 lg:mt-9 md:mt-7 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h2 className="sr-only">Use case</h2>
@@ -49,4 +48,4 @@ const Example = () => (
   </div>
 );
 
-export default Example;
+export default UseCaseCalculator;

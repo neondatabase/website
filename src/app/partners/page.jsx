@@ -1,4 +1,5 @@
 import Apply from 'components/pages/partners/apply';
+import Calculator from 'components/pages/partners/calculator';
 import Collaboration from 'components/pages/partners/collaboration';
 import Hero from 'components/pages/partners/hero';
 import Integration from 'components/pages/partners/integration';
@@ -72,7 +73,7 @@ const PartnersPage = () => (
       isGradientLabel
     />
     <Testimonial
-      className="mt-[176px] 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
+      className="mt-44 2xl:mt-40 xl:mt-36 lg:mt-28 md:mt-20"
       quoteClassName="text-[32px] xl:text-[28px] lg:text-xl md:text-lg"
       quote="We’ve built RetoolDB while virtually automating all database tasks. This saved us a tremendous amount of time and engineering effort."
       name="Himanshu Bhandoh"
@@ -81,6 +82,7 @@ const PartnersPage = () => (
     <Collaboration />
     <Apply />
     <Integration />
+    <Calculator />
     <CTAWithElephant
       className="mt-[178px] 2xl:mt-40 xl:mt-[125px] lg:mt-16 sm:mt-0"
       titleClassName="-mr-10 sm:max-w-[300px]"
