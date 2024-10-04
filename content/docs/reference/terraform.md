@@ -2,7 +2,7 @@
 title: Neon Terraform providers
 enableTableOfContents: true
 tag: community
-updatedOn: '2024-10-04T09:35:20.659Z'
+updatedOn: '2024-10-04T19:39:10.721Z'
 ---
 
 The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
@@ -26,7 +26,7 @@ Community Terraform providers are not maintained or officially supported by Neon
 
 - **Upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
 
-  To avoid unintended resource replacements which can result data loss:
+  To avoid unintended resource replacements which can result in data loss:
 
   - Review the provider’s changelog for any breaking changes that might affect your resources before upgrading to a new version.
   - For CI pipelines and auto-approved pull requests, only use `terraform init`. Running `terraform init -upgrade` should be done manually followed by plan reviews.
