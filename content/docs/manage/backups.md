@@ -41,6 +41,9 @@ For more command options, see [all @neondatabase/pg-import options](https://gith
 
 ## Automate Postgres Backups with a GitHub Action
 
-This blog post from a Neon community member describes how to set up a nightly backup to an AWS S3 storage bucket using a GitHub Action: [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/).
+These blog posts from Neon community members describe how you can schedule a backup to an AWS S3 storage bucket using a GitHub Action:
+
+- [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://thenewstack.io/how-to-schedule-postgresql-backups-with-github-actions/)
+- [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/)
 
 <NeedHelp/>
