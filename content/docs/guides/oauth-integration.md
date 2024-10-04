@@ -9,22 +9,16 @@ You can integrate your application or service with Neon using OAuth. The Neon OA
 To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partners). You will need to provide the following information:
 
 1. Details about your application, including the application name, what it does, and a link to the website.
-2. Callback URL(s), which are used to redirect users after completing the authorization flow.
-
-   Examples:
-
-   `https://yourapplication.com/api/oauth/callback`
-
-   `http://localhost:3000/api/oauth/callback`
-
-3. Scopes, defining the type of access you want to request. We provide scopes for managing both projects and organizations.
-
-   For a list of all available scopes, see [Supported OAuth Scopes](#supported-oauth-scopes).
-
+2. Callback URL(s), which are used to redirect users after completing the authorization flow. For example `https://yourapplication.com/api/oauth/callback`, `http://localhost:3000/api/oauth/callback`
+3. Scopes, defining the type of access you require. Currently, we provide access to the following scopes:
+   - Create Projects
+   - Read Projects
+   - Modify Projects
+   - Delete Projects
 4. Whether or not you will make API calls from a backend.
 5. A logo to be displayed on Neon's OAuth consent dialog when users authorize your application to access their Neon account.
 
-After your application is reviewed, we will provide you with a client ID and, if applicable, a client secret. Client secrets are only provided for backend clients, so non-backend applications (e.g., browser-based apps) will not receive a secret. These credentials are sensitive and should be stored securely.
+After your application is reviewed, we will get in touch with you and provide you with two credentials: a client ID and a client secret. These credentials are sensitive and should be stored securely.
 
 ## How the OAuth integration works
 
@@ -96,42 +90,13 @@ You must add `offline` and `offline_access` scopes to your request to receive th
 
 Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](https://neon.tech/docs/reference/neon-cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/main/src/auth.ts#L54-L71). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
-## Supported OAuth Scopes
-
-The following OAuth scopes allow varying degrees of access to Neon resources:
-
-| **Project scopes** | **Scope Name**                      |
-| :----------------- | :---------------------------------- |
-| Create Projects    | `urn:neoncloud:projects:create`     |
-| Read Projects      | `urn:neoncloud:projects:read`       |
-| Modify Projects    | `urn:neoncloud:projects:update`     |
-| Delete Projects    | `urn:neoncloud:projects:delete`     |
-| Manage Projects    | `urn:neoncloud:projects:permission` |
-
-| **Organization scopes**         | **Scope Name**                  |
-| :------------------------------ | :------------------------------ |
-| Create Organizations            | `urn:neoncloud:orgs:create`     |
-| Read Organizations              | `urn:neoncloud:orgs:read`       |
-| Update Organizations            | `urn:neoncloud:orgs:update`     |
-| Delete Organizations            | `urn:neoncloud:orgs:delete`     |
-| Manage Organization Permissions | `urn:neoncloud:orgs:permission` |
-
-You must choose from these predefined scopes when requesting access; custom scopes are not supported.
-
 ### 1. Initiating the OAuth flow
 
 To initiate the OAuth flow, you need to generate an authorization URL. You can do that by directing your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
 
 - `client_id`: your OAuth application's ID.
 - `redirect_uri`: the full URL that Neon should redirect users to after authorizing your application. The URL should match at least one of the callback URLs you provided when applying to become a partner.
-- `scope`: This is a space-separated list of predefined scopes that define the level of access you want to request. For a full list of supported scopes and their meanings, see the [Supported OAuth Scopes](#supported-oauth-scopes) section.
-
-  **Example:**
-
-  ```text
-  urn:neoncloud:projects:create urn:neoncloud:projects:read urn:neoncloud:projects:update urn:neoncloud:projects:delete urn:neoncloud:orgs:read
-  ```
-
+- `scope`: This is a space-separated list of scopes that you want to request access to. For example: `urn:neoncloud:projects:create urn:neoncloud:projects:read urn:neoncloud:projects:update urn:neoncloud:projects:delete`
 - `response_type`: This should be set to `code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/).
 - `code_challenge`: This is a random string that is used to verify the integrity of the authorization code.
 - `state`: This is a random string that is returned to your callback URL. You can use this parameter to verify that the request came from your application and not from a third party.
