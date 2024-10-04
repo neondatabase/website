@@ -248,7 +248,7 @@ const DynamicTicket = ({
                   >
                     10 AM PT,
                     <br />
-                    Oct 01, 2024
+                    Oct 30, 2024
                   </time>
                 </footer>
               </div>
