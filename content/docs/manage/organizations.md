@@ -65,10 +65,6 @@ In this scenario you've been using Neon for personal projects for some time, and
 - Start creating new projects within the new organization.
 - Keep your personal projects on your existing paid plan. No need to transfer or downgrade.
 
-## Request conversion from support
-
-If you want us to handle this conversion for you, you can contact [Neon Support](https://neon.tech/docs/introduction/support#support-channels) to request this service. We’ll manage the transition of your billing and projects to your new organization for you.
-
 ## Limitations
 
 As we continue to refine our Organizations feature during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
