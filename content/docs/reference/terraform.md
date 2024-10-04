@@ -33,7 +33,7 @@ Community Terraform providers are not maintained or officially supported by Neon
   - Run `terraform plan` before applying any changes to detect potential differences and review the behavior of resource updates.
   - Use [lifecycle protections](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#prevent_destroy) on critical resources to ensure they're not recreated unintentionally.
   - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
-- On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
+  - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
 ## Resources
 
