@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how you can integrate your platform with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.403Z'
+updatedOn: '2024-10-05T09:31:59.749Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your end-users through Neon. This guide covers how to become a Neon partner, integrate your platform with Neon, set usage limits for your users, and more.
