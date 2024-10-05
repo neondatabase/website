@@ -42,7 +42,7 @@ https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}
 
 ## Using the Neon API reference to construct and execute requests
 
-You can use the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to execute Neon API requests. Select an endpoint, enter an API key token in the **Bearer** field, supply any required parameters and properties, and click **Try it!** to execute the request. For information about obtaining API keys, see [Manage API keys](/docs/manage/api-keys).
+You can use the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to execute Neon API requests. Select an endpoint, enter an API key token in the **Bearer** field in the **Authorization** section, and supply any required parameters and properties. For information about obtaining API keys, see [Manage API keys](/docs/manage/api-keys).
 
 The [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) also provides request and response body examples that you can reference when constructing your own requests.
 

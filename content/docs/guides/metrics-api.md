@@ -34,9 +34,7 @@ This API endpoint accepts the following query parameters: `from`, `to`, `granula
 
 Include the unique `org_id` for your organization to retrieve account metrics for that specific organization. If not specified, metrics for your personal account will be returned.
 
-<Admonition type="note">
-Organizations are currently in private preview. For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
-</Admonition>
+For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
 
 ### Set a date range for granular results
 

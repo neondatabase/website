@@ -1,16 +1,16 @@
 ---
 title: Partner guide
-subtitle: Learn how you can partner with Neon
+subtitle: Learn how you can integrate your platform with Neon
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-06-14T07:55:54.403Z'
 ---
 
-Find relevant documentation explaining how partners can integrate with Neon, how to set usage quotas, and links to where you can apply to become a Neon partner.
+Learn how you can offer instant, managed Postgres databases to your end-users through Neon. This guide covers how to become a Neon partner, integrate your platform with Neon, set usage limits for your users, and more.
 
 ## Partnering with Neon
 
-Apply for partnership with Neon.
+Learn about the benefits of integrating with Neon and how to become a partner.
 
 <DetailIconCards>
 
