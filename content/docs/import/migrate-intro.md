@@ -20,8 +20,6 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <a href="/docs/import/migrate-from-postgres" description="Migrate data from another Postgres database using pg_dump and pg_restore" icon="postgres">MIgrate with pg_dump and pg_restore</a>
 
-<a href="/docs/import/migrate-from-postgres-pg-import" description="Easily migrate data from another Postgres database with the @neondatabase/pg-import CLI" icon="postgres">Migrate with @neondatabase/pg-import</a>
-
 <a href="/docs/import/migrate-from-neon" description="Migrate data from another Neon project for Postgres version, region, or account migration" icon="neon">Migrate from another Neon project</a>
 
 <a href="/docs/import/migrate-schema-only" description="Migrate only the schema from a Postgres database with pg_dump and pg_restore" icon="neon">Migrate schema only</a>

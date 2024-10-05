@@ -24,21 +24,6 @@ This method dumps a single database in a single branch of your Neon project. If 
 
 To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate from Postgres](/docs/import/migrate-from-postgres) guide.
 
-## Backups with @neondatabase/pg-import
-
-Export your data from the source database with `@neondatabase/pg-import`:
-
-```bash shouldWrap
-npx @neondatabase/pg-import --source <source_database_connection_string> --backup-file-path <dump_file_name>
-```
-
-The `@neondatabase/pg-import` command above includes these arguments:
-
-- `--source`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
-- `--backup-file-path`: The dump file name. It can be any name you choose (`./mydumpfile.bak`, for example).
-
-For more command options, see [all @neondatabase/pg-import options](https://github.com/neondatabase/pg-import?tab=readme-ov-file#flags-and-options).
-
 ## Automate Postgres Backups with a GitHub Action
 
 These blog posts from Neon community members describe how you can schedule a backup to an AWS S3 storage bucket using a GitHub Action:

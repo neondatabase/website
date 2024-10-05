@@ -119,8 +119,6 @@
           items:
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
-            - title: Migrate from Postgres with pg-import
-              slug: import/migrate-from-postgres-pg-import
             - title: Migrate from a Neon project
               slug: import/migrate-from-neon
             - title: Migrate schema only
