@@ -58,10 +58,6 @@ Neon supports the following dump and restore options:
 
   If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
 
-- [Migrate data with the @neondatabase/pg-import CLI](/docs/import/migrate-from-postgres-pg-import)
-
-  This experimental CLI utility is built on top of the piping method described above.
-
 **Logical Replication**
 
 The logical replication method can be used to achieve a near-zero downtime migration. Once the data in the new Neon project is synced with the data in the Neon project running the older version of Postgres, you can quickly switch your applications to the database. This method is recommended for active databases that cannot afford much downtime. For instructions, see [Logical Replication](/docs/guides/logical-replication-neon-to-neon).
