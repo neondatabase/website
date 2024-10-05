@@ -1,6 +1,8 @@
 ---
 title: Chat with Neon Postgres with AskYourDatabase
 subtitle: Chat with your Neon Postgres database without writing SQL
+redirectFrom:
+  - /docs/connect/connect-ai
 enableTableOfContents: true
 updatedOn: '2024-08-07T21:36:52.645Z'
 ---
