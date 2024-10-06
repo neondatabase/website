@@ -47,9 +47,9 @@ This example shows how to use Go to execute Terraform commands and test Terrafor
 - Write a Go test function to validate Terraform execution
 - Execute Terraform commands such as init, plan, and apply
 
-**YouTube Tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s)
+**YouTube tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s)
 
-**GitHub Repository**: [go-terraform](https://github.com/mattmajestic/go-terraform)
+**GitHub repository**: [go-terraform](https://github.com/mattmajestic/go-terraform)
 
 ## Resources
 
