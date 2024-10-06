@@ -1,7 +1,7 @@
 ---
 title: Neon OAuth integration
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.403Z'
+updatedOn: '2024-10-05T09:31:59.748Z'
 ---
 
 You can integrate your application or service with Neon using OAuth. The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -112,7 +112,7 @@ After being redirected to the authorization URL, the user is presented with Neon
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
 
 <Admonition type="note">
-The Neon API provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
+The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
 </Admonition>
 
 ### 2. Authorization code is returned to your callback URL
@@ -133,11 +133,11 @@ You can now exchange the authorization code returned from the previous step for 
 - `grant_type`: set this to `authorization_code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/)
 - `code`: the authorization code returned from the previous step
 
-The response object includes an `access_token` value, required for making requests to the Neon API on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
+The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
 ## Example OAuth applications
 
-The [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application leverages the Neon OAuth integration. You can find the example application code on GitHub.
+For an example application that leverages the Neon OAuth integration, see the [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application. You can find the application code on GitHub.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app showcasing how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
