@@ -37,6 +37,20 @@ Community Terraform providers are not maintained or officially supported by Neon
 
 - **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
+## Terraform example
+
+**Neon Postgres for Terraform with Go**
+
+This example shows how to use Go to execute Terraform commands and test Terraform configurations. It covers how to:
+
+- Use Go's os/exec package to run Terraform commands
+- Write a Go test function to validate Terraform execution
+- Execute Terraform commands such as init, plan, and apply
+
+**YouTube Tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s)
+
+**GitHub Repository**: [go-terraform](https://github.com/mattmajestic/go-terraform)
+
 ## Resources
 
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
