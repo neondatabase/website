@@ -24,7 +24,7 @@ Community Terraform providers are not maintained or officially supported by Neon
 
 ## Important usage notes
 
-- **Upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
+- **Provider upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
 
   To avoid unintended resource replacements which can result in data loss:
 
@@ -34,9 +34,11 @@ Community Terraform providers are not maintained or officially supported by Neon
   - Use [lifecycle protections](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#prevent_destroy) on critical resources to ensure they're not recreated unintentionally.
   - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Resources
 
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
 - [Initialize Terraform configuration](https://developer.hashicorp.com/terraform/tutorials/cli/init)
 - [Terraform plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
+- [Terraform: Manage resource lifecycle](https://developer.hashicorp.com/terraform/tutorials/state/resource-lifecycle)
