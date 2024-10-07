@@ -37,7 +37,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
-    ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
+    ![Neon Sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
   </div>
 </div>
 
@@ -47,10 +47,10 @@ After you sign up, you are guided through some onboarding steps that ask you to 
 
 <div style={{ display: 'flex' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
-    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
+    ![Neon Onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
   </div>
   <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
-    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
+    ![Neon Quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
   </div>
 </div>
 
@@ -96,7 +96,7 @@ Your default branch `main` now has a table with some data.
 
 Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
-![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+![Neon Tables Page Drizzle Integration](/docs/relnotes/tables_page_drizzle.png)
 
 For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
 
