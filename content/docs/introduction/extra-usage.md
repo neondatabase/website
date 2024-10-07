@@ -15,7 +15,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                                                                                                        | Project Allowance |
 | ---------- | ----------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes | 1 project         |
+| Free Plan  | $0          | 0.5 GiB           | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes | 10 projects       |
 | Launch     | $19         | 10 GiB            | 300 compute hours per month                                                                                                                              | 100 projects      |
 | Scale      | $69         | 50 GiB            | 750 compute hours per month                                                                                                                              | 1000 projects     |
 | Business   | $700        | 500 GiB           | 1000 compute hours per month                                                                                                                             | 5000 projects     |
