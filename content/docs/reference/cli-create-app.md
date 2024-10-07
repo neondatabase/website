@@ -2,7 +2,7 @@
 title: Neon CLI commands — create-app
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-08-02T11:06:47.749Z'
+updatedOn: '2024-10-07T13:55:51.300Z'
 ---
 
 ## Before you begin

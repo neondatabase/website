@@ -3,7 +3,7 @@ title: Promote a branch
 subtitle: Learn how to promote a branch to the default branch of your Neon project using
   the Neon API
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.948Z'
+updatedOn: '2024-10-07T13:55:51.295Z'
 ---
 
 This guide describes how to create a new branch and promote it to the default branch of your Neon project in the context of a data recovery scenario. It also describes how to move the compute from your existing default branch to the new branch to avoid having to reconfigure your application's database connection details.
