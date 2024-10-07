@@ -36,4 +36,4 @@ Neon's read replicas perform read operations on the same data as your read-write
 
 ## Get started with read replicas
 
-Read replicas are a paid plan feature. To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.
+To get started, refer to the [Working with read replicas](/docs/guides/read-replica-guide) guide.

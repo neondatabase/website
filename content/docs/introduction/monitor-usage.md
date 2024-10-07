@@ -33,9 +33,9 @@ Here you will find the current bill and total usage for all projects in your Neo
 Usage metrics on the **Billing page** include:
 
 - **Storage**: Storage is the total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. The displayed value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances.
-- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month. On the Free Plan, this metric only applies to [non-default branch](/docs/reference/glossary#non-default-branch) computes.
+- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month.
+- **Branch compute**: Only applies to the Free Plan. The total number of [compute hours](/docs/reference/glossary#compute-hours) used by non-default branches during the current billing period. Compute usage is reset to zero at the beginning of each month.
 - **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your plan's allowances.
-- **Branches** (Free Plan only) Number of database branches currently active in your account. On The Free Plan, there is a 10-branch allowance.
 - **Data transfer** (Free Plan only) The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer).
 
 The peak usage triangle indicates the highest usage level reached for that metric during the current billing period. Extra charges are automatically applied based on the number of additional units needed to cover your excess usage, prorated from the date the excess was allocated.
@@ -58,16 +58,18 @@ The peak usage triangle indicates the highest usage level reached for that metri
 
 ### Project Dashboard
 
-The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
+For paid plan users, the **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
 
 ![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
 
-Usage metrics include:
+For Free Plan users, this information is displayed in a usage banner across the top of the page.
+
+Usage metrics:
 
 - **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features.
+- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period.
 - **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period. The [Free Plan](/docs/introduction/plans#free-plan) has a data transfer limit of 5 GB per month.
 - **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
-- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period.
 - **Active computes**: The current number of active computes in your project.
 - **Branches**: The number of branches in your project.
 
