@@ -116,6 +116,70 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 
 In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings, together with streamlined development workflows, improved collaboration, and fewer operational complexities.
 
+<ComputeCalculator
+className="mt-10"
+databases={[
+{
+type: 'Dev databases',
+instance: 'db.t4g.micro',
+usage: 'Used interminently',
+},
+{
+type: 'Test databases',
+instance: 'db.t3.medium',
+usage: 'Used interminently',
+},
+]}
+inputParamsBlock={[
+{
+title: 'Deployment',
+items: [
+{
+name: 'test_databases_num',
+title: 'Number of test databases',
+values: [1, 3, 5, 10],
+},
+{
+name: 'dev_databases_num',
+title: 'Number of dev databases',
+values: [1, 3, 5, 10],
+},
+],
+},
+{
+title: 'Usage',
+items: [
+{
+name: 'test_databases_daily_hrs',
+title: 'How many hrs/day are test databases&nbsp;running?',
+values: [1, 2, 3, 5, 8],
+},
+{
+name: 'dev_databases_daily_hrs',
+title: 'How many hrs/day are dev databases&nbsp;running?',
+values: [1, 2, 3, 5, 8],
+},
+],
+},
+]}
+values={[
+{
+name: 'wasted_money',
+title: 'Dollars overpaid',
+valueClassName: 'bg-variable-value-1',
+period: 'month',
+},
+{
+name: 'saved_money',
+title: 'Bill that could be saved',
+period: 'month',
+valueClassName: 'bg-variable-value-2',
+text: 'With scale to zero',
+},
+]}
+textSize="md"
+/>
+
 <CTA title="Reach out to us for an exact quote" description="Tell us more about your use case and we’ll send you back detailed information on how much you could save with Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
 
 ### Can Neon also help lower the costs of my production database?
