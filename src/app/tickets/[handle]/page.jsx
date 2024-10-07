@@ -24,6 +24,10 @@ const TicketPage = async ({ params }) => {
 
   return (
     <Layout>
+      <link rel="preload" crossOrigin="anonymous" href="/images/deploy/deploy-1.jpg" as="image" />
+      <link rel="preload" crossOrigin="anonymous" href="/images/deploy/deploy-2.jpg" as="image" />
+      <link rel="preload" crossOrigin="anonymous" href="/images/deploy/deploy-3.jpg" as="image" />
+      <link rel="preload" crossOrigin="anonymous" href="/images/deploy/deploy-4.jpg" as="image" />
       <section className="overflow-hidden">
         <Container
           className="relative z-10 grid flex-grow grid-cols-12 gap-10 pb-[176px] pt-40 xl:grid-cols-1 xl:gap-0 xl:pb-[120px] xl:pt-28 lg:py-9 lg:pb-[104px] md:py-4 md:pb-20 md:pt-5"
