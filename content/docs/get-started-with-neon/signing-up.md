@@ -12,14 +12,14 @@ updatedOn: '2024-08-06T15:23:10.945Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>The Neon object hierarchy, starting with the **Project**.</p>
-<p>How to create dev branches that periodically reset from main.</p>
+<p>Create an isolated database copy per developer</p>
+<p>Reset your branch to main when ready to start new work</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
 <a href="https://neon.tech/docs/introduction/branching">About branching</a>
 <a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/manage/overview">The Neon object hiearchy</a>
+<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 
