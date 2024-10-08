@@ -28,11 +28,15 @@ Neon supports several options for integrating with Vercel:
   Vercel Postgres is serverless Postgres **powered by Neon**. This integration allows you to create and manage a Postgres instance from the Vercel dashboard.
 
   <Admonition type="important">
-  **Starting in November 2024, Vercel Postgres will transition to Neon**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow 3 principles:
+  **Starting in November 2024, Vercel Postgres projects will be transitioned to Neon**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow the principles outlined below:
 
-  - Zero downtime transition with no infrastructure change so there is no impact on your application
+  - Zero downtime with no infrastructure change so there is no impact on user applications
   - Single seamless billing via the Vercel Marketplace 
-  - Choice and access to the full set of Neon features and plans
+  - Access to the full set of Neon features and plans
+
+  No action is required on your part. The transition will be performed for you.
+
+  After the transition, you will be able to manage existing databases in the Neon Console and create new databases via a Neon integration in the Vercel Marketplace.
 
   To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
   </Admonition>
