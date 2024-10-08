@@ -434,8 +434,6 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Vercel Postgres
-                  slug: guides/vercel-postgres
                 - title: Neon Vercel Integration
                   slug: guides/vercel
                 - title: Connect manually
