@@ -29,9 +29,9 @@ Neon supports several options for integrating with Vercel:
   <Admonition type="important">
   **Starting in November 2024, Vercel Postgres projects will be transitioned to Neon**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow the principles outlined below:
 
-  - Zero downtime with no infrastructure change so there is no impact on user applications
-  - Single seamless billing via the Vercel Marketplace 
-  - Access to the full set of Neon features and plans
+  - Zero downtime without infrastructure changes so there's no impact on user applications
+  - Billing via the Vercel Marketplace 
+  - Full access to Neon features and plans
 
   No action is required on your part. The transition will be performed for you.
 
