@@ -38,7 +38,7 @@ Compute details shown on the branch page include:
 
 ## Create a compute
 
-You can only create a primary read-write compute for a branch that does not have one, but a branch can have multiple read replica computes. [Read replicas](/docs/guides/read-replica-guide) are a paid plan feature.
+You can only create a primary read-write compute for a branch that does not have one, but a branch can have multiple read replica computes.
 
 To create an endpoint:
 
