@@ -2,7 +2,7 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 enableTableOfContents: true
-updatedOn: '2024-10-04T21:02:39.374Z'
+updatedOn: '2024-10-08T17:24:35.409Z'
 ---
 
 At Neon, our serverless architecture is resilient by default, with the separation of storage from compute giving us flexibility in designing High Availability (HA) solutions for each layer.
