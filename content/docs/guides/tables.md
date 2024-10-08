@@ -2,10 +2,14 @@
 title: Managing your data with interactive tables
 subtitle: 'Use the Tables page to easily view, edit, and manage your database entries'
 enableTableOfContents: true
-updatedOn: '2024-06-20T18:17:05.283Z'
+updatedOn: '2024-10-07T15:22:34.955Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, as well as export data in both .json and .csv formats.
+
+<Admonition type="note">
+The **Tables** page is powered by Drizzle Studio. For new features and updates, please refer to the [Neon Drizzle Studio Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md).
+</Admonition>
 
 ## Edit records
 

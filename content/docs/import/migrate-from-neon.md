@@ -3,7 +3,7 @@ title: Migrate data from another Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2024-09-25T23:29:08.592Z'
+updatedOn: '2024-10-07T18:18:31.784Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`.
@@ -25,7 +25,6 @@ You can also use **logical replication** to move your data from one Neon project
 
 - **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications. We also recommend familiarizing yourself with the changes in the new version of Postgres, especially those affecting compatibility. For information about those changes, please refer to the official Postgres [Release 15](https://www.postgresql.org/docs/release/15.0/) or [Release 16](https://www.postgresql.org/docs/16/release-16.html) documentation.
 - **Piping considerations**: Piping is not recommended for large datasets, as it is susceptible to failures during lengthy migration operations (see [Pipe pg_dump to pg_restore](/docs/import/migrate-from-postgres#pipe-pgdump-to-pgrestore) for more information). If your dataset is large, we recommend performing the dump and restore as separate operations. For instructions, see [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
-- **Neon Free Plan project limit**: The Neon Free Plan has a limit of one project per user, which means a Neon Free Plan user cannot have two projects simultaneously. To move your data from a Neon Free Plan project, dump your database first, delete your Neon project, create a new Neon project with the desired region or Postgres version, and import your data into the new project. For the dump and restore procedure, refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
 ## Import data from another project
 

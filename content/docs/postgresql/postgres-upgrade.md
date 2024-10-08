@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2024-10-01T20:18:22.320Z'
+updatedOn: '2024-10-07T18:18:31.791Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -29,10 +29,6 @@ SELECT version();
 ### 1. Create a Neon project with the new Postgres version
 
 Start by creating a new Neon project with the desired Postgres version. For instructions, see [creating a new Neon project](/docs/manage/projects#create-a-project).
-
-<Admonition type="note">
-The Neon [Free Plan](https://neon.tech/docs/introduction/plans#free-plan) has a limit of one project per user, which means a Neon Free Plan user cannot have two projects simultaneously. Due to this limitation, migrating to a Neon project with a new Postgres major version requires dumping your data using `pg_dump`, deleting your current Neon project, creating a new project with the desired Postgres version, and restoring your data using `pg_restore`. For instructions, please refer to the [Migrate data with pg_dump and pg_restore](https://neon.tech/docs/import/migrate-from-postgres) method.
-</Admonition>
 
 At this time, you may also also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to implement in your new Neon project:
 

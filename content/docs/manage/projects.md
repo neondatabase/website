@@ -5,10 +5,10 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-10-01T16:52:01.971Z'
+updatedOn: '2024-10-07T18:18:31.790Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Plan limits you to one project per Neon account.
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
 
 Learn more about projects and how to manage them in these sections:
 
@@ -53,7 +53,7 @@ Here are some basic actions you can take to add or manage projects:
 
 ### Create a project
 
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Plan users are limited to a single Neon project. Support for multiple projects is only available to users on paid plans.
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up).
 
 To create a Neon project:
 
@@ -409,7 +409,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Plan](/docs/introduction/plans#free-plan) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```http
 POST /projects

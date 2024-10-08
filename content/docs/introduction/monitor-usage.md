@@ -5,7 +5,7 @@ subtitle: Monitor billing and usage metrics for your account and projects from t
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2024-09-28T10:31:46.950Z'
+updatedOn: '2024-10-08T10:58:34.749Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
@@ -32,13 +32,13 @@ Here you will find the current bill and total usage for all projects in your Neo
 
 Usage metrics on the **Billing page** include:
 
-- **Storage**: Storage is the total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features. The displayed value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances.
-- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period. Compute usage is reset to zero at the beginning of each month. For example, on the Launch plan, compute usage will be set back to **0/300h** at the beginning of each month. On the Free Plan, this metric only applies to [non-default branch](/docs/reference/glossary#non-default-branch) computes.
-- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your plan's allowances.
-- **Branches** (Free Plan only) Number of database branches currently active in your account. On The Free Plan, there is a 10-branch allowance.
-- **Data transfer** (Free Plan only) The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer).
+- **Storage**: Storage is the total volume of data and history stored in Neon, measured in gibibytes (GiB). Data is your logical data size. History is your data’s change history that is used to enable branching-related features, which you can configure for each project via the [history retention](/docs/manage/projects#configure-history-retention) setting. The displayed storage value reflects your current usage, including any extra storage that has been automatically added as a result of exceeding your plan's allowances.
+- **Compute**: The total number of compute hours used during the current billing period. Compute usage is reset to zero at the beginning of each month. The monthly compute hour allowance differs by [plan](https://neon.tech/docs/introduction/plans).
+- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your [plan allowance](https://neon.tech/docs/introduction/plans).
+- **Branch compute**: The total number of compute hours used by non-default branches during the current billing period. Compute usage is reset to zero at the beginning of each month. This metric only applies to the Free Plan.
+- **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free Plan.
 
-The peak usage triangle indicates the highest usage level reached for that metric during the current billing period. Extra charges are automatically applied based on the number of additional units needed to cover your excess usage, prorated from the date the excess was allocated.
+On paid plan **Billing** pages, **Peak usage** is the highest usage level reached for storage or projects during the current billing period. When you exceed storage or project allowances, extra units are automatically allocated and billed based on the number of additional units needed to cover your excess usage, prorated from the date the excess was allocated.
 
 ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 
@@ -47,10 +47,10 @@ The peak usage triangle indicates the highest usage level reached for that metri
 - **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 
   <Admonition type="note">
-  On the Free Plan, you get 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
+  On the Free Plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
   </Admonition>
 
-- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, the Scale plan allows up to 14 days, and the Business plan offers up to 30 days. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, the Scale plan allows up to 14 days, and the Business plan offers up to 30 days. The default is 1 day on all plans. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
 
 - **What about extra usage?**
 
@@ -58,29 +58,24 @@ The peak usage triangle indicates the highest usage level reached for that metri
 
 ### Project Dashboard
 
-The **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
+For paid plan users, the **Usage** widget on the Neon Dashboard shows a snapshot of project usage.
 
 ![Monitor usage widget](/docs/introduction/monitor_usage_widget.png)
 
-Usage metrics include:
+For Free Plan users, project usage is displayed across the top of the Project Dashboard.
 
-- **Storage**: The total volume of data and history for your project, measured in gibibytes (GiB). Data refers to the logical data size. History consists of Write-Ahead Logging (WAL) records capturing the data’s change history that is used to enable branching-related features.
-- **Data transfer**: The total volume of data transferred out of Neon (known as "egress") during the current billing period. The [Free Plan](/docs/introduction/plans#free-plan) has a data transfer limit of 5 GB per month.
-- **Written data**: The total volume of data written from compute to storage during the current billing period, measured in gigibytes (GiB).
-- **Compute**: The total number of [compute hours](/docs/reference/glossary#compute-hours) used during the current billing period.
-- **Active computes**: The current number of active computes in your project.
-- **Branches**: The number of branches in your project.
+![Project usage banner project dashboard](/docs/introduction/usage_banner_projects.png)
 
-The **Branches** widget shows a **Data size** metric, which is the size of the actual data on your branch. It does not include history.
+For Free Plan users, the [Projects page](https://console.neon.tech/app/projects) provides an **Account Usage** banner. This banner shows usage for _all of your Neon projects_ for the current billing period.
 
-![Monitor branches widget](/docs/introduction/monitor_branches_widget.png)
+![Account usage banner project dashboard](/docs/introduction/usage_banner_all_projects.png)
 
 ### Branches page
 
 The **Branches** page in the Neon Console provides branch-specific metrics, including:
 
-- **Active time**: The [active hours](/docs/reference/glossary#active-hours) for the branch compute.
-- **Data size**: The size of the actual data on your branch, not including [history](https://neon.tech/docs/reference/glossary#history).
+- **Compute hours**: The number of computer hours used by the branch's primary compute in the current billing period.
+- **Data size**: The size of the data on the branch, not including [history](https://neon.tech/docs/reference/glossary#history).
 - **Last active**: The data and time the branch was last active.
 
 To view the branches in your Neon project:

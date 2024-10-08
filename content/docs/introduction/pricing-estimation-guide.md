@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Estimate your monthly bill with Neon
 redirectFrom:
   - /docs/introduction/how-billing-works#neon-pricing-estimation-guide
-updatedOn: '2024-10-01T16:17:23.384Z'
+updatedOn: '2024-10-07T18:18:31.789Z'
 ---
 
 You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.
@@ -22,7 +22,7 @@ This table provides an overview of plan fees with allowances for storage, comput
 
 | Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                            | Project Allowance |
 | ---------- | ----------- | ----------------- | ---------------------------------------------------------------------------- | ----------------- |
-| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 1 project         |
+| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 10 projects       |
 | Launch     | $19         | 10 GiB            | 300 compute hours per month                                                  | 100 projects      |
 | Scale      | $69         | 50 GiB            | 750 compute hours per month                                                  | 1000 projects     |
 | Business   | $700        | 500 GiB           | 1000 compute hours per month                                                 | 5000 projects     |
