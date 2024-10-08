@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-import { image1, image2, image3, image4 } from 'constants/og-images';
+import { image1, image3, image4 } from 'constants/og-images';
 
 export const config = {
   runtime: 'edge',
@@ -8,7 +8,7 @@ export const config = {
 
 const colorSchemeMap = {
   1: image1,
-  2: image2,
+  2: image4, // image2 is currently broken
   3: image3,
   4: image4,
 };
