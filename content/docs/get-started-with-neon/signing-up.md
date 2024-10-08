@@ -12,6 +12,7 @@ updatedOn: '2024-08-06T15:23:10.945Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
+<p>How to view and modify data in the console</p>
 <p>Create an isolated database copy per developer</p>
 <p>Reset your branch to main when ready to start new work</p>
 </DocsList>
