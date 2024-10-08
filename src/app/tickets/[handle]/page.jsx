@@ -1,7 +1,6 @@
 // import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import AgendaTable from 'components/pages/deploy/agenda-table';
 import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
 import Container from 'components/shared/container';
@@ -64,8 +63,6 @@ const TicketPage = async ({ params }) => {
             <DynamicTicket userData={userData} />
           </div>
         </Container>
-
-        <AgendaTable />
       </section>
     </Layout>
   );
