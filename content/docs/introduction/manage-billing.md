@@ -34,7 +34,7 @@ To access your **Billing** page:
 1. Select your Profile.
 1. Select **Billing** from the menu.
 
-On the **Billing** page, you will find a summary outlining current charges and the details of your plan, information about your current usage, upgrade and downgrade options, your payment information, and your monthly invoices. 
+On the **Billing** page, you will find a summary outlining current charges and the details of your plan, information about your current usage, upgrade and downgrade options, your payment information, and your monthly invoices.
 
 ## Update your payment method
 
