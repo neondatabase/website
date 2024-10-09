@@ -100,7 +100,7 @@ First, create a `.env` file in the root of your project to store the database co
 ```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
 ```
-Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are availble in the console.
+Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
 
 
 In your project, the `database.py` file manages the connection to `PostgreSQL` using `asyncpg` and its connection pool, which is a mechanism for managing and reusing database connections efficiently. With this, you can use asynchronous queries, allowing the application to handle multiple requests concurrently.
@@ -210,7 +210,7 @@ async def close_postgres() -> None:
 
 To properly manage the lifecycle of the database, you need a function to close the connection pool when the API spins down `close_postgres` is responsible for gracefully closing all connections in the pool when the `FastAPI` app shuts down.
 
-Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool. If the pool is not initialized, an error is raised. The term for passing this in is Depdendency Injection.
+Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool. If the pool is not initialized, an error is raised. The term for passing this in is Dependency Injection.
 
 
 
