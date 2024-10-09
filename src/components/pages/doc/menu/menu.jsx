@@ -103,7 +103,8 @@ const Menu = ({
   const BackLinkTag = parentMenu?.slug ? Link : 'button';
 
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
-  const isLastActive = activeMenuList[lastDepth]?.title === title;
+  const isLastActive =
+    activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
 
   const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
   const docsHomePath = LINKS.docsHome;
@@ -127,10 +128,10 @@ const Menu = ({
   return (
     <div
       className={clsx(
-        'absolute left-0 top-0 w-full px-[52px] pb-16 xl:px-8',
+        'absolute left-0 top-0 w-full px-[52px] pb-8 xl:px-8',
         !isActive && 'pointer-events-none',
         !isRootMenu && 'translate-x-full',
-        'lg:px-8 lg:pb-8 lg:pt-4 md:px-5',
+        'lg:px-8 lg:pt-4 md:px-5',
         (isActive || isRootMenu) && 'opacity-100'
       )}
       style={isRootMenu ? { transform: `translateX(${lastDepth * -100}%)` } : undefined}
