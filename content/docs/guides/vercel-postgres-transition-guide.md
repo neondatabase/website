@@ -8,6 +8,8 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 Starting in November, 2024, Vercel is transitioning its Postgres offering to Neon, as part of a new model where a Neon integration will be offered in the [Vercel Marketplace](https://vercel.com/marketplace).
 
+## What do you need to do?
+
 As mentioned in [Neon's announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel), the transition from will be performed for you and no action is required on your part. However, there's still lots to know when changing database platforms and many questions you may want answers to. In this guide, we'll try to answer as many of those questions as possible. 
 
 So, let's get into it. What do you need to know?
