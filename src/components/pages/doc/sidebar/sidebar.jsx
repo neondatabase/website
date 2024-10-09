@@ -102,10 +102,10 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
           </Link>
         </div>
         <nav
-          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-y-scroll pt-10"
+          className="no-scrollbars z-10 mt-5 h-[calc(100vh-100px)] overflow-y-scroll pt-10"
           ref={menuWrapperRef}
         >
-          <div className="relative w-full" style={{ height: menuHeight }}>
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
               basePath={basePath}
