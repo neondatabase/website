@@ -82,7 +82,7 @@
       "launch": "100",
       "scale": {
         "title": "1,000",
-        "info": "Extra at $50 per 10 projects"
+        "info": "$50 per 1,000 projects"
       },
       "business": {
         "title": "5,000",
@@ -240,7 +240,7 @@
       "launch": true,
       "scale": true,
       "business": true
-    },    
+    },
     {
       "rows": "1",
       "feature": {
@@ -260,7 +260,7 @@
       "launch": false,
       "scale": false,
       "business": true
-    },    
+    },
     {
       "rows": "1",
       "feature": {
