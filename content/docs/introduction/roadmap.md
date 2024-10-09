@@ -50,6 +50,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable logs and traces.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
+- **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability
 
 ## Join the Neon Early Access Program
 
