@@ -265,7 +265,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
-      slug: manage/accounts
+      slug: manage/platform
       items:
         - section: Access control
           items:

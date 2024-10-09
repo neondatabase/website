@@ -514,6 +514,8 @@ Another term for smoke test
 </DetailIconCards>
 ```
 
+List of available icons in folder: /website/src/components/pages/doc/detail-icon-cards/images
+
 ## Shared MDX components
 
 Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
