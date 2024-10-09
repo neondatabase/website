@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-09-28T10:31:46.949Z'
+updatedOn: '2024-10-09T15:10:07.751Z'
 ---
 
 <InfoBlock>
