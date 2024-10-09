@@ -5,9 +5,26 @@ enableTableOfContents: true
 updatedOn: '2024-10-01T16:52:01.966Z'
 ---
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Where to find database connections details</p>
+<p>Where to find example connection snippets</p>
+<p>Protocols supported by Neon</p>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/connect/choose-connection">Choosing a driver and connection type</a>
+<a href="/docs/connect/connect-securely">Connect to Neon securely</a>
+<a href="/docs/connect/connection-pooling">Connection pooling</a>
+<a href="/docs/connect/query-with-psql-editor">Connect with psql</a>
+</DocsList>
+</InfoBlock>
+
+## Database connection details
+
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
 
-You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
+You can find the connection details for your database in the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
 ![Connection details widget](/docs/connect/connection_details.png)
 
@@ -24,12 +41,12 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
 
-`.env` file:
+**.env file**
 
 ```text
 PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
@@ -39,25 +56,25 @@ PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
 
-Variable:
+**Variable**
 
 ```text shouldWrap
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-Command-line:
+**Command-line**
 
 ```bash shouldWrap
 psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending the `sslmode` parameter to your connection string. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by configuring the `sslmode`. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
-## Where do I obtain a password?
+## Where can I find my password?
 
-It's included in your Neon connection string, which you can find on the Neon **Dashboard**, in the **Connection Details** widget.
+It's included in your Neon connection string, which you can find in the **Connection Details** widget on your Project Dashboard.
 
 ## What port does Neon use?
 
@@ -65,15 +82,15 @@ Neon uses the default Postgres port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select.
+The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different frameworks and languages, constructed for the branch, database, and role that you select.
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-See our [Framework, language, and platform guides](https://neon.tech/docs/guides/guides-intro) for more connection examples.
+See our [frameworks](/docs/get-started-with-neon/frameworks) and [languages](/docs/get-started-with-neon/languages) guides for more connection examples.
 
 ## Network protocol support
 
-Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure currently only support IPv4.
+Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure support IPv4.
 
 Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 
