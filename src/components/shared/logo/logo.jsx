@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
 import useContextMenu from 'hooks/use-context-menu';
-import useWindowSize from 'hooks/use-window-size';
 import logoBlack from 'images/logo-black.svg';
 import logoWhite from 'images/logo-white.svg';
+
+import Link from '../link';
 
 import DownloadIcon from './images/download.inline.svg';
 import FileIcon from './images/file.inline.svg';
@@ -72,50 +73,22 @@ ContextMenu.propTypes = {
   isDarkTheme: PropTypes.bool.isRequired,
 };
 
-const Logo = ({
-  className = null,
-  isDarkTheme,
-  width,
-  height,
-  priority = undefined,
-  isDocPage = false,
-}) => {
+const Logo = ({ className = null, isDarkTheme, width, height, priority = undefined }) => {
   const { clicked, setClicked, points, setPoints } = useContextMenu();
-  const { width: screenWidth } = useWindowSize();
-
-  const doxPageX = screenWidth > 1280 ? 52 : 32;
 
   const handleContextMenu = (e) => {
     e.preventDefault();
     setClicked(true);
-    setPoints({ x: isDocPage ? doxPageX : 0, y: isDocPage ? 56 : 44 });
+    setPoints({ x: 0, y: 44 });
   };
 
   return (
-    <div onContextMenu={handleContextMenu}>
-      {isDarkTheme ? (
-        <Image
-          className={clsx(className)}
-          src={logoWhite}
-          alt=""
-          width={width}
-          height={height}
-          priority={priority}
-          aria-hidden
-        />
-      ) : (
-        <>
+    <div className="relative">
+      <Link to="/" onContextMenu={handleContextMenu}>
+        <span className="sr-only">Neon</span>
+        {isDarkTheme ? (
           <Image
-            className={clsx('dark:hidden', className)}
-            src={logoBlack}
-            alt=""
-            width={width}
-            height={height}
-            priority={priority}
-            aria-hidden
-          />
-          <Image
-            className={clsx('hidden dark:block', className)}
+            className={clsx(className)}
             src={logoWhite}
             alt=""
             width={width}
@@ -123,8 +96,29 @@ const Logo = ({
             priority={priority}
             aria-hidden
           />
-        </>
-      )}
+        ) : (
+          <>
+            <Image
+              className={clsx('dark:hidden', className)}
+              src={logoBlack}
+              alt=""
+              width={width}
+              height={height}
+              priority={priority}
+              aria-hidden
+            />
+            <Image
+              className={clsx('hidden dark:block', className)}
+              src={logoWhite}
+              alt=""
+              width={width}
+              height={height}
+              priority={priority}
+              aria-hidden
+            />
+          </>
+        )}
+      </Link>
       {clicked && <ContextMenu points={points} isDarkTheme={isDarkTheme} />}
     </div>
   );
