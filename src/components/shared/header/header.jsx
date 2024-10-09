@@ -212,7 +212,14 @@ const Header = async ({
               size="1408"
             >
               <div className="hidden lg:flex lg:items-center lg:gap-x-7">
-                <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
+                <Logo
+                  className="h-7"
+                  isDarkTheme={isDarkTheme}
+                  width={102}
+                  height={28}
+                  priority
+                  isHeader
+                />
                 <Link
                   className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
                   to={LINKS.docs}
@@ -231,7 +238,14 @@ const Header = async ({
         ) : (
           <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-              <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
+              <Logo
+                className="h-7"
+                isDarkTheme={isDarkTheme}
+                width={102}
+                height={28}
+                priority
+                isHeader
+              />
               <Navigation isDarkTheme={isDarkTheme} />
             </div>
             <Sidebar isDarkTheme={isDarkTheme} />

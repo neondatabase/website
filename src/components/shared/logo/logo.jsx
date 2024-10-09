@@ -46,7 +46,14 @@ const data = [
   },
 ];
 
-const Logo = ({ className = null, isDarkTheme, width, height, priority = undefined }) => {
+const Logo = ({
+  className = null,
+  isDarkTheme,
+  width,
+  height,
+  priority = undefined,
+  isHeader = false,
+}) => {
   const { clicked, setClicked } = useContextMenu();
   const [open, setOpen] = useState(false);
 
@@ -62,7 +69,7 @@ const Logo = ({ className = null, isDarkTheme, width, height, priority = undefin
 
   return (
     <div className="relative">
-      <Link to="/" onContextMenu={handleContextMenu}>
+      <Link to="/" onContextMenu={isHeader ? handleContextMenu : undefined}>
         <span className="sr-only">Neon</span>
         {isDarkTheme ? (
           <Image
@@ -97,7 +104,7 @@ const Logo = ({ className = null, isDarkTheme, width, height, priority = undefin
           </>
         )}
       </Link>
-      {clicked && (
+      {isHeader && clicked && (
         <div
           className="absolute z-10 flex flex-col items-start rounded-lg border border-gray-new-94 bg-white p-1 shadow-[0px_14px_20px_0px_rgba(0,0,0,0.10)] dark:border-[#16181D] dark:bg-[#0B0C0F]"
           style={{ left: 0, top: 44 }}
@@ -141,6 +148,7 @@ Logo.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   priority: PropTypes.bool,
+  isHeader: PropTypes.bool,
 };
 
 export default Logo;
