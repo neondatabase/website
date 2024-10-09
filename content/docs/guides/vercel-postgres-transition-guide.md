@@ -6,7 +6,9 @@ isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
 ---
 
-As mentioned in [Neon's announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel) about Vercel Postgres transitioning to Neon, the transition will be performed for you and no action is required on your part. However, there's still lots to know when changing database platforms and many questions you may want answers to. In this guide, we'll try try to provide that information and answer as many of those questions as we can. There's likely other questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel ##vercel-postgres-migration, which we will be monitoring closely. Additionally, if you're moving over to a paid plan in Neon, you can always reach out to our Support team.
+Starting in November, 2024, Vercel is transitioning its Postgres offering to Neon, as part of a new model where a Neon integration will be offered in the [Vercel Marketplace](https://vercel.com/marketplace).
+
+As mentioned in [Neon's announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel), the transition from will be performed for you and no action is required on your part. However, there's still lots to know when changing database platforms and many questions you may want answers to. In this guide, we'll try to answer as many of those questions as possible. 
 
 So, let's get into it. What do you need to know?
 
@@ -22,6 +24,8 @@ No, the transition will happen with **zero downtime**. You will not need to perf
 
 ### What changes will I see after the migration?
 After the migration, Vercel Postgres will transition fully to Neon Postgres, providing enhanced scalability, flexibility, and access to the full feature set of Neon. You will manage your databases via the Neon console, and all new projects will be created using the Neon integration in the Vercel Marketplace.
+
+This transition will allow developers to access all of Neon's latest features and improvements.
 
 ### How will billing and limits be affected?
 After the migration, pricing and limits will match what you would get if you were using Neon directly. This ensures that the transition maintains consistent costs and capabilities for users.
@@ -121,4 +125,8 @@ Yes, all regions supported by Vercel Postgres are also supported by Neon Postgre
 ## How do I do it in Neon?
 
 This section describes how to perform actions in Neon that you were able to perform in Vercel for your Postgres database?
+
+## I have more questions!
+
+There's likely questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel ##vercel-postgres-migration, which we will be monitoring closely. Additionally, if you're moving over to a paid plan in Neon, you can always reach out to our Support team.
 
