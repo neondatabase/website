@@ -10,7 +10,6 @@ Manage your account, your team, and who can access your project's databases.
 
 <DetailIconCards>
 
-
 <a href="/docs/manage/accounts" description="About Neon account types" icon="user">Accounts</a>
 
 <a href="/docs/manage/organizations" description="Build your team in Neon" icon="handshake">Organizations</a>
@@ -47,7 +46,6 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <a href="/docs/manage/integrations" description="Manage third-party integrations with your Neon project" icon="handshake">Integrations</a>
 
-
 </DetailIconCards>
 
 ## Monitoring
@@ -55,7 +53,6 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 Monitor your Neon projects to track system health and performance.
 
 <DetailIconCards>
-
 
 <a href="/docs/introduction/monitoring" description="Learn about monitoring resources and metrics in Neon" icon="research">Overview</a>
 
