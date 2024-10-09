@@ -8,7 +8,7 @@ updatedOn: '2024-09-28T10:31:46.949Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>How to access the Billing page in the Neon Console</p>
+<p>How to access the Billing page</p>
 <p>How to update your billing information</p>
 <p>How to download invoices</p>
 <p>How to change plans</p>
@@ -24,7 +24,7 @@ updatedOn: '2024-09-28T10:31:46.949Z'
 </DocsList>
 </InfoBlock>
 
-## View the billing page
+## View the Billing page
 
 A Neon account can view and manage billing from the **Billing** page in the Neon Console.
 
