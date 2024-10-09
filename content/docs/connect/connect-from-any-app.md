@@ -20,7 +20,6 @@ updatedOn: '2024-10-01T16:52:01.966Z'
 </DocsList>
 </InfoBlock>
 
-
 ## Database connection details
 
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
