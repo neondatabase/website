@@ -1,5 +1,5 @@
 ---
-title: Vercel Postgres Transition FAQ
+title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
@@ -13,25 +13,25 @@ In case you missed the announcements, you can read them here:
 - [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace)
 - [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel)
 
-**The transition requires no action on your part**. It will be performed automatically without any disruption to your applications. However, there's still lots to know when transitioning to a new platform and many questions you may want answers to. In this guide, we'll try to answer as many of those questions as possible. 
+**No action is required on your part**. The transition will happen automatically without disrupting your applications. However, transitioning to a new platform can raise many questions. In this guide, we'll try to answer as many of those questions as possible. 
 
 ## About the transition
 
 ### Why is this transition happening?
 
-Last year, Vercel added storage solutions to their platform, including Vercel Postgres (powered by Neon). In an effort to provide a wider variety of solutions and integrations for its customers, Vercel is moving to a different model. Instead of providing Vercel-packaged solutions, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you will be able to access a variety of first-party services that you can easily add to your Vercel project, including Neon Postgres.
+Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. To provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing Vercel-managed solutions, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party services, including Neon Postgres, into your Vercel projects.
 
-While Vercel Postgres was powered Neon, not all of Neon’s upgrades and features could be offered in Vercel Postgres. By transitioning from Vercel Postgres to Neon, developers will gain access to Neon's full suite of features and usage plans, providing a more powerful and flexible database experience. Vercel's new Marketplace model makes this possible.
+While Vercel Postgres is powered by Neon, it was not able to support all of Neon's upgrades and features. By transitioning to Neon Postgres, developers will gain  full access to Neon's feature set and usage plans, providing better database experience. Vercel's new Marketplace model makes this possible.
 
 ### When exactly will the transition happen?
 
-The transition will begin in November. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon Postgres without any downtime or changes to infrastructure.
+The transition will begin in November. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon without any downtime.
 
 Until then, you can continue using Vercel Postgres as usual.
 
 ### Do you need to do anything for the transition?
 
-No, the transition will be automatic. Vercel will handle the migration of your Vercel Postgres stores to Neon Postgres. Once the transition is complete, you will be able to manage your databases through the Neon Console.
+No, the transition will be automatic. Vercel will handle the migration of your Vercel Postgres stores to Neon. Once the transition is complete, you will be able to manage your databases through the Neon Console.
 
 ### Will there be any downtime during the transition?
 
@@ -39,29 +39,29 @@ No, the transition will be handled with zero downtime. You will not need to perf
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing databases from the Neon Console without needing new login credentials, and all new databases will be created using the Neon integration in the Vercel Marketplace, which will be available starting in November.
+After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases sing the Neon integration in the Vercel Marketplace, which will be available starting in November.
 
-Stay tuned for communication about the transition and when you can start accessing your database via the Neon Postgres integration in the Vercel Marketplace and the Neon Console.
+Stay tuned for communication about the transition and when you can start accessing your database via the Neon Console and using Neon's new Vercel Marketplace integration. The integration will be available in November.
 
 ### Can I still create new databases during the transition?
 
-Yes, you can continue creating new Postgres databases using Vercel Postgres until the transition starts in November. After that, new databases will be created using the Neon Postgres integration in the Vercel Marketplace.
+Yes, you can continue creating new databases using Vercel Postgres until the transition starts in November. After that, new databases will be created using the Neon Postgres integration in the Vercel Marketplace.
 
 ### What happens to databases created before the transition?
 
-Any Postgres databases created through Vercel before November will be automatically migrated to Neon Postgres as part of the transition.
+Any Postgres databases created using Vercel Postgres before November will be automatically migrated to Neon Postgres as part of the transition.
 
 ## Billing questions
 
 ### How will billing be affected?
 
-Billing will handled through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
+Billing will be handled through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
 
 Pricing and limits will match what you would get if you were using Neon directly instead of through the Vercel Marketplace. You will have access to all of Neon's pricing options and plans.
 
 ###  Will you be automatically transitioned to a particular Neon plan?
 
-TBD
+Vercel Hobby Plan database will be migrated to the Neon Free Plan. Vercel Pro database will be migrated to the Neon Launch plan. However, Vercel pricing for the Pro Plan ($20 per month), will still apply. This ensures no surprises in pricing during the transition.
 
 ### How do Vercel Postgres plans compare to Neon plans?
 
@@ -115,14 +115,14 @@ Neon is working with the Vercel team to provide joint frontend cloud services fo
 
 Once the transition to Neon Postgres is complete, you will gain access to a variety of advanced Neon features that were not available in Vercel Postgres, including:
 
-- **Neon Console** &#8212; managing all your projects and databases from a dedicated console 
+- [The Neon Console](https://console.neon.tech/app/projects) &#8212; Manage all your projects and databases from a dedicated console 
 - [Database branching](https://neon.tech/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings 
 - [Autosuspend](/docs/introduction/auto-suspend) &#8212; configure scale-to-zero behavior 
 - [Branch Restore](https://neon.tech/docs/guides/branch-restore) &#8212; instant point-in-time recovery  
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](https://neon.tech/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line
-- [IP Allow](https://neon.tech/docs/introduction/ip-allow) &#8212; limit access to IP addresses you trust
+- [IP Allow](https://neon.tech/docs/introduction/ip-allow) &#8212; limit access to the IP addresses you trust
 - [Organization accounts](https://neon.tech/docs/manage/organizations) &#8212; manage projects and teams with a Neon org account
 - [Monitoring](https://neon.tech/docs/introduction/monitoring-page) &#8212; monitor your database form the Neon Console
 - [Protected branches](https://neon.tech/docs/guides/protected-branches) &#8212; protect your production data 
@@ -131,7 +131,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [Read Replicas](https://neon.tech/docs/introduction/read-replicas) &#8212; offload read work for scale or ad hoc queries
 - [Logical Replication](https://neon.tech/docs/guides/logical-replication-guide) &#8212; replicate data to and from Neon 
 - [The Neon Vercel Integration](/docs/guides/vercel) &#8212; automatically create a database branch for each preview deployment
-- [GitHub integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
+- [The Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
 
 ### What Postgres versions are supported?
 
