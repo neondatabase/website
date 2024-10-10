@@ -691,7 +691,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     You can also retrieve a specific product by its ID:
 
-    ```
+    ```http
     http GET http://127.0.0.1:8080/products/1
     ```
 
