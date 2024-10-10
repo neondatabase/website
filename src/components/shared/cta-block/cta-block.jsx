@@ -2,9 +2,8 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
+import BgDecor from 'components/pages/use-case/bg-decor';
 import Button from 'components/shared/button';
-
-import BgDecor from '../../pages/use-case/bg-decor';
 
 import blueGlowMobile from './images/blue-glow-mobile.png';
 import blueGlow from './images/blue-glow.png';

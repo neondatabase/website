@@ -2,6 +2,8 @@ import CalendarIcon from 'icons/calendar.inline.svg';
 import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
+import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
+import aiAgentsIcon from 'icons/header/ai-agents.svg';
 import aiDarkIcon from 'icons/header/ai-dark.svg';
 import aiIcon from 'icons/header/ai.svg';
 import apiDarkIcon from 'icons/header/api-dark.svg';
@@ -183,6 +185,15 @@ export default {
           text: 'Dev/Test',
           description: 'Non-prod environments',
           to: `${LINKS.useCases}/dev-test`,
+        },
+        {
+          icon: {
+            light: aiAgentsIcon,
+            dark: aiAgentsDarkIcon,
+          },
+          text: 'AI Agents',
+          description: 'Postgres for agents',
+          to: `${LINKS.useCases}/ai-agents`,
         },
         // {
         //   icon: {
