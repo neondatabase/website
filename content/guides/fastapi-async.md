@@ -271,7 +271,7 @@ In this section, you will create the API endpoints that allow you to manage prod
 
 Each endpoint follows a similar flow for interacting with the database. You will first get a connection from the connection pool, execute the desired query, and release the connection back to the pool. Since the connection pool is used as a context manager, the connection will automatically be returned to the pool after each operation.
 
-The common database flow goes as the following :
+The common database flow goes as follows :
 1. Getting the Connection Pool:
     - You inject the connection pool using FastAPI's `Depends()` function, which allows you to easily retrieve a connection from the pool.
 2. Acquiring a Connection:
