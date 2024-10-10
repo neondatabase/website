@@ -12,48 +12,53 @@ Following this guide, you’ll build an asynchronous product management API and 
 ## Prerequisites
 
 Before starting, ensure you have the following tools and services ready:
-* pip : Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
-    ```bash
-    pip --version
-    ```
-* Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
+
+- pip : Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+  ```bash
+  pip --version
+  ```
+- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
 
 ## Setting up the Project
 
 Follow these steps to set up your project and virtual environment:
 
-1. Create a `uv` project
+1.  Create a `uv` project
 
     If you don't already have uv installed, you can install it with:
+
     ```bash
     pip install uv
     ```
+
     Once `uv` is installed, create a new project:
 
     ```bash
     uv init async_postgres
     ```
+
     This will create a new project directory called `async_postgres`. Open this directory in your code editor of your choice.
 
-2. Set Up the Virtual Environment
+2.  Set Up the Virtual Environment
 
     You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
     <CodeTabs labels={["Linux/macOS", "Windows"]}>
-        ```bash
-        uv venv
-        source .venv/bin/activate
-        ```
+    `bash
+    uv venv
+    source .venv/bin/activate
+    `
 
         ```bash
         uv venv
         .venv\Scripts\activate
         ```
+
     </CodeTabs>
 
     You should see `(async_postgres)` in your terminal now, this means that your virtual environment is activated.
 
-3. Install Dependencies
+3.  Install Dependencies
 
     Next, add all the necessary dependencies for your project:
 
@@ -62,46 +67,45 @@ Follow these steps to set up your project and virtual environment:
     ```
 
     Where each package does the following :
-    * `FastAPI` : A Web / API framework
-    * `AsyncPG` : An asynchronous PostgreSQL client
-    * `Uvicorn` : An ASGI server for our app
-    * `Loguru` : A logging library
-    * `Python-dotenv` : To load environment variables from a .env file
 
+    - `FastAPI` : A Web / API framework
+    - `AsyncPG` : An asynchronous PostgreSQL client
+    - `Uvicorn` : An ASGI server for our app
+    - `Loguru` : A logging library
+    - `Python-dotenv` : To load environment variables from a .env file
 
-4. Create the project structure
+4.  Create the project structure
 
     Now, create the following directory structure to organize your project files:
 
     ```md
     async_postgres
     ├── src/
-    │   ├── database/
-    │   │   └── postgres.py
-    │   ├── models/
-    │   │   └── product_models.py
-    │   ├── routes/
-    │   │   └── product_routes.py
-    │   └── main.py
-    ├── .env                                
+    │ ├── database/
+    │ │ └── postgres.py
+    │ ├── models/
+    │ │ └── product_models.py
+    │ ├── routes/
+    │ │ └── product_routes.py
+    │ └── main.py
+    ├── .env  
     ├── .python-version
-    ├── README.md                 
-    ├── pyproject.toml                    
-    └── uv.lock   
+    ├── README.md  
+    ├── pyproject.toml  
+    └── uv.lock
     ```
 
 ## Setting up your Database
 
 In this section, you will set up the connection pool, ensure your database schema is in place, and manage database connections effectively. To connect to your `PostgreSQL` database, you will use the `asyncpg` library for asynchronous database connections.
 
-
 First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
 
 ```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
 ```
-Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
 
+Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
 
 In your project, the `database.py` file manages the connection to `PostgreSQL` using `asyncpg` and its connection pool, which is a mechanism for managing and reusing database connections efficiently. With this, you can use asynchronous queries, allowing the application to handle multiple requests concurrently.
 
@@ -150,11 +154,11 @@ async def init_postgres() -> None:
             async with conn.transaction():
                 await conn.execute(create_table_query)
             logger.info("Products table ensured to exist.")
-    
+
     except Exception as e:
         logger.error(f"Error creating the products table: {e}")
         raise
-    
+
 
 async def get_postgres() -> asyncpg.Pool:
     """
@@ -168,7 +172,7 @@ async def get_postgres() -> asyncpg.Pool:
     -------
     asyncpg.Pool
         The connection pool object to the PostgreSQL database.
-    
+
     Raises
     ------
     ConnectionError
@@ -211,8 +215,6 @@ async def close_postgres() -> None:
 To properly manage the lifecycle of the database, you need a function to close the connection pool when the API spins down `close_postgres` is responsible for gracefully closing all connections in the pool when the `FastAPI` app shuts down.
 
 Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool. If the pool is not initialized, an error is raised. The term for passing this in is Dependency Injection.
-
-
 
 ## Defining the Pydantic Models
 
@@ -272,14 +274,15 @@ In this section, you will create the API endpoints that allow you to manage prod
 Each endpoint follows a similar flow for interacting with the database. You will first get a connection from the connection pool, execute the desired query, and release the connection back to the pool. Since the connection pool is used as a context manager, the connection will automatically be returned to the pool after each operation.
 
 The common database flow goes as follows :
+
 1. Getting the Connection Pool:
-    - You inject the connection pool using FastAPI's `Depends()` function, which allows you to easily retrieve a connection from the pool.
+   - You inject the connection pool using FastAPI's `Depends()` function, which allows you to easily retrieve a connection from the pool.
 2. Acquiring a Connection:
-    - Using the connection pool, you acquire a connection by calling `async with db_pool.acquire() as conn:`. This ensures you obtain a database connection to run the query.
+   - Using the connection pool, you acquire a connection by calling `async with db_pool.acquire() as conn:`. This ensures you obtain a database connection to run the query.
 3. Running the Query:
-    - Once the connection is acquired, you run the query using methods such as `fetchrow()` (for single rows) or `fetch()` (for multiple rows) depending on the operation.
+   - Once the connection is acquired, you run the query using methods such as `fetchrow()` (for single rows) or `fetch()` (for multiple rows) depending on the operation.
 4. Returning the Connection to the Pool:
-    - Once the query is complete, the connection is automatically returned to the pool because the async with context manager handles the lifecycle of the connection.
+   - Once the query is complete, the connection is automatically returned to the pool because the async with context manager handles the lifecycle of the connection.
 
 ```python
 from fastapi import HTTPException, Query, Path, Body, APIRouter, Depends
@@ -314,7 +317,7 @@ async def create_product(
     """
     query = """
     INSERT INTO products (name, price, quantity, description)
-    VALUES ($1, $2, $3, $4) 
+    VALUES ($1, $2, $3, $4)
     RETURNING id, name, price, quantity, description
     """
     try:
@@ -326,7 +329,7 @@ async def create_product(
                 product.quantity,
                 product.description,
             )
-        
+
         if result:
             return Product(**dict(result))
         else:
@@ -428,10 +431,10 @@ async def update_product(
         The updated product details.
     """
     query = """
-    UPDATE products 
-    SET name = COALESCE($1, name), 
-        price = COALESCE($2, price), 
-        quantity = COALESCE($3, quantity), 
+    UPDATE products
+    SET name = COALESCE($1, name),
+        price = COALESCE($2, price),
+        quantity = COALESCE($3, quantity),
         description = COALESCE($4, description)
     WHERE id = $5
     RETURNING id, name, price, quantity, description
@@ -520,9 +523,9 @@ async def update_product_stock(
         The updated product with new stock quantity.
     """
     query = """
-    UPDATE products 
-    SET quantity = $1 
-    WHERE id = $2 
+    UPDATE products
+    SET quantity = $1
+    WHERE id = $2
     RETURNING id, name, price, quantity, description
     """
     try:
@@ -563,8 +566,8 @@ async def filter_products_by_price(
         A list of products within the specified price range.
     """
     query = """
-    SELECT id, name, price, quantity, description 
-    FROM products 
+    SELECT id, name, price, quantity, description
+    FROM products
     WHERE price BETWEEN $1 AND $2
     """
     try:
@@ -579,24 +582,24 @@ async def filter_products_by_price(
 ```
 
 The code defines endpoints for :
-* `POST /products`: Creates a new product. It receives the product data (name, price, quantity, and description) and inserts it into the database. The newly created product is returned.
 
-* `GET /products`: Retrieves all products from the database. The response is a list of products, each containing its ID, name, price, quantity, and description.
+- `POST /products`: Creates a new product. It receives the product data (name, price, quantity, and description) and inserts it into the database. The newly created product is returned.
 
-* `GET /products/{id}`: Retrieves a product by its unique ID. If the product exists, its details are returned; otherwise, a 404 error is raised.
+- `GET /products`: Retrieves all products from the database. The response is a list of products, each containing its ID, name, price, quantity, and description.
 
-* `PUT /products/{id}`: Updates an existing product by its ID. The update can be partial, as it uses `COALESCE` to only update the fields provided. The updated product is returned.
+- `GET /products/{id}`: Retrieves a product by its unique ID. If the product exists, its details are returned; otherwise, a 404 error is raised.
 
-* `DELETE /products/{id}`: Deletes a product by its ID. If the product is successfully deleted, a success message is returned.
+- `PUT /products/{id}`: Updates an existing product by its ID. The update can be partial, as it uses `COALESCE` to only update the fields provided. The updated product is returned.
 
-* `PATCH /products/{id}/stock`: Updates the stock (quantity) of a specific product by its ID. The updated product, with the new quantity, is returned.
+- `DELETE /products/{id}`: Deletes a product by its ID. If the product is successfully deleted, a success message is returned.
 
-* `GET /products/filter/price`: Retrieves products within a specific price range. You pass min_price and max_price as query parameters, and the endpoint returns a list of products that fall within that range.
+- `PATCH /products/{id}/stock`: Updates the stock (quantity) of a specific product by its ID. The updated product, with the new quantity, is returned.
+
+- `GET /products/filter/price`: Retrieves products within a specific price range. You pass min_price and max_price as query parameters, and the endpoint returns a list of products that fall within that range.
 
 ## Running the Application
 
 After setting up the database, models, and API routes, the next step is to run the `FastAPI` application. The `main.py` file is the entry point for the application, and `Uvicorn` starts and serves it.
-
 
 The `main.py` file defines the `FastAPI` application, manages lifecycle events like starting and closing the `PostgreSQL` connection pool, and includes the product-related routes. Here, you will use the `@asynccontextmanager` decorator to manage the database connection pool lifecycle.
 
@@ -629,15 +632,12 @@ To run the application, use the following command:
 uv run src/main.py
 ```
 
-
 Once the server is running, you can access the API documentation and test the endpoints directly in your browser:
 
 - Interactive API Docs (Swagger UI):  
   Visit `http://127.0.0.1:8080/docs` to access the automatically generated API documentation where you can test the endpoints.
-  
 - Alternative Docs (ReDoc):  
   Visit `http://127.0.0.1:8080/redoc` for another style of API documentation.
-
 
 ## Testing the API
 
@@ -647,143 +647,144 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
 1. Create a Product
 
-    Start by creating a new product:
+   Start by creating a new product:
 
-    ``` 
-    http POST http://127.0.0.1:8080/products name="Test Product" price:=9.99 quantity:=100 description="A test product"
-    ```
+   ```
+   http POST http://127.0.0.1:8080/products name="Test Product" price:=9.99 quantity:=100 description="A test product"
+   ```
 
-    You should see a response with the created product data:
+   You should see a response with the created product data:
 
-    ```
-    {
-        "id": 1,
-        "name": "Test Product",
-        "price": 9.99,
-        "quantity": 100,
-        "description": "A test product"
-    }
-    ```
+   ```
+   {
+       "id": 1,
+       "name": "Test Product",
+       "price": 9.99,
+       "quantity": 100,
+       "description": "A test product"
+   }
+   ```
 
 2. Retrieve All Products
 
-    Next, retrieve all products from the database:
+   Next, retrieve all products from the database:
 
-    ```
-    http GET http://127.0.0.1:8080/products
-    ```
+   ```
+   http GET http://127.0.0.1:8080/products
+   ```
 
-    This will return a list of all products in the database:
+   This will return a list of all products in the database:
 
-    ```
-    [
-        {
-            "id": 1,
-            "name": "Test Product",
-            "price": 9.99,
-            "quantity": 100,
-            "description": "A test product"
-        }
-    ]
-    ```
+   ```
+   [
+       {
+           "id": 1,
+           "name": "Test Product",
+           "price": 9.99,
+           "quantity": 100,
+           "description": "A test product"
+       }
+   ]
+   ```
 
 3. Retrieve a Specific Product by ID
 
-    You can also retrieve a specific product by its ID:
+   You can also retrieve a specific product by its ID:
 
-    ```
-    http GET http://127.0.0.1:8080/products/1
-    ```
+   ```
+   http GET http://127.0.0.1:8080/products/1
+   ```
 
-    This will return the product details for the product with ID `1`:
+   This will return the product details for the product with ID `1`:
 
-    ```
-    {
-        "id": 1,
-        "name": "Test Product",
-        "price": 9.99,
-        "quantity": 100,
-        "description": "A test product"
-    }
-    ```
+   ```
+   {
+       "id": 1,
+       "name": "Test Product",
+       "price": 9.99,
+       "quantity": 100,
+       "description": "A test product"
+   }
+   ```
 
 4. Update a Product
 
-    To update an existing product, use the following command:
+   To update an existing product, use the following command:
 
-    ``` 
-    http PUT http://127.0.0.1:8080/products/1 name="Updated Product" price:=12.99 quantity:=150 description="An updated product description"
-    ```
+   ```
+   http PUT http://127.0.0.1:8080/products/1 name="Updated Product" price:=12.99 quantity:=150 description="An updated product description"
+   ```
 
-    This will return the updated product data:
+   This will return the updated product data:
 
-    ```
-    {
-        "id": 1,
-        "name": "Updated Product",
-        "price": 12.99,
-        "quantity": 150,
-        "description": "An updated product description"
-    }
-    ```
+   ```
+   {
+       "id": 1,
+       "name": "Updated Product",
+       "price": 12.99,
+       "quantity": 150,
+       "description": "An updated product description"
+   }
+   ```
 
 5. Update Product Stock
 
-    You can also update just the stock (quantity) of a product:
+   You can also update just the stock (quantity) of a product:
 
-    ```
-    http PATCH http://127.0.0.1:8080/products/1/stock quantity:=200
-    ```
+   ```
+   http PATCH http://127.0.0.1:8080/products/1/stock quantity:=200
+   ```
 
-    This will return the updated product with the new quantity:
+   This will return the updated product with the new quantity:
 
-    ```
-    {
-        "id": 1,
-        "name": "Updated Product",
-        "price": 12.99,
-        "quantity": 200,
-        "description": "An updated product description"
-    }
-    ```
+   ```
+   {
+       "id": 1,
+       "name": "Updated Product",
+       "price": 12.99,
+       "quantity": 200,
+       "description": "An updated product description"
+   }
+   ```
 
 6. Filter Products by Price Range
 
-    To filter products by a specific price range, use this command:
+   To filter products by a specific price range, use this command:
 
-    ``` 
-    http GET http://127.0.0.1:8080/products/filter/price min_price==5.00 max_price==15.00
-    ```
+   ```
+   http GET http://127.0.0.1:8080/products/filter/price min_price==5.00 max_price==15.00
+   ```
 
-    This will return products that fall within the specified price range:
+   This will return products that fall within the specified price range:
 
-    ```
-    [
-        {
-            "id": 1,
-            "name": "Updated Product",
-            "price": 12.99,
-            "quantity": 200,
-            "description": "An updated product description"
-        }
-    ]
-    ```
+   ```
+   [
+       {
+           "id": 1,
+           "name": "Updated Product",
+           "price": 12.99,
+           "quantity": 200,
+           "description": "An updated product description"
+       }
+   ]
+   ```
 
 7. Delete a Product
 
-    To delete a product by its ID, use the following command:
+   To delete a product by its ID, use the following command:
 
-    ```
-    http DELETE http://127.0.0.1:8080/products/1
-    ```
+   ```
+   http DELETE http://127.0.0.1:8080/products/1
+   ```
 
-    If successful, you will receive a confirmation message:
+   If successful, you will receive a confirmation message:
 
-    ```
-    {
-        "message": "Product deleted successfully"
-    }
-    ```
+   ```
+   {
+       "message": "Product deleted successfully"
+   }
+   ```
+
 ## Conclusion
 
 Using this guide, you have built a fully functional API for managing products using `FastAPI`, `Pydantic`, and `PostgreSQL` with `asyncpg`.
