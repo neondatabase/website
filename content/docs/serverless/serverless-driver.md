@@ -397,8 +397,8 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive (Beta)</a>
-<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
+<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
 </DetailIconCards>
 
