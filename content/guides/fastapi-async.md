@@ -751,7 +751,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To filter products by a specific price range, use this command:
 
-    ```
+    ```http
     http GET http://127.0.0.1:8080/products/filter/price min_price==5.00 max_price==15.00
     ```
 
