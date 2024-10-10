@@ -649,7 +649,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     Start by creating a new product:
 
-    ```
+    ```http shouldWrap
     http POST http://127.0.0.1:8080/products name="Test Product" price:=9.99 quantity:=100 description="A test product"
     ```
 
