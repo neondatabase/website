@@ -41,22 +41,23 @@ Follow these steps to set up your project and virtual environment:
 
 2.  Set Up the Virtual Environment
 
-    You will now create and activate a virtual environment in which your project's dependencies will be installed.
+        You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
-    <CodeTabs labels={["Linux/macOS", "Windows"]}>
-    `bash
-uv venv
-source .venv/bin/activate
-`
+        <CodeTabs labels={["Linux/macOS", "Windows"]}>
+        `bash
 
-        ```bash
-        uv venv
-        .venv\Scripts\activate
-        ```
+    uv venv
+    source .venv/bin/activate
+    `
 
-    </CodeTabs>
+            ```bash
+            uv venv
+            .venv\Scripts\activate
+            ```
 
-    You should see `(async_postgres)` in your terminal now, this means that your virtual environment is activated.
+        </CodeTabs>
+
+        You should see `(async_postgres)` in your terminal now, this means that your virtual environment is activated.
 
 3.  Install Dependencies
 
