@@ -39,6 +39,7 @@ With Neon, that’s not a problem. You can still maintain this fleet within a re
 
 The same API endpoints that are useful for [developers managing large database fleets on Neon](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) are also perfect for AI Agents.
 Just like developers appreciate a simple, clear API, so do AI agents. If it’s easy enough for a junior dev, it’s great for AI. Neon checks that box.
+
 With the Neon API, you can not only create and delete databases but also track usage, limit resources, and handle configuration.
 
 ```jsx showLineNumbers
@@ -75,6 +76,7 @@ await toolkit.deleteProject(project);
 ### Neon is 100% Postgres
 
 The most-loved database by developers worldwide is also the best choice for AI agents, thanks to its versatility (it works for almost any app) and the vast amount of resources, examples, and training datasets available.
+
 Neon is simply Postgres. Everything an agent knows about Postgres is available in Neon, from extensions to full SQL syntax.
 
-<SubscriptionForm title="If you’re building an AI agent, let’s talk more information?" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
+<SubscriptionForm title="If you’re building an AI agent, let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
