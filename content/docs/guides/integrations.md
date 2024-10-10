@@ -8,6 +8,14 @@ redirectFrom:
 updatedOn: '2024-10-02T13:57:11.416Z'
 ---
 
+## Monitor
+
+<TechnologyNavigation open>
+
+<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+</TechnologyNavigation>
+
 ## Deploy
 
 <TechnologyNavigation open>
