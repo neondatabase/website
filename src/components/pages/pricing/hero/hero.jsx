@@ -43,7 +43,7 @@ const items = [
     features: [
       {
         title: '10 projects',
-        info: '10 branches',
+        info: '10 branches per project',
       },
       { title: '0.5 GiB storage' },
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },

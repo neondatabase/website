@@ -39,7 +39,7 @@ The Free Plan includes the following usage allowances:
 | Usage type                 | Plan allowance                                                                                                                                           |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Projects**               | 10 Neon projects                                                                                                                                         |
-| **Branches**               | 10 branches                                                                                                                                              |
+| **Branches**               | 10 branches per project                                                                                                                                              |
 | **Databases**              | 500 per branch                                                                                                                                           |
 | **Storage**                | 0.5 GiB                                                                                                                                                  |
 | **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
