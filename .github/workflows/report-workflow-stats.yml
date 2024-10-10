@@ -1,0 +1,25 @@
+name: Report Workflow Stats
+
+on:
+  workflow_run:
+    workflows:
+      - E2E on Chrome
+      - Format Markdown
+      - Linkinator
+      - Update Frontmatter
+    types: [completed]
+
+jobs:
+  gh-workflow-stats:
+    name: Github Workflow Stats
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+    steps:
+      - name: Export GH Workflow Stats
+        uses: fedordikarev/gh-workflow-stats-action@v0.1.3
+        with:
+          DB_URI: ${{ secrets.GH_REPORT_STATS_DB_RW_CONNSTR }}
+          DB_TABLE: "gh_workflow_stats_website"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_RUN_ID: ${{ github.event.workflow_run.id }}
