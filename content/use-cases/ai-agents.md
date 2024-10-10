@@ -1,13 +1,13 @@
 ---
 title: 'Postgres for AI Agents'
-subtitle: Neon databases are fast to provision, easy to manage, and they scale to zero—perfect for AI agents.
+subtitle: Neon databases are fast to provision, easy to manage, and they scale to zero — perfect for AI agents.
 enableTableOfContents: true
 updatedOn: '2024-10-09T09:00:00.000Z'
 ---
 
 **TL:DR**
 
-Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d love to connect](/agent-design-partner)—we’re looking for design partners in this space.
+Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d love to connect](/agent-design-partner) — we’re looking for design partners in this space.
 
 AI agents can now provision infrastructure, including databases. With AI Agents already spinning up databases every few seconds, chances are they’re going to manage a big part of the web’s infrastructure in the future—and, just like developers, AI agents love working with Neon.
 
@@ -68,7 +68,7 @@ await toolkit.deleteProject(project);
 
 ```
 
-<p className="text-sm tracking-extra-tight text-center text-gray-new-50 mt-3.5">We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>.</p>
+<p className="text-sm tracking-extra-tight text-center text-gray-new-50 mt-3.5">We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit" target="_blank" rel="noopener noreferrer">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>.</p>
 
 ---
 
