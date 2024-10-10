@@ -45,9 +45,9 @@ Follow these steps to set up your project and virtual environment:
 
     <CodeTabs labels={["Linux/macOS", "Windows"]}>
     `bash
-    uv venv
-    source .venv/bin/activate
-    `
+uv venv
+source .venv/bin/activate
+`
 
         ```bash
         uv venv
