@@ -97,7 +97,7 @@ In this section, you will set up the connection pool, ensure your database schem
 
 First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
 
-```bash shouldWrap
+```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
 ```
 Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
@@ -649,7 +649,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     Start by creating a new product:
 
-    ```http shouldWrap
+    ``` 
     http POST http://127.0.0.1:8080/products name="Test Product" price:=9.99 quantity:=100 description="A test product"
     ```
 
@@ -669,7 +669,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     Next, retrieve all products from the database:
 
-    ```http
+    ```
     http GET http://127.0.0.1:8080/products
     ```
 
@@ -691,7 +691,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     You can also retrieve a specific product by its ID:
 
-    ```http
+    ```
     http GET http://127.0.0.1:8080/products/1
     ```
 
@@ -711,7 +711,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To update an existing product, use the following command:
 
-    ```http shouldWrap
+    ``` 
     http PUT http://127.0.0.1:8080/products/1 name="Updated Product" price:=12.99 quantity:=150 description="An updated product description"
     ```
 
@@ -731,7 +731,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     You can also update just the stock (quantity) of a product:
 
-    ```http
+    ```
     http PATCH http://127.0.0.1:8080/products/1/stock quantity:=200
     ```
 
@@ -751,7 +751,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To filter products by a specific price range, use this command:
 
-    ```http shouldWrap
+    ``` 
     http GET http://127.0.0.1:8080/products/filter/price min_price==5.00 max_price==15.00
     ```
 
@@ -773,7 +773,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To delete a product by its ID, use the following command:
 
-    ```http
+    ```
     http DELETE http://127.0.0.1:8080/products/1
     ```
 
