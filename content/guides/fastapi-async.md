@@ -711,7 +711,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To update an existing product, use the following command:
 
-    ```
+    ```http shouldWrap
     http PUT http://127.0.0.1:8080/products/1 name="Updated Product" price:=12.99 quantity:=150 description="An updated product description"
     ```
 
