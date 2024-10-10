@@ -669,7 +669,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     Next, retrieve all products from the database:
 
-    ```
+    ```http
     http GET http://127.0.0.1:8080/products
     ```
 
