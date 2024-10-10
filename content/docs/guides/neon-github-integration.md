@@ -218,6 +218,10 @@ To connect another Neon project to a GitHub repository:
    ![GitHub App card](/docs/guides/github_card.png)
 3. Select a GitHub repository to connect to your Neon project, and click **Connect**.
 
+<Admonition type="note">
+Connecting to the same GitHub repository from different Neon projects is not supported.
+</Admonition>
+
 ## Secret and variable set by the GitHub integration
 
 When connecting a Neon project to a GitHub repository, the GitHub integration performs the following actions:
