@@ -42,7 +42,7 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       {
-        title: '10 project',
+        title: '10 projects',
         info: '10 branches',
       },
       { title: '0.5 GiB storage' },
