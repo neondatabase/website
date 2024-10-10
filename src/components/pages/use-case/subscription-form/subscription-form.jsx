@@ -9,6 +9,7 @@ import { useCookie, useLocalStorage, useLocation } from 'react-use';
 
 import BgDecor from 'components/shared/use-case-calculator/bg-decor';
 import { HUBSPOT_USE_CASES_FORM_ID } from 'constants/forms';
+import ErrorIcon from 'icons/error.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
@@ -33,6 +34,7 @@ const SubscriptionForm = ({ title, description }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailUseCaseForm', []);
+
   const [errorMessage, setErrorMessage] = useState('');
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
@@ -99,7 +101,7 @@ const SubscriptionForm = ({ title, description }) => {
   };
 
   return (
-    <figure className="not-prose relative mt-12 flex w-full flex-col overflow-hidden rounded-lg bg-gray-new-8 bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6">
+    <figure className="not-prose relative mt-12 flex w-full flex-col rounded-[10px] bg-gray-new-8 bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6">
       <div className="relative z-10">
         <h2 className="!my-0 font-title text-2xl font-medium leading-tight tracking-extra-tight">
           {title}
@@ -121,12 +123,7 @@ const SubscriptionForm = ({ title, description }) => {
             <AnimatePresence>
               {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                 <m.button
-                  className={clsx(
-                    'absolute right-1 top-1 h-10 rounded-full px-[26px] font-semibold leading-none tracking-tighter text-black sm:flex sm:w-10 sm:items-center sm:justify-center sm:px-0',
-                    formState === STATES.ERROR
-                      ? 'bg-secondary-1/50'
-                      : 'bg-primary-1 hover:bg-[#00e5bf]'
-                  )}
+                  className="absolute right-1 top-1 h-10 rounded-full bg-primary-1 px-[26px] font-semibold leading-none tracking-tighter text-black hover:bg-[#00e5bf] sm:flex sm:w-10 sm:items-center sm:justify-center sm:px-0"
                   type="submit"
                   initial="initial"
                   animate="animate"
@@ -182,9 +179,12 @@ const SubscriptionForm = ({ title, description }) => {
             </AnimatePresence>
           </LazyMotion>
           {formState === STATES.ERROR && errorMessage && (
-            <p className="absolute left-4 top-full pt-2 text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:py-1 sm:text-xs sm:leading-tight">
-              {errorMessage}
-            </p>
+            <span
+              className="absolute top-full z-50 flex h-[42px] translate-y-3 items-center gap-x-2 rounded-md border border-secondary-1/30 bg-[#21191d] px-3 text-sm leading-tight text-[#FF4B7A]
+                        before:absolute before:-top-1.5 before:left-[22px] before:h-[11px] before:w-[11px] before:rotate-45 before:rounded-tl-sm before:border-l before:border-t before:border-secondary-1/30 before:bg-[#21191d]"
+            >
+              <ErrorIcon className="h-4.5 w-4.5" /> {errorMessage}
+            </span>
           )}
         </form>
       </div>
