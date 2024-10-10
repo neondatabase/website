@@ -585,7 +585,7 @@ The code defines endpoints for :
 
 * `GET /products/{id}`: Retrieves a product by its unique ID. If the product exists, its details are returned; otherwise, a 404 error is raised.
 
-* `PUT /products/{id}`: Updates an existing product by its ID. The update can be partial, as it uses COALESCE to only update the fields provided. The updated product is returned.
+* `PUT /products/{id}`: Updates an existing product by its ID. The update can be partial, as it uses `COALESCE` to only update the fields provided. The updated product is returned.
 
 * `DELETE /products/{id}`: Deletes a product by its ID. If the product is successfully deleted, a success message is returned.
 
