@@ -104,7 +104,9 @@ const SubscriptionForm = ({ title, description }) => {
         <h2 className="!my-0 font-title text-2xl font-medium leading-tight tracking-extra-tight">
           {title}
         </h2>
-        <p className="mt-1.5 tracking-extra-tight text-gray-new-70">{description}</p>
+        <p className="mt-1.5 max-w-[636px] tracking-extra-tight text-gray-new-70 lg:max-w-[800px]">
+          {description}
+        </p>
         <form className="relative mt-[18px] w-full" onSubmit={handleSubmit}>
           <input
             className="remove-autocomplete-styles-apply-form h-12 w-full rounded-full bg-[linear-gradient(95deg,rgba(37,47,62,0.00)_75.17%,#252F3E_110.82%),rgba(24,25,27,0.80)] px-4 py-2.5 text-gray-new-70 placeholder:text-gray-new-40 focus:outline-none"
