@@ -773,7 +773,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     To delete a product by its ID, use the following command:
 
-    ```
+    ```http
     http DELETE http://127.0.0.1:8080/products/1
     ```
 
