@@ -731,7 +731,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
     You can also update just the stock (quantity) of a product:
 
-    ```
+    ```http
     http PATCH http://127.0.0.1:8080/products/1/stock quantity:=200
     ```
 
