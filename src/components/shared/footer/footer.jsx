@@ -31,15 +31,13 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
         <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
           <div className="mb-[30px] flex grow flex-col lg:mb-0 sm:w-full sm:flex-row sm:justify-between">
             <div className="flex grow flex-col items-start">
-              <Link className="block" to="/">
-                <span className="sr-only">Neon</span>
-                <Logo
-                  className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
-                  isDarkTheme={isDarkTheme}
-                  width={116}
-                  height={32}
-                />
-              </Link>
+              <Logo
+                className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
+                isDarkTheme={isDarkTheme}
+                width={116}
+                height={32}
+              />
+
               <StatusBadge hasThemesSupport={hasThemesSupport} isDarkTheme={isDarkTheme} />
               {hasThemesSupport && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
