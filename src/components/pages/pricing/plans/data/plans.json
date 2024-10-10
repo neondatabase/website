@@ -78,7 +78,7 @@
       "feature": {
         "title": "Projects"
       },
-      "free": "1",
+      "free": "10",
       "launch": "100",
       "scale": {
         "title": "1,000",
@@ -94,7 +94,7 @@
       "feature": {
         "title": "Branches"
       },
-      "free": "10",
+      "free": "10  <span>per project</span>",
       "launch": "500 <span>per project</span>",
       "scale": "500 <span>per project</span>",
       "business": "500 <span>per project</span>"
