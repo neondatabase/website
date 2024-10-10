@@ -184,6 +184,15 @@ export default {
           description: 'Non-prod environments',
           to: `${LINKS.useCases}/dev-test`,
         },
+        {
+          icon: {
+            light: caseDevIcon,
+            dark: caseDevDarkIcon,
+          },
+          text: 'AI Agents',
+          description: 'AI Agents',
+          to: `${LINKS.useCases}/ai-agents`,
+        },
         // {
         //   icon: {
         //     light: caseVelocityIcon,
