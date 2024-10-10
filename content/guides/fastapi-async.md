@@ -37,7 +37,7 @@ Follow these steps to set up your project and virtual environment:
 
 2. Set Up the Virtual Environment
 
-    you will now create and activate a virtual environment in which your project's dependencies will be installed.
+    You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
     <CodeTabs labels={["Linux/macOS", "Windows"]}>
         ```bash
