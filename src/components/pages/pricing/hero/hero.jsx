@@ -42,8 +42,8 @@ const items = [
     description: 'Always-available free tier, no credit card required.',
     features: [
       {
-        title: '1 project',
-        info: '10 branches',
+        title: '10 projects',
+        info: '10 branches per project',
       },
       { title: '0.5 GiB storage' },
       { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
@@ -113,7 +113,7 @@ const items = [
     features: [
       {
         title: '1,000 projects',
-        info: '500 branches per project',
+        info: '$50 per 1,000 extra projects',
       },
       { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
       {

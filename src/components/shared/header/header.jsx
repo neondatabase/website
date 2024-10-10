@@ -7,7 +7,6 @@ import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
-import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
@@ -15,20 +14,13 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
 
+import Logo from '../logo';
+
 import HeaderWrapper from './header-wrapper';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
 };
-
-const LogoLink = async ({ isDarkTheme }) => (
-  <Link to="/">
-    <span className="sr-only">Neon</span>
-    <Logo className="h-7" isDarkTheme={isDarkTheme} width={102} height={28} priority />
-  </Link>
-);
-
-LogoLink.propTypes = themePropTypes;
 
 const Navigation = async ({ isDarkTheme }) => (
   <nav>
@@ -220,7 +212,14 @@ const Header = async ({
               size="1408"
             >
               <div className="hidden lg:flex lg:items-center lg:gap-x-7">
-                <LogoLink isDarkTheme={isDarkTheme} />
+                <Logo
+                  className="h-7"
+                  isDarkTheme={isDarkTheme}
+                  width={102}
+                  height={28}
+                  priority
+                  isHeader
+                />
                 <Link
                   className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
                   to={LINKS.docs}
@@ -239,7 +238,14 @@ const Header = async ({
         ) : (
           <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-              <LogoLink isDarkTheme={isDarkTheme} />
+              <Logo
+                className="h-7"
+                isDarkTheme={isDarkTheme}
+                width={102}
+                height={28}
+                priority
+                isHeader
+              />
               <Navigation isDarkTheme={isDarkTheme} />
             </div>
             <Sidebar isDarkTheme={isDarkTheme} />
