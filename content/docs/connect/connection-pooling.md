@@ -115,18 +115,20 @@ As mentioned above, Neon uses PgBouncer in _transaction mode_ (`pool_mode=transa
 - `LOAD` statement
 - Session-level advisory locks
 
-These features are not supported due to the nature of transaction-mode pooling, which does not maintain a persistent session state across transactions.
+These session-level features are not supported _transaction mode_ because:
+1. In this mode, database connections are allocated from the pool on a per-transaction basis
+2. Session states are not persisted across transactions
 
 <Admonition type="warning" title="Avoid using SET statements over a pooled connection">
-Due to the transaction mode limitation described above, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. This is because database connections are allocated to clients from the connection pool on a per-transaction basis. As a result, a session variable like `search_path` will not remain set for subsequent transactions.
+Due to the transaction mode limitation described above, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. As a result, a session variable like `search_path` will not remain set for subsequent transactions.
 
 This particular `search_path` issue often shows up as a `relation does not exist` error. To avoid this error, you can:
 
 - Use a direct connection string when you need to set the search path and have it persist across multiple transactions.
-- Explicitly specify the schema in your queries, so you don’t need to set the search path.
-- Use an `ALTER ROLE your_role_name SET search_path TO <schema1>, <schema2>, <schema3>;` command to set a persistent search path for the role executing queries. See the [ALTER ROLE documentation](https://www.postgresql.org/docs/current/sql-alterrole.html).
+- Explicitly specify the schema in your queries so that you don’t need to set the search path.
+- Use an `ALTER ROLE your_role_name SET search_path TO <schema1>, <schema2>, <schema3>;` command to set a persistent search path for the role executing queries. See the [ALTER ROLE](https://www.postgresql.org/docs/current/sql-alterrole.html).
 
-Similar issues can occur when attempting to use `pg_dump` over a pooled connection. A `pg_dump` operation typically executes several `SET` statements during data ingestion, which will not persist over a pool connection. For these reasons, we always recommend using `pg_dump` only over a direct connection.
+Similar issues can occur when attempting to use `pg_dump` over a pooled connection. A `pg_dump` operation typically executes several `SET` statements during data ingestion, and these settings will not persist over a pool connection. For these reasons, we recommend using `pg_dump` only over a direct connection.
   </Admonition>
 
 For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
