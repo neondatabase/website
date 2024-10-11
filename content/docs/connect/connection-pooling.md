@@ -116,6 +116,7 @@ As mentioned above, Neon uses PgBouncer in _transaction mode_ (`pool_mode=transa
 - Session-level advisory locks
 
 These session-level features are not supported _transaction mode_ because:
+
 1. In this mode, database connections are allocated from the pool on a per-transaction basis
 2. Session states are not persisted across transactions
 
@@ -129,7 +130,7 @@ This particular `search_path` issue often shows up as a `relation does not exist
 - Use an `ALTER ROLE your_role_name SET search_path TO <schema1>, <schema2>, <schema3>;` command to set a persistent search path for the role executing queries. See the [ALTER ROLE](https://www.postgresql.org/docs/current/sql-alterrole.html).
 
 Similar issues can occur when attempting to use `pg_dump` over a pooled connection. A `pg_dump` operation typically executes several `SET` statements during data ingestion, and these settings will not persist over a pool connection. For these reasons, we recommend using `pg_dump` only over a direct connection.
-  </Admonition>
+</Admonition>
 
 For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
