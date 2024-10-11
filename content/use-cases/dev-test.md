@@ -3,6 +3,7 @@ title: 'Postgres for Dev/Test'
 subtitle: Migrate your non-prod environments to Neon. Start shipping faster with up to 75% lower costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
+image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
 
 <Admonition type="note" title="TL;DR">

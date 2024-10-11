@@ -3,6 +3,7 @@ title: 'Postgres for AI Agents'
 subtitle: Neon databases are fast to provision, easy to manage, and they scale to zero — perfect for AI agents.
 enableTableOfContents: true
 updatedOn: '2024-10-09T09:00:00.000Z'
+image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
 <Admonition type="note" title="TL;DR">

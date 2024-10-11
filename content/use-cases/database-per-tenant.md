@@ -3,7 +3,7 @@ title: 'Database per Tenant on Postgres'
 subtitle: Scale to zero and instant provisioning via a comprehensive management API make DB-per-user architectures easy and cost-efficient on Neon.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
-image: '/images/social-previews/db-per-tenant.jpg'
+image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
 <UseCaseContext />
