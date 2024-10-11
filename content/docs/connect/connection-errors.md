@@ -214,4 +214,8 @@ To resolve this issue, you have several options:
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
 
+## Relation not found
+
+This error is often encountered when attempting to set set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
+
 <NeedHelp/>
