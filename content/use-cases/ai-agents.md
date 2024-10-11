@@ -5,9 +5,11 @@ enableTableOfContents: true
 updatedOn: '2024-10-09T09:00:00.000Z'
 ---
 
-**TL:DR**
-
+<Admonition type="note" title="TL;DR">
 Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d love to connect](/agent-design-partner) — we’re looking for design partners in this space.
+</Admonition>
+
+---
 
 AI agents can now provision infrastructure, including databases. With AI Agents already spinning up databases every few seconds, chances are they’re going to manage a big part of the web’s infrastructure in the future—and, just like developers, AI agents love working with Neon.
 
@@ -21,8 +23,6 @@ If you’re a dev writing code, a five-minute deploy isn’t a big deal. But AI 
 
 [Neon](/) takes the world's most loved database (Postgres) and delivers it as a [serverless platform](/docs/introduction/serverless). This means that spinning up new Neon databases takes seconds vs minutes in other Postgres services.
 
----
-
 ### With scale to zero, empty databases are very, very cheap.
 
 Imagine spinning up a new RDS instance every few seconds—you’d blow your budget on the first invoice. In most managed databases, managing thousands of isolated instances is unthinkable, and even more so without breaking the bank.
@@ -32,8 +32,6 @@ Neon’s serverless architecture solves this. In Neon, databases [automatically 
 Some databases created by agents might only be used for a few minutes; if you’re the company behind the agent, you’ll quickly have a large database fleet full of inactive databases.
 
 With Neon, that’s not a problem. You can still maintain this fleet within a reasonable budget.
-
----
 
 ### Straightforward API that even an AI Agent can use.
 
@@ -70,8 +68,6 @@ await toolkit.deleteProject(project);
 ```
 
 <p className="text-sm tracking-extra-tight text-center text-gray-new-50 mt-3.5">We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit" target="_blank" rel="noopener noreferrer">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>.</p>
-
----
 
 ### Neon is 100% Postgres
 
