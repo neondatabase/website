@@ -101,7 +101,12 @@ const SubscriptionForm = ({ title, description }) => {
   };
 
   return (
-    <figure className="not-prose relative mt-12 flex w-full flex-col rounded-[10px] bg-gray-new-8 bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6">
+    <figure
+      className={clsx(
+        'not-prose relative mt-12 flex w-full flex-col rounded-[10px] bg-gray-new-8',
+        'bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6'
+      )}
+    >
       <div className="relative z-10">
         <h2 className="!my-0 font-title text-2xl font-medium leading-tight tracking-extra-tight">
           {title}
@@ -111,7 +116,11 @@ const SubscriptionForm = ({ title, description }) => {
         </p>
         <form className="relative mt-[18px] w-full" onSubmit={handleSubmit}>
           <input
-            className="remove-autocomplete-styles-apply-form h-12 w-full rounded-full bg-[linear-gradient(95deg,rgba(37,47,62,0.00)_75.17%,#252F3E_110.82%),rgba(24,25,27,0.80)] px-4 py-2.5 text-gray-new-70 placeholder:text-gray-new-40 focus:outline-none"
+            className={clsx(
+              'remove-autocomplete-styles-apply-form h-12 w-full rounded-full',
+              'bg-[linear-gradient(95deg,rgba(37,47,62,0.00)_75.17%,#252F3E_110.82%),rgba(24,25,27,0.80)]',
+              'px-4 py-2.5 text-gray-new-70 placeholder:text-gray-new-40 focus:outline-none'
+            )}
             type="email"
             name="email"
             value={email}
@@ -123,7 +132,10 @@ const SubscriptionForm = ({ title, description }) => {
             <AnimatePresence>
               {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                 <m.button
-                  className="absolute right-1 top-1 h-10 rounded-full bg-primary-1 px-[26px] font-semibold leading-none tracking-tighter text-black hover:bg-[#00e5bf] sm:flex sm:w-10 sm:items-center sm:justify-center sm:px-0"
+                  className={clsx(
+                    'absolute right-1 top-1 h-10 rounded-full bg-primary-1 px-[26px] font-semibold leading-none tracking-tighter text-black',
+                    'hover:bg-[#00e5bf] sm:flex sm:w-10 sm:items-center sm:justify-center sm:px-0'
+                  )}
                   type="submit"
                   initial="initial"
                   animate="animate"
@@ -180,8 +192,12 @@ const SubscriptionForm = ({ title, description }) => {
           </LazyMotion>
           {formState === STATES.ERROR && errorMessage && (
             <span
-              className="absolute top-full z-50 flex h-[42px] translate-y-3 items-center gap-x-2 rounded-md border border-secondary-1/30 bg-[#21191d] px-3 text-sm leading-tight text-[#FF4B7A]
-                        before:absolute before:-top-1.5 before:left-[22px] before:h-[11px] before:w-[11px] before:rotate-45 before:rounded-tl-sm before:border-l before:border-t before:border-secondary-1/30 before:bg-[#21191d]"
+              className={clsx(
+                'absolute top-full z-50 flex h-[42px] translate-y-3 items-center gap-x-2 rounded-md',
+                'border border-secondary-1/30 bg-[#21191d] px-3 text-sm leading-tight text-[#FF4B7A]',
+                'before:absolute before:-top-1.5 before:left-[22px] before:h-[11px] before:w-[11px] before:rotate-45',
+                'before:rounded-tl-sm before:border-l before:border-t before:border-secondary-1/30 before:bg-[#21191d]'
+              )}
             >
               <ErrorIcon className="h-4.5 w-4.5" /> {errorMessage}
             </span>
