@@ -115,15 +115,16 @@ As mentioned above, Neon uses PgBouncer in _transaction mode_ (`pool_mode=transa
 - `LOAD` statement
 - Session-level advisory locks
 
- These features are not supported due to the nature of transaction-mode pooling, which does not maintain a persistent session state across transactions.
+These features are not supported due to the nature of transaction-mode pooling, which does not maintain a persistent session state across transactions.
 
 <Admonition type="important" title="Avoid using SET statements over a pooled connection">
-Due to the transaction mode limitation, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres search path using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. This is because database connections are allocated to clients from the connection pool on a per-transaction basis. 
+Due to the transaction mode limitation, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres search path using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. This is because database connections are allocated to clients from the connection pool on a per-transaction basis.
 
 This issue often shows up as a `relation does not exist` error. To avoid this particular `SET search_path` issue, you can either:
+
 - Use a direct connection string when you need to set the search path, or
 - Explicitly specify the schema in your queries.
-</Admonition>
+  </Admonition>
 
 For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
