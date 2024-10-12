@@ -3,7 +3,7 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-08T12:44:00.901Z'
+updatedOn: '2024-10-12T11:16:13.586Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
