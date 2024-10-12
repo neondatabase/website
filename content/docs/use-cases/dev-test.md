@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Use Neon as your development, testing, or staging environment without migrating production off of your current Postgres database (RDS Postgres, Aurora, Azure Postgres, etc.) 
+Use Neon as your development, testing, or staging environment without migrating production off of your current Postgres database (RDS Postgres, Aurora, Azure Postgres, etc.)
 
 <DetailIconCards>
 
