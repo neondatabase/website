@@ -22,6 +22,3 @@ Explore popular Neon use cases.
 <a href="/docs/use-cases/dev-test" description="Migrate your non-prod environments to Neon to ship faster with up to 75% lower costs" icon="import">Neon for Dev/Test</a>
 
 </DetailIconCards>
-
-
-
