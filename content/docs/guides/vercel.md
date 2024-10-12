@@ -143,7 +143,7 @@ The integration supports automatic deletion of obsolete preview branches when th
 5. Check **Automatically delete obsolete Neon branches**.
 
 <Admonition type="note">
-Avoid creating child branches on automatically created preview branches. This will prevent the preview branch from being automatically deleted. In Neon, child branches must be deleted before you can delete a parent branch. 
+Avoid creating child branches on automatically created preview branches, as it will prevent a preview branch from being automatically deleted. In Neon, child branches must be deleted before you can delete a parent branch. 
 </Admonition>
 
 <Admonition type="warning" title="Avoid manually renaming branches when using automatic branch deletion">
