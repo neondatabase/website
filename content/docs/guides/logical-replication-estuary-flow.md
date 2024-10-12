@@ -3,7 +3,6 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-tag: new
 updatedOn: '2024-09-08T12:44:00.901Z'
 ---
 
