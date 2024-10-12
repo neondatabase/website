@@ -77,425 +77,7 @@ Here's how you can import the dashboard:
 
    OR
 
-   You can copy the JSON below instead.
-
-    <details>
-    <summary>Neon dashboard</summary>
-    ```json shouldWrap
-    {
-    "title": "Single Neon Compute metrics (with dropdown)",
-    "description": "",
-    "widgets": [
-        {
-        "id": 7296782684811837,
-        "definition": {
-            "title": "CPU",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "alias": "Used",
-                    "formula": "per_minute(host_cpu_seconds_total)"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "host_cpu_seconds_total",
-                    "data_source": "metrics",
-                    "query": "sum:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_count()"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ]
-        },
-        "layout": {
-            "x": 0,
-            "y": 0,
-            "width": 5,
-            "height": 2
-        }
-        },
-        {
-        "id": 3831219857468963,
-        "definition": {
-            "title": "RAM",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "number_format": {
-                    "unit": {
-                        "type": "canonical_unit",
-                        "unit_name": "byte"
-                    }
-                    },
-                    "alias": "Cached",
-                    "formula": "ram_cached"
-                },
-                {
-                    "alias": "Used",
-                    "number_format": {
-                    "unit": {
-                        "type": "canonical_unit",
-                        "unit_name": "byte"
-                    }
-                    },
-                    "formula": "ram_total - ram_available"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "ram_cached",
-                    "data_source": "metrics",
-                    "query": "avg:host_memory_cached_bytes{$endpoint_id}"
-                },
-                {
-                    "name": "ram_total",
-                    "data_source": "metrics",
-                    "query": "avg:host_memory_total_bytes{$endpoint_id}"
-                },
-                {
-                    "name": "ram_available",
-                    "data_source": "metrics",
-                    "query": "avg:host_memory_available_bytes{$endpoint_id}"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ]
-        },
-        "layout": {
-            "x": 5,
-            "y": 0,
-            "width": 4,
-            "height": 2
-        }
-        },
-        {
-        "id": 7513607855022102,
-        "definition": {
-            "title": "Connections",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "alias": "Total",
-                    "formula": "connection_counts"
-                },
-                {
-                    "alias": "Active",
-                    "formula": "active_connection_counts"
-                },
-                {
-                    "alias": "Idle",
-                    "formula": "idle_connection_count"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "connection_counts",
-                    "data_source": "metrics",
-                    "query": "avg:connection_counts{!datname:postgres,$endpoint_id}"
-                },
-                {
-                    "name": "active_connection_counts",
-                    "data_source": "metrics",
-                    "query": "avg:connection_counts{!datname:postgres,state:active}"
-                },
-                {
-                    "name": "idle_connection_count",
-                    "data_source": "metrics",
-                    "query": "avg:connection_counts{!datname:postgres,!state:active,$endpoint_id}"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ]
-        },
-        "layout": {
-            "x": 0,
-            "y": 2,
-            "width": 6,
-            "height": 2
-        }
-        },
-        {
-        "id": 5523349536895199,
-        "definition": {
-            "title": "Database size",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "number_format": {
-                    "unit": {
-                        "type": "canonical_unit",
-                        "unit_name": "byte"
-                    }
-                    },
-                    "formula": "pg_stats_userdb"
-                },
-                {
-                    "number_format": {
-                    "unit": {
-                        "type": "canonical_unit",
-                        "unit_name": "byte"
-                    }
-                    },
-                    "alias": "Size of all databases",
-                    "formula": "pg_stats_userdb"
-                },
-                {
-                    "alias": "Max size",
-                    "number_format": {
-                    "unit": {
-                        "type": "canonical_unit",
-                        "unit_name": "byte"
-                    }
-                    },
-                    "formula": "db_total_size * 1024 * 1024"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "pg_stats_userdb",
-                    "data_source": "metrics",
-                    "query": "sum:pg_stats_userdb{kind:db_size,$endpoint_id} by {datname}"
-                },
-                {
-                    "name": "db_total_size",
-                    "data_source": "metrics",
-                    "query": "sum:db_total_size{$endpoint_id}"
-                },
-                {
-                    "name": "max_cluster_size",
-                    "data_source": "metrics",
-                    "query": "avg:max_cluster_size{$endpoint_id}"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ],
-            "yaxis": {
-            "include_zero": false,
-            "scale": "log"
-            }
-        },
-        "layout": {
-            "x": 0,
-            "y": 4,
-            "width": 5,
-            "height": 3
-        }
-        },
-        {
-        "id": 5728659221127513,
-        "definition": {
-            "title": "Changed rows",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "alias": "Rows inserted",
-                    "formula": "diff(inserted_rows)"
-                },
-                {
-                    "alias": "Rows deleted",
-                    "formula": "diff(deleted_rows)"
-                },
-                {
-                    "alias": "Rows updated",
-                    "formula": "diff(updated_rows)"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "inserted_rows",
-                    "data_source": "metrics",
-                    "query": "avg:pg_stats_userdb{kind:inserted,$endpoint_id}"
-                },
-                {
-                    "name": "deleted_rows",
-                    "data_source": "metrics",
-                    "query": "avg:pg_stats_userdb{kind:deleted,$endpoint_id}"
-                },
-                {
-                    "name": "updated_rows",
-                    "data_source": "metrics",
-                    "query": "avg:pg_stats_userdb{kind:updated,$endpoint_id}"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ]
-        },
-        "layout": {
-            "x": 5,
-            "y": 4,
-            "width": 5,
-            "height": 3
-        }
-        },
-        {
-        "id": 1608572645458648,
-        "definition": {
-            "title": "Deadlocks",
-            "title_size": "16",
-            "title_align": "left",
-            "show_legend": true,
-            "legend_layout": "auto",
-            "legend_columns": [
-            "avg",
-            "min",
-            "max",
-            "value",
-            "sum"
-            ],
-            "type": "timeseries",
-            "requests": [
-            {
-                "formulas": [
-                {
-                    "alias": "Deadlocks",
-                    "formula": "deadlocks"
-                }
-                ],
-                "queries": [
-                {
-                    "name": "deadlocks",
-                    "data_source": "metrics",
-                    "query": "avg:pg_stats_userdb{kind:deadlocks,$endpoint_id}"
-                }
-                ],
-                "response_format": "timeseries",
-                "style": {
-                "palette": "dog_classic",
-                "order_by": "values",
-                "line_type": "solid",
-                "line_width": "normal"
-                },
-                "display_type": "line"
-            }
-            ]
-        },
-        "layout": {
-            "x": 0,
-            "y": 7,
-            "width": 4,
-            "height": 2
-        }
-        }
-    ],
-    "template_variables": [
-        {
-        "name": "endpoint_id",
-        "prefix": "endpoint_id",
-        "available_values": [],
-        "default": "*"
-        }
-    ],
-    "layout_type": "ordered",
-    "notify_list": [],
-    "reflow_type": "fixed"
-    }
-    ```
-    </details>
+   You can copy the [JSON below](#dashboard-json) instead.
 
 1. Next, create a new dashboard in Datadog.
 1. Open **Configure**, select **Import dashboard JSON**, then paste the Neon-provided configuration JSON.
@@ -503,6 +85,426 @@ Here's how you can import the dashboard:
 If any of the computes in your project are active, you should start seeing data in the resulting charts right away. By default, the charts show metrics for all active endpoints in your project. You can filter results to one or more selected endpoints using the **endpoint_id** variable dropdown selector.
 
 ![select endpoint variable in dashboard](/docs/guides/datadog_select_endpoint.png)
+
+### Dashboard JSON
+
+<details>
+<summary>Copy JSON configuration</summary>
+```json shouldWrap
+{
+"title": "Single Neon Compute metrics (with dropdown)",
+"description": "",
+"widgets": [
+    {
+    "id": 7296782684811837,
+    "definition": {
+        "title": "CPU",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "alias": "Used",
+                "formula": "per_minute(host_cpu_seconds_total)"
+            }
+            ],
+            "queries": [
+            {
+                "name": "host_cpu_seconds_total",
+                "data_source": "metrics",
+                "query": "sum:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_count()"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ]
+    },
+    "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 5,
+        "height": 2
+    }
+    },
+    {
+    "id": 3831219857468963,
+    "definition": {
+        "title": "RAM",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "number_format": {
+                "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                }
+                },
+                "alias": "Cached",
+                "formula": "ram_cached"
+            },
+            {
+                "alias": "Used",
+                "number_format": {
+                "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                }
+                },
+                "formula": "ram_total - ram_available"
+            }
+            ],
+            "queries": [
+            {
+                "name": "ram_cached",
+                "data_source": "metrics",
+                "query": "avg:host_memory_cached_bytes{$endpoint_id}"
+            },
+            {
+                "name": "ram_total",
+                "data_source": "metrics",
+                "query": "avg:host_memory_total_bytes{$endpoint_id}"
+            },
+            {
+                "name": "ram_available",
+                "data_source": "metrics",
+                "query": "avg:host_memory_available_bytes{$endpoint_id}"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ]
+    },
+    "layout": {
+        "x": 5,
+        "y": 0,
+        "width": 4,
+        "height": 2
+    }
+    },
+    {
+    "id": 7513607855022102,
+    "definition": {
+        "title": "Connections",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "alias": "Total",
+                "formula": "connection_counts"
+            },
+            {
+                "alias": "Active",
+                "formula": "active_connection_counts"
+            },
+            {
+                "alias": "Idle",
+                "formula": "idle_connection_count"
+            }
+            ],
+            "queries": [
+            {
+                "name": "connection_counts",
+                "data_source": "metrics",
+                "query": "avg:connection_counts{!datname:postgres,$endpoint_id}"
+            },
+            {
+                "name": "active_connection_counts",
+                "data_source": "metrics",
+                "query": "avg:connection_counts{!datname:postgres,state:active}"
+            },
+            {
+                "name": "idle_connection_count",
+                "data_source": "metrics",
+                "query": "avg:connection_counts{!datname:postgres,!state:active,$endpoint_id}"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ]
+    },
+    "layout": {
+        "x": 0,
+        "y": 2,
+        "width": 6,
+        "height": 2
+    }
+    },
+    {
+    "id": 5523349536895199,
+    "definition": {
+        "title": "Database size",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "number_format": {
+                "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                }
+                },
+                "formula": "pg_stats_userdb"
+            },
+            {
+                "number_format": {
+                "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                }
+                },
+                "alias": "Size of all databases",
+                "formula": "pg_stats_userdb"
+            },
+            {
+                "alias": "Max size",
+                "number_format": {
+                "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                }
+                },
+                "formula": "db_total_size * 1024 * 1024"
+            }
+            ],
+            "queries": [
+            {
+                "name": "pg_stats_userdb",
+                "data_source": "metrics",
+                "query": "sum:pg_stats_userdb{kind:db_size,$endpoint_id} by {datname}"
+            },
+            {
+                "name": "db_total_size",
+                "data_source": "metrics",
+                "query": "sum:db_total_size{$endpoint_id}"
+            },
+            {
+                "name": "max_cluster_size",
+                "data_source": "metrics",
+                "query": "avg:max_cluster_size{$endpoint_id}"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ],
+        "yaxis": {
+        "include_zero": false,
+        "scale": "log"
+        }
+    },
+    "layout": {
+        "x": 0,
+        "y": 4,
+        "width": 5,
+        "height": 3
+    }
+    },
+    {
+    "id": 5728659221127513,
+    "definition": {
+        "title": "Changed rows",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "alias": "Rows inserted",
+                "formula": "diff(inserted_rows)"
+            },
+            {
+                "alias": "Rows deleted",
+                "formula": "diff(deleted_rows)"
+            },
+            {
+                "alias": "Rows updated",
+                "formula": "diff(updated_rows)"
+            }
+            ],
+            "queries": [
+            {
+                "name": "inserted_rows",
+                "data_source": "metrics",
+                "query": "avg:pg_stats_userdb{kind:inserted,$endpoint_id}"
+            },
+            {
+                "name": "deleted_rows",
+                "data_source": "metrics",
+                "query": "avg:pg_stats_userdb{kind:deleted,$endpoint_id}"
+            },
+            {
+                "name": "updated_rows",
+                "data_source": "metrics",
+                "query": "avg:pg_stats_userdb{kind:updated,$endpoint_id}"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ]
+    },
+    "layout": {
+        "x": 5,
+        "y": 4,
+        "width": 5,
+        "height": 3
+    }
+    },
+    {
+    "id": 1608572645458648,
+    "definition": {
+        "title": "Deadlocks",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+        "avg",
+        "min",
+        "max",
+        "value",
+        "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+        {
+            "formulas": [
+            {
+                "alias": "Deadlocks",
+                "formula": "deadlocks"
+            }
+            ],
+            "queries": [
+            {
+                "name": "deadlocks",
+                "data_source": "metrics",
+                "query": "avg:pg_stats_userdb{kind:deadlocks,$endpoint_id}"
+            }
+            ],
+            "response_format": "timeseries",
+            "style": {
+            "palette": "dog_classic",
+            "order_by": "values",
+            "line_type": "solid",
+            "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+        ]
+    },
+    "layout": {
+        "x": 0,
+        "y": 7,
+        "width": 4,
+        "height": 2
+    }
+    }
+],
+"template_variables": [
+    {
+    "name": "endpoint_id",
+    "prefix": "endpoint_id",
+    "available_values": [],
+    "default": "*"
+    }
+],
+"layout_type": "ordered",
+"notify_list": [],
+"reflow_type": "fixed"
+}
+```
+</details>
 
 ## Available metrics
 
