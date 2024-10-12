@@ -142,6 +142,10 @@ The integration supports automatic deletion of obsolete preview branches when th
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Check **Automatically delete obsolete Neon branches**.
 
+<Admonition type="note">
+Avoid creating child branches on automatically created preview branches. This will prevent the preview branch from being automatically deleted. In Neon, child branches must be deleted before you can delete a parent branch. 
+</Admonition>
+
 <Admonition type="warning" title="Avoid manually renaming branches when using automatic branch deletion">
 The integration determines whether a preview branch created in Neon is obsolete by looking at its name and asking Vercel if a Git branch with the same exists.
 
