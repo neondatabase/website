@@ -4,7 +4,6 @@ subtitle: Learn how to create event-driven flows on your backend triggered by ch
   your Neon Postgres database
 enableTableOfContents: true
 isDraft: false
-tag: new
 updatedOn: '2024-09-08T12:44:00.902Z'
 ---
 

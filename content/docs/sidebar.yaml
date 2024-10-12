@@ -123,23 +123,18 @@
               slug: import/migrate-schema-only
             - title: Migrate from Digital Ocean
               slug: import/migrate-from-digital-ocean
-              tag: new
             - title: Migrate from Firebase
               slug: import/migrate-from-firebase
-              tag: new
             - title: Migrate from Heroku
               slug: import/migrate-from-heroku
             - title: Migrate from MySQL
               slug: import/migrate-mysql
             - title: Migrate from MSSQL
               slug: import/migrate-mssql
-              tag: new
             - title: Migrate from Render
               slug: import/migrate-from-render
-              tag: new
             - title: Migrate from Supabase
               slug: import/migrate-from-supabase
-              tag: new
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
@@ -148,7 +143,6 @@
               slug: guides/logical-replication-aurora-to-neon
             - title: Replicate from Azure
               slug: import/migrate-from-azure-postgres
-              tag: new
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -516,7 +510,6 @@
               slug: guides/logical-replication-decodable
             - title: Estuary Flow
               slug: guides/logical-replication-estuary-flow
-              tag: new
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -527,7 +520,6 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
-              tag: new
             - title: Sequin
               slug: guides/sequin
             - title: Snowflake
@@ -536,20 +528,16 @@
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
-              tag: new
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
             - title: Cloud SQL
-              tag: new
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
-              tag: new
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
-              tag: new
         - section: Schema Migration
           items:
             - title: Django
@@ -588,7 +576,6 @@
               slug: guides/auth-auth0
             - title: Auth.js
               slug: guides/auth-authjs
-              tag: new
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -882,5 +869,4 @@
       icon: changelog
     - title: RSS feeds
       slug: reference/feeds
-      tag: new
       icon: feeds

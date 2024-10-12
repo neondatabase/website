@@ -2,7 +2,6 @@
 title: Neon RSS feeds
 subtitle: Stay updated with the latest news from Neon
 enableTableOfContents: true
-tag: new
 updatedOn: '2024-09-08T12:44:00.906Z'
 ---
 
