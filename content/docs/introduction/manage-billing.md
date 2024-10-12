@@ -48,9 +48,17 @@ To update your payment method:
 
 If you are unable to update your payment method, please [contact support](/docs/introduction/support).
 
+## Payment issues
+
 ### Missed payments
 
 If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](https://neon.tech/terms-of-service).
+
+## Failing payments for Indian customers
+
+Currently, Neon's billing system does not support e-Mandates, which is required for automatic payments in India. As a result, Indian customers are unable to complete automatic payments for their bills with us.
+
+If you are an Indian customer and experiencing issues with automatic billing, please contact our [Support](/docs/introduction/support) team. They will provide you with a manual payment link to complete your transaction.
 
 ## Update your billing email
 
