@@ -199,6 +199,14 @@ To delete your Worker project, you can use the Cloudflare dashboard or run `wran
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
 
+## Example application
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
+
+</DetailIconCards>
+
 ## Resources
 
 - [Cloudflare Workers](https://workers.cloudflare.com/)
