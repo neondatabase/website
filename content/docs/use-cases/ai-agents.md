@@ -9,7 +9,7 @@ Description
 
 <DetailIconCards>
 
-<a href="/docs/use-cases/tbd" description="Find out if Neon for AI agents use case is for you" icon="gui">Learn about this use case</a>
+<a href="/docs/use-cases/about-ai-agents" description="Learn more about how you can leverage Neon for AI agent development" icon="gui">Learn more about this use case</a>
 
 <a href="/docs/use-cases/tbd" description="Get start with our" icon="chart-bar">tbd</a>
 

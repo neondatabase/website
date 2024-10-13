@@ -9,11 +9,11 @@ Build an architecture with one Postgres database per customer. It scales from a 
 
 <DetailIconCards>
 
-<a href="/docs/use-cases/tbd" description="Find out if the database-per-tenant use case is for you." icon="gui">Learn about the use case</a>
+<a href="/docs/use-cases/about-database-per-tenant" description="Learn more about how to build database-per-tenant architectures with Neon" icon="gui">Learn more about this use case</a>
 
 <a href="/docs/use-cases/tbd" description="How to manage schema migrations across many Neon projects" icon="chart-bar">Schema migration</a>
 
-<a href="/docs/use-cases/tbd" description="Automate your fleet management via the Neon API" icon="database">API essentials for db-per-tenant</a>
+<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Automate your fleet management via the Neon API" icon="database">API essentials for db-per-tenant</a>
 
 <a href="/docs/use-cases/tbd" description="Enable your users to create their own isolated Postgres database" icon="openai">Platforms</a>
 

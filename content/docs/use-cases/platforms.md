@@ -1,6 +1,6 @@
 ---
 title: Neon for Platforms
-subtitle: Enable your users to create their own isolated Postgres databases
+subtitle: Integrate Neon and enable your users to create their own isolated Postgres databases
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
@@ -9,7 +9,7 @@ Description
 
 <DetailIconCards>
 
-<a href="/docs/use-cases/tbd" description="Find out if Neon platform use case is for you" icon="gui">Learn about this use case</a>
+<a href="/docs/use-cases/about-platforms" description="Learn more about how you can you can integrate with Neon" icon="gui">Learn about about this use case</a>
 
 <a href="/docs/use-cases/tbd" description="Get start with Neon" icon="chart-bar">tbd</a>
 

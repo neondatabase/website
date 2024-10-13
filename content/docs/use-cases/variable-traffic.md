@@ -9,16 +9,16 @@ Use Neon as your development, testing, or staging environment without migrating 
 
 <DetailIconCards>
 
-<a href="/docs/use-cases/tbd" description="Find out if the variable traffic use case is for you" icon="gui">Learn about the use case</a>
+<a href="/docs/use-cases/about-variable-traffic" description="Learn more about how you can optimize for variable traffic workloads with Neon" icon="gui">Learn more about this use case</a>
 
-<a href="/docs/use-cases/tbd" description="Neon is a serverless platform—it scales your CPU and memory up and down automatically" icon="chart-bar">About autoscaling</a>
+<a href="/docs/introduction/autoscaling" description="Neon is a serverless platform—it scales your CPU and memory up and down automatically" icon="chart-bar">About autoscaling</a>
 
-<a href="/docs/use-cases/tbd" description="For your non-production workloads, Neon scales all the way down to zero, so you only pay for dev databases when you use them" icon="database">About scale-to-zero</a>
+<a href="/docs/introduction/auto-suspend" description="For your non-production workloads, Neon scales all the way down to zero, so you only pay for dev databases when you use them" icon="database">About scale-to-zero</a>
 
-<a href="/docs/use-cases/tbd" description="Learn the main differences between both platforms" icon="openai">Compare it with Aurora Serverless</a>
+<a href="https://neon.tech/variable-load#why-neon-vs-aurora-serverless" description="Learn the main differences between both platforms" icon="openai">Compare it with Aurora Serverless</a>
 
-<a href="/docs/use-cases/tbd" description="Get details on how Neon will bill your variable usage based on compute hours" icon="filter">How compute usage is billed</a>
+<a href="/docs/introduction/usage-metrics#compute" description="Get details on how Neon will bill your variable usage based on compute hours" icon="filter">How compute usage is billed</a>
 
-<a href="/docs/use-cases/tbd" description="Follow our guides to move your data from Azure Postgres, AWS RDS, Amazon Aurora, and others" icon="import">Migration guides</a>
+<a href="/docs/import/migrate-intro" description="Follow our guides to move your data from Azure Postgres, AWS RDS, Amazon Aurora, and others" icon="import">Migration guides</a>
 
 </DetailIconCards>
