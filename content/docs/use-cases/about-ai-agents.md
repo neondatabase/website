@@ -11,7 +11,7 @@ This toolkit is ideal for AI agents needing efficient and straightforward databa
 
 ## Why We Built @neondatabase/toolkit
 
-AI agents perform best with a reduced search space and a focused toolset. By offering a single SDK for creating and managing databases, we’re providing the tools necessary for agents to operate efficiently with Neon. For example, Replit Agents use Neon as their primary Postgres provider, which supports their ability to generate high-quality applications by focusing solely on Postgres. 
+AI agents perform best with a reduced search space and a focused toolset. By offering a single SDK for creating and managing databases, we’re providing the tools necessary for agents to operate efficiently with Neon. For example, Replit Agents use Neon as their primary Postgres provider, which supports their ability to generate high-quality applications by focusing solely on Postgres.
 
 ## Key features
 
@@ -27,7 +27,7 @@ With **@neondatabase/toolkit**, AI agents can:
 Here's an example script that demonstrates how **@neondatabase/toolkit** can be used by an AI agent to create, use, and delete a Postgres database:
 
 ```javascript
-import { NeonToolkit } from "@neondatabase/toolkit"; 
+import { NeonToolkit } from "@neondatabase/toolkit";
 
 const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
 
