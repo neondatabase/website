@@ -11,7 +11,7 @@ Description
 
 <a href="/docs/use-cases/about-platforms" description="Learn more about how you can you can integrate with Neon" icon="gui">Learn about about this use case</a>
 
-<a href="/docs/use-cases/tbd" description="Get start with Neon" icon="chart-bar">tbd</a>
+<a href="/docs/use-cases/tbd" description="Get started with Neon" icon="chart-bar">tbd</a>
 
 <a href="/docs/use-cases/tbd" description="Learn about with Neon" icon="database">tbd</a>
 
