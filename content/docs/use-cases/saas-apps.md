@@ -7,9 +7,9 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 
 Teams building SaaS applications can accelerate development and reduce operational burden with Neon's innovative features like database branching, autoscaling, and a serverless operating model.
 
-- Neon's **database branching** allows developers to create production-like copies of their databases instantly, streamlining development, testing, and CI/CD workflows. 
-- With **autoscaling**, teams only pay for the resources they need as Neon adjusts CPU and memory based on workload, reducing costs and eliminating the need for manual resizing. 
-- The **serverless model** further simplifies operations by removing server management tasks, enabling teams to focus on their core applications. 
+- Neon's **database branching** allows developers to create production-like copies of their databases instantly, streamlining development, testing, and CI/CD workflows.
+- With **autoscaling**, teams only pay for the resources they need as Neon adjusts CPU and memory based on workload, reducing costs and eliminating the need for manual resizing.
+- The **serverless model** further simplifies operations by removing server management tasks, enabling teams to focus on their core applications.
 
 These features combine to help teams ship faster and more efficiently.
 
