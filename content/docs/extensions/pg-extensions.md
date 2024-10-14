@@ -123,7 +123,7 @@ When Neon releases a new extension or new extension version, a compute restart i
 - The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
-- The [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension is not supported due to storage and change management being provided by [Tentivy](https://github.com/quickwit-oss/tantivy) rather than Postgres WAL-logged buffers and pages.
+- The `pg_search` extension is not supported. The extension's storage and change management is built on [Tantivy](https://github.com/quickwit-oss/tantivy), which is currently not supported by Neon.
 
 ## Request extension support
 
