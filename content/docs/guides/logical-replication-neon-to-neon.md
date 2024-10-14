@@ -17,6 +17,10 @@ Neon's logical replication feature allows you to replicate data from one Neon pr
 
 These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
 
+<Admonition type="info" title="Replicating between databases on the same Neon project branch">
+**The procedure in this guide does not work for replicating between databases on the same Neon project branch**. That setup requires a slightly different publication and subscription configuration. For details, see [Replicating between databases on the same Neon project branch](/docs/guides/logical-replication-neon#replicating-between-databases-on-the-same-neon-project-branch).
+</Admonition>
+
 ## Prerequisites
 
 - A Neon project with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
