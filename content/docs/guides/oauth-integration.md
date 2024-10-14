@@ -94,7 +94,7 @@ Here is an example response:
 You must add `offline` and `offline_access` scopes to your request to receive the `refresh_token`.
 </Admonition>
 
-Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](https://neon.tech/docs/reference/neon-cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/3764c5d5675197ef9bc7ed78d5531bd318f7f13b/src/auth.ts#L54-L71. In this example, the `oauthHost` is `https://oauth2.neon.tech`.
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](https://neon.tech/docs/reference/neon-cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/3764c5d5675197ef9bc7ed78d5531bd318f7f13b/src/auth.ts#L63-L81). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
 ## Supported OAuth Scopes
 
