@@ -2,7 +2,7 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 enableTableOfContents: true
-updatedOn: '2024-10-04T21:02:39.374Z'
+updatedOn: '2024-10-08T17:24:35.409Z'
 ---
 
 At Neon, our serverless architecture is resilient by default, with the separation of storage from compute giving us flexibility in designing High Availability (HA) solutions for each layer.
@@ -39,7 +39,7 @@ In this architecture:
 
   Pageservers act as a disk cache, ingesting and indexing data from the WAL stored by Safekeepers and serving that data to your compute. To ensure high availability, Neon employs secondary Pageservers that maintain up-to-date copies of project data.
 
-  In the event of a Pageserver failure, data remains safe in cloud object storage, but impacted projects may become temporarily unavailable until the system reassigns them to a secondary Pageserver. The system continuously monitors Pageserver health using a heartbeat mechanism to ensure timely detection and failover.
+  In the event of a Pageserver failure, impacted projects are immediately reassigned to a secondary Pageserver, with minimal downtime. The system continuously monitors Pageserver health using a heartbeat mechanism to ensure timely detection and failover.
 
 - **Object storage**
 

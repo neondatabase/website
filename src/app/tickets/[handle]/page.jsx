@@ -122,6 +122,7 @@ export async function generateMetadata({ params }) {
   }
 
   if (userData) {
+    delete userData.email;
     return getMetadata({
       ...SEO_DATA.ticket(userData),
       pathname: `/tickets/${userData.login}`,

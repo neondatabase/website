@@ -72,6 +72,8 @@ Databases like AWS RDS are widely used for a reason: they’re robust, reliable,
 
 **These problems get worse over time, not better**. As your fleet of RDS instances grows, the manual setup and configuration work grows too, as do the cost inefficiencies. It just gets worse.
 
+<CTA title="Build a Neon Twin" description="Set up a GitHub action that automatically syncs your data from RDS to Neon." buttonText="Read more" buttonUrl="/dev-for-rds" />
+
 ## How Neon can help: FAQ
 
 ---

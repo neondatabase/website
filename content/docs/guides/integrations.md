@@ -5,8 +5,16 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-10-02T13:57:11.416Z'
+updatedOn: '2024-10-10T12:46:18.182Z'
 ---
+
+## Monitor
+
+<TechnologyNavigation open>
+
+<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+</TechnologyNavigation>
 
 ## Deploy
 
