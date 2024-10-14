@@ -10,6 +10,7 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 Neon's serverless architecture simplifies database-per-tenant designs, enabling instant provisioning and scale-to-zero for cost efficiency. With Neon's management API, you can easily provision and manage thousands of isolated databases, each scaling to zero when idle.
 
 Key Features:
+
 - **Management API**: Provision new databases, set usage quotas, and track detailed metrics for each tenant.
 - **Instant Provisioning**: Databases are ready in under a second.
 - **Scale to Zero**: Idle databases automatically reduce compute costs to zero, resuming instantly when needed.

@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Neon dynamically scales with traffic, optimizing performance during peak times without overprovisioning. Modern applications experience variable traffic patterns, from productivity apps surging during work hours to gaming platforms peaking in the evening. 
+Neon dynamically scales with traffic, optimizing performance during peak times without overprovisioning. Modern applications experience variable traffic patterns, from productivity apps surging during work hours to gaming platforms peaking in the evening.
 
 Traditional databases require provisioning for peak demand, leading to 24/7 costs for resources that are often idle. Neon's serverless architecture solves this by separating storage and compute, offering autoscaling and the ability to scale to zero. This means you only pay for the compute you use, with no manual resizing and controlled costs. For production, Neon ensures fast performance without overpaying, while non-prod databases minimize costs by scaling down when inactive.
 

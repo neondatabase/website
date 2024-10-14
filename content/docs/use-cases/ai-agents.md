@@ -8,6 +8,7 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 Neon’s serverless Postgres is an ideal match for AI agents, offering rapid provisioning, simple management, and cost-efficient scale-to-zero capabilities.
 
 **Why Neon?**
+
 - **Fast Provisioning**: Create databases in seconds—no more waiting.
 - **Scale to Zero**: Idle databases automatically scale down, keeping costs low.
 - **Developer-Friendly API**: Straightforward API endpoints make database management easy, even for AI agents.
