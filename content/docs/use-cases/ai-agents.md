@@ -5,24 +5,27 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-### Postgres for AI Agents
+Neon’s serverless Postgres is an ideal match for AI agents, offering rapid provisioning, simple management, and cost-efficient scale-to-zero capabilities.
 
-Neon provides instant, serverless Postgres databases designed for AI agent development. With rapid database provisioning via API, AI agents can efficiently spin up and manage databases on demand. 
+**Why Neon?**
+- **Fast Provisioning**: Create databases in seconds—no more waiting.
+- **Scale to Zero**: Idle databases automatically scale down, keeping costs low.
+- **Developer-Friendly API**: Straightforward API endpoints make database management easy, even for AI agents.
 
-Our streamlined toolkit simplifies this process, allowing agents to focus on higher-level tasks without complex configurations. Agents can create, query, and delete databases quickly, making Neon ideal for projects requiring temporary or task-specific data handling. 
+Join Replit and others in leveraging Neon to manage database infrastructure for AI agents. Neon’s flexible Postgres platform supports high scalability without the operational burden, allowing agents to handle thousands of databases effortlessly.
 
-For those building AI agents, Neon offers flexible database interactions to support your agent’s unique needs, with a purpose-built SDK available to facilitate development.
+## Learn more
 
 <DetailIconCards>
 
 <a href="/docs/use-cases/about-ai-agents" description="Learn more about how you can leverage Neon for AI agent development" icon="gui">Learn more about this use case</a>
 
-<a href="/docs/use-cases/tbd" description="Get start with our" icon="chart-bar">tbd</a>
+<a href="/docs/introduction/auto-suspend" description="Learn about how Neon scales all the way down to zero, so you only pay for dev databases when they are being used" icon="database">About scale-to-zero</a>
 
-<a href="/docs/use-cases/tbd" description="Learn about on Neon" icon="database">tbd</a>
+## Get started
 
-<a href="/docs/use-cases/tbd" description="Learn about on Neon" icon="openai">tbd</a>
+<DetailIconCards>
 
-<a href="/docs/use-cases/tbd" description="Learn how to on Neon" icon="filter">tbd</a>
+<a href="https://neon.tech/blog/why-neondatabase-toolkit" description="Learn how you can use the @neondatabase/toolkit for building AI Agents" icon="openai">The @neondatabase/toolkit</a>
 
 </DetailIconCards>

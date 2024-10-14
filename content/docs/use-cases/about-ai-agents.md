@@ -1,76 +1,76 @@
 ---
-title: Postgres for AI Agents
-subtitle: Leverage Neon's instant Postgres database provisioning for AI agent development
+title: 'Postgres for AI Agents'
+subtitle: Neon databases are fast to provision, easy to manage, and they scale to zero — perfect for AI agents.
 enableTableOfContents: true
-updatedOn: '2024-08-23T09:00:00.000Z'
+updatedOn: '2024-10-09T09:00:00.000Z'
 ---
 
-Neon is a serverless, instant Postgres database platform built with AI agents in mind. With Neon, developers can instantly provision Postgres databases via a simple API, allowing AI agents to access an SQL database on-demand. Our streamlined **@neondatabase/toolkit** simplifies this process by merging our previously existing API packages into a single, easy-to-use SDK.
+<Admonition type="note" title="TL;DR">
+Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d love to connect](/agent-design-partner) — we’re looking for design partners in this space.
+</Admonition>
 
-This toolkit is ideal for AI agents needing efficient and straightforward database provisioning and management. By providing a narrow, purpose-built API, we enable AI agents to spin up and interact with databases quickly, letting them focus on solving higher-level tasks rather than dealing with complex database configurations.
+---
 
-## Why We Built @neondatabase/toolkit
+AI agents can now provision infrastructure, including databases. With AI Agents already spinning up databases every few seconds, chances are they’re going to manage a big part of the web’s infrastructure in the future—and, just like developers, AI agents love working with Neon.
 
-AI agents perform best with a reduced search space and a focused toolset. By offering a single SDK for creating and managing databases, we’re providing the tools necessary for agents to operate efficiently with Neon. For example, Replit Agents use Neon as their primary Postgres provider, which supports their ability to generate high-quality applications by focusing solely on Postgres.
+## Neon is the perfect DB for AI Agents. Here’s why:
 
-## Key features
+---
 
-With **@neondatabase/toolkit**, AI agents can:
+### One-second provision times
 
-- **Instantly Spin Up Databases**: Quickly create a Postgres instance via API, perfect for tasks requiring temporary or task-specific databases.
-- **Execute SQL Commands**: Run SQL queries or commands directly, all within a consistent and agent-friendly interface.
-- **Manage Database Lifecycle**: Easily create, query, and delete databases on-demand, streamlining project cleanup and resource management.
-- **Select Connection Types**: While HTTP is the default, upcoming features will allow for connections via WebSockets or TCP, providing flexibility for various agent needs.
+If you’re a dev writing code, a five-minute deploy isn’t a big deal. But AI Agents generate the same code in seconds, waiting five minutes for a deployment is painful. This gets even more painful at scale.
 
-## Example workflow
+[Neon](/) takes the world's most loved database (Postgres) and delivers it as a [serverless platform](/docs/introduction/serverless). This means that spinning up new Neon databases takes seconds vs minutes in other Postgres services.
 
-Here's an example script that demonstrates how **@neondatabase/toolkit** can be used by an AI agent to create, use, and delete a Postgres database:
+### With scale to zero, empty databases are very, very cheap
+
+Imagine spinning up a new RDS instance every few seconds—you’d blow your budget on the first invoice. In most managed databases, managing thousands of isolated instances is unthinkable, and even more so without breaking the bank.
+
+Neon’s serverless architecture solves this. In Neon, databases [automatically scale to zero](/docs/introduction/auto-suspend) when idle and wake up instantly. You don’t pay for a database unless it’s being used or has data on it.
+
+Some databases created by agents might only be used for a few minutes; if you’re the company behind the agent, you’ll quickly have a large database fleet full of inactive databases.
+
+With Neon, that’s not a problem. You can still maintain this fleet within a reasonable budget.
+
+### Straightforward API that even an AI Agent can use
+
+The same API endpoints that are useful for [developers managing large database fleets on Neon](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) are also perfect for AI Agents.
+Just like developers appreciate a simple, clear API, so do AI agents. If it’s easy enough for a junior dev, it’s great for AI. Neon checks that box.
+
+With the Neon API, you can not only create and delete databases but also track usage, limit resources, and handle configuration.
 
 ```javascript
 import { NeonToolkit } from "@neondatabase/toolkit";
 
 const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
-
-// Create a new Postgres project
 const project = await toolkit.createProject();
 
-// Create a table
 await toolkit.sql(
   project,
   `
     CREATE TABLE IF NOT EXISTS
-        users (
-            id UUID PRIMARY KEY,
-            name VARCHAR(255) NOT NULL
-        );
-`,
+      users (
+          id UUID PRIMARY KEY,
+          name VARCHAR(255) NOT NULL
+      );
+  `,
 );
-
-// Insert a record into the table
 await toolkit.sql(
   project,
   `INSERT INTO users (id, name) VALUES (gen_random_uuid(), 'Sam Smith')`,
 );
 
-// Query the table
 console.log(await toolkit.sql(project, `SELECT name FROM users`));
 
-// Delete the project when done
 await toolkit.deleteProject(project);
+
 ```
 
-This workflow allows the AI agent to provision a database, run necessary SQL commands, and tear down the instance—all with minimal code and in a few seconds.
+<p className="text-sm tracking-extra-tight text-center text-gray-new-50 mt-3.5">We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit" target="_blank" rel="noopener noreferrer">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>.</p>
 
-## Getting Started
+### Neon is 100% Postgres
 
-To get started with `@neondatabase/toolkit, install the package from NPM:
+The most-loved database by developers worldwide is also the best choice for AI agents, thanks to its versatility (it works for almost any app) and the vast amount of resources, examples, and training datasets available.
 
-```bash
-npm install @neondatabase/toolkit
-```
-
-Set up your API key and instantiate the toolkit, and you’re ready to start managing your databases. The toolkit also allows access to all Neon API features via its apiClient, providing flexibility for more advanced use cases, such as branching and autoscaling.
-
-## Building AI Agents?
-
-If you're working on an AI agent that requires database interactions, we’d love to hear your feedback. We're actively iterating on Neon for Agents and invite design partners to help shape the future of this toolkit. Please file an issue on our GitHub repository, or reach out to us on Discord with any feedback.
+Neon is simply Postgres. Everything an agent knows about Postgres is available in Neon, from extensions to full SQL syntax.
