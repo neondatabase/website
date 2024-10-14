@@ -15,7 +15,7 @@ Neon offers a convenient way to manage your subscription and billing through the
 1. Select your preferred contract options:
    1. If you’d like a monthly subscription, select **1 month**. If you prefer a yearly subscription, select **12 months**.
    1. In the **Renewal** settings, select **Yes**.
-   1. Select **Scale** or **Launch** depending on your usage needs. See our [pricing page](https://neon.tech/pricing) for a refresh on what’s included in our different plans.
+   1. Select the Neon plan that best fits your usage requirements. See our [pricing page](https://neon.tech/pricing) for information about what’s included in our different plans.
    1. In the **Units** field for your selected plan, write down **1**.
 1. Click on **Create contract**.
 1. Once you subscribe, go to the **Your Marketplace Software** tab, where you'll find Neon listed as one of your subscriptions. Click **Set Up Product** and it will redirect you to the ordering page.
