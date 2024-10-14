@@ -56,9 +56,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ### Failing payments for Indian customers
 
-Currently, Neon's billing system does not support e-Mandates, which is required for automatic payments in India. As a result, Indian customers are unable to complete automatic payments for their bills with us.
-
-If you are an Indian customer and experiencing issues with automatic billing, please contact our [Support](/docs/introduction/support) team. They will provide you with a manual payment link to complete your transaction.
+Neon’s billing system, powered by Stripe, currently lacks support for e-Mandates, a requirement for automatic payments in India as per Reserve Bank of India (RBI) regulations. As a result, Indian customers are unable to complete automatic monthly payments through Neon's billing system. Instead, we recommend that Indian customers pay for their subscription via AWS Marketplace. Please refer to our [AWS Marketplace instructions](/docs/introduction/billing-aws-marketplace) for details.
 
 ## Update your billing email
 
