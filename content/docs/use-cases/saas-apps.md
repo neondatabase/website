@@ -37,7 +37,11 @@ These features combine to help teams ship faster and more efficiently.
 
 <DetailIconCards>
 
-<a href="https://neon.tech/flow" description="Learn how to setup your database branching workflows on Neon" icon="filter">Set up branching workflows</a>
+<a href="https://neon.tech/flow" description="Learn how to set up your database branching workflows on Neon" icon="filter">Set up branching workflows</a>
+
+<a href="https://neon.tech/docs/guides/vercel" description="Deploy an instant workflow with the Neon Vercel Integration" icon="filter">Neon Vercel Integration</a>
+
+<a href="https://neon.tech/docs/guides/neon-github-integration#feedback-and-future-improvements" description="Build your own workflow with the Neon GitHub Integration" icon="filter">Neon GitHub Integration</a>
 
 <a href="https://neon.tech/docs/guides/integrations" description="Learn how to integrate Neon with various platforms and services" icon="filter">Neon integration guides</a>
 

@@ -22,6 +22,8 @@ Join Replit and others in leveraging Neon to manage database infrastructure for 
 
 <a href="/docs/introduction/auto-suspend" description="Learn about how Neon scales all the way down to zero, so you only pay for dev databases when they are being used" icon="database">About scale-to-zero</a>
 
+</DetailIconCards>
+
 ## Get started
 
 <DetailIconCards>
