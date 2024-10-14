@@ -24,7 +24,7 @@ To set up the integration and create a Neon OAuth application, you can apply on 
 4. Whether or not you will make API calls from a backend.
 5. A logo to be displayed on Neon's OAuth consent dialog when users authorize your application to access their Neon account.
 
-After your application is reviewed, we will provide you with a client ID and, if applicable, a client secret. Client secrets are only provided for backend clients, so non-backend applications (e.g., browser-based apps) will not receive a secret. These credentials are sensitive and should be stored securely.
+After your application is reviewed, we will provide you with a client ID and, if applicable, a client secret. Client secrets are only provided for backend clients, so non-backend applications (e.g. browser-based apps or CLI tools) will not receive a secret. These credentials are sensitive and should be stored securely.
 
 ## How the OAuth integration works
 
