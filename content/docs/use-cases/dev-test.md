@@ -1,17 +1,17 @@
 ---
 title: Neon for Dev/Test
-subtitle: Migrate your non-prod environments to Neon to ship faster with up to 75% lower costs
+subtitle: Migrate your non-prod environments to Neon to ship faster with lower costs
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Neon is built for modern development workflows. It’s designed to help teams ship reliable, scalable applications faster by removing the complexities of traditional database management. Even if you’re not ready to migrate production away from your current Postgres provider, you can leverage Neon to transform your development and testing environments. Use Neon’s developer-friendly features like instant provisioning, autoscaling, and database branching in your dev/test workflows, without having to touch your production database.
+Neon is built for modern development workflows. It’s designed to help teams ship reliable, scalable applications faster by removing the complexities of traditional database management. Even if you’re not ready to migrate production away from your current Postgres provider, you can leverage Neon for your development and testing environments. Use Neon’s developer-friendly features like instant provisioning, autoscaling, and database branching in your dev/test workflows, without having to touch your production database.
 
-Here’s how Neon can enhance your non-production environments:
+Here’s how Neon can enhance optimize non-production environments:
 
-- **Boost developer velocity**: Enjoy a streamlined experience with automatic scaling and easy-to-use APIs, allowing your team to focus on building, not managing.
-- **Reduce costs by up to 75%**: Pay only for the compute you use, and avoid the inefficiencies of always-on resources in RDS or other providers.
+- **Reduce costs by up to 75%**: Pay only for the compute resources you use, and avoid the inefficiencies of always-on resources in RDS or other providers.
 - **Enable better collaboration**: Use database branching for isolated dev/test environments without interfering with production, making it easy for multiple developers to work concurrently.
+- **Boost developer velocity**: Streamline your workflows with near-instant database and branch provisioning, automatic scaling, and and easy-to-use APIs, allowing your team to focus on building, not managing.
 
 ## Learn more
 
