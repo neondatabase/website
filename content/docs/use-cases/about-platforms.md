@@ -5,7 +5,20 @@ enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 ---
 
-Bring isolated Postgres databases to your end-users through a Neon integration. Follow the lead of Vercel, Replit, Retool, and many others. Ideal for developers and AI agents.
+Three features make database-per-user architectures on Neon possible to the extent that today, companies are able to manage fleets of hundreds of thousands of databases with a single engineer.
+
+<DefinitionList>
+Management API
+: Use the API to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics. [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+
+Instant Provisioning
+: P99 database provisioning time is less than 1 second.
+
+Scale to Zero
+: Idle databases scale compute to zero automatically, and instantly come back online when needed. This means you're not paying a fixed cost for every database you onboard.
+</DefinitionList>
+
+**The result:** Small teams can build flexible database-per-tenant architectures on Neon without operational burden or infra cost overhead.
 
 - **Level up your platform**
 

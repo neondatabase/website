@@ -5,11 +5,28 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Build an architecture with one Postgres database per customer. It scales from a small SaaS to hundreds of thousands of tenants.
+### Database-per-tenant on Postgres
+
+Neon's serverless architecture simplifies database-per-tenant designs, enabling instant provisioning and scale-to-zero for cost efficiency. With Neon's management API, you can easily provision and manage thousands of isolated databases, each scaling to zero when idle.
+
+Key Features:
+- **Management API**: Provision new databases, set usage quotas, and track detailed metrics for each tenant.
+- **Instant Provisioning**: Databases are ready in under a second.
+- **Scale to Zero**: Idle databases automatically reduce compute costs to zero, resuming instantly when needed.
+
+Neon is ideal for B2B SaaS and developer platforms, supporting isolated databases per tenant to meet data privacy and regional compliance needs. Easily scale from a handful of users to hundreds of thousands with minimal operational overhead.
+
+## Learn more
 
 <DetailIconCards>
 
 <a href="/docs/use-cases/about-database-per-tenant" description="Learn more about how to build database-per-tenant architectures with Neon" icon="gui">Learn more about this use case</a>
+
+</DetailIconCards>
+
+## Get started
+
+<DetailIconCards>
 
 <a href="/docs/use-cases/tbd" description="How to manage schema migrations across many Neon projects" icon="chart-bar">Schema migration</a>
 

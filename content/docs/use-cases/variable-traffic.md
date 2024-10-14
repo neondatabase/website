@@ -5,7 +5,11 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Use Neon as your development, testing, or staging environment without migrating production off of your current Postgres database (RDS Postgres, Aurora, Azure Postgres, etc.)
+Neon dynamically scales with traffic, optimizing performance during peak times without overprovisioning. Modern applications experience variable traffic patterns, from productivity apps surging during work hours to gaming platforms peaking in the evening. 
+
+Traditional databases require provisioning for peak demand, leading to 24/7 costs for resources that are often idle. Neon's serverless architecture solves this by separating storage and compute, offering autoscaling and the ability to scale to zero. This means you only pay for the compute you use, with no manual resizing and controlled costs. For production, Neon ensures fast performance without overpaying, while non-prod databases minimize costs by scaling down when inactive.
+
+## Learn more
 
 <DetailIconCards>
 
@@ -18,6 +22,12 @@ Use Neon as your development, testing, or staging environment without migrating 
 <a href="https://neon.tech/variable-load#why-neon-vs-aurora-serverless" description="Learn the main differences between both platforms" icon="openai">Compare it with Aurora Serverless</a>
 
 <a href="/docs/introduction/usage-metrics#compute" description="Get details on how Neon will bill your variable usage based on compute hours" icon="filter">How compute usage is billed</a>
+
+</DetailIconCards>
+
+## Get started
+
+<DetailIconCards>
 
 <a href="/docs/import/migrate-intro" description="Follow our guides to move your data from Azure Postgres, AWS RDS, Amazon Aurora, and others" icon="import">Migration guides</a>
 
