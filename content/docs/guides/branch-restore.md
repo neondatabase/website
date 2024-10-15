@@ -39,11 +39,11 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
 <Admonition type="note" title="Can you delete a backup branch?">
-Unfortunately, not at this time. A backup branch is the parent of a restored branch, and you cannot delete a parent branch without first removing its child branches. Support for deleting backup branches is expected in a future release.
+[Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program) users can delete a backup branch created by a restore operation on a root branch, which is the initial branch created with your Neon project. Your root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch is not yet supported.
 
-In the meantime, if you're certain you no longer need a backup branch, you can free up its storage space by connecting to the branch and dropping its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+If you cannot delete a backup branch, and you're certain you no longer need the data in a backup branch, you can free up its storage space by connecting to the branch and dropping its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
-If backup branches clutter your **Branches** page, consider renaming them. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
+To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 </Admonition>
 
 This backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
