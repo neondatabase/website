@@ -3,6 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Role-Level Security
 enableTableOfContents: true
 ---
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>JSON Web Tokens (JWT)</p>
@@ -46,12 +47,12 @@ Let's take a **before/after** look at moving authorization from the application 
 In a traditional setup, you might handle authorization for a function directly in your backend code:
 
 ```typescript shouldWrap
-export async function insertTodo(newTodo: { newTodo: string, userId: string }) {
+export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
   const { userId } = auth(); // Gets the user's ID from the JWT or session
-  
-  if (!userId) throw new Error("No user logged in"); // No user authenticated
 
-  if (newTodo.userId !== userId) throw new Error("Unauthorized"); // User mismatch
+  if (!userId) throw new Error('No user logged in'); // No user authenticated
+
+  if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
 
   // Inserts the new todo, linking it to the authenticated user
   await fetchWithDrizzle(async (db) => {
@@ -62,7 +63,7 @@ export async function insertTodo(newTodo: { newTodo: string, userId: string }) {
     });
   });
 
-  revalidatePath("/");
+  revalidatePath('/');
 }
 ```
 
@@ -76,9 +77,9 @@ In this case, you have to:
 With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies:
 
 ```typescript
-pgPolicy("create todos", {
-  for: "insert",
-  to: "authenticated",
+pgPolicy('create todos', {
+  for: 'insert',
+  to: 'authenticated',
   withCheck: sql`(select auth.user_id() = user_id)`,
 });
 ```
@@ -94,7 +95,7 @@ export async function insertTodo(newTodo: { newTodo: string }) {
     });
   });
 
-  revalidatePath("/");
+  revalidatePath('/');
 }
 ```
 
@@ -105,9 +106,9 @@ This approach is flexible: you can manage RLS policies directly in SQL or work m
 Let's break down the sample RLS policy we just looked at to see what Neon Authorize is actually doing:
 
 ```typescript
-pgPolicy("view todos", {
-  for: "select",
-  to: "authenticated",
+pgPolicy('view todos', {
+  for: 'select',
+  to: 'authenticated',
   using: sql`(select auth.user_id() = user_id)`,
 });
 ```
