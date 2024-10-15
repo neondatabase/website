@@ -127,8 +127,8 @@ The **pg_session_jwt** extension makes the extracted user ID accessible within y
 using: sql`(select auth.user_id() = user_id)`,
 ```
 
-* `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user's ID from the JWT.
-* `user_id`: This refers to the `user_id` column in the `todos` table, representing the owner of each to-do item.
+- `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user's ID from the JWT.
+- `user_id`: This refers to the `user_id` column in the `todos` table, representing the owner of each to-do item.
 
 The RLS policy compares the `user_id` from the JWT with the `user_id` in the todos table. If they match, the user is allowed to view their own todos; if not, access is denied.
 
