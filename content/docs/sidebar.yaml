@@ -423,7 +423,7 @@
       slug: guides/neon-authorize
       icon: api
       items:
-        - title: About
+        - title: About Neon Authorize
           slug: guides/neon-authorize
         - title: Quickstart
           slug: guides/neon-authorize-quickstart
