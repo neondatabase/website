@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-10-01T17:32:03.806Z'
+updatedOn: '2024-10-12T11:16:13.591Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peek at some of the upcoming features we'll be taking on next.
@@ -50,6 +50,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable logs and traces.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
+- **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability
 
 ## Join the Neon Early Access Program
 
@@ -91,4 +92,4 @@ The Neon **Limited Preview** started in February 2022 and was made available to 
 
 - On April 15th, 2024, Neon announced [General Availability](https://neon.tech/blog/neon-ga).
 
-For everything post-GA, please refer to our [Changelog](https://neon.tech/docs/changelog) and the [Neon Blog](https://neon.tech/blog). You can also stay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or newsletter.
+For everything post-GA, please refer to our [Changelog](https://neon.tech/docs/changelog) and the [Neon Blog](https://neon.tech/blog). You can also stay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or [newsletter](https://neon.tech/blog#subscribe-form).

@@ -3,7 +3,7 @@ title: Connect with the Neon Vercel Integration
 subtitle: Learn how to connect your Vercel project to Neon using the Neon Vercel
   Integration
 enableTableOfContents: true
-updatedOn: '2024-09-27T19:57:36.966Z'
+updatedOn: '2024-10-14T09:36:17.632Z'
 ---
 
 This guide describes how to connect using the [Neon Vercel Integration](https://vercel.com/integrations/neon) from the Vercel marketplace. The integration connects your Vercel project to a Neon database and creates a database branch for each preview deployment.
@@ -141,6 +141,10 @@ The integration supports automatic deletion of obsolete preview branches when th
 3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Check **Automatically delete obsolete Neon branches**.
+
+<Admonition type="note">
+Avoid creating child branches on automatically created preview branches. The presence of a child branch will prevent the parent preview branch from being automatically deleted. In Neon, child branches must be deleted before the parent branch can be deleted.
+</Admonition>
 
 <Admonition type="warning" title="Avoid manually renaming branches when using automatic branch deletion">
 The integration determines whether a preview branch created in Neon is obsolete by looking at its name and asking Vercel if a Git branch with the same exists.

@@ -78,11 +78,11 @@
       "feature": {
         "title": "Projects"
       },
-      "free": "1",
+      "free": "10",
       "launch": "100",
       "scale": {
         "title": "1,000",
-        "info": "Extra at $50 per 10 projects"
+        "info": "$50 per 1,000 projects"
       },
       "business": {
         "title": "5,000",
@@ -94,7 +94,7 @@
       "feature": {
         "title": "Branches"
       },
-      "free": "10",
+      "free": "10 <span>per project</span>",
       "launch": "500 <span>per project</span>",
       "scale": "500 <span>per project</span>",
       "business": "500 <span>per project</span>"
@@ -240,7 +240,7 @@
       "launch": true,
       "scale": true,
       "business": true
-    },    
+    },
     {
       "rows": "1",
       "feature": {
@@ -260,7 +260,7 @@
       "launch": false,
       "scale": false,
       "business": true
-    },    
+    },
     {
       "rows": "1",
       "feature": {

@@ -7,13 +7,24 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-08-06T15:23:10.945Z'
+updatedOn: '2024-10-15T14:06:04.361Z'
 ---
 
-This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to view and modify data in the console</p>
+<p>Create an isolated database copy per developer</p>
+<p>Reset your branch to main when ready to start new work</p>
+</DocsList>
 
-- How the Neon [object hierarchy](/docs/manage/overview) works, starting with the **Project**.
-- How [branching](https://neon.tech/docs/introduction/branching) keeps your data isolated from production, and how easy it is to reset development branches when ready to start on new work.
+<DocsList title="Related topics" theme="docs">
+<a href="https://neon.tech/docs/introduction/branching">About branching</a>
+<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+</DocsList>
+</InfoBlock>
+
+This tutorial walks you through your first steps using Neon as your Postgres database. You’ll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
 ## About branching
 
