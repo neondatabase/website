@@ -25,25 +25,25 @@ enableTableOfContents: true
 
 ## Authentication and authorization
 
-When implementing user authentication in your application, third-party authentication providers like **Clerk**, **Auth0**, and others simplify the process of managing user identifies, passwords, and security tokens. Once a user’s identity is confirmed, the next step is **authorization** — controlling who can do what in your app based on their user type or role — for example, admins versus regular users. With Neon Authorize, you can handle authorization right in Postgres, in addition to, or to replace entirely, security at other layers.
+When implementing user authentication in your application, third-party authentication providers like **Clerk**, **Auth0**, and others simplify the process of managing user identities, passwords, and security tokens. Once a user's identity is confirmed, the next step is **authorization** — controlling who can do what in your app based on their user type or role — for example, admins versus regular users. With Neon Authorize, you can handle authorization right in Postgres, in addition to, or to replace entirely, security at other layers.
 
 ## How Neon Authorize works
 
-Most authentication providers issue **JSON Web Tokens (JWTs)** on user authentication to convey user identity and claims. The JWT is a secure way of proving that a logged in user is who they say they are &#8212; and passing that proof on to other entities.
+Most authentication providers issue **JSON Web Tokens (JWTs)** on user authentication to convey user identity and claims. The JWT is a secure way of proving that logged-in users are who they say they are &#8212; and passing that proof on to other entities.
 
 With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity right in Postgres. To integrate with an authentication provider, add your provider's JWT discovery URL to your project. This lets Neon retrieve the necessary keys to validate the JWTs.
 
-Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while the open source extension [pg_session_jwt](#how-the-pg_session_jwt-extension-works) makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are enforced directly in the database, they can offer a secure fallback — or even a primary solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
+Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while the open source extension [pg_session_jwt](#how-the-pg_session_jwt-extension-works) makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
 ## Before and after Neon Authorize
 
-To demonstrate how Neon Authorize offers a different approach, let's take a **before/after** look at moving authorizatoin from the application-level to the database.
+Let's take a **before/after** look at moving authorization from the application level to the database to demonstrate how Neon Authorize offers a different approach to securing your application.
 
 ### Before Neon Authorize (application-level checks):
 
-In a traditional setup, you might handle authorization for an Insert function directly in your backend code:
+In a traditional setup, you might handle authorization for a function directly in your backend code:
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string, userId: string }) {
@@ -68,7 +68,7 @@ export async function insertTodo(newTodo: { newTodo: string, userId: string }) {
 
 In this case, you have to:
 
-- Check if the user is authenticated and if their `userId` matches the data they are trying to modify.
+- Check if the user is authenticated and their `userId` matches the data they are trying to modify.
 - Handle both task creation and authorization in the backend code.
 
 ### After Neon Authorize (RLS in the database):
@@ -83,7 +83,7 @@ pgPolicy("create todos", {
 });
 ```
 
-Now, in your backend, you can simplify the logic, removing the user authentication checks and explicity authorization handling.
+Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string }) {
@@ -102,7 +102,7 @@ This approach is flexible: you can manage RLS policies directly in SQL or work m
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
-Let’s break down the sample RLS policy we just looked at to see what Neon Authorize is actually doing:
+Let's break down the sample RLS policy we just looked at to see what Neon Authorize is actually doing:
 
 ```typescript
 pgPolicy("view todos", {
@@ -112,27 +112,28 @@ pgPolicy("view todos", {
 });
 ```
 
-This policy enforces that a user can only view their own `todos`. The function `auth.user_id()` retrieves the user's ID from the **JWT** provided by the authentication provider. Here's how the process works:
+This policy enforces that a user can only view their own `todos`. Here's how each component works together.
 
 ### The role of the Neon Proxy
 
-When a request is made, the **Neon Proxy** validates the JWT by checking its signature and expiration. Once validated, the Neon Proxy extracts the user id from the JWT’s claims and forwards it to the database.
+When a request is made, the Neon Proxy validates the JWT by checking its signature and expiration date against the public keys. Once validated, the Neon Proxy extracts the `user_id` from the JWT's claims and forwards it to the database session, making it available within Postgres.
 
 ### How the `pg_session_jwt` extension works
 
-The **pg_session_jwt** extension makes the extracted user id accessible within your SQL queries and RLS policies:
+The **pg_session_jwt** extension makes the extracted user ID accessible within your SQL queries and RLS policies:
 
 ```typescript
 using: sql`(select auth.user_id() = user_id)`,
 ```
-* `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user’s ID from the JWT.
-* `user_id`: This refers to the `user_id` column in the `todos` table, representing the user who owns that particular todo entry.
 
-The RLS policy compares the user_id from the JWT (auth.user_id()) with the user_id in the todos table. If they match, the user is allowed to view their own todos; if not, access is denied.
+* `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user's ID from the JWT.
+* `user_id`: This refers to the `user_id` column in the `todos` table, representing the owner of each to-do item.
+
+The RLS policy compares the `user_id` from the JWT with the `user_id` in the todos table. If they match, the user is allowed to view their own todos; if not, access is denied.
 
 ## When to rely on RLS
 
-For early-stage applications, **RLS** might be all the security you need to scale your project. For more mature applications, where larger development teams are involved, RLS can act as a backstop or final guarantee. Even if other security layers fail — for example, a front-end component exposes access to a part of your app that it shouldn’t, or your backend misapplies authorization — RLS ensures that unauthorized users will not be able to interact with your data. The exposed action will fail, protecting your sensitive database-backed resources.
+For early-stage applications, **RLS** might be all the security you need to scale your project. For more mature applications, where larger development teams are involved, RLS can act as a backstop or final guarantee. Even if other security layers fail — for example, a front-end component exposes access to a part of your app that it shouldn't, or your backend misapplies authorization — RLS ensures that unauthorized users will not be able to interact with your data. The exposed action will fail, protecting your sensitive database-backed resources.
 
 ## Sample applications
 

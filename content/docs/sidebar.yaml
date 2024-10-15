@@ -425,7 +425,7 @@
       items:
         - title: About Neon Authorize
           slug: guides/neon-authorize
-        - title: Quickstart
+        - title: Get started
           slug: guides/neon-authorize-quickstart
     - title: Integrations
       icon: integrations
