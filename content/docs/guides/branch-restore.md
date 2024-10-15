@@ -247,9 +247,9 @@ To delete a backup branch:
 1. Navigate to the **Branches** page.
 2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `main`.
 
-    ```
-    {branch_name}_old_{head_timestamp}
-    ```
+   ```
+   {branch_name}_old_{head_timestamp}
+   ```
 
 3. Select **Delete** from the menu.
 
