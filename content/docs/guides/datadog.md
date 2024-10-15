@@ -66,7 +66,7 @@ Once integrated, you can create custom dashboards in Datadog by querying the met
 
 ## Import the Neon dashboard
 
-As part of the integration, Neon provides a JSON configuration file that you can import into Datadog to start with a pre-built dashboard based on Neon metrics.
+As part of the integration, Neon provides a JSON configuration file that you can import into Datadog to start with a pre-built dashboard based on a subset of Neon metrics.
 
 ![neon dashboard in datadog](/docs/guides/neon-dashboard-datadog.png)
 
