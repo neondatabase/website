@@ -38,15 +38,7 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-<Admonition type="note" title="Can you delete a backup branch?">
-[Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program) users can delete a backup branch created by a restore operation on a root branch, which is the initial branch created with your Neon project. Your root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch is not yet supported.
-
-If you cannot delete a backup branch, and you're certain you no longer need the data in a backup branch, you can free up its storage space by connecting to the branch and dropping its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
-
-To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
-</Admonition>
-
-This backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+The backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
 
@@ -82,7 +74,7 @@ Similar to the manual restore operation using the Neon Console and API described
 
 ### Time Travel Assist
 
-Use Time Travel Assist to make sure you've targetted the correct restore point before you restore your branch.
+Use Time Travel Assist to make sure you've targeted the correct restore point before you restore your branch.
 
 See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
 
@@ -245,6 +237,25 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 
 To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
+
+## Deleting backup branches
+
+If you are an [Early Access](/docs/introduction/roadmap#join-the-neon-early-access-program) user, you can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `main`) is not yet supported.
+
+To delete a backup branch:
+
+1. Navigate to the **Branches** page.
+2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `main`.
+
+    ```
+    {branch_name}_old_{head_timestamp}
+    ```
+
+3. Select **Delete** from the menu.
+
+If you cannot delete a backup branch because you are not an Early Access user or because the backup branch was created by a restore operation on a non-root branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+
+To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 
 ## Billing considerations
 
