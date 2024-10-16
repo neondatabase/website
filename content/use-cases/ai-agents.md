@@ -14,7 +14,7 @@ Replit partnered with Neon to back Replit Agents, which are already creating tho
 
 AI agents can now provision infrastructure, including databases. With AI Agents already spinning up databases every few seconds, chances are they’re going to manage a big part of the web’s infrastructure in the future—and, just like developers, AI agents love working with Neon.
 
-## Neon is the perfect DB for AI Agents. Here’s why:
+## Neon is ideally suited to AI Agents. Here’s why:
 
 ---
 
