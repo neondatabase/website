@@ -1,6 +1,6 @@
 ---
 title: About Neon Authorize
-subtitle: Secure your application at the database level using Postgres's Role-Level Security
+subtitle: Secure your application at the database level using Postgres's Row Level Security
 enableTableOfContents: true
 ---
 
