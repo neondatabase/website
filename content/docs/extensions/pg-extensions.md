@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-10-04T11:42:05.385Z'
+updatedOn: '2024-10-14T14:39:04.077Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
@@ -40,7 +40,7 @@ Postgres 17, released in September 2024, currently lacks support for several ext
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |    1.1 |    1.1 |    1.1 |   1.1 |                                                                                                                                                                           |
 | [ltree](https://www.postgresql.org/docs/16/ltree.html)                                           |    1.2 |    1.2 |    1.2 |   1.3 |                                                                                                                                                                           |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |    1.0 |    1.0 |    1.0 |   1.0 |                                                                                                                                                                           |
-| [neon](/docs/extensions/neon)                                                                    |    1.3 |    1.3 |    1.3 |   1.4 |                                                                                                                                                                           |
+| [neon](/docs/extensions/neon)                                                                    |    1.5 |    1.5 |    1.5 |   1.5 |                                                                                                                                                                           |
 | [neon_utils](/docs/extensions/neon-utils)                                                        |    1.0 |    1.0 |    1.0 |   1.0 |                                                                                                                                                                           |
 | [pg_graphql](https://github.com/supabase/pg_graphql)                                             |  1.5.7 |  1.5.7 |  1.5.7 |     - |                                                                                                                                                                           |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                                             |  1.2.1 |  1.2.1 |  1.2.1 |     - |                                                                                                                                                                           |
@@ -123,6 +123,7 @@ When Neon releases a new extension or new extension version, a compute restart i
 - The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `pg_cron` extension is not supported. Neon scales to zero when it is not being used, which means that a scheduler that runs inside the database cannot be implemented. Consider using an scheduler that runs externally instead.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
+- The `pg_search` extension is not supported. The extension's storage and change management is built on [Tantivy](https://github.com/quickwit-oss/tantivy), which is currently not supported by Neon.
 
 ## Request extension support
 

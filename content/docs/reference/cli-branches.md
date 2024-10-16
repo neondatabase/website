@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-08T16:51:37.142Z'
+updatedOn: '2024-10-16T12:49:16.154Z'
 ---
 
 ## Before you begin
@@ -131,6 +131,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
 
 <Admonition type="note">
@@ -239,6 +240,18 @@ When creating a branch from a protected parent branch, role passwords on the chi
 
   ```bash
   neon branches create --name mybranch
+  ```
+
+- Set the compute size when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 2
+  ```
+
+- Set the compute's autoscaling range when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 0.5-3
   ```
 
 - Create a branch with a [read replica](/docs/introduction/read-replicas) compute.
@@ -614,13 +627,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   └─────────────────────┴──────────────────────────────────────────────────┘
   ```
 
-- Set the compute size when creating a branch:
+- Set the compute size when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 2
   ```
 
-- Set the compute's autoscaling range when creating a branch:
+- Set the compute's autoscaling range when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 0.5-3

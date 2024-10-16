@@ -2,11 +2,10 @@
 title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
-tag: new
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2024-09-18T09:52:58.422Z'
+updatedOn: '2024-10-12T11:16:13.588Z'
 ---
 
 <LRBeta/>

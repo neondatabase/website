@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-25T13:03:45.130Z'
+updatedOn: '2024-10-14T09:37:02.884Z'
 ---
 
 <LRBeta/>
@@ -132,5 +132,28 @@ max_replication_slots = 10
 - The `max_replication_slots` defines the maximum number of replication slots used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 
 If you require different values for these parameters, please contact Neon support.
+
+## Replicating between databases on the same Neon project branch
+
+Each branch in a Neon project has its own Postgres instance, and a Postgres instance is a database cluster, capable of supporting multiple databases. If your use case requires replicating data between two databases in the same database cluster, i.e., on the same Neon project branch, the setup is slightly different than configuring replication between separate Postgres instances. As described in the official PostgreSQL [CREATE SUBSCRIPTION Notes documentation](https://www.postgresql.org/docs/current/sql-createsubscription.html):
+
+```text shouldWrap
+Creating a subscription that connects to the same database cluster (for example, to replicate between databases in the same cluster or to replicate within the same database) will only succeed if the replication slot is not created as part of the same command. Otherwise, the `CREATE SUBSCRIPTION` call will hang. To make this work, create the replication slot separately (using the function `pg_create_logical_replication_slot` with the plugin name `pgoutput`) and create the subscription using the parameter `create_slot = false`. This is an implementation restriction that might be lifted in a future release.
+```
+
+For example, on the publisher database, you would create the publication and the replication slot, as shown:
+
+```sql
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+SELECT pg_create_logical_replication_slot('my_publication', 'pgoutput');
+```
+
+Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to false`:
+
+```sql
+CREATE SUBSCRIPTION my_subscription
+    CONNECTION '<...>'
+    PUBLICATION my_publication with (create_slot = false);
+```
 
 <NeedHelp/>
