@@ -185,10 +185,6 @@ To use a meta-command in the SQL Editor:
 
 ## AI features
 
-<Admonition type="note">
-This feature is currently available for Neon paid plan and [Early Access](/docs/introduction/roadmap#join-the-neon-early-access-program) users.
-</Admonition>
-
 The Neon SQL Editor offers three AI-driven features:
 
 - **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
