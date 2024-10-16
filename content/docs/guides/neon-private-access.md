@@ -48,11 +48,11 @@ To configure Neon Private Access, perform the following steps:
 
 2. **Provide the endpoint ID to Neon**
 
-   Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Access service and notify you once the authorization is complete.
+   Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Access service and notify when the authorization is complete.
 
 3. **Enable Private DNS**
 
-   After Neon authorizes your endpoint (please wait for confirmation from Neon), you will need to enable private DNS lookup for the endpoint.
+   After Neon authorizes your endpoint (please wait for confirmation from Neon), you need to enable private DNS lookup for the endpoint.
 
    1. In AWS, select the VCP endpoint you created.
    1. Select **Modify private DNS name**.
@@ -62,7 +62,7 @@ To configure Neon Private Access, perform the following steps:
 
 4. **Update the connection string**
 
-   To connect to your Neon database using AWS PrivateLink, you must modify your Neon database connection string to use the private endpoint.
+   To connect to your Neon database using AWS PrivateLink, you have to modify your Neon database connection string to use the private endpoint.
 
    For example, if your original Neon database connection string is:
 
@@ -76,7 +76,7 @@ To configure Neon Private Access, perform the following steps:
    postgresql://user:password@ep-testing-bush-12345.vpce.us-east-1.aws.neon.tech
    ```
 
-   This change will route database connections over AWS PrivateLink.
+   Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
 
 5. **Restrict public internet access**
 
@@ -84,6 +84,8 @@ To configure Neon Private Access, perform the following steps:
 
    To restrict public internet access via this connection string, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature in the Neon Console. For IP Allow configuration instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
+   You can access your **IP Allow** configuration from your Neon project's **Settings** page.
+   
    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
    <Admonition type="note">
