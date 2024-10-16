@@ -95,7 +95,7 @@ const items = [
       { title: 'Standard Support' },
     ],
     button: {
-      url: `${LINKS.console}/?upgrade=launch`,
+      url: `${LINKS.console}/app/billing#plans`,
       text: 'Get started',
       theme: 'primary',
       event: 'Hero Launch Panel',
@@ -136,7 +136,7 @@ const items = [
       { title: 'Standard support' },
     ],
     button: {
-      url: `${LINKS.console}/?upgrade=scale`,
+      url: `${LINKS.console}/app/billing#plans`,
       text: 'Get started',
       theme: 'white-outline',
       event: 'Hero Scale Panel',
@@ -185,7 +185,7 @@ const items = [
       { title: 'Priority support' },
     ],
     button: {
-      url: `${LINKS.console}/?upgrade=business`,
+      url: `${LINKS.console}/app/billing#plans`,
       text: 'Get started',
       theme: 'white-outline',
       event: 'Hero Enterprise Panel',
