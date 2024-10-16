@@ -85,7 +85,7 @@ To configure Neon Private Access, perform the following steps:
    To restrict public internet access via this connection string, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature in the Neon Console. For IP Allow configuration instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
    You can access your **IP Allow** configuration from your Neon project's **Settings** page.
-   
+
    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
    <Admonition type="note">
