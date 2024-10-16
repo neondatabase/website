@@ -54,37 +54,37 @@ All systems are hosted on AWS, where we have implemented specific security measu
 
 - **Customer and Sensitive Data Encryption (AWS KMS)**
 
-   All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail for auditing and compliance purposes.
+  All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail for auditing and compliance purposes.
 
 - **Fine-Grained Access Control via IAM**
 
-   Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
+  Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
 
-   Additionally, all infrastructure is managed through Terraform, ensuring that any changes to access controls or resources are fully auditable and version-controlled. Regular access reviews and audits are conducted to verify that access rights remain aligned with security best practices.
+  Additionally, all infrastructure is managed through Terraform, ensuring that any changes to access controls or resources are fully auditable and version-controlled. Regular access reviews and audits are conducted to verify that access rights remain aligned with security best practices.
 
 - **Data Segmentation and Isolation Using VPCs and Security Groups**
 
-   In our AWS environment, workloads are segmented using Virtual Private Clouds (VPCs) to separate sensitive data environments from other systems. We control network access between services by using security groups and Network Access Control Lists (NACLs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
+  In our AWS environment, workloads are segmented using Virtual Private Clouds (VPCs) to separate sensitive data environments from other systems. We control network access between services by using security groups and Network Access Control Lists (NACLs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
 
 - **Event-Based Data Anomaly Detection via AWS GuardDuty and Logz.io**
 
-   Customer data access attempts and other anomalies are continuously monitored using AWS GuardDuty. All GuardDuty alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
+  Customer data access attempts and other anomalies are continuously monitored using AWS GuardDuty. All GuardDuty alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
 
 - **Data Access Logging and Auditing (AWS CloudTrail & Logz.io)**
 
-   All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
+  All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
 
 - **PII Backup, Retention, and Deletion Policies with S3 Versioning**
 
-   Customer data backups are stored in Amazon S3 with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
+  Customer data backups are stored in Amazon S3 with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
 
 - **Vulnerability Management with Orca and Oligo**
 
-   Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
 - **Annual Audits and Continuous Penetration Testing**
 
-   We undergo annual audits for SOC2 and ISO by two independent firms to verify the integrity and security of our systems. In addition, bi-annual penetration tests with Hackerone are performed, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+  We undergo annual audits for SOC2 and ISO by two independent firms to verify the integrity and security of our systems. In addition, bi-annual penetration tests with Hackerone are performed, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
