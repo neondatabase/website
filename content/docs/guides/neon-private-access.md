@@ -13,9 +13,7 @@ The **Neon Private Access** feature lets you securely connect to your Neon datab
 
 In a standard setup, the client application connects to a Neon database over the open internet via the Neon proxy.
 
-With **Neon Private Access**, you can connect to your database via AWS PrivateLink instead of over the open internet. In this configuration, the private access client connects to a private instance of the Neon proxy through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) provided by Neon. This endpoint service is accessible only within the same AWS region as your client and is restricted to Neon-authorized customers. With **Neon Private Access**, all traffic between the private access client application and the Neon database remains within AWS’s private network, rather than traversing the public internet.
-
-![Neon PrivateLink configuration diagram](/docs/guides/privatelink.png)
+With **Neon Private Access**, you can connect to your database via AWS PrivateLink instead of over the open internet. In this configuration, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon Proxy instance that is not accessible from the public internet. This endpoint service is accessible only within the same AWS region as your client application and is restricted to Neon-authorized customers. With **Neon Private Access**, all traffic between the client application and the Neon database remains within AWS’s private network, rather than traversing the public internet.
 
 ## Prerequisites
 
@@ -54,7 +52,7 @@ To configure Neon Private Access, perform the following steps:
 
    After Neon authorizes your endpoint (please wait for confirmation from Neon), you need to enable private DNS lookup for the endpoint.
 
-   1. In AWS, select the VCP endpoint you created.
+   1. In AWS, select the VPC endpoint you created.
    1. Select **Modify private DNS name**.
    1. Select **Enable for this endpoint**.
    1. Save your changes.
