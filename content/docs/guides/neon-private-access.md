@@ -7,24 +7,24 @@ updatedOn: '2024-08-07T21:36:52.647Z'
 
 <PrivatePreview />
 
-The **Neon Private Access** feature allows you to securely connect to your Neon databases using [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), avoiding the open internet for improved security.
+The **Neon Private Access** feature lets you securely connect to your Neon databases using [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), avoiding the open internet for improved security.
 
 ## Overview
 
 In a standard setup, the client application connects to a Neon database over the open internet via the Neon proxy.
 
-With **Neon Private Access**, you can use AWS PrivateLink instead. In this configuration, the private access client connects to a dedicated instance of the Neon proxy through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) provided by Neon. This endpoint service is accessible only within the same AWS region and is restricted to Neon-authorized customers. With **Neon Private Access**, all traffic between the private access client application and the Neon database remains within AWS’s private network, rather than traversing the public internet.
+With **Neon Private Access**, you can connect to your database via AWS PrivateLink instead of over the open internet. In this configuration, the private access client connects to a private instance of the Neon proxy through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) provided by Neon. This endpoint service is accessible only within the same AWS region as your client and is restricted to Neon-authorized customers. With **Neon Private Access**, all traffic between the private access client application and the Neon database remains within AWS’s private network, rather than traversing the public internet.
 
 ![Neon PrivateLink configuration diagram](/docs/guides/privatelink.png)
 
 ## Prerequisites
 
-- Ensure your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. For the Private Preview of the **Neon Private Access** feature, Neon supports the AWS **us-east-1** and **eu-central-1** regions. Your private access client application and your Neon database must reside in one of these regions.
-- You must add a [VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) to the AWS Virtual Private Cloud ([VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)) where your client application is deployed. The steps are outlined below.
+- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. For the Private Preview of the **Neon Private Access** feature, only the AWS **us-east-1** and **eu-central-1** regions are supported. Your private access client application and Neon database must reside in one of these regions.
+- You will need to add a [VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) to the AWS Virtual Private Cloud ([VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)) where your client application is deployed. The steps are outlined below.
 
 ## Configuration steps
 
-To configure Neon Private Access, you'll need to perform the following steps:
+To configure Neon Private Access, perform the following steps:
 
 1. **Create an AWS VPC endpoint**
 
@@ -41,7 +41,7 @@ To configure Neon Private Access, you'll need to perform the following steps:
 
       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
 
-   1. Click **Verify service**. If successful, you should seem a `Service name verified` message.
+   1. Click **Verify service**. If successful, you should see a `Service name verified` message.
    1. Select the VPC where your application is deployed.
    1. Add the availability zones and associated subnets you want to support.
    1. Click **Create endpoint** to complete the setup of the endpoint service.
