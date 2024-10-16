@@ -46,7 +46,7 @@ Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon
 
 The Microsoft cloud data centers that power Azure focus on high reliability, operational excellence, cost-effectiveness, and a trustworthy online experience for Microsoft customers and partners worldwide. Microsoft regularly tests data center security through both internal and third-party audits. To learn more, refer to [Microsoft's Datacenter security overview](https://learn.microsoft.com/en-us/compliance/assurance/assurance-datacenter-security).
 
-## Compliance Overview
+## Compliance
 
 At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations.
 
