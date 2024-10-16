@@ -36,7 +36,7 @@ The protected branches feature is available on all Neon paid plans. Typically, t
 
 ## Data-at-rest encryption
 
-Data-at-rest encryption is a method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an `XTS-AES-256` block cipher implemented in a hardware module on the instance.
+Data-at-rest encryption is a method of storing inactive data that converts plaintext data into a coded form or cipher text, making it unreadable without an encryption key. Neon stores inactive data in [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes). The data on NVMe instance storage is encrypted using an `AES-256` block cipher implemented in a hardware module on the instance.
 
 ## Secure data centers
 
@@ -46,9 +46,45 @@ Amazon’s secure data centers backed by [AWS Cloud Security](https://aws.amazon
 
 The Microsoft cloud data centers that power Azure focus on high reliability, operational excellence, cost-effectiveness, and a trustworthy online experience for Microsoft customers and partners worldwide. Microsoft regularly tests data center security through both internal and third-party audits. To learn more, refer to [Microsoft's Datacenter security overview](https://learn.microsoft.com/en-us/compliance/assurance/assurance-datacenter-security).
 
-## Compliance
+## Compliance-relevant security measures
 
-Neon has successfully completed audits for SOC 2 Type 1 and Type 2, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA regulations. See [Compliance](/docs/security/compliance).
+At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations. To learn more about these standards and regulations, see [Compliance](/docs/secirty/compliance).
+
+All systems are hosted on AWS, where we have implemented specific security measures to protect data. Below is a detailed breakdown of these compliance-relevant security measures for access control, encryption, network security, event logging, vulnerability management, backups, data deletion and retention:
+
+- **Customer and Sensitive Data Encryption (AWS KMS)**
+
+  All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail for auditing and compliance purposes.
+
+- **Fine-Grained Access Control via IAM**
+
+  Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
+
+  Additionally, all infrastructure is managed through Terraform, ensuring that any changes to access controls or resources are fully auditable and version-controlled. Regular access reviews and audits are conducted to verify that access rights remain aligned with security best practices.
+
+- **Data Segmentation and Isolation Using VPCs and Security Groups**
+
+  In our AWS environment, workloads are segmented using Virtual Private Clouds (VPCs) to separate sensitive data environments from other systems. We control network access between services by using security groups and Network Access Control Lists (NACLs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
+
+- **Event-Based Data Anomaly Detection via AWS GuardDuty and Logz.io**
+
+  Customer data access attempts and other anomalies are continuously monitored using AWS GuardDuty. All GuardDuty alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
+
+- **Data Access Logging and Auditing (AWS CloudTrail & Logz.io)**
+
+  All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
+
+- **PII Backup, Retention, and Deletion Policies with S3 Versioning**
+
+  Customer data backups are stored in Amazon S3 with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
+
+- **Vulnerability Management with Orca and Oligo**
+
+  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+
+- **Annual Audits and Continuous Penetration Testing**
+
+  We undergo annual audits for SOC2 and ISO by two independent firms to verify the integrity and security of our systems. In addition, bi-annual penetration tests with Hackerone are performed, with results feeding into our vulnerability management program. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
