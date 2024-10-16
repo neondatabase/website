@@ -7,7 +7,7 @@ updatedOn: '2024-08-07T21:36:52.647Z'
 
 <PrivatePreview />
 
-The **Neon Private Access** feature allows customers to securely connect to their Neon databases using [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), avoiding the open internet for improved security.
+The **Neon Private Access** feature allows you to securely connect to your Neon databases using [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), avoiding the open internet for improved security.
 
 ## Overview
 
