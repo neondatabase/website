@@ -36,7 +36,7 @@ On the **Branches** page in the Neon Console, select the branch that you want to
 
 The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
 
-To reset the branch, select **Reset from parent** from either the **More** dropdown or the **Last Data Reset** panel.
+To reset the branch, select **Reset from parent** from the **Actions** menu or the **Last data reset** panel.
 
 ![Reset from parent](/docs/manage/reset_from_parent.png)
 
