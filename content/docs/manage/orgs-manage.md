@@ -1,19 +1,19 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-08-23T13:51:17.454Z'
+updatedOn: '2024-09-19T14:13:04.118Z'
 ---
 
-<EarlyAccess/>
+<FeatureBeta/>
 
-Learn how to manage your organization's projects, invite Members and Guests, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
+Learn how to manage your organization's projects, invite Members and Collaborators, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
 <div style={{ display: 'flex' }}>
   <div style={{ flex: 1, paddingRight: '20px' }}>
     <ul>
       <li><a href="#switch-to-your-organization-account">Switch to your org</a></li>
       <li><a href="#invite-members">Invite Member</a></li>
-      <li><a href="#invite-guests">Invite Guests</a></li>
+      <li><a href="#invite-collaborators">Invite Collaborators</a></li>
       <li><a href="#set-permissions" style={{ cursor: 'pointer' }} >Set permissions</a></li>
     </ul>
   </div>
@@ -55,22 +55,22 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
   ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
 
-## Invite Guests
+## Invite Collaborators
 
-All members can invite external Guests to collaborate on specific projects through [project sharing](/docs/guides/project-sharing-guide). Guests will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with Me**.
+All members can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
 
-![organization guests](/docs/manage/org_guests.png)
+![organization collaborators](/docs/manage/org_collaborators.png)
 
-To invite new Guests, click **Invite guests** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to. These users will receive an email inviting them to the project.
+To invite new Collaborators, click **Invite collaborators** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to. These users will receive an email inviting them to the project.
 
-### Manage Guests
+### Manage Collaborators
 
-Click the kebab menu next to the row in the **Guests** table to manage Guest access. You have two options:
+Click the More Options menu next to the row in the **Collaborators** table to manage Collaborator access. You have two options:
 
-- **Convert to member** — Admins can promote the Guest to a full Member, granting access to all projects in the organization.
-- **Remove from project** — All members can revoke the Guest's access to the shared project.
+- **Convert to member** — Admins can promote the Collaborator to a full Member, granting access to all projects in the organization.
+- **Remove from project** — All members can revoke the Collaborator's access to the shared project.
 
-  ![guests kebab](/docs/manage/orgs_guests_kebab.png 'no-border')
+  ![collaborators more options menu](/docs/manage/orgs_collaborators_kebab.png 'no-border')
 
 ## Create and delete projects
 

@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-06-30T18:09:08.264Z'
+updatedOn: '2024-10-09T23:54:43.681Z'
 ---
 
 # Docs
@@ -513,6 +513,8 @@ Another term for smoke test
 
 </DetailIconCards>
 ```
+
+List of available icons in folder: /website/src/components/pages/doc/detail-icon-cards/images
 
 ## Shared MDX components
 

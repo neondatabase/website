@@ -1,7 +1,6 @@
 import 'styles/globals.css';
 
 import Script from 'next/script';
-import { CookiesProvider } from 'next-client-cookies/server';
 
 import 'swiper/css';
 
@@ -10,6 +9,7 @@ import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsC
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import ThemeProvider from './provider';
+import SessionProvider from './session-provider';
 
 export const preferredRegion = 'edge';
 
@@ -30,13 +30,13 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href="https://console.neon.tech" />
     </head>
     <body>
-      <CookiesProvider>
+      <SessionProvider>
         <ThemeProvider>
           <HomepageVisitProvider>
             <ActiveLabelProvider>{children}</ActiveLabelProvider>
           </HomepageVisitProvider>
         </ThemeProvider>
-      </CookiesProvider>
+      </SessionProvider>
     </body>
   </html>
 );

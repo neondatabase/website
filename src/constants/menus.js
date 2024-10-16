@@ -16,8 +16,8 @@ import careersDarkIcon from 'icons/header/careers-dark.svg';
 import careersIcon from 'icons/header/careers.svg';
 import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
 import caseDatabaseIcon from 'icons/header/case-database.svg';
-// import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
-// import caseDevIcon from 'icons/header/case-dev.svg';
+import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
+import caseDevIcon from 'icons/header/case-dev.svg';
 import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
 import caseSaasIcon from 'icons/header/case-saas.svg';
 import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
@@ -36,8 +36,8 @@ import demosDarkIcon from 'icons/header/demos-dark.svg';
 import demosIcon from 'icons/header/demos.svg';
 import discordDarkIcon from 'icons/header/discord-dark.svg';
 import discordIcon from 'icons/header/discord.svg';
-import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
-import enterpriseIcon from 'icons/header/enterprise.svg';
+// import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
+// import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersDarkIcon from 'icons/header/partners-dark.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
@@ -175,6 +175,15 @@ export default {
           description: 'DB-per-User Archictectures',
           to: `${LINKS.useCases}/database-per-tenant`,
         },
+        {
+          icon: {
+            light: caseDevIcon,
+            dark: caseDevDarkIcon,
+          },
+          text: 'Dev/Test',
+          description: 'Non-prod environments',
+          to: `${LINKS.useCases}/dev-test`,
+        },
         // {
         //   icon: {
         //     light: caseVelocityIcon,
@@ -253,8 +262,8 @@ export default {
             light: partnersIcon,
             dark: partnersDarkIcon,
           },
-          text: 'Neon for platforms',
-          description: 'Postgres for your users',
+          text: 'Partners',
+          description: 'Add Neon to your platform',
           to: LINKS.partners,
         },
         {
@@ -266,15 +275,15 @@ export default {
           description: 'Explore customer stories',
           to: LINKS.caseStudies,
         },
-        {
-          icon: {
-            light: enterpriseIcon,
-            dark: enterpriseDarkIcon,
-          },
-          text: 'Enterprise',
-          description: 'Scale & grow',
-          to: LINKS.enterprise,
-        },
+        // {
+        //   icon: {
+        //     light: enterpriseIcon,
+        //     dark: enterpriseDarkIcon,
+        //   },
+        //   text: 'Enterprise',
+        //   description: 'Scale & grow',
+        //   to: LINKS.enterprise,
+        // },
       ],
     },
   ],
@@ -326,6 +335,10 @@ export default {
         {
           text: 'Blog',
           to: LINKS.blog,
+        },
+        {
+          text: 'Brand',
+          to: LINKS.brand,
         },
         {
           text: 'Docs',

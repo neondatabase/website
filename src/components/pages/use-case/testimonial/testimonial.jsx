@@ -15,7 +15,7 @@ const Testimonial = ({ text, author, url }) => (
     )}
   >
     <div className="relative z-10">
-      <blockquote className="text-xl leading-snug tracking-tighter lg:text-lg">{text}</blockquote>
+      <blockquote className="text-lg leading-snug tracking-tighter">{text}</blockquote>
       <div className="mt-5 flex items-center justify-between sm:mt-2.5 sm:flex-col sm:items-start sm:gap-4">
         {author && (
           <div className="flex items-center gap-3 sm:gap-2">

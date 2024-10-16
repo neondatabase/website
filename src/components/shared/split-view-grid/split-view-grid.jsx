@@ -6,6 +6,7 @@ import GradientLabel from 'components/shared/gradient-label';
 
 const SplitViewGrid = ({
   className = null,
+  titleClassName = null,
   label,
   title,
   description,
@@ -42,8 +43,8 @@ const SplitViewGrid = ({
             </span>
           )}
           <h2
-            className={clsx('mt-3 font-title font-medium leading-none', {
-              'max-w-[322px] text-[52px] tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]':
+            className={clsx('mt-3 font-title font-medium leading-none', titleClassName, {
+              'max-w-[322px] text-[52px] tracking-extra-tight xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]':
                 size === 'md',
               'text-5xl tracking-tight': size === 'sm',
             })}
@@ -122,6 +123,7 @@ const SplitViewGrid = ({
 
 SplitViewGrid.propTypes = {
   className: PropTypes.string,
+  titleClassName: PropTypes.string,
   label: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

@@ -2,7 +2,7 @@
 title: Querying consumption metrics with the API
 subtitle: Learn how to get a variety of consumption metrics using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.655Z'
+updatedOn: '2024-10-05T09:31:59.745Z'
 ---
 
 Using the Neon API, you can query a range of account-level and project-level metrics to help gauge your resource consumption.
@@ -34,9 +34,7 @@ This API endpoint accepts the following query parameters: `from`, `to`, `granula
 
 Include the unique `org_id` for your organization to retrieve account metrics for that specific organization. If not specified, metrics for your personal account will be returned.
 
-<Admonition type="note">
-Organizations are currently in private preview. For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
-</Admonition>
+For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
 
 ### Set a date range for granular results
 

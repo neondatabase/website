@@ -76,7 +76,7 @@ To view the newly created tables from the Neon Console:
 
 ## Import existing data to Neon
 
-If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/import-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
+If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Import data from Heroku](/docs/import/migrate-from-heroku) guide for data import instructions. For general data import instructions, see [Import data from Postgres](/docs/import/migrate-from-postgres).
 
 ## Maximum connections configuration
 

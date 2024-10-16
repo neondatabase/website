@@ -3,7 +3,7 @@ title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.650Z'
+updatedOn: '2024-09-27T18:08:38.284Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -151,7 +151,7 @@ DROP SUBSCRIPTION my_subscription;
 Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](#unused-replication-slots) to learn more.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
 ### Create a replication slot
@@ -196,7 +196,7 @@ To ensure that your logical replication setup is running as expected, you should
 SELECT * FROM pg_stat_replication;
 ```
 
-It provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
+The view provides details like the state of the replication, the last received WAL location, sent location, write location, and the delay between the publisher and subscriber.
 
 Additionally, the [pg_replication_slots](https://www.postgresql.org/docs/current/view-pg-replication-slots.html) view shows information about the current replication slots on the publisher, including their size.
 

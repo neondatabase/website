@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-09-02T13:42:56.652Z'
+updatedOn: '2024-09-23T19:07:35.840Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -42,7 +42,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 
 - **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
-- **Scale**: Up to 10 CUs (10 vCPU, 40 GB RAM)
+- **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
 - **Business**: Up to 10 CUs (10 vCPU, 40 GB RAM)
 - **Enterprise**: Larger sizes
 
@@ -83,19 +83,19 @@ The `-pooler` flag directs connections to a connection pooling port at the Neon 
 
 ## Configure your history retention period
 
-Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries among other development-focussed features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
+Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries, among other development-focused features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
 
-The history retention limit is 24 hours for Neon Free Plan users, 7 days for Launch plan users, and 30 days for Scale and Business plan users. Before going into production, select a history retention period that suits your operational requirements.
+By default, Neon's history retention window is set to **1 day** across all plans to help you avoid unexpected storage costs.
+
+If you choose to extend your retention window beyond the default &#8212; to take full advantage of the features that this history enables &#8212; keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches. Make sure you select a history retention period that aligns with your goals.
 
 ![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
-
-A longer history retention period expands your point-in-time restore and time travel query horizons at the cost of increased storage usage.
 
 For more, see [Branch reset and restore](/docs/introduction/point-in-time-restore).
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
@@ -127,7 +127,7 @@ To learn more about monitoring resources and metrics in Neon, check out our [Mon
 
 ## Create staging or test branches
 
-With Neon branching, you can easily create an isolated copy of your production database for est schema changes and application updates before deploying to production. To get an idea of how easily you can create a branch for testing, see our [Branching — Testing queries](/docs/guides/branching-test-queries) guide.
+With Neon branching, you can easily create an isolated copy of your production database for test schema changes and application updates before deploying to production. To get an idea of how easily you can create a branch for testing, see our [Branching — Testing queries](/docs/guides/branching-test-queries) guide.
 
 The [Neon CLI](/docs/reference/neon-cli) and [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) enable you to automate testing and build CI/CD pipelines to streamline your testing processes.
 

@@ -14,5 +14,21 @@
       "title": "GitHub",
       "url": "https://github.com/bobbyiliev"
     }
+  },
+  "vkarpov15": {
+    "name": "Valeri Karpov",
+    "position": "Independent Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/vkarpov15"
+    }
+  },
+  "sam-harri": {
+    "name": "Samuel Harrison",
+    "position": "Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/sam-harri"
+    }
   }
 }

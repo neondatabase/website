@@ -1,10 +1,5 @@
 - section: noname
   items:
-    - title: Home
-      slug: introduction
-      icon: home
-- section: noname
-  items:
     - title: Why Neon?
       icon: why-neon
       slug: get-started-with-neon/why-neon
@@ -62,7 +57,6 @@
               slug: guides/laravel
             - title: NestJS
               slug: guides/nestjs
-              tag: new
             - title: Next.js
               slug: guides/nextjs
             - title: Node.js
@@ -73,17 +67,14 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
-              tag: new
             - title: Reflex
               slug: guides/reflex
-              tag: new
             - title: Remix
               slug: guides/remix
             - title: Ruby on Rails
               slug: guides/ruby-on-rails
             - title: SolidStart
               slug: guides/solid-start
-              tag: new
             - title: SQLAlchemy
               slug: guides/sqlalchemy
             - title: Symfony
@@ -94,7 +85,6 @@
       items:
         - title: Choosing connections
           slug: connect/choose-connection
-          tag: new
         - title: Connect from any app
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
@@ -111,8 +101,6 @@
           slug: connect/query-with-psql-editor
         - title: Connect with pgcli
           slug: connect/connect-pgcli
-        - title: Connect with AI
-          slug: connect/connect-ai
         - title: Connection pooling
           slug: connect/connection-pooling
         - title: Connection issues
@@ -121,30 +109,40 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
-    - title: Import data
+    - title: Migrate to Neon
       icon: import
-      slug: import/import-intro
+      slug: import/migrate-intro
       items:
         - section: Import utilities
           items:
-            - title: Import from Postgres with pg_dump and pg_restore
-              slug: import/import-from-postgres
-            - title: Import from Postgres with pg-import
-              slug: import/import-from-postgres-pg-import
-            - title: Import from a Neon project
-              slug: import/import-from-neon
-            - title: Import schema only
-              slug: import/import-schema-only
-            - title: Import from Heroku
-              slug: import/import-from-heroku
-            - title: Import from MySQL
+            - title: Migrate from Postgres with pg_dump and pg_restore
+              slug: import/migrate-from-postgres
+            - title: Migrate from a Neon project
+              slug: import/migrate-from-neon
+            - title: Migrate schema only
+              slug: import/migrate-schema-only
+            - title: Migrate from Digital Ocean
+              slug: import/migrate-from-digital-ocean
+            - title: Migrate from Firebase
+              slug: import/migrate-from-firebase
+            - title: Migrate from Heroku
+              slug: import/migrate-from-heroku
+            - title: Migrate from MySQL
               slug: import/migrate-mysql
+            - title: Migrate from MSSQL
+              slug: import/migrate-mssql
+            - title: Migrate from Render
+              slug: import/migrate-from-render
+            - title: Migrate from Supabase
+              slug: import/migrate-from-supabase
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Replicate from Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/migrate-from-azure-postgres
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -163,7 +161,7 @@
               slug: import/import-from-csv
         - section: Sample data
           items:
-            - title: Postgres sample data
+            - title: Sample data
               slug: import/import-sample-data
 - section: Platform
   items:
@@ -177,6 +175,8 @@
           slug: introduction/autoscaling-architecture
         - title: Compute lifecycle
           slug: introduction/compute-lifecycle
+        - title: High availability
+          slug: introduction/high-availability
     - title: Features
       slug: guides/neon-features
       icon: features
@@ -232,6 +232,8 @@
               slug: guides/logical-replication-neon
             - title: Schema management
               slug: guides/logical-replication-schema-changes
+            - title: Logical replication tips
+              slug: guides/logical-replication-tips
         - title: Read replicas
           slug: introduction/read-replicas
           items:
@@ -257,6 +259,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
+      slug: manage/platform
       items:
         - section: Access control
           items:
@@ -275,10 +278,8 @@
                   slug: manage/orgs-api
                 - title: CLI actions
                   slug: manage/orgs-cli
-            - title: Project access
-              slug: manage/project-access
-            - title: Project sharing
-              slug: guides/project-sharing-guide
+            - title: Project collaboration
+              slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
             - title: E-mail signup
@@ -319,11 +320,11 @@
               slug: security/security-overview
             - title: Security reporting
               slug: security/security-reporting
-            - title: SOC 2 compliance
-              slug: security/soc2-compliance
+            - title: Compliance
+              slug: security/compliance
             - title: Acceptable Use Policy
               slug: security/acceptable-use-policy
-        - section:
+        - section: Backups
           items:
             - title: Backups
               slug: manage/backups
@@ -372,31 +373,26 @@
           slug: guides/laravel
         - title: NestJS
           slug: guides/nestjs
-          tag: new
         - title: Next.js
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
         - title: Phoenix
           slug: guides/phoenix
-          tag: new
         - title: Quarkus (JDBC)
           slug: guides/quarkus-jdbc
         - title: Quarkus (Reactive)
           slug: guides/quarkus-reactive
         - title: React
           slug: guides/react
-          tag: new
         - title: Reflex
           slug: guides/reflex
-          tag: new
         - title: Remix
           slug: guides/remix
         - title: Ruby on Rails
           slug: guides/ruby-on-rails
         - title: SolidStart
           slug: guides/solid-start
-          tag: new
         - title: SQLAlchemy
           slug: guides/sqlalchemy
         - title: Symfony
@@ -421,6 +417,11 @@
       icon: integrations
       slug: guides/integrations
       items:
+        - section: Monitor
+          items: 
+            - title: Datadog Integration
+              slug: guides/datadog
+              tag: new
         - section: Deploy
           items:
             - title: Vercel
@@ -428,8 +429,6 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Vercel Postgres
-                  slug: guides/vercel-postgres
                 - title: Neon Vercel Integration
                   slug: guides/vercel
                 - title: Connect manually
@@ -483,7 +482,6 @@
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
-              tag: new
             - title: Neosync
               items:
                 - title: Generate synthetic data
@@ -496,7 +494,6 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
-              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -507,6 +504,7 @@
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
             - title: DoubleCloud
               slug: guides/logical-replication-clickhouse
+              tag: deprecated
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
@@ -523,6 +521,8 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
+            - title: Sequin
+              slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
         - section: Replicate to Neon
@@ -537,8 +537,6 @@
               slug: guides/logical-replication-neon-to-neon
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
-            - title: Sequin
-              slug: guides/sequin
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
         - section: Schema Migration
@@ -577,6 +575,8 @@
           items:
             - title: Auth0
               slug: guides/auth-auth0
+            - title: Auth.js
+              slug: guides/auth-authjs
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -648,6 +648,10 @@
       items:
         - title: Neon SDKs
           slug: reference/sdk
+    - title: Terraform
+      slug: reference/terraform
+      tag: community
+      icon: management
 - section: Postgres
   items:
     - title: PostgreSQL docs
@@ -822,6 +826,15 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
+    - title: Extensions
+      slug: extensions/extensions-intro
+      icon: frameworks
+    - title: Version support
+      slug: postgresql/postgres-version-policy
+      icon: why-neon
+    - title: Upgrade
+      slug: postgresql/postgres-upgrade
+      icon: import
 - section: Resources
   items:
     - title: Partner guide

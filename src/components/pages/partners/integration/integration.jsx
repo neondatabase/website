@@ -8,7 +8,7 @@ import databaseTable from './images/database-table.svg';
 import Row from './row';
 
 const Integration = () => (
-  <section className="integration safe-paddings mt-[192px] 2xl:mt-36 lg:mt-28 md:mt-20">
+  <section className="integration safe-paddings mt-48 2xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="flex flex-col items-center" size="medium">
       <GradientLabel>Features</GradientLabel>
       <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
@@ -19,17 +19,17 @@ const Integration = () => (
       </p>
       <div className="mt-20 flex flex-col gap-y-[88px] 2xl:gap-y-20 xl:mt-16 xl:gap-y-16 lg:mt-12 lg:gap-y-12 md:mt-8 md:gap-y-8">
         <Row
-          title="Instant databases for your users"
-          description="Give your users their own databases within seconds. Seamless provisioning and dedicated URLs ensure effortless scalability with full isolation."
-          linkText="Discover now"
-          linkUrl={`${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`}
+          title="Instant Postgres databases"
+          description="Neon databases are ready within seconds. With dedicated URLs."
+          linkText="Learn more"
+          linkUrl={`${LINKS.docs}/introduction/serverless`}
           image={databaseTable}
         />
         <Row
-          title="Scalability without overhead"
-          description="Neon’s scale to zero and pay-as-you-go pricing align perfectly with your growth. You only pay for the resources your customers actually use."
-          linkText="Learn about the Neon architecture"
-          linkUrl={`${LINKS.blog}/architecture-decisions-in-neon`}
+          title="Large fleet, small bill"
+          description="With Neon’s scale-to-zero, you only pay for the resources your customers actually use."
+          linkText="Learn more"
+          linkUrl={`${LINKS.docs}/introduction/auto-suspend`}
           image={autoscalingChart}
           imagePosition="left"
         />

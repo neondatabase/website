@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import Burger from 'components/shared/header/burger';
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
-import Search from 'components/shared/search';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
@@ -166,22 +166,13 @@ const mobileMenuItems = [
 ];
 
 // TODO: need to refactor this component
-const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
+const MobileMenu = ({ isDarkTheme, showSearchInput = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
-  let searchIndexName = null;
-  if (isBlogPage) {
-    searchIndexName = process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME;
-  }
-  if (isDocPage) {
-    searchIndexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME;
-  }
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {searchIndexName && (
-          <Search className="mobile-search" indexName={searchIndexName} isBlog={isBlogPage} />
-        )}
+        {showSearchInput && <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />}
         <Burger
           className={clsx(
             'relative flex',
@@ -247,8 +238,7 @@ const MobileMenu = ({ isDarkTheme, isBlogPage = false, isDocPage = false }) => {
 
 MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
-  isDocPage: PropTypes.bool,
+  showSearchInput: PropTypes.bool,
 };
 
 export default MobileMenu;

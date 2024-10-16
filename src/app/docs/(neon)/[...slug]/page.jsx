@@ -9,12 +9,12 @@ import {
   DOCS_DIR_PATH,
   getAllPosts,
   getAllChangelogPosts,
-  getBreadcrumbs,
   getNavigationLinks,
-  getFlatSidebar,
   getPostBySlug,
   getSidebar,
 } from 'utils/api-docs';
+import { getBreadcrumbs } from 'utils/get-breadcrumbs';
+import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -54,8 +54,9 @@ export async function generateMetadata({ params }) {
   const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
 
-  const flatSidebar = await getFlatSidebar(getSidebar());
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const sidebar = getSidebar();
+  const flatSidebar = await getFlatSidebar(sidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
   const encodedCategory = category && Buffer.from(category).toString('base64');
 
@@ -78,12 +79,13 @@ const DocPost = async ({ params }) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const flatSidebar = await getFlatSidebar(getSidebar());
+  const sidebar = getSidebar();
+  const flatSidebar = await getFlatSidebar(sidebar);
 
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const allChangelogPosts = await getAllChangelogPosts();
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const fileOriginPath = isChangelogIndex
     ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH

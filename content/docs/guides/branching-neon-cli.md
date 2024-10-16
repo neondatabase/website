@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.648Z'
+updatedOn: '2024-10-07T13:55:51.298Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -28,7 +28,7 @@ neon branches create
 
 branch
 ┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name                  │ Primary │ Created At           │ Updated At           │
+│ Id                    │ Name                  │ Default │ Created At           │ Updated At           │
 ├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:22:42Z │
 └───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
@@ -60,7 +60,7 @@ In this example, we're creating a branch for a hotfix called `alex/hotfix` using
 neon branches create --name alex/hotfix --parent dev/alex --project-id crimson-voice-12345678
 branch
 ┌───────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name        │ Primary │ Created At           │ Updated At           │
+│ Id                    │ Name        │ Default │ Created At           │ Updated At           │
 ├───────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-misty-mud-a5poo34s │ alex/hotfix │ false   │ 2024-04-23T17:04:10Z │ 2024-04-23T17:04:10Z │
 └───────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
@@ -94,7 +94,7 @@ Projects
 ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
 │ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
 └────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
-Shared with me
+Shared with you
 ┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
 │ Id                │ Name               │ Region Id        │ Created At           │
 ├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
@@ -109,7 +109,7 @@ The following Neon CLI command deletes the specified branch. If your Neon accoun
 ```bash
 neon branches delete br-rough-sky-158193
 ┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name                  │ Primary │ Created At           │ Updated At           │
+│ Id                    │ Name                  │ Default │ Created At           │ Updated At           │
 ├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:44:51Z │
 └───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
@@ -148,7 +148,7 @@ This example resets a developer's branch to match the latest state of its parent
 ```bash
 neon branches reset dev/alex --parent
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
+│ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
 ├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-twilight-smoke-123456   │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
 ```
@@ -160,7 +160,7 @@ For example, here we are resetting `dev/alex` to its parent while preserving its
 ```bash
 neon branches reset dev/alex --parent --preserve-under-name dev/alex_backup
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name     │ Primary │ Created At           │ Last Reset At        │
+│ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
 ├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-twilight-smoke-a5ofkxry │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T18:02:36Z │
 ```

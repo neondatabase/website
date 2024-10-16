@@ -21,7 +21,7 @@
     },
     "business": {
       "label": "Business",
-      "price": "<span>$700</span>",
+      "price": "<span>From</span> $700<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
@@ -47,7 +47,7 @@
       },
       "business": {
         "title": "500 GiB",
-        "info": "Extra at $0.75 per GiB"
+        "info": "Extra at $0.5 per GiB"
       }
     },
     {
@@ -78,15 +78,15 @@
       "feature": {
         "title": "Projects"
       },
-      "free": "1",
-      "launch": "10",
+      "free": "10",
+      "launch": "100",
       "scale": {
-        "title": "50",
-        "info": "Extra at $50 per 10 projects"
+        "title": "1,000",
+        "info": "$50 per 1,000 projects"
       },
       "business": {
-        "title": "100",
-        "info": "Extra at $50 per 10 projects"
+        "title": "5,000",
+        "info": "Extra at $50 per 5,000 projects"
       }
     },
     {
@@ -94,7 +94,7 @@
       "feature": {
         "title": "Branches"
       },
-      "free": "10",
+      "free": "10 <span>per project</span>",
       "launch": "500 <span>per project</span>",
       "scale": "500 <span>per project</span>",
       "business": "500 <span>per project</span>"
@@ -104,10 +104,10 @@
       "feature": {
         "title": "Databases"
       },
-      "free": "Unlimited",
-      "launch": "Unlimited",
-      "scale": "Unlimited",
-      "business": "Unlimited"
+      "free": "500 per branch",
+      "launch": "500 per branch",
+      "scale": "500 per branch",
+      "business": "500 per branch"
     },
     {
       "feature": "Compute Features"
@@ -185,16 +185,6 @@
       "business": "10,000"
     },
     {
-      "rows": "1",
-      "feature": {
-        "title": "Tenant Isolation"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": false
-    },
-    {
       "feature": "Advanced Postgres Features"
     },
     {
@@ -238,13 +228,33 @@
       },
       "free": false,
       "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "GDPR"
+      },
+      "free": true,
+      "launch": true,
       "scale": true,
       "business": true
     },
     {
       "rows": "1",
       "feature": {
-        "title": "SOC 2 Report"
+        "title": "SOC 2 Type 2"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "ISO (27001, 27701)"
       },
       "free": false,
       "launch": false,
@@ -277,10 +287,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Branch Protection"
+        "title": "Branch Protection",
+        "subtitle": "Restrict access & actions"
       },
       "free": false,
-      "launch": false,
+      "launch": "Up to 2 branches",
       "scale": true,
       "business": true
     },
@@ -297,12 +308,32 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Private Link"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Monitoring"
       },
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
       "scale": "Up to 7 days",
       "business": "Up to 14 days"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Datadog Integration"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
     },
     {
       "rows": "1",
@@ -357,6 +388,17 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Usage Limits via API",
+        "subtitle": "For DB-per-tenant architectures"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Project Sharing"
       },
       "free": true,
@@ -367,17 +409,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Support"
-      },
-      "free": "Community Support",
-      "launch": "Standard Support",
-      "scale": "Standard Support",
-      "business": "Priority Support"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Data transfer"
+        "title": "Data Transfer"
       },
       "free": "5 GB /month",
       "launch": true,
@@ -387,7 +419,38 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Custom domain proxy"
+        "title": "Custom Domain Proxy"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Technical Support"
+      },
+      "free": "Community Support",
+      "launch": "Standard Support",
+      "scale": "Standard Support",
+      "business": "Priority Support"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Migration Assistance",
+        "subtitle": "With waived migration fees"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Solutions Architect"
       },
       "free": false,
       "launch": false,

@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.663Z'
+updatedOn: '2024-10-08T10:58:34.747Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -16,7 +16,6 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 ## Prerequisites
 
 - An application that uses Prisma with a Neon database.
-- A paid plan account. Read replicas are a paid plan feature.
 
 ## Create a read replica
 
