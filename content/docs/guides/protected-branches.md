@@ -158,6 +158,6 @@ After you've selected the protected branches option, click **Save changes** to a
 
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **Actions** menu on the branch page.
 
 <NeedHelp/>
