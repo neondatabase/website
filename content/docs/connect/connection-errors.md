@@ -20,7 +20,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
-- [(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)](#dbconnectionconnectionerror-ssl-send-closed-ecto_sql-3120)
+- [DBConnection.ConnectionError ssl send: closed (ecto_sql 3.12.0)](#dbconnection-connectionerror-ssl-send-closed)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -220,15 +220,16 @@ If you are already using connection pooling, you may need to reach out to Neon S
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
 
-## (DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0) 
+## DBConnection ConnectionError ssl send: closed
 
 Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo
-# normal connection options
-...
-idle_interval: :timer.hours(24)
+  # normal connection options
+  ...
+  idle_interval:
+:timer.hours(24)
 ```
 
 For additional details, refer to this discussion on our Discord server: [Compute not suspended due to Postgrex idle_interval setting](https://discord.com/channels/1176467419317940276/1295401751574351923/1295419826319265903)
