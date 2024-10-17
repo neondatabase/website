@@ -10,6 +10,7 @@ import Details from './details';
 const Hero = ({
   title,
   description,
+  formTitle,
   hubspotFormId,
   formData,
   detailsLabel,
@@ -35,7 +36,7 @@ const Hero = ({
           {title}
         </h1>
         <p
-          className="mx-auto mt-4 max-w-[760px] text-center text-2xl font-light leading-snug lg:text-lg md:max-w-[85%] md:text-base [&>a]:text-green-45"
+          className="mx-auto mt-4 max-w-3xl text-center text-xl font-light leading-snug tracking-tight lg:text-lg md:max-w-[85%] md:text-base xs:max-w-full [&>a]:text-green-45"
           dangerouslySetInnerHTML={{ __html: description }}
         />
         {simpleField ? (
@@ -63,6 +64,7 @@ const Hero = ({
               <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
                 {formData && (
                   <Form
+                    title={formTitle}
                     hubspotFormId={hubspotFormId}
                     fieldGroups={fieldGroups}
                     greenMode={!hasDetails}
@@ -91,6 +93,7 @@ const Hero = ({
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  formTitle: PropTypes.string,
   hubspotFormId: PropTypes.string.isRequired,
   formData: PropTypes.shape({
     formFieldGroups: PropTypes.arrayOf({

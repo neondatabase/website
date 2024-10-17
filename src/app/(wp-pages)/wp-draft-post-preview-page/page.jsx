@@ -1,30 +1,44 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
+import { clsx } from 'clsx';
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
+import Azure from 'components/pages/landing/azure';
+import Benefits from 'components/pages/landing/benefits';
 import Hero from 'components/pages/landing/hero';
-import CTA from 'components/pages/pricing/cta';
+import PricingCTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
+import SharedCTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import replicasIcon from 'icons/landing/replica.svg';
-import scaleIcon from 'icons/landing/scalability.svg';
-import storageIcon from 'icons/landing/storage.svg';
-import timerIcon from 'icons/landing/timer.svg';
+import benefitsCommunityIcon from 'icons/landing/benefits/community.svg';
+import benefitsGrowthIcon from 'icons/landing/benefits/growth.svg';
+import benefitsPerksIcon from 'icons/landing/benefits/perks.svg';
+import featuresReplicasIcon from 'icons/landing/features/replica.svg';
+import featuresScaleIcon from 'icons/landing/features/scalability.svg';
+import featuresStorageIcon from 'icons/landing/features/storage.svg';
+import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getWpPreviewPageData } from 'utils/api-pages';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const icons = {
-  scale: scaleIcon,
-  timer: timerIcon,
-  storage: storageIcon,
-  replicas: replicasIcon,
+  features: {
+    scale: featuresScaleIcon,
+    timer: featuresTimerIcon,
+    storage: featuresStorageIcon,
+    replicas: featuresReplicasIcon,
+  },
+  benefits: {
+    growth: benefitsGrowthIcon,
+    perks: benefitsPerksIcon,
+    community: benefitsCommunityIcon,
+  },
 };
 
 /*
@@ -50,6 +64,9 @@ const WpPageDraft = async ({ searchParams }) => {
 
   if (!page) return notFound();
 
+  const isAzurePage = searchParams.slug === 'neon-on-azure';
+  const isCreatorsPage = searchParams.slug === 'creators';
+
   const {
     title,
     content,
@@ -61,11 +78,14 @@ const WpPageDraft = async ({ searchParams }) => {
     {
       landinghero: async ({ hubspotFormId, ...restProps }) => {
         const formData = await getHubspotFormData(hubspotFormId);
+        if (isAzurePage) {
+          return <Azure formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+        }
         return <Hero formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
       },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
-          const icon = icons[feature.iconName];
+          const icon = icons.features[feature.iconName];
           return {
             ...feature,
             icon,
@@ -74,7 +94,11 @@ const WpPageDraft = async ({ searchParams }) => {
 
         return (
           <SplitViewGrid
-            className="mx-auto mb-32 mt-16 max-w-[1265px] lg:my-14"
+            className={clsx(
+              'mx-auto mt-16 max-w-[1265px]',
+              isAzurePage ? 'mb-14' : 'mb-32',
+              'lg:my-14'
+            )}
             {...restProps}
             items={items}
             size="sm"
@@ -82,7 +106,29 @@ const WpPageDraft = async ({ searchParams }) => {
           />
         );
       },
-      landingcta: CTA,
+      landingbenefits: ({ benefits, ...restProps }) => {
+        const items = benefits.map((benefit) => {
+          const icon = icons.benefits[benefit.iconName];
+          return {
+            ...benefit,
+            icon,
+          };
+        });
+
+        return <Benefits items={items} {...restProps} />;
+      },
+      landingcta: ({ ...props }) => {
+        if (isAzurePage || isCreatorsPage) {
+          return (
+            <SharedCTA
+              className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
+              descriptionClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
+              {...props}
+            />
+          );
+        }
+        return <PricingCTA {...props} />;
+      },
     },
     true
   );
