@@ -122,7 +122,7 @@ const WpPageDraft = async ({ searchParams }) => {
           return (
             <SharedCTA
               className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
-              descriptionClassName="xk:max-w-[704px] lg:max-w-lg md:max-w-md"
+              descriptionClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
               {...props}
             />
           );

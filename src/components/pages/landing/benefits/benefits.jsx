@@ -26,7 +26,7 @@ const Benefits = ({ title, description, items }) => (
             <h3 className="mt-4 font-title text-xl font-medium leading-tight tracking-extra-tight text-white">
               {title}
             </h3>
-            <p className="mt-2 text-balance font-light leading-snug text-gray-new-70">
+            <p className="mt-2 text-balance font-light leading-snug text-gray-new-70 sm:text-pretty">
               {description}
             </p>
           </li>
