@@ -10,20 +10,18 @@ This guide outlines the steps to integrate Neon into your platform, enabling you
 
 ## 1. Setting up your integration
 
-Neon provides flexible options for integrating Postgres into your platform. You can choose from the following methods:
+Neon provides flexible options for integrating Postgres into your platform. We support the following integration methods:
 
 - **OAuth**: This approach allows your application to interact with user accounts and perform authorized actions on their behalf. With OAuth, there’s no need for direct access to user login credentials, and users can grant permissions securely. For details, see the [Neon OAuth Integration Guide](/docs/guides/oauth-integration), and be sure to check out our [OAuth sample app](https://github.com/neondatabase/neon-branches-visualizer).
 
 - **Neon API**: Use the Neon API to directly interact with the platform, enabling `POST`, `GET`, `PATCH`, and `DELETE` operations on Neon objects such as projects, branches, databases, roles, and more. To explore available endpoints and try them out in your browser, visit our [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-Whether you choose to use one integration method or both depends on your requirements and what you are trying to achieve with your integration.
+## 2. Configuring limits
 
-## 2. Configuring limits with Neon's APIs
+To ensure you have control over usage and costs, Neon provides APIs for configuring limits and monitoring usage. With these APIs you can set up billing features, such as:
 
-To ensure you have control over usage and costs, Neon provides APIs for configuring limits and monitoring usage. These APIs let you set up billing features, such as:
-
-- Usage limits for metrics like **storage**, **compute time**, and **data transfer**.
-- Limits for different pricing plans that you might define for your platform. For example, offer your customers customized pricing plans by setting limits on:
+- Usage limits for consumption metrics like **storage**, **compute time**, and **data transfer**.
+- Limits for different pricing plans that you might define for your platform or service. For example, offer your customers customized pricing plans by setting limits on:
     - **storage**: Define maximum allowed storage for different tiers.
     - **compute time**: Cap the CPU usage based on the plan your customers choose.
     - **data transfer**: Set limits for data transfers, ensuring different usage tiers for different customers.
