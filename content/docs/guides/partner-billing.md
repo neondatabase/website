@@ -76,7 +76,7 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. The Neon Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch, Scale, and Business plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can request it from Neon via your Partners contact at Neon.
+These limits are not directly configurable. The Neon Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch, Scale, and Business plans support any data size but have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can request it via your Partner contact at Neon.
 
 The Neon Free Plan logical data size limit is approximately 512 MiB:
 

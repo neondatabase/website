@@ -841,16 +841,10 @@
       slug: guides/partner-intro
       icon: partner-guide
       items:
-        - title: Neon Partner page
-          slug: https://neon.tech/partners
         - title: Get started
           slug: guides/partner-get-started
-        - title: Neon API Reference
-          slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
-        - title: OAuth
-          slug: guides/oauth-integrationneon api
-        - title: OAuth sample app
-          slug: https://github.com/neondatabase/neon-branches-visualizer
+        - title: OAuth integration
+          slug: guides/oauth-integration
         - title: Configure consumption limits
           slug: guides/partner-billing
         - title: Query consumption metrics

@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-10-05T09:31:59.749Z'
 ---
 
-Learn how you can offer instant, managed Postgres databases to your end-users through Neon. This guide covers how to become a Neon partner, integrate your platform with Neon, set usage limits for your users, and more.
+Learn how you can offer instant, managed Postgres databases to your users through Neon. This guide covers how to become a Neon partner, integrate your platform with Neon, set usage limits for your users, and more.
 
 ## Partnering with Neon
 
@@ -22,7 +22,7 @@ Learn about the benefits of integrating with Neon and how to become a partner.
 
 ## Integrate with Neon
 
-Find details about the different ways you can integrate with Neon.
+Find out how you can integrate with Neon.
 
 <DetailIconCards>
 
@@ -38,7 +38,7 @@ Find details about the different ways you can integrate with Neon.
 
 ## Billing
 
-Learn how to set limits for your customers and track metrics for projects and accounts.
+Learn how to set limits for your customers and track usage.
 
 <DetailIconCards>
 
