@@ -1,8 +1,10 @@
 ---
 title: Use read replicas with Drizzle in Next.js
 subtitle: Learn how to scale Next.js applications with Neon read replicas and Drizzle ORM
+author: dhanush-reddy
 enableTableOfContents: true
-updatedOn: '2024-10-14T08:30:00.000Z'
+createdAt: '2024-10-14T00:00:00.000Z'
+updatedOn: '2024-10-14T00:00:00.000Z'
 ---
 
 ## Introduction
