@@ -1,6 +1,6 @@
 ---
-title: Manage billing with consumption limits
-subtitle: Learn how to set usage quotas per project with the Neon API
+title: Configure consumption limits
+subtitle: Learn how to set consumption limits per project with the Neon API
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-10-05T09:31:59.749Z'
