@@ -26,9 +26,11 @@ Find details about the different ways you can integrate with Neon.
 
 <DetailIconCards>
 
-<a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
+<a href="/docs/guides/partner-get-started" description="Learn the essentials and key steps for integrating with Neon" icon="check">Getting started</a>
 
-<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">API</a>
+<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
+
+<a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
 
 <a href="https://neon-experimental.vercel.app/" description="See a sample application using OAuth" icon="lock-landscape">Sample OAuth</a>
 
