@@ -11,20 +11,30 @@ import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import replicasIcon from 'icons/landing/replica.svg';
-import scaleIcon from 'icons/landing/scalability.svg';
-import storageIcon from 'icons/landing/storage.svg';
-import timerIcon from 'icons/landing/timer.svg';
+import benefitsCommunityIcon from 'icons/landing/benefits/community.svg';
+import benefitsGrowthIcon from 'icons/landing/benefits/growth.svg';
+import benefitsPerksIcon from 'icons/landing/benefits/perks.svg';
+import featuresReplicasIcon from 'icons/landing/features/replica.svg';
+import featuresScaleIcon from 'icons/landing/features/scalability.svg';
+import featuresStorageIcon from 'icons/landing/features/storage.svg';
+import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getWpPreviewPageData } from 'utils/api-pages';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const icons = {
-  scale: scaleIcon,
-  timer: timerIcon,
-  storage: storageIcon,
-  replicas: replicasIcon,
+  features: {
+    scale: featuresScaleIcon,
+    timer: featuresTimerIcon,
+    storage: featuresStorageIcon,
+    replicas: featuresReplicasIcon,
+  },
+  benefits: {
+    growth: benefitsGrowthIcon,
+    perks: benefitsPerksIcon,
+    community: benefitsCommunityIcon,
+  },
 };
 
 /*
@@ -65,7 +75,7 @@ const WpPageDraft = async ({ searchParams }) => {
       },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
-          const icon = icons[feature.iconName];
+          const icon = icons.features[feature.iconName];
           return {
             ...feature,
             icon,
@@ -81,6 +91,17 @@ const WpPageDraft = async ({ searchParams }) => {
             isGradientLabel
           />
         );
+      },
+      landingbenefits: ({ benefits, ...restProps }) => {
+        const items = benefits.map((benefit) => {
+          const icon = icons.benefits[benefit.iconName];
+          return {
+            ...benefits,
+            icon,
+          };
+        });
+
+        return <Benefits items={items} {...restProps} />;
       },
       landingcta: CTA,
     },

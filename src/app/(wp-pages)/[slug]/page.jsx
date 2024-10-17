@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import Azure from 'components/pages/landing/azure';
+import Benefits from 'components/pages/landing/benefits';
 import Hero from 'components/pages/landing/hero';
 import PricingCTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
@@ -11,20 +12,30 @@ import Content from 'components/shared/content';
 import SharedCTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
-import replicasIcon from 'icons/landing/replica.svg';
-import scaleIcon from 'icons/landing/scalability.svg';
-import storageIcon from 'icons/landing/storage.svg';
-import timerIcon from 'icons/landing/timer.svg';
+import benefitsCommunityIcon from 'icons/landing/benefits/community.svg';
+import benefitsGrowthIcon from 'icons/landing/benefits/growth.svg';
+import benefitsPerksIcon from 'icons/landing/benefits/perks.svg';
+import featuresReplicasIcon from 'icons/landing/features/replica.svg';
+import featuresScaleIcon from 'icons/landing/features/scalability.svg';
+import featuresStorageIcon from 'icons/landing/features/storage.svg';
+import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const icons = {
-  scale: scaleIcon,
-  timer: timerIcon,
-  storage: storageIcon,
-  replicas: replicasIcon,
+  features: {
+    scale: featuresScaleIcon,
+    timer: featuresTimerIcon,
+    storage: featuresStorageIcon,
+    replicas: featuresReplicasIcon,
+  },
+  benefits: {
+    growth: benefitsGrowthIcon,
+    perks: benefitsPerksIcon,
+    community: benefitsCommunityIcon,
+  },
 };
 
 const DynamicPage = async ({ params }) => {
@@ -33,6 +44,7 @@ const DynamicPage = async ({ params }) => {
   if (!page) return notFound();
 
   const isAzurePage = params.slug === 'neon-on-azure';
+  const isCreatorsPage = params.slug === 'creators';
 
   const {
     title,
@@ -52,7 +64,7 @@ const DynamicPage = async ({ params }) => {
       },
       landingfeatures: ({ features, ...restProps }) => {
         const items = features.map((feature) => {
-          const icon = icons[feature.iconName];
+          const icon = icons.features[feature.iconName];
           return {
             ...feature,
             icon,
@@ -73,11 +85,23 @@ const DynamicPage = async ({ params }) => {
           />
         );
       },
+      landingbenefits: ({ benefits, ...restProps }) => {
+        const items = benefits.map((benefit) => {
+          const icon = icons.benefits[benefit.iconName];
+          return {
+            ...benefit,
+            icon,
+          };
+        });
+
+        return <Benefits items={items} {...restProps} />;
+      },
       landingcta: ({ ...props }) => {
-        if (isAzurePage) {
+        if (isAzurePage || isCreatorsPage) {
           return (
             <SharedCTA
               className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
+              descriptionClassName="xk:max-w-[704px] lg:max-w-lg md:max-w-md"
               {...props}
             />
           );
