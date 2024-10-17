@@ -42,7 +42,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 
 ## Key considerations for a successful integration
 
-1. When setting up your integration, we recommend a **project-per-user** setup rather than branch-per-user or database-per-user.
+1.  When setting up your integration, we recommend a **project-per-user** setup rather than branch-per-user or database-per-user.
 
     **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. You can learn more about that structure here: [Neon Object hierarchy](https://neon.tech/docs/manage/overview). We recommend that each user gets their own project for these reasons:
 
@@ -51,9 +51,9 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
         - Isolation of data by project protect against accidental data exposures through an unintended configuration or privilege error, making it easier to comply with regulatory standards such as GDPR
         - In Neon, databases reside on a branch, and certain operation in Neon are performed at the branch level, such as point-in-time restore. In a user-per-database implementation, a restore would affect every database on a branch. In a project based structure, branch level actions such as point-in-time restore can be isolated to a single user.
 
-1. **OAuth integration**: Make sure to request the right OAuth scopes for managing Neon resources. Review the [Supported OAuth Scopes](/docs/guides/oauth-integration#supported-oauth-scopes) to determine what levels of access your application needs.
-1. **Set the right project limits to control costs**: Use the Neon API to configure projects limits to control costs.
-1. **Customize object names when creating projects**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default project, branch, role, and database names to whatever you want.
-1. **Don't forget Autoscaling and Autosuspend**: Be aware of autoscaling limits and autosuspend settings to ensure optimal performance for your users. See [Other consumption-related settings](/docs/guides/partner-billing#other-consumption-related-settings).
+1.  **OAuth integration**: Make sure to request the right OAuth scopes for managing Neon resources. Review the [Supported OAuth Scopes](/docs/guides/oauth-integration#supported-oauth-scopes) to determine what levels of access your application needs.
+1.  **Set the right project limits to control costs**: Use the Neon API to configure projects limits to control costs.
+1.  **Customize object names when creating projects**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default project, branch, role, and database names to whatever you want.
+1.  **Don't forget Autoscaling and Autosuspend**: Be aware of autoscaling limits and autosuspend settings to ensure optimal performance for your users. See [Other consumption-related settings](/docs/guides/partner-billing#other-consumption-related-settings).
 
 We’re here to support you through every step of your integration. If you have any questions, feel free to reach out to our support team at [support@neon.tech](mailto:support@neon.tech).
