@@ -22,9 +22,9 @@ To ensure you have control over usage and costs, Neon provides APIs for configur
 
 - Usage limits for consumption metrics like **storage**, **compute time**, and **data transfer**.
 - Limits for different pricing plans that you might define for your platform or service. For example, offer your customers customized pricing plans by setting limits on:
-    - **storage**: Define maximum allowed storage for different tiers.
-    - **compute time**: Cap the CPU usage based on the plan your customers choose.
-    - **data transfer**: Set limits for data transfers, ensuring different usage tiers for different customers.
+  - **storage**: Define maximum allowed storage for different tiers.
+  - **compute time**: Cap the CPU usage based on the plan your customers choose.
+  - **data transfer**: Set limits for data transfers, ensuring different usage tiers for different customers.
 
 As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
 
