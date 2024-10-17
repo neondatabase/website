@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
 import ApiIcon from 'icons/docs/sidebar/api.inline.svg';
 import ArchitectureIcon from 'icons/docs/sidebar/architecture.inline.svg';
+import AuthIcon from 'icons/docs/sidebar/auth.inline.svg';
 import BillingIcon from 'icons/docs/sidebar/billing.inline.svg';
 import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
@@ -27,12 +28,14 @@ import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import StatusIcon from 'icons/docs/sidebar/status.inline.svg';
 import SupportIcon from 'icons/docs/sidebar/support.inline.svg';
+import UseCasesIcon from 'icons/docs/sidebar/use-cases.inline.svg';
 import WhyNeonIcon from 'icons/docs/sidebar/why-neon.inline.svg';
 
 const icons = {
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,
+  auth: AuthIcon,
   billing: BillingIcon,
   changelog: ChangelogIcon,
   cli: CliIcon,
@@ -57,6 +60,7 @@ const icons = {
   sdk: SdkIcon,
   status: StatusIcon,
   support: SupportIcon,
+  'use-cases': UseCasesIcon,
   'why-neon': WhyNeonIcon,
 };
 
