@@ -44,7 +44,7 @@ const DynamicPage = async ({ params }) => {
   if (!page) return notFound();
 
   const isAzurePage = params.slug === 'neon-on-azure';
-  const isCreatorsPage = params.slug === 'creators' || params.slug === 'creators-test';
+  const isCreatorsPage = params.slug === 'creators';
 
   const {
     title,

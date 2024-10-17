@@ -65,7 +65,7 @@ const WpPageDraft = async ({ searchParams }) => {
   if (!page) return notFound();
 
   const isAzurePage = searchParams.slug === 'neon-on-azure';
-  const isCreatorsPage = searchParams.slug === 'creators' || searchParams.slug === 'creators-test';
+  const isCreatorsPage = searchParams.slug === 'creators';
 
   const {
     title,
