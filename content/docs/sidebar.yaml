@@ -841,11 +841,13 @@
       slug: guides/partner-intro
       icon: partner-guide
       items:
-        - title: OAuth
+        - title: Get started
+          slug: guides/partner-get-started
+        - title: OAuth integration
           slug: guides/oauth-integration
-        - title: Manage billing with quotas
+        - title: Configure consumption limits
           slug: guides/partner-billing
-        - title: Getting metrics via API
+        - title: Query consumption metrics
           slug: guides/metrics-api
     - title: Glossary
       slug: reference/glossary
