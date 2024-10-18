@@ -44,11 +44,11 @@ Follow these steps to set up your project and virtual environment:
         You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
         <CodeTabs labels={["Linux/macOS", "Windows"]}>
-        `bash
 
-    uv venv
-    source .venv/bin/activate
-    `
+            ```bash
+            uv venv
+            source .venv/bin/activate
+            ```
 
             ```bash
             uv venv
