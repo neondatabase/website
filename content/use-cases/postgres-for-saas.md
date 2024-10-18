@@ -3,7 +3,7 @@ title: 'Postgres for SaaS'
 subtitle: Teams build SaaS faster on Neon with autoscaling, database branching and the serverless operating model.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
-image: '/images/social-previews/postgres-for-saas.jpg'
+image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 ---
 
 <UseCaseContext />

@@ -17,6 +17,7 @@ import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
@@ -143,6 +144,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   UseCaseList,
   UseCaseContext,
   ComputeCalculator,
+  SubscriptionForm,
   ...sharedComponents,
 });
 
