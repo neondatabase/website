@@ -21,7 +21,7 @@ You will be guided through a few steps, asking you to reauthenticate using your 
 
 ## Changing your email
 
-If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a GitHub, Google, or Hasura account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings → Personal Information**.
+If you've signed up with a social or partner login and now want to change your email &#8212; for example, you previously signed up using a Google, GitHub, Microsoft, or Hasura account and now want to use your personal email &#8212; you can make this change under **Profile → Account Settings → Personal Information**.
 
 Or follow this direct link:
 
