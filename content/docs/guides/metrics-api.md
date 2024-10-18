@@ -326,3 +326,7 @@ As mentioned above, usage data can be pulled every 15 minutes, but partners are 
 ### How often should consumption data be polled to invoice end users?
 
 Neon does not dictate how partners bill their users. Partners can use the data retrieved from the consumption API to generate invoices according to their own billing cycles and preferences.
+
+### Does consumption polling wake up computes?
+
+Neon's consumption polling APIs do not wake computes that have been suspended due to inactivity. Therefore, calls to Neon's consumption APIs will not increase your users' consumption.
