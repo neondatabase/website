@@ -8,6 +8,10 @@ updatedOn: '2024-10-05T09:31:59.749Z'
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you’re developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.
 
+<Admonition type="tip" title="key considerations for a successful integration">
+Before you start building your integration, be sure read [Key considerations for a successful integration](#key-considerations-for-a-successful-integration).
+</Admonition>
+
 ## 1. Setting up your integration
 
 Neon provides flexible options for integrating Postgres into your platform. We support the following integration options:
@@ -66,13 +70,13 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 - **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database name.
 - **Protected names for roles and databases**: Neon protects certain names for Postgres roles and databases. Your users will not be able to use these protected names when creating roles and databases. See [Protected role names](/docs/manage/roles#protected-role-names), and [Protected database names](/docs/manage/databases#protected-database-names).
 - **Postgres extension support**: We often receive questions from our Partners about the Postgres extensions supported by Neon. See [Supported Postgres extensions](/docs/extensions/pg-extensions) the extensions that Neon supports.
-- **Staying up to date with the Neon roadmap and changes to the Neon platform**: We do our best to proactively inform Partners of updates and changes that may impact their business. Sources of information Partners can monitor include:
+- **Staying up to date with changes to the Neon platform**: We do our best to proactively inform Partners of updates and changes that may impact their business. Sources of information Partners can monitor include:
     - The [Neon Roadmap](/docs/introduction/roadmap) for what's been delivered recently and what's coming next
     - The [Neon Changelog](/docs/changelog) for the latest product updates from Neon
-    - The [Neon newsletter](https://neon.tech/blog#subscribe-form), sent weekly
+    - The [Neon Newsletter](https://neon.tech/blog#subscribe-form), sent weekly
     - The [Neon Blog](https://neon.tech/blog)
-    - The [Neon status page](https://neonstatus.com/) for our platform status in each region
-    - [RSS feeds](/docs/reference/feeds) for all of the above, which you can add to your Slack channels
+    - The [Neon Status Page](https://neonstatus.com/) for Neon platform status in each region
+    - [RSS Feeds](/docs/reference/feeds) for all of the above, which you can add to your Slack channels
 
 ## Integration support
 
