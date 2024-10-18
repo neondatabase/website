@@ -28,13 +28,14 @@ To ensure you have control over usage and costs, Neon's APIs let you configure l
 
 - **Usage limits**: Define limits on consumption metrics like **storage**, **compute time**, and **data transfer**.
 - **Pricing Plans**: Create different pricing plans for your platform or service. For example, you can set limits on consumption metrics to define your own Free, Pro, and Enterprise plans:
-    - **storage**: Define maximum allowed storage for each plan.
-    - **compute time**: Cap the CPU usage based on the plan your customers choose.
-    - **data transfer**: Set limits for data transfer (egress) for different usage plans.
+
+  - **storage**: Define maximum allowed storage for each plan.
+  - **compute time**: Cap the CPU usage based on the plan your customers choose.
+  - **data transfer**: Set limits for data transfer (egress) for different usage plans.
 
     <Admonition type="tip" title="partner example">
     For an example of how one of our partners defined usage limits based on _database instance types_, see [Koyeb Database Instance Types](https://www.koyeb.com/docs/databases#database-instance-types). You will see limits defined on compute size, compute time, stored data, written data, and egress.
-    </Admonition> 
+    </Admonition>
 
 As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
 
@@ -54,9 +55,9 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 
 - **Use a project-per-user model**: When setting up your integration, we recommend a **project-per-user** model rather than branch-per-user or database-per-user.
 
-    **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. You can learn more about Neon's project-based structure here: [Neon object hierarchy](https://neon.tech/docs/manage/overview).
+  **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. You can learn more about Neon's project-based structure here: [Neon object hierarchy](https://neon.tech/docs/manage/overview).
 
-    **Why do we recommend the project-per-user model?**
+  **Why do we recommend the project-per-user model?**
 
         - Neon uses a project-based structure for resource management; it's easier to follow this established, underlying model
         - A project-per-user structure isolates resources and data, making it easier to manage consumption
@@ -64,7 +65,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
         - Isolation of resources and data by project prevents one user's usage patterns or actions from affecting other users on your platform or service. For example, each user will have their own compute, storage, and data transfer limits, which are set for their project.
         - In Neon, databases reside on a branch, and certain operations in Neon are performed at the branch level, such as point-in-time restore. In a user-per-database implementation, a restore operation would affect every database on a branch. In a project based structure, branch level actions such as point-in-time restore can be isolated to a single user. In a database-per-user model, where users are given separate databases in the same Neon project, point-in-time restore operations would not be possible.
 
-- **Carefully consider limits**: When setting limits for your users, aim to find the right balance between cost management and user-flexibility. Look at how Neon defines its [pricing plans](/docs/introduction/plans) or how Neon partners like Koyeb define [usage limits](https://www.koyeb.com/docs/databases#database-instance-types). Be aware that when users reach defined limits, their computes may be suspended preventing further interaction with the database. Take time to consider what you want to occur when a user reaches the limits you define. Do you want to build in advanced notifications? Do you want to provide an upgrade path? 
+- **Carefully consider limits**: When setting limits for your users, aim to find the right balance between cost management and user-flexibility. Look at how Neon defines its [pricing plans](/docs/introduction/plans) or how Neon partners like Koyeb define [usage limits](https://www.koyeb.com/docs/databases#database-instance-types). Be aware that when users reach defined limits, their computes may be suspended preventing further interaction with the database. Take time to consider what you want to occur when a user reaches the limits you define. Do you want to build in advanced notifications? Do you want to provide an upgrade path?
 - **Autoscaling and Autosuspend**: Consider [autoscaling](/docs/introduction/autoscaling) limits and [autosuspend](/docs/introduction/auto-suspend) settings for the compute instances you create for customers. Do you want to allow compute resources to scale on demand? How soon should computes scale to zero when they are inactive? See [Other consumption-related settings](/docs/guides/partner-billing#other-consumption-related-settings).
 - **Connection limits**: Be aware of the connection limits associated with each Neon compute size and that connection pooling supports more concurrent connections. To learn more, see [Connection limits](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 - **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database name.
