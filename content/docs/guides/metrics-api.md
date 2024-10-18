@@ -315,7 +315,9 @@ To learn more about using pagination to control large response sizes, the [Keyse
 
 ## Consumption polling FAQ
 
-### How often can partners poll consumption data for usage reporting and billing?
+As an Neon partner or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
+
+### How often can you poll consumption data for usage reporting and billing?
 
 Neon's consumption data is updated approximately every 15 minutes, so a minimum interval of 15 minutes between calls to our consumption APIs is recommended.
 
