@@ -2,7 +2,6 @@
 title: 'PostgreSQL BEFORE UPDATE Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-before-update-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

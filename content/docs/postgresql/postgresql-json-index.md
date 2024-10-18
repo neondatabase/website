@@ -2,7 +2,6 @@
 title: 'PostgreSQL JSON Index'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-json-index/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

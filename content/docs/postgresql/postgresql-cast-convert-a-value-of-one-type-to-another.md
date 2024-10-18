@@ -2,7 +2,6 @@
 title: 'PostgreSQL CAST: Convert a value of One Type to Another'
 redirectFrom: 
             - /docs/postgresql/postgresql-cast
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

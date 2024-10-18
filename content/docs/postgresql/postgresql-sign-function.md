@@ -2,7 +2,6 @@
 title: 'PostgreSQL SIGN() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-sign
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

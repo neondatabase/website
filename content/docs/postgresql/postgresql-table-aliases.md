@@ -2,7 +2,6 @@
 title: 'PostgreSQL Table Aliases'
 redirectFrom: 
             - /docs/postgresql/postgresql-alias
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

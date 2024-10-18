@@ -2,7 +2,6 @@
 title: 'PostgreSQL Event Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-event-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

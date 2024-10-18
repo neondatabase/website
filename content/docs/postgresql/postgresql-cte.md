@@ -2,7 +2,6 @@
 title: 'PostgreSQL CTE'
 redirectFrom: 
             - /docs/postgresql/postgresql-cte
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

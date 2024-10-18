@@ -2,7 +2,6 @@
 title: 'PostgreSQL MIN_SCALE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-min_scale
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

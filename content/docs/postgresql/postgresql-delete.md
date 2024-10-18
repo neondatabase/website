@@ -2,7 +2,6 @@
 title: 'PostgreSQL DELETE'
 redirectFrom: 
             - /docs/postgresql/postgresql-delete
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

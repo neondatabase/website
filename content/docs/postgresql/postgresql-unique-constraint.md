@@ -2,7 +2,6 @@
 title: 'PostgreSQL UNIQUE Constraint'
 redirectFrom: 
             - /docs/postgresql/postgresql-unique-constraint
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALTER ROLE Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-alter-role/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

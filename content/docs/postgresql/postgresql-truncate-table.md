@@ -2,7 +2,6 @@
 title: 'PostgreSQL TRUNCATE TABLE'
 redirectFrom: 
             - /docs/postgresql/postgresql-truncate-table
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

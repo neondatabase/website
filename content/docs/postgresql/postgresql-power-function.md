@@ -2,7 +2,6 @@
 title: 'PostgreSQL POWER() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-power
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

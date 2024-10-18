@@ -2,7 +2,6 @@
 title: 'PostgreSQL TRIM_SCALE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-trim_scale
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

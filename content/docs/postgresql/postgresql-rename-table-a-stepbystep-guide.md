@@ -2,7 +2,6 @@
 title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
 redirectFrom: 
             - /docs/postgresql/postgresql-rename-table
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

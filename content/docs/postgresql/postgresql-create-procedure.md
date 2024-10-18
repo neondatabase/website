@@ -2,7 +2,6 @@
 title: 'PostgreSQL CREATE PROCEDURE'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/postgresql-create-procedure/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

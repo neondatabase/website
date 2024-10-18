@@ -2,7 +2,6 @@
 title: 'PostgreSQL GRANT'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-grant/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

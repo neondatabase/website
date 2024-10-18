@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL C#'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

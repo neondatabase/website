@@ -2,7 +2,6 @@
 title: 'PostgreSQL BEFORE TRUNCATE Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-before-truncate-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

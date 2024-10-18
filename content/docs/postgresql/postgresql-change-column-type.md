@@ -2,7 +2,6 @@
 title: 'PostgreSQL Change Column Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-change-column-type
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

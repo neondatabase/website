@@ -2,7 +2,6 @@
 title: 'PostgreSQL ANY Operator'
 redirectFrom: 
             - /docs/postgresql/postgresql-any
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

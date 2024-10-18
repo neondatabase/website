@@ -2,7 +2,6 @@
 title: 'PostgreSQL MOD() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-mod
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

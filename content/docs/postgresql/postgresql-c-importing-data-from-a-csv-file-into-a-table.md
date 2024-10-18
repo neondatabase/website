@@ -2,7 +2,6 @@
 title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-csharp/postgresql-csharp-import-csv-file/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

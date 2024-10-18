@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALL Operator'
 redirectFrom: 
             - /docs/postgresql/postgresql-all
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

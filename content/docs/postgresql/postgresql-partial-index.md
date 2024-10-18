@@ -2,7 +2,6 @@
 title: 'PostgreSQL Partial Index'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-partial-index/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

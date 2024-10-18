@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_object_keys() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_object_keys/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

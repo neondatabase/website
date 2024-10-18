@@ -2,7 +2,6 @@
 title: 'PostgreSQL JSON'
 redirectFrom: 
             - /docs/postgresql/postgresql-json
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

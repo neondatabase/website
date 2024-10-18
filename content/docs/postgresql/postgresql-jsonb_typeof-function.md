@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_typeof() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_typeof/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

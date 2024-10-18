@@ -2,7 +2,6 @@
 title: 'How to Change the Password of a PostgreSQL User'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-change-password/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

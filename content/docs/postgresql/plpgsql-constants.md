@@ -2,7 +2,6 @@
 title: 'PL/pgSQL Constants'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-constants/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

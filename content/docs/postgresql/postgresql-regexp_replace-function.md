@@ -2,7 +2,6 @@
 title: 'PostgreSQL REGEXP_REPLACE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/regexp_replace/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

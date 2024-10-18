@@ -2,7 +2,6 @@
 title: 'PostgreSQL Row-Level Security'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-row-level-security/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

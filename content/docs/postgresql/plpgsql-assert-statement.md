@@ -2,7 +2,6 @@
 title: 'PL/pgSQL Assert Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/pl-pgsql-assert/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

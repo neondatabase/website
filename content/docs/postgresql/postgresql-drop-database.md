@@ -2,7 +2,6 @@
 title: 'PostgreSQL DROP DATABASE'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-drop-database/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

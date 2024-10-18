@@ -2,7 +2,6 @@
 title: 'How to Generate a Random Number in a Range'
 redirectFrom: 
             - /docs/postgresql/postgresql-random-range
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

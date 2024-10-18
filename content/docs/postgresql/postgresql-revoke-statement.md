@@ -2,7 +2,6 @@
 title: 'PostgreSQL REVOKE Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-revoke/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

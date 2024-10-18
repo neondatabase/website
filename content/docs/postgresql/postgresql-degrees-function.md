@@ -2,7 +2,6 @@
 title: 'PostgreSQL DEGREES() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-degrees
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

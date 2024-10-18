@@ -2,7 +2,6 @@
 title: 'PostgreSQL CBRT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-cbrt
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

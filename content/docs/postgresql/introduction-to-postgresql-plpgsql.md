@@ -2,7 +2,6 @@
 title: 'Introduction to PostgreSQL PL/pgSQL'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

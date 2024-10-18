@@ -2,7 +2,6 @@
 title: 'PostgreSQL Primary Key'
 redirectFrom: 
             - /docs/postgresql/postgresql-primary-key
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

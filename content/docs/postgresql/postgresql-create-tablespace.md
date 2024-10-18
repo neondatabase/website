@@ -2,7 +2,6 @@
 title: 'PostgreSQL CREATE TABLESPACE'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-create-tablespace/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

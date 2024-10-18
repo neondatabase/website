@@ -2,7 +2,6 @@
 title: 'PostgreSQL Recursive Query'
 redirectFrom: 
             - /docs/postgresql/postgresql-recursive-query
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

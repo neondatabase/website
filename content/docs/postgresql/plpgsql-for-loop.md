@@ -2,7 +2,6 @@
 title: 'PL/pgSQL For Loop'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-for-loop/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

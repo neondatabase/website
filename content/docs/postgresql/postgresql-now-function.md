@@ -2,7 +2,6 @@
 title: 'PostgreSQL NOW() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-now/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

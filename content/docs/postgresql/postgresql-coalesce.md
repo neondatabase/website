@@ -2,7 +2,6 @@
 title: 'PostgreSQL COALESCE'
 redirectFrom: 
             - /docs/postgresql/postgresql-coalesce
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

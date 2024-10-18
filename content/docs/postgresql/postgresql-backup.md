@@ -2,7 +2,6 @@
 title: 'PostgreSQL Backup'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-backup-database/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL enum'
 redirectFrom: 
             - /docs/postgresql/postgresql-enum
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

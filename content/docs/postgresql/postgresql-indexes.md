@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL Indexes'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

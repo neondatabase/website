@@ -2,7 +2,6 @@
 title: 'PostgreSQL CURRENT_DATE Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-current_date/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

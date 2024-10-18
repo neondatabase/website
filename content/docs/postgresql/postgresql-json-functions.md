@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL JSON Functions'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

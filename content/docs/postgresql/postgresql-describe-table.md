@@ -2,7 +2,6 @@
 title: 'PostgreSQL Describe Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-describe-table/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

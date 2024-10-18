@@ -2,7 +2,6 @@
 title: 'PostgreSQL FACTORIAL() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-factorial
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

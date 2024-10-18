@@ -2,7 +2,6 @@
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-postgresql-function/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

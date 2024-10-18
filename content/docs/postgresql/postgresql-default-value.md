@@ -2,7 +2,6 @@
 title: 'PostgreSQL DEFAULT Value'
 redirectFrom: 
             - /docs/postgresql/postgresql-default-value
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

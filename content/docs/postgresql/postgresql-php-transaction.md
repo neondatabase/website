@@ -2,7 +2,6 @@
 title: 'PostgreSQL PHP: Transaction'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/transaction/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

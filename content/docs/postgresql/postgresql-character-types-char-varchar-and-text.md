@@ -2,7 +2,6 @@
 title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
 redirectFrom: 
             - /docs/postgresql/postgresql-char-varchar-text
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

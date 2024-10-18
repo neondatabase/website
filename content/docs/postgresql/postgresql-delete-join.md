@@ -2,7 +2,6 @@
 title: 'PostgreSQL DELETE JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-delete-join
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

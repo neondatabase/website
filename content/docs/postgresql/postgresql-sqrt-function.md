@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL SQRT() Function'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

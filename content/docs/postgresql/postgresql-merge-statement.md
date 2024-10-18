@@ -2,7 +2,6 @@
 title: 'PostgreSQL MERGE Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-merge
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

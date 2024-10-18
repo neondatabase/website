@@ -2,7 +2,6 @@
 title: 'PostgreSQL ABS() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-abs
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

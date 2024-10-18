@@ -2,7 +2,6 @@
 title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-upsert
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

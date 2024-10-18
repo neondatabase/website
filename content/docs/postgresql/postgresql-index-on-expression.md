@@ -2,7 +2,6 @@
 title: 'PostgreSQL Index on Expression'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-index-on-expression/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

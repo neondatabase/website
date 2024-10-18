@@ -2,7 +2,6 @@
 title: 'PostgreSQL WITH CHECK OPTION'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-views-with-check-option/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

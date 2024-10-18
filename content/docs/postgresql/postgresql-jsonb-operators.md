@@ -2,7 +2,6 @@
 title: 'PostgreSQL JSONB Operators'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb-operators/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL String Functions'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

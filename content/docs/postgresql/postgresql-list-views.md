@@ -2,7 +2,6 @@
 title: 'PostgreSQL List Views'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-list-views/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

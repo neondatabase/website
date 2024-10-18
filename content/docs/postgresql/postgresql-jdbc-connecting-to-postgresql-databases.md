@@ -2,7 +2,6 @@
 title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
 redirectFrom: 
             - /docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

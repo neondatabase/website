@@ -2,7 +2,6 @@
 title: 'PostgreSQL UPDATE'
 redirectFrom: 
             - /docs/postgresql/postgresql-update
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

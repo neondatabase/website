@@ -2,7 +2,6 @@
 title: 'PostgreSQL Python: Call Stored Procedures'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/call-stored-procedures/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

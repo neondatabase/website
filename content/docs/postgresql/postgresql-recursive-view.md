@@ -2,7 +2,6 @@
 title: 'PostgreSQL Recursive View'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-recursive-view/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

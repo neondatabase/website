@@ -2,7 +2,6 @@
 title: 'PostgreSQL PI() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-pi-function
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL UUID Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-uuid
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL DISTINCT ON'
 redirectFrom: 
             - /docs/postgresql/postgresql-distinct-on
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

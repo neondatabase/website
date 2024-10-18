@@ -2,7 +2,6 @@
 title: 'PostgreSQL LCM() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-lcm
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

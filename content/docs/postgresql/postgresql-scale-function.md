@@ -2,7 +2,6 @@
 title: 'PostgreSQL SCALE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-scale
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

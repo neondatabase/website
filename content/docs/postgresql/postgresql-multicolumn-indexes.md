@@ -2,7 +2,6 @@
 title: 'PostgreSQL Multicolumn Indexes'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-multicolumn-indexes/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

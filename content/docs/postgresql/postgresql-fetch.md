@@ -2,7 +2,6 @@
 title: 'PostgreSQL FETCH'
 redirectFrom: 
             - /docs/postgresql/postgresql-fetch
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL DATE Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-date
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

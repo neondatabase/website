@@ -2,7 +2,6 @@
 title: 'PostgreSQL BEFORE DELETE Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-before-delete-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL REPLACE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-replace/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

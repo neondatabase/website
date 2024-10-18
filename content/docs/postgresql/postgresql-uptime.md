@@ -2,7 +2,6 @@
 title: 'PostgreSQL Uptime'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-uptime/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 'How to Kill a Process Specified by PID in PostgreSQL'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_each() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_each/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

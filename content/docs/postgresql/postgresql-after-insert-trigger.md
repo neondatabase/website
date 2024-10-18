@@ -2,7 +2,6 @@
 title: 'PostgreSQL AFTER INSERT Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-after-insert-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

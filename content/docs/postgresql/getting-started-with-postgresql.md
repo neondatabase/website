@@ -1,6 +1,5 @@
 ---
 title: 'Getting Started with PostgreSQL'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

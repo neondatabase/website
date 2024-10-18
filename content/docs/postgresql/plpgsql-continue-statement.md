@@ -2,7 +2,6 @@
 title: 'PL/pgSQL Continue Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/pl-pgsql-continue/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL XML Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-xml-data-type
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

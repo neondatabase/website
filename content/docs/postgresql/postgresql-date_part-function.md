@@ -2,7 +2,6 @@
 title: 'PostgreSQL DATE_PART() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-date_part/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

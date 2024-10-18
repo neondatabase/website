@@ -2,7 +2,6 @@
 title: 'Introduction to PostgreSQL Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/introduction-postgresql-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

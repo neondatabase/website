@@ -2,7 +2,6 @@
 title: 'PostgreSQL JSON Path'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-json-path/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

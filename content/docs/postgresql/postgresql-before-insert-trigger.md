@@ -2,7 +2,6 @@
 title: 'PostgreSQL BEFORE INSERT Trigger'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-before-insert-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL Role Membership'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-role-membership/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL Interval Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-interval
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL Materialized Views'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-materialized-views/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

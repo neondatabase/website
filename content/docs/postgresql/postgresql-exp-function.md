@@ -2,7 +2,6 @@
 title: 'PostgreSQL EXP() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-exp
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

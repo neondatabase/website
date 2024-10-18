@@ -2,7 +2,6 @@
 title: 'PostgreSQL Generated Columns'
 redirectFrom: 
             - /docs/postgresql/postgresql-generated-columns
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

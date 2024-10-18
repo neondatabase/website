@@ -2,7 +2,6 @@
 title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-function-parameters/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL NULLIF'
 redirectFrom: 
             - /docs/postgresql/postgresql-nullif
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

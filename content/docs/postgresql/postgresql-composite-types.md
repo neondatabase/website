@@ -2,7 +2,6 @@
 title: 'PostgreSQL Composite Types'
 redirectFrom: 
             - /docs/postgresql/postgresql-composite-types
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL JDBC: Insert Data into a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-jdbc/insert/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

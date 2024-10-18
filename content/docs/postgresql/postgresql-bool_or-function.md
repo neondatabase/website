@@ -2,7 +2,6 @@
 title: 'PostgreSQL BOOL_OR() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_or/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

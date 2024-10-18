@@ -2,7 +2,6 @@
 title: 'PostgreSQL Subquery'
 redirectFrom: 
             - /docs/postgresql/postgresql-subquery
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

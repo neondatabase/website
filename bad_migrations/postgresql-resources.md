@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL Resources'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

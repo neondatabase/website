@@ -2,7 +2,6 @@
 title: 'PostgreSQL REAL Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-real-data-type
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

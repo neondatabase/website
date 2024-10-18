@@ -2,7 +2,6 @@
 title: 'PostgreSQL Correlated Subquery'
 redirectFrom: 
             - /docs/postgresql/postgresql-correlated-subquery
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

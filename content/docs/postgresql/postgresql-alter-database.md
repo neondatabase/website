@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALTER DATABASE'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-alter-database/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

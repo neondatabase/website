@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_extract_path() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_extract_path/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

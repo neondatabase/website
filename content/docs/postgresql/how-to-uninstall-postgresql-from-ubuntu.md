@@ -2,7 +2,6 @@
 title: 'How to Uninstall PostgreSQL from Ubuntu'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/uninstall-postgresql-ubuntu/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

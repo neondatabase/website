@@ -2,7 +2,6 @@
 title: 'PostgreSQL Array'
 redirectFrom: 
             - /docs/postgresql/postgresql-array
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL TRIM() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-trim-function/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

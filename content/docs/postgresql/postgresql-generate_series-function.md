@@ -2,7 +2,6 @@
 title: 'PostgreSQL generate_series() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-generate_series
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

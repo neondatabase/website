@@ -2,7 +2,6 @@
 title: 'PostgreSQL REINDEX'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-reindex/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

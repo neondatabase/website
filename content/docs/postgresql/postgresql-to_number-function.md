@@ -2,7 +2,6 @@
 title: 'PostgreSQL TO_NUMBER() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-to_number/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

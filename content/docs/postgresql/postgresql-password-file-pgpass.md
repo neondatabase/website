@@ -2,7 +2,6 @@
 title: 'PostgreSQL Password File .pgpass'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-password-file-pgpass/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

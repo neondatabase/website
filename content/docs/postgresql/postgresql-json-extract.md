@@ -2,7 +2,6 @@
 title: 'PostgreSQL JSON Extract'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-json-extract/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

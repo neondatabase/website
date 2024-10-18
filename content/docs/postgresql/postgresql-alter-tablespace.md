@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALTER TABLESPACE'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-alter-tablespace/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL IS NULL'
 redirectFrom: 
             - /docs/postgresql/postgresql-is-null
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

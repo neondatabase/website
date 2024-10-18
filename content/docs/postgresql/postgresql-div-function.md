@@ -2,7 +2,6 @@
 title: 'PostgreSQL DIV() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-div
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

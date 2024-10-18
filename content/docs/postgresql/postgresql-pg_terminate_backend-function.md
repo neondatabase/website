@@ -2,7 +2,6 @@
 title: 'PostgreSQL pg_terminate_backend() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-pg_terminate_backend/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

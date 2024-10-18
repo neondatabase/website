@@ -2,7 +2,6 @@
 title: 'PostgreSQL DOUBLE PRECISION Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-double-precision-type
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

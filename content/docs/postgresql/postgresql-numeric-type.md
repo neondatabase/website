@@ -2,7 +2,6 @@
 title: 'PostgreSQL NUMERIC Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-numeric
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

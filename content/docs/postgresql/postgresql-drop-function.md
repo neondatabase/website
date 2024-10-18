@@ -2,7 +2,6 @@
 title: 'PostgreSQL Drop Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/postgresql-drop-function/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

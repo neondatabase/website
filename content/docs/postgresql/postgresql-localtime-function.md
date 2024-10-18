@@ -2,7 +2,6 @@
 title: 'PostgreSQL LOCALTIME Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-localtime/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

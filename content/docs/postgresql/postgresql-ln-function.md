@@ -2,7 +2,6 @@
 title: 'PostgreSQL LN() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-ln
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

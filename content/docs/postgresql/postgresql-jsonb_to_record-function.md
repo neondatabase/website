@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_to_record() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_to_record/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

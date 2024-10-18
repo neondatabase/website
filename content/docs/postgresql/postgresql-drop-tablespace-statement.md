@@ -2,7 +2,6 @@
 title: 'PostgreSQL DROP TABLESPACE Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-drop-tablespace/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

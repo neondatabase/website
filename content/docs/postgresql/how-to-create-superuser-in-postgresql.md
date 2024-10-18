@@ -2,7 +2,6 @@
 title: 'How to Create Superuser in PostgreSQL'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/create-superuser-postgresql/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

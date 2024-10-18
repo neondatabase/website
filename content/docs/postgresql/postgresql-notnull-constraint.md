@@ -2,7 +2,6 @@
 title: 'PostgreSQL Not-Null Constraint'
 redirectFrom: 
             - /docs/postgresql/postgresql-not-null-constraint
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

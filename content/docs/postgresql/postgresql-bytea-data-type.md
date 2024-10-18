@@ -2,7 +2,6 @@
 title: 'PostgreSQL BYTEA Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-bytea-data-type
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL CHECK Constraints'
 redirectFrom: 
             - /docs/postgresql/postgresql-check-constraint
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

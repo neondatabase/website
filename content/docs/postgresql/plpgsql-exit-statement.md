@@ -2,7 +2,6 @@
 title: 'PL/pgSQL Exit Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-exit/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

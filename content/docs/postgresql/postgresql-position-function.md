@@ -2,7 +2,6 @@
 title: 'PostgreSQL POSITION() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-position/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

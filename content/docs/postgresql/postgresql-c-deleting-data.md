@@ -2,7 +2,6 @@
 title: 'PostgreSQL C#: Deleting Data'
 redirectFrom: 
             - /docs/postgresql/postgresql-csharp/postgresql-csharp-delete/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

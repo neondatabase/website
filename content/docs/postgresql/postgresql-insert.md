@@ -2,7 +2,6 @@
 title: 'PostgreSQL INSERT'
 redirectFrom: 
             - /docs/postgresql/postgresql-insert
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'Disable Triggers'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/managing-postgresql-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

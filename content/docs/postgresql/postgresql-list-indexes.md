@@ -2,7 +2,6 @@
 title: 'PostgreSQL List Indexes'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-list-indexes/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL JDBC: Managing Transactions'
 redirectFrom: 
             - /docs/postgresql/postgresql-jdbc/transaction/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

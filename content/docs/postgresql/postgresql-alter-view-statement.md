@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALTER VIEW Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-alter-view/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL Math Functions'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

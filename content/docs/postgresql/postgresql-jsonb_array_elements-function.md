@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_array_elements() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_elements/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

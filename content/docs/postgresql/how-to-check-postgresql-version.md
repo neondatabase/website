@@ -2,7 +2,6 @@
 title: 'How to Check PostgreSQL Version'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-version/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

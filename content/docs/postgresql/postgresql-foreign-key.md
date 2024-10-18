@@ -2,7 +2,6 @@
 title: 'PostgreSQL Foreign Key'
 redirectFrom: 
             - /docs/postgresql/postgresql-foreign-key
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

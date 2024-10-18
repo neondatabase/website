@@ -2,7 +2,6 @@
 title: 'PostgreSQL UNIQUE Index'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-unique-index/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

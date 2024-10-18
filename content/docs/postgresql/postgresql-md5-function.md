@@ -2,7 +2,6 @@
 title: 'PostgreSQL MD5() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-md5/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL Date Functions'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL LAG Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-lag-function/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

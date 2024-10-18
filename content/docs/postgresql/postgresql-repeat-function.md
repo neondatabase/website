@@ -2,7 +2,6 @@
 title: 'PostgreSQL REPEAT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-repeat/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

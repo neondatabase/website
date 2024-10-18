@@ -2,7 +2,6 @@
 title: 'PostgreSQL LOG() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-log
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

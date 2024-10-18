@@ -2,7 +2,6 @@
 title: 'PostgreSQL ISFINITE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-isfinite/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -2,7 +2,6 @@
 title: 'PostgreSQL Full Text Search'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-full-text-search/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

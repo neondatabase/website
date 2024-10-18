@@ -2,7 +2,6 @@
 title: 'PostgreSQL CREATE TABLE'
 redirectFrom: 
             - /docs/postgresql/postgresql-create-table
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

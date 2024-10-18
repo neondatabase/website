@@ -2,7 +2,6 @@
 title: 'PostgreSQL TO_TIMESTAMP Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-to_timestamp/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

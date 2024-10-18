@@ -2,7 +2,6 @@
 title: 'PostgreSQL CURRENT_USER'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-current_user/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

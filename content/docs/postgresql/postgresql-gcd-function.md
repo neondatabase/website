@@ -2,7 +2,6 @@
 title: 'PostgreSQL GCD() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-gcd
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 'PostgreSQL Administration'
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

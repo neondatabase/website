@@ -2,7 +2,6 @@
 title: 'PostgreSQL RADIANS() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-radians
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

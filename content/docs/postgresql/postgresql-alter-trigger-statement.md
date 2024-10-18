@@ -2,7 +2,6 @@
 title: 'PostgreSQL ALTER TRIGGER Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-alter-trigger/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

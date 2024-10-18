@@ -2,7 +2,6 @@
 title: 'PostgreSQL OR Operator'
 redirectFrom: 
             - /docs/postgresql/postgresql-or
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 

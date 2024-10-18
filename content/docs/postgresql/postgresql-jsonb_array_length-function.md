@@ -2,7 +2,6 @@
 title: 'PostgreSQL jsonb_array_length() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_length/
-ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 
