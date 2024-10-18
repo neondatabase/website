@@ -240,7 +240,7 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 ## Deleting backup branches
 
-If you are an [Early Access](/docs/introduction/roadmap#join-the-neon-early-access-program) user, you can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `main`) is not yet supported.
+You can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `main`) is not yet supported.
 
 To delete a backup branch:
 
@@ -253,7 +253,7 @@ To delete a backup branch:
 
 3. Select **Delete** from the menu.
 
-If you cannot delete a backup branch because you are not an Early Access user or because the backup branch was created by a restore operation on a non-root branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+If you cannot delete a backup branch because the backup branch was created by a restore operation on a non-root branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
 To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 
