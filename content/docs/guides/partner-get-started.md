@@ -55,14 +55,14 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 
 - **Use a project-per-user model**: When setting up your integration, we recommend a **project-per-user** model rather than branch-per-user or database-per-user.
 
-  **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. You can learn more about Neon's project-based structure here: [Neon object hierarchy](https://neon.tech/docs/manage/overview).
+  **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. When a user signs up with Neon, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration. You can learn more about Neon's project-based structure here: [Neon object hierarchy](https://neon.tech/docs/manage/overview).
 
-  **Why do we recommend the project-per-user model?**
+  **Why we recommend the project-per-user model**:
 
         - Neon uses a project-based structure for resource management; it's easier to follow this established, underlying model
-        - A project-per-user structure isolates resources and data, making it easier to manage consumption
+        - A project-per-user structure isolates resources and data, making it easier to manage limits and billing
         - Isolation of resources and data by project helps protect against accidental data exposures among your users through unintended configuration or privilege management errors, making it easier to comply with privacy standards like GDPR.
-        - Isolation of resources and data by project prevents one user's usage patterns or actions from affecting other users on your platform or service. For example, each user will have their own compute, storage, and data transfer limits, which are set for their project.
+        - Isolation of resources and data by project prevents one user's usage patterns or actions from affecting other users on your platform or service. For example, each user will have their own compute resources. Therefore, heavy load in one user's project will not affect other users.
         - In Neon, databases reside on a branch, and certain operations in Neon are performed at the branch level, such as point-in-time restore. In a user-per-database implementation, a restore operation would affect every database on a branch. In a project based structure, branch-level actions such as point-in-time restore can be isolated to a single user. In a database-per-user model, where users are given separate databases in the same Neon project, point-in-time restore operations would not be possible.
 
 - **Carefully consider limits**: When setting limits for your users, aim to find the right balance between cost management and user-flexibility. Look at how Neon defines its [pricing plans](/docs/introduction/plans) or how Neon partners like Koyeb define [usage limits](https://www.koyeb.com/docs/databases#database-instance-types). Be aware that when users reach defined limits, their computes may be suspended preventing further interaction with the database. Take time to consider what you want to occur when a user reaches the limits you define. Do you want to build in advanced notifications? Do you want to provide an upgrade path?
