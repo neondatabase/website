@@ -2,7 +2,7 @@
 title: 'PostgreSQL Joins'
 redirectFrom: 
             - /docs/postgresql/postgresql-joins
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png
 tableOfContents: true
 ---
 
@@ -134,7 +134,7 @@ The following Venn diagram illustrates the inner join:
 
 
 
-![PostgreSQL Join - Inner Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png)
+![PostgreSQL Join - Inner Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png)
 
 
 
@@ -192,7 +192,7 @@ The following Venn diagram illustrates the left join:
 
 
 
-![PostgreSQL Join - Left Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png)
+![PostgreSQL Join - Left Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png)
 
 
 
@@ -237,7 +237,7 @@ The following Venn diagram illustrates the left join that returns rows from the 
 
 
 
-![PostgreSQL Join - Left Join with Where](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join-with-Where.png)
+![PostgreSQL Join - Left Join with Where](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join-with-Where.png)
 
 
 
@@ -294,7 +294,7 @@ The following Venn diagram illustrates the right join:
 
 
 
-![PostgreSQL Join - Right Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png)
+![PostgreSQL Join - Right Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png)
 
 
 
@@ -339,7 +339,7 @@ The following Venn diagram illustrates the right join that returns rows from the
 
 
 
-![PostgreSQL Join - Right Join with Where](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join-with-Where.png)
+![PostgreSQL Join - Right Join with Where](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join-with-Where.png)
 
 
 
@@ -387,7 +387,7 @@ The following Venn diagram illustrates the full outer join:
 
 
 
-![PostgreSQL Join - Full Outer Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png)
+![PostgreSQL Join - Full Outer Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png)
 
 
 
@@ -430,7 +430,7 @@ The following Venn diagram illustrates the full outer join that returns rows fro
 
 
 
-![PostgreSQL Join - Full Outer Join with Where](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join-with-Where.png)
+![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join-with-Where.png)
 
 
 
@@ -438,7 +438,7 @@ The following picture shows all the PostgreSQL joins that we discussed so far wi
 
 
 
-![PostgreSQL Joins](./img/wp-content-uploads-2018-12-PostgreSQL-Joins.png)
+![PostgreSQL Joins](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Joins.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL TIME Data Type'
 redirectFrom: 
             - /docs/postgresql/postgresql-time
-ogImage: ./img/wp-content-uploads-2017-02-PostgreSQL-TIME-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-TIME-example.png
 tableOfContents: true
 ---
 
@@ -360,7 +360,7 @@ SELECT
 
 
 
-### ![PostgreSQL TIME example](./img/wp-content-uploads-2017-02-PostgreSQL-TIME-example.png "PostgreSQL TIME example")
+### ![PostgreSQL TIME example](/postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-TIME-example.png "PostgreSQL TIME example")
 
 
 

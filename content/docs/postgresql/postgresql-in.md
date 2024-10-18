@@ -2,7 +2,7 @@
 title: 'PostgreSQL IN'
 redirectFrom: 
             - /docs/postgresql/postgresql-in
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -83,7 +83,7 @@ We'll use the `film` table from the [sample database](https://www.postgresqltuto
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 
@@ -180,7 +180,7 @@ We'll use the `actor` table from the [sample database](https://www.postgresqltut
 
 
 
-![](./img/wp-content-uploads-2019-05-actor.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-actor.png)
 
 
 

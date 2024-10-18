@@ -2,7 +2,7 @@
 title: 'PostgreSQL FIRST_VALUE Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-first_value-function/
-ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---
 
@@ -90,7 +90,7 @@ We will use the `products` table created in the [window function](https://www.po
 
 
 
-![](./img/wp-content-uploads-2016-06-products_product_groups_tables.png)
+![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
 
 
@@ -98,7 +98,7 @@ The data of the `products` table is as follows:
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-sample-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 
 
 
@@ -130,7 +130,7 @@ Here is the result set:
 
 
 
-![PostgreSQL FIRST_VALUE Function over a result set](./img/wp-content-uploads-2019-12-PostgreSQL-FIRST_VALUE-Function-over-a-result-set.png)
+![PostgreSQL FIRST_VALUE Function over a result set](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-FIRST_VALUE-Function-over-a-result-set.png)
 
 
 
@@ -172,7 +172,7 @@ FROM
 
 
 
-![PostgreSQL FIRST_VALUE Function over partition](./img/wp-content-uploads-2019-12-PostgreSQL-FIRST_VALUE-Function-over-partition.png)
+![PostgreSQL FIRST_VALUE Function over partition](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-FIRST_VALUE-Function-over-partition.png)
 
 
 

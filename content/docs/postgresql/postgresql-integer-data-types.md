@@ -2,7 +2,7 @@
 title: 'PostgreSQL Integer Data Types'
 redirectFrom: 
             - /docs/postgresql/postgresql-integer
-ogImage: ./img/wp-content-uploads-2017-02-postgresql-integer-300x59.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-integer-300x59.png
 tableOfContents: true
 ---
 
@@ -14,7 +14,7 @@ tableOfContents: true
 
 
 
-![postgresql integer](./img/wp-content-uploads-2017-02-postgresql-integer-300x59.png)
+![postgresql integer](/postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-integer-300x59.png)
 
 
 

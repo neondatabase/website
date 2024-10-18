@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL JSON Functions'
-redirectFrom: 
-            - /docs/postgresql/postgresql-json-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

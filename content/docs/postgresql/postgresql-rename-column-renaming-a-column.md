@@ -2,12 +2,12 @@
 title: 'PostgreSQL RENAME COLUMN: Renaming a column'
 redirectFrom: 
             - /docs/postgresql/postgresql-rename-column
-ogImage: ./img/wp-content-uploads-2017-02-postgresql-rename-column-300x254.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-rename-column-300x254.png
 tableOfContents: true
 ---
 
 
-![PostgreSQL RENAME COLUMN](./img/wp-content-uploads-2017-02-postgresql-rename-column-300x254.png)
+![PostgreSQL RENAME COLUMN](/postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-rename-column-300x254.png)
 
 
 

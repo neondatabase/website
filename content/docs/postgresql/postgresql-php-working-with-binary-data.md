@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Working with Binary Data'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/postgresql-blob/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png
 tableOfContents: true
 ---
 
@@ -43,7 +43,7 @@ To work with the binary data, we create a new class named `BlobDB`.
 
 
 
-![PostgreSQL PHP BLOB](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png)
+![PostgreSQL PHP BLOB](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png)
 
 
 
@@ -265,7 +265,7 @@ The file.php file gets the id value from the query string and outputs the file s
 
 
 
-![PostgreSQL BLOB example](./img/wp-content-uploads-2016-06-PostgreSQL-BLOB-example.png)
+![PostgreSQL BLOB example](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-BLOB-example.png)
 
 
 

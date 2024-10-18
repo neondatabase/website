@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/insert/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Insert-Example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Insert-Example.png
 tableOfContents: true
 ---
 
@@ -34,7 +34,7 @@ Let's create a new class named `PostgreSQLPHPInsert` in the `app` folder and the
 
 
 
-![PostgreSQL PHP Insert Example](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Insert-Example.png)
+![PostgreSQL PHP Insert Example](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Insert-Example.png)
 
 
 

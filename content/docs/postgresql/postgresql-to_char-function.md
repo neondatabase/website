@@ -2,7 +2,7 @@
 title: 'PostgreSQL TO_CHAR() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-to_char/
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -181,7 +181,7 @@ We will use the `payment` table in the [sample database](https://www.postgresqlt
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 
@@ -222,7 +222,7 @@ Here is the result:
 
 
 
-![PostgreSQL TO_CHAR Function - format timestamp example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-timestamp-example.png)
+![PostgreSQL TO_CHAR Function - format timestamp example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-timestamp-example.png)
 
 
 
@@ -264,7 +264,7 @@ The output is:
 
 
 
-![](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-payment-date-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-payment-date-example.png)
 
 
 
@@ -344,7 +344,7 @@ The following picture illustrates the output:
 
 
 
-![PostgreSQL TO_CHAR Function - add currency symbol example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-add-currency-symbol-example.png)
+![PostgreSQL TO_CHAR Function - add currency symbol example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-add-currency-symbol-example.png)
 
 
 
@@ -435,7 +435,7 @@ The result is
 
 
 
-![PostgreSQL TO_CHAR Function - example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-example.png)
+![PostgreSQL TO_CHAR Function - example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-example.png)
 
 
 

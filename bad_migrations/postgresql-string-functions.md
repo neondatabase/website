@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL String Functions'
-redirectFrom: 
-            - /docs/postgresql/postgresql-string-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

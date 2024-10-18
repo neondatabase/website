@@ -2,7 +2,7 @@
 title: 'PostgreSQL SELECT INTO'
 redirectFrom: 
             - /docs/postgresql/postgresql-select-into
-ogImage: ./img/wp-content-uploads-2018-03-film_table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
 
@@ -105,7 +105,7 @@ We will use the `film` table from the [sample database](https://www.postgresqltu
 
 
 
-![PostgreSQL SELECT INTO sample table](./img/wp-content-uploads-2018-03-film_table.png)
+![PostgreSQL SELECT INTO sample table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 
 
 
@@ -156,7 +156,7 @@ SELECT * FROM film_r;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Select-Into-Example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Select-Into-Example.png)
 
 
 

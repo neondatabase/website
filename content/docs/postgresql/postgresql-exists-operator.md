@@ -2,7 +2,7 @@
 title: 'PostgreSQL EXISTS Operator'
 redirectFrom: 
             - /docs/postgresql/postgresql-exists
-ogImage: ./img/wp-content-uploads-2017-08-customer-and-payment-tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png
 tableOfContents: true
 ---
 
@@ -110,7 +110,7 @@ We will use the following `customer` and `payment` tables in the [sample databas
 
 
 
-![customer and payment tables](./img/wp-content-uploads-2017-08-customer-and-payment-tables.png)
+![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png)
 
 
 

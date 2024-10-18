@@ -2,7 +2,7 @@
 title: 'PostgreSQL INNER JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-inner-join
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png
 tableOfContents: true
 ---
 
@@ -104,7 +104,7 @@ The following Venn diagram illustrates how `INNER JOIN` clause works.
 
 
 
-![PostgreSQL Join - Inner Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png)
+![PostgreSQL Join - Inner Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png)
 
 
 
@@ -124,7 +124,7 @@ Let's take a look at the `customer`and `payment` tables in the [sample database]
 
 
 
-![customer and payment tables](./img/wp-content-uploads-2013-05-customer-and-payment-tables.png)
+![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png)
 
 
 
@@ -217,7 +217,7 @@ The following diagram below illustrates the relationship between three tables: `
 
 
 
-![customer, payment and staff tables](./img/wp-content-uploads-2013-05-customer-payment-staff-tables.png)
+![customer, payment and staff tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-payment-staff-tables.png)
 
 
 

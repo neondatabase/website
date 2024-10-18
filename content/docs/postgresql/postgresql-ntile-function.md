@@ -2,7 +2,7 @@
 title: 'PostgreSQL NTILE Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-ntile-function/
-ogImage: ./img/wp-content-uploads-2019-05-sales_stats-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-sales_stats-table.png
 tableOfContents: true
 ---
 
@@ -100,7 +100,7 @@ ORDER BY
 
 
 
-![sales_stats table](./img/wp-content-uploads-2019-05-sales_stats-table.png)
+![sales_stats table](/postgresqltutorial_data/wp-content-uploads-2019-05-sales_stats-table.png)
 
 
 
@@ -131,7 +131,7 @@ Here is the output:
 
 
 
-![PostgreSQL NTILE Function Over a Result Set Example](./img/wp-content-uploads-2019-05-PostgreSQL-NTILE-Function-Over-a-Result-Set-Example.png)
+![PostgreSQL NTILE Function Over a Result Set Example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-NTILE-Function-Over-a-Result-Set-Example.png)
 
 
 
@@ -161,7 +161,7 @@ Here is the result set:
 
 
 
-![PostgreSQL NTILE Function Over a Partition Example](./img/wp-content-uploads-2019-05-PostgreSQL-NTILE-Function-Over-a-Partition-Example.png)
+![PostgreSQL NTILE Function Over a Partition Example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-NTILE-Function-Over-a-Partition-Example.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL ORDER BY'
 redirectFrom: 
             - /docs/postgresql/postgresql-order-by
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-ORDER-BY.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-ORDER-BY.png
 tableOfContents: true
 ---
 
@@ -76,7 +76,7 @@ PostgreSQL evaluates the clauses in the `SELECT` statement in the following orde
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-ORDER-BY.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-ORDER-BY.png)
 
 
 
@@ -106,7 +106,7 @@ We will use the `customer` table in the [sample database](https://www.postgresql
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 
@@ -138,7 +138,7 @@ ORDER BY
 
 
 
-![PostgreSQL ORDER BY one column example](./img/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-one-column-example.png)
+![PostgreSQL ORDER BY one column example](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-one-column-example.png)
 
 
 
@@ -190,7 +190,7 @@ ORDER BY
 
 
 
-![PostgreSQL ORDER BY one column DESC example](./img/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-one-column-desc-example.png)
+![PostgreSQL ORDER BY one column DESC example](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-one-column-desc-example.png)
 
 
 
@@ -223,7 +223,7 @@ ORDER BY
 
 
 
-![PostgreSQL ORDER BY multiple columns](./img/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-multiple-columns.png)
+![PostgreSQL ORDER BY multiple columns](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-multiple-columns.png)
 
 
 
@@ -273,7 +273,7 @@ ORDER BY
 
 
 
-![PostgreSQL ORDER BY expressions](./img/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-expressions.png)
+![PostgreSQL ORDER BY expressions](/postgresqltutorial_data/wp-content-uploads-2019-12-PostgreSQL-ORDER-BY-expressions.png)
 
 
 

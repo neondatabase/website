@@ -2,7 +2,7 @@
 title: 'PostgreSQL DENSE_RANK Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-dense_rank-function/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-Sample-Table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-Sample-Table.png
 tableOfContents: true
 ---
 
@@ -80,7 +80,7 @@ SELECT c from dense_ranks;
 
 
 
-![](./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-Sample-Table.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-Sample-Table.png)
 
 
 
@@ -104,7 +104,7 @@ Here is the output:
 
 
 
-![PostgreSQL DENSE_RANK Function example](./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-example.png)
+![PostgreSQL DENSE_RANK Function example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-example.png)
 
 
 
@@ -116,11 +116,11 @@ We will use the `products` table to demonstrate the `DENSE_RANK()` function.
 
 
 
-![](./img/wp-content-uploads-2016-06-products_product_groups_tables.png)
+![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-sample-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 
 
 
@@ -150,7 +150,7 @@ Here is the output:
 
 
 
-![](./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-over-a-result-set.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-over-a-result-set.png)
 
 
 
@@ -190,7 +190,7 @@ This picture shows the output:
 
 
 
-![](./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-over-a-partition.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-over-a-partition.png)
 
 
 
@@ -232,7 +232,7 @@ WHERE
 
 
 
-![PostgreSQL DENSE_RANK Function top rows example](./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-top-rows-example.png)
+![PostgreSQL DENSE_RANK Function top rows example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-top-rows-example.png)
 
 
 

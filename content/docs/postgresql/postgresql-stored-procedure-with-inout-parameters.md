@@ -2,7 +2,7 @@
 title: 'PostgreSQL Stored Procedure with INOUT Parameters'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -78,7 +78,7 @@ Let's take some examples of creating stored procedures with `INOUT` parameters. 
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

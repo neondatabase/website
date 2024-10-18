@@ -2,7 +2,7 @@
 title: 'PostgreSQL LEFT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-left/
-ogImage: ./img/wp-content-uploads-2017-08-PostgreSQL-LEFT-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-LEFT-example.png
 tableOfContents: true
 ---
 
@@ -159,7 +159,7 @@ In this example, first, the `LEFT()` function returns initials of all customers.
 
 
 
-![PostgreSQL LEFT example](./img/wp-content-uploads-2017-08-PostgreSQL-LEFT-example.png)
+![PostgreSQL LEFT example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-LEFT-example.png)
 
 
 

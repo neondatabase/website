@@ -2,7 +2,7 @@
 title: 'PostgreSQL SPLIT_PART() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-split_part/
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -203,7 +203,7 @@ See the following `payment` table in the [sample database.](https://www.postgres
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 

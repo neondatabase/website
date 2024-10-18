@@ -2,7 +2,7 @@
 title: 'PostgreSQL PERCENT_RANK Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-percent_rank-function/
-ogImage: ./img/wp-content-uploads-2019-05-sales_stats-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-sales_stats-table.png
 tableOfContents: true
 ---
 
@@ -131,7 +131,7 @@ ORDER BY
 
 
 
-![sales_stats table](./img/wp-content-uploads-2019-05-sales_stats-table.png)
+![sales_stats table](/postgresqltutorial_data/wp-content-uploads-2019-05-sales_stats-table.png)
 
 
 
@@ -172,7 +172,7 @@ Here is the output:
 
 
 
-![PostgreSQL PERCENT_RANK Function Over a Result Set example](./img/wp-content-uploads-2019-05-PostgreSQL-PERCENT_RANK-Function-Over-a-Result-Set-example.png)
+![PostgreSQL PERCENT_RANK Function Over a Result Set example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-PERCENT_RANK-Function-Over-a-Result-Set-example.png)
 
 
 
@@ -212,7 +212,7 @@ Here is the output:
 
 
 
-![PostgreSQL PERCENT_RANK Function Over a Partition example](./img/wp-content-uploads-2019-05-PostgreSQL-PERCENT_RANK-Function-Over-a-Partition-example.png)
+![PostgreSQL PERCENT_RANK Function Over a Partition example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-PERCENT_RANK-Function-Over-a-Partition-example.png)
 
 
 

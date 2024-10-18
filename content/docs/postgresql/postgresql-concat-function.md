@@ -2,7 +2,7 @@
 title: 'PostgreSQL CONCAT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-concat-function/
-ogImage: ./img/wp-content-uploads-2019-05-customer.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
 
@@ -189,7 +189,7 @@ We'll use the `customer` table from the [sample database](https://www.postgresql
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

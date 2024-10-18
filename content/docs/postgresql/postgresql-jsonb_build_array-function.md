@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_build_array() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_array/
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -79,7 +79,7 @@ We'll use the `film` table from the [sample database](https://www.postgresqltuto
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

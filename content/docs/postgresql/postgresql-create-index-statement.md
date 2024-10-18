@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE INDEX Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-create-index/
-ogImage: ./img/wp-content-uploads-2018-12-address.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-address.png
 tableOfContents: true
 ---
 
@@ -67,7 +67,7 @@ We'll use the `address` table from the [sample database](https://www.postgresqlt
 
 
 
-![address table](./img/wp-content-uploads-2018-12-address.png)
+![address table](/postgresqltutorial_data/wp-content-uploads-2018-12-address.png)
 
 
 

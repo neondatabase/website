@@ -2,7 +2,7 @@
 title: 'PostgreSQL Python: Transactions'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/transaction/
-ogImage: ./img/wp-content-uploads-2016-06-parts_vendors_tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-parts_vendors_tables.png
 tableOfContents: true
 ---
 
@@ -205,7 +205,7 @@ We will use the `parts` and `vendor_parts` tables in the `suppliers` database:
 
 
 
-![parts_vendors_tables](./img/wp-content-uploads-2016-06-parts_vendors_tables.png)
+![parts_vendors_tables](/postgresqltutorial_data/wp-content-uploads-2016-06-parts_vendors_tables.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL List Users'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-list-users/
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-List-User-Example-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-List-User-Example-1.png
 tableOfContents: true
 ---
 
@@ -75,7 +75,7 @@ Second, use the `\du` to list all user accounts (or roles) in the current Postgr
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-List-User-Example-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-List-User-Example-1.png)
 
 
 
@@ -133,7 +133,7 @@ ORDER BY role_name desc;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-List-User-Using-SQL-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-List-User-Using-SQL-example.png)
 
 
 

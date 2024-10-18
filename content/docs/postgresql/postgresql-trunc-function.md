@@ -2,7 +2,7 @@
 title: 'PostgreSQL TRUNC() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-trunc
-ogImage: ./img/wp-content-uploads-2017-08-film-film_category-category-tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---
 
@@ -158,7 +158,7 @@ See the following `film`, `film_category`, and `category` tables in the [sample 
 
 
 
-![film film_category category tables](./img/wp-content-uploads-2017-08-film-film_category-category-tables.png)
+![film film_category category tables](/postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png)
 
 
 
@@ -191,7 +191,7 @@ The following picture illustrates the result:
 
 
 
-![PostgreSQL TRUNC example](./img/wp-content-uploads-2017-08-PostgreSQL-TRUNC-example.png)
+![PostgreSQL TRUNC example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TRUNC-example.png)
 
 
 

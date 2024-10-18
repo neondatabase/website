@@ -2,7 +2,7 @@
 title: 'PostgreSQL Self-Join'
 redirectFrom: 
             - /docs/postgresql/postgresql-self-join
-ogImage: ./img/wp-content-uploads-2018-03-PostgreSQL-Self-Join-Reporting-Structure.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-Self-Join-Reporting-Structure.png
 tableOfContents: true
 ---
 
@@ -70,7 +70,7 @@ Suppose, you have the following organizational structure:
 
 
 
-![PostgreSQL Self Join - Reporting Structure](./img/wp-content-uploads-2018-03-PostgreSQL-Self-Join-Reporting-Structure.png)
+![PostgreSQL Self Join - Reporting Structure](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-Self-Join-Reporting-Structure.png)
 
 
 
@@ -227,7 +227,7 @@ See the following `film` table from the DVD rental database:
 
 
 
-![Film Table](./img/wp-content-uploads-2018-03-film_table.png)
+![Film Table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 
 
 

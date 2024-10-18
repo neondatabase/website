@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/connect/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Connect.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Connect.png
 tableOfContents: true
 ---
 
@@ -158,7 +158,7 @@ The project structure will look like the following picture:
 
 
 
-![PostgreSQL PHP Connect](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Connect.png)
+![PostgreSQL PHP Connect](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Connect.png)
 
 
 

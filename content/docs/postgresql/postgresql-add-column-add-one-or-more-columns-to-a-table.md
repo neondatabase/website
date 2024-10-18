@@ -2,12 +2,12 @@
 title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-add-column
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Add-Column-300x128.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Add-Column-300x128.png
 tableOfContents: true
 ---
 
 
-![PostgreSQL Add Column](./img/wp-content-uploads-2016-06-PostgreSQL-Add-Column-300x128.png)
+![PostgreSQL Add Column](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Add-Column-300x128.png)
 
 
 

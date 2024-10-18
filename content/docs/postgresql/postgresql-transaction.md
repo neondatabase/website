@@ -2,7 +2,7 @@
 title: 'PostgreSQL Transaction'
 redirectFrom: 
             - /docs/postgresql/postgresql-transaction
-ogImage: ./img/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png
 tableOfContents: true
 ---
 
@@ -138,7 +138,7 @@ FROM
 
 
 
-![PostgreSQL Transaction - from current session](./img/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
+![PostgreSQL Transaction - from current session](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
 
 
 
@@ -157,7 +157,7 @@ FROM
 
 
 
-![PostgreSQL Transaction - from another session](./img/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-another-transaction.png)
+![PostgreSQL Transaction - from another session](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-another-transaction.png)
 
 
 
@@ -210,7 +210,7 @@ FROM
 
 
 
-![PostgreSQL Transaction - commit](./img/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
+![PostgreSQL Transaction - commit](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
 
 
 

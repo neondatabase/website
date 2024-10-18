@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL C#'
-redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

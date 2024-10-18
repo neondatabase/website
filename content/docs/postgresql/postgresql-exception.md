@@ -2,7 +2,7 @@
 title: 'PostgreSQL Exception'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/postgresql-exception/
-ogImage: ./img/wp-content-uploads-2018-03-film_table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
 
@@ -83,7 +83,7 @@ We'll use the `film` table from the [sample database](https://www.postgresqltuto
 
 
 
-![Film table](./img/wp-content-uploads-2018-03-film_table.png)
+![Film table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL FORMAT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-format/
-ogImage: ./img/wp-content-uploads-2013-05-customer-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png
 tableOfContents: true
 ---
 
@@ -293,7 +293,7 @@ We'll use the following `customer` table in the [sample database](https://www.po
 
 
 
-![customer table](./img/wp-content-uploads-2013-05-customer-table.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png)
 
 
 

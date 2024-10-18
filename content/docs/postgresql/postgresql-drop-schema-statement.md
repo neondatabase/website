@@ -2,7 +2,7 @@
 title: 'PostgreSQL DROP SCHEMA Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-drop-schema/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png
 tableOfContents: true
 ---
 
@@ -60,7 +60,7 @@ Note that the following examples use schemas created in the `CREATE SCHEMA` tuto
 
 
 
-![PostgreSQL DROP Schema](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png)
+![PostgreSQL DROP Schema](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png)
 
 
 
@@ -82,11 +82,11 @@ To refresh the schemas in the list, right-click the Schemas node and select the 
 
 
 
-![PostgreSQL DROP Schema - drop empty schema example](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-empty-schema-example.png)
+![PostgreSQL DROP Schema - drop empty schema example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-empty-schema-example.png)
 
 
 
-![PostgreSQL DROP Schema - drop empty schema example result](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-empty-schema-example-result.png)
+![PostgreSQL DROP Schema - drop empty schema example result](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-empty-schema-example-result.png)
 
 
 
@@ -104,7 +104,7 @@ DROP SCHEMA IF EXISTS finance, marketing;
 
 
 
-![PostgreSQL DROP Schema - drop multiple schemas](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-multiple-schemas.png)
+![PostgreSQL DROP Schema - drop multiple schemas](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-multiple-schemas.png)
 
 
 
@@ -146,7 +146,7 @@ DROP SCHEMA scm CASCADE;
 
 
 
-![PostgreSQL DROP Schema - drop a non-empty schema](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-a-non-empty-schema.png)
+![PostgreSQL DROP Schema - drop a non-empty schema](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-a-non-empty-schema.png)
 
 
 
@@ -160,7 +160,7 @@ DROP SCHEMA sales CASCADE;
 
 
 
-![PostgreSQL DROP Schema - drop a non-empty schema example](./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-a-non-empty-schema-example.png)
+![PostgreSQL DROP Schema - drop a non-empty schema example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema-drop-a-non-empty-schema-example.png)
 
 
 

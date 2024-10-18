@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE DATABASE'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-create-database/
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png
 tableOfContents: true
 ---
 
@@ -398,7 +398,7 @@ Second, right-click the **Databases** node and select **Create > Database...** m
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png)
 
 
 
@@ -416,7 +416,7 @@ Third, enter the name of the database and select an owner in the general tab.
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-2.png)
 
 
 
@@ -434,7 +434,7 @@ Fourth, select the **Definition** tab to set the properties for the database:
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-3.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-3.png)
 
 
 
@@ -458,7 +458,7 @@ Fifth, click the SQL tab to view the generated SQL statement that will execute.
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-4.png)
 
 
 
@@ -470,7 +470,7 @@ Finally, click the **Save **button to create the `sampledb` database. You will s
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-5.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-5.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL Python: Create Tables'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/create-tables/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---
 
@@ -194,7 +194,7 @@ The following diagram illustrates the tables and their relationships:
 
 
 
-![PostgreSQL Python Sample Database Diagram](./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png)
+![PostgreSQL Python Sample Database Diagram](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png)
 
 
 

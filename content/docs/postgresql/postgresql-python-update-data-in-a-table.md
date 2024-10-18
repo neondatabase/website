@@ -2,7 +2,7 @@
 title: 'PostgreSQL Python: Update Data in a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/update/
-ogImage: ./img/wp-content-uploads-2016-06-vendors_table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-vendors_table.png
 tableOfContents: true
 ---
 
@@ -42,7 +42,7 @@ We will use the `vendors` table in the `suppliers` database for the demonstratio
 
 
 
-![vendors_table](./img/wp-content-uploads-2016-06-vendors_table.png)
+![vendors_table](/postgresqltutorial_data/wp-content-uploads-2016-06-vendors_table.png)
 
 
 

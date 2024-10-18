@@ -2,12 +2,12 @@
 title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
 redirectFrom: 
             - /docs/postgresql/postgresql-copy-table
-ogImage: ./img/wp-content-uploads-2017-03-PostgreSQL-Copy-Table-300x260.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-Copy-Table-300x260.png
 tableOfContents: true
 ---
 
 
-![PostgreSQL Copy Table](./img/wp-content-uploads-2017-03-PostgreSQL-Copy-Table-300x260.png)
+![PostgreSQL Copy Table](/postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-Copy-Table-300x260.png)
 
 
 

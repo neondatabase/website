@@ -1,13 +1,11 @@
 ---
 title: 'PostgreSQL PHP'
-redirectFrom: 
-            - /docs/postgresql/postgresql-php/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png
 tableOfContents: true
 ---
 
 
-![PostgreSQL-PHP](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png)
+![PostgreSQL-PHP](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png)
 
 
 

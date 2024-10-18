@@ -2,7 +2,7 @@
 title: 'PostgreSQL RIGHT JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-right-join
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png
 tableOfContents: true
 ---
 
@@ -118,7 +118,7 @@ The following Venn diagram illustrates how the `RIGHT JOIN` works:
 
 
 
-![PostgreSQL Join - Right Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png)
+![PostgreSQL Join - Right Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png)
 
 
 
@@ -201,7 +201,7 @@ Output:
 
 
 
-![PostgreSQL RIGHT JOIN example](./img/wp-content-uploads-2024-01-PostgreSQL-RIGHT-JOIN-example.png)
+![PostgreSQL RIGHT JOIN example](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-RIGHT-JOIN-example.png)
 
 
 

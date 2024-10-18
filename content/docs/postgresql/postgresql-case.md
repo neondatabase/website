@@ -2,7 +2,7 @@
 title: 'PostgreSQL CASE'
 redirectFrom: 
             - /docs/postgresql/postgresql-case
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -110,7 +110,7 @@ Let's take a look at the `film` table from the [sample database](https://www.pos
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

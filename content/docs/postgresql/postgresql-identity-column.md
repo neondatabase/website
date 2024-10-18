@@ -2,7 +2,7 @@
 title: 'PostgreSQL Identity Column'
 redirectFrom: 
             - /docs/postgresql/postgresql-identity-column
-ogImage: ./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png
 tableOfContents: true
 ---
 
@@ -192,7 +192,7 @@ VALUES(2, 'Green');
 
 
 
-![PostgreSQL identity column - OVERRIDING SYSTEM VALUE example](./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png)
+![PostgreSQL identity column - OVERRIDING SYSTEM VALUE example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png)
 
 
 
@@ -338,7 +338,7 @@ SELECT * FROM color;
 
 
 
-![PostgreSQL identity column - sequence options example](./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-sequence-options-example.png)
+![PostgreSQL identity column - sequence options example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-sequence-options-example.png)
 
 
 
@@ -373,7 +373,7 @@ SELECT * FROM color;
 
 
 
-![PostgreSQL identity column - increment example](./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-increment-example.png)
+![PostgreSQL identity column - increment example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-increment-example.png)
 
 
 
@@ -474,7 +474,7 @@ It returns the following output which is what we expected:
 
 
 
-![](./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-alter-column-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-alter-column-example.png)
 
 
 
@@ -532,7 +532,7 @@ The following command describes the structure of the shape table in the psql too
 
 
 
-![](./img/wp-content-uploads-2018-03-PostgreSQL-identity-column-changing-identity-column-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-changing-identity-column-example.png)
 
 
 

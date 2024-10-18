@@ -2,7 +2,7 @@
 title: 'PL/pgSQL IF Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements/
-ogImage: ./img/wp-content-uploads-2015-09-plpgsql-if-statement.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-statement.png
 tableOfContents: true
 ---
 
@@ -93,7 +93,7 @@ The following flowchart illustrates the simple `if` statement.
 
 
 
-[![PL/pgSQL if statement](https://www.postgresqltutorial.com/wp-content/uploads/2015/09/plpgsql-if-statement.png)](./img/wp-content-uploads-2015-09-plpgsql-if-statement.png)
+[![PL/pgSQL if statement](https://www.postgresqltutorial.com/wp-content/uploads/2015/09/plpgsql-if-statement.png)](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-statement.png)
 
 
 
@@ -211,7 +211,7 @@ The following flowchart illustrates the `if else` statement.
 
 
 
-![PL/pgSQL if else statement](./img/wp-content-uploads-2015-09-plpgsql-if-else-statement.png)
+![PL/pgSQL if else statement](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-else-statement.png)
 
 
 
@@ -320,7 +320,7 @@ The following flowchart illustrates the `if then elsif` statement:
 
 
 
-![PL/pgSQL if ELSif else Statement](./img/wp-content-uploads-2015-09-if-elsif-else-statement.png)
+![PL/pgSQL if ELSif else Statement](/postgresqltutorial_data/wp-content-uploads-2015-09-if-elsif-else-statement.png)
 
 
 

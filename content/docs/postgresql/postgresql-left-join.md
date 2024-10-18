@@ -2,7 +2,7 @@
 title: 'PostgreSQL LEFT JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-left-join
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png
 tableOfContents: true
 ---
 
@@ -89,7 +89,7 @@ The following Venn diagram illustrates how the `LEFT JOIN` clause works:
 
 
 
-![PostgreSQL Join - Left Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png)
+![PostgreSQL Join - Left Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png)
 
 
 
@@ -101,7 +101,7 @@ Let's look at the following `film` and `inventory` tables from the [sample datab
 
 
 
-![Film and Inventory tables](./img/wp-content-uploads-2013-05-film-and-inventory-tables.png)
+![Film and Inventory tables](/postgresqltutorial_data/wp-content-uploads-2013-05-film-and-inventory-tables.png)
 
 
 
@@ -139,7 +139,7 @@ ORDER BY
 
 
 
-![PostgreSQL LEFT JOIN example](./img/wp-content-uploads-2020-07-PostgreSQL-LEFT-JOIN-join-two-tables-example.png)
+![PostgreSQL LEFT JOIN example](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-LEFT-JOIN-join-two-tables-example.png)
 
 
 

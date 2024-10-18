@@ -2,7 +2,7 @@
 title: 'PostgreSQL ROUND() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-round
-ogImage: ./img/wp-content-uploads-2013-05-customer-and-payment-tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png
 tableOfContents: true
 ---
 
@@ -245,7 +245,7 @@ We will use the following `payment` and `customer` tables in the [sample databas
 
 
 
-![customer and payment tables](./img/wp-content-uploads-2013-05-customer-and-payment-tables.png)
+![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png)
 
 
 

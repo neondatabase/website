@@ -2,7 +2,7 @@
 title: 'PL/pgSQL Variables'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-variables/
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -284,7 +284,7 @@ We'll use the following `film` table from the [sample database](https://www.post
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL Sequences'
 redirectFrom: 
             - /docs/postgresql/postgresql-sequences
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png
 tableOfContents: true
 ---
 
@@ -281,7 +281,7 @@ SELECT nextval('mysequence');
 
 
 
-![PostgreSQL Sequence - simple example](./img/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png)
+![PostgreSQL Sequence - simple example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png)
 
 
 
@@ -301,7 +301,7 @@ SELECT nextval('mysequence');
 
 
 
-![PostgreSQL Sequence - nextval example](./img/wp-content-uploads-2019-05-PostgreSQL-Sequence-nextval-example.png)
+![PostgreSQL Sequence - nextval example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Sequence-nextval-example.png)
 
 
 
@@ -435,7 +435,7 @@ FROM
 
 
 
-![PostgreSQL Sequence in a table](./img/wp-content-uploads-2019-05-PostgreSQL-Sequence-in-a-table.png)
+![PostgreSQL Sequence in a table](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Sequence-in-a-table.png)
 
 
 

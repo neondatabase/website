@@ -2,7 +2,7 @@
 title: 'PostgreSQL SUBSTRING() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-substring/
-ogImage: ./img/wp-content-uploads-2015-09-PostgreSQL-substring-function-example.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-PostgreSQL-substring-function-example.jpg
 tableOfContents: true
 ---
 
@@ -94,7 +94,7 @@ In the example, we extract a substring that has a length of 8, starting at the f
 
 
 
-![PostgreSQL substring function example](./img/wp-content-uploads-2015-09-PostgreSQL-substring-function-example.jpg)
+![PostgreSQL substring function example](/postgresqltutorial_data/wp-content-uploads-2015-09-PostgreSQL-substring-function-example.jpg)
 
 
 
@@ -159,7 +159,7 @@ We'll use the `customer` table from the [sample database](https://www.postgresql
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

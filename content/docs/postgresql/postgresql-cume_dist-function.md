@@ -2,7 +2,7 @@
 title: 'PostgreSQL CUME_DIST Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-cume_dist-function/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
 tableOfContents: true
 ---
 
@@ -150,7 +150,7 @@ Here is the output:
 
 
 
-![PostgreSQL CUME_DIST Function over a result set example](./img/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png)
+![PostgreSQL CUME_DIST Function over a result set example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png)
 
 
 
@@ -185,7 +185,7 @@ Here is the output:
 
 
 
-![PostgreSQL CUME_DIST Function over a partition example](./img/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-partition-example.png)
+![PostgreSQL CUME_DIST Function over a partition example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-partition-example.png)
 
 
 

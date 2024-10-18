@@ -2,7 +2,7 @@
 title: 'PostgreSQL EXPLAIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-explain
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
 tableOfContents: true
 ---
 
@@ -142,7 +142,7 @@ The output is as follows:
 
 
 
-![PostgreSQL EXPLAIN - shows plan for a simple query](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png)
+![PostgreSQL EXPLAIN - shows plan for a simple query](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png)
 
 
 
@@ -160,7 +160,7 @@ Here is the output:
 
 
 
-![PostgreSQL EXPLAIN - shows plan for a query with an index](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-query-with-an-index.png)
+![PostgreSQL EXPLAIN - shows plan for a query with an index](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-query-with-an-index.png)
 
 
 
@@ -183,7 +183,7 @@ WHERE
 
 
 
-![PostgreSQL EXPLAIN - shows plan without costs](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-without-costs.png)
+![PostgreSQL EXPLAIN - shows plan without costs](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-without-costs.png)
 
 
 
@@ -201,7 +201,7 @@ The output is:
 
 
 
-![PostgreSQL EXPLAIN - shows plan with an aggregate function](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-with-an-aggregate-function.png)
+![PostgreSQL EXPLAIN - shows plan with an aggregate function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-with-an-aggregate-function.png)
 
 
 
@@ -231,7 +231,7 @@ The output is:
 
 
 
-![PostgreSQL EXPLAIN - shows plan for a join](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-join.png)
+![PostgreSQL EXPLAIN - shows plan for a join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-join.png)
 
 
 
@@ -261,7 +261,7 @@ Here is the output:
 
 
 
-![PostgreSQL EXPLAIN ANALYZE output](./img/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-ANALYZE-output.png)
+![PostgreSQL EXPLAIN ANALYZE output](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-ANALYZE-output.png)
 
 
 

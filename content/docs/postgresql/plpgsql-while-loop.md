@@ -2,7 +2,7 @@
 title: 'PL/pgSQL While Loop'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/pl-pgsql-while-loop/
-ogImage: ./img/wp-content-uploads-2015-09-plpgsql-WHILE-loop.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-WHILE-loop.png
 tableOfContents: true
 ---
 
@@ -72,7 +72,7 @@ The following flowchart illustrates the `while` loop statement:
 
 
 
-![PL/pgSQL WHILE loop](./img/wp-content-uploads-2015-09-plpgsql-WHILE-loop.png)
+![PL/pgSQL WHILE loop](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-WHILE-loop.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL ARRAY_AGG Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-aggregate-functions/postgresql-array_agg/
-ogImage: ./img/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-example.png
 tableOfContents: true
 ---
 
@@ -105,7 +105,7 @@ Here is the partial output:
 
 
 
-![](./img/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-example.png)
 
 
 
@@ -157,7 +157,7 @@ The following shows the partial output:
 
 
 
-![](./img/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-with-ORDER-BY-clause.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-with-ORDER-BY-clause.png)
 
 
 
@@ -198,7 +198,7 @@ This picture shows the partial output of the query:
 
 
 
-![](./img/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-with-ORDER-BY-clause-example-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-with-ORDER-BY-clause-example-2.png)
 
 
 

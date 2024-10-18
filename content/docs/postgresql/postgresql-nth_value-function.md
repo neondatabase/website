@@ -2,7 +2,7 @@
 title: 'PostgreSQL NTH_VALUE Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-nth_value-function/
-ogImage: ./img/wp-content-uploads-2019-05-products-table-sample-data.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png
 tableOfContents: true
 ---
 
@@ -85,7 +85,7 @@ We will use the `products` table created in the [window functions](https://www.p
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-sample-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 
 
 
@@ -119,7 +119,7 @@ Here is the output:
 
 
 
-![PostgreSQL NTH_VALUE function over a result set example](./img/wp-content-uploads-2019-05-PostgreSQL-NTH_VALUE-function-over-a-result-set-example.png)
+![PostgreSQL NTH_VALUE function over a result set example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-NTH_VALUE-function-over-a-result-set-example.png)
 
 
 
@@ -165,7 +165,7 @@ The following picture illustrates the output:
 
 
 
-![PostgreSQL NTH_VALUE function over a partition example](./img/wp-content-uploads-2019-05-PostgreSQL-NTH_VALUE-function-over-a-partition-example.png)
+![PostgreSQL NTH_VALUE function over a partition example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-NTH_VALUE-function-over-a-partition-example.png)
 
 
 

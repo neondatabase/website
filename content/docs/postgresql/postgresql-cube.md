@@ -2,7 +2,7 @@
 title: 'PostgreSQL CUBE'
 redirectFrom: 
             - /docs/postgresql/postgresql-cube
-ogImage: ./img/wp-content-uploads-2018-03-sales-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-sales-table.png
 tableOfContents: true
 ---
 
@@ -102,7 +102,7 @@ We will use the `sales` table created in the `GROUPING SETS` tutorial for the de
 
 
 
-![Sales Table](./img/wp-content-uploads-2018-03-sales-table.png)
+![Sales Table](/postgresqltutorial_data/wp-content-uploads-2018-03-sales-table.png)
 
 
 
@@ -130,7 +130,7 @@ Here is the output:
 
 
 
-![PostgreSQL CUBE example](./img/wp-content-uploads-2018-03-PostgreSQL-CUBE-example.png)
+![PostgreSQL CUBE example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CUBE-example.png)
 
 
 
@@ -155,7 +155,7 @@ ORDER BY
 
 
 
-![PostgreSQL CUBE - partial cube example](./img/wp-content-uploads-2018-03-PostgreSQL-CUBE-partial-cube-example.png)
+![PostgreSQL CUBE - partial cube example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CUBE-partial-cube-example.png)
 
 
 

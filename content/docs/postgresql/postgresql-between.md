@@ -2,7 +2,7 @@
 title: 'PostgreSQL BETWEEN'
 redirectFrom: 
             - /docs/postgresql/postgresql-between
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -105,7 +105,7 @@ Let's take a look at the `payment`table in the [sample database](https://www.pos
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 

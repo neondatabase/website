@@ -2,7 +2,7 @@
 title: 'PostgreSQL UNION'
 redirectFrom: 
             - /docs/postgresql/postgresql-union
-ogImage: ./img/wp-content-uploads-2020-07-PostgresQL-UNION.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgresQL-UNION.png
 tableOfContents: true
 ---
 
@@ -91,7 +91,7 @@ The following Venn diagram illustrates how the `UNION` works:
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgresQL-UNION.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgresQL-UNION.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL INTERSECT Operator'
 redirectFrom: 
             - /docs/postgresql/postgresql-intersect
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-INTERSECT-Operator-300x206.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-INTERSECT-Operator-300x206.png
 tableOfContents: true
 ---
 
@@ -67,7 +67,7 @@ The following diagram illustrates how the `INTERSECT` operator combines the resu
 
 
 
-![PostgreSQL INTERSECT Operator](./img/wp-content-uploads-2016-06-PostgreSQL-INTERSECT-Operator-300x206.png)
+![PostgreSQL INTERSECT Operator](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-INTERSECT-Operator-300x206.png)
 
 
 

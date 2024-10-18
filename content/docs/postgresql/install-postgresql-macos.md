@@ -2,7 +2,7 @@
 title: 'Install PostgreSQL macOS'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/install-postgresql-macos/
-ogImage: ./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-1.png
 tableOfContents: true
 ---
 
@@ -50,7 +50,7 @@ First, launch the setup wizard by double-click the installer file:
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-1.png)
 
 
 
@@ -62,7 +62,7 @@ Second, select the directory where the PostgreSQL will be installed and click th
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-2.png)
 
 
 
@@ -74,7 +74,7 @@ Third, select the components that you want to install, uncheck the Stack Builder
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-3.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-3.png)
 
 
 
@@ -86,7 +86,7 @@ Fourth, specify a directory where PostgreSQL stores the data and click the Next 
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-4.png)
 
 
 
@@ -98,7 +98,7 @@ Fifth, enter the password for the **postgres **user account. You should note dow
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-5.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-5.png)
 
 
 
@@ -110,7 +110,7 @@ Sixth, specify the port number on which the PostgreSQL server will listen. By de
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-6.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-6.png)
 
 
 
@@ -122,7 +122,7 @@ Seventh, select the locale used by PostgreSQL. By default, PostgreSQL uses the l
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-7.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-7.png)
 
 
 
@@ -134,7 +134,7 @@ Eighth, review the installation information. If everything looks correct, click 
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-8.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-8.png)
 
 
 
@@ -146,7 +146,7 @@ Ninth, click the Next button to start installing the PostgreSQL database server 
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-9.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-9.png)
 
 
 
@@ -158,7 +158,7 @@ It will take few mintues to complete the installation.
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-step-10.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-step-10.png)
 
 
 
@@ -170,7 +170,7 @@ Finally, click the Finish button once the installation is completed:
 
 
 
-![](./img/wp-content-uploads-2020-07-Install-PostgreSQL-step-11.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Install-PostgreSQL-step-11.png)
 
 
 
@@ -200,7 +200,7 @@ Third, right-click the PostgreSQL 12 and select **Create > Database..** to open 
 
 
 
-![](./img/wp-content-uploads-2020-07-Restore-Sample-Database-Step-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-1.png)
 
 
 
@@ -212,7 +212,7 @@ Fourth, enter dvdrental as the database, postgres as the owner, and click the Sa
 
 
 
-![](./img/wp-content-uploads-2020-07-Restore-Sample-Database-Step-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-2.png)
 
 
 
@@ -230,7 +230,7 @@ Seventh, right-click the **dvdrental **database and select the **Restore...** me
 
 
 
-![](./img/wp-content-uploads-2020-07-Restore-Sample-Database-Step-3.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-3.png)
 
 
 
@@ -242,7 +242,7 @@ Eighth, select the directory as the Format (1), the directory that contains samp
 
 
 
-![](./img/wp-content-uploads-2020-07-Restore-Sample-Database-Step-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-4.png)
 
 
 
@@ -254,7 +254,7 @@ It will take few seconds to restore the sample database. Once the restoration co
 
 
 
-![](./img/wp-content-uploads-2020-07-Restore-Sample-Database-Step-5.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-5.png)
 
 
 

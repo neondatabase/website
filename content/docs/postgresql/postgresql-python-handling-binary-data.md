@@ -2,7 +2,7 @@
 title: 'PostgreSQL Python: Handling Binary Data'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/blob/
-ogImage: ./img/wp-content-uploads-2016-06-parts_part_drawings_tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-parts_part_drawings_tables.png
 tableOfContents: true
 ---
 
@@ -26,7 +26,7 @@ Let's take a look at the `part_drawings` table.
 
 
 
-![parts_part_drawings_tables](./img/wp-content-uploads-2016-06-parts_part_drawings_tables.png)
+![parts_part_drawings_tables](/postgresqltutorial_data/wp-content-uploads-2016-06-parts_part_drawings_tables.png)
 
 
 

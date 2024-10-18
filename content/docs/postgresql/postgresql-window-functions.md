@@ -1,8 +1,6 @@
 ---
 title: 'PostgreSQL Window Functions'
-redirectFrom: 
-            - /docs/postgresql/postgresql-window-function/
-ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---
 
@@ -25,7 +23,7 @@ First, [create two tables](/docs/postgresql/postgresql-create-table) named `prod
 
 
 
-![](./img/wp-content-uploads-2016-06-products_product_groups_tables.png)
+![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
 
 
@@ -82,13 +80,13 @@ VALUES
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-sample-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 
 
 
 
 
-![](./img/wp-content-uploads-2019-05-product_groups-table-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-product_groups-table-data.png)
 
 
 
@@ -123,7 +121,7 @@ FROM
 
 
 
-![PostgreSQL Window Function - AVG function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-function.png)
+![PostgreSQL Window Function - AVG function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-function.png)
 
 
 
@@ -150,7 +148,7 @@ GROUP BY
 
 
 
-![PostgreSQL Window Function - AVG function with GROUP BY](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-function-with-GROUP-BY.png)
+![PostgreSQL Window Function - AVG function with GROUP BY](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-function-with-GROUP-BY.png)
 
 
 
@@ -198,7 +196,7 @@ FROM
 
 
 
-![](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-window-function.png)
+![](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-AVG-window-function.png)
 
 
 
@@ -442,7 +440,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - ROW_NUMBER function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-ROW_NUMBER-function.png)
+![PostgreSQL Window Function - ROW_NUMBER function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-ROW_NUMBER-function.png)
 
 
 
@@ -479,7 +477,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - RANK function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-RANK-function.png)
+![PostgreSQL Window Function - RANK function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-RANK-function.png)
 
 
 
@@ -516,7 +514,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - DENSE_RANK function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-DENSE_RANK-function.png)
+![PostgreSQL Window Function - DENSE_RANK function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-DENSE_RANK-function.png)
 
 
 
@@ -565,7 +563,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - FIRST_VALUE function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-FIRST_VALUE-function.png)
+![PostgreSQL Window Function - FIRST_VALUE function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-FIRST_VALUE-function.png)
 
 
 
@@ -597,7 +595,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - LAST_VALUE function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LAST_VALUE-function.png)
+![PostgreSQL Window Function - LAST_VALUE function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LAST_VALUE-function.png)
 
 
 
@@ -680,7 +678,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - LAG function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LAG-function.png)
+![PostgreSQL Window Function - LAG function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LAG-function.png)
 
 
 
@@ -716,7 +714,7 @@ INNER JOIN product_groups USING (group_id);
 
 
 
-![PostgreSQL Window Function - LEAD function](./img/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LEAD-function.png)
+![PostgreSQL Window Function - LEAD function](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Window-Function-LEAD-function.png)
 
 
 

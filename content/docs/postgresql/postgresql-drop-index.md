@@ -2,7 +2,7 @@
 title: 'PostgreSQL DROP INDEX'
 redirectFrom: 
             - /docs/postgresql/postgresql-indexes/postgresql-drop-index/
-ogImage: ./img/wp-content-uploads-2018-12-actor.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-actor.png
 tableOfContents: true
 ---
 
@@ -150,7 +150,7 @@ We will use the `actor` table from the [sample database](https://www.postgresqlt
 
 
 
-![actor](./img/wp-content-uploads-2018-12-actor.png)
+![actor](/postgresqltutorial_data/wp-content-uploads-2018-12-actor.png)
 
 
 

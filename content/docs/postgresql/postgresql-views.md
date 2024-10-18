@@ -1,13 +1,11 @@
 ---
 title: 'PostgreSQL Views'
-redirectFrom: 
-            - /docs/postgresql/postgresql-views/
-ogImage: ./img/wp-content-uploads-2015-05-PostgreSQL-View.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-PostgreSQL-View.png
 tableOfContents: true
 ---
 
 
-![PostgreSQL Views](./img/wp-content-uploads-2015-05-PostgreSQL-View.png)
+![PostgreSQL Views](/postgresqltutorial_data/wp-content-uploads-2015-05-PostgreSQL-View.png)
 
 
 

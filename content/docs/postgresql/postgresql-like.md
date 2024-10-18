@@ -2,7 +2,7 @@
 title: 'PostgreSQL LIKE'
 redirectFrom: 
             - /docs/postgresql/postgresql-like
-ogImage: ./img/wp-content-uploads-2019-05-customer.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
 
@@ -187,7 +187,7 @@ We'll use the `customer` table from the [sample database](https://www.postgresql
 
 
 
-![customer table - PostgreSQL LIKE and ILIKE examples](./img/wp-content-uploads-2019-05-customer.png)
+![customer table - PostgreSQL LIKE and ILIKE examples](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

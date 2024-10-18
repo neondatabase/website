@@ -1,8 +1,6 @@
 ---
 title: 'PostgreSQL Aggregate Functions'
-redirectFrom: 
-            - /docs/postgresql/postgresql-aggregate-functions/
-ogImage: ./img/wp-content-uploads-2018-03-film_table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
 
@@ -54,7 +52,7 @@ Let's use the `film` table in the [sample database](https://www.postgresqltutori
 
 
 
-![Film table](./img/wp-content-uploads-2018-03-film_table.png)
+![Film table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 
 
 

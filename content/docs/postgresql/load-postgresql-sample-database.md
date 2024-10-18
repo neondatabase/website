@@ -2,7 +2,7 @@
 title: 'Load PostgreSQL Sample Database'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/load-postgresql-sample-database/
-ogImage: ./img/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png
 tableOfContents: true
 ---
 
@@ -291,7 +291,7 @@ Second, right-click the **Databases** and select the **Create > Database...** me
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png)
 
 
 
@@ -299,7 +299,7 @@ Third, enter the database name `dvdrental` and click the **Save **button:
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-database-name.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-database-name.png)
 
 
 
@@ -307,7 +307,7 @@ You'll see the new empty database created under the **Databases** node:
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-sample-database.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-sample-database.png)
 
 
 
@@ -315,7 +315,7 @@ Fourth, right-click on the **dvdrental **database and choose the **Restore...** 
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-restore-db.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-restore-db.png)
 
 
 
@@ -323,7 +323,7 @@ Fifth, enter the path to the sample database file such as **c:\\sampledb\\dvdren
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-restore-from-a-tar-file.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-restore-from-a-tar-file.png)
 
 
 
@@ -331,7 +331,7 @@ Sixth, the restoration process will complete in a few seconds and show the follo
 
 
 
-![](./img/wp-content-uploads-2024-01-PostgreSQL-create-database-completed.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-completed.png)
 
 
 
@@ -339,7 +339,7 @@ Finally, open the `dvdrental` database from the object browser panel, you will f
 
 
 
-![PostgreSQL Load Sample Database - pgAdmin step 3](./img/wp-content-uploads-2019-05-PostgreSQL-Load-Sample-Database-pgAdmin-step-3.png)
+![PostgreSQL Load Sample Database - pgAdmin step 3](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Load-Sample-Database-pgAdmin-step-3.png)
 
 
 

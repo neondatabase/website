@@ -2,7 +2,7 @@
 title: 'Export PostgreSQL Table to CSV File'
 redirectFrom: 
             - /docs/postgresql/export-postgresql-table-to-csv-file
-ogImage: ./img/wp-content-uploads-2015-05-posgresql-import-csv.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg
 tableOfContents: true
 ---
 
@@ -19,7 +19,7 @@ In the previous tutorial, we showed you how to [import data from a CSV file into
 
 
 
-![posgresql export csv](./img/wp-content-uploads-2015-05-posgresql-import-csv.jpg)
+![posgresql export csv](/postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg)
 
 
 
@@ -109,7 +109,7 @@ In this example, the COPY statement exports all data from all columns of the `pe
 
 
 
-![postgresql export csv](./img/wp-content-uploads-2015-05-postgresql-export-csv.jpg)
+![postgresql export csv](/postgresqltutorial_data/wp-content-uploads-2015-05-postgresql-export-csv.jpg)
 
 
 
@@ -136,7 +136,7 @@ TO 'C:\temp\persons_partial_db.csv' DELIMITER ',' CSV HEADER;
 
 
 
-![postgresql export csv partially](./img/wp-content-uploads-2015-05-postgresql-export-csv-partially.jpg)
+![postgresql export csv partially](/postgresqltutorial_data/wp-content-uploads-2015-05-postgresql-export-csv-partially.jpg)
 
 
 
@@ -163,7 +163,7 @@ TO 'C:\temp\persons_email_db.csv' DELIMITER ',' CSV;
 
 
 
-![postgresql export csv partially without header](./img/wp-content-uploads-2015-05-postgresql-export-csv-partially-without-header.jpg)
+![postgresql export csv partially without header](/postgresqltutorial_data/wp-content-uploads-2015-05-postgresql-export-csv-partially-without-header.jpg)
 
 
 

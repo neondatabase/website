@@ -2,7 +2,7 @@
 title: 'PostgreSQL AVG Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function/
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -58,7 +58,7 @@ We will use the following `payment` table in the [dvdrental sample database](htt
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 

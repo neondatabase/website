@@ -2,7 +2,7 @@
 title: 'PostgreSQL Sample Database'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/postgresql-sample-database/
-ogImage: ./img/wp-content-uploads-2018-03-dvd-rental-sample-database-diagram.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-dvd-rental-sample-database-diagram.png
 tableOfContents: true
 ---
 
@@ -59,7 +59,7 @@ The DVD rental database represents the business processes of a DVD rental store.
 
 
 
-## ![PostgreSQL Sample Database Diagram](./img/wp-content-uploads-2018-03-dvd-rental-sample-database-diagram.png "PostgreSQL Sample Database Diagram")
+## ![PostgreSQL Sample Database Diagram](/postgresqltutorial_data/wp-content-uploads-2018-03-dvd-rental-sample-database-diagram.png "PostgreSQL Sample Database Diagram")
 
 
 

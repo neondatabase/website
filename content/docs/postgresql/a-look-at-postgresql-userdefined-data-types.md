@@ -2,7 +2,7 @@
 title: 'A Look at PostgreSQL User-defined Data Types'
 redirectFrom: 
             - /docs/postgresql/postgresql-user-defined-data-types
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-User-defined-Type-Example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-User-defined-Type-Example.png
 tableOfContents: true
 ---
 
@@ -165,7 +165,7 @@ WHERE
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-User-defined-Type-Example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-User-defined-Type-Example.png)
 
 
 
@@ -223,7 +223,7 @@ SELECT * FROM get_film_summary (40);
 
 
 
-![PostgreSQL user-defined type example](./img/wp-content-uploads-2017-03-postgresql-user-defined-type.png)
+![PostgreSQL user-defined type example](/postgresqltutorial_data/wp-content-uploads-2017-03-postgresql-user-defined-type.png)
 
 
 

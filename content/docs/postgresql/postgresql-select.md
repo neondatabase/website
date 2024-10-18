@@ -2,7 +2,7 @@
 title: 'PostgreSQL SELECT'
 redirectFrom: 
             - /docs/postgresql/postgresql-select
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-Select.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Select.png
 tableOfContents: true
 ---
 
@@ -144,7 +144,7 @@ PostgreSQL evaluates the `FROM` clause before the `SELECT` clause in the `SELECT
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Select.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Select.png)
 
 
 
@@ -174,7 +174,7 @@ We will use the following `customer` table in the `dvdrental` [sample\*\* \*\*da
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

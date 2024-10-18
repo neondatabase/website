@@ -2,7 +2,7 @@
 title: 'PostgreSQL FULL OUTER JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-full-outer-join
-ogImage: ./img/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png
 tableOfContents: true
 ---
 
@@ -164,7 +164,7 @@ The following Venn diagram illustrates the `FULL OUTER JOIN` operation:
 
 
 
-![PostgreSQL Join - Full Outer Join](./img/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png)
+![PostgreSQL Join - Full Outer Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png)
 
 
 

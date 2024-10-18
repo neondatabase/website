@@ -2,7 +2,7 @@
 title: 'PostgreSQL ROW_NUMBER Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-row_number/
-ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---
 
@@ -78,7 +78,7 @@ We will use the `products` table created in the [PostgreSQL window function tuto
 
 
 
-![products_product_groups_tables](./img/wp-content-uploads-2016-06-products_product_groups_tables.png)
+![products_product_groups_tables](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
 
 
@@ -90,7 +90,7 @@ The following shows the data in the `products` table:
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-data.png)
 
 
 
@@ -119,7 +119,7 @@ FROM
 
 
 
-![](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-example.png)
 
 
 
@@ -160,7 +160,7 @@ FROM
 
 
 
-![PostgreSQL ROW_NUMBER order by product name](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-order-by-product-name.png)
+![PostgreSQL ROW_NUMBER order by product name](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-order-by-product-name.png)
 
 
 
@@ -196,7 +196,7 @@ FROM
 
 
 
-![PostgreSQL ROW_NUMBER with PARTITION example](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-with-PARTITION-example.png)
+![PostgreSQL ROW_NUMBER with PARTITION example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-with-PARTITION-example.png)
 
 
 
@@ -231,7 +231,7 @@ ORDER BY
 
 
 
-![PostgreSQL ROW_NUMBER and DISTINCT](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-DISTINCT.png)
+![PostgreSQL ROW_NUMBER and DISTINCT](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-DISTINCT.png)
 
 
 
@@ -270,7 +270,7 @@ FROM
 
 
 
-![PostgreSQL ROW_NUMBER and CTE](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-CTE.png)
+![PostgreSQL ROW_NUMBER and CTE](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-CTE.png)
 
 
 
@@ -302,7 +302,7 @@ FROM
 
 
 
-![PostgreSQL ROW_NUMBER and subquery](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-subquery.png)
+![PostgreSQL ROW_NUMBER and subquery](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-and-subquery.png)
 
 
 
@@ -356,7 +356,7 @@ WHERE
 
 
 
-![PostgreSQL ROW_NUMBER with pagination](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-with-pagination.png)
+![PostgreSQL ROW_NUMBER with pagination](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-with-pagination.png)
 
 
 
@@ -408,7 +408,7 @@ WHERE
 
 
 
-![PostgreSQL ROW_NUMBER nth highest lowest example](./img/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-nth-highest-lowest-example.png)
+![PostgreSQL ROW_NUMBER nth highest lowest example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ROW_NUMBER-nth-highest-lowest-example.png)
 
 
 

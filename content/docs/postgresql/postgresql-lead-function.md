@@ -2,7 +2,7 @@
 title: 'PostgreSQL LEAD Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-lead-function/
-ogImage: ./img/wp-content-uploads-2019-05-Sales-sample-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-Sales-sample-table.png
 tableOfContents: true
 ---
 
@@ -146,7 +146,7 @@ SELECT * FROM sales;
 
 
 
-![Sales sample table](./img/wp-content-uploads-2019-05-Sales-sample-table.png)
+![Sales sample table](/postgresqltutorial_data/wp-content-uploads-2019-05-Sales-sample-table.png)
 
 
 
@@ -169,7 +169,7 @@ ORDER BY year;
 
 
 
-![PostgreSQL LEAD Function - Sales by years](./img/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-Sales-by-years.png)
+![PostgreSQL LEAD Function - Sales by years](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-Sales-by-years.png)
 
 
 
@@ -202,7 +202,7 @@ Here is the output:
 
 
 
-![PostgreSQL LEAD Function over a result set example](./img/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-a-result-set-example.png)
+![PostgreSQL LEAD Function over a result set example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-a-result-set-example.png)
 
 
 
@@ -248,7 +248,7 @@ FROM
 
 
 
-![PostgreSQL LEAD Function over result set example](./img/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-result-set-example-2.png)
+![PostgreSQL LEAD Function over result set example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-result-set-example-2.png)
 
 
 
@@ -279,7 +279,7 @@ This picture shows the output:
 
 
 
-![PostgreSQL LEAD Function over a partition example](./img/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-a-partition-example.png)
+![PostgreSQL LEAD Function over a partition example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-LEAD-Function-over-a-partition-example.png)
 
 
 

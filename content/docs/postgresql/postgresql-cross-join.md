@@ -2,7 +2,7 @@
 title: 'PostgreSQL Cross Join'
 redirectFrom: 
             - /docs/postgresql/postgresql-cross-join
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-CROSS-JOIN-illustration.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-CROSS-JOIN-illustration.png
 tableOfContents: true
 ---
 
@@ -148,7 +148,7 @@ The following picture illustrates how the `CROSS JOIN` works when joining the `T
 
 
 
-![PostgreSQL CROSS JOIN illustration](./img/wp-content-uploads-2016-06-PostgreSQL-CROSS-JOIN-illustration.png)
+![PostgreSQL CROSS JOIN illustration](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-CROSS-JOIN-illustration.png)
 
 
 

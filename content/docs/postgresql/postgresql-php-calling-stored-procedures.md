@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Calling Stored Procedures'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/call-stored-procedures/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png
 tableOfContents: true
 ---
 
@@ -269,7 +269,7 @@ try {
 
 
 
-![D:\ref\projects\postgresql\php\stored procedure](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png)
+![D:\ref\projects\postgresql\php\stored procedure](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png)
 
 
 

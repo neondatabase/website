@@ -2,7 +2,7 @@
 title: 'PostgreSQL SUM Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-aggregate-functions/postgresql-sum-function/
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -75,7 +75,7 @@ Let's take some examples of using the `SUM()` function. We'll use the `payment` 
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 
@@ -388,7 +388,7 @@ See the following `rental` table from the [sample database](https://www.postgres
 
 
 
-![](./img/wp-content-uploads-2019-05-rental.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-rental.png)
 
 
 

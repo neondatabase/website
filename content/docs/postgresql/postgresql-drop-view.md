@@ -2,7 +2,7 @@
 title: 'PostgreSQL Drop View'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/postgresql-drop-view/
-ogImage: ./img/wp-content-uploads-2017-08-film-film_category-category-tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---
 
@@ -72,7 +72,7 @@ We'll use the following tables `film`, `film_category`, and `category` from the 
 
 
 
-![film film_category category tables](./img/wp-content-uploads-2017-08-film-film_category-category-tables.png)
+![film film_category category tables](/postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png)
 
 
 

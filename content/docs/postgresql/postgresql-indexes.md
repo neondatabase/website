@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Indexes'
-redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

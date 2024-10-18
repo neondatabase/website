@@ -2,7 +2,7 @@
 title: 'PostgreSQL AGE() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-date-functions/postgresql-age/
-ogImage: ./img/wp-content-uploads-2017-03-rental-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-rental-table.png
 tableOfContents: true
 ---
 
@@ -134,7 +134,7 @@ We'll use the following `rental` table in the [sample database](https://www.post
 
 
 
-![PostgreSQL age Function: Rental Table Sample](./img/wp-content-uploads-2017-03-rental-table.png)
+![PostgreSQL age Function: Rental Table Sample](/postgresqltutorial_data/wp-content-uploads-2017-03-rental-table.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PL/pgSQL Cursor'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-cursor/
-ogImage: ./img/wp-content-uploads-2015-09-plpgsql-cursor.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-cursor.png
 tableOfContents: true
 ---
 
@@ -37,7 +37,7 @@ The following diagram illustrates how to use a cursor in PostgreSQL:
 
 
 
-![PL/pgSQL Cursor](./img/wp-content-uploads-2015-09-plpgsql-cursor.png)
+![PL/pgSQL Cursor](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-cursor.png)
 
 
 

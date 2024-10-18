@@ -2,11 +2,11 @@
 title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-drop-column
-ogImage: ./img/wp-content-uploads-2017-02-PostgreSQL-Drop-Column-300x128.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Drop-Column-300x128.png
 tableOfContents: true
 ---
 
-![PostgreSQL DROP COLUMN](./img/wp-content-uploads-2017-02-PostgreSQL-Drop-Column-300x128.png)
+![PostgreSQL DROP COLUMN](/postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Drop-Column-300x128.png)
 
 
 
@@ -100,7 +100,7 @@ We will create three tables: `books`, `categories`, and `publishers` for the dem
 
 
 
-![PostgreSQL DROP COLUMN Example Diagram](./img/wp-content-uploads-2017-02-PostgreSQL-DROP-COLUMN-Example-Diagram.png)
+![PostgreSQL DROP COLUMN Example Diagram](/postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-DROP-COLUMN-Example-Diagram.png)
 
 
 

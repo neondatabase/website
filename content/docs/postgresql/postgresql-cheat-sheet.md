@@ -1,12 +1,10 @@
 ---
 title: 'PostgreSQL Cheat Sheet'
-redirectFrom: 
-            - /docs/postgresql/postgresql-cheat-sheet/
-ogImage: ./img/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png
 tableOfContents: true
 ---
 
-![PostgreSQL Cheat Sheet](./img/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png)
+![PostgreSQL Cheat Sheet](/postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png)
 
 
 

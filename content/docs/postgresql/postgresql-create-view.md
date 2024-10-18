@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE VIEW'
 redirectFrom: 
             - /docs/postgresql/postgresql-views/managing-postgresql-views/
-ogImage: ./img/wp-content-uploads-2019-05-customer.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
 
@@ -52,7 +52,7 @@ We'll use the `customer` table from the [sample database](https://www.postgresql
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

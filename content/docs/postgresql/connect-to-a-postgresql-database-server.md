@@ -2,7 +2,7 @@
 title: 'Connect to a PostgreSQL Database Server'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/connect-to-postgresql-database/
-ogImage: ./img/wp-content-uploads-2019-05-pgAdmin-4.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-pgAdmin-4.png
 tableOfContents: true
 ---
 
@@ -276,7 +276,7 @@ The pgAdmin application will launch on the web browser as shown in the following
 
 
 
-![](./img/wp-content-uploads-2019-05-pgAdmin-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-pgAdmin-4.png)
 
 
 
@@ -288,7 +288,7 @@ Second, right-click the Servers node and select **Register > Server...** menu to
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4.png)
 
 
 
@@ -300,7 +300,7 @@ Third, enter the server name such as `Local`, and click the **Connection** tab:
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-server-name.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-server-name.png)
 
 
 
@@ -312,7 +312,7 @@ Fourth, enter the host and password for the `postgres` user and click the **Save
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-connection.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-connection.png)
 
 
 
@@ -324,7 +324,7 @@ Fifth, click on the `Servers` node to expand the server. By default, PostgreSQL 
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-databases.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-databases.png)
 
 
 
@@ -336,7 +336,7 @@ Sixth, open the query tool by selecting the menu item **Tool > Query Tool**:
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-query-tool.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-query-tool.png)
 
 
 
@@ -348,7 +348,7 @@ Seventh, enter the query in the **Query Editor** and click the **Execute** butto
 
 
 
-![](./img/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-execute-query.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Connect-to-PostgreSQL-pgadmin4-execute-query.png)
 
 
 

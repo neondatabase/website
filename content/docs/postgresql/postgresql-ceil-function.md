@@ -2,7 +2,7 @@
 title: 'PostgreSQL CEIL() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-ceil
-ogImage: ./img/wp-content-uploads-2017-08-customer-and-payment-tables.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png
 tableOfContents: true
 ---
 
@@ -80,7 +80,7 @@ Let's take the `customer` and `payment` tables in the [sample database](https://
 
 
 
-![customer and payment tables](./img/wp-content-uploads-2017-08-customer-and-payment-tables.png)
+![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png)
 
 
 
@@ -109,7 +109,7 @@ The following picture illustrates the result:
 
 
 
-![PostgreSQL CEIL function example](./img/wp-content-uploads-2017-08-PostgreSQL-CEIL-function-example.png)
+![PostgreSQL CEIL function example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-CEIL-function-example.png)
 
 
 

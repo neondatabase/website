@@ -2,7 +2,7 @@
 title: 'PostgreSQL RIGHT() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-right/
-ogImage: ./img/wp-content-uploads-2019-05-customer.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
 
@@ -135,7 +135,7 @@ See the following `customer` table in the [sample database](https://www.postgres
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

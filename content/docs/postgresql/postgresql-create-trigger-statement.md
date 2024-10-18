@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE TRIGGER Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql/
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-Sample-Table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-Sample-Table.png
 tableOfContents: true
 ---
 
@@ -349,7 +349,7 @@ SELECT * FROM employees;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-Sample-Table.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-Sample-Table.png)
 
 
 
@@ -391,7 +391,7 @@ SELECT * FROM employees;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-after-update.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-after-update.png)
 
 
 
@@ -417,7 +417,7 @@ SELECT * FROM employee_audits;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-example.png)
 
 
 

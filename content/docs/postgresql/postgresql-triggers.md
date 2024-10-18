@@ -1,13 +1,11 @@
 ---
 title: 'PostgreSQL Triggers'
-redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/
-ogImage: ./img/wp-content-uploads-2014-05-PostgreSQL-Trigger.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2014-05-PostgreSQL-Trigger.png
 tableOfContents: true
 ---
 
 
-![](./img/wp-content-uploads-2014-05-PostgreSQL-Trigger.png)
+![](/postgresqltutorial_data/wp-content-uploads-2014-05-PostgreSQL-Trigger.png)
 
 
 

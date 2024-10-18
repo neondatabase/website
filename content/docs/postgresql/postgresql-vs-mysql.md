@@ -1,8 +1,6 @@
 ---
 title: 'PostgreSQL vs. MySQL'
-redirectFrom: 
-            - /docs/postgresql/postgresql-vs-mysql
-ogImage: ./img/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg
 tableOfContents: true
 ---
 
@@ -22,7 +20,7 @@ The following table compares the features of PostgreSQL 16.x vs. MySQL 8.x:
 
 
 
-![PostgreSQL vs. MySQL](./img/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg)
+![PostgreSQL vs. MySQL](/postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg)
 
 
 

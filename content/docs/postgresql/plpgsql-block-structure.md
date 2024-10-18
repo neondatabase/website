@@ -2,7 +2,7 @@
 title: 'PL/pgSQL Block Structure'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-block-structure/
-ogImage: ./img/wp-content-uploads-2020-07-plpgSQL-block-Structure.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-plpgSQL-block-Structure.png
 tableOfContents: true
 ---
 
@@ -145,7 +145,7 @@ To execute a block from pgAdmin, you click the **Execute** button as shown in th
 
 
 
-![](./img/wp-content-uploads-2020-07-plpgSQL-block-Structure.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-plpgSQL-block-Structure.png)
 
 
 
@@ -233,7 +233,7 @@ The following picture illustrates an outer block and subblocks:
 
 
 
-![plpgsql block structure](./img/wp-content-uploads-2019-01-plpgsql-block-structure.png)
+![plpgsql block structure](/postgresqltutorial_data/wp-content-uploads-2019-01-plpgsql-block-structure.png)
 
 
 

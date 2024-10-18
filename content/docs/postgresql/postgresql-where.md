@@ -2,7 +2,7 @@
 title: 'PostgreSQL WHERE'
 redirectFrom: 
             - /docs/postgresql/postgresql-where
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-WHERE.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-WHERE.png
 tableOfContents: true
 ---
 
@@ -76,7 +76,7 @@ PostgreSQL evaluates the `WHERE` clause after the `FROM` clause but before the `
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-WHERE.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-WHERE.png)
 
 
 
@@ -138,7 +138,7 @@ We will use the `customer` table from the [sample database](https://www.postgres
 
 
 
-![customer table](./img/wp-content-uploads-2019-05-customer.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
 
 

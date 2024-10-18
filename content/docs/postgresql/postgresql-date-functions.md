@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Date Functions'
-redirectFrom: 
-            - /docs/postgresql/postgresql-date-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

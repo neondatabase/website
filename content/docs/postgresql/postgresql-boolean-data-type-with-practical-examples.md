@@ -2,7 +2,7 @@
 title: 'PostgreSQL Boolean Data Type with Practical Examples'
 redirectFrom: 
             - /docs/postgresql/postgresql-boolean
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Boolean-300x146.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Boolean-300x146.png
 tableOfContents: true
 ---
 
@@ -19,7 +19,7 @@ tableOfContents: true
 
 
 
-![PostgreSQL Boolean](./img/wp-content-uploads-2016-06-PostgreSQL-Boolean-300x146.png)
+![PostgreSQL Boolean](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Boolean-300x146.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'How to Develop a PL/pgSQL Function That Returns a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-function-returns-a-table/
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -46,7 +46,7 @@ We will use the `film` table from the [sample database](https://www.postgresqltu
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL HAVING'
 redirectFrom: 
             - /docs/postgresql/postgresql-having
-ogImage: ./img/wp-content-uploads-2019-12-payment.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---
 
@@ -90,7 +90,7 @@ Let's take a look at the `payment` table in the [sample database](https://www.po
 
 
 
-![payment](./img/wp-content-uploads-2019-12-payment.png)
+![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 
 
 
@@ -174,7 +174,7 @@ See the following `customer` table from the [sample database](https://www.postgr
 
 
 
-![customer table](./img/wp-content-uploads-2013-05-customer-table.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png)
 
 
 

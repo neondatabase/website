@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE TABLE AS'
 redirectFrom: 
             - /docs/postgresql/postgresql-create-table-as
-ogImage: ./img/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png
 tableOfContents: true
 ---
 
@@ -177,7 +177,7 @@ ORDER BY title;
 
 
 
-![PostgreSQL CREATE TABLE AS data verification](./img/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png)
+![PostgreSQL CREATE TABLE AS data verification](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png)
 
 
 
@@ -203,7 +203,7 @@ It returns the following output:
 
 
 
-![PostgreSQL CREATE TABLE AS example](./img/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-example.png)
+![PostgreSQL CREATE TABLE AS example](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-example.png)
 
 
 
@@ -263,7 +263,7 @@ The following is the output:
 
 
 
-![PostgreSQL CREATE TABLE AS with explicit column names](./img/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-with-explicit-column-names.png)
+![PostgreSQL CREATE TABLE AS with explicit column names](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-with-explicit-column-names.png)
 
 
 

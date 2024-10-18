@@ -2,7 +2,7 @@
 title: 'PostgreSQL CREATE SCHEMA'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-create-schema/
-ogImage: ./img/wp-content-uploads-2019-05-postgresql-create-schema-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-create-schema-example.png
 tableOfContents: true
 ---
 
@@ -113,7 +113,7 @@ This picture shows the output:
 
 
 
-![postgresql create schema example](./img/wp-content-uploads-2019-05-postgresql-create-schema-example.png)
+![postgresql create schema example](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-create-schema-example.png)
 
 
 

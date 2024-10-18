@@ -2,7 +2,7 @@
 title: 'PostgreSQL RANK Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-window-function/postgresql-rank-function/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-sample-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-RANK-function-sample-table.png
 tableOfContents: true
 ---
 
@@ -88,7 +88,7 @@ FROM
 
 
 
-![PostgreSQL RANK function - sample table](./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-sample-table.png)
+![PostgreSQL RANK function - sample table](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-RANK-function-sample-table.png)
 
 
 
@@ -112,7 +112,7 @@ The following picture shows the output:
 
 
 
-![](./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-RANK-function-example.png)
 
 
 
@@ -133,7 +133,7 @@ We'll use the `products` table to demonstrate the `RANK()` function:
 
 
 
-![](./img/wp-content-uploads-2016-06-products_product_groups_tables.png)
+![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
 
 
@@ -141,7 +141,7 @@ This picture shows the data of the `products` table:
 
 
 
-![](./img/wp-content-uploads-2019-05-products-table-sample-data.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 
 
 
@@ -167,7 +167,7 @@ FROM
 
 
 
-![PostgreSQL RANK function over the result set](./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-over-the-result-set.png)
+![PostgreSQL RANK function over the result set](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-RANK-function-over-the-result-set.png)
 
 
 
@@ -205,7 +205,7 @@ FROM
 
 
 
-![PostgreSQL RANK function over partition](./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-over-partition.png)
+![PostgreSQL RANK function over partition](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-RANK-function-over-partition.png)
 
 
 

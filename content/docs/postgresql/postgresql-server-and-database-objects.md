@@ -2,7 +2,7 @@
 title: 'PostgreSQL Server and Database Objects'
 redirectFrom: 
             - /docs/postgresql/postgresql-server-and-database-objects
-ogImage: ./img/wp-content-uploads-2019-05-postgresql-databases.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png
 tableOfContents: true
 ---
 
@@ -49,7 +49,7 @@ A database is a container of other objects such as tables, [views](https://www.p
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-databases.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png)
 
 
 
@@ -73,7 +73,7 @@ A special feature of PostgreSQL is table inheritance, meaning that a table (chil
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-tables.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-tables.png)
 
 
 
@@ -91,7 +91,7 @@ A [schema](https://www.postgresqltutorial.com/postgresql-administration/postgres
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-schema.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-schema.png)
 
 
 
@@ -128,7 +128,7 @@ The following picture shows the default tablespaces:
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-tablespace.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-tablespace.png)
 
 
 
@@ -146,7 +146,7 @@ The following picture shows the default tablespaces:
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-views.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-views.png)
 
 
 
@@ -164,7 +164,7 @@ A [function](https://www.postgresqltutorial.com/postgresql-stored-procedures/) i
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-functions.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-functions.png)
 
 
 
@@ -206,7 +206,7 @@ Casts enable you to convert one data type into another data type. Casts backed b
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-sequence.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-sequence.png)
 
 
 
@@ -224,7 +224,7 @@ PostgreSQL introduced extension concept since version 9.1 to wrap other objects 
 
 
 
-![](./img/wp-content-uploads-2019-05-postgresql-extension.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-extension.png)
 
 
 

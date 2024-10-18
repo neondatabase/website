@@ -2,7 +2,7 @@
 title: 'PostgreSQL GROUP BY'
 redirectFrom: 
             - /docs/postgresql/postgresql-group-by
-ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-GROUP-BY-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-GROUP-BY-1.png
 tableOfContents: true
 ---
 
@@ -64,7 +64,7 @@ PostgreSQL evaluates the `GROUP BY` clause after the `FROM` and `WHERE` clauses 
 
 
 
-![PostgreSQL GROUP BY](./img/wp-content-uploads-2020-07-PostgreSQL-GROUP-BY-1.png)
+![PostgreSQL GROUP BY](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-GROUP-BY-1.png)
 
 
 
@@ -76,7 +76,7 @@ Let's take a look at the `payment` table in the [sample database](https://www.po
 
 
 
-![payment](./img/wp-content-uploads-2019-12-payment.png)
+![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 
 
 

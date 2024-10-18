@@ -2,7 +2,7 @@
 title: 'PostgreSQL COUNT Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-aggregate-functions/postgresql-count-function/
-ogImage: ./img/wp-content-uploads-2019-12-payment.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---
 
@@ -103,7 +103,7 @@ Let's use the `payment` table in the [sample database](https://www.postgresqltut
 
 
 
-![payment](./img/wp-content-uploads-2019-12-payment.png)
+![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Updating Data In a Table'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/update/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png
 tableOfContents: true
 ---
 
@@ -151,7 +151,7 @@ In the index.php script, we connected to the PostgreSQL database and called the 
 
 
 
-![PostgreSQL PHP Update](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png)
+![PostgreSQL PHP Update](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
 redirectFrom: 
             - /docs/postgresql/postgresql-csharp/postgresql-csharp-connect/
-ogImage: ./img/wp-content-uploads-2024-05-PostgreSQL-C-Connect.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2024-05-PostgreSQL-C-Connect.png
 tableOfContents: true
 ---
 
@@ -192,7 +192,7 @@ Fifth, right-click the `appsettings.json` file, choose the **Properties...** and
 
 
 
-![PostgreSQL C# Connect](./img/wp-content-uploads-2024-05-PostgreSQL-C-Connect.png)
+![PostgreSQL C# Connect](/postgresqltutorial_data/wp-content-uploads-2024-05-PostgreSQL-C-Connect.png)
 
 
 

@@ -1,8 +1,6 @@
 ---
 title: 'PostgreSQL JDBC'
-redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/
-ogImage: ./img/wp-content-uploads-2016-02-PostgreSQL-JDBC.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-02-PostgreSQL-JDBC.jpg
 tableOfContents: true
 ---
 
@@ -14,7 +12,7 @@ JDBC, as the core API of Java, offers a standardized interface for communication
 
 
 
-![PostgreSQL JDBC Tutorial](./img/wp-content-uploads-2016-02-PostgreSQL-JDBC.jpg)
+![PostgreSQL JDBC Tutorial](/postgresqltutorial_data/wp-content-uploads-2016-02-PostgreSQL-JDBC.jpg)
 
 
 

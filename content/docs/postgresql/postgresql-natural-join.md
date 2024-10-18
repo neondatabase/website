@@ -2,7 +2,7 @@
 title: 'PostgreSQL NATURAL JOIN'
 redirectFrom: 
             - /docs/postgresql/postgresql-natural-join
-ogImage: ./img/wp-content-uploads-2019-05-city.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-city.png
 tableOfContents: true
 ---
 
@@ -328,11 +328,11 @@ Consider the following `city` and `country` tables from the [sample database](ht
 
 
 
-![](./img/wp-content-uploads-2019-05-city.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-city.png)
 
 
 
-![](./img/wp-content-uploads-2019-05-country.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-country.png)
 
 
 

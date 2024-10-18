@@ -2,7 +2,7 @@
 title: 'PostgreSQL DROP TRIGGER Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-triggers/postgresql-drop-trigger/
-ogImage: ./img/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png
 tableOfContents: true
 ---
 
@@ -93,7 +93,7 @@ FOR EACH ROW
 
 
 
-![PostgreSQL DROP Trigger Example](./img/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png)
+![PostgreSQL DROP Trigger Example](/postgresqltutorial_data/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png)
 
 
 

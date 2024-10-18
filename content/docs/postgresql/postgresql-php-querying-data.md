@@ -2,7 +2,7 @@
 title: 'PostgreSQL PHP: Querying Data'
 redirectFrom: 
             - /docs/postgresql/postgresql-php/query/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png
 tableOfContents: true
 ---
 
@@ -76,7 +76,7 @@ To test the `all()` method, we use the following code in the `index.php` file.
 
 
 
-![PostgreSQL PHP Query Example](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png)
+![PostgreSQL PHP Query Example](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png)
 
 
 
@@ -148,7 +148,7 @@ The following screenshot illustrates the output of the index.php file.
 
 
 
-![PostgreSQL PHP Query all rows example](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-all-rows-example.png)
+![PostgreSQL PHP Query all rows example](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-all-rows-example.png)
 
 
 

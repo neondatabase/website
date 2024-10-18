@@ -2,7 +2,7 @@
 title: 'PostgreSQL Schema'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-schema/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-Schema-Example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Schema-Example.png
 tableOfContents: true
 ---
 
@@ -213,7 +213,7 @@ The following picture shows the new schema `sales` and the `staff` table that be
 
 
 
-![PostgreSQL Schema Example](./img/wp-content-uploads-2019-05-PostgreSQL-Schema-Example.png)
+![PostgreSQL Schema Example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Schema-Example.png)
 
 
 

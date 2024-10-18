@@ -2,7 +2,7 @@
 title: 'Install PostgreSQL on Windows'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/install-postgresql/
-ogImage: ./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png
 tableOfContents: true
 ---
 
@@ -60,7 +60,7 @@ Step 2. Click the Next button
 
 
 
-![in this tutorial, you will step by step learn how to install PostgreSQL on your local system.](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png)
+![in this tutorial, you will step by step learn how to install PostgreSQL on your local system.](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png)
 
 
 
@@ -69,7 +69,7 @@ Step 3. Specify the installation directory by either choosing your preferred loc
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-2.png)
 
 
 
@@ -92,7 +92,7 @@ For tutorials on this website, you can skill installing Stack Builder. Feel free
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-3.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-3.png)
 
 
 
@@ -100,7 +100,7 @@ Step 5. Choose the database directory to store the data, or accept the default d
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-4.png)
 
 
 
@@ -116,7 +116,7 @@ Step 7. Specify a port number on which the PostgreSQL database server will liste
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-6.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-6.png)
 
 
 
@@ -124,7 +124,7 @@ Step 8. Select the default locale for the PostgreSQL server. If you leave it as 
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-7.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-7.png)
 
 
 
@@ -132,7 +132,7 @@ Step 9. The setup wizard will show the summary PostgreSQL information. Review th
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-8.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-8.png)
 
 
 
@@ -140,7 +140,7 @@ Now, you are ready to install PostgreSQL on your computer. Click the **Next **bu
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-9.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-9.png)
 
 
 
@@ -148,7 +148,7 @@ The installation may take a few minutes to complete.
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-9-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-9-1.png)
 
 
 
@@ -156,7 +156,7 @@ Step 10. Click the **Finish** button to complete the PostgreSQL installation.
 
 
 
-![](./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-10.png)
+![](/postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-10.png)
 
 
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL LIMIT'
 redirectFrom: 
             - /docs/postgresql/postgresql-limit
-ogImage: ./img/wp-content-uploads-2018-03-film_table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
 
@@ -117,7 +117,7 @@ Let's take some examples of using the PostgreSQL `LIMIT` clause. We will use the
 
 
 
-![PostgreSQL LIMIT - Sample Table](./img/wp-content-uploads-2018-03-film_table.png)
+![PostgreSQL LIMIT - Sample Table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 
 
 

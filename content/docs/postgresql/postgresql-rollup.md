@@ -2,7 +2,7 @@
 title: 'PostgreSQL ROLLUP'
 redirectFrom: 
             - /docs/postgresql/postgresql-rollup
-ogImage: ./img/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png
 tableOfContents: true
 ---
 
@@ -172,7 +172,7 @@ ORDER BY
 
 
 
-![PostgreSQL ROLLUP example 2](./img/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png)
+![PostgreSQL ROLLUP example 2](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png)
 
 
 
@@ -201,7 +201,7 @@ ORDER BY
 
 
 
-![PostgreSQL ROLLUP - partial roll up](./img/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-partial-roll-up.png)
+![PostgreSQL ROLLUP - partial roll up](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-partial-roll-up.png)
 
 
 
@@ -209,7 +209,7 @@ See the following `rental` table from the [sample database](https://www.postgres
 
 
 
-![Rental Table](./img/wp-content-uploads-2018-03-rental.png)
+![Rental Table](/postgresqltutorial_data/wp-content-uploads-2018-03-rental.png)
 
 
 
@@ -235,7 +235,7 @@ GROUP BY
 
 
 
-![PostgreSQL ROLLUP example with year month and date](./img/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-with-year-month-and-date.png)
+![PostgreSQL ROLLUP example with year month and date](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-with-year-month-and-date.png)
 
 
 

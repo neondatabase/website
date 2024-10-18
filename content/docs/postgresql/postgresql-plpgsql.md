@@ -1,13 +1,11 @@
 ---
 title: 'PostgreSQL PL/pgSQL'
-redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/
-ogImage: ./img/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png
 tableOfContents: true
 ---
 
 
-![](./img/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png)
+![](/postgresqltutorial_data/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png)
 
 
 

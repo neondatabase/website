@@ -2,7 +2,7 @@
 title: 'PostgreSQL Column Alias'
 redirectFrom: 
             - /docs/postgresql/postgresql-column-alias
-ogImage: ./img/wp-content-uploads-2013-05-customer-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png
 tableOfContents: true
 ---
 
@@ -88,7 +88,7 @@ We'll use the `customer` table from the [sample database](https://www.postgresql
 
 
 
-![customer table](./img/wp-content-uploads-2013-05-customer-table.png)
+![customer table](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png)
 
 
 
@@ -117,7 +117,7 @@ FROM customer;
 
 
 
-![PostgreSQL Column Alias](./img/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-example-1.png)
+![PostgreSQL Column Alias](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-example-1.png)
 
 
 
@@ -146,7 +146,7 @@ This query assigned the `surname` as the alias of the `last_name` column:
 
 
 
-![PostgreSQL Column Alias example](./img/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-Surname-example-1.png)
+![PostgreSQL Column Alias example](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-Surname-example-1.png)
 
 
 
@@ -198,7 +198,7 @@ Note that in PostgreSQL, you use the `||` as the concatenating operator that con
 
 
 
-![PostgreSQL Alias Example](./img/wp-content-uploads-2020-07-PostgreSQL-Alias-Example.png)
+![PostgreSQL Alias Example](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Alias-Example.png)
 
 
 
@@ -227,7 +227,7 @@ FROM
 
 
 
-![PostgreSQL Column Alias Example](./img/wp-content-uploads-2020-07-PostgreSQL-Alias-column-alias-example.png)
+![PostgreSQL Column Alias Example](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Alias-column-alias-example.png)
 
 
 
@@ -270,7 +270,7 @@ FROM
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-with-space.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Column-Alias-with-space.png)
 
 
 

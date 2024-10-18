@@ -2,7 +2,7 @@
 title: 'PostgreSQL ALTER TABLE'
 redirectFrom: 
             - /docs/postgresql/postgresql-alter-table
-ogImage: ./img/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
 tableOfContents: true
 ---
 
@@ -331,7 +331,7 @@ SELECT * FROM links;
 
 
 
-![PostgreSQL ALTER TABLE SET DEFAULT](./img/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png)
+![PostgreSQL ALTER TABLE SET DEFAULT](/postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png)
 
 
 

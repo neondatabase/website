@@ -2,7 +2,7 @@
 title: 'PostgreSQL Data Types'
 redirectFrom: 
             - /docs/postgresql/postgresql-data-types
-ogImage: ./img/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png
 tableOfContents: true
 ---
 
@@ -13,7 +13,7 @@ tableOfContents: true
 
 
 
-## ![PostgreSQL Data Types](./img/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png "PostgreSQL Data Types")Overview of PostgreSQL data types
+## ![PostgreSQL Data Types](/postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png "PostgreSQL Data Types")Overview of PostgreSQL data types
 
 
 

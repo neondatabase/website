@@ -2,7 +2,7 @@
 title: 'PostgreSQL EXCEPT'
 redirectFrom: 
             - /docs/postgresql/postgresql-except
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-EXCEPT-300x202.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-EXCEPT-300x202.png
 tableOfContents: true
 ---
 
@@ -50,7 +50,7 @@ The following Venn diagram illustrates the `EXCEPT` operator:
 
 
 
-![PostgreSQL EXCEPT](./img/wp-content-uploads-2016-06-PostgreSQL-EXCEPT-300x202.png)
+![PostgreSQL EXCEPT](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-EXCEPT-300x202.png)
 
 
 

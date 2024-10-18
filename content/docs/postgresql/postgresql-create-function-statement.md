@@ -2,7 +2,7 @@
 title: 'PostgreSQL Create Function Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/postgresql-create-function/
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -62,7 +62,7 @@ We'll use the `film` table from the [sample database](https://www.postgresqltuto
 
 
 
-![](./img/wp-content-uploads-2019-05-film.png)
+![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 
@@ -157,7 +157,7 @@ Third, enter the above code in the query tool and click the **Execute** button t
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Function-example.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Function-example.png)
 
 
 
@@ -181,7 +181,7 @@ Finally, view the function `get_film_count` in the **Functions **list:
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Create-Function-Function-List.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Function-Function-List.png)
 
 
 

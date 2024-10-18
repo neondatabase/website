@@ -2,7 +2,7 @@
 title: 'PostgreSQL ALTER SCHEMA'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/postgresql-alter-schema/
-ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example.png
 tableOfContents: true
 ---
 
@@ -193,7 +193,7 @@ The output is:
 
 
 
-![PostgreSQL ALTER SCHEMA - change owner example](./img/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example.png)
+![PostgreSQL ALTER SCHEMA - change owner example](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example.png)
 
 
 
@@ -220,7 +220,7 @@ OWNER TO postgres;
 
 
 
-![PostgreSQL ALTER SCHEMA - change owner example 2](./img/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example-2.png)
+![PostgreSQL ALTER SCHEMA - change owner example 2](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example-2.png)
 
 
 

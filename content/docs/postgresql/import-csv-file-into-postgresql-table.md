@@ -2,7 +2,7 @@
 title: 'Import CSV File Into PostgreSQL Table'
 redirectFrom: 
             - /docs/postgresql/import-csv-file-into-posgresql-table
-ogImage: ./img/wp-content-uploads-2015-05-posgresql-import-csv.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg
 tableOfContents: true
 ---
 
@@ -58,7 +58,7 @@ CREATE TABLE persons (
 
 
 
-![posgresql import csv](./img/wp-content-uploads-2015-05-posgresql-import-csv.jpg)
+![posgresql import csv](/postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg)
 
 
 
@@ -70,13 +70,13 @@ Second, prepare a CSV data file with the following format:
 
 
 
-![csv data](./img/wp-content-uploads-2015-05-csv-data.jpg)
+![csv data](/postgresqltutorial_data/wp-content-uploads-2015-05-csv-data.jpg)
 
 
 
 
 
-![csv file](./img/wp-content-uploads-2015-05-csv-file.jpg)
+![csv file](/postgresqltutorial_data/wp-content-uploads-2015-05-csv-file.jpg)
 
 
 
@@ -145,7 +145,7 @@ SELECT * FROM persons;
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Import-CSV.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Import-CSV.png)
 
 
 
@@ -231,7 +231,7 @@ First, right-click the `persons` table and select the **Import/Export...** menu 
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-1.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-1.png)
 
 
 
@@ -243,7 +243,7 @@ Second, (1) switch to import, (2) browse to the import file, (3) select the form
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-2.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-2.png)
 
 
 
@@ -255,7 +255,7 @@ Third, click the columns tab, uncheck the id column, and click the OK button:
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-3.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-3.png)
 
 
 
@@ -267,7 +267,7 @@ Finally, wait for the import process to complete. The following shows the dialog
 
 
 
-![](./img/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-4.png)
+![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Import-CSV-pgAdmin-Step-4.png)
 
 
 

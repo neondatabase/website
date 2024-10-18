@@ -2,7 +2,7 @@
 title: 'PostgreSQL FLOOR() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-floor
-ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
 
@@ -110,7 +110,7 @@ See the following `payment` table in the [sample database](https://www.postgresq
 
 
 
-![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 
 
@@ -144,7 +144,7 @@ The following picture illustrates the result:
 
 
 
-![PostgreSQL FLOOR Function Example](./img/wp-content-uploads-2017-08-PostgreSQL-FLOOR-Function-Example.png)
+![PostgreSQL FLOOR Function Example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-FLOOR-Function-Example.png)
 
 
 

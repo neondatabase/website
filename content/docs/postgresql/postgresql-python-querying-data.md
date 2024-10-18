@@ -2,7 +2,7 @@
 title: 'PostgreSQL Python: Querying Data'
 redirectFrom: 
             - /docs/postgresql/postgresql-python/query/
-ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---
 
@@ -91,7 +91,7 @@ For the demonstration purposes, we will use the `parts`, `vendors`, and `vendor_
 
 
 
-![PostgreSQL Python Sample Database Diagram](./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png)
+![PostgreSQL Python Sample Database Diagram](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png)
 
 
 

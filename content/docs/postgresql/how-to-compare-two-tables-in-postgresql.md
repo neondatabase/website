@@ -2,7 +2,7 @@
 title: 'How to Compare Two Tables in PostgreSQL'
 redirectFrom: 
             - /docs/postgresql/compare-two-tables-in-postgresql
-ogImage: ./img/wp-content-uploads-2015-09-compare-two-tables-postgresql.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-compare-two-tables-postgresql.jpg
 tableOfContents: true
 ---
 
@@ -65,7 +65,7 @@ WHERE
 
 
 
-![compare-two-tables-postgresql](./img/wp-content-uploads-2015-09-compare-two-tables-postgresql.jpg)
+![compare-two-tables-postgresql](/postgresqltutorial_data/wp-content-uploads-2015-09-compare-two-tables-postgresql.jpg)
 
 
 

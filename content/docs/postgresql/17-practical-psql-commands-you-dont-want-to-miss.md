@@ -2,7 +2,7 @@
 title: '17 Practical psql Commands You Don''t Want to Miss'
 redirectFrom: 
             - /docs/postgresql/postgresql-administration/psql-commands/
-ogImage: ./img/wp-content-uploads-2015-07-psql-commands.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-07-psql-commands.jpg
 tableOfContents: true
 ---
 
@@ -321,7 +321,7 @@ It is very handy if you can type the command in your favorite editor. To do this
 
 
 
-![psql commands](./img/wp-content-uploads-2015-07-psql-commands.jpg)
+![psql commands](/postgresqltutorial_data/wp-content-uploads-2015-07-psql-commands.jpg)
 
 
 
@@ -329,7 +329,7 @@ After you type the command in the editor, save it, and close the editor, psql wi
 
 
 
-![psql command example](./img/wp-content-uploads-2015-07-psql-command-example.jpg)
+![psql command example](/postgresqltutorial_data/wp-content-uploads-2015-07-psql-command-example.jpg)
 
 
 
@@ -343,7 +343,7 @@ It is more useful when you edit a function in the editor.
 
 
 
-![psql commadn ef edit function](./img/wp-content-uploads-2015-07-psql-command-ef-edit-function.jpg)
+![psql commadn ef edit function](/postgresqltutorial_data/wp-content-uploads-2015-07-psql-command-ef-edit-function.jpg)
 
 
 

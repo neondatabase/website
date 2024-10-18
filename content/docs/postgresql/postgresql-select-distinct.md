@@ -2,7 +2,7 @@
 title: 'PostgreSQL SELECT DISTINCT'
 redirectFrom: 
             - /docs/postgresql/postgresql-select-distinct
-ogImage: ./img/wp-content-uploads-2019-05-film.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
 
@@ -253,7 +253,7 @@ For example, you may want to know how many rental rates for films from the `film
 
 
 
-![PostgreSQL SELECT DISTINCT - sample table](./img/wp-content-uploads-2019-05-film.png)
+![PostgreSQL SELECT DISTINCT - sample table](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
 
 

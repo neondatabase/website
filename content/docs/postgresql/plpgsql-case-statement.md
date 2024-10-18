@@ -2,7 +2,7 @@
 title: 'PL/pgSQL CASE Statement'
 redirectFrom: 
             - /docs/postgresql/postgresql-plpgsql/plpgsql-case-statement/
-ogImage: ./img/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png
 tableOfContents: true
 ---
 
@@ -143,7 +143,7 @@ The following flowchart illustrates the simple `case` statement in this example:
 
 
 
-![PL/pgSQL simple case statement](./img/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png)
+![PL/pgSQL simple case statement](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png)
 
 
 
@@ -231,7 +231,7 @@ The following diagram illustrates the logic:
 
 
 
-![PL/pgSQL searched case statement](./img/wp-content-uploads-2015-09-plpgsql-searched-case-statement.png)
+![PL/pgSQL searched case statement](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-searched-case-statement.png)
 
 
 

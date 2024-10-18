@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Resources'
-redirectFrom: 
-            - /docs/postgresql/postgresql-resources/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

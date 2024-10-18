@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Administration'
-redirectFrom: 
-            - /docs/postgresql/postgresql-administration/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -2,7 +2,7 @@
 title: 'PostgreSQL ASCII() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-ascii/
-ogImage: ./img/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-example.png
 tableOfContents: true
 ---
 
@@ -72,7 +72,7 @@ The output is:
 
 
 
-![PostgreSQL ASCII function example](./img/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-example.png)
+![PostgreSQL ASCII function example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-example.png)
 
 
 
@@ -91,7 +91,7 @@ The function returns the ASCII code of the letter A which is 65 as follows:
 
 
 
-![PostgreSQL ASCII function - string example](./img/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-string-example.png)
+![PostgreSQL ASCII function - string example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-string-example.png)
 
 
 
@@ -106,7 +106,7 @@ The following example illustrates how to use the `ASCII()` function to get the U
 
 
 
-![PostgreSQL ASCII function - unicode example](./img/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-unicode-example.png)
+![PostgreSQL ASCII function - unicode example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-unicode-example.png)
 
 
 

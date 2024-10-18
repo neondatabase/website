@@ -2,7 +2,7 @@
 title: 'What is PostgreSQL?'
 redirectFrom: 
             - /docs/postgresql/postgresql-getting-started/what-is-postgresql/
-ogImage: ./img/wp-content-uploads-2012-08-What-is-PostgreSQL.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2012-08-What-is-PostgreSQL.png
 tableOfContents: true
 ---
 
@@ -14,7 +14,7 @@ tableOfContents: true
 
 
 
-[![What is PostgreSQL](https://www.postgresqltutorial.com/wp-content/uploads/2012/08/What-is-PostgreSQL.png)](./img/wp-content-uploads-2012-08-What-is-PostgreSQL.png)
+[![What is PostgreSQL](https://www.postgresqltutorial.com/wp-content/uploads/2012/08/What-is-PostgreSQL.png)](/postgresqltutorial_data/wp-content-uploads-2012-08-What-is-PostgreSQL.png)
 
 
 

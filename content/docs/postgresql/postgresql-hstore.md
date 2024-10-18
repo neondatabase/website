@@ -2,7 +2,7 @@
 title: 'PostgreSQL hstore'
 redirectFrom: 
             - /docs/postgresql/postgresql-hstore
-ogImage: ./img/wp-content-uploads-2015-07-postgresql-hstore-query.jpg
+ogImage: /postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg
 tableOfContents: true
 ---
 
@@ -174,7 +174,7 @@ SELECT attr FROM books;
 
 
 
-[![postgresql hstore query](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-query.jpg)](./img/wp-content-uploads-2015-07-postgresql-hstore-query.jpg)
+[![postgresql hstore query](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-query.jpg)](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg)
 
 
 
@@ -203,7 +203,7 @@ FROM
 
 
 
-![postgresql hstore query key](./img/wp-content-uploads-2015-07-postgresql-hstore-query-key.jpg)
+![postgresql hstore query key](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query-key.jpg)
 
 
 
@@ -234,7 +234,7 @@ WHERE
 
 
 
-![postgresql hstore WHERE clause](./img/wp-content-uploads-2015-07-postgresql-hstore-WHERE-clause.jpg)
+![postgresql hstore WHERE clause](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-WHERE-clause.jpg)
 
 
 
@@ -279,7 +279,7 @@ FROM
 
 
 
-![postgresql hstore add key-value](./img/wp-content-uploads-2015-07-postgresql-hstore-add-key-value.jpg)
+![postgresql hstore add key-value](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-add-key-value.jpg)
 
 
 
@@ -354,7 +354,7 @@ WHERE
 
 
 
-![postgesql hstore check key](./img/wp-content-uploads-2015-07-postgesql-hstore-check-key.jpg)
+![postgesql hstore check key](/postgresqltutorial_data/wp-content-uploads-2015-07-postgesql-hstore-check-key.jpg)
 
 
 
@@ -385,7 +385,7 @@ WHERE
 
 
 
-![postgresql hstore check key-pair](./img/wp-content-uploads-2015-07-postgresql-hstore-check-key-pair.jpg)
+![postgresql hstore check key-pair](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-check-key-pair.jpg)
 
 
 
@@ -416,7 +416,7 @@ WHERE
 
 
 
-![postgresql hstore check multiple keys](./img/wp-content-uploads-2015-07-postgresql-hstore-check-multiple-keys.jpg)
+![postgresql hstore check multiple keys](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-check-multiple-keys.jpg)
 
 
 
@@ -451,7 +451,7 @@ FROM
 
 
 
-![postgresql hstore akeys function](./img/wp-content-uploads-2015-07-postgresql-hstore-akeys-function.jpg)
+![postgresql hstore akeys function](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-akeys-function.jpg)
 
 
 
@@ -474,7 +474,7 @@ FROM
 
 
 
-![postgresql hstore skeys function](./img/wp-content-uploads-2015-07-postgresql-hstore-skeys-function.jpg)
+![postgresql hstore skeys function](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-skeys-function.jpg)
 
 
 
@@ -503,7 +503,7 @@ FROM
 
 
 
-[![postgresql hstore avals function](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-avals-function.jpg)](./img/wp-content-uploads-2015-07-postgresql-hstore-avals-function.jpg)
+[![postgresql hstore avals function](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-avals-function.jpg)](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-avals-function.jpg)
 
 
 
@@ -526,7 +526,7 @@ FROM
 
 
 
-![postgresql hstore svals](./img/wp-content-uploads-2015-07-postgresql-hstore-svals.jpg)
+![postgresql hstore svals](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-svals.jpg)
 
 
 
@@ -556,7 +556,7 @@ FROM
 
 
 
-![postgresql hstore to json](./img/wp-content-uploads-2015-07-postgresql-hstore-to-json.jpg)
+![postgresql hstore to json](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-to-json.jpg)
 
 
 
@@ -586,7 +586,7 @@ FROM
 
 
 
-![postgresql hstore to sets](./img/wp-content-uploads-2015-07-postgresql-hstore-to-sets.jpg)
+![postgresql hstore to sets](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-to-sets.jpg)
 
 
 

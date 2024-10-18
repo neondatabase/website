@@ -1,7 +1,5 @@
 ---
 title: 'Getting Started with PostgreSQL'
-redirectFrom: 
-            - /docs/postgresql/postgresql-getting-started/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

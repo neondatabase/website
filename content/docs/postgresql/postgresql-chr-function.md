@@ -2,7 +2,7 @@
 title: 'PostgreSQL CHR() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-string-functions/postgresql-chr/
-ogImage: ./img/wp-content-uploads-2017-08-PostgreSQL-CHR-ASCII-example.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-CHR-ASCII-example.png
 tableOfContents: true
 ---
 
@@ -103,7 +103,7 @@ The query returns character A for 65 and a for 97:
 
 
 
-![PostgreSQL CHR - ASCII example](./img/wp-content-uploads-2017-08-PostgreSQL-CHR-ASCII-example.png)
+![PostgreSQL CHR - ASCII example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-CHR-ASCII-example.png)
 
 
 
@@ -130,7 +130,7 @@ The output for the Unicode code point 937 is Ω, which is what we expected.
 
 
 
-![PostgreSQL CHR - Unicode example](./img/wp-content-uploads-2017-08-PostgreSQL-CHR-Unicode-example.png)
+![PostgreSQL CHR - Unicode example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-CHR-Unicode-example.png)
 
 
 

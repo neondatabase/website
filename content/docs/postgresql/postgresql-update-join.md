@@ -2,7 +2,7 @@
 title: 'PostgreSQL UPDATE Join'
 redirectFrom: 
             - /docs/postgresql/postgresql-update-join
-ogImage: ./img/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png
+ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png
 tableOfContents: true
 ---
 
@@ -51,7 +51,7 @@ Let's take a look at an example to understand how the PostgreSQL `UPDATE` join w
 
 
 
-![PostgreSQL UPDATE join sample database](./img/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png)
+![PostgreSQL UPDATE join sample database](/postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png)
 
 
 
@@ -173,7 +173,7 @@ SELECT * FROM product;
 
 
 
-![PostgreSQL UPDATE Join Example](./img/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-example.png)
+![PostgreSQL UPDATE Join Example](/postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-example.png)
 
 
 
