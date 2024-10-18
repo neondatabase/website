@@ -16,7 +16,7 @@ Learn about the benefits of integrating with Neon and how to become a partner.
 
 <a href="https://neon.tech/partners" description="Read about the benefits of partnering with Neon" icon="handshake">Partner page</a>
 
-<a href="https://neon.tech/partners#partners-apply" description="Request a meeting with our partnerships team" icon="todo">Become a Partner</a>
+<a href="https://neon.tech/partners#partners-apply" description="Request a meeting with our partnership team" icon="todo">Become a Partner</a>
 
 </DetailIconCards>
 
