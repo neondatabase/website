@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -13,6 +14,10 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
+  ssr: false,
+});
 
 const ANIMATION_DURATION = 0.2;
 
@@ -166,13 +171,27 @@ const mobileMenuItems = [
 ];
 
 // TODO: need to refactor this component
-const MobileMenu = ({ isDarkTheme, showSearchInput = false }) => {
+const MobileMenu = ({
+  isDarkTheme,
+  showSearchInput = false,
+  isDocPage = false,
+  searchIndexName = null,
+}) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {showSearchInput && <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />}
+        {showSearchInput &&
+          (isDocPage ? (
+            <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />
+          ) : (
+            <AlgoliaSearch
+              className="mobile-search"
+              isDarkTheme={isDarkTheme}
+              indexName={searchIndexName}
+            />
+          ))}
         <Burger
           className={clsx(
             'relative flex',
@@ -239,6 +258,8 @@ const MobileMenu = ({ isDarkTheme, showSearchInput = false }) => {
 MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
   showSearchInput: PropTypes.bool,
+  isDocPage: PropTypes.bool,
+  searchIndexName: PropTypes.string,
 };
 
 export default MobileMenu;

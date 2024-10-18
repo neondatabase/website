@@ -192,6 +192,7 @@ const Header = async ({
   showSearchInput = false,
   isDocPage = false,
   withBorder = false,
+  searchIndexName = null,
 }) => {
   const isDarkTheme = theme === 'dark';
 
@@ -252,7 +253,12 @@ const Header = async ({
           </Container>
         )}
       </HeaderWrapper>
-      <MobileMenu isDarkTheme={isDarkTheme} showSearchInput={showSearchInput} />
+      <MobileMenu
+        isDarkTheme={isDarkTheme}
+        showSearchInput={showSearchInput}
+        isDocPage={isDocPage}
+        searchIndexName={searchIndexName}
+      />
     </>
   );
 };
@@ -265,6 +271,7 @@ Header.propTypes = {
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,
+  searchIndexName: PropTypes.string,
 };
 
 export default Header;
