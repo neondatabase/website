@@ -1,5 +1,5 @@
 ---
-title: Querying consumption metrics with the API
+title: Querying consumption metrics
 subtitle: Learn how to get a variety of consumption metrics using the Neon API
 enableTableOfContents: true
 updatedOn: '2024-10-05T09:31:59.745Z'
@@ -312,3 +312,17 @@ curl --request GET \
 <Admonition type="note">
 To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
 </Admonition>
+
+## Consumption polling FAQ
+
+### How often can partners poll consumption data for usage reporting and billing?
+
+Neon's consumption data is updated approximately every 15 minutes, so a minimum interval of 15 minutes between calls to our consumption APIs is recommended.
+
+### How often should consumption data be polled to report usage to customers?
+
+As mentioned above, usage data can be pulled every 15 minutes, but partners are free to choose their own reporting interval based on their requirements.
+
+### How often should consumption data be polled to invoice end users?
+
+Neon does not dictate how partners bill their users. Partners can use the data retrieved from the consumption API to generate invoices according to their own billing cycles and preferences.
