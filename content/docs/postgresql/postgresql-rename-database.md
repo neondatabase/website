@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Rename Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-rename-database/
+            - /docs/postgresql/postgresql-administration/postgresql-rename-database/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

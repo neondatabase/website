@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL CASE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-case-statement/
 ogImage: ./img/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png
 tableOfContents: true
 ---
@@ -26,9 +26,9 @@ The `case` statement has two forms:
 
 
 
-- - Simple `case` statement
+- Simple `case` statement
 - -
-- - Searched `case` statement
+- Searched `case` statement
 - 
 
 
@@ -221,9 +221,9 @@ How it works:
 
 
 
-- - First, select the total payment paid by the customer id 100 from the `payment` table.
+- First, select the total payment paid by the customer id 100 from the `payment` table.
 - -
-- - Then, assign the service level to the customer based on the total payment
+- Then, assign the service level to the customer based on the total payment
 - 
 
 
@@ -243,9 +243,9 @@ Notice that the searched `case` statement is similar to the [if then elsif state
 
 
 
-- - Use the `case` statement to execute a section based on certain conditions.
+- Use the `case` statement to execute a section based on certain conditions.
 - -
-- - Use a simple `case` statement to compare a value with a list of values and if a match is found, execute a section.
+- Use a simple `case` statement to compare a value with a list of values and if a match is found, execute a section.
 - -
-- - Use a searched `case` statement to evaluate a list of conditions and execute a section if the condition is true.
+- Use a searched `case` statement to evaluate a list of conditions and execute a section if the condition is true.
 - 

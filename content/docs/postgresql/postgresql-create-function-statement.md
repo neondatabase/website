@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Create Function Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-create-function/
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
@@ -42,15 +42,15 @@ In this syntax:
 
 
 
-- - First, specify the name of the function after the `create function` keywords. To replace the existing function, use the `or replace` option.
+- First, specify the name of the function after the `create function` keywords. To replace the existing function, use the `or replace` option.
 - -
-- - Then, list out parameters surrounded by parentheses after the function name. A function can have zero or more parameters.
+- Then, list out parameters surrounded by parentheses after the function name. A function can have zero or more parameters.
 - -
-- - Next, define the datatype of the returned value after the `returns` keyword.
+- Next, define the datatype of the returned value after the `returns` keyword.
 - -
-- - After that, use the `language plpgsql` to define the procedural language of the function. Note that PostgreSQL supports many languages including `plpgsql`.
+- After that, use the `language plpgsql` to define the procedural language of the function. Note that PostgreSQL supports many languages including `plpgsql`.
 - -
-- - Finally, place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) in the [dollar-quoted string constant](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) to define the function body.
+- Finally, place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) in the [dollar-quoted string constant](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) to define the function body.
 - 
 
 
@@ -105,9 +105,9 @@ The function `get_film_count` has two main sections:
 
 
 
-- - header
+- header
 - -
-- - body
+- body
 - 
 
 
@@ -115,13 +115,13 @@ In the header section:
 
 
 
-- - First, the name of the function is `get_film_count` that follows the `create function` keywords.
+- First, the name of the function is `get_film_count` that follows the `create function` keywords.
 - -
-- - Second, the `get_film_count()` function accepts two parameters `len_from` and `len_to` with the `integer` type.
+- Second, the `get_film_count()` function accepts two parameters `len_from` and `len_to` with the `integer` type.
 - -
-- - Third, the `get_film_count` function returns an integer specified by the `returns int` clause.
+- Third, the `get_film_count` function returns an integer specified by the `returns int` clause.
 - -
-- - Finally, the language of the function is `plpgsql` indicated by the `language plpgsql`.
+- Finally, the language of the function is `plpgsql` indicated by the `language plpgsql`.
 - 
 
 
@@ -129,11 +129,11 @@ In the function body:
 
 
 
-- - Use the [dollar-quoted string constant syntax](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) that starts with `$$` and ends with `$$`. Between these `$$`, you can place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) containing the declaration and logic of the function.
+- Use the [dollar-quoted string constant syntax](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) that starts with `$$` and ends with `$$`. Between these `$$`, you can place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) containing the declaration and logic of the function.
 - -
-- - In the declaration section, declare a variable `film_count` that stores the number of films from the `film` table.
+- In the declaration section, declare a variable `film_count` that stores the number of films from the `film` table.
 - -
-- - In the body of the block, use the `select into` statement to select the number of films whose lengths are between `len_from` and `len_to` and assign it to the `film_count` variable. At the end of the block, use the `return` statement to return the `film_count`.
+- In the body of the block, use the `select into` statement to select the number of films whose lengths are between `len_from` and `len_to` and assign it to the `film_count` variable. At the end of the block, use the `return` statement to return the `film_count`.
 - 
 
 
@@ -235,11 +235,11 @@ PostgreSQL provides you with three ways to call a user-defined function:
 
 
 
-- - Using positional notation
+- Using positional notation
 - -
-- - Using named notation
+- Using named notation
 - -
-- - Using the mixed notation.
+- Using the mixed notation.
 - 
 
 
@@ -368,5 +368,5 @@ LINE 1: select get_film_count(len_from => 40, 90);
 
 
 
-- - Use the `CREATE FUNCTION` statement to create a user-defined function.
+- Use the `CREATE FUNCTION` statement to create a user-defined function.
 - 

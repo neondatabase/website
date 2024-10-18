@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REINDEX'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-reindex/
+            - /docs/postgresql/postgresql-indexes/postgresql-reindex/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -42,11 +42,11 @@ The `option` can be one or more values:
 
 
 
-- - `VERBOSE [boolean]` - show the progress as each index is reindexed.
+- `VERBOSE [boolean]` - show the progress as each index is reindexed.
 - -
-- - `TABLESPACE new_tablespace` - specify the new tablespace on which the indexes will be rebuilt.
+- `TABLESPACE new_tablespace` - specify the new tablespace on which the indexes will be rebuilt.
 - -
-- - `CONCURRENTLY` - rebuild the index without taking any locks. If not used, reindex will lock out writes but not reads on the table until it is completed.
+- `CONCURRENTLY` - rebuild the index without taking any locks. If not used, reindex will lock out writes but not reads on the table until it is completed.
 - 
 
 
@@ -182,9 +182,9 @@ The `REINDEX` statement:
 
 
 
-- - Lock write but not read from the table to which the index belongs.
+- Lock write but not read from the table to which the index belongs.
 - -
-- - Take an exclusive lock on the index that is being processed, which blocks the read that attempts to use the index.
+- Take an exclusive lock on the index that is being processed, which blocks the read that attempts to use the index.
 - 
 
 
@@ -192,9 +192,9 @@ The `DROP INDEX` & `CREATE INDEX` statements:
 
 
 
-- - First, the `DROP INDEX` locks both writes and reads of the table to which the index belongs by acquiring an exclusive lock on the table.
+- First, the `DROP INDEX` locks both writes and reads of the table to which the index belongs by acquiring an exclusive lock on the table.
 - -
-- - Then, the subsequent `CREATE INDEX` statement locks out writes but not reads from the index's parent table. However, reads might be expensive during the creation of the index.
+- Then, the subsequent `CREATE INDEX` statement locks out writes but not reads from the index's parent table. However, reads might be expensive during the creation of the index.
 - 
 
 
@@ -202,5 +202,5 @@ The `DROP INDEX` & `CREATE INDEX` statements:
 
 
 
-- - Use the PostgreSQL `REINDEX` statement to drop and recreate one or more indexes.
+- Use the PostgreSQL `REINDEX` statement to drop and recreate one or more indexes.
 - 

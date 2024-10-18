@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Delete Data from Tables'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/delete/
+            - /docs/postgresql/postgresql-python/delete/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -200,5 +200,5 @@ The output indicates that part id 2 has been deleted successfully.
 
 
 
-- - Use the `execute()` method of a `cursor` object to delete a row from a table.
+- Use the `execute()` method of a `cursor` object to delete a row from a table.
 - 

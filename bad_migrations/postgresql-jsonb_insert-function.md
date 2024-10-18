@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_insert() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_insert/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -41,13 +41,13 @@ In this syntax:
 
 
 
-- - `target`: The JSON document of the JSONB type into which you want to insert a new value.
+- `target`: The JSON document of the JSONB type into which you want to insert a new value.
 - -
-- - `path`: This is an array of text elements that specifies the path where you want to insert the new value.
+- `path`: This is an array of text elements that specifies the path where you want to insert the new value.
 - -
-- - `new_value` is the new value that you want to insert into the JSON document.
+- `new_value` is the new value that you want to insert into the JSON document.
 - -
-- - `insert_after`: This is an optional boolean parameter indicating whether you want to insert the new value after the specified path instead of before. It defaults to `false`, meaning that the function will insert a new value before the specified path.
+- `insert_after`: This is an optional boolean parameter indicating whether you want to insert the new value after the specified path instead of before. It defaults to `false`, meaning that the function will insert a new value before the specified path.
 - 
 
 
@@ -94,11 +94,11 @@ In this example:
 
 
 
-- - The original array is \[1,2,3].
+- The original array is \[1,2,3].
 - -
-- - The path {0} indicates the first element of the array.
+- The path {0} indicates the first element of the array.
 - -
-- - The number 0 is the new value.
+- The number 0 is the new value.
 - 
 
 
@@ -163,11 +163,11 @@ In this example:
 
 
 
-- - The original array is \[1,2,\[3,4],6].
+- The original array is \[1,2,\[3,4],6].
 - -
-- - The path {2, 0}, 2 specifies the second element of the array which is the nested array \[3,4], and 0 specifies the first element of the nested array.
+- The path {2, 0}, 2 specifies the second element of the array which is the nested array \[3,4], and 0 specifies the first element of the nested array.
 - -
-- - 3 is the new value.
+- 3 is the new value.
 - 
 
 
@@ -207,11 +207,11 @@ In this example:
 
 
 
-- - {"name": "John"} is the original object.
+- {"name": "John"} is the original object.
 - -
-- - {age} is the path that indicates the age property (or key).
+- {age} is the path that indicates the age property (or key).
 - -
-- - '2' is the new value to insert.
+- '2' is the new value to insert.
 - 
 
 
@@ -280,11 +280,11 @@ In this example:
 
 
 
-- - {"name":"John Doe", "address" : { "city": "San Francisco"}} is the original JSON object.
+- {"name":"John Doe", "address" : { "city": "San Francisco"}} is the original JSON object.
 - -
-- - {address, state} is a path that specifies the address key whose value is an object and state is the new key of the address object.
+- {address, state} is a path that specifies the address key whose value is an object and state is the new key of the address object.
 - -
-- - "California" is the value of the state key.
+- "California" is the value of the state key.
 - 
 
 
@@ -361,11 +361,11 @@ In this example:
 
 
 
-- - {"name": "John", "skills" : \["PostgreSQL", "API"]} is the original JSON object.
+- {"name": "John", "skills" : \["PostgreSQL", "API"]} is the original JSON object.
 - -
-- - {skills,1} is a path that specifies the skills key, which is an array, and 1 specifies the second element of the array.
+- {skills,1} is a path that specifies the skills key, which is an array, and 1 specifies the second element of the array.
 - -
-- - "Web Dev" is the new value to insert.
+- "Web Dev" is the new value to insert.
 - 
 
 
@@ -457,5 +457,5 @@ Output:
 
 
 
-- - Use the `jsonb_insert()` function to insert a new value into a JSON document of the type JSONB.
+- Use the `jsonb_insert()` function to insert a new value into a JSON document of the type JSONB.
 - 

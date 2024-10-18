@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REPLACE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/
+            - /docs/postgresql/postgresql-string-functions/postgresql-replace/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,11 +32,11 @@ The `REPLACE()` function accepts three arguments:
 
 
 
-- - `source`: This is an input string that you want to replace.
+- `source`: This is an input string that you want to replace.
 - -
-- - `from_text`: This is the substring that you want to search and replace. If the `from_text` appears multiple times in the `source` string, the function will replace all the occurrences.
+- `from_text`: This is the substring that you want to search and replace. If the `from_text` appears multiple times in the `source` string, the function will replace all the occurrences.
 - -
-- - `to_text`: This is the new substring that you want to replace the `from_text`.
+- `to_text`: This is the new substring that you want to replace the `from_text`.
 - 
 
 
@@ -202,5 +202,5 @@ The output indicates that the `http` in the `url` column were replaced by the `h
 
 
 
-- - Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with another a new substring.
+- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with another a new substring.
 - 

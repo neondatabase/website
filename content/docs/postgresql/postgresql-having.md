@@ -40,9 +40,9 @@ In this syntax:
 
 
 
-- - First, the `GROUP BY` clause groups rows into groups by the values in the `column1`.
+- First, the `GROUP BY` clause groups rows into groups by the values in the `column1`.
 - -
-- - Then, the `HAVING` clause filters the groups based on the `condition`.
+- Then, the `HAVING` clause filters the groups based on the `condition`.
 - 
 
 
@@ -243,5 +243,5 @@ Output:
 
 
 
-- - Use the `HAVING` clause to specify the filter condition for groups returned by the `GROUP BY` clause.
+- Use the `HAVING` clause to specify the filter condition for groups returned by the `GROUP BY` clause.
 - 

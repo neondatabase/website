@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL NTH_VALUE Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-nth_value-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-nth_value-function/
 ogImage: ./img/wp-content-uploads-2019-05-products-table-sample-data.png
 tableOfContents: true
 ---

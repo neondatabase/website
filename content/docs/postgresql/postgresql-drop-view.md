@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Drop View'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/
+            - /docs/postgresql/postgresql-views/postgresql-drop-view/
 ogImage: ./img/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---
@@ -33,11 +33,11 @@ In this syntax:
 
 
 
-- - First, specify the name of the view in the `DROP VIEW` clause.
+- First, specify the name of the view in the `DROP VIEW` clause.
 - -
-- - Second, use `IF EXISTS` to prevent an error if the view does not exist. PostgreSQL will issue a notice instead of an error when you attempt to remove a non-existing view. The `IF EXISTS` is optional.
+- Second, use `IF EXISTS` to prevent an error if the view does not exist. PostgreSQL will issue a notice instead of an error when you attempt to remove a non-existing view. The `IF EXISTS` is optional.
 - -
-- - Third, use `CASCADE` option to remove dependent objects along with the view or the `RESTRICT` option to reject the removal of the view if other objects depend on the view. The `RESTRICT` option is the default.
+- Third, use `CASCADE` option to remove dependent objects along with the view or the `RESTRICT` option to reject the removal of the view if other objects depend on the view. The `RESTRICT` option is the default.
 - 
 
 
@@ -259,9 +259,9 @@ DROP VIEW film_length_stat, film_category_stat;
 
 
 
-- - Use the `DROP VIEW` statement to remove one or more views from the database.
+- Use the `DROP VIEW` statement to remove one or more views from the database.
 - -
-- - Use the `IF EXISTS` option to remove a view if it exists.
+- Use the `IF EXISTS` option to remove a view if it exists.
 - -
-- - Use the `CASCADE` option to remove a view and its dependent objects recursively.
+- Use the `CASCADE` option to remove a view and its dependent objects recursively.
 - 

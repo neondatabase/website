@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL TO_CHAR() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/
+            - /docs/postgresql/postgresql-string-functions/postgresql-to_char/
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

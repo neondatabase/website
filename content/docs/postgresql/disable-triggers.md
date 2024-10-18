@@ -1,7 +1,7 @@
 ---
 title: 'Disable Triggers'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/managing-postgresql-trigger/
+            - /docs/postgresql/postgresql-triggers/managing-postgresql-trigger/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

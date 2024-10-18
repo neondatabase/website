@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ROW_NUMBER Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-row_number/
+            - /docs/postgresql/postgresql-window-function/postgresql-row_number/
 ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---

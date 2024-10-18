@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP TRIGGER Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-drop-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-drop-trigger/
 ogImage: ./img/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png
 tableOfContents: true
 ---
@@ -30,15 +30,15 @@ In this syntax:
 
 
 
-- - First, specify the name of the trigger you want to delete after the `DROP TRIGGER` keywords.
+- First, specify the name of the trigger you want to delete after the `DROP TRIGGER` keywords.
 - -
-- - Next, use `IF EXISTS` to conditionally delete the trigger only if it exists. Deleting a non-existing trigger without specifying the `IF EXISTS` statement results in an error. If you use `IF EXISTS` to delete a non-existing trigger, PostgreSQL issues a notice instead. The `IF EXISTS` is optional.
+- Next, use `IF EXISTS` to conditionally delete the trigger only if it exists. Deleting a non-existing trigger without specifying the `IF EXISTS` statement results in an error. If you use `IF EXISTS` to delete a non-existing trigger, PostgreSQL issues a notice instead. The `IF EXISTS` is optional.
 - -
-- - Then, specify the name of the table to which the trigger belongs. If the table belongs to a specific schema, you can use the schema-qualified name of the table such as `schema_name.table_name`.
+- Then, specify the name of the table to which the trigger belongs. If the table belongs to a specific schema, you can use the schema-qualified name of the table such as `schema_name.table_name`.
 - -
-- - After that, use the `CASCADE` option to drop objects that depend on the trigger automatically. Note that `CASCADE` option will also delete objects that depend on objects that depend on the trigger.
+- After that, use the `CASCADE` option to drop objects that depend on the trigger automatically. Note that `CASCADE` option will also delete objects that depend on objects that depend on the trigger.
 - -
-- - Finally, use the `RESTRICT` option to refuse to drop the trigger if any objects depend on it. By default, the `DROP TRIGGER` statement uses `RESTRICT`.
+- Finally, use the `RESTRICT` option to refuse to drop the trigger if any objects depend on it. By default, the `DROP TRIGGER` statement uses `RESTRICT`.
 - 
 
 
@@ -112,5 +112,5 @@ ON staff;
 
 
 
-- - Use the PostgreSQL `DROP TRIGGER` statement to delete a trigger from a table.
+- Use the PostgreSQL `DROP TRIGGER` statement to delete a trigger from a table.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MOD() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/
+            - /docs/postgresql/postgresql-mod
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

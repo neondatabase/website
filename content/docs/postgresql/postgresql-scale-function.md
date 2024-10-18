@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SCALE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-scale/
+            - /docs/postgresql/postgresql-scale
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -180,5 +180,5 @@ By understanding the scales of prices, you can identify the diverse decimal prec
 
 
 
-- - Use the `SCALE()` function to retrieve the scale of a number.
+- Use the `SCALE()` function to retrieve the scale of a number.
 - 

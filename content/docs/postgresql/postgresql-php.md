@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/
+            - /docs/postgresql/postgresql-php/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png
 tableOfContents: true
 ---

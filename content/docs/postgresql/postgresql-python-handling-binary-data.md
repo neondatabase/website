@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Handling Binary Data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/blob/
+            - /docs/postgresql/postgresql-python/blob/
 ogImage: ./img/wp-content-uploads-2016-06-parts_part_drawings_tables.png
 tableOfContents: true
 ---

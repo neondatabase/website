@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL TRIM_SCALE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trim_scale/
+            - /docs/postgresql/postgresql-trim_scale
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -175,5 +175,5 @@ Output:
 
 
 
-- - Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.
+- Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.
 - 

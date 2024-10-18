@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Restore Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/
+            - /docs/postgresql/postgresql-administration/postgresql-restore-database/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -40,9 +40,9 @@ In this syntax:
 
 
 
-- - First, specify the name of the composite type (`type_name`) after the `CREATE TYPE` keywords.
+- First, specify the name of the composite type (`type_name`) after the `CREATE TYPE` keywords.
 - -
-- - Second, define a list of fields of the composite type along with their respective data types.
+- Second, define a list of fields of the composite type along with their respective data types.
 - 
 
 
@@ -312,5 +312,5 @@ In this example, you cannot put the parentheses around the column name of the co
 
 
 
-- - Composite types allow you to define custom data types that include multiple fields.
+- Composite types allow you to define custom data types that include multiple fields.
 - 

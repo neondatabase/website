@@ -26,9 +26,9 @@ There are two kinds of generated columns:
 
 
 
-- - Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
+- Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
 - -
-- - Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
+- Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
 - 
 
 
@@ -62,15 +62,15 @@ In this syntax:
 
 
 
-- - `column_name`: Specify the name of the generated column.
+- `column_name`: Specify the name of the generated column.
 - -
-- - `type`: Specify the data type for the column.
+- `type`: Specify the data type for the column.
 - -
-- - `expression`: Provide an expression that returns values for the calculated column.
+- `expression`: Provide an expression that returns values for the calculated column.
 - -
-- - `STORED` keyword: Indicate that the data of the generated column is physically stored in the table.
+- `STORED` keyword: Indicate that the data of the generated column is physically stored in the table.
 - -
-- - `VIRTUAL` keyword: Indicate that the data of the generated column is computed when queried, not stored physically.
+- `VIRTUAL` keyword: Indicate that the data of the generated column is computed when queried, not stored physically.
 - 
 
 
@@ -89,9 +89,9 @@ When defining an expression for a generated column, ensure that it meets the fol
 
 
 
-- - The expression can only use immutable functions and cannot involve [subqueries](/docs/postgresql/postgresql-subquery/) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp) function.
+- The expression can only use immutable functions and cannot involve [subqueries](/docs/postgresql/postgresql-subquery/) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp) function.
 - -
-- - The expression cannot reference another generated column or a system column, except `tableoid`.
+- The expression cannot reference another generated column or a system column, except `tableoid`.
 - 
 
 
@@ -220,5 +220,5 @@ Output:
 
 
 
-- - Use generated columns to automate calculations within your table.
+- Use generated columns to automate calculations within your table.
 - 

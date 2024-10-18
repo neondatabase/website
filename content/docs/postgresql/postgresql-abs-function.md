@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ABS() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-abs/
+            - /docs/postgresql/postgresql-abs
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Row Types'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-row-types/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-row-types/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'How to Change the Owner of a PostgreSQL Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgres-change-database-owner/
+            - /docs/postgresql/postgresql-administration/postgres-change-database-owner/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -29,9 +29,9 @@ In this syntax:
 
 
 
-- - First, specify the database name that you want to change the owner after the `ALTER` `DATABASE` keyword
+- First, specify the database name that you want to change the owner after the `ALTER` `DATABASE` keyword
 - -
-- - Second, specify the new owner, an existing role, in the `OWNER` `TO` clause.
+- Second, specify the new owner, an existing role, in the `OWNER` `TO` clause.
 - 
 
 
@@ -170,5 +170,5 @@ The output shows that the owner of the `scm` changed to `steve`.
 
 
 
-- - Use the `ALTER DATABASE...OWNER TO` statement to change the owner of a database to a new one.
+- Use the `ALTER DATABASE...OWNER TO` statement to change the owner of a database to a new one.
 - 

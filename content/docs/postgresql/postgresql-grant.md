@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL GRANT'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/
+            - /docs/postgresql/postgresql-administration/postgresql-grant/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -42,11 +42,11 @@ In this syntax:
 
 
 
-- - First, specify the `privilege_list` that can be `SELECT`, `INSERT`,`UPDATE`, `DELETE`,`TRUNCATE`, etc. Use the `ALL` option to grant all privileges on a table to the role.
+- First, specify the `privilege_list` that can be `SELECT`, `INSERT`,`UPDATE`, `DELETE`,`TRUNCATE`, etc. Use the `ALL` option to grant all privileges on a table to the role.
 - -
-- - Second, provide the name of the table after the `ON` keyword.
+- Second, provide the name of the table after the `ON` keyword.
 - -
-- - Third, indicate the name of the role to which you want to grant privileges.
+- Third, indicate the name of the role to which you want to grant privileges.
 - 
 
 
@@ -269,5 +269,5 @@ So far, you have learned how to grant privileges on tables. To grant privileges 
 
 
 
-- - Use the `GRANT` statement to grant privileges on database objects to a role.
+- Use the `GRANT` statement to grant privileges on database objects to a role.
 - 

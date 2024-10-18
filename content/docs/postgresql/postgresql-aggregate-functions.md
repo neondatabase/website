@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Aggregate Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/
+            - /docs/postgresql/postgresql-aggregate-functions/
 ogImage: ./img/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
@@ -18,15 +18,15 @@ Aggregate functions perform a calculation on a set of rows and return a single r
 
 
 
-- - `AVG()` - return the average value.
+- `AVG()` - return the average value.
 - -
-- - `COUNT()` - return the number of values.
+- `COUNT()` - return the number of values.
 - -
-- - `MAX()` - return the maximum value.
+- `MAX()` - return the maximum value.
 - -
-- - `MIN()` - return the minimum value.
+- `MIN()` - return the minimum value.
 - -
-- - `SUM()` - return the sum of all or distinct values.
+- `SUM()` - return the sum of all or distinct values.
 - 
 
 
@@ -371,17 +371,17 @@ The following picture illustrates the result:
 
 
 
-- - Aggregate functions perform a calculation on a set of rows and return a single row.
+- Aggregate functions perform a calculation on a set of rows and return a single row.
 - -
-- - Use aggregate functions to summarize data.
+- Use aggregate functions to summarize data.
 - -
-- - Use the `AVG()` function to calculate the average value in a set of values.
+- Use the `AVG()` function to calculate the average value in a set of values.
 - -
-- - Use the `COUNT()` function to perform a count.
+- Use the `COUNT()` function to perform a count.
 - -
-- - Use the `SUM()` function to calculate the total of values.
+- Use the `SUM()` function to calculate the total of values.
 - -
-- - Use the `MIN()` function to get the minimum value in a set of values.
+- Use the `MIN()` function to get the minimum value in a set of values.
 - -
-- - Use the `MAX()` function to get the maximum value in a set of values.
+- Use the `MAX()` function to get the maximum value in a set of values.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_each() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_each/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,7 +32,7 @@ In this syntax:
 
 
 
-- - `json_object` is the JSON object that you want to expand the key/value pairs.
+- `json_object` is the JSON object that you want to expand the key/value pairs.
 - 
 
 
@@ -197,5 +197,5 @@ Output:
 
 
 
-- - Use the `jsonb_each()` function to expand a JSON object into a set of key/value pairs.
+- Use the `jsonb_each()` function to expand a JSON object into a set of key/value pairs.
 - 

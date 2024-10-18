@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL RANDOM() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-random/
+            - /docs/postgresql/postgresql-random
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

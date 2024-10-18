@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SIGN() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sign/
+            - /docs/postgresql/postgresql-sign
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -167,9 +167,9 @@ How it works.
 
 
 
-- - Use the `LAG()` window function to retrieve the `sales_amount` from the previous year utilizing the `ORDER` `BY` year clause to specify the order of rows.
+- Use the `LAG()` window function to retrieve the `sales_amount` from the previous year utilizing the `ORDER` `BY` year clause to specify the order of rows.
 - -
-- - Use the `CASE` expression to evaluate each row's sales data and assign a corresponding value to the `sales_trend` column.
+- Use the `CASE` expression to evaluate each row's sales data and assign a corresponding value to the `sales_trend` column.
 - 
 
 
@@ -206,5 +206,5 @@ FROM
 
 
 
-- - Use the `SIGN()` function to determine the sign of a number.
+- Use the `SIGN()` function to determine the sign of a number.
 - 

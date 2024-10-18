@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL AGE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/
+            - /docs/postgresql/postgresql-date-functions/postgresql-age/
 ogImage: ./img/wp-content-uploads-2017-03-rental-table.png
 tableOfContents: true
 ---

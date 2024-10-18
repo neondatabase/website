@@ -40,9 +40,9 @@ If you work with PHP or Python and want to know how to store binary data in a `B
 
 
 
-- - [Storing files in a `BYTEA` column using PHP](https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/).
+- [Storing files in a `BYTEA` column using PHP](https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/).
 - -
-- - [Storing images in a `BYTEA` column using Python](https://www.postgresqltutorial.com/postgresql-python/blob/).
+- [Storing images in a `BYTEA` column using Python](https://www.postgresqltutorial.com/postgresql-python/blob/).
 - 
 
 
@@ -101,5 +101,5 @@ Output:
 
 
 
-- - Use the `BYTEA` data type to store small binary data in the database.
+- Use the `BYTEA` data type to store small binary data in the database.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REVOKE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-revoke/
+            - /docs/postgresql/postgresql-administration/postgresql-revoke/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -34,11 +34,11 @@ In this syntax:
 
 
 
-- - First, specify one or more privileges that you want to revoke or use the `ALL` option to revoke all privileges.
+- First, specify one or more privileges that you want to revoke or use the `ALL` option to revoke all privileges.
 - -
-- - Second, provide the name of the table after the `ON` keyword or use the `ALL TABLES` to revoke specified privileges from all tables in a schema.
+- Second, provide the name of the table after the `ON` keyword or use the `ALL TABLES` to revoke specified privileges from all tables in a schema.
 - -
-- - Third, specify the name of the role from which you want to revoke privileges.
+- Third, specify the name of the role from which you want to revoke privileges.
 - 
 
 
@@ -134,5 +134,5 @@ To revoke privileges from other database objects such as [sequences](/docs/postg
 
 
 
-- - Use the PostgreSQL `REVOKE` statement to revoke previously granted privileges on database objects from a role.
+- Use the PostgreSQL `REVOKE` statement to revoke previously granted privileges on database objects from a role.
 - 

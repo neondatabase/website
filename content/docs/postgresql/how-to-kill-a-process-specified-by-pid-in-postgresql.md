@@ -1,7 +1,5 @@
 ---
 title: 'How to Kill a Process Specified by PID in PostgreSQL'
-redirectFrom: 
-            - https://www.postgresqltutorial.com/?page_id=7990
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -84,5 +82,5 @@ SELECT pg_terminate_backend(pid);
 
 
 
-- - Use the pg_terminate_backend() function to terminate a process specified by pid.
+- Use the pg_terminate_backend() function to terminate a process specified by pid.
 - 

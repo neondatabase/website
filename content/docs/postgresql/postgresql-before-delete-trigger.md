@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BEFORE DELETE Trigger'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-before-delete-trigger/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -183,5 +183,5 @@ CONTEXT:  PL/pgSQL function fn_before_delete_product() line 3 at RAISE
 
 
 
-- - Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
+- Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
 - 

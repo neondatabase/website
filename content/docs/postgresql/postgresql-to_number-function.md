@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL TO_NUMBER() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_number/
+            - /docs/postgresql/postgresql-string-functions/postgresql-to_number/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ The `TO_NUMBER()` function requires two arguments:
 
 
 
-- - string: This is a string that you want to convert to a number.
+- string: This is a string that you want to convert to a number.
 - -
-- - format: This is the format that specifies how the string should be interpreted as a number.
+- format: This is the format that specifies how the string should be interpreted as a number.
 - 
 
 
@@ -268,5 +268,5 @@ The `TO_NUMBER()` function issues an error in this case.
 
 
 
-- - Use the PostgreSQL `TO_NUMBER()` function to convert a string to a numeric value.
+- Use the PostgreSQL `TO_NUMBER()` function to convert a string to a numeric value.
 - 

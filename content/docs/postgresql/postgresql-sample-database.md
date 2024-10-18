@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Sample Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/
+            - /docs/postgresql/postgresql-getting-started/postgresql-sample-database/
 ogImage: ./img/wp-content-uploads-2018-03-dvd-rental-sample-database-diagram.png
 tableOfContents: true
 ---

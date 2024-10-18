@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Triggers'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/
+            - /docs/postgresql/postgresql-triggers/
 ogImage: ./img/wp-content-uploads-2014-05-PostgreSQL-Trigger.png
 tableOfContents: true
 ---

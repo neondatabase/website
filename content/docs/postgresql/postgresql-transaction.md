@@ -30,13 +30,13 @@ A PostgreSQL transaction is atomic, consistent, isolated, and durable. These pro
 
 
 
-- - **Atomicity** guarantees that the transaction is completed in an all-or-nothing manner.
+- **Atomicity** guarantees that the transaction is completed in an all-or-nothing manner.
 - -
-- - **Consistency** ensures that changes to data written to the database are valid and adhere to predefined rules.
+- **Consistency** ensures that changes to data written to the database are valid and adhere to predefined rules.
 - -
-- - **Isolation** determines how the integrity of a transaction is visible to other transactions.
+- **Isolation** determines how the integrity of a transaction is visible to other transactions.
 - -
-- - **Durability** ensures that transactions that have been committed are permanently stored in the database.
+- **Durability** ensures that transactions that have been committed are permanently stored in the database.
 - 
 
 
@@ -324,9 +324,9 @@ In practice, you'll use transactions in [stored procedures](https://www.postgres
 
 
 
-- - Use the `BEGIN` statement to explicitly start a transaction
+- Use the `BEGIN` statement to explicitly start a transaction
 - -
-- - Use the `COMMIT` statement to apply the changes permanently to the database.
+- Use the `COMMIT` statement to apply the changes permanently to the database.
 - -
-- - Use the `ROLLBACK` statement to undo the changes made to the database during the transaction.
+- Use the `ROLLBACK` statement to undo the changes made to the database during the transaction.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Indexes'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/
+            - /docs/postgresql/postgresql-indexes/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -189,25 +189,25 @@ A BRIN index divides the table into ranges of pages and stores summarized inform
 
 
 
-- - [Create Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) - Show you how to define a new index for a table.
+- [Create Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) - Show you how to define a new index for a table.
 - -
-- - [Unique Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/) - Provide you with steps for defining unique indexes.
+- [Unique Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/) - Provide you with steps for defining unique indexes.
 - -
-- - [Index on Expression](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/) - Guide you on creating an index based on expressions.
+- [Index on Expression](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/) - Guide you on creating an index based on expressions.
 - -
-- - [Partial index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/) - Learn about creating partial indexes that include a subset of rows of the indexed columns.
+- [Partial index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/) - Learn about creating partial indexes that include a subset of rows of the indexed columns.
 - -
-- - [Multicolumn Indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/) - Show you how to define indexes that include multiple table columns.
+- [Multicolumn Indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/) - Show you how to define indexes that include multiple table columns.
 - -
-- - [Reindex](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-reindex/) - Learn how to rebuild indexes.
+- [Reindex](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-reindex/) - Learn how to rebuild indexes.
 - -
-- - [List indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/) - Learn how to list all indexes in a table or database.
+- [List indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/) - Learn how to list all indexes in a table or database.
 - -
-- - [Drop Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/) - Show you how to delete an index.
+- [Drop Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/) - Show you how to delete an index.
 - -
-- - [Index Types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/) - Discuss various PostgreSQL index types in detail.
+- [Index Types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/) - Discuss various PostgreSQL index types in detail.
 - -
-- - [Full Text Search](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/) - Show you how to use the GIN index to enable full-text search in PostgreSQL.
+- [Full Text Search](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/) - Show you how to use the GIN index to enable full-text search in PostgreSQL.
 - -
-- - [JSON index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/) - Learn how to index a JSONB column for enhanced query performance.
+- [JSON index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/) - Learn how to index a JSONB column for enhanced query performance.
 - 

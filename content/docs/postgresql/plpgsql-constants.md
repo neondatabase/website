@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Constants'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-constants/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -84,11 +84,11 @@ In this syntax:
 
 
 
-- - First, specify the name of the constant. The name should be as descriptive as possible.
+- First, specify the name of the constant. The name should be as descriptive as possible.
 - -
-- - Second, add the `constant` keyword after the name and specify the [data type](/docs/postgresql/postgresql-data-types) of the constant.
+- Second, add the `constant` keyword after the name and specify the [data type](/docs/postgresql/postgresql-data-types) of the constant.
 - -
-- - Third, initialize a value for the constant after the assignment operator (`=`).
+- Third, initialize a value for the constant after the assignment operator (`=`).
 - 
 
 
@@ -194,7 +194,7 @@ DO
 
 
 
-- - A constant holds a value that cannot be changed.
+- A constant holds a value that cannot be changed.
 - -
-- - Use the `constant` keyword to define a constant in PL/pgSQL.
+- Use the `constant` keyword to define a constant in PL/pgSQL.
 - 

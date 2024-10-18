@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/
+            - /docs/postgresql/postgresql-python/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---

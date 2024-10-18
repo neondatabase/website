@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_strip_nulls() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_strip_nulls/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_strip_nulls/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -173,5 +173,5 @@ The output indicates that the `ram` field and the entire `extras` object, as wel
 
 
 
-- - Use the `jsonb_strip_nulls()` function to recursively delete all object fields that have null values.
+- Use the `jsonb_strip_nulls()` function to recursively delete all object fields that have null values.
 - 

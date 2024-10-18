@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL FORMAT() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-format/
+            - /docs/postgresql/postgresql-string-functions/postgresql-format/
 ogImage: ./img/wp-content-uploads-2013-05-customer-table.png
 tableOfContents: true
 ---

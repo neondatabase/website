@@ -36,11 +36,11 @@ In this syntax:
 
 
 
-- - `start` is the starting value of the series.
+- `start` is the starting value of the series.
 - -
-- - `stop` is the ending value of the series. The resulting series will include the `stop` value.
+- `stop` is the ending value of the series. The resulting series will include the `stop` value.
 - -
-- - `step` is the increment value between each consecutive number. The `step` is optional and defaults to 1.
+- `step` is the increment value between each consecutive number. The `step` is optional and defaults to 1.
 - 
 
 
@@ -128,13 +128,13 @@ In this syntax:
 
 
 
-- - The `start` is the starting value of the series.
+- The `start` is the starting value of the series.
 - -
-- - The `stop` is the ending value of the series.
+- The `stop` is the ending value of the series.
 - -
-- - The `step` is increment values between two consecutive timestamps in the series.
+- The `step` is increment values between two consecutive timestamps in the series.
 - -
-- - The `timezone` represents the time zone. Its type is text e.g., `'America/New_York'`. The `timezone` argument is optional.
+- The `timezone` represents the time zone. Its type is text e.g., `'America/New_York'`. The `timezone` argument is optional.
 - 
 
 
@@ -261,7 +261,7 @@ Let's explore some real-world examples of using the `generate_series()` function
 
 
 
-The following example uses the `generate_series()` function with the [random()](https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-random/) function to create a series of five random numbers between 100 and 200:
+The following example uses the `generate_series()` function with the [random()](/docs/postgresql/postgresql-random) function to create a series of five random numbers between 100 and 200:
 
 
 
@@ -430,5 +430,5 @@ Output:
 
 
 
-- - Use the `generate_series()` function to create a series of numbers of timestamps.
+- Use the `generate_series()` function to create a series of numbers of timestamps.
 - 

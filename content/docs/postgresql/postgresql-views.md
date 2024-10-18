@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Views'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-views/
+            - /docs/postgresql/postgresql-views/
 ogImage: ./img/wp-content-uploads-2015-05-PostgreSQL-View.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Row-Level Security'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-row-level-security/
+            - /docs/postgresql/postgresql-administration/postgresql-row-level-security/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -265,7 +265,7 @@ Like `alice`, `bob` can only retrieve data whose manager is `bob`.
 
 
 
-- - Use the `ALTER TABLE table_name ENABLE ROW LEVEL SECURITY` statement to enable row-level security of a table.
+- Use the `ALTER TABLE table_name ENABLE ROW LEVEL SECURITY` statement to enable row-level security of a table.
 - -
-- - Use the `CREATE POLICY` statement to define a new row-level security policy for a table.
+- Use the `CREATE POLICY` statement to define a new row-level security policy for a table.
 - 

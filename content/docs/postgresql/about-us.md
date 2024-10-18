@@ -1,7 +1,7 @@
 ---
 title: 'About Us'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/about-us/
+            - /docs/postgresql/about-us/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

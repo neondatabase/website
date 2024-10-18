@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL WIDTH_BUCKET() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
+            - /docs/postgresql/postgresql-width_bucket
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
@@ -32,13 +32,13 @@ In this syntax:
 
 
 
-- - `numeric_value`: The numeric value that you want to place into a bucket.
+- `numeric_value`: The numeric value that you want to place into a bucket.
 - -
-- - `lower_bound`: The lower bound of the range within which the `numeric_value` falls. It is **inclusive**.
+- `lower_bound`: The lower bound of the range within which the `numeric_value` falls. It is **inclusive**.
 - -
-- - `upper_bound`: The upper bound of the range within which the `numeric_value` falls. It is exclusive.
+- `upper_bound`: The upper bound of the range within which the `numeric_value` falls. It is exclusive.
 - -
-- - `num_buckets`: The total number of buckets to divide the range into.
+- `num_buckets`: The total number of buckets to divide the range into.
 - 
 
 
@@ -114,15 +114,15 @@ In this example:
 
 
 
-- - The `WIDTH_BUCKET()` function returns 0 for the value -1 because -1 is less than the lower bound (0).
+- The `WIDTH_BUCKET()` function returns 0 for the value -1 because -1 is less than the lower bound (0).
 - -
-- - The `WIDTH_BUCKET()` function returns 1 for the value 0 because 0 falls in the range of the first bucket (0,10).
+- The `WIDTH_BUCKET()` function returns 1 for the value 0 because 0 falls in the range of the first bucket (0,10).
 - -
-- - The `WIDTH_BUCKET()` function returns 2 for the value 12 because 12 falls in the second bucket (10, 20).
+- The `WIDTH_BUCKET()` function returns 2 for the value 12 because 12 falls in the second bucket (10, 20).
 - -
-- - The `WIDTH_BUCKET()` function returns 3 for the value 25 because 25 falls in the third bucket (20, 30).
+- The `WIDTH_BUCKET()` function returns 3 for the value 25 because 25 falls in the third bucket (20, 30).
 - -
-- - The `WIDTH_BUCKET()` functions return 3 for the value 35 because 35 is greater than the upper bound (30).
+- The `WIDTH_BUCKET()` functions return 3 for the value 35 because 35 is greater than the upper bound (30).
 - 
 
 
@@ -224,9 +224,9 @@ CTE:
 
 
 
-- - First, define a common table expression named `buckets_cte`.
+- First, define a common table expression named `buckets_cte`.
 - -
-- - Second, use the `WIDTH_BUCKET()` function to assign each film's length into one of six buckets.
+- Second, use the `WIDTH_BUCKET()` function to assign each film's length into one of six buckets.
 - 
 
 
@@ -234,11 +234,11 @@ Main query:
 
 
 
-- - First, select data from the `buckets_cte`.
+- First, select data from the `buckets_cte`.
 - -
-- - Second, count the number of films for each bucket using the `COUNT(*)` function and group the result by the `bucket_number` using the `GROUP BY` clause.
+- Second, count the number of films for each bucket using the `COUNT(*)` function and group the result by the `bucket_number` using the `GROUP BY` clause.
 - -
-- - Third, sort the result by the `bucket_number`.
+- Third, sort the result by the `bucket_number`.
 - 
 
 
@@ -301,11 +301,11 @@ The query defines two common table expressions and generates the histogram using
 
 
 
-- - `buckets_cte` `CTE` - Assign films to buckets using the `WIDTH_BUCKET()` function based on their lengths.
+- `buckets_cte` `CTE` - Assign films to buckets using the `WIDTH_BUCKET()` function based on their lengths.
 - -
-- - `histogram_cte` `CTE` - Select data from the `buckets_cte` by grouping the frequency of the bucket numbers.
+- `histogram_cte` `CTE` - Select data from the `buckets_cte` by grouping the frequency of the bucket numbers.
 - -
-- - The main query - Select data from the `histogram_cte` `CTE`. We use the `REPEAT`() function to generate the histogram bars by repeating the asterisk (\*) character a number of times which equals the integer division of frequency by 10. This is to scale down the histogram to prevent it from being too wide. To perform integer divisions, we use the `DIV()` function. Since the `REPEAT` function accepts an integer only, we cast the result of the `DIV()` to an integer using the cast operator (::).
+- The main query - Select data from the `histogram_cte` `CTE`. We use the `REPEAT`() function to generate the histogram bars by repeating the asterisk (\*) character a number of times which equals the integer division of frequency by 10. This is to scale down the histogram to prevent it from being too wide. To perform integer divisions, we use the `DIV()` function. Since the `REPEAT` function accepts an integer only, we cast the result of the `DIV()` to an integer using the cast operator (::).
 - 
 
 
@@ -313,5 +313,5 @@ The query defines two common table expressions and generates the histogram using
 
 
 
-- - Use the PostgreSQL `WIDTH_BUCKET()` function for binning numeric data into discrete buckets or generating histograms.
+- Use the PostgreSQL `WIDTH_BUCKET()` function for binning numeric data into discrete buckets or generating histograms.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'Contact Us'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/contact-us/
+            - /docs/postgresql/contact-us/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

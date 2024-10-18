@@ -1,7 +1,7 @@
 ---
 title: 'How to List All Triggers in PostgreSQL'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
+            - /docs/postgresql/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -299,7 +299,7 @@ Note that psql does not provide a command to list all triggers in the current da
 
 
 
-- - List all triggers in a database or a specific table using the `information_schema.triggers` or `pg_trigger` views.
+- List all triggers in a database or a specific table using the `information_schema.triggers` or `pg_trigger` views.
 - -
-- - Use psql command `\dS table_name` to display a table along with its associated triggers.
+- Use psql command `\dS table_name` to display a table along with its associated triggers.
 - 

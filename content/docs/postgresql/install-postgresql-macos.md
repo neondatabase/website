@@ -1,7 +1,7 @@
 ---
 title: 'Install PostgreSQL macOS'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/
+            - /docs/postgresql/postgresql-getting-started/install-postgresql-macos/
 ogImage: ./img/wp-content-uploads-2020-07-Install-PostgreSQL-macOS-step-1.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LEFT() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
+            - /docs/postgresql/postgresql-string-functions/postgresql-left/
 ogImage: ./img/wp-content-uploads-2017-08-PostgreSQL-LEFT-example.png
 tableOfContents: true
 ---

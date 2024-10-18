@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LN() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-ln/
+            - /docs/postgresql/postgresql-ln
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

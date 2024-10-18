@@ -46,9 +46,9 @@ In this syntax:
 
 
 
-- - First, select the columns that you want to group such as `column1` and `column2`, and column that you want to apply an aggregate function (`column3`).
+- First, select the columns that you want to group such as `column1` and `column2`, and column that you want to apply an aggregate function (`column3`).
 - -
-- - Second, list the columns that you want to group in the `GROUP BY` clause.
+- Second, list the columns that you want to group in the `GROUP BY` clause.
 - 
 
 
@@ -381,5 +381,5 @@ Since the values in the `payment_date` column are [timestamps](/docs/postgresql/
 
 
 
-- - Use the PostgreSQL `GROUP BY` clause to divide rows into groups and apply an aggregate function to each group.
+- Use the PostgreSQL `GROUP BY` clause to divide rows into groups and apply an aggregate function to each group.
 - 

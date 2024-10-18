@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Updating Data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-jdbc/update/
+            - /docs/postgresql/postgresql-jdbc/update/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

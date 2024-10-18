@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/connect/
+            - /docs/postgresql/postgresql-php/connect/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Connect.png
 tableOfContents: true
 ---

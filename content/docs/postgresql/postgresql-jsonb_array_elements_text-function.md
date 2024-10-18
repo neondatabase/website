@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_array_elements_text() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_elements_text/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,7 +32,7 @@ In this syntax:
 
 
 
-- - `json_array` is a JSON array with the `JSONB` type, which you want to expand the elements.
+- `json_array` is a JSON array with the `JSONB` type, which you want to expand the elements.
 - 
 
 
@@ -253,5 +253,5 @@ Output:
 
 
 
-- - Use the `jsonb_array_elements_text()` function to expand elements of the top-level JSON array into a set of text values.
+- Use the `jsonb_array_elements_text()` function to expand elements of the top-level JSON array into a set of text values.
 - 

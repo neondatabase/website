@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP ROLE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-role/
+            - /docs/postgresql/postgresql-administration/postgresql-drop-role/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -28,9 +28,9 @@ In this syntax:
 
 
 
-- - First, specify the name of the role that you want to remove after the `DROP ROLE` keywords.
+- First, specify the name of the role that you want to remove after the `DROP ROLE` keywords.
 - -
-- - Second, use the `IF EXISTS` option to conditionally remove the role only if it exists.
+- Second, use the `IF EXISTS` option to conditionally remove the role only if it exists.
 - 
 
 
@@ -42,9 +42,9 @@ When you remove a role referenced in any database, PostgreSQL will raise an erro
 
 
 
-- - First, either remove the database objects owned by the role using the `DROP OWNED` statement or reassign the ownership of the database objects to another role `REASSIGN OWNED`.
+- First, either remove the database objects owned by the role using the `DROP OWNED` statement or reassign the ownership of the database objects to another role `REASSIGN OWNED`.
 - -
-- - Second, revoke any privileges granted to the role.
+- Second, revoke any privileges granted to the role.
 - 
 
 
@@ -81,11 +81,11 @@ Let's take an example of how to use the `DROP ROLE` statement:
 
 
 
-- - First, create a new role called `alice`
+- First, create a new role called `alice`
 - -
-- - Second, use the `alice` role to create a table called `customers`.
+- Second, use the `alice` role to create a table called `customers`.
 - -
-- - Third, remove the role `alice`.
+- Third, remove the role `alice`.
 - 
 
 
@@ -353,7 +353,7 @@ Finally, quit the current session:
 
 
 
-- - Use the PostgreSQL `DROP ROLE` statement to remove a role.
+- Use the PostgreSQL `DROP ROLE` statement to remove a role.
 - -
-- - If a role has dependent objects, use the `REASSIGN OWNED` and `DROP OWNED` statements in sequence to remove dependent objects of the role before executing the `DROP ROLE` statement.
+- If a role has dependent objects, use the `REASSIGN OWNED` and `DROP OWNED` statements in sequence to remove dependent objects of the role before executing the `DROP ROLE` statement.
 - 

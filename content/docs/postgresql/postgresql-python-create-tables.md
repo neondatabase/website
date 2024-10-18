@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Create Tables'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/create-tables/
+            - /docs/postgresql/postgresql-python/create-tables/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---
@@ -22,13 +22,13 @@ To create a new table in a PostgreSQL database, you use the following steps:
 
 
 
-- - First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function. The `connect()` function returns a `connection` object.
+- First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function. The `connect()` function returns a `connection` object.
 - -
-- - Second, create a `cursor` object by calling the `cursor()` method of the `connection` object.
+- Second, create a `cursor` object by calling the `cursor()` method of the `connection` object.
 - -
-- - Third, execute the `CREATE TABLE` by calling the `execute()` method of the `cursor` object.
+- Third, execute the `CREATE TABLE` by calling the `execute()` method of the `cursor` object.
 - -
-- - Finally, close the connection.
+- Finally, close the connection.
 - 
 
 
@@ -180,13 +180,13 @@ The `create_tables()` function will create four tables in the `suppliers` databa
 
 
 
-- - `vendors` - stores vendor data.
+- `vendors` - stores vendor data.
 - -
-- - `parts` - stores the part data.
+- `parts` - stores the part data.
 - -
-- - `vendor_parts` - stores the links between vendors and parts.
+- `vendor_parts` - stores the links between vendors and parts.
 - -
-- - `part_drawings` - stores the drawing of the parts.
+- `part_drawings` - stores the drawing of the parts.
 - 
 
 
@@ -279,5 +279,5 @@ The output indicates that the `suppliers` database has four tables.
 
 
 
-- - Call the `execute()` method of the `Cursor` object to execute a `CREATE TABLE` statement to create a new table in the database.
+- Call the `execute()` method of the `Cursor` object to execute a `CREATE TABLE` statement to create a new table in the database.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JUSTIFY_HOURS() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/
+            - /docs/postgresql/postgresql-date-functions/postgresql-justify_hours/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,7 +32,7 @@ In this syntax:
 
 
 
-- - `value` is an interval value you want to justify.
+- `value` is an interval value you want to justify.
 - 
 
 
@@ -40,11 +40,11 @@ The `JUSTIFY_HOURS()` function returns an adjusted interval with:
 
 
 
-- - Hours exceeding 24 are converted to days.
+- Hours exceeding 24 are converted to days.
 - -
-- - The remaining hours are kept the same.
+- The remaining hours are kept the same.
 - -
-- - Minutes, seconds, and other units remain unchanged.
+- Minutes, seconds, and other units remain unchanged.
 - 
 
 
@@ -149,5 +149,5 @@ Output:
 
 
 
-- - Use the `JUSTIFY_HOURS()` function to adjust 24-hour intervals as days.
+- Use the `JUSTIFY_HOURS()` function to adjust 24-hour intervals as days.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'How to Develop a PL/pgSQL Function That Returns a Table'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-returns-a-table/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-returns-a-table/
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
@@ -191,9 +191,9 @@ In this example, we create the `get_film(varchar,int)` that accepts two paramete
 
 
 
-- - The `p_pattern` is used to search for films.
+- The `p_pattern` is used to search for films.
 - -
-- - The `p_year` is the release year of the films.
+- The `p_year` is the release year of the films.
 - 
 
 
@@ -238,5 +238,5 @@ Output:
 
 
 
-- - Use the `returns table (column_list)` in the `create function` to define a function that returns a table (or result set).
+- Use the `returns table (column_list)` in the `create function` to define a function that returns a table (or result set).
 - 

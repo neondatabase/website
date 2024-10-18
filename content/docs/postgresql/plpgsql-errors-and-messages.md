@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Errors and Messages'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-errors-messages/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-errors-messages/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

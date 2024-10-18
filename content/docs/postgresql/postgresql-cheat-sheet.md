@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Cheat Sheet'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-cheat-sheet/
+            - /docs/postgresql/postgresql-cheat-sheet/
 ogImage: ./img/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png
 tableOfContents: true
 ---

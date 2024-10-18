@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Call Stored Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-jdbc/call-postgresql-stored-function/
+            - /docs/postgresql/postgresql-jdbc/call-postgresql-stored-function/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -22,15 +22,15 @@ To call the `initcap()` function, you follow these steps:
 
 
 
-- - First, [establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/).
+- First, [establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/).
 - -
-- - Second, create a `CallableStatement` object by calling the `prepareCall()` method of the `Connection` object.
+- Second, create a `CallableStatement` object by calling the `prepareCall()` method of the `Connection` object.
 - -
-- - Register `OUT` parameters if applicable.
+- Register `OUT` parameters if applicable.
 - -
-- - Bind values to the statement if applicable.
+- Bind values to the statement if applicable.
 - -
-- - Third, execute the function call and obtain the result.
+- Third, execute the function call and obtain the result.
 - 
 
 
@@ -231,5 +231,5 @@ Product{id=6, name='Phone Stand', price=24.99}
 
 
 
-- - Use the `CallableStatement` to call a built-in function from PostgreSQL.
+- Use the `CallableStatement` to call a built-in function from PostgreSQL.
 - 

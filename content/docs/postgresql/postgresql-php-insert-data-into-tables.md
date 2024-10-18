@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/insert/
+            - /docs/postgresql/postgresql-php/insert/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Insert-Example.png
 tableOfContents: true
 ---

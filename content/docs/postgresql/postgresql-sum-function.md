@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SUM Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-sum-function/
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

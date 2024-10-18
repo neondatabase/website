@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/connect/
+            - /docs/postgresql/postgresql-python/connect/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

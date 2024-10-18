@@ -297,5 +297,5 @@ first_name  |  last_name
 
 
 
-- - Use the PostgreSQL `EXISTS` to check the existence of rows in a subquery.
+- Use the PostgreSQL `EXISTS` to check the existence of rows in a subquery.
 - 

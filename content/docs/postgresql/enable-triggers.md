@@ -1,7 +1,7 @@
 ---
 title: 'Enable Triggers'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/
+            - /docs/postgresql/postgresql-triggers/enable-triggers/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

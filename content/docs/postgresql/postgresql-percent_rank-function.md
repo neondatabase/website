@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PERCENT_RANK Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-percent_rank-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-percent_rank-function/
 ogImage: ./img/wp-content-uploads-2019-05-sales_stats-table.png
 tableOfContents: true
 ---

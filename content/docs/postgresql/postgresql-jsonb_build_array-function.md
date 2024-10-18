@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_build_array() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_build_array/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_array/
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
@@ -118,5 +118,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `jsonb_build_array()` function to create a `JSONB` array from a variadic list of arguments.
+- Use the PostgreSQL `jsonb_build_array()` function to create a `JSONB` array from a variadic list of arguments.
 - 

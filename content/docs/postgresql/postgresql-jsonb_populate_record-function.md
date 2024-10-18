@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_populate_record() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_record/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_populate_record/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -39,9 +39,9 @@ In this syntax:
 
 
 
-- - `target` is a composite type to which you want to expand the JSONB value.
+- `target` is a composite type to which you want to expand the JSONB value.
 - -
-- - `json_object` is a JSON object of the JSONB type that you want to expand.
+- `json_object` is a JSON object of the JSONB type that you want to expand.
 - 
 
 
@@ -171,5 +171,5 @@ Output:
 
 
 
-- - Use the `jsonb_populate_record()` function to populate the fields of a record type or a custom composite type from a JSON object.
+- Use the `jsonb_populate_record()` function to populate the fields of a record type or a custom composite type from a JSON object.
 - 

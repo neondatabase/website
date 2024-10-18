@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL EXP() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-exp/
+            - /docs/postgresql/postgresql-exp
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -36,7 +36,7 @@ In this syntax:
 
 
 
-- - `n` is the number that you want to calculate the exponential. It can be a literal number, an expression, or a table column.
+- `n` is the number that you want to calculate the exponential. It can be a literal number, an expression, or a table column.
 - 
 
 
@@ -171,5 +171,5 @@ LINE 1: SELECT EXP('10X') result;
 
 
 
-- - Use the `EXP()` function to calculate the exponential of a number.
+- Use the `EXP()` function to calculate the exponential of a number.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Resources'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-resources/
+            - /docs/postgresql/postgresql-resources/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

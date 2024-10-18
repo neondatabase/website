@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JSON Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/
+            - /docs/postgresql/postgresql-json-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

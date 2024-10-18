@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL POWER() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-power/
+            - /docs/postgresql/postgresql-power
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

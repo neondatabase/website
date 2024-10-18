@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LAST_VALUE Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-last_value-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-last_value-function/
 ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---
@@ -130,11 +130,11 @@ In this example:
 
 
 
-- - Since we omit the `PARTITION BY` clause in the `LAST_VALUE()` function, the function treats the whole result set as a single partition.
+- Since we omit the `PARTITION BY` clause in the `LAST_VALUE()` function, the function treats the whole result set as a single partition.
 - -
-- - The `ORDER BY` clause sorts products by prices from low to high.
+- The `ORDER BY` clause sorts products by prices from low to high.
 - -
-- - The `LAST_VALUE()` retrieves the product name of the last row in the result set.
+- The `LAST_VALUE()` retrieves the product name of the last row in the result set.
 - 
 
 
@@ -174,13 +174,13 @@ In this example:
 
 
 
-- - The `PARTITION BY` clause divides rows by group id into three partitions specified by group id 1, 2, and 3.
+- The `PARTITION BY` clause divides rows by group id into three partitions specified by group id 1, 2, and 3.
 - -
-- - The `ORDER BY` clause sorts products in each product group ( or partition) from low to high.
+- The `ORDER BY` clause sorts products in each product group ( or partition) from low to high.
 - -
-- - The `RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING` clause defines the frame starting from the first row and ending at the last row of each partition.
+- The `RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING` clause defines the frame starting from the first row and ending at the last row of each partition.
 - -
-- - The `LAST_VALUE()` function applies to each partition separately and returns the product name of the last row in each partition.
+- The `LAST_VALUE()` function applies to each partition separately and returns the product name of the last row in each partition.
 - 
 
 
@@ -188,5 +188,5 @@ In this example:
 
 
 
-- - Use the PostgreSQL `LAST_VALUE()` window function to return the last value in an ordered partition of a result set.
+- Use the PostgreSQL `LAST_VALUE()` window function to return the last value in an ordered partition of a result set.
 - 

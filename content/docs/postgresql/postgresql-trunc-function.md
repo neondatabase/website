@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL TRUNC() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trunc/
+            - /docs/postgresql/postgresql-trunc
 ogImage: ./img/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---

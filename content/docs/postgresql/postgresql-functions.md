@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-functions/
+            - /docs/postgresql/postgresql-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

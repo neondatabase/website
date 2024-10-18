@@ -1,7 +1,7 @@
 ---
 title: 'Load PostgreSQL Sample Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/
+            - /docs/postgresql/postgresql-getting-started/load-postgresql-sample-database/
 ogImage: ./img/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png
 tableOfContents: true
 ---
@@ -14,9 +14,9 @@ Before going forward with this tutorial, you need to have:
 
 
 
-- - A PostgreSQL database server.
+- A PostgreSQL database server.
 - -
-- - A [PostgreSQL sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) called `dvdrental`.
+- A [PostgreSQL sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) called `dvdrental`.
 - 
 
 
@@ -36,11 +36,11 @@ To create a database and load data from an archive file, you follow these steps:
 
 
 
-- - First, connect to the [PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `psql` or `pgAdmin`.
+- First, connect to the [PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `psql` or `pgAdmin`.
 - -
-- - Second, create a blank database called `dvdrental`.
+- Second, create a blank database called `dvdrental`.
 - -
-- - Third, load data from the sample database file into the `dvdrental` database using `pg_restore`.
+- Third, load data from the sample database file into the `dvdrental` database using `pg_restore`.
 - 
 
 
@@ -179,9 +179,9 @@ In this command:
 
 
 
-- - The `-U postgres` instructs `pg_restore` to connect the PostgreSQL server using the `postgres` user.
+- The `-U postgres` instructs `pg_restore` to connect the PostgreSQL server using the `postgres` user.
 - -
-- - The `-d dvdrental` specifies the target database to load.
+- The `-d dvdrental` specifies the target database to load.
 - 
 
 

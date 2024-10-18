@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PG_SLEEP() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-pg_sleep/
+            - /docs/postgresql/postgresql-date-functions/postgresql-pg_sleep/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

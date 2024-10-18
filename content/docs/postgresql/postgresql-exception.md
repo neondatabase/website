@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Exception'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-exception/
 ogImage: ./img/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---
@@ -49,13 +49,13 @@ How it works.
 
 
 
-- - First, when an error occurs between the `begin` and `exception` clause, PL/pgSQL stops the execution and passes the control to the `exception` section.
+- First, when an error occurs between the `begin` and `exception` clause, PL/pgSQL stops the execution and passes the control to the `exception` section.
 - -
-- - Second, PL/pgSQL sequentially searches for the first `condition` that matches the error.
+- Second, PL/pgSQL sequentially searches for the first `condition` that matches the error.
 - -
-- - Third, if there is a match, the corresponding `handle_exception` statements will execute and the control is passed to the statement after the `end` keyword.
+- Third, if there is a match, the corresponding `handle_exception` statements will execute and the control is passed to the statement after the `end` keyword.
 - -
-- - Finally, if no match is found, the error propagates out and can be caught by the `exception` clause of the enclosing block. If there is no enclosing block with the `exception` clause, PL/pgSQL will abort the processing.
+- Finally, if no match is found, the error propagates out and can be caught by the `exception` clause of the enclosing block. If there is no enclosing block with the `exception` clause, PL/pgSQL will abort the processing.
 - 
 
 
@@ -303,5 +303,5 @@ SQL state: P0001
 
 
 
-- - Use the `exception` clause in the `begin...end` block to catch and handle exceptions.
+- Use the `exception` clause in the `begin...end` block to catch and handle exceptions.
 - 

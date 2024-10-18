@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL pg_terminate_backend() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-pg_terminate_backend/
+            - /docs/postgresql/postgresql-administration/postgresql-pg_terminate_backend/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -36,9 +36,9 @@ In this syntax:
 
 
 
-- - First, specify the process id (`pid`) that you want to terminate.
+- First, specify the process id (`pid`) that you want to terminate.
 - -
-- - Second, use the `timeout` in milliseconds to instruct the function to wait until the process is terminated or until the given time has passed. The timeout is optional.
+- Second, use the `timeout` in milliseconds to instruct the function to wait until the process is terminated or until the given time has passed. The timeout is optional.
 - 
 
 
@@ -111,5 +111,5 @@ Output:
 
 
 
-- - Use the `pg_terminate_backend()` function to terminate a process by the process ID.
+- Use the `pg_terminate_backend()` function to terminate a process by the process ID.
 - 

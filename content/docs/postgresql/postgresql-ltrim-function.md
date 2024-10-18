@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LTRIM() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ltrim/
+            - /docs/postgresql/postgresql-string-functions/postgresql-ltrim/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

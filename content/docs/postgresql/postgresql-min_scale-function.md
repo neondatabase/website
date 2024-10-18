@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MIN_SCALE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-min_scale/
+            - /docs/postgresql/postgresql-min_scale
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

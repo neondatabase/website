@@ -1,7 +1,7 @@
 ---
 title: 'Connect to a PostgreSQL Database Server'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/
+            - /docs/postgresql/postgresql-getting-started/connect-to-postgresql-database/
 ogImage: ./img/wp-content-uploads-2019-05-pgAdmin-4.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE DATABASE'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/
+            - /docs/postgresql/postgresql-administration/postgresql-create-database/
 ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png
 tableOfContents: true
 ---

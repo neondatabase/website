@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL WITH CHECK OPTION'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/
+            - /docs/postgresql/postgresql-views/postgresql-views-with-check-option/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -46,9 +46,9 @@ In PostgreSQL, you can specify a scope of check:
 
 
 
-- - `LOCAL`
+- `LOCAL`
 - -
-- - `CASCADED`
+- `CASCADED`
 - 
 
 
@@ -463,5 +463,5 @@ That's why the `INSERT` statement fails the condition of both `fte_1` and `fte` 
 
 
 
-- - Use the `WITH CHECK OPTION` clause to enforce constraints on data modifications through views and ensure that only valid data can be changed.
+- Use the `WITH CHECK OPTION` clause to enforce constraints on data modifications through views and ensure that only valid data can be changed.
 - 

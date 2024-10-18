@@ -249,7 +249,7 @@ Let's take some examples of using the PostgreSQL `NUMERIC` type.
 
 
 
-If you store a value with a scale greater than the declared scale of the `NUMERIC` column, PostgreSQL will [round](https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/) the value to a specified number of fractional digits. For example:
+If you store a value with a scale greater than the declared scale of the `NUMERIC` column, PostgreSQL will [round](/docs/postgresql/postgresql-round) the value to a specified number of fractional digits. For example:
 
 
 

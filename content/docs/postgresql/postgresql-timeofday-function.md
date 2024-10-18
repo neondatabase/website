@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL TIMEOFDAY() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-timeofday/
+            - /docs/postgresql/postgresql-date-functions/postgresql-timeofday/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'Install PostgreSQL on Windows'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/
+            - /docs/postgresql/postgresql-getting-started/install-postgresql/
 ogImage: ./img/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png
 tableOfContents: true
 ---
@@ -10,9 +10,9 @@ tableOfContents: true
 
 
 
-- - [Install PostgreSQL on macOS](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/)
+- [Install PostgreSQL on macOS](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/)
 - -
-- - [Install PostgreSQL on Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
+- [Install PostgreSQL on Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
 - 
 
 
@@ -24,11 +24,11 @@ To install PostgreSQL on Windows, you follow these steps:
 
 
 
-- - First, download the PostgreSQL installer for Windows.
+- First, download the PostgreSQL installer for Windows.
 - -
-- - Second, install PostgreSQL using the installer.
+- Second, install PostgreSQL using the installer.
 - -
-- - Third, add the path to the PostgreSQL's bin directory to the PATH environment variable.
+- Third, add the path to the PostgreSQL's bin directory to the PATH environment variable.
 - 
 
 
@@ -78,13 +78,13 @@ Step 4. Select software components to install:
 
 
 
-- - **PostgreSQL Server** option allows you to install the PostgreSQL database server
+- **PostgreSQL Server** option allows you to install the PostgreSQL database server
 - -
-- - **pgAdmin 4** option allows you to install the PostgreSQL database GUI management tool.
+- **pgAdmin 4** option allows you to install the PostgreSQL database GUI management tool.
 - -
-- - **Stack Builder** provides a GUI that allows you to download and install drivers that work with PostgreSQL.
+- **Stack Builder** provides a GUI that allows you to download and install drivers that work with PostgreSQL.
 - -
-- - **Command Line Tools** option allows you to install command-line tools such as `psql`, `pg_restore`, and so on. These tools allow you to interact with the PostgreSQL database server using the command-line interface.
+- **Command Line Tools** option allows you to install command-line tools such as `psql`, `pg_restore`, and so on. These tools allow you to interact with the PostgreSQL database server using the command-line interface.
 - 
 
 
@@ -192,11 +192,11 @@ Second, open the environment variables:
 
 
 
-- - Press `Win + R` to open the Run dialog
+- Press `Win + R` to open the Run dialog
 - -
-- - Type `sysdm.cpl` an press Enter. The System Properties dialog will display.
+- Type `sysdm.cpl` an press Enter. The System Properties dialog will display.
 - -
-- - Select the Advanced tab and click the `Environment Variables...`button.
+- Select the Advanced tab and click the `Environment Variables...`button.
 - 
 
 
@@ -204,9 +204,9 @@ You'll see two sections in the `Environment Variables` window:
 
 
 
-- - User variables for \[YourUsername]
+- User variables for \[YourUsername]
 - -
-- - System variables.
+- System variables.
 - 
 
 

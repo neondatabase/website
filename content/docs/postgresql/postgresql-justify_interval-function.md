@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
+            - /docs/postgresql/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -22,9 +22,9 @@ The `JUSTIFY_INTERVAL()` function achieves this by utilizing the `JUSTIFY_DAYS()
 
 
 
-- - `JUSTIFY_DAYS()`: Convert days exceeding 30 days into months and remaining days.
+- `JUSTIFY_DAYS()`: Convert days exceeding 30 days into months and remaining days.
 - -
-- - `JUSTIFY_HOURS()`: Convert hours exceeding 24 hours into days and remaining hours.
+- `JUSTIFY_HOURS()`: Convert hours exceeding 24 hours into days and remaining hours.
 - 
 
 
@@ -46,11 +46,11 @@ The `JUSTIFY_INTERVAL()` function returns an adjusted interval by:
 
 
 
-- - Convert days exceeding 30 days into months and remaining days.
+- Convert days exceeding 30 days into months and remaining days.
 - -
-- - Convert hours exceeding 24 hours into days and remaining hours.
+- Convert hours exceeding 24 hours into days and remaining hours.
 - -
-- - Correct signs (positive or negative) for the overall duration.
+- Correct signs (positive or negative) for the overall duration.
 - 
 
 
@@ -143,9 +143,9 @@ In this example:
 
 
 
-- - \-2 days 5 hours is -48 hours + 5 hours which is 43 hours.
+- \-2 days 5 hours is -48 hours + 5 hours which is 43 hours.
 - -
-- - The function converts - 43 hours to -24 hours + - 19 hours, which results in -1 days -19:00:00.
+- The function converts - 43 hours to -24 hours + - 19 hours, which results in -1 days -19:00:00.
 - 
 
 
@@ -153,5 +153,5 @@ In this example:
 
 
 
-- - Use the `JUSTIFY_INTERVAL()` function to normalize an interval by converting days exceeding 30 days into months and hours exceeding 24 hours into days, while maintaining correct signs for positive or negative intervals.
+- Use the `JUSTIFY_INTERVAL()` function to normalize an interval by converting days exceeding 30 days into months and hours exceeding 24 hours into days, while maintaining correct signs for positive or negative intervals.
 - 

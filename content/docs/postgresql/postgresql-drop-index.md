@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP INDEX'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-drop-index/
 ogImage: ./img/wp-content-uploads-2018-12-actor.png
 tableOfContents: true
 ---

@@ -1,14 +1,12 @@
 ---
 title: 'PostgreSQL String Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/
+            - /docs/postgresql/postgresql-string-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
 
 This page provides the most commonly used PostgreSQL string functions that allow you to manipulate string data effectively.  
-Type a function name to search...
-
 
 
 | Function                                                                                                    | Description                                                                                     | Example                                              | Result             |

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Describe Table'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-describe-table/
+            - /docs/postgresql/postgresql-administration/postgresql-describe-table/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -159,7 +159,7 @@ Note that the `SELECT *`from the `information_schema.columns` will retrieve a co
 
 
 
-- - Use the `\d table_name` to show the structure of the table using `psql`.
+- Use the `\d table_name` to show the structure of the table using `psql`.
 - -
-- - Query data from the `information_schema.columns` to retrieve the column information.
+- Query data from the `information_schema.columns` to retrieve the column information.
 - 

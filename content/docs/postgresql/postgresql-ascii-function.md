@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ASCII() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ascii/
+            - /docs/postgresql/postgresql-string-functions/postgresql-ascii/
 ogImage: ./img/wp-content-uploads-2017-08-PostgreSQL-ASCII-function-example.png
 tableOfContents: true
 ---

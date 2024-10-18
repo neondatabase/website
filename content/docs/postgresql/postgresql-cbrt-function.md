@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CBRT() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-cbrt/
+            - /docs/postgresql/postgresql-cbrt
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -33,7 +33,7 @@ A cube root number is a number that when you multiply itself twice, you'll get t
 
 
 
-In PostgreSQL, the `CBRT()` is a [math function](https://www.postgresqltutorial.com/postgresql-math-functions/) that returns the cube root of a number.
+In PostgreSQL, the `CBRT()` is a [math function](/docs/postgresql/postgresql-math-functions) that returns the cube root of a number.
 
 
 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LENGTH() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-length-function/
+            - /docs/postgresql/postgresql-string-functions/postgresql-length-function/
 ogImage: ./img/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
@@ -32,11 +32,11 @@ The `LENGTH()` function accepts a string as a parameter. It can be any of the fo
 
 
 
-- - character or char
+- character or char
 - -
-- - character varying or varchar
+- character varying or varchar
 - -
-- - text
+- text
 - 
 
 
@@ -158,5 +158,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `LENGTH()` function to get the number of characters of a string.
+- Use the PostgreSQL `LENGTH()` function to get the number of characters of a string.
 - 

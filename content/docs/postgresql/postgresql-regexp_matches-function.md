@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REGEXP_MATCHES() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-regexp_matches/
+            - /docs/postgresql/postgresql-string-functions/postgresql-regexp_matches/
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

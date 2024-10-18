@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DEGREES() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-degrees/
+            - /docs/postgresql/postgresql-degrees
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

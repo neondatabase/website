@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Show Databases'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/
+            - /docs/postgresql/postgresql-administration/postgresql-show-databases/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -113,7 +113,7 @@ The query returns four databases in the current PostgreSQL server.
 
 
 
-- - Use `\l` or `\l+` in `psql` to show all databases in a PostgreSQL database server.
+- Use `\l` or `\l+` in `psql` to show all databases in a PostgreSQL database server.
 - -
-- - Use the `SELECT` statement to query data from the `pg_database` to retrieve all the database names in a PostgreSQL database server.
+- Use the `SELECT` statement to query data from the `pg_database` to retrieve all the database names in a PostgreSQL database server.
 - 

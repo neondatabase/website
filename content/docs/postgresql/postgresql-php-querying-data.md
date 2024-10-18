@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Querying Data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/query/
+            - /docs/postgresql/postgresql-php/query/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png
 tableOfContents: true
 ---

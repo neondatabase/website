@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REVERSE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-reverse/
+            - /docs/postgresql/postgresql-string-functions/postgresql-reverse/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,7 +32,7 @@ In this syntax:
 
 
 
-- - `text`: The input string that you want to reverse.
+- `text`: The input string that you want to reverse.
 - 
 
 
@@ -216,5 +216,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `REVERSE()` function to reverse the order of characters within a string.
+- Use the PostgreSQL `REVERSE()` function to reverse the order of characters within a string.
 - 

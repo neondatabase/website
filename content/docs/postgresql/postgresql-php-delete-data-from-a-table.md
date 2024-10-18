@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Delete Data From a Table'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/delete/
+            - /docs/postgresql/postgresql-php/delete/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

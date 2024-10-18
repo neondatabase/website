@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Stored Procedure with INOUT Parameters'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/
 ogImage: ./img/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---
@@ -220,5 +220,5 @@ Output:
 
 
 
-- - Use the `INOUT` parameters to return values from stored procedures in PostgreSQL.
+- Use the `INOUT` parameters to return values from stored procedures in PostgreSQL.
 - 

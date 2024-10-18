@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Uptime'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-uptime/
+            - /docs/postgresql/postgresql-administration/postgresql-uptime/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JSON Index'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-json-index/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -480,5 +480,5 @@ The output indicates that the query uses the `customer_json_index` index.
 
 
 
-- - Use the `GIN` index to create an index for a JSONB column of a table to improve query performance.
+- Use the `GIN` index to create an index for a JSONB column of a table to improve query performance.
 - 

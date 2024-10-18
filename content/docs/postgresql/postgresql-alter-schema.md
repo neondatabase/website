@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER SCHEMA'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-alter-schema/
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-ALTER-SCHEMA-change-owner-example.png
 tableOfContents: true
 ---

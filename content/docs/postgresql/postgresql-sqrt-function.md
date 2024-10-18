@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL SQRT() Function'
-redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sqrt/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -14,7 +12,7 @@ tableOfContents: true
 
 
 
-The `SQRT()` function is a powerful [mathematical function](https://www.postgresqltutorial.com/postgresql-math-functions/) that allows you to calculate the square root of a number.
+The `SQRT()` function is a powerful [mathematical function](/docs/postgresql/postgresql-math-functions) that allows you to calculate the square root of a number.
 
 
 
@@ -152,5 +150,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `SQRT()` function to calculate the square root of a number.
+- Use the PostgreSQL `SQRT()` function to calculate the square root of a number.
 - 

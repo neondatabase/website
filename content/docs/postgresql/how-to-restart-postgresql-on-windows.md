@@ -1,7 +1,7 @@
 ---
 title: 'How to Restart PostgreSQL on Windows'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/restart-postgresql-windows/
+            - /docs/postgresql/postgresql-administration/restart-postgresql-windows/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -22,13 +22,13 @@ The following steps describe how to restart PostgreSQL on Windows using Service 
 
 
 
-- - Press `Win+R` to open the **Run** dialog.
+- Press `Win+R` to open the **Run** dialog.
 - -
-- - Type `services.msc` and press `Enter`.
+- Type `services.msc` and press `Enter`.
 - -
-- - In the `Services` window, locate the PostgreSQL service. Typically, it is something like `postgresql-x64-<version>`.
+- In the `Services` window, locate the PostgreSQL service. Typically, it is something like `postgresql-x64-<version>`.
 - -
-- - Right-click on it and select **Stop** to stop the service.
+- Right-click on it and select **Stop** to stop the service.
 - 
 
 
@@ -36,9 +36,9 @@ The following steps describe how to restart PostgreSQL on Windows using Service 
 
 
 
-- - After stopping the service, right-click on the service name.
+- After stopping the service, right-click on the service name.
 - -
-- - Select **Start** to start the service.
+- Select **Start** to start the service.
 - 
 
 
@@ -54,11 +54,11 @@ If you prefer working with command, you can follow these steps to restart Postgr
 
 
 
-- - Press `Win+R` to open the **Run** dialog
+- Press `Win+R` to open the **Run** dialog
 - -
-- - Type `cmd` and `press Ctrl+Shift+Enter` (not Enter). This will allow you to run the command prompt as an Administrator.
+- Type `cmd` and `press Ctrl+Shift+Enter` (not Enter). This will allow you to run the command prompt as an Administrator.
 - -
-- - A **User Account Control** pop-up will display, you can click the **Yes** button to acknowledge.
+- A **User Account Control** pop-up will display, you can click the **Yes** button to acknowledge.
 - 
 
 
@@ -152,9 +152,9 @@ It assumes that the `bin` directory is included in the `PATH` environment variab
 
 
 
-- - Press `Win+R` to open the **Run** dialog.
+- Press `Win+R` to open the **Run** dialog.
 - -
-- - Type `cmd` and ` press ``Ctrl+Shift+Enter ` to run the Command Prompt as an Administrator.
+- Type `cmd` and ` press ``Ctrl+Shift+Enter ` to run the Command Prompt as an Administrator.
 - 
 
 

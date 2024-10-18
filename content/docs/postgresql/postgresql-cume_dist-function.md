@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CUME_DIST Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-cume_dist-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-cume_dist-function/
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
 tableOfContents: true
 ---

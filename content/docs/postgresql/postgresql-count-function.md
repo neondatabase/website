@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL COUNT Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-count-function/
 ogImage: ./img/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---
@@ -277,5 +277,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `COUNT()` function to return the number of rows in a table.
+- Use the PostgreSQL `COUNT()` function to return the number of rows in a table.
 - 

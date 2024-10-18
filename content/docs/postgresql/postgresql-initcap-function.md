@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL INITCAP() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-letter-case-functions/
+            - /docs/postgresql/postgresql-string-functions/postgresql-letter-case-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

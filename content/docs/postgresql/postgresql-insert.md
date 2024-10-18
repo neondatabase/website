@@ -33,9 +33,9 @@ In this syntax:
 
 
 
-- - First, specify the name of the table (`table1`) that you want to insert data after the `INSERT INTO` keywords and a list of comma-separated columns (`colum1, column2, ....`).
+- First, specify the name of the table (`table1`) that you want to insert data after the `INSERT INTO` keywords and a list of comma-separated columns (`colum1, column2, ....`).
 - -
-- - Second, supply a list of comma-separated values in parentheses `(value1, value2, ...)` after the `VALUES` keyword. The column and value lists must be in the same order.
+- Second, supply a list of comma-separated values in parentheses `(value1, value2, ...)` after the `VALUES` keyword. The column and value lists must be in the same order.
 - 
 
 
@@ -53,9 +53,9 @@ In this syntax:
 
 
 
-- - The `OID` is an object identifier. PostgreSQL used the `OID` internally as a [primary key](/docs/postgresql/postgresql-primary-key) for its system tables. Typically, the `INSERT` statement returns `OID` with a value of 0.
+- The `OID` is an object identifier. PostgreSQL used the `OID` internally as a [primary key](/docs/postgresql/postgresql-primary-key) for its system tables. Typically, the `INSERT` statement returns `OID` with a value of 0.
 - -
-- - The `count` is the number of rows that the `INSERT` statement inserted successfully.
+- The `count` is the number of rows that the `INSERT` statement inserted successfully.
 - 
 
 
@@ -339,7 +339,7 @@ Output:
 
 
 
-- - Use PostgreSQL `INSERT` statement to insert a new row into a table.
+- Use PostgreSQL `INSERT` statement to insert a new row into a table.
 - -
-- - Use the `RETURNING` clause to get the inserted rows.
+- Use the `RETURNING` clause to get the inserted rows.
 - 

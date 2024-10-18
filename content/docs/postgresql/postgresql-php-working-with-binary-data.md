@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Working with Binary Data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/
+            - /docs/postgresql/postgresql-php/postgresql-blob/
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png
 tableOfContents: true
 ---

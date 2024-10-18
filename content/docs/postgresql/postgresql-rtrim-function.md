@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL RTRIM() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/
+            - /docs/postgresql/postgresql-string-functions/postgresql-rtrim/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - `string` is the input string that you want to remove characters
+- `string` is the input string that you want to remove characters
 - -
-- - `character` specifies the character you want to remove from the end of the string. The `character` parameter is optional and defaults to space.
+- `character` specifies the character you want to remove from the end of the string. The `character` parameter is optional and defaults to space.
 - 
 
 
@@ -209,5 +209,5 @@ Output:
 
 
 
-- - Use `RTRIM()` function to remove all specified characters from the end of a string.
+- Use `RTRIM()` function to remove all specified characters from the end of a string.
 - 

@@ -145,13 +145,13 @@ The `items` table has four columns:
 
 
 
-- - `id`: the primary key that identifies the item in the `items` table.
+- `id`: the primary key that identifies the item in the `items` table.
 - -
-- - `product`: the product name.
+- `product`: the product name.
 - -
-- - `price`: the price of the product.
+- `price`: the price of the product.
 - -
-- - `discount`: the discount on the product.
+- `discount`: the discount on the product.
 - 
 
 
@@ -280,5 +280,5 @@ It is recommended to use `COALESCE()` function because it makes the query shorte
 
 
 
-- - Use the `COALESCE()` function to substitute null values in the query.
+- Use the `COALESCE()` function to substitute null values in the query.
 - 

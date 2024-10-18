@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP TABLESPACE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/
+            - /docs/postgresql/postgresql-administration/postgresql-drop-tablespace/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

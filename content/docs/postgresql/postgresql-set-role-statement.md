@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SET ROLE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/
+            - /docs/postgresql/postgresql-administration/postgresql-set-role/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -218,7 +218,7 @@ The current role is back to `lily`.
 
 
 
-- - Use the `SET` `ROLE` statement to temporarily change the current role within a database session.
+- Use the `SET` `ROLE` statement to temporarily change the current role within a database session.
 - -
-- - Use the `RESET` `ROLE` statement to reset the role to the original one.
+- Use the `RESET` `ROLE` statement to reset the role to the original one.
 - 

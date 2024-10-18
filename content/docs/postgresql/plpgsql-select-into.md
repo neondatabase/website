@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Select Into'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select-into/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-select-into/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -34,11 +34,11 @@ In this syntax,
 
 
 
-- - First, specify one or more columns from which you want to retrieve data in the `select` clause.
+- First, specify one or more columns from which you want to retrieve data in the `select` clause.
 - -
-- - Second, place one or more variables after the `into` keyword.
+- Second, place one or more variables after the `into` keyword.
 - -
-- - Third, provide the name of the table in the `from` clause.
+- Third, provide the name of the table in the `from` clause.
 - 
 
 
@@ -99,11 +99,11 @@ In this example:
 
 
 
-- - First, declare a variable called `actor_count` that stores the number of actors from the `actor` table.
+- First, declare a variable called `actor_count` that stores the number of actors from the `actor` table.
 - -
-- - Second, assign the number of actors to the `actor_count` using the `select into` statement.
+- Second, assign the number of actors to the `actor_count` using the `select into` statement.
 - -
-- - Third, display a message that shows the value of the `actor_count` variable using the `raise notice` statement.
+- Third, display a message that shows the value of the `actor_count` variable using the `raise notice` statement.
 - 
 
 
@@ -213,5 +213,5 @@ $$;
 
 
 
-- - Use the `select into` statement to select data from the database and assign it to a variable.
+- Use the `select into` statement to select data from the database and assign it to a variable.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Selecting Data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-select/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-select/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -34,9 +34,9 @@ Third, execute the `SELECT` statement by calling one of the following methods of
 
 
 
-- - `ExecuteReaderAsync()` - executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
+- `ExecuteReaderAsync()` - executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
 - -
-- - `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
+- `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
 - 
 
 
@@ -235,7 +235,7 @@ Student count: 10
 
 
 
-- - Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
+- Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
 - -
-- - Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.
+- Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Function Overloading'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -232,7 +232,7 @@ As a rule of thumb, when overloading functions, you should always ensure their p
 
 
 
-- - Multiple functions can share the same names as long as they have different arguments. These function names are overloaded.
+- Multiple functions can share the same names as long as they have different arguments. These function names are overloaded.
 - -
-- - Use a unique function argument list to define overloaded functions.
+- Use a unique function argument list to define overloaded functions.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL List Indexes'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/
+            - /docs/postgresql/postgresql-indexes/postgresql-list-indexes/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

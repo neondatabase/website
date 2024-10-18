@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CURRENT_TIME Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_time/
+            - /docs/postgresql/postgresql-date-functions/postgresql-current_time/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LOCALTIME Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/
+            - /docs/postgresql/postgresql-date-functions/postgresql-localtime/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -118,5 +118,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `LOCALTIME` function to get the time at which the current transaction starts.
+- Use the PostgreSQL `LOCALTIME` function to get the time at which the current transaction starts.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_array_elements() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_elements/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -249,5 +249,5 @@ Output:
 
 
 
-- - Use the `jsonb_array_elements()` function to expand elements of the top-level JSON array.
+- Use the `jsonb_array_elements()` function to expand elements of the top-level JSON array.
 - 

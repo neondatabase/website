@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Password File .pgpass'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/
+            - /docs/postgresql/postgresql-administration/postgresql-password-file-pgpass/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -36,15 +36,15 @@ In this format:
 
 
 
-- - `hostname`: This is the hostname of the server where the PostgreSQL server is running.
+- `hostname`: This is the hostname of the server where the PostgreSQL server is running.
 - -
-- - `port`: This is the port on which the PostgreSQL server is listening.
+- `port`: This is the port on which the PostgreSQL server is listening.
 - -
-- - `database`: This is the database to which you want to connect.
+- `database`: This is the database to which you want to connect.
 - -
-- - `username`: This is the username that you want to use to connect to the database.
+- `username`: This is the username that you want to use to connect to the database.
 - -
-- - `password`: This is the password of the username.
+- `password`: This is the password of the username.
 - 
 
 
@@ -176,7 +176,7 @@ The `psql` command will read the `.pgpass` file for connection information.
 
 
 
-- - Use a password file `.pgpass` to store connection information securely.
+- Use a password file `.pgpass` to store connection information securely.
 - -
-- - Use the `.pgpass` file to avoid entering a password when connecting to a PostgreSQL database.
+- Use the `.pgpass` file to avoid entering a password when connecting to a PostgreSQL database.
 - 

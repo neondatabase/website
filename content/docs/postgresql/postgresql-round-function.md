@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ROUND() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/
+            - /docs/postgresql/postgresql-round
 ogImage: ./img/wp-content-uploads-2013-05-customer-and-payment-tables.png
 tableOfContents: true
 ---

@@ -361,11 +361,11 @@ The `TRUNCATE TABLE` statement is more efficient than the `DELETE` statement due
 
 
 
-- - **Minimal logging**: The `TRUNCATE TABLE` statement doesn't generate individual row deletion logs. Instead, it deallocates entire data pages making it faster than the `DELETE` statement.
+- **Minimal logging**: The `TRUNCATE TABLE` statement doesn't generate individual row deletion logs. Instead, it deallocates entire data pages making it faster than the `DELETE` statement.
 - -
-- - **Fewer resources**: The truncate operation is more lightweight than the delete option because it doesn't generate as much undo and redo information. It releases storage space without scanning individual rows.
+- **Fewer resources**: The truncate operation is more lightweight than the delete option because it doesn't generate as much undo and redo information. It releases storage space without scanning individual rows.
 - -
-- - **Lower-level locking mechanism**: The truncate operation often requires lower-level locks and is less prone to conflicts with other transactions, which improves overall system concurrency.
+- **Lower-level locking mechanism**: The truncate operation often requires lower-level locks and is less prone to conflicts with other transactions, which improves overall system concurrency.
 - 
 
 
@@ -373,11 +373,11 @@ The `TRUNCATE TABLE` statement is more efficient than the `DELETE` statement due
 
 
 
-- - Use the `TRUNCATE TABLE` statement to delete all data from a large table very fast.
+- Use the `TRUNCATE TABLE` statement to delete all data from a large table very fast.
 - -
-- - Use the `CASCADE` option to truncate a table that is referenced by foreign key constraints.
+- Use the `CASCADE` option to truncate a table that is referenced by foreign key constraints.
 - -
-- - The `TRUNCATE TABLE` deletes data but does not fire `ON DELETE` triggers. Instead, it fires the `BEFORE TRUNCATE` and `AFTER TRUNCATE` triggers.
+- The `TRUNCATE TABLE` deletes data but does not fire `ON DELETE` triggers. Instead, it fires the `BEFORE TRUNCATE` and `AFTER TRUNCATE` triggers.
 - -
-- - The `TRUNCATE TABLE` statement is transaction-safe.
+- The `TRUNCATE TABLE` statement is transaction-safe.
 - 

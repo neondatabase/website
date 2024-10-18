@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Loop Statements'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

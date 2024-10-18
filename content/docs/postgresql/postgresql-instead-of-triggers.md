@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL INSTEAD OF Triggers'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/
+            - /docs/postgresql/postgresql-triggers/postgresql-instead-of-triggers/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

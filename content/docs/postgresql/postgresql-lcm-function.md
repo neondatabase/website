@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LCM() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-lcm/
+            - /docs/postgresql/postgresql-lcm
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -110,9 +110,9 @@ In this example, we apply the `lcm()` function twice:
 
 
 
-- - lcm(12,18) returns the LCM of 12 and 18, which is 36.
+- lcm(12,18) returns the LCM of 12 and 18, which is 36.
 - -
-- - lcm(lcm(12,18),24) calculates the LCM of the previous LCM (36) and 24, which is 72.
+- lcm(lcm(12,18),24) calculates the LCM of the previous LCM (36) and 24, which is 72.
 - 
 
 
@@ -242,5 +242,5 @@ Output:
 
 
 
-- - Use the `lcm()` function to calculate the least common multiple (LCM) of two or more integers.
+- Use the `lcm()` function to calculate the least common multiple (LCM) of two or more integers.
 - 

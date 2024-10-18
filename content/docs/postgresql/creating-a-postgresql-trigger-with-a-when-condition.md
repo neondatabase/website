@@ -1,7 +1,7 @@
 ---
 title: 'Creating a PostgreSQL Trigger with a When Condition'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-trigger-when-condition/
+            - /docs/postgresql/postgresql-triggers/postgresql-trigger-when-condition/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

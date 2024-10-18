@@ -33,11 +33,11 @@ In this syntax:
 
 
 
-- - First, specify the name of the table that you want to insert data after the `INSERT INTO` keywords.
+- First, specify the name of the table that you want to insert data after the `INSERT INTO` keywords.
 - -
-- - Second, list the required columns or all columns of the table in parentheses that follow the table name.
+- Second, list the required columns or all columns of the table in parentheses that follow the table name.
 - -
-- - Third, supply a comma-separated list of rows after the `VALUES` keyword.
+- Third, supply a comma-separated list of rows after the `VALUES` keyword.
 - 
 
 
@@ -61,9 +61,9 @@ Inserting multiple rows at once has advantages over inserting one row at a time:
 
 
 
-- - **Performance:** Inserting multiple rows in a single statement is often more efficient than multiple individual inserts because it reduces the number of round-trips between the application and the PostgreSQL server.
+- **Performance:** Inserting multiple rows in a single statement is often more efficient than multiple individual inserts because it reduces the number of round-trips between the application and the PostgreSQL server.
 - -
-- - **Atomicity:** The entire `INSERT` statement is atomic, meaning that either all rows are inserted, or none are. This ensures data consistency.
+- **Atomicity:** The entire `INSERT` statement is atomic, meaning that either all rows are inserted, or none are. This ensures data consistency.
 - 
 
 
@@ -219,7 +219,7 @@ INSERT 0 3
 
 
 
-- - Specify multiple value lists in the `INSERT` statement to insert multiple rows into a table.
+- Specify multiple value lists in the `INSERT` statement to insert multiple rows into a table.
 - -
-- - Use `RETURNING` clause to return the inserted rows.
+- Use `RETURNING` clause to return the inserted rows.
 - 

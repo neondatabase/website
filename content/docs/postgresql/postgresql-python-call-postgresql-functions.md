@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Call PostgreSQL Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/
+            - /docs/postgresql/postgresql-python/postgresql-python-call-postgresql-functions/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -224,5 +224,5 @@ Output:
 
 
 
-- - Use the `callproc()` method of the `cursor` object to call a function in PostgreSQL from Python.
+- Use the `callproc()` method of the `cursor` object to call a function in PostgreSQL from Python.
 - 

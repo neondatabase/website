@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Record Types'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-record-types/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

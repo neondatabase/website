@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Continue Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-continue/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-continue/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -96,9 +96,9 @@ How it works.
 
 
 
-- - First, initialize the `counter` to zero.
+- First, initialize the `counter` to zero.
 - -
-- - Second, increase the counter by one in each iteration. If the `counter` is greater than 10, then [exit ](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/)the loop. If the `counter` is an even number, then skip the current iteration.
+- Second, increase the counter by one in each iteration. If the `counter` is greater than 10, then [exit ](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/)the loop. If the `counter` is an even number, then skip the current iteration.
 - 
 
 
@@ -114,5 +114,5 @@ If it is zero, then the `counter` is an even number. All the statements between 
 
 
 
-- - Use the `continue` statement to skip the current loop iteration prematurely and start a new one.
+- Use the `continue` statement to skip the current loop iteration prematurely and start a new one.
 - 

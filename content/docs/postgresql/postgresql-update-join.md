@@ -185,5 +185,5 @@ The output indicates that the `net_price` column has been updated with the corre
 
 
 
-- - Use the PostgreSQL `UPDATE` join statement to update data in a table based on values in another table.
+- Use the PostgreSQL `UPDATE` join statement to update data in a table based on values in another table.
 - 

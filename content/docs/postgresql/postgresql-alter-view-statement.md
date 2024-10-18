@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER VIEW Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-views/postgresql-alter-view/
+            - /docs/postgresql/postgresql-views/postgresql-alter-view/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -110,11 +110,11 @@ The `view_option_name` can be:
 
 
 
-- - `check_option`: change the check option. The valid value is `local` or `cascaded`.
+- `check_option`: change the check option. The valid value is `local` or `cascaded`.
 - -
-- - `security_barrier`: change the security-barrier property of a view. The valid value is `true` or `false`.
+- `security_barrier`: change the security-barrier property of a view. The valid value is `true` or `false`.
 - -
-- - `security_invoker`: change the security invoker of a view. The valid value is `true` or `false`.
+- `security_invoker`: change the security invoker of a view. The valid value is `true` or `false`.
 - 
 
 
@@ -282,9 +282,9 @@ Options: check_option=local
 
 
 
-- - Use the `ALTER VIEW ... RENAME TO` statement to rename a view.
+- Use the `ALTER VIEW ... RENAME TO` statement to rename a view.
 - -
-- - Use the `ALTER VIEW ... (SET check_option)` statement to change the check option of a view.
+- Use the `ALTER VIEW ... (SET check_option)` statement to change the check option of a view.
 - -
-- - Use the `ALTER VIEW ... SET SCHEMA` statement to change the schema of a view.
+- Use the `ALTER VIEW ... SET SCHEMA` statement to change the schema of a view.
 - 

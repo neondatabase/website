@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_object_agg() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_object_agg/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

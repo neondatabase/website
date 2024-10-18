@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BEFORE TRUNCATE Trigger'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -188,7 +188,7 @@ The output indicates that the `BEFORE TRUNCATE` trigger fires, raising an except
 
 
 
-- - A `BEFORE TRUNCATE` trigger is a statement-level trigger.
+- A `BEFORE TRUNCATE` trigger is a statement-level trigger.
 - -
-- - Create a `BEFORE TRUNCATE` trigger to fire before a `TRUNCATE` event.
+- Create a `BEFORE TRUNCATE` trigger to fire before a `TRUNCATE` event.
 - 

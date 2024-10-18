@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MAKE_DATE() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_date/
+            - /docs/postgresql/postgresql-date-functions/postgresql-make_date/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -136,5 +136,5 @@ Output:
 
 
 
-- - Use the `MAKE_DATE()` function to generate a date value from the year, month, and day
+- Use the `MAKE_DATE()` function to generate a date value from the year, month, and day
 - 

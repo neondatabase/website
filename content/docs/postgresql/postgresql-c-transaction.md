@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Transaction'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-transaction/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-transaction/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -240,10 +240,10 @@ Output:
 
 
 
-- - Call the `BeginTransactionAsync()` method of the `NpgsqlConnection` object to start a transaction.
+- Call the `BeginTransactionAsync()` method of the `NpgsqlConnection` object to start a transaction.
 - -
-- - Call the `CommitAsync()` method of the `NpgsqlTransaction` object to apply the changes since the transaction started to the database permanently.
+- Call the `CommitAsync()` method of the `NpgsqlTransaction` object to apply the changes since the transaction started to the database permanently.
 - -
-- - Call the `RollbackAsync()` method of the `NpgsqlTransaction` object to roll back the changes.
+- Call the `RollbackAsync()` method of the `NpgsqlTransaction` object to roll back the changes.
 
 - 

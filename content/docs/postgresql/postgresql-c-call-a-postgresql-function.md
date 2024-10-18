@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-postgresql-function/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -267,5 +267,5 @@ Finally, display the error message if any exceptions occur:
 
 
 
-- - Call the `ExecuteReaderAsync()` method of the `NpgsqlCommand` object to execute a call to a PostgreSQL function from a C# program.
+- Call the `ExecuteReaderAsync()` method of the `NpgsqlCommand` object to execute a call to a PostgreSQL function from a C# program.
 - 

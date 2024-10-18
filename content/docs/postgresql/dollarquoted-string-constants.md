@@ -1,7 +1,7 @@
 ---
 title: 'Dollar-Quoted String Constants'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/
+            - /docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -66,13 +66,13 @@ In this syntax, the `tag` is optional. It follows the same rules as unquoted ide
 
 
 
-- - Must begin with a letter (a-z, A-Z) or underscore.
+- Must begin with a letter (a-z, A-Z) or underscore.
 - -
-- - Can include letters (case-insensitive), digits, and underscores.
+- Can include letters (case-insensitive), digits, and underscores.
 - -
-- - Limited to 63 characters (longer ones are truncated).
+- Limited to 63 characters (longer ones are truncated).
 - -
-- - Cannot contain whitespaces, or reserved keywords without quotes.
+- Cannot contain whitespaces, or reserved keywords without quotes.
 - 
 
 
@@ -282,7 +282,7 @@ $$
 
 
 
-- - Use quoted-dollar string constant syntax to construct string constants without the need to escape single quotes.
+- Use quoted-dollar string constant syntax to construct string constants without the need to escape single quotes.
 - -
-- - Do use quoted-dollar string constants in anonymous blocks, user-defined functions, and stored procedures.
+- Do use quoted-dollar string constants in anonymous blocks, user-defined functions, and stored procedures.
 - 

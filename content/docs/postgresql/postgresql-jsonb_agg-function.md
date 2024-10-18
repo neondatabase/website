@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_agg() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_agg/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_agg/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -36,7 +36,7 @@ In this syntax:
 
 
 
-- - `expression`: is any valid expression that evaluates to a JSON value.
+- `expression`: is any valid expression that evaluates to a JSON value.
 - 
 
 
@@ -390,5 +390,5 @@ The `jsonb_agg_strict()` function works like the `jsonb_agg()` except that it sk
 
 
 
-- - Use the `jsonb_agg()` function to aggregate values into a JSON array.
+- Use the `jsonb_agg()` function to aggregate values into a JSON array.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'Install PostgreSQL Linux'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/
+            - /docs/postgresql/postgresql-getting-started/install-postgresql-linux/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

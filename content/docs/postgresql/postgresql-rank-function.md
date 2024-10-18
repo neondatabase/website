@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL RANK Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-rank-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-rank-function/
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-RANK-function-sample-table.png
 tableOfContents: true
 ---

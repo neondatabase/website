@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-connect/
 ogImage: ./img/wp-content-uploads-2024-05-PostgreSQL-C-Connect.png
 tableOfContents: true
 ---

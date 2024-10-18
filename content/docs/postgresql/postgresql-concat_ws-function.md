@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CONCAT_WS() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-concat_ws/
+            - /docs/postgresql/postgresql-string-functions/postgresql-concat_ws/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BEFORE INSERT Trigger'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-insert-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-before-insert-trigger/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -227,5 +227,5 @@ Eighth, retrieve the data from the `inventory_stat` table:
 
 
 
-- - A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a table.
+- A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a table.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MAX Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-max-function/
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
@@ -123,9 +123,9 @@ How it works.
 
 
 
-- - First, the subquery uses the `MAX()` function to return the highest payment.
+- First, the subquery uses the `MAX()` function to return the highest payment.
 - -
-- - Second, the outer query retrieves all the payments whose amounts are equal to the highest payment returned from the subquery.
+- Second, the outer query retrieves all the payments whose amounts are equal to the highest payment returned from the subquery.
 - 
 
 
@@ -211,5 +211,5 @@ customer_id |  max
 
 
 
-- - Use the PostgreSQL `MAX()` function to find the maximum value of a set.
+- Use the PostgreSQL `MAX()` function to find the maximum value of a set.
 - 

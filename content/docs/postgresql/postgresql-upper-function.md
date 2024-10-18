@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL UPPER() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-upper/
+            - /docs/postgresql/postgresql-string-functions/postgresql-upper/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -160,5 +160,5 @@ Output:
 
 
 
-- - Use the `UPPER()` function to return a new string with all the characters of the input string converted to uppercase.
+- Use the `UPPER()` function to return a new string with all the characters of the input string converted to uppercase.
 - 

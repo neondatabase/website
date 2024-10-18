@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL RIGHT() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-right/
+            - /docs/postgresql/postgresql-string-functions/postgresql-right/
 ogImage: ./img/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ The PostgreSQL `RIGHT()` function requires two arguments:
 
 
 
-- - `string` is a string from which a number of the rightmost characters are returned.
+- `string` is a string from which a number of the rightmost characters are returned.
 - -
-- - **`n`** is a positive integer that specifies the number of the rightmost characters in the string that should be returned.
+- **`n`** is a positive integer that specifies the number of the rightmost characters in the string that should be returned.
 - 
 
 
@@ -175,5 +175,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `RIGHT()` function to get the n rightmost characters in a string.
+- Use the PostgreSQL `RIGHT()` function to get the n rightmost characters in a string.
 - 

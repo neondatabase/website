@@ -18,11 +18,11 @@ PostgreSQL provides three primary character types:
 
 
 
-- - `CHARACTER(n)` or `CHAR(n)`
+- `CHARACTER(n)` or `CHAR(n)`
 - -
-- - `CHARACTER VARYING(n)` or `VARCHAR(n)`
+- `CHARACTER VARYING(n)` or `VARCHAR(n)`
 - -
-- - `TEXT`
+- `TEXT`
 - 
 
 
@@ -194,9 +194,9 @@ Output:
 
 
 
-- - PostgreSQL supports `CHAR`, `VARCHAR`, and `TEXT` data types. The `CHAR` is a fixed-length character type while the `VARCHAR` and `TEXT` are varying length character types.
+- PostgreSQL supports `CHAR`, `VARCHAR`, and `TEXT` data types. The `CHAR` is a fixed-length character type while the `VARCHAR` and `TEXT` are varying length character types.
 - -
-- - Use `VARCHAR(n)` if you want to validate the length of the string (`n`) before inserting into or updating to a column.
+- Use `VARCHAR(n)` if you want to validate the length of the string (`n`) before inserting into or updating to a column.
 - -
-- - `VARCHAR` (without the length specifier) and `TEXT` are equivalent.
+- `VARCHAR` (without the length specifier) and `TEXT` are equivalent.
 - 

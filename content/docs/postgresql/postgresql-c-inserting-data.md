@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Inserting data'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-insert/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-insert/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-clock_timestamp/
+            - /docs/postgresql/postgresql-date-functions/postgresql-clock_timestamp/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -183,5 +183,5 @@ It takes about 1008 ms or 1s to complete.
 
 
 
-- - Use the `CLOCK_TIMESTAMP()` function to return the current date and time.
+- Use the `CLOCK_TIMESTAMP()` function to return the current date and time.
 - 

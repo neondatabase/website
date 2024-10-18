@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CEIL() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-ceil/
+            - /docs/postgresql/postgresql-ceil
 ogImage: ./img/wp-content-uploads-2017-08-customer-and-payment-tables.png
 tableOfContents: true
 ---

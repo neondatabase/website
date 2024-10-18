@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE SCHEMA'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-create-schema/
 ogImage: ./img/wp-content-uploads-2019-05-postgresql-create-schema-example.png
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - First, specify the name of the schema after the `CREATE SCHEMA` keywords. The schema name must be unique within the current database.
+- First, specify the name of the schema after the `CREATE SCHEMA` keywords. The schema name must be unique within the current database.
 - -
-- - Second, optionally use `IF NOT EXISTS` to conditionally create the new schema only if it does not exist. Attempting to create a new schema that already exists without using the `IF NOT EXISTS` option will result in an error.
+- Second, optionally use `IF NOT EXISTS` to conditionally create the new schema only if it does not exist. Attempting to create a new schema that already exists without using the `IF NOT EXISTS` option will result in an error.
 - 
 
 
@@ -180,5 +180,5 @@ CREATE SCHEMA scm
 
 
 
-- - Use the PostgreSQL `CREATE SCHEMA` statement to create a new schema in a database.
+- Use the PostgreSQL `CREATE SCHEMA` statement to create a new schema in a database.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PL/pgSQL'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/
+            - /docs/postgresql/postgresql-plpgsql/
 ogImage: ./img/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png
 tableOfContents: true
 ---

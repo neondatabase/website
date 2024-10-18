@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Backup'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/
+            - /docs/postgresql/postgresql-administration/postgresql-backup-database/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -26,9 +26,9 @@ Before backing up the databases, you should consider the following types of back
 
 
 
-- - Logical backups
+- Logical backups
 - -
-- - Physical backups
+- Physical backups
 - 
 
 
@@ -159,13 +159,13 @@ In this command:
 
 
 
-- - `-U postgres`: specifies the user (`postgres`) that connects to the PostgreSQL database server.
+- `-U postgres`: specifies the user (`postgres`) that connects to the PostgreSQL database server.
 - -
-- - `-d dvdrental`: specifies the database name that you want to back up.
+- `-d dvdrental`: specifies the database name that you want to back up.
 - -
-- - `-F tar` : specifies `tar` as the output format of the archive file.
+- `-F tar` : specifies `tar` as the output format of the archive file.
 - -
-- - `-f d:\backup\dvdrental.tar`: This is the file path of the output backup file. Note that the `D:\backup` directory must exist. Also, it is a good practice to place a backup file in a server that is not the same as the one the PostgreSQL server is running.
+- `-f d:\backup\dvdrental.tar`: This is the file path of the output backup file. Note that the `D:\backup` directory must exist. Also, it is a good practice to place a backup file in a server that is not the same as the one the PostgreSQL server is running.
 - 
 
 
@@ -408,9 +408,9 @@ If you want to backup a database regularly, you can create a cron job to run the
 
 
 
-- - Back up PostgreSQL databases regularly for recovery later.
+- Back up PostgreSQL databases regularly for recovery later.
 - -
-- - Use the `pg_dump` and `pg_dumpall` tools to perform logical backups.
+- Use the `pg_dump` and `pg_dumpall` tools to perform logical backups.
 - -
-- - Use a password file to automate the backup processes.
+- Use a password file to automate the backup processes.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Exit Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-exit/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - The `label` is the loop label of the current loop where the `exit` is in or the loop label of the outer loop. Depending on the label, the `exit` statement will terminate the corresponding loop. If you don't use the label, the `exit` statement will terminate the enclosing loop.
+- The `label` is the loop label of the current loop where the `exit` is in or the loop label of the outer loop. Depending on the label, the `exit` statement will terminate the corresponding loop. If you don't use the label, the `exit` statement will terminate the enclosing loop.
 - -
-- - Use the `when boolean_expression` clause to specify a condition that terminates a loop. The `exit` statement will terminate the loop if the `boolean_expression` evaluates to `true`.
+- Use the `when boolean_expression` clause to specify a condition that terminates a loop. The `exit` statement will terminate the loop if the `boolean_expression` evaluates to `true`.
 - 
 
 
@@ -265,7 +265,7 @@ raise notice '%', 'unreachable!';
 
 
 
-- - Use the `exit` statement to terminate a loop including an unconditional `loop`, `while`, and `for` loop.
+- Use the `exit` statement to terminate a loop including an unconditional `loop`, `while`, and `for` loop.
 - -
-- - Use the `exit` statement to exit a block.
+- Use the `exit` statement to exit a block.
 - 

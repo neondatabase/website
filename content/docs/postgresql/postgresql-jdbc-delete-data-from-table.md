@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Delete Data from Table'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-jdbc/delete/
+            - /docs/postgresql/postgresql-jdbc/delete/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -18,13 +18,13 @@ To delete data from a Java program, you follow these steps:
 
 
 
-- - [Establish a database connection to PostgreSQL.](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
+- [Establish a database connection to PostgreSQL.](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
 - -
-- - Create a `PreparedStatement` object.
+- Create a `PreparedStatement` object.
 - -
-- - Execute a [DELETE statement](/docs/postgresql/postgresql-delete).
+- Execute a [DELETE statement](/docs/postgresql/postgresql-delete).
 - -
-- - Close the database connection.
+- Close the database connection.
 - 
 
 
@@ -186,5 +186,5 @@ The result set is empty, meaning that the program deleted the product with id 1 
 
 
 
-- - Use the `PreparedStatement` to delete data from a table using JDBC.
+- Use the `PreparedStatement` to delete data from a table using JDBC.
 - 

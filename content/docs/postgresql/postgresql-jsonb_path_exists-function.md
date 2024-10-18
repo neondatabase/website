@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_path_exists() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_exists/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_exists/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - `jsonb_data` is a JSON document where you want to check for a JSON path.
+- `jsonb_data` is a JSON document where you want to check for a JSON path.
 - -
-- - `json_path` is the path that you want to check.
+- `json_path` is the path that you want to check.
 - 
 
 
@@ -164,5 +164,5 @@ Output:
 
 
 
-- - Use the `jsonb_path_exists()` function to check the existence of JSON Path expressions within JSONB data
+- Use the `jsonb_path_exists()` function to check the existence of JSON Path expressions within JSONB data
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL AT TIME ZONE Operator'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-at-time-zone/
+            - /docs/postgresql/postgresql-date-functions/postgresql-at-time-zone/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

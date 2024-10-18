@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Index Types'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/
+            - /docs/postgresql/postgresql-indexes/postgresql-index-types/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

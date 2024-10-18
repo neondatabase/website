@@ -242,9 +242,9 @@ In this statement:
 
 
 
-- - First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
+- First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
 - -
-- - Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
+- Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
 - 
 
 
@@ -404,5 +404,5 @@ The `NULLIF` function checks if the number of female members is zero, it returns
 
 
 
-- - Use the `NULLIF()` function to substitute NULL for displaying data and to prevent division by zero.
+- Use the `NULLIF()` function to substitute NULL for displaying data and to prevent division by zero.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL FLOOR() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-floor/
+            - /docs/postgresql/postgresql-floor
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

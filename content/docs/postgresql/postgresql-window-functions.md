@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Window Functions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/
+            - /docs/postgresql/postgresql-window-function/
 ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---
@@ -382,12 +382,6 @@ WINDOW w AS (PARTITION BY c1 ORDER BY c2);
 
 
 The following table lists all window functions provided by PostgreSQL. Note that some aggregate functions such as `AVG()`, `MIN()`, `MAX()`, `SUM()`, and `COUNT()` can be also used as window functions.
-
-
-
-
-
-## Type a window function name to search...
 
 
 

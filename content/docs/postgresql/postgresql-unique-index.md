@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL UNIQUE Index'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-unique-index/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -34,11 +34,11 @@ In this syntax:
 
 
 
-- - First, specify the index name in the `CREATE UNIQUE INDEX` statement.
+- First, specify the index name in the `CREATE UNIQUE INDEX` statement.
 - -
-- - Second, provide the name of the table along with a list of indexed columns in the ON clause.
+- Second, provide the name of the table along with a list of indexed columns in the ON clause.
 - -
-- - Third, the `NULL NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
+- Third, the `NULL NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
 - 
 
 
@@ -270,7 +270,7 @@ DETAIL:  Key (work_phone, extension)=((408)-333-1234, 1211) already exists.
 
 
 
-- - Use a PostgreSQL unique index to enforce the uniqueness of values in a column or a set of columns.
+- Use a PostgreSQL unique index to enforce the uniqueness of values in a column or a set of columns.
 - -
-- - PostgreSQL automatically creates a unique index for a primary key column or a column with a unique constraint.
+- PostgreSQL automatically creates a unique index for a primary key column or a column with a unique constraint.
 - 

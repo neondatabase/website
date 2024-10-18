@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BOOL_OR() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_or/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_or/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -245,7 +245,7 @@ Output:
 
 
 
-- - Use the `BOOL_OR()` function to aggregate boolean values across rows within a group.
+- Use the `BOOL_OR()` function to aggregate boolean values across rows within a group.
 - -
-- - The `BOOL_OR()` function ignores NULLs in the group.
+- The `BOOL_OR()` function ignores NULLs in the group.
 - 

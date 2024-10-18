@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL GCD() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-gcd/
+            - /docs/postgresql/postgresql-gcd
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -56,11 +56,11 @@ PostgreSQL uses the Euclidean algorithm under the hood:
 
 
 
-- - Step 1. Given two integers a and b, a >= b, calculate the remainder r when a is divided by b.
+- Step 1. Given two integers a and b, a >= b, calculate the remainder r when a is divided by b.
 - -
-- - Step 2. Replace a with b and b with r.
+- Step 2. Replace a with b and b with r.
 - -
-- - Step 3. Repeat steps 1 and 2 until b becomes zero.
+- Step 3. Repeat steps 1 and 2 until b becomes zero.
 - 
 
 
@@ -111,9 +111,9 @@ To find the GCD of three numbers, you apply the `gcd()` function twice:
 
 
 
-- - The first one calculates the GCD of the first two numbers.
+- The first one calculates the GCD of the first two numbers.
 - -
-- - The second one returns the GCD of the result of the first one and the third number.
+- The second one returns the GCD of the result of the first one and the third number.
 - 
 
 
@@ -144,9 +144,9 @@ In this example:
 
 
 
-- - First, `gcd(30, 45)` finds the GCD of 30 and 45, which is 15.
+- First, `gcd(30, 45)` finds the GCD of 30 and 45, which is 15.
 - -
-- - Then, `gcd(15, 60)` returns the GCD of the result (15) and 60, which is 15.
+- Then, `gcd(15, 60)` returns the GCD of the result (15) and 60, which is 15.
 - 
 
 
@@ -388,7 +388,7 @@ Output:
 
 
 
-- - Use the `gcd()` function to calculate the GCD of two numbers.
+- Use the `gcd()` function to calculate the GCD of two numbers.
 - -
-- - Use a recursive CTE to find the GCD of three or more numbers.
+- Use a recursive CTE to find the GCD of three or more numbers.
 - 

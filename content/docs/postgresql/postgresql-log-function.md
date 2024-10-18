@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LOG() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-log/
+            - /docs/postgresql/postgresql-log
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

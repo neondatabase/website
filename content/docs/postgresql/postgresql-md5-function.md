@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MD5() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-md5/
+            - /docs/postgresql/postgresql-string-functions/postgresql-md5/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

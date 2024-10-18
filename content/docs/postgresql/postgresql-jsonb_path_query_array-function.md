@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_path_query_array() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_array/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_query_array/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - First, specify the `jsonb_data` that you want to query.
+- First, specify the `jsonb_data` that you want to query.
 - -
-- - Second, provide a `json_path` that you want to match elements within the `jsonb_data`.
+- Second, provide a `json_path` that you want to match elements within the `jsonb_data`.
 - 
 
 
@@ -208,5 +208,5 @@ In this example, the employee object doesn't have an `address` key, so the resul
 
 
 
-- - Use the `jsonb_path_query_array()` function to query JSONB data using a JSON path and return matched elements as a JSON array.
+- Use the `jsonb_path_query_array()` function to query JSONB data using a JSON path and return matched elements as a JSON array.
 - 

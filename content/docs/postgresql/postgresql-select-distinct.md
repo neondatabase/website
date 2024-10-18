@@ -295,5 +295,5 @@ The output indicates that there are only three distinct rental rates 0.99, 2.99,
 
 
 
-- - Use the `SELECT DISTINCT` to remove duplicate rows from a result set of a query.
+- Use the `SELECT DISTINCT` to remove duplicate rows from a result set of a query.
 - 

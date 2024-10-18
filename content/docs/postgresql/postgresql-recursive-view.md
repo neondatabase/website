@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Recursive View'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/
+            - /docs/postgresql/postgresql-views/postgresql-recursive-view/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -42,9 +42,9 @@ In this syntax:
 
 
 
-- - First, specify the name of the view you want to create in the `CREATE RECURSIVE VIEW` clause. You can add an optional schema to the name of the view.
+- First, specify the name of the view you want to create in the `CREATE RECURSIVE VIEW` clause. You can add an optional schema to the name of the view.
 - -
-- - Second, add a [SELECT statement](/docs/postgresql/postgresql-select) to define the view. The `SELECT` statement references the `view_name` to make the view recursive.
+- Second, add a [SELECT statement](/docs/postgresql/postgresql-select) to define the view. The `SELECT` statement references the `view_name` to make the view recursive.
 - 
 
 
@@ -192,7 +192,7 @@ Output:
 
 
 
-- - A recursive view is a view whose defining query references the view name.
+- A recursive view is a view whose defining query references the view name.
 - -
-- - Use the `CREATE RECURSIVE VIEW` statement to create a recursive view.
+- Use the `CREATE RECURSIVE VIEW` statement to create a recursive view.
 - 

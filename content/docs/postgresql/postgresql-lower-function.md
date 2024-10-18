@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LOWER() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lower/
+            - /docs/postgresql/postgresql-string-functions/postgresql-lower/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -156,5 +156,5 @@ Output:
 
 
 
-- - Use the `LOWER()` function to return a new string with all the characters of the input string converted to lowercase.
+- Use the `LOWER()` function to return a new string with all the characters of the input string converted to lowercase.
 - 

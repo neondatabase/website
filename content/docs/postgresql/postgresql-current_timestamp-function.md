@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CURRENT_TIMESTAMP Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/
+            - /docs/postgresql/postgresql-date-functions/postgresql-current_timestamp/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,7 +32,7 @@ The PostgreSQL `CURRENT_TIMESTAMP()` function accepts one optional argument:
 
 
 
-- - `precision`: specifies the number of digits in the fractional seconds precision in the second field of the result.
+- `precision`: specifies the number of digits in the fractional seconds precision in the second field of the result.
 - 
 
 
@@ -159,5 +159,5 @@ In PostgreSQL, the `TRANSACTION_TIMESTAMP()` function is synonymous with the `CU
 
 
 
-- - Use the PostgreSQL `CURRENT_TIMESTAMP()` to get the date and time at which the transaction starts.
+- Use the PostgreSQL `CURRENT_TIMESTAMP()` to get the date and time at which the transaction starts.
 - 

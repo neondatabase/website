@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Tutorial'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/
+            - /docs/postgresql/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

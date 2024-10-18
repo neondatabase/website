@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Transaction'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-php/transaction/
+            - /docs/postgresql/postgresql-php/transaction/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -14,13 +14,13 @@ A transaction is a series of operations performed as a single logical unit of wo
 
 
 
-- - Atomicity
+- Atomicity
 - -
-- - Consistency
+- Consistency
 - -
-- - Isolation
+- Isolation
 - -
-- - Durability
+- Durability
 - 
 
 
@@ -129,9 +129,9 @@ The following `addAccount()` method performs two main steps:
 
 
 
-- - First, insert an account into the `accounts` table and return the account id.
+- First, insert an account into the `accounts` table and return the account id.
 - -
-- - Then, assign the account a specific plan by inserting a new row into the `account_plans` table.
+- Then, assign the account a specific plan by inserting a new row into the `account_plans` table.
 - 
 
 
@@ -262,11 +262,11 @@ How it works.
 
 
 
-- - First, connect to the PostgreSQL database.
+- First, connect to the PostgreSQL database.
 - -
-- - Second, insert three accounts with silver, gold, and platinum levels.
+- Second, insert three accounts with silver, gold, and platinum levels.
 - -
-- - Third, try to insert one more account but with a plan ID that does not exist in the `plans` table. Based on the input, the step of assigning the plan to the account fails which causes the whole transaction to be rolled back.
+- Third, try to insert one more account but with a plan ID that does not exist in the `plans` table. Based on the input, the step of assigning the plan to the account fails which causes the whole transaction to be rolled back.
 - 
 
 
@@ -310,7 +310,7 @@ stocks=# SELECT * FROM account_plans;
 
 
 
-- - Use the `beginTransaction`() method of the PDO object to start a transaction.
+- Use the `beginTransaction`() method of the PDO object to start a transaction.
 - -
-- - Use the `commit()` method to apply the changes to the database and `rollback()` method to undo the changes.
+- Use the `commit()` method to apply the changes to the database and `rollback()` method to undo the changes.
 - 

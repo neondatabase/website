@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CURRENT_DATE Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_date/
+            - /docs/postgresql/postgresql-date-functions/postgresql-current_date/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -247,5 +247,5 @@ Note that you will see a different value in the `delivery_date` column, dependin
 
 
 
-- - Use the PostgreSQL `CURRENT_DATE` function to retrieve the current date.
+- Use the PostgreSQL `CURRENT_DATE` function to retrieve the current date.
 - 

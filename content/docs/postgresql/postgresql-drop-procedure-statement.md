@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP PROCEDURE Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-procedure/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-drop-procedure/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -33,13 +33,13 @@ In this syntax:
 
 
 
-- - First, specify the name (`procedure_name`) of the stored procedure that you want to remove after the `drop procedure` keywords.
+- First, specify the name (`procedure_name`) of the stored procedure that you want to remove after the `drop procedure` keywords.
 - -
-- - Second, use the `if exists` option if you want PostgreSQL to issue a notice instead of an error if you drop a stored procedure that does not exist.
+- Second, use the `if exists` option if you want PostgreSQL to issue a notice instead of an error if you drop a stored procedure that does not exist.
 - -
-- - Third, specify the argument list of the stored procedure if the stored procedure's name is not unique in the database. Note that stored procedures that have different argument lists can share the same name. PostgreSQL needs the argument list to determine which stored procedure that you want to remove.
+- Third, specify the argument list of the stored procedure if the stored procedure's name is not unique in the database. Note that stored procedures that have different argument lists can share the same name. PostgreSQL needs the argument list to determine which stored procedure that you want to remove.
 - -
-- - Finally, use the `cascade` option to drop a stored procedure and its dependent objects, the objects that depend on those objects, and so on. The default option is `restrict` that will reject the removal of the stored procedure in case it has any dependent objects.
+- Finally, use the `cascade` option to drop a stored procedure and its dependent objects, the objects that depend on those objects, and so on. The default option is `restrict` that will reject the removal of the stored procedure in case it has any dependent objects.
 - 
 
 
@@ -232,9 +232,9 @@ drop procedure
 
 
 
-- - Use the `drop procedure` statement to remove a stored procedure.
+- Use the `drop procedure` statement to remove a stored procedure.
 - -
-- - Specify a comma-separated list of stored procedure names after the `drop procedure` keywords to drop multiple stored procedures.
+- Specify a comma-separated list of stored procedure names after the `drop procedure` keywords to drop multiple stored procedures.
 - -
-- - If the stored procedure name is not unique, use the argument list to specify which stored procedure you want to drop.
+- If the stored procedure name is not unique, use the argument list to specify which stored procedure you want to drop.
 - 

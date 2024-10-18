@@ -1,7 +1,7 @@
 ---
 title: 'What is PostgreSQL?'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-getting-started/what-is-postgresql/
+            - /docs/postgresql/postgresql-getting-started/what-is-postgresql/
 ogImage: ./img/wp-content-uploads-2012-08-What-is-PostgreSQL.png
 tableOfContents: true
 ---
@@ -102,23 +102,23 @@ PostgreSQL supports the most popular programming languages:
 
 
 
-- - Python
+- Python
 - -
-- - Java
+- Java
 - -
-- - C#
+- C#
 - -
-- - C/C+
+- C/C+
 - -
-- - Ruby
+- Ruby
 - -
-- - JavaScript (Node.js)
+- JavaScript (Node.js)
 - -
-- - Perl
+- Perl
 - -
-- - Go
+- Go
 - -
-- - Tcl
+- Tcl
 - 
 
 
@@ -130,21 +130,21 @@ PostgreSQL has many advanced features that other enterprise-class database manag
 
 
 
-- - User-defined types
+- User-defined types
 - -
-- - Table inheritance
+- Table inheritance
 - -
-- - Sophisticated locking mechanism
+- Sophisticated locking mechanism
 - -
-- - [Foreign key referential integrity](/docs/postgresql/postgresql-foreign-key)
+- [Foreign key referential integrity](/docs/postgresql/postgresql-foreign-key)
 - -
-- - [Views](https://www.postgresqltutorial.com/postgresql-views/), rules, [subquery](/docs/postgresql/postgresql-subquery)
+- [Views](https://www.postgresqltutorial.com/postgresql-views/), rules, [subquery](/docs/postgresql/postgresql-subquery)
 - -
-- - Nested transactions (savepoints)
+- Nested transactions (savepoints)
 - -
-- - Multi-version concurrency control (MVCC)
+- Multi-version concurrency control (MVCC)
 - -
-- - Asynchronous replication
+- Asynchronous replication
 - 
 
 
@@ -152,11 +152,11 @@ The recent versions of PostgreSQL support the following features:
 
 
 
-- - Native Microsoft Windows Server version
+- Native Microsoft Windows Server version
 - -
-- - Tablespaces
+- Tablespaces
 - -
-- - Point-in-time recovery
+- Point-in-time recovery
 - 
 
 

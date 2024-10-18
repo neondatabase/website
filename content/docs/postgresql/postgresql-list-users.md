@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL List Users'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-list-users/
+            - /docs/postgresql/postgresql-administration/postgresql-list-users/
 ogImage: ./img/wp-content-uploads-2020-07-PostgreSQL-List-User-Example-1.png
 tableOfContents: true
 ---

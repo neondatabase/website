@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL FACTORIAL() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-factorial/
+            - /docs/postgresql/postgresql-factorial
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -87,5 +87,5 @@ Output:
 
 
 
-- - Use the `factorial()` function to calculate the factorial of a number.
+- Use the `factorial()` function to calculate the factorial of a number.
 - 

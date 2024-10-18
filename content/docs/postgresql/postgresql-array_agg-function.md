@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ARRAY_AGG Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-array_agg/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-array_agg/
 ogImage: ./img/wp-content-uploads-2020-08-PostgreSQL-ARRAY_AGG-example.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL AFTER DELETE Trigger'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-after-delete-trigger/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

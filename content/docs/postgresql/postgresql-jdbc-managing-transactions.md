@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Managing Transactions'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-jdbc/transaction/
+            - /docs/postgresql/postgresql-jdbc/transaction/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

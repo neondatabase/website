@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER TABLESPACE'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-tablespace/
+            - /docs/postgresql/postgresql-administration/postgresql-alter-tablespace/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -29,11 +29,11 @@ The action can be:
 
 
 
-- - Rename the tablespace
+- Rename the tablespace
 - -
-- - Change the owner
+- Change the owner
 - -
-- - Set the parameters for the tablespace.
+- Set the parameters for the tablespace.
 - 
 
 
@@ -104,9 +104,9 @@ OWNER to hr;
 
 
 
-- - Use `ALTER TABLESPACE RENAME TO` statement to rename a tablespace.
+- Use `ALTER TABLESPACE RENAME TO` statement to rename a tablespace.
 - -
-- - Use `ALTER TABLESPACE OWNER TO` to change the owner of a tablespace.
+- Use `ALTER TABLESPACE OWNER TO` to change the owner of a tablespace.
 - -
-- - Use `ALTER TABLESPACE SET` to set the parameters for a tablespace.
+- Use `ALTER TABLESPACE SET` to set the parameters for a tablespace.
 - 

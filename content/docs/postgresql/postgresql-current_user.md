@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CURRENT_USER'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/
+            - /docs/postgresql/postgresql-administration/postgresql-current_user/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

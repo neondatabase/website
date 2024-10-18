@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE PROCEDURE'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-create-procedure/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -47,13 +47,13 @@ In this syntax:
 
 
 
-- - First, specify the name of the stored procedure after the `create procedure` keywords.
+- First, specify the name of the stored procedure after the `create procedure` keywords.
 - -
-- - Second, define parameters for the stored procedure. A stored procedure can accept zero or more parameters.
+- Second, define parameters for the stored procedure. A stored procedure can accept zero or more parameters.
 - -
-- - Third, specify `plpgsql` as the procedural language for the stored procedure. Note that you can use other procedural languages for the stored procedure such as SQL, C, etc.
+- Third, specify `plpgsql` as the procedural language for the stored procedure. Note that you can use other procedural languages for the stored procedure such as SQL, C, etc.
 - -
-- - Finally, use the dollar-quoted string constant syntax to define the body of the stored procedure.
+- Finally, use the dollar-quoted string constant syntax to define the body of the stored procedure.
 - 
 
 
@@ -221,7 +221,7 @@ The output shows that the transfer has been successful.
 
 
 
-- - Use `create procedure` statement to define a new stored procedure.
+- Use `create procedure` statement to define a new stored procedure.
 - -
-- - Use the `call` statement to invoke a stored procedure.
+- Use the `call` statement to invoke a stored procedure.
 - 

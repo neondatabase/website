@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PI() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-pi-function/
+            - /docs/postgresql/postgresql-pi-function
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -194,5 +194,5 @@ Output:
 
 
 
-- - Use the `PI()` function to return the pi value.
+- Use the `PI()` function to return the pi value.
 - 

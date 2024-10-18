@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DATE_PART() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
+            - /docs/postgresql/postgresql-date-functions/postgresql-date_part/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

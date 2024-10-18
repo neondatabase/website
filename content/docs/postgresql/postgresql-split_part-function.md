@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SPLIT_PART() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-split_part/
+            - /docs/postgresql/postgresql-string-functions/postgresql-split_part/
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

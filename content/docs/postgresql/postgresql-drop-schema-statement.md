@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP SCHEMA Statement'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-drop-schema/
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png
 tableOfContents: true
 ---
@@ -29,11 +29,11 @@ In this syntax:
 
 
 
-- - First, specify the name of the schema from which you want to remove after the `DROP SCHEMA` keywords.
+- First, specify the name of the schema from which you want to remove after the `DROP SCHEMA` keywords.
 - -
-- - Second, use the `IF EXISTS` option to conditionally delete schema only if it exists.
+- Second, use the `IF EXISTS` option to conditionally delete schema only if it exists.
 - -
-- - Third, use `CASCADE` to delete schema and all of its objects, and in turn, all objects that depend on those objects. If you want to delete schema only when it is empty, you can use the `RESTRICT` option. By default, the `DROP SCHEMA` uses the `RESTRICT` option.
+- Third, use `CASCADE` to delete schema and all of its objects, and in turn, all objects that depend on those objects. If you want to delete schema only when it is empty, you can use the `RESTRICT` option. By default, the `DROP SCHEMA` uses the `RESTRICT` option.
 - 
 
 
@@ -168,5 +168,5 @@ DROP SCHEMA sales CASCADE;
 
 
 
-- - Use the PostgreSQL `DROP SCHEMA` statement to drop one or more schemas in a database.
+- Use the PostgreSQL `DROP SCHEMA` statement to drop one or more schemas in a database.
 - 

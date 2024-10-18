@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL to_jsonb() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-to_jsonb/
+            - /docs/postgresql/postgresql-json-functions/postgresql-to_jsonb/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---

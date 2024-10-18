@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL MIN() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-min-function/
 ogImage: ./img/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---
@@ -128,9 +128,9 @@ How it works.
 
 
 
-- - First, the [subquery](/docs/postgresql/postgresql-subquery) to select the lowest rental rate.
+- First, the [subquery](/docs/postgresql/postgresql-subquery) to select the lowest rental rate.
 - -
-- - Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
+- Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
 - 
 
 
@@ -285,7 +285,7 @@ Output:
 
 
 
-- - Use the `MIN()` function to find the lowest value in a set of values.
+- Use the `MIN()` function to find the lowest value in a set of values.
 - -
-- - Use the `MIN()` with `GROUP BY` clause to find the lowest value in a group of values.
+- Use the `MIN()` with `GROUP BY` clause to find the lowest value in a group of values.
 - 

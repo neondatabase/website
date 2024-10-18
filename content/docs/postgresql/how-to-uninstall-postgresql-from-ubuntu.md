@@ -1,7 +1,7 @@
 ---
 title: 'How to Uninstall PostgreSQL from Ubuntu'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/uninstall-postgresql-ubuntu/
+            - /docs/postgresql/postgresql-administration/uninstall-postgresql-ubuntu/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -14,15 +14,15 @@ Here are the steps for uninstalling the PostgreSQL on Ubuntu:
 
 
 
-- - Uninstall the PostgreSQL application
+- Uninstall the PostgreSQL application
 - -
-- - Remove PostgreSQL packages
+- Remove PostgreSQL packages
 - -
-- - Remove PostgreSQL directories
+- Remove PostgreSQL directories
 - -
-- - Delete the postgres user
+- Delete the postgres user
 - -
-- - Verify uninstallation
+- Verify uninstallation
 - 
 
 

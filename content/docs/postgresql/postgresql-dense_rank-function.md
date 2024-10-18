@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DENSE_RANK Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-dense_rank-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-dense_rank-function/
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-DENSE_RANK-Function-Sample-Table.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DATE_TRUNC() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/
+            - /docs/postgresql/postgresql-date-functions/postgresql-date_trunc/
 ogImage: ./img/wp-content-uploads-2017-03-rental-table.png
 tableOfContents: true
 ---
@@ -52,31 +52,31 @@ Here are the valid values for the `field`:
 
 
 
-- - millennium
+- millennium
 - -
-- - century
+- century
 - -
-- - decade
+- decade
 - -
-- - year
+- year
 - -
-- - quarter
+- quarter
 - -
-- - month
+- month
 - -
-- - week
+- week
 - -
-- - day
+- day
 - -
-- - hour
+- hour
 - -
-- - minute
+- minute
 - -
-- - second
+- second
 - -
-- - milliseconds
+- milliseconds
 - -
-- - microseconds
+- microseconds
 - 
 
 
@@ -289,5 +289,5 @@ Output:
 
 
 
-- - Use the PostgreSQL `DATE_TRUNC` function to truncate a timestamp or an interval value to a specified level of precision
+- Use the PostgreSQL `DATE_TRUNC` function to truncate a timestamp or an interval value to a specified level of precision
 - 

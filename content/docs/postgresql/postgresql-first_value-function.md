@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL FIRST_VALUE Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-first_value-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-first_value-function/
 ogImage: ./img/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---

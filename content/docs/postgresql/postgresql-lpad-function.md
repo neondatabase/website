@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LPAD() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/
+            - /docs/postgresql/postgresql-string-functions/postgresql-lpad/
 ogImage: ./img/wp-content-uploads-2013-05-customer-and-payment-tables.png
 tableOfContents: true
 ---

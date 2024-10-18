@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL LEAD Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-window-function/postgresql-lead-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-lead-function/
 ogImage: ./img/wp-content-uploads-2019-05-Sales-sample-table.png
 tableOfContents: true
 ---

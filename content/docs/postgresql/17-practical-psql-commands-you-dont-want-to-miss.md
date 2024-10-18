@@ -1,7 +1,7 @@
 ---
 title: '17 Practical psql Commands You Don''t Want to Miss'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
+            - /docs/postgresql/postgresql-administration/psql-commands/
 ogImage: ./img/wp-content-uploads-2015-07-psql-commands.jpg
 tableOfContents: true
 ---
@@ -208,7 +208,7 @@ Now, if you want to save time typing the previous command again, you can use `\g
 
 
 
-psql executes the previous command again, which is the [SELECT statement](/docs/postgresql/postgresql-select),.
+psql executes the previous command again, which is the [SELECT statement](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/),.
 
 
 
@@ -268,7 +268,7 @@ To get help on specific PostgreSQL statement, you use the `\h` command.
 
 
 
-For example, if you want to know detailed information on the [ALTER TABLE](/docs/postgresql/postgresql-alter-table) statement, you use the following command:
+For example, if you want to know detailed information on the [ALTER TABLE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table/) statement, you use the following command:
 
 
 
@@ -355,9 +355,9 @@ psql supports some types of output format and allows you to customize how the ou
 
 
 
-- - `\a` command switches from aligned to non-aligned column output.
+- `\a` command switches from aligned to non-aligned column output.
 - -
-- - `\H` command formats the output to HTML format.
+- `\H` command formats the output to HTML format.
 - 
 
 

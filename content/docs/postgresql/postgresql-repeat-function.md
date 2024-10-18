@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REPEAT() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
+            - /docs/postgresql/postgresql-string-functions/postgresql-repeat/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -32,9 +32,9 @@ In this syntax:
 
 
 
-- - `string`. The string that you want to repeat.
+- `string`. The string that you want to repeat.
 - -
-- - `number`. The number of times that you want to repeat the `string` in the resulting string.
+- `number`. The number of times that you want to repeat the `string` in the resulting string.
 - 
 
 
@@ -144,5 +144,5 @@ Output:
 
 
 
-- - Use the `REPEAT()` function to repeat a string a specified number of times.
+- Use the `REPEAT()` function to repeat a string a specified number of times.
 - 

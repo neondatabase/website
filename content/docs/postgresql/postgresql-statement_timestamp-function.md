@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL STATEMENT_TIMESTAMP() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-statement_timestamp/
+            - /docs/postgresql/postgresql-date-functions/postgresql-statement_timestamp/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -181,5 +181,5 @@ It is important to notice that this behavior contrasts with the `CLOCK_TIMESTAMP
 
 
 
-- - Use the `STATEMENT_TIMESTAMP()` function to retrieve the start time of the current statement.
+- Use the `STATEMENT_TIMESTAMP()` function to retrieve the start time of the current statement.
 - 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Creating Tables'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-jdbc/create-tables/
+            - /docs/postgresql/postgresql-jdbc/create-tables/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -155,5 +155,5 @@ The output indicates that the `products` table has been created successfully.
 
 
 
-- - Call the `executeUpdate()` method of a Statement object to execute a `CREATE TABLE` statement to create a new table in the PostgreSQL database.
+- Call the `executeUpdate()` method of a Statement object to execute a `CREATE TABLE` statement to create a new table in the PostgreSQL database.
 - 

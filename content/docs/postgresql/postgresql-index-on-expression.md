@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Index on Expression'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/
+            - /docs/postgresql/postgresql-indexes/postgresql-index-on-expression/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -45,9 +45,9 @@ In this statement:
 
 
 
-- - First, specify the index name in the `CREATE INDEX` clause.
+- First, specify the index name in the `CREATE INDEX` clause.
 - -
-- - Then, form an expression that involves table columns of the `table_name` in the `ON` clause.
+- Then, form an expression that involves table columns of the `table_name` in the `ON` clause.
 - 
 
 
@@ -238,5 +238,5 @@ This time PostgreSQL uses the index on the expression `idx_ic_last_name` to quic
 
 
 
-- - Use the PostgreSQL index on expression to improve queries that have an expression involving table columns.
+- Use the PostgreSQL index on expression to improve queries that have an expression involving table columns.
 - 

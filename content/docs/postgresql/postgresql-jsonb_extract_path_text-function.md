@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_extract_path_text() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_extract_path_text/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_extract_path_text/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -35,9 +35,9 @@ In this syntax:
 
 
 
-- - `target` is a JSONB data from which you want to extract data as text.
+- `target` is a JSONB data from which you want to extract data as text.
 - -
-- - `path_elems` is a list of paths that you want to locate the elements in the JSONB data for extraction.
+- `path_elems` is a list of paths that you want to locate the elements in the JSONB data for extraction.
 - 
 
 
@@ -45,9 +45,9 @@ Here's the syntax for the `path_elems` parameter:
 
 
 
-- - `'key'`: Access a specific key in a JSON object.
+- `'key'`: Access a specific key in a JSON object.
 - -
-- - '`array_index`': Access an element in a JSON array using its index.
+- '`array_index`': Access an element in a JSON array using its index.
 - 
 
 
@@ -78,11 +78,11 @@ Here are some examples of the path expressions:
 
 
 
-- - `'employee'` returns the entire `employee` object.
+- `'employee'` returns the entire `employee` object.
 - -
-- - `['employee', 'name']` returns the name within the employee object, which is `"John Doe"`.
+- `['employee', 'name']` returns the name within the employee object, which is `"John Doe"`.
 - -
-- - `['employee', 'contacts', '0', 'value']` returns the value in the first element of the `contacts` array, which is `john.doe@test.com`
+- `['employee', 'contacts', '0', 'value']` returns the value in the first element of the `contacts` array, which is `john.doe@test.com`
 - 
 
 
@@ -216,5 +216,5 @@ Output:
 
 
 
-- - Use the `jsonb_extract_path_text()` function to extract JSON subobject as text at the specified path.
+- Use the `jsonb_extract_path_text()` function to extract JSON subobject as text at the specified path.
 - 

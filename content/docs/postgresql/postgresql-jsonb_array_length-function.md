@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_array_length() Function'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_length/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_length/
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
@@ -181,9 +181,9 @@ In this example:
 
 
 
-- - The `jsonb_path_query`(info, '\$.name') returns the name of the person.
+- The `jsonb_path_query`(info, '\$.name') returns the name of the person.
 - -
-- - The `jsonb_path_query`(info, '\$.pets') returns the `pets` array, and `jsonb_array_length()` returns the number of elements in the `pets` array.
+- The `jsonb_path_query`(info, '\$.pets') returns the `pets` array, and `jsonb_array_length()` returns the number of elements in the `pets` array.
 - 
 
 
@@ -191,5 +191,5 @@ In this example:
 
 
 
-- - Use the `jsonb_array_length()` function to get the number of elements in the top-level JSON array.
+- Use the `jsonb_array_length()` function to get the number of elements in the top-level JSON array.
 - 

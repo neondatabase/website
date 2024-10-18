@@ -99,11 +99,11 @@ quantity unit [quantity unit...] [direction]
 
 
 
-- - `quantity` is a number, sign `+` or `-` is also accepted
+- `quantity` is a number, sign `+` or `-` is also accepted
 - -
-- - `unit` can be any of millennium, century, decade, year, month, week, day, hour, minute, second, millisecond, microsecond, or abbreviation (y, m, d, etc.,) or plural forms (months, days, etc.).
+- `unit` can be any of millennium, century, decade, year, month, week, day, hour, minute, second, millisecond, microsecond, or abbreviation (y, m, d, etc.,) or plural forms (months, days, etc.).
 - -
-- - `direction` can be `ago` or empty string `''`
+- `direction` can be `ago` or empty string `''`
 - 
 
 
@@ -212,13 +212,13 @@ PostgreSQL provides four output formats:
 
 
 
-- - `sql standard`
+- `sql standard`
 - -
-- - `postgres`
+- `postgres`
 - -
-- - `postgresverbose`
+- `postgresverbose`
 - -
-- - `iso_8601`
+- `iso_8601`
 - 
 
 
