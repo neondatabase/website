@@ -72,12 +72,12 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 - **Protected names for roles and databases**: Neon protects certain names for Postgres roles and databases. Your users will not be able to use these protected names when creating roles and databases. See [Protected role names](/docs/manage/roles#protected-role-names), and [Protected database names](/docs/manage/databases#protected-database-names).
 - **Postgres extension support**: We often receive questions from our Partners about the Postgres extensions supported by Neon. See [Supported Postgres extensions](/docs/extensions/pg-extensions) the extensions that Neon supports.
 - **Staying up to date with changes to the Neon platform**: We do our best to proactively inform Partners of updates and changes that may impact their business. Sources of information Partners can monitor include:
-    - The [Neon Roadmap](/docs/introduction/roadmap) for what's been delivered recently and what's coming next
-    - The [Neon Changelog](/docs/changelog) for the latest product updates from Neon
-    - The [Neon Newsletter](https://neon.tech/blog#subscribe-form), sent weekly
-    - The [Neon Blog](https://neon.tech/blog)
-    - The [Neon Status Page](https://neonstatus.com/) for Neon platform status in each region
-    - [RSS Feeds](/docs/reference/feeds) for all of the above, which you can add to your Slack channels
+  - The [Neon Roadmap](/docs/introduction/roadmap) for what's been delivered recently and what's coming next
+  - The [Neon Changelog](/docs/changelog) for the latest product updates from Neon
+  - The [Neon Newsletter](https://neon.tech/blog#subscribe-form), sent weekly
+  - The [Neon Blog](https://neon.tech/blog)
+  - The [Neon Status Page](https://neonstatus.com/) for Neon platform status in each region
+  - [RSS Feeds](/docs/reference/feeds) for all of the above, which you can add to your Slack channels
 
 ## Integration support
 
