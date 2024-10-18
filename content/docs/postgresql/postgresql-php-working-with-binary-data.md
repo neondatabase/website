@@ -8,19 +8,11 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using PHP.
 
-
-
 BLOB stands for the binary large object used to store binary data such as the content of a file.
-
-
 
 PostgreSQL does not support the BLOB data type. However, you can use the [BYTEA data type](/docs/postgresql/postgresql-bytea-data-type) for storing the binary string.
 
-
-
 We'll [create a new table](/docs/postgresql/postgresql-create-table) called `company_files` to store the binary string:
-
-
 
 ```
 CREATE TABLE company_files (
@@ -33,27 +25,15 @@ CREATE TABLE company_files (
 );
 ```
 
-
-
 We will store the content of a file in the `file_data` column. In addition, we will read the files from the `assets/images` folder and insert them into the `company_files` table.
-
-
 
 To work with the binary data, we create a new class named `BlobDB`.
 
-
-
 ![PostgreSQL PHP BLOB](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-BLOB.png)
-
-
 
 ## Inserting binary data
 
-
-
 The following `insert()` method reads data from a file specified by the `$pathToFile` parameter and inserts it into the `company_files` table.
-
-
 
 ```
    /**
@@ -107,11 +87,7 @@ The following `insert()` method reads data from a file specified by the `$pathTo
     }
 ```
 
-
-
 How it works.
-
-
 
 1. 2. First, call the pgsqlLOBCreate() method of the PDO object to create a new large object and get the OID of the large object.
 3. 4.
@@ -122,16 +98,11 @@ How it works.
 13. 14. After that, prepare the INSERT statement and execute it.
 15. 16.
 17. 18. Finally, call the lastInsertId to get the generated ID.
-19. 
-
+19.
 
 Note that the `pgsqlLOBCreate()` method must be called within a transaction, therefore, we place all the logic within a transaction.
 
-
-
 Place the following code in the `index.php` file to insert the content of the `google.png` file into the `company_files` table.
-
-
 
 ```
 <?php
@@ -154,27 +125,17 @@ try {
 }
 ```
 
-
-
 Launch the index.php file, we get the following message.
-
-
 
 ```
 A file has been inserted with id 1
 ```
 
-
-
 To verify the insert operation, we use the following query:
-
-
 
 ```
 SELECT * FROM company_files;
 ```
-
-
 
 ```
  id | stock_id | mime_type | file_name |  file_data
@@ -183,15 +144,9 @@ SELECT * FROM company_files;
 (1 row)
 ```
 
-
-
 ## Querying binary data
 
-
-
 The following `read()` method reads the BLOB data from the `company_files` table and outputs the file content to the web browser:
-
-
 
 ```
     /**
@@ -220,11 +175,7 @@ The following `read()` method reads the BLOB data from the `company_files` table
     }
 ```
 
-
-
 How it works.
-
-
 
 1. 2. First, prepare a [SELECT](/docs/postgresql/postgresql-select) statement.
 3. 4.
@@ -235,12 +186,9 @@ How it works.
 13. 14. After that, output the stream based on the mime type of the file.
 15. 16.
 17. 18. Finally, because the `pgsqlLOBopen()` must be called within a transaction, we called the `beginTransaction()` at the beginning of the method.
-19. 
-
+19.
 
 To test the read() method, we place the following code in the file.php:
-
-
 
 ```
 <?php
@@ -259,23 +207,13 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $file = $blobDB->read($id);
 ```
 
-
-
 The file.php file gets the id value from the query string and outputs the file stored in the company_files table to the web browser.
-
-
 
 ![PostgreSQL BLOB example](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-BLOB-example.png)
 
-
-
 ## Deleting binary data
 
-
-
 The following `delete()` method deletes a row in the `company_files` table.
-
-
 
 ```
     /**
@@ -307,17 +245,11 @@ The following `delete()` method deletes a row in the `company_files` table.
     }
 ```
 
-
-
 How it works.
-
-
 
 1. 2. First, get the OID object from the `file_data` column.
 3. 4.
 5. 6. Second, use the `pgsqlLOBUnLink()` method to remove the BLOB data and execute the `DELETE` statement to remove a row specified by an ID in the `company_files` table.
-7. 
-
+7.
 
 In this tutorial, you have learned how to insert, query, and delete binary data in the PostgreSQL database.
-

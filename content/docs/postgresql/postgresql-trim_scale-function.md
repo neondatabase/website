@@ -7,67 +7,37 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TRIM_SCALE()` function to reduce the value's scale by removing trailing zeroes.
 
-
-
 ## Introduction to the PostgreSQL TRIM_SCALE() function
-
-
 
 The `TRIM_SCALE()` function allows you to reduce the scale of a number by removing trailing zeroes.
 
-
-
 Note that the scale of a number is a number of fractional decimal digits.
 
-
-
 Here's the syntax of the `TRIM_SCALE()` function:
-
-
 
 ```
 TRIM_SCALE(numeric_value)
 ```
 
-
-
 In this syntax, the `numeric_value` is a value that you want to trim the scale.
-
-
 
 The `TRIM_SCALE()` function returns a numeric value with the numeric type after removing trailing zeroes.
 
-
-
 It returns `NULL` if the `numeric_value` is `NULL`.
-
-
 
 ## PostgreSQL TRIM_SCALE() function examples
 
-
-
 Let's take some examples of using the `TRIM_SCALE()` function.
-
-
 
 ### 1) Basic TRIM_SCALE() function example
 
-
-
 The following example uses the `TRIM_SCALE()` function to reduce the trailing zeroes of the number `123.45000`:
-
-
 
 ```
 SELECT TRIM_SCALE(123.45000);
 ```
 
-
-
 Output:
-
-
 
 ```
  trim_scale
@@ -76,23 +46,13 @@ Output:
 (1 row)
 ```
 
-
-
 In this example, the `TRIM_SCALE()` function removes the trailing zeroes from the `123.45`000, resulting in `123.45`.
-
-
 
 ### 2) Using the TRIM_SCALE() function with table data
 
-
-
 We'll show you an example of using the `TRIM_SCALE()` function to standardize the numeric values in a table.
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `products` to store product data:
-
-
 
 ```
 CREATE TABLE products (
@@ -102,11 +62,7 @@ CREATE TABLE products (
 );
 ```
 
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
-
-
 
 ```
 INSERT INTO products (name, price)
@@ -120,11 +76,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |       name       |  price
@@ -138,11 +90,7 @@ Output:
 (6 rows)
 ```
 
-
-
 Third, [update](/docs/postgresql/postgresql-update) the prices to remove trailing zeroes using the `TRIM_SCALE()` function:
-
-
 
 ```
 UPDATE products
@@ -150,11 +98,7 @@ SET price = TRIM_SCALE(price)
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |       name       |  price
@@ -168,10 +112,6 @@ Output:
 (6 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.

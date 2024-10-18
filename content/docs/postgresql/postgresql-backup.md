@@ -7,57 +7,32 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to backup the PostgreSQL databases using the `pg_dump` and `pg_dumpall` tools.
 
-
-
 ## Introduction to PostgreSQL backup
-
-
 
 A PostgreSQL backup is a copy of the data that you can use to recover the database later. Typically, a backup includes all or selected data, schema, and configuration settings necessary to restore the database to a desired state.
 
-
-
 You need to back up PostgreSQL databases regularly to prevent data loss in case of human errors, hardware failures, disasters, or other unforeseen circumstances.
 
-
-
 Before backing up the databases, you should consider the following types of backups:
-
-
 
 - Logical backups
 - Physical backups
 
-
 PostgreSQL comes with `pg_dump` and `pg_dumpall` tools that help you perform logical backups effectively.
-
-
 
 ### pg_dump
 
-
-
 The `pg_dump` tool is a command-line utility that you can use to create a logical backup of a PostgreSQL database.
-
-
 
 The `pg_dump` extracts a PostgreSQL database into a script file or other archive file. The file represents the snapshot of the database at the time `pg_dump` begins running.
 
-
-
 Here's the syntax of the `pg_dump` command:
-
-
 
 ```
 pg_dump [connection_option] [option] [dbname]
 ```
 
-
-
 The following table illustrates the options for the `pg_dump` command:
-
-
 
 | Option                  | Description                                                                                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -79,33 +54,19 @@ The following table illustrates the options for the `pg_dump` command:
 | -X, --no-owner          | Prevents dumping of object ownership information (such as `OWNER TO`).                                 |
 | -h, --help              | Displays help and usage information.                                                                   |
 
-
-
 ### pg_dumpall
-
-
 
 The `pg_dumpall` tool is a command-line utility that you can use to create logical backups of the entire PostgreSQL cluster, including all databases, schemas, roles, and other cluster-wide objects.
 
-
-
 Unlike the `pg_dump` tool which backups individual databases or objects, the `pg_dumpall` tool offers a convenient way to make a backup of all databases in an PostgreSQL cluster (instance) in a single operation.
 
-
-
 Here's the syntax for `pg_dumpall` command:
-
-
 
 ```
 pg_dump [connection_option] [option]
 ```
 
-
-
 The following table presents some common command-line options for `pg_dumpall` utility:
-
-
 
 | Option                  | Description                                                                        |
 | ----------------------- | ---------------------------------------------------------------------------------- |
@@ -124,171 +85,98 @@ The following table presents some common command-line options for `pg_dumpall` u
 | -V, --version           | Displays the version of pg_dumpall and exits.                                      |
 | -?, --help              | Displays help and usage information.                                               |
 
-
-
 ## PostgreSQL backup examples
-
-
 
 Let's take some examples of backing up PostgreSQL databases.
 
-
-
 ### 1) Backing up a single database using the pg_dump utility
-
-
 
 First, open the Command Prompt on Windows or Terminal on Unix-like systems.
 
-
-
 Second, execute the following `pg_dump` to back up the `dvdrental` database on the local server:
-
-
 
 ```
 pg_dump -U postgres -d dvdrental -F tar -f d:\backup\dvdrental.tar
 ```
 
-
-
 In this command:
-
-
 
 - `-U postgres`: specifies the user (`postgres`) that connects to the PostgreSQL database server.
 - `-d dvdrental`: specifies the database name that you want to back up.
 - `-F tar` : specifies `tar` as the output format of the archive file.
 - `-f d:\backup\dvdrental.tar`: This is the file path of the output backup file. Note that the `D:\backup` directory must exist. Also, it is a good practice to place a backup file in a server that is not the same as the one the PostgreSQL server is running.
 
-
 After you run the command, `pg_dump` will prompt you to enter a password for the `postgres` user:
-
-
 
 ```
 Password:
 ```
 
-
-
 After you enter a valid password, the `pg_dump` will create the backup file `dvdrental.tar` in the `d:\backup` directory.
-
-
 
 If you want to automate the backup regularly, you need to use [a password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) (`.pgpass` on Unix-like systems and `pgpass.conf` on Windows) so that when the command executes, it doesn't ask for the password.
 
-
-
 ### 2) Backing up all databases using the pg_dumpall utility
-
-
 
 First, open the Command Prompt on Windows or Terminal on Unix-like systems.
 
-
-
 Second, run the `pg_dumpall` command to back up all databases in the local PostgreSQL server into the all_databases.sql file:
-
-
 
 ```
 pg_dumpall -U postgres > D:\backup\all_databases.sql
 ```
-
-
 
 This command will prompt you to enter a password for each database in the PostgreSQL server.
 
-
-
 To suppress the password prompt, you can use the `-w` option:
-
-
 
 ```
 pg_dumpall -U postgres > D:\backup\all_databases.sql
 ```
 
-
-
 However, you need to use a [password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) with the following entry:
-
-
 
 ```
 hostname:port:database:username:password
 ```
 
-
-
 For example:
-
-
 
 ```
 localhost:5432:*:postgres:SecurePass1
 ```
 
-
-
 The asterisk (\*) means all databases.
-
-
 
 ### 3) Backing up database objects using the pg_dumpall utility
 
-
-
 Sometimes, you want to backup only database object definitions, not the data. This is helpful in the testing phase, in which you do not want to move test data to the live system.
 
-
-
 To back up objects in all databases, including roles, tablespaces, databases, schemas, tables, indexes, triggers, functions, constraints, views, ownerships, and privileges, you use the following command:
-
-
 
 ```
 pg_dumpall --schema-only > d:\backup\schemas.sql
 ```
 
-
-
 If you want to back up role definition only, use the following command:
-
-
 
 ```
 pg_dumpall --roles-only > D:\backup\roles.sql
 ```
 
-
-
-If you want to back up [tablespaces ](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Tablespaces")definition, use the following command:
-
-
+If you want to back up [tablespaces](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Tablespaces")definition, use the following command:
 
 ```
 pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 ```
 
-
-
 ## Creating backup script on Windows
-
-
 
 The following backup script assumes that you have [a password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) setup properly.
 
-
-
 First, open a text editor such a Notepad.
 
-
-
 Second, write a batch script to generate backup file with a date and timestamp:
-
-
 
 ```
 @echo off
@@ -307,39 +195,21 @@ REM Execute pg_dump command to dump the database
 pg_dump -U %PGUSER% -d %PGDATABASE% -f "%BACKUP_DIR%\%PGDATABASE%_%datestamp%_%timestamp%.sql"
 ```
 
-
-
 In the script, you need to replace `your_username`, `your_database_name`, and the `C:\path\to\backup\directory` with your actual ones that you want to use.
-
-
 
 Third, save the script to a file with the .bat extension such as backup.bat.
 
-
-
 Finally, run the script by double-clicking it.
-
-
 
 If you want to make a regular backup, you can use the Task Scheduler on Windows to run the backup.bat file periodically.
 
-
-
 ## Creating backup script on Linux or macOS
-
-
 
 The following backup script assumes that you have a [password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) setup properly.
 
-
-
 First, open a text editor.
 
-
-
 Second, write a shell script to generate a backup file with a date and timestamp:
-
-
 
 ```
 #!/bin/bash
@@ -359,47 +229,27 @@ timestamp=$(date +'%H%M')
 pg_dump -U "$PGUSER" -d "$PGDATABASE" > "$BACKUP_DIR/$PGDATABASE"_"$datestamp"_"$timestamp".sql
 ```
 
-
-
 In this script, you need to replace `your_username`, `your_database_name`, and `/path/to/backup/directory` with your actual ones that you want to use.
-
-
 
 Third, save the script with a `.sh` extension such as `backup.sh`.
 
-
-
 Fourth, make the script executable by executing the following command on your terminal:
-
-
 
 ```
 chmod +x backup_script.sh
 ```
 
-
-
 Fifth, run the script by executing it in your terminal:
-
-
 
 ```
 ./backup.sh
 ```
 
-
-
 This will execute the `pg_dump` command to dump your database into a backup file with extension .sql with the current date and timestamp appended to its name.
-
-
 
 If you want to backup a database regularly, you can create a cron job to run the script periodically.
 
-
-
 ## Summary
-
-
 
 - Back up PostgreSQL databases regularly for recovery later.
 - Use the `pg_dump` and `pg_dumpall` tools to perform logical backups.

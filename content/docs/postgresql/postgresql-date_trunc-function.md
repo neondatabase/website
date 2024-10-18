@@ -9,49 +9,27 @@ tableOfContents: true
 
 **Summary**: This tutorial shows you how to use the PostgreSQL `DATE_TRUNC()` function to truncate a timestamp or interval to a specified precision.
 
-
-
 ## Introduction to the PostgreSQL DATE_TRUNC() function
-
-
 
 The `DATE_TRUNC()` function truncates a [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp/), a `TIMESTAMP WITH TIME ZONE`, or an [`INTERVAL`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval) value to a specified precision.
 
-
-
 Here's the basic syntax of the `DATE_TRUNC` function:
-
-
 
 ```
 DATE_TRUNC(field, source [,time_zone])
 ```
 
-
-
 In this syntax:
-
-
 
 ### source
 
-
-
 `source` is a value or an expression of type timestamp, timestamp with time zone, or interval. If you use a value of the date or time type, the function will cast it automatically to timestamp or interval respectively.
-
-
 
 ### field
 
-
-
 `field` specifies the to which precision to truncate the `source`.
 
-
-
 Here are the valid values for the `field`:
-
-
 
 - millennium
 - century
@@ -67,48 +45,27 @@ Here are the valid values for the `field`:
 - milliseconds
 - microseconds
 
-
 ### time_zone
-
-
 
 `time_zone` specifies the time zone in which the function will perform the truncation. The `time_zone` argument is the default.
 
-
-
 If you omit the `time_zone`, the function will truncate the `source` based on the current time zone setting.
-
-
 
 The `DATE_TRUNC` function returns a `TIMESTAMP` or an `INTERVAL` value.
 
-
-
 ## PostgreSQL DATE_TRUNC() function examples
-
-
 
 Let's explore some examples of using the `DATE_TRUNC()` function.
 
-
-
 ### 1) Basic PostgreSQL DATE_TRUNC() function example
 
-
-
 The following example uses the `DATE_TRUNC()` function to truncate a `TIMESTAMP` value to `hour` part:
-
-
 
 ```
 SELECT DATE_TRUNC('hour', TIMESTAMP '2017-03-17 02:09:30');
 ```
 
-
-
 Output:
-
-
 
 ```
      date_trunc
@@ -117,25 +74,15 @@ Output:
 (1 row)
 ```
 
-
-
 In this example, the `DATE_TRUNC()` function returns a timestamp with the hour precision.
 
-
-
 If you want to truncate a `TIMESTAMP` value to a minute, you use the `'minute'` field as shown in the following example:
-
-
 
 ```
 SELECT DATE_TRUNC('minute', TIMESTAMP '2017-03-17 02:09:30');
 ```
 
-
-
 The function returns a `TIMESTAMP` with the precision is minute:
-
-
 
 ```
      date_trunc
@@ -144,23 +91,13 @@ The function returns a `TIMESTAMP` with the precision is minute:
 (1 row)
 ```
 
-
-
 ### 2) Using PostgreSQL DATE_TRUNC() function with table data
-
-
 
 See the following `rental` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
 
-
-
 ![Rental table - PostgreSQL date_trunc function demo](/postgresqltutorial_data/wp-content-uploads-2017-03-rental-table.png)
 
-
-
 The following example uses the `DATE_TRUNC()` function to retrieve the number of rentals by month from the rental table:
-
-
 
 ```
 SELECT
@@ -174,11 +111,7 @@ ORDER BY
     m;
 ```
 
-
-
 Output:
-
-
 
 ```
           m          | count
@@ -191,15 +124,9 @@ Output:
 (5 rows)
 ```
 
-
-
 This query retrieves the month of each rental date and counts the number of rentals each month from the `rental` table. It then groups the counts by month and sorts the result set by month.
 
-
-
 If you want to count the rentals by week, you can pass the week to the DATE_TRUNC() function as follows:
-
-
 
 ```
 SELECT
@@ -213,11 +140,7 @@ ORDER BY
     week;
 ```
 
-
-
 Output:
-
-
 
 ```
         week         | count
@@ -236,30 +159,22 @@ Output:
 (11 rows)
 ```
 
-
-
 The following example uses the `DATE_TRUNC()` function to count the number of rentals by staff per year:
-
-
 
 ```
 SELECT
-	staff_id,
-	date_trunc('year', rental_date) y,
-	COUNT (rental_id) rental
+ staff_id,
+ date_trunc('year', rental_date) y,
+ COUNT (rental_id) rental
 FROM
-	rental
+ rental
 GROUP BY
-	staff_id, y
+ staff_id, y
 ORDER BY
-	staff_id;
+ staff_id;
 ```
 
-
-
 Output:
-
-
 
 ```
  staff_id |          y          | rental
@@ -271,10 +186,6 @@ Output:
 (4 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the PostgreSQL `DATE_TRUNC` function to truncate a timestamp or an interval value to a specified level of precision

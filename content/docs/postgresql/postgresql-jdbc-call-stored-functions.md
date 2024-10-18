@@ -7,19 +7,11 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL stored functions using JDBC.
 
-
-
 ## Calling a built-in stored function example
-
-
 
 We will call a built-in string function `initcap()` that capitalizes the first letter of each word in a string.
 
-
-
 To call the `initcap()` function, you follow these steps:
-
-
 
 - First, [establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/).
 - Second, create a `CallableStatement` object by calling the `prepareCall()` method of the `Connection` object.
@@ -27,10 +19,7 @@ To call the `initcap()` function, you follow these steps:
 - Bind values to the statement if applicable.
 - Third, execute the function call and obtain the result.
 
-
 The following example creates a new class named `Util` and defines a static method `properCase()` that calls the `initcap()` function in PostgreSQL:
-
-
 
 ```
 import java.sql.SQLException;
@@ -52,11 +41,7 @@ public class Util {
 }
 ```
 
-
-
 The following illustrates how to use the `properCase()` method of the `Util` class:
-
-
 
 ```
 public class Main {
@@ -67,91 +52,63 @@ public class Main {
 }
 ```
 
-
-
 Output:
-
-
 
 ```
 Hello Joe
 ```
 
-
-
 ## Calling a stored function example
-
-
 
 Let's take an example of calling a stored function in PostgreSQL from a Java program using JDBC.
 
-
-
 ### Creating a stored function
 
-
-
 First, open Command Prompt on Windows or Terminal on Unix-like systems and connect to the sales database on your PostgreSQL server:
-
-
 
 ```
 psql -U postgres -d sales
 ```
 
-
-
 Second, create a function that finds the products by name based on a specified pattern:
-
-
 
 ```
 create or replace function find_products (
-	p_pattern varchar
+ p_pattern varchar
 )
 returns table (
-	p_id int,
-	p_name varchar,
-	p_price decimal
+ p_id int,
+ p_name varchar,
+ p_price decimal
 )
 language plpgsql
 as $$
 declare
     var_r record;
 begin
-	for var_r in(
-		select id, name, price
-		from products
-		where name ilike p_pattern
+ for var_r in(
+  select id, name, price
+  from products
+  where name ilike p_pattern
     )
-	loop
-		p_id := var_r.id;
-		p_name := var_r.name;
-		p_price := var_r.price;
+ loop
+  p_id := var_r.id;
+  p_name := var_r.name;
+  p_price := var_r.price;
         return next;
-	end loop;
+ end loop;
 end; $$
 ```
 
-
-
 Third, exit the psql:
-
-
 
 ```
 exit
 ```
 
-
-
 ### Calling a stored function
 
-
-
 The following defines the `findByName()` method in the `ProductDB` class that calls the `find_products` stored function to find the products by names based on a pattern:
-
-
 
 ```
 import java.sql.SQLException;
@@ -189,11 +146,7 @@ public class ProductDB {
 }
 ```
 
-
-
 The following uses the `findByName()` method of the `ProductDB` class to search for products with the name containing the string `"phone"`:
-
-
 
 ```
 public class Main {
@@ -208,21 +161,13 @@ public class Main {
 }
 ```
 
-
-
 Output:
-
-
 
 ```
 Product{id=5, name='Bluetooth Headphones', price=199.0}
 Product{id=6, name='Phone Stand', price=24.99}
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `CallableStatement` to call a built-in function from PostgreSQL.

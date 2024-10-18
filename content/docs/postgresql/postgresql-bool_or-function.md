@@ -8,53 +8,29 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `BOOL_OR()` function to aggregate boolean values across rows within a group.
 
-
-
 ## Introduction to the PostgreSQL BOOL_OR() function
-
-
 
 The `BOOL_OR()` is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to aggregate boolean values across rows within a group.
 
-
-
 Here's the syntax of the `BOOL_OR()` function:
-
-
 
 ```
 bool_or(expression)
 ```
 
-
-
 In this syntax, the `expression` is the boolean expression to evaluate.
-
-
 
 The `BOOL_OR()` function returns true if at least one value in the group is true. If all values are false, the function returns false.
 
-
-
 Please note that the `BOOL_OR` function ignores `NULL`s within the group.
-
-
 
 ## PostgreSQL BOOL_OR() function examples
 
-
-
 Let's explore some examples of using the `BOOL_OR()` function.
-
-
 
 ### 1) Setting up sample tables
 
-
-
 First, [create tables](/docs/postgresql/postgresql-create-table) called `teams` and `members`:
-
-
 
 ```
 CREATE TABLE teams (
@@ -70,11 +46,7 @@ CREATE TABLE members (
 );
 ```
 
-
-
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the tables:
-
-
 
 ```
 INSERT INTO teams (team_name)
@@ -95,11 +67,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 The `teams` table:
-
-
 
 ```
  team_id | team_name
@@ -110,11 +78,7 @@ The `teams` table:
 (3 rows)
 ```
 
-
-
 The `members` table:
-
-
 
 ```
  member_id | member_name | active | team_id
@@ -128,15 +92,9 @@ The `members` table:
 (6 rows)
 ```
 
-
-
 ### 2) Basic BOOL_OR() function example
 
-
-
 The following example uses the `BOOL_OR()` function to test if there are any active members in the `members` table:
-
-
 
 ```
 SELECT
@@ -145,11 +103,7 @@ FROM
   members;
 ```
 
-
-
 Output:
-
-
 
 ```
  active_member_exists
@@ -158,19 +112,11 @@ Output:
 (1 row)
 ```
 
-
-
 The `BOOL_OR()` function returns true indicating that the `members` table has active members.
-
-
 
 ### 2) Using BOOL_OR() function with GROUP BY clause
 
-
-
 The following example uses the `BOOL_OR()` function with the `GROUP BY` clause to check if there are any active members in each team:
-
-
 
 ```
 SELECT
@@ -183,11 +129,7 @@ GROUP BY
   team_name;
 ```
 
-
-
 Output:
-
-
 
 ```
  team_name | active_member_exists
@@ -198,19 +140,11 @@ Output:
 (3 rows)
 ```
 
-
-
 The output indicates that teams A and B have active members whereas team C does not have any active members.
-
-
 
 ### 3) Using BOOL_OR() function in HAVING clause
 
-
-
 The following example uses the `BOOL_OR()` function with the `GROUP BY` and [HAVING](/docs/postgresql/postgresql-having) clauses to retrieve teams that have active members:
-
-
 
 ```
 SELECT
@@ -225,11 +159,7 @@ HAVING
   BOOL_OR(active) = true;
 ```
 
-
-
 Output:
-
-
 
 ```
  team_name | active_member_exists
@@ -239,11 +169,7 @@ Output:
 (2 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `BOOL_OR()` function to aggregate boolean values across rows within a group.
 - The `BOOL_OR()` function ignores NULLs in the group.

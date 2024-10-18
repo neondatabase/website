@@ -8,45 +8,17 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to list indexes from a PostgreSQL database by using either `pg_indexes` view or `psql` command.
 
-
-
-
-
 PostgreSQL does not provide a command like `SHOW INDEXES` to list the index information of a table or database.
-
-
-
-
 
 However, it does provide you with access to the `pg_indexes` view so that you can query the index information.
 
-
-
-
-
 If you use the `psql` program to interact with the PostgreSQL database, you can use the `\d` command to view the index information for a table.
-
-
-
-
 
 ## PostgreSQL List Indexes using pg_indexes View
 
-
-
-
-
 The `pg_indexes` view allows you to access useful information on each index in the PostgreSQL database.
 
-
-
-
-
 The `pg_indexes` view consists of five columns:
-
-
-
-
 
 - `schemaname`: stores the name of the schema that contains tables and indexes.
 -
@@ -58,15 +30,7 @@ The `pg_indexes` view consists of five columns:
 -
 - `indexdef`: contains the index definition command in the form of `CREATE INDEX` statement.
 
-
-
-
-
 The following statement lists all indexes of the schema `public` in the current database:
-
-
-
-
 
 ```
 SELECT
@@ -82,15 +46,7 @@ ORDER BY
     indexname;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
      tablename      |                      indexname                      |                                                                   indexdef
@@ -104,15 +60,7 @@ Output:
 ...
 ```
 
-
-
-
-
 To show all the indexes of a table, you use the following statement:
-
-
-
-
 
 ```
 SELECT
@@ -124,15 +72,7 @@ WHERE
   tablename = 'table_name';
 ```
 
-
-
-
-
 For example, to list all the indexes for the `customer` table, you use the following statement:
-
-
-
-
 
 ```
 SELECT
@@ -144,15 +84,7 @@ WHERE
     tablename = 'customer';
 ```
 
-
-
-
-
 Here is the output:
-
-
-
-
 
 ```
      indexname     |                                    indexdef
@@ -164,15 +96,7 @@ Here is the output:
 (4 rows)
 ```
 
-
-
-
-
 If you want to get a list of indexes for tables whose names start with the letter `c`, you can use the following query:
-
-
-
-
 
 ```
 SELECT
@@ -188,15 +112,7 @@ ORDER BY
     indexname;
 ```
 
-
-
-
-
 The following shows the output:
-
-
-
-
 
 ```
  tablename  |     indexname     |                                      indexdef
@@ -213,55 +129,23 @@ The following shows the output:
 (9 rows)
 ```
 
-
-
-
-
 ## PostgreSQL List Indexes using psql command
 
-
-
-
-
 If you use `psql` to connect to a PostgreSQL database and want to list all indexes of a table, you can use the `\d` [psql command](https://www.postgresqltutorial.com/postgresql-administration/psql-commands/) as follows:
-
-
-
-
 
 ```
 \d table_name
 ```
 
-
-
-
-
 The command will return all information about the table including the table's structure, indexes, constraints, and [triggers](https://www.postgresqltutorial.com/postgresql-triggers/).
 
-
-
-
-
 For example, the following statement returns detailed information about the `customer` table:
-
-
-
-
 
 ```
 \d customer
 ```
 
-
-
-
-
 The output is:
-
-
-
-
 
 ```
                                              Table "public.customer"
@@ -291,24 +175,10 @@ Triggers:
     last_updated BEFORE UPDATE ON customer FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-
-
-
-
 The output shows the index of the table under the **Indexes** section.
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - Query data from the `pg_indexes` view to retrieve the index information.
 -
 - Use the `\d table_name` command to display the table information along with indexes.
-
-

@@ -8,87 +8,35 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL table aliases and their practical applications.
 
-
-
-
-
 ## Introduction to the PostgreSQL table aliases
-
-
-
-
 
 A table alias is a feature in SQL that allows you to assign a temporary name to a table during the execution of a query.
 
-
-
-
-
 The following illustrates the syntax of defining a table alias:
-
-
-
-
 
 ```
 table_name AS alias_name
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `table_name`: Specify the name of the table that you want to give an alias.
 -
 - `alias_name`: Provide the alias for the table.
 
-
-
-
-
 Like [column aliases](/docs/postgresql/postgresql-column-alias), the `AS` keyword is optional, meaning that you can omit it like this:
-
-
-
-
 
 ```
 table_name alias_name
 ```
 
-
-
-
-
 ## PostgreSQL table alias examples
-
-
-
-
 
 Let's take some examples of using table aliases.
 
-
-
-
-
 ### 1) Basic PostgreSQL table alias example
 
-
-
-
-
 The following example uses a table alias to retrieve five titles from the `film` table:
-
-
-
-
 
 ```
 SELECT f.title
@@ -97,15 +45,7 @@ ORDER BY f.title
 LIMIT 5;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       title
@@ -118,21 +58,9 @@ Output:
 (5 rows)
 ```
 
-
-
-
-
 In this example, we assign the `film` table an alias `f` and use the table alias to fully qualify the `title` column.
 
-
-
-
-
 Since the `AS` keyword is optional, you can remove it as follows:
-
-
-
-
 
 ```
 SELECT f.title
@@ -141,61 +69,25 @@ ORDER BY f.title
 LIMIT 5;
 ```
 
-
-
-
-
 ### 2) Using table aliases in join clauses
-
-
-
-
 
 Typically, you use table aliases in a query that has a [join](/docs/postgresql/postgresql-joins) clause to retrieve data from multiple related tables that share the same column name.
 
-
-
-
-
 If you use the same column name that comes from multiple tables in the same query without fully qualifying them, you will get an error.
 
-
-
-
-
 To avoid this error, you can qualify the columns using the following syntax:
-
-
-
-
 
 ```
 table_name.column_name
 ```
 
-
-
-
-
 If the table has an alias, you can qualify its column using the alias:
-
-
-
-
 
 ```
 alias.column_name
 ```
 
-
-
-
-
 For example, the following query uses an `INNER JOIN` clause to retrieve data from the `customer` and `payment` tables:
-
-
-
-
 
 ```
 SELECT
@@ -210,15 +102,7 @@ ORDER BY
   p.payment_date DESC;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  customer_id | first_name  | amount |        payment_date
@@ -229,33 +113,13 @@ Output:
          252 | Mattie      |   4.99 | 2007-05-14 13:44:29.996577
 ```
 
-
-
-
-
 Note that you'll learn about [INNER JOIN](/docs/postgresql/postgresql-inner-join) in the upcoming tutorial.
-
-
-
-
 
 ### 3) Using table aliases in self-join
 
-
-
-
-
 When you join a table to itself (a.k.a [self-join](/docs/postgresql/postgresql-self-join)), you need to use table aliases. This is because referencing the same table multiple times within a query will result in an error.
 
-
-
-
-
 The following example shows how to reference the `film` table twice in the same query using the table aliases:
-
-
-
-
 
 ```
 SELECT
@@ -269,15 +133,7 @@ INNER JOIN film f2
        f1.length = f2.length;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
             title            |            title            | length
@@ -293,22 +149,8 @@ Output:
 ...
 ```
 
-
-
-
-
 Note that you'll learn about [self-join](/docs/postgresql/postgresql-inner-join) in the upcoming tutorial.
-
-
-
-
 
 ## Summary
 
-
-
-
-
 - Use PostgreSQL table aliases to assign a temporary name to a table during the execution of a query.
-
-

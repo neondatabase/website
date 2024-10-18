@@ -9,41 +9,17 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `MAKE_INTERVAL()` function to create an interval from the interval's components
 
-
-
-
-
 ## Introduction to the PostgreSQL MAKE_INTERVAL() function
-
-
-
-
 
 The `MAKE_INTERVAL()` function allows you to create an [interval](/docs/postgresql/postgresql-interval) from years, months, weeks, days, hours, minutes, and seconds.
 
-
-
-
-
 Here's the syntax of the `MAKE_INTERVAL()` function:
-
-
-
-
 
 ```
 MAKE_INTERVAL ( [ years int [, months int [, weeks int [, days int [, hours int [, mins int [, secs double precision ]]]]]]] ) → interval
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `years` is an integer representing the number of years.
 -
@@ -59,71 +35,27 @@ In this syntax:
 -
 - `secs` is a double-precision number representing the number of seconds.
 
-
-
-
-
 All of these parameters are optional and default to zero.
-
-
-
-
 
 The `MAKE_INTERVAL()` function returns a value of interval type.
 
-
-
-
-
 Besides the `MAKE_INTERVAL()` function, you can use the `INTERVAL` literal syntax to create an interval:
-
-
-
-
 
 ```
 INTERVAL 'X years Y months Z days W hours V minutes U seconds'
 ```
 
-
-
-
-
 The `INTERVAL` literal syntax allows you to create an interval by specifying all components in a single string. It is suitable for creating static or predefined intervals.
-
-
-
-
 
 On the other hand, the `MAKE_INTERVAL()` function offers the flexibility to specify each component separately and is ideal for creating an interval dynamically. For example, you can use the `MAKE_INTERVAL()` function to create an interval from values stored in a table.
 
-
-
-
-
 ## PostgreSQL MAKE_INTERVAL() function examples
-
-
-
-
 
 Let's explore some examples of using the `MAKE_INTERVAL()` function.
 
-
-
-
-
 ### 1) Basic MAKE_INTERVAL() function example
 
-
-
-
-
 The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 1 year, 2 months, 3 days, and 4 hours:
-
-
-
-
 
 ```
 SELECT
@@ -132,15 +64,7 @@ SELECT
   );
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
           make_interval
@@ -149,35 +73,15 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 2) Using the MAKE_INTERVAL() function with default values
 
-
-
-
-
 All of the parameters of the `MAKE_INTERVAL()` function are optional and default to zero. For example, the following statement creates an interval zero:
-
-
-
-
 
 ```
 SELECT MAKE_INTERVAL();
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  make_interval
@@ -186,21 +90,9 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 3) Using the MAKE_INTERVAL( ) function with table data
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `time_data`:
-
-
-
-
 
 ```
 CREATE TABLE time_data (
@@ -214,15 +106,7 @@ CREATE TABLE time_data (
 );
 ```
 
-
-
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the time_data table:
-
-
-
-
 
 ```
 INSERT INTO time_data (year, month, day, hour, minute, second)
@@ -233,15 +117,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | year | month | day | hour | minute | second
@@ -252,15 +128,7 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 Third, use the `MAKE_INTERVAL()` function to create intervals from the data stored in the `time_data` table:
-
-
-
-
 
 ```
 SELECT
@@ -271,15 +139,7 @@ FROM
   time_data;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
           interval_data
@@ -290,16 +150,6 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the `MAKE_INTERVAL()` function to construct an interval from the provided components, such as years, months, days, hours, minutes, and seconds.
-
-

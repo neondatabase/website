@@ -9,77 +9,29 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_TIMESTAMP()` function to convert a string to a timestamp based on a specified format
 
-
-
-
-
 The PostgreSQL `TO_TIMESTAMP()` function converts a string to a [timestamp](/docs/postgresql/postgresql-timestamp) according to the specified format.
-
-
-
-
 
 ## Syntax
 
-
-
-
-
 The following illustrates the syntax of `TO_TIMESTAMP()` function:
-
-
-
-
 
 ```
 TO_TIMESTAMP(timestamp, format)
 ```
 
-
-
-
-
 ## Arguments
-
-
-
-
 
 The `TO_TIMESTAMP()` function requires two arguments:
 
-
-
-
-
 **1) `timestamp`**
-
-
-
-
 
 The `timestamp` is a string that represents a timestamp value in the format specified by `format`.
 
-
-
-
-
 **2) `format`**
-
-
-
-
 
 The format for `timestamp` argument.
 
-
-
-
-
 To construct `format` strings, you use the following template patterns for formatting date and time values.
-
-
-
-
 
 |                          |                                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------ |
@@ -131,33 +83,13 @@ To construct `format` strings, you use the following template patterns for forma
 | AM, am, PM or pm         | Meridiem indicator (without periods)                                                             |
 | A.M., a.m., P.M. or p.m. | Meridiem indicator (with periods)                                                                |
 
-
-
-
-
 ## Return Value
-
-
-
-
 
 The PostgreSQL `TO_TIMESTAMP()` function returns a timestamp with the time zone.
 
-
-
-
-
 ## Examples
 
-
-
-
-
 The following statement uses the `TO_TIMESTAMP()` function to convert a string to a timestamp:
-
-
-
-
 
 ```
 SELECT TO_TIMESTAMP(
@@ -166,15 +98,7 @@ SELECT TO_TIMESTAMP(
 );
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       to_timestamp
@@ -183,15 +107,7 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 In this example:
-
-
-
-
 
 - YYYY is the four-digit year 2017
 -
@@ -205,42 +121,18 @@ In this example:
 -
 - SS is the second 20
 
-
-
-
-
 ## Remarks
-
-
-
-
 
 1. The `TO_TIMESTAMP()` function skips spaces in the input string unless the fixed format global option (`FX` prefix) is used.
 
-
-
-
-
 This example uses multiple spaces in the input string:
-
-
-
-
 
 ```
 SELECT
     TO_TIMESTAMP('2017     Aug','YYYY MON');
 ```
 
-
-
-
-
 The `TO_TIMESTAMP()` function just omits the spaces and returns the correct timestamp value:
-
-
-
-
 
 ```
       to_timestamp
@@ -249,30 +141,14 @@ The `TO_TIMESTAMP()` function just omits the spaces and returns the correct time
 (1 row)
 ```
 
-
-
-
-
 However, the following example returns an error:
-
-
-
-
 
 ```
 SELECT
     TO_TIMESTAMP('2017     Aug','FXYYYY MON');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
 ERROR:  invalid value "" for "MON"
@@ -280,72 +156,32 @@ DETAIL:  The given value did not match any of the allowed values for this field.
 SQL state: 22007
 ```
 
-
-
-
-
 Because the `FX` option instructs the `TO_TIMESTAMP()` to accept the input string with one space only.
-
-
-
-
 
 2. The `TO_TIMESTAMP()` function validates the input string with minimal error checking. It will try to convert the input string to a valid timestamp as much as possible that sometimes yields unexpected results.
 
-
-
-
-
 The following example uses an invalid timestamp value:
-
-
-
-
 
 ```
 SELECT
     TO_TIMESTAMP('2017-02-31 30:8:00', 'YYYY-MM-DD HH24:MI:SS');
 ```
 
-
-
-
-
 It returns an error:
-
-
-
-
 
 ```
 ERROR:  date/time field value out of range: "2017-02-31 30:8:00"
 SQL state: 22008
 ```
 
-
-
-
-
 3. When converting a string to a timestamp, the `TO_TIMESTAMP()` function treats milliseconds or microseconds as seconds after the decimal point.
-
-
-
-
 
 ```
 SELECT
     TO_TIMESTAMP('01-01-2017 10:2', 'DD-MM-YYYY SS:MS');
 ```
 
-
-
-
-
 The result is:
-
-
-
-
 
 ```
 to_timestamp
@@ -353,80 +189,36 @@ to_timestamp
  2017-01-01 00:00:10.2-07
 ```
 
-
-
-
-
 In this example, 2 is not 2 milliseconds but 200. It means that:
-
-
-
-
 
 ```
 SELECT
         TO_TIMESTAMP('01-01-2017 10:2', 'DD-MM-YYYY SS:MS');
 ```
 
-
-
-
-
 and
-
-
-
-
 
 ```
 SELECT
         TO_TIMESTAMP('01-01-2017 10:200', 'DD-MM-YYYY SS:MS');
 ```
 
-
-
-
-
 returns the same result.
-
-
-
-
 
 ```
 2017-01-01 00:00:10.2-07
 ```
 
-
-
-
-
 To get 2 milliseconds, you must use `01-01-2017 10:002`. In this case, `002` is interpreted as `0.002` seconds, equivalent to 2 milliseconds.
 
-
-
-
-
 4. If the year is less than four digits, the `TO_TIMESTAMP()` will adjust it to the nearest year e.g., 99 becomes 1999, 17 becomes 2017.
-
-
-
-
 
 ```
 SELECT
     TO_TIMESTAMP('12 31 99 12:45', 'MM DD YY HH:MI');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       to_timestamp
@@ -435,30 +227,14 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 Consider the following example:
-
-
-
-
 
 ```
 SELECT
       TO_TIMESTAMP('12 31 16 12:45', 'MM DD YY HH:MI');
 ```
 
-
-
-
-
 The nearest year of 16 is 2016, therefore, it returns the following result:
-
-
-
-
 
 ```
 to_timestamp
@@ -466,10 +242,4 @@ to_timestamp
  2016-12-31 00:45:00-07
 ```
 
-
-
-
-
 In this tutorial, you have learned how to use the PostgreSQL `TO_TIMESTAMP()` function to convert a string to a timestamp.
-
-

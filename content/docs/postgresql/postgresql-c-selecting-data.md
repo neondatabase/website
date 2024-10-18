@@ -7,47 +7,26 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C# program.
 
-
-
 This tutorial begins where [Deleting data from PostgreSQL using C#](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/) is left off.
-
-
 
 ## How to query data from PostgreSQL using C
 
-
-
 To query data from PostgreSQL using C# ADO.NET, you follow these steps:
-
-
 
 First, create a data source that represents the PostgreSQL database.
 
-
-
 Second, create a command object `NpgsqlCommand` with a `SELECT` statement from the data source.
 
-
-
 Third, execute the `SELECT` statement by calling one of the following methods of the `NpgsqlCommand` object:
-
-
 
 - `ExecuteReaderAsync()` - executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
 - `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
 
-
 Finally, iterate over the result set and use the Get\* methods of the NpgsqlDataReader object to retrieve the values of columns in each row.
-
-
 
 ## Querying all rows from a table
 
-
-
 The following program queries all rows from the `students` table in the `elearning` database:
-
-
 
 ```
 using Npgsql;
@@ -93,11 +72,7 @@ catch (NpgsqlException ex)
 }
 ```
 
-
-
 Output:
-
-
 
 ```
 2       Emma    Smith   emma.smith@gmail.com    5/20/2024
@@ -112,15 +87,9 @@ Output:
 11      Benjamin        Martinez        benjamin.martinez@gmail.com     5/10/2024
 ```
 
-
-
 ## Querying data with parameters
 
-
-
 The following program shows how to retrieve the students who registered on `2024-05-10` from the `students` table:
-
-
 
 ```
 using Npgsql;
@@ -167,11 +136,7 @@ catch (NpgsqlException ex)
 }
 ```
 
-
-
 Output:
-
-
 
 ```
 Sophia  5/10/2024
@@ -180,15 +145,9 @@ Isabella        5/10/2024
 Benjamin        5/10/2024
 ```
 
-
-
 ## Querying a scalar value
 
-
-
 The following program shows how to select the total number of students from the `students` table using the [count(\*)](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/) aggregate function:
-
-
 
 ```
 using Npgsql;
@@ -216,21 +175,13 @@ catch (NpgsqlException ex)
 }
 ```
 
-
-
 Output:
-
-
 
 ```
 Student count: 10
 ```
 
-
-
 ## Summary
-
-
 
 - Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
 - Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.

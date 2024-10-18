@@ -8,59 +8,23 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to restore a database by using a **PostgreSQL restore** tool called `pg_restore`.
 
-
-
-
-
 ## Introduction to the PostgreSQL pg_restore tool
-
-
-
-
 
 [To perform a logical backup of a PostgreSQL database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/), you use the `pg_dump` tool. To back up all the databases on a PostgreSQL cluster, you use the `pg_dumpall` tool.
 
-
-
-
-
 Both `pg_dump` and `pg_dumpall` tools create a snapshot of one or all databases at the time the command starts running.
-
-
-
-
 
 To restore a database created by the `pg_dump` or `pg_dumpall` tools, you can use the `pg_restore` tool.
 
-
-
-
-
 The `pg_restore` tool allows you to restore the PostgreSQL database from an archive file.
 
-
-
-
-
 Here's the syntax of the `pg_restore` command:
-
-
-
-
 
 ```
 pg_restore [connection-option] [option] [filename]
 ```
 
-
-
-
-
 The following table presents the most commonly used command-line options for the `pg_restore` utility:
-
-
-
-
 
 | Option                      | Description                                                                                                                                                                   |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -81,166 +45,68 @@ The following table presents the most commonly used command-line options for the
 | -v, --version               | Shows the version of pg_restore and exits.                                                                                                                                    |
 | -?, --help                  | Shows help and usage information.                                                                                                                                             |
 
-
-
-
-
 ## PostgreSQL Restore Database example
-
-
-
-
 
 First, open the Command Prompt on Windows or Terminal on Unix-like systems.
 
-
-
-
-
 Second, back up the dvdrental database to a directory such as D:\\backup\\
-
-
-
-
 
 ```
 pg_dump -U postgres -d dvdrental -F tar -f d:\backup\dvdrental.tar
 ```
 
-
-
-
-
 It'll prompt you to enter the password for the user `postgres`. After entering a valid password, the `pg_dump` will create an archive file dvdrental.tar in the `D:\backup` file.
 
-
-
-
-
 Third, connect to the PostgreSQL server:
-
-
-
-
 
 ```
 psql -U postgres
 ```
 
-
-
-
-
 Fourth, drop the `dvdrental` database:
-
-
-
-
 
 ```
 drop database dvdrental;
 ```
 
-
-
-
-
 Fifth, create a new empty `dvdrental` database:
-
-
-
-
 
 ```
 create database dvdrental;
 ```
 
-
-
-
-
 Sixth, exit the psql:
-
-
-
-
 
 ```
 exit
 ```
 
-
-
-
-
 Seven, restore the dvdrental database from the backup file using the pg_restore tool:
-
-
-
-
 
 ```
 pg_restore -U postgres -d dvdrental D:/backup/dvdrental.tar
 ```
 
-
-
-
-
 Eight, connect to the dvdrental database:
-
-
-
-
 
 ```
 psql -U postgres -d dvdrental
 ```
 
-
-
-
-
 Ninth, show the tables:
-
-
-
-
 
 ```
 \dt
 ```
 
-
-
-
-
 It returns all the tables in the dvdrental database.
 
-
-
-
-
 Finally, exit the psql:
-
-
-
-
 
 ```
 exit
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the `pg_restore` tool to restore a PostgreSQL database from an archive file.
-
-

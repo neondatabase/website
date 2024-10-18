@@ -7,57 +7,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the `psql` tool and `information_schema` to describe tables in PostgreSQL.
 
-
-
 If you have been using MySQL, you typically use the `DESCRIBE` statement to find the information about a table.
-
-
 
 PostgreSQL does not support the `DESCRIBE`statement. However, you can query the information in columns of a table in a couple of ways.
 
-
-
 ## 1) PostgreSQL DESCRIBE TABLE using psql
 
-
-
 First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using the `psql` tool:
-
-
 
 ```
 psql -U postgres
 ```
 
-
-
 It'll prompt you to enter a password for the `postgres` user.
 
-
-
 Second, change the current database to `dvdrental` [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
-
-
 
 ```
 \c dvdrental
 ```
 
-
-
 Third, execute the `\d table_name` to or `\d+ table_name` to show the structure of a table. For example, the following shows the structure of the `film` table in the sample database:
-
-
 
 ```
 \d film
 ```
 
-
-
 Output:
-
-
 
 ```
                                               Table "public.film"
@@ -92,23 +68,13 @@ Triggers:
     last_updated BEFORE UPDATE ON film FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-
-
 The command returns a lot of information on the structure of the `film` table. Additionally, it returns [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), and [triggers](https://www.postgresqltutorial.com/postgresql-triggers).
-
-
 
 ## 2) PostgreSQL DESCRIBE TABLE using information_schema
 
-
-
 The `information_schema.columns` catalog contains the information on columns of all tables. To get information on columns of a table, you query the `information_schema.columns` catalog.
 
-
-
 For example:
-
-
 
 ```
 SELECT
@@ -123,11 +89,7 @@ WHERE
   table_name = 'film';
 ```
 
-
-
 Output:
-
-
 
 ```
    column_name    |          data_type          | character_maximum_length | is_nullable |            column_default
@@ -148,15 +110,9 @@ Output:
 (13 rows)
 ```
 
-
-
 Note that the `SELECT *`from the `information_schema.columns` will retrieve a comprehensive set of information.
 
-
-
 ## Summary
-
-
 
 - Use the `\d table_name` to show the structure of the table using `psql`.
 - Query data from the `information_schema.columns` to retrieve the column information.

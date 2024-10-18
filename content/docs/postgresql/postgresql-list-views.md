@@ -7,61 +7,35 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to list views in the PostgreSQL database server using the `psql` command and SQL statements.
 
-
-
 In PostgreSQL, views are named queries stored directly within the database server. These views allow you to encapsulate complex SQL queries, enabling you to retrieve specific subset data from underlying tables easily.
-
-
 
 PostgreSQL offers some options for listing views within the current database. You can either use the `\dv` command in `psql` or query the `information_schema.views` and `pg_matviews` views directly.
 
-
-
 ## Listing views using psql
 
-
-
 First, open the Command Prompt on Windows or Terminal on Unix-like systems and connect to the PostgreSQL using the following `psql` command:
-
-
 
 ```
 psql -U postgres
 ```
 
-
-
 It'll prompt you to enter a password for the `postgres` user.
 
-
-
 Second, change the current database to the desired one where you want to list the views, for example, `dvdrental`:
-
-
 
 ```
 \c dvdrental
 ```
 
-
-
 Finally, list the view in the database using the `\dv` command:
-
-
 
 ```
 \dv
 ```
 
-
-
 In this command, `dv` stands for **d**isplay **v**iews. The `\dv` command allows you to quickly examine the views in the database without having to write SQL queries.
 
-
-
 Output:
-
-
 
 ```
                    List of relations
@@ -80,29 +54,18 @@ Output:
 (10 rows)
 ```
 
-
-
 The output has four columns:
-
-
 
 - `Schema`: Indicates the schema of the view. When you create a view without a schema, it defaults to public.
 - `Name`: Specifies the name of the view.
 - `Type`: Denotes the type of the object, which is `view` in this case.
 - `Owner`: Shows the user account that created the view.
 
-
 ## Listing view using SQL statement
-
-
 
 PostgreSQL offers various database views that contain information about objects defined in the current database through the information schema.
 
-
-
 To retrieve the information about database views, you can execute the following SQL statement:
-
-
 
 ```
 SELECT
@@ -119,11 +82,7 @@ ORDER BY
   table_name;
 ```
 
-
-
 The output will display the schema and the name of the views:
-
-
 
 ```
  table_schema |         table_name
@@ -142,25 +101,15 @@ The output will display the schema and the name of the views:
 (11 rows)
 ```
 
-
-
 ## Listing materialized views
 
-
-
 To retrieve all [materialized views](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/), you can query them from the `pg_matviews` view:
-
-
 
 ```
 SELECT * FROM pg_matviews\G
 ```
 
-
-
 Output:
-
-
 
 ```
  schemaname |    matviewname     | matviewowner | tablespace | hasindexes | ispopulated |                          definition
@@ -178,15 +127,9 @@ Output:
 (1 row)
 ```
 
-
-
 The output includes detailed information about materialized views, including their definitions.
 
-
-
 If you solely want to get the names of the materialized view, you can use the following query:
-
-
 
 ```
 SELECT
@@ -197,15 +140,9 @@ ORDER BY
   materialized_view_name;
 ```
 
-
-
 This query will return only the names of the materialized views.
 
-
-
 Output:
-
-
 
 ```
  materialized_view_name
@@ -214,11 +151,7 @@ Output:
 (1 row)
 ```
 
-
-
 ## Summary
-
-
 
 - Utilize the `\dv` command to list all views of a database using the `psql` program.
 - Use the `information_schemas.views` view to retrieve information about views.

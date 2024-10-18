@@ -7,118 +7,68 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL functions from a Python program.
 
-
-
 This tutorial picks up from where the [Transaction Tutorial](https://www.postgresqltutorial.com/postgresql-python/transaction/) left off.
-
-
 
 ## Calling a PostgreSQL function in Python
 
-
-
 To call a PostgreSQL function from a Python program, you use the following steps:
 
-
-
 First, [create a new database connection](https://www.postgresqltutorial.com/postgresql-python/connect/) to the PostgreSQL server by calling the `connect()` function of the `psycopg2` module.
-
-
 
 ```
 conn = psycopg2.connect(config)
 ```
 
-
-
 The `connect()` method returns a new instance of the `connection` class.
 
-
-
 Next, create a new cursor by calling the `cursor()` method of the `connection` object.
-
-
 
 ```
 cur = conn.cursor()
 ```
 
-
-
 Then, pass the name of the function and the optionally pass values to the `callproc()` method of the `cursor` object:
-
-
 
 ```
 cur.callproc('function_name', (value1,value2))
 ```
 
-
-
 Internally, the `callproc()` method translates the function call and input values into the following statement:
-
-
 
 ```
 SELECT * FROM function_name(value1,value2);
 ```
 
-
-
 Therefore, you can use the `execute()` method of the `cursor` object to call a function as follows:
-
-
 
 ```
 cur.execute("SELECT * FROM function_name( %s,%s); ",(value1,value2))
 ```
 
-
-
 Both statements have the same effect.
-
-
 
 After that, process the result set returned by the function using the `fetchone()`, `fetchall()`, or `fetchmany()` method.
 
-
-
 Finally, call the `close()` method of the `cursor` and `connection` objects to close the communication with the PostgreSQL database server:
-
-
 
 ```
 cur.close()
 conn.close()
 ```
 
-
-
 ## Calling a PostgreSQL function example
-
-
 
 Let's take an example of calling a PostgreSQL function from Python.
 
-
-
 ### 1) Create a new function
 
-
-
 First, open the Command Prompt on Windows or Terminal on Unix-like systems and connect to the `suppliers` database:
-
-
 
 ```
 psql -U postgres -d suppliers
 ```
 
-
-
 Second, execute the following command to create a new function called `get_parts_by_vendors()` that returns a list of parts by a specified vendor:
-
-
 
 ```
 CREATE OR REPLACE FUNCTION get_parts_by_vendor(id INTEGER)
@@ -137,23 +87,13 @@ END; $$
 LANGUAGE plpgsql;
 ```
 
-
-
 Notice that you can use any PostgreSQL client tools to create a function such as pgAdmin.
-
-
 
 ### 2) Create call_function.py module
 
-
-
 First, create a new module in the project directory called `call_function.py`:
 
-
-
 Second, define a new function called `get_parts()` that calls the `get_parts_by_vendors()` function in PostgreSQL:
-
-
 
 ```
 import psycopg2
@@ -189,38 +129,22 @@ if __name__ == '__main__':
     print(parts)
 ```
 
-
-
 ### 3) Call the call_function.py module
 
-
-
 Run the following command to execute the `call_function.py` module:
-
-
 
 ```
 python call_function.py
 ```
 
-
-
 Output:
-
-
 
 ```
 [(1, 'SIM Tray'), (5, 'Home Button'), (6, 'LTE Modem')]
 ```
 
-
-
 [Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/call_function.zip)
 
-
-
 ## Summary
-
-
 
 - Use the `callproc()` method of the `cursor` object to call a function in PostgreSQL from Python.

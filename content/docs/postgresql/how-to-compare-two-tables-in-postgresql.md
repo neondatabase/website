@@ -8,19 +8,11 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn various ways to compare two tables in PostgreSQL.
 
-
-
 There are several ways to compare the content of two tables to find the differences between them. We will show you two commonly used techniques to compare the data from two tables.
-
-
 
 ## Comparing two tables using EXCEPT and UNION operators
 
-
-
 First, [create table](/docs/postgresql/postgresql-create-table/) two tables called `foo` and `bar`, and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
-
-
 
 ```
 CREATE TABLE foo (
@@ -44,15 +36,9 @@ VALUES
   (2, 'b');
 ```
 
-
-
 The `foo` table has the same structure and data as the `bar` table.
 
-
-
 Next, [update](/docs/postgresql/postgresql-update) one row in the `bar` table.
-
-
 
 ```
 UPDATE
@@ -63,15 +49,9 @@ WHERE
   id = 2;
 ```
 
-
-
 ![compare-two-tables-postgresql](/postgresqltutorial_data/wp-content-uploads-2015-09-compare-two-tables-postgresql.jpg)
 
-
-
 Then, find the rows in the `foo` table but not in the `bar` table using the following [query](/docs/postgresql/postgresql-select):
-
-
 
 ```
 SELECT
@@ -89,11 +69,7 @@ FROM
   bar;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name |    note
@@ -102,11 +78,7 @@ Output:
 (1 row)
 ```
 
-
-
 We used the `EXCEPT` operator that returns the rows in the `foo` table but not in the `bar` table. We can apply the same technique to find the rows that are in the `bar` table but not in the `foo` table.
-
-
 
 ```
 SELECT
@@ -124,11 +96,7 @@ FROM
   foo;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name |    note
@@ -137,11 +105,7 @@ Output:
 (1 row)
 ```
 
-
-
 Finally, use the [UNION operator](/docs/postgresql/postgresql-union) to combine the results of both queries to find the rows in the `bar` table but not in the `foo` table and vice versa:
-
-
 
 ```
 SELECT
@@ -173,11 +137,7 @@ FROM
   foo;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name |    note
@@ -187,15 +147,9 @@ Output:
 (2 rows)
 ```
 
-
-
 ## Comparing two tables using an outer join
 
-
-
 You can use the outer join to compare two tables as follows:
-
-
 
 ```
 SELECT
@@ -209,11 +163,7 @@ WHERE
   OR bar.id IS NULL;
 ```
 
-
-
 It returns the differences between the two tables:
-
-
 
 ```
  id | name
@@ -223,11 +173,7 @@ It returns the differences between the two tables:
 (2 rows)
 ```
 
-
-
 To find the number of rows that are in the `foo` table but not `bar` table and vice versa, you use the [COUNT function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/) as follows:
-
-
 
 ```
 SELECT
@@ -240,11 +186,7 @@ WHERE
   OR bar.id IS NULL;
 ```
 
-
-
 Output:
-
-
 
 ```
  count
@@ -253,10 +195,6 @@ Output:
 (1 row)
 ```
 
-
-
 ## Summary
-
-
 
 - Use `UNION` and `EXCEPT` operators or outer join to compare two tables in PostgreSQL.

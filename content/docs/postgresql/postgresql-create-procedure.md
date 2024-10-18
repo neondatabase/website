@@ -7,27 +7,15 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE PROCEDURE` statement to create new stored procedures.
 
-
-
 ## Introduction to PostgreSQL CREATE PROCEDURE statement
-
-
 
 So far, you have learned how to [define user-defined functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) using the `create function` statement.
 
-
-
 A drawback of user-defined functions is that they cannot execute [transactions](/docs/postgresql/postgresql-transaction/). In other words, inside a user-defined function, you cannot [start a transaction](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction), and commit or rollback it.
-
-
 
 PostgreSQL 11 introduced stored procedures that support transactions.
 
-
-
 To define a new stored procedure, you use the `create procedure` statement with the following syntax:
-
-
 
 ```
 create [or replace] procedure procedure_name(parameter_list)
@@ -40,53 +28,32 @@ begin
 end; $$
 ```
 
-
-
 In this syntax:
-
-
 
 - First, specify the name of the stored procedure after the `create procedure` keywords.
 - Second, define parameters for the stored procedure. A stored procedure can accept zero or more parameters.
 - Third, specify `plpgsql` as the procedural language for the stored procedure. Note that you can use other procedural languages for the stored procedure such as SQL, C, etc.
 - Finally, use the dollar-quoted string constant syntax to define the body of the stored procedure.
 
-
 Parameters in stored procedures can have the `in` and `inout` modes but cannot have the `out` mode.
 
-
-
 A stored procedure does not return a value. You cannot use the `return` statement with a value inside a store procedure like this:
-
-
 
 ```
 return expression;
 ```
 
-
-
 However, you can use the `return` statement without the `expression` to stop the stored procedure immediately:
-
-
 
 ```
 return;
 ```
 
-
-
 If you want to return a value from a stored procedure, you can use parameters with the `inout` mode.
-
-
 
 ## PostgreSQL CREATE PROCEDURE statement examples
 
-
-
 We will use the following `accounts` table for the demonstration:
-
-
 
 ```
 drop table if exists accounts;
@@ -105,21 +72,13 @@ insert into accounts(name,balance)
 values('Alice',10000);
 ```
 
-
-
 The following statement shows the data from the `accounts` table:
-
-
 
 ```
 select * from accounts;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name  | balance
@@ -129,11 +88,7 @@ Output:
 (2 rows)
 ```
 
-
-
 The following example creates a stored procedure named `transfer` that transfers a specified amount of money from one account to another.
-
-
 
 ```
 create or replace procedure transfer(
@@ -158,45 +113,27 @@ begin
 end;$$;
 ```
 
-
-
 ## Calling a stored procedure
 
-
-
 To call a stored procedure, you use the `CALL` statement as follows:
-
-
 
 ```
 call stored_procedure_name(argument_list);
 ```
 
-
-
 For example, this statement invokes the `transfer` stored procedure to transfer `$1,000` from Bob's account to Alice's account.
-
-
 
 ```
 call transfer(1,2,1000);
 ```
 
-
-
 The following statement verifies the data in the `accounts` table after the transfer:
-
-
 
 ```
 SELECT * FROM accounts;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name  | balance
@@ -206,15 +143,9 @@ Output:
 (2 rows)
 ```
 
-
-
 The output shows that the transfer has been successful.
 
-
-
 ## Summary
-
-
 
 - Use `create procedure` statement to define a new stored procedure.
 - Use the `call` statement to invoke a stored procedure.

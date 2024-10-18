@@ -8,53 +8,21 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `AFTER UPDATE` trigger that executes a function after an update event occurs.
 
-
-
-
-
 ## Introduction to the PostgreSQL AFTER UPDATE trigger
-
-
-
-
 
 In PostgreSQL, a trigger is a database object that is fired automatically when an event such as `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` occurs.
 
-
-
-
-
 An `AFTER UPDATE` trigger is a type of trigger that fires after an `UPDATE` operation is completed successfully on a table.
-
-
-
-
 
 Because the `AFTER UPDATE` triggers can access the row after the update, you can perform tasks such as logging changes, updating data in related tables, or sending notifications based on the modified data.
 
-
-
-
-
 In an `AFTER UPDATE` trigger, you can access the following variables:
-
-
-
-
 
 - `OLD`: This record variable allows you to access the row before the update.
 -
 - `NEW`: This record variable represents the row after the update.
 
-
-
-
-
 Additionally, you can access the following variables:
-
-
-
-
 
 - `TG_NAME`: Store the name of the trigger.
 -
@@ -62,21 +30,9 @@ Additionally, you can access the following variables:
 -
 - `TG_WHEN`: Represent the trigger timing, which is `AFTER` for the `AFTER UPDATE` trigger.
 
-
-
-
-
 To create a `AFTER UPDATE` trigger, you use the following steps:
 
-
-
-
-
 First, [define a trigger function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when the `AFTER UPDATE` trigger fires:
-
-
-
-
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function()
@@ -92,15 +48,7 @@ END;
 $$
 ```
 
-
-
-
-
 Second, create a `AFTER UPDATE` trigger that executes the trigger function:
-
-
-
-
 
 ```
 CREATE TRIGGER trigger_name
@@ -110,21 +58,9 @@ FOR EACH {ROW | STATEMENT}
 EXECUTE FUNCTION trigger_function();
 ```
 
-
-
-
-
 ## PostgreSQL AFTER UPDATE trigger example
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `salaries` to store the employee's salaries:
-
-
-
-
 
 ```
 CREATE TABLE salaries(
@@ -134,15 +70,7 @@ CREATE TABLE salaries(
 );
 ```
 
-
-
-
-
 Second, create a table called `salary_changes` that stores the updates to the `salary` column of the `salaries` table:
-
-
-
-
 
 ```
 CREATE TABLE salary_changes (
@@ -154,15 +82,7 @@ CREATE TABLE salary_changes (
 );
 ```
 
-
-
-
-
 Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
-
-
-
-
 
 ```
 CREATE OR REPLACE FUNCTION log_salary_change()
@@ -178,15 +98,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-
-
-
-
 Fourth, define an `AFTER UPDATE` trigger that calls the `log_salary_change()` function after an update occurs to the `salary` column of the `salaries` table:
-
-
-
-
 
 ```
 CREATE TRIGGER after_update_salary_trigger
@@ -195,15 +107,7 @@ FOR EACH ROW
 EXECUTE FUNCTION log_salary_change();
 ```
 
-
-
-
-
 Fifth, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `salaries` table:
-
-
-
-
 
 ```
 INSERT INTO salaries(name, salary)
@@ -213,15 +117,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |   name   | salary
@@ -231,15 +127,7 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 Sixth, increase the salary of `John Doe` by 5%:
-
-
-
-
 
 ```
 UPDATE salaries
@@ -247,29 +135,13 @@ SET salary = salary * 1.05
 WHERE id = 1;
 ```
 
-
-
-
-
 Seventh, retrieve the data from `salary_changes` table:
-
-
-
-
 
 ```
 SELECT * FROM salary_changes;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | employee_id | old_salary | new_salary |         changed_at
@@ -278,22 +150,8 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The output shows that the salary before and after changes have been logged to the `salary_changes` table.
-
-
-
-
 
 ## Summary
 
-
-
-
-
 - Use a `BEFORE` `UPDATE` trigger to execute a function before an update operation occurs.
-
-

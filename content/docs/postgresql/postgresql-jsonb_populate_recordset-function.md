@@ -9,33 +9,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_popuplate_recordset()` function to populate the fields of a record type from a JSON array of objects.
 
-
-
-
-
 ## Introduction to the PostgreSQL jsonb_popuplate_recordset() function
-
-
-
-
 
 The `jsonb_populate_recordset()` function allows you to populate the fields of a record type from a JSON array of objects.
 
-
-
-
-
 In other words, the `jsonb_popuplate_recordset()` function converts a JSON array of objects with the JSONB type into a set of records of a specified type.
 
-
-
-
-
 Here's the syntax of the `jsonb_populate_recordset()` function:
-
-
-
-
 
 ```
 jsonb_populate_recordset(
@@ -44,53 +24,21 @@ jsonb_populate_recordset(
 ) RETURNS SETOF anyelement
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `target` represents the target record type to which the JSONB data will be mapped.
 -
 - `json_object` is a JSON array of objects from which the records will be populated. The jsonb_array has the type of JSONB.
 
-
-
-
-
 The `jsonb_populate_recordset()` function returns a set of records of a specified type, with each record's fields populated using the corresponding key-value pairs from the JSONB objects in the array.
-
-
-
-
 
 ## PostgreSQL jsonb_popuplate_recordset() function examples
 
-
-
-
-
 Let's explore some examples of using the `jsonb_populate_recordset()` function.
-
-
-
-
 
 ### 1) Basic jsonb_populate_recordset() function example
 
-
-
-
-
 First, [create a new type](/docs/postgresql/postgresql-user-defined-data-types) called `address`:
-
-
-
-
 
 ```
 CREATE TYPE address_type AS (
@@ -100,15 +48,7 @@ CREATE TYPE address_type AS (
 );
 ```
 
-
-
-
-
 Second, use the `jsonb_populate_recordset()` function to populate the address custom type from a JSON array of objects:
-
-
-
-
 
 ```
 SELECT
@@ -119,15 +59,7 @@ FROM
   ) AS address;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
    street    |    city     | zipcode
@@ -137,21 +69,9 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 ### 2) Using the jsonb_populate_recordset() function with table data
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
-
-
-
-
 
 ```
 CREATE TABLE employees (
@@ -162,15 +82,7 @@ CREATE TABLE employees (
 );
 ```
 
-
-
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
-
-
-
-
 
 ```
 INSERT INTO employees (name, age, salary)
@@ -179,15 +91,7 @@ VALUES
   ('Jane Smith', 22, 80000);
 ```
 
-
-
-
-
 Third, use `jsonb_populate_recordset()` to query the data from the `employees` table in a structured format:
-
-
-
-
 
 ```
 SELECT
@@ -202,15 +106,7 @@ FROM
   employees;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
          employees
@@ -220,16 +116,6 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the `jsonb_popuplate_recordset()` function to populate the fields of a record type or a custom composite type from a JSON object.
-
-

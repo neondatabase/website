@@ -6,19 +6,11 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` join syntax to update data in a table based on values in another table.
 
-
-
 ## Introduction to the PostgreSQL UPDATE join syntax
-
-
 
 Sometimes, you need to update data in a table based on values in another table. In this case, you can use the PostgreSQL [`UPDATE`](/docs/postgresql/postgresql-update) join.
 
-
-
 Here's the basic syntax of the `UPDATE` join statement:
-
-
 
 ```
 UPDATE table1
@@ -27,39 +19,21 @@ FROM table2
 WHERE table1.c2 = table2.c2;
 ```
 
-
-
 To join a table (table1) with another table (table2) in the `UPDATE` statement, you specify the joined table (table2) in the `FROM` clause and provide the join condition in the `WHERE` clause. The `FROM` clause must appear immediately after the `SET` clause.
-
-
 
 For each row of the table `table1`, the `UPDATE` statement examines every row of the table `table2`.
 
-
-
 If the values in the `c2` column of table `table1` equals the values in the `c2` column of table `table2`, the `UPDATE` statement updates the value in the `c1` column of the table `table1` the new value (`new_value`).
-
-
 
 ## PostgreSQL UPDATE JOIN example
 
-
-
 Let's take a look at an example to understand how the PostgreSQL `UPDATE` join works. We will use the following database tables for the demonstration:
-
-
 
 ![PostgreSQL UPDATE join sample database](/postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png)
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `product_segment` that stores the product segments such as grand luxury, luxury, and mass.
 
-
-
 The `product_segment` table has the `discount` column that stores the discount percentage based on a specific segment. For example, products with the grand luxury segment have `5%` discount while luxury and mass products have `6%` and `10%` discounts respectively.
-
-
 
 ```
 CREATE TABLE product_segment (
@@ -77,11 +51,7 @@ VALUES
     ('Mass', 0.1);
 ```
 
-
-
 Second, create another table named `product` that stores the product data. The `product` table has the [foreign key column](/docs/postgresql/postgresql-foreign-key) `segment_id` that links to the `id` of the `segment` table.
-
-
 
 ```
 CREATE TABLE product(
@@ -119,11 +89,7 @@ VALUES
     ('nulla elit ac', 161.71, 3);
 ```
 
-
-
 Third, suppose you have to calculate the net price of every product based on the discount of the product segment. To do this, you can apply the `UPDATE` join statement as follows:
-
-
 
 ```
 UPDATE product
@@ -132,11 +98,7 @@ FROM product_segment
 WHERE product.segment_id = product_segment.id;
 ```
 
-
-
 You can utilize the table aliases to make the query shorter like this:
-
-
 
 ```
 UPDATE
@@ -149,38 +111,22 @@ WHERE
     p.segment_id = s.id;
 ```
 
-
-
 This statement joins the `product` table to the `product_segment` table. If there is a match in both tables, it gets a discount from the `product_segment` table, calculates the net price based on the following formula, and updates the `net_price` column.
-
-
 
 ```
 net_price = price - price * discount;
 ```
 
-
-
 The following [`SELECT`](/docs/postgresql/postgresql-select) statement retrieves the data of the `product` table to verify the update:
-
-
 
 ```
 SELECT * FROM product;
 ```
 
-
-
 ![PostgreSQL UPDATE Join Example](/postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-example.png)
-
-
 
 The output indicates that the `net_price` column has been updated with the correct values.
 
-
-
 ## Summary
-
-
 
 - Use the PostgreSQL `UPDATE` join statement to update data in a table based on values in another table.

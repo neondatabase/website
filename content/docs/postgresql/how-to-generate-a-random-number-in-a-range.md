@@ -8,23 +8,11 @@ tableOfContents: true
 
 **Summary**: This tutorial shows you how to develop a user-defined function that generates a random number between two numbers.
 
-
-
-
-
 PostgreSQL provides the `random()` function that returns a random number between 0 and 1. The following statement returns a random number between 0 and 1.
-
-
-
-
 
 ```
 SELECT random();
 ```
-
-
-
-
 
 ```
       random
@@ -33,23 +21,11 @@ SELECT random();
 (1 row)
 ```
 
-
-
-
-
 To generate a random number between 1 and 11, you use the following statement:
-
-
-
-
 
 ```
 SELECT random() * 10 + 1 AS RAND_1_11;
 ```
-
-
-
-
 
 ```
     rand_1_11
@@ -58,23 +34,11 @@ SELECT random() * 10 + 1 AS RAND_1_11;
 (1 row)
 ```
 
-
-
-
-
 If you want to generate the random number as an integer, you apply the `floor()` function to the expression as follows:
-
-
-
-
 
 ```
 SELECT floor(random() * 10 + 1)::int;
 ```
-
-
-
-
 
 ```
  floor
@@ -83,29 +47,13 @@ SELECT floor(random() * 10 + 1)::int;
 (1 row)
 ```
 
-
-
-
-
 Generally, to generate a random number between two integers low and high, you use the following statement:
-
-
-
-
 
 ```
 SELECT floor(random() * (high-low+1) + low)::int;
 ```
 
-
-
-
-
 You can [develop a user-defined function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that returns a random number between two numbers `low` and `high`:
-
-
-
-
 
 ```
 CREATE OR REPLACE FUNCTION random_between(low INT ,high INT)
@@ -117,23 +65,11 @@ END;
 $$ language 'plpgsql' STRICT;
 ```
 
-
-
-
-
 The following statement calls the `random_between()` function and returns a random number between 1 and 100:
-
-
-
-
 
 ```
 SELECT random_between(1,100);
 ```
-
-
-
-
 
 ```
  random_between
@@ -142,24 +78,12 @@ SELECT random_between(1,100);
 (1 row)
 ```
 
-
-
-
-
 If you want to get multiple random numbers between two integers, you use the following statement:
-
-
-
-
 
 ```
 SELECT random_between(1,100)
 FROM generate_series(1,5);
 ```
-
-
-
-
 
 ```
  random_between
@@ -172,10 +96,4 @@ FROM generate_series(1,5);
 (5 rows)
 ```
 
-
-
-
-
 In this tutorial, you have learned how to generate a random number between a range of two numbers.
-
-

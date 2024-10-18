@@ -9,21 +9,9 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn to update data in a PostgreSQL database table using PHP PDO.
 
-
-
-
-
 ## Steps for updating data in a database table from a PHP application
 
-
-
-
-
 To update data in a table, you use these steps:
-
-
-
-
 
 1. [Connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating an instance of the PDO class.
 2. Call the `prepare()` method of the PDO object to prepare the [UPDATE](/docs/postgresql/postgresql-update) statement for execution. The `prepare()` method returns a `PDOStatement` object.
@@ -31,27 +19,11 @@ To update data in a table, you use these steps:
 4. Execute the `UPDATE` statement by calling the `execute()` method of the `PDOStatement` object.
 5. Get the number of rows updated using the `rowCount()` method of the `PDOStatement` object.
 
-
-
-
-
 ## Updating data example
-
-
-
-
 
 We will use the `stocks` table that we created in the [creating table tutorial](https://www.postgresqltutorial.com/postgresql-php/create-tables/) for the demonstration.
 
-
-
-
-
 The `updateStock()` method of the `PostgreSQLPHPUpdate` class updates the data in the `stocks` table based on a specified id.
-
-
-
-
 
 ```
 <?php
@@ -107,15 +79,7 @@ class PostgreSQLPHPUpdate {
 }
 ```
 
-
-
-
-
 We use the `PostgreSQLPHPUpdate` class in the `index.php` file as follows:
-
-
-
-
 
 ```
 <?php
@@ -141,27 +105,11 @@ try {
 }
 ```
 
-
-
-
-
 In the index.php script, we connected to the PostgreSQL database and called the `updateStock()` method of the `PostgreSQLPHPUpdate` class to update the company name of the stock id 2 from `Google Inc.` to `Alphabet Inc.`
-
-
-
-
 
 ![PostgreSQL PHP Update](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png)
 
-
-
-
-
 Before running the script, we query data from the stocks table to see its current data.
-
-
-
-
 
 ```
 SELECT
@@ -169,10 +117,6 @@ SELECT
 FROM
     stocks;
 ```
-
-
-
-
 
 ```
  id | symbol |        company
@@ -184,29 +128,13 @@ FROM
 (4 rows)
 ```
 
-
-
-
-
 Launch the `index.php` file in a web browser; we get the following output.
-
-
-
-
 
 ```
 Number of row affected 1
 ```
 
-
-
-
-
 Let's recheck the stocks table.
-
-
-
-
 
 ```
  id | symbol |        company
@@ -218,16 +146,6 @@ Let's recheck the stocks table.
 (4 rows)
 ```
 
-
-
-
-
 The company name of stock with id 2 has been updated to the new one.
 
-
-
-
-
 In this tutorial, you have learned how to update data in a PostgreSQL table using the prepared statement in PHP PDO.
-
-

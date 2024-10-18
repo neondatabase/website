@@ -8,27 +8,11 @@ tableOfContents: true
 
 ![PostgreSQL Tutorial](https://www.postgresqltutorial.com//wp-content/uploads/2021/04/postgresql-tutorial-homepage.svg "PostgreSQL Tutorial")
 
-
-
-
-
 Welcome to the PostgreSQLTutorial.com website!
 
-
-
-
-
-This** PostgreSQL tutorial** helps you quickly understand PostgreSQL. You'll master PostgreSQL fast through many practical examples and apply the knowledge to application development using PostgreSQL.
-
-
-
-
+This**PostgreSQL tutorial** helps you quickly understand PostgreSQL. You'll master PostgreSQL fast through many practical examples and apply the knowledge to application development using PostgreSQL.
 
 If you want to:
-
-
-
-
 
 - Learn PostgreSQL fast.
 -
@@ -36,63 +20,21 @@ If you want to:
 -
 - Migrate from other database management systems such as MySQL, Oracle, and Microsoft SQL Server.
 
-
-
-
-
 You've come to the right place. This website provides you with everything you need to know to get started with PostgreSQL quickly and effectively.
-
-
-
-
 
 The PostgreSQL tutorial demonstrates many unique features of PostgreSQL that position it as the most advanced open-source database management system.
 
-
-
-
-
 ## Quick start
-
-
-
-
-
-
-
-
 
 ## Basic PostgreSQL Tutorial
 
-
-
-
-
 First, you'll learn how to query data from a single table using basic data techniques, which include selecting data, sorting result sets, and filtering rows.
-
-
-
-
 
 Next, you'll delve into advanced queries, which include joining multiple tables, using set operations, and constructing the subquery.
 
-
-
-
-
 Finally, you'll learn how to manage database tables, including creating a new table or modifying the structure of an existing table.
 
-
-
-
-
-
-
 ### Section 1. Querying Data
-
-
-
-
 
 - [Select](/docs/postgresql/postgresql-select "PostgreSQL SELECT") - show you how to query data from a single table.
 -
@@ -100,21 +42,9 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [Order By](/docs/postgresql/postgresql-order-by "PostgreSQL ORDER BY") - guide you on how to sort the result set returned by a query.
 -
-- [Select Distinct ](/docs/postgresql/postgresql-select-distinct "PostgreSQL SELECT DISTINCT")- show you how to remove duplicate rows from the result set.
-
-
-
-
-
-
-
-
+- [Select Distinct](/docs/postgresql/postgresql-select-distinct "PostgreSQL SELECT DISTINCT")- show you how to remove duplicate rows from the result set.
 
 ### Section 2. Filtering Data
-
-
-
-
 
 - [Where](/docs/postgresql/postgresql-where "PostgreSQL WHERE") - filter rows based on a specified condition.
 -
@@ -134,25 +64,13 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [Is Null](/docs/postgresql/postgresql-is-null) - check if a value is null or not.
 
-
-
-
-
-
-
-
-
 ### Section 3. Joining Multiple Tables
-
-
-
-
 
 - [Joins](/docs/postgresql/postgresql-joins) - show you a brief overview of joins in PostgreSQL.
 -
 - [Table aliases](/docs/postgresql/postgresql-alias) - describes how to use table aliases in the query.
 -
-- [Inner Join ](/docs/postgresql/postgresql-inner-join "PostgreSQL INNER JOIN")- select rows from one table that have the corresponding rows in other tables.
+- [Inner Join](/docs/postgresql/postgresql-inner-join "PostgreSQL INNER JOIN")- select rows from one table that have the corresponding rows in other tables.
 -
 - [Left Join](/docs/postgresql/postgresql-left-join "PostgreSQL LEFT JOIN") - select rows from one table that may or may not have the corresponding rows in other tables.
 -
@@ -164,37 +82,13 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [Natural Join](/docs/postgresql/postgresql-natural-join) - join two or more tables using implicit join conditions based on the common column names in the joined tables.
 
-
-
-
-
-
-
-
-
 ### Section 4. Grouping Data
-
-
-
-
 
 - [Group By](/docs/postgresql/postgresql-group-by "PostgreSQL GROUP BY") - divide rows of a result set into groups and optionally apply an aggregate function to each group.
 -
 - [Having](/docs/postgresql/postgresql-having "PostgreSQL HAVING") - apply conditions to groups, which allow you to filter groups.
 
-
-
-
-
-
-
-
-
 ### Section 5. Set Operations
-
-
-
-
 
 - [Union](/docs/postgresql/postgresql-union "PostgreSQL UNION") - combine result sets of multiple queries into a single result set.
 -
@@ -202,19 +96,7 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [Except](/docs/postgresql/postgresql-except) - return the rows from the first query that do not appear in the output of the second query.
 
-
-
-
-
-
-
-
-
 ### Section 6. Grouping sets, Cubes, and Rollups
-
-
-
-
 
 - [Grouping Sets](/docs/postgresql/postgresql-grouping-sets) - generate multiple grouping sets in reporting.
 -
@@ -222,19 +104,7 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [Rollup](/docs/postgresql/postgresql-rollup) - generate reports that contain totals and subtotals.
 
-
-
-
-
-
-
-
-
 ### Section 7. Subquery
-
-
-
-
 
 - [Subquery](/docs/postgresql/postgresql-subquery "PostgreSQL Subquery") - write a query nested inside another query.
 -
@@ -246,43 +116,15 @@ Finally, you'll learn how to manage database tables, including creating a new ta
 -
 - [EXISTS](/docs/postgresql/postgresql-exists) - check for the existence of rows returned by a subquery.
 
-
-
-
-
-
-
-
-
 ### Section 8. Common Table Expressions
-
-
-
-
 
 - [PostgreSQL CTE](/docs/postgresql/postgresql-cte) - introduce you to PostgreSQL common table expressions or CTEs.
 -
 - [Recursive query using CTEs](/docs/postgresql/postgresql-recursive-query) - discuss the recursive query and learn how to apply it in various contexts.
 
-
-
-
-
-
-
-
-
 ### Section 9. Modifying Data
 
-
-
-
-
 In this section, you will learn how to insert data into a table with the `INSERT`statement, modify existing data with the `UPDATE` statement, and remove data with the `DELETE` statement. Additionally, you will learn how to use the UPSERT statement to merge data.
-
-
-
-
 
 - [Insert](/docs/postgresql/postgresql-insert "PostgreSQL INSERT") - guide you on how to insert a single row into a table.
 -
@@ -294,67 +136,23 @@ In this section, you will learn how to insert data into a table with the `INSERT
 -
 - [Delete](/docs/postgresql/postgresql-delete "PostgreSQL DELETE") - delete data in a table.
 -
-- [Upsert ](/docs/postgresql/postgresql-upsert)- insert or update data if the new row already exists in the table.
-
-
-
-
-
-
-
-
+- [Upsert](/docs/postgresql/postgresql-upsert)- insert or update data if the new row already exists in the table.
 
 ### Section 10. Transactions
 
-
-
-
-
 - [PostgreSQL Transactions](/docs/postgresql/postgresql-transaction) - show you how to handle transactions in PostgreSQL using BEGIN, COMMIT, and ROLLBACK statements.
-
-
-
-
-
-
-
-
 
 ### Section 11. Import & Export Data
 
-
-
-
-
 You will learn how to import and export PostgreSQL data from and to CSV file format using the copy command.
-
-
-
-
 
 - [Import CSV file into Table](/docs/postgresql/import-csv-file-into-posgresql-table) - show you how to import CSV file into a table.
 -
 - [Export PostgreSQL Table to CSV file](/docs/postgresql/export-postgresql-table-to-csv-file) - show you how to export tables to a CSV file.
 
-
-
-
-
-
-
-
-
 ### Section 12. Managing Tables
 
-
-
-
-
 In this section, you will begin exploring the PostgreSQL data types and learn how to create new tables and modify the structure of the existing ones.
-
-
-
-
 
 - [Data types](/docs/postgresql/postgresql-data-types "PostgreSQL Data Types") - cover the most commonly used PostgreSQL data types.
 -
@@ -368,7 +166,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [Identity column](/docs/postgresql/postgresql-identity-column) - show you how to use the identity column.
 -
-- [Alter table ](/docs/postgresql/postgresql-alter-table "PostgreSQL ALTER TABLE")- modify the structure of an existing table.
+- [Alter table](/docs/postgresql/postgresql-alter-table "PostgreSQL ALTER TABLE")- modify the structure of an existing table.
 -
 - [Rename table](/docs/postgresql/postgresql-rename-table) - change the name of the table to a new one.
 -
@@ -388,19 +186,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [Copy a table](/docs/postgresql/postgresql-copy-table) - show you how to copy a table to a new one.
 
-
-
-
-
-
-
-
-
 ### Section 13. PostgreSQL Constraints
-
-
-
-
 
 - [Primary key](/docs/postgresql/postgresql-primary-key) - illustrate how to define a primary key when creating a table or adding a primary key to an existing table.
 -
@@ -416,19 +202,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [DEFAULT constraint](/docs/postgresql/postgresql-default-value) - specify a default value for a column using the DEFAULT constraint.
 
-
-
-
-
-
-
-
-
 ### Section 14. PostgreSQL Data Types in Depth
-
-
-
-
 
 - [Boolean](/docs/postgresql/postgresql-boolean) - store `TRUE` and `FALSE`values with the Boolean data type.
 -
@@ -468,19 +242,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [Composite Types](/docs/postgresql/postgresql-composite-types) - show you how to define a composite type that consists of multiple fields.
 
-
-
-
-
-
-
-
-
 ### Section 15. Conditional Expressions & Operators
-
-
-
-
 
 - [CASE](/docs/postgresql/postgresql-case) – show you how to form conditional queries with `CASE` expression.
 -
@@ -490,62 +252,22 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [CAST](/docs/postgresql/postgresql-cast) – convert from one data type into another e.g., from a string into an integer, from a string into a date.
 
-
-
-
-
-
-
-
-
 ### Section 16. PostgreSQL Utilities
-
-
-
-
 
 - [psql commands](/docs/postgresql/psql-commands) - show you the most common psql commands that help you interact with psql faster and more effectively.
 
-
-
-
-
-
-
-
-
 ### Section 17. PostgreSQL Recipes
-
-
-
-
 
 - [How to compare two tables](/docs/postgresql/compare-two-tables-in-postgresql) - describe how to compare data in two tables in a database.
 -
 - [How to delete duplicate rows in PostgreSQL](/docs/postgresql/how-to-delete-duplicate-rows-in-postgresql) - show you various ways to delete duplicate rows from a table.
 -
-- [How to generate a random number in a range ](/docs/postgresql/postgresql-random-range)- illustrate how to generate a random number in a specific range.
+- [How to generate a random number in a range](/docs/postgresql/postgresql-random-range)- illustrate how to generate a random number in a specific range.
 -
 - [EXPLAIN statement](/docs/postgresql/postgresql-explain)- guide you on how to use the `EXPLAIN` statement to return the execution plan of a query.
 -
 - [PostgreSQL vs. MySQL](/docs/postgresql/postgresql-vs-mysql) - compare PostgreSQL with MySQL in terms of functionalities.
 
-
-
-
-
-
-
 ## Advanced PostgreSQL Tutorial
 
-
-
-
-
 This advanced PostgreSQL tutorial covers the advanced concepts including stored procedures, indexes, views, triggers, and database administrations.
-
-
-
-
-
-

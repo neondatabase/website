@@ -5,23 +5,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL indexes to enhance the data retrieval speed and various index types.
 
-
-
 ## Introduction to PostgreSQL indexes
-
-
 
 In PostgreSQL, an index is a data structure that increases the data retrieval speed by providing a rapid way to locate rows within a table.
 
-
-
 An index in PostgreSQL works like an index in a book, providing a quick reference to the page where specific content can be found.
 
-
-
 Suppose you have a table called `contacts` with the following structure:
-
-
 
 ```
 CREATE TABLE contacts (
@@ -31,160 +21,86 @@ CREATE TABLE contacts (
 );
 ```
 
-
-
 And you issue the following query to find contacts by name:
-
-
 
 ```
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```
 
-
-
 PostgreSQL must scan the entire `contacts` table to find the matching rows. If the `contacts` table contains many rows, the method of locating relevant rows is inefficient.
-
-
 
 However, with an index on the `name` column, PostgreSQL can use a more efficient method to find the relevant rows.
 
-
-
 To create an index, you use the [CREATE INDEX](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) statement:
-
-
 
 ```
 CREATE INDEX contacts_name
 ON contacts(name);
 ```
 
-
-
 This statement creates an index named `contacts_name` on the `name` column of the `contacts` table.
-
-
 
 After creating an index on the `name` column, PostgreSQL extracts data from the `name` column of the `contacts` table and insert it into the index data structure.
 
-
-
 This process may take time, depending on the number of rows in the `contacts` table.
-
-
 
 By default, PostgreSQL allows data selection from a table during index creation but blocks [insert](/docs/postgresql/postgresql-insert/), [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/), and [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) operations.
 
-
-
 When executing the following `SELECT` statement, PostgreSQL can utilize the `contacts_name` index to quickly find the relevant rows in the `contacts` table:
-
-
 
 ```
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```
 
-
-
 After creating an index, PostgreSQL must keep it synchronized with the table.
-
-
 
 For example, when inserting, updating, or deleting data from the `contacts` table, PostgreSQL updates the index to reflect the changes accordingly.
 
-
-
 As a result, an index adds write overhead to the data manipulation operations (inserts, updates, deletes).
-
-
 
 ## Types of PostgreSQL indexes
 
-
-
 PostgreSQL offers various index types, each designed to cater to specific data scenarios and query patterns.
-
-
 
 By understanding these index types, you can enhance the query performance more effectively.
 
-
-
 ### B-tree index
-
-
 
 B-tree is the default index type in PostgreSQL. B-tree stands for balanced tree. B-tree indexes maintain the sorted values, making them efficient for exact matches and range queries.
 
-
-
 ### Hash index
-
-
 
 Hash indexes maintain 32-bit hash code created from values of the indexed columns.
 
-
-
 Therefore, hash indexes can only handle simple equality comparisons (=).
-
-
 
 ### GIN index
 
-
-
 GIN indexes are inverted indexes that are suitable for composite values such as [arrays](/docs/postgresql/postgresql-array/), [JSONB data](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/), and [full-text search](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search).
-
-
 
 Since a GIN index stores a separate entry for each component, it can handle queries that check for the existence of a specific component.
 
-
-
 ### GiST index
-
-
 
 GiST indexes are versatile and support a wide range of [data types](/docs/postgresql/postgresql-data-types), including geometric and full-text data.
 
-
-
 GiST indexes allow various search strategies such as nearest-neighbor and partial match searches, making them useful for specialized applications.
-
-
 
 ### SP-GiST index
 
-
-
 SP-GiST indexes are useful for indexing data with hierarchical structures or complex data types.
-
-
 
 SP-GiST indexes partition the index space into non-overlapping regions, offering efficient search capabilities for specialized data structures.
 
-
-
 ### BRIN (Block Range Index) index
-
-
 
 BRIN indexes are designed for very large tables where indexing every row is impractical.
 
-
-
 A BRIN index divides the table into ranges of pages and stores summarized information about each range, making them efficient for range queries on large datasets while using minimal space.
 
-
-
 ## PostgreSQL indexes tutorials
-
-
 
 - [Create Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) - Show you how to define a new index for a table.
 - [Unique Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/) - Provide you with steps for defining unique indexes.

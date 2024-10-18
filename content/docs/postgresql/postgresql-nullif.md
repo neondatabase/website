@@ -5,55 +5,31 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NULLIF()` function to handle null values.
 
-
-
 ## Introduction to PostgreSQL NULLIF function
-
-
 
 The `NULLIF()` function is one of the most common conditional expressions provided by PostgreSQL.
 
-
-
 Here's the basic syntax of the `NULLIF` function:
-
-
 
 ```
 NULLIF(argument_1,argument_2);
 ```
 
-
-
 The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
-
-
 
 ## PostgreSQL NULLIF function examples
 
-
-
 Let's take some examples of using the `NULLIF()` function.
-
-
 
 ### 1) Basic PostgreSQL NULLIF examples
 
-
-
 The following statements illustrate how to use the `NULLIF()` function:
-
-
 
 ```
 SELECT NULLIF (1, 1); -- return NULL
 ```
 
-
-
 Output:
-
-
 
 ```
  nullif
@@ -62,25 +38,15 @@ Output:
 (1 row)
 ```
 
-
-
 It returns null because the two arguments are equal.
 
-
-
 The following example returns the first argument because the two arguments are not equal:
-
-
 
 ```
 SELECT NULLIF (1, 0); -- return 1
 ```
 
-
-
 Output:
-
-
 
 ```
  nullif
@@ -89,21 +55,13 @@ Output:
 (1 row)
 ```
 
-
-
 The following example uses the `NULLIF()` function with two unequal text arguments:
-
-
 
 ```
 SELECT NULLIF ('A', 'B');
 ```
 
-
-
 Output:
-
-
 
 ```
  nullif
@@ -112,15 +70,9 @@ Output:
 (1 row)
 ```
 
-
-
 ### 2) Using the NULLIF function with table data
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `posts`:
-
-
 
 ```
 CREATE TABLE posts (
@@ -133,11 +85,7 @@ CREATE TABLE posts (
 );
 ```
 
-
-
 Second, [insert some sample data](/docs/postgresql/postgresql-insert) into the `posts` table.
-
-
 
 ```
 INSERT INTO posts (title, excerpt, body)
@@ -148,11 +96,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |    title    |       excerpt       |       body       |         created_at         | updated_at
@@ -163,15 +107,9 @@ Output:
 (3 rows)
 ```
 
-
-
 The goal is to retrieve data for displaying them on the post overview page that includes the title and excerpt of each post. To achieve this, you can use the first 40 characters of the post body as the excerpt.
 
-
-
 Third, use the [COALESCE function](/docs/postgresql/postgresql-coalesce) to handle `NULL` in the `body` column:
-
-
 
 ```
 SELECT
@@ -185,11 +123,7 @@ FROM
   posts;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |    title    |      coalesce
@@ -200,11 +134,7 @@ Output:
 (3 rows)
 ```
 
-
-
 Unfortunately, there is a mix between null value and '' (empty) in the `excerpt` column. To address this issue, you can use the `NULLIF` function:
-
-
 
 ```
 SELECT
@@ -218,11 +148,7 @@ FROM
   posts;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |    title    |      coalesce
@@ -233,27 +159,16 @@ Output:
 (3 rows)
 ```
 
-
-
 In this statement:
-
-
 
 - First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
 - Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
 
-
 ## Using NULLIF() function to prevent division-by-zero
-
-
 
 Another good example of using the `NULLIF` function is to prevent division-by-zero error.
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) named members:
-
-
 
 ```
 CREATE TABLE members (
@@ -264,11 +179,7 @@ CREATE TABLE members (
 );
 ```
 
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert) for testing:
-
-
 
 ```
 INSERT INTO members (first_name, last_name, gender)
@@ -279,11 +190,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | first_name | last_name | gender
@@ -294,11 +201,7 @@ Output:
 (3 rows)
 ```
 
-
-
 Third, calculate the ratio between male and female members:
-
-
 
 ```
 SELECT
@@ -309,11 +212,7 @@ FROM
   members;
 ```
 
-
-
 In this example, we use the [SUM function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/) and [CASE expression](/docs/postgresql/postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
-
-
 
 ```
  Male/Female ratio
@@ -322,22 +221,14 @@ In this example, we use the [SUM function](https://www.postgresqltutorial.com/po
 (1 row)
 ```
 
-
-
 Fourth, delete a female member:
-
-
 
 ```
 DELETE FROM members
 WHERE gender = 2;
 ```
 
-
-
 And execute the query to calculate the male/female ratio again:
-
-
 
 ```
 SELECT
@@ -348,21 +239,13 @@ FROM
   members;
 ```
 
-
-
 We got the following error message:
-
-
 
 ```
 ERROR:  division by zero
 ```
 
-
-
 The reason is that the number of females is zero now. To prevent this division by zero error, you can use the `NULLIF` function as follows:
-
-
 
 ```
 SELECT
@@ -376,11 +259,7 @@ FROM
   members;
 ```
 
-
-
 Output:
-
-
 
 ```
  Male/Female ratio
@@ -389,14 +268,8 @@ Output:
 (1 row)
 ```
 
-
-
 The `NULLIF` function checks if the number of female members is zero, it returns null. The total of male members is divided by `NULL` will return `NULL` .
 
-
-
 ## Summary
-
-
 
 - Use the `NULLIF()` function to substitute NULL for displaying data and to prevent division by zero.

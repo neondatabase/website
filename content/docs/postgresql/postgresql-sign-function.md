@@ -7,49 +7,27 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SIGN()` function to determine the sign of a number.
 
-
-
 ## Introduction to the PostgreSQL SIGN() function
-
-
 
 The `SIGN()` function allows you to determine the sign of a number.
 
-
-
 Here's the syntax of the `SIGN()` function:
-
-
 
 ```
 SIGN(numeric_value)
 ```
 
-
-
 The `SIGN()` function accepts a numeric value (`numeric_value`) and returns -1 if the value is negative, 0 if the value is zero, and 1 if the value is positive. Additionally, it returns `NULL` if the value is `NULL`.
-
-
 
 The `SIGN()` function can be handy when you're working with financial data, performing mathematical calculations, or handling data validation activities.
 
-
-
 ## PostgreSQL SIGN() function examples
-
-
 
 Let's explore some examples of using the `SIGN()` function.
 
-
-
 ### 1) Basic SIGN() function example
 
-
-
 The following example uses the `SIGN()` function to get the sign of various numbers:
-
-
 
 ```
 SELECT
@@ -59,11 +37,7 @@ SELECT
   SIGN(NULL);
 ```
 
-
-
 Output:
-
-
 
 ```
  sign | sign | sign | sign
@@ -72,19 +46,11 @@ Output:
 (1 row)
 ```
 
-
-
 The `SIGN()` returns -1 for -10, 0 for 0, 1 for 10, and `NULL` for `NULL`.
-
-
 
 ### 2) Using the SIGN() function with table data
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `sales` to store the sales amount by year:
-
-
 
 ```
 CREATE TABLE sales (
@@ -93,11 +59,7 @@ CREATE TABLE sales (
 );
 ```
 
-
-
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `sales` table:
-
-
 
 ```
 INSERT INTO sales (year, sales_amount)
@@ -116,11 +78,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Third, compare the sales of a year with the previous year and use the `SIGN()` function to output the sales trend:
-
-
 
 ```
 SELECT
@@ -137,11 +95,7 @@ FROM
     sales;
 ```
 
-
-
 Output:
-
-
 
 ```
  year | sales_amount | previous_year_sales | sales_trend
@@ -160,19 +114,12 @@ Output:
 (11 rows)
 ```
 
-
-
 How it works.
-
-
 
 - Use the `LAG()` window function to retrieve the `sales_amount` from the previous year utilizing the `ORDER` `BY` year clause to specify the order of rows.
 - Use the `CASE` expression to evaluate each row's sales data and assign a corresponding value to the `sales_trend` column.
 
-
 If you want to reuse the result of the LAG() function, you can use a [common table expression](/docs/postgresql/postgresql-cte):
-
-
 
 ```
 WITH sales_data AS (
@@ -197,10 +144,6 @@ FROM
     sales_data;
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `SIGN()` function to determine the sign of a number.

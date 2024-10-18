@@ -8,93 +8,54 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to query data from the PostgreSQL tables in Python.
 
-
-
 This tutorial picks up from where the [Handling BLOB Data Tutorial](https://www.postgresqltutorial.com/postgresql-python/blob/) left off.
-
-
 
 ## The steps for querying data from a PostgreSQL table in Python
 
-
-
 To query data from one or more PostgreSQL tables in Python, you use the following steps.
 
-
-
 First, [establish a connection to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function of the `psycopg2` module.
-
-
 
 ```
 conn = psycopg2.connect(config)
 ```
 
-
-
 If the connection is created successfully, the `connect()` function returns a new `Connection` object; Otherwise, it throws a `DatabaseError` exception.
 
-
-
 Next, create a new cursor by calling the `cursor()` method of the `Connection` object. The `cursor` object is used to execute a [SELECT](/docs/postgresql/postgresql-select) statement.
-
-
 
 ```
 cur = conn.cursor()
 ```
 
-
-
 Then, execute a `SELECT` statement by calling the `execute()` method. If you want to pass values to the `SELECT` statement, you use the placeholder ( `%s`) in the `SELECT` statement and bind the input values when calling the `execute()` method:
-
-
 
 ```
 cur.execute(sql, (value1,value2))
 ```
 
-
-
 After that, process the result set returned by the SELECT statement using the `fetchone()`, `fetchall()`, or `fetchmany()` method.
-
-
 
 - The `fetchone()` fetches the next row in the result set. It returns a single tuple or `None` when no more row is available.
 - The `fetchmany(size=cursor.arraysize)` fetches the next set of rows specified by the `size` parameter. If you omit this parameter, the `arraysize` will determine the number of rows to be fetched. The `fetchmany()` method returns a list of tuples or an empty list if no more rows are available.
 - The `fetchall()` fetches all rows in the result set and returns a list of tuples. If there are no rows to fetch, the `fetchall()` method returns an empty list.
 
-
 Finally, close the database connection by calling the `close()` method of the `Cursor` and `Connection` objects
-
-
 
 ```
 cur.close()
 conn.close()
 ```
 
-
-
 If you use context managers, you don't need to explicitly call the `close()` methods of the `Cursor` and `Connection` objects.
-
-
 
 ## Querying data using the fetchone() method
 
-
-
 For the demonstration purposes, we will use the `parts`, `vendors`, and `vendor_parts` tables in the `suppliers` database:
-
-
 
 ![PostgreSQL Python Sample Database Diagram](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png)
 
-
-
 The following `get_vendor()` function selects data from the `vendors` table and fetches the rows using the `fetchone()` method.
-
-
 
 ```
 import psycopg2
@@ -121,11 +82,7 @@ if __name__ == '__main__':
     get_vendors()
 ```
 
-
-
 Output:
-
-
 
 ```
 The number of parts:  8
@@ -139,15 +96,9 @@ The number of parts:  8
 (7, 'Murata Manufacturing Co. Ltd.')
 ```
 
-
-
 ## Querying data using the fetchall() method
 
-
-
 The following `get_parts()` function uses the `fetchall()` method of the cursor object to fetch rows from the result set and display all the parts in the `parts` table.
-
-
 
 ```
 import psycopg2
@@ -173,8 +124,6 @@ if __name__ == '__main__':
     get_vendors()
 ```
 
-
-
 ```
 The number of parts:  8
 (1, '3M Corp')
@@ -187,15 +136,9 @@ The number of parts:  8
 (7, 'Murata Manufacturing Co. Ltd.')
 ```
 
-
-
 ## Querying data using the fetchmany() method
 
-
-
 The following `get_suppliers()` function selects parts and vendor data using the `fetchmany()` method.
-
-
 
 ```
 import psycopg2
@@ -231,11 +174,7 @@ if __name__ == '__main__':
     get_part_vendors()
 ```
 
-
-
 Output:
-
-
 
 ```
 ('Antenna', 'Foster Electric Co. Ltd.')
@@ -252,11 +191,6 @@ Output:
 ('Vibrator', 'Foster Electric Co. Ltd.')
 ```
 
-
-
 [Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/query.zip)
 
-
-
 In this tutorial, we have learned how to select data from the PostgreSQL tables in Python using the `fetchone()`, `fetchall()`, and `fetchmany()` methods.
-

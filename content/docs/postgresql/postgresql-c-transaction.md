@@ -7,25 +7,15 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to perform a transaction in PostgreSQL using C#.
 
-
-
 ## Creating a new table
 
-
-
 First, open a terminal and connect to the `elearning` database using the `ed` user using `psql` program:
-
-
 
 ```
 psql -U ed -d elearning
 ```
 
-
-
 Second, [create a new table](/docs/postgresql/postgresql-create-table) called `invoices`:
-
-
 
 ```
 CREATE TABLE invoices (
@@ -40,11 +30,7 @@ CREATE TABLE invoices (
 );
 ```
 
-
-
 Third, [insert five rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `courses` table:
-
-
 
 ```
 INSERT INTO courses ( name, duration)
@@ -57,11 +43,7 @@ VALUES
 RETURNING id, name, duration;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |                     name                      | duration
@@ -74,25 +56,15 @@ Output:
 (5 rows)
 ```
 
-
-
 Finally, exit the psql program:
-
-
 
 ```
 exit
 ```
 
-
-
 ## Perform a transaction
 
-
-
 The following program illustrates how to enroll a student in a course and create an invoice for the enrollment within a transaction:
-
-
 
 ```
 using Npgsql;
@@ -169,39 +141,23 @@ catch (NpgsqlException ex)
 }
 ```
 
-
-
 ## Verify the transaction
 
-
-
 First, open a terminal and connect to the `elearning` database using the `ed` user:
-
-
 
 ```
 psql -U ed -d elearning
 ```
 
-
-
 It'll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
 
-
-
 Second, retrieve data from the `enrollments` table:
-
-
 
 ```
 SELECT * FROM enrollments;
 ```
 
-
-
 Output:
-
-
 
 ```
  student_id | course_id | enrolled_date
@@ -210,21 +166,13 @@ Output:
 (1 row)
 ```
 
-
-
 Third, retrieve data from the `invoices` table:
-
-
 
 ```
 SELECT * FROM invoices;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | student_id | course_id | amount | tax  | invoice_date
@@ -233,13 +181,8 @@ Output:
 (1 row)
 ```
 
-
-
 ## Summary
-
-
 
 - Call the `BeginTransactionAsync()` method of the `NpgsqlConnection` object to start a transaction.
 - Call the `CommitAsync()` method of the `NpgsqlTransaction` object to apply the changes since the transaction started to the database permanently.
 - Call the `RollbackAsync()` method of the `NpgsqlTransaction` object to roll back the changes.
-

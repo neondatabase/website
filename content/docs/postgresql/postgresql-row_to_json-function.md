@@ -10,93 +10,37 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `row_to_json()` function to convert an SQL composite value to a JSON object.
 
-
-
-
-
 ## Introduction to the PostgreSQL row_to_json() function
-
-
-
-
 
 The `row_to_json()` function allows you to convert an SQL composite value into a JSON object.
 
-
-
-
-
 Here's the syntax of the `row_to_json()` function:
-
-
-
-
 
 ```
 row_to_json ( record [, boolean ] ) → json
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `record` is an SQL composite value that you want to convert into a JSON object.
 -
 - `boolean` if true, the function will add a line feed between top-level elements.
 
-
-
-
-
 The `row_to_json()` function will return a JSON object.
-
-
-
-
 
 ## PostgreSQL row_to_json() function examples
 
-
-
-
-
 Let's take some examples of using the `row_to_json()` function.
-
-
-
-
 
 ### 1) Basic row_to_json() function example
 
-
-
-
-
 The following example uses the `row_to_json()` function to convert a row into a JSON object:
-
-
-
-
 
 ```
 SELECT row_to_json(row('John',20));
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       row_to_json
@@ -105,45 +49,17 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 In this example, we use the `row()` function to create a composite value made up of multiple columns.
-
-
-
-
 
 The `row_to_json()` function returns an object whose keys are automatically generated f1 and f2 with the values from the composite values.
 
-
-
-
-
 ### 2) Using the row_to_json() function with table data
-
-
-
-
 
 We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
 
-
-
-
-
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
-
-
-
-
 The following example uses the `row_to_json()` function to convert the `title` and `length` of each film in the `film` table into a JSON object:
-
-
-
-
 
 ```
 SELECT
@@ -160,15 +76,7 @@ FROM
   ) t;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
                          film
@@ -182,29 +90,13 @@ Output:
 ...
 ```
 
-
-
-
-
 How it works.
-
-
-
-
 
 - The subquery retrieves the `title` and `length` from the `film` table.
 -
 - The outer query uses the `row_to_json()` to convert each row returned by the subquery into a JSON object.
 
-
-
-
-
 Note that you can use a [common table expression](/docs/postgresql/postgresql-cte) (`CTE`) instead of a subquery to achieve the same result:
-
-
-
-
 
 ```
 WITH film_cte AS (
@@ -222,16 +114,6 @@ FROM
   film_cte;
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the `row_to_json()` function to convert an SQL composite value to a JSON object.
-
-

@@ -7,67 +7,39 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to show tables in PostgreSQL using `psql` tool and `pg_catalog` schema.
 
-
-
 MySQL offers a popular [`SHOW TABLES`](http://www.mysqltutorial.org/mysql-show-tables/) statement that displays all tables in a specific database.
-
-
 
 Unfortunately, PostgreSQL does not support the `SHOW TABLES` statement directly but provides you with alternatives.
 
-
-
 ## Showing tables from PostgreSQL using psql
 
-
-
 First, open the Command Prompt on Windows or Terminal on Unix-like systems and connect to the PostgreSQL using psql client tool:
-
-
 
 ```
 psql -U postgres
 ```
 
-
-
 Second, change the current database to the one that you want to show tables:
-
-
 
 ```
 \c dvdrental
 ```
 
-
-
 Note that you can connect to a specific database when you log in to the PostgreSQL database server:
-
-
 
 ```
 psql -U postgres -d dvdrental
 ```
 
-
-
 In this command, the `-d` flag means **d**atabase. In this command, you connect to the `dvdrental` database using the `postgres` user.
 
-
-
 Third, use the `\dt` command from the PostgreSQL command prompt to show tables in the `dvdrental` database:
-
-
 
 ```
 \dt
 ```
 
-
-
 Output:
-
-
 
 ```
              List of relations
@@ -91,21 +63,13 @@ Output:
 (15 rows)
 ```
 
-
-
 To get more information on tables, you can use the `\dt+` command. It will add the `size` and `description` columns:
-
-
 
 ```
 \dt+
 ```
 
-
-
 Output:
-
-
 
 ```
                                          List of relations
@@ -129,41 +93,25 @@ Output:
 (15 rows)
 ```
 
-
-
 To show the details of a specific table, you can specify the name of the table after the \\d command:
-
-
 
 ```
 \d table_name
 ```
 
-
-
 Or
-
-
 
 ```
 \d+ table_name
 ```
 
-
-
 For example, the following shows the structure of the actor table:
-
-
 
 ```
 \d actor
 ```
 
-
-
 Output:
-
-
 
 ```
                                             Table "public.actor"
@@ -183,15 +131,9 @@ Triggers:
     last_updated BEFORE UPDATE ON actor FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-
-
 ## Showing tables using pg_catalog schema
 
-
-
 The following statement retrieves the table in PostgreSQL from the `pg_catalog.pg_tables` view:
-
-
 
 ```
 SELECT *
@@ -200,11 +142,7 @@ WHERE schemaname != 'pg_catalog' AND
     schemaname != 'information_schema';
 ```
 
-
-
 Output:
-
-
 
 ```
  schemaname |   tablename   | tableowner | tablespace | hasindexes | hasrules | hastriggers | rowsecurity
@@ -227,15 +165,9 @@ Output:
 (15 rows)
 ```
 
-
-
 In this query, we use a condition in the `WHERE` clause to exclude the system tables. If you omit the `WHERE` clause, you will get many tables including the system ones.
 
-
-
 ## Summary
-
-
 
 - Use the `\dt` or `\dt+` command in `psql` to show tables in a specific database.
 - Use the `SELECT` statement to query table information from the `pg_catalog.pg_tables` catalog.

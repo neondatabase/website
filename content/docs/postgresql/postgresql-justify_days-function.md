@@ -9,53 +9,21 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `JUSTIFY_DAYS()` function to adjust 30-day intervals as months.
 
-
-
-
-
 ## Introduction to the PostgreSQL JUSTIFY_DAYS() function
-
-
-
-
 
 The `JUSTIFY_DAYS()` function allows you to normalize an [interval](/docs/postgresql/postgresql-interval) by converting days exceeding 30 days into months and remaining days.
 
-
-
-
-
 Here's the basic syntax of the `JUSTIFY_DAYS()` function:
-
-
-
-
 
 ```
 JUSTIFY_DAYS ( value) → interval
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `value` is an interval value you want to justify.
 
-
-
-
-
 The `JUSTIFY_DAYS()` function returns an adjusted interval with:
-
-
-
-
 
 - Days exceeding 30 converted to months.
 -
@@ -63,39 +31,15 @@ The `JUSTIFY_DAYS()` function returns an adjusted interval with:
 -
 - Hours, minutes, and seconds remain intact.
 
-
-
-
-
 If the input interval (`value`) is `NULL`, the function returns `NULL`.
-
-
-
-
 
 ## PostgreSQL JUSTIFY_DAYS() function examples
 
-
-
-
-
 Let's explore some examples of using the PostgreSQL `JUSTIFY_DAYS()` function.
-
-
-
-
 
 ### 1) Basic PostgreSQL JUSTIFY_DAYS() function example
 
-
-
-
-
 The following statement uses the `JUSTIFY_DAYS()` function to adjust intervals that are multiples of 30 days:
-
-
-
-
 
 ```
 SELECT JUSTIFY_DAYS(INTERVAL '30 days'),
@@ -103,15 +47,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '30 days'),
        JUSTIFY_DAYS(INTERVAL '90 days');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  justify_days | justify_days | justify_days
@@ -120,21 +56,9 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 2) Using JUSTIFY_DAYS() function with intervals that are not multiple of 30 days
 
-
-
-
-
 The following example uses the `JUSTIFY_DAYS()` function to adjust intervals that are not multiples of 30 days:
-
-
-
-
 
 ```
 SELECT JUSTIFY_DAYS(INTERVAL '15 days'),
@@ -142,15 +66,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '15 days'),
        JUSTIFY_DAYS(INTERVAL '75 days');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  justify_days | justify_days  |  justify_days
@@ -159,21 +75,9 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 3) Using JUSTIFY_DAYS() function with intervals that include hours
 
-
-
-
-
 The following example uses the `JUSTIFY_DAYS()` function to adjust intervals that include hours, minutes, and seconds:
-
-
-
-
 
 ```
 SELECT JUSTIFY_DAYS(INTERVAL '15 days 2 hours'),
@@ -181,15 +85,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '15 days 2 hours'),
        JUSTIFY_DAYS(INTERVAL '75 days 45 seconds');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
    justify_days   |      justify_days      |      justify_days
@@ -198,22 +94,8 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The output indicates that the adjusted intervals have the time parts.
-
-
-
-
 
 ## Summary
 
-
-
-
-
 - Use the `JUSTIFY_DAYS()` function to normalize an interval by converting days exceeding 30 days as months.
-
-

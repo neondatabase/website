@@ -8,56 +8,31 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_agg()` function to aggregate values into a JSON array.
 
-
-
 ## Introduction to the PostgreSQL jsonb_agg() function
-
-
 
 The `jsonb_agg()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to aggregate values into a JSON array.
 
-
-
 The `jsonb_agg()` function can be particularly useful when you want to create a JSON array from data of multiple rows.
 
-
-
 Here's the syntax of the `jsonb_agg()` function:
-
-
 
 ```
 jsonb_agg(expression)
 ```
 
-
-
 In this syntax:
-
-
 
 - `expression`: is any valid expression that evaluates to a JSON value.
 
-
 The `jsonb_agg()` function returns a JSON array that consists of data from multiple rows.
-
-
 
 ## PostgreSQL jsonb_agg() function example
 
-
-
 Let's explore some examples of using the `jsonb_agg()` function.
-
-
 
 ### 1) Basic jsonb_agg() function example
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
-
-
 
 ```
 CREATE TABLE products (
@@ -67,11 +42,7 @@ CREATE TABLE products (
 );
 ```
 
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
-
-
 
 ```
 INSERT INTO products (name, price)
@@ -81,11 +52,7 @@ VALUES
 ('Headphones', 100.00);
 ```
 
-
-
 Third, use the `jsonb_agg()` function to aggregate product information into a JSON array:
-
-
 
 ```
 SELECT
@@ -96,11 +63,7 @@ FROM
   products;
 ```
 
-
-
 Output:
-
-
 
 ```
                                                          products
@@ -109,15 +72,9 @@ Output:
 (1 row)
 ```
 
-
-
 ### 2) Using jsonb_agg() function with GROUP BY clause
 
-
-
 First, [create new tables](/docs/postgresql/postgresql-create-table) called `departments` and `employees`:
-
-
 
 ```
 CREATE TABLE departments(
@@ -134,11 +91,7 @@ CREATE TABLE employees(
 );
 ```
 
-
-
 Second, insert rows into `departments` and `employees` tables:
-
-
 
 ```
 INSERT INTO departments (department_name)
@@ -156,11 +109,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 The `departments` table:
-
-
 
 ```
  id | department_name
@@ -170,11 +119,7 @@ The `departments` table:
 (2 rows)
 ```
 
-
-
 The `employees` table:
-
-
 
 ```
  id | employee_name | department_id
@@ -186,11 +131,7 @@ The `employees` table:
 (4 rows)
 ```
 
-
-
 Third, use the `jsonb_agg()` function to retrieve departments and a list of employees for each department in the form of a JSON array:
-
-
 
 ```
 SELECT
@@ -203,11 +144,7 @@ GROUP BY
   department_name;
 ```
 
-
-
 Output:
-
-
 
 ```
  department_name |                  employees
@@ -217,26 +154,16 @@ Output:
 (2 rows)
 ```
 
-
-
 ### 3) Using jsonb_agg() function with NULLs
 
-
-
 First, drop the departments and employees tables:
-
-
 
 ```
 DROP TABLE employees;
 DROP TABLE departments;
 ```
 
-
-
 Second, recreate the departments and employees tables:
-
-
 
 ```
 CREATE TABLE departments(
@@ -253,11 +180,7 @@ CREATE TABLE employees(
 );
 ```
 
-
-
 Third, insert rows into the departments and employees tables:
-
-
 
 ```
 INSERT INTO departments (department_name)
@@ -276,15 +199,9 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
 
-
-
 The `departments` table:
-
-
 
 ```
  id | department_name
@@ -295,11 +212,7 @@ The `departments` table:
 (3 rows)
 ```
 
-
-
 The `employees` table:
-
-
 
 ```
  id | employee_name | department_id
@@ -311,11 +224,7 @@ The `employees` table:
 (4 rows)
 ```
 
-
-
 Third, use the `jsonb_agg()` function to retrieve departments and a list of employees for each department in the form of a JSON array:
-
-
 
 ```
 SELECT
@@ -328,11 +237,7 @@ GROUP BY
   department_name;
 ```
 
-
-
 Output:
-
-
 
 ```
  department_name |                  employees
@@ -343,15 +248,9 @@ Output:
 (3 rows)
 ```
 
-
-
 In this example, the IT department has no employees therefore `jsonb_agg()` function returns an array that contains a null value.
 
-
-
 To skip the null and make the JSON array an empty array, you can use the `jsonb_agg_strict()` function:
-
-
 
 ```
 SELECT
@@ -364,11 +263,7 @@ GROUP BY
   department_name;
 ```
 
-
-
 Output:
-
-
 
 ```
  department_name |                  employees
@@ -379,14 +274,8 @@ Output:
 (3 rows)
 ```
 
-
-
 The `jsonb_agg_strict()` function works like the `jsonb_agg()` except that it skips the null values.
 
-
-
 ## Summary
-
-
 
 - Use the `jsonb_agg()` function to aggregate values into a JSON array.

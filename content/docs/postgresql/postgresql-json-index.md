@@ -7,31 +7,17 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL JSON index for a JSONB column to improve query performance.
 
-
-
 ## Introduction to PostgreSQL JSON index
-
-
 
 JSONB (binary JSON) is a data type that allows you to store JSON data and query it efficiently.
 
-
-
 When a JSONB column has a complex JSON structure, utilizing an index can significantly improve query performance.
-
-
 
 PostgreSQL uses the `GIN` index type for indexing a column with JSONB data type. `GIN` stands for Generalized Inverted Index.
 
-
-
 Note that you can utilize the GIN index for tsvector or array columns.
 
-
-
 To create a `GIN` index for a JSONB column, you can use the following `CREATE INDEX` statement:
-
-
 
 ```
 CREATE INDEX index_name
@@ -39,23 +25,13 @@ ON table_name
 USING GIN(jsonb_column);
 ```
 
-
-
 This statement creates a `GIN` index on the `jsonb_column`. This `GIN` index is suitable for general-purpose queries on JSONB data.
-
-
 
 When creating a `GIN` index on a JSONB column, you can use a specific `GIN` operator class.
 
-
-
 The operator class determines how PostgreSQL builds the index and how it optimizes the queries on the indexed column.
 
-
-
 For example, The following `CREATE INDEX` statement creates a `GIN` index on the `jsonb_coumn` with `jsonb_path_ops` operator class:
-
-
 
 ```
 CREATE INDEX index_name
@@ -63,15 +39,9 @@ ON table_name
 USING GIN(jsonb_column jsonb_path_ops);
 ```
 
-
-
 This index is optimized for the queries that use the @> (contains), ? (exists), and @@ JSONB operators. It can be useful for searches involving keys or values within JSONB documents.
 
-
-
 The following table displays the `GIN` operator classes:
-
-
 
 | Name                     | Indexable Operators      |
 | ------------------------ | ------------------------ |
@@ -91,15 +61,9 @@ The following table displays the `GIN` operator classes:
 | `tsvector_ops`           | `@@ (tsvector,tsquery)`  |
 | `@@@ (tsvector,tsquery)` |                          |
 
-
-
 Note that if you don't explicitly specify a `GIN` operator class, the statement will use the `jsonb_ops` operator by default, which is suitable for most cases.
 
-
-
 Additionally, PostgreSQL allows you to create a `GIN` index for a specific field in JSON documents as follows:
-
-
 
 ```
 CREATE INDEX index_name
@@ -107,27 +71,15 @@ ON table_name
 USING GIN ((data->'field_name') jsonb_path_ops);
 ```
 
-
-
 This index can improve the queries that involve searching values within the `field_name` of JSON documents stored in the JSONB column (data).
-
-
 
 ## PostgreSQL JSON index examples
 
-
-
 We'll use the tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
-
-
 
 ### 1) Setting up a sample table
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `customer_json` that stores the customer information in JSON format:
-
-
 
 ```
 CREATE TABLE customer_json(
@@ -136,11 +88,7 @@ CREATE TABLE customer_json(
 );
 ```
 
-
-
 Second, insert data from the `customer`, `address`, `city`, and `country` tables into the `customer_json` table:
-
-
 
 ```
 WITH json_cte AS(
@@ -172,11 +120,7 @@ FROM
   json_cte;
 ```
 
-
-
 Third, retrieve the email of the customer whose first name is `John`:
-
-
 
 ```
 SELECT
@@ -189,11 +133,7 @@ WHERE
    data @> '{"first_name": "John"}';
 ```
 
-
-
 Output:
-
-
 
 ```
  first_name | last_name  |    phone
@@ -202,11 +142,7 @@ Output:
 (1 row)
 ```
 
-
-
 Finally, explain and analyze the above query:
-
-
 
 ```
 EXPLAIN ANALYZE
@@ -220,11 +156,7 @@ WHERE
    data @> '{"first_name": "John"}';
 ```
 
-
-
 Output:
-
-
 
 ```
                                                QUERY PLAN
@@ -237,23 +169,13 @@ Output:
 (5 rows)
 ```
 
-
-
 The output indicates that PostgreSQL has to scan the entire `customer_json` table to search for the customer.
-
-
 
 To improve the performance of the query, you can create a `GIN` index on the data column of the `customer_json` table.
 
-
-
 ### 2) Creating an index on the JSONB column
 
-
-
 First, [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on the `data` column of the `customer_json` table:
-
-
 
 ```
 CREATE INDEX customer_json_index
@@ -261,11 +183,7 @@ ON customer_json
 USING GIN(data);
 ```
 
-
-
 Second, execute the query that searches for the customer whose first name is `John`:
-
-
 
 ```
 EXPLAIN ANALYZE
@@ -279,11 +197,7 @@ WHERE
    data @> '{"first_name": "John"}';
 ```
 
-
-
 Output:
-
-
 
 ```
                                                          QUERY PLAN
@@ -298,33 +212,19 @@ Output:
 (7 rows)
 ```
 
-
-
 The query plan indicates that PostgreSQL uses the `customer_json_index` to improve the performance.
-
-
 
 This time, the execution time is significantly smaller `0.045ms` vs. `0.128` ms, about 2 - 3 times faster than a query without using the `GIN` index.
 
-
-
 ### 3) Creating an index on the JSONB column with the GIN operator class
 
-
-
 First, [drop](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/) the `customer_json_index` index:
-
-
 
 ```
 DROP INDEX customer_json_index;
 ```
 
-
-
 Second, create a `GIN` index on the data column of the `customer_json` table with a `GIN` operator class:
-
-
 
 ```
 CREATE INDEX customer_json_index
@@ -332,11 +232,7 @@ ON customer_json
 USING GIN(data jsonb_path_ops);
 ```
 
-
-
 Third, explain the query that finds the customer whose first name is `John`:
-
-
 
 ```
 EXPLAIN ANALYZE
@@ -350,11 +246,7 @@ WHERE
    data @> '{"first_name": "John"}';
 ```
 
-
-
 Output:
-
-
 
 ```
                                                          QUERY PLAN
@@ -369,15 +261,9 @@ Output:
 (7 rows)
 ```
 
-
-
 The query plan shows that the query does use the `customer_json_index` for improved performance.
 
-
-
 Finally, explain the query that searches for the customer where the value in the `first_name` field within the data column is John:
-
-
 
 ```
 EXPLAIN ANALYZE
@@ -385,11 +271,7 @@ SELECT * FROM customer_json
 WHERE data->>'first_name' = 'John';
 ```
 
-
-
 Output:
-
-
 
 ```
                                                 QUERY PLAN
@@ -402,29 +284,17 @@ Output:
 (5 rows)
 ```
 
-
-
 In this plan, the query cannot fully utilize the `GIN` index `customer_json_index`. The reason is that the query does not use the JSONB operator (`@`, `@?`, `@@`) that the `jsonb_path_ops` operator class is optimized for.
-
-
 
 ### 4) Creating an index on a specific field of a JSONB column
 
-
-
 First, drop the `customer_json_index` index:
-
-
 
 ```
 DROP INDEX customer_json_index;
 ```
 
-
-
 Second, create a `GIN` index on the `first_name` field of the `customer_json` table using the `GIN` operator class:
-
-
 
 ```
 CREATE INDEX customer_json_index
@@ -432,11 +302,7 @@ ON customer_json
 USING GIN((data->'first_name'));
 ```
 
-
-
 Third, explain the query that finds the rows where the "`first_name`" field in the `data` JSONB column contains the value `"John"`:
-
-
 
 ```
 EXPLAIN ANALYZE
@@ -450,11 +316,7 @@ WHERE
    data->'first_name' @> '"John"';
 ```
 
-
-
 Output:
-
-
 
 ```
                                                          QUERY PLAN
@@ -469,14 +331,8 @@ Output:
 (7 rows)
 ```
 
-
-
 The output indicates that the query uses the `customer_json_index` index.
 
-
-
 ## Summary
-
-
 
 - Use the `GIN` index to create an index for a JSONB column of a table to improve query performance.

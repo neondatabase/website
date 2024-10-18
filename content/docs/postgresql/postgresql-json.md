@@ -6,39 +6,15 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about JSON and how to work with JSON data in PostgreSQL using the PostgreSQL JSON and JSONB data types.
 
-
-
-
-
 ## What is JSON
-
-
-
-
 
 JSON stands for JavaScript Object Notation. JSON is a lightweight data interchange format that is readable for humans and simple for computers to parse.
 
-
-
-
-
 JSON is based on two main data structures **objects** and **arrays**:
-
-
-
-
 
 ### Objects
 
-
-
-
-
 An object is defined as an unordered collection of key-value pairs enclosed in curly braces `{}`. Each pair includes:
-
-
-
-
 
 - A key which is a string surrounded by double quotes (").
 -
@@ -46,67 +22,27 @@ An object is defined as an unordered collection of key-value pairs enclosed in c
 -
 - A value that can be a string, a number, or even an object.
 
-
-
-
-
 For example, the following illustrates a JSON object that represents a film:
-
-
-
-
 
 ```
 {"title": "Chamber Italian", "release_year": 2006, "length": 117}
 ```
 
-
-
-
-
 The film object has three keys `title`, `release_year`, and `length` with associated values.
-
-
-
-
 
 ### Arrays
 
-
-
-
-
 An array is an ordered list of values enclosed in square brackets `[]`. The values do not have to be the same type. Additionally, an array may contain values of any valid JSON data type including objects and arrays.
 
-
-
-
-
 For example, the following shows an array that stores three film titles as strings:
-
-
-
-
 
 ```
 ["Chamber Italian","Grosse Wonderful"," Airport Pollock"]
 ```
 
-
-
-
-
 ### Data types in JSON
 
-
-
-
-
 JSON supports some data types including:
-
-
-
-
 
 - String: "Joe"
 -
@@ -116,47 +52,19 @@ JSON supports some data types including:
 -
 - Null: null
 
-
-
-
-
 JSON data can be particularly useful for creating configuration files or exchanging data between a client and a server.
-
-
-
-
 
 ## PostgreSQL JSON data types
 
-
-
-
-
 PostgreSQL offers two data types for storing JSON:
-
-
-
-
 
 - JSON - store an exact copy of the JSON text.
 -
 - JSONB - store the JSON data in binary format.
 
-
-
-
-
 ### JSON vs. JSONB
 
-
-
-
-
 The following table illustrates the key differences between JSON and JSONB types:
-
-
-
-
 
 | Feature           | JSON                                                            | JSONB                                                                |
 | ----------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -171,39 +79,15 @@ The following table illustrates the key differences between JSON and JSONB types
 | Duplicate keys    | Allow duplicate key, the last value is retained                 | Do not allow duplicate keys.                                         |
 | Use cases         | Storing configuration data, log data, simple JSON documents     | Storing JSON documents where fast querying and indexing are required |
 
-
-
-
-
 In practice, you should use JSONB to store JSON data unless you have specialized requirements such as retaining the ordering of keys in the JSON documents.
-
-
-
-
 
 ## PostgreSQL JSON examples
 
-
-
-
-
 Let's take some examples of storing JSON data in the PostgreSQL database.
-
-
-
-
 
 ### 1) Storing JSON objects example
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
-
-
-
-
 
 ```
 CREATE TABLE products(
@@ -213,37 +97,21 @@ CREATE TABLE products(
 );
 ```
 
-
-
-
-
 The `products` table includes three columns:
 
-
-
-
-
-1. 
+1.
 2. The `id` column is the primary key column that uniquely identifies the product.
-3. 
+3.
 4.
-5. 
+5.
 6. The `name` column stores the product name.
-7. 
+7.
 8.
-9. 
+9.
 10. The `properties` column stores various properties of a product such as size, and color.
-11. 
-
-
-
-
+11.
 
 Second, insert JSON data into the `products` table:
-
-
-
-
 
 ```
 INSERT INTO products(name, properties)
@@ -251,15 +119,7 @@ VALUES('Ink Fusion T-Shirt','{"color": "white", "size": ["S","M","L","XL"]}')
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |        name        |                    properties
@@ -268,15 +128,7 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 Third, [insert multiple rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
-
-
-
-
 
 ```
 INSERT INTO products(name, properties)
@@ -285,15 +137,7 @@ VALUES('ThreadVerse T-Shirt','{"color": "black", "size": ["S","M","L","XL"]}'),
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |        name         |                    properties
@@ -303,30 +147,14 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 Fourth, retrieve JSON data from the `products` table:
-
-
-
-
 
 ```
 SELECT id, name, properties
 FROM products;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |         name          |                    properties
@@ -337,15 +165,7 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 Fifth, retrieve the product with the colors extracted from the JSON data in the `properties` column:
-
-
-
-
 
 ```
 SELECT
@@ -356,15 +176,7 @@ FROM
   products;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |         name          |  color
@@ -375,35 +187,15 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 The `->` operator extracts a JSON object field by a key. In this example, we use the -> operator `->` to extract the color of the properties object:
-
-
-
-
 
 ```
 properties -> 'color'
 ```
 
-
-
-
-
 The values in the color column are surrounded by double quotes (").
 
-
-
-
-
 To extract a JSON object field by a key as text, you can use the `->>` operator. For example:
-
-
-
-
 
 ```
 SELECT
@@ -414,15 +206,7 @@ FROM
   products;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |         name          | color
@@ -433,15 +217,7 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 Sixth, retrieve the products with the colors black and white using the `->>` operator in the [WHERE](/docs/postgresql/postgresql-where) clause:
-
-
-
-
 
 ```
 SELECT
@@ -454,15 +230,7 @@ WHERE
   properties ->> 'color' IN ('black', 'white');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |        name         | color
@@ -472,21 +240,9 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 ### 2) Storing JSON arrays example
 
-
-
-
-
 First, create a table called `contacts` for storing the contact persons:
-
-
-
-
 
 ```
 CREATE TABLE contacts(
@@ -496,21 +252,9 @@ CREATE TABLE contacts(
 );
 ```
 
-
-
-
-
 The `phones` column has the JSONB data type. We'll store both work phone and personal number numbers in a JSON array in the `phones` column.
 
-
-
-
-
 Second, insert new rows into the `contacts` table:
-
-
-
-
 
 ```
 INSERT INTO contacts(name, phones)
@@ -520,15 +264,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |   name   |              phones
@@ -538,15 +274,7 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 Third, retrieve the contacts with the work phone numbers from the `contacts` table:
-
-
-
-
 
 ```
 SELECT
@@ -556,15 +284,7 @@ FROM
   contacts;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
    name   |  work phone
@@ -574,30 +294,12 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 The `->> index` extract the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
-
-
-
-
 
 [Check JSON functions to process JSON data](https://www.postgresqltutorial.com/postgresql-json-functions/).
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - JSON stands for JavaScript Object Notation.
 -
 - Use JSONB data type to store JSON data.
-
-

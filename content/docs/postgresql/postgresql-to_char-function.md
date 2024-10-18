@@ -8,73 +8,29 @@ tableOfContents: true
 ---
 
 
-The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp/), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric ](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
-
-
-
-
+The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp/), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
 
 ## Syntax
 
-
-
-
-
 The following illustrates the syntax of the PostgreSQL `TO_CHAR()` function:
-
-
-
-
 
 ```
 TO_CHAR(expression, format)
 ```
 
-
-
-
-
 ## Arguments
-
-
-
-
 
 The PostgreSQL `TO_CHAR()` function requires two arguments:
 
-
-
-
-
 ### 1) expression
-
-
-
-
 
 The expression can be a timestamp, an interval, an integer, a double-precision, or a numeric value that is converted to a string according to a specific format.
 
-
-
-
-
 ### 2) format
-
-
-
-
 
 The format for the result string.
 
-
-
-
-
 The following table illustrates the valid numeric format strings:
-
-
-
-
 
 | Format     | Description                                                              |
 | ---------- | ------------------------------------------------------------------------ |
@@ -94,15 +50,7 @@ The following table illustrates the valid numeric format strings:
 | RN         | Roman numeral that ranges from 1 to 3999                                 |
 | TH or th   | Upper case or lower case ordinal number suffix                           |
 
-
-
-
-
 The following table shows the valid timestamp format strings:
-
-
-
-
 
 |                          |                                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------ |
@@ -154,51 +102,19 @@ The following table shows the valid timestamp format strings:
 | AM, am, PM or pm         | Meridiem indicator (without periods)                                                             |
 | A.M., a.m., P.M. or p.m. | Meridiem indicator (with periods)                                                                |
 
-
-
-
-
 ## Return value
-
-
-
-
 
 The `TO_CHAR()` function returns a string in `TEXT` data type that represents the first argument formatted according to the specified format.
 
-
-
-
-
 ## Examples
-
-
-
-
 
 We will use the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
 
-
-
-
-
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
-
-
-
-
 
 ### 1) Converting a timestamp to a string example
 
-
-
-
-
 The following statement uses the `TO_CHAR()` function to format the payment date that consists of hours, minutes, and seconds:
-
-
-
-
 
 ```
 SELECT
@@ -213,33 +129,13 @@ ORDER BY
     payment_date;
 ```
 
-
-
-
-
 Here is the result:
-
-
-
-
 
 ![PostgreSQL TO_CHAR Function - format timestamp example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-timestamp-example.png)
 
-
-
-
-
 ### 2) Converting an entire timestamp value into a different format example
 
-
-
-
-
 The following example converts the payment date into a different format:
-
-
-
-
 
 ```
 SELECT
@@ -255,33 +151,13 @@ ORDER BY
     payment_date;
 ```
 
-
-
-
-
 The output is:
-
-
-
-
 
 ![](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-payment-date-example.png)
 
-
-
-
-
 ### 3) Converting a timestamp literal to a string example
 
-
-
-
-
 The following statement converts a timestamp literal to a string:
-
-
-
-
 
 ```
 SELECT
@@ -291,35 +167,15 @@ SELECT
     );
 ```
 
-
-
-
-
 The result is:
-
-
-
-
 
 ```
 22:30:59
 ```
 
-
-
-
-
 ### 4) Adding currency symbol to the amount example
 
-
-
-
-
 The following example adds US dollar to the paid amounts:
-
-
-
-
 
 ```
 SELECT
@@ -335,33 +191,13 @@ ORDER BY
     payment_date;
 ```
 
-
-
-
-
 The following picture illustrates the output:
-
-
-
-
 
 ![PostgreSQL TO_CHAR Function - add currency symbol example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-add-currency-symbol-example.png)
 
-
-
-
-
 ### 5) Converting an integer to a string example
 
-
-
-
-
 The following example converts an integer to a string:
-
-
-
-
 
 ```
 SELECT
@@ -371,35 +207,15 @@ SELECT
     );
 ```
 
-
-
-
-
 Result
-
-
-
-
 
 ```
   2,017
 ```
 
-
-
-
-
 ### 6) Putting it all together example
 
-
-
-
-
 The following example converts a numeric and timestamp to a string:
-
-
-
-
 
 ```
 SELECT
@@ -426,28 +242,10 @@ ORDER BY
     rental_id;
 ```
 
-
-
-
-
 The result is
-
-
-
-
 
 ![PostgreSQL TO_CHAR Function - example](/postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-example.png)
 
-
-
-
-
 Summary
 
-
-
-
-
 - Use the PostgreSQL `TO_CHAR()` function to convert a timestamp or a numeric value to a string.
-
-

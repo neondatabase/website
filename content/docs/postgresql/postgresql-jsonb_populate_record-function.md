@@ -8,23 +8,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_record()` function to populate the fields of a record type from a JSON object.
 
-
-
 ## Introduction to the PostgreSQL jsonb_populate_record() function
-
-
 
 The `jsonb_populate_record()` function expands the top-level JSON object of type JSONB to a row of a specified composite type.
 
-
-
 In other words, the `jsonb_populate_record()` function converts a JSON object into a row of a specified composite type.
 
-
-
 Here's the basic syntax of the `jsonb_populate_record()` function:
-
-
 
 ```
 jsonb_populate_record (
@@ -33,35 +23,20 @@ jsonb_populate_record (
 ) → anyelement
 ```
 
-
-
 In this syntax:
-
-
 
 - `target` is a composite type to which you want to expand the JSONB value.
 - `json_object` is a JSON object of the JSONB type that you want to expand.
 
-
 The `jsonb_populate_record()` function returns a record of the specified type with its fields populated using the key-value pairs from the JSON object.
-
-
 
 ## PostgreSQL jsonb_populate_record() function examples
 
-
-
 Let's explore some examples of using the `jsonb_populate_record()` function.
-
-
 
 ### 1) Basic jsonb_populate_record() function example
 
-
-
 First, [create a new type](/docs/postgresql/postgresql-user-defined-data-types) called `person`:
-
-
 
 ```
 CREATE TYPE person AS (
@@ -71,11 +46,7 @@ CREATE TYPE person AS (
 );
 ```
 
-
-
 Second, use the `jsonb_populate_record()` function to expand the JSON object to a row of the `person` type:
-
-
 
 ```
 SELECT
@@ -85,11 +56,7 @@ SELECT
   );
 ```
 
-
-
 Output:
-
-
 
 ```
  jsonb_populate_record
@@ -98,15 +65,9 @@ Output:
 (1 row)
 ```
 
-
-
 ### 2) Using the jsonb_populate_record() function with table data
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
-
-
 
 ```
 CREATE TABLE employees (
@@ -117,11 +78,7 @@ CREATE TABLE employees (
 );
 ```
 
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
-
-
 
 ```
 INSERT INTO employees (name, age, salary)
@@ -130,11 +87,7 @@ VALUES
   ('Jane Smith', 22, 80000);
 ```
 
-
-
 Third, use `jsonb_populate_record()` to query the data from the `employees` table in a structured format:
-
-
 
 ```
 SELECT
@@ -149,11 +102,7 @@ FROM
   employees;
 ```
 
-
-
 Output:
-
-
 
 ```
          employees
@@ -163,10 +112,6 @@ Output:
 (2 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `jsonb_populate_record()` function to populate the fields of a record type or a custom composite type from a JSON object.

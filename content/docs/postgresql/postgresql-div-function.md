@@ -7,63 +7,36 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DIV()` function to perform integer division.
 
-
-
 ## Introduction to the PostgreSQL DIV() function
-
-
 
 The `DIV()` function is a useful tool for performing integer division. Unlike the division operator (`/`), which returns a floating-point result, the `DIV()` function provides an integer quotient.
 
-
-
 Here's the basic syntax of the `DIV()` function:
-
-
 
 ```
 DIV(dividend, divisor)
 ```
 
-
-
 In this syntax:
-
-
 
 - `dividend` is the number that you want to divide.
 - `divisor` is the number to which to divide the dividend.
 
-
 The `DIV()` function returns the integer quotient of the division.
-
-
 
 ## PostgreSQL DIV() function examples
 
-
-
 Let's explore some examples of using the `DIV()` function.
-
-
 
 ### 1) Basic DIV() function example
 
-
-
 The following uses the `DIV()` function to return the result of dividing 10 by 3:
-
-
 
 ```
 SELECT DIV(10,3) as result;
 ```
 
-
-
 Output:
-
-
 
 ```
  result
@@ -72,23 +45,13 @@ Output:
 (1 row)
 ```
 
-
-
 The result is 3.
-
-
 
 Unlike regular division, the `DIV()` function truncates any fractional part of the result and returns only the integer part.
 
-
-
 ### 2) Grouping data into bins
 
-
-
 You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) into bins of 30 minutes:
-
-
 
 ```
 SELECT
@@ -103,11 +66,7 @@ ORDER BY
   title;
 ```
 
-
-
 Output:
-
-
 
 ```
             title            | bin
@@ -122,19 +81,11 @@ Output:
 ...
 ```
 
-
-
 In this example, we group the lengths of films into bins of 30 minutes.
-
-
 
 ### 3) Using the PostgreSQL DIV() for calculating ages
 
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table/) called `employees` and [insert some data into it](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows):
-
-
 
 ```
 CREATE TABLE employees (
@@ -152,11 +103,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |      name       | birthdate
@@ -168,22 +115,14 @@ Output:
 (4 rows)
 ```
 
-
-
 Second, calculate the age of each employee:
-
-
 
 ```
 SELECT name, DIV(EXTRACT(YEAR FROM AGE(current_date, birthdate)), 1) AS age
 FROM employees;
 ```
 
-
-
 Output:
-
-
 
 ```
       name       | age
@@ -195,19 +134,12 @@ Output:
 (4 rows)
 ```
 
-
-
 How it works.
-
-
 
 - Use the [AGE()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/) function to calculate age.
 - Use the [EXTRACT()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/) function to extract the year from the age.
 - Use the `DIV()` function to return the integer part of the age.
 
-
 ## Summary
-
-
 
 - Use the PostgreSQL `DIV()` function to perform integer division.

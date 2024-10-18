@@ -7,21 +7,9 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about **PostgreSQL data types** including Boolean, character, numeric, temporal, array, json, UUID, and special types.
 
-
-
-
-
 ## ![PostgreSQL Data Types](/postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png "PostgreSQL Data Types")Overview of PostgreSQL data types
 
-
-
-
-
 PostgreSQL supports the following data types:
-
-
-
-
 
 - [Boolean](/docs/postgresql/postgresql-boolean)
 -
@@ -41,53 +29,21 @@ PostgreSQL supports the following data types:
 -
 - Special types such as network address and geometric data.
 
-
-
-
-
 ## Boolean
-
-
-
-
 
 A [Boolean](/docs/postgresql/postgresql-boolean) data type can hold one of three possible values: true, false, or null. You use `boolean` or `bool` keyword to declare a column with the Boolean data type.
 
-
-
-
-
 When you [insert data](/docs/postgresql/postgresql-insert) into a Boolean column, PostgreSQL converts it to a Boolean value
-
-
-
-
 
 - `1`, `yes`, `y`, `t`, `true` values are converted to `true`
 -
 - `0`, `no`, `false`, `f` values are converted to `false`.
 
-
-
-
-
 When you [select data](/docs/postgresql/postgresql-select) from a Boolean column, PostgreSQL converts the values back e.g., `t` to true, `f` to `false` and `space` to `null`.
-
-
-
-
 
 ## Character
 
-
-
-
-
 PostgreSQL provides three [character data types](/docs/postgresql/postgresql-char-varchar-text): `CHAR(n)`, `VARCHAR(n)`, and `TEXT`
-
-
-
-
 
 - `CHAR(n)` is the fixed-length character with space padded. If you insert a string that is shorter than the length of the column, PostgreSQL pads spaces. If you insert a string that is longer than the length of the column, PostgreSQL will issue an error.
 -
@@ -95,41 +51,17 @@ PostgreSQL provides three [character data types](/docs/postgresql/postgresql-cha
 -
 - `TEXT` is the variable-length character string. Theoretically, text data is a character string with unlimited length.
 
-
-
-
-
 ## Numeric
 
-
-
-
-
 PostgreSQL provides two distinct types of numbers:
-
-
-
-
 
 - [integers](/docs/postgresql/postgresql-integer)
 -
 - floating-point numbers
 
-
-
-
-
 ### Integer
 
-
-
-
-
 There are three kinds of integers in PostgreSQL:
-
-
-
-
 
 - Small integer ( `SMALLINT`) is a 2-byte signed integer that has a range from -32,768 to 32,767.
 -
@@ -137,21 +69,9 @@ There are three kinds of integers in PostgreSQL:
 -
 - [Serial](/docs/postgresql/postgresql-serial) is the same as integer except that PostgreSQL will automatically generate and populate values into the `SERIAL` column. This is similar to `AUTO_INCREMENT` column in MySQL or `AUTOINCREMENT` column in SQLite.
 
-
-
-
-
 ### Floating-point number
 
-
-
-
-
 There are three main types of floating-point numbers:
-
-
-
-
 
 - `float(n)` is a floating-point number whose precision, is at least, n, up to a maximum of 8 bytes.
 -
@@ -159,21 +79,9 @@ There are three main types of floating-point numbers:
 -
 - `numeric`or `numeric(p,s)` is a real number with p digits with s number after the decimal point. This `numeric(p,s)` is the exact number.
 
-
-
-
-
 ## Temporal data types
 
-
-
-
-
 The temporal data types allow you to store date and /or time data. PostgreSQL has five main temporal data types:
-
-
-
-
 
 - `DATE` stores the dates only.
 -
@@ -185,69 +93,25 @@ The temporal data types allow you to store date and /or time data. PostgreSQL ha
 -
 - `INTERVAL` stores periods.
 
-
-
-
-
 The `TIMESTAMPTZ` is PostgreSQL's extension to the SQL standard's temporal data types.
-
-
-
-
 
 ## Arrays
 
-
-
-
-
 In PostgreSQL, you can store an [array](/docs/postgresql/postgresql-array) of strings, an array of integers, etc., in array columns. The array comes in handy in some situations e.g., storing days of the week, and months of the year.
-
-
-
-
 
 ## JSON
 
-
-
-
-
 PostgreSQL provides two JSON data types: `JSON` and `JSONB` for storing JSON data.
-
-
-
-
 
 The `JSON` data type stores plain JSON data that requires reparsing for each processing, while `JSONB` data type stores `JSON` data in a binary format which is faster to process but slower to insert. In addition, `JSONB` supports indexing, which can be an advantage.
 
-
-
-
-
 ## UUID
-
-
-
-
 
 The `UUID` data type allows you to store Universal Unique Identifiers defined by [RFC 4122](https://tools.ietf.org/html/rfc4122 "UUID") . The `UUID` values guarantee a better uniqueness than `SERIAL` and can be used to hide sensitive data exposed to the public such as values of `id` in URL.
 
-
-
-
-
 ## Special data types
 
-
-
-
-
 Besides the primitive data types, PostgreSQL also provides several special data types related to geometry and network.
-
-
-
-
 
 - `box` - a rectangular box.
 -
@@ -263,10 +127,4 @@ Besides the primitive data types, PostgreSQL also provides several special data 
 -
 - `macaddr`- a MAC address.
 
-
-
-
-
 In this tutorial, we have introduced you to the PostgreSQL data types so that you can use them to create tables in the next tutorial.
-
-

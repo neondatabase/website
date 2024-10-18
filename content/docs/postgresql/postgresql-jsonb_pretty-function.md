@@ -9,77 +9,29 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_pretty()` function to convert a JSON value to a human-readable, indented format.
 
-
-
-
-
 ## Introduction to the PostgreSQL jsonb_pretty() function
-
-
-
-
 
 The `jsonb_pretty()` function allows you to convert a given [JSONB](/docs/postgresql/postgresql-json) value to a human-readable, indented format.
 
-
-
-
-
 Here's the basic syntax of the `jsonb_pretty()` function:
-
-
-
-
 
 ```
 jsonb_pretty(jsonb_value)
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `jsonb_value` is a JSONB value that you want to convert.
 
-
-
-
-
 The `jsonb_pretty()` function returns a text that is the human-readable and indented format of the input JSONB value.
-
-
-
-
 
 ## PostgreSQL jsonb_pretty() function examples
 
-
-
-
-
 Let's explore some examples of using the `jsonb_pretty()` function.
-
-
-
-
 
 ### 1) Basic PostgreSQL jsonb_pretty() function example
 
-
-
-
-
 The following example uses the `jsonb_pretty()` function to format a JSONB value:
-
-
-
-
 
 ```
 SELECT
@@ -88,15 +40,7 @@ SELECT
   );
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       jsonb_pretty
@@ -112,21 +56,9 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 2) Using PostgreSQL jsonb_pretty() function with table data
 
-
-
-
-
 First, create a new table called recipes:
-
-
-
-
 
 ```
 CREATE TABLE recipes (
@@ -136,15 +68,7 @@ CREATE TABLE recipes (
 );
 ```
 
-
-
-
-
 Second, insert some rows into the recipes table:
-
-
-
-
 
 ```
 INSERT INTO recipes (name, details)
@@ -169,15 +93,7 @@ VALUES
     );
 ```
 
-
-
-
-
 Third, format the JSONB data in the details column:
-
-
-
-
 
 ```
 SELECT
@@ -187,15 +103,7 @@ FROM
   recipes;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
          name         |             jsonb_pretty
@@ -236,16 +144,6 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the `jsonb_pretty()` function to convert a JSON value to pretty-printed, indented text.
-
-

@@ -6,10 +6,6 @@ tableOfContents: true
 
 This page provides the most commonly used PostgreSQL Math functions that help you perform various math operations quickly and effectively.  
 
-
-
-
-
 | Function                                                                                              | Description                                                                                    | Example                | Result  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------- | ------- |
 | [ABS](/docs/postgresql/postgresql-abs)                   | Calculate the absolute value of a number.                                                      | ABS(-10)               | 10      |
@@ -39,5 +35,3 @@ This page provides the most commonly used PostgreSQL Math functions that help yo
 | [TRUNC](/docs/postgresql/postgresql-trunc)               | Truncate a numeric value to a whole number of the specified decimal places                     | TRUNC(12.3)            | 12      |
 | [WIDTH_BUCKET](/docs/postgresql/postgresql-width_bucket) | Assign a numeric value to a bucket in an equiwidth histogram.                                  | WIDTH_BUCKET(1,1,10,5) | 1       |
 | [RANDOM](/docs/postgresql/postgresql-random)             | Generate a random number between 0 and 1                                                       | RANDOM()               | 0.9684  |
-
-

@@ -8,85 +8,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `RADIANS()` function to convert degrees to radians.
 
-
-
-
-
 ## Introduction to the PostgreSQL RADIANS() function
-
-
-
-
 
 The `RADIANS()` function converts degrees to radians.
 
-
-
-
-
 Here's the basic syntax of the `RADIANS()` function:
-
-
-
-
 
 ```
 RADIANS(degrees_value)
 ```
 
-
-
-
-
 In this syntax, the `degrees_value` is a value in degrees that you want to convert to radians. The function returns the `degrees_value` converted to radians.
-
-
-
-
 
 If the `degrees_value` is `NULL`, the function returns `NULL`.
 
-
-
-
-
 ## PostgreSQL RADIANS() function examples
-
-
-
-
 
 Let's explore some examples of using the `RADIANS()` function.
 
-
-
-
-
 ### 1) Basic RADIANS() function example
 
-
-
-
-
 The following example uses the `RADIANS()` function to convert 180 degrees to its equivalent in radians, resulting in `PI` value:
-
-
-
-
 
 ```
 SELECT RADIANS(180);
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
       radians
@@ -95,27 +43,11 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 2) Using the RADIANS() function with table data
-
-
-
-
 
 We'll show you how to use the `RADIANS` with data in a table.
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `angles` to store angle data in radians:
-
-
-
-
 
 ```
 CREATE TABLE angles (
@@ -124,15 +56,7 @@ CREATE TABLE angles (
 );
 ```
 
-
-
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `angles` table:
-
-
-
-
 
 ```
 INSERT INTO angles (angle_degrees)
@@ -144,15 +68,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | angle_degrees
@@ -164,15 +80,7 @@ Output:
 (4 rows)
 ```
 
-
-
-
-
 Third, use the `RADIANS()` function to convert the values in the `angle_degrees` column to radians:
-
-
-
-
 
 ```
 SELECT
@@ -183,15 +91,7 @@ FROM
     angles;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | angle_degrees |   angle_radians
@@ -203,16 +103,6 @@ Output:
 (4 rows)
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `RADIANS()` function to convert degrees to radians.
-
-

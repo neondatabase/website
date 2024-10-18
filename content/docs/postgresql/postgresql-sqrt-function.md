@@ -7,59 +7,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SQRT()` function to calculate the square root of a number.
 
-
-
 ## Introduction to the PostgreSQL SQRT() function
-
-
 
 The `SQRT()` function is a powerful [mathematical function](/docs/postgresql/postgresql-math-functions) that allows you to calculate the square root of a number.
 
-
-
 Here's the basic syntax of the `SQRT()` function:
-
-
 
 ```
 SQRT(number)
 ```
 
-
-
 In this syntax, the `number` is a numeric value for which you want to calculate the square root
-
-
 
 The `SQRT()` function returns the square root of the input `number`.
 
-
-
 ## PostgreSQL SQRT() function examples
-
-
 
 Let's take some examples of using the `SQRT()` function.
 
-
-
 ### 1) Basic SQRT() function example
 
-
-
 The following example uses the `SQRT()` function to return the square root of 25:
-
-
 
 ```
 SELECT SQRT(25) AS result;
 ```
 
-
-
 Output:
-
-
 
 ```
  result
@@ -68,19 +42,11 @@ Output:
 (1 row)
 ```
 
-
-
 The query returns the square root of 25, which is 5.
-
-
 
 ### 2) Using PostgreSQL SQRT() function to calculate distance
 
-
-
 Suppose you have a table called `coordinates` that consists of columns `x` and `y` representing the coordinates of points in two-dimensional space:
-
-
 
 ```
 -- Create coordinates table
@@ -100,11 +66,7 @@ INSERT INTO coordinates (x, y) VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id |  x   |  y
@@ -117,22 +79,14 @@ Output:
 (5 rows)
 ```
 
-
-
 The following query uses the `SQRT()` function to calculate the distance of each point from the origin (0,0):
-
-
 
 ```
 SELECT SQRT(x * x + y * y) AS distance_from_origin
 FROM coordinates;
 ```
 
-
-
 Output:
-
-
 
 ```
  distance_from_origin
@@ -145,10 +99,6 @@ Output:
 (5 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the PostgreSQL `SQRT()` function to calculate the square root of a number.

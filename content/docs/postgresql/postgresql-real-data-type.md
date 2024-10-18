@@ -6,51 +6,19 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REAL` data type to store single-precision floating-point numbers in the database.
 
-
-
-
-
 ## Introduction to the PostgreSQL REAL data type
-
-
-
-
 
 The `REAL` data type allows you to store single-precision floating-point numbers in the database.
 
-
-
-
-
 A value of the real type takes 4 bytes of storage space. Its valid range is from `-3.40282347 × 1038` and `3.40282347 × 1038`.
-
-
-
-
 
 Typically, you use the `REAL` data type to store floating-point numbers with relatively large ranges and precision is not critical, or when you are concerned about the storage space.
 
-
-
-
-
 However, you can use the [double precision](/docs/postgresql/postgresql-double-precision-type) data type if you need higher precision.
-
-
-
-
 
 ## PostgreSQL REAL data type example
 
-
-
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `weathers` to store wind speed (meter per second) and temperature (celsius) data:
-
-
-
-
 
 ```
 CREATE TABLE weathers(
@@ -62,15 +30,7 @@ CREATE TABLE weathers(
 );
 ```
 
-
-
-
-
 Second, [insert rows](/docs/postgresql/postgresql-insert) into the `weathers` table:
-
-
-
-
 
 ```
 INSERT INTO weathers (location, wind_speed_mps, temperature_celsius, recorded_at)
@@ -87,15 +47,7 @@ VALUES
     ('New York', 5.3, 15.9, '2024-04-19 18:00:00');
 ```
 
-
-
-
-
 Third, calculate the [average](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/) wind speed and temperature in `New York` on `April 19, 2024`:
-
-
-
-
 
 ```
 SELECT
@@ -108,15 +60,7 @@ WHERE
   AND DATE(recorded_at) = '2024-04-19';
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
     wind_speed     | temperature_celsius
@@ -125,16 +69,6 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `REAL` data type to store single-precision floating-point numbers in the database.
-
-

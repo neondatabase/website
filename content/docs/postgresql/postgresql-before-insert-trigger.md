@@ -7,23 +7,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL `BEFORE INSERT` trigger associated with a table.
 
-
-
 ## Introduction to PostgreSQL BEFORE INSERT trigger
-
-
 
 A trigger is a database object that automatically calls a function when an event such as `INSERT`, `UPDATE`, and `DELETE` statement occurs on the associated table.
 
-
-
 A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a table. To create a `BEFORE INSERT` trigger, you follow these steps:
 
-
-
 First, define a trigger function that will execute before the `INSERT` event occurs:
-
-
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function()
@@ -39,15 +29,9 @@ END;
 $$
 ```
 
-
-
 At the end of the function, you need to place the `RETURN NEW` statement
 
-
-
 Second, create a `BEFORE INSERT` trigger and associate a trigger function with it:
-
-
 
 ```
 CREATE TRIGGER trigger_name
@@ -57,15 +41,9 @@ FOR EACH {ROW | STATEMENT}
 EXECUTE FUNCTION trigger_function();
 ```
 
-
-
 ## PostgreSQL BEFORE INSERT trigger example
 
-
-
 First, create a table called `inventory` to store inventory data:
-
-
 
 ```
 CREATE TABLE inventory(
@@ -74,11 +52,7 @@ CREATE TABLE inventory(
 );
 ```
 
-
-
 Second, create a table called `inventory_stat` that stores the total quantity of all products:
-
-
 
 ```
 CREATE TABLE inventory_stat(
@@ -86,11 +60,7 @@ CREATE TABLE inventory_stat(
 );
 ```
 
-
-
 Third, define a function that increases the total quantity in the `inventory_stat` before a row is inserted into the `inventory` table:
-
-
 
 ```
 CREATE OR REPLACE FUNCTION update_total_qty()
@@ -116,15 +86,9 @@ END;
 $$;
 ```
 
-
-
 If the inventory_stat table has no rows, the function inserts a new row with the quantity being inserted into the inventory table. Otherwise, it updates the existing quantity.
 
-
-
 Fourth, define a `BEFORE INSERT` trigger associated with the `inventory` table:
-
-
 
 ```
 CREATE TRIGGER inventory_before_insert
@@ -134,11 +98,7 @@ FOR EACH ROW
 EXECUTE FUNCTION update_total_qty();
 ```
 
-
-
 Fifth, insert a row into the inventory table:
-
-
 
 ```
 INSERT INTO inventory(product_id, quantity)
@@ -146,11 +106,7 @@ VALUES(1, 100)
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  product_id | quantity
@@ -159,21 +115,13 @@ Output:
 (1 row)
 ```
 
-
-
 Sixth, retrieve data from the `inventory_stat` table:
-
-
 
 ```
 SELECT * FROM inventory_stat;
 ```
 
-
-
 Output:
-
-
 
 ```
  total_qty
@@ -182,11 +130,7 @@ Output:
 (1 row)
 ```
 
-
-
 Seventh, insert another row into the `inventory` table:
-
-
 
 ```
 INSERT INTO inventory(product_id, quantity)
@@ -194,11 +138,7 @@ VALUES(2, 200)
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  product_id | quantity
@@ -207,11 +147,7 @@ Output:
 (1 row)
 ```
 
-
-
 Eighth, retrieve the data from the `inventory_stat` table:
-
-
 
 ```
  total_qty
@@ -220,10 +156,6 @@ Eighth, retrieve the data from the `inventory_stat` table:
 (1 row)
 ```
 
-
-
 ## Summary
-
-
 
 - A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a table.

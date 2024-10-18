@@ -7,59 +7,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SCALE()` function to retrieve the scale of a number.
 
-
-
 ## Introduction to the PostgreSQL SCALE() function
-
-
 
 The scale of a number is the count of decimal digits in its fractional part. For example, the scale of `1.234` is 3 because it has three digits after the decimal point.
 
-
-
 The `SCALE()` function allows you to determine the scale of a number.
 
-
-
 Here's the basic syntax of the `SCALE()` function:
-
-
 
 ```
 SCALE(numeric_value)
 ```
 
-
-
 The `SCALE()` function returns an integer representing the scale of the `numeric_value`. It returns `NULL` if the `numeric_value` is `NULL`.
-
-
 
 ## PostgreSQL SCALE() function examples
 
-
-
 Let's explore some examples of using the PostgreSQL `SCALE()` function.
-
-
 
 ### 1) Basic SCALE() function example
 
-
-
 The following example uses the `SCALE()` function to determine the scale of the number `3.141592653589793`:
-
-
 
 ```
 SELECT SCALE(3.141592653589793);
 ```
 
-
-
 Output:
-
-
 
 ```
  scale
@@ -68,19 +42,11 @@ Output:
 (1 row)
 ```
 
-
-
 It returns 15 indicating that there are 15 digits after the decimal point.
-
-
 
 ### 2) Using the SCALE() table to examine table data
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `product_prices` to store product prices with various scales:
-
-
 
 ```
 CREATE TABLE product_prices (
@@ -90,11 +56,7 @@ CREATE TABLE product_prices (
 );
 ```
 
-
-
 Second, [insert some data](/docs/postgresql/postgresql-insert-multiple-rows) into the table:
-
-
 
 ```
 INSERT INTO product_prices (product_name, price)
@@ -112,11 +74,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  product_id | product_name |  price
@@ -134,11 +92,7 @@ Output:
 (10 rows)
 ```
 
-
-
 Third, group the product prices by scales using the `SCALE()` function:
-
-
 
 ```
 SELECT
@@ -152,11 +106,7 @@ ORDER BY
   price_scale;
 ```
 
-
-
 Output:
-
-
 
 ```
  price_scale | count_of_products
@@ -169,14 +119,8 @@ Output:
 (5 rows)
 ```
 
-
-
 By understanding the scales of prices, you can identify the diverse decimal precisions and take appropriate action to standardize them.
 
-
-
 ## Summary
-
-
 
 - Use the `SCALE()` function to retrieve the scale of a number.

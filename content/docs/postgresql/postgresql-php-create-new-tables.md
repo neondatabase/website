@@ -8,36 +8,20 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.
 
-
-
 ## Creating new tables using PHP PDO steps
 
-
-
 To create new tables in a PostgreSQL database using PHP PDO, you follow these steps:
-
-
 
 1. First, [connect to the database](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new PDO object.
 2. Second, call the `exec()` method of the PDO object to execute the [CREATE TABLE](/docs/postgresql/postgresql-create-table) statement.
 
-
-
 Let's look at an example of creating new tables.
-
-
 
 ## Creating new table example
 
-
-
 In the previous tutorial, we created the `stocks` database in the PostgreSQL database server.
 
-
-
 For the demonstration, we'll create two new tables in the `stocks` database: `stocks` and `stock_evaluations` with the following structures:
-
-
 
 ```
 CREATE TABLE IF NOT EXISTS stocks (
@@ -46,8 +30,6 @@ CREATE TABLE IF NOT EXISTS stocks (
     company CHARACTER VARYING(255) NOT NULL UNIQUE
 );
 ```
-
-
 
 ```
 CREATE TABLE IF NOT EXISTS stock_valuations (
@@ -60,11 +42,7 @@ CREATE TABLE IF NOT EXISTS stock_valuations (
 );
 ```
 
-
-
 We create a new class named `PostgreSQLCreateTable` in the `app` folder.
-
-
 
 ```
 <?php
@@ -133,25 +111,15 @@ class PostgreSQLCreateTable {
 }
 ```
 
-
-
 How it works.
-
-
 
 - First, the constructor of the class accepts a PDO object as the argument.
 - Second, the `createTables()` method creates new tables in the database. The `$sqlList` array holds all the [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements. To execute a statement, you call the `exec()` method of the PDO object. We iterate over the array of SQL statements and execute them one by one by calling the `exec()` method.
 - Third, the `getTables()` method returns all tables in the connected database. We use it to query the tables in the `stocks` database after calling the `createTables()` method.
 
-
-
 ![PostgreSQL PHP Create Tables](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Create-Tables.png)
 
-
-
 In the `index.php` file, connect to the PostgreSQL database execute the statement to create tables and query tables.
-
-
 
 ```
 <?php
@@ -183,27 +151,16 @@ try {
 }
 ```
 
-
-
 Launch the `index.php` file in a web browser. You'll see the following output:
-
-
 
 ```
 stock_valuations
 stocks
 ```
 
-
-
 The output shows that the script has created two tables successfully.
-
-
 
 ## Summary
 
-
-
 - Use the `CREATE TABLE` statement to create a new table.
 - Use the PDO `exec()` method to to execute a `CREATE TABLE` statement to create a new table in the datatabase.
-

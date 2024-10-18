@@ -7,39 +7,15 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT INTO` statement to create a new table from the result set of a query.
 
-
-
-
-
 If you want to select data into variables, check out the [PL/pgSQL SELECT INTO statement](https://www.postgresqltutorial.com/plpgsql-select-into/).
-
-
-
-
 
 ## Introduction to PostgreSQL SELECT INTO statement
 
-
-
-
-
-The PostgreSQL `SELECT INTO` statement [creates a new table ](/docs/postgresql/postgresql-create-table/)and [inserts data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) returned from a query into the table.
-
-
-
-
+The PostgreSQL `SELECT INTO` statement [creates a new table](/docs/postgresql/postgresql-create-table/)and [inserts data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) returned from a query into the table.
 
 The new table will have columns with the same names as the columns of the result set of the query. Unlike a regular [`SELECT`](/docs/postgresql/postgresql-select) statement, the `SELECT INTO` statement does not return a result to the client.
 
-
-
-
-
 Here's the basic syntax of the PostgreSQL `SELECT INTO` statement:
-
-
-
-
 
 ```
 SELECT
@@ -51,75 +27,27 @@ WHERE
   search_condition;
 ```
 
-
-
-
-
 To create a new table with the structure and data derived from a result set, you specify the new table name after the `INTO` keyword.
-
-
-
-
 
 The `TEMP` or `TEMPORARY` keyword is optional; it allows you to create a [temporary table](/docs/postgresql/postgresql-temporary-table) instead.
 
-
-
-
-
 The `TABLE` keyword is optional, which enhances the clarity of the statement.
-
-
-
-
 
 The `WHERE` clause allows you to specify a condition that determines which rows from the original tables should be filled into the new table.
 
-
-
-
-
 Besides the `WHERE` clause, you can use other clauses in the `SELECT` statement for the `SELECT INTO` statement such as `INNER JOIN`, `LEFT JOIN`, `GROUP BY`, and `HAVING`.
-
-
-
-
 
 Note that you cannot use the `SELECT INTO` statement in PL/pgSQL because it interprets the `INTO` clause differently. In this case, you can use the `CREATE TABLE AS` statement which provides more functionality than the `SELECT INTO` statement.
 
-
-
-
-
 ## PostgreSQL SELECT INTO examples
-
-
-
-
 
 We will use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
 
-
-
-
-
 ![PostgreSQL SELECT INTO sample table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
-
-
-
-
 
 ### 1) Basic PostgreSQL SELECT INTO statement example
 
-
-
-
-
 The following statement uses the `SELECT INTO` statement to create a new table called `film_r` that contains films with the rating `R` and rental duration 5 days from the `film` table.
-
-
-
-
 
 ```
 SELECT
@@ -136,41 +64,17 @@ ORDER BY
     title;
 ```
 
-
-
-
-
 To verify the table creation, you can query data from the `film_r` table:
-
-
-
-
 
 ```
 SELECT * FROM film_r;
 ```
 
-
-
-
-
 ![](/postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Select-Into-Example.png)
-
-
-
-
 
 ### 2) Using the SELECT INTO statement to create a new temporary table
 
-
-
-
-
 The following example uses the `SELECT INTO` statement to create a temporary table named `short_film` that contains films whose lengths are under 60 minutes.
-
-
-
-
 
 ```
 SELECT
@@ -186,30 +90,14 @@ ORDER BY
     title;
 ```
 
-
-
-
-
 The following shows the data from the `short_film` table:
-
-
-
-
 
 ```
 SELECT * FROM short_film
 ORDER BY length DESC;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  film_id |        title         | length
@@ -221,16 +109,6 @@ Output:
 ...
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `SELECT INTO` statement to create a new table from the result set of a query.
-
-

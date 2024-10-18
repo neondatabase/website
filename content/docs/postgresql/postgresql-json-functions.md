@@ -6,23 +6,9 @@ tableOfContents: true
 
 This page provides you with the most commonly used PostgreSQL JSON functions that allow you to manage JSON data effectively.
 
-
-
-
-
-
-
 ## Section 1. Creating JSON data
 
-
-
-
-
 This section covers the functions that help you create JSON data in SQL:
-
-
-
-
 
 - [to_jsonb()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-to_jsonb/) - Convert an SQL value to a value of JSONB.
 -
@@ -34,25 +20,9 @@ This section covers the functions that help you create JSON data in SQL:
 -
 - [row_to_json()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-row_to_json/) - Create a JSON object from a SQL composite value.
 
-
-
-
-
-
-
-
-
 ## Section 2. Searching JSON data
 
-
-
-
-
 This section provides you with functions that search for JSON elements based on JSON paths.
-
-
-
-
 
 - [JSON path](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/) - Show you how to construct simple JSON paths to locate values or elements within a JSON document.
 -
@@ -66,25 +36,9 @@ This section provides you with functions that search for JSON elements based on 
 -
 - jsonb_path_match() - Return true if any part of a JSON document matches a JSON path expression or false otherwise.
 
-
-
-
-
-
-
-
-
 ## Section 3. Querying JSON data
 
-
-
-
-
 This section shows you how to query and extract elements in JSON documents.
-
-
-
-
 
 - [JSONB operators](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb-operators/) - Show you how to use JSONB operators to extract and query JSON data effectively.
 -
@@ -94,25 +48,9 @@ This section shows you how to query and extract elements in JSON documents.
 -
 - [jsonb_extract_path_text()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_extract_path_text/) - Extract a JSON sub-object as text from JSONB data at a specified path.
 
-
-
-
-
-
-
-
-
 ## Section 4. Modifying JSON data
 
-
-
-
-
 This section discusses the function that inserts and updates values in JSON documents.
-
-
-
-
 
 - [jsonb_insert()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/) - Insert a new value into a JSON document based on a path and return the modified JSON document.
 -
@@ -120,25 +58,9 @@ This section discusses the function that inserts and updates values in JSON docu
 -
 - [jsonb_strip_nulls()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_strip_nulls/) - Delete all object fields that have null values from a specified JSON document.
 
-
-
-
-
-
-
-
-
 ## Section 5. Working with JSON arrays
 
-
-
-
-
 This section introduces you to JSON functions that work with JSON arrays including getting array length and expanding array elements into JSONB values and text.
-
-
-
-
 
 - [jsonb_array_length()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_length/) - Return the number of elements in the top-level JSON array.
 -
@@ -146,25 +68,9 @@ This section introduces you to JSON functions that work with JSON arrays includi
 -
 - [jsonb_array_elements_text()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/) - Expand the top-level JSON array into a set of text values.
 
-
-
-
-
-
-
-
-
 ## Section 6. Working with JSON objects
 
-
-
-
-
 This section shows you how to use JSON functions that handle JSON objects.
-
-
-
-
 
 - [jsonb_each()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/) - Expand the keys and values of the top-level JSON object into a set of key/value pairs. The values are JSON values.
 -
@@ -174,54 +80,18 @@ This section shows you how to use JSON functions that handle JSON objects.
 -
 - [jsonb_to_record()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_to_record/) - Convert a top-level JSON object into a PostgreSQL record type defined by an AS clause.
 
-
-
-
-
-
-
-
-
 ## Section 7. Aggregating JSON data
 
-
-
-
-
 This section shows you how to use JSON aggregate functions that collect data from multiple rows into a JSON array or object.
-
-
-
-
 
 - [jsonb_agg()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_agg/) - aggregate a list of values including NULL into a JSON array.
 -
 - [jsonb_object_agg()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/) - aggregate a list of key/value pairs into a JSON object.
 
-
-
-
-
-
-
-
-
 ## Section 8. JSON utility functions
 
-
-
-
-
 This section discusses the JSON utility functions for getting types of JSONB values and formats JSON values into a human-readable format.
-
-
-
-
 
 - [jsonb_typeof()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_typeof/) - Return the type of top-level JSON value as a text string.
 -
 - [jsonb_pretty()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_pretty/) - Format a JSON value into human-readable, indented format, making it easier to read.
-
-
-
-

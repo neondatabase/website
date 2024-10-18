@@ -8,19 +8,11 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn to insert one or more rows into a PostgreSQL table from Python.
 
-
-
 This tutorial picks up from where the [Creating Tables Tutorial](https://www.postgresqltutorial.com/postgresql-python/create-tables/) left off.
-
-
 
 ## Steps for inserting one row into a table from Python
 
-
-
 To insert one or more rows into a table from Python, you follow these steps:
-
-
 
 - First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
 - Next, create a `cursor` object from the `connection` object.
@@ -28,30 +20,17 @@ To insert one or more rows into a table from Python, you follow these steps:
 - After that, commit the transaction by calling the `commit()` method of the `connection` object.
 - Finally, obtain the inserted ID by calling the `fetchone()` method of the `cursor` object.
 
-
 ## Inserting data into a table example
-
-
 
 We will use the `vendors` table in the `suppliers` database for the demonstration purposes:
 
-
-
 ![vendors_table](/postgresqltutorial_data/wp-content-uploads-2016-06-vendors_table.png)
-
-
 
 ### 1) Inserting one row into a table
 
-
-
 First, create a new file named insert.py.
 
-
-
 Second, define a `insert_vendor()` function in the insert.py file:
-
-
 
 ```
 import psycopg2
@@ -90,27 +69,15 @@ if __name__ == '__main__':
     insert_vendor("3M Co.")
 ```
 
-
-
 The `insert_vendor()` function will insert a new row into the `vendors` table and return the inserted `vendor_id`.
-
-
 
 ### 2) Inserting multiple rows into a table
 
-
-
 The steps for inserting multiple rows into a table are similar to the steps for inserting one row.
-
-
 
 The key difference is in the third step: instead of calling the `execute()` method of the `cursor` object, you use the `executemany()` method.
 
-
-
 For example, the following defines `insert_many_vendors()` function that inserts multiple rows into the `vendors` table:
-
-
 
 ```
 def insert_many_vendors(vendor_list):
@@ -130,11 +97,7 @@ def insert_many_vendors(vendor_list):
         print(error)
 ```
 
-
-
 The following uses the `insert_vendor()` and `insert_many_vendors()` functions to insert one and multiple rows into the `vendors` table:
-
-
 
 ```
 if __name__ == '__main__':
@@ -150,63 +113,37 @@ if __name__ == '__main__':
     ])
 ```
 
-
-
 ### 3) Execute the insert.py module
-
-
 
 First, open the Command Prompt on Windows or Terminal on Unix-like systems.
 
-
-
 Second, run the following command to execute the `insert.py` module:
-
-
 
 ```
 python insert.py
 ```
 
-
-
 ### 4) Verify the inserts
 
-
-
 First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) using the `psql`:
-
-
 
 ```
 psql -U postgres
 ```
 
-
-
 Second, change the current database to `suppliers`:
-
-
 
 ```
 \c suppliers
 ```
 
-
-
 Third, retrieve data from the `vendors` table:
-
-
 
 ```
 SELECT * FROM vendors;
 ```
 
-
-
 Output:
-
-
 
 ```
  vendor_id |          vendor_name
@@ -221,14 +158,8 @@ Output:
 (7 rows)
 ```
 
-
-
 [Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/insert.zip)
 
-
-
 ## Summary
-
-
 
 - Use the `execute()` or `executemany()` method of the `cursor` object to insert one or more rows into a table from Python.

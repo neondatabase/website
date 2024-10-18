@@ -7,56 +7,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `generate_series()` function to generate a series of numbers or timestamps.
 
-
-
 ## Introduction to the PostgreSQL generate_series() function
-
-
 
 The `generate_series()` function allows you to generate a series of numbers or [timestamps](/docs/postgresql/postgresql-timestamp).
 
-
-
 ### Generating a series of numbers
 
-
-
 The following shows the syntax of `generate_series()` function that generates a series of numbers from `start` to `stop` with an optional `step` size:
-
-
 
 ```
 generate_series (start,stop[,step])
 ```
 
-
-
 In this syntax:
-
-
 
 - `start` is the starting value of the series.
 - `stop` is the ending value of the series. The resulting series will include the `stop` value.
 - `step` is the increment value between each consecutive number. The `step` is optional and defaults to 1.
 
-
 The data types of `start`, `stop`, and `step` can be `int`, `bigint`, or `numeric`. The function returns a `setof integer`, `bigint`, or `numeric` accordingly.
 
-
-
 The following example uses the `generate_series()` to generate a series of numbers from 1 to 5:
-
-
 
 ```
 SELECT generate_series(1,5);
 ```
 
-
-
 Output:
-
-
 
 ```
  generate_series
@@ -69,25 +46,15 @@ Output:
 (5 rows)
 ```
 
-
-
 Since the steps default to 1, the output series includes numbers from 1 to 5.
 
-
-
 The following example uses the `generate_series()` to generate a series of numbers from 1 to 10 with the step of 2:
-
-
 
 ```
 SELECT generate_series(1,10,2);
 ```
 
-
-
 Output:
-
-
 
 ```
  generate_series
@@ -100,55 +67,32 @@ Output:
 (5 rows)
 ```
 
-
-
 Since the next number of the series is 11 which is higher than the stop value (1), the function returns a number that stops at 9.
-
-
 
 ### Generating a series of timestamps
 
-
-
 The syntax for generating a series of timestamps is as follows:
-
-
 
 ```
 generate_series (start,stop,step[,timezone])
 ```
 
-
-
 In this syntax:
-
-
 
 - The `start` is the starting value of the series.
 - The `stop` is the ending value of the series.
 - The `step` is increment values between two consecutive timestamps in the series.
 - The `timezone` represents the time zone. Its type is text e.g., `'America/New_York'`. The `timezone` argument is optional.
 
-
 The data types of the `start` and `stop` can be either `timestamp` or `timestamp with time zone`.
-
-
 
 The data type of the `step` is the `interval`.
 
-
-
 The function returns a `setof timestamp` or `setof timestamp with time zone`respectively.
-
-
 
 When you use a timestamp with a time zone, the function adjusts the times of day and daylight savings time (`DST`) according to the time zone specified by the `timezone` argument, or the current time zone setting if you omit the `timezone` argument.
 
-
-
 The following example uses the `generate_series()` function to generate a series of timestamps representing one-hour intervals for a specific date range:
-
-
 
 ```
 SELECT * FROM generate_series(
@@ -158,11 +102,7 @@ SELECT * FROM generate_series(
 );
 ```
 
-
-
 Output:
-
-
 
 ```
  generate_series
@@ -194,21 +134,13 @@ Output:
 (24 rows)
 ```
 
-
-
 Assuming that the time zone is set to UTC. If this is not the case, you can run the following command to set the time zone to UTC:
-
-
 
 ```
 SET TIME ZONE 'UTC';
 ```
 
-
-
 The following example creates a time series of timestamps with 1-day intervals between two consecutive timestamps:
-
-
 
 ```
 SELECT * FROM generate_series(
@@ -219,11 +151,7 @@ SELECT * FROM generate_series(
 );
 ```
 
-
-
 Output:
-
-
 
 ```
     generate_series
@@ -235,38 +163,22 @@ Output:
 (4 rows)
 ```
 
-
-
 Please note that daylight saving time (`DST`) ends on Nov 3, 2024. Notice the `DST` transition between November 3 and November 4.
-
-
 
 ## PostgreSQL generate_series() function examples
 
-
-
 Let's explore some real-world examples of using the `generate_series()` function.
-
-
 
 ### 1) Creating a series of random numbers
 
-
-
 The following example uses the `generate_series()` function with the [random()](/docs/postgresql/postgresql-random) function to create a series of five random numbers between 100 and 200:
-
-
 
 ```
 SELECT floor(random()* (200-100+ 1) + 100) rand
 FROM generate_series(1,5);
 ```
 
-
-
 Output:
-
-
 
 ```
  rand
@@ -279,15 +191,9 @@ Output:
 (5 rows)
 ```
 
-
-
 ### 2) Generating test data
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `employees`:
-
-
 
 ```
 CREATE TABLE employees(
@@ -297,11 +203,7 @@ CREATE TABLE employees(
 );
 ```
 
-
-
 Second, insert 100 rows into the `employees` table:
-
-
 
 ```
 INSERT INTO employees(name, age)
@@ -311,15 +213,9 @@ FROM generate_series(1,100) n
 RETURNING *;
 ```
 
-
-
 This query generates 100 rows of mock employees with id, names, and random ages.
 
-
-
 Output:
-
-
 
 ```
  id  |     name     | age
@@ -332,19 +228,11 @@ Output:
 ...
 ```
 
-
-
 ### 3) Creating dates table in data analytics application
-
-
 
 In data analytics, you often need to create a `dates` table that contains a series of date values. To generate data for the `dates` table, you can use the `generate_series()` function.
 
-
-
 First, create a `dates` table:
-
-
 
 ```
 CREATE TABLE dates(
@@ -380,15 +268,9 @@ CREATE TABLE dates(
 );
 ```
 
-
-
 In the `dates` table, only the `date` column is required whereas other columns are [generated columns](/docs/postgresql/postgresql-generated-columns) whose values are derived from the `date` column.
 
-
-
 Second, create a series of dates between `2024-01-01` and `2024-31-12`:
-
-
 
 ```
 INSERT INTO dates(date)
@@ -400,11 +282,7 @@ SELECT * FROM generate_series(
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id  |    date    | month | month_name | quarter | quarter_name | year
@@ -416,10 +294,6 @@ Output:
 ...
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `generate_series()` function to create a series of numbers of timestamps.

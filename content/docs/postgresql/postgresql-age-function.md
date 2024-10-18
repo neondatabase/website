@@ -10,61 +10,25 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `AGE()` function to calculate ages.
 
-
-
-
-
 ## Introduction to PostgreSQL AGE() function
-
-
-
-
 
 In business applications, you often have to calculate ages such as the ages of employees, and years of service of employees. In PostgreSQL, you can use the `AGE()` function to accomplish these tasks.
 
-
-
-
-
 Here's the basic syntax of the `AGE()` function:
-
-
-
-
 
 ```
 AGE(timestamp,timestamp);
 ```
 
-
-
-
-
 The `AGE()` function accepts two [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp/) values. It subtracts the second argument from the first one and returns an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval) as a result.
 
-
-
-
-
 For example:
-
-
-
-
 
 ```
 SELECT AGE('2017-01-01','2011-06-24');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
    age
@@ -72,29 +36,13 @@ Output:
  5 years 6 mons 7 days
 ```
 
-
-
-
-
 If you want to use the current date as the first argument, you can use the following form of the `AGE()` function:
-
-
-
-
 
 ```
 AGE(timestamp);
 ```
 
-
-
-
-
 For example, if someone's birth date is `2000-01-01`, and the current date is `2024-01-26`, their age would be:
-
-
-
-
 
 ```
 SELECT
@@ -102,15 +50,7 @@ SELECT
   AGE(timestamp '2000-01-01');
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  current_date |       age
@@ -119,33 +59,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ## PostgreSQL AGE() function example
-
-
-
-
 
 We'll use the following `rental` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
 
-
-
-
-
 ![PostgreSQL age Function: Rental Table Sample](/postgresqltutorial_data/wp-content-uploads-2017-03-rental-table.png)
 
-
-
-
-
 The following example uses the `AGE()` function to retrieve the top 10 rentals that have the longest durations:
-
-
-
-
 
 ```
 SELECT
@@ -162,15 +82,7 @@ LIMIT
   10;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  rental_id | customer_id |    duration
@@ -188,22 +100,8 @@ Output:
 (10 rows)
 ```
 
-
-
-
-
 In this example, we use the `AGE()` function to calculate the rental duration based on the values of the `rental_date` and `return_date` columns.
-
-
-
-
 
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `AGE()` function to calculate ages.
-
-

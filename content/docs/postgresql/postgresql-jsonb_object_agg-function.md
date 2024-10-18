@@ -9,85 +9,33 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
 
-
-
-
-
 ## Introduction to the PostgreSQL jsonb_object_agg() function
-
-
-
-
 
 The PostgreSQL `jsonb_object_agg()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to collect key/value pairs into a [JSON](/docs/postgresql/postgresql-json) object.
 
-
-
-
-
 The `jsonb_object_agg()` can be useful when you want to aggregate data from multiple rows into a single JSON object or construct complex JSON output.
 
-
-
-
-
 Here's the syntax of the `jsonb_object_agg()` function:
-
-
-
-
 
 ```
 jsonb_object_agg(key, value)
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `key` represents the key for the JSON object. The key must not be null.
 -
 - `value` represents the value for the corresponding key.
 
-
-
-
-
 The `jsonb_object_agg()` returns a JSON object that consists of key/value pairs.
-
-
-
-
 
 ## PostgreSQL jsonb_object_agg() function examples
 
-
-
-
-
 Let's explore some examples of using the PostgreSQL `jsonb_object_agg()` function.
-
-
-
-
 
 ### 1) Basic PostgreSQL jsonb_object_agg() function example
 
-
-
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `departments`:
-
-
-
-
 
 ```
 CREATE TABLE departments(
@@ -96,15 +44,7 @@ CREATE TABLE departments(
 );
 ```
 
-
-
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `departments` table:
-
-
-
-
 
 ```
 INSERT INTO departments(department_name)
@@ -114,15 +54,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Third, use the `jsonb_object_agg()` function to create an object whose key is the department name and value is the id:
-
-
-
-
 
 ```
 SELECT
@@ -131,15 +63,7 @@ FROM
   departments;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
          departments
@@ -148,21 +72,9 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 ### 2) Using the jsonb_object_agg() function with GROUP BY clause
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
-
-
-
-
 
 ```
 CREATE TABLE employees (
@@ -175,15 +87,7 @@ CREATE TABLE employees (
 );
 ```
 
-
-
-
-
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
-
-
-
-
 
 ```
 INSERT INTO employees (name, salary, department_id)
@@ -196,15 +100,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id |     name      |  salary  | department_id
@@ -217,15 +113,7 @@ Output:
 (5 rows)
 ```
 
-
-
-
-
 Third, use the `jsonb_object_agg()` function to get the department name and a JSON object that contains employee details of the department including employee name and salary:
-
-
-
-
 
 ```
 SELECT
@@ -240,15 +128,7 @@ GROUP BY
   department_name;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  department_name |       employee_details
@@ -265,27 +145,11 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 Note that we use the `jsonb_pretty()` function to format JSON.
-
-
-
-
 
 Alex Miller has not had a salary yet so his salary is null. The `jsonb_object_agg()` also collects the null into the JSON object.
 
-
-
-
-
 To skip nulls, you can use the `jsonb_object_agg_strict()` function as follows:
-
-
-
-
 
 ```
 SELECT
@@ -300,15 +164,7 @@ GROUP BY
   department_name;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  department_name |       employee_details
@@ -324,24 +180,10 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` function except that it skips null values.
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
 -
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
-
-

@@ -7,39 +7,21 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE DELETE` trigger that is fired before a row is deleted from a table.
 
-
-
 ## Introduction to the PostgreSQL BEFORE DELETE trigger
-
-
 
 In PostgreSQL, a trigger is a database object that is automatically activated in response to an event including `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` occurring on a table.
 
-
-
 A `BEFORE DELETE` trigger is activated before one or more rows are deleted from a table.
-
-
 
 In practice, you'll use `BEFORE DELETE` triggers for tasks such as logging deleted data, updating data in related tables, or enforcing complex business rules.
 
-
-
 In a `BEFORE DELETE` trigger, you can access the `OLD` variable, which holds the value of the row being deleted. To access a column value of the deleted row, you can use the syntax `OLD.column_name`.
-
-
 
 Please note that you cannot modify the column values (`OLD.column_name`) because they are read-only.
 
-
-
 To create a `BEFORE DELETE` trigger, follow these steps:
 
-
-
 First, [define a trigger function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute before a `DELETE` operation:
-
-
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function_name()
@@ -57,11 +39,7 @@ $$
 LANGUAGE plpgsql;
 ```
 
-
-
 Second, create a trigger and associate the trigger function with it:
-
-
 
 ```
 CREATE TRIGGER trigger_name
@@ -70,19 +48,11 @@ FOR EACH ROW
 EXECUTE FUNCTION trigger_function_name();
 ```
 
-
-
 ## PostgreSQL BEFORE DELETE trigger example
-
-
 
 We'll use a `BEFORE DELETE` trigger to prevent applications from deleting a row in a table.
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `products` that stores the product data:
-
-
 
 ```
 CREATE TABLE products (
@@ -93,11 +63,7 @@ CREATE TABLE products (
 );
 ```
 
-
-
 Next, [insert some rows](/docs/postgresql/postgresql-insert) into the `products` table:
-
-
 
 ```
 INSERT INTO products (name, price, status)
@@ -108,11 +74,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name | price | status
@@ -123,11 +85,7 @@ Output:
 (3 rows)
 ```
 
-
-
 Then, create a `BEFORE DELETE` trigger function that [raises an exception](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/):
-
-
 
 ```
 CREATE OR REPLACE FUNCTION fn_before_delete_product()
@@ -141,11 +99,7 @@ $$
 LANGUAGE plpgsql;
 ```
 
-
-
 After that, create a `BEFORE DELETE` trigger on the `products` table:
-
-
 
 ```
 CREATE TRIGGER before_delete_product_trigger
@@ -154,32 +108,20 @@ FOR EACH ROW
 EXECUTE FUNCTION fn_before_delete_product();
 ```
 
-
-
 Finally, delete a row from the `products` table:
-
-
 
 ```
 DELETE FROM products
 WHERE id = 1;
 ```
 
-
-
 Error:
-
-
 
 ```
 ERROR:  Deletion from the products table is not allowed.
 CONTEXT:  PL/pgSQL function fn_before_delete_product() line 3 at RAISE
 ```
 
-
-
 ## Summary
-
-
 
 - Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.

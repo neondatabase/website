@@ -6,41 +6,24 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions using the `BEGIN`, `COMMIT`, and `ROLLBACK` statements.
 
-
-
 ## What is a database transaction?
-
-
 
 A database transaction is a single unit of work that consists of one or more operations.
 
-
-
 A classical example of a transaction is a bank transfer from one account to another. A complete transaction must ensure a balance between the sender and receiver accounts.
-
-
 
 This implies that if the sender account transfers X amount, the receiver receives exactly X amount, neither more nor less.
 
-
-
 A PostgreSQL transaction is atomic, consistent, isolated, and durable. These properties are often referred to collectively as ACID:
-
-
 
 - **Atomicity** guarantees that the transaction is completed in an all-or-nothing manner.
 - **Consistency** ensures that changes to data written to the database are valid and adhere to predefined rules.
 - **Isolation** determines how the integrity of a transaction is visible to other transactions.
 - **Durability** ensures that transactions that have been committed are permanently stored in the database.
 
-
 ## Setting up a sample table
 
-
-
 Let's [create a new table](/docs/postgresql/postgresql-create-table) called `accounts` for the demonstration:
-
-
 
 ```
 DROP TABLE IF EXISTS accounts;
@@ -53,60 +36,36 @@ CREATE TABLE accounts (
 );
 ```
 
-
-
 ## Begin a transaction
-
-
 
 When you execute a statement, PostgreSQL implicitly wraps it in a transaction.
 
-
-
 For example, when you execute the following `INSERT` statement, PostgreSQL immediately inserts a new row into the `accounts` table:
-
-
 
 ```
 INSERT INTO accounts(name,balance)
 VALUES('Bob',10000);
 ```
 
-
-
 To start a transaction explicitly, you execute either one of the following statements:
-
-
 
 ```
 BEGIN TRANSACTION;
 ```
 
-
-
 Or
-
-
 
 ```
 BEGIN WORK;
 ```
 
-
-
 Or
-
-
 
 ```
 BEGIN;
 ```
 
-
-
 For example, the following statements start a new transaction and insert a new account into the `accounts` table:
-
-
 
 ```
 BEGIN;
@@ -115,11 +74,7 @@ INSERT INTO accounts(name,balance)
 VALUES('Alice',10000);
 ```
 
-
-
 From the current session, you can see the change by retrieving data from the `accounts` table:
-
-
 
 ```
 SELECT
@@ -129,16 +84,10 @@ SELECT
 FROM
     accounts;
 ```
-
-
 
 ![PostgreSQL Transaction - from current session](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
 
-
-
 However, you will not see the change if you connect to the PostgreSQL server in a new session and execute the query above:
-
-
 
 ```
 SELECT
@@ -149,49 +98,29 @@ FROM
     accounts;
 ```
 
-
-
 ![PostgreSQL Transaction - from another session](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-another-transaction.png)
-
-
 
 ## Commit a transaction
 
-
-
 To permanently apply the change to the database, you commit the transaction by using the `COMMIT WORK` statement:
-
-
 
 ```
 COMMIT WORK;
 ```
 
-
-
 or
-
-
 
 ```
 COMMIT TRANSACTION;
 ```
 
-
-
 or simply:
-
-
 
 ```
 COMMIT;
 ```
 
-
-
 Other sessions can view the change by retrieving data from the `accounts` table:
-
-
 
 ```
 SELECT
@@ -202,19 +131,11 @@ FROM
     accounts;
 ```
 
-
-
 ![PostgreSQL Transaction - commit](/postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png)
-
-
 
 After executing the `COMMIT` statement, PostgreSQL guarantees that the change will be durable if a crash happens.
 
-
-
 Put it all together.
-
-
 
 ```
 -- start a transaction
@@ -228,49 +149,29 @@ VALUES('Alice',10000);
 COMMIT;
 ```
 
-
-
 ## Roll back a transaction
 
-
-
 If you want to undo the changes to the database, you can use the ROLLBACK statement:
-
-
 
 ```
 ROLLBACK;
 ```
 
-
-
 Or more clear:
-
-
 
 ```
 ROLLBACK TRANSACTION;
 ```
 
-
-
 Or:
-
-
 
 ```
 ROLLBACK WORK;
 ```
 
-
-
 The `ROLLBACK` statement undos the changes that you made within the transaction.
 
-
-
 For example, the following example uses the `ROLLBACK` statement to roll back the changes made to the account 1:
-
-
 
 ```
 -- start a transaction
@@ -284,21 +185,13 @@ WHERE id =  1;
 ROLLBACK;
 ```
 
-
-
 If you retrieve data from the accounts table, you'll won't see the changes because it was rolled back.
-
-
 
 ```
 SELECT * FROM accounts;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | name  | balance
@@ -308,15 +201,9 @@ Output:
 (2 rows)
 ```
 
-
-
 In practice, you'll use transactions in [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/) in PostgreSQL and in the application code such as [PHP](https://www.postgresqltutorial.com/postgresql-php/transaction/), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/transaction/), and [Python](https://www.postgresqltutorial.com/postgresql-python/transaction/).
 
-
-
 ## Summary
-
-
 
 - Use the `BEGIN` statement to explicitly start a transaction
 - Use the `COMMIT` statement to apply the changes permanently to the database.

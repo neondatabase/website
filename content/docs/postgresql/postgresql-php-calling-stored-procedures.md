@@ -9,21 +9,9 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to call stored procedures in PostgreSQL in PHP using PDO.
 
-
-
-
-
 ## Calling a stored procedure that returns one value
 
-
-
-
-
 Let’s create a simple [stored procedure](https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/) named `add()` that returns the product of two integers using plpgsql.
-
-
-
-
 
 ```
 CREATE OR REPLACE FUNCTION add(
@@ -36,45 +24,29 @@ END; $$
   LANGUAGE 'plpgsql';
 ```
 
-
-
-
-
 To call a stored procedure that returns one value, you use these steps:
 
-
-
-
-
-1. 
+1.
 2. [Connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new instance of the PDO class.
-3. 
+3.
 4.
-5. 
+5.
 6. Prepare the statement that calls the stored procedure for execution using the `prepare()` method of the PDO object. The `prepare()` method returns a `PDOStatement` object.
-7. 
+7.
 8.
-9. 
+9.
 10. Optionally pass values to the statement using the `bindValue()` method.
-11. 
+11.
 12.
-13. 
+13.
 14. Execute the statement using the `execute()` method of the `PDOStatement` object. You can pass the values to the statement when calling the `execute()` method as well.
-15. 
+15.
 16.
-17. 
+17.
 18. Get the value using the `fetchColumn()` method that returns a single column of the next row in the result set.
-19. 
-
-
-
-
+19.
 
 The following `add()` method demonstrates how to call the `add()` stored procedure in PostgreSQL database.
-
-
-
-
 
 ```
    /**
@@ -94,15 +66,7 @@ The following `add()` method demonstrates how to call the `add()` stored procedu
     }
 ```
 
-
-
-
-
 To test the `add()` method, you use the following code in the `index.php` file:
-
-
-
-
 
 ```
 <?php
@@ -126,21 +90,9 @@ try {
 }
 ```
 
-
-
-
-
 ## Calling a stored procedure that returns a result set
 
-
-
-
-
 We will use the `accounts`, `plans`, and `account_plans` tables for the sake of demonstration. The following `get_accounts()` stored procedure returns a result set that contains complete data of accounts.
-
-
-
-
 
 ```
 CREATE OR REPLACE FUNCTION get_accounts()
@@ -163,21 +115,9 @@ END; $$
 LANGUAGE plpgsql;
 ```
 
-
-
-
-
 The steps of calling a stored procedure that returns a result set are the same as the steps of [querying data](https://www.postgresqltutorial.com/postgresql-php/query/).
 
-
-
-
-
 The following `getAccounts()` method demonstrates how to call the `get_accounts()` stored procedure in PHP.
-
-
-
-
 
 ```
    /**
@@ -200,15 +140,7 @@ The following `getAccounts()` method demonstrates how to call the `get_accounts(
     }
 ```
 
-
-
-
-
 To test the `getAccounts()` method, you use the following code in the `account.php` file.
-
-
-
-
 
 ```
 <?php
@@ -265,16 +197,6 @@ try {
 </html>
 ```
 
-
-
-
-
 ![D:\ref\projects\postgresql\php\stored procedure](/postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png)
 
-
-
-
-
 In this tutorial, we have shown you how to call stored procedures from PostgreSQL using PHP PDO.
-
-

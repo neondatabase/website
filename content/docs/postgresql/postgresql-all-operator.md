@@ -8,55 +8,23 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALL` operator to compare a value with a list of values returned by a subquery.
 
-
-
-
-
 ## Overview of the PostgreSQL ALL operator
-
-
-
-
 
 The PostgreSQL `ALL` operator allows you to compare a value with all values in a set returned by a [subquery](/docs/postgresql/postgresql-subquery).
 
-
-
-
-
 Here's the basic syntax of the `ALL` operator:
-
-
-
-
 
 ```
 expression operator ALL(subquery)
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - The `ALL` operator must be preceded by a comparison operator such as equal (=), not equal (&lt;>), greater than (>), greater than or equal to (>=), less than (&lt;), and less than or equal to (&lt;=).
 -
 - The `ALL` operator must be followed by a subquery which also must be surrounded by the parentheses.
 
-
-
-
-
 If the subquery returns a non-empty result set, the `ALL` operator works as follows:
-
-
-
-
 
 - `value > ALL (subquery)` returns true if the value is greater than the biggest value returned by the subquery.
 -
@@ -70,33 +38,13 @@ If the subquery returns a non-empty result set, the `ALL` operator works as foll
 -
 - `value != ALL (subquery)` returns true if the value does not equal any value returned by the subquery.
 
-
-
-
-
 If the subquery returns no row, then the `ALL` operator always evaluates to true.
-
-
-
-
 
 ## PostgreSQL ALL operator examples
 
-
-
-
-
 Let's explore some examples of using the PostgreSQL `ALL` operator.
 
-
-
-
-
 ### Setting up a sample table
-
-
-
-
 
 ```
 CREATE TABLE employees (
@@ -135,21 +83,9 @@ VALUES
 ('Alice', 'Johnson',  58000.00);
 ```
 
-
-
-
-
 ### 1) Using the ALL operator with the greater than operator (>) example
 
-
-
-
-
 The following example uses the `ALL` operator for employees who have salaries greater than all managers
-
-
-
-
 
 ```
 SELECT
@@ -165,15 +101,7 @@ WHERE
   );
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | first_name | last_name |  salary
@@ -182,27 +110,11 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The query returns one row with a salary of 75K greater than the highest salary of all managers (60K).
-
-
-
-
 
 ### 2) Using the ALL operator with the less than operator (&lt;) example
 
-
-
-
-
 The following example uses the `ALL` operator for employees who have salaries less than all managers:
-
-
-
-
 
 ```
 SELECT
@@ -219,15 +131,7 @@ WHERE
 ORDER BY salary DESC;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  id | first_name | last_name |  salary
@@ -243,22 +147,8 @@ Output:
 (8 rows)
 ```
 
-
-
-
-
 It returns all the employees whose salaries are less than the lowest salary of all managers which is 55K.
-
-
-
-
 
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `ALL` operator to compare a value with all values in a set of values returned by a subquery.
-
-

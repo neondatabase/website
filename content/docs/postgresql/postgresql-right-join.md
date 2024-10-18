@@ -7,33 +7,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will how to use PostgreSQL `RIGHT JOIN` to join two tables and return rows from the right table that may or may not have matching rows in the left table.
 
-
-
-
-
 ## Introduction to PostgreSQL RIGHT JOIN clause
-
-
-
-
 
 The `RIGHT JOIN` clause joins a right table with a left table and returns the rows from the right table that may or may not have matching rows in the left table.
 
-
-
-
-
 The `RIGHT JOIN` can be useful when you want to find rows in the right table that do not have matching rows in the left table.
 
-
-
-
-
 Here's the basic syntax of the `RIGHT JOIN` clause:
-
-
-
-
 
 ```
 SELECT
@@ -44,15 +24,7 @@ RIGHT JOIN table2
   ON table1.column_name = table2.column_name;
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - First, specify the columns from both tables in the `select_list` in the `SELECT` clause.
 -
@@ -62,75 +34,27 @@ In this syntax:
 -
 - Finally, define a condition for joining two tables (`table1.column_name = table2.column_name`), which indicates the `column_name` in each table should have matching rows.
 
-
-
-
-
 ### How the RIGHT JOIN works
-
-
-
-
 
 The `RIGHT JOIN` starts retrieving data from the right table (`table2`).
 
-
-
-
-
 For each row in the right table (`table2`), the `RIGHT JOIN` checks if the value in the `column_name` is equal to the value of the corresponding column in every row of the left table (`table1`).
-
-
-
-
 
 When these values are equal, the `RIGHT JOIN` creates a new row that includes columns specified in the `select_list` and appends it to the result set.
 
-
-
-
-
 If these values are not equal, the `RIGHT JOIN` generates a new row that includes columns specified in the `select_list`, populates the columns on the left with `NULL`, and appends the new row to the result set.
-
-
-
-
 
 In other words, the `RIGHT JOIN` returns all rows from the right table whether or not they have corresponding rows in the left table.
 
-
-
-
-
 The following Venn diagram illustrates how the `RIGHT JOIN` works:
-
-
-
-
 
 ![PostgreSQL Join - Right Join](/postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png)
 
-
-
-
-
 Note that the `RIGHT OUTER JOIN` is the same as `RIGHT JOIN`. The `OUTER` keyword is optional
-
-
-
-
 
 ### The USING syntax
 
-
-
-
-
 When the columns for joining have the same name, you can use the `USING` syntax:
-
-
-
-
 
 ```
 SELECT
@@ -140,33 +64,13 @@ FROM
 RIGHT JOIN table2 USING (column_name);
 ```
 
-
-
-
-
 ## PostgreSQL RIGHT JOIN examples
-
-
-
-
 
 We'll use the `film` and `inventory` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
 
-
-
-
-
 ### 1) Basic PostgreSQL RIGHT JOIN examples
 
-
-
-
-
 The following example uses the `RIGHT JOIN` clause to retrieve all rows from the film table that may or may not have corresponding rows in the inventory table:
-
-
-
-
 
 ```
 SELECT
@@ -181,27 +85,11 @@ ORDER BY
   film.title;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ![PostgreSQL RIGHT JOIN example](/postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-RIGHT-JOIN-example.png)
 
-
-
-
-
 You can rewrite the above query using table aliases:
-
-
-
-
 
 ```
 SELECT
@@ -216,15 +104,7 @@ ORDER BY
   f.title;
 ```
 
-
-
-
-
 Since the film and inventory table has the film_id column, you can use the USING syntax:
-
-
-
-
 
 ```
 SELECT
@@ -238,21 +118,9 @@ ORDER BY
   f.title;
 ```
 
-
-
-
-
 ### 2) PostgreSQL RIGHT JOIN with a WHERE clause
 
-
-
-
-
 The following query uses a `RIGHT JOIN` clause with a `WHERE` clause to retrieve the films that have no inventory:
-
-
-
-
 
 ```
 SELECT
@@ -267,15 +135,7 @@ ORDER BY
   f.title;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  film_id |         title          | inventory_id
@@ -288,18 +148,8 @@ Output:
 ...
 ```
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - Use the PostgreSQL `RIGHT JOIN` clause to join a right table with a left table and return rows from the right table that may or may not have corresponding rows in the left table.
 -
 - The `RIGHT JOIN` is also known as `RIGHT OUTER JOIN`.
-
-

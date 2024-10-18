@@ -7,27 +7,11 @@ tableOfContents: true
 
 ![](/postgresqltutorial_data/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png)
 
-
-
-
-
 This section shows you step by step how to use the PL/pgSQL to develop PostgreSQL user-defined functions and stored procedures.
-
-
-
-
 
 PL/pgSQL procedural language adds many procedural elements, e.g., control structures, loops, and complex computations, to extend standard SQL. It allows you to develop complex functions and stored procedures in PostgreSQL that may not be possible using plain SQL.
 
-
-
-
-
 PL/pgSQL procedural language is similar to the [Oracle PL/SQL](https://www.oracletutorial.com/plsql-tutorial/). The following are reasons to learn PL/pgSQL:
-
-
-
-
 
 - PL/pgSQL is easy to learn and simple to use.
 -
@@ -39,23 +23,9 @@ PL/pgSQL procedural language is similar to the [Oracle PL/SQL](https://www.oracl
 -
 - PL/pgSQL can be defined to be trusted by the PostgreSQL database server.
 
-
-
-
-
 Let's get started programming with PL/pgSQL.
 
-
-
-
-
-
-
 ## Section 1. Getting started
-
-
-
-
 
 - [Introduction to PostgreSQL PL/pgSQL](https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/) - introduce you to PostgreSQL PL/pgSQL and explain to you their advantages and disadvantages.
 -
@@ -63,19 +33,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [Block Structure](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) - introduce you to the PL/pgSQL block structure and show you how to develop and execute anonymous blocks.
 
-
-
-
-
-
-
-
-
 ## Section 2. Variables & constants
-
-
-
-
 
 - [Variables](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/) - show you how to declare variables in PL/pgSQL.
 -
@@ -87,37 +45,13 @@ Let's get started programming with PL/pgSQL.
 -
 - [Constants](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/) - guide you on how to use constants to make the code more readable and easier to maintain.
 
-
-
-
-
-
-
-
-
 ## Section 3. Reporting messages and errors
-
-
-
-
 
 - [Raising errors and reporting messages](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-errors-messages/) - show you how to report messages and raise errors in PL/pgSQL.
 -
 - [Assert](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-assert/) - show you how to use the assert statement to add debugging checks to PL/pgSQL code.
 
-
-
-
-
-
-
-
-
 ## Section 4. Control structures
-
-
-
-
 
 - [If statement](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/) - introduce you to three forms of the `if` statement.
 -
@@ -133,19 +67,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [Continue](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-continue/) - provide you with a way to use the `continue` statement to skip the current loop iteration and start a new one.
 
-
-
-
-
-
-
-
-
 ## Section 5. User-defined functions
-
-
-
-
 
 - [Create Function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) - show you how to develop a user-defined function by using the `create function` statement.
 -
@@ -159,35 +81,11 @@ Let's get started programming with PL/pgSQL.
 -
 - [Drop function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/) - learn how to remove an existing function.
 
-
-
-
-
-
-
-
-
 ## Section 6. Exception handling
-
-
-
-
 
 - [Handling exceptions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/) - show you how to use the exception clause to catch and handle exceptions.
 
-
-
-
-
-
-
-
-
 ## Section 7. Stored procedures
-
-
-
-
 
 - [Create procedure](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/) - show you how to create a stored procedure using the `create procedure` statement and invoke it.
 -
@@ -195,38 +93,10 @@ Let's get started programming with PL/pgSQL.
 -
 - [Stored procedures with INOUT parameters](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/) - return values from stored procedures using the `inout` parameters.
 
-
-
-
-
-
-
-
-
 ## Section 8. Cursors
-
-
-
-
 
 - [Cursors](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-cursor/) - show you how to use cursors to process a result set, row by row.
 
-
-
-
-
-
-
-
-
 ## Section 9. Trigger functions
 
-
-
-
-
 - [Trigger procedures using PL/pgSQL](https://www.postgresqltutorial.com/postgresql-triggers/) - apply PL/pgSQL to define [trigger](https://www.postgresqltutorial.com/postgresql-triggers/) procedures.
-
-
-
-

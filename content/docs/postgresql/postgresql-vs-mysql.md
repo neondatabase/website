@@ -6,23 +6,13 @@ tableOfContents: true
 
 The choice between PostgreSQL and MySQL is crucial when selecting an open-source relational database management system.
 
-
-
 Both PostgreSQL and MySQL are time-proven solutions that are capable of competing with enterprise solutions alternatives like Oracle Database and SQL Server.
-
-
 
 MySQL has been famous for its ease of use and speed, whereas PostgreSQL boasts many advanced features, earning it the reputation of an open-source counterpart to Oracle Database.
 
-
-
 The following table compares the features of PostgreSQL 16.x vs. MySQL 8.x:
 
-
-
 ![PostgreSQL vs. MySQL](/postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg)
-
-
 
 | Feature                                                                                                              | PostgreSQL                                                                                                                            | MySQL                                                                                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,4 +53,3 @@ The following table compares the features of PostgreSQL 16.x vs. MySQL 8.x:
 | Partitioning                                                                                                         | RANGE, LIST                                                                                                                           | RANGE, LIST, HASH, KEY, and composite partitioning using a combination of RANGE or LIST with HASH or KEY subpartitions                                                                                    |
 | Task Scheduler                                                                                                       | pgAgent                                                                                                                               | [Scheduled event](http://www.mysqltutorial.org/mysql-triggers/working-mysql-scheduled-event/)                                                                                                             |
 | Connection Scalability                                                                                               | Each new connection is an OS process                                                                                                  | Each new connection is an OS thread                                                                                                                                                                       |
-

@@ -9,53 +9,21 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXTRACT()` function to extract a field such as a year, month, and day from a date/time value.
 
-
-
-
-
 ## Introduction to PostgreSQL EXTRACT() function
 
-
-
-
-
 The `EXTRACT()` function extracts a field from a date/time value. Here's the basic syntax of the `EXTRACT()` function:
-
-
-
-
 
 ```
 EXTRACT(field FROM source)
 ```
 
-
-
-
-
 The PostgreSQL `EXTRACT()` function requires two arguments:
-
-
-
-
 
 **1) `field`**
 
-
-
-
-
 The field argument specifies which information you want to extract from the date/time value.
 
-
-
-
-
 The following table illustrates the valid field values:
-
-
-
-
 
 | Field Value     | TIMESTAMP                                                           | Interval                                    |
 | --------------- | ------------------------------------------------------------------- | ------------------------------------------- |
@@ -81,65 +49,25 @@ The following table illustrates the valid field values:
 | WEEK            | The number of the ISO 8601 week-numbering week of the year          | N/A                                         |
 | YEAR            | The year                                                            | Sames as TIMESTAMP                          |
 
-
-
-
-
-**2) **`source`
-
-
-
-
+**2)**`source`
 
 The `source` is a value of type `TIMESTAMP` or `INTERVAL`. If you pass a `DATE` value, the function will cast it to a `TIMESTAMP` value.
 
-
-
-
-
 The `EXTRACT()` function returns a double precision value.
-
-
-
-
 
 ## PostgreSQL EXTRACT function examples
 
-
-
-
-
 Let's explore some examples of using the `EXTRACT()` function.
-
-
-
-
 
 ### 1) Basic PostgreSQL EXTRACT() function examples
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the year from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(YEAR FROM TIMESTAMP '2016-12-31 13:30:15') y;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
   y
@@ -148,29 +76,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the quarter from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(QUARTER FROM TIMESTAMP '2016-12-31 13:30:15') q;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  q
@@ -179,29 +91,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the month from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(MONTH FROM TIMESTAMP '2016-12-31 13:30:15') m;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  m
@@ -210,29 +106,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the day from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(DAY FROM TIMESTAMP '2016-12-31 13:30:15') d;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  d
@@ -241,29 +121,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the century from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(CENTURY FROM TIMESTAMP '2016-12-31 13:30:15') century;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  century
@@ -272,29 +136,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the decade from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(DECADE FROM TIMESTAMP '2016-12-31 13:30:15') decade;
 ```
 
-
-
-
-
 The following is the result:
-
-
-
-
 
 ```
  decade
@@ -303,29 +151,13 @@ The following is the result:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the day of the week from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(DOW FROM TIMESTAMP '2016-12-31 13:30:15') day_of_week;
 ```
 
-
-
-
-
 The result is:
-
-
-
-
 
 ```
  day_of_week
@@ -334,29 +166,13 @@ The result is:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the day of the year from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(DOY FROM TIMESTAMP '2016-12-31 13:30:15') day_of_year;
 ```
 
-
-
-
-
 It returned 366:
-
-
-
-
 
 ```
  day_of_year
@@ -365,29 +181,13 @@ It returned 366:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the epoch from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(EPOCH FROM TIMESTAMP '2016-12-31 13:30:15') epoch;
 ```
 
-
-
-
-
 The result is:
-
-
-
-
 
 ```
        epoch
@@ -396,29 +196,13 @@ The result is:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the hour from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(HOUR FROM TIMESTAMP '2016-12-31 13:30:15') h;
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
  h
@@ -427,29 +211,13 @@ Result:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the minute from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(MINUTE FROM TIMESTAMP '2016-12-31 13:30:15') min;
 ```
 
-
-
-
-
 Here is the result:
-
-
-
-
 
 ```
  min
@@ -458,29 +226,13 @@ Here is the result:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the second from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(SECOND FROM TIMESTAMP '2016-12-31 13:30:15') sec;
 ```
 
-
-
-
-
 The result includes second and its fractional seconds:
-
-
-
-
 
 ```
     sec
@@ -489,29 +241,13 @@ The result includes second and its fractional seconds:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the weekday according to ISO 8601:
-
-
-
-
 
 ```
 SELECT EXTRACT(ISODOW FROM TIMESTAMP '2016-12-31 13:30:15') weekday_iso;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  weekday_iso
@@ -520,29 +256,13 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the millisecond from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(MILLISECONDS FROM TIMESTAMP '2016-12-31 13:30:15') ms;
 ```
 
-
-
-
-
 The result is 15 \* 1000 = 15000
-
-
-
-
 
 ```
     ms
@@ -551,29 +271,13 @@ The result is 15 \* 1000 = 15000
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the microseconds from a timestamp:
-
-
-
-
 
 ```
 SELECT EXTRACT(MICROSECONDS FROM TIMESTAMP '2016-12-31 13:30:15') microsec;
 ```
 
-
-
-
-
 The result is 15 \* 1000000 = 15000000
-
-
-
-
 
 ```
  microsec
@@ -582,21 +286,9 @@ The result is 15 \* 1000000 = 15000000
 (1 row)
 ```
 
-
-
-
-
 ### 2) Extracting from an interval examples
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the year from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -607,15 +299,7 @@ SELECT
   ) y;
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
  y
@@ -624,15 +308,7 @@ Result:
 (1 row)
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the quarter from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -643,29 +319,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 2
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the month from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -676,29 +336,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 5
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the day from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -709,29 +353,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 4
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the hour from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -742,29 +370,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 3
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the minute from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -775,29 +387,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 2
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the second from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -808,29 +404,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 1
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the millisecond from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -841,29 +421,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 1000
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the microsecond from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -874,29 +438,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 1000000
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the decade from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -907,29 +455,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 60
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the millennium from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -940,29 +472,13 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 1
 ```
 
-
-
-
-
 The following example uses the `EXTRACT()` function to extract the century from an interval:
-
-
-
-
 
 ```
 SELECT
@@ -973,30 +489,12 @@ SELECT
   );
 ```
 
-
-
-
-
 Result:
-
-
-
-
 
 ```
 19
 ```
 
-
-
-
-
 ## Summary
 
-
-
-
-
 - Use the PostgreSQL `EXTRACT()` function to extract a field from a date/time or interval value.
-
-

@@ -7,55 +7,31 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `PI()` function to return the pi value.
 
-
-
 ## Introduction to the PostgreSQL PI() function
-
-
 
 In PostgreSQL, the `PI()` function returns the value of pi denoted by the Greek letter (π), which is approximately equal to `3.14`
 
-
-
 Here's the syntax of the `PI()` function:
-
-
 
 ```
 PI()
 ```
 
-
-
 The `PI`() function takes no arguments and returns the constant value of `PI`, which is `3.141592653589793`.
-
-
 
 ## PostgreSQL PI() function examples
 
-
-
 Let's take some examples of using the `PI()` function examples.
-
-
 
 ### 1) Basic PI() function examples
 
-
-
 The following statement uses the `PI()` function to return the constant `PI` value:
-
-
 
 ```
 SELECT PI();
 ```
 
-
-
 Output:
-
-
 
 ```
         pi
@@ -63,21 +39,13 @@ Output:
  3.141592653589793
 ```
 
-
-
 The following example uses the `PI()` function to calculate the area of a circle with a radius of 10:
-
-
 
 ```
 SELECT PI() * 10 * 10 area;
 ```
 
-
-
 Output:
-
-
 
 ```
        area
@@ -86,15 +54,9 @@ Output:
 (1 row)
 ```
 
-
-
 ### 2) Using the PI() function with table data
 
-
-
 First, [create a table](/docs/postgresql/postgresql-create-table) called `circles` that stores the radiuses of circles:
-
-
 
 ```
 CREATE TABLE circles(
@@ -104,11 +66,7 @@ CREATE TABLE circles(
 );
 ```
 
-
-
 Second, [insert rows](/docs/postgresql/postgresql-insert) into the `circles` table:
-
-
 
 ```
 INSERT INTO circles(radius)
@@ -116,11 +74,7 @@ VALUES(10), (20), (25)
 RETURNING *;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | radius
@@ -131,22 +85,14 @@ Output:
 (3 rows)
 ```
 
-
-
 Third, calculate the areas of circles using the `PI()` function:
-
-
 
 ```
 SELECT id, radius, PI() * radius * radius area
 FROM circles;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | radius |        area
@@ -157,11 +103,7 @@ Output:
 (3 rows)
 ```
 
-
-
 To make the area more readable, you can use the `ROUND()` function:
-
-
 
 ```
 SELECT
@@ -172,11 +114,7 @@ FROM
   circles;
 ```
 
-
-
 Output:
-
-
 
 ```
  id | radius |  area
@@ -187,10 +125,6 @@ Output:
 (3 rows)
 ```
 
-
-
 ## Summary
-
-
 
 - Use the `PI()` function to return the pi value.

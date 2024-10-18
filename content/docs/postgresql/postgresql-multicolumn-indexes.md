@@ -8,162 +8,66 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL multicolumn indexes, which are indexes defined on two or more columns of a table.
 
-
-
-
-
 ## Introduction to PostgreSQL multicolumn indexes
-
-
-
-
 
 When you [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on two or more columns within a table, this type of index is called a multicolumn index.
 
-
-
-
-
 A multicolumn index is often referred to as a composite index, a combined index, or a concatenated index.
-
-
-
-
 
 A multicolumn index can have a maximum of 32 columns. The limit can be adjusted by modifying the `pg_config_manual.h` file when building PostgreSQL source code.
 
-
-
-
-
 Additionally, only B-tree, GIST, GIN, and BRIN index types support multicolumn indexes.
 
-
-
-
-
 The following shows the syntax for creating a multicolumn index:
-
-
-
-
 
 ```
 CREATE INDEX [IF NOT EXISTS] index_name
 ON table_name(column1, column2, ...);
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - First, specify the index name in the `CREATE INDEX` clause. Use the `IF NOT EXISTS` option to prevent an error from creating an index whose name already exists.
 -
 - Second, provide the table name along with the index columns in the parenthesis.
 
-
-
-
-
 When defining a multicolumn index, you should place the columns that are frequently used in the `WHERE` clause at the beginning of the column list, followed by the columns that are less frequently used in the `WHERE` clause.
 
-
-
-
-
 In the above syntax, the query optimizer will consider using the index in the following cases:
-
-
-
-
 
 ```
 WHERE column1 = v1 AND column2 = v2 AND column3 = v3;
 ```
 
-
-
-
-
 Or
-
-
-
-
 
 ```
 WHERE column1 = v1 AND column2 = v2;
 ```
 
-
-
-
-
 Or
-
-
-
-
 
 ```
 WHERE column1 = v1;
 ```
 
-
-
-
-
 However, it will not consider using the index in the following cases:
-
-
-
-
 
 ```
 WHERE column3 = v3;
 ```
 
-
-
-
-
 or
-
-
-
-
 
 ```
 WHERE column2 = v2 and column3 = v3;
 ```
 
-
-
-
-
 Note that you can also use the `WHERE` clause to define a partially multicolumn index.
-
-
-
-
 
 ## PostgreSQL Multicolumn Index example
 
-
-
-
-
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `people` using the following `CREATE TABLE` statement:
-
-
-
-
 
 ```
 CREATE TABLE people (
@@ -173,33 +77,13 @@ CREATE TABLE people (
 );
 ```
 
-
-
-
-
 The `people` table consists of three columns: id, first name, and last name.
-
-
-
-
 
 Second, execute the `INSERT` statement in the following file to load `10,000` rows into the `people` table:
 
-
-
-
-
 [Script to load 10000 names](https://www.postgresqltutorial.com/wp-content/uploads/2019/01/Script-to-load-10000-names.txt)
 
-
-
-
-
 Third, show the query plan that finds the person whose last name is `Adams`:
-
-
-
-
 
 ```
 EXPLAIN SELECT
@@ -212,15 +96,7 @@ WHERE
   last_name = 'Adams';
 ```
 
-
-
-
-
 Here is the output:
-
-
-
-
 
 ```
                        QUERY PLAN
@@ -230,36 +106,16 @@ Here is the output:
 (2 rows)
 ```
 
-
-
-
-
 The output indicates that PostgreSQL performs a sequential scan on the `people` table to find the matching rows because there is no index defined for the `last_name` column.
 
-
-
-
-
 Fourth, create an index that includes both the `last_name` and `first_name` columns. Assuming that searching for people by their last name is more common than by their first name, we define the index with the following column order:
-
-
-
-
 
 ```
 CREATE INDEX idx_people_names
 ON people (last_name, first_name);
 ```
 
-
-
-
-
 Fifth, show the plan of the query that searches for the person whose last name is `Adams`:
-
-
-
-
 
 ```
 EXPLAIN SELECT
@@ -272,15 +128,7 @@ WHERE
   last_name = 'Adams';
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
                                    QUERY PLAN
@@ -292,21 +140,9 @@ Output:
 (4 rows)
 ```
 
-
-
-
-
 The output indicates that the query optimizer uses the `idx_people_names` index.
 
-
-
-
-
 Sixth, find the person whose last name is `Adams` and the first name is `Lou`.
-
-
-
-
 
 ```
 EXPLAIN SELECT
@@ -320,15 +156,7 @@ WHERE
   AND first_name = 'Lou';
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
                                          QUERY PLAN
@@ -338,21 +166,9 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 The output indicates that the query optimizer will use the index because both columns in the `WHERE` clause (`first_name` and `last_name`) are included in the index.
 
-
-
-
-
 Seventh, search for the person whose first name is `Lou`:
-
-
-
-
 
 ```
 EXPLAIN SELECT
@@ -365,15 +181,7 @@ WHERE
   first_name = 'Lou';
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
                         QUERY PLAN
@@ -383,24 +191,10 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 The output indicates that PostgreSQL performs a sequential scan of the `people` table instead of using the index even though the `first_name` column is a part of the index.
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - Use a PostgreSQL multicolumn index to define an index involving two or more columns from a table.
 -
 - Place the columns that are frequently used in the `WHERE` clause at the beginning of the column list of the multicolumn index.
-
-

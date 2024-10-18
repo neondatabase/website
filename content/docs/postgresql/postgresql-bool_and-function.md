@@ -9,83 +9,31 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `BOOL_AND()` function to aggregate boolean values across rows within a group.
 
-
-
-
-
 ## Introduction to the PostgreSQL BOOL_AND() function
-
-
-
-
 
 The `BOOL_AND()` is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to aggregate boolean values across rows within a group.
 
-
-
-
-
 The following shows the syntax of the `BOOL_AND()` function:
-
-
-
-
 
 ```
 BOOL_AND(expression)
 ```
 
-
-
-
-
 In this syntax:
-
-
-
-
 
 - `expression`: This is a boolean expression to evaluate.
 
-
-
-
-
 The `BOOL_AND()` function returns true if all values in the group are true, or false otherwise.
-
-
-
-
 
 It's important to note that the `BOOL_AND()` function ignores `NULL`s within the group.
 
-
-
-
-
 ## PostgreSQL BOOL_AND() function examples
-
-
-
-
 
 Let's explore some examples of using the `BOOL_AND()` function.
 
-
-
-
-
 ### 1) Setting up sample tables
 
-
-
-
-
 First, [create tables](/docs/postgresql/postgresql-create-table) called `teams` and `members`:
-
-
-
-
 
 ```
 CREATE TABLE teams (
@@ -101,15 +49,7 @@ CREATE TABLE projects(
 );
 ```
 
-
-
-
-
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the tables:
-
-
-
-
 
 ```
 INSERT INTO teams (team_name)
@@ -130,15 +70,7 @@ VALUES
 RETURNING *;
 ```
 
-
-
-
-
 The `teams` table:
-
-
-
-
 
 ```
  team_id | team_name
@@ -149,15 +81,7 @@ The `teams` table:
 (3 rows)
 ```
 
-
-
-
-
 The `members` table:
-
-
-
-
 
 ```
  project_id |      name      | active | team_id
@@ -171,21 +95,9 @@ The `members` table:
 (6 rows)
 ```
 
-
-
-
-
 ### 2) Basic BOOL_AND() function example
 
-
-
-
-
 The following example uses the `BOOL_AND()` function to test if all projects are active in the `projects` table:
-
-
-
-
 
 ```
 SELECT
@@ -194,15 +106,7 @@ FROM
   projects;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  bool_and
@@ -211,27 +115,11 @@ Output:
 (1 row)
 ```
 
-
-
-
-
 The `BOOL_AND()` function returns true indicating that there are inactive projects in the `projects` table.
-
-
-
-
 
 ### 2) Using BOOL_AND() function with GROUP BY clause
 
-
-
-
-
 The following example uses the `BOOL_AND()` function with the `GROUP BY` clause to check if there are active projects in each team:
-
-
-
-
 
 ```
 SELECT
@@ -244,15 +132,7 @@ GROUP BY
   team_name;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  team_name | active_projects
@@ -263,27 +143,11 @@ Output:
 (3 rows)
 ```
 
-
-
-
-
 The output indicates that teams B and C have projects that are active (or NULL) whereas team C has inactive projects.
-
-
-
-
 
 ### 3) Using BOOL_AND() function in HAVING clause
 
-
-
-
-
 The following example uses the `BOOL_AND()` function with the `GROUP BY` and [HAVING](/docs/postgresql/postgresql-having) clauses to retrieve teams that have active projects:
-
-
-
-
 
 ```
 SELECT
@@ -298,15 +162,7 @@ HAVING
   BOOL_AND(active) = true;
 ```
 
-
-
-
-
 Output:
-
-
-
-
 
 ```
  team_name | active_projects
@@ -316,18 +172,8 @@ Output:
 (2 rows)
 ```
 
-
-
-
-
 ## Summary
-
-
-
-
 
 - Use the `BOOL_AND()` function to aggregate boolean values across rows, which returns true if all values are true or false otherwise.
 -
 - The `BOOL_AND()` function ignores NULLs in the group.
-
-
