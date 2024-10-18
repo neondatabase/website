@@ -5,6 +5,6 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:shortcode -->
 
-<!-- /wp:shortcode -->
+
+

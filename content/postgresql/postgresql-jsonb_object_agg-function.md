@@ -5,93 +5,93 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to the PostgreSQL jsonb_object_agg() function
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The PostgreSQL `jsonb_object_agg()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to collect key/value pairs into a [JSON](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/) object.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The `jsonb_object_agg()` can be useful when you want to aggregate data from multiple rows into a single JSON object or construct complex JSON output.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Here's the syntax of the `jsonb_object_agg()` function:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 jsonb_object_agg(key, value)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this syntax:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - `key` represents the key for the JSON object. The key must not be null.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `value` represents the value for the corresponding key.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 The `jsonb_object_agg()` returns a JSON object that consists of key/value pairs.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL jsonb_object_agg() function examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 Let's explore some examples of using the PostgreSQL `jsonb_object_agg()` function.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Basic PostgreSQL jsonb_object_agg() function example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create a table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `departments`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TABLE departments(
@@ -100,15 +100,15 @@ CREATE TABLE departments(
 );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, [insert some rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/) into the `departments` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO departments(department_name)
@@ -118,15 +118,15 @@ VALUES
 RETURNING *;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Third, use the `jsonb_object_agg()` function to create an object whose key is the department name and value is the id:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -135,15 +135,15 @@ FROM
   departments;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
          departments
@@ -152,21 +152,21 @@ Output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Using the jsonb_object_agg() function with GROUP BY clause
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `employees`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TABLE employees (
@@ -179,15 +179,15 @@ CREATE TABLE employees (
 );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, [insert some rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/) into the `employees` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO employees (name, salary, department_id)
@@ -200,15 +200,15 @@ VALUES
 RETURNING *;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  id |     name      |  salary  | department_id
@@ -221,15 +221,15 @@ Output:
 (5 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Third, use the `jsonb_object_agg()` function to get the department name and a JSON object that contains employee details of the department including employee name and salary:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -244,15 +244,15 @@ GROUP BY
   department_name;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  department_name |       employee_details
@@ -269,27 +269,27 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Note that we use the `jsonb_pretty()` function to format JSON.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Alex Miller has not had a salary yet so his salary is null. The `jsonb_object_agg()` also collects the null into the JSON object.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 To skip nulls, you can use the `jsonb_object_agg_strict()` function as follows:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -304,15 +304,15 @@ GROUP BY
   department_name;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  department_name |       employee_details
@@ -328,28 +328,28 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` function except that it skips null values.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

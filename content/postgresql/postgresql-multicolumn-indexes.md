@@ -5,170 +5,170 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL multicolumn indexes, which are indexes defined on two or more columns of a table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to PostgreSQL multicolumn indexes
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 When you [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on two or more columns within a table, this type of index is called a multicolumn index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"note"} -->
+
+
 
 A multicolumn index is often referred to as a composite index, a combined index, or a concatenated index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 A multicolumn index can have a maximum of 32 columns. The limit can be adjusted by modifying the `pg_config_manual.h` file when building PostgreSQL source code.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Additionally, only B-tree, GIST, GIN, and BRIN index types support multicolumn indexes.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following shows the syntax for creating a multicolumn index:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 CREATE INDEX [IF NOT EXISTS] index_name
 ON table_name(column1, column2, ...);
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this syntax:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - First, specify the index name in the `CREATE INDEX` clause. Use the `IF NOT EXISTS` option to prevent an error from creating an index whose name already exists.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Second, provide the table name along with the index columns in the parenthesis.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 When defining a multicolumn index, you should place the columns that are frequently used in the `WHERE` clause at the beginning of the column list, followed by the columns that are less frequently used in the `WHERE` clause.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 In the above syntax, the query optimizer will consider using the index in the following cases:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 WHERE column1 = v1 AND column2 = v2 AND column3 = v3;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Or
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 WHERE column1 = v1 AND column2 = v2;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Or
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 WHERE column1 = v1;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 However, it will not consider using the index in the following cases:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 WHERE column3 = v3;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 or
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 WHERE column2 = v2 and column3 = v3;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph {"className":"note"} -->
+
+
 
 Note that you can also use the `WHERE` clause to define a partially multicolumn index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL Multicolumn Index example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `people` using the following `CREATE TABLE` statement:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 CREATE TABLE people (
@@ -178,33 +178,33 @@ CREATE TABLE people (
 );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The `people` table consists of three columns: id, first name, and last name.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, execute the `INSERT` statement in the following file to load `10,000` rows into the `people` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 [Script to load 10000 names](https://www.postgresqltutorial.com/wp-content/uploads/2019/01/Script-to-load-10000-names.txt)
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Third, show the query plan that finds the person whose last name is `Adams`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 EXPLAIN SELECT
@@ -217,15 +217,15 @@ WHERE
   last_name = 'Adams';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Here is the output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
                        QUERY PLAN
@@ -235,36 +235,36 @@ Here is the output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output indicates that PostgreSQL performs a sequential scan on the `people` table to find the matching rows because there is no index defined for the `last_name` column.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Fourth, create an index that includes both the `last_name` and `first_name` columns. Assuming that searching for people by their last name is more common than by their first name, we define the index with the following column order:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 CREATE INDEX idx_people_names
 ON people (last_name, first_name);
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Fifth, show the plan of the query that searches for the person whose last name is `Adams`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 EXPLAIN SELECT
@@ -277,15 +277,15 @@ WHERE
   last_name = 'Adams';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
                                    QUERY PLAN
@@ -297,21 +297,21 @@ Output:
 (4 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output indicates that the query optimizer uses the `idx_people_names` index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Sixth, find the person whose last name is `Adams` and the first name is `Lou`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 EXPLAIN SELECT
@@ -325,15 +325,15 @@ WHERE
   AND first_name = 'Lou';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
                                          QUERY PLAN
@@ -343,21 +343,21 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output indicates that the query optimizer will use the index because both columns in the `WHERE` clause (`first_name` and `last_name`) are included in the index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Seventh, search for the person whose first name is `Lou`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 EXPLAIN SELECT
@@ -370,15 +370,15 @@ WHERE
   first_name = 'Lou';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
                         QUERY PLAN
@@ -388,28 +388,28 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output indicates that PostgreSQL performs a sequential scan of the `people` table instead of using the index even though the `first_name` column is a part of the index.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use a PostgreSQL multicolumn index to define an index involving two or more columns from a table.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Place the columns that are frequently used in the `WHERE` clause at the beginning of the column list of the multicolumn index.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

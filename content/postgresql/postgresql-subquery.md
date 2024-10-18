@@ -5,37 +5,37 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL subquery** that allows you to construct complex queries.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to PostgreSQL subquery
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 A subquery is a [query](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/) nested within another query. A subquery is also known as an inner query or nested query.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 A subquery can be useful for retrieving data that will be used by the main query as a condition for further data selection.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The basic syntax of the subquery is as follows:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -53,15 +53,15 @@ WHERE
   );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this syntax, the subquery is enclosed within parentheses and is executed first:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -72,39 +72,39 @@ WHERE
   condition
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The main query will use the result of the subquery to filter data in the `WHERE` clause.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL subquery examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 Let's take some examples of using subqueries.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Basic PostgreSQL subquery example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, retrieve the country id of the `United States` from the `country` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -115,15 +115,15 @@ where
   country = 'United States';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 It returns the following output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  country_id
@@ -132,15 +132,15 @@ It returns the following output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, retrieve cities from the `city` table where `country_id` is `103`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -153,15 +153,15 @@ ORDER BY
   city;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
          city
@@ -177,15 +177,15 @@ Output:
 ...
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Instead of executing two queries, you can combine them into one, making the first query as a subquery and the second query as the main query as follows:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -205,15 +205,15 @@ ORDER BY
   city;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this query, the following is the subquery:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -224,33 +224,33 @@ WHERE
   country = 'United States';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 PostgreSQL executes the subquery first to get the country id and uses it for the `WHERE` clause to retrieve the cities.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Using a subquery with the IN operator
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 A subquery can return zero or more rows. If the query returns more than one row, you can use it with the [IN ](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/ "PostgreSQL IN")operator. For example:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 First, retrieve `film_id` of the film with the category `Action`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -262,15 +262,15 @@ WHERE
   name = 'Action';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  film_id
@@ -283,15 +283,15 @@ Output:
 ...
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, use the query above as a subquery to retrieve the film title from the `film` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -313,15 +313,15 @@ ORDER BY
   film_id;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 film_id |          title
@@ -334,22 +334,22 @@ film_id |          title
 ...
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - A subquery is a query nested inside another query
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - A subquery is also known as an inner query or nested query.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

@@ -5,75 +5,75 @@ redirectFrom:
 ogImage: ./img/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 The PostgreSQL `TO_CHAR()` function converts a [timestamp](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric ](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/).
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Syntax
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following illustrates the syntax of the PostgreSQL `TO_CHAR()` function:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 TO_CHAR(expression, format)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Arguments
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The PostgreSQL `TO_CHAR()` function requires two arguments:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) expression
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The expression can be a timestamp, an interval, an integer, a double-precision, or a numeric value that is converted to a string according to a specific format.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) format
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The format for the result string.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following table illustrates the valid numeric format strings:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:table -->
+
+
 
 | Format     | Description                                                              |
 | ---------- | ------------------------------------------------------------------------ |
@@ -93,15 +93,15 @@ The following table illustrates the valid numeric format strings:
 | RN         | Roman numeral that ranges from 1 to 3999                                 |
 | TH or th   | Upper case or lower case ordinal number suffix                           |
 
-<!-- /wp:table -->
 
-<!-- wp:paragraph -->
+
+
 
 The following table shows the valid timestamp format strings:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:table -->
+
+
 
 |                          |                                                                                                  |
 | ------------------------ | ------------------------------------------------------------------------------------------------ |
@@ -153,51 +153,51 @@ The following table shows the valid timestamp format strings:
 | AM, am, PM or pm         | Meridiem indicator (without periods)                                                             |
 | A.M., a.m., P.M. or p.m. | Meridiem indicator (with periods)                                                                |
 
-<!-- /wp:table -->
 
-<!-- wp:heading -->
+
+
 
 ## Return value
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The `TO_CHAR()` function returns a string in `TEXT` data type that represents the first argument formatted according to the specified format.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 We will use the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":443} -->
+
+
 
 ![payment table](./img/wp-content-uploads-2013-05-payment-table.png)
 
-<!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Converting a timestamp to a string example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement uses the `TO_CHAR()` function to format the payment date that consists of hours, minutes, and seconds:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -212,33 +212,33 @@ ORDER BY
     payment_date;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Here is the result:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":3128} -->
+
+
 
 ![PostgreSQL TO_CHAR Function - format timestamp example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-timestamp-example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Converting an entire timestamp value into a different format example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example converts the payment date into a different format:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -254,33 +254,33 @@ ORDER BY
     payment_date;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output is:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":3127} -->
+
+
 
 ![](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-format-payment-date-example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 3) Converting a timestamp literal to a string example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement converts a timestamp literal to a string:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -290,35 +290,35 @@ SELECT
     );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The result is:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 22:30:59
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 4) Adding currency symbol to the amount example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example adds US dollar to the paid amounts:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -334,33 +334,33 @@ ORDER BY
     payment_date;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The following picture illustrates the output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":3125} -->
+
+
 
 ![PostgreSQL TO_CHAR Function - add currency symbol example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-add-currency-symbol-example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 5) Converting an integer to a string example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example converts an integer to a string:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -370,35 +370,35 @@ SELECT
     );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Result
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
   2,017
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 6) Putting it all together example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example converts a numeric and timestamp to a string:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 SELECT
@@ -425,30 +425,30 @@ ORDER BY
     rental_id;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The result is
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":3126} -->
+
+
 
 ![PostgreSQL TO_CHAR Function - example](./img/wp-content-uploads-2017-08-PostgreSQL-TO_CHAR-Function-example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:paragraph -->
+
+
 
 Summary
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the PostgreSQL `TO_CHAR()` function to convert a timestamp or a numeric value to a string.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

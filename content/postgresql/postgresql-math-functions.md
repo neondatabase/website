@@ -5,14 +5,14 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 This page provides the most commonly used PostgreSQL Math functions that help you perform various math operations quickly and effectively.  
 Type a function name to search...
 
-<!-- /wp:paragraph -->
 
-<!-- wp:table {"className":"responsive functions"} -->
+
+
 
 | Function                                                                                              | Description                                                                                    | Example                | Result  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------- | ------- |
@@ -44,4 +44,4 @@ Type a function name to search...
 | [WIDTH_BUCKET](https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/) | Assign a numeric value to a bucket in an equiwidth histogram.                                  | WIDTH_BUCKET(1,1,10,5) | 1       |
 | [RANDOM](https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-random/)             | Generate a random number between 0 and 1                                                       | RANDOM()               | 0.9684  |
 
-<!-- /wp:table -->
+

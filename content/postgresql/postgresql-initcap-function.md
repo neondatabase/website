@@ -5,101 +5,101 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INITCAP()` function to convert a string to a proper case.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to PostgreSQL INITCAP() function
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The `INITCAP()` function converts the first letter of each word in a string to uppercase and the rest to lowercase. In other words, the `INITCAP()` function converts a string to a proper case.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Technically, words are defined as sequences of alphanumeric characters separated by non-alphanumeric characters.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Here's the basic syntax of the `INITCAP()` function:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INITCAP(text)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this syntax, the `text` is a string you want to convert to a proper case. Its type can be `CHAR`, `VARCHAR`, or `TEXT`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The `INITCAP()` returns the text in a proper case. It returns `NULL` if the `text` is `NULL`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"note"} -->
+
+
 
 To convert a string to lowercase, you use the `LOWER()` function. To convert a string to uppercase, you use the `UPPER()` function.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL INITCAP() function examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 Let's explore some examples of using the `INITCAP()` function.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Basic PostgreSQL INITCAP() example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example uses the INITCAP() to convert the string 'hello john' to the proper case:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT INITCAP('hello john');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
   initcap
@@ -108,27 +108,27 @@ Output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Using PostgreSQL INITCAP() with table data example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 In practice, you often use the `INITCAP()` function to format blog titles, author names, and so on. For example:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `blog_posts` and insert some rows into it:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TABLE blog_posts(
@@ -146,15 +146,15 @@ VALUES
 RETURNING *;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  id |                title
@@ -167,15 +167,15 @@ Output:
 (5 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, use the `INITCAP()` function to [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/) the titles in the `blog_posts` table to the proper case:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 UPDATE blog_posts
@@ -183,15 +183,15 @@ SET title = INITCAP(title)
 RETURNING *;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  id |                title
@@ -207,18 +207,18 @@ Output:
 UPDATE 5
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the PostgreSQL `INITCAP()` function to convert a text to the proper case.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

@@ -5,55 +5,55 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REAL` data type to store single-precision floating-point numbers in the database.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to the PostgreSQL REAL data type
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The `REAL` data type allows you to store single-precision floating-point numbers in the database.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 A value of the real type takes 4 bytes of storage space. Its valid range is from `-3.40282347 × 1038` and `3.40282347 × 1038`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Typically, you use the `REAL` data type to store floating-point numbers with relatively large ranges and precision is not critical, or when you are concerned about the storage space.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 However, you can use the [double precision](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type/) data type if you need higher precision.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL REAL data type example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create a table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `weathers` to store wind speed (meter per second) and temperature (celsius) data:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TABLE weathers(
@@ -65,15 +65,15 @@ CREATE TABLE weathers(
 );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, [insert rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/) into the `weathers` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO weathers (location, wind_speed_mps, temperature_celsius, recorded_at)
@@ -90,15 +90,15 @@ VALUES
     ('New York', 5.3, 15.9, '2024-04-19 18:00:00');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Third, calculate the [average](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/) wind speed and temperature in `New York` on `April 19, 2024`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -111,15 +111,15 @@ WHERE
   AND DATE(recorded_at) = '2024-04-19';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
     wind_speed     | temperature_celsius
@@ -128,18 +128,18 @@ Output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the PostgreSQL `REAL` data type to store single-precision floating-point numbers in the database.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

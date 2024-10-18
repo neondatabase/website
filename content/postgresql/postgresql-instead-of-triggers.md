@@ -5,43 +5,43 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn about PostgreSQL `INSTEAD OF` a trigger to insert, update, or delete data of base tables through a view.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to PostgreSQL INSTEAD OF triggers
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 In PostgreSQL, `INSTEAD OF` triggers are a special type of [triggers](https://www.postgresqltutorial.com/postgresql-triggers/) that **intercept** insert, update, and delete operations on views.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 It means that when you execute an `INSERT`, `UPDATE`, or `DELETE` statement on a view, PostgreSQL does not directly execute the statement. Instead, it executes the statements defined in the `INSTEAD OF` trigger.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 To create an `INSTEAD OF` trigger, you follow these steps:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [define a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when a trigger is fired:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 CREATE OR REPLACE FUNCTION fn_trigger()
@@ -52,21 +52,21 @@ $$
 LANGUAGE plpgsql;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Inside the function, you can customize the behavior for each operation including `INSERT`, `UPDATE`, and `DELETE`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, create an `INSTEAD OF` trigger and bind the function to it:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 CREATE TRIGGER trigger_name
@@ -76,33 +76,33 @@ FOR EACH ROW
 EXECUTE FUNCTION fn_trigger;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL INSTEAD OF trigger example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 Let's take an example of creating an `INSTEAD OF` trigger.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Setting up a view with an INSTEAD OF trigger
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, [create two tables](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) `employees` and `salaries`:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TABLE employees (
@@ -119,15 +119,15 @@ CREATE TABLE salaries (
 );
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Next, [insert rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/) into the `employees` and `salaries` tables:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO employees (name)
@@ -143,15 +143,15 @@ VALUES
 RETURNING *;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Then, [create a view](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/) based on the `employees` and `salaries` tables:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 CREATE VIEW employee_salaries
@@ -161,15 +161,15 @@ FROM employees e
 JOIN salaries s ON e.employee_id = s.employee_id;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 CREATE OR REPLACE FUNCTION update_employee_salaries()
@@ -202,33 +202,33 @@ $$
 LANGUAGE plpgsql;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 If you execute an insert against the `employee_salaries` view, the `INSTEAD OF` trigger will insert a new row into the employees table first, then insert a new row into the salaries table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 When you update an employee's salary by id, the `INSTEAD OF` trigger will update the data in the `salaries` table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 If you delete a row from the `employee_salaries` view, the `INSTEAD OF` trigger will delete a row from the `employees` table. The `DELETE CASCADE` will automatically delete a corresponding row from the salaries table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Finally, create an `INSTEAD OF` trigger that will be fired for the `INSERT`, `UPDATE`, or `DELETE` on the `employee_salaries` view:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 CREATE TRIGGER instead_of_employee_salaries
@@ -238,42 +238,42 @@ FOR EACH ROW
 EXECUTE FUNCTION update_employee_salaries();
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Inserting data into tables via the view
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, insert a new employee with a salary via the view:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO employee_salaries (name, salary, effective_date)
 VALUES ('Charlie', 75000.00, '2024-03-01');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 PostgreSQL does not execute this statement. Instead, it executes the statement defined in the `INSTEAD` `OF` trigger. More specifically, it executes two statements:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 1. Insert a new row into the `employees` table and get the employee id:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO employees(name)
@@ -281,44 +281,44 @@ VALUES (NEW.name)
 RETURNING employee_id INTO p_employee_id;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 2. Insert a new row into the salaries table using the employee id, salary, and effective date:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO salaries(employee_id, effective_date, salary)
 VALUES (p_employee_id, NEW.effective_date, NEW.salary);
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, verify the inserts by retrieving data from the `employees` and `salaries` tables:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM employees;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  employee_id |  name
@@ -329,23 +329,23 @@ Output:
 (3 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM salaries;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  employee_id | effective_date |  salary
@@ -356,21 +356,21 @@ Output:
 (3 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Updating data into tables via the view
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, update the salary of the employee id 3 via the `employee_salaries` view:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 UPDATE employee_salaries
@@ -378,29 +378,29 @@ SET salary = 95000
 WHERE employee_id = 3;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, retrieve data from the `salaries` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM salaries;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  employee_id | effective_date |  salary
@@ -411,50 +411,50 @@ Output:
 (3 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 3) Deleting data via views
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 First, delete the employee with id 3 via the `employee_salaries` view:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 DELETE FROM employee_salaries
 WHERE employee_id = 3;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Second, retrieve data from the `employees` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM employees;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  employee_id | effective_date |  salary
@@ -464,29 +464,29 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Because of the `DELETE` `CASCADE`, PostgreSQL also deletes the corresponding row in the `salaries` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM salaries;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
  employee_id | effective_date |  salary
@@ -496,18 +496,18 @@ Output:
 (2 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the `INSTEAD OF` trigger to customize the behavior of `INSERT`, `UPDATE`, and `DELETE` operations on a database view.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

@@ -5,79 +5,79 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to list indexes from a PostgreSQL database by using either `pg_indexes` view or `psql` command.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 PostgreSQL does not provide a command like `SHOW INDEXES` to list the index information of a table or database.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 However, it does provide you with access to the `pg_indexes` view so that you can query the index information.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 If you use the `psql` program to interact with the PostgreSQL database, you can use the `\d` command to view the index information for a table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL List Indexes using pg_indexes View
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The `pg_indexes` view allows you to access useful information on each index in the PostgreSQL database.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The `pg_indexes` view consists of five columns:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - `schemaname`: stores the name of the schema that contains tables and indexes.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `tablename`: indicates the name of the table to which the index belongs.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `indexname`: represents the name of the index.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `tablespace`: identifies the name of the tablespace that contains indexes.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `indexdef`: contains the index definition command in the form of `CREATE INDEX` statement.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement lists all indexes of the schema `public` in the current database:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -93,15 +93,15 @@ ORDER BY
     indexname;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
      tablename      |                      indexname                      |                                                                   indexdef
@@ -115,15 +115,15 @@ Output:
 ...
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 To show all the indexes of a table, you use the following statement:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT
@@ -135,15 +135,15 @@ WHERE
   tablename = 'table_name';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 For example, to list all the indexes for the `customer` table, you use the following statement:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 SELECT
@@ -155,15 +155,15 @@ WHERE
     tablename = 'customer';
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Here is the output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
      indexname     |                                    indexdef
@@ -175,15 +175,15 @@ Here is the output:
 (4 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 If you want to get a list of indexes for tables whose names start with the letter `c`, you can use the following query:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 SELECT
@@ -199,15 +199,15 @@ ORDER BY
     indexname;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The following shows the output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  tablename  |     indexname     |                                      indexdef
@@ -224,55 +224,55 @@ The following shows the output:
 (9 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL List Indexes using psql command
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 If you use `psql` to connect to a PostgreSQL database and want to list all indexes of a table, you can use the `\d` [psql command](https://www.postgresqltutorial.com/postgresql-administration/psql-commands/) as follows:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"plaintext"} -->
+
+
 
 ```
 \d table_name
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The command will return all information about the table including the table's structure, indexes, constraints, and [triggers](https://www.postgresqltutorial.com/postgresql-triggers/).
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 For example, the following statement returns detailed information about the `customer` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"plaintext"} -->
+
+
 
 ```
 \d customer
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output is:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"plaintext"} -->
+
+
 
 ```
                                              Table "public.customer"
@@ -302,28 +302,28 @@ Triggers:
     last_updated BEFORE UPDATE ON customer FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output shows the index of the table under the **Indexes** section.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Query data from the `pg_indexes` view to retrieve the index information.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Use the `\d table_name` command to display the table information along with indexes.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

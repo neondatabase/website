@@ -5,101 +5,101 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL record types, which enables you to define variables that can hold a single row from a result set.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to PL/pgSQL record types
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 PostgreSQL provides a "type" called the `record` that is similar to the [row-type](https://www.postgresqltutorial.com/plpgsql-row-types/).
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 It's important to note that a record isn't a true type but rather a placeholder. Furthermore, the structure of a record variable will change when you reassign it to another value.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 To declare a `record` variable, you simply use a variable name followed by the `record` keyword like this:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 variable_name record;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 A `record` variable is similar to a [row-type variable](https://www.postgresqltutorial.com/plpgsql-row-types/), which can hold only one row of a result set.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Unlike a row-type variable, a `record` variable lacks a predefined structure. Instead, the structure of a `record` variable is determined when an actual row is assigned to it via the `select` or `for` statement.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 To access a field in the record, you use the dot notation (`.`) syntax like this:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 record_variable.field_name;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 If you attempt to access a field in a record variable before it's assigned, you'll encounter an error.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## PL/pgSQL record examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 Let's take some examples of using the record variables.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 1) Using record with the select into statement
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example illustrates how to use the record variable with the `select into` statement:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 do
@@ -120,43 +120,43 @@ $$
 language plpgsql;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 How it works.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - First, declare a record variable called `rec` in the declaration section.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Second use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Third, print out the information of the film via the record variable.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Using record variables in the for loop statement
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following shows how to use a record variable in a `for loop` statement:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"pgsql"} -->
+
+
 
 ```
 do
@@ -175,15 +175,15 @@ end;
 $$;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Here is the partial output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"shell"} -->
+
+
 
 ```
 NOTICE:  Hall Cassidy (51)
@@ -194,50 +194,50 @@ NOTICE:  English Bulworth (51)
 ...
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph {"className":"note"} -->
+
+
 
 Note that you will learn more about the `for loop` statement in the [for-loop tutorial](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 How it works:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - First, declare a variable named r with the type `record`.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Third, show the contents of the fields of the record variable by using the dot notation (`rec.title` and `rec.length`)
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - A record is a placeholder that can hold a single row of a result set.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - A record does not have a predefined structure like a row variable. Its structure is determined when you assign a row to it.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

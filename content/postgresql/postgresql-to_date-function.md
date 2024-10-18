@@ -5,83 +5,83 @@ redirectFrom:
 ogImage: ../../../defaultHero.jpg
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_DATE()` function to convert a string to a date.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Introduction to the PostgreSQL TO_DATE() function
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The `TO_DATE()` function converts a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/) literal to a [date](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-date/) value.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 Here's the basic syntax of the `TO_DATE()` function:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 TO_DATE(text,format);
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The `TO_DATE()` function accepts two string arguments.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - `text`: is an input string that you want to convert to a date.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `format`: specifies the format of the input string.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 The `TO_DATE()` function returns a `DATE` value.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 See the following example:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT TO_DATE('20170103','YYYYMMDD');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
   TO_DATE
@@ -89,43 +89,43 @@ Output:
  2017-01-03
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this example, the string `20170103` is converted into a date based on the input format `YYYYMMDD`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - `YYYY`: year in four digits format.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `MM`: month in two digits format.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - `DD`: day in two digits format.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 As a result, the function returns `January 3rd 2017`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following table illustrates the template patterns for formatting date values:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:table -->
+
+
 
 |                         |                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------ |
@@ -167,35 +167,35 @@ The following table illustrates the template patterns for formatting date values
 | RM                      | Month in uppercase Roman numerals (I-XII; I=January)                                             |
 | rm                      | Month in lowercase Roman numerals (i-xii; i=January)                                             |
 
-<!-- /wp:table -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL TO_DATE function examples
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement converts the string `10 Feb 2017` into a date value:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT TO_DATE('10 Feb 2017', 'DD Mon YYYY');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The output is:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
   TO_DATE
@@ -204,29 +204,29 @@ The output is:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Suppose you want to convert the string `2017 Feb 10` to a date value, you can apply the pattern `YYYY Mon DD` as follows:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT TO_DATE('2017 Feb 20','YYYY Mon DD');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The function returns the following output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
   TO_DATE
@@ -235,53 +235,53 @@ The function returns the following output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## PostgreSQL TO_DATE() function gotchas
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 If you pass an invalid date string, the `TO_DATE()` function will try to convert it to a valid date and issue an error if it cannot. For example:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT TO_DATE('2017/02/30', 'YYYY/MM/DD');
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 PostgreSQL issued the following error:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 ERROR:  date/time field value out of range: "2017/02/30"
 LINE 1: SELECT '2017/02/30'::date;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the PostgreSQL `TO_DATE()` function to convert a string literal to a date value.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

@@ -144,7 +144,7 @@ In this case, the upsert operation can be handy to handle the following situatio
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
 
-<!-- wp:code {"language":"sql"} -->
+
 
 ```
 INSERT INTO inventory (id, name, price, quantity)
@@ -155,62 +155,62 @@ DO UPDATE SET
   quantity = EXCLUDED.quantity;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 INSERT 0 1
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this example, we attempt to insert a new row into the `inventory` table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 However, the `inventory` table already has a row with id 1, therefore, a conflict occurs.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The `DO UPDATE` changes the price and quantity of the product to the new values being inserted. The `EXCLUDED` allows you to access the new values.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement verifies the update:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM inventory
 WHERE id = 1;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  id | name | price | quantity
@@ -219,21 +219,21 @@ Output:
 (1 row)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading {"level":3} -->
+
+
 
 ### 2) Inserting data example
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 INSERT INTO inventory (id, name, price, quantity)
@@ -244,50 +244,50 @@ DO UPDATE SET
   quantity = EXCLUDED.quantity;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 INSERT 0 1
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this case, the statement [inserts a new row](https://www.postgresqltutorial.com/postgresql-python/insert/) into the `inventory` table because the product id 4 does not exist in the `inventory` table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following statement verifies the insert:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 SELECT * FROM inventory
 ORDER BY id;
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Output:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
  id | name | price | quantity
@@ -299,22 +299,22 @@ Output:
 (4 rows)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:heading -->
+
+
 
 ## Summary
 
-<!-- /wp:heading -->
 
-<!-- wp:list -->
 
-- <!-- wp:list-item -->
+
+
+- 
 - Use the PostgreSQL upsert to update data if it already exists or insert the data if it does not.
-- <!-- /wp:list-item -->
+- 
 -
-- <!-- wp:list-item -->
+- 
 - Use the `INSERT...ON CONFLICT` statement for upsert.
-- <!-- /wp:list-item -->
+- 
 
-<!-- /wp:list -->
+

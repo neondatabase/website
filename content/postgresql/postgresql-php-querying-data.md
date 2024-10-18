@@ -5,45 +5,45 @@ redirectFrom:
 ogImage: ./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png
 tableOfContents: true
 ---
-<!-- wp:paragraph -->
+
 
 **Summary**: in this tutorial, you will learn to query data from the PostgreSQL database in PHP using PDO.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:heading -->
+
+
 
 ## Querying all rows in a table
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 To query all rows from a table in the PostgreSQL database, you use the following steps:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list {"ordered":true} -->
+
+
 
 1. First, [connect to the PostgreSQL database](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new PDO object.
 2. Second, call the `query()` method of the PDO object. The query() method accepts a [SELECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/) statement as the argument. The query method returns a `PDOStatement` object.
 3. Third, fetch the next rows from the result by calling the fetch() method of the PDOstatement object. The fetch_style argument of the `fetch()` method controls how the result returned. For example, the `PDO::FETCH_ASSOC` instructs the `fetch()` method to return the result set as an array indexed by column name.
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 We will use the `stocks` table created in the [creating table tutorial](https://www.postgresqltutorial.com/postgresql-php/create-tables/) for the demonstration. Let's create a new class `StockDB` for storing all the methods that select data from the `stocks` table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following `all()` method selects all rows in the `stocks` table.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"php"} -->
+
+
 
 ```
    /**
@@ -66,21 +66,21 @@ The following `all()` method selects all rows in the `stocks` table.
     }
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 To test the `all()` method, we use the following code in the `index.php` file.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":2036} -->
+
+
 
 ![PostgreSQL PHP Query Example](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-Example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:code {"language":"sql"} -->
+
+
 
 ```
 <?php
@@ -132,39 +132,39 @@ try {
 </html>
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 The first part of the index.php is to connect to the PostgreSQL database and get all rows in the stocks table. The second part shows the data in HTML format.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+
+
 
 The following screenshot illustrates the output of the index.php file.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:image {"id":2037} -->
+
+
 
 ![PostgreSQL PHP Query all rows example](./img/wp-content-uploads-2016-06-PostgreSQL-PHP-Query-all-rows-example.png)
 
-<!-- /wp:image -->
 
-<!-- wp:heading -->
+
+
 
 ## Querying a specific row in a table
 
-<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
+
+
 
 To query a specific row in a table, you use the following steps:
 
-<!-- /wp:paragraph -->
 
-<!-- wp:list {"ordered":true} -->
+
+
 
 1. First, connect to the PostgreSQL database by creating a new PDO object.
 2. Next, prepare the SELECT statement for execution by calling the `prepare()` method of the PDO object. The `prepare()` method returns an instance of the PDOStatement class.
@@ -172,15 +172,15 @@ To query a specific row in a table, you use the following steps:
 4. After that, execute the SELECT statement by calling the `execute()` method of the PDOStatement object.
 5. Finally, fetch the next row in the result using the `fetch()` method. If the SELECT statement returns 1 row, you can use the fetchObject() method to return an object.
 
-<!-- /wp:list -->
 
-<!-- wp:paragraph -->
+
+
 
 The following `findByPK()` method selects a row in the stocks table based on a specified id and returns a Stock object.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"php"} -->
+
+
 
 ```
    /**
@@ -204,15 +204,15 @@ The following `findByPK()` method selects a row in the stocks table based on a s
     }
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 To test the `findByPK()` method, we create a new PHP file named `stock.php`.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code {"language":"php"} -->
+
+
 
 ```
 <?php
@@ -236,15 +236,15 @@ try {
 }
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 Run the stock.php file, we get the following result.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:code -->
+
+
 
 ```
 object(stdClass)[6]
@@ -253,10 +253,10 @@ object(stdClass)[6]
   public 'company' => string 'Microsoft Corporation' (length=21)
 ```
 
-<!-- /wp:code -->
 
-<!-- wp:paragraph -->
+
+
 
 In this tutorial, you have learned various ways to query data from the tables in the PostgreSQL database using PHP PDO.
 
-<!-- /wp:paragraph -->
+
