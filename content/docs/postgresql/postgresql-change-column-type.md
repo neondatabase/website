@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Change Column Type'
-redirectFrom: 
-            - /docs/postgresql/postgresql-change-column-type
 tableOfContents: true
 ---
 

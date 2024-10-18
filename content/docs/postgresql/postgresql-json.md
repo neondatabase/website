@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL JSON'
-redirectFrom: 
-            - /docs/postgresql/postgresql-json
 tableOfContents: true
 ---
 

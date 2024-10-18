@@ -1,7 +1,5 @@
 ---
 title: 'Export PostgreSQL Table to CSV File'
-redirectFrom: 
-            - /docs/postgresql/export-postgresql-table-to-csv-file
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg
 tableOfContents: true
 ---

@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL DELETE CASCADE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-delete-cascade
 tableOfContents: true
 ---
 

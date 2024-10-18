@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL LIKE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-like
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---

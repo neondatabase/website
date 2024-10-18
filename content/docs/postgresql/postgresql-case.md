@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL CASE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-case
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

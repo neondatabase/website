@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL TRUNCATE TABLE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-truncate-table
 tableOfContents: true
 ---
 

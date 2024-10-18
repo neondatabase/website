@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Column Alias'
-redirectFrom: 
-            - /docs/postgresql/postgresql-column-alias
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png
 tableOfContents: true
 ---

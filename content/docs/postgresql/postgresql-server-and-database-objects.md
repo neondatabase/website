@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Server and Database Objects'
-redirectFrom: 
-            - /docs/postgresql/postgresql-server-and-database-objects
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png
 tableOfContents: true
 ---

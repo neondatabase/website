@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL CREATE TABLE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-create-table
 tableOfContents: true
 ---
 

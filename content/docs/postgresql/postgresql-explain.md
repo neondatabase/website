@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL EXPLAIN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-explain
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
 tableOfContents: true
 ---

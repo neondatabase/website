@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL CTE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-cte
 tableOfContents: true
 ---
 

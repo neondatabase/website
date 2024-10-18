@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL enum'
-redirectFrom: 
-            - /docs/postgresql/postgresql-enum
 tableOfContents: true
 ---
 

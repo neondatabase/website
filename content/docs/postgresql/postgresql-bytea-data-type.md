@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL BYTEA Data Type'
-redirectFrom: 
-            - /docs/postgresql/postgresql-bytea-data-type
 tableOfContents: true
 ---
 

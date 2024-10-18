@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL UPDATE Join'
-redirectFrom: 
-            - /docs/postgresql/postgresql-update-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png
 tableOfContents: true
 ---

@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL CUBE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-cube
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-sales-table.png
 tableOfContents: true
 ---

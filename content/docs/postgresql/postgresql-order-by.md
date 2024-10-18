@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL ORDER BY'
-redirectFrom: 
-            - /docs/postgresql/postgresql-order-by
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-ORDER-BY.png
 tableOfContents: true
 ---

@@ -1,7 +1,5 @@
 ---
 title: 'How To Delete Duplicate Rows in PostgreSQL'
-redirectFrom: 
-            - /docs/postgresql/how-to-delete-duplicate-rows-in-postgresql
 tableOfContents: true
 ---
 

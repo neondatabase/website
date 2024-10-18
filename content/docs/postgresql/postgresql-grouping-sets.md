@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL GROUPING SETS'
-redirectFrom: 
-            - /docs/postgresql/postgresql-grouping-sets
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Grouping-Sets-GROUPING-function-in-HAVING-clause.png
 tableOfContents: true
 ---

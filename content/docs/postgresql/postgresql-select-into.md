@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL SELECT INTO'
-redirectFrom: 
-            - /docs/postgresql/postgresql-select-into
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---

@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Array'
-redirectFrom: 
-            - /docs/postgresql/postgresql-array
 tableOfContents: true
 ---
 

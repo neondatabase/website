@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL COALESCE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-coalesce
 tableOfContents: true
 ---
 

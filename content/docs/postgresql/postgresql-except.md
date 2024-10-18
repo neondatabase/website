@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL EXCEPT'
-redirectFrom: 
-            - /docs/postgresql/postgresql-except
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-EXCEPT-300x202.png
 tableOfContents: true
 ---

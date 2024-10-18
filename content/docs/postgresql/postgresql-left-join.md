@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL LEFT JOIN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-left-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png
 tableOfContents: true
 ---

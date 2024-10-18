@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Composite Types'
-redirectFrom: 
-            - /docs/postgresql/postgresql-composite-types
 tableOfContents: true
 ---
 

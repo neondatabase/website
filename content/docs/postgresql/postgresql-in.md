@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL IN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-in
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

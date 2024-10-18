@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL hstore'
-redirectFrom: 
-            - /docs/postgresql/postgresql-hstore
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg
 tableOfContents: true
 ---

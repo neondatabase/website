@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL NULLIF'
-redirectFrom: 
-            - /docs/postgresql/postgresql-nullif
 tableOfContents: true
 ---
 

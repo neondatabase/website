@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL SELECT DISTINCT'
-redirectFrom: 
-            - /docs/postgresql/postgresql-select-distinct
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

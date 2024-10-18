@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL ALTER TABLE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-alter-table
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
 tableOfContents: true
 ---

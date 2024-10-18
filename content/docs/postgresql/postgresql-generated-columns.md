@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Generated Columns'
-redirectFrom: 
-            - /docs/postgresql/postgresql-generated-columns
 tableOfContents: true
 ---
 

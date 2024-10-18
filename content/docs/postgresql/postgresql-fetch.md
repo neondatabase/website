@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL FETCH'
-redirectFrom: 
-            - /docs/postgresql/postgresql-fetch
 tableOfContents: true
 ---
 

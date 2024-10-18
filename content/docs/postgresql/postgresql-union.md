@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL UNION'
-redirectFrom: 
-            - /docs/postgresql/postgresql-union
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgresQL-UNION.png
 tableOfContents: true
 ---

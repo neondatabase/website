@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL XML Data Type'
-redirectFrom: 
-            - /docs/postgresql/postgresql-xml-data-type
 tableOfContents: true
 ---
 

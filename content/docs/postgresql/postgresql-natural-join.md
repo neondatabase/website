@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL NATURAL JOIN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-natural-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-city.png
 tableOfContents: true
 ---

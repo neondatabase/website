@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Correlated Subquery'
-redirectFrom: 
-            - /docs/postgresql/postgresql-correlated-subquery
 tableOfContents: true
 ---
 

@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL LIMIT'
-redirectFrom: 
-            - /docs/postgresql/postgresql-limit
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---

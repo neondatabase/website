@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL RIGHT JOIN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-right-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Right-Join.png
 tableOfContents: true
 ---

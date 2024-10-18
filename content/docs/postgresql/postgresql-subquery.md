@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Subquery'
-redirectFrom: 
-            - /docs/postgresql/postgresql-subquery
 tableOfContents: true
 ---
 

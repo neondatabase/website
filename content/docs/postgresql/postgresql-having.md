@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL HAVING'
-redirectFrom: 
-            - /docs/postgresql/postgresql-having
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---

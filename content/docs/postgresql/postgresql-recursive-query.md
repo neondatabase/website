@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Recursive Query'
-redirectFrom: 
-            - /docs/postgresql/postgresql-recursive-query
 tableOfContents: true
 ---
 

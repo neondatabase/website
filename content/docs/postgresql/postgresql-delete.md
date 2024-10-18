@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL DELETE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-delete
 tableOfContents: true
 ---
 

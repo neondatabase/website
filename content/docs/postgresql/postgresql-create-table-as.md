@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL CREATE TABLE AS'
-redirectFrom: 
-            - /docs/postgresql/postgresql-create-table-as
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png
 tableOfContents: true
 ---

@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL Identity Column'
-redirectFrom: 
-            - /docs/postgresql/postgresql-identity-column
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png
 tableOfContents: true
 ---

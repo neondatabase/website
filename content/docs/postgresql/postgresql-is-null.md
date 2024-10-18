@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL IS NULL'
-redirectFrom: 
-            - /docs/postgresql/postgresql-is-null
 tableOfContents: true
 ---
 

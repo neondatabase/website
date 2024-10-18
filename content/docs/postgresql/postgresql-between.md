@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL BETWEEN'
-redirectFrom: 
-            - /docs/postgresql/postgresql-between
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

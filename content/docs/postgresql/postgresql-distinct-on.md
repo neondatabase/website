@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL DISTINCT ON'
-redirectFrom: 
-            - /docs/postgresql/postgresql-distinct-on
 tableOfContents: true
 ---
 

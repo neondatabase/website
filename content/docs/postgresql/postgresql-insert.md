@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL INSERT'
-redirectFrom: 
-            - /docs/postgresql/postgresql-insert
 tableOfContents: true
 ---
 

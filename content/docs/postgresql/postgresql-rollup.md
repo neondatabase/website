@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL ROLLUP'
-redirectFrom: 
-            - /docs/postgresql/postgresql-rollup
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png
 tableOfContents: true
 ---

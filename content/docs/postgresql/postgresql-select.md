@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL SELECT'
-redirectFrom: 
-            - /docs/postgresql/postgresql-select
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Select.png
 tableOfContents: true
 ---

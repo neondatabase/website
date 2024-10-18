@@ -1,7 +1,5 @@
 ---
 title: 'PostgreSQL DROP TABLE'
-redirectFrom: 
-            - /docs/postgresql/postgresql-drop-table
 tableOfContents: true
 ---
 
