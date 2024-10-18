@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL INITCAP() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-initcap 
             - /docs/postgresql/postgresql-string-functions/postgresql-letter-case-functions/
 tableOfContents: true
 ---

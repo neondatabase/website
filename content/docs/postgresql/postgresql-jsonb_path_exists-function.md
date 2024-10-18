@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_path_exists() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-jsonb_path_exists 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_exists/
 tableOfContents: true
 ---

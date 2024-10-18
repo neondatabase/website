@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL LTRIM() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-ltrim 
             - /docs/postgresql/postgresql-string-functions/postgresql-ltrim/
 tableOfContents: true
 ---

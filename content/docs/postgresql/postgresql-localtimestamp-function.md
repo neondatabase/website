@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL LOCALTIMESTAMP Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-localtimestamp 
             - /docs/postgresql/postgresql-date-functions/postgresql-localtimestamp/
 tableOfContents: true
 ---

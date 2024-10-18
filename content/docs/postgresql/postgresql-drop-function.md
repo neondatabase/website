@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Drop Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-drop 
             - /docs/postgresql/postgresql-plpgsql/postgresql-drop-function/
 tableOfContents: true
 ---

@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_path_query_first() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-jsonb_path_query_first 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_query_first/
 tableOfContents: true
 ---

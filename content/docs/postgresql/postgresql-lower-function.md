@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL LOWER() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-lower 
             - /docs/postgresql/postgresql-string-functions/postgresql-lower/
 tableOfContents: true
 ---

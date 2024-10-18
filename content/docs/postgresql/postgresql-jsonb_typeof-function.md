@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL jsonb_typeof() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-jsonb_typeof 
             - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_typeof/
 tableOfContents: true
 ---

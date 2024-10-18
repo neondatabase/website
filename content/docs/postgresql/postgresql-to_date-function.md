@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL TO_DATE() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-to_date 
             - /docs/postgresql/postgresql-date-functions/postgresql-to_date/
 tableOfContents: true
 ---

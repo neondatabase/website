@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL NTILE Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-ntile 
             - /docs/postgresql/postgresql-window-function/postgresql-ntile-function/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-sales_stats-table.png
 tableOfContents: true

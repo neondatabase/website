@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL LENGTH() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-length 
             - /docs/postgresql/postgresql-string-functions/postgresql-length-function/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true

@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL RTRIM() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-rtrim 
             - /docs/postgresql/postgresql-string-functions/postgresql-rtrim/
 tableOfContents: true
 ---

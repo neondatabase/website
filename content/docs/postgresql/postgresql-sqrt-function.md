@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /docs/postgresql/postgresql-sqrt
 title: 'PostgreSQL SQRT() Function'
 tableOfContents: true
 ---

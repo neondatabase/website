@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL MAKE_INTERVAL() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-make_interval 
             - /docs/postgresql/postgresql-date-functions/postgresql-make_interval/
 tableOfContents: true
 ---

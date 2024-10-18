@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL RIGHT() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-right 
             - /docs/postgresql/postgresql-string-functions/postgresql-right/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true

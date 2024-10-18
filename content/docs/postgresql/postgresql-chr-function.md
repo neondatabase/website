@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL CHR() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-chr 
             - /docs/postgresql/postgresql-string-functions/postgresql-chr/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-PostgreSQL-CHR-ASCII-example.png
 tableOfContents: true

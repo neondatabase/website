@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL JUSTIFY_DAYS() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-justify_days 
             - /docs/postgresql/postgresql-date-functions/postgresql-justify_days/
 tableOfContents: true
 ---

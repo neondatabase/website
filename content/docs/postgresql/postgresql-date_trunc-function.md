@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL DATE_TRUNC() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-date_trunc 
             - /docs/postgresql/postgresql-date-functions/postgresql-date_trunc/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-rental-table.png
 tableOfContents: true

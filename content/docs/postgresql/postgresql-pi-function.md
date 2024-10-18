@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /docs/postgresql/postgresql-pi
 title: 'PostgreSQL PI() Function'
 tableOfContents: true
 ---

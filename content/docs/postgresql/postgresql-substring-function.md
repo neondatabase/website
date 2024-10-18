@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL SUBSTRING() Function'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-substring 
             - /docs/postgresql/postgresql-string-functions/postgresql-substring/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-PostgreSQL-substring-function-example.jpg
 tableOfContents: true
