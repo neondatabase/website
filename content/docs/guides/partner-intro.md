@@ -26,7 +26,7 @@ Find out how you can integrate with Neon.
 
 <DetailIconCards>
 
-<a href="/docs/guides/partner-get-started" description="Learn the essentials for integrating with Neon" icon="check">Getting started</a>
+<a href="/docs/guides/partner-get-started" description="Learn the essentials for integrating with Neon" icon="import">Get started</a>
 
 <a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
@@ -44,6 +44,6 @@ Learn how to set limits for your customers and track usage.
 
 <a href="/docs/guides/partner-billing" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
 
-<a href="/docs/guides/metrics-api" description="Track usage with Neon's consumption metrics APIs" icon="cheque">Query consumption metrics</a>
+<a href="/docs/guides/metrics-api" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
 
 </DetailIconCards>
