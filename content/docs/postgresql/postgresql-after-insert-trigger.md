@@ -158,17 +158,11 @@ The memberships table has three columns id, member_id, and membership_type:
 
 
 
-- 
 - The `id` is a serial and primary key column.
-- 
 -
-- 
 - The `member_id` references the id column of the `members` table. It is a foreign key column.
-- 
 -
-- 
 - The `membership_type` column has a default value of "free".
-- 
 
 
 
@@ -282,8 +276,6 @@ Output:
 
 
 
-- 
 - Use an `AFTER` `INSERT` trigger to call a function automatically after an `INSERT` operation successfully on the associated table.
-- 
 
 

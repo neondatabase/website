@@ -42,21 +42,13 @@ PostgreSQL supports the following events:
 
 
 
-- 
 - `ddl_command_start`
-- 
 -
-- 
 - `ddl_command_end`
-- 
 -
-- 
 - `table_rewrite`
-- 
 -
-- 
 - `sql_drop`
-- 
 
 
 
@@ -296,12 +288,8 @@ The following table compares regular triggers and event triggers:
 
 
 
-- 
 - An event trigger is a trigger that fires when an event related to the DDL statement occurs.
-- 
 -
-- 
 - Use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
-- 
 
 

@@ -193,29 +193,17 @@ In this example:
 
 
 
-- 
 - YYYY is the four-digit year 2017
-- 
 -
-- 
 - MM is the month 03
-- 
 -
-- 
 - DD is the day 31
-- 
 -
-- 
 - HH is the hour 9
-- 
 -
-- 
 - MI is the minute 30
-- 
 -
-- 
 - SS is the second 20
-- 
 
 
 

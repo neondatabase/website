@@ -46,9 +46,7 @@ In PostgreSQL, you can specify a scope of check:
 
 
 - `LOCAL`
-- -
 - `CASCADED`
-- 
 
 
 The `LOCAL` scope restricts the check option enforcement to the current view only. It does not enforce the check to the views that the current view is based on.
@@ -463,4 +461,3 @@ That's why the `INSERT` statement fails the condition of both `fte_1` and `fte` 
 
 
 - Use the `WITH CHECK OPTION` clause to enforce constraints on data modifications through views and ensure that only valid data can be changed.
-- 

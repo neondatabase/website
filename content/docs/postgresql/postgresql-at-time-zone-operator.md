@@ -50,13 +50,9 @@ In this syntax:
 
 
 
-- 
 - timestamp_expression is a timestamp or timestamp with time zone value that you want to convert.
-- 
 -
-- 
 - target_timezone is the target time zone to which you want to convert. This can be either a time zone name or an expression that evaluates to a time zone name.
-- 
 
 
 
@@ -322,8 +318,6 @@ Please note that PostgreSQL uses the [IANA time zone database](https://en.wikipe
 
 
 
-- 
 - Use the `AT TIME ZONE` operator to convert a timestamp to a different time zone.
-- 
 
 

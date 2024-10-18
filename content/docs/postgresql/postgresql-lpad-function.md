@@ -291,17 +291,11 @@ In this example,
 
 
 
-- 
 - First, add up the payments for each customer using the [`SUM()`](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/) function and the `GROUP BY` clause,
-- 
 -
-- 
 - Second, calculate the length of the bar chart based on the sums of payments using various functions: `TRUNC()` to truncate the total payments, `CAST()` to convert the result of the `TRUNC()` to an integer. To make the bar chart more readable, we divided the sum of payments by 10.
-- 
 -
-- 
 - Third, apply the `LPAD()` function to pad the character (\*) based on the result of the second step above.
-- 
 
 
 
@@ -313,8 +307,6 @@ In this example,
 
 
 
-- 
 - Use the PostgreSQL `LPAD()` function to pad characters on the left of a string to a certain length.
-- 
 
 

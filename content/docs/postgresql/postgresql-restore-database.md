@@ -241,8 +241,6 @@ exit
 
 
 
-- 
 - Use the `pg_restore` tool to restore a PostgreSQL database from an archive file.
-- 
 
 

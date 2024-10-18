@@ -51,13 +51,9 @@ How it works.
 
 
 - First, specify the `view_name` after the `CREATE MATERIALIZED VIEW` clause
-- -
 - Second, add the query that retrieves data from the underlying tables after the `AS` keyword.
-- -
 - Third, if you want to load data into the materialized view at the creation time, use the `WITH DATA` option; otherwise, you use `WITH NO DATA` option. If you use the `WITH NO DATA` option, the view is flagged as unreadable. It means that you cannot query data from the view until you load data into it.
-- -
 - Finally, use the IF NOT EXISTS option to conditionally create a view only if it does not exist.
-- 
 
 
 ### Refreshing data for materialized views
@@ -251,10 +247,6 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY rental_by_category;
 
 
 - A materialized view is a view that stores data that comes from the base tables.
-- -
 - Use the `CREATE MATERIALIZED VIEW` statement to create a materialized view.
-- -
 - Use the `REFRESH MATERIALIZED VIEW` statement to load data from the base tables into the view.
-- -
 - Use the `DROP MATERIALIZED VIEW` statement to drop a materialized view.
-- 

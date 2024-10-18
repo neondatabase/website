@@ -217,8 +217,6 @@ UPDATE 5
 
 
 
-- 
 - Use the PostgreSQL `INITCAP()` function to convert a text to the proper case.
-- 
 
 

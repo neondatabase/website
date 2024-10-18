@@ -356,9 +356,7 @@ psql supports some types of output format and allows you to customize how the ou
 
 
 - `\a` command switches from aligned to non-aligned column output.
-- -
 - `\H` command formats the output to HTML format.
-- 
 
 
 ## 17) Quit psql

@@ -58,9 +58,7 @@ In this syntax:
 
 
 
-- 
 - `n` is the number that you want to calculate the cube root. `n` can be a literal number, an expression, or a table column.
-- 
 
 
 
@@ -326,8 +324,6 @@ Output:
 
 
 
-- 
 - Use the `CBRT()` function to calculate the cube root of a number.
-- 
 
 

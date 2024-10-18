@@ -30,13 +30,9 @@ To import data from a CSV file into a table in PostgreSQL from a C# program, you
 
 
 
-- 
 - First, read data from the CSV file into a list of records.
-- 
 -
-- 
 - Second, iterate over the list and [insert each record into the table](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-insert/).
-- 
 
 
 
@@ -492,12 +488,8 @@ The output indicates that the program has successfully imported 10 rows from the
 
 
 
-- 
 - Utilize the `CsvHelper` package to read data from a CSV file.
-- 
 -
-- 
 - Call the `ExecuteNonQueryAsync()` method of the `NpgsqlCommand` object to execute an SQL `INSERT` statement to load data from a CSV file into a table in the SQLite database.
-- 
 
 

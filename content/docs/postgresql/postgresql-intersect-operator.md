@@ -49,13 +49,9 @@ To use the `INTERSECT` operator, the columns that appear in the `SELECT` stateme
 
 
 
-- 
 - The number of columns and their order in queries must be the same.
-- 
 -
-- 
 - The [data types](/docs/postgresql/postgresql-data-types) of the columns in the queries must be compatible.
-- 
 
 
 
@@ -292,12 +288,8 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `INTERSECT` operator to combine two result sets and return a single result set containing rows appearing in both.
-- 
 -
-- 
 - Place the `ORDER BY` clause after the second query to sort the rows in the result set returned by the `INTERSECT` operator.
-- 
 
 

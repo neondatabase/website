@@ -38,17 +38,11 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the table to which the column you want to change after the `ALTER TABLE` keywords.
-- 
 -
-- 
 - Second, provide the name of the column that you want to change the data type after the `ALTER COLUMN` clause.
-- 
 -
-- 
 - Third, supply the new data type for the column after the `TYPE` keyword. The `SET DATA TYPE` and `TYPE` are equivalent.
-- 
 
 
 
@@ -321,8 +315,6 @@ ALTER TABLE
 
 
 
-- 
 - Use the `ALTER TABLE ... ALTER COLUMN` statement to change the data type of a column.
-- 
 
 

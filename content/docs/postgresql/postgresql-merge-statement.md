@@ -54,25 +54,15 @@ In this syntax:
 
 
 
-- 
 - `target_table` is the table you want to modify data (`INSERT`, `UPDATE`, and `DELETE`).
-- 
 -
-- 
 - `source_query` is a source table or a [SELECT](/docs/postgresql/postgresql-select) statement that provides the data for the merge operation.
-- 
 -
-- 
 - `ON merge_condition`: This clause specifies the conditions for matching rows between the source and target tables.
-- 
 -
-- 
 - `WHEN MATCHED THEN`: This clause defines the statement on rows that match the merge condition. The condition provides additional conditions for performing either update or delete statements. If you don't want to do anything for the matching rows, you can use the `DO` `NOTHING` option.
-- 
 -
-- 
 - `WHEN NOT MATCHED THEN`: This clause defines a statement on rows that don't match the merge condition. You can specify either insert statement to add a new row to the target table or use `DO` `NOTHING` to ignore the matching rows.
-- 
 
 
 
@@ -442,13 +432,9 @@ The output indicates that three rows have been modified:
 
 
 
-- 
 - Insert a new row.
-- 
 -
-- 
 - Update two matching rows.
-- 
 
 
 
@@ -620,8 +606,6 @@ Output:
 
 
 
-- 
 - Use the `MERGE` statement to conditionally insert, update, and delete rows of a table.
-- 
 
 

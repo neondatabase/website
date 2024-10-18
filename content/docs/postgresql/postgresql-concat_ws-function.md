@@ -45,13 +45,9 @@ In this syntax:
 
 
 
-- 
 - `separator`: Specify the separator that you want to separate the strings. The `separator` should not be `NULL`.
-- 
 -
-- 
 - `string1`, `string2`, `string3`, ..: These are strings that you want to concatenate. If any string is NULL, it is ignored by the function.
-- 
 
 
 
@@ -199,12 +195,8 @@ The query returns a result set with a single column `full_name` containing the f
 
 
 
-- 
 - Use the `CONCAT_WS` function to concatenate multiple strings into a single string separated by a specified separator.
-- 
 -
-- 
 - The `CONCAT_WS` function skips `NULL` values.
-- 
 
 

@@ -327,8 +327,6 @@ The output indicates that the program has successfully deleted the row id 1.
 
 
 
-- 
 - Use the `NpgsqlCommand` object to execute an `DELETE` statement that deletes a row from a table.
-- 
 
 

@@ -254,8 +254,6 @@ You should look at the result to find the `state` column with the value `idle in
 
 
 
-- 
 - Use the `UNIQUE` constraints to enforce values stored in a column or a group of columns unique across rows within the same table.
-- 
 
 

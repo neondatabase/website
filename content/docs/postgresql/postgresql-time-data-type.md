@@ -427,4 +427,3 @@ In this example, the sum of a time value and an interval value is a time value.
 
 
 - Use the PostgreSQL `TIME` data type to store time data.
-- 

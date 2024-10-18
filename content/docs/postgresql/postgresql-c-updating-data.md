@@ -332,8 +332,6 @@ The output indicates that the program has successfully updated the email of row 
 
 
 
-- 
 - Use the `NpgsqlCommand` object to execute an `UPDATE` statement that updates a row into a table.
-- 
 
 

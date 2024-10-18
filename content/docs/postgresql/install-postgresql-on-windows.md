@@ -11,9 +11,7 @@ tableOfContents: true
 
 
 - [Install PostgreSQL on macOS](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/)
-- -
 - [Install PostgreSQL on Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
-- 
 
 
 PostgreSQL was developed for UNIX-like platforms, however, it was designed to be portable. It means that PostgreSQL can also run on other platforms such as macOS, Solaris, and Windows.
@@ -25,11 +23,8 @@ To install PostgreSQL on Windows, you follow these steps:
 
 
 - First, download the PostgreSQL installer for Windows.
-- -
 - Second, install PostgreSQL using the installer.
-- -
 - Third, add the path to the PostgreSQL's bin directory to the PATH environment variable.
-- 
 
 
 ## 1) Download PostgreSQL Installer for Windows
@@ -79,13 +74,9 @@ Step 4. Select software components to install:
 
 
 - **PostgreSQL Server** option allows you to install the PostgreSQL database server
-- -
 - **pgAdmin 4** option allows you to install the PostgreSQL database GUI management tool.
-- -
 - **Stack Builder** provides a GUI that allows you to download and install drivers that work with PostgreSQL.
-- -
 - **Command Line Tools** option allows you to install command-line tools such as `psql`, `pg_restore`, and so on. These tools allow you to interact with the PostgreSQL database server using the command-line interface.
-- 
 
 
 For tutorials on this website, you can skill installing Stack Builder. Feel free to uncheck it and click the Next button to proceed to the data directory selection:
@@ -136,7 +127,7 @@ Step 9. The setup wizard will show the summary PostgreSQL information. Review th
 
 
 
-Now, you are ready to install PostgreSQL on your computer. Click the **Next **button to initiate PostgreSQL installation.
+Now, you are ready to install PostgreSQL on your computer. Click the **Next** button to initiate PostgreSQL installation.
 
 
 
@@ -193,11 +184,8 @@ Second, open the environment variables:
 
 
 - Press `Win + R` to open the Run dialog
-- -
 - Type `sysdm.cpl` an press Enter. The System Properties dialog will display.
-- -
 - Select the Advanced tab and click the `Environment Variables...`button.
-- 
 
 
 You'll see two sections in the `Environment Variables` window:
@@ -205,9 +193,7 @@ You'll see two sections in the `Environment Variables` window:
 
 
 - User variables for \[YourUsername]
-- -
 - System variables.
-- 
 
 
 Usually, you can edit the `PATH` variable under the `System variables` section, but if you want to add the path only for your user account, you can edit the `User variables` section.

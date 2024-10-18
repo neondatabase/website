@@ -61,17 +61,11 @@ We create a table named `books` that has three columns:
 
 
 
-- 
 - `id` is the primary key that identifies the book.
-- 
 -
-- 
 - `title` is the title of the products
-- 
 -
-- 
 - `attr` stores attributes of the book such as ISBN, weight, and paperback. The data type of the `attr` column is hstore.
-- 
 
 
 

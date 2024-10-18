@@ -35,40 +35,22 @@ Many PHP distributions include the `PDO_PGSQL` driver that allows you to interac
 
 
 
-- 
 - [Connecting to a PostgreSQL database](https://www.postgresqltutorial.com/postgresql-php/connect/) - shows you how to set up a simple PHP application structure and connect to a PostgreSQL database.
-- 
 -
-- 
 - [Creating new PostgreSQL database tables](https://www.postgresqltutorial.com/postgresql-php/create-tables/) - walks you through the steps of creating database tables in PostgreSQL using PHP.
-- 
 -
-- 
 - [Inserting data into PostgreSQL tables](https://www.postgresqltutorial.com/postgresql-php/insert/) - guides you on how to insert data into a table using PHP PDO.
-- 
 -
-- 
 - [Updating data in the table](https://www.postgresqltutorial.com/postgresql-php/update/) - provides you with the steps of updating data in the database tables.
-- 
 -
-- 
 - [Querying data from a table](https://www.postgresqltutorial.com/postgresql-php/query/) - shows you various ways to query data in the PostgreSQL database from PHP.
-- 
 -
-- 
 - [Performing transactions](https://www.postgresqltutorial.com/postgresql-php/transaction/) - explains the transaction concept and shows you how to perform transactions in PHP.
-- 
 -
-- 
 - [Working with the binary large objects (BLOB)](https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/) - shows you how to insert, select, and delete large objects in PostgreSQL using PHP.
-- 
 -
-- 
 - [Calling PostgreSQL stored procedures](https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/) - explains to you the steps of calling [PostgreSQL stored procedures](https://www.postgresqltutorial.com/postgresql-stored-procedures/) from PHP.
-- 
 -
-- 
 - [Deleting data in a PostgreSQL table using PHP PDO](https://www.postgresqltutorial.com/postgresql-php/delete/) - teaches you how to delete data from the PostgreSQL table in the PHP application using PDO.
-- 
 
 

@@ -23,11 +23,8 @@ To store the whole numbers in PostgreSQL, you can use one of the following integ
 
 
 - `SMALLINT`
-- -
 - `INTEGER`
-- -
 - `BIGINT`
-- 
 
 
 The following table illustrates the specification of each integer type:
@@ -131,4 +128,3 @@ Using `BIGINT` type is not only consuming a lot of storage but also decreasing t
 
 
 - Use `SMALLINT`, `INT`, and `BIGINT` data types to store integers in the database.
-- 

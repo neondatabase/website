@@ -177,13 +177,9 @@ How it works.
 
 
 
-- 
 - First, sort films by the `film_id` ascending order using the `ORDER BY film_id` clause.
-- 
 -
-- 
 - Second, take 5 films from the top using the `LIMIT 5` clause.
-- 
 
 
 
@@ -243,17 +239,11 @@ How it works.
 
 
 
-- 
 - First, sort films by film id in ascending order.
-- 
 -
-- 
 - Second, skip the first three rows using the `OFFSET 3` clause.
-- 
 -
-- 
 - Second, take the next four rows using the `LIMIT 4` clause.
-- 
 
 
 
@@ -326,13 +316,9 @@ How it works.
 
 
 
-- 
 - First, sort all the films by rental rates from high to low using the `ORDER BY rental_rate` clause.
-- 
 -
-- 
 - Second, take only 10 rows from the top using the `LIMIT 10` clause.
-- 
 
 
 
@@ -344,8 +330,6 @@ How it works.
 
 
 
-- 
 - Use the PostgreSQL `LIMIT OFFSET` clause to retrieve a subset of rows returned by a query.
-- 
 
 

@@ -99,13 +99,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the cursor (`cursor_name`) after the `DECLARE` keyword.
-- 
 -
-- 
 - Second, provide a `query` that defines the result set of the cursor.
-- 
 
 
 
@@ -143,25 +139,15 @@ Once the cursor is open, you can fetch rows from it using the `FETCH` statement.
 
 
 
-- 
 - FETCH NEXT: fetches the next row from the cursor.
-- 
 -
-- 
 - FETCH PRIOR: fetches the previous row from the cursor.
-- 
 -
-- 
 - FETCH FIRST: fetches the first row from the cursor.
-- 
 -
-- 
 - FETCH LAST: fetches the last row from the cursor.
-- 
 -
-- 
 - FETCH ALL: fetches all rows from the cursor.
-- 
 
 
 
@@ -187,13 +173,9 @@ In this syntax:
 
 
 
-- 
 - `cursor_name` specifies the name of the cursor.
-- 
 -
-- 
 - `variable_list`: is a comma-separated list of variables that store the values fetched from the cursor. It also can be a record.
-- 
 
 
 
@@ -344,8 +326,6 @@ Output:
 
 
 
-- 
 - A cursor is a database object that allows you to traverse the rows of a result of a query one by one.
-- 
 
 

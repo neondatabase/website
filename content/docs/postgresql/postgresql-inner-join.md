@@ -40,13 +40,9 @@ In this syntax:
 
 
 - First, specify the columns from both tables in the select list of the `SELECT` clause.
-- -
 - Second, specify the main table (`table1`) from which you want to select data in the `FROM` clause.
-- -
 - Third, specify the second table (`table2`) you want to join using the `INNER JOIN` keyword.
-- -
 - Finally, define a condition for the join. This condition indicates which column (`column_name`) in each table should have matching values for the join.
-- 
 
 
 To make the query shorter, you can use [table aliases](/docs/postgresql/postgresql-alias):
@@ -270,4 +266,3 @@ Output:
 
 
 - Use `INNER JOIN` clauses to select data from two or more related tables and return rows that have matching values in all tables.
-- 

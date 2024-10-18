@@ -33,9 +33,7 @@ In this syntax:
 
 
 - `jsonb_data` is a JSON document where you want to check for a JSON path.
-- -
 - `json_path` is the path that you want to check.
-- 
 
 
 The `jsonb_path_exists()` function returns true if the `json_path` returns any elements in the `jsonb_data` document or false otherwise.
@@ -165,4 +163,3 @@ Output:
 
 
 - Use the `jsonb_path_exists()` function to check the existence of JSON Path expressions within JSONB data
-- 

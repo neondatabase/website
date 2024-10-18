@@ -126,13 +126,9 @@ The `DROP INDEX CONCURRENTLY` has some limitations:
 
 
 
-- 
 - First, the `CASCADE` option is not supported.
-- 
 -
-- 
 - Second, executing in a transaction block is also not supported.
-- 
 
 
 
@@ -246,8 +242,6 @@ The statement removed the index as expected.
 
 
 
-- 
 - Use the PostgreSQL `DROP INDEX` statement to delete an index.
-- 
 
 

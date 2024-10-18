@@ -33,9 +33,7 @@ In this syntax:
 
 
 - `string` is the input string that you want to remove characters
-- -
 - `character` specifies the character you want to remove from the end of the string. The `character` parameter is optional and defaults to space.
-- 
 
 
 The `RTRIM()` function returns the string with all trailing characters removed.
@@ -210,4 +208,3 @@ Output:
 
 
 - Use `RTRIM()` function to remove all specified characters from the end of a string.
-- 

@@ -60,13 +60,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the constraint name after the `CONSTRAINT` keyword. This is optional. If you omit it, PostgreSQL will automatically generate a name for the `CHECK` constraint.
-- 
 -
-- 
 - Second, define a condition that must be satisfied for the constraint to be valid.
-- 
 
 
 
@@ -319,13 +315,9 @@ In this example, we define a condition using the `TRIM()` and `LENGTH()` functio
 
 
 
-- 
 - First, the `TRIM()` function removes leading and trailing whitespaces from the first_name.
-- 
 -
-- 
 - Second, the `LENGTH()` function returns the character length of the result of the `TRIM()` function.
-- 
 
 
 
@@ -394,8 +386,6 @@ DROP CONSTRAINT joined_date_check;
 
 
 
-- 
 - Use PostgreSQL `CHECK` constraint to check the values of columns based on a boolean expression.
-- 
 
 

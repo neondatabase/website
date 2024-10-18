@@ -41,17 +41,11 @@ In this syntax:
 
 
 
-- 
 - First, the `for` loop creates an integer variable `loop_counter` which is accessible only inside the loop. By default, the `for` loop increases the `loop_counter` by `step` after each iteration. However, when you use the `reverse` option, the `for` loop decreases the `loop_counter` by the `step`.
-- 
 -
-- 
 - Second, the `from` and `to` are expressions that specify the lower and upper bound of the range. The `for` loop evaluates these expressions before entering the loop.
-- 
 -
-- 
 - Third, the `step` that follows the `by` keyword specifies the iteration step. It is optional and defaults to 1. The `for loop` evaluates the `step` expression once only.
-- 
 
 
 
@@ -277,13 +271,9 @@ In this syntax:
 
 
 
-- 
 - The `query_expression` is an SQL statement.
-- 
 -
-- 
 - The `using` clause is used to pass parameters to the query.
-- 
 
 
 
@@ -295,13 +285,9 @@ The following block shows how to use the `for` loop statement to loop through a 
 
 
 
-- 
 - `sort_type`: 1 to sort the films by title, 2 to sort the films by release year.
-- 
 -
-- 
 - `rec_count`: is the number of rows to query from the `film` table. We'll use it in the `using` clause of the `for` loop.
-- 
 
 
 

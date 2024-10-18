@@ -248,4 +248,3 @@ Note that you will see a different value in the `delivery_date` column, dependin
 
 
 - Use the PostgreSQL `CURRENT_DATE` function to retrieve the current date.
-- 

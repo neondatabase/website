@@ -45,13 +45,9 @@ In this syntax:
 
 
 
-- 
 - First, specify a JSONB data from which you want to query data.
-- 
 -
-- 
 - Second, provide a JSON path to match elements in the JSONB data.
-- 
 
 
 
@@ -249,8 +245,6 @@ In this case, the person object doesn’t have an `email` key, therefore the res
 
 
 
-- 
 - Use the `jsonb_path_query_first()` function to extract the first JSON value that matches a JSON path expression from a JSON document.
-- 
 
 

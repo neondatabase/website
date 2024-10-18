@@ -34,11 +34,8 @@ The `LENGTH()` function accepts a string as a parameter. It can be any of the fo
 
 
 - character or char
-- -
 - character varying or varchar
-- -
 - text
-- 
 
 
 The `LENGTH()` function returns an integer that represents the number of characters in the string. It returns NULL if the string is null.
@@ -160,4 +157,3 @@ Output:
 
 
 - Use the PostgreSQL `LENGTH()` function to get the number of characters of a string.
-- 

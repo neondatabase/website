@@ -499,13 +499,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the sequence which you want to drop. The `IF EXISTS` option conditionally deletes the sequence if it exists. If you want to drop multiple sequences at once, you can use a list of comma-separated sequence names.
-- 
 -
-- 
 - Then, use the `CASCADE` option if you want to drop objects that depend on the sequence recursively, objects that depend on the dependent objects, and so on.
-- 
 
 
 

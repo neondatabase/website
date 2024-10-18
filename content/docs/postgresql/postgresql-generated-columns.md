@@ -24,9 +24,7 @@ There are two kinds of generated columns:
 
 
 - Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
-- -
 - Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
-- 
 
 
 A virtual generated column is like a [view](https://www.postgresqltutorial.com/postgresql-views/), whereas a stored generated column is similar to a [materialized view](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/). Unlike a material view, PostgreSQL automatically updates data for stored generated columns.
@@ -60,15 +58,10 @@ In this syntax:
 
 
 - `column_name`: Specify the name of the generated column.
-- -
 - `type`: Specify the data type for the column.
-- -
 - `expression`: Provide an expression that returns values for the calculated column.
-- -
 - `STORED` keyword: Indicate that the data of the generated column is physically stored in the table.
-- -
 - `VIRTUAL` keyword: Indicate that the data of the generated column is computed when queried, not stored physically.
-- 
 
 
 To add a generated column to a table, you can use the [ALTER TABLE ... ADD COLUMN](/docs/postgresql/postgresql-add-column) statement:
@@ -87,9 +80,7 @@ When defining an expression for a generated column, ensure that it meets the fol
 
 
 - The expression can only use immutable functions and cannot involve [subqueries](/docs/postgresql/postgresql-subquery/) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp) function.
-- -
 - The expression cannot reference another generated column or a system column, except `tableoid`.
-- 
 
 
 A generated column cannot have a default value or an identity definition. Additionally, it cannot be a part of the partition key.
@@ -218,4 +209,3 @@ Output:
 
 
 - Use generated columns to automate calculations within your table.
-- 

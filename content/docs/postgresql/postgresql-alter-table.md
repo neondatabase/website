@@ -43,33 +43,19 @@ PostgreSQL provides you with many actions:
 
 
 
-- 
 - [Add a column](/docs/postgresql/postgresql-add-column)
-- 
 -
-- 
 - [Drop a column](/docs/postgresql/postgresql-drop-column)
-- 
 -
-- 
 - [Change the data type of a column](/docs/postgresql/postgresql-change-column-type)
-- 
 -
-- 
 - [Rename a column](/docs/postgresql/postgresql-rename-column)
-- 
 -
-- 
 - [Set a default value for the column](/docs/postgresql/postgresql-default-value)
-- 
 -
-- 
 - Add a constraint to a column.
-- 
 -
-- 
 - [Rename a table](/docs/postgresql/postgresql-rename-table)
-- 
 
 
 

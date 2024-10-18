@@ -45,9 +45,7 @@ In this syntax:
 
 
 
-- 
 - `jsonb_value` is a JSONB value that you want to convert.
-- 
 
 
 
@@ -248,8 +246,6 @@ Output:
 
 
 
-- 
 - Use the `jsonb_pretty()` function to convert a JSON value to pretty-printed, indented text.
-- 
 
 

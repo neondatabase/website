@@ -43,19 +43,12 @@ In this syntax:
 
 
 - `table_name`: This is the name of the table into which you want to insert data.
-- -
 - `(column1, column2, ...)`: The list of columns you want to insert values into the table.
-- -
 - `VALUES(value1, value2, ...)`: The values you want to insert into the specified columns `(column1, column2, ...)`.
-- -
 - `ON CONFLICT (conflict_column):` This clause specifies the conflict target, which is the [unique constraint](/docs/postgresql/postgresql-unique-constraint/) or [unique index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index) that may cause a conflict.
-- -
 - `DO NOTHING`: This instructs PostgreSQL to do nothing when a conflict occurs.
-- -
 - `DO UPDATE`: This performs an update if a conflict occurs.
-- -
 - `SET column = value1, column = value2, ...`: This list of the columns to be updated and their corresponding values in case of conflict.
-- 
 
 
 How the `INSERT ... ON CONFLICT` statement works.
@@ -131,9 +124,7 @@ In this case, the upsert operation can be handy to handle the following situatio
 
 
 - **Updating existing products**. If a product already exists in the `inventory` table, you want to update its price and quantity with the new information.
-- -
 - **Insert new products**. If a product is not in the `inventory` table, you want to insert it into the table.
-- 
 
 
 ### 1) Basic PostgreSQL INSERT ... ON CONFLICT statement example
@@ -308,12 +299,8 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL upsert to update data if it already exists or insert the data if it does not.
-- 
 -
-- 
 - Use the `INSERT...ON CONFLICT` statement for upsert.
-- 
 
 

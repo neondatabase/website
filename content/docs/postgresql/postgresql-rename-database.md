@@ -24,17 +24,11 @@ To rename a PostgreSQL database, you use the following steps:
 
 
 
-- 
 - First, change the current database from the one that you want to rename to a different one.
-- 
 -
-- 
 - Second, terminate all active connections to the database that you want to rename.
-- 
 -
-- 
 - Third, use the `ALTER DATABASE` statement to rename the database to the new one.
-- 
 
 
 
@@ -193,8 +187,6 @@ ALTER DATABASE db RENAME TO newdb;
 
 
 
-- 
 - Use the `ALTER DATABASE RENAME TO` statement to rename a database from the PostgreSQL server.
-- 
 
 

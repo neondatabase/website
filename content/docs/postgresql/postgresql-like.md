@@ -78,9 +78,7 @@ PostgreSQL offers two wildcards:
 
 
 - Percent sign ( `%`) matches any sequence of zero or more characters.
-- -
 - Underscore sign (`_`) matches any single character.
-- 
 
 
 Here's the basic syntax of the `LIKE` operator:
@@ -267,11 +265,8 @@ The pattern `_her%` matches any strings that satisfy the following conditions:
 
 
 - The first character can be anything.
-- -
 - The following characters must be `'her'`.
-- -
 - There can be any number (including zero) of characters after `'her'`.
-- 
 
 
 ### 4) PostgreSQL NOT LIKE examples
@@ -516,14 +511,8 @@ In the pattern `%10$%%`, the first and last `%` are the wildcard characters wher
 
 
 - Use the `LIKE` operator to match data by patterns.
-- -
 - Use the `NOT LIKE` operator to negate the `LIKE` operator.
-- -
 - Use the `%` wildcard to match zero or more characters.
-- -
 - Use the `_` wildcard to match a single character.
-- -
 - Use the `ESCAPE` option to specify the escape character.
-- -
 - Use the `ILIKE` operator to match data case-insensitively.
-- 

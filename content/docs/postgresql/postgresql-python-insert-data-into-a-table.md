@@ -23,15 +23,10 @@ To insert one or more rows into a table from Python, you follow these steps:
 
 
 - First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
-- -
 - Next, create a `cursor` object from the `connection` object.
-- -
 - Then, execute the [INSERT](/docs/postgresql/postgresql-insert) statement with values by calling the `execute()` or `executemany()` method of the `cursor` object.
-- -
 - After that, commit the transaction by calling the `commit()` method of the `connection` object.
-- -
 - Finally, obtain the inserted ID by calling the `fetchone()` method of the `cursor` object.
-- 
 
 
 ## Inserting data into a table example
@@ -237,4 +232,3 @@ Output:
 
 
 - Use the `execute()` or `executemany()` method of the `cursor` object to insert one or more rows into a table from Python.
-- 

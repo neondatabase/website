@@ -110,11 +110,8 @@ The `view_option_name` can be:
 
 
 - `check_option`: change the check option. The valid value is `local` or `cascaded`.
-- -
 - `security_barrier`: change the security-barrier property of a view. The valid value is `true` or `false`.
-- -
 - `security_invoker`: change the security invoker of a view. The valid value is `true` or `false`.
-- 
 
 
 For example, the following changes the check option of the `film_rating` view to `local`:
@@ -282,8 +279,5 @@ Options: check_option=local
 
 
 - Use the `ALTER VIEW ... RENAME TO` statement to rename a view.
-- -
 - Use the `ALTER VIEW ... (SET check_option)` statement to change the check option of a view.
-- -
 - Use the `ALTER VIEW ... SET SCHEMA` statement to change the schema of a view.
-- 

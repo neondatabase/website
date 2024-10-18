@@ -193,12 +193,8 @@ try {
 
 
 
-- 
 - Use the `commit()` method to apply permanent changes to the database.
-- 
 -
-- 
 - Use the `rollback()` method to undo the changes.
-- 
 
 

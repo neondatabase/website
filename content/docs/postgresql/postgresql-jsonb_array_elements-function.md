@@ -250,4 +250,3 @@ Output:
 
 
 - Use the `jsonb_array_elements()` function to expand elements of the top-level JSON array.
-- 

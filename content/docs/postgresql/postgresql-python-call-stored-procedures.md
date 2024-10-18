@@ -307,12 +307,8 @@ SELECT * FROM vendor_parts;
 
 
 
-- 
 - Use the `execute()` method of a `cursor` object to execute a stored procedure call.
-- 
 -
-- 
 - Use the `CALL sp_name(arguments)` syntax to construct a stored procedure call.
-- 
 
 

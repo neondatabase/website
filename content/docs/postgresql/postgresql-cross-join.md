@@ -195,4 +195,3 @@ CROSS JOIN warehouses;
 
 
 - Use the PostgreSQL `CROSS JOIN` clause to make a cartesian product of rows in two tables.
-- 

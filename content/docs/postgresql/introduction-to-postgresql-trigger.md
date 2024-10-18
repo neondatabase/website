@@ -48,13 +48,9 @@ PostgreSQL provides two main types of triggers:
 
 
 
-- 
 - Row-level triggers
-- 
 -
-- 
 - Statement-level triggers.
-- 
 
 
 
@@ -114,17 +110,11 @@ Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some 
 
 
 
-- 
 - PostgreSQL fires trigger for the `TRUNCATE` event.
-- 
 -
-- 
 - PostgreSQL allows you to define the statement-level trigger on [views](https://www.postgresqltutorial.com/postgresql-views/).
-- 
 -
-- 
 - PostgreSQL requires you to define a user-defined function as the action of the trigger, while the SQL standard allows you to use any SQL commands.
-- 
 
 
 
@@ -136,12 +126,8 @@ Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some 
 
 
 
-- 
 - A trigger is a function invoked automatically when an `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` occurs on a table.
-- 
 -
-- 
 - PostgreSQL supports row-level and statement-level triggers.
-- 
 
 

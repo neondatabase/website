@@ -44,45 +44,25 @@ The option can be:
 
 
 
-- 
 - `SUPERUSER` | `NOSUPERUSER` - determine if the role is a `superuser` or not.
-- 
 -
-- 
 - `CREATEDB` | `NOCREATEDB`- allow the role to create new databases.
-- 
 -
-- 
 - `CREATEROLE` | `NOCREATEROLE` - allow the role to create or change roles.
-- 
 -
-- 
 - `INHERIT` | `NOINHERIT` - determine if the role inherits the privileges of roles of which it is a member.
-- 
 -
-- 
 - `LOGIN` | `NOLOGIN` - allow the role to log in.
-- 
 -
-- 
 - `REPLICATION` | `NOREPLICATION` - determine if the role is a replication role.
-- 
 -
-- 
 - `BYPASSRLS` | `NOBYPASSRLS` - determine if the role is to bypass the row-level security (RLS) policy.
-- 
 -
-- 
 - `CONNECTION LIMIT limit` - specify the number of concurrent connections a role can make, -1 means unlimited.
-- 
 -
-- 
 - `PASSWORD 'password' | PASSWORD NULL` - change the role's password.
-- 
 -
-- 
 - `VALID UNTIL 'timestamp'` - set the date and time after which the role's password is no longer valid.
-- 
 
 
 
@@ -94,17 +74,11 @@ The following rules are applied:
 
 
 
-- 
 - Superusers can change any of those attributes for any role.
-- 
 -
-- 
 - Roles that have the `CREATEROLE` attribute can change any of these attributes for only non-superusers and no-replication roles.
-- 
 -
-- 
 - Ordinal roles can only change their passwords.
-- 
 
 
 
@@ -324,17 +298,11 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the role that you want to modify the role's session default, or use the `CURRENT_USER`, or `SESSION_USER`. You use the `ALL` option to change the settings for all roles.
-- 
 -
-- 
 - Second, specify a database name after the `IN DATABASE` keyword to change only for sessions in the named database. In case you omit the `IN DATABASE` clause, the change will be applied to all databases.
-- 
 -
-- 
 - Third, specify the configuration parameter and the new value in the `SET` clause.
-- 
 
 
 
@@ -368,16 +336,10 @@ SET client_min_messages = NOTICE;
 
 
 
-- 
 - Use the `ALTER ROLE role_name option` to modify the attributes of a role.
-- 
 -
-- 
 - Use the `ALTER ROLE role_name RENAME TO new_role` statement to rename a role.
-- 
 -
-- 
 - Use the `ALTER ROLE role_name SET param=value` statement to change a role's session default for a configuration variable.
-- 
 
 

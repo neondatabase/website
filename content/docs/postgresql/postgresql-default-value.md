@@ -107,11 +107,8 @@ In this syntax:
 
 
 - First, specify the table name in the `ALTER TABLE` clause (`table_name`).
-- -
 - Second, provide the name of the column that you want to assign a default value in the `ALTER COLUMN` clause.
-- -
 - Third, specify a default value for the column in the `SET DEFAULT` clause.
-- 
 
 
 ## Removing the DEFAULT value from a column
@@ -135,11 +132,8 @@ In this syntax:
 
 
 - First, specify the table name in the `ALTER TABLE` clause.
-- -
 - Second, provide the name of the column that you want to remove the default value in the `ALTER COLUMN` clause.
-- -
 - Third, use the `DROP DEFAULT` to remove the default value from the column.
-- 
 
 
 ## PostgreSQL default value examples
@@ -376,6 +370,4 @@ DROP DEFAULT;
 
 
 - Use the `DEFAULT` constraint to define a default value for a table column.
-- -
 - Use the `DEFAULT` keyword to explicitly use the default value specified in the `DEFAULT` constraint in the `INSERT` statement.
-- 

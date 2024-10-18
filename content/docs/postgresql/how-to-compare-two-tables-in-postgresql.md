@@ -260,4 +260,3 @@ Output:
 
 
 - Use `UNION` and `EXCEPT` operators or outer join to compare two tables in PostgreSQL.
-- 

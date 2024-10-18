@@ -46,17 +46,11 @@ In this syntax:
 
 
 
-- 
 - `string`: The input string that you want to extend.
-- 
 -
-- 
 - `length`: The desired length of the string after padding.
-- 
 -
-- 
 - `fill`: The character or string used for padding.
-- 
 
 
 
@@ -248,8 +242,6 @@ Output:
 
 
 
-- 
 - Use PostgreSQL `RPAD()` function to extend a string to a length by appending specified characters.
-- 
 
 

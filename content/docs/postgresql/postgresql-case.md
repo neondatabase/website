@@ -29,13 +29,9 @@ The `CASE` expression has two forms:
 
 
 
-- 
 - General
-- 
 -
-- 
 - Simple
-- 
 
 
 
@@ -120,17 +116,11 @@ Suppose you want to label the films by their lengths based on the following logi
 
 
 
-- 
 - If the length is less than 50 minutes, the film is short.
-- 
 -
-- 
 - If the length is greater than 50 minutes and less than or equal to 120 minutes, the film is medium.
-- 
 -
-- 
 - If the length is greater than 120 minutes, the film is long.
-- 
 
 
 
@@ -198,17 +188,11 @@ Suppose that you want to assign price segments to films with the following logic
 
 
 
-- 
 - If the rental rate is 0.99, the film is economic.
-- 
 -
-- 
 - If the rental rate is 1.99, the film is mass.
-- 
 -
-- 
 - If the rental rate is 4.99, the film is premium.
-- 
 
 
 

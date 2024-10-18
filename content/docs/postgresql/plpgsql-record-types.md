@@ -129,17 +129,11 @@ How it works.
 
 
 
-- 
 - First, declare a record variable called `rec` in the declaration section.
-- 
 -
-- 
 - Second use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
-- 
 -
-- 
 - Third, print out the information of the film via the record variable.
-- 
 
 
 
@@ -209,17 +203,11 @@ How it works:
 
 
 
-- 
 - First, declare a variable named r with the type `record`.
-- 
 -
-- 
 - Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
-- 
 -
-- 
 - Third, show the contents of the fields of the record variable by using the dot notation (`rec.title` and `rec.length`)
-- 
 
 
 
@@ -231,12 +219,8 @@ How it works:
 
 
 
-- 
 - A record is a placeholder that can hold a single row of a result set.
-- 
 -
-- 
 - A record does not have a predefined structure like a row variable. Its structure is determined when you assign a row to it.
-- 
 
 

@@ -51,13 +51,9 @@ In this syntax,
 
 
 
-- 
 - First, specify the name of the table to which the trigger belongs after the `ALTER TABLE` keywords.
-- 
 -
-- 
 - Second, specify the name of the trigger you want to disable after the `DISABLE TRIGGER` keywords, or use the `ALL` keyword to disable all triggers associated with the table.
-- 
 
 
 
@@ -99,8 +95,6 @@ DISABLE TRIGGER ALL;
 
 
 
-- 
 - Use the `ALTER TABLE ... DISABLE TRIGGER` statement to disable a trigger or all triggers associated with a table.
-- 
 
 

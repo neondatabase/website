@@ -33,11 +33,8 @@ In this syntax:
 
 
 - First, specify columns from the tables from which you want to retrieve data in the `select_list` in the `SELECT` clause.
-- -
 - Second, provide the main table (`table1`) from which you want to retrieve data.
-- -
 - Third, specify the table (`table2`) that you want to join with the main table, in the `NATURAL JOIN` clause.
-- 
 
 
 A natural join can be an [inner join](/docs/postgresql/postgresql-inner-join/), [left join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/), or [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join). If you do not specify an explicit join, PostgreSQL will use the `INNER JOIN` by default.
@@ -359,4 +356,3 @@ The reason is that both tables have another common column called `last_update`. 
 
 
 - Use the PostgreSQL `NATURAL JOIN` clause to query data from two or more tables that have common columns.
-- 

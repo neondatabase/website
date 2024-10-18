@@ -311,8 +311,6 @@ Indexes:
 
 
 
-- 
 - Use the `CREATE TABLE table_name AS TABLE table_copy` statement to make a copy of a table to a new one.
-- 
 
 

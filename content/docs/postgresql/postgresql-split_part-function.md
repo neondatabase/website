@@ -254,8 +254,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `SPLIT_PART()` function to retrieve a part of a string at a specified position after splitting.
-- 
 
 

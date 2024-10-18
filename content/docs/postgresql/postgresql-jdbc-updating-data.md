@@ -24,21 +24,13 @@ To update data in a table of a PostgreSQL database, you follow these steps:
 
 
 
-- 
 - Create a database connection by instantiating a `Connection` object.
-- 
 -
-- 
 - Create a `PreparedStatement` object.
-- 
 -
-- 
 - Execute an [UPDATE statement](/docs/postgresql/postgresql-update) by calling the `executeUpdate()` method of the `PreparedStatement` object.
-- 
 -
-- 
 - Close the `PreparedStatement` and `Connection` objects by calling the `close()` method.
-- 
 
 
 
@@ -265,8 +257,6 @@ WHERE id = 1;
 
 
 
-- 
 - Use a `PreparedStatement` object to update data in a table from a Java program.
-- 
 
 

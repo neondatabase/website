@@ -344,16 +344,10 @@ The reason is that the number is too small and very close to zero. PostgreSQL ca
 
 
 
-- 
 - `DOUBLE PRECISION` data type represents the inexact numbers.
-- 
 -
-- 
 - `DOUBLE PRECISION`, `FLOAT8`, or `FLOAT` are synonyms.
-- 
 -
-- 
 - Use `DOUBLE PRECISION` type to store inexact numbers and `NUMERIC` type to store exact numbers.
-- 
 
 

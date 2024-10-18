@@ -34,9 +34,7 @@ Third, execute the `SELECT` statement by calling one of the following methods of
 
 
 - `ExecuteReaderAsync()` - executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
-- -
 - `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
-- 
 
 
 Finally, iterate over the result set and use the Get\* methods of the NpgsqlDataReader object to retrieve the values of columns in each row.
@@ -235,6 +233,4 @@ Student count: 10
 
 
 - Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
-- -
 - Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.
-- 

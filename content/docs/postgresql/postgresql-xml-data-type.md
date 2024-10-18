@@ -42,13 +42,9 @@ The XML data type offers the following benefits:
 
 
 
-- 
 - **Type Safety**: PostgreSQL can validate when inserting/updating data, ensuring XML data conforms to XML standards.
-- 
 -
-- 
 - **Built-in XML functions and operators**: PostgreSQL supports many XML functions and operators to manipulate XML data effectively.
-- 
 
 
 
@@ -83,13 +79,9 @@ In this `person` table:
 
 
 
-- 
 - `id` is an [identity column](/docs/postgresql/postgresql-identity-column/) that serves as the [primary key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key) column of the table.
-- 
 -
-- 
 - `info` is a column with the type XML that will store the XML data.
-- 
 
 
 
@@ -123,17 +115,11 @@ In this statement:
 
 
 
-- 
 - `DOCUMENT` indicates that the input string is a complete XML document starting with the XML declaration `<?xml version="1.0" encoding="UTF-8"?>` and having the root element `<person>`
-- 
 -
-- 
 - `XMLPARSE` function converts the string into an XML document.
-- 
 -
-- 
 - The `INSERT` statement inserts the new XML document into the info column of the `persons` table.
-- 
 
 
 
@@ -260,17 +246,11 @@ How it works.
 
 
 
-- 
 - First, the XPath `'/person/name/text()'` returns the text of the name node of the XML document. It returns an array that includes all matching values.
-- 
 -
-- 
 - Second, the `[1]` subscript returns the first element of the array.
-- 
 -
-- 
 - Third, the `::text` casts the XML value to the text.
-- 
 
 
 
@@ -317,21 +297,13 @@ In this query:
 
 
 
-- 
 - The xpath `/person/age/text()` returns the text of the age nodes as an array of text.
-- 
 -
-- 
 - The `[1]` subscript returns the first element of the array.
-- 
 -
-- 
 - The `::text` cast the element to the text.
-- 
 -
-- 
 - The `::integer` casts the text to an integer.
-- 
 
 
 
@@ -542,12 +514,8 @@ The output indicates that the query utilizes the index expression of the `person
 
 
 
-- 
 - Use the `XML` data type to store XML documents in the database.
-- 
 -
-- 
 - Use the `xpath()` function to retrieve a value from XML documents.
-- 
 
 

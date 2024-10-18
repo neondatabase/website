@@ -279,12 +279,8 @@ For more information on the functions for UUID generation, check out the [uuid-o
 
 
 
-- 
 - UUID stands for Universal Unique Identifier.
-- 
 -
-- 
 - Use the `gen_random_uuid()` function to generate a version 4 (random) UUID.
-- 
 
 

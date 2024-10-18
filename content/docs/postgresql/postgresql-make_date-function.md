@@ -137,4 +137,3 @@ Output:
 
 
 - Use the `MAKE_DATE()` function to generate a date value from the year, month, and day
-- 

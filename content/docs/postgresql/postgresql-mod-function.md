@@ -44,13 +44,9 @@ In this syntax:
 
 
 
-- 
 - `dividend`: The `dividend` is a number that you want to divide.
-- 
 -
-- 
 - `divisor`: The `divisor` is the number by which you want to divide the dividend.
-- 
 
 
 
@@ -253,8 +249,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `MOD()` function to find the remainder after dividing one number by another.
-- 
 
 

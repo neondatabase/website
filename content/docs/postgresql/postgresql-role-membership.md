@@ -152,13 +152,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the group role after the `GRANT` keyword.
-- 
 -
-- 
 - Second, specify the name of the role after the `TO` keyword.
-- 
 
 
 
@@ -325,13 +321,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the group role after the `REVOKE` keyword.
-- 
 -
-- 
 - Second, specify the name of the role after the `FROM` keyword.
-- 
 
 
 
@@ -369,20 +361,12 @@ Notice that PostgreSQL does not permit circular membership loops, where a role i
 
 
 
-- 
 - A group role is a role that serves as a container for other roles.
-- 
 -
-- 
 - All individual roles of a group role automatically inherit privileges granted to the group role. Use the `NOINHERIT` attribute if you don't want a role to inherit the privileges from its group roles.
-- 
 -
-- 
 - Use the `GRANT` statement to add a role to a group role.
-- 
 -
-- 
 - Use the `REVOKE` statement to remove a role from a group.
-- 
 
 

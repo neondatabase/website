@@ -50,9 +50,7 @@ In this syntax:
 
 
 
-- 
 - `n` is a number with the type [numeric](/docs/postgresql/postgresql-numeric/) or [double precision](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type) you want to calculate the base-10 logarithm.
-- 
 
 
 
@@ -90,13 +88,9 @@ In this syntax:
 
 
 
-- 
 - `b` is the base of the logarithm. `b` can be a value of the [numeric](/docs/postgresql/postgresql-numeric) type.
-- 
 -
-- 
 - `n` has the same meaning in the `LOG(n)` function.
-- 
 
 
 
@@ -294,12 +288,8 @@ LINE 1: SELECT LOG('64x');                  ^
 
 
 
-- 
 - Use `LOG(n)` function to calculate the base-10 logarithm of the number `n`.
-- 
 -
-- 
 - Use `LOG(b, n)` function to calculate the logarithm of the number `n` with the base `b`.
-- 
 
 

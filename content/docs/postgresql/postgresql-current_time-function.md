@@ -244,8 +244,6 @@ The output indicates that the `created_at` column is populated with the time at 
 
 
 
-- 
 - Use the PostgreSQL `CURRENT_TIME` function to get the current time with the default timezone.
-- 
 
 

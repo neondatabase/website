@@ -45,9 +45,7 @@ In this syntax:
 
 
 
-- 
 - `json_object` is the JSON object of type JSONB that you want to extract the keys.
-- 
 
 
 
@@ -305,8 +303,6 @@ In this example, the query returns each key along with its corresponding value f
 
 
 
-- 
 - Use the `jsonb_object_keys()` function to extract the keys from a JSON object.
-- 
 
 

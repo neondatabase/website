@@ -34,11 +34,8 @@ In this syntax:
 
 
 - First, specify one or more privileges that you want to revoke or use the `ALL` option to revoke all privileges.
-- -
 - Second, provide the name of the table after the `ON` keyword or use the `ALL TABLES` to revoke specified privileges from all tables in a schema.
-- -
 - Third, specify the name of the role from which you want to revoke privileges.
-- 
 
 
 ## PostgreSQL REVOKE statement example
@@ -134,4 +131,3 @@ To revoke privileges from other database objects such as [sequences](/docs/postg
 
 
 - Use the PostgreSQL `REVOKE` statement to revoke previously granted privileges on database objects from a role.
-- 

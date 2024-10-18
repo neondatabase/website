@@ -265,6 +265,4 @@ Like `alice`, `bob` can only retrieve data whose manager is `bob`.
 
 
 - Use the `ALTER TABLE table_name ENABLE ROW LEVEL SECURITY` statement to enable row-level security of a table.
-- -
 - Use the `CREATE POLICY` statement to define a new row-level security policy for a table.
-- 

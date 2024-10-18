@@ -139,8 +139,6 @@ Output:
 
 
 
-- 
 - Use the `TIMEOFDAY()` function to obtain the current date and time as a formatted string.
-- 
 
 

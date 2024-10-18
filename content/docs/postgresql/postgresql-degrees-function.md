@@ -224,8 +224,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `DEGREES()` function to convert radians to degrees.
-- 
 
 

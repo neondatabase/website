@@ -50,11 +50,8 @@ In this syntax:
 
 
 - First, specify the index name in the `CREATE INDEX`statement. Use the `IF NOT EXISTS` to prevent an error of creating an index that already exists.
-- -
 - Second, provide the table name along with indexed columns in the `ON` clause.
-- -
 - Third, use a predicate in the `WHERE` clause to specify the condition for rows to be included in the index.
-- 
 
 
 ## PostgreSQL partial index example
@@ -74,9 +71,7 @@ The active column has two values:
 
 
 - 0: inactive
-- -
 - 1: active
-- 
 
 
 When querying data from the database, you often work with inactive customers, not active ones. For example, you may want to follow up with inactive customers to get them back to order more films.
@@ -135,4 +130,3 @@ The partial index customer_active improves the query performance while including
 
 
 - Use PostgreSQL partial index to create an index that includes a subset of rows in a table specified by a condition.
-- 

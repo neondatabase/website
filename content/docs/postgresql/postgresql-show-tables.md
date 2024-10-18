@@ -238,6 +238,4 @@ In this query, we use a condition in the `WHERE` clause to exclude the system ta
 
 
 - Use the `\dt` or `\dt+` command in `psql` to show tables in a specific database.
-- -
 - Use the `SELECT` statement to query table information from the `pg_catalog.pg_tables` catalog.
-- 

@@ -29,9 +29,7 @@ In this syntax:
 
 
 - First, specify the database name that you want to change the owner after the `ALTER` `DATABASE` keyword
-- -
 - Second, specify the new owner, an existing role, in the `OWNER` `TO` clause.
-- 
 
 
 ## Changing database owner example
@@ -170,4 +168,3 @@ The output shows that the owner of the `scm` changed to `steve`.
 
 
 - Use the `ALTER DATABASE...OWNER TO` statement to change the owner of a database to a new one.
-- 

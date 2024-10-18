@@ -161,4 +161,3 @@ Output:
 
 
 - Use the `UPPER()` function to return a new string with all the characters of the input string converted to uppercase.
-- 

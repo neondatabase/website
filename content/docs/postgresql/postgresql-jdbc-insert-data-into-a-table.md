@@ -563,12 +563,8 @@ The output indicates the new `add()` method added nine rows to the `products` ta
 
 
 
-- 
 - Call the `executeUpdate()` method of the `PreparedStatement` object to execute the `INSERT` statement to insert a new row into a table.
-- 
 -
-- 
 - Use the `addBatch()` and the `executeBatch()` methods of the `PreparedStatement` object to execute batch inserts.
-- 
 
 

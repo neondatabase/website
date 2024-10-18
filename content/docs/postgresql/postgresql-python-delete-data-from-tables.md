@@ -200,4 +200,3 @@ The output indicates that part id 2 has been deleted successfully.
 
 
 - Use the `execute()` method of a `cursor` object to delete a row from a table.
-- 

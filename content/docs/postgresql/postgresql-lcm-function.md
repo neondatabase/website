@@ -110,9 +110,7 @@ In this example, we apply the `lcm()` function twice:
 
 
 - lcm(12,18) returns the LCM of 12 and 18, which is 36.
-- -
 - lcm(lcm(12,18),24) calculates the LCM of the previous LCM (36) and 24, which is 72.
-- 
 
 
 ### 3) Using the lcm() function to find the LCM of multiple numbers
@@ -242,4 +240,3 @@ Output:
 
 
 - Use the `lcm()` function to calculate the least common multiple (LCM) of two or more integers.
-- 

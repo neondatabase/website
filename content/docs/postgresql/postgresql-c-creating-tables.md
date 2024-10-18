@@ -314,8 +314,6 @@ The output indicates that the program has successfully created three tables incl
 
 
 
-- 
 - Call the `ExecuteNonQueryAsync()` method of the `NpgsqlCommand` to execute a `CREATE` `TABLE` statement to create a new table in the PostgreSQL database.
-- 
 
 

@@ -221,4 +221,3 @@ Output:
 
 
 - Use the `INOUT` parameters to return values from stored procedures in PostgreSQL.
-- 

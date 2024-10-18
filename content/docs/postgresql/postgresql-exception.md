@@ -50,13 +50,9 @@ How it works.
 
 
 - First, when an error occurs between the `begin` and `exception` clause, PL/pgSQL stops the execution and passes the control to the `exception` section.
-- -
 - Second, PL/pgSQL sequentially searches for the first `condition` that matches the error.
-- -
 - Third, if there is a match, the corresponding `handle_exception` statements will execute and the control is passed to the statement after the `end` keyword.
-- -
 - Finally, if no match is found, the error propagates out and can be caught by the `exception` clause of the enclosing block. If there is no enclosing block with the `exception` clause, PL/pgSQL will abort the processing.
-- 
 
 
 The condition names can be `no_data_found` in case of a `select` statement returns no rows or `too_many_rows` if the `select` statement returns more than one row. For a complete list of [condition names on the PostgreSQL website](https://www.postgresql.org/docs/current/errcodes-appendix.html).
@@ -304,4 +300,3 @@ SQL state: P0001
 
 
 - Use the `exception` clause in the `begin...end` block to catch and handle exceptions.
-- 

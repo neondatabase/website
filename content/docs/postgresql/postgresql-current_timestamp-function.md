@@ -33,7 +33,6 @@ The PostgreSQL `CURRENT_TIMESTAMP()` function accepts one optional argument:
 
 
 - `precision`: specifies the number of digits in the fractional seconds precision in the second field of the result.
-- 
 
 
 If you omit the `precision` argument, the `CURRENT_TIMESTAMP()` function will return a `TIMESTAMP` with a timezone that includes the full fractional seconds precision available.
@@ -160,4 +159,3 @@ In PostgreSQL, the `TRANSACTION_TIMESTAMP()` function is synonymous with the `CU
 
 
 - Use the PostgreSQL `CURRENT_TIMESTAMP()` to get the date and time at which the transaction starts.
-- 

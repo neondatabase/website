@@ -27,9 +27,7 @@ The `case` statement has two forms:
 
 
 - Simple `case` statement
-- -
 - Searched `case` statement
-- 
 
 
 Notice that you should not be confused about the `case` statement and [case expression](/docs/postgresql/postgresql-case). The `case` expression evaluates to a value while the `case` statement selects a section to execute based on conditions.
@@ -222,9 +220,7 @@ How it works:
 
 
 - First, select the total payment paid by the customer id 100 from the `payment` table.
-- -
 - Then, assign the service level to the customer based on the total payment
-- 
 
 
 The following diagram illustrates the logic:
@@ -244,8 +240,5 @@ Notice that the searched `case` statement is similar to the [if then elsif state
 
 
 - Use the `case` statement to execute a section based on certain conditions.
-- -
 - Use a simple `case` statement to compare a value with a list of values and if a match is found, execute a section.
-- -
 - Use a searched `case` statement to evaluate a list of conditions and execute a section if the condition is true.
-- 

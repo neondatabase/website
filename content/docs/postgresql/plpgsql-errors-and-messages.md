@@ -50,29 +50,17 @@ The `level` option determines the error severity with the following values:
 
 
 
-- 
 - `debug`
-- 
 -
-- 
 - `log`
-- 
 -
-- 
 - `notice`
-- 
 -
-- 
 - `info`
-- 
 -
-- 
 - `warning`
-- 
 -
-- 
 - `exception`
-- 
 
 
 
@@ -185,17 +173,11 @@ The `option` can be:
 
 
 
-- 
 - `hint`: provide the hint message so that the root cause of the error is easier to discover.
-- 
 -
-- 
 - `detail`: give detailed information about the error.
-- 
 -
-- 
 - `errcode`: identify the error code, which can be either by condition name or an `SQLSTATE` code. Please refer to the [table of error codes and condition names](https://www.postgresql.org/docs/current/static/errcodes-appendix.html).
-- 
 
 
 
@@ -282,12 +264,8 @@ Now you can use `raise` statement to either raise a message or report an error.
 
 
 
-- 
 - Use the `raise` statement to issue a message in PL/pgSQL.
-- 
 -
-- 
 - Utilize the `using` clause to provide a hint for the error message.
-- 
 
 

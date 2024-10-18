@@ -188,6 +188,4 @@ The output indicates that the `BEFORE TRUNCATE` trigger fires, raising an except
 
 
 - A `BEFORE TRUNCATE` trigger is a statement-level trigger.
-- -
 - Create a `BEFORE TRUNCATE` trigger to fire before a `TRUNCATE` event.
-- 

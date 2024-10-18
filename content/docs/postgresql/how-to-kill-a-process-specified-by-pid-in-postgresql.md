@@ -82,4 +82,3 @@ SELECT pg_terminate_backend(pid);
 
 
 - Use the pg_terminate_backend() function to terminate a process specified by pid.
-- 

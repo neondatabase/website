@@ -359,8 +359,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `to_jsonb()` function to convert an SQL value to a `JSONB` value.
-- 
 
 

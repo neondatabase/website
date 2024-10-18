@@ -419,8 +419,6 @@ The output shows that the program successfully called the stored procedure `enro
 
 
 
-- 
 - Call the `ExecuteNonQueryAsync()` method of the `NpgsqlCommand` object to execute a call to a PostgreSQL stored procedure from a C# program.
-- 
 
 

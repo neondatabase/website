@@ -17,15 +17,10 @@ Aggregate functions perform a calculation on a set of rows and return a single r
 
 
 - `AVG()` - return the average value.
-- -
 - `COUNT()` - return the number of values.
-- -
 - `MAX()` - return the maximum value.
-- -
 - `MIN()` - return the minimum value.
-- -
 - `SUM()` - return the sum of all or distinct values.
-- 
 
 
 In practice, you often use the aggregate functions with the `GROUP BY` clause in the `SELECT` statement:
@@ -370,16 +365,9 @@ The following picture illustrates the result:
 
 
 - Aggregate functions perform a calculation on a set of rows and return a single row.
-- -
 - Use aggregate functions to summarize data.
-- -
 - Use the `AVG()` function to calculate the average value in a set of values.
-- -
 - Use the `COUNT()` function to perform a count.
-- -
 - Use the `SUM()` function to calculate the total of values.
-- -
 - Use the `MIN()` function to get the minimum value in a set of values.
-- -
 - Use the `MAX()` function to get the maximum value in a set of values.
-- 

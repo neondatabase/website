@@ -152,4 +152,3 @@ Output:
 
 
 - Use the PostgreSQL `SQRT()` function to calculate the square root of a number.
-- 

@@ -22,13 +22,9 @@ The following steps describe how to restart PostgreSQL on Windows using Service 
 
 
 - Press `Win+R` to open the **Run** dialog.
-- -
 - Type `services.msc` and press `Enter`.
-- -
 - In the `Services` window, locate the PostgreSQL service. Typically, it is something like `postgresql-x64-<version>`.
-- -
 - Right-click on it and select **Stop** to stop the service.
-- 
 
 
 ### Step 2. Start PostgreSQL service
@@ -36,9 +32,7 @@ The following steps describe how to restart PostgreSQL on Windows using Service 
 
 
 - After stopping the service, right-click on the service name.
-- -
 - Select **Start** to start the service.
-- 
 
 
 ## 2) Restart PostgreSQL from the command line
@@ -54,11 +48,8 @@ If you prefer working with command, you can follow these steps to restart Postgr
 
 
 - Press `Win+R` to open the **Run** dialog
-- -
 - Type `cmd` and `press Ctrl+Shift+Enter` (not Enter). This will allow you to run the command prompt as an Administrator.
-- -
 - A **User Account Control** pop-up will display, you can click the **Yes** button to acknowledge.
-- 
 
 
 ### Step 2. Restart PostgreSQL service
@@ -152,9 +143,7 @@ It assumes that the `bin` directory is included in the `PATH` environment variab
 
 
 - Press `Win+R` to open the **Run** dialog.
-- -
 - Type `cmd` and ` press ``Ctrl+Shift+Enter ` to run the Command Prompt as an Administrator.
-- 
 
 
 ### Step 2. Execute the pg_ctl command

@@ -66,13 +66,9 @@ In this syntax:
 
 
 - First, specify the name for the foreign key constraint after the `CONSTRAINT` keyword. The `CONSTRAINT` clause is optional. If you omit it, PostgreSQL will assign an auto-generated name.
-- -
 - Second, specify one or more foreign key columns in parentheses after the `FOREIGN KEY` keywords.
-- -
 - Third, specify the parent table and parent key columns referenced by the foreign key columns in the `REFERENCES` clause.
-- -
 - Finally, specify the desired delete and update actions in the`ON DELETE` and `ON UPDATE` clauses.
-- 
 
 
 The delete and update actions determine the behaviors when the primary key in the parent table is deleted and updated.
@@ -88,15 +84,10 @@ PostgreSQL supports the following actions:
 
 
 - SET NULL
-- -
 - SET DEFAULT
-- -
 - RESTRICT
-- -
 - NO ACTION
-- -
 - CASCADE
-- 
 
 
 ## PostgreSQL foreign key constraint examples
@@ -447,8 +438,5 @@ ON DELETE CASCADE;
 
 
 - Use foreign keys to ensure the referential integrity and consistency of data between two tables.
-- -
 - Use the `FOREIGN KEY` constraint to define a foreign key constraint when creating a table.
-- -
 - Use the `ALTER TABLE ... ADD CONSTRAINT ... FOREIGN KEY` to add a foreign key constraint to an existing table.
-- 

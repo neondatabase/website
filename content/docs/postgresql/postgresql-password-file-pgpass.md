@@ -36,15 +36,10 @@ In this format:
 
 
 - `hostname`: This is the hostname of the server where the PostgreSQL server is running.
-- -
 - `port`: This is the port on which the PostgreSQL server is listening.
-- -
 - `database`: This is the database to which you want to connect.
-- -
 - `username`: This is the username that you want to use to connect to the database.
-- -
 - `password`: This is the password of the username.
-- 
 
 
 Each line in the `.pgpass` file represents connection information for a specific database.
@@ -176,6 +171,4 @@ The `psql` command will read the `.pgpass` file for connection information.
 
 
 - Use a password file `.pgpass` to store connection information securely.
-- -
 - Use the `.pgpass` file to avoid entering a password when connecting to a PostgreSQL database.
-- 

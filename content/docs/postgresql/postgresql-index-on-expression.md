@@ -45,9 +45,7 @@ In this statement:
 
 
 - First, specify the index name in the `CREATE INDEX` clause.
-- -
 - Then, form an expression that involves table columns of the `table_name` in the `ON` clause.
-- 
 
 
 After defining an index expression, PostgreSQL will consider using that index when the expression appears in the `WHERE` clause or in the `ORDER BY` clause of the SQL statement.
@@ -238,4 +236,3 @@ This time PostgreSQL uses the index on the expression `idx_ic_last_name` to quic
 
 
 - Use the PostgreSQL index on expression to improve queries that have an expression involving table columns.
-- 

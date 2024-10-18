@@ -305,18 +305,10 @@ Output:
 
 
 - Use the `pg_size_pretty()` function to format the size.
-- -
 - Use the `pg_relation_size()` function to get the size of a table.
-- -
 - Use the `pg_total_relation_size()` function to get the total size of a table.
-- -
 - Use the `pg_database_size()` function to get the size of a database.
-- -
 - Use the `pg_indexes_size()` function to get the size of an index.
-- -
 - Use the `pg_total_index_size()` function to get the size of all indexes on a table.
-- -
 - Use the `pg_tablespace_size()` function to get the size of a tablespace.
-- -
 - Use the `pg_column_size()` function to obtain the size of a column of a specific type.
-- 

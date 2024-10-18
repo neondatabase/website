@@ -47,13 +47,9 @@ In this syntax, the queries must conform to the following rules:
 
 
 
-- 
 - The number and the order of the columns in the select list of both queries must be the same.
-- 
 -
-- 
 - The data types of the columns in select lists of the queries must be compatible.
-- 
 
 
 
@@ -409,12 +405,8 @@ Output:
 
 
 
-- 
 - Use the `UNION` to combine result sets of two queries and return distinct rows.
-- 
 -
-- 
 - Use the `UNION ALL` to combine the result sets of two queries but retain the duplicate rows.
-- 
 
 

@@ -113,6 +113,4 @@ The query returns four databases in the current PostgreSQL server.
 
 
 - Use `\l` or `\l+` in `psql` to show all databases in a PostgreSQL database server.
-- -
 - Use the `SELECT` statement to query data from the `pg_database` to retrieve all the database names in a PostgreSQL database server.
-- 

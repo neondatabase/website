@@ -271,20 +271,12 @@ Output:
 
 
 
-- 
 - In PostgreSQL, a superuser bypass all permission checks except the permission to log in.
-- 
 -
-- 
 - Use the `CREATE ROLE...SUPERUSER` statement to create a superuser.
-- 
 -
-- 
 - Use the `ALTER ROLE...SUPERUSER` statement to make a role a superuser.
-- 
 -
-- 
 - Use the `ALTER ROLE...NOSUPERUSER` statement to revoke the superuser from a user.
-- 
 
 

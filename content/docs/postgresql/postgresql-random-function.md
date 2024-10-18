@@ -44,17 +44,11 @@ In practice, you'll find the `RANDOM()` function useful in various applications 
 
 
 
-- 
 - Generate random data.
-- 
 -
-- 
 - Shuffling results.
-- 
 -
-- 
 - Select random rows from a table.
-- 
 
 
 
@@ -277,8 +271,6 @@ SELECT SETSEED(0.5), RANDOM();
 
 
 
-- 
 - Use the `RANDOM()` function to generate a random number between 0 and 1.
-- 
 
 

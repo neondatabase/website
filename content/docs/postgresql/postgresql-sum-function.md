@@ -435,13 +435,9 @@ How it works.
 
 
 
-- 
 - First, calculate the rental duration by subtracting the rental date from the return date.
-- 
 -
-- 
 - Second, apply the `SUM()` function to the expression.
-- 
 
 
 
@@ -496,16 +492,10 @@ Output:
 
 
 
-- 
 - Use the `SUM()` function to calculate the sum of values in a set.
-- 
 -
-- 
 - Use the `DISTINCT` option in the `SUM()` function to calculate the sum of distinct values.
-- 
 -
-- 
 - Use the `SUM()` function with the `GROUP BY` clause to calculate the sum for each group.
-- 
 
 

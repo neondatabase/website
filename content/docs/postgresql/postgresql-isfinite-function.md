@@ -260,8 +260,6 @@ Output:
 
 
 
-- 
 - Use the `ISFINITE()` function to test if a date, a timestamp, or an interval is finite or not.
-- 
 
 

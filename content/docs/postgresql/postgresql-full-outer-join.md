@@ -52,21 +52,13 @@ In this syntax:
 
 
 
-- 
 - First, specify the columns from `table1` and `table2` in the `select_list`.
-- 
 -
-- 
 - Second, specify the `table1` that you want to retrieve data in the `FROM` clause.
-- 
 -
-- 
 - Third, specify the `table2` that you want to join with the `table1` in the `FULL OUTER JOIN` clause.
-- 
 -
-- 
 - Finally, define a condition for joining two tables.
-- 
 
 
 
@@ -90,9 +82,7 @@ The `FULL OUTER JOIN` is also known as `FULL JOIN`. The `OUTER` keyword is optio
 
 
 
-- 
 - The `FULL OUTER JOIN` starts with an empty result set.
-- 
 
 
 
@@ -104,13 +94,9 @@ The `FULL OUTER JOIN` is also known as `FULL JOIN`. The `OUTER` keyword is optio
 
 
 
-- 
 - First, identify rows in `table1` and `table2` where the values in the specified `column_name` match.
-- 
 -
-- 
 - Then, include these matching rows in the result set.
-- 
 
 
 
@@ -122,13 +108,9 @@ The `FULL OUTER JOIN` is also known as `FULL JOIN`. The `OUTER` keyword is optio
 
 
 
-- 
 - First, include rows from `table1` that do not have a match in `table2`. For the columns from `table2` in these rows, include NULLs.
-- 
 -
-- 
 - Second, include rows from `table2` that do not have a match in `table1`. For the columns from `table1` in these rows, include NULLs.
-- 
 
 
 
@@ -140,17 +122,11 @@ The `FULL OUTER JOIN` is also known as `FULL JOIN`. The `OUTER` keyword is optio
 
 
 
-- 
 - Return the final result set will contain all rows from both tables, with matching rows and non-matching rows from both `table1` and `table2`.
-- 
 -
-- 
 - If a row has a match on both sides, combine the values into a single row.
-- 
 -
-- 
 - If there is no match on one side, the columns from the non-matching side will have NULLs.
-- 
 
 
 
@@ -470,8 +446,6 @@ The output shows that `Juila Mcqueen` does not belong to any department.
 
 
 
-- 
 - Use the PostgreSQL `FULL OUTER JOIN` clause to combine data from both tables, ensuring that matching rows are included from both the left and right tables, as well as unmatched rows from either table.
-- 
 
 

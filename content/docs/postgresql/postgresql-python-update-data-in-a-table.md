@@ -23,15 +23,10 @@ To update data from a table in Python, you follow these steps:
 
 
 - First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
-- -
 - Next, create a `cursor` object from the `connection` object.
-- -
 - Then, execute an [UPDATE](/docs/postgresql/postgresql-update) statement by calling the `execute()` method of the `cursor` object.
-- -
 - After that, commit the changes by calling the `commit()` method of the `connection` object.
-- -
 - Finally, optionally obtain the number of updated rows from the `rowcount` property of the `cursor` object.
-- 
 
 
 ## Updating data in a table example
@@ -186,4 +181,3 @@ The name of the vendor id 1 has been changed as expected.
 
 
 - Use the `execute()` method of a `cursor` object to execute an `UPDATE` statement that updates data in a table
-- 

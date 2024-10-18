@@ -59,17 +59,11 @@ In this syntax:
 
 
 
-- 
 - First, specify the function name after the `create or replace function` keywords.
-- 
 -
-- 
 - Second, use the `returns setof` with a predefined row structure. The row structure can be a composite type defined in the database.
-- 
 -
-- 
 - Third, return rows inside the function body using the `return query` statement followed by a select statement.
-- 
 
 
 
@@ -309,8 +303,6 @@ Note that we use `\x` command in psql to display the result set vertically.
 
 
 
-- 
 - Use the `returns setof` to return one or more rows from a function.
-- 
 
 

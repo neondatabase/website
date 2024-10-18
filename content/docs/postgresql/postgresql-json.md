@@ -40,17 +40,11 @@ An object is defined as an unordered collection of key-value pairs enclosed in c
 
 
 
-- 
 - A key which is a string surrounded by double quotes (").
-- 
 -
-- 
 - A colon `:` that separates the key and value.
-- 
 -
-- 
 - A value that can be a string, a number, or even an object.
-- 
 
 
 
@@ -114,21 +108,13 @@ JSON supports some data types including:
 
 
 
-- 
 - String: "Joe"
-- 
 -
-- 
 - Number: 100, 9.99, ...
-- 
 -
-- 
 - Boolean: true and false.
-- 
 -
-- 
 - Null: null
-- 
 
 
 
@@ -152,13 +138,9 @@ PostgreSQL offers two data types for storing JSON:
 
 
 
-- 
 - JSON - store an exact copy of the JSON text.
-- 
 -
-- 
 - JSONB - store the JSON data in binary format.
-- 
 
 
 
@@ -614,12 +596,8 @@ The `->> index` extract the index element in an array. In this example, we use t
 
 
 
-- 
 - JSON stands for JavaScript Object Notation.
-- 
 -
-- 
 - Use JSONB data type to store JSON data.
-- 
 
 

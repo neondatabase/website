@@ -332,25 +332,15 @@ The following is the list of the connection parameters:
 
 
 
-- 
 - `database`: the name of the database that you want to connect.
-- 
 -
-- 
 - `user`: the username used to authenticate.
-- 
 -
-- 
 - `password`: password used to authenticate.
-- 
 -
-- 
 - `host`: database server address e.g., localhost or an IP address.
-- 
 -
-- 
 - `port`: the port number that defaults to 5432 if it is not provided.
-- 
 
 
 
@@ -428,12 +418,8 @@ The output indicates that you have successfully connected to the PostgreSQL serv
 
 
 
-- 
 - Use the `psycopg2` package to connect to the PostgreSQL server from Python.
-- 
 -
-- 
 - Call the `connect()` function of the `psycopg2` module to connect to the PostgreSQL server.
-- 
 
 

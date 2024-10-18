@@ -45,17 +45,11 @@ In this syntax:
 
 
 
-- 
 - First, specify the database name that you want to remove after the `DROP DATABASE` keywords.
-- 
 -
-- 
 - Second, if you delete a non-existing database, PostgreSQL will issue an error. To prevent the error, you can use the `IF EXISTS` option. In this case, PostgreSQL will issue a notice instead.
-- 
 -
-- 
 - Third, the `DROP DATABASE` statement will fail if there are active connections to the target database unless you use the `FORCE` option. The `FORCE` option will attempt to terminate all existing connections to the target database.
-- 
 
 
 
@@ -363,8 +357,6 @@ DROP DATABASE
 
 
 
-- 
 - Use the PostgreSQL `DROP DATABASE` statement to drop a database.
-- 
 
 

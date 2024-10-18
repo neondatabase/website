@@ -469,20 +469,12 @@ Output:
 
 
 
-- 
 - In PostgreSQL, an array is a collection of elements with the same data type.
-- 
 -
-- 
 - Use the `data_type []` to define a one-dimensional array for a column.
-- 
 -
-- 
 - Use the `[index]` syntax to access the `index` element of an array. The first element has an index of one.
-- 
 -
-- 
 - Use the `unnest()` function to expand an array to a list of rows.
-- 
 
 

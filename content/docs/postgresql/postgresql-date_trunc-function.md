@@ -54,31 +54,18 @@ Here are the valid values for the `field`:
 
 
 - millennium
-- -
 - century
-- -
 - decade
-- -
 - year
-- -
 - quarter
-- -
 - month
-- -
 - week
-- -
 - day
-- -
 - hour
-- -
 - minute
-- -
 - second
-- -
 - milliseconds
-- -
 - microseconds
-- 
 
 
 ### time_zone
@@ -291,4 +278,3 @@ Output:
 
 
 - Use the PostgreSQL `DATE_TRUNC` function to truncate a timestamp or an interval value to a specified level of precision
-- 

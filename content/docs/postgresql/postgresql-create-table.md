@@ -113,25 +113,15 @@ PostgreSQL includes the following column constraints:
 
 
 
-- 
 - [NOT NULL ](/docs/postgresql/postgresql-not-null-constraint)- ensures that the values in a column cannot be `NULL`.
-- 
 -
-- 
 - [UNIQUE](/docs/postgresql/postgresql-unique-constraint) - ensures the values in a column are unique across the rows within the same table.
-- 
 -
-- 
 - [PRIMARY KEY](/docs/postgresql/postgresql-primary-key) - a primary key column uniquely identifies rows in a table. A table can have one and only one primary key. The primary key constraint allows you to define the primary key of a table.
-- 
 -
-- 
 - [CHECK](/docs/postgresql/postgresql-check-constraint) - ensures the data must satisfy a boolean expression. For example, the value in the price column must be zero or positive.
-- 
 -
-- 
 - [FOREIGN KEY](/docs/postgresql/postgresql-foreign-key) - ensures that the values in a column or a group of columns from a table exist in a column or group of columns in another table. Unlike the primary key, a table can have many foreign keys.
-- 
 
 
 
@@ -155,29 +145,17 @@ We will create a new table called `accounts` in the `dvdrental` [sample database
 
 
 
-- 
 - `user_id` - primary key
-- 
 -
-- 
 - `username` - unique and not null
-- 
 -
-- 
 - `password` - not null
-- 
 -
-- 
 - `email` - unique and not null
-- 
 -
-- 
 - `created_at` - not null
-- 
 -
-- 
 - `last_login` - null
-- 
 
 
 
@@ -359,12 +337,8 @@ Indexes:
 
 
 
-- 
 - Use the `CREATE TABLE` statement to create a new table.
-- 
 -
-- 
 - Use the `IF NOT EXISTS` option to create the new table only if it does not exist.
-- 
 
 

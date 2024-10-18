@@ -238,8 +238,6 @@ Output:
 
 
 
-- 
 - Specify a condition in the `WHEN` clause of the `CREATE TRIGGER` statement to instruct PostgreSQL to fire the trigger when the condition is true.
-- 
 
 

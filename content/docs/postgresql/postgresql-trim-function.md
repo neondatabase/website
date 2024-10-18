@@ -46,25 +46,15 @@ In this syntax:
 
 
 
-- 
 - `source_string`: Specify the string that you want to remove specified characters.
-- 
 -
-- 
 - `trim_character`: Specify the trim characters.
-- 
 -
-- 
 - `LEADING`: This option instructs the function to remove the leading occurrences of the specified trim character.
-- 
 -
-- 
 - `TRAILING`: This option instructs the function to remove trailing occurrences of the specified trim character.
-- 
 -
-- 
 - `BOTH`: This option instructs the function to remove both leading and trailing occurrences of the specified trim character.
-- 
 
 
 
@@ -328,8 +318,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `TRIM()` function to remove a specified leading, trailing, or both leading and trailing characters from a string.
-- 
 
 

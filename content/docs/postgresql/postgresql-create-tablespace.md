@@ -26,9 +26,7 @@ PostgreSQL comes with two default tablespaces:
 
 
 - `pg_default` tablespace stores user data.
-- -
 - `pg_global` tablespace stores global data.
-- 
 
 
 Tablespaces enable you to control the disk layout of PostgreSQL. There are two primary advantages to using tablespaces:
@@ -36,9 +34,7 @@ Tablespaces enable you to control the disk layout of PostgreSQL. There are two p
 
 
 - First, if a partition on which the cluster was initialized runs out of space, you can create a new tablespace on a different partition and utilize it until you reconfigure the system.
-- -
 - Second, you can use statistics to optimize database performance. For example, you can place the frequent access indexes or tables on fast-performing devices like solid-state drives, and store the less frequently accessed archive data on slower devices.
-- 
 
 
 ## PostgreSQL CREATE TABLESPACE statement
@@ -208,6 +204,4 @@ Output:
 
 
 - A tablespace is a location on the storage device where PostgreSQL stores data files.
-- -
 - Use the `CREATE TABLESAPCE` statement to create a new tablespace.
-- 

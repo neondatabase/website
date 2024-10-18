@@ -24,41 +24,23 @@ This section shows you various functions for getting the current date, current d
 
 
 
-- 
 - [CURRENT_DATE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_date/) - Return the current date.
-- 
 -
-- 
 - [CURRENT_TIME](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_time/) - Return the current time without date parts.
-- 
 -
-- 
 - [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/) - Return the current date and time with the time zone at which the current transaction starts.
-- 
 -
-- 
 - [CLOCK_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-clock_timestamp/) - Return the current timestamp which changes during statement execution.
-- 
 -
-- 
 - [STATEMENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-statement_timestamp/) - Return the current timestamp and time of the current statement.
-- 
 -
-- 
 - [NOW](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/) - Return the date and time with the time zone at which the current transaction starts.
-- 
 -
-- 
 - [TRANSACTION_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/) - Same as the [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/) or [NOW()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/) function.
-- 
 -
-- 
 - [LOCALTIME](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/) - Return the time at which the current transaction starts.
-- 
 -
-- 
 - [LOCALTIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtimestamp/) - Return the date and time at which the current transaction starts.
-- 
 
 
 
@@ -80,13 +62,9 @@ This section provides you with functions for extracting date and time components
 
 
 
-- 
 - [DATE_PART](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/) - Get a field of a timestamp or an interval e.g., year, month, day, etc.
-- 
 -
-- 
 - [EXTRACT](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/) - Same as [DATE_PART()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/) function.
-- 
 
 
 
@@ -108,21 +86,13 @@ This section introduces the functions that convert a string to a date and timest
 
 
 
-- 
 - [TO_DATE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_date/) - Convert a string to a date.
-- 
 -
-- 
 - [TO_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_timestamp/) - Convert a string to a timestamp.
-- 
 -
-- 
 - [MAKE_DATE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_date/) - Create a date from year, month, and day.
-- 
 -
-- 
 - [MAKE_TIME](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/) - Create a time from hour, minute, and second.
-- 
 
 
 
@@ -144,25 +114,15 @@ This section covers the function that handles intervals such as calculating age 
 
 
 
-- 
 - [AGE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/) - Calculate the age and return an interval.
-- 
 -
-- 
 - [JUSTIFY_DAYS](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_days/) - Adjust 30-day intervals as months.
-- 
 -
-- 
 - [JUSTIFY_HOURS](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/) - Adjust 24-hour intervals as days
-- 
 -
-- 
 - [JUSTIFY_INTERVAL](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/) - Adjust interval using justify_days and justify_hours functions, with additional sign adjustments.
-- 
 -
-- 
 - [MAKE_INTERVAL](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/) - Create an interval from the provided interval's components.
-- 
 
 
 
@@ -184,9 +144,7 @@ This section shows you how to use the date and time operators.
 
 
 
-- 
 - [AT TIME ZONE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-at-time-zone/) - Convert a timestamp or a timestamp with time zone to a different time zone.
-- 
 
 
 
@@ -208,21 +166,13 @@ This section shows you various date and time utility functions.
 
 
 
-- 
 - [DATE_TRUNC](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/) - Truncate a date.
-- 
 -
-- 
 - [ISFINITE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-isfinite/) - Check if a date, a timestamp, or an interval is finite or not (not +/-infinity).
-- 
 -
-- 
 - [TIMEOFDAY](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-timeofday/) - Return the current date and time, like clock_timestamp, as a text string).
-- 
 -
-- 
 - [PG_SLEEP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-pg_sleep/) - Pause the execution of a statement for some seconds.
-- 
 
 
 

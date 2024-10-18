@@ -33,7 +33,6 @@ In this syntax:
 
 
 - `text`: The input string that you want to reverse.
-- 
 
 
 The `REVERSE()` function returns a string with the order of all the characters reversed.
@@ -217,4 +216,3 @@ Output:
 
 
 - Use the PostgreSQL `REVERSE()` function to reverse the order of characters within a string.
-- 

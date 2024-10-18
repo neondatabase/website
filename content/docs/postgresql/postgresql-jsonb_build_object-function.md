@@ -146,4 +146,3 @@ HINT:  The arguments of jsonb_build_object() must consist of alternating keys an
 
 
 - Use the PostgreSQL `jsonb_build_object()` function to build a JSON object out of a variadic argument list.
-- 

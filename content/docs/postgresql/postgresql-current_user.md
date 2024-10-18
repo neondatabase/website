@@ -216,12 +216,8 @@ The `SESSION_USER` function returns `postgres`, not `bob`.
 
 
 
-- 
 - Use the `CURRENT_USER` function to return the current effective user within the session.
-- 
 -
-- 
 - Use the `SESSION_USER` function to return the original user who connected to the session.
-- 
 
 

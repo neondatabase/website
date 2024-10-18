@@ -99,11 +99,8 @@ quantity unit [quantity unit...] [direction]
 
 
 - `quantity` is a number, sign `+` or `-` is also accepted
-- -
 - `unit` can be any of millennium, century, decade, year, month, week, day, hour, minute, second, millisecond, microsecond, or abbreviation (y, m, d, etc.,) or plural forms (months, days, etc.).
-- -
 - `direction` can be `ago` or empty string `''`
-- 
 
 
 This format is called `postgres_verbose` which is also used for the interval output format. The following examples illustrate some interval values that use the verbose syntax:
@@ -212,13 +209,9 @@ PostgreSQL provides four output formats:
 
 
 - `sql standard`
-- -
 - `postgres`
-- -
 - `postgresverbose`
-- -
 - `iso_8601`
-- 
 
 
 PostgreSQL uses the `postgres` style by default for formatting the interval values.

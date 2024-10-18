@@ -182,9 +182,7 @@ In this example:
 
 
 - The `jsonb_path_query`(info, '\$.name') returns the name of the person.
-- -
 - The `jsonb_path_query`(info, '\$.pets') returns the `pets` array, and `jsonb_array_length()` returns the number of elements in the `pets` array.
-- 
 
 
 ## Summary
@@ -192,4 +190,3 @@ In this example:
 
 
 - Use the `jsonb_array_length()` function to get the number of elements in the top-level JSON array.
-- 

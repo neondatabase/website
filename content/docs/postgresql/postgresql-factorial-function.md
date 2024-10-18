@@ -87,4 +87,3 @@ Output:
 
 
 - Use the `factorial()` function to calculate the factorial of a number.
-- 

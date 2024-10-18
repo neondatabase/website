@@ -184,4 +184,3 @@ It takes about 1008 ms or 1s to complete.
 
 
 - Use the `CLOCK_TIMESTAMP()` function to return the current date and time.
-- 

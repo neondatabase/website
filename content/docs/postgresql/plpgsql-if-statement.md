@@ -387,13 +387,9 @@ How it works:
 
 
 
-- 
 - First, select the film with id 100. If the film does not exist, raise a notice that the film is not found.
-- 
 -
-- 
 - Second, use the `if...then....elsif` statement to assign a description to a film based on the length of the film.
-- 
 
 
 
@@ -405,16 +401,10 @@ How it works:
 
 
 
-- 
 - Use the `if..then` statement to execute one or more statements when a condition is `true`.
-- 
 -
-- 
 - Use the `if...then...else` statement to execute statements when a condition is `true` and execute other statements when the condition is `false`.
-- 
 -
-- 
 - Use the `if...then...elsif` statement to evaluate multiple conditions and execute statements when the corresponding condition is `true`.
-- 
 
 

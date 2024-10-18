@@ -56,13 +56,9 @@ In this syntax:
 
 
 
-- 
 - First, specify a sort expression, which can be a column or an expression, that you want to sort after the `ORDER BY` keywords. If you want to sort the result set based on multiple columns or expressions, you need to place a comma (`,`) between two columns or expressions to separate them.
-- 
 -
-- 
 - Second, you use the `ASC` option to sort rows in ascending order and the `DESC` option to sort rows in descending order. If you omit the `ASC` or `DESC` option, the `ORDER BY` uses `ASC` by default.
-- 
 
 
 
@@ -585,20 +581,12 @@ Output:
 
 
 
-- 
 - Use the `ORDER BY` clause in the `SELECT` statement to sort the rows in the query set.
-- 
 -
-- 
 - Use the `ASC` option to sort rows in ascending order and `DESC` option to sort rows in descending order.
-- 
 -
-- 
 - The `ORDER BY` clause uses the `ASC` option by default.
-- 
 -
-- 
 - Use `NULLS FIRST` and `NULLS LAST` options to explicitly specify the order of `NULL` with other non-null values.
-- 
 
 

@@ -38,13 +38,9 @@ In this syntax:
 
 
 
-- 
 - `base`: This is the base number
-- 
 -
-- 
 - `exponent`: This is the exponent to which you want to raise the base number.
-- 
 
 
 
@@ -336,13 +332,9 @@ To calculate the compound interest of each investment:
 
 
 
-- 
 - Calculate the interest rate using the `POWER()` function.
-- 
 -
-- 
 - Use the `ROUND()` function to round the future value to two decimal places.
-- 
 
 
 
@@ -354,8 +346,6 @@ To calculate the compound interest of each investment:
 
 
 
-- 
 - Use the PostgreSQL `POWER()` function to raise a number to a specific power.
-- 
 
 

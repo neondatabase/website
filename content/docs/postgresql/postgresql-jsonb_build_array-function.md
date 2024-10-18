@@ -120,4 +120,3 @@ Output:
 
 
 - Use the PostgreSQL `jsonb_build_array()` function to create a `JSONB` array from a variadic list of arguments.
-- 

@@ -36,9 +36,7 @@ In this syntax:
 
 
 - First, provide a `value` that you want to convert. It can be a constant, a table column, or an expression.
-- -
 - Then, specify the target [data type](/docs/postgresql/postgresql-data-types) to which you want to convert the `value`.
-- 
 
 
 The `CAST()` returns a value after it has been cast to the specified target data type. If the `CAST()` function cannot cast the value to a target type, it'll raise an error. The error message will depend on the nature of the conversion failure.
@@ -64,9 +62,7 @@ In this syntax:
 
 
 - `value` is a value that you want to convert.
-- -
 - `target_type` specifies the target type that you want to cast the value to.
-- 
 
 
 The cast operator `::` returns a value after casting the `value` to the `target_type` or raise an error if the cast fails.
@@ -580,9 +576,7 @@ In this example:
 
 
 - `rating ~ E'^\\d+$'`: This expression matches the values in the rating column with a regular expression `E'^\\d+$'`. The pattern checks if a value contains only digits (`\d+`) from the beginning (`^`) to the end (`$`). The letter `E` before the string indicates is an escape string.
-- -
 - If the value contains only digits, the `CAST()` function converts it to an integer. Otherwise, it returns zero.
-- 
 
 
 In this tutorial, you have learned how to use PostgreSQL `CAST` to convert a value of one type to another.

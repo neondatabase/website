@@ -35,45 +35,25 @@ This PostgreSQL Python section covers the most common activities for interacting
 
 
 
-- 
 - [Connecting to the PostgreSQL database server ](https://www.postgresqltutorial.com/postgresql-python/connect/)– show you how to connect to the PostgreSQL database server from Python.
-- 
 -
-- 
 - [Creating new PostgreSQL tables in Python](https://www.postgresqltutorial.com/postgresql-python/create-tables/) – show you how to create new tables in PostgreSQL from Python.
-- 
 -
-- 
 - [Inserting data into the PostgreSQL table in Python ](https://www.postgresqltutorial.com/postgresql-python/insert/)– explain to you how to insert data into a PostgreSQL database table in Python.
-- 
 -
-- 
 - [Updating data in the PostgreSQL table in Python ](https://www.postgresqltutorial.com/postgresql-python/update/)– learn various ways to update data in the PostgreSQL table.
-- 
 -
-- 
 - [Transaction](https://www.postgresqltutorial.com/postgresql-python/transaction/) - show you how to perform transactions in Python.
-- 
 -
-- 
 - [Calling a PostgreSQL function in Python](https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/) - show you step by step how to call a PostgreSQL function in Python.
-- 
 -
-- 
 - [Calling a PostgreSQL stored procedure in Python](https://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/) – guide you on how to call a stored procedure from in a Python application.
-- 
 -
-- 
 - [Handling PostgreSQL BLOB data in Python](https://www.postgresqltutorial.com/postgresql-python/blob/)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
-- 
 -
-- 
 - [Querying data from the PostgreSQL tables ](https://www.postgresqltutorial.com/postgresql-python/query/)– walk you through the steps of querying data from the PostgreSQL tables in a Python application.
-- 
 -
-- 
 - [Deleting data from PostgreSQL tables in Python](https://www.postgresqltutorial.com/postgresql-python/delete/) - show you how to delete data in a table in Python.
-- 
 
 
 

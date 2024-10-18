@@ -46,13 +46,9 @@ In this syntax:
 
 
 
-- 
 - First, specify a JSON object (`json_object`) of type JSONB that you want to convert into a record type.
-- 
 -
-- 
 - Second, define the `record_type` with a list of columns that have the same names as the keys in the JSON object. The record may have fewer columns than the number of keys in the JSON object. If the names of the columns of the `record_type` are not the same as the names of the keys in the JSON object, they will be ignored.
-- 
 
 
 
@@ -222,8 +218,6 @@ Output:
 
 
 
-- 
 - Use the `jsonb_to_record()` function to convert a JSON object into a PostgreSQL record type.
-- 
 
 

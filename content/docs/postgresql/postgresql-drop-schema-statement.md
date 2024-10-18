@@ -30,11 +30,8 @@ In this syntax:
 
 
 - First, specify the name of the schema from which you want to remove after the `DROP SCHEMA` keywords.
-- -
 - Second, use the `IF EXISTS` option to conditionally delete schema only if it exists.
-- -
 - Third, use `CASCADE` to delete schema and all of its objects, and in turn, all objects that depend on those objects. If you want to delete schema only when it is empty, you can use the `RESTRICT` option. By default, the `DROP SCHEMA` uses the `RESTRICT` option.
-- 
 
 
 To execute the `DROP SCHEMA` statement, you must be the owner of the schema that you want to drop or a superuser.
@@ -169,4 +166,3 @@ DROP SCHEMA sales CASCADE;
 
 
 - Use the PostgreSQL `DROP SCHEMA` statement to drop one or more schemas in a database.
-- 

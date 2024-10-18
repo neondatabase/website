@@ -240,9 +240,6 @@ Output:
 
 
 - Call the `BeginTransactionAsync()` method of the `NpgsqlConnection` object to start a transaction.
-- -
 - Call the `CommitAsync()` method of the `NpgsqlTransaction` object to apply the changes since the transaction started to the database permanently.
-- -
 - Call the `RollbackAsync()` method of the `NpgsqlTransaction` object to roll back the changes.
 
-- 

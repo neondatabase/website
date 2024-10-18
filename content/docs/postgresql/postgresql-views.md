@@ -109,13 +109,9 @@ In this section, you'll learn about the fundamentals of PostgreSQL views includi
 
 
 
-- 
 - [Create View](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/ "Managing PostgreSQL Views") - show you how to create a new view in your database.
-- 
 -
-- 
 - [Drop view](https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/) - learn to drop one or more views from the database.
-- 
 
 
 
@@ -137,13 +133,9 @@ In this section, you'll learn how to create updatable views, which allow you to 
 
 
 
-- 
 - [Create updatable views](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/) - show how to create updatable views.
-- 
 -
-- 
 - [WITH CHECK OPTION](https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/) - guide you on how to enforce the data modification through a view based on a condition of the defining query.
-- 
 
 
 
@@ -159,9 +151,7 @@ In this section, you'll learn how to create updatable views, which allow you to 
 
 
 
-- 
 - [Materialized views](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/ "PosgreSQL Materialized Views") - introduce you to materialized views and provide you with the steps of creating and refreshing data for materialized views.
-- 
 
 
 
@@ -177,9 +167,7 @@ In this section, you'll learn how to create updatable views, which allow you to 
 
 
 
-- 
 - [Create recursive views](https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/) - explain the recursive view and show you how to create a recursive view in PostgreSQL.
-- 
 
 
 
@@ -201,13 +189,9 @@ This section discusses the management of the PostgreSQL views including altering
 
 
 
-- 
 - [Alter view](https://www.postgresqltutorial.com/postgresql-views/postgresql-alter-view/) - learn how to rename a view, modify the check option, change a column, and set a new schema for a view.
-- 
 -
-- 
 - [List views in the current database](https://www.postgresqltutorial.com/postgresql-views/postgresql-list-views/) - show you how to list views in the current database using the `\dv` command in psql or querying from the `information_schema.views` view.
-- 
 
 
 

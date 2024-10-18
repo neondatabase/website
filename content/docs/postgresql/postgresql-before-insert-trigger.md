@@ -227,4 +227,3 @@ Eighth, retrieve the data from the `inventory_stat` table:
 
 
 - A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a table.
-- 

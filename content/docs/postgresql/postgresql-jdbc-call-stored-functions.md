@@ -22,15 +22,10 @@ To call the `initcap()` function, you follow these steps:
 
 
 - First, [establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/).
-- -
 - Second, create a `CallableStatement` object by calling the `prepareCall()` method of the `Connection` object.
-- -
 - Register `OUT` parameters if applicable.
-- -
 - Bind values to the statement if applicable.
-- -
 - Third, execute the function call and obtain the result.
-- 
 
 
 The following example creates a new class named `Util` and defines a static method `properCase()` that calls the `initcap()` function in PostgreSQL:
@@ -231,4 +226,3 @@ Product{id=6, name='Phone Stand', price=24.99}
 
 
 - Use the `CallableStatement` to call a built-in function from PostgreSQL.
-- 

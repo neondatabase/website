@@ -33,9 +33,7 @@ The `TO_NUMBER()` function requires two arguments:
 
 
 - string: This is a string that you want to convert to a number.
-- -
 - format: This is the format that specifies how the string should be interpreted as a number.
-- 
 
 
 The `TO_NUMBER()` function returns a value whose data type is numeric.
@@ -113,10 +111,8 @@ In this example:
 
 
 
-- 
 - `'12,345.6-'` is the input that we want to convert to a number. The input string consists of a group separator (`,`), a decimal point (`.`), and a minus sign (`-`) indicating a negative number.
 
-- 
 -
 
 * 
@@ -130,8 +126,7 @@ In this example:
   -   - `D`: The decimal point (`.`).
   -   -
   -   - `S`: The sign (either `+` or `-`).
-  - 
-  
+    
 * 
 
 
@@ -174,10 +169,8 @@ In this example:
 
 
 
-- 
 - `'$1,234,567.89'` is the input string representing a money amount. It includes a dollar sign (`$`), a group separator (`,`), a decimal point (`.`), and numeric digits.
 
-- 
 -
 
 * 
@@ -195,8 +188,7 @@ In this example:
   -   - `.`: The decimal point.
   -   -
   -   - `99`: Two-digit placeholders for the fractional part (cents).
-  - 
-  
+    
 * 
 
 
@@ -269,4 +261,3 @@ The `TO_NUMBER()` function issues an error in this case.
 
 
 - Use the PostgreSQL `TO_NUMBER()` function to convert a string to a numeric value.
-- 

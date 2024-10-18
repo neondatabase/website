@@ -126,7 +126,7 @@ Then, right-click the project name and choose the **Open Module Settings**.
 
 
 
-After that, choose the **Libraries** under **Project Settings **and click **New Project Library**.
+After that, choose the **Libraries** under **Project Settings** and click **New Project Library**.
 
 
 
@@ -172,17 +172,11 @@ The `config.properties` include three connection parameters:
 
 
 
-- 
 - `db.url`: The URL of the PostgreSQL database server. In this example, we connect to the `sales` database on the local PostgreSQL server with port 5432 (default port).
-- 
 -
-- 
 - `db.user`: The user account that connects to the database.
-- 
 -
-- 
 - `db.password`: The password for the user.
-- 
 
 
 
@@ -265,17 +259,11 @@ The `DatabaseConfig` has three static methods that expose the database configura
 
 
 
-- 
 - `getDbUrl()` - Return the database URL.
-- 
 -
-- 
 - `getDbUsername()` - Return the username.
-- 
 -
-- 
 - `getDbPassword()` - Return the password.
-- 
 
 
 
@@ -427,8 +415,6 @@ Connected to the PostgreSQL database.
 
 
 
-- 
 - Use the `DriverManager.getConnection()` method to establish a connection to a database on a PostgreSQL server.
-- 
 
 

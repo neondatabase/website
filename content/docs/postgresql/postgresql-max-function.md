@@ -125,9 +125,7 @@ How it works.
 
 
 - First, the subquery uses the `MAX()` function to return the highest payment.
-- -
 - Second, the outer query retrieves all the payments whose amounts are equal to the highest payment returned from the subquery.
-- 
 
 
 ### 3) Using PostgreSQL MAX() function with the GROUP BY clause
@@ -213,4 +211,3 @@ customer_id |  max
 
 
 - Use the PostgreSQL `MAX()` function to find the maximum value of a set.
-- 

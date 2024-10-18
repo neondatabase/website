@@ -46,13 +46,9 @@ In this syntax:
 
 
 
-- 
 - `record` is an SQL composite value that you want to convert into a JSON object.
-- 
 -
-- 
 - `boolean` if true, the function will add a line feed between top-level elements.
-- 
 
 
 
@@ -196,13 +192,9 @@ How it works.
 
 
 
-- 
 - The subquery retrieves the `title` and `length` from the `film` table.
-- 
 -
-- 
 - The outer query uses the `row_to_json()` to convert each row returned by the subquery into a JSON object.
-- 
 
 
 
@@ -240,8 +232,6 @@ FROM
 
 
 
-- 
 - Use the `row_to_json()` function to convert an SQL composite value to a JSON object.
-- 
 
 

@@ -63,13 +63,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the index name in the `CREATE INDEX` clause. Use the `IF NOT EXISTS` option to prevent an error from creating an index whose name already exists.
-- 
 -
-- 
 - Second, provide the table name along with the index columns in the parenthesis.
-- 
 
 
 
@@ -403,12 +399,8 @@ The output indicates that PostgreSQL performs a sequential scan of the `people` 
 
 
 
-- 
 - Use a PostgreSQL multicolumn index to define an index involving two or more columns from a table.
-- 
 -
-- 
 - Place the columns that are frequently used in the `WHERE` clause at the beginning of the column list of the multicolumn index.
-- 
 
 

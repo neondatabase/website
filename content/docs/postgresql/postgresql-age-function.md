@@ -204,8 +204,6 @@ In this example, we use the `AGE()` function to calculate the rental duration ba
 
 
 
-- 
 - Use the PostgreSQL `AGE()` function to calculate ages.
-- 
 
 

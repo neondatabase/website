@@ -18,15 +18,10 @@ To query data from a table using JDBC, you follow these steps:
 
 
 - [Establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) to the PostgreSQL server.
-- -
 - Create an instance of the `Statement` or `PreparedStatement` object.
-- -
 - Execute a statement to get a `ResultSet` object.
-- -
 - Process the `ResultSet` object.
-- -
 - Close the `Statement` & `Connection` object by calling their `close()` method.
-- 
 
 
 If you use the try-with-resources statement, you don't need to explicitly call the `close()` method of the `Statement` or `Connection` object. It will automatically close these objects.
@@ -60,9 +55,7 @@ In JDBC, a `Statement` object represents an SQL statement.
 
 
 - First, create a `Statement` object from the `Connection` object.
-- -
 - Then, execute the `Statement` object to get a `ResultSet` object that represents a database result set.
-- 
 
 
 JDBC offers three types of `Statement` objects:
@@ -70,11 +63,8 @@ JDBC offers three types of `Statement` objects:
 
 
 - `Statement`: use the Statement to implement a simple SQL statement that has no parameters.
-- -
 - `PreparedStatement`: is the subclass of the `Statement` class, which allows you to bind parameters to the SQL statement.
-- -
 - `CallableStatement`: extends the `PreparedStatement` class that can execute a stored procedure.
-- 
 
 
 ### 3) Executing a query
@@ -86,11 +76,8 @@ To execute a query, you use one of the following methods of the `Statement` obje
 
 
 - `execute()`: Return true if the first object of the query is a `ResultSet` object. You can get the `ResultSet` by calling the method `getResultSet()`.
-- -
 - `executeQuery()`: Return only one `ResultSet` object.
-- -
 - `executeUpdate()`: Return the number of rows affected by the statement. Typically, you use this method for executing the [INSERT](/docs/postgresql/postgresql-insert/), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) statement.
-- 
 
 
 ### 4) Processing the ResultSet
@@ -425,4 +412,3 @@ Product{id=1, name='Phone Case', price=19.99}
 
 
 - Use the `executeQuery()` method of the `Statement` or `PreparedStatement` object to retrieve data from a table.
-- 

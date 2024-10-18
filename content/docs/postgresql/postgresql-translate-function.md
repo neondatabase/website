@@ -86,9 +86,7 @@ In this example:
 
 
 - The character `'1'` in string `'12345'` is substituted by character `'a'`, The character `'3'` in the string `'12345'` is substituted by the character `'x'`.
-- -
 - Because the string `'134'` has more characters than the string `'ax'`, the `TRANSLATE()` function removes the extra character in the string `'134'`, which is `'4'`, from the string `'12345'`.
-- 
 
 
 The following illustrates the result:

@@ -42,13 +42,9 @@ In this syntax:
 
 
 - First, specify the index name after the `CREATE INDEX` clause.
-- -
 - Second, use the `IF NOT EXISTS` option to prevent an error if the index already exists.
-- -
 - Third, provide the table name to which the index belongs.
-- -
 - Finally, list out one or more indexed columns inside the () after the table name.
-- 
 
 
 Note that the syntax of the `CREATE INDEX` statement is more complex than this. We'll cover additional features of the `CREATE INDEX` statement in the upcoming tutorials such as [unique indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/), [indexes on expressions](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/), [partial indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/), and [multicolumn indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/).
@@ -255,6 +251,4 @@ The output indicates that PostgreSQL uses the index `idx_address_phone` for the 
 
 
 - Use the `CREATE INDEX` statement to create an index.
-- -
 - Use the `EXPLAIN` statement to explain a query.
-- 

@@ -40,13 +40,9 @@ In this syntax:
 
 
 - First, specify the columns from both tables in the select list (`select_list`) of the `SELECT` clause.
-- -
 - Second, specify the left table (`table1`) from which you want to select data in the `FROM` clause.
-- -
 - Third, specify the right table (`table2`) you want to join using the `LEFT JOIN` keyword.
-- -
 - Finally, define a condition for the join (`table1.column_name = table2.column_name`), which indicates the column (`column_name`) in each table should have matching values.
-- 
 
 
 ### How the LEFT JOIN works
@@ -227,4 +223,3 @@ Output:
 
 
 - Use the PostgreSQL `LEFT JOIN` clause to select rows from one table that may or may not have corresponding rows in other tables.
-- 

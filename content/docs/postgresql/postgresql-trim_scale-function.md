@@ -175,4 +175,3 @@ Output:
 
 
 - Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.
-- 

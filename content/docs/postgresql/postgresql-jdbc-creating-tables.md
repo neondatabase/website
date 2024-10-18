@@ -155,4 +155,3 @@ The output indicates that the `products` table has been created successfully.
 
 
 - Call the `executeUpdate()` method of a Statement object to execute a `CREATE TABLE` statement to create a new table in the PostgreSQL database.
-- 

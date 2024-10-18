@@ -248,10 +248,6 @@ Output:
 
 
 - PL/pgSQL supports three parameter modes: `in`, `out`, and `intout`. By default, a parameter takes the `in` mode.
-- -
 - Use the `in` mode if you want to pass a value to the function.
-- -
 - Use the `out` mode if you want to return a value from a function.
-- -
 - Use the `inout` mode when you want to pass in an initial value, update the value in the function, and return its updated value.
-- 

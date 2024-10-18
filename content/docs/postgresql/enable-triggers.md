@@ -51,13 +51,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the table to which the trigger belongs you want to enable in the `ALTER TABLE` clause.
-- 
 -
-- 
 - Second, specify the name of the trigger you want to enable in the `ENABLE TRIGGER` clause, or use the `ALL` option if you want to enable all triggers associated with the table.
-- 
 
 
 
@@ -105,8 +101,6 @@ ENABLE TRIGGER ALL;
 
 
 
-- 
 - Use the `ALTER TABLE ENABLE TRIGGER` statement to enable a trigger or all triggers that belong to a table.
-- 
 
 

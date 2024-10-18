@@ -512,8 +512,6 @@ Note that you can use the `!=` operator and `<>` operator interchangeably becaus
 
 
 
-- 
 - Use a `WHERE` clause in the `SELECT` statement to filter rows of a query based on one or more conditions.
-- 
 
 

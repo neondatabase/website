@@ -505,8 +505,6 @@ Output:
 
 
 
-- 
 - Use the `INSTEAD OF` trigger to customize the behavior of `INSERT`, `UPDATE`, and `DELETE` operations on a database view.
-- 
 
 

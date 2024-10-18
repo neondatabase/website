@@ -239,13 +239,9 @@ In this example:
 
 
 
-- 
 - The `WHERE` clause retrieves only the rows with the group id 1.
-- 
 -
-- 
 - The `LAG()` function returns the sales amount of the previous year from the current year.
-- 
 
 
 
@@ -318,17 +314,11 @@ In this example:
 
 
 
-- 
 - The `PARTITION BY` clause divides the rows into partitions by the group id.
-- 
 -
-- 
 - The `ORDER BY` clause sorts rows in each product group by years in ascending order.
-- 
 -
-- 
 - The `LAG()` function is applied to each partition to return the sales of the previous year.
-- 
 
 
 
@@ -340,8 +330,6 @@ In this example:
 
 
 
-- 
 - Use the PostgreSQL `LAG()` function to access the data of the previous row from the current row.
-- 
 
 

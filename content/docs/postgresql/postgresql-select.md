@@ -41,37 +41,21 @@ The `SELECT` statement has the following clauses:
 
 
 
-- 
 - Select distinct rows using `DISTINCT` operator.
-- 
 -
-- 
 - Sort rows using `ORDER BY` clause.
-- 
 -
-- 
 - Filter rows using `WHERE` clause.
-- 
 -
-- 
 - Select a subset of rows from a table using `LIMIT` or `FETCH` clause.
-- 
 -
-- 
 - Group rows into groups using `GROUP BY` clause.
-- 
 -
-- 
 - Filter groups using `HAVING` clause.
-- 
 -
-- 
 - Join with other tables using [joins](/docs/postgresql/postgresql-joins) such as `INNER JOIN`, `LEFT JOIN`, `FULL OUTER JOIN`, `CROSS JOIN` clauses.
-- 
 -
-- 
 - Perform set operations using `UNION`, `INTERSECT`, and `EXCEPT`.
-- 
 
 
 
@@ -118,13 +102,9 @@ In this syntax:
 
 
 
-- 
 - First, specify a select list that can be a column or a list of columns in a table from which you want to retrieve data. If you specify a list of columns, you need to place a comma (`,`) between two columns to separate them. If you want to select data from all the columns of the table, you can use an asterisk (`*`) shorthand instead of specifying all the column names. The select list may also contain expressions or literal values.
-- 
 -
-- 
 - Second, provide the name of the table from which you want to query data after the `FROM` keyword.
-- 
 
 
 
@@ -380,13 +360,9 @@ However, using the asterisk (`*`) in the `SELECT` statement is considered a bad 
 
 
 
-- 
 - Database performance. Suppose you have a table with many columns and substantial data, the `SELECT` statement with the asterisk (`*`) shorthand will select data from all the columns of the table, potentially retrieving more data than required for the application.
-- 
 -
-- 
 - Application performance. Retrieving unnecessary data from the database increases the traffic between the PostgreSQL server and the application server. Consequently, this can result in slower response times and reduced scalability for your applications.
-- 
 
 
 
@@ -556,20 +532,12 @@ In this example, we use the `NOW()` function in the `SELECT` statement. It'll re
 
 
 
-- 
 - Use the `SELECT ... FROM` statement to retrieve data from a table.
-- 
 -
-- 
 - PostgreSQL evaluates the `FROM` clause before the `SELECT` clause.
-- 
 -
-- 
 - Use a column alias to assign a temporary name to a column or an expression in a query.
-- 
 -
-- 
 - In PostgreSQL, the `FROM` clause is optional.
-- 
 
 

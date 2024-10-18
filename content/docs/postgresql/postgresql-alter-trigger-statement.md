@@ -30,11 +30,8 @@ In this syntax:
 
 
 - First, specify the name of the trigger you want to rename after the `ALTER TRIGGER` keywords.
-- -
 - Second, provide the name of the table associated with the trigger after the `ON` keyword.
-- -
 - Third, specify the new name of the trigger after the `RENAME TO` keyword.
-- 
 
 
 To execute the `ALTER TRIGGER` statement, you must be the owner of the table to which the trigger belongs.
@@ -206,6 +203,4 @@ COMMIT;
 
 
 - Use the `ALTER TRIGGER` statement to rename a trigger.
-- -
 - Use the pair of the `DROP TRIGGER` and `CREATE TRIGGER` statements to replace a trigger with a new one.
-- 

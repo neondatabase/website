@@ -213,8 +213,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `RADIANS()` function to convert degrees to radians.
-- 
 
 

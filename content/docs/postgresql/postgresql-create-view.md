@@ -35,9 +35,7 @@ In this syntax:
 
 
 - First, specify the name of the view after the `CREATE VIEW` keywords.
-- -
 - Second, specify a `SELECT` statement (`query`) that defines the view. The query is often referred to as the **defining query** of the view.
-- 
 
 
 ## PostgreSQL CREATE VIEW statement examples
@@ -313,6 +311,4 @@ View definition:
 
 
 - Use the PostgreSQL `CREATE VIEW` statement to create a new view in your database.
-- -
 - Use the `\d+` command in psql to display the information of a view.
-- 

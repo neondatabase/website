@@ -192,9 +192,7 @@ In this example, we create the `get_film(varchar,int)` that accepts two paramete
 
 
 - The `p_pattern` is used to search for films.
-- -
 - The `p_year` is the release year of the films.
-- 
 
 
 In the function body, we use a `for` loop statement to process the query, row by row.
@@ -239,4 +237,3 @@ Output:
 
 
 - Use the `returns table (column_list)` in the `create function` to define a function that returns a table (or result set).
-- 

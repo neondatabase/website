@@ -23,9 +23,7 @@ PostgreSQL provides you with two temporal [data types](/docs/postgresql/postgres
 
 
 - `timestamp`: a timestamp without a timezone one.
-- -
 - `timestamptz`: timestamp with a timezone.
-- 
 
 
 The `timestamp` datatype allows you to store both [date](/docs/postgresql/postgresql-date) and time. However, it does not have any time zone data. It means that when you change the timezone of your database server, the timestamp value stored in the database will not change automatically.
@@ -41,9 +39,7 @@ Internally, PostgreSQL stores the `timestamptz` in UTC value.
 
 
 - When you insert a value into a `timestamptz` column, PostgreSQL converts the `timestamptz` value into a UTC value and stores the UTC value in the table.
-- -
 - When you retrieve data from a `timestamptz` column, PostgreSQL converts the UTC value back to the time value of the timezone set by the database server, the user, or the current database connection.
-- 
 
 
 Notice that both `timestamp` and `timestamptz` uses 8 bytes for storing the timestamp values as shown in the following query:
@@ -497,6 +493,4 @@ The output indicates that the value in the `updated_at` column has been updated 
 
 
 - Use `timestamp` and `timestamptz` to store timestamp data.
-- -
 - PostgreSQL stores the `timestamptz` values in the database as UTC values.
-- 

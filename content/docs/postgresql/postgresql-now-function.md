@@ -509,8 +509,6 @@ Even though we did not provide the value for the `created_at` column, the statem
 
 
 
-- 
 - Use the PostgreSQL `NOW()` function to get the current date and time with the timezone.
-- 
 
 

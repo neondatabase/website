@@ -18,15 +18,10 @@ The `ALTER DATABASE` statement allows you to carry the following action on the d
 
 
 - Change the attributes of the database
-- -
 - Rename the database
-- -
 - Change the owner of the database
-- -
 - Change the default tablespace of a database
-- -
 - Change the session default for a run-time configuration variable for a database
-- 
 
 
 ### 1) Changing attributes of a database
@@ -48,11 +43,8 @@ The option can be:
 
 
 - `IS_TEMPLATE`
-- -
 - `CONNECTION LIMIT`
-- -
 - `ALLOW_CONNECTIONS`
-- 
 
 
 Note that only superusers or database owners can change these settings.
@@ -102,9 +94,7 @@ The following users can change the owner of the database:
 
 
 - The database owner with `CREATEDB` privilege and is a direct or indirect member of the new owning role.
-- -
 - The superusers
-- 
 
 
 ### 4) Change the default tablespace of a database

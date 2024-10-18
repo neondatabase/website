@@ -161,8 +161,6 @@ The result is:
 
 
 
-- 
 - Use the PostgreSQL `LOCALTIMESTAMP` function to return the date and time at which the current transaction starts.
-- 
 
 

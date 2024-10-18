@@ -42,9 +42,7 @@ In this syntax:
 
 
 - First, specify the name of the view you want to create in the `CREATE RECURSIVE VIEW` clause. You can add an optional schema to the name of the view.
-- -
 - Second, add a [SELECT statement](/docs/postgresql/postgresql-select) to define the view. The `SELECT` statement references the `view_name` to make the view recursive.
-- 
 
 
 The `CREATE RECURSIVE VIEW` statement is equivalent to the following statement:
@@ -192,6 +190,4 @@ Output:
 
 
 - A recursive view is a view whose defining query references the view name.
-- -
 - Use the `CREATE RECURSIVE VIEW` statement to create a recursive view.
-- 

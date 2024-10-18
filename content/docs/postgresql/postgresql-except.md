@@ -39,9 +39,7 @@ The queries that involve the `EXCEPT` need to follow these rules:
 
 
 - The number of columns and their orders must be the same in the two queries.
-- -
 - The data types of the respective columns must be compatible.
-- 
 
 
 The following Venn diagram illustrates the `EXCEPT` operator:
@@ -216,4 +214,3 @@ Notice that we placed the [ORDER BY](/docs/postgresql/postgresql-order-by) claus
 
 
 - Use the PostgreSQL `EXCEPT` operator to combine rows from two result sets and return a result set containing rows from the first result set that do not appear in the second result set.
-- 

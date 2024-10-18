@@ -159,8 +159,6 @@ Output:
 
 
 
-- 
 - Calculate the PostgreSQL uptime using the current time and start time.
-- 
 
 

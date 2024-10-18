@@ -61,9 +61,7 @@ Schemas can be very useful in the following scenarios:
 
 
 - Schemas allow you to organize database objects e.g., tables into logical groups to make them more manageable.
-- -
 - Schemas enable multiple users to use one database without interfering with each other.
-- 
 
 
 ## The public schema
@@ -169,9 +167,7 @@ In this output:
 
 
 - The `"$user"` specifies that the first schema that PostgreSQL will use to search for the object, which has the same name as the current user. For example, if you use the `postgres` user to log in and access the `staff` table. PostgreSQL will search for the `staff` table in the `postgres` schema. If it cannot find any object like that, it continues to look for the object in the `public` schema.
-- -
 - The second element refers to the `public` schema as we have seen before.
-- 
 
 
 To create a new schema, you use the `CREATE SCHEMA` statement:
@@ -300,11 +296,8 @@ Note that, by default, every user has the `CREATE` and `USAGE` on the `public` s
 
 
 - To create a new schema, you use the `CREATE SCHEMA` statement.
-- -
 - To rename a schema or change its owner, you use the `ALTER SCHEMA` statement.
-- -
 - To drop a schema, you use the `DROP SCHEMA` statement.
-- 
 
 
 ## Summary
@@ -312,8 +305,5 @@ Note that, by default, every user has the `CREATE` and `USAGE` on the `public` s
 
 
 - A schema is a named collection of database objects, including tables, views, indexes, sequences, and so on.
-- -
 - Use schemas to organize and namespace these objects within a database.
-- -
 - Use the search path to resolve object names.
-- 

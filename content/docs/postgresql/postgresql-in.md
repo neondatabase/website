@@ -428,12 +428,8 @@ ORDER BY
 
 
 
-- 
 - Use the `IN` operator to check if a value matches any value in a list of values.
-- 
 -
-- 
 - Use the `NOT` operator to negate the `IN` operator.
-- 
 
 

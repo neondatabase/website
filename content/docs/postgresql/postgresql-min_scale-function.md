@@ -44,9 +44,7 @@ In this syntax:
 
 
 
-- 
 - `n` is a value of the numeric data type that you want to find the minimum number of decimal places.
-- 
 
 
 
@@ -181,8 +179,6 @@ Output:
 
 
 
-- 
 - Use the `min_scale()` function to determine the minimum scale of a number.
-- 
 
 

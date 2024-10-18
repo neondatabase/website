@@ -52,13 +52,9 @@ In this syntax:
 
 
 
-- 
 - `format_string`: This is the input string that you want to format.
-- 
 -
-- 
 - `value1`, `value2`, ...: These are values to be inserted into placeholders in the `format_string`.
-- 
 
 
 
@@ -168,17 +164,11 @@ The `width` can be one of the following values:
 
 
 
-- 
 - A positive integer.
-- 
 -
-- 
 - An asterisk (\*) to use the next function argument as the width.
-- 
 -
-- 
 - A string of the form `*n$` to use the `nth` function argument as the width.
-- 
 
 
 
@@ -202,17 +192,11 @@ The permitted values for type argument are as follows:
 
 
 
-- 
 - `s` formats the argument value as a string. NULL is treated as an empty string.
-- 
 -
-- 
 - `I` treats the argument value as an SQL identifier.
-- 
 -
-- 
 - `L` quotes the argument value as an SQL literal.
-- 
 
 
 
@@ -478,8 +462,6 @@ The `1$` appears twice in the format string, therefore, the first argument is al
 
 
 
-- 
 - Use the PostgreSQL `FORMAT()` function to format a string based on a template.
-- 
 
 

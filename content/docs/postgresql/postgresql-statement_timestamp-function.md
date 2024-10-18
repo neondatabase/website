@@ -182,4 +182,3 @@ It is important to notice that this behavior contrasts with the `CLOCK_TIMESTAMP
 
 
 - Use the `STATEMENT_TIMESTAMP()` function to retrieve the start time of the current statement.
-- 

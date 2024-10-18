@@ -41,13 +41,9 @@ In this syntax:
 
 
 - `target`: This is the original JSON document of the JSONB type that you want to modify.
-- -
 - `path`: This is an array of text elements that specifies the path to the key where you want to insert or update the data.
-- -
 - `new_value` is the new JSONB value that you want to set at the specified path.
-- -
 - `create_missing`: This is an optional boolean parameter indicating whether you want to create missing keys if they do not exist. It defaults to true, meaning that the function will create a new key if you attempt to set it for a key that does not exist.
-- 
 
 
 The `jsonb_set()` function returns the modified JSON document with the `new_value` set at a specified `path`.
@@ -94,11 +90,8 @@ In this example:
 
 
 - The original array is `[1,2,3]`.
-- -
 - The path `{0}` indicates the first element of the array.
-- -
 - The number `-1` is the new value.
-- 
 
 
 The `jsonb_set()` function sets the first element of the array to -1 and returns the modified document.
@@ -163,11 +156,8 @@ In this example:
 
 
 - The original array is \[1,2,\[4,5],6].
-- -
 - The path {2, 0}, 2 specifies the second element of the array which is the nested array \[4,5], and 0 specifies the first element of the nested array.
-- -
 - 3 is the new value.
-- 
 
 
 Therefore the `jsonb_set()` function changes the number 4 as the first element of the nested array \[4,5] to 3.
@@ -207,11 +197,8 @@ In this example:
 
 
 - {"name": "Jane Doe"} is the original object.
-- -
 - {name} is the path that indicates the name property (or key).
-- -
 - "Jane Smith" is the new value to update.
-- 
 
 
 Therefore, the `jsonb_set()` set the value of the `name` key in the JSON object to "Jane Smith".
@@ -305,11 +292,8 @@ In this example:
 
 
 - `{"name":"John Doe", "address" : { "city": "San Francisco"}}` is the original JSON object.
-- -
 - `{address, city}` is a path that specifies the `address` key whose value is an object and the `city` is the key of the `address` object that will be modified.
-- -
 - `"San Jose"` is the value of the `city` key.
-- 
 
 
 Therefore, the `jsonb_set()` function updates the `city` with the value `San Jose` in the `address` object of the JSON document.
@@ -353,11 +337,8 @@ In this example:
 
 
 - `{"name": "John", "skills" : ["PostgreSQL", "API"]}` is the original JSON object.
-- -
 - `{skills,1}` is a path that specifies the skills key, which is an array, and 1 specifies the second element of the array.
-- -
 - `"Web Dev"` is the new value to update.
-- 
 
 
 The `jsonb_set()` function sets the second element of the skills array to `"Web Dev"`.
@@ -449,4 +430,3 @@ Output:
 
 
 - Use the `jsonb_set()` function to update a JSON document of the type JSONB.
-- 

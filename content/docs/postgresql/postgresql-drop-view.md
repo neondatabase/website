@@ -34,11 +34,8 @@ In this syntax:
 
 
 - First, specify the name of the view in the `DROP VIEW` clause.
-- -
 - Second, use `IF EXISTS` to prevent an error if the view does not exist. PostgreSQL will issue a notice instead of an error when you attempt to remove a non-existing view. The `IF EXISTS` is optional.
-- -
 - Third, use `CASCADE` option to remove dependent objects along with the view or the `RESTRICT` option to reject the removal of the view if other objects depend on the view. The `RESTRICT` option is the default.
-- 
 
 
 ### Dropping multiple views
@@ -260,8 +257,5 @@ DROP VIEW film_length_stat, film_category_stat;
 
 
 - Use the `DROP VIEW` statement to remove one or more views from the database.
-- -
 - Use the `IF EXISTS` option to remove a view if it exists.
-- -
 - Use the `CASCADE` option to remove a view and its dependent objects recursively.
-- 

@@ -480,4 +480,3 @@ The output indicates that the query uses the `customer_json_index` index.
 
 
 - Use the `GIN` index to create an index for a JSONB column of a table to improve query performance.
-- 

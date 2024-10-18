@@ -15,9 +15,7 @@ Before going forward with this tutorial, you need to have:
 
 
 - A PostgreSQL database server.
-- -
 - A [PostgreSQL sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) called `dvdrental`.
-- 
 
 
 ## Load the sample database using the psql & pg_restore tool
@@ -37,11 +35,8 @@ To create a database and load data from an archive file, you follow these steps:
 
 
 - First, connect to the [PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `psql` or `pgAdmin`.
-- -
 - Second, create a blank database called `dvdrental`.
-- -
 - Third, load data from the sample database file into the `dvdrental` database using `pg_restore`.
-- 
 
 
 ### 1) Create the dvdrental database
@@ -180,9 +175,7 @@ In this command:
 
 
 - The `-U postgres` instructs `pg_restore` to connect the PostgreSQL server using the `postgres` user.
-- -
 - The `-d dvdrental` specifies the target database to load.
-- 
 
 
 It'll prompt you to enter the password for the `postgres` user. Enter the password for the `postgres` user and press the Enter (or Return key):
@@ -295,7 +288,7 @@ Second, right-click the **Databases** and select the **Create > Database...** me
 
 
 
-Third, enter the database name `dvdrental` and click the **Save **button:
+Third, enter the database name `dvdrental` and click the **Save** button:
 
 
 
@@ -311,7 +304,7 @@ You'll see the new empty database created under the **Databases** node:
 
 
 
-Fourth, right-click on the **dvdrental **database and choose the **Restore...** menu item to restore the database from the downloaded database file:
+Fourth, right-click on the **dvdrental** database and choose the **Restore...** menu item to restore the database from the downloaded database file:
 
 
 

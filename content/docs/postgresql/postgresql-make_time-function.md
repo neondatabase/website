@@ -45,17 +45,11 @@ In this syntax:
 
 
 
-- 
 - `hour`: The hour part of the time. The valid range for the hour is from 0 to 23. 0 represents midnight (12:00 AM) and 24 represents noon.
-- 
 -
-- 
 - `min`: The minute part of the time. The valid range for the second is from 0 to 59.
-- 
 -
-- 
 - `sec`: The second within a minute. Its valid range is from 0 to `59.999999`.
-- 
 
 
 
@@ -199,8 +193,6 @@ Output:
 
 
 
-- 
 - Use the `MAKE_TIME()` function to create a time value from hour, minute, and second values.
-- 
 
 

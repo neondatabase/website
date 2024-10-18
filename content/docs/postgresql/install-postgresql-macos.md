@@ -92,7 +92,7 @@ Fourth, specify a directory where PostgreSQL stores the data and click the Next 
 
 
 
-Fifth, enter the password for the **postgres **user account. You should note down this password for logging in to the PostgreSQL database server later. After that, click the Next button.
+Fifth, enter the password for the **postgres** user account. You should note down this password for logging in to the PostgreSQL database server later. After that, click the Next button.
 
 
 
@@ -224,7 +224,7 @@ Sixth, [download the sample database](https://www.postgresqltutorial.com/postgre
 
 
 
-Seventh, right-click the **dvdrental **database and select the **Restore...** menu item:
+Seventh, right-click the **dvdrental** database and select the **Restore...** menu item:
 
 
 

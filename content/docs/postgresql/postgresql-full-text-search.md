@@ -26,15 +26,10 @@ The following describes an overview of how the PostgreSQL full text search works
 
 
 - **Indexing**: PostgreSQL allows you to create indexes on columns with the tsvector data type. When creating a full-text search index, PostgreSQL analyzes text data and generates a specialized data structure called **tsvector**, which represents the indexed document in a format optimized for searches.
-- -
 - **Text analysis**: For building a full text index, PostgreSQL performs a text analysis process that involves tokenizing text into individual words or tokens, removing stop words ( like `the`, `and`,..) applying stemming (or lemmatization) to reduce words to their root forms, and performing other linguistic transformations to prepare the text for indexing.
-- -
 - **Querying**: Once PostgreSQL creates the full text index, you can perform full-text search queries using dedicated full text search functions and operators. For example, you can search for specific words or phrases, apply boolean operators to combine search terms, and more.
-- -
 - **Ranking**: allows you to rank the search results based on their relevance to the query. PostgreSQL offers the `ts_rank()` function to calculate a rank score for each document based on its similarity to the search query. You can use the ranking feature to sort the search results based on relevance.
-- -
 - **Highlighting**: PostgreSQL can generate snippets or summaries of documents containing the matching words from the search query.
-- 
 
 
 In practice, you often use the full text search feature in applications including content management systems (`CMS`), document management systems, and so on to enable fast searches on a large volume of text.
@@ -122,11 +117,8 @@ In this example:
 
 
 - Each entry in the tsvector value represents a word (lexeme) and its position within the string (or document). For example, the word `quick` appears at position 2, the word `brown` appears at position 3, and so on.
-- -
 - Words are sorted in alphabetical order.
-- -
 - Articles and stop words are omitted like `The` and `over`.
-- 
 
 
 ### tsquery
@@ -142,15 +134,10 @@ Additionally, a `tsquery` value can include search operators to refine the searc
 
 
 - **Boolean operators** AND (&), OR (|), and NOT (!): can combine search terms and define logical relationships between them.
-- -
 - **Phrase search **(""): Double quotes ("") indicate that the enclosed words must appear together in the index document in the specified order.
-- -
 - **Prefix search **(:) : A colon (:) after a word indicates that the search term should match words with the same prefix.
-- -
 - **Negation** (-): a negation excludes specific terms from the search results.
-- -
 - **Grouping** (): You can use parentheses to group terms and operators to define flexible search conditions.
-- 
 
 
 For example:
@@ -588,12 +575,7 @@ Output:
 
 
 - Use PostgreSQL full text search feature to perform complex searches on text stored in the database.
-- -
 - Use tsvector and tsquery data types for full text searches.
-- -
 - Use the match operator (`@@`) to check if documents match a query.
-- -
 - Use the generated column with `tsvector` type to store the tsvector data for full text searches.
-- -
 - Use `GIN` indexes for full-text search vectors (`tsvector`).
-- 

@@ -46,17 +46,11 @@ In this statement:
 
 
 
-- 
 - First, specify the name of the table that contains the column which you want to rename after the `ALTER TABLE` clause.
-- 
 -
-- 
 - Second, provide the name of the column that you want to rename after the `RENAME COLUMN` keywords.
-- 
 -
-- 
 - Third, specify the new name for the column after the `TO` keyword.
-- 
 
 
 
@@ -294,8 +288,6 @@ RENAME COLUMN phone TO contact_phone;
 
 
 
-- 
 - Use the PostgreSQL `ALTER TABLE...RENAME COLUMN` statement to rename a column.
-- 
 
 

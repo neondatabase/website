@@ -44,13 +44,9 @@ In this syntax:
 
 
 
-- 
 - The `ALL` operator must be preceded by a comparison operator such as equal (=), not equal (&lt;>), greater than (>), greater than or equal to (>=), less than (&lt;), and less than or equal to (&lt;=).
-- 
 -
-- 
 - The `ALL` operator must be followed by a subquery which also must be surrounded by the parentheses.
-- 
 
 
 
@@ -62,29 +58,17 @@ If the subquery returns a non-empty result set, the `ALL` operator works as foll
 
 
 
-- 
 - `value > ALL (subquery)` returns true if the value is greater than the biggest value returned by the subquery.
-- 
 -
-- 
 - `value >= ALL (subquery)` returns true if the value is greater than or equal to the biggest value returned by the subquery.
-- 
 -
-- 
 - `value < ALL (subquery)` returns true if the value is less than the smallest value returned by the subquery.
-- 
 -
-- 
 - `value <= ALL (subquery)` returns true if the value is less than or equal to the smallest value returned by the subquery.
-- 
 -
-- 
 - `value = ALL (subquery)` returns true if the value equals every value returned by the subquery.
-- 
 -
-- 
 - `value != ALL (subquery)` returns true if the value does not equal any value returned by the subquery.
-- 
 
 
 
@@ -275,8 +259,6 @@ It returns all the employees whose salaries are less than the lowest salary of a
 
 
 
-- 
 - Use the PostgreSQL `ALL` operator to compare a value with all values in a set of values returned by a subquery.
-- 
 
 

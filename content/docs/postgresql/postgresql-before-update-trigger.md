@@ -30,9 +30,7 @@ In a `BEFORE UPDATE` trigger, you can access the following variables:
 
 
 - `OLD`: This record variable allows you to access the row before the update.
-- -
 - `NEW`: This record variable represents the row after the update.
-- 
 
 
 Also, you can access the following variables:
@@ -40,11 +38,8 @@ Also, you can access the following variables:
 
 
 - `TG_NAME`: Represent the name of the trigger.
-- -
 - `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `BEFORE UPDATE` triggers.
-- -
 - `TG_WHEN`: Represent the trigger timing, which is `BEFORE` for the `BEFORE UPDATE` triggers.
-- 
 
 
 To create a `BEFORE UPDATE` trigger, you follow these steps:
@@ -194,4 +189,3 @@ CONTEXT:  PL/pgSQL function fn_before_update_salary() line 4 at RAISE
 
 
 - Use a `BEFORE UPDATE` trigger to automatically execute a function before an update.
-- 

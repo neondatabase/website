@@ -311,8 +311,6 @@ CREATE TABLE boolean_demo (
 
 
 
-- 
 - Use the PostgreSQL `BOOLEAN` datatype to store the boolean data.
-- 
 
 

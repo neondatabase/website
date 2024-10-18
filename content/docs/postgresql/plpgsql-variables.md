@@ -45,11 +45,8 @@ In this syntax:
 
 
 - First, specify the name of the variable. It is a good practice to assign a meaningful name to a variable. For example, instead of naming a variable `i` you should use `index` or `counter`.
-- -
 - Second, associate a specific [data type](/docs/postgresql/postgresql-data-types/) with the variable. The data type can be any valid data type such as [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/), [varchar](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/), and [char](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
-- -
 - Third, optionally assign a default value to the variable. If you don't do so, the initial value of the variable is `NULL`.
-- 
 
 
 Please note that you can use either `:=` or `=` assignment operator to set an initial value for a variable.
@@ -125,11 +122,8 @@ First, declare four variables in the declaration part of the block:
 
 
 - The `counter` variable is an integer with an initial value of 1.
-- -
 - The `first_name` and `last_name` are `varchar(50)` with the initial values of `'John'` and `'Doe'` respectively.
-- -
 - The `payment` variable has the numeric type with the initial value `20.5`.
-- 
 
 
 Second, display the values of the variables using the `raise notice` statement.
@@ -239,13 +233,9 @@ In this example:
 
 
 - First, declare a variable `created_at` and initialize its value to the current time.
-- -
 - Second, display the variable.
-- -
 - Third, pause the execution for 3 seconds using the `pg_sleep()` function.
-- -
 - Finally, display the value of the `created_at` variable again.
-- 
 
 
 The output indicates that the value of the `created_at` variable is only initialized once when the block is entered.
@@ -328,9 +318,7 @@ In this example, we declare two variables:
 
 
 - The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
-- -
 - The `featured_title` has the same data type as the data type of the `film_title` variable.
-- 
 
 
 We use the [select into](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select-into/) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
@@ -342,9 +330,7 @@ Using the type-copying feature offers the following advantages:
 
 
 - First, you don't need to know the type of column or reference being accessed.
-- -
 - Second, if the data type of the referenced column name (or variable) changes, you don't need to change the block.
-- 
 
 
 ## Variables in blocks and subblocks
@@ -398,15 +384,10 @@ In this example:
 
 
 - First, declare a variable named `counter` in the `outer_block`.
-- -
 - Next, declare a variable with the same name in the subblock.
-- -
 - Then, before entering into the subblock, the value of `counter` is one. Within the subblock, we increase the value of the `counter` variable to ten and print it out. Note that this change only affects the `counter` variable within the subblock.
-- -
 - After that, reference the `counter` variable in the outer block using the block label `outer_block.counter`.
-- -
 - Finally, display the value of the `counter` variable in the outer block, its value remains unchanged.
-- 
 
 
 ## Summary
@@ -414,8 +395,5 @@ In this example:
 
 
 - A variable is a named storage location with a data type that can hold a value.
-- -
 - PostgreSQL evaluates the default value of a variable and assigns it to the variable when it enters the block.
-- -
 - Declare variables and optionally an initial value to it in the declaration section of the block.
-- 

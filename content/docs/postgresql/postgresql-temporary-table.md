@@ -60,13 +60,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the temporary table that you want to create after the `CREATE TEMPORARY TABLE` keywords.
-- 
 -
-- 
 - Second, define a list of columns for the table.
-- 
 
 
 
@@ -380,16 +376,10 @@ DROP TABLE customers;
 
 
 
-- 
 - A temporary table is a short-lived table that exists during a database session or a transaction.
-- 
 -
-- 
 - Use `the CREATE TEMP TABLE` statement to create a temporary table.
-- 
 -
-- 
 - Use the `DROP TABLE` statement to drop a temporary table.
-- 
 
 

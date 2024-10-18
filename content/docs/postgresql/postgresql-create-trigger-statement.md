@@ -19,13 +19,9 @@ To create a new trigger in PostgreSQL, you follow these steps:
 
 
 
-- 
 - First, create a trigger function using `CREATE FUNCTION` statement.
-- 
 -
-- 
 - Second, bind the trigger function to a table by using `CREATE TRIGGER` statement.
-- 
 
 
 
@@ -166,13 +162,9 @@ Fifth, define the type of triggers, which can be:
 
 
 
-- 
 - The row-level trigger that is specified by the `FOR EACH ROW` clause.
-- 
 -
-- 
 - The statement-level trigger that is specified by the `FOR EACH STATEMENT` clause.
-- 
 
 
 
@@ -435,8 +427,6 @@ The change was logged in the `employee_audits` table by the trigger.
 
 
 
-- 
 - Use the PostgreSQL `CREATE TRIGGER` to create a new trigger.
-- 
 
 

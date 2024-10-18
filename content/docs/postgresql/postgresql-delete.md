@@ -31,9 +31,7 @@ In this syntax:
 
 
 - First, specify the name (`table_name`) of the table from which you want to delete data after the `DELETE FROM` keywords.
-- -
 - Second, specify a condition in the `WHERE` clause to determine which rows to delete.
-- 
 
 
 The `WHERE` clause is optional. If you omit the `WHERE` clause, the `DELETE` statement will delete all rows in the table.
@@ -293,8 +291,5 @@ The `todos` table now is empty.
 
 
 - Use the `DELETE FROM` statement to delete one or more rows from a table.
-- -
 - Use the `WHERE` clause to specify which rows to be deleted.
-- -
 - Use the `RETURNING` clause to return the deleted rows.
-- 

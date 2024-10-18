@@ -279,4 +279,3 @@ Output:
 
 
 - Use the PostgreSQL `COUNT()` function to return the number of rows in a table.
-- 

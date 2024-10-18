@@ -45,9 +45,7 @@ In this syntax:
 
 
 
-- 
 - `jsonb_value` is a JSONB value of which you want to get the type as a text string.
-- 
 
 
 
@@ -235,8 +233,6 @@ Output:
 
 
 
-- 
 - Use the `jsonb_typeof()` function to return the type of the top-level JSON value as a text string.
-- 
 
 

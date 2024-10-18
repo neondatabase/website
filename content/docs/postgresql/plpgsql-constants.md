@@ -84,11 +84,8 @@ In this syntax:
 
 
 - First, specify the name of the constant. The name should be as descriptive as possible.
-- -
 - Second, add the `constant` keyword after the name and specify the [data type](/docs/postgresql/postgresql-data-types) of the constant.
-- -
 - Third, initialize a value for the constant after the assignment operator (`=`).
-- 
 
 
 ## PL/pgSQL constants example
@@ -194,6 +191,4 @@ DO
 
 
 - A constant holds a value that cannot be changed.
-- -
 - Use the `constant` keyword to define a constant in PL/pgSQL.
-- 

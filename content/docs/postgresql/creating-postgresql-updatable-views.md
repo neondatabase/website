@@ -30,23 +30,14 @@ Second, the defining query must not contain one of the following clauses at the 
 
 
 - [GROUP BY](/docs/postgresql/postgresql-group-by)
-- -
 - [HAVING](/docs/postgresql/postgresql-having)
-- -
 - [LIMIT](/docs/postgresql/postgresql-limit)
-- -
 - [OFFSET FETCH](/docs/postgresql/postgresql-fetch)
-- -
 - [DISTINCT](/docs/postgresql/postgresql-select-distinct)
-- -
 - [WITH](/docs/postgresql/postgresql-cte)
-- -
 - [UNION](/docs/postgresql/postgresql-union)
-- -
 - [INTERSECT](/docs/postgresql/postgresql-intersect)
-- -
 - [EXCEPT](/docs/postgresql/postgresql-tutorial/postgresql-except)
-- 
 
 
 Third, the selection list of the defining query must not contain any:
@@ -54,11 +45,8 @@ Third, the selection list of the defining query must not contain any:
 
 
 - [Window functions](https://www.postgresqltutorial.com/postgresql-window-function/)
-- -
 - [Set-returning function](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-returns-a-table/)
-- -
 - [Aggregate functions](https://www.postgresqltutorial.com/postgresql-aggregate-functions/)
-- 
 
 
 An updatable view may contain both updatable and non-updatable columns. If you attempt to modify a non-updatable column, PostgreSQL will raise an error.
@@ -260,4 +248,3 @@ The row with id 21 has been deleted.
 
 
 - A view can be updatable when its defining query meets certain conditions.
-- 

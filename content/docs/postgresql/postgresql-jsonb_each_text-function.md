@@ -33,7 +33,6 @@ In this syntax:
 
 
 - `json_object` is the JSON object that you want to expand the key/value pairs.
-- 
 
 
 The function returns a set of records where each record consists of two fields key and value, both have the type `text`.
@@ -197,4 +196,3 @@ Output:
 
 
 - Use the `jsonb_each_text()` function to expand a JSON object into a set of key/value pairs of type `text`.
-- 

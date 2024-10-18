@@ -51,13 +51,9 @@ In this syntax:
 
 
 
-- 
 - `key` represents the key for the JSON object. The key must not be null.
-- 
 -
-- 
 - `value` represents the value for the corresponding key.
-- 
 
 
 
@@ -344,12 +340,8 @@ The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` fun
 
 
 
-- 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
-- 
 -
-- 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
-- 
 
 

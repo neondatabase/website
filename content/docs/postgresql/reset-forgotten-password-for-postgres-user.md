@@ -30,17 +30,11 @@ To reset the password for the `postgres` user, you need to follow these steps:
 
 
 
-- 
 - First, modify some parameters in the `pg_hba.conf` configuration file.
-- 
 -
-- 
 - Log in to the PostgreSQL server using the `postgres` user account without a password.
-- 
 -
-- 
 - Reset the password.
-- 
 
 
 

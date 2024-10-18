@@ -51,13 +51,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the variable name.
-- 
 -
-- 
 - Second, provide the name of a table or view followed by `%` and `ROWTYPE`.
-- 
 
 
 
@@ -131,17 +127,11 @@ How it works.
 
 
 
-- 
 - First, declare a row variable called `selected_actor` with the same type as the row in the `actor` table.
-- 
 -
-- 
 - Second, assign the row whose value in the `actor_id` column is 10 to the `selected_actor` variable using the `select into` statement.
-- 
 -
-- 
 - Third, show the first and last names of the selected actor using the `raise notice` statement.
-- 
 
 
 
@@ -153,8 +143,6 @@ How it works.
 
 
 
-- 
 - Use row type variables (`%ROWTYPE`) to hold a row of a result set returned by the `select into` statement.
-- 
 
 

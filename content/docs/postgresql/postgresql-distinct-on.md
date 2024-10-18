@@ -186,12 +186,8 @@ In this example, the `DISTINCT ON` clause keeps the row with the highest scores 
 
 
 
-- 
 - Use the `DISTINCT ON` clause to keep the first unique entry from each column or combination of columns in a result set.
-- 
 -
-- 
 - Always use the `ORDER BY` clause to determine which entry to retain in the result set.
-- 
 
 

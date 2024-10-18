@@ -307,8 +307,6 @@ The output indicates that the `AFTER DELETE` trigger has successfully archived t
 
 
 
-- 
 - Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
-- 
 
 

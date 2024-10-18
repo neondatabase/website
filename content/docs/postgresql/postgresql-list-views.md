@@ -87,13 +87,9 @@ The output has four columns:
 
 
 - `Schema`: Indicates the schema of the view. When you create a view without a schema, it defaults to public.
-- -
 - `Name`: Specifies the name of the view.
-- -
 - `Type`: Denotes the type of the object, which is `view` in this case.
-- -
 - `Owner`: Shows the user account that created the view.
-- 
 
 
 ## Listing view using SQL statement
@@ -225,8 +221,5 @@ Output:
 
 
 - Utilize the `\dv` command to list all views of a database using the `psql` program.
-- -
 - Use the `information_schemas.views` view to retrieve information about views.
-- -
 - Use the `pg_matviews` view to obtain the materialized views.
-- 

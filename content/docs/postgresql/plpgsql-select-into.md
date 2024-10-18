@@ -34,11 +34,8 @@ In this syntax,
 
 
 - First, specify one or more columns from which you want to retrieve data in the `select` clause.
-- -
 - Second, place one or more variables after the `into` keyword.
-- -
 - Third, provide the name of the table in the `from` clause.
-- 
 
 
 The `select` `into` statement will assign the data returned by the `select` clause to the corresponding variables.
@@ -99,11 +96,8 @@ In this example:
 
 
 - First, declare a variable called `actor_count` that stores the number of actors from the `actor` table.
-- -
 - Second, assign the number of actors to the `actor_count` using the `select into` statement.
-- -
 - Third, display a message that shows the value of the `actor_count` variable using the `raise notice` statement.
-- 
 
 
 ### 2) Using the select into with multiple variables
@@ -213,4 +207,3 @@ $$;
 
 
 - Use the `select into` statement to select data from the database and assign it to a variable.
-- 

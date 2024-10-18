@@ -40,13 +40,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the schema that you want to rename after the `ALTER SCHEMA` keywords.
-- 
 -
-- 
 - Second, specify the new name of the schema after the `RENAME TO` keywords.
-- 
 
 
 
@@ -79,13 +75,9 @@ In this statement:
 
 
 
-- 
 - First, specify the name of the schema to which you want to change the owner in the `ALTER SCHEMA` clause.
-- 
 -
-- 
 - Second, specify the new owner in the `OWNER TO` clause.
-- 
 
 
 

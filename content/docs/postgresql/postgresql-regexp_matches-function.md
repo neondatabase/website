@@ -266,8 +266,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `REGEXP_MATCHES()` function to extract text from a string based on a regular expression.
-- 
 
 

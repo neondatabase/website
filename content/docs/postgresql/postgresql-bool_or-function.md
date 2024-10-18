@@ -246,6 +246,4 @@ Output:
 
 
 - Use the `BOOL_OR()` function to aggregate boolean values across rows within a group.
-- -
 - The `BOOL_OR()` function ignores NULLs in the group.
-- 

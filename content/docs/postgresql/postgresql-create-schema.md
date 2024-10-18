@@ -33,9 +33,7 @@ In this syntax:
 
 
 - First, specify the name of the schema after the `CREATE SCHEMA` keywords. The schema name must be unique within the current database.
-- -
 - Second, optionally use `IF NOT EXISTS` to conditionally create the new schema only if it does not exist. Attempting to create a new schema that already exists without using the `IF NOT EXISTS` option will result in an error.
-- 
 
 
 Note that to execute the `CREATE SCHEMA` statement, you must have the `CREATE` privilege in the current database.
@@ -181,4 +179,3 @@ CREATE SCHEMA scm
 
 
 - Use the PostgreSQL `CREATE SCHEMA` statement to create a new schema in a database.
-- 

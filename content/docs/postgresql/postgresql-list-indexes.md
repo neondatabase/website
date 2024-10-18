@@ -48,25 +48,15 @@ The `pg_indexes` view consists of five columns:
 
 
 
-- 
 - `schemaname`: stores the name of the schema that contains tables and indexes.
-- 
 -
-- 
 - `tablename`: indicates the name of the table to which the index belongs.
-- 
 -
-- 
 - `indexname`: represents the name of the index.
-- 
 -
-- 
 - `tablespace`: identifies the name of the tablespace that contains indexes.
-- 
 -
-- 
 - `indexdef`: contains the index definition command in the form of `CREATE INDEX` statement.
-- 
 
 
 
@@ -317,12 +307,8 @@ The output shows the index of the table under the **Indexes** section.
 
 
 
-- 
 - Query data from the `pg_indexes` view to retrieve the index information.
-- 
 -
-- 
 - Use the `\d table_name` command to display the table information along with indexes.
-- 
 
 

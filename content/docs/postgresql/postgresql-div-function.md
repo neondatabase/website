@@ -32,9 +32,7 @@ In this syntax:
 
 
 - `dividend` is the number that you want to divide.
-- -
 - `divisor` is the number to which to divide the dividend.
-- 
 
 
 The `DIV()` function returns the integer quotient of the division.
@@ -204,11 +202,8 @@ How it works.
 
 
 - Use the [AGE()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/) function to calculate age.
-- -
 - Use the [EXTRACT()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/) function to extract the year from the age.
-- -
 - Use the `DIV()` function to return the integer part of the age.
-- 
 
 
 ## Summary
@@ -216,4 +211,3 @@ How it works.
 
 
 - Use the PostgreSQL `DIV()` function to perform integer division.
-- 

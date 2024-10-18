@@ -46,17 +46,11 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the table that you want to update data after the `UPDATE` keyword.
-- 
 -
-- 
 - Second, specify columns and their new values after `SET` keyword. The columns that do not appear in the `SET` clause retain their original values.
-- 
 -
-- 
 - Third, determine which rows to update in the condition of the [`WHERE`](/docs/postgresql/postgresql-where) clause.
-- 
 
 
 
@@ -392,16 +386,10 @@ Output:
 
 
 
-- 
 - Use the `UPDATE` statement to update data in one or more columns of a table.
-- 
 -
-- 
 - Specify a condition in a WHERE clause to determine which rows to update data.
-- 
 -
-- 
 - Use the `RETURNING` clause to return the updated rows from the `UPDATE` statement
-- 
 
 

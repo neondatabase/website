@@ -135,8 +135,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `REAL` data type to store single-precision floating-point numbers in the database.
-- 
 
 

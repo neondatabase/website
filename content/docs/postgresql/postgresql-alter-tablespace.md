@@ -29,11 +29,8 @@ The action can be:
 
 
 - Rename the tablespace
-- -
 - Change the owner
-- -
 - Set the parameters for the tablespace.
-- 
 
 
 To rename the tablespace, you use the `ALTER TABLESPACE RENAME TO` statement:
@@ -104,8 +101,5 @@ OWNER to hr;
 
 
 - Use `ALTER TABLESPACE RENAME TO` statement to rename a tablespace.
-- -
 - Use `ALTER TABLESPACE OWNER TO` to change the owner of a tablespace.
-- -
 - Use `ALTER TABLESPACE SET` to set the parameters for a tablespace.
-- 

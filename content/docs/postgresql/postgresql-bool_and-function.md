@@ -45,9 +45,7 @@ In this syntax:
 
 
 
-- 
 - `expression`: This is a boolean expression to evaluate.
-- 
 
 
 
@@ -328,12 +326,8 @@ Output:
 
 
 
-- 
 - Use the `BOOL_AND()` function to aggregate boolean values across rows, which returns true if all values are true or false otherwise.
-- 
 -
-- 
 - The `BOOL_AND()` function ignores NULLs in the group.
-- 
 
 

@@ -130,9 +130,7 @@ How it works.
 
 
 - First, the [subquery](/docs/postgresql/postgresql-subquery) to select the lowest rental rate.
-- -
 - Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
-- 
 
 
 ### 3) Using PostgreSQL MIN() function with GROUP BY clause example
@@ -287,6 +285,4 @@ Output:
 
 
 - Use the `MIN()` function to find the lowest value in a set of values.
-- -
 - Use the `MIN()` with `GROUP BY` clause to find the lowest value in a group of values.
-- 

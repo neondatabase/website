@@ -33,7 +33,6 @@ In this syntax:
 
 
 - `json_array` is a JSON array with the `JSONB` type, which you want to expand the elements.
-- 
 
 
 The `jsonb_array_elements_text()` function will expand the elements in the `json_array` into individual text values.
@@ -254,4 +253,3 @@ Output:
 
 
 - Use the `jsonb_array_elements_text()` function to expand elements of the top-level JSON array into a set of text values.
-- 

@@ -46,13 +46,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the table to which you want to add a new column after the `ALTER TABLE` keyword.
-- 
 -
-- 
 - Second, specify the name of the new column as well as its data type and constraint after the `ADD COLUMN` keywords.
-- 
 
 
 
@@ -396,8 +392,6 @@ SET NOT NULL;
 
 
 
-- 
 - Use the PostgreSQL `ALTER TABLE...ADD COLUMN` statement to add one or more columns to a table.
-- 
 
 

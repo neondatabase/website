@@ -268,4 +268,3 @@ Finally, display the error message if any exceptions occur:
 
 
 - Call the `ExecuteReaderAsync()` method of the `NpgsqlCommand` object to execute a call to a PostgreSQL function from a C# program.
-- 

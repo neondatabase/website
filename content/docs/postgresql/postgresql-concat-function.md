@@ -344,8 +344,6 @@ The output indicates that the `CONCAT()` function ignores `NULL`.
 
 
 
-- 
 - Use the PostgreSQL `CONCAT()` function to concatenate two or more strings into one.
-- 
 
 

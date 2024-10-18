@@ -174,4 +174,3 @@ The output indicates that the `ram` field and the entire `extras` object, as wel
 
 
 - Use the `jsonb_strip_nulls()` function to recursively delete all object fields that have null values.
-- 

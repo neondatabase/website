@@ -36,7 +36,6 @@ In this syntax:
 
 
 - `n` is the number that you want to calculate the exponential. It can be a literal number, an expression, or a table column.
-- 
 
 
 The `EXP()` function returns the exponential of a number in double precision. The `EXP()` function returns `NULL` if the n is `NULL`.
@@ -171,4 +170,3 @@ LINE 1: SELECT EXP('10X') result;
 
 
 - Use the `EXP()` function to calculate the exponential of a number.
-- 

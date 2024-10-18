@@ -155,8 +155,6 @@ Output:
 
 
 
-- 
 - Use the `psql --version` command, `select version()` statement, and retrieve the `setting` from the `pg_settings` to get the PostgreSQL version.
-- 
 
 

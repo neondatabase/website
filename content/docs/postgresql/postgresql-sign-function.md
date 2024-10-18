@@ -167,9 +167,7 @@ How it works.
 
 
 - Use the `LAG()` window function to retrieve the `sales_amount` from the previous year utilizing the `ORDER` `BY` year clause to specify the order of rows.
-- -
 - Use the `CASE` expression to evaluate each row's sales data and assign a corresponding value to the `sales_trend` column.
-- 
 
 
 If you want to reuse the result of the LAG() function, you can use a [common table expression](/docs/postgresql/postgresql-cte):
@@ -206,4 +204,3 @@ FROM
 
 
 - Use the `SIGN()` function to determine the sign of a number.
-- 

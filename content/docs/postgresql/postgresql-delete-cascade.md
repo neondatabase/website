@@ -179,4 +179,3 @@ The output indicates that the employees with department id 1 were deleted succes
 
 
 - Use PostgreSQL `DELETE CASCADE` action to automatically delete related rows in child tables when a parent row is deleted.
-- 

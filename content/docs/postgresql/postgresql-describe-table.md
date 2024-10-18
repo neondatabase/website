@@ -159,6 +159,4 @@ Note that the `SELECT *`from the `information_schema.columns` will retrieve a co
 
 
 - Use the `\d table_name` to show the structure of the table using `psql`.
-- -
 - Query data from the `information_schema.columns` to retrieve the column information.
-- 

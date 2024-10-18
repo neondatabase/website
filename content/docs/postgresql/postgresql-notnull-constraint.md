@@ -425,16 +425,10 @@ VALUES
 
 
 
-- 
 - Use the `NOT NULL` constraint for a column to enforce a column not accept `NULL`. By default, a column can hold NULL.
-- 
 -
-- 
 - To check if a value is `NULL` or not, you use the `IS NULL` operator. The `IS NOT NULL` negates the result of the `IS NULL`.
-- 
 -
-- 
 - Never use equal operator `=` to compare a value with `NULL` because it always returns `NULL`.
-- 
 
 

@@ -343,13 +343,9 @@ Even though the above query works as you expected, it has two main problems.
 
 
 
-- 
 - First, it is quite lengthy.
-- 
 -
-- 
 - Second, it has a performance issue because PostgreSQL has to scan the `sales` table separately for each query.
-- 
 
 
 
@@ -579,8 +575,6 @@ ORDER BY
 
 
 
-- 
 - Use the PostgreSQL `GROUPING SETS` to generate multiple grouping sets.
-- 
 
 

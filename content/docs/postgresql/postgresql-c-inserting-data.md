@@ -346,8 +346,6 @@ The output indicates that the program has successfully inserted a new row into t
 
 
 
-- 
 - Use the `NpgsqlCommand` object to execute an `INSERT` statement that inserts a row into a table.
-- 
 
 

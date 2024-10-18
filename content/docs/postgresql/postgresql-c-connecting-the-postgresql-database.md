@@ -150,13 +150,9 @@ dotnet add package Npgsql
 
 
 
-- 
 - The `Npgsql` is a .NET data provider for PostgreSQL.
-- 
 -
-- 
 - The `Microsoft.Extensions`.Configuration and `Microsoft.Extensions`.`Configuration.Json` are packages that manage configurations.
-- 
 
 
 
@@ -425,8 +421,6 @@ await using var conn = await dataSource.OpenConnectionAsync();
 
 
 
-- 
 - Use Npgsql .NET Data Provider to interact with the PostgreSQL database.
-- 
 
 

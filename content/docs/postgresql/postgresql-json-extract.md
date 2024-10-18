@@ -446,6 +446,4 @@ Output:
 
 
 - Use the `json_array -> n` and `json_array ->> n` operator to extract a JSON array element as a `JSONB` value or as a text string specified by an index.
-- -
 - Use the `json_object -> 'key'` and `json_object ->> 'key'` operator to extract a value from an object specified by a key as a JSONB value and a text string.
-- 

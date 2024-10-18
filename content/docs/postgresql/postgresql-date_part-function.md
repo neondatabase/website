@@ -51,77 +51,41 @@ The values of the field must be one of the following permitted values:
 
 
 
-- 
 - century
-- 
 -
-- 
 - decade
-- 
 -
-- 
 - year
-- 
 -
-- 
 - month
-- 
 -
-- 
 - day
-- 
 -
-- 
 - hour
-- 
 -
-- 
 - minute
-- 
 -
-- 
 - second
-- 
 -
-- 
 - microseconds
-- 
 -
-- 
 - milliseconds
-- 
 -
-- 
 - dow
-- 
 -
-- 
 - doy
-- 
 -
-- 
 - epoch
-- 
 -
-- 
 - isodow
-- 
 -
-- 
 - isoyear
-- 
 -
-- 
 - timezone
-- 
 -
-- 
 - timezone_hour
-- 
 -
-- 
 - timezone_minute
-- 
 
 
 
@@ -530,8 +494,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `DATE_PART()` function to extract a subfield of a timestamp.
-- 
 
 

@@ -40,9 +40,7 @@ In this syntax:
 
 
 - `target` is a composite type to which you want to expand the JSONB value.
-- -
 - `json_object` is a JSON object of the JSONB type that you want to expand.
-- 
 
 
 The `jsonb_populate_record()` function returns a record of the specified type with its fields populated using the key-value pairs from the JSON object.
@@ -172,4 +170,3 @@ Output:
 
 
 - Use the `jsonb_populate_record()` function to populate the fields of a record type or a custom composite type from a JSON object.
-- 

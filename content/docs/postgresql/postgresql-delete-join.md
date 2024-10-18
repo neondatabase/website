@@ -33,13 +33,9 @@ In this syntax:
 
 
 - First, specify the name of the table (`table1`) from which you want to delete data after the `DELETE FROM` keywords
-- -
 - Second, provide a table (`table2`) to join with the main table after the `USING` keyword.
-- -
 - Third, define a condition in the `WHERE` clause for joining two tables.
-- -
 - Finally, return the deleted rows in the `RETURNING` clause. The `RETURNING` clause is optional.
-- 
 
 
 For example, the following statement uses the `DELETE` statement with the `USING` clause to delete data from `t1` that has the same id as `t2`:
@@ -216,9 +212,7 @@ In this example:
 
 
 - First, the subquery returns a list of phones from the `denylist` table.
-- -
 - Second, the `DELETE` statement deletes rows in the member table whose values in the phone column are in the list of phones returned by the subquery.
-- 
 
 
 ## Summary
@@ -226,4 +220,3 @@ In this example:
 
 
 - Use the `DELETE USING` statement or a subquery to emulate the `DELETE JOIN` operation.
-- 

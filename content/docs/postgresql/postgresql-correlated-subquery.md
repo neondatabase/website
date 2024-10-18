@@ -120,4 +120,3 @@ As a result, the outer query returns rows where the `length` of the film is grea
 
 
 - Use a correlated subquery to perform a query that depends on the values of the current row being processed.
-- 

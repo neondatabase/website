@@ -54,21 +54,13 @@ In this syntax:
 
 
 
-- 
 - First, specify the columns from both tables in the `select_list` in the `SELECT` clause.
-- 
 -
-- 
 - Second, provide the left table (`table1`) from which you want to select data in the `FROM` clause.
-- 
 -
-- 
 - Third, specify the right table (`table2`) that you want to join with the left table in the `RIGHT JOIN` clause.
-- 
 -
-- 
 - Finally, define a condition for joining two tables (`table1.column_name = table2.column_name`), which indicates the `column_name` in each table should have matching rows.
-- 
 
 
 
@@ -306,12 +298,8 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `RIGHT JOIN` clause to join a right table with a left table and return rows from the right table that may or may not have corresponding rows in the left table.
-- 
 -
-- 
 - The `RIGHT JOIN` is also known as `RIGHT OUTER JOIN`.
-- 
 
 

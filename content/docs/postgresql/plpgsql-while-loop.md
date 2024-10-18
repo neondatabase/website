@@ -133,13 +133,9 @@ How it works.
 
 
 
-- 
 - First, declare the `counter` variable and initialize its value to 0.
-- 
 -
-- 
 - Second, use the `while` loop statement to show the current value of the `counter` as long as it is less than 5. In each iteration, increase the value of `counter` by one. After 5 iterations, the `counter` is 5 therefore the `while` loop is terminated.
-- 
 
 
 
@@ -151,8 +147,6 @@ How it works.
 
 
 
-- 
 - Use the PL/pgSQL `while` loop statement to execute one or more statements as long as long as a specified condition is true.
-- 
 
 

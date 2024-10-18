@@ -34,11 +34,8 @@ In this syntax:
 
 
 - `string`: This is an input string with the data type char, varchar, text, and so on.
-- -
 - `start_position`: This is an integer that specifies where in the string you want to extract the substring. If `start_position` equals zero, the substring starts at the first character of the string. The `start_position` can be only positive. Note that in other database systems such as MySQL the [SUBSTRING() function](https://www.mysqltutorial.org/mysql-string-functions/mysql-substring/) can accept a negative `start_position`.
-- -
 - `length`: This is a positive integer that determines the number of characters that you want to extract from the string beginning at `start_position`. If the sum of `start_position` and `length` is greater than the number of characters in the `string`, the substring function returns the whole string beginning at `start_position`. The `length` parameter is optional. If you omit it, the `SUBSTRING` function returns the whole string started at `start_position`.
-- 
 
 
 PostgreSQL offers another syntax for the `SUBSTRING()` function as follows:
@@ -275,11 +272,8 @@ In this syntax:
 
 
 - `string`: is a string that you want to extract the substring.
-- -
 - `escape-character`: the escape character.
-- -
 - `pattern` is a regular expression wrapped inside escape characters followed by a double quote (`"`). For example, if the character `#` is the escape character, the pattern will be `#"pattern#"`. In addition, the `pattern` must match the entire `string`, otherwise, the function will fail and return `NULL`.
-- 
 
 
 For example:
@@ -311,4 +305,3 @@ Output:
 
 
 - Use the PostgreSQL `SUBSTRING()` functions to extract a substring from a string.
-- 

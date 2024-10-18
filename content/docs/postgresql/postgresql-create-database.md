@@ -61,13 +61,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the new database that you want to create after the `CREATE DATABASE` keywords. The database name must be unique in the PostgreSQL server. If you attempt to create a database whose name already exists, PostgreSQL will issue an error.
-- 
 -
-- 
 - Then, use one or more parameters for the new database.
-- 
 
 
 
@@ -446,7 +442,7 @@ In the **Definition** tab, you can select the encoding, a template, tablespace, 
 
 
 
-The **Security** tab allows you to define security labels and assign privileges. The **Privileges **tab allows you to assign privileges to a role.
+The **Security** tab allows you to define security labels and assign privileges. The **Privileges** tab allows you to assign privileges to a role.
 
 
 
@@ -464,7 +460,7 @@ Fifth, click the SQL tab to view the generated SQL statement that will execute.
 
 
 
-Finally, click the **Save **button to create the `sampledb` database. You will see the `sampledb` listed on the database list:
+Finally, click the **Save** button to create the `sampledb` database. You will see the `sampledb` listed on the database list:
 
 
 
@@ -482,8 +478,6 @@ Finally, click the **Save **button to create the `sampledb` database. You will s
 
 
 
-- 
 - Use the `CREATE DATABASE` statement to create a new database.
-- 
 
 

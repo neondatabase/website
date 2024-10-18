@@ -44,13 +44,9 @@ In this syntax:
 
 
 
-- 
 - The `precision` is the total number of digits
-- 
 -
-- 
 - The `scale` is the number of digits in the fraction part.
-- 
 
 
 
@@ -208,17 +204,11 @@ Besides the ordinal numeric values, the `numeric` type has several special value
 
 
 
-- 
 - `Infinity`
-- 
 -
-- 
 - `-Infinity`
-- 
 -
-- 
 - `NaN`
-- 
 
 
 
@@ -479,8 +469,6 @@ The output indicates that the `NaN` is greater than `500.21`
 
 
 
-- 
 - Use the PostgreSQL `NUMERIC` data type to store numbers that require exactness.
-- 
 
 

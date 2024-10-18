@@ -39,13 +39,9 @@ In this statement:
 
 
 
-- 
 - First, specify the name of the table which you want to rename after the `ALTER TABLE` clause.
-- 
 -
-- 
 - Second, assign the new table name after the `RENAME TO` clause.
-- 
 
 
 
@@ -362,8 +358,6 @@ The output shows that the `supplier_groups` table in the [`SELECT`](/docs/postgr
 
 
 
-- 
 - Use the `ALTER TABLE ... RENAME TO` statement to rename a table.
-- 
 
 

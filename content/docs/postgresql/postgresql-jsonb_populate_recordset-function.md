@@ -54,13 +54,9 @@ In this syntax:
 
 
 
-- 
 - `target` represents the target record type to which the JSONB data will be mapped.
-- 
 -
-- 
 - `json_object` is a JSON array of objects from which the records will be populated. The jsonb_array has the type of JSONB.
-- 
 
 
 
@@ -234,8 +230,6 @@ Output:
 
 
 
-- 
 - Use the `jsonb_popuplate_recordset()` function to populate the fields of a record type or a custom composite type from a JSON object.
-- 
 
 

@@ -470,16 +470,10 @@ Third, use the `inner_loop` as the label for the inner loop. In the inner loop, 
 
 
 
-- 
 - Use the PL/pgSQL `LOOP` statement to create unconditional loops.
-- 
 -
-- 
 - The loop can be nested.
-- 
 -
-- 
 - Use the `exit` statement to terminate a loop prematurely.
-- 
 
 

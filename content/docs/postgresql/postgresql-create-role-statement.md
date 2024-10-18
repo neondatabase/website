@@ -464,12 +464,8 @@ The following `psql` command shows all the roles that we have created so far:
 
 
 
-- 
 - PostgreSQL uses roles to represent user accounts. A role that can log in is equivalent to a user account in other database systems.
-- 
 -
-- 
 - Use the role attributes to specify the privileges of the roles such as `LOGIN` allows the role to log in, `CREATEDB` allows the role to create a new database, `SUPERUSER` allows the role to have all privileges.
-- 
 
 

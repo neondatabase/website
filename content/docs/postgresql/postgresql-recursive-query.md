@@ -48,15 +48,10 @@ In this syntax:
 
 
 - `cte_name`: Specify the name of the CTE. You can reference this CTE name in the subsequent parts of the query.
-- -
 - `column1`, `column2`, ... Specify the columns selected in both the anchor and recursive members. These columns define the CTE's structure.
-- -
 - Anchor member: Responsible for forming the base result set of the CTE structure.
-- -
 - Recursive member: Refer to the CTE name itself. It combines with the anchor member using the `UNION` or `UNION ALL` operator.
-- -
 - `recursive_condition`: Is a condition used in the recursive member that determines how the recursion stops.
-- 
 
 
 PostgreSQL executes a recursive CTE in the following sequence:
@@ -64,13 +59,9 @@ PostgreSQL executes a recursive CTE in the following sequence:
 
 
 - First, execute the anchor member to create the base result set (R0).
-- -
 - Second, execute the recursive member with Ri as an input to return the result set Ri+1 as the output.
-- -
 - Third, repeat step 2 until an empty set is returned. (termination check)
-- -
 - Finally, return the final result set that is a [UNION](/docs/postgresql/postgresql-union) or `UNION ALL` of the result sets R0, R1, ... Rn.
-- 
 
 
 A recursive CTE can be useful when dealing with hierarchical or nested data structures, such as trees or graphs.
@@ -197,9 +188,7 @@ How it works:
 
 
 - The recursive CTE `subordinates` defines an anchor member and a recursive member.
-- -
 - The anchor member returns the base result set R0 which is the employee with the id 2.
-- 
 
 
 ```
@@ -272,6 +261,4 @@ PostgreSQL returns the final result set which is the union of all result sets in
 
 
 - Use the `WITH RECURSIVE` syntax to define a recursive query.
-- -
 - Use a recursive query to deal with hierarchical or nested data structures such as trees or graphs.
-- 

@@ -37,13 +37,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the table that you want to drop after the `DROP TABLE` keywords.
-- 
 -
-- 
 - Second, use the `IF EXISTS` option to remove the table only if it exists.
-- 
 
 
 
@@ -61,13 +57,9 @@ If the table is used in other database objects such as [views](https://www.postg
 
 
 
-- 
 - Use the `CASCADE` option to remove the table and its dependent objects.
-- 
 -
-- 
 - Use the `RESTRICT` option rejects the removal if there is any object depending on the table. The `RESTRICT` option is the default if you don't explicitly specify it in the `DROP TABLE` statement.
-- 
 
 
 
@@ -320,12 +312,8 @@ DROP TABLE tvshows, animes;
 
 
 
-- 
 - Use the `DROP TABLE` statement to drop one or more tables.
-- 
 -
-- 
 - Use the `CASCADE` option to drop a table and all of its dependent objects.
-- 
 
 

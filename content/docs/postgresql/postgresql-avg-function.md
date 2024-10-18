@@ -183,9 +183,7 @@ Typically, you use the AVG() function with the GROUP BY clause to calculate the 
 
 
 - First, the `GROUP BY` clause divides rows of the table into groups
-- -
 - Then, the `AVG()` function calculates the average value per group.
-- 
 
 
 The following example uses the `AVG()` function with `GROUP BY` clause to calculate the average amount paid by each customer:
@@ -377,8 +375,5 @@ It returns 20, meaning that the `AVG()` function ignores `NULL` values.
 
 
 - Use PostgreSQL `AVG()` function to calculate the average value of a set.
-- -
 - The `AVG()` function ignores NULL in the calculation.
-- -
 - The `AVG()` function returns NULL if the set is empty.
-- 

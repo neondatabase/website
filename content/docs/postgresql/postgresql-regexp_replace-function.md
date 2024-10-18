@@ -251,17 +251,11 @@ In this example,
 
 
 
-- 
 - `[[:alpha:]]`matches any alphabets
-- 
 -
-- 
 - `''` is the replacement string
-- 
 -
-- 
 - `'g'` instructs the function to remove all alphabets, not just the first one.
-- 
 
 
 
@@ -344,8 +338,6 @@ In this example, we use the `REGEXP_REPLACE()` function to match two or more con
 
 
 
-- 
 - Use the PostgreSQL `REGEXP_REPLACE()` function to replace substrings that match a regular expression with a new substring.
-- 
 
 

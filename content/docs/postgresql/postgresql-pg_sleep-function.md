@@ -223,8 +223,6 @@ The output shows that the `CLOCK_TIMESTAMP()` returns the actual current timesta
 
 
 
-- 
 - Use the `PG_SLEEP()` function to pause the SQL execution for a number of seconds.
-- 
 
 

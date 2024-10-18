@@ -245,8 +245,6 @@ Even though the substring `'is'` appears twice in the string `'This is a cat'`, 
 
 
 
-- 
 - Use the `POSITION()` function to locate the first instance of a substring within a string.
-- 
 
 

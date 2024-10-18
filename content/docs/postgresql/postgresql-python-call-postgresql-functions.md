@@ -224,4 +224,3 @@ Output:
 
 
 - Use the `callproc()` method of the `cursor` object to call a function in PostgreSQL from Python.
-- 

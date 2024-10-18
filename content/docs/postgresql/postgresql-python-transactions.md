@@ -49,13 +49,9 @@ The `connection` class has two methods for concluding a transaction:
 
 
 
-- 
 - `commit()` - Use this method to permanently apply all changes to the PostgreSQL database.
-- 
 -
-- 
 - `rollback()` - Call this method to discard the changes.
-- 
 
 
 
@@ -223,13 +219,9 @@ To achieve this, you can do as follows:
 
 
 
-- 
 - First, [insert a new row](/docs/postgresql/postgresql-insert) into the `parts` table and get the part id.
-- 
 -
-- 
 - Then, insert rows into the `vendor_parts` table.
-- 
 
 
 
@@ -479,12 +471,8 @@ You can query data from the `parts` and `vendor_parts` tables again. There will 
 
 
 
-- 
 - Use the `commit()` method to permanently apply all changes to the database.
-- 
 -
-- 
 - Use the `rollback()` method to discard the changes.
-- 
 
 

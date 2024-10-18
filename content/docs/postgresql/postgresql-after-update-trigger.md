@@ -42,13 +42,9 @@ In an `AFTER UPDATE` trigger, you can access the following variables:
 
 
 
-- 
 - `OLD`: This record variable allows you to access the row before the update.
-- 
 -
-- 
 - `NEW`: This record variable represents the row after the update.
-- 
 
 
 
@@ -60,17 +56,11 @@ Additionally, you can access the following variables:
 
 
 
-- 
 - `TG_NAME`: Store the name of the trigger.
-- 
 -
-- 
 - `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `AFTER` `UPDATE` trigger.
-- 
 -
-- 
 - `TG_WHEN`: Represent the trigger timing, which is `AFTER` for the `AFTER UPDATE` trigger.
-- 
 
 
 
@@ -304,8 +294,6 @@ The output shows that the salary before and after changes have been logged to th
 
 
 
-- 
 - Use a `BEFORE` `UPDATE` trigger to execute a function before an update operation occurs.
-- 
 
 

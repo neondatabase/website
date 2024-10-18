@@ -33,13 +33,9 @@ In this statement, to change the password of a user:
 
 
 
-- 
 - First, specify the `username` that you want to change the password.
-- 
 -
-- 
 - Second, provide a new `password` wrapped within single quotes (').
-- 
 
 
 
@@ -144,8 +140,6 @@ Additionally, the cleartext password may be logged in the psql's command history
 
 
 
-- 
 - Use the `ALTER ROLE` statement to change the password of a PostgreSQL user.
-- 
 
 

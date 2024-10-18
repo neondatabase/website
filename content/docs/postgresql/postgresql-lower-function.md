@@ -157,4 +157,3 @@ Output:
 
 
 - Use the `LOWER()` function to return a new string with all the characters of the input string converted to lowercase.
-- 

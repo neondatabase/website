@@ -45,33 +45,19 @@ In this syntax:
 
 
 
-- 
 - `years` is an integer representing the number of years.
-- 
 -
-- 
 - `months` is an integer representing the number of months.
-- 
 -
-- 
 - `weeks` is an integer representing the number of weeks.
-- 
 -
-- 
 - `days` is an integer representing the number of days.
-- 
 -
-- 
 - `hours` is an integer representing the number of hours.
-- 
 -
-- 
 - `mins` is an integer representing the number of minutes.
-- 
 -
-- 
 - `secs` is a double-precision number representing the number of seconds.
-- 
 
 
 
@@ -314,8 +300,6 @@ Output:
 
 
 
-- 
 - Use the `MAKE_INTERVAL()` function to construct an interval from the provided components, such as years, months, days, hours, minutes, and seconds.
-- 
 
 

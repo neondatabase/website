@@ -448,8 +448,6 @@ Summary
 
 
 
-- 
 - Use the PostgreSQL `TO_CHAR()` function to convert a timestamp or a numeric value to a string.
-- 
 
 

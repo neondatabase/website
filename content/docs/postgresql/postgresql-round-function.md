@@ -360,8 +360,6 @@ In this example, we used the `ROUND()` function to round the result to an intege
 
 
 
-- 
 - Use the PostgreSQL `ROUND()` function to round a number to its nearest integer or a number of specified decimal places.
-- 
 
 

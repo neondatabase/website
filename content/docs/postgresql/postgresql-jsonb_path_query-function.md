@@ -45,13 +45,9 @@ In this syntax:
 
 
 
-- 
 - `jsonb_data` is the JSONB data that you want to query.
-- 
 -
-- 
 - `path_expression` is a JSON path expression that locates values or elements in the JSONB data.
-- 
 
 
 
@@ -206,8 +202,6 @@ Output:
 
 
 
-- 
 - Use the `jsonb_path_query()` function to query JSONB data based on JSON path expressions.
-- 
 
 

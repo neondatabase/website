@@ -997,8 +997,6 @@ Result:
 
 
 
-- 
 - Use the PostgreSQL `EXTRACT()` function to extract a field from a date/time or interval value.
-- 
 
 

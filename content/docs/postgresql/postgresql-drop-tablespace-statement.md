@@ -44,13 +44,9 @@ In this syntax:
 
 
 
-- 
 - First, specify the name of the tablespace that you want to remove after the `DROP TABLESPACE` keywords.
-- 
 -
-- 
 - Second, use the `IF EXISTS` option to instruct PostgreSQL to issue a notice instead of an error when the tablespace does not exist.
-- 
 
 
 
@@ -343,8 +339,6 @@ DROP TABLESPACE demo_ts
 
 
 
-- 
 - Use the PostgreSQL `DROP TABLESPACE` statement to drop a tablespace.
-- 
 
 

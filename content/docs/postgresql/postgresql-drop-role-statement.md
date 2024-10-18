@@ -28,9 +28,7 @@ In this syntax:
 
 
 - First, specify the name of the role that you want to remove after the `DROP ROLE` keywords.
-- -
 - Second, use the `IF EXISTS` option to conditionally remove the role only if it exists.
-- 
 
 
 To remove a superuser role, you need to be a superuser. To drop non-superuser roles, you need to have the `CREATEROLE` privilege.
@@ -42,9 +40,7 @@ When you remove a role referenced in any database, PostgreSQL will raise an erro
 
 
 - First, either remove the database objects owned by the role using the `DROP OWNED` statement or reassign the ownership of the database objects to another role `REASSIGN OWNED`.
-- -
 - Second, revoke any privileges granted to the role.
-- 
 
 
 The `REASSIGN OWNED` statement reassigns the ownership of all dependent objects of a target role to another role. Because the `REASSIGN OWNED` statement can only access objects in the current database, you need to execute this statement in each database that contains objects owned by the target role.
@@ -81,11 +77,8 @@ Let's take an example of how to use the `DROP ROLE` statement:
 
 
 - First, create a new role called `alice`
-- -
 - Second, use the `alice` role to create a table called `customers`.
-- -
 - Third, remove the role `alice`.
-- 
 
 
 We'll use the psql client tool. But, you can use any client tool of your choice.
@@ -353,6 +346,4 @@ Finally, quit the current session:
 
 
 - Use the PostgreSQL `DROP ROLE` statement to remove a role.
-- -
 - If a role has dependent objects, use the `REASSIGN OWNED` and `DROP OWNED` statements in sequence to remove dependent objects of the role before executing the `DROP ROLE` statement.
-- 

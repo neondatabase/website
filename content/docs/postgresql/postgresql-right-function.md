@@ -34,9 +34,7 @@ The PostgreSQL `RIGHT()` function requires two arguments:
 
 
 - `string` is a string from which a number of the rightmost characters are returned.
-- -
 - **`n`** is a positive integer that specifies the number of the rightmost characters in the string that should be returned.
-- 
 
 
 The `RIGHT()` function returns the last `n` characters in a string. If `n` is negative, the `RIGHT()` function returns all characters in the string but first `|n|` (absolute) characters.
@@ -177,4 +175,3 @@ Output:
 
 
 - Use the PostgreSQL `RIGHT()` function to get the n rightmost characters in a string.
-- 

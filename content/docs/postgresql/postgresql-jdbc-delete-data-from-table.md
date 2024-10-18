@@ -18,13 +18,9 @@ To delete data from a Java program, you follow these steps:
 
 
 - [Establish a database connection to PostgreSQL.](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
-- -
 - Create a `PreparedStatement` object.
-- -
 - Execute a [DELETE statement](/docs/postgresql/postgresql-delete).
-- -
 - Close the database connection.
-- 
 
 
 ## Deleting data example
@@ -186,4 +182,3 @@ The result set is empty, meaning that the program deleted the product with id 1 
 
 
 - Use the `PreparedStatement` to delete data from a table using JDBC.
-- 

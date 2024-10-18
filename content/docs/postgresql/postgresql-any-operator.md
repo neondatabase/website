@@ -32,11 +32,8 @@ In this syntax:
 
 
 - `expression` is a value that you want to compare.
-- -
 - `operator` is a comparison operator including =, &lt;, >, &lt;=, >=, and &lt;>.
-- -
 - `subquery` is a subquery that returns a set of values to compare against. It must return exactly one column.
-- 
 
 
 The `ANY` operator returns `true` if the comparison returns `true` for at least one of the values in the set, and `false` otherwise.
@@ -285,9 +282,7 @@ The output indicates that the two employees have a higher salary than the manage
 
 
 - Jack has a salary of 56K which is greater than 55K.
-- -
 - Liam has a salary of 59K which is greater than 55K and 58K.
-- 
 
 
 ### 3) Using ANY operator with &lt; operator example
@@ -346,4 +341,3 @@ It returns all the rows with the `employee` type because they have a value in th
 
 
 - Use the PostgreSQL `ANY` operator to compare a value to a set of values returned by a subquery.
-- 

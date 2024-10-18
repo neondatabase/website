@@ -103,23 +103,14 @@ PostgreSQL supports the most popular programming languages:
 
 
 - Python
-- -
 - Java
-- -
 - C#
-- -
 - C/C+
-- -
 - Ruby
-- -
 - JavaScript (Node.js)
-- -
 - Perl
-- -
 - Go
-- -
 - Tcl
-- 
 
 
 ## PostgreSQL feature highlights
@@ -131,21 +122,13 @@ PostgreSQL has many advanced features that other enterprise-class database manag
 
 
 - User-defined types
-- -
 - Table inheritance
-- -
 - Sophisticated locking mechanism
-- -
 - [Foreign key referential integrity](/docs/postgresql/postgresql-foreign-key)
-- -
 - [Views](https://www.postgresqltutorial.com/postgresql-views/), rules, [subquery](/docs/postgresql/postgresql-subquery)
-- -
 - Nested transactions (savepoints)
-- -
 - Multi-version concurrency control (MVCC)
-- -
 - Asynchronous replication
-- 
 
 
 The recent versions of PostgreSQL support the following features:
@@ -153,11 +136,8 @@ The recent versions of PostgreSQL support the following features:
 
 
 - Native Microsoft Windows Server version
-- -
 - Tablespaces
-- -
 - Point-in-time recovery
-- 
 
 
 And more new features are added in each new release.

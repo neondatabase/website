@@ -45,13 +45,9 @@ The `TO_DATE()` function accepts two string arguments.
 
 
 
-- 
 - `text`: is an input string that you want to convert to a date.
-- 
 -
-- 
 - `format`: specifies the format of the input string.
-- 
 
 
 
@@ -99,17 +95,11 @@ In this example, the string `20170103` is converted into a date based on the inp
 
 
 
-- 
 - `YYYY`: year in four digits format.
-- 
 -
-- 
 - `MM`: month in two digits format.
-- 
 -
-- 
 - `DD`: day in two digits format.
-- 
 
 
 
@@ -280,8 +270,6 @@ LINE 1: SELECT '2017/02/30'::date;
 
 
 
-- 
 - Use the PostgreSQL `TO_DATE()` function to convert a string literal to a date value.
-- 
 
 

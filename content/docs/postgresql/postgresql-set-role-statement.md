@@ -218,6 +218,4 @@ The current role is back to `lily`.
 
 
 - Use the `SET` `ROLE` statement to temporarily change the current role within a database session.
-- -
 - Use the `RESET` `ROLE` statement to reset the role to the original one.
-- 

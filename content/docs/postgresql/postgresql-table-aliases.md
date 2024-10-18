@@ -44,13 +44,9 @@ In this syntax:
 
 
 
-- 
 - `table_name`: Specify the name of the table that you want to give an alias.
-- 
 -
-- 
 - `alias_name`: Provide the alias for the table.
-- 
 
 
 
@@ -313,8 +309,6 @@ Note that you'll learn about [self-join](/docs/postgresql/postgresql-inner-join)
 
 
 
-- 
 - Use PostgreSQL table aliases to assign a temporary name to a table during the execution of a query.
-- 
 
 

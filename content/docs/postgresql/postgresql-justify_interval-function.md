@@ -23,9 +23,7 @@ The `JUSTIFY_INTERVAL()` function achieves this by utilizing the `JUSTIFY_DAYS()
 
 
 - `JUSTIFY_DAYS()`: Convert days exceeding 30 days into months and remaining days.
-- -
 - `JUSTIFY_HOURS()`: Convert hours exceeding 24 hours into days and remaining hours.
-- 
 
 
 Here's the syntax of the `JUSTIFY_INTERVAL()` function:
@@ -47,11 +45,8 @@ The `JUSTIFY_INTERVAL()` function returns an adjusted interval by:
 
 
 - Convert days exceeding 30 days into months and remaining days.
-- -
 - Convert hours exceeding 24 hours into days and remaining hours.
-- -
 - Correct signs (positive or negative) for the overall duration.
-- 
 
 
 ## PostgreSQL JUSTIFY_INTERVAL() function examples
@@ -144,9 +139,7 @@ In this example:
 
 
 - \-2 days 5 hours is -48 hours + 5 hours which is 43 hours.
-- -
 - The function converts - 43 hours to -24 hours + - 19 hours, which results in -1 days -19:00:00.
-- 
 
 
 ## Summary
@@ -154,4 +147,3 @@ In this example:
 
 
 - Use the `JUSTIFY_INTERVAL()` function to normalize an interval by converting days exceeding 30 days into months and hours exceeding 24 hours into days, while maintaining correct signs for positive or negative intervals.
-- 

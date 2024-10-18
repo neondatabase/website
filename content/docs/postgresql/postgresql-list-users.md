@@ -145,12 +145,8 @@ ORDER BY role_name desc;
 
 
 
-- 
 - Use `\du` or `\du+` psql command to list all users in the current database server.
-- 
 -
-- 
 - Use the `SELECT` statement to query the user information from the `pg_catalog.pg_user` catalog.
-- 
 
 

@@ -62,9 +62,7 @@ In this syntax:
 
 
 
-- 
 - `n` is a number with the type numeric or double precision. It can be a literal number, an expression, or a table column. `n` cannot be zero.
-- 
 
 
 
@@ -250,8 +248,6 @@ LINE 1: SELECT LN('10x') result;
 
 
 
-- 
 - Use the `LN()` function to calculate the natural logarithm of a number.
-- 
 
 

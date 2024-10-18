@@ -46,13 +46,9 @@ The `STRING_AGG()` function accepts two arguments and an optional `ORDER BY` cla
 
 
 
-- 
 - `expression` is any valid expression that can resolve to a character string. If you use other types than character string type, you need to explicitly [cast](/docs/postgresql/postgresql-cast) these values of that type to the character string type.
-- 
 -
-- 
 - `separator` is the separator for concatenated strings.
-- 
 
 
 
@@ -198,8 +194,6 @@ The following picture shows the partial output:
 
 
 
-- 
 - Use the PostgreSQL `STRING_AGG()` function to concatenate strings and place a separator between them.
-- 
 
 

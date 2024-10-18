@@ -232,6 +232,4 @@ As a rule of thumb, when overloading functions, you should always ensure their p
 
 
 - Multiple functions can share the same names as long as they have different arguments. These function names are overloaded.
-- -
 - Use a unique function argument list to define overloaded functions.
-- 

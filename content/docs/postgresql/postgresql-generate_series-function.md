@@ -36,11 +36,8 @@ In this syntax:
 
 
 - `start` is the starting value of the series.
-- -
 - `stop` is the ending value of the series. The resulting series will include the `stop` value.
-- -
 - `step` is the increment value between each consecutive number. The `step` is optional and defaults to 1.
-- 
 
 
 The data types of `start`, `stop`, and `step` can be `int`, `bigint`, or `numeric`. The function returns a `setof integer`, `bigint`, or `numeric` accordingly.
@@ -128,13 +125,9 @@ In this syntax:
 
 
 - The `start` is the starting value of the series.
-- -
 - The `stop` is the ending value of the series.
-- -
 - The `step` is increment values between two consecutive timestamps in the series.
-- -
 - The `timezone` represents the time zone. Its type is text e.g., `'America/New_York'`. The `timezone` argument is optional.
-- 
 
 
 The data types of the `start` and `stop` can be either `timestamp` or `timestamp with time zone`.
@@ -430,4 +423,3 @@ Output:
 
 
 - Use the `generate_series()` function to create a series of numbers of timestamps.
-- 

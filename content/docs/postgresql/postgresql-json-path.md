@@ -26,17 +26,11 @@ To construct JSON path expressions, you can use the combination of the following
 
 
 - `$` - Represent the root element to query.
-- -
 - `.key` - Use a dot (.) followed by a key name (`.key`) to access a field of a JSON object or (`.*`) to access all properties of a JSON object.
-- -
 - `[n]` - Use square brackets (`[]`) to access an array element by its index (n), or \[\*] to access all array elements.
-- -
 - `@` - Represent the current node being processed by a filter predicate.
-- -
 - `[start: end]` - Array slice operator.
-- -
 - `[?(expression)]` - Filter expression that evaluates to a boolean value.
-- 
 
 
 To extract specific elements from a JSON path `jsonb_path_query()` function:
@@ -228,13 +222,9 @@ In this example, we use the JSON path `$.pets[0].name` to locate the name of the
 
 
 - `$`: represents the top-level JSON object.
-- -
 - `$.pets` locates the values of the property with the name `pets`, which is a JSON array.
-- -
 - `$.pets[0]` returns the first element of the `$.pets` array, which is a JSON object.
-- -
 - `$.pets[0].name` returns the value of the property `name` of the `$.pets[0]` object.
-- 
 
 
 The following example uses the JSON path `$.pets[*].name` to return all pet names of a person object:
@@ -304,9 +294,7 @@ Here's the break-down of the JSON path expression `$.pets[*] ? (@.species == "Ca
 
 
 - `$.pets[*]`: selects all elements (`*`) within the "pets" array. The `$.` denotes the root of the JSON document and `pets[*]` represents all array elements of the `pets` array.
-- -
 - `? (@.species == "Cat")`: filters the selected elements from the `pets` array. The `?` is used to apply the filter condition `(@.species == "Cat")`, which checks if the value of the `species` key in each selected element is equal to `Cat`.
-- 
 
 
 In short, the JSON path `$.pets[*] ? (@.species == "Cat")` matches all objects within the `pets` array where the value of the `species` key is `Cat`.
@@ -332,9 +320,7 @@ The mode can be `lax` or `strict`:
 
 
 - In `lax` mode, the function returns an empty value (result set) if the JSON path expression has an error. For example, if you use the `$.email` path for the JSON document that doesn't contain the `email` key, the function returns an empty result set.
-- -
 - In `strict` mode, the function issues an error if the path expression contains an error.
-- 
 
 
 The default is `lax` mode.
@@ -404,6 +390,4 @@ The output shows that the function raises an error.
 
 
 - Use JSON paths to locate specific values or elements within a JSON document.
-- -
 - Use the `jsonb_path_query()` function to return all items within a JSON document that match a specified JSON path.
-- 

@@ -37,9 +37,7 @@ In this syntax:
 
 
 - First, specify the process id (`pid`) that you want to terminate.
-- -
 - Second, use the `timeout` in milliseconds to instruct the function to wait until the process is terminated or until the given time has passed. The timeout is optional.
-- 
 
 
 If you don't use a `timeout`, the function returns `true` indicating that it has successfully sent a termination signal to the backend whether the process is terminated or not.
@@ -112,4 +110,3 @@ Output:
 
 
 - Use the `pg_terminate_backend()` function to terminate a process by the process ID.
-- 

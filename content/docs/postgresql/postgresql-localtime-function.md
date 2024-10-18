@@ -119,4 +119,3 @@ Output:
 
 
 - Use the PostgreSQL `LOCALTIME` function to get the time at which the current transaction starts.
-- 

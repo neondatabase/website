@@ -33,7 +33,6 @@ In this syntax:
 
 
 - `value` is an interval value you want to justify.
-- 
 
 
 The `JUSTIFY_HOURS()` function returns an adjusted interval with:
@@ -41,11 +40,8 @@ The `JUSTIFY_HOURS()` function returns an adjusted interval with:
 
 
 - Hours exceeding 24 are converted to days.
-- -
 - The remaining hours are kept the same.
-- -
 - Minutes, seconds, and other units remain unchanged.
-- 
 
 
 If the value is `NULL`, the function returns `NULL`.
@@ -150,4 +146,3 @@ Output:
 
 
 - Use the `JUSTIFY_HOURS()` function to adjust 24-hour intervals as days.
-- 

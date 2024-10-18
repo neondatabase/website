@@ -287,13 +287,9 @@ How it works.
 
 
 
-- 
 - The `Connection` class is a singleton class. It means that you can create only one instance for the class. If the instance already exists and you try to create a new one, the class will return the existing reference.
-- 
 -
-- 
 - To connect to a PostgreSQL database, you need to create a new instance of the PDO class. In the `connect()` method, we read the database configuration parameters in the `database.ini` file, construct a connection string, and pass it to the `PDO` constructor.
-- 
 
 
 

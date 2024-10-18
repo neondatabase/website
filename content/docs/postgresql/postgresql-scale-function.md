@@ -180,4 +180,3 @@ By understanding the scales of prices, you can identify the diverse decimal prec
 
 
 - Use the `SCALE()` function to retrieve the scale of a number.
-- 

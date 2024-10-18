@@ -23,41 +23,23 @@ PostgreSQL supports the following data types:
 
 
 
-- 
 - [Boolean](/docs/postgresql/postgresql-boolean)
-- 
 -
-- 
 - [Character](/docs/postgresql/postgresql-char-varchar-text/) types such as [`char`, `varchar`, and `text`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
-- 
 -
-- 
 - Numeric types such as integer and floating-point number.
-- 
 -
-- 
 - Temporal types such as [date](/docs/postgresql/postgresql-date/), [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), [timestamp](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/), and [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval)
-- 
 -
-- 
 - [UUID](/docs/postgresql/postgresql-uuid) for storing Universally Unique Identifiers
-- 
 -
-- 
 - [Array](/docs/postgresql/postgresql-array) for storing array strings, numbers, etc.
-- 
 -
-- 
 - [JSON](/docs/postgresql/postgresql-json) stores JSON data
-- 
 -
-- 
 - [hstore](/docs/postgresql/postgresql-hstore) stores key-value pair
-- 
 -
-- 
 - Special types such as network address and geometric data.
-- 
 
 
 
@@ -81,13 +63,9 @@ When you [insert data](/docs/postgresql/postgresql-insert) into a Boolean column
 
 
 
-- 
 - `1`, `yes`, `y`, `t`, `true` values are converted to `true`
-- 
 -
-- 
 - `0`, `no`, `false`, `f` values are converted to `false`.
-- 
 
 
 
@@ -111,17 +89,11 @@ PostgreSQL provides three [character data types](/docs/postgresql/postgresql-cha
 
 
 
-- 
 - `CHAR(n)` is the fixed-length character with space padded. If you insert a string that is shorter than the length of the column, PostgreSQL pads spaces. If you insert a string that is longer than the length of the column, PostgreSQL will issue an error.
-- 
 -
-- 
 - `VARCHAR(n)` is the variable-length character string. The `VARCHAR(n)` allows you to store up to `n` characters. PostgreSQL does not pad spaces when the stored string is shorter than the length of the column.
-- 
 -
-- 
 - `TEXT` is the variable-length character string. Theoretically, text data is a character string with unlimited length.
-- 
 
 
 
@@ -139,13 +111,9 @@ PostgreSQL provides two distinct types of numbers:
 
 
 
-- 
 - [integers](/docs/postgresql/postgresql-integer)
-- 
 -
-- 
 - floating-point numbers
-- 
 
 
 
@@ -163,17 +131,11 @@ There are three kinds of integers in PostgreSQL:
 
 
 
-- 
 - Small integer ( `SMALLINT`) is a 2-byte signed integer that has a range from -32,768 to 32,767.
-- 
 -
-- 
 - Integer ( `INT`) is a 4-byte integer that has a range from -2,147,483,648 to 2,147,483,647.
-- 
 -
-- 
 - [Serial](/docs/postgresql/postgresql-serial) is the same as integer except that PostgreSQL will automatically generate and populate values into the `SERIAL` column. This is similar to `AUTO_INCREMENT` column in MySQL or `AUTOINCREMENT` column in SQLite.
-- 
 
 
 
@@ -191,17 +153,11 @@ There are three main types of floating-point numbers:
 
 
 
-- 
 - `float(n)` is a floating-point number whose precision, is at least, n, up to a maximum of 8 bytes.
-- 
 -
-- 
 - `real`or `float8`is a 4-byte floating-point number.
-- 
 -
-- 
 - `numeric`or `numeric(p,s)` is a real number with p digits with s number after the decimal point. This `numeric(p,s)` is the exact number.
-- 
 
 
 
@@ -219,25 +175,15 @@ The temporal data types allow you to store date and /or time data. PostgreSQL ha
 
 
 
-- 
 - `DATE` stores the dates only.
-- 
 -
-- 
 - `TIME` stores the time of day values.
-- 
 -
-- 
 - `TIMESTAMP` stores both date and time values.
-- 
 -
-- 
 - `TIMESTAMPTZ` is a timezone-aware timestamp data type. It is the abbreviation for [timestamp](/docs/postgresql/postgresql-timestamp) with the time zone.
-- 
 -
-- 
 - `INTERVAL` stores periods.
-- 
 
 
 
@@ -303,33 +249,19 @@ Besides the primitive data types, PostgreSQL also provides several special data 
 
 
 
-- 
 - `box` - a rectangular box.
-- 
 -
-- 
 - `line`- a set of points.
-- 
 -
-- 
 - `point` - a geometric pair of numbers.
-- 
 -
-- 
 - `lseg` - a line segment.
-- 
 -
-- 
 - `polygon` - a closed geometric.
-- 
 -
-- 
 - `inet` - an IP4 address.
-- 
 -
-- 
 - `macaddr`- a MAC address.
-- 
 
 
 

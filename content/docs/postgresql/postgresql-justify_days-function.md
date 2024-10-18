@@ -45,9 +45,7 @@ In this syntax:
 
 
 
-- 
 - `value` is an interval value you want to justify.
-- 
 
 
 
@@ -59,17 +57,11 @@ The `JUSTIFY_DAYS()` function returns an adjusted interval with:
 
 
 
-- 
 - Days exceeding 30 converted to months.
-- 
 -
-- 
 - The remaining days are kept as days.
-- 
 -
-- 
 - Hours, minutes, and seconds remain intact.
-- 
 
 
 
@@ -222,8 +214,6 @@ The output indicates that the adjusted intervals have the time parts.
 
 
 
-- 
 - Use the `JUSTIFY_DAYS()` function to normalize an interval by converting days exceeding 30 days as months.
-- 
 
 

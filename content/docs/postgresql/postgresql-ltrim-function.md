@@ -45,13 +45,9 @@ In this syntax:
 
 
 
-- 
 - `string` is the input string that you want to remove characters.
-- 
 -
-- 
 - `character` specifies the characters you want to remove from the beginning of the `string`. The `character` parameter is optional. It defaults to space.
-- 
 
 
 
@@ -287,8 +283,6 @@ Output:
 
 
 
-- 
 - Use `LTRIM()` function to remove all specified characters from the beginning of a string.
-- 
 
 

@@ -33,9 +33,7 @@ In this syntax:
 
 
 - `string`. The string that you want to repeat.
-- -
 - `number`. The number of times that you want to repeat the `string` in the resulting string.
-- 
 
 
 The `REPEAT()` function returns a string that repeats `number` times. If the `number` is less than 1, the function returns an empty string.
@@ -145,4 +143,3 @@ Output:
 
 
 - Use the `REPEAT()` function to repeat a string a specified number of times.
-- 

@@ -46,13 +46,9 @@ In this syntax, `text[]` array can be:
 
 
 
-- 
 - A one-dimensional array that contains an even number of elements. The elements are the alternating key/value pairs.
-- 
 -
-- 
 - A two-dimensional array. Each inner array has exactly two elements representing the key/value pair.
-- 
 
 
 
@@ -268,8 +264,6 @@ Output:
 
 
 
-- 
 - Use the PostgreSQL `jsonb_object()` function to create a JSON object from a text array.
-- 
 
 

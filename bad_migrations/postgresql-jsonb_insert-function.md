@@ -41,13 +41,9 @@ In this syntax:
 
 
 - `target`: The JSON document of the JSONB type into which you want to insert a new value.
-- -
 - `path`: This is an array of text elements that specifies the path where you want to insert the new value.
-- -
 - `new_value` is the new value that you want to insert into the JSON document.
-- -
 - `insert_after`: This is an optional boolean parameter indicating whether you want to insert the new value after the specified path instead of before. It defaults to `false`, meaning that the function will insert a new value before the specified path.
-- 
 
 
 The `jsonb_insert()` function returns a new JSON document with the `new_value` inserted before/after the specified `path`.
@@ -94,11 +90,8 @@ In this example:
 
 
 - The original array is \[1,2,3].
-- -
 - The path {0} indicates the first element of the array.
-- -
 - The number 0 is the new value.
-- 
 
 
 The `jsonb_insert()` function inserts the number 0 before the first element of the array.
@@ -163,11 +156,8 @@ In this example:
 
 
 - The original array is \[1,2,\[3,4],6].
-- -
 - The path {2, 0}, 2 specifies the second element of the array which is the nested array \[3,4], and 0 specifies the first element of the nested array.
-- -
 - 3 is the new value.
-- 
 
 
 Therefore the `jsonb_insert()` function inserts the new value 3 before the first element of the nested array.
@@ -207,11 +197,8 @@ In this example:
 
 
 - {"name": "John"} is the original object.
-- -
 - {age} is the path that indicates the age property (or key).
-- -
 - '2' is the new value to insert.
-- 
 
 
 Therefore, the `jsonb_insert()` inserts the age property with value 2 into the JSON object.
@@ -280,11 +267,8 @@ In this example:
 
 
 - {"name":"John Doe", "address" : { "city": "San Francisco"}} is the original JSON object.
-- -
 - {address, state} is a path that specifies the address key whose value is an object and state is the new key of the address object.
-- -
 - "California" is the value of the state key.
-- 
 
 
 Therefore, the `jsonb_insert()` function inserts the state with the value California to the address object of the JSON document.
@@ -361,11 +345,8 @@ In this example:
 
 
 - {"name": "John", "skills" : \["PostgreSQL", "API"]} is the original JSON object.
-- -
 - {skills,1} is a path that specifies the skills key, which is an array, and 1 specifies the second element of the array.
-- -
 - "Web Dev" is the new value to insert.
-- 
 
 
 The `jsonb_insert()` function inserts the "Web Dev" before the second element of the skills array of the JSON object.
@@ -457,4 +438,3 @@ Output:
 
 
 - Use the `jsonb_insert()` function to insert a new value into a JSON document of the type JSONB.
-- 

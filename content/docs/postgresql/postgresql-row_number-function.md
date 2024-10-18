@@ -421,8 +421,6 @@ WHERE
 
 
 
-- 
 - Use the PostgreSQL `ROW_NUMBER()` function to assign integer values to rows in a result set.
-- 
 
 

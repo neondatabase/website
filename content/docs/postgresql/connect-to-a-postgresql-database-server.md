@@ -25,13 +25,9 @@ In this tutorial, you will learn how to connect to the PostgreSQL server via the
 
 
 
-- 
 - `psql`- a terminal-based utility to connect to the PostgreSQL server.
-- 
 -
-- 
 - `pgAdmin` - a web-based tool to connect to the PostgreSQL server.
-- 
 
 
 
@@ -81,13 +77,9 @@ In this command:
 
 
 
-- 
 - `psql`: Invoke the psql program.
-- 
 -
-- 
 - `-U postgres`: Specify the user that connects to the PostgreSQL server. The `-U` option means user. Note that you need to use `-U` in uppercase, not lowercase.
-- 
 
 
 
@@ -372,17 +364,11 @@ Furthermore, if you develop an application that uses a specific driver, it can c
 
 
 
-- 
 - [Connect to PostgreSQL from PHP](https://www.postgresqltutorial.com/postgresql-php/connect/)
-- 
 -
-- 
 - [Connect to PostgreSQL from Python](https://www.postgresqltutorial.com/postgresql-python/connect/)
-- 
 -
-- 
 - [Connect to PostgreSQL from Java](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
-- 
 
 
 

@@ -211,8 +211,6 @@ This picture shows the partial output of the query:
 
 
 
-- 
 - Use the PostgreSQL `ARRAY_AGG()` function to return an array from a set of input values.
-- 
 
 

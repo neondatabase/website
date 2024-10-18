@@ -19,25 +19,15 @@ First, [create a new table](/docs/postgresql/postgresql-create-table) named `per
 
 
 
-- 
 - `id`: the person id
-- 
 -
-- 
 - `first_name`: first name
-- 
 -
-- 
 - `last_name:` last name
-- 
 -
-- 
 - `dob` date of birth
-- 
 -
-- 
 - `email`: the email address
-- 
 
 
 
