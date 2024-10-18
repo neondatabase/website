@@ -2,7 +2,7 @@
 title: Querying consumption metrics
 subtitle: Learn how to get a variety of consumption metrics using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-10-05T09:31:59.745Z'
+updatedOn: '2024-10-18T18:50:56.381Z'
 ---
 
 Using the Neon API, you can query a range of account-level and project-level metrics to help gauge your resource consumption.
