@@ -1,5 +1,5 @@
 ---
-title: Querying consumption metrics with the API
+title: Querying consumption metrics
 subtitle: Learn how to get a variety of consumption metrics using the Neon API
 enableTableOfContents: true
 updatedOn: '2024-10-05T09:31:59.745Z'
@@ -15,7 +15,6 @@ Here are the different ways to retrieve these metrics, depending on how you want
 | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
 | [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only |
 | [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)   | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only |
-| [Billing period project-level metrics](https://api-docs.neon.tech/reference/listprojectsconsumption)     | Offers consumption metrics for each project in an account for the current billing period                                 | All plans                    |
 | [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    |
 
 ## Get account-level aggregated metrics
@@ -128,98 +127,6 @@ To control pagination (number of results per response), you can include these qu
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
 See [Details on pagination](#details-on-pagination) for more info.
-
-## Get project-level metrics for your account by billing period
-
-Use the [Consumption API](https://api-docs.neon.tech/reference/listprojectsconsumption) to get a full list of key consumption metrics for all the projects in your Neon account in one request. You can specify a date range to get metrics from across multiple billing periods and control pagination for large result sets.
-
-Here is the URL in the Neon API where you can get details for all projects in your account:
-
-```bash
-https://console.neon.tech/api/v2/consumption/projects
-```
-
-This API endpoint accepts the following query parameters: `from`, `to`, `limit`, and `cursor`.
-
-### Set a date range across multiple billing periods
-
-You can set `from` and `to` query parameters to define a time range that can span across multiple billing periods.
-
-- `from` — Sets the start date and time of the time period for which you are seeking metrics.
-- `to` — Sets the end date and time for the interval for which you desire metrics.
-
-The response is organized by project and billing period: one object per project, per active billing period within the range. For example, if you choose a 6-month time range you will get up to 6 objects for every project active within those months. The response includes any projects deleted within that time range.
-
-If you do not include these parameters, the query defaults to the current consumption period.
-
-Here is an example query that returns metrics from September 1st and December 1st, 2023. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption/projects?limit=10&from=2023-09-01T00%3A00%3A00Z&to=2023-12-01T00%3A00%3A00Z' \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-And here is a sample response (with key lines highlighted):
-
-<details>
-<summary>Response body</summary>
-
-```json {5,10,11,13,15,18-20,24,29,30,32,33,35-37,40,42}
-{
-  "projects": [
-    {
-      "project_id": "wispy-wind-94231251",
-      "period_id": "6fa781c3-fe37-45fa-9987-26a0d06edbd9",
-      "data_storage_bytes_hour": 6097554392,
-      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
-      "synthetic_storage_size": 32616552,
-      "synthetic_storage_size_updated_at": "2023-11-08T13:37:53Z",
-      "data_transfer_bytes": 0,
-      "written_data_bytes": 6296,
-      "written_data_bytes_updated_at": "2023-11-08T13:37:53Z",
-      "compute_time_seconds": 708,
-      "compute_time_seconds_updated_at": "2023-11-07T19:43:17Z",
-      "active_time_seconds": 672,
-      "active_time_seconds_updated_at": "2023-11-07T19:43:17Z",
-      "updated_at": "2023-11-08T19:08:56Z",
-      "period_start": "2023-11-01T00:00:00Z",
-      "period_end": null,
-      "previous_period_id": "4abcae52-490c-4144-a657-ed93139e2b4e"
-    },
-    {
-      "project_id": "divine-tree-77657175",
-      "period_id": "f8f50267-69d2-4891-8359-847c138dbf80",
-      "data_storage_bytes_hour": 6109745400,
-      "data_storage_bytes_hour_updated_at": "2023-11-08T19:07:53Z",
-      "synthetic_storage_size": 32673288,
-      "synthetic_storage_size_updated_at": "2023-11-06T22:58:17Z",
-      "data_transfer_bytes": 0,
-      "written_data_bytes": 2256,
-      "written_data_bytes_updated_at": "2023-11-06T22:43:17Z",
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "updated_at": "2023-11-08T19:08:56Z",
-      "period_start": "2023-11-01T00:00:00Z",
-      "period_end": null,
-      "previous_period_id": "385be9ab-5d6c-493e-b77f-d8f28a5191ca"
-    }
-  ],
-  "periods_in_response": 2,
-  "pagination": {
-    "cursor": "divine-tree-77657175"
-  }
-}
-```
-
-</details>
-
-Key details:
-
-- The `period_id` key and `previous_period_id` are unique values used to identify and connect periods across the time range.
-- The `period_start` and `period_end` keys show the dates for that particular billing period. A `null` value indicates that the object is for the current billing period.
-- The `cursor` object under `pagination` shows the last project Id in the response. See [Details on pagination](#details-on-pagination) for more.
 
 ## Get metrics for a single specified project
 
@@ -386,22 +293,42 @@ And here is a sample response:
 
 ## Details on pagination
 
-This section applies to the following metrics output types: [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account), and [Billing period project-level metrics for your account](#get-project-level-metrics-for-your-account-by-billing-period).
+This section applies to the following metrics output: [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account).
 
 To control pagination (number of results per response), you can include these query parameters:
 
 - `limit` &#8212; sets the number of project objects to be included in the response
 - `cursor` &#8212; by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-Here is an example `GET` request asking for the next 100 projects, starting with project id `divine-tree-77657175`:
+Here is an example `GET` request asking for the next 10 projects, starting with project id `divine-tree-77657175`:
 
 ```bash shouldWrap
 curl --request GET \
-     --url https://console.neon.tech/api/v2/consumption/projects?cursor=divine-tree-77657175&limit=100\
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
+     --url 'https://console.neon.tech/api/v2/consumption_history/projects?cursor=divine-tree-77657175&limit=100&granularity=daily' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
 <Admonition type="note">
 To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
 </Admonition>
+
+## Consumption polling FAQ
+
+As an Neon partner or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
+
+### How often can you poll consumption data for usage reporting and billing?
+
+Neon's consumption data is updated approximately every 15 minutes, so a minimum interval of 15 minutes between calls to our consumption APIs is recommended.
+
+### How often should consumption data be polled to report usage to customers?
+
+As mentioned above, usage data can be pulled every 15 minutes, but partners are free to choose their own reporting interval based on their requirements.
+
+### How often should consumption data be polled to invoice end users?
+
+Neon does not dictate how partners bill their users. Partners can use the data retrieved from the consumption API to generate invoices according to their own billing cycles and preferences.
+
+### Does consumption polling wake up computes?
+
+Neon's consumption polling APIs do not wake computes that have been suspended due to inactivity. Therefore, calls to Neon's consumption APIs will not increase your users' consumption.
