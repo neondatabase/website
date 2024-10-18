@@ -14,7 +14,7 @@ tableOfContents: true
 
 
 
-The `jsonb_insert()` function allows you to insert new values into a [JSON](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/) document of the JSONB type.
+The `jsonb_insert()` function allows you to insert new values into a [JSON](/docs/postgresql/postgresql-json) document of the JSONB type.
 
 
 
@@ -381,7 +381,7 @@ We'll show you how to use the `jsonb_insert()` function to insert a new value in
 
 
 
-First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `employee_profiles`:
+First, [create a new table](/docs/postgresql/postgresql-create-table) called `employee_profiles`:
 
 
 
@@ -394,7 +394,7 @@ CREATE TABLE employee_profiles(
 
 
 
-Second, [insert rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/) into the `employee_profiles` table:
+Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employee_profiles` table:
 
 
 

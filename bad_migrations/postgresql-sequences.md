@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Sequences'
 redirectFrom: 
-            - https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/
+            - /docs/postgresql/postgresql-sequences
 ogImage: ./img/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png
 tableOfContents: true
 ---
@@ -89,7 +89,7 @@ The sequence name must be distinct from any other sequences, tables, [indexes](h
 
 
 
-Specify the [data type](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/) of the sequence. The valid data type is `SMALLINT`, [`INT`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), and `BIGINT`. The default data type is `BIGINT` if you skip it.
+Specify the [data type](/docs/postgresql/postgresql-data-types/) of the sequence. The valid data type is `SMALLINT`, [`INT`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval), and `BIGINT`. The default data type is `BIGINT` if you skip it.
 
 
 
@@ -352,7 +352,7 @@ SELECT nextval('three');
 
 
 
-First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) named `order_details`:
+First, [create a new table](/docs/postgresql/postgresql-create-table) named `order_details`:
 
 
 
@@ -390,7 +390,7 @@ OWNED BY order_details.item_id;
 
 
 
-Third, [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/) three order line items into the `order_details` table:
+Third, [insert](/docs/postgresql/postgresql-insert) three order line items into the `order_details` table:
 
 
 
@@ -415,7 +415,7 @@ In this statement, we used the `nextval()` function to fetch the item id value f
 
 
 
-Fourth, [query](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/) data from the `order_details` table:
+Fourth, [query](/docs/postgresql/postgresql-select) data from the `order_details` table:
 
 
 

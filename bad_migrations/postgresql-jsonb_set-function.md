@@ -14,7 +14,7 @@ tableOfContents: true
 
 
 
-The `jsonb_set()` function allows you to replace an existing value specified by a path with a new value in a [JSON](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/) document of the JSONB type.
+The `jsonb_set()` function allows you to replace an existing value specified by a path with a new value in a [JSON](/docs/postgresql/postgresql-json) document of the JSONB type.
 
 
 
@@ -373,7 +373,7 @@ We'll show you how to use the `jsonb_set()` function to insert a new value into 
 
 
 
-First, [create a new table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/) called `employee_skills`:
+First, [create a new table](/docs/postgresql/postgresql-create-table) called `employee_skills`:
 
 
 
@@ -386,7 +386,7 @@ CREATE TABLE employee_skills(
 
 
 
-Second, [insert rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/) into the `employee_skills` table:
+Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employee_skills` table:
 
 
 
