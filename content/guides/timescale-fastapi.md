@@ -42,21 +42,22 @@ Follow these steps to set up your project and virtual environment:
 
 2.  Set up the virtual environment.
 
-        You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
+            You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
 
-        <CodeTabs labels={["Linux/macOS", "Windows"]}>
-        `bash
+            <CodeTabs labels={["Linux/macOS", "Windows"]}>
+            `bash
 
-    uv venv
-    source .venv/bin/activate
-    `
-`bash
+        uv venv
+        source .venv/bin/activate
+        `
+
+    `bash
     uv venv
     .venv\Scripts\activate
     `
     </CodeTabs>
 
-        You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
+            You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
 
 3.  Install dependencies.
 
