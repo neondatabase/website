@@ -1,7 +1,7 @@
 ---
 title: 'Dollar-Quoted String Constants'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants/
+            - /docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants
 tableOfContents: true
 ---
 

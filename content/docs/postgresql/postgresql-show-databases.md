@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Show Databases'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-show-databases/
+            - /docs/postgresql/postgresql-administration/postgresql-show-databases
 tableOfContents: true
 ---
 

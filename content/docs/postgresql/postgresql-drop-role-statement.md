@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP ROLE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-drop-role/
+            - /docs/postgresql/postgresql-administration/postgresql-drop-role
 tableOfContents: true
 ---
 

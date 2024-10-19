@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Backup'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-backup-database/
+            - /docs/postgresql/postgresql-administration/postgresql-backup-database
 tableOfContents: true
 ---
 

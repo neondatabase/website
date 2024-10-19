@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP SCHEMA Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-drop-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-drop-schema
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png
 tableOfContents: true
 ---

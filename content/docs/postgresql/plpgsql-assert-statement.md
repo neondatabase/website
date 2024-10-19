@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Assert Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-assert/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-assert
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL List Indexes'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-list-indexes/
+            - /docs/postgresql/postgresql-indexes/postgresql-list-indexes
 tableOfContents: true
 ---
 

@@ -82,7 +82,7 @@ Each customer has one or more payments. The `GROUP BY` clause removes duplicate 
 
 ### 2) Using PostgreSQL GROUP BY with SUM() function example
 
-The `GROUP BY` clause is useful when used in conjunction with an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/).
+The `GROUP BY` clause is useful when used in conjunction with an [aggregate function](/docs/postgresql/postgresql-aggregate-functions).
 
 The following query uses the `GROUP BY` clause to retrieve the total payment paid by each customer:
 

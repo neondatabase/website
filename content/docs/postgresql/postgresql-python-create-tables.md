@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Create Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/create-tables/
+            - /docs/postgresql/postgresql-python/create-tables
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---

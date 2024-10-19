@@ -2,7 +2,7 @@
 title: 'PostgreSQL LTRIM() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-ltrim 
-            - /docs/postgresql/postgresql-string-functions/postgresql-ltrim/
+            - /docs/postgresql/postgresql-string-functions/postgresql-ltrim
 tableOfContents: true
 ---
 
@@ -73,7 +73,7 @@ Since the default of the second argument of the `LTRIM()` function is space, we 
 
 ### 3) Using the LTRIM() function with table data example
 
-First, [create a new table](/docs/postgresql/postgresql-create-table/) called `articles` and [insert some rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
+First, [create a new table](/docs/postgresql/postgresql-create-table/) called `articles` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
 ```
 CREATE TABLE articles(

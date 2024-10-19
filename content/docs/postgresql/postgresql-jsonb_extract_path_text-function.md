@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_extract_path_text() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_extract_path_text 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_extract_path_text/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_extract_path_text
 tableOfContents: true
 ---
 

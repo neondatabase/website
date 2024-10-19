@@ -2,7 +2,7 @@
 title: 'PostgreSQL EXTRACT() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-extract 
-            - /docs/postgresql/postgresql-date-functions/postgresql-extract/
+            - /docs/postgresql/postgresql-date-functions/postgresql-extract
 tableOfContents: true
 ---
 

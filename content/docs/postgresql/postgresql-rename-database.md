@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Rename Database'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-rename-database/
+            - /docs/postgresql/postgresql-administration/postgresql-rename-database
 tableOfContents: true
 ---
 

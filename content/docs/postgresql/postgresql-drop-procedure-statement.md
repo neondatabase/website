@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP PROCEDURE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/postgresql-drop-procedure/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-drop-procedure
 tableOfContents: true
 ---
 

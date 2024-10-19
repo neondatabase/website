@@ -2,7 +2,7 @@
 title: 'PostgreSQL LAG Function'
 redirectFrom:
             - /docs/postgresql/postgresql-lag 
-            - /docs/postgresql/postgresql-window-function/postgresql-lag-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-lag-function
 tableOfContents: true
 ---
 

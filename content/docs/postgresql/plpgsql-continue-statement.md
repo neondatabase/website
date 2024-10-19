@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Continue Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-continue/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-continue
 tableOfContents: true
 ---
 

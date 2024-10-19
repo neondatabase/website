@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Calling Stored Procedures'
 redirectFrom: 
-            - /docs/postgresql/postgresql-php/call-stored-procedures/
+            - /docs/postgresql/postgresql-php/call-stored-procedures
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-store-procedure.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Call a Stored Procedure'
 redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-a-stored-procedure/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-a-stored-procedure
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Index on Expression'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-index-on-expression/
+            - /docs/postgresql/postgresql-indexes/postgresql-index-on-expression
 tableOfContents: true
 ---
 

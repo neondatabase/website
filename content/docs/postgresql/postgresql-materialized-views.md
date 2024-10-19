@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Materialized Views'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/postgresql-materialized-views/
+            - /docs/postgresql/postgresql-views/postgresql-materialized-views
 tableOfContents: true
 ---
 

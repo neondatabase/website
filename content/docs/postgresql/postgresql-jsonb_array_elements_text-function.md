@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_array_elements_text() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_array_elements_text 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_elements_text/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_array_elements_text
 tableOfContents: true
 ---
 

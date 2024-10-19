@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_populate_record() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_populate_record 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_populate_record/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_populate_record
 tableOfContents: true
 ---
 

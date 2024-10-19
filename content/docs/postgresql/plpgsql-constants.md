@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Constants'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-constants/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-constants
 tableOfContents: true
 ---
 

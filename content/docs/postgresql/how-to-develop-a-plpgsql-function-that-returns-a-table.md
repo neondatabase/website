@@ -1,7 +1,7 @@
 ---
 title: 'How to Develop a PL/pgSQL Function That Returns a Table'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-returns-a-table/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-returns-a-table
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

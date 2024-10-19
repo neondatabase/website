@@ -1,7 +1,7 @@
 ---
 title: 'How to Restart PostgreSQL on Windows'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/restart-postgresql-windows/
+            - /docs/postgresql/postgresql-administration/restart-postgresql-windows
 tableOfContents: true
 ---
 

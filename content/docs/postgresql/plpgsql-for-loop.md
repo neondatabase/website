@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL For Loop'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-for-loop/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-for-loop
 tableOfContents: true
 ---
 

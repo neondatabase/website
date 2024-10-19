@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Event Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-event-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-event-trigger
 tableOfContents: true
 ---
 

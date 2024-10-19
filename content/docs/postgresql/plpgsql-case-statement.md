@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL CASE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-case-statement/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-case-statement
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-simple-case-statement.png
 tableOfContents: true
 ---

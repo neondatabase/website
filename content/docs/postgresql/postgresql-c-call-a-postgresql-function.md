@@ -2,7 +2,7 @@
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 redirectFrom:
             - /docs/postgresql/postgresql-c-call-a-postgresql 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-postgresql-function/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-call-postgresql-function
 tableOfContents: true
 ---
 

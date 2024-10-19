@@ -2,7 +2,7 @@
 title: 'PostgreSQL UPPER() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-upper 
-            - /docs/postgresql/postgresql-string-functions/postgresql-upper/
+            - /docs/postgresql/postgresql-string-functions/postgresql-upper
 tableOfContents: true
 ---
 

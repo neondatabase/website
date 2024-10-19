@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Password File .pgpass'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-password-file-pgpass/
+            - /docs/postgresql/postgresql-administration/postgresql-password-file-pgpass
 tableOfContents: true
 ---
 

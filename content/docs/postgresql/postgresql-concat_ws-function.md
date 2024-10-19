@@ -2,7 +2,7 @@
 title: 'PostgreSQL CONCAT_WS() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-concat_ws 
-            - /docs/postgresql/postgresql-string-functions/postgresql-concat_ws/
+            - /docs/postgresql/postgresql-string-functions/postgresql-concat_ws
 tableOfContents: true
 ---
 

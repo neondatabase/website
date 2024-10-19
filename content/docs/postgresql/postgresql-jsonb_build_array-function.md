@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_build_array() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_build_array 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_array/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_array
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL While Loop'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-while-loop/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-while-loop
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-WHILE-loop.png
 tableOfContents: true
 ---

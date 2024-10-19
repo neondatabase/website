@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL AFTER UPDATE Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-after-update-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-after-update-trigger
 tableOfContents: true
 ---
 

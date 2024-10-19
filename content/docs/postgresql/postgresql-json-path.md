@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JSON Path'
 redirectFrom: 
-            - /docs/postgresql/postgresql-json-functions/postgresql-json-path/
+            - /docs/postgresql/postgresql-json-functions/postgresql-json-path
 tableOfContents: true
 ---
 

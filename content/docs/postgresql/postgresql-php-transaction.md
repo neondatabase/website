@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Transaction'
 redirectFrom: 
-            - /docs/postgresql/postgresql-php/transaction/
+            - /docs/postgresql/postgresql-php/transaction
 tableOfContents: true
 ---
 

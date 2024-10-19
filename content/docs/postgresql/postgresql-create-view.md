@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE VIEW'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/managing-postgresql-views/
+            - /docs/postgresql/postgresql-views/managing-postgresql-views
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---

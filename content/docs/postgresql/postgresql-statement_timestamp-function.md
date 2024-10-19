@@ -2,7 +2,7 @@
 title: 'PostgreSQL STATEMENT_TIMESTAMP() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-statement_timestamp 
-            - /docs/postgresql/postgresql-date-functions/postgresql-statement_timestamp/
+            - /docs/postgresql/postgresql-date-functions/postgresql-statement_timestamp
 tableOfContents: true
 ---
 

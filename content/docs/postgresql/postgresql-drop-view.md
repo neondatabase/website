@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Drop View'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/postgresql-drop-view/
+            - /docs/postgresql/postgresql-views/postgresql-drop-view
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---

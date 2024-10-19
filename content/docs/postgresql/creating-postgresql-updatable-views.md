@@ -1,7 +1,7 @@
 ---
 title: 'Creating PostgreSQL Updatable Views'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/postgresql-updatable-views/
+            - /docs/postgresql/postgresql-views/postgresql-updatable-views
 tableOfContents: true
 ---
 

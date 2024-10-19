@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Updating Data'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/update/
+            - /docs/postgresql/postgresql-jdbc/update
 tableOfContents: true
 ---
 

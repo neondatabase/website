@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_agg() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_agg 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_agg/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_agg
 tableOfContents: true
 ---
 

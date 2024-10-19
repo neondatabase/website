@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Creating Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-create-table/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-create-table
 tableOfContents: true
 ---
 

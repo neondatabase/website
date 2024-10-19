@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BEFORE TRUNCATE Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-before-truncate-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-before-truncate-trigger
 tableOfContents: true
 ---
 

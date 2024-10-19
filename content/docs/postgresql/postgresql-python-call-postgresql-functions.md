@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Call PostgreSQL Functions'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/postgresql-python-call-postgresql-functions/
+            - /docs/postgresql/postgresql-python/postgresql-python-call-postgresql-functions
 tableOfContents: true
 ---
 

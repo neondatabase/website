@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE PROCEDURE'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/postgresql-create-procedure/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-create-procedure
 tableOfContents: true
 ---
 

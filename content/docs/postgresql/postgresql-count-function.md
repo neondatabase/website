@@ -2,7 +2,7 @@
 title: 'PostgreSQL COUNT Function'
 redirectFrom:
             - /docs/postgresql/postgresql-count 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-count-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-count-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---

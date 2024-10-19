@@ -1,7 +1,7 @@
 ---
 title: 'Introduction to PostgreSQL Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/introduction-postgresql-trigger/
+            - /docs/postgresql/postgresql-triggers/introduction-postgresql-trigger
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Returns SetOf'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-returns-setof/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-returns-setof
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---

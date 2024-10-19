@@ -1,7 +1,7 @@
 ---
 title: 'Reset Forgotten Password For postgres User'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-reset-password/
+            - /docs/postgresql/postgresql-administration/postgresql-reset-password
 tableOfContents: true
 ---
 

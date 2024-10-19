@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE INDEX Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-create-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-create-index
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-address.png
 tableOfContents: true
 ---

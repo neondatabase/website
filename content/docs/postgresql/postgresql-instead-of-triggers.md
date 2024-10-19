@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL INSTEAD OF Triggers'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-instead-of-triggers/
+            - /docs/postgresql/postgresql-triggers/postgresql-instead-of-triggers
 tableOfContents: true
 ---
 

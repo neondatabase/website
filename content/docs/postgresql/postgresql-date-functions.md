@@ -42,7 +42,7 @@ This section introduces the functions that convert a string to a date and timest
 
 - [TO_DATE](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_date/) - Convert a string to a date.
 -
-- [TO_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_timestamp/) - Convert a string to a timestamp.
+- [TO_TIMESTAMP](/docs/postgresql/postgresql-date-functions/postgresql-to_timestamp) - Convert a string to a timestamp.
 -
 - [MAKE_DATE](/docs/postgresql/postgresql-date-functions/postgresql-make_date) - Create a date from year, month, and day.
 -
@@ -60,7 +60,7 @@ This section covers the function that handles intervals such as calculating age 
 -
 - [JUSTIFY_INTERVAL](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/) - Adjust interval using justify_days and justify_hours functions, with additional sign adjustments.
 -
-- [MAKE_INTERVAL](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/) - Create an interval from the provided interval's components.
+- [MAKE_INTERVAL](/docs/postgresql/postgresql-date-functions/postgresql-make_interval) - Create an interval from the provided interval's components.
 
 ## Section 5. Operators
 

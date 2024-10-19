@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Schema'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-schema
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Schema-Example.png
 tableOfContents: true
 ---

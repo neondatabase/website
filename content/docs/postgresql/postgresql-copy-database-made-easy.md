@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Copy Database Made Easy'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-copy-database/
+            - /docs/postgresql/postgresql-administration/postgresql-copy-database
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-postgresql-copy-database.jpg
 tableOfContents: true
 ---

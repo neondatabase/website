@@ -2,7 +2,7 @@
 title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-clock_timestamp 
-            - /docs/postgresql/postgresql-date-functions/postgresql-clock_timestamp/
+            - /docs/postgresql/postgresql-date-functions/postgresql-clock_timestamp
 tableOfContents: true
 ---
 

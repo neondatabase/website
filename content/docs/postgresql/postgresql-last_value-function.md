@@ -2,7 +2,7 @@
 title: 'PostgreSQL LAST_VALUE Function'
 redirectFrom:
             - /docs/postgresql/postgresql-last_value 
-            - /docs/postgresql/postgresql-window-function/postgresql-last_value-function/
+            - /docs/postgresql/postgresql-window-function/postgresql-last_value-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png
 tableOfContents: true
 ---

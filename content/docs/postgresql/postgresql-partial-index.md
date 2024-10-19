@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Partial Index'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-partial-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-partial-index
 tableOfContents: true
 ---
 

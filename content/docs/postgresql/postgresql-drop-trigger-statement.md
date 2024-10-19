@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL DROP TRIGGER Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-drop-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-drop-trigger
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-06-PostgreSQL-DROP-Trigger-Example.png
 tableOfContents: true
 ---

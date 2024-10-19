@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL REVOKE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-revoke/
+            - /docs/postgresql/postgresql-administration/postgresql-revoke
 tableOfContents: true
 ---
 
@@ -73,7 +73,7 @@ REVOKE ALL ON film FROM jim;
 
 ## Revoking privileges on other database objects
 
-To revoke privileges from other database objects such as [sequences](/docs/postgresql/postgresql-sequences/), [functions](/docs/postgresql/postgresql-functions), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/), [schemas](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/), and [databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/), check out the [REVOKE statement](https://www.postgresql.org/docs/currentsql-revoke.html).
+To revoke privileges from other database objects such as [sequences](/docs/postgresql/postgresql-sequences), [functions](/docs/postgresql/postgresql-functions), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/), [schemas](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/), and [databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/), check out the [REVOKE statement](https://www.postgresql.org/docs/currentsql-revoke.html).
 
 ## Summary
 

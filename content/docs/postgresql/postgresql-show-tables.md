@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Show Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-show-tables/
+            - /docs/postgresql/postgresql-administration/postgresql-show-tables
 tableOfContents: true
 ---
 

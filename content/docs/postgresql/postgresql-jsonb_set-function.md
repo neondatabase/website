@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_set() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-jsonb_set
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_set/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_set
 tableOfContents: true
 ---
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL STRING_AGG Function'
 redirectFrom:
             - /docs/postgresql/postgresql-string_agg 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-string_agg-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-string_agg-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-03-PostgreSQL-STRING_AGG-function-email-list-example.png
 tableOfContents: true
 ---

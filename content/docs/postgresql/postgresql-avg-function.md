@@ -2,7 +2,7 @@
 title: 'PostgreSQL AVG Function'
 redirectFrom:
             - /docs/postgresql/postgresql-avg 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

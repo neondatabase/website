@@ -33,4 +33,4 @@ This section guides you on how to perform a PostgreSQL database transaction in C
 This section shows you how to call PostgreSQL functions and stored procedures from C# programs.
 
 - [Calling a PostgreSQL Function](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/) - Show you how to call a PostgreSQL function from a C# program.
-- [Calling a Stored Procedure](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-a-stored-procedure/) - Guide you on calling a stored procedure using C#.
+- [Calling a Stored Procedure](/docs/postgresql/postgresql-csharp/postgresql-csharp-call-a-stored-procedure) - Guide you on calling a stored procedure using C#.

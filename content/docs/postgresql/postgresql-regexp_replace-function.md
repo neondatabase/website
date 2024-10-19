@@ -2,7 +2,7 @@
 title: 'PostgreSQL REGEXP_REPLACE() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-regexp_replace 
-            - /docs/postgresql/postgresql-string-functions/regexp_replace/
+            - /docs/postgresql/postgresql-string-functions/regexp_replace
 tableOfContents: true
 ---
 

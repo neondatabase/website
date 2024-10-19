@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Select Into'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-select-into/
+            - /docs/postgresql/postgresql-plpgsql/pl-pgsql-select-into
 tableOfContents: true
 ---
 

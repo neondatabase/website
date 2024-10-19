@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Cursor'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-cursor/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-cursor
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-cursor.png
 tableOfContents: true
 ---

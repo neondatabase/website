@@ -2,7 +2,7 @@
 title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-justify_interval 
-            - /docs/postgresql/postgresql-date-functions/postgresql-justify_interval/
+            - /docs/postgresql/postgresql-date-functions/postgresql-justify_interval
 tableOfContents: true
 ---
 

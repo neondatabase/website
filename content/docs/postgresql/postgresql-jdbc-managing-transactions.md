@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Managing Transactions'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/transaction/
+            - /docs/postgresql/postgresql-jdbc/transaction
 tableOfContents: true
 ---
 

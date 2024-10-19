@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Transactions'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/transaction/
+            - /docs/postgresql/postgresql-python/transaction
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-parts_vendors_tables.png
 tableOfContents: true
 ---

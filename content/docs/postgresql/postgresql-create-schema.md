@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE SCHEMA'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-create-schema/
+            - /docs/postgresql/postgresql-administration/postgresql-create-schema
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-create-schema-example.png
 tableOfContents: true
 ---
@@ -72,7 +72,7 @@ This picture shows the output:
 
 ### 2) Using CREATE SCHEMA statement to create a schema for a user example
 
-First, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) with named `john`:
+First, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) with named `john`:
 
 ```
 CREATE ROLE john

@@ -1,7 +1,7 @@
 ---
 title: 'How to Change the Owner of a PostgreSQL Database'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgres-change-database-owner/
+            - /docs/postgresql/postgresql-administration/postgres-change-database-owner
 tableOfContents: true
 ---
 

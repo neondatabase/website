@@ -2,7 +2,7 @@
 title: 'PostgreSQL RPAD() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-rpad 
-            - /docs/postgresql/postgresql-string-functions/postgresql-rpad/
+            - /docs/postgresql/postgresql-string-functions/postgresql-rpad
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

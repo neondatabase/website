@@ -1,7 +1,7 @@
 ---
 title: 'How to List All Triggers in PostgreSQL'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
+            - /docs/postgresql/postgresql-triggers/how-to-list-all-triggers-in-postgresql
 tableOfContents: true
 ---
 

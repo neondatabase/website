@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_to_record() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_to_record 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_to_record/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_to_record
 tableOfContents: true
 ---
 

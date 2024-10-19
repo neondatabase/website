@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Describe Table'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-describe-table/
+            - /docs/postgresql/postgresql-administration/postgresql-describe-table
 tableOfContents: true
 ---
 

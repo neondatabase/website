@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JSON Index'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-json-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-json-index
 tableOfContents: true
 ---
 

@@ -80,7 +80,7 @@ Additionally, PostgreSQL executes the query with the `IN` operator much faster t
 
 ### 2) Using the PostgreSQL IN operator with a list of strings
 
-We'll use the `actor` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `actor` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-actor.png)
 

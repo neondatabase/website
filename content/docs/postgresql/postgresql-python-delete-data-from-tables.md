@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Delete Data from Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/delete/
+            - /docs/postgresql/postgresql-python/delete
 tableOfContents: true
 ---
 

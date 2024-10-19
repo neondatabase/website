@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_insert() Function'
 redirectFrom: 
             - /docs/postgresql/postgresql-jsonb_insert
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_insert/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_insert
 tableOfContents: true
 ---
 

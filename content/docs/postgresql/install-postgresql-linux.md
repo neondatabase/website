@@ -1,7 +1,7 @@
 ---
 title: 'Install PostgreSQL Linux'
 redirectFrom: 
-            - /docs/postgresql/postgresql-getting-started/install-postgresql-linux/
+            - /docs/postgresql/postgresql-getting-started/install-postgresql-linux
 tableOfContents: true
 ---
 

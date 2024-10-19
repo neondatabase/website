@@ -59,7 +59,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [Loop statements](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/) - show you how to use loop statements to execute a block of code repeatedly based on a condition.
 -
-- [While loop](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-while-loop/) - learn how to use `while` loop statement to create a pre-test loop.
+- [While loop](/docs/postgresql/postgresql-plpgsql/pl-pgsql-while-loop) - learn how to use `while` loop statement to create a pre-test loop.
 -
 - [For loop](/docs/postgresql/postgresql-plpgsql/plpgsql-for-loop) - show you how to use the `for` loop statement to iterate over rows of a result set.
 -
@@ -75,9 +75,9 @@ Let's get started programming with PL/pgSQL.
 -
 - [Function overloading](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/) - introduce you to function overloading.
 -
-- [Functions that return a table](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-returns-a-table/) - show you how to develop a function that returns a table.
+- [Functions that return a table](/docs/postgresql/postgresql-plpgsql/plpgsql-function-returns-a-table) - show you how to develop a function that returns a table.
 -
-- [Functions that return one or more rows](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns-setof/) - learn how to define a function that returns one or more rows.
+- [Functions that return one or more rows](/docs/postgresql/postgresql-plpgsql/plpgsql-returns-setof) - learn how to define a function that returns one or more rows.
 -
 - [Drop function](/docs/postgresql/postgresql-plpgsql/postgresql-drop-function) - learn how to remove an existing function.
 
@@ -99,4 +99,4 @@ Let's get started programming with PL/pgSQL.
 
 ## Section 9. Trigger functions
 
-- [Trigger procedures using PL/pgSQL](https://www.postgresqltutorial.com/postgresql-triggers/) - apply PL/pgSQL to define [trigger](https://www.postgresqltutorial.com/postgresql-triggers/) procedures.
+- [Trigger procedures using PL/pgSQL](/docs/postgresql/postgresql-triggers) - apply PL/pgSQL to define [trigger](https://www.postgresqltutorial.com/postgresql-triggers/) procedures.

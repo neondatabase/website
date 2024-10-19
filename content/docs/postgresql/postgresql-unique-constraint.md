@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL UNIQUE Constraint'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-unique-constraint
 tableOfContents: true
 ---
 

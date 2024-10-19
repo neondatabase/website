@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Full Text Search'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-full-text-search/
+            - /docs/postgresql/postgresql-indexes/postgresql-full-text-search
 tableOfContents: true
 ---
 

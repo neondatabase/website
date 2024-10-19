@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_object() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_object 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_object/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_object
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL IF Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-statement.png
 tableOfContents: true
 ---

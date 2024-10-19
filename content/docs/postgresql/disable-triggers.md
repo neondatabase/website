@@ -1,7 +1,7 @@
 ---
 title: 'Disable Triggers'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/managing-postgresql-trigger/
+            - /docs/postgresql/postgresql-triggers/managing-postgresql-trigger
 tableOfContents: true
 ---
 

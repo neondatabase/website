@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE TRIGGER Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql/
+            - /docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Cretae-Trigger-Sample-Table.png
 tableOfContents: true
 ---

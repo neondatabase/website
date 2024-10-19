@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Delete Data from Table'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/delete/
+            - /docs/postgresql/postgresql-jdbc/delete
 tableOfContents: true
 ---
 

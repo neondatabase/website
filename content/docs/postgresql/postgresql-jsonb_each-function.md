@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_each() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_each 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_each/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_each
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER TABLESPACE'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-alter-tablespace/
+            - /docs/postgresql/postgresql-administration/postgresql-alter-tablespace
 tableOfContents: true
 ---
 

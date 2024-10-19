@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE DATABASE'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-create-database/
+            - /docs/postgresql/postgresql-administration/postgresql-create-database
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-Create-Database-pgAdmin-Step-1.png
 tableOfContents: true
 ---
@@ -73,7 +73,7 @@ The `allow_connections` parameter is a boolean value. If it is `false`, you cann
 
 **TABLESPACE**
 
-Specify the [tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/) that the new database will use. It defaults to the tablespace of the template database.
+Specify the [tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace) that the new database will use. It defaults to the tablespace of the template database.
 
 **IS_TEMPLATE**
 

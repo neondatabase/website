@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Block Structure'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-block-structure/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-block-structure
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-plpgSQL-block-Structure.png
 tableOfContents: true
 ---

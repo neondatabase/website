@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JSON Extract'
 redirectFrom: 
-            - /docs/postgresql/postgresql-json-functions/postgresql-json-extract/
+            - /docs/postgresql/postgresql-json-functions/postgresql-json-extract
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL GRANT'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-grant/
+            - /docs/postgresql/postgresql-administration/postgresql-grant
 tableOfContents: true
 ---
 

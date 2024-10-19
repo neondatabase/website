@@ -1,7 +1,7 @@
 ---
 title: 'Install PostgreSQL on Windows'
 redirectFrom: 
-            - /docs/postgresql/postgresql-getting-started/install-postgresql/
+            - /docs/postgresql/postgresql-getting-started/install-postgresql
 ogImage: /postgresqltutorial_data/wp-content-uploads-2024-01-Install-PostgreSQL-Windows-Step-1.png
 tableOfContents: true
 ---

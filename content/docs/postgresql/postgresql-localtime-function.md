@@ -2,7 +2,7 @@
 title: 'PostgreSQL LOCALTIME Function'
 redirectFrom:
             - /docs/postgresql/postgresql-localtime 
-            - /docs/postgresql/postgresql-date-functions/postgresql-localtime/
+            - /docs/postgresql/postgresql-date-functions/postgresql-localtime
 tableOfContents: true
 ---
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL BOOL_AND() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-bool_and 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_and/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_and
 tableOfContents: true
 ---
 

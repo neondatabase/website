@@ -1,7 +1,7 @@
 ---
 title: 'Enable Triggers'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/enable-triggers/
+            - /docs/postgresql/postgresql-triggers/enable-triggers
 tableOfContents: true
 ---
 

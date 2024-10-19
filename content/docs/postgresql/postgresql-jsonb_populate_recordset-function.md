@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_populate_recordset() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_populate_recordset 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_populate_recordset/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_populate_recordset
 tableOfContents: true
 ---
 

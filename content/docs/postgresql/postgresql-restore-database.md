@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Restore Database'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-restore-database/
+            - /docs/postgresql/postgresql-administration/postgresql-restore-database
 tableOfContents: true
 ---
 

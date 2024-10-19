@@ -2,7 +2,7 @@
 title: 'PostgreSQL MAKE_TIME() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-make_time 
-            - /docs/postgresql/postgresql-date-functions/postgresql-make_time/
+            - /docs/postgresql/postgresql-date-functions/postgresql-make_time
 tableOfContents: true
 ---
 

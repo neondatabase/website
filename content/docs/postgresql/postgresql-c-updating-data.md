@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Updating Data'
 redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-update/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-update
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'How to Check PostgreSQL Version'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-version/
+            - /docs/postgresql/postgresql-administration/postgresql-version
 tableOfContents: true
 ---
 

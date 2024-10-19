@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER TRIGGER Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-alter-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-alter-trigger
 tableOfContents: true
 ---
 

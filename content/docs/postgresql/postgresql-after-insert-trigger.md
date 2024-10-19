@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL AFTER INSERT Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-after-insert-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-after-insert-trigger
 tableOfContents: true
 ---
 

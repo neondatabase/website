@@ -72,7 +72,7 @@ This section introduces you to JSON functions that work with JSON arrays includi
 
 This section shows you how to use JSON functions that handle JSON objects.
 
-- [jsonb_each()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/) - Expand the keys and values of the top-level JSON object into a set of key/value pairs. The values are JSON values.
+- [jsonb_each()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_each) - Expand the keys and values of the top-level JSON object into a set of key/value pairs. The values are JSON values.
 -
 - [jsonb_each_text()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_each_text) - Expand the top-level JSON object into a set of key/value pairs. The values are of the text type.
 -
@@ -92,6 +92,6 @@ This section shows you how to use JSON aggregate functions that collect data fro
 
 This section discusses the JSON utility functions for getting types of JSONB values and formats JSON values into a human-readable format.
 
-- [jsonb_typeof()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_typeof/) - Return the type of top-level JSON value as a text string.
+- [jsonb_typeof()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_typeof) - Return the type of top-level JSON value as a text string.
 -
 - [jsonb_pretty()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_pretty/) - Format a JSON value into human-readable, indented format, making it easier to read.

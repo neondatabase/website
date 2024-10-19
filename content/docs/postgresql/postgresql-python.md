@@ -29,7 +29,7 @@ This PostgreSQL Python section covers the most common activities for interacting
 -
 - [Calling a PostgreSQL stored procedure in Python](https://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/) – guide you on how to call a stored procedure from in a Python application.
 -
-- [Handling PostgreSQL BLOB data in Python](https://www.postgresqltutorial.com/postgresql-python/blob/)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
+- [Handling PostgreSQL BLOB data in Python](/docs/postgresql/postgresql-python/blob)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
 -
 - [Querying data from the PostgreSQL tables](/docs/postgresql/postgresql-python/query)– walk you through the steps of querying data from the PostgreSQL tables in a Python application.
 -

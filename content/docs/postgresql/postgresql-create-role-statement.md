@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL CREATE ROLE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-roles/
+            - /docs/postgresql/postgresql-administration/postgresql-roles
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-06-PostgreSQL-Roles.png
 tableOfContents: true
 ---

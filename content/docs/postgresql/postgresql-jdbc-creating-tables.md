@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Creating Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/create-tables/
+            - /docs/postgresql/postgresql-jdbc/create-tables
 tableOfContents: true
 ---
 

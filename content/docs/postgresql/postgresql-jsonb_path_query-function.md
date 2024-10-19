@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_path_query() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_path_query 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_query/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_query
 tableOfContents: true
 ---
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL MAX Function'
 redirectFrom:
             - /docs/postgresql/postgresql-max 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-max-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-max-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true
 ---

@@ -2,7 +2,7 @@
 title: 'PostgreSQL CONCAT() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-concat 
-            - /docs/postgresql/postgresql-string-functions/postgresql-concat-function/
+            - /docs/postgresql/postgresql-string-functions/postgresql-concat-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true
 ---

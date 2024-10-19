@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Exit Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-exit/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-exit
 tableOfContents: true
 ---
 

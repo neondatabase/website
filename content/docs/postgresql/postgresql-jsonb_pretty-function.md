@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_pretty() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_pretty 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_pretty/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_pretty
 tableOfContents: true
 ---
 

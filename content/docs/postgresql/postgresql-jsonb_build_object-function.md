@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_build_object() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_build_object 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_object/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_build_object
 tableOfContents: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Load PostgreSQL Sample Database'
 redirectFrom: 
-            - /docs/postgresql/postgresql-getting-started/load-postgresql-sample-database/
+            - /docs/postgresql/postgresql-getting-started/load-postgresql-sample-database
 ogImage: /postgresqltutorial_data/wp-content-uploads-2024-01-PostgreSQL-create-database-pgadmin4.png
 tableOfContents: true
 ---

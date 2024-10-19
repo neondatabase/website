@@ -2,7 +2,7 @@
 title: 'PostgreSQL row_to_json() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-row_to_json 
-            - /docs/postgresql/postgresql-json-functions/postgresql-row_to_json/
+            - /docs/postgresql/postgresql-json-functions/postgresql-row_to_json
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

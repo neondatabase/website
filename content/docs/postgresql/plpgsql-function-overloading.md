@@ -1,7 +1,7 @@
 ---
 title: 'PL/pgSQL Function Overloading'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-overloading/
+            - /docs/postgresql/postgresql-plpgsql/plpgsql-function-overloading
 tableOfContents: true
 ---
 

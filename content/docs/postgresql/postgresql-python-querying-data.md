@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Querying Data'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/query/
+            - /docs/postgresql/postgresql-python/query
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png
 tableOfContents: true
 ---

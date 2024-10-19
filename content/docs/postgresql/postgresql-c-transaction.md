@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Transaction'
 redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-transaction/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-transaction
 tableOfContents: true
 ---
 

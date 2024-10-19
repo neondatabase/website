@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Call Stored Functions'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/call-postgresql-stored-function/
+            - /docs/postgresql/postgresql-jdbc/call-postgresql-stored-function
 tableOfContents: true
 ---
 

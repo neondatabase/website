@@ -2,7 +2,7 @@
 title: 'PostgreSQL TRANSLATE() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-translate 
-            - /docs/postgresql/postgresql-string-functions/postgresql-translate/
+            - /docs/postgresql/postgresql-string-functions/postgresql-translate
 tableOfContents: true
 ---
 

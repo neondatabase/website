@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Uptime'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-uptime/
+            - /docs/postgresql/postgresql-administration/postgresql-uptime
 tableOfContents: true
 ---
 

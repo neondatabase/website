@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Row-Level Security'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-row-level-security/
+            - /docs/postgresql/postgresql-administration/postgresql-row-level-security
 tableOfContents: true
 ---
 

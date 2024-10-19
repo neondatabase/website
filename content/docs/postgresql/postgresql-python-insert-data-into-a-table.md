@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Python: Insert Data Into a Table'
 redirectFrom: 
-            - /docs/postgresql/postgresql-python/insert/
+            - /docs/postgresql/postgresql-python/insert
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-vendors_table.png
 tableOfContents: true
 ---
@@ -125,7 +125,7 @@ python insert.py
 
 ### 4) Verify the inserts
 
-First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) using the `psql`:
+First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-python/connect) using the `psql`:
 
 ```
 psql -U postgres

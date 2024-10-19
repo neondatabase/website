@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Recursive View'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/postgresql-recursive-view/
+            - /docs/postgresql/postgresql-views/postgresql-recursive-view
 tableOfContents: true
 ---
 

@@ -2,7 +2,7 @@
 title: 'PostgreSQL REVERSE() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-reverse 
-            - /docs/postgresql/postgresql-string-functions/postgresql-reverse/
+            - /docs/postgresql/postgresql-string-functions/postgresql-reverse
 tableOfContents: true
 ---
 

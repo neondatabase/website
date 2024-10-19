@@ -2,7 +2,7 @@
 title: 'PostgreSQL jsonb_strip_nulls() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-jsonb_strip_nulls 
-            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_strip_nulls/
+            - /docs/postgresql/postgresql-json-functions/postgresql-jsonb_strip_nulls
 tableOfContents: true
 ---
 

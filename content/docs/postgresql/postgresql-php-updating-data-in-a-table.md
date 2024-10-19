@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Updating Data In a Table'
 redirectFrom: 
-            - /docs/postgresql/postgresql-php/update/
+            - /docs/postgresql/postgresql-php/update
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Update.png
 tableOfContents: true
 ---

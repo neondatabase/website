@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL ALTER VIEW Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-views/postgresql-alter-view/
+            - /docs/postgresql/postgresql-views/postgresql-alter-view
 tableOfContents: true
 ---
 

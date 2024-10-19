@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL C#: Selecting Data'
 redirectFrom: 
-            - /docs/postgresql/postgresql-csharp/postgresql-csharp-select/
+            - /docs/postgresql/postgresql-csharp/postgresql-csharp-select
 tableOfContents: true
 ---
 

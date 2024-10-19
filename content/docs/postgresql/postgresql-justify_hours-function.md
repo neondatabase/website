@@ -2,7 +2,7 @@
 title: 'PostgreSQL JUSTIFY_HOURS() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-justify_hours 
-            - /docs/postgresql/postgresql-date-functions/postgresql-justify_hours/
+            - /docs/postgresql/postgresql-date-functions/postgresql-justify_hours
 tableOfContents: true
 ---
 

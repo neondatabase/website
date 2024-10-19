@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL SET ROLE Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-set-role/
+            - /docs/postgresql/postgresql-administration/postgresql-set-role
 tableOfContents: true
 ---
 

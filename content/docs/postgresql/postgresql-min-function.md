@@ -2,7 +2,7 @@
 title: 'PostgreSQL MIN() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-min 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-min-function/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-min-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true
 ---

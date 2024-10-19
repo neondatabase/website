@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL BEFORE UPDATE Trigger'
 redirectFrom: 
-            - /docs/postgresql/postgresql-triggers/postgresql-before-update-trigger/
+            - /docs/postgresql/postgresql-triggers/postgresql-before-update-trigger
 tableOfContents: true
 ---
 

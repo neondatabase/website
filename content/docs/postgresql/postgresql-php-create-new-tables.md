@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL PHP: Create New Tables'
 redirectFrom: 
-            - /docs/postgresql/postgresql-php/create-tables/
+            - /docs/postgresql/postgresql-php/create-tables
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-Create-Tables.png
 tableOfContents: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Create Function Statement'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/postgresql-create-function/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-create-function
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true
 ---

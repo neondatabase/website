@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL UNIQUE Index'
 redirectFrom: 
-            - /docs/postgresql/postgresql-indexes/postgresql-unique-index/
+            - /docs/postgresql/postgresql-indexes/postgresql-unique-index
 tableOfContents: true
 ---
 
@@ -31,7 +31,7 @@ When you define a unique index for a column, the column cannot store multiple ro
 
 If you define a unique index for two or more columns, the combined values in these columns cannot be duplicated in multiple rows.
 
-When you define a [primary key](/docs/postgresql/postgresql-primary-key/) or a [unique constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint) for a table, PostgreSQL automatically creates a corresponding unique index.
+When you define a [primary key](/docs/postgresql/postgresql-primary-key/) or a [unique constraint](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint) for a table, PostgreSQL automatically creates a corresponding unique index.
 
 ## PostgreSQL UNIQUE index examples
 

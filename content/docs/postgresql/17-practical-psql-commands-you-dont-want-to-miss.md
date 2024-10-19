@@ -2,7 +2,7 @@
 title: '17 Practical psql Commands You Don''t Want to Miss'
 redirectFrom: 
             - /docs/postgresql/psql-commands
-            - /docs/postgresql/postgresql-administration/psql-commands/
+            - /docs/postgresql/postgresql-administration/psql-commands
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-07-psql-commands.jpg
 tableOfContents: true
 ---

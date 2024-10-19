@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL JDBC: Querying Data'
 redirectFrom: 
-            - /docs/postgresql/postgresql-jdbc/query/
+            - /docs/postgresql/postgresql-jdbc/query
 tableOfContents: true
 ---
 

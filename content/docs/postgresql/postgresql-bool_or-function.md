@@ -2,7 +2,7 @@
 title: 'PostgreSQL BOOL_OR() Function'
 redirectFrom:
             - /docs/postgresql/postgresql-bool_or 
-            - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_or/
+            - /docs/postgresql/postgresql-aggregate-functions/postgresql-bool_or
 tableOfContents: true
 ---
 

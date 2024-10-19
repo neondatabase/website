@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL Exception'
 redirectFrom: 
-            - /docs/postgresql/postgresql-plpgsql/postgresql-exception/
+            - /docs/postgresql/postgresql-plpgsql/postgresql-exception
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true
 ---

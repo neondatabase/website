@@ -1,7 +1,7 @@
 ---
 title: 'How to Restart PostgreSQL on Ubuntu'
 redirectFrom: 
-            - /docs/postgresql/postgresql-administration/postgresql-restart-ubuntu/
+            - /docs/postgresql/postgresql-administration/postgresql-restart-ubuntu
 tableOfContents: true
 ---
 
