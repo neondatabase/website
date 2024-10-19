@@ -1,5 +1,5 @@
 ---
-title: Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas 
+title: Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas
 subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Neon Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true

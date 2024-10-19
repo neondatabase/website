@@ -18,9 +18,9 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 - Dotnet SDK installed on your local machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download).
 - Dotnet Entity Framework Core CLI tools installed. You can install them by running the following command:
 
-    ```bash
-    dotnet tool install --global dotnet-ef
-    ```
+  ```bash
+  dotnet tool install --global dotnet-ef
+  ```
 
 ## Build the Todo app
 
