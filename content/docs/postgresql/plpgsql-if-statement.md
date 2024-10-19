@@ -45,7 +45,7 @@ When you place an `if` statement is within another `if` statement, you'll have a
 
 The following flowchart illustrates the simple `if` statement.
 
-[![PL/pgSQL if statement](https://www.postgresqltutorial.com/wp-content/uploads/2015/09/plpgsql-if-statement.png)](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-statement.png)
+![PL/pgSQL if statement](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-if-statement.png)
 
 The following example uses an `if` statement to check if a query returns any rows:
 

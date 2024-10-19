@@ -198,7 +198,7 @@ Connected to the PostgreSQL server.
 
 The output indicates that you have successfully connected to the PostgreSQL server.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/connect.zip)
+[Download the project source code](/postgresqltutorial_data/connect.zip)
 
 ## Summary
 

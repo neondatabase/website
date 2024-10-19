@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Array'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-array
 tableOfContents: true
 ---
 

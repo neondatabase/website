@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## What is PostgreSQL
 
-[![What is PostgreSQL](https://www.postgresqltutorial.com/wp-content/uploads/2012/08/What-is-PostgreSQL.png)](/postgresqltutorial_data/wp-content-uploads-2012-08-What-is-PostgreSQL.png)
+![What is PostgreSQL](/postgresqltutorial_data/wp-content-uploads-2012-08-What-is-PostgreSQL.png)
 
 Let's start with a simple question: what is PostgreSQL?
 

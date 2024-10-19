@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Stored Procedure with INOUT Parameters'
-redirectFrom: 
+redirectFrom:
+            - /docs/postgresql/postgresql-stored-procedures
             - /docs/postgresql/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true

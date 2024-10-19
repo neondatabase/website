@@ -251,7 +251,7 @@ DETAIL:  Key (vendor_id)=(99) is not present in table "vendors".
 
 You can query data from the `parts` and `vendor_parts` tables again. There will be no new data, meaning that the program works as expected.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/transaction.zip)
+[Download the project source code](/postgresqltutorial_data/transaction.zip)
 
 ## Summary
 

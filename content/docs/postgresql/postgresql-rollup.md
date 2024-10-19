@@ -104,7 +104,7 @@ ORDER BY
     segment;
 ```
 
-![PostgreSQL ROLLUP example](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/PostgreSQL-ROLLUP-example.png)
+![PostgreSQL ROLLUP example](/postgresqltutorial_data/PostgreSQL-ROLLUP-example.png)
 
 As you can see clearly from the output, the third row shows the sales of the `ABC` brand, the sixth row displays sales of the `XYZ` brand. The last row shows the grand total for all brands and segments. In this example, the hierarchy is `brand > segment`.
 

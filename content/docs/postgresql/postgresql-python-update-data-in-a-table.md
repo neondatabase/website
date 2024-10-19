@@ -117,7 +117,7 @@ Output:
 
 The name of the vendor id 1 has been changed as expected.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/update.zip)
+[Download the project source code](/postgresqltutorial_data/update.zip)
 
 ## Summary
 

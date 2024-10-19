@@ -5,11 +5,6 @@ redirectFrom:
 tableOfContents: true
 ---
 
-
-![PostgreSQL Tutorial](https://www.postgresqltutorial.com//wp-content/uploads/2021/04/postgresql-tutorial-homepage.svg "PostgreSQL Tutorial")
-
-Welcome to the PostgreSQLTutorial.com website!
-
 This**PostgreSQL tutorial** helps you quickly understand PostgreSQL. You'll master PostgreSQL fast through many practical examples and apply the knowledge to application development using PostgreSQL.
 
 If you want to:

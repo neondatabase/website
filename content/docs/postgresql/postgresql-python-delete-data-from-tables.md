@@ -127,7 +127,7 @@ Output:
 
 The output indicates that part id 2 has been deleted successfully.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/delete.zip)
+[Download the project source code](/postgresqltutorial_data/delete.zip)
 
 ## Summary
 

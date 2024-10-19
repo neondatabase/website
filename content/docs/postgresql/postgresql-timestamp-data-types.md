@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Timestamp Data Types'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-timestamp
             - /docs/postgresql/postgresql-timestamp
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Timestamp-300x171.jpg
 tableOfContents: true

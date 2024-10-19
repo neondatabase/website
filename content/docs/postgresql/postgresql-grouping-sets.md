@@ -306,7 +306,7 @@ ORDER BY
  segment;
 ```
 
-![PostgreSQL GROUPING SETS - GROUPING function.](https://www.postgresqltutorial.com/wp-content/uploads/2020/07/PostgreSQL-Grouping-Sets-GROUPING-function-1.png)
+![PostgreSQL GROUPING SETS - GROUPING function.](/postgresqltutorial_data/PostgreSQL-Grouping-Sets-GROUPING-function-1.png)
 
 As shown in the screenshot, when the value in the `grouping_brand` is 0, the `sum` column shows the subtotal of the `brand`.
 

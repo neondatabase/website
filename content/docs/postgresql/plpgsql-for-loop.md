@@ -29,7 +29,7 @@ In this syntax:
 
 The following flowchart illustrates the `for` loop statement:
 
-![PL/pgSQL FOR loop](https://www.postgresqltutorial.com/wp-content/uploads/2015/09/plpgsql-FOR-loop.png)
+![PL/pgSQL FOR loop](/postgresqltutorial_data/plpgsql-FOR-loop.png)
 
 The following example uses the `for` loop statement to iterate over five numbers from 1 to 5 and display each of them in each iteration:
 

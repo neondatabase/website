@@ -151,7 +151,7 @@ SELECT * FROM vendors;
 SELECT * FROM vendor_parts;
 ```
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/call_stored_procedure.zip)
+[Download the project source code](/postgresqltutorial_data/call_stored_procedure.zip)
 
 ## Summary
 

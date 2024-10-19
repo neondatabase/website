@@ -143,7 +143,7 @@ Output:
 [(1, 'SIM Tray'), (5, 'Home Button'), (6, 'LTE Modem')]
 ```
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/call_function.zip)
+[Download the project source code](/postgresqltutorial_data/call_function.zip)
 
 ## Summary
 

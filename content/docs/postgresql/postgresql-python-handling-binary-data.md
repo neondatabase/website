@@ -111,6 +111,4 @@ if __name__ == '__main__':
 
 The following snippet reads the binary data of the parts with id values 1 and 2 and saves the binary data to the `images/output` directory.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/blob.zip)
-
 In this tutorial, you have learned how to write binary data to a table and read it back using Python.

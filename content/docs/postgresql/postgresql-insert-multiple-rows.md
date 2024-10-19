@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL INSERT Multiple Rows'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows
 tableOfContents: true
 ---
 

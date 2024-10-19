@@ -67,7 +67,7 @@ There are 15 tables in the DVD Rental database:
 
 You can download the PostgreSQL DVD Rental sample database via the following link:
 
-[Download DVD Rental Sample Database](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip)
+[Download DVD Rental Sample Database](/postgresqltutorial_data/dvdrental.zip)
 
 The database file is in `zip`format ( `dvdrental.zip`) so you need to extract it to `dvdrental.tar` [before loading the sample database into the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/ "Load PostgreSQL Sample Database").
 

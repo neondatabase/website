@@ -1,6 +1,8 @@
 ---
 title: 'PostgreSQL Window Functions'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png
+redirectFrom:
+  - /docs/postgresql/postgresql-window-function
 tableOfContents: true
 ---
 

@@ -191,6 +191,6 @@ Output:
 ('Vibrator', 'Foster Electric Co. Ltd.')
 ```
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/query.zip)
+[Download the project source code](/postgresqltutorial_data/query.zip)
 
 In this tutorial, we have learned how to select data from the PostgreSQL tables in Python using the `fetchone()`, `fetchall()`, and `fetchmany()` methods.

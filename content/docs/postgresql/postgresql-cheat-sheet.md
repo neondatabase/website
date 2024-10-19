@@ -12,7 +12,7 @@ The**PostgreSQL cheat sheet** provides you with the common PostgreSQL commands a
 
 We provide you with a 3-page PostgreSQL cheat sheet in PDF format. You can download and print it out for a quick reference to the most commonly used statements in PostgreSQL:
 
-[Download the PostgreSQL Cheat Sheet](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/PostgreSQL-Cheat-Sheet.pdf)
+[Download the PostgreSQL Cheat Sheet](/postgresqltutorial_data/PostgreSQL-Cheat-Sheet.pdf)
 
 ## PostgreSQL commands
 

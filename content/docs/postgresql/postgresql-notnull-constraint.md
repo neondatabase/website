@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Not-Null Constraint'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-not-null-constraint
             - /docs/postgresql/postgresql-not-null-constraint
 tableOfContents: true
 ---

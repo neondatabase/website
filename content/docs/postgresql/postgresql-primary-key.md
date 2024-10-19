@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Primary Key'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-primary-key
 tableOfContents: true
 ---
 
