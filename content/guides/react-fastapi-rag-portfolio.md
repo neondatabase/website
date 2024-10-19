@@ -64,9 +64,9 @@ Follow these steps to set up your backend for the full-stack portfolio website:
         `
 
     `bash
-    uv venv
-    .venv\Scripts\activate
-    `
+uv venv
+.venv\Scripts\activate
+`
     </CodeTabs>
 
             You should see `(portfolio_backend)` in your terminal now, this means that your virtual environment is activated.

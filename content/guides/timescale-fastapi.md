@@ -52,9 +52,9 @@ Follow these steps to set up your project and virtual environment:
         `
 
     `bash
-    uv venv
-    .venv\Scripts\activate
-    `
+uv venv
+.venv\Scripts\activate
+`
     </CodeTabs>
 
             You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
