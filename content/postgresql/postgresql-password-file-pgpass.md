@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-all-operator
+nextPost: /postgresql/postgresql-exists-operator
 createdAt: 2024-02-19T13:24:23.000Z
 title: 'PostgreSQL Password File .pgpass'
 redirectFrom: 

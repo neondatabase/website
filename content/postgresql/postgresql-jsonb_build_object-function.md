@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-column-alias
+nextPost: /postgresql/postgresql-cbrt-function
 createdAt: 2024-02-23T08:01:57.000Z
 title: 'PostgreSQL jsonb_build_object() Function'
 redirectFrom:

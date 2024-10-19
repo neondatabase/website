@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-case
+nextPost: /postgresql/postgresql-isnull
 createdAt: 2015-09-02T14:52:11.000Z
 title: 'PostgreSQL COALESCE'
 redirectFrom:

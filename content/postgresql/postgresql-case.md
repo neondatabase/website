@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-delete-duplicate-rows-in-postgresql
+nextPost: /postgresql/postgresql-coalesce
 createdAt: 2015-05-28T02:42:39.000Z
 title: 'PostgreSQL CASE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png

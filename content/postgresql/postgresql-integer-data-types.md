@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-real-data-type
+nextPost: /postgresql/postgresql-date-data-type
 createdAt: 2017-02-18T13:37:24.000Z
 title: 'PostgreSQL Integer Data Types'
 redirectFrom: 

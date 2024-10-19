@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-justify_interval-function
+nextPost: /postgresql/postgresql-md5-function
 createdAt: 2013-06-07T05:03:38.000Z
 title: 'PostgreSQL Create Function Statement'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-cross-join
+nextPost: /postgresql/postgresql-sign-function
 createdAt: 2017-08-12T04:33:47.000Z
 title: 'PostgreSQL LPAD() Function'
 redirectFrom:

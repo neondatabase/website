@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-subquery
+nextPost: /postgresql/17-practical-psql-commands-you-dont-want-to-miss
 createdAt: 2015-05-29T03:00:10.000Z
 title: 'PostgreSQL Describe Table'
 redirectFrom: 

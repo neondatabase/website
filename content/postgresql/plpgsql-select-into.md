@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-last_value-function
+nextPost: /postgresql/postgresql-alter-view-statement
 createdAt: 2020-07-22T08:26:00.000Z
 title: 'PL/pgSQL Select Into'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-bool_and-function
+nextPost: /postgresql/postgresql-factorial-function
 createdAt: 2024-03-28T04:17:48.000Z
 title: 'PostgreSQL BEFORE UPDATE Trigger'
 redirectFrom: 

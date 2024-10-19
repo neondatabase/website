@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-restore-database
+nextPost: /postgresql/postgresql-jsonb_populate_record-function
 createdAt: 2018-03-19T06:36:24.000Z
 title: 'PostgreSQL GROUPING SETS'
 redirectFrom:

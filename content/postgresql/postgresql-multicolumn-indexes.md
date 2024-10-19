@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-copy-database-made-easy
+nextPost: /postgresql/postgresql-last_value-function
 createdAt: 2019-01-01T13:12:10.000Z
 title: 'PostgreSQL Multicolumn Indexes'
 redirectFrom: 

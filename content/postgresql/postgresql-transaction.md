@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-merge-statement
+nextPost: /postgresql/import-csv-file-into-postgresql-table
 createdAt: 2019-01-03T15:10:12.000Z
 title: 'PostgreSQL Transaction'
 redirectFrom:

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-xml-data-type
+nextPost: /postgresql/postgresql-composite-types
 createdAt: 2024-04-20T13:26:11.000Z
 title: 'PostgreSQL BYTEA Data Type'
 tableOfContents: true

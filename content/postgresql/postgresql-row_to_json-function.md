@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-degrees-function
+nextPost: /postgresql/postgresql-statement_timestamp-function
 createdAt: 2024-02-25T14:19:43.000Z
 title: 'PostgreSQL row_to_json() Function'
 redirectFrom:

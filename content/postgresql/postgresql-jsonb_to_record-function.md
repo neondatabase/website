@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-trim_scale-function
+nextPost: /postgresql/postgresql-pg_sleep-function
 createdAt: 2024-02-24T10:45:03.000Z
 title: 'PostgreSQL jsonb_to_record() Function'
 redirectFrom:

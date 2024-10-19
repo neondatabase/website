@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-transaction
+nextPost: /postgresql/export-postgresql-table-to-csv-file
 createdAt: 2015-05-23T08:15:18.000Z
 title: 'Import CSV File Into PostgreSQL Table'
 redirectFrom: 

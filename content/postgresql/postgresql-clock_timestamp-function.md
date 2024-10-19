@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_object-function
+nextPost: /postgresql/postgresql-c-importing-data-from-a-csv-file-into-a-table
 createdAt: 2024-03-20T08:10:00.000Z
 title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
 redirectFrom:

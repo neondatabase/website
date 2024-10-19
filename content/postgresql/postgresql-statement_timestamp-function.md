@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-row_to_json-function
+nextPost: /postgresql/postgresql-before-insert-trigger
 createdAt: 2024-03-20T07:14:13.000Z
 title: 'PostgreSQL STATEMENT_TIMESTAMP() Function'
 redirectFrom:

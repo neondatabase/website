@@ -1,4 +1,5 @@
 ---
+nextPost: /postgresql/postgresql-server-and-database-objects
 createdAt: 2012-08-12T08:33:31.000Z
 title: 'What is PostgreSQL?'
 redirectFrom: 

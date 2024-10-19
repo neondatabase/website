@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-develop-a-plpgsql-function-that-returns-a-table
+nextPost: /postgresql/postgresql-lpad-function
 createdAt: 2016-06-17T09:50:14.000Z
 title: 'PostgreSQL Cross Join'
 redirectFrom:

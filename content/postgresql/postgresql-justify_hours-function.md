@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_strip_nulls-function
+nextPost: /postgresql/creating-a-postgresql-trigger-with-a-when-condition
 createdAt: 2024-03-20T10:37:32.000Z
 title: 'PostgreSQL JUSTIFY_HOURS() Function'
 redirectFrom:

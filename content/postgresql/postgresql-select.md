@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-tutorial
+nextPost: /postgresql/postgresql-sample-database
 createdAt: 2012-08-27T05:23:54.000Z
 title: 'PostgreSQL SELECT'
 redirectFrom:

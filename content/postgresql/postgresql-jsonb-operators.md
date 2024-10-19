@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-repeat-function
+nextPost: /postgresql/postgresql-json-index
 createdAt: 2024-02-26T09:44:50.000Z
 title: 'PostgreSQL JSONB Operators'
 redirectFrom: 

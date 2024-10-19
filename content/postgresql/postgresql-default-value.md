@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-not-null-constraint
+nextPost: /postgresql/postgresql-boolean-data-type-with-practical-examples
 createdAt: 2024-03-15T04:06:28.000Z
 title: 'PostgreSQL DEFAULT Value'
 redirectFrom:

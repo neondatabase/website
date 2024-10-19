@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-check-constraints
+nextPost: /postgresql/postgresql-not-null-constraint
 createdAt: 2015-08-31T09:27:01.000Z
 title: 'PostgreSQL UNIQUE Constraint'
 redirectFrom:

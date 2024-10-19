@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-self-join
+nextPost: /postgresql/postgresql-jsonb_array_elements_text-function
 createdAt: 2024-02-17T07:21:45.000Z
 redirectFrom:
     - /postgresql/postgresql-sqrt

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-change-the-owner-of-a-postgresql-database
+nextPost: /postgresql/postgresql-bool_and-function
 createdAt: 2024-02-23T13:39:45.000Z
 title: 'PostgreSQL jsonb_path_query() Function'
 redirectFrom:

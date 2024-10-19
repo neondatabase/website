@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-numeric-type
+nextPost: /postgresql/postgresql-real-data-type
 createdAt: 2024-04-18T13:18:29.000Z
 title: 'PostgreSQL DOUBLE PRECISION Data Type'
 redirectFrom: 

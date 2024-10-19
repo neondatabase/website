@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/introduction-to-postgresql-trigger
+nextPost: /postgresql/postgresql-jdbc-connecting-to-postgresql-databases
 createdAt: 2015-05-25T08:03:09.000Z
 title: 'PostgreSQL CREATE VIEW'
 redirectFrom: 

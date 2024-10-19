@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-role-membership
+nextPost: /postgresql/postgresql-power-function
 createdAt: 2024-01-28T09:48:11.000Z
 title: 'PostgreSQL LOWER() Function'
 redirectFrom:

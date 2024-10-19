@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jdbc-managing-transactions
+nextPost: /postgresql/postgresql-python-call-stored-procedures
 createdAt: 2016-06-12T08:49:07.000Z
 title: 'PostgreSQL PHP: Working with Binary Data'
 redirectFrom: 

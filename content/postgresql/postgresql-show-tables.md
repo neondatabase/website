@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_populate_recordset-function
+nextPost: /postgresql/postgresql-cube
 createdAt: 2015-05-29T01:45:56.000Z
 title: 'PostgreSQL Show Tables'
 redirectFrom: 

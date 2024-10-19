@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-drop-database
+nextPost: /postgresql/postgresql-max-function
 createdAt: 2013-06-07T03:05:43.000Z
 title: 'PostgreSQL PL/pgSQL'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-06-PostgreSQL-Stored-Procedure.png

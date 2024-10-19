@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-backup
+nextPost: /postgresql/postgresql-to_number-function
 createdAt: 2015-09-20T04:17:53.000Z
 title: 'PL/pgSQL Cursor'
 redirectFrom: 

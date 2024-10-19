@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-having
+nextPost: /postgresql/postgresql-create-procedure
 createdAt: 2013-06-04T07:47:43.000Z
 title: 'PostgreSQL CREATE TABLESPACE'
 redirectFrom: 

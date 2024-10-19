@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_path_query-function
+nextPost: /postgresql/postgresql-before-update-trigger
 createdAt: 2024-03-22T02:49:10.000Z
 title: 'PostgreSQL BOOL_AND() Function'
 redirectFrom:

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-rename-database
+nextPost: /postgresql/postgresql-partial-index
 createdAt: 2017-08-13T10:30:05.000Z
 title: 'PostgreSQL POSITION() Function'
 redirectFrom:

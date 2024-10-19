@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_each_text-function
+nextPost: /postgresql/contact-us
 createdAt: 2024-03-20T09:22:14.000Z
 title: 'PostgreSQL ISFINITE() Function'
 redirectFrom:

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-length-function
+nextPost: /postgresql/postgresql-mod-function
 createdAt: 2017-08-16T07:35:32.000Z
 title: 'PostgreSQL Math Functions'
 tableOfContents: true

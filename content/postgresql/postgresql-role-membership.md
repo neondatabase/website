@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-for-loop
+nextPost: /postgresql/postgresql-lower-function
 createdAt: 2020-07-27T10:26:42.000Z
 title: 'PostgreSQL Role Membership'
 redirectFrom: 

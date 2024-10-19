@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-kill-a-process-specified-by-pid-in-postgresql
+nextPost: /postgresql/postgresql-update-join
 createdAt: 2013-06-02T05:40:05.000Z
 title: 'PostgreSQL UPDATE'
 redirectFrom:

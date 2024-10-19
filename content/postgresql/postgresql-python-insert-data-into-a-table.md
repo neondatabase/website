@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-php-insert-data-into-tables
+nextPost: /postgresql/postgresql-current_timestamp-function
 createdAt: 2016-06-16T07:49:15.000Z
 title: 'PostgreSQL Python: Insert Data Into a Table'
 redirectFrom: 

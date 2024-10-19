@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-revoke-statement
+nextPost: /postgresql/postgresql-ltrim-function
 createdAt: 2020-08-01T10:51:55.000Z
 title: 'Enable Triggers'
 redirectFrom: 

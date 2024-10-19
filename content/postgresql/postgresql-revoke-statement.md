@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-while-loop
+nextPost: /postgresql/enable-triggers
 createdAt: 2020-07-28T03:58:18.000Z
 title: 'PostgreSQL REVOKE Statement'
 redirectFrom: 

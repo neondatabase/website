@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-gcd-function
+nextPost: /postgresql/postgresql-python-delete-data-from-tables
 createdAt: 2024-05-21T07:26:18.000Z
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 redirectFrom:

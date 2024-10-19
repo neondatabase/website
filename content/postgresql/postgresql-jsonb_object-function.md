@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-div-function
+nextPost: /postgresql/postgresql-clock_timestamp-function
 createdAt: 2024-02-25T13:22:54.000Z
 title: 'PostgreSQL jsonb_object() Function'
 redirectFrom:

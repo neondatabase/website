@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-concat-function
+nextPost: /postgresql/postgresql-drop-function
 createdAt: 2017-03-21T07:16:04.000Z
 title: 'How to Change the Password of a PostgreSQL User'
 redirectFrom: 

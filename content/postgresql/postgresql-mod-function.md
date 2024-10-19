@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-math-functions
+nextPost: /postgresql/postgresql-to_timestamp-function
 createdAt: 2017-08-17T06:10:29.000Z
 title: 'PostgreSQL MOD() Function'
 redirectFrom: 

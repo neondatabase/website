@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-regexp_replace-function
+nextPost: /postgresql/postgresql-floor-function
 createdAt: 2017-08-16T02:49:19.000Z
 title: 'PostgreSQL LOCALTIMESTAMP Function'
 redirectFrom:

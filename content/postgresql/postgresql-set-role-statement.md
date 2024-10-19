@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-upper-function
+nextPost: /postgresql/postgresql-jsonb_set-function
 createdAt: 2024-02-22T03:14:46.000Z
 title: 'PostgreSQL SET ROLE Statement'
 redirectFrom: 

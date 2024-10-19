@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-instead-of-triggers
+nextPost: /postgresql/postgresql-between
 createdAt: 2024-05-19T04:16:09.000Z
 title: 'PostgreSQL MIN_SCALE() Function'
 redirectFrom: 

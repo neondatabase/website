@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-window-functions
+nextPost: /postgresql/postgresql-jsonb_extract_path_text-function
 createdAt: 2020-07-28T02:14:43.000Z
 title: 'PostgreSQL GRANT'
 redirectFrom: 

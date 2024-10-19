@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-alter-database
+nextPost: /postgresql/postgresql-count-function
 createdAt: 2014-05-21T08:07:00.000Z
 title: 'PostgreSQL CREATE TRIGGER Statement'
 redirectFrom: 

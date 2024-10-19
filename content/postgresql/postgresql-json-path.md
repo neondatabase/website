@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-row-types
+nextPost: /postgresql/postgresql-after-insert-trigger
 createdAt: 2024-02-23T13:12:16.000Z
 title: 'PostgreSQL JSON Path'
 redirectFrom: 

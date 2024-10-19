@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-php-updating-data-in-a-table
+nextPost: /postgresql/postgresql-with-check-option
 createdAt: 2016-06-16T08:16:19.000Z
 title: 'PostgreSQL Python: Update Data in a Table'
 redirectFrom: 

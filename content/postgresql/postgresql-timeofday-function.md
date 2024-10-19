@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_object_keys-function
+nextPost: /postgresql/plpgsql-returns-setof
 createdAt: 2024-03-20T04:00:25.000Z
 title: 'PostgreSQL TIMEOFDAY() Function'
 redirectFrom:

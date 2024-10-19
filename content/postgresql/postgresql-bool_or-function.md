@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_path_query_first-function
+nextPost: /postgresql/postgresql-before-delete-trigger
 createdAt: 2024-03-22T02:27:40.000Z
 title: 'PostgreSQL BOOL_OR() Function'
 redirectFrom:

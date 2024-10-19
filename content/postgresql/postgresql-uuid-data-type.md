@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-time-data-type
+nextPost: /postgresql/postgresql-array
 createdAt: 2017-02-20T12:02:39.000Z
 title: 'PostgreSQL UUID Data Type'
 redirectFrom: 

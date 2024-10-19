@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-scale-function
+nextPost: /postgresql/postgresql-jsonb_each-function
 createdAt: 2024-02-21T09:50:44.000Z
 title: 'How to Create Superuser in PostgreSQL'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-list-views
+nextPost: /postgresql/postgresql-after-update-trigger
 createdAt: 2024-02-24T02:01:30.000Z
 title: 'PostgreSQL jsonb_path_query_array() Function'
 redirectFrom:

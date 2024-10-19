@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-function-overloading
+nextPost: /postgresql/postgresql-date_trunc-function
 createdAt: 2016-06-19T09:05:46.000Z
 title: 'PostgreSQL FULL OUTER JOIN'
 redirectFrom:

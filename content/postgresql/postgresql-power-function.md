@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-lower-function
+nextPost: /postgresql/postgresql-jsonb_insert-function
 createdAt: 2024-02-17T15:06:18.000Z
 title: 'PostgreSQL POWER() Function'
 redirectFrom: 

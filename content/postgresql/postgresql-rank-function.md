@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-alter-schema
+nextPost: /postgresql/plpgsql-assert-statement
 createdAt: 2019-05-12T13:29:28.000Z
 title: 'PostgreSQL RANK Function'
 redirectFrom:

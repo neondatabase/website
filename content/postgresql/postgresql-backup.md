@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-stored-procedure-with-inout-parameters
+nextPost: /postgresql/plpgsql-cursor
 createdAt: 2013-06-05T08:07:12.000Z
 title: 'PostgreSQL Backup'
 redirectFrom: 

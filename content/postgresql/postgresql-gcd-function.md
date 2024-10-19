@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-before-delete-trigger
+nextPost: /postgresql/postgresql-c-call-a-postgresql-function
 createdAt: 2024-05-19T02:14:47.000Z
 title: 'PostgreSQL GCD() Function'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-cume_dist-function
+nextPost: /postgresql/postgresql-to_jsonb-function
 createdAt: 2020-07-18T09:58:41.000Z
 title: 'Getting Started with PostgreSQL'
 tableOfContents: true

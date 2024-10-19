@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-check-postgresql-version
+nextPost: /postgresql/how-to-restart-postgresql-on-ubuntu
 createdAt: 2016-07-02T09:18:43.000Z
 title: 'PostgreSQL Recursive Query'
 tableOfContents: true

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_set-function
+nextPost: /postgresql/postgresql-event-trigger
 createdAt: 2024-03-20T09:39:04.000Z
 title: 'PostgreSQL JUSTIFY_DAYS() Function'
 redirectFrom:

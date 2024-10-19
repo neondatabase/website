@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-timeofday-function
+nextPost: /postgresql/privacy-policy
 createdAt: 2024-03-22T08:26:56.000Z
 title: 'PL/pgSQL Returns SetOf'
 redirectFrom: 

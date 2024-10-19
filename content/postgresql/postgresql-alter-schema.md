@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-fetch
+nextPost: /postgresql/postgresql-rank-function
 createdAt: 2019-05-11T08:18:01.000Z
 title: 'PostgreSQL ALTER SCHEMA'
 redirectFrom: 

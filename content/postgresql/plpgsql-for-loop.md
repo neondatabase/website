@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-joins
+nextPost: /postgresql/postgresql-role-membership
 createdAt: 2020-07-23T07:48:44.000Z
 title: 'PL/pgSQL For Loop'
 redirectFrom: 

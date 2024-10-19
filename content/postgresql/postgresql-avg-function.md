@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/introduction-to-postgresql-plpgsql
+nextPost: /postgresql/introduction-to-postgresql-trigger
 createdAt: 2014-05-03T15:01:38.000Z
 title: 'PostgreSQL AVG Function'
 redirectFrom:

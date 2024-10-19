@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-loop-statements
+nextPost: /postgresql/postgresql-window-functions
 createdAt: 2015-10-04T07:45:35.000Z
 title: 'PostgreSQL TRIM() Function'
 redirectFrom:

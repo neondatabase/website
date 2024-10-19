@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_extract_path-function
+nextPost: /postgresql/postgresql-like
 createdAt: 2024-03-29T01:58:26.000Z
 title: 'PostgreSQL BEFORE TRUNCATE Trigger'
 redirectFrom: 

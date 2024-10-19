@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-ceil-function
+nextPost: /postgresql/postgresql-dense_rank-function
 createdAt: 2018-12-06T15:36:14.000Z
 title: 'PostgreSQL UNIQUE Index'
 redirectFrom: 

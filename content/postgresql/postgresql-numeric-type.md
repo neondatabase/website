@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-character-types-char-varchar-and-text
+nextPost: /postgresql/postgresql-double-precision-data-type
 createdAt: 2017-02-19T09:25:57.000Z
 title: 'PostgreSQL NUMERIC Type'
 redirectFrom: 

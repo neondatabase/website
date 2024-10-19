@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-initcap-function
+nextPost: /postgresql/postgresql-php-insert-data-into-tables
 createdAt: 2016-03-12T14:59:56.000Z
 title: 'PostgreSQL JDBC: Insert Data into a Table'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-lag-function
+nextPost: /postgresql/postgresql-div-function
 createdAt: 2020-08-01T10:26:19.000Z
 title: 'PostgreSQL ALTER TRIGGER Statement'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-interval-data-type
+nextPost: /postgresql/postgresql-uuid-data-type
 createdAt: 2017-02-21T13:10:28.000Z
 title: 'PostgreSQL TIME Data Type'
 redirectFrom: 

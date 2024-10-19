@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-ntile-function
+nextPost: /postgresql/plpgsql-record-types
 createdAt: 2020-07-18T09:42:16.000Z
 title: 'Install PostgreSQL Linux'
 redirectFrom: 

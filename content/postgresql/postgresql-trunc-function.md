@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-natural-join
+nextPost: /postgresql/postgresql-rpad-function
 createdAt: 2017-08-16T09:47:23.000Z
 title: 'PostgreSQL TRUNC() Function'
 redirectFrom: 

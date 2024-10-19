@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-random-function
+nextPost: /postgresql/postgresql-justify_interval-function
 createdAt: 2024-02-24T03:49:31.000Z
 title: 'PostgreSQL jsonb_array_length() Function'
 redirectFrom:

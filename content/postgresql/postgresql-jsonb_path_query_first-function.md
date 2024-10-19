@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-percent_rank-function
+nextPost: /postgresql/postgresql-bool_or-function
 createdAt: 2024-02-24T02:56:06.000Z
 title: 'PostgreSQL jsonb_path_query_first() Function'
 redirectFrom:

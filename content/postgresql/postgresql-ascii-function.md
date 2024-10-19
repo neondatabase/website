@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-python-connect-to-postgresql-database-server
+nextPost: /postgresql/postgresql-current_date-function
 createdAt: 2017-08-14T07:58:34.000Z
 title: 'PostgreSQL ASCII() Function'
 redirectFrom:

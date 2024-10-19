@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/dollar-quoted-string-constants
+nextPost: /postgresql/postgresql-jdbc-creating-tables
 createdAt: 2020-08-02T02:01:16.000Z
 title: 'PostgreSQL Drop View'
 redirectFrom: 

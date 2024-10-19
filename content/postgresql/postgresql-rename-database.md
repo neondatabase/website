@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-with-check-option
+nextPost: /postgresql/postgresql-position-function
 createdAt: 2017-02-21T01:51:53.000Z
 title: 'PostgreSQL Rename Database'
 redirectFrom: 

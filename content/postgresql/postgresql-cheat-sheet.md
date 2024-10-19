@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-function-parameter-modes-in-out-inout
+nextPost: /postgresql/postgresql-list-users
 createdAt: 2017-02-25T03:31:11.000Z
 title: 'PostgreSQL Cheat Sheet'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Cheat-Sheet-300x204.png

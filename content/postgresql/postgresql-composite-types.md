@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-bytea-data-type
+nextPost: /postgresql/how-to-compare-two-tables-in-postgresql
 createdAt: 2024-04-21T14:03:47.000Z
 title: 'PostgreSQL Composite Types'
 tableOfContents: true

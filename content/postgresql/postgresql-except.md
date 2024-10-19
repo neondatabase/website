@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-to_number-function
+nextPost: /postgresql/postgresql-jsonb_pretty-function
 createdAt: 2022-08-28T08:44:12.000Z
 title: 'PostgreSQL EXCEPT'
 redirectFrom:

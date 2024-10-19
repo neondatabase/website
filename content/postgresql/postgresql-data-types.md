@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/export-postgresql-table-to-csv-file
+nextPost: /postgresql/postgresql-create-table
 createdAt: 2013-05-30T05:21:17.000Z
 title: 'PostgreSQL Data Types'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-Data-Types-300x254.png

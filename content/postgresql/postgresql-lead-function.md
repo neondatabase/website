@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-array_agg-function
+nextPost: /postgresql/install-postgresql-macos
 createdAt: 2019-05-16T07:16:48.000Z
 title: 'PostgreSQL LEAD Function'
 redirectFrom:

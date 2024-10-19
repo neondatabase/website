@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-python-update-data-in-a-table
+nextPost: /postgresql/postgresql-rename-database
 createdAt: 2016-07-02T03:50:51.000Z
 title: 'PostgreSQL WITH CHECK OPTION'
 redirectFrom: 

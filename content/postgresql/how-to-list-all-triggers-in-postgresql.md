@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_insert-function
+nextPost: /postgresql/postgresql-php
 createdAt: 2024-03-28T13:52:13.000Z
 title: 'How to List All Triggers in PostgreSQL'
 redirectFrom: 

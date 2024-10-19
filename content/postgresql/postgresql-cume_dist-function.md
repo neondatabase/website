@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-create-index-statement
+nextPost: /postgresql/getting-started-with-postgresql
 createdAt: 2019-05-25T00:53:00.000Z
 title: 'PostgreSQL CUME_DIST Function'
 redirectFrom:

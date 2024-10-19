@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-create-tablespace
+nextPost: /postgresql/postgresql-concat_ws-function
 createdAt: 2019-01-04T04:24:08.000Z
 title: 'PostgreSQL CREATE PROCEDURE'
 redirectFrom: 

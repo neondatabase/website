@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-to_char-function
+nextPost: /postgresql/postgresql-stored-procedure-with-inout-parameters
 createdAt: 2024-02-24T11:07:50.000Z
 title: 'PostgreSQL jsonb_typeof() Function'
 redirectFrom:

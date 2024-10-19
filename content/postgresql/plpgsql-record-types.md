@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/install-postgresql-linux
+nextPost: /postgresql/postgresql-python-call-postgresql-functions
 createdAt: 2020-07-25T09:27:24.000Z
 title: 'PL/pgSQL Record Types'
 redirectFrom: 

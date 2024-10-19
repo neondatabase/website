@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-current_timestamp-function
+nextPost: /postgresql/postgresql-first_value-function
 createdAt: 2018-12-06T15:10:46.000Z
 title: 'PostgreSQL Index on Expression'
 redirectFrom: 

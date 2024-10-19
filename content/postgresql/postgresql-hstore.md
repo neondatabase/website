@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-array
+nextPost: /postgresql/postgresql-json
 createdAt: 2015-07-10T02:53:59.000Z
 title: 'PostgreSQL hstore'
 redirectFrom:

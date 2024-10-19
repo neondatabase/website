@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-schema
+nextPost: /postgresql/postgresql-or-operator
 createdAt: 2019-05-14T14:59:48.000Z
 title: 'PostgreSQL NTH_VALUE Function'
 redirectFrom:

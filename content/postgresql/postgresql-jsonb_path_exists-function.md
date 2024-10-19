@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-reverse-function
+nextPost: /postgresql/postgresql-full-text-search
 createdAt: 2024-02-23T14:26:43.000Z
 title: 'PostgreSQL jsonb_path_exists() Function'
 redirectFrom:

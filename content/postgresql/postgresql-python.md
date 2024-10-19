@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-inner-join
+nextPost: /postgresql/plpgsql-continue-statement
 createdAt: 2016-06-16T01:59:58.000Z
 title: 'PostgreSQL Python'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Python-Sample-Database-Diagram.png

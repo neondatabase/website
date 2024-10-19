@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-recursive-view
+nextPost: /postgresql/postgresql-drop-index
 createdAt: 2017-08-16T02:58:48.000Z
 title: 'PostgreSQL LOCALTIME Function'
 redirectFrom:

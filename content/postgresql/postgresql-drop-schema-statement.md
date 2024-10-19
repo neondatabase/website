@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-string-functions
+nextPost: /postgresql/postgresql-repeat-function
 createdAt: 2019-05-11T08:29:38.000Z
 title: 'PostgreSQL DROP SCHEMA Statement'
 redirectFrom: 

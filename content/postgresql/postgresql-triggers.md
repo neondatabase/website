@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-min-function
+nextPost: /postgresql/plpgsql-variables
 createdAt: 2014-05-21T08:56:39.000Z
 title: 'PostgreSQL Triggers'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2014-05-PostgreSQL-Trigger.png

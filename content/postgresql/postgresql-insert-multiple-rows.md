@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-restart-postgresql-on-windows
+nextPost: /postgresql/postgresql-pg_terminate_backend-function
 createdAt: 2020-07-13T08:37:45.000Z
 title: 'PostgreSQL INSERT Multiple Rows'
 redirectFrom:

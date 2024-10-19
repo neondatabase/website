@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/contact-us
+nextPost: /postgresql/postgresql-natural-join
 createdAt: 2015-07-09T09:45:14.000Z
 title: 'Reset Forgotten Password For postgres User'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-c-creating-tables
+nextPost: /postgresql/postgresql-drop-database
 createdAt: 2012-08-12T08:43:11.000Z
 title: 'Install PostgreSQL on Windows'
 redirectFrom: 

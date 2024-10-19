@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-localtimestamp-function
+nextPost: /postgresql/postgresql-list-indexes
 createdAt: 2017-08-17T04:24:10.000Z
 title: 'PostgreSQL FLOOR() Function'
 redirectFrom: 

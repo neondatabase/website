@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-list-all-triggers-in-postgresql
+nextPost: /postgresql/postgresql-table-aliases
 createdAt: 2016-06-12T01:40:24.000Z
 title: 'PostgreSQL PHP'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-PHP-1.png

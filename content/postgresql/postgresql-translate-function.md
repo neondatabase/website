@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-alter-tablespace
+nextPost: /postgresql/postgresql-drop-procedure-statement
 createdAt: 2017-08-12T05:49:48.000Z
 title: 'PostgreSQL TRANSLATE() Function'
 redirectFrom:

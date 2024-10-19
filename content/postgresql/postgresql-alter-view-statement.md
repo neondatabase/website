@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-select-into
+nextPost: /postgresql/postgresql-degrees-function
 createdAt: 2024-01-19T02:16:56.000Z
 title: 'PostgreSQL ALTER VIEW Statement'
 redirectFrom: 

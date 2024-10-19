@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-index-types
+nextPost: /postgresql/postgresql-percent_rank-function
 createdAt: 2019-05-11T08:13:04.000Z
 title: 'PostgreSQL CREATE SCHEMA'
 redirectFrom: 

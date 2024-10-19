@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-upsert-using-insert-on-conflict-statement
+nextPost: /postgresql/postgresql-transaction
 createdAt: 2024-03-27T05:58:00.000Z
 title: 'PostgreSQL MERGE Statement'
 redirectFrom: 

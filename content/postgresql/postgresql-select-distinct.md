@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/load-postgresql-sample-database
+nextPost: /postgresql/postgresql-sum-function
 createdAt: 2012-08-27T07:55:32.000Z
 title: 'PostgreSQL SELECT DISTINCT'
 redirectFrom:

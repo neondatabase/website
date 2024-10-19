@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-avg-function
+nextPost: /postgresql/postgresql-create-view
 createdAt: 2014-05-21T08:02:54.000Z
 title: 'Introduction to PostgreSQL Trigger'
 redirectFrom: 

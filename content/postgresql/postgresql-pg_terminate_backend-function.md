@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-insert-multiple-rows
+nextPost: /postgresql/how-to-kill-a-process-specified-by-pid-in-postgresql
 createdAt: 2024-02-22T13:09:54.000Z
 title: 'PostgreSQL pg_terminate_backend() Function'
 redirectFrom:

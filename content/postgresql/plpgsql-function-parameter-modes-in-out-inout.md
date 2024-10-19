@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-c
+nextPost: /postgresql/postgresql-cheat-sheet
 createdAt: 2015-09-13T10:29:49.000Z
 title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
 redirectFrom: 

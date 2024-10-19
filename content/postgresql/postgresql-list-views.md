@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-or-operator
+nextPost: /postgresql/postgresql-jsonb_path_query_array-function
 createdAt: 2024-01-25T13:02:26.000Z
 title: 'PostgreSQL List Views'
 redirectFrom: 

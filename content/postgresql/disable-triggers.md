@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-like
+nextPost: /postgresql/plpgsql-loop-statements
 createdAt: 2014-05-21T08:12:02.000Z
 title: 'Disable Triggers'
 redirectFrom: 

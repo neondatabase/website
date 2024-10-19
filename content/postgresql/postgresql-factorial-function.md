@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-before-update-trigger
+nextPost: /postgresql/postgresql-c-selecting-data
 createdAt: 2024-05-19T03:44:16.000Z
 title: 'PostgreSQL FACTORIAL() Function'
 redirectFrom: 

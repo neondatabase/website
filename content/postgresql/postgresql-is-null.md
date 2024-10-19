@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-ln-function
+nextPost: /postgresql/plpgsql-while-loop
 createdAt: 2019-01-01T14:28:19.000Z
 title: 'PostgreSQL IS NULL'
 tableOfContents: true

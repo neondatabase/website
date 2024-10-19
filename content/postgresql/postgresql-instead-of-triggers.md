@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-json-index
+nextPost: /postgresql/postgresql-min_scale-function
 createdAt: 2024-03-27T08:54:27.000Z
 title: 'PostgreSQL INSTEAD OF Triggers'
 redirectFrom: 

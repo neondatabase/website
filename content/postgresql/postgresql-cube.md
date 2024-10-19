@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-show-tables
+nextPost: /postgresql/postgresql-subquery
 createdAt: 2018-03-19T09:10:41.000Z
 title: 'PostgreSQL CUBE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-sales-table.png

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-uptime
+nextPost: /postgresql/how-to-check-postgresql-version
 createdAt: 2019-01-02T12:19:37.000Z
 title: 'PostgreSQL CTE'
 tableOfContents: true

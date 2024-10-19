@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-sqrt-function
+nextPost: /postgresql/postgresql-at-time-zone-operator
 createdAt: 2024-02-24T08:05:50.000Z
 title: 'PostgreSQL jsonb_array_elements_text() Function'
 redirectFrom:

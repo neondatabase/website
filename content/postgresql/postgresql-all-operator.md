@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-uninstall-postgresql-from-ubuntu
+nextPost: /postgresql/postgresql-password-file-pgpass
 createdAt: 2018-03-17T13:22:59.000Z
 title: 'PostgreSQL ALL Operator'
 redirectFrom: 

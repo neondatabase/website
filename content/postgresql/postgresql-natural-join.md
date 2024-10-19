@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/reset-forgotten-password-for-postgres-user
+nextPost: /postgresql/postgresql-trunc-function
 createdAt: 2016-06-18T04:22:21.000Z
 title: 'PostgreSQL NATURAL JOIN'
 redirectFrom:

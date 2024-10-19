@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-generated-columns
+nextPost: /postgresql/postgresql-rename-table-a-step-by-step-guide
 createdAt: 2013-05-31T06:52:29.000Z
 title: 'PostgreSQL ALTER TABLE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png

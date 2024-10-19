@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_pretty-function
+nextPost: /postgresql/postgresql-grouping-sets
 createdAt: 2013-06-06T03:14:50.000Z
 title: 'PostgreSQL Restore Database'
 redirectFrom: 

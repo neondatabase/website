@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-where
+nextPost: /postgresql/postgresql-jdbc-delete-data-from-table
 createdAt: 2015-05-26T09:31:09.000Z
 title: 'PostgreSQL Materialized Views'
 redirectFrom: 

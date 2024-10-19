@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-multicolumn-indexes
+nextPost: /postgresql/plpgsql-select-into
 createdAt: 2019-05-14T06:04:08.000Z
 title: 'PostgreSQL LAST_VALUE Function'
 redirectFrom:

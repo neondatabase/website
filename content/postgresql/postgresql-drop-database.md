@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/install-postgresql-on-windows
+nextPost: /postgresql/postgresql-plpgsql
 createdAt: 2013-06-03T03:46:35.000Z
 title: 'PostgreSQL DROP DATABASE'
 redirectFrom: 

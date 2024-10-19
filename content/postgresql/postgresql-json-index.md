@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb-operators
+nextPost: /postgresql/postgresql-instead-of-triggers
 createdAt: 2024-03-06T08:18:52.000Z
 title: 'PostgreSQL JSON Index'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-recursive-query
+nextPost: /postgresql/postgresql-insert
 createdAt: 2024-02-20T09:40:30.000Z
 title: 'How to Restart PostgreSQL on Ubuntu'
 redirectFrom: 

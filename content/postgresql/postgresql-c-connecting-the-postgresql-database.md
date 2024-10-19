@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-to_jsonb-function
+nextPost: /postgresql/postgresql-tutorial
 createdAt: 2024-05-19T14:56:51.000Z
 title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
 redirectFrom: 

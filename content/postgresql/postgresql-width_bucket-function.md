@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-concat_ws-function
+nextPost: /postgresql/postgresql-jsonb_agg-function
 createdAt: 2024-02-17T13:55:37.000Z
 title: 'PostgreSQL WIDTH_BUCKET() Function'
 redirectFrom: 

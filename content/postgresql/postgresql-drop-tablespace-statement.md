@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_object_agg-function
+nextPost: /postgresql/postgresql-intersect-operator
 createdAt: 2013-06-05T04:01:06.000Z
 title: 'PostgreSQL DROP TABLESPACE Statement'
 redirectFrom: 

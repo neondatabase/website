@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-cbrt-function
+nextPost: /postgresql/connect-to-a-postgresql-database-server
 createdAt: 2024-05-20T06:20:35.000Z
 title: 'PostgreSQL C#: Inserting data'
 redirectFrom: 

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-python-handling-binary-data
+nextPost: /postgresql/postgresql-regexp_matches-function
 createdAt: 2017-03-18T05:34:57.000Z
 title: 'PostgreSQL DATE_PART() Function'
 redirectFrom:

@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-group-by
+nextPost: /postgresql/how-to-change-the-password-of-a-postgresql-user
 createdAt: 2015-10-04T10:30:49.000Z
 title: 'PostgreSQL CONCAT() Function'
 redirectFrom:

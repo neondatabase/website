@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-create-database
+nextPost: /postgresql/postgresql-avg-function
 createdAt: 2013-06-07T03:04:07.000Z
 title: 'Introduction to PostgreSQL PL/pgSQL'
 redirectFrom: 

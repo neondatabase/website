@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-jsonb_build_object-function
+nextPost: /postgresql/postgresql-c-inserting-data
 createdAt: 2024-04-18T02:13:52.000Z
 title: 'PostgreSQL CBRT() Function'
 redirectFrom: 

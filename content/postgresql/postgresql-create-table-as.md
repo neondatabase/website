@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-select-into
+nextPost: /postgresql/using-postgresql-serial-to-create-auto-increment-column
 createdAt: 2018-03-17T16:11:48.000Z
 title: 'PostgreSQL CREATE TABLE AS'
 redirectFrom:

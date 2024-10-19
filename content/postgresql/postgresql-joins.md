@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-age-function
+nextPost: /postgresql/plpgsql-for-loop
 createdAt: 2018-12-02T05:52:21.000Z
 title: 'PostgreSQL Joins'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png

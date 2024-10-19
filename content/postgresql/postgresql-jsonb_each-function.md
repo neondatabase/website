@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/how-to-create-superuser-in-postgresql
+nextPost: /postgresql/about-us
 createdAt: 2024-02-24T08:46:06.000Z
 title: 'PostgreSQL jsonb_each() Function'
 redirectFrom:

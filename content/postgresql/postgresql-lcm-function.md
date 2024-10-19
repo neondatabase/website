@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-after-delete-trigger
+nextPost: /postgresql/postgresql-c-call-a-stored-procedure
 createdAt: 2024-05-19T03:13:02.000Z
 title: 'PostgreSQL LCM() Function'
 redirectFrom: 

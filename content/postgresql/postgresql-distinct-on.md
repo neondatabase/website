@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-explain
+nextPost: /postgresql/postgresql-vs-mysql
 createdAt: 2024-01-16T09:44:42.000Z
 title: 'PostgreSQL DISTINCT ON'
 tableOfContents: true

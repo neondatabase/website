@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/import-csv-file-into-postgresql-table
+nextPost: /postgresql/postgresql-data-types
 createdAt: 2015-05-23T09:50:57.000Z
 title: 'Export PostgreSQL Table to CSV File'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-posgresql-import-csv.jpg

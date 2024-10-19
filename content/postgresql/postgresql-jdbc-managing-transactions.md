@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/plpgsql-constants
+nextPost: /postgresql/postgresql-php-working-with-binary-data
 createdAt: 2016-03-13T13:34:11.000Z
 title: 'PostgreSQL JDBC: Managing Transactions'
 redirectFrom: 

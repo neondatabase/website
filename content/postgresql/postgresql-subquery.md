@@ -1,4 +1,6 @@
 ---
+prevPost: /postgresql/postgresql-cube
+nextPost: /postgresql/postgresql-describe-table
 createdAt: 2013-05-30T02:56:10.000Z
 title: 'PostgreSQL Subquery'
 tableOfContents: true
