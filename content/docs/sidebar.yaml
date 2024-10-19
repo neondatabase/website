@@ -243,10 +243,6 @@
               slug: guides/read-replica-data-analysis
             - title: Use read replicas with Prisma
               slug: guides/read-replica-prisma
-            - title: Use read replicas with Entity Framework
-              slug: guides/read-replica-entity-framework
-            - title: Use read replicas with Drizzle
-              slug: guides/read-replica-drizzle
         - title: Time Travel
           slug: guides/time-travel-assist
           items:

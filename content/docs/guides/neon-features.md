@@ -83,10 +83,6 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 <a href="/docs/guides/read-replica-prisma" description="Scale your applications with Neon read replicas and Prisma Client" icon="screen">Use read replicas with Prisma</a>
 
-<a href="/docs/guides/read-replica-entity-framework" description="Scale your applications with Neon read replicas and Entity Framework" icon="screen">Use read replicas with Entity Framework</a>
-
-<a href="/docs/guides/read-replica-drizzle" description="Scale your Next.js applications with Neon read replicas and Drizzle ORM" icon="screen">Use read replicas with Drizzle</a>
-
 </DetailIconCards>
 
 ### Time Travel
