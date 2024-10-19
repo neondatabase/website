@@ -24,7 +24,7 @@ Typically, you use `AFTER INSERT` triggers for logging changes, updating related
 
 To create an `AFTER` `INSERT` trigger, you follow these steps:
 
-First, [define a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when the trigger is activated:
+First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the trigger is activated:
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function()

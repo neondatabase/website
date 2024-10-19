@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PL/pgSQL CASE Statment
 
-Besides the [if statement](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/), PostgreSQL provides the `case` statements that allow you to execute a block of code based on conditions.
+Besides the [if statement](/docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements), PostgreSQL provides the `case` statements that allow you to execute a block of code based on conditions.
 
 The `case` statement selects a `when` section to execute from a list of `when` sections based on a condition.
 

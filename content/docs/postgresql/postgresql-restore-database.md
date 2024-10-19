@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL pg_restore tool
 
-[To perform a logical backup of a PostgreSQL database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/), you use the `pg_dump` tool. To back up all the databases on a PostgreSQL cluster, you use the `pg_dumpall` tool.
+[To perform a logical backup of a PostgreSQL database](/docs/postgresql/postgresql-administration/postgresql-backup-database), you use the `pg_dump` tool. To back up all the databases on a PostgreSQL cluster, you use the `pg_dumpall` tool.
 
 Both `pg_dump` and `pg_dumpall` tools create a snapshot of one or all databases at the time the command starts running.
 

@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Listing all triggers using SQL statement
 
-To list all [triggers](https://www.postgresqltutorial.com/postgresql-triggers/) along with their associated tables in the current database, you can use the `information_schema.triggers` system view.
+To list all [triggers](/docs/postgresql/postgresql-triggers) along with their associated tables in the current database, you can use the `information_schema.triggers` system view.
 
 For example, the following statement retrieves the triggers with their associated tables in the current database from the `information_schema.triggers` view:
 
@@ -68,7 +68,7 @@ Output:
 (1 row)
 ```
 
-To make it more convenient, you can [create a user-defined function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that wraps the above query.
+To make it more convenient, you can [create a user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that wraps the above query.
 
 For example, the following creates a function named `get_triggers()` that returns all triggers with their associated tables in the current database:
 

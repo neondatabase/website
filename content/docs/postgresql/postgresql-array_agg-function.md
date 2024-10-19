@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL ARRAY_AGG() function
 
-The PostgreSQL `ARRAY_AGG()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that accepts a set of values and returns an [array](/docs/postgresql/postgresql-array) in which each value in the set is assigned to an element of the array.
+The PostgreSQL `ARRAY_AGG()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that accepts a set of values and returns an [array](/docs/postgresql/postgresql-array) in which each value in the set is assigned to an element of the array.
 
 The following shows the syntax of the `ARRAY_AGG()` function:
 
@@ -28,7 +28,7 @@ Similar to other aggregate functions such as `AVG()`, `COUNT()`, `MAX()`, `MIN()
 
 ## PostgreSQL ARRAY_AGG() function examples
 
-We will use the `film`, `film_actor`, and `actor` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the `film`, `film_actor`, and `actor` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ### 1) Using PostgreSQL ARRAY_AGG() function without the ORDER BY clause example
 

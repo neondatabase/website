@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database from a C# program.
 
-This tutorial begins where the [Creating Tables in PostgreSQL database from a C# program tutorial](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-create-table/) left off.
+This tutorial begins where the [Creating Tables in PostgreSQL database from a C# program tutorial](/docs/postgresql/postgresql-csharp/postgresql-csharp-create-table) left off.
 
 ## How to insert data into PostgreSQL database using C
 

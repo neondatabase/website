@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL `SERIAL` pseudo-type
 
-In PostgreSQL, a [sequence](/docs/postgresql/postgresql-sequences/) is a special kind of database object that generates a sequence of integers. A sequence is often used as the [primary key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key) column in a table.
+In PostgreSQL, a [sequence](/docs/postgresql/postgresql-sequences/) is a special kind of database object that generates a sequence of integers. A sequence is often used as the [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) column in a table.
 
 When [creating a new table](/docs/postgresql/postgresql-create-table), the sequence can be created through the `SERIAL` pseudo-type as follows:
 
@@ -63,7 +63,7 @@ Let's take some examples of using the SERIAL columns.
 
 ### 1) Basic PostgreSQL SERIAL example
 
-It is important to note that the `SERIAL` does not implicitly [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on the column or make the column the [primary key](/docs/postgresql/postgresql-primary-key) column. However, this can be done easily by specifying the `PRIMARY KEY` constraint for the `SERIAL` column.
+It is important to note that the `SERIAL` does not implicitly [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) on the column or make the column the [primary key](/docs/postgresql/postgresql-primary-key) column. However, this can be done easily by specifying the `PRIMARY KEY` constraint for the `SERIAL` column.
 
 The following statement creates the `fruits` table with the `id` column as the `SERIAL` column:
 

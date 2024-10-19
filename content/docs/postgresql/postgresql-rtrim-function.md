@@ -25,7 +25,7 @@ In this syntax:
 
 The `RTRIM()` function returns the string with all trailing characters removed.
 
-To remove both leading and trailing characters from a string, you use the [TRIM()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/) function.
+To remove both leading and trailing characters from a string, you use the [TRIM()](/docs/postgresql/postgresql-string-functions/postgresql-trim-function) function.
 
 To remove all the leading characters from a string, you use the [LTRIM()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ltrim/) function.
 
@@ -71,7 +71,7 @@ Because the default of the second argument of the `RTRIM()` function is space, y
 
 ### 3) Using the RTRIM() function with table data example
 
-First, [create a new table](/docs/postgresql/postgresql-create-table/) called `tweets` and [insert some rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
+First, [create a new table](/docs/postgresql/postgresql-create-table/) called `tweets` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
 ```
 CREATE TABLE tweets(

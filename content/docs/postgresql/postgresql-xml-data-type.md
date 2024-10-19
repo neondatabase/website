@@ -219,7 +219,7 @@ Output:
 
 If the person table has many rows, finding the person by name will be slow. You can create an expression index for the XML documents to improve the query performance.
 
-First, create an [index expression](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/) that extracts the name of a person as an array of text:
+First, create an [index expression](/docs/postgresql/postgresql-indexes/postgresql-index-on-expression) that extracts the name of a person as an array of text:
 
 ```
 CREATE INDEX person_name

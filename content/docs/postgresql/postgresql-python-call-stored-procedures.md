@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL stored procedures from a Python program.
 
-This tutorial picks up from where the [Call PostgreSQL Functions Tutorial](https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/) left off.
+This tutorial picks up from where the [Call PostgreSQL Functions Tutorial](/docs/postgresql/postgresql-python/postgresql-python-call-postgresql-functions) left off.
 
 ## Steps for calling a PostgreSQL stored procedure in Python
 

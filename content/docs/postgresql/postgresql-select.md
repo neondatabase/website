@@ -9,7 +9,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you are going to learn how to use the basic **PostgreSQL SELECT** statement to query data from a table.
 
-Note that if you don't know how to execute a query against the PostgreSQL database using the **psql** command-line tool or **pgAdmin** GUI tool, you can check [the connection to the PostgreSQL database tutorial](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/).
+Note that if you don't know how to execute a query against the PostgreSQL database using the **psql** command-line tool or **pgAdmin** GUI tool, you can check [the connection to the PostgreSQL database tutorial](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database).
 
 One of the most common tasks, when you work with the database, is to retrieve data from tables using the `SELECT` statement.
 
@@ -68,7 +68,7 @@ Note that the SQL keywords are case-insensitive. It means that `SELECT` is equiv
 
 Let's explore some examples of using the `SELECT` statement.
 
-We will use the following `customer` table in the `dvdrental` [sample\*\* \*\*database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database") for the demonstration.
+We will use the following `customer` table in the `dvdrental` [sample\*\* \*\*database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
@@ -164,7 +164,7 @@ In this example, we used an asterisk (`*`) in the `SELECT` clause, which serves 
 
 Instead of listing all columns in the `SELECT` clause individually, we can use the asterisk (`*`) to make the query shorter.
 
-However, using the asterisk (`*`) in the `SELECT` statement is considered a bad practice when you embed SQL statements in the application code, such as [Python](https://www.postgresqltutorial.com/postgresql-python/), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/), or [PHP](https://www.postgresqltutorial.com/postgresql-php/) for the following reasons:
+However, using the asterisk (`*`) in the `SELECT` statement is considered a bad practice when you embed SQL statements in the application code, such as [Python](/docs/postgresql/postgresql-python), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/), or [PHP](https://www.postgresqltutorial.com/postgresql-php/) for the following reasons:
 
 - Database performance. Suppose you have a table with many columns and substantial data, the `SELECT` statement with the asterisk (`*`) shorthand will select data from all the columns of the table, potentially retrieving more data than required for the application.
 -

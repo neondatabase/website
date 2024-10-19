@@ -296,7 +296,7 @@ Output:
 
 The `->> index` extract the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
 
-[Check JSON functions to process JSON data](https://www.postgresqltutorial.com/postgresql-json-functions/).
+[Check JSON functions to process JSON data](/docs/postgresql/postgresql-json-functions).
 
 ## Summary
 

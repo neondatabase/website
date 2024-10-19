@@ -7,7 +7,7 @@ tableOfContents: true
 
 **Summary**: This tutorial shows you how to delete data from PostgreSQL tables in Python.
 
-This tutorial picks up from where the [Querying Data from Tables Tutorial](https://www.postgresqltutorial.com/postgresql-python/query/) left off.
+This tutorial picks up from where the [Querying Data from Tables Tutorial](/docs/postgresql/postgresql-python/query) left off.
 
 ## Steps for deleting data from a PostgreSQL table in Python
 

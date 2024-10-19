@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL MAX() function
 
-PostgreSQL `MAX()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that returns the maximum value in a set of values.
+PostgreSQL `MAX()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that returns the maximum value in a set of values.
 
 The `MAX()` function can be useful in many cases. For example, you can use it to find the employees with the highest salary or to identify the most expensive products.
 
@@ -25,7 +25,7 @@ You can use the `MAX()` function not just in the [`SELECT`](/docs/postgresql/pos
 
 ## PostgreSQL MAX() function examples
 
-Let's take some examples of using the `MAX()` function. We'll use the `payment` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+Let's take some examples of using the `MAX()` function. We'll use the `payment` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 [![payment table](https://www.postgresqltutorial.com/wp-content/uploads/2013/05/payment-table.png)](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 

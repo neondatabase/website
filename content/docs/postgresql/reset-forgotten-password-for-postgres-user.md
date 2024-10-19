@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn step-by-step how to reset the password of the `postgres` user in PostgreSQL.
 
-For some reason, after [installing PostgreSQL](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/), you may forget the password of the `postgres` user. In such cases, you need to know how to reset the password to regain access to the PostgreSQL server.
+For some reason, after [installing PostgreSQL](/docs/postgresql/postgresql-getting-started/install-postgresql), you may forget the password of the `postgres` user. In such cases, you need to know how to reset the password to regain access to the PostgreSQL server.
 
 PostgreSQL uses the `pg_hba.conf` configuration file stored in the database data directory (e.g., `C:\Program Files\PostgreSQL\16\data` on Windows) to control the client authentication. The `hba` in `pg_hba.conf` means host-based authentication.
 

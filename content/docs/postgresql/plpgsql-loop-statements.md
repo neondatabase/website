@@ -147,7 +147,7 @@ end;
 $$;
 ```
 
-Note that you will learn more about the [exit statement](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/) in the upcoming tutorial.
+Note that you will learn more about the [exit statement](/docs/postgresql/postgresql-plpgsql/plpgsql-exit) in the upcoming tutorial.
 
 ### 2) Using a loop with a label
 

@@ -41,7 +41,7 @@ In practice, you often use the `BETWEEN`operator in the [WHERE](/docs/postgresql
 
 ## PostgreSQL BETWEEN operator examples
 
-Let's take a look at the `payment`table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database").
+Let's take a look at the `payment`table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 

@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL INSTEAD OF triggers
 
-In PostgreSQL, `INSTEAD OF` triggers are a special type of [triggers](https://www.postgresqltutorial.com/postgresql-triggers/) that **intercept** insert, update, and delete operations on views.
+In PostgreSQL, `INSTEAD OF` triggers are a special type of [triggers](/docs/postgresql/postgresql-triggers) that **intercept** insert, update, and delete operations on views.
 
 It means that when you execute an `INSERT`, `UPDATE`, or `DELETE` statement on a view, PostgreSQL does not directly execute the statement. Instead, it executes the statements defined in the `INSTEAD OF` trigger.
 

@@ -29,7 +29,7 @@ In this syntax:
 - **CTE name**: Specify the name of the CTE. The CTE name exists within the scope of the query. Ensure that the CTE name is unique within the query.
 - **Column List (optional)**: Specify the list of column names within the parentheses after the CTE name. If not specified, the columns implicitly inherit the column names from `SELECT` statement inside the CTE.
 - **AS keyword**: The AS keyword indicates the beginning of the CTE definition.
-- **CTE query**: This is a query that defines the CTE, which may include [JOINs](/docs/postgresql/postgresql-joins/), [WHERE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/), [GROUP BY](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by) clauses, and other valid SQL constructs.
+- **CTE query**: This is a query that defines the CTE, which may include [JOINs](/docs/postgresql/postgresql-joins), [WHERE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/), [GROUP BY](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by) clauses, and other valid SQL constructs.
 - **Main query**: After defining the CTE, you can reference it in the main query by its name. In the main query, you can use the CTE as if it were a regular table, simplifying the structure of complex queries.
 
 ## PostgreSQL CTE examples
@@ -74,7 +74,7 @@ In this example:
 
 ### 2) Join a CTE with a table example
 
-We'll use the `rental` and `staff` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) in this example:
+We'll use the `rental` and `staff` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) in this example:
 
 The following example join a CTE with a table to find the staff and rental count for each:
 

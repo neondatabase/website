@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to delete data from a table in a PostgreSQL database from a C# program.
 
-This tutorial begins where [updating data in PostgreSQL using C#](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-update/) is left off.
+This tutorial begins where [updating data in PostgreSQL using C#](/docs/postgresql/postgresql-csharp/postgresql-csharp-update) is left off.
 
 ## How to delete data from PostgreSQL using C
 

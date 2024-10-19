@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL DROP SCHEMA statement
 
-The `DROP SCHEMA` removes a [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) and all of its objects from a database. The following illustrates the syntax of the `DROP SCHEMA` statement:
+The `DROP SCHEMA` removes a [schema](/docs/postgresql/postgresql-administration/postgresql-schema) and all of its objects from a database. The following illustrates the syntax of the `DROP SCHEMA` statement:
 
 ```
 DROP SCHEMA [IF EXISTS] schema_name
@@ -34,7 +34,7 @@ DROP SCHEMA [IF EXISTS] schema_name1 [,schema_name2,...]
 
 ## PostgreSQL DROP SCHEMA statement examples
 
-Note that the following examples use schemas created in the `CREATE SCHEMA` tutorial with some modifications in the [`ALTER SCHEMA`](https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/) tutorial.
+Note that the following examples use schemas created in the `CREATE SCHEMA` tutorial with some modifications in the [`ALTER SCHEMA`](/docs/postgresql/postgresql-administration/postgresql-alter-schema) tutorial.
 
 ![PostgreSQL DROP Schema](/postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-DROP-Schema.png)
 

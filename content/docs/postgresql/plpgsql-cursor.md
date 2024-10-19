@@ -91,7 +91,7 @@ In this syntax:
 
 ### Step 4. Processing rows
 
-After fetching a row, you can process it. Typically, you use a [LOOP](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/) statement to process the rows fetched from the cursor:
+After fetching a row, you can process it. Typically, you use a [LOOP](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) statement to process the rows fetched from the cursor:
 
 ```
 LOOP

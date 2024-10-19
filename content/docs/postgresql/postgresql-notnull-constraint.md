@@ -39,7 +39,7 @@ CREATE TABLE table_name(
 );
 ```
 
-If a column has a `NOT NULL` constraint, any attempt to [insert](/docs/postgresql/postgresql-insert/) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) NULL in the column will result in an error.
+If a column has a `NOT NULL` constraint, any attempt to [insert](/docs/postgresql/postgresql-insert) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) NULL in the column will result in an error.
 
 ## Declaring NOT NULL columns
 

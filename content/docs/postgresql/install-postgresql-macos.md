@@ -78,7 +78,7 @@ Fourth, enter dvdrental as the database, postgres as the owner, and click the Sa
 
 ![](/postgresqltutorial_data/wp-content-uploads-2020-07-Restore-Sample-Database-Step-2.png)
 
-Sixth, [download the sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) and unzip it. You'll get a directory with many files.
+Sixth, [download the sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) and unzip it. You'll get a directory with many files.
 
 Seventh, right-click the **dvdrental** database and select the **Restore...** menu item:
 

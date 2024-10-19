@@ -10,7 +10,7 @@ tableOfContents: true
 
 The `GROUP BY` clause divides the rows returned from the `SELECT` statement into groups.
 
-For each group, you can apply an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) such as `SUM()` to calculate the sum of items or `COUNT()` to get the number of items in the groups.
+For each group, you can apply an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) such as `SUM()` to calculate the sum of items or `COUNT()` to get the number of items in the groups.
 
 The following illustrates the basic syntax of the `GROUP BY` clause:
 
@@ -260,7 +260,7 @@ payment_date |   sum
 ...
 ```
 
-Since the values in the `payment_date` column are [timestamps](/docs/postgresql/postgresql-timestamp/), we cast them to date values using the [cast operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast) `::`.
+Since the values in the `payment_date` column are [timestamps](/docs/postgresql/postgresql-timestamp), we cast them to date values using the [cast operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast) `::`.
 
 ## Summary
 

@@ -103,7 +103,7 @@ The output will display the schema and the name of the views:
 
 ## Listing materialized views
 
-To retrieve all [materialized views](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/), you can query them from the `pg_matviews` view:
+To retrieve all [materialized views](/docs/postgresql/postgresql-views/postgresql-materialized-views), you can query them from the `pg_matviews` view:
 
 ```
 SELECT * FROM pg_matviews\G

@@ -60,7 +60,7 @@ VALUES
 
 ## Introduction to PostgreSQL window functions
 
-The easiest way to understand the window functions is to start by reviewing the [aggregate functions](https://www.postgresqltutorial.com/postgresql-aggregate-functions/). An aggregate function aggregates data from a set of rows into a single row.
+The easiest way to understand the window functions is to start by reviewing the [aggregate functions](/docs/postgresql/postgresql-aggregate-functions). An aggregate function aggregates data from a set of rows into a single row.
 
 The following example uses the `AVG()` aggregate function to calculate the average price of all products in the `products` table.
 
@@ -189,7 +189,7 @@ The following table lists all window functions provided by PostgreSQL. Note that
 
 | Name                                                                                                            | Description                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [CUME_DIST](https://www.postgresqltutorial.com/postgresql-window-function/postgresql-cume_dist-function/)       | Return the relative rank of the current row.                                                                                |
+| [CUME_DIST](/docs/postgresql/postgresql-window-function/postgresql-cume_dist-function)       | Return the relative rank of the current row.                                                                                |
 | [DENSE_RANK](https://www.postgresqltutorial.com/postgresql-window-function/postgresql-dense_rank-function/)     | Rank the current row within its partition without gaps.                                                                     |
 | [FIRST_VALUE](https://www.postgresqltutorial.com/postgresql-window-function/postgresql-first_value-function/)   | Return a value evaluated against the first row within its partition.                                                        |
 | [LAG](https://www.postgresqltutorial.com/postgresql-window-function/postgresql-lag-function/)                   | Return a value evaluated at the row that is at a specified physical offset row before the current row within the partition. |

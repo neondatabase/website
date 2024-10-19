@@ -7,7 +7,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL functions from a Python program.
 
-This tutorial picks up from where the [Transaction Tutorial](https://www.postgresqltutorial.com/postgresql-python/transaction/) left off.
+This tutorial picks up from where the [Transaction Tutorial](/docs/postgresql/postgresql-python/transaction) left off.
 
 ## Calling a PostgreSQL function in Python
 

@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database from a C# program.
 
-This tutorial begins where the [Connecting to the PostgreSQL database from a C# program tutorial](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/) left off.
+This tutorial begins where the [Connecting to the PostgreSQL database from a C# program tutorial](/docs/postgresql/postgresql-csharp/postgresql-csharp-connect) left off.
 
 ## How to create tables in PostgreSQL using C
 

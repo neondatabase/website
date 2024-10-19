@@ -121,7 +121,7 @@ Output:
 
 ### 1) Operator (->) example
 
-The operator `->` allows you to [extract a field as a JSONB value](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/) from a JSON object by a key:
+The operator `->` allows you to [extract a field as a JSONB value](/docs/postgresql/postgresql-json-functions/postgresql-json-extract) from a JSON object by a key:
 
 ```
 jsonb -> 'key' → jsonb
@@ -544,7 +544,7 @@ Output:
 
 ### 13) Operator (@?)
 
-The operator `@?` returns true if a [JSON path](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/) returns any items for the specified JSONB value:
+The operator `@?` returns true if a [JSON path](/docs/postgresql/postgresql-json-functions/postgresql-json-path) returns any items for the specified JSONB value:
 
 ```
 jsonb @? jsonpath → boolean

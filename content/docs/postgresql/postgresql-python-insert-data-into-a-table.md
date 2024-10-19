@@ -8,13 +8,13 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn to insert one or more rows into a PostgreSQL table from Python.
 
-This tutorial picks up from where the [Creating Tables Tutorial](https://www.postgresqltutorial.com/postgresql-python/create-tables/) left off.
+This tutorial picks up from where the [Creating Tables Tutorial](/docs/postgresql/postgresql-python/create-tables) left off.
 
 ## Steps for inserting one row into a table from Python
 
 To insert one or more rows into a table from Python, you follow these steps:
 
-- First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
+- First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-python/connect).
 - Next, create a `cursor` object from the `connection` object.
 - Then, execute the [INSERT](/docs/postgresql/postgresql-insert) statement with values by calling the `execute()` or `executemany()` method of the `cursor` object.
 - After that, commit the transaction by calling the `commit()` method of the `connection` object.

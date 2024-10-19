@@ -27,7 +27,7 @@ If the session user is a superuser, you can switch to any role.
 
 We'll take an example of using the `SET ROLE` statement.
 
-First, [connect](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) to the `dvdrental` database using `psql`:
+First, [connect](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) to the `dvdrental` database using `psql`:
 
 ```
 psql -U postres -d dvdrental
@@ -100,7 +100,7 @@ Output:
 
 The output indicates that the current role is `marketing`, not `lily` due to the `SET ROLE` statement.
 
-If you attempt to switch the current role to a [superuser](https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/) such as `postgres`, you'll get an error because the current role is not a `superuser` role.
+If you attempt to switch the current role to a [superuser](/docs/postgresql/postgresql-administration/create-superuser-postgresql) such as `postgres`, you'll get an error because the current role is not a `superuser` role.
 
 Tenth, switch the current role to `postgres`:
 

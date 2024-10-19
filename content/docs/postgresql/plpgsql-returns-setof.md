@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Defining a function with returns setof option
 
-[PostgreSQL functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) allow you to encapsulate reusable logic within the database. To return one or more rows from a function, you can use the `returns setof` option.
+[PostgreSQL functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) allow you to encapsulate reusable logic within the database. To return one or more rows from a function, you can use the `returns setof` option.
 
 The `returns setof`option allows you to return one or more rows with a predefined structure from a function.
 
@@ -67,7 +67,7 @@ SELECT * FROM function_name(argument);
 
 ## PL/pgSQL Returns SetOf example
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![Film table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 

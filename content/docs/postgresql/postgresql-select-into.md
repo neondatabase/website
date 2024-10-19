@@ -7,7 +7,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT INTO` statement to create a new table from the result set of a query.
 
-If you want to select data into variables, check out the [PL/pgSQL SELECT INTO statement](https://www.postgresqltutorial.com/plpgsql-select-into/).
+If you want to select data into variables, check out the [PL/pgSQL SELECT INTO statement](/docs/postgresql/plpgsql-select-into).
 
 ## Introduction to PostgreSQL SELECT INTO statement
 

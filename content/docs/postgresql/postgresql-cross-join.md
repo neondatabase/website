@@ -53,7 +53,7 @@ FROM
 
 ## PostgreSQL CROSS JOIN example
 
-The following [CREATE TABLE](/docs/postgresql/postgresql-create-table/) statements create `T1` and `T2` tables and [insert sample data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) for the cross-join demonstration.
+The following [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements create `T1` and `T2` tables and [insert sample data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) for the cross-join demonstration.
 
 ```
 DROP TABLE IF EXISTS T1;

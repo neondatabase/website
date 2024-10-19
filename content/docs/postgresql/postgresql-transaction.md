@@ -201,7 +201,7 @@ Output:
 (2 rows)
 ```
 
-In practice, you'll use transactions in [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/) in PostgreSQL and in the application code such as [PHP](https://www.postgresqltutorial.com/postgresql-php/transaction/), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/transaction/), and [Python](https://www.postgresqltutorial.com/postgresql-python/transaction/).
+In practice, you'll use transactions in [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure) in PostgreSQL and in the application code such as [PHP](https://www.postgresqltutorial.com/postgresql-php/transaction/), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/transaction/), and [Python](https://www.postgresqltutorial.com/postgresql-python/transaction/).
 
 ## Summary
 

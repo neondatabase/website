@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL MIN function
 
-PostgreSQL `MIN()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that returns the minimum value in a set of values.
+PostgreSQL `MIN()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that returns the minimum value in a set of values.
 
 To find the minimum value in a column of a table, you pass the column name the `MIN()` function. The [data type](/docs/postgresql/postgresql-data-types/) of the column can be [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text), or any comparable type.
 
@@ -25,7 +25,7 @@ Unlike the `AVG()`, `COUNT()` and `SUM()` functions, the `DISTINCT` option does 
 
 ## PostgreSQL MIN() function examples
 
-We will use the `film` , `film_category`, and `category` tables from the [dvdrental sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database") for demonstration.
+We will use the `film` , `film_category`, and `category` tables from the [dvdrental sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for demonstration.
 
 ![film film_category category tables](/postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png)
 

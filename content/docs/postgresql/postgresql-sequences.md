@@ -37,7 +37,7 @@ CREATE SEQUENCE [ IF NOT EXISTS ] sequence_name
 
 Specify the name of the sequence after the `CREATE SEQUENCE` clause. The `IF NOT EXISTS` conditionally creates a new sequence only if it does not exist.
 
-The sequence name must be distinct from any other sequences, tables, [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [views](https://www.postgresqltutorial.com/postgresql-views/), or foreign tables in the same schema.
+The sequence name must be distinct from any other sequences, tables, [indexes](/docs/postgresql/postgresql-indexes), [views](https://www.postgresqltutorial.com/postgresql-views/), or foreign tables in the same schema.
 
 ### \[ AS \{ SMALLINT | INT | BIGINT } ]
 

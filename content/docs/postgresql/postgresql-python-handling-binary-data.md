@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.
 
-This tutorial picks up from where the [Call Stored Procedures Tutorial](https://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/) left off.
+This tutorial picks up from where the [Call Stored Procedures Tutorial](/docs/postgresql/postgresql-python/call-stored-procedures) left off.
 
 Standard SQL defines a `BLOB` as the binary large object for storing binary data in the database. Using the `BLOB` data type, you can store binary data such as images, documents, and so on in a table.
 
@@ -26,7 +26,7 @@ To insert binary data into a table, you use the following steps:
 
 1. 2. First, read data from a file.
 3. 4.
-5. 6. Next, [connect to the PostgreSQL database](https://www.postgresqltutorial.com/postgresql-python/connect/) by creating a new connection object from the `connect()` function.
+5. 6. Next, [connect to the PostgreSQL database](/docs/postgresql/postgresql-python/connect) by creating a new connection object from the `connect()` function.
 7. 8.
 9. 10. Then, create a `cursor` object from the `Connection` object.
 11. 12.

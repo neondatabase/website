@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL EXCEPT operator
 
-Like the [UNION](/docs/postgresql/postgresql-union/) and [INTERSECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-intersect) operators, the `EXCEPT` operator returns rows by comparing the result sets of two or more queries.
+Like the [UNION](/docs/postgresql/postgresql-union) and [INTERSECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-intersect) operators, the `EXCEPT` operator returns rows by comparing the result sets of two or more queries.
 
 The `EXCEPT` operator returns distinct rows from the first (left) query that are not in the second (right) query.
 

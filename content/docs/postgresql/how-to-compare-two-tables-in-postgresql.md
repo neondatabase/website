@@ -12,7 +12,7 @@ There are several ways to compare the content of two tables to find the differen
 
 ## Comparing two tables using EXCEPT and UNION operators
 
-First, [create table](/docs/postgresql/postgresql-create-table/) two tables called `foo` and `bar`, and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
+First, [create table](/docs/postgresql/postgresql-create-table) two tables called `foo` and `bar`, and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
 
 ```
 CREATE TABLE foo (
@@ -173,7 +173,7 @@ It returns the differences between the two tables:
 (2 rows)
 ```
 
-To find the number of rows that are in the `foo` table but not `bar` table and vice versa, you use the [COUNT function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/) as follows:
+To find the number of rows that are in the `foo` table but not `bar` table and vice versa, you use the [COUNT function](/docs/postgresql/postgresql-aggregate-functions/postgresql-count-function) as follows:
 
 ```
 SELECT

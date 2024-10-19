@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL SUM() function
 
-The PostgreSQL `SUM()` is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that returns the sum of values in a set.
+The PostgreSQL `SUM()` is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that returns the sum of values in a set.
 
 Here's the basic syntax of the `SUM()` function:
 
@@ -30,7 +30,7 @@ The `SUM()` of an empty set will return `NULL`, not zero.
 
 ## PostgreSQL SUM() function examples
 
-Let's take some examples of using the `SUM()` function. We'll use the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database").
+Let's take some examples of using the `SUM()` function. We'll use the `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
@@ -195,7 +195,7 @@ Output:
 
 ### 6) Using PostgreSQL SUM() function with an expression
 
-See the following `rental` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+See the following `rental` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-rental.png)
 

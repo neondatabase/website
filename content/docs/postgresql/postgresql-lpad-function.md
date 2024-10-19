@@ -97,7 +97,7 @@ Output:
 
 ### 3) Using LPAD() function with table data
 
-See the following `customer` and `payment` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+See the following `customer` and `payment` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png)
 

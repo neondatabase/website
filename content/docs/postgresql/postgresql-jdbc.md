@@ -27,7 +27,7 @@ JDBC, as the core API of Java, offers a standardized interface for communication
 
 This section helps you get started by setting up JDK, installing Java IDE, downloading the PostgreSQL JDBC driver, and connecting to the PostgreSQL server from a Java program.
 
-- [Connecting to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) - Show you how to connect to the PostgreSQL database server from a Java program.
+- [Connecting to the PostgreSQL database server](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) - Show you how to connect to the PostgreSQL database server from a Java program.
 
 ## Section 2. Performing Common Database Operations
 
@@ -37,7 +37,7 @@ This section shows you how to perform common database operations including creat
 - [Inserting Data](https://www.postgresqltutorial.com/postgresql-jdbc/insert/) - Guide you on how to insert one or more rows into a table.
 - [Querying Data](https://www.postgresqltutorial.com/postgresql-jdbc/query/) - Walk you through the steps for querying data from a table.
 - [Updating Data](https://www.postgresqltutorial.com/postgresql-jdbc/update/) - Provide you with the steps for updating existing data in a table.
-- [Deleting Data](https://www.postgresqltutorial.com/postgresql-jdbc/delete/) - Show you how to delete one or more rows from a table.
+- [Deleting Data](/docs/postgresql/postgresql-jdbc/delete) - Show you how to delete one or more rows from a table.
 
 ## Section 3. Calling stored functions & stored procedures
 

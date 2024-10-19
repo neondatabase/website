@@ -58,7 +58,7 @@ First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/pos
 psql -U postgres
 ```
 
-Second, [create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/) called `suppliers`:
+Second, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) called `suppliers`:
 
 ```
 CREATE DATABASE suppliers;

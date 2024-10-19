@@ -24,7 +24,7 @@ The `UPPER()` function returns a new string with all letters converted to upperc
 
 The `UPPER()` function returns `NULL` if the `text` is `NULL`.
 
-Note that to convert a string to lowercase, you use the [LOWER()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lower/) function.
+Note that to convert a string to lowercase, you use the [LOWER()](/docs/postgresql/postgresql-string-functions/postgresql-lower) function.
 
 ## PostgreSQL UPPER() function examples
 

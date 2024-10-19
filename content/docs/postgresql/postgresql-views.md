@@ -11,7 +11,7 @@ A view is a named query stored in the PostgreSQL database server. A view is defi
 
 After [creating a view](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/), you can query data from it as you would from a regular table. Behind the scenes, PostgreSQL will rewrite the query against the view and its defining query, executing it to retrieve data from the base tables.
 
-Views do not store data except the [materialized views](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/). In PostgreSQL, you can create special views called materialized views that store data physically and periodically refresh it from the base tables.
+Views do not store data except the [materialized views](/docs/postgresql/postgresql-views/postgresql-materialized-views). In PostgreSQL, you can create special views called materialized views that store data physically and periodically refresh it from the base tables.
 
 The materialized views are handy in various scenarios, providing faster data access to a remote server and serving as an effective caching mechanism.
 
@@ -39,7 +39,7 @@ If your applications use views, you can freely modify the structure of the base 
 
 In this section, you'll learn about the fundamentals of PostgreSQL views including creating new views and removing existing views. These essential operations lay the strong foundation for using views effectively.
 
-- [Create View](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/ "Managing PostgreSQL Views") - show you how to create a new view in your database.
+- [Create View](/docs/postgresql/postgresql-views/managing-postgresql-views) - show you how to create a new view in your database.
 -
 - [Drop view](https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/) - learn to drop one or more views from the database.
 

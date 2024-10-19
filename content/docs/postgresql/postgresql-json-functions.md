@@ -10,13 +10,13 @@ This page provides you with the most commonly used PostgreSQL JSON functions tha
 
 This section covers the functions that help you create JSON data in SQL:
 
-- [to_jsonb()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-to_jsonb/) - Convert an SQL value to a value of JSONB.
+- [to_jsonb()](/docs/postgresql/postgresql-json-functions/postgresql-to_jsonb) - Convert an SQL value to a value of JSONB.
 -
 - [jsonb_build_array()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_build_array/) - Construct a JSON array from a list of values or the result of a query.
 -
 - [jsonb_build_object()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_build_object/) - Build a JSON object from a list of alternating keys and values.
 -
-- [jsonb_object()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object/) - Build a JSON object from a text array.
+- [jsonb_object()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_object) - Build a JSON object from a text array.
 -
 - [row_to_json()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-row_to_json/) - Create a JSON object from a SQL composite value.
 
@@ -26,7 +26,7 @@ This section provides you with functions that search for JSON elements based on 
 
 - [JSON path](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/) - Show you how to construct simple JSON paths to locate values or elements within a JSON document.
 -
-- [jsonb_path_query()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query/) - Query data on a JSON document based on a JSON path expression and return matched JSONB data.
+- [jsonb_path_query()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_path_query) - Query data on a JSON document based on a JSON path expression and return matched JSONB data.
 -
 - [jsonb_path_query_array()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_array/) - Query data on a JSON document based on a JSON path expression and return matched elements as a JSON array.
 -
@@ -40,7 +40,7 @@ This section provides you with functions that search for JSON elements based on 
 
 This section shows you how to query and extract elements in JSON documents.
 
-- [JSONB operators](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb-operators/) - Show you how to use JSONB operators to extract and query JSON data effectively.
+- [JSONB operators](/docs/postgresql/postgresql-json-functions/postgresql-jsonb-operators) - Show you how to use JSONB operators to extract and query JSON data effectively.
 -
 - [Extracting JSON data](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/) - Extract an array element of a JSON array or extract the value associated with a specified key from a JSON object and return the value as a JSONB value or a text string.
 -
@@ -54,7 +54,7 @@ This section discusses the function that inserts and updates values in JSON docu
 
 - [jsonb_insert()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/) - Insert a new value into a JSON document based on a path and return the modified JSON document.
 -
-- [jsonb_set()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_set/) - Replace existing values in a JSON document based on a path and return the modified JSON document.
+- [jsonb_set()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_set) - Replace existing values in a JSON document based on a path and return the modified JSON document.
 -
 - [jsonb_strip_nulls()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_strip_nulls/) - Delete all object fields that have null values from a specified JSON document.
 
@@ -74,7 +74,7 @@ This section shows you how to use JSON functions that handle JSON objects.
 
 - [jsonb_each()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/) - Expand the keys and values of the top-level JSON object into a set of key/value pairs. The values are JSON values.
 -
-- [jsonb_each_text()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each_text/) - Expand the top-level JSON object into a set of key/value pairs. The values are of the text type.
+- [jsonb_each_text()](/docs/postgresql/postgresql-json-functions/postgresql-jsonb_each_text) - Expand the top-level JSON object into a set of key/value pairs. The values are of the text type.
 -
 - [jsonb_object_keys()](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/) - Return a set of keys in the top-level JSON object.
 -

@@ -15,7 +15,7 @@ A table can have zero or one primary key. It cannot have more than one primary k
 
 It is a good practice to add a primary key to every table. When you add a primary key to a table, PostgreSQL creates a unique B-tree index on the column or a group of columns used to define the primary key.
 
-Technically, a primary key constraint is the combination of a [not-null constraint](/docs/postgresql/postgresql-not-null-constraint/) and [a UNIQUE constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint).
+Technically, a primary key constraint is the combination of a [not-null constraint](/docs/postgresql/postgresql-not-null-constraint) and [a UNIQUE constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint).
 
 Typically, you define primary for a table when creating it:
 

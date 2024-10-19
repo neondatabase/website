@@ -8,7 +8,7 @@ tableOfContents: true
 
 ## PostgreSQL change column type statement
 
-To change the [data type](/docs/postgresql/postgresql-time/) of a column, you use the [`ALTER TABLE`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table) statement as follows:
+To change the [data type](/docs/postgresql/postgresql-time) of a column, you use the [`ALTER TABLE`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table) statement as follows:
 
 ```
 ALTER TABLE table_name
@@ -54,7 +54,7 @@ Let's take some examples of changing column type.
 
 ### Setting up a sample table
 
-The following [creates a new table](/docs/postgresql/postgresql-create-table/) called `assets` and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some rows into the table:
+The following [creates a new table](/docs/postgresql/postgresql-create-table) called `assets` and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some rows into the table:
 
 ```
 CREATE TABLE assets (

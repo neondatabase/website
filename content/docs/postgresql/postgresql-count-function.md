@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL COUNT() function
 
-The `COUNT()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to obtain the number of rows that match a specific condition.
+The `COUNT()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that allows you to obtain the number of rows that match a specific condition.
 
 The following statement illustrates various ways of using the `COUNT()` function.
 
@@ -64,7 +64,7 @@ For example, you can use the `COUNT()` with the `GROUP BY` clause to return the 
 
 ## PostgreSQL COUNT() function examples
 
-Let's use the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+Let's use the `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 

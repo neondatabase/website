@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will step by step learn how to **install PostgreSQL** on your local system.
 
-- [Install PostgreSQL on macOS](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/)
+- [Install PostgreSQL on macOS](/docs/postgresql/postgresql-getting-started/install-postgresql-macos)
 - [Install PostgreSQL on Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
 
 PostgreSQL was developed for UNIX-like platforms, however, it was designed to be portable. It means that PostgreSQL can also run on other platforms such as macOS, Solaris, and Windows.
@@ -119,4 +119,4 @@ Fifth, enter `C:\Program Files\PostgreSQL\16\bin` and click `OK` to add it to th
 
 Finally, click the OK button to close the Environment Variables window and click the OK button to close the System Properties window.
 
-Congratulations! You've successfully installed the PostgreSQL database server on your local system. Let's learn various ways to [connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/ "Connect to PostgreSQL Database").
+Congratulations! You've successfully installed the PostgreSQL database server on your local system. Let's learn various ways to [connect to the PostgreSQL database server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database).

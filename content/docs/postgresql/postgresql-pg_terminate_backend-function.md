@@ -33,7 +33,7 @@ If you use a `timeout`, the function returns true if the process is terminated o
 
 The steps for killing a process by the process `ID` are as follows:
 
-First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `psql`:
+First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using `psql`:
 
 ```
 psql -U postgres

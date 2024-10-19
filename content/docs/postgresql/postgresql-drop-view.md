@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL DROP VIEW statement
 
-The `DROP VIEW` statement allows you to remove a [view](https://www.postgresqltutorial.com/postgresql-views/) from the database.
+The `DROP VIEW` statement allows you to remove a [view](/docs/postgresql/postgresql-views) from the database.
 
 Here's the basic syntax of the `DROP VIEW` statement:
 
@@ -40,7 +40,7 @@ To execute the `DROP VIEW` statement, you need to be the owner of the view or ha
 
 ## PostgreSQL DROP VIEW statement examples
 
-We'll use the following tables `film`, `film_category`, and `category` from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the following tables `film`, `film_category`, and `category` from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![film film_category category tables](/postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png)
 

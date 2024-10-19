@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to ALTER TABLESPACE statement
 
-After [creating a tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL creating tablespace"), you can change its definition by using the `ALTER TABLESPACE` statement as follows:
+After [creating a tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace), you can change its definition by using the `ALTER TABLESPACE` statement as follows:
 
 ```
 ALTER TABLESPACE tablespace_name

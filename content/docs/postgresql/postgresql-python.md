@@ -11,7 +11,7 @@ Python has various database drivers for PostgreSQL. Currently, the [psycopg](htt
 
 The current version of the psycopg is 2 or psycopg2. The psycopg2 database adapter is implemented in C as a [libpq](https://www.postgresql.org/docs/9.0/static/libpq.html) wrapper resulting in both fast and secure. The psycopg2 provides many useful features such as client-side and server-side [cursors](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-cursor/), asynchronous notification and communication, COPY command support, etc.
 
-Besides, the psycopg2 driver supports many Python types out-of-the-box. The psycopg2 matches Python objects to the [PostgreSQL data types](/docs/postgresql/postgresql-data-types/), e.g., list to the [array](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array/), tuples to records, and dictionary to [hstore](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore). If you want to customize and extend the type adaption, you can use a flexible object adaption system.
+Besides, the psycopg2 driver supports many Python types out-of-the-box. The psycopg2 matches Python objects to the [PostgreSQL data types](/docs/postgresql/postgresql-data-types/), e.g., list to the [array](/docs/postgresql/postgresql-tutorial/postgresql-array), tuples to records, and dictionary to [hstore](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore). If you want to customize and extend the type adaption, you can use a flexible object adaption system.
 
 This PostgreSQL Python section covers the most common activities for interacting with PostgreSQL in Python applications:
 
@@ -19,7 +19,7 @@ This PostgreSQL Python section covers the most common activities for interacting
 -
 - [Creating new PostgreSQL tables in Python](https://www.postgresqltutorial.com/postgresql-python/create-tables/) – show you how to create new tables in PostgreSQL from Python.
 -
-- [Inserting data into the PostgreSQL table in Python](https://www.postgresqltutorial.com/postgresql-python/insert/)– explain to you how to insert data into a PostgreSQL database table in Python.
+- [Inserting data into the PostgreSQL table in Python](/docs/postgresql/postgresql-python/insert)– explain to you how to insert data into a PostgreSQL database table in Python.
 -
 - [Updating data in the PostgreSQL table in Python](https://www.postgresqltutorial.com/postgresql-python/update/)– learn various ways to update data in the PostgreSQL table.
 -
@@ -31,7 +31,7 @@ This PostgreSQL Python section covers the most common activities for interacting
 -
 - [Handling PostgreSQL BLOB data in Python](https://www.postgresqltutorial.com/postgresql-python/blob/)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
 -
-- [Querying data from the PostgreSQL tables](https://www.postgresqltutorial.com/postgresql-python/query/)– walk you through the steps of querying data from the PostgreSQL tables in a Python application.
+- [Querying data from the PostgreSQL tables](/docs/postgresql/postgresql-python/query)– walk you through the steps of querying data from the PostgreSQL tables in a Python application.
 -
 - [Deleting data from PostgreSQL tables in Python](https://www.postgresqltutorial.com/postgresql-python/delete/) - show you how to delete data in a table in Python.
 

@@ -49,7 +49,7 @@ Output:
 (1 row)
 ```
 
-Third, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) called `bob`:
+Third, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) called `bob`:
 
 ```
 CREATE ROLE bob

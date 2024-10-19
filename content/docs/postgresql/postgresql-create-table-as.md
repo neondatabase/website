@@ -58,7 +58,7 @@ AS query;
 
 ## PostgreSQL CREATE TABLE AS statement examples
 
-We will use the `film` and `film_category` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/)for the demonstration.
+We will use the `film` and `film_category` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database)for the demonstration.
 
 ![film_and_film_category_tables](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/film_and_film_category_tables.png)
 

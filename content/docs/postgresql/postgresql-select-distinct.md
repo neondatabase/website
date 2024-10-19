@@ -106,7 +106,7 @@ Output:
 
 ### 1) PostgreSQL SELECT DISTINCT one column example
 
-The following statement selects unique values from the `bcolor` column of the `t1` table and [sorts](/docs/postgresql/postgresql-order-by/) the result set in alphabetical order by using the [`ORDER BY`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by) clause.
+The following statement selects unique values from the `bcolor` column of the `t1` table and [sorts](/docs/postgresql/postgresql-order-by) the result set in alphabetical order by using the [`ORDER BY`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by) clause.
 
 ```
 SELECT

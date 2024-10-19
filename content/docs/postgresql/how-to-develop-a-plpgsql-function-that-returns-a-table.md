@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to develop PostgreSQL functions that return a table using PL/pgSQL.
 
-To define a function that returns a table, you use the following form of the [create function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) statement:
+To define a function that returns a table, you use the following form of the [create function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) statement:
 
 ```
 create or replace function function_name (
@@ -65,7 +65,7 @@ This `get_film(varchar)` accepts one parameter `p_pattern`, which is a pattern y
 
 The function returns a query set based on a select statement. You need to ensure that the columns in the result set match those you define in the table after the `returns table` clause.
 
-Since the [data type](/docs/postgresql/postgresql-data-types/) of `release_year` column from the `film` table is not an integer, you need to cast it to an integer using the [cast operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast)`::`.
+Since the [data type](/docs/postgresql/postgresql-data-types/) of `release_year` column from the `film` table is not an integer, you need to cast it to an integer using the [cast operator](/docs/postgresql/postgresql-tutorial/postgresql-cast)`::`.
 
 The following shows how to call the `get_film()` function:
 

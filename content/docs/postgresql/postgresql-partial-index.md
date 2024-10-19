@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL partial index
 
-When you [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on a column of a table, PostgreSQL uses all the values from that column for building the index.
+When you [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) on a column of a table, PostgreSQL uses all the values from that column for building the index.
 
 Sometimes, you may want to include only some values from the indexed column in the index. To do that you can use a partial index.
 
@@ -35,7 +35,7 @@ In this syntax:
 
 ## PostgreSQL partial index example
 
-Let's take a look at the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+Let's take a look at the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2013/05/customer-table.png)
 

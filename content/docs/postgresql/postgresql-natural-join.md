@@ -24,7 +24,7 @@ In this syntax:
 - Second, provide the main table (`table1`) from which you want to retrieve data.
 - Third, specify the table (`table2`) that you want to join with the main table, in the `NATURAL JOIN` clause.
 
-A natural join can be an [inner join](/docs/postgresql/postgresql-inner-join/), [left join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/), or [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join). If you do not specify an explicit join, PostgreSQL will use the `INNER JOIN` by default.
+A natural join can be an [inner join](/docs/postgresql/postgresql-inner-join), [left join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/), or [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join). If you do not specify an explicit join, PostgreSQL will use the `INNER JOIN` by default.
 
 The convenience of the `NATURAL JOIN` is that it does not require you to specify the condition in the join clause because it uses an implicit condition based on the equality of the common columns.
 
@@ -220,7 +220,7 @@ Output:
 
 In practice, you should avoid using the `NATURAL JOIN` whenever possible because sometimes it may cause an unexpected result.
 
-Consider the following `city` and `country` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+Consider the following `city` and `country` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-city.png)
 

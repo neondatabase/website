@@ -28,7 +28,7 @@ In this syntax, the `GROUP BY` clause divides the result set into groups of rows
 
 ## PostgreSQL aggregate function examples
 
-Let's use the `film` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+Let's use the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![Film table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 

@@ -9,7 +9,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to **connect to the PostgreSQL Database Server** via an interactive terminal program called **psql** and via the **pgAdmin** application.
 
-When you [install the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/ "Install PostgreSQL"), the PostgreSQL installer will also install some useful tools for working with the PostgreSQL server.
+When you [install the PostgreSQL database server](/docs/postgresql/postgresql-getting-started/install-postgresql), the PostgreSQL installer will also install some useful tools for working with the PostgreSQL server.
 
 In this tutorial, you will learn how to connect to the PostgreSQL server via the following tools:
 
@@ -144,7 +144,7 @@ Seventh, enter the query in the **Query Editor** and click the **Execute** butto
 
 ## Connect to PostgreSQL Server from other applications
 
-Any application that supports ODBC or [JDBC](https://www.postgresqltutorial.com/postgresql-jdbc/) can connect to the PostgreSQL server.
+Any application that supports ODBC or [JDBC](/docs/postgresql/postgresql-jdbc) can connect to the PostgreSQL server.
 
 Furthermore, if you develop an application that uses a specific driver, it can connect to the PostgreSQL database server:
 

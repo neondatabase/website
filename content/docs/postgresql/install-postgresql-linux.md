@@ -151,7 +151,7 @@ Fifth, quit the `psql` by using the `\q` command:
 \q
 ```
 
-Seventh, use the [pg_restore tool to restore](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/) the `dvdrental` database:
+Seventh, use the [pg_restore tool to restore](/docs/postgresql/postgresql-administration/postgresql-restore-database) the `dvdrental` database:
 
 ```
 pg_restore -U postgres --dbname=dvdrental --verbose dvdrental.tar

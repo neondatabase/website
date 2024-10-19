@@ -30,7 +30,7 @@ In this syntax:
 - Third, provide the table name to which the index belongs.
 - Finally, list out one or more indexed columns inside the () after the table name.
 
-Note that the syntax of the `CREATE INDEX` statement is more complex than this. We'll cover additional features of the `CREATE INDEX` statement in the upcoming tutorials such as [unique indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/), [indexes on expressions](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/), [partial indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/), and [multicolumn indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/).
+Note that the syntax of the `CREATE INDEX` statement is more complex than this. We'll cover additional features of the `CREATE INDEX` statement in the upcoming tutorials such as [unique indexes](/docs/postgresql/postgresql-indexes/postgresql-unique-index), [indexes on expressions](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/), [partial indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/), and [multicolumn indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/).
 
 By default, the `CREATE INDEX` statement creates a B-tree index, which is appropriate for most cases. We'll show you how to create other [index types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/).
 
@@ -97,7 +97,7 @@ Here is the output:
 
 The output indicates that the query optimizer has to perform a sequential scan on the `address` table.
 
-Fourth, [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) for the values in the `phone` column of the `address` table using the `CREATE INDEX` statement:
+Fourth, [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) for the values in the `phone` column of the `address` table using the `CREATE INDEX` statement:
 
 ```
 CREATE INDEX idx_address_phone

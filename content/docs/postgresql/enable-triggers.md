@@ -10,11 +10,11 @@ tableOfContents: true
 
 ## Introduction to ALTER TABLE...ENABLE TRIGGER statement
 
-In PostgreSQL, a [trigger](https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/) is a database object that automatically invokes a specified [function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) when an event occurs on a table or view. These events include `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`.
+In PostgreSQL, a [trigger](/docs/postgresql/postgresql-triggers/introduction-postgresql-trigger) is a database object that automatically invokes a specified [function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) when an event occurs on a table or view. These events include `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`.
 
 If a [trigger is disabled](https://www.postgresqltutorial.com/postgresql-triggers/managing-postgresql-trigger/), it doesn't activate when the triggering event occurs. To activate the trigger, you'll need to enable it.
 
-To enable a [trigger](https://www.postgresqltutorial.com/postgresql-triggers/) or all triggers associated with a table, you use the `ALTER TABLE ... ENABLE TRIGGER` statement:
+To enable a [trigger](/docs/postgresql/postgresql-triggers) or all triggers associated with a table, you use the `ALTER TABLE ... ENABLE TRIGGER` statement:
 
 ```
 ALTER TABLE table_name

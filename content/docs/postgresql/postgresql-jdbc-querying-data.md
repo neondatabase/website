@@ -11,7 +11,7 @@ tableOfContents: true
 
 To query data from a table using JDBC, you follow these steps:
 
-- [Establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) to the PostgreSQL server.
+- [Establish a database connection](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) to the PostgreSQL server.
 - Create an instance of the `Statement` or `PreparedStatement` object.
 - Execute a statement to get a `ResultSet` object.
 - Process the `ResultSet` object.
@@ -27,7 +27,7 @@ Use the `getConnection()` method of the `DriverManager` class to establish a con
 return DriverManager.getConnection(url, user, password);
 ```
 
-We'll use the `DB` class created in the [connecting to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) to connect to the PostgreSQL server.
+We'll use the `DB` class created in the [connecting to the PostgreSQL server](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) to connect to the PostgreSQL server.
 
 ### 2) Creating a Statement object
 
@@ -48,7 +48,7 @@ To execute a query, you use one of the following methods of the `Statement` obje
 
 - `execute()`: Return true if the first object of the query is a `ResultSet` object. You can get the `ResultSet` by calling the method `getResultSet()`.
 - `executeQuery()`: Return only one `ResultSet` object.
-- `executeUpdate()`: Return the number of rows affected by the statement. Typically, you use this method for executing the [INSERT](/docs/postgresql/postgresql-insert/), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) statement.
+- `executeUpdate()`: Return the number of rows affected by the statement. Typically, you use this method for executing the [INSERT](/docs/postgresql/postgresql-insert), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) statement.
 
 ### 4) Processing the ResultSet
 

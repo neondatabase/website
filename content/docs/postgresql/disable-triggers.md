@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to ALTER TABLE...DISABLE TRIGGER statement
 
-To disable a [trigger](https://www.postgresqltutorial.com/postgresql-triggers/), you use the `ALTER TABLE...DISABLE TRIGGER` statement.
+To disable a [trigger](/docs/postgresql/postgresql-triggers), you use the `ALTER TABLE...DISABLE TRIGGER` statement.
 
 When you disable a trigger, it remains in the database but won't activate when an event associated with the trigger occurs.
 

@@ -22,7 +22,7 @@ Notice that you cannot change the column values (`OLD.column_name`) because they
 
 To create an `AFTER DELETE` trigger, you follow these steps:
 
-First, [define a trigger function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute after a `DELETE` operation:
+First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute after a `DELETE` operation:
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function_name()

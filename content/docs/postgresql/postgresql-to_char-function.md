@@ -8,7 +8,7 @@ tableOfContents: true
 ---
 
 
-The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp/), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
+The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
 
 ## Syntax
 
@@ -108,7 +108,7 @@ The `TO_CHAR()` function returns a string in `TEXT` data type that represents th
 
 ## Examples
 
-We will use the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 

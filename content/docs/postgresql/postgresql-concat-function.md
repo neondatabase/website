@@ -58,7 +58,7 @@ The `CONCAT()` function returns a new string that results from concatenating the
 
 Unlike the concatenation operator `||`, the `CONCAT` function ignores `NULL` arguments.
 
-To concatenate two or more strings into one using a specified separator, you can use the [CONCAT_WS()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-concat_ws/) function.
+To concatenate two or more strings into one using a specified separator, you can use the [CONCAT_WS()](/docs/postgresql/postgresql-string-functions/postgresql-concat_ws) function.
 
 ## PostgreSQL CONCAT() function examples
 

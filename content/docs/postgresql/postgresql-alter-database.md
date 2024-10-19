@@ -62,7 +62,7 @@ The following users can change the owner of the database:
 
 ### 4) Change the default tablespace of a database
 
-The following statement changes the default [tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Creating Tablespaces")of the database:
+The following statement changes the default [tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace)of the database:
 
 ```
 ALTER DATABASE database_name

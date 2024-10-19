@@ -110,7 +110,7 @@ CREATE TABLE customers(
 );
 ```
 
-Second, [create a view](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/) based on the `customers` and `customer_groups` tables:
+Second, [create a view](/docs/postgresql/postgresql-views/postgresql-materialized-views) based on the `customers` and `customer_groups` tables:
 
 ```
 CREATE VIEW customer_data

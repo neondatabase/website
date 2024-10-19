@@ -35,7 +35,7 @@ In this syntax:
 
 ### `expression`
 
-The `expression` can be an expression, column, or subquery evaluated against the value of the first row of a sorted partition of a result set. The `expression` must return a single value. And it cannot be a [window function](https://www.postgresqltutorial.com/postgresql-window-function/).
+The `expression` can be an expression, column, or subquery evaluated against the value of the first row of a sorted partition of a result set. The `expression` must return a single value. And it cannot be a [window function](/docs/postgresql/postgresql-window-function).
 
 ### `PARTITION BY` clause
 

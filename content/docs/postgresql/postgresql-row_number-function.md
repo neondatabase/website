@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL ROW_NUMBER() function
 
-The `ROW_NUMBER()` function is a [window function](https://www.postgresqltutorial.com/postgresql-window-function/) that assigns a sequential integer to each row in a result set.
+The `ROW_NUMBER()` function is a [window function](/docs/postgresql/postgresql-window-function) that assigns a sequential integer to each row in a result set.
 
 The following illustrates the syntax of the `ROW_NUMBER()` function:
 
@@ -33,7 +33,7 @@ The `ORDER BY` clause inside the `OVER` clause determines the order in which the
 
 ## PostgreSQL ROW_NUMBER() function examples
 
-We will use the `products` table created in the [PostgreSQL window function tutorial](https://www.postgresqltutorial.com/postgresql-window-function/) to demonstrate the functionality of the `ROW_NUMBER()` function.
+We will use the `products` table created in the [PostgreSQL window function tutorial](/docs/postgresql/postgresql-window-function) to demonstrate the functionality of the `ROW_NUMBER()` function.
 
 ![products_product_groups_tables](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 

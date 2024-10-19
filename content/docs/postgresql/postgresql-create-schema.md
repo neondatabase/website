@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL CREATE SCHEMA statement
 
-The `CREATE SCHEMA` statement allows you to create a new [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) in the current database.
+The `CREATE SCHEMA` statement allows you to create a new [schema](/docs/postgresql/postgresql-administration/postgresql-schema) in the current database.
 
 The following illustrates the syntax of the `CREATE SCHEMA` statement:
 
@@ -34,7 +34,7 @@ AUTHORIZATION username;
 
 In this case, the schema will have the same name as the `username`.
 
-PostgreSQL allows you to create a schema and a list of objects such as tables and [views](https://www.postgresqltutorial.com/postgresql-views/) using a single statement as follows:
+PostgreSQL allows you to create a schema and a list of objects such as tables and [views](/docs/postgresql/postgresql-views) using a single statement as follows:
 
 ```
 CREATE SCHEMA schema_name

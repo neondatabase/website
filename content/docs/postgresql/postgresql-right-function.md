@@ -81,7 +81,7 @@ In this example, the `RIGHT()` function returns all characters except for the fi
 
 ### 2) Using the RIGHT() function with table data example
 
-See the following `customer` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+See the following `customer` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 

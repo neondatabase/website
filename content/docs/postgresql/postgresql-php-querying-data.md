@@ -13,11 +13,11 @@ tableOfContents: true
 
 To query all rows from a table in the PostgreSQL database, you use the following steps:
 
-1. First, [connect to the PostgreSQL database](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new PDO object.
+1. First, [connect to the PostgreSQL database](/docs/postgresql/postgresql-php/connect) by creating a new PDO object.
 2. Second, call the `query()` method of the PDO object. The query() method accepts a [SELECT](/docs/postgresql/postgresql-select) statement as the argument. The query method returns a `PDOStatement` object.
 3. Third, fetch the next rows from the result by calling the fetch() method of the PDOstatement object. The fetch_style argument of the `fetch()` method controls how the result returned. For example, the `PDO::FETCH_ASSOC` instructs the `fetch()` method to return the result set as an array indexed by column name.
 
-We will use the `stocks` table created in the [creating table tutorial](https://www.postgresqltutorial.com/postgresql-php/create-tables/) for the demonstration. Let's create a new class `StockDB` for storing all the methods that select data from the `stocks` table.
+We will use the `stocks` table created in the [creating table tutorial](/docs/postgresql/postgresql-php/create-tables) for the demonstration. Let's create a new class `StockDB` for storing all the methods that select data from the `stocks` table.
 
 The following `all()` method selects all rows in the `stocks` table.
 

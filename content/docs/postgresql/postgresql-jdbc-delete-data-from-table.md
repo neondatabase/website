@@ -11,7 +11,7 @@ tableOfContents: true
 
 To delete data from a Java program, you follow these steps:
 
-- [Establish a database connection to PostgreSQL.](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
+- [Establish a database connection to PostgreSQL.](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database)
 - Create a `PreparedStatement` object.
 - Execute a [DELETE statement](/docs/postgresql/postgresql-delete).
 - Close the database connection.

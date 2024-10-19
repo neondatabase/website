@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PL/pgSQL variables
 
-In PL/pgSQL, variables are placeholders for storing data within a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/). These variables can hold values of various types such as integers, booleans, text, and more.
+In PL/pgSQL, variables are placeholders for storing data within a [block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure). These variables can hold values of various types such as integers, booleans, text, and more.
 
 Variables allow you to hold values for calculations, store query results, and so on.
 
@@ -27,7 +27,7 @@ variable_name data_type [= expression];
 In this syntax:
 
 - First, specify the name of the variable. It is a good practice to assign a meaningful name to a variable. For example, instead of naming a variable `i` you should use `index` or `counter`.
-- Second, associate a specific [data type](/docs/postgresql/postgresql-data-types/) with the variable. The data type can be any valid data type such as [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/), [varchar](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/), and [char](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
+- Second, associate a specific [data type](/docs/postgresql/postgresql-data-types) with the variable. The data type can be any valid data type such as [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/), [varchar](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/), and [char](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
 - Third, optionally assign a default value to the variable. If you don't do so, the initial value of the variable is `NULL`.
 
 Please note that you can use either `:=` or `=` assignment operator to set an initial value for a variable.
@@ -171,7 +171,7 @@ The following shows how to declare a variable with the data type of another vari
 variable_name variable%type;
 ```
 
-We'll use the following `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the following `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

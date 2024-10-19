@@ -108,7 +108,7 @@ In this example, the function replaces the `%s` with the `'PostgreSQL'` string a
 
 ### 2) Using FORMAT() function with table data example
 
-We'll use the following `customer` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+We'll use the following `customer` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png)
 

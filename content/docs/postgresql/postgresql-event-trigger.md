@@ -14,7 +14,7 @@ A regular trigger fires whenever an `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` 
 
 To automatically respond to events related to data definition language (`DDL`) statements, you can use an event trigger.
 
-An event trigger is a [trigger](https://www.postgresqltutorial.com/postgresql-triggers/) that fires whenever an associated event occurs in the database.
+An event trigger is a [trigger](/docs/postgresql/postgresql-triggers) that fires whenever an associated event occurs in the database.
 
 PostgreSQL supports the following events:
 
@@ -38,7 +38,7 @@ The `table_rewrite` event occurs before you rewrite a table using the `ALTER TAB
 
 To create an event trigger, you follow these steps:
 
-First, [define a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when the event trigger fires:
+First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the event trigger fires:
 
 ```
 CREATE OR REPLACE FUNCTION event_trigger_function_name()

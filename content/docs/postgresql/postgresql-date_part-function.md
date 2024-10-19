@@ -7,7 +7,7 @@ tableOfContents: true
 ---
 
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `DATE_PART()` function to retrieve the subfields such as year, month, and week from a [date](/docs/postgresql/postgresql-date/) or [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time) value.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `DATE_PART()` function to retrieve the subfields such as year, month, and week from a [date](/docs/postgresql/postgresql-date) or [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time) value.
 
 ## Introduction to the PostgreSQL DATE_PART() function
 
@@ -59,7 +59,7 @@ The values of the field must be one of the following permitted values:
 -
 - timezone_minute
 
-The `source` is a temporal expression that evaluates to [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp/), [`TIME`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), or [`INTERVAL`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval). If the `source` evaluates to `DATE`, the function will be cast to `TIMESTAMP`.
+The `source` is a temporal expression that evaluates to [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp), [`TIME`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), or [`INTERVAL`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval). If the `source` evaluates to `DATE`, the function will be cast to `TIMESTAMP`.
 
 The `DATE_PART()` function returns a value whose type is double precision.
 
@@ -171,7 +171,7 @@ Output:
 
 ### 7) Extracting a week number from a timestamp
 
-To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/) function as follows:
+To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](/docs/postgresql/postgresql-date-functions/postgresql-now) function as follows:
 
 ```
 SELECT date_part('millennium',now());

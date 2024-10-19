@@ -114,7 +114,7 @@ Password:
 
 After you enter a valid password, the `pg_dump` will create the backup file `dvdrental.tar` in the `d:\backup` directory.
 
-If you want to automate the backup regularly, you need to use [a password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) (`.pgpass` on Unix-like systems and `pgpass.conf` on Windows) so that when the command executes, it doesn't ask for the password.
+If you want to automate the backup regularly, you need to use [a password file](/docs/postgresql/postgresql-administration/postgresql-password-file-pgpass) (`.pgpass` on Unix-like systems and `pgpass.conf` on Windows) so that when the command executes, it doesn't ask for the password.
 
 ### 2) Backing up all databases using the pg_dumpall utility
 

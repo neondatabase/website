@@ -49,7 +49,7 @@ In other words, you apply the condition in the `WHERE` clause to the rows while 
 
 ## PostgreSQL HAVING clause examples
 
-Let's take a look at the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database"):
+Let's take a look at the `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 

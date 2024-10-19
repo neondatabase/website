@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL DROP ROLE statement
 
-The `DROP ROLE` statement allows you to delete a [role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/):
+The `DROP ROLE` statement allows you to delete a [role](/docs/postgresql/postgresql-administration/postgresql-roles):
 
 ```
 DROP ROLE [IF EXISTS] target_role;

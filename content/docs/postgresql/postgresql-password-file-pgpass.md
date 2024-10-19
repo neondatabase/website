@@ -11,7 +11,7 @@ tableOfContents: true
 
 The password file `.pgpass` is a PostgreSQL feature that allows you to securely store the connection information.
 
-The password file can be useful for automation scripts like [pgdump](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/) or [pgrestore](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/) to avoid repeated password entries when connecting to PostgreSQL databases.
+The password file can be useful for automation scripts like [pgdump](/docs/postgresql/postgresql-administration/postgresql-backup-database) or [pgrestore](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/) to avoid repeated password entries when connecting to PostgreSQL databases.
 
 The `.pgpass` file is a plain text file that contains one or more lines with the following format:
 

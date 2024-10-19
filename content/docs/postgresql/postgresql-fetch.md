@@ -42,7 +42,7 @@ The `FETCH` clause is functionally equivalent to the `LIMIT` clause. If you plan
 
 ## PostgreSQL FETCH examples
 
-Let's use the `film` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+Let's use the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![Film Table](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/film_table.png)
 

@@ -17,7 +17,7 @@ PostgreSQL supports the following data types:
 -
 - Numeric types such as integer and floating-point number.
 -
-- Temporal types such as [date](/docs/postgresql/postgresql-date/), [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), [timestamp](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/), and [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval)
+- Temporal types such as [date](/docs/postgresql/postgresql-date/), [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), [timestamp](/docs/postgresql/postgresql-tutorial/postgresql-timestamp), and [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval)
 -
 - [UUID](/docs/postgresql/postgresql-uuid) for storing Universally Unique Identifiers
 -

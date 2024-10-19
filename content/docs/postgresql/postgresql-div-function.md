@@ -51,7 +51,7 @@ Unlike regular division, the `DIV()` function truncates any fractional part of t
 
 ### 2) Grouping data into bins
 
-You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) into bins of 30 minutes:
+You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
 
 ```
 SELECT
@@ -136,7 +136,7 @@ Output:
 
 How it works.
 
-- Use the [AGE()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/) function to calculate age.
+- Use the [AGE()](/docs/postgresql/postgresql-date-functions/postgresql-age) function to calculate age.
 - Use the [EXTRACT()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/) function to extract the year from the age.
 - Use the `DIV()` function to return the integer part of the age.
 

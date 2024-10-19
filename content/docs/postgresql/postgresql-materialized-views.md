@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL materialized views
 
-In PostgreSQL, [views](https://www.postgresqltutorial.com/postgresql-views/) are virtual tables that represent data of the underlying tables. Simple views can be [updatable](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/).
+In PostgreSQL, [views](/docs/postgresql/postgresql-views) are virtual tables that represent data of the underlying tables. Simple views can be [updatable](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/).
 
 PostgreSQL extends the view concept to the next level which allows views to store data physically. These views are called **materialized views**.
 
@@ -51,7 +51,7 @@ To avoid this, you can use the `CONCURRENTLY` option.
 REFRESH MATERIALIZED VIEW CONCURRENTLY view_name;
 ```
 
-With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version of the materialized view, compares two versions, and performs [INSERT](/docs/postgresql/postgresql-insert/) and [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) only the differences.
+With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version of the materialized view, compares two versions, and performs [INSERT](/docs/postgresql/postgresql-insert) and [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) only the differences.
 
 PostgreSQL allows you to retrieve data from a materialized view while it is being updated. One requirement for using `CONCURRENTLY` option is that the materialized view must have a `UNIQUE` index.
 

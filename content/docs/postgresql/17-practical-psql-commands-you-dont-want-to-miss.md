@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## 1) Connect to PostgreSQL database
 
-The following command [connects to a database](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) under a specific user. After pressing `Enter` PostgreSQL will ask for the password of the user.
+The following command [connects to a database](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) under a specific user. After pressing `Enter` PostgreSQL will ask for the password of the user.
 
 ```
 psql -d database -U  user -W
@@ -55,7 +55,7 @@ dvdrental=#
 
 ## 3) List available databases
 
-To [list all databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/) in the current PostgreSQL database server, you use `\l` command:
+To [list all databases](/docs/postgresql/postgresql-administration/postgresql-show-databases) in the current PostgreSQL database server, you use `\l` command:
 
 ```
 \l
@@ -125,7 +125,7 @@ Now, if you want to save time typing the previous command again, you can use `\g
 \g
 ```
 
-psql executes the previous command again, which is the [SELECT statement](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/),.
+psql executes the previous command again, which is the [SELECT statement](/docs/postgresql/postgresql-tutorial/postgresql-select),.
 
 ## 11) Command history
 

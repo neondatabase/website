@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL DROP PROCEDURE statement
 
-The `drop procedure` statement deletes one or more [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/) from a database.
+The `drop procedure` statement deletes one or more [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure) from a database.
 
 The following illustrates the syntax of the `drop procedure` statement:
 

@@ -47,7 +47,7 @@ VALUES
     ('New York', 5.3, 15.9, '2024-04-19 18:00:00');
 ```
 
-Third, calculate the [average](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/) wind speed and temperature in `New York` on `April 19, 2024`:
+Third, calculate the [average](/docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function) wind speed and temperature in `New York` on `April 19, 2024`:
 
 ```
 SELECT

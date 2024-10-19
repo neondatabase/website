@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Creating stored procedures with INOUT parameters
 
-Sometimes, you may want to return values from [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/). To achieve this, you can use the `create procedure` statement with `INOUT` parameters.
+Sometimes, you may want to return values from [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure). To achieve this, you can use the `create procedure` statement with `INOUT` parameters.
 
 Here's the basic syntax for creating a stored procedure with `INOUT` parameters:
 

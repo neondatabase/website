@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to update data in the PostgreSQL database using C#.
 
-This tutorial begins where [importing data from a CSV file into PostgreSQL tutorial](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-import-csv-file/) is left off.
+This tutorial begins where [importing data from a CSV file into PostgreSQL tutorial](/docs/postgresql/postgresql-csharp/postgresql-csharp-import-csv-file) is left off.
 
 ## How to update data in PostgreSQL using C
 

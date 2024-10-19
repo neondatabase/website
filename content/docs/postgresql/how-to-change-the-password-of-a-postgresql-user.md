@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to change the password for a user in PostgreSQL.
 
-To change the password of a [PostgreSQL user](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/), you use the `ALTER ROLE` statement as follows:
+To change the password of a [PostgreSQL user](/docs/postgresql/postgresql-administration/postgresql-roles), you use the `ALTER ROLE` statement as follows:
 
 ```
 ALTER ROLE username
@@ -44,7 +44,7 @@ ALTER ROLE bob
 VALID UNTIL 'December 31, 2050';
 ```
 
-To verify the result, you can use the `\du` command in psql to [view the detailed information of the user](https://www.postgresqltutorial.com/postgresql-administration/postgresql-list-users/):
+To verify the result, you can use the `\du` command in psql to [view the detailed information of the user](/docs/postgresql/postgresql-administration/postgresql-list-users):
 
 ```
 \du super

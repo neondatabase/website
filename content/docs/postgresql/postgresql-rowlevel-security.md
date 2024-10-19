@@ -44,7 +44,7 @@ FORCE ROW LEVEL SECURITY;
 
 We'll take an example of creating a table and roles where the roles can retrieve data from the table whose `manager` column matches the current role.
 
-1. [Create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/) called `hr`:
+1. [Create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) called `hr`:
 
 ```
 create database hr;

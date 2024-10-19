@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL BOOL_OR() function
 
-The `BOOL_OR()` is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to aggregate boolean values across rows within a group.
+The `BOOL_OR()` is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that allows you to aggregate boolean values across rows within a group.
 
 Here's the syntax of the `BOOL_OR()` function:
 

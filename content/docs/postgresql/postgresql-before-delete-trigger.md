@@ -21,7 +21,7 @@ Please note that you cannot modify the column values (`OLD.column_name`) because
 
 To create a `BEFORE DELETE` trigger, follow these steps:
 
-First, [define a trigger function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute before a `DELETE` operation:
+First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute before a `DELETE` operation:
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function_name()
@@ -85,7 +85,7 @@ Output:
 (3 rows)
 ```
 
-Then, create a `BEFORE DELETE` trigger function that [raises an exception](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/):
+Then, create a `BEFORE DELETE` trigger function that [raises an exception](/docs/postgresql/postgresql-plpgsql/postgresql-exception):
 
 ```
 CREATE OR REPLACE FUNCTION fn_before_delete_product()

@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Listing users using the psql tool
 
-First, [connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) using the `postgres` user:
+First, [connect to the PostgreSQL database server](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) using the `postgres` user:
 
 ```
 psql -U postgres

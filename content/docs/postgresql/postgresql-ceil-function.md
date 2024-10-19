@@ -46,7 +46,7 @@ The result is:
 (1 row)
 ```
 
-Let's take the `customer` and `payment` tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+Let's take the `customer` and `payment` tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png)
 

@@ -36,7 +36,7 @@ The main purpose of column aliases is to make the headings of the output of a qu
 
 ### PostgreSQL column alias examples
 
-We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) to show you how to work with column aliases.
+We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) to show you how to work with column aliases.
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png)
 

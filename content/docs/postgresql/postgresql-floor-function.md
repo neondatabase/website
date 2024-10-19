@@ -44,7 +44,7 @@ The result is:
 150
 ```
 
-See the following `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+See the following `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 

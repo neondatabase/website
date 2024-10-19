@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Using the PostgreSQL ALTER ROLE to modify attributes of roles
 
-To change attributes of a [role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/), you use the following form of `ALTER ROLE` statement.
+To change attributes of a [role](/docs/postgresql/postgresql-administration/postgresql-roles), you use the following form of `ALTER ROLE` statement.
 
 Here's the basic syntax of the
 
@@ -50,7 +50,7 @@ The following rules are applied:
 
 First, log in to PostgreSQL server using the `postgres` role.
 
-Second, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) called `calf` using the `CREATE ROLE` statement:
+Second, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) called `calf` using the `CREATE ROLE` statement:
 
 ```
 create role calf login password 'securePwd1';

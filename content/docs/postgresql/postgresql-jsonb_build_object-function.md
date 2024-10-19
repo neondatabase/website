@@ -51,7 +51,7 @@ Output:
 
 ### 2) Using jonb_build_object() function with table data example
 
-The following example uses the `jsonb_build_object()` function to create a JSON object based on the title and length of films in the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+The following example uses the `jsonb_build_object()` function to create a JSON object based on the title and length of films in the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ```
 SELECT

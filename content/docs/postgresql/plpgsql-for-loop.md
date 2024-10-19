@@ -161,7 +161,7 @@ The following block shows how to use the `for` loop statement to loop through a 
 -
 - `rec_count`: is the number of rows to query from the `film` table. We'll use it in the `using` clause of the `for` loop.
 
-This [anonymous block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) composes the query based on the `sort_type` variable and uses the for loop to iterate over the row of the result set.
+This [anonymous block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure) composes the query based on the `sort_type` variable and uses the for loop to iterate over the row of the result set.
 
 ```
 do $$

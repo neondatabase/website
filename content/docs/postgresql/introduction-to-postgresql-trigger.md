@@ -10,9 +10,9 @@ tableOfContents: true
 
 ## What are PostgreSQL triggers
 
-A PostgreSQL trigger is a [function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) invoked automatically whenever an event associated with a table occurs. An event could be any of the following: [INSERT](/docs/postgresql/postgresql-insert/ "PostgreSQL INSERT"), [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/ "PostgreSQL UPDATE"), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/ "PostgreSQL DELETE")or [TRUNCATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table "PostgreSQL TRUNCATE TABLE").
+A PostgreSQL trigger is a [function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) invoked automatically whenever an event associated with a table occurs. An event could be any of the following: [INSERT](/docs/postgresql/postgresql-insert/ "PostgreSQL INSERT"), [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/ "PostgreSQL UPDATE"), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/ "PostgreSQL DELETE")or [TRUNCATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table "PostgreSQL TRUNCATE TABLE").
 
-A trigger is a special [user-defined function](https://www.postgresqltutorial.com/postgresql-stored-procedures/) associated with a table. To create a new trigger, you define a trigger function first, and then bind this trigger function to a table.
+A trigger is a special [user-defined function](/docs/postgresql/postgresql-stored-procedures) associated with a table. To create a new trigger, you define a trigger function first, and then bind this trigger function to a table.
 
 The difference between a trigger and a user-defined function is that a trigger is automatically invoked when a triggering event occurs.
 
@@ -44,7 +44,7 @@ Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some 
 
 - PostgreSQL fires trigger for the `TRUNCATE` event.
 -
-- PostgreSQL allows you to define the statement-level trigger on [views](https://www.postgresqltutorial.com/postgresql-views/).
+- PostgreSQL allows you to define the statement-level trigger on [views](/docs/postgresql/postgresql-views).
 -
 - PostgreSQL requires you to define a user-defined function as the action of the trigger, while the SQL standard allows you to use any SQL commands.
 

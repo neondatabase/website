@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL TIMEOFDAY() function
 
-The `TIMEOFDAY()` function returns the [current date and time](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/) as a formatted string.
+The `TIMEOFDAY()` function returns the [current date and time](/docs/postgresql/postgresql-date-functions/postgresql-current_timestamp) as a formatted string.
 
 Here's the syntax of the `TIMEOFDAY()` function:
 

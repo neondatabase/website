@@ -46,7 +46,7 @@ Output:
 
 ### 2) Using PostgreSQL jsonb_build_array() function with table data
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

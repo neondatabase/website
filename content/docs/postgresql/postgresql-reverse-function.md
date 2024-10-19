@@ -49,7 +49,7 @@ Output:
 
 ### 2) Using the PostgreSQL REVERSE() function with table data
 
-We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/customer.png)
 

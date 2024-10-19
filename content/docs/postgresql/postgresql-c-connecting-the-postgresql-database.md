@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Create a sample database
 
-First, open a terminal and [connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/):
+First, open a terminal and [connect to the PostgreSQL database server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database):
 
 ```
 psql -U postgres
@@ -39,7 +39,7 @@ CREATE ROLE ed WITH LOGIN PASSWORD 'YourPassword';
 
 Note that you need to replace the `YourPassword` with your actual password and keep it for setting up the connection string later.
 
-Fifth, [grant all privileges](https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/) of the `elearning` database to the `ed` user:
+Fifth, [grant all privileges](/docs/postgresql/postgresql-administration/postgresql-grant) of the `elearning` database to the `ed` user:
 
 ```
 GRANT ALL PRIVILEGES ON SCHEMA public

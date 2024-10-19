@@ -55,7 +55,7 @@ ON table_name USING HASH (indexed_column);
 
 GIN stands for **g**eneralized **in**verted indexes. It is commonly referred to as GIN.
 
-GIN indexes are most useful when you have multiple values stored in a single column, for example, [hstore](/docs/postgresql/postgresql-hstore/), [array](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array), jsonb, and range types.
+GIN indexes are most useful when you have multiple values stored in a single column, for example, [hstore](/docs/postgresql/postgresql-hstore), [array](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array), jsonb, and range types.
 
 ## BRIN
 

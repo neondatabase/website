@@ -9,18 +9,18 @@ This page shows how to manipulate data in a PostgreSQL database from C# applicat
 
 This section helps you get started by showing you how to install the PostgreSQL driver for ADO.NET, connect to a PostgreSQL database, and create new tables
 
-- [Connecting to a PostgreSQL database](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/) - Learn how to install a Npgsql .NET Data provider and connect to a PostgreSQL database from a C# program.
+- [Connecting to a PostgreSQL database](/docs/postgresql/postgresql-csharp/postgresql-csharp-connect) - Learn how to install a Npgsql .NET Data provider and connect to a PostgreSQL database from a C# program.
 - [Creating new tables](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-create-table/) - Show how to create new tables in a PostgreSQL database from a C# program.
 
 ## Section 2. Performing Common Database Operations
 
 This section shows you how to perform common database operations such as inserting, updating, deleting, and retrieving data.
 
-- [Inserting data into a table](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-insert/) - Learn how to insert a new row into a table in a PostgreSQL database from a C# program.
+- [Inserting data into a table](/docs/postgresql/postgresql-csharp/postgresql-csharp-insert) - Learn how to insert a new row into a table in a PostgreSQL database from a C# program.
 - [Import a CSV file into a table](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-import-csv-file/) - Show you how to load data from a CSV file into a table in a PostgreSQL database using ADO.NET.
 - [Updating data](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-update/) - Show you how to update data in a table in a PostgreSQL database from a C# program.
 - [Deleting data](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/) - Discuss how to delete data from a table in a PostgreSQL database from a C# program.
-- [Querying data](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-select/) - Show you how to query one or more rows from a table in a PostgreSQL database from a C# program.
+- [Querying data](/docs/postgresql/postgresql-csharp/postgresql-csharp-select) - Show you how to query one or more rows from a table in a PostgreSQL database from a C# program.
 
 ## Section 3. Transactions
 

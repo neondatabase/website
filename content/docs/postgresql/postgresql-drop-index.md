@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL DROP INDEX statement
 
-Sometimes, you may want to remove an existing [index](https://www.postgresqltutorial.com/postgresql-indexes/) from the database system. To do it, you use the `DROP INDEX` statement as follows:
+Sometimes, you may want to remove an existing [index](/docs/postgresql/postgresql-indexes) from the database system. To do it, you use the `DROP INDEX` statement as follows:
 
 ```
 DROP INDEX  [ CONCURRENTLY] [ IF EXISTS ]  index_name
@@ -56,7 +56,7 @@ The `DROP INDEX CONCURRENTLY` has some limitations:
 
 ## PostgreSQL DROP INDEX example
 
-We will use the `actor` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the `actor` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![actor](/postgresqltutorial_data/wp-content-uploads-2018-12-actor.png)
 

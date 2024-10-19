@@ -20,7 +20,7 @@ CLOCK_TIMESTAMP()
 
 The `CLOCK_TIMESTAMP()` function has no parameters.
 
-The `CLOCK_TIMESTAMP()` function returns the current date and time as a [timestamp with a timezone](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/).
+The `CLOCK_TIMESTAMP()` function returns the current date and time as a [timestamp with a timezone](/docs/postgresql/postgresql-date-functions/postgresql-current_timestamp).
 
 When you call the `CLOCK_TIMESTAMP()` function multiple times within a statement, you'll get different results.
 
@@ -75,7 +75,7 @@ The output shows that the `CLOCK_TIMESTAMP()` function returns the actual date a
 
 ### 3) Using the CLOCK_TIMESTAMP() function to measure the execution time of a statement
 
-First, [define a new function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) called `time_it` to measure the execution time of a statement:
+First, [define a new function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) called `time_it` to measure the execution time of a statement:
 
 ```
 CREATE OR REPLACE FUNCTION time_it(

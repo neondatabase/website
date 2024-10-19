@@ -11,7 +11,7 @@ tableOfContents: true
 Before going forward with this tutorial, you need to have:
 
 - A PostgreSQL database server.
-- A [PostgreSQL sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) called `dvdrental`.
+- A [PostgreSQL sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) called `dvdrental`.
 
 ## Load the sample database using the psql & pg_restore tool
 
@@ -39,7 +39,7 @@ It'll prompt you to enter a password for the `postgres` user:
 Password for user postgres:
 ```
 
-The password for the `postgres` user is the one you entered during the [PostgreSQL installation](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/).
+The password for the `postgres` user is the one you entered during the [PostgreSQL installation](/docs/postgresql/postgresql-getting-started/install-postgresql).
 
 After entering the password correctly, you will be connected to the PostgreSQL server.
 
@@ -171,7 +171,7 @@ Output:
 
 pgAdmin is a web-based graphic user interface (GUI) for interacting with the PostgreSQL server.
 
-The following shows you step-by-step how to use the pgAdmin to restore the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) from the database file:
+The following shows you step-by-step how to use the pgAdmin to restore the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) from the database file:
 
 First, launch the **pgAdmin** tool and [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
 

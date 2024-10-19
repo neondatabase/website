@@ -41,7 +41,7 @@ Stop the PostgreSQL service using the following command:
 net stop postgresql-x64-<version>
 ```
 
-You need to replace `<version>` with your [PostgreSQL version](https://www.postgresqltutorial.com/postgresql-administration/postgresql-version/) number. For example:
+You need to replace `<version>` with your [PostgreSQL version](/docs/postgresql/postgresql-administration/postgresql-version) number. For example:
 
 ```
 net stop postgresql-x64-16

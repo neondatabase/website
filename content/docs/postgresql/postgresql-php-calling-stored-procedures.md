@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Calling a stored procedure that returns one value
 
-Let’s create a simple [stored procedure](https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/) named `add()` that returns the product of two integers using plpgsql.
+Let’s create a simple [stored procedure](/docs/postgresql/postgresql-php/call-stored-procedures) named `add()` that returns the product of two integers using plpgsql.
 
 ```
 CREATE OR REPLACE FUNCTION add(
@@ -115,7 +115,7 @@ END; $$
 LANGUAGE plpgsql;
 ```
 
-The steps of calling a stored procedure that returns a result set are the same as the steps of [querying data](https://www.postgresqltutorial.com/postgresql-php/query/).
+The steps of calling a stored procedure that returns a result set are the same as the steps of [querying data](/docs/postgresql/postgresql-php/query).
 
 The following `getAccounts()` method demonstrates how to call the `get_accounts()` stored procedure in PHP.
 

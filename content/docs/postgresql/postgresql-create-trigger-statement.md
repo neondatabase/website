@@ -15,7 +15,7 @@ To create a new trigger in PostgreSQL, you follow these steps:
 -
 - Second, bind the trigger function to a table by using `CREATE TRIGGER` statement.
 
-If you are not familiar with creating a user-defined function, you can check out the [PL/pgSQL section](https://www.postgresqltutorial.com/postgresql-stored-procedures/ "PostgreSQL Stored Procedures").
+If you are not familiar with creating a user-defined function, you can check out the [PL/pgSQL section](/docs/postgresql/postgresql-stored-procedures).
 
 ## Create trigger function syntax
 

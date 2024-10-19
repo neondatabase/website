@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL tablespace
 
-A tablespace is a disk location where PostgreSQL stores data files containing database objects such as [indexes](https://www.postgresqltutorial.com/postgresql-indexes/) and tables.
+A tablespace is a disk location where PostgreSQL stores data files containing database objects such as [indexes](/docs/postgresql/postgresql-indexes) and tables.
 
 PostgreSQL uses a tablespace to associate a logical name to a physical location on the disk.
 
@@ -99,7 +99,7 @@ TABLESPACE ts_primary;
 
 In this statement, we specify the tablespace `ts_primary` for the `logistics` database.
 
-The following statement [creates a new table](/docs/postgresql/postgresql-create-table/) called `deliveries` and [inserts](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert)a row into the table:
+The following statement [creates a new table](/docs/postgresql/postgresql-create-table) called `deliveries` and [inserts](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert)a row into the table:
 
 ```
 CREATE TABLE deliveries (

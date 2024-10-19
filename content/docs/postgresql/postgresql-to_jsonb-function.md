@@ -146,7 +146,7 @@ Output:
 
 ### 6) Using the to_jsonb() function with table data
 
-We'll use the `to_jsonb()` function to convert data in the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) to `JSONB` values:
+We'll use the `to_jsonb()` function to convert data in the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) to `JSONB` values:
 
 ```
 SELECT

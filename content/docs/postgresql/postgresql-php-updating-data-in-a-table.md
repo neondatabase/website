@@ -13,7 +13,7 @@ tableOfContents: true
 
 To update data in a table, you use these steps:
 
-1. [Connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating an instance of the PDO class.
+1. [Connect to the PostgreSQL database server](/docs/postgresql/postgresql-php/connect) by creating an instance of the PDO class.
 2. Call the `prepare()` method of the PDO object to prepare the [UPDATE](/docs/postgresql/postgresql-update) statement for execution. The `prepare()` method returns a `PDOStatement` object.
 3. Pass the values to the `UPDATE` statement by calling the `bindValue()` method of the `PDOStatement` object.
 4. Execute the `UPDATE` statement by calling the `execute()` method of the `PDOStatement` object.
@@ -21,7 +21,7 @@ To update data in a table, you use these steps:
 
 ## Updating data example
 
-We will use the `stocks` table that we created in the [creating table tutorial](https://www.postgresqltutorial.com/postgresql-php/create-tables/) for the demonstration.
+We will use the `stocks` table that we created in the [creating table tutorial](/docs/postgresql/postgresql-php/create-tables) for the demonstration.
 
 The `updateStock()` method of the `PostgreSQLPHPUpdate` class updates the data in the `stocks` table based on a specified id.
 

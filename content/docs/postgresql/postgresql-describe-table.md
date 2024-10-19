@@ -13,7 +13,7 @@ PostgreSQL does not support the `DESCRIBE`statement. However, you can query the 
 
 ## 1) PostgreSQL DESCRIBE TABLE using psql
 
-First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using the `psql` tool:
+First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using the `psql` tool:
 
 ```
 psql -U postgres
@@ -68,7 +68,7 @@ Triggers:
     last_updated BEFORE UPDATE ON film FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-The command returns a lot of information on the structure of the `film` table. Additionally, it returns [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), and [triggers](https://www.postgresqltutorial.com/postgresql-triggers).
+The command returns a lot of information on the structure of the `film` table. Additionally, it returns [indexes](/docs/postgresql/postgresql-indexes), [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), and [triggers](https://www.postgresqltutorial.com/postgresql-triggers).
 
 ## 2) PostgreSQL DESCRIBE TABLE using information_schema
 

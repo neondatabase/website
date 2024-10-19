@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Getting PostgreSQL table sizes
 
-To get the size of a specific table, you use the `pg_relation_size()` function. For example, you can get the size of the `actor` table in the `dvdrental` [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) as follows:
+To get the size of a specific table, you use the `pg_relation_size()` function. For example, you can get the size of the `actor` table in the `dvdrental` [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) as follows:
 
 ```
 select pg_relation_size('actor');

@@ -47,7 +47,7 @@ To quit the psql:
 \q
 ```
 
-[List all databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/) in the PostgreSQL database server
+[List all databases](/docs/postgresql/postgresql-administration/postgresql-show-databases) in the PostgreSQL database server
 
 ```
 \l
@@ -107,7 +107,7 @@ List all users:
 \du
 ```
 
-Create a new [role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/):
+Create a new [role](/docs/postgresql/postgresql-administration/postgresql-roles):
 
 ```
 CREATE ROLE role_name;
@@ -221,7 +221,7 @@ CREATE OR REPLACE view_name AS
 query;
 ```
 
-[Create a recursive view](https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/):
+[Create a recursive view](/docs/postgresql/postgresql-views/postgresql-recursive-view):
 
 ```
 CREATE RECURSIVE VIEW view_name(column_list) AS

@@ -54,7 +54,7 @@ In this example, the `REPEAT()` function returns a string `"AAA"` that repeats t
 
 ### 2) Using the REPEAT() function to draw a bar chart
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![PostgreSQL REPEAT() Function - Sample Table](https://www.mysqltutorial.org/wp-content/uploads/2023/10/products.svg)
 

@@ -61,7 +61,7 @@ Output:
 
 ### 2) Using the RPAD() function with the table data example
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

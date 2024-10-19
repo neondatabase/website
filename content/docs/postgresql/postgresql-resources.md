@@ -22,7 +22,7 @@ tableOfContents: true
 ## SQL tutorial websites
 
 - [MySQL Tutorial](http://www.mysqltutorial.org/ "MySQL Tutorial") - Learn MySQL fast, easy and fun.
-- [SQLite Tutorial](https:/www.sqlitetutorial.net "Db2 Tutorial") - Provides a good starting point for getting started with SQLite.
+- [SQLite Tutorial](https:/www.sqlitetutorial.net) - Provides a good starting point for getting started with SQLite.
 - [SQL Tutorial](http://www.sqltutorial.org/ "SQL Tutorial") - Essential SQL tutorial for beginners using extensive hands-on online.
 - [SQL Server Tutorial](http://www.sqlservertutorial.net/ "SQL Server Tutorial") - Master SQL Server fast and easily.
 - [Oracle Tutorial](http://www.oracletutorial.com/ "Oracle Tutorial") - Learn Oracle Database quickly.

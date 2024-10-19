@@ -13,7 +13,7 @@ We will call a built-in string function `initcap()` that capitalizes the first l
 
 To call the `initcap()` function, you follow these steps:
 
-- First, [establish a database connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/).
+- First, [establish a database connection](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database).
 - Second, create a `CallableStatement` object by calling the `prepareCall()` method of the `Connection` object.
 - Register `OUT` parameters if applicable.
 - Bind values to the statement if applicable.

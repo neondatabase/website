@@ -34,7 +34,7 @@ In this syntax:
 - Then, list out parameters surrounded by parentheses after the function name. A function can have zero or more parameters.
 - Next, define the datatype of the returned value after the `returns` keyword.
 - After that, use the `language plpgsql` to define the procedural language of the function. Note that PostgreSQL supports many languages including `plpgsql`.
-- Finally, place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) in the [dollar-quoted string constant](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) to define the function body.
+- Finally, place a [block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure) in the [dollar-quoted string constant](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) to define the function body.
 
 ## PostgreSQL Create Function statement examples
 
@@ -83,7 +83,7 @@ In the header section:
 
 In the function body:
 
-- Use the [dollar-quoted string constant syntax](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) that starts with `$$` and ends with `$$`. Between these `$$`, you can place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) containing the declaration and logic of the function.
+- Use the [dollar-quoted string constant syntax](/docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants) that starts with `$$` and ends with `$$`. Between these `$$`, you can place a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) containing the declaration and logic of the function.
 - In the declaration section, declare a variable `film_count` that stores the number of films from the `film` table.
 - In the body of the block, use the `select into` statement to select the number of films whose lengths are between `len_from` and `len_to` and assign it to the `film_count` variable. At the end of the block, use the `return` statement to return the `film_count`.
 

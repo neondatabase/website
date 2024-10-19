@@ -12,7 +12,7 @@ tableOfContents: true
 
 In PostgreSQL, a `CHECK` constraint ensures that values in a column or a group of columns meet a specific condition.
 
-A check constraint allows you to enforce data integrity rules at the database level. A check constraint uses a boolean expression to evaluate the values, ensuring that only valid data is [inserted](/docs/postgresql/postgresql-insert/) or [updated](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) in a table.
+A check constraint allows you to enforce data integrity rules at the database level. A check constraint uses a boolean expression to evaluate the values, ensuring that only valid data is [inserted](/docs/postgresql/postgresql-insert) or [updated](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) in a table.
 
 ### Creating CHECK constraints
 

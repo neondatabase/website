@@ -7,7 +7,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C# program.
 
-This tutorial begins where [Deleting data from PostgreSQL using C#](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/) is left off.
+This tutorial begins where [Deleting data from PostgreSQL using C#](/docs/postgresql/postgresql-csharp/postgresql-csharp-delete) is left off.
 
 ## How to query data from PostgreSQL using C
 
@@ -20,7 +20,7 @@ Second, create a command object `NpgsqlCommand` with a `SELECT` statement from t
 Third, execute the `SELECT` statement by calling one of the following methods of the `NpgsqlCommand` object:
 
 - `ExecuteReaderAsync()` - executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
-- `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
+- `ExecuteScalarAsync()` - executes a query that returns a scalar value such as a query that uses an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) to return a [count](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/), [sum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/), [maximum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/), [minimum](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/), and [average value](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/).
 
 Finally, iterate over the result set and use the Get\* methods of the NpgsqlDataReader object to retrieve the values of columns in each row.
 
@@ -147,7 +147,7 @@ Benjamin        5/10/2024
 
 ## Querying a scalar value
 
-The following program shows how to select the total number of students from the `students` table using the [count(\*)](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/) aggregate function:
+The following program shows how to select the total number of students from the `students` table using the [count(\*)](/docs/postgresql/postgresql-aggregate-functions/postgresql-count-function) aggregate function:
 
 ```
 using Npgsql;

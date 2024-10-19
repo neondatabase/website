@@ -152,7 +152,7 @@ Output:
 
 ### 2) Using the AND operator in the WHERE clause
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

@@ -94,7 +94,7 @@ end;'
 ;
 ```
 
-Note that you will learn about the anonymous block in the [PL/pgSQL block structure](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) tutorial. In this tutorial, you can copy and paste the code in any PostgreSQL client tool like pgAdmin or psql to execute it.
+Note that you will learn about the anonymous block in the [PL/pgSQL block structure](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure) tutorial. In this tutorial, you can copy and paste the code in any PostgreSQL client tool like pgAdmin or psql to execute it.
 
 Output:
 

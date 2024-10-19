@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL AVG() function
 
-The `AVG()` function is one of the most commonly used [aggregate functions](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) in PostgreSQL. The `AVG()` function allows you to calculate the average value of a set.
+The `AVG()` function is one of the most commonly used [aggregate functions](/docs/postgresql/postgresql-aggregate-functions) in PostgreSQL. The `AVG()` function allows you to calculate the average value of a set.
 
 Here is the syntax of the `AVG()` function:
 
@@ -33,7 +33,7 @@ Notice that the `AVG()` function ignores `NULL`. If the column has no values, th
 
 Let's take a look at some examples of using the `AVG` function.
 
-We will use the following `payment` table in the [dvdrental sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database") for demonstration:
+We will use the following `payment` table in the [dvdrental sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for demonstration:
 
 ![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 

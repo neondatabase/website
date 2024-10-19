@@ -99,7 +99,7 @@ You can change the second argument to round a number to specific decimal places.
 
 ### 3) Rounding data from table examples
 
-We will use the following `payment` and `customer` tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the following `payment` and `customer` tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png)
 

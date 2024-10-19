@@ -26,7 +26,7 @@ In this syntax, PostgreSQL evaluates the `condition` before executing the `state
 
 If the condition is true, it executes the `statements`. After each iteration, the `while` loop evaluates the `codition` again.
 
-Inside the body of the `while` loop, you need to change the some [variables](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/) to make the `condition` `false` or `null` at some points. Otherwise, you will have an indefinite loop.
+Inside the body of the `while` loop, you need to change the some [variables](/docs/postgresql/postgresql-plpgsql/plpgsql-variables) to make the `condition` `false` or `null` at some points. Otherwise, you will have an indefinite loop.
 
 Because the `while` loop tests the `condition` before executing the `statements`, it is often referred to as a **pretest loop**.
 

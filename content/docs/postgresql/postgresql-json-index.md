@@ -75,7 +75,7 @@ This index can improve the queries that involve searching values within the `fie
 
 ## PostgreSQL JSON index examples
 
-We'll use the tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+We'll use the tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ### 1) Setting up a sample table
 
@@ -218,7 +218,7 @@ This time, the execution time is significantly smaller `0.045ms` vs. `0.128` ms,
 
 ### 3) Creating an index on the JSONB column with the GIN operator class
 
-First, [drop](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/) the `customer_json_index` index:
+First, [drop](/docs/postgresql/postgresql-indexes/postgresql-drop-index) the `customer_json_index` index:
 
 ```
 DROP INDEX customer_json_index;

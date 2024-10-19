@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL ALTER SCHEMA statement
 
-The `ALTER SCHEMA` statement allows you to change the definition of a [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/). For example, you can rename a schema as follows:
+The `ALTER SCHEMA` statement allows you to change the definition of a [schema](/docs/postgresql/postgresql-administration/postgresql-schema). For example, you can rename a schema as follows:
 
 ```
 ALTER SCHEMA schema_name

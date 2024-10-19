@@ -69,7 +69,7 @@ Output:
 
 ### 2) Using the PostgreSQL LENGTH() function with table data example
 
-We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 

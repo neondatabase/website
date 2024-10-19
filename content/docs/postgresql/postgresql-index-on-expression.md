@@ -11,7 +11,7 @@ tableOfContents: true
 
 In PostgreSQL, indexes play an important role in optimizing query performance.
 
-Typically, you [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) that references one or more columns of a table.
+Typically, you [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) that references one or more columns of a table.
 
 PostgreSQL also allows you to create an index based on an expression involving table columns. This type of index is called an**index on expression**.
 
@@ -31,7 +31,7 @@ In this statement:
 
 After defining an index expression, PostgreSQL will consider using that index when the expression appears in the `WHERE` clause or in the `ORDER BY` clause of the SQL statement.
 
-Note that maintaining indexes on expressions can incur additional costs. PostgreSQL evaluates the expression for each row during [insertion](/docs/postgresql/postgresql-insert/) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) and utilizes the result for building the index.
+Note that maintaining indexes on expressions can incur additional costs. PostgreSQL evaluates the expression for each row during [insertion](/docs/postgresql/postgresql-insert) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) and utilizes the result for building the index.
 
 Therefore, it's recommended to use the indexes on expressions when prioritizing retrieval speed over insertion and update speed.
 

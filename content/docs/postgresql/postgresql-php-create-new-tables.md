@@ -12,7 +12,7 @@ tableOfContents: true
 
 To create new tables in a PostgreSQL database using PHP PDO, you follow these steps:
 
-1. First, [connect to the database](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new PDO object.
+1. First, [connect to the database](/docs/postgresql/postgresql-php/connect) by creating a new PDO object.
 2. Second, call the `exec()` method of the PDO object to execute the [CREATE TABLE](/docs/postgresql/postgresql-create-table) statement.
 
 Let's look at an example of creating new tables.

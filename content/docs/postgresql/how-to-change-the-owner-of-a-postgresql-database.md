@@ -23,7 +23,7 @@ In this syntax:
 
 ## Changing database owner example
 
-First, [connect to the PostgreSQL](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `postgres` user via `psql`:
+First, [connect to the PostgreSQL](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using `postgres` user via `psql`:
 
 ```
 psql -U postgres

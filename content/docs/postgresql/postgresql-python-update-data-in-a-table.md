@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to update data in a PostgreSQL table from a Python program.
 
-This tutorial picks up from where the [Inserting Data Into Table Tutorial](https://www.postgresqltutorial.com/postgresql-python/insert/) left off.
+This tutorial picks up from where the [Inserting Data Into Table Tutorial](/docs/postgresql/postgresql-python/insert) left off.
 
 ## Steps for updating data in a PostgreSQL table from Python
 

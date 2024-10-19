@@ -29,7 +29,7 @@ Let's get started programming with PL/pgSQL.
 
 - [Introduction to PostgreSQL PL/pgSQL](https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/) - introduce you to PostgreSQL PL/pgSQL and explain to you their advantages and disadvantages.
 -
-- [Dollar-quoted string constants](https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/) - learn how to use dollar-quoted string constant syntax.
+- [Dollar-quoted string constants](/docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants) - learn how to use dollar-quoted string constant syntax.
 -
 - [Block Structure](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/) - introduce you to the PL/pgSQL block structure and show you how to develop and execute anonymous blocks.
 
@@ -43,7 +43,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [Record type variables](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/) - show you how to declare record variables to hold a single row of a result set.
 -
-- [Constants](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/) - guide you on how to use constants to make the code more readable and easier to maintain.
+- [Constants](/docs/postgresql/postgresql-plpgsql/plpgsql-constants) - guide you on how to use constants to make the code more readable and easier to maintain.
 
 ## Section 3. Reporting messages and errors
 
@@ -61,7 +61,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [While loop](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-while-loop/) - learn how to use `while` loop statement to create a pre-test loop.
 -
-- [For loop](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/) - show you how to use the `for` loop statement to iterate over rows of a result set.
+- [For loop](/docs/postgresql/postgresql-plpgsql/plpgsql-for-loop) - show you how to use the `for` loop statement to iterate over rows of a result set.
 -
 - [Exit](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/) - guide you on using the `exit` statement to terminate a loop.
 -
@@ -79,7 +79,7 @@ Let's get started programming with PL/pgSQL.
 -
 - [Functions that return one or more rows](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns-setof/) - learn how to define a function that returns one or more rows.
 -
-- [Drop function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/) - learn how to remove an existing function.
+- [Drop function](/docs/postgresql/postgresql-plpgsql/postgresql-drop-function) - learn how to remove an existing function.
 
 ## Section 6. Exception handling
 

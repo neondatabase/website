@@ -32,7 +32,7 @@ Additionally, you can access the following variables:
 
 To create a `AFTER UPDATE` trigger, you use the following steps:
 
-First, [define a trigger function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when the `AFTER UPDATE` trigger fires:
+First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the `AFTER UPDATE` trigger fires:
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function()

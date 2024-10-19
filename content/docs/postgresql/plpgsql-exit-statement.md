@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to the PL/pgSQL exit statement
 
-The `exit` statement allows you to prematurely terminate a loop including an unconditional [loop](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/), a [while loop](https://www.postgresqltutorial.com/plpgsql-while-loop/), and a [for loop](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
+The `exit` statement allows you to prematurely terminate a loop including an unconditional [loop](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements), a [while loop](https://www.postgresqltutorial.com/plpgsql-while-loop/), and a [for loop](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
 
 The following shows the syntax of the `exit` statement:
 

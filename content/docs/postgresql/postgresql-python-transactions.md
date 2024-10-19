@@ -9,7 +9,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions in Python.
 
-This tutorial picks up from where the [Updating Data in a Table Tutorial](https://www.postgresqltutorial.com/postgresql-python/update/) left off.
+This tutorial picks up from where the [Updating Data in a Table Tutorial](/docs/postgresql/postgresql-python/update) left off.
 
 ## Introduction to transactions in Python
 
@@ -39,7 +39,7 @@ del conn
 
 Alternatively, you can set the `autocommit` attribute of the `connection` object to `True`. This ensures that `psycopg2` executes every statement and commits it immediately.
 
-The `autocommit` mode can be particularly useful when executing statements that need to operate outside a transaction, such as [CREATE DATABASE](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/) and `VACUUM`.
+The `autocommit` mode can be particularly useful when executing statements that need to operate outside a transaction, such as [CREATE DATABASE](/docs/postgresql/postgresql-administration/postgresql-create-database) and `VACUUM`.
 
 The following shows a typical pattern for managing a transaction in `psycopg2`:
 

@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL WITH CHECK OPTION clause
 
-In PostgreSQL, a view is a named query stored in the PostgreSQL database server. A simple [view can be updatable](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/).
+In PostgreSQL, a view is a named query stored in the PostgreSQL database server. A simple [view can be updatable](/docs/postgresql/postgresql-views/postgresql-updatable-views).
 
 To ensure that any data modification made through a view adheres to certain conditions in the view's definition, you use the `WITH CHECK OPTION` clause.
 
@@ -48,7 +48,7 @@ query
 WITH CASCADED CHECK OPTION;
 ```
 
-To change the scope of check for an existing view, you can use the [ALTER VIEW](https://www.postgresqltutorial.com/postgresql-views/postgresql-alter-view/) statement.
+To change the scope of check for an existing view, you can use the [ALTER VIEW](/docs/postgresql/postgresql-views/postgresql-alter-view) statement.
 
 ## PostgreSQL WITH CHECK OPTION examples
 
@@ -150,7 +150,7 @@ WHERE
 WITH CHECK OPTION;
 ```
 
-After adding the `WITH CHECK OPTION`, you perform insert, [update](/docs/postgresql/postgresql-update/), and [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
+After adding the `WITH CHECK OPTION`, you perform insert, [update](/docs/postgresql/postgresql-update), and [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
 
 For example, the following `INSERT` statement will fail with an error:
 

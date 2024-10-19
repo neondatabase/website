@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL INTERSECT operator
 
-Like the [UNION](/docs/postgresql/postgresql-union/) and [EXCEPT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both results sets.
+Like the [UNION](/docs/postgresql/postgresql-union) and [EXCEPT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both results sets.
 
 Here is the basic syntax of the `INTERSECT` operator:
 

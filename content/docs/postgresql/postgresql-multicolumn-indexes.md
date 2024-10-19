@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL multicolumn indexes
 
-When you [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on two or more columns within a table, this type of index is called a multicolumn index.
+When you [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) on two or more columns within a table, this type of index is called a multicolumn index.
 
 A multicolumn index is often referred to as a composite index, a combined index, or a concatenated index.
 

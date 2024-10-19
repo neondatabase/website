@@ -25,7 +25,7 @@ In this syntax:
 - Second, provide the name of the table along with a list of indexed columns in the ON clause.
 - Third, the `NULL NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
 
-PostgreSQL offers [multiple index types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/), but only the B-tree index type supports unique indexes.
+PostgreSQL offers [multiple index types](/docs/postgresql/postgresql-indexes/postgresql-index-types), but only the B-tree index type supports unique indexes.
 
 When you define a unique index for a column, the column cannot store multiple rows with the same values.
 

@@ -30,7 +30,7 @@ When you define a column with an enum type, you specify that the column can only
 column_name enum_type
 ```
 
-If you attempt to [insert](/docs/postgresql/postgresql-insert/) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) a row with a value not in the list, PostgreSQL will issue an error.
+If you attempt to [insert](/docs/postgresql/postgresql-insert) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) a row with a value not in the list, PostgreSQL will issue an error.
 
 The ordering of values in an enum is the order in which you list them when you define the enum.
 

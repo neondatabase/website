@@ -11,7 +11,7 @@ tableOfContents: true
 
 A `TRUNCATE TABLE` statement removes all from a table without creating any logs, making it faster than a `DELETE` operation.
 
-PostgreSQL allows you to [create a trigger](https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/) that fires before a `TRUNCATE` event occurs.
+PostgreSQL allows you to [create a trigger](/docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql) that fires before a `TRUNCATE` event occurs.
 
 A `BEFORE TRUNCATE` trigger is a statement-level trigger because the `TRUNCATE` statement deletes all the rows from the table, not individual rows.
 

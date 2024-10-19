@@ -17,7 +17,7 @@ A correlated subquery can be useful when you need to perform a query that depend
 
 ## PostgreSQL correlated subquery example
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/film.png)
 
@@ -59,7 +59,7 @@ For each row processed by the outer query, the correlated subquery calculates th
 
 The `WHERE` clause (`WHERE length > (...)`) checks if the length of the current film is greater than the average.
 
-The correlated subquery calculates the [average](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/) length for films with the same rating as the current row in the outer query:
+The correlated subquery calculates the [average](/docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function) length for films with the same rating as the current row in the outer query:
 
 ```
 SELECT AVG(length)

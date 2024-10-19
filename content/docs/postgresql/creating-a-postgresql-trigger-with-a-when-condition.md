@@ -10,7 +10,7 @@ tableOfContents: true
 
 In PostgreSQL, a trigger is a database object that automatically executes a function when `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` event occurs on a table.
 
-Sometimes, you want the trigger to be activated only when a specific condition is met. To do that, you specify a boolean condition in the `WHEN` clause of the [CREATE TRIGGER](https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/) statement, like so:
+Sometimes, you want the trigger to be activated only when a specific condition is met. To do that, you specify a boolean condition in the `WHEN` clause of the [CREATE TRIGGER](/docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql) statement, like so:
 
 ```
 CREATE TRIGGER trigger_name
@@ -45,7 +45,7 @@ CREATE TABLE customer_stats (
 );
 ```
 
-Third, create an [AFTER INSERT trigger](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-insert-trigger/) that inserts a row into the `customer_stats` table when a new row is inserted into the `orders` table:
+Third, create an [AFTER INSERT trigger](/docs/postgresql/postgresql-triggers/postgresql-after-insert-trigger) that inserts a row into the `customer_stats` table when a new row is inserted into the `orders` table:
 
 ```
 CREATE OR REPLACE FUNCTION insert_customer_stats()

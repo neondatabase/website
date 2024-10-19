@@ -9,11 +9,11 @@ The **PostgreSQL administration** covers the most important PostgreSQL database 
 
 In this section, you will learn how to manage databases in PostgreSQL including creating databases, modifying existing database features, and deleting databases.
 
-- [Create Database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/ "PostgreSQL CREATE DATABASE") - create a new database using `CREATE DATABASE` statement.
+- [Create Database](/docs/postgresql/postgresql-administration/postgresql-create-database) - create a new database using `CREATE DATABASE` statement.
 - [Alter Database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/ "PostgreSQL ALTER DATABASE") - modify the features of an existing database using the `ALTER DATABASE` statement.
 - [Rename Database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-rename-database/) - change the name of the database to a new one.
 - [Drop Database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/ "PostgreSQL DROP DATABASE") - remove a database permanently using the `DROP DATABASE` statement.
-- [Copy a Database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-copy-database/) - copy a database within a database server or from one server to another.
+- [Copy a Database](/docs/postgresql/postgresql-administration/postgresql-copy-database) - copy a database within a database server or from one server to another.
 - [Get Database Object Sizes](https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/) - introduce you to various handy functions to get the database size, table, and indexes.
 
 ## Section 2. Managing Schemas
@@ -21,7 +21,7 @@ In this section, you will learn how to manage databases in PostgreSQL including 
 - [Schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) - introduce the schema concept and explain how the schema search path works in PostgreSQL.
 - [Create Schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/) - show you how to create a new schema in a database.
 - [Alter Schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/) - rename a schema or change its owner to the new one.
-- [Drop schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/) - delete one or more schemas with their objects from a database.
+- [Drop schema](/docs/postgresql/postgresql-administration/postgresql-drop-schema) - delete one or more schemas with their objects from a database.
 
 ## Section 3. Managing Tablespaces
 
@@ -35,7 +35,7 @@ PostgreSQL tablespaces allow you to control how data is stored in the file syste
 
 PostgreSQL represents user accounts as roles. Roles that can log in are called login roles or users. Roles that contain other roles are called group roles. In this section, you will learn how to manage roles and groups effectively.
 
-- [Create role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/ "PostgresQL Roles Management") - introduce you to the concept of the role and show you how to create roles and groups.
+- [Create role](/docs/postgresql/postgresql-administration/postgresql-roles) - introduce you to the concept of the role and show you how to create roles and groups.
 - [Grant](https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/) - show you how to grant privileges on database objects to a role.
 - [Revoke](https://www.postgresqltutorial.com/postgresql-administration/postgresql-revoke/) - guide you on revoking granted privileges on database objects from a role.
 - [Alter role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/) - show you how to use the alter role statement to modify the attributes of roles, rename roles, and set the configuration parameters.
@@ -44,7 +44,7 @@ PostgreSQL represents user accounts as roles. Roles that can log in are called l
 - [SET ROLE](https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/) - show you how to temporarily switch the current role to one of its group roles using the SET ROLE statement.
 - [CURRENT_USER](https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/) - discover how to get the currently logged-in user and show you the difference between current_user and session_user.
 - [List roles](https://www.postgresqltutorial.com/postgresql-administration/postgresql-list-users/) - show you how to list all roles on the PostgreSQL server.
-- [Superuser](https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/) - learn about a special role called superuser in PostgreSQL.
+- [Superuser](/docs/postgresql/postgresql-administration/create-superuser-postgresql) - learn about a special role called superuser in PostgreSQL.
 - [Row-level Security](https://www.postgresqltutorial.com/postgresql-administration/postgresql-row-level-security/) - show you how to use row-level security (RLS) to restrict rows returned by a query based on a condition.
 
 ## Section 5. Backup & Restore Databases
@@ -60,4 +60,4 @@ This section shows you how to use various PostgreSQL backup and restore tools in
 - [psql Commands](https://www.postgresqltutorial.com/postgresql-administration/psql-commands/) - give you the most common psql command to help you query data from PostgreSQL faster and more effectively.
 - [Describe Table](https://www.postgresqltutorial.com/postgresql-administration/postgresql-describe-table/) - get information on a particular table.
 - [Show Databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/) - list all databases in the current database server
-- [Show Tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/)- show all tables in the current database.
+- [Show Tables](/docs/postgresql/postgresql-administration/postgresql-show-tables)- show all tables in the current database.

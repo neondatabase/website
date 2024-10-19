@@ -11,7 +11,7 @@ tableOfContents: true
 
 The `continue` statement prematurely skips the current iteration of the loop and starts the next one.
 
-In practice, you can use the `continue` statement within the loops including [unconditional loops,](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/) [while loops](https://www.postgresqltutorial.com/plpgsql-while-loop/), and [for loops](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
+In practice, you can use the `continue` statement within the loops including [unconditional loops,](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) [while loops](https://www.postgresqltutorial.com/plpgsql-while-loop/), and [for loops](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
 
 Here's the syntax of the `continue` statement:
 
@@ -66,7 +66,7 @@ NOTICE:  9
 How it works.
 
 - First, initialize the `counter` to zero.
-- Second, increase the counter by one in each iteration. If the `counter` is greater than 10, then [exit](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/)the loop. If the `counter` is an even number, then skip the current iteration.
+- Second, increase the counter by one in each iteration. If the `counter` is greater than 10, then [exit](/docs/postgresql/postgresql-plpgsql/plpgsql-exit)the loop. If the `counter` is an even number, then skip the current iteration.
 
 The `mod(counter,2)` returns the remainder of the division of the `counter` by two.
 

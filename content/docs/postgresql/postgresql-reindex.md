@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL REINDEX statement
 
-In practice, an [index](https://www.postgresqltutorial.com/postgresql-indexes/) can become corrupted and no longer contain valid data due to hardware failures or software bugs.
+In practice, an [index](/docs/postgresql/postgresql-indexes) can become corrupted and no longer contain valid data due to hardware failures or software bugs.
 
 Additionally, when you create an index without the `CONCURRENTLY` option, the index may become invalid if the index build fails.
 

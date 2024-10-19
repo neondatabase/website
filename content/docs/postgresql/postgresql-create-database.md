@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL CREATE DATABASE statement
 
-In PostgreSQL, a database is a collection of related data, which serves as a container for tables, [indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/), [views](https://www.postgresqltutorial.com/postgresql-views/), and other database objects.
+In PostgreSQL, a database is a collection of related data, which serves as a container for tables, [indexes](/docs/postgresql/postgresql-indexes/postgresql-index-types), [views](https://www.postgresqltutorial.com/postgresql-views/), and other database objects.
 
 To create a new database, you use the `CREATE DATABASE` statement.
 
@@ -41,7 +41,7 @@ In this syntax:
 
 **OWNER**
 
-Assign a [role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) that will be the owner of the database. If you omit the `OWNER` option, the database owner is the role you use to execute the `CREATE DATABASE` statement.
+Assign a [role](/docs/postgresql/postgresql-administration/postgresql-roles) that will be the owner of the database. If you omit the `OWNER` option, the database owner is the role you use to execute the `CREATE DATABASE` statement.
 
 **TEMPLATE**
 
@@ -61,7 +61,7 @@ Specify the character classification that the new database will use. It affects 
 
 **TABLESPACE**
 
-Specify the [tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/)name for the new database. The default is the tablespace of the template database.
+Specify the [tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace)name for the new database. The default is the tablespace of the template database.
 
 **CONNECTION LIMIT**
 

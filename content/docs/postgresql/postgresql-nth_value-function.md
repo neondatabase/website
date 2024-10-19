@@ -48,7 +48,7 @@ The `frame_clause` defines the subset (or the frame) of the current partition.
 
 ## PostgreSQL `NTH_VALUE()` function examples
 
-We will use the `products` table created in the [window functions](https://www.postgresqltutorial.com/postgresql-window-function/) tutorial for the demonstration.
+We will use the `products` table created in the [window functions](/docs/postgresql/postgresql-window-function) tutorial for the demonstration.
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-products-table-sample-data.png)
 

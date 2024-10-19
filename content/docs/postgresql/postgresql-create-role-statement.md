@@ -69,7 +69,7 @@ Output:
 (16 rows)
 ```
 
-Notice that the roles whose names start with `pg_` are system roles. The `postgres` is a [superuser](https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/) role created by the PostgreSQL installer.
+Notice that the roles whose names start with `pg_` are system roles. The `postgres` is a [superuser](/docs/postgresql/postgresql-administration/create-superuser-postgresql) role created by the PostgreSQL installer.
 
 In `psql`, you can use the `\du` command to show all roles that you create including the postgres role in the current PostgreSQL server:
 

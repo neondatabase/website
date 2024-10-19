@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL STRING_AGG() function
 
-The PostgreSQL `STRING_AGG()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that concatenates a list of strings and places a separator between them. It does not add the separator at the end of the string.
+The PostgreSQL `STRING_AGG()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that concatenates a list of strings and places a separator between them. It does not add the separator at the end of the string.
 
 The following shows the syntax of the `STRING_AGG()` function:
 

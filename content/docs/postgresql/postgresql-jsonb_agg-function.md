@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL jsonb_agg() function
 
-The `jsonb_agg()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to aggregate values into a JSON array.
+The `jsonb_agg()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that allows you to aggregate values into a JSON array.
 
 The `jsonb_agg()` function can be particularly useful when you want to create a JSON array from data of multiple rows.
 

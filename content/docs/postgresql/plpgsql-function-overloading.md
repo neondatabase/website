@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PL/pgSQL Function Overloading
 
-PostgreSQL allows multiple [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) to share the same name as long as they have different arguments.
+PostgreSQL allows multiple [functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) to share the same name as long as they have different arguments.
 
 If two or more functions share the same name, they are considered overloaded.
 

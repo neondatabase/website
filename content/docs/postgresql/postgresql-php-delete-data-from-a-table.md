@@ -13,7 +13,7 @@ tableOfContents: true
 To delete data from a PostgreSQL table in PHP, you use the following steps:
 
 1.
-2. [Connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating an instance of the PDO class.
+2. [Connect to the PostgreSQL database server](/docs/postgresql/postgresql-php/connect) by creating an instance of the PDO class.
 3.
 4.
 5.
@@ -34,7 +34,7 @@ To delete data from a PostgreSQL table in PHP, you use the following steps:
 
 ## Deleting data examples
 
-We will use the `stocks` table for the demonstration. If you have not created the `stocks` table yet, you can follow the [creating table tutorial](https://www.postgresqltutorial.com/postgresql-php/create-tables/).
+We will use the `stocks` table for the demonstration. If you have not created the `stocks` table yet, you can follow the [creating table tutorial](/docs/postgresql/postgresql-php/create-tables).
 
 Let's create a new class named StockDB that contains all the methods for deleting data in a table.
 

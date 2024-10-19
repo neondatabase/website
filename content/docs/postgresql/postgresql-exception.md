@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PL/pgSQL Exception clause
 
-When an error occurs within a [block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/), PostgreSQL will abort the execution of that block as well as the surrounding transaction.
+When an error occurs within a [block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure), PostgreSQL will abort the execution of that block as well as the surrounding transaction.
 
 To recover from the error, you can use the `exception` clause in the `begin...end` block.
 

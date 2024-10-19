@@ -23,7 +23,7 @@ CREATE TABLE [IF NOT EXISTS] table_name (
 
 In this syntax:
 
-First, specify the name of the table that you want to create after the `CREATE TABLE` keywords. The table name must be unique in a [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/). If you create a table with a name that already exists, you'll get an error.
+First, specify the name of the table that you want to create after the `CREATE TABLE` keywords. The table name must be unique in a [schema](/docs/postgresql/postgresql-administration/postgresql-schema). If you create a table with a name that already exists, you'll get an error.
 
 A [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) is a named collection of database objects including tables. If you create a table without a schema, it defaults to public. You'll learn more about the schema in the schema tutorial.
 
@@ -31,7 +31,7 @@ Second, use the `IF NOT EXISTS` option to create a new table only if it does not
 
 Third, specify table columns separated by commas. Each column definition consists of the column name, data type, size, and constraint.
 
-The constraint of a column specifies a rule that is applied to data within a column to ensure data integrity. The column constraints include [primary key](/docs/postgresql/postgresql-primary-key/), [foreign key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/), [not null](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/), [unique](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/), [check](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-check-constraint), and default.
+The constraint of a column specifies a rule that is applied to data within a column to ensure data integrity. The column constraints include [primary key](/docs/postgresql/postgresql-primary-key/), [foreign key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/), [not null](/docs/postgresql/postgresql-tutorial/postgresql-not-null-constraint), [unique](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/), [check](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-check-constraint), and default.
 
 For example, the `NOT NULL` constraint ensures that the values in a column cannot be NULL.
 

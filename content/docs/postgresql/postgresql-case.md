@@ -42,7 +42,7 @@ If all conditions are `false`, the `CASE` expression returns the result (`else_r
 
 ### 1) The general CASE example
 
-Let's take a look at the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+Let's take a look at the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

@@ -7,11 +7,11 @@ tableOfContents: true
 
 ![](/postgresqltutorial_data/wp-content-uploads-2014-05-PostgreSQL-Trigger.png)
 
-A PostgreSQL trigger is a database object that automatically executes a [function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) in response to an event such as [insert](/docs/postgresql/postgresql-insert/), [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/), [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [truncate](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table). In this section, you will learn about triggers and how to use them effectively.
+A PostgreSQL trigger is a database object that automatically executes a [function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) in response to an event such as [insert](/docs/postgresql/postgresql-insert/), [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/), [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [truncate](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table). In this section, you will learn about triggers and how to use them effectively.
 
 ## Section 1. Basic PostgreSQL Triggers
 
-- [Introduction to PostgreSQL trigger](https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/ "Introduction to PostgreSQL Trigger") - Give you a brief overview of PostgreSQL triggers, why you should use triggers, and when to use them.
+- [Introduction to PostgreSQL trigger](/docs/postgresql/postgresql-triggers/introduction-postgresql-trigger) - Give you a brief overview of PostgreSQL triggers, why you should use triggers, and when to use them.
 -
 - [Create trigger](https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/ "Creating the First Trigger in PostgreSQL") - Show you how to create your first trigger in PostgreSQL.
 -
@@ -21,7 +21,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 
 ## Section 2. INSERT triggers
 
-- [BEFORE INSERT triggers](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-insert-trigger/) - Show you how to create a trigger that is activated automatically before an INSERT event occurs on the associated table.
+- [BEFORE INSERT triggers](/docs/postgresql/postgresql-triggers/postgresql-before-insert-trigger) - Show you how to create a trigger that is activated automatically before an INSERT event occurs on the associated table.
 -
 - [AFTER INSERT triggers](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-insert-trigger/) - Guide you on defining a trigger activated automatically after an INSERT event occurs on the associated table.
 
@@ -35,7 +35,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 
 - [BEFORE DELETE triggers](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/) - Define a BEFORE DELETE trigger that fires before a delete event occurs.
 -
-- [AFTER DELETE triggers](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-update-trigger/) - Create an AFTER DELETE trigger fired after a delete event occurs.
+- [AFTER DELETE triggers](/docs/postgresql/postgresql-triggers/postgresql-after-update-trigger) - Create an AFTER DELETE trigger fired after a delete event occurs.
 
 ## Section 5. INSTEAD OF triggers
 
@@ -57,6 +57,6 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 
 ## Section 9. Advanced triggers
 
-- [Event trigger](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/) - Introduce the event trigger that fires when an event related to a DDL statement occurs.
+- [Event trigger](/docs/postgresql/postgresql-triggers/postgresql-event-trigger) - Introduce the event trigger that fires when an event related to a DDL statement occurs.
 -
 - [Conditional trigger](https://www.postgresqltutorial.com/postgresql-triggers/postgresql-trigger-when-condition/) - Define a conditional trigger that fires only when a condition is satisfied.

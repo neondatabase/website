@@ -131,7 +131,7 @@ The following shows the output:
 
 ## PostgreSQL List Indexes using psql command
 
-If you use `psql` to connect to a PostgreSQL database and want to list all indexes of a table, you can use the `\d` [psql command](https://www.postgresqltutorial.com/postgresql-administration/psql-commands/) as follows:
+If you use `psql` to connect to a PostgreSQL database and want to list all indexes of a table, you can use the `\d` [psql command](/docs/postgresql/postgresql-administration/psql-commands) as follows:
 
 ```
 \d table_name

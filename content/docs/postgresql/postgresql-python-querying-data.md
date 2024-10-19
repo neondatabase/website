@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to query data from the PostgreSQL tables in Python.
 
-This tutorial picks up from where the [Handling BLOB Data Tutorial](https://www.postgresqltutorial.com/postgresql-python/blob/) left off.
+This tutorial picks up from where the [Handling BLOB Data Tutorial](/docs/postgresql/postgresql-python/blob) left off.
 
 ## The steps for querying data from a PostgreSQL table in Python
 

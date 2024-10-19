@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL jsonb_object_agg() function
 
-The PostgreSQL `jsonb_object_agg()` function is an [aggregate function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) that allows you to collect key/value pairs into a [JSON](/docs/postgresql/postgresql-json) object.
+The PostgreSQL `jsonb_object_agg()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that allows you to collect key/value pairs into a [JSON](/docs/postgresql/postgresql-json) object.
 
 The `jsonb_object_agg()` can be useful when you want to aggregate data from multiple rows into a single JSON object or construct complex JSON output.
 

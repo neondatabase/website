@@ -15,7 +15,7 @@ The PHP Data Objects (PDO) defines a unified interface for accessing relational 
 
 Many PHP distributions include the `PDO_PGSQL` driver that allows you to interact with PostgreSQL databases through the PDO API.
 
-- [Connecting to a PostgreSQL database](https://www.postgresqltutorial.com/postgresql-php/connect/) - shows you how to set up a simple PHP application structure and connect to a PostgreSQL database.
+- [Connecting to a PostgreSQL database](/docs/postgresql/postgresql-php/connect) - shows you how to set up a simple PHP application structure and connect to a PostgreSQL database.
 -
 - [Creating new PostgreSQL database tables](https://www.postgresqltutorial.com/postgresql-php/create-tables/) - walks you through the steps of creating database tables in PostgreSQL using PHP.
 -
@@ -29,6 +29,6 @@ Many PHP distributions include the `PDO_PGSQL` driver that allows you to interac
 -
 - [Working with the binary large objects (BLOB)](https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/) - shows you how to insert, select, and delete large objects in PostgreSQL using PHP.
 -
-- [Calling PostgreSQL stored procedures](https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/) - explains to you the steps of calling [PostgreSQL stored procedures](https://www.postgresqltutorial.com/postgresql-stored-procedures/) from PHP.
+- [Calling PostgreSQL stored procedures](https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/) - explains to you the steps of calling [PostgreSQL stored procedures](/docs/postgresql/postgresql-stored-procedures) from PHP.
 -
 - [Deleting data in a PostgreSQL table using PHP PDO](https://www.postgresqltutorial.com/postgresql-php/delete/) - teaches you how to delete data from the PostgreSQL table in the PHP application using PDO.

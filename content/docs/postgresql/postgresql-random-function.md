@@ -68,7 +68,7 @@ Sample output:
 
 Sometimes, you may need to retrieve random records from a table. To do that, you can utilize the `RANDOM()` function in conjunction with the `ORDER` `BY` clause.
 
-For example, the following query uses the `RANDOM()` function to retrieve a random film from the `film` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+For example, the following query uses the `RANDOM()` function to retrieve a random film from the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ```
 SELECT title

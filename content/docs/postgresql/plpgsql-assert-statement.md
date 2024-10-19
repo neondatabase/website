@@ -44,7 +44,7 @@ PostgreSQL provides the `plpgsql.check_asserts` configuration parameter to enabl
 
 ## PostgreSQL assert statement example
 
-The following example uses the `assert` statement to check if the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) has data:
+The following example uses the `assert` statement to check if the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) has data:
 
 ```
 do $$

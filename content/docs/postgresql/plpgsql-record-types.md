@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PL/pgSQL record types
 
-PostgreSQL provides a "type" called the `record` that is similar to the [row-type](https://www.postgresqltutorial.com/plpgsql-row-types/).
+PostgreSQL provides a "type" called the `record` that is similar to the [row-type](/docs/postgresql/plpgsql-row-types).
 
 It's important to note that a record isn't a true type but rather a placeholder. Furthermore, the structure of a record variable will change when you reassign it to another value.
 
@@ -99,7 +99,7 @@ NOTICE:  English Bulworth (51)
 ...
 ```
 
-Note that you will learn more about the `for loop` statement in the [for-loop tutorial](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
+Note that you will learn more about the `for loop` statement in the [for-loop tutorial](/docs/postgresql/postgresql-plpgsql/plpgsql-for-loop).
 
 How it works:
 

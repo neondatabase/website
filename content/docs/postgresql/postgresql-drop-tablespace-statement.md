@@ -71,7 +71,7 @@ First, create a new directory called `C:/pgdata/demo` on your server. Replace th
 mkdir C:\pgdata\demo
 ```
 
-Second, [create a new tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Creating Tablespace") named `demo` and map it to the `c:\pgdata\demo` directory.
+Second, [create a new tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace) named `demo` and map it to the `c:\pgdata\demo` directory.
 
 ```
 CREATE TABLESPACE demo_ts

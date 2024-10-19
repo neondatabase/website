@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL superuser
 
-In PostgreSQL, a superuser is a special role with the highest privileges. A superuser has full access to all databases and tables. Additionally, it can perform administrative tasks such as [creating databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/), [dropping databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/), [managing user roles](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/), modifying database configuration, and so on.
+In PostgreSQL, a superuser is a special role with the highest privileges. A superuser has full access to all databases and tables. Additionally, it can perform administrative tasks such as [creating databases](/docs/postgresql/postgresql-administration/postgresql-create-database), [dropping databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/), [managing user roles](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/), modifying database configuration, and so on.
 
 In other words, a superuser can bypass all security checks except the right to log in.
 

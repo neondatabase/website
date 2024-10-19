@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL jsonb_each_text() function
 
-The `jsonb_each_text()` function allows you to expand a top-level [JSON](/docs/postgresql/postgresql-json/) object into a set of keyvalue pairs. Both keys and values are text strings.
+The `jsonb_each_text()` function allows you to expand a top-level [JSON](/docs/postgresql/postgresql-json) object into a set of keyvalue pairs. Both keys and values are text strings.
 
 The following shows the basic syntax of the `jsonb_each_text()` function:
 

@@ -19,7 +19,7 @@ ALTER TABLE table_name
 DROP COLUMN column_name;
 ```
 
-When you remove a column from a table, PostgreSQL will automatically remove all of the [indexes](https://www.postgresqltutorial.com/postgresql-indexes/) and constraints that involved the dropped column.
+When you remove a column from a table, PostgreSQL will automatically remove all of the [indexes](/docs/postgresql/postgresql-indexes) and constraints that involved the dropped column.
 
 If the column that you want to remove is used in other database objects such as [views](https://www.postgresqltutorial.com/postgresql-views/), [triggers](https://www.postgresqltutorial.com/postgresql-triggers/), and [stored procedures](https://www.postgresqltutorial.com/postgresql-stored-procedures/), you cannot drop the column because other objects depend on it.
 

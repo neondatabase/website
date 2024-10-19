@@ -44,7 +44,7 @@ var sql = "CREATE TABLE products (" +
             ");";
 ```
 
-Second, [establish a connection](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/) to `sales` database on the local PostgreSQL server using the `DB` class:
+Second, [establish a connection](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database) to `sales` database on the local PostgreSQL server using the `DB` class:
 
 ```
 var conn =  DB.connect();

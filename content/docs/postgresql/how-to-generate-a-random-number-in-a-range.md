@@ -53,7 +53,7 @@ Generally, to generate a random number between two integers low and high, you us
 SELECT floor(random() * (high-low+1) + low)::int;
 ```
 
-You can [develop a user-defined function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that returns a random number between two numbers `low` and `high`:
+You can [develop a user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that returns a random number between two numbers `low` and `high`:
 
 ```
 CREATE OR REPLACE FUNCTION random_between(low INT ,high INT)

@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL schema
 
-In PostgreSQL, a schema is a named collection of database objects, including tables, [views](https://www.postgresqltutorial.com/postgresql-views/), [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [data types](/docs/postgresql/postgresql-data-types/), [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure), and operators.
+In PostgreSQL, a schema is a named collection of database objects, including tables, [views](/docs/postgresql/postgresql-views), [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [data types](/docs/postgresql/postgresql-data-types/), [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure), and operators.
 
 A schema allows you to organize and namespace database objects within a database.
 

@@ -10,7 +10,7 @@ tableOfContents: true
 
 # Introduction to PostgreSQL jsonb_path_query_array() function
 
-The `jsonb_path_query_array()` function allows you to query [JSONB](/docs/postgresql/postgresql-json/) data using a [JSON path expression](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path).
+The `jsonb_path_query_array()` function allows you to query [JSONB](/docs/postgresql/postgresql-json) data using a [JSON path expression](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path).
 
 Here's the basic syntax of the `jsonb_path_query_array()` function:
 

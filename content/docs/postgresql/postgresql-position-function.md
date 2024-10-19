@@ -62,7 +62,7 @@ SELECT POSITION('tutorial' IN 'PostgreSQL Tutorial');
 
 It returns zero (0), indicating that the string `tutorial` does not exist in the string `'PostgreSQL Tutorial'`.
 
-The following example uses the `POSITION()` function to locate the first string `'fateful'` in the `description` column of the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+The following example uses the `POSITION()` function to locate the first string `'fateful'` in the `description` column of the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ```
 SELECT

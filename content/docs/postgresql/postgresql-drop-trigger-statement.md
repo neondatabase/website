@@ -34,7 +34,7 @@ DROP TRIGGER trigger_name;
 
 ## PostgreSQL DROP TRIGGER statement example
 
-First, [create a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that validates the username of a staff. The username is not null and its length must be at least 8.
+First, [create a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that validates the username of a staff. The username is not null and its length must be at least 8.
 
 ```
 CREATE FUNCTION check_staff_user()

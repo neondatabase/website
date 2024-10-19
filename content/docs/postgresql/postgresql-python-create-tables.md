@@ -8,7 +8,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using Python.
 
-This tutorial picks up from where the [Connecting to PostgreSQL database server tutorial](https://www.postgresqltutorial.com/postgresql-python/connect/) left off.
+This tutorial picks up from where the [Connecting to PostgreSQL database server tutorial](/docs/postgresql/postgresql-python/connect) left off.
 
 ## Steps for creating tables in PostgreSQL from Python
 

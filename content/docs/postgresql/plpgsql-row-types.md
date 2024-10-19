@@ -14,7 +14,7 @@ Row variables or row-type variables are variables of composite types that can st
 
 These row variables can hold the entire row returned by the `select into` or `for` statement.
 
-Here's the syntax for [declaring a row variable](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/):
+Here's the syntax for [declaring a row variable](/docs/postgresql/postgresql-plpgsql/plpgsql-variables):
 
 ```
 row_variable table_name%ROWTYPE;

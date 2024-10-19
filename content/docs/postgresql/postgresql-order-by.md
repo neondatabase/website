@@ -42,7 +42,7 @@ Let’s take some examples of using the PostgreSQL `ORDER BY` clause.
 
 ## PostgreSQL ORDER BY examples
 
-We will use the `customer` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the `customer` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 

@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL GRANT statement
 
-After [creating a role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) with the `LOGIN` attribute, the role can log in to the PostgreSQL database server.
+After [creating a role](/docs/postgresql/postgresql-administration/postgresql-roles) with the `LOGIN` attribute, the role can log in to the PostgreSQL database server.
 
 However, it cannot do anything to the database objects like tables, [views](https://www.postgresqltutorial.com/postgresql-views/), [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/), etc. For example, the role cannot [select data from a table](/docs/postgresql/postgresql-select) or execute a specific function.
 
@@ -37,7 +37,7 @@ First, use the `postgres` user to connect to the PostgreSQL server using any cli
 psql -U postgres
 ```
 
-Second, [create a new user role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) called `joe` that can log in to the PostgreSQL server:
+Second, [create a new user role](/docs/postgresql/postgresql-administration/postgresql-roles) called `joe` that can log in to the PostgreSQL server:
 
 ```
 create role joe
