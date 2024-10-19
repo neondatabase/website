@@ -14,11 +14,11 @@ By combining FastAPI with TimescaleDB's advanced time-series features, you'll be
 
 Before starting, ensure you have the following tools and services ready:
 
-- pip : Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+- `pip`: Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
   ```bash
   pip --version
   ```
-- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
+- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 
 ## Setting up the Project
 
@@ -40,7 +40,7 @@ Follow these steps to set up your project and virtual environment:
 
     This will create a new project directory called `timescale_fastapi`. Open this directory in your code editor of your choice.
 
-2.  Set Up the Virtual Environment
+2.  Set up the virtual environment.
 
     You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
     
@@ -57,7 +57,7 @@ Follow these steps to set up your project and virtual environment:
 
     You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
 
-3.  Install Dependencies
+3.  Install dependencies.
 
     Next, add all the necessary dependencies for your project:
 
@@ -65,16 +65,16 @@ Follow these steps to set up your project and virtual environment:
     uv add python-dotenv asyncpg loguru fastapi uvicorn requests
     ```
 
-    Where each package does the following:
-    - `FastAPI` : A Web / API framework
-    - `AsyncPG` : An asynchronous PostgreSQL client
-    - `Uvicorn` : An ASGI server for our app
-    - `Loguru` : A logging library
-    - `Python-dotenv` : To load environment variables from a .env file
+    where each package does the following:
+    - `FastAPI`: A Web / API framework
+    - `AsyncPG`: An asynchronous PostgreSQL client
+    - `Uvicorn`: An ASGI server for our app
+    - `Loguru`: A logging library
+    - `Python-dotenv`: To load environment variables from a .env file
 
-4.  Create the project structure
+4.  Create the project structure.
 
-    Now, create the following directory structure to organize your project files:
+    Create the following directory structure to organize your project files:
 
     ```md
     timescale_fastapi
@@ -497,7 +497,7 @@ app: FastAPI = FastAPI(lifespan=lifespan, title="FastAPI TimescaleDB Sensor Data
 app.include_router(sensor_router)
 ```
 
-To run the application, use uvicorn CLI with the following command :
+To run the application, use uvicorn CLI with the following command:
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8080
@@ -514,7 +514,7 @@ Once the server is running, you can access the API documentation and test the en
 
 You can test your application using `HTTPie`, a command-line tool for making HTTP requests. The following steps will guide you through creating sensors, streaming data, and querying sensor statistics.
 
-1. Retrieve Sensor Statistics for Pre-generated Data (Optional)
+1. Retrieve sensor statistics for pre-generated data (optional).
 
    If you followed the optional data generation steps, you can retrieve daily statistics for the pre-generated sensors:
 
@@ -528,7 +528,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
 
    These commands will return the daily statistics (average, min, max, median, and IQR) for the pre-generated temperature and humidity sensors over the last 7 days.
 
-2. Create a New Sensor
+2. Create a new sensor.
 
    Start by creating a new sensor (e.g., a temperature sensor for the living room):
 
@@ -545,7 +545,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
    }
    ```
 
-3. Stream a Single Sensor Data Point
+3. Stream a single sensor data point.
 
    Stream a single data point for the newly created sensor (`sensor_id = 3`):
 
@@ -561,7 +561,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
    }
    ```
 
-4. Stream a Batch of Sensor Data
+4. Stream a batch of sensor data.
 
    You can also stream multiple sensor data points in a batch for the same sensor:
 
@@ -577,7 +577,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
    }
    ```
 
-5. Retrieve Daily Statistics for the New Sensor
+5. Retrieve daily statistics for the new sensor.
 
    After streaming the sensor data, you can retrieve the daily statistics for the new sensor (`sensor_id = 3`):
 
@@ -608,4 +608,4 @@ By following these steps, you can easily create sensors, stream sensor data, and
 
 Now, you have created and tested an API for managing, streaming, and querying sensor data into `TimescaleDB` using `FastAPI`. By leveraging TimescaleDB for time-series data storage, you now have a high-performance solution for handling sensor data at scale.
 
-As a next step, you can look into streaming data into the database using a distributed event platform like `Kafka` or `Red Panda`, or using `Timescale` to monitor the sensor data with `Apache Superset` or `Grafana`
+As a next step, you can look into streaming data into the database using a distributed event platform like `Kafka` or `Red Panda`, or using `Timescale` to monitor the sensor data with `Apache Superset` or `Grafana`.

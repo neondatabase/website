@@ -20,23 +20,23 @@ Before you start, ensure that you have the following tools and services ready:
   pip --version
   ```
 - Neon serverless Postgres : You will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
-- Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
-- OpenAI API key: You need access to the OpenAI API for generating embeddings, you can [sign up here](https://platform.openai.com/signup)
+- Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+- OpenAI API key: You need access to the OpenAI API for generating embeddings, you can [sign up here](https://platform.openai.com/signup).
 
 ## Setting up the Backend
 
 Follow these steps to set up your backend for the full-stack portfolio website:
 
-1.  Create the Project Structure
+1.  Create the project structure.
 
-Since this is a full-stack project, your backend and frontend will be in separate directories within a single parent folder. Begin by creating the parent folder and moving into it
+    Since this is a full-stack project, your backend and frontend will be in separate directories within a single parent folder. Begin by creating the parent folder and moving into it
 
-```bash
-mkdir portfolio_project
-cd portfolio_project
-```
+    ```bash
+    mkdir portfolio_project
+    cd portfolio_project
+    ```
 
-2.  Create a `uv` Python virtual environment
+2.  Create a `uv` Python virtual environment.
 
     If you don't already have uv installed, you can install it with:
 
@@ -52,7 +52,7 @@ cd portfolio_project
 
     This will create a new project directory called `portfolio_backend`. Open this directory in your code editor of your choice.
 
-3.  Set Up the Virtual Environment
+3.  Set up the virtual environment.
 
     You will now create and activate a virtual environment in which your project's dependencies will be installed.
     
@@ -69,7 +69,7 @@ cd portfolio_project
 
     You should see `(portfolio_backend)` in your terminal now, this means that your virtual environment is activated.
 
-4.  Install Dependencies
+4.  Install dependencies.
 
     Next, add all the necessary dependencies for your project:
 
@@ -77,7 +77,7 @@ cd portfolio_project
     uv add fastapi asyncpg uvicorn loguru python-dotenv openai pgvector
     ```
 
-    Where each package does the following:
+    where each package does the following:
 
     - `FastAPI` : A Web / API framework
     - `AsyncPG` : An asynchronous PostgreSQL client
@@ -87,9 +87,9 @@ cd portfolio_project
     - `openai` : The OpenAI API client for generating embeddings and chatbot responses
     - `pgvector` : A Python client for working with pgvector in PostgreSQL
 
-5.  Create the project structure
+5.  Create the project structure.
 
-    Now, create the following directory structure to organize your project files:
+    Create the following directory structure to organize your project files:
 
     ```md
     portfolio_backend
@@ -112,13 +112,13 @@ cd portfolio_project
 
 In this section, you will set up the `pgvector` extension using Neon's console, add the database's schema, and create the database connection pool and lifecycle management logic in FastAPI. 
 
-First, add pgvector to Postgres using:
+First, add pgvector to Postgres:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
-Next, you will add the schema to your database with:
+Next, add the schema to your database:
 
 ```sql
 CREATE TABLE portfolio_embeddings (
@@ -245,10 +245,10 @@ class QueryResponse(BaseModel):
 ```
 
 Each of the models represent the following:
-- `PortfolioEntryCreate` : Represents the input for creating a new embedding
-- `PortfolioEntryResponse` : Represents the output of a created embedding
-- `QueryRequest` : Represents a question to ask the chatbot
-- `QueryResponse` : Represents the response from the chatbot
+- `PortfolioEntryCreate`: Represents the input for creating a new embedding
+- `PortfolioEntryResponse`: Represents the output of a created embedding
+- `QueryRequest`: Represents a question to ask the chatbot
+- `QueryResponse`: Represents the response from the chatbot
 
 ## Creating the API Endpoints
 
@@ -424,7 +424,7 @@ app.add_middleware(
 
 Since you will be connecting your application from the frontend, you will need to allow CORS (Cross Origin Resource Sharing). The `CORSMiddleware` is added such that the API can accept requests from any origin, including your React app.
 
-To run the application, use uvicorn CLI with the following command :
+To run the application, use uvicorn CLI with the following command:
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
@@ -442,7 +442,7 @@ For the best results, you should add a variety of portfolio entries that cover d
 
 ## Testing the Chatbot
 
-Using httpie, you can test the chatbot by sending a POST request to the `/chat` endpoint with a user query. For example:
+Using `httpie`, you can test the chatbot by sending a POST request to the `/chat` endpoint with a user query. For example:
 
 ```bash shouldWrap
 http POST http://localhost:8000/chat/ query="What is your favorite programming language?"
@@ -460,37 +460,37 @@ The chatbot will respond with a relevant answer based on the embeddings stored i
 
 Now that the backend is set up and running, it's time to set up the frontend using React. The frontend will be responsible for interacting with the FastAPI backend and displaying your portfolio, as well as allowing users to ask questions to the RAG-powered chatbot.
 
-1. Clone the Frontend Repository
+1. Clone the frontend repository.
 
-First, go back to the parent directory (portfolio_project) you created at the beginning of this guide and clone the frontend repository:
+    First, go back to the parent directory (portfolio_project) you created at the beginning of this guide and clone the frontend repository:
 
-```bash
-cd ..
-git clone https://github.com/sam-harri/portfolio_frontend
-```
+    ```bash
+    cd ..
+    git clone https://github.com/sam-harri/portfolio_frontend
+    ```
 
-Then, open up that new directory in your code editor.
+    Then, open up that new directory in your code editor.
 
-2. Install the Dependencies
+2. Install the dependencies.
 
-Once you have cloned the frontend repository, install the necessary dependencies using `npm`:
+    Once you have cloned the frontend repository, install the necessary dependencies using `npm`:
 
-```bash
-npm install
-```
+    ```bash
+    npm install
+    ```
 
-This will install all the packages specified in the `package.json` file, which are required for the React app to run.
+    This will install all the packages specified in the `package.json` file, which are required for the React app to run.
 
-3. Update the Frontend Content
+3. Update the frontend content.
 
-Now, you will update the content of your portfolio, such as your bio, projects, and skills, and experience to match your personal details. Each of the section in the portfolio is a separate component that you can modify to include your own information.
-These include:
-- Landing : The landing page of the portfolio, which includes your name, bio, and a profile picture.
-- Experience : A section that lists your work experience, including the company name, logo, your position, and a brief description of your role.
-- Skills : A section that lists your technical skills, such as programming languages, frameworks, and tools you are proficient in. Find the logos of your technologies at [Devicon](https://devicon.dev/)
-- Projects : A section that lists your projects, including the project name, description, and a link to the project's GitHub repository or live demo.
+    Now, you will update the content of your portfolio, such as your bio, projects, and skills, and experience to match your personal details. Each of the section in the portfolio is a separate component that you can modify to include your own information.
+    These include:
+    - Landing: The landing page of the portfolio, which includes your name, bio, and a profile picture.
+    - Experience: A section that lists your work experience, including the company name, logo, your position, and a brief description of your role.
+    - Skills: A section that lists your technical skills, such as programming languages, frameworks, and tools you are proficient in. Find the logos of your technologies at [Devicon](https://devicon.dev/)
+    - Projects: A section that lists your projects, including the project name, description, and a link to the project's GitHub repository or live demo.
 
-The chatbot component is responsible for sending user queries to the backend and displaying the chatbot responses, and can be found in the `Chatbot.tsx` file.
+    The chatbot component is responsible for sending user queries to the backend and displaying the chatbot responses, and can be found in the `Chatbot.tsx` file.
 
 ## Running the Frontend
 
@@ -514,113 +514,113 @@ In this optional section, you will containerize both the frontend and backend of
 
 The only prerequisite for this section is having Docker installed on your machine. If you don't have it installed, you can follow the [Docker installation guide](https://docs.docker.com/engine/install/).
 
-1. Dockerizing the Backend
+1. Dockerize the backend.
 
-To Dockerize the backend, you will create a `Dockerfile` in the `portfolio_backend` directory. This file will define the steps to build the Docker image for your FastAPI application.
+    To Dockerize the backend, you will create a `Dockerfile` in the `portfolio_backend` directory. This file will define the steps to build the Docker image for your FastAPI application.
 
-```Dockerfile
-FROM python:3.10-slim
+    ```Dockerfile
+    FROM python:3.10-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+    ENV PYTHONDONTWRITEBYTECODE=1
+    ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY . /app
+    COPY . /app
 
-RUN pip install uv
+    RUN pip install uv
 
-RUN uv pip install -r pyproject.toml --system
+    RUN uv pip install -r pyproject.toml --system
 
-WORKDIR /app/src
+    WORKDIR /app/src
 
-EXPOSE 8000
+    EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-```
-This Dockerfile:
-- Copies your FastAPI app into the container
-- Installs all necessary Python dependencies
-- Exposes port 8000, which is where FastAPI will run
-- Runs the FastAPI app using uvicorn
+    CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    ```
+    This Dockerfile:
+    - Copies your FastAPI app into the container
+    - Installs all necessary Python dependencies
+    - Exposes port 8000, which is where FastAPI will run
+    - Runs the FastAPI app using uvicorn
 
-2. Dockerizing the Frontend
+2. Dockerize the frontend.
 
-Dockerizing the frontend is similar to the backend. Create a `Dockerfile` in the root of the `portfolio_frontend` directory:
+    Dockerizing the frontend is similar to the backend. Create a `Dockerfile` in the root of the `portfolio_frontend` directory:
 
-```Dockerfile
-FROM node:18-alpine AS base
+    ```Dockerfile
+    FROM node:18-alpine AS base
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+    COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+    RUN \
+    if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
-COPY . .
+    COPY . .
 
-RUN npm run build
+    RUN npm run build
 
-RUN npm install -g serve
+    RUN npm install -g serve
 
-EXPOSE 3000
+    EXPOSE 3000
 
-CMD ["serve", "-s", "dist"]
-```
+    CMD ["serve", "-s", "dist"]
+    ```
 
-This Dockerfile:
-- Uses Node.js to install frontend dependencies
-- Builds the React application
-- Serves the static build using the serve package
-- Exposes port 3000 where the React app will be available
+    This Dockerfile:
+    - Uses Node.js to install frontend dependencies
+    - Builds the React application
+    - Serves the static build using the serve package
+    - Exposes port 3000 where the React app will be available
 
-3. Setting Up Docker Compose
+3. Set up Docker Compose.
 
-Docker Compose simplifies the process of running multiple containers together. You can define both the frontend and backend in a single configuration and run them together with a single command.
+    Docker Compose simplifies the process of running multiple containers together. You can define both the frontend and backend in a single configuration and run them together with a single command.
 
-Below is the `docker-compose.yml` file, placed at the root of the project, which sets up both the services:
+    Below is the `docker-compose.yml` file, placed at the root of the project, which sets up both the services:
 
-```yaml
-services:
-  api:
-    build:
-      context: portfolio_backend/
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    env_file:
-      - portfolio_backend/.env
-  nextjs-app:
-      build:
-        context: portfolio_frontend/
+    ```yaml
+    services:
+    api:
+        build:
+        context: portfolio_backend/
         dockerfile: Dockerfile
-      ports:
-        - "3000:3000"
-      environment:
-        - NODE_ENV=production
-      depends_on:
-        - api
-```
+        ports:
+        - "8000:8000"
+        env_file:
+        - portfolio_backend/.env
+    nextjs-app:
+        build:
+            context: portfolio_frontend/
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        environment:
+            - NODE_ENV=production
+        depends_on:
+            - api
+    ```
 
-4. Running the Application with Docker Compose
+4. Run the application with Docker Compose.
 
-Once your Dockerfiles and Docker Compose file are ready, you can bring up the entire stack using:
+    Once your Dockerfiles and Docker Compose file are ready, you can bring up the entire stack using:
 
-```bash
-docker-compose up --build
-```
+    ```bash
+    docker-compose up --build
+    ```
 
-This command will:
-- Build the Docker images for both the backend and frontend
-- Start both the FastAPI backend (on port 8000) and the React frontend (on port 3000)
-- Automatically manage the service dependencies (the frontend will wait until the backend is up before starting)
+    This command will:
+    - Build the Docker images for both the backend and frontend
+    - Start both the FastAPI backend (on port 8000) and the React frontend (on port 3000)
+    - Automatically manage the service dependencies (the frontend will wait until the backend is up before starting)
 
-Using Docker and Docker Compose to run your full-stack portfolio website simplifies the process of managing dependencies and ensures consistency across different environments. You can now run your entire application, both frontend and backend, in isolated containers with a single command. This setup is also beneficial if you plan to deploy your application to production in a cloud environment or if you want to share the project with others who can run it without manual installation steps.
+    Using Docker and Docker Compose to run your full-stack portfolio website simplifies the process of managing dependencies and ensures consistency across different environments. You can now run your entire application, both frontend and backend, in isolated containers with a single command. This setup is also beneficial if you plan to deploy your application to production in a cloud environment or if you want to share the project with others who can run it without manual installation steps.
 
 ## Conclusion
 
