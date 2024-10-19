@@ -19,7 +19,7 @@ Before you start, ensure that you have the following tools and services ready:
   ```bash
   pip --version
   ```
-- Neon serverless Postgres : You will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
+- Neon serverless Postgres : You will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 - Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
 - OpenAI API key: You need access to the OpenAI API for generating embeddings, you can [sign up here](https://platform.openai.com/signup)
 
