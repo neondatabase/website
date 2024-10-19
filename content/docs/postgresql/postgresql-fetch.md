@@ -44,7 +44,7 @@ The `FETCH` clause is functionally equivalent to the `LIMIT` clause. If you plan
 
 Let's use the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
-![Film Table](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/film_table.png)
+![Film Table](/postgresqltutorial_data/film_table.png)
 
 The following query uses the `FETCH` clause to select the first film sorted by titles in ascending order:
 

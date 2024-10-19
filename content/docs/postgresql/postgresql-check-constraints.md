@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL CHECK Constraints'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-check-constraint
             - /docs/postgresql/postgresql-check-constraint
 tableOfContents: true
 ---

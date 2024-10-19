@@ -58,7 +58,7 @@ In this example, we use the `CONCAT_WS()` function to concatenate the strings `'
 
 We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/customer.png)
+![customer table](/postgresqltutorial_data/customer.png)
 
 The following example uses the `CONCAT_WS()` to concatenate values from the `first_name` and `last_name` columns of the `customer` table using a space as a separator:
 

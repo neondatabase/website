@@ -39,7 +39,7 @@ Therefore, it's recommended to use the indexes on expressions when prioritizing 
 
 We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
 
-![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2013/05/customer-table.png)
+![customer table](/postgresqltutorial_data/customer-table.png)
 
 The `customer` table has a b-tree index defined for the `first_name` column.
 

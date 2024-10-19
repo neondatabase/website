@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Identity Column'
+redirectFrom:
+    - /docs/postgresql/postgresql-tutorial/postgresql-identity-column
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-identity-column-OVERRIDING-SYSTEM-VALUE-example.png
 tableOfContents: true
 ---
@@ -59,7 +61,7 @@ Because `color_id` column has the `GENERATED AS IDENTITY` constraint, PostgreSQL
 SELECT * FROM color;
 ```
 
-![PostgreSQL Identity Column - GENERATED AS ALWAYS example](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/PostgreSQL-identity-column-generated-as-always-example.png)
+![PostgreSQL Identity Column - GENERATED AS ALWAYS example](/postgresqltutorial_data/PostgreSQL-identity-column-generated-as-always-example.png)
 
 Third, insert a new row by supplying values for both `color_id` and `color_name` columns:
 

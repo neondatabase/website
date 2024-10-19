@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Transaction'
+redirectFrom:
+    - /docs/postgresql/postgresql-tutorial/postgresql-transaction
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-01-PostgreSQL-Transaction-from-current-transaction.png
 tableOfContents: true
 ---

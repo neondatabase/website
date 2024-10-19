@@ -75,6 +75,6 @@ The database file is in `zip`format ( `dvdrental.zip`) so you need to extract it
 
 Besides the sample database, we provide you with a printable ER diagram in PDF format. You can download and print the ER diagram for reference while practicing PostgreSQL.
 
-[Download the Printable ER Diagram](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/printable-postgresql-sample-database-diagram.pdf)
+[Download the Printable ER Diagram](/postgresqltutorial_data/printable-postgresql-sample-database-diagram.pdf)
 
 This tutorial introduced you to a PostgreSQL sample database named DVD Rental. We will use this database in our PostgreSQL tutorials, so make sure [you load it to your server](https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/).

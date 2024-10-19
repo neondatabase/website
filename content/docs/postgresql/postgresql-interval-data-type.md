@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Interval Data Type'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-interval
             - /docs/postgresql/postgresql-interval
 tableOfContents: true
 ---

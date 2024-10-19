@@ -49,7 +49,7 @@ Output:
 
 We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-![PostgreSQL LOWER() Function - Sample Table ](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/customer.png)
+![PostgreSQL LOWER() Function - Sample Table ](/postgresqltutorial_data/customer.png)
 
 The following example uses the `LOWER()` function to convert the first names of customers to lowercase:
 

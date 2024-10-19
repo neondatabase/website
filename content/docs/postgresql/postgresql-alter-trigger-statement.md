@@ -110,7 +110,7 @@ If you use psql tool, you can view all triggers associated with a table using th
 
 Notice that the letter `S` is uppercase.
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2020/08/PostgreSQL-ALTER-TRIGGER-example.png)
+![](/postgresqltutorial_data/PostgreSQL-ALTER-TRIGGER-example.png)
 
 ## Replacing triggers
 

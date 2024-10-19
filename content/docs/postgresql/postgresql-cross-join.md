@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Cross Join'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-cross-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-CROSS-JOIN-illustration.png
 tableOfContents: true
 ---

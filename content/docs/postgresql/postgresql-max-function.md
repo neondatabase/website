@@ -27,7 +27,7 @@ You can use the `MAX()` function not just in the [`SELECT`](/docs/postgresql/pos
 
 Let's take some examples of using the `MAX()` function. We'll use the `payment` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
-[![payment table](https://www.postgresqltutorial.com/wp-content/uploads/2013/05/payment-table.png)](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
+![payment table](/postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png)
 
 ### 1) Basic PostgreSQL MAX() function example
 

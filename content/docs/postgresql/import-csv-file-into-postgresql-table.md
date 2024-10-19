@@ -42,7 +42,7 @@ Second, prepare a CSV data file with the following format:
 
 The path of the CSV file is as follows: `C:\sampledb\persons.csv`
 
-[Download the persons.csv file](https://www.postgresqltutorial.com/wp-content/uploads/2020/07/persons.csv)
+[Download the persons.csv file](/postgresqltutorial_data/persons.csv)
 
 ## Import a CSV file into a table using COPY statement
 

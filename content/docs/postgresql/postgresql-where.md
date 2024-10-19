@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL WHERE'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-where
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-WHERE.png
 tableOfContents: true
 ---

@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL HAVING'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-having
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-12-payment.png
 tableOfContents: true
 ---
@@ -35,7 +37,7 @@ Besides the `GROUP BY` clause, you can also include other clauses such as `JOIN`
 
 PostgreSQL evaluates the `HAVING` clause after the `FROM`, `WHERE`, `GROUP BY`, and before the `DISTINCT`, `SELECT`, `ORDER BY` and `LIMIT` clauses:
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/postgresql-having.svg)
+![](/postgresqltutorial_data/postgresql-having.svg)
 
 Because PostgreSQL evaluates the `HAVING` clause before the `SELECT` clause, you cannot use the column aliases in the `HAVING` clause.
 

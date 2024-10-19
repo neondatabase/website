@@ -55,7 +55,7 @@ To ensure that a column does not contain NULL, you use the [NOT NULL constraint]
 
 We'll use the `address` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
 
-![address table](https://www.postgresqltutorial.com/wp-content/uploads/2018/12/address.png)
+![address table](/postgresqltutorial_data/address.png)
 
 Please note that the `psql` program displays `NULL` as an empty string by default. To change how `psql` shows NULL in the terminal, you can use the command: `\pset null null`. It will display NULL as null.
 

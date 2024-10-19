@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL NUMERIC Type'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-numeric
             - /docs/postgresql/postgresql-numeric
 tableOfContents: true
 ---

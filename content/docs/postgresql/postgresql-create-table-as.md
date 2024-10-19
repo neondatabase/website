@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL CREATE TABLE AS'
+redirectFrom:
+    - /docs/postgresql/postgresql-tutorial/postgresql-create-table-as
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-data-verification.png
 tableOfContents: true
 ---
@@ -60,7 +62,7 @@ AS query;
 
 We will use the `film` and `film_category` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database)for the demonstration.
 
-![film_and_film_category_tables](https://www.postgresqltutorial.com/wp-content/uploads/2018/03/film_and_film_category_tables.png)
+![film_and_film_category_tables](/postgresqltutorial_data/film_and_film_category_tables.png)
 
 The following example uses the CREATE TABLE AS statement to create a new table that contains the films whose category is 1:
 

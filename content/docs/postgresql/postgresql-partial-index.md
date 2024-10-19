@@ -37,7 +37,7 @@ In this syntax:
 
 Let's take a look at the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2013/05/customer-table.png)
+![customer table](/postgresqltutorial_data/customer-table.png)
 
 The active column has two values:
 

@@ -51,7 +51,7 @@ Output:
 
 We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-![customer table](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/customer.png)
+![customer table](/postgresqltutorial_data/customer.png)
 
 The following example uses the `REVERSE()` function to reverse the first names of customers:
 

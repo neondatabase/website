@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL DEFAULT Value'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-default-value
 tableOfContents: true
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL UPDATE'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-update
 tableOfContents: true
 ---
 

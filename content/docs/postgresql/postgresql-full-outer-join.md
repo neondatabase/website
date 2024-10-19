@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL FULL OUTER JOIN'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-full-outer-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Full-Outer-Join.png
 tableOfContents: true
 ---

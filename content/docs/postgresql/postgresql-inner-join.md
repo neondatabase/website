@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL INNER JOIN'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-inner-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Inner-Join.png
 tableOfContents: true
 ---

@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Integer Data Types'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-integer
             - /docs/postgresql/postgresql-integer
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-integer-300x59.png
 tableOfContents: true

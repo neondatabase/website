@@ -179,7 +179,7 @@ Output:
 
 The output indicates that the `suppliers` database has four tables.
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/create_tables.zip)
+[Download the project source code](/postgresqltutorial_data/create_tables.zip)
 
 ## Summary
 

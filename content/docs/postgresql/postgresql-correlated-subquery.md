@@ -19,7 +19,7 @@ A correlated subquery can be useful when you need to perform a query that depend
 
 We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/film.png)
+![](/postgresqltutorial_data/film.png)
 
 The following example uses a correlated subquery to find the films with higher lengths than average for their respective ratings:
 

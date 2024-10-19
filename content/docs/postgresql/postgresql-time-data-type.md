@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL TIME Data Type'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-time
             - /docs/postgresql/postgresql-time
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-TIME-example.png
 tableOfContents: true

@@ -1,6 +1,7 @@
 ---
 title: 'Using PostgreSQL SERIAL to Create Auto-increment Column'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-serial
             - /docs/postgresql/postgresql-serial
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Serial-268x300.png
 tableOfContents: true

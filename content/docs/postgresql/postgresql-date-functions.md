@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Date Functions'
+redirectFrom:
+            - /docs/postgresql/postgresql-tutorial/postgresql-date
 tableOfContents: true
 ---
 

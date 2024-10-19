@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Self-Join'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-self-join
             - /docs/postgresql/postgresql-self-join
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-Self-Join-Reporting-Structure.png
 tableOfContents: true

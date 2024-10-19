@@ -84,7 +84,7 @@ Output:
 
 ### 2) Using the CONCAT() function with table data example
 
-We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/download/dvd-rental-sample-database/):
+We'll use the `customer` table from the [sample database](/postgresqltutorial_data/dvdrental.zip):
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 

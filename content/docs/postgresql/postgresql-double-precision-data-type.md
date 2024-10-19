@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL DOUBLE PRECISION Data Type'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-double-precision-type
             - /docs/postgresql/postgresql-double-precision-type
 tableOfContents: true
 ---

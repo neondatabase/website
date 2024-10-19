@@ -35,7 +35,7 @@ drop procedure [if exists] name1, name2, ...;
 
 Let's create a couple of stored procedures that manage actors so that you can learn how to drop them:
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/actor.png)
+![](/postgresqltutorial_data/actor.png)
 
 The following `insert_actor()` stored procedure [inserts a new row](/docs/postgresql/postgresql-insert) into the `actor` table. It accepts two arguments which are the first name and last name of the actor.
 

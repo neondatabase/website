@@ -51,7 +51,7 @@ Output:
 
 We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
 
-![PostgreSQL UPPER() Function - Sample Table ](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/customer.png)
+![PostgreSQL UPPER() Function - Sample Table ](/postgresqltutorial_data/customer.png)
 
 The following example uses the `UPPER()` function to convert the first names of customers to uppercase:
 

@@ -37,7 +37,7 @@ row_variable.field_name
 
 We'll use the `actor` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) to show how row types work:
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/actor.png)
+![](/postgresqltutorial_data/actor.png)
 
 The following example retrieve the row with id 1 from the actor table and assign it to a row variable:
 

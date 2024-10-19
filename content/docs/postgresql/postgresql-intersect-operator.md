@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL INTERSECT Operator'
 redirectFrom: 
+            - /docs/postgresql/postgresql-tutorial/postgresql-intersect
             - /docs/postgresql/postgresql-intersect
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-INTERSECT-Operator-300x206.png
 tableOfContents: true

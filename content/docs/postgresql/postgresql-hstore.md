@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL hstore'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-hstore
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg
 tableOfContents: true
 ---
@@ -82,7 +84,7 @@ Querying data from an hstore column is similar to querying data from a column wi
 SELECT attr FROM books;
 ```
 
-[![postgresql hstore query](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-query.jpg)](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg)
+![postgresql hstore query](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-query.jpg)
 
 ## Query value for a specific key
 
@@ -235,7 +237,7 @@ FROM
  books;
 ```
 
-[![postgresql hstore avals function](https://www.postgresqltutorial.com/wp-content/uploads/2015/07/postgresql-hstore-avals-function.jpg)](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-avals-function.jpg)
+![postgresql hstore avals function](/postgresqltutorial_data/wp-content-uploads-2015-07-postgresql-hstore-avals-function.jpg)
 
 Or you can use the `svals()` function if you want to get the result as a set.
 

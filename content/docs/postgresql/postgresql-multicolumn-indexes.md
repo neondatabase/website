@@ -81,7 +81,7 @@ The `people` table consists of three columns: id, first name, and last name.
 
 Second, execute the `INSERT` statement in the following file to load `10,000` rows into the `people` table:
 
-[Script to load 10000 names](https://www.postgresqltutorial.com/wp-content/uploads/2019/01/Script-to-load-10000-names.txt)
+[Script to load 10000 names](/postgresqltutorial_data/Script-to-load-10000-names.txt)
 
 Third, show the query plan that finds the person whose last name is `Adams`:
 

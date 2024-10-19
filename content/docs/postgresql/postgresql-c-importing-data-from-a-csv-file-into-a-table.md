@@ -99,7 +99,7 @@ Install-Package CsvHelper
 
 To learn more details on reading data from a CSV file using the `CsvHelper` package, check out the tutorial on [how to read a CSV file in C# using the CsvHelper package](https://www.csharptutorial.net/csharp-file/csharp-read-csv-file/).
 
-Note that you can [download the students.csv file](https://www.postgresqltutorial.com/wp-content/uploads/2024/05/students.csv) from here.
+Note that you can [download the students.csv file](/postgresqltutorial_data/students.csv) from here.
 
 Let's discuss how the program works.
 

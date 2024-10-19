@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Foreign Key'
+redirectFrom:
+   - /docs/postgresql/postgresql-tutorial/postgresql-foreign-key
 tableOfContents: true
 ---
 

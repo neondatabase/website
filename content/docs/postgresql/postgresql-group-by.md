@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL GROUP BY'
+redirectFrom:
+  - /docs/postgresql/postgresql-tutorial/postgresql-group-by
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-GROUP-BY-1.png
 tableOfContents: true
 ---

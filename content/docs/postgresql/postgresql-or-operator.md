@@ -165,7 +165,7 @@ Output:
 
 We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
-![](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/film.png)
+![](/postgresqltutorial_data/film.png)
 
 The following example uses the `OR` operator in the `WHERE` clause to find the films that have a rental rate is `0.99` or `2.99`:
 

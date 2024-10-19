@@ -1,5 +1,7 @@
 ---
 title: 'PostgreSQL Temporary Table'
+redirectFrom:
+   - /docs/postgresql/postgresql-tutorial/postgresql-temporary-table
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Temporary-Table-300x254.png
 tableOfContents: true
 ---

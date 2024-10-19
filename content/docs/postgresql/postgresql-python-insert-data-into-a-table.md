@@ -158,7 +158,7 @@ Output:
 (7 rows)
 ```
 
-[Download the project source code](https://www.postgresqltutorial.com/wp-content/uploads/2024/01/insert.zip)
+[Download the project source code](/postgresqltutorial_data/insert.zip)
 
 ## Summary
 
