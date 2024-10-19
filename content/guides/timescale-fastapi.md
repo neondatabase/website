@@ -7,7 +7,7 @@ createdAt: '2024-10-12T00:00:00.000Z'
 updatedOn: '2024-10-12T00:00:00.000Z'
 ---
 
-In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage. 
+In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage.
 By combining FastAPI with TimescaleDB's advanced time-series features, you'll be able to maintain low latency queries even at the petabyte scale, making it perfect for things like IoT systems that generate large volumes of sensor data.
 
 ## Prerequisites
@@ -43,16 +43,16 @@ Follow these steps to set up your project and virtual environment:
 2.  Set up the virtual environment.
 
     You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
-    
+
     <CodeTabs labels={["Linux/macOS", "Windows"]}>
-        ```bash
-        uv venv
-        source .venv/bin/activate
-        ```
-        ```bash
-        uv venv
-        .venv\Scripts\activate
-        ```
+    `bash
+    uv venv
+    source .venv/bin/activate
+    `
+    `bash
+    uv venv
+    .venv\Scripts\activate
+    `
     </CodeTabs>
 
     You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
@@ -66,6 +66,7 @@ Follow these steps to set up your project and virtual environment:
     ```
 
     where each package does the following:
+
     - `FastAPI`: A Web / API framework
     - `AsyncPG`: An asynchronous PostgreSQL client
     - `Uvicorn`: An ASGI server for our app
@@ -108,17 +109,17 @@ Next, you will add the necessary tables to your database with:
 ```sql
 CREATE TABLE IF NOT EXISTS sensors (
     sensor_id SERIAL PRIMARY KEY,
-    sensor_type VARCHAR(50) NOT NULL,   
-    description VARCHAR(255),           
-    location VARCHAR(255)               
+    sensor_type VARCHAR(50) NOT NULL,
+    description VARCHAR(255),
+    location VARCHAR(255)
 );
 
 
 CREATE TABLE IF NOT EXISTS sensor_data (
     sensor_id INT REFERENCES sensors(sensor_id),
-    value FLOAT NOT NULL,               
-    time TIMESTAMPTZ NOT NULL DEFAULT NOW(),  
-    PRIMARY KEY(sensor_id, time)        
+    value FLOAT NOT NULL,
+    time TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    PRIMARY KEY(sensor_id, time)
 );
 ```
 
@@ -152,8 +153,8 @@ SELECT 1 as sensor_id,
        ) AS time;
 
 INSERT INTO sensor_data (sensor_id, value, time)
-SELECT 2 as sensor_id, 
-       40 + random() * 20 AS value, 
+SELECT 2 as sensor_id,
+       40 + random() * 20 AS value,
        generate_series(
            now() - INTERVAL '14 days',
            now(),
@@ -199,7 +200,7 @@ async def init_postgres() -> None:
     except Exception as e:
         logger.error(f"Error initializing PostgreSQL connection pool: {e}")
         raise
-    
+
 
 async def get_postgres() -> asyncpg.Pool:
     """
@@ -280,6 +281,7 @@ class SensorDailyStatsResponse(BaseModel):
 ```
 
 Each of the models represent the following:
+
 - `SensorData`: A single sensor reading, including the value recorded and the timestamp when the reading occurred
 - `SensorDataBatch`: A batch of data points, to support batch streaming in your API
 - `SensorCreate`: The fields for creating a new sensor
@@ -419,10 +421,10 @@ async def get_sensor_daily_avg(
     List[SensorDailyStatsResponse]
         A list of daily sensor statistics (average, min, max, median, IQR).
     """
-    
+
     query = """
     WITH sensor_stats AS (
-        SELECT 
+        SELECT
             time_bucket('1 day', time) AS day,
             sensor_id,
             avg(value) AS avg_value,
@@ -540,8 +542,8 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
 
    ```json
    {
-       "sensor_id": 3,
-       "message": "Sensor created successfully."
+     "sensor_id": 3,
+     "message": "Sensor created successfully."
    }
    ```
 
@@ -557,7 +559,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
 
    ```json
    {
-       "message": "Sensor data streamed successfully."
+     "message": "Sensor data streamed successfully."
    }
    ```
 
@@ -573,7 +575,7 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
 
    ```json
    {
-       "message": "Sensor data streamed successfully."
+     "message": "Sensor data streamed successfully."
    }
    ```
 
@@ -589,16 +591,16 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
 
    ```json
    [
-       {
-           "day": "2024-10-12",
-           "sensor_id": 3,
-           "avg_value": 22.6,
-           "min_value": 22.5,
-           "max_value": 22.7,
-           "reading_count": 2,
-           "median_value": 22.6,
-           "iqr_value": 0.2
-       }
+     {
+       "day": "2024-10-12",
+       "sensor_id": 3,
+       "avg_value": 22.6,
+       "min_value": 22.5,
+       "max_value": 22.7,
+       "reading_count": 2,
+       "median_value": 22.6,
+       "iqr_value": 0.2
+     }
    ]
    ```
 
