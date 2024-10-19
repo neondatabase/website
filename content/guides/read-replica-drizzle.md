@@ -1,15 +1,13 @@
 ---
-title: Use read replicas with Drizzle in Next.js
-subtitle: Learn how to scale Next.js applications with Neon read replicas and Drizzle ORM
+title: Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas 
+subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Neon Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-14T00:00:00.000Z'
 updatedOn: '2024-10-14T00:00:00.000Z'
 ---
 
-## Introduction
-
-Neon read replicas are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
+[Neon read replicas](https://neon.tech/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
 
 A key advantage of Neon's architecture is that adding a read replica doesn't require additional storage, making it a highly efficient scaling solution. This cost-effective approach is ideal for businesses of all sizes that need to improve database performance without increasing storage costs.
 
@@ -103,7 +101,7 @@ Add the following scripts to your `package.json`:
 }
 ```
 
-These scripts allow you to generate and run database migrations using Drizzle Kit.
+These scripts allow you to generate and run database migrations using [Drizzle Kit](https://www.npmjs.com/package/drizzle-kit).
 
 Create a new file `drizzle.config.ts` in the root of your project:
 

@@ -1,13 +1,13 @@
 ---
-title: Use read replicas with Entity Framework
-subtitle: Learn how to scale Entity Framework applications with Neon read replicas
+title: Scale your .NET application with Entity Framework and Neon Postgres Read Replicas
+subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Neon Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
 updatedOn: '2024-10-13T00:00:00.000Z'
 ---
 
-Neon read replicas are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
+[Neon read replicas](https://neon.tech/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
 
 This guide demonstrates how to leverage Neon read replicas to efficiently scale .NET applications using Entity Framework Core. You'll learn how to configure your DbContext to work with read replicas, enabling you to optimize your database operations and improve overall application performance.
 
@@ -18,9 +18,9 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 - Dotnet SDK installed on your local machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download).
 - Dotnet Entity Framework Core CLI tools installed. You can install them by running the following command:
 
-```bash
-dotnet tool install --global dotnet-ef
-```
+    ```bash
+    dotnet tool install --global dotnet-ef
+    ```
 
 ## Build the Todo app
 
@@ -426,7 +426,7 @@ namespace TodoApi.Controllers
 You can use dotnet-ef migrations even with multiple db contexts. You can specify the context to use by passing the `--context` option to the `dotnet ef` command.
 </Admonition>
 
-The Todo API is now set up to use separate read and write contexts, leveraging Neon's read replica feature. Read operations (GET requests) will use the read replica, while write operations (POST, PUT, DELETE) will use the primary database.
+The Todo API is now set up to use separate read and write contexts, leveraging Neon's read replica feature. Read operations (`GET` requests) will use the read replica, while write operations (`POST`, `PUT`, `DELETE`) will use the primary database.
 
 You can find the source code for the application described in this guide on GitHub.
 
@@ -436,6 +436,6 @@ You can find the source code for the application described in this guide on GitH
 
 ## Conclusion
 
-This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
+This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements. With Neon, you can quickly scale out with as many read replicas as you need.
 
 <NeedHelp/>
