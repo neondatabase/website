@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-10-09T15:10:07.751Z'
+updatedOn: '2024-10-14T11:46:51.929Z'
 ---
 
 <InfoBlock>
@@ -48,9 +48,15 @@ To update your payment method:
 
 If you are unable to update your payment method, please [contact support](/docs/introduction/support).
 
+## Payment issues
+
 ### Missed payments
 
 If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](https://neon.tech/terms-of-service).
+
+### Failing payments for Indian customers
+
+Neon’s billing system, powered by Stripe, currently lacks support for e-Mandates, a requirement for automatic payments in India as per Reserve Bank of India (RBI) regulations. As a result, Indian customers are unable to complete automatic monthly payments through Neon's billing system. Instead, we recommend that Indian customers pay for their subscription via AWS Marketplace. Please refer to our [AWS Marketplace instructions](/docs/introduction/billing-aws-marketplace) for details.
 
 ## Update your billing email
 

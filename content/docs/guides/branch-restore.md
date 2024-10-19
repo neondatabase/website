@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
-updatedOn: '2024-08-26T16:15:31.888Z'
+updatedOn: '2024-10-18T17:17:53.242Z'
 ---
 
 With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, Github-style visual comparison of your selected branches before restoring.
@@ -38,15 +38,7 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-<Admonition type="note" title="Can you delete a backup branch?">
-Unfortunately, not at this time. A backup branch is the parent of a restored branch, and you cannot delete a parent branch without first removing its child branches. Support for deleting backup branches is expected in a future release.
-
-In the meantime, if you're certain you no longer need a backup branch, you can free up its storage space by connecting to the branch and dropping its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
-
-If backup branches clutter your **Branches** page, consider renaming them. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
-</Admonition>
-
-This backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+The backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
 
@@ -82,7 +74,7 @@ Similar to the manual restore operation using the Neon Console and API described
 
 ### Time Travel Assist
 
-Use Time Travel Assist to make sure you've targetted the correct restore point before you restore your branch.
+Use Time Travel Assist to make sure you've targeted the correct restore point before you restore your branch.
 
 See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
 
@@ -246,6 +238,25 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
 
+## Deleting backup branches
+
+You can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `main`) is not yet supported.
+
+To delete a backup branch:
+
+1. Navigate to the **Branches** page.
+2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `main`.
+
+   ```
+   {branch_name}_old_{head_timestamp}
+   ```
+
+3. Select **Delete** from the menu.
+
+If you cannot delete a backup branch because the backup branch was created by a restore operation on a non-root branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+
+To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
+
 ## Billing considerations
 
 There are minimal impacts to billing from the branch restore and Time Travel Assist features:
@@ -255,7 +266,7 @@ There are minimal impacts to billing from the branch restore and Time Travel Ass
 
 ## Limitations
 
-- You cannot delete a backup branch without first removing the child branch. See the note [above](#automatic-backups).
-- Once you restore a branch, [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the restore backup branch, not the original parent.
+- Deleting backup branches is currently only supported for Early Access users, and it's only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
+- [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the parent branch, which may be a backup branch if you performed a restore operation on the parent branch.
 
   For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source.

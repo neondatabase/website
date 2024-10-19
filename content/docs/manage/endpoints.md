@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-08T10:58:34.751Z'
+updatedOn: '2024-10-13T09:21:28.917Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -141,53 +141,12 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
-As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. To query the cache hit ratio for your compute's LFC, Neon provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view.
+As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. You can monitor the Local File Cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 
-To use the `neon_stat_file_cache` view, install the `neon` extension on a preferred database or connect to the Neon-managed `postgres` database where the `neon` extension is always available.
+- [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate)
+- [Working set size](/docs/introduction/monitoring-page#working-set-size)
 
-To install the extension on a preferred database:
-
-```sql
-CREATE EXTENSION neon;
-```
-
-To connect to the Neon-managed `postgres` database instead:
-
-```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require
-```
-
-If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
-
-```shell
-\c postgres
-```
-
-Issue the following query to view LFC usage data for your compute:
-
-```sql
-SELECT * FROM neon_stat_file_cache;
- file_cache_misses | file_cache_hits | file_cache_used | file_cache_writes | file_cache_hit_ratio
--------------------+-----------------+-----------------+-------------------+----------------------
-           2133643 |       108999742 |             607 |          10767410 |                98.08
-(1 row)
-```
-
-The `file_cache_hit_ratio` is calculated according to the following formula:
-
-```
-file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
-```
-
-<Admonition type="tip">
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view data for LFC hits and misses. See [View LFC metrics with EXPLAIN ANALYZE](/docs/extensions/neon#view-lfc-metrics-with-explain-analyze).
-</Admonition>
-
-For OLTP workloads, you should aim for a `file_cache_hit_ratio` above 99%. If your hit ratio is below that, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
-
-<Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the `pg_prewarm` extension to pre-load data into memory after a compute restart. See [The pg_prewarm extension](/docs/extensions/pg_prewarm).
-</Admonition>
+Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute's Local File Cache. For more information, see [The neon extension](/docs/extensions/neon).
 
 #### Autoscaling considerations
 
