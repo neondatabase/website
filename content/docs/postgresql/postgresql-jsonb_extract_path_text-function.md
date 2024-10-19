@@ -62,7 +62,7 @@ Let's explore some examples of using the `jsonb_extract_path_text()` function.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `documents`:
 
-```
+```sql
 CREATE TABLE documents(
    id SERIAL PRIMARY KEY,
    data JSONB
@@ -71,7 +71,7 @@ CREATE TABLE documents(
 
 Second, [insert two rows](/docs/postgresql/postgresql-insert) into the `documents` table:
 
-```
+```sql
 INSERT INTO documents(data)
 VALUES
   ('{"employee":{"name":"John Doe","age":22,"contacts":[{"type":"email","value":"john.doe@test.com"},{"type":"phone","value":"408-123-456"}]}}'),
@@ -82,7 +82,7 @@ VALUES
 
 The following example uses the `jsonb_extract_path_text()` function to extract the employee object:
 
-```
+```sql
 SELECT
   jsonb_extract_path_text(data, 'employee') employee
 FROM
@@ -101,7 +101,7 @@ Output:
 
 The following example uses the `jsonb_extract_path_text()` function to extract the names of employees:
 
-```
+```sql
 SELECT
   jsonb_extract_path_text(data, 'employee', 'name') name
 FROM
@@ -120,7 +120,7 @@ Output:
 
 The following example uses the `jsonb_extract_path_text()` function to extract the emails of employees:
 
-```
+```sql
 SELECT
   jsonb_extract_path_text(
     data, 'employee', 'contacts', '0',

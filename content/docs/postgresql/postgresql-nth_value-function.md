@@ -15,7 +15,7 @@ The `NTH_VALUE()` function returns a value from the nth row in an ordered partit
 
 Here is the syntax of the `NTH_VALUE()` function:
 
-```
+```sql
 NTH_VALUE(expression, offset)
 OVER (
     [PARTITION BY partition_expression]
@@ -56,7 +56,7 @@ We will use the `products` table created in the [window functions](/docs/postgre
 
 This example uses the `NTH_VALUE()` function to return all products together with the most expensive product:
 
-```
+```sql
 SELECT
     product_id,
     product_name,
@@ -86,7 +86,7 @@ In this example:
 
 This example uses the `NTH_VALUE()` function to return all products with the second most expensive product for each product group:
 
-```
+```sql
 SELECT
     product_id,
     product_name,

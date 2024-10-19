@@ -13,7 +13,7 @@ tableOfContents: true
 
 Sometimes, you may want to remove an existing [index](/docs/postgresql/postgresql-indexes) from the database system. To do it, you use the `DROP INDEX` statement as follows:
 
-```
+```sql
 DROP INDEX  [ CONCURRENTLY] [ IF EXISTS ]  index_name
 [ CASCADE | RESTRICT ];
 ```
@@ -38,7 +38,7 @@ The `RESTRICT` option instructs PostgreSQL to refuse to drop the index if any ob
 
 Note that you can drop multiple indexes at a time by separating the indexes by commas (,):
 
-```
+```sql
 DROP INDEX index_name, index_name2,... ;
 ```
 
@@ -62,21 +62,21 @@ We will use the `actor` table from the [sample database](/docs/postgresql/postgr
 
 The following statement [creates an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) for the `first_name` column of the `actor` table:
 
-```
+```sql
 CREATE INDEX idx_actor_first_name
 ON actor (first_name);
 ```
 
 Sometimes, the query optimizer does not use the index. For example, the following statement finds the actor with the name `John`:
 
-```
+```sql
 SELECT * FROM actor
 WHERE first_name = 'John';
 ```
 
 The query did not use the `idx_actor_first_name` index defined earlier as explained in the following `EXPLAIN` statement:
 
-```
+```sql
 EXPLAIN SELECT *
 FROM actor
 WHERE first_name = 'John';
@@ -94,7 +94,7 @@ Output:
 
 This is because the query optimizer thinks that it is more optimal to just scan the entire table to locate the row. Hence, the `idx_actor_first_name` is not useful in this case, you can remove it:
 
-```
+```sql
 DROP INDEX idx_actor_first_name;
 ```
 

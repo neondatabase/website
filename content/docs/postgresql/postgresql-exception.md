@@ -77,7 +77,7 @@ language plpgsql;
 
 Output:
 
-```
+```sql
 ERROR:  query returned no rows
 CONTEXT:  PL/pgSQL function inline_code_block line 6 at SQL statement
 SQL state: P0002
@@ -107,7 +107,7 @@ $$;
 
 Output:
 
-```
+```sql
 ERROR:  film 2000 not found
 CONTEXT:  PL/pgSQL function inline_code_block line 14 at RAISE
 SQL state: P0001
@@ -138,7 +138,7 @@ $$;
 
 Output:
 
-```
+```sql
 ERROR:  Search query returns too many rows
 CONTEXT:  PL/pgSQL function inline_code_block line 15 at RAISE
 SQL state: P0001
@@ -175,7 +175,7 @@ $$;
 
 Output:
 
-```
+```sql
 ERROR:  The with length 90 is not unique
 CONTEXT:  PL/pgSQL function inline_code_block line 17 at RAISE
 SQL state: P0001
@@ -210,7 +210,7 @@ $$;
 
 Output:
 
-```
+```sql
 ERROR:  film with length 30 not found
 CONTEXT:  PL/pgSQL function inline_code_block line 15 at RAISE
 SQL state: P0001

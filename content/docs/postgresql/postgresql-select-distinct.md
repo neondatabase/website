@@ -16,7 +16,7 @@ The `SELECT DISTINCT` clause can be applied to one or more columns in the select
 
 The following illustrates the syntax of the `DISTINCT` clause:
 
-```
+```sql
 SELECT
   DISTINCT column1
 FROM
@@ -27,7 +27,7 @@ In this syntax, the `SELECT DISTINCT` uses the values in the `column1` column to
 
 If you specify multiple columns, the `SELECT DISTINCT` clause will evaluate the duplicate based on the combination of values in these columns. For example:
 
-```
+```sql
 SELECT
    DISTINCT column1, column2
 FROM
@@ -40,7 +40,7 @@ Note that PostgreSQL also offers the [DISTINCT ON](/docs/postgresql/postgresql-d
 
 If you want to find distinct values of all columns in a table, you can use `SELECT DISTINCT *`:
 
-```
+```sql
 SELECT DISTINCT *
 FROM table_name;
 ```
@@ -55,7 +55,7 @@ Note that you will learn how to [create a table](/docs/postgresql/postgresql-cre
 
 First, create the `colors` table that has three columns: `id`, `bcolor` and `fcolor` using the following `CREATE TABLE` statement:
 
-```
+```sql
 CREATE TABLE colors(
   id SERIAL PRIMARY KEY,
   bcolor VARCHAR,
@@ -65,7 +65,7 @@ CREATE TABLE colors(
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `colors` table:
 
-```
+```sql
 INSERT INTO
   colors (bcolor, fcolor)
 VALUES
@@ -81,7 +81,7 @@ VALUES
 
 Third, retrieve the data from the `colors` table using the `SELECT` statement:
 
-```
+```sql
 SELECT
   id,
   bcolor,
@@ -110,7 +110,7 @@ Output:
 
 The following statement selects unique values from the `bcolor` column of the `t1` table and [sorts](/docs/postgresql/postgresql-order-by) the result set in alphabetical order by using the [`ORDER BY`](/docs/postgresql/postgresql-tutorial/postgresql-order-by) clause.
 
-```
+```sql
 SELECT
   DISTINCT bcolor
 FROM
@@ -139,7 +139,7 @@ Note that PostgreSQL treats `NULL`s as duplicates so that it keeps one `NULL` fo
 
 The following statement applies the `SELECT DISTINCT` clause to both `bcolor` and `fcolor` columns:
 
-```
+```sql
 SELECT
   DISTINCT bcolor, fcolor
 FROM
@@ -175,7 +175,7 @@ For example, you may want to know how many rental rates for films from the `film
 
 To achieve this, you can specify the `rental_rate` column in the `SELECT DISTINCT` clause as follows:
 
-```
+```sql
 SELECT DISTINCT
   rental_rate
 FROM

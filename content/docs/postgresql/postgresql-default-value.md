@@ -11,7 +11,7 @@ tableOfContents: true
 
 When [creating a table](/docs/postgresql/postgresql-create-table), you can define a default value for a column in the table using the `DEFAULT` constraint. Here's the basic syntax:
 
-```
+```sql
 CREATE TABLE table_name(
     column1 type,
     column2 type DEFAULT default_value,
@@ -24,7 +24,7 @@ In this syntax, the `column2` will receive the `default_value` when you [insert 
 
 If you don't specify the `DEFAULT` constraint for the column, its default value is `NULL`:
 
-```
+```sql
 CREATE TABLE table_name(
     column1 type,
     column2 type,
@@ -37,7 +37,7 @@ This often makes sense because `NULL` represents unknown data.
 
 The default value can be a literal value such as a number, a string, a JSON object, etc. Additionally, it can be an expression that will be evaluated when the default value is inserted into the table:
 
-```
+```sql
 CREATE TABLE table_name(
     column1 type,
     column2 type DEFAULT expression,
@@ -48,14 +48,14 @@ CREATE TABLE table_name(
 
 When inserting a new row into a table, you can ignore the column that has a default value. In this case, PostgreSQL will use the default value for the insertion:
 
-```
+```sql
 INSERT INTO table_name(column1, colum3)
 VALUES(value1, value2);
 ```
 
 If you specify the column with a default constraint in the `INSERT` statement and want to use the default value for the insertion, you can use the `DEFAULT` keyword as follows:
 
-```
+```sql
 INSERT INTO table_name(column1, column2, colum3)
 VALUES(value1,DEFAULT,value2);
 ```
@@ -64,7 +64,7 @@ VALUES(value1,DEFAULT,value2);
 
 If you want to specify a default value for a column of an existing table, you can use the `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column2
 SET DEFAULT default_value;
@@ -80,7 +80,7 @@ In this syntax:
 
 To drop a default value later, you can also use the `ALTER TABLE ... ALTER COLUMN ... DROP DEFAULT` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column2
 DROP DEFAULT;
@@ -100,7 +100,7 @@ Let's take some examples of using the `DEFAULT` constraint to specify a default 
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products` to store product data:
 
-```
+```sql
 CREATE TABLE products(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE products(
 
 Second, insert a row into the `products` table:
 
-```
+```sql
 INSERT INTO products(name)
 VALUES('Laptop')
 RETURNING *;
@@ -129,7 +129,7 @@ In this example, we don't specify a value for the `price` column in the `INSERT`
 
 Third, insert one more row into the `products` table:
 
-```
+```sql
 INSERT INTO products(name, price)
 VALUES
    ('Smartphone', DEFAULT)
@@ -149,7 +149,7 @@ In this example, we use the `DEFAULT` keyword as the value for the `price` colum
 
 Finally, insert a new row into the `products` table:
 
-```
+```sql
 INSERT INTO products(name, price)
 VALUES
    ('Tablet', 699.99)
@@ -171,7 +171,7 @@ In this example, we explicitly specify a value for the price column, and Postgre
 
 First, create a new table called `logs` that stores the log messages:
 
-```
+```sql
 CREATE TABLE logs(
    id SERIAL PRIMARY KEY,
    message TEXT NOT NULL,
@@ -183,7 +183,7 @@ The `created_at` column uses the current timestamp returned by the `CURRENT_TIME
 
 Second, insert rows into the `logs` table:
 
-```
+```sql
 INSERT INTO logs(message)
 VALUES('Started the server')
 RETURNING *;
@@ -204,7 +204,7 @@ In the `INSERT` statement, we don't specify the value for the `created_at` colum
 
 First, create a table called `settings` to store configuration data:
 
-```
+```sql
 CREATE TABLE settings(
    id SERIAL PRIMARY KEY,
    name VARCHAR(50) NOT NULL,
@@ -216,7 +216,7 @@ The `configuration` column has the [JSONB](/docs/postgresql/postgresql-json) typ
 
 Second, insert a new row into the `settings` table:
 
-```
+```sql
 INSERT INTO settings(name)
 VALUES('global')
 RETURNING *;
@@ -235,7 +235,7 @@ Since we don't specify a value for the `configuration` column, PostgreSQL uses t
 
 To remove the default JSONB value from the `configuration` column of the `settings` table, you can use the following `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE settings
 ALTER COLUMN configuration
 DROP DEFAULT;

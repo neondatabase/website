@@ -16,7 +16,7 @@ An `AFTER INSERT` trigger is a trigger that is fired after an `INSERT` event occ
 
 The `AFTER INSERT` trigger can access the newly inserted data using the `NEW` record variable. This `NEW` variable allows you to access the values of columns in the inserted row:
 
-```
+```sql
 NEW.column_name
 ```
 
@@ -26,7 +26,7 @@ To create an `AFTER` `INSERT` trigger, you follow these steps:
 
 First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the trigger is activated:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -44,7 +44,7 @@ The `RETURN NEW` statement indicates that the function returns the modified row,
 
 Second, create an `AFTER` `INSERT` trigger and bind the function to it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 AFTER INSERT
 ON table_name
@@ -56,7 +56,7 @@ EXECUTE FUNCTION trigger_function();
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `members` to store the member data:
 
-```
+```sql
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -68,7 +68,7 @@ The `members` table has three columns `id`, `name`, and `email`. The `id` column
 
 Second, create another table called `memberships` to store the memberships of the members:
 
-```
+```sql
 CREATE TABLE memberships (
     id SERIAL PRIMARY KEY,
     member_id INT NOT NULL REFERENCES members(id),
@@ -86,7 +86,7 @@ The memberships table has three columns id, member_id, and membership_type:
 
 Third, define a trigger function that inserts a default free membership for every member:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION create_membership_after_insert()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -99,7 +99,7 @@ $$ LANGUAGE plpgsql;
 
 Fourth, define an `AFTER` `INSERT` trigger on the `members` table, specifying that it should execute the `create_membership_after_insert()` function for each row inserted:
 
-```
+```sql
 CREATE TRIGGER after_insert_member_trigger
 AFTER INSERT ON members
 FOR EACH ROW
@@ -108,7 +108,7 @@ EXECUTE FUNCTION create_membership_after_insert();
 
 Fifth, [insert a new row](/docs/postgresql/postgresql-insert) into the `members` table:
 
-```
+```sql
 INSERT INTO members(name, email)
 VALUES('John Doe', 'john.doe@gmail.com')
 RETURNING *;
@@ -125,7 +125,7 @@ Output:
 
 Sixth, retrieve data from the `memberships` table:
 
-```
+```sql
 SELECT * FROM memberships;
 ```
 

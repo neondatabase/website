@@ -38,7 +38,7 @@ Let's take a look at some examples of using the PostgreSQL Boolean data type.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `stock_availability` to log which products are available.
 
-```
+```sql
 CREATE TABLE stock_availability (
    product_id INT PRIMARY KEY,
    available BOOLEAN NOT NULL
@@ -47,7 +47,7 @@ CREATE TABLE stock_availability (
 
 Second, [insert some sample data](/docs/postgresql/postgresql-insert) into the `stock_availability` table. We use various literal values for the boolean values.
 
-```
+```sql
 INSERT INTO stock_availability (product_id, available)
 VALUES
   (100, TRUE),
@@ -62,7 +62,7 @@ VALUES
 
 Third, check for the availability of products:
 
-```
+```sql
 SELECT *
 FROM stock_availability
 WHERE available = 'yes';
@@ -81,7 +81,7 @@ WHERE available = 'yes';
 
 You can imply the true value by using the Boolean column without any operator. For example, the following query returns all available products:
 
-```
+```sql
 SELECT *
 FROM stock_availability
 WHERE available;
@@ -91,7 +91,7 @@ Similarly, if you want to look for `false` values, you compare the value of the 
 
 The following query returns the products that are not available.
 
-```
+```sql
 SELECT
   *
 FROM
@@ -111,7 +111,7 @@ WHERE
 
 Alternatively, you can use the `NOT` operator to check if values in the Boolean column are false like this:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -126,7 +126,7 @@ To set a default value for an existing Boolean column, you use the `SET DEFAULT`
 
 For example, the following `ALTER TABLE` statement sets the default value for the `available` column in the `stock_availability` table:
 
-```
+```sql
 ALTER TABLE stock_availability
 ALTER COLUMN available
 SET DEFAULT FALSE;
@@ -134,12 +134,12 @@ SET DEFAULT FALSE;
 
 If you insert a row without specifying the value for the `available` column, PostgreSQL will use `FALSE` by default:
 
-```
+```sql
 INSERT INTO stock_availability (product_id)
 VALUES (900);
 ```
 
-```
+```sql
 SELECT *
 FROM stock_availability
 WHERE product_id = 900;
@@ -154,7 +154,7 @@ WHERE product_id = 900;
 
 Likewise, if you want to set a default value for a Boolean column when you [create a table](/docs/postgresql/postgresql-create-table), you use the `DEFAULT` constraint in the column definition as follows:
 
-```
+```sql
 CREATE TABLE boolean_demo (
    ...
    is_ok BOOL DEFAULT 't'

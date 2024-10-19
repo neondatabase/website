@@ -25,7 +25,7 @@ To create a new role in a PostgreSQL server, you use the `CREATE ROLE` statement
 
 Here's the basic syntax of the `CREATE ROLE` statement:
 
-```
+```sql
 CREATE ROLE role_name;
 ```
 
@@ -35,13 +35,13 @@ When you create a role, it is valid in all databases within the database server 
 
 For example, the following statement uses the `CREATE ROLE` statement to create a new role called `bob`:
 
-```
+```sql
 CREATE ROLE bob;
 ```
 
 To retrieve all roles in the current PostgreSQL server, you can query them from the `pg_roles` system catalog as follows:
 
-```
+```sql
 SELECT rolname FROM pg_roles;
 ```
 
@@ -97,7 +97,7 @@ The attributes of a role define privileges for that role, including login, [supe
 
 Here's the syntax for creating a new role with attributes.
 
-```
+```sql
 CREATE ROLE name WITH option;
 ```
 
@@ -107,7 +107,7 @@ In this syntax, the `WITH` keyword is optional. The `option` can be one or more 
 
 For example, the following statement creates a role called `alice` that has the login privilege and an initial password:
 
-```
+```sql
 CREATE ROLE alice
 LOGIN
 PASSWORD 'securePass1';
@@ -137,7 +137,7 @@ It will prompt you for a password. You need to enter the password that you enter
 
 The following statement creates a role called `john` that has the `superuser` attribute.
 
-```
+```sql
 CREATE ROLE john
 SUPERUSER
 LOGIN
@@ -152,7 +152,7 @@ Notice that only a superuser role can create another superuser role.
 
 If you want to create roles that have the database creation privilege, you can use the `CREATEDB` attribute:
 
-```
+```sql
 CREATE ROLE dba
 CREATEDB
 LOGIN
@@ -163,13 +163,13 @@ PASSWORD 'securePass1';
 
 To set a date and time after which the role's password is no longer valid, you use the `VALID UNTIL` attribute:
 
-```
+```sql
 VALID UNTIL 'timestamp'
 ```
 
 For example, the following statement creates a `dev_api` role with password valid until the end of 2049:
 
-```
+```sql
 CREATE ROLE dev_api WITH
 LOGIN
 PASSWORD 'securePass1'
@@ -182,13 +182,13 @@ After one second tick in 2050, the password of `dev_api` is no longer valid.
 
 To specify the number of concurrent connections a role can make, you use the `CONNECTION LIMIT` attribute:
 
-```
+```sql
 CONNECTION LIMIT connection_count
 ```
 
 The following creates a new role called `api` that can make 1000 concurrent connections:
 
-```
+```sql
 CREATE ROLE api
 LOGIN
 PASSWORD 'securePass1'

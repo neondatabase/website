@@ -111,7 +111,7 @@ In the index.php script, we connected to the PostgreSQL database and called the 
 
 Before running the script, we query data from the stocks table to see its current data.
 
-```
+```sql
 SELECT
     id, symbol, company
 FROM
@@ -130,7 +130,7 @@ FROM
 
 Launch the `index.php` file in a web browser; we get the following output.
 
-```
+```sql
 Number of row affected 1
 ```
 

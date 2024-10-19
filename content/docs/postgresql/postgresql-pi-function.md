@@ -13,7 +13,7 @@ In PostgreSQL, the `PI()` function returns the value of pi denoted by the Greek 
 
 Here's the syntax of the `PI()` function:
 
-```
+```sql
 PI()
 ```
 
@@ -27,7 +27,7 @@ Let's take some examples of using the `PI()` function examples.
 
 The following statement uses the `PI()` function to return the constant `PI` value:
 
-```
+```sql
 SELECT PI();
 ```
 
@@ -41,7 +41,7 @@ Output:
 
 The following example uses the `PI()` function to calculate the area of a circle with a radius of 10:
 
-```
+```sql
 SELECT PI() * 10 * 10 area;
 ```
 
@@ -58,7 +58,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `circles` that stores the radiuses of circles:
 
-```
+```sql
 CREATE TABLE circles(
    id INT GENERATED ALWAYS AS IDENTITY,
    radius DEC(19,2) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE circles(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert) into the `circles` table:
 
-```
+```sql
 INSERT INTO circles(radius)
 VALUES(10), (20), (25)
 RETURNING *;
@@ -87,7 +87,7 @@ Output:
 
 Third, calculate the areas of circles using the `PI()` function:
 
-```
+```sql
 SELECT id, radius, PI() * radius * radius area
 FROM circles;
 ```
@@ -105,7 +105,7 @@ Output:
 
 To make the area more readable, you can use the `ROUND()` function:
 
-```
+```sql
 SELECT
   id,
   RADIUS,

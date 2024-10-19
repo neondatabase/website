@@ -15,7 +15,7 @@ The PostgreSQL `CONCAT_WS()` function allows you to concatenate multiple strings
 
 Here's the basic syntax of the `CONCAT_WS` function:
 
-```
+```sql
 CONCAT_WS(separator, string1, string2, string3, ...)
 ```
 
@@ -39,7 +39,7 @@ Let's take some examples of using the `CONCAT_WS()` function.
 
 The following example uses the `CONCAT_WS()` function to concatenate two strings with a space:
 
-```
+```sql
 SELECT CONCAT_WS(' ', 'PostgreSQL', 'Tutorial') title;
 ```
 
@@ -62,7 +62,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `CONCAT_WS()` to concatenate values from the `first_name` and `last_name` columns of the `customer` table using a space as a separator:
 
-```
+```sql
 SELECT
   CONCAT_WS(' ', first_name, last_name) full_name
 FROM

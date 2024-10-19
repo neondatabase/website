@@ -16,7 +16,7 @@ Base-10 logarithm: The base-10 logarithm is the most commonly used logarithm in 
 
 Here's the syntax of the `LOG()` function that calculates the base-10 logarithm of a number:
 
-```
+```sql
 LOG(n)
 ```
 
@@ -30,7 +30,7 @@ If `n` is a text string, the `LOG()` function will attempt to convert it into a 
 
 The second `LOG()` function allows you to calculate the logarithm of a number with a specified base:
 
-```
+```sql
 LOG(b, n)
 ```
 
@@ -50,7 +50,7 @@ Let's take some examples of using the `LOG()` function.
 
 The following example uses the `LOG()` function to calculate the base-10 logarithm of `100`:
 
-```
+```sql
 SELECT LOG(100);
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 The following statement uses the second form of the `LOG()` function to calculate the base-10 logarithm of 100:
 
-```
+```sql
 SELECT LOG(10,100);
 ```
 
@@ -78,7 +78,7 @@ Output:
 
 The following statement uses the `LOG()` function to calculate the base-2 logarithm of 8:
 
-```
+```sql
 SELECT LOG(2,8);
 ```
 
@@ -94,7 +94,7 @@ Output:
 
 The following statement uses the `LOG()` function to calculate the base-2 logarithm of the text `'64'`:
 
-```
+```sql
 SELECT LOG(2, '64');
 ```
 
@@ -111,13 +111,13 @@ In this example, the `LOG()` function converts the text `'64'` into a number and
 
 The following example raises an error because the `LOG()` function cannot convert the string `'64x'` into a number for calculation:
 
-```
+```sql
 SELECT LOG('64x');
 ```
 
 Error:
 
-```
+```sql
 ERROR:  invalid input syntax for type double precision: "64x"
 LINE 1: SELECT LOG('64x');                  ^
 ```

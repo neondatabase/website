@@ -11,7 +11,7 @@ tableOfContents: true
 
 After [creating a tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace), you can change its definition by using the `ALTER TABLESPACE` statement as follows:
 
-```
+```sql
 ALTER TABLESPACE tablespace_name
 action;
 ```
@@ -24,21 +24,21 @@ The action can be:
 
 To rename the tablespace, you use the `ALTER TABLESPACE RENAME TO` statement:
 
-```
+```sql
 ALTER TABLESPACE tablespace_name
 RENAME TO new_name;
 ```
 
 To change the owner of the tablespace, you use the `ALTER TABLESPACE OWNER TO` statement:
 
-```
+```sql
 ALTER TABLESPACE tablespace_name
 OWNER TO new_owner;
 ```
 
 The following statement changes the parameters for a tablespace:
 
-```
+```sql
 ALTER TABLESPACE tablespace_name
 SET parameter_name = value;
 ```
@@ -49,14 +49,14 @@ Only superusers or tablespace owners can execute the `ALTER TABLESPACE` statemen
 
 The following statement changes `dvdrental` tablespace to `dvdrental_raid`:
 
-```
+```sql
 ALTER TABLESPACE dvdrental
 RENAME TO dvdrental_raid;
 ```
 
 The following statement changes the owner of the `dvdrental_raid` from `postgres`to `hr`:
 
-```
+```sql
 ALTER TABLESPACE dvdrental_raid
 OWNER to hr;
 ```

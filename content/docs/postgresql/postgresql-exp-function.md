@@ -15,7 +15,7 @@ In PostgreSQL, you can use the `EXP()` function to calculate the exponential of 
 
 Here's the syntax of the `EXP()` function:
 
-```
+```sql
 EXP(n)
 ```
 
@@ -35,7 +35,7 @@ Let's take some examples to practice the `EXP()` function.
 
 The following example uses the `EXP()` function to return the exponential of 1:
 
-```
+```sql
 SELECT EXP(1) result;
 ```
 
@@ -52,7 +52,7 @@ It returns the Euler number (e) because e1 is e.
 
 The following statement uses the `EXP()` function to return the exponential of zero:
 
-```
+```sql
 SELECT EXP(0) result;
 ```
 
@@ -71,7 +71,7 @@ It returns 1 because e0 is 1.
 
 The following example uses the `EXP()` function with a numeric string:
 
-```
+```sql
 SELECT EXP('10') result;
 ```
 
@@ -88,13 +88,13 @@ In this example, the EXP() function converts the string '10' to the number 10 be
 
 The following example raises an error because the function fails to convert the string '10x' to a number:
 
-```
+```sql
 SELECT EXP('10X') result;
 ```
 
 Error:
 
-```
+```sql
 ERROR:  invalid input syntax for type double precision: "10X"
 LINE 1: SELECT EXP('10X') result;
                    ^

@@ -16,7 +16,7 @@ In business applications, you often have to calculate ages such as the ages of e
 
 Here's the basic syntax of the `AGE()` function:
 
-```
+```sql
 AGE(timestamp,timestamp);
 ```
 
@@ -24,7 +24,7 @@ The `AGE()` function accepts two [`TIMESTAMP`](/docs/postgresql/postgresql-times
 
 For example:
 
-```
+```sql
 SELECT AGE('2017-01-01','2011-06-24');
 ```
 
@@ -38,13 +38,13 @@ Output:
 
 If you want to use the current date as the first argument, you can use the following form of the `AGE()` function:
 
-```
+```sql
 AGE(timestamp);
 ```
 
 For example, if someone's birth date is `2000-01-01`, and the current date is `2024-01-26`, their age would be:
 
-```
+```sql
 SELECT
   current_date,
   AGE(timestamp '2000-01-01');
@@ -67,7 +67,7 @@ We'll use the following `rental` table in the [sample database](/docs/postgresql
 
 The following example uses the `AGE()` function to retrieve the top 10 rentals that have the longest durations:
 
-```
+```sql
 SELECT
   rental_id,
   customer_id,

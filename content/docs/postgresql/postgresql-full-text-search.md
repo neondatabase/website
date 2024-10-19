@@ -37,7 +37,7 @@ Note that lexemes are words without the variation created by suffixes, for examp
 
 For example, the following uses the `to_tsvector()` function to convert the words `watches`, `watched`, and `watching` to `tsvector`:
 
-```
+```sql
 SELECT to_tsvector('waches'),
        to_tsvector('wached'),
        to_tsvector('waching');
@@ -56,7 +56,7 @@ In this example, the `to_tsvector()` function converts the words into tsvector v
 
 The following example uses the `to_tsvector()` function to convert a string to a tsvector value. For example:
 
-```
+```sql
 SELECT to_tsvector('The quick brown fox jumps over the lazy dog.');
 ```
 
@@ -97,7 +97,7 @@ This `tsquery` searches for the documents that contain the words "quick" and "br
 
 The `to_tsquery()` converts a string to a `tsquery`. For example, the following statement uses the `to_tsquery()` to convert the word "jumping" to a `tsquery`:
 
-```
+```sql
 SELECT to_tsquery('jumping');
 ```
 
@@ -120,7 +120,7 @@ tsvector @@ tsquery
 
 For example, the following statement uses the `@@` operator to determine if the string matches the `tsquery`:
 
-```
+```sql
 SELECT
   to_tsvector(
     'The quick brown fox jumps over the lazy dog.'
@@ -140,7 +140,7 @@ It returns true because the tsvector contains the word jump which is the lexeme 
 
 The following example uses the match operator (`@@`) to determine if the string contains the word cat:
 
-```
+```sql
 SELECT
   to_tsvector(
     'The quick brown fox jumps over the lazy dog.'
@@ -164,7 +164,7 @@ Let's take some examples of using full-text searches with boolean operators.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `posts`:
 
-```
+```sql
 CREATE TABLE posts(
    id SERIAL PRIMARY KEY,
    title TEXT NOT NULL,
@@ -180,7 +180,7 @@ Whenever you change data in the `body` column, PostgreSQL will convert it to a `
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert) into the `posts` table:
 
-```
+```sql
 INSERT INTO posts (title, body)
 VALUES
     ('Introduction to PostgreSQL', 'This is an introductory post about PostgreSQL. It covers basic concepts and features.'),
@@ -190,7 +190,7 @@ VALUES
 
 Third, retrieve data from the `id` and `body_search` columns:
 
-```
+```sql
 SELECT
   id,
   body_search
@@ -213,7 +213,7 @@ Output:
 
 The following example uses the match operator (`@@`) to search for posts whose `body` contains the word `"PostgreSQL"`:
 
-```
+```sql
 SELECT
   id,
   body
@@ -238,7 +238,7 @@ Output:
 
 The following example uses the AND operator (&) to search for posts whose body contains both words "PostgreSQL" and "techniques" that can appear in any order:
 
-```
+```sql
 SELECT
   id,
   body
@@ -261,7 +261,7 @@ Output:
 
 The following example uses the OR operator (|) to search for posts whose body contains either the word `"efficient"` or `"optimization"`:
 
-```
+```sql
 SELECT
   id,
   body
@@ -285,7 +285,7 @@ Output:
 
 The following example searches for posts whose body contains the phrase "PostgreSQL technique":
 
-```
+```sql
 SELECT
   id,
   body
@@ -308,7 +308,7 @@ Output:
 
 The following example searches for posts whose body does not contain the word "efficient":
 
-```
+```sql
 SELECT id, body
 FROM posts
 WHERE NOT body_search @@ to_tsquery('efficient');
@@ -329,7 +329,7 @@ In PostgreSQL, GIN stands for Generalized Inverted Index. GIN index is a type of
 
 First, drop the `posts` table and recreate it using the following statements:
 
-```
+```sql
 DROP TABLE IF EXISTS posts;
 
 CREATE TABLE posts(
@@ -341,7 +341,7 @@ CREATE TABLE posts(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert) into the `posts` table:
 
-```
+```sql
 INSERT INTO posts (title, body)
 VALUES
     ('Introduction to PostgreSQL', 'This is an introductory post about PostgreSQL. It covers basic concepts and features.'),
@@ -351,7 +351,7 @@ VALUES
 
 Third, create a GIN index on the `body` column of the `posts` table:
 
-```
+```sql
 CREATE INDEX body_fts
 ON posts
 USING GIN ((to_tsvector('english',body)));
@@ -359,7 +359,7 @@ USING GIN ((to_tsvector('english',body)));
 
 Finally, search for the `posts` whose body contains either the word `basic` or `advanced`:
 
-```
+```sql
 SELECT
   id,
   body

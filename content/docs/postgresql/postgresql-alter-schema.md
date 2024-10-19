@@ -13,7 +13,7 @@ tableOfContents: true
 
 The `ALTER SCHEMA` statement allows you to change the definition of a [schema](/docs/postgresql/postgresql-administration/postgresql-schema). For example, you can rename a schema as follows:
 
-```
+```sql
 ALTER SCHEMA schema_name
 RENAME TO new_name;
 ```
@@ -28,7 +28,7 @@ Note that to execute this statement, you must be the owner of the schema and you
 
 Besides renaming a schema, the `ALTER SCHEMA` also allows you to change the owner of a schema to the new one as shown in the following statement:
 
-```
+```sql
 ALTER SCHEMA schema_name
 OWNER TO { new_owner | CURRENT_USER | SESSION_USER};
 ```
@@ -49,14 +49,14 @@ Notice that the examples in the following part are based on the schema created i
 
 This example uses the `ALTER SCHEMA` statement to rename the schema `doe` to `finance`:
 
-```
+```sql
 ALTER SCHEMA doe
 RENAME TO finance;
 ```
 
 Similarly, the following example renames the `john` schema to accounting:
 
-```
+```sql
 ALTER SCHEMA john
 RENAME TO accounting;
 ```
@@ -65,14 +65,14 @@ RENAME TO accounting;
 
 The following example uses the `ALTER SCHEMA` statement to change the owner of the schema accounting from `john` to `postgres`:
 
-```
+```sql
 ALTER SCHEMA finance
 OWNER TO postgres;
 ```
 
 Here is the statement to query the user-created schema:
 
-```
+```sql
 SELECT *
 FROM
     pg_catalog.pg_namespace
@@ -91,7 +91,7 @@ The output indicates that the `finance` schema now is owned by the owner with id
 
 Likewise, this statement changes the owner of the accounting schema to `postgres`:
 
-```
+```sql
 ALTER SCHEMA accounting
 OWNER TO postgres;
 ```

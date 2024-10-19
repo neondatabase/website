@@ -35,7 +35,7 @@ Internally, PostgreSQL stores interval values as months, days, and seconds. The 
 
 The interval values are very useful when doing [date](/docs/postgresql/postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 2 minutes ago at the current time of last year, you can use the following statement:
 
-```
+```sql
 SELECT
  now(),
  now() - INTERVAL '1 year 3 hours 20 minutes'
@@ -67,7 +67,7 @@ quantity unit [quantity unit...] [direction]
 
 This format is called `postgres_verbose` which is also used for the interval output format. The following examples illustrate some interval values that use the verbose syntax:
 
-```
+```sql
 INTERVAL '1 year 2 months 3 days';
 INTERVAL '2 weeks ago';
 ```
@@ -78,7 +78,7 @@ In addition to the verbose syntax, PostgreSQL allows you to write the interval v
 
 The `ISO 8601` format with designators is like this:
 
-```
+```sql
 P quantity unit [ quantity unit ...] [ T [ quantity unit ...]]
 ```
 
@@ -100,13 +100,13 @@ Note that `M` can be months or minutes depending on whether it appears before or
 
 For example, the interval of 6 years 5 months 4 days 3 hours 2 minutes 1 second can be written in the ISO 8601 designators format as follows:
 
-```
+```sql
 P6Y5M4DT3H2M1S
 ```
 
 The alternative form of `ISO 8601` is:
 
-```
+```sql
 P [ years-months-days ] [ T hours:minutes:seconds ]
 ```
 
@@ -114,7 +114,7 @@ It must start with the letter `P`, and the letter `T` separates the date and tim
 
 For example, the interval of `6 years 5 months 4 days 3 hours 2 minutes 1 second` can be written in the `ISO 8601` alternative form as:
 
-```
+```sql
 P0006-05-04T03:02:01
 ```
 
@@ -122,7 +122,7 @@ P0006-05-04T03:02:01
 
 The output style of interval values is set by using the `SET intervalstyle` command, for example:
 
-```
+```sql
 SET intervalstyle = 'sql_standard';
 ```
 
@@ -137,7 +137,7 @@ PostgreSQL uses the `postgres` style by default for formatting the interval valu
 
 The following represents the interval of `6 years 5 months 4 days 3 hours 2 minutes 1 second` in the four styles:
 
-```
+```sql
 SET intervalstyle = 'sql_standard';
 SELECT
   INTERVAL '6 years 5 months 4 days 3 hours 2 minutes 1 second';
@@ -165,7 +165,7 @@ SELECT
 
 You can apply the arithmetic operator ( `+`, `-`, `*`, etc.,) to the interval values, for example:
 
-```
+```sql
 SELECT INTERVAL '2h 50m' + INTERVAL '10m'; -- 03:00:00
 SELECT INTERVAL '2h 50m' - INTERVAL '50m'; -- 02:00:00
 SELECT 600 * INTERVAL '1 minute'; -- 10:00:00
@@ -175,7 +175,7 @@ SELECT 600 * INTERVAL '1 minute'; -- 10:00:00
 
 To convert an interval value to a string, you use the `TO_CHAR()` function.
 
-```
+```sql
 TO_CHAR(interval,format)
 ```
 
@@ -183,7 +183,7 @@ The `TO_CHAR()` function takes the first argument as an interval value, the seco
 
 See the following example:
 
-```
+```sql
 SELECT
     TO_CHAR(
         INTERVAL '17h 20m 05s',
@@ -204,7 +204,7 @@ Output:
 
 To extract fields such as year, month, date, etc., from an interval, you use the `EXTRACT()` function.
 
-```
+```sql
 EXTRACT(field FROM interval)
 ```
 
@@ -212,7 +212,7 @@ The field can be the year, month, date, hour, minutes, etc., that you want to ex
 
 See the following example:
 
-```
+```sql
 SELECT
     EXTRACT (
         MINUTE
@@ -234,7 +234,7 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 
 PostgreSQL provides two functions `justifydays` and `justifyhours` that allows you to adjust the interval of 30-day as one month and the interval of 24 hours as one day:
 
-```
+```sql
 SELECT
     justify_days(INTERVAL '30 days'),
     justify_hours(INTERVAL '24 hours');
@@ -249,7 +249,7 @@ SELECT
 
 In addition, the `justify_interval` function adjusts interval using `justifydays` and `justifyhours` with additional sign adjustments:
 
-```
+```sql
 SELECT
     justify_interval(interval '1 year -1 hour');
 ```
@@ -265,7 +265,7 @@ SELECT
 
 First, create a table called `event` that has three columns `id`, `event_name`, and `duration`. The duration column is `interval` type:
 
-```
+```sql
 CREATE TABLE event (
     id SERIAL PRIMARY KEY,
     event_name VARCHAR(255) NOT NULL,
@@ -275,7 +275,7 @@ CREATE TABLE event (
 
 Second, insert some rows into the `event` table:
 
-```
+```sql
 INSERT INTO event (event_name, duration)
 VALUES
     ('pgConf', '1 hour 30 minutes'),
@@ -298,7 +298,7 @@ INSERT 0 2
 
 Third, extract components (days, hours, minutes) from values in the `interval` column:
 
-```
+```sql
 SELECT
     event_name,
     duration,
@@ -320,7 +320,7 @@ Output:
 
 Fourth, retrieve the events with a duration longer than one day:
 
-```
+```sql
 SELECT *
 FROM event
 WHERE duration > INTERVAL '1 day';
@@ -337,7 +337,7 @@ Output:
 
 Finally, calculate the total duration for all events:
 
-```
+```sql
 SELECT
     SUM(duration) AS total_duration
 FROM event
@@ -355,7 +355,7 @@ Output:
 
 To make the output more clear, you can extract components of the total duration using a common table expression (CTE):
 
-```
+```sql
 WITH cte AS(
    SELECT SUM(duration) AS total_duration
    FROM event

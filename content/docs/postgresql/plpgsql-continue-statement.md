@@ -55,7 +55,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  1
 NOTICE:  3
 NOTICE:  5

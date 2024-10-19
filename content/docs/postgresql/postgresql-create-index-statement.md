@@ -18,7 +18,7 @@ To create an index on one or more columns of a table, you use the `CREATE INDEX`
 
 Here's the basic syntax of the `CREATE INDEX` statement:
 
-```
+```sql
 CREATE INDEX [IF NOT EXISTS] index_name
 ON table_name(column1, column2, ...);
 ```
@@ -48,7 +48,7 @@ psql -U postgres -d dvdrental
 
 Second, execute the following [query](/docs/postgresql/postgresql-select) to find the address whose phone number is `223664661973`:
 
-```
+```sql
 SELECT
   address_id,
   address,
@@ -73,7 +73,7 @@ To find the row whose value in the `phone` column is `223664661973`, PostgreSQL 
 
 Third, show the query plan using the following `EXPLAIN` statement::
 
-```
+```sql
 EXPLAIN SELECT
   address_id,
   address,
@@ -99,7 +99,7 @@ The output indicates that the query optimizer has to perform a sequential scan o
 
 Fourth, [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) for the values in the `phone` column of the `address` table using the `CREATE INDEX` statement:
 
-```
+```sql
 CREATE INDEX idx_address_phone
 ON address(phone);
 ```
@@ -110,7 +110,7 @@ This process is called an index build. By default, PostgreSQL allows reads from 
 
 Fifth, [show the indexes](/docs/postgresql/postgresql-indexes/postgresql-list-indexes) that belong to the `address` table from the `pg_indexes`:
 
-```
+```sql
 SELECT
   indexname,
   indexdef
@@ -139,7 +139,7 @@ More specifically, the `address_pkey` index was created for the [primary key](/d
 
 Fifth, execute the following query again:
 
-```
+```sql
 EXPLAIN SELECT
   address_id,
   address,

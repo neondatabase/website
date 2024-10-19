@@ -83,7 +83,7 @@ $$
 
 Output:
 
-```
+```sql
 NOTICE:  (i,j): (1,1)
 NOTICE:  (i,j): (1,2)
 NOTICE:  (i,j): (1,3)
@@ -133,7 +133,7 @@ $$
 
 Output:
 
-```
+```sql
 NOTICE:  (i,j): (1,1)
 NOTICE:  (i,j): (1,2)
 NOTICE:  (i,j): (1,3)
@@ -163,7 +163,7 @@ $$
 
 Output
 
-```
+```sql
 NOTICE:  End of block
 ```
 

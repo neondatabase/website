@@ -13,7 +13,7 @@ The PostgreSQL unique index enforces the uniqueness of values in one or multiple
 
 To create a unique index, you use the following `CREATE UNIQUE INDEX` statement:
 
-```
+```sql
 CREATE UNIQUE INDEX index_name
 ON table_name (column [, ...])
 [ NULLS [ NOT ] DISTINCT ];
@@ -41,7 +41,7 @@ Let's explore some examples of using the PostgreSQL unique indexes.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `employees` :
 
-```
+```sql
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
@@ -54,7 +54,7 @@ In this statement, the `employee_id` is the [primary key](/docs/postgresql/postg
 
 Second, show the indexes of the `employees` table:
 
-```
+```sql
 SELECT
     tablename,
     indexname,
@@ -79,7 +79,7 @@ Here is the output:
 
 First, [add a column](/docs/postgresql/postgresql-add-column) named `mobile_phone` to the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 ADD mobile_phone VARCHAR(20);
 ```
@@ -88,28 +88,28 @@ To ensure that the mobile phone numbers are distinct for all employees, you can 
 
 Second, create a unique index on the `mobile_phone` column of the `employees` table:
 
-```
+```sql
 CREATE UNIQUE INDEX idx_employees_mobile_phone
 ON employees(mobile_phone);
 ```
 
 Third, [insert a new row](/docs/postgresql/postgresql-insert) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, email, mobile_phone)
 VALUES ('John','Doe','john.doe@postgresqltutorial.com', '(408)-555-1234');
 ```
 
 Fourth, attempt to insert another row with the same phone number:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, email, mobile_phone)
 VALUES ('Jane','Doe','jane.doe@postgresqltutorial.com', '(408)-555-1234');
 ```
 
 PostgreSQL issues the following error due to the duplicate mobile phone number:
 
-```
+```sql
 ERROR:  duplicate key value violates unique constraint "idx_employees_mobile_phone"
 DETAIL:  Key (mobile_phone)=((408)-555-1234) already exists.
 ```
@@ -118,7 +118,7 @@ DETAIL:  Key (mobile_phone)=((408)-555-1234) already exists.
 
 First, [add two new columns](/docs/postgresql/postgresql-add-column) called `work_phone` and `extension` to the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 ADD work_phone VARCHAR(20),
 ADD extension VARCHAR(5);
@@ -130,21 +130,21 @@ To enforce this rule, you can define a unique index on both `work_phone` and `ex
 
 Next, create a unique index that includes both `work_phone` and `extension` columns:
 
-```
+```sql
 CREATE UNIQUE INDEX idx_employees_workphone
 ON employees(work_phone, extension);
 ```
 
 Then, insert a row into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, work_phone, extension)
 VALUES('Lily', 'Bush', '(408)-333-1234','1212');
 ```
 
 After that, insert another employee with the same work phone number but a different extension:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, work_phone, extension)
 VALUES('Joan', 'Doe', '(408)-333-1234','1211');
 ```
@@ -153,14 +153,14 @@ The statement works because the combination of values in the `work_phone` and `e
 
 Finally, attempt to insert a row with the same values in both `work_phone` and `extension` columns that already exist in the `employees` table:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, work_phone, extension)
 VALUES('Tommy', 'Stark', '(408)-333-1234','1211');
 ```
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  duplicate key value violates unique constraint "idx_employees_workphone"
 DETAIL:  Key (work_phone, extension)=((408)-333-1234, 1211) already exists.
 ```

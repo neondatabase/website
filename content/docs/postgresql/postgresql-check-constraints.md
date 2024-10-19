@@ -19,7 +19,7 @@ A check constraint allows you to enforce data integrity rules at the database le
 
 Typically, you create a check constraint when creating a table using the `CREATE TABLE` statement:
 
-```
+```sql
 CREATE TABLE table_name(
    column1 datatype,
    ...,
@@ -35,7 +35,7 @@ In this syntax:
 
 If the `CHECK` constraint involves only one column, you can define it as a column constraint like this:
 
-```
+```sql
 CREATE TABLE table_name(
    column1 datatype,
    column1 datatype CHECK(condition),
@@ -53,7 +53,7 @@ By default, PostgreSQL assigns a name to a `CHECK` constraint using the followin
 
 To add a `CHECK` constraint to an existing table, you use the `ALTER TABLE ... ADD CONSTRAINT` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ADD CONSTRAINT constraint_name CHECK (condition);
 ```
@@ -62,7 +62,7 @@ ADD CONSTRAINT constraint_name CHECK (condition);
 
 To drop a `CHECK` constraint, you use the `ALTER TABLE ... DROP CONSTRAINT` statement:
 
-```
+```sql
 ALTER TABLE table_name
 DROP CONSTRAINT constraint_name;
 ```
@@ -75,7 +75,7 @@ Let's explore some examples of using the `CHECK` constraints.
 
 First, create a new table called `employees` with some `CHECK` constraints:
 
-```
+```sql
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR (50) NOT NULL,
@@ -90,14 +90,14 @@ In this statement, the `employees` table has one `CHECK` constraint that enforce
 
 Second, attempt to [insert](/docs/postgresql/postgresql-insert) a new row with a negative salary into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (first_name, last_name, birth_date, joined_date, salary)
 VALUES ('John', 'Doe', '1972-01-01', '2015-07-01', -100000);
 ```
 
 Error:
 
-```
+```sql
 ERROR:  new row for relation "employees" violates check constraint "employees_salary_check"
 DETAIL:  Failing row contains (1, John, Doe, 1972-01-01, 2015-07-01, -100000).
 ```
@@ -108,7 +108,7 @@ The insert fails because the `CHECK` constraint on the `salary` column accepts o
 
 First, use the `ALTER TABLE ... ADD CONSTRAINT` statement to add a `CHECK` constraint to the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 ADD CONSTRAINT joined_date_check
 CHECK ( joined_date >  birth_date );
@@ -118,14 +118,14 @@ The `CHECK` constraint ensures that the joined date is later than the birthdate.
 
 Second, attempt to insert a new row into the `employees` table with the joined date is earlier than the birth date:
 
-```
+```sql
 INSERT INTO employees (first_name, last_name, birth_date, joined_date, salary)
 VALUES ('John', 'Doe', '1990-01-01', '1989-01-01', 100000);
 ```
 
 Output:
 
-```
+```sql
 ERROR:  new row for relation "employees" violates check constraint "joined_date_check"
 DETAIL:  Failing row contains (2, John, Doe, 1990-01-01, 1989-01-01, 100000).
 ```
@@ -136,7 +136,7 @@ The output indicates that the data violates the check constraint "joined_date_ch
 
 The following example adds a `CHECK` constraint to ensure that the first name has at least 3 characters:
 
-```
+```sql
 ALTER TABLE employees
 ADD CONSTRAINT first_name_check
 CHECK ( LENGTH(TRIM(first_name)) >= 3);
@@ -152,14 +152,14 @@ The whole expression `LENGTH(TRIM(first_name)) >= 3` ensures the first name cont
 
 The following statement will fail because it attempts to insert a row into the `employees` table with the first name that has 2 characters:
 
-```
+```sql
 INSERT INTO employees (first_name, last_name, birth_date, joined_date, salary)
 VALUES ('Ab', 'Doe', '1990-01-01', '2008-01-01', 100000);
 ```
 
 Error:
 
-```
+```sql
 ERROR:  new row for relation "employees" violates check constraint "first_name_check"
 DETAIL:  Failing row contains (4, Ab, Doe, 1990-01-01, 2008-01-01, 100000).
 ```
@@ -168,7 +168,7 @@ DETAIL:  Failing row contains (4, Ab, Doe, 1990-01-01, 2008-01-01, 100000).
 
 The following statement removes the `CHECK` constraint `joined_date_check` from the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 DROP CONSTRAINT joined_date_check;
 ```

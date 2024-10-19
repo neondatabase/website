@@ -23,7 +23,7 @@ A trigger function is similar to a regular [user-defined function](/docs/postgre
 
 The following illustrates the syntax of creating a trigger function:
 
-```
+```sql
 CREATE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -50,7 +50,7 @@ The `CREATE TRIGGER` statement allows you to create a new trigger.
 
 The following illustrates the basic syntax of the `CREATE TRIGGER` statement:
 
-```
+```sql
 CREATE TRIGGER trigger_name
    {BEFORE | AFTER} { event }
    ON table_name
@@ -86,7 +86,7 @@ Finally, give the name of the trigger function after the `EXECUTE PROCEDURE` key
 
 The following statement creates a new table called `employees`:
 
-```
+```sql
 CREATE TABLE employees(
    id INT GENERATED ALWAYS AS IDENTITY,
    first_name VARCHAR(40) NOT NULL,
@@ -97,13 +97,13 @@ CREATE TABLE employees(
 
 Note that if your database already has the `employees` table, you can drop it first before creating a new one:
 
-```
+```sql
 DROP TABLE IF EXISTS employees;
 ```
 
 Suppose that when the name of an employee changes, you want to log it in a separate table called `employee_audits` :
 
-```
+```sql
 CREATE TABLE employee_audits (
    id INT GENERATED ALWAYS AS IDENTITY,
    employee_id INT NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE employee_audits (
 
 First, create a new function called `log_last_name_changes`:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION log_last_name_changes()
   RETURNS TRIGGER
   LANGUAGE PLPGSQL
@@ -137,7 +137,7 @@ The `OLD` represents the row before the update while the `NEW` represents the ne
 
 Second, bind the trigger function to the `employees` table. The trigger name is `last_name_changes`. Before the value of the `last_name` column is updated, the trigger function is automatically invoked to log the changes.
 
-```
+```sql
 CREATE TRIGGER last_name_changes
   BEFORE UPDATE
   ON employees
@@ -147,7 +147,7 @@ CREATE TRIGGER last_name_changes
 
 Third, [insert](/docs/postgresql/postgresql-insert) some rows into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (first_name, last_name)
 VALUES ('John', 'Doe');
 
@@ -157,7 +157,7 @@ VALUES ('Lily', 'Bush');
 
 Fourth, examine the contents of the `employees` table:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -167,7 +167,7 @@ Suppose that `Lily Bush` changes her last name to `Lily Brown`.
 
 Fifth, update Lily's last name to the new one:
 
-```
+```sql
 UPDATE employees
 SET last_name = 'Brown'
 WHERE ID = 2;
@@ -175,7 +175,7 @@ WHERE ID = 2;
 
 Sixth, check if the last name of `Lily` has been updated:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -185,7 +185,7 @@ The output indicates that Lily's last name has been updated.
 
 Finally, verify the contents of the `employee_audits` table:
 
-```
+```sql
 SELECT * FROM employee_audits;
 ```
 

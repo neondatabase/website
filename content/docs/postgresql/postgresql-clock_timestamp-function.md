@@ -14,7 +14,7 @@ The `CLOCK_TIMESTAMP()` function returns the current date and time with a timezo
 
 Here's the basic syntax of the `CLOCK_TIMESTAMP()` function:
 
-```
+```sql
 CLOCK_TIMESTAMP()
 ```
 
@@ -32,7 +32,7 @@ Let's take some examples of using the `CLOCK_TIMESTAMP()` function.
 
 The following example uses the `CLOCK_TIMESTAMP()` function to obtain the current date and time:
 
-```
+```sql
 SELECT CLOCK_TIMESTAMP();
 ```
 
@@ -51,7 +51,7 @@ The result is a timestamp with a time zone.
 
 The following example calls the `CLOCK_TIMESTAMP()` function multiple times within a statement:
 
-```
+```sql
 SELECT
   clock_timestamp(),
   pg_sleep(3),
@@ -77,7 +77,7 @@ The output shows that the `CLOCK_TIMESTAMP()` function returns the actual date a
 
 First, [define a new function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) called `time_it` to measure the execution time of a statement:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION time_it(
     p_statement TEXT
 ) RETURNS NUMERIC AS $$
@@ -105,7 +105,7 @@ $$ LANGUAGE plpgsql;
 
 Second, use the `time_it()` function to measure the execution time of the statement that uses the `pg_sleep()` function:
 
-```
+```sql
 SELECT time_it('SELECT pg_sleep(1)');
 ```
 

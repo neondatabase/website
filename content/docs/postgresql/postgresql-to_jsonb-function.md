@@ -31,7 +31,7 @@ Let's explore some examples of using the `to_jsonb()` function.
 
 The following example uses the `to_jsonb()` function to convert a text string into a `JSONB` value:
 
-```
+```sql
 SELECT to_jsonb('Hello'::text);
 ```
 
@@ -52,7 +52,7 @@ The `jsonb_typeof()` function returns the type of a top-level JSON value as a te
 
 For example:
 
-```
+```sql
 SELECT
   JSONB_TYPEOF(
     to_jsonb('Hello' :: text)
@@ -72,7 +72,7 @@ Output:
 
 The following example uses the `to_jsonb()` function to convert numbers to `JSONB` values:
 
-```
+```sql
 SELECT
   to_jsonb(10 :: int),
   to_jsonb(9.99 :: numeric);
@@ -91,7 +91,7 @@ Output:
 
 The following example uses the `to_jsonb()` function to convert boolean values to `JSONB` values:
 
-```
+```sql
 SELECT
   to_jsonb(true :: bool),
   to_jsonb(false :: bool);
@@ -110,7 +110,7 @@ Output:
 
 The following example uses the `to_jsonb()` function to convert `NULL` to a `JSONB` value:
 
-```
+```sql
 SELECT
   to_jsonb(NULL::text);
 ```
@@ -128,7 +128,7 @@ Output:
 
 The following example uses the `to_jsonb()` function to convert an array in PostgreSQL to a JSON array with the `JSONB` type:
 
-```
+```sql
 SELECT
   to_jsonb(
     ARRAY[ 'red', 'green', 'blue' ]
@@ -148,7 +148,7 @@ Output:
 
 We'll use the `to_jsonb()` function to convert data in the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) to `JSONB` values:
 
-```
+```sql
 SELECT
   to_jsonb(title),
   to_jsonb(length)

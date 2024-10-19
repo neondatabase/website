@@ -21,7 +21,7 @@ It'll prompt you to enter a password for the postgres user.
 
 Second, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) called `elearning`:
 
-```
+```sql
 CREATE DATABASE elearning;
 ```
 
@@ -33,7 +33,7 @@ Third, change the current database to `elearning`:
 
 Fourth, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) (user) with the name `ed`:
 
-```
+```sql
 CREATE ROLE ed WITH LOGIN PASSWORD 'YourPassword';
 ```
 
@@ -41,7 +41,7 @@ Note that you need to replace the `YourPassword` with your actual password and k
 
 Fifth, [grant all privileges](/docs/postgresql/postgresql-administration/postgresql-grant) of the `elearning` database to the `ed` user:
 
-```
+```sql
 GRANT ALL PRIVILEGES ON SCHEMA public
 TO ed;
 ```
@@ -170,7 +170,7 @@ await conn.OpenAsync();
 
 Finally, display the PostgreSQL server version by accessing the `PostgreSqlVersion` property of the `NpgsqlConnection` object:
 
-```
+```sql
 Console.WriteLine($"The PostgreSQL version: {conn.PostgreSqlVersion}");
 ```
 

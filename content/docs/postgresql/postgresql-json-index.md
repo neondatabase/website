@@ -19,7 +19,7 @@ Note that you can utilize the GIN index for tsvector or array columns.
 
 To create a `GIN` index for a JSONB column, you can use the following `CREATE INDEX` statement:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name
 USING GIN(jsonb_column);
@@ -33,7 +33,7 @@ The operator class determines how PostgreSQL builds the index and how it optimiz
 
 For example, The following `CREATE INDEX` statement creates a `GIN` index on the `jsonb_coumn` with `jsonb_path_ops` operator class:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name
 USING GIN(jsonb_column jsonb_path_ops);
@@ -65,7 +65,7 @@ Note that if you don't explicitly specify a `GIN` operator class, the statement 
 
 Additionally, PostgreSQL allows you to create a `GIN` index for a specific field in JSON documents as follows:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name
 USING GIN ((data->'field_name') jsonb_path_ops);
@@ -81,7 +81,7 @@ We'll use the tables in the [sample database](/docs/postgresql/postgresql-gettin
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `customer_json` that stores the customer information in JSON format:
 
-```
+```sql
 CREATE TABLE customer_json(
    id SERIAL PRIMARY KEY,
    data JSONB NOT NULL
@@ -90,7 +90,7 @@ CREATE TABLE customer_json(
 
 Second, insert data from the `customer`, `address`, `city`, and `country` tables into the `customer_json` table:
 
-```
+```sql
 WITH json_cte AS(
   SELECT
     jsonb_build_object(
@@ -122,7 +122,7 @@ FROM
 
 Third, retrieve the email of the customer whose first name is `John`:
 
-```
+```sql
 SELECT
    data ->> 'first_name' first_name,
    data ->> 'last_name' last_name,
@@ -144,7 +144,7 @@ Output:
 
 Finally, explain and analyze the above query:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT
    data ->> 'first_name' first_name,
@@ -177,7 +177,7 @@ To improve the performance of the query, you can create a `GIN` index on the dat
 
 First, [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) on the `data` column of the `customer_json` table:
 
-```
+```sql
 CREATE INDEX customer_json_index
 ON customer_json
 USING GIN(data);
@@ -185,7 +185,7 @@ USING GIN(data);
 
 Second, execute the query that searches for the customer whose first name is `John`:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT
    data ->> 'first_name' first_name,
@@ -220,13 +220,13 @@ This time, the execution time is significantly smaller `0.045ms` vs. `0.128` ms,
 
 First, [drop](/docs/postgresql/postgresql-indexes/postgresql-drop-index) the `customer_json_index` index:
 
-```
+```sql
 DROP INDEX customer_json_index;
 ```
 
 Second, create a `GIN` index on the data column of the `customer_json` table with a `GIN` operator class:
 
-```
+```sql
 CREATE INDEX customer_json_index
 ON customer_json
 USING GIN(data jsonb_path_ops);
@@ -234,7 +234,7 @@ USING GIN(data jsonb_path_ops);
 
 Third, explain the query that finds the customer whose first name is `John`:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT
    data ->> 'first_name' first_name,
@@ -265,7 +265,7 @@ The query plan shows that the query does use the `customer_json_index` for impro
 
 Finally, explain the query that searches for the customer where the value in the `first_name` field within the data column is John:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT * FROM customer_json
 WHERE data->>'first_name' = 'John';
@@ -290,13 +290,13 @@ In this plan, the query cannot fully utilize the `GIN` index `customer_json_inde
 
 First, drop the `customer_json_index` index:
 
-```
+```sql
 DROP INDEX customer_json_index;
 ```
 
 Second, create a `GIN` index on the `first_name` field of the `customer_json` table using the `GIN` operator class:
 
-```
+```sql
 CREATE INDEX customer_json_index
 ON customer_json
 USING GIN((data->'first_name'));
@@ -304,7 +304,7 @@ USING GIN((data->'first_name'));
 
 Third, explain the query that finds the rows where the "`first_name`" field in the `data` JSONB column contains the value `"John"`:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT
    data ->> 'first_name' first_name,

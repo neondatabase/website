@@ -14,7 +14,7 @@ To change attributes of a [role](/docs/postgresql/postgresql-administration/post
 
 Here's the basic syntax of the
 
-```
+```sql
 ALTER ROLE role_name [WITH] option;
 ```
 
@@ -106,7 +106,7 @@ calf      | Superuser                                  +| {}
 
 To change the name of a role, you use the following form of the `ALTER ROLE` statement:
 
-```
+```sql
 ALTER ROLE role_name
 TO new_name;
 ```
@@ -117,7 +117,7 @@ A superuser can rename any role. A role that has the `CREATEROLE` privilege can 
 
 If you use a role to log in to the PostgreSQL database server and rename it in the current session, you will get an error:
 
-```
+```sql
 ERROR:  session user cannot be renamed
 ```
 
@@ -125,7 +125,7 @@ In this case, you need to connect to the PostgreSQL database server using a diff
 
 You execute the following statement from the `postgres`' session to rename the role `calf` to `elephant`:
 
-```
+```sql
 ALTER ROLE calf
 RENAME TO elephant;
 ```
@@ -134,7 +134,7 @@ RENAME TO elephant;
 
 The following `ALTER ROLE` statement changes the role's session default for a configuration variable:
 
-```
+```sql
 ALTER ROLE role_name | CURRENT_USER | SESSION_USER | ALL
 [IN DATABASE database_name]
 SET configuration_param = { value | DEFAULT }
@@ -152,7 +152,7 @@ Superusers can change the session defaults of any role. Roles with the `CREATERO
 
 The following example uses the `ALTER ROLE` to give the role elephant a non-default, database-specific setting of the `client_min_messages` parameter:
 
-```
+```sql
 ALTER ROLE elephant
 IN DATABASE dvdrental
 SET client_min_messages = NOTICE;

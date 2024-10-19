@@ -46,7 +46,7 @@ Let's explore some examples of using the PostgreSQL `ALL` operator.
 
 ### Setting up a sample table
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
@@ -87,7 +87,7 @@ VALUES
 
 The following example uses the `ALL` operator for employees who have salaries greater than all managers
 
-```
+```sql
 SELECT
   *
 FROM
@@ -116,7 +116,7 @@ The query returns one row with a salary of 75K greater than the highest salary o
 
 The following example uses the `ALL` operator for employees who have salaries less than all managers:
 
-```
+```sql
 SELECT
   *
 FROM

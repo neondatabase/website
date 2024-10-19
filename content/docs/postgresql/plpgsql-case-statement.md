@@ -80,7 +80,7 @@ end; $$
 
 Output:
 
-```
+```sql
 NOTICE:  High End
 ```
 

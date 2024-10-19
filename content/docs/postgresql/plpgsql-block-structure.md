@@ -85,7 +85,7 @@ end first_block $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The number of films is 1000
 DO
 ```
@@ -171,7 +171,7 @@ $$
 
 Output:
 
-```
+```sql
 NOTICE:  x=1 y=3
 DO
 ```

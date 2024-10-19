@@ -57,7 +57,7 @@ This command instructs the Composer to download the declared libraries in the `c
 
 The command will also place all third-party libraries in the newly created `vendor` folder. Because we don't declare any library in the `composer.json` file, it generates the autoload file.
 
-```
+```sql
 Loading composer repositories with package information
 Updating dependencies (including require-dev)
 Nothing to install or update
@@ -76,7 +76,7 @@ The project structure will look like the following picture:
 
 First, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) named `stocks` for the demonstration.
 
-```
+```sql
 CREATE DATABASE stocks;
 ```
 
@@ -194,13 +194,13 @@ composer dump-autoload -o
 
 Output:
 
-```
+```sql
 Generating optimized autoload files
 ```
 
 Finally, launch the `index.php` file from the web browser to test it.
 
-```
+```sql
 A connection to the PostgreSQL database sever has been established successfully.
 ```
 
@@ -208,13 +208,13 @@ If you want to see the exception that may occur, you can change the parameters i
 
 The following is the error message when the password is invalid.
 
-```
+```sql
 SQLSTATE[08006] [7] FATAL: password authentication failed for user "postgres"
 ```
 
 And the following is the error message when the database is invalid.
 
-```
+```sql
 SQLSTATE[08006] [7] FATAL: database "stockss" does not exist
 ```
 

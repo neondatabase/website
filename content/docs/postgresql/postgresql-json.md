@@ -89,7 +89,7 @@ Let's take some examples of storing JSON data in the PostgreSQL database.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -113,7 +113,7 @@ The `products` table includes three columns:
 
 Second, insert JSON data into the `products` table:
 
-```
+```sql
 INSERT INTO products(name, properties)
 VALUES('Ink Fusion T-Shirt','{"color": "white", "size": ["S","M","L","XL"]}')
 RETURNING *;
@@ -130,7 +130,7 @@ Output:
 
 Third, [insert multiple rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products(name, properties)
 VALUES('ThreadVerse T-Shirt','{"color": "black", "size": ["S","M","L","XL"]}'),
       ('Design Dynamo T-Shirt','{"color": "blue", "size": ["S","M","L","XL"]}')
@@ -149,7 +149,7 @@ Output:
 
 Fourth, retrieve JSON data from the `products` table:
 
-```
+```sql
 SELECT id, name, properties
 FROM products;
 ```
@@ -167,7 +167,7 @@ Output:
 
 Fifth, retrieve the product with the colors extracted from the JSON data in the `properties` column:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -197,7 +197,7 @@ The values in the color column are surrounded by double quotes (").
 
 To extract a JSON object field by a key as text, you can use the `->>` operator. For example:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -219,7 +219,7 @@ Output:
 
 Sixth, retrieve the products with the colors black and white using the `->>` operator in the [WHERE](/docs/postgresql/postgresql-where) clause:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -244,7 +244,7 @@ Output:
 
 First, create a table called `contacts` for storing the contact persons:
 
-```
+```sql
 CREATE TABLE contacts(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -256,7 +256,7 @@ The `phones` column has the JSONB data type. We'll store both work phone and per
 
 Second, insert new rows into the `contacts` table:
 
-```
+```sql
 INSERT INTO contacts(name, phones)
 VALUES
    ('John Doe','["408-111-2222", "408-111-2223"]'),
@@ -276,7 +276,7 @@ Output:
 
 Third, retrieve the contacts with the work phone numbers from the `contacts` table:
 
-```
+```sql
 SELECT
   name,
   phones ->> 0 "work phone"

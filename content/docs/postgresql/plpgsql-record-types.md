@@ -90,7 +90,7 @@ $$;
 
 Here is the partial output:
 
-```
+```sql
 NOTICE:  Hall Cassidy (51)
 NOTICE:  Champion Flatliners (51)
 NOTICE:  Deep Crusade (51)

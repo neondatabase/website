@@ -14,7 +14,7 @@ PostgreSQL supports [inner join](/docs/postgresql/postgresql-inner-join),[left j
 
 Suppose you have two tables called `basket_a` and `basket_b` that store fruits:
 
-```
+```sql
 CREATE TABLE basket_a (
     a INT PRIMARY KEY,
     fruit_a VARCHAR (100) NOT NULL
@@ -70,7 +70,7 @@ The following statement returns data from the `basket_b` table:
 
 The following statement joins the first table (`basket_a`) with the second table (`basket_b`) by matching the values in the `fruit_a` and `fruit_b` columns:
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -102,7 +102,7 @@ The following Venn diagram illustrates the inner join:
 
 The following statement uses the left join clause to join the `basket_a` table with the `basket_b` table. In the left join context, the first table is called the left table and the second table is called the right table.
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -138,7 +138,7 @@ The following Venn diagram illustrates the left join:
 
 To select rows from the left table that do not have matching rows in the right table, you use the left join with a `WHERE` clause. For example:
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -177,7 +177,7 @@ In case these values are not equal, the right join also creates a new row that c
 
 The following statement uses the right join to join the `basket_a` table with the `basket_b` table:
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -206,7 +206,7 @@ The following Venn diagram illustrates the right join:
 
 Similarly, you can get rows from the right table that do not have matching rows from the left table by adding a `WHERE` clause as follows:
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -239,7 +239,7 @@ The following Venn diagram illustrates the right join that returns rows from the
 
 The [full outer join](/docs/postgresql/postgresql-full-outer-join) or full join returns a result set that contains all rows from both left and right tables, with the matching rows from both sides if available. In case there is no match, the columns of the table will be filled with NULL.
 
-```
+```sql
 SELECT
     a,
     fruit_a,
@@ -271,7 +271,7 @@ The following Venn diagram illustrates the full outer join:
 
 To return rows in a table that do not have matching rows in the other, you use the full join with a `WHERE` clause like this:
 
-```
+```sql
 SELECT
     a,
     fruit_a,

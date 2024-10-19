@@ -16,7 +16,7 @@ Like the [UNION](/docs/postgresql/postgresql-union) and [EXCEPT](/docs/postgresq
 
 Here is the basic syntax of the `INTERSECT` operator:
 
-```
+```sql
 SELECT select_list
 FROM A
 INTERSECT
@@ -38,7 +38,7 @@ The following diagram illustrates how the `INTERSECT` operator combines the resu
 
 If you want to sort the result set returned by the `INTERSECT` operator, you place the `ORDER BY` after the final query:
 
-```
+```sql
 SELECT select_list
 FROM A
 INTERSECT
@@ -51,7 +51,7 @@ ORDER BY sort_expression;
 
 We'll create two tables `top_rated_films` and `most_popular_films` for demonstration:
 
-```
+```sql
 CREATE TABLE top_rated_films(
   title VARCHAR NOT NULL,
   release_year SMALLINT
@@ -112,7 +112,7 @@ Let's explore some examples of using the `INTERSECT` operator.
 
 The following example uses the `INTERSECT` operator to retrieve the popular films that are also top-rated:
 
-```
+```sql
 SELECT *
 FROM most_popular_films
 INTERSECT
@@ -136,7 +136,7 @@ The result set returns one film that appears on both tables.
 
 The following statement uses the `INTERSECT` operator to find the most popular films which are also the top-rated films and sort the films by release year:
 
-```
+```sql
 SELECT *
 FROM most_popular_films
 INTERSECT

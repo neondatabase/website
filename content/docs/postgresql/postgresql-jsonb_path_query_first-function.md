@@ -35,7 +35,7 @@ Let's explore some examples of using the `jsonb_path_query_first()` function.
 
 The following example uses the `jsonb_path_query_first()` function to get the first pet of a person:
 
-```
+```sql
 SELECT jsonb_path_query_first(
     '{"name": "Alice", "pets": ["Lucy","Bella"]}',
     '$.pets[*]'
@@ -55,7 +55,7 @@ Output:
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `person`:
 
-```
+```sql
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     data JSONB
@@ -66,7 +66,7 @@ In the `person` table, the `data` column has the type of JSONB that stores emplo
 
 Second, [insert data](/docs/postgresql/postgresql-insert-multiple-rows) into the `person` table:
 
-```
+```sql
 INSERT INTO person (data)
 VALUES
     ('{"name": "Alice", "age": 30, "pets": [{"type": "cat", "name": "Fluffy"}, {"type": "dog", "name": "Buddy"}]}'),
@@ -77,7 +77,7 @@ RETURNING *;
 
 Third, retrieve the first pet name using the `jsonb_path_query_first()` function:
 
-```
+```sql
 SELECT jsonb_path_query_first(data, '$.pets[*].name') AS first_pet_name
 FROM person;
 ```
@@ -97,7 +97,7 @@ Output:
 
 The following example attempts to find an element whose path does not exist:
 
-```
+```sql
 SELECT jsonb_path_query_first(data, '$.email')
 FROM person;
 ```

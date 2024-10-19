@@ -15,7 +15,7 @@ The `RIGHT()` function allows you to retrieve the last n characters of a string.
 
 Here's the basic syntax of the `RIGHT()` function:
 
-```
+```sql
 RIGHT(string, n)
 ```
 
@@ -36,7 +36,7 @@ Let's take some examples of using the PostgreSQL `RIGHT()` function.
 
 The following statement uses the `RIGHT()` function to get the last character in the string `'XYZ'`:
 
-```
+```sql
 SELECT RIGHT('XYZ', 1);
 ```
 
@@ -51,7 +51,7 @@ Here is the result:
 
 To get the last two characters, you pass the value `2` as the second argument as follows:
 
-```
+```sql
 SELECT RIGHT('XYZ', 2);
 ```
 
@@ -66,7 +66,7 @@ Output:
 
 The following statement illustrates how to use a negative integer as the second argument:
 
-```
+```sql
 SELECT RIGHT('XYZ', - 1);
 ```
 
@@ -87,7 +87,7 @@ See the following `customer` table in the [sample database](/docs/postgresql/pos
 
 The following statement uses the `RIGHT()` function in [`WHERE`](/docs/postgresql/postgresql-where) clause to get all customers whose last names end with `'son'`:
 
-```
+```sql
 SELECT
   last_name
 FROM

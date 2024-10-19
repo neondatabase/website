@@ -15,7 +15,7 @@ The `TO_DATE()` function converts a [string](/docs/postgresql/postgresql-char-va
 
 Here's the basic syntax of the `TO_DATE()` function:
 
-```
+```sql
 TO_DATE(text,format);
 ```
 
@@ -29,7 +29,7 @@ The `TO_DATE()` function returns a `DATE` value.
 
 See the following example:
 
-```
+```sql
 SELECT TO_DATE('20170103','YYYYMMDD');
 ```
 
@@ -97,7 +97,7 @@ The following table illustrates the template patterns for formatting date values
 
 The following statement converts the string `10 Feb 2017` into a date value:
 
-```
+```sql
 SELECT TO_DATE('10 Feb 2017', 'DD Mon YYYY');
 ```
 
@@ -112,7 +112,7 @@ The output is:
 
 Suppose you want to convert the string `2017 Feb 10` to a date value, you can apply the pattern `YYYY Mon DD` as follows:
 
-```
+```sql
 SELECT TO_DATE('2017 Feb 20','YYYY Mon DD');
 ```
 
@@ -129,13 +129,13 @@ The function returns the following output:
 
 If you pass an invalid date string, the `TO_DATE()` function will try to convert it to a valid date and issue an error if it cannot. For example:
 
-```
+```sql
 SELECT TO_DATE('2017/02/30', 'YYYY/MM/DD');
 ```
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  date/time field value out of range: "2017/02/30"
 LINE 1: SELECT '2017/02/30'::date;
 ```

@@ -15,7 +15,7 @@ Note that the scale of a number is a number of fractional decimal digits.
 
 Here's the syntax of the `TRIM_SCALE()` function:
 
-```
+```sql
 TRIM_SCALE(numeric_value)
 ```
 
@@ -33,7 +33,7 @@ Let's take some examples of using the `TRIM_SCALE()` function.
 
 The following example uses the `TRIM_SCALE()` function to reduce the trailing zeroes of the number `123.45000`:
 
-```
+```sql
 SELECT TRIM_SCALE(123.45000);
 ```
 
@@ -54,7 +54,7 @@ We'll show you an example of using the `TRIM_SCALE()` function to standardize th
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `products` to store product data:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE products (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES
     ('Smartphone', 699.9900),
@@ -92,7 +92,7 @@ Output:
 
 Third, [update](/docs/postgresql/postgresql-update) the prices to remove trailing zeroes using the `TRIM_SCALE()` function:
 
-```
+```sql
 UPDATE products
 SET price = TRIM_SCALE(price)
 RETURNING *;

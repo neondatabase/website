@@ -20,14 +20,14 @@ In this tutorial, we'll show you how to install PostgreSQL 16 on Ubuntu 22.04.
 
 First, update the package index and install the necessary packages:
 
-```
+```bash
 sudo apt update
 sudo apt install gnupg2 wget
 ```
 
 Second, add the PostgreSQL repository:
 
-```
+```bash
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
@@ -39,7 +39,7 @@ curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearm
 
 Finally, update the package list
 
-```
+```bash
 sudo apt update
 ```
 
@@ -47,19 +47,19 @@ sudo apt update
 
 First, install PostgreSQL and its contrib modules:
 
-```
+```bash
 sudo apt install postgresql-16 postgresql-contrib-16
 ```
 
 Second, start the PostgreSQL service:
 
-```
+```bash
 sudo systemctl start postgresql
 ```
 
 Third, enable PostgreSQL service:
 
-```
+```bash
 sudo systemctl enable postgresql
 ```
 
@@ -67,7 +67,7 @@ sudo systemctl enable postgresql
 
 PostgreSQL stores the configuration in the `postgresql.conf` file. You can edit the `postgresql.conf` using any text editor such as nano and vim.
 
-```
+```bash
 sudo nano /etc/postgresql/16/main/postgresql.conf
 ```
 
@@ -79,7 +79,7 @@ listen_addresses = '*'
 
 Configure PostgreSQL to use md5 password authentication in the `pg_hba.conf` file. This is necessary if you want to enable remote connections :
 
-```
+```bash
 sudo sed -i '/^host/s/ident/md5/' /etc/postgresql/16/main/pg_hba.conf
 sudo sed -i '/^local/s/peer/trust/' /etc/postgresql/16/main/pg_hba.conf
 echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
@@ -87,13 +87,13 @@ echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.c
 
 Restart PostgreSQL for the changes to take effect:
 
-```
+```bash
 sudo systemctl restart postgresql
 ```
 
 Allow PostgreSQL port through the firewall:
 
-```
+```bash
 sudo ufw allow 5432/tcp
 ```
 
@@ -101,13 +101,13 @@ sudo ufw allow 5432/tcp
 
 First, connect to the PostgreSQL server using the `postgres` user:
 
-```
+```bash
 sudo -u postgres psql
 ```
 
 Second, set a password for `postgres` user:
 
-```
+```sql
 ALTER USER postgres PASSWORD '<password>';
 ```
 
@@ -135,7 +135,7 @@ unzip dvdrental.zip
 
 Third, connect to the PostgreSQL server using `postgres` user:
 
-```
+```bash
 sudo -u postgres psql
 ```
 

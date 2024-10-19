@@ -102,7 +102,7 @@ drop function get_film_actors;
 
 PostgreSQL issued an error:
 
-```
+```sql
 ERROR:  function name "get_film_actors" is not unique
 HINT:  Specify the argument list to select the function unambiguously.
 SQL state: 42725

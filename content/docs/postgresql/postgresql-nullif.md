@@ -11,7 +11,7 @@ The `NULLIF()` function is one of the most common conditional expressions provid
 
 Here's the basic syntax of the `NULLIF` function:
 
-```
+```sql
 NULLIF(argument_1,argument_2);
 ```
 
@@ -25,7 +25,7 @@ Let's take some examples of using the `NULLIF()` function.
 
 The following statements illustrate how to use the `NULLIF()` function:
 
-```
+```sql
 SELECT NULLIF (1, 1); -- return NULL
 ```
 
@@ -42,7 +42,7 @@ It returns null because the two arguments are equal.
 
 The following example returns the first argument because the two arguments are not equal:
 
-```
+```sql
 SELECT NULLIF (1, 0); -- return 1
 ```
 
@@ -57,7 +57,7 @@ Output:
 
 The following example uses the `NULLIF()` function with two unequal text arguments:
 
-```
+```sql
 SELECT NULLIF ('A', 'B');
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `posts`:
 
-```
+```sql
 CREATE TABLE posts (
   id serial primary key,
   title VARCHAR (255) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE posts (
 
 Second, [insert some sample data](/docs/postgresql/postgresql-insert) into the `posts` table.
 
-```
+```sql
 INSERT INTO posts (title, excerpt, body)
 VALUES
       ('test post 1','test post excerpt 1','test post body 1'),
@@ -111,7 +111,7 @@ The goal is to retrieve data for displaying them on the post overview page that 
 
 Third, use the [COALESCE function](/docs/postgresql/postgresql-coalesce) to handle `NULL` in the `body` column:
 
-```
+```sql
 SELECT
   id,
   title,
@@ -136,7 +136,7 @@ Output:
 
 Unfortunately, there is a mix between null value and '' (empty) in the `excerpt` column. To address this issue, you can use the `NULLIF` function:
 
-```
+```sql
 SELECT
   id,
   title,
@@ -170,7 +170,7 @@ Another good example of using the `NULLIF` function is to prevent division-by-ze
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named members:
 
-```
+```sql
 CREATE TABLE members (
   id serial PRIMARY KEY,
   first_name VARCHAR (50) NOT NULL,
@@ -181,7 +181,7 @@ CREATE TABLE members (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert) for testing:
 
-```
+```sql
 INSERT INTO members (first_name, last_name, gender)
 VALUES
   ('John', 'Doe', 1),
@@ -203,7 +203,7 @@ Output:
 
 Third, calculate the ratio between male and female members:
 
-```
+```sql
 SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
@@ -223,14 +223,14 @@ In this example, we use the [SUM function](/docs/postgresql/postgresql-aggregate
 
 Fourth, delete a female member:
 
-```
+```sql
 DELETE FROM members
 WHERE gender = 2;
 ```
 
 And execute the query to calculate the male/female ratio again:
 
-```
+```sql
 SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
@@ -241,13 +241,13 @@ FROM
 
 We got the following error message:
 
-```
+```sql
 ERROR:  division by zero
 ```
 
 The reason is that the number of females is zero now. To prevent this division by zero error, you can use the `NULLIF` function as follows:
 
-```
+```sql
 SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (

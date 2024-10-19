@@ -43,7 +43,7 @@ Let’s start with the basic form of the `SELECT` statement that retrieves data 
 
 The following illustrates the syntax of the `SELECT` statement:
 
-```
+```sql
 SELECT
    select_list
 FROM
@@ -96,7 +96,7 @@ Third, execute the query in the following examples.
 
 This example uses the `SELECT` statement to find the first names of all customers from the `customer` table:
 
-```
+```sql
 SELECT first_name FROM customer;
 ```
 
@@ -119,7 +119,7 @@ Notice that we added a semicolon (`;`) at the end of the `SELECT` statement. The
 
 The following query uses the `SELECT` statement to retrieve first name, last name, and email of customers from the `customer` table:
 
-```
+```sql
 SELECT
    first_name,
    last_name,
@@ -145,7 +145,7 @@ The output shows three corresponding columns first_name, last_name, and email.
 
 The following query uses the `SELECT *` statement to retrieve data from all columns of the `customer` table:
 
-```
+```sql
 SELECT * FROM customer;
 ```
 
@@ -178,7 +178,7 @@ The asterisk (\*) shorthand should be reserved solely for the ad-hoc queries tha
 
 The following example uses the `SELECT` statement to return the full names and emails of all customers from the `customer` table:
 
-```
+```sql
 SELECT
    first_name || ' ' || last_name,
    email
@@ -213,7 +213,7 @@ expression column_lias
 
 For example, you can assign a column alias full_name to the first column of the query as follows:
 
-```
+```sql
 SELECT
    first_name || ' ' || last_name full_name,
    email
@@ -238,7 +238,7 @@ The `FROM` clause of the `SELECT` statement is optional. Therefore, you can omit
 
 Typically, you use the `SELECT` clause with a function to retrieve the function result. For example:
 
-```
+```sql
 SELECT NOW();
 ```
 

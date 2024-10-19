@@ -14,7 +14,7 @@ The PostgreSQL `CHR()` function converts an integer ASCII code to a character or
 
 The following shows the syntax of the `CHR()` function:
 
-```
+```sql
 CHR(num)
 ```
 
@@ -36,7 +36,7 @@ The `CHR()` function returns a character that corresponds the the ASCII code val
 
 The following example shows how to use the `CHR()` function to get the characters whose ASCII code value is 65 and 97:
 
-```
+```sql
 SELECT
     CHR(65),
     CHR(97);
@@ -48,7 +48,7 @@ The query returns character A for 65 and a for 97:
 
 Here is an example of getting the UTF8 character based on the Unicode code point 937:
 
-```
+```sql
 SELECT
     CHR(937);
 ```

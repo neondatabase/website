@@ -12,7 +12,7 @@ tableOfContents: true
 
 A cube root number is a number that when you multiply itself twice, you'll get the cube number. For example, 2 is a cube root number of 8 because when you multiply the number 2 by itself three times, you'll get the number 8:
 
-```
+```text
 2 * 2 * 2 = 8
 ```
 
@@ -20,7 +20,7 @@ In PostgreSQL, the `CBRT()` is a [math function](/docs/postgresql/postgresql-mat
 
 Here's the syntax of the `CBRT()` function:
 
-```
+```sql
 CBRT(n)
 ```
 
@@ -40,7 +40,7 @@ Let's explore some examples of using the `CBRT()` function.
 
 The following example uses the `CBRT()` function to calculate the cube root of 27:
 
-```
+```sql
 SELECT CBRT(27) result;
 ```
 
@@ -58,7 +58,7 @@ It returns 3 because 3\* 3 \*3 = 27.
 
 The following example uses the `CBRT()` function to find the cube root of -27:
 
-```
+```sql
 SELECT CBRT(-27) result;
 ```
 
@@ -76,7 +76,7 @@ The result is -3 because -3 \* -3 \* -3 is -27. Please note that the cube root o
 
 The following example uses the `CBRT()` function with a numeric string:
 
-```
+```sql
 SELECT CBRT('125') result;
 ```
 
@@ -94,7 +94,7 @@ In this example, the `CBRT()` function converts the text '125' to the number 125
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `cube_volumes` that stores the volumes of cubes:
 
-```
+```sql
 CREATE TABLE cube_volumes(
     id INT GENERATED ALWAYS AS IDENTITY,
     volume DEC(19,2),
@@ -104,7 +104,7 @@ CREATE TABLE cube_volumes(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `cube_volumes` table:
 
-```
+```sql
 INSERT INTO
   cube_volumes (volume)
 VALUES
@@ -129,7 +129,7 @@ Output:
 
 Third, calculate the side lengths of cubes using the `CBRT()` function:
 
-```
+```sql
 SELECT
   id,
   volume,

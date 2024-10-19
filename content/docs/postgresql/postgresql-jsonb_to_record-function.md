@@ -38,7 +38,7 @@ Let's take some examples of using the `jsonb_to_record()` function.
 
 The following example uses the `jsonb_to_record()` function to convert a JSON object into a record:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -58,7 +58,7 @@ Output:
 
 The following example converts a JSON object into a record type but with fewer keys:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -80,13 +80,13 @@ Output:
 
 First, create a new custom type called `pet` with two fields `type` and `name`:
 
-```
+```sql
 CREATE TYPE pet AS (type VARCHAR, name VARCHAR);
 ```
 
 Second, use the pet type with the `jsonb_to_record()` function:
 
-```
+```sql
 SELECT
   *
 FROM

@@ -10,7 +10,7 @@ tableOfContents: true
 
 PostgreSQL provides the `random()` function that returns a random number between 0 and 1. The following statement returns a random number between 0 and 1.
 
-```
+```sql
 SELECT random();
 ```
 
@@ -23,7 +23,7 @@ SELECT random();
 
 To generate a random number between 1 and 11, you use the following statement:
 
-```
+```sql
 SELECT random() * 10 + 1 AS RAND_1_11;
 ```
 
@@ -36,7 +36,7 @@ SELECT random() * 10 + 1 AS RAND_1_11;
 
 If you want to generate the random number as an integer, you apply the `floor()` function to the expression as follows:
 
-```
+```sql
 SELECT floor(random() * 10 + 1)::int;
 ```
 
@@ -49,13 +49,13 @@ SELECT floor(random() * 10 + 1)::int;
 
 Generally, to generate a random number between two integers low and high, you use the following statement:
 
-```
+```sql
 SELECT floor(random() * (high-low+1) + low)::int;
 ```
 
 You can [develop a user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that returns a random number between two numbers `low` and `high`:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION random_between(low INT ,high INT)
    RETURNS INT AS
 $$
@@ -67,7 +67,7 @@ $$ language 'plpgsql' STRICT;
 
 The following statement calls the `random_between()` function and returns a random number between 1 and 100:
 
-```
+```sql
 SELECT random_between(1,100);
 ```
 
@@ -80,7 +80,7 @@ SELECT random_between(1,100);
 
 If you want to get multiple random numbers between two integers, you use the following statement:
 
-```
+```sql
 SELECT random_between(1,100)
 FROM generate_series(1,5);
 ```

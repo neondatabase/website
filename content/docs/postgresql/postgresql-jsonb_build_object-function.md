@@ -32,7 +32,7 @@ Let's explore some examples of using the PostgreSQL `jsonb_build_object()` funct
 
 The following example uses the `jsonb_build_object()` function to build an object out of the alternating keys and values:
 
-```
+```sql
 SELECT
   jsonb_build_object(
     'title', 'Academy Dinosaur', 'length',
@@ -53,7 +53,7 @@ Output:
 
 The following example uses the `jsonb_build_object()` function to create a JSON object based on the title and length of films in the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-```
+```sql
 SELECT
   jsonb_build_object('title', title, 'length', length)
 FROM
@@ -77,7 +77,7 @@ Output:
 
 The following example attempts to use the `jsonb_build_object()` function with an odd number of values:
 
-```
+```sql
 SELECT
   jsonb_build_object(
     'title', 'Theory Mermaid', 'length'
@@ -86,7 +86,7 @@ SELECT
 
 It returns the following error:
 
-```
+```sql
 ERROR:  argument list must have even number of elements
 HINT:  The arguments of jsonb_build_object() must consist of alternating keys and values.
 ```

@@ -19,7 +19,7 @@ Technically, a primary key constraint is the combination of a [not-null constrai
 
 Typically, you define primary for a table when creating it:
 
-```
+```sql
 CREATE TABLE table_name (
   column_1 data_type PRIMARY KEY,
   column_2 data_type,
@@ -31,7 +31,7 @@ In this syntax, you define the primary key as the column constraint of the prima
 
 If the primary key consists of more than one column, you can define it using the table constraint:
 
-```
+```sql
 CREATE TABLE table_name (
   column_1 data_type,
   column_2 data_type,
@@ -43,7 +43,7 @@ CREATE TABLE table_name (
 
 To add a primary key to an existing table, you the `ALTER TABLE ... ADD PRIMARY KEY` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ADD PRIMARY KEY (column_1, column_2, ...);
 ```
@@ -54,7 +54,7 @@ By default, PostgreSQL uses the format `table-name_pkey` as the default name for
 
 To assign a name for the primary key, you can use the `CONSTRAINT` clause as follows:
 
-```
+```sql
 CONSTRAINT constraint_name
 PRIMARY KEY(column_1, column_2,...);
 ```
@@ -67,7 +67,7 @@ Let's explore some examples of using the PostgreSQL primary key.
 
 The following statement creates a table with a primary key that consists of one column:
 
-```
+```sql
 CREATE TABLE orders(
   order_id SERIAL PRIMARY KEY,
   customer_id VARCHAR(255) NOT NULL,
@@ -85,7 +85,7 @@ This ensures the value in the order_id is unique for every row in the table.
 
 The following example shows how to define a primary key that consists of two columns `order_id` and `item_no`:
 
-```
+```sql
 CREATE TABLE order_items(
   order_id INT,
   item_no SERIAL,
@@ -100,7 +100,7 @@ CREATE TABLE order_items(
 
 First, create a table called `products` without defining any primary key.
 
-```
+```sql
 CREATE TABLE products (
   product_id INT,
   name VARCHAR(255) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE products (
 
 Second, add a primary key constraint to the `products` table using the `ALTER TABLE ... ADD PRIMARY KEY` statement:
 
-```
+```sql
 ALTER TABLE products
 ADD PRIMARY KEY (product_id);
 ```
@@ -120,7 +120,7 @@ ADD PRIMARY KEY (product_id);
 
 First, create a new table called `vendors` that does not have a primary key:
 
-```
+```sql
 CREATE TABLE vendors (
   name VARCHAR(255)
 );
@@ -128,7 +128,7 @@ CREATE TABLE vendors (
 
 Second, insert some rows into the `vendors` table:
 
-```
+```sql
 INSERT INTO vendors (name)
 VALUES
   ('Microsoft'),
@@ -152,14 +152,14 @@ Output:
 
 Third, add a primary key named `vendor_id` into the `vendors` table with the type `SERIAL`:
 
-```
+```sql
 ALTER TABLE vendors
 ADD COLUMN vendor_id SERIAL PRIMARY KEY;
 ```
 
 Finally, verify the vendor_id column:
 
-```
+```sql
 SELECT
   vendor_id,
   name
@@ -183,7 +183,7 @@ Output:
 
 To remove a primary key from a table, you use the following `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE table_name
 DROP CONSTRAINT primary_key_constraint;
 ```
@@ -217,20 +217,20 @@ The output indicates that the primary key constraint is vendors_pkey.
 
 Second, drop the primary key from the `vendors` table using the `ALTER TABLE ... DROP CONSTRAINT` statement:
 
-```
+```sql
 ALTER TABLE vendors
 DROP CONSTRAINT vendors_pkey;
 ```
 
 Output:
 
-```
+```sql
 ALTER TABLE
 ```
 
 The statement removes only the primary key constraint but does not remove the vendor_id column:
 
-```
+```sql
 SELECT vendor_id, name
 FROM vendors;
 ```

@@ -15,7 +15,7 @@ The `TIMEOFDAY()` function returns the [current date and time](/docs/postgresql/
 
 Here's the syntax of the `TIMEOFDAY()` function:
 
-```
+```sql
 TIMEOFDAY()
 ```
 
@@ -44,7 +44,7 @@ The output shows the date, time, and timezone.
 
 If you want a specific format, you can cast the result of the `TIMEOFDAY()` function into a timestamp and use the `to_char()` function to achieve the desired format:
 
-```
+```sql
 SELECT
   to_char(
     timeofday():: timestamp,

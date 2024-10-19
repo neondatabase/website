@@ -142,7 +142,7 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, query the row with id 1 from the `students` table:
 
-```
+```sql
 SELECT * FROM students
 WHERE id = 1;
 ```

@@ -8,7 +8,7 @@ tableOfContents: true
 
 SQL Server supports `ISNULL` function that replaces `NULL` with a specified replacement value:
 
-```
+```sql
 ISNULL(expression, replacement)
 ```
 
@@ -18,7 +18,7 @@ PostgreSQL does not have the `ISNULL` function. However, you can use the `COALES
 
 Note that the `COALESCE` function returns the first non-null argument, so the following syntax has a similar effect as the `ISNULL` function above:
 
-```
+```sql
 COALESCE(expression,replacement)
 ```
 
@@ -26,7 +26,7 @@ For the `COALESCE` example, check out the `COALESCE` function tutorial.
 
 In addition to `COALESCE` function, you can use the `CASE` expression:
 
-```
+```sql
 SELECT
     CASE WHEN expression IS NULL
             THEN replacement

@@ -91,7 +91,7 @@ public class Main {
 
 Output:
 
-```
+```sql
 Deleted Rows: 1
 ```
 
@@ -105,7 +105,7 @@ psql -U postgres -d sales
 
 Second, retrieve the product with id 1 to verify the deletion:
 
-```
+```sql
 SELECT * FROM products
 WHERE id = 1;
 ```

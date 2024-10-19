@@ -13,7 +13,7 @@ tableOfContents: true
 
 Let's get started by [creating a new table](/docs/postgresql/postgresql-create-table) called `sales` for the demonstration.
 
-```
+```sql
 DROP TABLE IF EXISTS sales;
 
 CREATE TABLE sales (
@@ -58,7 +58,7 @@ A grouping set is denoted by a comma-separated list of columns placed inside par
 
 For example, the following query uses the `GROUP BY` clause to return the number of products sold by brand and segment. In other words, it defines a grouping set of the brand and segment which is denoted by `(brand, segement)`
 
-```
+```sql
 SELECT
     brand,
     segment,
@@ -84,7 +84,7 @@ Output:
 
 The following query finds the number of products sold by a brand. It defines a grouping set `(brand)`:
 
-```
+```sql
 SELECT
     brand,
     SUM (quantity)
@@ -106,7 +106,7 @@ Output:
 
 The following query finds the number of products sold by segment. It defines a grouping set `(segment)`:
 
-```
+```sql
 SELECT
     segment,
     SUM (quantity)
@@ -128,7 +128,7 @@ Output:
 
 The following query finds the number of products sold for all brands and segments. It defines an empty grouping set which is denoted by `()`.
 
-```
+```sql
 SELECT SUM (quantity) FROM sales;
 ```
 
@@ -145,7 +145,7 @@ Suppose you want to get all the grouping sets using a single query. To achieve t
 
 Because `UNION ALL` requires all result sets to have the same number of columns with compatible data types, you need to adjust the queries by adding `NULL` to the selection list of each as shown below:
 
-```
+```sql
 SELECT
     brand,
     segment,
@@ -219,7 +219,7 @@ The `GROUPING SETS` allows you to define multiple grouping sets in the same quer
 
 The general syntax of the `GROUPING SETS` is as follows:
 
-```
+```sql
 SELECT
     c1,
     c2,
@@ -239,7 +239,7 @@ In this syntax, we have four grouping sets `(c1,c2)`, `(c1)`, `(c2)`, and `()`.
 
 To apply this syntax to the above example, you can use `GROUPING SETS` clause instead of the `UNION ALL` clause like this:
 
-```
+```sql
 SELECT
     brand,
     segment,
@@ -278,7 +278,7 @@ This query is much shorter and more readable. In addition, PostgreSQL will optim
 
 The `GROUPING()` function accepts an argument which can be a column name or an expression:
 
-```
+```sql
 GROUPING( column_name | expression)
 ```
 
@@ -288,7 +288,7 @@ The `GROUPING()` function returns bit 0 if the argument is a member of the curre
 
 See the following example:
 
-```
+```sql
 SELECT
  GROUPING(brand) grouping_brand,
  GROUPING(segment) grouping_segment,
@@ -316,7 +316,7 @@ When the value in the `grouping_segment` is zero, the sum column shows the subto
 
 You can use the `GROUPING()` function in the `HAVING` clause to find the subtotal of each brand like this:
 
-```
+```sql
 SELECT
  GROUPING(brand) grouping_brand,
  GROUPING(segment) grouping_segment,

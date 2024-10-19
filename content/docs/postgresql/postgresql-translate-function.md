@@ -12,7 +12,7 @@ The PostgreSQL `TRANSLATE()` function performs several single-character, one-to-
 
 The following illustrates the syntax of the PostgreSQL `TRANSLATE()` function:
 
-```
+```sql
 TRANSLATE(string, from, to)
 ```
 
@@ -43,7 +43,7 @@ Let's see some examples of using the `TRANSLATE()` function to understand how it
 
 See the following statement:
 
-```
+```sql
 SELECT TRANSLATE('12345', '134', 'ax')
 ```
 
@@ -65,7 +65,7 @@ The following illustrates the result:
 
 The following example shows how to use the `TRANSLATE()` function to replace comma (,) with a semi-colon (;) in a comma-separated values list.
 
-```
+```sql
 SELECT TRANSLATE('apple,orange,banana', ',', ';');
 ```
 
@@ -82,7 +82,7 @@ Here is the output:
 
 The following example shows how to use the `TRANSLATE()` function to encrypt a message:
 
-```
+```sql
 SELECT TRANSLATE('a secret message',
                  'abcdefghijklmnopqrstuvxyz',
                  '0123456789acwrvyuiopkjhbq');
@@ -99,7 +99,7 @@ Here is the output:
 
 You can also decrypt the message `'0 o42i4p w4oo064'` using the function:
 
-```
+```sql
 SELECT TRANSLATE('0 o42i4p w4oo064',
                      '0123456789acwrvyuiopkjhbq',
                      'abcdefghijklmnopqrstuvxyz');

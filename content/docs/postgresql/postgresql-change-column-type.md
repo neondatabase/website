@@ -12,7 +12,7 @@ tableOfContents: true
 
 To change the [data type](/docs/postgresql/postgresql-time) of a column, you use the [`ALTER TABLE`](/docs/postgresql/postgresql-tutorial/postgresql-alter-table) statement as follows:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name
 [SET DATA] TYPE new_data_type;
@@ -28,7 +28,7 @@ In this syntax:
 
 To change the data types of multiple columns in a single statement, you use multiple `ALTER COLUMN` clauses like this:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name1 [SET DATA] TYPE new_data_type,
 ALTER COLUMN column_name2 [SET DATA] TYPE new_data_type,
@@ -39,7 +39,7 @@ In this syntax, you add a comma (`,`) after each `ALTER COLUMN` clause.
 
 PostgreSQL allows you to convert the values of a column to the new ones while changing its data type by adding a `USING` clause as follows:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name TYPE new_data_type USING expression;
 ```
@@ -58,7 +58,7 @@ Let's take some examples of changing column type.
 
 The following [creates a new table](/docs/postgresql/postgresql-create-table) called `assets` and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) some rows into the table:
 
-```
+```sql
 CREATE TABLE assets (
     id serial PRIMARY KEY,
     name TEXT NOT NULL,
@@ -88,14 +88,14 @@ Output:
 
 The following example uses the `ALTER TABLE ... ALTER COLUMN` statement to change the data type of the `name` column to [`VARCHAR`](/docs/postgresql/postgresql-char-varchar-text):
 
-```
+```sql
 ALTER TABLE assets
 ALTER COLUMN name TYPE VARCHAR(255);
 ```
 
 Output:
 
-```
+```sql
 ALTER TABLE
 ```
 
@@ -105,7 +105,7 @@ The output indicates that the statement successfully changed the type of the col
 
 The following statement changes the data types of `description` and `location` columns from [`TEXT`](/docs/postgresql/postgresql-char-varchar-text) to `VARCHAR`:
 
-```
+```sql
 ALTER TABLE assets
     ALTER COLUMN location TYPE VARCHAR(255),
     ALTER COLUMN description TYPE VARCHAR(255);
@@ -113,7 +113,7 @@ ALTER TABLE assets
 
 Output:
 
-```
+```sql
 ALTER TABLE
 ```
 
@@ -121,21 +121,21 @@ ALTER TABLE
 
 The following example uses the `ALTER TABLE ... ALTER COLUMN` statement to change the data type of the `asset_no` column to [integer](/docs/postgresql/postgresql-integer):
 
-```
+```sql
 ALTER TABLE assets
 ALTER COLUMN asset_no TYPE INT;
 ```
 
 PostgreSQL issued an error and a helpful hint:
 
-```
+```sql
 ERROR:  column "asset_no" cannot be cast automatically to type integer
 HINT:  You might need to specify "USING asset_no::integer".
 ```
 
 To both change the type of a column and cast data from `VARCHAR` to `INT`, you can use the `USING` clause:
 
-```
+```sql
 ALTER TABLE assets
 ALTER COLUMN asset_no TYPE INT
 USING asset_no::integer;
@@ -143,7 +143,7 @@ USING asset_no::integer;
 
 Output:
 
-```
+```sql
 ALTER TABLE
 ```
 

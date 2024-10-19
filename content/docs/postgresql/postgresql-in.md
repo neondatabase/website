@@ -39,7 +39,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `IN` operator to retrieve information about the film with id 1, 2, and 3:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -62,7 +62,7 @@ Output:
 
 The following statement uses the equal (`=`) and `OR` operators instead of the `IN` operator, which is equivalent to the query above:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -86,7 +86,7 @@ We'll use the `actor` table from the [sample database](/docs/postgresql/postgres
 
 The following example uses the `IN` operator to find the actors who have the last name in the list `'Allen'`, `'Chase'`, and `'Davis'`:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -118,7 +118,7 @@ Output:
 
 The following statement uses the IN operator to find payments whose payment dates are in a list of dates: `2007-02-15` and `2007-02-16`:
 
-```
+```sql
 SELECT
   payment_id,
   amount,
@@ -173,7 +173,7 @@ value <> value1 AND value <> value2 AND ...
 
 The following example uses the `NOT IN` operator to retrieve films whose id is not 1, 2, or 3:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -200,7 +200,7 @@ Output:
 
 The following query retrieves the same set of data but uses the not-equal (`<>`) and `AND` operators:
 
-```
+```sql
 SELECT
   film_id,
   title

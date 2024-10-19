@@ -37,7 +37,7 @@ Let's explore some examples of using the PostgreSQL `jsonb_object_agg()` functio
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `departments`:
 
-```
+```sql
 CREATE TABLE departments(
     id SERIAL PRIMARY KEY,
     department_name VARCHAR(255) NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE departments(
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `departments` table:
 
-```
+```sql
 INSERT INTO departments(department_name)
 VALUES
    ('Sales'),
@@ -56,7 +56,7 @@ RETURNING *;
 
 Third, use the `jsonb_object_agg()` function to create an object whose key is the department name and value is the id:
 
-```
+```sql
 SELECT
   jsonb_object_agg(department_name, id) departments
 FROM
@@ -76,7 +76,7 @@ Output:
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE employees (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (name, salary, department_id)
 VALUES
   ('John Doe', 60000, 1),
@@ -115,7 +115,7 @@ Output:
 
 Third, use the `jsonb_object_agg()` function to get the department name and a JSON object that contains employee details of the department including employee name and salary:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_pretty(
@@ -151,7 +151,7 @@ Alex Miller has not had a salary yet so his salary is null. The `jsonb_object_ag
 
 To skip nulls, you can use the `jsonb_object_agg_strict()` function as follows:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_pretty(

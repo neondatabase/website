@@ -13,7 +13,7 @@ The PostgreSQL `DELETE` statement allows you to delete one or more rows from a t
 
 The following shows the basic syntax of the `DELETE` statement:
 
-```
+```sql
 DELETE FROM table_name
 WHERE condition;
 ```
@@ -29,7 +29,7 @@ The `DELETE` statement returns the number of rows deleted. It returns zero if th
 
 To return the deleted row(s) to the client, you use the `RETURNING` clause as follows:
 
-```
+```sql
 DELETE FROM table_name
 WHERE condition
 RETURNING (select_list | *)
@@ -39,7 +39,7 @@ The asterisk (`*`) allows you to return all columns of the deleted row(s). If yo
 
 For example, the following statement deletes rows from a table and returns the values of the id of the deleted rows:
 
-```
+```sql
 DELETE FROM table_name
 WHERE condition
 RETURNING id;
@@ -59,7 +59,7 @@ Let's explore some examples of using the `DELETE` statement.
 
 The following statements [create a new table](/docs/postgresql/postgresql-create-table) called `todos` and [insert some sample data](/docs/postgresql/postgresql-tutorial/postgresql-insert):
 
-```
+```sql
 CREATE TABLE todos (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -103,27 +103,27 @@ Output:
 
 The following statement uses the `DELETE` statement to delete one row with the id 1 from the `todos` table:
 
-```
+```sql
 DELETE FROM todos
 WHERE id = 1;
 ```
 
 The statement returns 1 indicating that one row has been deleted:
 
-```
+```sql
 DELETE 1
 ```
 
 The following statement uses the `DELETE` statement to delete the row with id 100:
 
-```
+```sql
 DELETE FROM todos
 WHERE id = 100;
 ```
 
 Since the row with the id 100 does not exist, the `DELETE` statement returns 0:
 
-```
+```sql
 DELETE 0
 ```
 
@@ -131,7 +131,7 @@ DELETE 0
 
 The following statement uses the `DELETE` statement to delete the row with id 2 and return the deleted row to the client:
 
-```
+```sql
 DELETE FROM todos
 WHERE id = 2
 RETURNING *;
@@ -150,7 +150,7 @@ PostgreSQL returns the following deleted row:
 
 The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the value in the completed column `true` and return deleted rows:
 
-```
+```sql
 DELETE FROM todos
 WHERE completed = true
 RETURNING *;
@@ -177,13 +177,13 @@ It deleted four rows from the `todos` table.
 
 The following statement uses the `DELETE` statement without a `WHERE` clause to delete all rows from the `todos` table:
 
-```
+```sql
 DELETE FROM todos;
 ```
 
 Output:
 
-```
+```sql
 DELETE 4
 ```
 

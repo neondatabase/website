@@ -58,7 +58,7 @@ We'll create the following tables for the demonstration:
 
 The following [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements create the three tables:
 
-```
+```sql
 CREATE TABLE accounts(
    id SERIAL PRIMARY KEY,
    first_name CHARACTER VARYING(100),
@@ -82,7 +82,7 @@ CREATE TABLE account_plans(
 
 The following [INSERT](/docs/postgresql/postgresql-php/insert) statement inserts some sample data into the `plans` table.
 
-```
+```sql
 INSERT INTO plans(plan) VALUES('SILVER'),('GOLD'),('PLATINUM');
 ```
 
@@ -208,7 +208,7 @@ How it works.
 
 The following shows the output of the index.php file:
 
-```
+```sql
 The new accounts have been added.
 
 SQLSTATE[23503]: Foreign key violation: 7 ERROR: insert or update on table "account_plans" violates foreign key constraint "account_plans_plan_id_fkey" DETAIL: Key (plan_id)=(99) is not present in table "plans".

@@ -186,7 +186,7 @@ psql -U postgres -d suppliers
 
 Second, retrieve data from the `parts` table:
 
-```
+```sql
 SELECT * FROM parts;
 ```
 
@@ -206,7 +206,7 @@ Output:
 
 Third, query data from the `vendor_parts` table:
 
-```
+```sql
 SELECT * FROM vendor_parts;
 ```
 

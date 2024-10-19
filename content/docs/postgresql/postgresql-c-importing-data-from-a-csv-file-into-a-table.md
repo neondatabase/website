@@ -93,7 +93,7 @@ public class Program
 
 In this program, we use an external package for reading a CSV file called `CsvHelper`. You can install the `CsvHelper` package by running the following command in the Package Manager Console:
 
-```
+```sql
 Install-Package CsvHelper
 ```
 
@@ -241,7 +241,7 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, query data from the `students` table:
 
-```
+```sql
 SELECT * FROM students;
 ```
 

@@ -31,7 +31,7 @@ Let's explore some examples of using the `ISFINITE()` function.
 
 The following example uses the `ISFINITE()` function to check if a date is finite or not:
 
-```
+```sql
 SELECT ISFINITE('2024-03-20'::date) result;
 ```
 
@@ -48,7 +48,7 @@ The result is t, which is true in PostgreSQL.
 
 The following example uses the `ISFINITE()` function to determine whether the date infinity is finite or not:
 
-```
+```sql
 SELECT ISFINITE(DATE 'infinity') result;
 ```
 
@@ -67,7 +67,7 @@ The result is false because the infinity date is not finite.
 
 The following statement uses the `ISFINITE()` function to check if an interval is finite or not:
 
-```
+```sql
 SELECT ISFINITE(INTERVAL '1 day') result;
 ```
 
@@ -86,7 +86,7 @@ Since PostgreSQL doesn't support infinity intervals, the `ISFINITE()` function a
 
 The following statement uses the `ISFINITE()` function to test for a finite timestamp:
 
-```
+```sql
 SELECT ISFINITE(TIMESTAMP '2024-03-20 00:00:00') result;
 ```
 
@@ -101,7 +101,7 @@ Output:
 
 The following statement uses the `ISFINITE()` function to check for an infinite timestamp:
 
-```
+```sql
 SELECT ISFINITE(TIMESTAMP 'infinity') result;
 ```
 

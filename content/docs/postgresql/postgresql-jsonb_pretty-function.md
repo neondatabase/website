@@ -33,7 +33,7 @@ Let's explore some examples of using the `jsonb_pretty()` function.
 
 The following example uses the `jsonb_pretty()` function to format a JSONB value:
 
-```
+```sql
 SELECT
   jsonb_pretty(
     '{"id": 1, "name": {"first": "John", "last": "Doe"}, "age": 30}'
@@ -60,7 +60,7 @@ Output:
 
 First, create a new table called recipes:
 
-```
+```sql
 CREATE TABLE recipes (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE recipes (
 
 Second, insert some rows into the recipes table:
 
-```
+```sql
 INSERT INTO recipes (name, details)
 VALUES
     (
@@ -95,7 +95,7 @@ VALUES
 
 Third, format the JSONB data in the details column:
 
-```
+```sql
 SELECT
   name,
   jsonb_pretty(details)

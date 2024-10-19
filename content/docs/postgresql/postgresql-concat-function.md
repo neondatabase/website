@@ -14,7 +14,7 @@ tableOfContents: true
 
 To concatenate two or more strings into a single string, you can use the string concatenation operator || as shown in the following example:
 
-```
+```sql
 SELECT
    'John' || ' ' || 'Doe' AS full_name;
 ```
@@ -30,7 +30,7 @@ Output:
 
 The following statement uses the concatenation operator (`||`) to concatenate a string with `NULL`:
 
-```
+```sql
 SELECT
    'John' || NULL result;
 ```
@@ -48,7 +48,7 @@ Since version 9.1, PostgreSQL has introduced a built-in string function called `
 
 Here's the basic syntax of the `CONCAT()` function:
 
-```
+```sql
 CONCAT(string1, string2, ...)
 ```
 
@@ -68,7 +68,7 @@ Let's take some examples of using the PostgreSQL `CONCAT()` function.
 
 The following example uses the `CONCAT()` function to concatenate three literal strings into one:
 
-```
+```sql
 SELECT
   CONCAT ('John', ' ', 'Doe') full_name;
 ```
@@ -90,7 +90,7 @@ We'll use the `customer` table from the [sample database](/postgresqltutorial_da
 
 The following statement uses the `CONCAT()` function to concatenate values in the `first_name`, a space, and values in the `last_name` columns of the `customer` table into a single string:
 
-```
+```sql
 SELECT
   CONCAT (first_name, ' ', last_name) AS full_name
 FROM
@@ -116,7 +116,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `contacts` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
-```
+```sql
 CREATE TABLE contacts (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -152,7 +152,7 @@ INSERT 0 5
 
 Second, use the `CONCAT()` function to concatenate the values in the `name`, `email`, and `phone` columns of the `contacts` table:
 
-```
+```sql
 SELECT
   CONCAT(name, ' ', '(', email, ')', ' ', phone) contact
 FROM

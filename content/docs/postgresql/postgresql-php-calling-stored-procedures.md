@@ -13,7 +13,7 @@ tableOfContents: true
 
 Let’s create a simple [stored procedure](/docs/postgresql/postgresql-php/call-stored-procedures) named `add()` that returns the product of two integers using plpgsql.
 
-```
+```sql
 CREATE OR REPLACE FUNCTION add(
     a INTEGER,
     b INTEGER)
@@ -94,7 +94,7 @@ try {
 
 We will use the `accounts`, `plans`, and `account_plans` tables for the sake of demonstration. The following `get_accounts()` stored procedure returns a result set that contains complete data of accounts.
 
-```
+```sql
 CREATE OR REPLACE FUNCTION get_accounts()
   RETURNS TABLE(id integer,
                 first_name character varying,

@@ -16,7 +16,7 @@ The `SPLIT_PART()` function splits a [string](/docs/postgresql/postgresql-char-v
 
 The following illustrates the syntax of the PostgreSQL `SPLIT_PART()` function:
 
-```
+```sql
 SPLIT_PART(string, delimiter, position)
 ```
 
@@ -46,7 +46,7 @@ Let's take some examples of using the PostgreSQL `SPLIT_PART()` function.
 
 The following example uses the `SPLIT_PART()` function to split a string by a comma (`,`) and returns the third substring:
 
-```
+```sql
 SELECT SPLIT_PART('A,B,C', ',', 2);
 ```
 
@@ -67,7 +67,7 @@ Here is the output:
 
 The following example returns an empty string because the position is greater than the number of parts (3):
 
-```
+```sql
 SELECT SPLIT_PART('A,B,C', ',', 4) result;
 ```
 
@@ -88,7 +88,7 @@ See the following `payment` table in the [sample database.](/docs/postgresql/pos
 
 The following statement uses the `SPLIT_PART()` function to return the year and month of the payment date:
 
-```
+```sql
 SELECT
     split_part(payment_date::TEXT,'-', 1) y,
     split_part(payment_date::TEXT,'-', 2) m,

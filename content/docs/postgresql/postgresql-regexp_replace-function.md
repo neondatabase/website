@@ -17,7 +17,7 @@ Note that if you want to perform simple string replacement, you can use the `REP
 
 The syntax of the PostgreSQL `REGEXP_REPLACE()` function is as follows:
 
-```
+```sql
 REGEXP_REPLACE(source, pattern, replacement_string,[, flags])
 ```
 
@@ -67,7 +67,7 @@ last_name, first_name
 
 To do this, you can use the `REGEXP_REPLACE()` function as shown below:
 
-```
+```sql
 SELECT REGEXP_REPLACE('John Doe','(.*) (.*)','\2, \1');
 ```
 
@@ -81,13 +81,13 @@ The output of the statement is:
 
 Imagine you have string data with mixed alphabets and digits as follows:
 
-```
+```sql
 ABC12345xyz
 ```
 
 The following statement removes all alphabets e.g., A, B, C, etc from the source string:
 
-```
+```sql
 SELECT REGEXP_REPLACE('ABC12345xyz','[[:alpha:]]','','g');
 ```
 
@@ -107,7 +107,7 @@ In this example,
 
 Similarly, you can remove all digits in the source string by using the following statement:
 
-```
+```sql
 SELECT REGEXP_REPLACE('ABC12345xyz','[[:digit:]]','','g');
 ```
 
@@ -121,7 +121,7 @@ The output is:
 
 The following example uses the `REGEXP_REPLACE()` function to remove redundant spaces:
 
-```
+```sql
 SELECT REGEXP_REPLACE('Your string with   redundant    spaces', '\s{2,}', ' ', 'g') AS cleaned_string;
 ```
 

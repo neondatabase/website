@@ -17,7 +17,7 @@ PostgreSQL uses `true`, `'t'`, `'true'`, `'y'`, `'yes'`, `'1'` to represent `tru
 
 A boolean expression is an expression that evaluates to a boolean value. For example, the expression `1=1`is a boolean expression that evaluates to `true`:
 
-```
+```sql
 SELECT 1 = 1 AS result;
 ```
 
@@ -62,7 +62,7 @@ Let's explore some examples of using the `AND` operator.
 
 The following example uses the `AND` operator to combine two true values, which returns true:
 
-```
+```sql
 SELECT true AND true AS result;
 ```
 
@@ -77,7 +77,7 @@ Output:
 
 The following statement uses the `AND` operator to combine true with false, which returns false:
 
-```
+```sql
 SELECT true AND false AS result;
 ```
 
@@ -92,7 +92,7 @@ Output:
 
 The following example uses the `AND` operator to combine true with null, which returns null:
 
-```
+```sql
 SELECT true AND null AS result;
 ```
 
@@ -107,7 +107,7 @@ Output:
 
 The following example uses the `AND` operator to combine false with false, which returns false:
 
-```
+```sql
 SELECT false AND false AS result;
 ```
 
@@ -122,7 +122,7 @@ Output:
 
 The following example uses the `AND` operator to combine false with null, which returns false:
 
-```
+```sql
 SELECT false AND null AS result;
 ```
 
@@ -137,7 +137,7 @@ Output:
 
 The following example uses the `AND` operator to combine null with null, which returns null:
 
-```
+```sql
 SELECT null and null AS result;
 ```
 
@@ -158,7 +158,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `AND` operator in the `WHERE` clause to find the films that have a length greater than 180 and a rental rate less than 1:
 
-```
+```sql
 SELECT
   title,
   length,

@@ -25,7 +25,7 @@ The `TIME` data type requires 8 bytes and its allowed range is from `00:00:00` t
 
 The following illustrates the common formats of the `TIME` values:
 
-```
+```sql
 HH:MI
 HH:MI:SS
 HHMISS
@@ -33,7 +33,7 @@ HHMISS
 
 For example:
 
-```
+```text
 01:02
 01:02:03
 010203
@@ -41,7 +41,7 @@ For example:
 
 To use a time value with the precision, you can utilize the following formats:
 
-```
+```sql
 MI:SS.pppppp
 HH:MI:SS.pppppp
 HHMISS.pppppp
@@ -49,7 +49,7 @@ HHMISS.pppppp
 
 In this syntax, `p` specifies the precision. For example:
 
-```
+```text
 04:59.999999
 04:05:06.777777
 040506.777777
@@ -63,7 +63,7 @@ In practice, you often use the `TIME` data type for the columns that store the t
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `shifts` by using the following `CREATE TABLE` statement:
 
-```
+```sql
 CREATE TABLE shifts (
     id serial PRIMARY KEY,
     shift_name VARCHAR NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE shifts (
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into the `shifts` table:
 
-```
+```sql
 INSERT INTO shifts(shift_name, start_at, end_at)
 VALUES('Morning', '08:00:00', '12:00:00'),
       ('Afternoon', '13:00:00', '17:00:00'),
@@ -83,7 +83,7 @@ VALUES('Morning', '08:00:00', '12:00:00'),
 
 Third, [query](/docs/postgresql/postgresql-select) data from the `shifts` table:
 
-```
+```sql
 SELECT * FROM shifts;
 ```
 
@@ -112,7 +112,7 @@ The storage size of the `TIME WITH TIME ZONE` data type is 12 bytes, allowing yo
 
 The following are some examples of the `TIME WITH TIME ZONE` type:
 
-```
+```text
 04:05:06 PST
 04:05:06.789-8
 ```
@@ -127,7 +127,7 @@ Let's explore some functions that handle time values.
 
 To get the current time with the time zone, you use the `CURRENT_TIME` function as follows:
 
-```
+```sql
 SELECT CURRENT_TIME;
 ```
 
@@ -142,7 +142,7 @@ timetz
 
 To obtain the current time with a specific precision, you use the `CURRENT_TIME(precision)` function:
 
-```
+```sql
 SELECT CURRENT_TIME(5);
 ```
 
@@ -159,7 +159,7 @@ Notice that without specifying the precision, the `CURRENT_TIME` function return
 
 To get the local time, you use the `LOCALTIME` function:
 
-```
+```sql
 SELECT LOCALTIME;
 ```
 
@@ -174,7 +174,7 @@ Output:
 
 Similarly, to get the local time with a specific precision, you use the `LOCALTIME(precision)` function:
 
-```
+```sql
 SELECT LOCALTIME(0);
 ```
 
@@ -197,7 +197,7 @@ To convert time to a different time zone, you use the following form:
 
 For example, to convert the local time to the time at the time zone UTC-7, you use the following statement:
 
-```
+```sql
 SELECT LOCALTIME AT TIME ZONE 'UTC-7';
 ```
 
@@ -214,13 +214,13 @@ Output:
 
 To extract hours, minutes, and seconds from a time value, you use the `EXTRACT` function as follows:
 
-```
+```sql
 EXTRACT(field FROM time_value);
 ```
 
 The field can be the hour, minute, second, or milliseconds. For example:
 
-```
+```sql
 SELECT
     LOCALTIME,
     EXTRACT (HOUR FROM LOCALTIME) as hour,
@@ -237,7 +237,7 @@ PostgreSQL allows you to apply arithmetic operators such as +, -, and \* on time
 
 The following statement returns an [interval](/docs/postgresql/postgresql-interval) between two times:
 
-```
+```sql
 SELECT time '10:00' - time '02:00' AS result;
 ```
 
@@ -252,7 +252,7 @@ Output:
 
 The following statement adds 2 hours to the local time:
 
-```
+```sql
 SELECT LOCALTIME + interval '2 hours' AS result;
 ```
 

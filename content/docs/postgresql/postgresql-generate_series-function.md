@@ -29,7 +29,7 @@ The data types of `start`, `stop`, and `step` can be `int`, `bigint`, or `numeri
 
 The following example uses the `generate_series()` to generate a series of numbers from 1 to 5:
 
-```
+```sql
 SELECT generate_series(1,5);
 ```
 
@@ -50,7 +50,7 @@ Since the steps default to 1, the output series includes numbers from 1 to 5.
 
 The following example uses the `generate_series()` to generate a series of numbers from 1 to 10 with the step of 2:
 
-```
+```sql
 SELECT generate_series(1,10,2);
 ```
 
@@ -94,7 +94,7 @@ When you use a timestamp with a time zone, the function adjusts the times of day
 
 The following example uses the `generate_series()` function to generate a series of timestamps representing one-hour intervals for a specific date range:
 
-```
+```sql
 SELECT * FROM generate_series(
     '2024-03-29 00:00:00'::timestamp,
     '2024-03-29 23:00:00'::timestamp,
@@ -136,13 +136,13 @@ Output:
 
 Assuming that the time zone is set to UTC. If this is not the case, you can run the following command to set the time zone to UTC:
 
-```
+```sql
 SET TIME ZONE 'UTC';
 ```
 
 The following example creates a time series of timestamps with 1-day intervals between two consecutive timestamps:
 
-```
+```sql
 SELECT * FROM generate_series(
    '2024-11-02 00:00 -04:00'::timestamptz,
    '2024-11-05 00:00 -05:00'::timestamptz,
@@ -173,7 +173,7 @@ Let's explore some real-world examples of using the `generate_series()` function
 
 The following example uses the `generate_series()` function with the [random()](/docs/postgresql/postgresql-random) function to create a series of five random numbers between 100 and 200:
 
-```
+```sql
 SELECT floor(random()* (200-100+ 1) + 100) rand
 FROM generate_series(1,5);
 ```
@@ -195,7 +195,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees(
    id INT GENERATED ALWAYS AS IDENTITY,
    name VARCHAR(100) NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE employees(
 
 Second, insert 100 rows into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(name, age)
 SELECT 'employee ' || n  name,
         floor(random()* (65-18+ 1) + 18) age
@@ -234,7 +234,7 @@ In data analytics, you often need to create a `dates` table that contains a seri
 
 First, create a `dates` table:
 
-```
+```sql
 CREATE TABLE dates(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     date DATE NOT NULL UNIQUE,
@@ -272,7 +272,7 @@ In the `dates` table, only the `date` column is required whereas other columns a
 
 Second, create a series of dates between `2024-01-01` and `2024-31-12`:
 
-```
+```sql
 INSERT INTO dates(date)
 SELECT * FROM generate_series(
     '2024-01-01'::date,

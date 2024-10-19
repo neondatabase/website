@@ -35,7 +35,7 @@ Let's explore some examples of using the `->` and `->>` operators.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees` to store employee data:
 
-```
+```sql
 CREATE TABLE employees(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE employees(
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (name, phones)
 VALUES
    ('John Doe', '["(408) 555-1111", "(408) 555-2222", "(408) 555-3333"]'),
@@ -67,7 +67,7 @@ Output:
 
 The following example uses the -> operator to retrieve the first phone number of an employee with the name John Doe:
 
-```
+```sql
 SELECT
   name,
   phones -> 0 phone
@@ -90,7 +90,7 @@ In this example, we use the `->` operator with the index 0. Therefore, the expre
 
 To extract the first phone number as a text string, you can use the ->> operator:
 
-```
+```sql
 SELECT
   name,
   phones ->> 0 phone
@@ -113,7 +113,7 @@ Output:
 
 The following example uses the `->` operator to retrieve the first phone number of an employee with the name `Jane Smith`:
 
-```
+```sql
 SELECT
   name,
   phones -> -1 phone
@@ -134,7 +134,7 @@ Output:
 
 To extract the last phone number as a `JSONB` value, you can use the ->> operator:
 
-```
+```sql
 SELECT
   name,
   phones ->> -1 phone
@@ -157,7 +157,7 @@ Output:
 
 The following example uses the `->` operator to retrieve the 4th phone number of an employee with the name `Jane Smith`:
 
-```
+```sql
 SELECT
   name,
   phones -> 3 phone
@@ -200,7 +200,7 @@ object ->> 'key'
 
 First, create a new table called `requests`:
 
-```
+```sql
 CREATE TABLE requests(
    id SERIAL PRIMARY KEY,
    employee_id INT NOT NULL,
@@ -211,7 +211,7 @@ CREATE TABLE requests(
 
 Second, insert some rows into the `requests` table:
 
-```
+```sql
 INSERT INTO requests (request_date, employee_id, data)
 VALUES
    ('2024-02-23',1, '{"current_position": "Software Engineer", "new_position": "Senior Software Engineer", "effective_date": "2024-03-01"}'),
@@ -235,7 +235,7 @@ Output:
 
 The following example uses the `->` operator to extract the current position of the request of employee ID 1:
 
-```
+```sql
 SELECT
   data -> 'current_position' current_position
 FROM
@@ -257,7 +257,7 @@ The return value is a JSONB value.
 
 To get the current position as a text string, you can use the `->>` operator:
 
-```
+```sql
 SELECT
   data ->> 'current_position' current_position
 FROM
@@ -279,7 +279,7 @@ Output:
 
 The following example attempts to extract a value of a non-existing key from a JSON object:
 
-```
+```sql
 SELECT
   data ->> 'position' position
 FROM

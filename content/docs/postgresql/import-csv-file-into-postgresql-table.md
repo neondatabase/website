@@ -21,7 +21,7 @@ First, [create a new table](/docs/postgresql/postgresql-create-table) named `per
 -
 - `email`: the email address
 
-```
+```sql
 CREATE TABLE persons (
   id SERIAL,
   first_name VARCHAR(50),
@@ -48,7 +48,7 @@ The path of the CSV file is as follows: `C:\sampledb\persons.csv`
 
 To import this CSV file into the `persons` table, you use `COPY` statement as follows:
 
-```
+```sql
 COPY persons(first_name, last_name, dob, email)
 FROM 'C:\sampledb\persons.csv'
 DELIMITER ','
@@ -57,13 +57,13 @@ CSV HEADER;
 
 PostgreSQL gives back the following message:
 
-```
+```sql
 COPY 2
 ```
 
 It means that two rows have been copied. Let's check the `persons` table.
 
-```
+```sql
 SELECT * FROM persons;
 ```
 
@@ -75,7 +75,7 @@ Let's dive into the COPY statement in more detail.
 
 First, you specify the table with column names after the `COPY` keyword. The order of the columns must be the same as the ones in the CSV file. In case the CSV file contains all columns of the table, you don't need to specify them explicitly, for example:
 
-```
+```sql
 COPY sample_table_name
 FROM 'C:\sampledb\sample_data.csv'
 DELIMITER ','
@@ -94,7 +94,7 @@ In case you need to import a CSV file from your computer into a table on the Pos
 
 The following statement [truncates](/docs/postgresql/postgresql-truncate-table) the `persons` table so that you can re-import the data.
 
-```
+```sql
 TRUNCATE TABLE persons
 RESTART IDENTITY;
 ```

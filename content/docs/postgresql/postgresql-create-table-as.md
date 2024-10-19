@@ -13,7 +13,7 @@ tableOfContents: true
 
 The `CREATE TABLE AS` statement [creates a new table](/docs/postgresql/postgresql-create-table) and fills it with the data returned by a query. The following shows the syntax of the `CREATE TABLE AS` statement:
 
-```
+```sql
 CREATE TABLE new_table_name
 AS query;
 ```
@@ -30,14 +30,14 @@ In this syntax:
 
 The `TEMPORARY` or `TEMP` keyword allows you to create a [temporary table](/docs/postgresql/postgresql-temporary-table):
 
-```
+```sql
 CREATE TEMP TABLE new_table_name
 AS query;
 ```
 
 The `UNLOGGED` keyword allows the new table to be created as an unlogged table:
 
-```
+```sql
 CREATE UNLOGGED TABLE new_table_name
 AS query;
 ```
@@ -46,14 +46,14 @@ The columns of the new table will have the names and data types associated with 
 
 If you want the table columns to have different names, you can specify the new table columns after the new table name:
 
-```
+```sql
 CREATE TABLE new_table_name ( column_name_list)
 AS query;
 ```
 
 If you want to avoid an error by creating a new table that already exists, you can use the `IF NOT EXISTS` option as follows:
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS new_table_name
 AS query;
 ```
@@ -66,7 +66,7 @@ We will use the `film` and `film_category` table from the [sample database](/doc
 
 The following example uses the CREATE TABLE AS statement to create a new table that contains the films whose category is 1:
 
-```
+```sql
 CREATE TABLE action_film
 AS
 SELECT
@@ -84,7 +84,7 @@ WHERE
 
 To verify the table creation, you can query data from the `action_film` table:
 
-```
+```sql
 SELECT * FROM action_film
 ORDER BY title;
 ```
@@ -105,7 +105,7 @@ As clearly shown in the output, the names and data types of the `action_film` ta
 
 If the `SELECT` clause contains expressions, it is a good practice to override the columns, for example:
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS film_rating (rating, film_count)
 AS
 SELECT

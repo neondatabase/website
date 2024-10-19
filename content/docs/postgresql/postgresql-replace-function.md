@@ -14,7 +14,7 @@ The `REPLACE()` function replaces all occurrences of a substring with a new one 
 
 Here's the syntax of the PostgreSQL `REPLACE()` function:
 
-```
+```sql
 REPLACE(source, from_text, to_text);
 ```
 
@@ -32,7 +32,7 @@ Let's explore some examples of using the `REPLACE()` function.
 
 The following example uses the `REPLACE()` function to replace the string `'A'` in the string `'ABC AA'` with the string `'Z'`:
 
-```
+```sql
 SELECT REPLACE ('ABC AA', 'A', 'Z');
 ```
 
@@ -51,7 +51,7 @@ In this example, the `REPLACE()` function replaces all the characters `'A'` with
 
 If you want to search and replace a substring in a table column, you use the following syntax:
 
-```
+```sql
 UPDATE
   table_name
 SET
@@ -64,7 +64,7 @@ Let's see the following example.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `posts` that has three columns `id`, `title`, and `url`:
 
-```
+```sql
 CREATE TABLE posts(
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -97,14 +97,14 @@ INSERT 0 3
 
 Second, replace the `http` in the `url` column with the `https` using the `REPLACE()` function:
 
-```
+```sql
 UPDATE posts
 SET url = REPLACE(url, 'http','https');
 ```
 
 Output:
 
-```
+```sql
 UPDATE 3
 ```
 
@@ -112,7 +112,7 @@ The output indicates that three rows were updated.
 
 Third, verify the update by retrieving data from the `customer` table:
 
-```
+```sql
 SELECT * FROM posts;
 ```
 

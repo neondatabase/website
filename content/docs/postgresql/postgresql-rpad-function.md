@@ -16,7 +16,7 @@ The `RPAD()` function allows you to extend a string to a length by appending spe
 
 Here's the basic syntax of the `RPAD()` function:
 
-```
+```sql
 RPAD(string, length, fill)
 ```
 
@@ -46,7 +46,7 @@ Let's explore some examples of using the PostgreSQL `RPAD()` function.
 
 The following example uses the `RPAD()` function to extend a string by filling zeros ('0') to make it six characters long:
 
-```
+```sql
 SELECT RPAD('123', 6, '0');
 ```
 
@@ -67,7 +67,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `RPAD()` function to right-pad the titles from the `film` table with the character '.' to make it 50 characters long:
 
-```
+```sql
 SELECT
   RPAD(title, 50, '.')
 FROM
@@ -91,7 +91,7 @@ Output:
 
 The following example uses the `RPAD()` function to truncate the titles if their lengths are more than 10 characters:
 
-```
+```sql
 SELECT
   title, RPAD(title, 10, '') result
 FROM

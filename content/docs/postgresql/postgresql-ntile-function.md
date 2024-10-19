@@ -17,7 +17,7 @@ The `NTILE()` function assigns each group a bucket number starting from 1. For e
 
 The syntax of the `NTILE()` function is as follows:
 
-```
+```sql
 NTILE(buckets) OVER (
     [PARTITION BY partition_expression, ... ]
     [ORDER BY sort_expression [ASC | DESC], ...]
@@ -50,7 +50,7 @@ Let's take some examples of using the `NTILE()` function.
 
 We'll use the `sales_stats` table created in the `CUME_DIST()` function tutorial to demonstrate the `NTILE()` function.
 
-```
+```sql
 SELECT
  year,
  name,
@@ -67,7 +67,7 @@ ORDER BY
 
 This example uses the `NTILE()` function to distribute rows into 3 buckets:
 
-```
+```sql
 SELECT
  name,
  amount,
@@ -88,7 +88,7 @@ Here is the output:
 
 This example uses the `NTILE()` function to divide rows in the `sales_stats` table into two partitions and 3 buckets for each:
 
-```
+```sql
 SELECT
  name,
  amount,

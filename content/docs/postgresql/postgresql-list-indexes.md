@@ -32,7 +32,7 @@ The `pg_indexes` view consists of five columns:
 
 The following statement lists all indexes of the schema `public` in the current database:
 
-```
+```sql
 SELECT
     tablename,
     indexname,
@@ -62,7 +62,7 @@ Output:
 
 To show all the indexes of a table, you use the following statement:
 
-```
+```sql
 SELECT
   indexname,
   indexdef
@@ -74,7 +74,7 @@ WHERE
 
 For example, to list all the indexes for the `customer` table, you use the following statement:
 
-```
+```sql
 SELECT
     indexname,
     indexdef
@@ -98,7 +98,7 @@ Here is the output:
 
 If you want to get a list of indexes for tables whose names start with the letter `c`, you can use the following query:
 
-```
+```sql
 SELECT
     tablename,
     indexname,

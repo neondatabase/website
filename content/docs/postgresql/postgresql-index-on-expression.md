@@ -19,7 +19,7 @@ Note that the indexes on expressions are also known as functional indexes.
 
 Here's the basic syntax for creating an index on expression:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name (expression);
 ```
@@ -45,7 +45,7 @@ The `customer` table has a b-tree index defined for the `first_name` column.
 
 First, retrieve the customers with the last names are `Purdy`:
 
-```
+```sql
 SELECT
     customer_id,
     first_name,
@@ -69,7 +69,7 @@ It returns one matching row.
 
 Second, use the `EXPLAIN` statement to show the query plan:
 
-```
+```sql
 EXPLAIN
 SELECT
     customer_id,
@@ -95,7 +95,7 @@ The output indicates that the query uses the `idx_last_name` index to improve th
 
 Third, find customers whose last name is `purdy` in lowercase:
 
-```
+```sql
 EXPLAIN
 SELECT
     customer_id,
@@ -121,14 +121,14 @@ However, this time PostgreSQL could not utilize the index for lookup. To enhance
 
 Fourth, define an index on expression using the `CREATE INDEX` statement:
 
-```
+```sql
 CREATE INDEX idx_ic_last_name
 ON customer(LOWER(last_name));
 ```
 
 Finally, retrieve the customers based on a last name in lowercase:
 
-```
+```sql
 EXPLAIN
 SELECT
     customer_id,

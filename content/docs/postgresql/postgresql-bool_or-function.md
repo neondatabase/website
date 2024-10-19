@@ -32,7 +32,7 @@ Let's explore some examples of using the `BOOL_OR()` function.
 
 First, [create tables](/docs/postgresql/postgresql-create-table) called `teams` and `members`:
 
-```
+```sql
 CREATE TABLE teams (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(100) NOT NULL
@@ -48,7 +48,7 @@ CREATE TABLE members (
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the tables:
 
-```
+```sql
 INSERT INTO teams (team_name)
 VALUES
 ('Team A'),
@@ -96,7 +96,7 @@ The `members` table:
 
 The following example uses the `BOOL_OR()` function to test if there are any active members in the `members` table:
 
-```
+```sql
 SELECT
   BOOL_OR(active) active_member_exists
 FROM
@@ -118,7 +118,7 @@ The `BOOL_OR()` function returns true indicating that the `members` table has ac
 
 The following example uses the `BOOL_OR()` function with the `GROUP BY` clause to check if there are any active members in each team:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_OR(active) active_member_exists
@@ -146,7 +146,7 @@ The output indicates that teams A and B have active members whereas team C does 
 
 The following example uses the `BOOL_OR()` function with the `GROUP BY` and [HAVING](/docs/postgresql/postgresql-having) clauses to retrieve teams that have active members:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_OR(active) active_member_exists

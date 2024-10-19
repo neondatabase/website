@@ -24,7 +24,7 @@ To create an `AFTER DELETE` trigger, you follow these steps:
 
 First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute after a `DELETE` operation:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -42,7 +42,7 @@ LANGUAGE plpgsql;
 
 Second, create a trigger and associate the trigger function with it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 AFTER DELETE ON table_name
 FOR EACH ROW
@@ -55,7 +55,7 @@ We'll use an `AFTER DELETE` trigger to archive a deleted row in a separate table
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `employees` to store the employee data:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE employees (
 
 Second, [insert two rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(name, salary)
 VALUES
    ('John Doe', 90000),
@@ -85,7 +85,7 @@ Output:
 
 Third, create another table named `employee_archives` for archiving deleted employees:
 
-```
+```sql
 CREATE TABLE employee_archives(
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE employee_archives(
 
 Fourth, define a function that [inserts](/docs/postgresql/postgresql-insert) a deleted employee into the `employee_archives` table:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION archive_deleted_employee()
 RETURNS TRIGGER
 AS
@@ -114,7 +114,7 @@ LANGUAGE plpgsql;
 
 Fifth, create an `AFTER DELETE` trigger that executes the `archive_deleted_employee()` function when a row is deleted from the `employees` table:
 
-```
+```sql
 CREATE TRIGGER after_delete_employee_trigger
 AFTER DELETE ON employees
 FOR EACH ROW
@@ -123,7 +123,7 @@ EXECUTE FUNCTION archive_deleted_employee();
 
 Sixth, [delete a row](/docs/postgresql/postgresql-delete) from the `employees` table:
 
-```
+```sql
 DELETE FROM employees
 WHERE id = 1
 RETURNING *;
@@ -142,7 +142,7 @@ The `AFTER INSERT` trigger will be activated that calls the `archive_deleted_emp
 
 Seventh, retrieve data from the `employee_archives` table:
 
-```
+```sql
 SELECT * FROM employee_archives;
 ```
 

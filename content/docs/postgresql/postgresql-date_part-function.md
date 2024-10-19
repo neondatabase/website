@@ -15,7 +15,7 @@ The `DATE_PART()` function allows you to extract a subfield from a date or time 
 
 The following illustrates the basic syntax for the `DATE_PART()` function:
 
-```
+```sql
 DATE_PART(field, source)
 ```
 
@@ -71,7 +71,7 @@ Let's explore some examples of using the `DATE_PART()` function.
 
 The following example uses the `DATE_PART()` function to extract the century from a timestamp:
 
-```
+```sql
 SELECT date_part('century',TIMESTAMP '2017-01-01');
 ```
 
@@ -88,7 +88,7 @@ Output:
 
 To extract the year from the same timestamp, you pass the year to the `field` argument:
 
-```
+```sql
 SELECT date_part('year',TIMESTAMP '2017-01-01');
 ```
 
@@ -105,7 +105,7 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the quarter from a timestamp:
 
-```
+```sql
 SELECT date_part('quarter',TIMESTAMP '2017-01-01');
 ```
 
@@ -122,7 +122,7 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the month from a timestamp:
 
-```
+```sql
 SELECT date_part('month',TIMESTAMP '2017-09-30');
 ```
 
@@ -156,7 +156,7 @@ Output:
 
 To extract the week number from a time stamp, you pass the week as the first argument:
 
-```
+```sql
 SELECT date_part('week',TIMESTAMP '2017-09-30');
 ```
 
@@ -173,7 +173,7 @@ Output:
 
 To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](/docs/postgresql/postgresql-date-functions/postgresql-now) function as follows:
 
-```
+```sql
 SELECT date_part('millennium',now());
 ```
 
@@ -190,7 +190,7 @@ Output:
 
 To extract the day part from a timestamp, you pass the `day` string to the `DATE_PART()` function:
 
-```
+```sql
 SELECT date_part('day',TIMESTAMP '2017-03-18 10:20:30');
 ```
 
@@ -207,7 +207,7 @@ Output:
 
 To extract the hour, minute, and second, from a time stamp, you pass the corresponding value hour, minute, and second to the `DATE_PART()` function:
 
-```
+```sql
 SELECT date_part('hour',TIMESTAMP '2017-03-18 10:20:30') h,
        date_part('minute',TIMESTAMP '2017-03-18 10:20:30') m,
        date_part('second',TIMESTAMP '2017-03-18 10:20:30') s;
@@ -226,7 +226,7 @@ Output:
 
 To extract the day of the week and or day of the year from a time stamp, you use the `dow` and `doy` arguments:
 
-```
+```sql
 SELECT date_part('dow',TIMESTAMP '2017-03-18 10:20:30') dow,
        date_part('doy',TIMESTAMP '2017-03-18 10:20:30') doy;
 ```

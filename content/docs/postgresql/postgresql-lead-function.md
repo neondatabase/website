@@ -19,7 +19,7 @@ The `LEAD()` function is very useful for comparing the value of the current row 
 
 The following illustrates the syntax of `LEAD()` function:
 
-```
+```sql
 LEAD(expression [,offset [,default_value]])
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -59,7 +59,7 @@ Let's set up a new table for the demonstration.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `sales`:
 
-```
+```sql
 CREATE TABLE sales(
  year SMALLINT CHECK(year > 0),
  group_id INT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE sales(
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into the `sales` table:
 
-```
+```sql
 INSERT INTO
  sales(year, group_id, amount)
 VALUES
@@ -87,7 +87,7 @@ VALUES
 
 Third, query data from the `sales` table:
 
-```
+```sql
 SELECT * FROM sales;
 ```
 
@@ -97,7 +97,7 @@ SELECT * FROM sales;
 
 The following query returns the total sales amount by year:
 
-```
+```sql
 SELECT
  year,
  SUM(amount)
@@ -110,7 +110,7 @@ ORDER BY year;
 
 This example uses the `LEAD()` function to return the sales amount of the current year and the next year:
 
-```
+```sql
 WITH cte AS (
  SELECT
   year,
@@ -140,7 +140,7 @@ In this example:
 
 The following example uses two common table expressions to return the sales variance between the current year and the next:
 
-```
+```sql
 WITH cte AS (
  SELECT
   year,
@@ -173,7 +173,7 @@ FROM
 
 The following statement uses the `LEAD()` function to compare the sales of the current year with sales of the next year for each product group:
 
-```
+```sql
 SELECT
  year,
  amount,

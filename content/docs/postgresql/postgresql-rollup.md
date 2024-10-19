@@ -40,7 +40,7 @@ A common use of `ROLLUP` is to calculate the aggregations of data by year, month
 
 The following illustrates the syntax of the PostgreSQL `ROLLUP`:
 
-```
+```sql
 SELECT
     c1,
     c2,
@@ -54,7 +54,7 @@ GROUP BY
 
 It is also possible to do a partial roll up to reduce the number of subtotals generated.
 
-```
+```sql
 SELECT
     c1,
     c2,
@@ -71,7 +71,7 @@ GROUP BY
 
 If you haven't created the sales table, you can use the following script:
 
-```
+```sql
 DROP TABLE IF EXISTS sales;
 CREATE TABLE sales (
     brand VARCHAR NOT NULL,
@@ -90,7 +90,7 @@ VALUES
 
 The following query uses the `ROLLUP` clause to find the number of products sold by brand (subtotal) and by all brands and segments (total).
 
-```
+```sql
 SELECT
     brand,
     segment,
@@ -110,7 +110,7 @@ As you can see clearly from the output, the third row shows the sales of the `AB
 
 If you change the order of brand and segment, the result will be different as follows:
 
-```
+```sql
 SELECT
     segment,
     brand,
@@ -130,7 +130,7 @@ In this case, the hierarchy is the `segment > brand`.
 
 The following statement performs a partial roll-up:
 
-```
+```sql
 SELECT
     segment,
     brand,
@@ -153,7 +153,7 @@ See the following `rental` table from the [sample database](/docs/postgresql/pos
 
 The following statement finds the number of rental per day, month, and year by using the `ROLLUP`:
 
-```
+```sql
 SELECT
     EXTRACT (YEAR FROM rental_date) y,
     EXTRACT (MONTH FROM rental_date) M,

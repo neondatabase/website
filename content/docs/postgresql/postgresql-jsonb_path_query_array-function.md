@@ -37,7 +37,7 @@ Let's explore some examples of using the `jsonb_path_query_array()` function
 
 The following example uses the `jsonb_path_query_array()` function to get the employee names as an array:
 
-```
+```sql
 SELECT
   jsonb_path_query_array(
     '{"employees": [{"name": "Alice", "age": 25}, {"name": "Bob", "age": 30}]}',
@@ -60,7 +60,7 @@ In this example, the JSON path expression `$.employees[*].name` locates the valu
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     data JSONB
@@ -71,7 +71,7 @@ In the `employees` table, the `data` column has the type of `JSONB`.
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (data) VALUES
     ('{"name": "Alice", "age": 30, "pets": [{"type": "cat", "name": "Fluffy"}, {"type": "dog", "name": "Buddy"}]}'),
     ('{"name": "Bob", "age": 35, "pets": [{"type": "dog", "name": "Max"}]}'),
@@ -93,7 +93,7 @@ Output:
 
 Third, use the `jsonb_path_query_array()` function to retrieve the pet names of employees as a JSON array:
 
-```
+```sql
 SELECT jsonb_path_query_array(data, '$.pets[*].name') AS employee_pet_names
 FROM employees;
 ```
@@ -113,7 +113,7 @@ Output:
 
 If the specified path doesn't exist in the `JSONB` data, the `jsonb_path_query_array()` function returns an empty array. For example:
 
-```
+```sql
 SELECT jsonb_path_query_array(data, '$.address')
 FROM employees;
 ```

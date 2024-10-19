@@ -44,7 +44,7 @@ Let's explore some examples of using the `jsonb_object()` function.
 
 The following example uses the `jsonb_object()` function to create a JSON object from a text array:
 
-```
+```sql
 SELECT
   jsonb_object('{"name","John", "age", 22}');
 ```
@@ -60,7 +60,7 @@ Output:
 
 Alternatively, you can use a two-dimensional arrays to create the JSON object:
 
-```
+```sql
 SELECT
   jsonb_object(
     '{{"name","age"},{"John", 22}}'
@@ -78,7 +78,7 @@ Output:
 
 Additionally, you can use two arrays including `keys` and `values` to create the JSON object:
 
-```
+```sql
 SELECT
   jsonb_object(
     '{"name","age"}', '{"John", 22}'
@@ -102,7 +102,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `jsonb_object` function to create an object from the `title` and `release_year` from the `film` table:
 
-```
+```sql
 SELECT
   jsonb_object(
     array[title], array[release_year]::text[]

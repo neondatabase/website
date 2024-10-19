@@ -14,7 +14,7 @@ A grouping set is a set of columns to which you want to group. For more informat
 
 The following illustrates the syntax of the `CUBE` subclause:
 
-```
+```sql
 SELECT
     c1,
     c2,
@@ -34,7 +34,7 @@ In this syntax:
 
 The query generates all possible grouping sets based on the dimension columns specified in `CUBE`. The `CUBE` subclause is a short way to define multiple grouping sets so the following are equivalent:
 
-```
+```sql
 CUBE(c1,c2,c3)
 
 GROUPING SETS (
@@ -53,7 +53,7 @@ In general, if the number of columns specified in the `CUBE` is `n`, then you wi
 
 PostgreSQL allows you to perform a partial cube to reduce the number of aggregates calculated. The following shows the syntax:
 
-```
+```sql
 SELECT
     c1,
     c2,
@@ -74,7 +74,7 @@ We will use the `sales` table created in the `GROUPING SETS` tutorial for the de
 
 The following query uses the `CUBE` subclause to generate multiple grouping sets:
 
-```
+```sql
 SELECT
     brand,
     segment,
@@ -94,7 +94,7 @@ Here is the output:
 
 The following query performs a partial cube:
 
-```
+```sql
 SELECT
     brand,
     segment,

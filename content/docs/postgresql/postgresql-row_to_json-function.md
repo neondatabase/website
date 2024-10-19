@@ -36,7 +36,7 @@ Let's take some examples of using the `row_to_json()` function.
 
 The following example uses the `row_to_json()` function to convert a row into a JSON object:
 
-```
+```sql
 SELECT row_to_json(row('John',20));
 ```
 
@@ -61,7 +61,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `row_to_json()` function to convert the `title` and `length` of each film in the `film` table into a JSON object:
 
-```
+```sql
 SELECT
   row_to_json(t) film
 FROM
@@ -98,7 +98,7 @@ How it works.
 
 Note that you can use a [common table expression](/docs/postgresql/postgresql-cte) (`CTE`) instead of a subquery to achieve the same result:
 
-```
+```sql
 WITH film_cte AS (
   SELECT
     title,

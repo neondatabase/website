@@ -38,7 +38,7 @@ Let's take some examples of using table aliases.
 
 The following example uses a table alias to retrieve five titles from the `film` table:
 
-```
+```sql
 SELECT f.title
 FROM film AS f
 ORDER BY f.title
@@ -62,7 +62,7 @@ In this example, we assign the `film` table an alias `f` and use the table alias
 
 Since the `AS` keyword is optional, you can remove it as follows:
 
-```
+```sql
 SELECT f.title
 FROM film f
 ORDER BY f.title
@@ -89,7 +89,7 @@ alias.column_name
 
 For example, the following query uses an `INNER JOIN` clause to retrieve data from the `customer` and `payment` tables:
 
-```
+```sql
 SELECT
   c.customer_id,
   c.first_name,
@@ -121,7 +121,7 @@ When you join a table to itself (a.k.a [self-join](/docs/postgresql/postgresql-s
 
 The following example shows how to reference the `film` table twice in the same query using the table aliases:
 
-```
+```sql
 SELECT
     f1.title,
     f2.title,

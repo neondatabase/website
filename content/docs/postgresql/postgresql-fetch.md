@@ -17,7 +17,7 @@ Note that the `FETCH` clause was introduced as a part of the SQL standard in SQL
 
 The following illustrates the syntax of the PostgreSQL `FETCH` clause:
 
-```
+```sql
 OFFSET row_to_skip { ROW | ROWS }
 FETCH { FIRST | NEXT } [ row_count ] { ROW | ROWS } ONLY
 ```
@@ -48,7 +48,7 @@ Let's use the `film` table in the [sample database](/docs/postgresql/postgresql-
 
 The following query uses the `FETCH` clause to select the first film sorted by titles in ascending order:
 
-```
+```sql
 SELECT
     film_id,
     title
@@ -70,7 +70,7 @@ Output:
 
 It is equivalent to the following query:
 
-```
+```sql
 SELECT
     film_id,
     title
@@ -83,7 +83,7 @@ FETCH FIRST 1 ROW ONLY;
 
 The following query uses the `FETCH` clause to select the first five films sorted by titles:
 
-```
+```sql
 SELECT
     film_id,
     title
@@ -109,7 +109,7 @@ Output:
 
 The following statement returns the next five films after the first five films sorted by titles:
 
-```
+```sql
 SELECT
     film_id,
     title

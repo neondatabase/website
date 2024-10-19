@@ -15,7 +15,7 @@ The `DATE_TRUNC()` function truncates a [`TIMESTAMP`](/docs/postgresql/postgresq
 
 Here's the basic syntax of the `DATE_TRUNC` function:
 
-```
+```sql
 DATE_TRUNC(field, source [,time_zone])
 ```
 
@@ -61,7 +61,7 @@ Let's explore some examples of using the `DATE_TRUNC()` function.
 
 The following example uses the `DATE_TRUNC()` function to truncate a `TIMESTAMP` value to `hour` part:
 
-```
+```sql
 SELECT DATE_TRUNC('hour', TIMESTAMP '2017-03-17 02:09:30');
 ```
 
@@ -78,7 +78,7 @@ In this example, the `DATE_TRUNC()` function returns a timestamp with the hour p
 
 If you want to truncate a `TIMESTAMP` value to a minute, you use the `'minute'` field as shown in the following example:
 
-```
+```sql
 SELECT DATE_TRUNC('minute', TIMESTAMP '2017-03-17 02:09:30');
 ```
 
@@ -99,7 +99,7 @@ See the following `rental` table in the [sample database](/docs/postgresql/postg
 
 The following example uses the `DATE_TRUNC()` function to retrieve the number of rentals by month from the rental table:
 
-```
+```sql
 SELECT
     DATE_TRUNC('month', rental_date) m,
     COUNT (rental_id)
@@ -128,7 +128,7 @@ This query retrieves the month of each rental date and counts the number of rent
 
 If you want to count the rentals by week, you can pass the week to the DATE_TRUNC() function as follows:
 
-```
+```sql
 SELECT
     DATE_TRUNC('week', rental_date) week,
     COUNT (rental_id)
@@ -161,7 +161,7 @@ Output:
 
 The following example uses the `DATE_TRUNC()` function to count the number of rentals by staff per year:
 
-```
+```sql
 SELECT
  staff_id,
  date_trunc('year', rental_date) y,

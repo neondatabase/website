@@ -13,7 +13,7 @@ The `SET ROLE` statement allows you to temporarily change the current role withi
 
 Here's the syntax of the `SET ROLE` statement:
 
-```
+```sql
 SET ROLE role_name;
 ```
 
@@ -35,19 +35,19 @@ psql -U postres -d dvdrental
 
 Second, [create a group role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `marketing`:
 
-```
+```sql
 CREATE ROLE marketing;
 ```
 
 Third, [grant](/docs/postgresql/postgresql-administration/postgresql-grant) the `SELECT` privilege on the `film` table:
 
-```
+```sql
 GRANT SELECT ON film TO marketing;
 ```
 
 Fourth, [create a role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `lily` that is a member of the `marketing` role:
 
-```
+```sql
 CREATE ROLE lily
 WITH LOGIN PASSWORD 'SecurePass1'
 IN ROLE marketing;
@@ -61,7 +61,7 @@ psql -U lily -d dvdrental
 
 Seventh, retrieve the current role:
 
-```
+```sql
 SELECT current_role;
 ```
 
@@ -76,7 +76,7 @@ Output:
 
 Eight, switch the current role to `marketing`:
 
-```
+```sql
 SET ROLE marketing;
 ```
 
@@ -104,19 +104,19 @@ If you attempt to switch the current role to a [superuser](/docs/postgresql/post
 
 Tenth, switch the current role to `postgres`:
 
-```
+```sql
 SET ROLE postgres;
 ```
 
 Output:
 
-```
+```sql
 ERROR:  permission denied to set role "postgres"
 ```
 
 To set the current role back to the original one, you use the `RESET` `ROLE` statement:
 
-```
+```sql
 RESET ROLE;
 ```
 

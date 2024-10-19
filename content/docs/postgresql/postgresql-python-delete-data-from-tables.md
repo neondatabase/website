@@ -31,7 +31,7 @@ Then, execute the [DELETE](/docs/postgresql/postgresql-delete) statement. If you
 
 The `DELETE` statement with a placeholder for the value of the `id` field is as follows:
 
-```
+```sql
 DELETE FROM table_1 WHERE id = %s;
 ```
 
@@ -101,13 +101,13 @@ python delete.py
 
 Output:
 
-```
+```sql
 The number of deleted rows:  1
 ```
 
 Retrieve data from the `parts` table again to confirm the deletion:
 
-```
+```sql
 SELECT * FROM parts;
 ```
 

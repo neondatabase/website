@@ -135,7 +135,7 @@ Triggers:
 
 The following statement retrieves the table in PostgreSQL from the `pg_catalog.pg_tables` view:
 
-```
+```sql
 SELECT *
 FROM pg_catalog.pg_tables
 WHERE schemaname != 'pg_catalog' AND

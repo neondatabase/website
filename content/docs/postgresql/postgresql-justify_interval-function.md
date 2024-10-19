@@ -19,7 +19,7 @@ The `JUSTIFY_INTERVAL()` function achieves this by utilizing the `JUSTIFY_DAYS()
 
 Here's the syntax of the `JUSTIFY_INTERVAL()` function:
 
-```
+```sql
 JUSTIFY_INTERVAL( value ) → interval
 ```
 
@@ -39,7 +39,7 @@ Let's take some examples of using the `JUSTIFY_INTERVAL()` function.
 
 The following example uses the `JUSTIFY_INTERVAL()` function to justify an interval in days to months:
 
-```
+```sql
 SELECT JUSTIFY_INTERVAL('35 days');
 ```
 
@@ -54,7 +54,7 @@ Output:
 
 The following statement uses the `JUSTIFY_INTERVAL()` function to justify an interval in hours to days:
 
-```
+```sql
 SELECT JUSTIFY_INTERVAL('30 hours');
 ```
 
@@ -71,7 +71,7 @@ justify_interval
 
 The following example uses the `JUSTIFY_INTERVAL()` function to convert a negative interval into hours days and hours:
 
-```
+```sql
 SELECT JUSTIFY_INTERVAL('-2 days 5 hours');
 ```
 

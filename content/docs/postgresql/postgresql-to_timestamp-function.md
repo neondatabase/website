@@ -15,7 +15,7 @@ The PostgreSQL `TO_TIMESTAMP()` function converts a string to a [timestamp](/doc
 
 The following illustrates the syntax of `TO_TIMESTAMP()` function:
 
-```
+```sql
 TO_TIMESTAMP(timestamp, format)
 ```
 
@@ -91,7 +91,7 @@ The PostgreSQL `TO_TIMESTAMP()` function returns a timestamp with the time zone.
 
 The following statement uses the `TO_TIMESTAMP()` function to convert a string to a timestamp:
 
-```
+```sql
 SELECT TO_TIMESTAMP(
     '2017-03-31 9:30:20',
     'YYYY-MM-DD HH:MI:SS'
@@ -127,7 +127,7 @@ In this example:
 
 This example uses multiple spaces in the input string:
 
-```
+```sql
 SELECT
     TO_TIMESTAMP('2017     Aug','YYYY MON');
 ```
@@ -143,14 +143,14 @@ The `TO_TIMESTAMP()` function just omits the spaces and returns the correct time
 
 However, the following example returns an error:
 
-```
+```sql
 SELECT
     TO_TIMESTAMP('2017     Aug','FXYYYY MON');
 ```
 
 Output:
 
-```
+```sql
 ERROR:  invalid value "" for "MON"
 DETAIL:  The given value did not match any of the allowed values for this field.
 SQL state: 22007
@@ -162,21 +162,21 @@ Because the `FX` option instructs the `TO_TIMESTAMP()` to accept the input strin
 
 The following example uses an invalid timestamp value:
 
-```
+```sql
 SELECT
     TO_TIMESTAMP('2017-02-31 30:8:00', 'YYYY-MM-DD HH24:MI:SS');
 ```
 
 It returns an error:
 
-```
+```sql
 ERROR:  date/time field value out of range: "2017-02-31 30:8:00"
 SQL state: 22008
 ```
 
 3. When converting a string to a timestamp, the `TO_TIMESTAMP()` function treats milliseconds or microseconds as seconds after the decimal point.
 
-```
+```sql
 SELECT
     TO_TIMESTAMP('01-01-2017 10:2', 'DD-MM-YYYY SS:MS');
 ```
@@ -191,21 +191,21 @@ to_timestamp
 
 In this example, 2 is not 2 milliseconds but 200. It means that:
 
-```
+```sql
 SELECT
         TO_TIMESTAMP('01-01-2017 10:2', 'DD-MM-YYYY SS:MS');
 ```
 
 and
 
-```
+```sql
 SELECT
         TO_TIMESTAMP('01-01-2017 10:200', 'DD-MM-YYYY SS:MS');
 ```
 
 returns the same result.
 
-```
+```text
 2017-01-01 00:00:10.2-07
 ```
 
@@ -213,7 +213,7 @@ To get 2 milliseconds, you must use `01-01-2017 10:002`. In this case, `002` is 
 
 4. If the year is less than four digits, the `TO_TIMESTAMP()` will adjust it to the nearest year e.g., 99 becomes 1999, 17 becomes 2017.
 
-```
+```sql
 SELECT
     TO_TIMESTAMP('12 31 99 12:45', 'MM DD YY HH:MI');
 ```
@@ -229,7 +229,7 @@ Output:
 
 Consider the following example:
 
-```
+```sql
 SELECT
       TO_TIMESTAMP('12 31 16 12:45', 'MM DD YY HH:MI');
 ```

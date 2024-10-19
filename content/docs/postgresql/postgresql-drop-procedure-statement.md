@@ -122,7 +122,7 @@ drop procedure insert_actor;
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  procedure name "insert_actor" is not unique
 HINT:  Specify the argument list to select the procedure unambiguously.
 SQL state: 42725

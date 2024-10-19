@@ -13,7 +13,7 @@ In the previous tutorial, we showed you how to [import data from a CSV file into
 
 The following statement retrieves the data from the `persons` table.
 
-```
+```sql
 SELECT * FROM persons;
 ```
 
@@ -33,13 +33,13 @@ The `COPY` statement allows you to export data from a table to a CSV file.
 
 For example, if you want to export the data of the `persons` table to a CSV file named `persons_db.csv` in the `C:\temp` folder, you can use the following statement:
 
-```
+```sql
 COPY persons TO 'C:\temp\persons_db.csv' DELIMITER ',' CSV HEADER;
 ```
 
 Output:
 
-```
+```sql
 COPY 2
 ```
 
@@ -53,7 +53,7 @@ Sometimes, you may want to export data from some columns of a table to a CSV fil
 
 For example, the following statement exports data from the `first_name`, `last_name`, and `email` columns of the `persons` table to `person_partial_db.csv`
 
-```
+```sql
 COPY persons(first_name,last_name,email)
 TO 'C:\temp\persons_partial_db.csv' DELIMITER ',' CSV HEADER;
 ```
@@ -64,7 +64,7 @@ If you don't want to export the header, which contains the column names of the t
 
 For example, the following statement exports only data from the `email` column of the `persons` table to a CSV file:
 
-```
+```sql
 COPY persons(email)
 TO 'C:\temp\persons_email_db.csv' DELIMITER ',' CSV;
 ```

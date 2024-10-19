@@ -38,7 +38,7 @@ Let's take some examples of using JSON paths.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `person` that includes a `JSONB` column:
 
-```
+```sql
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     info JSONB
@@ -47,7 +47,7 @@ CREATE TABLE person (
 
 Second, [insert a new row](/docs/postgresql/postgresql-insert) into the `person` table:
 
-```
+```sql
 INSERT INTO person (info)
 VALUES
     ('{"name": "John", "age": 30, "city": "New York", "pets": [{"name": "Max", "species": "Dog"}, {"name": "Whiskers", "species": "Cat"}]}')
@@ -81,7 +81,7 @@ The JSON data in the `info` column of the `person` table looks like the followin
 
 The following statement uses the `jsonb_path_query()` to extract the name of the person:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.name')
 FROM
@@ -103,7 +103,7 @@ In this example, we use the `$.name` path to access the value of the `name` prop
 
 The following example uses the `jsonb_path_query()` function to retrieve all values of the JSON object in the `info` column:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.*')
 FROM
@@ -128,7 +128,7 @@ In this example, the `$.*` path locates the values of all properties of the top-
 
 The following example uses the `jsonb_path_query()` function to get the name of the first pet:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.pets[0].name')
 FROM
@@ -153,7 +153,7 @@ In this example, we use the JSON path `$.pets[0].name` to locate the name of the
 
 The following example uses the JSON path `$.pets[*].name` to return all pet names of a person object:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.pets[*].name')
 FROM
@@ -176,7 +176,7 @@ The wildcard `*` means all elements.
 
 The following example uses a filter expression to find the pet whose species is cat:
 
-```
+```sql
 SELECT
   jsonb_path_query(
     info, '$.pets[*] ? (@.species == "Cat")'
@@ -217,7 +217,7 @@ The default is `lax` mode.
 
 The following statement attempts to extract the `email` from the JSON data in the `info` column of the `person` table:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.email')
 FROM
@@ -236,7 +236,7 @@ It returns no row because the JSON object does not have the `email` key.
 
 The following statement extracts the `email` key but uses the `strict` mode for the JSON path:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, 'strict $.email')
 FROM
@@ -245,7 +245,7 @@ FROM
 
 Output:
 
-```
+```sql
 ERROR:  JSON object does not contain key "email"
 
 SQL state: 2203A

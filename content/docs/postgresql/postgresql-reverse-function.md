@@ -14,7 +14,7 @@ The `REVERSE()` function accepts a string and returns a new string with the orde
 
 Here's the syntax of the `REVERSE()` function:
 
-```
+```sql
 REVERSE(text)
 ```
 
@@ -34,7 +34,7 @@ Let's explore some examples of using the `REVERSE()` function.
 
 The following example uses the `REVERSE()` function to reverse the string `"SQL"`:
 
-```
+```sql
 SELECT REVERSE('SQL');
 ```
 
@@ -55,7 +55,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `REVERSE()` function to reverse the first names of customers:
 
-```
+```sql
 SELECT
   first_name,
   REVERSE(first_name)
@@ -84,7 +84,7 @@ You can use the `REVERSE()` function to reverse a string and then compare the re
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `words` to store the words:
 
-```
+```sql
 CREATE TABLE words(
   id SERIAL PRIMARY KEY,
   word VARCHAR(255) NOT NULL
@@ -93,7 +93,7 @@ CREATE TABLE words(
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `words` table:
 
-```
+```sql
 INSERT INTO words(word)
 VALUES('radar'), ('level'),('civic'),('man'),('12321'),('madam')
 RETURNING *;
@@ -115,7 +115,7 @@ Output:
 
 Third, determine if a value in the `word` column is a palindrome using the `REVERSE()` function:
 
-```
+```sql
 SELECT
   word,
   REVERSE(word),

@@ -60,7 +60,7 @@ PostgreSQL supports the following actions:
 
 The following statements create the `customers` and `contacts` tables:
 
-```
+```sql
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS contacts;
 
@@ -91,7 +91,7 @@ The `customer_id` column in the `contacts` table is the foreign key column that 
 
 The following foreign key constraint `fk_customer` in the `contacts` table defines the `customer_id` as the foreign key:
 
-```
+```sql
 CONSTRAINT fk_customer
    FOREIGN KEY(customer_id)
       REFERENCES customers(customer_id)
@@ -103,7 +103,7 @@ Because the foreign key constraint does not have the `ON DELETE` and `ON UPDATE`
 
 The following inserts data into the `customers` and `contacts` tables:
 
-```
+```sql
 INSERT INTO customers(customer_name)
 VALUES('BlueBird Inc'),
       ('Dolphin LLC');
@@ -116,14 +116,14 @@ VALUES(1,'John Doe','(408)-111-1234','john.doe@bluebird.dev'),
 
 The following statement deletes the customer id 1 from the `customers` table:
 
-```
+```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
 
 Because of the `ON DELETE NO ACTION`, PostgreSQL issues a constraint violation because the referencing rows of the customer id 1 still exist in the `contacts` table:
 
-```
+```sql
 ERROR:  update or delete on table "customers" violates foreign key constraint "fk_customer" on table "contacts"
 DETAIL:  Key (customer_id)=(1) is still referenced from table "contacts".
 SQL state: 23503
@@ -137,7 +137,7 @@ The `SET NULL` automatically sets `NULL` to the foreign key columns in the refer
 
 First, drop the sample tables and re-create them with the foreign key that uses the `SET NULL` action in the `ON DELETE` clause:
 
-```
+```sql
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
 
@@ -163,7 +163,7 @@ CREATE TABLE contacts(
 
 Second, insert data into the `customers` and `contacts` tables:
 
-```
+```sql
 INSERT INTO customers(customer_name)
 VALUES('BlueBird Inc'),
       ('Dolphin LLC');
@@ -176,7 +176,7 @@ VALUES(1,'John Doe','(408)-111-1234','john.doe@bluebird.dev'),
 
 Third, delete the customer with id 1 from the `customers` table:
 
-```
+```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
@@ -185,7 +185,7 @@ Because of the `ON DELETE SET NULL` action, the referencing rows in the `contact
 
 Finally, display the data in the `contacts` table:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -208,7 +208,7 @@ The `ON DELETE CASCADE` automatically deletes all the referencing rows in the ch
 
 The following statements recreate the sample tables with the delete action of the `fk_customer` changes to `CASCADE`:
 
-```
+```sql
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
 
@@ -243,14 +243,14 @@ VALUES(1,'John Doe','(408)-111-1234','john.doe@bluebird.dev'),
 
 The following statement deletes the customer id 1:
 
-```
+```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
 
 Because of the `ON DELETE CASCADE` action, all the referencing rows in the `contacts` table are automatically deleted:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -271,7 +271,7 @@ The `ON DELETE SET DEFAULT` sets the default value to the foreign key column of 
 
 To add a foreign key constraint to the existing table, you use the following form of the [ALTER TABLE](/docs/postgresql/postgresql-alter-table)statement:
 
-```
+```sql
 ALTER TABLE child_table
 ADD CONSTRAINT constraint_name
 FOREIGN KEY (fk_columns)
@@ -282,14 +282,14 @@ When adding a foreign key constraint with `ON DELETE CASCADE` option to an exist
 
 First, drop existing foreign key constraint:
 
-```
+```sql
 ALTER TABLE child_table
 DROP CONSTRAINT constraint_fkey;
 ```
 
 Second, add a new foreign key constraint with `ON DELETE CASCADE` action:
 
-```
+```sql
 ALTER TABLE child_table
 ADD CONSTRAINT constraint_fk
 FOREIGN KEY (fk_columns)

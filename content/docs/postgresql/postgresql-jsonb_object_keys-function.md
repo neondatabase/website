@@ -37,7 +37,7 @@ Let's take some examples of using the `jsonb_object_keys()` function.
 
 The following example uses the `jsonb_object_keys()` function to extract the keys of a JSON object as a set of text values:
 
-```
+```sql
 SELECT
   jsonb_object_keys(
     '{"name": "Joe", "age": 18, "city": "New York"}'
@@ -59,7 +59,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `person`:
 
-```
+```sql
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     info JSONB
@@ -70,7 +70,7 @@ In the `person` table, the `info` column has the type JSONB that stores various 
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `person` table:
 
-```
+```sql
 INSERT INTO person (info)
 VALUES
     ('{"name": "John", "age": 30, "city": "New York"}'),
@@ -80,7 +80,7 @@ VALUES
 
 Third, get the keys of the objects in the `info` column:
 
-```
+```sql
 SELECT jsonb_object_keys(info)
 FROM person;
 ```
@@ -102,7 +102,7 @@ Output:
 
 To get unique keys from all the stored JSON objects in the info column, you can use the `DISTINCT` operator:
 
-```
+```sql
 SELECT DISTINCT jsonb_object_keys(info)
 FROM person;
 ```
@@ -122,7 +122,7 @@ Output:
 
 The following example shows how to dynamically access values corresponding to each key retrieved using `jsonb_object_keys()`:
 
-```
+```sql
 SELECT
     id,
     key,

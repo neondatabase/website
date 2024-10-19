@@ -15,7 +15,7 @@ The `PG_SLEEP()` function allows you to create a delay (sleep) in your queries. 
 
 Here's the syntax of the `PG_SLEEP()` function:
 
-```
+```sql
 PG_SLEEP(seconds)
 ```
 
@@ -29,7 +29,7 @@ Let's explore some examples of using the `PG_SLEEP()` function.
 
 The following example uses the `PG_SLEEP()` function to pause the execution for 3 seconds before returning any result:
 
-```
+```sql
 SELECT pg_sleep(3);
 ```
 
@@ -46,7 +46,7 @@ After 3 seconds:
 
 The following example uses the `PG_SLEEP()` function to pause the execution for `1.5` seconds:
 
-```
+```sql
 SELECT PG_SLEEP(1.5);
 ```
 
@@ -63,7 +63,7 @@ After `1.5` seconds:
 
 The following example uses the `PG_SLEEP()` function between the `NOW()` functions:
 
-```
+```sql
 SELECT NOW(), PG_SLEEP(3), NOW();
 ```
 
@@ -82,7 +82,7 @@ The output indicates that the result of the `NOW()` function does not change wit
 
 The following example uses the `PG_SLEEP()` function between the `CLOCK_TIMESTAMP()` functions:
 
-```
+```sql
 SELECT CLOCK_TIMESTAMP(), PG_SLEEP(3), CLOCK_TIMESTAMP();
 ```
 

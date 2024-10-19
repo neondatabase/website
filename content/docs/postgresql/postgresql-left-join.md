@@ -16,7 +16,7 @@ The `LEFT JOIN` can be useful for selecting rows from one table that do not have
 
 Here's the basic syntax of the `LEFT JOIN` clause:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -44,7 +44,7 @@ Note that `LEFT JOIN` is also referred to as `LEFT OUTER JOIN`.
 
 If the columns for joining two tables have the same name, you can use the `USING` syntax:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -72,7 +72,7 @@ The linkage between the `film` and `inventory` tables is established through the
 
 The following statement uses the `LEFT JOIN` clause to join `film` table with the `inventory` table:
 
-```
+```sql
 SELECT
   film.film_id,
   film.title,
@@ -90,7 +90,7 @@ When a row from the `film` table does not have a matching row in the `inventory`
 
 The following statement uses table aliases and `LEFT JOIN` clause to join the `film` and `inventory` tables:
 
-```
+```sql
 SELECT
   f.film_id,
   f.title,
@@ -104,7 +104,7 @@ ORDER BY
 
 Because the `film` and `inventory` tables share the same `film_id` column, you can use the `USING` syntax:
 
-```
+```sql
 SELECT
   f.film_id,
   f.title,
@@ -120,7 +120,7 @@ ORDER BY
 
 The following uses the `LEFT JOIN` clause to join the `inventory` and `film` tables. It includes a `WHERE` clause that identifies the films that are not present in the inventory:
 
-```
+```sql
 SELECT
   f.film_id,
   f.title,

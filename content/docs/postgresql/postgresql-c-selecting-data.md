@@ -74,7 +74,7 @@ catch (NpgsqlException ex)
 
 Output:
 
-```
+```text
 2       Emma    Smith   emma.smith@gmail.com    5/20/2024
 3       Liam    Johnson liam.johnson@gmail.com  5/20/2024
 4       Olivia  Williams        olivia.williams@gmail.com       5/20/2024
@@ -138,7 +138,7 @@ catch (NpgsqlException ex)
 
 Output:
 
-```
+```sql
 Sophia  5/10/2024
 James   5/10/2024
 Isabella        5/10/2024
@@ -177,7 +177,7 @@ catch (NpgsqlException ex)
 
 Output:
 
-```
+```sql
 Student count: 10
 ```
 

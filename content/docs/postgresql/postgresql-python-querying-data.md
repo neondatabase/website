@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
 Output:
 
-```
+```sql
 The number of parts:  8
 (1, '3M Corp')
 (2, 'AKM Semiconductor Inc.')
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     get_vendors()
 ```
 
-```
+```sql
 The number of parts:  8
 (1, '3M Corp')
 (2, 'AKM Semiconductor Inc.')

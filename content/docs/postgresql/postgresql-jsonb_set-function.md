@@ -82,7 +82,7 @@ Output:
 
 The following example uses the `jsonb_set()` function to update an element in a nested array:
 
-```
+```sql
 SELECT
   jsonb_set(
     '[1,2,[4,5],6]', '{2,0}', '3'
@@ -110,7 +110,7 @@ Therefore the `jsonb_set()` function changes the number 4 as the first element o
 
 The following example uses the `jsonb_set()` to update the value of a key in a JSON object:
 
-```
+```sql
 SELECT
   jsonb_set('{"name": "Jane Doe"}', '{name}', '"Jane Smith"');
 ```
@@ -134,7 +134,7 @@ Therefore, the `jsonb_set()` set the value of the `name` key in the JSON object 
 
 Note that if you attempt to set a key that does not exist, you'll get an error, the jsonb_set will insert it. For example:
 
-```
+```sql
 SELECT jsonb_set('{"name": "Jane Doe"}', '{age}', '25');
 ```
 
@@ -149,7 +149,7 @@ Output:
 
 But if you set the `create_missing` parameter to false, the function will not insert a new key/value pair:
 
-```
+```sql
 SELECT
   jsonb_set(
     '{"name": "Jane Doe"}', '{age}',
@@ -171,7 +171,7 @@ Output:
 
 The following example uses the `jsonb_set()` to modify a key/value pair in a nested JSON object:
 
-```
+```sql
 SELECT
   jsonb_set(
     '{"name":"John Doe", "address" : { "city": "San Francisco"}}',
@@ -200,7 +200,7 @@ Therefore, the `jsonb_set()` function updates the `city` with the value `San Jos
 
 The following example uses the `jsonb_set()` to update an element in an array of a nested object
 
-```
+```sql
 SELECT
   jsonb_set(
     '{"name": "John", "skills" : ["PostgreSQL", "API"]}',
@@ -232,7 +232,7 @@ We'll show you how to use the `jsonb_set()` function to insert a new value into 
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employee_skills`:
 
-```
+```sql
 CREATE TABLE employee_skills(
     id INT PRIMARY KEY,
     data JSONB
@@ -241,7 +241,7 @@ CREATE TABLE employee_skills(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employee_skills` table:
 
-```
+```sql
 INSERT INTO employee_skills(id, data)
 VALUES
    (1, '{"name": "John", "skills" : ["PostgreSQL", "API"]}'),
@@ -261,7 +261,7 @@ Output:
 
 Third, replace the first skill in the skills array of the employee id 1 with the new skill `"Web Dev"`:
 
-```
+```sql
 UPDATE
   employee_skills
 SET

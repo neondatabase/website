@@ -104,7 +104,7 @@ begin
 end $$;
 ```
 
-```
+```sql
 ERROR:  duplicate email: info@postgresqltutorial.com
 HINT:  check the email again
 CONTEXT:  PL/pgSQL function inline_code_block line 8 at RAISE

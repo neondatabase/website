@@ -26,7 +26,7 @@ Because a `CROSS JOIN` may generate a large result set, you should use it carefu
 
 Here's the basic syntax of the `CROSS JOIN` syntax:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -36,7 +36,7 @@ CROSS JOIN table2;
 
 The following statement is equivalent to the above statement:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -45,7 +45,7 @@ FROM
 
 Alternatively, you can use an `INNER JOIN` clause with a condition that always evaluates to true to simulate a cross-join:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -57,7 +57,7 @@ FROM
 
 The following [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements create `T1` and `T2` tables and [insert sample data](/docs/postgresql/postgresql-tutorial/postgresql-insert) for the cross-join demonstration.
 
-```
+```sql
 DROP TABLE IF EXISTS T1;
 
 CREATE TABLE
@@ -84,7 +84,7 @@ VALUES
 
 The following statement uses the `CROSS JOIN` operator to join `T1` table with `T2` table:
 
-```
+```sql
 SELECT *
 FROM T1
 CROSS JOIN T2;
@@ -114,7 +114,7 @@ In practice, you can find the `CROSS JOIN` useful when you need to combine data 
 
 Suppose you have a table for `employees` and `shifts`, and you want to create a schedule that lists all possible combinations of employees and shifts to explore various staffing scenarios:
 
-```
+```sql
 SELECT *
 FROM employees
 CROSS JOIN shift;
@@ -124,7 +124,7 @@ CROSS JOIN shift;
 
 In an inventory management system, you have tables for `warehouses` and `products`. A `CROSS JOIN` can help you analyze the availability of each product in every warehouse:
 
-```
+```sql
 SELECT *
 FROM products
 CROSS JOIN warehouses;

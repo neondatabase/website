@@ -40,7 +40,7 @@ The `ORDER BY` clause sorts rows in each partition to which the `CUME_DIST()` fu
 
 The `CUME_DIST()` a double precision value which is greater than 0 and less than or equal to 1:
 
-```
+```text
 0 < CUME_DIST() <= 1
 ```
 
@@ -50,7 +50,7 @@ The function returns the same cumulative distribution values for the same tie va
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `sales_stats` that stores the sales revenue by employees:
 
-```
+```sql
 CREATE TABLE sales_stats(
     name VARCHAR(100) NOT NULL,
     year SMALLINT NOT NULL CHECK (year > 0),
@@ -61,7 +61,7 @@ CREATE TABLE sales_stats(
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into the `sales_stats` table:
 
-```
+```sql
 INSERT INTO
     sales_stats(name, year, amount)
 VALUES
@@ -83,7 +83,7 @@ The following examples help you get a better understanding of the `CUME_DIST()` 
 
 The following example returns the sales amount percentile for each sales employee in 2018:
 
-```
+```sql
 SELECT
     name,
     year,
@@ -107,7 +107,7 @@ As clearly shown in the output, we can find that 80% of sales employees have sal
 
 The following example uses the `CUME_DIST()` function to calculate the sales percentile for each sales employee in 2018 and 2019.
 
-```
+```sql
 SELECT
     name,
  year,

@@ -21,7 +21,7 @@ The materialized views can be useful in many cases that require fast data access
 
 To create a materialized view, you use the `CREATE MATERIALIZED VIEW` statement as follows:
 
-```
+```sql
 CREATE MATERIALIZED VIEW [IF NOT EXISTS] view_name
 AS
 query
@@ -39,7 +39,7 @@ How it works.
 
 To load data into a materialized view, you use the `REFRESH MATERIALIZED VIEW` statement:
 
-```
+```sql
 REFRESH MATERIALIZED VIEW view_name;
 ```
 
@@ -47,7 +47,7 @@ When you refresh data for a materialized view, PostgreSQL locks the underlying t
 
 To avoid this, you can use the `CONCURRENTLY` option.
 
-```
+```sql
 REFRESH MATERIALIZED VIEW CONCURRENTLY view_name;
 ```
 
@@ -61,7 +61,7 @@ Notice that `CONCURRENTLY` option is only available in PostgreSQL 9.4 or later.
 
 To remove a materialized view, you use the `DROP MATERIALIZED VIEW` statement:
 
-```
+```sql
 DROP MATERIALIZED VIEW view_name;
 ```
 
@@ -73,7 +73,7 @@ We'll use the tables in the [sample database](/docs/postgresql/postgresql-gettin
 
 First, create a materialized view named `rental_by_category` using the `CREATE MATERIALIZED VIEW` statement:
 
-```
+```sql
 CREATE MATERIALIZED VIEW rental_by_category
 AS
  SELECT c.name AS category,
@@ -91,7 +91,7 @@ WITH NO DATA;
 
 Because of the `WITH NO DATA` option, you cannot query data from the view. If you attempt to do so, you'll get the following error message:
 
-```
+```sql
 SELECT * FROM rental_by_category;
 ```
 
@@ -106,13 +106,13 @@ PostgreSQL is helpful to give you a hint to ask for loading data into the view.
 
 Second, load data into the materialized view using the `REFRESH MATERIALIZED VIEW` statement:
 
-```
+```sql
 REFRESH MATERIALIZED VIEW rental_by_category;
 ```
 
 Third, retrieve data from the materialized view:
 
-```
+```sql
 SELECT * FROM rental_by_category;
 ```
 
@@ -144,14 +144,14 @@ From now on, you can refresh the data in the `rental_by_category` view using the
 
 However, to refresh it with `CONCURRENTLY` option, you need to create a `UNIQUE` index for the view first.
 
-```
+```sql
 CREATE UNIQUE INDEX rental_category
 ON rental_by_category (category);
 ```
 
 Let's refresh data concurrently for the `rental_by_category` view.
 
-```
+```sql
 REFRESH MATERIALIZED VIEW CONCURRENTLY rental_by_category;
 ```
 

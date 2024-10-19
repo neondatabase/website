@@ -15,7 +15,7 @@ The `MAKE_TIME()` function allows you to create a [time](/docs/postgresql/postgr
 
 Here's the syntax of the `MAKE_TIME()` function:
 
-```
+```sql
 MAKE_TIME ( hour int, min int, sec double precision ) → time
 ```
 
@@ -39,7 +39,7 @@ Let's explore some examples of using the `MAKE_TIME()` function.
 
 The following example uses the `MAKE_TIME()` function to construct a time `22:30:45` from hour, minute, and second:
 
-```
+```sql
 SELECT MAKE_TIME(22,30,45);
 ```
 
@@ -54,13 +54,13 @@ Output:
 
 The following example attempts to use invalid values for hour, minute, and second to construct a time and results in an error:
 
-```
+```sql
 SELECT MAKE_TIME(25,30,45);
 ```
 
 Error:
 
-```
+```sql
 ERROR:  time field value out of range: 25:30:45
 ```
 
@@ -70,7 +70,7 @@ Even though the type of hour and minute parameters are integers and seconds are 
 
 Behind the scenes, the function will implicitly convert these string arguments to the proper types, as long as the results of the conversions are in the valid range.
 
-```
+```sql
 SELECT MAKE_TIME('8', '30', '59.999999');
 ```
 

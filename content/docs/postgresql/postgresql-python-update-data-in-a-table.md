@@ -97,7 +97,7 @@ Second, change the current database to `suppliers`:
 
 Third, retrieve data from the `vendors` table with the vendor id 1:
 
-```
+```sql
 SELECT
   *
 FROM

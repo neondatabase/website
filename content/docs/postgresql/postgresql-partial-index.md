@@ -21,7 +21,7 @@ This partial index can enhance query performance while reducing the index size. 
 
 To create a partial index, you use the `CREATE INDEX` statement with a `WHERE` clause:
 
-```
+```sql
 CREATE [IF NOT EXISTS] INDEX index_name
 ON table_name(column1, column2, ...)
 WHERE predicate;
@@ -50,7 +50,7 @@ To speed up the query that retrieves the inactive customer, you can create a par
 
 First, create a partial index on the `active` column of the customer table:
 
-```
+```sql
 CREATE INDEX customer_active
 ON customer(active)
 WHERE active = 0;
@@ -58,7 +58,7 @@ WHERE active = 0;
 
 Second, show the query plan that retrieves the inactive customers:
 
-```
+```sql
 EXPLAIN SELECT
   *
 FROM

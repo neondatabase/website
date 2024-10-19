@@ -14,7 +14,7 @@ The `HAVING` clause specifies a search condition for a group. The `HAVING` claus
 
 The following statement illustrates the basic syntax of the `HAVING` clause:
 
-```
+```sql
 SELECT
   column1,
   aggregate_function (column2)
@@ -59,7 +59,7 @@ Let's take a look at the `payment` table in the [sample database](/docs/postgres
 
 The following query uses the `GROUP BY` clause with the `SUM()` function to find the total payment of each customer:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) amount
@@ -85,7 +85,7 @@ Output:
 
 The following statement adds the `HAVING`clause to select the only customers who have been spending more than `200`:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) amount
@@ -117,7 +117,7 @@ See the following `customer` table from the [sample database](/docs/postgresql/p
 
 The following query uses the `GROUP BY` clause to find the number of customers per store:
 
-```
+```sql
 SELECT
   store_id,
   COUNT (customer_id)
@@ -139,7 +139,7 @@ Output:
 
 The following statement adds the `HAVING` clause to select a store that has more than 300 customers:
 
-```
+```sql
 SELECT
   store_id,
   COUNT (customer_id)

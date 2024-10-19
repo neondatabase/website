@@ -139,7 +139,7 @@ Second, change the current database to `suppliers`:
 
 Third, retrieve data from the `vendors` table:
 
-```
+```sql
 SELECT * FROM vendors;
 ```
 

@@ -115,7 +115,7 @@ To list all users and their assigned roles, you use `\du` command:
 
 To retrieve the current version of PostgreSQL server, you use the `version()` function as follows:
 
-```
+```sql
 SELECT version();
 ```
 

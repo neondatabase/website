@@ -65,7 +65,7 @@ The `jsonb_insert()` function inserts the number 0 before the first element of t
 
 To insert the number 0 after the first position, you set the `insert_after` parameter to true as follows:
 
-```
+```sql
 SELECT jsonb_insert('[1,2,3]', '{0}', '0', true);
 ```
 
@@ -82,7 +82,7 @@ Output:
 
 The following example uses the `jsonb_insert()` function to insert a new element into a nested array:
 
-```
+```sql
 SELECT
   jsonb_insert(
     '[1,2,[4,5],6]', '{2,0}', '3'
@@ -110,7 +110,7 @@ Therefore the `jsonb_insert()` function inserts the new value 3 before the first
 
 The following example uses the `jsonb_insert()` to add a new key/value pair to a JSON object:
 
-```
+```sql
 SELECT
   jsonb_insert('{"name": "John"}', '{age}', '2');
 ```
@@ -134,13 +134,13 @@ Therefore, the `jsonb_insert()` inserts the age property with value 2 into the J
 
 Note that if you attempt to insert a key that already exists, you'll get an error. For example:
 
-```
+```sql
 SELECT jsonb_insert('{"name": "John"}', '{name}', '"Jane"');
 ```
 
 Output:
 
-```
+```sql
 ERROR:  cannot replace existing key
 HINT:  Try using the function jsonb_set to replace key value.
 ```
@@ -151,7 +151,7 @@ In this case, you need to use the `jsonb_set()` function to replace the key valu
 
 The following example uses the `jsonb_insert()` to add a new key/value pair to a nested JSON object:
 
-```
+```sql
 SELECT
   jsonb_insert(
     '{"name":"John Doe", "address" : { "city": "San Francisco"}}',
@@ -179,7 +179,7 @@ Therefore, the `jsonb_insert()` function inserts the state with the value Califo
 
 Note that to beautify the output, you can use the `jsonb_pretty()` function:
 
-```
+```sql
 SELECT
   jsonb_pretty(jsonb_insert(
     '{"name":"John Doe", "address" : { "city": "San Francisco"}}',
@@ -207,7 +207,7 @@ Output:
 
 The following example uses the `jsonb_insert()` to add a new element into an array of a nested object
 
-```
+```sql
 SELECT
   jsonb_insert(
     '{"name": "John", "skills" : ["PostgreSQL", "API"]}',
@@ -238,7 +238,7 @@ We'll show you how to use the `jsonb_insert()` function to insert a new value in
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employee_profiles`:
 
-```
+```sql
 CREATE TABLE employee_profiles(
     id INT PRIMARY KEY,
     profiles JSONB
@@ -247,7 +247,7 @@ CREATE TABLE employee_profiles(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employee_profiles` table:
 
-```
+```sql
 INSERT INTO employee_profiles(id, profiles)
 VALUES
    (1, '{"name": "John", "skills" : ["PostgreSQL", "API"]}'),
@@ -267,7 +267,7 @@ Output:
 
 Third, add the "Web Dev" skill to the employee with the id 1:
 
-```
+```sql
 UPDATE
   employee_profiles
 SET

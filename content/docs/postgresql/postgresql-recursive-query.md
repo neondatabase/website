@@ -15,7 +15,7 @@ A recursive CTE is often referred to as a recursive query.
 
 Here's the basic syntax of a recursive CTE:
 
-```
+```sql
 WITH RECURSIVE cte_name (column1, column2, ...)
 AS(
     -- anchor member
@@ -54,7 +54,7 @@ Let's take an example of using a recursive query.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called employees:
 
-```
+```sql
 CREATE TABLE employees (
   employee_id SERIAL PRIMARY KEY,
   full_name VARCHAR NOT NULL,
@@ -66,7 +66,7 @@ The `employees` table has three columns: `employee_id`, `full_name`, and `manage
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (employee_id, full_name, manager_id)
 VALUES
   (1, 'Michael North', NULL),
@@ -95,7 +95,7 @@ VALUES
 
 The following statement uses a recursive CTE to find all subordinates of the manager with the id 2.
 
-```
+```sql
 WITH RECURSIVE subordinates AS (
   SELECT
     employee_id,

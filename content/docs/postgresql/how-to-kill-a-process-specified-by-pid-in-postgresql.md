@@ -15,7 +15,7 @@ psql -U postgres
 
 Second, get all the running processes by querying data from the pg_stat_activity:
 
-```
+```sql
 SELECT *
 FROM pg_stat_activity
 WHERE state = 'active';
@@ -37,7 +37,7 @@ The query returns a lot of information but the most important one is pid.
 
 Third, terminate the process specified by the pid by running the following query, for example:
 
-```
+```sql
 SELECT pg_cancel_backend(pid);
 ```
 
@@ -45,7 +45,7 @@ This query will take a while to kill the process.
 
 If you want to kill the process right away, you can use the pg_terminate_backend() function:
 
-```
+```sql
 SELECT pg_terminate_backend(pid);
 ```
 

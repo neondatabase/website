@@ -69,7 +69,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The film 0 could not be found
 ```
 
@@ -129,7 +129,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The film title is Brooklyn Desert
 ```
 
@@ -197,7 +197,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The Brooklyn Desert film is Long.
 ```
 

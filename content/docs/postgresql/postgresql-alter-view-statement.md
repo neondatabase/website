@@ -15,7 +15,7 @@ If you want to change the view's defining query, use the `CREATE OR REPLACE VIEW
 
 Here's the basic syntax of the `ALTER VIEW` statement:
 
-```
+```sql
 ALTER VIEW [IF EXISTS] view_name
 action;
 ```
@@ -32,7 +32,7 @@ Third, provide the action that you want to do with the view. The action includes
 
 The following `ALTER VIEW` statement changes the name of a view to the new one:
 
-```
+```sql
 ALTER VIEW [ IF EXISTS ] view_name
 RENAME TO new_view_name;
 ```
@@ -41,7 +41,7 @@ In this syntax, you specify the new view name (`new_view_name`) after the `RENAM
 
 First, create a new view called `film_type` that includes the `title` and `rating`:
 
-```
+```sql
 CREATE VIEW film_type
 AS
 SELECT title, rating
@@ -50,7 +50,7 @@ FROM film;
 
 Second, change the view `film_type` to `film_rating`:
 
-```
+```sql
 ALTER VIEW film_type RENAME TO film_rating;
 ```
 
@@ -58,7 +58,7 @@ ALTER VIEW film_type RENAME TO film_rating;
 
 The following `ALTER VIEW` statement changes the view option:
 
-```
+```sql
 ALTER VIEW [ IF EXISTS ] view_name
 SET ( view_option_name [= view_option_value] [, ... ] );
 ```
@@ -71,7 +71,7 @@ The `view_option_name` can be:
 
 For example, the following changes the check option of the `film_rating` view to `local`:
 
-```
+```sql
 ALTER VIEW film_rating
 SET (check_option = local);
 ```
@@ -101,14 +101,14 @@ Options: check_option=local
 
 The following statement changes a column name of a view to a new one:
 
-```
+```sql
 ALTER VIEW [ IF EXISTS ] view_name
 RENAME [ COLUMN ] column_name TO new_column_name;
 ```
 
 For example, the following statement changes the `title` column of the `film_rating` view to `film_title`:
 
-```
+```sql
 ALTER VIEW film_rating
 RENAME title TO film_title;
 ```
@@ -136,7 +136,7 @@ Options: check_option=local
 
 The following statement sets the new schema for a view:
 
-```
+```sql
 ALTER VIEW [ IF EXISTS ] view_name
 SET SCHEMA new_schema;
 ```
@@ -145,13 +145,13 @@ For example:
 
 First, create a new schema called `web`:
 
-```
+```sql
 CREATE SCHEMA web;
 ```
 
 Second, change the schema of the `film_rating` view to `web`:
 
-```
+```sql
 ALTER VIEW film_rating
 SET SCHEMA web;
 ```

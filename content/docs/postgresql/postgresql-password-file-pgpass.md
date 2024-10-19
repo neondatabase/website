@@ -53,7 +53,7 @@ localhost:5432:*:postgres:moreSecure
 
 Third, save the file with the name `pgpass.conf` with the following file path:
 
-```
+```sql
 C:\Users\<YourUsername>\AppData\Roaming\postgresql\pgpass.conf
 ```
 

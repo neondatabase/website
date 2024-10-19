@@ -15,7 +15,7 @@ The `JUSTIFY_DAYS()` function allows you to normalize an [interval](/docs/postgr
 
 Here's the basic syntax of the `JUSTIFY_DAYS()` function:
 
-```
+```sql
 JUSTIFY_DAYS ( value) → interval
 ```
 
@@ -41,7 +41,7 @@ Let's explore some examples of using the PostgreSQL `JUSTIFY_DAYS()` function.
 
 The following statement uses the `JUSTIFY_DAYS()` function to adjust intervals that are multiples of 30 days:
 
-```
+```sql
 SELECT JUSTIFY_DAYS(INTERVAL '30 days'),
        JUSTIFY_DAYS(INTERVAL '60 days'),
        JUSTIFY_DAYS(INTERVAL '90 days');
@@ -60,7 +60,7 @@ Output:
 
 The following example uses the `JUSTIFY_DAYS()` function to adjust intervals that are not multiples of 30 days:
 
-```
+```sql
 SELECT JUSTIFY_DAYS(INTERVAL '15 days'),
        JUSTIFY_DAYS(INTERVAL '45 days'),
        JUSTIFY_DAYS(INTERVAL '75 days');
@@ -79,7 +79,7 @@ Output:
 
 The following example uses the `JUSTIFY_DAYS()` function to adjust intervals that include hours, minutes, and seconds:
 
-```
+```sql
 SELECT JUSTIFY_DAYS(INTERVAL '15 days 2 hours'),
        JUSTIFY_DAYS(INTERVAL '55 days 30 minutes'),
        JUSTIFY_DAYS(INTERVAL '75 days 45 seconds');

@@ -17,7 +17,7 @@ The `ORDER BY` clause allows you to sort rows returned by a `SELECT` clause in a
 
 The following illustrates the syntax of the `ORDER BY` clause:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -52,7 +52,7 @@ We will use the `customer` table in the [sample database](/docs/postgresql/postg
 
 The following query uses the `ORDER BY` clause to sort customers by their first names in ascending order:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -66,7 +66,7 @@ ORDER BY
 
 Since the `ASC` option is the default, you can omit it in the `ORDER BY` clause like this:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -80,7 +80,7 @@ ORDER BY
 
 The following statement selects the first name and last name from the `customer` table and sorts the rows by values in the last name column in descending order:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -96,7 +96,7 @@ ORDER BY
 
 The following statement selects the first name and last name from the customer table and sorts the rows by the first name in ascending order and last name in descending order:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -119,7 +119,7 @@ The `LENGTH()` function accepts a string and returns the length of that string.
 
 The following statement selects the first names and their lengths. It sorts the rows by the lengths of the first names:
 
-```
+```sql
 SELECT
   first_name,
   LENGTH(first_name) len
@@ -139,7 +139,7 @@ In the database world, `NULL` is a marker that indicates the missing data or the
 
 When you sort rows that contain `NULL`, you can specify the order of `NULL` with other non-null values by using the `NULLS FIRST` or `NULLS LAST` option of the `ORDER BY` clause:
 
-```
+```sql
 ORDER BY sort_expresssion [ASC | DESC] [NULLS FIRST | NULLS LAST]
 ```
 
@@ -164,7 +164,7 @@ Note that if you are not yet familiar with the `CREATE TABLE` and `INSERT` state
 
 The following query returns data from the `sort_demo` table:
 
-```
+```sql
 SELECT
   num
 FROM
@@ -195,13 +195,13 @@ Note that psql displays null as an empty string by default. To make null clearer
 
 Output:
 
-```
+```sql
 Null display is "null".
 ```
 
 So if you use the `ASC` option, the `ORDER BY` clause uses the `NULLS LAST` option by default. Therefore, the following query returns the same result:
 
-```
+```sql
 SELECT
   num
 FROM
@@ -224,7 +224,7 @@ Output:
 
 To place `NULL` before other non-null values, you use the `NULLS FIRST` option:
 
-```
+```sql
 SELECT
   num
 FROM
@@ -247,7 +247,7 @@ Output:
 
 The following statement sorts values in the `num` column of the `sort_demo` table in descending order:
 
-```
+```sql
 SELECT
   num
 FROM
@@ -272,7 +272,7 @@ The output indicates that the `ORDER BY` clause with the `DESC` option uses the 
 
 To reverse the order, you can use the `NULLS LAST` option:
 
-```
+```sql
 SELECT
   num
 FROM

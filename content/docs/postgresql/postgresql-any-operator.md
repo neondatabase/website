@@ -39,7 +39,7 @@ Let's take some examples of using the `ANY` operator.
 
 First, create a table called `employees` and `managers`, and insert some data into it:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
@@ -78,7 +78,7 @@ VALUES
 
 Second, retrieve the data from the `employees` table:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -107,7 +107,7 @@ Output:
 
 Third, retrieve the data from the `managers` table:
 
-```
+```sql
 SELECT * FROM managers;
 ```
 
@@ -126,7 +126,7 @@ Output:
 
 The following statement uses the ANY operator to find employees who have the salary the same as manager:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -153,7 +153,7 @@ How it works.
 
 First, execute the subquery in the `ANY` operator that returns the salary of managers:
 
-```
+```sql
 SELECT salary FROM managers;
 ```
 
@@ -174,7 +174,7 @@ Second, compare the salary of each row in the `employees` table with the values 
 
 The following example uses the `ANY` operator to find employees who have salaries greater than the manager's salaries:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -207,7 +207,7 @@ The output indicates that the two employees have a higher salary than the manage
 
 The following example uses the `ANY` operator to find employees who have salaries less than the manager's salaries:
 
-```
+```sql
 SELECT
   *
 FROM

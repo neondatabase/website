@@ -15,7 +15,7 @@ To ensure that any data modification made through a view adheres to certain cond
 
 Typically, you specify the `WITH CHECK OPTION` when creating a view using the `CREATE VIEW` statement:
 
-```
+```sql
 CREATE VIEW view_name AS
 query
 WITH CHECK OPTION;
@@ -34,7 +34,7 @@ The `LOCAL` scope restricts the check option enforcement to the current view onl
 
 Here's the syntax for creating a view with the `WITH LOCAL CHECK OPTION`:
 
-```
+```sql
 CREATE VIEW view_name AS
 query
 WITH LOCAL CHECK OPTION;
@@ -42,7 +42,7 @@ WITH LOCAL CHECK OPTION;
 
 The `CASCADED` scope extends the check option enforcement to all underlying views of the current view. Here's the syntax for creating a view with the `WITH CASCADED CHECK OPTION`.
 
-```
+```sql
 CREATE VIEW view_name AS
 query
 WITH CASCADED CHECK OPTION;
@@ -58,7 +58,7 @@ Let's take some examples of using the `WITH CHECK OPTION`.
 
 The following statements [create a new table](/docs/postgresql/postgresql-create-table) called `employees` and [insert data into it](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows):
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -86,7 +86,7 @@ VALUES
 
 First, create a view called `fte` that retrieves the employees with the type `FTE` from the `employees` table:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte AS
 SELECT
   id,
@@ -102,7 +102,7 @@ WHERE
 
 Second, retrieve data from the `fte` view:
 
-```
+```sql
 SELECT * FROM fte;
 ```
 
@@ -122,7 +122,7 @@ Output:
 
 Third, insert a new row into the `employees` table via the `fte` view:
 
-```
+```sql
 INSERT INTO fte(first_name, last_name, department_id, employee_type)
 VALUES ('John', 'Smith', 1, 'Contractor');
 ```
@@ -135,7 +135,7 @@ To ensure that we can insert only employees with the type `FTE` into the `employ
 
 Fourth, replace the `fte` view and add the `WITH CHECK OPTION`:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte AS
 SELECT
   id,
@@ -154,14 +154,14 @@ After adding the `WITH CHECK OPTION`, you perform insert, [update](/docs/postgre
 
 For example, the following `INSERT` statement will fail with an error:
 
-```
+```sql
 INSERT INTO fte(first_name, last_name, department_id, employee_type)
 VALUES ('John', 'Snow', 1, 'Contractor');
 ```
 
 Error:
 
-```
+```sql
 ERROR:  new row violates check option for view "fte"
 DETAIL:  Failing row contains (12, John, Snow, 1, Contractor).
 ```
@@ -176,7 +176,7 @@ But if you modify the row with the employee type `FTE`, it'll be fine.
 
 Fifth, change the last name of the employee id `2` to `'Doe'`:
 
-```
+```sql
 UPDATE fte
 SET last_name = 'Doe'
 WHERE id = 2;
@@ -188,7 +188,7 @@ It works as expected.
 
 First, recreate the `fte` view without using the `WITH CHECK OPTION`:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte AS
 SELECT
   id,
@@ -204,7 +204,7 @@ WHERE
 
 Second, create a new view `fte_1` based on the `fte` view that returns the `employees` of department `1`, with the `WITH LOCAL CHECK OPTION`:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte_1
 AS
 SELECT
@@ -222,7 +222,7 @@ WITH LOCAL CHECK OPTION;
 
 Third, retrieve the data from the `fte_1` view:
 
-```
+```sql
 SELECT * FROM fte_1;
 ```
 
@@ -241,7 +241,7 @@ Since we use the `WITH LOCAL CHECK OPTION`, PostgreSQL checks only the `fte_1` v
 
 Fourth, insert a new row into the `employees` table via the `fte_1` view:
 
-```
+```sql
 INSERT INTO fte_1(first_name, last_name, department_id, employee_type)
 VALUES ('Miller', 'Jackson', 1, 'Contractor');
 ```
@@ -254,7 +254,7 @@ department_id = 1
 
 Fifth, query data from the `employees` table:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -277,7 +277,7 @@ Output:
 
 First, recreate the view `fte_1` with the `WITH CASCADED CHECK OPTION`:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte_1
 AS
 SELECT
@@ -295,14 +295,14 @@ WITH CASCADED CHECK OPTION;
 
 Second, insert a new row into `employee` table via the `fte_1` view:
 
-```
+```sql
 INSERT INTO fte_1(first_name, last_name, department_id, employee_type)
 VALUES ('Peter', 'Taylor', 1, 'Contractor');
 ```
 
 Error:
 
-```
+```sql
 ERROR:  new row violates check option for view "fte"
 DETAIL:  Failing row contains (24, Peter, Taylor, 1, Contractor).
 ```

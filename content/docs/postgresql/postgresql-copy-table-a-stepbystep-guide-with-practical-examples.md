@@ -15,14 +15,14 @@ tableOfContents: true
 
 To copy a table completely, including both table structure and data, you use the following statement:
 
-```
+```sql
 CREATE TABLE new_table AS
 TABLE existing_table;
 ```
 
 To copy a table structure without data, you add the `WITH NO DATA` clause to the `CREATE TABLE` statement as follows:
 
-```
+```sql
 CREATE TABLE new_table AS
 TABLE existing_table
 WITH NO DATA;
@@ -30,7 +30,7 @@ WITH NO DATA;
 
 To copy a table with partial data from an existing table, you use the following statement:
 
-```
+```sql
 CREATE TABLE new_table AS
 SELECT
 *
@@ -48,7 +48,7 @@ Note that all the statements above copy table structure and data but do not copy
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `contacts` for the demonstration:
 
-```
+```sql
 CREATE TABLE contacts(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR NOT NULL,
@@ -61,7 +61,7 @@ In this table, we have two indexes: one index for the [primary key](/docs/postgr
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into the `contacts` table:
 
-```
+```sql
 INSERT INTO contacts(first_name, last_name, email)
 VALUES('John','Doe','john.doe@postgresqltutorial.com'),
       ('David','William','david.william@postgresqltutorial.com')
@@ -80,7 +80,7 @@ Output:
 
 Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
 
-```
+```sql
 CREATE TABLE contact_backup
 AS TABLE contacts;
 ```
@@ -89,7 +89,7 @@ This statement creates a new table called `contact_backup` whose structure is th
 
 Fourth, verify the data of the `contact_backup` table by using the following [`SELECT`](/docs/postgresql/postgresql-select) statement:
 
-```
+```sql
 SELECT * FROM contact_backup;
 ```
 
@@ -127,7 +127,7 @@ The output indicates that the structure of the `contact_backup` table is the sam
 
 Sixth, add the primary key and `UNIQUE` constraints to the `contact_backup` table using the following [`ALTER TABLE`](/docs/postgresql/postgresql-alter-table) statements:
 
-```
+```sql
 ALTER TABLE contact_backup ADD PRIMARY KEY(id);
 ALTER TABLE contact_backup ADD UNIQUE(email);
 ```

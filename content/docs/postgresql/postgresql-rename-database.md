@@ -28,7 +28,7 @@ psql -U postgres
 
 Second, create a new database called db:
 
-```
+```sql
 CREATE DATABASE db;
 ```
 
@@ -42,7 +42,7 @@ Third, if you are already connected to the PostgreSQL server, you can change the
 
 Fourth, retrieve all active connections to the `db` database:
 
-```
+```sql
 SELECT  *
 FROM pg_stat_activity
 WHERE datname = 'db';
@@ -78,7 +78,7 @@ In practice, a database may have many active connections. In this case, you need
 
 Fifth, terminate all the connections to the `db` database:
 
-```
+```sql
 SELECT
     pg_terminate_backend (pid)
 FROM
@@ -89,7 +89,7 @@ WHERE
 
 Sixth, rename the `db` database to `newdb` using the `ALTER DATABASE RENAME TO` statement:
 
-```
+```sql
 ALTER DATABASE db RENAME TO newdb;
 ```
 

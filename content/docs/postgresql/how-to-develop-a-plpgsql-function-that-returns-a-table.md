@@ -69,7 +69,7 @@ Since the [data type](/docs/postgresql/postgresql-data-types) of `release_year` 
 
 The following shows how to call the `get_film()` function:
 
-```
+```sql
 SELECT * FROM get_film ('Al%');
 ```
 
@@ -93,7 +93,7 @@ Output:
 
 If you call the function using the following statement, PostgreSQL returns a table that consists of one column that holds an array of rows:
 
-```
+```sql
 SELECT get_film ('Al%');
 ```
 
@@ -154,7 +154,7 @@ The `return next` statement adds a row to the returned table of the function.
 
 The following illustrates how to call the `get_film()` function:
 
-```
+```sql
 SELECT * FROM get_film ('%er', 2006);
 ```
 

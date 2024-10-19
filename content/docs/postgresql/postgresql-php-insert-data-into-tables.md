@@ -127,7 +127,7 @@ try {
 
 Launch the index.php in the web browser, we got the following output:
 
-```
+```sql
 The stock has been inserted with the id 1
 The stock has been inserted with the id 2
 The stock has been inserted with the id 3

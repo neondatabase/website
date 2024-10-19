@@ -27,7 +27,7 @@ To make the result more human-readable, you use the `pg_size_pretty()` function.
 
 The `pg_size_pretty()` function formats a number using bytes, kB, MB, GB, or TB appropriately. For example:
 
-```
+```sql
 SELECT
     pg_size_pretty (pg_relation_size('actor')) size;
 ```
@@ -45,7 +45,7 @@ Note that the `pg_relation_size()` function returns the size of the table only, 
 
 To get the total size of a table, you use the `pg_total_relation_size()` function. For example, the following statement uses the `pg_total_relation_size()` to retrieve the total size of the `actor` table:
 
-```
+```sql
 SELECT
     pg_size_pretty (
         pg_total_relation_size ('actor')
@@ -65,7 +65,7 @@ You can use the `pg_total_relation_size()` function to find the size of the bigg
 
 For example, the following query returns the top 5 biggest tables in the `dvdrental` database:
 
-```
+```sql
 SELECT
     relname AS "relation",
     pg_size_pretty (
@@ -103,7 +103,7 @@ Here is the output:
 
 To get the size of the whole database, you use the `pg_database_size()` function. For example, the following statement returns the size of the `dvdrental` database:
 
-```
+```sql
 SELECT
     pg_size_pretty (
         pg_database_size ('dvdrental')
@@ -121,7 +121,7 @@ The statement returns the following result:
 
 To get the size of each database in the current database server, you use the following statement:
 
-```
+```sql
 SELECT
     pg_database.datname,
     pg_size_pretty(pg_database_size(pg_database.datname)) AS size
@@ -148,7 +148,7 @@ The `pg_indexes_size()` function accepts the OID or table name as the argument a
 
 For example, to get the total size of all indexes attached to the `film` table, you use the following statement:
 
-```
+```sql
 SELECT
     pg_size_pretty (pg_indexes_size('actor')) size;
 ```
@@ -168,7 +168,7 @@ To get the size of a tablespace, you use the `pg_tablespace_size()` function.
 
 The `pg_tablespace_size()` function accepts a tablespace name and returns the size in bytes. For example, the following statement returns the size of the `pg_default` tablespace:
 
-```
+```sql
 SELECT
     pg_size_pretty (
         pg_tablespace_size ('pg_default')
@@ -188,7 +188,7 @@ Output:
 
 To find how much space is needed to store a specific value, you use the pg_column_size() function, for example:
 
-```
+```sql
 SELECT
   pg_column_size(5 :: smallint) smallint_size,
   pg_column_size(5 :: int) int_size,

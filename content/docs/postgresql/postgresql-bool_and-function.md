@@ -15,7 +15,7 @@ The `BOOL_AND()` is an [aggregate function](/docs/postgresql/postgresql-aggregat
 
 The following shows the syntax of the `BOOL_AND()` function:
 
-```
+```sql
 BOOL_AND(expression)
 ```
 
@@ -35,7 +35,7 @@ Let's explore some examples of using the `BOOL_AND()` function.
 
 First, [create tables](/docs/postgresql/postgresql-create-table) called `teams` and `members`:
 
-```
+```sql
 CREATE TABLE teams (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(100) NOT NULL
@@ -51,7 +51,7 @@ CREATE TABLE projects(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the tables:
 
-```
+```sql
 INSERT INTO teams (team_name)
 VALUES
 ('Team A'),
@@ -99,7 +99,7 @@ The `members` table:
 
 The following example uses the `BOOL_AND()` function to test if all projects are active in the `projects` table:
 
-```
+```sql
 SELECT
   BOOL_AND(active)
 FROM
@@ -121,7 +121,7 @@ The `BOOL_AND()` function returns true indicating that there are inactive projec
 
 The following example uses the `BOOL_AND()` function with the `GROUP BY` clause to check if there are active projects in each team:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_AND(active) active_projects
@@ -149,7 +149,7 @@ The output indicates that teams B and C have projects that are active (or NULL) 
 
 The following example uses the `BOOL_AND()` function with the `GROUP BY` and [HAVING](/docs/postgresql/postgresql-having) clauses to retrieve teams that have active projects:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_AND(active) active_projects

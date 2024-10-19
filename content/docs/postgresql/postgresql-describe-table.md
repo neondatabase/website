@@ -76,7 +76,7 @@ The `information_schema.columns` catalog contains the information on columns of 
 
 For example:
 
-```
+```sql
 SELECT
   column_name,
   data_type,

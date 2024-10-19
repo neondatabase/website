@@ -20,7 +20,7 @@ In PostgreSQL, you use the `LN()` function to calculate the natural logarithm of
 
 Here's the syntax of the `LN()` function:
 
-```
+```sql
 LN(n)
 ```
 
@@ -42,7 +42,7 @@ Let's take some examples of using the `LN()` function.
 
 The following example uses the `LN()` function to return the natural logarithm of 10:
 
-```
+```sql
 SELECT LN(10) result;
 ```
 
@@ -56,7 +56,7 @@ Output:
 
 The following statement uses the `LN()` function to return the natural logarithm of e:
 
-```
+```sql
 SELECT LN(EXP(1)) result;
 ```
 
@@ -74,7 +74,7 @@ In this example, the `EXP`(1) function returns e1, which is e. Then, the `LN()` 
 
 The following example uses the `LN()` function to calculate the natural logarithm of a numeric string '10'
 
-```
+```sql
 SELECT LN('10') result;
 ```
 
@@ -90,13 +90,13 @@ In this example, the `LN()` function converts the string '10' to a number before
 
 The following example attempts to calculate the natural logarithm of the string '10x':
 
-```
+```sql
 SELECT LN('10x') result;
 ```
 
 The function raises an error because it cannot convert the string '10x' to a number:
 
-```
+```sql
 ERROR:  invalid input syntax for type double precision: "10x"
 LINE 1: SELECT LN('10x') result;
                   ^

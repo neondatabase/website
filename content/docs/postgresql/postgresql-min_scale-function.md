@@ -34,7 +34,7 @@ In practice, you can use the `min_scale()` function to save storage space by avo
 
 The following example uses the `min_scale()` function to return the min scale of the number `1.2300`:
 
-```
+```sql
 SELECT min_scale(1.2300);
 ```
 
@@ -49,7 +49,7 @@ Output:
 
 The following example returns the min scale of the number 1.23:
 
-```
+```sql
 SELECT min_scale(1.23);
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 The following example returns 0 because the integer 10 has no decimals:
 
-```
+```sql
 SELECT min_scale(10);
 ```
 

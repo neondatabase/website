@@ -15,7 +15,7 @@ Additionally, when you create an index without the `CONCURRENTLY` option, the in
 
 In such cases, you can rebuild the index. To rebuild the index, you can use the `REINDEX` statement as follows:
 
-```
+```sql
 REINDEX [ ( option, ...) ]
 { INDEX | TABLE | SCHEMA | DATABASE | SYSTEM }
 name;
@@ -31,31 +31,31 @@ The `option` can be one or more values:
 
 To rebuild a single index, you specify the index name after `REINDEX INDEX` clause:
 
-```
+```sql
 REINDEX INDEX index_name;
 ```
 
 To rebuild all the indexes of a table, you use the `TABLE` keyword and specify the name of the table:
 
-```
+```sql
 REINDEX TABLE table_name;
 ```
 
 If you want to rebuild all indexes in a specific schema, you use the `SCHEMA` keyword followed by the schema name:
 
-```
+```sql
 REINDEX SCHEMA schema_name;
 ```
 
 To rebuild all indexes in a specific database, you specify the database name after the `REINDEX DATABASE` clause:
 
-```
+```sql
 REINDEX DATABASE database_name;
 ```
 
 The following statement recreates all indexes on system catalogs in a specific database:
 
-```
+```sql
 REINDEX SYSTEM database_name;
 ```
 
@@ -71,14 +71,14 @@ psql -U postgres -d dvdrental
 
 Second, rebuild all indexes in the `film` table of the `dvdrental` database using the `REINDEX` statement:
 
-```
+```sql
 REINDEX (verbose, concurrently)
 TABLE film;
 ```
 
 Output:
 
-```
+```sql
 INFO:  index "public.film_pkey" was reindexed
 INFO:  index "public.film_fulltext_idx" was reindexed
 INFO:  index "public.idx_fk_language_id" was reindexed
@@ -93,13 +93,13 @@ Since the statement uses the `VERBOSE` option, the `REINDEX` statement displays 
 
 Third, rebuild all indexes in the `dvdrental` database using the `REINDEX` statement:
 
-```
+```sql
 REINDEX DATABASE dvdrental;
 ```
 
 Output:
 
-```
+```sql
 REINDEX
 ```
 

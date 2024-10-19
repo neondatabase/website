@@ -33,7 +33,7 @@ Let's take some examples of using the `jsonb_path_exists()` function.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products` that store product information:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -45,7 +45,7 @@ The `products` table has the `attributes` column whose data type is `JSONB`.
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, attributes)
 VALUES
     ('Laptop', '{"brand": "Dell", "price": 1200, "specs": {"cpu": "Intel i7", "ram": "16GB"}}'),
@@ -68,7 +68,7 @@ Output:
 
 The following example uses the `jsonb_path_exists()` function to check whether the CPU specification exists for any product:
 
-```
+```sql
 SELECT name,
        jsonb_path_exists(attributes, '$.specs.cpu') AS cpu_exists
 FROM products;
@@ -88,7 +88,7 @@ Output:
 
 The following example uses the `jsonb_path_exists()` function with the `jsonb_path_query()` function to retrieve the `CPU` specification of any products that have `CPU` spec:
 
-```
+```sql
 SELECT jsonb_path_query(attributes, '$.specs.cpu') AS cpu
 FROM products
 WHERE jsonb_path_exists(attributes, '$.specs.cpu');

@@ -18,7 +18,7 @@ To create an `INSTEAD OF` trigger, you follow these steps:
 
 First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when a trigger is fired:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION fn_trigger()
 RETURNS TRIGGER AS
 $$
@@ -31,7 +31,7 @@ Inside the function, you can customize the behavior for each operation including
 
 Second, create an `INSTEAD OF` trigger and bind the function to it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 INSTEAD OF INSERT OR UPDATE OR DELETE
 ON table_name
@@ -47,7 +47,7 @@ Let's take an example of creating an `INSTEAD OF` trigger.
 
 First, [create two tables](/docs/postgresql/postgresql-create-table) `employees` and `salaries`:
 
-```
+```sql
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
@@ -64,7 +64,7 @@ CREATE TABLE salaries (
 
 Next, [insert rows](/docs/postgresql/postgresql-insert) into the `employees` and `salaries` tables:
 
-```
+```sql
 INSERT INTO employees (name)
 VALUES
    ('Alice'),
@@ -80,7 +80,7 @@ RETURNING *;
 
 Then, [create a view](/docs/postgresql/postgresql-views/managing-postgresql-views) based on the `employees` and `salaries` tables:
 
-```
+```sql
 CREATE VIEW employee_salaries
 AS
 SELECT e.employee_id, e.name, s.salary, s.effective_date
@@ -90,7 +90,7 @@ JOIN salaries s ON e.employee_id = s.employee_id;
 
 After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION update_employee_salaries()
 RETURNS TRIGGER AS
 $$
@@ -129,7 +129,7 @@ If you delete a row from the `employee_salaries` view, the `INSTEAD OF` trigger 
 
 Finally, create an `INSTEAD OF` trigger that will be fired for the `INSERT`, `UPDATE`, or `DELETE` on the `employee_salaries` view:
 
-```
+```sql
 CREATE TRIGGER instead_of_employee_salaries
 INSTEAD OF INSERT OR UPDATE OR DELETE
 ON employee_salaries
@@ -141,7 +141,7 @@ EXECUTE FUNCTION update_employee_salaries();
 
 First, insert a new employee with a salary via the view:
 
-```
+```sql
 INSERT INTO employee_salaries (name, salary, effective_date)
 VALUES ('Charlie', 75000.00, '2024-03-01');
 ```
@@ -150,7 +150,7 @@ PostgreSQL does not execute this statement. Instead, it executes the statement d
 
 1. Insert a new row into the `employees` table and get the employee id:
 
-```
+```sql
 INSERT INTO employees(name)
 VALUES (NEW.name)
 RETURNING employee_id INTO p_employee_id;
@@ -158,14 +158,14 @@ RETURNING employee_id INTO p_employee_id;
 
 2. Insert a new row into the salaries table using the employee id, salary, and effective date:
 
-```
+```sql
 INSERT INTO salaries(employee_id, effective_date, salary)
 VALUES (p_employee_id, NEW.effective_date, NEW.salary);
 ```
 
 Second, verify the inserts by retrieving data from the `employees` and `salaries` tables:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -180,7 +180,7 @@ Output:
 (3 rows)
 ```
 
-```
+```sql
 SELECT * FROM salaries;
 ```
 
@@ -199,7 +199,7 @@ Output:
 
 First, update the salary of the employee id 3 via the `employee_salaries` view:
 
-```
+```sql
 UPDATE employee_salaries
 SET salary = 95000
 WHERE employee_id = 3;
@@ -207,7 +207,7 @@ WHERE employee_id = 3;
 
 Second, retrieve data from the `salaries` table:
 
-```
+```sql
 SELECT * FROM salaries;
 ```
 
@@ -226,14 +226,14 @@ Output:
 
 First, delete the employee with id 3 via the `employee_salaries` view:
 
-```
+```sql
 DELETE FROM employee_salaries
 WHERE employee_id = 3;
 ```
 
 Second, retrieve data from the `employees` table:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -249,7 +249,7 @@ Output:
 
 Because of the `DELETE` `CASCADE`, PostgreSQL also deletes the corresponding row in the `salaries` table:
 
-```
+```sql
 SELECT * FROM salaries;
 ```
 

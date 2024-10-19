@@ -19,7 +19,7 @@ psql -U postgres
 
 It will prompt you for a password:
 
-```
+```sql
 Password:
 ```
 
@@ -49,7 +49,7 @@ The `\du+`command adds column called `description`.
 
 The following statement returns all users in the current database server by [querying data](/docs/postgresql/postgresql-select) from the `pg_catalog.pg_user` catalog:
 
-```
+```sql
 SELECT usename AS role_name,
   CASE
      WHEN usesuper AND usecreatedb THEN

@@ -14,7 +14,7 @@ The `DROP TABLESPACE` statement delete a tablespace from a database:
 
 Here's the syntax of the `DROP TABLE` statement:
 
-```
+```sql
 DROP TABLESPACE [IF EXISTS] tablespace_name;
 ```
 
@@ -46,14 +46,14 @@ psql -U postgres
 
 Then, create a new tablespace called sample_ts:
 
-```
+```sql
 CREATE TABLESPACE sample_ts
 LOCATION 'C:/pgdata/demo';
 ```
 
 After that, drop the `sample_ts` tablespace using the `DROP TABLESPACE` statement:
 
-```
+```sql
 DROP TABLESPACE sample_ts;
 ```
 
@@ -73,14 +73,14 @@ mkdir C:\pgdata\demo
 
 Second, [create a new tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace) named `demo` and map it to the `c:\pgdata\demo` directory.
 
-```
+```sql
 CREATE TABLESPACE demo_ts
 LOCATION 'C:/pgdata/demo';
 ```
 
 Third, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) named `dbdemo` and set its tablespace to `demo`:
 
-```
+```sql
 CREATE DATABASE demodb
 TABLESPACE = demo;
 ```
@@ -93,7 +93,7 @@ Fourth, connect to the `demodb` database:
 
 Fifth, [create a new table](/docs/postgresql/postgresql-create-table "PostgreSQL CREATE TABLE") named `test`in the `dbdemo` and set it `tablespace` to `demo_ts`:
 
-```
+```sql
 CREATE TABLE test (
   id serial PRIMARY KEY,
   title VARCHAR (255) NOT NULL
@@ -102,7 +102,7 @@ CREATE TABLE test (
 
 Sixth, attempt to drop the `demo` tablespace:
 
-```
+```sql
 DROP TABLESPACE demo_ts;
 ```
 
@@ -122,26 +122,26 @@ Seventh, connect to the `postgres` database:
 
 Eight, drop the `demodb` database:
 
-```
+```sql
 DROP DATABASE demodb;
 ```
 
 Ninth, drop the `demo_ts` tablespace:
 
-```
+```sql
 DROP TABLESPACE demo_ts;
 ```
 
 Instead of [dropping the database](/docs/postgresql/postgresql-administration/postgresql-drop-database), you can move it to another tablespace such as `pg_default` by using the [ALTER TABLE](/docs/postgresql/postgresql-administration/postgresql-alter-database) statement as follows:
 
-```
+```sql
 ALTER DATABASE demodb
 SET TABLESPACE = pg_default;
 ```
 
 And then delete the `demo_ts` tablespace again:
 
-```
+```sql
 DROP TABLESPACE demo_ts
 ```
 

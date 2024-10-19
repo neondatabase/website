@@ -32,7 +32,7 @@ psql -U postgres
 
 Second, run the following statement to retrieve the version:
 
-```
+```sql
 SELECT version();
 ```
 
@@ -51,7 +51,7 @@ First, connect to the PostgreSQL database using psql or a PostgreSQL client.
 
 Second, execute the following query to get the PostgreSQL version:
 
-```
+```sql
 SELECT
   setting
 FROM

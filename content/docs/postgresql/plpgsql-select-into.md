@@ -56,7 +56,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The number of actors: 200
 ```
 
@@ -91,7 +91,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  Penelope Guiness
 ```
 

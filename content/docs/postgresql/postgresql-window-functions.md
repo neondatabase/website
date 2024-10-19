@@ -15,7 +15,7 @@ First, [create two tables](/docs/postgresql/postgresql-create-table) named `prod
 
 ![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 
-```
+```sql
 CREATE TABLE product_groups (
  group_id serial PRIMARY KEY,
  group_name VARCHAR (255) NOT NULL
@@ -32,7 +32,7 @@ CREATE TABLE products (
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into these tables:
 
-```
+```sql
 INSERT INTO product_groups (group_name)
 VALUES
  ('Smartphone'),
@@ -64,7 +64,7 @@ The easiest way to understand the window functions is to start by reviewing the 
 
 The following example uses the `AVG()` aggregate function to calculate the average price of all products in the `products` table.
 
-```
+```sql
 SELECT
  AVG (price)
 FROM
@@ -75,7 +75,7 @@ FROM
 
 To apply the aggregate function to subsets of rows, you use the `GROUP BY` clause. The following example returns the average price for every product group.
 
-```
+```sql
 SELECT
  group_name,
  AVG (price)
@@ -96,7 +96,7 @@ The term _window_ describes the set of rows on which the window function operate
 
 For instance, the following query returns the product name, the price, product group name, along with the average prices of each product group.
 
-```
+```sql
 SELECT
  product_name,
  price,
@@ -116,7 +116,7 @@ In this query, the `AVG()` function works as a _window function_ that operates o
 
 The new syntax for this query is the `OVER` clause:
 
-```
+```sql
 AVG(price) OVER (PARTITION BY group_name)
 ```
 
@@ -158,7 +158,7 @@ The `frame_clause` defines a subset of rows in the current partition to which th
 
 If you use multiple window functions in a query:
 
-```
+```sql
 SELECT
     wf1() OVER(PARTITION BY c1 ORDER BY c2),
     wf2() OVER(PARTITION BY c1 ORDER BY c2)
@@ -167,7 +167,7 @@ FROM table_name;
 
 you can use the `WINDOW` clause to shorten the query as shown in the following query:
 
-```
+```sql
 SELECT
    wf1() OVER w,
    wf2() OVER w,
@@ -177,7 +177,7 @@ WINDOW w AS (PARTITION BY c1 ORDER BY c2);
 
 It is also possible to use the `WINDOW` clause even though you call one window function in a query:
 
-```
+```sql
 SELECT wf1() OVER w
 FROM table_name
 WINDOW w AS (PARTITION BY c1 ORDER BY c2);
@@ -207,7 +207,7 @@ The `ROW_NUMBER()`, `RANK()`, and `DENSE_RANK()` functions assign an integer to 
 
 The `ROW_NUMBER()` function assigns a sequential number to each row in each partition. See the following query:
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -228,7 +228,7 @@ The `RANK()` function assigns ranking within an ordered partition. If rows have 
 
 See the following query:
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -249,7 +249,7 @@ In the laptop product group, both `Dell Vostro` and `Sony VAIO` products have th
 
 Similar to the `RANK()` function, the `DENSE_RANK()` function assigns a rank to each row within an ordered partition, but the ranks have no gap. In other words, the same ranks are assigned to multiple rows and no ranks are skipped.
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -274,7 +274,7 @@ The `FIRST_VALUE()` function returns a value evaluated against the first row wit
 
 The following statement uses the `FIRST_VALUE()` to return the lowest price for every product group.
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -293,7 +293,7 @@ INNER JOIN product_groups USING (group_id);
 
 The following statement uses the `LAST_VALUE()` function to return the highest price for every product group.
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -319,7 +319,7 @@ The `LAG()` function has the ability to access data from the previous row, while
 
 Both `LAG()` and `LEAD()` functions have the same syntax as follows:
 
-```
+```sql
 LAG  (expression [,offset] [,default]) over_clause;
 LEAD (expression [,offset] [,default]) over_clause;
 ```
@@ -332,7 +332,7 @@ In this syntax:
 
 The following statement uses the `LAG()` function to return the prices from the previous row and calculates the difference between the price of the current row and the previous row.
 
-```
+```sql
 SELECT
  product_name,
  group_name,
@@ -356,7 +356,7 @@ INNER JOIN product_groups USING (group_id);
 
 The following statement uses the `LEAD()` function to return the prices from the next row and calculates the difference between the price of the current row and the next row.
 
-```
+```sql
 SELECT
  product_name,
  group_name,

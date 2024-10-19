@@ -14,7 +14,7 @@ The `WIDTH_BUCKET()` function allows you to categorize numeric values into discr
 
 Here's the basic syntax of the `WIDTH_BUCKET()` function:
 
-```
+```sql
 WIDTH_BUCKET(numeric_value, lower_bound, upper_bound, num_buckets)
 ```
 
@@ -47,7 +47,7 @@ Let's explore some examples of using the `WIDTH_BUCKET()` function.
 
 The following example uses the `WIDTH_BUCKET()` function to assign numeric values to three buckets (0, 10), (10, 20), and (20, 30):
 
-```
+```sql
 SELECT
   WIDTH_BUCKET(-1, 0, 30, 3),
   WIDTH_BUCKET(0, 0, 30, 3),
@@ -81,7 +81,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `WIDTH_BUCKET()` function to categorize the films into six buckets:
 
-```
+```sql
 SELECT
   title,
   length,
@@ -109,7 +109,7 @@ Output:
 
 The following example uses a [common table expression](/docs/postgresql/postgresql-cte) (CTE) to generate the bucket numbers and then calculate the frequency of films falling into each bucket:
 
-```
+```sql
 WITH buckets_cte AS (
     SELECT WIDTH_BUCKET(length, 40, 200, 6) AS bucket_number
     FROM film
@@ -156,7 +156,7 @@ Main query:
 
 Based on the result set, you can generate a histogram in the application. But if you want to generate a histogram in psql, you can use the following query:
 
-```
+```sql
 WITH buckets_cte AS (
     SELECT WIDTH_BUCKET(length, 40, 200, 6) AS bucket_number
     FROM film

@@ -37,7 +37,7 @@ Let's take some examples of using the `jsonb_path_query()` function.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) named `products`with a JSONB column names `attributes` to store product attributes:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE products (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, attributes)
 VALUES
     ('Laptop', '{"brand": "Dell", "price": 1200, "specs": {"cpu": "Intel i7", "ram": "16GB"}}'),
@@ -58,7 +58,7 @@ VALUES
 
 The following example uses the `jsonb_path_query()` function to retrieve the brand and price of all products:
 
-```
+```sql
 SELECT jsonb_path_query(attributes, '$.brand') AS brand,
        jsonb_path_query(attributes, '$.price') AS price
 FROM products;
@@ -78,7 +78,7 @@ Output:
 
 The following example uses the `jsonb_path_query()` function to query nested attributes such as retrieving the CPU specification of laptops:
 
-```
+```sql
 SELECT jsonb_path_query(attributes, '$.specs.cpu') AS cpu
 FROM products;
 ```

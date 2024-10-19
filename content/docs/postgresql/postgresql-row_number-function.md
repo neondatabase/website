@@ -16,7 +16,7 @@ The `ROW_NUMBER()` function is a [window function](/docs/postgresql/postgresql-w
 
 The following illustrates the syntax of the `ROW_NUMBER()` function:
 
-```
+```sql
 ROW_NUMBER() OVER(
     [PARTITION BY column_1, column_2,…]
     [ORDER BY column_3,column_4,…]
@@ -43,7 +43,7 @@ The following shows the data in the `products` table:
 
 See the following query.
 
-```
+```sql
 SELECT
   product_id,
   product_name,
@@ -64,7 +64,7 @@ The `ORDER BY` clause sorts the result set by `product_id`, therefore, the `ROW_
 
 In the following query, we change the column in the `ORDER BY` clause to product_name, the `ROW_NUMBER()` function assigns the integer values to each row based on the product name order.
 
-```
+```sql
 SELECT
   product_id,
   product_name,
@@ -83,7 +83,7 @@ In the following query, we use the `PARTITION BY` clause to divide the window in
 
 The `ORDER BY` clause sorts the rows in each partition by the values in the `product_name` column.
 
-```
+```sql
 SELECT
   product_id,
   product_name,
@@ -103,7 +103,7 @@ FROM
 
 The following query uses the `ROW_NUMBER()` function to assign integers to the [distinct](/docs/postgresql/postgresql-select-distinct)prices from the `products` table.
 
-```
+```sql
 SELECT
   DISTINCT price,
   ROW_NUMBER () OVER (
@@ -122,7 +122,7 @@ However, the result is not expected because it includes duplicate prices. The re
 
 To solve this problem, we can get a list of distinct prices in a CTE, then apply the `ROW_NUMBER()` function in the outer query as follows:
 
-```
+```sql
 WITH prices AS (
   SELECT
     DISTINCT price
@@ -143,7 +143,7 @@ FROM
 
 Or we can use a [subquery](/docs/postgresql/postgresql-subquery) in the `FROM` clause to get a list of unique prices, and then apply the `ROW_NUMBER()` function in the outer query.
 
-```
+```sql
 SELECT
   price,
   ROW_NUMBER () OVER (
@@ -169,7 +169,7 @@ Besides using the [LIMIT](/docs/postgresql/postgresql-limit) clause, you can use
 
 For example, the following query selects the five rows starting at row number 6:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -195,7 +195,7 @@ WHERE
 
 For example, to get the third most expensive products, first, we get the distinct prices from the products table and select the price whose row number is 3. Then, in the outer query, we get the products with the price that equals the 3rd highest price.
 
-```
+```sql
 SELECT
   *
 FROM

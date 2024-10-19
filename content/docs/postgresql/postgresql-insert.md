@@ -13,7 +13,7 @@ The PostgreSQL `INSERT` statement allows you to insert a new row into a table.
 
 Here's the basic syntax of the `INSERT` statement:
 
-```
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …);
 ```
@@ -25,7 +25,7 @@ In this syntax:
 
 The `INSERT` statement returns a command tag with the following form:
 
-```
+```sql
 INSERT oid count
 ```
 
@@ -36,7 +36,7 @@ In this syntax:
 
 If you insert a new row into a table successfully, the return will typically look like:
 
-```
+```sql
 INSERT 0 1
 ```
 
@@ -46,7 +46,7 @@ The `INSERT` statement has an optional `RETURNING` clause that returns the infor
 
 If you want to return the entire inserted row, you use an asterisk (`*`) after the `RETURNING` keyword:
 
-```
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …)
 RETURNING *;
@@ -56,7 +56,7 @@ If you want to return some information about the inserted row, you can specify o
 
 For example, the following statement returns the `id` of the inserted row:
 
-```
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …)
 RETURNING id;
@@ -64,7 +64,7 @@ RETURNING id;
 
 To rename the returned value, you use the `AS` keyword followed by the name of the output. For example:
 
-```
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …)
 RETURNING output_expression AS output_name;
@@ -76,7 +76,7 @@ To insert multiple rows into a table simultaneously, you can use the [INSERT mul
 
 The following statement [creates a new table](/docs/postgresql/postgresql-create-table "PostgreSQL CREATE TABLE") called `links` for the demonstration:
 
-```
+```sql
 CREATE TABLE links (
   id SERIAL PRIMARY KEY,
   url VARCHAR(255) NOT NULL,
@@ -92,14 +92,14 @@ Note that you will learn how to [create a new table](/docs/postgresql/postgresql
 
 The following example uses the `INSERT` statement to insert a new row into the `links` table:
 
-```
+```sql
 INSERT INTO links (url, name)
 VALUES('https://www.postgresqltutorial.com','PostgreSQL Tutorial');
 ```
 
 The statement returns the following output:
 
-```
+```sql
 INSERT 0 1
 ```
 
@@ -113,7 +113,7 @@ PostgreSQL automatically generates a sequential number for the [serial column](/
 
 The following `SELECT` statement shows the contents of the `links` table:
 
-```
+```sql
 SELECT * FROM links;
 ```
 
@@ -130,20 +130,20 @@ Output:
 
 If you want to insert a string that contains a single quote (`'`) such as `O'Reilly Media`, you have to use an additional single quote (`'`) to escape it. For example:
 
-```
+```sql
 INSERT INTO links (url, name)
 VALUES('http://www.oreilly.com','O''Reilly Media');
 ```
 
 Output:
 
-```
+```sql
 INSERT 0 1
 ```
 
 The following statement verifies the insert:
 
-```
+```sql
 SELECT * FROM links;
 ```
 
@@ -163,14 +163,14 @@ To insert a date into a `DATE` column, you use the date in the format `'YYYY-MM-
 
 For example, the following statement inserts a new row with a specified date into the `links` table:
 
-```
+```sql
 INSERT INTO links (url, name, last_update)
 VALUES('https://www.google.com','Google','2013-06-01');
 ```
 
 Output:
 
-```
+```sql
 INSERT 0 1
 ```
 
@@ -191,7 +191,7 @@ To get the last inserted ID from the inserted row, you use the `RETURNING` claus
 
 For example, the following statement inserts a new row into the `links` table and returns the last inserted id:
 
-```
+```sql
 INSERT INTO links (url, name)
 VALUES('https://www.postgresql.org','PostgreSQL')
 RETURNING id;

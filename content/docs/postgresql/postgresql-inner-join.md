@@ -16,7 +16,7 @@ In this tutorial, we are focusing on how to retrieve data from multiple tables u
 
 Here is the generic syntax for the `INNER JOIN` clause that joins two tables:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -34,7 +34,7 @@ In this syntax:
 
 To make the query shorter, you can use [table aliases](/docs/postgresql/postgresql-alias):
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -47,7 +47,7 @@ In this syntax, we first assign `t1` and `t2` as the table aliases for `table1` 
 
 If the columns for matching share the same name, you can use the `USING` syntax:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -81,7 +81,7 @@ In this schema, whenever a customer makes a payment, a new row is inserted into 
 
 The following statement uses the `INNER JOIN` clause to select data from both tables:
 
-```
+```sql
 SELECT
   customer.customer_id,
   customer.first_name,
@@ -110,7 +110,7 @@ Output:
 
 To make the query shorter, you can use the table aliases:
 
-```
+```sql
 SELECT
   c.customer_id,
   c.first_name,
@@ -126,7 +126,7 @@ ORDER BY
 
 Since both tables have the same `customer_id` column, you can use the `USING` syntax:
 
-```
+```sql
 SELECT
   customer_id,
   first_name,
@@ -152,7 +152,7 @@ Similarly, each customer can make zero or multiple payments, and each payment is
 
 The following example uses `INNER JOIN` clauses to retrieve data from three tables
 
-```
+```sql
 SELECT
   c.customer_id,
   c.first_name || ' ' || c.last_name customer_name,

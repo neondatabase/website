@@ -14,7 +14,7 @@ The `LOCALTIME()` function returns the current time at which the current transac
 
 Here's the basic syntax of the `LOCALTIME` function:
 
-```
+```sql
 LOCALTIME(precision)
 ```
 
@@ -38,7 +38,7 @@ Let's take some examples of using the `LOCALTIME` function.
 
 The following example uses the `LOCALTIME` function to get the time of the current transaction:
 
-```
+```sql
 SELECT LOCALTIME;
 ```
 
@@ -55,7 +55,7 @@ Output:
 
 The following example uses the `LOCALTIME(2)` function to get the time with a specified fractional seconds precision:
 
-```
+```sql
 SELECT LOCALTIME(2);
 ```
 

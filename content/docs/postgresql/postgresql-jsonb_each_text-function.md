@@ -34,7 +34,7 @@ Let's take some examples of using the `jsonb_each_text()` function.
 
 The following example uses the `jsonb_each_text` function to expand the key/value pair of a JSON object:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -58,7 +58,7 @@ Notice that all values in the value column are text strings including the value 
 
 To retrieve a particular key/value pair, you can filter keys in the `WHERE` clause. For example, the following statement returns the name and city of the object:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -82,7 +82,7 @@ Output:
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `links`:
 
-```
+```sql
 CREATE TABLE links (
     id SERIAL PRIMARY KEY,
     href TEXT NOT NULL,
@@ -94,7 +94,7 @@ In the `links` table, the `attributes` column has the type of `JSONB` that store
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `links` table:
 
-```
+```sql
 INSERT INTO links (href, attributes)
 VALUES
     ('https://example.com', '{"rel": "stylesheet", "type": "text/css", "media": "screen"}'),
@@ -104,7 +104,7 @@ VALUES
 
 Third, expand the key/value pairs of the objects in `attributes` column into a set of key/value pairs using the `jsonb_each_text()` function:
 
-```
+```sql
 SELECT
   href,
   key,

@@ -108,7 +108,7 @@ In this command:
 
 After you run the command, `pg_dump` will prompt you to enter a password for the `postgres` user:
 
-```
+```sql
 Password:
 ```
 

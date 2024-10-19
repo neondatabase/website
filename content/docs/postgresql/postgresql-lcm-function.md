@@ -33,7 +33,7 @@ Let's take some examples of using the `lcm()` function.
 
 The following statement uses the `lcm()` function to calculate the LCM of two numbers 12 and 18:
 
-```
+```sql
 SELECT lcm(12, 18) result;
 ```
 
@@ -50,7 +50,7 @@ Output:
 
 The following statement uses the `lcm()` function to find the LCM of three numbers 12, 18, and 24:
 
-```
+```sql
 SELECT lcm(lcm(12,18),24) result
 ```
 
@@ -72,7 +72,7 @@ In this example, we apply the `lcm()` function twice:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `numbers` that have two columns `id` and `value`:
 
-```
+```sql
 CREATE TABLE numbers (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     value INTEGER NOT NULL
@@ -81,7 +81,7 @@ CREATE TABLE numbers (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `numbers` table:
 
-```
+```sql
 INSERT INTO numbers (value)
 VALUES (12), (18), (24), (48)
 RETURNING *;
@@ -101,7 +101,7 @@ Output:
 
 Third, use a [recursive CTE](/docs/postgresql/postgresql-recursive-query) to calculate the LCM of all numbers in the `value` column of the `numbers` table.
 
-```
+```sql
 WITH RECURSIVE lcm_cte AS (
   SELECT value AS lcm_value, ROW_NUMBER() OVER (ORDER BY id) AS rn
   FROM numbers
@@ -131,7 +131,7 @@ Output:
 
 Using a recursive query is quite complicated. Fortunately, PostgreSQL allows you to define a user-defined aggregate function based on the built-in `lcm()` function:
 
-```
+```sql
 CREATE AGGREGATE lcm_agg(bigint) (
     SFUNC = lcm,
     STYPE = bigint
@@ -140,7 +140,7 @@ CREATE AGGREGATE lcm_agg(bigint) (
 
 You can use the `lcm_gg()` function as follows:
 
-```
+```sql
 SELECT lcm_agg(value)
 FROM numbers;
 ```

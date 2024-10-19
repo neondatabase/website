@@ -15,7 +15,7 @@ tableOfContents: true
 
 To add a new column to an existing table, you use the [`ALTER TABLE`](/docs/postgresql/postgresql-alter-table) `ADD COLUMN` statement as follows:
 
-```
+```sql
 ALTER TABLE table_name
 ADD COLUMN new_column_name data_type constraint;
 ```
@@ -30,7 +30,7 @@ When you add a new column to the table, PostgreSQL appends it at the end of the 
 
 To add multiple columns to an existing table, you use multiple `ADD COLUMN` clauses in the `ALTER TABLE` statement as follows:
 
-```
+```sql
 ALTER TABLE table_name
 ADD COLUMN column_name1 data_type constraint,
 ADD COLUMN column_name2 data_type constraint,
@@ -46,7 +46,7 @@ Let's take some examples of using the `ALTER TABLE...ADD COLUMN` statement.
 
 The following `CREATE TABLE` statement creates a new table named `customers` with two columns: `id` and `customer_name`:
 
-```
+```sql
 DROP TABLE IF EXISTS customers CASCADE;
 
 CREATE TABLE customers (
@@ -59,7 +59,7 @@ CREATE TABLE customers (
 
 First, add the `phone` column to the `customers` table using the `ALTER TABLE...ADD COLUMN` statement:
 
-```
+```sql
 ALTER TABLE customers
 ADD COLUMN phone VARCHAR(25);
 ```
@@ -87,7 +87,7 @@ Indexes:
 
 First, add the `fax` and `email` columns to the `customers` table:
 
-```
+```sql
 ALTER TABLE customers
 ADD COLUMN fax VARCHAR (25),
 ADD COLUMN email VARCHAR (400);
@@ -120,7 +120,7 @@ The output shows the `fax` and `email` columns were added to the `customers` tab
 
 First, [insert data](/docs/postgresql/postgresql-insert) into the `customers` table:
 
-```
+```sql
 INSERT INTO
    customers (customer_name)
 VALUES
@@ -146,14 +146,14 @@ INSERT 0 3
 
 Second, attempt to add the `contact_name` column to the `customers` table:
 
-```
+```sql
 ALTER TABLE customers
 ADD COLUMN contact_name VARCHAR(255) NOT NULL;
 ```
 
 PostgreSQL issued an error:
 
-```
+```sql
 ERROR:  column "contact_name" of relation "customers" contains null values
 ```
 
@@ -163,14 +163,14 @@ To address this issue, you can follow these steps:
 
 First, add the `contact_name` column without the `NOT NULL` constraint:
 
-```
+```sql
 ALTER TABLE customers
 ADD COLUMN contact_name VARCHAR(255);
 ```
 
 Second, update the values in the `contact_name` column.
 
-```
+```sql
 UPDATE customers
 SET contact_name = 'John Doe'
 WHERE id = 1;
@@ -188,7 +188,7 @@ If you have contact data from other tables, you can update the contact names in 
 
 Third, modify the `contact_name` column to add the `NOT NULL` constraint:
 
-```
+```sql
 ALTER TABLE customers
 ALTER COLUMN contact_name
 SET NOT NULL;

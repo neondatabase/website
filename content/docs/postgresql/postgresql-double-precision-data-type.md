@@ -49,7 +49,7 @@ Let's take some examples of using the `DOUBLE PRECISION` data type.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `temperatures` to store temperature readings:
 
-```
+```sql
 CREATE TABLE temperatures (
     id SERIAL PRIMARY KEY,
     location TEXT NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE temperatures (
 
 Second, insert some rows into the `temperatures` table:
 
-```
+```sql
 INSERT INTO
   temperatures (location, temperature)
 VALUES
@@ -82,7 +82,7 @@ Output:
 
 Third, calculate the average temperature of all locations:
 
-```
+```sql
 SELECT AVG(temperature)
 FROM temperatures;
 ```
@@ -99,13 +99,13 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) `t` with the column `c` of `DOUBLE PRECISION` type:
 
-```
+```sql
 CREATE TABLE t(c double precision);
 ```
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `t` table:
 
-```
+```sql
 INSERT INTO t(c) VALUES(0.1), (0.1), (0.1)
 RETURNING *;
 ```
@@ -123,7 +123,7 @@ Output:
 
 Third, calculate the sum of values in the c column using the `SUM()` function:
 
-```
+```sql
 SELECT SUM(c) FROM t;
 ```
 
@@ -142,14 +142,14 @@ The output indicates that the sum of `0.1`, `0.1`, and `0.1` is not `0.3` but `0
 
 The following statement attempts to [insert](/docs/postgresql/postgresql-insert) a very small number into the `c` column of the `t` table:
 
-```
+```sql
 INSERT INTO t(c)
 VALUES (1E-400);
 ```
 
 It returns the following error:
 
-```
+```sql
 ERROR:  "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001" is out of range for type double precision
 ```
 

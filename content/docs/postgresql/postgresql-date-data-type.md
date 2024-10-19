@@ -20,7 +20,7 @@ If you [create a table](/docs/postgresql/postgresql-create-table) that has a `DA
 
 For example, the following statement creates the `documents` table that has the `posting_date` column with the `DATE` data type.
 
-```
+```sql
 CREATE TABLE documents (
   document_id SERIAL PRIMARY KEY,
   header_text VARCHAR (255) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE documents (
 
 The `posting_date` column accepts the current date as the default value. It means that if you don't provide a value when inserting a new row into the `documents` table, PostgreSQL will insert the current date into the `posting_date` column. For example:
 
-```
+```sql
 INSERT INTO documents (header_text)
 VALUES ('Billing to customer XYZ')
 RETURNING *;
@@ -51,7 +51,7 @@ Note that you may get a different posting date value based on the current date o
 
 For the demonstration, we will [create a new `employees` table](/docs/postgresql/postgresql-create-table) that consists of `employee_id`, `first_name`, `last_name`, `birth_date`, and `hire_date` columns, where the data types of the `birth_date` and `hire_date` columns are `DATE`.
 
-```
+```sql
 CREATE TABLE employees (
   employee_id SERIAL PRIMARY KEY,
   first_name VARCHAR (255) NOT NULL,
@@ -85,7 +85,7 @@ INSERT 0 3
 
 To get the current date and time, you use the built-in `NOW()` function:
 
-```
+```sql
 SELECT NOW();
 ```
 
@@ -100,7 +100,7 @@ Output:
 
 To get the date part only (without the time part), you use the cast operator (::) to cast a `DATETIME` value to a `DATE` value:
 
-```
+```sql
 SELECT NOW()::date;
 ```
 
@@ -115,7 +115,7 @@ Output:
 
 A quick way to get the current date is to use the `CURRENT_DATE` function:
 
-```
+```sql
 SELECT CURRENT_DATE;
 ```
 
@@ -138,7 +138,7 @@ The `TO_CHAR()` function accepts two parameters. The first parameter is the valu
 
 For example, to display the current date in `dd/mm/yyyy` format, you use the following statement:
 
-```
+```sql
 SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
 ```
 
@@ -151,7 +151,7 @@ SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
 
 To display a date in a format like `Feb 01, 2024`, you use the following statement:
 
-```
+```sql
 SELECT TO_CHAR(CURRENT_DATE, 'Mon dd, yyyy');
 ```
 
@@ -168,7 +168,7 @@ To get the [interval](/docs/postgresql/postgresql-interval) between two dates, y
 
 The following example retrieves the service days of employees by subtracting the values in the `hire_date` column from today's date:
 
-```
+```sql
 SELECT
   first_name,
   last_name,
@@ -194,7 +194,7 @@ To calculate age at the current date in years, months, and days, you use the `AG
 
 The following statement uses the `AGE()` function to calculate the ages of employees in the `employees` table.
 
-```
+```sql
 SELECT
  employee_id,
  first_name,
@@ -221,7 +221,7 @@ If you pass two arguments to the `AGE()` function, it will subtract the second a
 
 For example, to get the age of employees on `01/01/2015`, you use the following statement:
 
-```
+```sql
 SELECT
   employee_id,
   first_name,
@@ -248,7 +248,7 @@ To get the year, quarter, month, week, and day from a date value, you use the `E
 
 The following statement extracts the year, month, and day from the birth dates of employees:
 
-```
+```sql
 SELECT
  employee_id,
  first_name,

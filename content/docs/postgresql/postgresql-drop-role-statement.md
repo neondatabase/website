@@ -11,7 +11,7 @@ tableOfContents: true
 
 The `DROP ROLE` statement allows you to delete a [role](/docs/postgresql/postgresql-administration/postgresql-roles):
 
-```
+```sql
 DROP ROLE [IF EXISTS] target_role;
 ```
 
@@ -64,7 +64,7 @@ psql -U postgres
 
 Second, create a new database called sales:
 
-```
+```sql
 CREATE DATABASE sales;
 ```
 
@@ -164,7 +164,7 @@ drop role alice;
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  role "alice" cannot be dropped because some objects depend on it
 DETAIL:  privileges for database sales
 3 objects in database sales

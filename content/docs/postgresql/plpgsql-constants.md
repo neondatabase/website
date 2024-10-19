@@ -67,7 +67,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The selling price is 22.55
 ```
 
@@ -86,7 +86,7 @@ end $$;
 
 You will get the following error message:
 
-```
+```sql
 ERROR: "vat" is declared CONSTANT
 SQL state: 22005
 Character: 155
@@ -116,7 +116,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  3s later
 NOTICE:  Current time: 2024-03-19 09:30:09.28782+07
 NOTICE:  Started at: 09:30:06.276246

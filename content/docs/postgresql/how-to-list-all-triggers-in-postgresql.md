@@ -13,7 +13,7 @@ To list all [triggers](/docs/postgresql/postgresql-triggers) along with their as
 
 For example, the following statement retrieves the triggers with their associated tables in the current database from the `information_schema.triggers` view:
 
-```
+```sql
 SELECT
   event_object_table AS table_name,
   trigger_name
@@ -43,7 +43,7 @@ If you want to list all triggers associated with a specific table, you can filte
 
 For example, the following query lists all triggers associated with the `employees` table in the current database:
 
-```
+```sql
 SELECT
   event_object_table AS table_name,
   trigger_name
@@ -99,7 +99,7 @@ $$;
 
 The following statement shows how to call the `get_triggers()` function:
 
-```
+```sql
 SELECT * FROM get_triggers();
 ```
 
@@ -137,7 +137,7 @@ $$;
 
 The following statement uses the `get_triggers(text)` function to retrieve all triggers of the `employees` table:
 
-```
+```sql
 SELECT * FROM get_triggers('employees');
 ```
 
@@ -156,7 +156,7 @@ SELECT * FROM get_triggers('employees');
 
 For example, the following statement retrieves all user-defined triggers of the `employees` table from the `pg_trigger` view:
 
-```
+```sql
 SELECT
   tgname AS trigger_name
 FROM

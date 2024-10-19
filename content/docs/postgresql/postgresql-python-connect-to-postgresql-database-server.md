@@ -60,7 +60,7 @@ psql -U postgres
 
 Second, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) called `suppliers`:
 
-```
+```sql
 CREATE DATABASE suppliers;
 ```
 
@@ -192,7 +192,7 @@ python connect.py
 
 Output:
 
-```
+```sql
 Connected to the PostgreSQL server.
 ```
 

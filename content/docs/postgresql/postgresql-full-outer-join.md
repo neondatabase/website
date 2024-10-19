@@ -17,7 +17,7 @@ In other words, the `FULL OUTER JOIN` combines the results of both the [left joi
 
 Here's the basic syntax of `FULL OUTER JOIN` clause:
 
-```
+```sql
 SELECT select_list
 FROM table1
 FULL OUTER JOIN table2
@@ -70,7 +70,7 @@ The following Venn diagram illustrates the `FULL OUTER JOIN` operation:
 
 First, [create two new tables](/docs/postgresql/postgresql-create-table) for the demonstration: `employees` and `departments`:
 
-```
+```sql
 CREATE TABLE departments (
   department_id serial PRIMARY KEY,
   department_name VARCHAR (255) NOT NULL
@@ -86,7 +86,7 @@ Each department has zero or many employees and each employee belongs to zero or 
 
 Second, insert some sample data into the `departments` and `employees` tables.
 
-```
+```sql
 INSERT INTO departments (department_name)
 VALUES
   ('Sales'),
@@ -106,7 +106,7 @@ VALUES
 
 Third, query data from the `departments` and `employees` tables:
 
-```
+```sql
 SELECT * FROM departments;
 ```
 
@@ -123,7 +123,7 @@ Output:
 (5 rows)
 ```
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -149,7 +149,7 @@ Let's take some examples of using the `FULL OUTER JOIN` clause.
 
 The following query uses the `FULL OUTER JOIN` to query data from both `employees` and `departments` tables:
 
-```
+```sql
 SELECT
   employee_name,
   department_name
@@ -182,7 +182,7 @@ Additionally, it includes every employee who does not belong to a department and
 
 The following example use the `FULL OUTER JOIN` with a [WHERE](/docs/postgresql/postgresql-where) clause to find the department that does not have any employees:
 
-```
+```sql
 SELECT
   employee_name,
   department_name
@@ -207,7 +207,7 @@ The result shows that the `Production` department does not have any employees.
 
 The following example use the `FULL OUTER JOIN` cluase with a `WHERE` clause to find employees who do not belong to any department:
 
-```
+```sql
 SELECT
   employee_name,
   department_name

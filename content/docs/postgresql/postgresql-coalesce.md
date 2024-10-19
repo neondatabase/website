@@ -13,7 +13,7 @@ The `COALESCE()` function accepts a list of arguments and returns the first non-
 
 Here's the basic syntax of the `COALESCE()` function:
 
-```
+```sql
 COALESCE (argument_1, argument_2, …);
 ```
 
@@ -31,7 +31,7 @@ Let's take some examples of using the `COALESCE()` function.
 
 The following example uses the `COALESCE()` function to return the first non-null argument:
 
-```
+```sql
 SELECT COALESCE (1, 2);
 ```
 
@@ -46,7 +46,7 @@ Since both arguments are non-null, the function returns the first argument:
 
 The following example uses the `COALESCE()` function to return the first non-null argument:
 
-```
+```sql
 SELECT COALESCE (NULL, 2 , 1);
 ```
 
@@ -65,7 +65,7 @@ For example, if you want to display the excerpt from a blog post and the excerpt
 
 To achieve this, you can use the `COALESCE` function as follows:
 
-```
+```sql
 SELECT
   COALESCE (
     excerpt,
@@ -79,7 +79,7 @@ FROM
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `items`:
 
-```
+```sql
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
   product VARCHAR (100) NOT NULL,
@@ -97,7 +97,7 @@ The `items` table has four columns:
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `items` table:
 
-```
+```sql
 INSERT INTO items (product, price, discount)
 VALUES
   ('A', 1000, 10),
@@ -108,7 +108,7 @@ VALUES
 
 Third, retrieve the net prices of the products from the `items` table:
 
-```
+```sql
 SELECT
   product,
   (price - discount) AS net_price
@@ -134,7 +134,7 @@ The issue is that the `discount` of the product `D` is null. Therefore, the net 
 
 With an assumption that if the discount is null, the net price is zero, you can use the `COALESCE()` function in the query as follows:
 
-```
+```sql
 SELECT
   product,
   (
@@ -162,7 +162,7 @@ Besides using the `COALESCE()` function, you can use the [CASE](/docs/postgresql
 
 For example, the following query uses the `CASE` expression to achieve the same result:
 
-```
+```sql
 SELECT
   product,
   (

@@ -17,7 +17,7 @@ PostgreSQL 9.3 added a new syntax for creating a recursive view specified in the
 
 Here's the basic syntax of the `CREATE RECURSIVE VIEW` statement:
 
-```
+```sql
 CREATE RECURSIVE VIEW view_name(columns)
 AS
 query;
@@ -30,7 +30,7 @@ In this syntax:
 
 The `CREATE RECURSIVE VIEW` statement is equivalent to the following statement:
 
-```
+```sql
 CREATE VIEW view_name
 AS
   WITH RECURSIVE cte_name (columns) AS (
@@ -44,7 +44,7 @@ We will use the `employees` table created in the [recursive query tutorial](/doc
 
 The following recursive query returns the employee and their managers including the CEO using a common table expression (CTE):
 
-```
+```sql
 WITH RECURSIVE reporting_line AS (
   SELECT
     employee_id,
@@ -101,7 +101,7 @@ Output:
 
 You can use the `CREATE RECURSIVE VIEW` statement to convert a query into a recursive view as follows:
 
-```
+```sql
 CREATE RECURSIVE VIEW reporting_line (employee_id, subordinates) AS
 SELECT
   employee_id,
@@ -123,7 +123,7 @@ FROM
 
 To view the reporting line of the employee id 10, you can query directly from the view:
 
-```
+```sql
 SELECT
   subordinates
 FROM

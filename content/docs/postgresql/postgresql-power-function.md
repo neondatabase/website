@@ -12,7 +12,7 @@ tableOfContents: true
 
 The `POWER()` function allows you to raise a number to a specific power. Here's the basic syntax of the `POWER()` function:
 
-```
+```sql
 POWER(base, exponent)
 ```
 
@@ -32,7 +32,7 @@ Let's take some examples of using the `POWER()` function.
 
 The following example uses the `POWER()` function to raise the number to the power of 3:
 
-```
+```sql
 SELECT POWER(2,3) result;
 ```
 
@@ -47,7 +47,7 @@ Output:
 
 Similarly, you can use the `POWER()` function with decimal values:
 
-```
+```sql
 SELECT POWER(2.5, 2);
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 The following example uses the `POWER()` function with a negative exponent:
 
-```
+```sql
 SELECT POWER(10, -2);
 ```
 
@@ -83,7 +83,7 @@ In this example, we raise 10 to the power of -2 resulting in `0.01`.
 
 The following example uses the `POWER()` function to raise the number 2 to the power of `1.5`:
 
-```
+```sql
 SELECT POWER(2, 1.5);
 ```
 
@@ -102,7 +102,7 @@ We'll use the `POWER()` function to calculate [compound interest](https://en.wik
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `investments` to store the investment data:
 
-```
+```sql
 CREATE TABLE investments (
     id SERIAL PRIMARY KEY,
     investment_amount NUMERIC NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE investments (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `investments` table:
 
-```
+```sql
 INSERT INTO investments (investment_amount, annual_interest_rate, years)
 VALUES
     (1000, 5, 1),
@@ -135,7 +135,7 @@ Output:
 
 Third, calculate the compound interest of each investment in the `investments` table:
 
-```
+```sql
 SELECT
     investment_amount,
     annual_interest_rate,

@@ -29,7 +29,7 @@ Internally, PostgreSQL stores the `timestamptz` in UTC value.
 
 Notice that both `timestamp` and `timestamptz` uses 8 bytes for storing the timestamp values as shown in the following query:
 
-```
+```sql
 SELECT
   typname,
   typlen
@@ -57,7 +57,7 @@ Let's take a look at an example of using the `timestamp` and `timestamptz`to hav
 
 First, [create a table](/docs/postgresql/postgresql-create-table) that consists of both `timestamp` the `timestamptz` columns.
 
-```
+```sql
 CREATE TABLE timestamp_demo (
     ts TIMESTAMP,
     tstz TIMESTAMPTZ
@@ -66,13 +66,13 @@ CREATE TABLE timestamp_demo (
 
 Next, set the time zone of the database server to `America/Los_Angeles`.
 
-```
+```sql
 SET timezone = 'America/Los_Angeles';
 ```
 
 By the way, you can see the current time zone using the `SHOW TIMEZONE` command:
 
-```
+```sql
 SHOW TIMEZONE;
 ```
 
@@ -85,14 +85,14 @@ SHOW TIMEZONE;
 
 Then, [insert a new row](/docs/postgresql/postgresql-insert)into the `timstamp_demo`table:
 
-```
+```sql
 INSERT INTO timestamp_demo (ts, tstz)
 VALUES('2016-06-22 19:10:25-07','2016-06-22 19:10:25-07');
 ```
 
 After that, [query data](/docs/postgresql/postgresql-select) from the `timestamp` and `timestamptz` columns.
 
-```
+```sql
 SELECT
    ts, tstz
 FROM
@@ -110,11 +110,11 @@ The query returns the same timestamp values as the inserted values.
 
 Finally, change the timezone of the current session to `America/New_York` and query data again.
 
-```
+```sql
 SET timezone = 'America/New_York';
 ```
 
-```
+```sql
 SELECT
   ts,
   tstz
@@ -141,7 +141,7 @@ To handle timestamp data effectively, PostgreSQL provides some handy functions a
 
 To get the current timestamp you use the `NOW()` function as follows:
 
-```
+```sql
 SELECT NOW();
 ```
 
@@ -156,7 +156,7 @@ Output:
 
 Alternatively, you can use the `CURRENT_TIMESTAMP` function:
 
-```
+```sql
 SELECT CURRENT_TIMESTAMP;
 ```
 
@@ -171,7 +171,7 @@ Output:
 
 To get the current time without a date, you use the `CURRENT_TIME` function:
 
-```
+```sql
 SELECT CURRENT_TIME;
 ```
 
@@ -188,7 +188,7 @@ Note that both `CURRENT_TIMESTAMP` and `CURRENT_TIME` return the current time wi
 
 To get the time of day in the string format, you use the `timeofday()` function.
 
-```
+```sql
 SELECT TIMEOFDAY();
 ```
 
@@ -203,7 +203,7 @@ SELECT TIMEOFDAY();
 
 To convert a timestamp to another time zone, you use the `timezone(zone, timestamp)`function.
 
-```
+```sql
 SHOW TIMEZONE;
 ```
 
@@ -218,7 +218,7 @@ The current timezone is `America/New_York`.
 
 To convert `2016-06-01 00:00` to `America/Los_Angeles` timezone, you use the `timezone()` function as follows:
 
-```
+```sql
 SELECT timezone('America/Los_Angeles','2016-06-01 00:00');
 ```
 
@@ -231,7 +231,7 @@ SELECT timezone('America/Los_Angeles','2016-06-01 00:00');
 
 Note that we pass the timestamp as a string to the `timezone()` function, PostgreSQL casts it to `timestamptz` implicitly. It is better to cast a timestamp value to the `timestamptz` data type explicitly as the following statement:
 
-```
+```sql
 SELECT timezone('America/Los_Angeles','2016-06-01 00:00'::timestamptz);
 ```
 
@@ -248,7 +248,7 @@ Output:
 
 First, create a new table called `department`:
 
-```
+```sql
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -261,7 +261,7 @@ The default values for the `created_at` and `updated_at` columns are the current
 
 Second, insert a new row into the `department` table without specifying the values for the `created_at` and `updated_at` columns:
 
-```
+```sql
 INSERT INTO department(name)
 VALUES('IT')
 RETURNING *;
@@ -286,7 +286,7 @@ Note that MySQL offers the `ON UPDATE CURRENT_TIMESTAMP` to automatically update
 
 Third, create a `BEFORE UPDATE` trigger to update the `updated_at` column of the `department` table:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -303,7 +303,7 @@ EXECUTE FUNCTION update_updated_at();
 
 Fourth, update the name of the IT department to ITD without specifying a value for the `updated_at` column:
 
-```
+```sql
 UPDATE department
 SET name = 'ITD'
 WHERE id = 1

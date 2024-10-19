@@ -14,7 +14,7 @@ The PostgreSQL `CURRENT_USER` is a function that returns the name of the current
 
 Here's the syntax of the `CURRENT_USER` function:
 
-```
+```sql
 CURRENT_USER
 ```
 
@@ -36,7 +36,7 @@ psql -U postgres
 
 Second, use the `CURRENT_USER` function to get the currently logged-in user:
 
-```
+```sql
 SELECT CURRENT_USER;
 ```
 
@@ -51,20 +51,20 @@ Output:
 
 Third, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) called `bob`:
 
-```
+```sql
 CREATE ROLE bob
 WITH LOGIN PASSWORD 'SecurePass1';
 ```
 
 Fourth, change the role of the current user to `bob`:
 
-```
+```sql
 SET ROLE bob;
 ```
 
 Fifth, execute the `CURRENT_USER` function:
 
-```
+```sql
 SELECT CURRENT_USER;
 ```
 
@@ -79,7 +79,7 @@ It returns `bob` instead:
 
 Six, use the `SESSION_USER` function to retrieve the original user who connected to the session:
 
-```
+```sql
 SELECT SESSION_USER;
 ```
 

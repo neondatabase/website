@@ -13,7 +13,7 @@ The `UNION` operator allows you to combine the result sets of two or more `SELEC
 
 Here's the basic syntax of the `UNION` operator:
 
-```
+```sql
 SELECT select_list
 FROM A
 UNION
@@ -31,7 +31,7 @@ The `UNION` operator removes all duplicate rows from the combined data set. To r
 
 Here's the syntax of the `UNION ALL` operator:
 
-```
+```sql
 SELECT select_list
 FROM A
 UNION ALL
@@ -49,7 +49,7 @@ The `UNION` and `UNION ALL` operators may order the rows in the final result set
 
 To sort rows in the final result set, you specify the `ORDER BY` clause after the second query:
 
-```
+```sql
 SELECT select_list
 FROM A
 UNION
@@ -64,7 +64,7 @@ Note that if you use the `ORDER BY` clause in the first query, PostgreSQL will i
 
 The following statements create two tables `top_rated_films` and `most_popular_films`, and insert data into these tables:
 
-```
+```sql
 CREATE TABLE top_rated_films(
   title VARCHAR NOT NULL,
   release_year SMALLINT
@@ -92,7 +92,7 @@ VALUES
 
 The following statement retrieves data from the `top_rated_films` table:
 
-```
+```sql
 SELECT * FROM top_rated_films;
 ```
 
@@ -110,7 +110,7 @@ Output:
 
 The following statement retrieves data from the `most_popular_films` table:
 
-```
+```sql
 SELECT * FROM most_popular_films;
 ```
 
@@ -134,7 +134,7 @@ Let's take some examples of using the PostgreSQL `UNION` operator.
 
 The following statement uses the `UNION` operator to combine data from the queries that retrieve data from the `top_rated_films` and `most_popular_films`:
 
-```
+```sql
 SELECT * FROM top_rated_films
 UNION
 SELECT * FROM most_popular_films;
@@ -160,7 +160,7 @@ The result set includes six rows because the `UNION` operator removes two duplic
 
 The following statement uses the `UNION ALL` operator to combine result sets from queries that retrieve data from `top_rated_films` and `most_popular_films` tables:
 
-```
+```sql
 SELECT * FROM top_rated_films
 UNION ALL
 SELECT * FROM most_popular_films;
@@ -188,7 +188,7 @@ The output indicates that the `UNION ALL` operator retains the duplicate rows.
 
 To sort the result returned by the `UNION` operator, you place the `ORDER BY` clause after the second query:
 
-```
+```sql
 SELECT * FROM top_rated_films
 UNION ALL
 SELECT * FROM most_popular_films

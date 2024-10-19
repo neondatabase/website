@@ -14,7 +14,7 @@ There are several ways to compare the content of two tables to find the differen
 
 First, [create table](/docs/postgresql/postgresql-create-table) two tables called `foo` and `bar`, and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
 
-```
+```sql
 CREATE TABLE foo (
   id INT PRIMARY KEY,
   name VARCHAR (50)
@@ -40,7 +40,7 @@ The `foo` table has the same structure and data as the `bar` table.
 
 Next, [update](/docs/postgresql/postgresql-update) one row in the `bar` table.
 
-```
+```sql
 UPDATE
   bar
 SET
@@ -53,7 +53,7 @@ WHERE
 
 Then, find the rows in the `foo` table but not in the `bar` table using the following [query](/docs/postgresql/postgresql-select):
 
-```
+```sql
 SELECT
   id,
   name,
@@ -80,7 +80,7 @@ Output:
 
 We used the `EXCEPT` operator that returns the rows in the `foo` table but not in the `bar` table. We can apply the same technique to find the rows that are in the `bar` table but not in the `foo` table.
 
-```
+```sql
 SELECT
   ID,
   NAME,
@@ -107,7 +107,7 @@ Output:
 
 Finally, use the [UNION operator](/docs/postgresql/postgresql-union) to combine the results of both queries to find the rows in the `bar` table but not in the `foo` table and vice versa:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -151,7 +151,7 @@ Output:
 
 You can use the outer join to compare two tables as follows:
 
-```
+```sql
 SELECT
   id,
   name
@@ -175,7 +175,7 @@ It returns the differences between the two tables:
 
 To find the number of rows that are in the `foo` table but not `bar` table and vice versa, you use the [COUNT function](/docs/postgresql/postgresql-aggregate-functions/postgresql-count-function) as follows:
 
-```
+```sql
 SELECT
   COUNT (*)
 FROM

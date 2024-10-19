@@ -40,7 +40,7 @@ To create an event trigger, you follow these steps:
 
 First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the event trigger fires:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION event_trigger_function_name()
 RETURNS EVENT_TRIGGER
 AS
@@ -57,7 +57,7 @@ The event trigger function returns `EVENT_TRIGGER` instead of `TRIGGER`. Additio
 
 Second, create an event trigger using the `CREATE EVENT TRIGGER` statement:
 
-```
+```sql
 CREATE EVENT TRIGGER trigger_name
 ON event
 EXECUTE FUNCTION event_trigger_function_name()
@@ -67,7 +67,7 @@ EXECUTE FUNCTION event_trigger_function_name()
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `audits` to store audit logs for commands:
 
-```
+```sql
 CREATE TABLE audits (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
@@ -81,7 +81,7 @@ The `audits` table will record the username, event, command, and timestamp when 
 
 Second, define an event trigger function that executes whenever a relevant event occurs:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION audit_command()
 RETURNS EVENT_TRIGGER
 AS $$
@@ -96,7 +96,7 @@ The `audit_command()` function inserts audit records into the `audits` table.
 
 Third, create an event trigger that associates the function with DDL commands:
 
-```
+```sql
 CREATE EVENT TRIGGER audit_ddl_commands
 ON ddl_command_end
 EXECUTE FUNCTION audit_command();
@@ -104,7 +104,7 @@ EXECUTE FUNCTION audit_command();
 
 Fourth, execute a `CREATE TABLE` command:
 
-```
+```sql
 CREATE TABLE regions(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -113,7 +113,7 @@ CREATE TABLE regions(
 
 Fifth, retrieve data from the `audits` table:
 
-```
+```sql
 SELECT * FROM audits;
 ```
 

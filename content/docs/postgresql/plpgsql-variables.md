@@ -68,7 +68,7 @@ end $$;
 
 Output:
 
-```
+```sql
 NOTICE:  1 John Doe has been paid 20.50 USD
 ```
 
@@ -99,7 +99,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  The first name is John
 DO
 ```
@@ -141,7 +141,7 @@ end $$;
 
 Here is the output:
 
-```
+```sql
 NOTICE:  14:23:33.064008
 NOTICE:  14:23:33.064008
 ```
@@ -197,7 +197,7 @@ end; $$;
 
 Output:
 
-```
+```sql
 NOTICE:  Film title id 100: Brooklyn Deserts
 DO
 ```
@@ -243,7 +243,7 @@ begin
 end outer_block $$;
 ```
 
-```
+```sql
 NOTICE:  The current value of the counter is 1
 NOTICE:  Counter in the subblock is 10
 NOTICE:  Counter in the outer block is 1

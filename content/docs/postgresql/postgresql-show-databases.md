@@ -52,7 +52,7 @@ To display more information on databases, you can use the `\l+` command:
 
 The following statement retrieves the database names from the `pg_database` view:
 
-```
+```sql
 SELECT datname FROM pg_database;
 ```
 

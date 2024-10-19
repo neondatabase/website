@@ -17,7 +17,7 @@ To form a self-join, you specify the same table twice with [different table alia
 
 The following query uses an `INNER JOIN` that joins the table to itself:
 
-```
+```sql
 SELECT select_list
 FROM table_name t1
 INNER JOIN table_name t2 ON join_predicate;
@@ -27,7 +27,7 @@ In this syntax, the `table_name` is joined to itself using the `INNER JOIN` clau
 
 Alternatively, you can use the `LEFT JOIN` or `RIGHT JOIN` clause to join the table to itself like this:
 
-```
+```sql
 SELECT select_list
 FROM table_name t1
 LEFT JOIN table_name t2 ON join_predicate;
@@ -47,7 +47,7 @@ Suppose, you have the following organizational structure:
 
 The following statements create the `employee` table and insert some sample data into the table.
 
-```
+```sql
 CREATE TABLE employee (
   employee_id INT PRIMARY KEY,
   first_name VARCHAR (255) NOT NULL,
@@ -93,7 +93,7 @@ If the `manager_id` column contains NULL, which signifies that the respective em
 
 The following query uses the self-join to find who reports to whom:
 
-```
+```sql
 SELECT
   e.first_name || ' ' || e.last_name employee,
   m.first_name || ' ' || m.last_name manager
@@ -127,7 +127,7 @@ Notice that the top manager does not appear on the output.
 
 To include the top manager in the result set, you use the `LEFT JOIN` instead of `INNER JOIN` clause as shown in the following query:
 
-```
+```sql
 SELECT
   e.first_name || ' ' || e.last_name employee,
   m.first_name || ' ' || m.last_name manager
@@ -162,7 +162,7 @@ See the following `film` table from the DVD rental database:
 
 The following query finds all pairs of films that have the same length,
 
-```
+```sql
 SELECT
   f1.title,
   f2.title,

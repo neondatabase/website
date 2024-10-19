@@ -12,7 +12,7 @@ Sometimes, you need to update data in a table based on values in another table. 
 
 Here's the basic syntax of the `UPDATE` join statement:
 
-```
+```sql
 UPDATE table1
 SET table1.c1 = new_value
 FROM table2
@@ -35,7 +35,7 @@ First, [create a new table](/docs/postgresql/postgresql-create-table) called `pr
 
 The `product_segment` table has the `discount` column that stores the discount percentage based on a specific segment. For example, products with the grand luxury segment have `5%` discount while luxury and mass products have `6%` and `10%` discounts respectively.
 
-```
+```sql
 CREATE TABLE product_segment (
     id SERIAL PRIMARY KEY,
     segment VARCHAR NOT NULL,
@@ -53,7 +53,7 @@ VALUES
 
 Second, create another table named `product` that stores the product data. The `product` table has the [foreign key column](/docs/postgresql/postgresql-foreign-key) `segment_id` that links to the `id` of the `segment` table.
 
-```
+```sql
 CREATE TABLE product(
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -91,7 +91,7 @@ VALUES
 
 Third, suppose you have to calculate the net price of every product based on the discount of the product segment. To do this, you can apply the `UPDATE` join statement as follows:
 
-```
+```sql
 UPDATE product
 SET net_price = price - price * discount
 FROM product_segment
@@ -100,7 +100,7 @@ WHERE product.segment_id = product_segment.id;
 
 You can utilize the table aliases to make the query shorter like this:
 
-```
+```sql
 UPDATE
     product p
 SET
@@ -119,7 +119,7 @@ net_price = price - price * discount;
 
 The following [`SELECT`](/docs/postgresql/postgresql-select) statement retrieves the data of the `product` table to verify the update:
 
-```
+```sql
 SELECT * FROM product;
 ```
 

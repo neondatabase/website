@@ -175,7 +175,7 @@ public class Main {
 
 Output:
 
-```
+```sql
 Product{id=5, name='Bluetooth Headphones', price=199.0}
 Product{id=8, name='Car Mount', price=29.98}
 Product{id=1, name='Phone Case', price=19.99}
@@ -279,7 +279,7 @@ public class Main {
 
 Output:
 
-```
+```sql
 Product{id=1, name='Phone Case', price=19.99}
 ```
 

@@ -10,7 +10,7 @@ tableOfContents: true
 
 To change the password of a [PostgreSQL user](/docs/postgresql/postgresql-administration/postgresql-roles), you use the `ALTER ROLE` statement as follows:
 
-```
+```sql
 ALTER ROLE username
 WITH PASSWORD 'password';
 ```
@@ -23,13 +23,13 @@ In this statement, to change the password of a user:
 
 For example, the following statement changes the password of the `super` user to `secret123`.
 
-```
+```sql
 ALTER ROLE super WITH PASSWORD 'secret123';
 ```
 
 Sometimes, you want to set the password to be valid until a date and time. In this case, you use the `VALID UNTIL` clause:
 
-```
+```sql
 ALTER ROLE username
 WITH PASSWORD 'new_password'
 VALID UNTIL timestamp;
@@ -39,7 +39,7 @@ The `VALID UNTIL` clause is optional. If you omit it, the password will have no 
 
 The following statement uses the `ALTER ROLE` statement to set the expiration date for the password of `super` user to `December 31 2050`:
 
-```
+```sql
 ALTER ROLE bob
 VALID UNTIL 'December 31, 2050';
 ```

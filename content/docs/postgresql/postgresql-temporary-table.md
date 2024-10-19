@@ -19,7 +19,7 @@ In PostgreSQL, a temporary table is a table that exists only during a database s
 
 To create a temporary table, you use the `CREATE TEMPORARY TABLE` statement:
 
-```
+```sql
 CREATE TEMPORARY TABLE table_name(
    column1 datatype(size) constraint,
    column1 datatype(size) constraint,
@@ -36,7 +36,7 @@ In this syntax:
 
 The `TEMP` and `TEMPORARY` keywords are equivalent so you can use them interchangeably:
 
-```
+```sql
 CREATE TEMP TABLE table_name(
    ...
 );
@@ -44,7 +44,7 @@ CREATE TEMP TABLE table_name(
 
 The following example uses the `CREATE TEMP TABLE` to create a new temporary table `mytemp`:
 
-```
+```sql
 CREATE TEMP TABLE mytemp(id INT);
 
 INSERT INTO mytemp(id) VALUES(1), (2), (3)
@@ -64,13 +64,13 @@ Output:
 
 If you open a second database session and query data from the `mytemp` table, you'll get an error
 
-```
+```sql
 SELECT * FROM mytemp;
 ```
 
 Error:
 
-```
+```sql
 ERROR:  relation "mytemp" does not exist
 LINE 1: SELECT * FROM mytemp;
 ```
@@ -87,7 +87,7 @@ When you create a temporary table that shares the same name as a permanent table
 
 First, [create a table](/docs/postgresql/postgresql-create-table) named `customers`:
 
-```
+```sql
 CREATE TABLE customers(
    id SERIAL PRIMARY KEY,
    name VARCHAR NOT NULL
@@ -96,7 +96,7 @@ CREATE TABLE customers(
 
 Second, create a temporary table with the same name: `customers`
 
-```
+```sql
 CREATE TEMP TABLE customers(
     customer_id INT
 );
@@ -104,7 +104,7 @@ CREATE TEMP TABLE customers(
 
 Now, query data from the `customers` table:
 
-```
+```sql
 SELECT * FROM customers;
 ```
 
@@ -140,7 +140,7 @@ The output shows the schema of the `customers` temporary table is `pg_temp_3`.
 
 In this case, access to the permanent table requires qualifying the table name with its schema. For example:
 
-```
+```sql
 SELECT * FROM public.customers;
 ```
 
@@ -148,7 +148,7 @@ SELECT * FROM public.customers;
 
 To drop a temporary table, you use the [`DROP TABLE`](/docs/postgresql/postgresql-drop-table) statement. The following statement uses the `DROP TABLE` statement to drop a temporary table:
 
-```
+```sql
 DROP TABLE temp_table_name;
 ```
 
@@ -156,7 +156,7 @@ Unlike the `CREATE TABLE` statement, the `DROP TABLE` statement does not have th
 
 For example, the following statement drops the temporary table `customers` that we have created in the above example:
 
-```
+```sql
 DROP TABLE customers;
 ```
 

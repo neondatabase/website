@@ -41,7 +41,7 @@ psql -U postgres
 
 Second, retrieve a list of process `ID` (or pid) using the following query:
 
-```
+```sql
 SELECT
   pid,
   usename,
@@ -53,7 +53,7 @@ FROM
 
 Third, suppose you want to kill the process id `2600`, you can execute the `pg_terminate_backend()` function:
 
-```
+```sql
 SELECT pg_terminate_backend(2600);
 ```
 

@@ -45,7 +45,7 @@ We will examine each step in more detail in the following sections.
 
 To declare a cursor, you use the `DECLARE` statement. Here's the syntax for declaring a cursor:
 
-```
+```sql
 DECLARE cursor_name CURSOR FOR query;
 ```
 
@@ -59,7 +59,7 @@ In this syntax:
 
 After declaring a cursor, you need to open it using the `OPEN` statement:
 
-```
+```sql
 OPEN cursor_name;
 ```
 
@@ -79,7 +79,7 @@ Once the cursor is open, you can fetch rows from it using the `FETCH` statement.
 
 In practice, you often use the `FETCH NEXT` that fetches the next row from a cursor:
 
-```
+```sql
 FETCH NEXT FROM cursor_name INTO variable_list;
 ```
 
@@ -93,7 +93,7 @@ In this syntax:
 
 After fetching a row, you can process it. Typically, you use a [LOOP](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) statement to process the rows fetched from the cursor:
 
-```
+```sql
 LOOP
     -- Fetch the next row
     FETCH NEXT FROM cursor_name INTO variable_list;
@@ -111,7 +111,7 @@ END LOOP;
 
 Once completing fetching rows, you need to close the cursor using the `CLOSE` statement:
 
-```
+```sql
 CLOSE cursor_name;
 ```
 
@@ -121,7 +121,7 @@ The `CLOSE` statement releases the resources and frees up the cursor variable, a
 
 The following example illustrates how to use a cursor to traverse the rows from the film table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-```
+```sql
 CREATE OR REPLACE FUNCTION fetch_film_titles_and_years(
    OUT p_title VARCHAR(255),
    OUT p_release_year INTEGER
@@ -156,7 +156,7 @@ LANGUAGE PLPGSQL;
 
 The following shows how to call the `fetch_film_titles_and_years()` function:
 
-```
+```sql
 SELECT * FROM fetch_film_titles_and_years();
 ```
 

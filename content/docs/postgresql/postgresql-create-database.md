@@ -17,7 +17,7 @@ To create a new database, you use the `CREATE DATABASE` statement.
 
 Here's the basic syntax of the `CREATE DATABASE` statement:
 
-```
+```sql
 CREATE DATABASE database_name
 WITH
    [OWNER =  role_name]
@@ -95,13 +95,13 @@ psql -U postgres
 
 Second, execute the `CREATE DATABASE` statement to a new database with default parameters:
 
-```
+```sql
 CREATE DATABASE sales;
 ```
 
 Output:
 
-```
+```sql
 CREATE DATABASE
 ```
 
@@ -131,7 +131,7 @@ Output:
 
 Alternatively, you can retrieve the database names from the `pg_database` view:
 
-```
+```sql
 SELECT datname FROM pg_database;
 ```
 
@@ -153,7 +153,7 @@ Output:
 
 The following example uses the `CREATE DATABASE` statement to create a database named `hr` with some parameters:
 
-```
+```sql
 CREATE DATABASE hr
 WITH
    ENCODING = 'UTF8'

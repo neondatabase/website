@@ -10,7 +10,7 @@ tableOfContents: true
 
 To drop a table from the database, you use the `DROP TABLE` statement as follows:
 
-```
+```sql
 DROP TABLE [IF EXISTS] table_name
 [CASCADE | RESTRICT];
 ```
@@ -31,7 +31,7 @@ If the table is used in other database objects such as [views](/docs/postgresql/
 
 To remove multiple tables simultaneously, you can place the tables separated by commas after the `DROP TABLE` keywords:
 
-```
+```sql
 DROP TABLE [IF EXISTS]
    table_name_1,
    table_name_2,
@@ -49,7 +49,7 @@ Let's take some examples of using the PostgreSQL `DROP TABLE` statement.
 
 The following statement removes a table named `author` in the database:
 
-```
+```sql
 DROP TABLE author;
 ```
 
@@ -61,11 +61,11 @@ PostgreSQL issues an error because the `author` table does not exist.
 
 To avoid the error, you can use the `IF EXISTS` option like this.
 
-```
+```sql
 DROP TABLE IF EXISTS author;
 ```
 
-```
+```sql
 NOTICE:  table "author" does not exist, skipping DROP TABLE
 ```
 
@@ -75,7 +75,7 @@ The output indicates that PostgreSQL issued a notice instead of an error.
 
 The following [creates new tables](/docs/postgresql/postgresql-create-table "PostgreSQL CREATE TABLE") called `authors` and `pages`. The `pages` table has a foreign key that references the `authors` table.
 
-```
+```sql
 CREATE TABLE authors (
   author_id INT PRIMARY KEY,
   firstname VARCHAR (50) NOT NULL,
@@ -93,13 +93,13 @@ CREATE TABLE pages (
 
 The following statement uses the `DROP TABLE` to drop the `authors` table:
 
-```
+```sql
 DROP TABLE IF EXISTS authors;
 ```
 
 Because the `authors` table has a dependent object which is a foreign key that references the `pages` table, PostgreSQL issues an error message:
 
-```
+```sql
 ERROR:  cannot drop table authors because other objects depend on it
 DETAIL:  constraint pages_author_id_fkey on table pages depends on table authors
 HINT:  Use DROP ... CASCADE to drop the dependent objects too.
@@ -107,7 +107,7 @@ HINT:  Use DROP ... CASCADE to drop the dependent objects too.
 
 In this case, you need to remove all dependent objects first before dropping the `author` table or use `CASCADE` option as follows:
 
-```
+```sql
 DROP TABLE authors CASCADE;
 ```
 
@@ -115,7 +115,7 @@ This statement deletes the `authors` table as well as the constraint in the `pag
 
 If the `DROP TABLE` statement removes the dependent objects of the table that are being dropped, it will issue a notice like this:
 
-```
+```sql
 NOTICE:  drop cascades to constraint pages_author_id_fkey on table pages
 DROP TABLE
 ```
@@ -124,7 +124,7 @@ DROP TABLE
 
 The following statements create two tables for the demo purposes:
 
-```
+```sql
 CREATE TABLE tvshows(
   tvshow_id INT GENERATED ALWAYS AS IDENTITY,
   title VARCHAR,
@@ -142,7 +142,7 @@ CREATE TABLE animes(
 
 The following example uses a single `DROP TABLE` statement to drop the `tvshows` and `animes` tables:
 
-```
+```sql
 DROP TABLE tvshows, animes;
 ```
 

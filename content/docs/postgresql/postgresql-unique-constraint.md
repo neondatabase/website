@@ -22,7 +22,7 @@ When you add a `UNIQUE` constraint to a column or a group of columns, PostgreSQL
 
 The following statement [creates a new table](/docs/postgresql/postgresql-create-table) named `person` with a `UNIQUE` constraint for the `email` column.
 
-```
+```sql
 CREATE TABLE person (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR (50),
@@ -33,7 +33,7 @@ CREATE TABLE person (
 
 Note that the `UNIQUE` constraint above can be rewritten as a table constraint as shown in the following query:
 
-```
+```sql
 CREATE TABLE person (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR (50),
@@ -45,14 +45,14 @@ CREATE TABLE person (
 
 First, insert a new row into the `person` table using `INSERT` statement:
 
-```
+```sql
 INSERT INTO person(first_name,last_name,email)
 VALUES('john','doe','j.doe@postgresqltutorial.com');
 ```
 
 Second, insert another row with a duplicate email.
 
-```
+```sql
 INSERT INTO person(first_name,last_name,email)
 VALUES('jack','doe','j.doe@postgresqltutorial.com');
 ```
@@ -68,7 +68,7 @@ DETAIL:  Key (email)=(j.doe@postgresqltutorial.com) already exists.
 
 PostgreSQL allows you to create a `UNIQUE` constraint to a group of columns using the following syntax:
 
-```
+```sql
 CREATE TABLE table (
     c1 data_type,
     c2 data_type,
@@ -85,7 +85,7 @@ Sometimes, you may want to add a unique constraint to an existing column or grou
 
 First, suppose you have a table named `equipment`:
 
-```
+```sql
 CREATE TABLE equipment (
   id SERIAL PRIMARY KEY,
   name VARCHAR (50) NOT NULL,
@@ -95,14 +95,14 @@ CREATE TABLE equipment (
 
 Second, create a unique index based on the `equip_id` column.
 
-```
+```sql
 CREATE UNIQUE INDEX CONCURRENTLY equipment_equip_id
 ON equipment (equip_id);
 ```
 
 Third, add a unique constraint to the `equipment` table using the `equipment_equip_id` index.
 
-```
+```sql
 ALTER TABLE equipment
 ADD CONSTRAINT unique_equip_id
 UNIQUE USING INDEX equipment_equip_id;
@@ -110,7 +110,7 @@ UNIQUE USING INDEX equipment_equip_id;
 
 Notice that the `ALTER TABLE` statement acquires an exclusive lock on the table. If you have any pending transactions, it will wait for all transactions to complete before changing the table. Therefore, you should check the pg_stat_activity table to see the current pending transactions that are ongoing using the following query:
 
-```
+```sql
 SELECT
   datid,
   datname,

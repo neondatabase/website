@@ -26,7 +26,7 @@ The XML data type offers the following benefits:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `person`:
 
-```
+```sql
 CREATE TABLE person(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     info XML
@@ -41,7 +41,7 @@ In this `person` table:
 
 Second, [insert a row](/docs/postgresql/postgresql-insert) into the `person` table:
 
-```
+```sql
 INSERT INTO person (info)
 VALUES (
     XMLPARSE(DOCUMENT '<?xml version="1.0" encoding="UTF-8"?>
@@ -63,7 +63,7 @@ In this statement:
 
 Third, [insert multiple rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `person` table:
 
-```
+```sql
 INSERT INTO person (info)
 VALUES
 (
@@ -94,7 +94,7 @@ VALUES
 
 Fourth, retrieve the names of persons from the XML documents using `xpath()` function:
 
-```
+```sql
 SELECT xpath('/person/name/text()', info) AS name
 FROM person;
 ```
@@ -115,7 +115,7 @@ Each row in the result set is an array of XML values representing person names. 
 
 Fourth, retrieve person names as text from the XML documents using `xpath()` function:
 
-```
+```sql
 SELECT (xpath('/person/name/text()', info))[1]::text AS name
 FROM person;
 ```
@@ -142,7 +142,7 @@ How it works.
 
 Fifth, retrieve the ages of persons:
 
-```
+```sql
 SELECT (xpath('/person/age/text()', info))[1]::text::integer AS age
 FROM person;
 ```
@@ -173,7 +173,7 @@ In this example, we cast an XML value to text and text to an integer because we 
 
 Sixth, retrieve the name, age, and city from the XML document:
 
-```
+```sql
 SELECT
     (xpath('/person/name/text()', info))[1]::text AS name,
     (xpath('/person/age/text()', info))[1]::text::integer AS age,
@@ -196,7 +196,7 @@ Output:
 
 Seventh, find the person with the name "Jane Doe":
 
-```
+```sql
 SELECT *
 FROM person
 WHERE (xpath('/person/name/text()', info))[1]::text = 'Jane Doe';
@@ -221,7 +221,7 @@ If the person table has many rows, finding the person by name will be slow. You 
 
 First, create an [index expression](/docs/postgresql/postgresql-indexes/postgresql-index-on-expression) that extracts the name of a person as an array of text:
 
-```
+```sql
 CREATE INDEX person_name
 ON person USING BTREE
     (cast(xpath('/person/name', info) as text[])) ;
@@ -229,7 +229,7 @@ ON person USING BTREE
 
 Second, create a function that inserts 1000 rows into the `person` table for testing purposes:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION generate_persons()
 RETURNS void AS
 $$
@@ -251,13 +251,13 @@ $$ LANGUAGE plpgsql;
 
 Third, call the `generate_persons` to insert 1000 rows into the `person` table:
 
-```
+```sql
 SELECT generate_persons();
 ```
 
 Fifth, find a person with the name `Jane Doe`:
 
-```
+```sql
 EXPLAIN ANALYZE
 SELECT *
 FROM person

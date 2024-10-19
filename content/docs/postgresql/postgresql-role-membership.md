@@ -26,7 +26,7 @@ Individual roles can be members of multiple group roles. This allows for flexibl
 
 Creating a group role is like creating a role by using the `CREATE ROLE` statement:
 
-```
+```sql
 CREATE ROLE group_role;
 ```
 
@@ -36,7 +36,7 @@ By convention, a group role does not have the `LOGIN` privilege, meaning that yo
 
 For example, the following statement creates a group role called `sales`:
 
-```
+```sql
 CREATE ROLE sales;
 ```
 
@@ -62,7 +62,7 @@ When you use the `\du` command in the `psql` tool, you will see that the group r
 
 To add a role to a group, you use the following form of the `GRANT` statement:
 
-```
+```sql
 GRANT group_role TO role;
 ```
 
@@ -74,7 +74,7 @@ In this syntax:
 
 For example, the following statement creates a new role `alice` and adds it to the group role `sales`:
 
-```
+```sql
 GRANT sales TO alice;
 ```
 
@@ -82,7 +82,7 @@ After you execute this statement, the `alice` role will automatically inherit al
 
 Note that if your PostgreSQL server does not have the `alice` role, you can run the following command first to create it:
 
-```
+```sql
 CREATE ROLE alice
 WITH LOGIN
 PASSWORD 'SecurePass1';
@@ -92,7 +92,7 @@ This CREATE ROLE implicitly uses the `INHERIT` attribute to ensure that the role
 
 If you don't want the role `alice` to inherit the privileges of its group roles, you can use the `NOINHERIT` attribute:
 
-```
+```sql
 CREATE ROLE alice
 WITH LOGIN NOINHERIT
 PASSWORD 'SecurePass1';
@@ -100,7 +100,7 @@ PASSWORD 'SecurePass1';
 
 The following grants the `SELECT` privilege on the rental table to the `sales` group role:
 
-```
+```sql
 GRANT SELECT ON rental TO sales;
 ```
 
@@ -116,7 +116,7 @@ psql -U alice -d dvdrental
 
 Second, retrieve data from the rental table:
 
-```
+```sql
 SELECT count(*) FROM rental;
 ```
 
@@ -135,7 +135,7 @@ The output indicates that the role `alice` has the `SELECT` privilege on the `re
 
 To remove a role from a group role, you use the `REVOKE` statement:
 
-```
+```sql
 REVOKE group_role FROM role;
 ```
 
@@ -149,7 +149,7 @@ A useful tip to remember when using `GRANT` and `REVOKE` statements with the gro
 
 For example, the following statement uses the `REVOKE` statement to remove the role `alice` from the group role `sales`:
 
-```
+```sql
 REVOKE sales FROM alice;
 ```
 

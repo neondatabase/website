@@ -18,7 +18,7 @@ Aggregate functions perform a calculation on a set of rows and return a single r
 
 In practice, you often use the aggregate functions with the `GROUP BY` clause in the `SELECT` statement:
 
-```
+```sql
 SELECT column1, AGGREGATE_FUNCTION(column2)
 FROM table1
 GROUP BY column1;
@@ -36,7 +36,7 @@ Let's use the `film` table in the [sample database](/docs/postgresql/postgresql-
 
 The following statement uses the `AVG()` function to calculate the average replacement cost of all films:
 
-```
+```sql
 SELECT
   ROUND(AVG(replacement_cost), 2) avg_replacement_cost
 FROM
@@ -56,7 +56,7 @@ Noted that we use the `ROUND()` function to round the result to 2 decimal places
 
 To calculate the average replacement cost of the `Drama` films whose category id is 7, you use the following statement:
 
-```
+```sql
 SELECT
   ROUND(
     AVG(replacement_cost),
@@ -83,7 +83,7 @@ Here is the result:
 
 To get the number of films, you use the `COUNT(*)` function as follows:
 
-```
+```sql
 SELECT
   COUNT(*)
 FROM
@@ -101,7 +101,7 @@ Output:
 
 To get the number of drama films, you use the following statement:
 
-```
+```sql
 SELECT
   COUNT(*) drama_films
 FROM
@@ -125,7 +125,7 @@ The result shows that there are 62 drama films:
 
 The following statement returns the maximum replacement cost of films.
 
-```
+```sql
 SELECT
   MAX(replacement_cost)
 FROM
@@ -143,7 +143,7 @@ Output:
 
 To get the films that have the maximum replacement cost, you use the following query:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -179,7 +179,7 @@ The subquery returned the maximum replacement cost which then was used by the ou
 
 The following example uses the `MIN()` function to return the minimum replacement cost of films:
 
-```
+```sql
 SELECT
   MIN(replacement_cost)
 FROM
@@ -197,7 +197,7 @@ Output:
 
 To get the films that have the minimum replacement cost, you use the following query:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -230,7 +230,7 @@ Output:
 
 The following statement uses the `SUM()` function to calculate the total length of films grouped by film's rating:
 
-```
+```sql
 SELECT
   rating,
   SUM(rental_duration)

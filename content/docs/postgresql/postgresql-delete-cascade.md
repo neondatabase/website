@@ -13,7 +13,7 @@ This feature helps you maintain referential integrity in the database by ensurin
 
 To enable the `DELETE CASCADE` action, you need to have two related tables `parent_table` and `child_table`:
 
-```
+```sql
 CREATE TABLE parent_table(
     id SERIAL PRIMARY KEY,
     ...
@@ -38,7 +38,7 @@ Let's take a look at an example.
 
 First, create tables `departments` and `employees` to store departments and employees:
 
-```
+```sql
 CREATE TABLE departments (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
@@ -62,7 +62,7 @@ The foreign key has the `ON DELETE CASCADE` clause that specifies the referentia
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into `departments` and `employees` tables:
 
-```
+```sql
 INSERT INTO departments (name)
 VALUES
     ('Engineering'),
@@ -96,7 +96,7 @@ Output:
 
 Third, delete a department and observe the cascading effect on associated employees:
 
-```
+```sql
 DELETE FROM departments
 WHERE id = 1;
 ```
@@ -105,7 +105,7 @@ Once you execute this statement, it deletes all employees belonging to the depar
 
 Finally, retrieve data from the `employees` table to verify the employees associated with the deleted department:
 
-```
+```sql
 SELECT * FROM employees;
 ```
 

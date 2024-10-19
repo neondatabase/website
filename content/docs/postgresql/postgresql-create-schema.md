@@ -14,7 +14,7 @@ The `CREATE SCHEMA` statement allows you to create a new [schema](/docs/postgres
 
 The following illustrates the syntax of the `CREATE SCHEMA` statement:
 
-```
+```sql
 CREATE SCHEMA [IF NOT EXISTS] schema_name;
 ```
 
@@ -27,7 +27,7 @@ Note that to execute the `CREATE SCHEMA` statement, you must have the `CREATE` p
 
 You can also create a schema for a user:
 
-```
+```sql
 CREATE SCHEMA [IF NOT EXISTS]
 AUTHORIZATION username;
 ```
@@ -36,7 +36,7 @@ In this case, the schema will have the same name as the `username`.
 
 PostgreSQL allows you to create a schema and a list of objects such as tables and [views](/docs/postgresql/postgresql-views) using a single statement as follows:
 
-```
+```sql
 CREATE SCHEMA schema_name
     CREATE TABLE table_name1 (...)
     CREATE TABLE table_name2 (...)
@@ -54,13 +54,13 @@ Let's take some examples of using the `CREATE SCHEMA` statement.
 
 The following statement uses the `CREATE SCHEMA` statement to create a new schema named `marketing`:
 
-```
+```sql
 CREATE SCHEMA marketing;
 ```
 
 The following statement returns all schemas from the current database:
 
-```
+```sql
 SELECT *
 FROM pg_catalog.pg_namespace
 ORDER BY nspname;
@@ -74,7 +74,7 @@ This picture shows the output:
 
 First, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) with named `john`:
 
-```
+```sql
 CREATE ROLE john
 LOGIN
 PASSWORD 'Postgr@s321!';
@@ -82,13 +82,13 @@ PASSWORD 'Postgr@s321!';
 
 Second, create a schema for `john`:
 
-```
+```sql
 CREATE SCHEMA AUTHORIZATION john;
 ```
 
 Third, create a new schema called `doe` that will be owned by `john`:
 
-```
+```sql
 CREATE SCHEMA IF NOT EXISTS doe AUTHORIZATION john;
 ```
 
@@ -96,7 +96,7 @@ CREATE SCHEMA IF NOT EXISTS doe AUTHORIZATION john;
 
 The following example uses the `CREATE SCHEMA` statement to create a new schema named `scm`. It also creates a table named `deliveries` and a view named `delivery_due_list` that belongs to the `scm` schema:
 
-```
+```sql
 CREATE SCHEMA scm
     CREATE TABLE deliveries(
         id SERIAL NOT NULL,

@@ -18,7 +18,7 @@ psql -U postgres
 
 Second, execute the following query to get the PostgreSQL uptime:
 
-```
+```sql
 SELECT
   date_trunc(
     'second',
@@ -30,7 +30,7 @@ How it works
 
 PostgreSQL stores the time when it was started in the database server. To retrieve the start time, you use the `pg_postmaster_start_time()` function as follows:
 
-```
+```sql
 SELECT pg_postmaster_start_time();
 ```
 
@@ -45,7 +45,7 @@ Output:
 
 You can then calculate the uptime based on the current time and the start time returned by the `pg_postmaster_start_time()` function:
 
-```
+```sql
 SELECT current_timestamp - pg_postmaster_start_time() uptime;
 ```
 
@@ -60,7 +60,7 @@ Output:
 
 You can truncate the microsecond from the uptime using the `DATE_TRUNC()` function to make the output more human-readable:
 
-```
+```sql
 SELECT
   date_trunc(
     'second',

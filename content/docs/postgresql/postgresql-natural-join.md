@@ -14,7 +14,7 @@ A natural join is a [join](/docs/postgresql/postgresql-joins) that creates an im
 
 The following shows the syntax of the PostgreSQL NATURAL JOIN clause:
 
-```
+```sql
 SELECT select_list
 FROM table1
 NATURAL [INNER, LEFT, RIGHT] JOIN table2;
@@ -32,7 +32,7 @@ The convenience of the `NATURAL JOIN` is that it does not require you to specify
 
 The equivalent of the `NATURAL JOIN` clause will be like this:
 
-```
+```sql
 SELECT select_list
 FROM table1
 [INNER, LEFT, RIGHT] JOIN table2
@@ -43,7 +43,7 @@ FROM table1
 
 The following statements are equivalent:
 
-```
+```sql
 SELECT select_list
 FROM table1
 NATURAL INNER JOIN table2;
@@ -51,7 +51,7 @@ NATURAL INNER JOIN table2;
 
 And
 
-```
+```sql
 SELECT select_list
 FROM table1
 INNER JOIN table2 USING (column_name);
@@ -61,7 +61,7 @@ INNER JOIN table2 USING (column_name);
 
 The following statements are equivalent:
 
-```
+```sql
 SELECT select_list
 FROM table1
 NATURAL LEFT JOIN table2;
@@ -69,7 +69,7 @@ NATURAL LEFT JOIN table2;
 
 And
 
-```
+```sql
 SELECT select_list
 FROM table1
 LEFT JOIN table2 USING (column_name);
@@ -79,7 +79,7 @@ LEFT JOIN table2 USING (column_name);
 
 The following statements are equivalent:
 
-```
+```sql
 SELECT select_list
 FROM table1
 NATURAL RIGHT JOIN table2;
@@ -87,7 +87,7 @@ NATURAL RIGHT JOIN table2;
 
 And
 
-```
+```sql
 SELECT select_list
 FROM table1
 RIGHT JOIN table2 USING (column_name);
@@ -97,7 +97,7 @@ RIGHT JOIN table2 USING (column_name);
 
 The following statements create `categories` and `products` tables, and insert sample data for the demonstration:
 
-```
+```sql
 CREATE TABLE categories (
   category_id SERIAL PRIMARY KEY,
   category_name VARCHAR (255) NOT NULL
@@ -163,7 +163,7 @@ Let's explore some examples of using the `NATURAL JOIN` statement.
 
 The following statement uses the `NATURAL JOIN` clause to join the `products` table with the `categories` table:
 
-```
+```sql
 SELECT *
 FROM products
 NATURAL JOIN categories;
@@ -187,7 +187,7 @@ Output:
 
 The statement is equivalent to the following statement that uses the `INNER JOIN` clause:
 
-```
+```sql
 SELECT *
 FROM products
 INNER JOIN categories USING (category_id);
@@ -197,7 +197,7 @@ INNER JOIN categories USING (category_id);
 
 The following example uses the `NATURAL JOIN` clause to perform a `LEFT JOIN` without specifying the matching column:
 
-```
+```sql
 SELECT *
 FROM categories
 NATURAL LEFT JOIN products;
@@ -230,7 +230,7 @@ Consider the following `city` and `country` tables from the [sample database](/d
 
 Both tables have the same `country_id` column so you can use the `NATURAL JOIN` to join these tables as follows:
 
-```
+```sql
 SELECT *
 FROM city
 NATURAL JOIN country;

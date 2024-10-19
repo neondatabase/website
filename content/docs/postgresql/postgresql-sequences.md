@@ -21,7 +21,7 @@ To create a new sequence, you use the `CREATE SEQUENCE` statement.
 
 The following illustrates the syntax of the `CREATE SEQUENCE` statement:
 
-```
+```sql
 CREATE SEQUENCE [ IF NOT EXISTS ] sequence_name
     [ AS { SMALLINT | INT | BIGINT } ]
     [ INCREMENT [ BY ] increment ]
@@ -97,7 +97,7 @@ Let's take some examples of creating sequences to get a better understanding.
 
 This statement uses the `CREATE SEQUENCE` statement to create a new ascending sequence starting from 100 with an increment of 5:
 
-```
+```sql
 CREATE SEQUENCE mysequence
 INCREMENT 5
 START 100;
@@ -105,7 +105,7 @@ START 100;
 
 To get the next value from the sequence, you use the `nextval()` function:
 
-```
+```sql
 SELECT nextval('mysequence');
 ```
 
@@ -113,7 +113,7 @@ SELECT nextval('mysequence');
 
 If you execute the statement again, you will get the next value from the sequence:
 
-```
+```sql
 SELECT nextval('mysequence');
 ```
 
@@ -123,7 +123,7 @@ SELECT nextval('mysequence');
 
 The following statement creates a descending sequence from 3 to 1 with the cycle option:
 
-```
+```sql
 CREATE SEQUENCE three
 INCREMENT -1
 MINVALUE 1
@@ -134,7 +134,7 @@ CYCLE;
 
 When you execute the following statement multiple times, you will see the number starting from 3, 2, 1 and back to 3, 2, 1, and so on:
 
-```
+```sql
 SELECT nextval('three');
 ```
 
@@ -142,7 +142,7 @@ SELECT nextval('three');
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `order_details`:
 
-```
+```sql
 CREATE TABLE order_details(
     order_id SERIAL,
     item_id INT NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE order_details(
 
 Second, create a new sequence associated with the `item_id` column of the `order_details` table:
 
-```
+```sql
 CREATE SEQUENCE order_item_id
 START 10
 INCREMENT 10
@@ -164,7 +164,7 @@ OWNED BY order_details.item_id;
 
 Third, [insert](/docs/postgresql/postgresql-insert) three order line items into the `order_details` table:
 
-```
+```sql
 INSERT INTO
     order_details(order_id, item_id, item_text, price)
 VALUES
@@ -177,7 +177,7 @@ In this statement, we used the `nextval()` function to fetch the item id value f
 
 Fourth, [query](/docs/postgresql/postgresql-select) data from the `order_details` table:
 
-```
+```sql
 SELECT
     order_id,
     item_id,
@@ -193,7 +193,7 @@ FROM
 
 To list all sequences in the current database, you use the following query:
 
-```
+```sql
 SELECT
     relname sequence_name
 FROM
@@ -208,7 +208,7 @@ If a sequence is associated with a table column, it will be automatically droppe
 
 You can also remove a sequence manually using the `DROP SEQUENCE` statement:
 
-```
+```sql
 DROP SEQUENCE [ IF EXISTS ] sequence_name [, ...]
 [ CASCADE | RESTRICT ];
 ```
@@ -223,7 +223,7 @@ In this syntax:
 
 This statement drops the table `order_details`. Since the sequence `order_item_id` associates with the `item_id` of the `order_details`, it is also dropped automatically:
 
-```
+```sql
 DROP TABLE order_details;
 ```
 

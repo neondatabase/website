@@ -32,7 +32,7 @@ Let's explore some examples of using the `jsonb_array_length()` function.
 
 The following example uses the `jsonb_array_length()` function to get the number of elements in a JSON array:
 
-```
+```sql
 SELECT jsonb_array_length('[1,2,3]');
 ```
 
@@ -51,7 +51,7 @@ The function returns 3 because the JSON array \[1,2,3] contains three elements.
 
 The following example uses the `jsonb_array_length()` function with an array that contains another array:
 
-```
+```sql
 SELECT jsonb_array_length('[1,2,3, [4,5], 6]');
 ```
 
@@ -70,7 +70,7 @@ In this example, the function returns 5 because the top-level array contains 5 e
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `person`:
 
-```
+```sql
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     info JSONB
@@ -81,7 +81,7 @@ In this `person` table, the `info` column has the type `JSONB` that contains the
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `person` table:
 
-```
+```sql
 INSERT INTO person (info)
 VALUES
     ('{"name": "Alice", "age": 30, "pets": [{"type": "cat", "name": "Fluffy"}, {"type": "dog", "name": "Buddy"}]}'),
@@ -92,7 +92,7 @@ RETURNING *;
 
 Third, retrieve the person names with their number of pets from the `info` column of the `person` table:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, '$.name') name,
   jsonb_array_length(

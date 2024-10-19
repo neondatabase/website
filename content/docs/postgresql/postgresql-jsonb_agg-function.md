@@ -34,7 +34,7 @@ Let's explore some examples of using the `jsonb_agg()` function.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE products (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES
 ('Laptop', 1200.00),
@@ -54,7 +54,7 @@ VALUES
 
 Third, use the `jsonb_agg()` function to aggregate product information into a JSON array:
 
-```
+```sql
 SELECT
   jsonb_agg(
     jsonb_build_object('name', name, 'price', price)
@@ -76,7 +76,7 @@ Output:
 
 First, [create new tables](/docs/postgresql/postgresql-create-table) called `departments` and `employees`:
 
-```
+```sql
 CREATE TABLE departments(
    id SERIAL PRIMARY KEY,
    department_name VARCHAR(255) NOT NULL
@@ -93,7 +93,7 @@ CREATE TABLE employees(
 
 Second, insert rows into `departments` and `employees` tables:
 
-```
+```sql
 INSERT INTO departments (department_name)
 VALUES
   ('Engineering'),
@@ -133,7 +133,7 @@ The `employees` table:
 
 Third, use the `jsonb_agg()` function to retrieve departments and a list of employees for each department in the form of a JSON array:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_agg(employee_name) AS employees
@@ -158,14 +158,14 @@ Output:
 
 First, drop the departments and employees tables:
 
-```
+```sql
 DROP TABLE employees;
 DROP TABLE departments;
 ```
 
 Second, recreate the departments and employees tables:
 
-```
+```sql
 CREATE TABLE departments(
    id SERIAL PRIMARY KEY,
    department_name VARCHAR(255) NOT NULL
@@ -182,7 +182,7 @@ CREATE TABLE employees(
 
 Third, insert rows into the departments and employees tables:
 
-```
+```sql
 INSERT INTO departments (department_name)
 VALUES
   ('Engineering'),
@@ -226,7 +226,7 @@ The `employees` table:
 
 Third, use the `jsonb_agg()` function to retrieve departments and a list of employees for each department in the form of a JSON array:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_agg (employee_name) AS employees
@@ -252,7 +252,7 @@ In this example, the IT department has no employees therefore `jsonb_agg()` func
 
 To skip the null and make the JSON array an empty array, you can use the `jsonb_agg_strict()` function:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_agg_strict (employee_name) AS employees

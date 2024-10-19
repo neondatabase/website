@@ -15,7 +15,7 @@ The `SELECT` statement returns all rows from one or more columns in a table. To 
 
 The syntax of the PostgreSQL `WHERE` clause is as follows:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -72,7 +72,7 @@ We will use the `customer` table from the [sample database](/docs/postgresql/pos
 
 The following statement uses the `WHERE` clause to find customers with the first name is `Jamie`:
 
-```
+```sql
 SELECT
   last_name,
   first_name
@@ -96,7 +96,7 @@ Output:
 
 The following example uses a `WHERE` clause with the `AND` logical operator to find customers whose first name and last names are `Jamie` and `rice`:
 
-```
+```sql
 SELECT
   last_name,
   first_name
@@ -120,7 +120,7 @@ Output:
 
 The following example uses a WHERE clause with an OR operator to find the customers whose last name is `Rodriguez` or first name is `Adam`:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -147,7 +147,7 @@ If you want to find a value in a list of values, you can use the `IN` operator.
 
 The following example uses the WHERE clause with the IN operator to find the customers with first names in the list Ann, Anne, and Annie:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -174,7 +174,7 @@ To find a string that matches a specified pattern, you use the `LIKE` operator.
 
 The following example uses the LIKE operator in the WHERE clause to find customers whose first names start with the word `Ann`:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -205,7 +205,7 @@ The following example finds customers whose first names start with the letter `A
 
 The `BETWEEN` operator returns true if a value is in a range of values.
 
-```
+```sql
 SELECT
   first_name,
   LENGTH(first_name) name_length
@@ -244,7 +244,7 @@ In this example, we use the `LENGTH()` function gets the number of characters of
 
 This example finds customers whose first names start with `Bra` and last names are not `Motley`:
 
-```
+```sql
 SELECT
   first_name,
   last_name

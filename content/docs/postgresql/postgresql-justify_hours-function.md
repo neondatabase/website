@@ -14,7 +14,7 @@ The `JUSTIFY_HOURS()` function normalizes an [interval](/docs/postgresql/postgre
 
 Here's the syntax of the `JUSTIFY_HOURS()` function:
 
-```
+```sql
 JUSTIFY_HOURS ( value) → interval
 ```
 
@@ -38,7 +38,7 @@ Let's take some examples of using the PostgreSQL `JUSTIFY_HOURS()` function.
 
 The following statement uses the `JUSTIFY_HOURS()` function to adjust intervals that are multiples of 24 hours:
 
-```
+```sql
 SELECT JUSTIFY_HOURS(INTERVAL '24 hours'),
        JUSTIFY_HOURS(INTERVAL '48 hours'),
        JUSTIFY_HOURS(INTERVAL '72 hours');
@@ -56,7 +56,7 @@ Output:
 
 The following example uses the `JUSTIFY_HOURS()` function to adjust intervals that are not multiples of 24 hours:
 
-```
+```sql
 SELECT JUSTIFY_HOURS(INTERVAL '25 hours'),
        JUSTIFY_HOURS(INTERVAL '50 hours'),
        JUSTIFY_HOURS(INTERVAL '70 hours');
@@ -74,7 +74,7 @@ Output:
 
 The following example uses the `JUSTIFY_HOURS()` function to adjust intervals that include hours, minutes, and seconds:
 
-```
+```sql
 SELECT JUSTIFY_HOURS(INTERVAL '15 days 2 hours'),
        JUSTIFY_HOURS(INTERVAL '55 days 30 minutes'),
        JUSTIFY_HOURS(INTERVAL '75 days 45 seconds');

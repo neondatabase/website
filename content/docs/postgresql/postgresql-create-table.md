@@ -12,7 +12,7 @@ Typically, a relational database consists of multiple related tables. Tables all
 
 To create a new table, you use the `CREATE TABLE` statement. Here's the basic syntax of the `CREATE TABLE` statement:
 
-```
+```sql
 CREATE TABLE [IF NOT EXISTS] table_name (
    column1 datatype(length) column_constraint,
    column2 datatype(length) column_constraint,
@@ -75,7 +75,7 @@ We will create a new table called `accounts` in the `dvdrental` [sample database
 
 The following example uses the `CREATE TABLE` statement to create the `accounts` table:
 
-```
+```sql
 CREATE TABLE accounts (
   user_id SERIAL PRIMARY KEY,
   username VARCHAR (50) UNIQUE NOT NULL,
@@ -98,7 +98,7 @@ psql -U postgres
 
 It'll prompt you to enter a password for the user `postgres`.
 
-```
+```sql
 Password for user postgres:
 ```
 
@@ -116,7 +116,7 @@ Second, connect to the `dvdrental` database:
 
 Third, enter the following `CREATE TABLE` statement and press Enter:
 
-```
+```sql
 CREATE TABLE accounts (
   user_id SERIAL PRIMARY KEY,
   username VARCHAR (50) UNIQUE NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE accounts (
 
 Output:
 
-```
+```sql
 CREATE TABLE
 ```
 

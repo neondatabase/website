@@ -11,7 +11,7 @@ tableOfContents: true
 
 To insert multiple rows into a table using a single `INSERT` statement, you use the following syntax:
 
-```
+```sql
 INSERT INTO table_name (column_list)
 VALUES
     (value_list_1),
@@ -28,7 +28,7 @@ In this syntax:
 
 To insert multiple rows and return the inserted rows, you add the `RETURNING` clause as follows:
 
-```
+```sql
 INSERT INTO table_name (column_list)
 VALUES
     (value_list_1),
@@ -51,7 +51,7 @@ Let's take some examples of inserting multiple rows into a table.
 
 The following statement [creates a new table](/docs/postgresql/postgresql-create-table) called `contacts` that has four columns `id`, `first_name`, `last_name`, and `email`:
 
-```
+```sql
 CREATE TABLE contacts (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE contacts (
 
 The following statement uses the `INSERT` statement to insert three rows into the `links` table:
 
-```
+```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
     ('John', 'Doe', 'john.doe@example.com'),
@@ -74,13 +74,13 @@ VALUES
 
 PostgreSQL returns the following message:
 
-```
+```sql
 INSERT 0 3
 ```
 
 To verify the inserts, you use the following statement:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -99,7 +99,7 @@ Output:
 
 The following statement uses the `INSERT` statement to insert two rows into the `contacts` table and returns the inserted rows:
 
-```
+```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
     ('Alice', 'Johnson', 'alice.johnson@example.com'),
@@ -122,7 +122,7 @@ INSERT 0 2
 
 If you just want to return the inserted id list, you can specify the `id` column in the `RETURNING` clause like this:
 
-```
+```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
     ('Eva', 'Williams', 'eva.williams@example.com'),

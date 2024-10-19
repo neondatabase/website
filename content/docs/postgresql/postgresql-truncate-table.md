@@ -13,7 +13,7 @@ To remove all data from a table, you use the `DELETE` statement without a [WHERE
 
 The `TRUNCATE TABLE` statement deletes all data from a table very fast. Here's the basic syntax of the `TRUNCATE TABLE` statement:
 
-```
+```sql
 TRUNCATE TABLE table_name;
 ```
 
@@ -23,7 +23,7 @@ In this syntax, you specify the name of the table that you want to delete data a
 
 To remove all data from multiple tables at once, you separate the tables by commas (,) as follows:
 
-```
+```sql
 TRUNCATE TABLE
     table_name1,
     table_name2,
@@ -40,7 +40,7 @@ By default, the `TRUNCATE TABLE` statement does not remove any data from the tab
 
 To remove data from a table and other tables that have foreign key references the table, you use `CASCADE` option in the `TRUNCATE TABLE` statement as follows :
 
-```
+```sql
 TRUNCATE TABLE table_name
 CASCADE;
 ```
@@ -53,7 +53,7 @@ Let's explore some examples of using the `TRUNCATE TABLE` statement.
 
 First, create a new table called `products`:
 
-```
+```sql
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE products(
 
 Second, insert some rows into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES
     ('A', 19.99),
@@ -87,13 +87,13 @@ Output:
 
 Third, delete all data from the `products` table using the `TRUNCATE TABLE` statement:
 
-```
+```sql
 TRUNCATE TABLE products;
 ```
 
 Output:
 
-```
+```sql
 TRUNCATE TABLE
 ```
 
@@ -101,7 +101,7 @@ TRUNCATE TABLE
 
 First, create a table called `customers` and insert data into it:
 
-```
+```sql
 CREATE TABLE customers(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -118,7 +118,7 @@ RETURNING *;
 
 Second, create a table called `vendors` and insert data into it:
 
-```
+```sql
 CREATE TABLE vendors(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -135,7 +135,7 @@ RETURNING *;
 
 Third, delete data from the customers and vendors tables using the TRUNCATE TABLE statement:
 
-```
+```sql
 TRUNCATE TABLE customers, vendors;
 ```
 
@@ -143,7 +143,7 @@ TRUNCATE TABLE customers, vendors;
 
 First, create tables `orders` and `order_details`:
 
-```
+```sql
 CREATE TABLE orders(
   order_id SERIAL PRIMARY KEY,
   customer_name VARCHAR(255) NOT NULL,
@@ -178,13 +178,13 @@ VALUES
 
 Second, attempt to truncate data from the `orders` table:
 
-```
+```sql
 TRUNCATE TABLE orders;
 ```
 
 PostgreSQL issues the following error:
 
-```
+```sql
 DETAIL:  Table "order_items" references "orders".
 HINT:  Truncate table "order_items" at the same time, or use TRUNCATE ... CASCADE.
 ```
@@ -193,13 +193,13 @@ The reason is that the `orders` table is referenced by the `order_items` table. 
 
 Third, truncate data from both `orders` and `order_items` tables:
 
-```
+```sql
 TRUNCATE TABLE orders CASCADE;
 ```
 
 PostgreSQL issues the following notice indicating that the `order_items` is also truncated:
 
-```
+```sql
 NOTICE:  truncate cascades to table "order_items"
 TRUNCATE TABLE
 ```
@@ -210,14 +210,14 @@ Note that the `TRUNCATE TABLE` statement uses the `RESTRICT` option by default t
 
 Besides removing data, you may want to reset the values of the [identity column](/docs/postgresql/postgresql-identity-column) by using the `RESTART IDENTITY` option like this:
 
-```
+```sql
 TRUNCATE TABLE table_name
 RESTART IDENTITY;
 ```
 
 For example, the following statement removes all rows from the `products` table and resets the [sequence](/docs/postgresql/postgresql-sequences) associated with the `id` column:
 
-```
+```sql
 TRUNCATE TABLE products
 RESTART IDENTITY;
 ```

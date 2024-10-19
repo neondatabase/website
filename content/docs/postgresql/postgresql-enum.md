@@ -12,7 +12,7 @@ In PostgreSQL, an enum type is a [custom data type](/docs/postgresql/postgresql-
 
 Here's the syntax for creating a new enum type:
 
-```
+```sql
 CREATE TYPE enum_name
 AS
 ENUM('value1', 'value2', 'value3', ...);
@@ -42,13 +42,13 @@ Additionally, you can use all standard comparison operators (>, >=, =, &lt;>, &l
 
 First, create a new enum type called `priority` that includes three possible values 'low', 'medium', and 'high'.
 
-```
+```sql
 CREATE TYPE priority AS ENUM('low','medium','high');
 ```
 
 Second, [create a table](/docs/postgresql/postgresql-create-table) called `requests` that has a column using `priority` enum:
 
-```
+```sql
 CREATE TABLE requests(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE requests(
 
 Third, [insert some rows](/docs/postgresql/postgresql-insert) into the `requests` table:
 
-```
+```sql
 INSERT INTO requests(title, priority, request_date)
 VALUES
    ('Create an enum tutorial in PostgreSQL', 'high', '2019-01-01'),
@@ -81,7 +81,7 @@ Output:
 
 Fourth, retrieve the requests and sort them by priority from low to high:
 
-```
+```sql
 SELECT *
 FROM requests
 ORDER BY priority;
@@ -100,7 +100,7 @@ Output:
 
 Fifth, find the requests whose priority is higher than `low`:
 
-```
+```sql
 SELECT *
 FROM requests
 WHERE priority > 'low'
@@ -121,7 +121,7 @@ Note that enum values are case-sensitive.
 
 Sixth, attempt to find the requests whose priority is '`HIGH`':
 
-```
+```sql
 SELECT *
 FROM requests
 WHERE priority = 'HIGH'
@@ -130,7 +130,7 @@ ORDER BY priority;
 
 PostgreSQL issues the following error:
 
-```
+```sql
 ERROR:  invalid input value for enum priority: "HIGH"
 LINE 3: WHERE priority = 'HIGH'
                          ^
@@ -138,7 +138,7 @@ LINE 3: WHERE priority = 'HIGH'
 
 Finally, attempt to insert a new row into the `requests` table with an invalid value for the priority column:
 
-```
+```sql
 INSERT INTO requests(title, priority, request_date)
 VALUES
    ('Revise the enum tutorial', 'urgent', '2019-01-02')
@@ -147,7 +147,7 @@ RETURNING *;
 
 Error:
 
-```
+```sql
 ERROR:  invalid input value for enum priority: "urgent"
 LINE 3:    ('Revise the enum tutorial', 'urgent', '2019-01-02')
                                         ^
@@ -157,7 +157,7 @@ LINE 3:    ('Revise the enum tutorial', 'urgent', '2019-01-02')
 
 To add a new value to an enum, you use the `ALTER TYPE ... ADD VALUE` statement:
 
-```
+```sql
 ALTER TYPE enum_name
 ADD VALUE [IF NOT EXISTS] 'new_value'
 [{BEFORE | AFTER } 'existing_enum_value';
@@ -173,7 +173,7 @@ In this syntax:
 
 For example, the following statement adds a new value `'urgent'` to the `priority` enum:
 
-```
+```sql
 ALTER TYPE priority
 ADD VALUE 'urgent';
 ```
@@ -190,7 +190,7 @@ It returns a list of values of the `enum_name` as an ordered array
 
 For example, the following statement uses the `enum_range()` function to retrieve a list of enum values from the priority enum:
 
-```
+```sql
 SELECT enum_range(null::priority);
 ```
 
@@ -207,7 +207,7 @@ Output:
 
 To get the first and last values in an enum, you use the `enum_first()` and `enum_last()` functions respectively.
 
-```
+```sql
 SELECT
   enum_first(NULL::priority) first_value,
   enum_last(NULL::priority)  last_value;
@@ -226,21 +226,21 @@ Output:
 
 To rename a value in an enum, you use the `ALTER TYPE ... RENAME VALUE` statement as follows:
 
-```
+```sql
 ALTER TYPE enum_name
 RENAME VALUE existing_enum_value TO new_enum_value;
 ```
 
 For example, the following statement changes the `'urgent'` value in the priority enum to `'very high'`:
 
-```
+```sql
 ALTER TYPE priority
 RENAME VALUE 'urgent' TO 'very high';
 ```
 
 The following statement verifies the change:
 
-```
+```sql
 SELECT enum_range(null::priority);
 ```
 

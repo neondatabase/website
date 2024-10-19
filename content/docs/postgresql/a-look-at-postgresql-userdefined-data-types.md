@@ -21,7 +21,7 @@ Domains are useful for centralizing the management of fields with common constra
 
 The following statement [create a table](/docs/postgresql/postgresql-create-table) named `mailing_list`:
 
-```
+```sql
 CREATE TABLE mailing_list (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR NOT NULL,
@@ -38,14 +38,14 @@ In this table, both `first_name` and `last_name` columns do not accept null and 
 
 The following statement uses the `CREATE DOMAIN` to create a new domain called `contact_name` with the `VARCHAR` datatype and do not accept NULL and spaces:
 
-```
+```sql
 CREATE DOMAIN contact_name AS
    VARCHAR NOT NULL CHECK (value !~ '\s');
 ```
 
 And you use `contact_name` as the datatype of the `first_name` and `last_name` columns as a regular built-in type:
 
-```
+```sql
 CREATE TABLE mailing_list (
     id serial PRIMARY KEY,
     first_name contact_name,
@@ -56,20 +56,20 @@ CREATE TABLE mailing_list (
 
 The following statement inserts a new row into the `mailing_list` table:
 
-```
+```sql
 INSERT INTO mailing_list (first_name, last_name, email)
 VALUES('Jame V','Doe','jame.doe@example.com');
 ```
 
 PostgreSQL issued the following error because the first name contains a space:
 
-```
+```sql
 ERROR:  value for domain contact_name violates check constraint "contact_name_check"
 ```
 
 The following statement works because it does not violate any constraints of the `contact_name` type:
 
-```
+```sql
 INSERT INTO mailing_list (first_name, last_name, email)
 VALUES('Jane','Doe','jane.doe@example.com');
 ```
@@ -91,7 +91,7 @@ test=#\dD
 
 To get all domains in a specific schema, you use the following query:
 
-```
+```sql
 SELECT typname
 FROM pg_catalog.pg_type
   JOIN pg_catalog.pg_namespace
@@ -102,7 +102,7 @@ WHERE
 
 The following statement returns domains in the `public` schema of the current database:
 
-```
+```sql
 SELECT typname
 FROM pg_catalog.pg_type
   JOIN pg_catalog.pg_namespace
@@ -119,7 +119,7 @@ The `CREATE TYPE` statement allows you to create a composite type, which can be 
 
 Suppose you want to have a function that returns several values: `film_id`, `title`, and `release_year`. The first step is to create a type e.g., `film_summary` as follows:
 
-```
+```sql
 CREATE TYPE film_summary AS (
     film_id INT,
     title VARCHAR,
@@ -129,7 +129,7 @@ CREATE TYPE film_summary AS (
 
 Second, use the `film_summary` data type as the return type of a function:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION get_film_summary (f_id INT)
     RETURNS film_summary AS
 $$
@@ -147,7 +147,7 @@ LANGUAGE SQL;
 
 Third, call the `get_film_summary()` function:
 
-```
+```sql
 SELECT * FROM get_film_summary (40);
 ```
 

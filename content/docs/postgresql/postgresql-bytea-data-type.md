@@ -28,7 +28,7 @@ If you work with PHP or Python and want to know how to store binary data in a `B
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `binary_data` to store binary strings:
 
-```
+```sql
 CREATE TABLE binary_data(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     data BYTEA
@@ -37,14 +37,14 @@ CREATE TABLE binary_data(
 
 Second, [insert](/docs/postgresql/postgresql-insert) a binary string into the `binary_data` table:
 
-```
+```sql
 INSERT INTO binary_data(data)
 VALUES ('\x012345');
 ```
 
 Third, retrieve data from the `BYTEA` column:
 
-```
+```sql
 SELECT * FROM binary_data;
 ```
 

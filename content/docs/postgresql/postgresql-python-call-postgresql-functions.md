@@ -35,7 +35,7 @@ cur.callproc('function_name', (value1,value2))
 
 Internally, the `callproc()` method translates the function call and input values into the following statement:
 
-```
+```sql
 SELECT * FROM function_name(value1,value2);
 ```
 
@@ -70,7 +70,7 @@ psql -U postgres -d suppliers
 
 Second, execute the following command to create a new function called `get_parts_by_vendors()` that returns a list of parts by a specified vendor:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION get_parts_by_vendor(id INTEGER)
   RETURNS TABLE(part_id INTEGER, part_name VARCHAR) AS
 $$

@@ -17,7 +17,7 @@ psql -U ed -d elearning
 
 Second, [create a new table](/docs/postgresql/postgresql-create-table) called `invoices`:
 
-```
+```sql
 CREATE TABLE invoices (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     student_id INT NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE invoices (
 
 Third, [insert five rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `courses` table:
 
-```
+```sql
 INSERT INTO courses ( name, duration)
 VALUES
    ('Introduction to PostgreSQL', '10 hours'),
@@ -153,7 +153,7 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, retrieve data from the `enrollments` table:
 
-```
+```sql
 SELECT * FROM enrollments;
 ```
 
@@ -168,7 +168,7 @@ Output:
 
 Third, retrieve data from the `invoices` table:
 
-```
+```sql
 SELECT * FROM invoices;
 ```
 

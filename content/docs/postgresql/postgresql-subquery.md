@@ -14,7 +14,7 @@ A subquery can be useful for retrieving data that will be used by the main query
 
 The basic syntax of the subquery is as follows:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -32,7 +32,7 @@ WHERE
 
 In this syntax, the subquery is enclosed within parentheses and is executed first:
 
-```
+```sql
 SELECT
   columnB
 from
@@ -51,7 +51,7 @@ Let's take some examples of using subqueries.
 
 First, retrieve the country id of the `United States` from the `country` table:
 
-```
+```sql
 SELECT
   country_id
 from
@@ -71,7 +71,7 @@ It returns the following output:
 
 Second, retrieve cities from the `city` table where `country_id` is `103`:
 
-```
+```sql
 SELECT
   city
 FROM
@@ -100,7 +100,7 @@ Output:
 
 Instead of executing two queries, you can combine them into one, making the first query as a subquery and the second query as the main query as follows:
 
-```
+```sql
 SELECT
   city
 FROM
@@ -120,7 +120,7 @@ ORDER BY
 
 In this query, the following is the subquery:
 
-```
+```sql
 SELECT
   country_id
 FROM
@@ -137,7 +137,7 @@ A subquery can return zero or more rows. If the query returns more than one row,
 
 First, retrieve `film_id` of the film with the category `Action`:
 
-```
+```sql
 SELECT
   film_id
 FROM
@@ -162,7 +162,7 @@ Output:
 
 Second, use the query above as a subquery to retrieve the film title from the `film` table:
 
-```
+```sql
 SELECT
   film_id,
   title

@@ -14,7 +14,7 @@ The `UPPER()` function converts a string to uppercase based on the rules of the 
 
 Here's the syntax of the `UPPER()` function:
 
-```
+```sql
 UPPER(text)
 ```
 
@@ -34,7 +34,7 @@ Let's take some examples of using the `UPPER()` function.
 
 The following example uses the `UPPER()` function to convert the string `PostgreSQL` to uppercase:
 
-```
+```sql
 SELECT UPPER('PostgreSQL');
 ```
 
@@ -55,7 +55,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `UPPER()` function to convert the first names of customers to uppercase:
 
-```
+```sql
 SELECT
   UPPER(first_name)
 FROM
@@ -81,7 +81,7 @@ Output:
 
 The following example uses the `UPPER()` function in the `WHERE` clause to find customers by last names, comparing them with the input string in uppercase:
 
-```
+```sql
 SELECT
   first_name,
   last_name

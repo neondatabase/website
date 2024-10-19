@@ -46,7 +46,7 @@ Hash indexes can handle only simple equality comparison (=). It means that whene
 
 To create a hash index, you use the `CREATE INDEX` statement with the `HASH` index type in the `USING` clause as follows:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name USING HASH (indexed_column);
 ```

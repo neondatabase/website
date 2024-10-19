@@ -14,7 +14,7 @@ The `MAKE_DATE()` function allows you to construct a [date](/docs/postgresql/pos
 
 Here's the syntax of the `MAKE_DATE()` function:
 
-```
+```sql
 MAKE_DATE( year int, month int, day int ) → date
 ```
 
@@ -30,7 +30,7 @@ Let's explore some examples of using the `MAKE_DATE()` function.
 
 The following example uses the `MAKE_DATE()` function to generate the date `2024-03-25`:
 
-```
+```sql
 SELECT MAKE_DATE(2023,3, 25);
 ```
 
@@ -47,7 +47,7 @@ Output:
 
 The `MAKE_DATE()` function automatically handles the leap years for you. For example, you can create a date of `February 29th` in a leap year such as `2024` as follows:
 
-```
+```sql
 SELECT MAKE_DATE(2024, 2, 29);
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 The following example uses the `MAKE_DATE()` function to generate a list of date values from `Jan 1, 2024` to `Jan 7, 2024`:
 
-```
+```sql
 SELECT MAKE_DATE(2023, 1, day) dates
 FROM generate_series(1, 7) AS day;
 ```

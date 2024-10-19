@@ -31,7 +31,7 @@ Let's take some examples of using the `jsonb_build_array()` function.
 
 The following example uses the `jsonb_build_array()` function to create a JSON array from a list of values:
 
-```
+```sql
 SELECT jsonb_build_array(10, null, 'Hi', true) result;
 ```
 
@@ -52,7 +52,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `jsonb_build_array()` function to convert the title and length of each film into elements of a JSON array:
 
-```
+```sql
 SELECT
   jsonb_build_array(title, length)
 FROM

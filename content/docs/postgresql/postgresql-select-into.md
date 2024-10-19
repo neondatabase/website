@@ -17,7 +17,7 @@ The new table will have columns with the same names as the columns of the result
 
 Here's the basic syntax of the PostgreSQL `SELECT INTO` statement:
 
-```
+```sql
 SELECT
   select_list I
 INTO [ TEMPORARY | TEMP ] [ TABLE ] new_table_name
@@ -49,7 +49,7 @@ We will use the `film` table from the [sample database](/docs/postgresql/postgre
 
 The following statement uses the `SELECT INTO` statement to create a new table called `film_r` that contains films with the rating `R` and rental duration 5 days from the `film` table.
 
-```
+```sql
 SELECT
     film_id,
     title,
@@ -66,7 +66,7 @@ ORDER BY
 
 To verify the table creation, you can query data from the `film_r` table:
 
-```
+```sql
 SELECT * FROM film_r;
 ```
 
@@ -76,7 +76,7 @@ SELECT * FROM film_r;
 
 The following example uses the `SELECT INTO` statement to create a temporary table named `short_film` that contains films whose lengths are under 60 minutes.
 
-```
+```sql
 SELECT
     film_id,
     title,
@@ -92,7 +92,7 @@ ORDER BY
 
 The following shows the data from the `short_film` table:
 
-```
+```sql
 SELECT * FROM short_film
 ORDER BY length DESC;
 ```

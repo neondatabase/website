@@ -34,7 +34,7 @@ To create a `AFTER UPDATE` trigger, you use the following steps:
 
 First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the `AFTER UPDATE` trigger fires:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -50,7 +50,7 @@ $$
 
 Second, create a `AFTER UPDATE` trigger that executes the trigger function:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 AFTER UPDATE
 ON table_name
@@ -62,7 +62,7 @@ EXECUTE FUNCTION trigger_function();
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `salaries` to store the employee's salaries:
 
-```
+```sql
 CREATE TABLE salaries(
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE salaries(
 
 Second, create a table called `salary_changes` that stores the updates to the `salary` column of the `salaries` table:
 
-```
+```sql
 CREATE TABLE salary_changes (
     id SERIAL PRIMARY KEY,
     employee_id INT NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE salary_changes (
 
 Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION log_salary_change()
 RETURNS TRIGGER
 AS
@@ -100,7 +100,7 @@ $$ LANGUAGE plpgsql;
 
 Fourth, define an `AFTER UPDATE` trigger that calls the `log_salary_change()` function after an update occurs to the `salary` column of the `salaries` table:
 
-```
+```sql
 CREATE TRIGGER after_update_salary_trigger
 AFTER UPDATE OF salary ON salaries
 FOR EACH ROW
@@ -109,7 +109,7 @@ EXECUTE FUNCTION log_salary_change();
 
 Fifth, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `salaries` table:
 
-```
+```sql
 INSERT INTO salaries(name, salary)
 VALUES
    ('John Doe', 90000),
@@ -129,7 +129,7 @@ Output:
 
 Sixth, increase the salary of `John Doe` by 5%:
 
-```
+```sql
 UPDATE salaries
 SET salary = salary * 1.05
 WHERE id = 1;
@@ -137,7 +137,7 @@ WHERE id = 1;
 
 Seventh, retrieve the data from `salary_changes` table:
 
-```
+```sql
 SELECT * FROM salary_changes;
 ```
 

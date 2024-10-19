@@ -23,7 +23,7 @@ To create a `BEFORE DELETE` trigger, follow these steps:
 
 First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute before a `DELETE` operation:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -41,7 +41,7 @@ LANGUAGE plpgsql;
 
 Second, create a trigger and associate the trigger function with it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 BEFORE DELETE ON table_name
 FOR EACH ROW
@@ -54,7 +54,7 @@ We'll use a `BEFORE DELETE` trigger to prevent applications from deleting a row 
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `products` that stores the product data:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE products (
 
 Next, [insert some rows](/docs/postgresql/postgresql-insert) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, price, status)
 VALUES
   ('A', 10.99, true),
@@ -87,7 +87,7 @@ Output:
 
 Then, create a `BEFORE DELETE` trigger function that [raises an exception](/docs/postgresql/postgresql-plpgsql/postgresql-exception):
 
-```
+```sql
 CREATE OR REPLACE FUNCTION fn_before_delete_product()
 RETURNS TRIGGER
 AS
@@ -101,7 +101,7 @@ LANGUAGE plpgsql;
 
 After that, create a `BEFORE DELETE` trigger on the `products` table:
 
-```
+```sql
 CREATE TRIGGER before_delete_product_trigger
 BEFORE DELETE ON products
 FOR EACH ROW
@@ -110,14 +110,14 @@ EXECUTE FUNCTION fn_before_delete_product();
 
 Finally, delete a row from the `products` table:
 
-```
+```sql
 DELETE FROM products
 WHERE id = 1;
 ```
 
 Error:
 
-```
+```sql
 ERROR:  Deletion from the products table is not allowed.
 CONTEXT:  PL/pgSQL function fn_before_delete_product() line 3 at RAISE
 ```

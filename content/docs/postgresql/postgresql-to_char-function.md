@@ -14,7 +14,7 @@ The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/post
 
 The following illustrates the syntax of the PostgreSQL `TO_CHAR()` function:
 
-```
+```sql
 TO_CHAR(expression, format)
 ```
 
@@ -116,7 +116,7 @@ We will use the `payment` table in the [sample database](/docs/postgresql/postgr
 
 The following statement uses the `TO_CHAR()` function to format the payment date that consists of hours, minutes, and seconds:
 
-```
+```sql
 SELECT
     payment_date,
     TO_CHAR(
@@ -137,7 +137,7 @@ Here is the result:
 
 The following example converts the payment date into a different format:
 
-```
+```sql
 SELECT
     payment_id,
     payment_date,
@@ -159,7 +159,7 @@ The output is:
 
 The following statement converts a timestamp literal to a string:
 
-```
+```sql
 SELECT
     TO_CHAR(
         TIMESTAMP '2017-08-18 22:30:59',
@@ -169,7 +169,7 @@ SELECT
 
 The result is:
 
-```
+```text
 22:30:59
 ```
 
@@ -177,7 +177,7 @@ The result is:
 
 The following example adds US dollar to the paid amounts:
 
-```
+```sql
 SELECT
     payment_id,
     amount,
@@ -199,7 +199,7 @@ The following picture illustrates the output:
 
 The following example converts an integer to a string:
 
-```
+```sql
 SELECT
     TO_CHAR(
         2017,
@@ -217,7 +217,7 @@ Result
 
 The following example converts a numeric and timestamp to a string:
 
-```
+```sql
 SELECT
     first_name || ' ' || last_name
     || ' paid ' ||

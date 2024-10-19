@@ -23,7 +23,7 @@ In the previous tutorial, we created the `stocks` database in the PostgreSQL dat
 
 For the demonstration, we'll create two new tables in the `stocks` database: `stocks` and `stock_evaluations` with the following structures:
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS stocks (
     id SERIAL PRIMARY KEY,
     symbol CHARACTER VARYING(10) NOT NULL UNIQUE,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS stocks (
 );
 ```
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS stock_valuations (
     stock_id INTEGER NOT NULL,
     value_on DATE NOT NULL,

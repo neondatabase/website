@@ -14,7 +14,7 @@ The `CURRENT_TIMESTAMP` function returns the current date and time with the time
 
 Here's the basic syntax of the PostgreSQL `CURRENT_TIMESTAMP()` function:
 
-```
+```sql
 CURRENT_TIMESTAMP(precision)
 ```
 
@@ -34,7 +34,7 @@ Let's explore some examples of using the `CURRENT_TIMESTSAMP` function.
 
 The following example shows how to use the `CURRENT_TIMESTAMP()` function to get the current date and time:
 
-```
+```sql
 SELECT CURRENT_TIMESTAMP;
 ```
 
@@ -55,7 +55,7 @@ Like the `NOW()` function, the `CURRENT_TIMESTAMP()` function can be used as the
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `note`:
 
-```
+```sql
 CREATE TABLE note (
     id SERIAL PRIMARY KEY,
     message VARCHAR(255) NOT NULL,
@@ -67,7 +67,7 @@ The default value of the `created_at` column is provided by the result of the `C
 
 Second, [insert a new row](/docs/postgresql/postgresql-insert) into the `note` table:
 
-```
+```sql
 INSERT INTO note(message)
 VALUES('Testing current_timestamp function');
 ```
@@ -76,7 +76,7 @@ In this statement, we don't specify the value of the `created_at` column. Theref
 
 Third, verify the insert:
 
-```
+```sql
 SELECT * FROM note;
 ```
 

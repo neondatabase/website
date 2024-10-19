@@ -9,7 +9,7 @@ tableOfContents: true
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named `basket` that stores fruits:
 
-```
+```sql
 CREATE TABLE basket(
     id SERIAL PRIMARY KEY,
     fruit VARCHAR(50) NOT NULL
@@ -18,7 +18,7 @@ CREATE TABLE basket(
 
 Second, [insert](/docs/postgresql/postgresql-insert) some fruits into the `basket` table.
 
-```
+```sql
 INSERT INTO basket(fruit)
 VALUES
   ('apple'),
@@ -31,7 +31,7 @@ VALUES
 
 Third, [query data](/docs/postgresql/postgresql-select) from the `basket` table:
 
-```
+```sql
 SELECT
     id,
     fruit
@@ -61,7 +61,7 @@ If the table has few rows, you can easily see which ones are duplicates immediat
 
 The find the duplicate rows, you use the following statement:
 
-```
+```sql
 SELECT
     fruit,
     COUNT( fruit )
@@ -89,7 +89,7 @@ Output:
 
 The following statement uses the `DELETE USING` statement to remove duplicate rows:
 
-```
+```sql
 DELETE FROM
     basket a
         USING basket b
@@ -102,7 +102,7 @@ In this example, we joined the `basket` table to itself and checked if two diffe
 
 The following query retrieves data from the `basket` table to verify the duplication removal:
 
-```
+```sql
 SELECT
  id,
  fruit
@@ -125,7 +125,7 @@ The output indicates that the statement removes the duplicate rows with the lowe
 
 If you want to keep the duplicate rows with the lowest id, you need to flip the operator in the `WHERE` clause:
 
-```
+```sql
 DELETE  FROM
     basket a
         USING basket b
@@ -136,7 +136,7 @@ WHERE
 
 To check whether the statement works correctly, let's verify the data in the `basket` table:
 
-```
+```sql
 SELECT
     id,
     fruit
@@ -161,7 +161,7 @@ The output indicates that duplicate rows with the lowest ids are retained.
 
 The following statement uses a subquery to delete duplicate rows and keep the row with the lowest id.
 
-```
+```sql
 DELETE FROM basket
 WHERE id IN
     (SELECT id
@@ -177,7 +177,7 @@ In this example, the subquery returned the duplicate rows except for the first r
 
 If you want to keep the duplicate row with the highest ID, just change the order in the subquery:
 
-```
+```sql
 DELETE FROM basket
 WHERE id IN
     (SELECT id
@@ -191,7 +191,7 @@ WHERE id IN
 
 In case you want to delete duplicates based on values of multiple columns, here is the query template:
 
-```
+```sql
 DELETE FROM table_name
 WHERE id IN
     (SELECT id

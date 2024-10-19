@@ -54,7 +54,7 @@ public class Main {
 
 Output:
 
-```
+```sql
 Hello Joe
 ```
 
@@ -163,7 +163,7 @@ public class Main {
 
 Output:
 
-```
+```sql
 Product{id=5, name='Bluetooth Headphones', price=199.0}
 Product{id=6, name='Phone Stand', price=24.99}
 ```

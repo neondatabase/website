@@ -12,7 +12,7 @@ tableOfContents: true
 
 The `RANDOM()` function allows you to generate random values. Here's the basic syntax of the `RANDOM()` function:
 
-```
+```sql
 RANDOM()
 ```
 
@@ -34,7 +34,7 @@ Let's take some examples of using the PostgreSQL `RANDOM` function.
 
 The following query uses the `RANDOM()` function to generate a random value between 0 and 1:
 
-```
+```sql
 SELECT RANDOM() AS random;
 ```
 
@@ -51,7 +51,7 @@ Output:
 
 To generate a random integer, you need to use the `RANDOM()` function with the `FLOOR()` function. For example, the following generates a random integer between 1 and 100:
 
-```
+```sql
 SELECT floor(random() * 100) + 1 AS random_integer;
 ```
 
@@ -70,7 +70,7 @@ Sometimes, you may need to retrieve random records from a table. To do that, you
 
 For example, the following query uses the `RANDOM()` function to retrieve a random film from the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
-```
+```sql
 SELECT title
 FROM film
 ORDER BY RANDOM()
@@ -92,7 +92,7 @@ You can use the `RANDOM()` function to shuffle the rows in a result set of a que
 
 For example, the following query uses the `RANDOM()` function to shuffle the rows from the film table:
 
-```
+```sql
 SELECT title FROM film ORDER BY RANDOM();
 ```
 
@@ -117,7 +117,7 @@ But if you need to generate the same random number, you can reissue the `SETSEED
 
 For example, the following query always returns the same random number:
 
-```
+```sql
 SELECT SETSEED(0.5), RANDOM();
 ```
 

@@ -11,7 +11,7 @@ In PostgreSQL, a database object always has an owner which is the role that crea
 
 To change the owner of a database to another, you can use the `ALTER` `DATABASE` statement:
 
-```
+```sql
 ALTER DATABASE dbname
 OWNER TO new_owner;
 ```
@@ -31,14 +31,14 @@ psql -U postgres
 
 Second, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) with the `CREATEDB` privilege:
 
-```
+```sql
 CREATE ROLE alex
 WITH CREATEDB LOGIN PASSWORD 'Abcd1234';
 ```
 
 Third, create another role called `steve`:
 
-```
+```sql
 CREATE ROLE steve;
 ```
 
@@ -50,7 +50,7 @@ psql -U alex
 
 Fifth, create a new database called `scm`:
 
-```
+```sql
 CREATE DATABASE scm;
 ```
 
@@ -79,7 +79,7 @@ The output shows that the owner of `scm` database is `alex`.
 
 Eight, change the owner of the `scm` database from `alex` to `steve`:
 
-```
+```sql
 ALTER DATABASE scm
 OWNER TO steve;
 ```

@@ -18,7 +18,7 @@ The `FORMAT()` function allows you to format strings based on a template.
 
 Here's the basic syntax of the `FORMAT()` function:
 
-```
+```sql
 FORMAT(format_string, value1, value2, ...)
 ```
 
@@ -94,7 +94,7 @@ Let's explore some examples of using the `FORMAT()` function.
 
 The following statement uses the `FORMAT()` function to format a string:
 
-```
+```sql
 SELECT FORMAT('Hello, %s','PostgreSQL');
 ```
 
@@ -114,7 +114,7 @@ We'll use the following `customer` table in the [sample database](/docs/postgres
 
 The following statement uses the `FORMAT()` function to construct customers' full names from first names and last names:
 
-```
+```sql
 SELECT
     FORMAT('%s, %s',last_name, first_name) full_name
 FROM
@@ -144,7 +144,7 @@ In this example, we used two format specifiers `%s %s` which are then replaced b
 
 The following statement uses the FORMAT() function with the `flags` and `with` components in the format specifier:
 
-```
+```sql
 SELECT FORMAT('|%10s|', 'one');
 ```
 
@@ -159,7 +159,7 @@ The output string is left-padded with spaces and right-aligned.
 
 To make it left-aligned, you use - as the flag:
 
-```
+```sql
 SELECT FORMAT('|%-10s|', 'one');
 ```
 
@@ -176,7 +176,7 @@ The output is:
 
 This example uses the FORMAT() function with the `position` component of the format specifier:
 
-```
+```sql
 SELECT
     FORMAT('%1$s apple, %2$s orange, %1$s banana', 'small', 'big');
 ```

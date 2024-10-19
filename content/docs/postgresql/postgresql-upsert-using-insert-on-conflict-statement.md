@@ -17,7 +17,7 @@ If you use PostgreSQL 15 or later, you can use the [MERGE](/docs/postgresql/post
 
 Here's the basic syntax of the `INSERT...ON CONFLICT` statement:
 
-```
+```sql
 INSERT INTO table_name (column1, column2, ...)
 VALUES (value1, value2, ...)
 ON CONFLICT (conflict_column)
@@ -46,7 +46,7 @@ Third, the `SET` clause defines the columns and values to update. You can use ne
 
 The following statements create the `inventory` table and [insert data into it](/docs/postgresql/postgresql-insert):
 
-```
+```sql
 CREATE TABLE inventory(
    id INT PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -89,7 +89,7 @@ In this case, the upsert operation can be handy to handle the following situatio
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-```
+```sql
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (1, 'A', 16.99, 120)
 ON CONFLICT(id)
@@ -100,7 +100,7 @@ DO UPDATE SET
 
 Output:
 
-```
+```sql
 INSERT 0 1
 ```
 
@@ -112,7 +112,7 @@ The `DO UPDATE` changes the price and quantity of the product to the new values 
 
 The following statement verifies the update:
 
-```
+```sql
 SELECT * FROM inventory
 WHERE id = 1;
 ```
@@ -130,7 +130,7 @@ Output:
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-```
+```sql
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (4, 'D', 29.99, 20)
 ON CONFLICT(id)
@@ -141,7 +141,7 @@ DO UPDATE SET
 
 Output:
 
-```
+```sql
 INSERT 0 1
 ```
 
@@ -149,7 +149,7 @@ In this case, the statement [inserts a new row](/docs/postgresql/postgresql-pyth
 
 The following statement verifies the insert:
 
-```
+```sql
 SELECT * FROM inventory
 ORDER BY id;
 ```

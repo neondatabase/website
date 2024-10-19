@@ -88,13 +88,13 @@ By adding the bin directory of the PostgreSQL to the `PATH` environment variable
 
 First, find the path of the `bin` directory of the PostgreSQL installation directory. Typically, it is set to the following:
 
-```
+```sql
 C:\Program Files\PostgreSQL\<version>\bin
 ```
 
 The `<version>` is PostgreSQL's specific version. For example, if you install PostgreSQL 16, the path to the `bin` directory will look like this:
 
-```
+```sql
 C:\Program Files\PostgreSQL\16\bin
 ```
 

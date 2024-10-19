@@ -32,7 +32,7 @@ Let's take some examples of using the `jsonb_strip_nulls()` function.
 
 The following example uses the `jsonb_strip_nulls()` function to remove object fields with null values:
 
-```
+```sql
 SELECT
   jsonb_strip_nulls(
     '{"first_name": "John", "middle_name":null, "last_name": "Doe", "scores": [null, 4, 5]}'
@@ -54,7 +54,7 @@ In this example, the object field `middle_name` has a null value therefore the `
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE products (
 
 Second, [insert data](/docs/postgresql/postgresql-insert) into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, attributes)
 VALUES
   (
@@ -97,7 +97,7 @@ Output:
 
 Third, use the `jsonb_strip_nulls()` function to remove all fields with null values recursively from the specs object and its nested object:
 
-```
+```sql
 SELECT jsonb_strip_nulls(attributes) AS cleaned_attributes
 FROM products;
 ```

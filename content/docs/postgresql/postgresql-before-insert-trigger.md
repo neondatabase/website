@@ -15,7 +15,7 @@ A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a tabl
 
 First, define a trigger function that will execute before the `INSERT` event occurs:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -33,7 +33,7 @@ At the end of the function, you need to place the `RETURN NEW` statement
 
 Second, create a `BEFORE INSERT` trigger and associate a trigger function with it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 BEFORE INSERT
 ON table_name
@@ -45,7 +45,7 @@ EXECUTE FUNCTION trigger_function();
 
 First, create a table called `inventory` to store inventory data:
 
-```
+```sql
 CREATE TABLE inventory(
     product_id INT PRIMARY KEY,
     quantity INT NOT NULL DEFAULT 0
@@ -54,7 +54,7 @@ CREATE TABLE inventory(
 
 Second, create a table called `inventory_stat` that stores the total quantity of all products:
 
-```
+```sql
 CREATE TABLE inventory_stat(
     total_qty INT
 );
@@ -62,7 +62,7 @@ CREATE TABLE inventory_stat(
 
 Third, define a function that increases the total quantity in the `inventory_stat` before a row is inserted into the `inventory` table:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION update_total_qty()
 RETURNS TRIGGER
 LANGUAGE PLPGSQL
@@ -90,7 +90,7 @@ If the inventory_stat table has no rows, the function inserts a new row with the
 
 Fourth, define a `BEFORE INSERT` trigger associated with the `inventory` table:
 
-```
+```sql
 CREATE TRIGGER inventory_before_insert
 BEFORE INSERT
 ON inventory
@@ -100,7 +100,7 @@ EXECUTE FUNCTION update_total_qty();
 
 Fifth, insert a row into the inventory table:
 
-```
+```sql
 INSERT INTO inventory(product_id, quantity)
 VALUES(1, 100)
 RETURNING *;
@@ -117,7 +117,7 @@ Output:
 
 Sixth, retrieve data from the `inventory_stat` table:
 
-```
+```sql
 SELECT * FROM inventory_stat;
 ```
 
@@ -132,7 +132,7 @@ Output:
 
 Seventh, insert another row into the `inventory` table:
 
-```
+```sql
 INSERT INTO inventory(product_id, quantity)
 VALUES(2, 200)
 RETURNING *;

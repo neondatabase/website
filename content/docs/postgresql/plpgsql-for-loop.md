@@ -46,7 +46,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  Counter: 1
 NOTICE:  Counter: 2
 NOTICE:  Counter: 3
@@ -67,7 +67,7 @@ end; $$
 
 Output:
 
-```
+```sql
 NOTICE:  Counter: 5
 NOTICE:  Counter: 4
 NOTICE:  Counter: 3
@@ -88,7 +88,7 @@ end; $$
 
 Output:
 
-```
+```sql
 NOTICE:  Counter 1
 NOTICE:  Counter 3
 NOTICE:  Counter 5
@@ -124,7 +124,7 @@ end;
 $$
 ```
 
-```
+```sql
 NOTICE:  Chicago North(185 mins)
 NOTICE:  Control Anthem(185 mins)
 NOTICE:  Darn Forrester(185 mins)
@@ -198,7 +198,7 @@ $$
 
 Output:
 
-```
+```sql
 NOTICE:  2006 - Academy Dinosaur
 NOTICE:  2006 - Ace Goldfinger
 NOTICE:  2006 - Adaptation Holes
@@ -213,7 +213,7 @@ NOTICE:  2006 - Aladdin Calendar
 
 If you change the `sort_type` to 2, you'll get the following output:
 
-```
+```sql
 NOTICE:  2006 - Grosse Wonderful
 NOTICE:  2006 - Airport Pollock
 NOTICE:  2006 - Bright Encounters

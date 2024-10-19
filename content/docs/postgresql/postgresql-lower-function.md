@@ -14,7 +14,7 @@ The `LOWER()` function converts a string to lowercase based on the rules of the 
 
 Here's the syntax of the `LOWER()` function:
 
-```
+```sql
 LOWER(text)
 ```
 
@@ -32,7 +32,7 @@ Let's explore some examples of using the `LOWER()` function.
 
 The following example uses the `LOWER()` function to convert the string PostgreSQL to lowercase:
 
-```
+```sql
 SELECT LOWER('PostgreSQL');
 ```
 
@@ -53,7 +53,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `LOWER()` function to convert the first names of customers to lowercase:
 
-```
+```sql
 SELECT
   LOWER(first_name)
 FROM
@@ -79,7 +79,7 @@ Output:
 
 The following example uses the `LOWER()` function in the `WHERE` clause to find customers by last names, comparing them with the input string in lowercase:
 
-```
+```sql
 SELECT
   first_name,
   last_name

@@ -65,7 +65,7 @@ $$;
 
 Output:
 
-```
+```sql
 CREATE FUNCTION
 ```
 
@@ -101,7 +101,7 @@ Third, enter the above code in the query tool and click the **Execute** button t
 
 If everything is fine, you will see the following message:
 
-```
+```sql
 CREATE FUNCTION
 
 Query returned successfully in 44 msec.
@@ -127,7 +127,7 @@ Second, enter the above code in the psql to create the function. Note that you c
 
 You will see the following message if the function is created successfully:
 
-```
+```sql
 CREATE FUNCTION
 ```
 
@@ -215,7 +215,7 @@ select get_film_count(len_from => 40, 90);
 
 Error:
 
-```
+```sql
 ERROR:  positional argument cannot follow named argument
 LINE 1: select get_film_count(len_from => 40, 90);
 ```

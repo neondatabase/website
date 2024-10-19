@@ -17,14 +17,14 @@ The basic steps for implementing row-level security are as follows:
 
 First, enable row-level security on a table using the `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ENABLE ROW LEVEL SECURITY;
 ```
 
 Second, create a new row-level security policy for a table using the `CREATE POLICY` statement:
 
-```
+```sql
 CREATE POLICY name ON table_name
 USING (condition);
 ```
@@ -35,7 +35,7 @@ Note that superusers and roles with the `BYPASSRLS` attribute can bypass the row
 
 Additionally, table owners also bypass row-level security. To enforce the row-level security to the table owners, you can modify the table using the `FORCE ROW LEVEL SECURITY` option:
 
-```
+```sql
 ALTER TABLE table_name
 FORCE ROW LEVEL SECURITY;
 ```
@@ -68,7 +68,7 @@ create table departments(
 
 4. [Insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `departments` table:
 
-```
+```sql
 INSERT INTO departments(name, manager)
 VALUES('Sales', 'alice'),
       ('Marketing', 'bob'),
@@ -77,13 +77,13 @@ VALUES('Sales', 'alice'),
 
 5. [Create a group role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `managers`:
 
-```
+```sql
 CREATE ROLE managers;
 ```
 
 6. [Grant](/docs/postgresql/postgresql-administration/postgresql-grant) the `SELECT` privileges of all tables in the `public` schema to the group role `managers`:
 
-```
+```sql
 GRANT SELECT ON ALL TABLES
 IN SCHEMA public
 TO managers;
@@ -91,7 +91,7 @@ TO managers;
 
 7. Create three new roles `alice`, `bob`, `peter` and assign them as members of the `managers` group role:
 
-```
+```sql
 CREATE ROLE alice WITH LOGIN PASSWORD 'SecurePass1'
 IN ROLE managers;
 CREATE ROLE bob WITH LOGIN PASSWORD 'SecurePass2'
@@ -104,14 +104,14 @@ The roles `alice`, `bob`, and `jack` will implicitly inherit privileges from the
 
 8. Enable row-level security on the `departments` table:
 
-```
+```sql
 ALTER TABLE departments
 ENABLE ROW LEVEL SECURITY;
 ```
 
 9. Create a policy that the current user can access the rows whose value in the `manager` column of the `departments` table matches the current role name:
 
-```
+```sql
 CREATE POLICY department_managers
 ON departments
 TO managers
@@ -126,7 +126,7 @@ psql -U alice -d hr
 
 11. Retrieve data from the `departments` table:
 
-```
+```sql
 SELECT * FROM departments;
 ```
 
@@ -149,7 +149,7 @@ psql -U bob -d hr
 
 13. Select data from the `departments` table:
 
-```
+```sql
 SELECT * FROM departments;
 ```
 

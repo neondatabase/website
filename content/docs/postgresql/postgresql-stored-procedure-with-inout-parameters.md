@@ -106,7 +106,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  Total film: 1000
 ```
 

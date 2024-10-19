@@ -31,7 +31,7 @@ Let's take some examples of using the `jsonb_typeof()` function.
 
 The following example uses the `jsonb_typeof()` function to return the type of a JSON object:
 
-```
+```sql
 SELECT jsonb_typeof('{}');
 ```
 
@@ -61,7 +61,7 @@ Output:
 
 The following example uses the `jsonb_typeof()` function to return the type of a number:
 
-```
+```sql
 SELECT jsonb_typeof('1'::jsonb);
 ```
 
@@ -76,7 +76,7 @@ Output:
 
 The following example uses the `jsonb_typeof()` function to return the type of null:
 
-```
+```sql
 SELECT jsonb_typeof('null'::jsonb);
 ```
 
@@ -91,7 +91,7 @@ Output:
 
 The following example uses the `jsonb_typeof()` function to return the type of string:
 
-```
+```sql
 SELECT
   jsonb_typeof(
     jsonb_path_query('{"name": "Alice"}', '$.name')

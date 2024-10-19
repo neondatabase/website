@@ -13,7 +13,7 @@ To define a composite type, use the `CREATE TYPE` statement followed by the type
 
 Here's the basic syntax for defining a composite type:
 
-```
+```sql
 CREATE TYPE type_name AS (
     field1 data_type1,
     field2 data_type2,
@@ -28,7 +28,7 @@ In this syntax:
 
 For example, the following statement defines the address type that stores address information including street, city, state, zip code, and country:
 
-```
+```sql
 CREATE TYPE address_type AS(
    street text,
    city text,
@@ -42,7 +42,7 @@ After defining a composite type, you can use it as a data type of a table column
 
 For example, the following statement [creates a table](/docs/postgresql/postgresql-create-table) called `contacts` whose type of `address` column is the `address_type`:
 
-```
+```sql
 CREATE TABLE contacts(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -56,7 +56,7 @@ Please note that when creating a table, PostgreSQL implicitly creates a correspo
 
 To construct a composite value, you use the `ROW` expression syntax:
 
-```
+```sql
 ROW(value1, value2, ...)
 ```
 
@@ -80,7 +80,7 @@ Alternatively, you can omit it in the expression:
 
 For example, the following statement inserts a new row into the `contacts` table:
 
-```
+```sql
 INSERT INTO contacts (name, address)
 VALUES (
     'John Smith',
@@ -90,13 +90,13 @@ VALUES (
 
 In this example, we use the following composite value to insert into the `address` column:
 
-```
+```sql
 ROW('123 St', 'Houston', 'TX', 77001, 'USA')
 ```
 
 The following statement inserts a value into individual fields of the `address` column:
 
-```
+```sql
 INSERT INTO contacts (
     name,
     address.street,
@@ -114,7 +114,7 @@ In this statement, we use the column name, followed by a dot, and field name to 
 
 The following statement retrieves the rows from the `contacts` table:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -136,7 +136,7 @@ To query individual fields of a composite type, you use the following syntax:
 
 For example, the following statement retrieves the id, name, city, state, and zip code of contacts:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -159,7 +159,7 @@ Output:
 
 If you retrieve all fields from a composite value, you can use the asterisk (`*`) shorthand:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -182,7 +182,7 @@ Output:
 
 The following example [updates](/docs/postgresql/postgresql-update) the country of the contact id 2 to `USA`:
 
-```
+```sql
 UPDATE contacts
 SET
   address.country= 'USA'

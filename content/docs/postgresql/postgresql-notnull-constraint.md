@@ -31,7 +31,7 @@ The `IS NOT NULL` operator negates the result of the `IS NULL` operator.
 
 To control whether a column can accept NULL, you use the `NOT NULL` constraint:
 
-```
+```sql
 CREATE TABLE table_name(
    ...
    column_name data_type NOT NULL,
@@ -45,7 +45,7 @@ If a column has a `NOT NULL` constraint, any attempt to [insert](/docs/postgresq
 
 The following `CREATE TABLE` statement creates a new table name `invoices` with the not-null constraints.
 
-```
+```sql
 CREATE TABLE invoices(
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
@@ -64,14 +64,14 @@ If you use `NULL` instead of `NOT NULL`, the column will accept both `NULL` and 
 
 To add the `NOT NULL` constraint to a column of an existing table, you use the following form of the `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name SET NOT NULL;
 ```
 
 To add multiple `NOT NULL` constraints to multiple columns, you use the following syntax:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name_1 SET NOT NULL,
 ALTER COLUMN column_name_2 SET NOT NULL,
@@ -82,7 +82,7 @@ Let's take a look at the following example.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called production orders ( `production_orders`):
 
-```
+```sql
 CREATE TABLE production_orders (
  id SERIAL PRIMARY KEY,
  description VARCHAR (40) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE production_orders (
 
 Next, insert a new row into the `production_orders` table:
 
-```
+```sql
 INSERT INTO production_orders (description)
 VALUES('Make for Infosys inc.');
 ```
@@ -104,14 +104,14 @@ Then, to make sure that the `qty` field is not null, you can add the not-null co
 
 To add the `NOT NULL` constraint to a column that already contains NULL, you need to update `NULL` to non-NULL first, like this:
 
-```
+```sql
 UPDATE production_orders
 SET qty = 1;
 ```
 
 The values in the `qty` column is updated to one. Now, you can add the `NOT NULL` constraint to the `qty` column:
 
-```
+```sql
 ALTER TABLE production_orders
 ALTER COLUMN qty
 SET NOT NULL;
@@ -119,7 +119,7 @@ SET NOT NULL;
 
 After that, you can update the not-null constraints for `material_id`, `start_date`, and `finish_date` columns:
 
-```
+```sql
 UPDATE production_orders
 SET material_id = 'ABC',
     start_date = '2015-09-01',
@@ -128,7 +128,7 @@ SET material_id = 'ABC',
 
 Add not-null constraints to multiple columns:
 
-```
+```sql
 ALTER TABLE production_orders
 ALTER COLUMN material_id SET NOT NULL,
 ALTER COLUMN start_date SET NOT NULL,
@@ -137,7 +137,7 @@ ALTER COLUMN finish_date SET NOT NULL;
 
 Finally, attempt to update values in the `qty` column to NULL:
 
-```
+```sql
 UPDATE production_orders
 SET qty = NULL;
 ```
@@ -153,7 +153,7 @@ DETAIL:  Failing row contains (1, make for infosys inc., ABC, null, 2015-09-01, 
 
 Besides the `NOT NULL` constraint, you can use a [CHECK constraint](/docs/postgresql/postgresql-check-constraint) to force a column to accept not NULL values. The `NOT NULL` constraint is equivalent to the following `CHECK` constraint:
 
-```
+```sql
 CHECK(column IS NOT NULL)
 ```
 
@@ -161,7 +161,7 @@ This is useful because sometimes you may want either column `a` or `b` is not nu
 
 For example, you may want either `username` or `email` column of the user tables is not null or empty. In this case, you can use the `CHECK` constraint as follows:
 
-```
+```sql
 CREATE TABLE users (
   id serial PRIMARY KEY,
   username VARCHAR (50),
@@ -184,7 +184,7 @@ CREATE TABLE users (
 
 The following statement works.
 
-```
+```sql
 INSERT INTO users (username, email)
 VALUES
  ('user1', NULL),
@@ -195,7 +195,7 @@ VALUES
 
 However, the following statement will not work because it violates the `CHECK` constraint:
 
-```
+```sql
 INSERT INTO users (username, email)
 VALUES
  (NULL, NULL),

@@ -131,7 +131,7 @@ foreach (var statement in statements)
 
 Finally, use the [try-catch](https://www.csharptutorial.net/csharp-tutorial/csharp-try-catch/) statement to catch any exceptions that may occur and display the error message:
 
-```
+```sql
 Console.WriteLine($"Error: {ex.Message}");
 ```
 

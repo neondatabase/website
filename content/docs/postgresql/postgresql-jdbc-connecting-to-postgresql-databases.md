@@ -18,7 +18,7 @@ psql -U postgres
 
 Second, create a new database called `sales`:
 
-```
+```sql
 CREATE DATABASE sales;
 ```
 
@@ -197,7 +197,7 @@ The try-with-resources statement ensures that the `Connection` is automatically 
 
 If you run the program and see the following output, meaning that the program is successfully connected to the PostgreSQL server:
 
-```
+```sql
 Connected to the PostgreSQL database.
 ```
 

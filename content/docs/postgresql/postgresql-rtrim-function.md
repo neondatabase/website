@@ -14,7 +14,7 @@ The `RTRIM()` function allows you to remove specified characters from the end of
 
 Here's the syntax of the `RTRIM()` function:
 
-```
+```sql
 RTRIM(string, character)
 ```
 
@@ -37,7 +37,7 @@ Let's explore some examples of using the `RTRIM()` function.
 
 The following example uses the `RTRIM()` function to remove the character `!` from the end of the string `postgres!!!`:
 
-```
+```sql
 SELECT RTRIM('postgres!!!', '!');
 ```
 
@@ -54,7 +54,7 @@ Output:
 
 The following example uses the `RTRIM()` function to remove all the spaces from the end of the string `'PostgreSQL '`:
 
-```
+```sql
 SELECT RTRIM('PostgreSQL   ');
 ```
 
@@ -73,7 +73,7 @@ Because the default of the second argument of the `RTRIM()` function is space, y
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `tweets` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
-```
+```sql
 CREATE TABLE tweets(
    id SERIAL PRIMARY KEY,
    tweet VARCHAR(120) NOT NULL
@@ -101,14 +101,14 @@ INSERT 0 2
 
 Second, [update](/docs/postgresql/postgresql-update) the tweets by removing the trailing spaces using the `RTRIM()` function:
 
-```
+```sql
 UPDATE tweets
 SET tweet = RTRIM(tweet);
 ```
 
 Output:
 
-```
+```sql
 UPDATE 2
 ```
 
@@ -116,7 +116,7 @@ The output indicates that two rows were updated.
 
 Third, verify the updates:
 
-```
+```sql
 SELECT * FROM tweets;
 ```
 

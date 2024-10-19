@@ -16,7 +16,7 @@ The PostgreSQL `ARRAY_AGG()` function is an [aggregate function](/docs/postgresq
 
 The following shows the syntax of the `ARRAY_AGG()` function:
 
-```
+```sql
 ARRAY_AGG(expression [ORDER BY [sort_expression {ASC | DESC}], [...])
 ```
 
@@ -34,7 +34,7 @@ We will use the `film`, `film_actor`, and `actor` tables from the [sample databa
 
 The following example uses the `ARRAY_AGG()` function to return the list of film titles and a list of actors for each film:
 
-```
+```sql
 SELECT
     title,
     ARRAY_AGG (first_name || ' ' || last_name) actors
@@ -58,7 +58,7 @@ As you can see, the actors in each film are arbitrarily ordered. To sort the act
 
 This example uses the `ARRAY_AGG()` function to return a list of films and a list of actors for each film sorted by the actor's first name:
 
-```
+```sql
 SELECT
     title,
     ARRAY_AGG (
@@ -82,7 +82,7 @@ The following shows the partial output:
 
 You can sort the actor list for each film by the actor's first name and last name as shown in the following query:
 
-```
+```sql
 SELECT
     title,
     ARRAY_AGG (

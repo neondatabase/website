@@ -83,7 +83,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  1
 NOTICE:  2
 NOTICE:  3
@@ -174,7 +174,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  1
 NOTICE:  2
 NOTICE:  3
@@ -225,7 +225,7 @@ $$;
 
 Output:
 
-```
+```sql
 NOTICE:  (1, 1)
 NOTICE:  (1, 2)
 NOTICE:  (1, 3)

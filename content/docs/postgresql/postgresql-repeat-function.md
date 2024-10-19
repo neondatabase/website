@@ -14,7 +14,7 @@ In PostgreSQL, the `REPEAT()` function repeats a string a specified number of ti
 
 Here's the basic syntax of the `REPEAT()` function:
 
-```
+```sql
 REPEAT(string, number)
 ```
 
@@ -37,7 +37,7 @@ Let's explore some examples of using the `REPEAT()` function.
 
 The following example uses the `REPEAT()` function to repeat the letter "A" there times:
 
-```
+```sql
 SELECT REPEAT('A',3);
 ```
 
@@ -60,7 +60,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `REPEAT()` function to create a bar chart illustrating the counts of films based on their ratings:
 
-```
+```sql
 SELECT
   rating,
   count(film_id),

@@ -30,7 +30,7 @@ To create a `BEFORE UPDATE` trigger, you follow these steps:
 
 First, [define a trigger function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when the `BEFORE UPDATE` trigger fires:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -46,7 +46,7 @@ $$
 
 Second, create a `BEFORE UPDATE` trigger that executes the defined function:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 BEFORE UPDATE
 ON table_name
@@ -58,7 +58,7 @@ EXECUTE FUNCTION trigger_function();
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees` to store the employee data:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE employees (
 
 Next, define a trigger function that [raises an exception](/docs/postgresql/postgresql-plpgsql/postgresql-exception) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
 
-```
+```sql
 CREATE OR REPLACE FUNCTION fn_before_update_salary()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -82,7 +82,7 @@ $$ LANGUAGE plpgsql;
 
 Then, create a `BEFORE UPDATE` trigger that executes the `fn_before_update_salary()` before the update:
 
-```
+```sql
 CREATE TRIGGER before_update_salary_trigger
 BEFORE UPDATE OF salary ON employees
 FOR EACH ROW
@@ -93,7 +93,7 @@ This `BEFORE UPDATE` trigger ensures that the salary of the employee cannot be d
 
 After that, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(name, salary)
 VALUES
    ('John Doe', 70000),
@@ -113,7 +113,7 @@ Output:
 
 Finally, attempt to decrease the salary of `John Doe`:
 
-```
+```sql
 UPDATE employees
 SET salary = salary * 0.9
 WHERE id = 1;
@@ -121,7 +121,7 @@ WHERE id = 1;
 
 The `BEFORE UPDATE` trigger raises the following exception:
 
-```
+```sql
 ERROR:  New salary cannot be less than current salary
 CONTEXT:  PL/pgSQL function fn_before_update_salary() line 4 at RAISE
 ```

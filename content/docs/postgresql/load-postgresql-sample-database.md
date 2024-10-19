@@ -35,7 +35,7 @@ psql -U postgres
 
 It'll prompt you to enter a password for the `postgres` user:
 
-```
+```sql
 Password for user postgres:
 ```
 
@@ -51,13 +51,13 @@ postgres=#
 
 Second, create a new database called `dvdrental` using `CREATE DATABASE` statement:
 
-```
+```sql
 CREATE DATABASE dvdrental;
 ```
 
 Output:
 
-```
+```sql
 CREATE DATABASE
 ```
 
@@ -111,7 +111,7 @@ In this command:
 
 It'll prompt you to enter the password for the `postgres` user. Enter the password for the `postgres` user and press the Enter (or Return key):
 
-```
+```sql
 Password:
 ```
 

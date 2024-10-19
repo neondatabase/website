@@ -16,7 +16,7 @@ The PostgreSQL `SUM()` is an [aggregate function](/docs/postgresql/postgresql-ag
 
 Here's the basic syntax of the `SUM()` function:
 
-```
+```sql
 SUM(DISTINCT expression)
 ```
 
@@ -38,7 +38,7 @@ Let's take some examples of using the `SUM()` function. We'll use the `payment` 
 
 The following example uses the `SUM()` function to calculate the sum of all payments in the `payment` table:
 
-```
+```sql
 SELECT
   SUM(amount)
 FROM
@@ -58,7 +58,7 @@ Output:
 
 The following statement uses the `SUM()` function to calculate the total payment of the customer id 2000.
 
-```
+```sql
 SELECT
   SUM (amount)
 FROM
@@ -86,7 +86,7 @@ The `COALESCE()` function returns the first non-null argument. In other words, i
 
 The following query illustrates how to use the `SUM()` function with the `COALESCE()` function:
 
-```
+```sql
 SELECT
   COALESCE(SUM(amount), 0 ) total
 FROM
@@ -110,7 +110,7 @@ To calculate the summary of every group, you use the `GROUP BY` clause to group 
 
 The following example uses the `SUM()` function with the `GROUP BY` clause to calculate the total amount paid by each customer:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -136,7 +136,7 @@ Output:
 
 The following query retrieves the top five customers who made the highest payments:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -169,7 +169,7 @@ To filter group sums based on a specific condition, you use the `SUM()` function
 
 The following example retrieves customers who have made payments exceeding 200:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -201,7 +201,7 @@ See the following `rental` table from the [sample database](/docs/postgresql/pos
 
 The following statement uses the `SUM()` function to calculate the total rental days:
 
-```
+```sql
 SELECT
   SUM(return_date - rental_date)
 FROM
@@ -225,7 +225,7 @@ How it works.
 
 The following example uses the `SUM()` function to calculate the total duration by customers:
 
-```
+```sql
 SELECT
   first_name || ' ' || last_name full_name,
   SUM(return_date - rental_date) rental_duration

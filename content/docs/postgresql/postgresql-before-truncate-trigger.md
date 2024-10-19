@@ -21,7 +21,7 @@ Here's the step for creating a `BEFORE TRUNCATE` trigger:
 
 First, [define a user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute before the `TRUNCATE` event:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -38,7 +38,7 @@ The function returns `NULL` indicating that the trigger doesn't return additiona
 
 Second, create a `BEFORE TRUNCATE` trigger and associate the function with it:
 
-```
+```sql
 CREATE TRIGGER trigger_name
 BEFORE TRUNCATE ON table_name
 FOR EACH STATEMENT
@@ -55,7 +55,7 @@ We'll create a `BEFORE TRUNCATE` trigger to prevent applications from truncating
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `companies` to store company data:
 
-```
+```sql
 CREATE TABLE companies(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL
@@ -64,7 +64,7 @@ CREATE TABLE companies(
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `companies` table:
 
-```
+```sql
 INSERT INTO companies(name)
 VALUES ('Apple'),
        ('Microsoft'),
@@ -85,7 +85,7 @@ Output:
 
 Third, define a function that will execute when a `TRUNCATE` event occurs:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION before_truncate_companies()
 RETURNS TRIGGER AS
 $$
@@ -99,7 +99,7 @@ LANGUAGE plpgsql;
 
 Fourth, create a trigger that fires before a `TRUNCATE` event occurs:
 
-```
+```sql
 CREATE TRIGGER before_truncate_companies_trigger
 BEFORE TRUNCATE ON companies
 FOR EACH STATEMENT
@@ -108,13 +108,13 @@ EXECUTE FUNCTION before_truncate_companies();
 
 Fifth, attempt to truncate the `companies` table:
 
-```
+```sql
 TRUNCATE TABLE companies;
 ```
 
 Output:
 
-```
+```sql
 NOTICE:  Truncating the companies table is not allowed
 TRUNCATE TABLE
 ```

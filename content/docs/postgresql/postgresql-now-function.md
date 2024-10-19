@@ -15,13 +15,13 @@ The `NOW()` function returns the current date and time with the time zone of the
 
 Here's the basic syntax of the `NOW()` function:
 
-```
+```sql
 NOW()
 ```
 
 The `NOW()` function doesn't require any argument. Its return type is the [timestamp with time zone](/docs/postgresql/postgresql-timestamp). For example:
 
-```
+```sql
 SELECT NOW();
 ```
 
@@ -38,7 +38,7 @@ Note that the `NOW()` function returns the current date and time based on the da
 
 For example, if you change the timezone to 'Africa/Cairo' and get the current date and time:
 
-```
+```sql
 SET TIMEZONE='Africa/Cairo';
 SELECT NOW();
 ```
@@ -56,7 +56,7 @@ The output indicates that the value returned by the `NOW()` function is adjusted
 
 Note that to get a complete list of time zones, you can query from the `pg_timezone_names`:
 
-```
+```sql
 SELECT * FROM pg_timezone_names;
 ```
 
@@ -73,7 +73,7 @@ Partial output:
 
 If you want to get the current date and time without a timezone, you can cast it explicitly as follows:
 
-```
+```sql
 SELECT NOW()::timestamp;
 ```
 
@@ -97,7 +97,7 @@ You can use the common date and time operators for the `NOW()` function. For exa
 
 To get this time tomorrow, you add 1 day to the current time:
 
-```
+```sql
 SELECT (NOW() + interval '1 day') AS this_time_tomorrow;
 ```
 
@@ -112,7 +112,7 @@ Output:
 
 To get 2 hours 30 minutes ago, you use the minus (-) operator as follows:
 
-```
+```sql
 SELECT now() - interval '2 hours 30 minutes' AS two_hour_30_min_go;
 ```
 
@@ -129,7 +129,7 @@ Output:
 
 Besides the `NOW()` function, you can use the `CURRENT_TIME` or `CURRENT_TIMESTAMP` to get the current date and time with the timezone:
 
-```
+```sql
 SELECT CURRENT_TIME, CURRENT_TIMESTAMP;
 ```
 
@@ -144,7 +144,7 @@ Output:
 
 To get the current date and time without a timezone, you use the `LOCALTIME` and `LOCALTIMESTAMP` functions.
 
-```
+```sql
 SELECT LOCALTIME, LOCALTIMESTAMP;
 ```
 
@@ -195,7 +195,7 @@ Note that the `pg_sleep()` function pauses the current session's process sleep f
 
 If you want to get the current date and time that does advance during the transaction, you can use the `TIMEOFDAY()` function. Consider the following example:
 
-```
+```sql
 SELECT
     TIMEOFDAY(),
     pg_sleep(5),
@@ -219,7 +219,7 @@ You can use the `NOW()` function as the default value for a column of a table. F
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) named posts with the `created_at` column that has a default value provided by the `NOW()` function:
 
-```
+```sql
 CREATE TABLE posts (
      id         SERIAL PRIMARY KEY,
      title      VARCHAR NOT NULL,
@@ -229,14 +229,14 @@ CREATE TABLE posts (
 
 Second, [insert a new row](/docs/postgresql/postgresql-insert) into the `posts` table:
 
-```
+```sql
 INSERT INTO posts (title)
 VALUES     ('PostgreSQL NOW function');
 ```
 
 Third, [query data](/docs/postgresql/postgresql-select) from the `posts` table:
 
-```
+```sql
 SELECT * FROM posts;
 ```
 

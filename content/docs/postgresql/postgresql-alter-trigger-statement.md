@@ -11,7 +11,7 @@ tableOfContents: true
 
 The `ALTER TRIGGER` statement allows you to rename a trigger. The following shows the syntax of the `ALTER TRIGGER` statement:
 
-```
+```sql
 ALTER TRIGGER trigger_name
 ON table_name
 RENAME TO new_trigger_name;
@@ -29,7 +29,7 @@ To execute the `ALTER TRIGGER` statement, you must be the owner of the table to 
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 DROP TABLE IF EXISTS employees;
 
 CREATE TABLE employees(
@@ -43,7 +43,7 @@ CREATE TABLE employees(
 
 Second, [create a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that raises an exception if the new salary is greater than the old one 100%:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION check_salary()
   RETURNS TRIGGER
   LANGUAGE PLPGSQL
@@ -61,7 +61,7 @@ $$
 
 Third, create a before-update trigger that executes the `check_salary()` function before updating the salary:
 
-```
+```sql
 CREATE TRIGGER before_update_salary
   BEFORE UPDATE
   ON employees
@@ -71,14 +71,14 @@ CREATE TRIGGER before_update_salary
 
 Fourth, [insert a new row](/docs/postgresql/postgresql-insert) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees(first_name, last_name, salary)
 VALUES('John','Doe',100000);
 ```
 
 Fifth, update the salary of the employee id 1:
 
-```
+```sql
 UPDATE employees
 SET salary = 200000
 WHERE employee_id = 1;
@@ -86,7 +86,7 @@ WHERE employee_id = 1;
 
 The trigger was fired and issued the following error:
 
-```
+```sql
 ERROR:  The salary increment cannot that high.
 CONTEXT:  PL/pgSQL function check_salary() line 4 at RAISE
 SQL state: P0001
@@ -96,7 +96,7 @@ It works as expected.
 
 Finally, use the `ALTER TRIGGER` statement to rename the `before_update_salary` trigger to `salary_before_update`:
 
-```
+```sql
 ALTER TRIGGER before_update_salary
 ON employees
 RENAME TO salary_before_update;
@@ -120,7 +120,7 @@ To do so, you can use the `DROP TRIGGER` and `CREATE TRIGGER` statements. You ca
 
 The following example illustrates how to change the `check_salary` function of the `salary_before_update` trigger to `validate_salary`:
 
-```
+```sql
 BEGIN;
 
 DROP TRIGGER IF EXISTS salary_before_update

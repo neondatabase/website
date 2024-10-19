@@ -71,7 +71,7 @@ psql -U postgres -d suppliers
 
 Third, create a new stored procedure called `add_new_part()`:
 
-```
+```sql
 CREATE OR REPLACE PROCEDURE add_new_part(
  new_part_name varchar,
  new_vendor_name varchar
@@ -145,7 +145,7 @@ python call_stored_procedure.py
 
 Execute the following statement to retrieve data from the `parts`, `vendors`, and `vendor_parts` tables to verify the result:
 
-```
+```sql
 SELECT * FROM parts;
 SELECT * FROM vendors;
 SELECT * FROM vendor_parts;

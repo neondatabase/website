@@ -13,7 +13,7 @@ The `SQRT()` function is a powerful [mathematical function](/docs/postgresql/pos
 
 Here's the basic syntax of the `SQRT()` function:
 
-```
+```sql
 SQRT(number)
 ```
 
@@ -29,7 +29,7 @@ Let's take some examples of using the `SQRT()` function.
 
 The following example uses the `SQRT()` function to return the square root of 25:
 
-```
+```sql
 SELECT SQRT(25) AS result;
 ```
 
@@ -81,7 +81,7 @@ Output:
 
 The following query uses the `SQRT()` function to calculate the distance of each point from the origin (0,0):
 
-```
+```sql
 SELECT SQRT(x * x + y * y) AS distance_from_origin
 FROM coordinates;
 ```

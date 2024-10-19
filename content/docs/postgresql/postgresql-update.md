@@ -14,7 +14,7 @@ The PostgreSQL `UPDATE` statement allows you to update data in one or more colum
 
 Here's the basic syntax of the `UPDATE` statement:
 
-```
+```sql
 UPDATE table_name
 SET column1 = value1,
     column2 = value2,
@@ -34,7 +34,7 @@ The `WHERE` clause is optional. If you omit the `WHERE` clause, the `UPDATE` sta
 
 When the `UPDATE` statement is executed successfully, it returns the following command tag:
 
-```
+```sql
 UPDATE count
 ```
 
@@ -44,7 +44,7 @@ The `count` is the number of rows updated including rows whose values did not ch
 
 The `UPDATE` statement has an optional `RETURNING` clause that returns the updated rows:
 
-```
+```sql
 UPDATE table_name
 SET column1 = value1,
     column2 = value2,
@@ -61,7 +61,7 @@ Let's take some examples of using the PostgreSQL `UPDATE` statement.
 
 The following statements [create a table](/docs/postgresql/postgresql-create-table) called `courses` and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) data into it:
 
-```
+```sql
 CREATE TABLE courses(
   course_id serial PRIMARY KEY,
   course_name VARCHAR(255) NOT NULL,
@@ -99,7 +99,7 @@ Output:
 
 The following statement uses the `UPDATE` statement to update the course with id 3 by changing the `published_date` to `'2020-08-01'`.
 
-```
+```sql
 UPDATE courses
 SET published_date = '2020-08-01'
 WHERE course_id = 3;
@@ -107,13 +107,13 @@ WHERE course_id = 3;
 
 The statement returns the following message indicating that one row has been updated:
 
-```
+```sql
 UPDATE 1
 ```
 
 The following statement retrieves the course with id 3 to verify the update:
 
-```
+```sql
 SELECT course_id, course_name, published_date
 FROM courses
 WHERE course_id = 3;
@@ -132,7 +132,7 @@ Output:
 
 The following statement uses the `UPDATE` statement update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
 
-```
+```sql
 UPDATE courses
 SET published_date = '2020-07-01'
 WHERE course_id = 2
@@ -152,7 +152,7 @@ Output:
 
 The following statement uses an `UPDATE` statement to increase the price of all the courses 5%:
 
-```
+```sql
 UPDATE courses
 SET price = price * 1.05;
 ```
@@ -161,19 +161,19 @@ Because we don't use a WHERE clause, the UPDATE statement updates all the rows i
 
 Output:
 
-```
+```sql
 UPDATE 5
 ```
 
 The following statement retrieves data from the `courses` table to verify the update:
 
-```
+```sql
 SELECT * FROM courses;
 ```
 
 Output:
 
-```
+```sql
 SELECT
   course_name,
   price

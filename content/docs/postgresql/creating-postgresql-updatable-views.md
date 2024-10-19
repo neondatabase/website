@@ -47,7 +47,7 @@ We'll take some examples of creating updatable views.
 
 The following statements create a table called `cities` and [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the table:
 
-```
+```sql
 CREATE TABLE cities (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(255),
@@ -85,7 +85,7 @@ SELECT * FROM cities;
 
 First, [create an updatable view](/docs/postgresql/postgresql-views/managing-postgresql-views) called `city_us` that includes cities in the US only:
 
-```
+```sql
 CREATE VIEW city_us
 AS
 SELECT
@@ -98,14 +98,14 @@ WHERE
 
 Second, insert a new row into the `cities` table via the `city_us` view:
 
-```
+```sql
 INSERT INTO city_us(name, population, country)
 VALUES ('San Jose', 983459, 'US');
 ```
 
 Third, retrieve data from `cities` table:
 
-```
+```sql
 SELECT * FROM cities
 WHERE name = 'San Jose';
 ```
@@ -121,7 +121,7 @@ Output:
 
 Fourth, update the data in the cities table via the city_us view:
 
-```
+```sql
 UPDATE city_us
 SET population = 1000000
 WHERE name = 'New York';
@@ -129,7 +129,7 @@ WHERE name = 'New York';
 
 Fifth, verify the update:
 
-```
+```sql
 SELECT * FROM cities
 WHERE name = 'New York';
 ```
@@ -145,14 +145,14 @@ Output:
 
 Sixth, delete a row from the `cities` table via the `city_us` view:
 
-```
+```sql
 DELETE FROM city_us
 WHERE id = 21;
 ```
 
 Finally, verify the delete:
 
-```
+```sql
 SELECT * FROM cities
 WHERE id = 21;
 ```

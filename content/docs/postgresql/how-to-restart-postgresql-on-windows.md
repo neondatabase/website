@@ -49,7 +49,7 @@ net stop postgresql-x64-16
 
 Output:
 
-```
+```sql
 The postgresql-x64-16 - PostgreSQL Server 16 service is stopping.
 The postgresql-x64-16 - PostgreSQL Server 16 service was stopped successfully.
 ```
@@ -68,7 +68,7 @@ net start postgresql-x64-16
 
 Output:
 
-```
+```sql
 The postgresql-x64-16 - PostgreSQL Server 16 service is starting.
 The postgresql-x64-16 - PostgreSQL Server 16 service was started successfully.
 ```

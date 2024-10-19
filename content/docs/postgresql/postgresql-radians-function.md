@@ -14,7 +14,7 @@ The `RADIANS()` function converts degrees to radians.
 
 Here's the basic syntax of the `RADIANS()` function:
 
-```
+```sql
 RADIANS(degrees_value)
 ```
 
@@ -30,7 +30,7 @@ Let's explore some examples of using the `RADIANS()` function.
 
 The following example uses the `RADIANS()` function to convert 180 degrees to its equivalent in radians, resulting in `PI` value:
 
-```
+```sql
 SELECT RADIANS(180);
 ```
 
@@ -49,7 +49,7 @@ We'll show you how to use the `RADIANS` with data in a table.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `angles` to store angle data in radians:
 
-```
+```sql
 CREATE TABLE angles (
     id SERIAL PRIMARY KEY,
     angle_degrees NUMERIC
@@ -58,7 +58,7 @@ CREATE TABLE angles (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `angles` table:
 
-```
+```sql
 INSERT INTO angles (angle_degrees)
 VALUES
     (45),
@@ -82,7 +82,7 @@ Output:
 
 Third, use the `RADIANS()` function to convert the values in the `angle_degrees` column to radians:
 
-```
+```sql
 SELECT
     id,
     angle_degrees,

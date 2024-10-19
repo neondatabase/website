@@ -15,7 +15,7 @@ PostgreSQL `LAG()` function allows you to access data of the previous row from t
 
 Here's the basic syntax of the `LAG()` function:
 
-```
+```sql
 LAG(expression [,offset [,default_value]])
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -53,7 +53,7 @@ The `ORDER BY` clause specifies the order of the rows in each partition to which
 
 We'll use the `sales` table from the `LEAD()` function tutorial for the demonstration:
 
-```
+```sql
 CREATE TABLE sales(
  year SMALLINT CHECK(year > 0),
  group_id INT NOT NULL,
@@ -97,7 +97,7 @@ Here is the data from the `sales` function:
 
 This example uses the `LAG()` function to return the sales amount of the current year and the previous year of the group id 1:
 
-```
+```sql
 SELECT
   year,
   amount,
@@ -133,7 +133,7 @@ Since the sales table has no data for the year before 2018, the `LAG()` function
 
 The following example uses the `LAG()` function to compare the sales of the current year with the sales of the previous year of each product group:
 
-```
+```sql
 SELECT
   year,
   amount,

@@ -13,7 +13,7 @@ An index in PostgreSQL works like an index in a book, providing a quick referenc
 
 Suppose you have a table called `contacts` with the following structure:
 
-```
+```sql
 CREATE TABLE contacts (
     id INT PRIMARY KEY,
     name VACHAR(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE contacts (
 
 And you issue the following query to find contacts by name:
 
-```
+```sql
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```
@@ -34,7 +34,7 @@ However, with an index on the `name` column, PostgreSQL can use a more efficient
 
 To create an index, you use the [CREATE INDEX](/docs/postgresql/postgresql-indexes/postgresql-create-index) statement:
 
-```
+```sql
 CREATE INDEX contacts_name
 ON contacts(name);
 ```
@@ -49,7 +49,7 @@ By default, PostgreSQL allows data selection from a table during index creation 
 
 When executing the following `SELECT` statement, PostgreSQL can utilize the `contacts_name` index to quickly find the relevant rows in the `contacts` table:
 
-```
+```sql
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```

@@ -14,7 +14,7 @@ PostgreSQL does not support the BLOB data type. However, you can use the [BYTEA 
 
 We'll [create a new table](/docs/postgresql/postgresql-create-table) called `company_files` to store the binary string:
 
-```
+```sql
 CREATE TABLE company_files (
    id SERIAL PRIMARY KEY,
    stock_id INT NOT NULL,
@@ -127,13 +127,13 @@ try {
 
 Launch the index.php file, we get the following message.
 
-```
+```sql
 A file has been inserted with id 1
 ```
 
 To verify the insert operation, we use the following query:
 
-```
+```sql
 SELECT * FROM company_files;
 ```
 

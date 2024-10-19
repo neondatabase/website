@@ -14,13 +14,13 @@ The `EXISTS` operator is a boolean operator that checks the existence of rows in
 
 Here's the basic syntax of the `EXISTS` operator:
 
-```
+```sql
 EXISTS (subquery)
 ```
 
 Typically, you use the `EXISTS` operator in the `WHERE` clause of a `SELECT` statement:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -44,7 +44,7 @@ The result of `EXISTS` operator depends on whether any row is returned by the su
 
 For this reason, the common coding convention is to write `EXISTS` in the following form:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -62,7 +62,7 @@ WHERE
 
 To negate the `EXISTS` operator, you use the `NOT EXISTS` operator:
 
-```
+```sql
 NOT EXISTS (subquery)
 ```
 
@@ -80,7 +80,7 @@ We will use the following `customer` and `payment` tables in the [sample databas
 
 The following example uses the `EXISTS` operator to check if the payment value is zero exists in the `payment` table:
 
-```
+```sql
 SELECT
   EXISTS(
     SELECT
@@ -105,7 +105,7 @@ Output:
 
 The following example uses the `EXISTS` operator to find customers who have paid at least one rental with an amount greater than 11:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -148,7 +148,7 @@ In this example, for each customer in the `customer` table, the subquery checks 
 
 The following example uses the `NOT EXISTS` operator to find customers who have not made any payment more than 11.
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -186,7 +186,7 @@ first_name  |  last_name
 
 The following example returns all rows from the `customers` table because the subquery in the `EXISTS` operator returns `NULL`:
 
-```
+```sql
 SELECT
   first_name,
   last_name

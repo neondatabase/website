@@ -19,7 +19,7 @@ The following statement illustrates various ways of using the `COUNT()` function
 
 The `COUNT(*)` function returns the number of rows returned by a [`SELECT`](/docs/postgresql/postgresql-select) statement, including NULL and duplicates.
 
-```
+```sql
 SELECT
    COUNT(*)
 FROM
@@ -36,7 +36,7 @@ Due to multiple transactions seeing different states of data simultaneously, the
 
 Similar to the `COUNT(*)` function, the `COUNT(column_name)` function returns the number of rows returned by a `SELECT` clause. However, it does not consider `NULL` values in the `column_name`.
 
-```
+```sql
 SELECT
    COUNT(column_name)
 FROM
@@ -49,7 +49,7 @@ WHERE
 
 In this syntax, the `COUNT(DISTINCT column_name)` returns the number of unique non-null values in the `column_name`.
 
-```
+```sql
 SELECT
    COUNT(DISTINCT column_name)
 FROM
@@ -72,7 +72,7 @@ Let's use the `payment` table in the [sample database](/docs/postgresql/postgres
 
 The following statement uses the `COUNT(*)` function to return the number of transactions in the `payment` table:
 
-```
+```sql
 SELECT
    COUNT(*)
 FROM
@@ -92,7 +92,7 @@ Output:
 
 To get the distinct amounts that customers paid, you use the `COUNT(DISTINCT amount)` function as shown in the following example:
 
-```
+```sql
 SELECT
   COUNT (DISTINCT amount)
 FROM
@@ -112,7 +112,7 @@ Output:
 
 The following example uses the `COUNT()` function with the `GROUP BY` function to return the number of payments of each customer:
 
-```
+```sql
 SELECT
   customer_id,
   COUNT (customer_id)
@@ -136,7 +136,7 @@ Output:
 
 If you want to display the customer name instead of id, you can join the payment table with the customer table:
 
-```
+```sql
 SELECT
   first_name || ' ' || last_name full_name,
   COUNT (customer_id)
@@ -163,7 +163,7 @@ Output:
 
 You can use the `COUNT` function in a [`HAVING`](/docs/postgresql/postgresql-having) clause to apply a specific condition to groups. For example, the following statement finds customers who have made over 40 payments:
 
-```
+```sql
 SELECT
   first_name || ' ' || last_name full_name,
   COUNT (customer_id)

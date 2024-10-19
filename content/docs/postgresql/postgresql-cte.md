@@ -13,7 +13,7 @@ A CTE helps you enhance the readability of a complex query by breaking it down i
 
 Here's the basic syntax for creating a common table expression:
 
-```
+```sql
 WITH cte_name (column1, column2, ...) AS (
     -- CTE query
     SELECT ...
@@ -40,7 +40,7 @@ Let's explore some examples of using common table expressions (CTE).
 
 The following example uses a common table expression (CTE) to select the `title` and `length` of films in the `'Action'` category and returns all the columns of the CTE:
 
-```
+```sql
 WITH action_films AS (
   SELECT
     f.title,
@@ -78,7 +78,7 @@ We'll use the `rental` and `staff` tables from the [sample database](/docs/postg
 
 The following example join a CTE with a table to find the staff and rental count for each:
 
-```
+```sql
 WITH cte_rental AS (
   SELECT
     staff_id,
@@ -117,7 +117,7 @@ Output:
 
 The following example uses multiple CTEs to calculate various statistics related to films and customers:
 
-```
+```sql
 WITH film_stats AS (
     -- CTE 1: Calculate film statistics
     SELECT

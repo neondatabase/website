@@ -38,7 +38,7 @@ Let's set up a sample table and take some examples of using PostgreSQL JSONB ope
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `products` that has a JSONB column to store JSON data:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     data JSONB
@@ -47,7 +47,7 @@ CREATE TABLE products (
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `products` table:
 
-```
+```sql
 INSERT INTO products (data)
 VALUES
     ('{
@@ -131,7 +131,7 @@ Note that the `key` is surrounded by a single quote because the key in a JSON ob
 
 For example, the following query uses the operator `->` to get the product names from the `products` table:
 
-```
+```sql
 SELECT
   data -> 'name' AS product_name
 FROM
@@ -162,7 +162,7 @@ jsonb ->> 'key' → text
 
 For example, the following statement uses the operator `->>` to get the product names as text:
 
-```
+```sql
 SELECT
   data ->> 'name' AS product_name
 FROM
@@ -191,7 +191,7 @@ jsonb #> 'path' → jsonb
 
 For example, the following statement uses the operator `#>` to extract the `attributes` object from the JSON object in the `data` column of the `products` table:
 
-```
+```sql
 SELECT
   data #>'{attributes}' AS attributes
 FROM
@@ -212,7 +212,7 @@ Output:
 
 The following example uses the operator `#>` to extract the `color` field of the `attributes` object from the `data` column of the `products` table:
 
-```
+```sql
 SELECT
   data #>'{attributes, color}' AS colors
 FROM
@@ -241,7 +241,7 @@ json #>> text[] → text
 
 For example, the following statement uses the operator (`#>>`) to extract the `color` from the `attributes` subobject of the `data` object as text strings:
 
-```
+```sql
 SELECT
   data #>>'{attributes, color}' AS colors
 FROM
@@ -270,7 +270,7 @@ jsonb @> jsonb → boolean
 
 For example, the following statement uses the operator `@>` to retrieve the `products` in the `Electronics` category:
 
-```
+```sql
 SELECT
   id,
   data ->> 'name' product_name
@@ -300,7 +300,7 @@ jsonb <@ jsonb → boolean
 
 For example:
 
-```
+```sql
 SELECT
   data ->> 'name' name,
   data ->> 'price' price
@@ -329,7 +329,7 @@ jsonb || jsonb → jsonb
 
 For example, the following statement uses the operator `||` to concatenate two JSONB values into a single JSONB value:
 
-```
+```sql
 SELECT
   '{"name": "iPad"}' :: jsonb ||
    '{"price": 799}' :: jsonb
@@ -357,7 +357,7 @@ jsonb ? text → boolean
 
 For example, the following statement uses the operator (`?`) to retrieve the products whose `price` key exists as the top-level key of the JSON object stored in the `data` column of the `products` table:
 
-```
+```sql
 SELECT
   id,
   data ->> 'name' product_name,
@@ -382,7 +382,7 @@ Output:
 
 The following example uses the operator `?` to retrieve all products whose tags have the text `Apple`:
 
-```
+```sql
 SELECT
   data ->> 'name' product_name,
   data ->> 'tags' tags
@@ -412,7 +412,7 @@ jsonb ?| text[] → boolean
 
 For example, the following statement uses the operator `?|` to retrieve products whose `attributes` have either the `storage` or `size` keys:
 
-```
+```sql
 SELECT
   data ->> 'name' product_name,
   data ->> 'attributes' attributes
@@ -442,7 +442,7 @@ jsonb ?& text[] → boolean
 
 For example, the following statement uses the operator `?&` to retrieve the products whose `attributes` have both `color` or `storage` keys:
 
-```
+```sql
 SELECT
   data ->> 'name' product_name,
   data ->> 'attributes' attributes
@@ -471,7 +471,7 @@ jsonb - text → jsonb
 
 The following example uses the operator (`-`) to remove the `name` key and its value from a JSONB object:
 
-```
+```sql
 SELECT
   '{"name": "John Doe", "age": 22}' :: jsonb - 'name' result;
 ```
@@ -487,7 +487,7 @@ Output:
 
 The following example uses the operator (`-`) to remove the element `"API"` from a JSON array:
 
-```
+```sql
 SELECT
   '["PostgreSQL", "API", "Web Dev"]' :: jsonb - 'API' result;
 ```
@@ -511,7 +511,7 @@ jsonb - text[] → jsonb
 
 The following example uses the operator (`-`) to remove the `age` and `email` keys and their values from a JSONB object:
 
-```
+```sql
 SELECT
   '{"name": "John Doe", "age": 22, "email": "john.doe@test.com"}' :: jsonb - ARRAY[ 'age',
   'email' ] result;
@@ -528,7 +528,7 @@ Output:
 
 The following example uses the operator (`-`) to remove the element `"API"` and`"Web Dev"` from a JSON array:
 
-```
+```sql
 SELECT
   '["PostgreSQL", "API", "Web Dev"]' :: jsonb - ARRAY['API','Web Dev'] result;
 ```
@@ -552,7 +552,7 @@ jsonb @? jsonpath → boolean
 
 For example, the following uses the @? operator to retrieve the products whose prices are greater than `999`:
 
-```
+```sql
 SELECT
   data ->> 'name' product_name
 FROM
@@ -582,7 +582,7 @@ jsonb @@ jsonpath → boolean
 
 For example, the following example returns null because the JSON path `'$.scores'` returns an array, not a boolean result:
 
-```
+```sql
 SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores') result;
 ```
 
@@ -597,7 +597,7 @@ Output:
 
 However, the following statement returns true because the JSON path `'$.scores[*] > 2'` matches the elements that are greater than 2.
 
-```
+```sql
 SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores[*] > 2') result;
 ```
 

@@ -140,7 +140,7 @@ try {
 
 The following is the output:
 
-```
+```sql
 The number of row(s) deleted: 1
 ```
 
@@ -161,7 +161,7 @@ The row with id 1 was deleted as expected.
 
 In the `index.php` file, modify the code to call the `deleteAll()` method instead of the `delete()` method and execute it. The following is the output of the script:
 
-```
+```sql
 The number of row(s) deleted: 3
 ```
 

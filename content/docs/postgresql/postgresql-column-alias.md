@@ -13,21 +13,21 @@ A column alias allows you to assign a column or an expression in the select list
 
 The following illustrates the syntax of using a column alias:
 
-```
+```sql
 SELECT column_name AS alias_name
 FROM table_name;
 ```
 
 In this syntax, the `column_name` is assigned an alias `alias_name`. The `AS` keyword is optional so you can omit it like this:
 
-```
+```sql
 SELECT column_name alias_name
 FROM table_name;
 ```
 
 The following syntax illustrates how to set an alias for an expression in the `SELECT` clause:
 
-```
+```sql
 SELECT expression AS alias_name
 FROM table_name;
 ```
@@ -44,7 +44,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following query returns the first names and last names of all customers from the `customer` table:
 
-```
+```sql
 SELECT
    first_name,
    last_name
@@ -55,7 +55,7 @@ FROM customer;
 
 If you want to rename the `last_name` heading, you can assign it a new name using a column alias like this:
 
-```
+```sql
 SELECT
    first_name,
    last_name AS surname
@@ -68,7 +68,7 @@ This query assigned the `surname` as the alias of the `last_name` column:
 
 Or you can make it shorter by removing the `AS` keyword as follows:
 
-```
+```sql
 SELECT
    first_name,
    last_name surname
@@ -79,7 +79,7 @@ FROM customer;
 
 The following query returns the full names of all customers. It constructs the full name by concatenating the first name, space, and the last name:
 
-```
+```sql
 SELECT
    first_name || ' ' || last_name
 FROM
@@ -94,7 +94,7 @@ As you can see clearly from the output, the heading of the column is not meaning
 
 To fix this, you can assign the expression `first_name || ' ' || last_name` a column alias e.g., `full_name`:
 
-```
+```sql
 SELECT
     first_name || ' ' || last_name AS full_name
 FROM
@@ -113,7 +113,7 @@ column_name AS "column alias"
 
 For example:
 
-```
+```sql
 SELECT
     first_name || ' ' || last_name "full name"
 FROM

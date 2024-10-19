@@ -14,7 +14,7 @@ In PostgreSQL, a view is a named query stored in the database server. To create 
 
 Here's the basic syntax of the `CREATE VIEW` statement:
 
-```
+```sql
 CREATE VIEW view_name
 AS
   query;
@@ -37,7 +37,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `CREATE VIEW` statement to create a view based on the `customer` table:
 
-```
+```sql
 CREATE VIEW contact AS
 SELECT
   first_name,
@@ -49,13 +49,13 @@ FROM
 
 Output:
 
-```
+```sql
 CREATE VIEW
 ```
 
 The following query data from the `contact` view:
 
-```
+```sql
 SELECT * FROM contact;
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 The following example creates a view based on the tables `customer`, `address`, `city`, and `country`:
 
-```
+```sql
 CREATE VIEW customer_info AS
 SELECT
   first_name,
@@ -93,7 +93,7 @@ FROM
 
 The following query retrieves data from the `customer_info` view:
 
-```
+```sql
 SELECT * FROM customer_info;
 ```
 
@@ -112,7 +112,7 @@ Output:
 
 The following statement creates a view called `customer_usa` based on the `customer_info` view. The `customer_usa` returns the customers who are in the `United States`:
 
-```
+```sql
 CREATE VIEW customer_usa
 AS
 SELECT
@@ -125,7 +125,7 @@ WHERE
 
 Here's the query that retrieves data from the customer_usa view:
 
-```
+```sql
 SELECT * FROM customer_usa;
 ```
 
@@ -144,7 +144,7 @@ Output:
 
 To change the defining query of a view, you use the `CREATE OR REPLACE VIEW` statement:
 
-```
+```sql
 CREATE OR REPLACE VIEW view_name
 AS
   query;
@@ -154,7 +154,7 @@ In this syntax, you add the `OR REPLACE` between the `CREATE` and `VIEW` keyword
 
 For example, the following statement changes the defining query of the `contact` view to include the `phone` information from the `address` table:
 
-```
+```sql
 CREATE OR REPLACE VIEW contact AS
 SELECT
   first_name,

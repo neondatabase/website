@@ -12,7 +12,7 @@ tableOfContents: true
 
 To change the name of an existing table, you use the `ALTER TABLE... RENAME TO` statement as follows:
 
-```
+```sql
 ALTER TABLE table_name
 RENAME TO new_table_name;
 ```
@@ -27,7 +27,7 @@ If you rename a table that does not exist, PostgreSQL will issue an error.
 
 To avoid the error, you can use the the `IF EXISTS` option:
 
-```
+```sql
 ALTER TABLE IF EXISTS table_name
 RENAME TO new_table_name;
 ```
@@ -44,7 +44,7 @@ Let's take some examples of using the `ALTER TABLE ... RENAME TO` statement.
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `vendors` for the demonstration purpose:
 
-```
+```sql
 CREATE TABLE vendors (
     id serial PRIMARY KEY,
     name VARCHAR NOT NULL
@@ -71,7 +71,7 @@ Indexes:
 
 Third, change the name of the `vendors` table to `suppliers` using the `ALTER TABLE...RENAME TO` statement:
 
-```
+```sql
 ALTER TABLE vendors
 RENAME TO suppliers;
 ```
@@ -94,7 +94,7 @@ Notice that the name of the table changed but the [sequence](/docs/postgresql/po
 
 First, create new tables called `customers` and `groups`:
 
-```
+```sql
 CREATE TABLE customer_groups(
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL
@@ -112,7 +112,7 @@ CREATE TABLE customers(
 
 Second, [create a view](/docs/postgresql/postgresql-views/postgresql-materialized-views) based on the `customers` and `customer_groups` tables:
 
-```
+```sql
 CREATE VIEW customer_data
 AS SELECT
     c.id,
@@ -127,7 +127,7 @@ When you rename a table, PostgreSQL will automatically update its dependent obje
 
 Third, rename the `customer_groups` table to `groups`:
 
-```
+```sql
 ALTER TABLE customer_groups
 RENAME TO groups;
 ```

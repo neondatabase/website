@@ -11,7 +11,7 @@ PostgreSQL does not support the [DELETE JOIN statement like MySQL](https://www.m
 
 Here's the syntax of the `DELETE USING` statement:
 
-```
+```sql
 DELETE FROM table1
 USING table2
 WHERE condition
@@ -27,7 +27,7 @@ In this syntax:
 
 For example, the following statement uses the `DELETE` statement with the `USING` clause to delete data from `t1` that has the same id as `t2`:
 
-```
+```sql
 DELETE FROM t1
 USING t2
 WHERE t1.id = t2.id
@@ -41,7 +41,7 @@ Let's explore some examples of using the `DELETE USING` statement.
 
 The following statements create `member` and `denylist` tables and insert some sample data into them:
 
-```
+```sql
 CREATE TABLE member(
    id SERIAL PRIMARY KEY,
    first_name VARCHAR(50) NOT NULL,
@@ -95,7 +95,7 @@ The denylist table:
 
 The following statement deletes rows in the `members` table with the phone number exists in the `denylist` table:
 
-```
+```sql
 DELETE FROM member
 USING denylist
 WHERE member.phone = denylist.phone;
@@ -103,7 +103,7 @@ WHERE member.phone = denylist.phone;
 
 Output:
 
-```
+```sql
 DELETE 2
 ```
 
@@ -111,7 +111,7 @@ The output indicates that the `DELETE` statement has deleted two rows from the `
 
 Verify the deletion by retrieving data from the `contacts` table:
 
-```
+```sql
 SELECT * FROM member;
 ```
 
@@ -132,7 +132,7 @@ If you intend to ensure compatibility with various database products, you should
 
 The following statement uses the `DELETE` statement to delete all rows from the member table whose phones are in the `denylist` table:
 
-```
+```sql
 DELETE FROM member
 WHERE phone IN (
     SELECT

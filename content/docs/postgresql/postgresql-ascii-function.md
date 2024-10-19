@@ -13,7 +13,7 @@ The PostgreSQL `ASCII()` function returns an [ASCII](https://en.wikipedia.org/wi
 
 The following illustrates the syntax of ASCII function:
 
-```
+```sql
 ASCII(char)
 ```
 
@@ -35,7 +35,7 @@ The `ASCII()` function returns an integer that represents the ASCII code value o
 
 The following example uses the `ASCII()` function to get the ASCII code values of the character `A` and `a`:
 
-```
+```sql
 SELECT
     ASCII( 'A' ),
     ASCII( 'a' );
@@ -47,7 +47,7 @@ The output is:
 
 If you pass a sequence of characters to the `ASCII()` function, you will get the ASCII code of the first character as shown in the following example:
 
-```
+```sql
 SELECT
     ASCII( 'ABC' );
 ```

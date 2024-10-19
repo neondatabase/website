@@ -129,7 +129,7 @@ call transfer(1,2,1000);
 
 The following statement verifies the data in the `accounts` table after the transfer:
 
-```
+```sql
 SELECT * FROM accounts;
 ```
 

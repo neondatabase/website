@@ -23,7 +23,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses a correlated subquery to find the films with higher lengths than average for their respective ratings:
 
-```
+```sql
 SELECT film_id, title, length, rating
 FROM film f
 WHERE length > (
@@ -49,7 +49,7 @@ How it works.
 
 The outer query retrieves id, title, length, and rating from the `film` table that has the alias `f`:
 
-```
+```sql
 SELECT film_id, title, length, rating
 FROM film f
 WHERE length > (...)
@@ -61,7 +61,7 @@ The `WHERE` clause (`WHERE length > (...)`) checks if the length of the current 
 
 The correlated subquery calculates the [average](/docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function) length for films with the same rating as the current row in the outer query:
 
-```
+```sql
 SELECT AVG(length)
 FROM film
 WHERE rating = f.rating

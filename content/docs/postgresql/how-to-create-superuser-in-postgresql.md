@@ -28,13 +28,13 @@ psql -U postgres
 
 Second, execute the following `CREATE ROLE` command to create a superuser:
 
-```
+```sql
 CREATE ROLE username SUPERUSER;
 ```
 
 You need to replace `username` with your desired username for the superuser. For example:
 
-```
+```sql
 CREATE ROLE spiderman SUPERUSER
 LOGIN
 PASSWORD 'moreSecurePass';
@@ -63,13 +63,13 @@ It's possible to change a user to a superuser using the `ALTER` `ROLE` statement
 
 First, create a regular role with a login privilege and a password:
 
-```
+```sql
 CREATE ROLE batman LOGIN PASSWORD 'moreSecurePass';
 ```
 
 Second, make the `batman` role become a superuser using the `ALTER` `ROLE` statement:
 
-```
+```sql
 ALTER ROLE batman SUPERUSER;
 ```
 
@@ -92,13 +92,13 @@ Output:
 
 To revoke a superuser status of a user, you can use the following `ALTER` `ROLE` statement:
 
-```
+```sql
 ALTER USER username NOSUPERUSER;
 ```
 
 For example, the following statement revokes the `SUPERUSER` status from the `spiderman` role:
 
-```
+```sql
 ALTER USER spiderman NOSUPERUSER;
 ```
 

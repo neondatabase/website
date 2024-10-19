@@ -14,7 +14,7 @@ tableOfContents: true
 
 To drop a column of a table, you use the `DROP COLUMN` clause in the [`ALTER TABLE`](/docs/postgresql/postgresql-alter-table) statement as follows:
 
-```
+```sql
 ALTER TABLE table_name
 DROP COLUMN column_name;
 ```
@@ -25,14 +25,14 @@ If the column that you want to remove is used in other database objects such as 
 
 In this case, you can use the `CASCADE` option in the `DROP COLUMN` clause to drop the column and all of its dependent objects:
 
-```
+```sql
 ALTER TABLE table_name
 DROP COLUMN column_name CASCADE;
 ```
 
 If you remove a column that does not exist, PostgreSQL will issue an error. To remove a column if it exists only, you can use the `IF EXISTS` option as follows:
 
-```
+```sql
 ALTER TABLE table_name
 DROP COLUMN IF EXISTS column_name;
 ```
@@ -41,7 +41,7 @@ In this syntax, if you remove a column that does not exist, PostgreSQL will issu
 
 If you want to drop multiple columns of a table simultaneously, you use multiple `DROP COLUMN` clauses in the `ALTER TABLE` statement like this:
 
-```
+```sql
 ALTER TABLE table_name
 DROP COLUMN column_name1,
 DROP COLUMN column_name2,
@@ -66,7 +66,7 @@ In this diagram, each book has only one publisher and each publisher can publish
 
 The following statements create the three tables:
 
-```
+```sql
 CREATE TABLE publishers (
     publisher_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -94,7 +94,7 @@ CREATE TABLE books (
 
 Additionally, we [create a view](/docs/postgresql/postgresql-views/managing-postgresql-views) based on the `books` and `publishers` tables as follows:
 
-```
+```sql
 CREATE VIEW book_info
 AS SELECT
     book_id,
@@ -113,7 +113,7 @@ ORDER BY title;
 
 First, drop the `category_id` column in the `books` table using the `ALTER TABLE...DROP COLUMN` statement:
 
-```
+```sql
 ALTER TABLE books
 DROP COLUMN category_id;
 ```
@@ -148,14 +148,14 @@ The output indicates that the statement removes both the `category_id` column an
 
 First, attempt to remove the `publisher_id` column from the `books` table:
 
-```
+```sql
 ALTER TABLE books
 DROP COLUMN publisher_id;
 ```
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  cannot drop table books column publisher_id because other objects depend on it
 DETAIL:  view book_info depends on table books column publisher_id
 HINT:  Use DROP ... CASCADE to drop the dependent objects too.
@@ -163,14 +163,14 @@ HINT:  Use DROP ... CASCADE to drop the dependent objects too.
 
 The output states that the `book_info` view is using the column `publisher_id` of the `books` table. You need to use the `CASCADE` option to remove both the `publisher_id` column and `book_info` view as shown in the following statement:
 
-```
+```sql
 ALTER TABLE books
 DROP COLUMN publisher_id CASCADE;
 ```
 
 The statement issued the following notice indicating that the view book_info was also removed:
 
-```
+```sql
 NOTICE:  drop cascades to view book_info
 ALTER TABLE
 ```
@@ -179,7 +179,7 @@ ALTER TABLE
 
 To remove both `isbn` and `description` columns simultaneously, you can use multiple `DROP COLUMN` clauses as follows:
 
-```
+```sql
 ALTER TABLE books
   DROP COLUMN isbn,
   DROP COLUMN description;

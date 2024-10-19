@@ -15,7 +15,7 @@ The `LTRIM()` function allows you to remove specified characters from the beginn
 
 Here's the syntax of the `LTRIM()` function:
 
-```
+```sql
 LTRIM(string, character)
 ```
 
@@ -39,7 +39,7 @@ Let's explore some examples of using the `LTRIM()` function.
 
 The following example uses the `LTRIM()` function to remove the `#` from the beginning of the string `#postgres`:
 
-```
+```sql
 SELECT LTRIM('#postgres', '#');
 ```
 
@@ -56,7 +56,7 @@ Output:
 
 The following example uses the `LTRIM()` function to remove all the spaces from the string `' PostgreSQL'`:
 
-```
+```sql
 SELECT LTRIM('   PostgreSQL');
 ```
 
@@ -75,7 +75,7 @@ Since the default of the second argument of the `LTRIM()` function is space, we 
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `articles` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
-```
+```sql
 CREATE TABLE articles(
    id SERIAL PRIMARY KEY,
    title VARCHAR(255) NOT NULL
@@ -100,14 +100,14 @@ Output:
 
 Second, [update](/docs/postgresql/postgresql-update) the titles by removing the leading spaces using the `LTRIM()` function:
 
-```
+```sql
 UPDATE articles
 SET title = LTRIM(title);
 ```
 
 Output:
 
-```
+```sql
 UPDATE 2
 ```
 
@@ -115,7 +115,7 @@ The output indicates that two rows were updated.
 
 Third, verify the updates:
 
-```
+```sql
 SELECT * FROM articles;
 ```
 

@@ -174,7 +174,7 @@ public class Main {
 
 If you run the program, it'll show the following output:
 
-```
+```sql
 Inserted id:1
 ```
 
@@ -182,7 +182,7 @@ Inserted id:1
 
 Connect to the `sales` database and retrieve the data from the `products` table to verify the insert:
 
-```
+```sql
 SELECT * FROM products;
 ```
 
@@ -293,7 +293,7 @@ public class Main {
 
 Connect to the `sales` database and query data from the `products` table to verify the inserts:
 
-```
+```sql
 SELECT * FROM products;
 ```
 

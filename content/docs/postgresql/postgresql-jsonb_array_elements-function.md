@@ -32,7 +32,7 @@ Let's explore some examples of using the `jsonb_array_elements()` function.
 
 The following example uses the `jsonb_array_elements()` function to expand elements of a JSON array:
 
-```
+```sql
 SELECT jsonb_array_elements('[1,2,3]');
 ```
 
@@ -51,7 +51,7 @@ Note that the numbers 1, 2, 3 are the JSON values.
 
 The following example uses the `jsonb_array_elements()` function to expand an array of strings:
 
-```
+```sql
 SELECT jsonb_array_elements('["red","green","blue"]');
 ```
 
@@ -70,7 +70,7 @@ Output:
 
 The following example uses the `jsonb_array_elements()` function to expand elements of an array that contains another array:
 
-```
+```sql
 SELECT jsonb_array_elements('[1,2,3, [4,5], 6]');
 ```
 
@@ -91,7 +91,7 @@ Output:
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -103,7 +103,7 @@ The `skills` column has the JSONB type, which stores the skills of employees.
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (name, skills)
 VALUES
 ('John Doe', '["Java", "Python", "SQL"]'),
@@ -114,7 +114,7 @@ VALUES
 
 Third, retrieve all skills of employees:
 
-```
+```sql
 SELECT jsonb_array_elements(skills) skills
 FROM employees;
 ```
@@ -143,7 +143,7 @@ It returns 12 skills.
 
 It's possible to use the `DISTINCT` to get unique skills of all employees:
 
-```
+```sql
 SELECT DISTINCT jsonb_array_elements(skills) skills
 FROM employees;
 ```

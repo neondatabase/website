@@ -43,7 +43,7 @@ Schemas can be very useful in the following scenarios:
 
 PostgreSQL automatically creates a schema called `public` for every new database. Whatever object you create without specifying the schema name, PostgreSQL will place it into this `public` schema. Therefore, the following statements are equivalent:
 
-```
+```sql
 CREATE TABLE table_name(
   ...
 );
@@ -51,7 +51,7 @@ CREATE TABLE table_name(
 
 and
 
-```
+```sql
 CREATE TABLE public.table_name(
    ...
 );
@@ -69,7 +69,7 @@ The first schema in the search path is called the current schema. Note that when
 
 The `current_schema()` function returns the current schema:
 
-```
+```sql
 SELECT current_schema();
 ```
 
@@ -86,7 +86,7 @@ This is why PostgreSQL uses `public` for every new object that you create.
 
 To view the current search path, you use the `SHOW` command in `psql` tool:
 
-```
+```sql
 SHOW search_path;
 ```
 
@@ -106,19 +106,19 @@ In this output:
 
 To create a new schema, you use the `CREATE SCHEMA` statement:
 
-```
+```sql
 CREATE SCHEMA sales;
 ```
 
 To add the new schema to the search path, you use the following command:
 
-```
+```sql
 SET search_path TO sales, public;
 ```
 
 Now, if you create a new table named `staff` without specifying the schema name, PostgreSQL will put this `staff` table into the `sales` schema:
 
-```
+```sql
 CREATE TABLE staff(
     staff_id SERIAL PRIMARY KEY,
     first_name VARCHAR(45) NOT NULL,
@@ -133,25 +133,25 @@ The following picture shows the new schema `sales` and the `staff` table that be
 
 To access the `staff` table in the `sales` schema you can use one of the following statements:
 
-```
+```sql
 SELECT * FROM staff;
 ```
 
 and
 
-```
+```sql
 SELECT * FROM sales.staff;
 ```
 
 The `public` schema is the second element in the search path, so to access the `staff` table in the public schema, you must qualify the table name as follows:
 
-```
+```sql
 SELECT * FROM public.staff;
 ```
 
 If you use the following command, you will need to explicitly refer to objects in the `public` schema using a fully qualified name:
 
-```
+```sql
 SET search_path TO public;
 ```
 
@@ -163,14 +163,14 @@ Users can only access objects in the schemas that they own. It means they cannot
 
 To allow users to access the objects in the schema that they do not own, you must grant the `USAGE` privilege of the schema to the users:
 
-```
+```sql
 GRANT USAGE ON SCHEMA schema_name
 TO role_name;
 ```
 
 To allow users to create objects in the schema that they do not own, you need to grant them the `CREATE` privilege of the schema to the users:
 
-```
+```sql
 GRANT CREATE ON SCHEMA schema_name
 TO user_name;
 ```

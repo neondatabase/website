@@ -38,7 +38,7 @@ Let's explore some examples of using the `jsonb_populate_record()` function.
 
 First, [create a new type](/docs/postgresql/postgresql-user-defined-data-types) called `person`:
 
-```
+```sql
 CREATE TYPE person AS (
   id INT,
   name VARCHAR,
@@ -48,7 +48,7 @@ CREATE TYPE person AS (
 
 Second, use the `jsonb_populate_record()` function to expand the JSON object to a row of the `person` type:
 
-```
+```sql
 SELECT
   jsonb_populate_record(
     null :: person,
@@ -69,7 +69,7 @@ Output:
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE employees (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (name, age, salary)
 VALUES
   ('John Doe', 25, 70000),
@@ -89,7 +89,7 @@ VALUES
 
 Third, use `jsonb_populate_record()` to query the data from the `employees` table in a structured format:
 
-```
+```sql
 SELECT
   jsonb_populate_record(
     null :: employees,

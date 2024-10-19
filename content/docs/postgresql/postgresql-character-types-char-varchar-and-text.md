@@ -50,7 +50,7 @@ Let's take a look at an example to understand how the `CHAR`, `VARCHAR`, and `TE
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `character_tests`:
 
-```
+```sql
 CREATE TABLE character_tests (
   id serial PRIMARY KEY,
   x CHAR (1),
@@ -61,7 +61,7 @@ CREATE TABLE character_tests (
 
 Then, [insert a new row](/docs/postgresql/postgresql-insert) into the `character_tests` table:
 
-```
+```sql
 INSERT INTO character_tests (x, y, z)
 VALUES
   (
@@ -72,7 +72,7 @@ VALUES
 
 PostgreSQL issued an error:
 
-```
+```sql
 ERROR:  value too long for type character(1)
 ```
 
@@ -80,7 +80,7 @@ This is because the data type of the `x` column is `char(1)` and we attempted to
 
 Let's fix it:
 
-```
+```sql
 INSERT INTO character_tests (x, y, z)
 VALUES
   (
@@ -92,7 +92,7 @@ VALUES
 
 PostgreSQL issues a different error:
 
-```
+```sql
 ERROR:  value too long for type character varying(10)
 ```
 
@@ -100,7 +100,7 @@ This is because we attempted to insert a string with more than 10 characters int
 
 The following statement inserts a new row into the `character_tests` table successfully.
 
-```
+```sql
 INSERT INTO character_tests (x, y, z)
 VALUES
   (

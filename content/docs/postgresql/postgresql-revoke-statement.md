@@ -13,7 +13,7 @@ The `REVOKE` statement revokes previously [granted privileges](/docs/postgresql/
 
 The following shows the syntax of the `REVOKE` statement that revokes privileges on one or more tables from a role:
 
-```
+```sql
 REVOKE privilege | ALL
 ON TABLE table_name |  ALL TABLES IN SCHEMA schema_name
 FROM role_name;
@@ -39,7 +39,7 @@ psql -U postgres -d dvdrental
 
 Second, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) called `jim` with the `LOGIN` and `PASSWORD` attributes:
 
-```
+```sql
 CREATE ROLE jim LOGIN PASSWORD 'YourPassword';
 ```
 
@@ -47,13 +47,13 @@ Replace the `YourPassword` with the one you want.
 
 Third, grant all privileges to the role `jim` on the `film` table:
 
-```
+```sql
 GRANT ALL ON film TO jim;
 ```
 
 Finally, grant the `SELECT` privilege on the `actor` table to the role `jim`:
 
-```
+```sql
 GRANT SELECT ON actor TO jim;
 ```
 
@@ -61,13 +61,13 @@ GRANT SELECT ON actor TO jim;
 
 To revoke the `SELECT` privilege on the `actor` table from the role `jim`, you use the following statement:
 
-```
+```sql
 REVOKE SELECT ON actor FROM jim;
 ```
 
 To revoke all privileges on the `film` table from the role `jim`, you use `REVOKE` statement with the `ALL` option like this:
 
-```
+```sql
 REVOKE ALL ON film FROM jim;
 ```
 

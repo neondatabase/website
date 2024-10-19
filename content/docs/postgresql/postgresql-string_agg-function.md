@@ -16,7 +16,7 @@ The PostgreSQL `STRING_AGG()` function is an [aggregate function](/docs/postgres
 
 The following shows the syntax of the `STRING_AGG()` function:
 
-```
+```sql
 STRING_AGG ( expression, separator [order_by_clause] )
 ```
 
@@ -28,7 +28,7 @@ The `STRING_AGG()` function accepts two arguments and an optional `ORDER BY` cla
 
 The `order_by_clause` is an optional clause that specifies the order of concatenated results. It has the following form:
 
-```
+```sql
 ORDER BY expression1 {ASC | DESC}, [...]
 ```
 
@@ -44,7 +44,7 @@ We will use the `film`, `film_actor`, and `actor` tables from the [sample databa
 
 This example uses the `STRING_AGG()` function to return a list of actor's names for each film from the `film` table:
 
-```
+```sql
 SELECT
     f.title,
     STRING_AGG (
@@ -77,7 +77,7 @@ Here is the partial output:
 
 The following example uses the `STRING_AGG()` function to build an email list for each country, with emails separated by semicolons:
 
-```
+```sql
 SELECT
     country,
     STRING_AGG (email, ';') email_list

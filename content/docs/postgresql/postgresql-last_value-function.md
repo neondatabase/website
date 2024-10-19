@@ -15,7 +15,7 @@ The `LAST_VALUE()` function returns the last value in an ordered partition of a 
 
 The syntax of the `LAST_VALUE()` function is as follows:
 
-```
+```sql
 LAST_VALUE ( expression )
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -59,7 +59,7 @@ Here are the contents of the data of the `products` table:
 
 The following example uses the `LAST_VALUE()` function to return all products together with the product that has the highest price:
 
-```
+```sql
 SELECT
     product_id,
     product_name,
@@ -87,7 +87,7 @@ In this example:
 
 The following example uses the `LAST_VALUE()` function to return all products together with the most expensive product per product group:
 
-```
+```sql
 SELECT
     product_id,
     product_name,

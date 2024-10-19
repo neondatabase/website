@@ -15,7 +15,7 @@ PostgreSQL uses `true`, `'t'`, `'true'`, `'y'`, `'yes'`, `'1'` to represent `tru
 
 A boolean expression is an expression that evaluates to a boolean value. For example, the expression `1<>1`is a boolean expression that evaluates to `false`:
 
-```
+```sql
 SELECT 1 <> 1 AS result;
 ```
 
@@ -58,7 +58,7 @@ Let's explore some examples of using the `OR` operator.
 
 The following example uses the `OR` operator to combine `true` with `true`, which returns `true`:
 
-```
+```sql
 SELECT true OR true AS result;
 ```
 
@@ -73,7 +73,7 @@ Output:
 
 The following statement uses the `OR` operator to combine `true` with `false`, which returns true:
 
-```
+```sql
 SELECT true OR false AS result;
 ```
 
@@ -88,7 +88,7 @@ Output:
 
 The following example uses the `OR` operator to combine `true` with `null`, which returns `true`:
 
-```
+```sql
 SELECT true OR null AS result;
 ```
 
@@ -103,7 +103,7 @@ Output:
 
 The following example uses the `OR` operator to combine `false` with `false`, which returns `false`:
 
-```
+```sql
 SELECT false OR false AS result;
 ```
 
@@ -118,7 +118,7 @@ Output:
 
 The following example uses the `OR` operator to combine `false` with `null`, which returns `null`:
 
-```
+```sql
 SELECT false OR null AS result;
 ```
 
@@ -133,7 +133,7 @@ Output:
 
 The following example uses the `OR` operator to combine `false` with `false`, which returns `false`:
 
-```
+```sql
 SELECT false OR false AS result;
 ```
 
@@ -148,7 +148,7 @@ Output:
 
 The following example uses the `OR` operator to combine `null` with `null`, which returns `null`:
 
-```
+```sql
 SELECT null OR null AS result;
 ```
 
@@ -169,7 +169,7 @@ We'll use the `film` table from the [sample database](/docs/postgresql/postgresq
 
 The following example uses the `OR` operator in the `WHERE` clause to find the films that have a rental rate is `0.99` or `2.99`:
 
-```
+```sql
 SELECT
   title,
   rental_rate

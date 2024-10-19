@@ -24,7 +24,7 @@ A virtual generated column is like a [view](/docs/postgresql/postgresql-views), 
 
 Typically, you define a generated column when [creating a table](/docs/postgresql/postgresql-create-table)with the following syntax:
 
-```
+```sql
 CREATE TABLE table_name(
    ...,
    colum_name type GENERATED ALWAYS AS (expression ) STORED | VIRTUAL,
@@ -42,7 +42,7 @@ In this syntax:
 
 To add a generated column to a table, you can use the [ALTER TABLE ... ADD COLUMN](/docs/postgresql/postgresql-add-column) statement:
 
-```
+```sql
 ALTER TABLE table_name
 ADD COLUMN column_name type GENERATED ALWAYS AS (expression) STORED;
 ```
@@ -62,7 +62,7 @@ Let's explore some examples of using generated columns.
 
 First, create a new table called `contacts`:
 
-```
+```sql
 CREATE TABLE contacts(
    id SERIAL PRIMARY KEY,
    first_name VARCHAR(50) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE contacts(
 
 Second, insert rows into the `contacts` table. The values of the `full_name` column will be automatically updated from the values in the `first_name` and `last_name` columns:
 
-```
+```sql
 INSERT INTO contacts(first_name, last_name, email)
 VALUES
    ('John', 'Doe', 'john.doe@postgresqltutorial.com'),
@@ -96,7 +96,7 @@ Output:
 
 First, create a table called `products` that stores the product information:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -115,7 +115,7 @@ list_price = list_price + (list_price * tax / 100)) - (list_price * discount / 1
 
 Second, insert rows into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, list_price, tax, discount)
 VALUES
     ('A', 100.00, 10.00, 5.00),

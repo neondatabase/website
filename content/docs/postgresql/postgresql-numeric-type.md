@@ -61,7 +61,7 @@ quantity NUMERIC(5)
 
 If you omit precision and scale, they will default to 131072 and 16383, respectively.
 
-```
+```sql
 NUMERIC
 ```
 
@@ -69,13 +69,13 @@ NUMERIC
 
 In PostgreSQL, the `NUMERIC` and `DECIMAL` types are synonyms so you can use them interchangeably:
 
-```
+```sql
 DECIMAL(p,s)
 ```
 
 If you prefer a shorter name, you can use the name DEC because DEC and DECIMAL are the same type:
 
-```
+```sql
 DEC(p,s)
 ```
 
@@ -103,7 +103,7 @@ If you store a value with a scale greater than the declared scale of the `NUMERI
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE products (
 
 Second, [insert](/docs/postgresql/postgresql-python/insert)some products with prices whose scales exceed the scale declared in the `price` column:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES ('Phone',500.215),
        ('Tablet',500.214);
@@ -123,7 +123,7 @@ Because the scale of the `price` column is 2, PostgreSQL rounds the value `500.2
 
 The following [query](/docs/postgresql/postgresql-select) returns all rows of the `products` table:
 
-```
+```sql
 SELECT * FROM products;
 ```
 
@@ -139,14 +139,14 @@ Output:
 
 If you store a value whose precision exceeds the declared precision, PostgreSQL will raise an error as shown in the following example:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES('Phone',123456.21);
 ```
 
 PostgreSQL issued the following error:
 
-```
+```sql
 ERROR:  numeric field overflow
 DETAIL:  A field with precision 5, scale 2 must round to an absolute value less than 10^3.
 ```
@@ -157,7 +157,7 @@ In addition to holding numeric values, the `NUMERIC` type can also hold a specia
 
 The following example updates the price of product id 1 to `NaN` :
 
-```
+```sql
 UPDATE products
 SET price = 'NaN'
 WHERE id = 1;
@@ -167,7 +167,7 @@ Notice that you must use single quotes to wrap the `NaN` as shown in the [`UPDAT
 
 The following query returns the data of the `products` table:
 
-```
+```sql
 SELECT * FROM products;
 ```
 
@@ -187,7 +187,7 @@ But in PostgreSQL, two `NaN` values are equal. Also, `NaN` values are greater th
 
 The following query [sorts](/docs/postgresql/postgresql-order-by) the products based on prices from high to low:
 
-```
+```sql
 SELECT * FROM products
 ORDER BY price DESC;
 ```

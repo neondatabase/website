@@ -67,7 +67,7 @@ PostgreSQL offers various database views that contain information about objects 
 
 To retrieve the information about database views, you can execute the following SQL statement:
 
-```
+```sql
 SELECT
   table_schema,
   table_name
@@ -105,7 +105,7 @@ The output will display the schema and the name of the views:
 
 To retrieve all [materialized views](/docs/postgresql/postgresql-views/postgresql-materialized-views), you can query them from the `pg_matviews` view:
 
-```
+```sql
 SELECT * FROM pg_matviews\G
 ```
 
@@ -131,7 +131,7 @@ The output includes detailed information about materialized views, including the
 
 If you solely want to get the names of the materialized view, you can use the following query:
 
-```
+```sql
 SELECT
   matviewname AS materialized_view_name
 FROM

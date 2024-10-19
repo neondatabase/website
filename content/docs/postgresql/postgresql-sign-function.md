@@ -13,7 +13,7 @@ The `SIGN()` function allows you to determine the sign of a number.
 
 Here's the syntax of the `SIGN()` function:
 
-```
+```sql
 SIGN(numeric_value)
 ```
 
@@ -29,7 +29,7 @@ Let's explore some examples of using the `SIGN()` function.
 
 The following example uses the `SIGN()` function to get the sign of various numbers:
 
-```
+```sql
 SELECT
   SIGN(-10),
   SIGN(0),
@@ -52,7 +52,7 @@ The `SIGN()` returns -1 for -10, 0 for 0, 1 for 10, and `NULL` for `NULL`.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `sales` to store the sales amount by year:
 
-```
+```sql
 CREATE TABLE sales (
     year INTEGER PRIMARY KEY,
     sales_amount NUMERIC NOT NULL
@@ -61,7 +61,7 @@ CREATE TABLE sales (
 
 Second, [insert rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `sales` table:
 
-```
+```sql
 INSERT INTO sales (year, sales_amount)
 VALUES
     (2013, 10000),
@@ -80,7 +80,7 @@ RETURNING *;
 
 Third, compare the sales of a year with the previous year and use the `SIGN()` function to output the sales trend:
 
-```
+```sql
 SELECT
     year,
     sales_amount,
@@ -121,7 +121,7 @@ How it works.
 
 If you want to reuse the result of the LAG() function, you can use a [common table expression](/docs/postgresql/postgresql-cte):
 
-```
+```sql
 WITH sales_data AS (
     SELECT
         year,

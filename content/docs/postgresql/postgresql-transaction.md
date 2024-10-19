@@ -27,7 +27,7 @@ A PostgreSQL transaction is atomic, consistent, isolated, and durable. These pro
 
 Let's [create a new table](/docs/postgresql/postgresql-create-table) called `accounts` for the demonstration:
 
-```
+```sql
 DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE accounts (
@@ -44,32 +44,32 @@ When you execute a statement, PostgreSQL implicitly wraps it in a transaction.
 
 For example, when you execute the following `INSERT` statement, PostgreSQL immediately inserts a new row into the `accounts` table:
 
-```
+```sql
 INSERT INTO accounts(name,balance)
 VALUES('Bob',10000);
 ```
 
 To start a transaction explicitly, you execute either one of the following statements:
 
-```
+```sql
 BEGIN TRANSACTION;
 ```
 
 Or
 
-```
+```sql
 BEGIN WORK;
 ```
 
 Or
 
-```
+```sql
 BEGIN;
 ```
 
 For example, the following statements start a new transaction and insert a new account into the `accounts` table:
 
-```
+```sql
 BEGIN;
 
 INSERT INTO accounts(name,balance)
@@ -78,7 +78,7 @@ VALUES('Alice',10000);
 
 From the current session, you can see the change by retrieving data from the `accounts` table:
 
-```
+```sql
 SELECT
     id,
     name,
@@ -91,7 +91,7 @@ FROM
 
 However, you will not see the change if you connect to the PostgreSQL server in a new session and execute the query above:
 
-```
+```sql
 SELECT
     id,
     name,
@@ -106,25 +106,25 @@ FROM
 
 To permanently apply the change to the database, you commit the transaction by using the `COMMIT WORK` statement:
 
-```
+```sql
 COMMIT WORK;
 ```
 
 or
 
-```
+```sql
 COMMIT TRANSACTION;
 ```
 
 or simply:
 
-```
+```sql
 COMMIT;
 ```
 
 Other sessions can view the change by retrieving data from the `accounts` table:
 
-```
+```sql
 SELECT
     id,
     name,
@@ -155,19 +155,19 @@ COMMIT;
 
 If you want to undo the changes to the database, you can use the ROLLBACK statement:
 
-```
+```sql
 ROLLBACK;
 ```
 
 Or more clear:
 
-```
+```sql
 ROLLBACK TRANSACTION;
 ```
 
 Or:
 
-```
+```sql
 ROLLBACK WORK;
 ```
 
@@ -189,7 +189,7 @@ ROLLBACK;
 
 If you retrieve data from the accounts table, you'll won't see the changes because it was rolled back.
 
-```
+```sql
 SELECT * FROM accounts;
 ```
 

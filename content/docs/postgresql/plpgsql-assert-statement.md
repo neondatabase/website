@@ -78,7 +78,7 @@ end$$;
 
 Output:
 
-```
+```sql
 ERROR:  1000 Film found, check the film table
 CONTEXT:  PL/pgSQL function inline_code_block line 9 at ASSERT
 SQL state: P0004

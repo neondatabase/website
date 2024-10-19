@@ -21,7 +21,7 @@ The `CASE` expression has two forms:
 
 The following illustrates the general form of the `CASE` statement:
 
-```
+```sql
 CASE
       WHEN condition_1  THEN result_1
       WHEN condition_2  THEN result_2
@@ -56,7 +56,7 @@ Suppose you want to label the films by their lengths based on the following logi
 
 To apply this logic, you can use the `CASE` expression in the `SELECT` statement as follows:
 
-```
+```sql
 SELECT
   title,
   length,
@@ -98,7 +98,7 @@ And you want to know the number of films that belong to economy, mass, and premi
 
 In this case, you can use the `CASE` expression to construct the query as follows:
 
-```
+```sql
 SELECT
   SUM (
     CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END
@@ -128,7 +128,7 @@ In this example, we used the `CASE` expression to return 1 or 0 if the rental ra
 
 PostgreSQL provides another form of the `CASE` expression called simple form as follows:
 
-```
+```sql
 CASE expression
    WHEN value_1 THEN result_1
    WHEN value_2 THEN result_2
@@ -148,7 +148,7 @@ If `CASE` does not find any matches, it returns the `else_result` in that follow
 
 The following statement uses the `CASE` expression to add the rating description to the output:
 
-```
+```sql
 SELECT title,
        rating,
        CASE rating
@@ -183,7 +183,7 @@ In this example, we used a simple `CASE` expression to compare the rating from t
 
 The following statement uses `CASE` expression with the `SUM` function to calculate the number of films in each rating:
 
-```
+```sql
 SELECT
   SUM(CASE rating WHEN 'G' THEN 1 ELSE 0 END) "General Audiences",
   SUM(

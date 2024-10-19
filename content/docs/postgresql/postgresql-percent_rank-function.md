@@ -16,7 +16,7 @@ The `PERCENT_RANK()` function is like the `CUME_DIST()` function. The `PERCENT_R
 
 The following illustrates the syntax of the `PERCENT_RANK()` function:
 
-```
+```sql
 PERCENT_RANK() OVER (
     [PARTITION BY partition_expression, ... ]
     ORDER BY sort_expression [ASC | DESC], ...
@@ -39,7 +39,7 @@ The `ORDER BY` clause specifies the order of rows in each partition to which the
 
 The `PERCENT_RANK()` function returns a result that is greater than 0 and less than or equal to 1.
 
-```
+```text
 0 < PERCENT_RANK() <= 1
 ```
 
@@ -49,7 +49,7 @@ The first value always receives a rank of zero. Tie values evaluate to the same 
 
 We will use the `sales_stats` table created in the `CUME_DIST()` function tutorial for the demonstration.
 
-```
+```sql
 SELECT
  year,
  name,
@@ -66,7 +66,7 @@ ORDER BY
 
 The following example uses the `PERCENT_RANK()` function to calculate the sales percentile of each employee in 2019:
 
-```
+```sql
 SELECT
     name,
  amount,
@@ -87,7 +87,7 @@ Here is the output:
 
 This statement uses the `PERCENT_RANK()` function to calculate the sales amount percentile by sales employees in both 2018 and 2019.
 
-```
+```sql
 SELECT
     name,
  amount,

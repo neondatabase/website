@@ -29,7 +29,7 @@ To create a new tablespace, you use the `CREATE TABLESPACE` statement.
 
 Here is the basic syntax of the `CREATE TABLESPACE` statement:
 
-```
+```sql
 CREATE TABLESPACE tablespace_name
 OWNER user_name
 LOCATION directory_path;
@@ -47,7 +47,7 @@ After creating a new table space, you can specify it in the `CREATE DATABASE`, `
 
 The following statement uses the `CREATE TABLESPACE` to create a new tablespace called `ts_primary` with the physical location `c:\pgdata\primary`.
 
-```
+```sql
 CREATE TABLESPACE ts_primary
 LOCATION 'c:\pgdata\primary';
 ```
@@ -92,7 +92,7 @@ Output:
 
 The following statement creates the logistics database that uses the ts_primary tablespace:
 
-```
+```sql
 CREATE DATABASE logistics
 TABLESPACE ts_primary;
 ```
@@ -101,7 +101,7 @@ In this statement, we specify the tablespace `ts_primary` for the `logistics` da
 
 The following statement [creates a new table](/docs/postgresql/postgresql-create-table) called `deliveries` and [inserts](/docs/postgresql/postgresql-tutorial/postgresql-insert)a row into the table:
 
-```
+```sql
 CREATE TABLE deliveries (
     delivery_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_date DATE,

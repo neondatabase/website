@@ -13,7 +13,7 @@ tableOfContents: true
 
 The following illustrates the syntax of the `CURRENT_TIME` function:
 
-```
+```sql
 CURRENT_TIME(precision)
 ```
 
@@ -31,7 +31,7 @@ Let's explore some examples of using the `CURRENT_TIME` function.
 
 The following example uses the CURRENT_TIME function to get the current time with the timezone:
 
-```
+```sql
 SELECT CURRENT_TIME;
 ```
 
@@ -50,7 +50,7 @@ In this example, we don't specify the precision argument. Therefore, the result 
 
 The following example shows how to use the `CURRENT_TIME` function with the precision set to 2:
 
-```
+```sql
 SELECT CURRENT_TIME(2);
 ```
 
@@ -69,7 +69,7 @@ The `CURRENT_TIME` function can be used as the default value of `TIME` columns. 
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `log`:
 
-```
+```sql
 CREATE TABLE log (
     id SERIAL PRIMARY KEY,
     message VARCHAR(255) NOT NULL,
@@ -82,7 +82,7 @@ The `log` table has the `created_at` column with the default value is the result
 
 Second, [insert a row](/docs/postgresql/postgresql-insert) into the `log` table:
 
-```
+```sql
 INSERT INTO log( message )
 VALUES('Testing the CURRENT_TIME function');
 ```
@@ -91,7 +91,7 @@ In the statement, we only specify a value for the `message` column. Therefore, o
 
 Third, check whether the row was inserted into the `log` table with the `created_at` column populated correctly by using the following [query](/docs/postgresql/postgresql-select):
 
-```
+```sql
 SELECT * FROM log;
 ```
 

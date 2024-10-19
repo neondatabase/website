@@ -41,7 +41,7 @@ The `get_rental_function` function has the `p_customer_id` as an `in` parameter.
 
 The following returns the number of rental days of customer id 232:
 
-```
+```sql
 SELECT get_rental_duration(232);
 ```
 
@@ -88,7 +88,7 @@ In other words, the `get_rental_duration(integer)` function is overloaded by the
 
 The following statement returns the rental duration of the customer id `232` since `July 1st 2005`:
 
-```
+```sql
 SELECT get_rental_duration(232,'2005-07-01');
 ```
 
@@ -131,13 +131,13 @@ end; $$
 
 The following calls the `get_rental_duration()` function and passes the customer id 232:
 
-```
+```sql
 SELECT get_rental_duration(232);
 ```
 
 Error:
 
-```
+```sql
 ERROR:  function get_rental_duration(integer) is not unique
 LINE 1: SELECT get_rental_duration(232);
                ^

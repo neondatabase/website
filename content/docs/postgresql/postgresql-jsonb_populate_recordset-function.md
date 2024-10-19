@@ -40,7 +40,7 @@ Let's explore some examples of using the `jsonb_populate_recordset()` function.
 
 First, [create a new type](/docs/postgresql/postgresql-user-defined-data-types) called `address`:
 
-```
+```sql
 CREATE TYPE address_type AS (
     street VARCHAR(100),
     city VARCHAR(50),
@@ -50,7 +50,7 @@ CREATE TYPE address_type AS (
 
 Second, use the `jsonb_populate_recordset()` function to populate the address custom type from a JSON array of objects:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -73,7 +73,7 @@ Output:
 
 First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees`:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE employees (
 
 Second, [insert some rows](/docs/postgresql/postgresql-insert-multiple-rows) into the `employees` table:
 
-```
+```sql
 INSERT INTO employees (name, age, salary)
 VALUES
   ('John Doe', 25, 70000),
@@ -93,7 +93,7 @@ VALUES
 
 Third, use `jsonb_populate_recordset()` to query the data from the `employees` table in a structured format:
 
-```
+```sql
 SELECT
   jsonb_populate_recordset(
     null :: employees,

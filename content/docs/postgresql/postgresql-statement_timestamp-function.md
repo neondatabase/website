@@ -14,7 +14,7 @@ The `STATEMENT_TIMESTAMP()` function returns the start time of the current state
 
 Here's the syntax of the `STATEMENT_TIMESTAMP()` function:
 
-```
+```sql
 STATEMENT_TIMESTAMP()
 ```
 
@@ -28,7 +28,7 @@ Let's take some examples of using the `STATEMENT_TIMESTAMP()` function.
 
 The following statement uses the `STATEMENT_TIMESTAMP()` function to retrieve the start time of the current statement:
 
-```
+```sql
 SELECT STATEMENT_TIMESTAMP();
 ```
 
@@ -91,7 +91,7 @@ Notice that the `STATEMENT_TIMESTAMP()` function is unlike the `TRANSACTION_TIME
 
 The following example calls the `STATEMENT_TIMESTAMP()` function multiple times within a single statement:
 
-```
+```sql
 SELECT
   statement_timestamp(),
   pg_sleep(3),

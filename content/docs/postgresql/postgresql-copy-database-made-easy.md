@@ -17,14 +17,14 @@ Sometimes, you want to copy a PostgreSQL database within a database server for t
 
 PostgreSQL makes it easy to do so via the [`CREATE DATABASE`](https://www.postgrepgsqltutorial.com/postgrepgsql-create-database/) statement, as follows:
 
-```
+```sql
 CREATE DATABASE targetdb
 WITH TEMPLATE sourcedb;
 ```
 
 This statement copies the `sourcedb` to the `targetdb`. For example, to copy the `dvdrental` [sample database](https://www.postgrepgsqltutorial.com/postgrepgsql-sample-database/) to the `dvdrental_test` database, you use the following statement:
 
-```
+```sql
 CREATE DATABASE dvdrental_test
 WITH TEMPLATE dvdrental;
 ```
@@ -33,14 +33,14 @@ Depending on the [size of the source database](https://www.postgrepgsqltutorial.
 
 If the `dvdrental` database has active connections, you will encounter the following error:
 
-```
+```sql
 ERROR:  source database "dvdrental" is being accessed by other users
 DETAIL:  There is 1 other session using the database.
 ```
 
 The following query returns the active connections:
 
-```
+```sql
 SELECT pid, usename, client_addr
 FROM pg_stat_activity
 WHERE datname ='dvdrental';
@@ -48,7 +48,7 @@ WHERE datname ='dvdrental';
 
 To terminate the active connections to the `dvdrental` database, you use the following query:
 
-```
+```sql
 SELECT pg_terminate_backend (pid)
 FROM pg_stat_activity
 WHERE datname = 'dvdrental';
@@ -72,7 +72,7 @@ Second, copy the dump file to the remote server.
 
 Third, create a new database in the remote server:
 
-```
+```sql
 CREATE DATABASE targetdb;
 ```
 
@@ -96,7 +96,7 @@ Second, copy the dump file to the `remote` server.
 
 Third, create the `dvdrental` database on the `remote` server:
 
-```
+```sql
 CREATE DATABASE dvdrental;
 ```
 

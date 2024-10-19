@@ -15,7 +15,7 @@ tableOfContents: true
 
 To rename a column of a table, you use the [`ALTER TABLE`](/docs/postgresql/postgresql-alter-table) statement with `RENAME COLUMN` clause as follows:
 
-```
+```sql
 ALTER TABLE table_name
 RENAME COLUMN column_name TO new_column_name;
 ```
@@ -30,7 +30,7 @@ In this statement:
 
 The `COLUMN` keyword in the statement is optional therefore you can omit it like this:
 
-```
+```sql
 ALTER TABLE table_name
 RENAME column_name TO new_column_name;
 ```
@@ -39,7 +39,7 @@ For some reason, if you try to rename a column that does not exist, PostgreSQL w
 
 To rename multiple columns, you execute the `ALTER TABLE RENAME COLUMN` statement multiple times, one column at a time:
 
-```
+```sql
 ALTER TABLE table_name
 RENAME column_name1 TO new_column_name1;
 
@@ -57,7 +57,7 @@ Let's take some examples of using the `ALTER TABLE RENAME COLUMN` statement to r
 
 First, [create two new tables](/docs/postgresql/postgresql-create-table) `customers` and `customer_groups`.
 
-```
+```sql
 CREATE TABLE customer_groups (
   id serial PRIMARY KEY,
   name VARCHAR NOT NULL
@@ -74,7 +74,7 @@ CREATE TABLE customers (
 
 Then, [create a new view](/docs/postgresql/postgresql-views/managing-postgresql-views) named `customer_data` based on the `customers` and `customer_groups` tables.
 
-```
+```sql
 CREATE VIEW customer_data AS
 SELECT
   c.id,
@@ -89,7 +89,7 @@ FROM
 
 The following statement uses the `ALTER TABLE RENAME COLUMN` statement to rename the `email` column of the `customers` table to `contact_email`:
 
-```
+```sql
 ALTER TABLE customers
 RENAME COLUMN email TO contact_email;
 ```
@@ -98,7 +98,7 @@ RENAME COLUMN email TO contact_email;
 
 This example uses the `ALTER TABLE RENAME COLUMN` statement to change the `name` column of the `customer_groups` table to `group_name`:
 
-```
+```sql
 ALTER TABLE customer_groups
 RENAME COLUMN name TO group_name;
 ```
@@ -134,7 +134,7 @@ The output indicates that the `name` column has been changed to `group_name`.
 
 These statements rename two columns `name` and `phone` of the `customers` table to `customer_name` and `contact_phone` respectively:
 
-```
+```sql
 ALTER TABLE customers
 RENAME COLUMN name TO customer_name;
 

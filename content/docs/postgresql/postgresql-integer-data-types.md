@@ -39,7 +39,7 @@ You can use the `SMALLINT` type for storing something like the ages of people, t
 
 The following statement [creates a table](/docs/postgresql/postgresql-create-table) named `books`:
 
-```
+```sql
 CREATE TABLE books (
     book_id SERIAL PRIMARY KEY,
     title VARCHAR (255) NOT NULL,
@@ -57,7 +57,7 @@ The `INTEGER` type requires 4 bytes storage size that can store numbers in the r
 
 You can use the `INTEGER` type for a column that stores quite big whole numbers like the population of a city or even country as the following example:
 
-```
+```sql
 CREATE TABLE cities (
     city_id serial PRIMARY KEY,
     city_name VARCHAR (255) NOT NULL,

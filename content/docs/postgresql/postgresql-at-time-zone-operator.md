@@ -57,7 +57,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp to Coordinated Universal time (UTC):
 
-```
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'UTC';
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp with time zone to UTC:
 
-```
+```sql
 SELECT TIMESTAMP WITH TIME ZONE '2024-03-21 10:00:00-04' AT TIME ZONE 'UTC';
 ```
 
@@ -91,7 +91,7 @@ Output:
 
 The following query uses the `AT TIME ZONE` operator to convert a timestamp to Pacific Standard Time (PST) from the default time zone:
 
-```
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'PST';
 ```
 
@@ -108,7 +108,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp using a time zone offset:
 
-```
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE '-08:00';
 ```
 
@@ -125,7 +125,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp using a named time zone:
 
-```
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'America/New_York';
 ```
 

@@ -63,7 +63,7 @@ In this example, we do not specify the `tag` between the two dollar signs(`$`).
 
 The following example uses the dollar-quoted string constant syntax with a tag:
 
-```
+```sql
 SELECT $message$I'm a string constant$message$ s;
 ```
 
@@ -98,7 +98,7 @@ Note that you will learn about the anonymous block in the [PL/pgSQL block struct
 
 Output:
 
-```
+```sql
 NOTICE:  The number of films: 1000
 DO
 ```

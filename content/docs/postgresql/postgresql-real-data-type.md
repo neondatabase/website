@@ -20,7 +20,7 @@ However, you can use the [double precision](/docs/postgresql/postgresql-double-p
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `weathers` to store wind speed (meter per second) and temperature (celsius) data:
 
-```
+```sql
 CREATE TABLE weathers(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     location VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE weathers(
 
 Second, [insert rows](/docs/postgresql/postgresql-insert) into the `weathers` table:
 
-```
+```sql
 INSERT INTO weathers (location, wind_speed_mps, temperature_celsius, recorded_at)
 VALUES
     ('New York', 5.2, 15.3, '2024-04-19 09:00:00'),
@@ -49,7 +49,7 @@ VALUES
 
 Third, calculate the [average](/docs/postgresql/postgresql-aggregate-functions/postgresql-avg-function) wind speed and temperature in `New York` on `April 19, 2024`:
 
-```
+```sql
 SELECT
   AVG(wind_speed_mps)       wind_speed,
   AVG(temperature_celsius) temperature_celsius

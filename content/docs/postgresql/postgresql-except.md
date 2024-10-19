@@ -16,7 +16,7 @@ The `EXCEPT` operator returns distinct rows from the first (left) query that are
 
 The following illustrates the syntax of the `EXCEPT` operator.
 
-```
+```sql
 SELECT select_list
 FROM A
 EXCEPT
@@ -35,7 +35,7 @@ The following Venn diagram illustrates the `EXCEPT` operator:
 
 If you want to sort the rows in the combined result sets, you need to place the `ORDER BY` clause after the second query:
 
-```
+```sql
 SELECT select_list
 FROM A
 EXCEPT
@@ -48,7 +48,7 @@ ORDER BY sort_expression;
 
 We'll create the `top_rated_films` and `most_popular_films` tables for demonstration:
 
-```
+```sql
 CREATE TABLE top_rated_films(
   title VARCHAR NOT NULL,
   release_year SMALLINT
@@ -109,7 +109,7 @@ Let's take some examples of using the `EXCEPT` operator
 
 The following statement uses the `EXCEPT` operator to find the top-rated films that are not popular:
 
-```
+```sql
 SELECT * FROM top_rated_films
 EXCEPT
 SELECT * FROM most_popular_films;
@@ -129,7 +129,7 @@ Output:
 
 The following statement uses the `ORDER BY` clause in the query to sort the result set returned by the `EXCEPT` operator by titles:
 
-```
+```sql
 SELECT * FROM top_rated_films
 EXCEPT
 SELECT * FROM most_popular_films

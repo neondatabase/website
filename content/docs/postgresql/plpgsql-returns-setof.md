@@ -41,7 +41,7 @@ In this syntax:
 
 To call a function with the `returns setof`, you use the following statement:
 
-```
+```sql
 SELECT function_name(argument);
 ```
 
@@ -49,19 +49,19 @@ It'll return a single column containing an array of all columns of the returned 
 
 To retrieve data from a specific column of the return rows, you specify the dot (.) and column name after the function call:
 
-```
+```sql
 SELECT (function_name(argument)).column_name;
 ```
 
 If you want to retrieve data from all columns of the returned rows, you can use the `.*` like this:
 
-```
+```sql
 SELECT (function_name(argument)).*;
 ```
 
 Alternatively, you can call the function using the `SELECT...FROM` statement:
 
-```
+```sql
 SELECT * FROM function_name(argument);
 ```
 
@@ -90,7 +90,7 @@ language plpgsql;
 
 Second, call the `find_film_by_id()` function:
 
-```
+```sql
 SELECT find_film_by_id(100);
 ```
 
@@ -124,7 +124,7 @@ Output:
 
 Fourth, retrieve the data from all columns of the returned row:
 
-```
+```sql
 SELECT * FROM find_film_by_id(100);
 ```
 

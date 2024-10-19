@@ -15,7 +15,7 @@ The PostgreSQL `LENGTH()` function returns the number of characters in a string.
 
 Here's the basic syntax for the `LENGTH()` function:
 
-```
+```sql
 LENGTH(string);
 ```
 
@@ -37,7 +37,7 @@ Let's explore some examples of using the `LENGTH()` function.
 
 The following example uses the `LENGTH()` function to get the length of a string:
 
-```
+```sql
 SELECT
   LENGTH ('PostgreSQL Tutorial');
 ```
@@ -53,7 +53,7 @@ Output:
 
 If you pass NULL to the `LENGTH()` function, it returns NULL.
 
-```
+```sql
 SELECT
   LENGTH (NULL);
 ```
@@ -75,7 +75,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `LENGTH()` function to retrieve the first names and the number of characters of first names from the `customer` table:
 
-```
+```sql
 SELECT
   first_name,
   LENGTH (first_name) len

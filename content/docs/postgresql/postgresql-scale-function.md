@@ -15,7 +15,7 @@ The `SCALE()` function allows you to determine the scale of a number.
 
 Here's the basic syntax of the `SCALE()` function:
 
-```
+```sql
 SCALE(numeric_value)
 ```
 
@@ -29,7 +29,7 @@ Let's explore some examples of using the PostgreSQL `SCALE()` function.
 
 The following example uses the `SCALE()` function to determine the scale of the number `3.141592653589793`:
 
-```
+```sql
 SELECT SCALE(3.141592653589793);
 ```
 
@@ -48,7 +48,7 @@ It returns 15 indicating that there are 15 digits after the decimal point.
 
 First, [create a table](/docs/postgresql/postgresql-create-table) called `product_prices` to store product prices with various scales:
 
-```
+```sql
 CREATE TABLE product_prices (
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE product_prices (
 
 Second, [insert some data](/docs/postgresql/postgresql-insert-multiple-rows) into the table:
 
-```
+```sql
 INSERT INTO product_prices (product_name, price)
 VALUES
     ('T-Shirt', 10.123),
@@ -94,7 +94,7 @@ Output:
 
 Third, group the product prices by scales using the `SCALE()` function:
 
-```
+```sql
 SELECT
   scale(price) AS price_scale,
   COUNT(*) AS count_of_products

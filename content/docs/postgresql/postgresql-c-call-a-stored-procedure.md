@@ -53,7 +53,7 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, create a PostgreSQL stored procedure that enrolls a student and creates an invoice:
 
-```
+```sql
 CREATE OR REPLACE PROCEDURE enroll_student(
     p_student_id INTEGER,
     p_course_id INTEGER,
@@ -181,7 +181,7 @@ psql -U ed -d elearning
 
 Second, retrieve data from the enrollments table:
 
-```
+```sql
 SELECT * FROM enrollments;
 ```
 

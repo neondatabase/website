@@ -14,7 +14,7 @@ How do you locate the exact customers from the database? You can identify custom
 
 Fortunately, you can use the PostgreSQL `LIKE` operator to match the first names of customers with a string using the following query:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -76,7 +76,7 @@ Let's take some examples of using the `LIKE` operator
 
 The following statement uses the `LIKE` operator with a pattern that doesn't have any wildcard characters:
 
-```
+```sql
 SELECT 'Apple' LIKE 'Apple' AS result;
 ```
 
@@ -93,7 +93,7 @@ In this example, the `LIKE` operator behaves like the equal to (`=`) operator. T
 
 The following example uses the `LIKE` operator to match any string that starts with the letter `A`:
 
-```
+```sql
 SELECT 'Apple' LIKE 'A%' AS result;
 ```
 
@@ -116,7 +116,7 @@ We'll use the `customer` table from the [sample database](/docs/postgresql/postg
 
 The following example uses the `LIKE` operator to find customers whose first names contain the string `er` :
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -145,7 +145,7 @@ first_name  |  last_name
 
 The following example uses the `LIKE` operator with a pattern that contains both the percent ( `%`) and underscore (`_`) wildcards:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -179,7 +179,7 @@ The pattern `_her%` matches any strings that satisfy the following conditions:
 
 The following query uses the `NOT LIKE` operator to find customers whose first names do not begin with `Jen`:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -207,7 +207,7 @@ Output:
 
 PostgreSQL `ILIKE` operator, which is similar to the `LIKE` operator, but allows for **case-insensitive matching**. For example:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -229,7 +229,7 @@ Output:
 
 In this example, the `BAR%` pattern matches any string that begins with `BAR`, `Bar`, `BaR`, and so on. If you use the `LIKE` operator instead, the query will return no row:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -258,7 +258,7 @@ PostgreSQL also provides some operators that mirror the functionality of `LIKE`,
 
 For example, the following statement uses the `~~` operator to find a customer whose first names start with the string `Dar`:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -287,7 +287,7 @@ Output:
 
 Sometimes, the data, that you want to match, contains the wildcard characters `%` and `_`. For example:
 
-```
+```sql
 The rents are now 10% higher than last month
 The new film will have _ in the title
 ```
@@ -300,7 +300,7 @@ string LIKE pattern ESCAPE escape_character;
 
 Let's [create a simple table](/docs/postgresql/postgresql-create-table) for demonstration:
 
-```
+```sql
 CREATE TABLE t(
    message text
 );
@@ -326,7 +326,7 @@ Output:
 
 The following statement uses the `LIKE` operator with the `ESCAPE` option to treat the `%` followed by the number `10` as a regular character:
 
-```
+```sql
 SELECT * FROM t
 WHERE message LIKE '%10$%%' ESCAPE '$';
 ```
