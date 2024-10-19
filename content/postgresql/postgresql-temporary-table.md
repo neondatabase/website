@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-24T06:51:02.000Z
 title: 'PostgreSQL Temporary Table'
 redirectFrom:
    - /postgresql/postgresql-tutorial/postgresql-temporary-table

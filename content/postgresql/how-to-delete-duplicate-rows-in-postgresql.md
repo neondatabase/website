@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-18T13:43:29.000Z
 title: 'How To Delete Duplicate Rows in PostgreSQL'
 tableOfContents: true
 ---

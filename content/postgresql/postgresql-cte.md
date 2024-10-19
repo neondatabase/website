@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-01-02T12:19:37.000Z
 title: 'PostgreSQL CTE'
 tableOfContents: true
 ---

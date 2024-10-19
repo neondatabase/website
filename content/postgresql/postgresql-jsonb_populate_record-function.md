@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-26T01:39:59.000Z
 title: 'PostgreSQL jsonb_populate_record() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_populate_record 

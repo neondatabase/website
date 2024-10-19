@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-03-09T10:40:29.000Z
 title: 'PostgreSQL STRING_AGG Function'
 redirectFrom:
             - /postgresql/postgresql-string_agg 

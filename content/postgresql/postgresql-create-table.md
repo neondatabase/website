@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-31T04:00:10.000Z
 title: 'PostgreSQL CREATE TABLE'
 tableOfContents: true
 ---

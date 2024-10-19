@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-02T03:12:31.000Z
 title: 'PostgreSQL INSERT'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-insert

@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-18T03:07:35.000Z
 title: 'PostgreSQL NOW() Function'
 redirectFrom:
             - /postgresql/postgresql-now 

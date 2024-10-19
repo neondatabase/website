@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-19T15:09:16.000Z
 title: 'PostgreSQL INTERSECT Operator'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-intersect

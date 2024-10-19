@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-19T06:13:37.000Z
 title: 'Install PostgreSQL macOS'
 redirectFrom: 
             - /postgresql/postgresql-getting-started/install-postgresql-macos

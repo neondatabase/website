@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-29T01:58:26.000Z
 title: 'PostgreSQL BEFORE TRUNCATE Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-before-truncate-trigger

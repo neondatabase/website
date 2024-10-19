@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-05-21T09:30:48.000Z
 title: 'PostgreSQL COUNT Function'
 redirectFrom:
             - /postgresql/postgresql-count 

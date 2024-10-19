@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-27T13:00:49.000Z
 title: 'PostgreSQL LTRIM() Function'
 redirectFrom:
             - /postgresql/postgresql-ltrim 

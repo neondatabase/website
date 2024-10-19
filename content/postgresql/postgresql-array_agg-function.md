@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-03-09T09:25:30.000Z
 title: 'PostgreSQL ARRAY_AGG Function'
 redirectFrom:
             - /postgresql/postgresql-array_agg 

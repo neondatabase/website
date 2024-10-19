@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-23T14:26:43.000Z
 title: 'PostgreSQL jsonb_path_exists() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_path_exists 

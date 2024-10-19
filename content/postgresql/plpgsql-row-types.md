@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-22T08:51:11.000Z
 title: 'PL/pgSQL Row Types'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/pl-pgsql-row-types

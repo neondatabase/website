@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-03-13T15:06:15.000Z
 title: 'PostgreSQL JDBC: Call Stored Functions'
 redirectFrom: 
             - /postgresql/postgresql-jdbc/call-postgresql-stored-function

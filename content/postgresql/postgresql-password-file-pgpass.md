@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-19T13:24:23.000Z
 title: 'PostgreSQL Password File .pgpass'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-password-file-pgpass

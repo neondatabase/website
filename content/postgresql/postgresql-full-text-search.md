@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-05T10:34:52.000Z
 title: 'PostgreSQL Full Text Search'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-full-text-search

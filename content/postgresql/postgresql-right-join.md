@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-20T07:19:04.000Z
 title: 'PostgreSQL RIGHT JOIN'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-right-join

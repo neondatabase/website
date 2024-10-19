@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-05-21T08:07:00.000Z
 title: 'PostgreSQL CREATE TRIGGER Statement'
 redirectFrom: 
             - /postgresql/postgresql-triggers/creating-first-trigger-postgresql

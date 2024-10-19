@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-12T03:27:06.000Z
 title: 'PostgreSQL LEFT() Function'
 redirectFrom:
             - /postgresql/postgresql-left 

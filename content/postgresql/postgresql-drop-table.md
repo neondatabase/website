@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-31T08:04:05.000Z
 title: 'PostgreSQL DROP TABLE'
 tableOfContents: true
 ---

@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T02:56:06.000Z
 title: 'PostgreSQL jsonb_path_query_first() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_path_query_first 

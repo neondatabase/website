@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-01-02T13:03:39.000Z
 title: 'PostgreSQL ISNULL'
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-isnull

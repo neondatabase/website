@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-18T03:53:59.000Z
 title: 'PostgreSQL DEGREES() Function'
 redirectFrom: 
             - /postgresql/postgresql-degrees

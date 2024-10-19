@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-07-10T02:53:59.000Z
 title: 'PostgreSQL hstore'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-hstore

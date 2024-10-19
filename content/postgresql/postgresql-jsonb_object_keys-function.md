@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T09:11:34.000Z
 title: 'PostgreSQL jsonb_object_keys() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_object_keys 

@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-28T07:20:42.000Z
 title: 'PostgreSQL AFTER UPDATE Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-after-update-trigger

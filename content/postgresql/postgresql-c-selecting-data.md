@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T13:21:12.000Z
 title: 'PostgreSQL C#: Selecting Data'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-select

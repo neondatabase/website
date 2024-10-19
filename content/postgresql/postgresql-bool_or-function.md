@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-22T02:27:40.000Z
 title: 'PostgreSQL BOOL_OR() Function'
 redirectFrom:
             - /postgresql/postgresql-bool_or 

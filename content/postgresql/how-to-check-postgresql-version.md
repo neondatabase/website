@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-20T06:32:51.000Z
 title: 'How to Check PostgreSQL Version'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-version

@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-25T08:00:11.000Z
 title: 'PostgreSQL Generated Columns'
 tableOfContents: true
 ---

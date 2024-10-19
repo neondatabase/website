@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T09:22:07.000Z
 title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-import-csv-file

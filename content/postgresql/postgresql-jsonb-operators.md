@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-26T09:44:50.000Z
 title: 'PostgreSQL JSONB Operators'
 redirectFrom: 
             - /postgresql/postgresql-json-functions/postgresql-jsonb-operators

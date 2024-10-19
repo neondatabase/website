@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-07-09T09:45:14.000Z
 title: 'Reset Forgotten Password For postgres User'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-reset-password

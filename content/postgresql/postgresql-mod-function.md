@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-17T06:10:29.000Z
 title: 'PostgreSQL MOD() Function'
 redirectFrom: 
             - /postgresql/postgresql-mod

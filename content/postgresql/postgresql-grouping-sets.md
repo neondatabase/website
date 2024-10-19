@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-19T06:36:24.000Z
 title: 'PostgreSQL GROUPING SETS'
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-grouping-sets

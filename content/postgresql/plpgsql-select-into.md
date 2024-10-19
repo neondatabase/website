@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-22T08:26:00.000Z
 title: 'PL/pgSQL Select Into'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/pl-pgsql-select-into

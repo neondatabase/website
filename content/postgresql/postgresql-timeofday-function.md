@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-20T04:00:25.000Z
 title: 'PostgreSQL TIMEOFDAY() Function'
 redirectFrom:
             - /postgresql/postgresql-timeofday 

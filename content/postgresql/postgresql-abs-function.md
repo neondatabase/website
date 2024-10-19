@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-17T03:54:07.000Z
 title: 'PostgreSQL ABS() Function'
 redirectFrom: 
             - /postgresql/postgresql-abs

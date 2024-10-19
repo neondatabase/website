@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-27T08:54:27.000Z
 title: 'PostgreSQL INSTEAD OF Triggers'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-instead-of-triggers

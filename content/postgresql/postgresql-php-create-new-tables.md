@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-12T02:17:58.000Z
 title: 'PostgreSQL PHP: Create New Tables'
 redirectFrom: 
             - /postgresql/postgresql-php/create-tables

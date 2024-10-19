@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-17T16:11:48.000Z
 title: 'PostgreSQL CREATE TABLE AS'
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-create-table-as

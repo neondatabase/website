@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-02-17T08:43:06.000Z
 title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
 redirectFrom: 
             - /postgresql/postgresql-jdbc/connecting-to-postgresql-database

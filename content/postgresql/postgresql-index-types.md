@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-09T09:41:21.000Z
 title: 'PostgreSQL Index Types'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-index-types

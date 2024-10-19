@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-12T08:49:07.000Z
 title: 'PostgreSQL PHP: Working with Binary Data'
 redirectFrom: 
             - /postgresql/postgresql-php/postgresql-blob

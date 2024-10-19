@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-19T10:42:10.000Z
 title: 'PostgreSQL ANY Operator'
 redirectFrom: 
             - /postgresql/postgresql-any

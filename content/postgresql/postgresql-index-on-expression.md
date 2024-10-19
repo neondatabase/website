@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-06T15:10:46.000Z
 title: 'PostgreSQL Index on Expression'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-index-on-expression

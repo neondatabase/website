@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T08:09:13.000Z
 title: 'PostgreSQL C#: Deleting Data'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-delete

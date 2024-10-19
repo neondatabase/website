@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-13T03:47:13.000Z
 title: 'PostgreSQL REGEXP_REPLACE() Function'
 redirectFrom:
             - /postgresql/postgresql-regexp_replace 

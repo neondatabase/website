@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-08-31T05:05:07.000Z
 title: 'PostgreSQL CHECK Constraints'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-check-constraint

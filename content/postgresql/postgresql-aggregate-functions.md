@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-13T13:48:15.000Z
 title: 'PostgreSQL Aggregate Functions'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true

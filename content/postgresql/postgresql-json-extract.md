@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-23T09:33:34.000Z
 title: 'PostgreSQL JSON Extract'
 redirectFrom: 
             - /postgresql/postgresql-json-functions/postgresql-json-extract

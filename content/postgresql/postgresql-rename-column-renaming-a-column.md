@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-23T13:02:14.000Z
 title: 'PostgreSQL RENAME COLUMN: Renaming a column'
 redirectFrom: 
             - /postgresql/postgresql-rename-column

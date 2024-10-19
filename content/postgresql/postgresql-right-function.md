@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-12T03:51:22.000Z
 title: 'PostgreSQL RIGHT() Function'
 redirectFrom:
             - /postgresql/postgresql-right 

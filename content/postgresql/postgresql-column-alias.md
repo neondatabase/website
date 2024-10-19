@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-11T02:45:37.000Z
 title: 'PostgreSQL Column Alias'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-table.png
 tableOfContents: true

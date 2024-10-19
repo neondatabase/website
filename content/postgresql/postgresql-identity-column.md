@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-18T08:28:23.000Z
 title: 'PostgreSQL Identity Column'
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-identity-column

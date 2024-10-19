@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-17T06:16:57.000Z
 title: 'PostgreSQL Python: Delete Data from Tables'
 redirectFrom: 
             - /postgresql/postgresql-python/delete

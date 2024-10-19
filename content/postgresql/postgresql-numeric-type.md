@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-19T09:25:57.000Z
 title: 'PostgreSQL NUMERIC Type'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-numeric

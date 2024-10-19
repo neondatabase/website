@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-08-05T06:27:48.000Z
 title: 'PL/pgSQL Exit Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-exit

@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-12T10:32:33.000Z
 title: 'PL/pgSQL CASE Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-case-statement

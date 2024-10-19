@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-17T07:21:45.000Z
 redirectFrom:
     - /postgresql/postgresql-sqrt
 title: 'PostgreSQL SQRT() Function'

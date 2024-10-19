@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-12T03:57:36.000Z
 title: 'PL/pgSQL IF Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-if-else-statements

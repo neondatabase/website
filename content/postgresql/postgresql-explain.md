@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-02T08:40:09.000Z
 title: 'PostgreSQL EXPLAIN'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
 tableOfContents: true

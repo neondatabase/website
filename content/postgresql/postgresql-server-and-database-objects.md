@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-24T07:51:15.000Z
 title: 'PostgreSQL Server and Database Objects'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png
 tableOfContents: true

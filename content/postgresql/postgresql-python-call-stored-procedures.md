@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-17T02:06:35.000Z
 title: 'PostgreSQL Python: Call Stored Procedures'
 redirectFrom: 
             - /postgresql/postgresql-python/call-stored-procedures

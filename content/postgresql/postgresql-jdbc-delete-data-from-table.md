@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-03-12T15:59:17.000Z
 title: 'PostgreSQL JDBC: Delete Data from Table'
 redirectFrom: 
             - /postgresql/postgresql-jdbc/delete

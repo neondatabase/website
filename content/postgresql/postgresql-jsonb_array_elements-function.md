@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T04:18:10.000Z
 title: 'PostgreSQL jsonb_array_elements() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_array_elements 

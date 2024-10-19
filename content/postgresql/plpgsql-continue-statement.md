@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-08-05T09:53:10.000Z
 title: 'PL/pgSQL Continue Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/pl-pgsql-continue

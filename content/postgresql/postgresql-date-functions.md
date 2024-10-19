@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-15T07:35:45.000Z
 title: 'PostgreSQL Date Functions'
 redirectFrom:
             - /postgresql/postgresql-tutorial/postgresql-date

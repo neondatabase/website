@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-08-31T03:49:23.000Z
 title: 'PostgreSQL Foreign Key'
 redirectFrom:
    - /postgresql/postgresql-tutorial/postgresql-foreign-key

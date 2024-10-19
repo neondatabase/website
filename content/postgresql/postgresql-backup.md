@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-05T08:07:12.000Z
 title: 'PostgreSQL Backup'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-backup-database

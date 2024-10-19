@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-07-10T08:53:51.000Z
 title: 'PostgreSQL JSON'
 tableOfContents: true
 ---

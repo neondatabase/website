@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T07:37:43.000Z
 title: 'PostgreSQL C#: Updating Data'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-update

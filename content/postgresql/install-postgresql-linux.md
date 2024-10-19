@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-18T09:42:16.000Z
 title: 'Install PostgreSQL Linux'
 redirectFrom: 
             - /postgresql/postgresql-getting-started/install-postgresql-linux

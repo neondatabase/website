@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-07T05:03:38.000Z
 title: 'PostgreSQL Create Function Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/postgresql-create-function

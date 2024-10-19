@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T01:19:07.000Z
 title: 'PostgreSQL jsonb_insert() Function'
 redirectFrom: 
             - /postgresql/postgresql-jsonb_insert

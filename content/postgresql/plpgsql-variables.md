@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-11T10:09:23.000Z
 title: 'PL/pgSQL Variables'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-variables

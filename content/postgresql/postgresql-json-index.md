@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-06T08:18:52.000Z
 title: 'PostgreSQL JSON Index'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-json-index

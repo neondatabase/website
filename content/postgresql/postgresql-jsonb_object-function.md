@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T13:22:54.000Z
 title: 'PostgreSQL jsonb_object() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_object 

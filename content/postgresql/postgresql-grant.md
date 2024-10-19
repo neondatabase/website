@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-28T02:14:43.000Z
 title: 'PostgreSQL GRANT'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-grant

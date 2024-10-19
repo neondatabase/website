@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-03T02:25:10.000Z
 title: 'PostgreSQL CREATE DATABASE'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-create-database

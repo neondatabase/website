@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-29T06:06:40.000Z
 title: 'PostgreSQL Event Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-event-trigger

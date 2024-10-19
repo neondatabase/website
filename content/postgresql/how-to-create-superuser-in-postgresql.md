@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-21T09:50:44.000Z
 title: 'How to Create Superuser in PostgreSQL'
 redirectFrom: 
             - /postgresql/postgresql-administration/create-superuser-postgresql

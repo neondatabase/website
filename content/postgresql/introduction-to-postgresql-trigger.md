@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-05-21T08:02:54.000Z
 title: 'Introduction to PostgreSQL Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/introduction-postgresql-trigger

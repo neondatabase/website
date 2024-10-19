@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T14:19:43.000Z
 title: 'PostgreSQL row_to_json() Function'
 redirectFrom:
             - /postgresql/postgresql-row_to_json 

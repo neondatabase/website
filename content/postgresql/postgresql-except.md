@@ -1,4 +1,5 @@
 ---
+createdAt: 2022-08-28T08:44:12.000Z
 title: 'PostgreSQL EXCEPT'
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-except

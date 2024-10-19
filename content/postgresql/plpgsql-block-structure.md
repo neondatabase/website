@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-10T13:33:18.000Z
 title: 'PL/pgSQL Block Structure'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-block-structure

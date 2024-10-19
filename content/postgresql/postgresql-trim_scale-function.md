@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-18T03:02:15.000Z
 title: 'PostgreSQL TRIM_SCALE() Function'
 redirectFrom: 
             - /postgresql/postgresql-trim_scale

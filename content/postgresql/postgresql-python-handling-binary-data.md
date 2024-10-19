@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-16T09:29:02.000Z
 title: 'PostgreSQL Python: Handling Binary Data'
 redirectFrom: 
             - /postgresql/postgresql-python/blob

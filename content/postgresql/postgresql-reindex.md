@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-08T14:12:02.000Z
 title: 'PostgreSQL REINDEX'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-reindex

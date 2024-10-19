@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-16T02:58:48.000Z
 title: 'PostgreSQL LOCALTIME Function'
 redirectFrom:
             - /postgresql/postgresql-localtime 

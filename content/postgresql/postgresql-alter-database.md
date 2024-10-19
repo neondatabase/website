@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-03T05:10:06.000Z
 title: 'PostgreSQL ALTER DATABASE'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-alter-database

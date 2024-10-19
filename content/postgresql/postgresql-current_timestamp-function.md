@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-15T14:57:39.000Z
 title: 'PostgreSQL CURRENT_TIMESTAMP Function'
 redirectFrom:
             - /postgresql/postgresql-current_timestamp 

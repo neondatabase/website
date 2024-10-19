@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-27T04:12:58.000Z
 title: 'PostgreSQL DROP ROLE Statement'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-drop-role

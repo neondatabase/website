@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-25T13:02:26.000Z
 title: 'PostgreSQL List Views'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-list-views

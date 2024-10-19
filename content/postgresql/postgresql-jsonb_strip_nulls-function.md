@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-23T15:17:40.000Z
 title: 'PostgreSQL jsonb_strip_nulls() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_strip_nulls 

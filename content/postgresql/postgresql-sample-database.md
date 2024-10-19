@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-27T03:10:19.000Z
 title: 'PostgreSQL Sample Database'
 redirectFrom: 
             - /postgresql/postgresql-getting-started/postgresql-sample-database

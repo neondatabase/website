@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T07:52:38.000Z
 title: 'PostgreSQL jsonb_agg() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_agg 

@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-07-02T09:18:43.000Z
 title: 'PostgreSQL Recursive Query'
 tableOfContents: true
 ---

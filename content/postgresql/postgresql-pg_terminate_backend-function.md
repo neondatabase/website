@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-22T13:09:54.000Z
 title: 'PostgreSQL pg_terminate_backend() Function'
 redirectFrom:
             - /postgresql/postgresql-pg_terminate_backend 

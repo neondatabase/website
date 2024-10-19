@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-12T08:33:31.000Z
 title: 'What is PostgreSQL?'
 redirectFrom: 
             - /postgresql/postgresql-getting-started/what-is-postgresql

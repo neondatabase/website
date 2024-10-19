@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-08-06T02:20:53.000Z
 title: 'PostgreSQL Exception'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/postgresql-exception

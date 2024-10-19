@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-17T01:14:35.000Z
 title: 'PostgreSQL AND Operator'
 redirectFrom: 
             - /postgresql/postgresql-and

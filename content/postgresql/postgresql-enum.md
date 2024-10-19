@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-19T10:27:05.000Z
 title: 'PostgreSQL enum'
 tableOfContents: true
 ---

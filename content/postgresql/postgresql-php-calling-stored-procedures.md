@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-13T11:53:11.000Z
 title: 'PostgreSQL PHP: Calling Stored Procedures'
 redirectFrom: 
             - /postgresql/postgresql-php/call-stored-procedures

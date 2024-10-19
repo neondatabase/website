@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-02T08:29:25.000Z
 title: 'PostgreSQL DELETE'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-delete

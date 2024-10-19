@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-21T07:26:18.000Z
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 redirectFrom:
             - /postgresql/postgresql-c-call-a-postgresql 

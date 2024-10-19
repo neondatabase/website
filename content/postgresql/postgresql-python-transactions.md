@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-16T07:34:12.000Z
 title: 'PostgreSQL Python: Transactions'
 redirectFrom: 
             - /postgresql/postgresql-python/transaction

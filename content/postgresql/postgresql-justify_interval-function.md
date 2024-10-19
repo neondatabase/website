@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-21T03:31:22.000Z
 title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
 redirectFrom:
             - /postgresql/postgresql-justify_interval 

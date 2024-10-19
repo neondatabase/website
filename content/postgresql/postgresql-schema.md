@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-11T08:07:47.000Z
 title: 'PostgreSQL Schema'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-schema

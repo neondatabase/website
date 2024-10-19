@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-01-01T13:12:10.000Z
 title: 'PostgreSQL Multicolumn Indexes'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-multicolumn-indexes

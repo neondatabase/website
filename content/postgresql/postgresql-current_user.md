@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-22T06:47:50.000Z
 title: 'PostgreSQL CURRENT_USER'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-current_user

@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-27T14:07:02.000Z
 title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
 redirectFrom: 
             - /postgresql/postgresql-add-column

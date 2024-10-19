@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-18T15:46:21.000Z
 title: 'PL/pgSQL Loop Statements'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-loop-statements

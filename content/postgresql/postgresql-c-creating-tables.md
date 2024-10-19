@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T00:35:34.000Z
 title: 'PostgreSQL C#: Creating Tables'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-create-table

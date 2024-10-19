@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-13T14:31:19.000Z
 title: 'PostgreSQL PHP: Delete Data From a Table'
 redirectFrom: 
             - /postgresql/postgresql-php/delete

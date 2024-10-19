@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-27T08:20:07.000Z
 title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-char-varchar-text

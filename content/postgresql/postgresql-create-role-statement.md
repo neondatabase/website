@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-06T08:37:15.000Z
 title: 'PostgreSQL CREATE ROLE Statement'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-roles

@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-21T12:37:22.000Z
 title: 'PostgreSQL C#: Call a Stored Procedure'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-call-a-stored-procedure

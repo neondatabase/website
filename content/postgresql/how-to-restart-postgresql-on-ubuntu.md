@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-20T09:40:30.000Z
 title: 'How to Restart PostgreSQL on Ubuntu'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-restart-ubuntu

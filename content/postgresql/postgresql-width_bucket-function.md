@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-17T13:55:37.000Z
 title: 'PostgreSQL WIDTH_BUCKET() Function'
 redirectFrom: 
             - /postgresql/postgresql-width_bucket

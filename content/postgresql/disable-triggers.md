@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-05-21T08:12:02.000Z
 title: 'Disable Triggers'
 redirectFrom: 
             - /postgresql/postgresql-triggers/managing-postgresql-trigger

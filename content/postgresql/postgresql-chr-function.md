@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-14T08:19:35.000Z
 title: 'PostgreSQL CHR() Function'
 redirectFrom:
             - /postgresql/postgresql-chr 

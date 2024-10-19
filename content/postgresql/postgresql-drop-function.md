@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-25T10:56:57.000Z
 title: 'PostgreSQL Drop Function'
 redirectFrom:
             - /postgresql/postgresql-drop 

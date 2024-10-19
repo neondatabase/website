@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-28T08:42:28.000Z
 title: 'PostgreSQL BEFORE DELETE Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-before-delete-trigger

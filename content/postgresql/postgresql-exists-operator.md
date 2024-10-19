@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-19T08:41:22.000Z
 title: 'PostgreSQL EXISTS Operator'
 redirectFrom: 
             - /postgresql/postgresql-exists

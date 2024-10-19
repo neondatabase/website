@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-28T03:29:04.000Z
 title: 'PostgreSQL AFTER INSERT Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-after-insert-trigger

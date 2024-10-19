@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-13T08:37:45.000Z
 title: 'PostgreSQL INSERT Multiple Rows'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-insert-multiple-rows

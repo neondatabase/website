@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-31T08:13:29.000Z
 title: 'PostgreSQL IN'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true

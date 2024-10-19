@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-21T14:03:47.000Z
 title: 'PostgreSQL Composite Types'
 tableOfContents: true
 ---

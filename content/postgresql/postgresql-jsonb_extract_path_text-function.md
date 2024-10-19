@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T00:07:18.000Z
 title: 'PostgreSQL jsonb_extract_path_text() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_extract_path_text 

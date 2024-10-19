@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-07T03:04:07.000Z
 title: 'Introduction to PostgreSQL PL/pgSQL'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures

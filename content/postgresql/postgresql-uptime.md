@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-20T05:17:03.000Z
 title: 'PostgreSQL Uptime'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-uptime

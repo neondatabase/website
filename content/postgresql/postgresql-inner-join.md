@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-29T02:30:26.000Z
 title: 'PostgreSQL INNER JOIN'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-inner-join

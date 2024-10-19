@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-28T13:14:30.000Z
 title: 'PostgreSQL CONCAT_WS() Function'
 redirectFrom:
             - /postgresql/postgresql-concat_ws 

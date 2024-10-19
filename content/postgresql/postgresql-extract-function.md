@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-15T07:27:23.000Z
 title: 'PostgreSQL EXTRACT() Function'
 redirectFrom:
             - /postgresql/postgresql-extract 

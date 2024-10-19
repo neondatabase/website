@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-17T07:43:56.000Z
 title: 'PostgreSQL SCALE() Function'
 redirectFrom: 
             - /postgresql/postgresql-scale

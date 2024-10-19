@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-21T13:10:28.000Z
 title: 'PostgreSQL TIME Data Type'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-time

@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-28T05:30:37.000Z
 title: 'PostgreSQL LIKE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png
 tableOfContents: true

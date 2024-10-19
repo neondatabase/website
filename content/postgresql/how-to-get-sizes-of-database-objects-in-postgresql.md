@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-15T09:45:46.000Z
 title: 'How to Get Sizes of Database Objects in PostgreSQL'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-database-indexes-table-size

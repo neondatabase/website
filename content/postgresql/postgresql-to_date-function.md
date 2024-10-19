@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-16T14:12:39.000Z
 title: 'PostgreSQL TO_DATE() Function'
 redirectFrom:
             - /postgresql/postgresql-to_date 

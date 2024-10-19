@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-03T07:48:14.000Z
 title: 'PostgreSQL Administration'
 tableOfContents: true
 ---

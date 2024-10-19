@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-17T06:29:22.000Z
 title: 'PostgreSQL CEIL() Function'
 redirectFrom: 
             - /postgresql/postgresql-ceil

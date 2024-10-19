@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-20T08:10:00.000Z
 title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
 redirectFrom:
             - /postgresql/postgresql-clock_timestamp 

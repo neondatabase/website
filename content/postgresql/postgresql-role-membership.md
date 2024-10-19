@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-27T10:26:42.000Z
 title: 'PostgreSQL Role Membership'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-role-membership

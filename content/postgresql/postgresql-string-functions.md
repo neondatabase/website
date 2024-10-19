@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-14T12:11:27.000Z
 title: 'PostgreSQL String Functions'
 tableOfContents: true
 ---

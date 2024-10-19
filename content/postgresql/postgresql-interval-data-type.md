@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-21T06:29:07.000Z
 title: 'PostgreSQL Interval Data Type'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-interval

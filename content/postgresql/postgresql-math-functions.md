@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-16T07:35:32.000Z
 title: 'PostgreSQL Math Functions'
 tableOfContents: true
 ---

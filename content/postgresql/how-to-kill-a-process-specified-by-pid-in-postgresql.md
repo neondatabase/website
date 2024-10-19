@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-22T06:46:53.000Z
 title: 'How to Kill a Process Specified by PID in PostgreSQL'
 tableOfContents: true
 ---

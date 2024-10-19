@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-29T06:59:46.000Z
 title: 'PostgreSQL GROUP BY'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-group-by

@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-04-12T15:41:36.000Z
 title: 'PostgreSQL TRUNCATE TABLE'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-truncate-table

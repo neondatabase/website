@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-25T09:47:47.000Z
 title: 'Creating PostgreSQL Updatable Views'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-updatable-views

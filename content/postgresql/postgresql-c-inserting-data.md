@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-20T06:20:35.000Z
 title: 'PostgreSQL C#: Inserting data'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-insert

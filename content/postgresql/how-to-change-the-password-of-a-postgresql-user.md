@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-21T07:16:04.000Z
 title: 'How to Change the Password of a PostgreSQL User'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-change-password

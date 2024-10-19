@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-28T08:43:53.000Z
 title: 'PostgreSQL UNION'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgresQL-UNION.png
 tableOfContents: true

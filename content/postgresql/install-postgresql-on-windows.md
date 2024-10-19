@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-12T08:43:11.000Z
 title: 'Install PostgreSQL on Windows'
 redirectFrom: 
             - /postgresql/postgresql-getting-started/install-postgresql

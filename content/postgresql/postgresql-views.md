@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-27T08:05:54.000Z
 title: 'PostgreSQL Views'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2015-05-PostgreSQL-View.png
 tableOfContents: true

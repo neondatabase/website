@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-27T13:43:09.000Z
 title: 'PostgreSQL WHERE'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-where

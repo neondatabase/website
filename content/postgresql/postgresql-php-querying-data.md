@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-12T13:31:52.000Z
 title: 'PostgreSQL PHP: Querying Data'
 redirectFrom: 
             - /postgresql/postgresql-php/query

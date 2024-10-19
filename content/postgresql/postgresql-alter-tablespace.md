@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-04T09:08:47.000Z
 title: 'PostgreSQL ALTER TABLESPACE'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-alter-tablespace

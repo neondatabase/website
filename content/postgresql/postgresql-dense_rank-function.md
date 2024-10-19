@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-12T14:24:30.000Z
 title: 'PostgreSQL DENSE_RANK Function'
 redirectFrom:
             - /postgresql/postgresql-dense_rank 

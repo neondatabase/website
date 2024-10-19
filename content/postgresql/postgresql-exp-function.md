@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-18T03:00:06.000Z
 title: 'PostgreSQL EXP() Function'
 redirectFrom: 
             - /postgresql/postgresql-exp

@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-17T04:24:10.000Z
 title: 'PostgreSQL FLOOR() Function'
 redirectFrom: 
             - /postgresql/postgresql-floor

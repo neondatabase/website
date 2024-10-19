@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-05T10:10:52.000Z
 title: 'PostgreSQL UPDATE Join'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-03-PostgreSQL-UPDATE-JOIN-Sample-Database.png
 tableOfContents: true

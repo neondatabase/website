@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T02:01:30.000Z
 title: 'PostgreSQL jsonb_path_query_array() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_path_query_array 

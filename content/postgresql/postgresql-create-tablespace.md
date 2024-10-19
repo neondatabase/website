@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-04T07:47:43.000Z
 title: 'PostgreSQL CREATE TABLESPACE'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-create-tablespace

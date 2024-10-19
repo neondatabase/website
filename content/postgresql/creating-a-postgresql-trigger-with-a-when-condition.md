@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-30T03:12:49.000Z
 title: 'Creating a PostgreSQL Trigger with a When Condition'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-trigger-when-condition

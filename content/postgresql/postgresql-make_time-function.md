@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-25T02:03:00.000Z
 title: 'PostgreSQL MAKE_TIME() Function'
 redirectFrom:
             - /postgresql/postgresql-make_time 

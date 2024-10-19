@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-19T02:16:56.000Z
 title: 'PostgreSQL ALTER VIEW Statement'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-alter-view

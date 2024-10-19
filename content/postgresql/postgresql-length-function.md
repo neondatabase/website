@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-10-04T01:35:51.000Z
 title: 'PostgreSQL LENGTH() Function'
 redirectFrom:
             - /postgresql/postgresql-length 

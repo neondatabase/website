@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T11:32:08.000Z
 title: 'PostgreSQL jsonb_pretty() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_pretty 

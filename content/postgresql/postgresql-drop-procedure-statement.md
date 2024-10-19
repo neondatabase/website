@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-26T01:09:49.000Z
 title: 'PostgreSQL DROP PROCEDURE Statement'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/postgresql-drop-procedure

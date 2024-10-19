@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-05T04:01:06.000Z
 title: 'PostgreSQL DROP TABLESPACE Statement'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-drop-tablespace

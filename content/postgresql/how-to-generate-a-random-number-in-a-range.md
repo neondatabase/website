@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-28T06:32:59.000Z
 title: 'How to Generate a Random Number in a Range'
 redirectFrom: 
             - /postgresql/postgresql-random-range

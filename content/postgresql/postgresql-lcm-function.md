@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-19T03:13:02.000Z
 title: 'PostgreSQL LCM() Function'
 redirectFrom: 
             - /postgresql/postgresql-lcm

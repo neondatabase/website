@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-17T14:39:16.000Z
 title: 'PostgreSQL SELECT INTO'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png
 tableOfContents: true

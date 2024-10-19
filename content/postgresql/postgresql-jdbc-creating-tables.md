@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-30T07:30:37.000Z
 title: 'PostgreSQL JDBC: Creating Tables'
 redirectFrom: 
             - /postgresql/postgresql-jdbc/create-tables

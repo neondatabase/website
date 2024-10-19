@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-28T07:05:16.000Z
 title: 'PostgreSQL BETWEEN'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true

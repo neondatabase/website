@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-08-01T10:51:55.000Z
 title: 'Enable Triggers'
 redirectFrom: 
             - /postgresql/postgresql-triggers/enable-triggers

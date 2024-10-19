@@ -1,4 +1,5 @@
 ---
+createdAt: 2012-08-27T07:58:04.000Z
 title: 'PostgreSQL ORDER BY'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-order-by

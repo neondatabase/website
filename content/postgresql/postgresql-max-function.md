@@ -1,4 +1,5 @@
 ---
+createdAt: 2014-04-20T13:01:27.000Z
 title: 'PostgreSQL MAX Function'
 redirectFrom:
             - /postgresql/postgresql-max 

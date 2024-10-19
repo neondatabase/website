@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-19T14:56:51.000Z
 title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
 redirectFrom: 
             - /postgresql/postgresql-csharp/postgresql-csharp-connect

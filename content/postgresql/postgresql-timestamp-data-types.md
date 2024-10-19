@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-23T04:58:51.000Z
 title: 'PostgreSQL Timestamp Data Types'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-timestamp

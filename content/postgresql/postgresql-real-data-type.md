@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-19T03:12:36.000Z
 title: 'PostgreSQL REAL Data Type'
 tableOfContents: true
 ---

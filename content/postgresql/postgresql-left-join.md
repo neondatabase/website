@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-29T04:05:47.000Z
 title: 'PostgreSQL LEFT JOIN'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-12-PostgreSQL-Join-Left-Join.png
 redirectFrom:

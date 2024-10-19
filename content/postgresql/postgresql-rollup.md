@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-18T14:23:39.000Z
 title: 'PostgreSQL ROLLUP'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png
 tableOfContents: true

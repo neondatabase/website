@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-06T03:14:50.000Z
 title: 'PostgreSQL Restore Database'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-restore-database

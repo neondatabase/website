@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-22T10:01:03.000Z
 title: 'How to Change the Owner of a PostgreSQL Database'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgres-change-database-owner

@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-12T14:35:45.000Z
 title: 'PostgreSQL FORMAT() Function'
 redirectFrom:
             - /postgresql/postgresql-format 

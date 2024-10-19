@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-28T10:42:02.000Z
 title: 'PostgreSQL ALTER ROLE Statement'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-alter-role

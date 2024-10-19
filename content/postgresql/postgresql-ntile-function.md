@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-25T01:15:49.000Z
 title: 'PostgreSQL NTILE Function'
 redirectFrom:
             - /postgresql/postgresql-ntile 

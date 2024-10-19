@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-14T09:14:34.000Z
 title: 'PostgreSQL SPLIT_PART() Function'
 redirectFrom:
             - /postgresql/postgresql-split_part 

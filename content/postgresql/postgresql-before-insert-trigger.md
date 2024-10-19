@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-28T02:50:21.000Z
 title: 'PostgreSQL BEFORE INSERT Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-before-insert-trigger

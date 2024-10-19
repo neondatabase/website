@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-08-31T09:27:01.000Z
 title: 'PostgreSQL UNIQUE Constraint'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-unique-constraint

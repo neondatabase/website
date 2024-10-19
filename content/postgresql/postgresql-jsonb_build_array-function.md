@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-23T07:43:00.000Z
 title: 'PostgreSQL jsonb_build_array() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_build_array 

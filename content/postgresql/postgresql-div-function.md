@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-17T05:08:31.000Z
 title: 'PostgreSQL DIV() Function'
 redirectFrom: 
             - /postgresql/postgresql-div

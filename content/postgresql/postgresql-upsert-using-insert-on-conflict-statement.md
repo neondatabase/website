@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-30T06:20:52.000Z
 title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
 redirectFrom: 
             - /postgresql/postgresql-upsert

@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-22T08:11:08.000Z
 title: 'PostgreSQL Change Column Type'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-alter-table

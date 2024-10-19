@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-25T04:35:21.000Z
 title: 'PostgreSQL MAKE_INTERVAL() Function'
 redirectFrom:
             - /postgresql/postgresql-make_interval 

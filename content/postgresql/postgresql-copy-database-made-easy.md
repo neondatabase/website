@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-16T02:03:24.000Z
 title: 'PostgreSQL Copy Database Made Easy'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-copy-database

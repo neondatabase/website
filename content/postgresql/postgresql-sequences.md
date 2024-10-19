@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-17T10:06:48.000Z
 title: 'PostgreSQL Sequences'
 redirectFrom: 
             - /postgresql/postgresql-sequences

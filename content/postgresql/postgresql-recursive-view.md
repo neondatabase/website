@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-07-05T02:22:24.000Z
 title: 'PostgreSQL Recursive View'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-recursive-view

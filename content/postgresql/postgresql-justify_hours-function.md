@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-20T10:37:32.000Z
 title: 'PostgreSQL JUSTIFY_HOURS() Function'
 redirectFrom:
             - /postgresql/postgresql-justify_hours 

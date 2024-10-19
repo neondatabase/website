@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-08-03T03:38:42.000Z
 title: 'PostgreSQL Python: Call PostgreSQL Functions'
 redirectFrom: 
             - /postgresql/postgresql-python/postgresql-python-call-postgresql-functions

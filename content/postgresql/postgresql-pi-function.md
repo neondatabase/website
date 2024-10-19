@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-18T03:46:52.000Z
 redirectFrom:
     - /postgresql/postgresql-pi
 title: 'PostgreSQL PI() Function'

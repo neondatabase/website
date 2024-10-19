@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-23T01:46:43.000Z
 title: 'PostgreSQL DATE Data Type'
 redirectFrom: 
             - /postgresql/postgresql-date

@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-02T05:40:05.000Z
 title: 'PostgreSQL UPDATE'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-update

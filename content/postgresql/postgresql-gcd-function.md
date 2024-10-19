@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-05-19T02:14:47.000Z
 title: 'PostgreSQL GCD() Function'
 redirectFrom: 
             - /postgresql/postgresql-gcd

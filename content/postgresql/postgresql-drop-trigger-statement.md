@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-06-15T03:49:18.000Z
 title: 'PostgreSQL DROP TRIGGER Statement'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-drop-trigger

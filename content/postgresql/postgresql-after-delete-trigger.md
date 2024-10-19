@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-28T09:35:46.000Z
 title: 'PostgreSQL AFTER DELETE Trigger'
 redirectFrom: 
             - /postgresql/postgresql-triggers/postgresql-after-delete-trigger

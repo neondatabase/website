@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-31T06:52:29.000Z
 title: 'PostgreSQL ALTER TABLE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
 tableOfContents: true

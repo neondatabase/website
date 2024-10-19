@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-25T01:04:05.000Z
 title: 'PostgreSQL PERCENT_RANK Function'
 redirectFrom:
             - /postgresql/postgresql-percent_rank 

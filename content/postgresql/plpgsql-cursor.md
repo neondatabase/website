@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-20T04:17:53.000Z
 title: 'PL/pgSQL Cursor'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-cursor

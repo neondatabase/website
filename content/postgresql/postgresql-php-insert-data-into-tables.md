@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-12T03:25:56.000Z
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 redirectFrom: 
             - /postgresql/postgresql-php/insert

@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-10-10T03:53:19.000Z
 title: 'PostgreSQL INITCAP() Function'
 redirectFrom:
             - /postgresql/postgresql-initcap 

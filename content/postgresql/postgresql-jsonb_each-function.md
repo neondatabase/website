@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T08:46:06.000Z
 title: 'PostgreSQL jsonb_each() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_each 

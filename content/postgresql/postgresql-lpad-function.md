@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-12T04:33:47.000Z
 title: 'PostgreSQL LPAD() Function'
 redirectFrom:
             - /postgresql/postgresql-lpad 

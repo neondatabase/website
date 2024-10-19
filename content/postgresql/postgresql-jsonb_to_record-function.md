@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-24T10:45:03.000Z
 title: 'PostgreSQL jsonb_to_record() Function'
 redirectFrom:
             - /postgresql/postgresql-jsonb_to_record 

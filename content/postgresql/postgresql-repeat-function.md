@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-28T11:07:59.000Z
 title: 'PostgreSQL REPEAT() Function'
 redirectFrom:
             - /postgresql/postgresql-repeat 

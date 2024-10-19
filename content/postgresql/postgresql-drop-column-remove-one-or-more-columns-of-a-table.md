@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-22T04:10:47.000Z
 title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
 redirectFrom: 
             - /postgresql/postgresql-drop-column

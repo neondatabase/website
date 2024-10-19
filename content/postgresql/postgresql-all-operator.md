@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-03-17T13:22:59.000Z
 title: 'PostgreSQL ALL Operator'
 redirectFrom: 
             - /postgresql/postgresql-all

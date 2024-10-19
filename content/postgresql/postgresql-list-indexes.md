@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-09T04:08:12.000Z
 title: 'PostgreSQL List Indexes'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-list-indexes

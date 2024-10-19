@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-21T01:51:53.000Z
 title: 'PostgreSQL Rename Database'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-rename-database

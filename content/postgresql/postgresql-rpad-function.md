@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-29T01:07:53.000Z
 title: 'PostgreSQL RPAD() Function'
 redirectFrom:
             - /postgresql/postgresql-rpad 

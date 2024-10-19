@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-25T02:18:32.000Z
 title: 'PostgreSQL jsonb_set() Function'
 redirectFrom: 
             - /postgresql/postgresql-jsonb_set

@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-16T07:22:02.000Z
 title: 'PostgreSQL LAG Function'
 redirectFrom:
             - /postgresql/postgresql-lag 

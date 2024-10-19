@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-17T08:11:33.000Z
 title: 'PostgreSQL SIGN() Function'
 redirectFrom: 
             - /postgresql/postgresql-sign

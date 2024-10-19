@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-26T09:31:09.000Z
 title: 'PostgreSQL Materialized Views'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-materialized-views

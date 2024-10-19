@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-16T07:49:15.000Z
 title: 'PostgreSQL Python: Insert Data Into a Table'
 redirectFrom: 
             - /postgresql/postgresql-python/insert

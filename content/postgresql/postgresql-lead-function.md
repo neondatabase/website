@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-16T07:16:48.000Z
 title: 'PostgreSQL LEAD Function'
 redirectFrom:
             - /postgresql/postgresql-lead 

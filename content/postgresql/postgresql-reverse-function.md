@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-28T10:28:49.000Z
 title: 'PostgreSQL REVERSE() Function'
 redirectFrom:
             - /postgresql/postgresql-reverse 

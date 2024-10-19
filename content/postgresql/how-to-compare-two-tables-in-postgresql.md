@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-02T09:37:13.000Z
 title: 'How to Compare Two Tables in PostgreSQL'
 redirectFrom: 
             - /postgresql/compare-two-tables-in-postgresql

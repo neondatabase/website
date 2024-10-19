@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-27T05:58:00.000Z
 title: 'PostgreSQL MERGE Statement'
 redirectFrom: 
             - /postgresql/postgresql-merge

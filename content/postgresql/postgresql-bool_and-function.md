@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-03-22T02:49:10.000Z
 title: 'PostgreSQL BOOL_AND() Function'
 redirectFrom:
             - /postgresql/postgresql-bool_and 

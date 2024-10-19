@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-16T14:56:38.000Z
 title: 'PostgreSQL RANDOM() Function'
 redirectFrom: 
             - /postgresql/postgresql-random

@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-16T03:34:53.000Z
 title: 'PostgreSQL Python: Create Tables'
 redirectFrom: 
             - /postgresql/postgresql-python/create-tables

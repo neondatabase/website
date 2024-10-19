@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-23T07:12:32.000Z
 title: 'PostgreSQL to_jsonb() Function'
 redirectFrom:
             - /postgresql/postgresql-to_jsonb 

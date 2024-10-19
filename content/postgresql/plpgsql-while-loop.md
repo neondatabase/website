@@ -1,4 +1,5 @@
 ---
+createdAt: 2020-07-23T07:16:53.000Z
 title: 'PL/pgSQL While Loop'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/pl-pgsql-while-loop

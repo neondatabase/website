@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-02-18T13:37:24.000Z
 title: 'PostgreSQL Integer Data Types'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-integer

@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-02T11:52:12.000Z
 title: 'PostgreSQL CREATE INDEX Statement'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-create-index

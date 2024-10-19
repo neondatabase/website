@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-02T11:46:10.000Z
 title: 'PostgreSQL Indexes'
 tableOfContents: true
 ---

@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-18T05:34:57.000Z
 title: 'PostgreSQL DATE_PART() Function'
 redirectFrom:
             - /postgresql/postgresql-date_part 

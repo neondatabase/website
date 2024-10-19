@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-25T08:03:09.000Z
 title: 'PostgreSQL CREATE VIEW'
 redirectFrom: 
             - /postgresql/postgresql-views/managing-postgresql-views

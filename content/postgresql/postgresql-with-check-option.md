@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-07-02T03:50:51.000Z
 title: 'PostgreSQL WITH CHECK OPTION'
 redirectFrom: 
             - /postgresql/postgresql-views/postgresql-views-with-check-option

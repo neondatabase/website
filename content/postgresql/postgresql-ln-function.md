@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-18T04:22:26.000Z
 title: 'PostgreSQL LN() Function'
 redirectFrom: 
             - /postgresql/postgresql-ln

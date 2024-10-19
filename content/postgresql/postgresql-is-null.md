@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-01-01T14:28:19.000Z
 title: 'PostgreSQL IS NULL'
 tableOfContents: true
 ---

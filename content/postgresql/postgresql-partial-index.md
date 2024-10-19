@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-08T12:08:46.000Z
 title: 'PostgreSQL Partial Index'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-partial-index

@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-02-21T01:20:27.000Z
 title: 'How to Restart PostgreSQL on Windows'
 redirectFrom: 
             - /postgresql/postgresql-administration/restart-postgresql-windows

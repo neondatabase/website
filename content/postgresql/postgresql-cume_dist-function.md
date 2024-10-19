@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-25T00:53:00.000Z
 title: 'PostgreSQL CUME_DIST Function'
 redirectFrom:
             - /postgresql/postgresql-cume_dist 

@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-13T10:29:49.000Z
 title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-function-parameters

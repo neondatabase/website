@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-03-17T08:02:01.000Z
 title: 'PostgreSQL DATE_TRUNC() Function'
 redirectFrom:
             - /postgresql/postgresql-date_trunc 

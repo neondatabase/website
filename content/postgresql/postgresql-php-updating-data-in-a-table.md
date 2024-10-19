@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-12T06:48:51.000Z
 title: 'PostgreSQL PHP: Updating Data In a Table'
 redirectFrom: 
             - /postgresql/postgresql-php/update

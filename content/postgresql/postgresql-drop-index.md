@@ -1,4 +1,5 @@
 ---
+createdAt: 2018-12-02T14:42:46.000Z
 title: 'PostgreSQL DROP INDEX'
 redirectFrom: 
             - /postgresql/postgresql-indexes/postgresql-drop-index

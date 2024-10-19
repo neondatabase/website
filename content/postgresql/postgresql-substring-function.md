@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-26T01:13:03.000Z
 title: 'PostgreSQL SUBSTRING() Function'
 redirectFrom:
             - /postgresql/postgresql-substring 

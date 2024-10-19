@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-29T03:00:10.000Z
 title: 'PostgreSQL Describe Table'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-describe-table

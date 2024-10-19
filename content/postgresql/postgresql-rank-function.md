@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-05-12T13:29:28.000Z
 title: 'PostgreSQL RANK Function'
 redirectFrom:
             - /postgresql/postgresql-rank 

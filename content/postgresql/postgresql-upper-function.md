@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-01-28T09:57:35.000Z
 title: 'PostgreSQL UPPER() Function'
 redirectFrom:
             - /postgresql/postgresql-upper 

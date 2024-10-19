@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-05-29T08:03:02.000Z
 title: 'PostgreSQL HAVING'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-having

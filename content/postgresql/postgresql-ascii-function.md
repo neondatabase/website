@@ -1,4 +1,5 @@
 ---
+createdAt: 2017-08-14T07:58:34.000Z
 title: 'PostgreSQL ASCII() Function'
 redirectFrom:
             - /postgresql/postgresql-ascii 

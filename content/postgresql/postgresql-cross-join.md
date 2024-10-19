@@ -1,4 +1,5 @@
 ---
+createdAt: 2016-06-17T09:50:14.000Z
 title: 'PostgreSQL Cross Join'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-cross-join

@@ -1,4 +1,5 @@
 ---
+createdAt: 2013-06-03T03:46:35.000Z
 title: 'PostgreSQL DROP DATABASE'
 redirectFrom: 
             - /postgresql/postgresql-administration/postgresql-drop-database

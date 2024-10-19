@@ -1,4 +1,5 @@
 ---
+createdAt: 2019-01-04T04:24:08.000Z
 title: 'PostgreSQL CREATE PROCEDURE'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/postgresql-create-procedure

@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-08-30T09:23:06.000Z
 title: 'PostgreSQL Primary Key'
 redirectFrom:
   - /postgresql/postgresql-tutorial/postgresql-primary-key

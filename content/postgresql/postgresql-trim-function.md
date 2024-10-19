@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-10-04T07:45:35.000Z
 title: 'PostgreSQL TRIM() Function'
 redirectFrom:
             - /postgresql/postgresql-trim 

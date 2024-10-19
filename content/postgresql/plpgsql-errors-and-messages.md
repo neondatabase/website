@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-09-10T15:30:02.000Z
 title: 'PL/pgSQL Errors and Messages'
 redirectFrom: 
             - /postgresql/postgresql-plpgsql/plpgsql-errors-messages

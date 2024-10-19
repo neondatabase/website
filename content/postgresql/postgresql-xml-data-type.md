@@ -1,4 +1,5 @@
 ---
+createdAt: 2024-04-20T03:57:18.000Z
 title: 'PostgreSQL XML Data Type'
 tableOfContents: true
 ---

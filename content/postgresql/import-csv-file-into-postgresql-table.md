@@ -1,4 +1,5 @@
 ---
+createdAt: 2015-05-23T08:15:18.000Z
 title: 'Import CSV File Into PostgreSQL Table'
 redirectFrom: 
             - /postgresql/import-csv-file-into-posgresql-table
