@@ -8,6 +8,10 @@ updatedOn: '2024-10-18T18:50:56.386Z'
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
 
+<Admonition type="tip" title="partner stories">
+Read about how partners like [Vercel](https://neon.tech/blog/neon-postgres-on-vercel), [Replit](https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/), [Retool](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview) have integrated with Neon.
+</Admonition>
+
 ## Partnering with Neon
 
 Learn about the benefits of integrating with Neon and how to become a partner.
