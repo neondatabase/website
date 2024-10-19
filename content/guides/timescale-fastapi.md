@@ -50,7 +50,7 @@ Follow these steps to set up your project and virtual environment:
     uv venv
     source .venv/bin/activate
     `
-    `bash
+`bash
     uv venv
     .venv\Scripts\activate
     `

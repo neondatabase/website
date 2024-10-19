@@ -62,7 +62,7 @@ Follow these steps to set up your backend for the full-stack portfolio website:
     uv venv
     source .venv/bin/activate
     `
-    `bash
+`bash
     uv venv
     .venv\Scripts\activate
     `
