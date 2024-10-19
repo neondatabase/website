@@ -46,13 +46,13 @@ Follow these steps to set up your project and virtual environment:
 
     <CodeTabs labels={["Linux/macOS", "Windows"]}>
     `bash
-    uv venv
-    source .venv/bin/activate
-    `
+uv venv
+source .venv/bin/activate
+`
     `bash
-    uv venv
-    .venv\Scripts\activate
-    `
+uv venv
+.venv\Scripts\activate
+`
     </CodeTabs>
 
     You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
