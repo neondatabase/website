@@ -15,7 +15,7 @@ This project is perfect for showcasing technical skills through a portfolio that
 
 Before you start, ensure that you have the following tools and services ready:
 
-- pip : This is required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+- `pip`: This is required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
   ```bash
   pip --version
   ```
