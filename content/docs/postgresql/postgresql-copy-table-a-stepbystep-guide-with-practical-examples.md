@@ -57,7 +57,7 @@ CREATE TABLE contacts(
 );
 ```
 
-In this table, we have two indexes: one index for the [primary key](/docs/postgresql/postgresql-primary-key/) and another for the [`UNIQUE`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint) constraint.
+In this table, we have two indexes: one index for the [primary key](/docs/postgresql/postgresql-primary-key) and another for the [`UNIQUE`](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint) constraint.
 
 Second, [insert](/docs/postgresql/postgresql-insert) some rows into the `contacts` table:
 

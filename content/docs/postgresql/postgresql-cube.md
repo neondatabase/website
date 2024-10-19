@@ -29,7 +29,7 @@ GROUP BY
 In this syntax:
 
 - First, specify the `CUBE` subclause in the the `GROUP BY` clause of the [`SELECT`](/docs/postgresql/postgresql-select) statement.
-- Second, in the select list, specify the columns (dimensions or dimension columns) which you want to analyze and [aggregation function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/) expressions.
+- Second, in the select list, specify the columns (dimensions or dimension columns) which you want to analyze and [aggregation function](/docs/postgresql/postgresql-aggregate-functions) expressions.
 - Third, in the `GROUP BY` clause, specify the dimension columns within the parentheses of the `CUBE` subclause.
 
 The query generates all possible grouping sets based on the dimension columns specified in `CUBE`. The `CUBE` subclause is a short way to define multiple grouping sets so the following are equivalent:

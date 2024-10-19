@@ -31,13 +31,13 @@ In this statement:
 
 After defining an index expression, PostgreSQL will consider using that index when the expression appears in the `WHERE` clause or in the `ORDER BY` clause of the SQL statement.
 
-Note that maintaining indexes on expressions can incur additional costs. PostgreSQL evaluates the expression for each row during [insertion](/docs/postgresql/postgresql-insert) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) and utilizes the result for building the index.
+Note that maintaining indexes on expressions can incur additional costs. PostgreSQL evaluates the expression for each row during [insertion](/docs/postgresql/postgresql-insert) or [update](/docs/postgresql/postgresql-tutorial/postgresql-update) and utilizes the result for building the index.
 
 Therefore, it's recommended to use the indexes on expressions when prioritizing retrieval speed over insertion and update speed.
 
 ## PostgreSQL index on expression example
 
-We'll use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+We'll use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![customer table](/postgresqltutorial_data/customer-table.png)
 

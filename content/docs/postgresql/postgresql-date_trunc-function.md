@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL DATE_TRUNC() function
 
-The `DATE_TRUNC()` function truncates a [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp), a `TIMESTAMP WITH TIME ZONE`, or an [`INTERVAL`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval) value to a specified precision.
+The `DATE_TRUNC()` function truncates a [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp), a `TIMESTAMP WITH TIME ZONE`, or an [`INTERVAL`](/docs/postgresql/postgresql-tutorial/postgresql-interval) value to a specified precision.
 
 Here's the basic syntax of the `DATE_TRUNC` function:
 

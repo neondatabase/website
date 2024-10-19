@@ -72,7 +72,7 @@ PostgreSQL has many advanced features that other enterprise-class database manag
 - Table inheritance
 - Sophisticated locking mechanism
 - [Foreign key referential integrity](/docs/postgresql/postgresql-foreign-key)
-- [Views](https://www.postgresqltutorial.com/postgresql-views/), rules, [subquery](/docs/postgresql/postgresql-subquery)
+- [Views](/docs/postgresql/postgresql-views), rules, [subquery](/docs/postgresql/postgresql-subquery)
 - Nested transactions (savepoints)
 - Multi-version concurrency control (MVCC)
 - Asynchronous replication

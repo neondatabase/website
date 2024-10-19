@@ -131,7 +131,7 @@ The following picture illustrates the result:
 
 In this example,
 
-- First, add up the payments for each customer using the [`SUM()`](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/) function and the `GROUP BY` clause,
+- First, add up the payments for each customer using the [`SUM()`](/docs/postgresql/postgresql-aggregate-functions/postgresql-sum-function) function and the `GROUP BY` clause,
 -
 - Second, calculate the length of the bar chart based on the sums of payments using various functions: `TRUNC()` to truncate the total payments, `CAST()` to convert the result of the `TRUNC()` to an integer. To make the bar chart more readable, we divided the sum of payments by 10.
 -

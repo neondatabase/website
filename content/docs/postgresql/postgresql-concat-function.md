@@ -114,7 +114,7 @@ Output:
 
 ### 3) Using the CONCAT() function with NULL
 
-First, [create a table](/docs/postgresql/postgresql-create-table/) called `contacts` and [insert some rows](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
+First, [create a table](/docs/postgresql/postgresql-create-table) called `contacts` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
 ```
 CREATE TABLE contacts (

@@ -157,7 +157,7 @@ The following diagram illustrates the logic:
 
 ![PL/pgSQL searched case statement](/postgresqltutorial_data/wp-content-uploads-2015-09-plpgsql-searched-case-statement.png)
 
-Notice that the searched `case` statement is similar to the [if then elsif statement](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/).
+Notice that the searched `case` statement is similar to the [if then elsif statement](/docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements).
 
 ## Summary
 

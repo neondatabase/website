@@ -13,7 +13,7 @@ tableOfContents: true
 
 The `FULL OUTER JOIN` combine data from two tables and returns all rows from both tables, including matching and non-matching rows from both sides.
 
-In other words, the `FULL OUTER JOIN` combines the results of both the [left join](/docs/postgresql/postgresql-left-join) and the [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join).
+In other words, the `FULL OUTER JOIN` combines the results of both the [left join](/docs/postgresql/postgresql-left-join) and the [right join](/docs/postgresql/postgresql-tutorial/postgresql-right-join).
 
 Here's the basic syntax of `FULL OUTER JOIN` clause:
 

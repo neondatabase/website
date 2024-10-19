@@ -29,7 +29,7 @@ The `LTRIM()` function returns the string with all leading characters removed.
 
 To remove both leading and trailing characters from a string, you use the [TRIM()](/docs/postgresql/postgresql-string-functions/postgresql-trim-function) function.
 
-To remove the trailing characters from a string, you use the [RTRIM()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/) function.
+To remove the trailing characters from a string, you use the [RTRIM()](/docs/postgresql/postgresql-string-functions/postgresql-rtrim) function.
 
 ## PostgreSQL LTRIM() function examples
 
@@ -73,7 +73,7 @@ Since the default of the second argument of the `LTRIM()` function is space, we 
 
 ### 3) Using the LTRIM() function with table data example
 
-First, [create a new table](/docs/postgresql/postgresql-create-table/) called `articles` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
+First, [create a new table](/docs/postgresql/postgresql-create-table) called `articles` and [insert some rows](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
 ```
 CREATE TABLE articles(

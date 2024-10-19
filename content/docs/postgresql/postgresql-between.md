@@ -37,7 +37,7 @@ The following expression is equivalent to the expression that uses the `NOT BETW
 value < low OR value > high
 ```
 
-In practice, you often use the `BETWEEN`operator in the [WHERE](/docs/postgresql/postgresql-where/ "PostgreSQL WHERE")clause of the [SELECT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/ "PostgreSQL SELECT"), [INSERT](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/), [UPDATE,](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/)and [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) statements.
+In practice, you often use the `BETWEEN`operator in the [WHERE](/docs/postgresql/postgresql-where)clause of the [SELECT](/docs/postgresql/postgresql-tutorial/postgresql-select), [INSERT](/docs/postgresql/postgresql-tutorial/postgresql-insert), [UPDATE,](/docs/postgresql/postgresql-tutorial/postgresql-update)and [DELETE](/docs/postgresql/postgresql-tutorial/postgresql-delete) statements.
 
 ## PostgreSQL BETWEEN operator examples
 

@@ -50,7 +50,7 @@ To handle other exceptions rather than the one on the list, you can use the `whe
 
 ## Handling exception examples
 
-We'll use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We'll use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![Film table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 

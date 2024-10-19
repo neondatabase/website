@@ -19,7 +19,7 @@ psql -U postgres
 
 It'll prompt you to enter a password for the postgres user.
 
-Second, [create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/) called `elearning`:
+Second, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) called `elearning`:
 
 ```
 CREATE DATABASE elearning;
@@ -31,7 +31,7 @@ Third, change the current database to `elearning`:
 \c elearning
 ```
 
-Fourth, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) (user) with the name `ed`:
+Fourth, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) (user) with the name `ed`:
 
 ```
 CREATE ROLE ed WITH LOGIN PASSWORD 'YourPassword';

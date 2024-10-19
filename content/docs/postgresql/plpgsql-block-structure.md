@@ -33,7 +33,7 @@ A block may have an optional `label` that is located at the beginning and end of
 
 Typically, you use the block label when you want to specify it in the `EXIT` statement of the block body or to qualify the names of [variables](/docs/postgresql/postgresql-plpgsql/plpgsql-variables) declared in the block.
 
-The declaration section is where you [declare all variables](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/) used within the body section. Each statement in the declaration section is terminated with a semicolon (`;`).
+The declaration section is where you [declare all variables](/docs/postgresql/postgresql-plpgsql/plpgsql-variables) used within the body section. Each statement in the declaration section is terminated with a semicolon (`;`).
 
 The syntax for declaring a variable is as follows:
 
@@ -59,7 +59,7 @@ The initial value is optional. For example, you can declare a variable called `m
 max int;
 ```
 
-Please note that you'll learn about variables in more detail in the upcoming [variable tutorial](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/).
+Please note that you'll learn about variables in more detail in the upcoming [variable tutorial](/docs/postgresql/postgresql-plpgsql/plpgsql-variables).
 
 The body section is where you place the code. Each statement in the body section is terminated with a semicolon (;).
 
@@ -114,7 +114,7 @@ end first_block';
 
 However, we use the [dollar-quoted string constant syntax](/docs/postgresql/postgresql-plpgsql/dollar-quoted-string-constants) to make it more readable.
 
-In the declaration section, we declare a [variable](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/) `film_count` and initialize its value to zero.
+In the declaration section, we declare a [variable](/docs/postgresql/postgresql-plpgsql/plpgsql-variables) `film_count` and initialize its value to zero.
 
 ```
 film_count integer = 0;

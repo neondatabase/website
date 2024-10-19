@@ -90,7 +90,7 @@ The second argument is -2, therefore, the `TRUNC()` function replaced the digits
 
 ### 4) Truncate numbers returned by a query
 
-See the following `film`, `film_category`, and `category` tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+See the following `film`, `film_category`, and `category` tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![film film_category category tables](/postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png)
 

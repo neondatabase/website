@@ -6,9 +6,9 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you will learn about various kinds of PostgreSQL joins including inner join, left join, right join, and full outer join.
 
-PostgreSQL join is used to combine columns from one ([self-join](/docs/postgresql/postgresql-self-join)) or more tables based on the values of the common columns between related tables. The common columns are typically the [primary key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/) columns of the first table and the [foreign key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key) columns of the second table.
+PostgreSQL join is used to combine columns from one ([self-join](/docs/postgresql/postgresql-self-join)) or more tables based on the values of the common columns between related tables. The common columns are typically the [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) columns of the first table and the [foreign key](/docs/postgresql/postgresql-tutorial/postgresql-foreign-key) columns of the second table.
 
-PostgreSQL supports [inner join](/docs/postgresql/postgresql-inner-join/),[left join](/docs/postgresql/postgresql-tutorial/postgresql-left-join), [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join/), [full outer join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/), [cross join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cross-join/), [natural join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join/), and a special kind of join called [self-join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-self-join).
+PostgreSQL supports [inner join](/docs/postgresql/postgresql-inner-join),[left join](/docs/postgresql/postgresql-tutorial/postgresql-left-join), [right join](/docs/postgresql/postgresql-tutorial/postgresql-right-join), [full outer join](/docs/postgresql/postgresql-tutorial/postgresql-full-outer-join), [cross join](/docs/postgresql/postgresql-tutorial/postgresql-cross-join), [natural join](/docs/postgresql/postgresql-tutorial/postgresql-natural-join), and a special kind of join called [self-join](/docs/postgresql/postgresql-tutorial/postgresql-self-join).
 
 ## Setting up sample tables
 

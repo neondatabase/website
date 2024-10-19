@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL materialized views
 
-In PostgreSQL, [views](/docs/postgresql/postgresql-views) are virtual tables that represent data of the underlying tables. Simple views can be [updatable](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/).
+In PostgreSQL, [views](/docs/postgresql/postgresql-views) are virtual tables that represent data of the underlying tables. Simple views can be [updatable](/docs/postgresql/postgresql-views/postgresql-updatable-views).
 
 PostgreSQL extends the view concept to the next level which allows views to store data physically. These views are called **materialized views**.
 
@@ -51,7 +51,7 @@ To avoid this, you can use the `CONCURRENTLY` option.
 REFRESH MATERIALIZED VIEW CONCURRENTLY view_name;
 ```
 
-With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version of the materialized view, compares two versions, and performs [INSERT](/docs/postgresql/postgresql-insert) and [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) only the differences.
+With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version of the materialized view, compares two versions, and performs [INSERT](/docs/postgresql/postgresql-insert) and [UPDATE](/docs/postgresql/postgresql-tutorial/postgresql-update) only the differences.
 
 PostgreSQL allows you to retrieve data from a materialized view while it is being updated. One requirement for using `CONCURRENTLY` option is that the materialized view must have a `UNIQUE` index.
 
@@ -69,7 +69,7 @@ In this syntax, you specify the name of the materialized view that you want to d
 
 ## PostgreSQL materialized views example
 
-We'll use the tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for creating a materialized view.
+We'll use the tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for creating a materialized view.
 
 First, create a materialized view named `rental_by_category` using the `CREATE MATERIALIZED VIEW` statement:
 

@@ -20,7 +20,7 @@ To declare a `record` variable, you simply use a variable name followed by the `
 variable_name record;
 ```
 
-A `record` variable is similar to a [row-type variable](https://www.postgresqltutorial.com/plpgsql-row-types/), which can hold only one row of a result set.
+A `record` variable is similar to a [row-type variable](/docs/postgresql/plpgsql-row-types), which can hold only one row of a result set.
 
 Unlike a row-type variable, a `record` variable lacks a predefined structure. Instead, the structure of a `record` variable is determined when an actual row is assigned to it via the `select` or `for` statement.
 
@@ -105,7 +105,7 @@ How it works:
 
 - First, declare a variable named r with the type `record`.
 -
-- Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
+- Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
 -
 - Third, show the contents of the fields of the record variable by using the dot notation (`rec.title` and `rec.length`)
 

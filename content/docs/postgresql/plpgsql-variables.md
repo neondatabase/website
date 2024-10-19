@@ -27,7 +27,7 @@ variable_name data_type [= expression];
 In this syntax:
 
 - First, specify the name of the variable. It is a good practice to assign a meaningful name to a variable. For example, instead of naming a variable `i` you should use `index` or `counter`.
-- Second, associate a specific [data type](/docs/postgresql/postgresql-data-types) with the variable. The data type can be any valid data type such as [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/), [varchar](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/), and [char](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
+- Second, associate a specific [data type](/docs/postgresql/postgresql-data-types) with the variable. The data type can be any valid data type such as [integer](/docs/postgresql/postgresql-tutorial/postgresql-integer), [numeric](/docs/postgresql/postgresql-tutorial/postgresql-numeric), [varchar](/docs/postgresql/postgresql-tutorial/postgresql-char-varchar-text), and [char](/docs/postgresql/postgresql-tutorial/postgresql-char-varchar-text).
 - Third, optionally assign a default value to the variable. If you don't do so, the initial value of the variable is `NULL`.
 
 Please note that you can use either `:=` or `=` assignment operator to set an initial value for a variable.
@@ -204,10 +204,10 @@ DO
 
 In this example, we declare two variables:
 
-- The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+- The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 - The `featured_title` has the same data type as the data type of the `film_title` variable.
 
-We use the [select into](https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select-into/) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
+We use the [select into](/docs/postgresql/postgresql-plpgsql/pl-pgsql-select-into) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
 
 Using the type-copying feature offers the following advantages:
 

@@ -11,7 +11,7 @@ tableOfContents: true
 
 After [creating a role](/docs/postgresql/postgresql-administration/postgresql-roles) with the `LOGIN` attribute, the role can log in to the PostgreSQL database server.
 
-However, it cannot do anything to the database objects like tables, [views](https://www.postgresqltutorial.com/postgresql-views/), [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/), etc. For example, the role cannot [select data from a table](/docs/postgresql/postgresql-select) or execute a specific function.
+However, it cannot do anything to the database objects like tables, [views](/docs/postgresql/postgresql-views), [functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function), etc. For example, the role cannot [select data from a table](/docs/postgresql/postgresql-select) or execute a specific function.
 
 To allow a role to interact with database objects, you need to grant privileges on the database objects to the role using the `GRANT` statement.
 

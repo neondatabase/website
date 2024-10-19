@@ -25,7 +25,7 @@ In this syntax:
 - Second, use the `if exists` option if you want to instruct PostgreSQL to issue a notice instead of an error if the function does not exist.
 - Third, specify the argument list of the function. Since [functions can be overloaded,](/docs/postgresql/postgresql-plpgsql/plpgsql-function-overloading) PostgreSQL needs to know which function you want to remove by checking the argument list. If a function is unique within the schema, you do not need to specify the argument list.
 
-When a function has any dependent objects such as operators or [triggers](https://www.postgresqltutorial.com/postgresql-triggers/), you cannot drop that function.
+When a function has any dependent objects such as operators or [triggers](/docs/postgresql/postgresql-triggers), you cannot drop that function.
 
 To drop the function and its dependent objects, you can use the `cascade` option. The `drop function` with the `cascade` option will recursively remove the function, its dependent objects, and the objects that depend on those objects, and so on.
 

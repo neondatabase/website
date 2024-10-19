@@ -14,7 +14,7 @@ This tutorial picks up from where the [Inserting Data Into Table Tutorial](/docs
 
 To update data from a table in Python, you follow these steps:
 
-- First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
+- First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-python/connect).
 - Next, create a `cursor` object from the `connection` object.
 - Then, execute an [UPDATE](/docs/postgresql/postgresql-update) statement by calling the `execute()` method of the `cursor` object.
 - After that, commit the changes by calling the `commit()` method of the `connection` object.

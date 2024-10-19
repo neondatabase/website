@@ -20,7 +20,7 @@ Here's the basic syntax of the `AGE()` function:
 AGE(timestamp,timestamp);
 ```
 
-The `AGE()` function accepts two [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp) values. It subtracts the second argument from the first one and returns an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval) as a result.
+The `AGE()` function accepts two [`TIMESTAMP`](/docs/postgresql/postgresql-timestamp) values. It subtracts the second argument from the first one and returns an [interval](/docs/postgresql/postgresql-tutorial/postgresql-interval) as a result.
 
 For example:
 

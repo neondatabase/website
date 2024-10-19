@@ -72,7 +72,7 @@ In practice, you often use the `EXISTS` operator in conjunction with the [correl
 
 ## PostgreSQL EXISTS examples
 
-We will use the following `customer` and `payment` tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We will use the following `customer` and `payment` tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png)
 

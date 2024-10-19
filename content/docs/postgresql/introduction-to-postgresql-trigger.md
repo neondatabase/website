@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## What are PostgreSQL triggers
 
-A PostgreSQL trigger is a [function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) invoked automatically whenever an event associated with a table occurs. An event could be any of the following: [INSERT](/docs/postgresql/postgresql-insert/ "PostgreSQL INSERT"), [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/ "PostgreSQL UPDATE"), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/ "PostgreSQL DELETE")or [TRUNCATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table "PostgreSQL TRUNCATE TABLE").
+A PostgreSQL trigger is a [function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) invoked automatically whenever an event associated with a table occurs. An event could be any of the following: [INSERT](/docs/postgresql/postgresql-insert), [UPDATE](/docs/postgresql/postgresql-tutorial/postgresql-update), [DELETE](/docs/postgresql/postgresql-tutorial/postgresql-delete)or [TRUNCATE](/docs/postgresql/postgresql-tutorial/postgresql-truncate-table).
 
 A trigger is a special [user-defined function](/docs/postgresql/postgresql-stored-procedures) associated with a table. To create a new trigger, you define a trigger function first, and then bind this trigger function to a table.
 

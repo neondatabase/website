@@ -80,7 +80,7 @@ psql -U postgres -d sales
 
 It'll prompt you for a password.
 
-Third, use the `\dt` command to [show tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in the `sales` database:
+Third, use the `\dt` command to [show tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in the `sales` database:
 
 ```
 \dt

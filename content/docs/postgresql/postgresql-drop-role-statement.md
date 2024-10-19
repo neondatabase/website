@@ -126,7 +126,7 @@ create table customers(
 );
 ```
 
-Third, [show the table list](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in the `sales` database:
+Third, [show the table list](/docs/postgresql/postgresql-administration/postgresql-show-tables) in the `sales` database:
 
 ```
 \dt

@@ -13,7 +13,7 @@ tableOfContents: true
 
 PostgreSQL `MIN()` function is an [aggregate function](/docs/postgresql/postgresql-aggregate-functions) that returns the minimum value in a set of values.
 
-To find the minimum value in a column of a table, you pass the column name the `MIN()` function. The [data type](/docs/postgresql/postgresql-data-types/) of the column can be [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text), or any comparable type.
+To find the minimum value in a column of a table, you pass the column name the `MIN()` function. The [data type](/docs/postgresql/postgresql-data-types) of the column can be [numeric](/docs/postgresql/postgresql-tutorial/postgresql-integer), [string](/docs/postgresql/postgresql-tutorial/postgresql-char-varchar-text), or any comparable type.
 
 Here's the basic syntax of the `MIN()` function:
 

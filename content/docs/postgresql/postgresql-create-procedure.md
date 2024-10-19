@@ -11,7 +11,7 @@ tableOfContents: true
 
 So far, you have learned how to [define user-defined functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) using the `create function` statement.
 
-A drawback of user-defined functions is that they cannot execute [transactions](/docs/postgresql/postgresql-transaction/). In other words, inside a user-defined function, you cannot [start a transaction](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction), and commit or rollback it.
+A drawback of user-defined functions is that they cannot execute [transactions](/docs/postgresql/postgresql-transaction). In other words, inside a user-defined function, you cannot [start a transaction](/docs/postgresql/postgresql-tutorial/postgresql-transaction), and commit or rollback it.
 
 PostgreSQL 11 introduced stored procedures that support transactions.
 

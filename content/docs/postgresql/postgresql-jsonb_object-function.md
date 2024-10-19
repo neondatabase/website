@@ -12,7 +12,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL jsonb_object() function
 
-The `jsonb_object()` function allows you to build a JSON object from a [text](/docs/postgresql/postgresql-char-varchar-text) [array](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array).
+The `jsonb_object()` function allows you to build a JSON object from a [text](/docs/postgresql/postgresql-char-varchar-text) [array](/docs/postgresql/postgresql-tutorial/postgresql-array).
 
 Here's the syntax of the `jsonb_object()` function:
 

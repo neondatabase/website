@@ -56,7 +56,7 @@ Let's take some examples of using the `WITH CHECK OPTION`.
 
 ### Setting up a sample table
 
-The following statements [create a new table](/docs/postgresql/postgresql-create-table/) called `employees` and [insert data into it](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows):
+The following statements [create a new table](/docs/postgresql/postgresql-create-table) called `employees` and [insert data into it](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows):
 
 ```
 CREATE TABLE employees (
@@ -150,7 +150,7 @@ WHERE
 WITH CHECK OPTION;
 ```
 
-After adding the `WITH CHECK OPTION`, you perform insert, [update](/docs/postgresql/postgresql-update), and [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
+After adding the `WITH CHECK OPTION`, you perform insert, [update](/docs/postgresql/postgresql-update), and [delete](/docs/postgresql/postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
 
 For example, the following `INSERT` statement will fail with an error:
 

@@ -12,7 +12,7 @@ There are several ways to compare the content of two tables to find the differen
 
 ## Comparing two tables using EXCEPT and UNION operators
 
-First, [create table](/docs/postgresql/postgresql-create-table) two tables called `foo` and `bar`, and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
+First, [create table](/docs/postgresql/postgresql-create-table) two tables called `foo` and `bar`, and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) some sample data for demonstration purposes:
 
 ```
 CREATE TABLE foo (

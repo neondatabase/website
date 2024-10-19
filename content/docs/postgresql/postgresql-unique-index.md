@@ -31,7 +31,7 @@ When you define a unique index for a column, the column cannot store multiple ro
 
 If you define a unique index for two or more columns, the combined values in these columns cannot be duplicated in multiple rows.
 
-When you define a [primary key](/docs/postgresql/postgresql-primary-key/) or a [unique constraint](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint) for a table, PostgreSQL automatically creates a corresponding unique index.
+When you define a [primary key](/docs/postgresql/postgresql-primary-key) or a [unique constraint](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint) for a table, PostgreSQL automatically creates a corresponding unique index.
 
 ## PostgreSQL UNIQUE index examples
 
@@ -50,7 +50,7 @@ CREATE TABLE employees (
 );
 ```
 
-In this statement, the `employee_id` is the [primary key](/docs/postgresql/postgresql-primary-key/) column and `email` column has a [unique constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint), therefore, PostgreSQL creates two `UNIQUE` indexes, one for each column.
+In this statement, the `employee_id` is the [primary key](/docs/postgresql/postgresql-primary-key) column and `email` column has a [unique constraint](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint), therefore, PostgreSQL creates two `UNIQUE` indexes, one for each column.
 
 Second, show the indexes of the `employees` table:
 

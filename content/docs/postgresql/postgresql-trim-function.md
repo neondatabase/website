@@ -34,7 +34,7 @@ In this syntax:
 
 The `TRIM()` function can be very useful when you want to clean up strings.
 
-To remove specific characters from the beginning of a string, you use the [LTRIM()](/docs/postgresql/postgresql-string-functions/postgresql-ltrim) function. To remove specific characters from the end of a string, you can use the [RTRIM()](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/) function.
+To remove specific characters from the beginning of a string, you use the [LTRIM()](/docs/postgresql/postgresql-string-functions/postgresql-ltrim) function. To remove specific characters from the end of a string, you can use the [RTRIM()](/docs/postgresql/postgresql-string-functions/postgresql-rtrim) function.
 
 ## PostgreSQL TRIM() function examples
 
@@ -97,7 +97,7 @@ Output:
 
 ### 4) Using the TRIM() function with table data
 
-First, [create a table](/docs/postgresql/postgresql-create-table) called `todo` and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) some sample data:
+First, [create a table](/docs/postgresql/postgresql-create-table) called `todo` and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) some sample data:
 
 ```
 CREATE TABLE todo(

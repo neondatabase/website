@@ -8,7 +8,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL `ROLLUP`
 
-The PostgreSQL `ROLLUP` is a subclause of the `GROUP BY` clause that offers a shorthand for defining multiple [grouping sets](/docs/postgresql/postgresql-grouping-sets). A grouping set is a set of columns by which you group. Check out the [grouping sets](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-grouping-sets) tutorial for detailed information.
+The PostgreSQL `ROLLUP` is a subclause of the `GROUP BY` clause that offers a shorthand for defining multiple [grouping sets](/docs/postgresql/postgresql-grouping-sets). A grouping set is a set of columns by which you group. Check out the [grouping sets](/docs/postgresql/postgresql-tutorial/postgresql-grouping-sets) tutorial for detailed information.
 
 Different from the `CUBE` subclause, `ROLLUP` does not generate all possible grouping sets based on the specified columns. It just makes a subset of those.
 
@@ -147,7 +147,7 @@ ORDER BY
 
 ![PostgreSQL ROLLUP - partial roll up](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-partial-roll-up.png)
 
-See the following `rental` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+See the following `rental` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![Rental Table](/postgresqltutorial_data/wp-content-uploads-2018-03-rental.png)
 

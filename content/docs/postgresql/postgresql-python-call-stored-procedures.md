@@ -14,7 +14,7 @@ This tutorial picks up from where the [Call PostgreSQL Functions Tutorial](/docs
 
 To call a PostgreSQL stored procedure in a Python program, you follow these steps:
 
-First, [create a new database connection](https://www.postgresqltutorial.com/postgresql-python/connect/) to the PostgreSQL database server by calling the `connect()` function:
+First, [create a new database connection](/docs/postgresql/postgresql-python/connect) to the PostgreSQL database server by calling the `connect()` function:
 
 ```
 conn = psycopg2.connect(config)

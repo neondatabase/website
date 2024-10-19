@@ -59,19 +59,19 @@ List all schemas:
 \dn
 ```
 
-List all [stored procedures](https://www.postgresqltutorial.com/postgresql-stored-procedures/) and functions:
+List all [stored procedures](/docs/postgresql/postgresql-stored-procedures) and functions:
 
 ```
 \df
 ```
 
-List all [views](https://www.postgresqltutorial.com/postgresql-views/):
+List all [views](/docs/postgresql/postgresql-views):
 
 ```
 \dv
 ```
 
-[Lists all tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in a current database.
+[Lists all tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in a current database.
 
 ```
 \dt
@@ -89,7 +89,7 @@ Get detailed information on a table.
 \d+ table_name
 ```
 
-Show a [stored procedure](https://www.postgresqltutorial.com/postgresql-stored-procedures/) or function code:
+Show a [stored procedure](/docs/postgresql/postgresql-stored-procedures) or function code:
 
 ```
 \df+ function_name
@@ -133,13 +133,13 @@ GRANT role_2 TO role_1;
 
 ## Managing databases
 
-[Create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/):
+[Create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database):
 
 ```
 CREATE DATABASE [IF NOT EXISTS] db_name;
 ```
 
-[Delete a database permanently](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/):
+[Delete a database permanently](/docs/postgresql/postgresql-administration/postgresql-drop-database):
 
 ```
 DROP DATABASE [IF EXISTS] db_name;
@@ -147,7 +147,7 @@ DROP DATABASE [IF EXISTS] db_name;
 
 ## Managing tables
 
-[Create a new table](/docs/postgresql/postgresql-create-table/) or a [temporary table](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table)
+[Create a new table](/docs/postgresql/postgresql-create-table) or a [temporary table](/docs/postgresql/postgresql-tutorial/postgresql-temporary-table)
 
 ```
 CREATE [TEMP] TABLE [IF NOT EXISTS] table_name(
@@ -214,7 +214,7 @@ RENAME TO new_table_name;
 
 ## Managing views
 
-[Create a view](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/):
+[Create a view](/docs/postgresql/postgresql-views/managing-postgresql-views):
 
 ```
 CREATE OR REPLACE view_name AS
@@ -228,7 +228,7 @@ CREATE RECURSIVE VIEW view_name(column_list) AS
 SELECT column_list;
 ```
 
-[Create a materialized view](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/):
+[Create a materialized view](/docs/postgresql/postgresql-views/postgresql-materialized-views):
 
 ```
 CREATE MATERIALIZED VIEW view_name
@@ -344,7 +344,7 @@ LIMIT limit OFFSET offset
 ORDER BY column_name;
 ```
 
-Query data from multiple using the [inner join](/docs/postgresql/postgresql-inner-join/), [left join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/), [full outer join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/), [cross join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cross-join/) and [natural join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join):
+Query data from multiple using the [inner join](/docs/postgresql/postgresql-inner-join), [left join](/docs/postgresql/postgresql-tutorial/postgresql-left-join), [full outer join](/docs/postgresql/postgresql-tutorial/postgresql-full-outer-join), [cross join](/docs/postgresql/postgresql-tutorial/postgresql-cross-join) and [natural join](/docs/postgresql/postgresql-tutorial/postgresql-natural-join):
 
 ```
 SELECT *

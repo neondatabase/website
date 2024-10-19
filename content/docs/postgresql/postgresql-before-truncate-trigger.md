@@ -19,7 +19,7 @@ Although the `TRUNCATE` operation deletes rows from a table, it does not activat
 
 Here's the step for creating a `BEFORE TRUNCATE` trigger:
 
-First, [define a user-defined function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute before the `TRUNCATE` event:
+First, [define a user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute before the `TRUNCATE` event:
 
 ```
 CREATE OR REPLACE FUNCTION trigger_function_name()

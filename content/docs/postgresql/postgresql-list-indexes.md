@@ -137,7 +137,7 @@ If you use `psql` to connect to a PostgreSQL database and want to list all index
 \d table_name
 ```
 
-The command will return all information about the table including the table's structure, indexes, constraints, and [triggers](https://www.postgresqltutorial.com/postgresql-triggers/).
+The command will return all information about the table including the table's structure, indexes, constraints, and [triggers](/docs/postgresql/postgresql-triggers).
 
 For example, the following statement returns detailed information about the `customer` table:
 

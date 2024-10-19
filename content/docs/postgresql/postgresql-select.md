@@ -72,7 +72,7 @@ We will use the following `customer` table in the `dvdrental` [sample\*\* \*\*da
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 
-First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using the `postgres` user:
+First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using the `postgres` user:
 
 ```
 psql -U postgres
@@ -164,7 +164,7 @@ In this example, we used an asterisk (`*`) in the `SELECT` clause, which serves 
 
 Instead of listing all columns in the `SELECT` clause individually, we can use the asterisk (`*`) to make the query shorter.
 
-However, using the asterisk (`*`) in the `SELECT` statement is considered a bad practice when you embed SQL statements in the application code, such as [Python](/docs/postgresql/postgresql-python), [Java](https://www.postgresqltutorial.com/postgresql-jdbc/), or [PHP](https://www.postgresqltutorial.com/postgresql-php/) for the following reasons:
+However, using the asterisk (`*`) in the `SELECT` statement is considered a bad practice when you embed SQL statements in the application code, such as [Python](/docs/postgresql/postgresql-python), [Java](/docs/postgresql/postgresql-jdbc), or [PHP](/docs/postgresql/postgresql-php) for the following reasons:
 
 - Database performance. Suppose you have a table with many columns and substantial data, the `SELECT` statement with the asterisk (`*`) shorthand will select data from all the columns of the table, potentially retrieving more data than required for the application.
 -
@@ -197,7 +197,7 @@ Output:
 ...
 ```
 
-In this example, we used the [concatenation operator](https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-concat-function/) `||` to concatenate the first name, space, and last name of every customer.
+In this example, we used the [concatenation operator](/docs/postgresql/postgresql-string-functions/postgresql-concat-function) `||` to concatenate the first name, space, and last name of every customer.
 
 Notice the first column of the output doesn't have a name but `?column?`. To assign a name to a column temporarily in the query, you can use a [column alias](/docs/postgresql/postgresql-column-alias):
 

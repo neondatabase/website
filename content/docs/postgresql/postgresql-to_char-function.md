@@ -8,7 +8,7 @@ tableOfContents: true
 ---
 
 
-The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp), an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/), an [integer](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), a double-precision, or a [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/)value to a [string](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
+The PostgreSQL `TO_CHAR()` function converts a [timestamp](/docs/postgresql/postgresql-timestamp), an [interval](/docs/postgresql/postgresql-tutorial/postgresql-interval), an [integer](/docs/postgresql/postgresql-tutorial/postgresql-integer), a double-precision, or a [numeric](/docs/postgresql/postgresql-tutorial/postgresql-numeric)value to a [string](/docs/postgresql/postgresql-tutorial/postgresql-char-varchar-text).
 
 ## Syntax
 

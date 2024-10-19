@@ -21,7 +21,7 @@ Here's the syntax of the `MAX` function:
 MAX(expression);
 ```
 
-You can use the `MAX()` function not just in the [`SELECT`](/docs/postgresql/postgresql-select/) clause but also in the [`WHERE`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/) and [`HAVING`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having) clauses.
+You can use the `MAX()` function not just in the [`SELECT`](/docs/postgresql/postgresql-select) clause but also in the [`WHERE`](/docs/postgresql/postgresql-tutorial/postgresql-where) and [`HAVING`](/docs/postgresql/postgresql-tutorial/postgresql-having) clauses.
 
 ## PostgreSQL MAX() function examples
 

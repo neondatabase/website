@@ -78,7 +78,7 @@ CREATE TABLESPACE demo_ts
 LOCATION 'C:/pgdata/demo';
 ```
 
-Third, [create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/ "PostgreSQL CREATE DATABASE") named `dbdemo` and set its tablespace to `demo`:
+Third, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) named `dbdemo` and set its tablespace to `demo`:
 
 ```
 CREATE DATABASE demodb
@@ -132,7 +132,7 @@ Ninth, drop the `demo_ts` tablespace:
 DROP TABLESPACE demo_ts;
 ```
 
-Instead of [dropping the database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/ "PostgreSQL DROP DATABASE"), you can move it to another tablespace such as `pg_default` by using the [ALTER TABLE](https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/ "PostgreSQL ALTER DATABASE") statement as follows:
+Instead of [dropping the database](/docs/postgresql/postgresql-administration/postgresql-drop-database), you can move it to another tablespace such as `pg_default` by using the [ALTER TABLE](/docs/postgresql/postgresql-administration/postgresql-alter-database) statement as follows:
 
 ```
 ALTER DATABASE demodb

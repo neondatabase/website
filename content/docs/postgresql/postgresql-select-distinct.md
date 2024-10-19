@@ -51,7 +51,7 @@ The star or asterisk (`*`) means all columns of the `table_name`.
 
 Let's [create a new table](/docs/postgresql/postgresql-create-table) to practice the `SELECT DISTINCT` clause.
 
-Note that you will learn how to [create a table](/docs/postgresql/postgresql-create-table/) and [insert data into it](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in psql or pgAdmin to execute the statements.
+Note that you will learn how to [create a table](/docs/postgresql/postgresql-create-table) and [insert data into it](/docs/postgresql/postgresql-tutorial/postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in psql or pgAdmin to execute the statements.
 
 First, create the `colors` table that has three columns: `id`, `bcolor` and `fcolor` using the following `CREATE TABLE` statement:
 
@@ -108,7 +108,7 @@ Output:
 
 ### 1) PostgreSQL SELECT DISTINCT one column example
 
-The following statement selects unique values from the `bcolor` column of the `t1` table and [sorts](/docs/postgresql/postgresql-order-by) the result set in alphabetical order by using the [`ORDER BY`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by) clause.
+The following statement selects unique values from the `bcolor` column of the `t1` table and [sorts](/docs/postgresql/postgresql-order-by) the result set in alphabetical order by using the [`ORDER BY`](/docs/postgresql/postgresql-tutorial/postgresql-order-by) clause.
 
 ```
 SELECT

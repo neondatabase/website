@@ -119,7 +119,7 @@ The `CLOSE` statement releases the resources and frees up the cursor variable, a
 
 ## PL/pgSQL cursor example
 
-The following example illustrates how to use a cursor to traverse the rows from the film table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+The following example illustrates how to use a cursor to traverse the rows from the film table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ```
 CREATE OR REPLACE FUNCTION fetch_film_titles_and_years(

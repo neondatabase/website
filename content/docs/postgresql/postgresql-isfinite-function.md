@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL ISFINITE() function
 
-The `ISFINITE()` function accepts a [date](/docs/postgresql/postgresql-date), a [timestamp](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/), or an [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval) and returns true if the value is finite.
+The `ISFINITE()` function accepts a [date](/docs/postgresql/postgresql-date), a [timestamp](/docs/postgresql/postgresql-tutorial/postgresql-timestamp), or an [interval](/docs/postgresql/postgresql-tutorial/postgresql-interval) and returns true if the value is finite.
 
 Here's the syntax of the `ISFINITE()` function:
 

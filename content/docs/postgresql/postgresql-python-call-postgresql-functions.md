@@ -13,7 +13,7 @@ This tutorial picks up from where the [Transaction Tutorial](/docs/postgresql/po
 
 To call a PostgreSQL function from a Python program, you use the following steps:
 
-First, [create a new database connection](https://www.postgresqltutorial.com/postgresql-python/connect/) to the PostgreSQL server by calling the `connect()` function of the `psycopg2` module.
+First, [create a new database connection](/docs/postgresql/postgresql-python/connect) to the PostgreSQL server by calling the `connect()` function of the `psycopg2` module.
 
 ```
 conn = psycopg2.connect(config)

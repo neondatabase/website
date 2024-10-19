@@ -31,7 +31,7 @@ In this syntax:
 
 ### `expression`
 
-The `expression` is evaluated against the following row based on a specified offset from the current row. The `expression` can be a column, expression, [subquery](/docs/postgresql/postgresql-subquery) that must evaluate to a single value. And it cannot be a [window function](https://www.postgresqltutorial.com/postgresql-window-function).
+The `expression` is evaluated against the following row based on a specified offset from the current row. The `expression` can be a column, expression, [subquery](/docs/postgresql/postgresql-subquery) that must evaluate to a single value. And it cannot be a [window function](/docs/postgresql/postgresql-window-function).
 
 ### `offset`
 

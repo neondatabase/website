@@ -154,7 +154,7 @@ The return values are JSONB values.
 
 ### 2) Operator (->>)
 
-The operator `->>` allows you to [extract a field value as text](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/) from a JSON object by a specified key:
+The operator `->>` allows you to [extract a field value as text](/docs/postgresql/postgresql-json-functions/postgresql-json-extract) from a JSON object by a specified key:
 
 ```
 jsonb ->> 'key' → text
@@ -574,7 +574,7 @@ In this example, we use the operator `@?` to check if the JSON path `'$.price ? 
 
 ### 14) Operator (@@)
 
-The operator (`@@`) evaluates a [JSON path](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/) against a JSONB value and returns a boolean result based on whether the JSON path matches any items within the JSONB value. If the result is not a boolean, then the `@@` operator returns `NULL`.
+The operator (`@@`) evaluates a [JSON path](/docs/postgresql/postgresql-json-functions/postgresql-json-path) against a JSONB value and returns a boolean result based on whether the JSON path matches any items within the JSONB value. If the result is not a boolean, then the `@@` operator returns `NULL`.
 
 ```
 jsonb @@ jsonpath → boolean

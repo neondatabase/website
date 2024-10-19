@@ -21,7 +21,7 @@ Before going forward with this tutorial, you need to have:
 
 To create a database and load data from an archive file, you follow these steps:
 
-- First, connect to the [PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using `psql` or `pgAdmin`.
+- First, connect to the [PostgreSQL database server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using `psql` or `pgAdmin`.
 - Second, create a blank database called `dvdrental`.
 - Third, load data from the sample database file into the `dvdrental` database using `pg_restore`.
 
@@ -173,7 +173,7 @@ pgAdmin is a web-based graphic user interface (GUI) for interacting with the Pos
 
 The following shows you step-by-step how to use the pgAdmin to restore the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) from the database file:
 
-First, launch the **pgAdmin** tool and [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/).
+First, launch the **pgAdmin** tool and [connect to the PostgreSQL server](/docs/postgresql/postgresql-python/connect).
 
 Second, right-click the **Databases** and select the **Create > Database...** menu option:
 

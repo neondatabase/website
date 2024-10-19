@@ -11,7 +11,7 @@ tableOfContents: true
 
 In PL/pgSQL, constants are identifiers whose values cannot be changed during the execution of the code.
 
-Typically, you use constants to assign meaningful names to values that remain constants throughout the execution of a [block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure), a [function](https://www.postgresqltutorial.com/postgresql-functions/), or a [stored procedure](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/).
+Typically, you use constants to assign meaningful names to values that remain constants throughout the execution of a [block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure), a [function](/docs/postgresql/postgresql-functions), or a [stored procedure](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure).
 
 The following are the reasons to use constants:
 
@@ -92,7 +92,7 @@ SQL state: 22005
 Character: 155
 ```
 
-Similar to the default value of a [variable](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/), PostgreSQL evaluates the value for the constant when the block is entered at run-time, not compile-time. For example:
+Similar to the default value of a [variable](/docs/postgresql/postgresql-plpgsql/plpgsql-variables), PostgreSQL evaluates the value for the constant when the block is entered at run-time, not compile-time. For example:
 
 ```
 do $$

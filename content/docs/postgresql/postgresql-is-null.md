@@ -47,13 +47,13 @@ The `IS NOT NULL` operator returns true if the value is not NULL or false otherw
 
 To learn how to deal with NULL in sorting, check out the [ORDER BY tutorial](/docs/postgresql/postgresql-order-by).
 
-PostgreSQL offers some useful functions to handle NULL effectively such as [NULLIF](/docs/postgresql/postgresql-nullif/), [ISNULL](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-isnull/), and [COALESCE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce).
+PostgreSQL offers some useful functions to handle NULL effectively such as [NULLIF](/docs/postgresql/postgresql-nullif), [ISNULL](/docs/postgresql/postgresql-tutorial/postgresql-isnull), and [COALESCE](/docs/postgresql/postgresql-tutorial/postgresql-coalesce).
 
 To ensure that a column does not contain NULL, you use the [NOT NULL constraint](/docs/postgresql/postgresql-not-null-constraint).
 
 ## PostgreSQL IS NULL operator examples
 
-We'll use the `address` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the `address` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![address table](/postgresqltutorial_data/address.png)
 

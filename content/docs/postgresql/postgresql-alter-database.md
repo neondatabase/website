@@ -92,7 +92,7 @@ Only superusers or database owners can change the session default for a run-time
 
 ## PostgreSQL ALTER DATABASE examples
 
-First, log in to PostgreSQL using the `postgres` user and [create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/ "PostgreSQL CREATE DATABASE") named `testdb2` for the demonstration.
+First, log in to PostgreSQL using the `postgres` user and [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) named `testdb2` for the demonstration.
 
 ```
 CREATE DATABASE testdb2;

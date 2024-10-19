@@ -69,7 +69,7 @@ You can download the PostgreSQL DVD Rental sample database via the following lin
 
 [Download DVD Rental Sample Database](/postgresqltutorial_data/dvdrental.zip)
 
-The database file is in `zip`format ( `dvdrental.zip`) so you need to extract it to `dvdrental.tar` [before loading the sample database into the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/ "Load PostgreSQL Sample Database").
+The database file is in `zip`format ( `dvdrental.zip`) so you need to extract it to `dvdrental.tar` [before loading the sample database into the PostgreSQL database server](/docs/postgresql/postgresql-getting-started/load-postgresql-sample-database).
 
 ## Download printable ER diagram
 
@@ -77,4 +77,4 @@ Besides the sample database, we provide you with a printable ER diagram in PDF f
 
 [Download the Printable ER Diagram](/postgresqltutorial_data/printable-postgresql-sample-database-diagram.pdf)
 
-This tutorial introduced you to a PostgreSQL sample database named DVD Rental. We will use this database in our PostgreSQL tutorials, so make sure [you load it to your server](https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/).
+This tutorial introduced you to a PostgreSQL sample database named DVD Rental. We will use this database in our PostgreSQL tutorials, so make sure [you load it to your server](/docs/postgresql/postgresql-getting-started/load-postgresql-sample-database).

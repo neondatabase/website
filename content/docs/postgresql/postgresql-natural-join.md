@@ -26,7 +26,7 @@ In this syntax:
 - Second, provide the main table (`table1`) from which you want to retrieve data.
 - Third, specify the table (`table2`) that you want to join with the main table, in the `NATURAL JOIN` clause.
 
-A natural join can be an [inner join](/docs/postgresql/postgresql-inner-join), [left join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/), or [right join](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join). If you do not specify an explicit join, PostgreSQL will use the `INNER JOIN` by default.
+A natural join can be an [inner join](/docs/postgresql/postgresql-inner-join), [left join](/docs/postgresql/postgresql-tutorial/postgresql-left-join), or [right join](/docs/postgresql/postgresql-tutorial/postgresql-right-join). If you do not specify an explicit join, PostgreSQL will use the `INNER JOIN` by default.
 
 The convenience of the `NATURAL JOIN` is that it does not require you to specify the condition in the join clause because it uses an implicit condition based on the equality of the common columns.
 

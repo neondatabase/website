@@ -14,7 +14,7 @@ In PostgreSQL, a cross-join allows you to join two tables by combining each row 
 
 In the set theory, we can say that a cross-join produces the [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of rows in two tables.
 
-Unlike other [join](/docs/postgresql/postgresql-joins/) clauses such as [LEFT JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/) or [INNER JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join), the `CROSS JOIN` clause does not have a join predicate.
+Unlike other [join](/docs/postgresql/postgresql-joins) clauses such as [LEFT JOIN](/docs/postgresql/postgresql-tutorial/postgresql-left-join) or [INNER JOIN](/docs/postgresql/postgresql-tutorial/postgresql-inner-join), the `CROSS JOIN` clause does not have a join predicate.
 
 Suppose you have to perform a `CROSS JOIN` of `table1` and `table2`.
 
@@ -55,7 +55,7 @@ FROM
 
 ## PostgreSQL CROSS JOIN example
 
-The following [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements create `T1` and `T2` tables and [insert sample data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) for the cross-join demonstration.
+The following [CREATE TABLE](/docs/postgresql/postgresql-create-table) statements create `T1` and `T2` tables and [insert sample data](/docs/postgresql/postgresql-tutorial/postgresql-insert) for the cross-join demonstration.
 
 ```
 DROP TABLE IF EXISTS T1;

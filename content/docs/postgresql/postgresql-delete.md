@@ -57,7 +57,7 @@ Let's explore some examples of using the `DELETE` statement.
 
 ### Setting up a sample table
 
-The following statements [create a new table](/docs/postgresql/postgresql-create-table/) called `todos` and [insert some sample data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert):
+The following statements [create a new table](/docs/postgresql/postgresql-create-table) called `todos` and [insert some sample data](/docs/postgresql/postgresql-tutorial/postgresql-insert):
 
 ```
 CREATE TABLE todos (

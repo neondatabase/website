@@ -212,7 +212,7 @@ To delete rows using an immediate table, you use the following steps:
 
 1. 2. [Create a new table](/docs/postgresql/postgresql-create-table) with the same structure as the one whose duplicate rows should be removed.
 3. 4.
-5. 6. [Insert](/docs/postgresql/postgresql-insert/) [distinct](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-distinct) rows from the source table to the immediate table.
+5. 6. [Insert](/docs/postgresql/postgresql-insert) [distinct](/docs/postgresql/postgresql-tutorial/postgresql-select-distinct) rows from the source table to the immediate table.
 7. 8.
 9. 10. [Drop](/docs/postgresql/postgresql-drop-table) the source table.
 11. 12.

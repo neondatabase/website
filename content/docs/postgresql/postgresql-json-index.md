@@ -175,7 +175,7 @@ To improve the performance of the query, you can create a `GIN` index on the dat
 
 ### 2) Creating an index on the JSONB column
 
-First, [create an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) on the `data` column of the `customer_json` table:
+First, [create an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) on the `data` column of the `customer_json` table:
 
 ```
 CREATE INDEX customer_json_index

@@ -212,7 +212,7 @@ FROM
   members;
 ```
 
-In this example, we use the [SUM function](https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/) and [CASE expression](/docs/postgresql/postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
+In this example, we use the [SUM function](/docs/postgresql/postgresql-aggregate-functions/postgresql-sum-function) and [CASE expression](/docs/postgresql/postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
 
 ```
  Male/Female ratio

@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL REVOKE statement
 
-The `REVOKE` statement revokes previously [granted privileges](/docs/postgresql/postgresql-administration/postgresql-grant) on database objects from a [role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/).
+The `REVOKE` statement revokes previously [granted privileges](/docs/postgresql/postgresql-administration/postgresql-grant) on database objects from a [role](/docs/postgresql/postgresql-administration/postgresql-roles).
 
 The following shows the syntax of the `REVOKE` statement that revokes privileges on one or more tables from a role:
 
@@ -37,7 +37,7 @@ First, use the `postgres` user to log in to the `dvdrental` [sample database](/d
 psql -U postgres -d dvdrental
 ```
 
-Second, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) called `jim` with the `LOGIN` and `PASSWORD` attributes:
+Second, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) called `jim` with the `LOGIN` and `PASSWORD` attributes:
 
 ```
 CREATE ROLE jim LOGIN PASSWORD 'YourPassword';
@@ -73,7 +73,7 @@ REVOKE ALL ON film FROM jim;
 
 ## Revoking privileges on other database objects
 
-To revoke privileges from other database objects such as [sequences](/docs/postgresql/postgresql-sequences), [functions](/docs/postgresql/postgresql-functions), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/), [schemas](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/), and [databases](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/), check out the [REVOKE statement](https://www.postgresql.org/docs/currentsql-revoke.html).
+To revoke privileges from other database objects such as [sequences](/docs/postgresql/postgresql-sequences), [functions](/docs/postgresql/postgresql-functions), [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure), [schemas](/docs/postgresql/postgresql-administration/postgresql-schema), and [databases](/docs/postgresql/postgresql-administration/postgresql-create-database), check out the [REVOKE statement](https://www.postgresql.org/docs/currentsql-revoke.html).
 
 ## Summary
 

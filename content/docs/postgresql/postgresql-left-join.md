@@ -58,7 +58,7 @@ The following Venn diagram illustrates how the `LEFT JOIN` clause works:
 
 ## PostgreSQL LEFT JOIN examples
 
-Let's look at the following `film` and `inventory` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+Let's look at the following `film` and `inventory` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![Film and Inventory tables](/postgresqltutorial_data/wp-content-uploads-2013-05-film-and-inventory-tables.png)
 

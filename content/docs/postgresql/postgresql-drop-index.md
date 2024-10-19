@@ -60,7 +60,7 @@ We will use the `actor` table from the [sample database](/docs/postgresql/postgr
 
 ![actor](/postgresqltutorial_data/wp-content-uploads-2018-12-actor.png)
 
-The following statement [creates an index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) for the `first_name` column of the `actor` table:
+The following statement [creates an index](/docs/postgresql/postgresql-indexes/postgresql-create-index) for the `first_name` column of the `actor` table:
 
 ```
 CREATE INDEX idx_actor_first_name

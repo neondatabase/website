@@ -129,7 +129,7 @@ The following is the output:
 
 ![PostgreSQL CREATE TABLE AS with explicit column names](/postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-CREATE-TABLE-AS-with-explicit-column-names.png)
 
-Note that the `CREATE TABLE AS` statement is similar to the `SELECT INTO` statement, but the `CREATE TABLE AS` statement is preferred because it is not confused with other uses of the `SELECT INTO` syntax in [PL/pgSQL](https://www.postgresqltutorial.com/postgresql-plpgsql/). In addition, the `CREATE TABLE AS` statement provides a superset of the functionality offered by the `SELECT INTO` statement.
+Note that the `CREATE TABLE AS` statement is similar to the `SELECT INTO` statement, but the `CREATE TABLE AS` statement is preferred because it is not confused with other uses of the `SELECT INTO` syntax in [PL/pgSQL](/docs/postgresql/postgresql-plpgsql). In addition, the `CREATE TABLE AS` statement provides a superset of the functionality offered by the `SELECT INTO` statement.
 
 ## Summary
 

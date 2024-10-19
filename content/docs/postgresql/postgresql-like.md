@@ -312,7 +312,7 @@ VALUES('The rents are now 10% higher than last month'),
 SELECT message FROM t;
 ```
 
-Note that you'll learn how to [create a table](/docs/postgresql/postgresql-create-table/) and [insert data into it](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows) in the upcoming tutorials.
+Note that you'll learn how to [create a table](/docs/postgresql/postgresql-create-table) and [insert data into it](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows) in the upcoming tutorials.
 
 Output:
 

@@ -13,11 +13,11 @@ PostgreSQL supports the following data types:
 
 - [Boolean](/docs/postgresql/postgresql-boolean)
 -
-- [Character](/docs/postgresql/postgresql-char-varchar-text/) types such as [`char`, `varchar`, and `text`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text).
+- [Character](/docs/postgresql/postgresql-char-varchar-text) types such as [`char`, `varchar`, and `text`](/docs/postgresql/postgresql-tutorial/postgresql-char-varchar-text).
 -
 - Numeric types such as integer and floating-point number.
 -
-- Temporal types such as [date](/docs/postgresql/postgresql-date/), [time](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/), [timestamp](/docs/postgresql/postgresql-tutorial/postgresql-timestamp), and [interval](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval)
+- Temporal types such as [date](/docs/postgresql/postgresql-date), [time](/docs/postgresql/postgresql-tutorial/postgresql-time), [timestamp](/docs/postgresql/postgresql-tutorial/postgresql-timestamp), and [interval](/docs/postgresql/postgresql-tutorial/postgresql-interval)
 -
 - [UUID](/docs/postgresql/postgresql-uuid) for storing Universally Unique Identifiers
 -
@@ -107,7 +107,7 @@ The `JSON` data type stores plain JSON data that requires reparsing for each pro
 
 ## UUID
 
-The `UUID` data type allows you to store Universal Unique Identifiers defined by [RFC 4122](https://tools.ietf.org/html/rfc4122 "UUID") . The `UUID` values guarantee a better uniqueness than `SERIAL` and can be used to hide sensitive data exposed to the public such as values of `id` in URL.
+The `UUID` data type allows you to store Universal Unique Identifiers defined by [RFC 4122](https://tools.ietf.org/html/rfc4122) . The `UUID` values guarantee a better uniqueness than `SERIAL` and can be used to hide sensitive data exposed to the public such as values of `id` in URL.
 
 ## Special data types
 

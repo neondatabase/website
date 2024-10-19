@@ -29,7 +29,7 @@ In this syntax:
 - **CTE name**: Specify the name of the CTE. The CTE name exists within the scope of the query. Ensure that the CTE name is unique within the query.
 - **Column List (optional)**: Specify the list of column names within the parentheses after the CTE name. If not specified, the columns implicitly inherit the column names from `SELECT` statement inside the CTE.
 - **AS keyword**: The AS keyword indicates the beginning of the CTE definition.
-- **CTE query**: This is a query that defines the CTE, which may include [JOINs](/docs/postgresql/postgresql-joins), [WHERE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/), [GROUP BY](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by) clauses, and other valid SQL constructs.
+- **CTE query**: This is a query that defines the CTE, which may include [JOINs](/docs/postgresql/postgresql-joins), [WHERE](/docs/postgresql/postgresql-tutorial/postgresql-where), [GROUP BY](/docs/postgresql/postgresql-tutorial/postgresql-group-by) clauses, and other valid SQL constructs.
 - **Main query**: After defining the CTE, you can reference it in the main query by its name. In the main query, you can use the CTE as if it were a regular table, simplifying the structure of complex queries.
 
 ## PostgreSQL CTE examples
@@ -164,7 +164,7 @@ The following are some advantages of using common table expressions or CTEs:
 
 - Improve the readability of complex queries. You use CTEs to organize complex queries in a more organized and readable manner.
 - Ability to create [recursive queries](/docs/postgresql/postgresql-recursive-query), which are queries that reference themselves. The recursive queries come in handy when you want to query hierarchical data such as organization charts.
-- Use in conjunction with [window functions](https://www.postgresqltutorial.com/postgresql-window-function/). You can use CTEs in conjunction with window functions to create an initial result set and use another select statement to further process this result set.
+- Use in conjunction with [window functions](/docs/postgresql/postgresql-window-function). You can use CTEs in conjunction with window functions to create an initial result set and use another select statement to further process this result set.
 
 ## Summary
 

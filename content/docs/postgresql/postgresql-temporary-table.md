@@ -118,9 +118,9 @@ Output:
 
 This time PostgreSQL accessed the temporary table `customers` instead of the permanent one.
 
-Note that PostgreSQL creates temporary tables in a special [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/), therefore, you cannot specify the schema in the `CREATE TEMP TABLE` statement.
+Note that PostgreSQL creates temporary tables in a special [schema](/docs/postgresql/postgresql-administration/postgresql-schema), therefore, you cannot specify the schema in the `CREATE TEMP TABLE` statement.
 
-If you [list the tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in psql, you will see the temporary table `customers` only, not the permanent one:
+If you [list the tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in psql, you will see the temporary table `customers` only, not the permanent one:
 
 ```
 \dt+

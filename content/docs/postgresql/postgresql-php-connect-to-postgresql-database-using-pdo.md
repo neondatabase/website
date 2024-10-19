@@ -74,7 +74,7 @@ The project structure will look like the following picture:
 
 ## Connect to the PostgreSQL database
 
-First, [create a new database](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/) named `stocks` for the demonstration.
+First, [create a new database](/docs/postgresql/postgresql-administration/postgresql-create-database) named `stocks` for the demonstration.
 
 ```
 CREATE DATABASE stocks;

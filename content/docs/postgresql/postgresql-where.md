@@ -64,7 +64,7 @@ To form the condition in the `WHERE` clause, you use comparison and logical oper
 
 Let's practice with some examples of using the `WHERE` clause.
 
-We will use the `customer` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for demonstration.
+We will use the `customer` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for demonstration.
 
 ![customer table](/postgresqltutorial_data/wp-content-uploads-2019-05-customer.png)
 

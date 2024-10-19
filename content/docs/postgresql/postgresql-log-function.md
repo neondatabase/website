@@ -22,7 +22,7 @@ LOG(n)
 
 In this syntax:
 
-- `n` is a number with the type [numeric](/docs/postgresql/postgresql-numeric) or [double precision](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type) you want to calculate the base-10 logarithm.
+- `n` is a number with the type [numeric](/docs/postgresql/postgresql-numeric) or [double precision](/docs/postgresql/postgresql-tutorial/postgresql-double-precision-type) you want to calculate the base-10 logarithm.
 
 The `LOG()` function returns the base-10 logarithm with the same type as the type of the input number (`n`), which is `numeric` and `double precision` respectively. If n is `NULL` the `LOG()` function returns `NULL`.
 

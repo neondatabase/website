@@ -157,7 +157,7 @@ Output:
 
 ### 2) Using the MERGE statement to update and insert rows from the source table into the table
 
-First, [insert a new row](/docs/postgresql/postgresql-insert) into the `leads` table and [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) the `name` of the row with id 2:
+First, [insert a new row](/docs/postgresql/postgresql-insert) into the `leads` table and [update](/docs/postgresql/postgresql-tutorial/postgresql-update) the `name` of the row with id 2:
 
 ```
 INSERT INTO leads(name, email)

@@ -13,7 +13,7 @@ This tutorial picks up from where the [Querying Data from Tables Tutorial](/docs
 
 To delete data from the PostgreSQL table in Python, you use the following steps:
 
-First, [create a new database connection](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function of the `psycopg2` module.
+First, [create a new database connection](/docs/postgresql/postgresql-python/connect) by calling the `connect()` function of the `psycopg2` module.
 
 ```
 conn = psycopg2.connect(config)

@@ -33,19 +33,19 @@ First, [connect](/docs/postgresql/postgresql-getting-started/connect-to-postgres
 psql -U postres -d dvdrental
 ```
 
-Second, [create a group role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/) called `marketing`:
+Second, [create a group role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `marketing`:
 
 ```
 CREATE ROLE marketing;
 ```
 
-Third, [grant](https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/) the `SELECT` privilege on the `film` table:
+Third, [grant](/docs/postgresql/postgresql-administration/postgresql-grant) the `SELECT` privilege on the `film` table:
 
 ```
 GRANT SELECT ON film TO marketing;
 ```
 
-Fourth, [create a role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/) called `lily` that is a member of the `marketing` role:
+Fourth, [create a role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `lily` that is a member of the `marketing` role:
 
 ```
 CREATE ROLE lily

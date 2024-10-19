@@ -85,7 +85,7 @@ In this example, we group the lengths of films into bins of 30 minutes.
 
 ### 3) Using the PostgreSQL DIV() for calculating ages
 
-First, [create a new table](/docs/postgresql/postgresql-create-table/) called `employees` and [insert some data into it](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows):
+First, [create a new table](/docs/postgresql/postgresql-create-table) called `employees` and [insert some data into it](/docs/postgresql/postgresql-tutorial/postgresql-insert-multiple-rows):
 
 ```
 CREATE TABLE employees (
@@ -137,7 +137,7 @@ Output:
 How it works.
 
 - Use the [AGE()](/docs/postgresql/postgresql-date-functions/postgresql-age) function to calculate age.
-- Use the [EXTRACT()](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/) function to extract the year from the age.
+- Use the [EXTRACT()](/docs/postgresql/postgresql-date-functions/postgresql-extract) function to extract the year from the age.
 - Use the `DIV()` function to return the integer part of the age.
 
 ## Summary

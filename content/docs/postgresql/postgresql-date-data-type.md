@@ -16,7 +16,7 @@ PostgreSQL uses 4 bytes to store a date value. The lowest and highest values of 
 
 When storing a date value, PostgreSQL uses the `yyyy-mm-dd` format such as 2000-12-31. It also uses the same format for [inserting data](/docs/postgresql/postgresql-insert) into a `DATE` column.
 
-If you [create a table](/docs/postgresql/postgresql-create-table/) that has a `DATE` column and want to use the current date of the PostgreSQL server as the default value, you can use the `CURRENT_DATE` as the default value of the column using a [DEFAULT constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-default-value)
+If you [create a table](/docs/postgresql/postgresql-create-table) that has a `DATE` column and want to use the current date of the PostgreSQL server as the default value, you can use the `CURRENT_DATE` as the default value of the column using a [DEFAULT constraint](/docs/postgresql/postgresql-tutorial/postgresql-default-value)
 
 For example, the following statement creates the `documents` table that has the `posting_date` column with the `DATE` data type.
 

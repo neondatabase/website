@@ -11,7 +11,7 @@ tableOfContents: true
 
 In PostgreSQL, a foreign key is a column or a group of columns in a table that uniquely identifies a row in **another table**.
 
-A foreign key establishes a link between the data in two tables by referencing the [primary key](/docs/postgresql/postgresql-primary-key) or a [unique constraint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint) of the referenced table.
+A foreign key establishes a link between the data in two tables by referencing the [primary key](/docs/postgresql/postgresql-primary-key) or a [unique constraint](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint) of the referenced table.
 
 The table containing a foreign key is referred to as the referencing table or child table. Conversely, the table referenced by a foreign key is known as the referenced table or parent table.
 

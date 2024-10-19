@@ -134,7 +134,7 @@ To suppress the password prompt, you can use the `-w` option:
 pg_dumpall -U postgres > D:\backup\all_databases.sql
 ```
 
-However, you need to use a [password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) with the following entry:
+However, you need to use a [password file](/docs/postgresql/postgresql-administration/postgresql-password-file-pgpass) with the following entry:
 
 ```
 hostname:port:database:username:password
@@ -164,7 +164,7 @@ If you want to back up role definition only, use the following command:
 pg_dumpall --roles-only > D:\backup\roles.sql
 ```
 
-If you want to back up [tablespaces](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Tablespaces")definition, use the following command:
+If you want to back up [tablespaces](/docs/postgresql/postgresql-administration/postgresql-create-tablespace)definition, use the following command:
 
 ```
 pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
@@ -172,7 +172,7 @@ pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 
 ## Creating backup script on Windows
 
-The following backup script assumes that you have [a password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) setup properly.
+The following backup script assumes that you have [a password file](/docs/postgresql/postgresql-administration/postgresql-password-file-pgpass) setup properly.
 
 First, open a text editor such a Notepad.
 
@@ -205,7 +205,7 @@ If you want to make a regular backup, you can use the Task Scheduler on Windows 
 
 ## Creating backup script on Linux or macOS
 
-The following backup script assumes that you have a [password file](https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/) setup properly.
+The following backup script assumes that you have a [password file](/docs/postgresql/postgresql-administration/postgresql-password-file-pgpass) setup properly.
 
 First, open a text editor.
 

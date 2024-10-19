@@ -45,7 +45,7 @@ PostgreSQL evaluates the `GROUP BY` clause after the `FROM` and `WHERE` clauses 
 
 ## PostgreSQL GROUP BY clause examples
 
-Let's take a look at the `payment` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database").
+Let's take a look at the `payment` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![payment](/postgresqltutorial_data/wp-content-uploads-2019-12-payment.png)
 
@@ -262,7 +262,7 @@ payment_date |   sum
 ...
 ```
 
-Since the values in the `payment_date` column are [timestamps](/docs/postgresql/postgresql-timestamp), we cast them to date values using the [cast operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast) `::`.
+Since the values in the `payment_date` column are [timestamps](/docs/postgresql/postgresql-timestamp), we cast them to date values using the [cast operator](/docs/postgresql/postgresql-tutorial/postgresql-cast) `::`.
 
 ## Summary
 

@@ -29,7 +29,7 @@ In this syntax:
 
 The `expression` can be an expression, column, or [subquery](/docs/postgresql/postgresql-subquery) evaluated against the value of the last row in an ordered partition of the result set.
 
-The `expression` must return a single value. Additionally, it cannot be a [window function](https://www.postgresqltutorial.com/postgresql-window-function/).
+The `expression` must return a single value. Additionally, it cannot be a [window function](/docs/postgresql/postgresql-window-function).
 
 ### PARTITION BY clause
 
@@ -47,7 +47,7 @@ The `frame_clause` defines the subset of rows in the current partition to which 
 
 ## PostgreSQL LAST_VALUE() function examples
 
-We will use the `products` table created in the [window function](https://www.postgresqltutorial.com/postgresql-window-function/) tutorial for the demonstration:
+We will use the `products` table created in the [window function](/docs/postgresql/postgresql-window-function) tutorial for the demonstration:
 
 ![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 

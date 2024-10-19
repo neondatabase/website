@@ -92,7 +92,7 @@ Output:
 
 ### 2) Using the PostgreSQL REGEXP_MATCHES() function with table data example
 
-We'll use the following `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+We'll use the following `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 

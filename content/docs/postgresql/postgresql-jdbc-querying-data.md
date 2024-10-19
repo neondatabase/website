@@ -48,7 +48,7 @@ To execute a query, you use one of the following methods of the `Statement` obje
 
 - `execute()`: Return true if the first object of the query is a `ResultSet` object. You can get the `ResultSet` by calling the method `getResultSet()`.
 - `executeQuery()`: Return only one `ResultSet` object.
-- `executeUpdate()`: Return the number of rows affected by the statement. Typically, you use this method for executing the [INSERT](/docs/postgresql/postgresql-insert), [DELETE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/), or [UPDATE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) statement.
+- `executeUpdate()`: Return the number of rows affected by the statement. Typically, you use this method for executing the [INSERT](/docs/postgresql/postgresql-insert), [DELETE](/docs/postgresql/postgresql-tutorial/postgresql-delete), or [UPDATE](/docs/postgresql/postgresql-tutorial/postgresql-update) statement.
 
 ### 4) Processing the ResultSet
 

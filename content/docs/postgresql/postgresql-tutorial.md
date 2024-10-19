@@ -153,7 +153,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [Create a table](/docs/postgresql/postgresql-create-table "PostgreSQL CREATE TABLE") - guide you on how to create a new table in the database.
 -
-- [Select Into](/docs/postgresql/postgresql-select-into/) & [Create table as](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table-as)- shows you how to create a new table from the result set of a query.
+- [Select Into](/docs/postgresql/postgresql-select-into) & [Create table as](/docs/postgresql/postgresql-tutorial/postgresql-create-table-as)- shows you how to create a new table from the result set of a query.
 -
 - [Auto-increment](/docs/postgresql/postgresql-serial) column with SERIAL - uses SERIAL to add an auto-increment column to a table.
 -
@@ -223,7 +223,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 -
 - [Array](/docs/postgresql/postgresql-array) - show you how to work with arrays and introduce you to some handy functions for array manipulation.
 -
-- [hstore](/docs/postgresql/postgresql-hstore/) - introduce you to the hstore data type, a set of keyvalue pairs stored in a single value in PostgreSQL.
+- [hstore](/docs/postgresql/postgresql-hstore) - introduce you to the hstore data type, a set of keyvalue pairs stored in a single value in PostgreSQL.
 -
 - [JSON](/docs/postgresql/postgresql-json) - illustrate how to work with JSON data type and use some of the most important JSON operators and functions.
 -

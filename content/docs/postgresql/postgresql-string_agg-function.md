@@ -38,7 +38,7 @@ Like other aggregate functions such as `AVG()`, `COUNT()`, `MAX()`, `MIN()`, and
 
 ## PostgreSQL STRING_AGG() function examples
 
-We will use the `film`, `film_actor`, and `actor` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We will use the `film`, `film_actor`, and `actor` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ### 1) Using PostgreSQL STRING_AGG() function to generate a list of comma-separated values
 

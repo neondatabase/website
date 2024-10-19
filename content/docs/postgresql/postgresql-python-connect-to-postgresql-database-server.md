@@ -52,7 +52,7 @@ pip freeze > requirements.txt
 
 ## Creating a new database
 
-First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) using the `psql` client tool:
+First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) using the `psql` client tool:
 
 ```
 psql -U postgres

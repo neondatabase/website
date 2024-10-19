@@ -9,7 +9,7 @@ tableOfContents: true
 **Summary**: in this tutorial, you will step by step learn how to **install PostgreSQL** on your local system.
 
 - [Install PostgreSQL on macOS](/docs/postgresql/postgresql-getting-started/install-postgresql-macos)
-- [Install PostgreSQL on Linux](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/)
+- [Install PostgreSQL on Linux](/docs/postgresql/postgresql-getting-started/install-postgresql-linux)
 
 PostgreSQL was developed for UNIX-like platforms, however, it was designed to be portable. It means that PostgreSQL can also run on other platforms such as macOS, Solaris, and Windows.
 

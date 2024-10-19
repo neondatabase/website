@@ -63,7 +63,7 @@ To [list all databases](/docs/postgresql/postgresql-administration/postgresql-sh
 
 ## 4) List available tables
 
-To [list all tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in the current database, you use the `\dt` command:
+To [list all tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in the current database, you use the `\dt` command:
 
 ```
 \dt
@@ -73,7 +73,7 @@ Note that this command shows the only table in the currently connected database.
 
 ## 5) Describe a table
 
-To [describe a table](https://www.postgresqltutorial.com/postgresql-administration/postgresql-describe-table/) such as a column, type, or modifiers of columns, you use the following command:
+To [describe a table](/docs/postgresql/postgresql-administration/postgresql-describe-table) such as a column, type, or modifiers of columns, you use the following command:
 
 ```
 \d table_name
@@ -81,7 +81,7 @@ To [describe a table](https://www.postgresqltutorial.com/postgresql-administrati
 
 ## 6) List available schema
 
-To list all [schemas](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) of the currently connected database, you use the `\dn` command.
+To list all [schemas](/docs/postgresql/postgresql-administration/postgresql-schema) of the currently connected database, you use the `\dn` command.
 
 ```
 \dn
@@ -97,7 +97,7 @@ To list available functions in the current database, you use the `\df` command.
 
 ## 8) List available views
 
-To list available [views](https://www.postgresqltutorial.com/postgresql-views/) in the current database, you use the `\dv` command.
+To list available [views](/docs/postgresql/postgresql-views) in the current database, you use the `\dv` command.
 
 ```
 \dv
@@ -159,7 +159,7 @@ To know all available psql commands, you use the `\?` command.
 
 To get help on specific PostgreSQL statement, you use the `\h` command.
 
-For example, if you want to know detailed information on the [ALTER TABLE](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table/) statement, you use the following command:
+For example, if you want to know detailed information on the [ALTER TABLE](/docs/postgresql/postgresql-tutorial/postgresql-alter-table) statement, you use the following command:
 
 ```
 \h ALTER TABLE

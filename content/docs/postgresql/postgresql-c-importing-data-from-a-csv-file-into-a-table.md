@@ -16,7 +16,7 @@ To import data from a CSV file into a table in PostgreSQL from a C# program, you
 
 - First, read data from the CSV file into a list of records.
 -
-- Second, iterate over the list and [insert each record into the table](https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-insert/).
+- Second, iterate over the list and [insert each record into the table](/docs/postgresql/postgresql-csharp/postgresql-csharp-insert).
 
 ## Importing a CSV file into PostgreSQL
 

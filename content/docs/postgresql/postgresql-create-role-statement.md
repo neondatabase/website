@@ -15,7 +15,7 @@ PostgreSQL uses the concept of **roles** to represent user accounts. It doesn't 
 
 Typically, roles that can log in to the PostgreSQL server are called login roles. They are equivalent to user accounts in other database systems.
 
-When roles contain other roles, they are referred to as **[group roles](https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/)**.
+When roles contain other roles, they are referred to as **[group roles](/docs/postgresql/postgresql-administration/postgresql-role-membership)**.
 
 Note that PostgreSQL combined the users and groups into roles since version 8.1
 
@@ -93,7 +93,7 @@ To allow the `bob` to log in to the PostgreSQL server, you need to add the `LOGI
 
 ### Role attributes
 
-The attributes of a role define privileges for that role, including login, [superuser](https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/) status, database creation, role creation, password management, and so on.
+The attributes of a role define privileges for that role, including login, [superuser](/docs/postgresql/postgresql-administration/create-superuser-postgresql) status, database creation, role creation, password management, and so on.
 
 Here's the syntax for creating a new role with attributes.
 

@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL jsonb_path_query_first() function
 
-The `jsonb_path_query_first()` function allows you to query data from a [JSONB document](/docs/postgresql/postgresql-json) based on a [JSON path](https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path) expression and return the first match.
+The `jsonb_path_query_first()` function allows you to query data from a [JSONB document](/docs/postgresql/postgresql-json) based on a [JSON path](/docs/postgresql/postgresql-json-functions/postgresql-json-path) expression and return the first match.
 
 Here's the basic syntax of the `jsonb_path_query_first()` function:
 

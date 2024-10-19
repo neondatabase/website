@@ -7,7 +7,7 @@ tableOfContents: true
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.
 
-After [installing PostgreSQL](/docs/postgresql/postgresql-getting-started/install-postgresql), [loading sample database](https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/ "Load PostgreSQL Sample Database") and [connecting to the database server using _pgAdmin_ GUI application](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/ "Connect to PostgreSQL Database"), you will see that PostgreSQL provides many server and database objects. To leverage the features of each object that PostgreSQL provides effectively, you should have a good understanding of what each object is and how to use it effectively.
+After [installing PostgreSQL](/docs/postgresql/postgresql-getting-started/install-postgresql), [loading sample database](/docs/postgresql/postgresql-getting-started/load-postgresql-sample-database) and [connecting to the database server using _pgAdmin_ GUI application](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database), you will see that PostgreSQL provides many server and database objects. To leverage the features of each object that PostgreSQL provides effectively, you should have a good understanding of what each object is and how to use it effectively.
 
 Let's get familiar with these PostgreSQL server and database objects.
 
@@ -17,7 +17,7 @@ When you install a PostgreSQL instance, you will have a corresponding PostgreSQL
 
 ## Databases
 
-A database is a container of other objects such as tables, [views](/docs/postgresql/postgresql-views), [functions](https://www.postgresqltutorial.com/postgresql-stored-procedures/), and [indexes](https://www.postgresqltutorial.com/postgresql-indexes/). You can create as many databases as you want inside a PostgreSQL server.
+A database is a container of other objects such as tables, [views](/docs/postgresql/postgresql-views), [functions](/docs/postgresql/postgresql-stored-procedures), and [indexes](/docs/postgresql/postgresql-indexes). You can create as many databases as you want inside a PostgreSQL server.
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png)
 
@@ -31,13 +31,13 @@ A special feature of PostgreSQL is table inheritance, meaning that a table (chil
 
 ## Schemas
 
-A [schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/) is a logical container of tables and other objects inside a database. Each PostgreSQL database may have multiple schemas.
+A [schema](/docs/postgresql/postgresql-administration/postgresql-schema) is a logical container of tables and other objects inside a database. Each PostgreSQL database may have multiple schemas.
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-schema.png)
 
 ## Tablespaces
 
-Tablespaces are where PostgreSQL stores the data physically. [Tablespace](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/ "PostgreSQL Tablespaces")s allow you to move your data to different physical locations across drivers easily by using simple commands.
+Tablespaces are where PostgreSQL stores the data physically. [Tablespace](/docs/postgresql/postgresql-administration/postgresql-create-tablespace)s allow you to move your data to different physical locations across drivers easily by using simple commands.
 
 By default, PostgreSQL provides you with two tablespaces:
 
@@ -50,13 +50,13 @@ The following picture shows the default tablespaces:
 
 ## Views
 
-[Views](/docs/postgresql/postgresql-views) are named queries stored in the database. Besides the read-only views, PostgreSQL supports [updatable views](https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/).
+[Views](/docs/postgresql/postgresql-views) are named queries stored in the database. Besides the read-only views, PostgreSQL supports [updatable views](/docs/postgresql/postgresql-views/postgresql-updatable-views).
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-views.png)
 
 ## Functions
 
-A [function](https://www.postgresqltutorial.com/postgresql-stored-procedures/) is a reusable block of SQL code that returns a scalar value of a set of rows.
+A [function](/docs/postgresql/postgresql-stored-procedures) is a reusable block of SQL code that returns a scalar value of a set of rows.
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-functions.png)
 
@@ -70,7 +70,7 @@ Casts enable you to convert one data type into another data type. Casts backed b
 
 ## Sequence
 
-[Sequences](/docs/postgresql/postgresql-sequences/) are used to manage auto-increment columns defined in a table as a [serial column](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/) or an [identity column](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-identity-column).
+[Sequences](/docs/postgresql/postgresql-sequences) are used to manage auto-increment columns defined in a table as a [serial column](/docs/postgresql/postgresql-tutorial/postgresql-serial) or an [identity column](/docs/postgresql/postgresql-tutorial/postgresql-identity-column).
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-sequence.png)
 

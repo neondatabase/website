@@ -34,7 +34,7 @@ To call a stored procedure, you use the `call` statement without providing the `
 call sp_name();
 ```
 
-If you call a stored procedure with `INOUT` parameters in an [anonymous block](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/), you need to pass arguments to the stored procedure call as follows:
+If you call a stored procedure with `INOUT` parameters in an [anonymous block](/docs/postgresql/postgresql-plpgsql/plpgsql-block-structure), you need to pass arguments to the stored procedure call as follows:
 
 ```
 do

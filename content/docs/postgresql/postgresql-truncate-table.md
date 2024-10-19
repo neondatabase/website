@@ -226,7 +226,7 @@ By default, the `TRUNCATE TABLE` statement uses the `CONTINUE IDENTITY` option. 
 
 ## TRUNCATE TABLE statement and ON DELETE trigger
 
-Even though the `TRUNCATE TABLE` statement removes all data from a table, it does not fire any `ON DELETE` [triggers](https://www.postgresqltutorial.com/postgresql-triggers/) associated with the table.
+Even though the `TRUNCATE TABLE` statement removes all data from a table, it does not fire any `ON DELETE` [triggers](/docs/postgresql/postgresql-triggers) associated with the table.
 
 To fire the trigger when the `TRUNCATE TABLE` statement executes, you need to define `BEFORE TRUNCATE` and/or `AFTER TRUNCATE` triggers for that table.
 

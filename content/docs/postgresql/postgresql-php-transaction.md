@@ -80,7 +80,7 @@ CREATE TABLE account_plans(
 );
 ```
 
-The following [INSERT](https://www.postgresqltutorial.com/postgresql-php/insert/) statement inserts some sample data into the `plans` table.
+The following [INSERT](/docs/postgresql/postgresql-php/insert) statement inserts some sample data into the `plans` table.
 
 ```
 INSERT INTO plans(plan) VALUES('SILVER'),('GOLD'),('PLATINUM');

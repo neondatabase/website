@@ -22,7 +22,7 @@ If files are larger than a few megabytes, you can store them externally and save
 If you work with PHP or Python and want to know how to store binary data in a `BYTEA` column, you can follow these tutorials:
 
 - [Storing files in a `BYTEA` column using PHP](/docs/postgresql/postgresql-php/postgresql-blob).
-- [Storing images in a `BYTEA` column using Python](https://www.postgresqltutorial.com/postgresql-python/blob/).
+- [Storing images in a `BYTEA` column using Python](/docs/postgresql/postgresql-python/blob).
 
 ## PostgreSQL BYTEA data type example
 

@@ -47,7 +47,7 @@ ALTER TABLE table_name
 RENAME column_name2 TO new_column_name2;
 ```
 
-If you rename a column referenced by other database objects such as [views](/docs/postgresql/postgresql-views), [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), [triggers](https://www.postgresqltutorial.com/postgresql-triggers/), and [stored procedures](https://www.postgresqltutorial.com/postgresql-stored-procedures), PostgreSQL will automatically change the column name in the dependent objects.
+If you rename a column referenced by other database objects such as [views](/docs/postgresql/postgresql-views), [foreign key constraints](/docs/postgresql/postgresql-foreign-key), [triggers](/docs/postgresql/postgresql-triggers), and [stored procedures](/docs/postgresql/postgresql-stored-procedures), PostgreSQL will automatically change the column name in the dependent objects.
 
 ## PostgreSQL RENAME COLUMN examples
 
@@ -72,7 +72,7 @@ CREATE TABLE customers (
 );
 ```
 
-Then, [create a new view](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/) named `customer_data` based on the `customers` and `customer_groups` tables.
+Then, [create a new view](/docs/postgresql/postgresql-views/managing-postgresql-views) named `customer_data` based on the `customers` and `customer_groups` tables.
 
 ```
 CREATE VIEW customer_data AS

@@ -123,7 +123,7 @@ FROM
 INNER JOIN customer_groups g ON g.id = c.group_id;
 ```
 
-When you rename a table, PostgreSQL will automatically update its dependent objects such as [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), [views](https://www.postgresqltutorial.com/postgresql-views/), and [indexes](https://www.postgresqltutorial.com/postgresql-indexes).
+When you rename a table, PostgreSQL will automatically update its dependent objects such as [foreign key constraints](/docs/postgresql/postgresql-foreign-key), [views](/docs/postgresql/postgresql-views), and [indexes](/docs/postgresql/postgresql-indexes).
 
 Third, rename the `customer_groups` table to `groups`:
 

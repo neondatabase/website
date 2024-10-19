@@ -53,7 +53,7 @@ Output:
 
 ## Creating a table with a UUID column
 
-We will [create a table](/docs/postgresql/postgresql-create-table/) whose [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) is a UUID data type. Additionally, the values of the primary key column will be generated automatically using the `gen_random_uuid()` function.
+We will [create a table](/docs/postgresql/postgresql-create-table) whose [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) is a UUID data type. Additionally, the values of the primary key column will be generated automatically using the `gen_random_uuid()` function.
 
 First, create the `contacts` table:
 

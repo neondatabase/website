@@ -99,7 +99,7 @@ TABLESPACE ts_primary;
 
 In this statement, we specify the tablespace `ts_primary` for the `logistics` database.
 
-The following statement [creates a new table](/docs/postgresql/postgresql-create-table) called `deliveries` and [inserts](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert)a row into the table:
+The following statement [creates a new table](/docs/postgresql/postgresql-create-table) called `deliveries` and [inserts](/docs/postgresql/postgresql-tutorial/postgresql-insert)a row into the table:
 
 ```
 CREATE TABLE deliveries (

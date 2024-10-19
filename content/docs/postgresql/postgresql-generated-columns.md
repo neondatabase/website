@@ -16,7 +16,7 @@ There are two kinds of generated columns:
 - Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
 - Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
 
-A virtual generated column is like a [view](https://www.postgresqltutorial.com/postgresql-views/), whereas a stored generated column is similar to a [materialized view](https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/). Unlike a material view, PostgreSQL automatically updates data for stored generated columns.
+A virtual generated column is like a [view](/docs/postgresql/postgresql-views), whereas a stored generated column is similar to a [materialized view](/docs/postgresql/postgresql-views/postgresql-materialized-views). Unlike a material view, PostgreSQL automatically updates data for stored generated columns.
 
 **PostgreSQL currently implements only stored generated columns.**
 
@@ -49,7 +49,7 @@ ADD COLUMN column_name type GENERATED ALWAYS AS (expression) STORED;
 
 When defining an expression for a generated column, ensure that it meets the following requirements:
 
-- The expression can only use immutable functions and cannot involve [subqueries](/docs/postgresql/postgresql-subquery) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp) function.
+- The expression can only use immutable functions and cannot involve [subqueries](/docs/postgresql/postgresql-subquery) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](/docs/postgresql/postgresql-date-functions/postgresql-current_timestamp) function.
 - The expression cannot reference another generated column or a system column, except `tableoid`.
 
 A generated column cannot have a default value or an identity definition. Additionally, it cannot be a part of the partition key.

@@ -41,7 +41,7 @@ CREATE TABLE employees(
 );
 ```
 
-Second, [create a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that raises an exception if the new salary is greater than the old one 100%:
+Second, [create a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that raises an exception if the new salary is greater than the old one 100%:
 
 ```
 CREATE OR REPLACE FUNCTION check_salary()

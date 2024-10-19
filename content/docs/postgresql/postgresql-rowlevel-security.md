@@ -75,13 +75,13 @@ VALUES('Sales', 'alice'),
       ('IT', 'jack');
 ```
 
-5. [Create a group role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/) called `managers`:
+5. [Create a group role](/docs/postgresql/postgresql-administration/postgresql-role-membership) called `managers`:
 
 ```
 CREATE ROLE managers;
 ```
 
-6. [Grant](https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/) the `SELECT` privileges of all tables in the `public` schema to the group role `managers`:
+6. [Grant](/docs/postgresql/postgresql-administration/postgresql-grant) the `SELECT` privileges of all tables in the `public` schema to the group role `managers`:
 
 ```
 GRANT SELECT ON ALL TABLES

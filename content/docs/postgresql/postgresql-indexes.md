@@ -45,7 +45,7 @@ After creating an index on the `name` column, PostgreSQL extracts data from the 
 
 This process may take time, depending on the number of rows in the `contacts` table.
 
-By default, PostgreSQL allows data selection from a table during index creation but blocks [insert](/docs/postgresql/postgresql-insert/), [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/), and [delete](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete) operations.
+By default, PostgreSQL allows data selection from a table during index creation but blocks [insert](/docs/postgresql/postgresql-insert), [update](/docs/postgresql/postgresql-tutorial/postgresql-update), and [delete](/docs/postgresql/postgresql-tutorial/postgresql-delete) operations.
 
 When executing the following `SELECT` statement, PostgreSQL can utilize the `contacts_name` index to quickly find the relevant rows in the `contacts` table:
 
@@ -78,7 +78,7 @@ Therefore, hash indexes can only handle simple equality comparisons (=).
 
 ### GIN index
 
-GIN indexes are inverted indexes that are suitable for composite values such as [arrays](/docs/postgresql/postgresql-array), [JSONB data](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/), and [full-text search](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search).
+GIN indexes are inverted indexes that are suitable for composite values such as [arrays](/docs/postgresql/postgresql-array), [JSONB data](/docs/postgresql/postgresql-indexes/postgresql-json-index), and [full-text search](/docs/postgresql/postgresql-indexes/postgresql-full-text-search).
 
 Since a GIN index stores a separate entry for each component, it can handle queries that check for the existence of a specific component.
 
@@ -102,14 +102,14 @@ A BRIN index divides the table into ranges of pages and stores summarized inform
 
 ## PostgreSQL indexes tutorials
 
-- [Create Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/) - Show you how to define a new index for a table.
-- [Unique Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/) - Provide you with steps for defining unique indexes.
-- [Index on Expression](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/) - Guide you on creating an index based on expressions.
-- [Partial index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/) - Learn about creating partial indexes that include a subset of rows of the indexed columns.
-- [Multicolumn Indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/) - Show you how to define indexes that include multiple table columns.
+- [Create Index](/docs/postgresql/postgresql-indexes/postgresql-create-index) - Show you how to define a new index for a table.
+- [Unique Index](/docs/postgresql/postgresql-indexes/postgresql-unique-index) - Provide you with steps for defining unique indexes.
+- [Index on Expression](/docs/postgresql/postgresql-indexes/postgresql-index-on-expression) - Guide you on creating an index based on expressions.
+- [Partial index](/docs/postgresql/postgresql-indexes/postgresql-partial-index) - Learn about creating partial indexes that include a subset of rows of the indexed columns.
+- [Multicolumn Indexes](/docs/postgresql/postgresql-indexes/postgresql-multicolumn-indexes) - Show you how to define indexes that include multiple table columns.
 - [Reindex](/docs/postgresql/postgresql-indexes/postgresql-reindex) - Learn how to rebuild indexes.
-- [List indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/) - Learn how to list all indexes in a table or database.
-- [Drop Index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/) - Show you how to delete an index.
-- [Index Types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/) - Discuss various PostgreSQL index types in detail.
-- [Full Text Search](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/) - Show you how to use the GIN index to enable full-text search in PostgreSQL.
-- [JSON index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/) - Learn how to index a JSONB column for enhanced query performance.
+- [List indexes](/docs/postgresql/postgresql-indexes/postgresql-list-indexes) - Learn how to list all indexes in a table or database.
+- [Drop Index](/docs/postgresql/postgresql-indexes/postgresql-drop-index) - Show you how to delete an index.
+- [Index Types](/docs/postgresql/postgresql-indexes/postgresql-index-types) - Discuss various PostgreSQL index types in detail.
+- [Full Text Search](/docs/postgresql/postgresql-indexes/postgresql-full-text-search) - Show you how to use the GIN index to enable full-text search in PostgreSQL.
+- [JSON index](/docs/postgresql/postgresql-indexes/postgresql-json-index) - Learn how to index a JSONB column for enhanced query performance.

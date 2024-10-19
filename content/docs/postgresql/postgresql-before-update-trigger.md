@@ -66,7 +66,7 @@ CREATE TABLE employees (
 );
 ```
 
-Next, define a trigger function that [raises an exception](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
+Next, define a trigger function that [raises an exception](/docs/postgresql/postgresql-plpgsql/postgresql-exception) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
 
 ```
 CREATE OR REPLACE FUNCTION fn_before_update_salary()

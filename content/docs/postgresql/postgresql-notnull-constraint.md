@@ -39,7 +39,7 @@ CREATE TABLE table_name(
 );
 ```
 
-If a column has a `NOT NULL` constraint, any attempt to [insert](/docs/postgresql/postgresql-insert) or [update](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update) NULL in the column will result in an error.
+If a column has a `NOT NULL` constraint, any attempt to [insert](/docs/postgresql/postgresql-insert) or [update](/docs/postgresql/postgresql-tutorial/postgresql-update) NULL in the column will result in an error.
 
 ## Declaring NOT NULL columns
 
@@ -56,7 +56,7 @@ CREATE TABLE invoices(
 
 This example uses the `NOT NULL` keywords that follow the [data type](/docs/postgresql/postgresql-data-types) of the product_id and qty columns to declare `NOT NULL` constraints.
 
-Note that a column can have multiple constraints such as `NOT NULL`, [check](/docs/postgresql/postgresql-check-constraint/), [unique](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/), [foreign key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key) appearing next to each other. The order of the constraints is not important. PostgreSQL may check constraints in any order.
+Note that a column can have multiple constraints such as `NOT NULL`, [check](/docs/postgresql/postgresql-check-constraint), [unique](/docs/postgresql/postgresql-tutorial/postgresql-unique-constraint), [foreign key](/docs/postgresql/postgresql-tutorial/postgresql-foreign-key) appearing next to each other. The order of the constraints is not important. PostgreSQL may check constraints in any order.
 
 If you use `NULL` instead of `NOT NULL`, the column will accept both `NULL` and non-NULL values. If you don't explicitly specify `NULL` or `NOT NULL`, it will accept `NULL` by default.
 

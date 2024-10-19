@@ -30,17 +30,17 @@ In this syntax:
 - Third, provide the table name to which the index belongs.
 - Finally, list out one or more indexed columns inside the () after the table name.
 
-Note that the syntax of the `CREATE INDEX` statement is more complex than this. We'll cover additional features of the `CREATE INDEX` statement in the upcoming tutorials such as [unique indexes](/docs/postgresql/postgresql-indexes/postgresql-unique-index), [indexes on expressions](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/), [partial indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/), and [multicolumn indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/).
+Note that the syntax of the `CREATE INDEX` statement is more complex than this. We'll cover additional features of the `CREATE INDEX` statement in the upcoming tutorials such as [unique indexes](/docs/postgresql/postgresql-indexes/postgresql-unique-index), [indexes on expressions](/docs/postgresql/postgresql-indexes/postgresql-index-on-expression), [partial indexes](/docs/postgresql/postgresql-indexes/postgresql-partial-index), and [multicolumn indexes](/docs/postgresql/postgresql-indexes/postgresql-multicolumn-indexes).
 
-By default, the `CREATE INDEX` statement creates a B-tree index, which is appropriate for most cases. We'll show you how to create other [index types](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/).
+By default, the `CREATE INDEX` statement creates a B-tree index, which is appropriate for most cases. We'll show you how to create other [index types](/docs/postgresql/postgresql-indexes/postgresql-index-types).
 
 ## PostgreSQL CREATE INDEX statement example
 
-We'll use the `address` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We'll use the `address` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![address table](/postgresqltutorial_data/wp-content-uploads-2018-12-address.png)
 
-First, [connect to the PostgreSQL](https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/) `dvdrental` [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) using `psql`:
+First, [connect to the PostgreSQL](/docs/postgresql/postgresql-getting-started/connect-to-postgresql-database) `dvdrental` [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) using `psql`:
 
 ```
 psql -U postgres -d dvdrental
@@ -108,7 +108,7 @@ When you run the `CREATE INDEX` statement, PostgreSQL scans the `address` table,
 
 This process is called an index build. By default, PostgreSQL allows reads from the `address` table and blocks write operations while building the index.
 
-Fifth, [show the indexes](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/) that belong to the `address` table from the `pg_indexes`:
+Fifth, [show the indexes](/docs/postgresql/postgresql-indexes/postgresql-list-indexes) that belong to the `address` table from the `pg_indexes`:
 
 ```
 SELECT
@@ -135,7 +135,7 @@ The output shows that the `idx_address_phone` has been created successfully.
 
 Two other indexes `address_pkey` and `idx_fk_city_id` were created implicitly when the `address` table was created.
 
-More specifically, the `address_pkey` index was created for the [primary key](/docs/postgresql/postgresql-primary-key/) column `address_id` and `idx_fk_city_id` was created for the [foreign key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key) city_id column.
+More specifically, the `address_pkey` index was created for the [primary key](/docs/postgresql/postgresql-primary-key) column `address_id` and `idx_fk_city_id` was created for the [foreign key](/docs/postgresql/postgresql-tutorial/postgresql-foreign-key) city_id column.
 
 Fifth, execute the following query again:
 

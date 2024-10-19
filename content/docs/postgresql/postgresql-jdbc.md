@@ -33,20 +33,20 @@ This section helps you get started by setting up JDK, installing Java IDE, downl
 
 This section shows you how to perform common database operations including creating tables, inserting data, querying data, updating data, and deleting data.
 
-- [Creating Tables](https://www.postgresqltutorial.com/postgresql-jdbc/create-tables/) - Learn how to create tables in the PostgreSQL database using JDBC.
-- [Inserting Data](https://www.postgresqltutorial.com/postgresql-jdbc/insert/) - Guide you on how to insert one or more rows into a table.
-- [Querying Data](https://www.postgresqltutorial.com/postgresql-jdbc/query/) - Walk you through the steps for querying data from a table.
-- [Updating Data](https://www.postgresqltutorial.com/postgresql-jdbc/update/) - Provide you with the steps for updating existing data in a table.
+- [Creating Tables](/docs/postgresql/postgresql-jdbc/create-tables) - Learn how to create tables in the PostgreSQL database using JDBC.
+- [Inserting Data](/docs/postgresql/postgresql-jdbc/insert) - Guide you on how to insert one or more rows into a table.
+- [Querying Data](/docs/postgresql/postgresql-jdbc/query) - Walk you through the steps for querying data from a table.
+- [Updating Data](/docs/postgresql/postgresql-jdbc/update) - Provide you with the steps for updating existing data in a table.
 - [Deleting Data](/docs/postgresql/postgresql-jdbc/delete) - Show you how to delete one or more rows from a table.
 
 ## Section 3. Calling stored functions & stored procedures
 
 This section guides you on how to call stored functions and stored procedures in PostgreSQL from Java programs.
 
-- [Calling PostgreSQL stored functions](https://www.postgresqltutorial.com/postgresql-jdbc/call-postgresql-stored-function/) - Guide you on how to call PostgreSQL stored functions including built-in and user-defined stored functions.
+- [Calling PostgreSQL stored functions](/docs/postgresql/postgresql-jdbc/call-postgresql-stored-function) - Guide you on how to call PostgreSQL stored functions including built-in and user-defined stored functions.
 
 ## Section 4. Handling Transactions
 
 This section explores how to manage PostgreSQL transactions in a Java program.
 
-- [Handling database transactions](https://www.postgresqltutorial.com/postgresql-jdbc/transaction/)- Show you how to manage PostgreSQL transactions in Java.
+- [Handling database transactions](/docs/postgresql/postgresql-jdbc/transaction)- Show you how to manage PostgreSQL transactions in Java.

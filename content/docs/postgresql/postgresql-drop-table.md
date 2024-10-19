@@ -23,7 +23,7 @@ In this syntax:
 
 If you remove a table that does not exist, PostgreSQL issues an error. To avoid the error, you can use the `IF EXISTS` option.
 
-If the table is used in other database objects such as [views](/docs/postgresql/postgresql-views), [triggers](https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/), functions, and stored procedures, you cannot remove it. In this case, you have two options:
+If the table is used in other database objects such as [views](/docs/postgresql/postgresql-views), [triggers](/docs/postgresql/postgresql-triggers/enable-triggers), functions, and stored procedures, you cannot remove it. In this case, you have two options:
 
 - Use the `CASCADE` option to remove the table and its dependent objects.
 -

@@ -14,9 +14,9 @@ Sometimes, you want to ensure that values stored in a column or a group of colum
 
 PostgreSQL provides you with the `UNIQUE` constraint that maintains the uniqueness of the data correctly.
 
-When a `UNIQUE` constraint is in place, every time you [insert a new row](/docs/postgresql/postgresql-insert), it checks if the value is already in the table. It rejects the change and issues an error if the value already exists. The same process is carried out for [updating existing data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update).
+When a `UNIQUE` constraint is in place, every time you [insert a new row](/docs/postgresql/postgresql-insert), it checks if the value is already in the table. It rejects the change and issues an error if the value already exists. The same process is carried out for [updating existing data](/docs/postgresql/postgresql-tutorial/postgresql-update).
 
-When you add a `UNIQUE` constraint to a column or a group of columns, PostgreSQL will automatically create a [unique index](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/) on the column or the group of columns.
+When you add a `UNIQUE` constraint to a column or a group of columns, PostgreSQL will automatically create a [unique index](/docs/postgresql/postgresql-indexes/postgresql-unique-index) on the column or the group of columns.
 
 ## PostgreSQL UNIQUE constraint example
 

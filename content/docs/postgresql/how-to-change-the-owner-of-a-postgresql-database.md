@@ -29,7 +29,7 @@ First, [connect to the PostgreSQL](/docs/postgresql/postgresql-getting-started/c
 psql -U postgres
 ```
 
-Second, [create a new role](https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/) with the `CREATEDB` privilege:
+Second, [create a new role](/docs/postgresql/postgresql-administration/postgresql-roles) with the `CREATEDB` privilege:
 
 ```
 CREATE ROLE alex

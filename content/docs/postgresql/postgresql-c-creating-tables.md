@@ -145,7 +145,7 @@ psql -U ed -d elearning
 
 It'll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
 
-Second, run the `\dt` command to [show all tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in the `elearning` database:
+Second, run the `\dt` command to [show all tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in the `elearning` database:
 
 ```
 \dt

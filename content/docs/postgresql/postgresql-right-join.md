@@ -68,7 +68,7 @@ RIGHT JOIN table2 USING (column_name);
 
 ## PostgreSQL RIGHT JOIN examples
 
-We'll use the `film` and `inventory` tables from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/).
+We'll use the `film` and `inventory` tables from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ### 1) Basic PostgreSQL RIGHT JOIN examples
 

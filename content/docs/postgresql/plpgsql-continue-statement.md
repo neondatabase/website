@@ -11,7 +11,7 @@ tableOfContents: true
 
 The `continue` statement prematurely skips the current iteration of the loop and starts the next one.
 
-In practice, you can use the `continue` statement within the loops including [unconditional loops,](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) [while loops](https://www.postgresqltutorial.com/plpgsql-while-loop/), and [for loops](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/).
+In practice, you can use the `continue` statement within the loops including [unconditional loops,](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) [while loops](/docs/postgresql/plpgsql-while-loop), and [for loops](/docs/postgresql/postgresql-plpgsql/plpgsql-for-loop).
 
 Here's the syntax of the `continue` statement:
 

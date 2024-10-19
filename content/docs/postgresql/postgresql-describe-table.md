@@ -21,7 +21,7 @@ psql -U postgres
 
 It'll prompt you to enter a password for the `postgres` user.
 
-Second, change the current database to `dvdrental` [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/):
+Second, change the current database to `dvdrental` [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database):
 
 ```
 \c dvdrental
@@ -68,7 +68,7 @@ Triggers:
     last_updated BEFORE UPDATE ON film FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-The command returns a lot of information on the structure of the `film` table. Additionally, it returns [indexes](/docs/postgresql/postgresql-indexes), [foreign key constraints](/docs/postgresql/postgresql-foreign-key/), and [triggers](https://www.postgresqltutorial.com/postgresql-triggers).
+The command returns a lot of information on the structure of the `film` table. Additionally, it returns [indexes](/docs/postgresql/postgresql-indexes), [foreign key constraints](/docs/postgresql/postgresql-foreign-key), and [triggers](/docs/postgresql/postgresql-triggers).
 
 ## 2) PostgreSQL DESCRIBE TABLE using information_schema
 

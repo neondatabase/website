@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL TO_DATE() function
 
-The `TO_DATE()` function converts a [string](/docs/postgresql/postgresql-char-varchar-text) literal to a [date](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-date) value.
+The `TO_DATE()` function converts a [string](/docs/postgresql/postgresql-char-varchar-text) literal to a [date](/docs/postgresql/postgresql-tutorial/postgresql-date) value.
 
 Here's the basic syntax of the `TO_DATE()` function:
 

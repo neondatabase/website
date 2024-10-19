@@ -37,11 +37,11 @@ CREATE SEQUENCE [ IF NOT EXISTS ] sequence_name
 
 Specify the name of the sequence after the `CREATE SEQUENCE` clause. The `IF NOT EXISTS` conditionally creates a new sequence only if it does not exist.
 
-The sequence name must be distinct from any other sequences, tables, [indexes](/docs/postgresql/postgresql-indexes), [views](https://www.postgresqltutorial.com/postgresql-views/), or foreign tables in the same schema.
+The sequence name must be distinct from any other sequences, tables, [indexes](/docs/postgresql/postgresql-indexes), [views](/docs/postgresql/postgresql-views), or foreign tables in the same schema.
 
 ### \[ AS \{ SMALLINT | INT | BIGINT } ]
 
-Specify the [data type](/docs/postgresql/postgresql-data-types/) of the sequence. The valid data type is `SMALLINT`, [`INT`](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval), and `BIGINT`. The default data type is `BIGINT` if you skip it.
+Specify the [data type](/docs/postgresql/postgresql-data-types) of the sequence. The valid data type is `SMALLINT`, [`INT`](/docs/postgresql/postgresql-tutorial/postgresql-interval), and `BIGINT`. The default data type is `BIGINT` if you skip it.
 
 The data type of the sequence which determines the sequence's minimum and maximum values.
 

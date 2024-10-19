@@ -32,7 +32,7 @@ Instead of returning a single value, this syntax allows you to return a table wi
 returns table ( column_list )
 ```
 
-We will use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration:
+We will use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
 ![](/postgresqltutorial_data/wp-content-uploads-2019-05-film.png)
 
@@ -65,7 +65,7 @@ This `get_film(varchar)` accepts one parameter `p_pattern`, which is a pattern y
 
 The function returns a query set based on a select statement. You need to ensure that the columns in the result set match those you define in the table after the `returns table` clause.
 
-Since the [data type](/docs/postgresql/postgresql-data-types/) of `release_year` column from the `film` table is not an integer, you need to cast it to an integer using the [cast operator](/docs/postgresql/postgresql-tutorial/postgresql-cast)`::`.
+Since the [data type](/docs/postgresql/postgresql-data-types) of `release_year` column from the `film` table is not an integer, you need to cast it to an integer using the [cast operator](/docs/postgresql/postgresql-tutorial/postgresql-cast)`::`.
 
 The following shows how to call the `get_film()` function:
 

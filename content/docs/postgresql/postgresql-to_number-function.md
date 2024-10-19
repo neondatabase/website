@@ -6,7 +6,7 @@ redirectFrom:
 tableOfContents: true
 ---
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_NUMBER()` function to convert a [character string](/docs/postgresql/postgresql-char-varchar-text) to a [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric) value according to a specified format.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_NUMBER()` function to convert a [character string](/docs/postgresql/postgresql-char-varchar-text) to a [numeric](/docs/postgresql/postgresql-tutorial/postgresql-numeric) value according to a specified format.
 
 ## Introduction to the PostgreSQL TO_NUMBER() function
 

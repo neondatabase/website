@@ -14,7 +14,7 @@ This tutorial picks up from where the [Connecting to PostgreSQL database server 
 
 To create a new table in a PostgreSQL database, you use the following steps:
 
-- First, [connect to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function. The `connect()` function returns a `connection` object.
+- First, [connect to the PostgreSQL server](/docs/postgresql/postgresql-python/connect) by calling the `connect()` function. The `connect()` function returns a `connection` object.
 - Second, create a `cursor` object by calling the `cursor()` method of the `connection` object.
 - Third, execute the `CREATE TABLE` by calling the `execute()` method of the `cursor` object.
 - Finally, close the connection.
@@ -158,7 +158,7 @@ Second, change the current database to `suppliers`:
 \c suppliers
 ```
 
-Third, [show tables](https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/) in the `suppliers` database using the `\dt` command:
+Third, [show tables](/docs/postgresql/postgresql-administration/postgresql-show-tables) in the `suppliers` database using the `\dt` command:
 
 ```
 \dt

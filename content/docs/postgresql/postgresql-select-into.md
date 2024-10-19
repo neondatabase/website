@@ -11,7 +11,7 @@ If you want to select data into variables, check out the [PL/pgSQL SELECT INTO s
 
 ## Introduction to PostgreSQL SELECT INTO statement
 
-The PostgreSQL `SELECT INTO` statement [creates a new table](/docs/postgresql/postgresql-create-table/)and [inserts data](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) returned from a query into the table.
+The PostgreSQL `SELECT INTO` statement [creates a new table](/docs/postgresql/postgresql-create-table)and [inserts data](/docs/postgresql/postgresql-tutorial/postgresql-insert) returned from a query into the table.
 
 The new table will have columns with the same names as the columns of the result set of the query. Unlike a regular [`SELECT`](/docs/postgresql/postgresql-select) statement, the `SELECT INTO` statement does not return a result to the client.
 
@@ -41,7 +41,7 @@ Note that you cannot use the `SELECT INTO` statement in PL/pgSQL because it inte
 
 ## PostgreSQL SELECT INTO examples
 
-We will use the `film` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+We will use the `film` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![PostgreSQL SELECT INTO sample table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 

@@ -14,7 +14,7 @@ This tutorial picks up from where the [Handling BLOB Data Tutorial](/docs/postgr
 
 To query data from one or more PostgreSQL tables in Python, you use the following steps.
 
-First, [establish a connection to the PostgreSQL server](https://www.postgresqltutorial.com/postgresql-python/connect/) by calling the `connect()` function of the `psycopg2` module.
+First, [establish a connection to the PostgreSQL server](/docs/postgresql/postgresql-python/connect) by calling the `connect()` function of the `psycopg2` module.
 
 ```
 conn = psycopg2.connect(config)

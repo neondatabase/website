@@ -136,7 +136,7 @@ as
  'function_body'
 ```
 
-Note that you will learn about the syntax of `CREATE FUNCTION` statement in the [creating function tutorial](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/).
+Note that you will learn about the syntax of `CREATE FUNCTION` statement in the [creating function tutorial](/docs/postgresql/postgresql-plpgsql/postgresql-create-function).
 
 In this syntax, the `function_body` is a string constant. For example, the following function finds a film by its id:
 
@@ -170,7 +170,7 @@ Now, you can place any piece of code between the `$$` and `$$` without using the
 
 ## Using dollar-quoted string constants in stored procedures
 
-Similarly, you can use the dollar-quoted string constant syntax in [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/) like this:
+Similarly, you can use the dollar-quoted string constant syntax in [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure) like this:
 
 ```
 create procedure proc_name(param_list)

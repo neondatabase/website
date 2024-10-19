@@ -19,7 +19,7 @@ If you are not familiar with creating a user-defined function, you can check out
 
 ## Create trigger function syntax
 
-A trigger function is similar to a regular [user-defined function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/). However, a trigger function does not take any arguments and has a return value with the type `trigger`.
+A trigger function is similar to a regular [user-defined function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function). However, a trigger function does not take any arguments and has a return value with the type `trigger`.
 
 The following illustrates the syntax of creating a trigger function:
 

@@ -9,7 +9,7 @@ tableOfContents: true
 
 ## Introduction to PL/pgSQL Select Into statement
 
-The `select into` statement allows you to [select data from the database](/docs/postgresql/postgresql-select)and assign it to a [variable](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables).
+The `select into` statement allows you to [select data from the database](/docs/postgresql/postgresql-select)and assign it to a [variable](/docs/postgresql/postgresql-plpgsql/plpgsql-variables).
 
 Here's the basic syntax of the `select into` statement:
 

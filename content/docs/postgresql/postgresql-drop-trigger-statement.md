@@ -53,7 +53,7 @@ $$
 LANGUAGE plpgsql;
 ```
 
-Second, [create a new trigger](https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/) on the `staff` table of the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) to check the username of a staff. This trigger will fire whenever you insert or update a row in the `staff` table:
+Second, [create a new trigger](/docs/postgresql/postgresql-triggers/creating-first-trigger-postgresql) on the `staff` table of the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) to check the username of a staff. This trigger will fire whenever you insert or update a row in the `staff` table:
 
 ```
 CREATE TRIGGER username_check

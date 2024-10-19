@@ -13,7 +13,7 @@ tableOfContents: true
 
 ## Introduction to the PostgreSQL `SERIAL` pseudo-type
 
-In PostgreSQL, a [sequence](/docs/postgresql/postgresql-sequences/) is a special kind of database object that generates a sequence of integers. A sequence is often used as the [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) column in a table.
+In PostgreSQL, a [sequence](/docs/postgresql/postgresql-sequences) is a special kind of database object that generates a sequence of integers. A sequence is often used as the [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) column in a table.
 
 When [creating a new table](/docs/postgresql/postgresql-create-table), the sequence can be created through the `SERIAL` pseudo-type as follows:
 

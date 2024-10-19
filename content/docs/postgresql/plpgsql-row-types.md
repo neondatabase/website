@@ -35,7 +35,7 @@ row_variable.field_name
 
 ## PL/pgSQL row-type variable example
 
-We'll use the `actor` table from the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) to show how row types work:
+We'll use the `actor` table from the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) to show how row types work:
 
 ![](/postgresqltutorial_data/actor.png)
 

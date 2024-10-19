@@ -64,7 +64,7 @@ CREATE TABLE members (
 );
 ```
 
-The `members` table has three columns `id`, `name`, and `email`. The `id` column is a [serial](/docs/postgresql/postgresql-serial/) and [primary key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key) column. The `email` column has a unique constraint to ensure the uniqueness of emails.
+The `members` table has three columns `id`, `name`, and `email`. The `id` column is a [serial](/docs/postgresql/postgresql-serial) and [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) column. The `email` column has a unique constraint to ensure the uniqueness of emails.
 
 Second, create another table called `memberships` to store the memberships of the members:
 

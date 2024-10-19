@@ -21,7 +21,7 @@ Here's the syntax of the `lcm()` function:
 lcm(a,b)
 ```
 
-In this syntax, `a` and `b` are the numbers with types of [integer](/docs/postgresql/postgresql-integer), [bigint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), and [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric). The `lcm()` function returns the LCM of `a` and `b`.
+In this syntax, `a` and `b` are the numbers with types of [integer](/docs/postgresql/postgresql-integer), [bigint](/docs/postgresql/postgresql-tutorial/postgresql-integer), and [numeric](/docs/postgresql/postgresql-tutorial/postgresql-numeric). The `lcm()` function returns the LCM of `a` and `b`.
 
 If either a and b is zero, the `lcm()` function returns zero. If `a` and/or `b` are null, the `lcm()` function returns null.
 

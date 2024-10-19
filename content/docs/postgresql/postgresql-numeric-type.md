@@ -111,7 +111,7 @@ CREATE TABLE products (
 );
 ```
 
-Second, [insert](https://www.postgresqltutorial.com/postgresql-python/insert/)some products with prices whose scales exceed the scale declared in the `price` column:
+Second, [insert](/docs/postgresql/postgresql-python/insert)some products with prices whose scales exceed the scale declared in the `price` column:
 
 ```
 INSERT INTO products (name, price)
@@ -183,7 +183,7 @@ Output:
 
 Typically, the `NaN` is not equal to any number including itself. It means that the expression `NaN = NaN` returns `false`. You'll find this implementation [in JavaScript for](https://www.javascripttutorial.net/javascript-nan/)[NaN](https://www.javascripttutorial.net/javascript-nan/).
 
-But in PostgreSQL, two `NaN` values are equal. Also, `NaN` values are greater than regular numbers such as 1, 2, 3. This implementation allows PostgreSQL to sort `NUMERIC` values and use them in tree-based [indexes](https://www.postgresqltutorial.com/postgresql-indexes/).
+But in PostgreSQL, two `NaN` values are equal. Also, `NaN` values are greater than regular numbers such as 1, 2, 3. This implementation allows PostgreSQL to sort `NUMERIC` values and use them in tree-based [indexes](/docs/postgresql/postgresql-indexes).
 
 The following query [sorts](/docs/postgresql/postgresql-order-by) the products based on prices from high to low:
 

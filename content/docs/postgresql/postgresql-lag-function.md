@@ -29,7 +29,7 @@ In this syntax:
 
 The `expression` is evaluated against the previous row at a specified offset. It can be a column, expression, or [subquery](/docs/postgresql/postgresql-subquery).
 
-The `expression` must return a single value, and cannot be a [window function](https://www.postgresqltutorial.com/postgresql-window-function/).
+The `expression` must return a single value, and cannot be a [window function](/docs/postgresql/postgresql-window-function).
 
 ### `offset`
 

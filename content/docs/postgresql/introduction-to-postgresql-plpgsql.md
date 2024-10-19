@@ -16,9 +16,9 @@ PL/pgSQL allows you to extend the functionality of the PostgreSQL database serve
 
 PL/pgSQL is designed to :
 
-- Create user-defined [functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/), and [triggers](https://www.postgresqltutorial.com/postgresql-triggers/).
+- Create user-defined [functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function), [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure), and [triggers](/docs/postgresql/postgresql-triggers).
 -
-- Extend standard SQL by adding control structures such as [if-else](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/), [case](/docs/postgresql/postgresql-case/), and [loop](https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements) statements.
+- Extend standard SQL by adding control structures such as [if-else](/docs/postgresql/postgresql-plpgsql/plpgsql-if-else-statements), [case](/docs/postgresql/postgresql-case), and [loop](/docs/postgresql/postgresql-plpgsql/plpgsql-loop-statements) statements.
 -
 - Inherit all user-defined functions, operators, and types.
 

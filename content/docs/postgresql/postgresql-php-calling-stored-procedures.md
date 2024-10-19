@@ -27,7 +27,7 @@ END; $$
 To call a stored procedure that returns one value, you use these steps:
 
 1.
-2. [Connect to the PostgreSQL database server](https://www.postgresqltutorial.com/postgresql-php/connect/) by creating a new instance of the PDO class.
+2. [Connect to the PostgreSQL database server](/docs/postgresql/postgresql-php/connect) by creating a new instance of the PDO class.
 3.
 4.
 5.

@@ -73,7 +73,7 @@ Let's take some examples of using the `INNER JOIN` clause.
 
 ### 1) Using PostgreSQL INNER JOIN to join two tables
 
-Let's take a look at the `customer`and `payment` tables in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/ "PostgreSQL Sample Database").
+Let's take a look at the `customer`and `payment` tables in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database).
 
 ![customer and payment tables](/postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png)
 

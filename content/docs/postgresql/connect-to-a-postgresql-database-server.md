@@ -148,10 +148,10 @@ Any application that supports ODBC or [JDBC](/docs/postgresql/postgresql-jdbc) c
 
 Furthermore, if you develop an application that uses a specific driver, it can connect to the PostgreSQL database server:
 
-- [Connect to PostgreSQL from PHP](https://www.postgresqltutorial.com/postgresql-php/connect/)
+- [Connect to PostgreSQL from PHP](/docs/postgresql/postgresql-php/connect)
 -
-- [Connect to PostgreSQL from Python](https://www.postgresqltutorial.com/postgresql-python/connect/)
+- [Connect to PostgreSQL from Python](/docs/postgresql/postgresql-python/connect)
 -
-- [Connect to PostgreSQL from Java](https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/)
+- [Connect to PostgreSQL from Java](/docs/postgresql/postgresql-jdbc/connecting-to-postgresql-database)
 
 In this tutorial, you've learned how to connect to the PostgreSQL database server by using various client tools, including psql and pgAdmin.

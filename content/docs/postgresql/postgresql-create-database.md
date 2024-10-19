@@ -11,7 +11,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL CREATE DATABASE statement
 
-In PostgreSQL, a database is a collection of related data, which serves as a container for tables, [indexes](/docs/postgresql/postgresql-indexes/postgresql-index-types), [views](https://www.postgresqltutorial.com/postgresql-views/), and other database objects.
+In PostgreSQL, a database is a collection of related data, which serves as a container for tables, [indexes](/docs/postgresql/postgresql-indexes/postgresql-index-types), [views](/docs/postgresql/postgresql-views), and other database objects.
 
 To create a new database, you use the `CREATE DATABASE` statement.
 

@@ -59,7 +59,7 @@ Let's take some examples of using the PostgreSQL `UPDATE` statement.
 
 ### Setting up a sample table
 
-The following statements [create a table](/docs/postgresql/postgresql-create-table/) called `courses` and [insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert) data into it:
+The following statements [create a table](/docs/postgresql/postgresql-create-table) called `courses` and [insert](/docs/postgresql/postgresql-tutorial/postgresql-insert) data into it:
 
 ```
 CREATE TABLE courses(

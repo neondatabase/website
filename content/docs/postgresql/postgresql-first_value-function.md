@@ -53,7 +53,7 @@ The `rows_range_clause` further limits the rows within the partition by defining
 
 ## PostgreSQL `FIRST_VALUE()` function examples
 
-We will use the `products` table created in the [window function](https://www.postgresqltutorial.com/postgresql-window-function/) tutorial for the demonstration:
+We will use the `products` table created in the [window function](/docs/postgresql/postgresql-window-function) tutorial for the demonstration:
 
 ![](/postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png)
 

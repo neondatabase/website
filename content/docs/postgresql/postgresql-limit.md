@@ -53,7 +53,7 @@ If you don't use the `ORDER BY` clause, you may get a result set with the rows i
 
 ## PostgreSQL LIMIT clause examples
 
-Let's take some examples of using the PostgreSQL `LIMIT` clause. We will use the `film` table in the [sample database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) for the demonstration.
+Let's take some examples of using the PostgreSQL `LIMIT` clause. We will use the `film` table in the [sample database](/docs/postgresql/postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![PostgreSQL LIMIT - Sample Table](/postgresqltutorial_data/wp-content-uploads-2018-03-film_table.png)
 

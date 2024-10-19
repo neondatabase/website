@@ -16,7 +16,7 @@ It means that when you execute an `INSERT`, `UPDATE`, or `DELETE` statement on a
 
 To create an `INSTEAD OF` trigger, you follow these steps:
 
-First, [define a function](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/) that will execute when a trigger is fired:
+First, [define a function](/docs/postgresql/postgresql-plpgsql/postgresql-create-function) that will execute when a trigger is fired:
 
 ```
 CREATE OR REPLACE FUNCTION fn_trigger()
@@ -78,7 +78,7 @@ VALUES
 RETURNING *;
 ```
 
-Then, [create a view](https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/) based on the `employees` and `salaries` tables:
+Then, [create a view](/docs/postgresql/postgresql-views/managing-postgresql-views) based on the `employees` and `salaries` tables:
 
 ```
 CREATE VIEW employee_salaries

@@ -35,7 +35,7 @@ CREATE TABLE person(
 
 In this `person` table:
 
-- `id` is an [identity column](/docs/postgresql/postgresql-identity-column/) that serves as the [primary key](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key) column of the table.
+- `id` is an [identity column](/docs/postgresql/postgresql-identity-column) that serves as the [primary key](/docs/postgresql/postgresql-tutorial/postgresql-primary-key) column of the table.
 -
 - `info` is a column with the type XML that will store the XML data.
 

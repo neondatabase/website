@@ -10,7 +10,7 @@ tableOfContents: true
 
 ## Introduction to PostgreSQL schema
 
-In PostgreSQL, a schema is a named collection of database objects, including tables, [views](/docs/postgresql/postgresql-views), [indexes](https://www.postgresqltutorial.com/postgresql-indexes/), [data types](/docs/postgresql/postgresql-data-types/), [functions](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/), [stored procedures](https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure), and operators.
+In PostgreSQL, a schema is a named collection of database objects, including tables, [views](/docs/postgresql/postgresql-views), [indexes](/docs/postgresql/postgresql-indexes), [data types](/docs/postgresql/postgresql-data-types), [functions](/docs/postgresql/postgresql-plpgsql/postgresql-create-function), [stored procedures](/docs/postgresql/postgresql-plpgsql/postgresql-create-procedure), and operators.
 
 A schema allows you to organize and namespace database objects within a database.
 
@@ -155,7 +155,7 @@ If you use the following command, you will need to explicitly refer to objects i
 SET search_path TO public;
 ```
 
-The `public` schema is not a special schema, therefore, you can [drop](https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/) it too.
+The `public` schema is not a special schema, therefore, you can [drop](/docs/postgresql/postgresql-administration/postgresql-drop-schema) it too.
 
 ## PostgreSQL schemas and privileges
 

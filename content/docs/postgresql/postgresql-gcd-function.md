@@ -23,7 +23,7 @@ Here's the syntax of the `gcd()` function:
 gcd(a, b)
 ```
 
-In this syntax, you specify two numbers that you want to find their greatest common divisor. Both a and b are the types of [integer](/docs/postgresql/postgresql-integer/), [bigint](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/), and [numeric](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric).
+In this syntax, you specify two numbers that you want to find their greatest common divisor. Both a and b are the types of [integer](/docs/postgresql/postgresql-integer), [bigint](/docs/postgresql/postgresql-tutorial/postgresql-integer), and [numeric](/docs/postgresql/postgresql-tutorial/postgresql-numeric).
 
 The `gcd()` function returns an integer that is the GCD of the two input numbers.
 
