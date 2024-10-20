@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const { glob } = require('glob');
+const jsYaml = require('js-yaml');
 
 const getExcerpt = require('./get-excerpt');
 
@@ -38,19 +39,16 @@ const findTitle = (sidebar, currentSlug) => {
 const getPostBySlug = async (path, basePath) => {
   try {
     const content = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
-    const sidebar = fs.readFileSync(
-      `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
-      'utf8'
-    );
+    const sidebar = fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8');
 
     const currentSlug = path.slice(1);
-    const sidebarData = JSON.parse(sidebar);
+    const sidebarData = jsYaml.load(sidebar);
 
     const title = findTitle(sidebarData, currentSlug);
 
     const excerpt = getExcerpt(content, 200);
 
-    return { title, excerpt, content };
+    return { title, excerpt, content, sidebar: sidebarData };
   } catch (e) {
     return null;
   }
@@ -126,16 +124,10 @@ const getSideBarWithInlineCode = (sidebar) => {
   return sidebar;
 };
 
-const getSidebar = () => {
-  const sidebarJson = fs.readFileSync(
-    `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
-    'utf8'
+const getSidebar = () =>
+  getSideBarWithInlineCode(
+    jsYaml.load(fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8'))
   );
-  const sidebar = JSON.parse(sidebarJson);
-
-  return getSideBarWithInlineCode(sidebar);
-  // replace mdx inline code with html inline code
-};
 
 export {
   getAllPosts,

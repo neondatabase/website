@@ -4,7 +4,7 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
-import { getSidebar } from 'utils/api-docs';
+import { getSidebar } from 'utils/api-postgres';
 
 const NeonDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();

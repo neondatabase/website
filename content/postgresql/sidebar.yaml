@@ -1,0 +1,224 @@
+- section: PostgreSQL Quick Start
+  items:
+    - title: What is PostgreSQL?
+      slug: what-is-postgresql
+    - title: PostgreSQL Sample Database
+      slug: postgresql-sample-database
+    - title: Install PostgreSQL on Windows
+      slug: install-postgresql-on-windows
+    - title: Connect to PostgreSQL Database
+      slug: connect-to-a-postgresql-database-server
+    - title: Load PostgreSQL Sample Database
+      slug: load-postgresql-sample-database
+    - title: Install PostgreSQL on macOS
+      slug: install-postgresql-macos
+    - title: Install PostgreSQL on Linux
+      slug: install-postgresql-linux
+- section: Querying Data
+  items:
+    - title: SELECT
+      slug: postgresql-select
+    - title: Column Alias
+      slug: postgresql-column-alias
+    - title: ORDER BY
+      slug: postgresql-order-by
+    - title: SELECT DISTINCT
+      slug: postgresql-select-distinct
+- section: Filtering Data
+  items:
+    - title: WHERE
+      slug: postgresql-where
+    - title: AND Operator
+      slug: postgresql-and
+    - title: OR Operator
+      slug: postgresql-or
+    - title: LIMIT
+      slug: postgresql-limit
+    - title: FETCH
+      slug: postgresql-fetch
+    - title: IN
+      slug: postgresql-in
+    - title: BETWEEN
+      slug: postgresql-between
+    - title: LIKE
+      slug: postgresql-like
+    - title: IS NULL
+      slug: postgresql-is-null
+- section: Join Tables
+  items:
+    - title: Joins
+      slug: postgresql-joins
+    - title: Table Aliases
+      slug: postgresql-alias
+    - title: Inner Join
+      slug: postgresql-inner-join
+    - title: Left Join
+      slug: postgresql-left-join
+    - title: RIGHT JOIN
+      slug: postgresql-right-join
+    - title: SELF-JOIN
+      slug: postgresql-self-join
+    - title: FULL OUTER JOIN
+      slug: postgresql-full-outer-join
+    - title: Cross Join By Example
+      slug: postgresql-cross-join
+    - title: NATURAL JOIN Explained By Examples
+      slug: postgresql-natural-join
+- section: Group Data
+  items:
+    - title: GROUP BY
+      slug: postgresql-group-by
+    - title: HAVING
+      slug: postgresql-having
+    - title: GROUPING SETS
+      slug: postgresql-grouping-sets
+    - title: CUBE
+      slug: postgresql-cube
+    - title: ROLLUP
+      slug: postgresql-rollup
+- section: Set Operations
+  items:
+    - title: UNION
+      slug: postgresql-union
+    - title: INTERSECT Operator
+      slug: postgresql-intersect
+    - title: EXCEPT
+      slug: postgresql-except
+- section: Common Table Expression (CTE)
+  items:
+    - title: CTE
+      slug: postgresql-cte
+    - title: Recursive CTE
+      slug: postgresql-recursive-query
+- section: Modifying Data
+  items:
+    - title: INSERT
+      slug: postgresql-insert
+    - title: INSERT Multiple Rows
+      slug: postgresql-insert-multiple-rows
+    - title: UPDATE
+      slug: postgresql-update
+    - title: UPDATE Join
+      slug: postgresql-update-join
+    - title: DELETE
+      slug: postgresql-delete
+    - title: DELETE Join
+      slug: postgresql-delete-join
+    - title: Upsert
+      slug: postgresql-upsert
+    - title: MERGE Statement
+      slug: postgresql-merge
+- section: Transactions
+  items:
+    - title: Transaction
+      slug: postgresql-transaction
+- section: Import / Export
+  items:
+    - title: Import CSV File Into Table
+      slug: import-csv-file-into-posgresql-table
+    - title: Export PostgreSQL Table To CSV File
+      slug: export-postgresql-table-to-csv-file
+- section: Subquery
+  items:
+    - title: Subquery
+      slug: postgresql-subquery
+    - title: Correlated Subquery
+      slug: postgresql-correlated-subquery
+    - title: ANY Operator
+      slug: postgresql-any
+    - title: ALL Operator
+      slug: postgresql-all
+    - title: EXISTS Operator
+      slug: postgresql-exists
+- section: Managing Tables
+  items:
+    - title: Data Types
+      slug: postgresql-data-types
+    - title: Create Table
+      slug: postgresql-create-table
+    - title: SELECT INTO
+      slug: postgresql-select-into
+    - title: CREATE TABLE AS
+      slug: postgresql-create-table-as
+    - title: SERIAL
+      slug: postgresql-serial
+    - title: Sequences
+      slug: postgresql-sequences
+    - title: Identity Column
+      slug: postgresql-identity-column
+    - title: Generated Columns
+      slug: postgresql-generated-columns
+    - title: ALTER TABLE
+      slug: postgresql-alter-table
+    - title: Rename Table
+      slug: postgresql-rename-table
+    - title: ADD COLUMN
+      slug: postgresql-add-column
+    - title: DROP COLUMN
+      slug: postgresql-drop-column
+    - title: Change Column Type
+      slug: postgresql-change-column-type
+    - title: Rename Column
+      slug: postgresql-rename-column
+    - title: DROP TABLE
+      slug: postgresql-drop-table
+    - title: Temporary Table
+      slug: postgresql-temporary-table
+    - title: TRUNCATE TABLE
+      slug: postgresql-truncate-table
+- section: Database Constraints
+  items:
+    - title: Primary Key
+      slug: postgresql-primary-key
+    - title: Foreign Key
+      slug: postgresql-foreign-key
+    - title: CHECK Constraint
+      slug: postgresql-check-constraint
+    - title: UNIQUE Constraint
+      slug: postgresql-unique-constraint
+    - title: NOT NULL Constraint
+      slug: postgresql-not-null-constraint
+    - title: DEFAULT Constraint
+      slug: postgresql-default-value
+- section: PostgreSQL Data Types
+  items:
+    - title: Boolean
+      slug: postgresql-boolean
+    - title: CHAR, VARCHAR, and TEXT
+      slug: postgresql-char-varchar-text
+    - title: NUMERIC
+      slug: postgresql-numeric
+    - title: Double Precision
+      slug: postgresql-double-precision-type
+    - title: REAL
+      slug: postgresql-real-data-type
+    - title: Integer
+      slug: postgresql-integer
+    - title: SERIAL
+      slug: postgresql-serial
+    - title: Date
+      slug: postgresql-date
+    - title: TIMESTAMP
+      slug: postgresql-timestamp
+    - title: Interval
+      slug: postgresql-interval
+    - title: TIME
+      slug: postgresql-time
+    - title: UUID
+      slug: postgresql-uuid
+    - title: JSON
+      slug: postgresql-json
+    - title: HSTORE
+      slug: postgresql-hstore
+    - title: Array
+      slug: postgresql-array
+    - title: User-defined Data Types
+      slug: postgresql-user-defined-data-types
+    - title: Enum
+      slug: postgresql-enum
+    - title: XML
+      slug: postgresql-xml-data-type
+    - title: BYTEA
+      slug: postgresql-bytea
+    - title: Composite Types
+      slug: postgresql-composite-types
