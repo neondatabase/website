@@ -181,6 +181,7 @@ class ModelBenchmark(models.Model):
 ```
 
 Here we define five models:
+
 - `ModelAuthor`: Represents the creator of AI models. It includes fields for name, bio, contact info, and rating.
 - `AIModel`: Represents individual AI models with their details. It includes fields for name, model type, description, framework, version, download URL, price, tags, and author.
 - `ModelPurchase`: Tracks purchases and downloads of AI models. It includes fields for the user, AI model, purchase date, price paid, license key, and download link.
@@ -255,7 +256,7 @@ class AIModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AIModel
-        fields = ['id', 'name', 'model_type', 'description', 'framework', 'version', 
+        fields = ['id', 'name', 'model_type', 'description', 'framework', 'version',
                   'download_url', 'price', 'tags', 'author', 'author_id']
 
 class ModelPurchaseSerializer(serializers.ModelSerializer):
@@ -277,21 +278,25 @@ class ModelBenchmarkSerializer(serializers.ModelSerializer):
 Let's break down each serializer to better understand their purpose:
 
 1. `ModelAuthorSerializer`:
+
    - This serializer is used for the `ModelAuthor` model, it basically represents the author details.
    - It includes all fields of the model (`id`, `name`, `bio`, `contact_info`, `rating`).
    - By using `ModelSerializer`, we automatically get create and update functionality that matches the model fields.
 
 2. `AIModelSerializer`:
+
    - This serializer is more complex due to its relationship with `ModelAuthor`.
    - We include a nested `author` field using `ModelAuthorSerializer(read_only=True)`. This means when serializing an `AIModel`, it will include all the author's details, but this field can't be used for writing (creating or updating).
    - We also include an `author_id` field, which is write-only. This allows clients to specify an author when creating or updating an `AIModel` by just providing the author's ID.
    - The `source='author'` in the `author_id` field tells DRF to use this field to set the `author` attribute of the `AIModel`.
 
 3. `ModelPurchaseSerializer`:
+
    - This serializer includes all fields from the `ModelPurchase` model.
    - It will handle the serialization of purchase records, including details like the user, the AI model purchased, purchase date, and license information.
 
 4. `UsageScenarioSerializer`:
+
    - This serializer corresponds to the `UsageScenario` model.
    - It includes all fields, allowing for the representation of different use cases or scenarios for AI models.
 
@@ -307,7 +312,7 @@ This approach significantly reduces the amount of code we need to write while st
 
 ### Create API views
 
-Now, let's create views to handle API requests. We'll use ViewSets for a clean, RESTful API structure. 
+Now, let's create views to handle API requests. We'll use ViewSets for a clean, RESTful API structure.
 
 Start by opening the `models_api/views.py` file and defining the views:
 
@@ -370,7 +375,7 @@ Create a new file `models_api/urls.py` to define the URL patterns for our API:
 ```python
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import (ModelAuthorViewSet, AIModelViewSet, ModelPurchaseViewSet, 
+from .views import (ModelAuthorViewSet, AIModelViewSet, ModelPurchaseViewSet,
                     UsageScenarioViewSet, ModelBenchmarkViewSet)
 
 router = DefaultRouter()
@@ -416,6 +421,7 @@ If you were to now visit `http://localhost:8000/api/` in your browser, you would
 Alternatively, you can use tools like `curl` or Postman to interact with the API programmatically. Here are some example `curl` commands to test the API:
 
 1. Create a new model author:
+
    ```bash
    curl -X POST http://localhost:8000/api/authors/ -H "Content-Type: application/json" -d '{"name":"AI Innovations Inc.", "bio":"Leading AI research company", "contact_info":"contact@aiinnovations.com", "rating":4.8}'
    ```
@@ -423,18 +429,21 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
    This will create a new model author with the specified details.
 
 2. Create a new AI model:
+
    ```bash
    curl -X POST http://localhost:8000/api/models/ -H "Content-Type: application/json" -d '{"name":"AdvancedNLP", "model_type":"NLP", "description":"State-of-the-art NLP model", "framework":"PT", "version":"1.0", "download_url":"https://example.com/model", "price":"99.99", "tags":["NLP", "transformer"], "author_id":1}'
    ```
 
-    This will create a new AI model associated with the author created in the previous step.
+   This will create a new AI model associated with the author created in the previous step.
 
 3. Get all AI models:
+
    ```bash
    curl http://localhost:8000/api/models/
    ```
 
 4. Get usage scenarios for a specific AI model:
+
    ```bash
    curl http://localhost:8000/api/models/1/usage_scenarios/
    ```

@@ -255,6 +255,58 @@ Go back to your Flask project and integrate the Neon branch into your testing se
 
 In addition to running tests locally, you can automate the testing process by integrating Neon branching with your CI/CD pipeline. Neon provides a GitHub Actions workflow that simplifies the process of creating and managing database branches for testing. For more information, refer to the [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions).
 
+## Managing Neon Branches with `neonctl` CLI
+
+With the `neonctl` CLI tool, managing your Neon database branches becomes more efficient and straightforward. You can create, list, obtain connection strings, and delete branches using simple commands.
+
+### Installing `neonctl`
+
+Before you can start using `neonctl`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/reference/cli-install) to set up `neonctl` on your system.
+
+### Using `neonctl` to Manage Branches
+
+Once `neonctl` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
+
+#### 1. [Creating a Branch](/docs/reference/cli-branches#create)
+
+To create a new branch, use the `neonctl branches create` command:
+
+```bash
+neonctl branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BRANCH_NAME
+```
+
+Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch.
+
+#### 2. [Listing Branches](/docs/reference/cli-branches#list)
+
+To list all branches in your Neon project, use the `neonctl branches list` command:
+
+```bash
+neonctl branches list --project-id PROJECT_ID
+```
+
+Replace `PROJECT_ID` with your Neon project ID. This command will display a list of all branches along with their IDs, names, and other relevant information.
+
+#### 3. [Obtaining Connection String](/docs/reference/cli-connection-string)
+
+Once you've created a branch, you'll need to obtain the connection string to configure your Laravel application. Use the `neonctl connection-string` command:
+
+```bash
+neonctl connection-string BRANCH_ID
+```
+
+Replace `BRANCH_ID` with the ID of the branch you want to connect to. This command will output the connection string that you can use to configure your Laravel `.env` file.
+
+#### 4. [Deleting a Branch](/docs/reference/cli-branches#delete)
+
+After you've finished testing with a branch, you can delete it using the `neonctl branches delete` command:
+
+```bash
+neonctl branches delete BRANCH_ID
+```
+
+Replace `BRANCH_ID` with the ID of the branch you want to delete. This command will remove the branch from your Neon project, ensuring that resources are not left unused.
+
 ## Conclusion
 
 Testing Flask applications with Neon's database branching offers a solution that lets you test changes with realistic production data without affecting your live database.
@@ -269,6 +321,5 @@ Neon's branching feature provides isolation, efficiency, flexibility, and simpli
 - [pytest Documentation](https://docs.pytest.org/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
 - [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions)
-
 
 <NeedHelp />
