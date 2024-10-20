@@ -1010,8 +1010,8 @@ One thing to keep in mind is always to validate and sanitize user inputs, optimi
 
 ## Additional Resources
 
-- [Laravel Documentation](https://laravel.com/docs) - Official documentation for the Laravel PHP framework, covering installation, configuration, and usage guides.
-- [Neon Documentation](/docs) - Comprehensive documentation for Neon's database services, including guides, tutorials, and API references.
-- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions) - Step-by-step guide on integrating Neon database branching with GitHub Actions for automated testing workflows.
+- [Laravel Documentation](https://laravel.com/docs)
+- [Neon Documentation](/docs)
+- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions)
 
 <NeedHelp />
