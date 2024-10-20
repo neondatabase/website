@@ -37,10 +37,9 @@ Now that we've covered the benefits of testing Flask applications with Neon's da
 
 Before you begin, ensure you have the following:
 
-- **Neon Account:** You need an account with Neon to access their database services. You can sign up at [Neon's official website](https://neon.tech).
-- **API Keys:** Generate API keys from the Neon console. These keys will allow your Flask application to interact with the Neon database programmatically.
-- **Local Development Environment:** Flask requires a Python environment (Python 3.7 or later) and [pip](https://pip.pypa.io/en/stable/installation/) for managing dependencies.
-- **Flask Installation:** A Flask project set up on your local machine. For installation instructions, refer to the [Flask documentation](https://flask.palletsprojects.com/en/3.0.x/installation/).
+- Python 3.8 or higher installed on your machine
+- A [Neon account](https://console.neon.tech/signup) with a project created
+- Basic familiarity with Flask and SQLAlchemy
 
 ### Installation and Configuration
 
@@ -144,6 +143,8 @@ To verify the setup, run the Flask development server:
 ```bash
 flask run
 ```
+
+If everything is set up correctly, you should be able to access the `/questions` route and see the questions returned as JSON.
 
 ### Writing a pytest Test for the Questions Route
 

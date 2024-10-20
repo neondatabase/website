@@ -1,5 +1,5 @@
 ---
-title: Building an AI Model Marketplace API with Django, Django REST Framework, and Neon Postgres
+title: Building an API with Django, Django REST Framework, and Neon Postgres
 subtitle: Learn how to create a robust RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres
 author: bobbyiliev
 enableTableOfContents: true
@@ -85,11 +85,15 @@ To verify the connection, run the Django development server:
 python manage.py runserver
 ```
 
+If the server starts without errors, you've successfully connected to the Neon database.
+
 ## Creating the API
+
+Now that we have the Django project set up and connected to the Neon database, let's create the simple API for our AI Model Marketplace.
 
 ### Define the models
 
-In Django`, models are Python classes that represent database tables. Create a new Django app for our AI Model Marketplace:
+In Django, models are Python classes that represent database tables. Create a new Django app for our AI Model Marketplace:
 
 ```bash
 python manage.py startapp models_api
@@ -108,8 +112,6 @@ INSTALLED_APPS = [
 Now, let's define our models in `models_api/models.py`:
 
 ```python
-# models_api/models.py
-
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -190,11 +192,11 @@ Here we define five models:
 
 The models are related to each other using foreign keys and related names to establish relationships between entities.
 
-Django's ORM will automatically create the corresponding database tables based on these models. You can customize the models further by adding fields, methods, or meta options as needed.
+Django's ORM will automatically create the corresponding database migrations for tables based on these models. You can customize the models further by adding fields, methods, or meta options as needed.
 
 ### Create and apply migrations
 
-Unlike other frameworks like Laravel where you need to manually create database migrations which are separate from your models, Django allows you to define your models and then generate migrations automatically based on those models.
+Unlike other web frameworks like Laravel where you need to manually create database migrations which are separate from your models, Django allows you to define your models and then generate migrations automatically based on those models.
 
 With the models defined in the previous step, all that's left is to create and apply the migrations to create the corresponding tables in the database. To generate the migrations, run:
 
@@ -308,7 +310,7 @@ These serializers provide a powerful abstraction layer between your Python objec
 
 By using `ModelSerializer`, we get a lot of functionality out of the box, such as automatically generated fields based on the model fields, default implementations of `create()` and `update()` methods, and validation based on model field types.
 
-This approach significantly reduces the amount of code we need to write while still providing flexibility where needed (like in the `AIModelSerializer` where we customize the author-related fields).
+This approach reduces the amount of code we need to write while still providing flexibility where needed (like in the `AIModelSerializer` where we customize the author-related fields).
 
 ### Create API views
 

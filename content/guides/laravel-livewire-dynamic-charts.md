@@ -67,9 +67,11 @@ DB_PASSWORD=your_password
 php artisan migrate
 ```
 
+This will create the necessary tables for user authentication and session management.
+
 ## Additional Database Tables
 
-Now that we have the users table set up by Breeze, let's create migrations for our additional SaaS analytics data.
+Now that we have the `users` table set up by Breeze, let's create migrations for our additional SaaS analytics data.
 
 For the purpose of this guide, we'll track feature usage and subscriptions. You can adjust these tables based on your specific application requirements.
 
@@ -148,7 +150,7 @@ This will generate two model files in the `app/Models` directory corresponding t
 
 Now, let's update the model classes to define relationships between the tables. The `FeatureUsage` and `Subscription` models will be connected to the `User` model via foreign keys.
 
-#### 2.1 `FeatureUsage.php` Model
+#### 2.1 `FeatureUsage` Model
 
 In the `app/Models/FeatureUsage.php` file, define the relationship with the `User` model. Since each feature usage entry belongs to a specific user, we will use a `belongsTo` relationship:
 
@@ -189,7 +191,7 @@ The above defines the following:
 - `user()`: Defines a `belongsTo` relationship, meaning each `FeatureUsage` belongs to a single `User`.
 - `casts`: Automatically casts the `used_at` column to a `datetime` object for easier manipulation in PHP.
 
-#### 2.2 `Subscription.php` Model
+#### 2.2 `Subscription` Model
 
 In the `app/Models/Subscription.php` file, define relationships with both the `User` model and handle timestamps (`started_at` and `ended_at`) correctly. This indicates that each subscription belongs to a user and includes a `plan`:
 
@@ -240,7 +242,7 @@ Once these relationships are defined, Eloquent provides methods to interact with
 
 ## Building the Dashboard
 
-We’ll create a simple SaaS dashboard that showcases our dynamic charts which will include daily active users, feature usage trends, and user signups vs. cancellations. This dashboard will use **Livewire** for interactivity and **Tailwind CSS** for styling and the Livewire Charts package.
+We’ll create a simple SaaS dashboard that showcases our dynamic charts which will include daily active users, feature usage trends, and user signups vs. cancellations. This dashboard will use Livewire for interactivity and Tailwind CSS for styling along with the Livewire Charts package for creating the dynamic charts.
 
 ### Step 1: Create the Livewire Component
 
@@ -271,6 +273,8 @@ class Dashboard extends Component
     }
 }
 ```
+
+Note that we're using the `layout('layouts.app')` method to specify the main layout file for the dashboard view. This layout file will contains the main structure of the dashboard.
 
 ### Step 3: Create the Dashboard View
 
@@ -311,6 +315,8 @@ Now, let’s update the `dashboard.blade.php` view with a grid layout that displ
 </div>
 ```
 
+This view includes a header with a title and a refresh button, followed by a grid layout that displays the three charts: 'Daily Active Users', 'Feature Usage Trends', and 'User Signups vs. Cancellations'. We will create those charts components next.
+
 ## Setting up Routes
 
 With the charts dashboard view and the Livewire component in place, let's set up the routes to display the dashboard.
@@ -321,13 +327,15 @@ use App\Livewire\Dashboard;
 Route::get('/charts', Dashboard::class)->middleware(['auth'])->name('dashboard');
 ```
 
+This route will display the dashboard view when the `/charts` URL is accessed. The `auth` middleware ensures that only authenticated users can access the dashboard.
+
 ## Set Up Livewire Charts for the Dashboard
 
 Now with everything in place, let's implement individual chart components.
 
 The Livewire Charts package provides a wide range of chart types, including area charts, radar charts, and treemaps, offering flexibility to create various data visualizations.
 
-We'll use `LivewireLineChart` for 'Daily Active Users', `LivewireColumnChart` for 'Feature Usage Trends', and `LivewirePieChart` for 'User Signups vs. Cancellations'.
+We'll use `LivewireLineChart` for 'Daily Active Users', `LivewireColumnChart` for 'Feature Usage Trends', and `LivewirePieChart` for 'User Signups vs. Cancellations'. To get a full list of available chart types, check out the [Livewire Charts documentation](https://github.com/asantibanez/livewire-charts/).
 
 ### 2.1 Daily Active Users Chart
 
@@ -489,41 +497,7 @@ In `resources/views/livewire/user-signups-vs-cancellations-chart.blade.php`:
 </div>
 ```
 
-## Step 3: Update the Dashboard
-
-Now, update the `resources/views/livewire/dashboard.blade.php` file with the Livewire components:
-
-```blade
-<div class="min-h-screen py-12 bg-gray-100">
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h1 class="text-4xl font-bold text-gray-800">SaaS Analytics Dashboard</h1>
-            <button class="px-4 py-2 text-white transition duration-200 bg-indigo-600 rounded-lg hover:bg-indigo-700">
-                Refresh Data
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="p-6 bg-white rounded-lg shadow-md">
-                <h2 class="mb-4 text-xl font-semibold">Daily Active Users</h2>
-                <livewire:daily-active-users-chart />
-            </div>
-
-            <div class="p-6 bg-white rounded-lg shadow-md">
-                <h2 class="mb-4 text-xl font-semibold">Feature Usage Trends</h2>
-                <livewire:feature-usage-trends-chart />
-            </div>
-
-            <div class="p-6 bg-white rounded-lg shadow-md">
-                <h2 class="mb-4 text-xl font-semibold">User Signups vs Cancellations</h2>
-                <livewire:user-signups-vs-cancellations-chart />
-            </div>
-        </div>
-    </div>
-</div>
-```
-
-## Step 4: Add Chart Scripts
+## Step 3: Add Chart Scripts
 
 Include the chart scripts in your main layout file (`resources/views/layouts/app.blade.php`) by adding:
 
@@ -532,7 +506,9 @@ Include the chart scripts in your main layout file (`resources/views/layouts/app
 @livewireChartsScripts
 ```
 
-## Step 5: Test the Dashboard
+This will load the necessary JavaScript files for Livewire and Livewire Charts to render the interactive charts on the dashboard.
+
+## Step 4: Test the Dashboard
 
 Run the server to access your charts dashboard if you haven't already:
 
@@ -603,6 +579,8 @@ php artisan db:seed --class=SampleDataSeeder
 ```
 
 Once the database is seeded, refresh the charts dashboard, and you should see the charts populated with real-time data.
+
+For more information on seeding the database, check out the [Laravel documentation](https://laravel.com/docs/11.x/seeding).
 
 ## Optimizing Performance
 

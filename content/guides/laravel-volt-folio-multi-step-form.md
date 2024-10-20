@@ -68,15 +68,15 @@ Replace `your-neon-hostname.neon.tech`, `your_database_name`, `your_username`, a
 
 ## Database Design
 
-Let's create migrations for our job application form. We'll use separate tables for each section and leverage Postgres JSON columns for flexible data storage.
+Let's create the database migrations for our job application form. We'll use separate tables for each section and leverage Postgres JSON columns for flexible data storage for additional information.
 
-First, let's create the migration for the applicants table using the `artisan` command:
+First, let's create the migration for the applicants table using the following `artisan` command:
 
 ```bash
 php artisan make:migration create_applicants_table
 ```
 
-Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating.
+Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating. That way Laravel can automatically determine the table name from the migration name and also it will be easier to identify the purpose of the migration file by its name for other developers.
 
 This command generates a new migration file in the `database/migrations` directory. Open the newly created file and update its content as follows:
 
@@ -205,9 +205,9 @@ For your Laravel migrations, you should not use the Neon Postgres Pooler. The Po
 
 ## Creating Models
 
-Next, let's create models for our `Applicant`, `Education`, and `WorkExperience` tables. Laravel provides an easy way to generate models using the `artisan` command.
+Next, let's create models for our `Applicant`, `Education`, and `WorkExperience` tables. Models in Laravel are used to interact with database tables and represent the data in your application in an object-oriented way.
 
-Create the `Applicant` model:
+Laravel provides an easy way to generate models using the `artisan` command. To create the `Applicant` model run:
 
 ```bash
 php artisan make:model Applicant
@@ -256,7 +256,7 @@ Now, create the `Education` model:
 php artisan make:model Education
 ```
 
-Update `app/Models/Education.php`:
+Update the newly created file at `app/Models/Education.php` with the following content:
 
 ```php
 <?php
@@ -300,7 +300,7 @@ Finally, create the `WorkExperience` model:
 php artisan make:model WorkExperience
 ```
 
-Update `app/Models/WorkExperience.php`:
+And update the `app/Models/WorkExperience.php` file with the following content:
 
 ```php
 <?php
@@ -337,7 +337,7 @@ class WorkExperience extends Model
 }
 ```
 
-In these model definitions:
+Let's quickly note down the most important parts in these model definitions:
 
 - We've used the `$fillable` property to specify which attributes can be mass-assigned. This is a security feature to prevent unintended mass assignment vulnerabilities.
 - We've defined relationships between models. An `Applicant` has many `Education` and `WorkExperience` records, while `Education` and `WorkExperience` belong to an `Applicant`.
@@ -375,12 +375,11 @@ Create a new Blade layout file at `resources/views/layouts/app.blade.php`:
 
 In this layout file:
 
-- We've included the necessary meta tags for character encoding and viewport settings.
-- We've set the page title to "Job Application Form".
+- We've included the necessary meta tags for character encoding, viewport settings and the page title.
 - We've used the `@vite` directive to include the CSS and JavaScript assets. This directive is provided by the Laravel Vite package, which integrates Laravel with the Vite build tool for modern frontend development.
 - We've included the Livewire styles and scripts. Livewire is a full-stack framework for Laravel that allows you to build dynamic interfaces without writing JavaScript.
 
-To compile the assets, you'll need to run the Vite build command:
+To compile the frontend assets, you'll need to run the following commands:
 
 ```bash
 npm install
@@ -389,11 +388,15 @@ npm run build
 
 ## Implementing File-based Routing with Folio
 
-Laravel Folio, introduced in 2023, offers a new approach to routing in Laravel applications. It simplifies routing by allowing you to create routes simply by adding Blade templates to a specific directory. This file-based routing system makes your project structure cleaner and more intuitive.
+Laravel Folio was introduced in 2023, and it offers a new approach to routing in Laravel applications.
+
+It simplifies routing by allowing you to create routes simply by adding Blade templates to a specific directory. This file-based routing system makes your project structure cleaner and more intuitive.
+
+It is not a replacement for Laravel's built-in routing system but rather a complementary feature that simplifies routing for certain types of applications.
 
 First, let's set up the directory structure for our multi-step form. Create the following directory structure in your `resources/views/pages` folder:
 
-```
+```shell
 resources/
 └── views/
     └── pages/
@@ -461,7 +464,7 @@ php artisan make:volt personal-info-form
 
 That will create a file at `resources/views/livewire/personal-info-form.blade.php`. Update the file with the following content:
 
-```php
+```blade
 <?php
 
 use function Livewire\Volt\state;
@@ -548,7 +551,7 @@ php artisan make:volt education-form
 
 Update `resources/views/livewire/education-form.blade.php`:
 
-```php
+```blade
 <?php
 
 use function Livewire\Volt\state;
@@ -634,7 +637,7 @@ php artisan make:volt work-experience-form
 
 Update `resources/views/livewire/work-experience-form.blade.php` similar to the previous components:
 
-```php
+```blade
 <?php
 
 use function Livewire\Volt\state;
@@ -730,7 +733,7 @@ php artisan make:volt review-form
 
 Update `resources/views/livewire/review-form.blade.php` as we did for the other components:
 
-```php
+```blade
 <?php
 
 use function Livewire\Volt\state;
@@ -799,85 +802,85 @@ First, in each file, you will define a named route using the `name` function and
 
 - For the `resources/views/pages/apply/personal-info.blade.php` file:
 
-```php
-<?php
-use function Laravel\Folio\name;
+  ```blade
+  <?php
+  use function Laravel\Folio\name;
 
-name('apply.personal-info');
-?>
+  name('apply.personal-info');
+  ?>
 
-@extends('layouts.app')
+  @extends('layouts.app')
 
-@section('title', 'Personal Information')
+  @section('title', 'Personal Information')
 
-@section('content')
-<div>
-    <livewire:personal-info-form />
-</div>
-@endsection
-```
+  @section('content')
+  <div>
+      <livewire:personal-info-form />
+  </div>
+  @endsection
+  ```
 
 We need to do the same for the other pages:
 
 - For the `resources/views/pages/apply/education.blade.php` file:
 
-```php
-<?php
-use function Laravel\Folio\name;
+  ```blade
+  <?php
+  use function Laravel\Folio\name;
 
-name('apply.education');
-?>
+  name('apply.education');
+  ?>
 
-@extends('layouts.app')
+  @extends('layouts.app')
 
-@section('title', 'Education')
+  @section('title', 'Education')
 
-@section('content')
-<div>
-    <livewire:education-form />
-</div>
-@endsection
-```
+  @section('content')
+  <div>
+      <livewire:education-form />
+  </div>
+  @endsection
+  ```
 
 - For the `resources/views/pages/apply/work-experience.blade.php` file:
 
-```php
-<?php
-use function Laravel\Folio\name;
+  ```blade
+  <?php
+  use function Laravel\Folio\name;
 
-name('apply.work-experience');
-?>
+  name('apply.work-experience');
+  ?>
 
-@extends('layouts.app')
+  @extends('layouts.app')
 
-@section('title', 'Work Experience')
+  @section('title', 'Work Experience')
 
-@section('content')
-<div>
-    <livewire:work-experience-form />
-</div>
-@endsection
-```
+  @section('content')
+  <div>
+      <livewire:work-experience-form />
+  </div>
+  @endsection
+  ```
 
 - And for the `resources/views/pages/apply/review.blade.php` file:
 
-```php
-<?php
-use function Laravel\Folio\name;
+  ```blade
+  <?php
+  use function Laravel\Folio\name;
 
-name('apply.review');
-?>
+  name('apply.review');
+  ?>
 
-@extends('layouts.app')
+  @extends('layouts.app')
 
-@section('title', 'Review')
+  @section('title', 'Review')
 
-@section('content')
-<div>
-    <livewire:review-form />
-</div>
-@endsection
-```
+  @section('content')
+  <div>
+      <livewire:review-form />
+  </div>
+  @endsection
+  ```
 
 ### Confirmation Page
 
@@ -889,7 +892,7 @@ php artisan folio:page apply/confirmation
 
 Update the `resources/views/pages/apply/confirmation.blade.php` file:
 
-```php
+```blade
 <?php
 use function Laravel\Folio\name;
 
@@ -925,25 +928,25 @@ To manually verify that everything works as expected, follow these steps:
    php artisan serve
    ```
 
-2. Open your browser and navigate to `http://localhost:8000/apply/personal-info`.
+1. Open your browser and navigate to `http://localhost:8000/apply/personal-info`.
 
-3. Fill out the personal information form and submit it. You should be redirected to the education form.
+1. Fill out the personal information form and submit it. You should be redirected to the education form.
 
-4. Fill out the education form and submit it. You should be redirected to the work experience form.
+1. Fill out the education form and submit it. You should be redirected to the work experience form.
 
-5. Fill out the work experience form and submit it. You should be redirected to the review page.
+1. Fill out the work experience form and submit it. You should be redirected to the review page.
 
-6. On the review page, verify that all the information you entered is displayed correctly.
+1. On the review page, verify that all the information you entered is displayed correctly.
 
-7. Submit the application and verify that you see a success message.
+1. Submit the application and verify that you see a success message.
 
-8. To check if the data was persisted correctly:
+1. To check if the data was persisted correctly:
 
    - Open a database client (like pgAdmin for Postgres) and connect to your Neon database.
    - Check the `applicants`, `educations`, and `work_experiences` tables. You should see your submitted data.
    - Verify that the `applicant_id` in the `educations` and `work_experiences` tables matches the `id` in the `applicants` table for your submission.
 
-9. Try refreshing the page or closing and reopening your browser, then navigate back to `http://localhost:8000/apply/review`. You should still see your submitted data, demonstrating that the data persists across sessions.
+1. Try refreshing the page or closing and reopening your browser, then navigate back to `http://localhost:8000/apply/review`. You should still see your submitted data, demonstrating that the data persists across sessions.
 
 ## Testing
 
@@ -988,9 +991,9 @@ class PersonalInfoTest extends TestCase
 This test checks if:
 
 1. The form can be submitted with valid data.
-2. The data is correctly stored in the database.
-3. The `applicant_id` is stored in the session.
-4. The user is redirected to the next step after submission.
+1. The data is correctly stored in the database.
+1. The `applicant_id` is stored in the session.
+1. The user is redirected to the next step after submission.
 
 You can create similar tests for the education and work experience steps.
 
