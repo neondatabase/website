@@ -127,7 +127,7 @@ Third, quit the psql:
 First, download the sample database using the `curl` tool:
 
 ```
-curl -O https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+curl -O https://neon.tech/postgresqltutorial_data/dvdrental.zip
 ```
 
 Second, unzip the dvdrental.zip file to get the dvdrental.tar file:

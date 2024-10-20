@@ -183,7 +183,7 @@ There are numerous other resources you can draw upon to learn more about leverag
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
 - [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN).
-- [PostgreSQL EXPLAIN tutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
+- [PostgreSQL EXPLAIN tutorial](/postgresql/postgresql-tutorial/postgresql-explain)
 
 <Admonition type="tip" title="Tips">
 - The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
