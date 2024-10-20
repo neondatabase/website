@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-rank-function
-nextPost: /postgresql/postgresql-reverse-function
+prevPost: postgresql-rank-function
+nextPost: postgresql-reverse-function
 createdAt: 2020-07-23T04:53:02.000Z
 title: 'PL/pgSQL Assert Statement'
 redirectFrom: 

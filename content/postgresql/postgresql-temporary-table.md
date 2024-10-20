@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-truncate-table
-nextPost: /postgresql/postgresql-copy-table-a-step-by-step-guide-with-practical-examples
+prevPost: postgresql-truncate-table
+nextPost: postgresql-copy-table-a-step-by-step-guide-with-practical-examples
 createdAt: 2017-02-24T06:51:02.000Z
 title: 'PostgreSQL Temporary Table'
 redirectFrom:

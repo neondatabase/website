@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-chr-function
-nextPost: /postgresql/postgresql-ceil-function
+prevPost: postgresql-chr-function
+nextPost: postgresql-ceil-function
 createdAt: 2017-08-15T13:06:17.000Z
 title: 'PostgreSQL CURRENT_TIME Function'
 redirectFrom:

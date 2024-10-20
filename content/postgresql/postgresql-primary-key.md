@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-copy-table-a-step-by-step-guide-with-practical-examples
-nextPost: /postgresql/postgresql-foreign-key
+prevPost: postgresql-copy-table-a-step-by-step-guide-with-practical-examples
+nextPost: postgresql-foreign-key
 createdAt: 2015-08-30T09:23:06.000Z
 title: 'PostgreSQL Primary Key'
 redirectFrom:

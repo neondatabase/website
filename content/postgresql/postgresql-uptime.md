@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-exists-operator
-nextPost: /postgresql/postgresql-cte
+prevPost: postgresql-exists-operator
+nextPost: postgresql-cte
 createdAt: 2024-02-20T05:17:03.000Z
 title: 'PostgreSQL Uptime'
 redirectFrom: 

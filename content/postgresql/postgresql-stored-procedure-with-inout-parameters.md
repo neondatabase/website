@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_typeof-function
-nextPost: /postgresql/postgresql-backup
+prevPost: postgresql-jsonb_typeof-function
+nextPost: postgresql-backup
 createdAt: 2024-03-22T04:16:39.000Z
 title: 'PostgreSQL Stored Procedure with INOUT Parameters'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-right-join
-nextPost: /postgresql/postgresql-jsonb_array_elements-function
+prevPost: postgresql-right-join
+nextPost: postgresql-jsonb_array_elements-function
 createdAt: 2020-07-27T04:12:58.000Z
 title: 'PostgreSQL DROP ROLE Statement'
 redirectFrom: 

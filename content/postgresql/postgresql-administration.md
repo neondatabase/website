@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-deleting-data
-nextPost: /postgresql/postgresql-replace-function
+prevPost: postgresql-c-deleting-data
+nextPost: postgresql-replace-function
 createdAt: 2013-06-03T07:48:14.000Z
 title: 'PostgreSQL Administration'
 tableOfContents: true

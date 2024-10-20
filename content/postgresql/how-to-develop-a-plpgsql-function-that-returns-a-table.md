@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/about-us
-nextPost: /postgresql/postgresql-cross-join
+prevPost: about-us
+nextPost: postgresql-cross-join
 createdAt: 2015-10-12T09:56:51.000Z
 title: 'How to Develop a PL/pgSQL Function That Returns a Table'
 redirectFrom: 

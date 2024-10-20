@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-record-types
-nextPost: /postgresql/postgresql-and-operator
+prevPost: plpgsql-record-types
+nextPost: postgresql-and-operator
 createdAt: 2020-08-03T03:38:42.000Z
 title: 'PostgreSQL Python: Call PostgreSQL Functions'
 redirectFrom: 

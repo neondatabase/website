@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-connecting-the-postgresql-database
-nextPost: /postgresql/postgresql-select
+prevPost: postgresql-c-connecting-the-postgresql-database
+nextPost: postgresql-select
 createdAt: 2012-08-12T05:06:30.000Z
 title: 'PostgreSQL Tutorial'
 redirectFrom: 

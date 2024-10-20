@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-make_time-function
-nextPost: /postgresql/postgresql-age-function
+prevPost: postgresql-make_time-function
+nextPost: postgresql-age-function
 createdAt: 2024-04-19T01:54:25.000Z
 title: 'PostgreSQL LOG() Function'
 redirectFrom: 

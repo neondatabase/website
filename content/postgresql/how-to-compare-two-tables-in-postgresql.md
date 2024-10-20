@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-composite-types
-nextPost: /postgresql/how-to-generate-a-random-number-in-a-range
+prevPost: postgresql-composite-types
+nextPost: how-to-generate-a-random-number-in-a-range
 createdAt: 2015-09-02T09:37:13.000Z
 title: 'How to Compare Two Tables in PostgreSQL'
 redirectFrom: 

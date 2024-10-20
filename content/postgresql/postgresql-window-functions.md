@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-trim-function
-nextPost: /postgresql/postgresql-grant
+prevPost: postgresql-trim-function
+nextPost: postgresql-grant
 createdAt: 2016-06-20T05:02:39.000Z
 title: 'PostgreSQL Window Functions'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-products_product_groups_tables.png

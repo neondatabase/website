@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-column-remove-one-or-more-columns-of-a-table
-nextPost: /postgresql/postgresql-rename-column-renaming-a-column
+prevPost: postgresql-drop-column-remove-one-or-more-columns-of-a-table
+nextPost: postgresql-rename-column-renaming-a-column
 createdAt: 2017-02-22T08:11:08.000Z
 title: 'PostgreSQL Change Column Type'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-identity-column
-nextPost: /postgresql/postgresql-alter-table
+prevPost: postgresql-identity-column
+nextPost: postgresql-alter-table
 createdAt: 2024-03-25T08:00:11.000Z
 title: 'PostgreSQL Generated Columns'
 tableOfContents: true

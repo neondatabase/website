@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-cursor
-nextPost: /postgresql/postgresql-except
+prevPost: plpgsql-cursor
+nextPost: postgresql-except
 createdAt: 2017-08-18T03:13:00.000Z
 title: 'PostgreSQL TO_NUMBER() Function'
 redirectFrom:

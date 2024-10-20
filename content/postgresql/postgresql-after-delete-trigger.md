@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-full-text-search
-nextPost: /postgresql/postgresql-lcm-function
+prevPost: postgresql-full-text-search
+nextPost: postgresql-lcm-function
 createdAt: 2024-03-28T09:35:46.000Z
 title: 'PostgreSQL AFTER DELETE Trigger'
 redirectFrom: 

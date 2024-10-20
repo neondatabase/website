@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/how-to-restart-postgresql-on-ubuntu
-nextPost: /postgresql/how-to-restart-postgresql-on-windows
+prevPost: how-to-restart-postgresql-on-ubuntu
+nextPost: how-to-restart-postgresql-on-windows
 createdAt: 2013-06-02T03:12:31.000Z
 title: 'PostgreSQL INSERT'
 redirectFrom:

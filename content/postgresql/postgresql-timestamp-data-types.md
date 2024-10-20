@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-date-data-type
-nextPost: /postgresql/postgresql-interval-data-type
+prevPost: postgresql-date-data-type
+nextPost: postgresql-interval-data-type
 createdAt: 2016-06-23T04:58:51.000Z
 title: 'PostgreSQL Timestamp Data Types'
 redirectFrom: 

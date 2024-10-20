@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-and-operator
-nextPost: /postgresql/postgresql-jsonb_path_query-function
+prevPost: postgresql-and-operator
+nextPost: postgresql-jsonb_path_query-function
 createdAt: 2024-02-22T10:01:03.000Z
 title: 'How to Change the Owner of a PostgreSQL Database'
 redirectFrom: 

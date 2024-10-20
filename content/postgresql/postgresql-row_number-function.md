@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-if-statement
-nextPost: /postgresql/postgresql-to_date-function
+prevPost: plpgsql-if-statement
+nextPost: postgresql-to_date-function
 createdAt: 2016-06-21T06:12:53.000Z
 title: 'PostgreSQL ROW_NUMBER Function'
 redirectFrom:

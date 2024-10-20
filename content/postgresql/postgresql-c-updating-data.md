@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-before-insert-trigger
-nextPost: /postgresql/postgresql-where
+prevPost: postgresql-before-insert-trigger
+nextPost: postgresql-where
 createdAt: 2024-05-20T07:37:43.000Z
 title: 'PostgreSQL C#: Updating Data'
 redirectFrom: 

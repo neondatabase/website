@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-current_date-function
-nextPost: /postgresql/postgresql-create-index-statement
+prevPost: postgresql-current_date-function
+nextPost: postgresql-create-index-statement
 createdAt: 2017-08-17T03:54:07.000Z
 title: 'PostgreSQL ABS() Function'
 redirectFrom: 

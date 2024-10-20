@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-unique-index
-nextPost: /postgresql/dollar-quoted-string-constants
+prevPost: postgresql-unique-index
+nextPost: dollar-quoted-string-constants
 createdAt: 2019-05-12T14:24:30.000Z
 title: 'PostgreSQL DENSE_RANK Function'
 redirectFrom:

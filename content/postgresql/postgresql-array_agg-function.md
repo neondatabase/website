@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-reindex
-nextPost: /postgresql/postgresql-lead-function
+prevPost: postgresql-reindex
+nextPost: postgresql-lead-function
 createdAt: 2019-03-09T09:25:30.000Z
 title: 'PostgreSQL ARRAY_AGG Function'
 redirectFrom:

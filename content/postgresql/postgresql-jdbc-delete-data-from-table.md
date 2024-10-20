@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-materialized-views
-nextPost: /postgresql/postgresql-php-transaction
+prevPost: postgresql-materialized-views
+nextPost: postgresql-php-transaction
 createdAt: 2016-03-12T15:59:17.000Z
 title: 'PostgreSQL JDBC: Delete Data from Table'
 redirectFrom: 

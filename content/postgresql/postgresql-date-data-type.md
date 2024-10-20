@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-integer-data-types
-nextPost: /postgresql/postgresql-timestamp-data-types
+prevPost: postgresql-integer-data-types
+nextPost: postgresql-timestamp-data-types
 createdAt: 2016-06-23T01:46:43.000Z
 title: 'PostgreSQL DATE Data Type'
 redirectFrom: 

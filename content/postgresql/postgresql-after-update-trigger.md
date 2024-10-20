@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_path_query_array-function
-nextPost: /postgresql/postgresql-c-transaction
+prevPost: postgresql-jsonb_path_query_array-function
+nextPost: postgresql-c-transaction
 createdAt: 2024-03-28T07:20:42.000Z
 title: 'PostgreSQL AFTER UPDATE Trigger'
 redirectFrom: 

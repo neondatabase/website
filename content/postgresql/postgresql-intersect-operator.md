@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-tablespace-statement
-nextPost: /postgresql/postgresql-to_char-function
+prevPost: postgresql-drop-tablespace-statement
+nextPost: postgresql-to_char-function
 createdAt: 2016-06-19T15:09:16.000Z
 title: 'PostgreSQL INTERSECT Operator'
 redirectFrom: 

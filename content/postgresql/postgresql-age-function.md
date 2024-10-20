@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-log-function
-nextPost: /postgresql/postgresql-joins
+prevPost: postgresql-log-function
+nextPost: postgresql-joins
 createdAt: 2017-03-20T09:49:11.000Z
 title: 'PostgreSQL AGE() Function'
 redirectFrom:

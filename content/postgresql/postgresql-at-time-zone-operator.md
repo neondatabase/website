@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_array_elements_text-function
-nextPost: /postgresql/postgresql-resources
+prevPost: postgresql-jsonb_array_elements_text-function
+nextPost: postgresql-resources
 createdAt: 2024-03-21T08:33:29.000Z
 title: 'PostgreSQL AT TIME ZONE Operator'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-update-join
-nextPost: /postgresql/postgresql-delete-join
+prevPost: postgresql-update-join
+nextPost: postgresql-delete-join
 createdAt: 2013-06-02T08:29:25.000Z
 title: 'PostgreSQL DELETE'
 redirectFrom:

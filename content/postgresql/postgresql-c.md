@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-make_interval-function
-nextPost: /postgresql/plpgsql-function-parameter-modes-in-out-inout
+prevPost: postgresql-make_interval-function
+nextPost: plpgsql-function-parameter-modes-in-out-inout
 createdAt: 2024-05-19T13:15:18.000Z
 title: 'PostgreSQL C#'
 tableOfContents: true

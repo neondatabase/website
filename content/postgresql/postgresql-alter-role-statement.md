@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-format-function
-nextPost: /postgresql/postgresql-exception
+prevPost: postgresql-format-function
+nextPost: postgresql-exception
 createdAt: 2020-07-28T10:42:02.000Z
 title: 'PostgreSQL ALTER ROLE Statement'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-is-null
-nextPost: /postgresql/postgresql-revoke-statement
+prevPost: postgresql-is-null
+nextPost: postgresql-revoke-statement
 createdAt: 2020-07-23T07:16:53.000Z
 title: 'PL/pgSQL While Loop'
 redirectFrom: 

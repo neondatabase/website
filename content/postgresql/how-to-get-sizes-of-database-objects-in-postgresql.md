@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-python-transactions
-nextPost: /postgresql/postgresql-now-function
+prevPost: postgresql-python-transactions
+nextPost: postgresql-now-function
 createdAt: 2017-03-15T09:45:46.000Z
 title: 'How to Get Sizes of Database Objects in PostgreSQL'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-delete-data-from-a-table
-nextPost: /postgresql/postgresql-date_part-function
+prevPost: postgresql-php-delete-data-from-a-table
+nextPost: postgresql-date_part-function
 createdAt: 2016-06-16T09:29:02.000Z
 title: 'PostgreSQL Python: Handling Binary Data'
 redirectFrom: 

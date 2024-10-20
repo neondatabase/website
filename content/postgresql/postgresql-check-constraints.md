@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-delete-cascade
-nextPost: /postgresql/postgresql-unique-constraint
+prevPost: postgresql-delete-cascade
+nextPost: postgresql-unique-constraint
 createdAt: 2015-08-31T05:05:07.000Z
 title: 'PostgreSQL CHECK Constraints'
 redirectFrom: 

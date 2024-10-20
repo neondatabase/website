@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-add-column-add-one-or-more-columns-to-a-table
-nextPost: /postgresql/postgresql-change-column-type
+prevPost: postgresql-add-column-add-one-or-more-columns-to-a-table
+nextPost: postgresql-change-column-type
 createdAt: 2017-02-22T04:10:47.000Z
 title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-schema-statement
-nextPost: /postgresql/postgresql-jsonb-operators
+prevPost: postgresql-drop-schema-statement
+nextPost: postgresql-jsonb-operators
 createdAt: 2024-01-28T11:07:59.000Z
 title: 'PostgreSQL REPEAT() Function'
 redirectFrom:

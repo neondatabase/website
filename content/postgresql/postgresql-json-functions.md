@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-ltrim-function
-nextPost: /postgresql/postgresql-json-extract
+prevPost: postgresql-ltrim-function
+nextPost: postgresql-json-extract
 createdAt: 2024-02-23T06:38:03.000Z
 title: 'PostgreSQL JSON Functions'
 tableOfContents: true

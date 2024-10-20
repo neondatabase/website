@@ -2,9 +2,7 @@ const fs = require('fs');
 
 const { glob } = require('glob');
 const matter = require('gray-matter');
-const jsYaml = require('js-yaml');
 
-const { DOCS_DIR_PATH } = require('./api-docs');
 const getExcerpt = require('./get-excerpt');
 
 const POSTGRESQL_DIR_PATH = 'content/postgresql';
@@ -51,28 +49,25 @@ const getAllPostgresTutorials = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`, 'utf8'));
+const getNavigationLinks = (slug) => {
+  const post = getPostBySlug(slug, POSTGRESQL_DIR_PATH);
+  if (!post) return null;
 
-const getNavigationLinks = (slug, flatSidebar) => {
-  const posts = [
-    ...new Map(flatSidebar.filter((item) => item.slug).map((item) => [item.slug, item])).values(),
-  ];
-  const currentItemIndex = posts.findIndex((item) => item.slug === slug);
-
-  const previousItem = posts[currentItemIndex - 1];
-  const nextItem = posts[currentItemIndex + 1];
+  const {
+    data: { prevPost, nextPost },
+  } = post;
+  const previousItem = prevPost ? getPostBySlug(prevPost, POSTGRESQL_DIR_PATH) : null;
+  const nextItem = nextPost ? getPostBySlug(nextPost, POSTGRESQL_DIR_PATH) : null;
 
   return {
-    previousLink: { title: previousItem?.title, slug: previousItem?.slug },
-    nextLink: { title: nextItem?.title, slug: nextItem?.slug },
+    previousLink: { title: previousItem?.data?.title, slug: prevPost },
+    nextLink: { title: nextItem?.data?.title, slug: nextPost },
   };
 };
 
 module.exports = {
   getPostSlugs,
   getPostBySlug,
-  getSidebar,
   getNavigationLinks,
   getAllPostgresTutorials,
   POSTGRESQL_DIR_PATH,

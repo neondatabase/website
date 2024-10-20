@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-errors-and-messages
-nextPost: /postgresql/postgresql-python-handling-binary-data
+prevPost: plpgsql-errors-and-messages
+nextPost: postgresql-python-handling-binary-data
 createdAt: 2016-06-13T14:31:19.000Z
 title: 'PostgreSQL PHP: Delete Data From a Table'
 redirectFrom: 

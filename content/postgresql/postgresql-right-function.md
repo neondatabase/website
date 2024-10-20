@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-date_trunc-function
-nextPost: /postgresql/postgresql-scale-function
+prevPost: postgresql-date_trunc-function
+nextPost: postgresql-scale-function
 createdAt: 2017-08-12T03:51:22.000Z
 title: 'PostgreSQL RIGHT() Function'
 redirectFrom:

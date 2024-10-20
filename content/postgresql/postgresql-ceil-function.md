@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-current_time-function
-nextPost: /postgresql/postgresql-unique-index
+prevPost: postgresql-current_time-function
+nextPost: postgresql-unique-index
 createdAt: 2017-08-17T06:29:22.000Z
 title: 'PostgreSQL CEIL() Function'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-create-view
-nextPost: /postgresql/postgresql-php-connect-to-postgresql-database-using-pdo
+prevPost: postgresql-create-view
+nextPost: postgresql-php-connect-to-postgresql-database-using-pdo
 createdAt: 2016-02-17T08:43:06.000Z
 title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
 redirectFrom: 

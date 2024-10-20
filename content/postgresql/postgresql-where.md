@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-updating-data
-nextPost: /postgresql/postgresql-materialized-views
+prevPost: postgresql-c-updating-data
+nextPost: postgresql-materialized-views
 createdAt: 2012-08-27T13:43:09.000Z
 title: 'PostgreSQL WHERE'
 redirectFrom:

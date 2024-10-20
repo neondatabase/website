@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_array_length-function
-nextPost: /postgresql/postgresql-create-function-statement
+prevPost: postgresql-jsonb_array_length-function
+nextPost: postgresql-create-function-statement
 createdAt: 2024-03-21T03:31:22.000Z
 title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
 redirectFrom:

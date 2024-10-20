@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-selecting-data
-nextPost: /postgresql/plpgsql-constants
+prevPost: postgresql-c-selecting-data
+nextPost: plpgsql-constants
 createdAt: 2014-04-30T15:14:27.000Z
 title: 'PostgreSQL Functions'
 tableOfContents: true

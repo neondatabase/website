@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-union
-nextPost: /postgresql/postgresql-translate-function
+prevPost: postgresql-union
+nextPost: postgresql-translate-function
 createdAt: 2013-06-04T09:08:47.000Z
 title: 'PostgreSQL ALTER TABLESPACE'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-create-new-tables
-nextPost: /postgresql/postgresql-chr-function
+prevPost: postgresql-php-create-new-tables
+nextPost: postgresql-chr-function
 createdAt: 2016-06-16T03:34:53.000Z
 title: 'PostgreSQL Python: Create Tables'
 redirectFrom: 

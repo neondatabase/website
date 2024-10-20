@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc-querying-data
-nextPost: /postgresql/postgresql-python-update-data-in-a-table
+prevPost: postgresql-jdbc-querying-data
+nextPost: postgresql-python-update-data-in-a-table
 createdAt: 2016-06-12T06:48:51.000Z
 title: 'PostgreSQL PHP: Updating Data In a Table'
 redirectFrom: 

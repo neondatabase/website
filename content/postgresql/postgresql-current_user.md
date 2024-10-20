@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-radians-function
-nextPost: /postgresql/postgresql-jsonb_strip_nulls-function
+prevPost: postgresql-radians-function
+nextPost: postgresql-jsonb_strip_nulls-function
 createdAt: 2024-02-22T06:47:50.000Z
 title: 'PostgreSQL CURRENT_USER'
 redirectFrom: 

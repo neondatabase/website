@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-distinct-on
-nextPost: /postgresql/postgresql-generate_series-function
+prevPost: postgresql-distinct-on
+nextPost: postgresql-generate_series-function
 createdAt: 2017-02-24T14:59:53.000Z
 title: 'PostgreSQL vs. MySQL'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-vs-mysql-features.jpg

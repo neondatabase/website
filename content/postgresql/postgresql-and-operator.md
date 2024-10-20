@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-python-call-postgresql-functions
-nextPost: /postgresql/how-to-change-the-owner-of-a-postgresql-database
+prevPost: postgresql-python-call-postgresql-functions
+nextPost: how-to-change-the-owner-of-a-postgresql-database
 createdAt: 2024-01-17T01:14:35.000Z
 title: 'PostgreSQL AND Operator'
 redirectFrom: 

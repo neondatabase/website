@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-resources
-nextPost: /postgresql/postgresql-full-outer-join
+prevPost: postgresql-resources
+nextPost: postgresql-full-outer-join
 createdAt: 2015-09-13T03:49:51.000Z
 title: 'PL/pgSQL Function Overloading'
 redirectFrom: 

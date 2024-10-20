@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-pg_terminate_backend-function
-nextPost: /postgresql/postgresql-update
+prevPost: postgresql-pg_terminate_backend-function
+nextPost: postgresql-update
 createdAt: 2024-02-22T06:46:53.000Z
 title: 'How to Kill a Process Specified by PID in PostgreSQL'
 tableOfContents: true

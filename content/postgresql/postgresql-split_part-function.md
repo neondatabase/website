@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-now-function
-nextPost: /postgresql/postgresql-indexes
+prevPost: postgresql-now-function
+nextPost: postgresql-indexes
 createdAt: 2017-08-14T09:14:34.000Z
 title: 'PostgreSQL SPLIT_PART() Function'
 redirectFrom:

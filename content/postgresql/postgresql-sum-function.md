@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-select-distinct
-nextPost: /postgresql/postgresql-views
+prevPost: postgresql-select-distinct
+nextPost: postgresql-views
 createdAt: 2014-05-21T09:09:13.000Z
 title: 'PostgreSQL SUM Function'
 redirectFrom:

@@ -5,9 +5,6 @@ import Post from 'components/pages/doc/post';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
-import { getAllChangelogPosts } from 'utils/api-docs';
-import { getBreadcrumbs } from 'utils/get-breadcrumbs';
-import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 import {
@@ -15,7 +12,6 @@ import {
   getAllPostgresTutorials,
   getNavigationLinks,
   getPostBySlug,
-  getSidebar,
 } from 'utils/postgresql-pages';
 
 const isUnusedOrSharedContent = (slug) =>
@@ -47,68 +43,35 @@ export async function generateMetadata({ params }) {
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
 
-  const isChangelog = currentSlug === 'changelog';
+  if (!post) return notFound();
 
-  if (!isChangelog && !post) return notFound();
-
-  const title = post?.data?.title || 'Changelog';
+  const title = post?.data?.title || '';
   const encodedTitle = Buffer.from(title).toString('base64');
-
-  const sidebar = getSidebar();
-  const flatSidebar = await getFlatSidebar(sidebar);
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
-  const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
-  const encodedCategory = category && Buffer.from(category).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Docs`,
-    description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
+    description: post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`
+        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
-    pathname: `${LINKS.docs}/${currentSlug}`,
-    rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
+    pathname: `${LINKS.postgres}/${currentSlug}`,
+    rssPathname: null,
     type: 'article',
   });
 }
 
-const DocPost = async ({ params }) => {
+const PostgresTutorial = async ({ params }) => {
   const { slug } = params;
   const currentSlug = slug.join('/');
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
-  const flatSidebar = await getFlatSidebar(sidebar);
-
-  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
-  const allChangelogPosts = await getAllChangelogPosts();
-
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
-  const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const fileOriginPath = isChangelogIndex
-    ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
-    : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
+  const navigationLinks = getNavigationLinks(currentSlug);
+  const fileOriginPath = `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
-  if (!isChangelogIndex && !post) return notFound();
-
-  if (isChangelogIndex) {
-    return (
-      <Post
-        data={{}}
-        content={{}}
-        breadcrumbs={[]}
-        currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
-        changelogPosts={allChangelogPosts}
-        navigationLinks={navigationLinks}
-        changelogActiveLabel="all"
-        isChangelog
-      />
-    );
-  }
+  if (!post) return notFound();
 
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
@@ -132,8 +95,9 @@ const DocPost = async ({ params }) => {
       <Post
         content={content}
         data={data}
-        breadcrumbs={breadcrumbs}
+        breadcrumbs={[]}
         navigationLinks={navigationLinks}
+        navigationLinksPrefix="/postgresql/"
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         tableOfContents={tableOfContents}
@@ -142,4 +106,4 @@ const DocPost = async ({ params }) => {
   );
 };
 
-export default DocPost;
+export default PostgresTutorial;

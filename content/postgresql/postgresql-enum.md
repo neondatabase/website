@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/a-look-at-postgresql-user-defined-data-types
-nextPost: /postgresql/postgresql-xml-data-type
+prevPost: a-look-at-postgresql-user-defined-data-types
+nextPost: postgresql-xml-data-type
 createdAt: 2024-04-19T10:27:05.000Z
 title: 'PostgreSQL enum'
 tableOfContents: true

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-password-file-pgpass
-nextPost: /postgresql/postgresql-uptime
+prevPost: postgresql-password-file-pgpass
+nextPost: postgresql-uptime
 createdAt: 2017-08-19T08:41:22.000Z
 title: 'PostgreSQL EXISTS Operator'
 redirectFrom: 

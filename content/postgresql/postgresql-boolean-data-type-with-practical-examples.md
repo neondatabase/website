@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-default-value
-nextPost: /postgresql/postgresql-character-types-char-varchar-and-text
+prevPost: postgresql-default-value
+nextPost: postgresql-character-types-char-varchar-and-text
 createdAt: 2016-06-24T01:52:46.000Z
 title: 'PostgreSQL Boolean Data Type with Practical Examples'
 redirectFrom: 

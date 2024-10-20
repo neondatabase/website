@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-bool_or-function
-nextPost: /postgresql/postgresql-gcd-function
+prevPost: postgresql-bool_or-function
+nextPost: postgresql-gcd-function
 createdAt: 2024-03-28T08:42:28.000Z
 title: 'PostgreSQL BEFORE DELETE Trigger'
 redirectFrom: 

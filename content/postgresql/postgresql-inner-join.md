@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-pi-function
-nextPost: /postgresql/postgresql-python
+prevPost: postgresql-pi-function
+nextPost: postgresql-python
 createdAt: 2013-05-29T02:30:26.000Z
 title: 'PostgreSQL INNER JOIN'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-querying-data
-nextPost: /postgresql/postgresql-copy-database-made-easy
+prevPost: postgresql-php-querying-data
+nextPost: postgresql-copy-database-made-easy
 createdAt: 2016-06-17T04:04:53.000Z
 title: 'PostgreSQL Python: Querying Data'
 redirectFrom: 

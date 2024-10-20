@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-row_number-function
-nextPost: /postgresql/postgresql-string-functions
+prevPost: postgresql-row_number-function
+nextPost: postgresql-string-functions
 createdAt: 2017-03-16T14:12:39.000Z
 title: 'PostgreSQL TO_DATE() Function'
 redirectFrom:

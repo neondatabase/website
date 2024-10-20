@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-rename-column-renaming-a-column
-nextPost: /postgresql/postgresql-truncate-table
+prevPost: postgresql-rename-column-renaming-a-column
+nextPost: postgresql-truncate-table
 createdAt: 2013-05-31T08:04:05.000Z
 title: 'PostgreSQL DROP TABLE'
 tableOfContents: true

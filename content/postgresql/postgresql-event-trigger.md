@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-justify_days-function
-nextPost: /postgresql/postgresql-pi-function
+prevPost: postgresql-justify_days-function
+nextPost: postgresql-pi-function
 createdAt: 2024-03-29T06:06:40.000Z
 title: 'PostgreSQL Event Trigger'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-procedure-statement
-nextPost: /postgresql/postgresql-drop-tablespace-statement
+prevPost: postgresql-drop-procedure-statement
+nextPost: postgresql-drop-tablespace-statement
 createdAt: 2024-02-25T08:47:58.000Z
 title: 'PostgreSQL jsonb_object_agg() Function'
 redirectFrom:

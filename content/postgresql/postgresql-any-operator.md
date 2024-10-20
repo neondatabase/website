@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-correlated-subquery
-nextPost: /postgresql/how-to-uninstall-postgresql-from-ubuntu
+prevPost: postgresql-correlated-subquery
+nextPost: how-to-uninstall-postgresql-from-ubuntu
 createdAt: 2017-08-19T10:42:10.000Z
 title: 'PostgreSQL ANY Operator'
 redirectFrom: 

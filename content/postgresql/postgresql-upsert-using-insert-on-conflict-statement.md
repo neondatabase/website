@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-delete-join
-nextPost: /postgresql/postgresql-merge-statement
+prevPost: postgresql-delete-join
+nextPost: postgresql-merge-statement
 createdAt: 2016-06-30T06:20:52.000Z
 title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/install-postgresql-macos
-nextPost: /postgresql/postgresql-json-path
+prevPost: install-postgresql-macos
+nextPost: postgresql-json-path
 createdAt: 2020-07-22T08:51:11.000Z
 title: 'PL/pgSQL Row Types'
 redirectFrom: 

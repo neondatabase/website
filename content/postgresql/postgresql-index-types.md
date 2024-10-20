@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-aggregate-functions
-nextPost: /postgresql/postgresql-create-schema
+prevPost: postgresql-aggregate-functions
+nextPost: postgresql-create-schema
 createdAt: 2018-12-09T09:41:21.000Z
 title: 'PostgreSQL Index Types'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-order-by
-nextPost: /postgresql/postgresql-triggers
+prevPost: postgresql-order-by
+nextPost: postgresql-triggers
 createdAt: 2014-04-21T15:09:46.000Z
 title: 'PostgreSQL MIN() Function'
 redirectFrom:

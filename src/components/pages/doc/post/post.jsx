@@ -44,6 +44,7 @@ const Post = ({
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
+  navigationLinksPrefix,
   isChangelog = false,
   isUseCase = false,
   changelogPosts = [],
@@ -91,7 +92,7 @@ const Post = ({
         <NavigationLinks
           previousLink={previousLink}
           nextLink={nextLink}
-          basePath={DOCS_BASE_PATH}
+          basePath={navigationLinksPrefix || DOCS_BASE_PATH}
         />
       )}
       <DocFooter updatedOn={updatedOn} slug={currentSlug} />
@@ -134,6 +135,7 @@ Post.propTypes = {
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
+  navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-cheat-sheet
-nextPost: /postgresql/postgresql-left-function
+prevPost: postgresql-cheat-sheet
+nextPost: postgresql-left-function
 createdAt: 2017-03-18T03:45:59.000Z
 title: 'PostgreSQL List Users'
 redirectFrom: 

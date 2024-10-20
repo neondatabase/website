@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/creating-postgresql-updatable-views
-nextPost: /postgresql/postgresql-initcap-function
+prevPost: creating-postgresql-updatable-views
+nextPost: postgresql-initcap-function
 createdAt: 2015-09-10T13:33:18.000Z
 title: 'PL/pgSQL Block Structure'
 redirectFrom: 

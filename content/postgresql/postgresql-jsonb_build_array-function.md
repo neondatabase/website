@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc-creating-tables
-nextPost: /postgresql/postgresql-c-creating-tables
+prevPost: postgresql-jdbc-creating-tables
+nextPost: postgresql-c-creating-tables
 createdAt: 2024-02-23T07:43:00.000Z
 title: 'PostgreSQL jsonb_build_array() Function'
 redirectFrom:

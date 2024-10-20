@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-enum
-nextPost: /postgresql/postgresql-bytea-data-type
+prevPost: postgresql-enum
+nextPost: postgresql-bytea-data-type
 createdAt: 2024-04-20T03:57:18.000Z
 title: 'PostgreSQL XML Data Type'
 tableOfContents: true

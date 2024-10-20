@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-python-create-tables
-nextPost: /postgresql/postgresql-current_time-function
+prevPost: postgresql-python-create-tables
+nextPost: postgresql-current_time-function
 createdAt: 2017-08-14T08:19:35.000Z
 title: 'PostgreSQL CHR() Function'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-lcm-function
-nextPost: /postgresql/postgresql-in
+prevPost: postgresql-lcm-function
+nextPost: postgresql-in
 createdAt: 2024-05-21T12:37:22.000Z
 title: 'PostgreSQL C#: Call a Stored Procedure'
 redirectFrom: 

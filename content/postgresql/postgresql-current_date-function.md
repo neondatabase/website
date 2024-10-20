@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-ascii-function
-nextPost: /postgresql/postgresql-abs-function
+prevPost: postgresql-ascii-function
+nextPost: postgresql-abs-function
 createdAt: 2017-08-15T12:24:53.000Z
 title: 'PostgreSQL CURRENT_DATE Function'
 redirectFrom:

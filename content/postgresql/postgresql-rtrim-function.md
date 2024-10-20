@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-continue-statement
-nextPost: /postgresql/postgresql-radians-function
+prevPost: plpgsql-continue-statement
+nextPost: postgresql-radians-function
 createdAt: 2024-01-27T13:33:13.000Z
 title: 'PostgreSQL RTRIM() Function'
 redirectFrom:

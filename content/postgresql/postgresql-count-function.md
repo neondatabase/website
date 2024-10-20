@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-create-trigger-statement
-nextPost: /postgresql/postgresql-php-create-new-tables
+prevPost: postgresql-create-trigger-statement
+nextPost: postgresql-php-create-new-tables
 createdAt: 2014-05-21T09:30:48.000Z
 title: 'PostgreSQL COUNT Function'
 redirectFrom:

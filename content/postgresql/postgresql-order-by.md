@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/connect-to-a-postgresql-database-server
-nextPost: /postgresql/postgresql-min-function
+prevPost: connect-to-a-postgresql-database-server
+nextPost: postgresql-min-function
 createdAt: 2012-08-27T07:58:04.000Z
 title: 'PostgreSQL ORDER BY'
 redirectFrom:

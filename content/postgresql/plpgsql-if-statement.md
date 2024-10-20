@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-in
-nextPost: /postgresql/postgresql-row_number-function
+prevPost: postgresql-in
+nextPost: postgresql-row_number-function
 createdAt: 2015-09-12T03:57:36.000Z
 title: 'PL/pgSQL IF Statement'
 redirectFrom: 

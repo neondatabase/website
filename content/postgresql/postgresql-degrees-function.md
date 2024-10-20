@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-alter-view-statement
-nextPost: /postgresql/postgresql-row_to_json-function
+prevPost: postgresql-alter-view-statement
+nextPost: postgresql-row_to_json-function
 createdAt: 2024-02-18T03:53:59.000Z
 title: 'PostgreSQL DEGREES() Function'
 redirectFrom: 

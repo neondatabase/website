@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-exit-statement
-nextPost: /postgresql/postgresql-set-role-statement
+prevPost: plpgsql-exit-statement
+nextPost: postgresql-set-role-statement
 createdAt: 2024-01-28T09:57:35.000Z
 title: 'PostgreSQL UPPER() Function'
 redirectFrom:

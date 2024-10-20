@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-python
-nextPost: /postgresql/postgresql-rtrim-function
+prevPost: postgresql-python
+nextPost: postgresql-rtrim-function
 createdAt: 2020-08-05T09:53:10.000Z
 title: 'PL/pgSQL Continue Statement'
 redirectFrom: 

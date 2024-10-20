@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-double-precision-data-type
-nextPost: /postgresql/postgresql-integer-data-types
+prevPost: postgresql-double-precision-data-type
+nextPost: postgresql-integer-data-types
 createdAt: 2024-04-19T03:12:36.000Z
 title: 'PostgreSQL REAL Data Type'
 tableOfContents: true

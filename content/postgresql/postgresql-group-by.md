@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/privacy-policy
-nextPost: /postgresql/postgresql-concat-function
+prevPost: privacy-policy
+nextPost: postgresql-concat-function
 createdAt: 2013-05-29T06:59:46.000Z
 title: 'PostgreSQL GROUP BY'
 redirectFrom:

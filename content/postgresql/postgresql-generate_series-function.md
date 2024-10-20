@@ -1,5 +1,5 @@
 ---
-prevPost: /postgresql/postgresql-vs-mysql
+prevPost: postgresql-vs-mysql
 createdAt: 2024-03-29T13:27:31.000Z
 title: 'PostgreSQL generate_series() Function'
 redirectFrom: 

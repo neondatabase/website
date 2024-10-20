@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-insert
-nextPost: /postgresql/postgresql-insert-multiple-rows
+prevPost: postgresql-insert
+nextPost: postgresql-insert-multiple-rows
 createdAt: 2024-02-21T01:20:27.000Z
 title: 'How to Restart PostgreSQL on Windows'
 redirectFrom: 

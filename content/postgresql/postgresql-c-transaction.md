@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-after-update-trigger
-nextPost: /postgresql/postgresql-limit
+prevPost: postgresql-after-update-trigger
+nextPost: postgresql-limit
 createdAt: 2024-05-21T03:56:02.000Z
 title: 'PostgreSQL C#: Transaction'
 redirectFrom: 

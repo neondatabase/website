@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-assert-statement
-nextPost: /postgresql/postgresql-jsonb_path_exists-function
+prevPost: plpgsql-assert-statement
+nextPost: postgresql-jsonb_path_exists-function
 createdAt: 2024-01-28T10:28:49.000Z
 title: 'PostgreSQL REVERSE() Function'
 redirectFrom:

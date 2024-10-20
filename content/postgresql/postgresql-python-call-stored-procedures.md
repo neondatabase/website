@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-working-with-binary-data
-nextPost: /postgresql/postgresql-regexp_replace-function
+prevPost: postgresql-php-working-with-binary-data
+nextPost: postgresql-regexp_replace-function
 createdAt: 2016-06-17T02:06:35.000Z
 title: 'PostgreSQL Python: Call Stored Procedures'
 redirectFrom: 

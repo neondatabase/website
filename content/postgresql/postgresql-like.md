@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-before-truncate-trigger
-nextPost: /postgresql/disable-triggers
+prevPost: postgresql-before-truncate-trigger
+nextPost: disable-triggers
 createdAt: 2012-08-28T05:30:37.000Z
 title: 'PostgreSQL LIKE'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-customer.png

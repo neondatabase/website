@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-intersect-operator
-nextPost: /postgresql/postgresql-jsonb_typeof-function
+prevPost: postgresql-intersect-operator
+nextPost: postgresql-jsonb_typeof-function
 createdAt: 2017-08-18T04:35:00.000Z
 title: 'PostgreSQL TO_CHAR() Function'
 redirectFrom:

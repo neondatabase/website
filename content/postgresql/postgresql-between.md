@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-min_scale-function
-nextPost: /postgresql/postgresql-create-role-statement
+prevPost: postgresql-min_scale-function
+nextPost: postgresql-create-role-statement
 createdAt: 2013-05-28T07:05:16.000Z
 title: 'PostgreSQL BETWEEN'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png

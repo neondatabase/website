@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-substring-function
-nextPost: /postgresql/postgresql-php-querying-data
+prevPost: postgresql-substring-function
+nextPost: postgresql-php-querying-data
 createdAt: 2016-03-12T15:33:02.000Z
 title: 'PostgreSQL JDBC: Updating Data'
 redirectFrom: 

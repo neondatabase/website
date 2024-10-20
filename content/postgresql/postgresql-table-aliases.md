@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php
-nextPost: /postgresql/plpgsql-exit-statement
+prevPost: postgresql-php
+nextPost: plpgsql-exit-statement
 createdAt: 2018-02-10T04:33:14.000Z
 title: 'PostgreSQL Table Aliases'
 redirectFrom: 

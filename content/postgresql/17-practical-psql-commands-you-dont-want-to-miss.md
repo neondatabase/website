@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-describe-table
-nextPost: /postgresql/postgresql-correlated-subquery
+prevPost: postgresql-describe-table
+nextPost: postgresql-correlated-subquery
 createdAt: 2015-07-09T12:46:37.000Z
 title: '17 Practical psql Commands You Don''t Want to Miss'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-current_user
-nextPost: /postgresql/postgresql-justify_hours-function
+prevPost: postgresql-current_user
+nextPost: postgresql-justify_hours-function
 createdAt: 2024-02-23T15:17:40.000Z
 title: 'PostgreSQL jsonb_strip_nulls() Function'
 redirectFrom:

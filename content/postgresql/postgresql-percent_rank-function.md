@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-create-schema
-nextPost: /postgresql/postgresql-jsonb_path_query_first-function
+prevPost: postgresql-create-schema
+nextPost: postgresql-jsonb_path_query_first-function
 createdAt: 2019-05-25T01:04:05.000Z
 title: 'PostgreSQL PERCENT_RANK Function'
 redirectFrom:

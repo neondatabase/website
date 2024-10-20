@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-md5-function
-nextPost: /postgresql/postgresql-right-join
+prevPost: postgresql-md5-function
+nextPost: postgresql-right-join
 createdAt: 2017-08-16T08:22:36.000Z
 title: 'PostgreSQL ROUND() Function'
 redirectFrom: 

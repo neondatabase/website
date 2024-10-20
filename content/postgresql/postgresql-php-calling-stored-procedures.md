@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc-call-stored-functions
-nextPost: /postgresql/postgresql-recursive-view
+prevPost: postgresql-jdbc-call-stored-functions
+nextPost: postgresql-recursive-view
 createdAt: 2016-06-13T11:53:11.000Z
 title: 'PostgreSQL PHP: Calling Stored Procedures'
 redirectFrom: 

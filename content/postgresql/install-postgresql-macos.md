@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-lead-function
-nextPost: /postgresql/plpgsql-row-types
+prevPost: postgresql-lead-function
+nextPost: plpgsql-row-types
 createdAt: 2020-07-19T06:13:37.000Z
 title: 'Install PostgreSQL macOS'
 redirectFrom: 

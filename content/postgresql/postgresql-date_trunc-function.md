@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-full-outer-join
-nextPost: /postgresql/postgresql-right-function
+prevPost: postgresql-full-outer-join
+nextPost: postgresql-right-function
 createdAt: 2017-03-17T08:02:01.000Z
 title: 'PostgreSQL DATE_TRUNC() Function'
 redirectFrom:

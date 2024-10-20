@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-trunc-function
-nextPost: /postgresql/postgresql-jsonb_object_keys-function
+prevPost: postgresql-trunc-function
+nextPost: postgresql-jsonb_object_keys-function
 createdAt: 2024-01-29T01:07:53.000Z
 title: 'PostgreSQL RPAD() Function'
 redirectFrom:

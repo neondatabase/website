@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-python-delete-data-from-tables
-nextPost: /postgresql/postgresql-date-functions
+prevPost: postgresql-python-delete-data-from-tables
+nextPost: postgresql-date-functions
 createdAt: 2017-08-15T07:27:23.000Z
 title: 'PostgreSQL EXTRACT() Function'
 redirectFrom:

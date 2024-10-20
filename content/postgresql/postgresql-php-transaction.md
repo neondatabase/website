@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc-delete-data-from-table
-nextPost: /postgresql/postgresql-python-transactions
+prevPost: postgresql-jdbc-delete-data-from-table
+nextPost: postgresql-python-transactions
 createdAt: 2016-06-13T11:38:10.000Z
 title: 'PostgreSQL PHP: Transaction'
 redirectFrom: 

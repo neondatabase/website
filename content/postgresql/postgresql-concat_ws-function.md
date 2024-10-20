@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-create-procedure
-nextPost: /postgresql/postgresql-width_bucket-function
+prevPost: postgresql-create-procedure
+nextPost: postgresql-width_bucket-function
 createdAt: 2024-01-28T13:14:30.000Z
 title: 'PostgreSQL CONCAT_WS() Function'
 redirectFrom:

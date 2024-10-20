@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-to_timestamp-function
-nextPost: /postgresql/postgresql-before-truncate-trigger
+prevPost: postgresql-to_timestamp-function
+nextPost: postgresql-before-truncate-trigger
 createdAt: 2024-02-24T14:14:22.000Z
 title: 'PostgreSQL jsonb_extract_path() Function'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-abs-function
-nextPost: /postgresql/postgresql-cume_dist-function
+prevPost: postgresql-abs-function
+nextPost: postgresql-cume_dist-function
 createdAt: 2018-12-02T11:52:12.000Z
 title: 'PostgreSQL CREATE INDEX Statement'
 redirectFrom: 

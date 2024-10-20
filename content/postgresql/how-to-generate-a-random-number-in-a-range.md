@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/how-to-compare-two-tables-in-postgresql
-nextPost: /postgresql/how-to-delete-duplicate-rows-in-postgresql
+prevPost: how-to-compare-two-tables-in-postgresql
+nextPost: how-to-delete-duplicate-rows-in-postgresql
 createdAt: 2016-06-28T06:32:59.000Z
 title: 'How to Generate a Random Number in a Range'
 redirectFrom: 

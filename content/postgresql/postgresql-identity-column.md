@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-sequences
-nextPost: /postgresql/postgresql-generated-columns
+prevPost: postgresql-sequences
+nextPost: postgresql-generated-columns
 createdAt: 2018-03-18T08:28:23.000Z
 title: 'PostgreSQL Identity Column'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc
-nextPost: /postgresql/postgresql-alter-role-statement
+prevPost: postgresql-jdbc
+nextPost: postgresql-alter-role-statement
 createdAt: 2017-08-12T14:35:45.000Z
 title: 'PostgreSQL FORMAT() Function'
 redirectFrom:

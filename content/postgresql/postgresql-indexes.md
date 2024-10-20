@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-split_part-function
-nextPost: /postgresql/postgresql-reindex
+prevPost: postgresql-split_part-function
+nextPost: postgresql-reindex
 createdAt: 2018-12-02T11:46:10.000Z
 title: 'PostgreSQL Indexes'
 tableOfContents: true

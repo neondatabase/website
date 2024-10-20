@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-create-role-statement
-nextPost: /postgresql/postgresql-length-function
+prevPost: postgresql-create-role-statement
+nextPost: postgresql-length-function
 createdAt: 2015-09-12T10:32:33.000Z
 title: 'PL/pgSQL CASE Statement'
 redirectFrom: 

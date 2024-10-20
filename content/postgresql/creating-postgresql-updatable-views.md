@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-max-function
-nextPost: /postgresql/plpgsql-block-structure
+prevPost: postgresql-max-function
+nextPost: plpgsql-block-structure
 createdAt: 2015-05-25T09:47:47.000Z
 title: 'Creating PostgreSQL Updatable Views'
 redirectFrom: 

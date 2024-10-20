@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-show-databases
-nextPost: /postgresql/postgresql-jsonb_populate_recordset-function
+prevPost: postgresql-show-databases
+nextPost: postgresql-jsonb_populate_recordset-function
 createdAt: 2018-03-18T14:23:39.000Z
 title: 'PostgreSQL ROLLUP'
 ogImage: /postgresqltutorial_data/wp-content-uploads-2018-03-PostgreSQL-ROLLUP-example-2.png

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-administration
-nextPost: /postgresql/postgresql-jdbc-call-stored-functions
+prevPost: postgresql-administration
+nextPost: postgresql-jdbc-call-stored-functions
 createdAt: 2015-09-26T03:49:05.000Z
 title: 'PostgreSQL REPLACE() Function'
 redirectFrom:

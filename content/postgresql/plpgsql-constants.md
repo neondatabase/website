@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-functions
-nextPost: /postgresql/postgresql-jdbc-managing-transactions
+prevPost: postgresql-functions
+nextPost: postgresql-jdbc-managing-transactions
 createdAt: 2015-09-11T10:52:02.000Z
 title: 'PL/pgSQL Constants'
 redirectFrom: 

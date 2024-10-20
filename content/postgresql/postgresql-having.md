@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-pg_sleep-function
-nextPost: /postgresql/postgresql-create-tablespace
+prevPost: postgresql-pg_sleep-function
+nextPost: postgresql-create-tablespace
 createdAt: 2013-05-29T08:03:02.000Z
 title: 'PostgreSQL HAVING'
 redirectFrom:

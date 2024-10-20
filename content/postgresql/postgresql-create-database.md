@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-server-and-database-objects
-nextPost: /postgresql/introduction-to-postgresql-plpgsql
+prevPost: postgresql-server-and-database-objects
+nextPost: introduction-to-postgresql-plpgsql
 createdAt: 2013-06-03T02:25:10.000Z
 title: 'PostgreSQL CREATE DATABASE'
 redirectFrom: 

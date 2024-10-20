@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-clock_timestamp-function
-nextPost: /postgresql/load-postgresql-sample-database
+prevPost: postgresql-clock_timestamp-function
+nextPost: load-postgresql-sample-database
 createdAt: 2024-05-20T09:22:07.000Z
 title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
 redirectFrom: 

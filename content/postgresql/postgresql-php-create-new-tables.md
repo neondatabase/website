@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-count-function
-nextPost: /postgresql/postgresql-python-create-tables
+prevPost: postgresql-count-function
+nextPost: postgresql-python-create-tables
 createdAt: 2016-06-12T02:17:58.000Z
 title: 'PostgreSQL PHP: Create New Tables'
 redirectFrom: 

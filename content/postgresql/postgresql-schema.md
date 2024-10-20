@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-string_agg-function
-nextPost: /postgresql/postgresql-nth_value-function
+prevPost: postgresql-string_agg-function
+nextPost: postgresql-nth_value-function
 createdAt: 2019-05-11T08:07:47.000Z
 title: 'PostgreSQL Schema'
 redirectFrom: 

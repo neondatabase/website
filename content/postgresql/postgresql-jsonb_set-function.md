@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-set-role-statement
-nextPost: /postgresql/postgresql-justify_days-function
+prevPost: postgresql-set-role-statement
+nextPost: postgresql-justify_days-function
 createdAt: 2024-02-25T02:18:32.000Z
 title: 'PostgreSQL jsonb_set() Function'
 redirectFrom: 

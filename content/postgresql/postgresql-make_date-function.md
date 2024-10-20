@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_extract_path_text-function
-nextPost: /postgresql/postgresql-ln-function
+prevPost: postgresql-jsonb_extract_path_text-function
+nextPost: postgresql-ln-function
 createdAt: 2024-03-25T01:28:49.000Z
 title: 'PostgreSQL MAKE_DATE() Function'
 redirectFrom:

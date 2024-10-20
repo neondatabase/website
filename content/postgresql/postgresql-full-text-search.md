@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_path_exists-function
-nextPost: /postgresql/postgresql-after-delete-trigger
+prevPost: postgresql-jsonb_path_exists-function
+nextPost: postgresql-after-delete-trigger
 createdAt: 2024-03-05T10:34:52.000Z
 title: 'PostgreSQL Full Text Search'
 redirectFrom: 

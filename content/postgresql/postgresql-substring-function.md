@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-views
-nextPost: /postgresql/postgresql-jdbc-updating-data
+prevPost: postgresql-views
+nextPost: postgresql-jdbc-updating-data
 createdAt: 2015-09-26T01:13:03.000Z
 title: 'PostgreSQL SUBSTRING() Function'
 redirectFrom:

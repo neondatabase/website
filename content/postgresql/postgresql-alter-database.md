@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-sample-database
-nextPost: /postgresql/postgresql-create-trigger-statement
+prevPost: postgresql-sample-database
+nextPost: postgresql-create-trigger-statement
 createdAt: 2013-06-03T05:10:06.000Z
 title: 'PostgreSQL ALTER DATABASE'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-position-function
-nextPost: /postgresql/postgresql-lag-function
+prevPost: postgresql-position-function
+nextPost: postgresql-lag-function
 createdAt: 2018-12-08T12:08:46.000Z
 title: 'PostgreSQL Partial Index'
 redirectFrom: 

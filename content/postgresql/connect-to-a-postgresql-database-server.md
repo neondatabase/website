@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-inserting-data
-nextPost: /postgresql/postgresql-order-by
+prevPost: postgresql-c-inserting-data
+nextPost: postgresql-order-by
 createdAt: 2012-08-23T10:07:50.000Z
 title: 'Connect to a PostgreSQL Database Server'
 redirectFrom: 

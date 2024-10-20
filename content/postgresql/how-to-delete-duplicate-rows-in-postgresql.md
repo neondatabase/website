@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/how-to-generate-a-random-number-in-a-range
-nextPost: /postgresql/postgresql-case
+prevPost: how-to-generate-a-random-number-in-a-range
+nextPost: postgresql-case
 createdAt: 2017-08-18T13:43:29.000Z
 title: 'How To Delete Duplicate Rows in PostgreSQL'
 tableOfContents: true

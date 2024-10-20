@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-limit
-nextPost: /postgresql/postgresql-php-delete-data-from-a-table
+prevPost: postgresql-limit
+nextPost: postgresql-php-delete-data-from-a-table
 createdAt: 2015-09-10T15:30:02.000Z
 title: 'PL/pgSQL Errors and Messages'
 redirectFrom: 

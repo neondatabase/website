@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-variables
-nextPost: /postgresql/postgresql-php-updating-data-in-a-table
+prevPost: plpgsql-variables
+nextPost: postgresql-php-updating-data-in-a-table
 createdAt: 2016-03-12T02:29:36.000Z
 title: 'PostgreSQL JDBC: Querying Data'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-json-extract
-nextPost: /postgresql/postgresql-log-function
+prevPost: postgresql-json-extract
+nextPost: postgresql-log-function
 createdAt: 2024-03-25T02:03:00.000Z
 title: 'PostgreSQL MAKE_TIME() Function'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-right-function
-nextPost: /postgresql/how-to-create-superuser-in-postgresql
+prevPost: postgresql-right-function
+nextPost: how-to-create-superuser-in-postgresql
 createdAt: 2024-02-17T07:43:56.000Z
 title: 'PostgreSQL SCALE() Function'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-call-a-postgresql-function
-nextPost: /postgresql/postgresql-extract-function
+prevPost: postgresql-c-call-a-postgresql-function
+nextPost: postgresql-extract-function
 createdAt: 2016-06-17T06:16:57.000Z
 title: 'PostgreSQL Python: Delete Data from Tables'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/getting-started-with-postgresql
-nextPost: /postgresql/postgresql-c-connecting-the-postgresql-database
+prevPost: getting-started-with-postgresql
+nextPost: postgresql-c-connecting-the-postgresql-database
 createdAt: 2024-02-23T07:12:32.000Z
 title: 'PostgreSQL to_jsonb() Function'
 redirectFrom:

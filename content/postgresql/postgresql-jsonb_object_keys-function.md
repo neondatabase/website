@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-rpad-function
-nextPost: /postgresql/postgresql-timeofday-function
+prevPost: postgresql-rpad-function
+nextPost: postgresql-timeofday-function
 createdAt: 2024-02-24T09:11:34.000Z
 title: 'PostgreSQL jsonb_object_keys() Function'
 redirectFrom:

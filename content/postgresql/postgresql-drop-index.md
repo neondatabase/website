@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-localtime-function
-nextPost: /postgresql/postgresql-ntile-function
+prevPost: postgresql-localtime-function
+nextPost: postgresql-ntile-function
 createdAt: 2018-12-02T14:42:46.000Z
 title: 'PostgreSQL DROP INDEX'
 redirectFrom: 

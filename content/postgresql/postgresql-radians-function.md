@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-rtrim-function
-nextPost: /postgresql/postgresql-current_user
+prevPost: postgresql-rtrim-function
+nextPost: postgresql-current_user
 createdAt: 2024-02-18T04:15:44.000Z
 title: 'PostgreSQL RADIANS() Function'
 redirectFrom: 

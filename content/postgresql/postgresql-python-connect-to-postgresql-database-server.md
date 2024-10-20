@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-connect-to-postgresql-database-using-pdo
-nextPost: /postgresql/postgresql-ascii-function
+prevPost: postgresql-php-connect-to-postgresql-database-using-pdo
+nextPost: postgresql-ascii-function
 createdAt: 2016-06-16T02:27:11.000Z
 title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-transaction
-nextPost: /postgresql/how-to-get-sizes-of-database-objects-in-postgresql
+prevPost: postgresql-php-transaction
+nextPost: how-to-get-sizes-of-database-objects-in-postgresql
 createdAt: 2016-06-16T07:34:12.000Z
 title: 'PostgreSQL Python: Transactions'
 redirectFrom: 

@@ -45,6 +45,7 @@ export default {
   login: 'https://console.neon.tech/login',
   onDemandStorage: '/docs/introduction/about#bottomless-storage',
   partners: '/partners',
+  postgresql: '/postgresql',
   postgres: '/docs/postgres',
   postgresDocs: 'https://www.postgresql.org/docs/',
   postgresList: 'https://www.postgresql.org/list/',

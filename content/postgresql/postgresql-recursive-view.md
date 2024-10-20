@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-php-calling-stored-procedures
-nextPost: /postgresql/postgresql-localtime-function
+prevPost: postgresql-php-calling-stored-procedures
+nextPost: postgresql-localtime-function
 createdAt: 2016-07-05T02:22:24.000Z
 title: 'PostgreSQL Recursive View'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jsonb_build_array-function
-nextPost: /postgresql/install-postgresql-on-windows
+prevPost: postgresql-jsonb_build_array-function
+nextPost: install-postgresql-on-windows
 createdAt: 2024-05-20T00:35:34.000Z
 title: 'PostgreSQL C#: Creating Tables'
 redirectFrom: 

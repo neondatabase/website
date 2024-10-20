@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-date_part-function
-nextPost: /postgresql/postgresql-aggregate-functions
+prevPost: postgresql-date_part-function
+nextPost: postgresql-aggregate-functions
 createdAt: 2017-08-13T09:37:34.000Z
 title: 'PostgreSQL REGEXP_MATCHES() Function'
 redirectFrom:

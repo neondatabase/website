@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-cte
-nextPost: /postgresql/postgresql-recursive-query
+prevPost: postgresql-cte
+nextPost: postgresql-recursive-query
 createdAt: 2024-02-20T06:32:51.000Z
 title: 'How to Check PostgreSQL Version'
 redirectFrom: 

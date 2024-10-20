@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-statement_timestamp-function
-nextPost: /postgresql/postgresql-c-updating-data
+prevPost: postgresql-statement_timestamp-function
+nextPost: postgresql-c-updating-data
 createdAt: 2024-03-28T02:50:21.000Z
 title: 'PostgreSQL BEFORE INSERT Trigger'
 redirectFrom: 

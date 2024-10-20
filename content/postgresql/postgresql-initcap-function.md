@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/plpgsql-block-structure
-nextPost: /postgresql/postgresql-jdbc-insert-data-into-a-table
+prevPost: plpgsql-block-structure
+nextPost: postgresql-jdbc-insert-data-into-a-table
 createdAt: 2015-10-10T03:53:19.000Z
 title: 'PostgreSQL INITCAP() Function'
 redirectFrom:

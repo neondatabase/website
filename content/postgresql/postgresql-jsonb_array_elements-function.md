@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-role-statement
-nextPost: /postgresql/postgresql-make_interval-function
+prevPost: postgresql-drop-role-statement
+nextPost: postgresql-make_interval-function
 createdAt: 2024-02-24T04:18:10.000Z
 title: 'PostgreSQL jsonb_array_elements() Function'
 redirectFrom:

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/disable-triggers
-nextPost: /postgresql/postgresql-trim-function
+prevPost: disable-triggers
+nextPost: postgresql-trim-function
 createdAt: 2015-09-18T15:46:21.000Z
 title: 'PL/pgSQL Loop Statements'
 redirectFrom: 

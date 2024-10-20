@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-indexes
-nextPost: /postgresql/postgresql-array_agg-function
+prevPost: postgresql-indexes
+nextPost: postgresql-array_agg-function
 createdAt: 2018-12-08T14:12:02.000Z
 title: 'PostgreSQL REINDEX'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-json-functions
-nextPost: /postgresql/postgresql-make_time-function
+prevPost: postgresql-json-functions
+nextPost: postgresql-make_time-function
 createdAt: 2024-02-23T09:33:34.000Z
 title: 'PostgreSQL JSON Extract'
 redirectFrom: 

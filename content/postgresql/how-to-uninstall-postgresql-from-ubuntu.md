@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-any-operator
-nextPost: /postgresql/postgresql-all-operator
+prevPost: postgresql-any-operator
+nextPost: postgresql-all-operator
 createdAt: 2024-02-19T07:24:19.000Z
 title: 'How to Uninstall PostgreSQL from Ubuntu'
 redirectFrom: 

@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-between
-nextPost: /postgresql/plpgsql-case-statement
+prevPost: postgresql-between
+nextPost: plpgsql-case-statement
 createdAt: 2013-06-06T08:37:15.000Z
 title: 'PostgreSQL CREATE ROLE Statement'
 redirectFrom: 

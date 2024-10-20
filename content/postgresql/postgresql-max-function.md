@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-plpgsql
-nextPost: /postgresql/creating-postgresql-updatable-views
+prevPost: postgresql-plpgsql
+nextPost: creating-postgresql-updatable-views
 createdAt: 2014-04-20T13:01:27.000Z
 title: 'PostgreSQL MAX Function'
 redirectFrom:

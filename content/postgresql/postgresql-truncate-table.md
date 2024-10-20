@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-drop-table
-nextPost: /postgresql/postgresql-temporary-table
+prevPost: postgresql-drop-table
+nextPost: postgresql-temporary-table
 createdAt: 2014-04-12T15:41:36.000Z
 title: 'PostgreSQL TRUNCATE TABLE'
 redirectFrom:

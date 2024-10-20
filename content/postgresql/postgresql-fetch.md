@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-date-functions
-nextPost: /postgresql/postgresql-alter-schema
+prevPost: postgresql-date-functions
+nextPost: postgresql-alter-schema
 createdAt: 2018-03-18T10:13:12.000Z
 title: 'PostgreSQL FETCH'
 tableOfContents: true

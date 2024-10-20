@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-boolean-data-type-with-practical-examples
-nextPost: /postgresql/postgresql-numeric-type
+prevPost: postgresql-boolean-data-type-with-practical-examples
+nextPost: postgresql-numeric-type
 createdAt: 2016-06-27T08:20:07.000Z
 title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
 redirectFrom: 

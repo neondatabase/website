@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-c-importing-data-from-a-csv-file-into-a-table
-nextPost: /postgresql/postgresql-select-distinct
+prevPost: postgresql-c-importing-data-from-a-csv-file-into-a-table
+nextPost: postgresql-select-distinct
 createdAt: 2012-08-13T14:09:56.000Z
 title: 'Load PostgreSQL Sample Database'
 redirectFrom: 

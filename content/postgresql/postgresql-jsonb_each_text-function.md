@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-row-level-security
-nextPost: /postgresql/postgresql-isfinite-function
+prevPost: postgresql-row-level-security
+nextPost: postgresql-isfinite-function
 createdAt: 2024-02-24T08:55:25.000Z
 title: 'PostgreSQL jsonb_each_text() Function'
 redirectFrom:

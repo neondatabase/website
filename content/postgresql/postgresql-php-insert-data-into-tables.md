@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-jdbc-insert-data-into-a-table
-nextPost: /postgresql/postgresql-python-insert-data-into-a-table
+prevPost: postgresql-jdbc-insert-data-into-a-table
+nextPost: postgresql-python-insert-data-into-a-table
 createdAt: 2016-06-12T03:25:56.000Z
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 redirectFrom: 

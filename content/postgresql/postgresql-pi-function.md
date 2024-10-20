@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-event-trigger
-nextPost: /postgresql/postgresql-inner-join
+prevPost: postgresql-event-trigger
+nextPost: postgresql-inner-join
 createdAt: 2024-04-18T03:46:52.000Z
 redirectFrom:
     - /postgresql/postgresql-pi

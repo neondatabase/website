@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-primary-key
-nextPost: /postgresql/postgresql-delete-cascade
+prevPost: postgresql-primary-key
+nextPost: postgresql-delete-cascade
 createdAt: 2015-08-31T03:49:23.000Z
 title: 'PostgreSQL Foreign Key'
 redirectFrom:

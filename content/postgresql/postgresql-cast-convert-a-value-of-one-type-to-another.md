@@ -1,6 +1,6 @@
 ---
-prevPost: /postgresql/postgresql-nullif
-nextPost: /postgresql/postgresql-explain
+prevPost: postgresql-nullif
+nextPost: postgresql-explain
 createdAt: 2015-10-10T10:17:49.000Z
 title: 'PostgreSQL CAST: Convert a value of One Type to Another'
 redirectFrom: 
