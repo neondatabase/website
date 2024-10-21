@@ -53,9 +53,12 @@ const getPostBySlug = async (path, basePath) => {
 
     const createdAt = data.createdAt || new Date().toISOString();
 
+    const imageRegex = /!\[.*?\]\((.*?)\)/g;
+    const images = [...content.matchAll(imageRegex)].map((match) => match[1]);
+
     const excerpt = getExcerpt(content, 200);
 
-    return { title, createdAt, excerpt, content, sidebar: sidebarData };
+    return { title, createdAt, excerpt, content, sidebar: sidebarData, images };
   } catch (e) {
     return null;
   }
@@ -71,7 +74,7 @@ const getAllPosts = async () => {
 
       const slugWithoutFirstSlash = path.slice(1);
 
-      const { title, createdAt, excerpt, content, sidebar } = data;
+      const { title, createdAt, excerpt, content, sidebar, images } = data;
 
       const parsedCreatedAt = createdAt ? new Date(createdAt) : new Date();
 
@@ -82,13 +85,18 @@ const getAllPosts = async () => {
         excerpt,
         content,
         sidebar,
+        images: images || [],
       };
     })
   );
 
   return posts
     .filter((item) => item)
-    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
+    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1))
+    .map((post) => ({
+      ...post,
+      images: post.images.map((image) => `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${image}`),
+    }));
 };
 
 const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
