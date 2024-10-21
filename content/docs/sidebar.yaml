@@ -413,6 +413,14 @@
           slug: guides/python
         - title: Rust
           slug: guides/rust
+    - title: Neon Authorize
+      slug: guides/neon-authorize
+      icon: api
+      items:
+        - title: About Neon Authorize
+          slug: guides/neon-authorize
+        - title: Get started
+          slug: guides/neon-authorize-quickstart
     - title: Integrations
       icon: integrations
       slug: guides/integrations
