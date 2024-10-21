@@ -21,7 +21,7 @@ export async function GET() {
               (post) => `
               <url>
                   <loc>${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql/${post.slug}</loc>
-                  <lastmod>${new Date(post.createdAt).toISOString()}</lastmod>
+                  <lastmod>${new Date(post.modifiedAt).toISOString()}</lastmod>
                   <changefreq>weekly</changefreq>
                   <priority>0.8</priority>
                   ${post.images
