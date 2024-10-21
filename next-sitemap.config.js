@@ -56,7 +56,6 @@ module.exports = {
     additionalSitemaps: [
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`,
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql-sitemap.xml`,
-      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql-sitemap.xml`,
     ],
   },
 };
