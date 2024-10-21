@@ -96,86 +96,86 @@ Here you will learn how to insert, update, and delete data in PostgreSQL:
 
 ## Section 10. Transactions
 
-- [PostgreSQL Transactions](/postgresql/postgresql-tutorial/postgresql-transaction) – show you how to handle transactions in PostgreSQL using `BEGIN`, `COMMIT`, and `ROLLBACK` statements.
+- **[PostgreSQL Transactions](/postgresql/postgresql-tutorial/postgresql-transaction)** – show you how to handle transactions in PostgreSQL using `BEGIN`, `COMMIT`, and `ROLLBACK` statements.
 
 ## Section 11. Import & Export Data
 
 You will learn how to import and export PostgreSQL data from and to CSV file format using the copy command.
 
-- [Import CSV file into Table](/postgresql/postgresql-tutorial/import-csv-file-into-posgresql-table) – show you how to import CSV file into a table.
-- [Export PostgreSQL Table to CSV file](/postgresql/postgresql-tutorial/export-postgresql-table-to-csv-file) – show you how to export tables to a CSV file.
+- **[Import CSV file into Table](/postgresql/postgresql-tutorial/import-csv-file-into-posgresql-table)** – show you how to import CSV file into a table.
+- **[Export PostgreSQL Table to CSV file](/postgresql/postgresql-tutorial/export-postgresql-table-to-csv-file)** – show you how to export tables to a CSV file.
 
 ## Section 12. Managing Tables
 
 In this section, you will begin exploring the PostgreSQL data types and learn how to create new tables and modify the structure of the existing ones.
 
-- [Data types](/postgresql/postgresql-tutorial/postgresql-data-types) – cover the most commonly used PostgreSQL data types.
-- [Create a table](/postgresql/postgresql-tutorial/postgresql-create-table) – guide you on how to create a new table in the database.
-- [Select Into](/postgresql/postgresql-tutorial/postgresql-select-into) & [Create table as](/postgresql/postgresql-tutorial/postgresql-create-table-as) – shows you how to create a new table from the result set of a query.
-- [Auto-increment](/postgresql/postgresql-tutorial/postgresql-serial) column with `SERIAL` – uses `SERIAL` to add an auto-increment column to a table.
-- [Sequences](/postgresql/postgresql-tutorial/postgresql-sequences) – introduce you to sequences and describe how to use a sequence to generate a sequence of numbers.
-- [Identity column](/postgresql/postgresql-tutorial/postgresql-identity-column) – show you how to use the identity column.
-- [Alter table](/postgresql/postgresql-tutorial/postgresql-alter-table) – modify the structure of an existing table.
-- [Rename table](/postgresql/postgresql-tutorial/postgresql-rename-table) – change the name of the table to a new one.
-- [Add column](/postgresql/postgresql-tutorial/postgresql-add-column) – show you how to add one or more columns to an existing table.
-- [Drop column](/postgresql/postgresql-tutorial/postgresql-drop-column) – demonstrate how to drop a column of a table.
-- [Change column data type](/postgresql/postgresql-tutorial/postgresql-change-column-type) – show you how to change a column’s data.
-- [Rename column](/postgresql/postgresql-tutorial/postgresql-rename-column) – illustrate how to rename one or more table columns.
-- [Drop table](/postgresql/postgresql-tutorial/postgresql-drop-table) – remove an existing table and all of its dependent objects.
-- [Truncate table](/postgresql/postgresql-tutorial/postgresql-truncate-table) – remove all data in a large table quickly and efficiently.
-- [Temporary table](/postgresql/postgresql-tutorial/postgresql-temporary-table) – show you how to use the temporary table.
-- [Copy a table](/postgresql/postgresql-tutorial/postgresql-copy-table) – show you how to copy a table to a new one.
+- **[Data types](/postgresql/postgresql-tutorial/postgresql-data-types)** – cover the most commonly used PostgreSQL data types.
+- **[Create a table](/postgresql/postgresql-tutorial/postgresql-create-table)** – guide you on how to create a new table in the database.
+- **[Select Into](/postgresql/postgresql-tutorial/postgresql-select-into) & [Create table as](/postgresql/postgresql-tutorial/postgresql-create-table-as)** – shows you how to create a new table from the result set of a query.
+- **[Auto-increment](/postgresql/postgresql-tutorial/postgresql-serial) column with `SERIAL`** – uses `SERIAL` to add an auto-increment column to a table.
+- **[Sequences](/postgresql/postgresql-tutorial/postgresql-sequences)** – introduce you to sequences and describe how to use a sequence to generate a sequence of numbers.
+- **[Identity column](/postgresql/postgresql-tutorial/postgresql-identity-column)** – show you how to use the identity column.
+- **[Alter table](/postgresql/postgresql-tutorial/postgresql-alter-table)** – modify the structure of an existing table.
+- **[Rename table](/postgresql/postgresql-tutorial/postgresql-rename-table)** – change the name of the table to a new one.
+- **[Add column](/postgresql/postgresql-tutorial/postgresql-add-column)** – show you how to add one or more columns to an existing table.
+- **[Drop column](/postgresql/postgresql-tutorial/postgresql-drop-column)** – demonstrate how to drop a column of a table.
+- **[Change column data type](/postgresql/postgresql-tutorial/postgresql-change-column-type)** – show you how to change a column’s data.
+- **[Rename column](/postgresql/postgresql-tutorial/postgresql-rename-column)** – illustrate how to rename one or more table columns.
+- **[Drop table](/postgresql/postgresql-tutorial/postgresql-drop-table)** – remove an existing table and all of its dependent objects.
+- **[Truncate table](/postgresql/postgresql-tutorial/postgresql-truncate-table)** – remove all data in a large table quickly and efficiently.
+- **[Temporary table](/postgresql/postgresql-tutorial/postgresql-temporary-table)** – show you how to use the temporary table.
+- **[Copy a table](/postgresql/postgresql-tutorial/postgresql-copy-table)** – show you how to copy a table to a new one.
 
 ## Section 13. PostgreSQL Constraints
 
-- [Primary key](/postgresql/postgresql-tutorial/postgresql-primary-key) – illustrate how to define a primary key when creating a table or adding a primary key to an existing table.
-- [Foreign key](/postgresql/postgresql-tutorial/postgresql-foreign-key) – show you how to define foreign key constraints when creating a new table or adding foreign key constraints for existing tables.
-- [DELETE CASCADE](/postgresql/postgresql-tutorial/postgresql-delete-cascade) – show you how to automatically delete rows in child tables when the corresponding rows in the parent table are deleted.
-- [CHECK constraint](/postgresql/postgresql-tutorial/postgresql-check-constraint) – add logic to check value based on a Boolean expression.
-- [UNIQUE constraint](/postgresql/postgresql-tutorial/postgresql-unique-constraint) – ensure that values in a column or a group of columns are unique across the table.
-- [NOT NULL constraint](/postgresql/postgresql-tutorial/postgresql-not-null-constraint) – ensure values in a column are not `NULL`.
-- [DEFAULT constraint](/postgresql/postgresql-tutorial/postgresql-default-value) – specify a default value for a column using the `DEFAULT` constraint.
+- **[Primary key](/postgresql/postgresql-tutorial/postgresql-primary-key)** – illustrate how to define a primary key when creating a table or adding a primary key to an existing table.
+- **[Foreign key](/postgresql/postgresql-tutorial/postgresql-foreign-key)** – show you how to define foreign key constraints when creating a new table or adding foreign key constraints for existing tables.
+- **[DELETE CASCADE](/postgresql/postgresql-tutorial/postgresql-delete-cascade)** – show you how to automatically delete rows in child tables when the corresponding rows in the parent table are deleted.
+- **[CHECK constraint](/postgresql/postgresql-tutorial/postgresql-check-constraint)** – add logic to check value based on a Boolean expression.
+- **[UNIQUE constraint](/postgresql/postgresql-tutorial/postgresql-unique-constraint)** – ensure that values in a column or a group of columns are unique across the table.
+- **[NOT NULL constraint](/postgresql/postgresql-tutorial/postgresql-not-null-constraint)** – ensure values in a column are not `NULL`.
+- **[DEFAULT constraint](/postgresql/postgresql-tutorial/postgresql-default-value)** – specify a default value for a column using the `DEFAULT` constraint.
 
 ## Section 14. PostgreSQL Data Types in Depth
 
-- [Boolean](/postgresql/postgresql-tutorial/postgresql-boolean) – store `TRUE` and `FALSE` values with the Boolean data type.
-- [CHAR, VARCHAR, and TEXT](/postgresql/postgresql-tutorial/postgresql-char-varchar-text) – learn how to use various character types including `CHAR`, `VARCHAR`, and `TEXT`.
-- [NUMERIC](/postgresql/postgresql-tutorial/postgresql-numeric) – show you how to use `NUMERIC` type to store values that require precision.
-- [DOUBLE PRECISION](/postgresql/postgresql-tutorial/postgresql-double-precision-type) – learn to store inexact, variable-precision numbers in the database. The `DOUBLE PRECISION` type is also known as the `FLOAT` type.
-- [REAL](/postgresql/postgresql-tutorial/postgresql-real-data-type) – guide you on how to use single-precision floating-point numbers in the database.
-- [Integer](/postgresql/postgresql-tutorial/postgresql-integer) – introduce you to various integer types in PostgreSQL including `SMALLINT`, `INT`, and `BIGINT`.
-- [DATE](/postgresql/postgresql-tutorial/postgresql-date) – introduce the `DATE` data type for storing date values.
-- [Timestamp](/postgresql/postgresql-tutorial/postgresql-timestamp) – understand timestamp data types quickly.
-- [Interval](/postgresql/postgresql-tutorial/postgresql-interval) – show you how to use interval data type to handle a period effectively.
-- [TIME](/postgresql/postgresql-tutorial/postgresql-time) – use the `TIME` datatype to manage time of day values.
-- [UUID](/postgresql/postgresql-tutorial/postgresql-uuid) – guide you on how to use the `UUID` datatype and generate `UUID` values using supplied modules.
-- [Array](/postgresql/postgresql-tutorial/postgresql-array) – show you how to work with arrays and introduce you to some handy functions for array manipulation.
-- [hstore](/postgresql/postgresql-tutorial/postgresql-hstore) – introduce you to the hstore data type, a set of key/value pairs stored in a single value in PostgreSQL.
-- [JSON](/postgresql/postgresql-tutorial/postgresql-json) – illustrate how to work with JSON data type and use some of the most important JSON operators and functions.
-- [User-defined data types](/postgresql/postgresql-tutorial/postgresql-user-defined-data-types) – show you how to use the `CREATE DOMAIN` and `CREATE TYPE` statements to create user-defined data types.
-- [Enum](/postgresql/postgresql-tutorial/postgresql-enum) – learn how to create an enum type that defines a list of fixed values for a column.
-- [XML](/postgresql/postgresql-tutorial/postgresql-xml-data-type) – show you how to store XML documents in the database using the XML data type.
-- [BYTEA](/postgresql/postgresql-tutorial/postgresql-bytea-data-type) – learn how to store binary strings in the database.
-- [Composite Types](/postgresql/postgresql-tutorial/postgresql-composite-types) – show you how to define a composite type that consists of multiple fields.
+- **[Boolean](/postgresql/postgresql-tutorial/postgresql-boolean)** – store `TRUE` and `FALSE` values with the Boolean data type.
+- **[CHAR, VARCHAR, and TEXT](/postgresql/postgresql-tutorial/postgresql-char-varchar-text)** – learn how to use various character types including `CHAR`, `VARCHAR`, and `TEXT`.
+- **[NUMERIC](/postgresql/postgresql-tutorial/postgresql-numeric)** – show you how to use `NUMERIC` type to store values that require precision.
+- **[DOUBLE PRECISION](/postgresql/postgresql-tutorial/postgresql-double-precision-type)** – learn to store inexact, variable-precision numbers in the database. The `DOUBLE PRECISION` type is also known as the `FLOAT` type.
+- **[REAL](/postgresql/postgresql-tutorial/postgresql-real-data-type)** – guide you on how to use single-precision floating-point numbers in the database.
+- **[Integer](/postgresql/postgresql-tutorial/postgresql-integer)** – introduce you to various integer types in PostgreSQL including `SMALLINT`, `INT`, and `BIGINT`.
+- **[DATE](/postgresql/postgresql-tutorial/postgresql-date)** – introduce the `DATE` data type for storing date values.
+- **[Timestamp](/postgresql/postgresql-tutorial/postgresql-timestamp)** – understand timestamp data types quickly.
+- **[Interval](/postgresql/postgresql-tutorial/postgresql-interval)** – show you how to use interval data type to handle a period effectively.
+- **[TIME](/postgresql/postgresql-tutorial/postgresql-time)** – use the `TIME` datatype to manage time of day values.
+- **[UUID](/postgresql/postgresql-tutorial/postgresql-uuid)** – guide you on how to use the `UUID` datatype and generate `UUID` values using supplied modules.
+- **[Array](/postgresql/postgresql-tutorial/postgresql-array)** – show you how to work with arrays and introduce you to some handy functions for array manipulation.
+- **[hstore](/postgresql/postgresql-tutorial/postgresql-hstore)** – introduce you to the hstore data type, a set of key/value pairs stored in a single value in PostgreSQL.
+- **[JSON](/postgresql/postgresql-tutorial/postgresql-json)** – illustrate how to work with JSON data type and use some of the most important JSON operators and functions.
+- **[User-defined data types](/postgresql/postgresql-tutorial/postgresql-user-defined-data-types)** – show you how to use the `CREATE DOMAIN` and `CREATE TYPE` statements to create user-defined data types.
+- **[Enum](/postgresql/postgresql-tutorial/postgresql-enum)** – learn how to create an enum type that defines a list of fixed values for a column.
+- **[XML](/postgresql/postgresql-tutorial/postgresql-xml-data-type)** – show you how to store XML documents in the database using the XML data type.
+- **[BYTEA](/postgresql/postgresql-tutorial/postgresql-bytea-data-type)** – learn how to store binary strings in the database.
+- **[Composite Types](/postgresql/postgresql-tutorial/postgresql-composite-types)** – show you how to define a composite type that consists of multiple fields.
 
 ## Section 15. Conditional Expressions & Operators
 
-- [CASE](/postgresql/postgresql-tutorial/postgresql-case) – show you how to form conditional queries with `CASE` expression.
-- [COALESCE](/postgresql/postgresql-tutorial/postgresql-coalesce) – return the first non-null argument. You can use it to substitute `NULL` by a default value.
-- [NULLIF](/postgresql/postgresql-tutorial/postgresql-nullif) – return `NULL` if the first argument equals the second one.
-- [CAST](/postgresql/postgresql-tutorial/postgresql-cast) – convert from one data type into another, e.g., from a string into an integer, from a string into a date.
+- **[CASE](/postgresql/postgresql-tutorial/postgresql-case)** – show you how to form conditional queries with `CASE` expression.
+- **[COALESCE](/postgresql/postgresql-tutorial/postgresql-coalesce)** – return the first non-null argument. You can use it to substitute `NULL` by a default value.
+- **[NULLIF](/postgresql/postgresql-tutorial/postgresql-nullif)** – return `NULL` if the first argument equals the second one.
+- **[CAST](/postgresql/postgresql-tutorial/postgresql-cast)** – convert from one data type into another, e.g., from a string into an integer, from a string into a date.
 
 ## Section 16. PostgreSQL Utilities
 
-- [psql commands](postgresql-administration/psql-commands) – show you the most common psql commands that help you interact with psql faster and more effectively.
+- **[psql commands](postgresql-administration/psql-commands)** – show you the most common psql commands that help you interact with psql faster and more effectively.
 
 ## Section 17. PostgreSQL Recipes
 
-- [How to compare two tables](/postgresql/postgresql-tutorial/compare-two-tables-in-postgresql) – describe how to compare data in two tables in a database.
-- [How to delete duplicate rows in PostgreSQL](/postgresql/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql) – show you various ways to delete duplicate rows from a table.
-- [How to generate a random number in a range](/postgresql/postgresql-tutorial/postgresql-random-range) – illustrate how to generate a random number in a specific range.
-- [EXPLAIN statement](/postgresql/postgresql-tutorial/postgresql-explain) – guide you on how to use the `EXPLAIN` statement to return the execution plan of a query.
-- [PostgreSQL vs. MySQL](/postgresql/postgresql-tutorial/postgresql-vs-mysql) – compare PostgreSQL with MySQL in terms of functionalities.
+- **[How to compare two tables](/postgresql/postgresql-tutorial/compare-two-tables-in-postgresql)** – describe how to compare data in two tables in a database.
+- **[How to delete duplicate rows in PostgreSQL](/postgresql/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql)** – show you various ways to delete duplicate rows from a table.
+- **[How to generate a random number in a range](/postgresql/postgresql-tutorial/postgresql-random-range)** – illustrate how to generate a random number in a specific range.
+- **[EXPLAIN statement](/postgresql/postgresql-tutorial/postgresql-explain)** – guide you on how to use the `EXPLAIN` statement to return the execution plan of a query.
+- **[PostgreSQL vs. MySQL](/postgresql/postgresql-tutorial/postgresql-vs-mysql)** – compare PostgreSQL with MySQL in terms of functionalities.
 
 ## Advanced PostgreSQL Tutorial
 
