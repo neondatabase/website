@@ -5,7 +5,6 @@ createdAt: 2019-05-17T10:06:48.000Z
 title: 'PostgreSQL Sequences'
 redirectFrom: 
             - /postgresql/postgresql-tutorial/postgresql-sequences
-            - /postgresql/postgresql-sequences
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-PostgreSQL-Sequence-simple-example.png
 tableOfContents: true
 ---
