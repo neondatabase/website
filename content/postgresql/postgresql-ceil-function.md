@@ -4,6 +4,7 @@ nextPost: postgresql-unique-index
 createdAt: 2017-08-17T06:29:22.000Z
 title: 'PostgreSQL CEIL() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-ceil
             - /postgresql/postgresql-ceil
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png
 tableOfContents: true

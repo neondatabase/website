@@ -4,6 +4,7 @@ nextPost: postgresql-right-join
 createdAt: 2017-08-16T08:22:36.000Z
 title: 'PostgreSQL ROUND() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-round
             - /postgresql/postgresql-round
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-customer-and-payment-tables.png
 tableOfContents: true

@@ -4,6 +4,7 @@ nextPost: postgresql-age-function
 createdAt: 2024-04-19T01:54:25.000Z
 title: 'PostgreSQL LOG() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-log
             - /postgresql/postgresql-log
 tableOfContents: true
 ---

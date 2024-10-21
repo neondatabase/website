@@ -3,6 +3,8 @@ prevPost: postgresql-explain
 nextPost: postgresql-vs-mysql
 createdAt: 2024-01-16T09:44:42.000Z
 title: 'PostgreSQL DISTINCT ON'
+redirectFrom:
+  - /postgresql/postgresql-tutorial/postgresql-distinct-on
 tableOfContents: true
 ---
 

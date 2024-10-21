@@ -4,6 +4,7 @@ nextPost: postgresql-c-deleting-data
 createdAt: 2024-04-18T03:00:06.000Z
 title: 'PostgreSQL EXP() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-exp
             - /postgresql/postgresql-exp
 tableOfContents: true
 ---

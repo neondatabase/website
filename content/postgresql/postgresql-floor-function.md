@@ -4,6 +4,7 @@ nextPost: postgresql-list-indexes
 createdAt: 2017-08-17T04:24:10.000Z
 title: 'PostgreSQL FLOOR() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-floor
             - /postgresql/postgresql-floor
 ogImage: /postgresqltutorial_data/wp-content-uploads-2013-05-payment-table.png
 tableOfContents: true

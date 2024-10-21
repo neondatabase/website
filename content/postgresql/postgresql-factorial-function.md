@@ -4,6 +4,7 @@ nextPost: postgresql-c-selecting-data
 createdAt: 2024-05-19T03:44:16.000Z
 title: 'PostgreSQL FACTORIAL() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-factorial
             - /postgresql/postgresql-factorial
 tableOfContents: true
 ---

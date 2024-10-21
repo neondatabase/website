@@ -4,6 +4,7 @@ nextPost: postgresql-jsonb_to_record-function
 createdAt: 2024-02-18T03:02:15.000Z
 title: 'PostgreSQL TRIM_SCALE() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-trim_scale
             - /postgresql/postgresql-trim_scale
 tableOfContents: true
 ---

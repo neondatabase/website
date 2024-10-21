@@ -4,6 +4,7 @@ nextPost: postgresql-rpad-function
 createdAt: 2017-08-16T09:47:23.000Z
 title: 'PostgreSQL TRUNC() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-trunc
             - /postgresql/postgresql-trunc
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-film-film_category-category-tables.png
 tableOfContents: true

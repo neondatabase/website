@@ -3,6 +3,8 @@ prevPost: what-is-postgresql
 nextPost: postgresql-create-database
 createdAt: 2012-08-24T07:51:15.000Z
 title: 'PostgreSQL Server and Database Objects'
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-server-and-database-objects
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-postgresql-databases.png
 tableOfContents: true
 ---

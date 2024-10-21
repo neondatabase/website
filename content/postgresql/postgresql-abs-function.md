@@ -4,6 +4,7 @@ nextPost: postgresql-create-index-statement
 createdAt: 2017-08-17T03:54:07.000Z
 title: 'PostgreSQL ABS() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-abs
             - /postgresql/postgresql-abs
 tableOfContents: true
 ---

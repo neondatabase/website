@@ -3,6 +3,8 @@ prevPost: postgresql-delete
 nextPost: postgresql-upsert-using-insert-on-conflict-statement
 createdAt: 2020-07-13T06:04:02.000Z
 title: 'PostgreSQL DELETE JOIN'
+redirectFrom:
+  - /postgresql/postgresql-tutorial/postgresql-delete-join
 tableOfContents: true
 ---
 

@@ -4,6 +4,7 @@ nextPost: postgresql-row_to_json-function
 createdAt: 2024-02-18T03:53:59.000Z
 title: 'PostgreSQL DEGREES() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-degrees
             - /postgresql/postgresql-degrees
 tableOfContents: true
 ---

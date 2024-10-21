@@ -4,6 +4,7 @@ nextPost: postgresql-jsonb_insert-function
 createdAt: 2024-02-17T15:06:18.000Z
 title: 'PostgreSQL POWER() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-power
             - /postgresql/postgresql-power
 tableOfContents: true
 ---

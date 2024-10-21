@@ -4,6 +4,7 @@ nextPost: postgresql-jsonb_agg-function
 createdAt: 2024-02-17T13:55:37.000Z
 title: 'PostgreSQL WIDTH_BUCKET() Function'
 redirectFrom: 
+            - /postgresql/postgresql-math-functions/postgresql-width_bucket
             - /postgresql/postgresql-width_bucket
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true

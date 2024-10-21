@@ -3,6 +3,8 @@ prevPost: postgresql-identity-column
 nextPost: postgresql-alter-table
 createdAt: 2024-03-25T08:00:11.000Z
 title: 'PostgreSQL Generated Columns'
+redirectFrom:
+   - /postgresql/postgresql-tutorial/postgresql-generated-columns
 tableOfContents: true
 ---
 

@@ -3,6 +3,7 @@ prevPost: postgresql-vs-mysql
 createdAt: 2024-03-29T13:27:31.000Z
 title: 'PostgreSQL generate_series() Function'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-generate_series
             - /postgresql/postgresql-generate_series
 tableOfContents: true
 ---
