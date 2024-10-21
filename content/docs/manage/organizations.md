@@ -53,11 +53,13 @@ Here's a breakdown of what actions each role can take:
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
     If you're on the Free Plan, you'll need to choose a paid plan for your organization (since organizations are a paid feature).
 
-    You'll be prompted to choose to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).  
+    You'll be prompted to choose to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
+
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
 
 ![getting started with new org](/docs/manage/orgs_create_next.png)
+
   </div>
 </div>
 
@@ -74,6 +76,7 @@ Here's a breakdown of what actions each role can take:
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
 
 ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
+
   </div>
 </div>
 
