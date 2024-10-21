@@ -76,7 +76,7 @@ All systems are hosted on AWS, where we have implemented specific security measu
 
 - **PII Backup, Retention, and Deletion Policies with S3 Versioning**
 
-  Customer data backups are stored in Amazon S3 with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
+  Customer data backups are stored in cloud object storage, such as Amazon S3, with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
 
 - **Vulnerability Management with Orca and Oligo**
 

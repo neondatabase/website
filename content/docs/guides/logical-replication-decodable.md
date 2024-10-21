@@ -173,7 +173,7 @@ By clicking **Run Preview**, you can examine the change events ingested by the c
 ## Next steps
 
 At this point, you have a running connector, which continuously ingests changes from a Neon database into Decodable with low latency.
-Next, you could set up one of the supported Decodable **sink connectors** which will propagate the data to a wide range of data stores and systems, such as Snowflake, Elasticsearch, Apache Kafka, Apache Iceberg, S3, any many more.
+Next, you could set up one of the supported Decodable **sink connectors** which will propagate the data to a wide range of data stores and systems, such as Snowflake, Elasticsearch, Apache Kafka, Apache Iceberg, Amazon S3, any many more.
 
 If needed, you also can add a **processing step**, either using SQL or by deploying your own Apache Flink job,
 for instance, to filter and transform the data before propagating it to an external system.
