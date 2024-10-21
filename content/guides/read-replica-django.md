@@ -326,7 +326,7 @@ DATABASES = {
 DATABASE_ROUTERS = ['notes.db_router.PrimaryReplicaRouter']
 ```
 
-In the settings.py file, we define two database connections: 'default' for the primary database and 'replica' for the read replica. Both use the PostgreSQL engine and share the same database name, but have different host addresses. The `DATABASE_ROUTERS` setting tells Django to use our custom `PrimaryReplicaRouter` for database routing decisions.
+In the `settings.py` file, we define two database connections: `'default'` for the primary database and `'replica'` for the read replica. Both use the PostgreSQL engine and share the same database name, but have different host addresses. The `DATABASE_ROUTERS` setting tells Django to use our custom `PrimaryReplicaRouter` for database routing decisions.
 
 With these configurations in place, Django will automatically route read queries to the read replica and write queries to the primary database, effectively distributing the database load and potentially improving your application's performance.
 
