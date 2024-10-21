@@ -329,7 +329,7 @@ DB_WRITE_HOST=your-neon-primary-host
 
 ## Automatic Query Routing with Eloquent
 
-One of the great features of Laravel's Eloquent ORM is that it automatically routes queries to the appropriate database connection based on the type of query. This means that after configuring your read replica, you don't need to make any changes to your existing controller or model code.
+One of the great features of [Laravel's Eloquent ORM](https://laravel.com/docs/11.x/eloquent) is that it automatically routes queries to the appropriate database connection based on the type of query. This means that after configuring your read replica, you don't need to make any changes to your existing controller or model code.
 Here's how Eloquent handles different types of queries:
 
 - Read Operations: `SELECT` queries are automatically routed to the read replica.
