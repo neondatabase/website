@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-19 01:40:51
 prevPost: postgresql-c-call-a-postgresql-function
 nextPost: postgresql-extract-function
 createdAt: 2016-06-17T06:16:57.000Z

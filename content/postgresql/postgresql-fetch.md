@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-16 21:54:54
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-fetch
 prevPost: postgresql-date-functions

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-20 06:26:12
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-bytea-data-type
 prevPost: postgresql-xml-data-type

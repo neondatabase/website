@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 22:00:10
 prevPost: plpgsql-constants
 nextPost: postgresql-php-working-with-binary-data
 createdAt: 2016-03-13T13:34:11.000Z

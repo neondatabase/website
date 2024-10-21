@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-23 21:16:44
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-select-into
 prevPost: postgresql-create-table

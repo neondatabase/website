@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-22 01:40:18
 prevPost: postgresql-scale-function
 nextPost: postgresql-jsonb_each-function
 createdAt: 2024-02-21T09:50:44.000Z

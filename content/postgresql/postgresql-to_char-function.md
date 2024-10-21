@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 19:05:27
 prevPost: postgresql-intersect-operator
 nextPost: postgresql-jsonb_typeof-function
 createdAt: 2017-08-18T04:35:00.000Z

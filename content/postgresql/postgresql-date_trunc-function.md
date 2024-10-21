@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 18:11:13
 prevPost: postgresql-full-outer-join
 nextPost: postgresql-right-function
 createdAt: 2017-03-17T08:02:01.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 08:58:59
 prevPost: plpgsql-if-statement
 nextPost: postgresql-to_date-function
 createdAt: 2016-06-21T06:12:53.000Z

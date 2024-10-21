@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-12 05:08:42
 prevPost: postgresql-partial-index
 nextPost: postgresql-alter-trigger-statement
 createdAt: 2019-05-16T07:22:02.000Z

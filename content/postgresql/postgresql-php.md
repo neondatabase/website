@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-29 17:39:28
 prevPost: how-to-list-all-triggers-in-postgresql
 nextPost: postgresql-table-aliases
 createdAt: 2016-06-12T01:40:24.000Z

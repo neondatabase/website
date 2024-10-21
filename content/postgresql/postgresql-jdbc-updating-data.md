@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 21:57:49
 prevPost: postgresql-substring-function
 nextPost: postgresql-php-querying-data
 createdAt: 2016-03-12T15:33:02.000Z

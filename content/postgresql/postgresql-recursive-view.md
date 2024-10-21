@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-15 21:42:50
 prevPost: postgresql-php-calling-stored-procedures
 nextPost: postgresql-localtime-function
 createdAt: 2016-07-05T02:22:24.000Z

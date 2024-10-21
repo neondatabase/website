@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 18:30:01
 prevPost: postgresql-row_number-function
 nextPost: postgresql-string-functions
 createdAt: 2017-03-16T14:12:39.000Z

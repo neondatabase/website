@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-02 00:00:36
 prevPost: postgresql-boolean-data-type-with-practical-examples
 nextPost: postgresql-numeric-type
 createdAt: 2016-06-27T08:20:07.000Z

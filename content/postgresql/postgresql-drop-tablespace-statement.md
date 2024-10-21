@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-14 18:34:04
 prevPost: postgresql-jsonb_object_agg-function
 nextPost: postgresql-intersect-operator
 createdAt: 2013-06-05T04:01:06.000Z

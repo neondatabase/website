@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-15 21:33:26
 prevPost: plpgsql-select-into
 nextPost: postgresql-degrees-function
 createdAt: 2024-01-19T02:16:56.000Z

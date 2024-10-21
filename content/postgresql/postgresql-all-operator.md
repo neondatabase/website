@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-30 18:08:50
 prevPost: how-to-uninstall-postgresql-from-ubuntu
 nextPost: postgresql-password-file-pgpass
 createdAt: 2018-03-17T13:22:59.000Z

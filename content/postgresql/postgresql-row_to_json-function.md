@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-25 07:51:03
 prevPost: postgresql-degrees-function
 nextPost: postgresql-statement_timestamp-function
 createdAt: 2024-02-25T14:19:43.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-18 20:25:07
 prevPost: postgresql-after-delete-trigger
 nextPost: postgresql-c-call-a-stored-procedure
 createdAt: 2024-05-19T03:13:02.000Z

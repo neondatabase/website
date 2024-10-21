@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-17 20:02:25
 prevPost: postgresql-drop-function
 nextPost: postgresql-jsonb_to_record-function
 createdAt: 2024-02-18T03:02:15.000Z

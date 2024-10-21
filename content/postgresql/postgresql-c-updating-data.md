@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-20 20:27:42
 prevPost: postgresql-before-insert-trigger
 nextPost: postgresql-where
 createdAt: 2024-05-20T07:37:43.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 21:56:04
 prevPost: postgresql-initcap-function
 nextPost: postgresql-php-insert-data-into-tables
 createdAt: 2016-03-12T14:59:56.000Z

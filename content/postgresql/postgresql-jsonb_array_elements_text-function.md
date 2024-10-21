@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 01:07:50
 prevPost: postgresql-sqrt-function
 nextPost: postgresql-at-time-zone-operator
 createdAt: 2024-02-24T08:05:50.000Z

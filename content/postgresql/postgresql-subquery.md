@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-30 18:04:57
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-subquery
 prevPost: postgresql-cube

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-12 04:37:48
 prevPost: postgresql-mod-function
 nextPost: postgresql-jsonb_extract_path-function
 createdAt: 2017-08-17T09:49:09.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-18 20:00:24
 prevPost: postgresql-rank-function
 nextPost: postgresql-reverse-function
 createdAt: 2020-07-23T04:53:02.000Z

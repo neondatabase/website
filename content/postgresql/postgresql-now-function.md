@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-26 19:24:06
 prevPost: how-to-get-sizes-of-database-objects-in-postgresql
 nextPost: postgresql-split_part-function
 createdAt: 2017-03-18T03:07:35.000Z

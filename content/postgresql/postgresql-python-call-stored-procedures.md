@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-29 06:48:43
 prevPost: postgresql-php-working-with-binary-data
 nextPost: postgresql-regexp_replace-function
 createdAt: 2016-06-17T02:06:35.000Z

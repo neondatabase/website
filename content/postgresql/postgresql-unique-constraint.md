@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-25 02:57:33
 prevPost: postgresql-check-constraints
 nextPost: postgresql-not-null-constraint
 createdAt: 2015-08-31T09:27:01.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-21 20:48:45
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-correlated-subquery
 prevPost: 17-practical-psql-commands-you-dont-want-to-miss

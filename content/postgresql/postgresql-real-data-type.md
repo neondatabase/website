@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-18 20:13:41
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-real-data-type
 prevPost: postgresql-double-precision-data-type

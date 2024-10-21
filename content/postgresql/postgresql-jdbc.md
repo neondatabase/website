@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 01:53:11
 prevPost: postgresql-left-join
 nextPost: postgresql-format-function
 createdAt: 2016-02-17T06:15:15.000Z

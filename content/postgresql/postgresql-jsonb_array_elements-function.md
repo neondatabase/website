@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-23 21:18:19
 prevPost: postgresql-drop-role-statement
 nextPost: postgresql-make_interval-function
 createdAt: 2024-02-24T04:18:10.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 07:20:37
 prevPost: postgresql-to_timestamp-function
 nextPost: postgresql-before-truncate-trigger
 createdAt: 2024-02-24T14:14:22.000Z

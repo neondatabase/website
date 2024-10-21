@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-14 21:07:10
 prevPost: postgresql-not-null-constraint
 nextPost: postgresql-boolean-data-type-with-practical-examples
 createdAt: 2024-03-15T04:06:28.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-22 18:09:16
 prevPost: postgresql-update-join
 nextPost: postgresql-delete-join
 createdAt: 2013-06-02T08:29:25.000Z

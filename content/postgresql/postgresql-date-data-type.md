@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-19 02:05:26
 prevPost: postgresql-integer-data-types
 nextPost: postgresql-timestamp-data-types
 createdAt: 2016-06-23T01:46:43.000Z

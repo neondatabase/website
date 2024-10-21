@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 23:49:37
 prevPost: postgresql-interval-data-type
 nextPost: postgresql-uuid-data-type
 createdAt: 2017-02-21T13:10:28.000Z

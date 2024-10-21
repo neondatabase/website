@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-29 20:14:14
 prevPost: postgresql-lag-function
 nextPost: postgresql-div-function
 createdAt: 2020-08-01T10:26:19.000Z

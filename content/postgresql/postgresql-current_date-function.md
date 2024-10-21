@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-26 00:40:24
 prevPost: postgresql-ascii-function
 nextPost: postgresql-abs-function
 createdAt: 2017-08-15T12:24:53.000Z

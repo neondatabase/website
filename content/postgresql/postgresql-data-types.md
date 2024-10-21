@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-08 15:50:24
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-data-types
 prevPost: export-postgresql-table-to-csv-file

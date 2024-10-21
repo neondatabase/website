@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-28 19:51:11
 prevPost: postgresql-jsonb_path_exists-function
 nextPost: postgresql-after-delete-trigger
 createdAt: 2024-03-05T10:34:52.000Z

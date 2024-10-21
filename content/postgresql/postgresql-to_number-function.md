@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 19:05:33
 prevPost: plpgsql-cursor
 nextPost: postgresql-except
 createdAt: 2017-08-18T03:13:00.000Z

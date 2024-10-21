@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-16 19:51:29
 prevPost: how-to-compare-two-tables-in-postgresql
 nextPost: how-to-delete-duplicate-rows-in-postgresql
 createdAt: 2016-06-28T06:32:59.000Z

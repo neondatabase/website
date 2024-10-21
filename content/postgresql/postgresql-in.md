@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-16 19:52:11
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-in
 prevPost: postgresql-c-call-a-stored-procedure

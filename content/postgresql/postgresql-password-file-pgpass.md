@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-19 06:45:32
 prevPost: postgresql-all-operator
 nextPost: postgresql-exists-operator
 createdAt: 2024-02-19T13:24:23.000Z

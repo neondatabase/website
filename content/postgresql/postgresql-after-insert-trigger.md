@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-27 20:30:39
 prevPost: postgresql-json-path
 nextPost: postgresql-exp-function
 createdAt: 2024-03-28T03:29:04.000Z

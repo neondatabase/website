@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-26 02:41:35
 prevPost: postgresql-chr-function
 nextPost: postgresql-ceil-function
 createdAt: 2017-08-15T13:06:17.000Z

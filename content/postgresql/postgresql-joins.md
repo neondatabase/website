@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-16 22:01:10
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-joins
 prevPost: postgresql-age-function

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-22 06:20:44
 prevPost: postgresql-insert-multiple-rows
 nextPost: how-to-kill-a-process-specified-by-pid-in-postgresql
 createdAt: 2024-02-22T13:09:54.000Z

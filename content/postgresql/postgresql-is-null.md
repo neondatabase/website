@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-14 06:59:22
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-is-null
 prevPost: postgresql-ln-function

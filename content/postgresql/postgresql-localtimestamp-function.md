@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-26 03:03:19
 prevPost: postgresql-regexp_replace-function
 nextPost: postgresql-floor-function
 createdAt: 2017-08-16T02:49:19.000Z

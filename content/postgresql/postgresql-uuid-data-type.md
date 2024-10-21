@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 02:53:47
 prevPost: postgresql-time-data-type
 nextPost: postgresql-array
 createdAt: 2017-02-20T12:02:39.000Z

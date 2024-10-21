@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-25 20:03:53
 prevPost: postgresql-plpgsql
 nextPost: creating-postgresql-updatable-views
 createdAt: 2014-04-20T13:01:27.000Z

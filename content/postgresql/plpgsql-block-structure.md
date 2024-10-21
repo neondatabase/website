@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-19 01:08:48
 prevPost: creating-postgresql-updatable-views
 nextPost: postgresql-initcap-function
 createdAt: 2015-09-10T13:33:18.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-18 05:27:09
 prevPost: postgresql-character-types-char-varchar-and-text
 nextPost: postgresql-double-precision-data-type
 createdAt: 2017-02-19T09:25:57.000Z

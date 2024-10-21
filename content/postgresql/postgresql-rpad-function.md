@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 18:09:47
 prevPost: postgresql-trunc-function
 nextPost: postgresql-jsonb_object_keys-function
 createdAt: 2024-01-29T01:07:53.000Z

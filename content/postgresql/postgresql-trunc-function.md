@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-16 07:26:33
 prevPost: postgresql-natural-join
 nextPost: postgresql-rpad-function
 createdAt: 2017-08-16T09:47:23.000Z

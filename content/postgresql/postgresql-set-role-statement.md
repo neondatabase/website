@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-21 20:14:57
 prevPost: postgresql-upper-function
 nextPost: postgresql-jsonb_set-function
 createdAt: 2024-02-22T03:14:46.000Z

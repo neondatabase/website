@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-23 03:18:42
 prevPost: postgresql-json-functions
 nextPost: postgresql-make_time-function
 createdAt: 2024-02-23T09:33:34.000Z

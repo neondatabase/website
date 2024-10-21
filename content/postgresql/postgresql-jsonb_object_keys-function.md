@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 02:28:45
 prevPost: postgresql-rpad-function
 nextPost: postgresql-timeofday-function
 createdAt: 2024-02-24T09:11:34.000Z

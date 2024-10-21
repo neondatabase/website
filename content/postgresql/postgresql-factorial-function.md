@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-18 20:51:00
 prevPost: postgresql-before-update-trigger
 nextPost: postgresql-c-selecting-data
 createdAt: 2024-05-19T03:44:16.000Z

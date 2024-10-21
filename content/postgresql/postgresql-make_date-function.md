@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-24 18:39:34
 prevPost: postgresql-jsonb_extract_path_text-function
 nextPost: postgresql-ln-function
 createdAt: 2024-03-25T01:28:49.000Z

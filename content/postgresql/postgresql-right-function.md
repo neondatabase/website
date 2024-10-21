@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 18:48:10
 prevPost: postgresql-date_trunc-function
 nextPost: postgresql-scale-function
 createdAt: 2017-08-12T03:51:22.000Z

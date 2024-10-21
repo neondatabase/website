@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-26 23:36:15
 prevPost: postgresql-ltrim-function
 nextPost: postgresql-json-extract
 createdAt: 2024-02-23T06:38:03.000Z

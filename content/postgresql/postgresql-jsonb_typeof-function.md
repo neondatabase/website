@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 04:07:59
 prevPost: postgresql-to_char-function
 nextPost: postgresql-stored-procedure-with-inout-parameters
 createdAt: 2024-02-24T11:07:50.000Z

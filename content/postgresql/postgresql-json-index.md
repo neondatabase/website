@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-06 01:18:53
 prevPost: postgresql-jsonb-operators
 nextPost: postgresql-instead-of-triggers
 createdAt: 2024-03-06T08:18:52.000Z

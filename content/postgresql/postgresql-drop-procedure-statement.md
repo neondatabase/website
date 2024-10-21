@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-07 07:17:58
 prevPost: postgresql-translate-function
 nextPost: postgresql-jsonb_object_agg-function
 createdAt: 2020-07-26T01:09:49.000Z

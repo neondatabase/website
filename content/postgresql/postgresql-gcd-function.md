@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-18 20:19:27
 prevPost: postgresql-before-delete-trigger
 nextPost: postgresql-c-call-a-postgresql-function
 createdAt: 2024-05-19T02:14:47.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-28 19:17:22
 prevPost: postgresql-jsonb_extract_path-function
 nextPost: postgresql-like
 createdAt: 2024-03-29T01:58:26.000Z

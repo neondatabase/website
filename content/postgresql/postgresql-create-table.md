@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-16 06:40:04
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-create-table
 prevPost: postgresql-data-types

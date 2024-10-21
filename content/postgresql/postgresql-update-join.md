@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 01:42:46
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-update-join
 prevPost: postgresql-update

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 19:58:18
 prevPost: postgresql-timestamp-data-types
 nextPost: postgresql-time-data-type
 createdAt: 2017-02-21T06:29:07.000Z

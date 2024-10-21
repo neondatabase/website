@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-28 03:30:19
 prevPost: postgresql-localtime-function
 nextPost: postgresql-ntile-function
 createdAt: 2018-12-02T14:42:46.000Z

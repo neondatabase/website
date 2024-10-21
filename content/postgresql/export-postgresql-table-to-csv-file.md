@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 07:54:49
 redirectFrom:
     - /postgresql/postgresql-tutorial/export-postgresql-table-to-csv-file
 prevPost: import-csv-file-into-postgresql-table

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-24 21:15:44
 prevPost: postgresql-add-column-add-one-or-more-columns-to-a-table
 nextPost: postgresql-change-column-type
 createdAt: 2017-02-22T04:10:47.000Z

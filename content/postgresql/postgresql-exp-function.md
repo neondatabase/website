@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-17 20:00:18
 prevPost: postgresql-after-insert-trigger
 nextPost: postgresql-c-deleting-data
 createdAt: 2024-04-18T03:00:06.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-30 17:51:42
 prevPost: postgresql-to_number-function
 nextPost: postgresql-jsonb_pretty-function
 createdAt: 2022-08-28T08:44:12.000Z

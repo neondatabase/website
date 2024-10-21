@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-02 00:21:07
 prevPost: postgresql-lead-function
 nextPost: plpgsql-row-types
 createdAt: 2020-07-19T06:13:37.000Z

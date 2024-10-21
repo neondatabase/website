@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-22 18:14:02
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-delete-cascade
 prevPost: postgresql-foreign-key

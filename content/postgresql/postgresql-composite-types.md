@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-21 07:05:08
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-composite-types
 prevPost: postgresql-bytea-data-type

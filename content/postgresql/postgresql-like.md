@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-20 19:25:04
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-like
 prevPost: postgresql-before-truncate-trigger

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-13 06:42:10
 prevPost: postgresql-select-into
 nextPost: using-postgresql-serial-to-create-auto-increment-column
 createdAt: 2018-03-17T16:11:48.000Z

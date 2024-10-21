@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 20:59:29
 prevPost: postgresql-case
 nextPost: postgresql-isnull
 createdAt: 2015-09-02T14:52:11.000Z

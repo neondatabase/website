@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-18 20:25:47
 prevPost: postgresql-numeric-type
 nextPost: postgresql-real-data-type
 createdAt: 2024-04-18T13:18:29.000Z

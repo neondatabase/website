@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-22 00:00:29
 prevPost: postgresql-between
 nextPost: plpgsql-case-statement
 createdAt: 2013-06-06T08:37:15.000Z

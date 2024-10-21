@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 21:56:46
 prevPost: postgresql-drop-view
 nextPost: postgresql-jsonb_build_array-function
 createdAt: 2024-01-30T07:30:37.000Z

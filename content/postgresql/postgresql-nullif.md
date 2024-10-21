@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 21:37:20
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-nullif
 prevPost: postgresql-isnull

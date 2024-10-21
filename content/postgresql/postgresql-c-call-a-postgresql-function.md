@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-21 00:40:03
 prevPost: postgresql-gcd-function
 nextPost: postgresql-python-delete-data-from-tables
 createdAt: 2024-05-21T07:26:18.000Z

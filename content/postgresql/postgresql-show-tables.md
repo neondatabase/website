@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 01:32:56
 prevPost: postgresql-jsonb_populate_recordset-function
 nextPost: postgresql-cube
 createdAt: 2015-05-29T01:45:56.000Z

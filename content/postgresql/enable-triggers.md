@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-25 19:02:29
 prevPost: postgresql-revoke-statement
 nextPost: postgresql-ltrim-function
 createdAt: 2020-08-01T10:51:55.000Z

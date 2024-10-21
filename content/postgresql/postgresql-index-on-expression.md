@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-28 06:11:22
 prevPost: postgresql-current_timestamp-function
 nextPost: postgresql-first_value-function
 createdAt: 2018-12-06T15:10:46.000Z

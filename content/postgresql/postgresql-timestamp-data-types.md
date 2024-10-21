@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 19:32:23
 prevPost: postgresql-date-data-type
 nextPost: postgresql-interval-data-type
 createdAt: 2016-06-23T04:58:51.000Z

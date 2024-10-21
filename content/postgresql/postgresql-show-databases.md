@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-07 06:11:13
 prevPost: postgresql-jsonb_populate_record-function
 nextPost: postgresql-rollup
 createdAt: 2015-05-29T02:16:44.000Z

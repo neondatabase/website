@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-15 17:36:34
 prevPost: plpgsql-function-parameter-modes-in-out-inout
 nextPost: postgresql-list-users
 createdAt: 2017-02-25T03:31:11.000Z

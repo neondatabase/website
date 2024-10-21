@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-20 17:35:17
 prevPost: postgresql-to_jsonb-function
 nextPost: postgresql-tutorial
 createdAt: 2024-05-19T14:56:51.000Z

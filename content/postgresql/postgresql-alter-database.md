@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-12 05:18:32
 prevPost: postgresql-sample-database
 nextPost: postgresql-create-trigger-statement
 createdAt: 2013-06-03T05:10:06.000Z

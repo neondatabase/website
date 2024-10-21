@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-05 18:38:07
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-union
 prevPost: postgresql-jsonb_agg-function

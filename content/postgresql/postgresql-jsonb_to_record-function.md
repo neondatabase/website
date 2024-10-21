@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 04:07:01
 prevPost: postgresql-trim_scale-function
 nextPost: postgresql-pg_sleep-function
 createdAt: 2024-02-24T10:45:03.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-20 21:12:51
 prevPost: postgresql-row_to_json-function
 nextPost: postgresql-before-insert-trigger
 createdAt: 2024-03-20T07:14:13.000Z

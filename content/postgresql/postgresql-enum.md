@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-19 03:27:07
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-enum
 prevPost: a-look-at-postgresql-user-defined-data-types

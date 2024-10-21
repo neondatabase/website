@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-23 03:29:43
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-json
 prevPost: postgresql-hstore

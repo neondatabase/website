@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-25 06:23:04
 prevPost: postgresql-div-function
 nextPost: postgresql-clock_timestamp-function
 createdAt: 2024-02-25T13:22:54.000Z

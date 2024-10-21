@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-19 20:57:22
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-xml-data-type
 prevPost: postgresql-enum

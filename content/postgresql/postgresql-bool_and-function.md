@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 19:49:19
 prevPost: postgresql-jsonb_path_query-function
 nextPost: postgresql-before-update-trigger
 createdAt: 2024-03-22T02:49:10.000Z

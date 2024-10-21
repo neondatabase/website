@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-16 01:47:13
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-column-alias
 prevPost: postgresql-drop-trigger-statement

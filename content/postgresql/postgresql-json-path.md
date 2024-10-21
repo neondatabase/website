@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-15 19:17:02
 prevPost: plpgsql-row-types
 nextPost: postgresql-after-insert-trigger
 createdAt: 2024-02-23T13:12:16.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-26 08:18:38
 prevPost: postgresql-generated-columns
 nextPost: postgresql-rename-table-a-step-by-step-guide
 createdAt: 2013-05-31T06:52:29.000Z

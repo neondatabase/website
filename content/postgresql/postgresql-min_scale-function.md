@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-18 21:16:51
 prevPost: postgresql-instead-of-triggers
 nextPost: postgresql-between
 createdAt: 2024-05-19T04:16:09.000Z

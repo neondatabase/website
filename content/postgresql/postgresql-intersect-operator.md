@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-30 18:03:14
 prevPost: postgresql-drop-tablespace-statement
 nextPost: postgresql-to_char-function
 createdAt: 2016-06-19T15:09:16.000Z

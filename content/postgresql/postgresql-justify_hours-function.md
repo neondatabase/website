@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-20 20:42:38
 prevPost: postgresql-jsonb_strip_nulls-function
 nextPost: creating-a-postgresql-trigger-with-a-when-condition
 createdAt: 2024-03-20T10:37:32.000Z

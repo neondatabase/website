@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-19 19:00:57
 prevPost: postgresql-stored-procedure-with-inout-parameters
 nextPost: plpgsql-cursor
 createdAt: 2013-06-05T08:07:12.000Z

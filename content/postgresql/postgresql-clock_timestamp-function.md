@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-20 02:24:37
 prevPost: postgresql-jsonb_object-function
 nextPost: postgresql-c-importing-data-from-a-csv-file-into-a-table
 createdAt: 2024-03-20T08:10:00.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-20 18:45:41
 prevPost: postgresql-insert
 nextPost: postgresql-insert-multiple-rows
 createdAt: 2024-02-21T01:20:27.000Z

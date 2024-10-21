@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 18:10:49
 prevPost: postgresql-python-handling-binary-data
 nextPost: postgresql-regexp_matches-function
 createdAt: 2017-03-18T05:34:57.000Z

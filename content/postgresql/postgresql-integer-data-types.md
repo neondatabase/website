@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-02 00:01:29
 prevPost: postgresql-real-data-type
 nextPost: postgresql-date-data-type
 createdAt: 2017-02-18T13:37:24.000Z

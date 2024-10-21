@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-25 00:25:38
 prevPost: postgresql-copy-table-a-step-by-step-guide-with-practical-examples
 nextPost: postgresql-foreign-key
 createdAt: 2015-08-30T09:23:06.000Z

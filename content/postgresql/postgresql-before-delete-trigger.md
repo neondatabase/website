@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-28 02:57:59
 prevPost: postgresql-bool_or-function
 nextPost: postgresql-gcd-function
 createdAt: 2024-03-28T08:42:28.000Z

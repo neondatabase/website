@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-16 01:31:02
 prevPost: postgresql-sum-function
 nextPost: postgresql-substring-function
 createdAt: 2015-05-27T08:05:54.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-17 00:51:05
 prevPost: postgresql-right-function
 nextPost: how-to-create-superuser-in-postgresql
 createdAt: 2024-02-17T07:43:56.000Z

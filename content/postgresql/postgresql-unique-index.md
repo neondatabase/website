@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-28 06:08:05
 prevPost: postgresql-ceil-function
 nextPost: postgresql-dense_rank-function
 createdAt: 2018-12-06T15:36:14.000Z

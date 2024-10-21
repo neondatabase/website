@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-22 00:25:18
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-recursive-query
 prevPost: how-to-check-postgresql-version

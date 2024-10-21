@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-23 19:02:31
 prevPost: postgresql-list-views
 nextPost: postgresql-after-update-trigger
 createdAt: 2024-02-24T02:01:30.000Z

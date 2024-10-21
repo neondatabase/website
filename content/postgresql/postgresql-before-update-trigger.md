@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-28 03:18:43
 prevPost: postgresql-bool_and-function
 nextPost: postgresql-factorial-function
 createdAt: 2024-03-28T04:17:48.000Z

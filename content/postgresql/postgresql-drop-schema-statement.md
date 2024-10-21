@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-12 06:31:28
 prevPost: postgresql-string-functions
 nextPost: postgresql-repeat-function
 createdAt: 2019-05-11T08:29:38.000Z

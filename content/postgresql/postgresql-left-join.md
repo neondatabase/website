@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-06 19:59:26
 prevPost: creating-a-postgresql-trigger-with-a-when-condition
 nextPost: postgresql-jdbc
 createdAt: 2013-05-29T04:05:47.000Z

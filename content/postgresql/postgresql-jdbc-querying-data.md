@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-30 21:06:17
 prevPost: plpgsql-variables
 nextPost: postgresql-php-updating-data-in-a-table
 createdAt: 2016-03-12T02:29:36.000Z

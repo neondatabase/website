@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-07 23:01:43
 prevPost: using-postgresql-serial-to-create-auto-increment-column
 nextPost: postgresql-identity-column
 createdAt: 2019-05-17T10:06:48.000Z

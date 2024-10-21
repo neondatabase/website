@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-15 21:07:27
 prevPost: introduction-to-postgresql-trigger
 nextPost: postgresql-jdbc-connecting-to-postgresql-databases
 createdAt: 2015-05-25T08:03:09.000Z

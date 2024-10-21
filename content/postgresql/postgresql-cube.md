@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-30 18:06:31
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-cube
 prevPost: postgresql-show-tables

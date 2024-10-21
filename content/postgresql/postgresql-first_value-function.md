@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2020-07-09 21:55:53
 prevPost: postgresql-index-on-expression
 nextPost: postgresql-drop-trigger-statement
 createdAt: 2019-05-14T05:59:11.000Z

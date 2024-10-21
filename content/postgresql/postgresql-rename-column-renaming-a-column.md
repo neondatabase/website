@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-24 23:33:58
 prevPost: postgresql-change-column-type
 nextPost: postgresql-drop-table
 createdAt: 2017-02-23T13:02:14.000Z

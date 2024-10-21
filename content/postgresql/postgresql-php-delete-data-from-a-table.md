@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-29 17:55:55
 prevPost: plpgsql-errors-and-messages
 nextPost: postgresql-python-handling-binary-data
 createdAt: 2016-06-13T14:31:19.000Z

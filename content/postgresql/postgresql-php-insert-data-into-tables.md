@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2022-02-09 08:05:02
 prevPost: postgresql-jdbc-insert-data-into-a-table
 nextPost: postgresql-python-insert-data-into-a-table
 createdAt: 2016-06-12T03:25:56.000Z

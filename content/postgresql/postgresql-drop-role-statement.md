@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-21 07:37:07
 prevPost: postgresql-right-join
 nextPost: postgresql-jsonb_array_elements-function
 createdAt: 2020-07-27T04:12:58.000Z

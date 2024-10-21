@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 01:44:30
 prevPost: postgresql-subquery
 nextPost: 17-practical-psql-commands-you-dont-want-to-miss
 createdAt: 2015-05-29T03:00:10.000Z

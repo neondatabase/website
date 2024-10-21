@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 03:36:42
 prevPost: plpgsql-assert-statement
 nextPost: postgresql-jsonb_path_exists-function
 createdAt: 2024-01-28T10:28:49.000Z

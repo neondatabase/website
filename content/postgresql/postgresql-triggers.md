@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-10 08:08:37
 prevPost: postgresql-min-function
 nextPost: plpgsql-variables
 createdAt: 2014-05-21T08:56:39.000Z

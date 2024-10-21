@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 19:28:16
 prevPost: postgresql-jsonb_path_query_first-function
 nextPost: postgresql-before-delete-trigger
 createdAt: 2024-03-22T02:27:40.000Z

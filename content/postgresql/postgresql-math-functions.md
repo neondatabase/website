@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-18 21:18:23
 prevPost: postgresql-length-function
 nextPost: postgresql-mod-function
 createdAt: 2017-08-16T07:35:32.000Z

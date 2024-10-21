@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 18:09:16
 prevPost: postgresql-default-value
 nextPost: postgresql-character-types-char-varchar-and-text
 createdAt: 2016-06-24T01:52:46.000Z

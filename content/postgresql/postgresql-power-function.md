@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-17 08:07:31
 prevPost: postgresql-lower-function
 nextPost: postgresql-jsonb_insert-function
 createdAt: 2024-02-17T15:06:18.000Z

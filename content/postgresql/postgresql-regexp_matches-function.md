@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-27 02:14:12
 prevPost: postgresql-date_part-function
 nextPost: postgresql-aggregate-functions
 createdAt: 2017-08-13T09:37:34.000Z

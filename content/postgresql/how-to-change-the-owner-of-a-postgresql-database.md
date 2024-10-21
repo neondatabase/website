@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-22 03:02:54
 prevPost: postgresql-and-operator
 nextPost: postgresql-jsonb_path_query-function
 createdAt: 2024-02-22T10:01:03.000Z

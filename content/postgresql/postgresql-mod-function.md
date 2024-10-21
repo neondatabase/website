@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-18 00:38:31
 prevPost: postgresql-math-functions
 nextPost: postgresql-to_timestamp-function
 createdAt: 2017-08-17T06:10:29.000Z

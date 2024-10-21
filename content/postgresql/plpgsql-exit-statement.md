@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-18 21:05:44
 prevPost: postgresql-table-aliases
 nextPost: postgresql-upper-function
 createdAt: 2020-08-05T06:27:48.000Z

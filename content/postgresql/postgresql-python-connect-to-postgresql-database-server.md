@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-19 01:11:16
 prevPost: postgresql-php-connect-to-postgresql-database-using-pdo
 nextPost: postgresql-ascii-function
 createdAt: 2016-06-16T02:27:11.000Z

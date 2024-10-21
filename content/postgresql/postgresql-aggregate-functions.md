@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-19 18:48:16
 prevPost: postgresql-regexp_matches-function
 nextPost: postgresql-index-types
 createdAt: 2017-08-13T13:48:15.000Z

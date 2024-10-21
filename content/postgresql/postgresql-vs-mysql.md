@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-15 07:32:40
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-vs-mysql
 prevPost: postgresql-distinct-on

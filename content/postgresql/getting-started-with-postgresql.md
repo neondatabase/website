@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2021-04-26 19:23:23
 prevPost: postgresql-cume_dist-function
 nextPost: postgresql-to_jsonb-function
 createdAt: 2020-07-18T09:58:41.000Z

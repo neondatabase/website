@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-24 21:01:41
 prevPost: postgresql-rename-table-a-step-by-step-guide
 nextPost: postgresql-drop-column-remove-one-or-more-columns-of-a-table
 createdAt: 2016-06-27T14:07:02.000Z

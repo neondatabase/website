@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-18 03:49:32
 prevPost: postgresql-truncate-table
 nextPost: postgresql-copy-table-a-step-by-step-guide-with-practical-examples
 createdAt: 2017-02-24T06:51:02.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-05-20 20:40:01
 prevPost: postgresql-factorial-function
 nextPost: postgresql-functions
 createdAt: 2024-05-20T13:21:12.000Z

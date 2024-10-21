@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-28 06:56:31
 prevPost: postgresql-drop-schema-statement
 nextPost: postgresql-jsonb-operators
 createdAt: 2024-01-28T11:07:59.000Z

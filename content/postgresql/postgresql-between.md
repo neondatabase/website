@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-04-19 00:33:19
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-between
 prevPost: postgresql-min_scale-function

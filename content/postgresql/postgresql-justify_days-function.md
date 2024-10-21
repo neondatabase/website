@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-20 20:38:28
 prevPost: postgresql-jsonb_set-function
 nextPost: postgresql-event-trigger
 createdAt: 2024-03-20T09:39:04.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2023-12-30 03:24:23
 prevPost: postgresql-union
 nextPost: postgresql-translate-function
 createdAt: 2013-06-04T09:08:47.000Z

@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 21:01:35
 prevPost: postgresql-coalesce
 nextPost: postgresql-nullif
 createdAt: 2019-01-02T13:03:39.000Z

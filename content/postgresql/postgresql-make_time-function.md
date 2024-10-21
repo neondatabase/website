@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-24 19:56:31
 prevPost: postgresql-json-extract
 nextPost: postgresql-log-function
 createdAt: 2024-03-25T02:03:00.000Z

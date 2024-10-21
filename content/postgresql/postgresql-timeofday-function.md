@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-19 21:01:17
 prevPost: postgresql-jsonb_object_keys-function
 nextPost: plpgsql-returns-setof
 createdAt: 2024-03-20T04:00:25.000Z

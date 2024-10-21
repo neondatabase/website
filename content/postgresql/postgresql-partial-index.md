@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-28 01:55:51
 prevPost: postgresql-position-function
 nextPost: postgresql-lag-function
 createdAt: 2018-12-08T12:08:46.000Z

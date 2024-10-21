@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-06-07 07:04:49
 prevPost: postgresql-floor-function
 nextPost: postgresql-string_agg-function
 createdAt: 2018-12-09T04:08:12.000Z

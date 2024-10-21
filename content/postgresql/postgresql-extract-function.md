@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 18:01:47
 prevPost: postgresql-python-delete-data-from-tables
 nextPost: postgresql-date-functions
 createdAt: 2017-08-15T07:27:23.000Z

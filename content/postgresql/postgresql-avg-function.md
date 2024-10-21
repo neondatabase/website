@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-25 06:26:11
 prevPost: introduction-to-postgresql-plpgsql
 nextPost: introduction-to-postgresql-trigger
 createdAt: 2014-05-03T15:01:38.000Z

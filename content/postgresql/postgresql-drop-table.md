@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-24 03:32:29
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-drop-table
 prevPost: postgresql-rename-column-renaming-a-column

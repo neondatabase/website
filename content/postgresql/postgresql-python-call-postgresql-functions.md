@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-29 06:45:56
 prevPost: plpgsql-record-types
 nextPost: postgresql-and-operator
 createdAt: 2020-08-03T03:38:42.000Z

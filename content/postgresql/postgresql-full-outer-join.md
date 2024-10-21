@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-17 22:31:07
 prevPost: plpgsql-function-overloading
 nextPost: postgresql-date_trunc-function
 createdAt: 2016-06-19T09:05:46.000Z

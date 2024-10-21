@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 05:38:39
 prevPost: postgresql-uuid-data-type
 nextPost: postgresql-hstore
 createdAt: 2015-07-11T00:53:56.000Z

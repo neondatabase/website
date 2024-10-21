@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-01 02:33:46
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-explain
 prevPost: postgresql-cast-convert-a-value-of-one-type-to-another

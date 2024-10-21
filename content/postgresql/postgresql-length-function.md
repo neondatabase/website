@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-27 02:29:04
 prevPost: plpgsql-case-statement
 nextPost: postgresql-math-functions
 createdAt: 2015-10-04T01:35:51.000Z

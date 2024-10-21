@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-17 07:08:37
 prevPost: postgresql-concat_ws-function
 nextPost: postgresql-jsonb_agg-function
 createdAt: 2024-02-17T13:55:37.000Z

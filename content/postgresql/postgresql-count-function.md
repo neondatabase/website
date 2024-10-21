@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-25 19:50:46
 prevPost: postgresql-create-trigger-statement
 nextPost: postgresql-php-create-new-tables
 createdAt: 2014-05-21T09:30:48.000Z

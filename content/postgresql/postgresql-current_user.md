@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-21 23:48:14
 prevPost: postgresql-radians-function
 nextPost: postgresql-jsonb_strip_nulls-function
 createdAt: 2024-02-22T06:47:50.000Z

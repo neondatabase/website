@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-24 18:22:46
 prevPost: postgresql-power-function
 nextPost: how-to-list-all-triggers-in-postgresql
 createdAt: 2024-02-25T01:19:07.000Z

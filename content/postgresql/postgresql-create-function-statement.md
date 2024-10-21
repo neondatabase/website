@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-03-21 23:51:44
 prevPost: postgresql-justify_interval-function
 nextPost: postgresql-md5-function
 createdAt: 2013-06-07T05:03:38.000Z

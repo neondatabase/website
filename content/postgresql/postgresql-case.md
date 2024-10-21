@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-01-31 20:34:12
 redirectFrom:
     - /postgresql/postgresql-tutorial/postgresql-case
 prevPost: how-to-delete-duplicate-rows-in-postgresql

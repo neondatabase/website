@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-17 21:15:55
 prevPost: postgresql-rtrim-function
 nextPost: postgresql-current_user
 createdAt: 2024-02-18T04:15:44.000Z

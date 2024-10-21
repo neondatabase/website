@@ -1,4 +1,5 @@
 ---
+modifiedAt: 2024-02-21 19:54:15
 prevPost: plpgsql-for-loop
 nextPost: postgresql-lower-function
 createdAt: 2020-07-27T10:26:42.000Z
