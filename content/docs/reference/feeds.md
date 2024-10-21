@@ -78,3 +78,9 @@ To receive updates in Slack, enter the `/feed subscribe` command with the desire
 ```bash
 /feed subscribe https://neon.tech/docs/changelog/rss.xml
 ```
+
+## Remove feeds from Slack
+
+To remove feeds from Slack, enter the the `/feed list` command and note the feed ID number.
+
+Enter `/feed remove [ID number]` to remove the feed.
