@@ -19,13 +19,14 @@ const Item = ({
   activeMenuList,
   setActiveMenuList,
   closeMobileMenu = null,
+  root,
   children,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
   const externalSlug = slug && slug.startsWith('http') ? slug : null;
-  const docSlug = `${basePath}${slug}/`;
+  const docSlug = root ? slug : `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
 
@@ -89,6 +90,7 @@ Item.propTypes = {
   ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
+  root: PropTypes.bool,
   children: PropTypes.node,
 };
 

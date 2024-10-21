@@ -1,0 +1,11 @@
+---
+modifiedAt: 2021-08-10 20:08:08
+prevPost: postgresql-c-selecting-data
+nextPost: plpgsql-constants
+createdAt: 2014-04-30T15:14:27.000Z
+title: 'PostgreSQL Functions'
+tableOfContents: true
+---
+
+
+

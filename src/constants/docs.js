@@ -5,7 +5,7 @@ const CHANGELOG_BASE_PATH = `${DOCS_BASE_PATH}${CHANGELOG_SLUG}/`;
 const CHANGELOG_DIR_PATH = `content/${CHANGELOG_SLUG}`;
 const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}/;
 
-const POSTGRES_DOCS_BASE_PATH = '/docs/postgres/';
+const POSTGRES_DOCS_BASE_PATH = '/postgresql/';
 
 const VERCEL_URL =
   process.env.VERCEL_ENV === 'preview'

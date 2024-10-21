@@ -95,6 +95,7 @@ const Menu = ({
   menuWrapperRef,
   activeMenuList,
   setActiveMenuList,
+  customType = null,
 }) => {
   const isRootMenu = depth === 0;
   const menuRef = useRef(null);
@@ -205,10 +206,10 @@ const Menu = ({
               'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
               'text-gray-new-60 hover:text-black-new dark:hover:text-white'
             )}
-            to={isRootMenu ? backLinkPath : homePath}
+            to={customType?.link || (isRootMenu ? backLinkPath : homePath)}
           >
             <ArrowBackIcon className="size-4.5" />
-            Back to docs
+            {customType?.title || 'Back to Docs'}
           </Link>
         </div>
       )}
@@ -245,6 +246,10 @@ Menu.propTypes = {
   ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Menu;

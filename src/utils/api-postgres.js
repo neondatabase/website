@@ -1,6 +1,8 @@
 const fs = require('fs');
 
 const { glob } = require('glob');
+const matter = require('gray-matter');
+const jsYaml = require('js-yaml');
 
 const getExcerpt = require('./get-excerpt');
 
@@ -37,20 +39,27 @@ const findTitle = (sidebar, currentSlug) => {
 
 const getPostBySlug = async (path, basePath) => {
   try {
-    const content = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
-    const sidebar = fs.readFileSync(
-      `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
-      'utf8'
-    );
+    const source = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
+
+    const { data, content } = matter(source);
+
+    const sidebar = fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8');
+    const sidebarData = jsYaml.load(sidebar);
 
     const currentSlug = path.slice(1);
-    const sidebarData = JSON.parse(sidebar);
+    const titleFromSidebar = findTitle(sidebarData, currentSlug);
 
-    const title = findTitle(sidebarData, currentSlug);
+    const title = data.title || titleFromSidebar;
+
+    const createdAt = data.createdAt || new Date().toISOString();
+    const modifiedAt = data.modifiedAt || new Date().toISOString();
+
+    const imageRegex = /!\[.*?\]\((.*?)\)/g;
+    const images = [...content.matchAll(imageRegex)].map((match) => match[1]);
 
     const excerpt = getExcerpt(content, 200);
 
-    return { title, excerpt, content };
+    return { title, createdAt, modifiedAt, excerpt, content, sidebar: sidebarData, images };
   } catch (e) {
     return null;
   }
@@ -59,14 +68,38 @@ const getPostBySlug = async (path, basePath) => {
 const getAllPosts = async () => {
   const paths = await getPostSlugs(POSTGRES_DIR_PATH);
 
-  return paths.map((path) => {
-    if (!getPostBySlug(path, POSTGRES_DIR_PATH)) return;
-    const data = getPostBySlug(path, POSTGRES_DIR_PATH);
+  const posts = await Promise.all(
+    paths.map(async (path) => {
+      const data = await getPostBySlug(path, POSTGRES_DIR_PATH);
+      if (!data) return null;
 
-    const slugWithoutFirstSlash = path.slice(1);
+      const slugWithoutFirstSlash = path.slice(1);
 
-    return { slug: slugWithoutFirstSlash, ...data };
-  });
+      const { title, createdAt, modifiedAt, excerpt, content, sidebar, images } = data;
+
+      const parsedCreatedAt = createdAt ? new Date(createdAt) : new Date();
+      const parsedModifiedAt = modifiedAt ? new Date(modifiedAt) : new Date();
+
+      return {
+        slug: slugWithoutFirstSlash,
+        title,
+        createdAt: parsedCreatedAt,
+        modifiedAt: parsedModifiedAt,
+        excerpt,
+        content,
+        sidebar,
+        images: images || [],
+      };
+    })
+  );
+
+  return posts
+    .filter((item) => item)
+    .sort((a, b) => (new Date(a.modifiedAt).getTime() < new Date(b.modifiedAt).getTime() ? 1 : -1))
+    .map((post) => ({
+      ...post,
+      images: post.images.map((image) => `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${image}`),
+    }));
 };
 
 const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -126,16 +159,10 @@ const getSideBarWithInlineCode = (sidebar) => {
   return sidebar;
 };
 
-const getSidebar = () => {
-  const sidebarJson = fs.readFileSync(
-    `${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar/sidebar.json`,
-    'utf8'
+const getSidebar = () =>
+  getSideBarWithInlineCode(
+    jsYaml.load(fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8'))
   );
-  const sidebar = JSON.parse(sidebarJson);
-
-  return getSideBarWithInlineCode(sidebar);
-  // replace mdx inline code with html inline code
-};
 
 export {
   getAllPosts,
