@@ -2,7 +2,7 @@
 
 title: Query your Postgres Database Using Azure Functions  
 subtitle: Learn how to Query your Postgres Database Using Azure Functions  
-author: AdalbertPungu  
+author: adalbert-pungu  
 enableTableOfContents: true  
 createdAt: "2024-10-19T21:00:00.000Z"  
 
