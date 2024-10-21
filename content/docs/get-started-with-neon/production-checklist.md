@@ -109,7 +109,7 @@ Neon's protected branches feature allows you to apply IP restrictions more preci
 
 Monitoring is an important consideration as you prepare for production. Neon offers several monitoring resources and metrics, including a **Monitoring Dashboard** in Neon Console, where you can view graphs for system and database metrics like CPU, RAM, and connections.
 
-![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
+![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
 For query performance and statistics in Postgres, we also recommend installing the [pg_stat_statements extension](/docs/extensions/pg_stat_statements).
 
