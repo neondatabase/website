@@ -159,7 +159,7 @@ To create a read-write role:
 4. Create a database user. The password requirements mentioned above apply here as well.
 
    ```sql
-   CREATE ROLE readwrite_user1 WITH LOGIN PASSWORD '<password>';
+   CREATE USER readwrite_user1 WITH LOGIN PASSWORD '<password>';
    ```
 
 5. Assign the `readwrite` role to `readwrite_user1`:
@@ -278,7 +278,7 @@ GRANT ALL PRIVILEGES ON DATABASE <database> TO dev_users;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
 
 -- User creation
-CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';
+CREATE USER dev_user1 WITH LOGIN PASSWORD '<password>';
 
 -- Grant privileges to user
 GRANT dev_users TO dev_user1;
