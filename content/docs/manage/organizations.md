@@ -67,7 +67,9 @@ Here's a breakdown of what actions each role can take:
 
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
-    If you're already on a paid plan for your personal account, you'll have two options: convert your personal account to an organization, or create a new organization from scratch.
+    If you're already on a paid plan for your personal account, you'll have two options: 
+    - convert your personal account to an organization
+    - create a new organization from scratch.
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
 
