@@ -170,9 +170,9 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 
 While this feature is in its early-access phase, there are some limitations to be aware of:
 
-- **Authentication provider requirements**: The provider you integrate with must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added.
+- **Authentication provider requirements**: Your authentication provider must  provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added.
   
-- **Connection type**: Your app must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP. Note, a serverless driver for **Python** is planned but not yet available.
+- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP.
 
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 
