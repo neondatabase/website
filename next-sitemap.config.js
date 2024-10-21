@@ -21,6 +21,7 @@ module.exports = {
     '/blog-sitemap.xml',
     '/blog/*',
     '/guides/rss.xml',
+    '/postgresql/rss.xml',
     '/enterprise',
     '/stage',
   ],

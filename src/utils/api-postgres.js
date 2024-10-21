@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const { glob } = require('glob');
+const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
 const getExcerpt = require('./get-excerpt');
@@ -38,17 +39,23 @@ const findTitle = (sidebar, currentSlug) => {
 
 const getPostBySlug = async (path, basePath) => {
   try {
-    const content = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
-    const sidebar = fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8');
+    const source = fs.readFileSync(`${process.cwd()}/${basePath}${path}.md`, 'utf-8');
 
-    const currentSlug = path.slice(1);
+    const { data, content } = matter(source);
+
+    const sidebar = fs.readFileSync(`${process.cwd()}/${POSTGRES_DIR_PATH}/sidebar.yaml`, 'utf8');
     const sidebarData = jsYaml.load(sidebar);
 
-    const title = findTitle(sidebarData, currentSlug);
+    const currentSlug = path.slice(1);
+    const titleFromSidebar = findTitle(sidebarData, currentSlug);
+
+    const title = data.title || titleFromSidebar;
+
+    const createdAt = data.createdAt || new Date().toISOString();
 
     const excerpt = getExcerpt(content, 200);
 
-    return { title, excerpt, content, sidebar: sidebarData };
+    return { title, createdAt, excerpt, content, sidebar: sidebarData };
   } catch (e) {
     return null;
   }
@@ -57,14 +64,31 @@ const getPostBySlug = async (path, basePath) => {
 const getAllPosts = async () => {
   const paths = await getPostSlugs(POSTGRES_DIR_PATH);
 
-  return paths.map((path) => {
-    if (!getPostBySlug(path, POSTGRES_DIR_PATH)) return;
-    const data = getPostBySlug(path, POSTGRES_DIR_PATH);
+  const posts = await Promise.all(
+    paths.map(async (path) => {
+      const data = await getPostBySlug(path, POSTGRES_DIR_PATH);
+      if (!data) return null;
 
-    const slugWithoutFirstSlash = path.slice(1);
+      const slugWithoutFirstSlash = path.slice(1);
 
-    return { slug: slugWithoutFirstSlash, ...data };
-  });
+      const { title, createdAt, excerpt, content, sidebar } = data;
+
+      const parsedCreatedAt = createdAt ? new Date(createdAt) : new Date();
+
+      return {
+        slug: slugWithoutFirstSlash,
+        title,
+        createdAt: parsedCreatedAt,
+        excerpt,
+        content,
+        sidebar,
+      };
+    })
+  );
+
+  return posts
+    .filter((item) => item)
+    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };
 
 const getTitleWithInlineCode = (title) => title.replace(/`([^`]+)`/g, '<code>$1</code>');
