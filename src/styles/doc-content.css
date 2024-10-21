@@ -135,6 +135,17 @@
       }
     }
 
+    hr {
+      @apply my-8;
+    }
+
+    h2,
+    h3 {
+      & + hr {
+        @apply mt-0;
+      }
+    }
+
     .table-wrapper {
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }

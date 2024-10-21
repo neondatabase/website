@@ -3,10 +3,10 @@ title: 'Postgres for Dev/Test'
 subtitle: Migrate your non-prod environments to Neon. Start shipping faster with up to 75% lower costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
+image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
 
-**TL:DR**
-
+<Admonition type="note" title="TL;DR">
 - [Neon](/) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
 - Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
   - You can keep your production DB in your current Postgres, e.g. RDS;
@@ -15,6 +15,7 @@ updatedOn: '2024-08-23T09:00:00.000Z'
   - Once the changes are tested, you apply them back to prod.
 - What you get: more developer velocity with up to 75% less costs.
 - You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
+</Admonition>
 
 ## AWS RDS is fine for prod, but terrible for dev
 
