@@ -140,18 +140,18 @@ For early-stage applications, **RLS** might be all the security you need to scal
 
 Here is a non-exhaustive list of authentication providers. The table shows which providers Neon Authorize supports, links out to provider documentation for details, and the discovery URL pattern each provider typically uses.
 
-| Provider         | Supported? | Documentation  | JWKS URL                                                      |
-|------------------|------------|----------------|----------------------------------------------------------------|
-| **Clerk**        | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)  | `https://{yourClerkDomain}/.well-known/jwks.json`               |
-| **Auth0**        | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets) | `https://{yourDomain}/.well-known/jwks.json`                    |
-| **Firebase**     | ✅         | [docs](https://firebase.google.com/docs/auth/admin/verify-id-tokens)  | `https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com` |
-| **Stytch**       | ✅         | [docs](https://stytch.com/docs/guides/sessions/using-jwts)  | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                                               |
-| **Keycloak**     | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html) | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`                                                    |
-| **Supabase**     | ❌         | None           | N/A                                                            |
-| **Okta**         | ✅         | [docs](https://auth0.com/docs/secure/tokens/json-web-tokens/locate-json-web-key-sets) | `https://{yourOktaDomain}/oauth2/{authServerId}/.well-known/jwks.json`                |
-| **Amazon Cognito** | ✅      | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html)  | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json` |
-| **Microsoft Azure AD** | ✅  | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)  | `https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys` |
-| **Apple Sign In** | ✅       | [docs](https://developer.apple.com/documentation/sign_in_with_apple/generate_and_validate_tokens)  | `https://appleid.apple.com/auth/keys`                           |
+| Provider               | Supported? | Documentation                                                                                                                 | JWKS URL                                                                                   |
+| ---------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Clerk**              | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    | `https://{yourClerkDomain}/.well-known/jwks.json`                                          |
+| **Auth0**              | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              | `https://{yourDomain}/.well-known/jwks.json`                                               |
+| **Firebase**           | ✅         | [docs](https://firebase.google.com/docs/auth/admin/verify-id-tokens)                                                          | `https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com` |
+| **Stytch**             | ✅         | [docs](https://stytch.com/docs/guides/sessions/using-jwts)                                                                    | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                        |
+| **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`    |
+| **Supabase**           | ❌         | None                                                                                                                          | N/A                                                                                        |
+| **Okta**               | ✅         | [docs](https://auth0.com/docs/secure/tokens/json-web-tokens/locate-json-web-key-sets)                                         | `https://{yourOktaDomain}/oauth2/{authServerId}/.well-known/jwks.json`                     |
+| **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`            |
+| **Microsoft Azure AD** | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys`                           |
+| **Apple Sign In**      | ✅         | [docs](https://developer.apple.com/documentation/sign_in_with_apple/generate_and_validate_tokens)                             | `https://appleid.apple.com/auth/keys`                                                      |
 
 ## Sample applications
 
