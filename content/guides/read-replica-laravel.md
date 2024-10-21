@@ -360,6 +360,6 @@ By leveraging Neon's read replicas with Laravel, you can significantly improve y
 
 This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
 
-By implementing read replicas in your Laravel application, you're taking a significant step towards building a more scalable and performant system that can handle increased traffic and data loads.
+By implementing read replicas in your Laravel application, you're taking a significant step toward building a more scalable and performant system that can handle increased traffic and data loads.
 
 <NeedHelp/>
