@@ -2,6 +2,7 @@
 title: 'A Look at PostgreSQL User-defined Data Types'
 redirectFrom: 
             - /postgresql/postgresql-user-defined-data-types
+            - /postgresql/postgresql-tutorial/postgresql-user-defined-data-types
 ogImage: /postgresqltutorial_data/wp-content-uploads-2020-07-PostgreSQL-User-defined-Type-Example.png
 tableOfContents: true
 ---

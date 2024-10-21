@@ -4,6 +4,7 @@ nextPost: postgresql-list-views
 createdAt: 2024-01-17T01:27:01.000Z
 title: 'PostgreSQL OR Operator'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-or
             - /postgresql/postgresql-or
 tableOfContents: true
 ---

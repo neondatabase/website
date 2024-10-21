@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-composite-types
 prevPost: postgresql-bytea-data-type
 nextPost: how-to-compare-two-tables-in-postgresql
 createdAt: 2024-04-21T14:03:47.000Z

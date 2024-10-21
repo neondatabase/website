@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-case
 prevPost: how-to-delete-duplicate-rows-in-postgresql
 nextPost: postgresql-coalesce
 createdAt: 2015-05-28T02:42:39.000Z

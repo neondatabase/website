@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-drop-table
 prevPost: postgresql-rename-column-renaming-a-column
 nextPost: postgresql-truncate-table
 createdAt: 2013-05-31T08:04:05.000Z

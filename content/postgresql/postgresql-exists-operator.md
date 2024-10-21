@@ -4,6 +4,7 @@ nextPost: postgresql-uptime
 createdAt: 2017-08-19T08:41:22.000Z
 title: 'PostgreSQL EXISTS Operator'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-exists
             - /postgresql/postgresql-exists
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-08-customer-and-payment-tables.png
 tableOfContents: true

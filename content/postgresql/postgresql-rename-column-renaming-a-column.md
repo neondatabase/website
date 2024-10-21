@@ -4,6 +4,7 @@ nextPost: postgresql-drop-table
 createdAt: 2017-02-23T13:02:14.000Z
 title: 'PostgreSQL RENAME COLUMN: Renaming a column'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-rename-column
             - /postgresql/postgresql-rename-column
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-postgresql-rename-column-300x254.png
 tableOfContents: true

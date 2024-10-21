@@ -4,6 +4,7 @@ nextPost: postgresql-drop-column-remove-one-or-more-columns-of-a-table
 createdAt: 2016-06-27T14:07:02.000Z
 title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-add-column
             - /postgresql/postgresql-add-column
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Add-Column-300x128.png
 tableOfContents: true

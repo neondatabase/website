@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-update-join
 prevPost: postgresql-update
 nextPost: postgresql-delete
 createdAt: 2017-03-05T10:10:52.000Z

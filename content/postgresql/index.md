@@ -167,7 +167,7 @@ In this section, you will begin exploring the PostgreSQL data types and learn ho
 
 ## Section 16. PostgreSQL Utilities
 
-- **[psql commands](postgresql-administration/psql-commands)** – show you the most common psql commands that help you interact with psql faster and more effectively.
+- **[psql commands](/postgresql/postgresql-administration/psql-commands)** – show you the most common psql commands that help you interact with psql faster and more effectively.
 
 ## Section 17. PostgreSQL Recipes
 

@@ -3,6 +3,8 @@ prevPost: postgresql-cume_dist-function
 nextPost: postgresql-to_jsonb-function
 createdAt: 2020-07-18T09:58:41.000Z
 title: 'Getting Started with PostgreSQL'
+redirectFrom:
+    - /postgresql/postgresql-getting-started
 tableOfContents: true
 ---
 

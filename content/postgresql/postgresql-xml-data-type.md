@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-xml-data-type
 prevPost: postgresql-enum
 nextPost: postgresql-bytea-data-type
 createdAt: 2024-04-20T03:57:18.000Z

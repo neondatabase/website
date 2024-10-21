@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-between
 prevPost: postgresql-min_scale-function
 nextPost: postgresql-create-role-statement
 createdAt: 2013-05-28T07:05:16.000Z

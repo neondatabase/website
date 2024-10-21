@@ -4,6 +4,7 @@ nextPost: postgresql-password-file-pgpass
 createdAt: 2018-03-17T13:22:59.000Z
 title: 'PostgreSQL ALL Operator'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-all
             - /postgresql/postgresql-all
 tableOfContents: true
 ---

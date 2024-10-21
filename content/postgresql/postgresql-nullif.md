@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-nullif
 prevPost: postgresql-isnull
 nextPost: postgresql-cast-convert-a-value-of-one-type-to-another
 createdAt: 2015-09-03T02:54:40.000Z

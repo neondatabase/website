@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-data-types
 prevPost: export-postgresql-table-to-csv-file
 nextPost: postgresql-create-table
 createdAt: 2013-05-30T05:21:17.000Z

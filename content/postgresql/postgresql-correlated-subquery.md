@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-correlated-subquery
 prevPost: 17-practical-psql-commands-you-dont-want-to-miss
 nextPost: postgresql-any-operator
 createdAt: 2024-01-22T03:48:44.000Z

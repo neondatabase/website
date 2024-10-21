@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-subquery
 prevPost: postgresql-cube
 nextPost: postgresql-describe-table
 createdAt: 2013-05-30T02:56:10.000Z

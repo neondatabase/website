@@ -1,6 +1,7 @@
 ---
 title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-rename-table
             - /postgresql/postgresql-rename-table
 tableOfContents: true
 ---

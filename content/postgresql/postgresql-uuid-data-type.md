@@ -4,6 +4,7 @@ nextPost: postgresql-array
 createdAt: 2017-02-20T12:02:39.000Z
 title: 'PostgreSQL UUID Data Type'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-uuid
             - /postgresql/postgresql-uuid
 tableOfContents: true
 ---

@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-recursive-query
 prevPost: how-to-check-postgresql-version
 nextPost: how-to-restart-postgresql-on-ubuntu
 createdAt: 2016-07-02T09:18:43.000Z

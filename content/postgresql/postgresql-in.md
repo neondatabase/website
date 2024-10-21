@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-in
 prevPost: postgresql-c-call-a-stored-procedure
 nextPost: plpgsql-if-statement
 createdAt: 2012-08-31T08:13:29.000Z

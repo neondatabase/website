@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
 prevPost: how-to-generate-a-random-number-in-a-range
 nextPost: postgresql-case
 createdAt: 2017-08-18T13:43:29.000Z

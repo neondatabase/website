@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-column-alias
 prevPost: postgresql-drop-trigger-statement
 nextPost: postgresql-jsonb_build_object-function
 createdAt: 2020-07-11T02:45:37.000Z

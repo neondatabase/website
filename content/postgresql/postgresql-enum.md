@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-enum
 prevPost: a-look-at-postgresql-user-defined-data-types
 nextPost: postgresql-xml-data-type
 createdAt: 2024-04-19T10:27:05.000Z

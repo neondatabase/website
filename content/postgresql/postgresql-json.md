@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-json
 prevPost: postgresql-hstore
 nextPost: a-look-at-postgresql-user-defined-data-types
 createdAt: 2015-07-10T08:53:51.000Z

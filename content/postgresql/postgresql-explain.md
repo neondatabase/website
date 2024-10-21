@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-explain
 prevPost: postgresql-cast-convert-a-value-of-one-type-to-another
 nextPost: postgresql-distinct-on
 createdAt: 2018-12-02T08:40:09.000Z

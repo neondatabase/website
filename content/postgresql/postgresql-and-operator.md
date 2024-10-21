@@ -4,6 +4,7 @@ nextPost: how-to-change-the-owner-of-a-postgresql-database
 createdAt: 2024-01-17T01:14:35.000Z
 title: 'PostgreSQL AND Operator'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-and
             - /postgresql/postgresql-and
 ogImage: /postgresqltutorial_data/wp-content-uploads-2019-05-film.png
 tableOfContents: true

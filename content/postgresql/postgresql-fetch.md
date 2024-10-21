@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-fetch
 prevPost: postgresql-date-functions
 nextPost: postgresql-alter-schema
 createdAt: 2018-03-18T10:13:12.000Z

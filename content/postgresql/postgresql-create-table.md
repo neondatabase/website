@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-create-table
 prevPost: postgresql-data-types
 nextPost: postgresql-select-into
 createdAt: 2013-05-31T04:00:10.000Z

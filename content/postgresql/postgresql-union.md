@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-union
 prevPost: postgresql-jsonb_agg-function
 nextPost: postgresql-alter-tablespace
 createdAt: 2013-05-28T08:43:53.000Z

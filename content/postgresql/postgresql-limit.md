@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-limit
 prevPost: postgresql-c-transaction
 nextPost: plpgsql-errors-and-messages
 createdAt: 2015-05-28T03:54:08.000Z

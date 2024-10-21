@@ -4,6 +4,7 @@ nextPost: plpgsql-exit-statement
 createdAt: 2018-02-10T04:33:14.000Z
 title: 'PostgreSQL Table Aliases'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-alias
             - /postgresql/postgresql-alias
 tableOfContents: true
 ---

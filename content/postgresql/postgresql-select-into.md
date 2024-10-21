@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-select-into
 prevPost: postgresql-create-table
 nextPost: postgresql-create-table-as
 createdAt: 2018-03-17T14:39:16.000Z

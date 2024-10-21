@@ -4,6 +4,7 @@ nextPost: postgresql-character-types-char-varchar-and-text
 createdAt: 2016-06-24T01:52:46.000Z
 title: 'PostgreSQL Boolean Data Type with Practical Examples'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-boolean
             - /postgresql/postgresql-boolean
 ogImage: /postgresqltutorial_data/wp-content-uploads-2016-06-PostgreSQL-Boolean-300x146.png
 tableOfContents: true

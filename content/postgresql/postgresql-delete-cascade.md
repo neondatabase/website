@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-delete-cascade
 prevPost: postgresql-foreign-key
 nextPost: postgresql-check-constraints
 createdAt: 2024-02-23T01:12:55.000Z

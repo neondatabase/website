@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/export-postgresql-table-to-csv-file
 prevPost: import-csv-file-into-postgresql-table
 nextPost: postgresql-data-types
 createdAt: 2015-05-23T09:50:57.000Z

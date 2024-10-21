@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-bytea-data-type
 prevPost: postgresql-xml-data-type
 nextPost: postgresql-composite-types
 createdAt: 2024-04-20T13:26:11.000Z

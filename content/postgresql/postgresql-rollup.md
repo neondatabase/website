@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-rollup
 prevPost: postgresql-show-databases
 nextPost: postgresql-jsonb_populate_recordset-function
 createdAt: 2018-03-18T14:23:39.000Z

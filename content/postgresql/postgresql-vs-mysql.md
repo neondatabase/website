@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-vs-mysql
 prevPost: postgresql-distinct-on
 nextPost: postgresql-generate_series-function
 createdAt: 2017-02-24T14:59:53.000Z

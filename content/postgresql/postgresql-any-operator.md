@@ -4,6 +4,7 @@ nextPost: how-to-uninstall-postgresql-from-ubuntu
 createdAt: 2017-08-19T10:42:10.000Z
 title: 'PostgreSQL ANY Operator'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-any
             - /postgresql/postgresql-any
 tableOfContents: true
 ---

@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-like
 prevPost: postgresql-before-truncate-trigger
 nextPost: disable-triggers
 createdAt: 2012-08-28T05:30:37.000Z

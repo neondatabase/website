@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-joins
 prevPost: postgresql-age-function
 nextPost: plpgsql-for-loop
 createdAt: 2018-12-02T05:52:21.000Z

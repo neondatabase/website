@@ -4,6 +4,7 @@ nextPost: postgresql-change-column-type
 createdAt: 2017-02-22T04:10:47.000Z
 title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
 redirectFrom: 
+            - /postgresql/postgresql-tutorial/postgresql-drop-column
             - /postgresql/postgresql-drop-column
 ogImage: /postgresqltutorial_data/wp-content-uploads-2017-02-PostgreSQL-Drop-Column-300x128.png
 tableOfContents: true

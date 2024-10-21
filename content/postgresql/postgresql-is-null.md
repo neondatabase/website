@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-is-null
 prevPost: postgresql-ln-function
 nextPost: plpgsql-while-loop
 createdAt: 2019-01-01T14:28:19.000Z

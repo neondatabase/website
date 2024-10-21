@@ -1,4 +1,6 @@
 ---
+redirectFrom:
+    - /postgresql/postgresql-tutorial/postgresql-cube
 prevPost: postgresql-show-tables
 nextPost: postgresql-subquery
 createdAt: 2018-03-19T09:10:41.000Z
