@@ -51,7 +51,7 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   }, result);
 };
 
-const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
+const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -94,9 +94,9 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
 
           <Link
             className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
-            to={LINKS.docs}
+            to={customType ? customType.link : LINKS.postgresDocs}
           >
-            Docs
+            {customType?.title || 'Docs'}
           </Link>
         </div>
         <nav
@@ -113,6 +113,14 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
               menuWrapperRef={menuWrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
+              customType={
+                customType
+                  ? {
+                      title: `Back to ${customType.title}`,
+                      link: customType.link,
+                    }
+                  : null
+              }
             />
           </div>
         </nav>
@@ -126,6 +134,10 @@ Sidebar.propTypes = {
   sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Sidebar;

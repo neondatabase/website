@@ -219,6 +219,6 @@
     - title: XML
       slug: postgresql-xml-data-type
     - title: BYTEA
-      slug: postgresql-bytea
+      slug: postgresql-bytea-data-type
     - title: Composite Types
       slug: postgresql-composite-types

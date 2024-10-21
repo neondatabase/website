@@ -6,11 +6,17 @@ import Layout from 'components/shared/layout';
 import { POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
 import { getSidebar } from 'utils/api-postgres';
 
-const NeonDocsLayout = async ({ children }) => {
+const NeonPostgresLayout = async ({ children }) => {
   const sidebar = await getSidebar();
+
+  const customType = {
+    title: 'Tutorials',
+    link: `${POSTGRES_DOCS_BASE_PATH  }index`,
+  };
 
   return (
     <Layout
+      customType={customType}
       headerClassName="lg:border-none"
       burgerWithoutBorder
       showSearchInput
@@ -23,15 +29,18 @@ const NeonDocsLayout = async ({ children }) => {
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
-          slug="introduction"
+          slug="index"
           basePath={POSTGRES_DOCS_BASE_PATH}
+          customName="PostgreSQL Documentation"
+          customType={customType}
         />
 
         <Sidebar
           className="-mt-[65px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
           sidebar={sidebar}
-          slug="introduction"
+          slug="index"
           basePath={POSTGRES_DOCS_BASE_PATH}
+          customType={customType}
         />
 
         <div className="-ml-[350px] w-full 3xl:ml-0">
@@ -47,4 +56,4 @@ const NeonDocsLayout = async ({ children }) => {
   );
 };
 
-export default NeonDocsLayout;
+export default NeonPostgresLayout;
