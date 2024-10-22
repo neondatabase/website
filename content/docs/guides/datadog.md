@@ -97,56 +97,6 @@ If any of the computes in your project are active, you should start seeing data 
   "description": "",
   "widgets": [
     {
-      "id": 7296782684811837,
-      "definition": {
-        "title": "CPU",
-        "title_size": "16",
-        "title_align": "left",
-        "show_legend": true,
-        "legend_layout": "auto",
-        "legend_columns": [
-          "avg",
-          "min",
-          "max",
-          "value",
-          "sum"
-        ],
-        "time": {},
-        "type": "timeseries",
-        "requests": [
-          {
-            "formulas": [
-              {
-                "alias": "Used",
-                "formula": "per_minute(query1)"
-              }
-            ],
-            "queries": [
-              {
-                "name": "query1",
-                "data_source": "metrics",
-                "query": "max:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_rate()"
-              }
-            ],
-            "response_format": "timeseries",
-            "style": {
-              "palette": "dog_classic",
-              "order_by": "values",
-              "line_type": "solid",
-              "line_width": "normal"
-            },
-            "display_type": "line"
-          }
-        ]
-      },
-      "layout": {
-        "x": 0,
-        "y": 0,
-        "width": 5,
-        "height": 2
-      }
-    },
-    {
       "id": 3831219857468963,
       "definition": {
         "title": "RAM",
@@ -216,9 +166,59 @@ If any of the computes in your project are active, you should start seeing data 
         ]
       },
       "layout": {
-        "x": 5,
+        "x": 0,
         "y": 0,
-        "width": 4,
+        "width": 6,
+        "height": 2
+      }
+    },
+    {
+      "id": 7296782684811837,
+      "definition": {
+        "title": "CPU",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Used",
+                "formula": "per_minute(query1)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_rate()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "width": 6,
         "height": 2
       }
     },
@@ -237,7 +237,6 @@ If any of the computes in your project are active, you should start seeing data 
           "value",
           "sum"
         ],
-        "time": {},
         "type": "timeseries",
         "requests": [
           {
@@ -287,7 +286,7 @@ If any of the computes in your project are active, you should start seeing data 
         "x": 0,
         "y": 2,
         "width": 6,
-        "height": 2
+        "height": 3
       }
     },
     {
@@ -305,7 +304,6 @@ If any of the computes in your project are active, you should start seeing data 
           "value",
           "sum"
         ],
-        "time": {},
         "type": "timeseries",
         "requests": [
           {
@@ -373,10 +371,59 @@ If any of the computes in your project are active, you should start seeing data 
         }
       },
       "layout": {
-        "x": 0,
-        "y": 4,
-        "width": 5,
+        "x": 6,
+        "y": 2,
+        "width": 6,
         "height": 3
+      }
+    },
+    {
+      "id": 1608572645458648,
+      "definition": {
+        "title": "Deadlocks",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Deadlocks",
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:neon_pg_stats_userdb{kind:deadlocks,$endpoint_id} by {datname}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 5,
+        "width": 6,
+        "height": 2
       }
     },
     {
@@ -394,7 +441,6 @@ If any of the computes in your project are active, you should start seeing data 
           "value",
           "sum"
         ],
-        "time": {},
         "type": "timeseries",
         "requests": [
           {
@@ -441,16 +487,16 @@ If any of the computes in your project are active, you should start seeing data 
         ]
       },
       "layout": {
-        "x": 5,
-        "y": 4,
-        "width": 5,
-        "height": 3
+        "x": 6,
+        "y": 5,
+        "width": 6,
+        "height": 2
       }
     },
     {
-      "id": 1608572645458648,
+      "id": 630770240665422,
       "definition": {
-        "title": "Deadlocks",
+        "title": "Local file cache hit rate",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
@@ -468,15 +514,26 @@ If any of the computes in your project are active, you should start seeing data 
           {
             "formulas": [
               {
-                "alias": "Deadlocks",
-                "formula": "query1"
+                "alias": "Cache hit rate",
+                "formula": "query1 / (query1 + query2)",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "fraction"
+                  }
+                }
               }
             ],
             "queries": [
               {
                 "name": "query1",
                 "data_source": "metrics",
-                "query": "max:neon_pg_stats_userdb{kind:deadlocks,$endpoint_id} by {datname}"
+                "query": "max:neon_lfc_hits{$endpoint_id}"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_misses{$endpoint_id}"
               }
             ],
             "response_format": "timeseries",
@@ -493,8 +550,78 @@ If any of the computes in your project are active, you should start seeing data 
       "layout": {
         "x": 0,
         "y": 7,
-        "width": 4,
-        "height": 2
+        "width": 6,
+        "height": 3
+      }
+    },
+    {
+      "id": 2040733022455075,
+      "definition": {
+        "title": "Working set size",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Local file cache size",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query2"
+              },
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "8192 * query1"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_cache_size_limit{$endpoint_id}"
+              },
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_approximate_working_set_size_windows{$endpoint_id} by {duration}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 6,
+        "y": 7,
+        "width": 6,
+        "height": 3
       }
     }
   ],
