@@ -144,8 +144,8 @@ Output:
 ```
 In this example:
 
-* {“name”: “Jane Doe”} is the original object.
-* {name} is the path that indicates the name property (or key).
+* `\{“name”: “Jane Doe”\}` is the original object.
+* `\{name\}` is the path that indicates the name property (or key).
 * “Jane Smith” is the new value to update.
 
 Therefore, the `jsonb_set()` set the value of the `name` key in the JSON object to “Jane Smith”.
