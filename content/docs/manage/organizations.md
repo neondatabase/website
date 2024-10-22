@@ -45,13 +45,13 @@ Here's a breakdown of what actions each role can take:
     <img src="/docs/manage/orgs_create_button.png" alt="create organization button" style={{ verticalAlign: 'middle', maxWidth: '100%' }} />
   </div>
 </div>
-<Tabs labels={["Free Plan","Paid plans"]}>
 
-<TabItem>
+### Free Plan
 
-<div style={{ display: 'flex', alignItems: 'center' }}>
+If you're on the Free Plan, you'll need to choose a paid plan for your organization (since organizations are a paid feature).
+
+<div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
-    If you're on the Free Plan, you'll need to choose a paid plan for your organization (since organizations are a paid feature).
 
     You'll be prompted to choose to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
 
@@ -63,9 +63,7 @@ Here's a breakdown of what actions each role can take:
   </div>
 </div>
 
-</TabItem>
-
-<TabItem>
+### Paid plans
 
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
@@ -80,16 +78,13 @@ Here's a breakdown of what actions each role can take:
   </div>
 </div>
 
-### Convert your personal account
+#### Convert your personal account
 
 Converting your personal account transfers all of your projects and billing to the new organization. Your personal account will switch to the Free Plan. This is a quick, one-time, one-way operation: everything in your personal account is transferred to your new organization instantly. There is no service disruption, no change to your connections, and no way to move resources back to your personal account after the conversion.
 
-### Create a new organization
+#### Create a new organization
 
 If you choose to create a new organization, you can decide which projects (if any) you want to [transfer](/docs/manage/orgs-project-transfer). First, you'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan — so note that you'll be billed for both your personal and organization accounts. This option is helpful if you want to keep personal projects separate while still requiring paid features like higher allowances or additional security.
-
-</TabItem>
-</Tabs>
 
 <Admonition type="note">
 Project transfers to an organization are one-way. You cannot move organization projects back to your personal account.
