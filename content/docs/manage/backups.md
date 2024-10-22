@@ -1,7 +1,7 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2024-10-04T13:13:13.778Z'
+updatedOn: '2024-10-21T14:14:21.659Z'
 ---
 
 Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
@@ -26,7 +26,7 @@ To dump a database from your Neon project, please refer to the `pg_dump` instruc
 
 ## Automate Postgres Backups with a GitHub Action
 
-These blog posts from Neon community members describe how you can schedule a backup to an AWS S3 storage bucket using a GitHub Action:
+These blog posts from Neon community members describe how you can schedule a backup to an Amazon S3 storage bucket using a GitHub Action:
 
 - [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://thenewstack.io/how-to-schedule-postgresql-backups-with-github-actions/)
 - [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/)
