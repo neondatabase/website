@@ -231,9 +231,9 @@ $ curl https://cloudy-otter-57.deno.dev/books
 
 To check the health of the deployment or modify settings, navigate to the [Project Overview](https://dash.deno.com/account/projects) page and select your project from the **Projects** list.
 
-### Deploying using Github
+### Deploying using GitHub
 
-When deploying a more complex Deno application, with custom build steps, you can use Deno's Github integration. The integration lets you link a Deno Deploy project to a GitHub repository. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/how-to-deploy).
+When deploying a more complex Deno application, with custom build steps, you can use Deno's GitHub integration. The integration lets you link a Deno Deploy project to a GitHub repository. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/how-to-deploy).
 
 ## Removing the example application and Neon project
 

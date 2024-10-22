@@ -40,7 +40,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
 
-    Sign up with your email, Github, Google, or other partner account.
+    Sign up with your email, GitHub, Google, or other partner account.
 
     For information about what's included with the free plan, see
     [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
@@ -255,7 +255,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
 
 ## Step 7 - Check your changes with Schema Diff
 
-After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
+After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a GitHub-style code-comparison tool used to visualize differences between different branch's databases.
 
 For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the main branch.
 

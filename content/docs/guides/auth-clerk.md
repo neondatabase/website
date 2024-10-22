@@ -79,7 +79,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 ### Create a Clerk application
 
 1. Log in to your Clerk account and navigate to the [Dashboard](https://dashboard.clerk.dev/). From the left sidebar, select `Create Application` to create a new app.
-2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `Github` as allowed sign-in methods.
+2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `GitHub` as allowed sign-in methods.
 
 ### Retrieve your API keys
 

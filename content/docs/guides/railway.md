@@ -139,7 +139,7 @@ You can visit the GitHub repository to verify that your code has been pushed suc
 
 ### Creating a new Railway project
 
-Log in to your Railway account and navigate to the dashboard. Click on the `New Project` button and select the `Deploy from Github repo` option. Pick the repository you created above, which sets off a Railway deployment.
+Log in to your Railway account and navigate to the dashboard. Click on the `New Project` button and select the `Deploy from GitHub repo` option. Pick the repository you created above, which sets off a Railway deployment.
 
 Railway automatically figures out the type of application you're deploying and sets up the necessary build and start commands. However, we still need to add the `DATABASE_URL` environment variable to connect to our Neon database.
 

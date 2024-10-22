@@ -280,7 +280,7 @@ const Home: NextPage = () => {
               target="_blank"
               href="https://github.com/wundergraph/wundergraph"
             >
-              Github
+              GitHub
             </a>{' '}
             to learn more about WunderGraph.
           </p>
