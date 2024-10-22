@@ -13,6 +13,7 @@ The general purpose of read replicas is to segregate read-only work from your pr
 - Distributing read requests to achieve higher throughput
 - Providing read-only data access to specific users or applications
 
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over read replica compute usage.
 
 ## Prerequisites
 
