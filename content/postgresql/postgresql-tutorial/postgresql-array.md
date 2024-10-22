@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-arr
 ogImage: ""
 updatedOn: "2024-02-01T12:38:39+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UUID Data Type"
   slug: "postgresql-tutorial/postgresql-uuid"
-next_page: 
+nextLink: 
   title: "PostgreSQL hstore"
   slug: "postgresql-tutorial/postgresql-hstore"
 ---

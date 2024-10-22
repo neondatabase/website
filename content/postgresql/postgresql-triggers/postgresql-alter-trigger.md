@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-alt
 ogImage: "/postgresqltutorial/PostgreSQL-ALTER-TRIGGER-example.png"
 updatedOn: "2024-03-30T03:14:14+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP TRIGGER Statement"
   slug: "postgresql-triggers/postgresql-drop-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL BEFORE INSERT Trigger"
   slug: "postgresql-triggers/postgresql-before-insert-trigger"
 ---

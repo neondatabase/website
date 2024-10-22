@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: ""
 updatedOn: "2024-03-22T02:28:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL STRING_AGG Function"
   slug: "postgresql-aggregate-functions/postgresql-string_agg-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL Date Functions"
   slug: "postgresql-aggregate-functions/../postgresql-date-functions"
 ---

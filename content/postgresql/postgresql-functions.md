@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-functions/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png"
 updatedOn: "2021-08-11T03:08:08+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL pg_terminate_backend() Function"
   slug: "postgresql-administration/postgresql-pg_terminate_backend"
-next_page: 
+nextLink: 
   title: "PostgreSQL Aggregate Functions"
   slug: "postgresql-aggregate-functions"
 ---

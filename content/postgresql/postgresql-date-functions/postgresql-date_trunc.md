@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: "/postgresqltutorial/rental-table.png"
 updatedOn: "2024-03-22T01:11:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL AT TIME ZONE Operator"
   slug: "postgresql-date-functions/postgresql-at-time-zone"
-next_page: 
+nextLink: 
   title: "PostgreSQL ISFINITE() Function"
   slug: "postgresql-date-functions/postgresql-isfinite"
 ---

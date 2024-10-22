@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-post
 ogImage: ""
 updatedOn: "2024-05-14T14:32:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC"
   slug: "postgresql-jdbc/"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Creating Tables"
   slug: "postgresql-jdbc/create-tables"
 ---

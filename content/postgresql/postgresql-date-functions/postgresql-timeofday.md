@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-20T04:01:17+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ISFINITE() Function"
   slug: "postgresql-date-functions/postgresql-isfinite"
-next_page: 
+nextLink: 
   title: "PostgreSQL PG_SLEEP() Function"
   slug: "postgresql-date-functions/postgresql-pg_sleep"
 ---

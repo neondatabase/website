@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-18T08:18:38+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Reset Forgotten Password For postgres User"
   slug: "postgresql-administration/postgresql-reset-password"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE TABLESPACE"
   slug: "postgresql-administration/postgresql-create-tablespace"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exp
 ogImage: "/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png"
 updatedOn: "2024-02-01T09:33:46+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CAST: Convert a value of One Type to Another"
   slug: "postgresql-tutorial/postgresql-cast"
-next_page: 
+nextLink: 
   title: "PostgreSQL DISTINCT ON"
   slug: "postgresql-tutorial/postgresql-distinct-on"
 ---

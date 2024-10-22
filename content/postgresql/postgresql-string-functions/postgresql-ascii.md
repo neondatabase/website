@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/PostgreSQL-ASCII-function-example.png"
 updatedOn: "2024-01-29T01:37:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL String Functions"
   slug: "postgresql-string-functions/"
-next_page: 
+nextLink: 
   title: "PostgreSQL CHR() Function"
   slug: "postgresql-string-functions/postgresql-chr"
 ---

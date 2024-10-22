@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-def
 ogImage: ""
 updatedOn: "2024-03-15T04:07:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Not-Null Constraint"
   slug: "postgresql-tutorial/postgresql-not-null-constraint"
-next_page: 
+nextLink: 
   title: "PostgreSQL Boolean Data Type with Practical Examples"
   slug: "postgresql-tutorial/postgresql-boolean"
 ---

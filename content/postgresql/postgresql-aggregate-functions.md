@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/aggregate-functions.png"
 updatedOn: "2024-03-20T01:48:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Functions"
   slug: "postgresql-functions"
-next_page: 
+nextLink: 
   title: "PostgreSQL AVG Function"
   slug: "postgresql-aggregate-functions/postgresql-avg-function"
 ---

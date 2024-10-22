@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-all
 ogImage: ""
 updatedOn: "2024-07-01T01:08:50+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ANY Operator"
   slug: "postgresql-tutorial/postgresql-any"
-next_page: 
+nextLink: 
   title: "PostgreSQL EXISTS Operator"
   slug: "postgresql-tutorial/postgresql-exists"
 ---

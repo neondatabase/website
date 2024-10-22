@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-BLOB.png"
 updatedOn: "2024-04-20T13:44:59+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Calling Stored Procedures"
   slug: "postgresql-php/call-stored-procedures"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Delete Data From a Table"
   slug: "postgresql-php/delete"
 ---

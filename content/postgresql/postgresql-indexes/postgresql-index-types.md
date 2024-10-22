@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-inde
 ogImage: ""
 updatedOn: "2024-02-01T08:10:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL List Indexes"
   slug: "postgresql-indexes/postgresql-list-indexes"
-next_page: 
+nextLink: 
   title: "PostgreSQL Full Text Search"
   slug: "postgresql-indexes/postgresql-full-text-search"
 ---

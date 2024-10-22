@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upd
 ogImage: ""
 updatedOn: "2024-01-22T13:47:38+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL INSERT Multiple Rows"
   slug: "postgresql-tutorial/postgresql-insert-multiple-rows"
-next_page: 
+nextLink: 
   title: "PostgreSQL UPDATE Join"
   slug: "postgresql-tutorial/postgresql-update-join"
 ---

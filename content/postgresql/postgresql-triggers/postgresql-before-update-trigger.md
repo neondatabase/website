@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-bef
 ogImage: ""
 updatedOn: "2024-03-28T10:18:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL AFTER INSERT Trigger"
   slug: "postgresql-triggers/postgresql-after-insert-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL AFTER UPDATE Trigger"
   slug: "postgresql-triggers/postgresql-after-update-trigger"
 ---

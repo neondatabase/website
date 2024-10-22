@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: "/postgresqltutorial/customer-and-payment-tables.png"
 updatedOn: "2024-02-16T14:25:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ABS() Function"
   slug: "postgresql-math-functions/postgresql-abs"
-next_page: 
+nextLink: 
   title: "PostgreSQL CBRT() Function"
   slug: "postgresql-math-functions/postgresql-cbrt"
 ---

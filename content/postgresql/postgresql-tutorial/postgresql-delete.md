@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-del
 ogImage: ""
 updatedOn: "2024-01-23T01:09:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UPDATE Join"
   slug: "postgresql-tutorial/postgresql-update-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL DELETE JOIN"
   slug: "postgresql-tutorial/postgresql-delete-join"
 ---

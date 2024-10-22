@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select
 ogImage: ""
 updatedOn: "2024-03-19T01:05:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Variables"
   slug: "postgresql-plpgsql/plpgsql-variables"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Row Types"
   slug: "postgresql-plpgsql/pl-pgsql-row-types"
 ---

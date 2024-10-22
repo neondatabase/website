@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png"
 updatedOn: "2020-07-10T04:55:06+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CUME_DIST Function"
   slug: "postgresql-window-function/postgresql-cume_dist-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL FIRST_VALUE Function"
   slug: "postgresql-window-function/postgresql-first_value-function"
 ---

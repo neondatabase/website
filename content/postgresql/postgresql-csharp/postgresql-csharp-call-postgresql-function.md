@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-cshar
 ogImage: ""
 updatedOn: "2024-05-21T07:40:03+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL C#: Transaction"
   slug: "postgresql-csharp/postgresql-csharp-transaction"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#: Call a Stored Procedure"
   slug: "postgresql-csharp/postgresql-csharp-call-a-stored-procedure"
 ---

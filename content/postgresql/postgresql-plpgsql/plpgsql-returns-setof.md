@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/film_table.png"
 updatedOn: "2024-03-22T08:26:57+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Develop a PL/pgSQL Function That Returns a Table"
   slug: "postgresql-plpgsql/plpgsql-function-returns-a-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL Drop Function"
   slug: "postgresql-plpgsql/postgresql-drop-function"
 ---

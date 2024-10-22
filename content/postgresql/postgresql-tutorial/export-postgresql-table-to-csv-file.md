@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/export-postgre
 ogImage: "/postgresqltutorial/posgresql-import-csv.jpg"
 updatedOn: "2024-02-01T14:54:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Import CSV File Into PostgreSQL Table"
   slug: "postgresql-tutorial/import-csv-file-into-posgresql-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL Data Types"
   slug: "postgresql-tutorial/postgresql-data-types"
 ---

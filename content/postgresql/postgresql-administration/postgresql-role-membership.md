@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-22T02:54:15+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REVOKE Statement"
   slug: "postgresql-administration/postgresql-revoke"
-next_page: 
+nextLink: 
   title: "PostgreSQL SET ROLE Statement"
   slug: "postgresql-administration/postgresql-set-role"
 ---

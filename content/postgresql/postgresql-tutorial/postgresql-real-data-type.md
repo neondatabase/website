@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rea
 ogImage: ""
 updatedOn: "2024-04-19T03:13:41+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DOUBLE PRECISION Data Type"
   slug: "postgresql-tutorial/postgresql-double-precision-type"
-next_page: 
+nextLink: 
   title: "PostgreSQL Integer Data Types"
   slug: "postgresql-tutorial/postgresql-integer"
 ---

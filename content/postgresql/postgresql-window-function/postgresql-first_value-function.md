@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png"
 updatedOn: "2020-07-10T04:55:53+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DENSE_RANK Function"
   slug: "postgresql-window-function/postgresql-dense_rank-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL LAG Function"
   slug: "postgresql-window-function/postgresql-lag-function"
 ---

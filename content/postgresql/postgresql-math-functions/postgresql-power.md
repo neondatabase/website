@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-17T15:07:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LOG() Function"
   slug: "postgresql-math-functions/postgresql-log"
-next_page: 
+nextLink: 
   title: "PostgreSQL PI() Function"
   slug: "postgresql-math-functions/postgresql-pi-function"
 ---

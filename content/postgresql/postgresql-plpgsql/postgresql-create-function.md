@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-crea
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-03-22T06:51:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Exception"
   slug: "postgresql-plpgsql/postgresql-exception"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Function Parameter Modes: IN, OUT, INOUT"
   slug: "postgresql-plpgsql/plpgsql-function-parameters"
 ---

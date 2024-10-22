@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-dro
 ogImage: "/postgresqltutorial/PostgreSQL-DROP-Trigger-Example.png"
 updatedOn: "2024-03-30T03:14:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE TRIGGER Statement"
   slug: "postgresql-triggers/creating-first-trigger-postgresql"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALTER TRIGGER Statement"
   slug: "postgresql-triggers/postgresql-alter-trigger"
 ---

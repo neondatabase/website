@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-window-function/postgre
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png"
 updatedOn: "2024-02-15T02:30:55+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LAG Function"
   slug: "postgresql-window-function/postgresql-lag-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL LEAD Function"
   slug: "postgresql-window-function/postgresql-lead-function"
 ---

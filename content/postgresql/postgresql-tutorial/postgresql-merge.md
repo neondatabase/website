@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-mer
 ogImage: ""
 updatedOn: "2024-03-27T06:10:50+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UPSERT using INSERT ON CONFLICT Statement"
   slug: "postgresql-tutorial/postgresql-upsert"
-next_page: 
+nextLink: 
   title: "PostgreSQL Transaction"
   slug: "postgresql-tutorial/postgresql-transaction"
 ---

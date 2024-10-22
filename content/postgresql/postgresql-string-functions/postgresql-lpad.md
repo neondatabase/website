@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer-and-payment-tables.png"
 updatedOn: "2024-01-28T02:20:39+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RIGHT() Function"
   slug: "postgresql-string-functions/postgresql-right"
-next_page: 
+nextLink: 
   title: "PostgreSQL RPAD() Function"
   slug: "postgresql-string-functions/postgresql-rpad"
 ---

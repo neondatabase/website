@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-crea
 ogImage: ""
 updatedOn: "2024-02-01T13:52:00+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Drop Function"
   slug: "postgresql-plpgsql/postgresql-drop-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP PROCEDURE Statement"
   slug: "postgresql-plpgsql/postgresql-drop-procedure"
 ---

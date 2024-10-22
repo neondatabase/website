@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/payment-table.png"
 updatedOn: "2024-01-26T03:46:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MIN() Function"
   slug: "postgresql-aggregate-functions/postgresql-min-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL ARRAY_AGG Function"
   slug: "postgresql-aggregate-functions/postgresql-array_agg"
 ---

@@ -62,7 +62,7 @@ const Post = ({
       )}
     >
       {breadcrumbs.length > 0 && (
-        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
+        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} isPostgresPost />
       )}
       {isChangelog ? (
         <Changelog currentSlug={currentSlug} items={changelogPosts} />

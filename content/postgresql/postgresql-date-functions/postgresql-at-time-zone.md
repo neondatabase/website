@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-21T09:22:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MAKE_INTERVAL() Function"
   slug: "postgresql-date-functions/postgresql-make_interval"
-next_page: 
+nextLink: 
   title: "PostgreSQL DATE_TRUNC() Function"
   slug: "postgresql-date-functions/postgresql-date_trunc"
 ---

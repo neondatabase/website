@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ful
 ogImage: "/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png"
 updatedOn: "2024-01-18T05:31:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Self-Join"
   slug: "postgresql-tutorial/postgresql-self-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL Cross Join"
   slug: "postgresql-tutorial/postgresql-cross-join"
 ---

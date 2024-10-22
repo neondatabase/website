@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-16T14:56:59+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RADIANS() Function"
   slug: "postgresql-math-functions/postgresql-radians"
-next_page: 
+nextLink: 
   title: "PostgreSQL ROUND() Function"
   slug: "postgresql-math-functions/postgresql-round"
 ---

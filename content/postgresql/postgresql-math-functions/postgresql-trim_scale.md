@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-18T03:02:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TRUNC() Function"
   slug: "postgresql-math-functions/postgresql-trunc"
-next_page: 
+nextLink: 
   title: "PostgreSQL WIDTH_BUCKET() Function"
   slug: "postgresql-math-functions/postgresql-width_bucket"
 ---

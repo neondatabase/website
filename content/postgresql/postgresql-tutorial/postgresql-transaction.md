@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-tra
 ogImage: "/postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png"
 updatedOn: "2024-02-13T15:07:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MERGE Statement"
   slug: "postgresql-tutorial/postgresql-merge"
-next_page: 
+nextLink: 
   title: "Import CSV File Into PostgreSQL Table"
   slug: "postgresql-tutorial/import-csv-file-into-posgresql-table"
 ---

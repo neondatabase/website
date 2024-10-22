@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-24T11:42:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_typeof() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_typeof"
-next_page: 
+nextLink: 
   title: "PostgreSQL jsonb_populate_record() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_populate_record"
 ---

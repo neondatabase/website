@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-aft
 ogImage: ""
 updatedOn: "2024-03-28T09:39:21+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BEFORE DELETE Trigger"
   slug: "postgresql-triggers/postgresql-before-delete-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL INSTEAD OF Triggers"
   slug: "postgresql-triggers/postgresql-instead-of-triggers"
 ---

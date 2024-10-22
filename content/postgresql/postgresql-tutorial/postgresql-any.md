@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any
 ogImage: ""
 updatedOn: "2024-04-24T06:18:58+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Correlated Subquery"
   slug: "postgresql-tutorial/postgresql-correlated-subquery"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALL Operator"
   slug: "postgresql-tutorial/postgresql-all"
 ---

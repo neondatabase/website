@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loo
 ogImage: "/postgresqltutorial/plpgsql-FOR-loop.png"
 updatedOn: "2024-03-19T04:07:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL While Loop"
   slug: "postgresql-plpgsql/pl-pgsql-while-loop"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Exit Statement"
   slug: "postgresql-plpgsql/plpgsql-exit"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ins
 ogImage: ""
 updatedOn: "2024-01-22T13:22:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL INSERT"
   slug: "postgresql-tutorial/postgresql-insert"
-next_page: 
+nextLink: 
   title: "PostgreSQL UPDATE"
   slug: "postgresql-tutorial/postgresql-update"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/postgresql-pytho
 ogImage: ""
 updatedOn: "2024-01-29T13:45:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Transactions"
   slug: "postgresql-python/transaction"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Call Stored Procedures"
   slug: "postgresql-python/call-stored-procedures"
 ---

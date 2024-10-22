@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-28T11:13:28+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LOWER() Function"
   slug: "postgresql-string-functions/postgresql-lower"
-next_page: 
+nextLink: 
   title: "PostgreSQL RTRIM() Function"
   slug: "postgresql-string-functions/postgresql-rtrim"
 ---

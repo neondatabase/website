@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/blob/"
 ogImage: "/postgresqltutorial/parts_part_drawings_tables.png"
 updatedOn: "2024-04-20T13:39:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Call Stored Procedures"
   slug: "postgresql-python/call-stored-procedures"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Delete Data from Tables"
   slug: "postgresql-python/delete"
 ---

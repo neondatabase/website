@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/delete/"
 ogImage: ""
 updatedOn: "2024-05-19T08:40:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Handling Binary Data"
   slug: "postgresql-python/blob"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC"
   slug: "postgresql-python/../postgresql-jdbc"
 ---

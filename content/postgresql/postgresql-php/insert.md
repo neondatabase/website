@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/insert/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png"
 updatedOn: "2022-02-09T15:05:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Create New Tables"
   slug: "postgresql-php/create-tables"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Updating Data In a Table"
   slug: "postgresql-php/update"
 ---

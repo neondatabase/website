@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "https://www.mysqltutorial.org//postgresqltutorial/products.svg"
 updatedOn: "2024-01-28T13:56:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REVERSE() Function"
   slug: "postgresql-string-functions/postgresql-reverse"
-next_page: 
+nextLink: 
   title: "PostgreSQL LENGTH() Function"
   slug: "postgresql-string-functions/postgresql-length-function"
 ---

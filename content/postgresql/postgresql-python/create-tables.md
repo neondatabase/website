@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/create-tables/"
 ogImage: "/postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png"
 updatedOn: "2024-05-19T08:12:15+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Connect to PostgreSQL Database Server"
   slug: "postgresql-python/connect"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Insert Data Into a Table"
   slug: "postgresql-python/insert"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop
 ogImage: ""
 updatedOn: "2024-02-07T14:14:09+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Returns SetOf"
   slug: "postgresql-plpgsql/plpgsql-returns-setof"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE PROCEDURE"
   slug: "postgresql-plpgsql/postgresql-create-procedure"
 ---

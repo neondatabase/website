@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hav
 ogImage: "/postgresqltutorial/postgresql-having.svg"
 updatedOn: "2024-01-17T08:04:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL GROUP BY"
   slug: "postgresql-tutorial/postgresql-group-by"
-next_page: 
+nextLink: 
   title: "PostgreSQL UNION"
   slug: "postgresql-tutorial/postgresql-union"
 ---

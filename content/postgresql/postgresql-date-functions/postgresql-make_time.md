@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-25T02:56:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MAKE_DATE() Function"
   slug: "postgresql-date-functions/postgresql-make_date"
-next_page: 
+nextLink: 
   title: "PostgreSQL AGE() Function"
   slug: "postgresql-date-functions/postgresql-age"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/PostgreSQL-STRING_AGG-function-email-list-example.png"
 updatedOn: "2024-01-26T04:07:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BOOL_AND() Function"
   slug: "postgresql-aggregate-functions/postgresql-bool_and"
-next_page: 
+nextLink: 
   title: "PostgreSQL BOOL_OR() Function"
   slug: "postgresql-aggregate-functions/postgresql-bool_or"
 ---

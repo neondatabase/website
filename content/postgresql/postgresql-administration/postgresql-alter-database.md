@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-12T12:18:32+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE DATABASE"
   slug: "postgresql-administration/postgresql-create-database"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP DATABASE"
   slug: "postgresql-administration/postgresql-drop-database"
 ---

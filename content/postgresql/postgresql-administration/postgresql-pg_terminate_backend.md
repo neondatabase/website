@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-22T13:20:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Restart PostgreSQL on Windows"
   slug: "postgresql-administration/restart-postgresql-windows"
-next_page: 
+nextLink: 
   title: "PostgreSQL Functions"
   slug: "postgresql-administration/../postgresql-functions"
 ---

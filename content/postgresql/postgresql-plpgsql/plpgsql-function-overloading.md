@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-functio
 ogImage: ""
 updatedOn: "2024-02-07T13:59:52+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Function Parameter Modes: IN, OUT, INOUT"
   slug: "postgresql-plpgsql/plpgsql-function-parameters"
-next_page: 
+nextLink: 
   title: "How to Develop a PL/pgSQL Function That Returns a Table"
   slug: "postgresql-plpgsql/plpgsql-function-returns-a-table"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-byt
 ogImage: ""
 updatedOn: "2024-04-20T13:26:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL XML Data Type"
   slug: "postgresql-tutorial/postgresql-xml-data-type"
-next_page: 
+nextLink: 
   title: "PostgreSQL Composite Types"
   slug: "postgresql-tutorial/postgresql-composite-types"
 ---

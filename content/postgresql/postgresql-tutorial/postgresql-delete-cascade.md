@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-del
 ogImage: ""
 updatedOn: "2024-02-23T01:14:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Foreign Key"
   slug: "postgresql-tutorial/postgresql-foreign-key"
-next_page: 
+nextLink: 
   title: "PostgreSQL CHECK Constraints"
   slug: "postgresql-tutorial/postgresql-check-constraint"
 ---

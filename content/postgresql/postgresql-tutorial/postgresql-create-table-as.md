@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cre
 ogImage: "/postgresqltutorial/film_and_film_category_tables.png"
 updatedOn: "2024-02-13T13:42:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SELECT INTO"
   slug: "postgresql-tutorial/postgresql-select-into"
-next_page: 
+nextLink: 
   title: "Using PostgreSQL SERIAL to Create Auto-increment Column"
   slug: "postgresql-tutorial/postgresql-serial"
 ---

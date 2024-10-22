@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-01T08:32:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Show Databases"
   slug: "postgresql-administration/postgresql-show-databases"
-next_page: 
+nextLink: 
   title: "PostgreSQL Describe Table"
   slug: "postgresql-administration/postgresql-describe-table"
 ---

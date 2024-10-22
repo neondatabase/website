@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/create-tables/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-Create-Tables.png"
 updatedOn: "2022-02-09T14:58:21+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Connect to PostgreSQL Database Using PDO"
   slug: "postgresql-php/connect"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Insert Data Into Tables"
   slug: "postgresql-php/insert"
 ---

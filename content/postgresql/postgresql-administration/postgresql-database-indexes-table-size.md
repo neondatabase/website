@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-19T04:10:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Copy Database Made Easy"
   slug: "postgresql-administration/postgresql-copy-database"
-next_page: 
+nextLink: 
   title: "How to Change the Owner of a PostgreSQL Database"
   slug: "postgresql-administration/postgres-change-database-owner"
 ---

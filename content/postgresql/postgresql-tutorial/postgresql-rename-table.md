@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ren
 ogImage: ""
 updatedOn: "2024-02-19T04:29:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALTER TABLE"
   slug: "postgresql-tutorial/postgresql-alter-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL ADD COLUMN:  Add One or More Columns to a Table"
   slug: "postgresql-tutorial/postgresql-add-column"
 ---

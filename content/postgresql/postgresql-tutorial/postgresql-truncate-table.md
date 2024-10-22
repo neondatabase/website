@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-tru
 ogImage: ""
 updatedOn: "2024-01-25T02:04:03+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP TABLE"
   slug: "postgresql-tutorial/postgresql-drop-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL Temporary Table"
   slug: "postgresql-tutorial/postgresql-temporary-table"
 ---

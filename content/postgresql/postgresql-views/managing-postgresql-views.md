@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/managing-postgres
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-03-16T04:07:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Views"
   slug: "postgresql-views/"
-next_page: 
+nextLink: 
   title: "PostgreSQL Drop View"
   slug: "postgresql-views/postgresql-drop-view"
 ---

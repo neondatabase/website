@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-20T06:42:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Uptime"
   slug: "postgresql-administration/postgresql-uptime"
-next_page: 
+nextLink: 
   title: "How to Restart PostgreSQL on Ubuntu"
   slug: "postgresql-administration/postgresql-restart-ubuntu"
 ---

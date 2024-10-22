@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/PostgreSQL-RANK-function-sample-table.png"
 updatedOn: "2020-07-10T04:57:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PERCENT_RANK Function"
   slug: "postgresql-window-function/postgresql-percent_rank-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL ROW_NUMBER Function"
   slug: "postgresql-window-function/postgresql-row_number"
 ---

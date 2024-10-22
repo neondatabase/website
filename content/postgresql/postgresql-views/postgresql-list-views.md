@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-list-v
 ogImage: ""
 updatedOn: "2024-03-16T08:19:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Recursive View"
   slug: "postgresql-views/postgresql-recursive-view"
-next_page: 
+nextLink: 
   title: "PostgreSQL Indexes"
   slug: "postgresql-views/../postgresql-indexes"
 ---

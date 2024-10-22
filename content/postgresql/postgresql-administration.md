@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/"
 ogImage: ""
 updatedOn: "2024-02-22T07:13:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JSON Index"
   slug: "postgresql-indexes/postgresql-json-index"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE DATABASE"
   slug: "postgresql-administration/postgresql-create-database"
 ---

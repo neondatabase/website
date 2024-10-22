@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rig
 ogImage: "/postgresqltutorial/PostgreSQL-Join-Right-Join.png"
 updatedOn: "2024-01-18T03:45:01+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LEFT JOIN"
   slug: "postgresql-tutorial/postgresql-left-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL Self-Join"
   slug: "postgresql-tutorial/postgresql-self-join"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inn
 ogImage: "/postgresqltutorial/PostgreSQL-Join-Inner-Join.png"
 updatedOn: "2024-01-17T15:32:06+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Table Aliases"
   slug: "postgresql-tutorial/postgresql-alias"
-next_page: 
+nextLink: 
   title: "PostgreSQL LEFT JOIN"
   slug: "postgresql-tutorial/postgresql-left-join"
 ---

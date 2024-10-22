@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-eve
 ogImage: ""
 updatedOn: "2024-03-29T06:08:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to List All Triggers in PostgreSQL"
   slug: "postgresql-triggers/how-to-list-all-triggers-in-postgresql"
-next_page: 
+nextLink: 
   title: "Creating a PostgreSQL Trigger with a When Condition"
   slug: "postgresql-triggers/postgresql-trigger-when-condition"
 ---

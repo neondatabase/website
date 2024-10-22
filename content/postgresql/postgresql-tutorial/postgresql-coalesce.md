@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coa
 ogImage: ""
 updatedOn: "2024-02-01T03:59:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CASE"
   slug: "postgresql-tutorial/postgresql-case"
-next_page: 
+nextLink: 
   title: "PostgreSQL ISNULL"
   slug: "postgresql-tutorial/postgresql-isnull"
 ---

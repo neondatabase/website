@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-17T14:02:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SCALE() Function"
   slug: "postgresql-math-functions/postgresql-scale"
-next_page: 
+nextLink: 
   title: "PostgreSQL TRUNC() Function"
   slug: "postgresql-math-functions/postgresql-trunc"
 ---

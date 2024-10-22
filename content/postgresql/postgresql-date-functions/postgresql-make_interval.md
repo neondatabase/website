@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-25T05:04:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JUSTIFY_INTERVAL() Function"
   slug: "postgresql-date-functions/postgresql-justify_interval"
-next_page: 
+nextLink: 
   title: "PostgreSQL AT TIME ZONE Operator"
   slug: "postgresql-date-functions/postgresql-at-time-zone"
 ---

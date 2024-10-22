@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/film-film_category-category-tables.png"
 updatedOn: "2024-01-26T03:16:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MAX Function"
   slug: "postgresql-aggregate-functions/postgresql-max-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL SUM Function"
   slug: "postgresql-aggregate-functions/postgresql-sum-function"
 ---

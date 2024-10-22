@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-jso
 ogImage: ""
 updatedOn: "2024-02-23T10:29:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL hstore"
   slug: "postgresql-tutorial/postgresql-hstore"
-next_page: 
+nextLink: 
   title: "A Look at PostgreSQL User-defined Data Types"
   slug: "postgresql-tutorial/postgresql-user-defined-data-types"
 ---

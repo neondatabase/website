@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to
 ogImage: ""
 updatedOn: "2024-02-07T02:29:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PL/pgSQL"
   slug: "postgresql-plpgsql/"
-next_page: 
+nextLink: 
   title: "Dollar-Quoted String Constants"
   slug: "postgresql-plpgsql/dollar-quoted-string-constants"
 ---

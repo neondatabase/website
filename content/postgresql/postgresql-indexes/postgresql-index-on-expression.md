@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-inde
 ogImage: "/postgresqltutorial/customer-table.png"
 updatedOn: "2024-02-28T13:11:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UNIQUE Index"
   slug: "postgresql-indexes/postgresql-unique-index"
-next_page: 
+nextLink: 
   title: "PostgreSQL Partial Index"
   slug: "postgresql-indexes/postgresql-partial-index"
 ---

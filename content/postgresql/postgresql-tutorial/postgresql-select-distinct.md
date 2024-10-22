@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sel
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-04-19T08:05:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ORDER BY"
   slug: "postgresql-tutorial/postgresql-order-by"
-next_page: 
+nextLink: 
   title: "PostgreSQL WHERE"
   slug: "postgresql-tutorial/postgresql-where"
 ---

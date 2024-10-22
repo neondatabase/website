@@ -5,6 +5,9 @@ import Post from 'components/pages/doc/post';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import { getSidebar } from 'utils/api-postgresql';
+import { getBreadcrumbs } from 'utils/get-breadcrumbs';
+import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 import {
@@ -45,12 +48,12 @@ export async function generateMetadata({ params }) {
 
   if (!post) return notFound();
 
-  const title = post?.data?.title || '';
+  const title = post?.data?.page_title || '';
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
-    title: `${title} - Neon Docs`,
-    description: post.excerpt,
+    title: `${title} - PostgreSQL Tutorial`,
+    description: post?.data?.page_description || post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
@@ -66,6 +69,11 @@ const PostgresTutorial = async ({ params }) => {
   const currentSlug = slug.join('/');
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
+
+  const sidebar = getSidebar();
+  const flatSidebar = await getFlatSidebar(sidebar);
+
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
 
   const navigationLinks = getNavigationLinks(currentSlug);
   const fileOriginPath = `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
@@ -95,7 +103,7 @@ const PostgresTutorial = async ({ params }) => {
       <Post
         content={content}
         data={data}
-        breadcrumbs={[]}
+        breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         navigationLinksPrefix="/postgresql/"
         currentSlug={currentSlug}

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-23T14:26:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_path_query_first() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_path_query_first"
-next_page: 
+nextLink: 
   title: "PostgreSQL JSONB Operators"
   slug: "postgresql-json-functions/postgresql-jsonb-operators"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-v
 ogImage: "/postgresqltutorial/film-film_category-category-tables.png"
 updatedOn: "2024-03-16T04:09:52+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE VIEW"
   slug: "postgresql-views/managing-postgresql-views"
-next_page: 
+nextLink: 
   title: "Creating PostgreSQL Updatable Views"
   slug: "postgresql-views/postgresql-updatable-views"
 ---

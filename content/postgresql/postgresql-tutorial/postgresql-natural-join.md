@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nat
 ogImage: "/postgresqltutorial/city.png"
 updatedOn: "2024-02-02T02:29:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Cross Join"
   slug: "postgresql-tutorial/postgresql-cross-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL GROUP BY"
   slug: "postgresql-tutorial/postgresql-group-by"
 ---

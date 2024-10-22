@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-01-31T11:04:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Row-Level Security"
   slug: "postgresql-administration/postgresql-row-level-security"
-next_page: 
+nextLink: 
   title: "How to Change the Password of a PostgreSQL User"
   slug: "postgresql-administration/postgresql-change-password"
 ---

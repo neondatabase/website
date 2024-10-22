@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-27T13:51:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TRIM() Function"
   slug: "postgresql-string-functions/postgresql-trim-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL LOWER() Function"
   slug: "postgresql-string-functions/postgresql-lower"
 ---

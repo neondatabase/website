@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-01-26T09:41:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CURRENT_DATE Function"
   slug: "postgresql-date-functions/postgresql-current_date"
-next_page: 
+nextLink: 
   title: "PostgreSQL CURRENT_TIMESTAMP Function"
   slug: "postgresql-date-functions/postgresql-current_timestamp"
 ---

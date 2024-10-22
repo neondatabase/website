@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-
 ogImage: ""
 updatedOn: "2024-03-19T02:14:47+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Row Types"
   slug: "postgresql-plpgsql/pl-pgsql-row-types"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Constants"
   slug: "postgresql-plpgsql/plpgsql-constants"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-29T01:48:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LEFT() Function"
   slug: "postgresql-string-functions/postgresql-left"
-next_page: 
+nextLink: 
   title: "PostgreSQL LPAD() Function"
   slug: "postgresql-string-functions/postgresql-lpad"
 ---

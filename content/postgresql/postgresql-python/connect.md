@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/connect/"
 ogImage: ""
 updatedOn: "2024-05-19T08:11:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python"
   slug: "postgresql-python/"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Create Tables"
   slug: "postgresql-python/create-tables"
 ---

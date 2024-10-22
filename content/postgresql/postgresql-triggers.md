@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/"
 ogImage: ""
 updatedOn: "2024-04-10T15:08:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Cursor"
   slug: "postgresql-plpgsql/plpgsql-cursor"
-next_page: 
+nextLink: 
   title: "Introduction to PostgreSQL Trigger"
   slug: "postgresql-triggers/introduction-postgresql-trigger"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/PostgreSQL-ALTER-SCHEMA-change-owner-example.png"
 updatedOn: "2024-02-12T13:22:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE SCHEMA"
   slug: "postgresql-administration/postgresql-create-schema"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP SCHEMA Statement"
   slug: "postgresql-administration/postgresql-drop-schema"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-01-17T02:52:11+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FETCH"
   slug: "postgresql-tutorial/postgresql-fetch"
-next_page: 
+nextLink: 
   title: "PostgreSQL BETWEEN"
   slug: "postgresql-tutorial/postgresql-between"
 ---

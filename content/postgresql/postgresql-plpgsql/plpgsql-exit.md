@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/"
 ogImage: ""
 updatedOn: "2024-03-19T04:05:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL For Loop"
   slug: "postgresql-plpgsql/plpgsql-for-loop"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Continue Statement"
   slug: "postgresql-plpgsql/pl-pgsql-continue"
 ---

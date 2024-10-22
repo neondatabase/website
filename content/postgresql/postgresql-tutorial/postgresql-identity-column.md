@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ide
 ogImage: "/postgresqltutorial/PostgreSQL-identity-column-generated-as-always-example.png"
 updatedOn: "2024-02-01T09:08:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Sequences"
   slug: "postgresql-tutorial/postgresql-sequences"
-next_page: 
+nextLink: 
   title: "PostgreSQL Generated Columns"
   slug: "postgresql-tutorial/postgresql-generated-columns"
 ---

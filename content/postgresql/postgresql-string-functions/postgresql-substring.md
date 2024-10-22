@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/PostgreSQL-substring-function-example.jpg"
 updatedOn: "2024-01-29T01:37:47+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL POSITION() Function"
   slug: "postgresql-string-functions/postgresql-position"
-next_page: 
+nextLink: 
   title: "PostgreSQL SPLIT_PART() Function"
   slug: "postgresql-string-functions/postgresql-split_part"
 ---

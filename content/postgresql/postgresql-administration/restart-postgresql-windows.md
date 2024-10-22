@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/restart-
 ogImage: ""
 updatedOn: "2024-02-21T01:45:41+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Restart PostgreSQL on Ubuntu"
   slug: "postgresql-administration/postgresql-restart-ubuntu"
-next_page: 
+nextLink: 
   title: "PostgreSQL pg_terminate_backend() Function"
   slug: "postgresql-administration/postgresql-pg_terminate_backend"
 ---

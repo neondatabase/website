@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-ins
 ogImage: ""
 updatedOn: "2024-03-28T13:58:28+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL AFTER DELETE Trigger"
   slug: "postgresql-triggers/postgresql-after-delete-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL BEFORE TRUNCATE Trigger"
   slug: "postgresql-triggers/postgresql-before-truncate-trigger"
 ---

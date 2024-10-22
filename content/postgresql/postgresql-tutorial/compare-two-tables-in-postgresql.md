@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/compare-two-ta
 ogImage: "/postgresqltutorial/compare-two-tables-postgresql.jpg"
 updatedOn: "2024-02-01T14:06:45+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Composite Types"
   slug: "postgresql-tutorial/postgresql-composite-types"
-next_page: 
+nextLink: 
   title: "How to Generate a Random Number in a Range"
   slug: "postgresql-tutorial/postgresql-random-range"
 ---

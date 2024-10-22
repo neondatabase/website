@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-04-18T03:00:18+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DEGREES() Function"
   slug: "postgresql-math-functions/postgresql-degrees"
-next_page: 
+nextLink: 
   title: "PostgreSQL FACTORIAL() Function"
   slug: "postgresql-math-functions/postgresql-factorial"
 ---

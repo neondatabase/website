@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upd
 ogImage: "/postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png"
 updatedOn: "2024-02-01T08:42:46+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UPDATE"
   slug: "postgresql-tutorial/postgresql-update"
-next_page: 
+nextLink: 
   title: "PostgreSQL DELETE"
   slug: "postgresql-tutorial/postgresql-delete"
 ---

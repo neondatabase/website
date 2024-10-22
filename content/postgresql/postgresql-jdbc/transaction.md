@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/transaction/"
 ogImage: ""
 updatedOn: "2024-02-02T05:00:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Call Stored Functions"
   slug: "postgresql-jdbc/call-postgresql-stored-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#"
   slug: "postgresql-jdbc/../postgresql-csharp"
 ---

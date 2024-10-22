@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/PostgreSQL-ARRAY_AGG-example.png"
 updatedOn: "2024-01-26T04:00:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SUM Function"
   slug: "postgresql-aggregate-functions/postgresql-sum-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL BOOL_AND() Function"
   slug: "postgresql-aggregate-functions/postgresql-bool_and"
 ---

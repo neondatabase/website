@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-01-27T09:14:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REGEXP_REPLACE() Function"
   slug: "postgresql-string-functions/regexp_replace"
-next_page: 
+nextLink: 
   title: "PostgreSQL REVERSE() Function"
   slug: "postgresql-string-functions/postgresql-reverse"
 ---

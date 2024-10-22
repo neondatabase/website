@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-fet
 ogImage: "/postgresqltutorial/film_table.png"
 updatedOn: "2024-01-17T04:54:54+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LIMIT"
   slug: "postgresql-tutorial/postgresql-limit"
-next_page: 
+nextLink: 
   title: "PostgreSQL IN"
   slug: "postgresql-tutorial/postgresql-in"
 ---

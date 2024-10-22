@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-27T13:44:30+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UPPER() Function"
   slug: "postgresql-string-functions/postgresql-upper"
-next_page: 
+nextLink: 
   title: "PostgreSQL FORMAT() Function"
   slug: "postgresql-string-functions/postgresql-format"
 ---

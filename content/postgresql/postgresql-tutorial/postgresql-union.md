@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uni
 ogImage: "/postgresqltutorial/PostgresQL-UNION.png"
 updatedOn: "2024-02-06T01:38:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL HAVING"
   slug: "postgresql-tutorial/postgresql-having"
-next_page: 
+nextLink: 
   title: "PostgreSQL INTERSECT Operator"
   slug: "postgresql-tutorial/postgresql-intersect"
 ---

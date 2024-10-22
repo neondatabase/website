@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-and
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-02-12T11:29:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL WHERE"
   slug: "postgresql-tutorial/postgresql-where"
-next_page: 
+nextLink: 
   title: "PostgreSQL OR Operator"
   slug: "postgresql-tutorial/postgresql-or"
 ---

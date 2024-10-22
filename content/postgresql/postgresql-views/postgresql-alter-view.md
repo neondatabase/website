@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-alter-
 ogImage: ""
 updatedOn: "2024-03-16T04:33:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL WITH CHECK OPTION"
   slug: "postgresql-views/postgresql-views-with-check-option"
-next_page: 
+nextLink: 
   title: "PostgreSQL Materialized Views"
   slug: "postgresql-views/postgresql-materialized-views"
 ---

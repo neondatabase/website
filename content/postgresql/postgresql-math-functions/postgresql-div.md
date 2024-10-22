@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-17T05:09:08+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CBRT() Function"
   slug: "postgresql-math-functions/postgresql-cbrt"
-next_page: 
+nextLink: 
   title: "PostgreSQL DEGREES() Function"
   slug: "postgresql-math-functions/postgresql-degrees"
 ---

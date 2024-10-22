@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/about-us/"
 ogImage: ""
 updatedOn: "2021-04-27T02:42:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: ""
   slug: ""
-next_page: 
+nextLink: 
   title: ""
   slug: ""
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else
 ogImage: "/postgresqltutorial/plpgsql-if-statement.png"
 updatedOn: "2024-03-19T03:39:48+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Assert Statement"
   slug: "postgresql-plpgsql/pl-pgsql-assert"
-next_page: 
+nextLink: 
   title: "PL/pgSQL CASE Statement"
   slug: "postgresql-plpgsql/plpgsql-case-statement"
 ---

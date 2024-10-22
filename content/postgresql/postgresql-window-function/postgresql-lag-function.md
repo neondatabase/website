@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-window-function/postgre
 ogImage: ""
 updatedOn: "2024-02-12T12:08:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FIRST_VALUE Function"
   slug: "postgresql-window-function/postgresql-first_value-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL LAST_VALUE Function"
   slug: "postgresql-window-function/postgresql-last_value-function"
 ---

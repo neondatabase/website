@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ins
 ogImage: ""
 updatedOn: "2024-07-01T01:09:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Recursive Query"
   slug: "postgresql-tutorial/postgresql-recursive-query"
-next_page: 
+nextLink: 
   title: "PostgreSQL INSERT Multiple Rows"
   slug: "postgresql-tutorial/postgresql-insert-multiple-rows"
 ---

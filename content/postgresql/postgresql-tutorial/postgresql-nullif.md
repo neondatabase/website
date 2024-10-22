@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nul
 ogImage: ""
 updatedOn: "2024-02-01T04:37:20+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ISNULL"
   slug: "postgresql-tutorial/postgresql-isnull"
-next_page: 
+nextLink: 
   title: "PostgreSQL CAST: Convert a value of One Type to Another"
   slug: "postgresql-tutorial/postgresql-cast"
 ---

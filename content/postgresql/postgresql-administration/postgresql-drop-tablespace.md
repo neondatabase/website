@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-15T01:34:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALTER TABLESPACE"
   slug: "postgresql-administration/postgresql-alter-tablespace"
-next_page: 
+nextLink: 
   title: "PostgreSQL Backup"
   slug: "postgresql-administration/postgresql-backup-database"
 ---

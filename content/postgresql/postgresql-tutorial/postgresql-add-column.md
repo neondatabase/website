@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-add
 ogImage: "/postgresqltutorial/PostgreSQL-Add-Column-300x128.png"
 updatedOn: "2024-01-25T04:01:41+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Rename Table: A Step-by-Step Guide"
   slug: "postgresql-tutorial/postgresql-rename-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP COLUMN: Remove One or More Columns of a Table"
   slug: "postgresql-tutorial/postgresql-drop-column"
 ---

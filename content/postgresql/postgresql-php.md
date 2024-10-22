@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-1.png"
 updatedOn: "2024-01-30T00:39:28+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_populate_recordset() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_populate_recordset"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Connect to PostgreSQL Database Using PDO"
   slug: "postgresql-php/connect"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-cursor/
 ogImage: "/postgresqltutorial/plpgsql-cursor.png"
 updatedOn: "2024-03-22T14:04:21+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Stored Procedure with INOUT Parameters"
   slug: "postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters"
-next_page: 
+nextLink: 
   title: "PostgreSQL Triggers"
   slug: "postgresql-plpgsql/../postgresql-triggers"
 ---

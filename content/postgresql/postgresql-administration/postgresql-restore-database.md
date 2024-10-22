@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-18T14:24:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Backup"
   slug: "postgresql-administration/postgresql-backup-database"
-next_page: 
+nextLink: 
   title: "PostgreSQL Show Databases"
   slug: "postgresql-administration/postgresql-show-databases"
 ---

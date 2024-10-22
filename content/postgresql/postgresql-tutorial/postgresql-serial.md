@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ser
 ogImage: "/postgresqltutorial/PostgreSQL-Serial-268x300.png"
 updatedOn: "2024-02-01T08:57:58+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE TABLE AS"
   slug: "postgresql-tutorial/postgresql-create-table-as"
-next_page: 
+nextLink: 
   title: "PostgreSQL Sequences"
   slug: "postgresql-tutorial/postgresql-sequences"
 ---

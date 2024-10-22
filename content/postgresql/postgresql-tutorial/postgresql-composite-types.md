@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-com
 ogImage: ""
 updatedOn: "2024-04-21T14:05:08+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BYTEA Data Type"
   slug: "postgresql-tutorial/postgresql-bytea-data-type"
-next_page: 
+nextLink: 
   title: "How to Compare Two Tables in PostgreSQL"
   slug: "postgresql-tutorial/compare-two-tables-in-postgresql"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/transaction/"
 ogImage: "/postgresqltutorial/parts_vendors_tables.png"
 updatedOn: "2024-01-29T13:40:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Querying Data"
   slug: "postgresql-python/query"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Call PostgreSQL Functions"
   slug: "postgresql-python/postgresql-python-call-postgresql-functions"
 ---

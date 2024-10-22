@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/update/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-Update.png"
 updatedOn: "2022-02-09T15:06:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Insert Data Into Tables"
   slug: "postgresql-php/insert"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Querying Data"
   slug: "postgresql-php/query"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-29T01:39:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FORMAT() Function"
   slug: "postgresql-string-functions/postgresql-format"
-next_page: 
+nextLink: 
   title: "PostgreSQL LEFT() Function"
   slug: "postgresql-string-functions/postgresql-left"
 ---

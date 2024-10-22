@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-uniq
 ogImage: ""
 updatedOn: "2024-02-28T13:08:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE INDEX Statement"
   slug: "postgresql-indexes/postgresql-create-index"
-next_page: 
+nextLink: 
   title: "PostgreSQL Index on Expression"
   slug: "postgresql-indexes/postgresql-index-on-expression"
 ---

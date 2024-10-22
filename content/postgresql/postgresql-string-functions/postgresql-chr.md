@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/PostgreSQL-CHR-ASCII-example.png"
 updatedOn: "2024-01-29T01:38:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ASCII() Function"
   slug: "postgresql-string-functions/postgresql-ascii"
-next_page: 
+nextLink: 
   title: "PostgreSQL INITCAP() Function"
   slug: "postgresql-string-functions/postgresql-letter-case-functions"
 ---

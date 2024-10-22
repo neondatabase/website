@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-24T08:46:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_array_elements_text() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_array_elements_text"
-next_page: 
+nextLink: 
   title: "PostgreSQL jsonb_each_text() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_each_text"
 ---

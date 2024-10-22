@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-int
 ogImage: "/postgresqltutorial/PostgreSQL-INTERSECT-Operator-300x206.png"
 updatedOn: "2024-07-01T01:03:14+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UNION"
   slug: "postgresql-tutorial/postgresql-union"
-next_page: 
+nextLink: 
   title: "PostgreSQL EXCEPT"
   slug: "postgresql-tutorial/postgresql-except"
 ---

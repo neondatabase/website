@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/uninstal
 ogImage: ""
 updatedOn: "2024-02-19T07:24:39+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "17 Practical psql Commands You Don’t Want to Miss"
   slug: "postgresql-administration/psql-commands"
-next_page: 
+nextLink: 
   title: "PostgreSQL Password File .pgpass"
   slug: "postgresql-administration/postgresql-password-file-pgpass"
 ---

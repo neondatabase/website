@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-del
 ogImage: ""
 updatedOn: "2024-01-23T06:55:56+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DELETE"
   slug: "postgresql-tutorial/postgresql-delete"
-next_page: 
+nextLink: 
   title: "PostgreSQL UPSERT using INSERT ON CONFLICT Statement"
   slug: "postgresql-tutorial/postgresql-upsert"
 ---

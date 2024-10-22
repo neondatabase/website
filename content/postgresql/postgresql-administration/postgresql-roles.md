@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/PostgreSQL-Roles.png"
 updatedOn: "2024-02-22T07:00:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP SCHEMA Statement"
   slug: "postgresql-administration/postgresql-drop-schema"
-next_page: 
+nextLink: 
   title: "PostgreSQL GRANT"
   slug: "postgresql-administration/postgresql-grant"
 ---

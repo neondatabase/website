@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png"
 updatedOn: "2020-04-11T10:53:00+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Window Functions"
   slug: "postgresql-window-function/"
-next_page: 
+nextLink: 
   title: "PostgreSQL DENSE_RANK Function"
   slug: "postgresql-window-function/postgresql-dense_rank-function"
 ---

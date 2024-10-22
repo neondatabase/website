@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/payment-table.png"
 updatedOn: "2024-02-13T13:52:15+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SUBSTRING() Function"
   slug: "postgresql-string-functions/postgresql-substring"
-next_page: 
+nextLink: 
   title: "PostgreSQL REPLACE() Function"
   slug: "postgresql-string-functions/postgresql-replace"
 ---

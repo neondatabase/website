@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-cshar
 ogImage: ""
 updatedOn: "2024-05-21T03:47:58+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL C#: Updating Data"
   slug: "postgresql-csharp/postgresql-csharp-update"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#: Selecting Data"
   slug: "postgresql-csharp/postgresql-csharp-select"
 ---

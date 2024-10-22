@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-26T04:22:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_populate_record() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_populate_record"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP"
   slug: "postgresql-json-functions/../postgresql-php"
 ---

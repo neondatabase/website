@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-vs-
 ogImage: "/postgresqltutorial/postgresql-vs-mysql-features.jpg"
 updatedOn: "2024-03-15T14:32:40+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DISTINCT ON"
   slug: "postgresql-tutorial/postgresql-distinct-on"
-next_page: 
+nextLink: 
   title: "PostgreSQL generate_series() Function"
   slug: "postgresql-tutorial/postgresql-generate_series"
 ---

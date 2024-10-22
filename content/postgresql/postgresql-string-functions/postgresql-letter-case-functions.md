@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-29T01:36:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CHR() Function"
   slug: "postgresql-string-functions/postgresql-chr"
-next_page: 
+nextLink: 
   title: "PostgreSQL POSITION() Function"
   slug: "postgresql-string-functions/postgresql-position"
 ---

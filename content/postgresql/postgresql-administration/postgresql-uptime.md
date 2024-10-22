@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-20T06:03:34+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Password File .pgpass"
   slug: "postgresql-administration/postgresql-password-file-pgpass"
-next_page: 
+nextLink: 
   title: "How to Check PostgreSQL Version"
   slug: "postgresql-administration/postgresql-version"
 ---

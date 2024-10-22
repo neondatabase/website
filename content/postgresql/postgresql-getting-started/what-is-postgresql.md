@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/what-is
 ogImage: "/postgresqltutorial/What-is-PostgreSQL.png"
 updatedOn: "2024-01-18T09:18:45+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Getting Started with PostgreSQL"
   slug: "postgresql-getting-started/"
-next_page: 
+nextLink: 
   title: "PostgreSQL Sample Database"
   slug: "postgresql-getting-started/postgresql-sample-database"
 ---

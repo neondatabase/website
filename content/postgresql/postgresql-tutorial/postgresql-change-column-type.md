@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cha
 ogImage: ""
 updatedOn: "2024-01-25T05:13:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP COLUMN: Remove One or More Columns of a Table"
   slug: "postgresql-tutorial/postgresql-drop-column"
-next_page: 
+nextLink: 
   title: "PostgreSQL RENAME COLUMN: Renaming a column"
   slug: "postgresql-tutorial/postgresql-rename-column"
 ---

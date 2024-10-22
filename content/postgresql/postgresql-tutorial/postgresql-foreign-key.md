@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-for
 ogImage: ""
 updatedOn: "2024-01-25T08:23:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Primary Key"
   slug: "postgresql-tutorial/postgresql-primary-key"
-next_page: 
+nextLink: 
   title: "PostgreSQL DELETE CASCADE"
   slug: "postgresql-tutorial/postgresql-delete-cascade"
 ---

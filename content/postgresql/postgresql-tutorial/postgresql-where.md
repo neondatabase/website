@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-whe
 ogImage: "/postgresqltutorial/PostgreSQL-WHERE.png"
 updatedOn: "2024-01-16T10:02:38+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SELECT DISTINCT"
   slug: "postgresql-tutorial/postgresql-select-distinct"
-next_page: 
+nextLink: 
   title: "PostgreSQL AND Operator"
   slug: "postgresql-tutorial/postgresql-and"
 ---

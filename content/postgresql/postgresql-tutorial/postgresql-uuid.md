@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uui
 ogImage: ""
 updatedOn: "2024-02-01T09:53:47+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TIME Data Type"
   slug: "postgresql-tutorial/postgresql-time"
-next_page: 
+nextLink: 
   title: "PostgreSQL Array"
   slug: "postgresql-tutorial/postgresql-array"
 ---

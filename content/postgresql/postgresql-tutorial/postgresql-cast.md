@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cas
 ogImage: ""
 updatedOn: "2024-02-01T06:59:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL NULLIF"
   slug: "postgresql-tutorial/postgresql-nullif"
-next_page: 
+nextLink: 
   title: "PostgreSQL EXPLAIN"
   slug: "postgresql-tutorial/postgresql-explain"
 ---

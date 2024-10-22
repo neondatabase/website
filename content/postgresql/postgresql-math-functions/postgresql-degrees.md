@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-18T03:54:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DIV() Function"
   slug: "postgresql-math-functions/postgresql-div"
-next_page: 
+nextLink: 
   title: "PostgreSQL EXP() Function"
   slug: "postgresql-math-functions/postgresql-exp"
 ---

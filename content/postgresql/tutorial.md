@@ -6,12 +6,6 @@ prev_url: "https://www.postgresqltutorial.com/"
 ogImage: "/postgresqltutorial/postgresql-tutorial-homepage.svg"
 updatedOn: "2024-09-08T01:42:12+00:00"
 enableTableOfContents: true
-prev_page: 
-  title: ""
-  url: ""
-next_page: 
-  title: ""
-  url: ""
 ---
 
 ![PostgreSQL Tutorial](/postgresqltutorial/postgresql-tutorial-homepage.svg?alignright "PostgreSQL Tutorial")

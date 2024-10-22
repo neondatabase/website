@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/payment-table.png"
 updatedOn: "2024-01-25T13:26:11+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Aggregate Functions"
   slug: "postgresql-aggregate-functions/"
-next_page: 
+nextLink: 
   title: "PostgreSQL COUNT Function"
   slug: "postgresql-aggregate-functions/postgresql-count-function"
 ---

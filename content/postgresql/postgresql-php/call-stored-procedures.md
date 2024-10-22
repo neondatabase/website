@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/call-stored-procedu
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-store-procedure.png"
 updatedOn: "2024-01-30T00:56:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Transaction"
   slug: "postgresql-php/transaction"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Working with Binary Data"
   slug: "postgresql-php/postgresql-blob"
 ---

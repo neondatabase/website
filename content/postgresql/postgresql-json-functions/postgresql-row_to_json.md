@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-02-25T14:51:03+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_object() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_object"
-next_page: 
+nextLink: 
   title: "PostgreSQL JSON Path"
   slug: "postgresql-json-functions/postgresql-json-path"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/privacy-policy/"
 ogImage: ""
 updatedOn: "2024-05-13T03:26:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: ""
   slug: ""
-next_page: 
+nextLink: 
   title: ""
   slug: ""
 ---

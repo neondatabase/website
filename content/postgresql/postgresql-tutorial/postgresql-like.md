@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-lik
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-21T02:25:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BETWEEN"
   slug: "postgresql-tutorial/postgresql-between"
-next_page: 
+nextLink: 
   title: "PostgreSQL IS NULL"
   slug: "postgresql-tutorial/postgresql-is-null"
 ---

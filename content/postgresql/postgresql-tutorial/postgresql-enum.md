@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-enu
 ogImage: ""
 updatedOn: "2024-04-19T10:27:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "A Look at PostgreSQL User-defined Data Types"
   slug: "postgresql-tutorial/postgresql-user-defined-data-types"
-next_page: 
+nextLink: 
   title: "PostgreSQL XML Data Type"
   slug: "postgresql-tutorial/postgresql-xml-data-type"
 ---

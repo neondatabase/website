@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/PostgreSQL-DROP-Schema.png"
 updatedOn: "2024-02-12T13:31:28+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALTER SCHEMA"
   slug: "postgresql-administration/postgresql-alter-schema"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE ROLE Statement"
   slug: "postgresql-administration/postgresql-roles"
 ---

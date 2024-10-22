@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-part
 ogImage: "/postgresqltutorial/customer-table.png"
 updatedOn: "2024-02-28T08:55:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Index on Expression"
   slug: "postgresql-indexes/postgresql-index-on-expression"
-next_page: 
+nextLink: 
   title: "PostgreSQL Multicolumn Indexes"
   slug: "postgresql-indexes/postgresql-multicolumn-indexes"
 ---

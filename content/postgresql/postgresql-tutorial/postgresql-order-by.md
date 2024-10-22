@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ord
 ogImage: "/postgresqltutorial/PostgreSQL-ORDER-BY.png"
 updatedOn: "2024-01-16T09:02:03+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Column Alias"
   slug: "postgresql-tutorial/postgresql-column-alias"
-next_page: 
+nextLink: 
   title: "PostgreSQL SELECT DISTINCT"
   slug: "postgresql-tutorial/postgresql-select-distinct"
 ---

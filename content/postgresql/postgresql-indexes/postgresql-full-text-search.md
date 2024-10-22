@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full
 ogImage: ""
 updatedOn: "2024-03-29T02:51:11+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Index Types"
   slug: "postgresql-indexes/postgresql-index-types"
-next_page: 
+nextLink: 
   title: "PostgreSQL JSON Index"
   slug: "postgresql-indexes/postgresql-json-index"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rec
 ogImage: ""
 updatedOn: "2024-01-22T07:25:18+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CTE"
   slug: "postgresql-tutorial/postgresql-cte"
-next_page: 
+nextLink: 
   title: "PostgreSQL INSERT"
   slug: "postgresql-tutorial/postgresql-insert"
 ---

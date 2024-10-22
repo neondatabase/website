@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-window-function/postgre
 ogImage: "/postgresqltutorial/products_product_groups_tables.png"
 updatedOn: "2024-02-01T15:58:59+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RANK Function"
   slug: "postgresql-window-function/postgresql-rank-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL JSON Functions"
   slug: "postgresql-window-function/../postgresql-json-functions"
 ---

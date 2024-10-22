@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/call-postgresql-st
 ogImage: ""
 updatedOn: "2024-01-31T08:32:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Delete Data from Table"
   slug: "postgresql-jdbc/delete"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Managing Transactions"
   slug: "postgresql-jdbc/transaction"
 ---

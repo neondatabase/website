@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-28T13:55:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RPAD() Function"
   slug: "postgresql-string-functions/postgresql-rpad"
-next_page: 
+nextLink: 
   title: "PostgreSQL CONCAT_WS() Function"
   slug: "postgresql-string-functions/postgresql-concat_ws"
 ---

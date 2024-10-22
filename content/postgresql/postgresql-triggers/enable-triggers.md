@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/enable-trigger
 ogImage: ""
 updatedOn: "2024-03-26T02:02:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Disable Triggers"
   slug: "postgresql-triggers/managing-postgresql-trigger"
-next_page: 
+nextLink: 
   title: "How to List All Triggers in PostgreSQL"
   slug: "postgresql-triggers/how-to-list-all-triggers-in-postgresql"
 ---

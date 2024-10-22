@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-views-
 ogImage: ""
 updatedOn: "2024-03-16T04:31:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Creating PostgreSQL Updatable Views"
   slug: "postgresql-views/postgresql-updatable-views"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALTER VIEW Statement"
   slug: "postgresql-views/postgresql-alter-view"
 ---

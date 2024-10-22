@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/PostgreSQL-LEFT-example.png"
 updatedOn: "2024-01-29T02:05:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MD5() Function"
   slug: "postgresql-string-functions/postgresql-md5"
-next_page: 
+nextLink: 
   title: "PostgreSQL RIGHT() Function"
   slug: "postgresql-string-functions/postgresql-right"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alt
 ogImage: "/postgresqltutorial/PostgreSQL-ALTER-TABLE-SET-DEFAULT.png"
 updatedOn: "2024-03-26T15:18:38+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Generated Columns"
   slug: "postgresql-tutorial/postgresql-generated-columns"
-next_page: 
+nextLink: 
   title: "PostgreSQL Rename Table: A Step-by-Step Guide"
   slug: "postgresql-tutorial/postgresql-rename-table"
 ---

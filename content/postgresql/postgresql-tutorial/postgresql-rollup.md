@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rol
 ogImage: "/postgresqltutorial/PostgreSQL-ROLLUP-example.png"
 updatedOn: "2024-07-01T01:04:08+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL GROUPING SETS"
   slug: "postgresql-tutorial/postgresql-grouping-sets"
-next_page: 
+nextLink: 
   title: "PostgreSQL CUBE"
   slug: "postgresql-tutorial/postgresql-cube"
 ---

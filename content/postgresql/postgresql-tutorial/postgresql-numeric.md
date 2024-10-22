@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-num
 ogImage: ""
 updatedOn: "2024-04-18T12:27:09+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Character Types: CHAR, VARCHAR, and TEXT"
   slug: "postgresql-tutorial/postgresql-char-varchar-text"
-next_page: 
+nextLink: 
   title: "PostgreSQL DOUBLE PRECISION Data Type"
   slug: "postgresql-tutorial/postgresql-double-precision-type"
 ---

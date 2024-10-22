@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-04-18T04:23:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MOD() Function"
   slug: "postgresql-math-functions/postgresql-mod"
-next_page: 
+nextLink: 
   title: "PostgreSQL LOG() Function"
   slug: "postgresql-math-functions/postgresql-log"
 ---

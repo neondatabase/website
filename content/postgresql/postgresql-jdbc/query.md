@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/query/"
 ogImage: ""
 updatedOn: "2024-01-31T04:06:17+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Insert Data into a Table"
   slug: "postgresql-jdbc/insert"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Updating Data"
   slug: "postgresql-jdbc/update"
 ---

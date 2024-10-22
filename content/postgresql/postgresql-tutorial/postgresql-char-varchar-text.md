@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cha
 ogImage: ""
 updatedOn: "2024-02-02T07:00:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Boolean Data Type with Practical Examples"
   slug: "postgresql-tutorial/postgresql-boolean"
-next_page: 
+nextLink: 
   title: "PostgreSQL NUMERIC Type"
   slug: "postgresql-tutorial/postgresql-numeric"
 ---

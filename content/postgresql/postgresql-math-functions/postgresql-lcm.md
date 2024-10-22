@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-05-19T03:25:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL GCD() Function"
   slug: "postgresql-math-functions/postgresql-gcd"
-next_page: 
+nextLink: 
   title: "PostgreSQL MIN_SCALE() Function"
   slug: "postgresql-math-functions/postgresql-min_scale"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sel
 ogImage: "/postgresqltutorial/film_table.png"
 updatedOn: "2024-01-24T04:16:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE TABLE"
   slug: "postgresql-tutorial/postgresql-create-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE TABLE AS"
   slug: "postgresql-tutorial/postgresql-create-table-as"
 ---

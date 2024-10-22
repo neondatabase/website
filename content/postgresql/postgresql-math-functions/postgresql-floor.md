@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: "/postgresqltutorial/payment-table.png"
 updatedOn: "2024-02-25T04:31:17+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FACTORIAL() Function"
   slug: "postgresql-math-functions/postgresql-factorial"
-next_page: 
+nextLink: 
   title: "PostgreSQL GCD() Function"
   slug: "postgresql-math-functions/postgresql-gcd"
 ---

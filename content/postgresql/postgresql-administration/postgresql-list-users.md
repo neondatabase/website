@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/PostgreSQL-List-User-Example-1.png"
 updatedOn: "2024-02-15T02:21:52+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP ROLE Statement"
   slug: "postgresql-administration/postgresql-drop-role"
-next_page: 
+nextLink: 
   title: "How to Create Superuser in PostgreSQL"
   slug: "postgresql-administration/create-superuser-postgresql"
 ---

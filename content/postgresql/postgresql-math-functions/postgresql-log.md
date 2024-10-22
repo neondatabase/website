@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-04-19T01:55:53+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LN() Function"
   slug: "postgresql-math-functions/postgresql-ln"
-next_page: 
+nextLink: 
   title: "PostgreSQL POWER() Function"
   slug: "postgresql-math-functions/postgresql-power"
 ---

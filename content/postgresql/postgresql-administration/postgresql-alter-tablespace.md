@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2023-12-30T10:24:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE TABLESPACE"
   slug: "postgresql-administration/postgresql-create-tablespace"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP TABLESPACE Statement"
   slug: "postgresql-administration/postgresql-drop-tablespace"
 ---

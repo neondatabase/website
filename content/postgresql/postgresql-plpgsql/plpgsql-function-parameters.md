@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-functio
 ogImage: ""
 updatedOn: "2024-02-07T12:54:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Create Function Statement"
   slug: "postgresql-plpgsql/postgresql-create-function"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Function Overloading"
   slug: "postgresql-plpgsql/plpgsql-function-overloading"
 ---

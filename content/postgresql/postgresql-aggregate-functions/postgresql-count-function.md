@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/pos
 ogImage: "/postgresqltutorial/payment.png"
 updatedOn: "2024-01-26T02:50:46+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL AVG Function"
   slug: "postgresql-aggregate-functions/postgresql-avg-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL MAX Function"
   slug: "postgresql-aggregate-functions/postgresql-max-function"
 ---

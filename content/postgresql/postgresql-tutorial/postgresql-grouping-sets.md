@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-gro
 ogImage: "/postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-1.png"
 updatedOn: "2024-07-01T01:00:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL EXCEPT"
   slug: "postgresql-tutorial/postgresql-except"
-next_page: 
+nextLink: 
   title: "PostgreSQL ROLLUP"
   slug: "postgresql-tutorial/postgresql-rollup"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/insert/"
 ogImage: ""
 updatedOn: "2024-02-02T04:56:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Creating Tables"
   slug: "postgresql-jdbc/create-tables"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Querying Data"
   slug: "postgresql-jdbc/query"
 ---

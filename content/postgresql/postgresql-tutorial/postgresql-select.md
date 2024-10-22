@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sel
 ogImage: "/postgresqltutorial/PostgreSQL-Select.png"
 updatedOn: "2024-09-21T09:35:09+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Server and Database Objects"
   slug: "postgresql-tutorial/postgresql-server-and-database-objects"
-next_page: 
+nextLink: 
   title: "PostgreSQL Column Alias"
   slug: "postgresql-tutorial/postgresql-column-alias"
 ---

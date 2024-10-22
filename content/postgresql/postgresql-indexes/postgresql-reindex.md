@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-rein
 ogImage: ""
 updatedOn: "2024-02-28T10:26:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Multicolumn Indexes"
   slug: "postgresql-indexes/postgresql-multicolumn-indexes"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP INDEX"
   slug: "postgresql-indexes/postgresql-drop-index"
 ---

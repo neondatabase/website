@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uni
 ogImage: ""
 updatedOn: "2024-01-25T09:57:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CHECK Constraints"
   slug: "postgresql-tutorial/postgresql-check-constraint"
-next_page: 
+nextLink: 
   title: "PostgreSQL Not-Null Constraint"
   slug: "postgresql-tutorial/postgresql-not-null-constraint"
 ---

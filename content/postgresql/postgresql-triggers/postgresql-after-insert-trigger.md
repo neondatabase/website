@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-aft
 ogImage: ""
 updatedOn: "2024-03-28T03:30:39+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BEFORE INSERT Trigger"
   slug: "postgresql-triggers/postgresql-before-insert-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL BEFORE UPDATE Trigger"
   slug: "postgresql-triggers/postgresql-before-update-trigger"
 ---

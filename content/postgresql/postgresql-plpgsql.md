@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/"
 ogImage: ""
 updatedOn: "2024-03-22T09:00:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL generate_series() Function"
   slug: "postgresql-tutorial/postgresql-generate_series"
-next_page: 
+nextLink: 
   title: "Introduction to PostgreSQL PL/pgSQL"
   slug: "postgresql-plpgsql/introduction-to-postgresql-stored-procedures"
 ---

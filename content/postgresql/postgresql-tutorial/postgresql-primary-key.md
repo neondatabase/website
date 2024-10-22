@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-pri
 ogImage: ""
 updatedOn: "2024-01-25T07:25:38+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples"
   slug: "postgresql-tutorial/postgresql-copy-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL Foreign Key"
   slug: "postgresql-tutorial/postgresql-foreign-key"
 ---

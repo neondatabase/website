@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/call-stored-proc
 ogImage: ""
 updatedOn: "2024-01-29T13:48:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Call PostgreSQL Functions"
   slug: "postgresql-python/postgresql-python-call-postgresql-functions"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Handling Binary Data"
   slug: "postgresql-python/blob"
 ---

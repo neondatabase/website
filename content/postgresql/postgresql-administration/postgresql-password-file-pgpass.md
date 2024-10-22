@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-19T13:45:32+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Uninstall PostgreSQL from Ubuntu"
   slug: "postgresql-administration/uninstall-postgresql-ubuntu"
-next_page: 
+nextLink: 
   title: "PostgreSQL Uptime"
   slug: "postgresql-administration/postgresql-uptime"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/create-s
 ogImage: ""
 updatedOn: "2024-02-22T08:40:18+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL List Users"
   slug: "postgresql-administration/postgresql-list-users"
-next_page: 
+nextLink: 
   title: "PostgreSQL Row-Level Security"
   slug: "postgresql-administration/postgresql-row-level-security"
 ---

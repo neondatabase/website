@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ran
 ogImage: ""
 updatedOn: "2024-02-17T02:51:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Compare Two Tables in PostgreSQL"
   slug: "postgresql-tutorial/compare-two-tables-in-postgresql"
-next_page: 
+nextLink: 
   title: "How To Delete Duplicate Rows in PostgreSQL"
   slug: "postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql"
 ---

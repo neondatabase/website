@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-29T01:41:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CONCAT_WS() Function"
   slug: "postgresql-string-functions/postgresql-concat_ws"
-next_page: 
+nextLink: 
   title: "PostgreSQL TO_CHAR() Function"
   slug: "postgresql-string-functions/postgresql-to_char"
 ---

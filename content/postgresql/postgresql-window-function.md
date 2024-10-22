@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-window-function/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png"
 updatedOn: "2021-04-27T01:56:11+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL WIDTH_BUCKET() Function"
   slug: "postgresql-math-functions/postgresql-width_bucket"
-next_page: 
+nextLink: 
   title: "PostgreSQL CUME_DIST Function"
   slug: "postgresql-window-function/postgresql-cume_dist-function"
 ---

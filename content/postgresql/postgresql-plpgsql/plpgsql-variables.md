@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variabl
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-03-19T03:19:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Block Structure"
   slug: "postgresql-plpgsql/plpgsql-block-structure"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Select Into"
   slug: "postgresql-plpgsql/pl-pgsql-select-into"
 ---

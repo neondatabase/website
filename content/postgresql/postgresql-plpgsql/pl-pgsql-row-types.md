@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-row-ty
 ogImage: "/postgresqltutorial/actor.png"
 updatedOn: "2024-03-19T01:58:41+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Select Into"
   slug: "postgresql-plpgsql/pl-pgsql-select-into"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Record Types"
   slug: "postgresql-plpgsql/plpgsql-record-types"
 ---

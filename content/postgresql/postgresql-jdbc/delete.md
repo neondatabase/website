@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/delete/"
 ogImage: ""
 updatedOn: "2024-02-02T04:58:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Updating Data"
   slug: "postgresql-jdbc/update"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Call Stored Functions"
   slug: "postgresql-jdbc/call-postgresql-stored-function"
 ---

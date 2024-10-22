@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-use
 ogImage: "/postgresqltutorial/PostgreSQL-User-defined-Type-Example.png"
 updatedOn: "2020-07-10T01:18:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JSON"
   slug: "postgresql-tutorial/postgresql-json"
-next_page: 
+nextLink: 
   title: "PostgreSQL enum"
   slug: "postgresql-tutorial/postgresql-enum"
 ---

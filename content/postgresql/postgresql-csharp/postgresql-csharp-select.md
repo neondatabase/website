@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-cshar
 ogImage: ""
 updatedOn: "2024-05-21T03:40:01+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL C#: Deleting Data"
   slug: "postgresql-csharp/postgresql-csharp-delete"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#: Transaction"
   slug: "postgresql-csharp/postgresql-csharp-transaction"
 ---

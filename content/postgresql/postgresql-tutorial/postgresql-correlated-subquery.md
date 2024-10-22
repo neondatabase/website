@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cor
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-01-22T03:48:45+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Subquery"
   slug: "postgresql-tutorial/postgresql-subquery"
-next_page: 
+nextLink: 
   title: "PostgreSQL ANY Operator"
   slug: "postgresql-tutorial/postgresql-any"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/"
 ogImage: ""
 updatedOn: "2024-02-27T06:36:15+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ROW_NUMBER Function"
   slug: "postgresql-window-function/postgresql-row_number"
-next_page: 
+nextLink: 
   title: "PostgreSQL to_jsonb() Function"
   slug: "postgresql-json-functions/postgresql-to_jsonb"
 ---

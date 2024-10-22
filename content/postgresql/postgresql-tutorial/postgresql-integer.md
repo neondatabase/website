@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-int
 ogImage: "/postgresqltutorial/postgresql-integer-300x59.png"
 updatedOn: "2024-02-02T07:01:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REAL Data Type"
   slug: "postgresql-tutorial/postgresql-real-data-type"
-next_page: 
+nextLink: 
   title: "PostgreSQL DATE Data Type"
   slug: "postgresql-tutorial/postgresql-date"
 ---

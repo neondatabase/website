@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-functio
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-03-22T06:58:32+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Function Overloading"
   slug: "postgresql-plpgsql/plpgsql-function-overloading"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Returns SetOf"
   slug: "postgresql-plpgsql/plpgsql-returns-setof"
 ---

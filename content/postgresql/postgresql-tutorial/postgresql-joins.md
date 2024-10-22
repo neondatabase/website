@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-joi
 ogImage: "/postgresqltutorial/PostgreSQL-Join-Inner-Join.png"
 updatedOn: "2024-01-17T05:01:10+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL IS NULL"
   slug: "postgresql-tutorial/postgresql-is-null"
-next_page: 
+nextLink: 
   title: "PostgreSQL Table Aliases"
   slug: "postgresql-tutorial/postgresql-alias"
 ---

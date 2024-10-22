@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-22T03:14:57+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Role Membership"
   slug: "postgresql-administration/postgresql-role-membership"
-next_page: 
+nextLink: 
   title: "PostgreSQL CURRENT_USER"
   slug: "postgresql-administration/postgresql-current_user"
 ---

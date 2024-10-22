@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/"
 ogImage: ""
 updatedOn: "2024-03-06T08:34:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL List Views"
   slug: "postgresql-views/postgresql-list-views"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE INDEX Statement"
   slug: "postgresql-indexes/postgresql-create-index"
 ---

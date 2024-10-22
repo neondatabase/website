@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-lef
 ogImage: "/postgresqltutorial/PostgreSQL-Join-Left-Join.png"
 updatedOn: "2024-02-07T02:59:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL INNER JOIN"
   slug: "postgresql-tutorial/postgresql-inner-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL RIGHT JOIN"
   slug: "postgresql-tutorial/postgresql-right-join"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cte
 ogImage: ""
 updatedOn: "2024-01-22T06:27:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL EXISTS Operator"
   slug: "postgresql-tutorial/postgresql-exists"
-next_page: 
+nextLink: 
   title: "PostgreSQL Recursive Query"
   slug: "postgresql-tutorial/postgresql-recursive-query"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cas
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-02-01T03:34:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How To Delete Duplicate Rows in PostgreSQL"
   slug: "postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql"
-next_page: 
+nextLink: 
   title: "PostgreSQL COALESCE"
   slug: "postgresql-tutorial/postgresql-coalesce"
 ---

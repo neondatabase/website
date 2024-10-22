@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-materi
 ogImage: ""
 updatedOn: "2024-03-16T04:34:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALTER VIEW Statement"
   slug: "postgresql-views/postgresql-alter-view"
-next_page: 
+nextLink: 
   title: "PostgreSQL Recursive View"
   slug: "postgresql-views/postgresql-recursive-view"
 ---

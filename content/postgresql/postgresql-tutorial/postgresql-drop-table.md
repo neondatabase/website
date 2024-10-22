@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dro
 ogImage: ""
 updatedOn: "2024-01-24T10:32:29+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RENAME COLUMN: Renaming a column"
   slug: "postgresql-tutorial/postgresql-rename-column"
-next_page: 
+nextLink: 
   title: "PostgreSQL TRUNCATE TABLE"
   slug: "postgresql-tutorial/postgresql-truncate-table"
 ---

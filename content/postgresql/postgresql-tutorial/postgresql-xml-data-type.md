@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml
 ogImage: ""
 updatedOn: "2024-04-20T03:57:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL enum"
   slug: "postgresql-tutorial/postgresql-enum"
-next_page: 
+nextLink: 
   title: "PostgreSQL BYTEA Data Type"
   slug: "postgresql-tutorial/postgresql-bytea-data-type"
 ---

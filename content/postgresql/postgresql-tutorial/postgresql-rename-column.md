@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ren
 ogImage: "/postgresqltutorial/postgresql-rename-column-300x254.png"
 updatedOn: "2024-01-25T06:33:58+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Change Column Type"
   slug: "postgresql-tutorial/postgresql-change-column-type"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP TABLE"
   slug: "postgresql-tutorial/postgresql-drop-table"
 ---

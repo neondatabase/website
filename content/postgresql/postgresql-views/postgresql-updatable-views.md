@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-updata
 ogImage: ""
 updatedOn: "2024-03-16T04:21:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Drop View"
   slug: "postgresql-views/postgresql-drop-view"
-next_page: 
+nextLink: 
   title: "PostgreSQL WITH CHECK OPTION"
   slug: "postgresql-views/postgresql-views-with-check-option"
 ---

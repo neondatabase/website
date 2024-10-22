@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list
 ogImage: ""
 updatedOn: "2024-06-07T14:04:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP INDEX"
   slug: "postgresql-indexes/postgresql-drop-index"
-next_page: 
+nextLink: 
   title: "PostgreSQL Index Types"
   slug: "postgresql-indexes/postgresql-index-types"
 ---

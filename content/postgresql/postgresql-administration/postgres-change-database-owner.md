@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-22T10:02:54+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Get Sizes of Database Objects in PostgreSQL"
   slug: "postgresql-administration/postgresql-database-indexes-table-size"
-next_page: 
+nextLink: 
   title: "PostgreSQL Schema"
   slug: "postgresql-administration/postgresql-schema"
 ---

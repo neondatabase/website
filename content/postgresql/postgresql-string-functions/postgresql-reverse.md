@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-28T10:36:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REGEXP_MATCHES() Function"
   slug: "postgresql-string-functions/postgresql-regexp_matches"
-next_page: 
+nextLink: 
   title: "PostgreSQL REPEAT() Function"
   slug: "postgresql-string-functions/postgresql-repeat"
 ---

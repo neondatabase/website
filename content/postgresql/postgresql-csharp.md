@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/"
 ogImage: ""
 updatedOn: "2024-05-21T12:42:32+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Managing Transactions"
   slug: "postgresql-jdbc/transaction"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#: Connecting the PostgreSQL Database"
   slug: "postgresql-csharp/postgresql-csharp-connect"
 ---

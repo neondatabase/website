@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-22T01:30:01+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL EXTRACT() Function"
   slug: "postgresql-date-functions/postgresql-extract"
-next_page: 
+nextLink: 
   title: "PostgreSQL TO_TIMESTAMP Function"
   slug: "postgresql-date-functions/postgresql-to_timestamp"
 ---

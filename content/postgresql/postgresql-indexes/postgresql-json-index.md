@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json
 ogImage: ""
 updatedOn: "2024-03-06T08:18:53+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Full Text Search"
   slug: "postgresql-indexes/postgresql-full-text-search"
-next_page: 
+nextLink: 
   title: "PostgreSQL Administration"
   slug: "postgresql-indexes/../postgresql-administration"
 ---

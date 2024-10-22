@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-lim
 ogImage: "/postgresqltutorial/film_table.png"
 updatedOn: "2024-04-19T07:40:00+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL OR Operator"
   slug: "postgresql-tutorial/postgresql-or"
-next_page: 
+nextLink: 
   title: "PostgreSQL FETCH"
   slug: "postgresql-tutorial/postgresql-fetch"
 ---

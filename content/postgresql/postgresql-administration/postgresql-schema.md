@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/PostgreSQL-Schema-Example.png"
 updatedOn: "2024-02-12T12:30:41+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Change the Owner of a PostgreSQL Database"
   slug: "postgresql-administration/postgres-change-database-owner"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE SCHEMA"
   slug: "postgresql-administration/postgresql-create-schema"
 ---

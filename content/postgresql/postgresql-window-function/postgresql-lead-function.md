@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/Sales-sample-table.png"
 updatedOn: "2020-04-11T10:53:00+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LAST_VALUE Function"
   slug: "postgresql-window-function/postgresql-last_value-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL NTILE Function"
   slug: "postgresql-window-function/postgresql-ntile-function"
 ---

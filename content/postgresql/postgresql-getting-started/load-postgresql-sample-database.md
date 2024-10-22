@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/load-po
 ogImage: "/postgresqltutorial/PostgreSQL-create-database-pgadmin4.png"
 updatedOn: "2024-01-20T09:40:21+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Connect to a PostgreSQL Database Server"
   slug: "postgresql-getting-started/connect-to-postgresql-database"
-next_page: 
+nextLink: 
   title: "Install PostgreSQL macOS"
   slug: "postgresql-getting-started/install-postgresql-macos"
 ---

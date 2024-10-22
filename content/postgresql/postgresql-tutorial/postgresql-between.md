@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-bet
 ogImage: "/postgresqltutorial/payment-table.png"
 updatedOn: "2024-04-19T07:33:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL IN"
   slug: "postgresql-tutorial/postgresql-in"
-next_page: 
+nextLink: 
   title: "PostgreSQL LIKE"
   slug: "postgresql-tutorial/postgresql-like"
 ---

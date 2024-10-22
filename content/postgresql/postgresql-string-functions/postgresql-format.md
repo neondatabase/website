@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer-table.png"
 updatedOn: "2024-01-27T14:36:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RTRIM() Function"
   slug: "postgresql-string-functions/postgresql-rtrim"
-next_page: 
+nextLink: 
   title: "PostgreSQL MD5() Function"
   slug: "postgresql-string-functions/postgresql-md5"
 ---

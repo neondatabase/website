@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/connect/"
 ogImage: "/postgresqltutorial/PostgreSQL-PHP-Connect.png"
 updatedOn: "2024-01-30T00:49:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP"
   slug: "postgresql-php/"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Create New Tables"
   slug: "postgresql-php/create-tables"
 ---

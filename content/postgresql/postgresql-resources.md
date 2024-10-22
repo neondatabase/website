@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-resources/"
 ogImage: ""
 updatedOn: "2021-07-13T02:47:47+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Cheat Sheet"
   slug: "postgresql-cheat-sheet"
-next_page: 
+nextLink: 
   title: "About Us"
   slug: "about-us"
 ---

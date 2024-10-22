@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dou
 ogImage: ""
 updatedOn: "2024-04-19T03:25:47+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL NUMERIC Type"
   slug: "postgresql-tutorial/postgresql-numeric"
-next_page: 
+nextLink: 
   title: "PostgreSQL REAL Data Type"
   slug: "postgresql-tutorial/postgresql-real-data-type"
 ---

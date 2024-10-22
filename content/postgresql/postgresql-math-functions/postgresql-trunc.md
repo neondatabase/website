@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: "/postgresqltutorial/film-film_category-category-tables.png"
 updatedOn: "2024-02-16T14:26:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SIGN() Function"
   slug: "postgresql-math-functions/postgresql-sign"
-next_page: 
+nextLink: 
   title: "PostgreSQL TRIM_SCALE() Function"
   slug: "postgresql-math-functions/postgresql-trim_scale"
 ---

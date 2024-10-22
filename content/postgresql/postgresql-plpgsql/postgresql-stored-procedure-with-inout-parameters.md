@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-stor
 ogImage: "/postgresqltutorial/film.png"
 updatedOn: "2024-04-19T08:15:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DROP PROCEDURE Statement"
   slug: "postgresql-plpgsql/postgresql-drop-procedure"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Cursor"
   slug: "postgresql-plpgsql/plpgsql-cursor"
 ---

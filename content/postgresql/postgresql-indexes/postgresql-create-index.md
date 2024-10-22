@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-crea
 ogImage: "/postgresqltutorial/address.png"
 updatedOn: "2024-02-28T13:06:03+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Indexes"
   slug: "postgresql-indexes/"
-next_page: 
+nextLink: 
   title: "PostgreSQL UNIQUE Index"
   slug: "postgresql-indexes/postgresql-unique-index"
 ---

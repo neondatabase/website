@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/creating-first
 ogImage: "/postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png"
 updatedOn: "2024-03-30T03:13:57+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Introduction to PostgreSQL Trigger"
   slug: "postgresql-triggers/introduction-postgresql-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL DROP TRIGGER Statement"
   slug: "postgresql-triggers/postgresql-drop-trigger"
 ---

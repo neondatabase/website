@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-recurs
 ogImage: ""
 updatedOn: "2024-03-16T04:42:50+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Materialized Views"
   slug: "postgresql-views/postgresql-materialized-views"
-next_page: 
+nextLink: 
   title: "PostgreSQL List Views"
   slug: "postgresql-views/postgresql-list-views"
 ---

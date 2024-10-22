@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-cshar
 ogImage: ""
 updatedOn: "2024-05-21T03:19:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL C#: Inserting data"
   slug: "postgresql-csharp/postgresql-csharp-insert"
-next_page: 
+nextLink: 
   title: "PostgreSQL C#: Updating Data"
   slug: "postgresql-csharp/postgresql-csharp-update"
 ---

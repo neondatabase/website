@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/postgresql-copy-database.jpg"
 updatedOn: "2024-02-12T15:16:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Rename Database"
   slug: "postgresql-administration/postgresql-rename-database"
-next_page: 
+nextLink: 
   title: "How to Get Sizes of Database Objects in PostgreSQL"
   slug: "postgresql-administration/postgresql-database-indexes-table-size"
 ---

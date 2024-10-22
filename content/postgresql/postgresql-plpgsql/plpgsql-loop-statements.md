@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-st
 ogImage: ""
 updatedOn: "2024-03-19T03:57:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL CASE Statement"
   slug: "postgresql-plpgsql/plpgsql-case-statement"
-next_page: 
+nextLink: 
   title: "PL/pgSQL While Loop"
   slug: "postgresql-plpgsql/pl-pgsql-while-loop"
 ---

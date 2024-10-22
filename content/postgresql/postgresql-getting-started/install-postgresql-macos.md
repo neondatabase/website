@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/install
 ogImage: "/postgresqltutorial/Install-PostgreSQL-macOS-step-1.png"
 updatedOn: "2024-02-02T07:21:07+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Load PostgreSQL Sample Database"
   slug: "postgresql-getting-started/load-postgresql-sample-database"
-next_page: 
+nextLink: 
   title: "Install PostgreSQL Linux"
   slug: "postgresql-getting-started/install-postgresql-linux"
 ---

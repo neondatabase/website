@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exce
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/film_table.png"
 updatedOn: "2024-03-19T08:01:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Continue Statement"
   slug: "postgresql-plpgsql/pl-pgsql-continue"
-next_page: 
+nextLink: 
   title: "PostgreSQL Create Function Statement"
   slug: "postgresql-plpgsql/postgresql-create-function"
 ---

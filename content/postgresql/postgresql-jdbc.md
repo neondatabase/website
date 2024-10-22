@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-JDBC.png"
 updatedOn: "2024-01-31T08:53:11+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Delete Data from Tables"
   slug: "postgresql-python/delete"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Connecting to PostgreSQL Databases"
   slug: "postgresql-jdbc/connecting-to-postgresql-database"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cub
 ogImage: "/postgresqltutorial/sales-table.png"
 updatedOn: "2024-07-01T01:06:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ROLLUP"
   slug: "postgresql-tutorial/postgresql-rollup"
-next_page: 
+nextLink: 
   title: "PostgreSQL Subquery"
   slug: "postgresql-tutorial/postgresql-subquery"
 ---

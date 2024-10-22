@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-28T13:17:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CONCAT() Function"
   slug: "postgresql-string-functions/postgresql-concat-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL TRANSLATE() Function"
   slug: "postgresql-string-functions/postgresql-translate"
 ---

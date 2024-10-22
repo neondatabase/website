@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-04-18T02:16:40+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CEIL() Function"
   slug: "postgresql-math-functions/postgresql-ceil"
-next_page: 
+nextLink: 
   title: "PostgreSQL DIV() Function"
   slug: "postgresql-math-functions/postgresql-div"
 ---

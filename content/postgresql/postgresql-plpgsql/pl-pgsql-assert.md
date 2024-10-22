@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-assert
 ogImage: ""
 updatedOn: "2024-03-19T03:00:24+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Errors and Messages"
   slug: "postgresql-plpgsql/plpgsql-errors-messages"
-next_page: 
+nextLink: 
   title: "PL/pgSQL IF Statement"
   slug: "postgresql-plpgsql/plpgsql-if-else-statements"
 ---

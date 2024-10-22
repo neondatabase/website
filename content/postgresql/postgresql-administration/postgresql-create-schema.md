@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: "/postgresqltutorial/postgresql-create-schema-example.png"
 updatedOn: "2024-02-12T12:34:40+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Schema"
   slug: "postgresql-administration/postgresql-schema"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALTER SCHEMA"
   slug: "postgresql-administration/postgresql-alter-schema"
 ---

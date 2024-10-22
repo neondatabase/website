@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/update/"
 ogImage: "/postgresqltutorial/vendors_table.png"
 updatedOn: "2024-05-19T08:31:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Python: Insert Data Into a Table"
   slug: "postgresql-python/insert"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Querying Data"
   slug: "postgresql-python/query"
 ---

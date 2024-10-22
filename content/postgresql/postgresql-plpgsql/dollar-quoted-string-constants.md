@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-s
 ogImage: ""
 updatedOn: "2024-03-18T14:51:14+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Introduction to PostgreSQL PL/pgSQL"
   slug: "postgresql-plpgsql/introduction-to-postgresql-stored-procedures"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Block Structure"
   slug: "postgresql-plpgsql/plpgsql-block-structure"
 ---

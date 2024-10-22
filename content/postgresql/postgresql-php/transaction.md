@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/transaction/"
 ogImage: ""
 updatedOn: "2024-01-30T01:08:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Querying Data"
   slug: "postgresql-php/query"
-next_page: 
+nextLink: 
   title: "PostgreSQL PHP: Calling Stored Procedures"
   slug: "postgresql-php/call-stored-procedures"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/install
 ogImage: "/postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png"
 updatedOn: "2024-01-16T05:41:06+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Sample Database"
   slug: "postgresql-getting-started/postgresql-sample-database"
-next_page: 
+nextLink: 
   title: "Connect to a PostgreSQL Database Server"
   slug: "postgresql-getting-started/connect-to-postgresql-database"
 ---

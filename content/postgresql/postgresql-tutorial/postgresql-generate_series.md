@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-gen
 ogImage: ""
 updatedOn: "2024-07-01T01:21:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL vs. MySQL"
   slug: "postgresql-tutorial/postgresql-vs-mysql"
-next_page: 
+nextLink: 
   title: "PostgreSQL PL/pgSQL"
   slug: "postgresql-tutorial/../postgresql-plpgsql"
 ---

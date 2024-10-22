@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exc
 ogImage: "/postgresqltutorial/PostgreSQL-EXCEPT-300x202.png"
 updatedOn: "2024-07-01T00:51:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL INTERSECT Operator"
   slug: "postgresql-tutorial/postgresql-intersect"
-next_page: 
+nextLink: 
   title: "PostgreSQL GROUPING SETS"
   slug: "postgresql-tutorial/postgresql-grouping-sets"
 ---

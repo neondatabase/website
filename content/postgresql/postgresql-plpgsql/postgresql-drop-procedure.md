@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop
 ogImage: "/postgresqltutorial/actor.png"
 updatedOn: "2024-02-07T14:17:58+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CREATE PROCEDURE"
   slug: "postgresql-plpgsql/postgresql-create-procedure"
-next_page: 
+nextLink: 
   title: "PostgreSQL Stored Procedure with INOUT Parameters"
   slug: "postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters"
 ---

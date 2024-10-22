@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dro
 ogImage: "/postgresqltutorial/PostgreSQL-Drop-Column-300x128.png"
 updatedOn: "2024-01-25T04:15:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ADD COLUMN:  Add One or More Columns to a Table"
   slug: "postgresql-tutorial/postgresql-add-column"
-next_page: 
+nextLink: 
   title: "PostgreSQL Change Column Type"
   slug: "postgresql-tutorial/postgresql-change-column-type"
 ---

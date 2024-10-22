@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-tem
 ogImage: "/postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png"
 updatedOn: "2024-02-18T10:49:32+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TRUNCATE TABLE"
   slug: "postgresql-tutorial/postgresql-truncate-table"
-next_page: 
+nextLink: 
   title: "PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples"
   slug: "postgresql-tutorial/postgresql-copy-table"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-tri
 ogImage: ""
 updatedOn: "2024-03-30T03:13:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Event Trigger"
   slug: "postgresql-triggers/postgresql-event-trigger"
-next_page: 
+nextLink: 
   title: "PostgreSQL Views"
   slug: "postgresql-triggers/../postgresql-views"
 ---

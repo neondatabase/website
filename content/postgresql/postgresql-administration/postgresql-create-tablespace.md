@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-13T15:22:39+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Change the Password of a PostgreSQL User"
   slug: "postgresql-administration/postgresql-change-password"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALTER TABLESPACE"
   slug: "postgresql-administration/postgresql-alter-tablespace"
 ---

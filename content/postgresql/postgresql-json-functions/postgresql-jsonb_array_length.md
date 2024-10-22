@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-24T03:50:01+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL jsonb_strip_nulls() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_strip_nulls"
-next_page: 
+nextLink: 
   title: "PostgreSQL jsonb_array_elements() Function"
   slug: "postgresql-json-functions/postgresql-jsonb_array_elements"
 ---

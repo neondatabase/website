@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/postgre
 ogImage: "/postgresqltutorial/dvd-rental-sample-database-diagram.png"
 updatedOn: "2024-01-16T02:36:36+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "What is PostgreSQL?"
   slug: "postgresql-getting-started/what-is-postgresql"
-next_page: 
+nextLink: 
   title: "Install PostgreSQL on Windows"
   slug: "postgresql-getting-started/install-postgresql"
 ---

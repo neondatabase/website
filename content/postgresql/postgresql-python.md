@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-python/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png"
 updatedOn: "2024-05-19T08:36:25+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Delete Data From a Table"
   slug: "postgresql-php/delete"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python: Connect to PostgreSQL Database Server"
   slug: "postgresql-python/connect"
 ---

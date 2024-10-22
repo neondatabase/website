@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-21T09:32:51+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TIMEOFDAY() Function"
   slug: "postgresql-date-functions/postgresql-timeofday"
-next_page: 
+nextLink: 
   title: "PostgreSQL String Functions"
   slug: "postgresql-date-functions/../postgresql-string-functions"
 ---

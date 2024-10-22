@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dat
 ogImage: ""
 updatedOn: "2024-04-19T09:05:26+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Integer Data Types"
   slug: "postgresql-tutorial/postgresql-integer"
-next_page: 
+nextLink: 
   title: "PostgreSQL Timestamp Data Types"
   slug: "postgresql-tutorial/postgresql-timestamp"
 ---

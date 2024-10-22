@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-01T08:44:30+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Show Tables"
   slug: "postgresql-administration/postgresql-show-tables"
-next_page: 
+nextLink: 
   title: "17 Practical psql Commands You Don’t Want to Miss"
   slug: "postgresql-administration/psql-commands"
 ---

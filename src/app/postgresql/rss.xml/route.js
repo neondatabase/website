@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
-import { POSTGRES_DOCS_BASE_PATH } from 'constants/docs';
-import { getAllPosts } from 'utils/api-postgres';
+import { POSTGRESQL_BASE_PATH } from 'constants/docs';
+import { getAllPosts } from 'utils/api-postgresql';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
@@ -10,18 +10,18 @@ export async function GET() {
   const allPosts = await getAllPosts();
 
   const feed = new Rss({
-    id: POSTGRES_DOCS_BASE_PATH,
+    id: POSTGRESQL_BASE_PATH,
     language: 'en',
     title: `PostgreSQL Tutorials — Neon Docs`,
     description:
       'Learn PostgreSQL quickly through a practical PostgreSQL tutorial designed for database administrators and application developers.',
-    feed_url: `${SITE_URL}${POSTGRES_DOCS_BASE_PATH}rss.xml`,
+    feed_url: `${SITE_URL}${POSTGRESQL_BASE_PATH}rss.xml`,
     site_url: SITE_URL,
   });
 
   allPosts.forEach((post) => {
     const { slug, title, subtitle, createdAt, content } = post;
-    const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${POSTGRES_DOCS_BASE_PATH}${slug}`;
+    const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${POSTGRESQL_BASE_PATH}${slug}`;
 
     feed.item({
       id: url,

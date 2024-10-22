@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exi
 ogImage: "/postgresqltutorial/customer-and-payment-tables.png"
 updatedOn: "2024-07-01T01:05:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALL Operator"
   slug: "postgresql-tutorial/postgresql-all"
-next_page: 
+nextLink: 
   title: "PostgreSQL CTE"
   slug: "postgresql-tutorial/postgresql-cte"
 ---

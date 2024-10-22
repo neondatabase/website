@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-gen
 ogImage: ""
 updatedOn: "2024-03-25T08:00:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Identity Column"
   slug: "postgresql-tutorial/postgresql-identity-column"
-next_page: 
+nextLink: 
   title: "PostgreSQL ALTER TABLE"
   slug: "postgresql-tutorial/postgresql-alter-table"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/math-functions.png"
 updatedOn: "2024-05-19T04:18:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TO_NUMBER() Function"
   slug: "postgresql-string-functions/postgresql-to_number"
-next_page: 
+nextLink: 
   title: "PostgreSQL ABS() Function"
   slug: "postgresql-math-functions/postgresql-abs"
 ---

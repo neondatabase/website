@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-cheat-sheet/"
 ogImage: "/postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png"
 updatedOn: "2024-01-16T00:36:34+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL C#: Call a Stored Procedure"
   slug: "postgresql-csharp/postgresql-csharp-call-a-stored-procedure"
-next_page: 
+nextLink: 
   title: "PostgreSQL Resources"
   slug: "postgresql-resources"
 ---

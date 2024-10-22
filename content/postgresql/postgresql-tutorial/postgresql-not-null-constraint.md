@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not
 ogImage: ""
 updatedOn: "2024-01-25T10:09:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL UNIQUE Constraint"
   slug: "postgresql-tutorial/postgresql-unique-constraint"
-next_page: 
+nextLink: 
   title: "PostgreSQL DEFAULT Value"
   slug: "postgresql-tutorial/postgresql-default-value"
 ---

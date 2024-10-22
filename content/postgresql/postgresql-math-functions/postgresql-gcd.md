@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-05-19T03:19:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FLOOR() Function"
   slug: "postgresql-math-functions/postgresql-floor"
-next_page: 
+nextLink: 
   title: "PostgreSQL LCM() Function"
   slug: "postgresql-math-functions/postgresql-lcm"
 ---

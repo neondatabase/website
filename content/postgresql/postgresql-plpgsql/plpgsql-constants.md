@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constan
 ogImage: ""
 updatedOn: "2024-03-19T02:45:18+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Record Types"
   slug: "postgresql-plpgsql/plpgsql-record-types"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Errors and Messages"
   slug: "postgresql-plpgsql/plpgsql-errors-messages"
 ---

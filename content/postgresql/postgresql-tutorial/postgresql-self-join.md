@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sel
 ogImage: "/postgresqltutorial/PostgreSQL-Self-Join-Reporting-Structure.png"
 updatedOn: "2024-01-18T03:56:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RIGHT JOIN"
   slug: "postgresql-tutorial/postgresql-right-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL FULL OUTER JOIN"
   slug: "postgresql-tutorial/postgresql-full-outer-join"
 ---

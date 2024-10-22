@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-al
 ogImage: ""
 updatedOn: "2024-03-28T13:52:14+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Enable Triggers"
   slug: "postgresql-triggers/enable-triggers"
-next_page: 
+nextLink: 
   title: "PostgreSQL Event Trigger"
   slug: "postgresql-triggers/postgresql-event-trigger"
 ---

@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/postgresql-databases.png"
 updatedOn: "2020-07-17T02:50:14+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Tutorial"
   slug: "postgresql-tutorial/.."
-next_page: 
+nextLink: 
   title: "PostgreSQL SELECT"
   slug: "postgresql-tutorial/postgresql-select"
 ---

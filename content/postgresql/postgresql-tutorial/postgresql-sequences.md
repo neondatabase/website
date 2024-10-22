@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-seq
 ogImage: "/postgresqltutorial/PostgreSQL-Sequence-simple-example.png"
 updatedOn: "2024-02-08T06:01:43+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Using PostgreSQL SERIAL to Create Auto-increment Column"
   slug: "postgresql-tutorial/postgresql-serial"
-next_page: 
+nextLink: 
   title: "PostgreSQL Identity Column"
   slug: "postgresql-tutorial/postgresql-identity-column"
 ---

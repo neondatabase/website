@@ -6,10 +6,10 @@ prev_url: "index.html"
 ogImage: "/postgresqltutorial/sales_stats-table.png"
 updatedOn: "2020-04-11T10:53:00+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LEAD Function"
   slug: "postgresql-window-function/postgresql-lead-function"
-next_page: 
+nextLink: 
   title: "PostgreSQL NTH_VALUE Function"
   slug: "postgresql-window-function/postgresql-nth_value-function"
 ---

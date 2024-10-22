@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dis
 ogImage: ""
 updatedOn: "2024-01-16T09:44:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL EXPLAIN"
   slug: "postgresql-tutorial/postgresql-explain"
-next_page: 
+nextLink: 
   title: "PostgreSQL vs. MySQL"
   slug: "postgresql-tutorial/postgresql-vs-mysql"
 ---

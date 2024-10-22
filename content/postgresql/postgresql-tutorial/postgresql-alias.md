@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-ali
 ogImage: ""
 updatedOn: "2024-01-17T06:08:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Joins"
   slug: "postgresql-tutorial/postgresql-joins"
-next_page: 
+nextLink: 
   title: "PostgreSQL INNER JOIN"
   slug: "postgresql-tutorial/postgresql-inner-join"
 ---

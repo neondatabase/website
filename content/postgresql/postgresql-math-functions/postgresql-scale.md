@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: ""
 updatedOn: "2024-02-17T07:51:05+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SQRT() Function"
   slug: "postgresql-math-functions/postgresql-sqrt"
-next_page: 
+nextLink: 
   title: "PostgreSQL SIGN() Function"
   slug: "postgresql-math-functions/postgresql-sign"
 ---

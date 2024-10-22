@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: "/postgresqltutorial/rental-table.png"
 updatedOn: "2024-03-21T04:14:17+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL MAKE_TIME() Function"
   slug: "postgresql-date-functions/postgresql-make_time"
-next_page: 
+nextLink: 
   title: "PostgreSQL JUSTIFY_DAYS() Function"
   slug: "postgresql-date-functions/postgresql-justify_days"
 ---

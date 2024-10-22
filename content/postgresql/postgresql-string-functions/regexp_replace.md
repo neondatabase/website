@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/regexp
 ogImage: ""
 updatedOn: "2024-01-29T01:38:59+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REPLACE() Function"
   slug: "postgresql-string-functions/postgresql-replace"
-next_page: 
+nextLink: 
   title: "PostgreSQL REGEXP_MATCHES() Function"
   slug: "postgresql-string-functions/postgresql-regexp_matches"
 ---

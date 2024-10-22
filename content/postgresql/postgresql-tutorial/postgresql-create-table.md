@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cre
 ogImage: ""
 updatedOn: "2024-02-16T13:40:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Data Types"
   slug: "postgresql-tutorial/postgresql-data-types"
-next_page: 
+nextLink: 
   title: "PostgreSQL SELECT INTO"
   slug: "postgresql-tutorial/postgresql-select-into"
 ---

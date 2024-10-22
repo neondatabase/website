@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-errors-
 ogImage: ""
 updatedOn: "2024-03-19T02:58:12+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Constants"
   slug: "postgresql-plpgsql/plpgsql-constants"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Assert Statement"
   slug: "postgresql-plpgsql/pl-pgsql-assert"
 ---

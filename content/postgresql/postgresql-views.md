@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-views/"
 ogImage: ""
 updatedOn: "2024-03-16T08:31:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Creating a PostgreSQL Trigger with a When Condition"
   slug: "postgresql-triggers/postgresql-trigger-when-condition"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE VIEW"
   slug: "postgresql-views/managing-postgresql-views"
 ---

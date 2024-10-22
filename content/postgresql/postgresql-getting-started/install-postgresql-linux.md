@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/install
 ogImage: ""
 updatedOn: "2024-02-19T07:35:09+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Install PostgreSQL macOS"
   slug: "postgresql-getting-started/install-postgresql-macos"
-next_page: 
+nextLink: 
   title: "PostgreSQL Tutorial"
   slug: "postgresql-getting-started/.."
 ---

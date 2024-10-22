@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-contin
 ogImage: ""
 updatedOn: "2024-03-19T04:07:31+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL Exit Statement"
   slug: "postgresql-plpgsql/plpgsql-exit"
-next_page: 
+nextLink: 
   title: "PostgreSQL Exception"
   slug: "postgresql-plpgsql/postgresql-exception"
 ---

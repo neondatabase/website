@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/update/"
 ogImage: ""
 updatedOn: "2024-02-02T04:57:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JDBC: Querying Data"
   slug: "postgresql-jdbc/query"
-next_page: 
+nextLink: 
   title: "PostgreSQL JDBC: Delete Data from Table"
   slug: "postgresql-jdbc/delete"
 ---

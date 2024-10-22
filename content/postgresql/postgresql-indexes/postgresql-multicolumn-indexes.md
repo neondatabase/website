@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-mult
 ogImage: ""
 updatedOn: "2024-02-28T09:28:50+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Partial Index"
   slug: "postgresql-indexes/postgresql-partial-index"
-next_page: 
+nextLink: 
   title: "PostgreSQL REINDEX"
   slug: "postgresql-indexes/postgresql-reindex"
 ---

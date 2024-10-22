@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-is-
 ogImage: "/postgresqltutorial/address.png"
 updatedOn: "2024-05-14T13:59:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LIKE"
   slug: "postgresql-tutorial/postgresql-like"
-next_page: 
+nextLink: 
   title: "PostgreSQL Joins"
   slug: "postgresql-tutorial/postgresql-joins"
 ---

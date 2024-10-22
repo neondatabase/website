@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-01-26T10:03:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LOCALTIME Function"
   slug: "postgresql-date-functions/postgresql-localtime"
-next_page: 
+nextLink: 
   title: "PostgreSQL DATE_PART() Function"
   slug: "postgresql-date-functions/postgresql-date_part"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: "/postgresqltutorial/customer.png"
 updatedOn: "2024-01-28T09:51:45+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL LTRIM() Function"
   slug: "postgresql-string-functions/postgresql-ltrim"
-next_page: 
+nextLink: 
   title: "PostgreSQL UPPER() Function"
   slug: "postgresql-string-functions/postgresql-upper"
 ---

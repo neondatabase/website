@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgres
 ogImage: ""
 updatedOn: "2024-03-21T03:47:04+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL JUSTIFY_HOURS() Function"
   slug: "postgresql-date-functions/postgresql-justify_hours"
-next_page: 
+nextLink: 
   title: "PostgreSQL MAKE_INTERVAL() Function"
   slug: "postgresql-date-functions/postgresql-make_interval"
 ---

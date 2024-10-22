@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-bef
 ogImage: ""
 updatedOn: "2024-03-29T02:17:22+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL INSTEAD OF Triggers"
   slug: "postgresql-triggers/postgresql-instead-of-triggers"
-next_page: 
+nextLink: 
   title: "Disable Triggers"
   slug: "postgresql-triggers/managing-postgresql-trigger"
 ---

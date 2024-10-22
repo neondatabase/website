@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-getting-started/"
 ogImage: ""
 updatedOn: "2021-04-27T02:23:23+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: ""
   slug: ""
-next_page: 
+nextLink: 
   title: "What is PostgreSQL?"
   slug: "postgresql-getting-started/what-is-postgresql"
 ---

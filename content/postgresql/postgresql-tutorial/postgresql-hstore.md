@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hst
 ogImage: "/postgresqltutorial/postgresql-hstore-query.jpg"
 updatedOn: "2024-02-01T12:53:20+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Array"
   slug: "postgresql-tutorial/postgresql-array"
-next_page: 
+nextLink: 
   title: "PostgreSQL JSON"
   slug: "postgresql-tutorial/postgresql-json"
 ---

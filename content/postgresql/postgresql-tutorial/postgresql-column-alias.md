@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-col
 ogImage: "/postgresqltutorial/customer-table.png"
 updatedOn: "2024-01-16T08:47:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SELECT"
   slug: "postgresql-tutorial/postgresql-select"
-next_page: 
+nextLink: 
   title: "PostgreSQL ORDER BY"
   slug: "postgresql-tutorial/postgresql-order-by"
 ---

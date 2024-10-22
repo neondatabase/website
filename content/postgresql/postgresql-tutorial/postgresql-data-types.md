@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-dat
 ogImage: "/postgresqltutorial/PostgreSQL-Data-Types-300x254.png"
 updatedOn: "2024-05-08T22:50:24+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Export PostgreSQL Table to CSV File"
   slug: "postgresql-tutorial/export-postgresql-table-to-csv-file"
-next_page: 
+nextLink: 
   title: "PostgreSQL CREATE TABLE"
   slug: "postgresql-tutorial/postgresql-create-table"
 ---

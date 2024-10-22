@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/psql-com
 ogImage: "/postgresqltutorial/psql-commands.jpg"
 updatedOn: "2024-01-16T06:44:49+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Describe Table"
   slug: "postgresql-administration/postgresql-describe-table"
-next_page: 
+nextLink: 
   title: "How to Uninstall PostgreSQL from Ubuntu"
   slug: "postgresql-administration/uninstall-postgresql-ubuntu"
 ---

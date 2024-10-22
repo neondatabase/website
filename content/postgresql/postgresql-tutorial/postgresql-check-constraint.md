@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-che
 ogImage: ""
 updatedOn: "2024-01-25T09:16:13+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DELETE CASCADE"
   slug: "postgresql-tutorial/postgresql-delete-cascade"
-next_page: 
+nextLink: 
   title: "PostgreSQL UNIQUE Constraint"
   slug: "postgresql-tutorial/postgresql-unique-constraint"
 ---

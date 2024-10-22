@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-gro
 ogImage: "/postgresqltutorial/PostgreSQL-GROUP-BY-1.png"
 updatedOn: "2024-04-19T07:10:40+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL NATURAL JOIN"
   slug: "postgresql-tutorial/postgresql-natural-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL HAVING"
   slug: "postgresql-tutorial/postgresql-having"
 ---

@@ -2,11 +2,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { POSTGRES_DOCS_BASE_PATH } = require('./src/constants/docs');
 const { getAllPosts, getAllChangelogPosts } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
-const { getAllPostgresTutorials } = require('./src/utils/postgresql-pages');
 
 const defaultConfig = {
   poweredByHeader: false,
@@ -83,23 +81,8 @@ const defaultConfig = {
     ];
   },
   async redirects() {
-    const postgresPosts = await getAllPostgresTutorials();
     const docPosts = await getAllPosts();
     const changelogPosts = await getAllChangelogPosts();
-    const postgresRedirects = postgresPosts.reduce((acc, post) => {
-      const { slug, redirectFrom: postRedirects } = post;
-      if (!postRedirects || !postRedirects.length) {
-        return acc;
-      }
-
-      const postRedirectsArray = postRedirects.map((redirect) => ({
-        source: redirect,
-        destination: `${POSTGRES_DOCS_BASE_PATH}${slug}`,
-        permanent: true,
-      }));
-
-      return [...acc, ...postRedirectsArray];
-    }, []);
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -130,6 +113,11 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/postgresql',
+        destination: '/postgresql/tutorial',
+        permanent: true,
+      },
       {
         source: '/blog/the-non-obviousness-of-postgres-roles',
         destination: '/blog/postgres-roles',
@@ -242,7 +230,6 @@ const defaultConfig = {
         destination: '/docs/ai/ai-intro',
         permanent: true,
       },
-      ...postgresRedirects,
       ...docsRedirects,
       ...changelogRedirects,
     ];

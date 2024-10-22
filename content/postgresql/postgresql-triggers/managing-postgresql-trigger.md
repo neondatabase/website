@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/managing-postg
 ogImage: ""
 updatedOn: "2024-03-26T01:55:24+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL BEFORE TRUNCATE Trigger"
   slug: "postgresql-triggers/postgresql-before-truncate-trigger"
-next_page: 
+nextLink: 
   title: "Enable Triggers"
   slug: "postgresql-triggers/enable-triggers"
 ---

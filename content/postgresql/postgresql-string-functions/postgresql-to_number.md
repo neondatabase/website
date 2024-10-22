@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-29T02:05:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL TO_CHAR() Function"
   slug: "postgresql-string-functions/postgresql-to_char"
-next_page: 
+nextLink: 
   title: "PostgreSQL Math Functions"
   slug: "postgresql-string-functions/../postgresql-math-functions"
 ---

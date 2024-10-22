@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-tim
 ogImage: "/postgresqltutorial/PostgreSQL-TIME-example.png"
 updatedOn: "2024-02-02T06:49:37+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL Interval Data Type"
   slug: "postgresql-tutorial/postgresql-interval"
-next_page: 
+nextLink: 
   title: "PostgreSQL UUID Data Type"
   slug: "postgresql-tutorial/postgresql-uuid"
 ---

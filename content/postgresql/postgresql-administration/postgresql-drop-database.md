@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgres
 ogImage: ""
 updatedOn: "2024-02-19T00:53:42+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL ALTER DATABASE"
   slug: "postgresql-administration/postgresql-alter-database"
-next_page: 
+nextLink: 
   title: "PostgreSQL Rename Database"
   slug: "postgresql-administration/postgresql-rename-database"
 ---

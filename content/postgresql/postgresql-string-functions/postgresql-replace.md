@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgr
 ogImage: ""
 updatedOn: "2024-01-29T01:38:44+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL SPLIT_PART() Function"
   slug: "postgresql-string-functions/postgresql-split_part"
-next_page: 
+nextLink: 
   title: "PostgreSQL REGEXP_REPLACE() Function"
   slug: "postgresql-string-functions/regexp_replace"
 ---

@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop
 ogImage: "/postgresqltutorial/actor.png"
 updatedOn: "2024-02-28T10:30:19+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL REINDEX"
   slug: "postgresql-indexes/postgresql-reindex"
-next_page: 
+nextLink: 
   title: "PostgreSQL List Indexes"
   slug: "postgresql-indexes/postgresql-list-indexes"
 ---

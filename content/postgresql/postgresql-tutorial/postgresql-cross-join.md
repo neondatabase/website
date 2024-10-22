@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cro
 ogImage: "/postgresqltutorial/PostgreSQL-CROSS-JOIN-illustration.png"
 updatedOn: "2024-04-08T04:05:33+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL FULL OUTER JOIN"
   slug: "postgresql-tutorial/postgresql-full-outer-join"
-next_page: 
+nextLink: 
   title: "PostgreSQL NATURAL JOIN"
   slug: "postgresql-tutorial/postgresql-natural-join"
 ---

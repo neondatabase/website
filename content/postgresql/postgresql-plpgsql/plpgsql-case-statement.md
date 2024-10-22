@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-st
 ogImage: "/postgresqltutorial/plpgsql-simple-case-statement.png"
 updatedOn: "2024-02-07T04:18:40+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PL/pgSQL IF Statement"
   slug: "postgresql-plpgsql/plpgsql-if-else-statements"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Loop Statements"
   slug: "postgresql-plpgsql/plpgsql-loop-statements"
 ---

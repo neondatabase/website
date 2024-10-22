@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-s
 ogImage: "/postgresqltutorial/plpgSQL-block-Structure.png"
 updatedOn: "2024-04-19T08:08:48+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "Dollar-Quoted String Constants"
   slug: "postgresql-plpgsql/dollar-quoted-string-constants"
-next_page: 
+nextLink: 
   title: "PL/pgSQL Variables"
   slug: "postgresql-plpgsql/plpgsql-variables"
 ---

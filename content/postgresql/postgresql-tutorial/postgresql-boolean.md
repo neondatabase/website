@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-boo
 ogImage: "/postgresqltutorial/PostgreSQL-Boolean-300x146.png"
 updatedOn: "2024-02-01T01:09:16+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL DEFAULT Value"
   slug: "postgresql-tutorial/postgresql-default-value"
-next_page: 
+nextLink: 
   title: "PostgreSQL Character Types: CHAR, VARCHAR, and TEXT"
   slug: "postgresql-tutorial/postgresql-char-varchar-text"
 ---

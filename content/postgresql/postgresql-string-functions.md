@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/"
 ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/string-functions.png"
 updatedOn: "2024-03-20T02:04:54+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PG_SLEEP() Function"
   slug: "postgresql-date-functions/postgresql-pg_sleep"
-next_page: 
+nextLink: 
   title: "PostgreSQL ASCII() Function"
   slug: "postgresql-string-functions/postgresql-ascii"
 ---

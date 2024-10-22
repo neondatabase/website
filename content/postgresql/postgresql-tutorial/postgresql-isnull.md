@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-isn
 ogImage: ""
 updatedOn: "2024-02-01T04:01:35+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL COALESCE"
   slug: "postgresql-tutorial/postgresql-coalesce"
-next_page: 
+nextLink: 
   title: "PostgreSQL NULLIF"
   slug: "postgresql-tutorial/postgresql-nullif"
 ---

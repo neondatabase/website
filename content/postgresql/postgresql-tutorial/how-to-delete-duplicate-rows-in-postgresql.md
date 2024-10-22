@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/how-to-delete-
 ogImage: ""
 updatedOn: "2024-02-01T03:13:27+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "How to Generate a Random Number in a Range"
   slug: "postgresql-tutorial/postgresql-random-range"
-next_page: 
+nextLink: 
   title: "PostgreSQL CASE"
   slug: "postgresql-tutorial/postgresql-case"
 ---

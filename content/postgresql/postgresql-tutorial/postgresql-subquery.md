@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sub
 ogImage: ""
 updatedOn: "2024-07-01T01:04:57+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL CUBE"
   slug: "postgresql-tutorial/postgresql-cube"
-next_page: 
+nextLink: 
   title: "PostgreSQL Correlated Subquery"
   slug: "postgresql-tutorial/postgresql-correlated-subquery"
 ---

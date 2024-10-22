@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgres
 ogImage: "/postgresqltutorial/customer-and-payment-tables.png"
 updatedOn: "2024-02-16T14:25:02+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL RANDOM() Function"
   slug: "postgresql-math-functions/postgresql-random"
-next_page: 
+nextLink: 
   title: "PostgreSQL SQRT() Function"
   slug: "postgresql-math-functions/postgresql-sqrt"
 ---

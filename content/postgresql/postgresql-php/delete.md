@@ -6,10 +6,10 @@ prev_url: "https://www.postgresqltutorial.com/postgresql-php/delete/"
 ogImage: ""
 updatedOn: "2024-01-30T00:55:55+00:00"
 enableTableOfContents: true
-prev_page: 
+previousLink: 
   title: "PostgreSQL PHP: Working with Binary Data"
   slug: "postgresql-php/postgresql-blob"
-next_page: 
+nextLink: 
   title: "PostgreSQL Python"
   slug: "postgresql-php/../postgresql-python"
 ---

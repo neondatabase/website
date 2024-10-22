@@ -98,7 +98,36 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
-    return (
+    return src.includes('?') ? (
+      <Image
+        className={clsx(className, {
+          'no-border':
+            title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+        })}
+        src={src.split('?')[0]}
+        width={isReleaseNote ? 762 : 796}
+        height={isReleaseNote ? 428 : 447}
+        style={{
+          float: src.includes('alignright') ? 'right' : src.includes('alignleft') ? 'left' : 'none',
+          width: src.includes('noscale')
+            ? 'auto'
+            : src.includes('alignright')
+              ? '30%'
+              : src.includes('alignleft')
+                ? '30%'
+                : '100%',
+          padding: src.includes('alignright')
+            ? '20px 0 20px 20px'
+            : src.includes('alignleft')
+              ? '20px 20px 20px 0'
+              : 'none',
+          height: '100%',
+          filter: 'grayscale(100%) sepia(75%) hue-rotate(100deg)',
+        }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    ) : (
       <ImageZoom src={src}>
         <Image
           className={clsx(className, { 'no-border': title === 'no-border' })}
