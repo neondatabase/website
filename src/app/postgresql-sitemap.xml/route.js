@@ -1,4 +1,4 @@
-import { getAllPosts as getAllPostgresPosts } from 'utils/api-postgres'; // Import the PostgreSQL posts fetching function
+import { getAllPosts as getAllPostgresPosts } from 'utils/api-postgresql'; // Import the PostgreSQL posts fetching function
 
 export async function GET() {
   const headers = new Headers();
