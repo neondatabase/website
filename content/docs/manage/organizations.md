@@ -84,7 +84,7 @@ Converting your personal account transfers all of your projects and billing to t
 
 #### Create a new organization
 
-If you choose to create a new organization, you can decide which projects (if any) you want to [transfer](/docs/manage/orgs-project-transfer). First, you'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan — so note that you'll be billed for both your personal and organization accounts. This option is helpful if you want to keep personal projects separate while still requiring paid features like higher allowances or additional security.
+If you choose to create a new organization, you can decide which projects (if any) you want to [transfer](/docs/manage/orgs-project-transfer). First, you'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan — so you'll be billed for both your personal and organization accounts. This option is helpful if you want to keep personal projects separate while still requiring paid features like higher allowances or additional security.
 
 <Admonition type="note">
 Project transfers to an organization are one-way. You cannot move organization projects back to your personal account.
