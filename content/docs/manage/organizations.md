@@ -42,7 +42,7 @@ Here's a breakdown of what actions each role can take:
     To get started, click **Create organization** from the breadcrumb dropdown.
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
-    <img src="/docs/manage/orgs_create_button.png" alt="create organization button" style={{ verticalAlign: 'middle', maxWidth: '100%' }} />
+    ![create organization button](/docs/manage/orgs_create_button.png)
   </div>
 </div>
 
@@ -52,14 +52,10 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
 
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
-
     You'll be prompted to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
-
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
-
-![getting started with new org](/docs/manage/orgs_create_next.png)
-
+  ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
   </div>
 </div>
 
@@ -67,14 +63,12 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
 
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
-    If you're already on a paid plan for your personal account, you'll have two options: 
-    - convert your personal account to an organization
-    - create a new organization from scratch.
+    If you're already on a paid plan for your personal account, you'll have two options:
+    - Convert your personal account to an organization
+    - Create a new organization from scratch
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
-
-![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
-
+    ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
   </div>
 </div>
 
@@ -82,33 +76,25 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
 
 Converting your personal account transfers all of your projects and billing to the new organization. Your personal account will switch to the Free Plan. This is a quick, one-time, one-way operation: everything in your personal account is transferred to your new organization instantly. There is no service disruption, no change to your connections, and no way to move resources back to your personal account after the conversion.
 
+After conversion, you can:
+
+- [Invite](/docs/manage/orgs-manage#invite-members) team members to collaborate on transferred projects
+- Promote [collaborators](/docs/manage/orgs-manage#manage-collaborators) to full members or leave them on specific projects
+- Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
+
 #### Create a new organization
 
-If you choose to create a new organization, you can decide which projects (if any) you want to [transfer](/docs/manage/orgs-project-transfer). First, you'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan — so you'll be billed for both your personal and organization accounts. This option is helpful if you want to keep personal projects separate while still requiring paid features like higher allowances or additional security.
+If you create a new organization, you can choose which projects (if any) to [transfer](/docs/manage/orgs-project-transfer). You'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan, so you'll be billed for both accounts. 
+
+After creating the organization, you can:
+
+- [Invite](/docs/manage/orgs-manage#invite-members) team members to the new organization
+- Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
+- [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects) within the organization
 
 <Admonition type="note">
 Project transfers to an organization are one-way. You cannot move organization projects back to your personal account.
 </Admonition>
-
-## What's next?
-
-After creating the organization, your next actions depend on your particular scenario. Here are a couple of example scenarios.
-
-### Scenario 1 — Moving an existing team to a new organization
-
-If you're currently on a paid plan, using [project collaboration](/docs/guides/project-collaboration-guide) to work with your team on your Personal account projects, and you intend to work primarily from your new Organization account:
-
-- [Transfer your existing projects](/docs/manage/orgs-project-transfer#transfer-projects-in-bulk) from your personal account to the new organization. You can leave up to 10 projects behind, since that's the Free Plan limit.
-- Downgrade your personal account to the [Free Plan](/docs/introduction/manage-billing#change-your-plan) once all projects are transferred. This shifts all billing to the Organization.
-- [Invite](/docs/manage/orgs-manage#invite-members) your team members to join the organization.
-
-### Scenario 2 — Starting a new organization from scratch
-
-In this scenario you've been using Neon for personal projects for some time, and you now want to bring Neon to your company, but still keep your personal projects separate. You might instead:
-
-- [Invite](/docs/manage/orgs-manage#invite-members) someone to your new organization and delegate billing to them: set their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**. They can then revise the billing details and handle invoices for the organization.
-- Start creating new projects within the new organization.
-- Keep your personal projects on your existing paid plan. No need to transfer or downgrade.
 
 ## Limitations
 
