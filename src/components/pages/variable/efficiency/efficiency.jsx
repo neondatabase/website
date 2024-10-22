@@ -35,7 +35,7 @@ const items = [
   },
   {
     icon: openSourceIcon,
-    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;Github</a>.',
+    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;GitHub</a>.',
   },
 ];
 

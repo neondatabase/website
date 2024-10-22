@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2024-08-07T21:36:52.665Z'
 ---
 
-In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, Github-style visual comparison between the `dev/jordan` development branch and `main`.
+In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `dev/jordan` development branch and `main`.
 
 ## Before you start
 

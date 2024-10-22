@@ -14,7 +14,7 @@ This guide will show you how to connect to a Neon Postgres database from your Ne
 Before starting, ensure you have:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A Netlify account for deploying your site with `Functions`. Sign up at [Netlify](https://netlify.com) if necessary. While Netlify can deploy directly from a Github repository, we'll use the `Netlify` CLI tool to deploy our project manually.
+- A Netlify account for deploying your site with `Functions`. Sign up at [Netlify](https://netlify.com) if necessary. While Netlify can deploy directly from a GitHub repository, we'll use the `Netlify` CLI tool to deploy our project manually.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed locally for developing and deploying your Functions.
 
 ## Setting up your Neon database
