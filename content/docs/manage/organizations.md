@@ -53,7 +53,7 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
 
-    You'll be prompted to choose to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
+    You'll be prompted to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
 
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
