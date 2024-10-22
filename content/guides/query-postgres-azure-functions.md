@@ -41,8 +41,6 @@ The application's features will include:
 - **Add a new reservation**: When a customer makes a reservation, their information will be stored in the Neon Database.
 - **Cancel a reservation**: Customers can cancel a reservation by deleting the corresponding record from the database.
 
-Here is the English translation:
-
 ---
 
 ## Step 1: Create and Configure the Database on Neon Database
@@ -426,8 +424,6 @@ app.http("manageReservations", {
 ```
 
 Feel free to extend this structure to include features such as adding new clients, creating new reservations, or even updating and deleting data, each with **its own file** and **its own logic**.
-
-Voici la traduction en anglais :
 
 ## Step 3: Test the Function Locally
 
