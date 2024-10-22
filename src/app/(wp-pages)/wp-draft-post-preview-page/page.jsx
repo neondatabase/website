@@ -117,8 +117,21 @@ const WpPageDraft = async ({ searchParams }) => {
 
         return <Benefits items={items} {...restProps} />;
       },
+      landingformcopy: async ({ hubspotFormId, ...restProps }) => {
+        const formData = await getHubspotFormData(hubspotFormId);
+        return (
+          <Hero
+            theme="form-copy"
+            formData={formData}
+            hubspotFormId={hubspotFormId}
+            {...restProps}
+          />
+        );
+      },
       landingcta: ({ ...props }) => {
-        if (isAzurePage || isCreatorsPage) {
+        if (isCreatorsPage) return null;
+
+        if (isAzurePage) {
           return (
             <SharedCTA
               className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
