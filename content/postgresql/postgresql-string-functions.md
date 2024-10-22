@@ -20,8 +20,6 @@ nextLink:
 This page provides the most commonly used PostgreSQL string functions that allow you to manipulate string data effectively.  
  
 
-
-
 | Function | Description | Example | Result |
 | --- | --- | --- | --- |
 | [ASCII](postgresql-string-functions/postgresql-ascii) | Return the ASCII code value of a character or Unicode code point of a UTF8 character | ASCII(‘A’) | 65 |
@@ -37,12 +35,12 @@ This page provides the most commonly used PostgreSQL string functions that allow
 | [LTRIM](postgresql-string-functions/postgresql-ltrim) | Remove the longest string that contains specified characters from the left of the input string | LTRIM(‘00123’) | ‘123’ |
 | [MD5](postgresql-string-functions/postgresql-md5) | Return MD5 hash of a string in hexadecimal | MD5(‘ABC’) |  |
 | [POSITION](postgresql-string-functions/postgresql-position) | Return the location of a substring in a string | POSITION(‘B’ in ‘A B C’) | 3 |
-| [REGEXP\_MATCHES](postgresql-string-functions/postgresql-regexp_matches) | Replace substrings that match a POSIX regular expression with a new substring | SELECT REGEXP\_MATCHES(‘ABC’, ‘^(A)(..)$’, ‘g’); | {A,BC} |
+| [REGEXP\_MATCHES](postgresql-string-functions/postgresql-regexp_matches) | Replace substrings that match a POSIX regular expression with a new substring | SELECT REGEXP\_MATCHES(‘ABC’, ‘^(A)(..)$’, ‘g’); | \{A,BC\} |
 | [REGEXP\_REPLACE](postgresql-string-functions/regexp_replace) | Replace a substring using regular expressions. | REGEXP\_REPLACE(‘John Doe’,'(.\*) (.\*)’,’\\2, \\1′); | ‘Doe, John’ |
 | [REPEAT](postgresql-string-functions/postgresql-repeat) | Repeat a string the specified number of times. | REPEAT(‘\*’, 5\) | ‘\*\*\*\*\*’ |
 | [REPLACE](postgresql-string-functions/postgresql-replace) | Replace a substring within a string with a new one. | REPLACE(‘ABC’,’B’,’A’) | ‘AAC’ |
 | [REVERSE](postgresql-string-functions/postgresql-reverse) | Replace a substring within a string with a new one | REVERSE(‘ABC’) | ‘CBA’ |
-| [RIGHT](postgresql-string-functions/postgresql-right) | Return the last n characters in the string. When n is negative, return all but the first \|n\| characters. | RIGHT(‘ABC’, 2\) | ‘BC’ |
+| [RIGHT](postgresql-string-functions/postgresql-right) | Return the last n characters in the string. When n is negative, return all but the first \\n  characters. | RIGHT(‘ABC’, 2\) | ‘BC’ |
 | [RPAD](postgresql-string-functions/postgresql-rpad) | Extend a string to a length by appending specified characters. | RPAD(‘ABC’, 6, ‘xo’) | ‘ABCxox’ |
 | [RTRIM](postgresql-string-functions/postgresql-rtrim) | Remove the longest string that contains specified characters from the right of the input string | RTRIM(‘abcxxzx’, ‘xyz’) | ‘abc’ |
 | [SPLIT\_PART](postgresql-string-functions/postgresql-split_part) | Split a string on a specified delimiter and return nth substring | SPLIT\_PART(‘2017\-12\-31′,’\-‘,2\) | ’12’ |

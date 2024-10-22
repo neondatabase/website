@@ -91,10 +91,9 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
       >
         <div className="flex items-center gap-x-7 px-[52px] xl:px-8">
           <Logo className="h-7" width={102} height={28} priority isHeader />
-
           <Link
             className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
-            to={customType ? customType.link : LINKS.postgresDocs}
+            to={customType ? customType.link : LINKS.docs}
           >
             {customType?.title || 'Docs'}
           </Link>

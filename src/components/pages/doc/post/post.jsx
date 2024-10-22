@@ -47,6 +47,7 @@ const Post = ({
   navigationLinksPrefix,
   isChangelog = false,
   isUseCase = false,
+  isPostgresql = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -62,7 +63,11 @@ const Post = ({
       )}
     >
       {breadcrumbs.length > 0 && (
-        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} isPostgresPost />
+        <Breadcrumbs
+          breadcrumbs={breadcrumbs}
+          currentSlug={currentSlug}
+          isPostgresPost={isPostgresql}
+        />
       )}
       {isChangelog ? (
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
@@ -138,6 +143,7 @@ Post.propTypes = {
   navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
+  isPostgresql: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

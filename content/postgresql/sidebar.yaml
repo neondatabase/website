@@ -734,7 +734,7 @@
         title: "Select Data in a Table using C#"
       - slug: "postgresql-csharp/postgresql-csharp-transaction"
         title: "PostgreSQL Transactions in C#"
-      - slug: "/postgresql-csharp/postgresql-csharp-update"
+      - slug: "postgresql-csharp/postgresql-csharp-update"
         title: "Update Data in a Table in C#"
    - title: "PostgreSQL PHP"
      slug: postgresql-php

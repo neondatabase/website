@@ -340,24 +340,12 @@ export default {
       heading: 'Resources',
       links: [
         {
-          text: 'AI',
-          to: LINKS.ai,
-        },
-        {
-          text: 'Blog',
-          to: LINKS.blog,
-        },
-        {
-          text: 'Brand',
-          to: LINKS.brand,
-        },
-        {
           text: 'Docs',
           to: LINKS.docs,
         },
         {
-          text: 'Community Guides',
-          to: LINKS.guides,
+          text: 'Blog',
+          to: LINKS.blog,
         },
         {
           text: 'Changelog',
@@ -375,11 +363,28 @@ export default {
           text: 'Security',
           to: LINKS.security,
         },
+        {
+          text: 'Community Guides',
+          to: LINKS.guides,
+        },
+        {
+          text: 'PostgreSQL Tutorial',
+          to: LINKS.postgresql,
+        },
+        {
+          text: 'Brand',
+          to: LINKS.brand,
+        },
       ],
     },
     {
       heading: 'Community',
       links: [
+        {
+          text: 'GitHub',
+          to: LINKS.github,
+          icon: 'github-icon',
+        },
         {
           text: 'x.com',
           to: LINKS.twitter,
@@ -391,19 +396,9 @@ export default {
           icon: 'linkedin-icon',
         },
         {
-          text: 'GitHub',
-          to: LINKS.github,
-          icon: 'github-icon',
-        },
-        {
           text: 'Discord',
           to: LINKS.discord,
           icon: 'discord-icon',
-        },
-        {
-          text: 'Discourse',
-          to: LINKS.discourse,
-          icon: 'discourse-icon',
         },
         {
           text: 'YouTube',
@@ -469,8 +464,8 @@ export default {
     },
     {
       icon: PostgresDocsIcon,
-      title: 'PostgreSQL Docs',
-      slug: LINKS.postgres,
+      title: 'PostgreSQL',
+      slug: LINKS.postgresql,
     },
   ],
   postgresSidebar: [

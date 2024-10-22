@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
-import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getSidebar } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
@@ -52,13 +51,13 @@ export async function generateMetadata({ params }) {
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
-    title: `${title} - PostgreSQL Tutorial`,
+    title,
     description: post?.data?.page_description || post.excerpt,
     imagePath:
       title.length < MAX_TITLE_LENGTH
         ? `${VERCEL_URL}/docs/og?title=${encodedTitle}`
         : DEFAULT_IMAGE_PATH,
-    pathname: `${LINKS.postgres}/${currentSlug}`,
+    pathname: `postgresql/${currentSlug}`,
     rssPathname: null,
     type: 'article',
   });
@@ -76,7 +75,7 @@ const PostgresTutorial = async ({ params }) => {
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
 
   const navigationLinks = getNavigationLinks(currentSlug);
-  const fileOriginPath = `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
+  const fileOriginPath = `${process.env.NEXT_PUBLIC_POSTGRESQL_GITHUB_PATH + currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
   if (!post) return notFound();
@@ -109,6 +108,7 @@ const PostgresTutorial = async ({ params }) => {
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         tableOfContents={tableOfContents}
+        isPostgresql
       />
     </>
   );
