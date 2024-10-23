@@ -22,7 +22,11 @@ You can instantly create read replicas for any branch in your Neon project and c
 
 You can create read replicas using the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), providing the flexibility required to integrate read replicas into your workflow or CI/CD processes.
 
-From the Neon Console, it's a simple **Add Read Replica** action on a branch:
+From the Neon Console, it's a simple **Add Read Replica** action on a branch.
+
+<Admonition type="note">
+You can add as many read replicas to a branch as you need, accommodating any scale.
+</Admonition>
 
 ![Create a read replica](/docs/introduction/create_read_replica.png)
 
