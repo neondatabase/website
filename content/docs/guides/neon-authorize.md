@@ -114,7 +114,7 @@ export async function insertTodo(newTodo: { newTodo: string }) {
 }
 ```
 
-This approach is flexible: you can manage RLS policies directly in SQL or work more declaratively using an ORM, applying authorization within your schema. This ability to handle both schema and authorization in one place can make it easier to maintain security.
+This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like Drizzle are adding support for declaritive RLS, which makes the logic easier to scan and scale.
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
@@ -173,18 +173,19 @@ For early-stage applications, **RLS** might be all the security you need to scal
 
 Here is a non-exhaustive list of authentication providers. The table shows which providers Neon Authorize supports, links out to provider documentation for details, and the discovery URL pattern each provider typically uses.
 
-| Provider               | Supported? | Documentation                                                                                                                 | JWKS URL                                                                                    |
-| ---------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Clerk**              | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    | `https://{yourClerkDomain}/.well-known/jwks.json`                                           |
-| **Stack Auth**         | ✅         | [docs](https://sage.storia.ai/stack-auth)                                                                                     | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`             |
-| **Auth0**              | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              | `https://{yourDomain}/.well-known/jwks.json`                                                |
-| **Firebase Auth**      | ✅         | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` |
-| **Stytch**             | ✅         | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                         |
-| **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`     |
-| **Supabase**           | ❌         | N/A                                                                                                                           | N/A                                                                                         |
-| **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             |
-| **Azure AD**           | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens`                   |
-| **GCP Cloud Identity** | ✅         | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        | `https://www.googleapis.com/oauth2/v3/certs`                                                |
+| Provider               | Supported? | Documentation                                                                                                                 | JWKS URL                                                                                   |
+| ---------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Clerk**              | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    | `https://{yourClerkDomain}/.well-known/jwks.json`                                          |
+| **Stack Auth**         | ✅         | [docs](https://sage.storia.ai/stack-auth)                                                                                            | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`                                         |
+| **Auth0**              | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              | `https://{yourDomain}/.well-known/jwks.json`                                               |
+| **Firebase Auth**           | ✅         | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                                          | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` |
+| **Stytch**             | ✅         | [docs](https://stytch.com/docs/api/jwks-get)                                                                    | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                        |
+| **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`    |
+| **Supabase**           | ❌         | N/A                                                                                                                          | N/A                                                                                        |
+| **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`            |
+| **Azure AD**           | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens`                           |
+| **GCP Cloud Identity** | ✅         | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                                                               | `https://www.googleapis.com/oauth2/v3/certs`                             |
+
 
 ## Sample applications
 
