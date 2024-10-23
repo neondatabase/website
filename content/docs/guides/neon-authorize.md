@@ -11,6 +11,10 @@ enableTableOfContents: true
 <p>How Neon Authorize works</p>
 </DocsList>
 
+<DocsList title="Related docs" theme="docs">
+  <a href="https://www.postgresql.org/docs/current/ddl-rowsecurity.html">Postgres row security policies</a>
+</DocsList>
+
 <DocsList title="Sample projects" theme="repo">
   <a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize">Clerk + Neon Authorize (frontend sql)</a>
   <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
@@ -20,7 +24,7 @@ enableTableOfContents: true
 
 <ComingSoon/>
 
-**Neon Authorize** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, bringing authorization closer to your data by leveraging **Row-Level Security (RLS)** at the database level.
+**Neon Authorize** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, bringing authorization closer to your data by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
 
 ## Authentication and authorization
 
@@ -31,6 +35,14 @@ When implementing user authentication in your application, third-party authentic
 Most authentication providers issue **JSON Web Tokens (JWTs)** on user authentication to convey user identity and claims. The JWT is a secure way of proving that logged-in users are who they say they are &#8212; and passing that proof on to other entities.
 
 With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity right in Postgres. To integrate with an authentication provider, add your provider's JWT discovery URL to your project. This lets Neon retrieve the necessary keys to validate the JWTs.
+
+```typescript
+import { neon } from "@neondatabase/serverless";
+
+const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProvider.getJWT() });
+
+await sql(`select * from todos`);
+```
 
 Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while the open source extension [pg_session_jwt](#how-the-pg_session_jwt-extension-works) makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
 
@@ -181,7 +193,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Firebase Auth**      | ✅         | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` |
 | **Stytch**             | ✅         | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                         |
 | **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`     |
-| **Supabase**           | ❌         | N/A                                                                                                                           | N/A                                                                                         |
+| **Supabase Auth**           | ❌         | N/A                                                                                                                           | N/A                                                                                         |
 | **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             |
 | **Azure AD**           | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens`                   |
 | **GCP Cloud Identity** | ✅         | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        | `https://www.googleapis.com/oauth2/v3/certs`                                                |
