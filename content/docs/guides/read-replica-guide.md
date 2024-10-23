@@ -94,7 +94,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
    <Admonition type="note">
    Write operations are not permitted on a read replica connection.
-   </Admonition> 
+   </Admonition>
 
 ## View read replicas
 
