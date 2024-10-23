@@ -24,27 +24,29 @@ npm install @prisma/extension-read-replicas
 You can then initialize the extension by extending your Prisma Client instance and providing a connection string that points to your read replica in the `url` option of the extension:
 
 ```javascript
-import { PrismaClient } from '@prisma/client'
-import { readReplicas } from '@prisma/extension-read-replicas'
+import { PrismaClient } from '@prisma/client';
+import { readReplicas } from '@prisma/extension-read-replicas';
 
 const prisma = new PrismaClient().$extends(
   readReplicas({
     url: process.env.DATABASE_URL_REPLICA,
   })
-)
+);
 
 // Query is run against the database replica
-await prisma.post.findMany()
+await prisma.post.findMany();
 
 // Query is run against the primary database
-await prisma.post.create({ 
-  data: {/** */},
-})
+await prisma.post.create({
+  data: {
+    /** */
+  },
+});
 ```
 
 All read operations, such as `findMany`, are executed against the read replica in the setup shown above. All write operations, such as create, update, and `$transaction` queries, are run against your primary compute.
 
-For more, including configuring multiple read replicas, refer to [Read Replicas](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/read-replicas) in the Prisma documentation. 
+For more, including configuring multiple read replicas, refer to [Read Replicas](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/read-replicas) in the Prisma documentation.
 
 **Example**: For a full example, see [Use Read Replicas with Prisma](https://neon.tech/docs/guides/read-replica-prisma).
 
@@ -79,7 +81,7 @@ await db.select().from(usersTable)
 await db.delete(usersTable).where(eq(usersTable.id, 1))
 ```
 
-For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) in the Drizzle documentation. 
+For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) in the Drizzle documentation.
 
 **Example application**: For a full example, refer to this Neon community guide: [Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-drizzle).
 
@@ -153,7 +155,7 @@ class PrimaryReplicaRouter:
         return True
 ```
 
-For more, see [Multiple databases](https://docs.djangoproject.com/en/5.1/topics/db/multi-db/) in the Django documentation. 
+For more, see [Multiple databases](https://docs.djangoproject.com/en/5.1/topics/db/multi-db/) in the Django documentation.
 
 **Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-django).
 
