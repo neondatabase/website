@@ -1,5 +1,5 @@
 ---
-title: Working with Neon read replicas
+title: Create and manage Read Replicas
 subtitle: Learn how to create and and manage read replicas in Neon
 enableTableOfContents: true
 updatedOn: '2024-10-08T10:58:34.745Z'
@@ -9,9 +9,9 @@ updatedOn: '2024-10-08T10:58:34.745Z'
 
 The general purpose of read replicas is to segregate read-only work from your production database operations. This can be applied to different uses cases, such as:
 
-- Offloading analytics or reporting queries
-- Distributing read requests to achieve higher throughput
-- Providing read-only data access to specific users or applications
+- **Horizontal scaling**: Distributing read requests across replicas to improve performance and increase throughput
+- **Analytics queries**: Offloading resource-intensive analytics and reporting workloads to reduce load on the primary compute
+- **Read-only access**: Granting read-only access to users or applications that don't require write permissions
 
 Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over read replica compute usage.
 
