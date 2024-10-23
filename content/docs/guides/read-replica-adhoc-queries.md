@@ -19,9 +19,9 @@ This is where **Neon Read Replicas** come in handy. With read replicas, you can 
 An ad-hoc query is an impromptu query used to retrieve specific data from your database. These queries are not part of routine reporting or pre-written scripts; they are created on the fly to answer immediate questions or perform temporary analysis. For example, if you want to quickly calculate the total sales for a product over the last month, you might write a simple SQL query like this:
 
 ```sql
-SELECT product_id, SUM(sale_amount) 
-FROM sales 
-WHERE sale_date >= (CURRENT_DATE - INTERVAL '1 month') 
+SELECT product_id, SUM(sale_amount)
+FROM sales
+WHERE sale_date >= (CURRENT_DATE - INTERVAL '1 month')
 GROUP BY product_id;
 ```
 
@@ -114,7 +114,6 @@ Here are a few common scenarios where ad-hoc queries on a read replica can be us
   ```
 
   This ensures that the replica is used solely for reading data, preserving the integrity of your production system.
-
 
 ## Summary
 

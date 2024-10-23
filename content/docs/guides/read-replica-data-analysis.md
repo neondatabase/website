@@ -50,7 +50,7 @@ You can add a read replica compute- to any branch in your Neon project by follow
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint)., providing the flexibility required to integrate read replicas into your workflows or CI/CD processes. 
+Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint)., providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
 
 <CodeTabs labels={["CLI", "API"]}>
 
@@ -127,7 +127,7 @@ When you are finished running analytics queries, you can delete the read replica
 
 <Admonition type="tip">
 Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature will suspend the compute until the next time you access it. The default autosuspend setting is 5 minutes, meaning that the read replica compute will automatically suspend after 5 minutes of inactivity.
-</Admonition> 
+</Admonition>
 
 To delete a read replica:
 
