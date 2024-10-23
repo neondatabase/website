@@ -81,11 +81,11 @@ curl --request POST \
 2. Under **Connection Details**, select the replica compute.
 3. Copy the connection string and use it to connect to the replica, either via `psql` or your application.
 
-    Your connection string will look something like this:
+   Your connection string will look something like this:
 
-    ```bash
-    postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-    ```
+   ```bash
+   postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   ```
 
 ### Running ad-hoc queries
 
