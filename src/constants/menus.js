@@ -1,5 +1,3 @@
-import CalendarIcon from 'icons/calendar.inline.svg';
-import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
 import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
@@ -46,8 +44,6 @@ import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
 import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
 import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
 import serverlessIcon from 'icons/header/serverless.svg';
-import PostgresDocsIcon from 'icons/postgres.inline.svg';
-import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
 
@@ -303,73 +299,24 @@ export default {
       heading: 'Company',
       links: [
         {
-          text: 'About us',
+          text: 'About',
           to: LINKS.aboutUs,
-        },
-        {
-          text: 'Careers',
-          to: LINKS.careers,
-        },
-        {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
-          text: 'Case Studies',
-          to: LINKS.caseStudies,
-        },
-        {
-          text: 'Trust',
-          to: LINKS.trust,
-        },
-        {
-          text: 'Pricing',
-          to: LINKS.pricing,
-        },
-        {
-          text: 'Contact Sales',
-          to: LINKS.contactSales,
-        },
-        {
-          text: 'Early Access',
-          to: LINKS.earlyAccess,
-        },
-      ],
-    },
-    {
-      heading: 'Resources',
-      links: [
-        {
-          text: 'AI',
-          to: LINKS.ai,
         },
         {
           text: 'Blog',
           to: LINKS.blog,
         },
         {
-          text: 'Brand',
-          to: LINKS.brand,
+          text: 'Careers',
+          to: LINKS.careers,
         },
         {
-          text: 'Docs',
-          to: LINKS.docs,
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
         },
         {
-          text: 'Community Guides',
-          to: LINKS.guides,
-        },
-        {
-          text: 'Changelog',
-          to: LINKS.changelog,
-        },
-        {
-          text: 'Demos',
-          to: LINKS.demos,
-        },
-        {
-          text: 'Support',
-          to: LINKS.support,
+          text: 'Partners',
+          to: LINKS.partners,
         },
         {
           text: 'Security',
@@ -378,8 +325,47 @@ export default {
       ],
     },
     {
-      heading: 'Community',
+      heading: 'Resources',
       links: [
+        {
+          text: 'Docs',
+          to: LINKS.docs,
+        },
+        {
+          text: 'Changelog',
+          to: LINKS.changelog,
+        },
+        {
+          text: 'Support',
+          to: LINKS.support,
+        },
+        {
+          text: 'Community Guides',
+          to: LINKS.guides,
+        },
+        {
+          text: 'PostgreSQL Tutorial',
+          to: LINKS.postgresqltutorial,
+        },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
+        },
+      ],
+    },
+    {
+      heading: 'Social',
+      links: [
+        {
+          text: 'Discord',
+          to: LINKS.discord,
+          icon: 'discord-icon',
+        },
+        {
+          text: 'GitHub',
+          to: LINKS.github,
+          icon: 'github-icon',
+        },
         {
           text: 'x.com',
           to: LINKS.twitter,
@@ -391,29 +377,9 @@ export default {
           icon: 'linkedin-icon',
         },
         {
-          text: 'GitHub',
-          to: LINKS.github,
-          icon: 'github-icon',
-        },
-        {
-          text: 'Discord',
-          to: LINKS.discord,
-          icon: 'discord-icon',
-        },
-        {
-          text: 'Discourse',
-          to: LINKS.discourse,
-          icon: 'discourse-icon',
-        },
-        {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
-        },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
-          icon: 'creators-icon',
         },
       ],
     },
@@ -449,35 +415,6 @@ export default {
           to: LINKS.businessInformation,
         },
       ],
-    },
-  ],
-  docSidebar: [
-    {
-      icon: TransactionsIcon,
-      title: 'API Reference',
-      slug: LINKS.apiReference,
-    },
-    {
-      icon: ConsoleIcon,
-      title: 'CLI Reference',
-      slug: LINKS.cliReference,
-    },
-    {
-      icon: CalendarIcon,
-      title: 'Changelog',
-      slug: LINKS.changelog,
-    },
-    {
-      icon: PostgresDocsIcon,
-      title: 'PostgreSQL Docs',
-      slug: LINKS.postgres,
-    },
-  ],
-  postgresSidebar: [
-    {
-      icon: PostgresDocsIcon,
-      title: 'Neon Docs',
-      slug: LINKS.docs,
     },
   ],
 };

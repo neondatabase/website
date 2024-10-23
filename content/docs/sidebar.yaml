@@ -660,10 +660,7 @@
       icon: management
 - section: Postgres
   items:
-    - title: PostgreSQL docs
-      slug: postgres
-      icon: docs
-    - title: Postgres guides
+    - title: Postgres Reference
       slug: postgresql/introduction
       icon: postgres-guides
       items:
