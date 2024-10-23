@@ -683,7 +683,7 @@
       - slug: "postgresql-string-functions/postgresql-upper"
         title: "UPPER"
   - title: Window Functions
-    slug: "postgresql-window-functions"
+    slug: "postgresql-window-function"
     items:  
     - section: PostgreSQL Window Functions
       items:
