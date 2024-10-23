@@ -47,7 +47,7 @@ const Post = ({
   navigationLinksPrefix,
   isChangelog = false,
   isUseCase = false,
-  isPostgresql = false,
+  isPostgres = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -66,7 +66,7 @@ const Post = ({
         <Breadcrumbs
           breadcrumbs={breadcrumbs}
           currentSlug={currentSlug}
-          isPostgresPost={isPostgresql}
+          isPostgresPost={isPostgres}
         />
       )}
       {isChangelog ? (
@@ -89,7 +89,12 @@ const Post = ({
               {subtitle}
             </p>
           )}
-          <Content className="mt-5" content={content} isUseCase={isUseCase} />
+          <Content
+            className="mt-5"
+            content={content}
+            isUseCase={isUseCase}
+            isPostgres={isPostgres}
+          />
         </article>
       )}
 
@@ -143,7 +148,7 @@ Post.propTypes = {
   navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
-  isPostgresql: PropTypes.bool,
+  isPostgres: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

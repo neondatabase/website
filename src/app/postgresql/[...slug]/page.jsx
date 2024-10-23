@@ -108,7 +108,7 @@ const PostgresTutorial = async ({ params }) => {
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         tableOfContents={tableOfContents}
-        isPostgresql
+        isPostgres
       />
     </>
   );

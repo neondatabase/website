@@ -109,7 +109,7 @@ const Menu = ({
 
   const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
   const docsHomePath = LINKS.docsHome;
-  const postgresHomePath = LINKS.postgresql;
+  const postgresHomePath = LINKS.postgresqltutorial;
   const homePath = basePath === DOCS_BASE_PATH ? docsHomePath : postgresHomePath;
 
   // update menu height and scroll menu to top

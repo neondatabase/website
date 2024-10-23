@@ -1,5 +1,3 @@
-import CalendarIcon from 'icons/calendar.inline.svg';
-import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
 import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
@@ -46,8 +44,6 @@ import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
 import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
 import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
 import serverlessIcon from 'icons/header/serverless.svg';
-import PostgresDocsIcon from 'icons/postgres.inline.svg';
-import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
 
@@ -349,7 +345,7 @@ export default {
         },
         {
           text: 'PostgreSQL Tutorial',
-          to: LINKS.postgresql,
+          to: LINKS.postgresqltutorial,
         },
         {
           text: 'Creators',
@@ -419,35 +415,6 @@ export default {
           to: LINKS.businessInformation,
         },
       ],
-    },
-  ],
-  docSidebar: [
-    {
-      icon: TransactionsIcon,
-      title: 'API Reference',
-      slug: LINKS.apiReference,
-    },
-    {
-      icon: ConsoleIcon,
-      title: 'CLI Reference',
-      slug: LINKS.cliReference,
-    },
-    {
-      icon: CalendarIcon,
-      title: 'Changelog',
-      slug: LINKS.changelog,
-    },
-    {
-      icon: PostgresDocsIcon,
-      title: 'PostgreSQL',
-      slug: LINKS.postgresql,
-    },
-  ],
-  postgresSidebar: [
-    {
-      icon: PostgresDocsIcon,
-      title: 'Neon Docs',
-      slug: LINKS.docs,
     },
   ],
 };
