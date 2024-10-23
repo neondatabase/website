@@ -26,11 +26,11 @@ isDraft: true
 
 <ComingSoon/>
 
-This guide shows how to use Clerk with Neon Authorize to move authorization to the database level. 
+This guide shows how to use Clerk with Neon Authorize to move authorization to the database level.
 
 ## How it works
 
-Clerk generates JSON Web Tokens (JWTs) upon user authentication, which are then passed to Neon Authorize. Neon uses the metadata within these JWTs to enforce the Row-Level Security (RLS) policies that you define directly in Postgres, securing database queries based on the user's identity. 
+Clerk generates JSON Web Tokens (JWTs) upon user authentication, which are then passed to Neon Authorize. Neon uses the metadata within these JWTs to enforce the Row-Level Security (RLS) policies that you define directly in Postgres, securing database queries based on the user's identity.
 
 In this guide, you'll set up Clerk for user authentication, pass JWTs to Neon Authorize, and secure your queries with RLS policies.
 
@@ -139,18 +139,15 @@ npm install @neondatabase/serverless
 
 To learn more about the driver, check out the [GitHub Repo](https://github.com/neondatabase/serverless).
 
-
-
 Add this URL to your environment variables:
 
-```bash
+````bash
 # Clerk JWT Discovery URL
 CLERK_JWT_DISCOVERY_URL='https://your-clerk-domain/.well-known/jwks.json'
 ```bash
 # Clerk JWT Discovery URL
 CLERK_JWT_DISCOVERY_URL='https://your-clerk-domain/.well-known/jwks.json'
-```
-
+````
 
 To securely pass JWTs from Clerk to Neon, you need the JWT Discovery URL. You can find this in the Clerk Dashboard under **Settings > API Keys**.
 
