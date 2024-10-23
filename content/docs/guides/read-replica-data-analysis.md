@@ -9,6 +9,8 @@ With Neon's read replica feature, you can instantly create a dedicated read repl
 
 A read replica reads data from the same source as your primary read-write compute. There's no data replication, so creating a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](/docs/introduction/read-replicas).
 
+## Scenario
+
 Suppose you have a `sales` table in your production database. The table and data might look something like this:
 
 ```sql
@@ -31,6 +33,16 @@ INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
 You want to find the total sale amount for each product in the past year, but due to the large number of products and sales in your database, you know it's a costly query that could impact performance on your production system.
 
 This guide walks you through creating a read replica, connecting to it, running your query, and optionally deleting the read replica when finished.
+
+<Admonition type="tip" title="Metabase Analytics Use Case">
+[Metabase](https://www.metabase.com/) is an open-source business intelligence (BI) company that provides a platform for visualizing and analyzing data. With Metabase and Neon, you can:
+- Create a read replica in Neon
+- Configure [Autoscaling](/docs/introduction/autoscaling) to define minimum and maximum limits for compute resources
+- Configure [Autosuspend](/docs/introduction/auto-suspend) to define how soon the read replica scales to zero when not being used
+- Configure a connection to the read replica from Metabase.
+
+With this setup, your read replica only wakes up when Metabase connects, scales to sync job requirements without affecting your production database, and scales back to zero after the job sync is finished.
+</Admonition>
 
 ## Create a read replica
 
