@@ -142,3 +142,5 @@ This example demonstrates how to use the [@prisma/extension-read-replicas](https
 <DetailIconCards>
 <a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
 </DetailIconCards>
+
+<NeedHelp/>

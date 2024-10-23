@@ -30,7 +30,7 @@ INSERT INTO sales (product_id, sale_amount, sale_date) VALUES
 ...
 ```
 
-You want to find the total sale amount for each product in the past year, but due to the large number of products and sales in your database, you know it's a costly query that could impact performance on your production system.
+You want to find the total sale amount for each product in the past year, but due to the large number of products and sales in your database, you know this is a costly query that could impact performance on your production system.
 
 This guide walks you through creating a read replica, connecting to it, running your query, and optionally deleting the read replica when finished.
 
@@ -62,7 +62,7 @@ You can add a read replica compute- to any branch in your Neon project by follow
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint)., providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
+Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
 
 <CodeTabs labels={["CLI", "API"]}>
 
@@ -95,7 +95,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select the **Replica** compute.
 1. Select a **Database** and the **Role** you want to connect with.
-1. Copy the connection string. This is the information you need to connect to the read replica from you client or application.
+1. Copy the connection string. This is the information you need to connect to the read replica from your client or application.
 
    The connection string appears similar to the following:
 
@@ -147,3 +147,5 @@ To delete a read replica:
 1. Select a branch.
 1. On the **Computes** tab, find the read replica you want to delete.
 1. Click **Edit** &#8594; **Delete compute**.
+
+<NeedHelp/>

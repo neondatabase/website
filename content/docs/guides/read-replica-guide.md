@@ -1,6 +1,6 @@
 ---
 title: Create and manage Read Replicas
-subtitle: Learn how to create and and manage read replicas in Neon
+subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
 updatedOn: '2024-10-08T10:58:34.745Z'
 ---
@@ -82,7 +82,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select a **Replica**.
-1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
+1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from your client or application.
 
    A **psql** connection string appears similar to the following:
 

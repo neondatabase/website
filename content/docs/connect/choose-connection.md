@@ -120,7 +120,7 @@ neonctl connection-string [branch_name]
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-For more detail, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
+For more details, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## Table summarizing your options
 

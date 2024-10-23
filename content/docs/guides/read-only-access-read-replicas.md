@@ -40,7 +40,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
    GROUP BY product_id;
    ```
 
-   This query will run efficiently on the read replica without impacting the performance of your production database, since read replicas run on an isolated compute instance.
+   This query will run on the read replica without impacting the performance of your production database, since read replicas run on an isolated read-only compute.
 
 4. **Write operations are not permitted**
 
@@ -50,8 +50,4 @@ Suppose you need to give a partner read-only access to your sales data so they c
    ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)
    ```
 
-## Benefits of providing read-only access
-
-- **Data integrity**: The read-only connection ensures that no accidental or unauthorized changes are made to your data.
-- **Offloading reporting workloads**: Analytics queries can be run on the read replica without affecting your production database's performance.
-- **Secure access**: The read replica provides a secure way to share data without giving full control or write access.
+<NeedHelp/>
