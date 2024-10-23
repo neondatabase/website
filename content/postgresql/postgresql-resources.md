@@ -24,13 +24,13 @@ nextLink:
 * [http://www.postgresql.org/docs](https://www.postgresql.org/docs/current/index.html)/ – provides current and archived PostgreSQL documentation. You can also find the PostgreSQL frequently asked questions.
 * [PostgreSQL Planet](https://planet.postgresql.org/) – PostgreSQL planet where you can get updated information on the PostgreSQL.
 * [http://www.enterprisedb.com/products\-services\-training/pgdownload](http://www.enterprisedb.com/products-services-training/pgdownload) – download the latest versions of PostgreSQL on various platforms such as Linux, Windows, and Mac OS X.
-* <http://www.pgadmin.org/>  – pgAdmin is one of the most popular and free administration tools for PostgreSQL. It is available on Windows, Linux, macOS X, and FreeBSD.
+* [http://www.pgadmin.org/](http://www.pgadmin.org/)  – pgAdmin is one of the most popular and free administration tools for PostgreSQL. It is available on Windows, Linux, macOS X, and FreeBSD.
 * [PostgreSQL feature matrix](https://www.postgresql.org/about/featurematrix/) – display features by PostgreSQL version in a nicely formatted matrix.
 * [http://adpgtech.blogspot.com/search/label/PostgreSQL](https://adpgtech.blogspot.com/search/label/PostgreSQL) – PostgreSQL blog posts by Andrew Dunstan.
 
 ## PostgreSQL social links
 
-* <https://twitter.com/postgresql> – PostgreSQL on Twitter
+* [https://twitter.com/postgresql](https://twitter.com/postgresql) – PostgreSQL on Twitter
 * [http://www.youtube.com/watch?v\=yCpu3IDdy6M](https://www.youtube.com/watch?v=yCpu3IDdy6M) – PostgreSQL vs. MySQL – Pros \& Cons by CEO of EnterpiseDB at Postgres
 
 ## SQL tutorial websites

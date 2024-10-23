@@ -53,7 +53,7 @@ Specify the name of the sequence after the `CREATE SEQUENCE` clause. The `IF NOT
 The sequence name must be distinct from any other sequences, tables, [indexes](../postgresql-indexes), [views](../postgresql-views), or foreign tables in the same schema.
 
 
-### \[ AS { SMALLINT \| INT \| BIGINT } ]
+### \[ AS \{ SMALLINT \| INT \| BIGINT \} \]
 
 Specify the [data type](postgresql-data-types) of the sequence. The valid data type is [`SMALLINT`](postgresql-integer), [`INT`](postgresql-interval), and [`BIGINT`](postgresql-integer). The default data type is `BIGINT` if you skip it.
 

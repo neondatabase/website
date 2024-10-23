@@ -20,7 +20,7 @@ nextLink:
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_path_query_array()` function to query JSONB data using a JSON path and return matched elements as a JSON array.
 
 
-# Introduction to PostgreSQL jsonb\_path\_query\_array() function
+## Introduction to PostgreSQL jsonb\_path\_query\_array() function
 
 The `jsonb_path_query_array()` function allows you to query [JSONB](../postgresql-tutorial/postgresql-json) data using a [JSON path expression](postgresql-json-path).
 

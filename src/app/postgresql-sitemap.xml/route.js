@@ -7,6 +7,14 @@ export async function GET() {
   // Fetch all PostgreSQL posts
   const postgresPosts = await getAllPostgresPosts();
 
+  const getDateString = (date) => {
+    try {
+      return new Date(date).toISOString();
+    } catch (error) {
+      return new Date().toISOString(); // Fallback to current date if parsing fails
+    }
+  };
+
   // Generate the XML sitemap
   return new Response(
     `<?xml version="1.0" encoding="UTF-8" ?>
@@ -21,18 +29,21 @@ export async function GET() {
               (post) => `
               <url>
                   <loc>${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql/${post.slug}</loc>
-                  <lastmod>${new Date(post.modifiedAt).toISOString()}</lastmod>
+                  <lastmod>${getDateString(post.modifiedAt)}</lastmod>
                   <changefreq>weekly</changefreq>
                   <priority>0.8</priority>
-                  ${post.images
-                    .map(
-                      (image) => `
+                  ${
+                    post.images &&
+                    post.images
+                      .map(
+                        (image) => `
                     <image:image>
                       <image:loc>${image}</image:loc>
                     </image:image>
                   `
-                    )
-                    .join('')}
+                      )
+                      .join('')
+                  }
               </url>
               `
             )
