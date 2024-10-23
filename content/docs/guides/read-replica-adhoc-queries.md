@@ -11,12 +11,12 @@ This is where **Neon Read Replicas** come in handy. With read replicas, you can 
 
 - You can add a fully functional read replica in seconds.
 - There's no additional storage cost or data replication, as the replica uses the same storage as your primary compute.
-- The read replica compute automatically scales to zero based on your [autosuspend](/docs/introduction/auto-suspend) settings, so you're only billed for the compute used while you run your ad-hoc query. By default, a compute suspends due to inactivity after 5 minutes of inactivity.
-- You can remove a read replica as quickly as you created it or just leave it for the next time you need to run an ad-hoc query. The compute will remain suspended until you run your next query.
+- The read replica compute automatically scales to zero based on your [autosuspend](/docs/introduction/auto-suspend) settings. By default, a compute suspends due to inactivity after 5 minutes of inactivity.
+- You can remove a read replica as quickly as you created it or just leave it for next time. The compute will remain suspended until you run your next query.
 
 ## What is an ad-hoc query?
 
-An ad-hoc query is an impromptu query used to retrieve specific data from your database. These queries are not part of routine reporting or pre-written scripts; they are created on the fly to answer immediate questions or perform temporary analysis. For example, if you want to quickly calculate the total sales for a product over the last month, you might write a simple SQL query like this:
+An ad-hoc query is an impromptu query used to retrieve specific data from your database. These queries are not part of routine reporting or pre-written scripts; they are created on the fly to answer immediate questions or perform temporary analysis. For example, if you want to quickly calculate the total sales for a product over the last month, you might write an SQL query like this:
 
 ```sql
 SELECT product_id, SUM(sale_amount)
