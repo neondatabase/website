@@ -660,7 +660,10 @@
       icon: management
 - section: Postgres
   items:
-    - title: Postgres Reference
+    - title: PostgreSQL Tutorial
+      slug: https://neon.tech/postgresql/tutorial
+      icon: get-started
+    - title: Neon Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
       items:
