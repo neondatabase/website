@@ -48,6 +48,7 @@ In the Clerk Dashboard, go to **Configure > JWT Templates** and create a blank *
 You can leave the claims field empty, as Clerk will include the necessary `sub` (subject) field as part of the default [session claims](https://clerk.com/docs/backend-requests/resources/session-tokens). This will include the `user_id` that we'll need for our Neon integration.
 
 Copy the **JWKS Endpoint** URL.
+
   </div>
   <div style={{ flex: '0 0 40%', marginTop: '-20px' }}>
 ![JWT URL location in clerk](/docs/guides/clerk_jwks_url.png)
@@ -113,7 +114,7 @@ CREATE TABLE todos (
   is_complete boolean default false,
   inserted_at timestamp not null
 );
-  
+
 ```
 
 </TabItem>
@@ -121,54 +122,48 @@ CREATE TABLE todos (
 <TabItem>
 
 ```typescript
-
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const todos = pgTable(
   'todos',
   {
-    id: bigint('id', { mode: 'bigint' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity(),
+    id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
     userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     task: text('task').notNull(),
     isComplete: boolean('is_complete').notNull().default(false),
-    insertedAt: timestamp('inserted_at', { withTimezone: true })
-      .defaultNow()
-      .notNull(),
+    insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
   (t) => ({
-    p1: pgPolicy("create todos", {
-      for: "insert",
-      to: "authenticated",
+    p1: pgPolicy('create todos', {
+      for: 'insert',
+      to: 'authenticated',
       withCheck: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p2: pgPolicy("view todos", {
-      for: "select",
-      to: "authenticated",
+    p2: pgPolicy('view todos', {
+      for: 'select',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p3: pgPolicy("update todos", {
-      for: "update",
-      to: "authenticated",
+    p3: pgPolicy('update todos', {
+      for: 'update',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p4: pgPolicy("delete todos", {
-      for: "delete",
-      to: "authenticated",
+    p4: pgPolicy('delete todos', {
+      for: 'delete',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
-  }),
+  })
 );
 
 export type Todo = InferSelectModel<typeof todos>;
-
 ```
 
 </TabItem>
@@ -245,6 +240,7 @@ export const todos = pgTable(
 Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. It supports HTTP, WebSockets, and TCP connections. For Neon Authorize, the connection must be established over HTTP.
 
 Install it using the following command:
+
 ```bash
 npm install @neondatabase/serverless
 ```
@@ -300,48 +296,49 @@ export async function TodoList() {
   );
 }
 ```
+
 </TabItem>
 
 <TabItem>
 
 ```typescript shouldWrap
 'use client';
-  
+
   import type { Todo } from '@/app/schema';
   import { neon } from '@neondatabase/serverless';
   import { useAuth } from '@clerk/nextjs';
   import { useEffect, useState } from 'react';
-  
+
   const getDb = (token: string) =>
       neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
           authToken: token,
       });
-  
+
   export function TodoList() {
       const { getToken } = useAuth();
       const [todos, setTodos] = useState<Array<Todo>>();
-  
+
       useEffect(() => {
           async function loadTodos() {
               const authToken = await getToken();
-  
+
               if (!authToken) {
                   return;
               }
-  
+
               const sql = getDb(authToken);
-  
+
               // WHERE filter is optional because of RLS.
               // But we send it anyway for performance reasons.
               const todosResponse = await
                   sql('select * from todos where user_id = auth.user_id()');
-  
+
               setTodos(todosResponse as Array<Todo>);
           }
-  
+
           loadTodos();
       }, [getToken]);
-  
+
       return (
           <ul>
               {todos?.map((todo) => (
