@@ -303,36 +303,28 @@ export default {
       heading: 'Company',
       links: [
         {
-          text: 'About us',
+          text: 'About',
           to: LINKS.aboutUs,
+        },
+        {
+          text: 'Blog',
+          to: LINKS.blog,
         },
         {
           text: 'Careers',
           to: LINKS.careers,
         },
         {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
-          text: 'Case Studies',
-          to: LINKS.caseStudies,
-        },
-        {
-          text: 'Trust',
-          to: LINKS.trust,
-        },
-        {
-          text: 'Pricing',
-          to: LINKS.pricing,
-        },
-        {
           text: 'Contact Sales',
           to: LINKS.contactSales,
         },
         {
-          text: 'Early Access',
-          to: LINKS.earlyAccess,
+          text: 'Partners',
+          to: LINKS.partners,
+        },
+        {
+          text: 'Security',
+          to: LINKS.security,
         },
       ],
     },
@@ -344,24 +336,12 @@ export default {
           to: LINKS.docs,
         },
         {
-          text: 'Blog',
-          to: LINKS.blog,
-        },
-        {
           text: 'Changelog',
           to: LINKS.changelog,
         },
         {
-          text: 'Demos',
-          to: LINKS.demos,
-        },
-        {
           text: 'Support',
           to: LINKS.support,
-        },
-        {
-          text: 'Security',
-          to: LINKS.security,
         },
         {
           text: 'Community Guides',
@@ -372,14 +352,19 @@ export default {
           to: LINKS.postgresql,
         },
         {
-          text: 'Brand',
-          to: LINKS.brand,
+          text: 'Creators',
+          to: LINKS.creators,
         },
       ],
     },
     {
-      heading: 'Community',
+      heading: 'Social',
       links: [
+        {
+          text: 'Discord',
+          to: LINKS.discord,
+          icon: 'discord-icon',
+        },
         {
           text: 'GitHub',
           to: LINKS.github,
@@ -396,19 +381,9 @@ export default {
           icon: 'linkedin-icon',
         },
         {
-          text: 'Discord',
-          to: LINKS.discord,
-          icon: 'discord-icon',
-        },
-        {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
-        },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
-          icon: 'creators-icon',
         },
       ],
     },
