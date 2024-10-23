@@ -425,6 +425,8 @@
       items:
         - title: About Neon Authorize
           slug: guides/neon-authorize
+        - title: Clerk Quickstart
+          slug: guides/neon-authorize-clerk
     - title: Integrations
       icon: integrations
       slug: guides/integrations

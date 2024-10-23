@@ -1,8 +1,7 @@
 ---
-title: Setup Clerk with Neon Authorize
+title: Set up Clerk with Neon Authorize
 subtitle: Integrate Clerk with Neon Authorize to secure your application at the database level
 enableTableOfContents: true
-isDraft: true
 ---
 
 <InfoBlock>

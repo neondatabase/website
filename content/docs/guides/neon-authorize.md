@@ -16,7 +16,7 @@ enableTableOfContents: true
 </DocsList>
 
 <DocsList title="Sample projects" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize">Clerk + Neon Authorize (frontend sql)</a>
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
   <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
   <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize">Auth0 + Neon Authorize</a>
 </DocsList>
@@ -34,9 +34,9 @@ When implementing user authentication in your application, third-party authentic
 
 Most authentication providers issue **JSON Web Tokens (JWTs)** on user authentication to convey user identity and claims. The JWT is a secure way of proving that logged-in users are who they say they are &#8212; and passing that proof on to other entities.
 
-With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity right in Postgres. To integrate with an authentication provider, add your provider's JWT discovery URL to your project. This lets Neon retrieve the necessary keys to validate the JWTs.
+With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity directly in Postgres. To integrate with an authentication provider, add your provider's JWT discovery URL to your project. This lets Neon retrieve the necessary keys to validate the JWTs.
 
-```typescript
+```typescript shouldWrap
 import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProvider.getJWT() });
