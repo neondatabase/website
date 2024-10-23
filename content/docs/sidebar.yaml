@@ -654,11 +654,7 @@
       icon: management
 - section: Postgres
   items:
-    - title: PostgreSQL tutorial
-      slug: /postgresql
-      root: true
-      icon: docs
-    - title: Postgres data types
+    - title: Postgres Reference
       slug: postgresql/introduction
       icon: postgres-guides
       items:
