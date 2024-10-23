@@ -792,4 +792,4 @@ Using this guide, you have built a fully functional API for managing products us
 
 This stack provides a solid foundation for building high-performance and scalable web services. `FastAPI`'s asynchronous support, combined with `Pydantic`'s robust data validation and `asyncpg`'s efficient database interactions, allows for fast and reliable API development.
 
-As a next step, you can look at deploying this application in the cloud using scalable technologies like `Docker` and `Kubernetes`, or implementing automated test, build, and deployment workflows using `Github CI`
+As a next step, you can look at deploying this application in the cloud using scalable technologies like `Docker` and `Kubernetes`, or implementing automated test, build, and deployment workflows using `GitHub CI`

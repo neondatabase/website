@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2024-10-16T15:15:23.153Z'
+updatedOn: '2024-10-21T14:14:21.660Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -76,7 +76,7 @@ All systems are hosted on AWS, where we have implemented specific security measu
 
 - **PII Backup, Retention, and Deletion Policies with S3 Versioning**
 
-  Customer data backups are stored in Amazon S3 with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
+  Customer data backups are stored in cloud object storage, such as Amazon S3, with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
 
 - **Vulnerability Management with Orca and Oligo**
 

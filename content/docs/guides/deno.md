@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.649Z'
+updatedOn: '2024-10-22T15:41:04.375Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -231,9 +231,9 @@ $ curl https://cloudy-otter-57.deno.dev/books
 
 To check the health of the deployment or modify settings, navigate to the [Project Overview](https://dash.deno.com/account/projects) page and select your project from the **Projects** list.
 
-### Deploying using Github
+### Deploying using GitHub
 
-When deploying a more complex Deno application, with custom build steps, you can use Deno's Github integration. The integration lets you link a Deno Deploy project to a GitHub repository. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/how-to-deploy).
+When deploying a more complex Deno application, with custom build steps, you can use Deno's GitHub integration. The integration lets you link a Deno Deploy project to a GitHub repository. For more information, see [Deploying with GitHub](https://docs.deno.com/deploy/manual/how-to-deploy).
 
 ## Removing the example application and Neon project
 

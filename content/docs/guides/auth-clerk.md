@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.646Z'
+updatedOn: '2024-10-22T15:41:04.373Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
@@ -83,7 +83,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 ### Create a Clerk application
 
 1. Log in to your Clerk account and navigate to the [Dashboard](https://dashboard.clerk.dev/). From the left sidebar, select `Create Application` to create a new app.
-2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `Github` as allowed sign-in methods.
+2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `GitHub` as allowed sign-in methods.
 
 ### Retrieve your API keys
 
