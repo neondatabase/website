@@ -67,7 +67,7 @@ List all schemas:
 \dn
 ```
 
-List all [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) and functions:
+List all [stored procedures](https://neon.tech/postgresql/postgresql-plpgsql) and functions:
 
 ```sql
 \df
@@ -97,7 +97,7 @@ Get detailed information on a table.
 \d+ table_name
 ```
 
-Show a [stored procedure](https://neon.tech/postgresql/postgresql-stored-procedures/) or function code:
+Show a [stored procedure](https://neon.tech/postgresql/postgresql-plpgsql) or function code:
 
 ```
 \df+ function_name

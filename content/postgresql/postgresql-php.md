@@ -30,5 +30,5 @@ Many PHP distributions include the `PDO_PGSQL` driver that allows you to interac
 - [Querying data from a table](postgresql-php/query) – shows you various ways to query data in the PostgreSQL database from PHP.
 - [Performing transactions](postgresql-php/transaction) – explains the transaction concept and shows you how to perform transactions in PHP.
 - [Working with the binary large objects (BLOB)](postgresql-php/postgresql-blob) – shows you how to insert, select, and delete large objects in PostgreSQL using PHP.
-- [Calling PostgreSQL stored procedures](postgresql-php/call-stored-procedures) – explains to you the steps of calling [PostgreSQL stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) from PHP.
+- [Calling PostgreSQL stored procedures](postgresql-php/call-stored-procedures) – explains to you the steps of calling [PostgreSQL stored procedures](https://neon.tech/postgresql/postgresql-plpgsql) from PHP.
 - [Deleting data in a PostgreSQL table using PHP PDO](postgresql-php/delete) – teaches you how to delete data from the PostgreSQL table in the PHP application using PDO.

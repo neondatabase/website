@@ -50,7 +50,7 @@ ALTER TABLE table_name
 RENAME column_name2 TO new_column_name2;
 ```
 
-If you rename a column referenced by other database objects such as [views](../postgresql-views), [foreign key constraints](postgresql-foreign-key), [triggers](../postgresql-triggers), and [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/), PostgreSQL will automatically change the column name in the dependent objects.
+If you rename a column referenced by other database objects such as [views](../postgresql-views), [foreign key constraints](postgresql-foreign-key), [triggers](../postgresql-triggers), and [stored procedures](https://neon.tech/postgresql/postgresql-plpgsql), PostgreSQL will automatically change the column name in the dependent objects.
 
 ## PostgreSQL RENAME COLUMN examples
 

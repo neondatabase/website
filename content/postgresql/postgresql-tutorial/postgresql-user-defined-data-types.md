@@ -19,7 +19,7 @@ nextLink:
 Besides built\-in [data types](postgresql-data-types), PostgreSQL allows you to create user\-defined data types through the following statements:
 
 - `CREATE DOMAIN` creates a user\-defined data type with constraints such as [`NOT NULL`](postgresql-not-null-constraint), [`CHECK`](postgresql-check-constraint), etc.
-- `CREATE TYPE` creates a composite type used in [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) as the data types of returned values.
+- `CREATE TYPE` creates a composite type used in [stored procedures](https://neon.tech/postgresql/postgresql-plpgsql) as the data types of returned values.
 
 ## PostgreSQL CREATE DOMAIN statement
 

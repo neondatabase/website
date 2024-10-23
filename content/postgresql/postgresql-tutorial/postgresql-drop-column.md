@@ -28,7 +28,7 @@ DROP COLUMN column_name;
 
 When you remove a column from a table, PostgreSQL will automatically remove all of the [indexes](../postgresql-indexes) and constraints that involved the dropped column.
 
-If the column that you want to remove is used in other database objects such as [views](../postgresql-views), [triggers](../postgresql-triggers), and [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/), you cannot drop the column because other objects depend on it.
+If the column that you want to remove is used in other database objects such as [views](../postgresql-views), [triggers](../postgresql-triggers), and [stored procedures](https://neon.tech/postgresql/postgresql-plpgsql), you cannot drop the column because other objects depend on it.
 
 In this case, you can use the `CASCADE` option in the `DROP COLUMN` clause to drop the column and all of its dependent objects:
 

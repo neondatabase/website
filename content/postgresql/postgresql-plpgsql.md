@@ -1,6 +1,6 @@
 ---
-title: 'PostgreSQL PL/pgSQL'
-page_title: 'PostgreSQL PL/pgSQL'
+title: 'PostgreSQL PL/pgSQL Stored Procedures'
+page_title: 'PostgreSQL PL/pgSQL Stored Procedures'
 page_description: 'In this section, you will learn how to develop user-defined functions and stored procedures in PostgreSQL using PL/pgSQL programming language.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/'
 ogImage: ''
