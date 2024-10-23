@@ -25,11 +25,11 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <TechnologyNavigation>
 
-<a href="/docs/guides/prisma" title="Prisma" description="Easily add secure, beautiful, and fast authentication to Prisma with Neon." icon="prisma"></a>
+<a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
 
-<a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database." icon="react"></a>
+<a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database" icon="react"></a>
 
-<a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application." icon="node-js"></a>
+<a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application" icon="node-js"></a>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
@@ -48,6 +48,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <a href="/docs/guides/laravel" title="Laravel" description="Connect from Laravel to Neon" icon="laravel"></a>
 
 <a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
+
+<a href="/docs/guides/prisma" title="Prisma" description="Learn how to connect from Prisma ORM to your Neon Postgres database" icon="prisma"></a>
 
 <a href="/docs/guides/quarkus-jdbc" title="Quarkus" description="Connect Quarkus (JDBC) to Neon" icon="quarkus"></a>
 
