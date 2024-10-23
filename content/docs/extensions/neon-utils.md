@@ -40,7 +40,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 The following limitations apply:
 
 - The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
-- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute does not return a correct value.
+- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed-size compute does not return a correct value.
 
 ## Observe autoscaling with `neon_utils` and `pgbench`
 

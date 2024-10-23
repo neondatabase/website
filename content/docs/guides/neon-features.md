@@ -77,11 +77,15 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 <a href="/docs/introduction/read-replicas" description="Learn how Neon maximizes scalability and more with read replicas" icon="scale-up">Learn about read replicas</a>
 
-<a href="/docs/guides/read-replica-guide" description="How to create and manage read replicas" icon="ladder">Working with read replicas</a>
+<a href="/docs/guides/read-replica-guide" description="Learn how to create, connect to, configure, delete, and monitor read replicas" icon="ladder">Create and manage Read Replicas</a>
 
-<a href="/docs/guides/read-replica-data-analysis" description="Offload data analysis and reporting queries to read replicas" icon="chart-bar">Data analysis and reporting</a>
+<a href="/docs/guides/read-replica-integrations" description="Scale your app with read replicas using built-in framework support" icon="enable">Scale your app with Read Replicas</a>
 
-<a href="/docs/guides/read-replica-prisma" description="Scale your applications with Neon read replicas and Prisma Client" icon="screen">Use read replicas with Prisma</a>
+<a href="/docs/guides/read-replica-data-analysis" description="Leverage read replicas for running data-intensive analytics queries" icon="chart-bar">Run analytics queries with Read Replicas</a>
+
+<a href="/docs/guides/read-replica-adhoc-queries" description="Leverage read replicas for running ad-hoc queries" icon="queries">Run ad-hoc queries with Read Replicas</a>
+
+<a href="/docs/guides/read-only-access-read-replicas" description="Leverage read replicas to provide read-only access to your data" icon="screen">Provide read-only access with Read Replicas</a>
 
 </DetailIconCards>
 
