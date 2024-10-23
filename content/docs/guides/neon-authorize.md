@@ -24,7 +24,7 @@ enableTableOfContents: true
 
 ## Authentication and authorization
 
-When implementing user authentication in your application, third-party authentication providers like **Clerk**, **Auth0**, and others simplify the process of managing user identities, passwords, and security tokens. Once a user's identity is confirmed, the next step is **authorization** — controlling who can do what in your app based on their user type or role — for example, admins versus regular users. With Neon Authorize, you can handle authorization right in Postgres, in addition to, or to replace entirely, security at other layers.
+When implementing user authentication in your application, third-party authentication providers like **Clerk**, **Auth0**, and others simplify the process of managing user identities, passwords, and security tokens. Once a user's identity is confirmed, the next step is **authorization** — controlling who can do what in your app based on their user type or role — for example, admins versus regular users. With Neon Authorize, you can manage authorization directly within Postgres, either alongside or as a complete replacement for security at other layers.
 
 ## How Neon Authorize works
 
