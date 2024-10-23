@@ -11,12 +11,10 @@ enableTableOfContents: true
 <p>How Neon Authorize works</p>
 </DocsList>
 
-<DocsList title="Before you start" theme="docs">
-<a href="/docs/guides/neon-authorize-quickstart">Get started</a>
-</DocsList>
-
-<DocsList title="Example repository" theme="repo">
-<a href="https://github.com/orgs/neondatabase/repositories?type=source&q=authorize">6 sample demos</a>
+<DocsList title="Sample projects" theme="repo">
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize">Clerk + Neon Authorize (frontend sql)</a>
+  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize">Auth0 + Neon Authorize</a>
 </DocsList>
 </InfoBlock>
 
@@ -74,7 +72,21 @@ In this case, you have to:
 
 ### After Neon Authorize (RLS in the database):
 
-With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies:
+With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies. Here's an example of applying authorization for creating new todo items, where only authenticated users can insert data:
+
+<Tabs labels={["SQL", "Drizzle"]}>
+<TabItem>
+
+```sql
+CREATE POLICY "create todos" ON "todos"
+    AS PERMISSIVE FOR INSERT
+    TO authenticated
+    WITH CHECK (auth.user_id() = user_id);
+```
+
+</TabItem>
+
+<TabItem>
 
 ```typescript
 pgPolicy('create todos', {
@@ -83,6 +95,9 @@ pgPolicy('create todos', {
   withCheck: sql`(select auth.user_id() = user_id)`,
 });
 ```
+
+</TabItem>
+</Tabs>
 
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
@@ -103,7 +118,21 @@ This approach is flexible: you can manage RLS policies directly in SQL or work m
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
-Let's break down the sample RLS policy we just looked at to see what Neon Authorize is actually doing:
+Let's break down the RLS policy controlling who can **view todos** to see what Neon Authorize is actually doing:
+
+<Tabs labels={["SQL", "Drizzle"]}>
+
+<TabItem>
+
+```sql
+CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
+  FOR SELECT TO authenticated
+  USING ((select auth.user_id() = user_id));
+```
+
+</TabItem>
+
+<TabItem>
 
 ```typescript
 pgPolicy('view todos', {
@@ -112,6 +141,10 @@ pgPolicy('view todos', {
   using: sql`(select auth.user_id() = user_id)`,
 });
 ```
+
+</TabItem>
+
+</Tabs>
 
 This policy enforces that a user can only view their own `todos`. Here's how each component works together.
 
@@ -127,7 +160,7 @@ The **pg_session_jwt** extension makes the extracted user ID accessible within y
 using: sql`(select auth.user_id() = user_id)`,
 ```
 
-- `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user's ID from the JWT.
+- `auth.user_id()`: This function, provided by `pg_session_jwt`, retrieves the authenticated user's ID from the JWT (it looks for it in the `sub` field).
 - `user_id`: This refers to the `user_id` column in the `todos` table, representing the owner of each to-do item.
 
 The RLS policy compares the `user_id` from the JWT with the `user_id` in the todos table. If they match, the user is allowed to view their own todos; if not, access is denied.
@@ -143,38 +176,41 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | Provider               | Supported? | Documentation                                                                                                                 | JWKS URL                                                                                   |
 | ---------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | **Clerk**              | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    | `https://{yourClerkDomain}/.well-known/jwks.json`                                          |
+| **Stack Auth**         | ✅         | [docs](https://sage.storia.ai/stack-auth)                                                                                            | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`                                         |
 | **Auth0**              | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              | `https://{yourDomain}/.well-known/jwks.json`                                               |
-| **Firebase**           | ✅         | [docs](https://firebase.google.com/docs/auth/admin/verify-id-tokens)                                                          | `https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com` |
-| **Stytch**             | ✅         | [docs](https://stytch.com/docs/guides/sessions/using-jwts)                                                                    | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                        |
+| **Firebase Auth**           | ✅         | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                                          | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` |
+| **Stytch**             | ✅         | [docs](https://stytch.com/docs/api/jwks-get)                                                                    | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                        |
 | **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`    |
-| **Supabase**           | ❌         | None                                                                                                                          | N/A                                                                                        |
-| **Okta**               | ✅         | [docs](https://auth0.com/docs/secure/tokens/json-web-tokens/locate-json-web-key-sets)                                         | `https://{yourOktaDomain}/oauth2/{authServerId}/.well-known/jwks.json`                     |
+| **Supabase**           | ❌         | N/A                                                                                                                          | N/A                                                                                        |
 | **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`            |
-| **Microsoft Azure AD** | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys`                           |
-| **Apple Sign In**      | ✅         | [docs](https://developer.apple.com/documentation/sign_in_with_apple/generate_and_validate_tokens)                             | `https://appleid.apple.com/auth/keys`                                                      |
+| **Azure AD**           | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens`                           |
+| **GCP Cloud Identity** | ✅         | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                                                               | `https://www.googleapis.com/oauth2/v3/certs`                             |
+
+
 
 ## Sample applications
 
 You can use these sample ToDo applications to get started using Neon Authorize with the following popular authentication providers.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/stack-nextjs-neon-authorize" description="A Todo List built with Stack Auth, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stack Auth + Neon Authorize</a>
-<a href="https://github.com/neondatabase/stytch-nextjs-neon-authorize" description="A Todo List built with Stytch, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stytch + Neon Authorize</a>
-<a href="https://github.com/neondatabase/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon Authorize</a>
-<a href="https://github.com/neondatabase/clerk-nextjs-neon-authorize" description="A Todo List built with Clerk, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Clerk + Neon Authorize</a>
-<a href="https://github.com/neondatabase/auth0-nextjs-neon-authorize" description="A Todo List built with Auth0, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Auth0 + Neon Authorize</a>
-<a href="https://github.com/neondatabase/clerk-nextjs-frontend-neon-authorize" description="A Todo List built with Clerk, Next.js, and Neon Authorize (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize" description="A Todo List built with Clerk, Next.js, and Neon Authorize (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize" description="A Todo List built with Stack Auth, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stack Auth + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize" description="A Todo List built with Auth0, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Auth0 + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize" description="A Todo List built with Stytch, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stytch + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon Authorize with custom generated JWTs" icon="github">Neon Authorize with custom JWTs</a>
 </DetailIconCards>
 
 ## Current limitations
 
 While this feature is in its early-access phase, there are some limitations to be aware of:
 
-- **Authentication provider requirements**: Your authentication provider must provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added.
+- **Authentication provider requirements**: Your authentication provider must provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289).
 - **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP.
-
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
-
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
+- **Postgres 17:** Postgres 17 is currently unsupported but may be available soon.
+- **Azure:** Neon Authorize does not yet support projects set up in Azure regions.
+
 
 These limitations will evolve as we continue developing the feature. If you have any questions or run into issues, please let us know.
