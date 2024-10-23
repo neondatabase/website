@@ -15,8 +15,8 @@ You can instantly create read replicas for any branch in your Neon project and c
 
 - **No additional storage is required**: With read replicas reading from the same source as your primary read-write compute, no additional storage is required to create a read replica. Data is neither duplicated nor replicated. Creating a read replica involves spinning up a read-only compute instance, which takes a few seconds.
 - **You can create them almost instantly**: With no data replication required, you can create read replicas almost instantly.
-- **They are cost-efficient**: With no additional storage or transfer of data, costs associated with storage and data transfer are avoided. Neon's read replicas also benefit from Neon's [Autoscaling](/docs/introduction/autoscaling) and [Autosuspend](/docs/manage/endpoints#auto-suspend-configuration) features, which enable efficient management of compute resources.
-- **They are instantly available**. You can allow read replicas to scale to zero when not in use without introducing lag. When a read replica starts up in response to a query, it is up to date with your primary read-write compute almost instantly.
+- **They are cost-efficient**: With no additional storage or transfer of data, costs associated with storage and data transfer are avoided. Neon's read replicas also benefit from Neon's [Autoscaling](/docs/introduction/autoscaling) and [Autosuspend](/docs/manage/endpoints#auto-suspend-configuration) features, which allow you to manage compute usage.
+- **They are instantly available**: You can allow read replicas to scale to zero when not in use without introducing lag. When a read replica starts up in response to a query, it is up to date with your primary read-write compute almost instantly.
 
 ## How do you create read replicas?
 
