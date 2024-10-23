@@ -7,7 +7,19 @@ import Form from '../form';
 
 import Details from './details';
 
+const themes = {
+  hero: {
+    className: 'hero pt-[152px] xl:pt-[120px] lg:pt-11 md:pt-7',
+    titleClassName: 'text-[72px] 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]',
+  },
+  'form-copy': {
+    className: 'form-copy pb-12 pt-[136px] xl:pt-[120px] lg:pb-8 lg:pt-20 md:pt-16',
+    titleClassName: 'text-[56px] xl:text-5xl lg:text-4xl md:text-[32px]',
+  },
+};
+
 const Hero = ({
+  theme = 'hero',
   title,
   description,
   formTitle,
@@ -30,9 +42,14 @@ const Hero = ({
   const hasDetails = detailsTitle && detailsDescription;
 
   return (
-    <section className="safe-paddings overflow-hidden pt-[152px] xl:pt-[120px] lg:pt-11 md:pt-7">
+    <section className={clsx('safe-paddings overflow-hidden', themes[theme].className)}>
       <Container className="flex flex-col items-center" size="medium">
-        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px] md:text-[40px]">
+        <h1
+          className={clsx(
+            'text-center font-title font-medium leading-none tracking-extra-tight',
+            themes[theme].titleClassName
+          )}
+        >
           {title}
         </h1>
         <p
@@ -91,6 +108,7 @@ const Hero = ({
 };
 
 Hero.propTypes = {
+  theme: PropTypes.oneOf(Object.keys(themes)),
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   formTitle: PropTypes.string,
