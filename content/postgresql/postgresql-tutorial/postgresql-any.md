@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL ANY Operator"
-page_title: "PostgreSQL ANY Operator"
-page_description: "This tutorial shows you how to use the PostgreSQL ANY operator to compare a value to a set of values returned by a subquery."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/"
-ogImage: ""
-updatedOn: "2024-04-24T06:18:58+00:00"
+title: 'PostgreSQL ANY Operator'
+page_title: 'PostgreSQL ANY Operator'
+page_description: 'This tutorial shows you how to use the PostgreSQL ANY operator to compare a value to a set of values returned by a subquery.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
+ogImage: ''
+updatedOn: '2024-04-24T06:18:58+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Correlated Subquery"
-  slug: "postgresql-tutorial/postgresql-correlated-subquery"
-nextLink: 
-  title: "PostgreSQL ALL Operator"
-  slug: "postgresql-tutorial/postgresql-all"
+previousLink:
+  title: 'PostgreSQL Correlated Subquery'
+  slug: 'postgresql-tutorial/postgresql-correlated-subquery'
+nextLink:
+  title: 'PostgreSQL ALL Operator'
+  slug: 'postgresql-tutorial/postgresql-all'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ANY` operator to compare a scalar value with a set of values returned by a subquery.
-
 
 ## Introduction to PostgreSQL ANY operator
 
@@ -26,15 +22,15 @@ The PostgreSQL `ANY` operator compares a value with a set of values returned by 
 
 Here’s the basic syntax of  the `ANY` operator:
 
-
 ```csssql
 expression operator ANY(subquery)
 ```
+
 In this syntax:
 
-* `expression` is a value that you want to compare.
-* `operator` is a comparison operator including \=, \<, \>, \<\=, \>\=, and \<\>.
-* `subquery` is a subquery that returns a set of values to compare against. It must return exactly one column.
+- `expression` is a value that you want to compare.
+- `operator` is a comparison operator including \=, \<, \>, \<\=, \>\=, and \<\>.
+- `subquery` is a subquery that returns a set of values to compare against. It must return exactly one column.
 
 The `ANY` operator returns `true` if the comparison returns `true` for at least one of the values in the set, and `false` otherwise.
 
@@ -44,16 +40,13 @@ Besides the subquery, you can use any construct that returns a set of values suc
 
 Note that `SOME` is a synonym for `ANY`, which means that you can use them interchangeably.
 
-
 ## PostgreSQL ANY operator examples
 
 Let’s take some examples of using the `ANY` operator.
 
-
 ### Setting up a sample table
 
 First, create a table called `employees` and `managers`, and insert some data into it:
-
 
 ```sql
 CREATE TABLE employees (
@@ -70,7 +63,7 @@ CREATE TABLE managers(
     salary DECIMAL(10, 2) NOT NULL
 );
 
-INSERT INTO employees (first_name, last_name, salary) 
+INSERT INTO employees (first_name, last_name, salary)
 VALUES
 ('Bob', 'Williams', 45000.00),
 ('Charlie', 'Davis', 55000.00),
@@ -85,20 +78,20 @@ VALUES
 ('Liam', 'Clark', 59000.00),
 ('Mia', 'Parker', 42000.00);
 
-INSERT INTO managers(first_name, last_name, salary) 
+INSERT INTO managers(first_name, last_name, salary)
 VALUES
 ('John', 'Doe',  60000.00),
 ('Jane', 'Smith', 55000.00),
 ('Alice', 'Johnson',  58000.00);
 ```
-Second, retrieve the data from the `employees` table:
 
+Second, retrieve the data from the `employees` table:
 
 ```sql
 SELECT * FROM employees;
 ```
-Output:
 
+Output:
 
 ```sql
  id | first_name | last_name |  salary
@@ -120,14 +113,14 @@ Output:
  15 | Alice      | Johnson   | 58000.00
 (15 rows)
 ```
-Third, retrieve the data from the `managers` table:
 
+Third, retrieve the data from the `managers` table:
 
 ```
 SELECT * FROM managers;
 ```
-Output:
 
+Output:
 
 ```sql
  id | first_name | last_name |  type   |  salary
@@ -142,23 +135,22 @@ Output:
 
 The following statement uses the ANY operator to find employees who have the salary the same as manager:
 
-
 ```
-SELECT 
-  * 
-FROM 
-  employees 
-WHERE 
+SELECT
+  *
+FROM
+  employees
+WHERE
   salary = ANY (
-    SELECT 
-      salary 
-    FROM 
+    SELECT
+      salary
+    FROM
       managers
   );
 
 ```
-It returns one row:
 
+It returns one row:
 
 ```sql
  id | first_name | last_name |  salary
@@ -166,16 +158,16 @@ It returns one row:
   2 | Charlie    | Davis     | 55000.00
 (1 row)
 ```
+
 How it works.
 
 First, execute the subquery in the `ANY` operator that returns the salary of managers:
 
-
 ```
 SELECT salary FROM managers;
 ```
-Output:
 
+Output:
 
 ```sql
   salary
@@ -185,29 +177,28 @@ Output:
  58000.00
 (3 rows)
 ```
-Second, compare the salary of each row in the `employees` table with the values returned by the subquery and include the row that has a salary equal to the one in the set (`60K`, `55K`, and `58K`).
 
+Second, compare the salary of each row in the `employees` table with the values returned by the subquery and include the row that has a salary equal to the one in the set (`60K`, `55K`, and `58K`).
 
 ### 2\) Using ANY operator with \> operator example
 
 The following example uses the `ANY` operator to find employees who have salaries greater than the manager’s salaries:
 
-
 ```
-SELECT 
-  * 
-FROM 
-  employees 
-WHERE 
+SELECT
+  *
+FROM
+  employees
+WHERE
   salary > ANY (
-    SELECT 
-      salary 
-    FROM 
+    SELECT
+      salary
+    FROM
       managers
   );
 ```
-Output:
 
+Output:
 
 ```sql
  id | first_name | last_name |  salary
@@ -216,32 +207,31 @@ Output:
  11 | Liam       | Clark     | 59000.00
 (2 rows)
 ```
+
 The output indicates that the two employees have a higher salary than the manager’s.
 
-* Jack has a salary of 56K which is greater than 55K.
-* Liam has a salary of 59K which is greater than 55K and 58K.
-
+- Jack has a salary of 56K which is greater than 55K.
+- Liam has a salary of 59K which is greater than 55K and 58K.
 
 ### 3\) Using ANY operator with \< operator example
 
 The following example uses the `ANY` operator to find employees who have salaries less than the manager’s salaries:
 
-
 ```
-SELECT 
-  * 
-FROM 
-  employees 
-WHERE 
+SELECT
+  *
+FROM
+  employees
+WHERE
   salary < ANY (
-    SELECT 
-      salary 
-    FROM 
+    SELECT
+      salary
+    FROM
       employees
   );
 ```
-Output:
 
+Output:
 
 ```
  id | first_name | last_name |  salary
@@ -260,10 +250,9 @@ Output:
 (11 rows)
 
 ```
-It returns all the rows with the `employee` type because they have a value in the `salary` column less than any value in the set (55K, 58K, and 60K).
 
+It returns all the rows with the `employee` type because they have a value in the `salary` column less than any value in the set (55K, 58K, and 60K).
 
 ## Summary
 
-* Use the PostgreSQL `ANY` operator to compare a value to a set of values returned by a subquery.
-
+- Use the PostgreSQL `ANY` operator to compare a value to a set of values returned by a subquery.

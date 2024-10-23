@@ -1,21 +1,18 @@
 ---
-title: "PostgreSQL CREATE ROLE Statement"
-page_title: "PostgreSQL CREATE ROLE Statement"
-page_description: "In this tutorial, you will learn about the PostgreSQL roles concept and how to use PostgreSQL create role statement to create roles."
-prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/"
-ogImage: "/postgresqltutorial/PostgreSQL-Roles.png"
-updatedOn: "2024-02-22T07:00:29+00:00"
+title: 'PostgreSQL CREATE ROLE Statement'
+page_title: 'PostgreSQL CREATE ROLE Statement'
+page_description: 'In this tutorial, you will learn about the PostgreSQL roles concept and how to use PostgreSQL create role statement to create roles.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/'
+ogImage: '/postgresqltutorial/PostgreSQL-Roles.png'
+updatedOn: '2024-02-22T07:00:29+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL DROP SCHEMA Statement"
-  slug: "postgresql-administration/postgresql-drop-schema"
-nextLink: 
-  title: "PostgreSQL GRANT"
-  slug: "postgresql-administration/postgresql-grant"
+previousLink:
+  title: 'PostgreSQL DROP SCHEMA Statement'
+  slug: 'postgresql-administration/postgresql-drop-schema'
+nextLink:
+  title: 'PostgreSQL GRANT'
+  slug: 'postgresql-administration/postgresql-grant'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL roles and how to use the PostgreSQL `CREATE ROLE` statement to create new roles.
 
@@ -27,35 +24,33 @@ When roles contain other roles, they are referred to as **[group roles](postgres
 
 Note that PostgreSQL combined the users and groups into roles since version 8\.1
 
-
 ## Introduction to PostgreSQL CREATE ROLE statement
 
 To create a new role in a PostgreSQL server, you use the `CREATE ROLE` statement.
 
 Here’s the basic syntax of the `CREATE ROLE` statement:
 
-
 ```pgsqlsqlsql
 CREATE ROLE role_name;
 ```
+
 In this syntax, you specify the name of the role that you want to create after the `CREATE ROLE` keywords.
 
 When you create a role, it is valid in all databases within the database server (or cluster).
 
 For example, the following statement uses the `CREATE ROLE` statement to create a new role called `bob`:
 
-
 ```pgsql
 CREATE ROLE bob;
 ```
-To retrieve all roles in the current PostgreSQL server, you can query them from the `pg_roles` system catalog as follows:
 
+To retrieve all roles in the current PostgreSQL server, you can query them from the `pg_roles` system catalog as follows:
 
 ```pgsql
 SELECT rolname FROM pg_roles;
 ```
-Output:
 
+Output:
 
 ```pgsql
            rolname
@@ -78,16 +73,16 @@ Output:
  bob
 (16 rows)
 ```
+
 Notice that the roles whose names start with `pg_` are system roles. The `postgres` is a [superuser](create-superuser-postgresql) role created by the PostgreSQL installer.
 
 In `psql`, you can use the `\du` command to show all roles that you create including the postgres role in the current PostgreSQL server:
 
-
 ```pgsql
 \du
 ```
-Output:
 
+Output:
 
 ```shell
                              List of roles
@@ -96,10 +91,10 @@ Output:
  bob       | Cannot login
  postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
 ```
+
 The output indicates that the role `bob` cannot log in.
 
 To allow the `bob` to log in to the PostgreSQL server, you need to add the `LOGIN` attribute to it.
-
 
 ### Role attributes
 
@@ -107,27 +102,25 @@ The attributes of a role define privileges for that role, including login, [supe
 
 Here’s the syntax for creating a new role with attributes.
 
-
 ```pgsql
 CREATE ROLE name WITH option;
 ```
-In this syntax, the `WITH` keyword is optional. The `option` can be one or more attributes like `SUPERUSER`, `CREATEDB`, `CREATEROLE`, etc.
 
+In this syntax, the `WITH` keyword is optional. The `option` can be one or more attributes like `SUPERUSER`, `CREATEDB`, `CREATEROLE`, etc.
 
 ### 1\) Create login roles
 
 For example, the following statement creates a role called `alice` that has the login privilege and an initial password:
 
-
 ```pgsql
-CREATE ROLE alice 
-LOGIN 
+CREATE ROLE alice
+LOGIN
 PASSWORD 'securePass1';
 ```
+
 Note that you place the password in single quotes (`'`).
 
 Here’s the new roles list:
-
 
 ```shell
  Role name |                         Attributes
@@ -136,40 +129,38 @@ Here’s the new roles list:
  bob       | Cannot login
  postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
 ```
-Now, you can use the role `alice` to log in to the PostgreSQL database server using the `psql` client tool:
 
+Now, you can use the role `alice` to log in to the PostgreSQL database server using the `psql` client tool:
 
 ```
 psql -U alice
 ```
-It will prompt you for a password. You need to enter the password that you entered in the `CREATE ROLE` statement to log in to the PostgreSQL server.
 
+It will prompt you for a password. You need to enter the password that you entered in the `CREATE ROLE` statement to log in to the PostgreSQL server.
 
 ### 2\) Create superuser roles
 
 The following statement creates a role called `john` that has the `superuser` attribute.
 
-
 ```pgsql
-CREATE ROLE john 
-SUPERUSER 
-LOGIN 
+CREATE ROLE john
+SUPERUSER
+LOGIN
 PASSWORD 'securePass1';
 ```
+
 The superuser role has all permissions within the PostgreSQL server. Therefore, you should create the superuser role only when necessary.
 
 Notice that only a superuser role can create another superuser role.
-
 
 ### 3\) Create roles with database creation permission
 
 If you want to create roles that have the database creation privilege, you can use the `CREATEDB` attribute:
 
-
 ```
-CREATE ROLE dba 
-CREATEDB 
-LOGIN 
+CREATE ROLE dba
+CREATEDB
+LOGIN
 PASSWORD 'securePass1';
 ```
 
@@ -177,12 +168,11 @@ PASSWORD 'securePass1';
 
 To set a date and time after which the role’s password is no longer valid, you use the `VALID UNTIL` attribute:
 
-
 ```pgsql
 VALID UNTIL 'timestamp'
 ```
-For example, the following statement creates a `dev_api` role with password valid until the end of 2049:
 
+For example, the following statement creates a `dev_api` role with password valid until the end of 2049:
 
 ```
 CREATE ROLE dev_api WITH
@@ -190,19 +180,18 @@ LOGIN
 PASSWORD 'securePass1'
 VALID UNTIL '2050-01-01';
 ```
-After one second tick in 2050, the password of `dev_api` is no longer valid.
 
+After one second tick in 2050, the password of `dev_api` is no longer valid.
 
 ### 5\) Create roles with connection limit
 
 To specify the number of concurrent connections a role can make, you use the `CONNECTION LIMIT` attribute:
 
-
 ```pgsql
 CONNECTION LIMIT connection_count
 ```
-The following creates a new role called `api` that can make 1000 concurrent connections:
 
+The following creates a new role called `api` that can make 1000 concurrent connections:
 
 ```pgsql
 CREATE ROLE api
@@ -210,8 +199,8 @@ LOGIN
 PASSWORD 'securePass1'
 CONNECTION LIMIT 1000;
 ```
-The following `psql` command shows all the roles that we have created so far:
 
+The following `psql` command shows all the roles that we have created so far:
 
 ```shell
 \du
@@ -232,6 +221,5 @@ The following `psql` command shows all the roles that we have created so far:
 
 ## Summary
 
-* PostgreSQL uses roles to represent user accounts. A role that can log in is equivalent to a user account in other database systems.
-* Use the role attributes to specify the privileges of the roles such as `LOGIN` allows the role to log in, `CREATEDB` allows the role to create a new database, `SUPERUSER` allows the role to have all privileges.
-
+- PostgreSQL uses roles to represent user accounts. A role that can log in is equivalent to a user account in other database systems.
+- Use the role attributes to specify the privileges of the roles such as `LOGIN` allows the role to log in, `CREATEDB` allows the role to create a new database, `SUPERUSER` allows the role to have all privileges.

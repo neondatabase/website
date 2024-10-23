@@ -1,24 +1,20 @@
 ---
-title: "Enable Triggers"
-page_title: "How to Enable Triggers in PostgreSQL"
-page_description: "In this tutorial, you will learn how to enable a trigger or all triggers associated with a table."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/"
-ogImage: ""
-updatedOn: "2024-03-26T02:02:29+00:00"
+title: 'Enable Triggers'
+page_title: 'How to Enable Triggers in PostgreSQL'
+page_description: 'In this tutorial, you will learn how to enable a trigger or all triggers associated with a table.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/'
+ogImage: ''
+updatedOn: '2024-03-26T02:02:29+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "Disable Triggers"
-  slug: "postgresql-triggers/managing-postgresql-trigger"
-nextLink: 
-  title: "How to List All Triggers in PostgreSQL"
-  slug: "postgresql-triggers/how-to-list-all-triggers-in-postgresql"
+previousLink:
+  title: 'Disable Triggers'
+  slug: 'postgresql-triggers/managing-postgresql-trigger'
+nextLink:
+  title: 'How to List All Triggers in PostgreSQL'
+  slug: 'postgresql-triggers/how-to-list-all-triggers-in-postgresql'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to enable a trigger or all triggers associated with a table.
-
 
 ## Introduction to ALTER TABLE…ENABLE TRIGGER statement
 
@@ -28,28 +24,26 @@ If a [trigger is disabled](managing-postgresql-trigger), it doesn’t activate w
 
 To enable a trigger or all triggers associated with a table, you use the `ALTER TABLE ... ENABLE TRIGGER` statement:
 
-
 ```
 ALTER TABLE table_name
 ENABLE TRIGGER trigger_name |  ALL;
 ```
+
 In this syntax:
 
-* First, specify the name of the table to which the trigger belongs you want to enable in the `ALTER TABLE` clause.
-* Second, specify the name of the trigger you want to enable in the `ENABLE TRIGGER` clause, or use the `ALL` option if you want to enable all triggers associated with the table.
-
+- First, specify the name of the table to which the trigger belongs you want to enable in the `ALTER TABLE` clause.
+- Second, specify the name of the trigger you want to enable in the `ENABLE TRIGGER` clause, or use the `ALL` option if you want to enable all triggers associated with the table.
 
 ## Enabling trigger example
 
 The following statement enables the `salary_before_update` trigger on the `employees` table:
 
-
 ```
 ALTER TABLE employees
 ENABLE TRIGGER salary_before_update;
 ```
-The following example enables all triggers that belong to the `employees` table:
 
+The following example enables all triggers that belong to the `employees` table:
 
 ```
 ALTER TABLE employees
@@ -58,5 +52,4 @@ ENABLE TRIGGER ALL;
 
 ## Summary
 
-* Use the `ALTER TABLE ENABLE TRIGGER` statement to enable a trigger or all triggers that belong to a table.
-
+- Use the `ALTER TABLE ENABLE TRIGGER` statement to enable a trigger or all triggers that belong to a table.

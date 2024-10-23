@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL SCALE() Function"
-page_title: "PostgreSQL SCALE() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL SCALE() function to retrieve the scale of a number."
-prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-scale/"
-ogImage: ""
-updatedOn: "2024-02-17T07:51:05+00:00"
+title: 'PostgreSQL SCALE() Function'
+page_title: 'PostgreSQL SCALE() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL SCALE() function to retrieve the scale of a number.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-scale/'
+ogImage: ''
+updatedOn: '2024-02-17T07:51:05+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL SQRT() Function"
-  slug: "postgresql-math-functions/postgresql-sqrt"
-nextLink: 
-  title: "PostgreSQL SIGN() Function"
-  slug: "postgresql-math-functions/postgresql-sign"
+previousLink:
+  title: 'PostgreSQL SQRT() Function'
+  slug: 'postgresql-math-functions/postgresql-sqrt'
+nextLink:
+  title: 'PostgreSQL SIGN() Function'
+  slug: 'postgresql-math-functions/postgresql-sign'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SCALE()` function to retrieve the scale of a number.
-
 
 ## Introduction to the PostgreSQL SCALE() function
 
@@ -28,28 +24,25 @@ The `SCALE()` function allows you to determine the scale of a number.
 
 Here’s the basic syntax of the `SCALE()` function:
 
-
 ```sql
 SCALE(numeric_value)
 ```
-The `SCALE()` function returns an integer representing the scale of the `numeric_value`. It returns `NULL` if the `numeric_value` is `NULL`.
 
+The `SCALE()` function returns an integer representing the scale of the `numeric_value`. It returns `NULL` if the `numeric_value` is `NULL`.
 
 ## PostgreSQL SCALE() function examples
 
 Let’s explore some examples of using the PostgreSQL `SCALE()` function.
 
-
 ### 1\) Basic SCALE() function example
 
 The following example uses the `SCALE()` function to determine the scale of the number `3.141592653589793`:
 
-
 ```sql
 SELECT SCALE(3.141592653589793);
 ```
-Output:
 
+Output:
 
 ```sql
  scale
@@ -57,13 +50,12 @@ Output:
     15
 (1 row)
 ```
-It returns 15 indicating that there are 15 digits after the decimal point.
 
+It returns 15 indicating that there are 15 digits after the decimal point.
 
 ### 2\) Using the SCALE() table to examine table data
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `product_prices` to store product prices with various scales:
-
 
 ```sql
 CREATE TABLE product_prices (
@@ -72,11 +64,11 @@ CREATE TABLE product_prices (
     price NUMERIC NOT NULL
 );
 ```
+
 Second, [insert some data](../postgresql-tutorial/postgresql-insert-multiple-rows) into the table:
 
-
 ```sql
-INSERT INTO product_prices (product_name, price) 
+INSERT INTO product_prices (product_name, price)
 VALUES
     ('T-Shirt', 10.123),
     ('Jeans', 20.5678),
@@ -90,8 +82,8 @@ VALUES
     ('Camera', 100.1234)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  product_id | product_name |  price
@@ -108,22 +100,22 @@ Output:
          10 | Camera       | 100.1234
 (10 rows)
 ```
+
 Third, group the product prices by scales using the `SCALE()` function:
 
-
 ```sql
-SELECT 
-  scale(price) AS price_scale, 
-  COUNT(*) AS count_of_products 
-FROM 
-  product_prices 
-GROUP BY 
-  price_scale 
-ORDER BY 
+SELECT
+  scale(price) AS price_scale,
+  COUNT(*) AS count_of_products
+FROM
+  product_prices
+GROUP BY
+  price_scale
+ORDER BY
   price_scale;
 ```
-Output:
 
+Output:
 
 ```sql
  price_scale | count_of_products
@@ -135,10 +127,9 @@ Output:
            5 |                 2
 (5 rows)
 ```
-By understanding the scales of prices, you can identify the diverse decimal precisions and take appropriate action to standardize them.
 
+By understanding the scales of prices, you can identify the diverse decimal precisions and take appropriate action to standardize them.
 
 ## Summary
 
-* Use the `SCALE()` function to retrieve the scale of a number.
-
+- Use the `SCALE()` function to retrieve the scale of a number.

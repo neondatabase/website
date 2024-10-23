@@ -1,31 +1,26 @@
 ---
-title: "PostgreSQL UPDATE"
-page_title: "PostgreSQL UPDATE Statement"
-page_description: "This tutorial shows you how to use the PostgreSQL UPDATE statement to update data of one or more columns of a table."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/"
-ogImage: ""
-updatedOn: "2024-01-22T13:47:38+00:00"
+title: 'PostgreSQL UPDATE'
+page_title: 'PostgreSQL UPDATE Statement'
+page_description: 'This tutorial shows you how to use the PostgreSQL UPDATE statement to update data of one or more columns of a table.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
+ogImage: ''
+updatedOn: '2024-01-22T13:47:38+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL INSERT Multiple Rows"
-  slug: "postgresql-tutorial/postgresql-insert-multiple-rows"
-nextLink: 
-  title: "PostgreSQL UPDATE Join"
-  slug: "postgresql-tutorial/postgresql-update-join"
+previousLink:
+  title: 'PostgreSQL INSERT Multiple Rows'
+  slug: 'postgresql-tutorial/postgresql-insert-multiple-rows'
+nextLink:
+  title: 'PostgreSQL UPDATE Join'
+  slug: 'postgresql-tutorial/postgresql-update-join'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` statement to update existing data in a table.
-
 
 ## Introduction to the PostgreSQL UPDATE statement
 
 The PostgreSQL `UPDATE` statement allows you to update data in one or more columns of one or more rows in a table.
 
 Here’s the basic syntax of the `UPDATE` statement:
-
 
 ```shellsqlsql
 UPDATE table_name
@@ -34,27 +29,26 @@ SET column1 = value1,
     ...
 WHERE condition;
 ```
+
 In this syntax:
 
-* First, specify the name of the table that you want to update data after the `UPDATE` keyword.
-* Second, specify columns and their new values after `SET` keyword. The columns that do not appear in the `SET` clause retain their original values.
-* Third, determine which rows to update in the condition of the [`WHERE`](postgresql-where) clause.
+- First, specify the name of the table that you want to update data after the `UPDATE` keyword.
+- Second, specify columns and their new values after `SET` keyword. The columns that do not appear in the `SET` clause retain their original values.
+- Third, determine which rows to update in the condition of the [`WHERE`](postgresql-where) clause.
 
 The `WHERE` clause is optional. If you omit the `WHERE` clause, the `UPDATE` statement will update all rows in the table.
 
 When the `UPDATE` statement is executed successfully, it returns the following command tag:
 
-
 ```sql
 UPDATE count
 ```
-The `count` is the number of rows updated including rows whose values did not change.
 
+The `count` is the number of rows updated including rows whose values did not change.
 
 ### Returning updated rows
 
 The `UPDATE` statement has an optional `RETURNING` clause that returns the updated rows:
-
 
 ```
 UPDATE table_name
@@ -69,35 +63,33 @@ RETURNING * | output_expression AS output_name;
 
 Let’s take some examples of using the PostgreSQL `UPDATE` statement.
 
-
 ### Setting up a sample table
 
 The following statements [create a table](postgresql-create-table) called `courses` and [insert](postgresql-insert) data into it:
 
-
 ```sql
 CREATE TABLE courses(
-  course_id serial PRIMARY KEY, 
-  course_name VARCHAR(255) NOT NULL, 
+  course_id serial PRIMARY KEY,
+  course_name VARCHAR(255) NOT NULL,
   price DECIMAL(10,2) NOT NULL,
-  description VARCHAR(500), 
+  description VARCHAR(500),
   published_date date
 );
 
 
-INSERT INTO courses( course_name, price, description, published_date) 
-VALUES 
-('PostgreSQL for Developers', 299.99, 'A complete PostgreSQL for Developers', '2020-07-13'), 
-('PostgreSQL Admininstration', 349.99, 'A PostgreSQL Guide for DBA', NULL), 
-('PostgreSQL High Performance', 549.99, NULL, NULL), 
-('PostgreSQL Bootcamp', 777.99, 'Learn PostgreSQL via Bootcamp', '2013-07-11'), 
+INSERT INTO courses( course_name, price, description, published_date)
+VALUES
+('PostgreSQL for Developers', 299.99, 'A complete PostgreSQL for Developers', '2020-07-13'),
+('PostgreSQL Admininstration', 349.99, 'A PostgreSQL Guide for DBA', NULL),
+('PostgreSQL High Performance', 549.99, NULL, NULL),
+('PostgreSQL Bootcamp', 777.99, 'Learn PostgreSQL via Bootcamp', '2013-07-11'),
 ('Mastering PostgreSQL', 999.98, 'Mastering PostgreSQL in 21 Days', '2012-06-30');
 
 SELECT * FROM courses;
 
 ```
-Output:
 
+Output:
 
 ```sql
  course_id |         course_name         | price  |             description              | published_date
@@ -114,28 +106,27 @@ Output:
 
 The following statement uses the `UPDATE` statement to update the course with id 3 by changing the `published_date` to `'2020-08-01'`.
 
-
 ```
 UPDATE courses
-SET published_date = '2020-08-01' 
+SET published_date = '2020-08-01'
 WHERE course_id = 3;
 ```
-The statement returns the following message indicating that one row has been updated:
 
+The statement returns the following message indicating that one row has been updated:
 
 ```sql
 UPDATE 1
 ```
-The following statement retrieves the course with id 3 to verify the update:
 
+The following statement retrieves the course with id 3 to verify the update:
 
 ```
 SELECT course_id, course_name, published_date
 FROM courses
 WHERE course_id = 3;
 ```
-Output:
 
+Output:
 
 ```sql
  course_id |         course_name         | published_date
@@ -148,15 +139,14 @@ Output:
 
 The following statement uses the `UPDATE` statement update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
 
-
 ```
 UPDATE courses
 SET published_date = '2020-07-01'
 WHERE course_id = 2
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```
  course_id |        course_name         | price  |        description         | published_date
@@ -169,37 +159,36 @@ Output:
 
 The following statement uses an `UPDATE` statement to increase the price of all the courses 5%:
 
-
 ```
 UPDATE courses
 SET price = price * 1.05;
 ```
+
 Because we don’t use a WHERE clause, the UPDATE statement updates all the rows in the `courses` table.
 
 Output:
 
-
 ```
 UPDATE 5
 ```
-The following statement retrieves data from the `courses` table to verify the update:
 
+The following statement retrieves data from the `courses` table to verify the update:
 
 ```
 SELECT * FROM courses;
 ```
+
 Output:
 
-
 ```
-SELECT 
-  course_name, 
-  price 
-FROM 
+SELECT
+  course_name,
+  price
+FROM
   courses;
 ```
-Output:
 
+Output:
 
 ```
          course_name         |  price
@@ -214,7 +203,6 @@ Output:
 
 ## Summary
 
-* Use the `UPDATE` statement to update data in one or more columns of a table.
-* Specify a condition in a WHERE clause to determine which rows to update data.
-* Use the `RETURNING` clause to return the updated rows from the `UPDATE` statement
-
+- Use the `UPDATE` statement to update data in one or more columns of a table.
+- Specify a condition in a WHERE clause to determine which rows to update data.
+- Use the `RETURNING` clause to return the updated rows from the `UPDATE` statement

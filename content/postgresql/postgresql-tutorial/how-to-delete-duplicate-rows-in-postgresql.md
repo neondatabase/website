@@ -1,29 +1,24 @@
 ---
-title: "How To Delete Duplicate Rows in PostgreSQL"
-page_title: "How to Delete Duplicate Rows in PostgreSQL"
-page_description: "This tutorial shows you how to use various techniques: DELETE join, subquery, and immediate table to delete duplicate rows in PostgreSQL."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql/"
-ogImage: ""
-updatedOn: "2024-02-01T03:13:27+00:00"
+title: 'How To Delete Duplicate Rows in PostgreSQL'
+page_title: 'How to Delete Duplicate Rows in PostgreSQL'
+page_description: 'This tutorial shows you how to use various techniques: DELETE join, subquery, and immediate table to delete duplicate rows in PostgreSQL.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql/'
+ogImage: ''
+updatedOn: '2024-02-01T03:13:27+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "How to Generate a Random Number in a Range"
-  slug: "postgresql-tutorial/postgresql-random-range"
-nextLink: 
-  title: "PostgreSQL CASE"
-  slug: "postgresql-tutorial/postgresql-case"
+previousLink:
+  title: 'How to Generate a Random Number in a Range'
+  slug: 'postgresql-tutorial/postgresql-random-range'
+nextLink:
+  title: 'PostgreSQL CASE'
+  slug: 'postgresql-tutorial/postgresql-case'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use various techniques to delete duplicate rows in PostgreSQL.
-
 
 ## Preparing sample data
 
 First, [create a new table](postgresql-create-table) named `basket` that stores fruits:
-
 
 ```pgsql
 CREATE TABLE basket(
@@ -31,21 +26,21 @@ CREATE TABLE basket(
     fruit VARCHAR(50) NOT NULL
 );
 ```
+
 Second, [insert](postgresql-insert) some fruits into the `basket` table.
 
-
 ```pgsql
-INSERT INTO basket(fruit) 
-VALUES 
-  ('apple'), 
-  ('apple'), 
-  ('orange'), 
-  ('orange'), 
-  ('orange'), 
+INSERT INTO basket(fruit)
+VALUES
+  ('apple'),
+  ('apple'),
+  ('orange'),
+  ('orange'),
+  ('orange'),
   ('banana');
 ```
-Third, [query data](postgresql-select) from the `basket` table:
 
+Third, [query data](postgresql-select) from the `basket` table:
 
 ```pgsql
 SELECT
@@ -54,8 +49,8 @@ SELECT
 FROM
     basket;
 ```
-Output:
 
+Output:
 
 ```pgsql
  id | fruit
@@ -68,15 +63,14 @@ Output:
   6 | banana
 (6 rows)
 ```
-The output indicates some duplicate rows such as 2 apples and 3 oranges in the `basket` table.
 
+The output indicates some duplicate rows such as 2 apples and 3 oranges in the `basket` table.
 
 ## Finding duplicate rows
 
 If the table has few rows, you can easily see which ones are duplicates immediately. However, this is not the case with a table that has lots of rows.
 
 The find the duplicate rows, you use the following statement:
-
 
 ```
 SELECT
@@ -91,8 +85,8 @@ HAVING
 ORDER BY
     fruit;
 ```
-Output:
 
+Output:
 
 ```pgsql
  fruit  | count
@@ -106,7 +100,6 @@ Output:
 
 The following statement uses the `DELETE USING` statement to remove duplicate rows:
 
-
 ```
 DELETE FROM
     basket a
@@ -115,10 +108,10 @@ WHERE
     a.id < b.id
     AND a.fruit = b.fruit;
 ```
+
 In this example, we joined the `basket` table to itself and checked if two different rows (a.id \< b.id) have the same value in the `fruit` column.
 
 The following query retrieves data from the `basket` table to verify the duplication removal:
-
 
 ```pgsql
 SELECT
@@ -127,8 +120,8 @@ SELECT
 FROM
 	basket;
 ```
-Output:
 
+Output:
 
 ```pgsql
  id | fruit
@@ -138,10 +131,10 @@ Output:
   6 | banana
 (3 rows)
 ```
+
 The output indicates that the statement removes the duplicate rows with the lowest IDs and keeps the one with the highest id.
 
 If you want to keep the duplicate rows with the lowest id, you need to flip the operator in the `WHERE` clause:
-
 
 ```
 DELETE  FROM
@@ -151,8 +144,8 @@ WHERE
     a.id > b.id
     AND a.fruit = b.fruit;
 ```
-To check whether the statement works correctly, let’s verify the data in the `basket` table:
 
+To check whether the statement works correctly, let’s verify the data in the `basket` table:
 
 ```pgsql
 SELECT
@@ -161,8 +154,8 @@ SELECT
 FROM
     basket;
 ```
-Output:
 
+Output:
 
 ```pgsql
  id | fruit
@@ -172,49 +165,48 @@ Output:
   6 | banana
 (3 rows)
 ```
-The output indicates that duplicate rows with the lowest ids are retained.
 
+The output indicates that duplicate rows with the lowest ids are retained.
 
 ## Deleting duplicate rows using subquery
 
 The following statement uses a subquery to delete duplicate rows and keep the row with the lowest id.
 
-
 ```
 DELETE FROM basket
 WHERE id IN
     (SELECT id
-    FROM 
+    FROM
         (SELECT id,
          ROW_NUMBER() OVER( PARTITION BY fruit
         ORDER BY  id ) AS row_num
         FROM basket ) t
         WHERE t.row_num > 1 );
 ```
+
 In this example, the subquery returned the duplicate rows except for the first row in the duplicate group. The outer `DELETE` statement deleted the duplicate rows returned by the subquery.
 
 If you want to keep the duplicate row with the highest ID, just change the order in the subquery:
-
 
 ```pgsql
 DELETE FROM basket
 WHERE id IN
     (SELECT id
-    FROM 
+    FROM
         (SELECT id,
          ROW_NUMBER() OVER( PARTITION BY fruit
         ORDER BY  id DESC ) AS row_num
         FROM basket ) t
         WHERE t.row_num > 1 );
 ```
-In case you want to delete duplicates based on values of multiple columns, here is the query template:
 
+In case you want to delete duplicates based on values of multiple columns, here is the query template:
 
 ```pgsql
 DELETE FROM table_name
 WHERE id IN
     (SELECT id
-    FROM 
+    FROM
         (SELECT id,
          ROW_NUMBER() OVER( PARTITION BY column_1,
          column_2
@@ -222,8 +214,8 @@ WHERE id IN
         FROM table_name ) t
         WHERE t.row_num > 1 );
 ```
-In this case, the statement will delete all rows with duplicate values in the `column_1` and `column_2` columns.
 
+In this case, the statement will delete all rows with duplicate values in the `column_1` and `column_2` columns.
 
 ## Deleting duplicate rows using an immediate table
 
@@ -236,24 +228,23 @@ To delete rows using an immediate table, you use the following steps:
 
 The following illustrates the steps for removing duplicate rows from the `basket` table:
 
-
 ```pgsql
 -- step 1
 CREATE TABLE basket_temp (LIKE basket);
 
 -- step 2
 INSERT INTO basket_temp(fruit, id)
-SELECT 
+SELECT
     DISTINCT ON (fruit) fruit,
     id
-FROM basket; 
+FROM basket;
 
 -- step 3
 DROP TABLE basket;
 
 -- step 4
-ALTER TABLE basket_temp 
-RENAME TO basket;                 
+ALTER TABLE basket_temp
+RENAME TO basket;
 ```
-In this tutorial, you have learned how to delete duplicate rows in PostgreSQL using the `DELETE USING` statement, subquery, and the immediate table techniques.
 
+In this tutorial, you have learned how to delete duplicate rows in PostgreSQL using the `DELETE USING` statement, subquery, and the immediate table techniques.

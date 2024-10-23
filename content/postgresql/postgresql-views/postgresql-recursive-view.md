@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Recursive View"
-page_title: "How To Create a PostgreSQL Recursive View"
-page_description: "This tutorial shows you step by step how to create a PostgreSQL recursive view using the CREATE RECURSIVE VIEW statement."
-prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/"
-ogImage: ""
-updatedOn: "2024-03-16T04:42:50+00:00"
+title: 'PostgreSQL Recursive View'
+page_title: 'How To Create a PostgreSQL Recursive View'
+page_description: 'This tutorial shows you step by step how to create a PostgreSQL recursive view using the CREATE RECURSIVE VIEW statement.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/'
+ogImage: ''
+updatedOn: '2024-03-16T04:42:50+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Materialized Views"
-  slug: "postgresql-views/postgresql-materialized-views"
-nextLink: 
-  title: "PostgreSQL List Views"
-  slug: "postgresql-views/postgresql-list-views"
+previousLink:
+  title: 'PostgreSQL Materialized Views'
+  slug: 'postgresql-views/postgresql-materialized-views'
+nextLink:
+  title: 'PostgreSQL List Views'
+  slug: 'postgresql-views/postgresql-list-views'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL recursive view using the `CREATE RECURSIVE VIEW` statement.
-
 
 ## Introduction to the PostgreSQL recursive view
 
@@ -30,22 +26,21 @@ PostgreSQL 9\.3 added a new syntax for creating a recursive view specified in th
 
 Here’s the basic syntax of the `CREATE RECURSIVE VIEW` statement:
 
-
 ```sql
-CREATE RECURSIVE VIEW view_name(columns) 
+CREATE RECURSIVE VIEW view_name(columns)
 AS
 query;
 ```
+
 In this syntax:
 
-* First, specify the name of the view you want to create in the `CREATE RECURSIVE VIEW` clause. You can add an optional schema to the name of the view.
-* Second, add a [SELECT statement](../postgresql-tutorial/postgresql-select) to define the view. The `SELECT` statement references the `view_name` to make the view recursive.
+- First, specify the name of the view you want to create in the `CREATE RECURSIVE VIEW` clause. You can add an optional schema to the name of the view.
+- Second, add a [SELECT statement](../postgresql-tutorial/postgresql-select) to define the view. The `SELECT` statement references the `view_name` to make the view recursive.
 
 The `CREATE RECURSIVE VIEW` statement is equivalent to the following statement:
 
-
 ```sql
-CREATE VIEW view_name 
+CREATE VIEW view_name
 AS
   WITH RECURSIVE cte_name (columns) AS (
     SELECT ...)
@@ -58,36 +53,35 @@ We will use the `employees` table created in the [recursive query tutorial](../p
 
 The following recursive query returns the employee and their managers including the CEO using a common table expression (CTE):
 
-
 ```sql
 WITH RECURSIVE reporting_line AS (
-  SELECT 
-    employee_id, 
-    full_name AS subordinates 
-  FROM 
-    employees 
-  WHERE 
-    manager_id IS NULL 
-  UNION ALL 
-  SELECT 
-    e.employee_id, 
+  SELECT
+    employee_id,
+    full_name AS subordinates
+  FROM
+    employees
+  WHERE
+    manager_id IS NULL
+  UNION ALL
+  SELECT
+    e.employee_id,
     (
       rl.subordinates || ' > ' || e.full_name
-    ) AS subordinates 
-  FROM 
-    employees e 
+    ) AS subordinates
+  FROM
+    employees e
     INNER JOIN reporting_line rl ON e.manager_id = rl.employee_id
-) 
-SELECT 
-  employee_id, 
-  subordinates 
-FROM 
-  reporting_line 
-ORDER BY 
+)
+SELECT
+  employee_id,
+  subordinates
+FROM
+  reporting_line
+ORDER BY
   employee_id;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id |                         subordinates
@@ -113,41 +107,41 @@ Output:
           19 | Michael North > Megan Berry > Max Mills > Nathan Ferguson
           20 | Michael North > Megan Berry > Max Mills > Kevin Rampling
 ```
+
 You can use the `CREATE RECURSIVE VIEW` statement to convert a query into a recursive view as follows:
 
-
 ```sql
-CREATE RECURSIVE VIEW reporting_line (employee_id, subordinates) AS 
-SELECT 
-  employee_id, 
-  full_name AS subordinates 
-FROM 
-  employees 
-WHERE 
-  manager_id IS NULL 
-UNION ALL 
-SELECT 
-  e.employee_id, 
+CREATE RECURSIVE VIEW reporting_line (employee_id, subordinates) AS
+SELECT
+  employee_id,
+  full_name AS subordinates
+FROM
+  employees
+WHERE
+  manager_id IS NULL
+UNION ALL
+SELECT
+  e.employee_id,
   (
     rl.subordinates || ' > ' || e.full_name
-  ) AS subordinates 
-FROM 
-  employees e 
+  ) AS subordinates
+FROM
+  employees e
   INNER JOIN reporting_line rl ON e.manager_id = rl.employee_id;
 ```
+
 To view the reporting line of the employee id 10, you can query directly from the view:
 
-
 ```sql
-SELECT 
-  subordinates 
-FROM 
-  reporting_line 
-WHERE 
+SELECT
+  subordinates
+FROM
+  reporting_line
+WHERE
   employee_id = 10;
 ```
-Output:
 
+Output:
 
 ```sql
                   subordinates
@@ -157,6 +151,5 @@ Output:
 
 ## Summary
 
-* A recursive view is a view whose defining query references the view name.
-* Use the `CREATE RECURSIVE VIEW` statement to create a recursive view.
-
+- A recursive view is a view whose defining query references the view name.
+- Use the `CREATE RECURSIVE VIEW` statement to create a recursive view.

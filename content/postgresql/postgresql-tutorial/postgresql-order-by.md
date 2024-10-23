@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL ORDER BY"
-page_title: "PostgreSQL ORDER BY"
-page_description: "This tutorial shows you how to use the PostgreSQL ORDER BY clause to sort result set returned by a query in ascending or descending order."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by/"
-ogImage: "/postgresqltutorial/PostgreSQL-ORDER-BY.png"
-updatedOn: "2024-01-16T09:02:03+00:00"
+title: 'PostgreSQL ORDER BY'
+page_title: 'PostgreSQL ORDER BY'
+page_description: 'This tutorial shows you how to use the PostgreSQL ORDER BY clause to sort result set returned by a query in ascending or descending order.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by/'
+ogImage: '/postgresqltutorial/PostgreSQL-ORDER-BY.png'
+updatedOn: '2024-01-16T09:02:03+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Column Alias"
-  slug: "postgresql-tutorial/postgresql-column-alias"
-nextLink: 
-  title: "PostgreSQL SELECT DISTINCT"
-  slug: "postgresql-tutorial/postgresql-select-distinct"
+previousLink:
+  title: 'PostgreSQL Column Alias'
+  slug: 'postgresql-tutorial/postgresql-column-alias'
+nextLink:
+  title: 'PostgreSQL SELECT DISTINCT'
+  slug: 'postgresql-tutorial/postgresql-select-distinct'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ORDER BY` clause to sort the rows of a query by one or more criteria.
-
 
 ## Introduction to PostgreSQL ORDER BY clause
 
@@ -28,62 +24,59 @@ The `ORDER BY` clause allows you to sort rows returned by a `SELECT` clause in 
 
 The following illustrates the syntax of the `ORDER BY` clause:
 
-
 ```csssqlsql
-SELECT 
-  select_list 
-FROM 
-  table_name 
-ORDER BY 
-  sort_expression1 [ASC | DESC], 
+SELECT
+  select_list
+FROM
+  table_name
+ORDER BY
+  sort_expression1 [ASC | DESC],
   sort_expression2 [ASC | DESC],
   ...;
 ```
+
 In this syntax:
 
-* First, specify a sort expression, which can be a column or an expression, that you want to sort after the `ORDER BY` keywords. If you want to sort the result set based on multiple columns or expressions, you need to place a comma (`,`) between two columns or expressions to separate them.
-* Second, you use the `ASC` option to sort rows in ascending order and the `DESC` option to sort rows in descending order. If you omit the `ASC` or `DESC` option, the `ORDER BY` uses `ASC` by default.
+- First, specify a sort expression, which can be a column or an expression, that you want to sort after the `ORDER BY` keywords. If you want to sort the result set based on multiple columns or expressions, you need to place a comma (`,`) between two columns or expressions to separate them.
+- Second, you use the `ASC` option to sort rows in ascending order and the `DESC` option to sort rows in descending order. If you omit the `ASC` or `DESC` option, the `ORDER BY` uses `ASC` by default.
 
 PostgreSQL evaluates the clauses in the `SELECT` statement in the following order: `FROM`, `SELECT`, and `ORDER BY`:
-
 
 ![](/postgresqltutorial/PostgreSQL-ORDER-BY.png)
 Due to the order of evaluation, if you have a column alias in the `SELECT` clause, you can use it in the `ORDER BY` clause.
 
 Let’s take some examples of using the PostgreSQL `ORDER BY` clause.
 
-
 ## PostgreSQL ORDER BY examples
 
 We will use the `customer` table in the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer table](/postgresqltutorial/customer.png)
+
 ### 1\) Using PostgreSQL ORDER BY clause to sort rows by one column
 
 The following query uses the `ORDER BY` clause to sort customers by their first names in ascending order:
 
-
 ```sql
-SELECT 
-  first_name, 
-  last_name 
-FROM 
-  customer 
-ORDER BY 
+SELECT
+  first_name,
+  last_name
+FROM
+  customer
+ORDER BY
   first_name ASC;
 ```
 
 ![PostgreSQL ORDER BY one column example](/postgresqltutorial/PostgreSQL-ORDER-BY-one-column-example.png)
 Since the `ASC` option is the default, you can omit it in the `ORDER BY` clause like this:
 
-
 ```sql
-SELECT 
-  first_name, 
-  last_name 
-FROM 
-  customer 
-ORDER BY 
+SELECT
+  first_name,
+  last_name
+FROM
+  customer
+ORDER BY
   first_name;
 ```
 
@@ -91,14 +84,13 @@ ORDER BY
 
 The following statement selects the first name and last name from the `customer` table and sorts the rows by values in the last name column in descending order:
 
-
 ```sql
-SELECT 
-  first_name, 
-  last_name 
-FROM 
-  customer 
-ORDER BY 
+SELECT
+  first_name,
+  last_name
+FROM
+  customer
+ORDER BY
   last_name DESC;
 ```
 
@@ -108,15 +100,14 @@ ORDER BY
 
 The following statement selects the first name and last name from the customer table and sorts the rows by the first name in ascending order and last name in descending order:
 
-
 ```sql
-SELECT 
-  first_name, 
-  last_name 
-FROM 
-  customer 
-ORDER BY 
-  first_name ASC, 
+SELECT
+  first_name,
+  last_name
+FROM
+  customer
+ORDER BY
+  first_name ASC,
   last_name DESC;
 ```
 
@@ -125,27 +116,24 @@ In this example, the ORDER BY clause sorts rows by values in the first name colu
 
 As you can see clearly from the output, two customers with the same first name `Kelly` have the last name sorted in descending order.
 
-
 ### 4\) Using PostgreSQL ORDER BY clause to sort rows by expressions
 
 The [`LENGTH()`](../postgresql-string-functions/postgresql-length-function) function accepts a string and returns the length of that string.
 
 The following statement selects the first names and their lengths. It sorts the rows by the lengths of the first names:
 
-
 ```sql
-SELECT 
-  first_name, 
-  LENGTH(first_name) len 
-FROM 
-  customer 
-ORDER BY 
+SELECT
+  first_name,
+  LENGTH(first_name) len
+FROM
+  customer
+ORDER BY
   len DESC;
 ```
 
 ![PostgreSQL ORDER BY expressions](/postgresqltutorial/PostgreSQL-ORDER-BY-expressions.png)
 Because the `ORDER BY` clause is evaluated after the `SELECT` clause, the column alias `len` is available and can be used in the `ORDER BY` clause.
-
 
 ## PostgreSQL ORDER BY clause and NULL
 
@@ -153,42 +141,41 @@ In the database world, `NULL` is a marker that indicates the missing data or the
 
 When you sort rows that contain `NULL`, you can specify the order of `NULL` with other non\-null values by using the `NULLS FIRST` or `NULLS LAST` option of the `ORDER BY` clause:
 
-
 ```sql
 ORDER BY sort_expresssion [ASC | DESC] [NULLS FIRST | NULLS LAST]
 ```
+
 The `NULLS FIRST` option places `NULL` before other non\-null values and the `NULL LAST` option places `NULL` after other non\-null values.
 
 Let’s [create a table](postgresql-create-table) for the demonstration.
-
 
 ```php
 -- create a new table
 CREATE TABLE sort_demo(num INT);
 
 -- insert some data
-INSERT INTO sort_demo(num) 
-VALUES 
-  (1), 
-  (2), 
-  (3), 
+INSERT INTO sort_demo(num)
+VALUES
+  (1),
+  (2),
+  (3),
   (null);
 ```
+
 Note that if you are not yet familiar with the `CREATE TABLE` and `INSERT` statements, you can simply execute them from `pgAdmin` or `psql` to create the `sort_demo` table and insert data into it.
 
 The following query returns data from the `sort_demo` table:
 
-
 ```sql
-SELECT 
-  num 
-FROM 
-  sort_demo 
-ORDER BY 
+SELECT
+  num
+FROM
+  sort_demo
+ORDER BY
   num;
 ```
-Output:
 
+Output:
 
 ```sql
  num
@@ -199,33 +186,33 @@ Output:
  null
 (4 rows)
 ```
+
 In this example, the `ORDER BY` clause sorts values in the `num` column of the `sort_demo` table in ascending order. It places `NULL` after other values.
 
 Note that psql displays null as an empty string by default. To make null clearer, you can execute the following command to change an empty string to another such as null:
 
-
 ```sql
 \pset null null
 ```
-Output:
 
+Output:
 
 ```sql
 Null display is "null".
 ```
+
 So if you use the `ASC` option, the `ORDER BY` clause uses the `NULLS LAST` option by default. Therefore, the following query returns the same result:
 
-
 ```
-SELECT 
-  num 
-FROM 
-  sort_demo 
-ORDER BY 
+SELECT
+  num
+FROM
+  sort_demo
+ORDER BY
   num NULLS LAST;
 ```
-Output:
 
+Output:
 
 ```sql
  num
@@ -236,19 +223,19 @@ Output:
  null
 (4 rows)
 ```
+
 To place `NULL` before other non\-null values, you use the `NULLS FIRST` option:
 
-
 ```sql
-SELECT 
-  num 
-FROM 
-  sort_demo 
-ORDER BY 
+SELECT
+  num
+FROM
+  sort_demo
+ORDER BY
   num NULLS FIRST;
 ```
-Output:
 
+Output:
 
 ```sql
  num
@@ -259,19 +246,19 @@ Output:
     3
 (4 rows)
 ```
+
 The following statement sorts values in the `num` column of the `sort_demo` table in descending order:
 
-
 ```sql
-SELECT 
-  num 
-FROM 
-  sort_demo 
-ORDER BY 
+SELECT
+  num
+FROM
+  sort_demo
+ORDER BY
   num DESC;
 ```
-Output:
 
+Output:
 
 ```sql
  num
@@ -282,21 +269,21 @@ Output:
     1
 (4 rows)
 ```
+
 The output indicates that the `ORDER BY` clause with the `DESC` option uses the `NULLS FIRST` by default.
 
 To reverse the order, you can use the `NULLS LAST` option:
 
-
 ```sql
-SELECT 
-  num 
-FROM 
-  sort_demo 
-ORDER BY 
+SELECT
+  num
+FROM
+  sort_demo
+ORDER BY
   num DESC NULLS LAST;
 ```
-Output:
 
+Output:
 
 ```
  num
@@ -310,8 +297,7 @@ Output:
 
 ## Summary
 
-* Use the `ORDER BY` clause in the `SELECT` statement to sort the rows in the query set.
-* Use the `ASC` option to sort rows in ascending order and `DESC` option to sort rows in descending order.
-* The `ORDER BY` clause uses the `ASC` option by default.
-* Use `NULLS FIRST` and `NULLS LAST` options to explicitly specify the order of `NULL` with other non\-null values.
-
+- Use the `ORDER BY` clause in the `SELECT` statement to sort the rows in the query set.
+- Use the `ASC` option to sort rows in ascending order and `DESC` option to sort rows in descending order.
+- The `ORDER BY` clause uses the `ASC` option by default.
+- Use `NULLS FIRST` and `NULLS LAST` options to explicitly specify the order of `NULL` with other non\-null values.

@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL LEFT JOIN"
-page_title: "PostgreSQL LEFT JOIN"
-page_description: "This tutorial shows you how to use PostgreSQL LEFT JOIN clause to select rows from one table that may or may not have corresponding rows in another table."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/"
-ogImage: "/postgresqltutorial/PostgreSQL-Join-Left-Join.png"
-updatedOn: "2024-02-07T02:59:26+00:00"
+title: 'PostgreSQL LEFT JOIN'
+page_title: 'PostgreSQL LEFT JOIN'
+page_description: 'This tutorial shows you how to use PostgreSQL LEFT JOIN clause to select rows from one table that may or may not have corresponding rows in another table.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/'
+ogImage: '/postgresqltutorial/PostgreSQL-Join-Left-Join.png'
+updatedOn: '2024-02-07T02:59:26+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL INNER JOIN"
-  slug: "postgresql-tutorial/postgresql-inner-join"
-nextLink: 
-  title: "PostgreSQL RIGHT JOIN"
-  slug: "postgresql-tutorial/postgresql-right-join"
+previousLink:
+  title: 'PostgreSQL INNER JOIN'
+  slug: 'postgresql-tutorial/postgresql-inner-join'
+nextLink:
+  title: 'PostgreSQL RIGHT JOIN'
+  slug: 'postgresql-tutorial/postgresql-right-join'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LEFT JOIN` clause to select data from multiple tables.
-
 
 ## Introduction to PostgreSQL LEFT JOIN clause
 
@@ -28,22 +24,21 @@ The `LEFT JOIN` can be useful for selecting rows from one table that do not have
 
 Here’s the basic syntax of the `LEFT JOIN` clause:
 
-
 ```sqlsql
-SELECT 
-  select_list 
-FROM 
+SELECT
+  select_list
+FROM
   table1
-LEFT JOIN table2 
+LEFT JOIN table2
   ON table1.column_name = table2.column_name;
 ```
+
 In this syntax:
 
-* First, specify the columns from both tables in the select list (`select_list`) of the `SELECT` clause.
-* Second, specify the left table (`table1`) from which you want to select data in the `FROM` clause.
-* Third, specify the right table (`table2`) you want to join using the `LEFT JOIN` keyword.
-* Finally, define a condition for the join (`table1.column_name = table2.column_name`), which indicates the column (`column_name`) in each table should have matching values.
-
+- First, specify the columns from both tables in the select list (`select_list`) of the `SELECT` clause.
+- Second, specify the left table (`table1`) from which you want to select data in the `FROM` clause.
+- Third, specify the right table (`table2`) you want to join using the `LEFT JOIN` keyword.
+- Finally, define a condition for the join (`table1.column_name = table2.column_name`), which indicates the column (`column_name`) in each table should have matching values.
 
 ### How the LEFT JOIN works
 
@@ -57,21 +52,21 @@ Note that `LEFT JOIN` is also referred to as `LEFT OUTER JOIN`.
 
 If the columns for joining two tables have the same name, you can use the `USING` syntax:
 
-
 ```sql
-SELECT 
-  select_list 
-FROM 
-  table1 
+SELECT
+  select_list
+FROM
+  table1
   LEFT JOIN table2 USING (column_name);
 ```
+
 The following Venn diagram illustrates how the `LEFT JOIN` clause works:
 
 ![PostgreSQL Join - Left Join](/postgresqltutorial/PostgreSQL-Join-Left-Join.png)
+
 ## PostgreSQL LEFT JOIN examples
 
 Let’s look at the following `film` and `inventory` tables from the [sample database](../postgresql-getting-started/postgresql-sample-database).
-
 
 ![Film and Inventory tables](/postgresqltutorial/film-and-inventory-tables.png)
 Each row in the `film` table may correspond to zero or multiple rows in the `inventory` table.
@@ -80,21 +75,19 @@ Conversely, each row in the `inventory` table has one and only one row in the `f
 
 The linkage between the `film` and `inventory` tables is established through the `film_id` column.
 
-
 ### 1\) Basic PostgreSQL LEFT JOIN examples
 
 The following statement uses the `LEFT JOIN` clause to join `film` table with the `inventory` table:
 
-
 ```sql
-SELECT 
-  film.film_id, 
-  film.title, 
-  inventory.inventory_id 
-FROM 
-  film 
-  LEFT JOIN inventory ON inventory.film_id = film.film_id 
-ORDER BY 
+SELECT
+  film.film_id,
+  film.title,
+  inventory.inventory_id
+FROM
+  film
+  LEFT JOIN inventory ON inventory.film_id = film.film_id
+ORDER BY
   film.title;
 ```
 
@@ -103,30 +96,29 @@ When a row from the `film` table does not have a matching row in the `inventory`
 
 The following statement uses table aliases and `LEFT JOIN` clause to join the `film` and `inventory` tables:
 
-
 ```sql
-SELECT 
-  f.film_id, 
-  f.title, 
-  i.inventory_id 
-FROM 
+SELECT
+  f.film_id,
+  f.title,
+  i.inventory_id
+FROM
   film f
-  LEFT JOIN inventory i ON i.film_id = f.film_id 
-ORDER BY 
+  LEFT JOIN inventory i ON i.film_id = f.film_id
+ORDER BY
   i.inventory_id;
 ```
+
 Because the `film` and `inventory` tables share the same `film_id` column, you can use the `USING` syntax:
 
-
 ```sql
-SELECT 
-  f.film_id, 
-  f.title, 
-  i.inventory_id 
-FROM 
+SELECT
+  f.film_id,
+  f.title,
+  i.inventory_id
+FROM
   film f
   LEFT JOIN inventory i USING (film_id)
-ORDER BY 
+ORDER BY
   i.inventory_id;
 ```
 
@@ -134,22 +126,21 @@ ORDER BY
 
 The following uses the `LEFT JOIN` clause to join the `inventory` and `film` tables. It includes a [`WHERE`](postgresql-where) clause that identifies the films that are not present in the inventory:
 
-
 ```sql
-SELECT 
-  f.film_id, 
-  f.title, 
-  i.inventory_id 
-FROM 
-  film f 
-  LEFT JOIN inventory i USING (film_id) 
-WHERE 
-  i.film_id IS NULL 
-ORDER BY 
+SELECT
+  f.film_id,
+  f.title,
+  i.inventory_id
+FROM
+  film f
+  LEFT JOIN inventory i USING (film_id)
+WHERE
+  i.film_id IS NULL
+ORDER BY
   f.title;
 ```
-Output:
 
+Output:
 
 ```
  film_id |         title          | inventory_id
@@ -164,5 +155,4 @@ Output:
 
 ## Summary
 
-* Use the PostgreSQL `LEFT JOIN` clause to select rows from one table that may or may not have corresponding rows in other tables.
-
+- Use the PostgreSQL `LEFT JOIN` clause to select rows from one table that may or may not have corresponding rows in other tables.

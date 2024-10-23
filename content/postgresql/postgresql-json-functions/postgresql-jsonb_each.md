@@ -1,64 +1,57 @@
 ---
-title: "PostgreSQL jsonb_each() Function"
-page_title: "PostgreSQL jsonb_each() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL jsonb_each() function to expand a JSON object into a set of key/value pairs."
-prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/"
-ogImage: ""
-updatedOn: "2024-02-24T08:46:16+00:00"
+title: 'PostgreSQL jsonb_each() Function'
+page_title: 'PostgreSQL jsonb_each() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_each() function to expand a JSON object into a set of key/value pairs.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/'
+ogImage: ''
+updatedOn: '2024-02-24T08:46:16+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL jsonb_array_elements_text() Function"
-  slug: "postgresql-json-functions/postgresql-jsonb_array_elements_text"
-nextLink: 
-  title: "PostgreSQL jsonb_each_text() Function"
-  slug: "postgresql-json-functions/postgresql-jsonb_each_text"
+previousLink:
+  title: 'PostgreSQL jsonb_array_elements_text() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_array_elements_text'
+nextLink:
+  title: 'PostgreSQL jsonb_each_text() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_each_text'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_each()` function to expand a JSON object into a set of key/value pairs.
 
-
-## Introduction to the PostgreSQL jsonb\_each() function
+## Introduction to the PostgreSQL jsonb_each() function
 
 The `jsonb_each()` function allows you to expand a top\-level [JSON](../postgresql-tutorial/postgresql-json) object of a JSONB value into a set of key/value pairs. The keys are text and values are JSON values.
 
 Here’s the syntax of the `jsonb_each()` function:
 
-
 ```sql
 jsonb_each(json_object)
 ```
+
 In this syntax:
 
-* `json_object` is the JSON object that you want to expand the key/value pairs.
+- `json_object` is the JSON object that you want to expand the key/value pairs.
 
 The function returns a set of records where each record consists of two fields key of type `text` and value of the `JSONB`.
 
 If the `json_object` is not a JSON object, the function will issue an error. In case the `json_object` is null, the function returns an empty set.
 
-
-## PostgreSQL jsonb\_each() function examples
+## PostgreSQL jsonb_each() function examples
 
 Let’s explore some examples of using the `jsonb_each()` function.
 
-
-### 1\) Basic PostgreSQL jsonb\_each() function example
+### 1\) Basic PostgreSQL jsonb_each() function example
 
 The following example uses the `jsonb_each` function to expand the key/value pair of a JSON object:
 
-
 ```sql
-SELECT 
-  * 
-FROM 
+SELECT
+  *
+FROM
   jsonb_each(
     '{"name": "John", "age": 30, "city": "New York"}'
   );
 ```
-Output:
 
+Output:
 
 ```sql
  key  |   value
@@ -68,23 +61,23 @@ Output:
  name | "John"
 (3 rows)
 ```
+
 If you want to retrieve a particular key, you can filter the key in the `WHERE` clause.
 
 For example, the following statement returns the name and age of the object:
 
-
 ```sql
-SELECT 
-  * 
-FROM 
+SELECT
+  *
+FROM
   jsonb_each(
     '{"name": "John", "age": 30, "city": "New York"}'
-  ) 
-WHERE 
+  )
+WHERE
   key in ('name', 'age');
 ```
-Output:
 
+Output:
 
 ```sql
  key  | value
@@ -94,10 +87,9 @@ Output:
 (2 rows)
 ```
 
-### 2\) Using the jsonb\_each() function with table data
+### 2\) Using the jsonb_each() function with table data
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `links`:
-
 
 ```sql
 CREATE TABLE links (
@@ -106,32 +98,32 @@ CREATE TABLE links (
     attributes JSONB
 );
 ```
+
 In the `links` table, the `attributes` column has the type of `JSONB` that stores various attributes of a link.
 
 Second, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `links` table:
 
-
 ```sql
-INSERT INTO links (href, attributes) 
+INSERT INTO links (href, attributes)
 VALUES
     ('https://example.com', '{"rel": "stylesheet", "type": "text/css", "media": "screen"}'),
     ('https://example.org', '{"rel": "icon", "type": "image/x-icon"}'),
     ('https://example.net', '{"rel": "alternate", "type": "application/rss+xml", "title": "RSS Feed"}');
 ```
-Third, expand the key/value pairs of the objects in `attributes` column into a set of key/value pairs using the `jsonb_each()` function:
 
+Third, expand the key/value pairs of the objects in `attributes` column into a set of key/value pairs using the `jsonb_each()` function:
 
 ```sql
 SELECT
-  href, 
-  key, 
-  value 
+  href,
+  key,
+  value
 FROM
-  links, 
+  links,
   jsonb_each(attributes);
 ```
-Output:
 
+Output:
 
 ```sql
         href         |  key  |         value
@@ -149,5 +141,4 @@ Output:
 
 ## Summary
 
-* Use the `jsonb_each()` function to expand a JSON object into a set of key/value pairs.
-
+- Use the `jsonb_each()` function to expand a JSON object into a set of key/value pairs.

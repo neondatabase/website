@@ -1,24 +1,20 @@
 ---
-title: "Creating PostgreSQL Updatable Views"
-page_title: "PostgreSQL Updatable Views"
-page_description: "In this tutorial, we will show you the requirements of PostgreSQL updatable views and how to create updatable views."
-prev_url: "https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/"
-ogImage: ""
-updatedOn: "2024-03-16T04:21:16+00:00"
+title: 'Creating PostgreSQL Updatable Views'
+page_title: 'PostgreSQL Updatable Views'
+page_description: 'In this tutorial, we will show you the requirements of PostgreSQL updatable views and how to create updatable views.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/'
+ogImage: ''
+updatedOn: '2024-03-16T04:21:16+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Drop View"
-  slug: "postgresql-views/postgresql-drop-view"
-nextLink: 
-  title: "PostgreSQL WITH CHECK OPTION"
-  slug: "postgresql-views/postgresql-views-with-check-option"
+previousLink:
+  title: 'PostgreSQL Drop View'
+  slug: 'postgresql-views/postgresql-drop-view'
+nextLink:
+  title: 'PostgreSQL WITH CHECK OPTION'
+  slug: 'postgresql-views/postgresql-views-with-check-option'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to create PostgreSQL updatable views used for modifying data in the underlying table.
-
 
 ## Introduction to PostgreSQL updatable views
 
@@ -30,21 +26,21 @@ First, the defining query of the view must have exactly one entry in the `FROM` 
 
 Second, the defining query must not contain one of the following clauses at the top level:
 
-* [GROUP BY](../postgresql-tutorial/postgresql-group-by)
-* [HAVING](../postgresql-tutorial/postgresql-having)
-* [LIMIT](../postgresql-tutorial/postgresql-limit)
-* [OFFSET FETCH](../postgresql-tutorial/postgresql-fetch)
-* [DISTINCT](../postgresql-tutorial/postgresql-select-distinct)
-* [WITH](../postgresql-tutorial/postgresql-cte)
-* [UNION](../postgresql-tutorial/postgresql-union)
-* [INTERSECT](../postgresql-tutorial/postgresql-intersect)
-* [EXCEPT](https://neon.tech/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/)
+- [GROUP BY](../postgresql-tutorial/postgresql-group-by)
+- [HAVING](../postgresql-tutorial/postgresql-having)
+- [LIMIT](../postgresql-tutorial/postgresql-limit)
+- [OFFSET FETCH](../postgresql-tutorial/postgresql-fetch)
+- [DISTINCT](../postgresql-tutorial/postgresql-select-distinct)
+- [WITH](../postgresql-tutorial/postgresql-cte)
+- [UNION](../postgresql-tutorial/postgresql-union)
+- [INTERSECT](../postgresql-tutorial/postgresql-intersect)
+- [EXCEPT](https://neon.tech/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/)
 
 Third, the selection list of the defining query must not contain any:
 
-* [Window functions](../postgresql-window-function)
-* [Set\-returning function](../postgresql-plpgsql/plpgsql-function-returns-a-table)
-* [Aggregate functions](../postgresql-aggregate-functions)
+- [Window functions](../postgresql-window-function)
+- [Set\-returning function](../postgresql-plpgsql/plpgsql-function-returns-a-table)
+- [Aggregate functions](../postgresql-aggregate-functions)
 
 An updatable view may contain both updatable and non\-updatable columns. If you attempt to modify a non\-updatable column, PostgreSQL will raise an error.
 
@@ -52,16 +48,13 @@ When you execute a modification statement such as [INSERT](../postgresql-tutoria
 
 If you have a [`WHERE`](../postgresql-tutorial/postgresql-where) condition in the defining query of a view, you still can update or delete the rows that are not visible through the view. However, if you want to avoid this, you can use the `WITH CHECK OPTION` to define the view.
 
-
 ## PostgreSQL updatable views examples
 
 We’ll take some examples of creating updatable views.
 
-
 ### Setting up a sample table
 
 The following statements create a table called `cities` and [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the table:
-
 
 ```phpsql
 CREATE TABLE cities (
@@ -101,33 +94,32 @@ SELECT * FROM cities;
 
 First, [create an updatable view](managing-postgresql-views) called `city_us` that includes cities in the US only:
 
-
 ```sql
-CREATE VIEW city_us 
-AS 
-SELECT 
-  * 
-FROM 
-  cities 
-WHERE 
+CREATE VIEW city_us
+AS
+SELECT
+  *
+FROM
+  cities
+WHERE
   country = 'US';
 ```
-Second, insert a new row into the `cities` table via the `city_us` view:
 
+Second, insert a new row into the `cities` table via the `city_us` view:
 
 ```sql
 INSERT INTO city_us(name, population, country)
 VALUES ('San Jose', 983459, 'US');
 ```
-Third, retrieve data from `cities` table:
 
+Third, retrieve data from `cities` table:
 
 ```sql
 SELECT * FROM cities
 WHERE name = 'San Jose';
 ```
-Output:
 
+Output:
 
 ```sql
  id |   name   | population | country
@@ -135,23 +127,23 @@ Output:
  21 | San Jose |     983459 | US
 (1 row)
 ```
-Fourth, update the data in the cities table via the city\_us view:
 
+Fourth, update the data in the cities table via the city_us view:
 
 ```
 UPDATE city_us
 SET population = 1000000
 WHERE name = 'New York';
 ```
+
 Fifth, verify the update:
 
-
 ```sql
-SELECT * FROM cities 
+SELECT * FROM cities
 WHERE name = 'New York';
 ```
-Output:
 
+Output:
 
 ```sql
  id |   name   | population | country
@@ -159,32 +151,31 @@ Output:
   1 | New York |    1000000 | US
 (1 row)
 ```
+
 Sixth, delete a row from the `cities` table via the `city_us` view:
 
-
 ```
-DELETE FROM city_us 
+DELETE FROM city_us
 WHERE id = 21;
 ```
+
 Finally, verify the delete:
 
-
 ```sql
-SELECT * FROM cities 
+SELECT * FROM cities
 WHERE id = 21;
 ```
-Output:
 
+Output:
 
 ```
  id | name | population | country
 ----+------+------------+---------
 (0 rows)
 ```
-The row with id 21 has been deleted.
 
+The row with id 21 has been deleted.
 
 ## Summary
 
-* A view can be updatable when its defining query meets certain conditions.
-
+- A view can be updatable when its defining query meets certain conditions.

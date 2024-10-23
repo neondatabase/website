@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL DROP DATABASE"
-page_title: "PostgreSQL DROP DATABASE Statement"
-page_description: "In this tutorial, you will learn how to use the DROP DATABASE statement to drop a database from a PostgreSQL server."
-prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/"
-ogImage: ""
-updatedOn: "2024-02-19T00:53:42+00:00"
+title: 'PostgreSQL DROP DATABASE'
+page_title: 'PostgreSQL DROP DATABASE Statement'
+page_description: 'In this tutorial, you will learn how to use the DROP DATABASE statement to drop a database from a PostgreSQL server.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/'
+ogImage: ''
+updatedOn: '2024-02-19T00:53:42+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL ALTER DATABASE"
-  slug: "postgresql-administration/postgresql-alter-database"
-nextLink: 
-  title: "PostgreSQL Rename Database"
-  slug: "postgresql-administration/postgresql-rename-database"
+previousLink:
+  title: 'PostgreSQL ALTER DATABASE'
+  slug: 'postgresql-administration/postgresql-alter-database'
+nextLink:
+  title: 'PostgreSQL Rename Database'
+  slug: 'postgresql-administration/postgresql-rename-database'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP DATABASE` statement to drop a database.
-
 
 ## Introduction to PostgreSQL DROP DATABASE statement
 
@@ -26,16 +22,16 @@ The `DROP DATABASE` statement deletes a database from a PostgreSQL server.
 
 Here’s the basic syntax of the `DROP DATABASE` statement:
 
-
 ```httpsqlsql
 DROP DATABASE [IF EXISTS] database_name
 [WITH (FORCE)]
 ```
+
 In this syntax:
 
-* First, specify the database name that you want to remove after the `DROP DATABASE` keywords.
-* Second, if you delete a non\-existing database, PostgreSQL will issue an error. To prevent the error, you can use the `IF EXISTS` option. In this case, PostgreSQL will issue a notice instead.
-* Third, the `DROP DATABASE` statement will fail if there are active connections to the target database unless you use the `FORCE` option. The `FORCE` option will attempt to terminate all existing connections to the target database.
+- First, specify the database name that you want to remove after the `DROP DATABASE` keywords.
+- Second, if you delete a non\-existing database, PostgreSQL will issue an error. To prevent the error, you can use the `IF EXISTS` option. In this case, PostgreSQL will issue a notice instead.
+- Third, the `DROP DATABASE` statement will fail if there are active connections to the target database unless you use the `FORCE` option. The `FORCE` option will attempt to terminate all existing connections to the target database.
 
 The `DROP DATABASE` statement deletes the database from both catalog entry and data directory. Since PostgreSQL does not allow you to roll back this operation, you should use it with caution.
 
@@ -45,16 +41,13 @@ Additionally, you cannot execute the `DROP DATABASE` statement while connecting 
 
 The `dropdb` is a command\-line utility that allows you to drop a database. The `dropdb` program executes the `DROP DATABASE` statement behind the scenes.
 
-
 ## PostgreSQL DROP DATABASE statement examples
 
 Let’s take some examples of using the `DROP DATABASE` statement.
 
-
 ### Setting up sample databases
 
 We’ll create some databases for the demonstration purposes:
-
 
 ```sql
 CREATE DATABASE hr;
@@ -65,12 +58,11 @@ CREATE DATABASE test;
 
 First, open Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using psql:
 
-
 ```sql
 psql -U postgres
 ```
-Second, drop the database `hr` using the following `DROP DATABASE` statement:
 
+Second, drop the database `hr` using the following `DROP DATABASE` statement:
 
 ```
 DROP DATABASE hr;
@@ -80,24 +72,23 @@ DROP DATABASE hr;
 
 The following example attempts to drop a database that does not exist:
 
-
 ```sql
 DROP DATABASE non_existing_database;
 ```
-PostgreSQL will issue the following error:
 
+PostgreSQL will issue the following error:
 
 ```
 ERROR:  database "non_existing_database" does not exist
 ```
-If you use the `IF EXISTS` option, PostgreSQL will issue a notice instead:
 
+If you use the `IF EXISTS` option, PostgreSQL will issue a notice instead:
 
 ```sql
 DROP DATABASE IF EXISTS non_existing_database;
 ```
-Output:
 
+Output:
 
 ```
 NOTICE:  database "non_existing_database" does not exist, skipping
@@ -108,47 +99,46 @@ DROP DATABASE
 
 First, establish a connection to the PostgreSQL server using the `psql` tool:
 
-
 ```
 psql -U postgres
 ```
+
 Next, open the second connection to the PostgreSQL server. You can use psql, pgAdmin, or any PostgreSQL client tool.
 
 Then, attempt to delete the `test` database from the first session:
 
-
 ```
 DROP DATABASE test;
 ```
-PostgreSQL issues an error:
 
+PostgreSQL issues an error:
 
 ```sql
 ERROR:  database "test" is being accessed by other users
 DETAIL:  There is 1 other session using the database.
 ```
+
 The output indicates that the `test` database is being accessed by other users.
 
 To drop the database that has active connections, you can use the `FORCE` option.
 
 After that, find the connections to the `test` database by retrieving data from the `pg_stat_activity` view:
 
-
 ```
-SELECT 
-  datname, 
-  pid, 
-  usename, 
-  application_name, 
-  client_addr, 
-  client_port 
-FROM 
-  pg_stat_activity 
-WHERE 
+SELECT
+  datname,
+  pid,
+  usename,
+  application_name,
+  client_addr,
+  client_port
+FROM
+  pg_stat_activity
+WHERE
   datname = 'test';
 ```
-Output:
 
+Output:
 
 ```sql
  datname | pid  | usename  | application_name | client_addr | client_port
@@ -156,16 +146,16 @@ Output:
  test    | 9724 | postgres | psql             | 127.0.0.1   |       61287
 (1 row)
 ```
+
 The `test` database has one connection from `localhost`. Therefore, it’s safe to terminate this connection and remove the database.
 
 Finally, terminate the connections to the `test` database and drop it using the `WITH (FORCE)` option:
 
-
 ```
 DROP DATABASE test WITH (FORCE)
 ```
-Output:
 
+Output:
 
 ```
 DROP DATABASE
@@ -173,5 +163,4 @@ DROP DATABASE
 
 ## Summary
 
-* Use the PostgreSQL `DROP DATABASE` statement to drop a database.
-
+- Use the PostgreSQL `DROP DATABASE` statement to drop a database.

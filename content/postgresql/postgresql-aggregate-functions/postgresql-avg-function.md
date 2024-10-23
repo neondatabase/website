@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL AVG Function"
-page_title: "PostgreSQL AVG function"
-page_description: "In this tutorial, you will learn how to use PostgreSQL AVG function to calculate average value of a numeric column."
-prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/"
-ogImage: "/postgresqltutorial/payment-table.png"
-updatedOn: "2024-01-25T13:26:11+00:00"
+title: 'PostgreSQL AVG Function'
+page_title: 'PostgreSQL AVG function'
+page_description: 'In this tutorial, you will learn how to use PostgreSQL AVG function to calculate average value of a numeric column.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/'
+ogImage: '/postgresqltutorial/payment-table.png'
+updatedOn: '2024-01-25T13:26:11+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Aggregate Functions"
-  slug: "postgresql-aggregate-functions/"
-nextLink: 
-  title: "PostgreSQL COUNT Function"
-  slug: "postgresql-aggregate-functions/postgresql-count-function"
+previousLink:
+  title: 'PostgreSQL Aggregate Functions'
+  slug: 'postgresql-aggregate-functions/'
+nextLink:
+  title: 'PostgreSQL COUNT Function'
+  slug: 'postgresql-aggregate-functions/postgresql-count-function'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `AVG()` function to calculate the average value of a set.
-
 
 ## Introduction to PostgreSQL AVG() function
 
@@ -26,27 +22,25 @@ The `AVG()` function is one of the most commonly used aggregate functions in Pos
 
 Here is the syntax of the `AVG()` function:
 
-
 ```pgsqlsql
 AVG(column)
 ```
+
 You can use the `AVG()` function in the [`SELECT`](../postgresql-tutorial/postgresql-select) and [`HAVING`](../postgresql-tutorial/postgresql-having) clauses.
 
 To calculate the average value of distinct values in a set, you use the distinct option as follows:
 
-
 ```sql
 AVG(DISTINCT column)
 ```
-Notice that the `AVG()` function ignores `NULL`. If the column has no values, the `AVG()` function returns `NULL`.
 
+Notice that the `AVG()` function ignores `NULL`. If the column has no values, the `AVG()` function returns `NULL`.
 
 ## PostgreSQL AVG() function examples
 
 Let’s take a look at some examples of using the `AVG` function.
 
-We will use the following  `payment` table in the [dvdrental sample database](../postgresql-getting-started/postgresql-sample-database "PostgreSQL Sample Database") for demonstration:
-
+We will use the following  `payment` table in the [dvdrental sample database](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for demonstration:
 
 ![payment table](/postgresqltutorial/payment-table.png)
 
@@ -54,13 +48,12 @@ We will use the following  `payment` table in the [dvdrental sample database](.
 
 The following example uses the `AVG()` function to calculate the average amount that customers paid:
 
-
 ```sql
 SELECT AVG(amount)
 FROM payment;
 ```
-Output:
 
+Output:
 
 ```shell
         avg
@@ -68,15 +61,15 @@ Output:
  4.2006056453822965
 (1 row)
 ```
+
 To make the output more readable, you can use the [cast](../postgresql-tutorial/postgresql-cast) operator as follows:
 
-
 ```pgsql
-SELECT AVG(amount)::numeric(10,2) 
+SELECT AVG(amount)::numeric(10,2)
 FROM payment;
 ```
-Output:
 
+Output:
 
 ```shell
  avg
@@ -89,13 +82,12 @@ Output:
 
 The following query returns the average payment made by customers. Because we use `DISTINCT` PostgreSQL takes unique amounts and calculates the average.
 
-
 ```css
 SELECT AVG(DISTINCT amount)::numeric(10,2)
 FROM payment;
 ```
-Output:
 
+Output:
 
 ```sql
  avg
@@ -103,13 +95,12 @@ Output:
  6.14
 (1 row)
 ```
-Notice that the result is different from the first example that does not use the `DISTINCT` option.
 
+Notice that the result is different from the first example that does not use the `DISTINCT` option.
 
 ### 3\) Using AVG() function with SUM() function example
 
 The following query uses the `AVG()` function with the `SUM()` function to calculate the total payment made by customers and the average of all transactions.
-
 
 ```css
 SELECT
@@ -130,28 +121,27 @@ FROM
 
 Typically, you use the AVG() function with the GROUP BY clause to calculate the average value of per group.
 
-* First, the `GROUP BY` clause divides rows of the table into groups
-* Then, the `AVG()` function calculates the average value per group.
+- First, the `GROUP BY` clause divides rows of the table into groups
+- Then, the `AVG()` function calculates the average value per group.
 
 The following example uses the `AVG()` function with `GROUP BY` clause to calculate the average amount paid by each customer:
 
-
 ```
-SELECT 
-  customer_id, 
-  first_name, 
-  last_name, 
-  AVG (amount):: NUMERIC(10, 2) 
-FROM 
-  payment 
-  INNER JOIN customer USING(customer_id) 
-GROUP BY 
-  customer_id 
-ORDER BY 
+SELECT
+  customer_id,
+  first_name,
+  last_name,
+  AVG (amount):: NUMERIC(10, 2)
+FROM
+  payment
+  INNER JOIN customer USING(customer_id)
+GROUP BY
+  customer_id
+ORDER BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id | first_name  |  last_name   | avg
@@ -162,8 +152,8 @@ Output:
            4 | Barbara     | Jones        | 3.72
 ...
 ```
-In the query, we joined the `payment` table with the `customer` table using [inner join](../postgresql-tutorial/postgresql-inner-join). We used `GROUP BY` clause to group customers into groups and applied the `AVG()` function to calculate the average per group.
 
+In the query, we joined the `payment` table with the `customer` table using [inner join](../postgresql-tutorial/postgresql-inner-join). We used `GROUP BY` clause to group customers into groups and applied the `AVG()` function to calculate the average per group.
 
 ### 5\) PostgreSQL AVG() function with HAVING clause example
 
@@ -171,25 +161,24 @@ You can use the `AVG()` function in the `HAVING` clause to filter groups based o
 
 The following example uses the `AVG()` function to calculate the average payment of each customer and return only the ones who paid higher than 5 USD:
 
-
 ```
-SELECT 
-  customer_id, 
-  first_name, 
-  last_name, 
-  AVG (amount):: NUMERIC(10, 2) 
-FROM 
-  payment 
-  INNER JOIN customer USING(customer_id) 
-GROUP BY 
-  customer_id 
-HAVING 
-  AVG (amount) > 5 
-ORDER BY 
+SELECT
+  customer_id,
+  first_name,
+  last_name,
+  AVG (amount):: NUMERIC(10, 2)
+FROM
+  payment
+  INNER JOIN customer USING(customer_id)
+GROUP BY
+  customer_id
+HAVING
+  AVG (amount) > 5
+ORDER BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id | first_name | last_name | avg
@@ -216,8 +205,8 @@ Output:
          583 | Marshall   | Thorn     | 5.12
 (20 rows)
 ```
-This query is similar to the one above with an additional `HAVING` clause. We used `AVG` function in the `HAVING` clause to filter the groups that have an average amount less than or equal to 5\.
 
+This query is similar to the one above with an additional `HAVING` clause. We used `AVG` function in the `HAVING` clause to filter the groups that have an average amount less than or equal to 5\.
 
 ### 6\) Using PostgreSQL AVG() function and NULL
 
@@ -225,42 +214,41 @@ Let’s see the behavior of the `AVG()` function when its input has NULL.
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) named `t1`.
 
-
 ```
 CREATE TABLE t1 (
-  id serial PRIMARY KEY, 
+  id serial PRIMARY KEY,
   amount INTEGER
 );
 
 ```
+
 Second, [insert](../postgresql-tutorial/postgresql-insert) some sample data:
 
-
 ```sql
-INSERT INTO t1 (amount) 
-VALUES 
-  (10), 
-  (NULL), 
+INSERT INTO t1 (amount)
+VALUES
+  (10),
+  (NULL),
   (30);
 ```
+
 The data of the `t1` table is as follows:
 
-
 ```sql
-SELECT 
-  * 
-FROM 
+SELECT
+  *
+FROM
   t1;
 ```
+
 Third, use the `AVG()` function to calculate average values in the amount column.
 
-
 ```sql
-SELECT AVG(amount)::numeric(10,2) 
+SELECT AVG(amount)::numeric(10,2)
 FROM t1;
 ```
-Output:
 
+Output:
 
 ```
   avg
@@ -268,12 +256,11 @@ Output:
  20.00
 (1 row)
 ```
-It returns 20, meaning that the `AVG()` function ignores `NULL` values.
 
+It returns 20, meaning that the `AVG()` function ignores `NULL` values.
 
 ## Summary
 
-* Use PostgreSQL `AVG()` function to calculate the average value of a set.
-* The `AVG()` function ignores NULL in the calculation.
-* The `AVG()` function returns NULL if the set is empty.
-
+- Use PostgreSQL `AVG()` function to calculate the average value of a set.
+- The `AVG()` function ignores NULL in the calculation.
+- The `AVG()` function returns NULL if the set is empty.

@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL LPAD() Function"
-page_title: "PostgreSQL LPAD() Function"
-page_description: "The PostgreSQL LPAD() function pads a string on the left to a specified length with a sequence of characters."
-prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/"
-ogImage: "/postgresqltutorial/customer-and-payment-tables.png"
-updatedOn: "2024-01-28T02:20:39+00:00"
+title: 'PostgreSQL LPAD() Function'
+page_title: 'PostgreSQL LPAD() Function'
+page_description: 'The PostgreSQL LPAD() function pads a string on the left to a specified length with a sequence of characters.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/'
+ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
+updatedOn: '2024-01-28T02:20:39+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL RIGHT() Function"
-  slug: "postgresql-string-functions/postgresql-right"
-nextLink: 
-  title: "PostgreSQL RPAD() Function"
-  slug: "postgresql-string-functions/postgresql-rpad"
+previousLink:
+  title: 'PostgreSQL RIGHT() Function'
+  slug: 'postgresql-string-functions/postgresql-right'
+nextLink:
+  title: 'PostgreSQL RPAD() Function'
+  slug: 'postgresql-string-functions/postgresql-rpad'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LPAD()` function to pad a string on the left to a specified length with a sequence of characters.
-
 
 ## Introduction to the PostgreSQL LPAD() function
 
@@ -26,10 +22,10 @@ The LPAD() function pad a string on the left to a specified length with a sequen
 
 Here’s the basic syntax of the `LPAD()` function:
 
-
 ```csssql
-LPAD(string, length[, fill])    
+LPAD(string, length[, fill])
 ```
+
 The `LPAD()` function accepts 3 arguments:
 
 **1\) `string`**
@@ -50,22 +46,19 @@ The `fill` argument is optional. If you omit the `fill` argument, its default va
 
 The PostgreSQL `LPAD()` function returns a string left\-padded to `length` characters.
 
-
 ## PostgreSQL LPAD() function Examples
 
 Let’s see some examples of using the `LPAD()` function.
-
 
 ### 1\) Basic PostgreSQL LPAD() function example
 
 The following statement uses the `LPAD()` function to pad the ‘\*’ on the left of the string ‘PostgreSQL’:
 
-
 ```
 SELECT LPAD('PostgreSQL',15,'*');
 ```
-The result is:
 
+The result is:
 
 ```sql
       lpad
@@ -73,19 +66,18 @@ The result is:
  *****PostgreSQL
 (1 row)
 ```
-In this example, the length of the `PostgreSQL` string is 10, and the result string should have a length of 15\. Therefore, the `LPAD()` function pads 5 asterisks (\*) on the left of the string.
 
+In this example, the length of the `PostgreSQL` string is 10, and the result string should have a length of 15\. Therefore, the `LPAD()` function pads 5 asterisks (\*) on the left of the string.
 
 ### 2\) Padding leading zeros
 
 The following example uses the `LPAD()` function to pad zeros at the beginning of the string to a length of five characters:
 
-
 ```
 SELECT LPAD('123',5,'0') result;
 ```
-Output:
 
+Output:
 
 ```sql
  result
@@ -93,14 +85,14 @@ Output:
  00123
 (1 row)
 ```
-If you want to pad a number, you need to convert that number to a string before padding. For example:
 
+If you want to pad a number, you need to convert that number to a string before padding. For example:
 
 ```
 SELECT LPAD(123::text,5,'0') result;
 ```
-Output:
 
+Output:
 
 ```sql
  result
@@ -115,7 +107,6 @@ See the following `customer` and `payment` tables from the [sample database](../
 
 ![customer and payment tables](/postgresqltutorial/customer-and-payment-tables.png)The following statement illustrates how to use the `LPAD()` function to draw a chart based on the sum of payments per customer.
 
-
 ```
 SELECT first_name || ' ' || last_name fullname,
     SUM(amount) total,
@@ -125,8 +116,8 @@ INNER JOIN customer using (customer_id)
 GROUP BY customer_id
 ORDER BY SUM(amount) DESC;
 ```
-The following picture illustrates the result:
 
+The following picture illustrates the result:
 
 ```
        fullname        | total  |         chart
@@ -141,14 +132,13 @@ The following picture illustrates the result:
  Curtis Irby           | 167.62 | ****************
 ...
 ```
+
 In this example,
 
-* First, add up the payments for each customer using the [`SUM()`](../postgresql-aggregate-functions/postgresql-sum-function) function and the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause,
-* Second, calculate the length of the bar chart based on the sums of payments using various functions: `TRUNC()` to truncate the total payments, `CAST()` to convert the result of the `TRUNC()` to an integer. To make the bar chart more readable, we divided the sum of payments by 10\.
-* Third, apply the `LPAD()` function to pad the character (\*) based on the result of the second step above.
-
+- First, add up the payments for each customer using the [`SUM()`](../postgresql-aggregate-functions/postgresql-sum-function) function and the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause,
+- Second, calculate the length of the bar chart based on the sums of payments using various functions: `TRUNC()` to truncate the total payments, `CAST()` to convert the result of the `TRUNC()` to an integer. To make the bar chart more readable, we divided the sum of payments by 10\.
+- Third, apply the `LPAD()` function to pad the character (\*) based on the result of the second step above.
 
 ## Summary
 
-* Use the PostgreSQL `LPAD()` function to pad characters on the left of a string to a certain length.
-
+- Use the PostgreSQL `LPAD()` function to pad characters on the left of a string to a certain length.

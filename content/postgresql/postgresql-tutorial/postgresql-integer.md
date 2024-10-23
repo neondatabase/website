@@ -1,49 +1,41 @@
 ---
-title: "PostgreSQL Integer Data Types"
-page_title: "PostgreSQL Integer Data Types"
-page_description: "This tutorial introduces you to various PostgreSQL integer data types including SMALLINT, INTEGER, and BIGINT for designing tables."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/"
-ogImage: "/postgresqltutorial/postgresql-integer-300x59.png"
-updatedOn: "2024-02-02T07:01:29+00:00"
+title: 'PostgreSQL Integer Data Types'
+page_title: 'PostgreSQL Integer Data Types'
+page_description: 'This tutorial introduces you to various PostgreSQL integer data types including SMALLINT, INTEGER, and BIGINT for designing tables.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
+ogImage: '/postgresqltutorial/postgresql-integer-300x59.png'
+updatedOn: '2024-02-02T07:01:29+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL REAL Data Type"
-  slug: "postgresql-tutorial/postgresql-real-data-type"
-nextLink: 
-  title: "PostgreSQL DATE Data Type"
-  slug: "postgresql-tutorial/postgresql-date"
+previousLink:
+  title: 'PostgreSQL REAL Data Type'
+  slug: 'postgresql-tutorial/postgresql-real-data-type'
+nextLink:
+  title: 'PostgreSQL DATE Data Type'
+  slug: 'postgresql-tutorial/postgresql-date'
 ---
-
-
-
 
 **Summary**: this tutorial introduces you to various PostgreSQL integer types including `SMALLINT`, `INTEGER`, and `BIGINT`.
 
-
 ## Introduction to PostgreSQL integer types
-
 
 ![postgresql integer](/postgresqltutorial/postgresql-integer-300x59.png?alignright)
 To store the whole numbers in PostgreSQL, you can use one of the following integer types:
 
-* `SMALLINT`
-* `INTEGER`
-* `BIGINT`
+- `SMALLINT`
+- `INTEGER`
+- `BIGINT`
 
 The following table illustrates the specification of each integer type:
 
-
-
-| Name | Storage Size | Min | Max |
-| --- | --- | --- | --- |
-| `SMALLINT` | 2 bytes | \-32,768 | \+32,767 |
-| `INTEGER` | 4 bytes | \-2,147,483,648 | \+2,147,483,647 |
-| `BIGINT` | 8 bytes | \-9,223,372,036,854,775,808 | \+9,223,372,036,854,775,807 |
+| Name       | Storage Size | Min                         | Max                         |
+| ---------- | ------------ | --------------------------- | --------------------------- |
+| `SMALLINT` | 2 bytes      | \-32,768                    | \+32,767                    |
+| `INTEGER`  | 4 bytes      | \-2,147,483,648             | \+2,147,483,647             |
+| `BIGINT`   | 8 bytes      | \-9,223,372,036,854,775,808 | \+9,223,372,036,854,775,807 |
 
 If you attempt to store a value outside of the permitted ranges, PostgreSQL will issue an error.
 
 Unlike [MySQL integer](https://www.mysqltutorial.org/mysql-basics/mysql-int/), PostgreSQL does not provide unsigned integer types.
-
 
 ### SMALLINT
 
@@ -53,7 +45,6 @@ You can use the `SMALLINT` type for storing something like the ages of people, t
 
 The following statement [creates a table](postgresql-create-table) named `books`:
 
-
 ```sql
 CREATE TABLE books (
     book_id SERIAL PRIMARY KEY,
@@ -61,8 +52,8 @@ CREATE TABLE books (
     pages SMALLINT NOT NULL CHECK (pages > 0)
 );
 ```
-In this example, the `pages` column is a `SMALLINT` column. Because the number of pages must be positive, we added a [`CHECK`](postgresql-check-constraint) constraint to enforce this rule.
 
+In this example, the `pages` column is a `SMALLINT` column. Because the number of pages must be positive, we added a [`CHECK`](postgresql-check-constraint) constraint to enforce this rule.
 
 ### INTEGER
 
@@ -72,7 +63,6 @@ The `INTEGER` type requires 4 bytes storage size that can store numbers in the r
 
 You can use the `INTEGER` type for a column that stores quite big whole numbers like the population of a city or even country as the following example:
 
-
 ```sql
 CREATE TABLE cities (
     city_id serial PRIMARY KEY,
@@ -80,8 +70,8 @@ CREATE TABLE cities (
     population INT NOT NULL CHECK (population >= 0)
 );
 ```
-Notice that `INT` is the synonym of `INTEGER`.
 
+Notice that `INT` is the synonym of `INTEGER`.
 
 ### BIGINT
 
@@ -91,8 +81,6 @@ The `BIGINT` type requires 8 bytes storage size that can store any number in the
 
 Using `BIGINT` type is not only consuming a lot of storage but also decreasing the performance of the database, therefore, you should have a good reason to use it.
 
-
 ## Summary
 
-* Use `SMALLINT`, `INT`, and `BIGINT` data types to store integers in the database.
-
+- Use `SMALLINT`, `INT`, and `BIGINT` data types to store integers in the database.

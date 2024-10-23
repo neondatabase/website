@@ -1,30 +1,27 @@
 ---
-title: "PostgreSQL PHP: Transaction"
-page_title: "PostgreSQL PHP: Transaction"
-page_description: "In this tutorial, you will learn how to perform transactions in the PostgreSQL using PHP PDO."
-prev_url: "https://www.postgresqltutorial.com/postgresql-php/transaction/"
-ogImage: ""
-updatedOn: "2024-01-30T01:08:33+00:00"
+title: 'PostgreSQL PHP: Transaction'
+page_title: 'PostgreSQL PHP: Transaction'
+page_description: 'In this tutorial, you will learn how to perform transactions in the PostgreSQL using PHP PDO.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-php/transaction/'
+ogImage: ''
+updatedOn: '2024-01-30T01:08:33+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Querying Data"
-  slug: "postgresql-php/query"
-nextLink: 
-  title: "PostgreSQL PHP: Calling Stored Procedures"
-  slug: "postgresql-php/call-stored-procedures"
+previousLink:
+  title: 'PostgreSQL PHP: Querying Data'
+  slug: 'postgresql-php/query'
+nextLink:
+  title: 'PostgreSQL PHP: Calling Stored Procedures'
+  slug: 'postgresql-php/call-stored-procedures'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to perform transactions in PostgreSQL using PHP PDO.
 
 A transaction is a series of operations performed as a single logical unit of work. A transaction has four characteristics:
 
-* Atomicity
-* Consistency
-* Isolation
-* Durability
+- Atomicity
+- Consistency
+- Isolation
+- Durability
 
 These characteristics are referred to as ([ACID](https://en.wikipedia.org/wiki/ACID)).
 
@@ -35,7 +32,6 @@ To turn off the auto\-commit mode in PHP, you call the `beginTransaction()` meth
 If there is an exception or error, you can cancel the change using the `rollback()` method of the PDO object.
 
 The typical usage of the transaction in PHP PDO is as follows:
-
 
 ```phpsqlsql
 <?php
@@ -68,7 +64,6 @@ We’ll create the following tables for the demonstration:
 
 The following [CREATE TABLE](../postgresql-tutorial/postgresql-create-table) statements create the three tables:
 
-
 ```php
 CREATE TABLE accounts(
    id SERIAL PRIMARY KEY,
@@ -90,23 +85,23 @@ CREATE TABLE account_plans(
    FOREIGN KEY(plan_id) REFERENCES plans(id)
 );
 ```
-The following [INSERT](insert) statement inserts some sample data into the `plans` table.
 
+The following [INSERT](insert) statement inserts some sample data into the `plans` table.
 
 ```sql
 INSERT INTO plans(plan) VALUES('SILVER'),('GOLD'),('PLATINUM');
 ```
+
 When creating an account, you need to assign a plan that can be silver, gold, or platinum. To ensure that an account always has at least one plan at a time, you use the transaction API in PDO.
 
 The following `addAccount()` method performs two main steps:
 
-* First, insert an account into the `accounts` table and return the account id.
-* Then, assign the account a specific plan by inserting a new row into the `account_plans` table.
+- First, insert an account into the `accounts` table and return the account id.
+- Then, assign the account a specific plan by inserting a new row into the `account_plans` table.
 
 At the beginning of the method, you call the `beginTransaction()` method of the PDO object to start the transaction.
 
 If all the steps succeed, you call the `commit()` method to save the changes. If an exception occurs in any step, you roll back the changes by calling the `rollback()` method in the `catch` block:
-
 
 ```sql
    /**
@@ -136,12 +131,12 @@ If all the steps succeed, you call the `commit()` method to save the changes. If
         }
     }
 ```
-The `addAccount()` method uses two other private methods: `insertAccount()` and `insertPlan()` as shown in the following:
 
+The `addAccount()` method uses two other private methods: `insertAccount()` and `insertPlan()` as shown in the following:
 
 ```php
    /**
-     * 
+     *
      * @param string $firstName
      * @param string $lastName
      * @return int
@@ -180,8 +175,8 @@ The `addAccount()` method uses two other private methods: `insertAccount()` and 
         ]);
     }
 ```
-To test the `AccountDB` class, you use the following code in the `index.php` file.
 
+To test the `AccountDB` class, you use the following code in the `index.php` file.
 
 ```php
 <?php
@@ -204,28 +199,28 @@ try {
 
 
     echo 'The new accounts have been added.' . '<br>';
-    // 
+    //
     $accountDB->addAccount('Susan', 'Wilson', 99, date('Y-m-d'));
 } catch (\PDOException $e) {
     echo $e->getMessage();
 }
 ```
+
 How it works.
 
-* First, connect to the PostgreSQL database.
-* Second, insert three accounts with silver, gold, and platinum levels.
-* Third, try to insert one more account but with a plan ID that does not exist in the `plans` table. Based on the input, the step of assigning the plan to the account fails which causes the whole transaction to be rolled back.
+- First, connect to the PostgreSQL database.
+- Second, insert three accounts with silver, gold, and platinum levels.
+- Third, try to insert one more account but with a plan ID that does not exist in the `plans` table. Based on the input, the step of assigning the plan to the account fails which causes the whole transaction to be rolled back.
 
 The following shows the output of the index.php file:
-
 
 ```
 The new accounts have been added.
 
 SQLSTATE[23503]: Foreign key violation: 7 ERROR: insert or update on table "account_plans" violates foreign key constraint "account_plans_plan_id_fkey" DETAIL: Key (plan_id)=(99) is not present in table "plans".
 ```
-If you query the data in the `accounts` and `account_plans` tables, you will see only three rows inserted in each table:
 
+If you query the data in the `accounts` and `account_plans` tables, you will see only three rows inserted in each table:
 
 ```
 stocks=# SELECT * FROM accounts;
@@ -247,6 +242,5 @@ stocks=# SELECT * FROM account_plans;
 
 ## Summary
 
-* Use the `beginTransaction`() method of the PDO object to start a transaction.
-* Use the `commit()` method to apply the changes to the database and `rollback()` method to undo the changes.
-
+- Use the `beginTransaction`() method of the PDO object to start a transaction.
+- Use the `commit()` method to apply the changes to the database and `rollback()` method to undo the changes.

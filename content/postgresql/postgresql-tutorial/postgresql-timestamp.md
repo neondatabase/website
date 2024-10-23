@@ -1,55 +1,50 @@
 ---
-title: "PostgreSQL Timestamp Data Types"
-page_title: "PostgreSQL Timestamp Data Types"
-page_description: "This tutorial explains the PostgreSQL TIMESTAMP data types including TIMESTAMP and TIMESTAMPTZ for storing timestamp data."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/"
-ogImage: "/postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg"
-updatedOn: "2024-02-01T02:32:23+00:00"
+title: 'PostgreSQL Timestamp Data Types'
+page_title: 'PostgreSQL Timestamp Data Types'
+page_description: 'This tutorial explains the PostgreSQL TIMESTAMP data types including TIMESTAMP and TIMESTAMPTZ for storing timestamp data.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/'
+ogImage: '/postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg'
+updatedOn: '2024-02-01T02:32:23+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL DATE Data Type"
-  slug: "postgresql-tutorial/postgresql-date"
-nextLink: 
-  title: "PostgreSQL Interval Data Type"
-  slug: "postgresql-tutorial/postgresql-interval"
+previousLink:
+  title: 'PostgreSQL DATE Data Type'
+  slug: 'postgresql-tutorial/postgresql-date'
+nextLink:
+  title: 'PostgreSQL Interval Data Type'
+  slug: 'postgresql-tutorial/postgresql-interval'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about the PostgreSQL timestamp data types including `timestamp` and `timestamptz`. You will also learn how to use some handy functions to handle timestamp data effectively.
-
 
 ## Introduction to PostgreSQL timestamp
 
 ![PostgreSQL Timestamp](/postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg?alignright)PostgreSQL provides you with two temporal [data types](postgresql-data-types) for handling timestamps:
 
-* `timestamp`: a timestamp without a timezone one.
-* `timestamptz`: timestamp with a timezone.
+- `timestamp`: a timestamp without a timezone one.
+- `timestamptz`: timestamp with a timezone.
 
 The `timestamp` datatype allows you to store both [date](postgresql-date) and time. However, it does not have any time zone data. It means that when you change the timezone of your database server, the timestamp value stored in the database will not change automatically.
 
 The `timestamptz` datatype is the timestamp with a timezone. The `timestamptz` data type is a time zone\-aware date and time data type.
 
-Internally, PostgreSQL stores the `timestamptz` in UTC value. 
+Internally, PostgreSQL stores the `timestamptz` in UTC value.
 
-* When you insert a value into a `timestamptz` column, PostgreSQL converts the `timestamptz` value into a UTC value and stores the UTC value in the table.
-* When you retrieve data from a `timestamptz` column, PostgreSQL converts the UTC value back to the time value of the timezone set by the database server, the user, or the current database connection.
+- When you insert a value into a `timestamptz` column, PostgreSQL converts the `timestamptz` value into a UTC value and stores the UTC value in the table.
+- When you retrieve data from a `timestamptz` column, PostgreSQL converts the UTC value back to the time value of the timezone set by the database server, the user, or the current database connection.
 
 Notice that both `timestamp` and `timestamptz` uses 8 bytes for storing the timestamp values as shown in the following query:
 
-
 ```csssqlsql
-SELECT 
-  typname, 
-  typlen 
-FROM 
-  pg_type 
-WHERE 
+SELECT
+  typname,
+  typlen
+FROM
+  pg_type
+WHERE
   typname ~ '^timestamp';
 ```
-Output:
 
+Output:
 
 ```sql
    typname   | typlen
@@ -58,8 +53,8 @@ Output:
  timestamptz |      8
 (2 rows)
 ```
-It’s important to note that PostgreSQL stores `timestamptz` values in the database using UTC values. It does not store any timezone data with the `timestamptz` value.
 
+It’s important to note that PostgreSQL stores `timestamptz` values in the database using UTC values. It does not store any timezone data with the `timestamptz` value.
 
 ## PostgreSQL timestamp example
 
@@ -67,21 +62,20 @@ Let’s take a look at an example of using the `timestamp` and `timestamptz`to 
 
 First, [create a table](postgresql-create-table) that consists of both `timestamp` the `timestamptz` columns.
 
-
 ```sql
 CREATE TABLE timestamp_demo (
-    ts TIMESTAMP, 
+    ts TIMESTAMP,
     tstz TIMESTAMPTZ
 );
 ```
-Next, set the time zone of the database server to  `America/Los_Angeles`.
 
+Next, set the time zone of the database server to  `America/Los_Angeles`.
 
 ```sql
 SET timezone = 'America/Los_Angeles';
 ```
-By the way, you can see the current time zone using the `SHOW TIMEZONE` command:
 
+By the way, you can see the current time zone using the `SHOW TIMEZONE` command:
 
 ```sql
 SHOW TIMEZONE;
@@ -93,20 +87,20 @@ SHOW TIMEZONE;
  America/Los_Angeles
 (1 row)
 ```
-Then, [insert a new row](postgresql-insert) into the `timstamp_demo`table:
 
+Then, [insert a new row](postgresql-insert) into the `timstamp_demo`table:
 
 ```sql
 INSERT INTO timestamp_demo (ts, tstz)
 VALUES('2016-06-22 19:10:25-07','2016-06-22 19:10:25-07');
 ```
+
 After that, [query data](postgresql-select) from the `timestamp` and `timestamptz` columns.
 
-
 ```sql
-SELECT 
+SELECT
    ts, tstz
-FROM 
+FROM
    timestamp_demo;
 ```
 
@@ -116,20 +110,20 @@ FROM
  2016-06-22 19:10:25 | 2016-06-22 19:10:25-07
 (1 row)
 ```
+
 The query returns the same timestamp values as the inserted values.
 
 Finally, change the timezone of the current session to `America/New_York` and query data again.
-
 
 ```sql
 SET timezone = 'America/New_York';
 ```
 
 ```sql
-SELECT 
-  ts, 
-  tstz 
-FROM 
+SELECT
+  ts,
+  tstz
+FROM
   timestamp_demo;
 ```
 
@@ -139,26 +133,24 @@ FROM
  2016-06-22 19:10:25 | 2016-06-22 22:10:25-04
 (1 row)
 ```
+
 The value in the `timestamp` column does not change whereas the value in the `timestamptz` column is adjusted to the new time zone of `'America/New_York'`.
 
 Generally, it is a good practice to use the `timestamptz` data type to store the timestamp data.
-
 
 ## PostgreSQL timestamp functions
 
 To handle timestamp data effectively, PostgreSQL provides some handy functions as follows:
 
-
 ### Getting the current time
 
 To get the current timestamp you use the `NOW()` function as follows:
 
-
 ```sql
 SELECT NOW();
 ```
-Output:
 
+Output:
 
 ```sql
               now
@@ -167,14 +159,14 @@ Output:
 (1 row)
 
 ```
-Alternatively, you can use the `CURRENT_TIMESTAMP` function:
 
+Alternatively, you can use the `CURRENT_TIMESTAMP` function:
 
 ```sql
 SELECT CURRENT_TIMESTAMP;
 ```
-Output:
 
+Output:
 
 ```sql
        current_timestamp
@@ -183,14 +175,14 @@ Output:
 (1 row)
 
 ```
-To get the current time without a date, you use the `CURRENT_TIME` function:
 
+To get the current time without a date, you use the `CURRENT_TIME` function:
 
 ```css
 SELECT CURRENT_TIME;
 ```
-Output:
 
+Output:
 
 ```
     current_time
@@ -199,10 +191,10 @@ Output:
 (1 row)
 
 ```
+
 Note that both `CURRENT_TIMESTAMP` and `CURRENT_TIME` return the current time with the time zone.
 
 To get the time of day in the string format, you use the `timeofday()` function.
-
 
 ```sql
 SELECT TIMEOFDAY();
@@ -219,7 +211,6 @@ SELECT TIMEOFDAY();
 
 To convert a timestamp to another time zone, you use the `timezone(zone, timestamp)` function.
 
-
 ```sql
 SHOW TIMEZONE;
 ```
@@ -230,10 +221,10 @@ SHOW TIMEZONE;
  America/New_York
 (1 row)
 ```
+
 The current timezone is `America/New_York`.
 
 To convert `2016-06-01 00:00` to `America/Los_Angeles` timezone, you use the `timezone()` function as follows:
-
 
 ```sql
 SELECT timezone('America/Los_Angeles','2016-06-01 00:00');
@@ -245,14 +236,14 @@ SELECT timezone('America/Los_Angeles','2016-06-01 00:00');
  2016-05-31 21:00:00
 (1 row)
 ```
-Note that we pass the timestamp as a string to the `timezone()` function, PostgreSQL casts it to `timestamptz` implicitly. It is better to cast a timestamp value to the `timestamptz` data type explicitly as the following statement:
 
+Note that we pass the timestamp as a string to the `timezone()` function, PostgreSQL casts it to `timestamptz` implicitly. It is better to cast a timestamp value to the `timestamptz` data type explicitly as the following statement:
 
 ```sql
 SELECT timezone('America/Los_Angeles','2016-06-01 00:00'::timestamptz);
 ```
-Output:
 
+Output:
 
 ```
       timezone
@@ -265,7 +256,6 @@ Output:
 
 First, create a new table called `department`:
 
-
 ```php
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
@@ -274,18 +264,18 @@ CREATE TABLE department (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
 The default values for the `created_at` and `updated_at` columns are the current timestamp provided by the `CURRENT_TIMESTAMP` function.
 
 Second, insert a new row into the `department` table without specifying the values for the `created_at` and `updated_at` columns:
-
 
 ```
 INSERT INTO department(name)
 VALUES('IT')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | name |          created_at           |          updated_at
@@ -293,16 +283,16 @@ Output:
   1 | IT   | 2024-01-31 21:25:31.162808-05 | 2024-01-31 21:25:31.162808-05
 (1 row)
 ```
+
 The output indicates that PostgreSQL uses the current time to insert into the `created_at` and `updated_at` columns.
 
 When you update a row in the `department` table, the `updated_at` column will not be updated to the current time automatically.
 
-To update the value in the updated\_at column to the time the row is updated, you can create a `BEFORE UPDATE` trigger to change the value in the `updated_at` column.
+To update the value in the updated_at column to the time the row is updated, you can create a `BEFORE UPDATE` trigger to change the value in the `updated_at` column.
 
 Note that MySQL offers the `ON UPDATE CURRENT_TIMESTAMP` to automatically update a `TIMESTAMP` column to the current timestamp. PostgreSQL does not support this feature at the moment.
 
 Third, create a `BEFORE UPDATE` trigger to update the `updated_at` column of the `department` table:
-
 
 ```
 CREATE OR REPLACE FUNCTION update_updated_at()
@@ -318,8 +308,8 @@ BEFORE UPDATE ON department
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
 ```
-Fourth, update the name of the IT department to ITD without specifying a value for the `updated_at` column:
 
+Fourth, update the name of the IT department to ITD without specifying a value for the `updated_at` column:
 
 ```
 UPDATE department
@@ -327,8 +317,8 @@ SET name = 'ITD'
 WHERE id = 1
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```
  id | name |          created_at           |          updated_at
@@ -336,11 +326,10 @@ Output:
   1 | ITD  | 2024-01-31 21:25:31.162808-05 | 2024-01-31 21:25:51.318803-05
 (1 row)
 ```
-The output indicates that the value in the `updated_at` column has been updated automatically by the trigger.
 
+The output indicates that the value in the `updated_at` column has been updated automatically by the trigger.
 
 ## Summary
 
-* Use `timestamp` and `timestamptz` to store timestamp data.
-* PostgreSQL stores the `timestamptz` values in the database as UTC values.
-
+- Use `timestamp` and `timestamptz` to store timestamp data.
+- PostgreSQL stores the `timestamptz` values in the database as UTC values.

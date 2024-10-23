@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Interval Data Type"
-page_title: "PostgreSQL Interval Data Type"
-page_description: "This tutorial introduces PostgreSQL interval type and shows you how to manipulate interval values using arithmetic operators and functions."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/"
-ogImage: ""
-updatedOn: "2024-02-01T02:58:18+00:00"
+title: 'PostgreSQL Interval Data Type'
+page_title: 'PostgreSQL Interval Data Type'
+page_description: 'This tutorial introduces PostgreSQL interval type and shows you how to manipulate interval values using arithmetic operators and functions.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
+ogImage: ''
+updatedOn: '2024-02-01T02:58:18+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Timestamp Data Types"
-  slug: "postgresql-tutorial/postgresql-timestamp"
-nextLink: 
-  title: "PostgreSQL TIME Data Type"
-  slug: "postgresql-tutorial/postgresql-time"
+previousLink:
+  title: 'PostgreSQL Timestamp Data Types'
+  slug: 'postgresql-tutorial/postgresql-timestamp'
+nextLink:
+  title: 'PostgreSQL TIME Data Type'
+  slug: 'postgresql-tutorial/postgresql-time'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about the PostgreSQL interval data type and how to manipulate interval values.
-
 
 ## Introduction to PostgreSQL interval data type
 
@@ -26,10 +22,10 @@ The interval data type allows you to store and manipulate a period in years, mon
 
 The following illustrates the interval type:
 
-
 ```sql
-@ interval [ fields ] [ (p) ]   
+@ interval [ fields ] [ (p) ]
 ```
+
 An interval value requires 16 bytes of storage that can store a period with the allowed range from `-178,000,000` years to `178,000,000` years.
 
 Additionally, an interval value can have an optional precision value `p` with the permitted range from 0 to 6\. The precision `p` is the number of fraction digits retained in the second field.
@@ -38,24 +34,23 @@ The at sign ( `@`) is optional so you can omit it.
 
 The following  examples show some interval values:
 
-
 ```sql
 interval '2 months ago';
 interval '3 hours 20 minutes';
 ```
+
 Internally, PostgreSQL stores interval values as months, days, and seconds. The months and days values are integers while the seconds field can have fractions.
 
 The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 2 minutes ago at the current time of last year, you can use the following statement:
 
-
 ```sql
 SELECT
 	now(),
-	now() - INTERVAL '1 year 3 hours 20 minutes' 
+	now() - INTERVAL '1 year 3 hours 20 minutes'
              AS "3 hours 20 minutes ago of last year";
 ```
-Output:
 
+Output:
 
 ```sql
               now              | 3 hours 20 minutes ago of last year
@@ -63,23 +58,22 @@ Output:
  2024-01-31 21:34:52.242914-05 | 2023-01-31 18:14:52.242914-05
 (1 row)
 ```
-Let’s see how to format interval values for input and output.
 
+Let’s see how to format interval values for input and output.
 
 ## PostgreSQL interval input format
 
 PostgreSQL provides you with the following verbose syntax to write the interval values:
 
-
 ```
 quantity unit [quantity unit...] [direction]
 ```
-* `quantity` is a number, sign `+` or `-` is also accepted
-* `unit` can be any of millennium, century, decade, year, month, week, day, hour, minute, second, millisecond, microsecond, or abbreviation (y, m, d, etc.,) or plural forms (months, days, etc.).
-* `direction` can be `ago` or empty string `''`
+
+- `quantity` is a number, sign `+` or `-` is also accepted
+- `unit` can be any of millennium, century, decade, year, month, week, day, hour, minute, second, millisecond, microsecond, or abbreviation (y, m, d, etc.,) or plural forms (months, days, etc.).
+- `direction` can be `ago` or empty string `''`
 
 This format is called `postgres_verbose` which is also used for the interval output format. The following examples illustrate some interval values that use the verbose syntax:
-
 
 ```sql
 INTERVAL '1 year 2 months 3 days';
@@ -92,44 +86,41 @@ In addition to the verbose syntax, PostgreSQL allows you to write the interval v
 
 The `ISO 8601` format with designators is like this:
 
-
 ```sql
 P quantity unit [ quantity unit ...] [ T [ quantity unit ...]]
 ```
+
 In this format, the interval value must start with the letter `P`. The letter `T` is for determining the time\-of\-day unit.
 
 The following table illustrates the `ISO 8601` interval unit abbreviations:
 
-
-
-| Abbreviation | Description |
-| --- | --- |
-| Y | Years |
-| M | Months (in the date part) |
-| W | Weeks |
-| D | Days |
-| H | Hours |
-| M | Minutes (in the time part) |
-| S | Seconds |
+| Abbreviation | Description                |
+| ------------ | -------------------------- |
+| Y            | Years                      |
+| M            | Months (in the date part)  |
+| W            | Weeks                      |
+| D            | Days                       |
+| H            | Hours                      |
+| M            | Minutes (in the time part) |
+| S            | Seconds                    |
 
 Note that `M` can be months or minutes depending on whether it appears before or after the letter `T`.
 
 For example, the interval of 6 years 5 months 4 days 3 hours 2 minutes 1 second can be written in the ISO 8601 designators format as follows:
 
-
 ```sql
 P6Y5M4DT3H2M1S
 ```
-The alternative form of `ISO 8601` is:
 
+The alternative form of `ISO 8601` is:
 
 ```sql
 P [ years-months-days ] [ T hours:minutes:seconds ]
 ```
+
 It must start with the letter `P`, and the letter `T` separates the date and time parts of the interval value.
 
 For example, the interval of `6 years 5 months 4 days 3 hours 2 minutes 1 second` can be written in the `ISO 8601` alternative form as:
-
 
 ```sql
 P0006-05-04T03:02:01
@@ -139,53 +130,48 @@ P0006-05-04T03:02:01
 
 The output style of interval values is set by using the `SET intervalstyle` command, for example:
 
-
 ```sql
 SET intervalstyle = 'sql_standard';
 ```
+
 PostgreSQL provides four output formats:
 
-* `sql standard`
-* `postgres`
-* `postgresverbose`
-* `iso_8601`
+- `sql standard`
+- `postgres`
+- `postgresverbose`
+- `iso_8601`
 
 PostgreSQL uses the `postgres` style by default for formatting the interval values.
 
 The following represents the interval of `6 years 5 months 4 days 3 hours 2 minutes 1 second` in the four styles:
 
-
 ```sql
 SET intervalstyle = 'sql_standard';
-SELECT 
+SELECT
   INTERVAL '6 years 5 months 4 days 3 hours 2 minutes 1 second';
 
 SET intervalstyle = 'postgres';
-SELECT 
+SELECT
   INTERVAL '6 years 5 months 4 days 3 hours 2 minutes 1 second';
 
 SET intervalstyle = 'postgres_verbose';
-SELECT 
+SELECT
   INTERVAL '6 years 5 months 4 days 3 hours 2 minutes 1 second';
 
 SET intervalstyle = 'iso_8601';
-SELECT 
+SELECT
   INTERVAL '6 years 5 months 4 days 3 hours 2 minutes 1 second';
 ```
 
-
-| sql standard | postgres | postgres verbose | iso\_8601 |
-| --- | --- | --- | --- |
+| sql standard       | postgres                         | postgres verbose                               | iso_8601         |
+| ------------------ | -------------------------------- | ---------------------------------------------- | ---------------- |
 | `+6-5 +4 +3:02:01` | `6 years 5 mons 4 days 03:02:01` | `@ 6 years 5 mons 4 days 3 hours 2 mins 1 sec` | `P6Y5M4DT3H2M1S` |
 
-
 ## PostgreSQL interval\-related operators and functions
-
 
 ### Interval operators
 
 You can apply the arithmetic operator ( `+`, `-`, `*`, etc.,) to the interval values, for example:
-
 
 ```sql
 SELECT INTERVAL '2h 50m' + INTERVAL '10m'; -- 03:00:00
@@ -197,14 +183,13 @@ SELECT 600 * INTERVAL '1 minute'; -- 10:00:00
 
 To convert an interval value to a string, you use the `TO_CHAR()` function.
 
-
 ```sql
 TO_CHAR(interval,format)
 ```
+
 The [`TO_CHAR()`](../postgresql-string-functions/postgresql-to_char) function takes the first argument as an interval value, the second one as the format, and returns a string that represents the interval in the specified format.
 
 See the following example:
-
 
 ```sql
 SELECT
@@ -213,8 +198,8 @@ SELECT
         'HH24:MI:SS'
     );
 ```
-Output:
 
+Output:
 
 ```sql
  to_char
@@ -227,14 +212,13 @@ Output:
 
 To extract fields such as year, month, date, etc., from an interval, you use the [`EXTRACT()`](../postgresql-date-functions/postgresql-extract) function.
 
-
 ```sql
 EXTRACT(field FROM interval)
 ```
+
 The field can be the year, month, date, hour, minutes, etc., that you want to extract from the interval. The extract function returns a value of type double precision.
 
 See the following example:
-
 
 ```sql
 SELECT
@@ -244,8 +228,8 @@ SELECT
             INTERVAL '5 hours 21 minutes'
     );
 ```
-In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
+In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
 ```sql
  date_part
@@ -257,7 +241,6 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 ### Adjusting interval values
 
 PostgreSQL provides two functions `justifydays` and `justifyhours` that allows you to adjust the interval of 30\-day as one month and the interval of 24 hours as one day:
-
 
 ```sql
 SELECT
@@ -271,8 +254,8 @@ SELECT
  1 mon        | 1 day
 (1 row)
 ```
-In addition, the `justify_interval` function adjusts interval using `justifydays` and  `justifyhours` with additional sign adjustments:
 
+In addition, the `justify_interval` function adjusts interval using `justifydays` and  `justifyhours` with additional sign adjustments:
 
 ```
 SELECT
@@ -290,7 +273,6 @@ SELECT
 
 First, create a table called `event` that has three columns `id`, `event_name`, and `duration`. The duration column is `interval` type:
 
-
 ```sql
 CREATE TABLE event (
     id SERIAL PRIMARY KEY,
@@ -298,18 +280,18 @@ CREATE TABLE event (
     duration INTERVAL NOT NULL
 );
 ```
+
 Second, insert some rows into the `event` table:
 
-
 ```sql
-INSERT INTO event (event_name, duration) 
+INSERT INTO event (event_name, duration)
 VALUES
     ('pgConf', '1 hour 30 minutes'),
     ('pgDAY', '2 days 5 hours')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | event_name | duration
@@ -321,8 +303,8 @@ Output:
 
 INSERT 0 2
 ```
-Third, extract components (days, hours, minutes) from values in the `interval` column:
 
+Third, extract components (days, hours, minutes) from values in the `interval` column:
 
 ```
 SELECT
@@ -333,8 +315,8 @@ SELECT
     EXTRACT(MINUTE FROM duration) AS minutes
 FROM event;
 ```
-Output:
 
+Output:
 
 ```sql
  event_name | duration | days | hours | minutes
@@ -343,16 +325,16 @@ Output:
  pgDAY      | P2DT5H   |    2 |     5 |       0
 (2 rows)
 ```
-Fourth, retrieve the events with a duration longer than one day:
 
+Fourth, retrieve the events with a duration longer than one day:
 
 ```
 SELECT *
 FROM event
 WHERE duration > INTERVAL '1 day';
 ```
-Output:
 
+Output:
 
 ```sql
  id | event_name | duration
@@ -360,8 +342,8 @@ Output:
   2 | pgDAY      | P2DT5H
 (1 row)
 ```
-Finally, calculate the total duration for all events:
 
+Finally, calculate the total duration for all events:
 
 ```
 SELECT
@@ -369,8 +351,8 @@ SELECT
 FROM event
 ;
 ```
-Output:
 
+Output:
 
 ```sql
  total_duration
@@ -378,23 +360,23 @@ Output:
  P2DT6H30M
 (1 row)
 ```
-To make the output more clear, you can extract components of the total duration using a common table expression (CTE):
 
+To make the output more clear, you can extract components of the total duration using a common table expression (CTE):
 
 ```
 WITH cte AS(
-   SELECT SUM(duration) AS total_duration 
+   SELECT SUM(duration) AS total_duration
    FROM event
 )
-SELECT 
+SELECT
     total_duration,
     EXTRACT(DAY FROM total_duration ) AS days,
     EXTRACT(HOUR FROM total_duration ) AS hours,
     EXTRACT(MINUTE FROM total_duration ) AS minutes
 FROM cte;
 ```
-Output:
 
+Output:
 
 ```
  total_duration | days | hours | minutes
@@ -402,5 +384,5 @@ Output:
  P2DT6H30M      |    2 |     6 |      30
 (1 row)
 ```
-In this tutorial, you have learned about the PostgreSQL interval data type and how to manipulate interval values.
 
+In this tutorial, you have learned about the PostgreSQL interval data type and how to manipulate interval values.

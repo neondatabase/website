@@ -1,34 +1,28 @@
 ---
-title: "PostgreSQL JDBC: Insert Data into a Table"
-page_title: "PostgreSQL JDBC: Insert Data into a Table"
-page_description: "In this tutorial, you will learn how to insert one or more rows into a table in the PostgreSQL database using JDBC."
-prev_url: "https://www.postgresqltutorial.com/postgresql-jdbc/insert/"
-ogImage: ""
-updatedOn: "2024-02-02T04:56:04+00:00"
+title: 'PostgreSQL JDBC: Insert Data into a Table'
+page_title: 'PostgreSQL JDBC: Insert Data into a Table'
+page_description: 'In this tutorial, you will learn how to insert one or more rows into a table in the PostgreSQL database using JDBC.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/insert/'
+ogImage: ''
+updatedOn: '2024-02-02T04:56:04+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL JDBC: Creating Tables"
-  slug: "postgresql-jdbc/create-tables"
-nextLink: 
-  title: "PostgreSQL JDBC: Querying Data"
-  slug: "postgresql-jdbc/query"
+previousLink:
+  title: 'PostgreSQL JDBC: Creating Tables'
+  slug: 'postgresql-jdbc/create-tables'
+nextLink:
+  title: 'PostgreSQL JDBC: Querying Data'
+  slug: 'postgresql-jdbc/query'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database using JDBC.
-
 
 ## Inserting one row into a table
 
 We’ll use the `products` table from the `sales` database for the demonstration.
 
-
 ### Defining a Product class
 
 The following creates `Product.java` file and defines the `Product` class with three properties `id`, `name`, and `price`. These properties correspond to the columns in the `products` table:
-
 
 ```javasqlsql
 public class Product {
@@ -82,7 +76,6 @@ public class Product {
 
 The following creates a new file called `ProductDB.java` and defines the `ProductDB` class:
 
-
 ```java
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -90,7 +83,7 @@ import java.util.List;
 
 public class ProductDB {
 
-    
+
     public static int add(Product product) {
         var sql = "INSERT INTO products(name, price) "
                 + "VALUES(?,?)";
@@ -117,50 +110,50 @@ public class ProductDB {
     }
 }
 ```
+
 The `add()` method inserts a new row into the `products` table.
 
 How it works.
 
 First, initialize an `INSERT` statement:
 
-
 ```java
 var sql = "INSERT INTO products(name,price) "
           + "VALUES(?,?)";
 ```
+
 The question mark (`?`) is a placeholder that will be replaced by the actual values later.
 
 Second, open a connection to the sales database on the local PostgreSQL server using the `DB` class:
 
-
 ```java
 var conn =  DB.connect();
 ```
-Third, create a `PreparedStatement` object by calling the `preparedStatement()` method:
 
+Third, create a `PreparedStatement` object by calling the `preparedStatement()` method:
 
 ```java
 var pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
 ```
+
 The `Statement.RETURN_GENERATED_KEYS` argument instructs the `PreparedStatement` object to return the generated id key of the product.
 
 Fourth, bind the values to the statement:
-
 
 ```java
 pstmt.setString(1, product.getName());
 pstmt.setDouble(2, product.getPrice());
 ```
+
 Behind the scenes, the `PreparedStatement` will validate the values and bind them to the placeholders (?) accordingly.
 
 Fifth, execute the `INSERT` statement and return the number of inserted rows by calling the `executeUpdate()` method of the `PreparedStatement` object:
 
-
 ```java
 int insertedRow = pstmt.executeUpdate();
 ```
-Sixth, retrieve the inserted id and return it:
 
+Sixth, retrieve the inserted id and return it:
 
 ```java
 if (insertedRow > 0) {
@@ -170,15 +163,14 @@ if (insertedRow > 0) {
     }
 }
 ```
+
 If any `SQLException` occurs, display the detail of the exception in the catch block.
 
 Since the Connection and `PreparedStatement` objects are created in the try\-with\-resources statement, they will be automatically closed.
 
-
 ### Adding a product
 
 The following `main()` method uses the `add()` method of the ProductDB class to insert a new row into the `products` table:
-
 
 ```java
 public class Main {
@@ -188,8 +180,8 @@ public class Main {
     }
 }
 ```
-If you run the program, it’ll show the following output:
 
+If you run the program, it’ll show the following output:
 
 ```java
 Inserted id:1
@@ -199,12 +191,11 @@ Inserted id:1
 
 Connect to the `sales` database and retrieve the data from the `products` table to verify the insert:
 
-
 ```plaintext
 SELECT * FROM products;
 ```
-Output:
 
+Output:
 
 ```
  id |    name    | price
@@ -216,7 +207,6 @@ Output:
 ## Inserting multiple rows into a table
 
 Define a new method add() that accepts a list of `Product` objects and inserts them into the `products` table:
-
 
 ```java
 import java.sql.SQLException;
@@ -245,27 +235,27 @@ public class ProductDB {
     // ...
 }
 ```
+
 How it works.
 
 First, initialize an `INSERT` statement:
-
 
 ```
 var sql = "INSERT INTO products(name,price) "
           + "VALUES(?,?)";
 ```
-Second, open a connection and create a `PreparedStatement` object:
 
+Second, open a connection and create a `PreparedStatement` object:
 
 ```java
 try (var conn =  DB.connect();
      var pstmt = conn.prepareStatement(sql)) {
 // ...
 ```
+
 The try\-with\-resources statement ensures that the `PreparedStatement` and `Connection` objects will be closed automatically.
 
 Third, iterate over the `Product` in the `Products` list, bind the values to the statement, and add the statement to a batch for insertion:
-
 
 ```java
 for (var product : products) {
@@ -274,8 +264,8 @@ for (var product : products) {
     pstmt.addBatch();
 }
 ```
-Finally, execute insert statements in batch by calling the `executeBatch()` method of the `PreparedStatement` object:
 
+Finally, execute insert statements in batch by calling the `executeBatch()` method of the `PreparedStatement` object:
 
 ```java
 pstmt.executeBatch();
@@ -284,7 +274,6 @@ pstmt.executeBatch();
 ### Adding multiple products
 
 The following shows how to use the `ProductDB` class to add multiple products to the `products` table:
-
 
 ```java
 import java.util.ArrayList;
@@ -314,12 +303,11 @@ public class Main {
 
 Connect to the `sales` database and query data from the `products` table to verify the inserts:
 
-
 ```java
 SELECT * FROM products;
 ```
-Output:
 
+Output:
 
 ```php
  id |         name         | price
@@ -336,11 +324,10 @@ Output:
  10 | Smartwatch           | 399.97
 (10 rows)
 ```
-The output indicates the new `add()` method added nine rows to the `products` table successfully.
 
+The output indicates the new `add()` method added nine rows to the `products` table successfully.
 
 ## Summary
 
-* Call the `executeUpdate()` method of the `PreparedStatement` object to execute the `INSERT` statement to insert a new row into a table.
-* Use the `addBatch()` and the `executeBatch()` methods of the `PreparedStatement` object to execute batch inserts.
-
+- Call the `executeUpdate()` method of the `PreparedStatement` object to execute the `INSERT` statement to insert a new row into a table.
+- Use the `addBatch()` and the `executeBatch()` methods of the `PreparedStatement` object to execute batch inserts.

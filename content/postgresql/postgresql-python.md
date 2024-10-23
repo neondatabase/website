@@ -1,21 +1,18 @@
 ---
-title: "PostgreSQL Python"
-page_title: "PostgreSQL Python"
-page_description: "This PostgreSQL Python section shows how to work with PostgreSQL from Python programming language using the psycopg2 database driver."
-prev_url: "https://www.postgresqltutorial.com/postgresql-python/"
-ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png"
-updatedOn: "2024-05-19T08:36:25+00:00"
+title: 'PostgreSQL Python'
+page_title: 'PostgreSQL Python'
+page_description: 'This PostgreSQL Python section shows how to work with PostgreSQL from Python programming language using the psycopg2 database driver.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-python/'
+ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png'
+updatedOn: '2024-05-19T08:36:25+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Delete Data From a Table"
-  slug: "postgresql-php/delete"
-nextLink: 
-  title: "PostgreSQL Python: Connect to PostgreSQL Database Server"
-  slug: "postgresql-python/connect"
+previousLink:
+  title: 'PostgreSQL PHP: Delete Data From a Table'
+  slug: 'postgresql-php/delete'
+nextLink:
+  title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
+  slug: 'postgresql-python/connect'
 ---
-
-
-
 
 This PostgreSQL Python section shows you how to work with PostgreSQL using the [Python programming language](https://www.pythontutorial.net/).
 
@@ -27,16 +24,16 @@ Besides, the psycopg2 driver supports many Python types out\-of\-the\-box. The p
 
 This PostgreSQL Python section covers the most common activities for interacting with PostgreSQL in Python applications:
 
-* [Connecting to the PostgreSQL database server](postgresql-python/connect) – show you how to connect to the PostgreSQL database server from Python.
-* [Creating new PostgreSQL tables in Python](postgresql-python/create-tables) – show you how to create new tables in PostgreSQL from Python.
-* [Inserting data into the PostgreSQL table in Python](postgresql-python/insert) – explain to you how to insert data into a PostgreSQL database table in Python.
-* [Updating data in the PostgreSQL table in Python](postgresql-python/update) – learn various ways to update data in the PostgreSQL table.
-* [Transaction](postgresql-python/transaction) – show you how to perform transactions in Python.
-* [Calling a PostgreSQL function in Python](postgresql-python/postgresql-python-call-postgresql-functions) – show you step by step how to call a PostgreSQL function in Python.
-* [Calling a PostgreSQL stored procedure in Python](postgresql-python/call-stored-procedures) – guide you on how to call a stored procedure from in a Python application.
-* [Handling PostgreSQL BLOB data in Python](postgresql-python/blob)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
-* [Querying data from the PostgreSQL tables](postgresql-python/query) – walk you through the steps of querying data from the PostgreSQL tables in a Python application.
-* [Deleting data from PostgreSQL tables in Python](postgresql-python/delete) – show you how to delete data in a table in Python.
+- [Connecting to the PostgreSQL database server](postgresql-python/connect) – show you how to connect to the PostgreSQL database server from Python.
+- [Creating new PostgreSQL tables in Python](postgresql-python/create-tables) – show you how to create new tables in PostgreSQL from Python.
+- [Inserting data into the PostgreSQL table in Python](postgresql-python/insert) – explain to you how to insert data into a PostgreSQL database table in Python.
+- [Updating data in the PostgreSQL table in Python](postgresql-python/update) – learn various ways to update data in the PostgreSQL table.
+- [Transaction](postgresql-python/transaction) – show you how to perform transactions in Python.
+- [Calling a PostgreSQL function in Python](postgresql-python/postgresql-python-call-postgresql-functions) – show you step by step how to call a PostgreSQL function in Python.
+- [Calling a PostgreSQL stored procedure in Python](postgresql-python/call-stored-procedures) – guide you on how to call a stored procedure from in a Python application.
+- [Handling PostgreSQL BLOB data in Python](postgresql-python/blob)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
+- [Querying data from the PostgreSQL tables](postgresql-python/query) – walk you through the steps of querying data from the PostgreSQL tables in a Python application.
+- [Deleting data from PostgreSQL tables in Python](postgresql-python/delete) – show you how to delete data in a table in Python.
 
 For demonstration purposes, we will use the `suppliers` sample database. The following picture illustrates the structure of the `suppliers` database:
 
@@ -46,4 +43,3 @@ For demonstration purposes, we will use the `suppliers` sample database. The fol
 2. `parts` table: stores parts data.
 3. `parts_drawings` table: stores the drawing of a part.
 4. `vendor_parts` table: stores the data of which parts are supplied by which vendor.
-

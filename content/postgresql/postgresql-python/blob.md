@@ -1,21 +1,18 @@
 ---
-title: "PostgreSQL Python: Handling Binary Data"
-page_title: "PostgreSQL Python: Handling Binary Data"
-page_description: "In this tutorial, you will learn how to store binary data in the PostgreSQL database using Python."
-prev_url: "https://www.postgresqltutorial.com/postgresql-python/blob/"
-ogImage: "/postgresqltutorial/parts_part_drawings_tables.png"
-updatedOn: "2024-04-20T13:39:35+00:00"
+title: 'PostgreSQL Python: Handling Binary Data'
+page_title: 'PostgreSQL Python: Handling Binary Data'
+page_description: 'In this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-python/blob/'
+ogImage: '/postgresqltutorial/parts_part_drawings_tables.png'
+updatedOn: '2024-04-20T13:39:35+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Python: Call Stored Procedures"
-  slug: "postgresql-python/call-stored-procedures"
-nextLink: 
-  title: "PostgreSQL Python: Delete Data from Tables"
-  slug: "postgresql-python/delete"
+previousLink:
+  title: 'PostgreSQL Python: Call Stored Procedures'
+  slug: 'postgresql-python/call-stored-procedures'
+nextLink:
+  title: 'PostgreSQL Python: Delete Data from Tables'
+  slug: 'postgresql-python/delete'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.
 
@@ -29,7 +26,6 @@ Let’s take a look at the `part_drawings` table.
 
 ![parts_part_drawings_tables](/postgresqltutorial/parts_part_drawings_tables.png)The `part_drawings` table stores the pictures of parts in the `drawing_data` column. We will show you how to insert binary data into this column and read it back.
 
-
 ## Insert binary data into a table
 
 To insert binary data into a table, you use the following steps:
@@ -41,7 +37,6 @@ To insert binary data into a table, you use the following steps:
 5. Finally, commit the changes permanently to the PostgreSQL database by calling the `commit()` method of the `connection` object.
 
 The following `write_blob()` function reads binary data from a file specified by the `path_to_file` parameter and inserts it into the `part_drawings` table.
-
 
 ```python
 import psycopg2
@@ -56,7 +51,7 @@ def write_blob(part_id, path_to_file, file_extension):
     # read data from a picture
     data = open(path_to_file, 'rb').read()
 
-    
+
     try:
         # connect to the PostgresQL database
         with psycopg2.connect(**params) as conn:
@@ -66,15 +61,15 @@ def write_blob(part_id, path_to_file, file_extension):
                 cur.execute("INSERT INTO part_drawings(part_id,file_extension,drawing_data) " +
                             "VALUES(%s,%s,%s)",
                             (part_id, file_extension, psycopg2.Binary(data)))
-                
+
             conn.commit()
-        
+
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
 if __name__ == '__main__':
     write_blob(1, 'images/input/simtray.png', 'png')
-    write_blob(2, 'images/input/speaker.png', 'png')        
+    write_blob(2, 'images/input/speaker.png', 'png')
 ```
 
 ## Read binary data from a table
@@ -82,7 +77,6 @@ if __name__ == '__main__':
 The steps of reading binary data from a table are similar to the steps of querying data from a table. After fetching binary data from the table, you can save it to a file, output it to the web browser, and so on.
 
 The following `read_blob()` function selects BLOB data from the `part_drawings` table based on a specified part id and saves the binary data to a file.
-
 
 ```python
 import psycopg2
@@ -105,7 +99,7 @@ def read_blob(part_id, path_to_dir):
                             (part_id,))
 
                 blob = cur.fetchone()
-                
+
                 # write blob data into file
                 open(path_to_dir + blob[0] + '.' + blob[1], 'wb').write(blob[2])
     except (Exception, psycopg2.DatabaseError) as error:
@@ -113,11 +107,11 @@ def read_blob(part_id, path_to_dir):
 
 if __name__ == '__main__':
     read_blob(1, 'images/output/')
-    read_blob(2, 'images/output/')                
+    read_blob(2, 'images/output/')
 ```
+
 The following snippet reads the binary data of the parts with id values 1 and 2 and saves the binary data to the `images/output` directory.
 
 [Download the project source code](/postgresqltutorial/blob.zip)
 
 In this tutorial, you have learned how to write binary data to a table and read it back using Python.
-

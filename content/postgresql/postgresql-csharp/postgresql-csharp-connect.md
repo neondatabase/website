@@ -1,64 +1,59 @@
 ---
-title: "PostgreSQL C#: Connecting the PostgreSQL Database"
-page_title: "PostgreSQL C#: Connecting to the PostgreSQL database"
-page_description: "Learn how to create a sample database in PostgreSQL and how to connect to the database from a C# program using ADO.NET"
-prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/"
-ogImage: "/postgresqltutorial/PostgreSQL-C-Connect.png"
-updatedOn: "2024-05-21T00:35:17+00:00"
+title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
+page_title: 'PostgreSQL C#: Connecting to the PostgreSQL database'
+page_description: 'Learn how to create a sample database in PostgreSQL and how to connect to the database from a C# program using ADO.NET'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/'
+ogImage: '/postgresqltutorial/PostgreSQL-C-Connect.png'
+updatedOn: '2024-05-21T00:35:17+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL C#"
-  slug: "postgresql-csharp/"
-nextLink: 
-  title: "PostgreSQL C#: Creating Tables"
-  slug: "postgresql-csharp/postgresql-csharp-create-table"
+previousLink:
+  title: 'PostgreSQL C#'
+  slug: 'postgresql-csharp/'
+nextLink:
+  title: 'PostgreSQL C#: Creating Tables'
+  slug: 'postgresql-csharp/postgresql-csharp-create-table'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to create a sample database in PostgreSQL and how to connect to the database from a C\# program using ADO.NET
-
 
 ## Create a sample database
 
 First, open a terminal and [connect to the PostgreSQL database server](../postgresql-getting-started/connect-to-postgresql-database):
 
-
 ```plaintextsql
 psql -U postgres
 ```
+
 It’ll prompt you to enter a password for the postgres user.
 
 Second, [create a new database](../postgresql-administration/postgresql-create-database) called `elearning`:
 
-
 ```pgsql
 CREATE DATABASE elearning;
 ```
-Third, change the current database to `elearning`:
 
+Third, change the current database to `elearning`:
 
 ```pgsql
 \c elearning
 ```
-Fourth, [create a new role](../postgresql-administration/postgresql-roles) (user) with the name `ed`:
 
+Fourth, [create a new role](../postgresql-administration/postgresql-roles) (user) with the name `ed`:
 
 ```
 CREATE ROLE ed WITH LOGIN PASSWORD 'YourPassword';
 ```
+
 Note that you need to replace the `YourPassword` with your actual password and keep it for setting up the connection string later.
 
 Fifth, [grant all privileges](../postgresql-administration/postgresql-grant) of the `elearning` database to the `ed` user:
-
 
 ```pgsql
 GRANT ALL PRIVILEGES ON SCHEMA public
 TO ed;
 ```
-Finally, exit the psql database:
 
+Finally, exit the psql database:
 
 ```pgsql
 exit
@@ -72,17 +67,16 @@ Second, create a Console App with the name `ELearning`.
 
 Third, install the following Nuget packages:
 
-
 ```cs
 dotnet add package Microsoft.Extensions.Configuration
 dotnet add package Microsoft.Extensions.Configuration.Json
 dotnet add package Npgsql
 ```
-* The `Npgsql` is a .NET data provider for PostgreSQL.
-* The `Microsoft.Extensions`.Configuration and `Microsoft.Extensions`.`Configuration.Json` are packages that manage configurations.
+
+- The `Npgsql` is a .NET data provider for PostgreSQL.
+- The `Microsoft.Extensions`.Configuration and `Microsoft.Extensions`.`Configuration.Json` are packages that manage configurations.
 
 Fourth, create `appsettings.json` file in the project and add the `ConnnectionStrings` setting as follows:
-
 
 ```json
 {
@@ -91,12 +85,12 @@ Fourth, create `appsettings.json` file in the project and add the `ConnnectionSt
   }
 }
 ```
+
 In the `appsettings.json` file, add the connection string that connects to the local PostgreSQL server, `elearning` database using the `ed` user with your selected password.
 
 Fifth, right\-click the `appsettings.json` file, choose the **Properties…** and change the **Copy to Output Directory** to **“Copy if Newer”**:
 
 ![PostgreSQL C# Connect](/postgresqltutorial/PostgreSQL-C-Connect.png)Sixth, create a new `ConfigurationHelper.cs` file and define the `ConfigurationHelper` class with the following code:
-
 
 ```cs
 using Microsoft.Extensions.Configuration;
@@ -125,10 +119,10 @@ public static class ConfigurationHelper
     }
 }
 ```
+
 The `ConfigurationHelper` reads the `appsettings.json` file and returns the connection string from the `GetConnectionString()` method.
 
 Seventh, add the following code to the `Program.cs` to connect to the PostgreSQL server:
-
 
 ```cs
 using Npgsql;
@@ -143,43 +137,42 @@ await conn.OpenAsync();
 
 Console.WriteLine($"The PostgreSQL version: {conn.PostgreSqlVersion}");
 ```
+
 Finally, run the program.
 
 If everything is fine, you should see the PostgreSQL server version on the screen.
-
 
 ## How the Program.cs file works
 
 First, import the `Npgsql` namespace that allows you to use the classes provided by `Npgsql` to interact with the PostgreSQL database:
 
-
 ```cs
 using Npgsql;
 ```
-Second, get the connection string by calling the `GetConnectionString` from the `ConfigurationHelper` class:
 
+Second, get the connection string by calling the `GetConnectionString` from the `ConfigurationHelper` class:
 
 ```cs
 string connectionString = ConfigurationHelper.GetConnectionString("DefaultConnection");
 ```
-Third, create a `NpgsqlConnection` object that represents a connection to the PostgreSQL database with the provided connection string:
 
+Third, create a `NpgsqlConnection` object that represents a connection to the PostgreSQL database with the provided connection string:
 
 ```cs
 await using var conn = new NpgsqlConnection(connectionString);
 ```
+
 The `using` statement automatically closes the database connection when it goes out of scope.
 
 It’s important to close a connection where it is no longer needed. If you do not close it, you’ll encounter a connection leak, which may crash your program.
 
 Fourth, open a connection to the PostgreSQL Server by calling the `OpenAsync()` method:
 
-
 ```cs
 await conn.OpenAsync();
 ```
-Finally, display the PostgreSQL server version by accessing the `PostgreSqlVersion` property of the `NpgsqlConnection` object:
 
+Finally, display the PostgreSQL server version by accessing the `PostgreSqlVersion` property of the `NpgsqlConnection` object:
 
 ```cs
 Console.WriteLine($"The PostgreSQL version: {conn.PostgreSqlVersion}");
@@ -191,17 +184,16 @@ Npgsql 7\.0 or later supports a new concept called data source. The data source 
 
 To create a new data source, you call the Create() method of the NpgsqlDataSource class:
 
-
 ```
 string connectionString = ConfigurationHelper.GetConnectionString("DefaultConnection");
 await using var dataSource = NpgsqlDataSource.Create(connectionString);
 ```
+
 After having a data source, you can perform database operations such as executing a query and handling a transaction.
 
 Typically, you create and use a single data source object through your application. Note that the data source is thread\-safe.
 
 Sometimes, you may want to deal with the database connection manually. In such cases, you can use the data source object to create a new database connection:
-
 
 ```sql
 await using var conn = await dataSource.OpenConnectionAsync();
@@ -209,5 +201,4 @@ await using var conn = await dataSource.OpenConnectionAsync();
 
 ## Summary
 
-* Use Npgsql .NET Data Provider to interact with the PostgreSQL database.
-
+- Use Npgsql .NET Data Provider to interact with the PostgreSQL database.

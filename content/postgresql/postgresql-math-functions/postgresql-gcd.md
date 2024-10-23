@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL GCD() Function"
-page_title: "PostgreSQL GCD() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL GCD() function to find the greatest common divisor of two numbers."
-prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-gcd/"
-ogImage: ""
-updatedOn: "2024-05-19T03:19:27+00:00"
+title: 'PostgreSQL GCD() Function'
+page_title: 'PostgreSQL GCD() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL GCD() function to find the greatest common divisor of two numbers.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-gcd/'
+ogImage: ''
+updatedOn: '2024-05-19T03:19:27+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL FLOOR() Function"
-  slug: "postgresql-math-functions/postgresql-floor"
-nextLink: 
-  title: "PostgreSQL LCM() Function"
-  slug: "postgresql-math-functions/postgresql-lcm"
+previousLink:
+  title: 'PostgreSQL FLOOR() Function'
+  slug: 'postgresql-math-functions/postgresql-floor'
+nextLink:
+  title: 'PostgreSQL LCM() Function'
+  slug: 'postgresql-math-functions/postgresql-lcm'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `gcd()` function to find the greatest common divisor of two numbers.
-
 
 ## Introduction to the PostgreSQL gcd() function
 
@@ -32,10 +28,10 @@ PostgreSQL 13 or later offers a built\-in `gcd()` function that allows you to fi
 
 Here’s the syntax of the `gcd()` function:
 
-
 ```pgsqlsql
 gcd(a, b)
 ```
+
 In this syntax, you specify two numbers that you want to find their greatest common divisor. Both a and b are the types of [integer](../postgresql-tutorial/postgresql-integer), [bigint](../postgresql-tutorial/postgresql-integer), and [numeric](../postgresql-tutorial/postgresql-numeric).
 
 The `gcd()` function returns an integer that is the GCD of the two input numbers.
@@ -44,28 +40,25 @@ If both numbers a and b are zero, the `gcd()` function returns zero. If a and/or
 
 PostgreSQL uses the Euclidean algorithm under the hood:
 
-* Step 1\. Given two integers a and b, a \>\= b, calculate the remainder r when a is divided by b.
-* Step 2\. Replace a with b and b with r.
-* Step 3\. Repeat steps 1 and 2 until b becomes zero.
+- Step 1\. Given two integers a and b, a \>\= b, calculate the remainder r when a is divided by b.
+- Step 2\. Replace a with b and b with r.
+- Step 3\. Repeat steps 1 and 2 until b becomes zero.
 
 The GCD is the last non\-zero remainder.
-
 
 ## PostgreSQL gcd() function examples
 
 Let’s take some examples of using the `gcd()` function.
 
-
 ### 1\) Basic PostgreSQL gcd() function example
 
 The following statement uses the `gcd()` function to find the greatest common divisor of two numbers 8 and 12:
 
-
 ```sql
 SELECT gcd(8,12) result;
 ```
-Output:
 
+Output:
 
 ```sql
  result
@@ -78,17 +71,16 @@ Output:
 
 To find the GCD of three numbers, you apply the `gcd()` function twice:
 
-* The first one calculates the GCD of the first two numbers.
-* The second one returns the GCD of the result of the first one and the third number.
+- The first one calculates the GCD of the first two numbers.
+- The second one returns the GCD of the result of the first one and the third number.
 
 The following example uses the `gcd()` function to find the GCD of three numbers 30, 45, and 60:
-
 
 ```sql
 SELECT gcd(gcd(30,45), 60) result;
 ```
-Output:
 
+Output:
 
 ```sql
  result
@@ -96,16 +88,15 @@ Output:
      15
 (1 row)
 ```
+
 In this example:
 
-* First, `gcd(30, 45)` finds the GCD of 30 and 45, which is 15\.
-* Then, `gcd(15, 60)` returns the GCD of the result (15\) and 60, which is 15\.
-
+- First, `gcd(30, 45)` finds the GCD of 30 and 45, which is 15\.
+- Then, `gcd(15, 60)` returns the GCD of the result (15\) and 60, which is 15\.
 
 ### 3\) Using the gcd() function to find the greatest common divisor of multiple numbers
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `numbers` that have two columns `id` and `value`:
-
 
 ```sql
 CREATE TABLE numbers (
@@ -113,16 +104,16 @@ CREATE TABLE numbers (
     value INTEGER NOT NULL
 );
 ```
+
 Second, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `numbers` table:
 
-
 ```sql
-INSERT INTO numbers (value) 
+INSERT INTO numbers (value)
 VALUES (30), (45), (60), (90), (120)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | value
@@ -134,8 +125,8 @@ Output:
   5 |   120
 (5 rows)
 ```
-Third, use a [recursive query](../postgresql-tutorial/postgresql-recursive-query) to find the GCD of all the numbers in the `value` column:
 
+Third, use a [recursive query](../postgresql-tutorial/postgresql-recursive-query) to find the GCD of all the numbers in the `value` column:
 
 ```sql
 WITH RECURSIVE gcd_calculation AS (
@@ -143,9 +134,9 @@ WITH RECURSIVE gcd_calculation AS (
     SELECT id, value AS gcd_value
     FROM numbers
     WHERE id = (SELECT MIN(id) FROM numbers)
-    
+
     UNION ALL
-    
+
     -- Recursively apply the GCD function to the current GCD value and the next value
     SELECT gcd(gcd_value, value) AS gcd_value, numbers.id
     FROM gcd_calculation, numbers
@@ -162,20 +153,20 @@ FROM gcd_calculation
 ORDER BY id DESC
 LIMIT 1;
 ```
+
 How it works.
 
 Initialization: define the `gcd_calculation` [CTE](../postgresql-tutorial/postgresql-cte) that initializes the first number in the `value` column of the `numbers` table:
-
 
 ```sql
 SELECT id, value AS gcd_value
     FROM numbers
     WHERE id = (SELECT MIN(id) FROM numbers)
 ```
+
 It returns 30\.
 
 Recursive part: takes the current `gcd_value` and applies the `gcd()` function to it with the next value in the list:
-
 
 ```sql
 SELECT
@@ -198,8 +189,8 @@ WHERE
       1
   );
 ```
-Final selection: selects the last GCD value which is the GCD of all values in `value` column of the `numbers` table:
 
+Final selection: selects the last GCD value which is the GCD of all values in `value` column of the `numbers` table:
 
 ```sql
 SELECT gcd_value AS greatest_common_divisor
@@ -214,14 +205,13 @@ If you use the earlier versions of PostgreSQL, you will not be able to use the b
 
 However, you can create the following gcd() function using PL/pgSQL:
 
-
 ```
 CREATE OR REPLACE FUNCTION gcd(a INTEGER, b INTEGER)
 RETURNS INTEGER AS $$
-   DECLARE 
+   DECLARE
       r INTEGER = 0;
 BEGIN
-    
+
     WHILE b <> 0 LOOP
         r = a % b;
         a = b;
@@ -231,14 +221,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-The following shows how to use the user\-defined `gcd` function:
 
+The following shows how to use the user\-defined `gcd` function:
 
 ```pgsql
 SELECT gcd(8,12) result;
 ```
-Output:
 
+Output:
 
 ```
  result
@@ -251,22 +241,21 @@ Output:
 
 Using a recursive query to calculate the GCD of multiple values is quite complex. To make it simple, you can define an aggregate GCD function based on the built\-in `gcd()` function as follows:
 
-
 ```
 CREATE AGGREGATE gcd_agg(bigint) (
     SFUNC = gcd,
     STYPE = bigint
 );
 ```
+
 To calculate the GCD of all numbers in the value column of the numbers table, you can use the `gcd_agg()` function as follows:
 
-
 ```
-SELECT gcd_agg(value) 
+SELECT gcd_agg(value)
 FROM numbers;
 ```
-Output:
 
+Output:
 
 ```
  gcd_agg
@@ -277,6 +266,5 @@ Output:
 
 ## Summary
 
-* Use the `gcd()` function to calculate the GCD of two numbers.
-* Use a recursive CTE to find the GCD of three or more numbers.
-
+- Use the `gcd()` function to calculate the GCD of two numbers.
+- Use a recursive CTE to find the GCD of three or more numbers.

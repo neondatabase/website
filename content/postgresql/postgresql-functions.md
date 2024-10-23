@@ -1,22 +1,18 @@
 ---
-title: "PostgreSQL Functions"
-page_title: "PostgreSQL Functions"
-page_description: "This section provides you with the most useful PostgreSQL functions including aggregate functions, string functions, and date & time functions."
-prev_url: "https://www.postgresqltutorial.com/postgresql-functions/"
-ogImage: "https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png"
-updatedOn: "2021-08-11T03:08:08+00:00"
+title: 'PostgreSQL Functions'
+page_title: 'PostgreSQL Functions'
+page_description: 'This section provides you with the most useful PostgreSQL functions including aggregate functions, string functions, and date & time functions.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
+ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png'
+updatedOn: '2021-08-11T03:08:08+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL pg_terminate_backend() Function"
-  slug: "postgresql-administration/postgresql-pg_terminate_backend"
-nextLink: 
-  title: "PostgreSQL Aggregate Functions"
-  slug: "postgresql-aggregate-functions"
+previousLink:
+  title: 'PostgreSQL pg_terminate_backend() Function'
+  slug: 'postgresql-administration/postgresql-pg_terminate_backend'
+nextLink:
+  title: 'PostgreSQL Aggregate Functions'
+  slug: 'postgresql-aggregate-functions'
 ---
-
-
-
-
 
 ![](/postgresqltutorial/aggregate-functions-150x150.png?alignleft)
 

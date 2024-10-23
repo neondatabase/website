@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL MIN() Function"
-page_title: "PostgreSQL MIN() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL MIN() function to get the minimum value in a set of values."
-prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/"
-ogImage: "/postgresqltutorial/film-film_category-category-tables.png"
-updatedOn: "2024-01-26T03:16:19+00:00"
+title: 'PostgreSQL MIN() Function'
+page_title: 'PostgreSQL MIN() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL MIN() function to get the minimum value in a set of values.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/'
+ogImage: '/postgresqltutorial/film-film_category-category-tables.png'
+updatedOn: '2024-01-26T03:16:19+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL MAX Function"
-  slug: "postgresql-aggregate-functions/postgresql-max-function"
-nextLink: 
-  title: "PostgreSQL SUM Function"
-  slug: "postgresql-aggregate-functions/postgresql-sum-function"
+previousLink:
+  title: 'PostgreSQL MAX Function'
+  slug: 'postgresql-aggregate-functions/postgresql-max-function'
+nextLink:
+  title: 'PostgreSQL SUM Function'
+  slug: 'postgresql-aggregate-functions/postgresql-sum-function'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use PostgreSQL`MIN()` function to get the minimum value of a set.
-
 
 ## Introduction to PostgreSQL MIN function
 
@@ -28,22 +24,21 @@ To find the minimum value in a column of a table, you pass the column name the `
 
 Here’s the basic syntax of the `MIN()` function:
 
-
 ```csssqlsql
 MIN(expression)
 ```
-Unlike the [`AVG()`](postgresql-avg-function), [`COUNT()`](postgresql-count-function) and [`SUM()`](postgresql-sum-function) functions, the `DISTINCT` option does not have any effects on the `MIN()` function.
 
+Unlike the [`AVG()`](postgresql-avg-function), [`COUNT()`](postgresql-count-function) and [`SUM()`](postgresql-sum-function) functions, the `DISTINCT` option does not have any effects on the `MIN()` function.
 
 ## PostgreSQL MIN() function examples
 
-We will use the `film` , `film_category`, and `category` tables from the [dvdrental sample database](../postgresql-getting-started/postgresql-sample-database "PostgreSQL Sample Database") for demonstration.
+We will use the `film` , `film_category`, and `category` tables from the [dvdrental sample database](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for demonstration.
 
 ![film film_category category tables](/postgresqltutorial/film-film_category-category-tables.png)
+
 ### 1\) Basic PostgreSQL MIN() function example
 
 The following example uses the `MIN()` function to get the lowest rental rate from the `rental_rate` column the `film` table:
-
 
 ```sql
 SELECT
@@ -51,8 +46,8 @@ SELECT
 FROM
    film;
 ```
-Output:
 
+Output:
 
 ```sql
  min
@@ -60,31 +55,30 @@ Output:
  0.99
 (1 row)
 ```
-The query returns 0\.99, which is the lowest rental rate.
 
+The query returns 0\.99, which is the lowest rental rate.
 
 ### 2\) Using the PostgreSQL MIN() function in a subquery example
 
 The following example uses the `MIN()` function in a subquery to get the film information of the film with the lowest rental rate:
 
-
 ```php
-SELECT 
-  film_id, 
-  title, 
-  rental_rate 
-FROM 
-  film 
-WHERE 
+SELECT
+  film_id,
+  title,
+  rental_rate
+FROM
+  film
+WHERE
   rental_rate = (
-    SELECT 
-      MIN(rental_rate) 
-    FROM 
+    SELECT
+      MIN(rental_rate)
+    FROM
       film
   );
 ```
-Output:
 
+Output:
 
 ```sql
  film_id |          title          | rental_rate
@@ -95,11 +89,11 @@ Output:
      213 | Date Speed              |        0.99
 ...
 ```
+
 How it works.
 
-* First, the [subquery](../postgresql-tutorial/postgresql-subquery) to select the lowest rental rate.
-* Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
-
+- First, the [subquery](../postgresql-tutorial/postgresql-subquery) to select the lowest rental rate.
+- Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
 
 ### 3\) Using PostgreSQL MIN() function with GROUP BY clause example
 
@@ -107,22 +101,21 @@ In practice, you often use the `MIN` function with the [`GROUP BY`](../postgresq
 
 The following statement uses the `MIN()` function with the `GROUP BY` clause to find the lowest replacement cost of films by category:
 
-
 ```
-SELECT 
-  name category, 
-  MIN(replacement_cost) replacement_cost 
-FROM 
-  category 
-  INNER JOIN film_category USING (category_id) 
-  INNER JOIN film USING (film_id) 
-GROUP BY 
-  name 
-ORDER BY 
+SELECT
+  name category,
+  MIN(replacement_cost) replacement_cost
+FROM
+  category
+  INNER JOIN film_category USING (category_id)
+  INNER JOIN film USING (film_id)
+GROUP BY
+  name
+ORDER BY
   name;
 ```
-Output:
 
+Output:
 
 ```sql
   category   | replacement_cost
@@ -141,24 +134,23 @@ It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutori
 
 The following query uses the `MIN()` function to find the lowest replacement costs of films grouped by category, selecting only groups with replacement costs greater than `9.99`:
 
-
 ```
-SELECT 
-  name category, 
-  MIN(replacement_cost) replacement_cost 
-FROM 
-  category 
-  INNER JOIN film_category USING (category_id) 
-  INNER JOIN film USING (film_id) 
-GROUP BY 
-  name 
-HAVING 
-  MIN(replacement_cost) > 9.99 
-ORDER BY 
+SELECT
+  name category,
+  MIN(replacement_cost) replacement_cost
+FROM
+  category
+  INNER JOIN film_category USING (category_id)
+  INNER JOIN film USING (film_id)
+GROUP BY
+  name
+HAVING
+  MIN(replacement_cost) > 9.99
+ORDER BY
   name;
 ```
-Output:
 
+Output:
 
 ```sql
  category | replacement_cost
@@ -175,23 +167,22 @@ It’s possible to use the  `MIN()` function with other aggregate functions suc
 
 The following example uses the `MIN()` and `MAX()` function to find the shortest and longest films by category:
 
-
 ```
-SELECT 
-  name category, 
-  MIN(length) min_length, 
-  MAX(length) max_length 
-FROM 
-  category 
-  INNER JOIN film_category USING (category_id) 
-  INNER JOIN film USING (film_id) 
-GROUP BY 
-  name 
-ORDER BY 
+SELECT
+  name category,
+  MIN(length) min_length,
+  MAX(length) max_length
+FROM
+  category
+  INNER JOIN film_category USING (category_id)
+  INNER JOIN film USING (film_id)
+GROUP BY
+  name
+ORDER BY
   name;
 ```
-Output:
 
+Output:
 
 ```
   category   | min_length | max_length
@@ -217,6 +208,5 @@ Output:
 
 ### Summary
 
-* Use the `MIN()` function to find the lowest value in a set of values.
-* Use the `MIN()` with `GROUP BY` clause to find the lowest value in a group of values.
-
+- Use the `MIN()` function to find the lowest value in a set of values.
+- Use the `MIN()` with `GROUP BY` clause to find the lowest value in a group of values.

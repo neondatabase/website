@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL PI() Function"
-page_title: "PostgreSQL PI() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL PI() function to return the pi value."
-prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-pi-function/"
-ogImage: ""
-updatedOn: "2024-04-18T03:47:36+00:00"
+title: 'PostgreSQL PI() Function'
+page_title: 'PostgreSQL PI() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL PI() function to return the pi value.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-pi-function/'
+ogImage: ''
+updatedOn: '2024-04-18T03:47:36+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL POWER() Function"
-  slug: "postgresql-math-functions/postgresql-power"
-nextLink: 
-  title: "PostgreSQL RADIANS() Function"
-  slug: "postgresql-math-functions/postgresql-radians"
+previousLink:
+  title: 'PostgreSQL POWER() Function'
+  slug: 'postgresql-math-functions/postgresql-power'
+nextLink:
+  title: 'PostgreSQL RADIANS() Function'
+  slug: 'postgresql-math-functions/postgresql-radians'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `PI()` function to return the pi value.
-
 
 ## Introduction to the PostgreSQL PI() function
 
@@ -26,42 +22,39 @@ In PostgreSQL, the `PI()` function returns the value of pi denoted by the Greek 
 
 Here’s the syntax of the `PI()` function:
 
-
 ```sql
 PI()
 ```
-The `PI`() function takes no arguments and returns the constant value of `PI`, which is `3.141592653589793`.
 
+The `PI`() function takes no arguments and returns the constant value of `PI`, which is `3.141592653589793`.
 
 ## PostgreSQL PI() function examples
 
 Let’s take some examples of using the `PI()` function examples.
 
-
 ### 1\) Basic PI() function examples
 
 The following statement uses the `PI()` function to return the constant `PI` value:
 
-
 ```sql
 SELECT PI();
 ```
-Output:
 
+Output:
 
 ```sql
         pi
 -------------------
  3.141592653589793
 ```
-The following example uses the `PI()` function to calculate the area of a circle with a radius of 10:
 
+The following example uses the `PI()` function to calculate the area of a circle with a radius of 10:
 
 ```sql
 SELECT PI() * 10 * 10 area;
 ```
-Output:
 
+Output:
 
 ```sql
        area
@@ -74,7 +67,6 @@ Output:
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `circles` that stores the radiuses of circles:
 
-
 ```sql
 CREATE TABLE circles(
    id INT GENERATED ALWAYS AS IDENTITY,
@@ -82,16 +74,16 @@ CREATE TABLE circles(
    PRIMARY KEY(id)
 );
 ```
-Second, [insert rows](../postgresql-tutorial/postgresql-insert) into the `circles` table:
 
+Second, [insert rows](../postgresql-tutorial/postgresql-insert) into the `circles` table:
 
 ```sql
 INSERT INTO circles(radius)
 VALUES(10), (20), (25)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | radius
@@ -101,15 +93,15 @@ Output:
   3 |  25.00
 (3 rows)
 ```
-Third, calculate the areas of circles using the `PI()` function:
 
+Third, calculate the areas of circles using the `PI()` function:
 
 ```sql
 SELECT id, radius, PI() * radius * radius area
 FROM circles;
 ```
-Output:
 
+Output:
 
 ```sql
  id | radius |        area
@@ -119,8 +111,8 @@ Output:
   3 |  25.00 | 1963.4954084936207
 (3 rows)
 ```
-To make the area more readable, you can use the [`ROUND()`](postgresql-round) function:
 
+To make the area more readable, you can use the [`ROUND()`](postgresql-round) function:
 
 ```sql
 SELECT
@@ -130,8 +122,8 @@ SELECT
 FROM
   circles;
 ```
-Output:
 
+Output:
 
 ```sql
  id | radius |  area
@@ -144,5 +136,4 @@ Output:
 
 ## Summary
 
-* Use the `PI()` function to return the pi value.
-
+- Use the `PI()` function to return the pi value.

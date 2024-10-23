@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL DIV() Function"
-page_title: "PostgreSQL DIV() Function By Practical Examples"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL DIV() function to perform integer division and apply it effectively."
-prev_url: "https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/"
-ogImage: ""
-updatedOn: "2024-02-17T05:09:08+00:00"
+title: 'PostgreSQL DIV() Function'
+page_title: 'PostgreSQL DIV() Function By Practical Examples'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL DIV() function to perform integer division and apply it effectively.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
+ogImage: ''
+updatedOn: '2024-02-17T05:09:08+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL CBRT() Function"
-  slug: "postgresql-math-functions/postgresql-cbrt"
-nextLink: 
-  title: "PostgreSQL DEGREES() Function"
-  slug: "postgresql-math-functions/postgresql-degrees"
+previousLink:
+  title: 'PostgreSQL CBRT() Function'
+  slug: 'postgresql-math-functions/postgresql-cbrt'
+nextLink:
+  title: 'PostgreSQL DEGREES() Function'
+  slug: 'postgresql-math-functions/postgresql-degrees'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DIV()` function to perform integer division.
-
 
 ## Introduction to the PostgreSQL DIV() function
 
@@ -26,33 +22,30 @@ The `DIV()` function is a useful tool for performing integer division. Unlike th
 
 Here’s the basic syntax of the `DIV()` function:
 
-
 ```pgsqlsql
 DIV(dividend, divisor)
 ```
+
 In this syntax:
 
-* `dividend` is the number that you want to divide.
-* `divisor` is the number to which to divide the dividend.
+- `dividend` is the number that you want to divide.
+- `divisor` is the number to which to divide the dividend.
 
 The `DIV()` function returns the integer quotient of the division.
-
 
 ## PostgreSQL DIV() function examples
 
 Let’s explore some examples of using the `DIV()` function.
 
-
 ### 1\) Basic DIV() function example
 
 The following uses the `DIV()` function to return the result of dividing 10 by 3:
 
-
 ```
 SELECT DIV(10,3) as result;
 ```
-Output:
 
+Output:
 
 ```sql
  result
@@ -60,30 +53,29 @@ Output:
       3
 (1 row)
 ```
+
 The result is 3\.
 
 Unlike regular division, the `DIV()` function truncates any fractional part of the result and returns only the integer part.
-
 
 ### 2\) Grouping data into bins
 
 You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
 
-
 ```
 SELECT
-  title, 
-  DIV(length, 30) * 30 as bin 
+  title,
+  DIV(length, 30) * 30 as bin
 FROM
-  film 
-GROUP BY 
-  bin, 
-  title 
-ORDER BY  
+  film
+GROUP BY
+  bin,
+  title
+ORDER BY
   title;
 ```
-Output:
 
+Output:
 
 ```
             title            | bin
@@ -97,13 +89,12 @@ Output:
  Airplane Sierra             |  60
 ...
 ```
-In this example, we group the lengths of films into bins of 30 minutes.
 
+In this example, we group the lengths of films into bins of 30 minutes.
 
 ### 3\) Using the PostgreSQL DIV() for calculating ages
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `employees` and [insert some data into it](../postgresql-tutorial/postgresql-insert-multiple-rows):
-
 
 ```
 CREATE TABLE employees (
@@ -112,7 +103,7 @@ CREATE TABLE employees (
     birthdate DATE NOT NULL
 );
 
-INSERT INTO employees (name, birthdate) 
+INSERT INTO employees (name, birthdate)
 VALUES
     ('John Doe', '1990-05-15'),
     ('Jane Smith', '1985-09-20'),
@@ -120,8 +111,8 @@ VALUES
     ('Emily Brown', '1995-11-28')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```pgsql
  id |      name       | birthdate
@@ -132,15 +123,15 @@ Output:
   4 | Emily Brown     | 1995-11-28
 (4 rows)
 ```
-Second, calculate the age of each employee:
 
+Second, calculate the age of each employee:
 
 ```
 SELECT name, DIV(EXTRACT(YEAR FROM AGE(current_date, birthdate)), 1) AS age
 FROM employees;
 ```
-Output:
 
+Output:
 
 ```
       name       | age
@@ -151,14 +142,13 @@ Output:
  Emily Brown     |  28
 (4 rows)
 ```
+
 How it works.
 
-* Use the [AGE()](../postgresql-date-functions/postgresql-age) function to calculate age.
-* Use the [EXTRACT()](../postgresql-date-functions/postgresql-extract) function to extract the year from the age.
-* Use the `DIV()` function to return the integer part of the age.
-
+- Use the [AGE()](../postgresql-date-functions/postgresql-age) function to calculate age.
+- Use the [EXTRACT()](../postgresql-date-functions/postgresql-extract) function to extract the year from the age.
+- Use the `DIV()` function to return the integer part of the age.
 
 ## Summary
 
-* Use the PostgreSQL `DIV()` function to perform integer division.
-
+- Use the PostgreSQL `DIV()` function to perform integer division.

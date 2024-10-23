@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL GROUP BY"
-page_title: "PostgreSQL GROUP BY Clause"
-page_description: "In this tutorial, you will learn how to use PostgreSQL GROUP BY clause to divide rows into groups."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by/"
-ogImage: "/postgresqltutorial/PostgreSQL-GROUP-BY-1.png"
-updatedOn: "2024-04-19T07:10:40+00:00"
+title: 'PostgreSQL GROUP BY'
+page_title: 'PostgreSQL GROUP BY Clause'
+page_description: 'In this tutorial, you will learn how to use PostgreSQL GROUP BY clause to divide rows into groups.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by/'
+ogImage: '/postgresqltutorial/PostgreSQL-GROUP-BY-1.png'
+updatedOn: '2024-04-19T07:10:40+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL NATURAL JOIN"
-  slug: "postgresql-tutorial/postgresql-natural-join"
-nextLink: 
-  title: "PostgreSQL HAVING"
-  slug: "postgresql-tutorial/postgresql-having"
+previousLink:
+  title: 'PostgreSQL NATURAL JOIN'
+  slug: 'postgresql-tutorial/postgresql-natural-join'
+nextLink:
+  title: 'PostgreSQL HAVING'
+  slug: 'postgresql-tutorial/postgresql-having'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `GROUP BY` clause to divide rows into groups.
-
 
 ## Introduction to PostgreSQL GROUP BY clause
 
@@ -28,25 +24,25 @@ For each group, you can apply an [aggregate function](../postgresql-aggregate-fu
 
 The following illustrates the basic syntax of the `GROUP BY` clause:
 
-
 ```sql
-SELECT 
-   column_1, 
+SELECT
+   column_1,
    column_2,
    ...,
    aggregate_function(column_3)
-FROM 
+FROM
    table_name
-GROUP BY 
+GROUP BY
    column_1,
    column_2,
    ...;
 
 ```
+
 In this syntax:
 
-* First, select the columns that you want to group such as `column1` and `column2`, and column that you want to apply an aggregate function (`column3`).
-* Second, list the columns that you want to group in the `GROUP BY` clause.
+- First, select the columns that you want to group such as `column1` and `column2`, and column that you want to apply an aggregate function (`column3`).
+- Second, list the columns that you want to group in the `GROUP BY` clause.
 
 The `GROUP BY` clause divides the rows by the values in the columns specified in the `GROUP BY` clause and calculates a value for each group.
 
@@ -55,10 +51,10 @@ It’s possible to use other clauses of the `SELECT` statement with the `GROUP B
 PostgreSQL evaluates the `GROUP BY` clause after the `FROM` and [`WHERE`](postgresql-where) clauses and before the [`HAVING`](postgresql-having) [`SELECT`](postgresql-select), [`DISTINCT`](postgresql-select-distinct), [`ORDER BY`](postgresql-order-by) and [`LIMIT`](postgresql-limit) clauses.
 
 ![PostgreSQL GROUP BY](/postgresqltutorial/PostgreSQL-GROUP-BY-1.png)
+
 ## PostgreSQL GROUP BY clause examples
 
-Let’s take a look at the `payment` table in the [sample database](../postgresql-getting-started/postgresql-sample-database "PostgreSQL Sample Database").
-
+Let’s take a look at the `payment` table in the [sample database](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database').
 
 ![payment](/postgresqltutorial/payment.png)
 
@@ -66,19 +62,18 @@ Let’s take a look at the `payment` table in the [sample database](../postgresq
 
 The following example uses the `GROUP BY` clause to retrieve the `customer_id` from the payment table:
 
-
 ```sql
-SELECT 
-  customer_id 
-FROM 
-  payment 
-GROUP BY 
-  customer_id 
-ORDER BY 
+SELECT
+  customer_id
+FROM
+  payment
+GROUP BY
+  customer_id
+ORDER BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id
@@ -93,8 +88,8 @@ Output:
            8
 ...
 ```
-Each customer has one or more payments. The `GROUP BY` clause removes duplicate values in the customer\_id column and returns distinct customer ids. In this example, the `GROUP BY` clause works like the [`DISTINCT`](postgresql-select-distinct) operator.
 
+Each customer has one or more payments. The `GROUP BY` clause removes duplicate values in the customer_id column and returns distinct customer ids. In this example, the `GROUP BY` clause works like the [`DISTINCT`](postgresql-select-distinct) operator.
 
 ### 2\) Using PostgreSQL GROUP BY with SUM() function example
 
@@ -102,20 +97,19 @@ The `GROUP BY` clause is useful when used in conjunction with an [aggregate fun
 
 The following query uses the `GROUP BY` clause to retrieve the total payment paid by each customer:
 
-
 ```
-SELECT 
-  customer_id, 
-  SUM (amount) 
-FROM 
-  payment 
-GROUP BY 
-  customer_id 
-ORDER BY 
+SELECT
+  customer_id,
+  SUM (amount)
+FROM
+  payment
+GROUP BY
+  customer_id
+ORDER BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id |  sum
@@ -129,24 +123,24 @@ Output:
            7 | 130.72
 ...
 ```
+
 In this example, the `GROUP BY` clause groups the payments by the customer id. For each group, it calculates the total payment.
 
 The following statement uses the [`ORDER BY`](postgresql-order-by) clause with `GROUP BY` clause to sort the groups by total payments:
 
-
 ```
-SELECT 
-  customer_id, 
-  SUM (amount) 
-FROM 
-  payment 
-GROUP BY 
-  customer_id 
-ORDER BY 
+SELECT
+  customer_id,
+  SUM (amount)
+FROM
+  payment
+GROUP BY
+  customer_id
+ORDER BY
   SUM (amount) DESC;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id |  sum
@@ -162,21 +156,20 @@ Output:
 
 The following statement uses the `GROUP BY` clause to retrieve the total payment for each customer and display the customer name and amount:
 
-
 ```
-SELECT 
-  first_name || ' ' || last_name full_name, 
-  SUM (amount) amount 
-FROM 
-  payment 
-  INNER JOIN customer USING (customer_id) 
-GROUP BY 
-  full_name 
-ORDER BY 
+SELECT
+  first_name || ' ' || last_name full_name,
+  SUM (amount) amount
+FROM
+  payment
+  INNER JOIN customer USING (customer_id)
+GROUP BY
+  full_name
+ORDER BY
   amount DESC;
 ```
-Output:
 
+Output:
 
 ```sql
        full_name       | amount
@@ -188,13 +181,12 @@ Output:
  Clara Shaw            | 189.60
 ...
 ```
-In this example, we join the `payment` table with the `customer` table using an [inner join](postgresql-inner-join) to get the customer names and group customers by their names.
 
+In this example, we join the `payment` table with the `customer` table using an [inner join](postgresql-inner-join) to get the customer names and group customers by their names.
 
 ### 4\) Using PostgreSQL GROUP BY with COUNT() function example
 
 The following example uses the `GROUP BY` clause with the [`COUNT()`](../postgresql-aggregate-functions/postgresql-count-function) function to count the number of payments processed by each staff:
-
 
 ```
 SELECT
@@ -205,8 +197,8 @@ FROM
 GROUP BY
 	staff_id;
 ```
-Output:
 
+Output:
 
 ```sql
  staff_id | count
@@ -215,29 +207,28 @@ Output:
         2 |  7304
 (2 rows)
 ```
-In this example, the `GROUP BY` clause divides the rows in the `payment` table into groups and groups them by value in the `staff_id` column. For each group, it counts the number of rows using the [`COUNT()`](../postgresql-aggregate-functions/postgresql-count-function) function.
 
+In this example, the `GROUP BY` clause divides the rows in the `payment` table into groups and groups them by value in the `staff_id` column. For each group, it counts the number of rows using the [`COUNT()`](../postgresql-aggregate-functions/postgresql-count-function) function.
 
 ### 5\) Using PostgreSQL GROUP BY with multiple columns
 
 The following example uses a `GROUP BY` clause to group rows by values in two columns:
 
-
 ```
-SELECT 
-  customer_id, 
-  staff_id, 
-  SUM(amount) 
-FROM 
-  payment 
-GROUP BY 
-  staff_id, 
-  customer_id 
-ORDER BY 
+SELECT
+  customer_id,
+  staff_id,
+  SUM(amount)
+FROM
+  payment
+GROUP BY
+  staff_id,
+  customer_id
+ORDER BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id | staff_id |  sum
@@ -249,27 +240,26 @@ Output:
            3 |        1 |  59.88
 ...
 ```
-In this example, the `GROUP BY` clause divides the rows in the `payment` table by the values in the `customer_id` and `staff_id` columns. For each group of `(customer_id, staff_id)`, the `SUM()` calculates the total amount.
 
+In this example, the `GROUP BY` clause divides the rows in the `payment` table by the values in the `customer_id` and `staff_id` columns. For each group of `(customer_id, staff_id)`, the `SUM()` calculates the total amount.
 
 ### 6\) Using PostgreSQL GROUP BY clause with a date column
 
 The following example uses the `GROUP BY` clause to group the payments by payment date:
 
-
 ```
-SELECT 
-  payment_date::date payment_date, 
-  SUM(amount) sum 
-FROM 
-  payment 
-GROUP BY 
+SELECT
+  payment_date::date payment_date,
+  SUM(amount) sum
+FROM
+  payment
+GROUP BY
   payment_date::date
-ORDER BY 
+ORDER BY
   payment_date DESC;
 ```
-Output:
 
+Output:
 
 ```
 payment_date |   sum
@@ -280,10 +270,9 @@ payment_date |   sum
  2007-04-28   | 2622.73
 ...
 ```
-Since the values in the `payment_date` column are [timestamps](postgresql-timestamp), we cast them to date values using the [cast operator](postgresql-cast) `::`.
 
+Since the values in the `payment_date` column are [timestamps](postgresql-timestamp), we cast them to date values using the [cast operator](postgresql-cast) `::`.
 
 ## Summary
 
-* Use the PostgreSQL `GROUP BY` clause to divide rows into groups and apply an aggregate function to each group.
-
+- Use the PostgreSQL `GROUP BY` clause to divide rows into groups and apply an aggregate function to each group.

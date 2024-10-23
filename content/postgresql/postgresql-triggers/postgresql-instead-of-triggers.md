@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL INSTEAD OF Triggers"
-page_title: "PostgreSQL INSTEAD OF Triggers"
-page_description: "In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to insert, update, or delete data of base tables through a view."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/"
-ogImage: ""
-updatedOn: "2024-03-28T13:58:28+00:00"
+title: 'PostgreSQL INSTEAD OF Triggers'
+page_title: 'PostgreSQL INSTEAD OF Triggers'
+page_description: 'In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to insert, update, or delete data of base tables through a view.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/'
+ogImage: ''
+updatedOn: '2024-03-28T13:58:28+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL AFTER DELETE Trigger"
-  slug: "postgresql-triggers/postgresql-after-delete-trigger"
-nextLink: 
-  title: "PostgreSQL BEFORE TRUNCATE Trigger"
-  slug: "postgresql-triggers/postgresql-before-truncate-trigger"
+previousLink:
+  title: 'PostgreSQL AFTER DELETE Trigger'
+  slug: 'postgresql-triggers/postgresql-after-delete-trigger'
+nextLink:
+  title: 'PostgreSQL BEFORE TRUNCATE Trigger'
+  slug: 'postgresql-triggers/postgresql-before-truncate-trigger'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about PostgreSQL `INSTEAD OF` a trigger to insert, update, or delete data of base tables through a view.
-
 
 ## Introduction to PostgreSQL INSTEAD OF triggers
 
@@ -30,25 +26,24 @@ To create an `INSTEAD OF` trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when a trigger is fired:
 
-
 ```pgsqlsql
 CREATE OR REPLACE FUNCTION fn_trigger()
-RETURNS TRIGGER AS 
+RETURNS TRIGGER AS
 $$
    -- function body
-$$ 
+$$
 LANGUAGE plpgsql;
 ```
+
 Inside the function, you can customize the behavior for each operation including `INSERT`, `UPDATE`, and `DELETE`.
 
 Second, create an `INSTEAD OF` trigger and bind the function to it:
 
-
 ```pgsql
 CREATE TRIGGER trigger_name
-INSTEAD OF INSERT OR UPDATE OR DELETE 
+INSTEAD OF INSERT OR UPDATE OR DELETE
 ON table_name
-FOR EACH ROW 
+FOR EACH ROW
 EXECUTE FUNCTION fn_trigger;
 ```
 
@@ -56,11 +51,9 @@ EXECUTE FUNCTION fn_trigger;
 
 Let’s take an example of creating an `INSTEAD OF` trigger.
 
-
 ### 1\) Setting up a view with an INSTEAD OF trigger
 
 First, [create two tables](../postgresql-tutorial/postgresql-create-table) `employees` and `salaries`:
-
 
 ```pgsql
 CREATE TABLE employees (
@@ -71,70 +64,71 @@ CREATE TABLE employees (
 CREATE TABLE salaries (
     employee_id INT,
     effective_date DATE NOT NULL,
-    salary DECIMAL(10, 2) NOT NULL DEFAULT 0, 
+    salary DECIMAL(10, 2) NOT NULL DEFAULT 0,
     PRIMARY KEY (employee_id, effective_date),
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 ```
+
 Next, [insert rows](../postgresql-tutorial/postgresql-insert) into the `employees` and `salaries` tables:
 
-
 ```sql
-INSERT INTO employees (name) 
-VALUES 
-   ('Alice'), 
+INSERT INTO employees (name)
+VALUES
+   ('Alice'),
    ('Bob')
 RETURNING *;
 
-INSERT INTO salaries 
-VALUES 
-   (1, '2024-03-01', 60000.00), 
+INSERT INTO salaries
+VALUES
+   (1, '2024-03-01', 60000.00),
    (2, '2024-03-01', 70000.00)
 RETURNING *;
 ```
+
 Then, [create a view](../postgresql-views/managing-postgresql-views) based on the `employees` and `salaries` tables:
 
-
 ```sql
-CREATE VIEW employee_salaries 
+CREATE VIEW employee_salaries
 AS
 SELECT e.employee_id, e.name, s.salary, s.effective_date
 FROM employees e
 JOIN salaries s ON e.employee_id = s.employee_id;
 ```
-After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
+After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
 ```pgsql
 CREATE OR REPLACE FUNCTION update_employee_salaries()
-RETURNS TRIGGER AS 
+RETURNS TRIGGER AS
 $$
 DECLARE
     p_employee_id INT;
 BEGIN
     IF TG_OP = 'INSERT' THEN
-	-- insert a new employee 
-        INSERT INTO employees(name) 
+	-- insert a new employee
+        INSERT INTO employees(name)
         VALUES (NEW.name)
 	RETURNING employee_id INTO p_employee_id;
 
 	-- insert salary for the employee
-        INSERT INTO salaries(employee_id, effective_date, salary) 
+        INSERT INTO salaries(employee_id, effective_date, salary)
 	VALUES (p_employee_id, NEW.effective_date, NEW.salary);
     ELSIF TG_OP = 'UPDATE' THEN
-        UPDATE salaries 
-	SET salary = NEW.salary 
+        UPDATE salaries
+	SET salary = NEW.salary
 	WHERE employee_id = NEW.employee_id;
 
     ELSIF TG_OP = 'DELETE' THEN
-        DELETE FROM salaries 
+        DELETE FROM salaries
 	WHERE employee_id = OLD.employee_id;
     END IF;
     RETURN NULL;
 END;
-$$ 
+$$
 LANGUAGE plpgsql;
 ```
+
 If you execute an insert against the `employee_salaries` view, the `INSTEAD OF` trigger will insert a new row into the employees table first, then insert a new row into the salaries table.
 
 When you update an employee’s salary by id, the `INSTEAD OF` trigger will update the data in the `salaries` table.
@@ -143,12 +137,11 @@ If you delete a row from the `employee_salaries` view, the `INSTEAD OF` trigger 
 
 Finally, create an `INSTEAD OF` trigger that will be fired for the `INSERT`, `UPDATE`, or `DELETE` on the `employee_salaries` view:
 
-
 ```
 CREATE TRIGGER instead_of_employee_salaries
-INSTEAD OF INSERT OR UPDATE OR DELETE 
+INSTEAD OF INSERT OR UPDATE OR DELETE
 ON employee_salaries
-FOR EACH ROW 
+FOR EACH ROW
 EXECUTE FUNCTION update_employee_salaries();
 ```
 
@@ -156,36 +149,35 @@ EXECUTE FUNCTION update_employee_salaries();
 
 First, insert a new employee with a salary via the view:
 
-
 ```sql
 INSERT INTO employee_salaries (name, salary, effective_date)
 VALUES ('Charlie', 75000.00, '2024-03-01');
 ```
+
 PostgreSQL does not execute this statement. Instead, it executes the statement defined in the `INSTEAD` `OF` trigger. More specifically, it executes two statements:
 
 1\) Insert a new row into the `employees` table and get the employee id:
 
-
 ```sql
-INSERT INTO employees(name) 
+INSERT INTO employees(name)
 VALUES (NEW.name)
 RETURNING employee_id INTO p_employee_id;
 ```
+
 2\) Insert a new row into the salaries table using the employee id, salary, and effective date:
 
-
 ```sql
-INSERT INTO salaries(employee_id, effective_date, salary) 
+INSERT INTO salaries(employee_id, effective_date, salary)
 VALUES (p_employee_id, NEW.effective_date, NEW.salary);
 ```
-Second, verify the inserts by retrieving data from the `employees` and `salaries` tables:
 
+Second, verify the inserts by retrieving data from the `employees` and `salaries` tables:
 
 ```sql
 SELECT * FROM employees;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id |  name
@@ -199,8 +191,8 @@ Output:
 ```sql
 SELECT * FROM salaries;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id | effective_date |  salary
@@ -215,20 +207,19 @@ Output:
 
 First, update the salary of the employee id 3 via the `employee_salaries` view:
 
-
 ```sql
 UPDATE employee_salaries
 SET salary = 95000
 WHERE employee_id = 3;
 ```
-Second, retrieve data from the `salaries` table:
 
+Second, retrieve data from the `salaries` table:
 
 ```sql
 SELECT * FROM salaries;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id | effective_date |  salary
@@ -243,19 +234,18 @@ Output:
 
 First, delete the employee with id 3 via the `employee_salaries` view:
 
-
 ```sql
 DELETE FROM employee_salaries
 WHERE employee_id = 3;
 ```
-Second, retrieve data from the `employees` table:
 
+Second, retrieve data from the `employees` table:
 
 ```sql
 SELECT * FROM employees;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id | effective_date |  salary
@@ -264,14 +254,14 @@ Output:
            2 | 2024-03-01     | 70000.00
 (2 rows)
 ```
-Because of the `DELETE` `CASCADE`, PostgreSQL also deletes the corresponding row in the `salaries` table:
 
+Because of the `DELETE` `CASCADE`, PostgreSQL also deletes the corresponding row in the `salaries` table:
 
 ```sql
 SELECT * FROM salaries;
 ```
-Output:
 
+Output:
 
 ```sql
  employee_id | effective_date |  salary
@@ -283,5 +273,4 @@ Output:
 
 ## Summary
 
-* Use the `INSTEAD OF` trigger to customize the behavior of `INSERT`, `UPDATE`, and `DELETE` operations on a database view.
-
+- Use the `INSTEAD OF` trigger to customize the behavior of `INSERT`, `UPDATE`, and `DELETE` operations on a database view.

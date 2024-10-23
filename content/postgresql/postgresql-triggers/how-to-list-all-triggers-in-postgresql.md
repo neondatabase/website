@@ -1,24 +1,20 @@
 ---
-title: "How to List All Triggers in PostgreSQL"
-page_title: "How to List All Triggers in PostgreSQL"
-page_description: "In this tutorial, you will learn how to list all triggers in the current database or triggers associated with a specific table in PostgreSQL."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/"
-ogImage: ""
-updatedOn: "2024-03-28T13:52:14+00:00"
+title: 'How to List All Triggers in PostgreSQL'
+page_title: 'How to List All Triggers in PostgreSQL'
+page_description: 'In this tutorial, you will learn how to list all triggers in the current database or triggers associated with a specific table in PostgreSQL.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/'
+ogImage: ''
+updatedOn: '2024-03-28T13:52:14+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "Enable Triggers"
-  slug: "postgresql-triggers/enable-triggers"
-nextLink: 
-  title: "PostgreSQL Event Trigger"
-  slug: "postgresql-triggers/postgresql-event-trigger"
+previousLink:
+  title: 'Enable Triggers'
+  slug: 'postgresql-triggers/enable-triggers'
+nextLink:
+  title: 'PostgreSQL Event Trigger'
+  slug: 'postgresql-triggers/postgresql-event-trigger'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to list all triggers in the current database or triggers associated with a specific table in PostgreSQL.
-
 
 ## Listing all triggers using SQL statement
 
@@ -26,22 +22,21 @@ To list all triggers along with their associated tables in the current database,
 
 For example, the following statement retrieves the triggers with their associated tables in the current database from the `information_schema.triggers` view:
 
-
 ```sql
-SELECT 
-  event_object_table AS table_name, 
-  trigger_name 
-FROM 
-  information_schema.triggers 
-GROUP BY 
-  table_name, 
-  trigger_name 
-ORDER BY 
-  table_name, 
+SELECT
+  event_object_table AS table_name,
+  trigger_name
+FROM
+  information_schema.triggers
+GROUP BY
+  table_name,
+  trigger_name
+ORDER BY
+  table_name,
   trigger_name;
 ```
-Sample output:
 
+Sample output:
 
 ```sql
 table_name |         trigger_name
@@ -52,28 +47,28 @@ table_name |         trigger_name
  salaries   | after_update_salary_trigger
 (4 rows)
 ```
+
 If you want to list all triggers associated with a specific table, you can filter the `event_object_table` column by specifying the table name in the [`WHERE`](../postgresql-tutorial/postgresql-where) clause.
 
 For example, the following query lists all triggers associated with the `employees` table in the current database:
 
-
 ```sql
-SELECT 
-  event_object_table AS table_name, 
-  trigger_name 
-FROM 
-  information_schema.triggers 
-WHERE 
-  event_object_table = 'employees' 
-GROUP BY 
-  table_name, 
-  trigger_name 
-ORDER BY 
-  table_name, 
+SELECT
+  event_object_table AS table_name,
+  trigger_name
+FROM
+  information_schema.triggers
+WHERE
+  event_object_table = 'employees'
+GROUP BY
+  table_name,
+  trigger_name
+ORDER BY
+  table_name,
   trigger_name;
 ```
-Output:
 
+Output:
 
 ```sql
  table_name |         trigger_name
@@ -81,10 +76,10 @@ Output:
  employees  | after_delete_employee_trigger
 (1 row)
 ```
+
 To make it more convenient, you can [create a user\-defined function](../postgresql-plpgsql/postgresql-create-function) that wraps the above query.
 
 For example, the following creates a function named `get_triggers()` that returns all triggers with their associated tables in the current database:
-
 
 ```sql
 create or replace function get_triggers()
@@ -96,28 +91,28 @@ language plpgsql
 as
 $$
 begin
-	return query select 
-	  trg.event_object_table::text AS table_name, 
+	return query select
+	  trg.event_object_table::text AS table_name,
 	  trg.trigger_name::text
-	from 
+	from
 	  information_schema.triggers trg
-	group by 
-	  table_name, 
+	group by
+	  table_name,
 	  trg.trigger_name
 	order by
-	  table_name, 
+	  table_name,
 	  trg.trigger_name;
 end;
 $$;
 ```
-The following statement shows how to call the `get_triggers()` function:
 
+The following statement shows how to call the `get_triggers()` function:
 
 ```sql
 SELECT * FROM get_triggers();
 ```
-The following creates a function `get_triggers()` that accepts a table name and returns all the triggers of the table:
 
+The following creates a function `get_triggers()` that accepts a table name and returns all the triggers of the table:
 
 ```sql
 
@@ -132,60 +127,57 @@ language plpgsql
 as
 $$
 begin
-	return query select 
-	  event_object_table::text AS table_name, 
+	return query select
+	  event_object_table::text AS table_name,
 	  trg.trigger_name::text
-	from 
+	from
 	  information_schema.triggers trg
-	where 
+	where
 	   event_object_table = p_table_name
-	group by 
-	  table_name, 
+	group by
+	  table_name,
 	  trg.trigger_name
 	order by
-	  table_name, 
+	  table_name,
 	  trg.trigger_name;
 end;
 $$;
 ```
-The following statement uses the `get_triggers(text)` function to retrieve all triggers of the `employees` table:
 
+The following statement uses the `get_triggers(text)` function to retrieve all triggers of the `employees` table:
 
 ```sql
 SELECT * FROM get_triggers('employees');
 ```
 
-## Listing all triggers using the pg\_trigger view
+## Listing all triggers using the pg_trigger view
 
 `pg_trigger` is a system view that provides information about triggers defined in the database. Here are some important columns:
 
-
-
-| Column | Description |
-| --- | --- |
-| `tgname` | The name of the trigger. |
-| `tgrelid` | The object ID of the table or view to which the trigger belongs. |
-| `tgfoid` | The object ID of the function is called when the trigger fires. |
-| `tgtype` | The type of the trigger, such as `BEFORE`, `AFTER`, or [`INSTEAD OF`](postgresql-instead-of-triggers). |
-| `tgenabled` | The status of the trigger, either enabled or disabled. |
+| Column         | Description                                                                                                    |
+| -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `tgname`       | The name of the trigger.                                                                                       |
+| `tgrelid`      | The object ID of the table or view to which the trigger belongs.                                               |
+| `tgfoid`       | The object ID of the function is called when the trigger fires.                                                |
+| `tgtype`       | The type of the trigger, such as `BEFORE`, `AFTER`, or [`INSTEAD OF`](postgresql-instead-of-triggers).         |
+| `tgenabled`    | The status of the trigger, either enabled or disabled.                                                         |
 | `tgisinternal` | The boolean indicator indicates whether the trigger is a system\-generated trigger or a user\-defined trigger. |
 
 For example, the following statement retrieves all user\-defined triggers of the `employees` table from the `pg_trigger` view:
 
-
 ```sql
-SELECT 
-  tgname AS trigger_name 
-FROM 
-  pg_trigger 
-WHERE 
-  tgrelid = 'employees' :: regclass 
-  AND tgisinternal = false 
-ORDER BY 
+SELECT
+  tgname AS trigger_name
+FROM
+  pg_trigger
+WHERE
+  tgrelid = 'employees' :: regclass
+  AND tgisinternal = false
+ORDER BY
   trigger_name;
 ```
-Output:
 
+Output:
 
 ```sql
          trigger_name
@@ -198,24 +190,23 @@ Output:
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using psql:
 
-
 ```sql
 psql -U postgres
 ```
-Second, use the `\dS` command with a table name to list all the triggers associated with the table:
 
+Second, use the `\dS` command with a table name to list all the triggers associated with the table:
 
 ```sql
 \dS table_name;
 ```
-For example, the following command displays the `employees` table with its triggers:
 
+For example, the following command displays the `employees` table with its triggers:
 
 ```sql
 \dS employees
 ```
-Output:
 
+Output:
 
 ```sql
                                     Table "public.employees"
@@ -229,13 +220,12 @@ Indexes:
 Triggers:
     after_delete_employee_trigger AFTER DELETE ON employees FOR EACH ROW EXECUTE FUNCTION archive_deleted_employee()
 ```
+
 The last part of the output shows the triggers of the `employees` table.
 
 Note that psql does not provide a command to list all triggers in the current database.
 
-
 ## Summary
 
-* List all triggers in a database or a specific table using the `information_schema.triggers` or `pg_trigger` views.
-* Use psql command `\dS table_name` to display a table along with its associated triggers.
-
+- List all triggers in a database or a specific table using the `information_schema.triggers` or `pg_trigger` views.
+- Use psql command `\dS table_name` to display a table along with its associated triggers.

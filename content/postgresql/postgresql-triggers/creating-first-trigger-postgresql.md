@@ -1,31 +1,27 @@
 ---
-title: "PostgreSQL CREATE TRIGGER Statement"
-page_title: "PostgreSQL CREATE TRIGGER Statement"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL CREATE TRIGGER statement to create a trigger."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/"
-ogImage: "/postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png"
-updatedOn: "2024-03-30T03:13:57+00:00"
+title: 'PostgreSQL CREATE TRIGGER Statement'
+page_title: 'PostgreSQL CREATE TRIGGER Statement'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE TRIGGER statement to create a trigger.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/'
+ogImage: '/postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png'
+updatedOn: '2024-03-30T03:13:57+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "Introduction to PostgreSQL Trigger"
-  slug: "postgresql-triggers/introduction-postgresql-trigger"
-nextLink: 
-  title: "PostgreSQL DROP TRIGGER Statement"
-  slug: "postgresql-triggers/postgresql-drop-trigger"
+previousLink:
+  title: 'Introduction to PostgreSQL Trigger'
+  slug: 'postgresql-triggers/introduction-postgresql-trigger'
+nextLink:
+  title: 'PostgreSQL DROP TRIGGER Statement'
+  slug: 'postgresql-triggers/postgresql-drop-trigger'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE TRIGGER` statement to create a trigger.
 
 To create a new trigger in PostgreSQL, you follow these steps:
 
-* First, create a trigger function using [`CREATE FUNCTION`](../postgresql-plpgsql/postgresql-create-function) statement.
-* Second, bind the trigger function to a table by using `CREATE TRIGGER` statement.
+- First, create a trigger function using [`CREATE FUNCTION`](../postgresql-plpgsql/postgresql-create-function) statement.
+- Second, bind the trigger function to a table by using `CREATE TRIGGER` statement.
 
-If you are not familiar with creating a user\-defined function, you can check out the [PL/pgSQL section](https://neon.tech/postgresql/postgresql-stored-procedures/ "PostgreSQL Stored Procedures").
-
+If you are not familiar with creating a user\-defined function, you can check out the [PL/pgSQL section](https://neon.tech/postgresql/postgresql-stored-procedures/ 'PostgreSQL Stored Procedures').
 
 ## Create trigger function syntax
 
@@ -33,10 +29,9 @@ A trigger function is similar to a regular [user\-defined function](../postgresq
 
 The following illustrates the syntax of creating a trigger function:
 
-
 ```sql
-CREATE FUNCTION trigger_function() 
-   RETURNS TRIGGER 
+CREATE FUNCTION trigger_function()
+   RETURNS TRIGGER
    LANGUAGE PLPGSQL
 AS $$
 BEGIN
@@ -44,6 +39,7 @@ BEGIN
 END;
 $$
 ```
+
 Notice that you can create a trigger function using any language supported by PostgreSQL. In this tutorial, we will use PL/pgSQL.
 
 A trigger function receives data about its calling environment through a special structure called `TriggerData` which contains a set of local variables.
@@ -54,21 +50,20 @@ PostgreSQL also provides other local variables preceded by `TG_` such as `TG_WH
 
 After creating a trigger function, you can bind it to one or more trigger events such as [`INSERT`](../postgresql-tutorial/postgresql-insert), [`UPDATE`](../postgresql-tutorial/postgresql-update), and [`DELETE`](../postgresql-tutorial/postgresql-delete).
 
-
 ## Introduction to PostgreSQL CREATE TRIGGER statement
 
 The `CREATE TRIGGER` statement allows you to create a new trigger.
 
 The following illustrates the basic syntax of the `CREATE TRIGGER` statement:
 
-
 ```sql
-CREATE TRIGGER trigger_name 
+CREATE TRIGGER trigger_name
    {BEFORE | AFTER} { event }
    ON table_name
    [FOR [EACH] { ROW | STATEMENT }]
        EXECUTE PROCEDURE trigger_function
 ```
+
 In this syntax:
 
 First, provide the name of the trigger after the `TRIGGER` keywords.
@@ -81,8 +76,8 @@ Fourth, specify the name of the table associated with the trigger after the `ON`
 
 Fifth, define the type of triggers, which can be:
 
-* The row\-level trigger that is specified by the `FOR EACH ROW` clause.
-* The statement\-level trigger that is specified by the `FOR EACH STATEMENT` clause.
+- The row\-level trigger that is specified by the `FOR EACH ROW` clause.
+- The statement\-level trigger that is specified by the `FOR EACH STATEMENT` clause.
 
 A row\-level trigger is fired for each row while a statement\-level trigger is fired for each transaction.
 
@@ -92,11 +87,9 @@ If the `DELETE` statement deletes 100 rows, the row\-level trigger will fire 100
 
 Finally, give the name of the trigger function after the `EXECUTE PROCEDURE` keywords.
 
-
 ## PostgreSQL CREATE TRIGGER example
 
 The following statement creates a new table called `employees`:
-
 
 ```sql
 CREATE TABLE employees(
@@ -106,14 +99,14 @@ CREATE TABLE employees(
    PRIMARY KEY(id)
 );
 ```
-Note that if your database already has the `employees` table, you can drop it first before creating a new one:
 
+Note that if your database already has the `employees` table, you can drop it first before creating a new one:
 
 ```sql
 DROP TABLE IF EXISTS employees;
 ```
-Suppose that when the name of an employee changes, you want to log it in a separate table called `employee_audits` :
 
+Suppose that when the name of an employee changes, you want to log it in a separate table called `employee_audits` :
 
 ```
 CREATE TABLE employee_audits (
@@ -123,12 +116,12 @@ CREATE TABLE employee_audits (
    changed_on TIMESTAMP NOT NULL
 );
 ```
-First, create a new function called `log_last_name_changes`:
 
+First, create a new function called `log_last_name_changes`:
 
 ```sql
 CREATE OR REPLACE FUNCTION log_last_name_changes()
-  RETURNS TRIGGER 
+  RETURNS TRIGGER
   LANGUAGE PLPGSQL
   AS
 $$
@@ -142,12 +135,12 @@ BEGIN
 END;
 $$
 ```
+
 The function inserts the old last name into the `employee_audits` table including employee id, last name, and the time of change if the last name of an employee changes.
 
 The `OLD` represents the row before the update while the `NEW` represents the new row that will be updated. The `OLD.last_name` returns the last name before the update and the `NEW.last_name` returns the new last name.
 
 Second, bind the trigger function to the `employees` table. The trigger name is `last_name_changes`. Before the value of the `last_name` column is updated, the trigger function is automatically invoked to log the changes.
-
 
 ```sql
 CREATE TRIGGER last_name_changes
@@ -156,8 +149,8 @@ CREATE TRIGGER last_name_changes
   FOR EACH ROW
   EXECUTE PROCEDURE log_last_name_changes();
 ```
-Third, [insert](../postgresql-tutorial/postgresql-insert) some rows into the `employees` table:
 
+Third, [insert](../postgresql-tutorial/postgresql-insert) some rows into the `employees` table:
 
 ```sql
 INSERT INTO employees (first_name, last_name)
@@ -166,8 +159,8 @@ VALUES ('John', 'Doe');
 INSERT INTO employees (first_name, last_name)
 VALUES ('Lily', 'Bush');
 ```
-Fourth, examine the contents of the `employees` table:
 
+Fourth, examine the contents of the `employees` table:
 
 ```sql
 SELECT * FROM employees;
@@ -178,14 +171,13 @@ Suppose that `Lily Bush` changes her last name to `Lily Brown`.
 
 Fifth, update Lily’s last name to the new one:
 
-
 ```sql
 UPDATE employees
 SET last_name = 'Brown'
 WHERE ID = 2;
 ```
-Sixth, check if the last name of `Lily` has been updated:
 
+Sixth, check if the last name of `Lily` has been updated:
 
 ```sql
 SELECT * FROM employees;
@@ -196,7 +188,6 @@ The output indicates that Lily’s last name has been updated.
 
 Finally, verify the contents of the `employee_audits` table:
 
-
 ```sql
 SELECT * FROM employee_audits;
 ```
@@ -204,8 +195,6 @@ SELECT * FROM employee_audits;
 ![](/postgresqltutorial/PostgreSQL-Cretae-Trigger-example.png)
 The change was logged in the `employee_audits` table by the trigger.
 
-
 ## Summary
 
-* Use the PostgreSQL `CREATE TRIGGER` to create a new trigger.
-
+- Use the PostgreSQL `CREATE TRIGGER` to create a new trigger.

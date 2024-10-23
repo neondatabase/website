@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL BEFORE UPDATE Trigger"
-page_title: "PostgreSQL BEFORE UPDATE Trigger"
-page_description: "In this tutorial, you will learn how to define a PostgreSQL BEFORE UPDATE trigger that executes a function before an update operation occurs."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-update-trigger/"
-ogImage: ""
-updatedOn: "2024-03-28T10:18:43+00:00"
+title: 'PostgreSQL BEFORE UPDATE Trigger'
+page_title: 'PostgreSQL BEFORE UPDATE Trigger'
+page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE UPDATE trigger that executes a function before an update operation occurs.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-update-trigger/'
+ogImage: ''
+updatedOn: '2024-03-28T10:18:43+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL AFTER INSERT Trigger"
-  slug: "postgresql-triggers/postgresql-after-insert-trigger"
-nextLink: 
-  title: "PostgreSQL AFTER UPDATE Trigger"
-  slug: "postgresql-triggers/postgresql-after-update-trigger"
+previousLink:
+  title: 'PostgreSQL AFTER INSERT Trigger'
+  slug: 'postgresql-triggers/postgresql-after-insert-trigger'
+nextLink:
+  title: 'PostgreSQL AFTER UPDATE Trigger'
+  slug: 'postgresql-triggers/postgresql-after-update-trigger'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE UPDATE` trigger that executes a function before an update event occurs.
-
 
 ## Introduction to the PostgreSQL BEFORE UPDATE trigger
 
@@ -30,19 +26,18 @@ These `BEFORE UPDATE` triggers can be particularly useful when you want to modif
 
 In a `BEFORE UPDATE` trigger, you can access the following variables:
 
-* `OLD`: This record variable allows you to access the row before the update.
-* `NEW`: This record variable represents the row after the update.
+- `OLD`: This record variable allows you to access the row before the update.
+- `NEW`: This record variable represents the row after the update.
 
 Also, you can access the following variables:
 
-* `TG_NAME`: Represent the name of the trigger.
-* `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `BEFORE UPDATE` triggers.
-* `TG_WHEN`: Represent the trigger timing, which is `BEFORE` for the `BEFORE UPDATE` triggers.
+- `TG_NAME`: Represent the name of the trigger.
+- `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `BEFORE UPDATE` triggers.
+- `TG_WHEN`: Represent the trigger timing, which is `BEFORE` for the `BEFORE UPDATE` triggers.
 
 To create a `BEFORE UPDATE` trigger, you follow these steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute when the `BEFORE UPDATE` trigger fires:
-
 
 ```sql
 CREATE OR REPLACE FUNCTION trigger_function()
@@ -57,8 +52,8 @@ BEGIN
 END;
 $$
 ```
-Second, create a `BEFORE UPDATE` trigger that executes the defined function:
 
+Second, create a `BEFORE UPDATE` trigger that executes the defined function:
 
 ```sql
 CREATE TRIGGER trigger_name
@@ -72,7 +67,6 @@ EXECUTE FUNCTION trigger_function();
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `employees` to store the employee data:
 
-
 ```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
@@ -80,8 +74,8 @@ CREATE TABLE employees (
     salary NUMERIC NOT NULL
 );
 ```
-Next, define a trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
 
+Next, define a trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
 
 ```sql
 CREATE OR REPLACE FUNCTION fn_before_update_salary()
@@ -94,8 +88,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-Then, create a `BEFORE UPDATE` trigger that executes the `fn_before_update_salary()` before the update:
 
+Then, create a `BEFORE UPDATE` trigger that executes the `fn_before_update_salary()` before the update:
 
 ```sql
 CREATE TRIGGER before_update_salary_trigger
@@ -103,10 +97,10 @@ BEFORE UPDATE OF salary ON employees
 FOR EACH ROW
 EXECUTE FUNCTION fn_before_update_salary();
 ```
+
 This `BEFORE UPDATE` trigger ensures that the salary of the employee cannot be decreased. If you attempt to reduce the salary, the trigger will raise an exception and abort the update.
 
 After that, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `employees` table:
-
 
 ```sql
 INSERT INTO employees(name, salary)
@@ -115,8 +109,8 @@ VALUES
    ('Jane Doe', 80000)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id |   name   | salary
@@ -125,16 +119,16 @@ Output:
   2 | Jane Doe |  80000
 (2 rows)
 ```
-Finally, attempt to decrease the salary of `John Doe`:
 
+Finally, attempt to decrease the salary of `John Doe`:
 
 ```sql
 UPDATE employees
 SET salary = salary * 0.9
 WHERE id = 1;
 ```
-The `BEFORE UPDATE` trigger raises the following exception:
 
+The `BEFORE UPDATE` trigger raises the following exception:
 
 ```sql
 ERROR:  New salary cannot be less than current salary
@@ -143,5 +137,4 @@ CONTEXT:  PL/pgSQL function fn_before_update_salary() line 4 at RAISE
 
 ## Summary
 
-* Use a `BEFORE UPDATE` trigger to automatically execute a function before an update.
-
+- Use a `BEFORE UPDATE` trigger to automatically execute a function before an update.

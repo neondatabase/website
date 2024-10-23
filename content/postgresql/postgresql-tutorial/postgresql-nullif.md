@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL NULLIF"
-page_title: "PostgreSQL NULLIF function"
-page_description: "Show you how to apply the PostgreSQL NULLIF function to substitute the null values for displaying data and preventing division by zero error."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/"
-ogImage: ""
-updatedOn: "2024-02-01T04:37:20+00:00"
+title: 'PostgreSQL NULLIF'
+page_title: 'PostgreSQL NULLIF function'
+page_description: 'Show you how to apply the PostgreSQL NULLIF function to substitute the null values for displaying data and preventing division by zero error.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
+ogImage: ''
+updatedOn: '2024-02-01T04:37:20+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL ISNULL"
-  slug: "postgresql-tutorial/postgresql-isnull"
-nextLink: 
-  title: "PostgreSQL CAST: Convert a value of One Type to Another"
-  slug: "postgresql-tutorial/postgresql-cast"
+previousLink:
+  title: 'PostgreSQL ISNULL'
+  slug: 'postgresql-tutorial/postgresql-isnull'
+nextLink:
+  title: 'PostgreSQL CAST: Convert a value of One Type to Another'
+  slug: 'postgresql-tutorial/postgresql-cast'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NULLIF()` function to handle null values.
-
 
 ## Introduction to PostgreSQL NULLIF function
 
@@ -26,28 +22,25 @@ The `NULLIF()` function is one of the most common conditional expressions provid
 
 Here’s the basic syntax of the `NULLIF` function:
 
-
 ```phpsqlsql
 NULLIF(argument_1,argument_2);
 ```
-The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
 
+The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
 
 ## PostgreSQL NULLIF function examples
 
 Let’s take some examples of using the `NULLIF()` function.
 
-
 ### 1\) Basic PostgreSQL NULLIF examples
 
 The following statements illustrate how to use the `NULLIF()` function:
 
-
 ```sql
 SELECT NULLIF (1, 1); -- return NULL
 ```
-Output:
 
+Output:
 
 ```sql
  nullif
@@ -56,16 +49,16 @@ Output:
 (1 row)
 
 ```
+
 It returns null because the two arguments are equal.
 
 The following example returns the first argument because the two arguments are not equal:
 
-
 ```sql
 SELECT NULLIF (1, 0); -- return 1
 ```
-Output:
 
+Output:
 
 ```sql
  nullif
@@ -73,14 +66,14 @@ Output:
       1
 (1 row)
 ```
+
 The following example uses the `NULLIF()` function with two unequal text arguments:
 
+```
+SELECT NULLIF ('A', 'B');
+```
 
-```
-SELECT NULLIF ('A', 'B'); 
-```
 Output:
-
 
 ```sql
  nullif
@@ -94,19 +87,18 @@ Output:
 
 First, [create a table](postgresql-create-table) called `posts`:
 
-
 ```
 CREATE TABLE posts (
-  id serial primary key, 
-  title VARCHAR (255) NOT NULL, 
-  excerpt VARCHAR (150), 
-  body TEXT, 
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+  id serial primary key,
+  title VARCHAR (255) NOT NULL,
+  excerpt VARCHAR (150),
+  body TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP
 );
 ```
-Second, [insert some sample data](postgresql-insert) into the `posts` table.
 
+Second, [insert some sample data](postgresql-insert) into the `posts` table.
 
 ```sql
 INSERT INTO posts (title, excerpt, body)
@@ -116,8 +108,8 @@ VALUES
       ('test post 3', null ,'test post body 3')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    title    |       excerpt       |       body       |         created_at         | updated_at
@@ -127,24 +119,24 @@ Output:
   3 | test post 3 | null                | test post body 3 | 2024-02-01 11:28:38.779881 | null
 (3 rows)
 ```
+
 The goal is to retrieve data for displaying them on the post overview page that includes the title and excerpt of each post. To achieve this, you can use the first 40 characters of the post body as the excerpt.
 
 Third, use the [COALESCE function](postgresql-coalesce) to handle `NULL` in the `body` column:
 
-
 ```sql
-SELECT 
-  id, 
-  title, 
+SELECT
+  id,
+  title,
   COALESCE (
-    excerpt, 
+    excerpt,
     LEFT(body, 40)
-  ) 
-FROM 
+  )
+FROM
   posts;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    title    |      coalesce
@@ -154,22 +146,22 @@ Output:
   3 | test post 3 | test post body 3
 (3 rows)
 ```
+
 Unfortunately, there is a mix between null value and ” (empty) in the `excerpt` column. To address this issue, you can use the `NULLIF` function:
 
-
 ```
-SELECT 
-  id, 
-  title, 
+SELECT
+  id,
+  title,
   COALESCE (
-    NULLIF (excerpt, ''), 
+    NULLIF (excerpt, ''),
     LEFT (body, 40)
-  ) 
-FROM 
+  )
+FROM
   posts;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    title    |      coalesce
@@ -179,11 +171,11 @@ Output:
   3 | test post 3 | test post body 3
 (3 rows)
 ```
+
 In this statement:
 
-* First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
-* Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
-
+- First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
+- Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
 
 ## Using NULLIF() function to prevent division\-by\-zero
 
@@ -191,28 +183,27 @@ Another good example of using the `NULLIF` function is to prevent division\-by\-
 
 First, [create a new table](postgresql-create-table) named members:
 
-
 ```
 CREATE TABLE members (
-  id serial PRIMARY KEY, 
-  first_name VARCHAR (50) NOT NULL, 
-  last_name VARCHAR (50) NOT NULL, 
+  id serial PRIMARY KEY,
+  first_name VARCHAR (50) NOT NULL,
+  last_name VARCHAR (50) NOT NULL,
   gender SMALLINT NOT NULL -- 1: male, 2 female
 );
 ```
+
 Second, [insert some rows](postgresql-insert) for testing:
 
-
 ```sql
-INSERT INTO members (first_name, last_name, gender) 
-VALUES 
-  ('John', 'Doe', 1), 
-  ('David', 'Dave', 1), 
+INSERT INTO members (first_name, last_name, gender)
+VALUES
+  ('John', 'Doe', 1),
+  ('David', 'Dave', 1),
   ('Bush', 'Lily', 2)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | first_name | last_name | gender
@@ -222,19 +213,19 @@ Output:
   3 | Bush       | Lily      |      2
 (3 rows)
 ```
+
 Third, calculate the ratio between male and female members:
 
-
 ```
-SELECT 
+SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
-  ) * 100 AS "Male/Female ratio" 
-FROM 
+  ) * 100 AS "Male/Female ratio"
+FROM
   members;
 ```
-In this example, we use the [SUM function](../postgresql-aggregate-functions/postgresql-sum-function) and [CASE expression](postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
 
+In this example, we use the [SUM function](../postgresql-aggregate-functions/postgresql-sum-function) and [CASE expression](postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
 
 ```sql
  Male/Female ratio
@@ -242,46 +233,46 @@ In this example, we use the [SUM function](../postgresql-aggregate-functions/pos
                200
 (1 row)
 ```
+
 Fourth, delete a female member:
 
-
 ```
-DELETE FROM members 
+DELETE FROM members
 WHERE gender = 2;
 ```
+
 And execute the query to calculate the male/female ratio again:
 
-
 ```sql
-SELECT 
+SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
-  ) * 100 AS "Male/Female ratio" 
-FROM 
+  ) * 100 AS "Male/Female ratio"
+FROM
   members;
 ```
-We got the following error message:
 
+We got the following error message:
 
 ```http
 ERROR:  division by zero
 ```
+
 The reason is that the number of females is zero now. To prevent this division by zero error, you can use the `NULLIF` function as follows:
 
-
 ```
-SELECT 
+SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
-      SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END), 
+      SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END),
       0
     )
-  ) * 100 AS "Male/Female ratio" 
-FROM 
+  ) * 100 AS "Male/Female ratio"
+FROM
   members;
 ```
-Output:
 
+Output:
 
 ```
  Male/Female ratio
@@ -290,10 +281,9 @@ Output:
 (1 row)
 
 ```
-The `NULLIF` function checks if the number of female members is zero, it returns null. The total of male members is divided by `NULL` will return `NULL` .
 
+The `NULLIF` function checks if the number of female members is zero, it returns null. The total of male members is divided by `NULL` will return `NULL` .
 
 ## Summary
 
-* Use the `NULLIF()` function to substitute NULL for displaying data and to prevent division by zero.
-
+- Use the `NULLIF()` function to substitute NULL for displaying data and to prevent division by zero.

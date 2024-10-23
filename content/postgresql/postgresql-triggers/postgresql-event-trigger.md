@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Event Trigger"
-page_title: "PostgreSQL Event Trigger"
-page_description: "You will learn about PostgreSQL event triggers and how to use the CREATE EVENT TRIGGER statement to define a new event trigger."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/"
-ogImage: ""
-updatedOn: "2024-03-29T06:08:37+00:00"
+title: 'PostgreSQL Event Trigger'
+page_title: 'PostgreSQL Event Trigger'
+page_description: 'You will learn about PostgreSQL event triggers and how to use the CREATE EVENT TRIGGER statement to define a new event trigger.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/'
+ogImage: ''
+updatedOn: '2024-03-29T06:08:37+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "How to List All Triggers in PostgreSQL"
-  slug: "postgresql-triggers/how-to-list-all-triggers-in-postgresql"
-nextLink: 
-  title: "Creating a PostgreSQL Trigger with a When Condition"
-  slug: "postgresql-triggers/postgresql-trigger-when-condition"
+previousLink:
+  title: 'How to List All Triggers in PostgreSQL'
+  slug: 'postgresql-triggers/how-to-list-all-triggers-in-postgresql'
+nextLink:
+  title: 'Creating a PostgreSQL Trigger with a When Condition'
+  slug: 'postgresql-triggers/postgresql-trigger-when-condition'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
-
 
 ## Introduction to the PostgreSQL event trigger
 
@@ -30,10 +26,10 @@ An event trigger is a trigger that fires whenever an associated event occurs in 
 
 PostgreSQL supports the following events:
 
-* `ddl_command_start`
-* `ddl_command_end`
-* `table_rewrite`
-* `sql_drop`
+- `ddl_command_start`
+- `ddl_command_end`
+- `table_rewrite`
+- `sql_drop`
 
 The `ddl_command_start` events before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For complete commands that the event trigger supports, read more on the [event trigger firing matrix](https://www.postgresql.org/docs/current/event-trigger-matrix.html).
 
@@ -49,7 +45,6 @@ To create an event trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when the event trigger fires:
 
-
 ```sql
 CREATE OR REPLACE FUNCTION event_trigger_function_name()
 RETURNS EVENT_TRIGGER
@@ -62,10 +57,10 @@ BEGIN
 END;
 $$;
 ```
+
 The event trigger function returns `EVENT_TRIGGER` instead of `TRIGGER`. Additionally, it does not have any `RETURN` statement like a regular trigger function.
 
 Second, create an event trigger using the `CREATE EVENT TRIGGER` statement:
-
 
 ```sql
 CREATE EVENT TRIGGER trigger_name
@@ -77,7 +72,6 @@ EXECUTE FUNCTION event_trigger_function_name()
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `audits` to store audit logs for commands:
 
-
 ```sql
 CREATE TABLE audits (
     id SERIAL PRIMARY KEY,
@@ -87,14 +81,14 @@ CREATE TABLE audits (
     executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+
 The `audits` table will record the username, event, command, and timestamp when the command is executed.
 
 Second, define an event trigger function that executes whenever a relevant event occurs:
 
-
 ```sql
 CREATE OR REPLACE FUNCTION audit_command()
-RETURNS EVENT_TRIGGER 
+RETURNS EVENT_TRIGGER
 AS $$
 BEGIN
     INSERT INTO audits (username, event , command)
@@ -102,33 +96,33 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
+
 The `audit_command()` function inserts audit records into the `audits` table.
 
 Third, create an event trigger that associates the function with DDL commands:
-
 
 ```sql
 CREATE EVENT TRIGGER audit_ddl_commands
 ON ddl_command_end
 EXECUTE FUNCTION audit_command();
 ```
-Fourth, execute a `CREATE TABLE` command:
 
+Fourth, execute a `CREATE TABLE` command:
 
 ```sql
 CREATE TABLE regions(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL   
+    name VARCHAR(255) NOT NULL
 );
 ```
-Fifth, retrieve data from the `audits` table:
 
+Fifth, retrieve data from the `audits` table:
 
 ```sql
 SELECT * FROM audits;
 ```
-Output:
 
+Output:
 
 ```sql
  id | username |      event      |   command    |        executed_at
@@ -141,19 +135,15 @@ Output:
 
 The following table compares regular triggers and event triggers:
 
-
-
-| Feature | Regular Trigger | Event Trigger |
-| --- | --- | --- |
-| Trigger Level | Table\-level trigger, associated with a specific table and fired on `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` statement. | Database\-level triggers fired in response to DDL statements such as `CREATE`, `ALTER`, `DROP`, etc. |
-| Execution Time | Can be fired `BEFORE`, `AFTER`, or `INSTEAD` `OF` `DML` operations | Fired at some events including `ddl_command_start`, `ddl_command_end`, `table_rewrite`, `sql_drop` |
-| Scope | Can be defined at the row or statement level | Executes at the database level |
-| Access to Data | Has access to the data being modified | Has access to metadata |
-| Use Cases | Logging changes to a specific table, updating related tables, and enforcing business rules. | Auditing DDL commands, and monitoring user activities. |
-
+| Feature        | Regular Trigger                                                                                                            | Event Trigger                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Trigger Level  | Table\-level trigger, associated with a specific table and fired on `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` statement. | Database\-level triggers fired in response to DDL statements such as `CREATE`, `ALTER`, `DROP`, etc. |
+| Execution Time | Can be fired `BEFORE`, `AFTER`, or `INSTEAD` `OF` `DML` operations                                                         | Fired at some events including `ddl_command_start`, `ddl_command_end`, `table_rewrite`, `sql_drop`   |
+| Scope          | Can be defined at the row or statement level                                                                               | Executes at the database level                                                                       |
+| Access to Data | Has access to the data being modified                                                                                      | Has access to metadata                                                                               |
+| Use Cases      | Logging changes to a specific table, updating related tables, and enforcing business rules.                                | Auditing DDL commands, and monitoring user activities.                                               |
 
 ## Summary
 
-* An event trigger is a trigger that fires when an event related to the DDL statement occurs.
-* Use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
-
+- An event trigger is a trigger that fires when an event related to the DDL statement occurs.
+- Use the `CREATE EVENT TRIGGER` statement to define a new event trigger.

@@ -1,21 +1,18 @@
 ---
-title: "PostgreSQL Show Tables"
-page_title: "PostgreSQL Show Tables"
-page_description: "This tutorial shows you various ways to show tables in a specific database using psql and querying pg_catalog schema in PostgreSQL"
-prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/"
-ogImage: ""
-updatedOn: "2024-02-01T08:32:56+00:00"
+title: 'PostgreSQL Show Tables'
+page_title: 'PostgreSQL Show Tables'
+page_description: 'This tutorial shows you various ways to show tables in a specific database using psql and querying pg_catalog schema in PostgreSQL'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/'
+ogImage: ''
+updatedOn: '2024-02-01T08:32:56+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Show Databases"
-  slug: "postgresql-administration/postgresql-show-databases"
-nextLink: 
-  title: "PostgreSQL Describe Table"
-  slug: "postgresql-administration/postgresql-describe-table"
+previousLink:
+  title: 'PostgreSQL Show Databases'
+  slug: 'postgresql-administration/postgresql-show-databases'
+nextLink:
+  title: 'PostgreSQL Describe Table'
+  slug: 'postgresql-administration/postgresql-describe-table'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to show tables in PostgreSQL using `psql` tool and `pg_catalog` schema.
 
@@ -23,37 +20,35 @@ MySQL offers a popular [`SHOW TABLES`](http://www.mysqltutorial.org/mysql-show-t
 
 Unfortunately, PostgreSQL does not support the `SHOW TABLES` statement directly but provides you with alternatives.
 
-
 ## Showing tables from PostgreSQL using psql
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL using psql client tool:
 
-
 ```phpsql
 psql -U postgres
 ```
-Second, change the current database to the one that you want to show tables:
 
+Second, change the current database to the one that you want to show tables:
 
 ```
 \c dvdrental
 ```
-Note that you can connect to a specific database when you log in to the PostgreSQL database server:
 
+Note that you can connect to a specific database when you log in to the PostgreSQL database server:
 
 ```
 psql -U postgres -d dvdrental
 ```
+
 In this command, the `-d` flag means **d**atabase. In this command, you connect to the `dvdrental` database using the `postgres` user.
 
 Third, use the `\dt` command from the PostgreSQL command prompt to show tables in the `dvdrental` database:
 
-
 ```
 \dt
 ```
-Output:
 
+Output:
 
 ```
              List of relations
@@ -76,14 +71,14 @@ Output:
  public | store         | table | postgres
 (15 rows)
 ```
-To get more information on tables, you can use the `\dt+` command. It will add the `size` and `description` columns:
 
+To get more information on tables, you can use the `\dt+` command. It will add the `size` and `description` columns:
 
 ```php
 \dt+
 ```
-Output:
 
+Output:
 
 ```
                                          List of relations
@@ -106,26 +101,26 @@ Output:
  public | store         | table | postgres | permanent   | heap          | 8192 bytes |
 (15 rows)
 ```
-To show the details of a specific table, you can specify the name of the table after the \\d command:
 
+To show the details of a specific table, you can specify the name of the table after the \\d command:
 
 ```php
 \d table_name
 ```
-Or
 
+Or
 
 ```
 \d+ table_name
 ```
-For example, the following shows the structure of the actor table:
 
+For example, the following shows the structure of the actor table:
 
 ```
 \d actor
 ```
-Output:
 
+Output:
 
 ```
                                             Table "public.actor"
@@ -145,19 +140,18 @@ Triggers:
     last_updated BEFORE UPDATE ON actor FOR EACH ROW EXECUTE FUNCTION last_updated()
 ```
 
-## Showing tables using pg\_catalog schema
+## Showing tables using pg_catalog schema
 
 The following statement retrieves the table in PostgreSQL from the `pg_catalog.pg_tables` view:
-
 
 ```php
 SELECT *
 FROM pg_catalog.pg_tables
-WHERE schemaname != 'pg_catalog' AND 
+WHERE schemaname != 'pg_catalog' AND
     schemaname != 'information_schema';
 ```
-Output:
 
+Output:
 
 ```
  schemaname |   tablename   | tableowner | tablespace | hasindexes | hasrules | hastriggers | rowsecurity
@@ -179,11 +173,10 @@ Output:
  public     | film          | postgres   | null       | t          | f        | t           | f
 (15 rows)
 ```
-In this query, we use a condition in the [`WHERE`](../postgresql-tutorial/postgresql-where) clause to exclude the system tables. If you omit the `WHERE` clause, you will get many tables including the system ones.
 
+In this query, we use a condition in the [`WHERE`](../postgresql-tutorial/postgresql-where) clause to exclude the system tables. If you omit the `WHERE` clause, you will get many tables including the system ones.
 
 ## Summary
 
-* Use the `\dt` or `\dt+` command in `psql` to show tables in a specific database.
-* Use the `SELECT` statement to query table information from the `pg_catalog.pg_tables` catalog.
-
+- Use the `\dt` or `\dt+` command in `psql` to show tables in a specific database.
+- Use the `SELECT` statement to query table information from the `pg_catalog.pg_tables` catalog.

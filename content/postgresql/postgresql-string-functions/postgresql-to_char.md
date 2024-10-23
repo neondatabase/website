@@ -1,29 +1,24 @@
 ---
-title: "PostgreSQL TO_CHAR() Function"
-page_title: "PostgreSQL TO_CHAR Function By Practical Examples"
-page_description: "This tutorial shows you how to use the PostgreSQL TO_CHAR() function to convert a timestamp or a numeric value to a string."
-prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/"
-ogImage: "/postgresqltutorial/payment-table.png"
-updatedOn: "2024-01-29T02:05:27+00:00"
+title: 'PostgreSQL TO_CHAR() Function'
+page_title: 'PostgreSQL TO_CHAR Function By Practical Examples'
+page_description: 'This tutorial shows you how to use the PostgreSQL TO_CHAR() function to convert a timestamp or a numeric value to a string.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/'
+ogImage: '/postgresqltutorial/payment-table.png'
+updatedOn: '2024-01-29T02:05:27+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL TRANSLATE() Function"
-  slug: "postgresql-string-functions/postgresql-translate"
-nextLink: 
-  title: "PostgreSQL TO_NUMBER() Function"
-  slug: "postgresql-string-functions/postgresql-to_number"
+previousLink:
+  title: 'PostgreSQL TRANSLATE() Function'
+  slug: 'postgresql-string-functions/postgresql-translate'
+nextLink:
+  title: 'PostgreSQL TO_NUMBER() Function'
+  slug: 'postgresql-string-functions/postgresql-to_number'
 ---
 
-
-
-
 The PostgreSQL `TO_CHAR()` function converts a [timestamp](../postgresql-tutorial/postgresql-timestamp), an [interval](../postgresql-tutorial/postgresql-interval), an [integer](../postgresql-tutorial/postgresql-integer), a double\-precision, or a [numeric](../postgresql-tutorial/postgresql-numeric) value to a [string](../postgresql-tutorial/postgresql-char-varchar-text).
-
 
 ## Syntax
 
 The following illustrates the syntax of the PostgreSQL `TO_CHAR()` function:
-
 
 ```csssql
 TO_CHAR(expression, format)
@@ -33,11 +28,9 @@ TO_CHAR(expression, format)
 
 The PostgreSQL `TO_CHAR()` function requires two arguments:
 
-
 ### 1\) expression
 
 The expression can be a timestamp, an interval, an integer, a double\-precision, or a numeric value that is converted to a string according to a specific format.
-
 
 ### 2\) format
 
@@ -45,96 +38,88 @@ The format for the result string.
 
 The following table illustrates the valid numeric format strings:
 
-
-
-| Format | Description |
-| --- | --- |
-| 9 | Numeric value with the specified number of digits |
-| 0 | Numeric value with leading zeros |
-| . (period) | decimal point |
-| D | decimal point that uses the locale |
-| , (comma) | group (thousand) separator |
-| FM | Fill mode, which suppresses padding blanks and leading zeroes. |
-| PR | Negative value in angle brackets. |
-| S | Sign anchored to a number that uses locale |
-| L | Currency symbol that uses locale |
-| G | Group separator that uses locale |
-| MI | Minus sign in the specified position for numbers that are less than 0\. |
-| PL | Plus sign in the specified position for numbers that are greater than 0\. |
-| SG | Plus / minus sign in the specified position |
-| RN | Roman numeral that ranges from 1 to 3999 |
-| TH or th | Upper case or lower case ordinal number suffix |
+| Format     | Description                                                               |
+| ---------- | ------------------------------------------------------------------------- |
+| 9          | Numeric value with the specified number of digits                         |
+| 0          | Numeric value with leading zeros                                          |
+| . (period) | decimal point                                                             |
+| D          | decimal point that uses the locale                                        |
+| , (comma)  | group (thousand) separator                                                |
+| FM         | Fill mode, which suppresses padding blanks and leading zeroes.            |
+| PR         | Negative value in angle brackets.                                         |
+| S          | Sign anchored to a number that uses locale                                |
+| L          | Currency symbol that uses locale                                          |
+| G          | Group separator that uses locale                                          |
+| MI         | Minus sign in the specified position for numbers that are less than 0\.   |
+| PL         | Plus sign in the specified position for numbers that are greater than 0\. |
+| SG         | Plus / minus sign in the specified position                               |
+| RN         | Roman numeral that ranges from 1 to 3999                                  |
+| TH or th   | Upper case or lower case ordinal number suffix                            |
 
 The following table shows the valid timestamp format strings:
 
-
-
-| **Pattern** | **Description** |
-| --- | --- |
-| Y,YYY | year in 4 digits with comma |
-| YYYY | year in 4 digits |
-| YYY | The last 3 digits of ISO 8601 week\-numbering year |
-| YY | last 3 digits of the year |
-| Y | last 2 digits of the year |
-| IYYY | ISO 8601 week\-numbering year (4 or more digits) |
-| IYY | The last 2 digits of ISO 8601 week\-numbering year |
-| IY | The last digit of ISO 8601 week\-numbering year |
-| I | Abbreviated lowercase month name e.g., Jan, feb, etc. |
-| BC, bc, AD or ad | Era indicator without periods |
-| B.C., b.c., A.D. ora.d. | Era indicator with periods |
-| MONTH | English month name in uppercase |
-| Month | Full capitalized English month name |
-| month | Full lowercase English month name |
-| MON | Abbreviated uppercase month name e.g., JAN, FEB, etc. |
-| Mon | Week number of the year (1\-53\) (the first week starts on the first day of the year) |
-| mon | Abbreviated capitalized month name e.g., Jan, Feb,  etc. |
-| MM | month number from 01 to 12 |
-| DAY | Full uppercase day name |
-| Day | Full capitalized day name |
-| day | Full lowercase day name |
-| DY | Abbreviated uppercase day name |
-| Dy | Abbreviated capitalized day name |
-| dy | Abbreviated lowercase day name |
-| DDD | Day of year (001\-366\) |
-| IDDD | Day of ISO 8601 week\-numbering year (001\-371; day 1 of the year is Monday of the first ISO week) |
-| DD | Day of month (01\-31\) |
-| D | Day of the week, Sunday (1\) to Saturday (7\) |
-| ID | ISO 8601 day of the week, Monday (1\) to Sunday (7\) |
-| W | Week of month (1\-5\) (the first week starts on the first day of the month) |
-| WW | Century e.g., 21, 22, etc. |
-| IW | Week number of ISO 8601 week\-numbering year (01\-53; the first Thursday of the year is in week 1\) |
-| CC | Century e.g, 21, 22, etc. |
-| J | Julian Day (integer days since November 24, 4714 BC at midnight UTC) |
-| RM | Month in upper case Roman numerals (I\-XII; \> |
-| rm | Month in lowercase Roman numerals (i\-xii; \> |
-| HH | Hour of day (0\-12\) |
-| HH12 | Hour of day (0\-12\) |
-| HH24 | Hour of day (0\-23\) |
-| MI | Minute (0\-59\) |
-| SS | Second (0\-59\) |
-| MS | Millisecond (000\-999\) |
-| US | Microsecond (000000\-999999\) |
-| SSSS | Seconds past midnight (0\-86399\) |
-| AM, am, PM or pm | Meridiem indicator (without periods) |
-| A.M., a.m., P.M. or p.m. | Meridiem indicator (with periods) |
-
+| **Pattern**              | **Description**                                                                                     |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| Y,YYY                    | year in 4 digits with comma                                                                         |
+| YYYY                     | year in 4 digits                                                                                    |
+| YYY                      | The last 3 digits of ISO 8601 week\-numbering year                                                  |
+| YY                       | last 3 digits of the year                                                                           |
+| Y                        | last 2 digits of the year                                                                           |
+| IYYY                     | ISO 8601 week\-numbering year (4 or more digits)                                                    |
+| IYY                      | The last 2 digits of ISO 8601 week\-numbering year                                                  |
+| IY                       | The last digit of ISO 8601 week\-numbering year                                                     |
+| I                        | Abbreviated lowercase month name e.g., Jan, feb, etc.                                               |
+| BC, bc, AD or ad         | Era indicator without periods                                                                       |
+| B.C., b.c., A.D. ora.d.  | Era indicator with periods                                                                          |
+| MONTH                    | English month name in uppercase                                                                     |
+| Month                    | Full capitalized English month name                                                                 |
+| month                    | Full lowercase English month name                                                                   |
+| MON                      | Abbreviated uppercase month name e.g., JAN, FEB, etc.                                               |
+| Mon                      | Week number of the year (1\-53\) (the first week starts on the first day of the year)               |
+| mon                      | Abbreviated capitalized month name e.g., Jan, Feb,  etc.                                            |
+| MM                       | month number from 01 to 12                                                                          |
+| DAY                      | Full uppercase day name                                                                             |
+| Day                      | Full capitalized day name                                                                           |
+| day                      | Full lowercase day name                                                                             |
+| DY                       | Abbreviated uppercase day name                                                                      |
+| Dy                       | Abbreviated capitalized day name                                                                    |
+| dy                       | Abbreviated lowercase day name                                                                      |
+| DDD                      | Day of year (001\-366\)                                                                             |
+| IDDD                     | Day of ISO 8601 week\-numbering year (001\-371; day 1 of the year is Monday of the first ISO week)  |
+| DD                       | Day of month (01\-31\)                                                                              |
+| D                        | Day of the week, Sunday (1\) to Saturday (7\)                                                       |
+| ID                       | ISO 8601 day of the week, Monday (1\) to Sunday (7\)                                                |
+| W                        | Week of month (1\-5\) (the first week starts on the first day of the month)                         |
+| WW                       | Century e.g., 21, 22, etc.                                                                          |
+| IW                       | Week number of ISO 8601 week\-numbering year (01\-53; the first Thursday of the year is in week 1\) |
+| CC                       | Century e.g, 21, 22, etc.                                                                           |
+| J                        | Julian Day (integer days since November 24, 4714 BC at midnight UTC)                                |
+| RM                       | Month in upper case Roman numerals (I\-XII; \>                                                      |
+| rm                       | Month in lowercase Roman numerals (i\-xii; \>                                                       |
+| HH                       | Hour of day (0\-12\)                                                                                |
+| HH12                     | Hour of day (0\-12\)                                                                                |
+| HH24                     | Hour of day (0\-23\)                                                                                |
+| MI                       | Minute (0\-59\)                                                                                     |
+| SS                       | Second (0\-59\)                                                                                     |
+| MS                       | Millisecond (000\-999\)                                                                             |
+| US                       | Microsecond (000000\-999999\)                                                                       |
+| SSSS                     | Seconds past midnight (0\-86399\)                                                                   |
+| AM, am, PM or pm         | Meridiem indicator (without periods)                                                                |
+| A.M., a.m., P.M. or p.m. | Meridiem indicator (with periods)                                                                   |
 
 ## Return value
 
 The `TO_CHAR()` function returns a string in [`TEXT`](../postgresql-tutorial/postgresql-char-varchar-text) data type that represents the first argument formatted according to the specified format.
 
-
 ## Examples
 
 We will use the `payment` table in the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
-
 
 ![payment table](/postgresqltutorial/payment-table.png)
 
 ### 1\) Converting a timestamp to a string example
 
 The following statement uses the `TO_CHAR()` function to format the payment date that consists of hours, minutes, and seconds:
-
 
 ```
 SELECT
@@ -148,13 +133,14 @@ FROM
 ORDER BY
     payment_date;
 ```
+
 Here is the result:
 
 ![PostgreSQL TO_CHAR Function - format timestamp example](/postgresqltutorial/PostgreSQL-TO_CHAR-Function-format-timestamp-example.png)
+
 ### 2\) Converting an entire timestamp value into a different format example
 
 The following example converts the payment date into a different format:
-
 
 ```sql
 SELECT
@@ -169,15 +155,14 @@ FROM
 ORDER BY
     payment_date;
 ```
-The output is:
 
+The output is:
 
 ![](/postgresqltutorial/PostgreSQL-TO_CHAR-Function-format-payment-date-example.png)
 
 ### 3\) Converting a timestamp literal to a string example
 
 The following statement converts a timestamp literal to a string:
-
 
 ```sql
 SELECT
@@ -186,8 +171,8 @@ SELECT
         'HH24:MI:SS'
     );
 ```
-The result is:
 
+The result is:
 
 ```sql
 22:30:59
@@ -196,7 +181,6 @@ The result is:
 ### 4\) Adding currency symbol to the amount example
 
 The following example adds US dollar to the paid amounts:
-
 
 ```
 SELECT
@@ -211,15 +195,14 @@ FROM
 ORDER BY
     payment_date;
 ```
-The following picture illustrates the output:
 
+The following picture illustrates the output:
 
 ![PostgreSQL TO_CHAR Function - add currency symbol example](/postgresqltutorial/PostgreSQL-TO_CHAR-Function-add-currency-symbol-example.png)
 
 ### 5\) Converting an integer to a string example
 
 The following example converts an integer to a string:
-
 
 ```sql
 SELECT
@@ -228,8 +211,8 @@ SELECT
         '9,999'
     );
 ```
-Result
 
+Result
 
 ```sql
   2,017
@@ -239,21 +222,20 @@ Result
 
 The following example converts a numeric and timestamp to a string:
 
-
 ```
 SELECT
-    first_name || ' ' || last_name 
-    || ' paid ' || 
+    first_name || ' ' || last_name
+    || ' paid ' ||
     TO_CHAR(
         amount,
         'l99D99'
-    ) 
-    || ' at ' || 
+    )
+    || ' at ' ||
     TO_CHAR(
         payment_date,
         'HH24:MI:SS'
     )
-    || ' on ' || 
+    || ' on ' ||
     TO_CHAR(
         payment_date,
         'Mon-DD-YYYY'
@@ -264,11 +246,10 @@ INNER JOIN customer USING(customer_id)
 ORDER BY
     rental_id;
 ```
-The result is
 
+The result is
 
 ![PostgreSQL TO_CHAR Function - example](/postgresqltutorial/PostgreSQL-TO_CHAR-Function-example.png)
 Summary
 
-* Use the PostgreSQL `TO_CHAR()` function to convert a timestamp or a numeric value to a string.
-
+- Use the PostgreSQL `TO_CHAR()` function to convert a timestamp or a numeric value to a string.

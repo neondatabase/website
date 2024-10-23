@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL COUNT Function"
-page_title: "PostgreSQL COUNT() Function"
-page_description: "You will learn how to use the PostgreSQL COUNT() function to get the number of rows that satisfy a specific condition."
-prev_url: "https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/"
-ogImage: "/postgresqltutorial/payment.png"
-updatedOn: "2024-01-26T02:50:46+00:00"
+title: 'PostgreSQL COUNT Function'
+page_title: 'PostgreSQL COUNT() Function'
+page_description: 'You will learn how to use the PostgreSQL COUNT() function to get the number of rows that satisfy a specific condition.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-count-function/'
+ogImage: '/postgresqltutorial/payment.png'
+updatedOn: '2024-01-26T02:50:46+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL AVG Function"
-  slug: "postgresql-aggregate-functions/postgresql-avg-function"
-nextLink: 
-  title: "PostgreSQL MAX Function"
-  slug: "postgresql-aggregate-functions/postgresql-max-function"
+previousLink:
+  title: 'PostgreSQL AVG Function'
+  slug: 'postgresql-aggregate-functions/postgresql-avg-function'
+nextLink:
+  title: 'PostgreSQL MAX Function'
+  slug: 'postgresql-aggregate-functions/postgresql-max-function'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `COUNT()` function to count the number of rows in a table.
-
 
 ## Introduction to PostgreSQL COUNT() function
 
@@ -26,34 +22,31 @@ The `COUNT()` function is an aggregate function that allows you to obtain the nu
 
 The following statement illustrates various ways of using the `COUNT()` function.
 
-
 ### COUNT(\*)
 
 The `COUNT(*)` function returns the number of rows returned by a  [`SELECT`](../postgresql-tutorial/postgresql-select) statement, including NULL and duplicates.
 
-
 ```sqlsql
-SELECT 
-   COUNT(*) 
-FROM 
+SELECT
+   COUNT(*)
+FROM
    table_name
 WHERE
    condition;
 ```
+
 When you apply the `COUNT(*)` function to the entire table, PostgreSQL has to scan the whole table sequentially. If you use the `COUNT(*)` function on a big table, the query will be slow. This is related to the PostgreSQL MVCC implementation.
 
 Due to multiple transactions seeing different states of data simultaneously, there is no direct way for `COUNT(*)` function to count across the entire table. Therefore, PostgreSQL must scan all rows.
-
 
 ### COUNT(column)
 
 Similar to the `COUNT(*)` function, the `COUNT(column_name)` function returns the number of rows returned by a `SELECT` clause. However, it does not consider `NULL` values in the `column_name`.
 
-
 ```sql
-SELECT 
-   COUNT(column_name) 
-FROM 
+SELECT
+   COUNT(column_name)
+FROM
    table_name
 WHERE
    condition;
@@ -63,24 +56,22 @@ WHERE
 
 In this syntax, the `COUNT(DISTINCT column_name)` returns the number of unique non\-null values in the `column_name`.
 
-
 ```sql
-SELECT 
-   COUNT(DISTINCT column_name) 
-FROM 
+SELECT
+   COUNT(DISTINCT column_name)
+FROM
    table_name
 WHERE
    condition;
 ```
+
 In practice, you often use the `COUNT()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to return the number of items for each group.
 
 For example, you can use the `COUNT()` with the `GROUP BY` clause to return the number of films in each film category.
 
-
 ## PostgreSQL COUNT() function examples
 
 Let’s use the `payment` table in the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
-
 
 ![payment](/postgresqltutorial/payment.png)
 
@@ -88,15 +79,14 @@ Let’s use the `payment` table in the [sample database](../postgresql-getting-
 
 The following statement uses the `COUNT(*)` function to return the number of transactions in the `payment` table:
 
-
 ```sql
 SELECT
    COUNT(*)
 FROM
    payment;
 ```
-Output:
 
+Output:
 
 ```sql
  count
@@ -109,15 +99,14 @@ Output:
 
 To get the distinct amounts that customers paid, you use the `COUNT(DISTINCT amount)` function as shown in the following example:
 
-
 ```
-SELECT 
-  COUNT (DISTINCT amount) 
-FROM 
+SELECT
+  COUNT (DISTINCT amount)
+FROM
   payment;
 ```
-Output:
 
+Output:
 
 ```sql
  count
@@ -130,18 +119,17 @@ Output:
 
 The following example uses the `COUNT()` function with the `GROUP BY` function to return the number of payments of each customer:
 
-
 ```
-SELECT 
-  customer_id, 
-  COUNT (customer_id) 
-FROM 
-  payment 
-GROUP BY 
+SELECT
+  customer_id,
+  COUNT (customer_id)
+FROM
+  payment
+GROUP BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```sql
  customer_id | count
@@ -152,21 +140,21 @@ Output:
          273 |    28
 ...
 ```
+
 If you want to display the customer name instead of id, you can join the payment table with the customer table:
 
-
 ```
-SELECT 
-  first_name || ' ' || last_name full_name, 
-  COUNT (customer_id) 
-FROM 
-  payment 
+SELECT
+  first_name || ' ' || last_name full_name,
+  COUNT (customer_id)
+FROM
+  payment
 INNER JOIN customer USING (customer_id)
-GROUP BY 
+GROUP BY
   customer_id;
 ```
-Output:
 
+Output:
 
 ```
        full_name       | count
@@ -182,21 +170,20 @@ Output:
 
 You can use the `COUNT` function in a  [`HAVING`](../postgresql-tutorial/postgresql-having) clause to apply a specific condition to groups. For example, the following statement finds customers who have made over 40 payments:
 
-
 ```
-SELECT 
-  first_name || ' ' || last_name full_name, 
-  COUNT (customer_id) 
-FROM 
-  payment 
+SELECT
+  first_name || ' ' || last_name full_name,
+  COUNT (customer_id)
+FROM
+  payment
 INNER JOIN customer USING (customer_id)
-GROUP BY 
+GROUP BY
   customer_id
-HAVING 
+HAVING
   COUNT (customer_id) > 40
 ```
-Output:
 
+Output:
 
 ```
   full_name   | count
@@ -208,5 +195,4 @@ Output:
 
 ## Summary
 
-* Use the PostgreSQL `COUNT()` function to return the number of rows in a table.
-
+- Use the PostgreSQL `COUNT()` function to return the number of rows in a table.

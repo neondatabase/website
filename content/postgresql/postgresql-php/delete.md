@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL PHP: Delete Data From a Table"
-page_title: "PostgreSQL PHP: Delete Data In a Table"
-page_description: "In this tutorial, you will learn how to delete data from a PostgreSQL table in PHP application using PDO API."
-prev_url: "https://www.postgresqltutorial.com/postgresql-php/delete/"
-ogImage: ""
-updatedOn: "2024-01-30T00:55:55+00:00"
+title: 'PostgreSQL PHP: Delete Data From a Table'
+page_title: 'PostgreSQL PHP: Delete Data In a Table'
+page_description: 'In this tutorial, you will learn how to delete data from a PostgreSQL table in PHP application using PDO API.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-php/delete/'
+ogImage: ''
+updatedOn: '2024-01-30T00:55:55+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Working with Binary Data"
-  slug: "postgresql-php/postgresql-blob"
-nextLink: 
-  title: "PostgreSQL Python"
-  slug: "postgresql-php/../postgresql-python"
+previousLink:
+  title: 'PostgreSQL PHP: Working with Binary Data'
+  slug: 'postgresql-php/postgresql-blob'
+nextLink:
+  title: 'PostgreSQL Python'
+  slug: 'postgresql-php/../postgresql-python'
 ---
 
-
-
-
 **Summary**: This tutorial shows you how to delete data from a PostgreSQL table using the PHP PDO.
-
 
 ## Steps for deleting data in the PostgreSQL using PHP PDO
 
@@ -30,13 +26,11 @@ To delete data from a PostgreSQL table in PHP, you use the following steps:
 4. Execute the `DELETE` statement by calling the `execute()` method.
 5. Get the number of rows deleted using the `rowCount()` method.
 
-
 ## Deleting data examples
 
 We will use the `stocks` table for the demonstration. If you have not created the `stocks` table yet, you can follow the [creating table tutorial](create-tables).
 
 Let’s create a new class named StockDB that contains all the methods for deleting data in a table.
-
 
 ```phpsql
 <?php
@@ -64,8 +58,8 @@ class StockDB {
     // ...
 }
 ```
-The following `delete()` method deletes a row specified by id from the `stocks` table
 
+The following `delete()` method deletes a row specified by id from the `stocks` table
 
 ```php
    /**
@@ -84,8 +78,8 @@ The following `delete()` method deletes a row specified by id from the `stocks` 
         return $stmt->rowCount();
     }
 ```
-The following `deleteAll()` method deletes all rows from the `stocks` table.
 
+The following `deleteAll()` method deletes all rows from the `stocks` table.
 
 ```php
    /**
@@ -99,8 +93,8 @@ The following `deleteAll()` method deletes all rows from the `stocks` table.
         return $stmt->rowCount();
     }
 ```
-Before running the methods, we query the data from the `stocks` table.
 
+Before running the methods, we query the data from the `stocks` table.
 
 ```php
 stocks=# SELECT * FROM stocks
@@ -113,8 +107,8 @@ stocks-# ORDER BY id;
   4 | FB     | Facebook, Inc.
 (4 rows)
 ```
-Use the following code in the index.php file to delete the row with id 1\.
 
+Use the following code in the index.php file to delete the row with id 1\.
 
 ```sql
 <?php
@@ -127,25 +121,25 @@ use PostgreSQLTutorial\StockDB as StockDB;
 try {
     // connect to the PostgreSQL database
     $pdo = Connection::get()->connect();
-    // 
+    //
     $stockDB = new StockDB($pdo);
     // delete a stock with a specified id
     $deletedRows = $stockDB->delete(1);
     echo 'The number of row(s) deleted: ' . $deletedRows . '<br>';
-    
+
 } catch (\PDOException $e) {
     echo $e->getMessage();
 }
 
 ```
-The following is the output:
 
+The following is the output:
 
 ```
 The number of row(s) deleted: 1
 ```
-We query data from the stocks table again to verify.
 
+We query data from the stocks table again to verify.
 
 ```sql
 stocks=# SELECT * FROM stocks
@@ -157,16 +151,16 @@ stocks-# ORDER BY id;
   4 | FB     | Facebook, Inc.
 (3 rows)
 ```
+
 The row with id 1 was deleted as expected.
 
 In the `index.php` file, modify the code to call the `deleteAll()` method instead of the `delete()` method and execute it. The following is the output of the script:
 
-
 ```sql
 The number of row(s) deleted: 3
 ```
-The following shows the output when we query data from the `stocks` table.
 
+The following shows the output when we query data from the `stocks` table.
 
 ```
 stocks=# SELECT * FROM stocks
@@ -175,7 +169,7 @@ stocks-# ORDER BY id;
 ----+--------+---------
 (0 rows)
 ```
+
 All rows in the stocks table have been deleted as expected.
 
 In this tutorial, we have shown you how to delete data from a PostgreSQL table in the PHP application using PDO API.
-

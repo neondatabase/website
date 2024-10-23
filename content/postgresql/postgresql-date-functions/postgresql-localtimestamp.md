@@ -1,33 +1,29 @@
 ---
-title: "PostgreSQL LOCALTIMESTAMP Function"
-page_title: "PostgreSQL LOCALTIMESTAMP Function By Examples"
-page_description: "This tutorial shows you how to use the PostgreSQL LOCALTIMESTAMP function to return the date and time at which the current transaction starts."
-prev_url: "https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtimestamp/"
-ogImage: ""
-updatedOn: "2024-01-26T10:03:19+00:00"
+title: 'PostgreSQL LOCALTIMESTAMP Function'
+page_title: 'PostgreSQL LOCALTIMESTAMP Function By Examples'
+page_description: 'This tutorial shows you how to use the PostgreSQL LOCALTIMESTAMP function to return the date and time at which the current transaction starts.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtimestamp/'
+ogImage: ''
+updatedOn: '2024-01-26T10:03:19+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL LOCALTIME Function"
-  slug: "postgresql-date-functions/postgresql-localtime"
-nextLink: 
-  title: "PostgreSQL DATE_PART() Function"
-  slug: "postgresql-date-functions/postgresql-date_part"
+previousLink:
+  title: 'PostgreSQL LOCALTIME Function'
+  slug: 'postgresql-date-functions/postgresql-localtime'
+nextLink:
+  title: 'PostgreSQL DATE_PART() Function'
+  slug: 'postgresql-date-functions/postgresql-date_part'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LOCALTIMESTAMP` function to return the current date and time at which the current transaction starts.
-
 
 ## Introduction to PostgreSQL LOCALTIMESTAMP function
 
 The following illustrates the syntax of the `LOCALTIMESTAMP` function:
 
-
 ```csssql
 LOCALTIMESTAMP(precision)
 ```
+
 The `LOCALTIMESTAMP` function accepts one argument:
 
 **1\) `precision`**
@@ -40,22 +36,19 @@ The `LOCALTIMESTAMP` function returns a [`TIMESTAMP`](../postgresql-tutorial/pos
 
 The `LOCALTIMESTAMP` function returns a `TIMESTAMP` value **without** time zone whereas the [`CURRENT_TIMESTAMP`](postgresql-current_timestamp) function returns a `TIMESTAMP` **with** the timezone.
 
-
 ## PostgreSQL LOCALTIMESTAMP function examples
 
 Let’s explore some examples of using the `LOCALTIMESTAMP` function
-
 
 ### 1\) Basic PostgreSQL LOCALTIMESTAMP function example
 
 The following example uses the `LOCALTIMESTAMP` function to get the current date and time of the transaction:
 
-
 ```
 SELECT LOCALTIMESTAMP;
 ```
-Output:
 
+Output:
 
 ```
          timestamp
@@ -68,12 +61,11 @@ Output:
 
 To get the timestamp of the current transaction with specific fractional seconds precision, you use the `precision` argument as follows:
 
-
 ```css
 SELECT LOCALTIMESTAMP(2);
 ```
-The result is:
 
+The result is:
 
 ```
        timestamp
@@ -84,5 +76,4 @@ The result is:
 
 ## Summary
 
-* Use the PostgreSQL `LOCALTIMESTAMP` function to return the date and time at which the current transaction starts.
-
+- Use the PostgreSQL `LOCALTIMESTAMP` function to return the date and time at which the current transaction starts.

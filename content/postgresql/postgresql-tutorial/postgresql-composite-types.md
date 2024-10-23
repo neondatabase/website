@@ -1,26 +1,22 @@
 ---
-title: "PostgreSQL Composite Types"
-page_title: "PostgreSQL Composite Types"
-page_description: "In this tutorial, you will learn how to define PostgreSQL composite types to represent the structure of a row or record."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-composite-types/"
-ogImage: ""
-updatedOn: "2024-04-21T14:05:08+00:00"
+title: 'PostgreSQL Composite Types'
+page_title: 'PostgreSQL Composite Types'
+page_description: 'In this tutorial, you will learn how to define PostgreSQL composite types to represent the structure of a row or record.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-composite-types/'
+ogImage: ''
+updatedOn: '2024-04-21T14:05:08+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL BYTEA Data Type"
-  slug: "postgresql-tutorial/postgresql-bytea-data-type"
-nextLink: 
-  title: "How to Compare Two Tables in PostgreSQL"
-  slug: "postgresql-tutorial/compare-two-tables-in-postgresql"
+previousLink:
+  title: 'PostgreSQL BYTEA Data Type'
+  slug: 'postgresql-tutorial/postgresql-bytea-data-type'
+nextLink:
+  title: 'How to Compare Two Tables in PostgreSQL'
+  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to define PostgreSQL composite types to represent the structure of a row or record.
 
 In PostgreSQL, composite types allow you to define [custom data types](postgresql-user-defined-data-types) with multiple fields. These fields can be any built\-in or user\-defined types, including other composite types.
-
 
 ## Defining PostgreSQL composite types
 
@@ -28,35 +24,34 @@ To define a composite type, use the `CREATE TYPE` statement followed by the type
 
 Here’s the basic syntax for defining a composite type:
 
-
 ```sql
 CREATE TYPE type_name AS (
     field1 data_type1,
-    field2 data_type2, 
+    field2 data_type2,
     ...
 );
 ```
+
 In this syntax:
 
-* First, specify the name of the composite type (`type_name`) after the `CREATE TYPE` keywords.
-* Second, define a list of fields of the composite type along with their respective data types.
+- First, specify the name of the composite type (`type_name`) after the `CREATE TYPE` keywords.
+- Second, define a list of fields of the composite type along with their respective data types.
 
 For example, the following statement defines the address type that stores address information including street, city, state, zip code, and country:
 
-
 ```sql
 CREATE TYPE address_type AS(
-   street text, 
+   street text,
    city text,
-   state text, 
+   state text,
    zip_code integer,
    country text
 );
 ```
+
 After defining a composite type, you can use it as a data type of a table column.
 
 For example, the following statement [creates a table](postgresql-create-table) called `contacts` whose type of `address` column is the `address_type`:
-
 
 ```sql
 CREATE TABLE contacts(
@@ -65,37 +60,36 @@ CREATE TABLE contacts(
     address address_type
 );
 ```
-Please note that when creating a table, PostgreSQL implicitly creates a corresponding composite type. In this example, PostgreSQL automatically creates the `contacts` composite type.
 
+Please note that when creating a table, PostgreSQL implicitly creates a corresponding composite type. In this example, PostgreSQL automatically creates the `contacts` composite type.
 
 ## Inserting values into a composite column
 
 To construct a composite value, you use the `ROW` expression syntax:
 
-
 ```sql
 ROW(value1, value2, ...)
 ```
-In this syntax, the `ROW` keyword is optional when you have multiple fields in the expression. Therefore, you can simplify the composite value as follows:
 
+In this syntax, the `ROW` keyword is optional when you have multiple fields in the expression. Therefore, you can simplify the composite value as follows:
 
 ```sql
 (value1, value2, ...)
 ```
-To indicate a `NULL`, you can use the `NULL` keyword:
 
+To indicate a `NULL`, you can use the `NULL` keyword:
 
 ```sql
 (value1, NULL, value3, ...)
 ```
-Alternatively, you can omit it in the expression:
 
+Alternatively, you can omit it in the expression:
 
 ```sql
 (value1,, value3, ...)
 ```
-For example, the following statement inserts a new row into the `contacts` table:
 
+For example, the following statement inserts a new row into the `contacts` table:
 
 ```sql
 INSERT INTO contacts (name, address)
@@ -104,14 +98,14 @@ VALUES (
     ROW('123 St', 'Houston', 'TX', 77001, 'USA')
 );
 ```
-In this example, we use the following composite value to insert into the `address` column:
 
+In this example, we use the following composite value to insert into the `address` column:
 
 ```sql
 ROW('123 St', 'Houston', 'TX', 77001, 'USA')
 ```
-The following statement inserts a value into individual fields of the `address` column:
 
+The following statement inserts a value into individual fields of the `address` column:
 
 ```sql
 INSERT INTO contacts (
@@ -124,19 +118,18 @@ INSERT INTO contacts (
 VALUES
   ('Jane Doe', '4000 N. 1st Street', 'San Jose', 'CA', 95134);
 ```
-In this statement, we use the column name, followed by a dot, and field name to indicate the field of a composite type.
 
+In this statement, we use the column name, followed by a dot, and field name to indicate the field of a composite type.
 
 ## Querying composite values
 
 The following statement retrieves the rows from the `contacts` table:
 
-
 ```sql
 SELECT * FROM contacts;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    name    |                   address
@@ -145,14 +138,14 @@ Output:
   2 | Jane Doe   | ("4000 N. 1st Street","San Jose",CA,95134,)
 (2 rows)
 ```
-To query individual fields of a composite type, you use the following syntax:
 
+To query individual fields of a composite type, you use the following syntax:
 
 ```sql
 (column_name).field_name
 ```
-For example, the following statement retrieves the id, name, city, state, and zip code of contacts:
 
+For example, the following statement retrieves the id, name, city, state, and zip code of contacts:
 
 ```sql
 SELECT
@@ -164,8 +157,8 @@ SELECT
 FROM
   contacts;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    name    |   city   | state | zip_code
@@ -174,8 +167,8 @@ Output:
   2 | Jane Doe   | San Jose | CA    |    95134
 (2 rows)
 ```
-If you retrieve all fields from a composite value, you can use the asterisk (`*`) shorthand:
 
+If you retrieve all fields from a composite value, you can use the asterisk (`*`) shorthand:
 
 ```sql
 SELECT
@@ -185,8 +178,8 @@ SELECT
 FROM
   contacts;
 ```
-Output:
 
+Output:
 
 ```sql
  id |    name    |       street       |   city   | state | zip_code | country
@@ -200,7 +193,6 @@ Output:
 
 The following example [updates](postgresql-update) the country of the contact id 2 to `USA`:
 
-
 ```sql
 UPDATE contacts
 SET
@@ -209,8 +201,8 @@ WHERE
   id = 2
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id |   name   |                    address
@@ -218,10 +210,9 @@ Output:
   2 | Jane Doe | ("4000 N. 1st Street","San Jose",CA,95134,USA)
 (1 row)
 ```
-In this example, you cannot put the parentheses around the column name of the composite type after the `SET` keyword.
 
+In this example, you cannot put the parentheses around the column name of the composite type after the `SET` keyword.
 
 ## Summary
 
-* Composite types allow you to define custom data types that include multiple fields.
-
+- Composite types allow you to define custom data types that include multiple fields.

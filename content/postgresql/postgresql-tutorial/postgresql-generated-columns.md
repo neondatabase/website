@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Generated Columns"
-page_title: "PostgreSQL Generated Columns"
-page_description: "In this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generated-columns/"
-ogImage: ""
-updatedOn: "2024-03-25T08:00:13+00:00"
+title: 'PostgreSQL Generated Columns'
+page_title: 'PostgreSQL Generated Columns'
+page_description: 'In this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generated-columns/'
+ogImage: ''
+updatedOn: '2024-03-25T08:00:13+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Identity Column"
-  slug: "postgresql-tutorial/postgresql-identity-column"
-nextLink: 
-  title: "PostgreSQL ALTER TABLE"
-  slug: "postgresql-tutorial/postgresql-alter-table"
+previousLink:
+  title: 'PostgreSQL Identity Column'
+  slug: 'postgresql-tutorial/postgresql-identity-column'
+nextLink:
+  title: 'PostgreSQL ALTER TABLE'
+  slug: 'postgresql-tutorial/postgresql-alter-table'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns.
-
 
 ## Introduction to PostgreSQL Generated Columns
 
@@ -28,18 +24,16 @@ A generated column is referred to as a [computed column in the SQL Server](https
 
 There are two kinds of generated columns:
 
-* Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
-* Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
+- Stored: A stored generated column is calculated when it is inserted or updated and occupies storage space.
+- Virtual: A virtual generated column is computed when it is read and does not occupy storage space.
 
 A virtual generated column is like a [view](../postgresql-views), whereas a stored generated column is similar to a [materialized view](../postgresql-views/postgresql-materialized-views). Unlike a material view, PostgreSQL automatically updates data for stored generated columns.
 
 **PostgreSQL currently implements only stored generated columns.**
 
-
 ### Defining generated columns
 
 Typically, you define a generated column when [creating a table](postgresql-create-table) with the following syntax:
-
 
 ```plaintextsql
 CREATE TABLE table_name(
@@ -48,38 +42,36 @@ CREATE TABLE table_name(
    ...
 );
 ```
+
 In this syntax:
 
-* `column_name`: Specify the name of the generated column.
-* `type`: Specify the data type for the column.
-* `expression`: Provide an expression that returns values for the calculated column.
-* `STORED` keyword: Indicate that the data of the generated column is physically stored in the table.
-* `VIRTUAL` keyword: Indicate that the data of the generated column is computed when queried, not stored physically.
+- `column_name`: Specify the name of the generated column.
+- `type`: Specify the data type for the column.
+- `expression`: Provide an expression that returns values for the calculated column.
+- `STORED` keyword: Indicate that the data of the generated column is physically stored in the table.
+- `VIRTUAL` keyword: Indicate that the data of the generated column is computed when queried, not stored physically.
 
 To add a generated column to a table, you can use the [ALTER TABLE … ADD COLUMN](postgresql-add-column) statement:
-
 
 ```sql
 ALTER TABLE table_name
 ADD COLUMN column_name type GENERATED ALWAYS AS (expression) STORED;
 ```
+
 When defining an expression for a generated column, ensure that it meets the following requirements:
 
-* The expression can only use immutable functions and cannot involve [subqueries](postgresql-subquery) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT\_TIMESTAMP](../postgresql-date-functions/postgresql-current_timestamp) function.
-* The expression cannot reference another generated column or a system column, except `tableoid`.
+- The expression can only use immutable functions and cannot involve [subqueries](postgresql-subquery) or reference anything beyond the current row. For example, the expression cannot use the [CURRENT_TIMESTAMP](../postgresql-date-functions/postgresql-current_timestamp) function.
+- The expression cannot reference another generated column or a system column, except `tableoid`.
 
 A generated column cannot have a default value or an identity definition. Additionally, it cannot be a part of the partition key.
-
 
 ## PostgreSQL Generated Column examples
 
 Let’s explore some examples of using generated columns.
 
-
 ### 1\) Concatenating columns
 
 First, create a new table called `contacts`:
-
 
 ```sql
 CREATE TABLE contacts(
@@ -91,8 +83,8 @@ CREATE TABLE contacts(
 );
 
 ```
-Second, insert rows into the `contacts` table. The values of the `full_name` column will be automatically updated from the values in the `first_name` and `last_name` columns:
 
+Second, insert rows into the `contacts` table. The values of the `full_name` column will be automatically updated from the values in the `first_name` and `last_name` columns:
 
 ```sql
 INSERT INTO contacts(first_name, last_name, email)
@@ -101,8 +93,8 @@ VALUES
    ('Jane', 'Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | first_name | last_name | full_name |              email
@@ -116,7 +108,6 @@ Output:
 
 First, create a table called `products` that stores the product information:
 
-
 ```
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
@@ -127,14 +118,14 @@ CREATE TABLE products (
     net_price DECIMAL(10, 2) GENERATED ALWAYS AS ((list_price + (list_price * tax / 100)) - (list_price * discount / 100)) STORED
 );
 ```
-In the `products` table, the `net_price` column is a generated column whose values are calculated based on the list price, tax, and discount with the following formula:
 
+In the `products` table, the `net_price` column is a generated column whose values are calculated based on the list price, tax, and discount with the following formula:
 
 ```sql
 list_price = list_price + (list_price * tax / 100)) - (list_price * discount / 100)
 ```
-Second, insert rows into the `products` table:
 
+Second, insert rows into the `products` table:
 
 ```
 INSERT INTO products (name, list_price, tax, discount)
@@ -144,8 +135,8 @@ VALUES
     ('C', 120.00, 12.50, 10.00)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```
  id | name | list_price |  tax  | discount | net_price
@@ -158,5 +149,4 @@ Output:
 
 ## Summary
 
-* Use generated columns to automate calculations within your table.
-
+- Use generated columns to automate calculations within your table.

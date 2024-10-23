@@ -1,26 +1,22 @@
 ---
-title: "PostgreSQL C#: Selecting Data"
-page_title: "PostgreSQL C#: Selecting Data"
-page_description: "In this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C# program."
-prev_url: "https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-select/"
-ogImage: ""
-updatedOn: "2024-05-21T03:40:01+00:00"
+title: 'PostgreSQL C#: Selecting Data'
+page_title: 'PostgreSQL C#: Selecting Data'
+page_description: 'In this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C# program.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-select/'
+ogImage: ''
+updatedOn: '2024-05-21T03:40:01+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL C#: Deleting Data"
-  slug: "postgresql-csharp/postgresql-csharp-delete"
-nextLink: 
-  title: "PostgreSQL C#: Transaction"
-  slug: "postgresql-csharp/postgresql-csharp-transaction"
+previousLink:
+  title: 'PostgreSQL C#: Deleting Data'
+  slug: 'postgresql-csharp/postgresql-csharp-delete'
+nextLink:
+  title: 'PostgreSQL C#: Transaction'
+  slug: 'postgresql-csharp/postgresql-csharp-transaction'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C\# program.
 
 This tutorial begins where [Deleting data from PostgreSQL using C\#](postgresql-csharp-delete) is left off.
-
 
 ## How to query data from PostgreSQL using C\#
 
@@ -32,16 +28,14 @@ Second, create a command object `NpgsqlCommand` with a `SELECT` statement from t
 
 Third, execute the `SELECT` statement by calling one of the following methods of the `NpgsqlCommand` object:
 
-* `ExecuteReaderAsync()` – executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query’s result set.
-* `ExecuteScalarAsync()` – executes a query that returns a scalar value such as a query that uses an [aggregate function](../postgresql-aggregate-functions) to return a [count](../postgresql-aggregate-functions/postgresql-count-function), [sum](../postgresql-aggregate-functions/postgresql-sum-function), [maximum](../postgresql-aggregate-functions/postgresql-max-function), [minimum](../postgresql-aggregate-functions/postgresql-min-function), and [average value](../postgresql-aggregate-functions/postgresql-avg-function).
+- `ExecuteReaderAsync()` – executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query’s result set.
+- `ExecuteScalarAsync()` – executes a query that returns a scalar value such as a query that uses an [aggregate function](../postgresql-aggregate-functions) to return a [count](../postgresql-aggregate-functions/postgresql-count-function), [sum](../postgresql-aggregate-functions/postgresql-sum-function), [maximum](../postgresql-aggregate-functions/postgresql-max-function), [minimum](../postgresql-aggregate-functions/postgresql-min-function), and [average value](../postgresql-aggregate-functions/postgresql-avg-function).
 
 Finally, iterate over the result set and use the Get\* methods of the NpgsqlDataReader object to retrieve the values of columns in each row.
-
 
 ## Querying all rows from a table
 
 The following program queries all rows from the `students` table in the `elearning` database:
-
 
 ```cs
 using Npgsql;
@@ -86,8 +80,8 @@ catch (NpgsqlException ex)
     Console.WriteLine($"Error: {ex.Message}");
 }
 ```
-Output:
 
+Output:
 
 ```cs
 2       Emma    Smith   [[email protected]](../cdn-cgi/l/email-protection.html)    5/20/2024
@@ -105,7 +99,6 @@ Output:
 ## Querying data with parameters
 
 The following program shows how to retrieve the students who registered on `2024-05-10` from the `students` table:
-
 
 ```cs
 using Npgsql;
@@ -151,8 +144,8 @@ catch (NpgsqlException ex)
     Console.WriteLine($"Error: {ex.Message}");
 }
 ```
-Output:
 
+Output:
 
 ```cs
 Sophia  5/10/2024
@@ -164,7 +157,6 @@ Benjamin        5/10/2024
 ## Querying a scalar value
 
 The following program shows how to select the total number of students from the `students` table using the [count(\*)](../postgresql-aggregate-functions/postgresql-count-function) aggregate function:
-
 
 ```cs
 using Npgsql;
@@ -191,8 +183,8 @@ catch (NpgsqlException ex)
     Console.WriteLine($"Error: {ex.Message}");
 }
 ```
-Output:
 
+Output:
 
 ```
 Student count: 10
@@ -200,6 +192,5 @@ Student count: 10
 
 ## Summary
 
-* Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
-* Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.
-
+- Call the `ExecuteReaderAsync()` method of a `NpgsqlCommand` object to execute a query that returns a result set.
+- Call the `ExecuteScalarAsync()` method of the `NpgsqlCommand` object to execute a query that returns a scalar value.

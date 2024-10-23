@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Primary Key"
-page_title: "PostgreSQL Primary Key"
-page_description: "In this tutorial, we will show you what is the primary key is and how to manage PostgreSQL primary key constraints through SQL statements."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/"
-ogImage: ""
-updatedOn: "2024-01-25T07:25:38+00:00"
+title: 'PostgreSQL Primary Key'
+page_title: 'PostgreSQL Primary Key'
+page_description: 'In this tutorial, we will show you what is the primary key is and how to manage PostgreSQL primary key constraints through SQL statements.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/'
+ogImage: ''
+updatedOn: '2024-01-25T07:25:38+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples"
-  slug: "postgresql-tutorial/postgresql-copy-table"
-nextLink: 
-  title: "PostgreSQL Foreign Key"
-  slug: "postgresql-tutorial/postgresql-foreign-key"
+previousLink:
+  title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
+  slug: 'postgresql-tutorial/postgresql-copy-table'
+nextLink:
+  title: 'PostgreSQL Foreign Key'
+  slug: 'postgresql-tutorial/postgresql-foreign-key'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about the PostgreSQL primary key and how to manage primary key constraints effectively.
-
 
 ## Introduction to PostgreSQL primary key
 
@@ -32,44 +28,43 @@ Technically, a primary key constraint is the combination of a [not\-null constra
 
 Typically, you define primary for a table when creating it:
 
-
 ```phpsql
 CREATE TABLE table_name (
-  column_1 data_type PRIMARY KEY, 
+  column_1 data_type PRIMARY KEY,
   column_2 data_type,
   …
 );
 ```
+
 In this syntax, you define the primary key as the column constraint of the primary key column.
 
 If the primary key consists of more than one column, you can define it using the table constraint:
 
-
 ```sql
 CREATE TABLE table_name (
-  column_1 data_type, 
+  column_1 data_type,
   column_2 data_type,
   column_3 data_type,
   …
   PRIMARY KEY(column_1, column2, ...)
 );
 ```
+
 To add a primary key to an existing table, you the `ALTER TABLE ... ADD PRIMARY KEY` statement:
 
-
 ```
-ALTER TABLE table_name 
+ALTER TABLE table_name
 ADD PRIMARY KEY (column_1, column_2, ...);
 ```
+
 If you don’t explicitly specify the name for the primary key constraint, PostgreSQL will assign a default name to the primary key constraint.
 
 By default, PostgreSQL uses the format `table-name_pkey` as the default name for the primary key constraint.
 
 To assign a name for the primary key, you can use the `CONSTRAINT` clause as follows:
 
-
 ```
-CONSTRAINT constraint_name 
+CONSTRAINT constraint_name
 PRIMARY KEY(column_1, column_2,...);
 ```
 
@@ -77,38 +72,35 @@ PRIMARY KEY(column_1, column_2,...);
 
 Let’s explore some examples of using the PostgreSQL primary key.
 
-
 ### 1\) Creating a table with a primary key that consists of one column
 
 The following statement creates a table with a primary key that consists of one column:
 
-
 ```
 CREATE TABLE orders(
-  order_id SERIAL PRIMARY KEY, 
-  customer_id VARCHAR(255) NOT NULL, 
+  order_id SERIAL PRIMARY KEY,
+  customer_id VARCHAR(255) NOT NULL,
   order_date DATE NOT NULL
 );
 ```
-In this example, we create the orders with the order\_id as the primary key.
 
-We define the order\_id column with the type SERIAL so that PostgreSQL will generate a unique integer (1, 2, 3, and so on) when you insert a new row into the table without providing the value for the order\_id column.
+In this example, we create the orders with the order_id as the primary key.
 
-This ensures the value in the order\_id is unique for every row in the table.
+We define the order_id column with the type SERIAL so that PostgreSQL will generate a unique integer (1, 2, 3, and so on) when you insert a new row into the table without providing the value for the order_id column.
 
+This ensures the value in the order_id is unique for every row in the table.
 
 ### 2\) Creating a table with a primary key that consists of two columns
 
 The following example shows how to define a primary key that consists of two columns `order_id` and `item_no`:
 
-
 ```sql
 CREATE TABLE order_items(
-  order_id INT, 
-  item_no SERIAL, 
-  item_description VARCHAR NOT NULL, 
-  quantity INTEGER NOT NULL, 
-  price DEC(10, 2), 
+  order_id INT,
+  item_no SERIAL,
+  item_description VARCHAR NOT NULL,
+  quantity INTEGER NOT NULL,
+  price DEC(10, 2),
   PRIMARY KEY (order_id, item_no)
 );
 
@@ -118,20 +110,19 @@ CREATE TABLE order_items(
 
 First, create a table called `products` without defining any primary key.
 
-
 ```sql
 CREATE TABLE products (
-  product_id INT, 
+  product_id INT,
   name VARCHAR(255) NOT NULL,
-  description TEXT, 
+  description TEXT,
   price DEC(10, 2) NOT NULL
 );
 ```
+
 Second, add a primary key constraint to the `products` table using the `ALTER TABLE ... ADD PRIMARY KEY` statement:
 
-
 ```sql
-ALTER TABLE products 
+ALTER TABLE products
 ADD PRIMARY KEY (product_id);
 ```
 
@@ -139,26 +130,25 @@ ADD PRIMARY KEY (product_id);
 
 First, create a new table called `vendors` that does not have a primary key:
 
-
 ```sql
 CREATE TABLE vendors (
   name VARCHAR(255)
 );
 ```
+
 Second, insert some rows into the `vendors` table:
 
-
 ```sql
-INSERT INTO vendors (name) 
-VALUES 
-  ('Microsoft'), 
-  ('IBM'), 
-  ('Apple'), 
+INSERT INTO vendors (name)
+VALUES
+  ('Microsoft'),
+  ('IBM'),
+  ('Apple'),
   ('Samsung')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
    name
@@ -170,25 +160,25 @@ Output:
 (4 rows)
 
 ```
+
 Third, add a primary key named `vendor_id` into the `vendors` table with the type `SERIAL`:
 
-
 ```sql
-ALTER TABLE vendors 
+ALTER TABLE vendors
 ADD COLUMN vendor_id SERIAL PRIMARY KEY;
 ```
-Finally, verify the vendor\_id column:
 
+Finally, verify the vendor_id column:
 
 ```sql
-SELECT 
-  vendor_id, 
-  name 
-FROM 
+SELECT
+  vendor_id,
+  name
+FROM
   vendors;
 ```
-Output:
 
+Output:
 
 ```sql
  vendor_id |   name
@@ -204,26 +194,25 @@ Output:
 
 To remove a primary key from a table, you use the following `ALTER TABLE` statement:
 
-
 ```
-ALTER TABLE table_name 
+ALTER TABLE table_name
 DROP CONSTRAINT primary_key_constraint;
 ```
+
 In this syntax:
 
-* First, specify the name of the table from which you want to remove the primary key.
-* Second, provide the primary key constraint to drop.
+- First, specify the name of the table from which you want to remove the primary key.
+- Second, provide the primary key constraint to drop.
 
 Let’s take an example of removing the primary key constraint from the `vendors` table using psql.
 
 First, display the structure of the `vendors` table using the \\d command:
 
-
 ```sql
 \d vendors
 ```
-Output:
 
+Output:
 
 ```
                                          Table "public.vendors"
@@ -236,30 +225,30 @@ Indexes:
 
 
 ```
-The output indicates that the primary key constraint is vendors\_pkey.
+
+The output indicates that the primary key constraint is vendors_pkey.
 
 Second, drop the primary key from the `vendors` table using the `ALTER TABLE ... DROP CONSTRAINT` statement:
-
 
 ```
 ALTER TABLE vendors
 DROP CONSTRAINT vendors_pkey;
 ```
-Output:
 
+Output:
 
 ```
 ALTER TABLE
 ```
-The statement removes only the primary key constraint but does not remove the vendor\_id column:
 
+The statement removes only the primary key constraint but does not remove the vendor_id column:
 
 ```
-SELECT vendor_id, name 
+SELECT vendor_id, name
 FROM vendors;
 ```
-Output:
 
+Output:
 
 ```
  vendor_id |   name
@@ -273,7 +262,6 @@ Output:
 
 ## Summary
 
-* Use the `PRIMARY KEY` constraint to define a primary key for a table when creating the table.
-* Use the `ALTER TABLE ... ADD PRIMARY KEY` statement to add a primary key to a table.
-* Use the `ALTER TABLE ... DROP CONSTRAINT` statement to drop a primary key from a table.
-
+- Use the `PRIMARY KEY` constraint to define a primary key for a table when creating the table.
+- Use the `ALTER TABLE ... ADD PRIMARY KEY` statement to add a primary key to a table.
+- Use the `ALTER TABLE ... DROP CONSTRAINT` statement to drop a primary key from a table.

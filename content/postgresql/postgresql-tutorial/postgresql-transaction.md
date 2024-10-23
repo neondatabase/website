@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Transaction"
-page_title: "PostgreSQL Transaction"
-page_description: "This tutorial shows you how to manage PostgreSQL transactions using the BEGIN, COMMIT, and ROLLBACK statements."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction/"
-ogImage: "/postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png"
-updatedOn: "2024-02-13T15:07:37+00:00"
+title: 'PostgreSQL Transaction'
+page_title: 'PostgreSQL Transaction'
+page_description: 'This tutorial shows you how to manage PostgreSQL transactions using the BEGIN, COMMIT, and ROLLBACK statements.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction/'
+ogImage: '/postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png'
+updatedOn: '2024-02-13T15:07:37+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL MERGE Statement"
-  slug: "postgresql-tutorial/postgresql-merge"
-nextLink: 
-  title: "Import CSV File Into PostgreSQL Table"
-  slug: "postgresql-tutorial/import-csv-file-into-posgresql-table"
+previousLink:
+  title: 'PostgreSQL MERGE Statement'
+  slug: 'postgresql-tutorial/postgresql-merge'
+nextLink:
+  title: 'Import CSV File Into PostgreSQL Table'
+  slug: 'postgresql-tutorial/import-csv-file-into-posgresql-table'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions using the `BEGIN`, `COMMIT`, and `ROLLBACK` statements.
-
 
 ## What is a database transaction?
 
@@ -30,16 +26,14 @@ This implies that if the sender account transfers X amount, the receiver receive
 
 A PostgreSQL transaction is atomic, consistent, isolated, and durable. These properties are often referred to collectively as ACID:
 
-* **Atomicity** guarantees that the transaction is completed in an all\-or\-nothing manner.
-* **Consistency** ensures that changes to data written to the database are valid and adhere to predefined rules.
-* **Isolation** determines how the integrity of a transaction is visible to other transactions.
-* **Durability** ensures that transactions that have been committed are permanently stored in the database.
-
+- **Atomicity** guarantees that the transaction is completed in an all\-or\-nothing manner.
+- **Consistency** ensures that changes to data written to the database are valid and adhere to predefined rules.
+- **Isolation** determines how the integrity of a transaction is visible to other transactions.
+- **Durability** ensures that transactions that have been committed are permanently stored in the database.
 
 ## Setting up a sample table
 
 Let’s [create a new table](postgresql-create-table) called `accounts` for the demonstration:
-
 
 ```sql
 DROP TABLE IF EXISTS accounts;
@@ -58,31 +52,30 @@ When you execute a statement, PostgreSQL implicitly wraps it in a transaction.
 
 For example, when you execute the following [`INSERT`](postgresql-insert) statement, PostgreSQL immediately inserts a new row into the `accounts` table:
 
-
 ```sql
 INSERT INTO accounts(name,balance)
 VALUES('Bob',10000);
 ```
-To start a transaction explicitly, you execute either one of the following statements:
 
+To start a transaction explicitly, you execute either one of the following statements:
 
 ```sql
 BEGIN TRANSACTION;
 ```
-Or
 
+Or
 
 ```sql
 BEGIN WORK;
 ```
-Or
 
+Or
 
 ```sql
 BEGIN;
 ```
-For example, the following statements start a new transaction and insert a new account into the `accounts` table:
 
+For example, the following statements start a new transaction and insert a new account into the `accounts` table:
 
 ```sql
 BEGIN;
@@ -90,28 +83,27 @@ BEGIN;
 INSERT INTO accounts(name,balance)
 VALUES('Alice',10000);
 ```
+
 From the current session, you can see the change by retrieving data from the `accounts` table:
 
-
 ```sql
-SELECT 
+SELECT
     id,
     name,
     balance
-FROM 
+FROM
     accounts;
 ```
 
 ![PostgreSQL Transaction - from current session](/postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png)
 However, you will not see the change if you connect to the PostgreSQL server in a new session and execute the query above:
 
-
 ```sql
-SELECT 
+SELECT
     id,
     name,
     balance
-FROM 
+FROM
     accounts;
 ```
 
@@ -121,31 +113,30 @@ FROM
 
 To permanently apply the change to the database, you commit the transaction by using the `COMMIT WORK` statement:
 
-
 ```sql
 COMMIT WORK;
 ```
-or
 
+or
 
 ```sql
 COMMIT TRANSACTION;
 ```
-or simply:
 
+or simply:
 
 ```sql
 COMMIT;
 ```
+
 Other sessions can view the change by retrieving data from the `accounts` table:
 
-
 ```sql
-SELECT 
+SELECT
     id,
     name,
     balance
-FROM 
+FROM
     accounts;
 ```
 
@@ -153,7 +144,6 @@ FROM
 After executing the `COMMIT` statement, PostgreSQL guarantees that the change will be durable if a crash happens.
 
 Put it all together.
-
 
 ```sql
 -- start a transaction
@@ -171,26 +161,25 @@ COMMIT;
 
 If you want to undo the changes to the database, you can use the ROLLBACK statement:
 
-
 ```
 ROLLBACK;
 ```
-Or more clear:
 
+Or more clear:
 
 ```
 ROLLBACK TRANSACTION;
 ```
-Or:
 
+Or:
 
 ```
 ROLLBACK WORK;
 ```
+
 The `ROLLBACK` statement undos the changes that you made within the transaction.
 
 For example, the following example uses the `ROLLBACK` statement to roll back the changes made to the account 1:
-
 
 ```
 -- start a transaction
@@ -203,14 +192,14 @@ WHERE id =  1;
 -- rollback the changes
 ROLLBACK;
 ```
-If you retrieve data from the accounts table, you’ll won’t see the changes because it was rolled back.
 
+If you retrieve data from the accounts table, you’ll won’t see the changes because it was rolled back.
 
 ```
 SELECT * FROM accounts;
 ```
-Output:
 
+Output:
 
 ```
  id | name  | balance
@@ -219,12 +208,11 @@ Output:
   2 | Alice | 10000.00
 (2 rows)
 ```
-In practice, you’ll use transactions in [stored procedures](../postgresql-plpgsql/postgresql-create-procedure) in PostgreSQL and in the application code such as [PHP](../postgresql-php/transaction), [Java](../postgresql-jdbc/transaction), and [Python](../postgresql-python/transaction).
 
+In practice, you’ll use transactions in [stored procedures](../postgresql-plpgsql/postgresql-create-procedure) in PostgreSQL and in the application code such as [PHP](../postgresql-php/transaction), [Java](../postgresql-jdbc/transaction), and [Python](../postgresql-python/transaction).
 
 ## Summary
 
-* Use the `BEGIN` statement to explicitly start a transaction
-* Use the `COMMIT` statement to apply the changes permanently to the database.
-* Use the `ROLLBACK` statement to undo the changes made to the database during the transaction.
-
+- Use the `BEGIN` statement to explicitly start a transaction
+- Use the `COMMIT` statement to apply the changes permanently to the database.
+- Use the `ROLLBACK` statement to undo the changes made to the database during the transaction.

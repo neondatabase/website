@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL REAL Data Type"
-page_title: "PostgreSQL REAL Data Type"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL REAL data type to store single-precision floating-point numbers in the database."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-real-data-type/"
-ogImage: ""
-updatedOn: "2024-04-19T03:13:41+00:00"
+title: 'PostgreSQL REAL Data Type'
+page_title: 'PostgreSQL REAL Data Type'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL REAL data type to store single-precision floating-point numbers in the database.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-real-data-type/'
+ogImage: ''
+updatedOn: '2024-04-19T03:13:41+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL DOUBLE PRECISION Data Type"
-  slug: "postgresql-tutorial/postgresql-double-precision-type"
-nextLink: 
-  title: "PostgreSQL Integer Data Types"
-  slug: "postgresql-tutorial/postgresql-integer"
+previousLink:
+  title: 'PostgreSQL DOUBLE PRECISION Data Type'
+  slug: 'postgresql-tutorial/postgresql-double-precision-type'
+nextLink:
+  title: 'PostgreSQL Integer Data Types'
+  slug: 'postgresql-tutorial/postgresql-integer'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REAL` data type to store single\-precision floating\-point numbers in the database.
-
 
 ## Introduction to the PostgreSQL REAL data type
 
@@ -30,11 +26,9 @@ Typically, you use the `REAL` data type to store floating\-point numbers with re
 
 However, you can use the [double precision](postgresql-double-precision-type) data type if you need higher precision.
 
-
 ## PostgreSQL REAL data type example
 
 First, [create a table](postgresql-create-table) called `weathers` to store wind speed (meter per second) and temperature (celsius) data:
-
 
 ```sql
 CREATE TABLE weathers(
@@ -45,11 +39,11 @@ CREATE TABLE weathers(
     recorded_at TIMESTAMP NOT NULL
 );
 ```
+
 Second, [insert rows](postgresql-insert) into the `weathers` table:
 
-
 ```sql
-INSERT INTO weathers (location, wind_speed_mps, temperature_celsius, recorded_at) 
+INSERT INTO weathers (location, wind_speed_mps, temperature_celsius, recorded_at)
 VALUES
     ('New York', 5.2, 15.3, '2024-04-19 09:00:00'),
     ('New York', 4.8, 14.9, '2024-04-19 10:00:00'),
@@ -62,8 +56,8 @@ VALUES
     ('New York', 4.7, 14.8, '2024-04-19 17:00:00'),
     ('New York', 5.3, 15.9, '2024-04-19 18:00:00');
 ```
-Third, calculate the [average](../postgresql-aggregate-functions/postgresql-avg-function) wind speed and temperature in `New York` on `April 19, 2024`:
 
+Third, calculate the [average](../postgresql-aggregate-functions/postgresql-avg-function) wind speed and temperature in `New York` on `April 19, 2024`:
 
 ```sql
 SELECT
@@ -75,8 +69,8 @@ WHERE
   location = 'New York'
   AND DATE(recorded_at) = '2024-04-19';
 ```
-Output:
 
+Output:
 
 ```sql
     wind_speed     | temperature_celsius
@@ -87,5 +81,4 @@ Output:
 
 ## Summary
 
-* Use the PostgreSQL `REAL` data type to store single\-precision floating\-point numbers in the database.
-
+- Use the PostgreSQL `REAL` data type to store single\-precision floating\-point numbers in the database.

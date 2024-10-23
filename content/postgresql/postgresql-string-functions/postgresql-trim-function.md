@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL TRIM() Function"
-page_title: "PostgreSQL TRIM() Function"
-page_description: "Use the PostgreSQL TRIM() function to remove the specified characters from the leading, trailing, or both leading and trailing of a string."
-prev_url: "https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/"
-ogImage: ""
-updatedOn: "2024-01-27T14:01:40+00:00"
+title: 'PostgreSQL TRIM() Function'
+page_title: 'PostgreSQL TRIM() Function'
+page_description: 'Use the PostgreSQL TRIM() function to remove the specified characters from the leading, trailing, or both leading and trailing of a string.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/'
+ogImage: ''
+updatedOn: '2024-01-27T14:01:40+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL LENGTH() Function"
-  slug: "postgresql-string-functions/postgresql-length-function"
-nextLink: 
-  title: "PostgreSQL LTRIM() Function"
-  slug: "postgresql-string-functions/postgresql-ltrim"
+previousLink:
+  title: 'PostgreSQL LENGTH() Function'
+  slug: 'postgresql-string-functions/postgresql-length-function'
+nextLink:
+  title: 'PostgreSQL LTRIM() Function'
+  slug: 'postgresql-string-functions/postgresql-ltrim'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TRIM()` function to remove specified prefixes or suffixes (or both) from a string.
-
 
 ## Introduction to PostgreSQL TRIM() function
 
@@ -26,41 +22,38 @@ The `TRIM()` function allows you to remove specified prefixes or suffixes (or bo
 
 Here’s the basic syntax of the `TRIM()` function:
 
-
 ```css
-TRIM([LEADING | TRAILING | BOTH] trim_character 
+TRIM([LEADING | TRAILING | BOTH] trim_character
 FROM source_string)
 
 ```
+
 In this syntax:
 
-* `source_string`: Specify the string that you want to remove specified characters.
-* `trim_character`: Specify the trim characters.
-* `LEADING`: This option instructs the function to remove the leading occurrences of the specified trim character.
-* `TRAILING`: This option instructs the function to remove trailing occurrences of the specified trim character.
-* `BOTH`: This option instructs the function to remove both leading and trailing occurrences of the specified trim character.
+- `source_string`: Specify the string that you want to remove specified characters.
+- `trim_character`: Specify the trim characters.
+- `LEADING`: This option instructs the function to remove the leading occurrences of the specified trim character.
+- `TRAILING`: This option instructs the function to remove trailing occurrences of the specified trim character.
+- `BOTH`: This option instructs the function to remove both leading and trailing occurrences of the specified trim character.
 
 The `TRIM()` function can be very useful when you want to clean up strings.
 
 To remove specific characters from the beginning of a string, you use the [LTRIM()](postgresql-ltrim) function. To remove specific characters from the end of a string, you can use the [RTRIM()](postgresql-rtrim) function.
 
-
 ## PostgreSQL TRIM() function examples
 
 Let’s explore some examples of using the `TRIM()` function.
-
 
 ### 1\) Basic PostgreSQL TRIM() function example
 
 The following example uses the `TRIM()` function to remove leading and trailing spaces from the string `' PostgreSQL '`:
 
-
 ```php
 SELECT TRIM('   PostgreSQL   ') AS trimmed_string;
 
 ```
-Output:
 
+Output:
 
 ```php
  trimmed_string
@@ -68,20 +61,19 @@ Output:
  PostgreSQL
 (1 row)
 ```
-The output is a string without leading and trailing spaces.
 
+The output is a string without leading and trailing spaces.
 
 ### 2\) Using the PostgreSQL TRIM() function to remove specific characters
 
 The following example uses the `TRIM()` function to remove leading and trailing hash symbols (`#`) from the string `'##PostgreSQL##'`:
 
-
 ```
 SELECT TRIM('#' FROM '##PostgreSQL##') AS trimmed_string;
 
 ```
-Output:
 
+Output:
 
 ```php
  trimmed_string
@@ -94,15 +86,14 @@ Output:
 
 The following example uses the PostgreSQL `TRIM()` function to remove leading, trailing, and both leading and trailing zeros from the string `'0000123450'`:
 
-
 ```
 SELECT TRIM(LEADING '0' FROM '000123450') AS trimmed_string_leading,
        TRIM(TRAILING '0' FROM '000123450') AS trimmed_string_trailing,
        TRIM(BOTH '0' FROM '000123450') AS trimmed_string_both;
 
 ```
-Output:
 
+Output:
 
 ```php
  trimmed_string_leading | trimmed_string_trailing | trimmed_string_both
@@ -115,22 +106,21 @@ Output:
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `todo` and [insert](../postgresql-tutorial/postgresql-insert) some sample data:
 
-
 ```
 CREATE TABLE todo(
-  id SERIAL PRIMARY KEY, 
-  title VARCHAR(255) NOT NULL, 
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
   completed BOOL NOT NULL DEFAULT false
 );
 
-INSERT INTO todo(title) 
-VALUES 
-  ('   Learn PostgreSQL   '), 
-  ('Build an App   ') 
+INSERT INTO todo(title)
+VALUES
+  ('   Learn PostgreSQL   '),
+  ('Build an App   ')
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```
  id |         title          | completed
@@ -139,27 +129,27 @@ Output:
   2 | Build an App           | f
 (2 rows)
 ```
-Second, remove the leading and trailing spaces from the `title` column using the `TRIM()` function:
 
+Second, remove the leading and trailing spaces from the `title` column using the `TRIM()` function:
 
 ```
 UPDATE todo
 SET title = TRIM(title);
 ```
-Output:
 
+Output:
 
 ```
 UPDATE 2
 ```
-Third, verify the updates:
 
+Third, verify the updates:
 
 ```
 SELECT * FROM todo;
 ```
-Output:
 
+Output:
 
 ```
  id |      title       | completed
@@ -171,5 +161,4 @@ Output:
 
 ## Summary
 
-* Use the PostgreSQL `TRIM()` function to remove a specified leading, trailing, or both leading and trailing characters from a string.
-
+- Use the PostgreSQL `TRIM()` function to remove a specified leading, trailing, or both leading and trailing characters from a string.

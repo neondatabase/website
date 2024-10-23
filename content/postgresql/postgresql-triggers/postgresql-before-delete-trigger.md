@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL BEFORE DELETE Trigger"
-page_title: "PostgreSQL BEFORE DELETE Trigger"
-page_description: "In this tutorial, you will learn how to define a PostgreSQL BEFORE DELETE trigger that is fired before a row is deleted from a table."
-prev_url: "https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/"
-ogImage: ""
-updatedOn: "2024-03-28T09:57:59+00:00"
+title: 'PostgreSQL BEFORE DELETE Trigger'
+page_title: 'PostgreSQL BEFORE DELETE Trigger'
+page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE DELETE trigger that is fired before a row is deleted from a table.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/'
+ogImage: ''
+updatedOn: '2024-03-28T09:57:59+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL AFTER UPDATE Trigger"
-  slug: "postgresql-triggers/postgresql-after-update-trigger"
-nextLink: 
-  title: "PostgreSQL AFTER DELETE Trigger"
-  slug: "postgresql-triggers/postgresql-after-delete-trigger"
+previousLink:
+  title: 'PostgreSQL AFTER UPDATE Trigger'
+  slug: 'postgresql-triggers/postgresql-after-update-trigger'
+nextLink:
+  title: 'PostgreSQL AFTER DELETE Trigger'
+  slug: 'postgresql-triggers/postgresql-after-delete-trigger'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE DELETE` trigger that is fired before a row is deleted from a table.
-
 
 ## Introduction to the PostgreSQL BEFORE DELETE trigger
 
@@ -36,24 +32,23 @@ To create a `BEFORE DELETE` trigger, follow these steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute before a `DELETE` operation:
 
-
 ```sql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
 BEGIN
     -- This logic will be executed before the DELETE operation
-    
+
     -- To access the values of rows being deleted:
     -- OLD.column_name
-    
+
     RETURN OLD;
 END;
 $$
 LANGUAGE plpgsql;
 ```
-Second, create a trigger and associate the trigger function with it:
 
+Second, create a trigger and associate the trigger function with it:
 
 ```sql
 CREATE TRIGGER trigger_name
@@ -68,7 +63,6 @@ We’ll use a `BEFORE DELETE` trigger to prevent applications from deleting a ro
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `products` that stores the product data:
 
-
 ```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
@@ -77,19 +71,19 @@ CREATE TABLE products (
     status BOOLEAN NOT NULL DEFAULT true
 );
 ```
+
 Next, [insert some rows](../postgresql-tutorial/postgresql-insert) into the `products` table:
 
-
 ```sql
-INSERT INTO products (name, price, status) 
+INSERT INTO products (name, price, status)
 VALUES
   ('A', 10.99, true),
   ('B', 20.49, false),
   ('C', 15.79, true)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | name | price | status
@@ -99,12 +93,12 @@ Output:
   3 | C    | 15.79 | t
 (3 rows)
 ```
-Then, create a `BEFORE DELETE` trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception):
 
+Then, create a `BEFORE DELETE` trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception):
 
 ```sql
 CREATE OR REPLACE FUNCTION fn_before_delete_product()
-RETURNS TRIGGER 
+RETURNS TRIGGER
 AS
 $$
 BEGIN
@@ -113,8 +107,8 @@ END;
 $$
 LANGUAGE plpgsql;
 ```
-After that, create a `BEFORE DELETE` trigger on the `products` table:
 
+After that, create a `BEFORE DELETE` trigger on the `products` table:
 
 ```sql
 CREATE TRIGGER before_delete_product_trigger
@@ -122,15 +116,15 @@ BEFORE DELETE ON products
 FOR EACH ROW
 EXECUTE FUNCTION fn_before_delete_product();
 ```
-Finally, delete a row from the `products` table:
 
+Finally, delete a row from the `products` table:
 
 ```sql
 DELETE FROM products
 WHERE id = 1;
 ```
-Error:
 
+Error:
 
 ```sql
 ERROR:  Deletion from the products table is not allowed.
@@ -139,5 +133,4 @@ CONTEXT:  PL/pgSQL function fn_before_delete_product() line 3 at RAISE
 
 ## Summary
 
-* Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
-
+- Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.

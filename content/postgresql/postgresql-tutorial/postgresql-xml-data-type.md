@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL XML Data Type"
-page_title: "PostgreSQL XML Data Type"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL XML data type to store XML documents in the database."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml-data-type/"
-ogImage: ""
-updatedOn: "2024-04-20T03:57:22+00:00"
+title: 'PostgreSQL XML Data Type'
+page_title: 'PostgreSQL XML Data Type'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL XML data type to store XML documents in the database.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml-data-type/'
+ogImage: ''
+updatedOn: '2024-04-20T03:57:22+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL enum"
-  slug: "postgresql-tutorial/postgresql-enum"
-nextLink: 
-  title: "PostgreSQL BYTEA Data Type"
-  slug: "postgresql-tutorial/postgresql-bytea-data-type"
+previousLink:
+  title: 'PostgreSQL enum'
+  slug: 'postgresql-tutorial/postgresql-enum'
+nextLink:
+  title: 'PostgreSQL BYTEA Data Type'
+  slug: 'postgresql-tutorial/postgresql-bytea-data-type'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL XML data type to store XML documents in the database.
-
 
 ## Introduction to the PostgreSQL XML data type
 
@@ -26,20 +22,18 @@ PostgreSQL supports built\-in `XML` data type that allows you to store XML docum
 
 Here’s the syntax for declaring a column with the `XML` type:
 
-
 ```sql
 column_name XML
 ```
+
 The XML data type offers the following benefits:
 
-* **Type Safety**: PostgreSQL can validate when inserting/updating data, ensuring XML data conforms to XML standards.
-* **Built\-in XML functions and operators**: PostgreSQL supports many XML functions and operators to manipulate XML data effectively.
-
+- **Type Safety**: PostgreSQL can validate when inserting/updating data, ensuring XML data conforms to XML standards.
+- **Built\-in XML functions and operators**: PostgreSQL supports many XML functions and operators to manipulate XML data effectively.
 
 ## PostgreSQL XML data type example
 
 First, [create a table](postgresql-create-table) called `person`:
-
 
 ```sql
 CREATE TABLE person(
@@ -47,13 +41,13 @@ CREATE TABLE person(
     info XML
 );
 ```
+
 In this `person` table:
 
-* `id` is an [identity column](postgresql-identity-column) that serves as the [primary key](postgresql-primary-key) column of the table.
-* `info` is a column with the type XML that will store the XML data.
+- `id` is an [identity column](postgresql-identity-column) that serves as the [primary key](postgresql-primary-key) column of the table.
+- `info` is a column with the type XML that will store the XML data.
 
 Second, [insert a row](postgresql-insert) into the `person` table:
-
 
 ```sql
 INSERT INTO person (info)
@@ -66,18 +60,18 @@ VALUES (
     </person>')
 );
 ```
+
 In this statement:
 
-* `DOCUMENT` indicates that the input string is a complete XML document starting with the XML declaration `<?xml version="1.0" encoding="UTF-8"?>` and having the root element `<person>`
-* `XMLPARSE` function converts the string into an XML document.
-* The `INSERT` statement inserts the new XML document into the info column of the `persons` table.
+- `DOCUMENT` indicates that the input string is a complete XML document starting with the XML declaration `<?xml version="1.0" encoding="UTF-8"?>` and having the root element `<person>`
+- `XMLPARSE` function converts the string into an XML document.
+- The `INSERT` statement inserts the new XML document into the info column of the `persons` table.
 
 Third, [insert multiple rows](postgresql-insert-multiple-rows) into the `person` table:
 
-
 ```sql
 INSERT INTO person (info)
-VALUES 
+VALUES
 (
     XMLPARSE(DOCUMENT '<?xml version="1.0" encoding="UTF-8"?>
     <person>
@@ -103,15 +97,15 @@ VALUES
     </person>')
 );
 ```
-Fourth, retrieve the names of persons from the XML documents using `xpath()` function:
 
+Fourth, retrieve the names of persons from the XML documents using `xpath()` function:
 
 ```sql
 SELECT xpath('/person/name/text()', info) AS name
 FROM person;
 ```
-Output:
 
+Output:
 
 ```sql
        name
@@ -122,17 +116,17 @@ Output:
  {"Alice Johnson"}
 (4 rows)
 ```
+
 Each row in the result set is an array of XML values representing person names. Since each person has one name, the result array has only one element.
 
 Fourth, retrieve person names as text from the XML documents using `xpath()` function:
-
 
 ```sql
 SELECT (xpath('/person/name/text()', info))[1]::text AS name
 FROM person;
 ```
-Output:
 
+Output:
 
 ```sql
      name
@@ -143,21 +137,21 @@ Output:
  Alice Johnson
 (4 rows)
 ```
+
 How it works.
 
-* First, the XPath `'/person/name/text()'` returns the text of the name node of the XML document. It returns an array that includes all matching values.
-* Second, the `[1]` subscript returns the first element of the array.
-* Third, the `::text` casts the XML value to the text.
+- First, the XPath `'/person/name/text()'` returns the text of the name node of the XML document. It returns an array that includes all matching values.
+- Second, the `[1]` subscript returns the first element of the array.
+- Third, the `::text` casts the XML value to the text.
 
 Fifth, retrieve the ages of persons:
-
 
 ```sql
 SELECT (xpath('/person/age/text()', info))[1]::text::integer AS age
 FROM person;
 ```
-Output:
 
+Output:
 
 ```sql
  age
@@ -168,17 +162,17 @@ Output:
   30
 (4 rows)
 ```
+
 In this query:
 
-* The xpath `/person/age/text()` returns the text of the age nodes as an array of text.
-* The `[1]` subscript returns the first element of the array.
-* The `::text` cast the element to the text.
-* The `::integer` casts the text to an integer.
+- The xpath `/person/age/text()` returns the text of the age nodes as an array of text.
+- The `[1]` subscript returns the first element of the array.
+- The `::text` cast the element to the text.
+- The `::integer` casts the text to an integer.
 
 In this example, we cast an XML value to text and text to an integer because we cannot cast an XML value directly to an integer.
 
 Sixth, retrieve the name, age, and city from the XML document:
-
 
 ```sql
 SELECT
@@ -188,8 +182,8 @@ SELECT
 FROM
     person;
 ```
-Output:
 
+Output:
 
 ```sql
      name      | age |     city
@@ -200,16 +194,16 @@ Output:
  Alice Johnson |  30 | Los Angeles
 (4 rows)
 ```
-Seventh, find the person with the name “Jane Doe”:
 
+Seventh, find the person with the name “Jane Doe”:
 
 ```sql
 SELECT *
 FROM person
 WHERE (xpath('/person/name/text()', info))[1]::text = 'Jane Doe';
 ```
-Output:
 
+Output:
 
 ```sql
  id |                info
@@ -228,14 +222,13 @@ If the person table has many rows, finding the person by name will be slow. You 
 
 First, create an [index expression](../postgresql-indexes/postgresql-index-on-expression) that extracts the name of a person as an array of text:
 
-
 ```sql
 CREATE INDEX person_name
-ON person USING BTREE 
+ON person USING BTREE
     (cast(xpath('/person/name', info) as text[])) ;
 ```
-Second, create a function that inserts 1000 rows into the `person` table for testing purposes:
 
+Second, create a function that inserts 1000 rows into the `person` table for testing purposes:
 
 ```sql
 CREATE OR REPLACE FUNCTION generate_persons()
@@ -256,23 +249,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
-Third, call the `generate_persons` to insert 1000 rows into the `person` table:
 
+Third, call the `generate_persons` to insert 1000 rows into the `person` table:
 
 ```sql
 SELECT generate_persons();
 ```
+
 Fifth, find a person with the name `Jane Doe`:
 
-
 ```sql
-EXPLAIN ANALYZE 
+EXPLAIN ANALYZE
 SELECT *
 FROM person
 WHERE cast(xpath('/person/name', info) as text[]) = '{<name>Jane Doe</name>}';
 ```
-Output:
 
+Output:
 
 ```sql
                                                       QUERY PLAN
@@ -285,11 +278,10 @@ Output:
  Execution Time: 0.069 ms
 (6 rows)
 ```
-The output indicates that the query utilizes the index expression of the `person` table.
 
+The output indicates that the query utilizes the index expression of the `person` table.
 
 ## Summary
 
-* Use the `XML` data type to store XML documents in the database.
-* Use the `xpath()` function to retrieve a value from XML documents.
-
+- Use the `XML` data type to store XML documents in the database.
+- Use the `xpath()` function to retrieve a value from XML documents.

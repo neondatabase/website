@@ -1,21 +1,18 @@
 ---
-title: "Privacy Policy"
-page_title: "Privacy Policy"
-page_description: "The privacy of our visitors to www.postgresqltutorial.com is very important to us."
-prev_url: "https://www.postgresqltutorial.com/privacy-policy/"
-ogImage: ""
-updatedOn: "2024-05-13T03:26:42+00:00"
+title: 'Privacy Policy'
+page_title: 'Privacy Policy'
+page_description: 'The privacy of our visitors to www.postgresqltutorial.com is very important to us.'
+prev_url: 'https://www.postgresqltutorial.com/privacy-policy/'
+ogImage: ''
+updatedOn: '2024-05-13T03:26:42+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: ""
-  slug: ""
-nextLink: 
-  title: ""
-  slug: ""
+previousLink:
+  title: ''
+  slug: ''
+nextLink:
+  title: ''
+  slug: ''
 ---
-
-
-
 
 **The privacy of our visitors to neon.tech/postgresql is very important to us.**
 
@@ -34,10 +31,10 @@ Users may opt out of the use of the `DART` cookie by visiting the postgresqltuto
 
 Any of the information we collect from you may be used in one of the following ways:
 
-* To personalize your experience – (your information helps us to better respond to your individual needs)
-* To improve our website – (we continually strive to improve our website offerings based on the information and feedback we receive from you)
-* To administer a contest, promotion, survey or other site feature
-* To send periodic emails
+- To personalize your experience – (your information helps us to better respond to your individual needs)
+- To improve our website – (we continually strive to improve our website offerings based on the information and feedback we receive from you)
+- To administer a contest, promotion, survey or other site feature
+- To send periodic emails
 
 The email address you provide may be used to send you information, respond to inquiries, and/or other requests or questions.
 
@@ -70,4 +67,3 @@ By using our site, you consent to our [online privacy policy](http://www.freepri
 **Changes to our Privacy Policy**
 
 If we decide to change our privacy policy, we will post those changes on our homepage.
-

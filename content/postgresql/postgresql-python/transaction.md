@@ -1,26 +1,22 @@
 ---
-title: "PostgreSQL Python: Transactions"
-page_title: "PostgreSQL Python: Managing Transactions"
-page_description: "You will learn how to manage PostgreSQL transactions in Python using the commit() and rollback() methods of the connection object."
-prev_url: "https://www.postgresqltutorial.com/postgresql-python/transaction/"
-ogImage: "/postgresqltutorial/parts_vendors_tables.png"
-updatedOn: "2024-01-29T13:40:36+00:00"
+title: 'PostgreSQL Python: Transactions'
+page_title: 'PostgreSQL Python: Managing Transactions'
+page_description: 'You will learn how to manage PostgreSQL transactions in Python using the commit() and rollback() methods of the connection object.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-python/transaction/'
+ogImage: '/postgresqltutorial/parts_vendors_tables.png'
+updatedOn: '2024-01-29T13:40:36+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Python: Querying Data"
-  slug: "postgresql-python/query"
-nextLink: 
-  title: "PostgreSQL Python: Call PostgreSQL Functions"
-  slug: "postgresql-python/postgresql-python-call-postgresql-functions"
+previousLink:
+  title: 'PostgreSQL Python: Querying Data'
+  slug: 'postgresql-python/query'
+nextLink:
+  title: 'PostgreSQL Python: Call PostgreSQL Functions'
+  slug: 'postgresql-python/postgresql-python-call-postgresql-functions'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions in Python.
 
 This tutorial picks up from where the [Updating Data in a Table Tutorial](update) left off.
-
 
 ## Introduction to transactions in Python
 
@@ -32,27 +28,26 @@ Subsequentially, all the following statements are executed within the same trans
 
 The `connection` class has two methods for concluding a transaction:
 
-* `commit()` – Use this method to permanently apply all changes to the PostgreSQL database.
-* `rollback()` – Call this method to discard the changes.
+- `commit()` – Use this method to permanently apply all changes to the PostgreSQL database.
+- `rollback()` – Call this method to discard the changes.
 
 Closing a connection object by calling the close() method or deleting it using `del` will also trigger an implicit rollback:
-
 
 ```csssql
 conn.close()
 ```
-Or
 
+Or
 
 ```python
 del conn
 ```
+
 Alternatively, you can set the `autocommit` attribute of the `connection` object to `True`. This ensures that `psycopg2` executes every statement and commits it immediately.
 
 The `autocommit` mode can be particularly useful when executing statements that need to operate outside a transaction, such as [CREATE DATABASE](../postgresql-administration/postgresql-create-database) and `VACUUM`.
 
 The following shows a typical pattern for managing a transaction in `psycopg2`:
-
 
 ```
 import psycopg2
@@ -86,16 +81,15 @@ finally:
 
 Starting from `psycopg` 2\.5, the connection and cursor are [context managers](https://www.pythontutorial.net/advanced-python/python-context-managers/) therefore you can use them in the `with` statement:
 
-
 ```python
 with psycopg2.connect(config) as conn:
     with conn.cursor() as cur:
         cur.execute(sql)
 ```
+
 The `psycopg2` commits the transaction if no exception occurs within the `with` block, otherwise, it rolls back the transaction.
 
 Unlike other [context manager](https://www.pythontutorial.net/advanced-python/python-context-managers/) objects, exiting the `with` block does not close the connection but only terminates the transaction. Consequentially, you can use the same `connection` object in the subsequent `with` statements in another transaction as follows:
-
 
 ```python
 conn = psycopg2.connect(config)
@@ -121,11 +115,10 @@ We will use the `parts` and `vendor_parts` tables in the `suppliers` database:
 
 To achieve this, you can do as follows:
 
-* First, [insert a new row](../postgresql-tutorial/postgresql-insert) into the `parts` table and get the part id.
-* Then, insert rows into the `vendor_parts` table.
+- First, [insert a new row](../postgresql-tutorial/postgresql-insert) into the `parts` table and get the part id.
+- Then, insert rows into the `vendor_parts` table.
 
 The following `add_part()` function demonstrates the steps:
-
 
 ```python
 import psycopg2
@@ -154,7 +147,7 @@ def add_part(part_name, vendor_list):
                     part_id = row[0]
                 else:
                     raise Exception('Could not get the part id')
-                
+
                 # assign parts provided by vendors
                 for vendor_id in vendor_list:
                     cur.execute(assign_vendor, (vendor_id, part_id))
@@ -182,7 +175,6 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, run the following command to execute the `transaction.py` module:
 
-
 ```css
 python transaction.py
 ```
@@ -191,18 +183,17 @@ python transaction.py
 
 First, connect to the `suppliers` on the PostgreSQL server:
 
-
 ```python
 psql -U postgres -d suppliers
 ```
-Second, retrieve data from the `parts` table:
 
+Second, retrieve data from the `parts` table:
 
 ```
 SELECT * FROM parts;
 ```
-Output:
 
+Output:
 
 ```
  part_id |  part_name
@@ -215,14 +206,14 @@ Output:
        6 | LTE Modem
 (6 rows)
 ```
-Third, query data from the `vendor_parts` table:
 
+Third, query data from the `vendor_parts` table:
 
 ```
 SELECT * FROM vendor_parts;
 ```
-Output:
 
+Output:
 
 ```
  vendor_id | part_id
@@ -248,26 +239,24 @@ Let’s insert another part, but this time, we intentionally use an invalid vend
 
 The program should not add a new part without assigning it to a vendor.
 
-
 ```
 if __name__ == '__main__':
     # no rows inserted into the parts and vendor_parts tables
     add_part('Power Amplifier', (99,))
 ```
-An exception occurred.
 
+An exception occurred.
 
 ```
 insert or update on table "vendor_parts" violates foreign key constraint "vendor_parts_vendor_id_fkey"
 DETAIL:  Key (vendor_id)=(99) is not present in table "vendors".
 ```
+
 You can query data from the `parts` and `vendor_parts` tables again. There will be no new data, meaning that the program works as expected.
 
 [Download the project source code](/postgresqltutorial/transaction.zip)
 
-
 ## Summary
 
-* Use the `commit()` method to permanently apply all changes to the database.
-* Use the `rollback()` method to discard the changes.
-
+- Use the `commit()` method to permanently apply all changes to the database.
+- Use the `rollback()` method to discard the changes.

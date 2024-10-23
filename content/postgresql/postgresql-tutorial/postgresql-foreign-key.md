@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Foreign Key"
-page_title: "PostgreSQL Foreign Key"
-page_description: "In this tutorial, you will learn about PostgreSQL foreign key and how to add foreign keys to tables using foreign key constraints."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/"
-ogImage: ""
-updatedOn: "2024-01-25T08:23:10+00:00"
+title: 'PostgreSQL Foreign Key'
+page_title: 'PostgreSQL Foreign Key'
+page_description: 'In this tutorial, you will learn about PostgreSQL foreign key and how to add foreign keys to tables using foreign key constraints.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/'
+ogImage: ''
+updatedOn: '2024-01-25T08:23:10+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Primary Key"
-  slug: "postgresql-tutorial/postgresql-primary-key"
-nextLink: 
-  title: "PostgreSQL DELETE CASCADE"
-  slug: "postgresql-tutorial/postgresql-delete-cascade"
+previousLink:
+  title: 'PostgreSQL Primary Key'
+  slug: 'postgresql-tutorial/postgresql-primary-key'
+nextLink:
+  title: 'PostgreSQL DELETE CASCADE'
+  slug: 'postgresql-tutorial/postgresql-delete-cascade'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about the PostgreSQL foreign key and how to add foreign keys to tables using foreign key constraints.
-
 
 ## Introduction to PostgreSQL Foreign Key Constraint
 
@@ -38,25 +34,24 @@ A table can have multiple foreign keys depending on its relationships with other
 
 To define a foreign key, you can use a foreign key constraint.
 
-
 ## PostgreSQL foreign key constraint syntax
 
 The following illustrates a foreign key constraint syntax:
 
-
 ```csssqlsql
 [CONSTRAINT fk_name]
-   FOREIGN KEY(fk_columns) 
+   FOREIGN KEY(fk_columns)
    REFERENCES parent_table(parent_key_columns)
    [ON DELETE delete_action]
    [ON UPDATE update_action]
 ```
+
 In this syntax:
 
-* First, specify the name for the foreign key constraint after the `CONSTRAINT` keyword. The `CONSTRAINT` clause is optional. If you omit it, PostgreSQL will assign an auto\-generated name.
-* Second, specify one or more foreign key columns in parentheses after the `FOREIGN KEY` keywords.
-* Third, specify the parent table and parent key columns referenced by the foreign key columns in the `REFERENCES` clause.
-* Finally, specify the desired delete and update actions in the `ON DELETE` and `ON UPDATE` clauses.
+- First, specify the name for the foreign key constraint after the `CONSTRAINT` keyword. The `CONSTRAINT` clause is optional. If you omit it, PostgreSQL will assign an auto\-generated name.
+- Second, specify one or more foreign key columns in parentheses after the `FOREIGN KEY` keywords.
+- Third, specify the parent table and parent key columns referenced by the foreign key columns in the `REFERENCES` clause.
+- Finally, specify the desired delete and update actions in the `ON DELETE` and `ON UPDATE` clauses.
 
 The delete and update actions determine the behaviors when the primary key in the parent table is deleted and updated.
 
@@ -64,17 +59,15 @@ Since the primary key is rarely updated, the `ON UPDATE action` is infrequently 
 
 PostgreSQL supports the following actions:
 
-* SET NULL
-* SET DEFAULT
-* RESTRICT
-* NO ACTION
-* CASCADE
-
+- SET NULL
+- SET DEFAULT
+- RESTRICT
+- NO ACTION
+- CASCADE
 
 ## PostgreSQL foreign key constraint examples
 
 The following statements create the `customers` and `contacts` tables:
-
 
 ```shell
 DROP TABLE IF EXISTS customers;
@@ -94,10 +87,11 @@ CREATE TABLE contacts(
    email VARCHAR(100),
    PRIMARY KEY(contact_id),
    CONSTRAINT fk_customer
-      FOREIGN KEY(customer_id) 
+      FOREIGN KEY(customer_id)
         REFERENCES customers(customer_id)
 );
 ```
+
 In this example, the `customers` table is the parent table and the `contacts` table is the child table.
 
 Each customer has zero or many contacts and each contact belongs to zero or one customer.
@@ -106,54 +100,51 @@ The `customer_id` column in the `contacts` table is the foreign key column that 
 
 The following foreign key constraint `fk_customer` in the `contacts` table defines the `customer_id` as the foreign key:
 
-
 ```sql
 CONSTRAINT fk_customer
-   FOREIGN KEY(customer_id) 
+   FOREIGN KEY(customer_id)
       REFERENCES customers(customer_id)
 ```
-Because the foreign key constraint does not have the `ON DELETE` and `ON UPDATE` action, they default to `NO ACTION`.
 
+Because the foreign key constraint does not have the `ON DELETE` and `ON UPDATE` action, they default to `NO ACTION`.
 
 ### NO ACTION
 
 The following inserts data into the `customers` and `contacts` tables:
 
-
 ```sql
 INSERT INTO customers(customer_name)
 VALUES('BlueBird Inc'),
-      ('Dolphin LLC');	   
-	   
+      ('Dolphin LLC');
+
 INSERT INTO contacts(customer_id, contact_name, phone, email)
 VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
 ```
-The following statement deletes the customer id 1 from the `customers` table:
 
+The following statement deletes the customer id 1 from the `customers` table:
 
 ```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
-Because of the `ON DELETE NO ACTION`, PostgreSQL issues a constraint violation because the referencing rows of the customer id 1 still exist in the `contacts` table:
 
+Because of the `ON DELETE NO ACTION`, PostgreSQL issues a constraint violation because the referencing rows of the customer id 1 still exist in the `contacts` table:
 
 ```sql
 ERROR:  update or delete on table "customers" violates foreign key constraint "fk_customer" on table "contacts"
 DETAIL:  Key (customer_id)=(1) is still referenced from table "contacts".
 SQL state: 23503
 ```
-The `RESTRICT` action is similar to the `NO ACTION`. The difference only arises when you define the foreign key constraint as `DEFERRABLE` with an `INITIALLY DEFERRED` or `INITIALLY IMMEDIATE` mode. We’ll discuss more on this in the upcoming tutorial.
 
+The `RESTRICT` action is similar to the `NO ACTION`. The difference only arises when you define the foreign key constraint as `DEFERRABLE` with an `INITIALLY DEFERRED` or `INITIALLY IMMEDIATE` mode. We’ll discuss more on this in the upcoming tutorial.
 
 ### SET NULL
 
 The `SET NULL` automatically sets `NULL` to the foreign key columns in the referencing rows of the child table when the referenced rows in the parent table are deleted.
 
 First, drop the sample tables and re\-create them with the foreign key that uses the `SET NULL` action in the `ON DELETE` clause:
-
 
 ```
 DROP TABLE IF EXISTS contacts;
@@ -173,41 +164,41 @@ CREATE TABLE contacts(
    email VARCHAR(100),
    PRIMARY KEY(contact_id),
    CONSTRAINT fk_customer
-      FOREIGN KEY(customer_id) 
+      FOREIGN KEY(customer_id)
 	  REFERENCES customers(customer_id)
 	  ON DELETE SET NULL
 );
 ```
-Second, insert data into the `customers` and `contacts` tables:
 
+Second, insert data into the `customers` and `contacts` tables:
 
 ```sql
 INSERT INTO customers(customer_name)
 VALUES('BlueBird Inc'),
-      ('Dolphin LLC');	   
-	   
+      ('Dolphin LLC');
+
 INSERT INTO contacts(customer_id, contact_name, phone, email)
 VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
 ```
-Third, delete the customer with id 1 from the `customers` table:
 
+Third, delete the customer with id 1 from the `customers` table:
 
 ```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
+
 Because of the `ON DELETE SET NULL` action, the referencing rows in the `contacts` table are set to NULL.
 
 Finally, display the data in the `contacts` table:
 
-
 ```sql
 SELECT * FROM contacts;
 ```
-Output:
 
+Output:
 
 ```
  contact_id | customer_id | contact_name |     phone      |          email
@@ -217,15 +208,14 @@ Output:
           2 |        null | Jane Doe     | (408)-111-1235 | [[email protected]](../cdn-cgi/l/email-protection.html)
 (3 rows)
 ```
-The output indicates that the values of customer id 1 changed to `NULL`.
 
+The output indicates that the values of customer id 1 changed to `NULL`.
 
 ### CASCADE
 
 The `ON DELETE CASCADE` automatically deletes all the referencing rows in the child table when the referenced rows in the parent table are deleted. In practice, the `ON DELETE CASCADE` is the most commonly used option.
 
 The following statements recreate the sample tables with the delete action of the `fk_customer` changes to `CASCADE`:
-
 
 ```
 DROP TABLE IF EXISTS contacts;
@@ -245,35 +235,35 @@ CREATE TABLE contacts(
    email VARCHAR(100),
    PRIMARY KEY(contact_id),
    CONSTRAINT fk_customer
-      FOREIGN KEY(customer_id) 
+      FOREIGN KEY(customer_id)
 	  REFERENCES customers(customer_id)
 	  ON DELETE CASCADE
 );
 
 INSERT INTO customers(customer_name)
 VALUES('BlueBird Inc'),
-      ('Dolphin LLC');	   
-	   
+      ('Dolphin LLC');
+
 INSERT INTO contacts(customer_id, contact_name, phone, email)
 VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
       (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
 ```
-The following statement deletes the customer id 1:
 
+The following statement deletes the customer id 1:
 
 ```sql
 DELETE FROM customers
 WHERE customer_id = 1;
 ```
-Because of the `ON DELETE CASCADE` action, all the referencing rows in the `contacts` table are automatically deleted:
 
+Because of the `ON DELETE CASCADE` action, all the referencing rows in the `contacts` table are automatically deleted:
 
 ```
 SELECT * FROM contacts;
 ```
-Output:
 
+Output:
 
 ```
  contact_id | customer_id | contact_name |     phone      |          email
@@ -286,29 +276,27 @@ Output:
 
 The `ON DELETE SET DEFAULT` sets the default value to the foreign key column of the referencing rows in the child table when the referenced rows from the parent table are deleted.
 
-
 ## Add a foreign key constraint to an existing table
 
 To add a foreign key constraint to the existing table, you use the following form of the [ALTER TABLE](postgresql-alter-table) statement:
 
-
 ```
-ALTER TABLE child_table 
-ADD CONSTRAINT constraint_name 
-FOREIGN KEY (fk_columns) 
+ALTER TABLE child_table
+ADD CONSTRAINT constraint_name
+FOREIGN KEY (fk_columns)
 REFERENCES parent_table (parent_key_columns);
 ```
+
 When adding a foreign key constraint with `ON DELETE CASCADE` option to an existing table, you need to follow these steps:
 
 First, drop existing foreign key constraint:
-
 
 ```sql
 ALTER TABLE child_table
 DROP CONSTRAINT constraint_fkey;
 ```
-Second, add a new foreign key constraint with  `ON DELETE CASCADE` action:
 
+Second, add a new foreign key constraint with  `ON DELETE CASCADE` action:
 
 ```sql
 ALTER TABLE child_table
@@ -320,7 +308,6 @@ ON DELETE CASCADE;
 
 ## Summary
 
-* Use foreign keys to ensure the referential integrity and consistency of data between two tables.
-* Use the `FOREIGN KEY` constraint to define a foreign key constraint when creating a table.
-* Use the `ALTER TABLE ... ADD CONSTRAINT ... FOREIGN KEY` to add a foreign key constraint to an existing table.
-
+- Use foreign keys to ensure the referential integrity and consistency of data between two tables.
+- Use the `FOREIGN KEY` constraint to define a foreign key constraint when creating a table.
+- Use the `ALTER TABLE ... ADD CONSTRAINT ... FOREIGN KEY` to add a foreign key constraint to an existing table.

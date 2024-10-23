@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL ROLLUP"
-page_title: "PostgreSQL ROLLUP"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate multiple grouping sets."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/"
-ogImage: "/postgresqltutorial/PostgreSQL-ROLLUP-example.png"
-updatedOn: "2024-07-01T01:04:08+00:00"
+title: 'PostgreSQL ROLLUP'
+page_title: 'PostgreSQL ROLLUP'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate multiple grouping sets.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/'
+ogImage: '/postgresqltutorial/PostgreSQL-ROLLUP-example.png'
+updatedOn: '2024-07-01T01:04:08+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL GROUPING SETS"
-  slug: "postgresql-tutorial/postgresql-grouping-sets"
-nextLink: 
-  title: "PostgreSQL CUBE"
-  slug: "postgresql-tutorial/postgresql-cube"
+previousLink:
+  title: 'PostgreSQL GROUPING SETS'
+  slug: 'postgresql-tutorial/postgresql-grouping-sets'
+nextLink:
+  title: 'PostgreSQL CUBE'
+  slug: 'postgresql-tutorial/postgresql-cube'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
-
 
 ## Introduction to the PostgreSQL ROLLUP
 
@@ -29,7 +25,6 @@ Different from the [`CUBE`](postgresql-cube) subclause, `ROLLUP` does not genera
 The `ROLLUP` assumes a hierarchy among the input columns and generates all grouping sets that make sense considering the hierarchy. This is the reason why `ROLLUP` is often used to generate the subtotals and the grand total for reports.
 
 For example, the `CUBE (c1,c2,c3)` makes all eight possible grouping sets:
-
 
 ```phpsql
 (c1, c2, c3)
@@ -42,8 +37,8 @@ For example, the `CUBE (c1,c2,c3)` makes all eight possible grouping sets:
 ()
 
 ```
-However, the `ROLLUP(c1,c2,c3)` generates only four grouping sets, assuming the hierarchy `c1 > c2 > c3` as follows:
 
+However, the `ROLLUP(c1,c2,c3)` generates only four grouping sets, assuming the hierarchy `c1 > c2 > c3` as follows:
 
 ```sql
 (c1, c2, c3)
@@ -52,10 +47,10 @@ However, the `ROLLUP(c1,c2,c3)` generates only four grouping sets, assuming the 
 ()
 
 ```
+
 A common use of  `ROLLUP` is to calculate the aggregations of data by year, month, and date, considering the hierarchy `year > month > date`
 
 The following illustrates the syntax of the PostgreSQL `ROLLUP`:
-
 
 ```sql
 SELECT
@@ -69,8 +64,8 @@ GROUP BY
     ROLLUP (c1, c2, c3);
 
 ```
-It is also possible to do a partial roll up to reduce the number of subtotals generated.
 
+It is also possible to do a partial roll up to reduce the number of subtotals generated.
 
 ```sql
 SELECT
@@ -81,7 +76,7 @@ SELECT
 FROM
     table_name
 GROUP BY
-    c1, 
+    c1,
     ROLLUP (c2, c3);
 
 ```
@@ -89,7 +84,6 @@ GROUP BY
 ## PostgreSQL ROLLUP examples
 
 If you haven’t created the sales table, you can use the following script:
-
 
 ```sql
 DROP TABLE IF EXISTS sales;
@@ -108,8 +102,8 @@ VALUES
     ('XYZ', 'Basic', 300);
 
 ```
-The following query uses the `ROLLUP` clause to find the number of products sold by brand (subtotal) and by all brands and segments (total).
 
+The following query uses the `ROLLUP` clause to find the number of products sold by brand (subtotal) and by all brands and segments (total).
 
 ```
 SELECT
@@ -131,7 +125,6 @@ As you can see clearly from the output, the third row shows the sales of the `AB
 
 If you change the order of brand and segment, the result will be different as follows:
 
-
 ```sql
 SELECT
     segment,
@@ -152,7 +145,6 @@ In this case, the hierarchy is the `segment > brand`.
 
 The following statement performs a partial roll\-up:
 
-
 ```sql
 SELECT
     segment,
@@ -172,10 +164,8 @@ ORDER BY
 ![PostgreSQL ROLLUP - partial roll up](/postgresqltutorial/PostgreSQL-ROLLUP-partial-roll-up.png)
 See the following `rental` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
-
 ![Rental Table](/postgresqltutorial/rental.png)
 The following statement finds the number of rental per day, month, and year by using the `ROLLUP`:
-
 
 ```sql
 SELECT
@@ -196,4 +186,3 @@ GROUP BY
 
 ![PostgreSQL ROLLUP example with year month and date](/postgresqltutorial/PostgreSQL-ROLLUP-example-with-year-month-and-date.png)
 In this tutorial, you have learned how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
-

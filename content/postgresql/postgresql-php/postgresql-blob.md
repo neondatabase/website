@@ -1,21 +1,18 @@
 ---
-title: "PostgreSQL PHP: Working with Binary Data"
-page_title: "PostgreSQL PHP: Working with Binary Data"
-page_description: "In this tutorial, you will learn how to work with PostgreSQL BLOB using PHP such inserting BLOB, querying BLOB, and deleting BLOB."
-prev_url: "https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/"
-ogImage: "/postgresqltutorial/PostgreSQL-PHP-BLOB.png"
-updatedOn: "2024-04-20T13:44:59+00:00"
+title: 'PostgreSQL PHP: Working with Binary Data'
+page_title: 'PostgreSQL PHP: Working with Binary Data'
+page_description: 'In this tutorial, you will learn how to work with PostgreSQL BLOB using PHP such inserting BLOB, querying BLOB, and deleting BLOB.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/'
+ogImage: '/postgresqltutorial/PostgreSQL-PHP-BLOB.png'
+updatedOn: '2024-04-20T13:44:59+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Calling Stored Procedures"
-  slug: "postgresql-php/call-stored-procedures"
-nextLink: 
-  title: "PostgreSQL PHP: Delete Data From a Table"
-  slug: "postgresql-php/delete"
+previousLink:
+  title: 'PostgreSQL PHP: Calling Stored Procedures'
+  slug: 'postgresql-php/call-stored-procedures'
+nextLink:
+  title: 'PostgreSQL PHP: Delete Data From a Table'
+  slug: 'postgresql-php/delete'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using PHP.
 
@@ -24,7 +21,6 @@ BLOB stands for the binary large object used to store binary data such as the 
 PostgreSQL does not support the BLOB data type. However, you can use the [BYTEA data type](../postgresql-tutorial/postgresql-bytea-data-type) for storing the binary string.
 
 We’ll [create a new table](../postgresql-tutorial/postgresql-create-table) called `company_files` to store the binary string:
-
 
 ```phpsql
 CREATE TABLE company_files (
@@ -36,15 +32,16 @@ CREATE TABLE company_files (
    FOREIGN KEY (stock_id) REFERENCES stocks (id)
 );
 ```
+
 We will store the content of a file in the `file_data` column. In addition, we will read the files from the `assets/images` folder and insert them into the `company_files` table.
 
 To work with the binary data, we create a new class named `BlobDB`.
 
 ![PostgreSQL PHP BLOB](/postgresqltutorial/PostgreSQL-PHP-BLOB.png)
+
 ## Inserting binary data
 
 The following `insert()` method reads data from a file specified by the `$pathToFile` parameter and inserts it into the `company_files` table.
-
 
 ```sql
    /**
@@ -66,11 +63,11 @@ The following `insert()` method reads data from a file specified by the `$pathTo
 
         try {
             $this->pdo->beginTransaction();
-            
+
             // create large object
             $fileData = $this->pdo->pgsqlLOBCreate();
             $stream = $this->pdo->pgsqlLOBOpen($fileData, 'w');
-            
+
             // read data from the file and copy the the stream
             $fh = fopen($pathToFile, 'rb');
             stream_copy_to_stream($fh, $stream);
@@ -97,6 +94,7 @@ The following `insert()` method reads data from a file specified by the `$pathTo
         return $this->pdo->lastInsertId('company_files_id_seq');
     }
 ```
+
 How it works.
 
 1. First, call the pgsqlLOBCreate() method of the PDO object to create a new large object and get the OID of the large object.
@@ -109,7 +107,6 @@ Note that the `pgsqlLOBCreate()` method must be called within a transaction, the
 
 Place the following code in the `index.php` file to insert the content of the `google.png` file into the `company_files` table.
 
-
 ```php
 <?php
 
@@ -121,7 +118,7 @@ use PostgreSQLTutorial\BlobDB as BlobDB;
 try {
     // connect to the PostgreSQL database
     $pdo = Connection::get()->connect();
-    // 
+    //
     $blobDB = new BlobDB($pdo);
     $fileId = $blobDB->insert(2, 'logo', 'image/png', 'assets/images/google.png');
 
@@ -130,14 +127,14 @@ try {
     echo $e->getMessage();
 }
 ```
-Launch the index.php file, we get the following message.
 
+Launch the index.php file, we get the following message.
 
 ```sql
 A file has been inserted with id 1
 ```
-To verify the insert operation, we use the following query:
 
+To verify the insert operation, we use the following query:
 
 ```sql
 SELECT * FROM company_files;
@@ -153,7 +150,6 @@ SELECT * FROM company_files;
 ## Querying binary data
 
 The following `read()` method reads the BLOB data from the `company_files` table and outputs the file content to the web browser:
-
 
 ```
     /**
@@ -181,6 +177,7 @@ The following `read()` method reads the BLOB data from the `company_files` table
         fpassthru($stream);
     }
 ```
+
 How it works.
 
 1. First, prepare a [SELECT](../postgresql-tutorial/postgresql-select) statement.
@@ -190,7 +187,6 @@ How it works.
 5. Finally, because the `pgsqlLOBopen()` must be called within a transaction, we called the `beginTransaction()` at the beginning of the method.
 
 To test the read() method, we place the following code in the file.php:
-
 
 ```php
 <?php
@@ -208,15 +204,14 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 $file = $blobDB->read($id);
 ```
-The file.php file gets the id value from the query string and outputs the file stored in the company\_files table to the web browser.
 
+The file.php file gets the id value from the query string and outputs the file stored in the company_files table to the web browser.
 
 ![PostgreSQL BLOB example](/postgresqltutorial/PostgreSQL-BLOB-example.png)
 
 ## Deleting binary data
 
 The following `delete()` method deletes a row in the `company_files` table.
-
 
 ```php
     /**
@@ -247,10 +242,10 @@ The following `delete()` method deletes a row in the `company_files` table.
         }
     }
 ```
+
 How it works.
 
 1. First, get the OID object from the `file_data` column.
 2. Second, use the `pgsqlLOBUnLink()` method to remove the BLOB data and execute the `DELETE` statement to remove a row specified by an ID in the `company_files` table.
 
 In this tutorial, you have learned how to insert, query, and delete binary data in the PostgreSQL database.
-

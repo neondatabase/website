@@ -1,31 +1,26 @@
 ---
-title: "PostgreSQL CREATE TABLE"
-page_title: "PostgreSQL CREATE TABLE Statement"
-page_description: "This tutorial shows you how to use the PostgreSQL CREATE TABLE statement to create a new table in the database."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/"
-ogImage: ""
-updatedOn: "2024-02-16T13:40:04+00:00"
+title: 'PostgreSQL CREATE TABLE'
+page_title: 'PostgreSQL CREATE TABLE Statement'
+page_description: 'This tutorial shows you how to use the PostgreSQL CREATE TABLE statement to create a new table in the database.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/'
+ogImage: ''
+updatedOn: '2024-02-16T13:40:04+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL Data Types"
-  slug: "postgresql-tutorial/postgresql-data-types"
-nextLink: 
-  title: "PostgreSQL SELECT INTO"
-  slug: "postgresql-tutorial/postgresql-select-into"
+previousLink:
+  title: 'PostgreSQL Data Types'
+  slug: 'postgresql-tutorial/postgresql-data-types'
+nextLink:
+  title: 'PostgreSQL SELECT INTO'
+  slug: 'postgresql-tutorial/postgresql-select-into'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CREATE TABLE** statement to create a new table.
-
 
 ## Introduction to PostgreSQL CREATE TABLE statement
 
 Typically, a relational database consists of multiple related tables. Tables allow you to store structured data like customers, products, and employees.
 
 To create a new table, you use the `CREATE TABLE` statement. Here’s the basic syntax of the `CREATE TABLE` statement:
-
 
 ```phpsql
 CREATE TABLE [IF NOT EXISTS] table_name (
@@ -35,6 +30,7 @@ CREATE TABLE [IF NOT EXISTS] table_name (
    table_constraints
 );
 ```
+
 In this syntax:
 
 First, specify the name of the table that you want to create after the `CREATE TABLE` keywords. The table name must be unique in a [schema](../postgresql-administration/postgresql-schema). If you create a table with a name that already exists, you’ll get an error.
@@ -55,101 +51,98 @@ A table constraint is a rule that is applied to the data within the table to mai
 
 Note that some column constraints can be defined as table constraints such as primary key, foreign key, unique, and check constraints.
 
-
 ### Constraints
 
 PostgreSQL includes the following column constraints:
 
-* [NOT NULL](postgresql-not-null-constraint)– ensures that the values in a column cannot be `NULL`.
-* [UNIQUE](postgresql-unique-constraint) – ensures the values in a column are unique across the rows within the same table.
-* [PRIMARY KEY](postgresql-primary-key) – a primary key column uniquely identifies rows in a table. A table can have one and only one primary key. The primary key constraint allows you to define the primary key of a table.
-* [CHECK](postgresql-check-constraint) – ensures the data must satisfy a boolean expression. For example, the value in the price column must be zero or positive.
-* [FOREIGN KEY](postgresql-foreign-key) – ensures that the values in a column or a group of columns from a table exist in a column or group of columns in another table. Unlike the primary key, a table can have many foreign keys.
+- [NOT NULL](postgresql-not-null-constraint)– ensures that the values in a column cannot be `NULL`.
+- [UNIQUE](postgresql-unique-constraint) – ensures the values in a column are unique across the rows within the same table.
+- [PRIMARY KEY](postgresql-primary-key) – a primary key column uniquely identifies rows in a table. A table can have one and only one primary key. The primary key constraint allows you to define the primary key of a table.
+- [CHECK](postgresql-check-constraint) – ensures the data must satisfy a boolean expression. For example, the value in the price column must be zero or positive.
+- [FOREIGN KEY](postgresql-foreign-key) – ensures that the values in a column or a group of columns from a table exist in a column or group of columns in another table. Unlike the primary key, a table can have many foreign keys.
 
 Table constraints are similar to column constraints except that you can include more than one column in the table constraint.
-
 
 ## PostgreSQL CREATE TABLE example
 
 We will create a new table called `accounts` in the `dvdrental` [sample database](../postgresql-getting-started/postgresql-sample-database). The `accounts` table has the following columns:
 
-* `user_id` – primary key
-* `username` – unique and not null
-* `password` – not null
-* `email` – unique and not null
-* `created_at` – not null
-* `last_login` – null
+- `user_id` – primary key
+- `username` – unique and not null
+- `password` – not null
+- `email` – unique and not null
+- `created_at` – not null
+- `last_login` – null
 
 The following example uses the `CREATE TABLE` statement to create the `accounts` table:
 
-
 ```sql
 CREATE TABLE accounts (
-  user_id SERIAL PRIMARY KEY, 
-  username VARCHAR (50) UNIQUE NOT NULL, 
-  password VARCHAR (50) NOT NULL, 
-  email VARCHAR (255) UNIQUE NOT NULL, 
-  created_at TIMESTAMP NOT NULL, 
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR (50) UNIQUE NOT NULL,
+  password VARCHAR (50) NOT NULL,
+  email VARCHAR (255) UNIQUE NOT NULL,
+  created_at TIMESTAMP NOT NULL,
   last_login TIMESTAMP
 );
 ```
+
 To create a table in a database, you need to execute the `CREATE TABLE` statement using a PostgreSQL client such as psql and pgAdmin.
 
 We’ll show you step\-by\-step how to create the `accounts` table using the psql client tool.
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL:
 
-
 ```
 psql -U postgres
 ```
-It’ll prompt you to enter a password for the user `postgres`.
 
+It’ll prompt you to enter a password for the user `postgres`.
 
 ```
 Password for user postgres:
 ```
-When you enter a password correctly, you’ll see the following command prompt:
 
+When you enter a password correctly, you’ll see the following command prompt:
 
 ```
 postgres=#
 ```
-Second, connect to the `dvdrental` database:
 
+Second, connect to the `dvdrental` database:
 
 ```php
 \c dvdrental
 ```
-Third, enter the following `CREATE TABLE` statement and press Enter:
 
+Third, enter the following `CREATE TABLE` statement and press Enter:
 
 ```
 CREATE TABLE accounts (
-  user_id SERIAL PRIMARY KEY, 
-  username VARCHAR (50) UNIQUE NOT NULL, 
-  password VARCHAR (50) NOT NULL, 
-  email VARCHAR (255) UNIQUE NOT NULL, 
-  created_at TIMESTAMP NOT NULL, 
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR (50) UNIQUE NOT NULL,
+  password VARCHAR (50) NOT NULL,
+  email VARCHAR (255) UNIQUE NOT NULL,
+  created_at TIMESTAMP NOT NULL,
   last_login TIMESTAMP
 );
 ```
-Output:
 
+Output:
 
 ```php
 CREATE TABLE
 ```
+
 The output indicates that the table has been created.
 
 To view the accounts table, you can use the `\d` command:
 
-
 ```
 \d accounts
 ```
-Output:
 
+Output:
 
 ```
                                            Table "public.accounts"
@@ -169,6 +162,5 @@ Indexes:
 
 ## Summary
 
-* Use the `CREATE TABLE` statement to create a new table.
-* Use the `IF NOT EXISTS` option to create the new table only if it does not exist.
-
+- Use the `CREATE TABLE` statement to create a new table.
+- Use the `IF NOT EXISTS` option to create the new table only if it does not exist.

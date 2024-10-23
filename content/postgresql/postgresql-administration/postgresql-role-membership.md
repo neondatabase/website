@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Role Membership"
-page_title: "PostgreSQL Role Membership"
-page_description: "In this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively."
-prev_url: "https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/"
-ogImage: ""
-updatedOn: "2024-02-22T02:54:15+00:00"
+title: 'PostgreSQL Role Membership'
+page_title: 'PostgreSQL Role Membership'
+page_description: 'In this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/'
+ogImage: ''
+updatedOn: '2024-02-22T02:54:15+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL REVOKE Statement"
-  slug: "postgresql-administration/postgresql-revoke"
-nextLink: 
-  title: "PostgreSQL SET ROLE Statement"
-  slug: "postgresql-administration/postgresql-set-role"
+previousLink:
+  title: 'PostgreSQL REVOKE Statement'
+  slug: 'postgresql-administration/postgresql-revoke'
+nextLink:
+  title: 'PostgreSQL SET ROLE Statement'
+  slug: 'postgresql-administration/postgresql-set-role'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.
-
 
 ## Introduction to PostgreSQL group roles
 
@@ -34,27 +30,25 @@ Group roles can have individual roles or other group roles as their members. Thi
 
 Individual roles can be members of multiple group roles. This allows for flexible assignment of permissions and roles within the database.
 
-
 ### Creating a group role
 
 Creating a group role is like creating a role by using the [`CREATE ROLE`](postgresql-roles) statement:
 
-
 ```pgsqlsqlsql
 CREATE ROLE group_role;
 ```
+
 In this syntax, you specify the name of the group role after the `CREATE ROLE` keyword.
 
 By convention, a group role does not have the `LOGIN` privilege, meaning that you will not use the group role to log in to PostgreSQL even though you can.
 
 For example, the following statement creates a group role called `sales`:
 
-
 ```pgsql
 CREATE ROLE sales;
 ```
-When you use the `\du` command in the `psql` tool, you will see that the group roles are listed together with individual roles:
 
+When you use the `\du` command in the `psql` tool, you will see that the group roles are listed together with individual roles:
 
 ```shell
                              List of roles
@@ -76,65 +70,64 @@ When you use the `\du` command in the `psql` tool, you will see that the group r
 
 To add a role to a group, you use the following form of the `GRANT` statement:
 
-
 ```pgsql
 GRANT group_role TO role;
 ```
+
 In this syntax:
 
-* First, specify the name of the group role after the `GRANT` keyword.
-* Second, specify the name of the role after the `TO` keyword.
+- First, specify the name of the group role after the `GRANT` keyword.
+- Second, specify the name of the role after the `TO` keyword.
 
 For example, the following statement creates a new role `alice` and adds it to the group role `sales`:
-
 
 ```
 GRANT sales TO alice;
 ```
+
 After you execute this statement, the `alice` role will automatically inherit all privileges of the `sales` group role if the `alice` role has `INHERIT` attribute.
 
 Note that if your PostgreSQL server does not have the `alice` role, you can run the following command first to create it:
 
-
 ```sql
-CREATE ROLE alice 
-WITH LOGIN 
+CREATE ROLE alice
+WITH LOGIN
 PASSWORD 'SecurePass1';
 ```
+
 This CREATE ROLE implicitly uses the `INHERIT` attribute to ensure that the role `alice` automatically inherits privileges from the group roles to which it belongs.
 
 If you don’t want the role `alice` to inherit the privileges of its group roles, you can use the `NOINHERIT` attribute:
 
-
 ```sql
-CREATE ROLE alice 
-WITH LOGIN NOINHERIT 
+CREATE ROLE alice
+WITH LOGIN NOINHERIT
 PASSWORD 'SecurePass1';
 ```
-The following grants the `SELECT` privilege on the rental table to the `sales` group role:
 
+The following grants the `SELECT` privilege on the rental table to the `sales` group role:
 
 ```
 GRANT SELECT ON rental TO sales;
 ```
+
 The role `alice` will automatically inherit the `SELECT` privilege on the `rental` table from the `sales` group role.
 
 Let’s test it out.
 
 First, connect to the PostgreSQL server using the `alice` role:
 
-
 ```
 psql -U alice -d dvdrental
 ```
-Second, retrieve data from the rental table:
 
+Second, retrieve data from the rental table:
 
 ```
 SELECT count(*) FROM rental;
 ```
-Output:
 
+Output:
 
 ```
  count
@@ -142,37 +135,35 @@ Output:
  16044
 (1 row)
 ```
-The output indicates that the role `alice` has the `SELECT` privilege on the `rental` table even though we did not explicitly assign it.
 
+The output indicates that the role `alice` has the `SELECT` privilege on the `rental` table even though we did not explicitly assign it.
 
 ### Removing a role to a group role
 
 To remove a role from a group role, you use the `REVOKE` statement:
 
-
 ```
 REVOKE group_role FROM role;
 ```
+
 In this syntax:
 
-* First, specify the name of the group role after the `REVOKE` keyword.
-* Second, specify the name of the role after the `FROM` keyword.
+- First, specify the name of the group role after the `REVOKE` keyword.
+- Second, specify the name of the role after the `FROM` keyword.
 
 A useful tip to remember when using `GRANT` and `REVOKE` statements with the group role is that the **group role should come first**, followed by the individual role.
 
 For example, the following statement uses the `REVOKE` statement to remove the role `alice` from the group role `sales`:
 
-
 ```sql
 REVOKE sales FROM alice;
 ```
-Notice that PostgreSQL does not permit circular membership loops, where a role is the member of another role and vice versa.
 
+Notice that PostgreSQL does not permit circular membership loops, where a role is the member of another role and vice versa.
 
 ## Summary
 
-* A group role is a role that serves as a container for other roles.
-* All individual roles of a group role automatically inherit privileges granted to the group role. Use the `NOINHERIT` attribute if you don’t want a role to inherit the privileges from its group roles.
-* Use the `GRANT` statement to add a role to a group role.
-* Use the `REVOKE` statement to remove a role from a group.
-
+- A group role is a role that serves as a container for other roles.
+- All individual roles of a group role automatically inherit privileges granted to the group role. Use the `NOINHERIT` attribute if you don’t want a role to inherit the privileges from its group roles.
+- Use the `GRANT` statement to add a role to a group role.
+- Use the `REVOKE` statement to remove a role from a group.

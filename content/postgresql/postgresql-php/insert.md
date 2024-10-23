@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL PHP: Insert Data Into Tables"
-page_title: "PostgreSQL PHP: Insert Data Into Tables"
-page_description: "In this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table."
-prev_url: "https://www.postgresqltutorial.com/postgresql-php/insert/"
-ogImage: "/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png"
-updatedOn: "2022-02-09T15:05:02+00:00"
+title: 'PostgreSQL PHP: Insert Data Into Tables'
+page_title: 'PostgreSQL PHP: Insert Data Into Tables'
+page_description: 'In this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-php/insert/'
+ogImage: '/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png'
+updatedOn: '2022-02-09T15:05:02+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Create New Tables"
-  slug: "postgresql-php/create-tables"
-nextLink: 
-  title: "PostgreSQL PHP: Updating Data In a Table"
-  slug: "postgresql-php/update"
+previousLink:
+  title: 'PostgreSQL PHP: Create New Tables'
+  slug: 'postgresql-php/create-tables'
+nextLink:
+  title: 'PostgreSQL PHP: Updating Data In a Table'
+  slug: 'postgresql-php/update'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.
-
 
 ## Steps for inserting data into a PostgreSQL table using PDO
 
@@ -34,13 +30,11 @@ We will use the `stocks` table that we created in the previous tutorial for demo
 
 Let’s create a new class named `PostgreSQLPHPInsert` in the `app` folder and the `index.php` file in the project folder.
 
-
 ![PostgreSQL PHP Insert Example](/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png)
 
 ## Inserting a single row into a table example
 
 The following `insertStock()` method inserts a new row into the `stocks` table.
-
 
 ```phpsql
     /**
@@ -53,18 +47,19 @@ The following `insertStock()` method inserts a new row into the `stocks` table.
         // prepare statement for insert
         $sql = 'INSERT INTO stocks(symbol,company) VALUES(:symbol,:company)';
         $stmt = $this->pdo->prepare($sql);
-        
+
         // pass values to the statement
         $stmt->bindValue(':symbol', $symbol);
         $stmt->bindValue(':company', $company);
-        
+
         // execute the insert statement
         $stmt->execute();
-        
+
         // return generated id
         return $this->pdo->lastInsertId('stocks_id_seq');
     }
 ```
+
 First, construct an `INSERT` statement that uses two named placed holders: `:symbol` and `:company` for binding values later.
 
 Next, prepare the insert statement for execution by calling the `prepare()` method of the PDO object.
@@ -75,13 +70,11 @@ After that, execute the `INSERT` statement by calling the `execute()` method.
 
 Finally, get the ID of the last inserted row by calling the `lastInsertId()` method of the PDO object
 
- the `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
-
+the `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
 
 ## Insert multiple rows into a table example
 
 The following `insertStockList()` method inserts multiple rows into the `stocks` table.
-
 
 ```php
    /**
@@ -103,10 +96,10 @@ The following `insertStockList()` method inserts multiple rows into the `stocks`
         return $idList;
     }
 ```
+
 The method accepts an array of stocks and calls the `execute()` method multiple times to insert multiple rows into the `stocks` table. It returns a list of inserted IDs.
 
 Place the following code in the index.php file to test the `insertStock()` and `insertStockList()` methods.
-
 
 ```php
 <?php
@@ -118,7 +111,7 @@ use PostgreSQLTutorial\PostgreSQLPHPInsert as PostgreSQLPHPInsert;
 try {
     // connect to the PostgreSQL database
     $pdo = Connection::get()->connect();
-    // 
+    //
     $insertDemo = new PostgreSQLPHPInsert($pdo);
 
     // insert a stock into the stocks table
@@ -139,8 +132,8 @@ try {
     echo $e->getMessage();
 }
 ```
-Launch the index.php in the web browser, we got the following output:
 
+Launch the index.php in the web browser, we got the following output:
 
 ```
 The stock has been inserted with the id 1
@@ -148,5 +141,5 @@ The stock has been inserted with the id 2
 The stock has been inserted with the id 3
 The stock has been inserted with the id 4
 ```
-In this tutorial, you have learned how to insert a single row or multiple rows into a table in the PostgreSQL database using PHP PDO.
 
+In this tutorial, you have learned how to insert a single row or multiple rows into a table in the PostgreSQL database using PHP PDO.

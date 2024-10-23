@@ -1,26 +1,22 @@
 ---
-title: "PostgreSQL jsonb_object_agg() Function"
-page_title: "PostgreSQL jsonb_object_agg() Function"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL jsonb_object_agg() function to aggregate key/value pairs into a JSON object."
-prev_url: "https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/"
-ogImage: ""
-updatedOn: "2024-02-25T09:00:30+00:00"
+title: 'PostgreSQL jsonb_object_agg() Function'
+page_title: 'PostgreSQL jsonb_object_agg() Function'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_object_agg() function to aggregate key/value pairs into a JSON object.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/'
+ogImage: ''
+updatedOn: '2024-02-25T09:00:30+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL jsonb_agg() Function"
-  slug: "postgresql-json-functions/postgresql-jsonb_agg"
-nextLink: 
-  title: "PostgreSQL jsonb_typeof() Function"
-  slug: "postgresql-json-functions/postgresql-jsonb_typeof"
+previousLink:
+  title: 'PostgreSQL jsonb_agg() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_agg'
+nextLink:
+  title: 'PostgreSQL jsonb_typeof() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_typeof'
 ---
-
-
-
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
 
-
-## Introduction to the PostgreSQL jsonb\_object\_agg() function
+## Introduction to the PostgreSQL jsonb_object_agg() function
 
 The PostgreSQL `jsonb_object_agg()` function is an [aggregate function](../postgresql-aggregate-functions) that allows you to collect key/value pairs into a [JSON](../postgresql-tutorial/postgresql-json) object.
 
@@ -28,27 +24,24 @@ The `jsonb_object_agg()` can be useful when you want to aggregate data from mult
 
 Here’s the syntax of the `jsonb_object_agg()` function:
 
-
 ```sql
 jsonb_object_agg(key, value)
 ```
+
 In this syntax:
 
-* `key` represents the key for the JSON object. The key must not be null.
-* `value` represents the value for the corresponding key.
+- `key` represents the key for the JSON object. The key must not be null.
+- `value` represents the value for the corresponding key.
 
 The `jsonb_object_agg()` returns a JSON object that consists of key/value pairs.
 
-
-## PostgreSQL jsonb\_object\_agg() function examples
+## PostgreSQL jsonb_object_agg() function examples
 
 Let’s explore some examples of using the PostgreSQL `jsonb_object_agg()` function.
 
-
-### 1\) Basic PostgreSQL jsonb\_object\_agg() function example
+### 1\) Basic PostgreSQL jsonb_object_agg() function example
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `departments`:
-
 
 ```sql
 CREATE TABLE departments(
@@ -56,8 +49,8 @@ CREATE TABLE departments(
     department_name VARCHAR(255) NOT NULL
 );
 ```
-Second, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `departments` table:
 
+Second, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `departments` table:
 
 ```sql
 INSERT INTO departments(department_name)
@@ -66,17 +59,17 @@ VALUES
    ('Marketing')
 RETURNING *;
 ```
+
 Third, use the `jsonb_object_agg()` function to create an object whose key is the department name and value is the id:
 
-
 ```sql
-SELECT 
-  jsonb_object_agg(department_name, id) departments 
-FROM 
+SELECT
+  jsonb_object_agg(department_name, id) departments
+FROM
   departments;
 ```
-Output:
 
+Output:
 
 ```sql
          departments
@@ -85,10 +78,9 @@ Output:
 (1 row)
 ```
 
-### 2\) Using the jsonb\_object\_agg() function with GROUP BY clause
+### 2\) Using the jsonb_object_agg() function with GROUP BY clause
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `employees`:
-
 
 ```sql
 CREATE TABLE employees (
@@ -96,25 +88,25 @@ CREATE TABLE employees (
     name VARCHAR(100) NOT NULL,
     salary DECIMAL(10, 2),
     department_id INT NOT NULL,
-    FOREIGN KEY(department_id) 
+    FOREIGN KEY(department_id)
        REFERENCES departments(id) ON DELETE CASCADE
 );
 ```
+
 Second, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `employees` table:
 
-
 ```sql
-INSERT INTO employees (name, salary, department_id) 
-VALUES 
-  ('John Doe', 60000, 1), 
-  ('Jane Smith', 65000, 1), 
+INSERT INTO employees (name, salary, department_id)
+VALUES
+  ('John Doe', 60000, 1),
+  ('Jane Smith', 65000, 1),
   ('Alice Johnson', 55000, 2),
   ('Bob Williams', 70000, 2),
   ('Alex Miller', NULL , 2)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id |     name      |  salary  | department_id
@@ -126,23 +118,23 @@ Output:
   5 | Alex Miller   |     null |             2
 (5 rows)
 ```
+
 Third, use the `jsonb_object_agg()` function to get the department name and a JSON object that contains employee details of the department including employee name and salary:
 
-
 ```sql
-SELECT 
-  department_name, 
+SELECT
+  department_name,
   jsonb_pretty(
     jsonb_object_agg(e.name, e.salary)
-  ) AS employee_details 
-FROM 
-  departments d 
-  INNER JOIN employees e ON e.department_id = d.id 
-GROUP BY 
+  ) AS employee_details
+FROM
+  departments d
+  INNER JOIN employees e ON e.department_id = d.id
+GROUP BY
   department_name;
 ```
-Output:
 
+Output:
 
 ```sql
  department_name |       employee_details
@@ -158,27 +150,27 @@ Output:
                  | }
 (2 rows)
 ```
+
 Note that we use the `jsonb_pretty()` function to format JSON.
 
 Alex Miller has not had a salary yet so his salary is null. The `jsonb_object_agg()` also collects the null into the JSON object.
 
 To skip nulls, you can use the `jsonb_object_agg_strict()` function as follows:
 
-
 ```sql
-SELECT 
-  department_name, 
+SELECT
+  department_name,
   jsonb_pretty(
     jsonb_object_agg_strict(e.name, e.salary)
-  ) AS employee_details 
-FROM 
-  departments d 
-  INNER JOIN employees e ON e.department_id = d.id 
-GROUP BY 
+  ) AS employee_details
+FROM
+  departments d
+  INNER JOIN employees e ON e.department_id = d.id
+GROUP BY
   department_name;
 ```
-Output:
 
+Output:
 
 ```sql
  department_name |       employee_details
@@ -193,11 +185,10 @@ Output:
                  | }
 (2 rows)
 ```
-The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` function except that it skips null values.
 
+The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` function except that it skips null values.
 
 ## Summary
 
-* Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
-* Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
-
+- Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
+- Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.

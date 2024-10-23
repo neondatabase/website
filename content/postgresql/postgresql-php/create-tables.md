@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL PHP: Create New Tables"
-page_title: "PostgreSQL PHP: Create New Tables"
-page_description: "In this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API."
-prev_url: "https://www.postgresqltutorial.com/postgresql-php/create-tables/"
-ogImage: "/postgresqltutorial/PostgreSQL-PHP-Create-Tables.png"
-updatedOn: "2022-02-09T14:58:21+00:00"
+title: 'PostgreSQL PHP: Create New Tables'
+page_title: 'PostgreSQL PHP: Create New Tables'
+page_description: 'In this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-php/create-tables/'
+ogImage: '/postgresqltutorial/PostgreSQL-PHP-Create-Tables.png'
+updatedOn: '2022-02-09T14:58:21+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL PHP: Connect to PostgreSQL Database Using PDO"
-  slug: "postgresql-php/connect"
-nextLink: 
-  title: "PostgreSQL PHP: Insert Data Into Tables"
-  slug: "postgresql-php/insert"
+previousLink:
+  title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
+  slug: 'postgresql-php/connect'
+nextLink:
+  title: 'PostgreSQL PHP: Insert Data Into Tables'
+  slug: 'postgresql-php/insert'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.
-
 
 ## Creating new tables using PHP PDO steps
 
@@ -29,13 +25,11 @@ To create new tables in a PostgreSQL database using PHP PDO, you follow these st
 
 Let’s look at an example of creating new tables.
 
-
 ## Creating new table example
 
 In the previous tutorial, we created the `stocks` database in the PostgreSQL database server.
 
 For the demonstration, we’ll create two new tables in the `stocks` database: `stocks` and `stock_evaluations` with the following structures:
-
 
 ```phpsql
 CREATE TABLE IF NOT EXISTS stocks (
@@ -55,8 +49,8 @@ CREATE TABLE IF NOT EXISTS stock_valuations (
         REFERENCES stocks (id)
 );
 ```
-We create a new class named `PostgreSQLCreateTable` in the `app` folder.
 
+We create a new class named `PostgreSQLCreateTable` in the `app` folder.
 
 ```sql
 <?php
@@ -82,13 +76,13 @@ class PostgreSQLCreateTable {
     }
 
     /**
-     * create tables 
+     * create tables
      */
     public function createTables() {
         $sqlList = ['CREATE TABLE IF NOT EXISTS stocks (
                         id serial PRIMARY KEY,
                         symbol character varying(10) NOT NULL UNIQUE,
-                        company character varying(255) NOT NULL UNIQUE 
+                        company character varying(255) NOT NULL UNIQUE
                      );',
             'CREATE TABLE IF NOT EXISTS stock_valuations (
                         stock_id INTEGER NOT NULL,
@@ -102,7 +96,7 @@ class PostgreSQLCreateTable {
         foreach ($sqlList as $sql) {
             $this->pdo->exec($sql);
         }
-        
+
         return $this;
     }
 
@@ -110,9 +104,9 @@ class PostgreSQLCreateTable {
      * return tables in the database
      */
     public function getTables() {
-        $stmt = $this->pdo->query("SELECT table_name 
-                                   FROM information_schema.tables 
-                                   WHERE table_schema= 'public' 
+        $stmt = $this->pdo->query("SELECT table_name
+                                   FROM information_schema.tables
+                                   WHERE table_schema= 'public'
                                         AND table_type='BASE TABLE'
                                    ORDER BY table_name");
         $tableList = [];
@@ -125,16 +119,15 @@ class PostgreSQLCreateTable {
 }
 
 ```
+
 How it works.
 
-* First, the constructor of the class accepts a PDO object as the argument.
-* Second, the `createTables()` method creates new tables in the database. The `$sqlList` array holds all the [CREATE TABLE](../postgresql-tutorial/postgresql-create-table) statements. To execute a statement, you call the `exec()` method of the PDO object. We iterate over the array of SQL statements and execute them one by one by calling the `exec()` method.
-* Third, the `getTables()` method returns all tables in the connected database. We use it to query the tables in the `stocks` database after calling the `createTables()` method.
-
+- First, the constructor of the class accepts a PDO object as the argument.
+- Second, the `createTables()` method creates new tables in the database. The `$sqlList` array holds all the [CREATE TABLE](../postgresql-tutorial/postgresql-create-table) statements. To execute a statement, you call the `exec()` method of the PDO object. We iterate over the array of SQL statements and execute them one by one by calling the `exec()` method.
+- Third, the `getTables()` method returns all tables in the connected database. We use it to query the tables in the `stocks` database after calling the `createTables()` method.
 
 ![PostgreSQL PHP Create Tables](/postgresqltutorial/PostgreSQL-PHP-Create-Tables.png)
 In the `index.php` file, connect to the PostgreSQL database execute the statement to create tables and query tables.
-
 
 ```php
 <?php
@@ -145,39 +138,38 @@ use PostgreSQLTutorial\Connection as Connection;
 use PostgreSQLTutorial\PostgreSQLCreateTable as PostgreSQLCreateTable;
 
 try {
-    
+
     // connect to the PostgreSQL database
     $pdo = Connection::get()->connect();
-    
-    // 
+
+    //
     $tableCreator = new PostgreSQLCreateTable($pdo);
-    
+
     // create tables and query the table from the
     // database
     $tables = $tableCreator->createTables()
                             ->getTables();
-    
+
     foreach ($tables as $table){
         echo $table . '<br>';
     }
-    
+
 } catch (\PDOException $e) {
     echo $e->getMessage();
 }
 
 ```
-Launch the `index.php` file in a web browser. You’ll see the following output:
 
+Launch the `index.php` file in a web browser. You’ll see the following output:
 
 ```
 stock_valuations
 stocks
 ```
-The output shows that the script has created two tables successfully.
 
+The output shows that the script has created two tables successfully.
 
 ## Summary
 
-* Use the `CREATE TABLE` statement to create a new table.
-* Use the PDO `exec()` method to to execute a `CREATE TABLE` statement to create a new table in the datatabase.
-
+- Use the `CREATE TABLE` statement to create a new table.
+- Use the PDO `exec()` method to to execute a `CREATE TABLE` statement to create a new table in the datatabase.

@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL UPSERT using INSERT ON CONFLICT Statement"
-page_title: "PostgreSQL UPSERT Statement"
-page_description: "This tutorial shows you how to use the PostgreSQL UPSERT to either update an existing row or insert a new row if it does not exist."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/"
-ogImage: ""
-updatedOn: "2024-03-27T06:05:16+00:00"
+title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
+page_title: 'PostgreSQL UPSERT Statement'
+page_description: 'This tutorial shows you how to use the PostgreSQL UPSERT to either update an existing row or insert a new row if it does not exist.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/'
+ogImage: ''
+updatedOn: '2024-03-27T06:05:16+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL DELETE JOIN"
-  slug: "postgresql-tutorial/postgresql-delete-join"
-nextLink: 
-  title: "PostgreSQL MERGE Statement"
-  slug: "postgresql-tutorial/postgresql-merge"
+previousLink:
+  title: 'PostgreSQL DELETE JOIN'
+  slug: 'postgresql-tutorial/postgresql-delete-join'
+nextLink:
+  title: 'PostgreSQL MERGE Statement'
+  slug: 'postgresql-tutorial/postgresql-merge'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL upsert feature to insert a new row into a table if the row does not exist, or update an existing row if it already exists.
-
 
 ## Introduction to the PostgreSQL UPSERT Statement
 
@@ -30,22 +26,22 @@ If you use PostgreSQL 15 or later, you can use the [MERGE](postgresql-merge) sta
 
 Here’s the basic syntax of the `INSERT...ON CONFLICT` statement:
 
-
 ```sql
 INSERT INTO table_name (column1, column2, ...)
 VALUES (value1, value2, ...)
 ON CONFLICT (conflict_column)
 DO NOTHING | DO UPDATE SET column1 = value1, column2 = value2, ...;
 ```
+
 In this syntax:
 
-* `table_name`: This is the name of the table into which you want to insert data.
-* `(column1, column2, ...)`: The list of columns you want to insert values into the table.
-* `VALUES(value1, value2, ...)`: The values you want to insert into the specified columns `(column1, column2, ...)`.
-* `ON CONFLICT (conflict_column):` This clause specifies the conflict target, which is the [unique constraint](postgresql-unique-constraint) or [unique index](../postgresql-indexes/postgresql-unique-index) that may cause a conflict.
-* `DO NOTHING`: This instructs PostgreSQL to do nothing when a conflict occurs.
-* `DO UPDATE`: This performs an update if a conflict occurs.
-* `SET column = value1, column = value2, ...`: This list of the columns to be updated and their corresponding values in case of conflict.
+- `table_name`: This is the name of the table into which you want to insert data.
+- `(column1, column2, ...)`: The list of columns you want to insert values into the table.
+- `VALUES(value1, value2, ...)`: The values you want to insert into the specified columns `(column1, column2, ...)`.
+- `ON CONFLICT (conflict_column):` This clause specifies the conflict target, which is the [unique constraint](postgresql-unique-constraint) or [unique index](../postgresql-indexes/postgresql-unique-index) that may cause a conflict.
+- `DO NOTHING`: This instructs PostgreSQL to do nothing when a conflict occurs.
+- `DO UPDATE`: This performs an update if a conflict occurs.
+- `SET column = value1, column = value2, ...`: This list of the columns to be updated and their corresponding values in case of conflict.
 
 How the `INSERT ... ON CONFLICT` statement works.
 
@@ -55,11 +51,9 @@ Second, the `DO UPDATE` instructs PostgreSQL to update existing rows or do nothi
 
 Third, the `SET` clause defines the columns and values to update. You can use new values or reference the values you attempted to insert using the `EXCLUDED` keyword.
 
-
 ## PostgreSQL UPSERT examples
 
 The following statements create the `inventory` table and [insert data into it](postgresql-insert):
-
 
 ```sql
 CREATE TABLE inventory(
@@ -76,8 +70,8 @@ VALUES
 	(3, 'C', 19.95, 75)
 RETURNING *;
 ```
-Output:
 
+Output:
 
 ```sql
  id | name | price | quantity
@@ -90,35 +84,35 @@ Output:
 
 INSERT 0 3
 ```
+
 The `inventory` table contains information about various products, including their names, prices, and quantities in stock.
 
 Suppose you’ve received an updated list of products with new prices, and now you need to update the inventory accordingly.
 
 In this case, the upsert operation can be handy to handle the following situations:
 
-* **Updating existing products**. If a product already exists in the `inventory` table, you want to update its price and quantity with the new information.
-* **Insert new products**. If a product is not in the `inventory` table, you want to insert it into the table.
-
+- **Updating existing products**. If a product already exists in the `inventory` table, you want to update its price and quantity with the new information.
+- **Insert new products**. If a product is not in the `inventory` table, you want to insert it into the table.
 
 ### 1\) Basic PostgreSQL INSERT … ON CONFLICT statement example
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-
 ```
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (1, 'A', 16.99, 120)
-ON CONFLICT(id) 
+ON CONFLICT(id)
 DO UPDATE SET
   price = EXCLUDED.price,
   quantity = EXCLUDED.quantity;
 ```
-Output:
 
+Output:
 
 ```sql
 INSERT 0 1
 ```
+
 In this example, we attempt to insert a new row into the `inventory` table.
 
 However, the `inventory` table already has a row with id 1, therefore, a conflict occurs.
@@ -127,13 +121,12 @@ The `DO UPDATE` changes the price and quantity of the product to the new values 
 
 The following statement verifies the update:
 
-
 ```
-SELECT * FROM inventory 
+SELECT * FROM inventory
 WHERE id = 1;
 ```
-Output:
 
+Output:
 
 ```sql
  id | name | price | quantity
@@ -146,32 +139,31 @@ Output:
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-
 ```
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (4, 'D', 29.99, 20)
-ON CONFLICT(id) 
+ON CONFLICT(id)
 DO UPDATE SET
   price = EXCLUDED.price,
   quantity = EXCLUDED.quantity;
 ```
-Output:
 
+Output:
 
 ```sql
 INSERT 0 1
 ```
+
 In this case, the statement [inserts a new row](../postgresql-python/insert) into the `inventory` table because the product id 4 does not exist in the `inventory` table.
 
 The following statement verifies the insert:
-
 
 ```
 SELECT * FROM inventory
 ORDER BY id;
 ```
-Output:
 
+Output:
 
 ```
  id | name | price | quantity
@@ -185,6 +177,5 @@ Output:
 
 ## Summary
 
-* Use the PostgreSQL upsert to update data if it already exists or insert the data if it does not.
-* Use the `INSERT...ON CONFLICT` statement for upsert.
-
+- Use the PostgreSQL upsert to update data if it already exists or insert the data if it does not.
+- Use the `INSERT...ON CONFLICT` statement for upsert.

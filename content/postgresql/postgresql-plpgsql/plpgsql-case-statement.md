@@ -1,24 +1,20 @@
 ---
-title: "PL/pgSQL CASE Statement"
-page_title: "PL/pgSQL CASE Statements"
-page_description: "In this tutorial, you will learn about the PL/pgSQL CASE statement that executes a command based on a certain condition."
-prev_url: "https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/"
-ogImage: "/postgresqltutorial/plpgsql-simple-case-statement.png"
-updatedOn: "2024-02-07T04:18:40+00:00"
+title: 'PL/pgSQL CASE Statement'
+page_title: 'PL/pgSQL CASE Statements'
+page_description: 'In this tutorial, you will learn about the PL/pgSQL CASE statement that executes a command based on a certain condition.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
+ogImage: '/postgresqltutorial/plpgsql-simple-case-statement.png'
+updatedOn: '2024-02-07T04:18:40+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PL/pgSQL IF Statement"
-  slug: "postgresql-plpgsql/plpgsql-if-else-statements"
-nextLink: 
-  title: "PL/pgSQL Loop Statements"
-  slug: "postgresql-plpgsql/plpgsql-loop-statements"
+previousLink:
+  title: 'PL/pgSQL IF Statement'
+  slug: 'postgresql-plpgsql/plpgsql-if-else-statements'
+nextLink:
+  title: 'PL/pgSQL Loop Statements'
+  slug: 'postgresql-plpgsql/plpgsql-loop-statements'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `case` that executes statements based on a certain condition.
-
 
 ## Introduction to PL/pgSQL CASE Statment
 
@@ -28,16 +24,14 @@ The `case` statement selects a `when` section to execute from a list of `when` s
 
 The `case` statement has two forms:
 
-* Simple `case` statement
-* Searched `case` statement
+- Simple `case` statement
+- Searched `case` statement
 
 Notice that you should not be confused about the `case` statement and [case expression](../postgresql-tutorial/postgresql-case). The `case` expression evaluates to a value while the `case` statement selects a section to execute based on conditions.
-
 
 ## 1\) Simple case statement
 
 Here’s the basic syntax of the simple `case` statement:
-
 
 ```pgsql
 case search-expression
@@ -48,6 +42,7 @@ case search-expression
       else-statements ]
 END case;
 ```
+
 The `search-expression` is an expression that evaluates to a result.
 
 The `case` statement compares the result of the `search-expression` with the `expression` in each `when` branch using equal operator ( `=`) from top to bottom.
@@ -60,18 +55,17 @@ The `else` section is optional. If the result of the `search-expression` does no
 
 The following example shows how to use a simple `case` statement:
 
-
 ```pgsql
 do $$
-declare 
+declare
 	rate film.rental_rate%type;
 	price_segment varchar(50);
 begin
     -- get the rental rate
-    select rental_rate into rate 
-    from film 
+    select rental_rate into rate
+    from film
     where film_id = 100;
-	
+
 	-- assign the price segment
 	if found then
 		case rate
@@ -84,34 +78,35 @@ begin
 		   else
 	    	  price_segment = 'Unspecified';
 		   end case;
-		   
-		raise notice '%', price_segment;  
+
+		raise notice '%', price_segment;
 	else
-		raise notice 'film not found';  
+		raise notice 'film not found';
     end if;
 end; $$
 ```
-Output:
 
+Output:
 
 ```http
 NOTICE:  High End
 ```
+
 How it works.
 
 First, select the rental rate of the film with id 100\.
 
-Second, assign price segment to the price\_segment variable if the film id 100 exists or a message otherwise.
+Second, assign price segment to the price_segment variable if the film id 100 exists or a message otherwise.
 
 Based on the rental rates 0\.99, 2\.99, or 4\.99, the case statement assigns mass, mainstream, or high\-end to the `price_segment` variable. If the rental rate is not one of these values, the `case` statement assigns the string Unspecified to the `price_segment` variable.
 
 The following flowchart illustrates the simple `case` statement in this example:
 
 ![PL/pgSQL simple case statement](/postgresqltutorial/plpgsql-simple-case-statement.png)
+
 ## 2\) Searched case statement
 
 The following syntax shows the basic syntax of the searched `case` statement:
-
 
 ```pgsql
 case
@@ -124,6 +119,7 @@ case
       statements ]
 end case;
 ```
+
 In this syntax, the `case` statement evaluates the boolean expressions sequentially from top to bottom until it finds an expression that evaluates to `true`
 
 Subsequently, the case statement executes the corresponding `when` section and immediately stops searching for the remaining expressions.
@@ -134,19 +130,18 @@ The `else` section is optional. If you omit the `else` section and there is no e
 
 The following example illustrates how to use a simple `case` statement:
 
-
 ```pgsql
-do $$ 
+do $$
 declare
-    total_payment numeric; 
+    total_payment numeric;
     service_level varchar(25) ;
 begin
      select sum(amount) into total_payment
      from Payment
-     where customer_id = 100; 
-	 
+     where customer_id = 100;
+
 	 if found then
-	    case 
+	    case
 		   when total_payment > 200 then
                service_level = 'Platinum' ;
            when total_payment > 100 then
@@ -158,25 +153,23 @@ begin
      else
 	    raise notice 'Customer not found';
 	 end if;
-end; $$ 
+end; $$
 
 ```
+
 How it works:
 
-* First, select the total payment paid by the customer id 100 from the `payment` table.
-* Then, assign the service level to the customer based on the total payment
+- First, select the total payment paid by the customer id 100 from the `payment` table.
+- Then, assign the service level to the customer based on the total payment
 
 The following diagram illustrates the logic:
 
-
 ![PL/pgSQL searched case statement](/postgresqltutorial/plpgsql-searched-case-statement.png)
-  
-Notice that the searched `case` statement is similar to the [if then elsif statement](plpgsql-if-else-statements).
 
+Notice that the searched `case` statement is similar to the [if then elsif statement](plpgsql-if-else-statements).
 
 ## Summary
 
-* Use the `case` statement to execute a section based on certain conditions.
-* Use a simple `case` statement to compare a value with a list of values and if a match is found, execute a section.
-* Use a searched `case` statement to evaluate a list of conditions and execute a section if the condition is true.
-
+- Use the `case` statement to execute a section based on certain conditions.
+- Use a simple `case` statement to compare a value with a list of values and if a match is found, execute a section.
+- Use a searched `case` statement to evaluate a list of conditions and execute a section if the condition is true.

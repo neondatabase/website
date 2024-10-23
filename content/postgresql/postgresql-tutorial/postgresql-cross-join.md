@@ -1,24 +1,20 @@
 ---
-title: "PostgreSQL Cross Join"
-page_title: "PostgreSQL CROSS JOIN"
-page_description: "In this tutorial, you will learn how to use the PostgreSQL CROSS JOIN to produce the cartesian product of rows from the joined tables."
-prev_url: "https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cross-join/"
-ogImage: "/postgresqltutorial/PostgreSQL-CROSS-JOIN-illustration.png"
-updatedOn: "2024-04-08T04:05:33+00:00"
+title: 'PostgreSQL Cross Join'
+page_title: 'PostgreSQL CROSS JOIN'
+page_description: 'In this tutorial, you will learn how to use the PostgreSQL CROSS JOIN to produce the cartesian product of rows from the joined tables.'
+prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cross-join/'
+ogImage: '/postgresqltutorial/PostgreSQL-CROSS-JOIN-illustration.png'
+updatedOn: '2024-04-08T04:05:33+00:00'
 enableTableOfContents: true
-previousLink: 
-  title: "PostgreSQL FULL OUTER JOIN"
-  slug: "postgresql-tutorial/postgresql-full-outer-join"
-nextLink: 
-  title: "PostgreSQL NATURAL JOIN"
-  slug: "postgresql-tutorial/postgresql-natural-join"
+previousLink:
+  title: 'PostgreSQL FULL OUTER JOIN'
+  slug: 'postgresql-tutorial/postgresql-full-outer-join'
+nextLink:
+  title: 'PostgreSQL NATURAL JOIN'
+  slug: 'postgresql-tutorial/postgresql-natural-join'
 ---
 
-
-
-
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CROSS JOIN` to produce a cartesian product of rows from the joined tables.
-
 
 ## Introduction to the PostgreSQL CROSS JOIN clause
 
@@ -38,38 +34,36 @@ Because a `CROSS JOIN` may generate a large result set, you should use it carefu
 
 Here’s the basic syntax of the `CROSS JOIN` syntax:
 
-
 ```pgsqlsql
-SELECT 
-  select_list 
-FROM 
-  table1 
+SELECT
+  select_list
+FROM
+  table1
 CROSS JOIN table2;
 ```
+
 The following statement is equivalent to the above statement:
 
-
 ```sql
-SELECT 
-  select_list 
-FROM 
+SELECT
+  select_list
+FROM
   table1,table2;
 ```
+
 Alternatively, you can use an `INNER JOIN` clause with a condition that always evaluates to true to simulate a cross\-join:
 
-
 ```sql
-SELECT 
-  select_list 
-FROM 
-  table1 
+SELECT
+  select_list
+FROM
+  table1
   INNER JOIN table2 ON true;
 ```
 
 ## PostgreSQL CROSS JOIN example
 
 The following [CREATE TABLE](postgresql-create-table) statements create `T1` and `T2` tables and [insert sample data](postgresql-insert) for the cross\-join demonstration.
-
 
 ```sql
 DROP TABLE IF EXISTS T1;
@@ -95,8 +89,8 @@ VALUES
   (2),
   (3);
 ```
-The following statement uses the `CROSS JOIN` operator to join `T1` table with `T2` table:
 
+The following statement uses the `CROSS JOIN` operator to join `T1` table with `T2` table:
 
 ```sql
 SELECT *
@@ -115,18 +109,18 @@ CROSS JOIN T2;
  B     |     3
 (6 rows)
 ```
+
 The following picture illustrates how the `CROSS JOIN` works when joining the `T1` table with the `T2` table:
 
 ![PostgreSQL CROSS JOIN illustration](/postgresqltutorial/PostgreSQL-CROSS-JOIN-illustration.png)
+
 ## Some practical examples of using CROSS JOIN
 
 In practice, you can find the `CROSS JOIN` useful when you need to combine data from two tables without specific matching conditions. For example:
 
-
 ### 1\) Scheduling
 
 Suppose you have a table for `employees` and `shifts`, and you want to create a schedule that lists all possible combinations of employees and shifts to explore various staffing scenarios:
-
 
 ```
 SELECT *
@@ -138,7 +132,6 @@ CROSS JOIN shift;
 
 In an inventory management system, you have tables for `warehouses` and `products`. A `CROSS JOIN` can help you analyze the availability of each product in every warehouse:
 
-
 ```pgsql
 SELECT *
 FROM products
@@ -147,5 +140,4 @@ CROSS JOIN warehouses;
 
 ## Summary
 
-* Use the PostgreSQL `CROSS JOIN` clause to make a cartesian product of rows in two tables.
-
+- Use the PostgreSQL `CROSS JOIN` clause to make a cartesian product of rows in two tables.
