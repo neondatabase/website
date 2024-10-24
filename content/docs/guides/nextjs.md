@@ -57,7 +57,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with Next.js. See below for the different implementations.
+There are multiple ways to make server side requests with Next.js. See below for the different implementations.
 
 ### App Router
 
