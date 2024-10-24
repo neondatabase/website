@@ -36,6 +36,8 @@ Find out how you can integrate with Neon.
 
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="Check out a sample OAuth application" icon="lock-landscape">Sample OAuth app</a>
 
+<a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
+
 </DetailIconCards>
 
 ## Billing
