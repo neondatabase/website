@@ -54,23 +54,23 @@ Follow these steps to set up your backend for the full-stack portfolio website:
 
 3.  Set up the virtual environment.
 
-                You will now create and activate a virtual environment in which your project's dependencies will be installed.
+        You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
-                <CodeTabs labels={["Linux/macOS", "Windows"]}>
-                `bash
+        <CodeTabs labels={["Linux/macOS", "Windows"]}>
 
+            ```bash
             uv venv
             source .venv/bin/activate
-            `
+            ```
 
-        `bash
+            ```bash
+            uv venv
+            .venv\Scripts\activate
+            ```
 
-    uv venv
-    .venv\Scripts\activate
-    `
-    </CodeTabs>
+        </CodeTabs>
 
-                You should see `(portfolio_backend)` in your terminal now, this means that your virtual environment is activated.
+        You should see `(portfolio_backend)` in your terminal now, this means that your virtual environment is activated.
 
 4.  Install dependencies.
 
