@@ -98,7 +98,7 @@ Next, we can add the scripts required for database migrations to our `package.js
 
 And we can run `npm run db:generate-migrations` and `npm run db:migrate` (with `DATABASE_URL` set) to migrate our Neon database.
 
-With the database migrated, lets integrate this into our project. We will create the file `singletons/database.civet` to do our database connection. One thing I noticed doing this was the performance of the TS server felt quite slow:
+With the database migrated, lets integrate this into our project. At first, I tried to create the file `singletons/database.civet` to do our database connection. One thing I noticed doing this was the performance of the TS server felt quite slow:
 
 ![TS server being slow](/docs/guides/civet/slowness.png)
 
@@ -130,7 +130,62 @@ export default drizzle(pool, { schema });
 
 After I wrote all the code (whilst battling lots of crashes), the code was very clean and made very good use of indentation in my opinion:
 
-![guest book code](/docs/guides/civet/guest_book_code.png)
+```text
+"civet react"
+
+import React from "react"
+import database from "@/singletons/database"
+import { desc } from "drizzle-orm"
+import { guestBookSigners } from "@/schema"
+
+export runtime := "edge"
+
+function SignBook()
+    handler := async (ev: FormData) =>
+        "use server"
+        name := ev.get("name")
+        note := ev.get("note")
+        if name and note
+            await database.insert(guestBookSigners).values(
+                name: name.toString()
+                note: note.toString()
+            )
+
+    <form action={handler}>
+        <label>
+            Your Name:
+            <input name="name" required .block .my-4 .border .border-gray-300 .p-2>
+
+        <label>
+            Note:
+            <textarea name="note" required .block .mt-4 .border .border-gray-300 .p-2>
+        <br />
+
+        <button type="submit" .border .border-gray-300 .p-2>Sign the Guest Book
+
+        <hr .border-t .border-gray-300 .my-4>
+
+async function GuestBookContents()
+    results := await database.query.guestBookSigners.findMany(
+        orderBy:
+            desc(guestBookSigners.createdAt)
+    )
+
+    results.map (signer, index) =>
+        <p key=index>
+            <span .font-bold>{signer.name}{" "}
+            signed the guest book on {signer.createdAt.toDateString()} - {signer.note}
+
+export default function Page()
+    <h1 .text-3xl>My Guest Book
+    <h2 .text-lg.mt-4>Please sign the guest book below on your way around this site!
+    <hr .border-t .border-gray-300 .my-4>
+
+    <SignBook />
+
+    <React.Suspense fallback="Loading...">
+        <GuestBookContents />
+```
 
 With this, we have a fully working guest book! There are a few things I noticed though:
 
