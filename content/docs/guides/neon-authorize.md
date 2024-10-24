@@ -12,7 +12,7 @@ enableTableOfContents: true
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="https://www.postgresql.org/docs/current/ddl-rowsecurity.html">Postgres row security policies</a>
+  <a href="https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
 </DocsList>
 
 <DocsList title="Sample projects" theme="repo">
