@@ -67,7 +67,7 @@ const investors = {
     {
       image: natFriedman,
       name: 'Nat Friedman',
-      role: 'CEO at',
+      role: 'Former CEO at',
       company: 'GitHub',
     },
     {
