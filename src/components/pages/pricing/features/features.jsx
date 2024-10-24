@@ -4,7 +4,7 @@ import Heading from 'components/shared/heading';
 import compatibilityIcon from 'icons/ai/compatibility.svg';
 import branchingIcon from 'icons/aws/branching.svg';
 import storageIcon from 'icons/aws/storage.svg';
-import timerIcon from 'icons/landing/timer.svg';
+import timerIcon from 'icons/landing/features/timer.svg';
 
 import computeIllustration from './images/compute-illustration.jpg';
 import storageIllustration from './images/storage-illustration.jpg';

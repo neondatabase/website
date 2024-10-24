@@ -15,7 +15,7 @@ const SplitViewGrid = ({
   ctaText = '',
   size = 'md',
 }) => (
-  <section className={clsx('benefits safe-paddings', className)}>
+  <section className={clsx('features safe-paddings', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div
         className={clsx(
@@ -43,22 +43,23 @@ const SplitViewGrid = ({
             </span>
           )}
           <h2
-            className={clsx('mt-3 font-title font-medium leading-none', titleClassName, {
-              'max-w-[322px] text-[52px] tracking-extra-tight xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]':
-                size === 'md',
-              'text-5xl tracking-tight': size === 'sm',
-            })}
+            className={clsx(
+              'mt-3 text-balance font-title font-medium leading-none',
+              'max-w-[322px] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]',
+              {
+                'text-[52px] tracking-extra-tight': size === 'md',
+                'text-5xl tracking-tight': size === 'sm',
+              },
+              titleClassName
+            )}
           >
             {title}
           </h2>
           <p
-            className={clsx(
-              'max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5',
-              {
-                'mt-4': size === 'md',
-                'mt-5': size === 'sm',
-              }
-            )}
+            className={clsx('text-lg font-light leading-snug xl:text-base md:mt-2.5', {
+              'mt-4': size === 'md',
+              'mt-5': size === 'sm',
+            })}
           >
             {description}
           </p>
