@@ -3,7 +3,7 @@ title: Get started with your integration
 subtitle: Learn the essentials and key steps for integrating with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-18T18:50:56.385Z'
+updatedOn: '2024-10-24T10:48:39.462Z'
 ---
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you’re developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.
@@ -72,7 +72,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/metri
 - **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database names.
 - **Protected names for roles and databases**: Neon reserves certain names for Postgres roles and databases. Users will not be able to use these protected names when creating roles and databases. For more information, see [Protected role names](/docs/manage/roles#protected-role-names) and [Protected database names](/docs/manage/databases#protected-database-names).
 - **Postgres extension support**: We frequently receive questions from our partners about the Postgres extensions supported by Neon. See the list of [Supported Postgres extensions](/docs/extensions/pg-extensions) that Neon currently supports.
-- **Staying up to date with changes to the Neon platform**: We make every effort to proactively inform partners about updates and changes that could impact their business. Partners can monitor the following sources for information:
+- **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform our partners about updates and changes that could impact their business. In addition, Partners can monitor the following sources for information about the latest updates from Neon:
   - The [Neon Roadmap](/docs/introduction/roadmap) to see recent deliveries and upcoming features.
   - The [Neon Changelog](/docs/changelog) for the latest product updates.
   - The [Neon Newsletter](https://neon.tech/blog#subscribe-form), sent weekly.

@@ -2,12 +2,12 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-10-22T15:41:04.375Z'
+updatedOn: '2024-10-24T12:58:41.887Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
 
-This guide demonstrates how to connect to a Neon Postgres database from a simple Deno application that uses [deno-postgres](https://deno.land/x/postgres@ls) driver to interact with the database.
+This guide demonstrates how to connect to a Neon Postgres database from a simple Deno application using the [Neon serverless driver](https://jsr.io/@neon/serverless) on [JSR](https://jsr.io/).
 
 The guide covers two deployment options:
 
@@ -41,6 +41,31 @@ Deno Runtime is an open-source runtime for TypeScript and JavaScript. The follow
 
 Follow the [Install Deno and deployctl](https://docs.deno.com/deploy/manual/#install-deno-and-deployctl) instructions in the Deno documentation to install the Deno runtime and `deployctl` command-line utility on your local machine.
 
+### Set up the Neon serverless driver
+
+First, install the Neon serverless driver using the `deno add` command:
+
+```bash
+deno add jsr:@neon/serverless
+```
+
+<Admonition type="note">
+   You can also use npm to install the Neon serverless driver
+   ```bash
+   npx jsr add @neon/serverless
+  ```
+</Admonition>
+
+This will create or update your `deno.json` file with the necessary dependency:
+
+```json
+{
+  "imports": {
+    "@neon/serverless": "jsr:@neon/serverless@^0.10.1"
+  }
+}
+```
+
 ### Create the example application
 
 Next, create the `server.ts` script on your local machine.
@@ -48,54 +73,45 @@ Next, create the `server.ts` script on your local machine.
 ```ts
 // server.ts
 
-import * as postgres from 'https://deno.land/x/postgres@v0.17.0/mod.ts';
+import { neon } from '@neon/serverless';
 
 const databaseUrl = Deno.env.get('DATABASE_URL')!;
+const sql = neon(databaseUrl);
 
-const pool = new postgres.Pool(databaseUrl, 3, true);
+// Create the books table and insert initial data if it doesn't exist
+await sql`
+  CREATE TABLE IF NOT EXISTS books (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL
+  )
+`;
 
-const connection = await pool.connect();
-try {
-  await connection.queryObject`
-    CREATE TABLE IF NOT EXISTS books (
-      id SERIAL PRIMARY KEY,
-      title TEXT NOT NULL,
-      author TEXT NOT NULL
-    );
+// Check if the table is empty
+const { count } = await sql`SELECT COUNT(*)::INT as count FROM books`.then((rows) => rows[0]);
+
+if (count === 0) {
+  // The table is empty, insert the book records
+  await sql`
+    INSERT INTO books (title, author) VALUES
+      ('The Hobbit', 'J. R. R. Tolkien'),
+      ('Harry Potter and the Philosopher''s Stone', 'J. K. Rowling'),
+      ('The Little Prince', 'Antoine de Saint-Exupéry')
   `;
-
-  // Check if the table is empty by getting the count of rows
-  const result = await connection.queryObject<{ count: number }>`
-    SELECT COUNT(*) AS count FROM books;
-  `;
-  const bookCount = Number(result.rows[0].count);
-
-  if (bookCount === 0) {
-    // The table is empty, insert the book records
-    await connection.queryObject`
-      INSERT INTO books (title, author) VALUES
-        ('The Hobbit', 'J. R. R. Tolkien'),
-        ('Harry Potter and the Philosopher''s Stone', 'J. K. Rowling'),
-        ('The Little Prince', 'Antoine de Saint-Exupéry');
-    `;
-  }
-} finally {
-  connection.release();
 }
 
+// Start the server
 Deno.serve(async (req) => {
   const url = new URL(req.url);
   if (url.pathname !== '/books') {
     return new Response('Not Found', { status: 404 });
   }
 
-  const connection = await pool.connect();
   try {
     switch (req.method) {
       case 'GET': {
-        const result = await connection.queryObject`SELECT * FROM books`;
-        const body = JSON.stringify(result.rows, null, 2);
-        return new Response(body, {
+        const books = await sql`SELECT * FROM books`;
+        return new Response(JSON.stringify(books, null, 2), {
           headers: { 'content-type': 'application/json' },
         });
       }
@@ -104,11 +120,9 @@ Deno.serve(async (req) => {
     }
   } catch (err) {
     console.error(err);
-    return new Response(`Internal Server Error\n\n${err.message} `, {
+    return new Response(`Internal Server Error\n\n${err.message}`, {
       status: 500,
     });
-  } finally {
-    connection.release();
   }
 });
 ```
@@ -156,7 +170,7 @@ The `cURL` command should return the following data:
     "title": "The Little Prince",
     "author": "Antoine de Saint-Exupéry"
   }
-]%
+]
 ```
 
 ## Deploy your application with Deno Deploy
@@ -258,6 +272,7 @@ You can find the source code for the application described in this guide on GitH
 - [Deno Deploy](https://deno.com/deploy)
 - [Deno Runtime Quickstart](https://docs.deno.com/runtime/manual)
 - [Deno Deploy Quickstart](https://docs.deno.com/deploy/manual/)
-- [deno-postgres driver](https://deno.land/x/postgres@ls)
+- [Neon Serverless Driver](https://jsr.io/@neon/serverless)
+- [JSR](https://jsr.io/)
 
 <NeedHelp/>

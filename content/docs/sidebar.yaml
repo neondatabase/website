@@ -104,6 +104,7 @@
         - title: Connection pooling
           slug: connect/connection-pooling
         - title: Connection issues
+          slug: connect/connect-intro
           items:
             - title: Connection errors
               slug: connect/connection-errors

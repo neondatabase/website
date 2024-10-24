@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how to integrate your platform or service with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-19T10:34:10.005Z'
+updatedOn: '2024-10-24T10:48:39.465Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
@@ -35,6 +35,8 @@ Find out how you can integrate with Neon.
 <a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
 
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="Check out a sample OAuth application" icon="lock-landscape">Sample OAuth app</a>
+
+<a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
 
 </DetailIconCards>
 
