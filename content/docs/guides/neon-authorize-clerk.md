@@ -34,10 +34,9 @@ Clerk generates JSON Web Tokens (JWTs) upon user authentication, which are then 
 
 To follow along with this guide, you will need:
 
-- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech).
+- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
 - A [Clerk](https://clerk.com/) account and application. Clerk provides a free plan that you can use to get started.
 - An existing application, such as a **todos** app, where you can implement or modify the code samples from this guide. If you do not have an app, you can refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see how it implements schema and policies in a similar way to this guide.
-- A local development environment set up for running JavaScript applications, including [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/). These are required to run the Next.js application and manage dependencies.
 
 ## 1. Create a JWT Template and get your JWKS endpoint URL
 
