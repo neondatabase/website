@@ -54,14 +54,9 @@ For advanced JWT configuration, such as adding claims or setting token lifespans
 
 ### 2. Add Clerk as an authorization provider in the Neon Console
 
-<div style={{ display: 'flex', alignItems: 'top' }}>
-  <div style={{ flex: '0 0 60%', paddingRight: '20px' }}>
-Once you have the JWKS URL, go to the **Neon Console** and add Clerk as an authentication provider under the **Authorize** page — paste your copied URL and Clerk will be automatically recognized and selected.
-  </div>
-  <div style={{ flex: '0 0 40%', marginTop: '-20px' }}>
+Once you have the JWKS URL, go to the **Neon Console** and add Clerk as an authentication provider under the **Authorize** page. Paste your copied URL and Clerk will be automatically recognized and selected.
+
 ![Add Authentication Provider](/docs/guides/clerk_jwks_url_in_neon.png)
-  </div>
-</div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 

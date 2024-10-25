@@ -160,13 +160,13 @@ pgPolicy('view todos', {
 
 This policy enforces that a user can only view their own `todos`. Here's how each component works together.
 
-### The role of the Neon Proxy
+### What Neon does for you
 
-When a request is made, the Neon Proxy validates the JWT by checking its signature and expiration date against the public keys. Once validated, the Neon Proxy extracts the `user_id` from the JWT's claims and forwards it to the database session, making it available within Postgres.
+When your application makes a request, Neon validates the JWT by checking its signature and expiration date against the public keys. Once validated, Neon extracts the `user_id` from the JWT and uses it in the datasbase session, making it accessible for RLS.
 
 ### How the `pg_session_jwt` extension works
 
-The **pg_session_jwt** extension makes the extracted user ID accessible within your SQL queries and RLS policies:
+The **pg_session_jwt** extension enables RLS policies to verify user identity directly within SQL queries:
 
 ```typescript
 using: sql`(select auth.user_id() = user_id)`,
@@ -187,18 +187,19 @@ RLS can also act as a backstop or final guarantee to prevent data leaks. Even if
 
 Here is a non-exhaustive list of authentication providers. The table shows which providers Neon Authorize supports, links out to provider documentation for details, and the discovery URL pattern each provider typically uses.
 
-| Provider               | Supported? | Documentation                                                                                                                 | JWKS URL                                                                                    |
-| ---------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Clerk**              | ✅         | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    | `https://{yourClerkDomain}/.well-known/jwks.json`                                           |
-| **Stack Auth**         | ✅         | [docs](https://sage.storia.ai/stack-auth)                                                                                     | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`             |
-| **Auth0**              | ✅         | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              | `https://{yourDomain}/.well-known/jwks.json`                                                |
-| **Firebase Auth**      | ✅         | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` |
-| **Stytch**             | ✅         | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}  `                         |
-| **Keycloak**           | ✅         | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`     |
-| **Supabase Auth**      | ❌         | N/A                                                                                                                           | N/A                                                                                         |
-| **Amazon Cognito**     | ✅         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             |
-| **Azure AD**           | ✅         | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               | `https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens`                   |
-| **GCP Cloud Identity** | ✅         | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        | `https://www.googleapis.com/oauth2/v3/certs`                                                |
+| Provider               | Supported? | JWKS URL                                                                                    | Documentation                                                                                                                 |
+| ---------------------- | ---------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Clerk**              | ✅         | `https://{yourClerkDomain}/.well-known/jwks.json`                                           | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
+| **Stack Auth**         | ✅         | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`             | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
+| **Auth0**              | ✅         | `https://{yourDomain}/.well-known/jwks.json`                                                | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
+| **Firebase Auth**      | ✅         | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               |
+| **Stytch**             | ✅         | `https://{live or test}.stytch.com/v1/sessions/jwks/{project-id}`                           | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
+| **Keycloak**           | ✅         | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`     | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
+| **Supabase Auth**      | ❌         | N/A                                                                                         | N/A                                                                                                                           |
+| **Amazon Cognito**     | ✅         | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
+| **Azure AD**           | ✅         | `https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
+| **GCP Cloud Identity** | ✅         | `https://www.googleapis.com/oauth2/v3/certs`                                               | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
+| **Descope Auth**       | ✅         | `https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`                                        | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                                                  |
 
 ## Sample applications
 
@@ -210,6 +211,7 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize" description="A Todo List built with Auth0, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Auth0 + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize" description="A Todo List built with Stytch, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stytch + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-authorize" description="A Todo list built with Descope, Next.js, and Neon Authorize (SQL from the frontend)" icon="github">Descope + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon Authorize with custom generated JWTs" icon="github">Neon Authorize with custom JWTs</a>
 </DetailIconCards>
 
