@@ -22,11 +22,11 @@ enableTableOfContents: true
 
 <ComingSoon/>
 
-This guide shows you how to integrate Clerk with Neon Authorize to enable user authorization at the database-level using Postgres Row-level Security (RLS) policies. While the guide includes example schemas and policies to illustrate how RLS can work, it is not intended to build a complete application. You’ll need an existing application to integrate and modify the snippets as needed.
+Use Clerk with Neon Authorize to add secure, database-level authorization to your application. This guide first shows how to integrate Clerk with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Clerk handles user authentication by generating JSON Web Tokens (JWTs). These JWTs are then securely passed to Neon Authorize, which validates them and uses its user identity metadata to enforce the Row-Level Security (RLS) policies that you define directly in Postgres, securing database queries based on that user identity.
+Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity.
 
 ## Prerequisites
 
