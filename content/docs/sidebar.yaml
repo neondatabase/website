@@ -59,6 +59,8 @@
               slug: guides/nestjs
             - title: Next.js
               slug: guides/nextjs
+            - title: Nuxt
+              slug: guides/nuxt
             - title: Node.js
               slug: guides/node
             - title: Quarkus (JDBC)

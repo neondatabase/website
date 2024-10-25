@@ -31,6 +31,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application" icon="node-js"></a>
 
+<a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
+
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
 <a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
