@@ -198,8 +198,8 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Supabase Auth**      | ❌         | N/A                                                                                         | N/A                                                                                                                           |
 | **Amazon Cognito**     | ✅         | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
 | **Azure AD**           | ✅         | `https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
-| **GCP Cloud Identity** | ✅         | `https://www.googleapis.com/oauth2/v3/certs`                                               | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
-| **Descope Auth**       | ✅         | `https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`                                        | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                                                  |
+| **GCP Cloud Identity** | ✅         | `https://www.googleapis.com/oauth2/v3/certs`                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
+| **Descope Auth**       | ✅         | `https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
 
 ## Sample applications
 
