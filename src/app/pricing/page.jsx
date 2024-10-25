@@ -12,16 +12,18 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const logos = [
+  'openai',
   'zimmer',
   'outfront',
+  'adobe',
   'genomics',
-  'supergood',
-  'code-institute',
-  'branch',
-  'eqt',
+  'nerdwallet',
   'retool',
-  'master-school',
-  'encore',
+  'mistral',
+  'akqa',
+  'vercel',
+  'bcg',
+  'eqt',
 ];
 
 const sliderItems = [
