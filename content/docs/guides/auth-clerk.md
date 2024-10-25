@@ -180,17 +180,17 @@ all the app routes are protected by Clerk's authentication:
 ```typescript
 /// middleware.ts
 
-import { authMiddleware } from '@clerk/nextjs';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default authMiddleware({
-  // Routes that should be accessible without signing in can be defined as
-  // strings in this array, e.g, your home page, or a sign in page.
-  publicRoutes: [],
-});
+export default clerkMiddleware();
 
 export const config = {
-  // Protects all routes - https://clerk.com/docs/references/nextjs/auth-middleware
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/'],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 };
 ```
 
