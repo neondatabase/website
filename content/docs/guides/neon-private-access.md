@@ -37,6 +37,7 @@ To configure Neon Private Access, perform the following steps:
    1. Specify the **Service name**. It must be one of the following names, depending on your region:
 
       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
+      - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
 
       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
