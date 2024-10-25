@@ -24,6 +24,7 @@ const logos = [
   'akqa',
   'vercel',
   'bcg',
+  'wordware',
 ];
 
 const sliderItems = [
