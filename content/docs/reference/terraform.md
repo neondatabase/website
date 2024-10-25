@@ -8,7 +8,7 @@ updatedOn: '2024-10-09T15:10:07.754Z'
 The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
 
 <Admonition type="note">
-Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the the project maintainers.
+Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the project maintainers.
 </Admonition>
 
 - **Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
