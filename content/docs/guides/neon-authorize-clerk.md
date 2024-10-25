@@ -1,6 +1,6 @@
 ---
-title: Database-Level authorization with Clerk and Neon Authorize
-subtitle: Secure your application using Postges Row-level Security
+title: Database-level authorization with Clerk and Neon Authorize
+subtitle: Secure your application using Postgres Row-level Security
 enableTableOfContents: true
 ---
 
@@ -48,7 +48,7 @@ For a basic integration, the default JWT claims from Clerk, including the `user_
 https://{yourClerkDomain}/.well-known/jwks.json
 ```
 
-You can find your JWKS URL in the Clerk Dashboard under **Configure → Developers → API Keys.** Click **Show JWT Public Key** and copy the JWKS URL for later.
+You can find your JWKS URL in the Clerk Dashboard under **Configure → Developers → API Keys**. Click **Show JWT Public Key** and copy the JWKS URL for later.
 
 For advanced JWT configuration, such as adding claims or setting token lifespans, create a blank JWT template in **Configure > JWT Templates**. A dedicated Neon template is coming soon.
 
