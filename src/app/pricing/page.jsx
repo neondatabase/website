@@ -12,6 +12,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const logos = [
+  'eqt',
   'openai',
   'zimmer',
   'outfront',
@@ -23,7 +24,6 @@ const logos = [
   'akqa',
   'vercel',
   'bcg',
-  'eqt',
 ];
 
 const sliderItems = [
