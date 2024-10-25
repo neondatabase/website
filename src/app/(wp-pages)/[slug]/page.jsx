@@ -44,7 +44,6 @@ const DynamicPage = async ({ params }) => {
   if (!page) return notFound();
 
   const isAzurePage = params.slug === 'neon-on-azure';
-  const isCreatorsPage = params.slug === 'creators';
 
   const {
     title,
@@ -108,8 +107,6 @@ const DynamicPage = async ({ params }) => {
         );
       },
       landingcta: ({ ...props }) => {
-        if (isCreatorsPage) return null;
-
         if (isAzurePage) {
           return (
             <SharedCTA
@@ -119,6 +116,7 @@ const DynamicPage = async ({ params }) => {
             />
           );
         }
+
         return <PricingCTA {...props} />;
       },
     },

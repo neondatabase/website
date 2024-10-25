@@ -65,7 +65,6 @@ const WpPageDraft = async ({ searchParams }) => {
   if (!page) return notFound();
 
   const isAzurePage = searchParams.slug === 'neon-on-azure';
-  const isCreatorsPage = searchParams.slug === 'creators';
 
   const {
     title,
@@ -129,8 +128,6 @@ const WpPageDraft = async ({ searchParams }) => {
         );
       },
       landingcta: ({ ...props }) => {
-        if (isCreatorsPage) return null;
-
         if (isAzurePage) {
           return (
             <SharedCTA
@@ -140,6 +137,7 @@ const WpPageDraft = async ({ searchParams }) => {
             />
           );
         }
+
         return <PricingCTA {...props} />;
       },
     },
