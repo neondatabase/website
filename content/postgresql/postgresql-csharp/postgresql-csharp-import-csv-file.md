@@ -271,7 +271,7 @@ Output:
 (11 rows)
 ```
 
-The output indicates that the program has successfully imported 10 rows from the the `students.csv` file into the `students` table.
+The output indicates that the program has successfully imported 10 rows from the `students.csv` file into the `students` table.
 
 ## Summary
 

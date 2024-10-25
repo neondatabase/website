@@ -69,7 +69,7 @@ A table containing data about the periodic table of elements.
    psql postgresql://[user]:[password]@[neon_hostname]/periodic_table
    ```
 
-5. Look up the the element with the Atomic Number 10:
+5. Look up the element with the Atomic Number 10:
 
    ```sql
    SELECT * FROM periodic_table WHERE "AtomicNumber" = 10;
