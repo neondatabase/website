@@ -78,12 +78,12 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Create a Clerk application
 
-1. Log in to your Clerk account and navigate to the [Dashboard](https://dashboard.clerk.dev/). From the left sidebar, select `Create Application` to create a new app.
+1. Log in to the [Clerk Dashboard](https://dashboard.clerk.com/). Select `Create Application` to create a new app.
 2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `GitHub` as allowed sign-in methods.
 
 ### Retrieve your API keys
 
-From the sidebar, click on **Developers > API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
+From the `Configure` tab, click on **API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
 
 ```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=**************
