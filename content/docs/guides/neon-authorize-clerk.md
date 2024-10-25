@@ -34,7 +34,7 @@ To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
 - A [Clerk](https://clerk.com/) account and application. Clerk provides a free plan that you can use to get started.
-- An existing application (for example, a **todos** app), where you can model your policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
+- An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
 
 ## Integrate Clerk with Neon Authorize
 
