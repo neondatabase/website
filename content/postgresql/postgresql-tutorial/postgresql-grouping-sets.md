@@ -63,7 +63,7 @@ A grouping set is denoted by a comma\-separated list of columns placed inside pa
 (column1, column2, ...)
 ```
 
-For example, the following query uses the `GROUP BY` clause to return the number of products sold by brand and segment. In other words, it defines a grouping set of the brand and segment which is denoted by `(brand, segement)`
+For example, the following query uses the `GROUP BY` clause to return the number of products sold by brand and segment. In other words, it defines a grouping set of the brand and segment which is denoted by `(brand, segment)`
 
 ```sql
 SELECT
