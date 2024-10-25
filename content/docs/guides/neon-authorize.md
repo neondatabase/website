@@ -179,7 +179,9 @@ The RLS policy compares the `user_id` from the JWT with the `user_id` in the tod
 
 ## When to rely on RLS
 
-For early-stage applications, **RLS** might be all the security you need to scale your project. For more mature applications, where larger development teams are involved, RLS can act as a backstop or final guarantee. Even if other security layers fail — for example, a front-end component exposes access to a part of your app that it shouldn't, or your backend misapplies authorization — RLS ensures that unauthorized users will not be able to interact with your data. The exposed action will fail, protecting your sensitive database-backed resources.
+For early-stage applications, **RLS** might offer all the security you need to scale your project. For more mature applications or architectures where multiple backends read from the same database, RLS centralizes authorization rules within the database itself. This way, every service that accesses your database can benefit from secure, consistent access controls without needing to reimplement them individually.
+
+RLS can also act as a backstop or final guarantee to prevent data leaks. Even if other security layers fail — for example, a front-end component exposes access to a part of your app that it shouldn't, or your backend misapplies authorization — RLS ensures that unauthorized users will not be able to interact with your data. In these cases, the exposed action will fail, protecting your sensitive database-backed resources.
 
 ## Supported providers
 
@@ -219,7 +221,7 @@ While this feature is in its early-access phase, there are some limitations to b
 - **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
-- **Postgres 17:** Postgres 17 is currently unsupported but may be available soon.
+- **Postgres 17:** Postgres 17 is not currently supported but will be available soon.
 - **Azure:** Neon Authorize does not yet support projects set up in Azure regions.
 
 These limitations will evolve as we continue developing the feature. If you have any questions or run into issues, please let us know.
