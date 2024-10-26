@@ -151,7 +151,7 @@ pg_dump --schema-only \
 	> schema_dump.sql
 ```
 
-- With the the `--schema-only` option, only object definitions are dumped. Data is excluded.
+- With the `--schema-only` option, only object definitions are dumped. Data is excluded.
 - The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
 
 #### Review and modify the dumped schema

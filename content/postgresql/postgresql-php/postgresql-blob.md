@@ -68,7 +68,7 @@ The following `insert()` method reads data from a file specified by the `$pathTo
             $fileData = $this->pdo->pgsqlLOBCreate();
             $stream = $this->pdo->pgsqlLOBOpen($fileData, 'w');
 
-            // read data from the file and copy the the stream
+            // read data from the file and copy the stream
             $fh = fopen($pathToFile, 'rb');
             stream_copy_to_stream($fh, $stream);
             //

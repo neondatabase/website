@@ -81,6 +81,6 @@ To receive updates in Slack, enter the `/feed subscribe` command with the desire
 
 ## Remove feeds from Slack
 
-To remove feeds from Slack, enter the the `/feed list` command and note the feed ID number.
+To remove feeds from Slack, enter the `/feed list` command and note the feed ID number.
 
 Enter `/feed remove [ID number]` to remove the feed.

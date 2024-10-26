@@ -74,7 +74,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `dbname` is the name of the database. `neondb` is the default database created with a Neon project if you do not define your own database.
 - `?sslmode=require` an optional query parameter that enforces [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
 
-Save the connection string somewhere safe. It will be used to set the the **POSTGRES_URL** variable later.
+Save the connection string somewhere safe. It will be used to set the **POSTGRES_URL** variable later.
 
 ## Create a new Astro application
 

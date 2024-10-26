@@ -35,7 +35,7 @@ In this syntax, the queries must conform to the following rules:
 - The number and the order of the columns in the select list of both queries must be the same.
 - The data types of the columns in select lists of the queries must be compatible.
 
-The `UNION` operator removes all duplicate rows from the combined data set. To retain the duplicate rows, you use the the `UNION ALL` instead.
+The `UNION` operator removes all duplicate rows from the combined data set. To retain the duplicate rows, you use the `UNION ALL` instead.
 
 Here’s the syntax of the `UNION ALL` operator:
 

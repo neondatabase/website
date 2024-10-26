@@ -32,7 +32,7 @@ In this statement:
 
 If you rename a table that does not exist, PostgreSQL will issue an error.
 
-To avoid the error, you can use the the `IF EXISTS` option:
+To avoid the error, you can use the `IF EXISTS` option:
 
 ```sql
 ALTER TABLE IF EXISTS table_name

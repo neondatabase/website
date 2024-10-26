@@ -125,7 +125,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
    touch liquibase.properties
    ```
 
-3. Open the the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
+3. Open the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
 
    ```bash shouldWrap
    changeLogFile:dbchangelog.xml
