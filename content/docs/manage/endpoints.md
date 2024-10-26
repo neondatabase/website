@@ -483,4 +483,26 @@ curl -X 'DELETE' \
 
 </details>
 
+## Compute-related issues
+
+This section outlines compute-related issues you may encounter when using Neon and possible resolutions.
+
+### No space left on device
+
+You may encounter an error similar to the following when your compute's local disk storage is full:
+
+```bash shouldWrap
+ERROR: could not write to file "base/pgsql_tmp/pgsql_tmp1234.56.fileset/o12of34.p1.0": No space left on device (SQLSTATE 53100)
+```
+
+Neon computes allocate approximately 20 GiB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
+
+To resolve this issue, try the following strategies:
+
+- **Identify and terminate resource-intensive processes**: These could be long-running queries, operations, or possibly sync or replication activities. You can begin by [listing running queries by duration](/docs/postgresql/query-reference#list-running-queries-by-duration).
+- **Optimize queries to reduce temporary file usage**.
+- **Adjust pipeline settings for third-party sync or replication**: If you're syncing or replicating data with an external service, modify the pipeline settings to control disk space usage.
+
+If the issue persists, refer to our [Neon Support channels](https://neon.tech/docs/introduction/support#support-channels).
+
 <NeedHelp/>
