@@ -4,7 +4,7 @@ subtitle: Perform a schema-only migration with pg_dump and pg_restore
 redirectFrom:
   - /docs/import/import-schema-only
 enableTableOfContents: true
-updatedOn: '2024-09-30T11:41:25.025Z'
+updatedOn: '2024-10-26T08:44:49.114Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.

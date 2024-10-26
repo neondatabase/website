@@ -1,7 +1,7 @@
 ---
 title: SDKs for the Neon API
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.425Z'
+updatedOn: '2024-10-26T08:44:49.116Z'
 ---
 
 Neon provides support for the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). It provides a convenient way to interact with the Neon API using TypeScript.

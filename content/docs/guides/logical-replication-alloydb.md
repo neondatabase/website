@@ -3,7 +3,7 @@ title: Replicate data from AlloyDB
 subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-12T11:16:13.585Z'
+updatedOn: '2024-10-26T08:44:49.112Z'
 ---
 
 <LRBeta/>
