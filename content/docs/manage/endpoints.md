@@ -497,12 +497,52 @@ ERROR: could not write to file "base/pgsql_tmp/pgsql_tmp1234.56.fileset/o12of34.
 
 Neon computes allocate approximately 20 GiB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
 
-To resolve this issue, try the following strategies:
+To resolve this issue, you can try the following strategies:
 
 - **Identify and terminate resource-intensive processes**: These could be long-running queries, operations, or possibly sync or replication activities. You can begin by [listing running queries by duration](/docs/postgresql/query-reference#list-running-queries-by-duration).
 - **Optimize queries to reduce temporary file usage**.
 - **Adjust pipeline settings for third-party sync or replication**: If you're syncing or replicating data with an external service, modify the pipeline settings to control disk space usage.
 
 If the issue persists, refer to our [Neon Support channels](https://neon.tech/docs/introduction/support#support-channels).
+
+### Compute is not suspending
+
+In some cases, you may observe that your compute remains constantly active for no apparent reason. Possible causes for a constantly active compute when not expected include:
+
+- **Connection requests**: Frequent connection requests from clients, applications, or integrations can prevent a compute from suspending automatically. Each connection resets the autosuspend timer.
+- **Background processes**: Some applications or background jobs may run periodic tasks that keep the connection active.
+
+Possible steps you can take to identify the issues include:
+
+1. **Checking for active processes**
+
+    You can run the following query to identify active sessions and their states:
+
+      ```sql
+      SELECT 
+        pid, 
+        usename, 
+        query, 
+        state, 
+        query_start 
+      FROM 
+        pg_stat_activity
+      WHERE 
+        query_start >= now() - interval '24 hours'
+      ORDER BY 
+        query_start DESC;
+      ```
+
+      Look for processes initiated by your users, applications, or integrations that may be keeping your compute active.
+
+2. **Review connection patterns**
+
+   - Ensure that no applications are sending frequent, unnecessary connection requests.
+   - Consider batching connections if possible, or use a [connection pooling](/docs/connect/connection-pooling) to limit persistent connections.
+
+3. **Optimize any background jobs**
+   
+   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of activity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
+
 
 <NeedHelp/>
