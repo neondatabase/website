@@ -1,5 +1,5 @@
 ---
-title: Platform Overview
+title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
