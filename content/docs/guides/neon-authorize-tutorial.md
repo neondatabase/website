@@ -17,7 +17,7 @@ To get started, you’ll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **[Neon Authorize + Clerk Example application]**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
+- **Neon Authorize + Clerk Example application**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
 
   ```bash
   git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
@@ -52,6 +52,7 @@ When each user creates a todo, it’s securely linked to their `userId` in the d
       .generatedByDefaultAsIdentity(),
     userId: text("user_id")
       .notNull()
+      // [!code word:(auth.user_id())]
       .default(sql`(auth.user_id())`),
     task: text("task").notNull(),
     isComplete: boolean("is_complete").notNull().default(false),
@@ -61,7 +62,7 @@ When each user creates a todo, it’s securely linked to their `userId` in the d
 }
 ```
 
-The `userId` column is populated directly from the authenticated `userId` in the Clerk JWT, linking each todo to the correct user.
+The `userId` column is populated directly from the authenticated `(auth.user_id())` in the Clerk JWT, linking each todo to the correct user.
 
 ## Step 2 — Create todos
 
@@ -83,7 +84,7 @@ export async function getTodos(): Promise<Array<Todo>> {
     return db
       .select()
       .from(schema.todos)
-      .where(eq(schema.todos.userId, sql`auth.user_id()`))
+      .where(eq(schema.todos.userId, sql`auth.user_id()`)) // [!code highlight]
       .orderBy(asc(schema.todos.insertedAt));
   });
 }
@@ -122,7 +123,7 @@ export async function getTodos(): Promise<Array<Todo>> {
       db
         .select()
         .from(schema.todos)
-        // .where(eq(schema.todos.userId, sql`auth.user_id()`))
+        // .where(eq(schema.todos.userId, sql`auth.user_id()`)) // [!code highlight]
         .orderBy(asc(schema.todos.insertedAt))
     );
   });
@@ -151,13 +152,13 @@ Bob sees all of Alice's todos, and Alice now knows about her birthday party. Dis
 
 Another scenario, imagine a team member writes the `getTodos` function like this, thinking it's filtering todos by the current user:
 
-```typescript
+```typescript shouldWrap
 export async function getTodos(): Promise<Array<Todo>> {
   return fetchWithDrizzle(async (db) => {
     const todos = await db
       .select()
       .from(schema.todos)
-      .where(eq(schema.todos.userId, schema.todos.userId)) // Mistaken identity check
+      .where(eq(schema.todos.userId, schema.todos.userId)) // Woops // [!code highlight]
       .orderBy(asc(schema.todos.insertedAt));
 
     return todos;
