@@ -465,7 +465,7 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
-            - title: Trigger serverless functions
+            - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
         - section: Query
           items:

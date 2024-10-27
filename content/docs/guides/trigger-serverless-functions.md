@@ -1,11 +1,12 @@
 ---
 title: Trigger serverless functions
-subtitle: Use Inngest to trigger serverless functions from your Neon database changes.
+subtitle: Use Inngest to trigger serverless functions from your Neon database changes
 enableTableOfContents: true
 updatedOn: '2024-08-07T21:36:52.647Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**  
+
 By enabling your serverless functions to react to database changes, you open the door to many use cases. From onboarding to ETL and AI workflows, the possibilities are endless.
 
 This guide describes setting up a Neon database, configuring the Inngest integration, and connecting your Serverless functions to your Neon database with Inngest. It covers:
@@ -54,7 +55,7 @@ VALUES
 
 The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
 
-Navigate to your Neon Project using the Neon Console and open the “Settings > Logical Replication” page. From here, follow the instructions to enable Logical Replication:
+Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
@@ -70,7 +71,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Postgres credentials in your Neon project dashboard’s “Connection Details” section:
+You can find your admin Postgres credentials in your Neon project dashboard’s **Connection Details** section:
 
 ![Connection details section on the Neon console dashboard](/docs/guides/neon-console-connection-details.png)
 
@@ -168,7 +169,7 @@ export newUser = inngest.createFunction(
 
 ### 3. Exposing your Serverless Functions to Inngest
 
-To allow Inngest to run your Inngest Functions, add the following Serverless Function serving as a router:
+To allow Inngest to run your Inngest Functions, add the following Serverless Function, which serves as a router:
 
 <CodeTabs labels={["Vercel", "AWS Lambda", "Cloudflare Workers"]}>
 
@@ -212,7 +213,7 @@ export default {
 </CodeTabs>
 
 <Admonition type="note">
-Find more information about "Serving Inngest Functions" in [Inngest's documentation](https://www.inngest.com/docs/reference/serve?utm_source=neon&utm_medium=trigger-serverless-functions-guide#serve-client-functions-options).
+You can find more information about serving Inngest Functions in [Inngest's documentation](https://www.inngest.com/docs/reference/serve?utm_source=neon&utm_medium=trigger-serverless-functions-guide#serve-client-functions-options).
 </Admonition>
 
 ### 4. Configuring your Serverless application
@@ -227,20 +228,20 @@ We can now configure your Serverless application to sync with the Inngest Platfo
 
 We are now all set!
 
-Go over the Neon Console and add a new record to the `users` table:
+Go to the **Tables** page in the Neon Console and add a new record to the `users` table:
 
 ![You can add a new record to the users table directly from the Neon console](/docs/guides/inngest-integration-neon-console-users-table-add-new-record.png)
 
-You should see a new run of our `new-user` function appear on the [Inngest Platform](https://app.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
+You should see a new run of the `new-user` function appear on the [Inngest Platform](https://app.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
 
 ![The Inngest Platform lists all the runs](/docs/guides/inngest-integrations-inngest-platform-new-runs.png)
 
 ## Going further
 
-Your Serverless functions can now react to your Neon database changes!
+Your Serverless functions can now react to your Neon database changes.
 
-Besides being good for system design, Inngest has some special features that work great with database triggers:
+In addition to being good for system design, Inngest has some special features that work great with database triggers:
 
-- **[Fan-out](https://www.inngest.com/docs/guides/fan-out-jobs?utm_source=neon&utm_medium=trigger-serverless-functions-guide)** - This lets **one database event start multiple functions** at the same time. For example, when a new user is added, it could send a welcome email and set up a free trial, all at once.
-- **[Batching](https://www.inngest.com/docs/guides/batching?utm_source=neon&utm_medium=trigger-serverless-functions-guide)** - This **groups many database changes together** to handle them more efficiently. It's useful when you need to update lots of things at once, like when working with online stores.
-- **[Flow control](https://www.inngest.com/docs/guides/flow-control?utm_source=neon&utm_medium=trigger-serverless-functions-guide)** - This helps manage how often functions run. It can slow things down to **avoid overloading systems, or wait a bit to avoid doing unnecessary work**. This is helpful when working with other services that have limits on how often you can use them.
+- **[Fan-out](https://www.inngest.com/docs/guides/fan-out-jobs?utm_source=neon&utm_medium=trigger-serverless-functions-guide)**: Lets **one database event start multiple functions** at the same time. For example, when a new user is added, it could send a welcome email and set up a free trial, all at once.
+- **[Batching](https://www.inngest.com/docs/guides/batching?utm_source=neon&utm_medium=trigger-serverless-functions-guide)** **Groups many database changes together** to handle them more efficiently. It's useful when you need to update lots of things at once, like when working with online stores.
+- **[Flow control](https://www.inngest.com/docs/guides/flow-control?utm_source=neon&utm_medium=trigger-serverless-functions-guide)**: Helps manage how often functions run. It can slow things down to **avoid overloading systems, or wait a bit to avoid doing unnecessary work**. This is helpful when working with other services that have limits on how often you can use them.
