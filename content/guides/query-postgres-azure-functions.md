@@ -1,11 +1,9 @@
 ---
-
-title: Query your Postgres Database Using Azure Functions  
-subtitle: Learn how to query your Postgres database using Azure Functions  
-author: adalbert-pungu  
-enableTableOfContents: true  
-createdAt: "2024-10-19T21:00:00.000Z"  
-
+title: Query your Postgres Database Using Azure Functions
+subtitle: Learn how to query your Postgres database using Azure Functions
+author: adalbert-pungu
+enableTableOfContents: true
+createdAt: '2024-10-19T21:00:00.000Z'
 ---
 
 In this guide, we will explore how to query a **Postgres** database hosted on **Neon** using **Azure Functions**. This combination allows you to take advantage of a flexible, high-performance infrastructure without worrying about server management.
@@ -51,98 +49,98 @@ After creating the database, make sure to copy the connection details (such as *
 
 1. **Creating the tables**
 
-    Once the database is created, you should see an option named "SQL Editor" on the left to write and execute queries.
+   Once the database is created, you should see an option named "SQL Editor" on the left to write and execute queries.
 
-    In the query editor, copy and paste the SQL code below to create the `clients` and `hotels` tables. These are reference tables, as the `reservations` table will refer to these tables via foreign keys:
+   In the query editor, copy and paste the SQL code below to create the `clients` and `hotels` tables. These are reference tables, as the `reservations` table will refer to these tables via foreign keys:
 
-    ```sql
-    CREATE TABLE clients (
-        client_id SERIAL PRIMARY KEY,
-        first_name VARCHAR(100),
-        last_name VARCHAR(100),
-        email VARCHAR(100),
-        phone_number VARCHAR(20)
-    );
+   ```sql
+   CREATE TABLE clients (
+       client_id SERIAL PRIMARY KEY,
+       first_name VARCHAR(100),
+       last_name VARCHAR(100),
+       email VARCHAR(100),
+       phone_number VARCHAR(20)
+   );
 
-    CREATE TABLE hotels (
-        hotel_id SERIAL PRIMARY KEY,
-        name VARCHAR(100),
-        location VARCHAR(100)
-    );
-    ```
+   CREATE TABLE hotels (
+       hotel_id SERIAL PRIMARY KEY,
+       name VARCHAR(100),
+       location VARCHAR(100)
+   );
+   ```
 
-    Here is the SQL script to create the `reservations` table:
+   Here is the SQL script to create the `reservations` table:
 
-    ```sql
-    CREATE TABLE reservations (
-        reservation_id SERIAL PRIMARY KEY,
-        room_number INT,
-        client_name VARCHAR(100),
-        email VARCHAR(100),
-        check_in_date DATE,
-        check_out_date DATE
-    );
-    ```
+   ```sql
+   CREATE TABLE reservations (
+       reservation_id SERIAL PRIMARY KEY,
+       room_number INT,
+       client_name VARCHAR(100),
+       email VARCHAR(100),
+       check_in_date DATE,
+       check_out_date DATE
+   );
+   ```
 
 2. **Inserting test data**
 
-    You can insert some example data into the database to ensure that everything is working fine up to this point.
+   You can insert some example data into the database to ensure that everything is working fine up to this point.
 
-    Here is the SQL script to insert data into the `clients` table:
+   Here is the SQL script to insert data into the `clients` table:
 
-    ```sql
-    INSERT INTO clients (first_name, last_name, email, phone_number) VALUES
-    ('Alice', 'Dupont', 'alice.dupont@example.com', '0123456789'),
-    ('Bob', 'Martin', 'bob.martin@example.com', '0987654321'),
-    ('Charlie', 'Rousseau', 'charlie.rousseau@example.com', '0147253689');
-    ```
+   ```sql
+   INSERT INTO clients (first_name, last_name, email, phone_number) VALUES
+   ('Alice', 'Dupont', 'alice.dupont@example.com', '0123456789'),
+   ('Bob', 'Martin', 'bob.martin@example.com', '0987654321'),
+   ('Charlie', 'Rousseau', 'charlie.rousseau@example.com', '0147253689');
+   ```
 
-    Here is the SQL script to insert data into the `hotels` table:
+   Here is the SQL script to insert data into the `hotels` table:
 
-    ```sql
-    INSERT INTO hotels (name, location) VALUES
-    ('Hotel Le Paris', 'Paris'),
-    ('Hotel des Alpes', 'Annecy'),
-    ('Hotel de la Plage', 'Nice');
-    ```
+   ```sql
+   INSERT INTO hotels (name, location) VALUES
+   ('Hotel Le Paris', 'Paris'),
+   ('Hotel des Alpes', 'Annecy'),
+   ('Hotel de la Plage', 'Nice');
+   ```
 
-    Here is the SQL script to insert data into the `reservations` table:
+   Here is the SQL script to insert data into the `reservations` table:
 
-    ```sql
-    INSERT INTO reservations (client_id, hotel_id, check_in_date, check_out_date, number_of_guests) VALUES
-    (1, 1, '2024-11-01', '2024-11-05', 2),
-    (2, 2, '2024-11-10', '2024-11-15', 1),
-    (3, 3, '2024-12-01', '2024-12-10', 4);
-    ```
+   ```sql
+   INSERT INTO reservations (client_id, hotel_id, check_in_date, check_out_date, number_of_guests) VALUES
+   (1, 1, '2024-11-01', '2024-11-05', 2),
+   (2, 2, '2024-11-10', '2024-11-15', 1),
+   (3, 3, '2024-12-01', '2024-12-10', 4);
+   ```
 
 ## Step 2: Create an Azure Function to Manage Products
 
-1. **Sign in to Azure**
+1.  **Sign in to Azure**
 
     If you don't already have an account, sign up on the Microsoft [Azure](https://portal.azure.com/) portal.
 
     We will initialize an Azure Functions project where we will create an **HTTP Trigger function** in Visual Studio Code (VS Code) using the **Azure Functions extension**.
 
-2. **Install the Azure Functions extension**:
+2.  **Install the Azure Functions extension**:
 
     - Open VS Code, or install [Visual Studio Code](https://code.visualstudio.com/) if it's not yet installed.
     - Go to the extensions tab or press `Ctrl+Shift+X`.
     - Search for "Azure Functions" and install the official extension.
 
-3. **Create an Azure Functions Project**
+3.  **Create an Azure Functions Project**
 
     Open the command palette or press `Ctrl+Shift+P` to open the command palette.
 
-      * Type `Azure Functions: Create New Project...` and select that option.
-      * Choose a directory where you want to create the project.
-      * Select the programming language (`JavaScript` in our case).
-      * Choose a JavaScript programming model (`Model V4`).
-      * Choose a function template, and select `HTTP trigger`.
-      * Give your function a name, for example, `manageClients`.
+    - Type `Azure Functions: Create New Project...` and select that option.
+    - Choose a directory where you want to create the project.
+    - Select the programming language (`JavaScript` in our case).
+    - Choose a JavaScript programming model (`Model V4`).
+    - Choose a function template, and select `HTTP trigger`.
+    - Give your function a name, for example, `manageClients`.
 
     Once confirmed, the project will be created with some default code.
 
-4. **Install the Postgres client**
+4.  **Install the Postgres client**
 
     In the terminal of your Azure Functions project, install the **pg** package, which will be used to connect to Postgres:
 
@@ -150,7 +148,7 @@ After creating the database, make sure to copy the connection details (such as *
     npm install pg
     ```
 
-5. **Azure Functions Core Tools**
+5.  **Azure Functions Core Tools**
 
     Install Azure Functions Core Tools to run functions locally.
 
@@ -177,9 +175,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     </Admonition>
 
-
-
-7. **Configure Environment Variables**
+6.  **Configure Environment Variables**
 
     On the Neon dashboard, go to `Connection string`, select `Node.js`, and click `.env`. Then, click `show password` and copy the database connection string. If you don't click `show password`, you'll copy a connection string without the password (which is masked).
 
@@ -201,7 +197,7 @@ After creating the database, make sure to copy the connection details (such as *
     DB_PORT=5432
     ```
 
-8. **Modify the `local.settings.json` file**
+7.  **Modify the `local.settings.json` file**
 
     The `local.settings.json` file is used by Azure Functions for **local executions**. Azure Functions does not directly read the `.env` file. Instead, it relies on `local.settings.json` to inject environment variable values during local execution. In production, you will define the same settings through `App Settings` in the Azure portal.
 
@@ -226,9 +222,9 @@ After creating the database, make sure to copy the connection details (such as *
     npm install dotenv
     ```
 
-9. **Manage Each Table**
+8.  **Manage Each Table**
 
-      a. Create a separate file for each table in the `database/` folder.
+    a. Create a separate file for each table in the `database/` folder.
 
             **Example code for `client.js`**
 
@@ -429,12 +425,12 @@ After creating the database, make sure to copy the connection details (such as *
 
 1. **Run the Function Locally**:
 
-    - Open the integrated terminal in VS Code.
-    - Run the following command `npm run start`, which will execute `func start` to start the project and launch the functions:
+   - Open the integrated terminal in VS Code.
+   - Run the following command `npm run start`, which will execute `func start` to start the project and launch the functions:
 
-      ```bash
-      npm run start
-      ```
+     ```bash
+     npm run start
+     ```
 
 2. **Test with a Browser or Postman**:
    - Open a browser and navigate to `http://localhost:7071/api/manageClients` to test your function.
@@ -444,18 +440,18 @@ After creating the database, make sure to copy the connection details (such as *
 
 1. **Deploy Your Function**:
 
-    - Open the command palette with `Ctrl+Shift+P` and type `Azure Functions: Deploy to Function App...`.
-    - Follow the instructions to select your Azure subscription and choose or create a Function App, then complete the deployment process.
+   - Open the command palette with `Ctrl+Shift+P` and type `Azure Functions: Deploy to Function App...`.
+   - Follow the instructions to select your Azure subscription and choose or create a Function App, then complete the deployment process.
 
 2. **Test the Function**:
 
-    Use a tool like Postman to send an HTTP request to the Azure Function, for example:
+   Use a tool like Postman to send an HTTP request to the Azure Function, for example:
 
-    ```arduino
-    https://your-azure-function-url?client_id=1234
-    ```
+   ```arduino
+   https://your-azure-function-url?client_id=1234
+   ```
 
-    This will return the information of the client with the ID **1234**, if present in the database.
+   This will return the information of the client with the ID **1234**, if present in the database.
 
 ## Conclusion
 
