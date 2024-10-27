@@ -28,28 +28,28 @@ Let's start by creating a new Laravel project and setting up the necessary compo
 
 1. Create a new Laravel project:
 
-    ```bash
-    composer create-project laravel/laravel job-application-form
-    cd job-application-form
-    ```
+   ```bash
+   composer create-project laravel/laravel job-application-form
+   cd job-application-form
+   ```
 
 2. Install Laravel Folio for file-based routing:
 
-    ```bash
-    composer require laravel/folio
-    ```
+   ```bash
+   composer require laravel/folio
+   ```
 
 3. Install the Volt Livewire adapter for Laravel, this will also install the Livewire package:
 
-    ```bash
-    composer require livewire/volt
-    ```
+   ```bash
+   composer require livewire/volt
+   ```
 
 4. After installing Volt, you can install the Volt service provider:
 
-    ```bash
-    php artisan volt:install
-    ```
+   ```bash
+   php artisan volt:install
+   ```
 
 ## Configuring the Database Connection
 

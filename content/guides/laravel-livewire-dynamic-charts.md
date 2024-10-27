@@ -26,48 +26,48 @@ Before we begin, make sure you have:
 
 1. Create a new Laravel project:
 
-    ```bash
-    composer create-project laravel/laravel saas-charts
-    cd saas-charts
-    ```
+   ```bash
+   composer create-project laravel/laravel saas-charts
+   cd saas-charts
+   ```
 
 2. Install Laravel Breeze with Livewire:
 
-    ```bash
-    composer require laravel/breeze --dev
-    php artisan breeze:install livewire
-    ```
+   ```bash
+   composer require laravel/breeze --dev
+   php artisan breeze:install livewire
+   ```
 
 3. Install the Livewire Charts package which we'll use for data visualization:
 
-    ```bash
-    composer require asantibanez/livewire-charts
-    ```
+   ```bash
+   composer require asantibanez/livewire-charts
+   ```
 
 4. Install the Livewire Charts assets which include the necessary JavaScript and CSS files:
 
-    ```bash
-    php artisan livewire-charts:install
-    ```
+   ```bash
+   php artisan livewire-charts:install
+   ```
 
 5. Set up your Neon Postgres connection in the `.env` file:
 
-    ```env
-    DB_CONNECTION=pgsql
-    DB_HOST=your-neon-hostname.neon.tech
-    DB_PORT=5432
-    DB_DATABASE=your_database_name
-    DB_USERNAME=your_username
-    DB_PASSWORD=your_password
-    ```
+   ```env
+   DB_CONNECTION=pgsql
+   DB_HOST=your-neon-hostname.neon.tech
+   DB_PORT=5432
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
 
 6. Run the migrations to set up the users table and other Breeze-related tables in your Neon Postgres database:
 
-    ```bash
-    php artisan migrate
-    ```
+   ```bash
+   php artisan migrate
+   ```
 
-    This will create the necessary tables for user authentication and session management.
+   This will create the necessary tables for user authentication and session management.
 
 ## Additional Database Tables
 
@@ -77,55 +77,55 @@ For the purpose of this guide, we'll track feature usage and subscriptions. You 
 
 1. Create migrations:
 
-    ```bash
-    php artisan make:migration create_feature_usage_table
-    php artisan make:migration create_subscriptions_table
-    ```
+   ```bash
+   php artisan make:migration create_feature_usage_table
+   php artisan make:migration create_subscriptions_table
+   ```
 
-    Note that the naming convention for the migration files is important to make sure that your migrations are named correctly with the `create_` prefix followed by the table name.
+   Note that the naming convention for the migration files is important to make sure that your migrations are named correctly with the `create_` prefix followed by the table name.
 
 2. Update the migration files:
 
-    The above commands will create two migration files in the `database/migrations` directory. Update the migration files as follows:
+   The above commands will create two migration files in the `database/migrations` directory. Update the migration files as follows:
 
-    For the `create_feature_usage_table` we'll track the usage of different features by users, so we'll store the `user_id`, `feature_name`, and the `used_at` timestamp:
+   For the `create_feature_usage_table` we'll track the usage of different features by users, so we'll store the `user_id`, `feature_name`, and the `used_at` timestamp:
 
-    ```php
-    public function up()
-    {
-        Schema::create('feature_usage', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('feature_name');
-            $table->timestamp('used_at');
-            $table->timestamps();
-        });
-    }
-    ```
+   ```php
+   public function up()
+   {
+       Schema::create('feature_usage', function (Blueprint $table) {
+           $table->id();
+           $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->string('feature_name');
+           $table->timestamp('used_at');
+           $table->timestamps();
+       });
+   }
+   ```
 
-    For the `create_subscriptions_table` we'll track user subscriptions, including the `user_id`, `plan`, `started_at`, and `ended_at` timestamps:
+   For the `create_subscriptions_table` we'll track user subscriptions, including the `user_id`, `plan`, `started_at`, and `ended_at` timestamps:
 
-    ```php
-    public function up()
-    {
-        Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('plan');
-            $table->timestamp('started_at');
-            $table->timestamp('ended_at')->nullable();
-            $table->timestamps();
-        });
-    }
-    ```
+   ```php
+   public function up()
+   {
+       Schema::create('subscriptions', function (Blueprint $table) {
+           $table->id();
+           $table->foreignId('user_id')->constrained()->onDelete('cascade');
+           $table->string('plan');
+           $table->timestamp('started_at');
+           $table->timestamp('ended_at')->nullable();
+           $table->timestamps();
+       });
+   }
+   ```
 
 3. With the migrations in place, run the migrations to create the tables in your Neon Postgres database:
 
-    ```bash
-    php artisan migrate
-    ```
+   ```bash
+   php artisan migrate
+   ```
 
-    This will create the `feature_usage` and `subscriptions` tables in your database.
+   This will create the `feature_usage` and `subscriptions` tables in your database.
 
 ## Creating Models
 
@@ -524,59 +524,59 @@ If you don't have any data yet, you can seed the database with sample data to te
 
 1. Generate the seeder:
 
-    ```bash
-    php artisan make:seeder SampleDataSeeder
-    ```
+   ```bash
+   php artisan make:seeder SampleDataSeeder
+   ```
 
 2. Open the newly created seeder file (`database/seeders/SampleDataSeeder.php`) and populate it with sample data for feature usage and subscriptions:
 
-    ```php
-    <?php
+   ```php
+   <?php
 
-    namespace Database\Seeders;
+   namespace Database\Seeders;
 
-    use Illuminate\Database\Seeder;
-    use App\Models\FeatureUsage;
-    use App\Models\Subscription;
-    use App\Models\User;
-    use Carbon\Carbon;
+   use Illuminate\Database\Seeder;
+   use App\Models\FeatureUsage;
+   use App\Models\Subscription;
+   use App\Models\User;
+   use Carbon\Carbon;
 
-    class SampleDataSeeder extends Seeder
-    {
-        public function run()
-        {
-            // Create users
-            $users = User::factory(10)->create();
+   class SampleDataSeeder extends Seeder
+   {
+       public function run()
+       {
+           // Create users
+           $users = User::factory(10)->create();
 
-            // Seed FeatureUsage data
-            foreach ($users as $user) {
-                for ($i = 0; $i < 5; $i++) {
-                    FeatureUsage::create([
-                        'user_id' => $user->id,
-                        'feature_name' => 'Feature ' . rand(1, 5),
-                        'used_at' => Carbon::now()->subDays(rand(0, 30)),
-                    ]);
-                }
-            }
+           // Seed FeatureUsage data
+           foreach ($users as $user) {
+               for ($i = 0; $i < 5; $i++) {
+                   FeatureUsage::create([
+                       'user_id' => $user->id,
+                       'feature_name' => 'Feature ' . rand(1, 5),
+                       'used_at' => Carbon::now()->subDays(rand(0, 30)),
+                   ]);
+               }
+           }
 
-            // Seed Subscription data
-            foreach ($users as $user) {
-                Subscription::create([
-                    'user_id' => $user->id,
-                    'plan' => 'Basic',
-                    'started_at' => Carbon::now()->subMonths(2),
-                    'ended_at' => rand(0, 1) ? Carbon::now()->subMonth() : null,
-                ]);
-            }
-        }
-    }
-    ```
+           // Seed Subscription data
+           foreach ($users as $user) {
+               Subscription::create([
+                   'user_id' => $user->id,
+                   'plan' => 'Basic',
+                   'started_at' => Carbon::now()->subMonths(2),
+                   'ended_at' => rand(0, 1) ? Carbon::now()->subMonth() : null,
+               ]);
+           }
+       }
+   }
+   ```
 
 3. Run the seeder to populate the database with test data:
 
-    ```bash
-    php artisan db:seed --class=SampleDataSeeder
-    ```
+   ```bash
+   php artisan db:seed --class=SampleDataSeeder
+   ```
 
 Once the database is seeded, refresh the charts dashboard, and you should see the charts populated with real-time data.
 
