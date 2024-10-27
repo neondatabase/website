@@ -22,7 +22,7 @@ enableTableOfContents: true
 
 <ComingSoon/>
 
-Use Clerk with Neon Authorize to add secure, database-level authorization to your application. This guide first shows how to integrate Clerk with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Clerk with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Clerk for user authentication. It shows you how to integrate Clerk with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
@@ -33,7 +33,7 @@ Clerk handles user authentication by generating JSON Web Tokens (JWTs), which ar
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
-- A [Clerk](https://clerk.com/) account and application. Clerk provides a free plan that you can use to get started.
+- A [Clerk](https://clerk.com/) account with an application already user Clerk for user authentication. Clerk provides a free plan that you can use to get started.
 - An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
 
 ## Integrate Clerk with Neon Authorize
