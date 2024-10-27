@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2024-10-22T17:28:39.354Z'
+updatedOn: '2024-10-26T09:20:19.124Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
@@ -60,7 +60,7 @@ Postgres 17, released in September 2024, currently lacks support for several ext
 | [pgrowlocks](https://www.postgresql.org/docs/16/pgrowlocks.html)                                 |    1.2 |    1.2 |    1.2 |    1.2 |                                                                                                                                                                           |
 | [pgstattuple](https://www.postgresql.org/docs/16/pgstattuple.html)                               |    1.5 |    1.5 |    1.5 |    1.5 |                                                                                                                                                                           |
 | [pgtap](https://pgtap.org/documentation.html)                                                    |  1.3.3 |  1.3.3 |  1.3.3 |  1.3.3 |                                                                                                                                                                           |
-| [pgvector](/docs/extensions/pgvector)                                                            |  0.7.2 |  0.7.2 |  0.7.2 |      - | Install with `CREATE EXTENSION vector;`                                                                                                                                   |
+| [pgvector](/docs/extensions/pgvector)                                                            |  0.7.4 |  0.7.4 |  0.7.4 |  0.7.4 | Install with `CREATE EXTENSION vector;`                                                                                                                                   |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                                                |  0.1.5 |  0.1.5 |  0.1.5 |      - | Install with `CREATE EXTENSION ulid;`                                                                                                                                     |
 | [plcoffee](https://coffeescript.org/)                                                            |  3.1.5 |  3.1.5 |  3.1.8 |      - |                                                                                                                                                                           |
 | [plls](https://livescript.net/)                                                                  |  3.1.5 |  3.1.5 |  3.1.8 |      - |                                                                                                                                                                           |

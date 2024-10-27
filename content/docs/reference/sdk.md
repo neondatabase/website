@@ -1,7 +1,7 @@
 ---
 title: SDKs for the Neon API
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.425Z'
+updatedOn: '2024-10-26T08:44:49.116Z'
 ---
 
 Neon provides support for the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). It provides a convenient way to interact with the Neon API using TypeScript.
@@ -60,7 +60,7 @@ To get started with the `@neondatabase/api-client` library, follow these steps:
 The following is a list of community-created SDKs for interacting with the Neon API.
 
 <Admonition type="note">
-Community SDKs are not maintained or officially supported by Neon. Some features may be out of date, so use these SDKs at your own discretion. If you have questions about these SDKs, please contact the the project maintainers.
+Community SDKs are not maintained or officially supported by Neon. Some features may be out of date, so use these SDKs at your own discretion. If you have questions about these SDKs, please contact the project maintainers.
 </Admonition>
 
 - [Node and Deno TypeScript SDK](https://github.com/paambaati/neon-js-sdk)

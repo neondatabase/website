@@ -1,7 +1,7 @@
 ---
 title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.670Z'
+updatedOn: '2024-10-26T08:44:49.114Z'
 ---
 
 This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database server. AWS DMS supports a variety of database migration sources including PostgreSQL, MySQL, Oracle, and Microsoft SQL Server. For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
@@ -107,7 +107,7 @@ To verify that data was migrated to your Neon database:
 
 This section contains notes from our experience using AWS DMS to migrate data to Neon from an RDS Postgres database.
 
-- When testing migration steps, the the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
+- When testing migration steps, the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
 - We created all resources in the same region (`us-east-2a`)
 - We created an RDS PostgreSQL 15 database called `dms_sample` as the source database. The Neon target database was also Postgres 15.
 - We populated the RDS PostgreSQL source database using the [AWS DMS sample Postgres database](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md). To do this, we created an EC2 instance to connect to the database following the steps in this topic: [Create an Amazon EC2 Client](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.client).

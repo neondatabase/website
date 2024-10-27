@@ -36,7 +36,7 @@ It could be a Unicode code point which is converted to a UTF8 character.
 
 ## Return Value
 
-The `CHR()` function returns a character that corresponds the the ASCII code value or Unicode code point.
+The `CHR()` function returns a character that corresponds the ASCII code value or Unicode code point.
 
 ## Examples
 
