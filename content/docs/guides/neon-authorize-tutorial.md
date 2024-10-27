@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies protect user data by adding an extra layer of security beyond application logic.
+In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
 
 ## About the sample application
 
@@ -17,7 +17,7 @@ To get started, you’ll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon Authorize + Clerk Example application**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) locally.
+- **[Neon Authorize + Clerk Example application]**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
 
     ```bash
     git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
@@ -27,9 +27,17 @@ To get started, you’ll need:
 
 ## Step 1 — Create test users
 
-Create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and email logins, so let's create one of each. For this guide, we'll call our two users Bob and Alice.
+Start the sample application:
 
-Create your `Bob` user using Google. Then, using a private browser session, try the email sign-up to create `Alice`. You'll receive a verification email from `MyApp`, probably in your spam folder.
+```bash
+npm run dev
+```
+
+Open the app in your browser using `localhost:3000`.
+
+Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and email logins, so let's create one of each. For this guide, we'll call our two users Bob and Alice.
+
+Create your `Alice` user using Google. Then, using a private browser session, try the email sign-up to create `Bob`. You'll receive a verification email from `MyApp`, probably in your spam folder.
 
 Side by side, here's the empty state for both users:
 
@@ -87,7 +95,7 @@ Even though isolation is backed by our RLS policies, we include it here for perf
 
 ### RLS policy for viewing todos
 
-In the application's `schema.ts` file, you can find the RLS policy written in Drizzle that also performs the `user_id` check, but this time at the row level in Postgres.
+In the application's `schema.ts` file, you can find the RLS policies written in Drizzle that provide access control at the database level. Here is a look at one of those policies:
 
 ```typescript shoulWrap
  p2: pgPolicy("view todos", {
@@ -97,7 +105,7 @@ In the application's `schema.ts` file, you can find the RLS policy written in Dr
     }),
 ```
 
-This policy restricts each `SELECT` query to only return rows where the `user_id` matches the currently authenticated user, so that users only see their own Todos. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond application code, helping safeguard data even in cases of direct database access.
+This policy ensures that each `SELECT` query only returns rows where the `user_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own Todos. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
 
 ## Step 3 — Remove access control from application code
 
@@ -134,7 +142,7 @@ ALTER TABLE public.todos DISABLE ROW LEVEL SECURITY;
 ```
 ![data leak](/docs/guides/authorize_tutorial_data_leak.png)
 
-Birthday surprise is _ruined_. Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation.
+Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation. Birthday surprise is _ruined_.
 
 ## Step 5 — RLS as a safety net
 
@@ -154,9 +162,11 @@ export async function getTodos(): Promise<Array<Todo>> {
 }
 ```
 
-The `where` clause here might look like a valid comparison, and in a busy review, it might even go unnoticed. The developer likely intended to compare `schema.todos.userId` to an authenticated `userId`, like `schema.session.userId`, to limit results to the current user. But `userId = userId` is a tautology and always evaluates to true, allowing todos for any user to be returned.
+The `where` clause here might look like a valid comparison, and in a busy review, it might even go unnoticed. The developer likely intended to compare `schema.todos.userId` to an authenticated `userId`, like `schema.session.userId`. But `userId = userId` is a tautology, and will always evaluate to true.
 
-Go ahead and replace the `getTodos` in `actions.tsx` with this incorrect vesion. Referesh your open Todo pages and you'll see all todos still showing for both user sessions.
+Go ahead and replace the `getTodos` in `actions.tsx` with this incorrect version. Referesh your open Todo pages and you'll see all todos still showing for both user sessions, as expected.
+
+### Re-enable RLS
 
 Now, let's re-enable RLS from Neon:
 
@@ -166,7 +176,7 @@ ALTER TABLE public.todos ENABLE ROW LEVEL SECURITY;
 
 ![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
 
-With RLS back on, data isolation is restored, despite the incorrect check on the application side. In this case, RLS acts as a backstop, enforcing access control at the database layer, preventing unintended data exposure due to application-side mistakes.
+With RLS back on, there are no more data leaks, despite the incorrect check on the application side. In this case, RLS acts as a backstop, preventing unintended data exposure due to application-side mistakes.
 
 Order is restored, thanks to RLS. Now go fix your app before you forget:
 
@@ -184,13 +194,11 @@ export async function getTodos(): Promise<Array<Todo>> {
 }
 ```
 
-## Appendix: Understanding RLS Policies in Drizzle
+## Appendix: Understanding RLS policies in Drizzle
 
-In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application.
+In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application. You can find these policies in the `schema.ts` file.
 
 Writing RLS policies in SQL can be complex, but a recent release of Drizzle makes it much more straightforward. These policies are all written using Drizzle.
-
-You can find these policies in the `schema.ts` file.
 
 ### create todos
 
