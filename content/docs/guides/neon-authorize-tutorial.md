@@ -19,9 +19,9 @@ To get started, you’ll need:
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
 - **[Neon Authorize + Clerk Example application]**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
 
-    ```bash
-    git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
-    ```
+  ```bash
+  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
+  ```
 
   Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon Authorize Quickstart](/docs/guides/neon-authorize-clerk).
 
@@ -118,11 +118,13 @@ export async function getTodos(): Promise<Array<Todo>> {
   return fetchWithDrizzle(async (db, { userId }) => {
     // WHERE filter is optional because of RLS. But we send it anyway for
     // performance reasons.
-    return db
-      .select()
-      .from(schema.todos)
-      // .where(eq(schema.todos.userId, sql`auth.user_id()`))
-      .orderBy(asc(schema.todos.insertedAt));
+    return (
+      db
+        .select()
+        .from(schema.todos)
+        // .where(eq(schema.todos.userId, sql`auth.user_id()`))
+        .orderBy(asc(schema.todos.insertedAt))
+    );
   });
 }
 ```
@@ -140,6 +142,7 @@ Let's see what happens when we disable RLS on our todos table. Go to your Clerk 
 ```sql shouldWrap
 ALTER TABLE public.todos DISABLE ROW LEVEL SECURITY;
 ```
+
 ![data leak](/docs/guides/authorize_tutorial_data_leak.png)
 
 Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation. Birthday surprise is _ruined_.
@@ -261,11 +264,11 @@ To check out the RLS policies defined for the `todos` table in Postgres, run thi
 Here is the output, showing columns `policyname, cmd, qual, with_check` only:
 
 ```sql
-  policyname  |  cmd   |                    qual                    |                 with_check                 
+  policyname  |  cmd   |                    qual                    |                 with_check
 --------------+--------+--------------------------------------------+--------------------------------------------
  create todos | INSERT |                                            | ( SELECT (auth.user_id() = todos.user_id))
- update todos | UPDATE | ( SELECT (auth.user_id() = todos.user_id)) | 
- delete todos | DELETE | ( SELECT (auth.user_id() = todos.user_id)) | 
- view todos   | SELECT | ( SELECT (auth.user_id() = todos.user_id)) | 
+ update todos | UPDATE | ( SELECT (auth.user_id() = todos.user_id)) |
+ delete todos | DELETE | ( SELECT (auth.user_id() = todos.user_id)) |
+ view todos   | SELECT | ( SELECT (auth.user_id() = todos.user_id)) |
 (4 rows)
 ```
