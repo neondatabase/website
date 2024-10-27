@@ -13,9 +13,9 @@ Testing with realistic data is crucial as it helps ensure that your application 
 
 ## Understanding Flask Testing Approaches
 
-In Flask applications, you would commonly use an in-memory SQLite database for testing. This method is favored because it allows for starting with a clean state for each test run by applying all database migrations and seeders. This setup is also great for parallel testing, as that way tests run quickly and do not interfere with each other.
+In Flask applications, you would commonly use an in-memory SQLite database for testing. This method is favored because it allows for starting with a clean state for each test run by applying all database migrations and seeders. This setup is also great for parallel testing, as tests run quickly and do not interfere with each other.
 
-However, testing with SQLite can differ significantly from your production environment that might use a different database system, such as PostgreSQL. These differences can affect your application's behavior and lead to unexpected issues in production. This is one of the reasons why testing with real data can provide a more accurate finding of how your application will perform in its live environment.
+However, testing with SQLite can differ significantly from your production environment, which might use a different database system, such as PostgreSQL. These differences can affect your application's behavior and lead to unexpected issues in production. This is one of the reasons why testing with real data can provide a more accurate finding of how your application will perform in its live environment.
 
 ## Neon Branching
 

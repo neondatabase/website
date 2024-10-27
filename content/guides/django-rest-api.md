@@ -9,7 +9,7 @@ updatedOn: '2024-09-15T00:00:00.000Z'
 
 Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django to provide powerful tools for building RESTful APIs quickly and efficiently based on your Django models with minimal code.
 
-In this guide, we will go over how to build a RESTful API for an fictional AI Model Marketplace using Django and Django REST Framework with Neon's serverless Postgres as the database backend.
+In this guide, we will go over how to build a RESTful API for a fictional AI Model Marketplace using Django and Django REST Framework with Neon's serverless Postgres as the database backend.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ To follow this guide, you'll need:
 
 First, let's set up a new Python virtual environment for our project:
 
-```bash
+```bash shouldWrap
 python -m venv neon-django-ai-marketplace
 source neon-django-ai-marketplace/bin/activate  # On Windows, use `neon-django-ai-marketplace\Scripts\activate`
 ```
@@ -424,7 +424,7 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
 
 1. Create a new model author:
 
-   ```bash
+   ```bash shouldWrap
    curl -X POST http://localhost:8000/api/authors/ -H "Content-Type: application/json" -d '{"name":"AI Innovations Inc.", "bio":"Leading AI research company", "contact_info":"contact@aiinnovations.com", "rating":4.8}'
    ```
 
@@ -432,7 +432,7 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
 
 2. Create a new AI model:
 
-   ```bash
+   ```bash shouldWrap
    curl -X POST http://localhost:8000/api/models/ -H "Content-Type: application/json" -d '{"name":"AdvancedNLP", "model_type":"NLP", "description":"State-of-the-art NLP model", "framework":"PT", "version":"1.0", "download_url":"https://example.com/model", "price":"99.99", "tags":["NLP", "transformer"], "author_id":1}'
    ```
 
@@ -451,7 +451,7 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
    ```
 
 5. Add a benchmark for an AI model:
-   ```bash
+   ```bash shouldWrap
    curl -X POST http://localhost:8000/api/benchmarks/ -H "Content-Type: application/json" -d '{"ai_model":1, "metric_name":"Accuracy", "value":0.95, "hardware_used":"NVIDIA A100 GPU"}'
    ```
 

@@ -28,28 +28,28 @@ Let's start by creating a new Laravel project and setting up the necessary compo
 
 1. Create a new Laravel project:
 
-```bash
-composer create-project laravel/laravel job-application-form
-cd job-application-form
-```
+    ```bash
+    composer create-project laravel/laravel job-application-form
+    cd job-application-form
+    ```
 
 2. Install Laravel Folio for file-based routing:
 
-```bash
-composer require laravel/folio
-```
+    ```bash
+    composer require laravel/folio
+    ```
 
 3. Install the Volt Livewire adapter for Laravel, this will also install the Livewire package:
 
-```bash
-composer require livewire/volt
-```
+    ```bash
+    composer require livewire/volt
+    ```
 
 4. After installing Volt, you can install the Volt service provider:
 
-```bash
-php artisan volt:install
-```
+    ```bash
+    php artisan volt:install
+    ```
 
 ## Configuring the Database Connection
 
@@ -76,7 +76,7 @@ First, let's create the migration for the applicants table using the following `
 php artisan make:migration create_applicants_table
 ```
 
-Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating. That way Laravel can automatically determine the table name from the migration name and also it will be easier to identify the purpose of the migration file by its name for other developers.
+Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating. That way, Laravel can automatically determine the table name from the migration name, and also it will be easier to identify the purpose of the migration file by its name for other developers.
 
 This command generates a new migration file in the `database/migrations` directory. Open the newly created file and update its content as follows:
 
@@ -450,7 +450,7 @@ The main thing to remember here is that with Folio, you don't need to manually d
 
 ## Building the Multi-Step Form with Volt
 
-Volt is a powerful addition to Laravel Livewire that allows you to build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt enables you to define your component's state and validation rules directly in the view file, eliminating the need for a separate component class.
+Volt is a powerful addition to Laravel Livewire that allows you to build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt lets you define your component's state and validation rules directly in the view file, eliminating the need for a separate component class.
 
 Let's create Volt components for each step of our multi-step form.
 
@@ -997,7 +997,7 @@ This test checks if:
 
 You can create similar tests for the education and work experience steps.
 
-To learn more about testing in Laravel check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch) guide.
+To learn more about testing in Laravel, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch) guide.
 
 ## Conclusion
 
