@@ -424,10 +424,16 @@
       slug: guides/neon-authorize
       icon: api
       items:
-        - title: About Neon Authorize
-          slug: guides/neon-authorize
-        - title: Clerk Quickstart
-          slug: guides/neon-authorize-clerk
+        - section: Overview
+          items:
+            - title: About
+              slug: guides/neon-authorize
+            - title: Tutorial
+              slug: guides/neon-authorize-tutorial
+        - section: Quickstarts
+          items:
+            - title: Clerk
+              slug: guides/neon-authorize-clerk
     - title: Integrations
       icon: integrations
       slug: guides/integrations
