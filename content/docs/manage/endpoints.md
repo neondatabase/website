@@ -516,24 +516,24 @@ Possible steps you can take to identify the issues include:
 
 1. **Checking for active processes**
 
-    You can run the following query to identify active sessions and their states:
+   You can run the following query to identify active sessions and their states:
 
-      ```sql
-      SELECT 
-        pid, 
-        usename, 
-        query, 
-        state, 
-        query_start 
-      FROM 
-        pg_stat_activity
-      WHERE 
-        query_start >= now() - interval '24 hours'
-      ORDER BY 
-        query_start DESC;
-      ```
+   ```sql
+   SELECT
+     pid,
+     usename,
+     query,
+     state,
+     query_start
+   FROM
+     pg_stat_activity
+   WHERE
+     query_start >= now() - interval '24 hours'
+   ORDER BY
+     query_start DESC;
+   ```
 
-      Look for processes initiated by your users, applications, or integrations that may be keeping your compute active.
+   Look for processes initiated by your users, applications, or integrations that may be keeping your compute active.
 
 2. **Review connection patterns**
 
@@ -541,8 +541,7 @@ Possible steps you can take to identify the issues include:
    - Consider batching connections if possible, or use a [connection pooling](/docs/connect/connection-pooling) to limit persistent connections.
 
 3. **Optimize any background jobs**
-   
-   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of activity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
 
+   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of activity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
 
 <NeedHelp/>
