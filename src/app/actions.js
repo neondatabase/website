@@ -20,18 +20,8 @@ export const checkCookie = async (name) => {
   return isCookieValid;
 };
 
-// Memoization for referer headers to avoid repeated lookups
-let refererCache = null;
-
 export const getReferer = async () => {
-  if (refererCache !== null) {
-    return refererCache;
-  }
-
   const referer = headers().get('referer') || headers().get('referrer') || '';
-
-  // Cache the referer for future use during the same request lifecycle
-  refererCache = referer;
 
   return referer;
 };
