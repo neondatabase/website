@@ -74,7 +74,7 @@ Let's create some sample Todos for both Alice and Bob. See if you can guess wher
 
 ### Todos are isolated
 
-In this sample app, isolated of Todos to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
+In this sample app, isolation of Todos to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
 
 Let's take a look at the `getTodos` function in the `actions.tsx` file:
 
