@@ -163,7 +163,7 @@ This policy enforces that an authenticated user can only view their own `todos`.
 
 ### What Neon does for you
 
-When your application makes a request, Neon validates the JWT by checking its signature and expiration date against the public keys. Once validated, Neon extracts the `user_id` from the JWT and uses it in the datasbase session, making it accessible for RLS.
+When your application makes a request, Neon validates the JWT by checking its signature and expiration date against a public key. Once validated, Neon extracts the `user_id` from the JWT and uses it in the database session, making it accessible for RLS.
 
 ### How the `pg_session_jwt` extension works
 
