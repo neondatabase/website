@@ -159,7 +159,7 @@ pgPolicy('view todos', {
 
 </Tabs>
 
-This policy enforces that a user can only view their own `todos`. Here's how each component works together.
+This policy enforces that an authenticated user can only view their own `todos`. Here's how each component works together.
 
 ### What Neon does for you
 
