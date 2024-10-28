@@ -50,7 +50,7 @@ Password for user postgres:
 
 You need to provide the password for the `postgres` user and press Enter (or Return key). Note that the password is the one that you provided when installing the PostgreSQL server.
 
-After entering the password correctly, you’ll connected to the PostgreSQL server. The command prompt will change to something like this:
+After entering the password correctly, you’ll be connected to the PostgreSQL server. The command prompt will change to something like this:
 
 ```shell
 postgres=#
