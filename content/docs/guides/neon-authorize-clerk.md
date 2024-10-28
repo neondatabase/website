@@ -210,7 +210,7 @@ export type Todo = InferSelectModel<typeof todos>;
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Clerk, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the frontend and the backend of our sample **todos** application.
+With RLS policies in place, you can now query the database using JWTs from Clerk, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
