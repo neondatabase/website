@@ -12,6 +12,7 @@ enableTableOfContents: true
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
+  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
   <a href="https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
 </DocsList>
 

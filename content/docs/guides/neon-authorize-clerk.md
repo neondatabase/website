@@ -11,7 +11,8 @@ enableTableOfContents: true
 <p>Run a sample authenticated query</p>
 </DocsList>
 
-<DocsList title="Clerk docs" theme="docs">
+<DocsList title="Related docs" theme="docs">
+  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
   <a href="https://clerk.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
 </DocsList>
 

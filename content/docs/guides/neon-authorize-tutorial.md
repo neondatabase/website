@@ -5,6 +5,8 @@ enableTableOfContents: true
 isDraft: true
 ---
 
+<ComingSoon/>
+
 In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
 
 ## About the sample application
