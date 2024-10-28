@@ -110,7 +110,7 @@ neonctl connection-string --role-name authenticated
 
 Add this to your `.env` file.
 
-```bash
+```bash shouldWrap
 # Neon "authenticated" role connection string
 DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
 ```
