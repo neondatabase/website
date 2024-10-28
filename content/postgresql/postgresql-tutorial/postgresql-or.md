@@ -30,7 +30,7 @@ SELECT 1 <> 1 AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -73,7 +73,7 @@ SELECT true OR true AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -88,7 +88,7 @@ SELECT true OR false AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -103,7 +103,7 @@ SELECT true OR null AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -118,7 +118,7 @@ SELECT false OR false AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -133,7 +133,7 @@ SELECT false OR null AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  null
@@ -148,7 +148,7 @@ SELECT false OR false AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -189,7 +189,7 @@ WHERE
 
 Output:
 
-```sql
+```text
             title            | rental_rate
 -----------------------------+-------------
  Academy Dinosaur            |        0.99

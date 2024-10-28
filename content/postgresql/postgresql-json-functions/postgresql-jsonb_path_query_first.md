@@ -50,7 +50,7 @@ SELECT jsonb_path_query_first(
 
 Output:
 
-```sql
+```text
  first_pet_name
 ----------------
  "Lucy"
@@ -90,7 +90,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
  first_pet_name
 ----------------
  "Fluffy"
@@ -110,7 +110,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
  jsonb_path_query_first
 ------------------------
  null

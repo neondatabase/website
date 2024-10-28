@@ -44,7 +44,7 @@ SELECT pg_postmaster_start_time();
 
 Output:
 
-```sql
+```text
    pg_postmaster_start_time
 -------------------------------
  2024-02-14 03:41:32.048451-07
@@ -59,7 +59,7 @@ SELECT current_timestamp - pg_postmaster_start_time() uptime;
 
 Output:
 
-```sql
+```text
          uptime
 ------------------------
  6 days 07:39:06.006459

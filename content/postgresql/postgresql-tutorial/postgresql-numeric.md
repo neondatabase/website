@@ -133,7 +133,7 @@ SELECT * FROM products;
 
 Output:
 
-```sql
+```text
  id |  name  | price
 ----+--------+--------
   1 | Phone  | 500.22

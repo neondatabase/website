@@ -64,7 +64,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |    name    |                                     attributes
 
 ----+------------+------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ FROM products;
 
 Output:
 
-```sql
+```text
     name    | cpu_exists
 ------------+------------
  Laptop     | t
@@ -105,7 +105,7 @@ WHERE jsonb_path_exists(attributes, '$.specs.cpu');
 
 Output:
 
-```sql
+```text
     cpu
 ------------
  "Intel i7"

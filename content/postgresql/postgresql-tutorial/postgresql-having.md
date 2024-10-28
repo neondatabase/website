@@ -80,7 +80,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | amount
 -------------+--------
          148 | 211.55
@@ -108,7 +108,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | amount
 -------------+--------
          148 | 211.55
@@ -135,7 +135,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  store_id | count
 ----------+-------
         1 |   326

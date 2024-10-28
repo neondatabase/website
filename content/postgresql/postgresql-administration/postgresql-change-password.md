@@ -53,7 +53,7 @@ VALID UNTIL 'December 31, 2050';
 
 To verify the result, you can use the `\du` command in psql to [view the detailed information of the user](postgresql-list-users):
 
-```sql
+```text
 \du super
 ```
 

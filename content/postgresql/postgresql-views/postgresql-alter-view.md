@@ -87,13 +87,13 @@ SET (check_option = local);
 
 To view the change, you can use the `\d+` command in `psql`:
 
-```sql
+```text
 \d+ film_rating
 ```
 
 Output:
 
-```sql
+```text
                                  View "public.film_rating"
  Column |          Type          | Collation | Nullable | Default | Storage  | Description
 --------+------------------------+-----------+----------+---------+----------+-------------
@@ -124,11 +124,11 @@ RENAME title TO film_title;
 
 Here’s the new view detail:
 
-```sql
+```text
 \d+ film_rating
 ```
 
-```sql
+```text
                                    View "public.film_rating"
    Column   |          Type          | Collation | Nullable | Default | Storage  | Description
 ------------+------------------------+-----------+----------+---------+----------+-------------
@@ -167,13 +167,13 @@ SET SCHEMA web;
 
 Third, verify the change (in `psql`):
 
-```sql
+```text
 \d+ web.film_rating
 ```
 
 Output:
 
-```sql
+```text
                                     View "web.film_rating"
    Column   |          Type          | Collation | Nullable | Default | Storage  | Description
 ------------+------------------------+-----------+----------+---------+----------+-------------

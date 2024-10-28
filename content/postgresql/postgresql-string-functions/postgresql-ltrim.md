@@ -51,7 +51,7 @@ SELECT LTRIM('#postgres', '#');
 
 Output:
 
-```sql
+```text
   ltrim
 ----------
  postgres
@@ -68,7 +68,7 @@ SELECT LTRIM('   PostgreSQL');
 
 Output:
 
-```sql
+```text
    ltrim
 ------------
  PostgreSQL
@@ -96,7 +96,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                  title
 ----+------------------------------------------
   1 |    Mastering PostgreSQL string functions
@@ -127,7 +127,7 @@ SELECT * FROM articles;
 
 Output:
 
-```sql
+```text
  id |                 title
 ----+---------------------------------------
   1 | Mastering PostgreSQL string functions

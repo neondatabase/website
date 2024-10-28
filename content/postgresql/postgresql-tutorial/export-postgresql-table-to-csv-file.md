@@ -27,7 +27,7 @@ SELECT * FROM persons;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |    dob     |              email
 ----+------------+-----------+------------+---------------------------------
   1 | John       | Doe       | 1995-01-05 | [[email protected]](../cdn-cgi/l/email-protection.html)
@@ -89,7 +89,7 @@ To use `\copy` command, you need to have sufficient privileges to your local mac
 
 For example, if you want to export all data from the `persons` table into `persons_client.csv` file, you can execute the `\copy` command from the psql client as follows:
 
-```sql
+```text
 \copy (SELECT * FROM persons) to 'C:\temp\persons_client.csv' with csv
 ```
 

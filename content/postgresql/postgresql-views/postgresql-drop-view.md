@@ -22,7 +22,7 @@ The `DROP VIEW` statement allows you to remove a view from the database.
 
 Here’s the basic syntax of the `DROP VIEW` statement:
 
-```pgsqlsql
+```sqlsql
 DROP VIEW [IF EXISTS] view_name
 [CASCADE | RESTRICT];
 ```

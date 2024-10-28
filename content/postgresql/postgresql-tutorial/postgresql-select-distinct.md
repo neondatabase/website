@@ -24,7 +24,7 @@ The `SELECT DISTINCT` clause can be applied to one or more columns in the select
 
 The following illustrates the syntax of the `DISTINCT` clause:
 
-```pgsqlsqlsql
+```sqlsqlsql
 SELECT
   DISTINCT column1
 FROM
@@ -100,7 +100,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | bcolor | fcolor
 ----+--------+--------
   1 | red    | red
@@ -129,7 +129,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  bcolor
 --------
  blue

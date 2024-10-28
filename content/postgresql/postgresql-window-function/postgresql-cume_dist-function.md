@@ -24,7 +24,7 @@ The `CUME_DIST()` function returns the cumulative distribution of a value within
 
 The syntax of the `CUME_DIST()` function is as follows:
 
-```sql
+```text
  CUME_DIST() OVER (
     [PARTITION BY partition_expression, ... ]
     ORDER BY sort_expression [ASC | DESC], ...

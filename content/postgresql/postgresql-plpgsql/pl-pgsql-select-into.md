@@ -22,7 +22,7 @@ The `select into` statement allows you to [select data from the database](../pos
 
 Here’s the basic syntax of the `select into` statement:
 
-```pgsql
+```sql
 select column1, column2, ...
 into variable1, variable2, ...
 from table_expression;
@@ -46,7 +46,7 @@ Let’s take some examples of using the `select into` statement.
 
 The following example uses the `select into` statement to retrieve the number of actors from the `actor` table and assign it to the `actor_count` variable:
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -79,7 +79,7 @@ In this example:
 
 The following example uses the `select into` statement to assign the first and last names of the actor id 1 to two variables:
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -108,7 +108,7 @@ How it works.
 
 First, declare two variables `v_first_name` and `v_last_name` with the types `varchar`:
 
-```pgsql
+```sql
 v_first_name varchar;
 v_last_name varchar;
 ```
@@ -124,13 +124,13 @@ where actor_id = 1;
 
 Third, show the values of `v_first_name` and `v_last_name` variables:
 
-```pgsql
+```sql
 raise notice '% %', v_first_name, v_last_name;
 ```
 
 Because we assign data retrieved from the `first_name` and `last_name` columns of the `actor` table, we can use the type\-copying technique to declare the `v_first_name` and `v_last_name` variables:
 
-```pgsql
+```sql
 do
 $$
 declare

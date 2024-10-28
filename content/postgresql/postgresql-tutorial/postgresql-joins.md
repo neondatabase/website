@@ -54,7 +54,7 @@ The tables have some common fruits such as `apple` and `orange`.
 
 The following statement returns data from the `basket_a` table:
 
-```sql
+```text
  a | fruit_a
 ---+----------
  1 | Apple
@@ -94,7 +94,7 @@ INNER JOIN basket_b
 
 Output:
 
-```sql
+```text
  a | fruit_a | b | fruit_b
 ---+---------+---+---------
  1 | Apple   | 2 | Apple
@@ -126,7 +126,7 @@ LEFT JOIN basket_b
 
 Output:
 
-```sql
+```text
  a | fruit_a  |  b   | fruit_b
 ---+----------+------+---------
  1 | Apple    |    2 | Apple
@@ -162,7 +162,7 @@ WHERE b IS NULL;
 
 The output is:
 
-```sql
+```text
  a | fruit_a  |  b   | fruit_b
 ---+----------+------+---------
  3 | Banana   | null | null
@@ -200,7 +200,7 @@ RIGHT JOIN basket_b ON fruit_a = fruit_b;
 
 Here is the output:
 
-```sql
+```text
   a   | fruit_a | b |  fruit_b
 ------+---------+---+------------
     2 | Orange  | 1 | Orange
@@ -230,7 +230,7 @@ WHERE a IS NULL;
 
 Output:
 
-```sql
+```text
   a   | fruit_a | b |  fruit_b
 ------+---------+---+------------
  null | null    | 3 | Watermelon
@@ -262,7 +262,7 @@ FULL OUTER JOIN basket_b
 
 Output:
 
-```sql
+```text
   a   | fruit_a  |  b   |  fruit_b
 ------+----------+------+------------
     1 | Apple    |    2 | Apple

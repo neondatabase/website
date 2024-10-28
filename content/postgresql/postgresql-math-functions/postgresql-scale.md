@@ -44,7 +44,7 @@ SELECT SCALE(3.141592653589793);
 
 Output:
 
-```sql
+```text
  scale
 -------
     15
@@ -85,7 +85,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  product_id | product_name |  price
 ------------+--------------+----------
           1 | T-Shirt      |   10.123
@@ -117,7 +117,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  price_scale | count_of_products
 -------------+-------------------
            1 |                 2

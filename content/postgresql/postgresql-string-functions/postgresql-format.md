@@ -125,7 +125,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
        full_name
 ------------------------
  Abney, Rafael
@@ -150,7 +150,7 @@ SELECT FORMAT('|%10s|', 'one');
 
 The output string is left\-padded with spaces and right\-aligned.
 
-```sql
+```text
     format
 --------------
  |       one|
@@ -165,7 +165,7 @@ SELECT FORMAT('|%-10s|', 'one');
 
 The output is:
 
-```sql
+```text
     format
 --------------
  |one       |

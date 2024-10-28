@@ -54,7 +54,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '30 days'),
 
 Output:
 
-```sql
+```text
  justify_days | justify_days | justify_days
 --------------+--------------+--------------
  1 mon        | 2 mons       | 3 mons
@@ -73,7 +73,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '15 days'),
 
 Output:
 
-```sql
+```text
  justify_days | justify_days  |  justify_days
 --------------+---------------+----------------
  15 days      | 1 mon 15 days | 2 mons 15 days
@@ -92,7 +92,7 @@ SELECT JUSTIFY_DAYS(INTERVAL '15 days 2 hours'),
 
 Output:
 
-```sql
+```text
    justify_days   |      justify_days      |      justify_days
 ------------------+------------------------+-------------------------
  15 days 02:00:00 | 1 mon 25 days 00:30:00 | 2 mons 15 days 00:00:45

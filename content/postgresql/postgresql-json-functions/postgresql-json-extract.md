@@ -64,7 +64,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |    name    |                         phones
 ----+------------+--------------------------------------------------------
   1 | John Doe   | ["(408) 555-1111", "(408) 555-2222", "(408) 555-3333"]
@@ -88,7 +88,7 @@ WHERE
 
 Output:
 
-```sql
+```text
    name   |      phone
 ----------+------------------
  John Doe | "(408) 555-1111"
@@ -111,7 +111,7 @@ WHERE
 
 Output:
 
-```sql
+```text
    name   |     phone
 ----------+----------------
  John Doe | (408) 555-1111
@@ -134,7 +134,7 @@ WHERE
 
 Output:
 
-```sql
+```text
     name    |      phone
 ------------+------------------
  Jane Smith | "(408) 666-3333"
@@ -155,7 +155,7 @@ WHERE
 
 Output:
 
-```sql
+```text
     name    |     phone
 ------------+----------------
  Jane Smith | (408) 666-3333
@@ -178,7 +178,7 @@ WHERE
 
 Output:
 
-```sql
+```text
     name    | phone
 ------------+-------
  Jane Smith | null
@@ -231,7 +231,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | employee_id | request_date |                                                         data
 ----+-------------+--------------+-----------------------------------------------------------------------------------------------------------------------
   1 |           1 | 2024-02-23   | {"new_position": "Senior Software Engineer", "effective_date": "2024-03-01", "current_position": "Software Engineer"}
@@ -255,7 +255,7 @@ WHERE
 
 Output:
 
-```sql
+```text
   current_position
 ---------------------
  "Software Engineer"
@@ -277,7 +277,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  current_position
 -------------------
  Software Engineer

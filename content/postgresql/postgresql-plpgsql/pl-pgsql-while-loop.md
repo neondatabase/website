@@ -22,7 +22,7 @@ The `while` loop statement executes one or more statements as long as a specifie
 
 Here’s the basic syntax of a `while` loop statement:
 
-```pgsql
+```sql
 [ <<label>> ]
 while condition loop
    statements;
@@ -45,7 +45,7 @@ The following flowchart illustrates the `while` loop statement:
 
 The following example uses the `while` loop statement to display the value of a `counter`:
 
-```pgsql
+```sql
 do $$
 
 declare

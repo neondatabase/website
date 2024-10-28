@@ -30,7 +30,7 @@ However, if you need additional superuser roles, you can create them using the `
 
 First, connect to the PostgreSQL database using a client such as `psql`:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -50,13 +50,13 @@ PASSWORD 'moreSecurePass';
 
 Third, verify the user creation:
 
-```sql
+```text
 \du spiderman
 ```
 
 Output:
 
-```sql
+```text
      List of roles
  Role name | Attributes
 -----------+------------
@@ -83,13 +83,13 @@ ALTER ROLE batman SUPERUSER;
 
 Third, verify the user modification:
 
-```sql
+```text
 \du batman
 ```
 
 Output:
 
-```sql
+```text
      List of roles
  Role name | Attributes
 -----------+------------
@@ -112,13 +112,13 @@ ALTER USER spiderman NOSUPERUSER;
 
 You can verify the `spiderman` role as follows:
 
-```sql
+```text
 \du spiderman
 ```
 
 Output:
 
-```sql
+```text
      List of roles
  Role name | Attributes
 -----------+------------

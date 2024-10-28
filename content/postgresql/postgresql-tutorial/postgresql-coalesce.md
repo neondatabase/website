@@ -46,7 +46,7 @@ SELECT COALESCE (1, 2);
 
 Since both arguments are non\-null, the function returns the first argument:
 
-```sql
+```text
  coalesce
 ----------
         1
@@ -61,7 +61,7 @@ SELECT COALESCE (NULL, 2 , 1);
 
 Because the first argument is NULL and the second argument is non\-null, the function returns the second argument:
 
-```sql
+```text
  coalesce
 ----------
         2
@@ -127,7 +127,7 @@ FROM
 
 Output:
 
-```sql
+```text
  product | net_price
 ---------+-----------
  A       |       990
@@ -155,7 +155,7 @@ FROM
 
 Output:
 
-```sql
+```text
  product | net_price
 ---------+-----------
  A       |       990

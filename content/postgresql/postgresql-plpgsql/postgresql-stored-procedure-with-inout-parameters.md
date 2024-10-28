@@ -90,7 +90,7 @@ call count_film();
 
 Output:
 
-```sql
+```text
  total_film
 ------------
        1000
@@ -153,7 +153,7 @@ Since all the parameters in the `film_stat()` stored procedure are the `inout` p
 
 Output:
 
-```sql
+```text
  total_film | total_length | avg_rental_rate
 ------------+--------------+-----------------
        1000 |       115272 |            2.98

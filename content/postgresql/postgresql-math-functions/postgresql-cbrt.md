@@ -54,7 +54,7 @@ SELECT CBRT(27) result;
 
 Output:
 
-```sql
+```text
  result
 --------
       3
@@ -72,7 +72,7 @@ SELECT CBRT(-27) result;
 
 Output:
 
-```sql
+```text
  result
 --------
      -3
@@ -90,7 +90,7 @@ SELECT CBRT('125') result;
 
 Output:
 
-```sql
+```text
  result
 --------
       5
@@ -125,7 +125,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | volume
 ----+--------
   1 |   8.00
@@ -148,7 +148,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | volume | side_length
 ----+--------+-------------
   1 |   8.00 |           2

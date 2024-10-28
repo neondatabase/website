@@ -124,7 +124,7 @@ FROM
     stocks;
 ```
 
-```sql
+```text
  id | symbol |        company
 ----+--------+-----------------------
   1 | MSFT   | Microsoft Corporation

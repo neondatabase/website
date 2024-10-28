@@ -60,7 +60,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  film_id |      title
 ---------+------------------
        1 | Academy Dinosaur
@@ -196,7 +196,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  film_id |            title
 ---------+-----------------------------
        4 | Affair Prejudice

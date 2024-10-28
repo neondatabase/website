@@ -55,7 +55,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  jsonb_path_query_array
 ------------------------
  ["Alice", "Bob"]
@@ -89,7 +89,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                                                    data
 
 ----+-------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ FROM employees;
 
 Output:
 
-```sql
+```text
  employee_pet_names
 ---------------------
  ["Fluffy", "Buddy"]
@@ -128,7 +128,7 @@ FROM employees;
 
 Output:
 
-```sql
+```text
  jsonb_path_query_array
 ------------------------
  []

@@ -38,7 +38,7 @@ psql -U postgres
 
 Connect to a specific database:
 
-```sql
+```text
 \c database_name;
 ```
 
@@ -51,7 +51,7 @@ You are now connected to database "dvdrental" as user "postgres".
 
 To quit the psql:
 
-```sql
+```text
 \q
 ```
 
@@ -69,7 +69,7 @@ List all schemas:
 
 List all [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) and functions:
 
-```sql
+```text
 \df
 ```
 
@@ -81,7 +81,7 @@ List all [views](postgresql-views):
 
 [Lists all tables](postgresql-administration/postgresql-show-tables) in a current database.
 
-```sql
+```text
 \dt
 ```
 

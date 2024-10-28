@@ -22,7 +22,7 @@ To change attributes of a [role](postgresql-roles), you use the following form o
 
 Here’s the basic syntax of the
 
-```pgsql
+```sql
 ALTER ROLE role_name [WITH] option;
 ```
 
@@ -49,7 +49,7 @@ First, log in to PostgreSQL server using the `postgres` role.
 
 Second, [create a new role](postgresql-roles) called `calf` using the `CREATE ROLE` statement:
 
-```pgsql
+```sql
 create role calf login password 'securePwd1';
 ```
 
@@ -57,19 +57,19 @@ The `calf` role can log in with a password.
 
 Because `postgres` is a superuser, it can change the role `calf` to be a superuser:
 
-```pgsql
+```sql
 alter role calf superuser;
 ```
 
 View the role `calf`:
 
-```pgsql
+```text
 \du calf
 ```
 
 Output:
 
-```pgsql
+```text
         List of roles
 Role name | Attributes | Member of
 -----------+------------+-----------
@@ -79,20 +79,20 @@ calf      | Superuser  | {}
 
 The following statement sets the password of the role `calf` to expire until the end of `2050`:
 
-```pgsql
+```sql
 alter role calf
 valid until '2050-01-01';
 ```
 
 Use the `\du` command to see the effect:
 
-```pgsql
+```text
 \du calf
 ```
 
 Output:
 
-```pgsql
+```text
                             List of roles
 Role name |                 Attributes                  | Member of
 -----------+---------------------------------------------+-----------
@@ -105,7 +105,7 @@ calf      | Superuser                                  +| {}
 
 To change the name of a role, you use the following form of the `ALTER ROLE` statement:
 
-```pgsql
+```sql
 ALTER ROLE role_name
 TO new_name;
 ```
@@ -116,7 +116,7 @@ A superuser can rename any role. A role that has the `CREATEROLE` privilege can 
 
 If you use a role to log in to the PostgreSQL database server and rename it in the current session, you will get an error:
 
-```pgsql
+```sql
 ERROR:  session user cannot be renamed
 ```
 
@@ -124,7 +124,7 @@ In this case, you need to connect to the PostgreSQL database server using a diff
 
 You execute the following statement from the `postgres`‘ session to rename the role `calf` to `elephant`:
 
-```pgsql
+```sql
 ALTER ROLE calf
 RENAME TO elephant;
 ```
@@ -133,7 +133,7 @@ RENAME TO elephant;
 
 The following `ALTER ROLE` statement changes the role’s session default for a configuration variable:
 
-```pgsql
+```sql
 ALTER ROLE role_name | CURRENT_USER | SESSION_USER | ALL
 [IN DATABASE database_name]
 SET configuration_param = { value | DEFAULT }
@@ -149,7 +149,7 @@ Superusers can change the session defaults of any role. Roles with the `CREATERO
 
 The following example uses the `ALTER ROLE` to give the role elephant a non\-default, database\-specific setting of the `client_min_messages` parameter:
 
-```pgsql
+```sql
 ALTER ROLE elephant
 IN DATABASE dvdrental
 SET client_min_messages = NOTICE;

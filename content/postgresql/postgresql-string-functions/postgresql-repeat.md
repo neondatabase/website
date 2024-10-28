@@ -51,7 +51,7 @@ SELECT REPEAT('A',3);
 
 Output:
 
-```sql
+```text
  repeat
 --------
  AAA
@@ -85,7 +85,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  rating | count |         chart
 --------+-------+------------------------
  PG-13  |   223 | **********************

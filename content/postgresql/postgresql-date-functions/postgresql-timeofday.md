@@ -38,7 +38,7 @@ Let’s take some examples of using the `TIMEOFDAY()` function.
 
 The following example uses the `TIMEOFDAY()` function to retrieve the current date and time as a string:
 
-```sql
+```text
               timeofday
 -------------------------------------
  Wed Mar 20 10:20:10.108369 2024 -07
@@ -61,7 +61,7 @@ SELECT
 
 Output:
 
-```sql
+```text
     current_time
 ---------------------
  2024-03-20 10:26:57

@@ -93,7 +93,7 @@ SELECT * FROM employees;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |  salary
 ----+------------+-----------+----------
   1 | Bob        | Williams  | 45000.00
@@ -122,7 +122,7 @@ SELECT * FROM managers;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |  type   |  salary
 ----+------------+-----------+---------+----------
   1 | John       | Doe       | manager | 60000.00
@@ -152,7 +152,7 @@ WHERE
 
 It returns one row:
 
-```sql
+```text
  id | first_name | last_name |  salary
 ----+------------+-----------+----------
   2 | Charlie    | Davis     | 55000.00
@@ -169,7 +169,7 @@ SELECT salary FROM managers;
 
 Output:
 
-```sql
+```text
   salary
 ----------
  60000.00
@@ -200,7 +200,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |  salary
 ----+------------+-----------+----------
   9 | Jack       | Anderson  | 56000.00

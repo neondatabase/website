@@ -75,7 +75,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id
 -------------
            1
@@ -111,7 +111,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id |  sum
 -------------+--------
            1 | 114.70
@@ -142,7 +142,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id |  sum
 -------------+--------
          148 | 211.55
@@ -171,7 +171,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
        full_name       | amount
 -----------------------+--------
  Eleanor Hunt          | 211.55
@@ -200,7 +200,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  staff_id | count
 ----------+-------
         1 |  7292
@@ -230,7 +230,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | staff_id |  sum
 -------------+----------+--------
            1 |        2 |  53.85

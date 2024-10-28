@@ -96,7 +96,7 @@ SELECT * FROM shifts;
 
 Output:
 
-```sql
+```text
  id | shift_name | start_at |  end_at
 ----+------------+----------+----------
   1 | Morning    | 08:00:00 | 12:00:00

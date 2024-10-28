@@ -48,7 +48,7 @@ SELECT TRIM_SCALE(123.45000);
 
 Output:
 
-```sql
+```text
  trim_scale
 ------------
      123.45
@@ -87,7 +87,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |       name       |  price
 ----+------------------+----------
   1 | Smartphone       | 699.9900
@@ -109,7 +109,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |       name       |  price
 ----+------------------+---------
   1 | Smartphone       |  699.99

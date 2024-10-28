@@ -24,14 +24,14 @@ Sometimes, you want to copy a PostgreSQL database within a database server for t
 
 PostgreSQL makes it easy to do so via the [`CREATE DATABASE`](https://www.postgrepgsqltutorial.com/postgrepgsql-create-database/) statement, as follows:
 
-```pgsqlsql
+```sqlsql
 CREATE DATABASE targetdb
 WITH TEMPLATE sourcedb;
 ```
 
 This statement copies the `sourcedb` to the `targetdb`. For example, to copy the `dvdrental` [sample database](https://www.postgrepgsqltutorial.com/postgrepgsql-sample-database/) to the `dvdrental_test` database, you use the following statement:
 
-```pgsql
+```sql
 CREATE DATABASE dvdrental_test
 WITH TEMPLATE dvdrental;
 ```
@@ -47,7 +47,7 @@ DETAIL:  There is 1 other session using the database.
 
 The following query returns the active connections:
 
-```pgsql
+```sql
 SELECT pid, usename, client_addr
 FROM pg_stat_activity
 WHERE datname ='dvdrental';
@@ -79,13 +79,13 @@ Second, copy the dump file to the remote server.
 
 Third, create a new database in the remote server:
 
-```pgsql
+```sql
 CREATE DATABASE targetdb;
 ```
 
 Finally, restore the dump file on the remote server:
 
-```pgsql
+```bash
 psql -U postgres -d targetdb -f sourcedb.sql
 ```
 
@@ -95,7 +95,7 @@ The following steps illustrate how to copy the `dvdrental` database from the loc
 
 First, dump the `dvdrental` database into a dump file such as `dvdrental.sql`:
 
-```pgsql
+```sql
 pg_dump -U postgres -O dvdrental -f dvdrental.sql
 ```
 
@@ -103,13 +103,13 @@ Second, copy the dump file to the `remote` server.
 
 Third, create the `dvdrental` database on the `remote` server:
 
-```pgsql
+```sql
 CREATE DATABASE dvdrental;
 ```
 
 Fourth, restore the `dvdrental.sql` dump file in the `remote` server:
 
-```pgsql
+```bash
 psql -U postgres -d dvdrental -f dvdrental.sql
 ```
 

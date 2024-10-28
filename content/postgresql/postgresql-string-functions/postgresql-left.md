@@ -54,7 +54,7 @@ SELECT LEFT('ABC',1);
 
 The result is
 
-```sql
+```text
  left
 ------
  A
@@ -69,7 +69,7 @@ SELECT LEFT('ABC',2);
 
 Here is the result:
 
-```sql
+```text
  left
 ------
  AB

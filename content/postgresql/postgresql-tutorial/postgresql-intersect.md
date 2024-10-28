@@ -87,7 +87,7 @@ SELECT * FROM most_popular_films;
 
 The contents of the `top_rated_films` table:
 
-```sql
+```text
           title           | release_year
 --------------------------+--------------
  The Shawshank Redemption |         1994
@@ -127,7 +127,7 @@ FROM top_rated_films;
 
 Output:
 
-```sql
+```text
       title      | release_year
 -----------------+--------------
  The Godfather   |         1972

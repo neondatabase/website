@@ -22,7 +22,7 @@ The `create function` statement allows you to define a new user\-defined functio
 
 Here’s the syntax of the `create function` statement:
 
-```pgsql
+```sql
 create [or replace] function function_name(param_list)
    returns return_type
    language plpgsql
@@ -50,7 +50,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 ![](/postgresqltutorial/film.png)The following statement creates a function that returns the number films whose length between the `len_from` and `len_to` parameters:
 
-```pgsql
+```sql
 create function get_film_count(len_from int, len_to int)
 returns int
 language plpgsql
@@ -153,7 +153,7 @@ PostgreSQL provides you with three ways to call a user\-defined function:
 
 When invoking a function using the positional notation, you need to supply the arguments in the exact order as the parameters are defined within the function signature:
 
-```pgsql
+```sql
 select get_film_count(40,90);
 ```
 
@@ -176,7 +176,7 @@ If the function has many parameters, you should call it using the named notation
 
 The following shows how to call the `get_film_count` function using the positional notation:
 
-```pgsql
+```sql
 select get_film_count(
     len_from => 40,
      len_to => 90
@@ -196,7 +196,7 @@ In the named notation, you use the `=>` to separate the argument’s name and it
 
 For backward compatibility, PostgreSQL supports the older syntax based on `:=` as follows:
 
-```pgsql
+```sql
 select get_film_count(
     len_from := 40,
     len_to := 90
@@ -207,13 +207,13 @@ select get_film_count(
 
 The mixed notation is the combination of positional and named notations. For example:
 
-```pgsql
+```sql
 select get_film_count(40, len_to => 90);
 ```
 
 Note that you cannot use the named arguments before positional arguments like this:
 
-```pgsql
+```sql
 select get_film_count(len_from => 40, 90);
 ```
 

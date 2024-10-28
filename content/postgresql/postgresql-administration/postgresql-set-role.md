@@ -38,7 +38,7 @@ We’ll take an example of using the `SET ROLE` statement.
 
 First, [connect](../postgresql-getting-started/connect-to-postgresql-database) to the `dvdrental` database using `psql`:
 
-```sql
+```bash
 psql -U postres -d dvdrental
 ```
 
@@ -64,7 +64,7 @@ IN ROLE marketing;
 
 Sixth, connect to the `dvdrental` database using the `lily` role in a separate session:
 
-```sql
+```bash
 psql -U lily -d dvdrental
 ```
 
@@ -76,7 +76,7 @@ SELECT current_role;
 
 Output:
 
-```sql
+```text
  current_role
 --------------
  lily
@@ -91,7 +91,7 @@ SET ROLE marketing;
 
 Ninth, retrieve the current role:
 
-```sql
+```text
  current_role
 --------------
  marketing
@@ -100,7 +100,7 @@ Ninth, retrieve the current role:
 
 Output:
 
-```sql
+```text
  current_role
 --------------
  marketing
@@ -131,7 +131,7 @@ RESET ROLE;
 
 Eleventh, select the current role:
 
-```sql
+```text
  current_role
 --------------
  lily

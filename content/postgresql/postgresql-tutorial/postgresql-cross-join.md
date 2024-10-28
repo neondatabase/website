@@ -34,7 +34,7 @@ Because a `CROSS JOIN` may generate a large result set, you should use it carefu
 
 Here’s the basic syntax of the `CROSS JOIN` syntax:
 
-```pgsqlsql
+```sqlsql
 SELECT
   select_list
 FROM
@@ -132,7 +132,7 @@ CROSS JOIN shift;
 
 In an inventory management system, you have tables for `warehouses` and `products`. A `CROSS JOIN` can help you analyze the availability of each product in every warehouse:
 
-```pgsql
+```sql
 SELECT *
 FROM products
 CROSS JOIN warehouses;

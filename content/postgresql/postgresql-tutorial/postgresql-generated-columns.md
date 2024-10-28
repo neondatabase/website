@@ -96,7 +96,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name | full_name |              email
 ----+------------+-----------+-----------+---------------------------------
   1 | John       | Doe       | John Doe  | [[email protected]](../cdn-cgi/l/email-protection.html)

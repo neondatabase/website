@@ -103,7 +103,7 @@ At the beginning of the method, you call the `beginTransaction()` method of the 
 
 If all the steps succeed, you call the `commit()` method to save the changes. If an exception occurs in any step, you roll back the changes by calling the `rollback()` method in the `catch` block:
 
-```sql
+```text
    /**
      * Add a new account
      * @param string $firstName

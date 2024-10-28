@@ -74,7 +74,7 @@ The `name` specifies the name of an index, a table name, a schema, a database re
 
 First, connect to the `dvdrental` database using the psql:
 
-```sql
+```bash
 psql -U postgres -d dvdrental
 ```
 
