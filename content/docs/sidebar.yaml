@@ -422,7 +422,7 @@
           slug: guides/rust
     - title: Neon Authorize
       slug: guides/neon-authorize
-      icon: api
+      icon: auth
       items:
         - section: Overview
           items:
