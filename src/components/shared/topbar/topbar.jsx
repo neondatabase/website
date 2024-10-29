@@ -5,7 +5,6 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -71,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Authorize just launched - Add row-level security policies to your codebase 
+      Neon Authorize just launched: Add row level security to your codebase
     </span>
     <ChevronIcon
       className={clsx(
