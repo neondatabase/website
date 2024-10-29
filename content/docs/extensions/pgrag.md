@@ -35,7 +35,7 @@ The `pgrag` extension is experimental and under active development. Use at your 
 
 ---
 
-## What's included in typical RAG pipeline?
+## What's included in a RAG pipeline?
 
 There are two main stages in a RAG pipeline:
 
