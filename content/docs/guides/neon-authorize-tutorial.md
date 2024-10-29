@@ -100,9 +100,9 @@ Even though isolation is backed by our RLS policies, we include it here for perf
 In the application's `schema.ts` file, you can find the RLS policies written in Drizzle that provide access control at the database level. Here is a look at one of those policies:
 
 ```typescript shoulWrap
-pgPolicy("view todos", {
-  for: "select",
-  to: "authenticated",
+pgPolicy('view todos', {
+  for: 'select',
+  to: 'authenticated',
   using: sql`(select auth.user_id() = user_id)`,
 });
 ```
