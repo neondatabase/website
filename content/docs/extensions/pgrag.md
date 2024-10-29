@@ -45,12 +45,12 @@ There are two main stages in a RAG pipeline:
    - Generating embeddings for the chunks
    - Storing the embeddings alongside chunks in your vector database
 2. **Handling incoming questions**: This second stage involves:
-    - Vectorizing the question to create an embedding
-    - Using the question embedding to find relevant document chunks based on the shortest vector distances
-    - Retrieving document chunks from the database
-    - Re-ranking the chunks, taking the best-matching chunks
-    - Prompting the generative AI chat model with the question and relevant document chunks
-    - Generating the answer
+   - Vectorizing the question to create an embedding
+   - Using the question embedding to find relevant document chunks based on the shortest vector distances
+   - Retrieving document chunks from the database
+   - Re-ranking the chunks, taking the best-matching chunks
+   - Prompting the generative AI chat model with the question and relevant document chunks
+   - Generating the answer
 
 ---
 
@@ -124,7 +124,7 @@ This section lists the `pgrag` functions that support the first and second RAG p
   - `rag_bge_small_en_v15.embedding_for_passage(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
-### Second stage RAG pipeline functions 
+### Second stage RAG pipeline functions
 
 - **Generating embeddings for questions**
 
@@ -245,3 +245,4 @@ from reranked;
 ```
 
 <NeedHelp/>
+````
