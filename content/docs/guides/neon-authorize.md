@@ -208,7 +208,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 
 ## Sample applications
 
-You can use these sample ToDo applications to get started using Neon Authorize with the following popular authentication providers.
+You can use these sample ToDo applications to get started using Neon Authorize with popular authentication providers.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize" description="A Todo List built with Clerk, Next.js, and Neon Authorize (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon Authorize</a>
