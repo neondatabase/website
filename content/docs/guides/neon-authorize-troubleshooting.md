@@ -22,15 +22,15 @@ This issue typically occurs when:
 
 1. **JWKS URL not configured or incorrect**
 
-    You did not add the JWKS URL in the Authorize UI, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
+   You did not add the JWKS URL in the Authorize UI, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
 
 2. **JWT and JWKS mismatch**
 
-    The `kid` field in your JWT doesn't match any of the keys being returned by your JWKS URL.
+   The `kid` field in your JWT doesn't match any of the keys being returned by your JWKS URL.
 
 3. **Unsupported role name**
 
-    The Postgres username used in your connection string is not a role registered for Neon Authorize. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
+   The Postgres username used in your connection string is not a role registered for Neon Authorize. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
 
 **Solution:**
 
@@ -39,6 +39,7 @@ This issue typically occurs when:
 - Check that the role name in your connection string matches either `anonymous` or `authenticated`.
 
 **Helpful Links:**
+
 - [Introduction to JSON Web Tokens](https://jwt.io/introduction/)
 - [JSON Web Key (JWK) Specification](https://datatracker.ietf.org/doc/html/rfc7517)
 
