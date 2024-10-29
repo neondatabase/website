@@ -30,7 +30,7 @@ We would like to add support for configuring Neon Authorize from the Neon CLI.
 
 ## Neon Authorize for Neon Console frontend database requests
 
-Using Neon Authorize for database requests from our SQL Editor can help map the individual Neon Console user more easily to the person in the organization who triggered the request.
+Using Neon Authorize for database requests from the Neon SQL Editor can help map the Neon Console user to the individual who issued the request.
 
 ## Proxy rate limiting
 
