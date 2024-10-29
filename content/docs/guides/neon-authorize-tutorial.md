@@ -19,7 +19,7 @@ To get started, you’ll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon Authorize + Clerk Example application**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
+- **Neon Authorize + Clerk example application**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
 
   ```bash
   git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
@@ -37,7 +37,7 @@ npm run dev
 
 Open the app in your browser using `localhost:3000`.
 
-Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and email logins, so let's create one of each. For this guide, we'll call our two users Bob and Alice.
+Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and email logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
 
 Create your `Alice` user using Google. Then, using a private browser session, try the email sign-up to create `Bob`. You'll receive a verification email from `MyApp`, probably in your spam folder.
 
@@ -73,7 +73,7 @@ Let's create some sample Todos for both Alice and Bob.
 
 ### Todos are isolated
 
-In this sample app, isolated of Todos to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
+In this sample app, isolation of Todos to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
 
 Let's take a look at the `getTodos` function in the `actions.tsx` file:
 

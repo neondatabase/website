@@ -35,7 +35,7 @@ When implementing user authentication in your application, third-party authentic
 
 Most authentication providers issue **JSON Web Tokens (JWTs)** on user authentication to convey user identity and claims. The JWT is a secure way of proving that logged-in users are who they say they are &#8212; and passing that proof on to other entities.
 
-With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity directly in Postgres. To integrate with an authentication provider, add your provider's JWT discovery URL to your project. This lets Neon retrieve the necessary keys to validate the JWTs.
+With **Neon Authorize**, the JWT is passed on to Neon, where you can make use of the validated user identity directly in Postgres. To integrate with an authentication provider, you will add your provider's JWT discovery URL to your Neon project. This lets Neon retrieve the necessary keys to validate the JWTs.
 
 ```typescript shouldWrap
 import { neon } from '@neondatabase/serverless';
@@ -45,7 +45,7 @@ const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProv
 await sql(`select * from todos`);
 ```
 
-Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while the open source extension [pg_session_jwt](#how-the-pg_session_jwt-extension-works) makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
+Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while Neon's open source [pg_session_jwt](#how-the-pg_session_jwt-extension-works) extension makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary authorization solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
@@ -163,11 +163,11 @@ pgPolicy('view todos', {
 
 </Tabs>
 
-This policy enforces that a user can only view their own `todos`. Here's how each component works together.
+This policy enforces that an authenticated user can only view their own `todos`. Here's how each component works together.
 
 ### What Neon does for you
 
-When your application makes a request, Neon validates the JWT by checking its signature and expiration date against the public keys. Once validated, Neon extracts the `user_id` from the JWT and uses it in the datasbase session, making it accessible for RLS.
+When your application makes a request, Neon validates the JWT by checking its signature and expiration date against a public key. Once validated, Neon extracts the `user_id` from the JWT and uses it in the database session, making it accessible for RLS.
 
 ### How the `pg_session_jwt` extension works
 
@@ -184,7 +184,7 @@ The RLS policy compares the `user_id` from the JWT with the `user_id` in the tod
 
 ## When to rely on RLS
 
-For early-stage applications, **RLS** might offer all the security you need to scale your project. For more mature applications or architectures where multiple backends read from the same database, RLS centralizes authorization rules within the database itself. This way, every service that accesses your database can benefit from secure, consistent access controls without needing to reimplement them individually.
+For early-stage applications, **RLS** might offer all the security you need to scale your project. For more mature applications or architectures where multiple backends read from the same database, RLS centralizes authorization rules within the database itself. This way, every service that accesses your database can benefit from secure, consistent access controls without needing to reimplement them individually in each connecting application.
 
 RLS can also act as a backstop or final guarantee to prevent data leaks. Even if other security layers fail — for example, a front-end component exposes access to a part of your app that it shouldn't, or your backend misapplies authorization — RLS ensures that unauthorized users will not be able to interact with your data. In these cases, the exposed action will fail, protecting your sensitive database-backed resources.
 
@@ -225,7 +225,7 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 While this feature is in its early-access phase, there are some limitations to be aware of:
 
 - **Authentication provider requirements**: Your authentication provider must provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289).
-- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP.
+- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
 - **Postgres 17:** Postgres 17 is not currently supported but will be available soon.
