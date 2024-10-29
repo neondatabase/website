@@ -46,7 +46,7 @@ We're exploring the generation of React Query hooks for SQL queries, simplifying
 
 ## Simplified OAuth flow for JWKS endpoint
 
-Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we're working on an OAuth flow that allows you to simply `Sign in with <Provider>`, automatically populating the JWKS endpoint.
+Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we are interested in developing an OAuth flow that allows you to simply `Sign in with <Provider>`, automatically populating the JWKS endpoint.
 
 ## User interface for RLS and user impersonation
 
