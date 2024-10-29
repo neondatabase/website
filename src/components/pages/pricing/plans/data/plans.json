@@ -318,7 +318,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Neon Authorize"
+        "title": "Neon Authorize",
         "subtitle": "Row level security"
       },
       "free": true,
