@@ -242,7 +242,7 @@
               slug: guides/read-replica-guide
             - title: Scale your app with Read Replicas
               slug: guides/read-replica-integrations
-            - title: Run analytics queries with Read Replicas 
+            - title: Run analytics queries with Read Replicas
               slug: guides/read-replica-data-analysis
             - title: Run ad-hoc queries with Read Replicas
               slug: guides/read-replica-adhoc-queries
@@ -439,7 +439,7 @@
       slug: guides/integrations
       items:
         - section: Monitor
-          items: 
+          items:
             - title: Datadog Integration
               slug: guides/datadog
               tag: new
@@ -479,6 +479,8 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Trigger serverless functions with Inngest
+              slug: guides/trigger-serverless-functions
         - section: Query
           items:
             - title: Exograph
