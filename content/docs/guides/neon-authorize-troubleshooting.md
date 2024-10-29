@@ -85,7 +85,7 @@ TO anonymous;
 ```
 
 <Admonition type="note">
-Neon Authorize promps you to run these commands when you first set up your authentication provider in the Authorization UI. If you're using a different database, you will have to run these commands manually.
+Neon Authorize prompts you to run these commands when you first set up your authentication provider on the Neon Authorize drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
 </Admonition>
 
 ---
