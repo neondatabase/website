@@ -1,40 +1,38 @@
 ---
 title: Migrate from Vercel Postgres SDK to the Neon serverless driver
-subtitle: Learn how to smoothly transition your Next.js application from the Vercel Postgres SDK to the Neon serverless driver
+subtitle: Learn how to smoothly transition your application from using Vercel Postgres SDK to the Neon serverless driver
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
 updatedAt: '2024-10-28T00:00:00.000Z'
 ---
 
-With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK (@vercel/postgres) to the Neon serverless driver. This guide will walk you through the migration process, helping you leverage the full power of Neon's serverless PostgreSQL capabilities.
+With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK (@vercel/postgres) to the Neon serverless driver. This guide will help you transition your application smoothly.
 
 ## Why migrate?
 
-Switching to the Neon serverless driver offers several advantages over the Vercel Postgres SDK:
-
-- **Direct database access**: Connect directly to your database without added abstraction layers.
-- **Enhanced performance**: Benefit from Neon's optimized database driver.
-- **Greater flexibility**: Choose HTTP for single queries or WebSockets for transactions.
-- **Improved maintainability**: Rely on Neon's actively maintained, native database driver.
+Switching to the Neon serverless driver provides several advantages over the Vercel Postgres SDK. It offers greater flexibility by allowing the choice between HTTP for single queries or WebSockets for transactions. Additionally, it enhances maintainability by relying on Neon's actively maintained, native database driver.
 
 ## Prerequisites
 
 To begin, you’ll need:
 
-- An existing Next.js application using the Vercel Postgres SDK
+- An existing application using the Vercel Postgres SDK
 - A [Neon account](https://neon.tech/docs/get-started-with-neon/signing-up) (your Vercel Postgres database will automatically migrate to Neon)
-- Basic knowledge of PostgreSQL and Next.js
 
 ## Migration Steps
 
 ### 1. Install the Neon serverless driver
 
-Start by installing the Neon serverless driver in your Next.js project:
+Start by installing the Neon serverless driver in your project:
 
 ```bash
 npm install @neondatabase/serverless
 ```
+
+<Admonition type="important">
+To ensure proper configuration, set your environment variable to `DATABASE_URL` when referencing the database URL in your code, especially if you're following this guide.
+</Admonition>
 
 ### 2. Update your database connection
 
@@ -42,26 +40,20 @@ Replace your Vercel Postgres SDK imports and connection setup with the Neon serv
 
 #### Option A: Using HTTP (Recommended for simple queries)
 
-```typescript
-// Before (Vercel Postgres SDK)
-import { sql } from '@vercel/postgres';
-
-// After (Neon serverless driver)
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.POSTGRES_URL!);
+```diff
+- import { sql } from '@vercel/postgres'; // [!code --]
++ import { neon } from '@neondatabase/serverless'; // [!code ++]
++ const sql = neon(process.env.DATABASE_URL!); // [!code ++]
 ```
 
 #### Option B: Using WebSockets (Recommended for transactions)
 
-```typescript
-// Before (Vercel Postgres SDK)
-import { db } from '@vercel/postgres';
-
-// After (Neon serverless driver)
-import { Pool, neonConfig } from '@neondatabase/serverless';
-const ws = require('ws');
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-neonConfig.webSocketConstructor = ws;
+```diff
+- import { db } from '@vercel/postgres'; // [!code --]
++ import { Pool, neonConfig } from '@neondatabase/serverless'; // [!code ++]
++ import ws from 'ws'; // [!code ++]
++ const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
++ neonConfig.webSocketConstructor = ws; // [!code ++]
 ```
 
 ### 3. Update your queries
@@ -70,70 +62,57 @@ Here are common query patterns and how to migrate them:
 
 #### Simple Queries
 
-```typescript
-// Before (Vercel Postgres SDK)
-const { rows } = await sql`SELECT * FROM users WHERE id = ${userId}`;
+```diff
+# Vercel Postgres SDK
+- const { rows } = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code --]
 
-// After (Neon HTTP)
-const rows = await sql`SELECT * FROM users WHERE id = ${userId}`;
+# Neon HTTP
++ const rows = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code ++]
 
-// After (Neon WebSockets)
-const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+# Neon WebSockets
++ const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [userId]); // [!code ++]
 ```
 
 #### Transactions
 
-```typescript
-// Before (Vercel Postgres SDK)
-import { db } from '@vercel/postgres';
+```diff
+- import { db } from '@vercel/postgres'; // [!code --]
+-  // [!code --]
+- async function transferFunds(fromId: number, toId: number, amount: number) { // [!code --]
+-   const client = await db.connect(); // [!code --]
+-   try { // [!code --]
+-     await client.query('BEGIN'); // [!code --]
+-     await client.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [ // [!code --]
+-       amount, // [!code --]
+-       fromId, // [!code --]
+-     ]); // [!code --]
+-     await client.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code --]
+-     await client.query('COMMIT'); // [!code --]
+-   } catch (e) { // [!code --]
+-     await client.query('ROLLBACK'); // [!code --]
+-     throw e; // [!code --]
+-   } finally { // [!code --]
+-     client.release(); // [!code --]
+-   } // [!code --]
+- } // [!code --]
 
-async function transferFunds(fromId: number, toId: number, amount: number) {
-  const client = await db.connect();
-  try {
-    await client.query('BEGIN');
-    await client.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [
-      amount,
-      fromId,
-    ]);
-    await client.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]);
-    await client.query('COMMIT');
-  } catch (e) {
-    await client.query('ROLLBACK');
-    throw e;
-  } finally {
-    client.release();
-  }
-}
 
-// After (Neon serverless driver - WebSockets)
-import { Pool } from '@neondatabase/serverless';
-
-async function transferFunds(fromId: number, toId: number, amount: number) {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  try {
-    await pool.query('BEGIN');
-    await pool.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [amount, fromId]);
-    await pool.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]);
-    await pool.query('COMMIT');
-  } catch (e) {
-    await pool.query('ROLLBACK');
-    throw e;
-  } finally {
-    await pool.end();
-  }
-}
-```
-
-### 4. Environment Variables
-
-Update your environment variable names if necessary:
-
-```bash
-# Before
-POSTGRES_URL="postgres://..."
-
-# After
-DATABASE_URL="postgres://..."
++ import { Pool } from '@neondatabase/serverless'; // [!code ++]
++ // [!code ++]
++ async function transferFunds(fromId: number, toId: number, amount: number) { // [!code ++]
++   const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
++   try { // [!code ++]
++     await pool.query('BEGIN'); // [!code ++]
++     await pool.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [amount, fromId]); // [!code ++]
++     await pool.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code ++]
++     await pool.query('COMMIT'); // [!code ++]
++   } catch (e) { // [!code ++]
++     await pool.query('ROLLBACK'); // [!code ++]
++     throw e; // [!code ++]
++   } finally { // [!code ++]
++     await pool.end(); // [!code ++]
++   } // [!code ++]
++ } // [!code ++]
 ```
 
 ## Best practices
@@ -170,64 +149,14 @@ DATABASE_URL="postgres://..."
 
 ## Working with ORMs
 
-If you're using an ORM, here are the recommended configurations:
+Neon's serverless driver is compatible with popular ORMs like Prisma and Drizzle ORM. Check out the following guides to learn more:
 
-### Prisma
+<DetailIconCards>
 
-Install the Prisma adapter for Neon, along with the Neon serverless driver and ws packages:
+<a href="/docs/guides/prisma" description="Learn how to connect to Neon from Prisma" icon="prisma">Prisma</a>
 
-```bash
-npm install @prisma/adapter-neon @neondatabase/serverless ws
-npm install --save-dev @types/ws
-```
+<a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon" description="Learn how to connect to Neon from Drizzle ORM" icon="drizzle">Drizzle ORM</a>
 
-```typescript
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
-
-neonConfig.webSocketConstructor = ws;
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
-const prisma = new PrismaClient({ adapter });
-```
-
-### Drizzle ORM
-
-Install the Neon serverless driver and Drizzle ORM:
-
-```bash
-npm install @neondatabase/serverless drizzle-orm ws
-npm install --save-dev @types/ws
-```
-
-For HTTP connections:
-
-```typescript
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
-
-const sql = neon(process.env.DATABASE_URL!);
-export const db = drizzle({ client: sql });
-```
-
-For WebSocket connections:
-
-```typescript
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from 'ws';
-neonConfig.webSocketConstructor = ws;
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle({ client: pool });
-```
-
-## Conclusion
-
-Migrating from the Vercel Postgres SDK to the Neon serverless driver allows direct access to Neon's powerful features and optimizations. With flexible HTTP and WebSocket connections, you can tailor your database operations to meet the needs of your specific use case, from rapid single queries to complex transactions.
+</DetailIconCards>
 
 <NeedHelp/>
