@@ -722,6 +722,8 @@
               slug: extensions/neon-utils
             - title: pgvector
               slug: extensions/pgvector
+            - title: pgrag
+              slug: extensions/pgrag
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
