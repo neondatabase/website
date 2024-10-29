@@ -14,7 +14,7 @@ We want Neon Authorize to work over any type of connection: TCP, HTTP, or WebSoc
 
 ## Custom roles
 
-We aim to introduce custom roles for Neon Authorize, beyond the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed", which would be managed by our platform and included by default in every branch and read replica.
+We aim to introduce custom roles for Neon Authorize, in addition to the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding a "Neon-managed" role, which would be managed by our platform and included by default in every branch and read replica.
 
 ## JWT audience checks
 
