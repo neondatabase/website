@@ -8,6 +8,10 @@ updatedOn: '2024-10-22T15:41:04.373Z'
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
+<Admonition type="comingSoon">
+Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon Authorize](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+</Admonition>
+
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
 
 In this guide, we'll walk through setting up a simple Next.js application using Neon Postgres as the database, and add user authentication using [Clerk](https://clerk.com/). We will go over how to:
