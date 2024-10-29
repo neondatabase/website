@@ -26,7 +26,7 @@ We want to support multi-tenancy with Neon Authorize, allowing users to configur
 
 ## Neon CLI for configuration
 
-We can add the ability to configure Neon Authorize from our Neon CLI.
+We would like to add support for configuring Neon Authorize from the Neon CLI.
 
 ## Neon Authorize for Neon Console frontend database requests
 
