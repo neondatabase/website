@@ -6,14 +6,13 @@ updatedOn: '2024-10-29T00:27:11.738Z'
 ---
 
 <InfoBlock>
+<DocsList title="Sample project" theme="repo">
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
+</DocsList>
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
   <a href="https://clerk.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
-</DocsList>
-
-<DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
 </DocsList>
 </InfoBlock>
 
