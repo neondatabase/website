@@ -319,7 +319,7 @@
       "rows": "1",
       "feature": {
         "title": "Neon Authorize",
-        "subtitle": "Row level security"
+        "subtitle": "Row-level security"
       },
       "free": true,
       "launch": true,
