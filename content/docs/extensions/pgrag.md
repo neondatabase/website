@@ -52,7 +52,7 @@ There are two main stages in a RAG pipeline:
     - Prompting the generative AI chat model with the question and relevant document chunks
     - Generating the answer
 
-    
+---
 
 ## What does pgrag support?
 
@@ -87,7 +87,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
     * Fireworks.ai API for embeddings (e.g. `nomic-ai/nomic-embed-text-v1.5`) and chat completions (e.g. `llama-v3p1-8b-instruct`).
     * Voyage AI API for embeddings (e.g. `voyage-multilingual-2`) and reranking (e.g. `rerank-2-lite`).
 
-
+---
 
 ## Installation
 
@@ -100,6 +100,8 @@ create extension if not exists rag_jina_reranker_v1_tiny_en cascade;
 ```
 
 The three extensions have no dependencies on each other, but all are dependent on **pgvector**. Specify `cascade` to ensure pgvector is installed alongside them.
+
+---
 
 ## pgrag functions
 
@@ -130,7 +132,6 @@ This section lists the `pgrag` functions that support the first and second RAG p
     - `rag_bge_small_en_v15.embedding_for_passage(text) -> vector(384)`
     - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
-
 ### Second stage RAG pipeline functions 
 
 - **Generating embeddings for questions**
@@ -151,6 +152,8 @@ This section lists the `pgrag` functions that support the first and second RAG p
     This function permits making API calls out to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
 
     - `rag.openai_chat_completion(json) -> json`
+
+---
 
 ## End-to-end RAG example
 
@@ -248,3 +251,5 @@ select rag.openai_chat_completion(json_object(
 )) -> 'choices' -> 0 -> 'message' -> 'content' as answer
 from reranked;
 ```
+
+<NeedHelp/>
