@@ -50,4 +50,4 @@ Instead of manually copying and pasting the JWKS endpoint from your authenticati
 
 ## User interface for RLS and user impersonation
 
-We'd like to add a friendly UI for managing RLS policies, with AI assistance plus a way to simulate SQL queries from different application users and JWT properties.
+We'd like to add a user-friendly UI for managing RLS policies with AI assistance and a way to simulate SQL queries from different application users and JWT properties.
