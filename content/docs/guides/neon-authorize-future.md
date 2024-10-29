@@ -38,7 +38,7 @@ Implementing proxy rate limiting will make SQL from the client safer.
 
 ## Query allow-listing
 
-A query allow-list would also help increase the safety of SQL queries from the client.
+The ability to define a query allow-list would help increase the safety of SQL queries from the client.
 
 ## Investigate React/TanStack query hooks for SQL queries
 
