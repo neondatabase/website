@@ -20,7 +20,7 @@ updatedOn: '2024-10-23T06:56:25.981Z'
 
 Available for Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
-<Admonition type="note">
+<Admonition type="note" title="beta">
 This feature is currently in Beta for Business plan users. It will remain free of charge for Business plan users during the Beta period.
 </Admonition>
 
