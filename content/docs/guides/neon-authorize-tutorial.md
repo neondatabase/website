@@ -6,6 +6,16 @@ isDraft: true
 updatedOn: '2024-10-29T00:27:11.739Z'
 ---
 
+<InfoBlock>
+<DocsList title="Sample project" theme="repo">
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
+</DocsList>
+
+<DocsList title="Related docs" theme="docs">
+  <a href="/docs/guides/neon-authorize">About Neon Authorize</a>
+</DocsList>
+</InfoBlock>
+
 <ComingSoon/>
 
 In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
