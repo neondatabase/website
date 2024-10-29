@@ -1,16 +1,11 @@
 ---
-title: Database-level authorization with Clerk and Neon Authorize
-subtitle: Secure your application using Postgres Row-level Security
+title: Secure your data with Clerk and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon Authorize
 enableTableOfContents: true
 updatedOn: '2024-10-29T00:27:11.738Z'
 ---
 
 <InfoBlock>
-<DocsList title="Learn how to">
-<p>Set up Clerk for Neon Authorize</p>
-<p>Set up Postgres with RLS policies</p>
-<p>Run a sample authenticated query</p>
-</DocsList>
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
