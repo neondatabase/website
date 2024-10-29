@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Authorize just launched: Add row level security to your codebase
+      Neon Authorize just launched - Add row level security to your codebase, with simplified syntax
     </span>
     <ChevronIcon
       className={clsx(
