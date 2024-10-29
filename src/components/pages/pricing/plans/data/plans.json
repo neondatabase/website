@@ -318,6 +318,17 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Neon Authorize"
+        "subtitle": "Row level security"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Monitoring"
       },
       "free": "Up to 24 hours",
