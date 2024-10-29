@@ -8,11 +8,7 @@ This page covers common errors you might encounter when implementing Row-level S
 
 ---
 
-## Password authentication issues
-
-If you encounter issues related to password authentication, you might see the following error:
-
-```sql
+```bash
 NeonDbError: password authentication failed for user 'jwk not found'
 ```
 
@@ -45,11 +41,8 @@ This issue typically occurs when:
 
 ---
 
-## Permission denied
 
-If you encounter a permission denied error, you might see the following message:
-
-```sql
+```bash
 NeonDbError: permission denied for table X
 ```
 
@@ -90,7 +83,9 @@ Neon Authorize promps you to run these commands when you first set up your authe
 
 ---
 
-## Invalid RSA signing algorithm
+```bash
+invalid RSA signing algorithm
+```
 
 Neon Authorize only supports JWTs signed with the `ES256` and `RS256` algorithms. If the Neon Proxy receives a JWT signed with any other algorithm, it will produce an error.
 
