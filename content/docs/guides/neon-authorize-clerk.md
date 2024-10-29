@@ -2,6 +2,7 @@
 title: Database-level authorization with Clerk and Neon Authorize
 subtitle: Secure your application using Postgres Row-level Security
 enableTableOfContents: true
+updatedOn: '2024-10-29T00:27:11.738Z'
 ---
 
 <InfoBlock>

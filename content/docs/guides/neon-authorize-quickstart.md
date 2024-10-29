@@ -1,7 +1,9 @@
 ---
 title: Neon Authorize Quickstart
-subtitle: Learn how to integrate your preferred authentication provider with Neon and start securing your database connections
+subtitle: Learn how to integrate your preferred authentication provider with Neon and
+  start securing your database connections
 enableTableOfContents: true
+updatedOn: '2024-10-29T00:27:11.739Z'
 ---
 
 <InfoBlock>
