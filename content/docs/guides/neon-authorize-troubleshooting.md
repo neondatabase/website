@@ -4,7 +4,7 @@ subtitle: Common issues and solutions when using Neon Authorize
 enableTableOfContents: true
 ---
 
-This page covers common errors you might encounter when implementing Row-level Security policies when using Neon Authorize with your authentication provider.
+This page covers common errors you might encounter when implementing Row-level Security policies with Neon Authorize and your authentication provider.
 
 ---
 
@@ -95,4 +95,4 @@ Neon Authorize only supports JWTs signed with the `ES256` and `RS256` algorithms
 
 **Solution:**
 
-Ensure your JWTs are signed using either the ES256 or RS256 algorithms.
+Ensure your JWTs are signed using either the `ES256` or `RS256` algorithms.

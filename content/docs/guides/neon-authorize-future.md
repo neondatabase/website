@@ -1,6 +1,6 @@
 ---
 title: The future for Neon Authorize
-subtitle: A vision for what might come next
+subtitle: Our vision for what comes next
 enableTableOfContents: true
 ---
 
