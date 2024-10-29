@@ -4,7 +4,7 @@ subtitle: Common issues and solutions when using Neon Authorize
 enableTableOfContents: true
 ---
 
-This page covers common errors you might encounter when implementing Row-level Security policies with Neon Authorize and your authentication provider.
+This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon Authorize and your authentication provider.
 
 ---
 
@@ -78,7 +78,7 @@ TO anonymous;
 ```
 
 <Admonition type="note">
-Neon Authorize promps you to run these commands when you first set up your authentication provider in the Authorization UI. If you're using a different database, you will have to run these commands manually.
+Neon Authorize prompts you to run these commands when you first set up your authentication provider on the Neon Authorize drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
 </Admonition>
 
 ---

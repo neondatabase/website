@@ -14,7 +14,7 @@ We want Neon Authorize to work over any type of connection: TCP, HTTP, or WebSoc
 
 ## Custom roles
 
-We aim to introduce custom roles for Neon Authorize, beyond the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed" roles, which would be managed by our platform and included by default in every branch and read replica.
+We aim to introduce custom roles for Neon Authorize, in addition to the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed" roles, which would be managed by our platform and included by default in every branch and read replica.
 
 ## JWT audience checks
 
@@ -26,19 +26,19 @@ We've discussed supportring multi-tenancy via Neon Authorize, allowing users to 
 
 ## Neon CLI for configuration
 
-We can add the ability to configure Neon Authorize from our Neon CLI.
+We would like to add support for configuring Neon Authorize from the Neon CLI.
 
 ## Neon Authorize for Neon Console frontend database requests
 
-Using Neon Authorize for database requests from our SQL Editor can help map the individual Neon Console user more easily to the person in the organization who triggered the request.
+Using Neon Authorize for database requests from the Neon SQL Editor can help map the Neon Console user to the individual who issued the request.
 
 ## Proxy rate limiting
 
-Implementing rate limiting will make SQL from the client safer.
+Implementing proxy rate limiting will make SQL from the client safer.
 
 ## Query allow-listing
 
-A query allow-list would also help increase the safety of SQL queries from the client.
+The ability to define a query allow-list would help increase the safety of SQL queries from the client.
 
 ## Investigate React/TanStack query hooks for SQL queries
 
@@ -46,8 +46,8 @@ We're exploring the generation of React Query hooks for SQL queries, simplifying
 
 ## Simplified OAuth flow for JWKS endpoint
 
-Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we could work on an OAuth flow that allows you to simply `Sign in with <Provider>`, automatically populating the JWKS endpoint.
+Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we are interested in developing an OAuth flow that allows you to simply `Sign in with <Provider>`, automatically populating the JWKS endpoint.
 
 ## User interface for RLS and user impersonation
 
-We'd like to add a friendly UI for managing RLS policies, with AI assistance plus a way to simulate SQL queries from different application users and JWT properties.
+We'd like to add a user-friendly UI for managing RLS policies with AI assistance and a way to simulate SQL queries from different application users and JWT properties.
