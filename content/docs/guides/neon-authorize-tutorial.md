@@ -54,8 +54,7 @@ When each user creates a todo, it’s securely linked to their `userId` in the d
       .generatedByDefaultAsIdentity(),
     userId: text("user_id")
       .notNull()
-      // [!code word:(auth.user_id())]
-      .default(sql`(auth.user_id())`),
+      .default(sql`(auth.user_id())`), // [!code highlight]
     task: text("task").notNull(),
     isComplete: boolean("is_complete").notNull().default(false),
     insertedAt: timestamp("inserted_at", { withTimezone: true })
@@ -68,7 +67,7 @@ The `userId` column is populated directly from the authenticated `(auth.user_id(
 
 ## Step 2 — Create todos
 
-Let's create some sample Todos for both Alice and Bob. See if you can guess where we're going with this.
+Let's create some sample Todos for both Alice and Bob.
 
 ![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
 
@@ -94,18 +93,18 @@ export async function getTodos(): Promise<Array<Todo>> {
 
 The `WHERE` clause is technically enough to make sure data is properly isolated. Neon gets `auth.user_id` from the Clerk JWT and matches that to the `userId` column in the `todos` tables, so each user can only see their own Todos.
 
-Even though isolation is backed by our RLS policies, we include it here for performance reasons: it discards irrelevent rows early in the query process.
+Even though isolation is backed by our RLS policies, we include it here for performance reasons: it helps Postgres build a better query plan and use indexes where possible.
 
 ### RLS policy for viewing todos
 
 In the application's `schema.ts` file, you can find the RLS policies written in Drizzle that provide access control at the database level. Here is a look at one of those policies:
 
 ```typescript shoulWrap
- p2: pgPolicy("view todos", {
-      for: "select",
-      to: "authenticated",
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
+pgPolicy("view todos", {
+  for: "select",
+  to: "authenticated",
+  using: sql`(select auth.user_id() = user_id)`,
+});
 ```
 
 This policy ensures that each `SELECT` query only returns rows where the `user_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own Todos. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
@@ -136,7 +135,7 @@ Check your two open Todo users, reload the page, and see what happens:
 
 ![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
 
-Nothing happens. RLS is still in place, and isolation is maintained: no data leaks.
+Nothing happens. RLS is still in place, and isolation is maintained: no data leaks. 💪
 
 ## Step 4 — Disable RLS
 
@@ -202,9 +201,11 @@ export async function getTodos(): Promise<Array<Todo>> {
 
 ## Appendix: Understanding RLS policies in Drizzle
 
-In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application. You can find these policies in the `schema.ts` file.
+In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application, found in the `schema.ts` file.
 
-Writing RLS policies in SQL can be complex, but a recent release of Drizzle makes it much more straightforward. These policies are all written using Drizzle.
+These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function – a wrapper that works with Neon’s predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function.
+
+The examples here use `pgPolicy` for custom control over each action.
 
 ### create todos
 

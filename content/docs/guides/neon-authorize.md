@@ -49,6 +49,10 @@ Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the va
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
+### Using Neon Authorize with custom JWTs
+
+If you don’t want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here’s a sample application that demonstrates this approach: [See demo](https://github.com/neondatabase/authorize-demo-custom-jwt)
+
 ## Before and after Neon Authorize
 
 Let's take a **before/after** look at moving authorization from the application level to the database to demonstrate how Neon Authorize offers a different approach to securing your application.
