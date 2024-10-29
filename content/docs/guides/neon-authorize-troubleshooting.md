@@ -41,7 +41,6 @@ This issue typically occurs when:
 
 ---
 
-
 ```bash
 NeonDbError: permission denied for table X
 ```
