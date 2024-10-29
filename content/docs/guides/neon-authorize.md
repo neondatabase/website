@@ -226,6 +226,5 @@ While this feature is in its early-access phase, there are some limitations to b
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
 - **Postgres 17:** Postgres 17 is not currently supported but will be available soon.
-- **Azure:** Neon Authorize does not yet support projects set up in Azure regions.
 
 These limitations will evolve as we continue developing the feature. If you have any questions or run into issues, please let us know.
