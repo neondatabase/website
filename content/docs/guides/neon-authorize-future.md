@@ -34,7 +34,7 @@ Using Neon Authorize for database requests from the Neon SQL Editor can help map
 
 ## Proxy rate limiting
 
-Implementing rate limiting will make SQL from the client safer.
+Implementing proxy rate limiting will make SQL from the client safer.
 
 ## Query allow-listing
 
