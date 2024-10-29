@@ -4,7 +4,7 @@ subtitle: Common issues and solutions when using Neon Authorize
 enableTableOfContents: true
 ---
 
-This page covers common errors you might encounter when implementing Row-level Security policies with Neon Authorize and your authentication provider.
+This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon Authorize and your authentication provider.
 
 ---
 
