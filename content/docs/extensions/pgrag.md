@@ -140,7 +140,7 @@ This section lists the functions provided by `pgrag`. For function usage example
 
 - **Reranking**
 
-  This function reranks chunks against the question using a small but best-in-class model that runs locally on the database server.
+  This function reranks chunks against the question using a small but best-in-class model that runs locally on your Postgres server.
 
   - `rag_jina_reranker_v1_tiny_en.rerank_distance(text, text) -> real`
 
