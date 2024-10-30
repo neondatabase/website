@@ -20,8 +20,6 @@ updatedOn: '2024-10-29T14:36:40.246Z'
 
 </InfoBlock>
 
-<ComingSoon/>
-
 **Neon Authorize** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, bringing authorization closer to your data by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
 
 ## Authentication and authorization
