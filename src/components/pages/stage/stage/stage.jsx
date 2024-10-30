@@ -9,11 +9,11 @@ import TwitterShareButton from 'components/shared/twitter-share-button';
 import { DEPLOY_AGENDA } from 'constants/deploy';
 
 // TODO: Replace with actual video
-const DEV_DAYS_STAGE_VIDEO =
+const DEPLOY_STAGE_VIDEO =
   'https://www.youtube.com/embed/Mz4OsXP6dvc?autoplay=1&vq=hd1080&mute=1&rel=0&start=';
 
 const Stage = () => {
-  const [videoSource, setVideoSource] = useState(DEV_DAYS_STAGE_VIDEO);
+  const [videoSource, setVideoSource] = useState(DEPLOY_STAGE_VIDEO);
 
   return (
     <>
@@ -83,7 +83,7 @@ const Stage = () => {
                   type="button"
                   onClick={() =>
                     timestamp
-                      ? setVideoSource(DEV_DAYS_STAGE_VIDEO.replace('&mute=1', '') + timestamp)
+                      ? setVideoSource(DEPLOY_STAGE_VIDEO.replace('&mute=1', '') + timestamp)
                       : false
                   }
                 >
