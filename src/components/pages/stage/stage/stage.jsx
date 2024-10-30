@@ -93,7 +93,7 @@ const Stage = () => {
                   <figure className="mt-3 flex items-center">
                     {speaker.avatar && (
                       <Image
-                        className="mr-2"
+                        className="mr-2 rounded-full"
                         width={28}
                         height={28}
                         quality={100}
