@@ -7,7 +7,15 @@ updatedOn: '2024-10-29T23:35:22.437Z'
 
 This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon Authorize and your authentication provider.
 
+Errors:
+
+- [`NeonDbError: password authentication failed for user 'jwk not found'`](#password-authentication-error)
+- [`NeonDbError: permission denied for table X`](#permission-denied-error)
+- [`invalid RSA Signing Algorithm`](#invalid-rsa-signing-algorithm)
+
 ---
+
+<a id="password-authentication-error"></a>
 
 ```bash
 NeonDbError: password authentication failed for user 'jwk not found'
@@ -41,6 +49,8 @@ This issue typically occurs when:
 - [JSON Web Key (JWK) Specification](https://datatracker.ietf.org/doc/html/rfc7517)
 
 ---
+
+<a id="permission-denied-error"></a>
 
 ```bash
 NeonDbError: permission denied for table X
@@ -82,6 +92,8 @@ Neon Authorize prompts you to run these commands when you first set up your auth
 </Admonition>
 
 ---
+
+<a id="invalid-rsa-signing-algorithm"></a>
 
 ```bash
 invalid RSA signing algorithm
