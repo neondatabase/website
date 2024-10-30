@@ -177,7 +177,7 @@ insert into docs (name, fulltext)
 values ('third.pdf', rag.text_from_pdf(decode(:'contents','base64'))));
 ```
 
-**Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
+**2. Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
 
 ```sql
 drop table embeddings;
@@ -199,7 +199,7 @@ insert into embeddings (doc_id, chunk, embedding) (
 );
 ```
 
-**Query the embeddings and rerank the results (performed locally)**
+**3. Query the embeddings and rerank the results (performed locally)**
 
 ```sql
 \set query 'what is [...]? how does it work?'
@@ -216,7 +216,7 @@ from ranked
 order by rerank_distance;
 ```
 
-**Feed the query and top chunks to a remote AI chat model such as ChatGPT to complete the RAG pipeline**
+**4. Feed the query and top chunks to a remote AI chat model such as ChatGPT to complete the RAG pipeline**
 
 ````sql
 \set query 'what is [...]? how does it work?'
