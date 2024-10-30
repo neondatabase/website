@@ -5,13 +5,14 @@ import georgeMacKerron from 'images/agenda/george-mackerron.png';
 import heikkiLinnakangas from 'images/agenda/heikki-linnakangas.png';
 import mahmoudAbdelwahab from 'images/agenda/mahmoud-abdelwahab.png';
 import pranavAurora from 'images/agenda/pranav-aurora.jpeg';
+import nikitaShamgunov from 'images/pages/about/leadership/nikita-shamgunov.jpg';
 
 const DEPLOY_AGENDA = [
   {
-    event: 'Learn about the latest new features and improvements we released',
+    event: 'Keynote - Learn about the latest new features and improvements we released',
     company: 'Neon',
     time: '10:05 AM',
-    speaker: { name: 'Keynote' },
+    speaker: { name: 'Nikita Shamgunov', role: 'CEO', avatar: nikitaShamgunov },
     timestamp: '300',
   },
   {
