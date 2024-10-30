@@ -23,7 +23,7 @@ The `aud` field in a JWT typically defines the token's intended recipients. In t
 
 ## Multi-tenancy through Neon Authorize
 
-We've discussed supportring multi-tenancy via Neon Authorize, allowing users to configure how their JWTs should trigger Neon to route database requests to different Neon instances.
+We've discussed supporting multi-tenancy via Neon Authorize, allowing users to configure how their JWTs should trigger Neon to route database requests to different Neon instances.
 
 ## Neon CLI for configuration
 
