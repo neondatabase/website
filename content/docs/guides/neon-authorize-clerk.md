@@ -106,7 +106,7 @@ Add this to your `.env` file.
 
 ```bash shouldWrap
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
+DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
 ```
 
 ## Add RLS policies
