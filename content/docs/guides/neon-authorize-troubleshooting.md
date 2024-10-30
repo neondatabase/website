@@ -10,7 +10,7 @@ This page covers common errors you might encounter when implementing Row-Level S
 Errors:
 - [`NeonDbError: password authentication failed for user 'jwk not found'`](#password-authentication-error)
 - [`NeonDbError: permission denied for table X`](#permission-denied-error)
-- [`Invalid RSA Signing Algorithm`](#invalid-rsa-signing-algorithm)
+- [`invalid RSA Signing Algorithm`](#invalid-rsa-signing-algorithm)
 
 ---
 <a id="password-authentication-error"></a>
