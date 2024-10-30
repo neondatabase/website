@@ -50,8 +50,9 @@ Replace your Vercel Postgres SDK imports and connection setup with the Neon serv
 
 ```diff
 - import { db } from '@vercel/postgres'; // [!code --]
-+ import { Pool, neonConfig } from '@neondatabase/serverless'; // [!code ++]
 + import ws from 'ws'; // [!code ++]
++ import { Pool, neonConfig } from '@neondatabase/serverless'; // [!code ++]
+
 + const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
 + neonConfig.webSocketConstructor = ws; // [!code ++]
 ```
