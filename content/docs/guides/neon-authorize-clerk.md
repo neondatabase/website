@@ -28,8 +28,7 @@ Clerk handles user authentication by generating JSON Web Tokens (JWTs), which ar
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech).
-- A [Clerk](https://clerk.com/) account and an existing application that uses Clerk for user authentication. Clerk offers a free plan to help you get started.
-- An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
+- A [Clerk](https://clerk.com/) account and an existing application (e.g., a **todos** app) that uses Clerk for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) for similar schema and policies in action.
 
 ## Integrate Clerk with Neon Authorize
 
@@ -43,34 +42,20 @@ For a basic integration, the default JWT claims from Clerk, including the `user_
 https://{yourClerkDomain}/.well-known/jwks.json
 ```
 
-You can find your JWKS URL in the Clerk Dashboard under:
+You can find your JWKS URL in the Clerk Dashboard under: **Configure → Developers → API Keys**. Click **Show JWT Public Key** and copy the JWKS URL for later.
 
-**Configure → Developers → API Keys**
+**Neon JWT Template**: For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under: **Configure > JWT Templates**
 
-Click **Show JWT Public Key** and copy the JWKS URL for later.
-
-<div style={{ display: 'flex', alignItems: 'top' }}>
-  <div style={{ flex: '0 0 65%', paddingRight: '20px' }}>
-**Neon JWT Template**
-
-For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under:
-
-**Configure > JWT Templates**.
-  </div>
-  <div style={{ flex: '0 0 35%', marginTop: '-20px' }}>
-![Neon-specific template option in Clerk templates](/docs/guides/clerk_neon_jwt_template.png)
-  </div>
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/clerk_neon_jwt_template.png" alt="Neon-specific template option in Clerk templates" style={{ width: '40%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 ### 2. Add Clerk as an authorization provider in the Neon Console
 
-<div style={{ display: 'flex', alignItems: 'top' }}>
-  <div style={{ flex: '0 0 65%', paddingRight: '20px' }}>
 Once you have the JWKS URL, go to the **Neon Console** and add Clerk as an authentication provider under the **Authorize** page. Paste your copied URL and Clerk will be automatically recognized and selected.
-  </div>
-  <div style={{ flex: '0 0 35%', marginTop: '-20px' }}>
-![Add Authentication Provider](/docs/guides/clerk_jwks_url_in_neon.png)
-  </div>
+
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/clerk_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
@@ -91,16 +76,20 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 In a future update, setting up the `pg_session_jwt` extension and granting role privileges will be done automatically when you add an authentication provider to your Neon project.
 </Admonition>
 
-### 4. Set up Roles
+### 4. Set up Postgres roles
 
-Next, define the table-level permissions for these new roles. For most use cases of Neon Authorize, you should run the following commands in order to give the roles access to read and write to any table in your public schema:
+The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
 ```sql
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO anonymous;
 ```
 
-Later, you can define RLS policies that will restrict what your application's users can do with these roles.
+- **Authenticated role**: This role is intended for users who are logged in, where Clerk will send and can send JWTs, allowing them to create, update, and delete their own records.
+  
+- **Anonymous role**: This role is intended for users who are not logged in. It allows limited access, such as reading public content (e.g., blog posts) without authentication.
+
+When you define Row-Level Security (RLS) policies later, you'll focus on the authenticated role to restrict what users can do with their own data.
 
 ### 5. Install the Neon Serverless Driver
 
@@ -126,8 +115,22 @@ Add this to your `.env` file.
 
 ```bash shouldWrap
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
+DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
 ```
+
+Your application will use this connection string to establish a connection to the Neon database. Here’s an example of how you might use it in your application:
+
+```typescript
+import { neon } from '@neondatabase/serverless';
+
+// Establish a connection to the Neon database using the authenticated URL
+const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProvider.getJWT() });
+
+// Execute a query to select all todos for the logged-in user
+await sql(`select * from todos`);
+```
+
+In this example, the application connects to the Neon database using the `DATABASE_AUTHENTICATED_URL` and passes the JWT obtained from the authentication provider. This allows the app to execute authorized queries, ensuring that the user can only access their own data.
 
 <Admonition type="note">
 This guide focuses on the `authenticated` role, but we also granted the `anonymous` role similar CRUD access to your database tables. Depending on your application, you might use both roles. For instance, in a **blog application**, the `anonymous` role could allow users to read articles without logging in, while the `authenticated` role lets users create or edit their own posts. The [demo repositories](/guides/neon-authorize#sample-applications) mostly showcase the `authenticated` role, but you can adapt your setup to include the `anonymous` role as needed.
