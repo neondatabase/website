@@ -45,12 +45,12 @@ There are two main stages in a RAG pipeline:
    - Generating embeddings for the chunks
    - Storing the embeddings alongside chunks in your vector database
 2. **Handling incoming questions**: This second stage involves:
-    - Vectorizing the question to create an embedding
-    - Using the question embedding to find relevant document chunks based on the shortest vector distances
-    - Retrieving document chunks from the database
-    - Reranking the chunks, taking the best-matching chunks
-    - Prompting the generative AI chat model with the question and relevant document chunks
-    - Generating the answer
+   - Vectorizing the question to create an embedding
+   - Using the question embedding to find relevant document chunks based on the shortest vector distances
+   - Retrieving document chunks from the database
+   - Reranking the chunks, taking the best-matching chunks
+   - Prompting the generative AI chat model with the question and relevant document chunks
+   - Generating the answer
 
 ---
 
