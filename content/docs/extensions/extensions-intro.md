@@ -251,6 +251,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
+<a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
+
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="check">pgjwt</a>
