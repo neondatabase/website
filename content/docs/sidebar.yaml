@@ -242,7 +242,7 @@
               slug: guides/read-replica-guide
             - title: Scale your app with Read Replicas
               slug: guides/read-replica-integrations
-            - title: Run analytics queries with Read Replicas 
+            - title: Run analytics queries with Read Replicas
               slug: guides/read-replica-data-analysis
             - title: Run ad-hoc queries with Read Replicas
               slug: guides/read-replica-adhoc-queries
@@ -420,12 +420,30 @@
           slug: guides/python
         - title: Rust
           slug: guides/rust
+    - title: Neon Authorize
+      slug: guides/neon-authorize
+      icon: auth
+      items:
+        - section: Overview
+          items:
+            - title: About
+              slug: guides/neon-authorize
+            - title: Tutorial
+              slug: guides/neon-authorize-tutorial
+            - title: Troubleshooting
+              slug: guides/neon-authorize-troubleshooting
+            - title: What's next
+              slug: guides/neon-authorize-future
+        - section: Quickstarts
+          items:
+            - title: Clerk
+              slug: guides/neon-authorize-clerk
     - title: Integrations
       icon: integrations
       slug: guides/integrations
       items:
         - section: Monitor
-          items: 
+          items:
             - title: Datadog Integration
               slug: guides/datadog
               tag: new
@@ -465,6 +483,8 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Trigger serverless functions with Inngest
+              slug: guides/trigger-serverless-functions
         - section: Query
           items:
             - title: Exograph
@@ -706,6 +726,8 @@
               slug: extensions/neon-utils
             - title: pgvector
               slug: extensions/pgvector
+            - title: pgrag
+              slug: extensions/pgrag
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
