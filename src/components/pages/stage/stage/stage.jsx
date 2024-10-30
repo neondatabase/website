@@ -10,7 +10,7 @@ import { DEPLOY_AGENDA } from 'constants/deploy';
 
 // TODO: Replace with actual video
 const DEPLOY_STAGE_VIDEO =
-  'https://www.youtube.com/embed/UnoKbTSpEY8?si=nV4fznnxDHJbmUnh?autoplay=1&vq=hd1080&mute=1&rel=0&start=';
+  'https://www.youtube.com/embed/QDNsxw_3ris?si=CwUiHOo8LOnvPUE3?autoplay=1&vq=hd1080&mute=1&rel=0&start=';
 
 const Stage = () => {
   const [videoSource, setVideoSource] = useState(DEPLOY_STAGE_VIDEO);
