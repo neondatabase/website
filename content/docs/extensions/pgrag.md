@@ -31,7 +31,7 @@ The `pgrag` extension is experimental and actively being developed. Use it with 
 
 ## What is RAG?
 
-**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model; for example: "_ChatGPT, please answer questions x using information Y_".
+**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model. For example, "_ChatGPT, please answer questions x using information Y_".
 
 ---
 
