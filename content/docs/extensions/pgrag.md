@@ -23,7 +23,7 @@ updatedOn: '2024-06-14T07:55:54.371Z'
 
 </InfoBlock>
 
-The `pgrag` extension and its accompanying model extensions are designed for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving your SQL client. No programming languages or libraries are required. With functions provided by `pgrag` and a Postgres database with `pgvector`, you can build a complete RAG pipeline via SQL.
+The `pgrag` extension and its accompanying model extensions are designed for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving your SQL client. No additional programming languages or libraries are required. With functions provided by `pgrag` and a Postgres database with `pgvector`, you can build a complete RAG pipeline via SQL.
 
 <Admonition type="info" title="Experimental Feature">
 The `pgrag` extension is experimental and actively being developed. Use it with caution as functionality may change.
@@ -31,7 +31,7 @@ The `pgrag` extension is experimental and actively being developed. Use it with 
 
 ## What is RAG?
 
-**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model; for example: "_ChatGPT, please answer questions x using information Y_".
+**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model. For example, "_ChatGPT, please answer questions x using information Y_".
 
 ---
 
@@ -60,7 +60,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
 
 - **Text extraction and conversion**
 
-  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no OCR or support for complex layout and formatting.
+  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no Optical Character Recognition (OCR) or support for complex layout and formatting.
   - Simple text extraction from `.docx` documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
   - HTML conversion to Markdown (using [htmd](https://github.com/letmutex/htmd)).
 
@@ -140,7 +140,7 @@ This section lists the functions provided by `pgrag`. For function usage example
 
 - **Reranking**
 
-  This function reranks chunks against the question using a small but best-in-class model that runs locally on the database server.
+  This function reranks chunks against the question using a small but best-in-class model that runs locally on your Postgres server.
 
   - `rag_jina_reranker_v1_tiny_en.rerank_distance(text, text) -> real`
 
@@ -177,7 +177,7 @@ insert into docs (name, fulltext)
 values ('third.pdf', rag.text_from_pdf(decode(:'contents','base64'))));
 ```
 
-**2. Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
+**2. Create an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
 
 ```sql
 drop table embeddings;
