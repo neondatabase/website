@@ -60,7 +60,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
 
 - **Text extraction and conversion**
 
-  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no OCR or support for complex layout and formatting.
+  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no Optical Character Recognition (OCR) or support for complex layout and formatting.
   - Simple text extraction from `.docx` documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
   - HTML conversion to Markdown (using [htmd](https://github.com/letmutex/htmd)).
 
