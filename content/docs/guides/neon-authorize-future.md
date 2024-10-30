@@ -2,7 +2,7 @@
 title: The future for Neon Authorize
 subtitle: Our vision for what comes next
 enableTableOfContents: true
-updatedOn: '2024-10-29T23:35:22.434Z'
+updatedOn: '2024-10-30T13:10:34.508Z'
 ---
 
 [Neon Authorize](/docs/guides/neon-authorize) is an exciting feature, and we want to build more capabilities on top of it.
@@ -23,7 +23,7 @@ The `aud` field in a JWT typically defines the token's intended recipients. In t
 
 ## Multi-tenancy through Neon Authorize
 
-We've discussed supportring multi-tenancy via Neon Authorize, allowing users to configure how their JWTs should trigger Neon to route database requests to different Neon instances.
+We've discussed supporting multi-tenancy via Neon Authorize, allowing users to configure how their JWTs should trigger Neon to route database requests to different Neon instances.
 
 ## Neon CLI for configuration
 

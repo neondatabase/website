@@ -148,7 +148,6 @@ export default {
     description:
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
-    robotsNoindex: 'noindex',
   },
   404: {
     title: 'Page Not Found — Neon',
