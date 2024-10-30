@@ -84,6 +84,14 @@ With the exception of storing and retrieving embeddings, which is supported by P
 
 ## Installation
 
+<Admonition type="warning">
+As an experimental extension, `pgrag` may be unstable or introduce backward-incompatible changes. We recommend using it only in a separate, dedicated Neon project. To proceed with the installation, you will need to run the following command first:
+
+```sql
+SET neon.allow_unstable_extensions='true'
+```
+</Admonition> 
+
 To install `pgrag` to a Neon Postgres database, run the following commands:
 
 ```sql
