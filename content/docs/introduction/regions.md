@@ -29,10 +29,8 @@ During this Beta period:
 
 - Anyone can create a Neon project in the Azure region.
 - The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
-- For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will not be counted toward your [Neon plan allowances](/docs/introduction/plans), though project allowances still apply, and [extra project units](/docs/introduction/extra-usage) will be billed accordingly.
+- For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will become billable as of **Dec 1, 2024**. [Extra project units](/docs/introduction/extra-usage) are currently billable and will remain so.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
-
-Users with Neon projects in the Azure region will be notified before the Beta period ends, at which point usage in these projects will begin to count toward your [Neon plan allowances](/docs/introduction/plans).
 
 To stay informed about the latest developments for Neon on Azure, please [sign up for our newsletter](https://neon.tech/blog#subscribe-form). Neon will soon be available through the Azure Marketplace. To be notified as soon as it's live, join our [Neon in the Azure Marketplace Waitlist](https://neon.tech/azure-marketplace).
 
