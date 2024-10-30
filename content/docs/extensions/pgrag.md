@@ -90,7 +90,8 @@ As an experimental extension, `pgrag` may be unstable or introduce backward-inco
 ```sql
 SET neon.allow_unstable_extensions='true'
 ```
-</Admonition> 
+
+</Admonition>
 
 To install `pgrag` to a Neon Postgres database, run the following commands:
 
