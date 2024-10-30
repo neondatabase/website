@@ -23,7 +23,7 @@ updatedOn: '2024-06-14T07:55:54.371Z'
 
 </InfoBlock>
 
-The `pgrag` extension and its accompanying model extensions are designed for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving your SQL client. No programming languages or libraries are required. With functions provided by `pgrag` and a Postgres database with `pgvector`, you can build a complete RAG pipeline via SQL.
+The `pgrag` extension and its accompanying model extensions are designed for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving your SQL client. No additional programming languages or libraries are required. With functions provided by `pgrag` and a Postgres database with `pgvector`, you can build a complete RAG pipeline via SQL.
 
 <Admonition type="info" title="Experimental Feature">
 The `pgrag` extension is experimental and actively being developed. Use it with caution as functionality may change.
