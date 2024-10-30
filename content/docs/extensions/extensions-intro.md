@@ -15,7 +15,9 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="app-store" icon="sparkle">pg_tiktoken</a>
+<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="sparkle">pg_tiktoken</a>
+
+<a href="/docs/extensions/pgrag" description="Create end-to-end Retrieval-Augmented Generation (RAG) pipelines" icon="sparkle">pgrag</a>
 
 <a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres" icon="sparkle">pgvector</a>
 
