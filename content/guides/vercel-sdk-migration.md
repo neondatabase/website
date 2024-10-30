@@ -41,20 +41,22 @@ Replace your Vercel Postgres SDK imports and connection setup with the Neon serv
 #### Option A: Using HTTP (Recommended for simple queries)
 
 ```diff
-- import { sql } from '@vercel/postgres'; // [!code --]
-+ import { neon } from '@neondatabase/serverless'; // [!code ++]
-+ const sql = neon(process.env.DATABASE_URL!); // [!code ++]
+import { sql } from '@vercel/postgres'; // [!code --]
+
+import { neon } from '@neondatabase/serverless'; // [!code ++]
+const sql = neon(process.env.DATABASE_URL!); // [!code ++]
 ```
 
 #### Option B: Using WebSockets (Recommended for transactions)
 
 ```diff
-- import { db } from '@vercel/postgres'; // [!code --]
-+ import ws from 'ws'; // [!code ++]
-+ import { Pool, neonConfig } from '@neondatabase/serverless'; // [!code ++]
+import { db } from '@vercel/postgres'; // [!code --]
 
-+ const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
-+ neonConfig.webSocketConstructor = ws; // [!code ++]
+import ws from 'ws'; // [!code ++]
+import { Pool, neonConfig } from '@neondatabase/serverless'; // [!code ++]
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
+neonConfig.webSocketConstructor = ws; // [!code ++]
 ```
 
 ### 3. Update your queries
@@ -65,55 +67,54 @@ Here are common query patterns and how to migrate them:
 
 ```diff
 # Vercel Postgres SDK
-- const { rows } = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code --]
+const { rows } = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code --]
 
 # Neon HTTP
-+ const rows = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code ++]
+const rows = await sql`SELECT * FROM users WHERE id = ${userId}`; // [!code ++]
 
 # Neon WebSockets
-+ const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [userId]); // [!code ++]
+const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [userId]); // [!code ++]
 ```
 
 #### Transactions
 
 ```diff
-- import { db } from '@vercel/postgres'; // [!code --]
--  // [!code --]
-- async function transferFunds(fromId: number, toId: number, amount: number) { // [!code --]
--   const client = await db.connect(); // [!code --]
--   try { // [!code --]
--     await client.query('BEGIN'); // [!code --]
--     await client.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [ // [!code --]
--       amount, // [!code --]
--       fromId, // [!code --]
--     ]); // [!code --]
--     await client.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code --]
--     await client.query('COMMIT'); // [!code --]
--   } catch (e) { // [!code --]
--     await client.query('ROLLBACK'); // [!code --]
--     throw e; // [!code --]
--   } finally { // [!code --]
--     client.release(); // [!code --]
--   } // [!code --]
-- } // [!code --]
+ import { db } from '@vercel/postgres'; // [!code --]
 
+async function transferFunds(fromId: number, toId: number, amount: number) { // [!code --]
+  const client = await db.connect(); // [!code --]
+  try { // [!code --]
+    await client.query('BEGIN'); // [!code --]
+    await client.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [ // [!code --]
+      amount, // [!code --]
+      fromId, // [!code --]
+    ]); // [!code --]
+    await client.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code --]
+    await client.query('COMMIT'); // [!code --]
+  } catch (e) { // [!code --]
+    await client.query('ROLLBACK'); // [!code --]
+    throw e; // [!code --]
+  } finally { // [!code --]
+    client.release(); // [!code --]
+  } // [!code --]
+} // [!code --]
 
-+ import { Pool } from '@neondatabase/serverless'; // [!code ++]
-+ // [!code ++]
-+ async function transferFunds(fromId: number, toId: number, amount: number) { // [!code ++]
-+   const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
-+   try { // [!code ++]
-+     await pool.query('BEGIN'); // [!code ++]
-+     await pool.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [amount, fromId]); // [!code ++]
-+     await pool.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code ++]
-+     await pool.query('COMMIT'); // [!code ++]
-+   } catch (e) { // [!code ++]
-+     await pool.query('ROLLBACK'); // [!code ++]
-+     throw e; // [!code ++]
-+   } finally { // [!code ++]
-+     await pool.end(); // [!code ++]
-+   } // [!code ++]
-+ } // [!code ++]
+import { Pool } from '@neondatabase/serverless'; // [!code ++]
+
+async function transferFunds(fromId: number, toId: number, amount: number) { // [!code ++]
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL }); // [!code ++]
+  try { // [!code ++]
+    await pool.query('BEGIN'); // [!code ++]
+    await pool.query('UPDATE accounts SET balance = balance - $1 WHERE id = $2', [amount, fromId]); // [!code ++]
+    await pool.query('UPDATE accounts SET balance = balance + $1 WHERE id = $2', [amount, toId]); // [!code ++]
+    await pool.query('COMMIT'); // [!code ++]
+  } catch (e) { // [!code ++]
+    await pool.query('ROLLBACK'); // [!code ++]
+    throw e; // [!code ++]
+  } finally { // [!code ++]
+    await pool.end(); // [!code ++]
+  } // [!code ++]
+} // [!code ++]
 ```
 
 ## Best practices
