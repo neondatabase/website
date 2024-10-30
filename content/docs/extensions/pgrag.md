@@ -23,7 +23,7 @@ updatedOn: '2024-06-14T07:55:54.371Z'
 
 </InfoBlock>
 
-The `pgrag` is a set of extensions that support creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving `psql`. No programming languages or libraries are required. With functions provided by `pgrag`, you can build a complete RAG pipeline via SQL statements.
+The `pgrag` extension and its accompanying model extensions are designed for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving your SQL client. No programming languages or libraries are required. With functions provided by `pgrag` and a Postgres database with `pgvector`, you can build a complete RAG pipeline via SQL.
 
 <Admonition type="info" title="Experimental Feature">
 The `pgrag` extension is experimental and actively being developed. Use it with caution as functionality may change.
@@ -31,7 +31,7 @@ The `pgrag` extension is experimental and actively being developed. Use it with 
 
 ## What is RAG?
 
-**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model; for example: "ChatGPT, please answer questions x using information Y".
+**RAG stands for Retrieval-Augmented Generation**. It's the search for information relevant to a question that includes information alongside the question in a prompt to an AI chat model; for example: "_ChatGPT, please answer questions x using information Y_".
 
 ---
 
@@ -48,7 +48,7 @@ There are two main stages in a RAG pipeline:
    - Vectorizing the question to create an embedding
    - Using the question embedding to find relevant document chunks based on the shortest vector distances
    - Retrieving document chunks from the database
-   - Reranking the chunks, taking the best-matching chunks
+   - Reranking the chunks for the best-matching ones
    - Prompting the generative AI chat model with the question and relevant document chunks
    - Generating the answer
 
@@ -61,7 +61,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
 - **Text extraction and conversion**
 
   - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no OCR or support for complex layout and formatting.
-  - Simple text extraction from .docx documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
+  - Simple text extraction from `.docx` documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
   - HTML conversion to Markdown (using [htmd](https://github.com/letmutex/htmd)).
 
 - **Text chunking**
@@ -75,7 +75,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
   - Local tokenising + reranking with 33M parameter model [jina-reranker-v1-tiny-en](https://huggingface.co/jinaai/jina-reranker-v1-tiny-en) (also using [ort](https://github.com/pykeio/ort) via [fastembed](https://github.com/Anush008/fastembed-rs)).
 
    <Admonition type="note">
-   These models run locally on your Postgres server. They are packaged as separate extensions that accompany `pgrag`, because they are large (>100MB) and because we may want to add support for other models in future.
+   These models run locally on your Postgres server. They are packaged as separate extensions that accompany `pgrag`, because they are large (>100MB), and because we may want to add support for more models in future in the form of additional `pgrag` model extensions.
    </Admonition>
 
 - **Remote embedding and chat models**
@@ -92,7 +92,7 @@ create extension if not exists rag_bge_small_en_v15 cascade;
 create extension if not exists rag_jina_reranker_v1_tiny_en cascade;
 ```
 
-The three extensions have no dependencies on each other, but all depend on `pgvector`. Specify `cascade` to ensure `pgvector` is installed alongside them.
+The first extension is the `pgrag` extension. The other two extensions are the model extensions for local tokenising, embedding generation, and reranking. The three extensions have no dependencies on each other, but all depend on `pgvector`. Specifying `cascade` ensures that `pgvector` is installed.
 
 ---
 
@@ -102,7 +102,7 @@ This section lists the functions provided by `pgrag`. For function usage example
 
 - **Text extraction**
 
-  These functions allow you to extract text from PDFs, Word files, and HTML.
+  These functions extract text from PDFs, Word files, and HTML.
 
   - `rag.text_from_pdf(bytea) -> text`
   - `rag.text_from_docx(bytea) -> text`
@@ -110,34 +110,34 @@ This section lists the functions provided by `pgrag`. For function usage example
 
 - **Splitting text into chunks**
 
-  These functions let spit the extracted text into chunks by character count or token count.
+  These functions split the extracted text into chunks by character count or token count.
 
   - `rag.chunks_by_character_count(text, max_chars, overlap) -> text[]`
   - `rag_bge_small_en_v15.chunks_by_token_count(text, max_tokens, overlap) -> text[]`
 
 - **Generating embeddings for chunks**
 
-  These functions let you generate embeddings for chunks either directly in the extension using a small but best-in-class model on the server's CPU or by callign out to a 3rd-party API such as OpenAI.
+  These functions generate embeddings for chunks either directly in the extension using a small but best-in-class model on the database server or by calling out to a 3rd-party API such as OpenAI.
 
   - `rag_bge_small_en_v15.embedding_for_passage(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
 - **Generating embeddings for questions**
 
-  These functions let you generate embeddings for the questions
+  These functions generate embeddings for the questions.
 
   - `rag_bge_small_en_v15.embedding_for_query(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
 - **Reranking**
 
-  This function allows you to rerank chunks against the question using a small but best-in-class model that runs locally on the database server.
+  This function reranks chunks against the question using a small but best-in-class model that runs locally on the database server.
 
   - `rag_jina_reranker_v1_tiny_en.rerank_distance(text, text) -> real`
 
 - **Calling out to chat models**
 
-  This function lets you make API calls to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
+  This function makes API calls to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
 
   - `rag.openai_chat_completion(json) -> json`
 
@@ -145,7 +145,7 @@ This section lists the functions provided by `pgrag`. For function usage example
 
 ## End-to-end RAG example
 
-**1. Create a `docs` table and ingest some PDF documents as text.**
+**1. Create a `docs` table and ingest some PDF documents as text**
 
 ```sql
 drop table docs cascade;
@@ -168,7 +168,7 @@ insert into docs (name, fulltext)
 values ('third.pdf', rag.text_from_pdf(decode(:'contents','base64'))));
 ```
 
-**Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (this is all done locally).**
+**Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
 
 ```sql
 drop table embeddings;
@@ -190,7 +190,7 @@ insert into embeddings (doc_id, chunk, embedding) (
 );
 ```
 
-**Query the embeddings and rerank the results (still all done locally).**
+**Query the embeddings and rerank the results (performed locally)**
 
 ```sql
 \set query 'what is [...]? how does it work?'
@@ -207,7 +207,7 @@ from ranked
 order by rerank_distance;
 ```
 
-**Feed the query and top chunks to remote ChatGPT to complete the RAG pipeline**
+**Feed the query and top chunks to a remote AI chat model such as ChatGPT to complete the RAG pipeline**
 
 ````sql
 \set query 'what is [...]? how does it work?'
@@ -238,7 +238,6 @@ select rag.openai_chat_completion(json_object(
   )
 )) -> 'choices' -> 0 -> 'message' -> 'content' as answer
 from reranked;
-```
+````
 
 <NeedHelp/>
-````
