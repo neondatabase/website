@@ -23,10 +23,10 @@ updatedOn: '2024-06-14T07:55:54.371Z'
 
 </InfoBlock>
 
-The `pgrag` is a set of extensions that support creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving `psql`. No programming languages or libraries are required. With `pgrag`, you can build a complete RAG pipeline via SQL.
+The `pgrag` is a set of extensions that support creating end-to-end Retrieval-Augmented Generation (RAG) pipelines without leaving `psql`. No programming languages or libraries are required. With functions provided by `pgrag`, you can build a complete RAG pipeline via SQL statements.
 
-<Admonition type="info" title="experimental">
-The `pgrag` extension is experimental and under active development. Use at your own discretion.
+<Admonition type="info" title="Experimental Feature">
+The `pgrag` extension is experimental and actively being developed. Use it with caution as functionality may change.
 </Admonition>
 
 ## What is RAG?
@@ -41,14 +41,14 @@ There are two main stages in a RAG pipeline:
 
 1. **Preparing and indexing the information**: This stage involves:
    - Loading documents and extracting text
-   - Splittings the documents into chunks
+   - Splitting the documents into chunks
    - Generating embeddings for the chunks
    - Storing the embeddings alongside chunks in your vector database
 2. **Handling incoming questions**: This second stage involves:
     - Vectorizing the question to create an embedding
     - Using the question embedding to find relevant document chunks based on the shortest vector distances
     - Retrieving document chunks from the database
-    - Re-ranking the chunks, taking the best-matching chunks
+    - Reranking the chunks, taking the best-matching chunks
     - Prompting the generative AI chat model with the question and relevant document chunks
     - Generating the answer
 
@@ -60,7 +60,7 @@ With the exception of storing and retrieving embeddings, which is supported by P
 
 - **Text extraction and conversion**
 
-  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently no OCR and no support for complex layout or formatting.
+  - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no OCR or support for complex layout and formatting.
   - Simple text extraction from .docx documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
   - HTML conversion to Markdown (using [htmd](https://github.com/letmutex/htmd)).
 
@@ -92,15 +92,13 @@ create extension if not exists rag_bge_small_en_v15 cascade;
 create extension if not exists rag_jina_reranker_v1_tiny_en cascade;
 ```
 
-The three extensions have no dependencies on each other, but all are dependent on **pgvector**. Specify `cascade` to ensure pgvector is installed alongside them.
+The three extensions have no dependencies on each other, but all depend on `pgvector`. Specify `cascade` to ensure `pgvector` is installed alongside them.
 
 ---
 
 ## pgrag functions
 
-This section lists the `pgrag` functions that support the first and second RAG pipeline stages outlined above. For function examples, refer the [end-to-end RAG example](#end-to-end-rag-example) below or to the [pgrag GitHub repository](https://github.com/neondatabase-labs/pgrag).
-
-### First stage RAG pipeline functions
+This section lists the functions provided by `pgrag`. For function usage examples, refer to the [end-to-end RAG example](#end-to-end-rag-example) below or the [pgrag GitHub repository](https://github.com/neondatabase-labs/pgrag).
 
 - **Text extraction**
 
@@ -110,7 +108,7 @@ This section lists the `pgrag` functions that support the first and second RAG p
   - `rag.text_from_docx(bytea) -> text`
   - `rag.markdown_from_html(text) -> text`
 
-- **Splitting into chunks**
+- **Splitting text into chunks**
 
   These functions let spit the extracted text into chunks by character count or token count.
 
@@ -119,29 +117,27 @@ This section lists the `pgrag` functions that support the first and second RAG p
 
 - **Generating embeddings for chunks**
 
-  These function let you generate embeddings for chunks either directly in the extension using a small but best-in-class model on the server's CPU or by callign out to a 3rd-party API such as OpenAI.
+  These functions let you generate embeddings for chunks either directly in the extension using a small but best-in-class model on the server's CPU or by callign out to a 3rd-party API such as OpenAI.
 
   - `rag_bge_small_en_v15.embedding_for_passage(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
-### Second stage RAG pipeline functions 
-
 - **Generating embeddings for questions**
 
-  These function let you generate embeddings for the questions
+  These functions let you generate embeddings for the questions
 
   - `rag_bge_small_en_v15.embedding_for_query(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
 - **Reranking**
 
-  This function allows you to rerank chunks against the question, using a small but best-in-class model that runs locally on the data server using the server's CPU.
+  This function allows you to rerank chunks against the question using a small but best-in-class model that runs locally on the database server.
 
   - `rag_jina_reranker_v1_tiny_en.rerank_distance(text, text) -> real`
 
 - **Calling out to chat models**
 
-  This function permits making API calls out to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
+  This function lets you make API calls to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
 
   - `rag.openai_chat_completion(json) -> json`
 
@@ -194,7 +190,7 @@ insert into embeddings (doc_id, chunk, embedding) (
 );
 ```
 
-**Query the embeddings and re-rank the results (still all done locally).**
+**Query the embeddings and rerank the results (still all done locally).**
 
 ```sql
 \set query 'what is [...]? how does it work?'
