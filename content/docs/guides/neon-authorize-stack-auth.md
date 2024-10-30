@@ -11,11 +11,8 @@ enableTableOfContents: true
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="https://stackauth.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
 </DocsList>
 </InfoBlock>
-
-<ComingSoon/>
 
 Use Stack Auth with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
@@ -27,22 +24,8 @@ Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), whi
 
 To follow along with this guide, you will need:
 
-- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
-- A [Stack Auth](https://stackauth.com/) account and an existing application that uses Stack Auth for user authentication. Stack Auth offers a free plan to help you get started. 
-  - **Note**: If you do not have a Stack Auth-based application, you will need to set one up. This includes adding the following keys to your `.env` file:
-    ```bash
-    NEXT_PUBLIC_STACK_PROJECT_ID=<id>
-    NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=<id>
-    STACK_SECRET_SERVER_KEY=<id>
-
-    # For the `neondb_owner` role.
-    DATABASE_URL=postgresql://neondb_owner:<password>@ep-aged-heart-a4vhounp.us-east-1.aws.neon.tech/neondb?sslmode=require
-    # For the `authenticated`, passwordless role.
-    DATABASE_AUTHENTICATED_URL=postgresql://authenticated@<id>.us-east-1.aws.neon.tech/neondb?sslmode=require
-    ```
-  - For detailed guidance on creating a Stack Auth application, refer to the [Stack Auth documentation](https://stackauth.com/docs/getting-started).
-
-- An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-authorize) to see similar schema and policies in action.
+- A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
+- A [Stack Auth](https://stackauth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-authorize) for similar schema and policies in action.
 
 ## Integrate Stack Auth with Neon Authorize
 
@@ -50,13 +33,19 @@ In this first set of steps, we’ll integrate Stack Auth as an authorization pro
 
 ### 1. Get your Stack Auth JWKS URL
 
-You can find your JWKS URL by constructing it based on your Stack Auth project ID. The format is:
+When integrating Stack Auth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+
+The Stack Auth JWKS URL follows this format:
 
 ```plaintext
 https://api.stack-auth.com/api/v1/projects/{yourProjectId}/.well-known/jwks.json
 ```
 
-Replace `{yourProjectId}` with your actual Stack Auth project ID. This URL structure is typically used for both local testing and production environments, but please refer to the official Stack Auth documentation for any specific guidelines or best practices.
+Replace `{your-project-id}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
+
+```plaintext
+https://api.stack-auth.com/v1/projects/my-awesome-project/.well-known/jwks.json
+```
 
 ### 2. Add Stack Auth as an authorization provider in the Neon Console
 
@@ -119,6 +108,10 @@ Add this to your `.env` file.
 # Neon "authenticated" role connection string
 DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
 ```
+
+<Admonition type="note">
+This guide focuses on the `authenticated` role, but we also granted the `anonymous` role similar CRUD access to your database tables. Depending on your application, you might use both roles. For instance, in a **blog application**, the `anonymous` role could allow users to read articles without logging in, while the `authenticated` role lets users create or edit their own posts. The [demo repositories](/guides/neon-authorize#sample-applications) mostly showcase the `authenticated` role, but you can adapt your setup to include the `anonymous` role as needed.
+</Admonition>
 
 ## Add RLS policies
 

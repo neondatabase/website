@@ -28,7 +28,7 @@ Clerk handles user authentication by generating JSON Web Tokens (JWTs), which ar
 
 To follow along with this guide, you will need:
 
-- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
+- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech).
 - A [Clerk](https://clerk.com/) account and an existing application that uses Clerk for user authentication. Clerk offers a free plan to help you get started.
 - An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
 
@@ -44,17 +44,35 @@ For a basic integration, the default JWT claims from Clerk, including the `user_
 https://{yourClerkDomain}/.well-known/jwks.json
 ```
 
-You can find your JWKS URL in the Clerk Dashboard under **Configure → Developers → API Keys**. Click **Show JWT Public Key** and copy the JWKS URL for later.
+You can find your JWKS URL in the Clerk Dashboard under:
 
-For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under **Configure > JWT Templates**.
+**Configure → Developers → API Keys**
 
-![Neon-specific template option in Clerk templates](/docs/guides/neon-template-clerk.png)
+Click **Show JWT Public Key** and copy the JWKS URL for later.
+
+<div style={{ display: 'flex', alignItems: 'top' }}>
+  <div style={{ flex: '0 0 65%', paddingRight: '20px' }}>
+**Neon JWT Template**
+
+For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under:
+
+**Configure > JWT Templates**.
+  </div>
+  <div style={{ flex: '0 0 35%', marginTop: '-20px' }}>
+![Neon-specific template option in Clerk templates](/docs/guides/clerk_neon_jwt_template.png)
+  </div>
+</div>
 
 ### 2. Add Clerk as an authorization provider in the Neon Console
 
+<div style={{ display: 'flex', alignItems: 'top' }}>
+  <div style={{ flex: '0 0 65%', paddingRight: '20px' }}>
 Once you have the JWKS URL, go to the **Neon Console** and add Clerk as an authentication provider under the **Authorize** page. Paste your copied URL and Clerk will be automatically recognized and selected.
-
+  </div>
+  <div style={{ flex: '0 0 35%', marginTop: '-20px' }}>
 ![Add Authentication Provider](/docs/guides/clerk_jwks_url_in_neon.png)
+  </div>
+</div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -112,13 +130,17 @@ Add this to your `.env` file.
 DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
 ```
 
+<Admonition type="note">
+This guide focuses on the `authenticated` role, but we also granted the `anonymous` role similar CRUD access to your database tables. Depending on your application, you might use both roles. For instance, in a **blog application**, the `anonymous` role could allow users to read articles without logging in, while the `authenticated` role lets users create or edit their own posts. The [demo repositories](/guides/neon-authorize#sample-applications) mostly showcase the `authenticated` role, but you can adapt your setup to include the `anonymous` role as needed.
+</Admonition>
+
 ## Add RLS policies
 
 At this point, Clerk is now fully integrated with Neon Authorize. JWTs are now passed securely to your Neon database. You can now start adding RLS policies to your schema and running authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
-Below are examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
+Here are some examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
 
 <Tabs labels={["SQL","Drizzle"]}>
 
