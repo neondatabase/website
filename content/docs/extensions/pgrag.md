@@ -177,7 +177,7 @@ insert into docs (name, fulltext)
 values ('third.pdf', rag.text_from_pdf(decode(:'contents','base64'))));
 ```
 
-**2. Ceate an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
+**2. Create an `embeddings` table, chunk the text, and generate embeddings for the chunks (performed locally)**
 
 ```sql
 drop table embeddings;
