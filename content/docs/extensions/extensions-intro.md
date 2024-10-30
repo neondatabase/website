@@ -25,7 +25,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
-<a href="https://github.com/Mooncake-Labs/pg_mooncake" description="An experimental Postgres extension that adds native columnstore tables with DuckDB execution" icon="a-chart">pg_mooncacke</a>
+<a href="https://github.com/Mooncake-Labs/pg_mooncake" description="An experimental Postgres extension that adds native columnstore tables with DuckDB execution" icon="a-chart">pg_mooncake</a>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="a-chart">hll</a>
 
