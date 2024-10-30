@@ -1,62 +1,70 @@
 ---
-title: Secure your data with Clerk and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon Authorize
+title: Secure your data with Stack Auth and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-10-29T00:27:11.738Z'
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="https://clerk.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
+  <a href="https://stackauth.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
 </DocsList>
 </InfoBlock>
 
 <ComingSoon/>
 
-Use Clerk with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Clerk for user authentication. It shows you how to integrate Clerk with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Stack Auth with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity.
+Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Create your first project in **AWS**. [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported.
-- A [Clerk](https://clerk.com/) account and an existing application that uses Clerk for user authentication. Clerk offers a free plan to help you get started.
-- An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) to see similar schema and policies in action.
+- A [Stack Auth](https://stackauth.com/) account and an existing application that uses Stack Auth for user authentication. Stack Auth offers a free plan to help you get started. 
+  - **Note**: If you do not have a Stack Auth-based application, you will need to set one up. This includes adding the following keys to your `.env` file:
+    ```bash
+    NEXT_PUBLIC_STACK_PROJECT_ID=<id>
+    NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=<id>
+    STACK_SECRET_SERVER_KEY=<id>
 
-## Integrate Clerk with Neon Authorize
+    # For the `neondb_owner` role.
+    DATABASE_URL=postgresql://neondb_owner:<password>@ep-aged-heart-a4vhounp.us-east-1.aws.neon.tech/neondb?sslmode=require
+    # For the `authenticated`, passwordless role.
+    DATABASE_AUTHENTICATED_URL=postgresql://authenticated@<id>.us-east-1.aws.neon.tech/neondb?sslmode=require
+    ```
+  - For detailed guidance on creating a Stack Auth application, refer to the [Stack Auth documentation](https://stackauth.com/docs/getting-started).
 
-In this first set of steps, we’ll integrate Clerk as an authorization provider in Neon. When these steps are complete, Clerk will start passing JWTs to your Neon database, which you can then use to create policies.
+- An existing application (for example, a **todos** app) where you can model your RLS policies on the samples in this guide. If you don't have an app, refer to our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-authorize) to see similar schema and policies in action.
 
-### 1. Get your Clerk JWKS URL
+## Integrate Stack Auth with Neon Authorize
 
-For a basic integration, the default JWT claims from Clerk, including the `user_id`, are all you need for Neon Authorize. Use the following JWKS URL format:
+In this first set of steps, we’ll integrate Stack Auth as an authorization provider in Neon. When these steps are complete, Stack Auth will start passing JWTs to your Neon database, which you can then use to create policies.
 
-```bash
-https://{yourClerkDomain}/.well-known/jwks.json
+### 1. Get your Stack Auth JWKS URL
+
+You can find your JWKS URL by constructing it based on your Stack Auth project ID. The format is:
+
+```plaintext
+https://api.stack-auth.com/api/v1/projects/{yourProjectId}/.well-known/jwks.json
 ```
 
-You can find your JWKS URL in the Clerk Dashboard under **Configure → Developers → API Keys**. Click **Show JWT Public Key** and copy the JWKS URL for later.
+Replace `{yourProjectId}` with your actual Stack Auth project ID. This URL structure is typically used for both local testing and production environments, but please refer to the official Stack Auth documentation for any specific guidelines or best practices.
 
-For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under **Configure > JWT Templates**.
+### 2. Add Stack Auth as an authorization provider in the Neon Console
 
-![Neon-specific template option in Clerk templates](/docs/guides/neon-template-clerk.png)
+Once you have the JWKS URL, go to the **Neon Console** and add Stack Auth as an authentication provider under the **Authorize** page. Paste your copied URL and Stack Auth will be automatically recognized and selected.
 
-### 2. Add Clerk as an authorization provider in the Neon Console
+![Add Authentication Provider](/docs/guides/stack_auth_jwks_url_in_neon.png)
 
-Once you have the JWKS URL, go to the **Neon Console** and add Clerk as an authentication provider under the **Authorize** page. Paste your copied URL and Clerk will be automatically recognized and selected.
-
-![Add Authentication Provider](/docs/guides/clerk_jwks_url_in_neon.png)
-
-At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
@@ -114,7 +122,7 @@ DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.ea
 
 ## Add RLS policies
 
-At this point, Clerk is now fully integrated with Neon Authorize. JWTs are now passed securely to your Neon database. You can now start adding RLS policies to your schema and running authenticated queries from your application.
+At this point, Stack Auth is now fully integrated with Neon Authorize. JWTs are now passed securely to your Neon database. You can now start adding RLS policies to your schema and running authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -207,7 +215,7 @@ export type Todo = InferSelectModel<typeof todos>;
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Clerk, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application.
+With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -217,7 +225,7 @@ With RLS policies in place, you can now query the database using JWTs from Clerk
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@stackauth/nextjs/server';
 
 export async function TodoList() {
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
@@ -253,7 +261,7 @@ export async function TodoList() {
 
   import type { Todo } from '@/app/schema';
   import { neon } from '@neondatabase/serverless';
-  import { useAuth } from '@clerk/nextjs';
+  import { useAuth } from '@stackauth/nextjs';
   import { useEffect, useState } from 'react';
 
   const getDb = (token: string) =>
