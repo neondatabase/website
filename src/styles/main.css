@@ -81,7 +81,7 @@
     }
   }
 
-  input[type='search']::-webkit-search-cancel-button {
+  .templates-search[type='search']::-webkit-search-cancel-button {
     -webkit-appearance: none;
     height: 16px;
     width: 16px;
@@ -89,7 +89,7 @@
     cursor: pointer;
   }
 
-  .dark input[type='search']::-webkit-search-cancel-button {
+  .dark .templates-search[type='search']::-webkit-search-cancel-button {
     background-image: url(/images/templates/close-dark-mode.svg);
   }
 
