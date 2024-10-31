@@ -44,7 +44,7 @@ SELECT MAKE_DATE(2023,3, 25);
 
 Output:
 
-```sql
+```text
  make_date
 ------------
  2023-03-25
@@ -61,7 +61,7 @@ SELECT MAKE_DATE(2024, 2, 29);
 
 Output:
 
-```sql
+```text
  make_date
 ------------
  2024-02-29
@@ -79,7 +79,7 @@ FROM generate_series(1, 7) AS day;
 
 Output:
 
-```sql
+```text
    dates
 ------------
  2023-01-01

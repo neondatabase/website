@@ -54,7 +54,7 @@ SELECT to_tsvector('waches'),
 
 Output:
 
-```sql
+```text
  to_tsvector | to_tsvector | to_tsvector
 -------------+-------------+-------------
  'wach':1    | 'wach':1    | 'wach':1
@@ -71,7 +71,7 @@ SELECT to_tsvector('The quick brown fox jumps over the lazy dog.');
 
 Output:
 
-```sql
+```text
                       to_tsvector
 -------------------------------------------------------
  'brown':3 'dog':9 'fox':4 'jump':5 'lazi':8 'quick':2
@@ -112,7 +112,7 @@ SELECT to_tsquery('jumping');
 
 Output:
 
-```sql
+```text
  to_tsquery
 ------------
  'jump'
@@ -138,7 +138,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -158,7 +158,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -209,7 +209,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |                                                body_search
 ----+------------------------------------------------------------------------------------------------------------
   1 | 'basic':10 'concept':11 'cover':9 'featur':13 'introductori':4 'post':5 'postgresql':7
@@ -234,7 +234,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |                                                   body
 ----+----------------------------------------------------------------------------------------------------------
   1 | This is an introductory post about PostgreSQL. It covers basic concepts and features.
@@ -259,7 +259,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |                                                   body
 ----+----------------------------------------------------------------------------------------------------------
   2 | In this post, we delve into advanced PostgreSQL techniques for efficient querying and data manipulation.
@@ -283,7 +283,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |                                                   body
 ----+----------------------------------------------------------------------------------------------------------
   2 | In this post, we delve into advanced PostgreSQL techniques for efficient querying and data manipulation.
@@ -307,7 +307,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |                                                   body
 ----+----------------------------------------------------------------------------------------------------------
   2 | In this post, we delve into advanced PostgreSQL techniques for efficient querying and data manipulation.
@@ -326,7 +326,7 @@ WHERE NOT body_search @@ to_tsquery('efficient');
 
 Output:
 
-```sql
+```text
  id |                                         body
 ----+---------------------------------------------------------------------------------------
   1 | This is an introductory post about PostgreSQL. It covers basic concepts and features.
@@ -381,7 +381,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |                                                   body
 ----+----------------------------------------------------------------------------------------------------------
   1 | This is an introductory post about PostgreSQL. It covers basic concepts and features.

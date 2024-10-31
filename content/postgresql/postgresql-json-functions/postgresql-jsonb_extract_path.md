@@ -96,7 +96,7 @@ FROM
 
 Output:
 
-```sql
+```text
                                                                  employee
 -------------------------------------------------------------------------------------------------------------------------------------------
  {"age": 22, "name": "John Doe", "contacts": [{"type": "email", "value": "[[email protected]](../cdn-cgi/l/email-protection.html)"}, {"type": "phone", "value": "408-123-456"}]}
@@ -115,7 +115,7 @@ FROM
 
 Output:
 
-```sql
+```text
     name
 ------------
  "John Doe"
@@ -137,7 +137,7 @@ FROM
 
 Output:
 
-```sql
+```text
         email
 ---------------------
  "[[email protected]](../cdn-cgi/l/email-protection.html)"

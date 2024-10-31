@@ -24,7 +24,7 @@ To create a new database, you use the `CREATE DATABASE` statement.
 
 Here’s the basic syntax of the `CREATE DATABASE` statement:
 
-```pgsql
+```sql
 CREATE DATABASE database_name
 WITH
    [OWNER =  role_name]
@@ -95,7 +95,7 @@ Let’s explore some examples of using the `CREATE DATABASE` statement.
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server:
 
-```pgsql
+```bash
 psql -U postgres
 ```
 
@@ -137,7 +137,7 @@ Output:
 
 Alternatively, you can retrieve the database names from the `pg_database` view:
 
-```pgsql
+```sql
 SELECT datname FROM pg_database;
 ```
 

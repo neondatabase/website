@@ -20,7 +20,7 @@ nextLink:
 
 First, [create a new table](postgresql-create-table) named `basket` that stores fruits:
 
-```pgsql
+```sql
 CREATE TABLE basket(
     id SERIAL PRIMARY KEY,
     fruit VARCHAR(50) NOT NULL
@@ -29,7 +29,7 @@ CREATE TABLE basket(
 
 Second, [insert](postgresql-insert) some fruits into the `basket` table.
 
-```pgsql
+```sql
 INSERT INTO basket(fruit)
 VALUES
   ('apple'),
@@ -42,7 +42,7 @@ VALUES
 
 Third, [query data](postgresql-select) from the `basket` table:
 
-```pgsql
+```sql
 SELECT
     id,
     fruit
@@ -52,7 +52,7 @@ FROM
 
 Output:
 
-```pgsql
+```text
  id | fruit
 ----+--------
   1 | apple
@@ -88,7 +88,7 @@ ORDER BY
 
 Output:
 
-```pgsql
+```text
  fruit  | count
 --------+-------
  apple  |     2
@@ -113,7 +113,7 @@ In this example, we joined the `basket` table to itself and checked if two diffe
 
 The following query retrieves data from the `basket` table to verify the duplication removal:
 
-```pgsql
+```sql
 SELECT
 	id,
 	fruit
@@ -123,7 +123,7 @@ FROM
 
 Output:
 
-```pgsql
+```text
  id | fruit
 ----+--------
   2 | apple
@@ -147,7 +147,7 @@ WHERE
 
 To check whether the statement works correctly, let’s verify the data in the `basket` table:
 
-```pgsql
+```sql
 SELECT
     id,
     fruit
@@ -157,7 +157,7 @@ FROM
 
 Output:
 
-```pgsql
+```text
  id | fruit
 ----+--------
   1 | apple
@@ -188,7 +188,7 @@ In this example, the subquery returned the duplicate rows except for the first r
 
 If you want to keep the duplicate row with the highest ID, just change the order in the subquery:
 
-```pgsql
+```sql
 DELETE FROM basket
 WHERE id IN
     (SELECT id
@@ -202,7 +202,7 @@ WHERE id IN
 
 In case you want to delete duplicates based on values of multiple columns, here is the query template:
 
-```pgsql
+```sql
 DELETE FROM table_name
 WHERE id IN
     (SELECT id
@@ -228,7 +228,7 @@ To delete rows using an immediate table, you use the following steps:
 
 The following illustrates the steps for removing duplicate rows from the `basket` table:
 
-```pgsql
+```sql
 -- step 1
 CREATE TABLE basket_temp (LIKE basket);
 

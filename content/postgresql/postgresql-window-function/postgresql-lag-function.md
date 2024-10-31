@@ -120,7 +120,7 @@ WHERE group_id = 1;
 
 Output:
 
-```sql
+```text
  year | amount  | previous_year_sales
 ------+---------+---------------------
  2018 | 1474.00 |                null

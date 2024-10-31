@@ -45,7 +45,7 @@ SELECT POWER(2,3) result;
 
 Output:
 
-```sql
+```text
  result
 --------
       8
@@ -60,7 +60,7 @@ SELECT POWER(2.5, 2);
 
 Output:
 
-```sql
+```text
        power
 --------------------
  6.2500000000000000
@@ -77,7 +77,7 @@ SELECT POWER(10, -2);
 
 Output:
 
-```sql
+```text
  power
 -------
   0.01
@@ -96,7 +96,7 @@ SELECT POWER(2, 1.5);
 
 Output:
 
-```sql
+```text
        power
 --------------------
  2.8284271247461901
@@ -131,7 +131,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | investment_amount | annual_interest_rate | years
 ----+-------------------+----------------------+-------
   1 |              1000 |                    5 |     1
@@ -154,7 +154,7 @@ FROM
 
 Output:
 
-```sql
+```text
  investment_amount | annual_interest_rate | years | future_value
 -------------------+----------------------+-------+--------------
               1000 |                    5 |     1 |      1050.00

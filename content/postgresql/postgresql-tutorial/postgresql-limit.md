@@ -85,7 +85,7 @@ LIMIT
 
 Output:
 
-```sql
+```text
  film_id |      title       | release_year
 ---------+------------------+--------------
        1 | Academy Dinosaur |         2006
@@ -119,7 +119,7 @@ LIMIT 4 OFFSET 3;
 
 Output:
 
-```sql
+```text
  film_id |      title       | release_year
 ---------+------------------+--------------
        4 | Affair Prejudice |         2006

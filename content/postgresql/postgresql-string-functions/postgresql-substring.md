@@ -73,7 +73,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  substring
 -----------
  SQL
@@ -93,7 +93,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  substring | substring
 -----------+-----------
  PostgreS  | SQL
@@ -117,7 +117,7 @@ FROM
 
 Output:
 
-```sql
+```text
  first_name  | initial
 -------------+---------
  Jared       | J
@@ -158,7 +158,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  house_no
 ----------
  9001

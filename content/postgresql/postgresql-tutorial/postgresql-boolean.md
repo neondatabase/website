@@ -74,7 +74,7 @@ FROM stock_availability
 WHERE available = 'yes';
 ```
 
-```sql
+```text
  product_id | available
 ------------+-----------
         100 | t
@@ -106,7 +106,7 @@ WHERE
   available = 'no';
 ```
 
-```sql
+```text
  product_id | available
 ------------+-----------
         200 | f
@@ -151,7 +151,7 @@ FROM stock_availability
 WHERE product_id = 900;
 ```
 
-```sql
+```text
  product_id | available
 ------------+-----------
         900 | f

@@ -48,7 +48,7 @@ SELECT CURRENT_TIMESTAMP;
 
 The result is:
 
-```sql
+```text
               now
 -------------------------------
  2017-08-15 21:05:15.723336-07

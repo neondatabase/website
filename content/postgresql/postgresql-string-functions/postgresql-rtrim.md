@@ -51,7 +51,7 @@ SELECT RTRIM('postgres!!!', '!');
 
 Output:
 
-```sql
+```text
   rtrim
 ----------
  postgres
@@ -68,7 +68,7 @@ SELECT RTRIM('PostgreSQL   ');
 
 Output:
 
-```sql
+```text
    rtrim
 ------------
  PostgreSQL
@@ -97,7 +97,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |             tweet
 ----+--------------------------------
   1 | PostgreSQL tutorial
@@ -131,7 +131,7 @@ SELECT * FROM tweets;
 
 Output:
 
-```sql
+```text
  id |            tweet
 ----+-----------------------------
   1 | PostgreSQL tutorial

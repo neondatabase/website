@@ -66,7 +66,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  width_bucket | width_bucket | width_bucket | width_bucket | width_bucket
 --------------+--------------+--------------+--------------+--------------
             0 |            1 |            2 |            3 |            4
@@ -100,7 +100,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
             title            | length | bucket_number
 -----------------------------+--------+---------------
  Academy Dinosaur            |     86 |             2
@@ -133,7 +133,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  bucket_number | frequency
 ---------------+-----------
              1 |       147
@@ -187,7 +187,7 @@ FROM
 
 Output:
 
-```sql
+```text
  bucket_number |      histogram
 ---------------+----------------------
              1 | **************

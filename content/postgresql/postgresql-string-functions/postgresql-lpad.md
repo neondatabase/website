@@ -60,7 +60,7 @@ SELECT LPAD('PostgreSQL',15,'*');
 
 The result is:
 
-```sql
+```text
       lpad
 ----------------
  *****PostgreSQL
@@ -79,7 +79,7 @@ SELECT LPAD('123',5,'0') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  00123
@@ -94,7 +94,7 @@ SELECT LPAD(123::text,5,'0') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  00123

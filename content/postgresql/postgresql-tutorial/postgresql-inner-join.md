@@ -104,7 +104,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | first_name  |  last_name   | amount |        payment_date
 -------------+-------------+--------------+--------+----------------------------
          416 | Jeffery     | Pinson       |   2.99 | 2007-02-14 21:21:59.996577

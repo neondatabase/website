@@ -42,7 +42,7 @@ SELECT STATEMENT_TIMESTAMP();
 
 Output:
 
-```sql
+```text
       statement_timestamp
 -------------------------------
  2024-03-20 11:30:47.001021-07
@@ -80,7 +80,7 @@ SELECT * FROM logs;
 
 Output:
 
-```sql
+```text
  id |          started_at
 ----+-------------------------------
   1 | 2024-03-20 13:22:13.056783+07

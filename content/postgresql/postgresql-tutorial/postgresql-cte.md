@@ -68,7 +68,7 @@ SELECT * FROM action_films;
 
 Output:
 
-```sql
+```text
           title          | length
 -------------------------+--------
  Amadeus Holy            |    113
@@ -116,7 +116,7 @@ In this example:
 
 Output:
 
-```sql
+```text
  staff_id | first_name | last_name | rental_count
 ----------+------------+-----------+--------------
         1 | Mike       | Hillyer   |         8040

@@ -28,7 +28,7 @@ Variables are scoped to the block in which they’re declared. It means that var
 
 The following illustrates the syntax of declaring a variable.
 
-```pgsqlsqlsql
+```sqlsqlsql
 variable_name data_type [= expression];
 ```
 
@@ -42,7 +42,7 @@ Please note that you can use either `:=` or `=` assignment operator to set an in
 
 To assign a value to a variable, you can use the assignment operator (\=) as follows:
 
-```pgsql
+```sql
 variable_name = value;
 ```
 
@@ -116,7 +116,7 @@ How it works.
 
 First, declare a variable in the declaration block:
 
-```pgsql
+```sql
 first_name VARCHAR(50);
 ```
 
@@ -169,13 +169,13 @@ The `%type` provides the data type of a table column or another variable. Typica
 
 The following illustrates how to declare a variable with the data type of a table column:
 
-```pgsql
+```sql
 variable_name table_name.column_name%type;
 ```
 
 The following shows how to declare a variable with the data type of another variable:
 
-```pgsql
+```sql
 variable_name variable%type;
 ```
 
@@ -226,7 +226,7 @@ When you declare a variable in a subblock with the same name as another variable
 
 To access a variable in the outer block, you use the block label to qualify its name, as shown in the following example:
 
-```pgsql
+```sql
 do
 $$
 <<outer_block>>

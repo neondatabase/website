@@ -50,13 +50,13 @@ Let’s take some examples of using the PostgreSQL `jsonb_insert()` function
 
 The following example uses the `jsonb_insert()` function to insert a new element into a JSON array:
 
-```sql
+```text
  SELECT jsonb_insert('[1,2,3]', '{0}', '0');
 ```
 
 Output:
 
-```sql
+```text
  jsonb_insert
 --------------
  [0, 1, 2, 3]
@@ -79,7 +79,7 @@ SELECT jsonb_insert('[1,2,3]', '{0}', '0', true);
 
 Output:
 
-```sql
+```text
  jsonb_insert
 --------------
  [1, 0, 2, 3]
@@ -99,7 +99,7 @@ SELECT
 
 Output:
 
-```sql
+```text
      jsonb_insert
 ----------------------
  [1, 2, [3, 4, 5], 6]
@@ -125,7 +125,7 @@ SELECT
 
 Output:
 
-```sql
+```text
         jsonb_insert
 ----------------------------
  {"age": 2, "name": "John"}
@@ -170,7 +170,7 @@ SELECT
 
 Output:
 
-```sql
+```text
                                    jsonb_insert
 -----------------------------------------------------------------------------------
  {"name": "John Doe", "address": {"city": "San Francisco", "state": "California"}}
@@ -198,7 +198,7 @@ SELECT
 
 Output:
 
-```sql
+```text
            jsonb_pretty
 ----------------------------------
  {                               +
@@ -225,7 +225,7 @@ SELECT
 
 Output:
 
-```sql
+```text
                          jsonb_insert
 --------------------------------------------------------------
  {"name": "John", "skills": ["PostgreSQL", "Web Dev", "API"]}
@@ -265,7 +265,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                     profiles
 ----+---------------------------------------------------
   1 | {"name": "John", "skills": ["PostgreSQL", "API"]}
@@ -289,7 +289,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                           profiles
 ----+--------------------------------------------------------------
   1 | {"name": "John", "skills": ["Web Dev", "PostgreSQL", "API"]}

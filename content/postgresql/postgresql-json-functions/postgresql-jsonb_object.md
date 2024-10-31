@@ -56,7 +56,7 @@ SELECT
 
 Output:
 
-```sql
+```text
          jsonb_object
 -------------------------------
  {"age": "22", "name": "John"}
@@ -74,7 +74,7 @@ SELECT
 
 Output:
 
-```sql
+```text
          jsonb_object
 -------------------------------
  {"John": "22", "name": "age"}
@@ -92,7 +92,7 @@ SELECT
 
 Output:
 
-```sql
+```text
          jsonb_object
 -------------------------------
  {"age": "22", "name": "John"}
@@ -118,7 +118,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
          jsonb_object
 ------------------------------
  {"Academy Dinosaur": "2006"}

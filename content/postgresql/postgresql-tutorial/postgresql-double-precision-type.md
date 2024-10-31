@@ -78,7 +78,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   location    | temperature
 ----+---------------+-------------
   1 | Lab Room 1    |        23.5
@@ -96,7 +96,7 @@ FROM temperatures;
 
 Output:
 
-```sql
+```text
  avg
 ------
  23.2
@@ -119,7 +119,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
   c
 -----
  0.1
@@ -136,7 +136,7 @@ SELECT SUM(c) FROM t;
 
 Output:
 
-```sql
+```text
          sum
 ---------------------
  0.30000000000000004

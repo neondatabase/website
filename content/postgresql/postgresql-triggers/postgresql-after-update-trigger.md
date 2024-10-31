@@ -125,7 +125,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   name   | salary
 ----+----------+--------
   1 | John Doe |  90000

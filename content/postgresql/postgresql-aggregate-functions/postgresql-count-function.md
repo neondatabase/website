@@ -88,7 +88,7 @@ FROM
 
 Output:
 
-```sql
+```text
  count
 -------
  14596
@@ -108,7 +108,7 @@ FROM
 
 Output:
 
-```sql
+```text
  count
 -------
     19
@@ -131,7 +131,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  customer_id | count
 -------------+-------
          184 |    20

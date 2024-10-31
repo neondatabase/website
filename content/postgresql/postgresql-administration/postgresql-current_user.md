@@ -38,7 +38,7 @@ To get the original user who connected to the session, you use the `SESSION_USER
 
 First, open the command prompt on Windows or a terminal on Unix\-like systems and connect to the PostgreSQL server using psql:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -50,7 +50,7 @@ SELECT CURRENT_USER;
 
 Output:
 
-```sql
+```text
  current_user
 --------------
  postgres
@@ -78,7 +78,7 @@ SELECT CURRENT_USER;
 
 It returns `bob` instead:
 
-```sql
+```text
  current_user
 --------------
  bob
@@ -93,7 +93,7 @@ SELECT SESSION_USER;
 
 Output:
 
-```sql
+```text
  session_user
 --------------
  postgres

@@ -24,7 +24,7 @@ The `generate_series()` function allows you to generate a series of numbers or [
 
 The following shows the syntax of `generate_series()` function that generates a series of numbers from `start` to `stop` with an optional `step` size:
 
-```pgsqlsql
+```sqlsql
 generate_series (start,stop[,step])
 ```
 
@@ -44,7 +44,7 @@ SELECT generate_series(1,5);
 
 Output:
 
-```sql
+```text
  generate_series
 -----------------
                1
@@ -65,7 +65,7 @@ SELECT generate_series(1,10,2);
 
 Output:
 
-```sql
+```text
  generate_series
 -----------------
                1
@@ -113,7 +113,7 @@ SELECT * FROM generate_series(
 
 Output:
 
-```sql
+```text
  generate_series
 ---------------------
  2024-03-29 00:00:00
@@ -162,7 +162,7 @@ SELECT * FROM generate_series(
 
 Output:
 
-```sql
+```text
     generate_series
 ------------------------
  2024-11-02 04:00:00+00
@@ -204,7 +204,7 @@ Output:
 
 First, [create a table](postgresql-create-table) called `employees`:
 
-```pgsql
+```sql
 CREATE TABLE employees(
    id INT GENERATED ALWAYS AS IDENTITY,
    name VARCHAR(100) NOT NULL,
@@ -214,7 +214,7 @@ CREATE TABLE employees(
 
 Second, insert 100 rows into the `employees` table:
 
-```pgsql
+```sql
 INSERT INTO employees(name, age)
 SELECT 'employee ' || n  name,
         floor(random()* (65-18+ 1) + 18) age
@@ -243,7 +243,7 @@ In data analytics, you often need to create a `dates` table that contains a seri
 
 First, create a `dates` table:
 
-```pgsql
+```sql
 CREATE TABLE dates(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     date DATE NOT NULL UNIQUE,
@@ -282,7 +282,7 @@ In the `dates` table, only the `date` column is required whereas other columns a
 
 Second, create a series of dates between `2024-01-01` and `2024-31-12`:
 
-```pgsql
+```sql
 INSERT INTO dates(date)
 SELECT * FROM generate_series(
     '2024-01-01'::date,
