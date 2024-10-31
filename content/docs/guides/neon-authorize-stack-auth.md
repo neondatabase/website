@@ -37,13 +37,13 @@ When integrating Stack Auth with Neon, you'll need to provide the JWKS (JSON Web
 
 The Stack Auth JWKS URL follows this format:
 
-```plaintext
+```plaintext shouldWrap
 https://api.stack-auth.com/api/v1/projects/{yourProjectId}/.well-known/jwks.json
 ```
 
 Replace `{your-project-id}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
 
-```plaintext
+```plaintext shouldWrap
 https://api.stack-auth.com/v1/projects/my-awesome-project/.well-known/jwks.json
 ```
 
@@ -51,7 +51,9 @@ https://api.stack-auth.com/v1/projects/my-awesome-project/.well-known/jwks.json
 
 Once you have the JWKS URL, go to the **Neon Console** and add Stack Auth as an authentication provider under the **Authorize** page. Paste your copied URL and Stack Auth will be automatically recognized and selected.
 
-![Add Authentication Provider](/docs/guides/stack_auth_jwks_url_in_neon.png)
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/stack_auth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+</div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -59,28 +61,24 @@ At this point, you can use the **Get Started** setup steps from the Authorize pa
 
 Neon Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
-When installed, the `pg_session_jwt` enables passwordless connections by using JWTs for user authentication. Two roles are created for you: `authenticated` and `anonymous`.
-
 To install the extension in the `neondb` database, run:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 ```
 
-<Admonition type="note">
-In a future update, setting up the `pg_session_jwt` extension and granting role privileges will be done automatically when you add an authentication provider to your Neon project.
-</Admonition>
+### 4. Set up Postgres roles
 
-### 4. Set up Roles
+The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
-Next, define the table-level permissions for these new roles. For most use cases of Neon Authorize, you should run the following commands in order to give the roles access to read and write to any table in your public schema:
-
-```sql
+```sql shouldWrap
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous;
 ```
 
-Later, you can define RLS policies that will restrict what your application's users can do with these roles.
+- **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
+  
+- **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
 
 ### 5. Install the Neon Serverless Driver
 
@@ -96,26 +94,28 @@ To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/se
 
 ### 6. Set up environment variables
 
-Copy the `authenticated` role connection string into your `.env` file. You can find it from **Connection Details** in the Neon Console, or using the Neon CLI:
+Here is an example of setting up administrative and authenticated database connections in your `.env` file. Copy the connection strings for both the `neondb_owner` and `authenticated` roles. You can find them from **Connection Details** in the Neon Console, or using the Neon CLI:
 
 ```bash
+neonctl connection-string --role-name neondb_owner
 neonctl connection-string --role-name authenticated
 ```
 
-Add this to your `.env` file.
+Add these to your `.env` file.
 
 ```bash shouldWrap
+# Database owner connection string
+DATABASE_URL='postgresql://neondb_owner:12345678901@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
+
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-bold-queen-w33bqbhq.eastus2.azure.neon.build/neondb?sslmode=require'
+DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
 ```
 
-<Admonition type="note">
-This guide focuses on the `authenticated` role, but we also granted the `anonymous` role similar CRUD access to your database tables. Depending on your application, you might use both roles. For instance, in a **blog application**, the `anonymous` role could allow users to read articles without logging in, while the `authenticated` role lets users create or edit their own posts. The [demo repositories](/guides/neon-authorize#sample-applications) mostly showcase the `authenticated` role, but you can adapt your setup to include the `anonymous` role as needed.
-</Admonition>
+The `DATABASE_URL` is intended for administrative tasks using the database owner credentials, while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](#2-run-your-first-authorized-query) below.
 
 ## Add RLS policies
 
-At this point, Stack Auth is now fully integrated with Neon Authorize. JWTs are now passed securely to your Neon database. You can now start adding RLS policies to your schema and running authenticated queries from your application.
+Now that you’ve integrated Stack Auth with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -125,54 +125,61 @@ Below are examples of RLS policies for a **todos** table, designed to restrict a
 
 <TabItem>
 
-```sql
+```sql shouldWrap
 -- schema for TODOs table
 CREATE TABLE todos (
   id bigint generated by default as identity primary key,
   user_id text not null default (auth.user_id()),
-  task text,
+  task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null
+  inserted_at timestamp not null default now()
 );
-
--- 1st enable row level security for your table
-alter table todos enable row level security;
-
+  
+-- 1st enable row level security for your table      
+ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
+  
 -- 2nd create policies for your table
-create policy "Individuals can create todos." on todos for
-  insert with check (auth.user_id() = user_id);
+CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
+TO authenticated
+WITH CHECK ((select auth.user_id()) = user_id);
+  
+CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+TO authenticated
+USING ((select auth.user_id()) = user_id);
+  
+CREATE POLICY "Individuals can update their own todos." ON todos FOR UPDATE
+TO authenticated
+USING ((select auth.user_id()) = user_id)
+WITH CHECK ((select auth.user_id()) = user_id);
 
-create policy "Individuals can view their own todos." on todos for
-  select using (auth.user_id() = user_id);
-
-create policy "Individuals can update their own todos." on todos for
-  update using (auth.user_id() = user_id);
-
-create policy "Individuals can delete their own todos." on todos for
-  delete using (auth.user_id() = user_id);
+CREATE POLICY "Individuals can delete their own todos." ON todos FOR DELETE
+TO authenticated 
+USING ((select auth.user_id()) = user_id);
 ```
 
 </TabItem>
 
 <TabItem>
 
-```typescript
+```typescript shouldWrap
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-// schema for TODOs table
 export const todos = pgTable(
   'todos',
   {
-    id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
+    id: bigint('id', { mode: 'bigint' })
+      .primaryKey()
+      .generatedByDefaultAsIdentity(),
     userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     task: text('task').notNull(),
     isComplete: boolean('is_complete').notNull().default(false),
-    insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
+    insertedAt: timestamp('inserted_at', { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
-  // Create policies for your table
   (t) => ({
     p1: pgPolicy('create todos', {
       for: 'insert',
@@ -197,7 +204,7 @@ export const todos = pgTable(
       to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
-  })
+  }),
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -208,13 +215,13 @@ export type Todo = InferSelectModel<typeof todos>;
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application.
+With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
 <TabItem>
 
-```tsx shouldWrap
+```typescript shouldWrap
 'use server';
 
 import { neon } from '@neondatabase/serverless';
@@ -223,7 +230,7 @@ import { auth } from '@stackauth/nextjs/server';
 export async function TodoList() {
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const token = await auth().getToken();
+      const token = await auth().getToken(); // [!code highlight]
       if (!token) {
         throw new Error('No token');
       }
@@ -233,7 +240,7 @@ export async function TodoList() {
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await sql('select * from todos where user_id = auth.user_id()');
+  const todos = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -252,51 +259,51 @@ export async function TodoList() {
 ```typescript shouldWrap
 'use client';
 
-  import type { Todo } from '@/app/schema';
-  import { neon } from '@neondatabase/serverless';
-  import { useAuth } from '@stackauth/nextjs';
-  import { useEffect, useState } from 'react';
+import type { Todo } from '@/app/schema';
+import { neon } from '@neondatabase/serverless';
+import { useAuth } from '@stackauth/nextjs';
+import { useEffect, useState } from 'react';
 
-  const getDb = (token: string) =>
-      neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-          authToken: token,
-      });
+const getDb = (token: string) =>
+    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+        authToken: token, // [!code highlight]
+    });
 
-  export function TodoList() {
-      const { getToken } = useAuth();
-      const [todos, setTodos] = useState<Array<Todo>>();
+export function TodoList() {
+    const { getToken } = useAuth();
+    const [todos, setTodos] = useState<Array<Todo>>();
 
-      useEffect(() => {
-          async function loadTodos() {
-              const authToken = await getToken();
+    useEffect(() => {
+        async function loadTodos() {
+            const authToken = await getToken(); // [!code highlight]
 
-              if (!authToken) {
-                  return;
-              }
+            if (!authToken) {
+                return;
+            }
 
-              const sql = getDb(authToken);
+            const sql = getDb(authToken);
 
-              // WHERE filter is optional because of RLS.
-              // But we send it anyway for performance reasons.
-              const todosResponse = await
-                  sql('select * from todos where user_id = auth.user_id()');
+            // WHERE filter is optional because of RLS.
+            // But we send it anyway for performance reasons.
+            const todosResponse = await
+                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-              setTodos(todosResponse as Array<Todo>);
-          }
+            setTodos(todosResponse as Array<Todo>);
+        }
 
-          loadTodos();
-      }, [getToken]);
+        loadTodos();
+    }, [getToken]);
 
-      return (
-          <ul>
-              {todos?.map((todo) => (
-                  <li key={todo.id}>
-                      {todo.task}
-                  </li>
-              ))}
-          </ul>
-      );
-  }
+    return (
+        <ul>
+            {todos?.map((todo) => (
+                <li key={todo.id}>
+                    {todo.task}
+                </li>
+            ))}
+        </ul>
+    );
+}
 ```
 
 </TabItem>
@@ -304,11 +311,14 @@ export async function TodoList() {
 <TabItem>
 
 ```bash shouldWrap
+# used for database migrations
+DATABASE_URL='postgresql://neondb_owner:12345678901@random-host-12345.us-east-1.aws.neon.tech/random-db?sslmode=require'
+        
 # used for server side fetching
-DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-mute-night-123456.eastus2.azure.neon.build/neondb?sslmode=require'
+DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.us-east-1.aws.neon.tech/random-db?sslmode=require'
 
 # used for client side fetching
-NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='postgresql://authenticated@ep-mute-night-123456.eastus2.azure.neon.build/neondb?sslmode=require'
+NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.us-east-1.aws.neon.tech/random-db?sslmode=require'
 ```
 
 </TabItem>
