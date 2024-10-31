@@ -40,7 +40,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
+const MobileNav = ({ className = null, sidebar, slug, basePath, customName, customType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [wrapperHeight, setWrapperHeight] = useState(null);
@@ -134,7 +134,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         ref={buttonRef}
         onClick={toggleMenu}
       >
-        <span className="text-ellipsis">Documentation menu</span>
+        <span className="text-ellipsis">{customName || 'Documentation'} menu</span>
         <ChevronRight
           className={clsx(
             'absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 transition-transform duration-200 md:right-5',
@@ -166,6 +166,14 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
               menuWrapperRef={wrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
+              customType={
+                customType
+                  ? {
+                      title: `Back to ${customType.title}`,
+                      link: customType.link,
+                    }
+                  : null
+              }
             />
           </div>
         </m.div>
@@ -179,6 +187,11 @@ MobileNav.propTypes = {
   sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
+  customName: PropTypes.string,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default MobileNav;

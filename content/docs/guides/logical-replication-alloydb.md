@@ -3,7 +3,7 @@ title: Replicate data from AlloyDB
 subtitle: Learn how to replicate data from AlloyDB to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-12T11:16:13.585Z'
+updatedOn: '2024-10-26T08:44:49.112Z'
 ---
 
 <LRBeta/>
@@ -151,7 +151,7 @@ pg_dump --schema-only \
 	> schema_dump.sql
 ```
 
-- With the the `--schema-only` option, only object definitions are dumped. Data is excluded.
+- With the `--schema-only` option, only object definitions are dumped. Data is excluded.
 - The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
 
 #### Review and modify the dumped schema

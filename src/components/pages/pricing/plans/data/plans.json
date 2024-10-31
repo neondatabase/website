@@ -139,7 +139,7 @@
       "feature": {
         "title": "Read Replicas"
       },
-      "free": false,
+      "free": true,
       "launch": true,
       "scale": true,
       "business": true
@@ -313,6 +313,17 @@
       "free": false,
       "launch": false,
       "scale": false,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Neon Authorize",
+        "subtitle": "Row-level security"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
       "business": true
     },
     {

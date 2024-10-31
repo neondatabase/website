@@ -193,6 +193,7 @@ const Header = async ({
   isDocPage = false,
   withBorder = false,
   searchIndexName = null,
+  customType = null,
 }) => {
   const isDarkTheme = theme === 'dark';
 
@@ -223,9 +224,9 @@ const Header = async ({
                 />
                 <Link
                   className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
-                  to={LINKS.docs}
+                  to={customType?.link || LINKS.docs}
                 >
-                  Docs
+                  {customType?.title || 'Docs'}
                 </Link>
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
@@ -272,6 +273,10 @@ Header.propTypes = {
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,
   searchIndexName: PropTypes.string,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Header;

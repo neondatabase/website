@@ -104,6 +104,7 @@
         - title: Connection pooling
           slug: connect/connection-pooling
         - title: Connection issues
+          slug: connect/connect-intro
           items:
             - title: Connection errors
               slug: connect/connection-errors
@@ -234,14 +235,20 @@
               slug: guides/logical-replication-schema-changes
             - title: Logical replication tips
               slug: guides/logical-replication-tips
-        - title: Read replicas
+        - title: Read Replicas
           slug: introduction/read-replicas
           items:
-            - title: Working with read replicas
+            - title: Create and manage Read Replicas
               slug: guides/read-replica-guide
-            - title: Data analysis and reporting
+            - title: Scale your app with Read Replicas
+              slug: guides/read-replica-integrations
+            - title: Run analytics queries with Read Replicas
               slug: guides/read-replica-data-analysis
-            - title: Use read replicas with Prisma
+            - title: Run ad-hoc queries with Read Replicas
+              slug: guides/read-replica-adhoc-queries
+            - title: Provide read-only access with Read Replicas
+              slug: guides/read-only-access-read-replicas
+            - title: Use Read Replicas with Prisma
               slug: guides/read-replica-prisma
         - title: Time Travel
           slug: guides/time-travel-assist
@@ -413,12 +420,30 @@
           slug: guides/python
         - title: Rust
           slug: guides/rust
+    - title: Neon Authorize
+      slug: guides/neon-authorize
+      icon: auth
+      items:
+        - section: Overview
+          items:
+            - title: About
+              slug: guides/neon-authorize
+            - title: Tutorial
+              slug: guides/neon-authorize-tutorial
+            - title: Troubleshooting
+              slug: guides/neon-authorize-troubleshooting
+            - title: What's next
+              slug: guides/neon-authorize-future
+        - section: Quickstarts
+          items:
+            - title: Clerk
+              slug: guides/neon-authorize-clerk
     - title: Integrations
       icon: integrations
       slug: guides/integrations
       items:
         - section: Monitor
-          items: 
+          items:
             - title: Datadog Integration
               slug: guides/datadog
               tag: new
@@ -458,6 +483,8 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Trigger serverless functions with Inngest
+              slug: guides/trigger-serverless-functions
         - section: Query
           items:
             - title: Exograph
@@ -654,10 +681,10 @@
       icon: management
 - section: Postgres
   items:
-    - title: PostgreSQL docs
-      slug: postgres
-      icon: docs
-    - title: Postgres guides
+    - title: PostgreSQL Tutorial
+      slug: https://neon.tech/postgresql/tutorial
+      icon: get-started
+    - title: Neon Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
       items:
@@ -699,6 +726,8 @@
               slug: extensions/neon-utils
             - title: pgvector
               slug: extensions/pgvector
+            - title: pgrag
+              slug: extensions/pgrag
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
@@ -841,11 +870,13 @@
       slug: guides/partner-intro
       icon: partner-guide
       items:
-        - title: OAuth
+        - title: Get started
+          slug: guides/partner-get-started
+        - title: OAuth integration
           slug: guides/oauth-integration
-        - title: Manage billing with quotas
+        - title: Configure consumption limits
           slug: guides/partner-billing
-        - title: Getting metrics via API
+        - title: Query consumption metrics
           slug: guides/metrics-api
     - title: Glossary
       slug: reference/glossary

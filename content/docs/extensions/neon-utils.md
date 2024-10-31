@@ -2,7 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.642Z'
+updatedOn: '2024-10-23T14:34:44.513Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -40,7 +40,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 The following limitations apply:
 
 - The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
-- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute does not return a correct value.
+- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed-size compute does not return a correct value.
 
 ## Observe autoscaling with `neon_utils` and `pgbench`
 

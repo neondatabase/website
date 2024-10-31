@@ -1,18 +1,18 @@
 import clsx from 'clsx';
 
 import Container from 'components/shared/container';
-import akqaIcon from 'icons/home/logos/akqa.svg';
 import bcgIcon from 'icons/home/logos/bcg.svg';
-import outfront7Icon from 'icons/home/logos/outfront7.svg';
+import mistralIcon from 'icons/home/logos/mistral.svg';
+import nerdwalletIcon from 'icons/home/logos/nerdwallet.svg';
 import retoolIcon from 'icons/home/logos/retool.svg';
-import vercelIcon from 'icons/home/logos/vercel.svg';
+import v0Icon from 'icons/home/logos/v0.svg';
 import zimmerBiometIcon from 'icons/home/logos/zimmer-biomet.svg';
 
 const logos = [
   {
-    logo: vercelIcon,
-    alt: 'Vercel',
-    width: 100,
+    logo: v0Icon,
+    alt: 'Vercel V0',
+    width: 40,
   },
   {
     logo: zimmerBiometIcon,
@@ -30,13 +30,13 @@ const logos = [
     width: 101,
   },
   {
-    logo: outfront7Icon,
-    alt: 'outfront7',
+    logo: nerdwalletIcon,
+    alt: 'NerdWallet',
     width: 123,
   },
   {
-    logo: akqaIcon,
-    alt: 'akqa',
+    logo: mistralIcon,
+    alt: 'mistral AI',
     width: 58,
   },
 ];
