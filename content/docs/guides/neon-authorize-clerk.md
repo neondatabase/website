@@ -82,7 +82,6 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous
 ```
 
 - **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
-  
 - **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
 
 ### 5. Install the Neon Serverless Driver
@@ -311,7 +310,7 @@ export async function TodoList() {
 ```bash shouldWrap
 # used for database migrations
 DATABASE_URL='postgresql://neondb_owner:12345678901@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
-        
+
 # used for server side fetching
 DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.eastus2.azure.neon.build/random-db?sslmode=require'
 

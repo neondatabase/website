@@ -77,7 +77,6 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous
 ```
 
 - **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
-  
 - **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
 
 ### 5. Install the Neon Serverless Driver
@@ -134,26 +133,26 @@ CREATE TABLE todos (
   is_complete boolean default false,
   inserted_at timestamp not null default now()
 );
-  
--- 1st enable row level security for your table      
+
+-- 1st enable row level security for your table
 ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
-  
+
 -- 2nd create policies for your table
 CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
-  
+
 CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
-  
+
 CREATE POLICY "Individuals can update their own todos." ON todos FOR UPDATE
 TO authenticated
 USING ((select auth.user_id()) = user_id)
 WITH CHECK ((select auth.user_id()) = user_id);
 
 CREATE POLICY "Individuals can delete their own todos." ON todos FOR DELETE
-TO authenticated 
+TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
@@ -168,17 +167,13 @@ import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm
 export const todos = pgTable(
   'todos',
   {
-    id: bigint('id', { mode: 'bigint' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity(),
+    id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
     userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     task: text('task').notNull(),
     isComplete: boolean('is_complete').notNull().default(false),
-    insertedAt: timestamp('inserted_at', { withTimezone: true })
-      .defaultNow()
-      .notNull(),
+    insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
   (t) => ({
     p1: pgPolicy('create todos', {
@@ -204,7 +199,7 @@ export const todos = pgTable(
       to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
-  }),
+  })
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -313,7 +308,7 @@ export function TodoList() {
 ```bash shouldWrap
 # used for database migrations
 DATABASE_URL='postgresql://neondb_owner:12345678901@random-host-12345.us-east-1.aws.neon.tech/random-db?sslmode=require'
-        
+
 # used for server side fetching
 DATABASE_AUTHENTICATED_URL='postgresql://authenticated@random-host-12345.us-east-1.aws.neon.tech/random-db?sslmode=require'
 
