@@ -20,7 +20,7 @@ updatedOn: '2024-10-10T12:46:18.182Z'
 
 <TechnologyNavigation open>
 
-<a href="/docs/guides/vercel" title="Vercel" description="Connect with the Neon Vercel Integration" icon="vercel"></a>
+<a href="/docs/guides/vercel" title="Vercel" description="Create a database branch with each preview deployment" icon="vercel"></a>
 
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 

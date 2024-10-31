@@ -54,9 +54,9 @@ For more information, see:
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-neon-cli" description="Learn about branching with the Neon CLI" icon="github">Branching with CLI</a>
+<a href="/docs/guides/branching-neon-cli" description="Learn about branching with the Neon CLI" icon="github">Branching with the Neon CLI</a>
 
-<a href="/docs/reference/neon-cli" description="Reference for all commands in the Neon CLI" icon="github">CLI Reference</a>
+<a href="/docs/reference/neon-cli" description="Reference for all commands in the Neon CLI" icon="github">Neon CLI Reference</a>
 
 </DetailIconCards>
 
