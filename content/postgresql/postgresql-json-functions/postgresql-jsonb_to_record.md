@@ -55,7 +55,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | name  | age
 ----+-------+-----
   1 | Alice |  30
@@ -75,7 +75,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | name
 ----+-------
   1 | Alice
@@ -103,7 +103,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | name  |              pets
 ----+-------+--------------------------------
   1 | Alice | {"(cat,Ellie)","(dog,Birdie)"}

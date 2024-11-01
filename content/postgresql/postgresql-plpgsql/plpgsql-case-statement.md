@@ -33,7 +33,7 @@ Notice that you should not be confused about the `case` statement and [case exp
 
 Here’s the basic syntax of the simple `case` statement:
 
-```pgsql
+```sql
 case search-expression
    when expression_1 [, expression_2, ...] then
       when-statements
@@ -55,7 +55,7 @@ The `else` section is optional. If the result of the `search-expression` does no
 
 The following example shows how to use a simple `case` statement:
 
-```pgsql
+```sql
 do $$
 declare
 	rate film.rental_rate%type;
@@ -108,7 +108,7 @@ The following flowchart illustrates the simple `case` statement in this example:
 
 The following syntax shows the basic syntax of the searched `case` statement:
 
-```pgsql
+```sql
 case
     when boolean-expression-1 then
       statements
@@ -130,7 +130,7 @@ The `else` section is optional. If you omit the `else` section and there is no e
 
 The following example illustrates how to use a simple `case` statement:
 
-```pgsql
+```sql
 do $$
 declare
     total_payment numeric;

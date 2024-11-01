@@ -111,9 +111,9 @@ export default {
             light: consoleIcon,
             dark: consoleDarkIcon,
           },
-          text: 'Console',
-          description: 'UI for data management',
-          to: LINKS.consoleTables,
+          text: 'Authorize',
+          description: 'Row-level security',
+          to: LINKS.authorize,
         },
         {
           icon: {

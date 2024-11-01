@@ -122,7 +122,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   name   |       email
 ----+----------+--------------------
   1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html)
@@ -137,7 +137,7 @@ SELECT * FROM memberships;
 
 Output:
 
-```sql
+```text
  id | member_id | membership_type
 ----+-----------+-----------------
   1 |         1 | free

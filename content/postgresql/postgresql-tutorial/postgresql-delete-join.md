@@ -83,7 +83,7 @@ SELECT * FROM denylist;
 
 The member table:
 
-```sql
+```text
  id | first_name | last_name |     phone
 ----+------------+-----------+----------------
   1 | John       | Doe       | (408)-523-9874
@@ -128,7 +128,7 @@ SELECT * FROM member;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |     phone
 ----+------------+-----------+----------------
   3 | Lily       | Bush      | (408)-124-9221

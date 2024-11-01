@@ -41,7 +41,7 @@ SELECT TO_DATE('20170103','YYYYMMDD');
 
 Output:
 
-```sql
+```text
   TO_DATE
 ------------
  2017-01-03
@@ -106,7 +106,7 @@ SELECT TO_DATE('10 Feb 2017', 'DD Mon YYYY');
 
 The output is:
 
-```sql
+```text
   TO_DATE
 ------------
  2017-02-10
@@ -121,7 +121,7 @@ SELECT TO_DATE('2017 Feb 20','YYYY Mon DD');
 
 The function returns the following output:
 
-```sql
+```text
   TO_DATE
 ------------
  2017-02-20

@@ -22,7 +22,7 @@ In PostgreSQL, the `min_scale()` function allows you to determine the minimum nu
 
 Here’s the syntax of the `min_scale()` function:
 
-```pgsqlsql
+```sqlsql
 min_sacle(n)
 ```
 
@@ -48,7 +48,7 @@ SELECT min_scale(1.2300);
 
 Output:
 
-```sql
+```text
  min_scale
 -----------
          2
@@ -72,7 +72,7 @@ Output:
 
 The following example returns 0 because the integer 10 has no decimals:
 
-```pgsql
+```sql
 SELECT min_scale(10);
 ```
 

@@ -44,7 +44,7 @@ WHERE length > (
 
 Output:
 
-```sql
+```text
  film_id |            title            | length | rating
 ---------+-----------------------------+--------+--------
      133 | Chamber Italian             |    117 | NC-17

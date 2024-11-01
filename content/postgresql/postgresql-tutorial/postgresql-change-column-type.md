@@ -82,7 +82,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |  name  | asset_no | description |  location   | acquired_date
 ----+--------+----------+-------------+-------------+---------------
   1 | Server | 10001    | null        | Server room | 2017-01-01

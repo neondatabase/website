@@ -38,7 +38,7 @@ The `condition` is a boolean expression that specifies the condition to skip the
 
 The following example uses the `continue` statement in an unconditional loop to print out the odd numbers from 1 to 10:
 
-```pgsql
+```sql
 do
 $$
 declare

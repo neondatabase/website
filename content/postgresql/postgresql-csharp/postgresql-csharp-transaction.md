@@ -54,7 +54,7 @@ RETURNING id, name, duration;
 
 Output:
 
-```sql
+```text
  id |                     name                      | duration
 ----+-----------------------------------------------+----------
   1 | Introduction to PostgreSQL                    | 10:00:00
@@ -168,7 +168,7 @@ SELECT * FROM enrollments;
 
 Output:
 
-```sql
+```text
  student_id | course_id | enrolled_date
 ------------+-----------+---------------
           2 |         1 | 2024-05-20

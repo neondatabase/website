@@ -94,7 +94,7 @@ TABLESPACE = demo;
 
 Fourth, connect to the `demodb` database:
 
-```sql
+```text
 \c demodb
 ```
 

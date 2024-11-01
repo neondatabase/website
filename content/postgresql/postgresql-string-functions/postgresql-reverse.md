@@ -48,7 +48,7 @@ SELECT REVERSE('SQL');
 
 Output:
 
-```sql
+```text
  reverse
 ---------
  LQS
@@ -73,7 +73,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  first_name  |   reverse
 -------------+-------------
  Aaron       | noraA
@@ -107,7 +107,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | word
 ----+-------
   1 | radar
@@ -134,7 +134,7 @@ FROM
 
 Output:
 
-```sql
+```text
  word  | reverse | palindrome
 -------+---------+------------
  radar | radar   | t

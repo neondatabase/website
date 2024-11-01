@@ -73,7 +73,7 @@ FROM
 
 Output:
 
-```sql
+```text
                                                          products
 --------------------------------------------------------------------------------------------------------------------------
  [{"name": "Laptop", "price": 1200.00}, {"name": "Smartphone", "price": 800.00}, {"name": "Headphones", "price": 100.00}]
@@ -119,7 +119,7 @@ RETURNING *;
 
 The `departments` table:
 
-```sql
+```text
  id | department_name
 ----+-----------------
   1 | Engineering
@@ -129,7 +129,7 @@ The `departments` table:
 
 The `employees` table:
 
-```sql
+```text
  id | employee_name | department_id
 ----+---------------+---------------
   1 | John Doe      |             1
@@ -154,7 +154,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  department_name |                  employees
 -----------------+---------------------------------------------
  Engineering     | ["John Doe", "Jane Smith", "Alice Johnson"]
@@ -211,7 +211,7 @@ Output:
 
 The `departments` table:
 
-```sql
+```text
  id | department_name
 ----+-----------------
   1 | Engineering
@@ -248,7 +248,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  department_name |                  employees
 -----------------+---------------------------------------------
  Engineering     | ["John Doe", "Jane Smith", "Alice Johnson"]

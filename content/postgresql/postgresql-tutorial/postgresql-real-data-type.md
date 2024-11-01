@@ -72,7 +72,7 @@ WHERE
 
 Output:
 
-```sql
+```text
     wind_speed     | temperature_celsius
 -------------------+---------------------
  5.360000038146973 |  15.639999961853027

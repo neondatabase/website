@@ -66,7 +66,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  jsonb_populate_record
 -----------------------
  (1,John,22)
@@ -112,7 +112,7 @@ FROM
 
 Output:
 
-```sql
+```text
          employees
 ---------------------------
  (1,"John Doe",25,70000)

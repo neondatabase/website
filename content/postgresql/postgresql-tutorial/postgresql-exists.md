@@ -102,7 +102,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  exists
 --------
  t
@@ -136,7 +136,7 @@ ORDER BY
 
 The query returns the following output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Karen      | Jackson

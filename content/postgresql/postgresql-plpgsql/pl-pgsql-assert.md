@@ -24,7 +24,7 @@ The `assert` statement is a useful shorthand for inserting debugging checks into
 
 Here’s the basic syntax of the `assert` statement:
 
-```pgsql
+```sql
 assert condition [, message];
 ```
 
@@ -54,7 +54,7 @@ PostgreSQL provides the `plpgsql.check_asserts` configuration parameter to enabl
 
 The following example uses the `assert` statement to check if the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) has data:
 
-```pgsql
+```sql
 do $$
 declare
    film_count integer;
@@ -71,7 +71,7 @@ Because the `film` table has data, the block did not issue any message.
 
 The following example issues an error because the number of films from the film table is not greater than `1,000`.
 
-```pgsql
+```sql
 do $$
 declare
    film_count integer;

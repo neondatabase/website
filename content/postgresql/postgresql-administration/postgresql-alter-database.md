@@ -30,7 +30,7 @@ The `ALTER DATABASE` statement allows you to carry the following action on the d
 
 To change the attributes of a database, you use the following form of the `ALTER TABLE` statement:
 
-```pgsql
+```sql
 ALTER DATABASE name WITH option;
 ```
 
@@ -46,7 +46,7 @@ Note that only superusers or database owners can change these settings.
 
 The following `ALTER DATABASE RENAME TO` statement renames a database:
 
-```pgsql
+```sql
 ALTER DATABASE database_name
 RENAME TO new_name;
 ```
@@ -59,7 +59,7 @@ Only superusers and database owners with CREATEDB privilege can rename the datab
 
 The following `ALTER DATABASE` statement changes the owner of a database to the new one:
 
-```pgsql
+```sql
 ALTER DATABASE database_name
 OWNER TO new_owner | current_user | session_user;
 ```
@@ -73,7 +73,7 @@ The following users can change the owner of the database:
 
 The following statement changes the default [tablespace](postgresql-create-tablespace 'PostgreSQL Creating Tablespaces') of the database:
 
-```pgsql
+```sql
 ALTER DATABASE database_name
 SET TABLESPACE new_tablespace;
 ```
@@ -90,7 +90,7 @@ Whenever you connect to a database, PostgreSQL loads the configuration variables
 
 To override these settings for a particular database, you use `ALTER DATABASE SET` statement as follows:
 
-```pgsql
+```sql
 ALTER DATABASE database_name
 SET configuration_parameter = value;
 ```
@@ -103,27 +103,27 @@ Only superusers or database owners can change the session default for a run\-tim
 
 First, log in to PostgreSQL using the `postgres` user and [create a new database](postgresql-create-database 'PostgreSQL CREATE DATABASE') named `testdb2` for the demonstration.
 
-```pgsql
+```sql
 CREATE DATABASE testdb2;
 ```
 
 Second, rename the `testdb2` to `testhrdb` using the following statement:
 
-```pgsql
+```sql
 ALTER DATABASE testdb2
 RENAME TO testhrdb;
 ```
 
 Third, execute the following statement to change the owner of the `testhrdb`database from `postgres`to `hr`, with the assumption that the `hr` role already exists.
 
-```pgsql
+```sql
 ALTER DATABASE testhrdb
 OWNER TO hr;
 ```
 
 If the `hr` role does not exist, you can create it by using the [`CREATE ROLE`](postgresql-roles) statement:
 
-```pgsql
+```sql
 CREATE ROLE hr
 LOGIN
 CREATEDB
@@ -132,14 +132,14 @@ PASSWORD 'securePa$$1';
 
 Fourth, change the default tablespace of the `testhrdb`from `pg_default` to `hr_default`, with the assumption that the `hr_default` tablespace already exists.
 
-```pgsql
+```sql
 ALTER DATABASE testhrdb
 SET TABLESPACE hr_default;
 ```
 
 If the `hr_default` tablespace does not exist, you can create it by using the following statement:
 
-```pgsql
+```sql
 CREATE TABLESPACE hr_default
 OWNER hr
 LOCATION 'C:\\sampledb\\hr';
@@ -147,7 +147,7 @@ LOCATION 'C:\\sampledb\\hr';
 
 Fifth, set `escape_string_warning`configuration variable to `off` by using the following statement:
 
-```pgsql
+```sql
 ALTER DATABASE testhrdb
 SET escape_string_warning = off;
 ```

@@ -42,7 +42,7 @@ SELECT pg_sleep(3);
 
 After 3 seconds:
 
-```sql
+```text
  pg_sleep
 ----------
 
@@ -59,7 +59,7 @@ SELECT PG_SLEEP(1.5);
 
 After `1.5` seconds:
 
-```sql
+```text
  pg_sleep
 ----------
 

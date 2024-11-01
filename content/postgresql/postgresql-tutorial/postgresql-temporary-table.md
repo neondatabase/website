@@ -24,7 +24,7 @@ In PostgreSQL, a temporary table is a table that exists only during a database s
 
 To create a temporary table, you use the `CREATE TEMPORARY TABLE` statement:
 
-```pgsqlsqlsql
+```sqlsqlsql
 CREATE TEMPORARY TABLE table_name(
    column1 datatype(size) constraint,
    column1 datatype(size) constraint,
@@ -40,7 +40,7 @@ In this syntax:
 
 The `TEMP` and `TEMPORARY` keywords are equivalent so you can use them interchangeably:
 
-```pgsql
+```sql
 CREATE TEMP TABLE table_name(
    ...
 );
@@ -48,7 +48,7 @@ CREATE TEMP TABLE table_name(
 
 The following example uses the `CREATE TEMP TABLE` to create a new temporary table `mytemp`:
 
-```pgsql
+```sql
 CREATE TEMP TABLE mytemp(id INT);
 
 INSERT INTO mytemp(id) VALUES(1), (2), (3)
@@ -100,7 +100,7 @@ CREATE TABLE customers(
 
 Second, create a temporary table with the same name: `customers`
 
-```pgsql
+```sql
 CREATE TEMP TABLE customers(
     customer_id INT
 );
@@ -108,13 +108,13 @@ CREATE TEMP TABLE customers(
 
 Now, query data from the  `customers` table:
 
-```pgsql
+```sql
 SELECT * FROM customers;
 ```
 
 Output:
 
-```pgsql
+```text
  customer_id
 -------------
 (0 rows)
@@ -144,7 +144,7 @@ The output shows the schema of the `customers` temporary table is `pg_temp_3`.
 
 In this case, access to the permanent table requires qualifying the table name with its schema. For example:
 
-```pgsql
+```sql
 SELECT * FROM public.customers;
 ```
 
@@ -160,7 +160,7 @@ Unlike the `CREATE TABLE` statement, the `DROP TABLE` statement does not have th
 
 For example, the following statement drops the temporary table `customers` that we have created in the above example:
 
-```pgsql
+```sql
 DROP TABLE customers;
 ```
 

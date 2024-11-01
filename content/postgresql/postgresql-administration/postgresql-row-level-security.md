@@ -61,7 +61,7 @@ create database hr;
 
 2\) Change the current database to the `hr` database:
 
-```sql
+```text
 \c hr
 ```
 
@@ -129,7 +129,7 @@ USING (manager = current_user);
 
 10\) Connect to the `hr` database using the `alice` role in a separate session:
 
-```sql
+```bash
 psql -U alice -d hr
 ```
 
@@ -141,7 +141,7 @@ SELECT * FROM departments;
 
 Output:
 
-```sql
+```text
  id | name  | manager
 ----+-------+---------
   1 | Sales | alice
@@ -152,7 +152,7 @@ The query returns the rows whose manager column is `alice`.
 
 12\) Connect to the `hr` database using the `bob` role in a separate session:
 
-```sql
+```bash
 psql -U bob -d hr
 ```
 
@@ -164,7 +164,7 @@ SELECT * FROM departments;
 
 Output:
 
-```sql
+```text
  id |   name    | manager
 ----+-----------+---------
   2 | Marketing | bob

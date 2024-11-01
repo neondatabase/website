@@ -85,7 +85,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | name | price | status
 ----+------+-------+--------
   1 | A    | 10.99 | t

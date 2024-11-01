@@ -70,7 +70,7 @@ FETCH FIRST ROW ONLY;
 
 Output:
 
-```sql
+```text
  film_id |      title
 ---------+------------------
        1 | Academy Dinosaur
@@ -105,7 +105,7 @@ FETCH FIRST 5 ROW ONLY;
 
 Output:
 
-```sql
+```text
  film_id |      title
 ---------+------------------
        1 | Academy Dinosaur

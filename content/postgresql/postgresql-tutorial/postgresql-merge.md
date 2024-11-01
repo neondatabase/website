@@ -113,7 +113,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  lead_id |   name   |       email        | active
 ---------+----------+--------------------+--------
        1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
@@ -151,7 +151,7 @@ SELECT * FROM customers;
 
 Output:
 
-```sql
+```text
  customer_id |   name   |       email        | active
 -------------+----------+--------------------+--------
            1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
@@ -181,7 +181,7 @@ ORDER BY id;
 
 Output:
 
-```sql
+```text
  lead_id |    name     |          email          | active
 ---------+-------------+-------------------------+--------
        1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)      | t
@@ -253,7 +253,7 @@ ORDER BY lead_id;
 
 Output:
 
-```sql
+```text
  lead_id |    name     |          email          | active
 ---------+-------------+-------------------------+--------
        1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)    | t
@@ -293,7 +293,7 @@ SELECT * FROM customers;
 
 Output:
 
-```sql
+```text
  customer_id |    name     |          email          | active
 -------------+-------------+-------------------------+--------
            1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)      | t

@@ -22,7 +22,7 @@ The `AVG()` function is one of the most commonly used aggregate functions in Pos
 
 Here is the syntax of the `AVG()` function:
 
-```pgsqlsql
+```sqlsql
 AVG(column)
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 To make the output more readable, you can use the [cast](../postgresql-tutorial/postgresql-cast) operator as follows:
 
-```pgsql
+```sql
 SELECT AVG(amount)::numeric(10,2)
 FROM payment;
 ```
@@ -89,7 +89,7 @@ FROM payment;
 
 Output:
 
-```sql
+```text
  avg
 ------
  6.14
@@ -110,7 +110,7 @@ FROM
 	payment;
 ```
 
-```sql
+```text
  avg  |   sum
 ------+----------
  4.20 | 61312.04
@@ -143,7 +143,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | first_name  |  last_name   | avg
 -------------+-------------+--------------+------
            1 | Mary        | Smith        | 3.82
@@ -180,7 +180,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | first_name | last_name | avg
 -------------+------------+-----------+------
            3 | Linda      | Williams  | 5.45

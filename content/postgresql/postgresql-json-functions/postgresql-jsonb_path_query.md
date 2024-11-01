@@ -72,7 +72,7 @@ FROM products;
 
 Output:
 
-```sql
+```text
    brand   | price
 -----------+-------
  "Dell"    | 1200
@@ -91,7 +91,7 @@ FROM products;
 
 Output:
 
-```sql
+```text
     cpu
 ------------
  "Intel i7"

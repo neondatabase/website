@@ -52,7 +52,7 @@ SELECT NOW();
 
 Output:
 
-```sql
+```text
               now
 -------------------------------
  2024-01-27 04:15:20.112974+02
@@ -96,7 +96,7 @@ Output:
 
 You can use the common date and time operators for the `NOW()` function. For example, to get 1 hour from now:
 
-```sql
+```text
         an_hour_later
 ------------------------------
  2024-01-27 05:16:17.15237+02

@@ -135,7 +135,7 @@ SELECT
 
 The `TO_TIMESTAMP()` function just omits the spaces and returns the correct timestamp value:
 
-```sql
+```text
       to_timestamp
 ------------------------
  2017-08-01 00:00:00-07
@@ -221,7 +221,7 @@ SELECT
 
 Output:
 
-```sql
+```text
       to_timestamp
 ------------------------
  1999-12-31 00:45:00-07

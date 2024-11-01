@@ -46,7 +46,7 @@ WHERE
 
 Output:
 
-```sql
+```text
    typname   | typlen
 -------------+--------
  timestamp   |      8
@@ -81,7 +81,7 @@ By the way, you can see the current time zone using the `SHOW TIMEZONE` command
 SHOW TIMEZONE;
 ```
 
-```sql
+```text
       TimeZone
 ---------------------
  America/Los_Angeles
@@ -104,7 +104,7 @@ FROM
    timestamp_demo;
 ```
 
-```sql
+```text
          ts          |          tstz
 ---------------------+------------------------
  2016-06-22 19:10:25 | 2016-06-22 19:10:25-07
@@ -127,7 +127,7 @@ FROM
   timestamp_demo;
 ```
 
-```sql
+```text
          ts          |          tstz
 ---------------------+------------------------
  2016-06-22 19:10:25 | 2016-06-22 22:10:25-04
@@ -152,7 +152,7 @@ SELECT NOW();
 
 Output:
 
-```sql
+```text
               now
 -------------------------------
  2024-01-31 21:01:58.985943-05
@@ -168,7 +168,7 @@ SELECT CURRENT_TIMESTAMP;
 
 Output:
 
-```sql
+```text
        current_timestamp
 -------------------------------
  2024-01-31 21:02:04.715486-05
@@ -200,7 +200,7 @@ To get the time of day in the string format, you use the `timeofday()` function
 SELECT TIMEOFDAY();
 ```
 
-```sql
+```text
               timeofday
 -------------------------------------
  Wed Jan 31 21:02:20.840159 2024 EST
@@ -215,7 +215,7 @@ To convert a timestamp to another time zone, you use the `timezone(zone, timesta
 SHOW TIMEZONE;
 ```
 
-```sql
+```text
      TimeZone
 ------------------
  America/New_York
@@ -230,7 +230,7 @@ To convert `2016-06-01 00:00` to `America/Los_Angeles` timezone, you use the `ti
 SELECT timezone('America/Los_Angeles','2016-06-01 00:00');
 ```
 
-```sql
+```text
       timezone
 ---------------------
  2016-05-31 21:00:00
@@ -277,7 +277,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | name |          created_at           |          updated_at
 ----+------+-------------------------------+-------------------------------
   1 | IT   | 2024-01-31 21:25:31.162808-05 | 2024-01-31 21:25:31.162808-05

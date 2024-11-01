@@ -237,7 +237,7 @@ SELECT * FROM fte_1;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name | department_id | employee_type
 ----+------------+-----------+---------------+---------------
   1 | John       | Doe       |             1 | FTE
@@ -275,7 +275,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id | first_name | last_name | department_id | employee_type
 ----+------------+-----------+---------------+---------------
  12 | Miller     | Jackson   |             1 | Contractor

@@ -20,7 +20,7 @@ nextLink:
 
 PL/pgSQL is a block\-structured language. Here’s the syntax of a block in PL/pgSQL:
 
-```pgsql
+```sql
 [ <<label>> ]
 [ declare
     declarations ]
@@ -45,7 +45,7 @@ The declaration section is where you [declare all variables](plpgsql-variables) 
 
 The syntax for declaring a variable is as follows:
 
-```pgsql
+```sql
 variable_name type = initial_value;
 ```
 
@@ -104,7 +104,7 @@ To execute a block from pgAdmin, you click the **Execute** button as shown in th
 
 The anonymous block has to be surrounded by single quotes like this:
 
-```pgsql
+```sql
 '<<first_block>>
 declare
   film_count integer := 0;
@@ -122,13 +122,13 @@ However, we use the [dollar\-quoted string constant syntax](dollar-quoted-string
 
 In the declaration section, we declare a [variable](plpgsql-variables) `film_count` and initialize its value to zero.
 
-```pgsql
+```sql
 film_count integer = 0;
 ```
 
 Inside the body section, we use a [`select into`](https://neon.tech/postgresql/plpgsql-select-into/) statement with the [`count()`](../postgresql-aggregate-functions/postgresql-count-function) function to retrieve the number of films from the `film` table and assign it to the `film_count` variable:
 
-```pgsql
+```sql
 select count(*)
 into film_count
 from film;
@@ -136,7 +136,7 @@ from film;
 
 After that, we show a message using [`raise notice`](plpgsql-errors-messages) statement:
 
-```pgsql
+```sql
 raise notice 'The number of films is %', film_count;
 ```
 
