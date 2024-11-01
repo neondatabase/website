@@ -35,14 +35,21 @@ const items = [
     answer: `Yes, we display your usage consumption in the Neon admin console and we will also email you when you’re getting close.`,
   },
   {
-    question: 'Why are we limited to 500 branches per project?',
-    answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
+    question: 'Can I use Neon for database-per-user architectures?',
+    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="https://neon.tech/blog/thousands-of-neon-projects-now-included-in-your-pricing-plan">Read more</a>.`,
   },
   {
-    question: 'Who needs the Business plan?',
-    answer: `The Business plan is our most affordable and feature-complete option for teams with existing production workloads. This plan is designed to fit all the production use cases that are popular among our customers, including large production applications with variable traffic, SaaS with database-per-user at scale, developer/BaaS platforms, dev/test workflows, and AI Agents. Explore our <a href="/case-studies">Case Studies</a> to learn more. We also do Enterprise contracts to accomodate unique requirements—<a href="/contact-sales">reach out to us</a> to inquire about it.`,
-    id: 'business-plan',
+    question: 'Is Neon compliant?',
+    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance will come very soon.`,
   },
+  {
+    question: 'Which level of uptime can I expect with Neon?',
+    answer: `Neon offers a 99.95% uptime SLA for Business and Enterprise customers, ensuring consistent availability and performance for mission-critical applications.`,
+  },
+  {
+    question: 'Can Neon help with migrations?',
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process, waiving any migration-related fees to ensure a smooth transition. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
+  }
 ];
 
 const Faq = () => (
