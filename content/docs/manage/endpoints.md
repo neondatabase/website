@@ -499,7 +499,7 @@ Neon computes allocate approximately 20 GiB of local disk space for temporary fi
 
 To resolve this issue, you can try the following strategies:
 
-- **Identify and terminate resource-intensive processes**: These could be long-running queries, operations, or possibly sync or replication activities. You can begin by [listing running queries by duration](/docs/postgresql/query-reference#list-running-queries-by-duration).
+- **Identify and terminate resource-intensive processes**: These could be long-running queries, operations, or possibly sync or replication activities. You can start your investigation by [listing running queries by duration](/docs/postgresql/query-reference#list-running-queries-by-duration).
 - **Optimize queries to reduce temporary file usage**.
 - **Adjust pipeline settings for third-party sync or replication**: If you're syncing or replicating data with an external service, modify the pipeline settings to control disk space usage.
 
