@@ -17,6 +17,10 @@ We want Neon Authorize to work over any type of connection: TCP, HTTP, or WebSoc
 
 We aim to introduce custom roles for Neon Authorize, in addition to the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed" roles, which would be managed by our platform and included by default in every branch and read replica.
 
+## Automatic installation of `pg_session_jwt` and set up of role grants
+
+The `pg_session_jwt` extension is required for Neon Authorize to work. We're exploring the idea of automatically installing the extension and setting up the role grants for the `authenticated` and `anonymous` roles.
+
 ## JWT audience checks
 
 The `aud` field in a JWT typically defines the token's intended recipients. In the future, we want to allow users to customize the expected `aud` field in the JWTs they use with Neon Authorize, providing greater flexibility and control.
