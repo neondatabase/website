@@ -42,7 +42,7 @@ SELECT PI();
 
 Output:
 
-```sql
+```text
         pi
 -------------------
  3.141592653589793
@@ -56,7 +56,7 @@ SELECT PI() * 10 * 10 area;
 
 Output:
 
-```sql
+```text
        area
 -------------------
  314.1592653589793
@@ -85,7 +85,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | radius
 ----+--------
   1 |  10.00
@@ -103,7 +103,7 @@ FROM circles;
 
 Output:
 
-```sql
+```text
  id | radius |        area
 ----+--------+--------------------
   1 |  10.00 |  314.1592653589793
@@ -125,7 +125,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | radius |  area
 ----+--------+---------
   1 |  10.00 |  314.16

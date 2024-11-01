@@ -102,7 +102,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
                           data
 
 ----+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ FROM
 
 Output:
 
-```sql
+```text
            product_name
 ----------------------------------
  "iPhone 15 Pro"
@@ -165,7 +165,7 @@ FROM
 
 Output:
 
-```sql
+```text
           product_name
 --------------------------------
  iPhone 15 Pro
@@ -194,7 +194,7 @@ FROM
 
 Output:
 
-```sql
+```text
                                                         attributes
 ---------------------------------------------------------------------------------------------------------------------------
  {"color": "Graphite", "display": "6.1-inch Super Retina XDR display", "storage": "256GB", "processor": "A15 Bionic chip"}
@@ -215,7 +215,7 @@ FROM
 
 Output:
 
-```sql
+```text
      colors
 ----------------
  "Graphite"
@@ -245,7 +245,7 @@ FROM
 
 Output:
 
-```sql
+```text
     colors
 --------------
  Graphite
@@ -277,7 +277,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |      product_name
 ----+------------------------
   1 | iPhone 15 Pro
@@ -307,7 +307,7 @@ WHERE
 
 Output:
 
-```sql
+```text
      name      | price
 ---------------+--------
  iPhone 15 Pro | 999.99
@@ -333,7 +333,7 @@ AS product;
 
 Output:
 
-```sql
+```text
             product
 --------------------------------
  {"name": "iPad", "price": 799}
@@ -365,7 +365,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |          product_name          | price
 ----+--------------------------------+--------
   1 | iPhone 15 Pro                  | 999.99
@@ -389,7 +389,7 @@ WHERE
 
 Output:
 
-```sql
+```text
           product_name          |                 tags
 --------------------------------+--------------------------------------
  iPhone 15 Pro                  | ["smartphone", "iOS", "Apple"]
@@ -419,7 +419,7 @@ WHERE
 
 Output:
 
-```sql
+```text
       product_name      |                                                        attributes
 ------------------------+---------------------------------------------------------------------------------------------------------------------------
  iPhone 15 Pro          | {"color": "Graphite", "display": "6.1-inch Super Retina XDR display", "storage": "256GB", "processor": "A15 Bionic chip"}
@@ -449,7 +449,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  product_name  |                                                        attributes
 ---------------+---------------------------------------------------------------------------------------------------------------------------
  iPhone 15 Pro | {"color": "Graphite", "display": "6.1-inch Super Retina XDR display", "storage": "256GB", "processor": "A15 Bionic chip"}
@@ -473,7 +473,7 @@ SELECT
 
 Output:
 
-```sql
+```text
    result
 -------------
  {"age": 22}
@@ -489,7 +489,7 @@ SELECT
 
 Output:
 
-```sql
+```text
           result
 ---------------------------
  ["PostgreSQL", "Web Dev"]
@@ -514,7 +514,7 @@ SELECT
 
 Output:
 
-```sql
+```text
         result
 ----------------------
  {"name": "John Doe"}
@@ -530,7 +530,7 @@ SELECT
 
 Output:
 
-```sql
+```text
      result
 ----------------
  ["PostgreSQL"]
@@ -558,7 +558,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  product_name
 ---------------
  iPhone 15 Pro
@@ -583,7 +583,7 @@ SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  null
@@ -598,7 +598,7 @@ SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores[*] > 2') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t

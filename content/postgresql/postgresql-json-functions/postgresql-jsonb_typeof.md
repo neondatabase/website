@@ -44,7 +44,7 @@ SELECT jsonb_typeof('{}');
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  object
@@ -59,7 +59,7 @@ select jsonb_typeof('[]');
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  array
@@ -74,7 +74,7 @@ SELECT jsonb_typeof('1'::jsonb);
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  number
@@ -89,7 +89,7 @@ SELECT jsonb_typeof('null'::jsonb);
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  null
@@ -107,7 +107,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  string

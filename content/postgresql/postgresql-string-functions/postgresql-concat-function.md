@@ -27,7 +27,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  full_name
 -----------
  John Doe
@@ -44,7 +44,7 @@ SELECT
 
 It returns `NULL`.
 
-```sql
+```text
  result
 --------
  null
@@ -83,7 +83,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  full_name
 -----------
  John Doe
@@ -107,7 +107,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
        full_name
 -----------------------
  Aaron Selby
@@ -142,7 +142,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |     name      |        email        |    phone
 ----+---------------+---------------------+--------------
   1 | John Doe      | [[email protected]](../cdn-cgi/l/email-protection.html)      | 123-456-7890

@@ -53,7 +53,7 @@ FROM
 
 Output:
 
-```sql
+```text
  key  |     value
 ------+---------------
  age  | 22
@@ -78,7 +78,7 @@ WHERE key IN ('name','city');
 
 Output:
 
-```sql
+```text
  key  |     value
 ------+---------------
  city | San Francisco
@@ -124,7 +124,7 @@ FROM
 
 Output:
 
-```sql
+```text
         href         |  key  |        value
 ---------------------+-------+---------------------
  https://example.com | rel   | stylesheet

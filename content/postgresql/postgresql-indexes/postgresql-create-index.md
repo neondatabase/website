@@ -49,7 +49,7 @@ We’ll use the `address` table from the [sample database](../postgresql-getting
 ![address table](/postgresqltutorial/address.png)
 First, [connect to the PostgreSQL](../postgresql-getting-started/connect-to-postgresql-database) `dvdrental` [sample database](../postgresql-getting-started/postgresql-sample-database) using `psql`:
 
-```sql
+```bash
 psql -U postgres -d dvdrental
 ```
 
@@ -69,7 +69,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  address_id |      address       | district  |    phone
 ------------+--------------------+-----------+--------------
          85 | 320 Baiyin Parkway | Mahajanga | 223664661973
@@ -94,7 +94,7 @@ WHERE
 
 Here is the output:
 
-```sql
+```text
                        QUERY PLAN
 ---------------------------------------------------------
  Seq Scan on address  (cost=0.00..15.54 rows=1 width=45)
@@ -129,7 +129,7 @@ WHERE
 
 Output:
 
-```sql
+```text
      indexname     |                                  indexdef
 -------------------+-----------------------------------------------------------------------------
  address_pkey      | CREATE UNIQUE INDEX address_pkey ON public.address USING btree (address_id)

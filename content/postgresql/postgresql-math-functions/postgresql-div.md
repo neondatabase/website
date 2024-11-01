@@ -22,7 +22,7 @@ The `DIV()` function is a useful tool for performing integer division. Unlike th
 
 Here’s the basic syntax of the `DIV()` function:
 
-```pgsqlsql
+```sqlsql
 DIV(dividend, divisor)
 ```
 
@@ -47,7 +47,7 @@ SELECT DIV(10,3) as result;
 
 Output:
 
-```sql
+```text
  result
 --------
       3
@@ -114,7 +114,7 @@ RETURNING *;
 
 Output:
 
-```pgsql
+```text
  id |      name       | birthdate
 ----+-----------------+------------
   1 | John Doe        | 1990-05-15

@@ -20,7 +20,7 @@ In PostgreSQL, a trigger is a database object that automatically executes a func
 
 Sometimes, you want the trigger to be activated only when a specific condition is met. To do that, you specify a boolean condition in the `WHEN` clause of the [CREATE TRIGGER](creating-first-trigger-postgresql) statement, like so:
 
-```pgsql
+```sql
 CREATE TRIGGER trigger_name
 ON table_name
 WHEN condition
@@ -35,7 +35,7 @@ In row\-level triggers, you can access the old/new values of columns of the row 
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `orders` to store order data:
 
-```pgsql
+```sql
 CREATE TABLE orders (
     order_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     customer_id INT NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE orders (
 
 Second, create another table called `customer_stats` to store the total spent amount by customers:
 
-```pgsql
+```sql
 CREATE TABLE customer_stats (
     customer_id INT PRIMARY KEY,
     total_spent NUMERIC NOT NULL DEFAULT 0
@@ -55,7 +55,7 @@ CREATE TABLE customer_stats (
 
 Third, create an [AFTER INSERT trigger](postgresql-after-insert-trigger) that inserts a row into the `customer_stats` table when a new row is inserted into the `orders` table:
 
-```pgsql
+```sql
 CREATE OR REPLACE FUNCTION insert_customer_stats()
 RETURNS TRIGGER
 AS $$
@@ -74,7 +74,7 @@ EXECUTE FUNCTION insert_customer_stats();
 
 Fourth, define an `AFTER UPDATE` trigger on the `orders` table with a condition:
 
-```pgsql
+```sql
 CREATE OR REPLACE FUNCTION update_customer_stats()
 RETURNS TRIGGER
 AS
@@ -101,7 +101,7 @@ The `AFTER UPDATE` trigger fires only when the status of the row changes from no
 
 Fifth, [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the `orders` table:
 
-```pgsql
+```sql
 INSERT INTO orders (customer_id, total_amount, status)
 VALUES
     (1, 100, 'pending'),
@@ -112,7 +112,7 @@ The `AFTER INSERT` trigger fires and insert rows into the `customer_stats` table
 
 Sixth, change the order statuses of customer id 1 and 2 to `completed`:
 
-```pgsql
+```sql
 UPDATE order
 SET status = 'completed'
 WHERE customer_id IN (1,2);
@@ -122,7 +122,7 @@ The `AFTER UPDATE` trigger fires and updates the `total_spent` column in the `cu
 
 Finally, retrieve the data from the `customer_stats` table:
 
-```pgsql
+```sql
 SELECT * FROM customer_stats;
 ```
 

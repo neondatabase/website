@@ -127,7 +127,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |  name  | price
 ----+--------+-------
   1 | Laptop |  0.00
@@ -147,7 +147,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |    name    | price
 ----+------------+-------
   2 | Smartphone |  0.00
@@ -167,7 +167,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |  name  | price
 ----+--------+--------
   3 | Tablet | 699.99
@@ -200,7 +200,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |      message       |         created_at
 ----+--------------------+----------------------------
   1 | Started the server | 2024-03-15 10:22:48.680802
@@ -233,7 +233,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |  name  | configuration
 ----+--------+---------------
   1 | global | {}

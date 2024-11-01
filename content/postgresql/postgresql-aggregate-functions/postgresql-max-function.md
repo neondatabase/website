@@ -49,7 +49,7 @@ FROM
 
 Output:
 
-```sql
+```text
   max
 -------
  11.99
@@ -78,7 +78,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  payment_id | customer_id | amount
 ------------+-------------+--------
       20403 |         362 |  11.99
@@ -110,7 +110,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  customer_id |  max
 -------------+-------
          184 |  9.99

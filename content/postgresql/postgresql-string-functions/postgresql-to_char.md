@@ -214,7 +214,7 @@ SELECT
 
 Result
 
-```sql
+```text
   2,017
 ```
 

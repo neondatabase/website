@@ -40,7 +40,7 @@ We will use the `film`, `film_actor`, and `actor` tables from the [sample databa
 
 The following example uses the `ARRAY_AGG()` function to return the list of film titles and a list of actors for each film:
 
-```pgsql
+```sql
 SELECT
     title,
     ARRAY_AGG (first_name || ' ' || last_name) actors
@@ -62,7 +62,7 @@ Here is the partial output:
 
 This example uses the `ARRAY_AGG()` function to return a list of films and a list of actors for each film sorted by the actor’s first name:
 
-```pgsql
+```sql
 SELECT
     title,
     ARRAY_AGG (
@@ -85,7 +85,7 @@ The following shows the partial output:
 ![](/postgresqltutorial/PostgreSQL-ARRAY_AGG-with-ORDER-BY-clause.png)
 You can sort the actor list for each film by the actor’s first name and last name as shown in the following query:
 
-```pgsql
+```sql
 SELECT
     title,
     ARRAY_AGG (

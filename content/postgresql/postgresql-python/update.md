@@ -93,7 +93,7 @@ python update.py
 
 First, connect to the PostgreSQL server using the `psql` client tool:
 
-```pgsql
+```bash
 psql -U postgres
 ```
 

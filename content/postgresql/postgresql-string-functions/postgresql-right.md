@@ -49,7 +49,7 @@ SELECT RIGHT('XYZ', 1);
 
 Here is the result:
 
-```sql
+```text
  right
 -------
  Z
@@ -65,7 +65,7 @@ SELECT RIGHT('XYZ', 2);
 
 Output:
 
-```sql
+```text
  right
 -------
  YZ
@@ -80,7 +80,7 @@ SELECT RIGHT('XYZ', - 1);
 
 In this example, the `RIGHT()` function returns all characters except for the first character.
 
-```sql
+```text
  right
 -------
  YZ

@@ -41,7 +41,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  brand | segment | quantity
 -------+---------+----------
  ABC   | Premium |      100
@@ -79,7 +79,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  brand | segment | sum
 -------+---------+-----
  XYZ   | Basic   | 300
@@ -103,7 +103,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  brand | sum
 -------+-----
  ABC   | 300
@@ -125,7 +125,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  segment | sum
 ---------+-----
  Basic   | 500
@@ -141,7 +141,7 @@ SELECT SUM (quantity) FROM sales;
 
 Output:
 
-```sql
+```text
  sum
 -----
  700
@@ -197,7 +197,7 @@ FROM
 
 Output:
 
-```sql
+```text
  brand | segment | sum
 -------+---------+-----
  XYZ   | Basic   | 300
@@ -263,7 +263,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  brand | segment | sum
 -------+---------+-----
  null  | null    | 700

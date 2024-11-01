@@ -128,7 +128,7 @@ SELECT	* FROM links;
 
 Output:
 
-```sql
+```text
  id |                url                 |        name         | description | last_update
 ----+------------------------------------+---------------------+-------------+-------------
   1 | https://neon.tech/postgresql | PostgreSQL Tutorial | null        | null

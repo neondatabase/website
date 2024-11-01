@@ -72,7 +72,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  payment_id | amount
 ------------+--------
       17503 |   7.99

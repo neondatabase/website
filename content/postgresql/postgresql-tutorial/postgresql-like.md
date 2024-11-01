@@ -36,7 +36,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Jennifer   | Davis
@@ -92,7 +92,7 @@ SELECT 'Apple' LIKE 'Apple' AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -109,7 +109,7 @@ SELECT 'Apple' LIKE 'A%' AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -167,7 +167,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Cheryl     | Murphy
@@ -201,7 +201,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  first_name  |  last_name
 -------------+--------------
  Aaron       | Selby
@@ -227,7 +227,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Barbara    | Jones
@@ -249,7 +249,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
 (0 rows)
@@ -280,7 +280,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Darlene    | Rose
@@ -324,7 +324,7 @@ Note that you’ll learn how to [create a table](postgresql-create-table) and [i
 
 Output:
 
-```sql
+```text
                    message
 ----------------------------------------------
  The rents are now 10% higher than last month

@@ -124,7 +124,7 @@ SELECT * FROM audits;
 
 Output:
 
-```sql
+```text
  id | username |      event      |   command    |        executed_at
 ----+----------+-----------------+--------------+----------------------------
   1 | postgres | ddl_command_end | CREATE TABLE | 2024-03-29 12:12:38.773734

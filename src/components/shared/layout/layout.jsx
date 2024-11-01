@@ -19,6 +19,7 @@ const Layout = ({
   hasThemesSupport = false,
   showSearchInput = false,
   isDocPage = false,
+  searchIndexName = null,
   customType = null,
 }) => (
   <>
@@ -35,6 +36,7 @@ const Layout = ({
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
         withBorder={headerWithBorder}
+        searchIndexName={searchIndexName}
         customType={customType}
       />
       <main
@@ -61,6 +63,7 @@ Layout.propTypes = {
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
+  searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

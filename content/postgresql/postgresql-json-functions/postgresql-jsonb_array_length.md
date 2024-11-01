@@ -46,7 +46,7 @@ SELECT jsonb_array_length('[1,2,3]');
 
 Output:
 
-```sql
+```text
  jsonb_array_length
 --------------------
                   3
@@ -65,7 +65,7 @@ SELECT jsonb_array_length('[1,2,3, [4,5], 6]');
 
 Output:
 
-```sql
+```text
  jsonb_array_length
 --------------------
                   5
@@ -112,7 +112,7 @@ FROM
 
 Output:
 
-```sql
+```text
    name    | pet_count
 -----------+-----------
  "Alice"   |         2

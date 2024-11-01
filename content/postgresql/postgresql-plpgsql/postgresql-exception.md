@@ -24,7 +24,7 @@ To recover from the error, you can use the `exception` clause in the `begin...en
 
 Here’s the syntax of the `exception` clause:
 
-```pgsql
+```sql
 <<label>>
 declare
    ...
@@ -66,7 +66,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 The following example issues an error because the film id 2000 does not exist.
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -94,7 +94,7 @@ SQL state: P0002
 
 The following example uses the `exception` clause to catch the `no_data_found` exception and report a more meaningful message:
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -126,7 +126,7 @@ SQL state: P0001
 
 The following example illustrates how to handle the `too_many_rows` exception:
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -159,7 +159,7 @@ In this example, the `too_many_rows` exception occurs because the [`select into`
 
 The following example illustrates how to catch multiple exceptions:
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -194,7 +194,7 @@ SQL state: P0001
 
 The following example is the same as the one above except that it uses the `SQLSTATE` codes instead of the condition names:
 
-```pgsql
+```sql
 do
 $$
 declare

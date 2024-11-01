@@ -46,7 +46,7 @@ SELECT LOWER('PostgreSQL');
 
 Output:
 
-```sql
+```text
    lower
 ------------
  postgresql
@@ -70,7 +70,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
     lower
 -------------
  aaron
@@ -97,7 +97,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Carole     | Barnett

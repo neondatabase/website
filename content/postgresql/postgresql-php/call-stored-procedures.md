@@ -41,7 +41,7 @@ To call a stored procedure that returns one value, you use these steps:
 
 The following `add()` method demonstrates how to call the `add()` stored procedure in PostgreSQL database.
 
-```sql
+```text
    /**
      * Call a simple stored procedure
      * @param int $a
@@ -112,7 +112,7 @@ The steps of calling a stored procedure that returns a result set are the same a
 
 The following `getAccounts()` method demonstrates how to call the `get_accounts()` stored procedure in PHP.
 
-```sql
+```text
    /**
      * Call a stored procedure that returns a result set
      * @return array

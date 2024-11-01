@@ -83,7 +83,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   name
 ----+-----------
   1 | Apple

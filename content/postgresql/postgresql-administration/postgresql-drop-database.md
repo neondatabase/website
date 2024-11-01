@@ -58,7 +58,7 @@ CREATE DATABASE test;
 
 First, open Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using psql:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -140,7 +140,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  datname | pid  | usename  | application_name | client_addr | client_port
 ---------+------+----------+------------------+-------------+-------------
  test    | 9724 | postgres | psql             | 127.0.0.1   |       61287

@@ -91,7 +91,7 @@ SELECT * FROM courses;
 
 Output:
 
-```sql
+```text
  course_id |         course_name         | price  |             description              | published_date
 -----------+-----------------------------+--------+--------------------------------------+----------------
          1 | PostgreSQL for Developers   | 299.99 | A complete PostgreSQL for Developers | 2020-07-13
@@ -128,7 +128,7 @@ WHERE course_id = 3;
 
 Output:
 
-```sql
+```text
  course_id |         course_name         | published_date
 -----------+-----------------------------+----------------
          3 | PostgreSQL High Performance | 2020-08-01

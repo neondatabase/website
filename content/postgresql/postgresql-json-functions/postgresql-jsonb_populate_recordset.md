@@ -67,7 +67,7 @@ FROM
 
 Output:
 
-```sql
+```text
    street    |    city     | zipcode
 -------------+-------------+---------
  123 Main St | New York    | 10001
@@ -114,7 +114,7 @@ FROM
 
 Output:
 
-```sql
+```text
          employees
 ---------------------------
  (1,"John Doe",25,70000)

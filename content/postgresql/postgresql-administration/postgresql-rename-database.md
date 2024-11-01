@@ -28,7 +28,7 @@ Let’s take a look at an example of renaming a database.
 
 First, open the Command Prompt on Windows or Terminal on a Unix\-like system and connect to the PostgreSQL server:
 
-```pgsqlsql
+```sqlsql
 psql -U postgres
 ```
 

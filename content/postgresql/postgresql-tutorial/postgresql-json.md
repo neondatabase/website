@@ -117,7 +117,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |        name        |                    properties
 ----+--------------------+---------------------------------------------------
   1 | Ink Fusion T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "white"}
@@ -135,7 +135,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |        name         |                    properties
 ----+---------------------+---------------------------------------------------
   2 | ThreadVerse T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "white"}
@@ -152,7 +152,7 @@ FROM products;
 
 Output:
 
-```sql
+```text
  id |         name          |                    properties
 ----+-----------------------+---------------------------------------------------
   1 | Ink Fusion T-Shirt    | {"size": ["S", "M", "L", "XL"], "color": "white"}
@@ -174,7 +174,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |         name          |  color
 ----+-----------------------+---------
   1 | Ink Fusion T-Shirt    | "white"
@@ -204,7 +204,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |         name          | color
 ----+-----------------------+-------
   1 | Ink Fusion T-Shirt    | white
@@ -228,7 +228,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id |        name         | color
 ----+---------------------+-------
   1 | Ink Fusion T-Shirt  | white
@@ -262,7 +262,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   name   |              phones
 ----+----------+----------------------------------
   1 | John Doe | ["408-111-2222", "408-111-2223"]

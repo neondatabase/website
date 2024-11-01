@@ -79,7 +79,7 @@ RETURNING *;
 
 The `teams` table:
 
-```sql
+```text
  team_id | team_name
 ---------+-----------
        1 | Team A
@@ -90,7 +90,7 @@ The `teams` table:
 
 The `members` table:
 
-```sql
+```text
  project_id |      name      | active | team_id
 ------------+----------------+--------+---------
           1 | Intranet       | f      |       1
@@ -115,7 +115,7 @@ FROM
 
 Output:
 
-```sql
+```text
  bool_and
 ----------
  f
@@ -142,7 +142,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  team_name | active_projects
 -----------+-----------------
  Team A    | f

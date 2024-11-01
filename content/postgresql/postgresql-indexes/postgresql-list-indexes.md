@@ -52,7 +52,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
      tablename      |                      indexname                      |                                                                   indexdef
 --------------------+-----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------
  accounts           | accounts_email_key                                  | CREATE UNIQUE INDEX accounts_email_key ON public.accounts USING btree (email)
@@ -66,7 +66,7 @@ Output:
 
 To show all the indexes of a table, you use the following statement:
 
-```pgsql
+```sql
 SELECT
   indexname,
   indexdef
@@ -103,7 +103,7 @@ Here is the output:
 
 If you want to get a list of indexes for tables whose names start with the letter `c`, you can use the following query:
 
-```pgsql
+```sql
 SELECT
     tablename,
     indexname,

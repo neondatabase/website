@@ -76,7 +76,7 @@ WHERE
 
 Here is the output:
 
-```sql
+```text
  tablename |      indexname      |                                     indexdef
 -----------+---------------------+----------------------------------------------------------------------------------
  employees | employees_pkey      | CREATE UNIQUE INDEX employees_pkey ON public.employees USING btree (employee_id)

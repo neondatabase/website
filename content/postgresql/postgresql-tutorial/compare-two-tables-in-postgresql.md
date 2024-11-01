@@ -79,7 +79,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | name |    note
 ----+------+------------
   2 | b    | not in bar
@@ -106,7 +106,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | name |    note
 ----+------+------------
   2 | c    | not in foo
@@ -173,7 +173,7 @@ WHERE
 
 It returns the differences between the two tables:
 
-```sql
+```text
  id | name
 ----+------
   2 | b

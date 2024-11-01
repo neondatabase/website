@@ -28,13 +28,13 @@ It’ll prompt you to enter a password for the postgres user.
 
 Second, [create a new database](../postgresql-administration/postgresql-create-database) called `elearning`:
 
-```pgsql
+```sql
 CREATE DATABASE elearning;
 ```
 
 Third, change the current database to `elearning`:
 
-```pgsql
+```text
 \c elearning
 ```
 
@@ -48,14 +48,14 @@ Note that you need to replace the `YourPassword` with your actual password and k
 
 Fifth, [grant all privileges](../postgresql-administration/postgresql-grant) of the `elearning` database to the `ed` user:
 
-```pgsql
+```sql
 GRANT ALL PRIVILEGES ON SCHEMA public
 TO ed;
 ```
 
 Finally, exit the psql database:
 
-```pgsql
+```sql
 exit
 ```
 

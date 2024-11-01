@@ -2,8 +2,7 @@
 title: Neon Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-isDraft: true
-updatedOn: '2024-10-29T00:27:11.739Z'
+updatedOn: '2024-10-30T15:45:40.104Z'
 ---
 
 <InfoBlock>
@@ -15,8 +14,6 @@ updatedOn: '2024-10-29T00:27:11.739Z'
   <a href="/docs/guides/neon-authorize">About Neon Authorize</a>
 </DocsList>
 </InfoBlock>
-
-<ComingSoon/>
 
 In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
 

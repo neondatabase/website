@@ -44,7 +44,7 @@ SELECT SQRT(25) AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
       5
@@ -77,7 +77,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |  x   |  y
 ----+------+-----
   1 |    3 |   4
@@ -97,7 +97,7 @@ FROM coordinates;
 
 Output:
 
-```sql
+```text
  distance_from_origin
 ----------------------
     5.000000000000000
