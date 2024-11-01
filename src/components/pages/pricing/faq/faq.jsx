@@ -31,6 +31,10 @@ const items = [
     answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. Since Neon retains database history, the size of storage for a Neon project will be calculated as the size of your tables plus the WAL up to the configurable history retention period. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
   },
   {
+    question: 'Why is price per-GB higher in Neon vs others?',
+    answer: `Neon's storage model is unique: our "per-GB" metric truly stretches. You can create hundreds of database copies (branches) or replicas without increasing storage costs. High availability is also included in this price. For maximum storage scalability, consider the Business plan—our most cost-efficient option—and stay tuned for upcoming pricing updates aimed at further cost reductions.`,
+  },
+  {
     question: 'Do I get a notification if I am approaching my usage limits?',
     answer: `Yes, we display your usage consumption in the Neon admin console and we will also email you when you’re getting close.`,
   },
