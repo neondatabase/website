@@ -2,7 +2,7 @@
 title: The future for Neon Authorize
 subtitle: Our vision for what comes next
 enableTableOfContents: true
-updatedOn: '2024-10-30T13:10:34.508Z'
+updatedOn: '2024-11-01T12:33:44.124Z'
 ---
 
 [Neon Authorize](/docs/guides/neon-authorize) is an exciting feature, and we want to build more capabilities on top of it.
