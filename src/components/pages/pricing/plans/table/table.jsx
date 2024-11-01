@@ -8,7 +8,7 @@ import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-import checkIcon from 'icons/pricing/check.svg';
+import CheckIcon from 'icons/pricing/check.inline.svg';
 
 import tableData from '../data/plans.json';
 
@@ -230,7 +230,7 @@ const Table = () => {
                   let cell;
                   if (typeof item[key] === 'boolean') {
                     cell = item[key] ? (
-                      <img src={checkIcon} width="24" height="24" alt="" loading="lazy" />
+                      <CheckIcon className="w-4" />
                     ) : (
                       <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
                     );

@@ -10,7 +10,7 @@ import blueGlow from './images/blue-glow.png';
 import greenGlowMobile from './images/green-glow-mobile.png';
 import greenGlow from './images/green-glow.png';
 
-const CtaBlock = ({ className, title, description, buttonText, buttonUrl }) => (
+const CtaBlock = ({ className, title, description, buttonText, buttonUrl, hasDecor = true }) => (
   <div
     className={clsx(
       'not-prose relative mt-10 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 xl:mt-9 lg:mt-8 lg:pr-10 sm:mt-6 sm:p-6',
@@ -34,36 +34,38 @@ const CtaBlock = ({ className, title, description, buttonText, buttonUrl }) => (
         {buttonText}
       </Button>
     </div>
-    <BgDecor hasBorder hasNoise hasPattern>
-      <Image
-        className="absolute bottom-0 right-0 h-[65px] w-[560px] sm:hidden"
-        src={greenGlow}
-        width={560}
-        height={65}
-        alt=""
-      />
-      <Image
-        className="absolute bottom-0 right-0 hidden h-[111px] w-[176px] sm:block"
-        src={greenGlowMobile}
-        width={176}
-        height={111}
-        alt=""
-      />
-      <Image
-        className="absolute left-0 top-0 h-full w-auto sm:hidden"
-        src={blueGlow}
-        width={315}
-        height={106}
-        alt=""
-      />
-      <Image
-        className="absolute left-0 top-0 hidden h-[152px] w-[315px] sm:block"
-        src={blueGlowMobile}
-        width={315}
-        height={152}
-        alt=""
-      />
-    </BgDecor>
+    {hasDecor && (
+      <BgDecor hasBorder hasNoise hasPattern>
+        <Image
+          className="absolute bottom-0 right-0 h-[65px] w-[560px] sm:hidden"
+          src={greenGlow}
+          width={560}
+          height={65}
+          alt=""
+        />
+        <Image
+          className="absolute bottom-0 right-0 hidden h-[111px] w-[176px] sm:block"
+          src={greenGlowMobile}
+          width={176}
+          height={111}
+          alt=""
+        />
+        <Image
+          className="absolute left-0 top-0 h-full w-auto sm:hidden"
+          src={blueGlow}
+          width={315}
+          height={106}
+          alt=""
+        />
+        <Image
+          className="absolute left-0 top-0 hidden h-[152px] w-[315px] sm:block"
+          src={blueGlowMobile}
+          width={315}
+          height={152}
+          alt=""
+        />
+      </BgDecor>
+    )}
   </div>
 );
 
@@ -73,6 +75,7 @@ CtaBlock.propTypes = {
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
+  hasDecor: PropTypes.bool,
 };
 
 export default CtaBlock;
