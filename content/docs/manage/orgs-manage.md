@@ -45,6 +45,10 @@ To invite Members:
 - Click **Invite member** and enter the email addresses in a comma-separated list.
 - Monitor the status of sent invites on the **Pending Invites** page; from here, you can resend or cancel invitations as needed.
 
+<Admonition type="note" title="Invites not received?">
+If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+</Admonition>
+
 ## Set permissions
 
 Permissions within the organization are exclusively managed by Admins. As an Admin:
@@ -62,6 +66,10 @@ All members can invite external users to [collaborate](/docs/guides/project-coll
 ![organization collaborators](/docs/manage/org_collaborators.png)
 
 To invite new Collaborators, click **Invite collaborators** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to. These users will receive an email inviting them to the project.
+
+<Admonition type="note" title="Invites not received?">
+If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+</Admonition>
 
 ### Manage Collaborators
 

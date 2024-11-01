@@ -38,6 +38,10 @@ The invited users will be granted access to the project, but they will not have 
 
 An email is sent to the invited users informing them of the project invitation, including an **Open project** link for easy access.
 
+<Admonition type="note" title="Invites not received?">
+If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+</Admonition>
+
 ## Project collaboration limits
 
 When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
