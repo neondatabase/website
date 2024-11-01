@@ -17,7 +17,7 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 - You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
 </Admonition>
 
-## Most managed Postgres are terrible for dev/test
+## RDS/Aurora are inefficient for dev/test
 
 ---
 
