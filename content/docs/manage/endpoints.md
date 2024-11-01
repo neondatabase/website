@@ -538,7 +538,7 @@ Possible steps you can take to identify the issues include:
 2. **Review connection patterns**
 
    - Ensure that no applications are sending frequent, unnecessary connection requests.
-   - Consider batching connections if possible, or use a [connection pooling](/docs/connect/connection-pooling) to limit persistent connections.
+   - Consider batching connections if possible, or use [connection pooling](/docs/connect/connection-pooling) to limit persistent connections.
 
 3. **Optimize any background jobs**
 
