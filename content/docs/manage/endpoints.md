@@ -542,6 +542,6 @@ Possible steps you can take to identify the issues include:
 
 3. **Optimize any background jobs**
 
-   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of activity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
+   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of inactivity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
 
 <NeedHelp/>
