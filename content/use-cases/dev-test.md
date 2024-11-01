@@ -52,8 +52,6 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 </TestimonialsWrapper>
 
-Databases like AWS RDS or Amazon Aurora are truly inefficient for non-prod workflows:
-
 **Provisioning instances is slow. Once they're live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
 
 **You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running.
