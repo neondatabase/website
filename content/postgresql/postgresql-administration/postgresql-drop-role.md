@@ -20,7 +20,7 @@ nextLink:
 
 The `DROP ROLE` statement allows you to delete a [role](postgresql-roles):
 
-```pgsql
+```sql
 DROP ROLE [IF EXISTS] target_role;
 ```
 
@@ -42,7 +42,7 @@ After transferring the ownership of objects to another role, you need to drop an
 
 In other words, you should execute the following statements in sequence to drop a role:
 
-```pgsql
+```sql
 -- execute these statements in the database that contains
 -- the object owned by the target role
 REASSIGN OWNED BY target_role TO another_role;
@@ -67,13 +67,13 @@ We’ll use the psql client tool. But, you can use any client tool of your choic
 
 First, open the Command Prompt on Windows or Terminal on Linux and log in to PostgreSQL using the `postgres` role:
 
-```pgsql
+```bash
 psql -U postgres
 ```
 
 Second, create a new database called sales:
 
-```pgsql
+```sql
 CREATE DATABASE sales;
 ```
 
@@ -89,7 +89,7 @@ Replace the `Password` with the actual one.
 
 Fourth, grant `createdb` privilege to `alice`:
 
-```pgsql
+```sql
 alter role alice createdb;
 ```
 
@@ -113,7 +113,7 @@ grant all on schema public to alice;
 
 Finally, exit the current session:
 
-```pgsql
+```text
 \q
 ```
 
@@ -121,13 +121,13 @@ Finally, exit the current session:
 
 First, log in to the PostgreSQL server using the `alice` role:
 
-```pgsql
+```bash
 psql -U alice -W sales
 ```
 
 Second, [create a new table](../postgresql-tutorial/postgresql-create-table) in the `sales` database:
 
-```pgsql
+```sql
 create table customers(
     customer_id int generated always as identity,
     customer_name varchar(150) not null,
@@ -137,7 +137,7 @@ create table customers(
 
 Third, [show the table list](postgresql-show-tables) in the `sales` database:
 
-```pgsql
+```text
 \dt
 ```
 
@@ -154,7 +154,7 @@ public | customers | table | alice
 
 Finally, quit the current session:
 
-```pgsql
+```text
 \q
 ```
 
@@ -162,19 +162,19 @@ Finally, quit the current session:
 
 First, log in to the PostgreSQL server using the `postgres` role:
 
-```pgsql
+```bash
 psql -U postgres
 ```
 
 Second, attempt to drop the role `alice`:
 
-```pgsql
+```sql
 drop role alice;
 ```
 
 PostgreSQL issued the following error:
 
-```pgsql
+```sql
 ERROR:  role "alice" cannot be dropped because some objects depend on it
 DETAIL:  privileges for database sales
 3 objects in database sales
@@ -184,31 +184,31 @@ The role `alice` cannot be dropped because it has dependent objects.
 
 Third, switch to the `sales` database:
 
-```pgsql
+```text
 \c sales
 ```
 
 Fourth, reassign owned objects of `alice` to `postgres`:
 
-```pgsql
+```sql
 reassign owned by alice to postgres;
 ```
 
 Fifth, drop owned objects by `alice`:
 
-```pgsql
+```sql
 drop owned by alice;
 ```
 
 Sixth, drop the role `alice`:
 
-```pgsql
+```sql
 drop role alice;
 ```
 
 Seventh, list the current roles:
 
-```pgsql
+```text
 \du
 ```
 
@@ -216,7 +216,7 @@ You will see that the role `alice` has been removed.
 
 Finally, quit the current session:
 
-```pgsql
+```text
 \q
 ```
 

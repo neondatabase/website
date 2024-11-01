@@ -93,7 +93,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
               contact_id              | first_name | last_name |         email          |    phone
 --------------------------------------+------------+-----------+------------------------+--------------
  ca61da8c-938a-48a6-8eb6-55aa08cd1b08 | John       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html) | 408-237-2345

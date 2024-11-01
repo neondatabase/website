@@ -61,7 +61,7 @@ SELECT * FROM binary_data;
 
 Output:
 
-```sql
+```text
  id |   data
 ----+----------
   1 | \x012345

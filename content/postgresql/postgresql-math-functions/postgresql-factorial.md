@@ -52,7 +52,7 @@ SELECT factorial(5);
 
 Output:
 
-```sql
+```text
  factorial
 -----------
        120

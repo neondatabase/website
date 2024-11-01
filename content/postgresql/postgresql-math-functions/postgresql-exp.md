@@ -50,7 +50,7 @@ SELECT EXP(1) result;
 
 Output:
 
-```sql
+```text
       result
 -------------------
  2.718281828459045
@@ -67,7 +67,7 @@ SELECT EXP(0) result;
 
 Output:
 
-```sql
+```text
  result
 --------
       1
@@ -86,7 +86,7 @@ SELECT EXP('10') result;
 
 Output:
 
-```sql
+```text
         exp
 --------------------
  22026.465794806718

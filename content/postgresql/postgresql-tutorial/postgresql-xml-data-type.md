@@ -107,7 +107,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
        name
 -------------------
  {"John Doe"}
@@ -128,7 +128,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
      name
 ---------------
  John Doe
@@ -153,7 +153,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
  age
 -----
   35
@@ -185,7 +185,7 @@ FROM
 
 Output:
 
-```sql
+```text
      name      | age |     city
 ---------------+-----+---------------
  John Doe      |  35 | San Francisco
@@ -205,7 +205,7 @@ WHERE (xpath('/person/name/text()', info))[1]::text = 'Jane Doe';
 
 Output:
 
-```sql
+```text
  id |                info
 ----+------------------------------------
   2 |     <person>                      +
@@ -267,7 +267,7 @@ WHERE cast(xpath('/person/name', info) as text[]) = '{<name>Jane Doe</name>}';
 
 Output:
 
-```sql
+```text
                                                       QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------
  Bitmap Heap Scan on person  (cost=4.31..17.81 rows=5 width=178) (actual time=0.039..0.040 rows=0 loops=1)

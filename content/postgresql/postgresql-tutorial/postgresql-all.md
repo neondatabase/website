@@ -105,7 +105,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |  salary
 ----+------------+-----------+----------
   1 | Bob        | Williams  | 75000.00

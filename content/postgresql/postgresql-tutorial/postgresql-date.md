@@ -114,7 +114,7 @@ SELECT NOW()::date;
 
 Output:
 
-```sql
+```text
     now
 ------------
  2024-02-01
@@ -129,7 +129,7 @@ SELECT CURRENT_DATE;
 
 Output:
 
-```sql
+```text
  current_date
 --------------
  2024-02-01
@@ -151,7 +151,7 @@ For example, to display the current date in `dd/mm/yyyy` format, you use the fol
 SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
 ```
 
-```sql
+```text
   to_char
 ------------
  01/02/2024
@@ -164,7 +164,7 @@ To display a date in a format like `Feb 01, 2024`, you use the following stateme
 SELECT TO_CHAR(CURRENT_DATE, 'Mon dd, yyyy');
 ```
 
-```sql
+```text
    to_char
 --------------
  Feb 01, 2024
@@ -188,7 +188,7 @@ FROM
 
 Output:
 
-```sql
+```text
  first_name | last_name |           diff
 ------------+-----------+---------------------------
  Shannon    | Freeman   | 6970 days 08:51:20.824847
@@ -215,7 +215,7 @@ FROM
 
 Output:
 
-```sql
+```text
  employee_id | first_name | last_name |           age
 -------------+------------+-----------+--------------------------
            1 | Shannon    | Freeman   | 44 years 1 mon
@@ -242,7 +242,7 @@ FROM
 
 Output:
 
-```sql
+```text
  employee_id | first_name | last_name |           age
 -------------+------------+-----------+--------------------------
            1 | Shannon    | Freeman   | 35 years
@@ -271,7 +271,7 @@ FROM
 
 Output:
 
-```sql
+```text
  employee_id | first_name | last_name | year | month | day
 -------------+------------+-----------+------+-------+-----
            1 | Shannon    | Freeman   | 1980 |     1 |   1

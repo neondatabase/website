@@ -69,7 +69,7 @@ SELECT * FROM contact;
 
 Output:
 
-```sql
+```text
  first_name  |  last_name   |                  email
 -------------+--------------+------------------------------------------
  Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)

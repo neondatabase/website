@@ -22,13 +22,13 @@ In PostgreSQL, dollar\-quoted string constants allow you to construct strings th
 
 For example, you can surround a string constant using single quotes like this:
 
-```pgsqlsql
+```sqlsql
 select 'String constant';
 ```
 
 But when a string constant contains a single quote (`'`), you need to escape it by doubling up the single quote:
 
-```pgsql
+```sql
 select 'I''m a string constant';
 ```
 
@@ -42,7 +42,7 @@ In this example, we don’t have to double up the single quote.
 
 Here’s the basic syntax of the dollar\-quoted string constants:
 
-```pgsql
+```sql
 $tag$<string_constant>$tag$
 ```
 
@@ -55,13 +55,13 @@ In this syntax, the `tag` is optional. It follows the same rules as unquoted ide
 
 Between the `$tag$`, you can place any string including single quotes (`'`). For example:
 
-```pgsql
+```sql
 select $$I'm a string constant$$ as message;
 ```
 
 Output:
 
-```pgsql
+```text
         message
 -----------------------
  I'm a string constant
@@ -78,7 +78,7 @@ SELECT $message$I'm a string constant$message$ s;
 
 Output:
 
-```pgsql
+```text
            s
 -----------------------
  I'm a string constant
@@ -115,7 +115,7 @@ DO
 
 The code in a block must be surrounded by single quotes. If it has any single quote, you need to escape it by doubling it like this:
 
-```pgsql
+```text
  raise notice ''The number of films: %'', film_count;
 ```
 
@@ -138,7 +138,7 @@ $$;
 
 The following shows the syntax of the [`CREATE FUNCTION`](postgresql-create-function) statement that allows you to create a user\-defined function:
 
-```pgsql
+```sql
 create function function_name(param_list)
     returns datatype
 language lang_name
@@ -150,7 +150,7 @@ Note that you will learn about the syntax of `CREATE FUNCTION` statement in the 
 
 In this syntax, the `function_body` is a string constant. For example, the following function finds a film by its id:
 
-```pgsql
+```sql
 create function find_film_by_id(
    id int
 ) returns film
@@ -164,7 +164,7 @@ In this example, the body of the `find_film_by_id()` function is surrounded by s
 
 If the function has many statements, it becomes more difficult to read. In this case, you can use dollar\-quoted string constant syntax:
 
-```pgsql
+```sql
 create function find_film_by_id(
    id int
 ) returns film
@@ -182,7 +182,7 @@ Now, you can place any piece of code between the `$$` and `$$` without using the
 
 Similarly, you can use the dollar\-quoted string constant syntax in [stored procedures](postgresql-create-procedure) like this:
 
-```pgsql
+```sql
 create procedure proc_name(param_list)
 language lang_name
 as $$

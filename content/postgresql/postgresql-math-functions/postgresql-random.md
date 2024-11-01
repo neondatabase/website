@@ -46,7 +46,7 @@ SELECT RANDOM() AS random;
 
 Output:
 
-```sql
+```text
        random
 --------------------
  0.1118658328429385
@@ -63,7 +63,7 @@ SELECT floor(random() * 100) + 1 AS random_integer;
 
 Sample output:
 
-```sql
+```text
  random_integer
 ----------------
              34
@@ -85,7 +85,7 @@ LIMIT 1;
 
 Sample output:
 
-```sql
+```text
        title
 -------------------
  Outfield Massacre
@@ -104,7 +104,7 @@ SELECT title FROM film ORDER BY RANDOM();
 
 Sample output:
 
-```sql
+```text
             title
 -----------------------------
  Shootist Superfly

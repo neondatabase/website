@@ -49,7 +49,7 @@ FROM
 
 Output:
 
-```sql
+```text
  min
 ------
  0.99
@@ -80,7 +80,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  film_id |          title          | rental_rate
 ---------+-------------------------+-------------
        1 | Academy Dinosaur        |        0.99
@@ -117,7 +117,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
   category   | replacement_cost
 -------------+------------------
  Action      |             9.99
@@ -152,7 +152,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  category | replacement_cost
 ----------+------------------
  Classics |            10.99

@@ -53,7 +53,7 @@ show timezone;
 
 Output:
 
-```sql
+```text
       TimeZone
 ---------------------
  America/Los_Angeles
@@ -87,7 +87,7 @@ SELECT TIMESTAMP WITH TIME ZONE '2024-03-21 10:00:00-04' AT TIME ZONE 'UTC';
 
 Output:
 
-```sql
+```text
       timezone
 ---------------------
  2024-03-21 14:00:00
@@ -104,7 +104,7 @@ SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'PST';
 
 Output:
 
-```sql
+```text
         timezone
 ------------------------
  2024-03-21 11:00:00-07
@@ -121,7 +121,7 @@ SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE '-08:00';
 
 Output:
 
-```sql
+```text
         timezone
 ------------------------
  2024-03-20 19:00:00-07

@@ -18,7 +18,7 @@ nextLink:
 
 To define a function that returns a table, you use the following form of the [create function](postgresql-create-function) statement:
 
-```pgsqlsqlsql
+```sqlsqlsql
 create or replace function function_name (
    parameter_list
 )
@@ -36,7 +36,7 @@ $$;
 
 Instead of returning a single value, this syntax allows you to return a table with a specified column list:
 
-```pgsql
+```sql
 returns table ( column_list )
 ```
 
@@ -44,7 +44,7 @@ We will use the `film` table from the [sample database](../postgresql-getting-st
 
 ![](/postgresqltutorial/film.png)The following function returns all films whose titles match a particular pattern using the [ILIKE operator](../postgresql-tutorial/postgresql-like).
 
-```pgsql
+```sql
 create or replace function get_film (
   p_pattern varchar
 )
@@ -75,13 +75,13 @@ Since the [data type](../postgresql-tutorial/postgresql-data-types) of `release_
 
 The following shows how to call the `get_film()` function:
 
-```pgsql
+```sql
 SELECT * FROM get_film ('Al%');
 ```
 
 Output:
 
-```pgsql
+```text
     film_title    | film_release_year
 ------------------+-------------------
  Alabama Devil    |              2006

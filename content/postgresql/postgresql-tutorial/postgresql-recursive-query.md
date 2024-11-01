@@ -130,7 +130,7 @@ SELECT * FROM subordinates;
 
 Output:
 
-```sql
+```text
  employee_id | manager_id |    full_name
 -------------+------------+-----------------
            2 |          1 | Megan Berry
@@ -159,7 +159,7 @@ How it works:
 
 The recursive member returns the direct subordinate(s) of the employee id 2\. This is the result of joining between the `employees` table and the `subordinates` CTE. The first iteration of the recursive term returns the following result set:
 
-```sql
+```text
  employee_id | manager_id |    full_name
 -------------+------------+-----------------
            6 |          2 | Bella Tucker
@@ -170,7 +170,7 @@ The recursive member returns the direct subordinate(s) of the employee id 2\. Th
 
 PostgreSQL executes the recursive member repeatedly. The second iteration of the recursive member uses the result set above step as the input value, and returns this result set:
 
-```sql
+```text
  employee_id | manager_id |    full_name
 -------------+------------+-----------------
           16 |          7 | Piers Paige

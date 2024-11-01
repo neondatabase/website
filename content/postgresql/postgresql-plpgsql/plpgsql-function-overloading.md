@@ -57,7 +57,7 @@ SELECT get_rental_duration(232);
 
 Output:
 
-```sql
+```text
  get_rental_duration
 ---------------------
                   90
@@ -103,7 +103,7 @@ The following statement returns the rental duration of the customer id `232` sin
 SELECT get_rental_duration(232,'2005-07-01');
 ```
 
-```sql
+```text
  get_rental_duration
 ---------------------
                   85

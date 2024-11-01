@@ -131,7 +131,7 @@ SELECT * FROM contacts;
 
 Output:
 
-```sql
+```text
  id |    name    |                   address
 ----+------------+---------------------------------------------
   1 | John Smith | ("123 St",Houston,TX,77001,USA)
@@ -160,7 +160,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |    name    |   city   | state | zip_code
 ----+------------+----------+-------+----------
   1 | John Smith | Houston  | TX    |    77001
@@ -181,7 +181,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |    name    |       street       |   city   | state | zip_code | country
 ----+------------+--------------------+----------+-------+----------+---------
   1 | John Smith | 123 St             | Houston  | TX    |    77001 | USA
@@ -204,7 +204,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |   name   |                    address
 ----+----------+------------------------------------------------
   2 | Jane Doe | ("4000 N. 1st Street","San Jose",CA,95134,USA)

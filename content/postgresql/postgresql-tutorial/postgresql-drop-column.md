@@ -126,7 +126,7 @@ DROP COLUMN category_id;
 
 Second, view the structure of the `books` table in psql:
 
-```sql
+```text
 \d books
 ```
 

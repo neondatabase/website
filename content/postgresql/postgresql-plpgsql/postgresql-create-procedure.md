@@ -89,7 +89,7 @@ select * from accounts;
 
 Output:
 
-```sql
+```text
  id | name  | balance
 ----+-------+----------
   1 | Bob   | 10000.00

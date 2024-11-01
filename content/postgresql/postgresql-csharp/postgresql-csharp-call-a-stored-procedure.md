@@ -61,7 +61,7 @@ It’ll prompt you to enter a password for the `ed` user. Input the valid passwo
 
 Second, create a PostgreSQL stored procedure that enrolls a student and creates an invoice:
 
-```pgsql
+```sql
 CREATE OR REPLACE PROCEDURE enroll_student(
     p_student_id INTEGER,
     p_course_id INTEGER,
@@ -195,7 +195,7 @@ SELECT * FROM enrollments;
 
 Output:
 
-```sql
+```text
  student_id | course_id | enrolled_date
 ------------+-----------+---------------
           2 |         1 | 2024-05-20

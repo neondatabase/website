@@ -74,7 +74,7 @@ SELECT DATE_TRUNC('hour', TIMESTAMP '2017-03-17 02:09:30');
 
 Output:
 
-```sql
+```text
      date_trunc
 ---------------------
  2017-03-17 02:00:00
@@ -91,7 +91,7 @@ SELECT DATE_TRUNC('minute', TIMESTAMP '2017-03-17 02:09:30');
 
 The function returns a `TIMESTAMP` with the precision is minute:
 
-```sql
+```text
      date_trunc
 ---------------------
  2017-03-17 02:09:00
@@ -119,7 +119,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
           m          | count
 ---------------------+-------
  2005-05-01 00:00:00 |  1156
@@ -182,7 +182,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  staff_id |          y          | rental
 ----------+---------------------+--------
         1 | 2006-01-01 00:00:00 |     85

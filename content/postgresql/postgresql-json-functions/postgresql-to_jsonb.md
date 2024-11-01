@@ -44,7 +44,7 @@ SELECT to_jsonb('Hello'::text);
 
 Output:
 
-```sql
+```text
  to_jsonb
 ----------
  "Hello"
@@ -68,7 +68,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  jsonb_typeof
 --------------
  string
@@ -87,7 +87,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  to_jsonb | to_jsonb
 ----------+----------
  10       | 9.99
@@ -106,7 +106,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  to_jsonb | to_jsonb
 ----------+----------
  true     | false
@@ -124,7 +124,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  to_jsonb
 ----------
  null
@@ -144,7 +144,7 @@ SELECT
 
 Output:
 
-```sql
+```text
        jsonb_array
 --------------------------
  ["red", "green", "blue"]

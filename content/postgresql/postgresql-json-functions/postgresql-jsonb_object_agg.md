@@ -71,7 +71,7 @@ FROM
 
 Output:
 
-```sql
+```text
          departments
 ------------------------------
  {"Sales": 1, "Marketing": 2}
@@ -108,7 +108,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |     name      |  salary  | department_id
 ----+---------------+----------+---------------
   1 | John Doe      | 60000.00 |             1
@@ -136,7 +136,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  department_name |       employee_details
 -----------------+-------------------------------
  Marketing       | {                            +
@@ -172,7 +172,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  department_name |       employee_details
 -----------------+-------------------------------
  Marketing       | {                            +

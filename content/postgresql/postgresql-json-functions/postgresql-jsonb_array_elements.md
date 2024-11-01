@@ -46,7 +46,7 @@ SELECT jsonb_array_elements('[1,2,3]');
 
 Output:
 
-```sql
+```text
  jsonb_array_elements
 ----------------------
  1
@@ -65,7 +65,7 @@ SELECT jsonb_array_elements('["red","green","blue"]');
 
 Output:
 
-```sql
+```text
  jsonb_array_elements
 ----------------------
  "red"
@@ -84,7 +84,7 @@ SELECT jsonb_array_elements('[1,2,3, [4,5], 6]');
 
 Output:
 
-```sql
+```text
  jsonb_array_elements
 ----------------------
  1
@@ -129,7 +129,7 @@ FROM employees;
 
 Output:
 
-```sql
+```text
        skills
 --------------------
  "Java"
@@ -158,7 +158,7 @@ FROM employees;
 
 Output:
 
-```sql
+```text
        skills
 --------------------
  "C++"

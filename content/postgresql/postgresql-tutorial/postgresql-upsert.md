@@ -73,7 +73,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | name | price | quantity
 ----+------+-------+----------
   1 | A    | 15.99 |      100
@@ -128,7 +128,7 @@ WHERE id = 1;
 
 Output:
 
-```sql
+```text
  id | name | price | quantity
 ----+------+-------+----------
   1 | A    | 16.99 |      120

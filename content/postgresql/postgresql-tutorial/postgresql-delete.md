@@ -92,7 +92,7 @@ SELECT * FROM todos;
 
 Output:
 
-```sql
+```text
  id |                   title                    | completed
 ----+--------------------------------------------+-----------
   1 | Learn basic SQL syntax                     | t
@@ -148,7 +148,7 @@ RETURNING *;
 
 PostgreSQL returns the following deleted row:
 
-```sql
+```text
  id |              title              | completed
 ----+---------------------------------+-----------
   2 | Practice writing SELECT queries | f
@@ -167,7 +167,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                title                | completed
 ----+-------------------------------------+-----------
   3 | Study PostgreSQL data types         | t

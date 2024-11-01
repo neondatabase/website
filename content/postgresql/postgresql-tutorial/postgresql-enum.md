@@ -79,7 +79,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                 title                 | priority | request_date
 ----+---------------------------------------+----------+--------------
   1 | Create an enum tutorial in PostgreSQL | high     | 2019-01-01
@@ -98,7 +98,7 @@ ORDER BY priority;
 
 Output:
 
-```sql
+```text
  id |                 title                 | priority | request_date
 ----+---------------------------------------+----------+--------------
   3 | Publish the PostgreSQL enum tutorial  | low      | 2019-01-01
@@ -118,7 +118,7 @@ ORDER BY priority;
 
 Output:
 
-```sql
+```text
  id |                 title                 | priority | request_date
 ----+---------------------------------------+----------+--------------
   2 | Review the enum tutorial              | medium   | 2019-01-01
@@ -203,7 +203,7 @@ SELECT enum_range(null::priority);
 
 Output:
 
-```sql
+```text
         enum_range
 --------------------------
  {low,medium,high,urgent}
@@ -222,7 +222,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  first_value | last_value
 -------------+------------
  low         | urgent
@@ -253,7 +253,7 @@ SELECT enum_range(null::priority);
 
 Output:
 
-```sql
+```text
           enum_range
 -------------------------------
  {low,medium,high,"very high"}

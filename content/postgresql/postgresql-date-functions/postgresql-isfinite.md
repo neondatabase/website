@@ -44,7 +44,7 @@ SELECT ISFINITE('2024-03-20'::date) result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -61,7 +61,7 @@ SELECT ISFINITE(DATE 'infinity') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -80,7 +80,7 @@ SELECT ISFINITE(INTERVAL '1 day') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -99,7 +99,7 @@ SELECT ISFINITE(TIMESTAMP '2024-03-20 00:00:00') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -114,7 +114,7 @@ SELECT ISFINITE(TIMESTAMP 'infinity') result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f

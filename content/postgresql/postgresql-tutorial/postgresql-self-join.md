@@ -76,7 +76,7 @@ SELECT * FROM employee;
 
 Output:
 
-```sql
+```text
  employee_id | first_name |  last_name  | manager_id
 -------------+------------+-------------+------------
            1 | Windy      | Hays        |       null
@@ -111,7 +111,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
     employee     |     manager
 -----------------+-----------------
  Sau Norman      | Ava Christensen
@@ -145,7 +145,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
     employee     |     manager
 -----------------+-----------------
  Anna Reeves     | Ava Christensen

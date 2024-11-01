@@ -28,7 +28,7 @@ The `if` statement allows you to execute one or more statements based on a condi
 
 The following illustrates the simplest form of the `if` statement:
 
-```pgsql
+```sql
 if condition then
    statements;
 end if;
@@ -46,7 +46,7 @@ The following flowchart illustrates the simple `if` statement.
 
 [![PL/pgSQL if statement](/postgresqltutorial/plpgsql-if-statement.png)](/postgresqltutorial/plpgsql-if-statement.png)The following example uses an `if` statement to check if a query returns any rows:
 
-```pgsql
+```sql
 do $$
 declare
   selected_film film%rowtype;
@@ -91,7 +91,7 @@ The `if...then...else` statement executes the statements in the `if` branch if t
 
 Here’s the syntax of the `if...then...else` statement:
 
-```pgsql
+```sql
 if condition then
   statements;
 else
@@ -104,7 +104,7 @@ The following flowchart illustrates the `if else` statement.
 ![PL/pgSQL if else statement](/postgresqltutorial/plpgsql-if-else-statement.png)
 The following example uses an if…then…else statement to display a message showing that a film with a specific id exists or not:
 
-```pgsql
+```sql
 do $$
 declare
   selected_film film%rowtype;
@@ -138,7 +138,7 @@ Unlike the `if` and `if...then...else` statements that evaluate only one conditi
 
 Here’s the syntax of the `if...then...elsif` statement:
 
-```pgsql
+```sql
 if condition_1 then
   statement_1;
 elsif condition_2 then
@@ -160,7 +160,7 @@ The following flowchart illustrates the `if then elsif` statement:
 ![PL/pgSQL if ELSif else Statement](/postgresqltutorial/if-elsif-else-statement.png)
 Let’s look at the following example:
 
-```pgsql
+```sql
 do $$
 declare
    v_film film%rowtype;

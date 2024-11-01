@@ -22,7 +22,7 @@ PostgreSQL provides the [`random()`](../postgresql-math-functions/postgresql-ran
 SELECT random();
 ```
 
-```sql
+```text
       random
 -------------------
  0.867320362944156
@@ -35,7 +35,7 @@ To generate a random number between 1 and 11, you use the following statement:
 SELECT random() * 10 + 1 AS RAND_1_11;
 ```
 
-```sql
+```text
     rand_1_11
 ------------------
  7.75778411421925
@@ -48,7 +48,7 @@ If you want to generate the random number as an integer, you apply the `floor()
 SELECT floor(random() * 10 + 1)::int;
 ```
 
-```sql
+```text
  floor
 -------
      9
@@ -79,7 +79,7 @@ The following statement calls the `random_between()` function and returns a rand
 SELECT random_between(1,100);
 ```
 
-```sql
+```text
  random_between
 ----------------
              81
@@ -93,7 +93,7 @@ SELECT random_between(1,100)
 FROM generate_series(1,5);
 ```
 
-```sql
+```text
  random_between
 ----------------
              37
