@@ -13,6 +13,10 @@ Here are some ideas of things we could build next — in no particular order (un
 
 We want Neon Authorize to work over any type of connection: TCP, HTTP, or WebSockets. This is probably our highest priority. Accepting JWTs over TCP (in the password field for the Postgres role) would mean that any Postgres SDK in any programming language could support Neon Authorize.
 
+## Local development experience
+
+We'd like to offer a very easy experience for developers to use Neon Authorize in their local machines without an Internet connection.
+
 ## Custom roles
 
 We aim to introduce custom roles for Neon Authorize, in addition to the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed" roles, which would be managed by our platform and included by default in every branch and read replica.
