@@ -232,7 +232,7 @@
       "business": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "Branch Protection",
         "subtitle": "Restrict access & actions"
@@ -382,7 +382,18 @@
       "feature": "All plans"
     },
     {
-      "rows": "1",
+      "rows": "2",
+      "feature": {
+        "title": "High Availability",
+        "subtitle": "<a href='/docs/introduction/high-availability' class='underline'>Our approach</a>"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "2",
       "feature": {
         "title": "Neon Authorize",
         "subtitle": "Row-level security"
