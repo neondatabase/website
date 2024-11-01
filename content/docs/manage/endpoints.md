@@ -485,7 +485,7 @@ curl -X 'DELETE' \
 
 ## Compute-related issues
 
-This section outlines compute-related issues you may encounter when using Neon and possible resolutions.
+This section outlines compute-related issues you may encounter and possible resolutions.
 
 ### No space left on device
 
