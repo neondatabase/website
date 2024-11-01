@@ -1,6 +1,6 @@
 ---
 title: 'Postgres for Dev/Test'
-subtitle: Migrate your non-prod environments to Neon. Start shipping faster with up +75% lower costs.
+subtitle: Migrate your non-prod environments to Neon. Start shipping faster with +75% lower costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'
@@ -233,4 +233,4 @@ We’ve built tutorials that teach you **how to run a nightly dump from RDS to N
 
 - [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
 
-<CTA title="Build a Neon Twin" description="Set up a GitHub action that automatically syncs your data from RDS to Neon." buttonText="Read more" buttonUrl="/dev-for-rds" />
+<CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this up. We can also discusss pricing options, annual contracts, and migration assitance." buttonText="Contact us" buttonUrl="/contact-sales" />
