@@ -56,14 +56,13 @@ Databases like AWS RDS or Amazon Aurora are truly inefficient for non-prod workf
 
 **Provisioning instances is slow. Once they're live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
 
-**You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running. 
+**You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running.
 
-**It's hard to keep data in sync across environments**. Syncing data across many instances requires repetitive, manual work. This leads to discrepancies that compromise test reliability and slow down deployments. 
+**It's hard to keep data in sync across environments**. Syncing data across many instances requires repetitive, manual work. This leads to discrepancies that compromise test reliability and slow down deployments.
 
 **These problems get worse over time, not better**. As your number of instances grows, the manual setup and configuration work grows too.
 
-
-## Use Neon for dev/test 
+## Use Neon for dev/test
 
 ---
 
@@ -98,16 +97,18 @@ Neon is a Postgres provider that offers a much more modern developer experience 
 ### Why it’s faster (and more affordable) to do dev/test in Neon?
 
 1. **Instant provisioning**. In Neon, it takes seconds to spin up new Postgres instances. Developers can start coding and testing immediately, no waiting time.
-2. **Database branching for ephemeral environments**. Neon's copy-on-write branching allows devs to create full copies of their testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: in Neon, you can sync data with parent in one click. Branches are also extremely affordable. 
+2. **Database branching for ephemeral environments**. Neon's copy-on-write branching allows devs to create full copies of their testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: in Neon, you can sync data with parent in one click. Branches are also extremely affordable.
 3. **Non-prod environments are automatically paused when unnused**. If a database branch is idle, Neon pauses it automatically to save costs (and management work).
-4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add  Neon to your CI/CD pipelines to automate branch creation /deletion.
+4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation /deletion.
 
 ### How does it work?
-Here's how you'll go about it: 
+
+Here's how you'll go about it:
+
 1. **Set up a single Neon Project for dev/test**. Many non-prod instances can be substituted by a single Neon project.
-2. **Sync testing data to the main branch**. Load data from your staging database / testing data into the main branch within the Neon project. This main branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes. 
-3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment. 
-4. **Automatic branch cleanup and autosuspend**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's autosuspend automatically pauses these environments when unnused, so you don't have to worry too much about them. 
+2. **Sync testing data to the main branch**. Load data from your staging database / testing data into the main branch within the Neon project. This main branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
+3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
+4. **Automatic branch cleanup and autosuspend**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's autosuspend automatically pauses these environments when unnused, so you don't have to worry too much about them.
 
 ### How much cost savings have you seen vs RDS/Aurora?
 
@@ -225,7 +226,6 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 />
 
 <TestimonialsWrapper>
-
 
 ## Getting started
 
