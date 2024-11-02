@@ -16,7 +16,7 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
 In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance.
-   </Admonition>
+</Admonition>
 
 <Testimonial
 text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
@@ -53,6 +53,7 @@ Neon is Postgres with serverless architecture. With rapid provisioning, scale-to
 ### One project per customer
 
 A Neon project is the logical equivalent of an "instance" but without the management heaviness:
+
 - By creating one project per customer, each customers' data will be completely isolated.
 - You'll be able to run independent PITRs without affecting your entire fleet.
 - You can create diffeent projects in different regions to match your customers' location.
