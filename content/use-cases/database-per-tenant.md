@@ -1,5 +1,5 @@
 ---
-title: 'Database per User at Scale'
+title: 'Database Per User at Scale'
 subtitle: Manage thousands of Postgres databases with minimal effort and costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
@@ -9,12 +9,13 @@ image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 <UseCaseContext />
 
 <Admonition type="note" title="TL;DR">
-Companies are managing fleets of thousands of database-per-tenant Neon databases with very small teams and budgets. This is why:
+Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
 
 1. **API-first**: Devs can provision databases, set usage quotas, and manage costs with ease through Neon's API.
 2. **Instant provisioning**: Databases are ready in under a second.
-3. **Autoscaling w/ scale-to-zero**: Idle databases pause automatically to eliminate fixed costs, while CPU/memory scale up and down automatically per-customer.
-   In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance.
+3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
+
+In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance.
    </Admonition>
 
 <Testimonial
@@ -33,7 +34,7 @@ One of the first design decisions you’ll face when building an application wit
 - **Meeting strict data privacy requirements**: If you’re operating a B2B SaaS platform with customers in regulated industries, they may require maximum data isolation at the instance level. A database-per-user approach allows you to meet these stringent data privacy demands by offering each customer their own isolated database.
 - **Complying with regional data regulations**: In cases where data regulations require customer data to be stored within specific regions, creating separate databases in each region provides a straightforward path to compliance.
 
-## Scaling database-per-user architectures in AWS: why is not a good idea
+## Scaling database-per-user architectures in AWS is not a good idea
 
 Scaling database per tenant architectures in managed Postgres solutions (e.g. Amazon RDS) is hard. If you fit thousands of databases inside a single RDS instance, this instance becomes a single point of failure, and it gets slow and hard to maintain. If you try to manage thousands of small instances in AWS, you start needing a dedicated DevOps team to handle the logistics. Plus, costs skyrocket.
 
@@ -49,9 +50,9 @@ author={{
 
 Neon is Postgres with serverless architecture. With rapid provisioning, scale-to-zero, and robust API support, you can scale database-per-user architectures without management overhead or big budgets. Just create **one project per customer** via the Neon API.
 
-### Why one project per customer
+### One project per customer
 
-- A Neon project is the logical equivalent of an "instance" but without the management heaviness.
+A Neon project is the logical equivalent of an "instance" but without the management heaviness:
 - By creating one project per customer, each customers' data will be completely isolated.
 - You'll be able to run independent PITRs without affecting your entire fleet.
 - You can create diffeent projects in different regions to match your customers' location.
@@ -63,9 +64,9 @@ Management is simplified vs other Postgres services because,
 - New projects are ready in milliseconds, and you can manage everything programmatically via the API.
 - You only pay for the projects that are active thanks to scale-to-zero.
 
-### What about dev/test and branching
+### A dedicated project for dev/test
 
-The best method for making the most of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design is to create a **separate Neon project as your single non-prod environment**. The methodology:
+To take advantage of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:
 
 - Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
