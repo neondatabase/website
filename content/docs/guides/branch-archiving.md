@@ -89,4 +89,4 @@ The endpoint response includes either the branch's `current_state` or `pending_s
 ...
 ```
 
-For example, if a branch is in the process of being archived, the `pending_state` will be be `archived`. When a branch is being unarchived, the `pending_state`  will be `ready`.
+For example, if a branch is in the process of being archived, the `pending_state` will be `archived`. When a branch is being unarchived, the `pending_state`  will be `ready`.
