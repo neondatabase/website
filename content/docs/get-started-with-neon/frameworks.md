@@ -17,7 +17,7 @@ updatedOn: '2024-08-15T17:23:10.552Z'
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<a href="/docs/guides/dotnet" title="Dotnet" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
+<a href="/docs/guides/dotnet-entity-framework" title="Dotnet" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
