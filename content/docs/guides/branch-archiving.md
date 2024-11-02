@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-10-15T17:19:50.116Z'
 ---
 
-To minimize storage costs, Neon automatically archives branches that have not been accessed for 7 days. These branches are transferred to cost-efficient archive storage. 
+To minimize storage costs, Neon automatically archives branches that have not been accessed for 7 days. These branches are transferred to cost-efficient archive storage.
 
 Archive storage is billed $0.10 per GB-month, which is significantly cheaper than regular storage. For more information about how archive storage is billed, see [Archive storage billing](#tbd).
 
@@ -31,13 +31,13 @@ The archiving process itself has no impact on the performance of other branches,
 
 Any action that accesses an archived branch will trigger the transfer of the branch from archive storage back to regular storage. For example, any of the following actions will bring a branch out of archive storage:
 
-- **Connecting to the branch**: For example, if you connect to an archived branch from an application or database client, this will trigger a transfer of the branch out of archive storage. 
+- **Connecting to the branch**: For example, if you connect to an archived branch from an application or database client, this will trigger a transfer of the branch out of archive storage.
 - **Querying the branch from the Neon SQL Editor**: Querying a branch from the editor initiates a connection to the branch, which in turn causes the branch to be transferred from archive storage.
 - **Creating a child branch**: Creating a child branch on an archived branch brings the branch out of archive storage. The child branh creation process will be slow during this process.
 - **Creating a role on a branch**
 - **Creating a database on a branch**
 - **Reset from parent**
-_ **Restore**
+  \_ **Restore**
 - **Delete**
 - **Neon CLI commands and API calls that access the branch**
 
@@ -58,7 +58,7 @@ You can monitor branch archive and unarchive operations from the **System operat
 - `Timeline archive`: The time when the branch archive operations was initiated
 - `Timeline unarchive`: The time when the branch unarchive operation was initiated
 
-You can also monitor branch archiving and unarchiving using Neon's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API. 
+You can also monitor branch archiving and unarchiving using Neon's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API.
 
 ```bash
 curl --request GET \
@@ -89,4 +89,4 @@ The endpoint response includes either the branch's `current_state` or `pending_s
 ...
 ```
 
-For example, if a branch is in the process of being archived, the `pending_state` will be `archived`. When a branch is being unarchived, the `pending_state`  will be `ready`.
+For example, if a branch is in the process of being archived, the `pending_state` will be `archived`. When a branch is being unarchived, the `pending_state` will be `ready`.
