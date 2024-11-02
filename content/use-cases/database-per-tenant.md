@@ -8,15 +8,14 @@ image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 
 <UseCaseContext />
 
-
 <Admonition type="note" title="TL;DR">
-Companies are managing fleets of thousands of database-per-tenant Neon databases with very small teams and budgets. This is why: 
+Companies are managing fleets of thousands of database-per-tenant Neon databases with very small teams and budgets. This is why:
 
 1. **API-first**: Devs can provision databases, set usage quotas, and manage costs with ease through Neon's API.
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Idle databases pause automatically to eliminate fixed costs, while CPU/memory scale up and down automatically per-customer.
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance. 
-</Admonition>
+   In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance.
+   </Admonition>
 
 <Testimonial
 text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
@@ -46,29 +45,31 @@ author={{
 }}
 />
 
-## Database-per-user in Neon 
+## Database-per-user in Neon
 
 Neon is Postgres with serverless architecture. With rapid provisioning, scale-to-zero, and robust API support, you can scale database-per-user architectures without management overhead or big budgets. Just create **one project per customer** via the Neon API.
 
-### Why one project per customer 
+### Why one project per customer
+
 - A Neon project is the logical equivalent of an "instance" but without the management heaviness.
 - By creating one project per customer, each customers' data will be completely isolated.
 - You'll be able to run independent PITRs without affecting your entire fleet.
-- You can create diffeent projects in different regions to match your customers' location. 
+- You can create diffeent projects in different regions to match your customers' location.
 
-Management is simplified vs other Postgres services because, 
+Management is simplified vs other Postgres services because,
 
 - There’s no need to provision infrastructure in advance.
 - You can scale your architecture progressively, from a few tenants to hundreds of thousands, without breaking the bank - our pricing plans include a generous number of projects within the monthly fee.
-- New projects are ready in milliseconds, and you can manage everything programmatically via the API. 
-- You only pay for the projects that are active thanks to scale-to-zero. 
+- New projects are ready in milliseconds, and you can manage everything programmatically via the API.
+- You only pay for the projects that are active thanks to scale-to-zero.
 
-### What about dev/test and branching 
-The best method for making the most of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design is to create a **separate Neon project as your single non-prod environment**. The methodology: 
+### What about dev/test and branching
 
-- Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds). 
-- To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click. 
-- Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD. 
+The best method for making the most of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design is to create a **separate Neon project as your single non-prod environment**. The methodology:
+
+- Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
+- To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
+- Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
 
 ## Neon for B2B SaaS: Data isolation with easy scalability
 
