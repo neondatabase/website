@@ -1,8 +1,9 @@
 ---
 title: Connect an Entity Framework application to Neon
-subtitle: Set up a Neon project in seconds and connect from an Entity Framework application
+subtitle: Set up a Neon project in seconds and connect from an Entity Framework
+  application
 enableTableOfContents: true
-updatedOn: '2024-11-01T00:00:00.000Z'
+updatedOn: '2024-11-03T11:19:09.439Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.

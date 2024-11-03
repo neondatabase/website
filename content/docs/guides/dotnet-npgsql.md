@@ -2,7 +2,7 @@
 title: Connect a .NET (C#) application to Neon
 subtitle: Set up a Neon project in seconds and connect from a .NET (C#) application
 enableTableOfContents: true
-updatedOn: '2024-11-02T00:00:00.000Z'
+updatedOn: '2024-11-03T11:19:09.440Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a .NET (C#) application. We'll build a simple book library that demonstrates basic database operations using the Npgsql provider.
