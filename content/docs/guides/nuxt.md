@@ -6,7 +6,6 @@ tag: new
 updatedOn: '2024-11-03T12:54:20.019Z'
 ---
 
-
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
 
 To create a Neon project and access it from a Next.js application:
@@ -56,9 +55,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-
 > Will add the content once https://github.com/neondatabase/examples/pull/30 is merged
-
 
 ## Run the app
 
@@ -79,4 +76,3 @@ You can find the source code for the applications described in this guide on Git
 </DetailIconCards>
 
 <NeedHelp/>
-
