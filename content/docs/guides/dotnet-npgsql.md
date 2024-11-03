@@ -186,7 +186,7 @@ using(var conn = new NpgsqlConnection(connString))
 {
     Console.Out.WriteLine("Opening connection");
     conn.Open();
-    
+
     using(var command = new NpgsqlCommand("DELETE FROM books WHERE id = @id", conn))
     {
         command.Parameters.AddWithValue("id", 2);
