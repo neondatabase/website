@@ -3,6 +3,7 @@ title: Connect Nuxt to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres using Nitro API
   routes
 enableTableOfContents: true
+tag: new
 updatedOn: '2024-10-16T12:17:44.852Z'
 ---
 

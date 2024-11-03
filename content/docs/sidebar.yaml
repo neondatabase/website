@@ -61,6 +61,7 @@
               slug: guides/nextjs
             - title: Nuxt
               slug: guides/nuxt
+              tag: new
             - title: Node.js
               slug: guides/node
             - title: Quarkus (JDBC)
@@ -386,6 +387,9 @@
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
+        - title: Nuxt
+          slug: guides/nuxt
+          tag: new
         - title: Phoenix
           slug: guides/phoenix
         - title: Quarkus (JDBC)

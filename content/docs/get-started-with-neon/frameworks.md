@@ -19,6 +19,8 @@ updatedOn: '2024-08-15T17:23:10.552Z'
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
+<a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
+
 <a href="/docs/guides/oauth-integration" title="OAuth" description="Integrate with Neon using OAuth" icon="oauth"></a>
 
 <a href="/docs/guides/phoenix" title="Phoenix" description="Connect a Phoenix site or app to Neon" icon="phoenix"></a>
