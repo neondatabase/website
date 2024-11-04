@@ -54,7 +54,7 @@ Neon is Postgres with serverless architecture. With rapid provisioning, scale-to
 
 A Neon project is the logical equivalent of an "instance" but without the management heaviness:
 
-- By creating one project per customer, each customers' data will be completely isolated.
+- By creating one project per customer, each customer's data will be completely isolated.
 - You'll be able to run independent PITRs without affecting your entire fleet.
 - You can create diffeent projects in different regions to match your customers' location.
 
