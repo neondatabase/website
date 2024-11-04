@@ -32,7 +32,7 @@
       "feature": "Included"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Storage"
       },
@@ -74,7 +74,7 @@
       }
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Projects"
       },
@@ -100,7 +100,7 @@
       "business": "500 <span>per project</span>"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Databases"
       },
@@ -113,7 +113,7 @@
       "feature": "Compute Features"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Max compute size"
       },
@@ -285,7 +285,7 @@
       "business": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "Branch Protection",
         "subtitle": "Restrict access & actions"
@@ -316,7 +316,7 @@
       "business": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "Neon Authorize",
         "subtitle": "Row-level security"
@@ -397,7 +397,7 @@
       "business": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
         "title": "Usage Limits via API",
         "subtitle": "For DB-per-tenant architectures"
@@ -418,7 +418,7 @@
       "business": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Data Transfer"
       },
@@ -428,7 +428,7 @@
       "business": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Custom Domain Proxy"
       },
@@ -438,7 +438,7 @@
       "business": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Technical Support"
       },
@@ -459,7 +459,7 @@
       "business": true
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Solutions Architect"
       },
