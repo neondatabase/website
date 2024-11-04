@@ -56,7 +56,7 @@ A Neon project is the logical equivalent of an "instance" but without the manage
 
 - By creating one project per customer, each customer's data will be completely isolated.
 - You'll be able to run independent PITRs without affecting your entire fleet.
-- You can create diffeent projects in different regions to match your customers' location.
+- You can create different projects in different regions to match your customers' locations.
 
 Management is simplified vs other Postgres services because,
 
