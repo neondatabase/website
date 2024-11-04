@@ -47,7 +47,7 @@ Based on your usage estimates, calculate the fees for extra storage units, compu
 <Admonition type="important">
 **On paid plans, extra usage is allocated and billed automatically when you exceed plan allowances** 
 - However, extra usage fees for storage and projects are prorated for the month from the date of purchase, meaning that you are not billed the full amount if extra units of storage or projects are allocated partway through the month. 
-- Once an extra unit of storage or projects is allocated, you are billed for that extra unit for the remainder of the month. If you reduce your usage during that month and no longer require extra units of storage or projects, the extra usage charge is dropped at the beginning of the next month when your bill resets based on current usage. For more, see [Extra usage](/docs/introduction/billing/extra-usage).
+- Once an extra unit of storage or projects is allocated, you are billed for that extra unit for the remainder of the month. If you reduce your usage during that month and no longer require extra units of storage or projects, the extra usage charge is dropped at the beginning of the next month when your bill resets based on current usage. For more, see [Extra usage](/docs/introduction/extra-usage).
 </Admonition>
 
 ### For the Launch plan:
