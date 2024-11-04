@@ -81,7 +81,7 @@ Each tenant can be scaled independently, optimizing both performance and costs w
 
 ## Neon for dev platforms: Join Vercel, Replit, Koyeb, and others
 
-If you’re instead building a developer platform including a backend, or an [AI Agent](https://neon.tech/use-cases/ai-agents), you can start offering Neon databases to your users by becoming a [Partner](https://neon.tech/partners). Neon is a cost-effective solution to at the same time support your hobby plan and your Enterprise customers. Companies like [Vercel](https://neon.tech/blog/neon-postgres-on-vercel), [Replit](https://neon.tech/blog/neon-replit-integration), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview) are already using Neon to offer Postgres to their end-users.
+If you’re instead building a developer platform including a backend, or an [AI Agent](https://neon.tech/use-cases/ai-agents), you can start offering Neon databases to your users by becoming a [Partner](https://neon.tech/partners). Neon is a cost-effective solution that can support your hobby plan and Enterprise customers at the same time. Companies like [Vercel](https://neon.tech/blog/neon-postgres-on-vercel), [Replit](https://neon.tech/blog/neon-replit-integration), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview) are already using Neon to offer Postgres to their end-users.
 
 <Testimonial
 text="Neon's serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering"
