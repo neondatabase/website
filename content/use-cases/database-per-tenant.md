@@ -61,7 +61,7 @@ A Neon project is the logical equivalent of an "instance" but without the manage
 Management is simplified vs other Postgres services because,
 
 - There’s no need to provision infrastructure in advance.
-- You can scale your architecture progressively, from a few tenants to hundreds of thousands, without breaking the bank - our pricing plans include a generous number of projects within the monthly fee.
+- You can scale your architecture progressively, from a few tenants to hundreds of thousands, without breaking the bank — our pricing plans include a generous number of projects within the monthly fee.
 - New projects are ready in milliseconds, and you can manage everything programmatically via the API.
 - You only pay for the projects that are active thanks to scale-to-zero.
 
