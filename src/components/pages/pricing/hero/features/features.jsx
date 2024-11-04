@@ -78,7 +78,7 @@ Feature.propTypes = {
   index: PropTypes.number,
 };
 
-const FeaturesList = ({ title, features, type, highlighted, hasToggler }) => {
+const Features = ({ title, features, type, highlighted, hasToggler }) => {
   const hasHiddenItems = features.length > 3;
   const [isOpen, setIsOpen] = useState(!hasHiddenItems);
   const [height, setHeight] = useState(70);
@@ -115,7 +115,10 @@ const FeaturesList = ({ title, features, type, highlighted, hasToggler }) => {
       {hasToggler && !isOpen && (
         <button
           type="button"
-          className="border-b pb-0.5 transition-colors duration-200 hover:border-green-45 hover:text-green-45"
+          className={clsx(
+            'border-b pb-0.5 transition-colors duration-200 hover:border-green-45 hover:text-green-45',
+            highlighted ? 'border-white' : 'border-gray-new-80'
+          )}
           onClick={handleOpen}
         >
           And more...
@@ -125,7 +128,7 @@ const FeaturesList = ({ title, features, type, highlighted, hasToggler }) => {
   );
 };
 
-FeaturesList.propTypes = {
+Features.propTypes = {
   title: PropTypes.string,
   features: PropTypes.arrayOf(Feature.propTypes).isRequired,
   type: PropTypes.string.isRequired,
@@ -133,4 +136,4 @@ FeaturesList.propTypes = {
   hasToggler: PropTypes.bool,
 };
 
-export default FeaturesList;
+export default Features;

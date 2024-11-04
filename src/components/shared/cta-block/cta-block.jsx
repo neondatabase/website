@@ -10,18 +10,47 @@ import blueGlow from './images/blue-glow.png';
 import greenGlowMobile from './images/green-glow-mobile.png';
 import greenGlow from './images/green-glow.png';
 
-const CtaBlock = ({ className, title, description, buttonText, buttonUrl, hasDecor = true }) => (
+const sizeClassNames = {
+  sm: {
+    block: 'px-6 py-5 sm:px-5 mt-8 xl:mt-5',
+    heading: 'text-xl sm:text-lg leading-none tracking-extra-tight',
+    description: 'leading-snug tracking-extra-tight',
+  },
+  md: {
+    block: 'px-7 py-6 lg:pr-10 sm:p-6 mt-10 xl:mt-9 lg:mt-8 sm:mt-6',
+    heading: 'text-2xl sm:text-xl leading-dense tracking-tighter',
+    description: 'text-14 leading-tight tracking-tight',
+  },
+};
+
+const CtaBlock = ({
+  className,
+  title,
+  description,
+  buttonText,
+  buttonUrl,
+  size = 'md',
+  hasDecor = true,
+}) => (
   <div
     className={clsx(
-      'not-prose relative mt-10 w-full overflow-hidden rounded-lg bg-gray-new-8 px-7 py-6 xl:mt-9 lg:mt-8 lg:pr-10 sm:mt-6 sm:p-6',
+      'not-prose relative w-full overflow-hidden rounded-lg',
+      sizeClassNames[size].block,
+      hasDecor ? 'bg-gray-new-8' : 'bg-black-new',
       className
     )}
   >
     <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
       <div className="max-w-sm sm:text-center">
-        <h3 className="text-2xl font-medium leading-dense tracking-tighter sm:text-xl">{title}</h3>
+        <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
         {description && (
-          <p className="text-14 mt-2.5 leading-tight tracking-tight text-gray-new-70">
+          <p
+            className={clsx(
+              'mt-2.5',
+              sizeClassNames[size].description,
+              hasDecor ? 'text-gray-new-70' : 'text-gray-new-60'
+            )}
+          >
             {description}
           </p>
         )}
@@ -75,6 +104,7 @@ CtaBlock.propTypes = {
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['sm', 'md']),
   hasDecor: PropTypes.bool,
 };
 

@@ -12,7 +12,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
 import plans from './data/plans.json';
-import FeaturesList from './features';
+import Features from './features';
 
 const scaleCardBorderVariants = {
   from: {
@@ -32,18 +32,18 @@ const scaleCardBorderVariants = {
 
 const Hero = () => (
   <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
-    <Container className="flex flex-col items-center xl:max-w-[708px]" size="1344">
+    <Container className="flex flex-col items-center" size="1344">
       <Heading
-        className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
+        className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
         tag="h1"
         size="lg"
       >
         <span>Neon Pricing</span>
       </Heading>
-      <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+      <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
         Pricing plans that grow with you. From prototype to Enterprise.
       </p>
-      <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-11 lg:w-full lg:max-w-[704px] md:mt-9">
+      <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
         <h2 className="sr-only">Neon pricing plans</h2>
         <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
           {plans.map(
@@ -80,7 +80,7 @@ const Hero = () => (
                   {headerLink && (
                     <a
                       className={clsx(
-                        'border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-tighter text-gray-new-50',
+                        'border-b border-[#85888E]/50 pb-0.5 text-sm font-light leading-none tracking-tighter text-gray-new-50',
                         'transition-colors duration-200 hover:border-transparent hover:text-gray-new-80'
                       )}
                       href={headerLink.url}
@@ -97,7 +97,7 @@ const Hero = () => (
                       From
                     </em>
                   )}
-                  <span className="text-[40px] font-medium leading-none tracking-tighter xl:text-[32px]">
+                  <span className="text-[40px] font-medium leading-none tracking-tighter">
                     ${price}
                   </span>{' '}
                   <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
@@ -106,7 +106,7 @@ const Hero = () => (
                 </p>
                 {highlighted ? (
                   <AnimatedButton
-                    className="mt-6 w-full !bg-green-45 !py-4 !text-base !font-semibold leading-none tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
+                    className="mt-6 w-full !bg-green-45 !py-4 !text-base !font-semibold leading-none tracking-tight group-hover:!bg-[#00ffaa] sm:max-w-none"
                     animationColor="#00e599"
                     theme="primary"
                     size="sm"
@@ -118,7 +118,7 @@ const Hero = () => (
                   </AnimatedButton>
                 ) : (
                   <Button
-                    className="mt-6 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-base !font-medium leading-none tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
+                    className="mt-6 w-full bg-gray-new-15 !py-4 !text-base !font-medium leading-none tracking-tight transition-colors duration-500 hover:bg-gray-new-30 sm:max-w-none"
                     size="sm"
                     to={button.url}
                     tag_name={button.event}
@@ -144,9 +144,9 @@ const Hero = () => (
                       )
                     : description}
                 </p>
-                <FeaturesList features={features} type={type} highlighted={highlighted} />
+                <Features features={features} type={type} highlighted={highlighted} />
                 {otherFeatures && (
-                  <FeaturesList
+                  <Features
                     title={otherFeatures.title}
                     features={otherFeatures.features}
                     type={type}
@@ -172,11 +172,12 @@ const Hero = () => (
         </ul>
       </div>
       <CtaBlock
-        className="mt-8 max-w-[656px] lg:mt-5"
+        className="max-w-[656px]"
         title="Custom Enterprise Plans"
         description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
         buttonText="Talk to Sales"
         buttonUrl={LINKS.contactSales}
+        size="sm"
         hasDecor={false}
       />
     </Container>

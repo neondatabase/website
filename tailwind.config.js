@@ -100,14 +100,6 @@ module.exports = {
         'brown-1': '#A86624',
         'brown-2': '#BA8C5E',
       },
-      pricing: {
-        black: '#0c0d0d',
-        primary: {
-          1: '#00e599',
-          3: 'rgb(0,229,153,0.4)',
-          4: 'rgba(19,236,182,0.1)',
-        },
-      },
     },
     extend: {
       fontFamily: {
