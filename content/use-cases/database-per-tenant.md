@@ -15,7 +15,7 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects—([sign up](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) for 1:1 guidance.
+In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) or [reach out to us](/contact-sales) for 1:1 guidance.
 </Admonition>
 
 <Testimonial
