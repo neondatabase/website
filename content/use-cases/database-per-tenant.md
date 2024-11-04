@@ -77,7 +77,7 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 
 If you’re building a B2B SaaS platform, a database-per-tenant design can simplify your architecture while preserving scalability. With Neon, when you place its tenant on its own project, you offer complete data privacy to your customers via instance-level isolation. This approach also makes it easy to comply with data regulations across different regions, as projects can be created in specific locations to meet local requirements.
 
-Each tenant can be scaled independently, optimizing both performance and costs while reducing operational risk. And in the event of an issue / a customer request, you can [run point-in-time recovery (PITR) instantaneously for a specific tenant, without impacting the rest of the fleet](https://neon.tech/docs/guides/branch-restore).
+Each tenant can be scaled independently, optimizing both performance and costs while reducing operational risk. And in the event of an issue or a customer request, you can [run point-in-time recovery (PITR) instantaneously for a specific tenant, without impacting the rest of the fleet](https://neon.tech/docs/guides/branch-restore).
 
 ## Neon for dev platforms: Join Vercel, Replit, Koyeb, and others
 
