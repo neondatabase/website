@@ -13,7 +13,7 @@ In case you missed the announcements, you can read them here:
 - [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace)
 - [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel)
 
-**No action is needed on your part**. The transition will be performed automatically without disruption to your applications. 
+**No action is needed on your part**. The transition will be performed automatically without disruption to your applications.
 
 We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many as possible.
 
@@ -53,9 +53,9 @@ Any Postgres databases created using Vercel Postgres before November will be aut
 
 Billing will continued to be managed through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
 
-###  Will you be automatically transitioned to a particular Neon plan?
+### Will you be automatically transitioned to a particular Neon plan?
 
-- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison. 
+- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
 
 - **Vercel Pro Plan** prices and limits wil stay the same. This ensures no surprises in pricing when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For comparison, please see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
@@ -67,13 +67,13 @@ Vercel Postgres was available with Vercel's Hobby and Pro plans. Let's take a lo
 
 The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](https://neon.tech/docs/introduction/plans#free-plan). Here are the differences that you'll need to be aware of:
 
-| Resource        | Vercel Hobby Included | Neon Free Plan Included                                  |
-|:----------------|:----------------------|:---------------------------------------------------------|
-| Compute Time    | 60 Hours              | 191.9 Hours                                              |
-| Data Transfer   | N/A                   | Up to 5 GBs per month                                    |
-| Database        | First Database        | 10 Projects, 500 databases per branch                    |
-| Storage         | First 256 MB Included | Up to 512 MB                                             |
-| Written Data    | N/A                   | Included in Storage.                                     |
+| Resource      | Vercel Hobby Included | Neon Free Plan Included               |
+| :------------ | :-------------------- | :------------------------------------ |
+| Compute Time  | 60 Hours              | 191.9 Hours                           |
+| Data Transfer | N/A                   | Up to 5 GBs per month                 |
+| Database      | First Database        | 10 Projects, 500 databases per branch |
+| Storage       | First 256 MB Included | Up to 512 MB                          |
+| Written Data  | N/A                   | Included in Storage.                  |
 
 Additional use (called "Extra usage" in Neon) for a fee is not available on either the Vercel Hobby or Neon Free plans.
 
@@ -81,23 +81,23 @@ Additional use (called "Extra usage" in Neon) for a fee is not available on eith
 
 The Vercel Pro plan is is tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](https://neon.tech/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison of what's included:
 
-| Resource        | Vercel Pro Included   | Neon Launch Plan Included                                  |
-|:----------------|:----------------------|:---------------------------------------------------------|
-| Compute Time    | 100 Hours             | 300 Hours                                                |
-| Data Transfer   | 256 MB                | Reasonable usage (no hard limit)                         |
-| Database        | First Database        | 1000 Projects, 500 databases per branch                  |
-| Storage         | First 256 MB          | Up to 10 GiB                                             |
-| Written Data    | 256 MB                | Included in Storage.                                     |
+| Resource      | Vercel Pro Included | Neon Launch Plan Included               |
+| :------------ | :------------------ | :-------------------------------------- |
+| Compute Time  | 100 Hours           | 300 Hours                               |
+| Data Transfer | 256 MB              | Reasonable usage (no hard limit)        |
+| Database      | First Database      | 1000 Projects, 500 databases per branch |
+| Storage       | First 256 MB        | Up to 10 GiB                            |
+| Written Data  | 256 MB              | Included in Storage.                    |
 
-Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but note that the monthly compute and storage allowance included with your plan's base fee is higher, and Neon does not charge for data transfer, additional databases, or written data.     
+Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but note that the monthly compute and storage allowance included with your plan's base fee is higher, and Neon does not charge for data transfer, additional databases, or written data.
 
-| Resource        | Vercel Pro Additional      | Neon Launch Plan Additional ("Extra") |
-|:----------------|:---------------------------|:--------------------------------------|
-| Compute Time    | $0.10 - 1 Compute Hour     | $0.16 - 1 Compute Hour                |
-| Data Transfer   | $0.10 - 1 GB               | No additional cost                   |
-| Database        | $1.00 - Per 1 Database     | No additional cost                   |
-| Storage         | $0.12 - 1 GB               | $3.50 - 2 GiB (but you start with 10 GiB included at no additional cost)|
-| Written Data    | $0.096 - 1 GB              | No additional cost                   |
+| Resource      | Vercel Pro Additional  | Neon Launch Plan Additional ("Extra")                                    |
+| :------------ | :--------------------- | :----------------------------------------------------------------------- |
+| Compute Time  | $0.10 - 1 Compute Hour | $0.16 - 1 Compute Hour                                                   |
+| Data Transfer | $0.10 - 1 GB           | No additional cost                                                       |
+| Database      | $1.00 - Per 1 Database | No additional cost                                                       |
+| Storage       | $0.12 - 1 GB           | $3.50 - 2 GiB (but you start with 10 GiB included at no additional cost) |
+| Written Data  | $0.096 - 1 GB          | No additional cost                                                       |
 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to check them out if the Launch plan does not meet your requirements.
 
@@ -111,21 +111,21 @@ Neon is working with the Vercel team to provide joint frontend cloud services fo
 
 Once the transition to Neon Postgres is complete, you will gain access to a variety of advanced Neon features that were not available in Vercel Postgres, including:
 
-- [The Neon Console](https://console.neon.tech/app/projects) &#8212; manage all your projects and databases from a dedicated console 
+- [The Neon Console](https://console.neon.tech/app/projects) &#8212; manage all your projects and databases from a dedicated console
 - [Database branching](https://neon.tech/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
-- [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings 
-- [Autosuspend](/docs/introduction/auto-suspend) &#8212; configure scale-to-zero behavior 
-- [Branch Restore](https://neon.tech/docs/guides/branch-restore) &#8212; instant point-in-time recovery  
+- [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings
+- [Autosuspend](/docs/introduction/auto-suspend) &#8212; configure scale-to-zero behavior
+- [Branch Restore](https://neon.tech/docs/guides/branch-restore) &#8212; instant point-in-time recovery
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](https://neon.tech/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line
 - [IP Allow](https://neon.tech/docs/introduction/ip-allow) &#8212; limit access to the IP addresses you trust
 - [Organization accounts](https://neon.tech/docs/manage/organizations) &#8212; manage projects and teams with a Neon org account
 - [Monitoring](https://neon.tech/docs/introduction/monitoring-page) &#8212; monitor your database form the Neon Console
-- [Protected branches](https://neon.tech/docs/guides/protected-branches) &#8212; protect your production data 
+- [Protected branches](https://neon.tech/docs/guides/protected-branches) &#8212; protect your production data
 - [Schema Diff](https://neon.tech/docs/guides/schema-diff) &#8212; compare schema changes between database branches
 - [Time Travel](https://neon.tech/docs/guides/time-travel-assist) &#8212; query your data in the past
 - [Read Replicas](https://neon.tech/docs/introduction/read-replicas) &#8212; offload read work for scale or ad hoc queries
-- [Logical Replication](https://neon.tech/docs/guides/logical-replication-guide) &#8212; replicate data to and from Neon 
+- [Logical Replication](https://neon.tech/docs/guides/logical-replication-guide) &#8212; replicate data to and from Neon
 - [The Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
 
 <Admonition type="note">
@@ -140,7 +140,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 
 ### What Postgres versions are supported?
 
-Vercel Postgres supported Postgres 15. With Neon, you'll be able to create databases with Postgres 14, 15, 16, or 17. You can find Neon's Postgres version support policy [here](https://neon.tech/docs/postgresql/postgres-version-policy). 
+Vercel Postgres supported Postgres 15. With Neon, you'll be able to create databases with Postgres 14, 15, 16, or 17. You can find Neon's Postgres version support policy [here](https://neon.tech/docs/postgresql/postgres-version-policy).
 
 ### Are the supported regions the same for both services?
 
@@ -153,6 +153,7 @@ Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/s
 ### Is Neon compatible with the same ORMs as Vercel Postgres?
 
 Yes, Neon supports any ORMs that is compatible with Vercel Postgres, including:
+
 - Drizzle
 - Keysley
 - Prisma
@@ -163,4 +164,4 @@ Yes, Neon supports any ORMs that is compatible with Vercel Postgres, including:
 
 ## More questions?
 
-There's likely questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period. 
+There's likely questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period.

@@ -20,13 +20,14 @@ To install Neon from the Vercel Marketplace:
 5. Select a Neon plan and click **Continue**. For details about Neon plans and what included, refer to our [Pricing](https://neon.tech/pricing) page.
 6. Specify a **Database Name** or accept the generated name, and click **Create**.
 7. A database created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view you database details, including:
-    - Status
-    - Plan
-    - Current Period
-    - Period Total
-    - Quickstart (shows your database connection string)
 
-    From the sidebar, you can view your Neon **Project Setting**, the **Getting Started**, and **Usage**. There's also a link to **Support**.
+   - Status
+   - Plan
+   - Current Period
+   - Period Total
+   - Quickstart (shows your database connection string)
+
+   From the sidebar, you can view your Neon **Project Setting**, the **Getting Started**, and **Usage**. There's also a link to **Support**.
 
 ## Open your Neon project in the Neon Console
 
@@ -35,8 +36,6 @@ To open Neon Project in the Neon Console:
 1. From the **Storage** tab in the Vercel Dashboard, select your Neon database.
 2. On your Neon database page, select **Open in Neon Database**.
 3. In the Neon Console, select your **Vercel: neondatabase** organization from the from the breadcrumb dropdown. You will be directed to your Organization's project page, where you can view Account Usage and projects belonging to your organization. If you've just installed, you will have a single project containing database you created earlier.
-
-
 
 ### Connecting to Neon Projects
 
@@ -75,7 +74,7 @@ When Vercel users interact with Neon, they are automatically assigned Neon accou
 
 The user who sets up the Neon database through Vercel is assigned the owner role in the new Neon organization. Subsequent users are assigned roles based on their Vercel team roles (e.g., developers will be assigned as members). Role management is done through the Vercel dashboard, and any changes will sync with Neon.
 
-*Note*: You can invite non-Vercel users to your Neon organization, but their permissions won’t synchronize with Vercel.
+_Note_: You can invite non-Vercel users to your Neon organization, but their permissions won’t synchronize with Vercel.
 
 ### Pricing
 
