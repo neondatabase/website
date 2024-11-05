@@ -13,13 +13,13 @@ In case you missed the announcements, you can read them here:
 - [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace)
 - [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel)
 
-**No action is required on your part**. The transition will happen automatically without disrupting your applications. However, transitioning to a new platform can raise many questions. In this guide, we'll try to answer as many of those questions as possible. 
+**No action is needed on your part**. The transition will be performed automatically without disruption to your applications. We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many as possible so that you have a full understanding of the process and where to begin after the transition is complete.
 
 ## About the transition
 
 ### Why is this transition happening?
 
-Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. To provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing Vercel-managed solutions, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party services, including Neon Postgres, into your Vercel projects.
+Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. To provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing Vercel-managed storage solutions, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party services, such as Neon Postgres, into your Vercel projects.
 
 While Vercel Postgres is powered by Neon, it was not able to support all of Neon's upgrades and features. By transitioning to Neon Postgres, developers will gain  full access to Neon's feature set and usage plans, providing better database experience. Vercel's new Marketplace model makes this possible.
 
@@ -29,13 +29,9 @@ The transition will begin in November. It will be a phased migration, with Verce
 
 Until then, you can continue using Vercel Postgres as usual.
 
-### Do you need to do anything for the transition?
+### Do you need to do anything before the transition?
 
-No, the transition will be automatic. Vercel will handle the migration of your Vercel Postgres stores to Neon. Once the transition is complete, you will be able to manage your databases through the Neon Console.
-
-### Will there be any downtime during the transition?
-
-No, the transition will be handled with zero downtime. You will not need to perform any action during the transition. The process is designed to be seamless, with no impact on your existing applications or infrastructure.
+No, the transition to Neon will be fully managed by Vercel. Once the transition is complete, you will be able to manage your databases through the Neon Console, with billing and certain account-level operations managed from Vercel.
 
 ### What changes will I see after the transition?
 
