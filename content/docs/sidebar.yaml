@@ -444,6 +444,8 @@
           items:
             - title: Clerk
               slug: guides/neon-authorize-clerk
+            - title: Stack Auth
+              slug: guides/neon-authorize-stack-auth
     - title: Integrations
       icon: integrations
       slug: guides/integrations

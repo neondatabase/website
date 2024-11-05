@@ -126,7 +126,7 @@ export async function insertTodo(newTodo: { newTodo: string }) {
 }
 ```
 
-This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like Drizzle are adding support for declaritive RLS, which makes the logic easier to scan and scale.
+This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
