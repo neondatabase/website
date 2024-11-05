@@ -4,7 +4,7 @@ subtitle: Learn how to invite people to collaborate on your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2024-11-01T10:14:56.346Z'
+updatedOn: '2024-11-05T20:46:38.516Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
