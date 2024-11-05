@@ -8,7 +8,7 @@ import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
 import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-import CheckIcon from 'icons/pricing/check.inline.svg';
+import checkIcon from 'icons/pricing/check.svg';
 
 import tableData from '../data/plans.json';
 
@@ -210,9 +210,19 @@ const Table = () => {
                   let cell;
                   if (typeof item[key] === 'boolean') {
                     cell = item[key] ? (
-                      <CheckIcon className="w-4" />
+                      <img
+                        src={checkIcon}
+                        width="24"
+                        height="24"
+                        alt=""
+                        loading="lazy"
+                        aria-label={`${item.feature.title} included`}
+                      />
                     ) : (
-                      <span className="inline-block h-[1.4px] w-4 rounded-full bg-gray-new-30" />
+                      <span
+                        className="inline-block h-px w-4 rounded-full bg-gray-new-30"
+                        aria-label={`${item.feature.title} not included`}
+                      />
                     );
                   } else if (typeof item[key] === 'object') {
                     const { title, info } = item[key];

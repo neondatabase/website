@@ -6,68 +6,56 @@ import { useState, useRef } from 'react';
 
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
-import AutoscaleIcon from 'icons/pricing/autoscale.inline.svg';
-import CheckIcon from 'icons/pricing/check.inline.svg';
-import ClockIcon from 'icons/pricing/clock.inline.svg';
-import ProjectsIcon from 'icons/pricing/projects.inline.svg';
-import StorageIcon from 'icons/pricing/storage.inline.svg';
 
 const icons = {
-  projects: ProjectsIcon,
-  storage: StorageIcon,
-  clock: ClockIcon,
-  autoscale: AutoscaleIcon,
+  projects: 'pricing-projects-icon',
+  storage: 'pricing-storage-icon',
+  clock: 'pricing-clock-icon',
+  autoscale: 'pricing-autoscale-icon',
 };
 
-const Feature = ({ icon, title, info, type, highlighted, index }) => {
-  const Icon = icons[icon];
-
-  return (
-    <li className="flex gap-x-2">
-      {Icon ? (
-        <Icon
-          className={clsx('mt-px size-3.5', highlighted ? 'text-green-45' : 'text-gray-new-70')}
-          aria-hidden
-        />
-      ) : (
-        <CheckIcon
-          className={clsx('mt-px size-3.5', highlighted ? 'text-green-45' : 'text-gray-new-70')}
-          aria-hidden
-        />
+const Feature = ({ icon, title, info, type, highlighted, index }) => (
+  <li className="flex gap-x-2">
+    <span
+      className={clsx(
+        icon ? icons[icon] : 'pricing-check-icon',
+        'mt-px size-3.5',
+        highlighted ? 'bg-green-45' : 'bg-gray-new-70'
       )}
-      <p
-        className={clsx(
-          'text-[15px] leading-none tracking-extra-tight',
-          highlighted ? 'text-white' : 'text-gray-new-80'
-        )}
-      >
-        <span className="with-link-primary">
-          {Array.isArray(title)
-            ? title.map((part, i) =>
-                typeof part === 'string' ? (
-                  part
-                ) : (
-                  <Link key={i} to={part.href} onClick={part.onClick}>
-                    {part.text}
-                  </Link>
-                )
+      aria-hidden
+    />
+    <p
+      className={clsx(
+        'text-[15px] leading-none tracking-extra-tight',
+        highlighted ? 'text-white' : 'text-gray-new-80'
+      )}
+    >
+      <span className="with-link-primary">
+        {Array.isArray(title)
+          ? title.map((part, i) =>
+              typeof part === 'string' ? (
+                part
+              ) : (
+                <Link key={i} to={part.href} onClick={part.onClick}>
+                  {part.text}
+                </Link>
               )
-            : title}
+            )
+          : title}
+      </span>
+      {info && (
+        <span className="whitespace-nowrap">
+          &nbsp;
+          <InfoIcon
+            className="relative top-0.5 ml-0.5 inline-block"
+            tooltip={info}
+            tooltipId={`${type}_tooltip_${index}`}
+          />
         </span>
-        {info && (
-          <span className="whitespace-nowrap">
-            &nbsp;
-            <InfoIcon
-              className="relative top-0.5 ml-0.5 inline-block"
-              tooltip={info}
-              tooltipId={`${type}_tooltip_${index}`}
-            />
-          </span>
-        )}
-      </p>
-    </li>
-  );
-};
+      )}
+    </p>
+  </li>
+);
 
 Feature.propTypes = {
   icon: PropTypes.oneOf(Object.keys(icons)),
