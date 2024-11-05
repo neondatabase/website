@@ -219,7 +219,7 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 
 While this feature is in its early-access phase, there are some limitations to be aware of:
 
-- **Authentication provider requirements**: Your authentication provider must provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289). Furthermore, the provider must generate a unique set of public keys for each project, and expose those keys via a unique URL for each project.
+- **Authentication provider requirements**: Your authentication provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289). Furthermore, the provider must generate a unique set of public keys for each project and expose those keys via a unique URL for each project.
 - **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
