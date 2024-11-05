@@ -9,6 +9,8 @@ Combining your serverless Neon database with [Inngest](https://www.inngest.com/?
 
 By enabling your serverless functions to react to database changes, you open the door to many use cases. From onboarding to ETL and AI workflows, the possibilities are endless.
 
+![trigger serverless functions with inngest](/docs/guides/inngest.jpg)
+
 This guide describes setting up a Neon database, configuring the Inngest integration, and connecting your Serverless functions to your Neon database with Inngest. It covers:
 
 - Creating a Neon project and enabling [Logical Replication](/docs/guides/logical-replication-guide).
