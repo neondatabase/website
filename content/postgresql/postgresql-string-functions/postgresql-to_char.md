@@ -70,7 +70,7 @@ The following table shows the valid timestamp format strings:
 | IY                       | The last digit of ISO 8601 week\-numbering year                                                     |
 | I                        | Abbreviated lowercase month name e.g., Jan, feb, etc.                                               |
 | BC, bc, AD or ad         | Era indicator without periods                                                                       |
-| B.C., b.c., A.D. ora.d.  | Era indicator with periods                                                                          |
+| B.C., b.c., A.D. or a.d. | Era indicator with periods                                                                          |
 | MONTH                    | English month name in uppercase                                                                     |
 | Month                    | Full capitalized English month name                                                                 |
 | month                    | Full lowercase English month name                                                                   |

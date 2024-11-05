@@ -6,13 +6,35 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-10-24T10:48:39.466Z'
+updatedOn: '2024-11-04T13:13:30.367Z'
 ---
 
-Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, plus a peek at some of the upcoming features we'll be taking on next.
+Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, what we delivered recently, and a peek at some of the upcoming features we'll be taking on next.
+
+## What we're working on now
+
+Here's a snapshot of what we're working on now:
+
+- **Neon in the Azure Marketplace**: We already support [creating Neon databases on Azure, starting with the East US 2 region](https://neon.tech/blog/first-azure-region-available-in-neon). Now, we’re working on support for more Azure regions and a tighter integration of Neon in the Azure Marketplace. If this sounds interesting to you, [let us know](https://neon.tech/azure-marketplace).
+- **Neon in the Vercel Marketplace**: We're working on first-party Neon integration for the Vercel Marketplace. [Read the announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
+- **Larger computes**: We are working on adding support for ever-larger compute sizes.
+- **Support for exporting metrics to more monitoring platforms**: We currently support [metrics export to Datadog](/docs/guides/datadog). We'd like to expand support to other monitoring platforms and services.
+- **Private network access**: Private and secure network access to your compute resources without traversing public networks.
+- **Archive branches**: To help minimize storage costs, we would like to add support for automatically archiving inactive branches (snapshots of your data) to cost-efficient object storage like Amazon S3 or Azure Blob Storage, depending on your chosen cloud provider.
+- **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
+- **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
+- **Data migration assistance**: We’re working on a streamlined data migration process to make it easy for users to bring their data to Neon with minimal downtime.
+
+If you have other feature ideas, [let us know](#share-your-thoughts).
 
 ## What we've just launched
 
+- **Neon Authorize**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-authorize).
+- **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](https://neon.tech/blog/first-azure-region-available-in-neon).
+- **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](https://neon.tech/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
+- **Support for Analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://mooncake.dev/blog/3).
+- **Datadog integration**: Business plan users can now export Neon metrics to Datadog. This feature is currently in Beta. [Learn more](/docs/guides/datadog).
+- **Deletion of backup branches created by restore operations**: To help minimize storage and keep your Neon project organized, we added support for deleting obsolete backup branches created by [restore](/docs/guides/branch-restore) operations. Previously, these backup branches could not be removed. [Learn more](/docs/guides/branch-restore#deleting-backup-branches).
 - **Read Replicas on the Free Plan**: Read Replicas are now available to all Neon users. [Read the announcement](https://neon.tech/blog/create-read-replicas-in-the-free-plan).
 - **ISO27110 & ISO27701 compliance**: These new certifications add to our growing list of compliance achievements. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 - **Increased limits for Neon projects**: We increased the number of projects included in all our paid plans: Launch (100 projects), Scale (1000 projects), and Business (5000 projects). More projects supports use cases such as database-per-tenant and AI agents. [Read the announcement](https://neon.tech/blog/thousands-of-neon-projects-now-included-in-your-pricing-plan).
@@ -22,26 +44,8 @@ Our development teams are focused on helping you ship faster with Postgres. This
 - **A new Business plan with more compute and storage**: This new plan provides higher storage and compute allowances (500 GiB of storage and 1,000 compute hours) in addition to all of Neon's advanced features. It also offers potential cost savings for customers requiring more storage than our Scale plan provides. To learn more, please refer to our [Pricing](https://neon.tech/pricing) page and [Plans](/docs/introduction/plans) documentation.
 - **Data migration support with inbound logical replication**: We've introduced inbound logical replication as the first step toward enabling seamless, low-downtime migrations from your current database provider to Neon. This feature allows you to use Neon as your development environment, taking advantage of developer-friendly tools like branching and our [GitHub integration](/docs/guides/neon-github-integration), even if you keep production with your existing provider. To get started, explore our guides for replicating data from AlloyDB, Aurora, CloudSQL, and RDS. See [Replicate data to Neon](/docs/guides/logical-replication-guide#replicate-data-to-neon). Inbound logical replication also supports migrating data between Neon projects, useful for version, region, or account migrations. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 - **Organizations**: Organization Accounts are now available in Beta. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
-- **Autoscaling on the Free Plan**: Users on the Free Plan are now able to try Neon's Autoscaling feature, within reasonable Free Plan limits. [Learn how](/docs/guides/autoscaling-guide).
 
 For more of the latest features and fixes, check our [Changelog](/docs/changelog), published weekly. Or watch for our Changelog email, also sent out weekly. You can also subscribe to updates using our [RSS feed](https://neon.tech/docs/changelog/rss.xml).
-
-## What we're working on now
-
-Here's a snapshot of what we're working on now:
-
-- **Neon on Azure**: If you didn't catch the post, Neon is coming to Azure. [Read more](https://neon.tech/blog/neon-is-coming-to-azure) about this big news.
-- **Neon in the Vercel Marketplace**: We're working on first-party Neon integration for the Vercel Marketplace. [Read the announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
-- **Larger computes**: We are working on adding support for ever-larger compute sizes.
-- **New authentication method:** We're working on a new authentication method for Postgres that will enable simplified application -> database connections, as well as allow for Neon to be integrated into various marketplaces.
-- **Support for exporting metrics**: We'd like to help users integrate Neon into their monitoring platforms and services with exportable metrics.
-- **Private network access**: Private and secure network access to your compute resources without traversing public networks.
-- **Better deletes**: We're adding support for deleting obsolete branches, especially after [restore](/docs/guides/branch-restore) operations.
-- **Archive branches**: A mechanism to allow offloading branches (snapshots of your data) to cost-efficient object storage for retention periods longer than a Neon project's history retention window.
-- **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
-- **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
-
-If you have other feature ideas, [let us know](#share-your-thoughts).
 
 ## What's on the horizon
 
@@ -49,7 +53,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 - **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
-- **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable logs and traces.
+- **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable Postgres logs and traces.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
 - **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability
 

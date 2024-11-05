@@ -143,7 +143,7 @@ const Table = () => {
                   isLabelsColumn,
                 'basis-[240px] last:basis-[208px] xl:basis-[19%] xl:last:basis-[160px] lg:shrink-0 lg:basis-[200px]':
                   !isLabelsColumn,
-                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[208px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-3 xl:before:w-[196px] lg:before:-left-5':
+                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[208px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-3 xl:before:w-[180px] lg:before:-left-5 lg:before:w-[196px]':
                   isHighlightedColumn,
                 'lg:basis-[220px]': i === 1,
               })}

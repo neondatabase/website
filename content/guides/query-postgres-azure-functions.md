@@ -259,6 +259,7 @@ After creating the database, make sure to copy the connection details (such as *
      database: process.env.DB_NAME,
      password: process.env.DB_PASSWORD,
      port: process.env.DB_PORT || 5432,
+     ssl: true,
    });
 
    const connectDB = async () => {
@@ -304,6 +305,7 @@ After creating the database, make sure to copy the connection details (such as *
      database: process.env.DB_NAME,
      password: process.env.DB_PASSWORD,
      port: process.env.DB_PORT || 5432,
+     ssl: true,
    });
 
    const connectDB = async () => {
@@ -337,6 +339,7 @@ After creating the database, make sure to copy the connection details (such as *
      database: process.env.DB_NAME,
      password: process.env.DB_PASSWORD,
      port: process.env.DB_PORT || 5432,
+     ssl: true,
    });
 
    const connectDB = async () => {
