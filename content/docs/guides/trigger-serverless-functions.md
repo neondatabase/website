@@ -15,6 +15,10 @@ This guide describes setting up a Neon database, configuring the Inngest integra
 - Configuring the Inngest integration on your Neon database.
 - Configure your Vercel, AWS, or Cloudflare functions to react to your Neon database changes using Inngest.
 
+The setup described in this guide is illustrated below:
+
+![trigger serverless functions with inngest](/docs/guides/inngest.jpg)
+
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up) for instructions.
