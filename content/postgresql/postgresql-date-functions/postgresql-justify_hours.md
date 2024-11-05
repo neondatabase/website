@@ -54,7 +54,7 @@ SELECT JUSTIFY_HOURS(INTERVAL '24 hours'),
 
 Output:
 
-```sql
+```text
  justify_hours | justify_hours | justify_hours
 ---------------+---------------+---------------
  1 day         | 2 days        | 3 days
@@ -73,7 +73,7 @@ SELECT JUSTIFY_HOURS(INTERVAL '25 hours'),
 
 Output:
 
-```sql
+```text
  justify_hours  |  justify_hours  |  justify_hours
 ----------------+-----------------+-----------------
  1 day 01:00:00 | 2 days 02:00:00 | 2 days 22:00:00
@@ -92,7 +92,7 @@ SELECT JUSTIFY_HOURS(INTERVAL '15 days 2 hours'),
 
 Output:
 
-```sql
+```text
    justify_days   |      justify_days      |      justify_days
 ------------------+------------------------+-------------------------
  15 days 02:00:00 | 1 mon 25 days 00:30:00 | 2 mons 15 days 00:00:45

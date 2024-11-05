@@ -72,7 +72,7 @@ ADD COLUMN phone VARCHAR(25);
 
 Second, view the `customers` table in psql:
 
-```sql
+```text
 \d customers
 ```
 
@@ -101,13 +101,13 @@ ADD COLUMN email VARCHAR (400);
 
 Second, view the structure of the `customers` table in `psql`:
 
-```sql
+```text
 \d customers
 ```
 
 Output:
 
-```sql
+```text
                                        Table "public.customers"
     Column     |          Type          | Collation | Nullable |                Default
 ---------------+------------------------+-----------+----------+---------------------------------------
@@ -138,7 +138,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | customer_name | phone | fax  | email
 ----+---------------+-------+------+-------
   4 | Apple         | null  | null | null

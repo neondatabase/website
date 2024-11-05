@@ -64,7 +64,7 @@ SELECT CURRENT_TIME(2);
 
 Output:
 
-```sql
+```text
   current_time
 ----------------
  14:44:35.03-07

@@ -43,7 +43,7 @@ To work with the binary data, we create a new class named `BlobDB`.
 
 The following `insert()` method reads data from a file specified by the `$pathToFile` parameter and inserts it into the `company_files` table.
 
-```sql
+```text
    /**
      * Insert a file into the company_files table
      * @param int $stockId

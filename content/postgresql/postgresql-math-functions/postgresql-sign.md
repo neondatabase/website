@@ -48,7 +48,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  sign | sign | sign | sign
 ------+------+------+------
    -1 |    0 |    1 | null
@@ -106,7 +106,7 @@ FROM
 
 Output:
 
-```sql
+```text
  year | sales_amount | previous_year_sales | sales_trend
 ------+--------------+---------------------+-------------
  2013 |        10000 |                null | N/A

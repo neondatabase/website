@@ -34,7 +34,7 @@ In this syntax:
 
 First, [connect to the PostgreSQL](../postgresql-getting-started/connect-to-postgresql-database) using `postgres` user via `psql`:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -53,7 +53,7 @@ CREATE ROLE steve;
 
 Fourth, connect to the PostgreSQL server using the `alex` role:
 
-```sql
+```bash
 psql -U alex
 ```
 
@@ -65,19 +65,19 @@ CREATE DATABASE scm;
 
 Sixth, quit `alex`‘s session:
 
-```sql
+```text
 \q
 ```
 
 Seven, show the `scm` database in the `postgres`‘ session:
 
-```sql
+```text
 \l scm
 ```
 
 Output:
 
-```sql
+```text
  Name | Owner | Encoding | Locale Provider |          Collate           |           Ctype            | ICU Locale | ICU Rules | Access privileges
 ------+-------+----------+-----------------+----------------------------+----------------------------+------------+-----------+-------------------
  scm  | alex  | UTF8     | libc            | English_United States.1252 | English_United States.1252 |            |           |
@@ -95,13 +95,13 @@ OWNER TO steve;
 
 Ninth, show the `scm` database again:
 
-```sql
+```text
 \l scm
 ```
 
 Output:
 
-```sql
+```text
                                                                 List of databases
  Name | Owner | Encoding | Locale Provider |          Collate           |           Ctype            | ICU Locale | ICU Rules | Access privileges
 ------+-------+----------+-----------------+----------------------------+----------------------------+------------+-----------+-------------------

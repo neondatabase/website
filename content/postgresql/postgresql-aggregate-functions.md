@@ -55,7 +55,7 @@ FROM
 
 The following is the result:
 
-```sql
+```text
  avg_replacement_cost
 ----------------------
                 19.98
@@ -82,7 +82,7 @@ WHERE
 
 Here is the result:
 
-```sql
+```text
  avg_replacement_cost
 ----------------------
                 21.09
@@ -102,7 +102,7 @@ FROM
 
 Output:
 
-```sql
+```text
  count
 -------
   1000
@@ -124,7 +124,7 @@ WHERE
 
 The result shows that there are 62 drama films:
 
-```sql
+```text
  drama_films
 -------------
           62
@@ -145,7 +145,7 @@ FROM
 
 Output:
 
-```sql
+```text
   max
 -------
  29.99
@@ -199,7 +199,7 @@ FROM
 
 Output:
 
-```sql
+```text
  min
 ------
  9.99
@@ -228,7 +228,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  film_id |         title
 ---------+------------------------
       23 | Anaconda Confessions

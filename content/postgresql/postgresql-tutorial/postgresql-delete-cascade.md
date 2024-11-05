@@ -90,7 +90,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |    name
 ----+-------------
   1 | Engineering
@@ -122,7 +122,7 @@ SELECT * FROM employees;
 
 Output:
 
-```sql
+```text
  id |      name       | department_id
 ----+-----------------+---------------
   3 | Michael Johnson |             2

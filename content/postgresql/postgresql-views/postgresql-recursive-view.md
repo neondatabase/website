@@ -83,7 +83,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  employee_id |                         subordinates
 -------------+--------------------------------------------------------------
            1 | Michael North
@@ -143,7 +143,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                   subordinates
 -------------------------------------------------
  Michael North > Sarah Berry > Carolyn Henderson

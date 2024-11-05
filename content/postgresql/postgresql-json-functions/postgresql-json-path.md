@@ -65,7 +65,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                                                                 info
 ----+--------------------------------------------------------------------------------------------------------------------------------------
   1 | {"age": 30, "city": "New York", "name": "John", "pets": [{"name": "Max", "species": "Dog"}, {"name": "Whiskers", "species": "Cat"}]}
@@ -99,7 +99,7 @@ FROM
 
 Output:
 
-```sql
+```text
  jsonb_path_query
 ------------------
  "John"
@@ -121,7 +121,7 @@ FROM
 
 Output:
 
-```sql
+```text
                               jsonb_path_query
 -----------------------------------------------------------------------------
  30
@@ -146,7 +146,7 @@ FROM
 
 Output:
 
-```sql
+```text
  jsonb_path_query
 ------------------
  "Max"
@@ -171,7 +171,7 @@ FROM
 
 Output:
 
-```sql
+```text
  jsonb_path_query
 ------------------
  "Max"
@@ -196,7 +196,7 @@ FROM
 
 Output:
 
-```sql
+```text
                   cat
 ----------------------------------------
  {"name": "Whiskers", "species": "Cat"}
@@ -235,7 +235,7 @@ FROM
 
 Output:
 
-```sql
+```text
  jsonb_path_query
 ------------------
 (0 rows)

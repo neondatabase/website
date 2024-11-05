@@ -62,7 +62,7 @@ In this example:
 
 The following illustrates the result:
 
-```sql
+```text
  translate
 -----------
  a2x5
@@ -79,7 +79,7 @@ SELECT TRANSLATE('apple,orange,banana', ',', ';');
 
 Here is the output:
 
-```sql
+```text
   translate
 ---------------------
  apple;orange;banana
@@ -98,7 +98,7 @@ SELECT TRANSLATE('a secret message',
 
 Here is the output:
 
-```sql
+```text
     translate
 ------------------
  0 o42i4p w4oo064

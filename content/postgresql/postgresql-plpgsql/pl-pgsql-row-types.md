@@ -24,7 +24,7 @@ These row variables can hold the entire row returned by the [`select into`](http
 
 Here’s the syntax for [declaring a row variable](plpgsql-variables):
 
-```pgsql
+```sql
 row_variable table_name%ROWTYPE;
 row_variable view_name%ROWTYPE;
 ```
@@ -36,7 +36,7 @@ In this syntax:
 
 To access the individual field of a row variable, you use the dot notation (`.`) as follows:
 
-```pgsql
+```sql
 row_variable.field_name
 ```
 
@@ -47,7 +47,7 @@ We’ll use the `actor` table from the [sample database](../postgresql-getting-s
 ![](/postgresqltutorial/actor.png)
 The following example retrieve the row with id 1 from the actor table and assign it to a row variable:
 
-```pgsql
+```sql
 do
 $$
 declare

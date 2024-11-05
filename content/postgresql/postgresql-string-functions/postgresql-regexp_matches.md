@@ -59,7 +59,7 @@ SELECT
 
 Output:
 
-```sql
+```text
   regexp_matches
 ------------------
  {PostgreSQL}
@@ -88,7 +88,7 @@ SELECT
 
 Output:
 
-```sql
+```text
      result
 ----------------
  PostgreSQL
@@ -113,7 +113,7 @@ FROM
 
 Output:
 
-```sql
+```text
  cat_or_dog |                                                    description
 ------------+--------------------------------------------------------------------------------------------------------------------
  {"Cat "}   | A Epic Drama of a Cat And a Explorer who must Redeem a Moose in Australia

@@ -52,7 +52,7 @@ public class Util {
 
 The following illustrates how to use the `properCase()` method of the `Util` class:
 
-```pgsql
+```sql
 public class Main {
     public static void main(String[] args) {
         var greeting = Util.properCase("hello joe");

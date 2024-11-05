@@ -62,7 +62,7 @@ Because the `position` is 2, the function returns the 2nd substring which is ‘
 
 Here is the output:
 
-```sql
+```text
  split_part
 ------------
  B

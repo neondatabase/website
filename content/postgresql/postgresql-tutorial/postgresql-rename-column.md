@@ -110,7 +110,7 @@ Note that the name column is used in the `customer_data` view.
 
 Now, you can check whether the change in the `name` column was cascaded to the `customer_data` view:
 
-```sql
+```text
 \d+ customer_data
 ```
 

@@ -34,7 +34,7 @@ Individual roles can be members of multiple group roles. This allows for flexibl
 
 Creating a group role is like creating a role by using the [`CREATE ROLE`](postgresql-roles) statement:
 
-```pgsqlsqlsql
+```sqlsqlsql
 CREATE ROLE group_role;
 ```
 
@@ -44,7 +44,7 @@ By convention, a group role does not have the `LOGIN` privilege, meaning that yo
 
 For example, the following statement creates a group role called `sales`:
 
-```pgsql
+```sql
 CREATE ROLE sales;
 ```
 
@@ -70,7 +70,7 @@ When you use the `\du` command in the `psql` tool, you will see that the group r
 
 To add a role to a group, you use the following form of the `GRANT` statement:
 
-```pgsql
+```sql
 GRANT group_role TO role;
 ```
 

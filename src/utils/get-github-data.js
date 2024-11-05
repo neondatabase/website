@@ -8,9 +8,8 @@ const getGithubStars = async () => {
       throw new Error('Error fetching GitHub stars');
     }
     return json.stargazers_count;
-  } 
-    return 9000;
-  
+  }
+  return 9000;
 };
 
 const getGithubContributors = async () => {

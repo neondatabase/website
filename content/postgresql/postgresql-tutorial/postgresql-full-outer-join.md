@@ -113,7 +113,7 @@ SELECT * FROM departments;
 
 Output:
 
-```sql
+```text
  department_id | department_name
 ---------------+-----------------
              1 | Sales
@@ -130,7 +130,7 @@ SELECT * FROM employees;
 
 Output:
 
-```sql
+```text
  employee_id |  employee_name  | department_id
 -------------+-----------------+---------------
            1 | Bette Nicholson |             1
@@ -162,7 +162,7 @@ FULL OUTER JOIN departments d
 
 Output:
 
-```sql
+```text
   employee_name  | department_name
 -----------------+-----------------
  Bette Nicholson | Sales
@@ -198,7 +198,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  employee_name | department_name
 ---------------+-----------------
  null          | Production

@@ -56,7 +56,7 @@ SELECT LN(10) result;
 
 Output:
 
-```sql
+```text
       result
 -------------------
  2.302585092994046
@@ -70,7 +70,7 @@ SELECT LN(EXP(1)) result;
 
 Output:
 
-```sql
+```text
  result
 --------
       1
@@ -88,7 +88,7 @@ SELECT LN('10') result;
 
 Output:
 
-```sql
+```text
       result
 -------------------
  2.302585092994046

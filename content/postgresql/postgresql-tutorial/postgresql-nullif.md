@@ -42,7 +42,7 @@ SELECT NULLIF (1, 1); -- return NULL
 
 Output:
 
-```sql
+```text
  nullif
 --------
    null
@@ -60,7 +60,7 @@ SELECT NULLIF (1, 0); -- return 1
 
 Output:
 
-```sql
+```text
  nullif
 --------
       1
@@ -75,7 +75,7 @@ SELECT NULLIF ('A', 'B');
 
 Output:
 
-```sql
+```text
  nullif
 --------
  A
@@ -111,7 +111,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |    title    |       excerpt       |       body       |         created_at         | updated_at
 ----+-------------+---------------------+------------------+----------------------------+------------
   1 | test post 1 | test post excerpt 1 | test post body 1 | 2024-02-01 11:28:38.779881 | null
@@ -138,7 +138,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |    title    |      coalesce
 ----+-------------+---------------------
   1 | test post 1 | test post excerpt 1
@@ -163,7 +163,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |    title    |      coalesce
 ----+-------------+---------------------
   1 | test post 1 | test post excerpt 1
@@ -205,7 +205,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name | gender
 ----+------------+-----------+--------
   1 | John       | Doe       |      1
@@ -227,7 +227,7 @@ FROM
 
 In this example, we use the [SUM function](../postgresql-aggregate-functions/postgresql-sum-function) and [CASE expression](postgresql-case) to calculate the total number of male members. Then we divide the total of male members by the total of female members to get the ratio. In this case, it returns 200%:
 
-```sql
+```text
  Male/Female ratio
 -------------------
                200

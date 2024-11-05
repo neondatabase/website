@@ -177,7 +177,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  num
 ------
     1
@@ -191,7 +191,7 @@ In this example, the `ORDER BY` clause sorts values in the `num` column of the `
 
 Note that psql displays null as an empty string by default. To make null clearer, you can execute the following command to change an empty string to another such as null:
 
-```sql
+```text
 \pset null null
 ```
 
@@ -214,7 +214,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  num
 ------
     1
@@ -237,7 +237,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  num
 ------
  null
@@ -260,7 +260,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  num
 ------
  null

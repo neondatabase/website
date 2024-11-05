@@ -48,7 +48,7 @@ SELECT UPPER('PostgreSQL');
 
 Output:
 
-```sql
+```text
    upper
 ------------
  POSTGRESQL
@@ -72,7 +72,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
     upper
 -------------
  AARON
@@ -99,7 +99,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Carole     | Barnett

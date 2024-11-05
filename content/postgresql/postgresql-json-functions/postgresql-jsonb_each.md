@@ -53,7 +53,7 @@ FROM
 
 Output:
 
-```sql
+```text
  key  |   value
 ------+------------
  age  | 30
@@ -79,7 +79,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  key  | value
 ------+--------
  age  | 30
@@ -125,7 +125,7 @@ FROM
 
 Output:
 
-```sql
+```text
         href         |  key  |         value
 ---------------------+-------+-----------------------
  https://example.com | rel   | "stylesheet"

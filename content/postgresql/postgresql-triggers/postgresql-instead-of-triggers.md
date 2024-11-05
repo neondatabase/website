@@ -26,7 +26,7 @@ To create an `INSTEAD OF` trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when a trigger is fired:
 
-```pgsqlsql
+```sqlsql
 CREATE OR REPLACE FUNCTION fn_trigger()
 RETURNS TRIGGER AS
 $$
@@ -39,7 +39,7 @@ Inside the function, you can customize the behavior for each operation including
 
 Second, create an `INSTEAD OF` trigger and bind the function to it:
 
-```pgsql
+```sql
 CREATE TRIGGER trigger_name
 INSTEAD OF INSERT OR UPDATE OR DELETE
 ON table_name
@@ -55,7 +55,7 @@ Let’s take an example of creating an `INSTEAD OF` trigger.
 
 First, [create two tables](../postgresql-tutorial/postgresql-create-table) `employees` and `salaries`:
 
-```pgsql
+```sql
 CREATE TABLE employees (
     employee_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
@@ -98,7 +98,7 @@ JOIN salaries s ON e.employee_id = s.employee_id;
 
 After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
-```pgsql
+```sql
 CREATE OR REPLACE FUNCTION update_employee_salaries()
 RETURNS TRIGGER AS
 $$
@@ -179,7 +179,7 @@ SELECT * FROM employees;
 
 Output:
 
-```sql
+```text
  employee_id |  name
 -------------+---------
            1 | Alice
@@ -194,7 +194,7 @@ SELECT * FROM salaries;
 
 Output:
 
-```sql
+```text
  employee_id | effective_date |  salary
 -------------+----------------+----------
            1 | 2024-03-01     | 60000.00
@@ -221,7 +221,7 @@ SELECT * FROM salaries;
 
 Output:
 
-```sql
+```text
  employee_id | effective_date |  salary
 -------------+----------------+----------
            1 | 2024-03-01     | 60000.00
@@ -247,7 +247,7 @@ SELECT * FROM employees;
 
 Output:
 
-```sql
+```text
  employee_id | effective_date |  salary
 -------------+----------------+----------
            1 | 2024-03-01     | 60000.00
@@ -263,7 +263,7 @@ SELECT * FROM salaries;
 
 Output:
 
-```sql
+```text
  employee_id | effective_date |  salary
 -------------+----------------+----------
            1 | 2024-03-01     | 60000.00

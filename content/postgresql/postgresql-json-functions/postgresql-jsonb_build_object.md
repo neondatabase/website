@@ -50,7 +50,7 @@ SELECT
 
 Output:
 
-```sql
+```text
              jsonb_build_object
 ---------------------------------------------
  {"title": "Academy Dinosaur", "length": 86}
@@ -72,7 +72,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
                    jsonb_build_object
 ---------------------------------------------------------
  {"title": "Muscle Bright", "length": 185}

@@ -105,7 +105,7 @@ WHERE
 
 Here is the output:
 
-```sql
+```text
                        QUERY PLAN
 ---------------------------------------------------------
  Seq Scan on people  (cost=0.00..83.88 rows=9 width=240)
@@ -137,7 +137,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                    QUERY PLAN
 --------------------------------------------------------------------------------
  Bitmap Heap Scan on people  (cost=4.42..44.07 rows=18 width=17)
@@ -165,7 +165,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                          QUERY PLAN
 --------------------------------------------------------------------------------------------
  Index Scan using idx_people_names on people  (cost=0.29..8.30 rows=1 width=17)

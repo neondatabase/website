@@ -60,13 +60,13 @@ Note that the data directory is `/var/lib/postgresql/<version>/main` by default.
 
 For example, to restart PostgreSQL 16\.x, you can use the following command:
 
-```sql
+```bash
 sudo -u postgres pg_ctl restart -D /var/lib/postgresql/16/main
 ```
 
 If you encounter the following error, the `pg_ctl` may not be in your system’s PATH:
 
-```sql
+```bash
 sudo: pg_ctl: command not found
 ```
 

@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-10-30T15:37:25.507Z'
+updatedOn: '2024-10-30T23:12:55.612Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -250,6 +250,8 @@ Explore supported Postgres extensions by category. Also see:
 ## Security
 
 <DetailIconCards>
+
+<a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
 
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 

@@ -46,7 +46,7 @@ SELECT CLOCK_TIMESTAMP();
 
 Output:
 
-```sql
+```text
         clock_timestamp
 -------------------------------
  2024-03-20 14:49:07.875891-07
@@ -119,7 +119,7 @@ SELECT time_it('SELECT pg_sleep(1)');
 
 Output:
 
-```sql
+```text
    time_it
 -------------
  1007.731000

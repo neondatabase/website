@@ -46,7 +46,7 @@ SELECT REPLACE ('ABC AA', 'A', 'Z');
 
 Output:
 
-```sql
+```text
  replace
 ---------
  ZBC ZZ

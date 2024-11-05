@@ -47,7 +47,7 @@ SELECT row_to_json(row('John',20));
 
 Output:
 
-```sql
+```text
       row_to_json
 -----------------------
  {"f1":"John","f2":20}
@@ -81,7 +81,7 @@ FROM
 
 Output:
 
-```sql
+```text
                          film
 ------------------------------------------------------
  {"title":"Academy Dinosaur","length":86}

@@ -28,7 +28,7 @@ PostgreSQL 13 or later offers a built\-in `gcd()` function that allows you to fi
 
 Here’s the syntax of the `gcd()` function:
 
-```pgsqlsql
+```sqlsql
 gcd(a, b)
 ```
 
@@ -60,7 +60,7 @@ SELECT gcd(8,12) result;
 
 Output:
 
-```sql
+```text
  result
 --------
       4
@@ -82,7 +82,7 @@ SELECT gcd(gcd(30,45), 60) result;
 
 Output:
 
-```sql
+```text
  result
 --------
      15
@@ -115,7 +115,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | value
 ----+-------
   1 |    30
@@ -224,7 +224,7 @@ $$ LANGUAGE plpgsql;
 
 The following shows how to use the user\-defined `gcd` function:
 
-```pgsql
+```sql
 SELECT gcd(8,12) result;
 ```
 

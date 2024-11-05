@@ -26,7 +26,7 @@ psql -d database -U  user -W
 
 For example, to connect to `dvdrental` database under `postgres` user, you use the following command:
 
-```sql
+```bash
 psql -d dvdrental -U postgres -W
 Password for user postgres:
 dvdrental=#
@@ -34,13 +34,13 @@ dvdrental=#
 
 If you want to connect to a database that resides on another host, you add the \-h option as follows:
 
-```sql
+```bash
 psql -h host -d database -U user -W
 ```
 
 In case you want to use SSL mode for the connection, just specify it as shown in the following command:
 
-```sql
+```bash
 psql -U user -h host "dbname=db sslmode=require"
 ```
 
@@ -48,7 +48,7 @@ psql -U user -h host "dbname=db sslmode=require"
 
 Once you are connected to a database, you can switch the connection to a new database under a user\-specified by `user`. The previous connection will be closed. If you omit the `user` parameter, the current `user` is assumed.
 
-```sql
+```text
 \c dbname username
 ```
 
@@ -72,7 +72,7 @@ To [list all databases](postgresql-show-databases) in the current PostgreSQL dat
 
 To [list all tables](postgresql-show-tables) in the current database, you use the `\dt` command:
 
-```sql
+```text
 \dt
 ```
 
@@ -82,7 +82,7 @@ Note that this command shows the only table in the currently connected database.
 
 To [describe a table](postgresql-describe-table) such as a column, type, or modifiers of columns, you use the following command:
 
-```sql
+```text
 \d table_name
 ```
 
@@ -90,7 +90,7 @@ To [describe a table](postgresql-describe-table) such as a column, type, or modi
 
 To list all [schemas](postgresql-schema) of the currently connected database, you use the `\dn` command.
 
-```sql
+```text
 \dn
 ```
 
@@ -98,7 +98,7 @@ To list all [schemas](postgresql-schema) of the currently connected database, yo
 
 To list available functions in the current database, you use the `\df` command.
 
-```sql
+```text
 \df
 ```
 
@@ -106,7 +106,7 @@ To list available functions in the current database, you use the `\df` command.
 
 To list available [views](../postgresql-views) in the current database, you use the `\dv` command.
 
-```sql
+```text
 \dv
 ```
 
@@ -114,7 +114,7 @@ To list available [views](../postgresql-views) in the current database, you use 
 
 To list all users and their assigned roles, you use `\du` command:
 
-```sql
+```text
 \du
 ```
 
@@ -128,7 +128,7 @@ SELECT version();
 
 Now, if you want to save time typing the previous command again, you can use `\g` command to execute the previous command:
 
-```sql
+```text
 \g
 ```
 
@@ -138,13 +138,13 @@ psql executes the previous command again, which is the [SELECT statement](../pos
 
 To display command history, you use the `\s` command.
 
-```sql
+```text
 \s
 ```
 
 If you want to save the command history to a file, you need to specify the file name followed the `\s` command as follows:
 
-```sql
+```text
 \s filename
 ```
 
@@ -152,7 +152,7 @@ If you want to save the command history to a file, you need to specify the file 
 
 In case you want to execute psql commands from a file, you use `\i` command as follows:
 
-```sql
+```text
 \i filename
 ```
 
@@ -160,7 +160,7 @@ In case you want to execute psql commands from a file, you use `\i` command as f
 
 To know all available psql commands, you use the `\?` command.
 
-```sql
+```text
 \?
 ```
 
@@ -168,7 +168,7 @@ To get help on specific PostgreSQL statement, you use the `\h` command.
 
 For example, if you want to know detailed information on the [ALTER TABLE](../postgresql-tutorial/postgresql-alter-table) statement, you use the following command:
 
-```sql
+```text
 \h ALTER TABLE
 ```
 
@@ -206,7 +206,7 @@ It is very handy if you can type the command in your favorite editor. To do this
 ![psql command example](/postgresqltutorial/psql-command-example.jpg)
 It is more useful when you edit a function in the editor.
 
-```sql
+```text
 \ef [function name]
 ```
 
@@ -223,7 +223,7 @@ psql supports some types of output format and allows you to customize how the ou
 
 To quit psql, you use `\q` command and press `Enter` to exit psql.
 
-```sql
+```text
 \q
 ```
 

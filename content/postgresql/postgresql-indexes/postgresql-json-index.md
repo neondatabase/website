@@ -144,7 +144,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name  |    phone
 ------------+------------+-------------
  John       | Farnsworth | 51917807050
@@ -167,7 +167,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                                QUERY PLAN
 ---------------------------------------------------------------------------------------------------------
  Seq Scan on customer_json  (cost=0.00..31.50 rows=1 width=96) (actual time=0.063..0.118 rows=1 loops=1)
@@ -208,7 +208,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                                          QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------------
  Bitmap Heap Scan on customer_json  (cost=21.51..25.53 rows=1 width=96) (actual time=0.024..0.024 rows=1 loops=1)
@@ -257,7 +257,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                                          QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------------
  Bitmap Heap Scan on customer_json  (cost=12.82..16.84 rows=1 width=96) (actual time=0.014..0.015 rows=1 loops=1)
@@ -282,7 +282,7 @@ WHERE data->>'first_name' = 'John';
 
 Output:
 
-```sql
+```text
                                                 QUERY PLAN
 ----------------------------------------------------------------------------------------------------------
  Seq Scan on customer_json  (cost=0.00..32.98 rows=3 width=275) (actual time=0.161..0.284 rows=1 loops=1)
@@ -327,7 +327,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                                          QUERY PLAN
 ----------------------------------------------------------------------------------------------------------------------------
  Bitmap Heap Scan on customer_json  (cost=8.58..23.72 rows=6 width=96) (actual time=0.031..0.032 rows=1 loops=1)

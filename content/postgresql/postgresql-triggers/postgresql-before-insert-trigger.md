@@ -24,7 +24,7 @@ A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a tabl
 
 First, define a trigger function that will execute before the `INSERT` event occurs:
 
-```pgsqlsql
+```sqlsql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -42,7 +42,7 @@ At the end of the function, you need to place the `RETURN NEW` statement
 
 Second, create a `BEFORE INSERT` trigger and associate a trigger function with it:
 
-```pgsql
+```sql
 CREATE TRIGGER trigger_name
 BEFORE INSERT
 ON table_name
@@ -117,7 +117,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  product_id | quantity
 ------------+----------
           1 |      100
@@ -132,7 +132,7 @@ SELECT * FROM inventory_stat;
 
 Output:
 
-```sql
+```text
  total_qty
 -----------
        100
@@ -149,7 +149,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  product_id | quantity
 ------------+----------
           2 |      200
@@ -158,7 +158,7 @@ Output:
 
 Eighth, retrieve the data from the `inventory_stat` table:
 
-```sql
+```text
  total_qty
 -----------
        300

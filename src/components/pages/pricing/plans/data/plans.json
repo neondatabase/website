@@ -167,16 +167,6 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Region Availability"
-      },
-      "free": "<a href='/docs/introduction/regions'>All</a>",
-      "launch": "<a href='/docs/introduction/regions'>All</a>",
-      "scale": "<a href='/docs/introduction/regions'>All</a>",
-      "business": "<a href='/docs/introduction/regions'>All</a>"
-    },
-    {
-      "rows": "1",
-      "feature": {
         "title": "Max Concurrent Connections"
       },
       "free": "10,000",
@@ -224,12 +214,43 @@
     {
       "rows": "1",
       "feature": {
+        "title": "Private Link"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "IP Allow Rules"
       },
       "free": false,
       "launch": false,
       "scale": false,
       "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Branch Protection",
+        "subtitle": "Restrict access & actions"
+      },
+      "free": false,
+      "launch": "Up to 2 branches",
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Point-in-time Restore"
+      },
+      "free": "Up to 24 hours",
+      "launch": "Up to 7 days",
+      "scale": "Up to 14 days",
+      "business": "Up to 30 days"
     },
     {
       "rows": "1",
@@ -272,7 +293,17 @@
       "business": "99.95%"
     },
     {
-      "feature": "Additional Features"
+      "feature": "Plan-Specific"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Data Transfer"
+      },
+      "free": "5 GB /month",
+      "launch": true,
+      "scale": true,
+      "business": true
     },
     {
       "rows": "1",
@@ -287,49 +318,8 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Branch Protection",
-        "subtitle": "Restrict access & actions"
-      },
-      "free": false,
-      "launch": "Up to 2 branches",
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Point-in-time Restore"
-      },
-      "free": "Up to 24 hours",
-      "launch": "Up to 7 days",
-      "scale": "Up to 14 days",
-      "business": "Up to 30 days"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Private Link"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Neon Authorize",
-        "subtitle": "Row-level security"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Monitoring"
+        "title": "Monitoring",
+        "subtitle": "In-console"
       },
       "free": "Up to 24 hours",
       "launch": "Up to 7 days",
@@ -347,9 +337,66 @@
       "business": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "Time Travel Connections"
+        "title": "Custom Domain Proxy"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Solutions Architect",
+        "subtitle": "Personalized advice"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Migration Assistance",
+        "subtitle": "With waived migration fees"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Technical Support"
+      },
+      "free": "Community Support",
+      "launch": "Standard Support",
+      "scale": "Standard Support",
+      "business": "Priority Support"
+    },
+    {
+      "feature": "All plans"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "High Availability",
+        "subtitle": "<a href='/docs/introduction/high-availability' class='underline'>Our approach</a>"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Neon Authorize",
+        "subtitle": "Row-level security"
       },
       "free": true,
       "launch": true,
@@ -369,7 +416,17 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Web Console"
+        "title": "Time Travel Connections"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Console UI"
       },
       "free": true,
       "launch": true,
@@ -389,83 +446,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Management API"
+        "title": "API"
       },
       "free": true,
       "launch": true,
       "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Usage Limits via API",
-        "subtitle": "For DB-per-tenant architectures"
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Project Sharing"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Data Transfer"
-      },
-      "free": "5 GB /month",
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Custom Domain Proxy"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Technical Support"
-      },
-      "free": "Community Support",
-      "launch": "Standard Support",
-      "scale": "Standard Support",
-      "business": "Priority Support"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Migration Assistance",
-        "subtitle": "With waived migration fees"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Solutions Architect"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
       "business": true
     }
   ]

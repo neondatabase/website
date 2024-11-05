@@ -52,7 +52,7 @@ SELECT
 
 Output:
 
-```sql
+```text
               now              | 3 hours 20 minutes ago of last year
 -------------------------------+-------------------------------------
  2024-01-31 21:34:52.242914-05 | 2023-01-31 18:14:52.242914-05
@@ -201,7 +201,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  to_char
 ----------
  17:20:05
@@ -231,7 +231,7 @@ SELECT
 
 In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
-```sql
+```text
  date_part
 -----------
         21
@@ -248,7 +248,7 @@ SELECT
     justify_hours(INTERVAL '24 hours');
 ```
 
-```sql
+```text
  justify_days | justify_hours
 --------------+---------------
  1 mon        | 1 day
@@ -262,7 +262,7 @@ SELECT
     justify_interval(interval '1 year -1 hour');
 ```
 
-```sql
+```text
      justify_interval
 --------------------------
  11 mons 29 days 23:00:00
@@ -293,7 +293,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | event_name | duration
 ----+------------+----------
   1 | pgConf     | PT1H30M
@@ -318,7 +318,7 @@ FROM event;
 
 Output:
 
-```sql
+```text
  event_name | duration | days | hours | minutes
 ------------+----------+------+-------+---------
  pgConf     | PT1H30M  |    0 |     1 |      30
@@ -336,7 +336,7 @@ WHERE duration > INTERVAL '1 day';
 
 Output:
 
-```sql
+```text
  id | event_name | duration
 ----+------------+----------
   2 | pgDAY      | P2DT5H
@@ -354,7 +354,7 @@ FROM event
 
 Output:
 
-```sql
+```text
  total_duration
 ----------------
  P2DT6H30M

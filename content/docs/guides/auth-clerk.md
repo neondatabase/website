@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2024-10-29T00:27:11.734Z'
+updatedOn: '2024-11-02T14:20:11.974Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
@@ -82,12 +82,12 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Create a Clerk application
 
-1. Log in to your Clerk account and navigate to the [Dashboard](https://dashboard.clerk.dev/). From the left sidebar, select `Create Application` to create a new app.
+1. Log in to the [Clerk Dashboard](https://dashboard.clerk.com/). Select `Create Application` to create a new app.
 2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `GitHub` as allowed sign-in methods.
 
 ### Retrieve your API keys
 
-From the sidebar, click on **Developers > API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
+From the `Configure` tab, click on **API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
 
 ```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=**************
@@ -184,17 +184,17 @@ all the app routes are protected by Clerk's authentication:
 ```typescript
 /// middleware.ts
 
-import { authMiddleware } from '@clerk/nextjs';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default authMiddleware({
-  // Routes that should be accessible without signing in can be defined as
-  // strings in this array, e.g, your home page, or a sign in page.
-  publicRoutes: [],
-});
+export default clerkMiddleware();
 
 export const config = {
-  // Protects all routes - https://clerk.com/docs/references/nextjs/auth-middleware
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/'],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 };
 ```
 

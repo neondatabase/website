@@ -89,7 +89,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  last_name | first_name
 -----------+------------
  Rice      | Jamie
@@ -114,7 +114,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  last_name | first_name
 -----------+------------
  Rice      | Jamie
@@ -138,7 +138,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Laura      | Rodriguez
@@ -164,7 +164,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Ann        | Evans
@@ -191,7 +191,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  first_name | last_name
 ------------+-----------
  Anna       | Hill

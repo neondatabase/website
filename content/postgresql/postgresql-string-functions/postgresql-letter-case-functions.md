@@ -48,7 +48,7 @@ SELECT INITCAP('hello john');
 
 Output:
 
-```sql
+```text
   initcap
 ------------
  Hello John
@@ -79,7 +79,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                title
 ----+-------------------------------------
   1 | getting started with postgresql

@@ -85,7 +85,7 @@ SELECT * FROM most_popular_films;
 
 The contents of the `top_rated_films` table:
 
-```sql
+```text
           title           | release_year
 --------------------------+--------------
  The Shawshank Redemption |         1994
@@ -97,7 +97,7 @@ The contents of the `top_rated_films` table:
 
 The contents of the `most_popular_films` table:
 
-```sql
+```text
        title        | release_year
 --------------------+--------------
  An American Pickle |         2020
@@ -123,7 +123,7 @@ SELECT * FROM most_popular_films;
 
 Output:
 
-```sql
+```text
           title           | release_year
 --------------------------+--------------
  The Shawshank Redemption |         1994
@@ -144,7 +144,7 @@ ORDER BY title;
 
 Output:
 
-```sql
+```text
           title           | release_year
 --------------------------+--------------
  12 Angry Men             |         1957

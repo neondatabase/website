@@ -60,7 +60,7 @@ CREATE TABLE vendors (
 
 Second, describe the `vendors` table using the `\d` command in `psql`:
 
-```sql
+```text
 \d vendors
 ```
 
@@ -85,7 +85,7 @@ RENAME TO suppliers;
 
 Finally, describe the `suppliers` table:
 
-```sql
+```text
                                 Table "public.suppliers"
  Column |       Type        | Collation | Nullable |               Default
 --------+-------------------+-----------+----------+-------------------------------------

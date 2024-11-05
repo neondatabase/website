@@ -2,7 +2,7 @@
 title: The future for Neon Authorize
 subtitle: Our vision for what comes next
 enableTableOfContents: true
-updatedOn: '2024-10-30T13:10:34.508Z'
+updatedOn: '2024-11-01T12:42:55.025Z'
 ---
 
 [Neon Authorize](/docs/guides/neon-authorize) is an exciting feature, and we want to build more capabilities on top of it.
@@ -13,9 +13,17 @@ Here are some ideas of things we could build next — in no particular order (un
 
 We want Neon Authorize to work over any type of connection: TCP, HTTP, or WebSockets. This is probably our highest priority. Accepting JWTs over TCP (in the password field for the Postgres role) would mean that any Postgres SDK in any programming language could support Neon Authorize.
 
+## Local development experience
+
+We'd like to offer a very easy experience for developers to use Neon Authorize in their local machines without an Internet connection.
+
 ## Custom roles
 
 We aim to introduce custom roles for Neon Authorize, in addition to the "authenticated" and "anonymous" roles we have now. We're also exploring the idea of adding "Neon-managed" roles, which would be managed by our platform and included by default in every branch and read replica.
+
+## Automatic installation of `pg_session_jwt` and set up of role grants
+
+The `pg_session_jwt` extension is required for Neon Authorize to work. We're exploring the idea of automatically installing the extension and setting up the role grants for the `authenticated` and `anonymous` roles.
 
 ## JWT audience checks
 

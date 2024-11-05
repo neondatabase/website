@@ -54,7 +54,7 @@ LIMIT 5;
 
 Output:
 
-```sql
+```text
       title
 ------------------
  Academy Dinosaur
@@ -111,7 +111,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | first_name  | amount |        payment_date
 -------------+-------------+--------+----------------------------
           94 | Norma       |   4.99 | 2007-05-14 13:44:29.996577
