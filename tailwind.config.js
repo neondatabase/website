@@ -142,7 +142,7 @@ module.exports = {
         'subscribe-sm':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0) 100%);',
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':

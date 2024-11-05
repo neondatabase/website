@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 
-import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
@@ -104,28 +103,19 @@ const Hero = () => (
                     /month
                   </span>
                 </p>
-                {highlighted ? (
-                  <AnimatedButton
-                    className="mt-6 w-full !bg-green-45 !py-4 !text-base !font-semibold leading-none tracking-tight group-hover:!bg-[#00ffaa] sm:max-w-none"
-                    animationColor="#00e599"
-                    theme="primary"
-                    size="sm"
-                    to={button.url}
-                    tag_name={button.event}
-                    isAnimated
-                  >
-                    {button.text}
-                  </AnimatedButton>
-                ) : (
-                  <Button
-                    className="mt-6 w-full bg-gray-new-15 !py-4 !text-base !font-medium leading-none tracking-tight transition-colors duration-500 hover:bg-gray-new-30 sm:max-w-none"
-                    size="sm"
-                    to={button.url}
-                    tag_name={button.event}
-                  >
-                    {button.text}
-                  </Button>
-                )}
+                <Button
+                  className={clsx(
+                    'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                    highlighted
+                      ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
+                      : 'bg-gray-new-15 hover:bg-gray-new-30'
+                  )}
+                  size="sm"
+                  to={button.url}
+                  tag_name={button.event}
+                >
+                  {button.text}
+                </Button>
                 <p
                   className={clsx(
                     'mt-5 leading-snug tracking-extra-tight text-gray-new-60',
@@ -157,7 +147,7 @@ const Hero = () => (
                 {highlighted && (
                   <LazyMotion features={domAnimation}>
                     <m.span
-                      className="pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45 transition-colors duration-300 md:!opacity-100"
+                      className="pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45/70 md:!opacity-100"
                       initial="from"
                       exit="exit"
                       variants={scaleCardBorderVariants}

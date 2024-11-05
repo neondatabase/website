@@ -33,6 +33,7 @@ const PricingPage = () => (
     <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
     <Faq />
     <CTA
+      className="sm:pt-[116px]' pb-[350px] pt-[445px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px]"
       title="Still have a question?"
       description="Complete the form below to get in touch with our Sales team."
       buttonText="Talk to Sales"

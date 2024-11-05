@@ -1,8 +1,9 @@
 'use client';
 
 import clsx from 'clsx';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
@@ -12,6 +13,15 @@ const icons = {
   storage: 'pricing-storage-icon',
   clock: 'pricing-clock-icon',
   autoscale: 'pricing-autoscale-icon',
+};
+
+const variantsAnimation = {
+  open: {
+    height: 'auto',
+  },
+  closed: {
+    height: 70,
+  },
 };
 
 const Feature = ({ icon, title, info, type, highlighted, index }) => (
@@ -69,12 +79,9 @@ Feature.propTypes = {
 const Features = ({ title, features, type, highlighted, hasToggler }) => {
   const hasHiddenItems = features.length > 3;
   const [isOpen, setIsOpen] = useState(!hasHiddenItems);
-  const [height, setHeight] = useState(70);
-  const listRef = useRef(null);
 
   const handleOpen = () => {
     setIsOpen(true);
-    setHeight(listRef.current.scrollHeight);
   };
 
   return (
@@ -88,24 +95,25 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
       {title && (
         <p className="text-[15px] font-medium leading-none tracking-extra-tight">{title}</p>
       )}
-      <ul
-        className={clsx(
-          'space-y-3',
-          hasToggler && 'overflow-hidden transition-[height] duration-500'
-        )}
-        style={{ height: hasToggler && `${height}px` }}
-        ref={listRef}
-      >
-        {features.map((feature, index) => (
-          <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
-        ))}
-      </ul>
+      <LazyMotion features={domAnimation}>
+        <m.ul
+          initial={hasToggler && 'closed'}
+          animate={hasToggler && !isOpen ? 'closed' : 'open'}
+          variants={variantsAnimation}
+          transition={{ duration: 0.5 }}
+          className={clsx('space-y-3', hasToggler && 'overflow-hidden')}
+        >
+          {features.map((feature, index) => (
+            <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
+          ))}
+        </m.ul>
+      </LazyMotion>
       {hasToggler && !isOpen && (
         <button
           type="button"
           className={clsx(
-            'border-b pb-0.5 transition-colors duration-200 hover:border-green-45 hover:text-green-45',
-            highlighted ? 'border-white' : 'border-gray-new-80'
+            'border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45',
+            highlighted ? 'border-white/50' : 'border-gray-new-80/50'
           )}
           onClick={handleOpen}
         >
