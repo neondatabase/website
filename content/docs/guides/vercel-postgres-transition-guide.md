@@ -13,31 +13,31 @@ In case you missed the announcements, you can read them here:
 - [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace)
 - [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel)
 
-**No action is needed on your part**. The transition will be performed automatically without disruption to your applications. We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many as possible so that you have a full understanding of the process and where to begin after the transition is complete.
+**No action is needed on your part**. The transition will be performed automatically without disruption to your applications. 
+
+We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many as possible.
 
 ## About the transition
 
 ### Why is this transition happening?
 
-Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. To provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing Vercel-managed storage solutions, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party services, such as Neon Postgres, into your Vercel projects.
+Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. Now, in order to provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing a Vercel-branded storage, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party storage services, such as Neon Postgres, into your Vercel projects.
 
-While Vercel Postgres is powered by Neon, it was not able to support all of Neon's upgrades and features. By transitioning to Neon Postgres, developers will gain  full access to Neon's feature set and usage plans, providing better database experience. Vercel's new Marketplace model makes this possible.
+While Vercel Postgres was powered by Neon, it was not able to support all of Neon's regular updates and features. By transitioning to Neon Postgres, you, as Vercel user, will gain access to Neon's full feature set and usage plans, providing you with a much better database experience. Vercel's new marketplace model makes this possible.
 
 ### When exactly will the transition happen?
 
-The transition will begin in November. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon without any downtime.
+The transition will begin in November. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon without any downtime. Stay tuned for updates from Vercel about exactly when this will happen for your account.
 
 Until then, you can continue using Vercel Postgres as usual.
 
 ### Do you need to do anything before the transition?
 
-No, the transition to Neon will be fully managed by Vercel. Once the transition is complete, you will be able to manage your databases through the Neon Console, with billing and certain account-level operations managed from Vercel.
+No, the transition to Neon will be fully managed by Vercel. There is nothing you need to do in preparation for it.
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases sing the Neon integration in the Vercel Marketplace, which will be available starting in November.
-
-Stay tuned for communication about the transition and when you can start accessing your database via the Neon Console and using Neon's new Vercel Marketplace integration. The integration will be available in November.
+After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases using the Neon integration in the Vercel Marketplace, which will be available starting in November.
 
 ### Can I still create new databases during the transition?
 
@@ -51,13 +51,13 @@ Any Postgres databases created using Vercel Postgres before November will be aut
 
 ### How will billing be affected?
 
-Billing will be handled through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
-
-Pricing and limits will match what you would get if you were using Neon directly instead of through the Vercel Marketplace. You will have access to all of Neon's pricing options and plans.
+Billing will continued to be managed through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
 
 ###  Will you be automatically transitioned to a particular Neon plan?
 
-Vercel Hobby Plan database will be migrated to the Neon Free Plan. Vercel Pro database will be migrated to the Neon Launch plan. However, Vercel pricing for the Pro Plan ($20 per month), will still apply. This ensures no surprises in pricing during the transition.
+- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison. 
+
+- **Vercel Pro Plan** prices and limits wil stay the same. This ensures no surprises in pricing when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For comparison, please see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
 ### How do Vercel Postgres plans compare to Neon plans?
 
@@ -89,7 +89,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 | Storage         | First 256 MB          | Up to 10 GiB                                             |
 | Written Data    | 256 MB                | Included in Storage.                                     |
 
-Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but the amount of compute and storage included with your plan is munch higher, and Neon does not charge for data transfer additional databases, or written data.     
+Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but note that the monthly compute and storage allowance included with your plan's base fee is higher, and Neon does not charge for data transfer, additional databases, or written data.     
 
 | Resource        | Vercel Pro Additional      | Neon Launch Plan Additional ("Extra") |
 |:----------------|:---------------------------|:--------------------------------------|
@@ -103,7 +103,7 @@ Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/do
 
 ### What about Enterprise customers?
 
-Neon is working with the Vercel team to provide joint frontend cloud services for Enterprise customers. This will simplify the adoption and procurement process through the Vercel Marketplace. Stay tuned for more information on this. If you want to speak to us about an Enterprise-level plan, you can [get in touch with our sales team](/contact-sales).
+Neon is working with the Vercel team to provide joint frontend cloud services for Enterprise customers. This will simplify the adoption and procurement process through the Vercel Marketplace. Stay tuned for more information. If you want to speak to us about an Enterprise-level Neon plan, you can [get in touch with our sales team](/contact-sales).
 
 ## Platform questions
 
@@ -111,7 +111,7 @@ Neon is working with the Vercel team to provide joint frontend cloud services fo
 
 Once the transition to Neon Postgres is complete, you will gain access to a variety of advanced Neon features that were not available in Vercel Postgres, including:
 
-- [The Neon Console](https://console.neon.tech/app/projects) &#8212; Manage all your projects and databases from a dedicated console 
+- [The Neon Console](https://console.neon.tech/app/projects) &#8212; manage all your projects and databases from a dedicated console 
 - [Database branching](https://neon.tech/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings 
 - [Autosuspend](/docs/introduction/auto-suspend) &#8212; configure scale-to-zero behavior 
@@ -126,33 +126,36 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [Time Travel](https://neon.tech/docs/guides/time-travel-assist) &#8212; query your data in the past
 - [Read Replicas](https://neon.tech/docs/introduction/read-replicas) &#8212; offload read work for scale or ad hoc queries
 - [Logical Replication](https://neon.tech/docs/guides/logical-replication-guide) &#8212; replicate data to and from Neon 
-- [The Neon Vercel Integration](/docs/guides/vercel) &#8212; automatically create a database branch for each preview deployment
 - [The Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
+
+<Admonition type="note">
+[The Neon Vercel Integration](/docs/guides/vercel), which automatically creates a database branch for each preview deployment, is currently only available to direct customers of Neon. To use this integration, you would have to sign up for a Neon account directly rather than through the Vercel Marketplace. 
+</Admonition>
+
+### What Vercel Postgres limitations are lifted by the transitions to Neon?
+
+- **CLI support**. The [Vercel CLI](https://vercel.com/docs/cli) and the [Vercel Terraform Provider](https://vercel.com/guides/integrating-terraform-with-vercel) did not support Vercel Postgres. With Neon Postgres, you have access to a fully featured [Neon CLI](https://neon.tech/docs/reference/neon-cli) and [community-maintained Terraform providers](https://neon.tech/docs/reference/terraform).
+- **Larger computes**. On Vercel, databases on Hobby plans are limited to 0.25 logical CPUs. The Neon Free plan supports computes up to 2 vCPUs and [Autoscaling](/docs/introduction/autoscaling).
+- **Postgres roles**. On Vercel, you were limited to a single Postgres database access role. There is no such database access role limit on Neon.
 
 ### What Postgres versions are supported?
 
 Vercel Postgres supported Postgres 15. With Neon, you'll be able to create databases with Postgres 14, 15, 16, or 17. You can find Neon's Postgres version support policy [here](https://neon.tech/docs/postgresql/postgres-version-policy). 
 
-### Will the Vercel Postgres SDK continue to work?
-
-Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/sdk) (built on the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver)) will continue to be supported. No changes are required to your applications. The SDK will work seamlessly with Neon Postgres.
-
-### Is Neon compatible with the same ORMs as Vercel Postgres?
-
-Yes, Neon supports all ORMs that are compatible with Vercel Postgres, including these:
-- Drizzle
-- Keysley
-- Prisma
-
-### What Vercel Postgres limitations are lifted by the transitions to Neon?
-
-- **CLI support**. The Vercel CLI and the [Vercel Terraform Provider](https://vercel.com/guides/integrating-terraform-with-vercel) did not support Vercel Postgres. With Neon Postgres, you have access to a fully featured [Neon CLI](https://neon.tech/docs/reference/neon-cli) and [community-maintained Terraform providers](https://neon.tech/docs/reference/terraform).
-- **Larger computes**. On Vercel, databases on Hobby plans are limited to 0.25 logical CPUs. The Neon Free plan supports computes up to 2 vCPUs and Autoscaling. A compute hour limit of 191.9 hours per month applies.
-- **Postgres roles**. On Vercel, you were limited to a single Postgres database access role. There is no such limit on Neon.
-
 ### Are the supported regions the same for both services?
 
 Yes, all regions supported by Vercel Postgres are also supported by Neon Postgres.
+
+### Will the Vercel Postgres SDK continue to work?
+
+Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/sdk) (a wrapper around the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver)) will continue to be supported. No changes are required to your applications. The SDK will continue to work with Neon Postgres for the forseeable future, although there is no plan for Neon to maintain the Vercel Postgres SDK. If you're interested in migrating from the Vercel SDK, please refer to our Vercel SDK to Neon serverless driver migration guide](#tbd).
+
+### Is Neon compatible with the same ORMs as Vercel Postgres?
+
+Yes, Neon supports any ORMs that is compatible with Vercel Postgres, including:
+- Drizzle
+- Keysley
+- Prisma
 
 ### What will happen to Vercel Postgres templates?
 
@@ -160,4 +163,4 @@ Yes, all regions supported by Vercel Postgres are also supported by Neon Postgre
 
 ## More questions?
 
-There's likely to be questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel ##vercel-postgres-transition, which we will be monitoring leading up to and through the November transition period. 
+There's likely questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period. 

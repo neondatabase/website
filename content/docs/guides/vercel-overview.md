@@ -14,7 +14,7 @@ If you're a Vercel customer and want to install the native Neon Postgres integra
 
 <DetailIconCards>
 
-<a href="/docs/guides/vercel-marketplace" description="Learn how to install Neon from the Vercel Marketplace" icon="vercel">Install Neon Postgres from the Vercel Marketplace</a>
+<a href="/docs/guides/vercel-marketplace" description="Learn how to install Neon from the Vercel Marketplace" icon="check">Install Neon Postgres from the Vercel Marketplace</a>
 
 </DetailIconCards>
 
@@ -24,7 +24,7 @@ If you're a Neon customer, you can install the Neon Postgres Previews integratio
 
 <DetailIconCards>
 
-<a href="(/docs/guides/vercel" description="Learn how to setup the Neon Vercel Postgres Preview Integration for a database branch with every deployment preview" icon="vercel">Neon Postgres Previews Integration</a>
+<a href="(/docs/guides/vercel" description="Learn how to setup the Neon Vercel Postgres Preview Integration for a database branch with every deployment preview" icon="check">Neon Postgres Previews Integration</a>
 
 </DetailIconCards>
 
@@ -38,11 +38,11 @@ If you're transitioning from Vercel Postgres to Neon, welcome. We're glad you're
 
 <DetailIconCards>
 
-<a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="vercel">Vercel Postgres Transition Guide</a>
+<a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="check">Vercel Postgres Transition Guide</a>
 
-<a href="/docs/guides/vercel-sdk-migration-guide" description="Learn how to migrate from the Vercel SDK to the Neon Serverless driver" icon="vercel">Migrating from the Vercel SDK</a>
+<a href="/docs/guides/vercel-sdk-migration-guide" description="Learn how to migrate from the Vercel SDK to the Neon Serverless driver" icon="check">Migrating from the Vercel SDK</a>
 
-<a href="/docs/guides/vercel-postgres-docs" description="Find a copy of the Vercel Postgres docs for your reference while you transition" icon="vercel">Vercel Postgres docs</a>
+<a href="/docs/guides/vercel-postgres-docs" description="Find a copy of the Vercel Postgres docs for your reference while you transition" icon="check">Vercel Postgres docs</a>
 
 </DetailIconCards>
 
