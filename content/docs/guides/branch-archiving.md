@@ -11,7 +11,7 @@ Automatic archiving of inactive branches is only enabled on the Free Plan. Branc
 
 To minimize storage costs, Neon automatically archives branches that are:
 
-- Older than **14 days**. 
+- Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
 Both conditions must be true for a branch to be archived.
@@ -45,7 +45,7 @@ If you select an archived branch on the **Branches** page to view its details, y
 
 ![archived_branch_icon](/docs/guides/archived_branch_details.png)
 
-Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).  
+Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).
 
 ## About archive storage
 
