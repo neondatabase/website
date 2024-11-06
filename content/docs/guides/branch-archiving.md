@@ -18,7 +18,7 @@ Both conditions must be true for a branch to be archived.
 
 ## Unarchiving a branch
 
-**No action is required to unarchive a branch. It happens automatically.** 
+**No action is required to unarchive a branch. It happens automatically.**
 
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is unarchived.
 
@@ -53,7 +53,7 @@ For Neon projects created in AWS regions, inactive branches are archived to Amaz
 
 ## Is automatic branch archiving configurable?
 
-Branch archiving  is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving may be offered on those plans.
+Branch archiving is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving may be offered on those plans.
 
 ## Monitoring branch archiving
 
