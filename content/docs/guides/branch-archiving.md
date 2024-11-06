@@ -49,7 +49,7 @@ Archive and unarchive operations can also be monitored in the Neon Console or us
 
 ## About archive storage
 
-For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
+For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage. For more information about how archive storage works in Neon, refer to [Archive storage](/docs/introduction/architecture-overview#archive-storage) in our architecture documentation.
 
 ## Is automatic branch archiving configurable?
 
