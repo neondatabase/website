@@ -139,7 +139,7 @@
       "features": [
         { "title": "More resources" },
         { "title": "Branch protection" },
-        { "title": "PITR (14 days)" },
+        { "title": "PITR (14 days)" }
       ]
     },
     "button": {
@@ -199,7 +199,7 @@
         {
           "title": "Migration assistance",
           "info": "With 0 migration fees—we will waive them"
-        },
+        }
       ]
     },
     "button": {
