@@ -6,7 +6,7 @@ updatedOn: '2024-10-15T17:19:50.116Z'
 ---
 
 <Admonition type="note" title="Only enabled on the Free Plan">
-Currently, automatic archiving of inactive branches is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
+Automatic archiving of inactive branches is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
 </Admonition>
 
 To minimize storage costs, Neon automatically archives branches that are:
@@ -20,9 +20,9 @@ Both conditions must be true for a branch to be archived.
 
 **No action is required to unarchive a branch. It happens automatically.** 
 
-Connecting to an archived branch, querying it , or performing some other action that accesses the branch will trigger the unarchive process. Connection times and query times may be slower while a branch is being unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is unarchived.
 
-The following actions will automatically unarchive a branch, transfers the branch's data from archive storage back to regular Neon storage:
+The following actions will automatically unarchive a branch, transferring the branch's data from archive storage back to regular Neon storage:
 
 - Connecting to or querying the branch from a client or application
 - Querying the branch from the Neon SQL Editor
@@ -57,7 +57,7 @@ Branch archiving  is not configurable on the Neon Free Plan. When branch archivi
 
 ## Monitoring branch archiving
 
-You can monitor branch archive and unarchive operations from the **System operations** tab on the **Monitoring** page in the Neon Console. Look for the the following operations:
+You can monitor branch archive and unarchive operations from the **System operations** tab on the **Monitoring** page in the Neon Console. Look for the following operations:
 
 - `Timeline archive`: The time when the branch archive operation was initiated
 - `Timeline unarchive`: The time when the branch unarchive operation was initiated
