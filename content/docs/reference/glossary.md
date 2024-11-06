@@ -71,7 +71,7 @@ Connecting to a database on a branch requires connecting via a compute attached 
 
 ## branch archiving
 
-The automatic archiving of inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
+The automatic archiving of inactive branches in cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 ## Branching
 
