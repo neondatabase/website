@@ -215,6 +215,8 @@
                   slug: guides/reset-from-parent
                 - title: Branch Restore
                   slug: guides/branch-restore
+            - title: Branch archiving
+              slug: introduction/branch-archiving
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
