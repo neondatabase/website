@@ -322,6 +322,10 @@ export default {
           text: 'Security',
           to: LINKS.security,
         },
+        {
+          text: 'Trust Center',
+          to: LINKS.trust,
+        },
       ],
     },
     {
