@@ -93,7 +93,7 @@ To view the branches in a Neon project:
 
    Branch details shown on the branch page include:
 
-   - **Archive status**: When the branch was archived to cost-efficient archive storage. For more, see [Branch archiving](/docs/guides/branch-archiving). 
+   - **Archive status**: When the branch was archived to cost-efficient archive storage. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created**: The date and time the branch was created.
    - **Compute hours**: The compute hours used by the branch in the current billing period.
