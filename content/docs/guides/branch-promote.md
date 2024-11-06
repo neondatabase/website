@@ -10,14 +10,11 @@ This guide describes how to create a new branch and promote it to the default br
 
 ## What is a default branch?
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified on the **Branches** page by a `DEFAULT` tag. You can designate any branch as the default branch. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
-
-- For [Neon Free Plan](/docs/introduction/plans#free-plan) users, the compute associated with the default branch is always available.
-- For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified on the **Branches** page by a `DEFAULT` tag. You can designate any branch as the default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
 
 ## Why promote a branch to default?
 
-A common usage scenario involving promoting a branch to default is data recovery. For example, a data loss occurs on the current default branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move the computefrom the current default branch to the new branch and make that branch your default branch.
+A common usage scenario involving promoting a branch to default is data recovery. For example, a data loss occurs on the current default branch. To recover the lost data, you create a point-in-time branch with data that existed before the data loss occurred. To avoid modifying your application's database connection configuration, you move the compute from the current default branch to the new branch and make that branch your default branch.
 
 The procedure described below creates a new branch and promotes it to the default branch of your project by performing the following steps:
 
