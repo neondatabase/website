@@ -11,7 +11,7 @@ Currently, branch archiving is only enabled on the Free Plan. Branch archiving w
 
 To minimize storage costs, Neon automatically archives branches that are:
 
-- Older than **14 days**. 
+- Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
 Both conditions must be true.
@@ -28,7 +28,7 @@ If you select an archived branch, you can find out exactly when the branch was a
 
 ![archived_branch_icon](/docs/guides/archived_branch_details.png)
 
-Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).  
+Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).
 
 ## About archive storage
 
@@ -36,7 +36,7 @@ For Neon projects created in AWS regions, are archived to cost-efficient storage
 
 ## Is automatic branch archiving configurable?
 
-Branch archiving  is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving will be available on those plans.
+Branch archiving is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving will be available on those plans.
 
 ## Actions that automatically unarchive branches
 
