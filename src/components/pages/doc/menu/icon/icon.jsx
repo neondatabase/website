@@ -30,6 +30,7 @@ import StatusIcon from 'icons/docs/sidebar/status.inline.svg';
 import SupportIcon from 'icons/docs/sidebar/support.inline.svg';
 import UseCasesIcon from 'icons/docs/sidebar/use-cases.inline.svg';
 import WhyNeonIcon from 'icons/docs/sidebar/why-neon.inline.svg';
+import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
 
 const icons = {
   ai: AiIcon,
@@ -62,6 +63,7 @@ const icons = {
   support: SupportIcon,
   'use-cases': UseCasesIcon,
   'why-neon': WhyNeonIcon,
+  workflows: WorkflowsIcon,
 };
 
 const Icon = ({ title, className = null }) => {
