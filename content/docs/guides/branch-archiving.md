@@ -22,7 +22,7 @@ Both conditions must be true for a branch to be archived.
 
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is unarchived.
 
-The following actions will automatically unarchive a branch, transferring the branch's data from archive storage back to regular Neon storage:
+The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
 - Connecting to or querying the branch from a client or application
 - Querying the branch from the Neon SQL Editor
@@ -49,11 +49,11 @@ Archive and unarchive operations can also be monitored in the Neon Console or us
 
 ## About archive storage
 
-For Neon projects created in AWS regions, inactive branches are archived to Amazon S3 storage. For Neon projects created in Azure regions, branches are archived to Azure Blob storage.
+For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
 ## Is automatic branch archiving configurable?
 
-Branch archiving  is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving may be offered on those plans.
+Branch archiving is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving may be offered on those plans.
 
 ## Monitoring branch archiving
 
@@ -75,7 +75,7 @@ The endpoint response includes either the branch's `current_state` or `pending_s
 
 - `init` - the branch is being created but is not available for querying.
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
-- `archived` - the branch is stored in cost-effective archival storage. Expect slow query response times.
+- `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
 
 ```json {6}
 {
