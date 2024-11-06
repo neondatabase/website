@@ -195,11 +195,11 @@
         { "title": "Priority Support" },
         { "title": "Datadog integration" },
         { "title": "Private Link" },
-        { "title": "PITR (30 days)" },
         {
           "title": "Migration assistance",
           "info": "With 0 migration fees—we will waive them"
-        }
+        },
+        { "title": "PITR (30 days)" }
       ]
     },
     "button": {
