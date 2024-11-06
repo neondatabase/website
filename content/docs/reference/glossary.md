@@ -35,7 +35,7 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 ## Archive storage
 
-Cost-efficient storage where Neon automatically stores inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
+Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
 ## Autosuspend
 
