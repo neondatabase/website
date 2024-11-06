@@ -1,45 +1,60 @@
 ---
 title: Branch archiving
-subtitle: Learn how Neon automatically archives inactive branches to cost-effective object storage
+subtitle: Learn how Neon automatically archives inactive branches to cost-effective archive storage
 enableTableOfContents: true
 updatedOn: '2024-10-15T17:19:50.116Z'
 ---
 
-To minimize storage costs, Neon automatically archives branches that have not been accessed for 7 days. These branches are transferred to cost-efficient archive storage.
+<Admonition type="note" title="Only enabled on the Free Plan">
+Currently, branch archiving is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
+</Admonition>
 
-Archive storage is billed $0.10 per GB-month, which is significantly cheaper than regular storage. For more information about how archive storage is billed, see [Archive storage billing](#tbd).
+To minimize storage costs, Neon automatically archives branches that are:
+
+- Older than **14 days**. 
+- Have not been accessed for the past **24 hours**
+
+Both conditions must be true.
+
+**No action is required to unarchive a branch. It happens automatically.** Accessing an archived branch through actions such as connecting to the branch or querying it will automatically unarchive the the branch. However, connection and query times may be slower during the unarchive process. For all actions that trigger the unarchive process, see [Actions that automatically unarchive branches](#actions-that-automatically-unarchive-branches).
+
+## Identifying archived branches
+
+Archived branches are easy to identify in the Neon Console. On the **Branches** page, archived branches are identified by an archive icon, as shown below.
+
+![archived_branch_icon](/docs/guides/archived_branch_icon.png)
+
+If you select an archived branch, you can find out exactly when the branch was archived:
+
+![archived_branch_icon](/docs/guides/archived_branch_details.png)
+
+Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).  
 
 ## About archive storage
 
-For Neon projects created in AWS regions, branches that have not been accessed for 7 days are archived to Amazon S3. For Neon projects created in Azure regions, branches are archived to Azure Blob storage.
-
-## How branch archiving works
-
-Neon performs a periodic check for branches that have not been accessed for 7 days. For any branch that exceeds this threshold, an archive process is triggered, which transfers the branch from regular Neon storage to archive storage.
+For Neon projects created in AWS regions, are archived to cost-efficient storage on Amazon S3. For Neon projects created in Azure regions, branches are archived to Azure Blob storage.
 
 ## Is automatic branch archiving configurable?
 
-Automatic archiving of inactive branches is currently not configurable. With the exception of protected branches, any branch that is not access for 7 days is automatically moved to archive storage.
-
-## Performance of archived branches
-
-The archiving process itself has no impact on the performance of other branches, as each branch is isolated with its own compute resources. However, the archive / unarchive process does impact connection and query performance for the branch itself as it moves in or out of archive storage. You can expect connection and query response times for the branch to be slower during this period.
-
-**How log does it take to archive or unarchive a branch?**
+Branch archiving  is not configurable on the Neon Free Plan. When branch archiving becomes available on Neon paid plan, configuration options such as disabling archiving will be available on those plans.
 
 ## Actions that automatically unarchive branches
 
-Any action that accesses an archived branch will trigger the transfer of the branch from archive storage back to regular storage. For example, any of the following actions will bring a branch out of archive storage:
+Any action that accesses an archived branch will trigger the the unarchive process, which transfers the branch from archive storage back to regular Neon storage. Any actions that accesses a branch will unarchive it. For example these action unarchive a branch:
 
-- **Connecting to the branch**: For example, if you connect to an archived branch from an application or database client, this will trigger a transfer of the branch out of archive storage.
-- **Querying the branch from the Neon SQL Editor**: Querying a branch from the editor initiates a connection to the branch, which in turn causes the branch to be transferred from archive storage.
-- **Creating a child branch**: Creating a child branch on an archived branch brings the branch out of archive storage. The child branh creation process will be slow during this process.
+- **Connecting to the branch**
+- **Querying the branch from the Neon SQL Editor**
+- **Viewing the branch on the Tables page in the Neon Console**
+- **Creating a child branch**
 - **Creating a role on a branch**
 - **Creating a database on a branch**
 - **Reset from parent**
-  \_ **Restore**
+- **Restore**
 - **Delete**
-- **Neon CLI commands and API calls that access the branch**
+- **Setting the branch as protected**
+- **Setting the branch as default**
+- **Renaming the branch**
+- **Any Neon CLI commands and API calls that access the branch**
 
 ## Checking branch archive status
 
@@ -58,7 +73,7 @@ You can monitor branch archive and unarchive operations from the **System operat
 - `Timeline archive`: The time when the branch archive operations was initiated
 - `Timeline unarchive`: The time when the branch unarchive operation was initiated
 
-You can also monitor branch archiving and unarchiving using Neon's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API.
+You can also monitor branch archive and unarchive operations using Neon's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API.
 
 ```bash
 curl --request GET \
