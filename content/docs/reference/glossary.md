@@ -364,7 +364,7 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
 
-The compute associated with a default branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch.
+The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
