@@ -33,6 +33,10 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 
 A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating Postgres users and databases initiates this operation. See [System operations](/docs/manage/operations) for more information.
 
+## Archive storage
+
+Cost-efficient storage where Neon automatically stores inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived to Amazon S3 storage. For Neon projects created in Azure regions, branches are archived to Azure Blob storage.
+
 ## Autosuspend
 
 A feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an `Idle` state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
@@ -64,6 +68,10 @@ Each Neon project is created with a main line of data referred to as the [root b
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
 Connecting to a database on a branch requires connecting via a compute attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+
+## branch archiving
+
+The automatic archiving of inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 ## Branching
 
