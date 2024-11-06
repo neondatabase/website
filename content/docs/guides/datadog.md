@@ -3,7 +3,7 @@ title: The Neon Datadog integration
 subtitle: Send metrics and events from Neon Postgres to Datadog
 enableTableOfContents: true
 tag: new
-updatedOn: '2024-10-15T18:18:48.013Z'
+updatedOn: '2024-10-29T19:33:11.057Z'
 ---
 
 <InfoBlock>
@@ -18,9 +18,11 @@ updatedOn: '2024-10-15T18:18:48.013Z'
 </DocsList>
 </InfoBlock>
 
-Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
+Available for Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
-<ComingSoon/>
+<Admonition type="note" title="beta">
+This feature is currently in Beta for Business plan users. It will remain free of charge for Business plan users during the Beta period.
+</Admonition>
 
 ## How it works
 
@@ -63,7 +65,7 @@ Additionally, if you are setting up Neon’s Datadog integration for a project w
 
 ## Example usage in Datadog
 
-Once integrated, you can create custom dashboards in Datadog by querying the metrics sent from Neon. Use Datadog's **Metrics Explorer** to search for metrics like `connection_counts`, `db_total_size`, and `host_cpu_seconds_total`. You can also set alerts based on threshold values for critical metrics.
+Once integrated, you can create custom dashboards in Datadog by querying the metrics sent from Neon. Use Datadog's **Metrics Explorer** to search for metrics like `neon_connection_counts`, `neon_db_total_size`, and `host_cpu_seconds_total`. You can also set alerts based on threshold values for critical metrics.
 
 ## Import the Neon dashboard
 
@@ -93,416 +95,561 @@ If any of the computes in your project are active, you should start seeing data 
 <summary>Copy JSON configuration</summary>
 ```json shouldWrap
 {
-"title": "Single Neon Compute metrics (with dropdown)",
-"description": "",
-"widgets": [
+  "title": "Single Neon Compute metrics (with dropdown)",
+  "description": "",
+  "widgets": [
     {
-    "id": 7296782684811837,
-    "definition": {
-        "title": "CPU",
-        "title_size": "16",
-        "title_align": "left",
-        "show_legend": true,
-        "legend_layout": "auto",
-        "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
-        ],
-        "type": "timeseries",
-        "requests": [
-        {
-            "formulas": [
-            {
-                "alias": "Used",
-                "formula": "per_minute(host_cpu_seconds_total)"
-            }
-            ],
-            "queries": [
-            {
-                "name": "host_cpu_seconds_total",
-                "data_source": "metrics",
-                "query": "sum:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_count()"
-            }
-            ],
-            "response_format": "timeseries",
-            "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
-            },
-            "display_type": "line"
-        }
-        ]
-    },
-    "layout": {
-        "x": 0,
-        "y": 0,
-        "width": 5,
-        "height": 2
-    }
-    },
-    {
-    "id": 3831219857468963,
-    "definition": {
+      "id": 3831219857468963,
+      "definition": {
         "title": "RAM",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
         "legend_layout": "auto",
         "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
         ],
+        "time": {},
         "type": "timeseries",
         "requests": [
-        {
+          {
             "formulas": [
-            {
+              {
                 "number_format": {
-                "unit": {
+                  "unit": {
                     "type": "canonical_unit",
                     "unit_name": "byte"
-                }
+                  }
                 },
                 "alias": "Cached",
-                "formula": "ram_cached"
-            },
-            {
+                "formula": "query3"
+              },
+              {
                 "alias": "Used",
                 "number_format": {
-                "unit": {
+                  "unit": {
                     "type": "canonical_unit",
                     "unit_name": "byte"
-                }
+                  }
                 },
-                "formula": "ram_total - ram_available"
-            }
+                "formula": "query1 - query2"
+              }
             ],
             "queries": [
-            {
-                "name": "ram_cached",
+              {
+                "name": "query3",
                 "data_source": "metrics",
-                "query": "avg:host_memory_cached_bytes{$endpoint_id}"
-            },
-            {
-                "name": "ram_total",
+                "query": "max:host_memory_cached_bytes{$endpoint_id}"
+              },
+              {
+                "name": "query1",
                 "data_source": "metrics",
-                "query": "avg:host_memory_total_bytes{$endpoint_id}"
-            },
-            {
-                "name": "ram_available",
+                "query": "max:host_memory_total_bytes{$endpoint_id}"
+              },
+              {
+                "name": "query2",
                 "data_source": "metrics",
-                "query": "avg:host_memory_available_bytes{$endpoint_id}"
-            }
+                "query": "max:host_memory_available_bytes{$endpoint_id}"
+              }
             ],
             "response_format": "timeseries",
             "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
             },
             "display_type": "line"
-        }
+          }
         ]
-    },
-    "layout": {
-        "x": 5,
+      },
+      "layout": {
+        "x": 0,
         "y": 0,
-        "width": 4,
+        "width": 6,
         "height": 2
-    }
+      }
     },
     {
-    "id": 7513607855022102,
-    "definition": {
+      "id": 7296782684811837,
+      "definition": {
+        "title": "CPU",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Used",
+                "formula": "per_minute(query1)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:host_cpu_seconds_total{!mode:idle,$endpoint_id}.as_rate()"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "width": 6,
+        "height": 2
+      }
+    },
+    {
+      "id": 7513607855022102,
+      "definition": {
         "title": "Connections",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
         "legend_layout": "auto",
         "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
         ],
         "type": "timeseries",
         "requests": [
-        {
+          {
             "formulas": [
-            {
+              {
                 "alias": "Total",
-                "formula": "connection_counts"
-            },
-            {
+                "formula": "query1"
+              },
+              {
                 "alias": "Active",
-                "formula": "active_connection_counts"
-            },
-            {
+                "formula": "query2"
+              },
+              {
                 "alias": "Idle",
-                "formula": "idle_connection_count"
-            }
+                "formula": "query3"
+              }
             ],
             "queries": [
-            {
-                "name": "connection_counts",
+              {
+                "name": "query1",
                 "data_source": "metrics",
-                "query": "avg:connection_counts{!datname:postgres,$endpoint_id}"
-            },
-            {
-                "name": "active_connection_counts",
+                "query": "sum:neon_connection_counts{!datname:postgres,$endpoint_id}"
+              },
+              {
+                "name": "query2",
                 "data_source": "metrics",
-                "query": "avg:connection_counts{!datname:postgres,state:active}"
-            },
-            {
-                "name": "idle_connection_count",
+                "query": "sum:neon_connection_counts{!datname:postgres,state:active ,$endpoint_id}"
+              },
+              {
+                "name": "query3",
                 "data_source": "metrics",
-                "query": "avg:connection_counts{!datname:postgres,!state:active,$endpoint_id}"
-            }
+                "query": "sum:neon_connection_counts{!datname:postgres,!state:active,$endpoint_id}"
+              }
             ],
             "response_format": "timeseries",
             "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
             },
             "display_type": "line"
-        }
+          }
         ]
-    },
-    "layout": {
+      },
+      "layout": {
         "x": 0,
         "y": 2,
         "width": 6,
-        "height": 2
-    }
+        "height": 3
+      }
     },
     {
-    "id": 5523349536895199,
-    "definition": {
+      "id": 5523349536895199,
+      "definition": {
         "title": "Database size",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
         "legend_layout": "auto",
         "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
         ],
         "type": "timeseries",
         "requests": [
-        {
+          {
             "formulas": [
-            {
+              {
                 "number_format": {
-                "unit": {
+                  "unit": {
                     "type": "canonical_unit",
                     "unit_name": "byte"
-                }
+                  }
                 },
-                "formula": "pg_stats_userdb"
-            },
-            {
+                "formula": "query2"
+              },
+              {
                 "number_format": {
-                "unit": {
+                  "unit": {
                     "type": "canonical_unit",
                     "unit_name": "byte"
-                }
+                  }
                 },
                 "alias": "Size of all databases",
-                "formula": "pg_stats_userdb"
-            },
-            {
+                "formula": "query3"
+              },
+              {
                 "alias": "Max size",
                 "number_format": {
-                "unit": {
+                  "unit": {
                     "type": "canonical_unit",
                     "unit_name": "byte"
-                }
+                  }
                 },
-                "formula": "db_total_size * 1024 * 1024"
-            }
+                "formula": "query1 * 1024 * 1024"
+              }
             ],
             "queries": [
-            {
-                "name": "pg_stats_userdb",
+              {
+                "name": "query2",
                 "data_source": "metrics",
-                "query": "sum:pg_stats_userdb{kind:db_size,$endpoint_id} by {datname}"
-            },
-            {
-                "name": "db_total_size",
+                "query": "max:neon_pg_stats_userdb{kind:db_size,$endpoint_id} by {datname}"
+              },
+              {
+                "name": "query3",
                 "data_source": "metrics",
-                "query": "sum:db_total_size{$endpoint_id}"
-            },
-            {
-                "name": "max_cluster_size",
+                "query": "max:neon_db_total_size{$endpoint_id}"
+              },
+              {
+                "name": "query1",
                 "data_source": "metrics",
-                "query": "avg:max_cluster_size{$endpoint_id}"
-            }
+                "query": "max:neon_max_cluster_size{$endpoint_id}"
+              }
             ],
             "response_format": "timeseries",
             "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
             },
             "display_type": "line"
-        }
+          }
         ],
         "yaxis": {
-        "include_zero": false,
-        "scale": "log"
+          "include_zero": false,
+          "scale": "log"
         }
-    },
-    "layout": {
-        "x": 0,
-        "y": 4,
-        "width": 5,
+      },
+      "layout": {
+        "x": 6,
+        "y": 2,
+        "width": 6,
         "height": 3
-    }
+      }
     },
     {
-    "id": 5728659221127513,
-    "definition": {
-        "title": "Changed rows",
-        "title_size": "16",
-        "title_align": "left",
-        "show_legend": true,
-        "legend_layout": "auto",
-        "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
-        ],
-        "type": "timeseries",
-        "requests": [
-        {
-            "formulas": [
-            {
-                "alias": "Rows inserted",
-                "formula": "diff(inserted_rows)"
-            },
-            {
-                "alias": "Rows deleted",
-                "formula": "diff(deleted_rows)"
-            },
-            {
-                "alias": "Rows updated",
-                "formula": "diff(updated_rows)"
-            }
-            ],
-            "queries": [
-            {
-                "name": "inserted_rows",
-                "data_source": "metrics",
-                "query": "avg:pg_stats_userdb{kind:inserted,$endpoint_id}"
-            },
-            {
-                "name": "deleted_rows",
-                "data_source": "metrics",
-                "query": "avg:pg_stats_userdb{kind:deleted,$endpoint_id}"
-            },
-            {
-                "name": "updated_rows",
-                "data_source": "metrics",
-                "query": "avg:pg_stats_userdb{kind:updated,$endpoint_id}"
-            }
-            ],
-            "response_format": "timeseries",
-            "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
-            },
-            "display_type": "line"
-        }
-        ]
-    },
-    "layout": {
-        "x": 5,
-        "y": 4,
-        "width": 5,
-        "height": 3
-    }
-    },
-    {
-    "id": 1608572645458648,
-    "definition": {
+      "id": 1608572645458648,
+      "definition": {
         "title": "Deadlocks",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
         "legend_layout": "auto",
         "legend_columns": [
-        "avg",
-        "min",
-        "max",
-        "value",
-        "sum"
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
         ],
         "type": "timeseries",
         "requests": [
-        {
+          {
             "formulas": [
-            {
+              {
                 "alias": "Deadlocks",
-                "formula": "deadlocks"
-            }
+                "formula": "query1"
+              }
             ],
             "queries": [
-            {
-                "name": "deadlocks",
+              {
+                "name": "query1",
                 "data_source": "metrics",
-                "query": "avg:pg_stats_userdb{kind:deadlocks,$endpoint_id}"
-            }
+                "query": "max:neon_pg_stats_userdb{kind:deadlocks,$endpoint_id} by {datname}"
+              }
             ],
             "response_format": "timeseries",
             "style": {
-            "palette": "dog_classic",
-            "order_by": "values",
-            "line_type": "solid",
-            "line_width": "normal"
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
             },
             "display_type": "line"
-        }
+          }
         ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 5,
+        "width": 6,
+        "height": 2
+      }
     },
-    "layout": {
+    {
+      "id": 5728659221127513,
+      "definition": {
+        "title": "Changed rows",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Rows inserted",
+                "formula": "diff(query1)"
+              },
+              {
+                "alias": "Rows deleted",
+                "formula": "diff(query2)"
+              },
+              {
+                "alias": "Rows updated",
+                "formula": "diff(query3)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:neon_pg_stats_userdb{kind:inserted,$endpoint_id}"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "max:neon_pg_stats_userdb{kind:deleted,$endpoint_id}"
+              },
+              {
+                "name": "query3",
+                "data_source": "metrics",
+                "query": "max:neon_pg_stats_userdb{kind:updated,$endpoint_id}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 6,
+        "y": 5,
+        "width": 6,
+        "height": 2
+      }
+    },
+    {
+      "id": 630770240665422,
+      "definition": {
+        "title": "Local file cache hit rate",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Cache hit rate",
+                "formula": "query1 / (query1 + query2)",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "fraction"
+                  }
+                }
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_hits{$endpoint_id}"
+              },
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_misses{$endpoint_id}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
         "x": 0,
         "y": 7,
-        "width": 4,
-        "height": 2
-    }
-    }
-],
-"template_variables": [
+        "width": 6,
+        "height": 3
+      }
+    },
     {
-    "name": "endpoint_id",
-    "prefix": "endpoint_id",
-    "available_values": [],
-    "default": "*"
+      "id": 2040733022455075,
+      "definition": {
+        "title": "Working set size",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "alias": "Local file cache size",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query2"
+              },
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "8192 * query1"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query2",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_cache_size_limit{$endpoint_id}"
+              },
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "max:neon_lfc_approximate_working_set_size_windows{$endpoint_id} by {duration}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      },
+      "layout": {
+        "x": 6,
+        "y": 7,
+        "width": 6,
+        "height": 3
+      }
     }
-],
-"layout_type": "ordered",
-"notify_list": [],
-"reflow_type": "fixed"
+  ],
+  "template_variables": [
+    {
+      "name": "endpoint_id",
+      "prefix": "endpoint_id",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "project_id",
+      "prefix": "project_id",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "state",
+      "prefix": "state",
+      "available_values": [],
+      "default": "*"
+    }
+  ],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "fixed"
 }
 ```
 </details>
@@ -521,44 +668,44 @@ All metrics include the following labels:
 Here's an example of the metric `db_total_size` with all labels:
 
 ```json shouldWrap
-db_total_size{project_id="square-daffodil-12345678", endpoint_id="ep-aged-art-260862", compute_id="compute-shrill-blaze-b4hry7fg", job="sql-metrics"} 10485760
+neon_db_total_size{project_id="square-daffodil-12345678", endpoint_id="ep-aged-art-260862", compute_id="compute-shrill-blaze-b4hry7fg", job="sql-metrics"} 10485760
 ```
 
 <Admonition type="note">
 In Datadog, metric labels are referred to as `tags.` See [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/) in the Datadog Docs.
 </Admonition>
 
-| Name                                     | Job                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ---------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| connection_counts                        | sql-metrics          | Total number of database connections. The `state` label indicates whether the connection is `active` (executing queries), `idle` (awaiting queries), or in a variety of other states derived from the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) Postgres view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| db_total_size                            | sql-metrics          | Total size of all databases in your project, measured in bytes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| lfc_approximate_working_set_size_windows | sql-metrics          | Approximate [working set size](/docs/manage/endpoints#sizing-your-compute-based-on-the-working-set) in pages of 8192 bytes. The metric is tracked over time windows (5m, 15m, 1h) to gauge access patterns. Duration values: `duration="5m"`, `duration="15m"`, `duration="1h"`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| lfc_cache_size_limit                     | sql-metrics          | The limit on the size of the Local File Cache (LFC), measured in bytes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| lfc_hits                                 | sql-metrics          | The number of times requested data was found in the LFC (cache hit). Higher cache hit rates indicate efficient memory use.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| lfc_misses                               | sql-metrics          | The number of times requested data was not found in the LFC (cache miss), forcing a read from slower storage. High miss rates may indicate insufficient compute size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| lfc_used                                 | sql-metrics          | The amount of space currently used in the LFC, measured in 1MB chunks. It reflects how much of the cache limit is being utilized.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| lfc_writes                               | sql-metrics          | The number of write operations to the LFC.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| max_cluster_size                         | sql-metrics          | The `neon.max_cluster_size` setting in MB.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| pg_stats_userdb                          | sql-metrics          | Aggregated metrics from the <a href="https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW">pg_stat_database</a> Postgres view.<br/><br/>We collect stats from the oldest non-system databases based on their creation time, but not for all databases. Only the first X databases (sorted by creation time) are included.<br/><br/><strong>datname</strong>: The name of the database<br/><strong>kind</strong>: The type of value being reported. One of the following:<br/><ul><li><strong>db_size</strong>: The size of the database on disk, in bytes (pg_database_size(datname))</li><li><strong>deadlocks</strong>: The number of deadlocks detected</li><li><strong>inserted</strong>: The number of rows inserted (tup_inserted)</li><li><strong>updated</strong>: The number of rows updated (tup_updated)</li><li><strong>deleted</strong>: The number of rows deleted (tup_deleted)</li></ul> |
-| replication_delay_bytes                  | sql-metrics          | The number of bytes between the last received LSN (`Log Sequence Number`) and the last replayed one. Large values indiciate replication lag.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| replication_delay_seconds                | sql-metrics          | Time since the last `LSN` was replayed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| host_cpu_seconds_total                   | compute-host-metrics | The number of CPU seconds accumulated in different operating modes (user, system, idle, etc.).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| host_load1                               | compute-host-metrics | System load averaged over the last 1 minute. Example: for 0.25 vCPU, `host_load1` of `0.25` means full utilization, >0.25 indicates waiting processes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| host_load5                               | compute-host-metrics | System load averaged over the last 5 minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| host_load15                              | compute-host-metrics | System load averaged over the last 15 minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| host_memory_active_bytes                 | compute-host-metrics | The number of bytes of active main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| host_memory_available_bytes              | compute-host-metrics | The number of bytes of main memory available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| host_memory_buffers_bytes                | compute-host-metrics | The number of bytes of main memory used by buffers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| host_memory_cached_bytes                 | compute-host-metrics | The number of bytes of main memory used by cached blocks.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| host_memory_free_bytes                   | compute-host-metrics | The number of bytes of main memory not used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| host_memory_shared_bytes                 | compute-host-metrics | The number of bytes of main memory shared between processes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| host_memory_swap_free_bytes              | compute-host-metrics | The number of free bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| host_memory_swap_total_bytes             | compute-host-metrics | The total number of bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| host_memory_swap_used_bytes              | compute-host-metrics | The number of used bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| host_memory_swapped_in_bytes_total       | compute-host-metrics | The number of bytes that have been swapped into main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| host_memory_swapped_out_bytes_total      | compute-host-metrics | The number of bytes that have been swapped out from main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| host_memory_total_bytes                  | compute-host-metrics | The total number of bytes of main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| host_memory_used_bytes                   | compute-host-metrics | The number of bytes of main memory used by programs or caches.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Name                                          | Job                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --------------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| neon_connection_counts                        | sql-metrics          | Total number of database connections. The `state` label indicates whether the connection is `active` (executing queries), `idle` (awaiting queries), or in a variety of other states derived from the [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) Postgres view.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| neon_db_total_size                            | sql-metrics          | Total size of all databases in your project, measured in bytes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| neon_lfc_approximate_working_set_size_windows | sql-metrics          | Approximate [working set size](/docs/manage/endpoints#sizing-your-compute-based-on-the-working-set) in pages of 8192 bytes. The metric is tracked over time windows (5m, 15m, 1h) to gauge access patterns. Duration values: `duration="5m"`, `duration="15m"`, `duration="1h"`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| neon_lfc_cache_size_limit                     | sql-metrics          | The limit on the size of the Local File Cache (LFC), measured in bytes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| neon_lfc_hits                                 | sql-metrics          | The number of times requested data was found in the LFC (cache hit). Higher cache hit rates indicate efficient memory use.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| neon_lfc_misses                               | sql-metrics          | The number of times requested data was not found in the LFC (cache miss), forcing a read from slower storage. High miss rates may indicate insufficient compute size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| neon_lfc_used                                 | sql-metrics          | The amount of space currently used in the LFC, measured in 1MB chunks. It reflects how much of the cache limit is being utilized.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| neon_lfc_writes                               | sql-metrics          | The number of write operations to the LFC.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| neon_max_cluster_size                         | sql-metrics          | The `neon.max_cluster_size` setting in MB.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| neon_pg_stats_userdb                          | sql-metrics          | Aggregated metrics from the <a href="https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-DATABASE-VIEW">pg_stat_database</a> Postgres view.<br/><br/>We collect stats from the oldest non-system databases based on their creation time, but not for all databases. Only the first X databases (sorted by creation time) are included.<br/><br/><strong>datname</strong>: The name of the database<br/><strong>kind</strong>: The type of value being reported. One of the following:<br/><ul><li><strong>db_size</strong>: The size of the database on disk, in bytes (pg_database_size(datname))</li><li><strong>deadlocks</strong>: The number of deadlocks detected</li><li><strong>inserted</strong>: The number of rows inserted (tup_inserted)</li><li><strong>updated</strong>: The number of rows updated (tup_updated)</li><li><strong>deleted</strong>: The number of rows deleted (tup_deleted)</li></ul> |
+| neon_replication_delay_bytes                  | sql-metrics          | The number of bytes between the last received LSN (`Log Sequence Number`) and the last replayed one. Large values indiciate replication lag.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| neon_replication_delay_seconds                | sql-metrics          | Time since the last `LSN` was replayed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| host_cpu_seconds_total                        | compute-host-metrics | The number of CPU seconds accumulated in different operating modes (user, system, idle, etc.).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| host_load1                                    | compute-host-metrics | System load averaged over the last 1 minute. Example: for 0.25 vCPU, `host_load1` of `0.25` means full utilization, >0.25 indicates waiting processes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| host_load5                                    | compute-host-metrics | System load averaged over the last 5 minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| host_load15                                   | compute-host-metrics | System load averaged over the last 15 minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| host_memory_active_bytes                      | compute-host-metrics | The number of bytes of active main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| host_memory_available_bytes                   | compute-host-metrics | The number of bytes of main memory available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| host_memory_buffers_bytes                     | compute-host-metrics | The number of bytes of main memory used by buffers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| host_memory_cached_bytes                      | compute-host-metrics | The number of bytes of main memory used by cached blocks.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| host_memory_free_bytes                        | compute-host-metrics | The number of bytes of main memory not used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| host_memory_shared_bytes                      | compute-host-metrics | The number of bytes of main memory shared between processes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| host_memory_swap_free_bytes                   | compute-host-metrics | The number of free bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| host_memory_swap_total_bytes                  | compute-host-metrics | The total number of bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| host_memory_swap_used_bytes                   | compute-host-metrics | The number of used bytes of swap space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| host_memory_swapped_in_bytes_total            | compute-host-metrics | The number of bytes that have been swapped into main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| host_memory_swapped_out_bytes_total           | compute-host-metrics | The number of bytes that have been swapped out from main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| host_memory_total_bytes                       | compute-host-metrics | The total number of bytes of main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| host_memory_used_bytes                        | compute-host-metrics | The number of bytes of main memory used by programs or caches.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## Feedback and future improvements
 

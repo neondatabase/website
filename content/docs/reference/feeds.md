@@ -2,7 +2,7 @@
 title: Neon RSS feeds
 subtitle: Stay updated with the latest news from Neon
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.591Z'
+updatedOn: '2024-10-26T08:44:49.115Z'
 ---
 
 Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelog, and blog posts, and Neon status updates through your preferred RSS reader or [Slack channel](#subscribe-to-feeds-in-slack).
@@ -78,3 +78,9 @@ To receive updates in Slack, enter the `/feed subscribe` command with the desire
 ```bash
 /feed subscribe https://neon.tech/docs/changelog/rss.xml
 ```
+
+## Remove feeds from Slack
+
+To remove feeds from Slack, enter the `/feed list` command and note the feed ID number.
+
+Enter `/feed remove [ID number]` to remove the feed.

@@ -17,6 +17,7 @@ import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
@@ -27,7 +28,6 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -40,19 +40,12 @@ const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   return acc;
 }, {});
 
-const Heading =
-  (Tag) =>
-  // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => (
-    <Tag className={clsx(className, 'postgres-heading')}>{children}</Tag>
-  );
-
 const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
   if (withoutAnchorHeading) {
     return heading;
   }
   if (isPostgres) {
-    return Heading(heading);
+    return AnchorHeading(heading);
   }
 
   return AnchorHeading(heading);
@@ -77,17 +70,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       return <span id={id} />;
     }
 
-    const regex = /^(?!\/|https?:|#)[\w-]+$/;
-    if (isPostgres && regex.test(href)) {
-      const postgresHref = `${LINKS.postgres}/${href}`;
-
-      return (
-        <Link to={postgresHref} {...otherProps}>
-          {children}
-        </Link>
-      );
-    }
-
     return (
       <Link to={href} {...otherProps}>
         {children}
@@ -96,8 +78,39 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   },
   img: (props) => {
     const { className, title, src, ...rest } = props;
-
-    return (
+    return isPostgres ? (
+      // No zoom on PostgreSQLTutorial Images
+      src.includes('?') ? (
+        // Authors can use anchor tags to make images float right/left
+        <Image
+          className={clsx(
+            className,
+            {
+              'no-border':
+                title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+            },
+            { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
+            { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
+          )}
+          src={src.split('?')[0]}
+          width={100}
+          height={100}
+          style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
+          title={title !== 'no-border' ? title : undefined}
+          {...rest}
+        />
+      ) : (
+        <Image
+          className={clsx(className, { 'no-border': title === 'no-border' })}
+          src={src}
+          width={200}
+          height={100}
+          style={{ width: 'auto', height: 'auto' }}
+          title={title !== 'no-border' ? title : undefined}
+          {...rest}
+        />
+      )
+    ) : (
       <ImageZoom src={src}>
         <Image
           className={clsx(className, { 'no-border': title === 'no-border' })}
@@ -110,20 +123,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
         />
       </ImageZoom>
     );
-  },
-  p: (props) => {
-    const { children, className } = props;
-    const href =
-      // eslint-disable-next-line react/prop-types
-      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
-
-    const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-
-    if (isPostgres) {
-      return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
-    }
-
-    return <p {...props} />;
   },
   YoutubeIframe,
   DefinitionList,
@@ -143,6 +142,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   UseCaseList,
   UseCaseContext,
   ComputeCalculator,
+  SubscriptionForm,
   ...sharedComponents,
 });
 
@@ -157,10 +157,15 @@ const Content = ({
   isUseCase = false,
 }) => (
   <div
-    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className, {
-      'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-        isUseCase,
-    })}
+    className={clsx(
+      'prose-doc prose dark:prose-invert xs:prose-code:break-words',
+      className,
+      { 'leading-8': isPostgres },
+      {
+        'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+          isUseCase,
+      }
+    )}
   >
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />

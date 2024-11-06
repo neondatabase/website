@@ -2,7 +2,7 @@
 title: Neon Private Access
 subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
-updatedOn: '2024-10-16T14:53:09.471Z'
+updatedOn: '2024-10-25T15:40:33.519Z'
 ---
 
 <PrivatePreview />
@@ -14,6 +14,8 @@ The **Neon Private Access** feature lets you securely connect to your Neon datab
 In a standard setup, the client application connects to a Neon database over the open internet via the Neon proxy.
 
 With **Neon Private Access**, you can connect to your database via AWS PrivateLink instead of over the open internet. In this configuration, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon Proxy instance that is not accessible from the public internet. This endpoint service is accessible only within the same AWS region as your client application and is restricted to Neon-authorized customers. With **Neon Private Access**, all traffic between the client application and the Neon database remains within AWS’s private network, rather than traversing the public internet.
+
+![Neon private access diagram](/docs/guides/neon_private_access.jpg)
 
 ## Prerequisites
 
@@ -35,6 +37,7 @@ To configure Neon Private Access, perform the following steps:
    1. Specify the **Service name**. It must be one of the following names, depending on your region:
 
       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
+      - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
 
       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)

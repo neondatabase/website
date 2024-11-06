@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-09-30T21:23:25.537Z'
+updatedOn: '2024-10-30T23:12:55.612Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -15,7 +15,9 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="app-store" icon="sparkle">pg_tiktoken</a>
+<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="sparkle">pg_tiktoken</a>
+
+<a href="/docs/extensions/pgrag" description="Create end-to-end Retrieval-Augmented Generation (RAG) pipelines" icon="sparkle">pgrag</a>
 
 <a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres" icon="sparkle">pgvector</a>
 
@@ -24,6 +26,8 @@ Explore supported Postgres extensions by category. Also see:
 ## Analytics
 
 <DetailIconCards>
+
+<a href="https://github.com/Mooncake-Labs/pg_mooncake" description="An experimental Postgres extension that adds native columnstore tables with DuckDB execution" icon="a-chart">pg_mooncake</a>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="a-chart">hll</a>
 
@@ -246,6 +250,8 @@ Explore supported Postgres extensions by category. Also see:
 ## Security
 
 <DetailIconCards>
+
+<a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
 
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 

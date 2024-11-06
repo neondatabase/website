@@ -3,7 +3,7 @@ title: 'Postgres for SaaS'
 subtitle: Teams build SaaS faster on Neon with autoscaling, database branching and the serverless operating model.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
-image: '/images/social-previews/postgres-for-saas.jpg'
+image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 ---
 
 <UseCaseContext />
@@ -125,7 +125,7 @@ Differentiated features are great, but what about the basics... Does Neon meet t
 
 <DefinitionList bulletType="check">
 It's Just Postgres
-: Deploy Postgres 14, 15, 16 on Neon. There is no lock-in, no proprietary syntax to learn.
+: Deploy Postgres 14, 15, 16, and 17 on Neon. There is no lock-in and no proprietary syntax to learn.
 
 Integrates with any language/framework
 : Anything that has a Postgres driver or integration works with Neon.

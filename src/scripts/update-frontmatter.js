@@ -6,7 +6,7 @@ const fs = require('fs').promises;
 const matter = require('gray-matter');
 
 // The function below is for getting the last update date from GitHub,
-// as Github has the rate limit for unauthenticated requests (60 requests per hour),
+// as GitHub has the rate limit for unauthenticated requests (60 requests per hour),
 // the script was run manually and the date was hardcoded in the frontmatter of the docs.
 
 // const octokit = new Octokit({
