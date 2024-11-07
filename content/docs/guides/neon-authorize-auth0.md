@@ -33,17 +33,19 @@ In this first set of steps, we'll integrate Auth0 as an authorization provider i
 
 ### 1. Get your Auth0 JWKS URL
 
-When integrating Auth0 with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This URL provides the public keys needed to verify the signatures of JWTs issued by your Auth0 application. It uses this format.
+To integrate Auth0 with Neon, you'll need to provide your Auth0 JWKS (JSON Web Key Set) URL. This URL provides the public keys needed to verify the signatures of JWTs issued by your Auth0 application. The URL follows this format.
 
 ```bash shouldWrap
 https://{YOUR_AUTH0_DOMAIN}/.well-known/jwks.json
 ```
 
-You can't find the URL directly from the Auth0 dashboard, but you can find your domain here: **Applications → `{your app}` → Settings**.
+First, open the **Settings** for your application in the Auth0 dashboard:
 
-For example, here's the Auth0 default domain (automatically assigned to your Auth0 tenant when you create an account).
+![find your Auth0 settings under applications - settings](/docs/guides/auth0_settings.png)
 
-![find your Auth0 domain for JWKS URL](/docs/guides/authO_neon_jwt.png)
+Copy your **Domain** and use that to form your JWKS URL. For example, here's the Auth0 default domain (automatically assigned to your Auth0 tenant when you create an account).
+
+![find your Auth0 domain for JWKS URL](/docs/guides/auth0_neon_jwt.png)
 
 ### 2. Add Auth0 as an authorization provider in the Neon Console
 
