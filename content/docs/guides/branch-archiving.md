@@ -39,11 +39,11 @@ The following actions will automatically unarchive a branch, transferring the br
 
 Archived branches can be easily identified in the Neon Console. On the **Branches** page, archived branches are identified by an archive icon, as shown below:
 
-![archived_branch_icon](/docs/guides/archived_branch_icon.png)
+![the archive icon shown on a branch in the branches list page](/docs/guides/archived_branch_icon.png)
 
 If you select an archived branch on the **Branches** page to view its details, you can find out when the branch was archived:
 
-![archived_branch_icon](/docs/guides/archived_branch_details.png)
+![the archive status shown on a branch in the branch detail page](/docs/guides/archived_branch_details.png)
 
 Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).
 
