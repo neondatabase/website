@@ -446,6 +446,8 @@
               slug: guides/neon-authorize-clerk
             - title: Stack Auth
               slug: guides/neon-authorize-stack-auth
+            - title: Auth0
+              slug: guides/neon-authorize-auth0
     - title: Integrations
       icon: integrations
       slug: guides/integrations
