@@ -71,7 +71,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-The endpoint response includes either the branch's `current_state` or `pending_state`. A pending state is reported if the branch is transitioning between states. State values include:
+The endpoint response includes a `current_state`, a `state_changed_at` for when the current state began, and an optional `pending_state` if the branch is currently transitioning between states. State values include:
 
 - `init` - the branch is being created but is not available for querying.
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
