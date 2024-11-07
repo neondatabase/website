@@ -20,7 +20,7 @@ Both conditions must be true for a branch to be archived.
 
 **No action is required to unarchive a branch. It happens automatically.**
 
-Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is in the process of being unarchived.
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
