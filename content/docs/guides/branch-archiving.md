@@ -20,7 +20,7 @@ Both conditions must be true for a branch to be archived.
 
 **No action is required to unarchive a branch. It happens automatically.**
 
-Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is in the process of being unarchived.
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
@@ -39,11 +39,11 @@ The following actions will automatically unarchive a branch, transferring the br
 
 Archived branches can be easily identified in the Neon Console. On the **Branches** page, archived branches are identified by an archive icon, as shown below:
 
-![archived_branch_icon](/docs/guides/archived_branch_icon.png)
+![the archive icon shown on a branch in the branches list page](/docs/guides/archived_branch_icon.png)
 
 If you select an archived branch on the **Branches** page to view its details, you can find out when the branch was archived:
 
-![archived_branch_icon](/docs/guides/archived_branch_details.png)
+![the archive status shown on a branch in the branch detail page](/docs/guides/archived_branch_details.png)
 
 Archive and unarchive operations can also be monitored in the Neon Console or using the Neon API. See [Monitoring branch archiving](#monitoring-branch-archiving).
 
@@ -71,7 +71,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-The endpoint response includes either the branch's `current_state` or `pending_state`. A pending state is reported if the branch is transitioning between states. State values include:
+The endpoint response includes a `current_state`, a `state_changed_at` for when the current state began, and an optional `pending_state` if the branch is currently transitioning between states. State values include:
 
 - `init` - the branch is being created but is not available for querying.
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
