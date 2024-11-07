@@ -12,7 +12,9 @@ import Heading from 'components/shared/heading';
 import links from 'constants/links';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) => {
+import illustration from './images/illustration.jpg';
+
+const CTAGasStation = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) => {
   const [contentRef, isContentInView] = useInView({ rootMargin: '50px 0px', triggerOnce: true });
   const {
     rive,
@@ -75,7 +77,7 @@ const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) 
         >
           <Image
             className="relative mx-auto min-h-[345px] lg:min-h-0 sm:left-1/2 sm:right-1/2 sm:-ml-[50vw] sm:-mr-[50vw] sm:w-screen sm:min-w-[100vw]"
-            src="/images/pages/pricing/cta.jpg"
+            src={illustration}
             width={842}
             height={538}
             loading="lazy"
@@ -97,11 +99,11 @@ const CTA = ({ title = '', description = '', buttonText = '', buttonUrl = '' }) 
   );
 };
 
-CTA.propTypes = {
+CTAGasStation.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
 };
 
-export default CTA;
+export default CTAGasStation;
