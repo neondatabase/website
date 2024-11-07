@@ -93,13 +93,13 @@ To configure Neon Private Access, perform the following steps:
 
    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
-   <Admonition type="note">
-    The Private Access connection is not affected by this IP Allow configuration.
-   </Admonition>
+      <Admonition type="note">
+       The Private Access connection is not affected by this IP Allow configuration.
+      </Admonition>
 
    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
-   <Admonition type="note">
-    Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
-   </Admonition>
-<NeedHelp />
+      <Admonition type="note">
+       Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
+      </Admonition>
+   <NeedHelp />
