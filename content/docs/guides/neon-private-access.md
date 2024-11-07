@@ -51,6 +51,10 @@ To configure Neon Private Access, perform the following steps:
 
    Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Access service and notify when the authorization is complete.
 
+   <Admonition type="note">
+    This step is specific to the Private Preview. In the final version, the allowed endpoint will be configured through the Neon Console without any manual involvement by Neon.
+   </Admonition>
+
 3. **Enable Private DNS**
 
    After Neon authorizes your endpoint (please wait for confirmation from Neon), you need to enable private DNS lookup for the endpoint.
@@ -89,10 +93,13 @@ To configure Neon Private Access, perform the following steps:
 
    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
-   <Admonition type="note">
-    The Private Access connection is not affected by this IP Allow configuration.
-   </Admonition>
+      <Admonition type="note">
+       The Private Access connection is not affected by this IP Allow configuration.
+      </Admonition>
 
    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
-<NeedHelp />
+      <Admonition type="note">
+       Using the IP Allow feature to block access from the public internet is only for the Private Preview. In the final version, there will be a dedicated option for this provided in the Neon Console.
+      </Admonition>
+   <NeedHelp />
