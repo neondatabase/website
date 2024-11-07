@@ -39,7 +39,7 @@ When integrating Auth0 with Neon, you'll need to provide the JWKS (JSON Web Key 
 https://{YOUR_AUTH0_DOMAIN}/.well-known/jwks.json
 ```
 
-You can't find the URL directly from the Auth0 dashboard, but you can find your domain here: **Applications → `{your app}` → Settings**. 
+You can't find the URL directly from the Auth0 dashboard, but you can find your domain here: **Applications → `{your app}` → Settings**.
 
 For example, here's the Auth0 default domain (automatically assigned to your Auth0 tenant when you create an account).
 
@@ -78,16 +78,16 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
   IN SCHEMA public
   to anonymous;
-  
+
 -- For future tables
-ALTER DEFAULT PRIVILEGES 
-  IN SCHEMA public 
-  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES 
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
   TO authenticated;
 
-ALTER DEFAULT PRIVILEGES 
-  IN SCHEMA public 
-  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES 
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
   TO anonymous;
 
 -- Grant USAGE on "public" schema
@@ -150,43 +150,39 @@ import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm
 export const todos = pgTable(
   'todos',
   {
-    id: bigint('id', { mode: 'bigint' })
-      .primaryKey()
-      .generatedByDefaultAsIdentity(),
+    id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
     userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     task: text('task').notNull(),
     isComplete: boolean('is_complete').notNull().default(false),
-    insertedAt: timestamp('inserted_at', { withTimezone: true })
-      .defaultNow()
-      .notNull(),
+    insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
   (t) => ({
-    p1: pgPolicy("create todos", {
-      for: "insert",
-      to: "authenticated",
+    p1: pgPolicy('create todos', {
+      for: 'insert',
+      to: 'authenticated',
       withCheck: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p2: pgPolicy("view todos", {
-      for: "select",
-      to: "authenticated",
+    p2: pgPolicy('view todos', {
+      for: 'select',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p3: pgPolicy("update todos", {
-      for: "update",
-      to: "authenticated",
+    p3: pgPolicy('update todos', {
+      for: 'update',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
 
-    p4: pgPolicy("delete todos", {
-      for: "delete",
-      to: "authenticated",
+    p4: pgPolicy('delete todos', {
+      for: 'delete',
+      to: 'authenticated',
       using: sql`(select auth.user_id() = user_id)`,
     }),
-  }),
+  })
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -206,25 +202,25 @@ CREATE TABLE todos (
   inserted_at timestamp not null default now()
 );
 
--- 1st enable row level security for your table      
+-- 1st enable row level security for your table
 ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
-  
+
 -- 2nd create policies for your table
 CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
-  
+
 CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
-  
+
 CREATE POLICY "Individuals can update their own todos." ON todos FOR UPDATE
 TO authenticated
 USING ((select auth.user_id()) = user_id)
 WITH CHECK ((select auth.user_id()) = user_id);
 
 CREATE POLICY "Individuals can delete their own todos." ON todos FOR DELETE
-TO authenticated 
+TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
@@ -258,7 +254,7 @@ export async function TodoList() {
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
-    const todos = await 
+    const todos = await
         sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
 
     return (
