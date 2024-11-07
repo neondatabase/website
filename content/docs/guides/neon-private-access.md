@@ -100,6 +100,6 @@ To configure Neon Private Access, perform the following steps:
    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
       <Admonition type="note">
-       Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
+       Using the IP Allow feature to block access from the public internet is only for the Private Preview. In the final version, there will be a dedicated option for this provided in the Neon Console.
       </Admonition>
    <NeedHelp />
