@@ -24,16 +24,16 @@ Connecting to an archived branch, querying it, or performing some other action t
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
-- Connecting to or querying the branch from a client or application
-- Querying the branch from the Neon SQL Editor
-- Viewing the branch on the Tables page in the Neon Console
-- Creating a child branch
-- Creating a role on a branch
-- Creating a database on a branch
-- Reset the branch from its parent
-- Performing a restore operation on a branch
-- Setting the branch as protected
-- Running Neon CLI commands and API calls that access the branch
+- [Connecting to or querying the branch from a client or application](https://neon.tech/docs/connect/connect-from-any-app)
+- [Querying the branch from the Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Viewing the branch on the Tables page in the Neon Console](https://neon.tech/docs/guides/tables)
+- [Creating a child branch](https://neon.tech/docs/manage/branches#create-a-branch)
+- [Creating a role on a branch](https://neon.tech/docs/manage/roles#create-a-role)
+- [Creating a database on a branch](https://neon.tech/docs/manage/databases#create-a-database)
+- [Reset the branch from its parent](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent)
+- [Performing a restore operation on a branch](https://neon.tech/docs/guides/branch-restore)
+- [Setting the branch as protected](https://neon.tech/docs/guides/protected-branches)
+- Running [Neon CLI](https://neon.tech/docs/reference/neon-cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
 
 ## Identifying archived branches
 
