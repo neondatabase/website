@@ -6,6 +6,8 @@ import GradientCard from 'components/shared/gradient-card';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
 import getLinkProps from 'utils/get-link-props';
 
+import CategoryLink from './category-link';
+
 const Card = ({ title, logo, description, externalUrl = '', isInternal, post = null, index }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
@@ -56,13 +58,24 @@ export const CardPropTypes = {
 
 Card.propTypes = CardPropTypes;
 
-const Cards = ({ items }) => (
-  <section className="main safe-paddings mt-56 xl:mt-[120px] lg:mt-11 md:mt-8">
+const Cards = ({ items, categories, activeCategory }) => (
+  <section className="main safe-paddings mt-40 lg:mt-32 md:mt-20 sm:mt-16">
     <Container className="flex flex-col items-center" size="960">
-      <h2 className="max-w-2xl text-center font-title text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
+      <h2 className="sr-only">All success stories</h2>
+      <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60">
         Powering ambitious product teams of all shapes and sizes
-      </h2>
-      <ul className="mt-14 h-12 w-full rounded-full border border-gray-new-15 bg-black-new" />
+      </p>
+      <ul className="mt-7 flex h-12 items-center gap-4 rounded-full border border-gray-new-15 bg-black-new px-8">
+        {categories.map(({ name, slug }, index) => (
+          <li className="group" key={index}>
+            <CategoryLink
+              name={name}
+              slug={slug}
+              isActive={slug === activeCategory?.slug || (!activeCategory && slug === 'all')}
+            />
+          </li>
+        ))}
+      </ul>
       <ul className="mt-12 grid grid-cols-3 gap-5 gap-x-[34px] lg:grid-cols-2 sm:grid-cols-1">
         {items.map(({ title, caseStudyPost }, index) => (
           <Card {...caseStudyPost} title={title} key={index} index={index} />
@@ -72,8 +85,15 @@ const Cards = ({ items }) => (
   </section>
 );
 
+const CategoryPropTypes = {
+  name: PropTypes.string,
+  slug: PropTypes.string,
+};
+
 Cards.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(CardPropTypes)).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape(CategoryPropTypes)).isRequired,
+  activeCategory: PropTypes.shape(CategoryPropTypes),
 };
 
 export default Cards;

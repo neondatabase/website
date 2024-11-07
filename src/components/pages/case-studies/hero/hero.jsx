@@ -106,12 +106,8 @@ const Hero = ({ items }) => {
         <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
           Explore success stories
         </h1>
-        <p className="mx-auto mt-3.5 max-w-xl text-center text-lg font-light leading-snug tracking-extra-tight md:text-base">
-          Discover the diverse and captivating stories of our valued partners, each a testament to
-          unique experiences and successes.
-        </p>
         {!!featuredItems.length && (
-          <ul className="mt-16 flex w-full flex-wrap gap-8 lg:mt-14 md:mt-10 sm:flex-col">
+          <ul className="mt-12 flex w-full flex-wrap gap-8 md:mt-10 sm:flex-col">
             {featuredItems.map(({ title, caseStudyPost }, index) => (
               <FeaturedCard {...caseStudyPost} title={title} index={index} key={index} />
             ))}

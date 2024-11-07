@@ -606,7 +606,6 @@ const getWpPostBySlug = cache(async (slug) => {
 
 // Query that executes when user requests a preview on a CMS,
 // the difference from a standard post query is that it uses Admin token to access unpublished posts and revisions of published posts
-
 const getWpPreviewPostData = async (id, status) => {
   const {
     refreshJwtAuthToken: { authToken },
@@ -828,10 +827,10 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-const getAllWpCaseStudiesPosts = async () => {
+const getAllWpCaseStudiesPosts = cache(async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 100) {
         nodes {
           caseStudyPost {
             isFeatured
@@ -864,6 +863,11 @@ const getAllWpCaseStudiesPosts = async () => {
             }
           }
           title(format: RENDERED)
+          caseStudiesCategories {
+            nodes {
+              slug
+            }
+          }
         }
       }
     }
@@ -871,12 +875,38 @@ const getAllWpCaseStudiesPosts = async () => {
   const data = await fetchGraphQL(graphQLClient).request(caseStudiesQuery);
 
   return data?.caseStudies?.nodes;
-};
+});
+
+const getAllWpCaseStudiesCategories = cache(async () => {
+  const categoriesQuery = gql`
+    query CaseStudiesCategories {
+      caseStudiesCategories {
+        nodes {
+          name
+          slug
+          caseStudies(first: 100) {
+            nodes {
+              id
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+
+  const filteredCategories = data?.caseStudiesCategories?.nodes
+    .filter((category) => category.caseStudies.nodes.length > 0)
+    .sort((a, b) => b.caseStudies.nodes.length - a.caseStudies.nodes.length);
+
+  return [{ name: 'All', slug: 'all' }, ...filteredCategories];
+});
 
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
   getAllWpCaseStudiesPosts,
+  getAllWpCaseStudiesCategories,
   getAllWpPosts,
   getWpBlogPage,
   getWpPostBySlug,
