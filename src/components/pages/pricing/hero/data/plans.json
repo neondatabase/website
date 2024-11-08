@@ -85,8 +85,7 @@
       "features": [
         { "title": "Organization accounts" },
         { "title": "Standard Support" },
-        { "title": "PITR (7 days)" },
-        { "title": "Monitoring (7 days)" }
+        { "title": "PITR (7 days)" }
       ]
     },
     "button": {
@@ -137,7 +136,6 @@
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
       "features": [
-        { "title": "More resources" },
         { "title": "Branch protection" },
         { "title": "PITR (14 days)" }
       ]
