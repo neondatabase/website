@@ -83,19 +83,20 @@ You can also monitor branch states using the Neon CLI or Neon API.
 <TabItem>
 The Neon CLI [branches list](https://neon.tech/docs/reference/cli-branches#list) command shows a branch's `Current State`. Branch states include:
 
-  - `init` - the branch is being created but is not available for querying.
-  - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
-  - `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
+- `init` - the branch is being created but is not available for querying.
+- `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
+- `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
 
-    ```bash
-    neon branches list --project-id green-hat-46829796
-    ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
-    │ Id                        │ Name │ Default │ Current State │ Created At           │
-    ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-    │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
-    └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
-    ```
-</TabItem>
+      ```bash
+      neon branches list --project-id green-hat-46829796
+      ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
+      │ Id                        │ Name │ Default │ Current State │ Created At           │
+      ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
+      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
+      └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
+      ```
+
+  </TabItem>
 
 <TabItem>
 The Neon API's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoint can retrieve a branch's state:
@@ -133,6 +134,7 @@ This example shows a branch that is currently `archived`. The `state_changed_at`
     "protected": false,
     ...
 ```
+
 </TabItem>
 
 </Tabs>
