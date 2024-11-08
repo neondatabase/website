@@ -45,13 +45,13 @@ To open Neon Project in the Neon Console:
 2. On your Neon database page, select **Open in Neon Postgres**.
 3. In the Neon Console, you are directed the projects page for your **Vercel: `<org_name>`** organization. If you've just installed, you will have a single Neon project with the database you created earlier.
 
-### Actions that can only be performed from the Vercel Dashboard
+### Actions supported from the Vercel Dashboard
 
-As a user of the Native Neon Postgres Integration, you have access to all Neon features, but there are a few differences to be aware of when managing your Neon account:
+As a user of the Native Neon Postgres Integration, you have access to all Neon features, but there are a few actions that can only be performed from the Vercel Dashboard:
 
 - Neon Projects can only be created or deleted through the Vercel dashboard.
 - Organizations cannot be deleted manually; they are deleted only if the Native Neon Postgres Integration is uninstalled from Vercel.
-- Organization members cannot be added manually through the Neon Dashboard. Adding users must be performed from Vercel. 
+- Organization members cannot be added manually through the Neon Dashboard. Members are managed from Vercel.
 - Invoices and payments are managed in Vercel, not Neon.
 
 ### Pricing
