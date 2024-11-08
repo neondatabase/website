@@ -1,22 +1,31 @@
 ---
-title: Vercel Marketplace
+title: Install Neon Postgres from the Azure Marketplace
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
 ---
 
-The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add services, like Neon Postgres, to your Vercel project directly from the Vercel platform.
+The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add native services, like Neon Postgres, to your Vercel project directly from the Vercel platform. With this integration, billing for Neon Postgres and some Neon project management options are managed in Vercel. 
 
-When you create Neon organizations and projects through the Vercel Marketplace, they function in the same way as projects created directly from Neon. However, billing is processed through your Vercel account, and you can manage your resources from the Vercel dashboard or CLI. Additionally, environment variables are automatically synced, making them readily available for your connected projects.
+<Admonition type="note">
+This integration option is intended for Vercel customers who want to add Neon Postgres to their Vercel project. It is assumed that you do not yet have a Neon Postgres account, as this integration creates one for you. If you are an existing Neon customer and want to use Vercel for preview deployments, please see our [Neon Postgres Previews] integration. 
+</Admonition>
+
 
 ## Install Neon from the Vercel Marketplace
 
 To install Neon from the Vercel Marketplace:
 
 1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
-2. Locate the Neon Postgres integration.
-3. Click **Install**. This will create a Neon organization for you.
-4. On the **Create Database** dialog, select a region. Generally, you should choose the region closest to your application.
+2. Locate the **Neon Postgres** integration.
+3. Click **Install**.
+4. On the **Install Neon Postgres** modal, you are presented with tow options. Select **Install the Neon Postgres Native Integration**, and click **Continue**.
+5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions and click **Create New Neon Postgres Account**.
+5. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**. 
+   <Admonition type="note">
+   Some details about Neon plans are provided, but for a full comparison, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
+   </Admonition> 
+
 5. Select a Neon plan and click **Continue**. For details about Neon plans and what included, refer to our [Pricing](https://neon.tech/pricing) page.
 6. Specify a **Database Name** or accept the generated name, and click **Create**.
 7. A database created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view you database details, including:
