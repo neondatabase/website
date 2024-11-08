@@ -18,7 +18,10 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
 
   return (
     <li className={clsx(index === 0 ? 'row-span-2 h-[380px]' : 'h-[180px]')}>
-      <Link className="group relative block size-full rounded-lg bg-[#080808]" {...linkProps}>
+      <Link
+        className="group relative block size-full rounded-lg border border-gray-new-20 bg-[#080808]"
+        {...linkProps}
+      >
         <div
           className={clsx(
             'relative z-10 flex size-full flex-col',
@@ -62,7 +65,8 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
           <span className="absolute -left-4 -top-20 h-[235px] w-[165%] rounded-full bg-[#166B70] opacity-20 blur-3xl" />
           <span className="absolute -right-3 -top-40 h-[250px] w-[60%] rotate-45 rounded-full bg-[#48C2CB] opacity-30 blur-3xl" />
         </span>
-        <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white mix-blend-overlay" />
+        <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white opacity-0 mix-blend-overlay transition-opacity duration-300 group-hover:opacity-100" />
+        <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20 transition-opacity duration-300 group-hover:opacity-0" />
       </Link>
     </li>
   );
