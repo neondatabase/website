@@ -39,7 +39,7 @@ To install Neon from the Vercel Marketplace:
 
 ## Open your Neon project in the Neon Console
 
-To open Neon Project in the Neon Console:
+To open your Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Neon database.
 2. On your Neon database page, select **Open in Neon Postgres**.
