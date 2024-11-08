@@ -9,6 +9,20 @@ updatedOn: '2024-10-15T17:19:50.116Z'
 Automatic archiving of inactive branches is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
 </Admonition>
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How Neon archives inactive branches</p>
+<p>How branches are unarchived</p>
+<p>How to monitor branch archiving</p>
+</DocsList>
+
+<DocsList title="Related docs" theme="docs">
+  <a href="/docs/introduction/architecture-overview#archive-storage">Archive storage</a>
+  <a href="https://api-docs.neon.tech/reference/getprojectbranch">Get branch details (Neon API)</a>
+</DocsList>
+
+</InfoBlock>
+
 To minimize storage costs, Neon automatically archives branches that are:
 
 - Older than **14 days**.
@@ -24,16 +38,16 @@ Connecting to an archived branch, querying it, or performing some other action t
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
-- [Connecting to or querying the branch from a client or application](https://neon.tech/docs/connect/connect-from-any-app)
-- [Querying the branch from the Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Viewing the branch on the Tables page in the Neon Console](https://neon.tech/docs/guides/tables)
-- [Creating a child branch](https://neon.tech/docs/manage/branches#create-a-branch)
-- [Creating a role on a branch](https://neon.tech/docs/manage/roles#create-a-role)
-- [Creating a database on a branch](https://neon.tech/docs/manage/databases#create-a-database)
-- [Reset the branch from its parent](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent)
-- [Performing a restore operation on a branch](https://neon.tech/docs/guides/branch-restore)
-- [Setting the branch as protected](https://neon.tech/docs/guides/protected-branches)
-- Running [Neon CLI](https://neon.tech/docs/reference/neon-cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
+- [Connecting to or querying the branch from a client or application](/docs/connect/connect-from-any-app)
+- [Querying the branch from the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Viewing the branch on the Tables page in the Neon Console](/docs/guides/tables)
+- [Creating a child branch](/docs/manage/branches#create-a-branch)
+- [Creating a role on a branch](/docs/manage/roles#create-a-role)
+- [Creating a database on a branch](/docs/manage/databases#create-a-database)
+- [Reset the branch from its parent](/docs/manage/branches#reset-a-branch-from-parent)
+- [Performing a restore operation on a branch](/docs/guides/branch-restore)
+- [Setting the branch as protected](/docs/guides/protected-branches)
+- Running [Neon CLI](/docs/reference/neon-cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
 
 ## Identifying archived branches
 
@@ -62,7 +76,29 @@ You can monitor branch archive and unarchive operations from the **System operat
 - `Timeline archive`: The time when the branch archive operation was initiated
 - `Timeline unarchive`: The time when the branch unarchive operation was initiated
 
-You can also monitor branch archive and unarchive operations using Neon's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API.
+You can also monitor branch states using the Neon CLI or Neon API.
+
+<Tabs labels={["CLI", "API"]}>
+
+<TabItem>
+The Neon CLI [branches list](https://neon.tech/docs/reference/cli-branches#list) command shows a branch's `Current State`. Branch states include:
+
+  - `init` - the branch is being created but is not available for querying.
+  - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
+  - `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
+
+    ```bash
+    neon branches list --project-id green-hat-46829796
+    ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
+    │ Id                        │ Name │ Default │ Current State │ Created At           │
+    ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
+    │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
+    └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
+    ```
+</TabItem>
+
+<TabItem>
+The Neon API's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoint can retrieve a branch's state:
 
 ```bash
 curl --request GET \
@@ -71,26 +107,34 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-The endpoint response includes a `current_state`, a `state_changed_at` for when the current state began, and an optional `pending_state` if the branch is currently transitioning between states. State values include:
+The response includes a `current_state`, a `state_changed_at` timestamp for when the current state began, and a `pending_state` if the branch is currently transitioning between states. State values include:
 
 - `init` - the branch is being created but is not available for querying.
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
 - `archived` - the branch is stored in cost-effective archive storage. Expect slow query response times.
 
+This example shows a branch that is currently `archived`. The `state_changed_at` shows a timestamp indicating when the state last changed.
+
 ```json {6}
 {
   "branch": {
-    "id": "br-cool-bread-a5mb9shh",
-    "project_id": "dark-bar-78675274",
-    "name": "main",
-    "current_state": "ready",
-    "state_changed_at": "2024-10-31T15:49:48Z",
-    "logical_size": 30900224,
+    "id": "br-broad-smoke-w2sqcu0i",
+    "project_id": "proud-darkness-91591984",
+    "parent_id": "br-falling-glade-w25m64ct",
+    "parent_lsn": "0/1F78F48",
+    "parent_timestamp": "2024-10-02T08:54:18Z",
+    "name": "dev/alex",
+    "current_state": "archived",
+    "state_changed_at": "2024-11-06T14:20:58Z",
+    "logical_size": 30810112,
     "creation_source": "console",
-    "primary": true,
-    "default": true,
+    "primary": false,
+    "default": false,
     "protected": false,
-...
+    ...
 ```
+</TabItem>
 
-For example, if a branch is in the process of being archived, the `pending_state` will be `archived`. When a branch is being unarchived, the `pending_state` will be `ready`.
+</Tabs>
+
+<NeedHelp/>
