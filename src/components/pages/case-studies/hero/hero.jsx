@@ -27,7 +27,7 @@ const FeaturedCard = ({
   isInternal,
   post = null,
 }) => {
-  const linkProps = getLinkProps({ externalUrl, isInternal, post, isFeatured: true });
+  const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
     <li
@@ -46,14 +46,14 @@ const FeaturedCard = ({
         {...linkProps}
       >
         <Image
-          className="h-8 w-fit lg:h-8"
+          className="h-8 w-fit"
           src={logo.mediaItemUrl}
           alt={title}
           width={logo.mediaDetails.width}
-          height={logo.mediaDetails.height}
+          height={32}
           priority
         />
-        <figure className="flex w-full flex-col">
+        <figure className="w-full">
           <blockquote>
             <p
               className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white xl:text-2xl lg:text-lg"
@@ -101,13 +101,13 @@ const Hero = ({ items }) => {
   );
 
   return (
-    <section className="hero safe-paddings pt-48 xl:pt-[120px] lg:pt-11 md:pt-8">
+    <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">
       <Container className="flex flex-col items-center" size="960">
-        <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
+        <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl sm:text-[32px]">
           Explore success stories
         </h1>
         {!!featuredItems.length && (
-          <ul className="mt-12 flex w-full flex-wrap gap-8 md:mt-10 sm:flex-col">
+          <ul className="mt-12 flex w-full flex-wrap gap-8 lg:mt-10 md:mt-8 md:gap-7 sm:mt-7 sm:flex-col sm:gap-5">
             {featuredItems.map(({ title, caseStudyPost }, index) => (
               <FeaturedCard {...caseStudyPost} title={title} index={index} key={index} />
             ))}

@@ -1,39 +1,69 @@
+'use client';
+
+import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
+import { useState, useMemo } from 'react';
 
+import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import GradientCard from 'components/shared/gradient-card';
+import Link from 'components/shared/link';
+import useWindowSize from 'hooks/use-window-size';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 import getLinkProps from 'utils/get-link-props';
 
-import CategoryLink from './category-link';
-
-const Card = ({ title, logo, description, externalUrl = '', isInternal, post = null, index }) => {
+const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post = null, index }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li>
-      <GradientCard className="p-8 lg:rounded-lg lg:p-6 sm:p-5" {...linkProps}>
-        <div className="flex h-full flex-col">
+    <li className={clsx(index === 0 ? 'row-span-2 h-[380px]' : 'h-[180px]')}>
+      <Link className="group relative block size-full rounded-lg bg-[#080808]" {...linkProps}>
+        <div
+          className={clsx(
+            'relative z-10 flex size-full flex-col',
+            index === 0 ? 'justify-between p-6' : 'items-center justify-center'
+          )}
+        >
           <Image
-            className="h-10 w-fit lg:h-8"
+            className="h-8 w-fit"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
-            height={logo.mediaDetails.height}
-            priority={index < 6}
+            height={32}
           />
-          <p className="mb-4 mt-[60px] line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-10 md:mt-6">
-            <span className="font-normal text-white">{title}</span>. {description}
-          </p>
-          {!!linkProps && (
-            <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:text-sm">
-              Read case study
-              <ArrowIcon className="ml-1" />
-            </div>
+          {index === 0 && (
+            <figure className="mt-auto flex w-full flex-col">
+              <blockquote>
+                <p
+                  className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white xl:text-2xl lg:text-lg"
+                  dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
+                />
+              </blockquote>
+              {author && author.name && (
+                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-[13px]">
+                  {author.name}{' '}
+                  <cite>
+                    {author?.post && <span className="not-italic">— {author?.post}</span>}
+                  </cite>
+                </figcaption>
+              )}
+              <div
+                className="mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight text-white transition-colors duration-200 hover:text-green-45 lg:mt-4 lg:text-sm"
+                {...linkProps}
+              >
+                Read story
+                <ArrowIcon className="ml-1.5" />
+              </div>
+            </figure>
           )}
         </div>
-      </GradientCard>
+        <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="absolute -left-4 -top-20 h-[235px] w-[165%] rounded-full bg-[#166B70] opacity-20 blur-3xl" />
+          <span className="absolute -right-3 -top-40 h-[250px] w-[60%] rotate-45 rounded-full bg-[#48C2CB] opacity-30 blur-3xl" />
+        </span>
+        <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white mix-blend-overlay" />
+      </Link>
     </li>
   );
 };
@@ -47,53 +77,103 @@ export const CardPropTypes = {
       height: PropTypes.number.isRequired,
     }).isRequired,
   }),
-  description: PropTypes.string,
+  quote: PropTypes.string,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    post: PropTypes.string,
+  }),
   isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
   externalUrl: PropTypes.string,
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
   }),
-  index: PropTypes.number,
+  index: PropTypes.number.isRequired,
 };
 
 Card.propTypes = CardPropTypes;
 
-const Cards = ({ items, categories, activeCategory }) => (
-  <section className="main safe-paddings mt-40 lg:mt-32 md:mt-20 sm:mt-16">
-    <Container className="flex flex-col items-center" size="960">
-      <h2 className="sr-only">All success stories</h2>
-      <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60">
-        Powering ambitious product teams of all shapes and sizes
-      </p>
-      <ul className="mt-7 flex h-12 items-center gap-4 rounded-full border border-gray-new-15 bg-black-new px-8">
-        {categories.map(({ name, slug }, index) => (
-          <li className="group" key={index}>
-            <CategoryLink
-              name={name}
-              slug={slug}
-              isActive={slug === activeCategory?.slug || (!activeCategory && slug === 'all')}
-            />
-          </li>
-        ))}
-      </ul>
-      <ul className="mt-12 grid grid-cols-3 gap-5 gap-x-[34px] lg:grid-cols-2 sm:grid-cols-1">
-        {items.map(({ title, caseStudyPost }, index) => (
-          <Card {...caseStudyPost} title={title} key={index} index={index} />
-        ))}
-      </ul>
-    </Container>
-  </section>
-);
+const Cards = ({ items, categories }) => {
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [isOpen, setIsOpen] = useState(false);
+  const { width: windowWidth } = useWindowSize();
+  const itemsToShow = windowWidth < 768 ? 10 : 17;
 
-const CategoryPropTypes = {
-  name: PropTypes.string,
-  slug: PropTypes.string,
+  const handleClickCategory = (slug) => {
+    setActiveCategory(slug);
+    setIsOpen(false);
+  };
+
+  const filteredItems = useMemo(
+    () =>
+      activeCategory === 'all'
+        ? items
+        : items.filter((item) =>
+            item.caseStudiesCategories.nodes.some((node) => node.slug === activeCategory)
+          ),
+    [items, activeCategory]
+  );
+
+  const hasHiddenItems = filteredItems.length > itemsToShow;
+
+  const limitedItems =
+    hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
+
+  return (
+    <section className="main safe-paddings mt-40 lg:mt-32 md:mt-20 sm:mt-16">
+      <Container className="flex flex-col items-center" size="960">
+        <h2 className="sr-only">All success stories</h2>
+        <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60">
+          Powering ambitious product teams of all shapes and sizes
+        </p>
+        <div className="mt-7 max-w-full overflow-hidden rounded-full border border-gray-new-15 bg-black-new">
+          <ul className="flex h-12 items-center overflow-x-auto px-[22px]">
+            {categories.map(({ name, slug }, index) => (
+              <li className="group" key={index}>
+                <button
+                  className={clsx(
+                    'flex h-9 items-center whitespace-nowrap rounded-full font-medium tracking-extra-tight',
+                    'transition-colors duration-200 hover:text-green-45',
+                    slug === activeCategory
+                      ? 'mx-4 border border-[#1B2C2E] bg-[#132628]/50 px-8 text-green-45 group-first:-ml-4 group-last:-mr-4'
+                      : 'px-4 text-gray-new-50'
+                  )}
+                  type="button"
+                  onClick={() => handleClickCategory(slug)}
+                >
+                  {name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ul className="mt-16 grid w-full grid-cols-3 gap-5 lg:grid-cols-2 sm:grid-cols-1">
+          {limitedItems.map(({ title, caseStudyPost }, index) => (
+            <Card title={title} {...caseStudyPost} index={index} key={index} />
+          ))}
+        </ul>
+        {hasHiddenItems && !isOpen && (
+          <Button
+            className="mx-auto mt-9 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
+            theme="gray-10"
+            onClick={() => setIsOpen(true)}
+          >
+            Show more
+            <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
+          </Button>
+        )}
+      </Container>
+    </section>
+  );
 };
 
 Cards.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(CardPropTypes)).isRequired,
-  categories: PropTypes.arrayOf(PropTypes.shape(CategoryPropTypes)).isRequired,
-  activeCategory: PropTypes.shape(CategoryPropTypes),
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      slug: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default Cards;
