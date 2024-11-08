@@ -29,8 +29,9 @@ To install Neon from the Vercel Marketplace:
 7. Specify a **Database Name**, and click **Create**.
 
    <Admonition type="note" title="A Database in Vercel is a Project in Neon"">
-   The **Database Name** in Vercel is the name of the **Neon Project** created when you install this integration. Just remember that **Database** in Vercel, means **Project** in Neon. A Neon project can have multiple Postgres databases. The initial Postgres database created in your Neon project will be named `neondb`. You will see that database name in the connection string that's provided when you complete the installation. 
+   The **Database Name** in Vercel is the name of the **Neon Project** created when you install this integration. Just remember that **Database** in Vercel, means **Project** in Neon. A Neon project can have multiple Postgres databases. The initial Postgres database created in your Neon project will be named `neondb`. You will see that database name in the connection string that's provided when you complete the installation.
    </Admonition>
+
 8. A database is created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your Neon database, including:
 
    - Status
