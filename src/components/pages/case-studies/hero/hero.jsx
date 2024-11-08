@@ -38,9 +38,8 @@ const FeaturedCard = ({
     >
       <Link
         className={clsx(
-          'relative z-10 flex h-full w-full flex-col justify-between overflow-hidden',
+          'group relative z-10 flex h-full w-full flex-col justify-between overflow-hidden',
           'rounded-xl border border-gray-new-15 bg-[#0A0A0A] px-6 py-5',
-          'transition-colors duration-200 hover:border-green-45',
           'xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full'
         )}
         {...linkProps}
@@ -67,7 +66,10 @@ const FeaturedCard = ({
             </figcaption>
           )}
           <div
-            className="mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight text-white transition-colors duration-200 hover:text-green-45 lg:mt-4 lg:text-sm"
+            className={clsx(
+              'mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight lg:mt-4',
+              'text-white transition-colors duration-200 group-hover:text-green-45'
+            )}
             {...linkProps}
           >
             Read story
@@ -105,7 +107,7 @@ const Hero = ({ items }) => {
 
   return (
     <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">
-      <Container className="flex flex-col items-center lg:!max-w-3xl" size="960">
+      <Container className="flex flex-col items-center lg:!max-w-3xl md:px-5" size="960">
         <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl sm:text-[32px]">
           Explore success stories
         </h1>

@@ -49,7 +49,10 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
                 </figcaption>
               )}
               <div
-                className="mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight text-white transition-colors duration-200 hover:text-green-45 lg:mt-4 lg:text-sm"
+                className={clsx(
+                  'mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight lg:mt-4',
+                  'text-white transition-colors duration-200 group-hover:text-green-45'
+                )}
                 {...linkProps}
               >
                 Read story
@@ -121,22 +124,22 @@ const Cards = ({ items, categories }) => {
 
   return (
     <section className="main safe-paddings mt-40 xl:mt-[136px] lg:mt-[104px] md:mt-20">
-      <Container className="flex flex-col items-center lg:!max-w-3xl" size="960">
+      <Container className="flex flex-col items-center lg:!max-w-3xl md:px-5" size="960">
         <h2 className="sr-only">All success stories</h2>
         <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60 sm:max-w-64 sm:text-base">
           Powering ambitious product teams of all shapes and sizes
         </p>
         <div className="mt-7 max-w-full overflow-hidden rounded-full border border-gray-new-15 bg-black-new xl:mt-6 lg:mt-5 sm:mt-[18px]">
-          <ul className="no-scrollbars flex h-12 items-center overflow-x-auto px-[22px]">
+          <ul className="no-scrollbars flex h-12 items-center overflow-x-auto px-1.5">
             {categories.map(({ name, slug }, index) => (
               <li className="group" key={index}>
                 <button
                   className={clsx(
-                    'flex h-9 items-center whitespace-nowrap rounded-full font-medium tracking-extra-tight',
-                    'transition-colors duration-200 hover:text-green-45',
+                    'flex h-9 items-center whitespace-nowrap rounded-full px-6 font-medium tracking-extra-tight',
+                    'border transition-colors duration-200 hover:text-green-45',
                     slug === activeCategory
-                      ? 'mx-4 border border-[#1B2C2E] bg-[#132628]/50 px-8 text-green-45 group-first:-ml-4 group-last:-mr-4'
-                      : 'px-4 text-gray-new-50'
+                      ? 'border-[#1B2C2E] bg-[#132628]/50 text-green-45'
+                      : 'border-transparent text-gray-new-50'
                   )}
                   type="button"
                   onClick={() => handleClickCategory(slug)}

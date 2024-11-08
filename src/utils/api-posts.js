@@ -841,14 +841,6 @@ const getAllWpCaseStudiesPosts = cache(async () => {
                 height
               }
             }
-            image {
-              mediaItemUrl
-              mediaDetails {
-                width
-                height
-              }
-            }
-            description
             quote
             author {
               name
@@ -866,6 +858,12 @@ const getAllWpCaseStudiesPosts = cache(async () => {
           caseStudiesCategories {
             nodes {
               slug
+              name
+              caseStudies(first: 100) {
+                nodes {
+                  id
+                }
+              }
             }
           }
         }
@@ -877,29 +875,25 @@ const getAllWpCaseStudiesPosts = cache(async () => {
   return data?.caseStudies?.nodes;
 });
 
-const getAllWpCaseStudiesCategories = cache(async () => {
-  const categoriesQuery = gql`
-    query CaseStudiesCategories {
-      caseStudiesCategories {
-        nodes {
-          name
-          slug
-          caseStudies(first: 100) {
-            nodes {
-              id
-            }
-          }
-        }
+const getAllWpCaseStudiesCategories = cache((caseStudies) => {
+  const categoriesMap = caseStudies.reduce((map, caseStudy) => {
+    caseStudy.caseStudiesCategories.nodes.forEach((category) => {
+      if (!map.has(category.slug)) {
+        map.set(category.slug, {
+          name: category.name,
+          slug: category.slug,
+          caseStudiesCount: category.caseStudies.nodes.length,
+        });
       }
-    }
-  `;
-  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+    });
+    return map;
+  }, new Map());
 
-  const filteredCategories = data?.caseStudiesCategories?.nodes
-    .filter((category) => category.caseStudies.nodes.length > 0)
-    .sort((a, b) => b.caseStudies.nodes.length - a.caseStudies.nodes.length);
+  const categories = Array.from(categoriesMap.values());
 
-  return [{ name: 'All', slug: 'all' }, ...filteredCategories];
+  categories.sort((a, b) => b.caseStudiesCount - a.caseStudiesCount);
+
+  return [{ name: 'All', slug: 'all' }, ...categories];
 });
 
 export {
