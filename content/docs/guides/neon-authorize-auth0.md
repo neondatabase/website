@@ -25,7 +25,7 @@ Auth0 handles user authentication by generating JSON Web Tokens (JWTs), which ar
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Auth0](https://auth0.com/) account with an existing application (e.g., a **todos** app) that uses Auth0 for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize) for similar schema and policies in action.
+- An [Auth0](https://auth0.com/) account with an existing application (e.g., a **todos** app) that uses Auth0 for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize) for similar schema and policies in action.
 
 ## Integrate Auth0 with Neon Authorize
 
