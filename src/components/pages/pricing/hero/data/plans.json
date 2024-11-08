@@ -35,7 +35,7 @@
       "features": [{ "title": "Read replicas" }, { "title": "90+ Postgres extensions" }]
     },
     "button": {
-      "url": "LINKS.signup",
+      "url": "https://console.neon.tech/signup",
       "text": "Start for free",
       "theme": "white-outline",
       "event": "Hero Free Tier Panel"
@@ -90,7 +90,7 @@
       ]
     },
     "button": {
-      "url": "LINKS.console/app/billing#plans",
+      "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "primary",
       "event": "Hero Launch Panel"
@@ -143,7 +143,7 @@
       ]
     },
     "button": {
-      "url": "LINKS.console/app/billing#plans",
+      "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "white-outline",
       "event": "Hero Scale Panel"
@@ -203,7 +203,7 @@
       ]
     },
     "button": {
-      "url": "LINKS.console/app/billing#plans",
+      "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "white-outline",
       "event": "Hero Enterprise Panel"
