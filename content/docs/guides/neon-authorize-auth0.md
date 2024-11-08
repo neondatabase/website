@@ -102,7 +102,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
+Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access Neon's HTTP API without using our driver, we recommend using the driver for best performance. The driver supports connecting over both WebSockets and HTTP, so make sure you use the [HTTP connection method](/docs/serverless/serverless-driver#use-the-driver-over-http) when working with Neon Authorize.
 
 Install it using the following command:
 
