@@ -1,5 +1,5 @@
 ---
-title: Install Neon Postgres from the Azure Marketplace
+title: Install the Native Neon Postgres Integration
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
@@ -11,7 +11,6 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add nativ
 This integration option is intended for Vercel customers who want to add Neon Postgres to their Vercel project. It is assumed that you do not yet have a Neon Postgres account, as this integration creates one for you. If you are an existing Neon customer and want to use Vercel for preview deployments, please see our [Neon Postgres Previews] integration. 
 </Admonition>
 
-
 ## Install Neon from the Vercel Marketplace
 
 To install Neon from the Vercel Marketplace:
@@ -21,47 +20,30 @@ To install Neon from the Vercel Marketplace:
 3. Click **Install**.
 4. On the **Install Neon Postgres** modal, you are presented with tow options. Select **Install the Neon Postgres Native Integration**, and click **Continue**.
 5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions and click **Create New Neon Postgres Account**.
-5. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**. 
+5. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**.
+
    <Admonition type="note">
    Some details about Neon plans are provided, but for a full comparison, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition> 
 
-5. Select a Neon plan and click **Continue**. For details about Neon plans and what included, refer to our [Pricing](https://neon.tech/pricing) page.
-6. Specify a **Database Name** or accept the generated name, and click **Create**.
-7. A database created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view you database details, including:
+6. Specify a **Database Name**, and click **Create**.
+7. A database is created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your Neon database, including:
 
    - Status
    - Plan
-   - Current Period
-   - Period Total
-   - Quickstart (shows your database connection string)
-
-   From the sidebar, you can view your Neon **Project Setting**, the **Getting Started**, and **Usage**. There's also a link to **Support**.
+   - Current Period (billing)
+   - Period Total (billing)
+   - Your database connection string
+   
+   From the sidebar, you can view your Neon **Projects**, **Setting**, the **Getting Started**, and **Usage**. There's also a link to **Support**.
 
 ## Open your Neon project in the Neon Console
 
 To open Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Neon database.
-2. On your Neon database page, select **Open in Neon Database**.
-3. In the Neon Console, select your **Vercel: neondatabase** organization from the from the breadcrumb dropdown. You will be directed to your Organization's project page, where you can view Account Usage and projects belonging to your organization. If you've just installed, you will have a single project containing database you created earlier.
-
-### Connecting to Neon Projects
-
-Neon projects created through the Vercel Marketplace are automatically synchronized with connected Vercel projects. This sync includes setting up key environment variables, such as:
-
-- `POSTGRES_URL`
-- `POSTGRES_PRISMA_URL`
-- `POSTGRES_URL_NON_POOLING`
-- `POSTGRES_USER`
-- `POSTGRES_HOST`
-- `POSTGRES_PASSWORD`
-- `POSTGRES_DATABASE`
-- `NEON_API_KEY`
-- `NEON_PROJECT_ID`
-- `NEXT_PUBLIC_NEON_API_URL`
-
-These variables ensure your applications can securely connect to the database and interact with Neon's APIs.
+2. On your Neon database page, select **Open in Neon Postgres**.
+3. In the Neon Console, you are directed the projects page for your **Vercel: `<org_name>`** organization. If you've just installed, you will have a single project containing database you created earlier.
 
 ### Neon Console Access
 
