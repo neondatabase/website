@@ -18,6 +18,7 @@ Automatic archiving of inactive branches is only enabled on the Free Plan. Branc
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/introduction/architecture-overview#archive-storage">Archive storage</a>
+  <a href="/docs/reference/cli-branches#list">Branches list command (Neon CLI)</a>
   <a href="https://api-docs.neon.tech/reference/getprojectbranch">Get branch details (Neon API)</a>
 </DocsList>
 
@@ -76,12 +77,14 @@ You can monitor branch archive and unarchive operations from the **System operat
 - `Timeline archive`: The time when the branch archive operation was initiated
 - `Timeline unarchive`: The time when the branch unarchive operation was initiated
 
+For related information, see [System operations](/docs/manage/operations).
+
 You can also monitor branch states using the Neon CLI or Neon API.
 
 <Tabs labels={["CLI", "API"]}>
 
 <TabItem>
-The Neon CLI [branches list](https://neon.tech/docs/reference/cli-branches#list) command shows a branch's `Current State`. Branch states include:
+The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a branch's `Current State`. Branch states include:
 
   - `init` - the branch is being created but is not available for querying.
   - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.
