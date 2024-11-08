@@ -84,8 +84,7 @@
       "title": "Everything in Free, plus...",
       "features": [
         { "title": "Organization accounts" },
-        { "title": "Standard Support" },
-        { "title": "PITR (7 days)" }
+        { "title": "Standard Support" }
       ]
     },
     "button": {
