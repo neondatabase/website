@@ -27,6 +27,10 @@ To install Neon from the Vercel Marketplace:
    </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
+
+   <Admonition type="note" title="A Database in Vercel is a Project in Neon"">
+   The **Database Name** in Vercel is the name of the **Neon Project** created when you install this integration. Just remember that **Database** in Vercel, means **Project** in Neon. A Neon project can have multiple Postgres databases. The initial Postgres database created in your Neon project will be named `neondb`. You will see that database name in the connection string that's provided when you complete the installation. 
+   </Admonition>
 8. A database is created, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your Neon database, including:
 
    - Status
@@ -50,15 +54,67 @@ To open your Neon Project in the Neon Console:
 As a user of the Native Neon Postgres Integration, you have access to all Neon features, but there are a few actions that can only be performed from the Vercel Dashboard:
 
 - Neon Projects can only be created or deleted through the Vercel dashboard.
-- Organizations cannot be deleted manually; they are deleted only if the Native Neon Postgres Integration is uninstalled from Vercel.
+- Organizations cannot be deleted in the Neon Console; they are deleted only if the Native Neon Postgres Integration is uninstalled from Vercel.
 - Organization members cannot be added manually through the Neon Dashboard. Members are managed from Vercel.
+- Project collaborators cannot be added manually through the Neon Dashboard. Collaborators are managed as Members in Vercel.
+- Compute settings, including compute size, autoscaling, and autosuspend settings are managed in Vercel.
+- Changing the name of your Neon project (**Database Name** in Vercel) is performed in Vercel.
 - Invoices and payments are managed in Vercel, not Neon.
+- Plan upgrades and downgrades are managed in Vercel.
 
-### Pricing
+### Changing your database configuration
 
-The pricing for databases created via the Vercel Marketplace is identical to those created directly in Neon. Detailed pricing information can be found on the Neon pricing page.
+Configuration changes you can make include:
 
-The usage of your Neon databases will be tracked on the Vercel usage page, and billing will appear on your Vercel invoice.
+- Changing the **Database Name** (Project name in Neon)
+- Changing the **Compute size**
+- Changing **Suspend after period of inactivity** setting (Autosuspend)
+- Changing your **Installation Level Plan** (your Neon plan)
+
+To change your configuration:
+
+1. On the Vercel Dashboard, navigate to **Storage** tab.
+2. Select **Settings**.
+3. In the **Update configuration** section, select **Change Configuration**.
+4. Select the desired configurations, and click **Save**.
+
+### Monitoring usage
+
+You can monitor usage in Vercel or in the Neon Console. For information about monitoring usage in the Neon Console, see [Monitor billing and usage](/docs/introduction/monitor-usage).
+
+To monitor usage in Vercel:
+
+1. On the Vercel Dashboard, navigate to **Storage** tab.
+2. Select **Usage** to view the **Usage Report**.
+
+**Usage metrics:**
+
+- **Total cost**: This chart shows total cost over time. Please keep in mind that there is a base monthly that include an allowance of compute and storage. If you've not exceeded your allowances, you see a flat line for total cost reflecting just your monthly charge. If you go over your allowances, the line will show those increases from your baseline monthly fee.
+- **Compute time**: This chart shows compute hour usage over time.
+- **Synthetic Storage size**: Synthetic storage is your logical data storage size plus your data change history, which supports Neon features like point-in-time restore.
+
+### Changing your plan
+
+When you install the Native Neon Postgres Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available if you signed up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
+
+1. On the Vercel Dashboard, navigate to **Storage** tab.
+2. Select **Settings**.
+3. In the **Update configuration** section, select **Change Configuration**.
+4. Select the desired **Installation plan**, and click **Save**.
+
+For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
+
+### Deleting your database
+
+Deleting a database in Vercel deletes your project in Neon and all of its data.
+
+To delete your database:
+
+1. On the Vercel Dashboard, navigate to **Storage** tab.
+2. Select **Settings**.
+3. Navigate to the Delete Database section and follow the instructions.
+
+This action is not reversible, so please proceed with caution.
 
 ### Limitations
 
