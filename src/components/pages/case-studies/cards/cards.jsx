@@ -30,7 +30,7 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
-            height={32}
+            height={logo.mediaDetails.height}
           />
           {index === 0 && (
             <figure className="mt-auto w-full">

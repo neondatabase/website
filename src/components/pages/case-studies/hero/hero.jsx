@@ -50,7 +50,7 @@ const FeaturedCard = ({
           src={logo.mediaItemUrl}
           alt={title}
           width={logo.mediaDetails.width}
-          height={32}
+          height={logo.mediaDetails.height}
           priority
         />
         <figure className="w-full">
