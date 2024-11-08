@@ -33,15 +33,15 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
             height={32}
           />
           {index === 0 && (
-            <figure className="mt-auto flex w-full flex-col">
+            <figure className="mt-auto w-full">
               <blockquote>
                 <p
-                  className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white xl:text-2xl lg:text-lg"
+                  className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
                   dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
                 />
               </blockquote>
               {author && author.name && (
-                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-[13px]">
+                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
                   {author.name}{' '}
                   <cite>
                     {author?.post && <span className="not-italic">— {author?.post}</span>}
@@ -119,14 +119,14 @@ const Cards = ({ items, categories }) => {
     hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
 
   return (
-    <section className="main safe-paddings mt-40 lg:mt-32 md:mt-20 sm:mt-16">
-      <Container className="flex flex-col items-center" size="960">
+    <section className="main safe-paddings mt-40 xl:mt-[136px] lg:mt-[104px] md:mt-20">
+      <Container className="flex flex-col items-center lg:!max-w-3xl" size="960">
         <h2 className="sr-only">All success stories</h2>
-        <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60">
+        <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60 sm:max-w-64 sm:text-base">
           Powering ambitious product teams of all shapes and sizes
         </p>
-        <div className="mt-7 max-w-full overflow-hidden rounded-full border border-gray-new-15 bg-black-new">
-          <ul className="flex h-12 items-center overflow-x-auto px-[22px]">
+        <div className="mt-7 max-w-full overflow-hidden rounded-full border border-gray-new-15 bg-black-new xl:mt-6 lg:mt-5 sm:mt-[18px]">
+          <ul className="no-scrollbars flex h-12 items-center overflow-x-auto px-[22px]">
             {categories.map(({ name, slug }, index) => (
               <li className="group" key={index}>
                 <button
@@ -146,14 +146,14 @@ const Cards = ({ items, categories }) => {
             ))}
           </ul>
         </div>
-        <ul className="mt-16 grid w-full grid-cols-3 gap-5 lg:grid-cols-2 sm:grid-cols-1">
+        <ul className="mt-16 grid w-full grid-cols-3 gap-5 xl:mt-14 lg:mt-12 lg:grid-cols-2 md:mt-9 sm:grid-cols-1">
           {limitedItems.map(({ title, caseStudyPost }, index) => (
             <Card title={title} {...caseStudyPost} index={index} key={index} />
           ))}
         </ul>
         {hasHiddenItems && !isOpen && (
           <Button
-            className="mx-auto mt-9 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
+            className="mx-auto mt-16 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200 xl:mt-14 lg:mt-12 md:mt-9"
             theme="gray-10"
             onClick={() => setIsOpen(true)}
           >

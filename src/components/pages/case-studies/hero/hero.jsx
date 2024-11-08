@@ -32,14 +32,14 @@ const FeaturedCard = ({
   return (
     <li
       className={clsx('h-[315px] sm:w-full', {
-        'w-[60%]': index % 4 === 0 || index % 4 === 3,
-        'flex-[30%] flex-grow': index % 4 === 1 || index % 4 === 2,
+        'w-[60%] lg:w-full': index % 4 === 0 || index % 4 === 3,
+        'lg:flex-1/2 flex-[30%] flex-grow sm:flex-none': index % 4 === 1 || index % 4 === 2,
       })}
     >
       <Link
         className={clsx(
           'relative z-10 flex h-full w-full flex-col justify-between overflow-hidden',
-          'rounded-xl border border-gray-new-15 bg-[#0A0A0A] p-6 pt-5',
+          'rounded-xl border border-gray-new-15 bg-[#0A0A0A] px-6 py-5',
           'transition-colors duration-200 hover:border-green-45',
           'xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full'
         )}
@@ -56,12 +56,12 @@ const FeaturedCard = ({
         <figure className="w-full">
           <blockquote>
             <p
-              className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white xl:text-2xl lg:text-lg"
+              className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
               dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
             />
           </blockquote>
           {author && author.name && (
-            <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-[13px]">
+            <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
               {author.name}{' '}
               <cite>{author?.post && <span className="not-italic">— {author?.post}</span>}</cite>
             </figcaption>
@@ -76,9 +76,12 @@ const FeaturedCard = ({
         </figure>
         {(index % 4 === 0 || index % 4 === 3) && (
           <Image
-            className="pointer-events-none absolute inset-0 -z-10 object-cover"
+            className={clsx(
+              'pointer-events-none absolute inset-0 -z-10 size-full object-cover object-left',
+              index % 4 === 3 && 'lg:object-center'
+            )}
             src={cardBgImages[(index % 4) + 1]}
-            width={576}
+            width={704}
             height={315}
             alt=""
             priority
@@ -102,12 +105,12 @@ const Hero = ({ items }) => {
 
   return (
     <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">
-      <Container className="flex flex-col items-center" size="960">
+      <Container className="flex flex-col items-center lg:!max-w-3xl" size="960">
         <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl sm:text-[32px]">
           Explore success stories
         </h1>
         {!!featuredItems.length && (
-          <ul className="mt-12 flex w-full flex-wrap gap-8 lg:mt-10 md:mt-8 md:gap-7 sm:mt-7 sm:flex-col sm:gap-5">
+          <ul className="mt-12 flex w-full flex-wrap gap-8 xl:mt-10 lg:mt-8 lg:gap-7 sm:mt-7 sm:flex-col sm:gap-5">
             {featuredItems.map(({ title, caseStudyPost }, index) => (
               <FeaturedCard {...caseStudyPost} title={title} index={index} key={index} />
             ))}

@@ -145,7 +145,7 @@ const Table = () => {
     <div className="mx-auto mt-12 flex max-w-[1220px] flex-col xl:max-w-none xl:px-10 lg:pl-8 lg:pr-0 md:pl-4">
       <ul
         className={clsx(
-          'scrollbar-hidden relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
+          'no-scrollbars relative flex w-full pt-5 lg:overflow-x-auto lg:pr-4',
           isHiddenItems &&
             'after:absolute after:inset-x-0 after:bottom-0 after:h-1.5 after:bg-black-pure'
         )}
