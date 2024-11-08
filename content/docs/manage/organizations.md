@@ -100,7 +100,6 @@ Project transfers to an organization are one-way. You cannot move organization p
 
 As we continue to refine our organization features during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
-- **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects.
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
 - **Project transfer restrictions** — Currently, you cannot transfer projects using either the Vercel, Outerbase, or the GitHub integrations.
 - **Permissions and roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
