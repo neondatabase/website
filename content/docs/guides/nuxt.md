@@ -70,23 +70,26 @@ export default defineNuxtConfig({
 Next, use the Neon serverless driver to create a database connection. Here’s an example configuration:
 
 ```javascript
-import { neon } from "@neondatabase/serverless";
+import { neon } from '@neondatabase/serverless';
 
-export default defineCachedEventHandler(async (event) => {
-  const { databaseUrl } = useRuntimeConfig();
-  const db = neon(databaseUrl);
-  const result = await db`SELECT version()`;
-  return result;
-}, {
-  maxAge: 60 * 60 * 24, // cache it for a day
-});
+export default defineCachedEventHandler(
+  async (event) => {
+    const { databaseUrl } = useRuntimeConfig();
+    const db = neon(databaseUrl);
+    const result = await db`SELECT version()`;
+    return result;
+  },
+  {
+    maxAge: 60 * 60 * 24, // cache it for a day
+  }
+);
 ```
 
 <Admonition type="note">
 - This example demonstrates using the Neon serverless driver to run a simple query. The `useRuntimeConfig` method accesses the `databaseUrl` set in your Nuxt runtime configuration.
 - Async Handling: Make sure the handler is async if you are awaiting the database query result.
 - Make sure maxAge caching fits your application’s needs. In this example, it’s set to cache results for a day. Adjust as necessary.
-</Admonition> 
+</Admonition>
 
 ## Run the app
 
