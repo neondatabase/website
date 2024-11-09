@@ -831,7 +831,7 @@ const getWpPreviewPost = async (id) => {
 const getAllWpCaseStudiesPosts = async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 33) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 40) {
         nodes {
           caseStudyPost {
             isFeatured
