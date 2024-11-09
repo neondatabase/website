@@ -5,7 +5,29 @@ isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
 ---
 
-The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add native services, like Neon Postgres, to your Vercel project directly from the Vercel platform. With this integration, billing for Neon Postgres and some Neon project management options are managed in Vercel.
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>What is the Native Neon Postgres Integration</p>
+<p>How to install Neon Postgres from the Vercel Marketplace</p>
+<p>How to manage your integration</p>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/vercel">Neon Postgres Previews Integration</a>
+<a href="https://neon.tech/docs/introduction/plans">Neon plans</a>
+</DocsList>
+</InfoBlock>
+
+## About the integration
+
+**What is the Native Neon Postgres Integration?**
+
+The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon Postgres to your Vercel account as a native integration, providing you with integrated management experience. With the native Neon Postgres integration:
+
+- You will install Neon Postgres as a first-party Vercel integration from the [Vercel Marketplace](https://vercel.com/marketplace).
+- Installing the integration creates a Neon account for you.
+- Billing is managed in Vercel, not Neon.
+- You get access to the same features and pricing plans as users who register directly with Neon, including access to the Neon Console.
 
 <Admonition type="note">
 This integration option is intended for Vercel customers who want to add Neon Postgres to their Vercel project. It is assumed that you do not yet have a Neon Postgres account, as this integration creates one for you. If you are an existing Neon customer and want to use Vercel for preview deployments, please see our [Neon Postgres Previews](/docs/guides/vercel) integration. 
@@ -48,7 +70,7 @@ To open your Database / Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Database.
 2. On your Database page, select **Open in Neon Postgres**.
-3. In the Neon Console, you are directed the projects page for your Organization. It will be named **Vercel: `<org_name>`**. If you've just installed, you will have a single Neon Project.
+3. In the Neon Console, you are directed the projects page for your Organization. It will be named **Vercel: `<organization_name>`**. If you've just installed, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be the same.
 
 <Admonition type="note">
 All Neon Plans, including the Free Plan, support multiple Neon Projects. Creating additional projects is performed from the Vercel Dashboard. See [Creating more Databases](#tbd) for instructions.
