@@ -10,25 +10,27 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 ## Installing Neon Postgres from the Vercel Marketplace
 
-If you're a Vercel customer and want to install the native Neon Postgres integration from the Vercel Marketplace, these docs are for you.
+If you want to integrate Neon with Vercel, you have two integration options, one for Vercel users who want to add Neon Postgres to their project, and the other for existing Neon users who want to use Vercel for for preview deployments.
+
+1. **Neon Postgres Native Integration**: A first-party Vercel storage integration. This integration creates a Neon Postgres account for you. You get access to Neon features and plans. Billing is managed through Vercel.
+
+2. **Neon Postgres Previews Integration**: A connectable account integration for existing Neon Postgres users that connects your Vercel project to a Neon database and creates a database branch with every preview deployment.
+
+<Admonition type="note">
+**Using both integrations on the same Vercel account is not supported**. Neon is currently working with Vercel to add a support for a database branch with each preview deployment to the **Neon Postgres Native Integration**.
+</Admonition>
+
+Refer to the guides below for the integration you want to set up.
 
 <DetailIconCards>
 
-<a href="/docs/guides/vercel-marketplace" description="Learn how to install Neon from the Vercel Marketplace" icon="check">Install Neon Postgres from the Vercel Marketplace</a>
+<a href="/docs/guides/vercel-marketplace" description="Learn how to install the Install the Native Neon Postgres Integration from the Vercel Marketplace" icon="check">Native Neon Postgres Integration</a>
+
+<a href="(/docs/guides/vercel" description="Learn how to install the Neon Postgres Preview Integration for a database branch with every deployment preview" icon="check">Neon Postgres Previews Integration</a>
 
 </DetailIconCards>
 
-## Install the Neon Postgres Previews integration
-
-If you're a Neon customer, you can install the Neon Postgres Previews integration to create a Neon branch with every preview deployment. The integration connects your Vercel project to a Neon database and uses Neon's branching capability to create a database branch for each preview deployment.
-
-<DetailIconCards>
-
-<a href="(/docs/guides/vercel" description="Learn how to setup the Neon Vercel Postgres Preview Integration for a database branch with every deployment preview" icon="check">Neon Postgres Previews Integration</a>
-
-</DetailIconCards>
-
-## Transitioning to Neon from Vercel Postgres?
+## Are you transitioning to Neon from Vercel Postgres?
 
 If you're transitioning from Vercel Postgres to Neon, welcome. We're glad you're here. We've prepared a transition guide to answer questions you might have and get you started with Neon. We've also put together a guide for transitioning from the Vercel SDK to the Neon serverless driver, and we've provided a copy of the Vercel Postgres docs, which we'll keep for a while for your reference while you make the transition.
 
