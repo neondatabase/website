@@ -1,5 +1,6 @@
 ---
-title: Install the Native Neon Postgres Integration on Vercel
+title: Install the Neon Postgres Native Integration on Vercel
+subtitle: Add Neon Postgres storage to your Vercel project as a first-party native integration
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
@@ -7,40 +8,39 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>What is the Native Neon Postgres Integration</p>
+<p>What is the Neon Postgres Native Integration</p>
 <p>How to install Neon Postgres from the Vercel Marketplace</p>
 <p>How to manage your integration</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="/docs/guides/vercel">Neon Postgres Previews Integration</a>
+<a href="/docs/guides/vercel-previews-integration">Neon Postgres Previews Integration</a>
 <a href="https://neon.tech/docs/introduction/plans">Neon plans</a>
 </DocsList>
 </InfoBlock>
 
 ## About the integration
 
-**What is the Native Neon Postgres Integration?**
+**What is the Neon Postgres Native Integration?**
 
-The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon Postgres to your Vercel account as a native integration, providing you with integrated management experience. With the native Neon Postgres integration:
+The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon Postgres to your Vercel project as a first-party [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration), providing you with integrated management experience.
 
-- You will install Neon Postgres as a first-party Vercel integration from the [Vercel Marketplace](https://vercel.com/marketplace).
 - Installing the integration creates a Neon account for you.
-- Billing is managed in Vercel, not Neon.
-- You get access to the same features and pricing plans as users who register directly with Neon, including access to the Neon Console.
+- Billing for Neon Postgres is managed in Vercel, not Neon.
+- You get access to the same features and Neon pricing plans as users who register with Neon directly, including access to your database from the Neon Console.
 
 <Admonition type="note">
-This integration option is intended for Vercel customers who want to add Neon Postgres to their Vercel project. It is assumed that you do not yet have a Neon Postgres account, as this integration creates one for you. If you are an existing Neon customer and want to use Vercel for preview deployments, please see our [Neon Postgres Previews](/docs/guides/vercel) integration. 
+The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project. If you are an existing Neon customer and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews](/docs/guides/vercel-previews-integration) integration. The native integration does not yet support automatic database branches for Vercel preview deployments.
 </Admonition>
 
 ## How to install
 
-To install the Install the **Native Neon Postgres Integration** from the Vercel Marketplace:
+To install the Install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 
 1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
 2. Locate the **Neon Postgres** integration.
 3. Click **Install**.
-4. On the **Install Neon Postgres** modal, you are presented with tow options. Select **Install the Neon Postgres Native Integration**, and click **Continue**.
+4. On the **Install Neon Postgres** modal, you are presented with two options. Select **Install the Neon Postgres Native Integration**, and click **Continue**.
 5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions, and click **Create New Neon Postgres Account**.
 6. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**.
 
@@ -78,10 +78,10 @@ All Neon Plans, including the Free Plan, support multiple Neon Projects. Creatin
 
 ### Actions supported only from the Vercel Dashboard
 
-As a user of the Native Neon Postgres Integration, you have access to all Neon features, but there are a few actions that can only be performed from the Vercel Dashboard:
+As a user of the Neon Postgres Native Integration, you have access to all Neon features, but there are a few actions that can only be performed from the Vercel Dashboard:
 
 - Neon Projects can only be created or deleted through the Vercel dashboard.
-- Organizations cannot be deleted in the Neon Console; they are deleted only if the Native Neon Postgres Integration is uninstalled from Vercel.
+- Organizations cannot be deleted in the Neon Console; they are deleted only if the Neon Postgres Native Integration is uninstalled from Vercel.
 - Organization members cannot be added manually through the Neon Dashboard. Members are managed from Vercel.
 - Project collaborators cannot be added manually through the Neon Dashboard. Collaborators are managed as Members in Vercel.
 - Compute settings, including compute size, autoscaling, and autosuspend settings are managed in Vercel.
@@ -148,7 +148,7 @@ To monitor usage in Vercel:
 
 ## Changing your plan
 
-When you install the Native Neon Postgres Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available if you signed up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
+When you install the Neon Postgres Native Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available if you signed up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
 2. Select **Settings**.
@@ -171,8 +171,8 @@ This action is not reversible, so please proceed with caution.
 
 ## Limitations
 
-When using Native Neon Postgres Integration from the Vercel Marketplace, the following limitations apply:
+When using Neon Postgres Native Integration from the Vercel Marketplace, the following limitations apply:
 
-- If you've installed the Native Neon Postgres Integration, installing the **Neon Postgres Previews Integration** for the same Vercel Account is not supported.
+- If you've installed the Neon Postgres Native Integration, installing the **Neon Postgres Previews Integration** for the same Vercel Account is not supported.
 
 <NeedHelp/>

@@ -31,7 +31,7 @@ neon branches reset dev/alex --parent
 
 No more time-consuming restore operations when you need a fresh database copy.
 
-You can use branching with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own branching workflow, you can use the [Neon Vercel integration](https://vercel.com/integrations/neon) to set one up in just a few clicks.
+You can use branching with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own branching workflow, you can use the [Neon Postgres Previews Integration](https://vercel.com/integrations/neon) to set one up in just a few clicks.
 
 To learn more, read [Database Branching Workflows](https://neon.tech/flow), and the [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers).
 

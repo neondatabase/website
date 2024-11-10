@@ -434,8 +434,10 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Neon Vercel Integration
-                  slug: guides/vercel
+                - title: Postgres Native Integration
+                  slug: guides/vercel-native-integration
+                - title: Postgres Previews Integration
+                  slug: guides/vercel-previews-integration
                 - title: Connect manually
                   slug: guides/vercel-manual
             - title: Cloudflare

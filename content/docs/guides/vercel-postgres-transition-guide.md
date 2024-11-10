@@ -129,7 +129,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [The Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
 
 <Admonition type="note">
-[The Neon Vercel Integration](/docs/guides/vercel), which automatically creates a database branch for each preview deployment, is currently only available to direct customers of Neon. To use this integration, you would have to sign up for a Neon account directly rather than through the Vercel Marketplace. 
+[The Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration), which automatically creates a database branch for each preview deployment, is currently only available to direct customers of Neon. To use this integration, you would have to sign up for a Neon account directly rather than through the Vercel Marketplace. 
 </Admonition>
 
 ### What Vercel Postgres limitations are lifted by the transitions to Neon?
@@ -149,6 +149,10 @@ Yes, all regions supported by Vercel Postgres are also supported by Neon Postgre
 ### Will the Vercel Postgres SDK continue to work?
 
 Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/sdk) (a wrapper around the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver)) will continue to be supported. No changes are required to your applications. The SDK will continue to work with Neon Postgres for the forseeable future, although there is no plan for Neon to maintain the Vercel Postgres SDK. If you're interested in migrating from the Vercel SDK, please refer to our Vercel SDK to Neon serverless driver migration guide](#tbd).
+
+<Admonition type="note" title="Did you know">
+**The Vercel SDK is a wrapper around the the Neon serverless driver.** There's no need to switch immediately. The Vercel SDK will continue to work for the forseeable future, but if you would like to user the Neon serverless driver directly (maintained by Neon), please refer to our migration guide for instructions.
+</Admonition>
 
 ### Is Neon compatible with the same ORMs as Vercel Postgres?
 
