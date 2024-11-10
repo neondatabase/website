@@ -8,11 +8,7 @@ isDraft: false
 updatedOn: '2024-06-14T07:55:54.409Z'
 ---
 
-There are a few different ways you can integrate Neon with Vercel.
-
 ## Are you transitioning from Vercel Postgres?
-
-If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a transition guide to answer questions you might have and get you started with Neon. We've also put together a guide for transitioning from the Vercel SDK to the Neon serverless driver, and we've provided a copy of the Vercel Postgres docs, which we'll keep for a while for your reference while you make the transition.
 
   <Admonition type="important">
   **Starting in November, 2024, Vercel will transition Vercel Postgres projects to a Neon Postgres Native Integration**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow the principles outlined below:
@@ -27,6 +23,8 @@ If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're
 
   To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
   </Admonition>
+
+If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a transition guide to answer questions you might have and get you started with Neon. We've also put together a guide for transitioning from the Vercel SDK to the Neon serverless driver, and we've provided a copy of the Vercel Postgres docs, which we'll keep for a while for your reference while you make the transition.
 
 <DetailIconCards>
 
@@ -62,7 +60,13 @@ You can find the Neon Postgres Previews Integration on the [Vercel Integration M
 
 ## Connect your Vercel project to Neon manually (no integration)
 
-If you're not interested in an integration, this method simply involves setting Vercel environment variables to connect your Vercel Project to your Neon database. See [Connect Vercel and Neon manually](/docs/guides/vercel-manual).
+If you're not interested in an integration, this method of integrating Vercel and Neon simply involves setting Vercel environment variables to connect your Vercel Project to your Neon database.
+
+<DetailIconCards>
+
+<a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project to Neon manually (no integration)" icon="vercel">Connect Vercel and Neon manually</a>
+
+</DetailIconCards>
 
 
 
