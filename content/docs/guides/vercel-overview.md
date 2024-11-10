@@ -17,16 +17,16 @@ If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're
   <Admonition type="important">
   **Starting in November, 2024, Vercel will transition Vercel Postgres projects to a Neon Postgres Native Integration**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow the principles outlined below:
 
-  - Zero downtime without infrastructure changes so there's no impact on user applications
-  - Integrated billing in Vercel
-  - Access to all Neon features and plans
+- Zero downtime without infrastructure changes so there's no impact on user applications
+- Integrated billing in Vercel
+- Access to all Neon features and plans
 
-  No action is required on your part. The transition to the native integration will be performed for you.
+No action is required on your part. The transition to the native integration will be performed for you.
 
-  After the transition, you will be able to manage existing databases via the native Neon Postgres integration, accessible from the Storage tab in the Vercel Dashboard and from the Neon Console. 
+After the transition, you will be able to manage existing databases via the native Neon Postgres integration, accessible from the Storage tab in the Vercel Dashboard and from the Neon Console.
 
-  To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
-  </Admonition>
+To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
+</Admonition>
 
 <DetailIconCards>
 
@@ -64,10 +64,8 @@ You can find the Neon Postgres Previews Integration on the [Vercel Integration M
 
 If you're not interested in an integration, this method simply involves setting Vercel environment variables to connect your Vercel Project to your Neon database. See [Connect Vercel and Neon manually](/docs/guides/vercel-manual).
 
-
-
 ## Resources for working with Neon and Vercel
-  
+
 - [The Neon serverless driver](/docs/serverless/serverless-driver)
 
   The Neon serverless driver allows you to query data from [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions) and is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package.
