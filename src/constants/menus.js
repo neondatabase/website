@@ -297,7 +297,7 @@ export default {
   footer: [
     {
       heading: 'Company',
-      links: [
+      items: [
         {
           text: 'About',
           to: LINKS.aboutUs,
@@ -323,14 +323,43 @@ export default {
           to: LINKS.security,
         },
         {
-          text: 'Trust Center',
-          to: LINKS.trust,
+          text: 'Legal',
+          links: [
+            {
+              text: 'Privacy Policy',
+              to: LINKS.privacy,
+            },
+            {
+              text: 'Terms of Service',
+              to: LINKS.terms,
+            },
+            {
+              text: 'DPA',
+              to: LINKS.dpa,
+            },
+            {
+              text: 'Subprocessors List',
+              to: LINKS.subprocessors,
+            },
+            {
+              text: 'Privacy Guide',
+              to: LINKS.privacyGuide,
+            },
+            {
+              text: 'Cookie Policy',
+              to: LINKS.cookiePolicy,
+            },
+            {
+              text: 'Business Information',
+              to: LINKS.businessInformation,
+            },
+          ],
         },
       ],
     },
     {
       heading: 'Resources',
-      links: [
+      items: [
         {
           text: 'Docs',
           to: LINKS.docs,
@@ -359,7 +388,7 @@ export default {
     },
     {
       heading: 'Social',
-      links: [
+      items: [
         {
           text: 'Discord',
           to: LINKS.discord,
@@ -388,35 +417,26 @@ export default {
       ],
     },
     {
-      heading: 'Legal',
-      links: [
+      heading: 'Compliance',
+      items: [
         {
-          text: 'Privacy Policy',
-          to: LINKS.privacy,
+          text: 'SOC 2',
+          description: 'Certified',
+          icon: 'check-icon',
         },
         {
-          text: 'Terms of Service',
-          to: LINKS.terms,
+          text: 'GDPR',
+          description: 'Compliant',
+          icon: 'check-icon',
         },
         {
-          text: 'DPA',
-          to: LINKS.dpa,
+          text: 'ISO 27001',
+          description: 'Compliant',
+          icon: 'check-icon',
         },
         {
-          text: 'Subprocessors List',
-          to: LINKS.subprocessors,
-        },
-        {
-          text: 'Privacy Guide',
-          to: LINKS.privacyGuide,
-        },
-        {
-          text: 'Cookie Policy',
-          to: LINKS.cookiePolicy,
-        },
-        {
-          text: 'Business Information',
-          to: LINKS.businessInformation,
+          text: 'Trust Center',
+          to: LINKS.trust,
         },
       ],
     },
