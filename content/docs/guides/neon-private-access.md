@@ -2,7 +2,7 @@
 title: Neon Private Access
 subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
-updatedOn: '2024-11-07T15:03:30.701Z'
+updatedOn: '2024-11-11T15:40:33.519Z'
 ---
 
 <PrivatePreview />
@@ -19,7 +19,7 @@ With **Neon Private Access**, you can connect to your database via AWS PrivateLi
 
 ## Prerequisites
 
-- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. For the Private Preview of the **Neon Private Access** feature, only the AWS **us-east-1** and **eu-central-1** regions are supported. Your private access client application and Neon database must reside in one of these regions.
+- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. As of now all Neon production regions in AWS are supported. Your private access client application and Neon database must reside in one of these regions.
 - You will need to add a [VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) to the AWS Virtual Private Cloud ([VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)) where your client application is deployed. The steps are outlined below.
 
 ## Configuration steps
@@ -39,6 +39,9 @@ To configure Neon Private Access, perform the following steps:
       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
+      - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
+      - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
+      - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
 
       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
 
@@ -99,7 +102,7 @@ To configure Neon Private Access, perform the following steps:
 
    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
-      <Admonition type="note">
-       Using the IP Allow feature to block access from the public internet is only for the Private Preview. In the final version, there will be a dedicated option for this provided in the Neon Console.
-      </Admonition>
-   <NeedHelp />
+   <Admonition type="note">
+    Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
+   </Admonition>
+<NeedHelp />
