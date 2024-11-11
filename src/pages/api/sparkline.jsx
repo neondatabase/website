@@ -18,7 +18,7 @@ export default async function handler(req) {
     paths.push(
       <path
         key={i}
-        stroke={`rgba(0,191,131,${alpha})`}
+        stroke={`rgba(162,162,162,${alpha})`}
         strokeWidth={i === 0 ? 1 : 2}
         d={series.reduce(
           (acc, v, k) =>
