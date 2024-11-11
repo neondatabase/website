@@ -859,11 +859,6 @@ const getAllWpCaseStudiesPosts = cache(async () => {
             nodes {
               slug
               name
-              caseStudies(first: 100) {
-                nodes {
-                  id
-                }
-              }
             }
           }
         }
@@ -878,11 +873,16 @@ const getAllWpCaseStudiesPosts = cache(async () => {
 const getAllWpCaseStudiesCategories = cache((caseStudies) => {
   const categoriesMap = caseStudies.reduce((map, caseStudy) => {
     caseStudy.caseStudiesCategories.nodes.forEach((category) => {
-      if (!map.has(category.slug)) {
+      if (map.has(category.slug)) {
+        map.set(category.slug, {
+          ...map.get(category.slug),
+          caseStudiesCount: map.get(category.slug).caseStudiesCount + 1,
+        });
+      } else {
         map.set(category.slug, {
           name: category.name,
           slug: category.slug,
-          caseStudiesCount: category.caseStudies.nodes.length,
+          caseStudiesCount: 1,
         });
       }
     });

@@ -28,12 +28,13 @@ const FeaturedCard = ({
   post = null,
 }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
+  const indexInGrid = index % 4;
 
   return (
     <li
       className={clsx('h-[315px] sm:w-full', {
-        'w-[60%] lg:w-full': index % 4 === 0 || index % 4 === 3,
-        'lg:flex-1/2 flex-[30%] flex-grow sm:flex-none': index % 4 === 1 || index % 4 === 2,
+        'w-[60%] lg:w-full': indexInGrid === 0 || indexInGrid === 3,
+        'lg:flex-1/2 flex-[30%] flex-grow sm:flex-none': indexInGrid === 1 || indexInGrid === 2,
       })}
     >
       <Link

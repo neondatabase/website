@@ -102,11 +102,6 @@ const Cards = ({ items, categories }) => {
   const { width: windowWidth } = useWindowSize();
   const itemsToShow = windowWidth < 768 ? 10 : 17;
 
-  const handleClickCategory = (slug) => {
-    setActiveCategory(slug);
-    setIsOpen(false);
-  };
-
   const filteredItems = useMemo(
     () =>
       activeCategory === 'all'
@@ -142,7 +137,7 @@ const Cards = ({ items, categories }) => {
                       : 'border-transparent text-gray-new-50'
                   )}
                   type="button"
-                  onClick={() => handleClickCategory(slug)}
+                  onClick={() => setActiveCategory(slug)}
                 >
                   {name}
                 </button>
