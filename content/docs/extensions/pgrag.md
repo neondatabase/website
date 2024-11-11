@@ -13,8 +13,9 @@ updatedOn: '2024-10-30T15:37:25.511Z'
 <p>How to use `pgrag`</p>
 </DocsList>
 
-<DocsList title="Related docs" theme="docs">
+<DocsList title="Related resources" theme="docs">
   <a href="https://neon.tech/docs/extensions/pgvector">The pgvector extension</a>
+  <a href="https://www.youtube.com/watch?v=QDNsxw_3ris&t=1356s">YouTube: pgrag video demonstration</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
