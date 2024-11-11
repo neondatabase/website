@@ -3,7 +3,7 @@ title: Connect Nuxt to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres using Nitro API routes
 enableTableOfContents: true
 tag: new
-updatedOn: '2024-11-03T12:57:44.324Z'
+updatedOn: '2024-11-09T10:04:27.008Z'
 ---
 
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
@@ -55,7 +55,41 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-> Will add the content once https://github.com/neondatabase/examples/pull/30 is merged
+First, make sure you load the `DATABASE_URL` from your .env file in Nuxt’s runtime configuration:
+
+In `nuxt.config.js`:
+
+```javascript
+export default defineNuxtConfig({
+  runtimeConfig: {
+    databaseUrl: process.env.DATABASE_URL,
+  },
+});
+```
+
+Next, use the Neon serverless driver to create a database connection. Here’s an example configuration:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+export default defineCachedEventHandler(
+  async (event) => {
+    const { databaseUrl } = useRuntimeConfig();
+    const db = neon(databaseUrl);
+    const result = await db`SELECT version()`;
+    return result;
+  },
+  {
+    maxAge: 60 * 60 * 24, // cache it for a day
+  }
+);
+```
+
+<Admonition type="note">
+- This example demonstrates using the Neon serverless driver to run a simple query. The `useRuntimeConfig` method accesses the `databaseUrl` set in your Nuxt runtime configuration.
+- Async Handling: Make sure the handler is async if you are awaiting the database query result.
+- Make sure `maxAge` caching fits your application’s needs. In this example, it’s set to cache results for a day. Adjust as necessary.
+</Admonition>
 
 ## Run the app
 

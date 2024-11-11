@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-10-16T19:23:03.917Z'
+updatedOn: '2024-11-05T20:56:00.570Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -96,7 +96,7 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 </CodeTabs>
 
 <Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB.
+The maximum request size and response size for queries over HTTP is 64 MB.
 </Admonition>
 
 ### neon function configuration options

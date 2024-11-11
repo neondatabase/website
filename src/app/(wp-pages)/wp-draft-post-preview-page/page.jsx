@@ -7,10 +7,10 @@ import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import Azure from 'components/pages/landing/azure';
 import Benefits from 'components/pages/landing/benefits';
 import Hero from 'components/pages/landing/hero';
-import PricingCTA from 'components/pages/pricing/cta';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
 import SharedCTA from 'components/shared/cta';
+import CTAGasStation from 'components/shared/cta-gas-station';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import LINKS from 'constants/links';
@@ -138,7 +138,7 @@ const WpPageDraft = async ({ searchParams }) => {
           );
         }
 
-        return <PricingCTA {...props} />;
+        return <CTAGasStation {...props} />;
       },
     },
     true
