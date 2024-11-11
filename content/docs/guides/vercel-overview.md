@@ -11,28 +11,26 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 ## Are you transitioning from Vercel Postgres?
 
   <Admonition type="important">
-  **Starting in November, 2024, Vercel will transition Vercel Postgres projects to a Neon Postgres Native Integration**. Until November, you can continue using Vercel Postgres as usual. Neon is currently working out a detailed transition process and timeline in partnership with the Vercel team. The transition will follow the principles outlined below:
+  **Starting in November, 2024, Vercel will transition Vercel Postgres projects to a new native Vercel integration for Neon Postgres**. Until November, you can continue using Vercel Postgres as usual. The transition will follow the principles outlined below:
 
-- Zero downtime without infrastructure changes so there's no impact on user applications
+- Zero downtime so there's no impact on user applications
 - Integrated billing in Vercel
 - Access to all Neon features and plans
 
-No action is required on your part. The transition to the native integration will be performed for you.
+No action is required on your part. Vercel will perform the transition for you.
 
-After the transition, you will be able to manage existing databases via the native Neon Postgres integration, accessible from the Storage tab in the Vercel Dashboard and from the Neon Console.
+After the transition, you will be able to manage existing databases via the native Neon Postgres integration from the **Storage** tab on the Vercel Dashboard. You will also be able to access your databases from the Neon Console.
 
 To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
 </Admonition>
 
-If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a transition guide to answer questions you might have and get you started with Neon. We've also put together a guide for transitioning from the Vercel SDK to the Neon serverless driver, and we've provided a copy of the Vercel Postgres docs, which we'll keep for a while for your reference while you make the transition.
+If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a transition guide to answer questions and help you get started.
 
 <DetailIconCards>
 
 <a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="vercel">Vercel Postgres Transition Guide</a>
 
 <a href="/docs/guides/vercel-sdk-migration-guide" description="Learn how to migrate from the Vercel SDK to the Neon serverless driver" icon="vercel">Migrating from the Vercel SDK</a>
-
-<a href="/docs/guides/vercel-postgres-docs" description="Find a copy of the Vercel Postgres docs for your reference while you transition" icon="vercel">Vercel Postgres docs</a>
 
 </DetailIconCards>
 

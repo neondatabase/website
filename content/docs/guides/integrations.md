@@ -12,7 +12,7 @@ updatedOn: '2024-10-02T13:57:11.416Z'
 
 <TechnologyNavigation open>
 
-<a href="/docs/guides/vercel-previews-integration" title="Vercel" description="Connect with the Neon Postgres Previews Integration" icon="vercel"></a>
+<a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
 
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
