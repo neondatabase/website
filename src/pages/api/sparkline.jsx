@@ -7,8 +7,8 @@ export const config = {
 export default async function handler(req) {
   const { searchParams } = req.nextUrl;
   const series = searchParams.get('series')?.split(',') || [1, 1];
-  const w = searchParams.get('w') || 140;
-  const h = searchParams.get('h') || 32;
+  const w = parseInt(searchParams.get('w'), 10) || 140;
+  const h = parseInt(searchParams.get('h'), 10) || 32;
   const normalizer = Math.max(...series);
 
   const fade = 10;
@@ -20,10 +20,13 @@ export default async function handler(req) {
         key={i}
         stroke={`rgba(0,191,131,${alpha})`}
         strokeWidth={i === 0 ? 1 : 2}
-        d={series.reduce((acc, v, k) => (
-            `${acc 
-            }${k == 0 ? 'M' : 'L'}${k * (w / (series.length - 1))} ${h + i * 2 - (v / normalizer) * h} `
-          ), '')}
+        d={series.reduce(
+          (acc, v, k) =>
+            `${
+              acc
+            }${k == 0 ? 'M' : 'L'}${k * (w / (series.length - 1))} ${h + i * 2 - (v / normalizer) * h} `,
+          ''
+        )}
       />
     );
     alpha = i === 0 ? 0.25 : alpha / 1.25;
