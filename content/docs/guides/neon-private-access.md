@@ -26,83 +26,83 @@ With **Neon Private Access**, you can connect to your database via AWS PrivateLi
 
 To configure Neon Private Access, perform the following steps:
 
-1. **Create an AWS VPC endpoint**
+1.  **Create an AWS VPC endpoint**
 
-   1. Go to the **AWS VPC Dashboard** and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
+    1. Go to the **AWS VPC Dashboard** and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
-      ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
+       ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
 
-   1. Optionally, enter a **Name tag** for the endpoint (e.g., `My Neon Private Access test`).
-   1. For **Service category**, select **Other endpoint services**.
-   1. Specify the **Service name**. It must be one of the following names, depending on your region:
+    1. Optionally, enter a **Name tag** for the endpoint (e.g., `My Neon Private Access test`).
+    1. For **Service category**, select **Other endpoint services**.
+    1. Specify the **Service name**. It must be one of the following names, depending on your region:
 
-      - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
-      - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
-      - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
-      - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
-      - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
-      - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
+       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
+       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
+       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
+       - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
+       - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
+       - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
 
-      ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
+       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
 
-   1. Click **Verify service**. If successful, you should see a `Service name verified` message.
-   1. Select the VPC where your application is deployed.
-   1. Add the availability zones and associated subnets you want to support.
-   1. Click **Create endpoint** to complete the setup of the endpoint service.
+    1. Click **Verify service**. If successful, you should see a `Service name verified` message.
+    1. Select the VPC where your application is deployed.
+    1. Add the availability zones and associated subnets you want to support.
+    1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-2. **Provide the endpoint ID to Neon**
+2.  **Provide the endpoint ID to Neon**
 
-   Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Access service and notify when the authorization is complete.
+    Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Access service and notify when the authorization is complete.
 
-   <Admonition type="note">
-    This step is specific to the Private Preview. In the final version, the allowed endpoint will be configured through the Neon Console without any manual involvement by Neon.
-   </Admonition>
+    <Admonition type="note">
+     This step is specific to the Private Preview. In the final version, the allowed endpoint will be configured through the Neon Console without any manual involvement by Neon.
+    </Admonition>
 
-3. **Enable Private DNS**
+3.  **Enable Private DNS**
 
-   After Neon authorizes your endpoint (please wait for confirmation from Neon), you need to enable private DNS lookup for the endpoint.
+    After Neon authorizes your endpoint (please wait for confirmation from Neon), you need to enable private DNS lookup for the endpoint.
 
-   1. In AWS, select the VPC endpoint you created.
-   1. Select **Modify private DNS name**.
-   1. Select **Enable for this endpoint**.
-   1. Save your changes.
-      ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
+    1. In AWS, select the VPC endpoint you created.
+    1. Select **Modify private DNS name**.
+    1. Select **Enable for this endpoint**.
+    1. Save your changes.
+       ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-4. **Update the connection string**
+4.  **Update the connection string**
 
-   To connect to your Neon database using AWS PrivateLink, you have to modify your Neon database connection string to use the private endpoint.
+    To connect to your Neon database using AWS PrivateLink, you have to modify your Neon database connection string to use the private endpoint.
 
-   For example, if your original Neon database connection string is:
+    For example, if your original Neon database connection string is:
 
-   ```
-   postgresql://user:password@ep-testing-bush-12345.us-east-1.aws.neon.tech
-   ```
+    ```
+    postgresql://user:password@ep-testing-bush-12345.us-east-1.aws.neon.tech
+    ```
 
-   Update it to:
+    Update it to:
 
-   ```
-   postgresql://user:password@ep-testing-bush-12345.vpce.us-east-1.aws.neon.tech
-   ```
+    ```
+    postgresql://user:password@ep-testing-bush-12345.vpce.us-east-1.aws.neon.tech
+    ```
 
-   Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
+    Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
 
-5. **Restrict public internet access**
+5.  **Restrict public internet access**
 
-   At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
+    At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
-   To restrict public internet access via this connection string, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature in the Neon Console. For IP Allow configuration instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+    To restrict public internet access via this connection string, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature in the Neon Console. For IP Allow configuration instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-   You can access your **IP Allow** configuration from your Neon project's **Settings** page.
+    You can access your **IP Allow** configuration from your Neon project's **Settings** page.
 
-   Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
+    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
-      <Admonition type="note">
-       The Private Access connection is not affected by this IP Allow configuration.
-      </Admonition>
+          <Admonition type="note">
+           The Private Access connection is not affected by this IP Allow configuration.
+          </Admonition>
 
-   ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
+    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
-   <Admonition type="note">
-    Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
-   </Admonition>
-<NeedHelp />
+       <Admonition type="note">
+        Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version there will be a dedicated way in the Neon console for doing that!
+       </Admonition>
+    <NeedHelp />
