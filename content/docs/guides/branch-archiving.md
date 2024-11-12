@@ -1,8 +1,9 @@
 ---
 title: Branch archiving
-subtitle: Learn how Neon automatically archives inactive branches to cost-effective storage
+subtitle: Learn how Neon automatically archives inactive branches to cost-effective
+  storage
 enableTableOfContents: true
-updatedOn: '2024-10-15T17:19:50.116Z'
+updatedOn: '2024-11-12T11:01:29.505Z'
 ---
 
 <Admonition type="note" title="Only enabled on the Free Plan">
