@@ -21,9 +21,9 @@ We know moving to a new platform may bring up questions, so we’ve prepared thi
 
 ### Why is this transition happening?
 
-Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. Now, in order to provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of providing a Vercel-branded storage, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party storage services, such as Neon Postgres, into your Vercel projects.
+Last year, Vercel introduced Vercel Postgres (powered by Neon) as part of their platform. Now, in order to provide a wider variety of solutions and integrations for its customers, Vercel is shifting to a different model. Instead of a Vercel-managed solution, Vercel is launching the [Vercel Marketplace](https://vercel.com/marketplace), where you can easily integrate first-party storage services, such as Neon Postgres, into your Vercel projects.
 
-While Vercel Postgres was powered by Neon, it was not able to support all of Neon's regular updates and features. By transitioning to Neon Postgres, you, as Vercel user, will gain access to Neon's full feature set and usage plans, providing you with a much better database experience. Vercel's new marketplace model makes this possible.
+While Vercel Postgres was powered by Neon, it was not able to support all of Neon's regular updates and features. By transitioning to Neon Postgres, you will gain access to Neon's full feature set and usage plans, providing you with a better database experience. Vercel's new marketplace model makes this possible.
 
 ### When exactly will the transition happen?
 
@@ -33,31 +33,31 @@ Until then, you can continue using Vercel Postgres as usual.
 
 ### Do you need to do anything before the transition?
 
-No, the transition to Neon will be fully managed by Vercel. There is nothing you need to do in preparation for it.
+No, the transition to Neon will be fully managed. There is nothing you need to do in preparation for it.
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases using the Neon integration in the Vercel Marketplace, which will be available starting in November.
+After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases from a **Storage** tab in the Vercel Dashboard. 
 
-### Can I still create new databases during the transition?
+### Can I still create new Databases during the transition?
 
-Yes, you can continue creating new databases using Vercel Postgres until the transition starts in November. After that, new databases will be created using the Neon Postgres integration in the Vercel Marketplace.
+Yes, you can continue creating new Databases using Vercel Postgres until the transition starts in November. After that, new Databases will be created via the native Neon Postgres integration, from the **Storage** tab on the Vercel Dashboard.
 
-### What happens to databases created before the transition?
+### What happens to Databases created before the transition?
 
-Any Postgres databases created using Vercel Postgres before November will be automatically migrated to Neon Postgres as part of the transition.
+Any Databases created using Vercel Postgres before November will be automatically migrated to Neon Postgres as part of the transition.
 
 ## Billing questions
 
 ### How will billing be affected?
 
-Billing will continued to be managed through the Vercel Marketplace. You won’t need to manage separate billing for Neon Postgres—everything will stay unified under your Vercel account.
+Billing for the new Neon Postgres native integration will be managed in Vercel. You won’t need to manage separate billing for Neon — everything will stay unified under your Vercel account.
 
 ### Will you be automatically transitioned to a particular Neon plan?
 
-- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
+- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
 
-- **Vercel Pro Plan** prices and limits wil stay the same. This ensures no surprises in pricing when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For comparison, please see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
+- **Vercel Pro Plan** prices and limits will not change. This ensures no pricing surprises when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
 ### How do Vercel Postgres plans compare to Neon plans?
 
@@ -65,7 +65,7 @@ Vercel Postgres was available with Vercel's Hobby and Pro plans. Let's take a lo
 
 #### Vercel Hobby Plan vs Neon Free Plan
 
-The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](https://neon.tech/docs/introduction/plans#free-plan). Here are the differences that you'll need to be aware of:
+The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](https://neon.tech/docs/introduction/plans#free-plan). Here are the differences to be aware of:
 
 | Resource      | Vercel Hobby Included | Neon Free Plan Included               |
 | :------------ | :-------------------- | :------------------------------------ |
@@ -76,6 +76,10 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 | Written Data  | N/A                   | Included in Storage.                  |
 
 Additional use (called "Extra usage" in Neon) for a fee is not available on either the Vercel Hobby or Neon Free plans.
+
+<Admonition type="note" title="A Database in Vercel is a Project in Neon">
+A **Database** in Vercel is a **Project** in Neon. A Neon project can have multiple Postgres databases.
+</Admonition>
 
 #### Vercel Pro Plan vs Neon Launch Plan
 
@@ -89,13 +93,13 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 | Storage       | First 256 MB        | Up to 10 GiB                            |
 | Written Data  | 256 MB              | Included in Storage.                    |
 
-Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but note that the monthly compute and storage allowance included with your plan's base fee is higher, and Neon does not charge for data transfer, additional databases, or written data.
+Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get a monthly compute and storage allowance included with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 
 | Resource      | Vercel Pro Additional  | Neon Launch Plan Additional ("Extra")                                    |
 | :------------ | :--------------------- | :----------------------------------------------------------------------- |
 | Compute Time  | $0.10 - 1 Compute Hour | $0.16 - 1 Compute Hour                                                   |
 | Data Transfer | $0.10 - 1 GB           | No additional cost                                                       |
-| Database      | $1.00 - Per 1 Database | No additional cost                                                       |
+| Database      | $1.00 - Per 1 Database | No additional cost for the first 100                                     |
 | Storage       | $0.12 - 1 GB           | $3.50 - 2 GiB (but you start with 10 GiB included at no additional cost) |
 | Written Data  | $0.096 - 1 GB          | No additional cost                                                       |
 
@@ -129,7 +133,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [The Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration) &#8212; connect your project to your repo and build GitHub Actions workflows
 
 <Admonition type="note">
-[The Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration), which automatically creates a database branch for each preview deployment, is currently only available to direct customers of Neon. To use this integration, you would have to sign up for a Neon account directly rather than through the Vercel Marketplace. 
+[The Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration), which automatically creates a database branch for each preview deployment, is currently only available to users who signed up with Neon directly. It cannot be used in combination with the native Neon Postgres integration on the same Vercel project.
 </Admonition>
 
 ### What Vercel Postgres limitations are lifted by the transitions to Neon?
@@ -148,15 +152,11 @@ Yes, all regions supported by Vercel Postgres are also supported by Neon Postgre
 
 ### Will the Vercel Postgres SDK continue to work?
 
-Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/sdk) (a wrapper around the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver)) will continue to be supported. No changes are required to your applications. The SDK will continue to work with Neon Postgres for the forseeable future, although there is no plan for Neon to maintain the Vercel Postgres SDK. If you're interested in migrating from the Vercel SDK, please refer to our Vercel SDK to Neon serverless driver migration guide](#tbd).
-
-<Admonition type="note" title="Did you know">
-**The Vercel SDK is a wrapper around the the Neon serverless driver.** There's no need to switch immediately. The Vercel SDK will continue to work for the forseeable future, but if you would like to user the Neon serverless driver directly (maintained by Neon), please refer to our migration guide for instructions.
-</Admonition>
+Yes, the [Vercel Postgres SDK](https://vercel.com/docs/storage/vercel-postgres/sdk) will continue to work. However, you can expect Vercel to deprecated it some point after the transition. The good news is that **the Vercel SDK is a wrapper around the the Neon serverless driver**, so it's very compatible. There's no need to switch to the Neon serverless driver immediately, but if you would like to get a start on that, please refer to our [Vercel SDK to Neon serverless driver migration guide](/guides/vercel-sdk-migration) for instructions.
 
 ### Is Neon compatible with the same ORMs as Vercel Postgres?
 
-Yes, Neon supports any ORMs that is compatible with Vercel Postgres, including:
+Yes, Neon supports any ORM that is compatible with Vercel Postgres, including:
 
 - Drizzle
 - Keysley
@@ -168,4 +168,4 @@ Yes, Neon supports any ORMs that is compatible with Vercel Postgres, including:
 
 ## More questions?
 
-There's likely questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period.
+There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period.

@@ -19,7 +19,7 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 No action is required on your part. Vercel will perform the transition for you.
 
-After the transition, you will be able to manage existing databases via the native Neon Postgres integration from the **Storage** tab on the Vercel Dashboard. You will also be able to access your databases from the Neon Console.
+After the transition, you will be able to manage your database via the native Neon Postgres integration from the **Storage** tab on your Vercel Dashboard. You will also be able to access your databases from the Neon Console.
 
 To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
 </Admonition>
@@ -30,7 +30,7 @@ If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're
 
 <a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="vercel">Vercel Postgres Transition Guide</a>
 
-<a href="/docs/guides/vercel-sdk-migration-guide" description="Learn how to migrate from the Vercel SDK to the Neon serverless driver" icon="vercel">Migrating from the Vercel SDK</a>
+<a href="/guides/vercel-sdk-migration" description="Learn how to migrate from the Vercel SDK to the Neon serverless driver" icon="vercel">Migrating from the Vercel SDK</a>
 
 </DetailIconCards>
 
