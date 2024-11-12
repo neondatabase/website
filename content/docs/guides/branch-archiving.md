@@ -99,7 +99,7 @@ The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a 
       └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
       ```
 
-  </TabItem>
+</TabItem>
 
 <TabItem>
 The Neon API's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoint can retrieve a branch's state:
