@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-10-07T18:18:31.790Z'
+updatedOn: '2024-10-23T14:34:44.517Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
@@ -61,7 +61,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
-   - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
 
 4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
@@ -140,8 +140,6 @@ From the **Project settings** page, you can also set defaults or apply bulk chan
 ### Reset the default compute size
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 10 CUs. Larger compute sizes will be supported in a future release.
-
-For [Neon Free Plan](/docs/introduction/plans#free-plan) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
 
 By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 

@@ -100,14 +100,6 @@ module.exports = {
         'brown-1': '#A86624',
         'brown-2': '#BA8C5E',
       },
-      pricing: {
-        black: '#0c0d0d',
-        primary: {
-          1: '#00e599',
-          3: 'rgb(0,229,153,0.4)',
-          4: 'rgba(19,236,182,0.1)',
-        },
-      },
     },
     extend: {
       fontFamily: {
@@ -150,7 +142,7 @@ module.exports = {
         'subscribe-sm':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0) 100%);',
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':

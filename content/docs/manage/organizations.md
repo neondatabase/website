@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-10-07T18:18:31.790Z'
+updatedOn: '2024-11-08T16:53:31.641Z'
 ---
 
 <FeatureBeta/>
@@ -11,7 +11,7 @@ Build your team in Neon with Organizations. Manage all of your team's projects u
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page provides a centralized view of all your team’s projects. From there, you can create new projects, manage existing ones, as well as oversee your organization’s members and your billing information.
+In the Neon Console, the Organizations page provides a centralized view of all your team's projects. From there, you can create new projects, manage existing ones, as well as oversee your organization's members and your billing information.
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
@@ -19,9 +19,9 @@ In the Neon Console, the Organizations page provides a centralized view of all y
 
 Each organization is made up of three types of users:
 
-- **Admin** &#8212; Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
-- **Members** &#8212; Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
-- **Collaborators** &#8212; Collaborators are people given limited access to particular projects. See [Collaborators](/docs/guides/project-collaboration-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
+- **Admin** — Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
+- **Members** — Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
+- **Collaborators** — Collaborators are people given limited access to particular projects. See [Collaborators](/docs/guides/project-collaboration-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
 
 Here's a breakdown of what actions each role can take:
 
@@ -37,39 +37,69 @@ Here's a breakdown of what actions each role can take:
 
 ## Create an organization
 
-To get started, click **Create organization** from the breadcrumb dropdown.
+<div style={{ display: 'flex', alignItems: 'top' }}>
+  <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
+    To get started, click **Create organization** from the breadcrumb dropdown.
+  </div>
+  <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
+    ![create organization button](/docs/manage/orgs_create_button.png)
+  </div>
+</div>
 
-![create organization button](/docs/manage/orgs_create_button.png)
+### Free Plan
 
-You'll be asked to select a plan and confirm your billing details. After confirming billing, you'll be directed to your organization's billing page, where you can take steps like inviting [members](/docs/manage/orgs-manage#invite-members) and [transferring projects](/docs/manage/orgs-project-transfer).
+If you're on the Free Plan, you'll need to choose a paid plan for your organization (since organizations are a paid feature).
 
-![getting started with new org](/docs/manage/orgs_create_next.png)
+<div style={{ display: 'flex', alignItems: 'top' }}>
+  <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
+    You'll be prompted to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
+  </div>
+  <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
+  ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
+  </div>
+</div>
 
-## What's next?
+### Paid plans
 
-After creating the organization, your next actions depend on your particular scenario. Here are a couple example scenarios.
+<div style={{ display: 'flex', alignItems: 'top' }}>
+  <div style={{ flex: '0 0 45%', paddingRight: '20px' }}>
+    If you're already on a paid plan for your personal account, you'll have two options:
+    - Convert your personal account to an organization
+    - Create a new organization from scratch
+  </div>
+  <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
+    ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
+  </div>
+</div>
 
-### Scenario 1 &#8212; Moving an existing team to a new organization
+#### Convert your personal account
 
-If you’re currently on a paid plan, using project collaboration to work with your team on your Personal account projects, and you intend to work primarily from your new Organization account:
+Converting your personal account transfers all of your projects and billing to the new organization. Your personal account will switch to the Free Plan. This is a quick, one-time, one-way operation: everything in your personal account is transferred to your new organization instantly. There is no service disruption, no change to your connections, and no way to move resources back to your personal account after the conversion.
 
-- [Transfer your existing projects](/docs/manage/orgs-project-transfer#transfer-projects-in-bulk) from your personal account to the new organization. You can leave up to 10 projects behind, since that's the Free Plan limit.
-- Downgrade your personal account to the [Free Plan](/docs/introduction/manage-billing#change-your-plan) once all projects are transferred. This shifts all billing to the Organization.
-- [Invite](/docs/manage/orgs-manage#invite-members) your team members to join the organization.
+After conversion, you can:
 
-### Scenario 2 &#8212; Starting a new organization from scratch
+- [Invite](/docs/manage/orgs-manage#invite-members) team members to collaborate on transferred projects
+- Promote [collaborators](/docs/manage/orgs-manage#manage-collaborators) to full members or leave them on specific projects
+- Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
 
-In this scenario you've been using Neon for personal projects for some time, and you now want to bring Neon to your company, but still keep your personal projects separate. You might instead:
+#### Create a new organization
 
-- [Invite](/docs/manage/orgs-manage#invite-members) someone to your new organization and delegate billing to them: set their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**. They can then revise the billing details and handle invoices for the organization.
-- Start creating new projects within the new organization.
-- Keep your personal projects on your existing paid plan. No need to transfer or downgrade.
+If you create a new organization, you can choose which projects (if any) to [transfer](/docs/manage/orgs-project-transfer). You'll need to select a paid plan for the organization. Your personal account will remain on its current paid plan, so you'll be billed for both accounts.
+
+After creating the organization, you can:
+
+- [Invite](/docs/manage/orgs-manage#invite-members) team members to the new organization
+- Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
+- [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects) within the organization
+
+<Admonition type="note">
+Project transfers to an organization are one-way. You cannot move organization projects back to your personal account.
+</Admonition>
 
 ## Limitations
 
-As we continue to refine our Organizations feature during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
+As we continue to refine our organization features during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
 
-- **Integration limitations** — You cannot install new Vercel integrations on organization-owned projects.
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
 - **Project transfer restrictions** — Currently, you cannot transfer projects using either the Vercel, Outerbase, or the GitHub integrations.
 - **Permissions and roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.

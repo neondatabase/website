@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-08-07T21:36:52.677Z'
+updatedOn: '2024-11-05T20:56:00.570Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -11,10 +11,6 @@ When to query over HTTP vs WebSockets:
 
 - **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
 - **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
-
-<Admonition type="note">
-The Neon serverless driver is currently in beta and subject to change in the future.
-</Admonition>
 
 ## Install the Neon serverless driver
 
@@ -100,7 +96,7 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 </CodeTabs>
 
 <Admonition type="note">
-The maximum request size and response size for queries over HTTP is 10 MB.
+The maximum request size and response size for queries over HTTP is 64 MB.
 </Admonition>
 
 ### neon function configuration options
@@ -397,7 +393,8 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-hyperdrive" description="Neon + Cloudflare Hyperdrive (Beta)" icon="github">Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers</a>
+<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
 </DetailIconCards>
 
 ### Ping Thing

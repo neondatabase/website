@@ -1,4 +1,3 @@
-// import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import Button from 'components/pages/deploy/button';
@@ -8,7 +7,7 @@ import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-// import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
+import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
 import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
 import prisma from 'utils/prisma';
@@ -41,13 +40,13 @@ const TicketPage = async ({ params }) => {
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
-            {/* <Link
+            <Link
               className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
-              href={LINKS.stage}
+              to={LINKS.stage}
             >
               <span>Watch the event live</span>
               <ArrowLeftIcon className="ml-2.5 h-auto w-[18px] rotate-180" />
-            </Link> */}
+            </Link>
 
             <Button
               className="pointer-events-auto mt-11"
@@ -122,6 +121,7 @@ export async function generateMetadata({ params }) {
   }
 
   if (userData) {
+    delete userData.email;
     return getMetadata({
       ...SEO_DATA.ticket(userData),
       pathname: `/tickets/${userData.login}`,

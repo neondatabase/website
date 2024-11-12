@@ -22,5 +22,29 @@
       "title": "GitHub",
       "url": "https://github.com/vkarpov15"
     }
+  },
+  "sam-harri": {
+    "name": "Samuel Harrison",
+    "position": "Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/sam-harri"
+    }
+  },
+  "dhanush-reddy": {
+    "name": "Dhanush Reddy",
+    "position": "Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/dhanushreddy291"
+    }
+  },
+  "adalbert-pungu": {
+    "name": "Adalbert Pungu",
+    "position": "Software Developer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/AdalbertPungu"
+    }
   }
 }

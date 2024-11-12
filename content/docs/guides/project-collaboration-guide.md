@@ -4,12 +4,12 @@ subtitle: Learn how to invite people to collaborate on your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2024-09-19T14:13:04.113Z'
+updatedOn: '2024-11-05T20:46:38.516Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
-<Admonition type="note">Project collaboration lets people not on your team work on a project with you. If you're inviting team members, consider creating an [Organization](docs/manage/organizations) instead. Organizations can also use project collaboration &#8212; for example, to allow an external contractor to contribute to a single project without making them a full Organization Member.</Admonition>
+<Admonition type="note">Project collaboration lets people not on your team work on a project with you. If you're inviting team members, consider creating an [Organization](/docs/manage/organizations) instead. Organizations can also use project collaboration &#8212; for example, to allow an external contractor to contribute to a single project without making them a full Organization Member.</Admonition>
 
 ## Set up Neon accounts
 
@@ -38,9 +38,13 @@ The invited users will be granted access to the project, but they will not have 
 
 An email is sent to the invited users informing them of the project invitation, including an **Open project** link for easy access.
 
+<Admonition type="note" title="Invites not received?">
+If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+</Admonition>
+
 ## Project collaboration limits
 
-When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches in their own project, but if they are using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
 
 ### Access for collaborators via the Neon API or CLI
 

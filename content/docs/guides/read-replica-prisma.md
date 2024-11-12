@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2024-10-08T10:58:34.747Z'
+updatedOn: '2024-10-23T14:34:44.516Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -142,3 +142,5 @@ This example demonstrates how to use the [@prisma/extension-read-replicas](https
 <DetailIconCards>
 <a href="https://github.com/prisma/read-replicas-demo" description="A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client" icon="github">Prisma read replicas demo</a>
 </DetailIconCards>
+
+<NeedHelp/>

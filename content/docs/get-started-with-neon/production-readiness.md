@@ -2,10 +2,10 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.644Z'
+updatedOn: '2024-10-21T14:14:21.655Z'
 ---
 
-Learn how autoscaling, scale-to-zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
+Learn how autoscaling, autosuspend, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 
 ## Autoscaling
 
@@ -19,17 +19,17 @@ Neon's autoscaling feature automatically and transparently scales up compute res
 
 To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
 
-## Scale to zero
+## Autosuspend
 
 **Stop paying for idle databases.**
 
 Neon's _Autosuspend_ feature automatically transitions a Neon compute (where Postgres runs) to an idle state when it is not being used, effectively scaling it to zero to minimize compute usage and costs.
 
-**Why do you need a database that scales to zero?** Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
+**Why do you need a database that scales to zero?** Combined with Neon's branching capability, autosuspend allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 
 - **Non-production databases**: Development, staging, and testing environments benefit as developers can work on multiple instances without cost concerns since these databases only use resources when active.
-- **Internal apps**: These apps often experience downtime during off-hours or holidays. Scale to zero ensures their supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
-- **Small projects**: Implementing scale to zero for these projects' databases enhances cost efficiency without significantly impacting user experience.
+- **Internal apps**: These apps often experience downtime during off-hours or holidays. Autosuspend ensures their supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
+- **Small projects**: Implementing autosuspend for these projects' databases enhances cost efficiency without significantly impacting user experience.
 
 Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).
 
@@ -37,11 +37,11 @@ Learn more about [why you want a database that scales to zero](https://neon.tech
 
 **Efficient, performant, reliable storage**
 
-Neon's storage was built for high availability and durability. Every transaction is stored in multiple copies across availability zones and S3. Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
+Neon's storage was built for high availability and durability. Every transaction is stored in multiple copies across availability zones and cloud object storage.Efficiency and performance are achieved through a multi-tier architecture designed to balance latency, throughput, and cost considerations.
 
 Neon storage is architected to integrate storage, backups, and archiving into one system to reduce operational headaches and administrative overhead associated with checkpoints, data backups, and restore.
 
-Neon uses cloud-based object storage solutions, like S3, to relocate less frequently accessed data to the most cost-efficient storage option. For your most frequently accessed data, which requires rapid access and high throughput, Neon uses locally attached SSDs to ensure high performance and low latency.
+Neon uses cloud-based object storage solutions, such as Amazon S3, to relocate less frequently accessed data to the most cost-efficient storage option. For your most frequently accessed data, which requires rapid access and high throughput, Neon uses locally attached SSDs to ensure high performance and low latency.
 
 The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](https://neon.tech/blog/get-page-at-lsn) with Neon Co-Founder, Heikki Linnakangas.
 

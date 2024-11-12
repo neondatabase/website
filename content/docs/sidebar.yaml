@@ -59,6 +59,9 @@
               slug: guides/nestjs
             - title: Next.js
               slug: guides/nextjs
+            - title: Nuxt
+              slug: guides/nuxt
+              tag: new
             - title: Node.js
               slug: guides/node
             - title: Quarkus (JDBC)
@@ -104,6 +107,7 @@
         - title: Connection pooling
           slug: connect/connection-pooling
         - title: Connection issues
+          slug: connect/connect-intro
           items:
             - title: Connection errors
               slug: connect/connection-errors
@@ -123,23 +127,18 @@
               slug: import/migrate-schema-only
             - title: Migrate from Digital Ocean
               slug: import/migrate-from-digital-ocean
-              tag: new
             - title: Migrate from Firebase
               slug: import/migrate-from-firebase
-              tag: new
             - title: Migrate from Heroku
               slug: import/migrate-from-heroku
             - title: Migrate from MySQL
               slug: import/migrate-mysql
             - title: Migrate from MSSQL
               slug: import/migrate-mssql
-              tag: new
             - title: Migrate from Render
               slug: import/migrate-from-render
-              tag: new
             - title: Migrate from Supabase
               slug: import/migrate-from-supabase
-              tag: new
         - section: Logical replication
           items:
             - title: Replicate from AlloyDB
@@ -148,7 +147,6 @@
               slug: guides/logical-replication-aurora-to-neon
             - title: Replicate from Azure
               slug: import/migrate-from-azure-postgres
-              tag: new
             - title: Replicate from Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Replicate from Neon to Neon
@@ -217,6 +215,8 @@
                   slug: guides/reset-from-parent
                 - title: Branch Restore
                   slug: guides/branch-restore
+            - title: Branch archiving
+              slug: guides/branch-archiving
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
@@ -240,14 +240,20 @@
               slug: guides/logical-replication-schema-changes
             - title: Logical replication tips
               slug: guides/logical-replication-tips
-        - title: Read replicas
+        - title: Read Replicas
           slug: introduction/read-replicas
           items:
-            - title: Working with read replicas
+            - title: Create and manage Read Replicas
               slug: guides/read-replica-guide
-            - title: Data analysis and reporting
+            - title: Scale your app with Read Replicas
+              slug: guides/read-replica-integrations
+            - title: Run analytics queries with Read Replicas
               slug: guides/read-replica-data-analysis
-            - title: Use read replicas with Prisma
+            - title: Run ad-hoc queries with Read Replicas
+              slug: guides/read-replica-adhoc-queries
+            - title: Provide read-only access with Read Replicas
+              slug: guides/read-only-access-read-replicas
+            - title: Use Read Replicas with Prisma
               slug: guides/read-replica-prisma
         - title: Time Travel
           slug: guides/time-travel-assist
@@ -265,7 +271,7 @@
           slug: guides/protected-branches
     - title: Platform
       icon: management
-      slug: manage/accounts
+      slug: manage/platform
       items:
         - section: Access control
           items:
@@ -383,6 +389,9 @@
           slug: guides/nextjs
         - title: Node.js
           slug: guides/node
+        - title: Nuxt
+          slug: guides/nuxt
+          tag: new
         - title: Phoenix
           slug: guides/phoenix
         - title: Quarkus (JDBC)
@@ -419,14 +428,37 @@
           slug: guides/python
         - title: Rust
           slug: guides/rust
+    - title: Neon Authorize
+      slug: guides/neon-authorize
+      icon: auth
+      items:
+        - section: Overview
+          items:
+            - title: About
+              slug: guides/neon-authorize
+            - title: Tutorial
+              slug: guides/neon-authorize-tutorial
+            - title: Troubleshooting
+              slug: guides/neon-authorize-troubleshooting
+            - title: What's next
+              slug: guides/neon-authorize-future
+        - section: Quickstarts
+          items:
+            - title: Clerk
+              slug: guides/neon-authorize-clerk
+            - title: Stack Auth
+              slug: guides/neon-authorize-stack-auth
+            - title: Auth0
+              slug: guides/neon-authorize-auth0
     - title: Integrations
       icon: integrations
       slug: guides/integrations
       items:
         - section: Monitor
-          items: 
+          items:
             - title: Datadog Integration
               slug: guides/datadog
+              tag: new
         - section: Deploy
           items:
             - title: Vercel
@@ -465,6 +497,8 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Trigger serverless functions with Inngest
+              slug: guides/trigger-serverless-functions
         - section: Query
           items:
             - title: Exograph
@@ -518,7 +552,6 @@
               slug: guides/logical-replication-decodable
             - title: Estuary Flow
               slug: guides/logical-replication-estuary-flow
-              tag: new
             - title: Fivetran
               slug: guides/logical-replication-fivetran
             - title: Materialize
@@ -529,7 +562,6 @@
               slug: guides/logical-replication-postgres
             - title: Prisma Pulse
               slug: guides/logical-replication-prisma-pulse
-              tag: new
             - title: Sequin
               slug: guides/sequin
             - title: Snowflake
@@ -538,20 +570,16 @@
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
-              tag: new
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
             - title: Cloud SQL
-              tag: new
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
-              tag: new
             - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
-              tag: new
         - section: Schema Migration
           items:
             - title: Django
@@ -590,7 +618,6 @@
               slug: guides/auth-auth0
             - title: Auth.js
               slug: guides/auth-authjs
-              tag: new
             - title: Clerk
               slug: guides/auth-clerk
             - title: Okta
@@ -668,10 +695,10 @@
       icon: management
 - section: Postgres
   items:
-    - title: PostgreSQL docs
-      slug: postgres
-      icon: docs
-    - title: Postgres guides
+    - title: PostgreSQL Tutorial
+      slug: https://neon.tech/postgresql/tutorial
+      icon: get-started
+    - title: Neon Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
       items:
@@ -713,6 +740,8 @@
               slug: extensions/neon-utils
             - title: pgvector
               slug: extensions/pgvector
+            - title: pgrag
+              slug: extensions/pgrag
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
@@ -855,11 +884,13 @@
       slug: guides/partner-intro
       icon: partner-guide
       items:
-        - title: OAuth
+        - title: Get started
+          slug: guides/partner-get-started
+        - title: OAuth integration
           slug: guides/oauth-integration
-        - title: Manage billing with quotas
+        - title: Configure consumption limits
           slug: guides/partner-billing
-        - title: Getting metrics via API
+        - title: Query consumption metrics
           slug: guides/metrics-api
     - title: Glossary
       slug: reference/glossary
@@ -884,5 +915,4 @@
       icon: changelog
     - title: RSS feeds
       slug: reference/feeds
-      tag: new
       icon: feeds

@@ -4,7 +4,7 @@ subtitle: Leverage the power of Neon and WunderGraph to build fully serverless a
   minutes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2023-11-24T11:25:06.757Z'
+updatedOn: '2024-10-22T15:41:04.377Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
@@ -280,7 +280,7 @@ const Home: NextPage = () => {
               target="_blank"
               href="https://github.com/wundergraph/wundergraph"
             >
-              Github
+              GitHub
             </a>{' '}
             to learn more about WunderGraph.
           </p>

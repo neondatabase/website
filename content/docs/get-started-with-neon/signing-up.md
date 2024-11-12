@@ -7,13 +7,24 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-08-06T15:23:10.945Z'
+updatedOn: '2024-10-22T15:41:04.370Z'
 ---
 
-This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to view and modify data in the console</p>
+<p>Create an isolated database copy per developer</p>
+<p>Reset your branch to main when ready to start new work</p>
+</DocsList>
 
-- How the Neon [object hierarchy](/docs/manage/overview) works, starting with the **Project**.
-- How [branching](https://neon.tech/docs/introduction/branching) keeps your data isolated from production, and how easy it is to reset development branches when ready to start on new work.
+<DocsList title="Related topics" theme="docs">
+<a href="https://neon.tech/docs/introduction/branching">About branching</a>
+<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+</DocsList>
+</InfoBlock>
+
+This tutorial walks you through your first steps using Neon as your Postgres database. You’ll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
 ## About branching
 
@@ -29,7 +40,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
 
-    Sign up with your email, Github, Google, or other partner account.
+    Sign up with your email, GitHub, Google, or other partner account.
 
     For information about what's included with the free plan, see
     [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
@@ -244,7 +255,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
 
 ## Step 7 - Check your changes with Schema Diff
 
-After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
+After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a GitHub-style code-comparison tool used to visualize differences between different branch's databases.
 
 For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the main branch.
 

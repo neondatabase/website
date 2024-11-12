@@ -2,13 +2,13 @@
 title: Neon Terraform providers
 enableTableOfContents: true
 tag: community
-updatedOn: '2024-10-07T10:28:42.220Z'
+updatedOn: '2024-10-25T16:07:48.665Z'
 ---
 
 The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
 
 <Admonition type="note">
-Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the the project maintainers.
+Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the project maintainers.
 </Admonition>
 
 - **Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
@@ -39,7 +39,7 @@ Community Terraform providers are not maintained or officially supported by Neon
 
 ## Example application
 
-The following example application demonstrates how to use Go to execute Terraform commands and test Terraform configurations. It covers how to:
+The following example application demonstrates how to set up Terraform, connect to a Neon Postgres database, and perform a Terraform run that inserts data. It covers how to:
 
 - Use Go's `os/exec` package to run Terraform commands
 - Write a Go test function to validate Terraform execution
@@ -51,7 +51,7 @@ The following example application demonstrates how to use Go to execute Terrafor
 
 </DetailIconCards>
 
-View the **YouTube tutorial**: [Neon Postgres with Terraform, Neon Postgres, and Go](https://www.youtube.com/watch?v=Pw38lgfbX0s).
+View the **YouTube tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s).
 
 ## Resources
 

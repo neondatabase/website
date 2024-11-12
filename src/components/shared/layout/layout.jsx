@@ -19,6 +19,8 @@ const Layout = ({
   hasThemesSupport = false,
   showSearchInput = false,
   isDocPage = false,
+  searchIndexName = null,
+  customType = null,
 }) => (
   <>
     <Topbar isDarkTheme={headerTheme === 'dark'} />
@@ -34,6 +36,8 @@ const Layout = ({
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
         withBorder={headerWithBorder}
+        searchIndexName={searchIndexName}
+        customType={customType}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
@@ -59,6 +63,11 @@ Layout.propTypes = {
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
+  searchIndexName: PropTypes.string,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Layout;
