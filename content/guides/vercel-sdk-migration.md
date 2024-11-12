@@ -7,11 +7,11 @@ createdAt: '2024-10-28T00:00:00.000Z'
 updatedAt: '2024-10-28T00:00:00.000Z'
 ---
 
-With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK (@vercel/postgres) to the Neon serverless driver.
+With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/neondatabase/serverless).
 
 ## Why migrate?
 
-Switching to the Neon serverless driver provides several advantages over the Vercel Postgres SDK. It offers greater flexibility by allowing the choice between HTTP for single queries or WebSockets for transactions. Additionally, it enhances maintainability by relying on Neon's actively maintained, native database driver.
+Switching to the Neon serverless driver provides several advantages. It offers greater flexibility by allowing the choice between HTTP for single queries or WebSockets for transactions and full [node-postgres](https://node-postgres.com/) compatibility. Additionally, it enhances maintainability by relying on Neon's actively maintained, native database driver.
 
 ## Prerequisites
 
@@ -163,10 +163,12 @@ Neon's serverless driver is compatible with popular ORMs like Prisma and Drizzle
 
 ## Advanced Configuration
 
-For most cases, using neon serverless driver is straightforward without needing advanced configuration. However, for custom setups or troubleshooting, here are key options:
+For most cases, using neon serverless driver is straightforward without needing advanced configuration. However, for custom setups or troubleshooting, here are the key options:
 
-- **poolQueryViaFetch**: Setting poolQueryViaFetch to true sends `Pool.query()` calls as low-latency `HTTP` fetch requests (currently defaults to false).
+- **poolQueryViaFetch**: Setting `poolQueryViaFetch` to true sends `Pool.query()` calls as low-latency `HTTP` fetch requests (currently defaults to false).
 
-- **wsProxy**: This option is for connecting to non-Neon databases via a WebSocket proxy.
+- **wsProxy**: This option is for connecting via a WebSocket proxy deployed in front of your your own Postgres instance, which allows you to use the server driver with a local development environment.
+
+For more information about these options, see [Advanced configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#advanced-configuration).
 
 <NeedHelp/>
