@@ -37,7 +37,7 @@ No, the transition to Neon will be fully managed. There is nothing you need to d
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases from a **Storage** tab in the Vercel Dashboard. 
+After the migration, you will be able to access and manage your existing Databases from the Neon Console without requiring new login credentials, and you will be able to create new Databases from a **Storage** tab in the Vercel Dashboard. 
 
 ### Can I still create new Databases during the transition?
 
@@ -55,7 +55,7 @@ Billing for the new Neon Postgres native integration will be managed in Vercel. 
 
 ### Will you be automatically transitioned to a particular Neon plan?
 
-- **Vercel Hobby Plan** databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, databases, and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
+- **Vercel Hobby Plan** Databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, Databases, and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
 
 - **Vercel Pro Plan** prices and limits will not change. This ensures no pricing surprises when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
@@ -71,14 +71,14 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 | :------------ | :-------------------- | :------------------------------------ |
 | Compute Time  | 60 Hours              | 191.9 Hours                           |
 | Data Transfer | N/A                   | Up to 5 GBs per month                 |
-| Database      | First Database        | 10 Projects, 500 databases per branch |
+| Database      | First Database        | 10 Projects                           |
 | Storage       | First 256 MB Included | Up to 512 MB                          |
 | Written Data  | N/A                   | Included in Storage.                  |
 
 Additional use (called "Extra usage" in Neon) for a fee is not available on either the Vercel Hobby or Neon Free plans.
 
 <Admonition type="note" title="A Database in Vercel is a Project in Neon">
-A **Database** in Vercel is a **Project** in Neon. A Neon project can have multiple Postgres databases.
+A **Database** in Vercel is a **Project** in Neon. A Neon project can have multiple Postgres databases — up to 500 per branch.
 </Admonition>
 
 #### Vercel Pro Plan vs Neon Launch Plan
@@ -89,7 +89,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 | :------------ | :------------------ | :-------------------------------------- |
 | Compute Time  | 100 Hours           | 300 Hours                               |
 | Data Transfer | 256 MB              | Reasonable usage (no hard limit)        |
-| Database      | First Database      | 1000 Projects, 500 databases per branch |
+| Database      | First Database      | 1000 Projects                           |
 | Storage       | First 256 MB        | Up to 10 GiB                            |
 | Written Data  | 256 MB              | Included in Storage.                    |
 
