@@ -167,7 +167,7 @@ For most cases, using neon serverless driver is straightforward without needing 
 
 - **poolQueryViaFetch**: Setting `poolQueryViaFetch` to true sends `Pool.query()` calls as low-latency `HTTP` fetch requests (currently defaults to false).
 
-- **wsProxy**: This option is for connecting via a WebSocket proxy deployed in front of your your own Postgres instance, which allows you to use the server driver with a local development environment.
+- **wsProxy**: This option is for connecting via a WebSocket proxy deployed in front of your your own Postgres instance, which allows you to use the Neon serverless driver with a local development environment.
 
 For more information about these options, see [Advanced configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#advanced-configuration).
 
