@@ -15,8 +15,8 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto dark:bg-black-pure dark:text-white',
-        'before:absolute before:inset-x-0 before:top-0 before:h-px before:w-full before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);] dark:before:bg-white',
+        'safe-paddings relative z-50 mt-auto dark:bg-black-pure dark:text-white',
+        'before:absolute before:left-1/2 before:top-0 before:h-px before:w-full before:max-w-[1920px] before:-translate-x-1/2 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);] dark:before:bg-white',
         isDarkTheme ? 'bg-black-pure before:bg-white' : 'bg-white before:bg-gray-new-10'
       )}
     >
