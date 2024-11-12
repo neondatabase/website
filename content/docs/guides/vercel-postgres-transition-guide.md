@@ -37,7 +37,7 @@ No, the transition to Neon will be fully managed. There is nothing you need to d
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases from a **Storage** tab in the Vercel Dashboard. 
+After the migration, you will be able to access and manage your existing databases from the Neon Console without requiring new login credentials, and you will be able to create new databases from a **Storage** tab in the Vercel Dashboard.
 
 ### Can I still create new Databases during the transition?
 
