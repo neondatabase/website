@@ -19,7 +19,7 @@ With **Neon Private Access**, you can connect to your database via AWS PrivateLi
 
 ## Prerequisites
 
-- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. As of now all Neon production regions in AWS are supported. Your private access client application and Neon database must reside in one of these regions.
+- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. The Private Access feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Your private access client application and Neon database must reside in one of these regions.
 - You will need to add a [VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) to the AWS Virtual Private Cloud ([VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)) where your client application is deployed. The steps are outlined below.
 
 ## Configuration steps
