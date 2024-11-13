@@ -14,7 +14,6 @@ To create a Neon project and access it from an Astro site or application:
 3. [Configure a Postgres client](#configure-the-postgres-client)
 4. [Run the app](#run-the-app)
 
-
 ## Create a Neon project
 
 If you do not have one already, create a Neon project. Save your connection details, including your password. They are required when defining connection settings.
