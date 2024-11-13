@@ -30,13 +30,24 @@ To minimize storage costs, Neon automatically archives branches that are:
 - Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
-Both conditions must be true for a branch to be archived.
+Both conditions must be true for a branch to be archived. Additionally, these conditions apply:
+
+- A branch cannot be archived if it has an unarchived child branch.
+- A child branch must be archived before a parent branch can be archived.
+
+<Admonition type="note">
+If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above are not tracked until the next time you access branches in your project.
+</Admonition>
 
 ## Unarchiving a branch
 
 **No action is required to unarchive a branch. It happens automatically.**
 
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is in the process of being unarchived.
+
+<Admonition type="note">
+When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
+</Admonition>
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
