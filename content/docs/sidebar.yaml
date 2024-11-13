@@ -412,6 +412,8 @@
           slug: guides/solid-start
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+        - title: SvelteKit
+          slug: guides/sveltekit
         - title: Symfony
           slug: guides/symfony
     - title: Languages

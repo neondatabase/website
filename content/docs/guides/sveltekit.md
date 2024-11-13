@@ -132,6 +132,8 @@ export const GET: RequestHandler = async () => {
 };
 ```
 
+</CodeTabs>
+
 ## Run the app
 
 Start your development server:
@@ -189,7 +191,5 @@ Visit http://localhost:5173/ to see the PostgreSQL version displayed on the page
 You have successfully connected your SvelteKit application to a Neon Postgres database and performed server-side queries. You can now build dynamic applications using SvelteKit and Neon.
 
 Feel free to explore more features of SvelteKit and Neon to enhance your application.
-
-</CodeTabs>
 
 <NeedHelp/>
