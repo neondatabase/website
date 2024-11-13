@@ -48,7 +48,7 @@
     "priceFrom": true,
     "headerLink": {
       "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
-      "text": "Pay via marketplace AWS"
+      "text": "Pay via AWS marketplace"
     },
     "description": "The resources, features, and support you need to launch.",
     "features": [
@@ -82,10 +82,7 @@
     ],
     "otherFeatures": {
       "title": "Everything in Free, plus...",
-      "features": [
-        { "title": "Organization accounts" },
-        { "title": "Standard Support" }
-      ]
+      "features": [{ "title": "Organization accounts" }, { "title": "Standard Support" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
@@ -100,7 +97,7 @@
     "priceFrom": true,
     "headerLink": {
       "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
-      "text": "Pay via marketplace AWS"
+      "text": "Pay via AWS marketplace"
     },
     "description": "More capacity and functionality for scaling production workloads.",
     "features": [
@@ -134,10 +131,7 @@
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
-      "features": [
-        { "title": "Branch protection" },
-        { "title": "PITR (14 days)" }
-      ]
+      "features": [{ "title": "Branch protection" }, { "title": "PITR (14 days)" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
