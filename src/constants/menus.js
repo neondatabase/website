@@ -423,16 +423,25 @@ export default {
           text: 'SOC 2',
           description: 'Certified',
           icon: 'check-icon',
+          to: LINKS.soc2,
         },
         {
           text: 'GDPR',
           description: 'Compliant',
           icon: 'check-icon',
+          to: LINKS.gdpr,
         },
         {
           text: 'ISO 27001',
           description: 'Compliant',
           icon: 'check-icon',
+          to: LINKS.iso27001,
+        },
+        {
+          text: 'HIPAA',
+          description: 'In progress',
+          icon: 'wip-icon',
+          to: LINKS.hipaa,
         },
         {
           text: 'Trust Center',
