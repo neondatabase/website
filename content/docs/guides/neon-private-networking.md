@@ -54,7 +54,7 @@ To configure Neon Private Networking, perform the following steps:
     1. Add the availability zones and associated subnets you want to support.
     1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-2. **Provide the endpoint ID to Neon**
+2.  **Provide the endpoint ID to Neon**
 
     Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
 
@@ -62,7 +62,7 @@ To configure Neon Private Networking, perform the following steps:
      This step is specific to the Private Preview. In the final version, the allowed endpoint will be configured through the Neon Console without any manual involvement by Neon.
     </Admonition>
 
-3. **Enable Private DNS**
+3.  **Enable Private DNS**
 
     After Neon authorizes your endpoint (wait for confirmation from Neon), enable private DNS lookup for the endpoint.
 
@@ -72,7 +72,7 @@ To configure Neon Private Networking, perform the following steps:
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-4. **Update the connection string**
+4.  **Update the connection string**
 
     To connect to your Neon database using AWS PrivateLink, modify your Neon database connection string to use the private endpoint.
 
@@ -90,7 +90,7 @@ To configure Neon Private Networking, perform the following steps:
 
     Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
 
-5. **Restrict public internet access**
+5.  **Restrict public internet access**
 
     At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
@@ -111,4 +111,3 @@ To configure Neon Private Networking, perform the following steps:
     </Admonition>
 
     <NeedHelp />
-
