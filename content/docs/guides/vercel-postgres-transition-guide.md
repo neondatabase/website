@@ -37,7 +37,7 @@ No, the transition to Neon will be fully managed. There is nothing you need to d
 
 ### What changes will I see after the transition?
 
-After the migration, you will be able to access and manage your existing Databases from the Neon Console without requiring new login credentials, and you will be able to create new Databases from a **Storage** tab in the Vercel Dashboard. 
+After the migration, you will be able to access and manage your existing Databases from the Neon Console without requiring new login credentials, and you will be able to create new Databases from a **Storage** tab in the Vercel Dashboard.
 
 ### Can I still create new Databases during the transition?
 
@@ -67,13 +67,13 @@ Vercel Postgres was available with Vercel's Hobby and Pro plans. Let's take a lo
 
 The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](https://neon.tech/docs/introduction/plans#free-plan). Here are the differences to be aware of:
 
-| Resource      | Vercel Hobby Included | Neon Free Plan Included               |
-| :------------ | :-------------------- | :------------------------------------ |
-| Compute Time  | 60 Hours              | 191.9 Hours                           |
-| Data Transfer | N/A                   | Up to 5 GBs per month                 |
-| Database      | First Database        | 10 Projects                           |
-| Storage       | First 256 MB Included | Up to 512 MB                          |
-| Written Data  | N/A                   | Included in Storage.                  |
+| Resource      | Vercel Hobby Included | Neon Free Plan Included |
+| :------------ | :-------------------- | :---------------------- |
+| Compute Time  | 60 Hours              | 191.9 Hours             |
+| Data Transfer | N/A                   | Up to 5 GBs per month   |
+| Database      | First Database        | 10 Projects             |
+| Storage       | First 256 MB Included | Up to 512 MB            |
+| Written Data  | N/A                   | Included in Storage.    |
 
 Additional use (called "Extra usage" in Neon) for a fee is not available on either the Vercel Hobby or Neon Free plans.
 
@@ -85,13 +85,13 @@ A **Database** in Vercel is a **Project** in Neon. A Neon project can have multi
 
 The Vercel Pro plan is is tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](https://neon.tech/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison of what's included:
 
-| Resource      | Vercel Pro Included | Neon Launch Plan Included               |
-| :------------ | :------------------ | :-------------------------------------- |
-| Compute Time  | 100 Hours           | 300 Hours                               |
-| Data Transfer | 256 MB              | Reasonable usage (no hard limit)        |
-| Database      | First Database      | 1000 Projects                           |
-| Storage       | First 256 MB        | Up to 10 GiB                            |
-| Written Data  | 256 MB              | Included in Storage.                    |
+| Resource      | Vercel Pro Included | Neon Launch Plan Included        |
+| :------------ | :------------------ | :------------------------------- |
+| Compute Time  | 100 Hours           | 300 Hours                        |
+| Data Transfer | 256 MB              | Reasonable usage (no hard limit) |
+| Database      | First Database      | 1000 Projects                    |
+| Storage       | First 256 MB        | Up to 10 GiB                     |
+| Written Data  | 256 MB              | Included in Storage.             |
 
 Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get a monthly compute and storage allowance included with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 
