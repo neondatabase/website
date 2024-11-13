@@ -13,16 +13,25 @@ import ArrowIcon from 'icons/arrow-sm.inline.svg';
 // import ChevronIcon from 'icons/chevron-down.inline.svg';
 import getLinkProps from 'utils/get-link-props';
 
-const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post = null, index }) => {
+const Card = ({
+  title,
+  logo,
+  quote,
+  author,
+  externalUrl = '',
+  isInternal,
+  post = null,
+  isFeatured = false,
+}) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className={clsx(index === 0 ? 'row-span-2 h-[380px]' : 'h-[180px]')}>
+    <li className={clsx(isFeatured ? '-order-1 row-span-2 h-[380px]' : 'h-[180px]')}>
       <Link className="group relative block size-full rounded-lg bg-[#080808]" {...linkProps}>
         <div
           className={clsx(
             'relative z-10 flex size-full flex-col',
-            index === 0 ? 'justify-between p-6' : 'items-center justify-center'
+            isFeatured ? 'justify-between p-6' : 'items-center justify-center'
           )}
         >
           <Image
@@ -32,7 +41,7 @@ const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post =
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
           />
-          {index === 0 && (
+          {isFeatured && (
             <figure className="mt-auto w-full">
               <blockquote>
                 <p
@@ -91,29 +100,28 @@ export const CardPropTypes = {
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
   }),
-  index: PropTypes.number.isRequired,
+  isFeatured: PropTypes.bool,
 };
 
 Card.propTypes = CardPropTypes;
 
 const Cards = ({ items, categories }) => {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState({ slug: 'all' });
   // const [isOpen, setIsOpen] = useState(false);
   // const { width: windowWidth } = useWindowSize();
   // const itemsToShow = windowWidth < 768 ? 10 : 17;
 
   const filteredItems = useMemo(
     () =>
-      activeCategory === 'all'
+      activeCategory.slug === 'all'
         ? items
         : items.filter((item) =>
-            item.caseStudiesCategories.nodes.some((node) => node.slug === activeCategory)
+            item.caseStudiesCategories.nodes.some((node) => node.slug === activeCategory.slug)
           ),
     [items, activeCategory]
   );
 
   // const hasHiddenItems = filteredItems.length > itemsToShow;
-
   // const limitedItems =
   //   hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
 
@@ -126,18 +134,18 @@ const Cards = ({ items, categories }) => {
         </p>
         <div className="mt-7 max-w-full overflow-hidden rounded-full border border-gray-new-15 bg-black-new xl:mt-6 lg:mt-5 sm:mt-[18px]">
           <ul className="no-scrollbars flex h-12 items-center overflow-x-auto px-1.5">
-            {categories.map(({ name, slug }, index) => (
+            {categories.map(({ name, slug, featuredCaseStudy }, index) => (
               <li className="group" key={index}>
                 <button
                   className={clsx(
                     'flex h-9 items-center whitespace-nowrap rounded-full px-6 font-medium tracking-extra-tight',
                     'border transition-colors duration-200 hover:text-green-45',
-                    slug === activeCategory
+                    slug === activeCategory.slug
                       ? 'border-[#1B2C2E] bg-[#132628]/50 text-green-45'
                       : 'border-transparent text-gray-new-50'
                   )}
                   type="button"
-                  onClick={() => setActiveCategory(slug)}
+                  onClick={() => setActiveCategory({ slug, featuredCaseStudy })}
                 >
                   {name}
                 </button>
@@ -146,11 +154,15 @@ const Cards = ({ items, categories }) => {
           </ul>
         </div>
         <ul className="mt-16 grid w-full grid-cols-3 gap-5 xl:mt-14 lg:mt-12 lg:grid-cols-2 md:mt-9 sm:grid-cols-1">
-          {filteredItems.map(({ title, caseStudyPost }, index) => (
-            <Card title={title} {...caseStudyPost} index={index} key={index} />
-          ))}
+          {filteredItems.map(({ id, title, caseStudyPost }, index) => {
+            const isFeatured = activeCategory.featuredCaseStudy
+              ? id === activeCategory.featuredCaseStudy
+              : index === 0;
+
+            return <Card key={index} title={title} {...caseStudyPost} isFeatured={isFeatured} />;
+          })}
         </ul>
-        {/* Show more button is hidden for now */}
+        {/* Show more button */}
         {/* {hasHiddenItems && !isOpen && (
           <Button
             className="mx-auto mt-16 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200 xl:mt-14 lg:mt-12 md:mt-9"
@@ -167,7 +179,12 @@ const Cards = ({ items, categories }) => {
 };
 
 Cards.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(CardPropTypes)).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      caseStudy: PropTypes.shape(CardPropTypes),
+    })
+  ).isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

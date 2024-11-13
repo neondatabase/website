@@ -832,6 +832,8 @@ const getAllWpCaseStudiesPosts = cache(async () => {
     query CaseStudies {
       caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 100) {
         nodes {
+          id
+          title(format: RENDERED)
           caseStudyPost {
             isFeatured
             logo {
@@ -854,7 +856,6 @@ const getAllWpCaseStudiesPosts = cache(async () => {
               }
             }
           }
-          title(format: RENDERED)
           caseStudiesCategories {
             nodes {
               slug
@@ -870,30 +871,32 @@ const getAllWpCaseStudiesPosts = cache(async () => {
   return data?.caseStudies?.nodes;
 });
 
-const getAllWpCaseStudiesCategories = cache((caseStudies) => {
-  const categoriesMap = caseStudies.reduce((map, caseStudy) => {
-    caseStudy.caseStudiesCategories.nodes.forEach((category) => {
-      if (map.has(category.slug)) {
-        map.set(category.slug, {
-          ...map.get(category.slug),
-          caseStudiesCount: map.get(category.slug).caseStudiesCount + 1,
-        });
-      } else {
-        map.set(category.slug, {
-          name: category.name,
-          slug: category.slug,
-          caseStudiesCount: 1,
-        });
+const getAllWpCaseStudiesCategories = cache(async () => {
+  const categoriesQuery = gql`
+    query CaseStudiesCategories {
+      caseStudiesCategories {
+        nodes {
+          slug
+          name
+          caseStudyCategory {
+            featuredCaseStudy {
+              ... on CaseStudy {
+                id
+              }
+            }
+          }
+        }
       }
-    });
-    return map;
-  }, new Map());
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+  const categories = data?.caseStudiesCategories?.nodes;
+  const updatedCategories = categories.map((category) => ({
+    ...category,
+    featuredCaseStudy: category.caseStudyCategory?.featuredCaseStudy?.id || null,
+  }));
 
-  const categories = Array.from(categoriesMap.values());
-
-  categories.sort((a, b) => b.caseStudiesCount - a.caseStudiesCount);
-
-  return [{ name: 'All', slug: 'all' }, ...categories];
+  return [{ name: 'All', slug: 'all' }, ...updatedCategories];
 });
 
 export {

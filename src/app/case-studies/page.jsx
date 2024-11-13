@@ -11,7 +11,7 @@ export const metadata = getMetadata(SEO_DATA.caseStudies);
 
 const CaseStudiesPage = async () => {
   const сaseStudies = await getAllWpCaseStudiesPosts();
-  const categories = getAllWpCaseStudiesCategories(сaseStudies);
+  const categories = await getAllWpCaseStudiesCategories();
 
   return (
     <Layout>
