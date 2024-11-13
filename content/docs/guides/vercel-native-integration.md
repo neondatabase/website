@@ -25,7 +25,7 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon Postgres to your Vercel project as a first-party [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration), providing you with integrated management experience.
 
-- Installing the integration creates a Neon account for you.
+- Installing the integration creates a Neon account for you if you do not have one already.
 - Billing for Neon Postgres is managed in Vercel, not Neon.
 - You get access to the same features and Neon pricing plans as users who register with Neon directly, including access to your database from the Neon Console.
 

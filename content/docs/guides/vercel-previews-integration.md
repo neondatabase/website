@@ -71,7 +71,7 @@ To add the integration:
     You can also access the integration directly from the [Vercel Marketplace](https://vercel.com/marketplace) or the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
     </Admonition>
 1.  Click **Install**.
-1.  On the **Install Neon Postgres** modal, you are presented with two options. Select **Install the Neon Postgres Previews Integration**, and click **Continue**.
+1.  On the **Install Neon Postgres** modal, you are presented with two options. Select **Link Existing Neon Postgres Account**, and click **Continue**.
 1.  Select a **Vercel Account** to add the integration to.
 1.  Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
 1.  Review the permissions required by the integration, and click **Install**.
