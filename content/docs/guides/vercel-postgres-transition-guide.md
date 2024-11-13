@@ -68,11 +68,11 @@ Vercel Postgres was available with Vercel's Hobby and Pro plans. Let's take a lo
 The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](https://neon.tech/docs/introduction/plans#free-plan). Here are the differences to be aware of:
 
 | Resource      | Vercel Hobby (Included) | Neon Free Plan (Included) |
-| :------------ | :-------------------- | :---------------------- |
-| Compute Time  | 60 Hours              | 191.9 Hours             |
-| Data Transfer | N/A                   | Up to 5 GBs per month   |
-| Database      | First Database        | 10                      |
-| Storage       | First 256 MB Included | Up to 512 MB            |
+| :------------ | :---------------------- | :------------------------ |
+| Compute Time  | 60 Hours                | 191.9 Hours               |
+| Data Transfer | N/A                     | Up to 5 GBs per month     |
+| Database      | First Database          | 10                        |
+| Storage       | First 256 MB Included   | Up to 512 MB              |
 
 Additional use (called "Extra usage" in Neon) for a fee is not available on either the Vercel Hobby or Neon Free plans.
 
@@ -84,21 +84,21 @@ A **Database** in Vercel is a **Project** in Neon. A Neon project can have multi
 
 The Vercel Pro plan is is tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](https://neon.tech/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison of what's included:
 
-| Resource      | Vercel Pro (Included) | Neon Launch Plan (Included)        |
-| :------------ | :------------------ | :------------------------------- |
-| Compute Time  | 100 Hours           | 300 Hours                        |
-| Data Transfer | 256 MB              | Reasonable usage (no hard limit) |
-| Database      | First Database      | 1000                   |
-| Storage       | First 256 MB        | Up to 10 GiB                     |
+| Resource      | Vercel Pro (Included) | Neon Launch Plan (Included)      |
+| :------------ | :-------------------- | :------------------------------- |
+| Compute Time  | 100 Hours             | 300 Hours                        |
+| Data Transfer | 256 MB                | Reasonable usage (no hard limit) |
+| Database      | First Database        | 1000                             |
+| Storage       | First 256 MB          | Up to 10 GiB                     |
 
 Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get a monthly compute and storage allowance included with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 
-| Resource      | Vercel Pro (Additional)  | Neon Launch Plan (Extra usage)                                            |
-| :------------ | :--------------------- | :----------------------------------------------------------------------- |
-| Compute Time  | $0.10 per compute hour | $0.16 per compute hour                                                   |
-| Data Transfer | $0.10 - 1 GB           | No additional cost                                                       |
-| Database      | $1.00 - Per 1 Database | No additional cost for the first 100                                     |
-| Storage       | $0.12 - 1 GB           | First 10 GB included; afterwards $1.75 per-GB / $0.1 per-GB for ([archived data](https://neon.tech/docs/guides/branching-intro))|
+| Resource      | Vercel Pro (Additional) | Neon Launch Plan (Extra usage)                                                                                                   |
+| :------------ | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| Compute Time  | $0.10 per compute hour  | $0.16 per compute hour                                                                                                           |
+| Data Transfer | $0.10 - 1 GB            | No additional cost                                                                                                               |
+| Database      | $1.00 - Per 1 Database  | No additional cost for the first 100                                                                                             |
+| Storage       | $0.12 - 1 GB            | First 10 GB included; afterwards $1.75 per-GB / $0.1 per-GB for ([archived data](https://neon.tech/docs/guides/branching-intro)) |
 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to check them out if the Launch plan does not meet your requirements.
 

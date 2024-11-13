@@ -10,16 +10,19 @@ updatedOn: '2024-06-14T07:55:54.409Z'
 
 Select one of the following options to get started get started:
 
-- **[Transitioning from Vercel Postgres](#transitioning-from-vercel-postgres)** 
-  
+- **[Transitioning from Vercel Postgres](#transitioning-from-vercel-postgres)**
+
   Find everything you need to know about transitioning from Vercel Postgres to Neon
-- **[Add the Neon Postgres Native Integration](#add-the-neon-postgres-native-integration)** 
-  
+
+- **[Add the Neon Postgres Native Integration](#add-the-neon-postgres-native-integration)**
+
   Choose this option if you're a Vercel user looking to add Neon Postgres as a native storage solution in Vercel
+
 - **[Add the Neon Postgres Previews Integration](#add-the-neon-postgres-previews-integration)**
 
   If you're a Neon user, install this integration for an instant database branching workflow that creates a database branch for every Vercel preview deployment
-- **[Connect your Vercel project to Neon manually (no integration)](#connect-your-vercel-project-to-neon-manually-no-integration)** 
+
+- **[Connect your Vercel project to Neon manually (no integration)](#connect-your-vercel-project-to-neon-manually-no-integration)**
 
   Select this option for a simple, manual integration setup that connects your app to a Neon database
 

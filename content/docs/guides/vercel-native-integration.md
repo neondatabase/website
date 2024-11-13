@@ -80,18 +80,22 @@ All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "
 
 As a user of the Neon Postgres Native Integration, you have access to all Neon features. However, some actions are only available through the Vercel Dashboard:
 
-- **Project/Database Management**: 
+- **Project/Database Management**:
+
   - Projects/Databases can only be created or deleted through the Vercel Dashboard.
   - **Organization Deletion**: Organizations cannot be deleted in the Neon Console; they are deleted if the Neon Postgres Native Integration is uninstalled from Vercel.
 
 - **User & Collaborator Management**:
+
   - Organization members are managed in Vercel, not manually added through the Neon Dashboard.
   - Project collaborators are also managed as Members in Vercel.
 
 - **Compute Settings**:
+
   - Compute settings like size, autoscaling, and autosuspend are managed in Vercel.
 
 - **Project Naming**:
+
   - Changing your Neon project name (**Database Name** in Vercel) is done in Vercel.
 
 - **Billing & Payments**:
@@ -182,12 +186,15 @@ This action is not reversible, so please proceed with caution.
 The following parameter values are set by the integration:
 
 # Recommended for most uses
+
 DATABASE_URL
 
 # For uses requiring a connection without pgbouncer
+
 DATABASE_URL_UNPOOLED
 
 # Parameters for constructing your own connection string
+
 PGHOST
 PGHOST_UNPOOLED
 PGUSER
@@ -195,6 +202,7 @@ PGDATABASE
 PGPASSWORD
 
 # Parameters for Vercel Postgres Templates
+
 POSTGRES_URL
 POSTGRES_URL_NON_POOLING
 POSTGRES_USER
@@ -203,7 +211,6 @@ POSTGRES_PASSWORD
 POSTGRES_DATABASE
 POSTGRES_URL_NO_SSL
 POSTGRES_PRISMA_URL
-
 
 ## Limitations
 
