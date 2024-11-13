@@ -2,7 +2,7 @@
 title: Neon Private Access
 subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
-updatedOn: '2024-11-11T15:40:33.519Z'
+updatedOn: '2024-11-13T15:01:17.207Z'
 ---
 
 <PrivatePreview />
