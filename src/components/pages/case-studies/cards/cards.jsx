@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 import { useState, useMemo } from 'react';
 
-import Button from 'components/shared/button';
+// import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import useWindowSize from 'hooks/use-window-size';
+// import useWindowSize from 'hooks/use-window-size';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
+// import ChevronIcon from 'icons/chevron-down.inline.svg';
 import getLinkProps from 'utils/get-link-props';
 
 const Card = ({ title, logo, quote, author, externalUrl = '', isInternal, post = null, index }) => {
@@ -98,9 +98,9 @@ Card.propTypes = CardPropTypes;
 
 const Cards = ({ items, categories }) => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [isOpen, setIsOpen] = useState(false);
-  const { width: windowWidth } = useWindowSize();
-  const itemsToShow = windowWidth < 768 ? 10 : 17;
+  // const [isOpen, setIsOpen] = useState(false);
+  // const { width: windowWidth } = useWindowSize();
+  // const itemsToShow = windowWidth < 768 ? 10 : 17;
 
   const filteredItems = useMemo(
     () =>
@@ -112,10 +112,10 @@ const Cards = ({ items, categories }) => {
     [items, activeCategory]
   );
 
-  const hasHiddenItems = filteredItems.length > itemsToShow;
+  // const hasHiddenItems = filteredItems.length > itemsToShow;
 
-  const limitedItems =
-    hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
+  // const limitedItems =
+  //   hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
 
   return (
     <section className="main safe-paddings mt-40 xl:mt-[136px] lg:mt-[104px] md:mt-20">
@@ -146,11 +146,12 @@ const Cards = ({ items, categories }) => {
           </ul>
         </div>
         <ul className="mt-16 grid w-full grid-cols-3 gap-5 xl:mt-14 lg:mt-12 lg:grid-cols-2 md:mt-9 sm:grid-cols-1">
-          {limitedItems.map(({ title, caseStudyPost }, index) => (
+          {filteredItems.map(({ title, caseStudyPost }, index) => (
             <Card title={title} {...caseStudyPost} index={index} key={index} />
           ))}
         </ul>
-        {hasHiddenItems && !isOpen && (
+        {/* Show more button is hidden for now */}
+        {/* {hasHiddenItems && !isOpen && (
           <Button
             className="mx-auto mt-16 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200 xl:mt-14 lg:mt-12 md:mt-9"
             theme="gray-10"
@@ -159,7 +160,7 @@ const Cards = ({ items, categories }) => {
             Show more
             <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
           </Button>
-        )}
+        )} */}
       </Container>
     </section>
   );
