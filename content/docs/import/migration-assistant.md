@@ -60,7 +60,7 @@ Neon will check the availability and configuration of your source database to he
     - Matching **region**
 
       <Admonition type="note">
-      This is an early feature and not work for all regions or providers.
+      This is an early feature and may not work for all regions or providers.
       </Admonition>
 
     You can modify any of these settings to suit the needs of your database, such as the host region, autoscaling range, and so on.
