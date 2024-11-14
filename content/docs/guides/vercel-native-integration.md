@@ -31,14 +31,15 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 - You get access to the same features and Neon pricing plans as users who register with Neon directly, including access to your database from the Neon Console.
 
 <Admonition type="note">
-The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a native integration. 
+The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a native integration.
+- You cannot install this integration if you currently have Vercel Postgres installed. Please see [Transitioning from Vercel Postgres](/docs/guides/vercel-overview#transitioning-from-vercel-postgres) for details about when Vercel will transition Vercel Postgres users to Neon.
 - If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<organization_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
 - If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not support automatic database branches for Vercel preview deployments.
 </Admonition>
 
 ## How to install
 
-To install the Install the **Neon Postgres Native Integration** from the Vercel Marketplace:
+To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 
 1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
 2. Locate the **Neon** integration.
