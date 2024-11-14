@@ -6,6 +6,10 @@ isDraft: false
 updatedOn: '2024-11-14T14:00:00.588Z'
 ---
 
+<Admonition type="warning">
+The Vercel Postgres to Neon transition has not started yet. Please be advised that until the transition starts, the content in this guide is subject to change.
+</Admonition>
+
 In Q4, 2024, Vercel is transitioning its Vercel Postgres stores to Neon.
 
 In case you missed the announcements, you can read them here:
