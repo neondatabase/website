@@ -81,4 +81,16 @@
     -webkit-mask-image: url('/images/footer/creators.svg');
     @apply mask-styles footer-icon-size;
   }
+
+  .check-icon {
+    -webkit-mask-image: url('/images/check.svg');
+    -webkit-mask-size: 12px 12px;
+    @apply mask-styles;
+  }
+
+  .wip-icon {
+    -webkit-mask-image: url('/images/refresh.svg');
+    -webkit-mask-size: 12px 12px;
+    @apply mask-styles;
+  }
 }
