@@ -7,25 +7,21 @@ import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-// TODO: add responsive styles for black-pure theme, fix logo size
 const Footer = ({ hasThemesSupport = false, theme = null }) => {
   const isDarkTheme = theme === 'dark';
 
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-black-pure dark:text-white',
-        isDarkTheme ? 'bg-black-pure' : 'bg-white'
+        'safe-paddings relative z-50 mt-auto dark:bg-black-pure dark:text-white',
+        'before:absolute before:left-1/2 before:top-0 before:h-px before:w-full before:max-w-[1920px] before:-translate-x-1/2 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);] dark:before:bg-white',
+        isDarkTheme ? 'bg-black-pure before:bg-white' : 'bg-white before:bg-gray-new-10'
       )}
     >
       <Container
-        className={clsx(
-          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8',
-          'before:absolute before:-left-[20%] before:top-0 before:h-px before:w-[140%] before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);]',
-          'dark:before:bg-white',
-          isDarkTheme ? 'before:bg-white' : 'before:bg-gray-new-10'
-        )}
+        className="flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8"
         size="1344"
       >
         <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
@@ -49,9 +45,9 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
             </p>
           </div>
         </div>
-        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[623px] lg:hidden">
-          {MENUS.footer.map(({ heading, links }, index) => (
-            <div className="flex flex-col pt-3 xl:w-full" key={index}>
+        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[700px] lg:hidden">
+          {MENUS.footer.map(({ heading, items }, index) => (
+            <div className="flex flex-col pt-3" key={index}>
               <span
                 className={clsx(
                   'relative text-xs font-semibold uppercase leading-none tracking-normal dark:text-white',
@@ -61,12 +57,26 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                 {heading}
               </span>
               <ul className="mt-7 flex grow flex-col gap-y-5">
-                {links.map(({ to, text, icon }, index) => {
-                  const isExternalUrl = to.startsWith('http');
+                {items.map(({ to, text, description, icon, links }, index) => {
+                  const Tag = to ? Link : 'div';
+                  const isExternalUrl = to?.startsWith('http');
+                  const hasSubmenu = links?.length > 0;
+
                   return (
-                    <li className="flex" key={index}>
-                      <Link
-                        className="group relative flex items-center gap-2 whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70 dark:hover:text-green-45"
+                    <li
+                      className={clsx(
+                        'flex w-fit',
+                        hasSubmenu && 'group relative [perspective:2000px]'
+                      )}
+                      key={index}
+                    >
+                      <Tag
+                        className={clsx(
+                          'group/link relative flex items-center whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70',
+                          isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-30',
+                          to && 'hover:!text-green-45',
+                          hasSubmenu && 'cursor-pointer'
+                        )}
                         to={to}
                         theme={isDarkTheme ? 'gray-70' : 'gray-30'}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
@@ -76,13 +86,63 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                           <span
                             className={clsx(
                               icon,
-                              'inline-block h-4 w-4 transition-colors duration-200 group-hover:bg-primary-2 dark:bg-gray-new-70 dark:group-hover:bg-green-45',
-                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30'
+                              'inline-block dark:bg-gray-new-70',
+                              to ? 'mr-2.5 size-4' : 'mr-1.5 size-3',
+                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30',
+                              to && 'transition-colors duration-200 group-hover/link:bg-green-45'
                             )}
                           />
                         )}
                         {text}
-                      </Link>
+                        {description && (
+                          <span
+                            className={clsx(
+                              'ml-1.5 dark:text-gray-new-40',
+                              isDarkTheme ? 'text-gray-new-40' : 'text-gray-new-70'
+                            )}
+                          >
+                            {description}
+                          </span>
+                        )}
+                        {hasSubmenu && (
+                          <ChevronIcon className="ml-1 size-3.5 scale-75 [&_path]:stroke-2" />
+                        )}
+                      </Tag>
+                      {hasSubmenu && (
+                        <div
+                          className={clsx(
+                            'absolute bottom-full right-0 w-[230px] pb-2.5',
+                            'pointer-events-none opacity-0',
+                            'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          )}
+                        >
+                          <ul
+                            className={clsx(
+                              'relative flex w-full flex-col gap-y-1 rounded-[14px] border px-2 py-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                              isDarkTheme
+                                ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+                                : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
+                            )}
+                          >
+                            {links.map(({ text, to }, index) => (
+                              <li key={index}>
+                                <Link
+                                  className={clsx(
+                                    'relative flex items-center overflow-hidden whitespace-nowrap rounded-lg p-3 text-[15px] leading-dense transition-colors duration-300 dark:text-white dark:hover:bg-[#16181D]',
+                                    isDarkTheme
+                                      ? 'text-gray-new-90 hover:bg-[#16181D]'
+                                      : 'text-gray-new-10 hover:bg-[#F5F5F5]'
+                                  )}
+                                  to={to}
+                                >
+                                  {text}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </li>
                   );
                 })}

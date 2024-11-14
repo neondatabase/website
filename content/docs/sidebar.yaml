@@ -217,6 +217,8 @@
                   slug: guides/reset-from-parent
                 - title: Branch Restore
                   slug: guides/branch-restore
+            - title: Branch archiving
+              slug: guides/branch-archiving
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
@@ -466,8 +468,10 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Neon Vercel Integration
-                  slug: guides/vercel
+                - title: Postgres Native Integration
+                  slug: guides/vercel-native-integration
+                - title: Postgres Previews Integration
+                  slug: guides/vercel-previews-integration
                 - title: Connect manually
                   slug: guides/vercel-manual
             - title: Cloudflare

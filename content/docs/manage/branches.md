@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-11-06T15:22:06.334Z'
+updatedOn: '2024-11-12T11:01:29.510Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -93,6 +93,7 @@ To view the branches in a Neon project:
 
    Branch details shown on the branch page include:
 
+   - **Archive status**: When the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created**: The date and time the branch was created.
    - **Compute hours**: The compute hours used by the branch in the current billing period.
@@ -108,6 +109,10 @@ The branch details page also includes details about the **Computes**, **Roles & 
 - [Manage roles](/docs/manage/roles)
 - [Manage databases](/docs/manage/databases)
 - [View branches](#view-branches)
+
+## Branch archiving
+
+On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 ## Rename a branch
 

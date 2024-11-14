@@ -68,4 +68,9 @@ export default {
   variableLoad: '/variable-load',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
+  gdpr: 'https://trust.neon.tech/?itemUid=45220873-6e51-4dbb-b1b1-37d66ee9ef95',
+  soc2: 'https://trust.neon.tech/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
+  soc3: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
+  hipaa: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
+  iso27001: 'https://trust.neon.tech/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
 };

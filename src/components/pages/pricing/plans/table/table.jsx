@@ -131,7 +131,7 @@ const Table = () => {
 
   return (
     <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 lg:pr-0 md:pl-5">
-      <ul className="scrollbar-hidden px-4.5 relative flex w-full lg:overflow-x-auto lg:pl-0 lg:pr-8 md:pr-5">
+      <ul className="no-scrollbars px-4.5 relative flex w-full lg:overflow-x-auto lg:pl-0 lg:pr-8 md:pr-5">
         {Object.keys(tableData.headings).map((key, i, arr) => {
           const isHighlightedColumn = key === 'launch';
           const isLabelsColumn = i === 0;
