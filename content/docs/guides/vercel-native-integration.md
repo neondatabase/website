@@ -32,7 +32,7 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 
 <Admonition type="note">
 The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a native integration. 
-- If you are an existing Neon user, installing the integration will add a Vercel org to your existing Neon account, assuming your Neon and Vercel accounts use the same email address. 
+- If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<organization_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
 - If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not support automatic database branches for Vercel preview deployments.
 </Admonition>
 
@@ -41,12 +41,12 @@ The **Neon Postgres Native Integration** is intended for Vercel users who want t
 To install the Install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 
 1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
-2. Locate the **Neon Postgres** integration.
+2. Locate the **Neon** integration.
 3. Click **Install**.
-4. On the **Install Neon Postgres** modal, you are presented with two options. Select **Install the Neon Postgres Native Integration**, and click **Continue**.
+4. On the **Install Neon** modal, you are presented with two options. Select **Create New Neon Account**, and click **Continue**.
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
-5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions, and click **Create New Neon Postgres Account**.
+5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
 6. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**.
 
    <Admonition type="note">

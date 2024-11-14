@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-11-14T13:15:10.568Z'
 ---
 
-Starting in November, 2024, Vercel is transitioning its Vercel Postgres stores to Neon.
+In Q4, 2024, Vercel is transitioning its Vercel Postgres stores to Neon.
 
 In case you missed the announcements, you can read them here:
 
@@ -27,7 +27,7 @@ While Vercel Postgres was powered by Neon, it was not able to support all of Neo
 
 ### When exactly will the transition happen?
 
-The transition will begin in November. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon without any downtime. Stay tuned for updates from Vercel about exactly when this will happen for your account.
+The transition will begin in Q4, 2024. It will be a phased migration, with Vercel Postgres stores automatically migrated over to Neon without any downtime. Stay tuned for updates from Vercel about exactly when this will happen for your account.
 
 Until then, you can continue using Vercel Postgres as usual.
 
@@ -41,11 +41,11 @@ After the migration, you will be able to access and manage your existing Databas
 
 ### Can I still create new Databases during the transition?
 
-Yes, you can continue creating new Databases using Vercel Postgres until the transition starts in November. After that, new Databases will be created via the native Neon Postgres integration, from the **Storage** tab on the Vercel Dashboard.
+Yes, you can continue creating new Databases using Vercel Postgres until the transition starts in Q4, 2024. After that, new Databases will be created via the native Neon Postgres integration, from the **Storage** tab on the Vercel Dashboard.
 
 ### What happens to Databases created before the transition?
 
-Any Databases created using Vercel Postgres before November will be automatically migrated to Neon Postgres as part of the transition.
+Any Databases created using Vercel Postgres before the transition will be automatically migrated to Neon Postgres as part of the transition.
 
 ## Billing questions
 
@@ -165,4 +165,4 @@ Yes, Neon supports any ORM that is compatible with Vercel Postgres, including:
 
 ## More questions?
 
-There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `##vercel-postgres-transition`, which we will be monitoring leading up to and through the November transition period.
+There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel `# vercel-postgres-transition`, which we will be monitoring leading up to and through the transition period.
