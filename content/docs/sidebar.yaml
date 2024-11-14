@@ -119,6 +119,8 @@
       items:
         - section: Import utilities
           items:
+            - title: Migration Assistant
+              slug: import/migration-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
             - title: Migrate from a Neon project
