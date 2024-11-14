@@ -31,6 +31,7 @@ You'll need the following to get started:
 - A **connection string** to your current database. Postgres connection strings use the format:
 
   `postgresql://username:password@host:port/database?sslmode=require&application_name=myapp`
+
 - **Admin privileges** or appropriate Postgres privileges on your source databases to perform the migration tasks. Using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges is recommended.
 
 ## Step 1 — Check compatibility
@@ -62,9 +63,10 @@ Neon will check the availability and configuration of your source database to he
       This is an early feature and not work for all regions or providers.
       </Admonition>
 
-    You can modify any of these settings to suit the needs of your database, such as the host region, autoscaling range, and so on. 
-    
+    You can modify any of these settings to suit the needs of your database, such as the host region, autoscaling range, and so on.
+
     See [Create a project](/docs/manage/projects#create-a-project) for more details about these options.
+
   </div>
   <div style={{ flex: '0 0 45%', margin: '-15px 0' }}>
     ![create Neon project](/docs/import/migration_create_project.png)
@@ -120,7 +122,7 @@ Sample response:
 subscription_name |  subdbid  |     pid     |   active   |    synced    |   last_event  |  last_error  |  lag  |  subscription_type
 ------------------|-----------|-------------|------------|--------------|---------------|--------------|-------|-------------------
  lr_subscription  |    12345  |   987654321 |    true    |    true      | 2024-11-12    |   NULL       |   0   |   logical
- ```
+```
 
 For more details about configuring logical replication or general migration from some common providers, see:
 
