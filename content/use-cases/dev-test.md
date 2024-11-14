@@ -1,5 +1,5 @@
 ---
-title: 'Optimize Dev/Test Workflows'
+title: 'Optimize Dev/Test'
 subtitle: Migrate your non-prod environments to Neon and start shipping faster with +75% lower costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
