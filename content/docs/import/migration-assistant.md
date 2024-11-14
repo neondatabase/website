@@ -1,6 +1,6 @@
 ---
 title: Neon Migration Assistant
-subtitle: Move your existing database into Neon using our guided tool
+subtitle: Move your existing database to Neon using our guided tool
 enableTableOfContents: true
 ---
 
