@@ -43,19 +43,23 @@ const Card = ({
           />
           {isFeatured && (
             <figure className="mt-auto w-full">
-              <blockquote>
-                <p
-                  className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
-                  dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
-                />
-              </blockquote>
-              {author && author.name && (
-                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
-                  {author.name}{' '}
-                  <cite>
-                    {author?.post && <span className="not-italic">— {author?.post}</span>}
-                  </cite>
-                </figcaption>
+              {quote && (
+                <>
+                  <blockquote>
+                    <p
+                      className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
+                      dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
+                    />
+                  </blockquote>
+                  {author && author.name && (
+                    <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
+                      {author.name}{' '}
+                      <cite>
+                        {author?.post && <span className="not-italic">— {author?.post}</span>}
+                      </cite>
+                    </figcaption>
+                  )}
+                </>
               )}
               <div
                 className={clsx(
