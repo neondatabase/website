@@ -48,7 +48,7 @@ Neon will check the availability and configuration of your source database to he
 - **Region** — Checks the hosting region of your source database.
 - **Supported extensions** — Identifies whether your extensions are supported by Neon. Unsupported extensions are listed, but you are not blocked from continuing the migration. Use your discretion.
 - **Compatible extensions** — Checks that your extension versions match Neon's current support. See [Supported Postgres extensions](/docs/extensions/pg-extensions) for a matrix of extensions to Postgres versions in Neon.
-- **Logical replication** — If logical replication is not enabled on your source database, you will see a warning message. You'll need to enable it if you intend to set up replication as part of the migration.
+- **Logical replication** — If logical replication is not enabled on your source database, you will see a warning message. You'll need to enable it if you intend to set up replication as part of the migration. Enabling logical replication in Postgres typically requires setting `wal_level=logical`. Check your provider's documentation for instructions.
 
 ## Step 2 — Create a Neon project
 
