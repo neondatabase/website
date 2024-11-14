@@ -6,6 +6,8 @@ enableTableOfContents: true
 
 When you're ready to move your data into Neon, our Migration Assistant can help. Aimed at databases in the 100 to 200 GiB range, you need only the connection string to your existing database to get started.
 
+<FeatureBeta/>
+
 ## How it works
 
 Enter your current database connection string, and the Assistant will:

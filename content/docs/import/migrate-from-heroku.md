@@ -10,6 +10,8 @@ updatedOn: '2024-08-07T21:36:52.668Z'
 
 This guide describes how to import your data from Heroku Postgres to Neon.
 
+<MigrationAssistant/>
+
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
 To migrate your data from Heroku to Neon:
