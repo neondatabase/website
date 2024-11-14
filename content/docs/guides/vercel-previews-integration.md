@@ -72,7 +72,7 @@ To add the integration:
     </Admonition>
 1.  Click **Install**.
 1.  On the **Install Neon Postgres** modal, you are presented with two options. Select **Link Existing Neon Postgres Account**, and click **Continue**.
-   ![Select the linked account integration option](/docs/guides/vercel_select_linked.png)
+    ![Select the linked account integration option](/docs/guides/vercel_select_linked.png)
 
 1.  Select a **Vercel Account** to add the integration to.
 1.  Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
