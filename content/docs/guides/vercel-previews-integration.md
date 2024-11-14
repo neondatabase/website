@@ -4,7 +4,7 @@ subtitle: Create a database branch for each preview deployment in Vercel
 redirectFrom:
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2024-10-31T12:08:18.157Z'
+updatedOn: '2024-11-14T13:15:10.568Z'
 ---
 
 <InfoBlock>

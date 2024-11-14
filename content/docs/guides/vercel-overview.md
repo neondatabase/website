@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.409Z'
+updatedOn: '2024-11-14T13:15:10.567Z'
 ---
 
 Select one of the following options to get started:

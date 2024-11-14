@@ -1,9 +1,10 @@
 ---
 title: Install the Neon Postgres Native Integration on Vercel
-subtitle: Add Neon Postgres storage to your Vercel project as a first-party native integration
+subtitle: Add Neon Postgres storage to your Vercel project as a first-party native
+  integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.409Z'
+updatedOn: '2024-11-14T13:15:10.567Z'
 ---
 
 <InfoBlock>

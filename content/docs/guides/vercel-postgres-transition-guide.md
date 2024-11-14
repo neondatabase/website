@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-14T07:55:54.409Z'
+updatedOn: '2024-11-14T13:15:10.568Z'
 ---
 
 Starting in November, 2024, Vercel is transitioning its Vercel Postgres stores to Neon.
