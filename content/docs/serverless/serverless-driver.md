@@ -252,10 +252,6 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
-### Advanced configuration options
-
-For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
-
 ## Use the driver over WebSockets
 
 The Neon serverless driver supports the [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.
@@ -374,6 +370,12 @@ For examples that demonstrate these points, see [Pool and Client](https://github
 ### Advanced configuration options
 
 For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
+
+## Developing locally with the Neon serverless driver
+
+The Neon serverless driver allows you to query data over **HTTP** or **WebSockets** in place of TCP, but Postgres does not support those connection methods natively. To use the Neon serverless driver locally requires running a local instance of Neon's proxy and configuring it to talk to your local Postgres database.
+
+To deploy a local setup, you can follow the steps in this community guide: [Local Development with Neon](https://neon.tech/guides/local-development-with-neon). The guide shows how to use a [community-developed Docker compose file](https://github.com/TimoWilhelm/local-neon-http-proxy) to set up a local Postgres database and and Neon proxy service. This setup supports connections over both WebSockets and HTTP.
 
 ## Example applications
 
