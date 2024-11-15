@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2024-11-05T20:56:00.570Z'
+updatedOn: '2024-11-15T09:50:35.543Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -252,10 +252,6 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
-### Advanced configuration options
-
-For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
-
 ## Use the driver over WebSockets
 
 The Neon serverless driver supports the [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.
@@ -374,6 +370,12 @@ For examples that demonstrate these points, see [Pool and Client](https://github
 ### Advanced configuration options
 
 For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
+
+## Developing locally with the Neon serverless driver
+
+The Neon serverless driver enables you to query data over **HTTP** or **WebSockets** instead of TCP, even though Postgres does not natively support these connection methods. To use the Neon serverless driver locally, you must run a local instance of Neon's proxy and configure it to connect to your local Postgres database.
+
+For a step-by-step guide to setting up a local environment, refer to this community guide: [Local Development with Neon](https://neon.tech/guides/local-development-with-neon). The guide demonstrates how to use a [community-developed Docker Compose file](https://github.com/TimoWilhelm/local-neon-http-proxy) to configure a local Postgres database and a Neon proxy service. This setup allows connections over both WebSockets and HTTP.
 
 ## Example applications
 

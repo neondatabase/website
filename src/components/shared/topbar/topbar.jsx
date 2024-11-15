@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Migration Assistance - Get expert help migrating your business workloads to Neon. 
+      Migration Assistance - Get expert help migrating your business workloads to Neon.
     </span>
     <ChevronIcon
       className={clsx(
