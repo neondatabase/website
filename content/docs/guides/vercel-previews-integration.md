@@ -175,6 +175,8 @@ The integration supports automatic deletion of obsolete preview branches when th
 4. In the **Vercel integration** drawer, select the **Branches** tab.
 5. Check **Automatically delete obsolete Neon branches**.
 
+When a branch is deleted, environment variables associated with the deleted branch are also removed from your Vercel project.
+
 <Admonition type="note">
 Avoid creating child branches on automatically created preview branches. The presence of a child branch will prevent the parent preview branch from being automatically deleted. In Neon, child branches must be deleted before the parent branch can be deleted.
 </Admonition>
