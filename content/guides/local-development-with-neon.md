@@ -8,40 +8,44 @@ updatedOn: '2024-11-05T00:00:00.000Z'
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
 
-## Two Ways to Develop
+<Admonition type="note">
+The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon. To learn more, see [The Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver).
+</Admonition>
+
+## Two ways to develop
 
 When working with Neon, you can choose between:
 
-1. **Database Branching**: Our recommended approach
-2. **Local PostgreSQL**: Traditional local setup
+1. **Database branching**
+2. **Local PostgreSQL**
 
 Let's explore both options to help you pick the right one.
 
-## Database Branching
+## Database branching
 
 Imagine creating a complete copy of your database as easily as creating a Git branch. That's [database branching](https://neon.tech/docs/introduction/branching) with Neon – perfect for testing new features or updates without touching production data.
 
-### Why Use It
+### Why use it?
 
-- **Lightning-Fast Setup**: Create new environments in ~1 second
-- **Zero Configuration**: No local PostgreSQL installation required
-- **True Isolation**: Test changes without fear of breaking production
-- **Cost-Efficient**: Pay only for unique data and actual compute usage
-- **Team-Friendly**: Share database branches as easily as sharing Git branches
-- **Auto-Scaling**: Resources scale to zero when you're not coding
-- **Data Reset**: Fresh start? Reset your branch to match production in seconds
+- **Fast setup**: Create new environments in ~1 second
+- **Zero cnfiguration**: No local PostgreSQL installation required
+- **True isolation**: Test changes without fear of breaking production
+- **Cost-efficient**: Pay only for unique data and actual compute usage
+- **Team-friendly**: Share database branches as easily as sharing Git branches
+- **Autoscaling**: Resources scale to zero when you're not coding
+- **Data reset**: Fresh start? Reset your branch to match production in seconds
 
-### Quick Start
+### Quickstart
 
 1. Install the [**Neon CLI**](/docs/reference/neon-cli) by following the guide [here](/docs/reference/neon-cli#install).
 
-2. **Connect Your Account**
+2. **Connect your account**
 
    ```bash
    neonctl auth
    ```
 
-3. **Create Your Branch**
+3. **Create your branch**
 
    ```bash
    neonctl branches create --name dev/your-name
@@ -51,35 +55,37 @@ Imagine creating a complete copy of your database as easily as creating a Git br
    ```
 
    <Admonition type="note">
-   You can also create branches through the Neon Web UI by navigating to your project and clicking the "Branches" tab. This provides a visual interface for branch management and configuration
+   You can also create branches through the Neon Console by navigating to your project and clicking the "Branches" tab. This provides a visual interface for branch management and configuration
    </Admonition>
 
-4. **Set Up Environment**
+4. **Set up your environment**
 
    ```bash
    # .env.development
    DATABASE_URL='postgresql://[user]:[password]@[endpoint]/[dbname]'
    ```
 
-5. **Install Dependencies**
+5. **Install dependencies**
 
-   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
+    Dependencies includes [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
 
-   ```bash
-   npm install @neondatabase/serverless ws
-   ```
+    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
-   ```bash
-   yarn add @neondatabase/serverless ws
-   ```
+    ```bash
+    npm install @neondatabase/serverless ws
+    ```
 
-   ```bash
-   pnpm add @neondatabase/serverless ws
-   ```
+    ```bash
+    yarn add @neondatabase/serverless ws
+    ```
 
-   </CodeTabs>
+    ```bash
+    pnpm add @neondatabase/serverless ws
+    ```
 
-6. **Connect Your App**
+    </CodeTabs>
+
+6. **Connect your app**
 
    ```javascript
    import { Pool, neon, neonConfig } from '@neondatabase/serverless';
@@ -92,14 +98,14 @@ Imagine creating a complete copy of your database as easily as creating a Git br
    export const sql = neon(process.env.DATABASE_URL);
    ```
 
-### Tips and Tricks
+### Tips and tricks
 
-- **Stay Organized**: Use prefixes like `dev/feature-auth` or `dev/alice`
-- **Reset Data**: Start fresh when needed:
+- **Stay organized**: Use prefixes like `dev/feature-auth` or `dev/alice`
+- **Reset data**: Start fresh when needed:
   ```bash
   neon branches reset dev/your-name
   ```
-- **Feature Work**: Create dedicated branches:
+- **Feature work**: Create dedicated branches:
   ```bash
   neon branches create --name dev/auth-system --parent main
   ```
@@ -108,14 +114,14 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 Sometimes you need to work offline or want full control over your database. Here's how to set up a local instance that works perfectly with Neon.
 
-### Why Use It
+### Why use it?
 
-- **Full Control**: Your own PostgreSQL instance
-- **Offline Work**: Code without internet dependency
-- **Fast Queries**: Zero network latency
-- **Free Development**: Use your local resources
+- **Full control**: Your own PostgreSQL instance
+- **Offline work**: Code without internet dependency
+- **Fast queries**: Zero network latency
+- **Free development**: Use your local resources
 
-### Setup Steps
+### Setup steps
 
 1. Install Dependencies
 
@@ -135,7 +141,7 @@ Sometimes you need to work offline or want full control over your database. Here
 
    </CodeTabs>
 
-2. **Set Up via Docker Compose**
+2. **Set up via Docker Compose**
 
    ```yaml
    services:
@@ -170,14 +176,14 @@ Sometimes you need to work offline or want full control over your database. Here
       db_data:
    ```
 
-3. **Set Up Environment**
+3. **Set up your environment**
 
    ```bash
    # .env.development
    DATABASE_URL='postgresql://postgres:postgres@localhost:5432/main'
    ```
 
-3. **Configure Connection**
+3. **Configure a connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -202,23 +208,25 @@ Sometimes you need to work offline or want full control over your database. Here
    export const sql = neon(connectionString);
    ```
 
-## Choosing Your Development Approach
+## Choosing your development approach
 
-Before diving into the comparison, it's important to understand why we recommend database branching as the optimal choice for most development workflows. Cloud-hosted branches offer several compelling advantages:
+Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach. 
 
-### Cost-Efficient Development
+Cloud-hosted branches offer several compelling advantages:
 
-- **Minimal Storage Costs**: Branches are extremely cost-effective as you only pay for unique data changes
-- **Smart Compute Usage**: Development happens on small, autosuspending computes (0.25 vCPU)
-- **Free Plan Benefits**: Even the Free Plan includes 5 compute hours on dev branches
+### Cost-efficient development
+
+- **Minimal storage costs**: Branches are extremely cost-effective as you only pay for unique data changes
+- **Smart compute usage**: Development happens on small, autosuspending computes (0.25 vCPU)
+- **Free Plan benefits**: Even the Free Plan includes 5 compute hours on dev branches
   - This translates to 20 hours of development time on a 0.25 vCPU compute
   - One compute hour at 1 vCPU equals four hours at 0.25 vCPU
 
-### Developer-Friendly Features
+### Developer-friendly features
 
-- **Instant Deployment**: Branches are created in seconds, just like Git branches
-- **Branch Reset**: Easily refresh your development data from the parent branch
-- **Zero Maintenance**: No need to manage local PostgreSQL installations
+- **Instant deployment**: Branches are created in seconds, just like Git branches
+- **Branch reset**: Easily refresh your development data from the parent branch
+- **Zero maintenance**: No need to manage local PostgreSQL installations
 
 | Feature             | Database Branching                           | Local PostgreSQL                     |
 | ------------------- | -------------------------------------------- | ------------------------------------ |
@@ -231,9 +239,9 @@ Before diving into the comparison, it's important to understand why we recommend
 | Network Latency     | 🌐 Depends on connection                     | ✅ Zero latency                      |
 | Production Parity   | ✅ Identical to production                   | 🔄 Requires additional configuration |
 
-## When to Use Each Approach
+## When to use each approach
 
-### Choose Database Branching When:
+### Choose database branching when:
 
 - You want instant development environments
 - You need efficient resource utilization
@@ -247,34 +255,34 @@ Before diving into the comparison, it's important to understand why we recommend
 - Feature development
 - Testing database changes
 
-### Consider Local PostgreSQL When:
+### Consider local PostgreSQL when:
 
 - Offline development is crucial
 - You need zero network latency
 - You require complete database control
 - You have specific local testing requirements
 
-## Best Practices
+## Best practices for cloud-hosted development with Neon branching
 
-### Environment Tips
+### Environment tips
 
 - Keep development and production database branches separate
 - Always Use clear branch naming
 - Never commit credentials to a version control system
 
-### Resource Tips
+### Resource tips
 
 - Use auto-suspend for development branches
 - Clean up unused branches
 - Reset branches to match production when needed
 
-### Security Tips
+### Security tips
 
 - Use separate development credentials
 - Rotate credentials regularly
 - Keep production credentials isolated
 
-## Start Building
+## Start building
 
 You're now ready to create a powerful development environment with Neon. Choose the approach that fits your team best and start building.
 
