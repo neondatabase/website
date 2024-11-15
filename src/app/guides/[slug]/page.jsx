@@ -22,11 +22,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const post = getPostBySlug(slug, GUIDES_DIR_PATH);
+
   if (!post) return notFound();
+
   const {
     data: { title, subtitle },
+    author,
   } = post;
+
   const encodedTitle = Buffer.from(title).toString('base64');
+
   return getMetadata({
     title: `${title} - Neon Guides`,
     description: subtitle,
@@ -37,6 +42,7 @@ export async function generateMetadata({ params }) {
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
+    authors: [author.name],
   });
 }
 
