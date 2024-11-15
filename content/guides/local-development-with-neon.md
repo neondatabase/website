@@ -67,23 +67,23 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 5. **Install dependencies**
 
-    Dependencies includes [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+   Dependencies includes [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
 
-    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
-    ```bash
-    npm install @neondatabase/serverless ws
-    ```
+   ```bash
+   npm install @neondatabase/serverless ws
+   ```
 
-    ```bash
-    yarn add @neondatabase/serverless ws
-    ```
+   ```bash
+   yarn add @neondatabase/serverless ws
+   ```
 
-    ```bash
-    pnpm add @neondatabase/serverless ws
-    ```
+   ```bash
+   pnpm add @neondatabase/serverless ws
+   ```
 
-    </CodeTabs>
+   </CodeTabs>
 
 6. **Connect your app**
 
@@ -145,35 +145,35 @@ Sometimes you need to work offline or want full control over your database. Here
 
    ```yaml
    services:
-    postgres:
-      image: postgres:17
-      command: '-d 1'
-      volumes:
-        - db_data:/var/lib/postgresql/data
-      ports:
-        - '5432:5432'
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-        - POSTGRES_DB=main
-      healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 10s
-      timeout: 5s
-      retries: 5
+     postgres:
+       image: postgres:17
+       command: '-d 1'
+       volumes:
+         - db_data:/var/lib/postgresql/data
+       ports:
+         - '5432:5432'
+       environment:
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
+         - POSTGRES_DB=main
+       healthcheck:
+       test: ['CMD-SHELL', 'pg_isready -U postgres']
+       interval: 10s
+       timeout: 5s
+       retries: 5
 
-    neon-proxy:
-      image: ghcr.io/timowilhelm/local-neon-http-proxy:main
-      environment:
-        - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/main
-      ports:
-        - '4444:4444'
-      depends_on:
-      postgres:
-        condition: service_healthy
+     neon-proxy:
+       image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+       environment:
+         - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/main
+       ports:
+         - '4444:4444'
+       depends_on:
+       postgres:
+         condition: service_healthy
 
-    volumes:
-      db_data:
+     volumes:
+       db_data:
    ```
 
 3. **Set up your environment**
@@ -183,7 +183,7 @@ Sometimes you need to work offline or want full control over your database. Here
    DATABASE_URL='postgresql://postgres:postgres@localhost:5432/main'
    ```
 
-3. **Configure a connection**
+4. **Configure a connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -210,7 +210,7 @@ Sometimes you need to work offline or want full control over your database. Here
 
 ## Choosing your development approach
 
-Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach. 
+Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach.
 
 Cloud-hosted branches offer several compelling advantages:
 
