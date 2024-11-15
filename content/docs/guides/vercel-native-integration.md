@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-14T14:59:29.257Z'
+updatedOn: '2024-11-15T18:34:20.044Z'
 ---
 
 <InfoBlock>
