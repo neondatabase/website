@@ -1,6 +1,7 @@
 ---
 title: Local Development with Neon
 subtitle: Learn how to efficiently develop applications locally with Neon
+author: dhanush-reddy
 enableTableOfContents: true
 updatedOn: '2024-11-05T00:00:00.000Z'
 ---
@@ -60,7 +61,7 @@ Imagine creating a complete copy of your database as easily as creating a Git br
    DATABASE_URL='postgresql://[user]:[password]@[endpoint]/[dbname]'
    ```
 
-5. Install Dependencies
+5. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
