@@ -158,10 +158,10 @@ Sometimes you need to work offline or want full control over your database. Here
          - POSTGRES_PASSWORD=postgres
          - POSTGRES_DB=main
        healthcheck:
-       test: ['CMD-SHELL', 'pg_isready -U postgres']
-       interval: 10s
-       timeout: 5s
-       retries: 5
+         test: ['CMD-SHELL', 'pg_isready -U postgres']
+         interval: 10s
+         timeout: 5s
+         retries: 5
 
      neon-proxy:
        image: ghcr.io/timowilhelm/local-neon-http-proxy:main
@@ -170,40 +170,33 @@ Sometimes you need to work offline or want full control over your database. Here
        ports:
          - '4444:4444'
        depends_on:
-       postgres:
-         condition: service_healthy
+         postgres:
+           condition: service_healthy
 
-     volumes:
-       db_data:
+   volumes:
+     db_data:
    ```
 
-3. **Set up your environment**
-
-   ```bash
-   # .env.development
-   DATABASE_URL='postgresql://postgres:postgres@localhost:5432/main'
-   ```
-
-4. **Configure a connection**
+3. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
    import ws from 'ws';
 
+   let connectionString = process.env.DATABASE_URL;
+
    // Configuring Neon for local development
    if (process.env.NODE_ENV === 'development') {
+     connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/main';
      neonConfig.fetchEndpoint = (host) => {
        const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
        return `${protocol}://${host}:${port}/sql`;
      };
-     neonConfig.wsProxy = (host) => `${host}:4444/v1`;
-     neonConfig.useSecureWebSocket = false;
-     neonConfig.pipelineTLS = false;
-     neonConfig.pipelineConnect = false;
+     const connectionStringUrl = new URL(connectionString);
+     neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v1` : undefined);
      neonConfig.webSocketConstructor = ws;
    }
-
-   const connectionString = process.env.DATABASE_URL;
 
    export const pool = new Pool({ connectionString });
    export const sql = neon(connectionString);
