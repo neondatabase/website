@@ -3,6 +3,7 @@ title: Local Development with Neon
 subtitle: Learn how to efficiently develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
+createdAt: '2024-11-05T00:00:00.000Z'
 updatedOn: '2024-11-05T00:00:00.000Z'
 ---
 
