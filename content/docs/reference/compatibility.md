@@ -171,7 +171,7 @@ In Postgres, you cannot change a database's encoding or collation after it has b
 
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. For example, a common standard provider, `libc`, uses locales provided by the operating system C library. 
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. For example, a common standard provider, `libc`, uses locales provided by the operating system C library.
 
 By default, Neon uses the `C.UTF-8` collation. `C.UTF-8` supports the full range of UTF-8 encoded characters.
 
