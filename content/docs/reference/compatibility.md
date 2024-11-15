@@ -171,17 +171,9 @@ In Postgres, you cannot change a database's encoding or collation after it has b
 
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters.
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. For example, a common standard provider, `libc`, uses locales provided by the operating system C library.
 
-The `C.UTF-8` collation is also available. While the `C` collation is strictly binary and limited to ASCII characters, `C.UTF-8` supports the full range of UTF-8 encoded characters. To create a database with that collation, you can use the following syntax:
-
-```sql
-CREATE DATABASE my_database
-ENCODING 'UTF8'
-LC_COLLATE 'C.UTF-8'
-LC_CTYPE 'C.UTF-8'
-template template0;
-```
+By default, Neon uses the `C.UTF-8` collation. `C.UTF-8` supports the full range of UTF-8 encoded characters.
 
 Another provider supported by Neon is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited compared to what you might find in a locally installed Postgres instance where there's typically a wider range of locales provided by libraries installed on your operating system. For this reason, Neon provides a full series of [predefined icu locales](https://www.postgresql.org/docs/current/collation.html#COLLATION-MANAGING-PREDEFINED-ICU) in case you require locale-specific sorting or case conversions.
 
