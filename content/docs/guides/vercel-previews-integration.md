@@ -82,6 +82,10 @@ To add the integration:
     1.  Select a Vercel project.
         ![Select a Vercel project](/docs/guides/vercel_select_project.png)
     1.  Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
+
+      <Admonition type="note">
+      The integration is dependent on the selected Postgres role. Removing it would cause the integration to stop functioning. If you need to change the role used by the integration in the future, see [Change the database and role for preview branches](/docs/guides/vercel#change-the-database-and-role-for-preview-branches).
+      </Admonition>
         ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
             The **Create a branch for your development environment** option creates a branch named `vercel-dev` and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
@@ -325,6 +329,10 @@ To avoid this issue, you can reinstall the integration to update to the latest v
 ### Stored passwords missing in the selected Neon project
 
 Neon projects created after March, 2023 store role passwords in a secure storage vault associated with the project, allowing passwords to be retrieved by the Neon Postgres Previews Integration for the purpose of setting Postgres connection environment variables in Vercel. Projects created before March 2023, do not store role passwords, and are therefore not compatible with the Neon Postgres Previews Integration. The current workaround for this issue is to migrate your data to a new Neon project. See [Import data from another Neon project](/docs/import/migrate-from-neon).
+
+### The integration stops working after removing Postgres roles in Neon
+
+The integration is dependent on the Postgres role you specify when installing the integration. Removing this role will cause the integration to stop creating preview deployment branches. If you need to change the role used by the integration, see [Change the database and role for preview branches](/docs/guides/vercel#change-the-database-and-role-for-preview-branches).
 
 ## Video: A Postgres database for Every Preview Deployment
 
