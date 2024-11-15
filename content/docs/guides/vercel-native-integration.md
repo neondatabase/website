@@ -84,7 +84,7 @@ All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "
 
 ### Actions supported only from the Vercel Dashboard
 
-As a user of the Neon Postgres Native Integration, you have access to all Neon features. However, some actions normally performed in the Neon Console are only available through the Vercel Dashboard:
+As a user of the Neon Postgres Native Integration, you have access to all Neon features. However, some actions normally performed in the Neon Console are either not supported or only available through the Vercel Dashboard:
 
 - **Project/Database Management**:
 
@@ -94,6 +94,8 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 - **User & Collaborator Management**:
 
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
+  - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
+  - [Project transfer](https://neon.tech/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
   - [Project collaborators](https://neon.tech/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
