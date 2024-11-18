@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-11-14T10:00:00.000Z'
 ---
 
-The `JSON_TABLE` function transforms JSON data into relational views, allowing you to query JSON data using standard SQL operations. Added in PostgreSQL 17, this feature helps you work with complex JSON data by presenting it as a virtual table for use in regular SQL queries.
+The `JSON_TABLE` function transforms JSON data into relational views, allowing you to query JSON data using standard SQL operations. Added in PostgreSQL 17, this feature helps you work with complex JSON data by presenting it as a virtual table which you can access with regular SQL queries.
 
 Use `JSON_TABLE` when you need to:
 
