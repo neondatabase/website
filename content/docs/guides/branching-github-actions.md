@@ -10,6 +10,7 @@ Neon provides the following GitHub Actions for working with Neon branches, which
 - [Create branch action](#create-branch-action)
 - [Delete branch action](#delete-branch-action)
 - [Reset from parent action](#reset-from-parent-action)
+- [Schema Diff action](#schema-diff-action)
 
 <Admonition type="tip">
 Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's [Create branch](#create-branch-action) and [Delete branch](#delete-branch-action) actions. See [Neon GitHub integration](/docs/guides/neon-github-integration) for more.
@@ -285,6 +286,86 @@ outputs:
 - `host`: The branch host after the reset.
 - `host_with_pooler`: The branch host with pooling after the reset.
 - `password`: The password for connecting to the branch database after the reset.
+
+
+## Schema Diff action
+
+This action performs a database schema diff on specified Neon branches for each pull request and writes a comment on the pull request highlighting the schema differences. It supports scenarios where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including schema changes as a comment in the pull request, reviewers can easily assess the differences directly within the pull request.
+
+### Prerequisites
+
+Using the action requires adding a Neon API key to your GitHub Secrets. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
+  2. Click **Actions** > **New Repository Secret**.
+  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+  4. Click **Add Secret**.
+
+Alternatively, the **Neon GitHub Integration** can perform this setup for you. See See [Neon GitHub integration](/docs/guides/neon-github-integration) for more. 
+
+### Example
+
+The following example performs schema diff for a database named `mydatabase` between the `compare_branch`, which is typically the branch created by the [Create branch](#create-branch-action) action, and the `main` branch, which is the default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database on the base branch.
+
+```yaml
+steps:
+  - uses: neondatabase/schema-diff-action@v1
+    with:
+      project_id: ${{ vars.NEON_PROJECT_ID }}
+      compare_branch:
+        preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+      base_branch: main
+      api_key: ${{ secrets.NEON_API_KEY }}
+      database: mydatabase
+      username: myrole
+```
+
+### Input variables
+
+```yaml
+inputs:
+  github-token:
+    description: The GitHub token used to create an authenticated client
+    required: false
+    default: ${{ github.token }}
+  project_id:
+    description: The project id
+    required: true
+  compare_branch:
+    description: The compare branch name or id (downstream branch)
+    required: true
+  api_key:
+    description: The Neon API key
+    required: true
+  base_branch:
+    description: The base branch name or id (upstream branch)
+    required: false
+  api_host:
+    description: The Neon API Host
+    default: https://console.neon.tech/api/v2
+  username:
+    description: The db role name
+    default: neondb_owner
+  database:
+    description: The database name
+    default: neondb
+  timestamp:
+    description:
+      The timestamp of the downstream branch to compare against. Leave it empty
+      to compare against the latest changes in your compare branch
+  lsn:
+    description:
+      The LSN of the downstream branch to compare against. Leave it empty to
+      compare against the latest changes in your compare branch
+```
+
+### Outputs
+
+```yaml
+  diff:
+    description: The schema diff SQL patch
+  comment_url:
+    description: The url of the comment containing the schema diff
+```
 
 ## Example applications
 
