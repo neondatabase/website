@@ -290,7 +290,9 @@ outputs:
 
 ## Schema Diff action
 
-This action performs a database schema diff on specified Neon branches for each pull request and writes a comment on the pull request highlighting the schema differences. It supports scenarios where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including schema changes as a comment in the pull request, reviewers can easily assess the differences directly within the pull request.
+This action performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request in GitHub highlighting the schema differences. 
+
+It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including schema changes as a comment in the pull request, reviewers can easily assess the differences directly within the pull request.
 
 ### Prerequisites
 
@@ -300,11 +302,11 @@ Using the action requires adding a Neon API key to your GitHub Secrets. For info
   3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
   4. Click **Add Secret**.
 
-Alternatively, the **Neon GitHub Integration** can perform this setup for you. See See [Neon GitHub integration](/docs/guides/neon-github-integration) for more. 
+Alternatively, the **Neon GitHub Integration** can perform the API key setup for you. See [Neon GitHub integration](/docs/guides/neon-github-integration). 
 
 ### Example
 
-The following example performs schema diff for a database named `mydatabase` between the `compare_branch`, which is typically the branch created by the [Create branch](#create-branch-action) action, and the `main` branch, which is the default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database on the base branch.
+The following example performs schema diff on a database named `mydatabase` between the `compare_branch`, which is typically the branch created by the [Create branch](#create-branch-action) action, and the `main` branch, which is the default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database.
 
 ```yaml
 steps:
