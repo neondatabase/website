@@ -69,7 +69,6 @@ export default {
   certISO27001: 'https://trust.neon.tech/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
   certISO27701: 'https://trust.neon.tech/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
   certSOC2: 'https://trust.neon.tech/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
-  certSOC3: 'https://trust.neon.tech/?itemUid=b2671060-5c66-4d9c-b70f-af4ab3dbd45a',
   certHIPAA: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',

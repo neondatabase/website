@@ -450,12 +450,6 @@ export default {
           to: LINKS.certSOC2,
         },
         {
-          text: 'SOC 3',
-          description: 'Certified',
-          icon: 'check-icon',
-          to: LINKS.certSOC3,
-        },
-        {
           text: 'HIPAA',
           description: 'In progress',
           icon: 'wip-icon',
