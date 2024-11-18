@@ -25,7 +25,7 @@ const Post = ({
 
     <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col xl:col-span-8 xl:col-start-1 xl:mx-0">
       <article>
-        <h1 className="font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
+        <h1 className="post-title font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
           {title}
         </h1>
         {subtitle && (
@@ -34,7 +34,7 @@ const Post = ({
           </p>
         )}
         {author && <Author data={author} className="mt-5 hidden lg:block" />}
-        <Content className="mt-5" content={content} />
+        <Content className="post-content mt-5" content={content} />
       </article>
 
       <NavigationLinks

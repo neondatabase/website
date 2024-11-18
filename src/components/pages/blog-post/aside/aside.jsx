@@ -38,7 +38,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 <div className="flex flex-col">
                   <span
                     className={clsx(
-                      'font-semibold leading-dense tracking-[-0.02em] transition-colors duration-200',
+                      'post-author font-semibold leading-dense tracking-[-0.02em] transition-colors duration-200',
                       { 'group-hover:text-green-45': author.postAuthor?.url }
                     )}
                   >
