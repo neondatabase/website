@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -27,6 +28,8 @@ const schema = yup
     message: yup.string().required('Message is a required field'),
   })
   .required();
+
+const labelClassName = 'text-sm text-gray-new-90';
 
 const ContactForm = ({ formState, setFormState }) => {
   const {
@@ -104,8 +107,10 @@ const ContactForm = ({ formState, setFormState }) => {
   };
   return (
     <form
-      className="relative z-10 grid gap-y-10 rounded-[20px] bg-black-new p-12 pb-14 2xl:gap-y-9 2xl:p-10 2xl:pb-10 md:gap-y-5 md:p-6 md:pb-6"
-      style={{ boxShadow: '0px 20px 40px rgba(26, 26, 26, 0.4)' }}
+      className={clsx(
+        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact sm:p-5',
+        'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
+      )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -113,6 +118,8 @@ const ContactForm = ({ formState, setFormState }) => {
         name="name"
         label="Your name *"
         autoComplete="name"
+        theme="transparent"
+        labelClassName={labelClassName}
         error={errors.name?.message}
         isDisabled={formState === FORM_STATES.LOADING}
         {...register('name')}
@@ -122,6 +129,8 @@ const ContactForm = ({ formState, setFormState }) => {
         label="Email address *"
         type="email"
         autoComplete="email"
+        theme="transparent"
+        labelClassName={labelClassName}
         isDisabled={formState === FORM_STATES.LOADING}
         error={errors.email?.message}
         {...register('email')}
@@ -131,6 +140,8 @@ const ContactForm = ({ formState, setFormState }) => {
           className="shrink-0 basis-[54%] 2xl:basis-[45%] lg:basis-[49%]"
           name="companyWebsite"
           label="Company website"
+          theme="transparent"
+          labelClassName={labelClassName}
           isDisabled={formState === FORM_STATES.LOADING}
           {...register('companyWebsite')}
         />
@@ -140,6 +151,8 @@ const ContactForm = ({ formState, setFormState }) => {
           label="Company size *"
           tag="select"
           defaultValue="hidden"
+          theme="transparent"
+          labelClassName={labelClassName}
           isDisabled={formState === FORM_STATES.LOADING}
           error={errors.companySize?.message}
           {...register('companySize')}
@@ -158,33 +171,34 @@ const ContactForm = ({ formState, setFormState }) => {
         name="message"
         label="Message *"
         tag="textarea"
+        theme="transparent"
+        labelClassName={labelClassName}
         isDisabled={formState === FORM_STATES.LOADING}
         error={errors.message?.message}
         {...register('message')}
       />
 
-      <div className="relative mt-2 flex items-center 2xl:mt-1 md:mt-0 md:flex-col md:items-start">
+      <div className="relative flex items-center justify-between gap-6 md:flex-col md:items-start">
+        <p className="text-light text-sm leading-tight text-gray-new-70">
+          By submitting you agree to the{' '}
+          <Link className="text-white" to={LINKS.terms} theme="white-underlined">
+            Terms Service
+          </Link>{' '}
+          and acknowledge the{' '}
+          <Link className="text-white" to={LINKS.privacyPolicy} theme="white-underlined">
+            Privacy Policy
+          </Link>
+          .
+        </p>
         <Button
-          className="w-[194px] shrink-0 !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
+          className="min-w-[182px] py-[15px] font-medium"
           type="submit"
           theme="primary"
           size="xs"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
-          {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Send message'}
+          {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
-        <p className="ml-7 text-left leading-tight md:ml-0">
-          By submitting, you agree to{' '}
-          <Link
-            className="pb-1 !text-base 2xl:!text-base md:!inline"
-            to={LINKS.privacyPolicy}
-            theme="underline-primary-1"
-            size="xs"
-          >
-            Neon’s Privacy Policy
-          </Link>
-          .
-        </p>
         {formError && (
           <span
             className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1"
