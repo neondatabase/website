@@ -88,7 +88,7 @@ const Hero = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   return (
-    <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] lg:pb-28 lg:pt-9 md:pb-24">
+    <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16">
       <Container className="xl:px-8 md:px-5" size="1152">
         <div className="flex gap-[90px] xl:gap-12 lg:flex-col lg:gap-10">
           <div className="w-[480px] pt-7 xl:w-[400px] lg:w-full">
