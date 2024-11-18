@@ -86,6 +86,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/jsonb_to_record" description="Convert a JSONB object to a record" icon="app-store">jsonb_to_record()</a>
 
+<a href="/docs/functions/json_table" description="Transform JSON data into relational views" icon="app-store">JSON_TABLE()</a>
+
 </DetailIconCards>
 
 ## Mathematical functions
