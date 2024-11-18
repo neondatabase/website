@@ -15,7 +15,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
           Posted by
         </h3>
         <div className="flex flex-col space-y-4">
-          {authors.map(({ author }) => {
+          {authors.map(({ author }, index) => {
             const Tag = author.postAuthor?.url ? Link : 'div';
             const isExternal =
               author.postAuthor?.url?.startsWith('http') ||
@@ -38,7 +38,8 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                 <div className="flex flex-col">
                   <span
                     className={clsx(
-                      'post-author font-semibold leading-dense tracking-[-0.02em] transition-colors duration-200',
+                      index === 0 && 'post-author',
+                      'font-semibold leading-dense tracking-[-0.02em] transition-colors duration-200',
                       { 'group-hover:text-green-45': author.postAuthor?.url }
                     )}
                   >
