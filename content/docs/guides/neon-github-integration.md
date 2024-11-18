@@ -16,7 +16,7 @@ The integration installs the GitHub App, letting you select which repositories y
 
 <Admonition type="note">
 The [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository) we provide is intended as a basic template you can expand on or customize to build your own workflows.
-</Admonition> 
+</Admonition>
 
 This guide walks you through the following steps:
 
@@ -114,8 +114,8 @@ jobs:
   #        env:
   #          DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}"
   #
-  # You can also add a Schema Diff action to compare the database schema on the new 
-  # branch with the base branch. This action automatically writes the schema differences 
+  # You can also add a Schema Diff action to compare the database schema on the new
+  # branch with the base branch. This action automatically writes the schema differences
   # as a comment on your GitHub pull request, making it easy to review changes.
   #
   # steps:

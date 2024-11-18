@@ -287,22 +287,22 @@ outputs:
 - `host_with_pooler`: The branch host with pooling after the reset.
 - `password`: The password for connecting to the branch database after the reset.
 
-
 ## Schema Diff action
 
-This action performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request in GitHub highlighting the schema differences. 
+This action performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request in GitHub highlighting the schema differences.
 
 It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including schema changes as a comment in the pull request, reviewers can easily assess the differences directly within the pull request.
 
 ### Prerequisites
 
 Using the action requires adding a Neon API key to your GitHub Secrets. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-  4. Click **Add Secret**.
 
-Alternatively, the **Neon GitHub Integration** can perform the API key setup for you. See [Neon GitHub integration](/docs/guides/neon-github-integration). 
+1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
+2. Click **Actions** > **New Repository Secret**.
+3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
+4. Click **Add Secret**.
+
+Alternatively, the **Neon GitHub Integration** can perform the API key setup for you. See [Neon GitHub integration](/docs/guides/neon-github-integration).
 
 ### Example
 
@@ -313,8 +313,7 @@ steps:
   - uses: neondatabase/schema-diff-action@v1
     with:
       project_id: ${{ vars.NEON_PROJECT_ID }}
-      compare_branch:
-        preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+      compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
       base_branch: main
       api_key: ${{ secrets.NEON_API_KEY }}
       database: mydatabase
@@ -351,22 +350,20 @@ inputs:
     description: The database name
     default: neondb
   timestamp:
-    description:
-      The timestamp of the downstream branch to compare against. Leave it empty
+    description: The timestamp of the downstream branch to compare against. Leave it empty
       to compare against the latest changes in your compare branch
   lsn:
-    description:
-      The LSN of the downstream branch to compare against. Leave it empty to
+    description: The LSN of the downstream branch to compare against. Leave it empty to
       compare against the latest changes in your compare branch
 ```
 
 ### Outputs
 
 ```yaml
-  diff:
-    description: The schema diff SQL patch
-  comment_url:
-    description: The url of the comment containing the schema diff
+diff:
+  description: The schema diff SQL patch
+comment_url:
+  description: The url of the comment containing the schema diff
 ```
 
 ## Example applications
