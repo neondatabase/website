@@ -420,28 +420,40 @@ export default {
       heading: 'Compliance',
       items: [
         {
-          text: 'SOC 2',
-          description: 'Certified',
+          text: 'CCPA',
+          description: 'Compliant',
           icon: 'check-icon',
-          to: LINKS.soc2,
+          to: LINKS.certCCPA,
         },
         {
           text: 'GDPR',
           description: 'Compliant',
           icon: 'check-icon',
-          to: LINKS.gdpr,
+          to: LINKS.certGDPR,
         },
         {
           text: 'ISO 27001',
-          description: 'Compliant',
+          description: 'Certified',
           icon: 'check-icon',
-          to: LINKS.iso27001,
+          to: LINKS.certISO27001,
+        },
+        {
+          text: 'ISO 27701',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certISO27701,
+        },
+        {
+          text: 'SOC 2',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certSOC2,
         },
         {
           text: 'HIPAA',
           description: 'In progress',
           icon: 'wip-icon',
-          to: LINKS.hipaa,
+          to: LINKS.certHIPAA,
         },
         {
           text: 'Trust Center',
