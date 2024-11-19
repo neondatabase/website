@@ -291,7 +291,7 @@ outputs:
 
 This action performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request in GitHub highlighting the schema differences.
 
-It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including schema changes as a comment in the pull request, reviewers can easily assess the differences directly within the pull request.
+It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including the schema diff as a comment in the pull request, reviewers can easily assess the changes directly within the pull request.
 
 ### Prerequisites
 
