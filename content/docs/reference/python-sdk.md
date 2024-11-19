@@ -50,9 +50,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 
 ## Methods of the `NeonAPI` Class
 
-### `me()`
-
-- **Description**: Returns the current user.
+- `me()`: Returns the current user.
 
 ### Manage API Keys
 
