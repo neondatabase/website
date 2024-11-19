@@ -28,6 +28,8 @@
           items:
             - title: Quick list
               slug: get-started-with-neon/languages
+            - title: .NET
+              slug: guides/dotnet-npgsql
             - title: Elixir
               slug: guides/elixir-ecto
             - title: Go
@@ -51,6 +53,8 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Laravel
