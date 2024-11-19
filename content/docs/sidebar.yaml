@@ -689,8 +689,22 @@
       slug: reference/sdk
       icon: sdk
       items:
-        - title: Neon SDKs
-          slug: reference/sdk
+        - section: Neon SDKs
+          items:
+            - title: TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK
+              slug: reference/python-sdk
+            - title: The @neondatabase/toolkit
+              slug: reference/neondatabase-toolkit
+        - section: Community SDKs
+          items:
+            - title: Go SDK
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
     - title: Terraform
       slug: reference/terraform
       tag: community
