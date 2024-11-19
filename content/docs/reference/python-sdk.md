@@ -51,14 +51,17 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 ## Methods of the `NeonAPI` Class
 
 ### `me()`
+
 - **Description**: Returns the current user.
 
 ### Manage API Keys
+
 - `api_keys()`: Returns a list of API keys.
 - `api_key_create(**json)`: Creates an API key.
 - `api_key_delete(key_id)`: Deletes a given API key.
 
 ### Manage Projects
+
 - `projects()`: Returns a list of projects.
 - `project(project_id)`: Returns a specific project.
 - `project_create(project_id, **json)`: Creates a new project.
@@ -70,6 +73,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `connection_uri(project_id, database_name, role_name)`: Returns the connection string for a given project.
 
 ### Manage Branches
+
 - `branches(project_id)`: Returns a list of branches for a given project.
 - `branch(project_id, branch_id)`: Returns a specific branch.
 - `branch_create(project_id, **json)`: Creates a new branch.
@@ -78,6 +82,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `branch_set_as_primary(project_id, branch_id)`: Sets a given branch as primary.
 
 ### Manage Databases
+
 - `databases(project_id, branch_id)`: Returns a list of databases for a given project and branch.
 - `database(project_id, branch_id, database_id)`: Returns a specific database.
 - `database_create(project_id, branch_id, **json)`: Creates a new database.
@@ -85,6 +90,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `database_delete(project_id, branch_id, database_id)`: Deletes a given database.
 
 ### Manage Endpoints
+
 - `endpoints(project_id, branch_id)`: Returns a list of endpoints for a given project and branch.
 - `endpoint_create(project_id, branch_id, **json)`: Creates a new endpoint.
 - `endpoint_update(project_id, branch_id, endpoint_id, **json)`: Updates a given endpoint.
@@ -93,6 +99,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `endpoint_suspend(project_id, branch_id, endpoint_id)`: Suspends a given endpoint.
 
 ### Manage Roles
+
 - `roles(project_id, branch_id)`: Returns a list of roles for a given project and branch.
 - `role(project_id, branch_id, role_name)`: Returns a specific role.
 - `role_create(project_id, branch_id, role_name)`: Creates a new role.
@@ -101,10 +108,12 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `role_password_reset(project_id, branch_id, role_name)`: Resets the password for a given role.
 
 ### Manage Operations
+
 - `operations(project_id)`: Returns a list of operations for a given project.
 - `operation(project_id, operation_id)`: Returns a specific operation.
 
 ### Experimental
+
 - `consumption()`: Returns a list of project consumption metrics.
 
-*View the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) documentation for more information on the available endpoints and their parameters.*
+_View the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) documentation for more information on the available endpoints and their parameters._
