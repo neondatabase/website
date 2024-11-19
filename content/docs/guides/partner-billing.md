@@ -76,7 +76,7 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. For example, the the Neon Free Plan branch size limit is 512 MiB (0.5 GiB). You can query the limits by running the [Get project details](https://api-docs.neon.tech/reference/getproject) or [Get project list](https://api-docs.neon.tech/reference/listprojects) endpoints.
+These limits are not directly configurable. You can query the limits by running the [Get project details](https://api-docs.neon.tech/reference/getproject) or [Get project list](https://api-docs.neon.tech/reference/listprojects) endpoints.
 
 ## Suspending active computes
 
