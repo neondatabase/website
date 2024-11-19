@@ -21,10 +21,6 @@ const schema = yup
       .string()
       .email('Please enter a valid email')
       .required('Email address is a required field'),
-    companySize: yup
-      .string()
-      .notOneOf(['hidden'], 'Please select a company size')
-      .required('Company size is a required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
@@ -34,6 +30,7 @@ const labelClassName = 'text-sm text-gray-new-90';
 const ContactForm = ({ formState, setFormState }) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -91,6 +88,7 @@ const ContactForm = ({ formState, setFormState }) => {
       if (response.ok) {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
+          reset();
           setFormError('');
         }, loadingAnimationStartedTime);
       } else {
@@ -105,6 +103,9 @@ const ContactForm = ({ formState, setFormState }) => {
       }
     }
   };
+
+  const isDisabled = formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS;
+
   return (
     <form
       className={clsx(
@@ -118,43 +119,44 @@ const ContactForm = ({ formState, setFormState }) => {
         name="name"
         label="Your name *"
         autoComplete="name"
+        placeholder="Marques Hansen"
         theme="transparent"
         labelClassName={labelClassName}
         error={errors.name?.message}
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         {...register('name')}
       />
       <Field
         name="email"
-        label="Email address *"
+        label="Email *"
         type="email"
         autoComplete="email"
+        placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex space-x-10 2xl:space-x-6 md:grid md:gap-y-5 md:space-x-0">
+      <div className="flex gap-5 md:flex-col">
         <Field
-          className="shrink-0 basis-[54%] 2xl:basis-[45%] lg:basis-[49%]"
+          className="shrink-0 basis-[60%]"
           name="companyWebsite"
-          label="Company website"
+          label="Company Website"
           theme="transparent"
           labelClassName={labelClassName}
-          isDisabled={formState === FORM_STATES.LOADING}
+          isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
         <Field
           className="grow"
           name="companySize"
-          label="Company size *"
+          label="Company Size *"
           tag="select"
           defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
-          isDisabled={formState === FORM_STATES.LOADING}
-          error={errors.companySize?.message}
+          isDisabled={isDisabled}
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
@@ -173,7 +175,8 @@ const ContactForm = ({ formState, setFormState }) => {
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}
-        isDisabled={formState === FORM_STATES.LOADING}
+        textareaClassName="min-h-[148px]"
+        isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}
       />

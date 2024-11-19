@@ -81,6 +81,10 @@ const CASE_STUDIES = [
       height: 24,
     },
     link: `${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`,
+    className:
+      'border-0 bg-gray-new-10 bg-[radial-gradient(85.43%_58.72%_at_70.83%_0%,#1D2930,#151E2300)] hover:bg-gray-new-50 hover:bg-none ' +
+      'before:pointer-events-none before:absolute before:inset-px before:rounded-[inherit] ' +
+      'before:bg-[#0A0A0C] before:bg-[radial-gradient(100%_132%_at_63%_-27%,#0E171BE6,#0E171B00)]',
   },
 ];
 
@@ -100,20 +104,25 @@ const Hero = () => {
               Let's Connect
             </Heading>
             <p className="mt-4 text-xl tracking-tight text-gray-new-80 md:text-base">
-              Were happy to assist you with any questions about our tech, pricing plans, custom
+              We're happy to assist you with any questions about our tech, pricing plans, custom
               contract options, and&nbsp;migrations assistance.
             </p>
             <div className="mt-6 space-y-4">
               {CERTIFICATES.map(({ title, description, icon }) => (
                 <div className="flex items-center gap-4" key={title}>
                   <Image src={icon} alt={title} width={24} height={24} />
-                  <p className="flex gap-2 text-lg leading-none tracking-tighter text-gray-new-80">
+                  <p className="flex gap-2 text-lg leading-none tracking-tight text-gray-new-80">
                     {title} <span className="text-gray-new-40">{description}</span>
                   </p>
                 </div>
               ))}
             </div>
-            <Link className="mt-9" theme="green" to={LINKS.contactSales} withArrow>
+            <Link
+              className="mt-9 text-lg font-medium tracking-tight"
+              theme="green"
+              to={LINKS.contactSales}
+              withArrow
+            >
               Book a meeting directly
             </Link>
           </div>
@@ -122,23 +131,30 @@ const Hero = () => {
           </div>
         </div>
         <div className="mt-[88px] grid grid-cols-4 gap-8 xl:gap-6 lg:grid-cols-2 md:mt-20 sm:mt-16 sm:grid-cols-1">
-          {CASE_STUDIES.map(({ title, description, logo, link }) => (
+          {CASE_STUDIES.map(({ title, description, logo, link, className }) => (
             <Link
               className={clsx(
-                'flex h-44 flex-col justify-between rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5',
-                'shadow-contact'
+                'group relative flex h-44 flex-col justify-between rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact',
+                'transition-colors hover:border-gray-new-50',
+                className
               )}
               to={link}
               key={title}
             >
-              <p className="text-xl font-semibold leading-snug tracking-tighter text-white xl:text-lg">
+              <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
                 {title}{' '}
                 <span
                   className="font-light text-gray-new-60"
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
               </p>
-              <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+              <Image
+                className="relative"
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+              />
             </Link>
           ))}
         </div>
