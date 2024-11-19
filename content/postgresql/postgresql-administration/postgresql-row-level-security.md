@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL row\-level security to control access to individual rows in a table.
 
-<CTA title="Looking to integrate Postgres RLS?" description="<a href='/docs/guides/neon-authorize'>Neon Authorize</a> uses the open-source <a href='https://github.com/neondatabase/pg_session_jwt'>pg_session_jwt</a> extension to help you write RLS policies that map to your app's or service's auth." buttonText="Learn More" buttonUrl="/docs/guides/neon-authorize" />
+<CTA title="Looking to use Postgres RLS?" description="<a href='/docs/guides/neon-authorize'>Neon Authorize</a> uses the open-source <a href='https://github.com/neondatabase/pg_session_jwt'>pg_session_jwt</a> extension to help you write RLS policies that map to your app's or service's auth." buttonText="Learn More" buttonUrl="/docs/guides/neon-authorize" />
 
 ## Introduction to the PostgreSQL Row\-Level Security
 
