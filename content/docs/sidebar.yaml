@@ -829,6 +829,8 @@
                   slug: functions/json_to_record
                 - title: jsonb_to_record
                   slug: functions/jsonb_to_record
+                - title: JSON_TABLE
+                  slug: functions/json_table
             - title: Window functions
               items:
                 - title: dense_rank
