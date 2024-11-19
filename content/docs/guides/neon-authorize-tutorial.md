@@ -2,7 +2,7 @@
 title: Neon Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2024-10-30T15:45:40.104Z'
+updatedOn: '2024-11-05T18:30:25.431Z'
 ---
 
 <InfoBlock>
@@ -12,6 +12,7 @@ updatedOn: '2024-10-30T15:45:40.104Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize">About Neon Authorize</a>
+  <a href="https://orm.drizzle.team/docs/rls">Row-Level security in Drizzle</a>
 </DocsList>
 </InfoBlock>
 
@@ -211,7 +212,7 @@ export async function getTodos(): Promise<Array<Todo>> {
 
 In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application, found in the `schema.ts` file.
 
-These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function – a wrapper that works with Neon’s predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function.
+These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function – a wrapper that works with Neon’s predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function. See [Row-level Security](https://orm.drizzle.team/docs/rls) in the Drizzle docs for details.
 
 The examples here use `pgPolicy` for custom control over each action.
 

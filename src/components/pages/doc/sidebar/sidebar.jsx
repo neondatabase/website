@@ -89,7 +89,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
           'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
         )}
       >
-        <div className="flex items-center gap-x-7 px-[52px] xl:px-8">
+        <div className="flex items-center gap-x-7 pl-[52px] pr-6 xl:pl-8">
           <Logo className="h-7" width={102} height={28} priority isHeader />
           <Link
             className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"

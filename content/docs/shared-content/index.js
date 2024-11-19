@@ -8,6 +8,7 @@ const sharedMdxComponents = {
   PrivatePreview: 'shared-content/private-preview',
   LRBeta: 'shared-content/lr-inbound-beta',
   FeatureBeta: 'shared-content/feature-beta',
+  MigrationAssistant: 'shared-content/migration-assistant',
 };
 
 module.exports = sharedMdxComponents;

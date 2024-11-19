@@ -28,6 +28,8 @@
           items:
             - title: Quick list
               slug: get-started-with-neon/languages
+            - title: .NET
+              slug: guides/dotnet-npgsql
             - title: Elixir
               slug: guides/elixir-ecto
             - title: Go
@@ -51,6 +53,8 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Laravel
@@ -119,6 +123,8 @@
       items:
         - section: Import utilities
           items:
+            - title: Migration Assistant
+              slug: import/migration-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
             - title: Migrate from a Neon project
@@ -215,6 +221,8 @@
                   slug: guides/reset-from-parent
                 - title: Branch Restore
                   slug: guides/branch-restore
+            - title: Branch archiving
+              slug: guides/branch-archiving
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
             - title: Branching with the API
@@ -444,6 +452,10 @@
           items:
             - title: Clerk
               slug: guides/neon-authorize-clerk
+            - title: Stack Auth
+              slug: guides/neon-authorize-stack-auth
+            - title: Auth0
+              slug: guides/neon-authorize-auth0
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -460,8 +472,10 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Neon Vercel Integration
-                  slug: guides/vercel
+                - title: Postgres Native Integration
+                  slug: guides/vercel-native-integration
+                - title: Postgres Previews Integration
+                  slug: guides/vercel-previews-integration
                 - title: Connect manually
                   slug: guides/vercel-manual
             - title: Cloudflare
@@ -679,8 +693,22 @@
       slug: reference/sdk
       icon: sdk
       items:
-        - title: Neon SDKs
-          slug: reference/sdk
+        - section: Neon SDKs
+          items:
+            - title: TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK
+              slug: reference/python-sdk
+            - title: The @neondatabase/toolkit
+              slug: reference/neondatabase-toolkit
+        - section: Community SDKs
+          items:
+            - title: Go SDK
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
     - title: Terraform
       slug: reference/terraform
       tag: community
@@ -819,6 +847,8 @@
                   slug: functions/json_to_record
                 - title: jsonb_to_record
                   slug: functions/jsonb_to_record
+                - title: JSON_TABLE
+                  slug: functions/json_table
             - title: Window functions
               items:
                 - title: dense_rank

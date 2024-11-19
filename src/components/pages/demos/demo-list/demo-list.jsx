@@ -13,7 +13,7 @@ const items = [
         title: 'AI app architecture: vector database per tenant',
         description:
           "An AI app where each user gets it's own database instance. Uses Neon + pgvector.",
-        demoLink: 'https://ai-vector-db-per-tenant.pages.dev/',
+        demoLink: 'https://db-per-tenant.up.railway.app/',
         sourceLink: 'https://github.com/neondatabase/ai-vector-db-per-tenant',
       },
     ],

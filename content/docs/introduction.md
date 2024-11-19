@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2024-11-03T12:54:20.020Z'
+updatedOn: '2024-11-19T20:27:25.090Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
@@ -33,6 +33,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
+<a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
+
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
 <a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
@@ -40,6 +42,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
+
+<a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
 <a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 

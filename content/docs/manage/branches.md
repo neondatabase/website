@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-11-01T10:14:56.349Z'
+updatedOn: '2024-11-12T11:01:29.510Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -93,6 +93,7 @@ To view the branches in a Neon project:
 
    Branch details shown on the branch page include:
 
+   - **Archive status**: When the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created**: The date and time the branch was created.
    - **Compute hours**: The compute hours used by the branch in the current billing period.
@@ -109,6 +110,10 @@ The branch details page also includes details about the **Computes**, **Roles & 
 - [Manage databases](/docs/manage/databases)
 - [View branches](#view-branches)
 
+## Branch archiving
+
+On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
+
 ## Rename a branch
 
 Neon permits renaming a branch, including your project's default branch. To rename a branch:
@@ -121,7 +126,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The benefit of the default branch is that the compute associated with the default branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the default branch. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 

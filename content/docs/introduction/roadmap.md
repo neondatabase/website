@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-11-04T13:13:30.367Z'
+updatedOn: '2024-11-12T11:01:29.510Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, what we delivered recently, and a peek at some of the upcoming features we'll be taking on next.
@@ -20,7 +20,7 @@ Here's a snapshot of what we're working on now:
 - **Larger computes**: We are working on adding support for ever-larger compute sizes.
 - **Support for exporting metrics to more monitoring platforms**: We currently support [metrics export to Datadog](/docs/guides/datadog). We'd like to expand support to other monitoring platforms and services.
 - **Private network access**: Private and secure network access to your compute resources without traversing public networks.
-- **Archive branches**: To help minimize storage costs, we would like to add support for automatically archiving inactive branches (snapshots of your data) to cost-efficient object storage like Amazon S3 or Azure Blob Storage, depending on your chosen cloud provider.
+- **Archive branches**: To help minimize storage costs, we would like to add support for automatically archiving inactive branches (snapshots of your data) in cost-efficient object storage like Amazon S3 or Azure Blob Storage, depending on your chosen cloud provider.
 - **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 - **Data migration assistance**: We’re working on a streamlined data migration process to make it easy for users to bring their data to Neon with minimal downtime.
