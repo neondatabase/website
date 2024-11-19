@@ -49,10 +49,10 @@ To get started:
 
 The sample GitHub Actions workflow includes:
 
-- A `Create Neon Branch` action that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
+- A [Create branch action](/docs/guides/branching-github-actions#create-branch-action) that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - Code that you can uncomment to add a database migration command to your workflow.
-- Code that you can uncomment to add a `Schema Diff` action that diffs database schemas and posts the diff as a comment in your pull request.
-- A `Delete Neon Branch` action that deletes the Neon branch from your Neon project when you close the pull request.
+- Code that you can uncomment to add a [Schema diff action](/docs/guides/branching-github-actions#schema-diff-action) that diffs database schemas and posts the diff as a comment in your pull request.
+- A [Delete branch action](/docs/guides/branching-github-actions#delete-branch-action) that deletes the Neon branch from your Neon project when you close the pull request.
 
 ```yaml
 name: Create/Delete Branch for Pull Request
