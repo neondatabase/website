@@ -306,7 +306,7 @@ Alternatively, the **Neon GitHub Integration** can perform the API key setup for
 
 ### Example
 
-The following example performs schema diff on a database named `mydatabase` between the `compare_branch`, which is typically the branch created by the [Create branch](#create-branch-action) action, and the `main` branch, which is the default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database.
+The following example performs schema diff on a database named `mydatabase` between the `compare_branch` and the `base_branch` branch. The `compare_branch` is typically the branch created by the [Create branch](#create-branch-action) action. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database.
 
 ```yaml
 steps:
