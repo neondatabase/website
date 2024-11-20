@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
-updatedOn: '2024-11-03T12:54:20.016Z'
+updatedOn: '2024-11-19T20:27:25.087Z'
 ---
 
 <TechnologyNavigation open>
@@ -17,7 +17,7 @@ updatedOn: '2024-11-03T12:54:20.016Z'
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
-<a href="/docs/guides/dotnet-entity-framework" title="Dotnet" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
+<a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 

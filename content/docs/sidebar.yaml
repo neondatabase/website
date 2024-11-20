@@ -28,6 +28,8 @@
           items:
             - title: Quick list
               slug: get-started-with-neon/languages
+            - title: .NET
+              slug: guides/dotnet-npgsql
             - title: Elixir
               slug: guides/elixir-ecto
             - title: Go
@@ -51,6 +53,8 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Laravel
@@ -468,12 +472,14 @@
               items:
                 - title: Overview
                   slug: guides/vercel-overview
-                - title: Postgres Native Integration
+                - title: Vercel Native Integration
                   slug: guides/vercel-native-integration
-                - title: Postgres Previews Integration
+                - title: Neon Previews Integration
                   slug: guides/vercel-previews-integration
                 - title: Connect manually
                   slug: guides/vercel-manual
+                - title: Vercel Postgres Transition Guide
+                  slug: guides/vercel-postgres-transition-guide
             - title: Cloudflare
               slug: guides/cloudflare-pages
               items:
@@ -689,8 +695,22 @@
       slug: reference/sdk
       icon: sdk
       items:
-        - title: Neon SDKs
-          slug: reference/sdk
+        - section: Neon SDKs
+          items:
+            - title: TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK
+              slug: reference/python-sdk
+            - title: The @neondatabase/toolkit
+              slug: reference/neondatabase-toolkit
+        - section: Community SDKs
+          items:
+            - title: Go SDK
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
     - title: Terraform
       slug: reference/terraform
       tag: community

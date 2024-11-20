@@ -3,7 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2024-11-05T18:30:25.432Z'
+updatedOn: '2024-11-19T13:09:02.037Z'
 ---
 
 <InfoBlock>
@@ -15,7 +15,7 @@ updatedOn: '2024-11-05T18:30:25.432Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
+  <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
 </DocsList>
 
 </InfoBlock>

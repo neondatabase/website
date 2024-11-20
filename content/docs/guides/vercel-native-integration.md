@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-15T18:34:20.044Z'
+updatedOn: '2024-11-20T10:57:13.782Z'
 ---
 
 <InfoBlock>
@@ -183,14 +183,14 @@ To delete your database:
 
 This action is not reversible, so please proceed with caution.
 
-## Parameter values set by the integration
+## Environment variables set by the integration
 
-The parameter values listed below are set by the integration. Please note the following:
+The environment variables listed below are set by the integration. Please note the following:
 
-- The `DATABASE_URL` parameter is a pooled Neon connection string. Connection pooling in Neon uses PgBouncer. For more, see [Connection pooling](/docs/connect/connection-pooling).
+- The `DATABASE_URL` variable is a pooled Neon connection string. Connection pooling in Neon uses PgBouncer. For more, see [Connection pooling](/docs/connect/connection-pooling).
 - `DATABASE_URL_UNPOOLED` is an direct connection string for your database, often required by schema migration tools. For more, see [Connection pooling with schema migration tools](/docs/connect/connection-pooling#connection-pooling-with-schema-migration-tools).
-- There are several parameters provided for constructing your own connection settings.
-- The integration sets parameters that were previously used by Vercel Postgres. These parameters support [Vercel Postgres Templates](https://vercel.com/templates/vercel-postgres), which you can now use with Neon Postgres.
+- There are several variables provided for constructing your own connection settings.
+- The integration sets variables that were previously used by Vercel Postgres. These variables support [Vercel Postgres Templates](https://vercel.com/templates/vercel-postgres), which you can now use with Neon Postgres.
 
 ```bash
 # Recommended for most uses

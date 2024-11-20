@@ -5,7 +5,7 @@ subtitle: Learn how to migrate data to Neon Postgres from different database pro
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2024-09-27T20:02:08.039Z'
+updatedOn: '2024-11-19T20:20:15.580Z'
 ---
 
 Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
@@ -18,7 +18,7 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <DetailIconCards>
 
-<a href="/docs/import/migrate-from-postgres" description="Migrate data from another Postgres database using pg_dump and pg_restore" icon="postgres">MIgrate with pg_dump and pg_restore</a>
+<a href="/docs/import/migrate-from-postgres" description="Migrate data from another Postgres database using pg_dump and pg_restore" icon="postgres">Migrate with pg_dump and pg_restore</a>
 
 <a href="/docs/import/migrate-from-neon" description="Migrate data from another Neon project for Postgres version, region, or account migration" icon="neon">Migrate from another Neon project</a>
 
