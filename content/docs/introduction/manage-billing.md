@@ -84,6 +84,10 @@ To download an invoice:
 1. Navigate to the **Invoices** section of the page.
 1. Find the invoice you want to download and select **Download** from the menu.
 
+<Admonition type="note">
+When an invoice is paid, Neon's billing system sends a payment confirmation email to the address associated with the Neon account.
+</Admonition>
+
 ### Request a refund
 
 If you find an issue with your invoice, you can request a refund. The request will be reviewed by the Neon billing team.
