@@ -24,7 +24,7 @@ To us, serverless means:
 
 - **Instant provisioning**: Neon allows you to spin up Postgres databases in seconds, eliminating the long setup times traditionally associated with database provisioning.
 - **No server management**: You don’t have to deal with the complexities of provisioning, maintaining, and administering servers. Neon handles it all, so you can focus on your application.
-- **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention.
+- **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention. No restarts are required.
 - **Usage-based pricing**: Your costs are directly tied to the resources your workload consumes—both compute and storage. There's no need to over-provision or pay for idle capacity.
 - **Built-in availability and fault tolerance**: We’ve designed our architecture for high availability and resilience, ensuring your data is safe and your applications are always accessible.
 - **Focus on business logic**: With the heavy lifting of infrastructure management handled by Neon, you can dedicate your time and effort to writing code and delivering value to your users.

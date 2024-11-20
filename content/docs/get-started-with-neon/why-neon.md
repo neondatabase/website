@@ -48,6 +48,10 @@ Separation of compute and storage enables scalability as these resources can be 
 
 [Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, and database branching workflows.
 
+<Admonition type="tip" title="Did you know?">
+Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
+</Admonition>
+
 ## Neon is fully managed
 
 **Leave the database administrative, maintenance, and scaling burdens to us.**
