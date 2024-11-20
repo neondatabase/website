@@ -50,18 +50,18 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
 6. On the **Create Database** modal, select a region, specify your compute size and autosuspend settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
 
-    <Admonition type="note">
-      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
+   <Admonition type="note">
+     **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-      | Plan            | Compute Size       | Suspend after ([Autosuspend](https://neon.tech/docs/introduction/auto-suspend))     |
-      |:----------------|:-------------------|:-----------------|
-      | Free            | 0.25 - 2 vCPUs     | 5 minutes (Default)|
-      | Launch          | 0.25 - 4 vCPUs     | 5 minutes or more (Default, Never, Custom)|
-      | Scale           | 0.25 - 8 vCPUs     | 1 minute or more (Default, Never, Custom)|
-      | Business        | 0.25 - 10 vCPUs    | 1 minute or more (Default, Never, Custom)|
+   | Plan     | Compute Size    | Suspend after ([Autosuspend](https://neon.tech/docs/introduction/auto-suspend)) |
+   | :------- | :-------------- | :------------------------------------------------------------------------------ |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                                             |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                                      |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                                       |
+   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                                       |
 
-      For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
-    </Admonition>
+   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
+   </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
 
