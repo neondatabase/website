@@ -54,12 +54,12 @@ To configure Neon Private Networking, perform the following steps:
     1. Add the availability zones and associated subnets you want to support.
     1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-2.  **Provide the endpoint ID to Neon**
+2.  **Provide the VPC Endpoint ID to Neon**
 
-    Note the ID of the created endpoint and provide it to Neon. Neon will authorize this endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
+    Note the **VPC Endpoint ID** and provide it to Neon. Neon will authorize this VPC Endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
 
     <Admonition type="note">
-     This step is specific to the Private Preview. In the final version, the allowed endpoint will be configured through the Neon Console without any manual involvement by Neon.
+     Please note that you must provide the **VPC Endpoint ID**, not the VPC ID. This step is specific to the Private Preview. In the final version, the allowed VPC Endpoint will be configured through the Neon Console without any manual involvement by Neon.
     </Admonition>
 
 3.  **Enable Private DNS**
