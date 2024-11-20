@@ -304,6 +304,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
 
+## Neon Proxy
+
+A component of the Neon platform that acts as an intermediary between connecting clients and compute nodes where Postgres runs. The Neon Proxy is responsible for tasks such as connection routing, authentication, and metrics collection. From a security perspective, it helps protect the integrity of the Neon platform through a combination of authentication, authorization, and other security measures.
+
 ## Neon user
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
