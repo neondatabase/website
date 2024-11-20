@@ -97,11 +97,11 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 
 Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 
-| Resource      | Vercel Pro (Additional) | Neon Launch Plan (Extra usage)                                                                                                   |
-| :------------ | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| Compute Time  | $0.10 per compute hour  | $0.16 per compute hour                                                                                                           |
-| Data Transfer | $0.10 - 1 GB            | No additional cost                                                                                                               |
-| Database      | $1.00 - Per 1 Database  | No additional cost for the first 100                                                                                             |
+| Resource      | Vercel Pro (Additional) | Neon Launch Plan (Extra usage)                |
+| :------------ | :---------------------- | :-------------------------------------------- |
+| Compute Time  | $0.10 per compute hour  | $0.16 per compute hour                        |
+| Data Transfer | $0.10 - 1 GB            | No additional cost                            |
+| Database      | $1.00 - Per 1 Database  | No additional cost for the first 100          |
 | Storage       | $0.12 - 1 GB            | First 10 GB included; afterwards $1.75 per-GB |
 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to look at these plans if the Launch plan does not meet your requirements.
