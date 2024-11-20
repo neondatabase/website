@@ -16,7 +16,12 @@ updatedOn: '2024-08-19T14:50:59.584Z'
 </DocsList>
 </InfoBlock>
 
-This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
+This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage. 
+
+<Admonition type="tip" title="Did you know?">
+Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
+</Admonition>
+
 
 ## Enable autoscaling for a compute
 

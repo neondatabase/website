@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-08-22T16:14:37.838Z'
 ---
 
-Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention.
+Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.
 
 The following visualization shows how Neon’s autoscaling works throughout a typical day. The compute resources scale up or down based on demand, ensuring that your database has the necessary compute resources when it needs them, while conserving resources during off-peak times.
 
@@ -20,7 +20,7 @@ Neon's Autoscaling feature offers the following benefits:
 - **On-demand scaling:** Autoscaling helps with workloads that experience variations over time, such as applications with time-based changes in demand or occasional spikes.
 - **Cost-effectiveness**: Autoscaling optimizes resource utilization, ensuring that you only use required resources, rather than over-provisioning to handle peak loads.
 - **Resource and cost control**: Autoscaling operates within a user-defined range, ensuring that your compute resources and associated costs do not scale indefinitely.
-- **No manual intervention**: After you enable autoscaling and set scaling limits, no manual intervention is required, allowing you to focus on your applications.
+- **No manual intervention or restarts**: After you enable autoscaling and set scaling limits, no manual intervention or restarts are required, allowing you to focus on your applications.
 
 ## Configuring autoscaling
 
