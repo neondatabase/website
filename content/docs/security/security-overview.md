@@ -23,7 +23,7 @@ Neon supports a variety of protections related to database connections:
 
 - **IP Allow** — For additional connection security, the Neon Business plan offers [IP allowlist support](#ip-allowlist-support), which allows you to limit access to trusted IPs.
 
-- **Private Networking** — this feature, which is currently under development, will enable connections to your Neon databases via AWS PrivateLink and similar services, bypassing the open internet entirely.
+- **Private Networking** — This feature is currently under development. It will enable connections to your Neon databases via AWS PrivateLink and similar services, bypassing the open internet entirely.
 
 ## IP allowlist support
 
