@@ -6,7 +6,8 @@ updatedOn: '2024-09-19T14:13:04.117Z'
 
 <FeatureBeta/>
 
-Learn how to manage Neon Organizations using the Neon API, including creating projects, transferring projects, and retrieving consumption metrics.
+Learn how to manage Neon Organizations using the Neon API, including creating and using organization-specific API keys, creating projects, transferring projects, and retrieving consumption metrics.
+
 
 The `org_id` is your organization's unique identifier, used to make sure your API requests are scoped to the right organization.
 
@@ -14,11 +15,15 @@ The `org_id` is your organization's unique identifier, used to make sure your AP
 
 To find your organization's `org_id`, navigate to your Organization's **Settings** page, where you'll find it under the **General information** section. Copy and use this ID in your API requests.
 
-![organization ID](/docs/manage/orgs_id.png)
+![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
 
-## Using the API key
+## Creating API keys
 
-Currently, while in Early Access, you can’t generate organization-specific API keys. Instead, use your personal account API key. If you’re a member of the specified `org_id`, these API requests will work. See [API Keys](/docs/manage/api-keys) for detail.
+Only admins can create API keys for the organization. These keys provide admin-level access to all organization resources, including projects, members, and billing information.
+
+To create a new key, go to your organization’s settings and click the **Create new API key** button in the API keys section.
+
+![creating an api key from the console](/docs/manage/org_api_keys.png)
 
 ## Creating a new project
 
