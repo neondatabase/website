@@ -90,8 +90,7 @@ pg_restore -v -d "postgresql://<username>:<password>@<destination_host>:<destina
 
 For more detailed instructions about using these commands, see [Migrate data using pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
-
 ## Next Steps
 
 1. **Verify data integrity** by running some queries and checking that tables and data are present as expected in Neon.
-3. **Switch over your application** by updating your connection string to point to Neon. You can find your connection details on your project Dashboard. See [Connect from any application](/docs/connect/connect-from-any-app) for more information.
+2. **Switch over your application** by updating your connection string to point to Neon. You can find your connection details on your project Dashboard. See [Connect from any application](/docs/connect/connect-from-any-app) for more information.
