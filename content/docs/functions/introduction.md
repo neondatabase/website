@@ -3,7 +3,7 @@ title: Postgres functions
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2024-06-30T18:09:08.268Z'
+updatedOn: '2024-11-18T22:53:11.098Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
@@ -85,6 +85,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 <a href="/docs/functions/json_to_record" description="Convert a JSON object to a record" icon="app-store">json_to_record()</a>
 
 <a href="/docs/functions/jsonb_to_record" description="Convert a JSONB object to a record" icon="app-store">jsonb_to_record()</a>
+
+<a href="/docs/functions/json_table" description="Transform JSON data into relational views" icon="app-store">JSON_TABLE()</a>
 
 </DetailIconCards>
 

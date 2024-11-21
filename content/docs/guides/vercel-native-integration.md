@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-15T18:34:20.044Z'
+updatedOn: '2024-11-20T21:33:15.906Z'
 ---
 
 <InfoBlock>
@@ -28,12 +28,12 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 
 - Installing the integration creates a Neon account for you if you do not have one already.
 - Billing for Neon Postgres is managed in Vercel, not Neon.
-- You get access to the same features and Neon pricing plans as users who register with Neon directly, including access to your database from the Neon Console.
+- You get access to the same features and [Neon pricing plans](https://neon.tech/docs/introduction/plans) as users who register with Neon directly, including access to your database from the Neon Console.
 
 <Admonition type="note">
-The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a native integration.
+The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a first-party native integration.
 - You cannot install this integration if you currently have Vercel Postgres installed. Please see [Transitioning from Vercel Postgres](/docs/guides/vercel-overview#transitioning-from-vercel-postgres) for details about when Vercel will transition Vercel Postgres users to Neon.
-- If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<organization_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
+- If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<vercel_team_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
 - If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not support automatic database branches for Vercel preview deployments.
 </Admonition>
 
@@ -47,17 +47,26 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 4. On the **Install Neon** modal, you are presented with two options. Select **Create New Neon Account**, and click **Continue**.
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
-5. On the **Create New Neon Postgres Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
-6. On the **Create Database** modal, select a region and a Neon Plan, and click **Continue**.
+5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
+6. On the **Create Database** modal, select a region, specify your compute size and autosuspend settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
 
    <Admonition type="note">
-   For a full overview of features and allowances available in each Neon plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
+     **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
+
+   | Plan     | Compute Size    | Suspend after ([Autosuspend](https://neon.tech/docs/introduction/auto-suspend)) |
+   | :------- | :-------------- | :------------------------------------------------------------------------------ |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                                             |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                                      |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                                       |
+   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                                       |
+
+   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
 
    <Admonition type="note" title="A Database in Vercel is a Project in Neon">
-   Your **Database Name** in Vercel will be the name of your **Project** in Neon. Just remember that **A "Database" in Vercel is a "Project" in Neon**. A Neon project can have multiple Postgres databases.
+   Your **Database Name** in Vercel will be the name of your **Project** in Neon.
    </Admonition>
 
 8. A **Database** is created in Vercel, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your new Database, including:
@@ -183,14 +192,14 @@ To delete your database:
 
 This action is not reversible, so please proceed with caution.
 
-## Parameter values set by the integration
+## Environment variables set by the integration
 
-The parameter values listed below are set by the integration. Please note the following:
+The environment variables listed below are set by the integration. Please note the following:
 
-- The `DATABASE_URL` parameter is a pooled Neon connection string. Connection pooling in Neon uses PgBouncer. For more, see [Connection pooling](/docs/connect/connection-pooling).
+- The `DATABASE_URL` variable is a pooled Neon connection string. Connection pooling in Neon uses PgBouncer. For more, see [Connection pooling](/docs/connect/connection-pooling).
 - `DATABASE_URL_UNPOOLED` is an direct connection string for your database, often required by schema migration tools. For more, see [Connection pooling with schema migration tools](/docs/connect/connection-pooling#connection-pooling-with-schema-migration-tools).
-- There are several parameters provided for constructing your own connection settings.
-- The integration sets parameters that were previously used by Vercel Postgres. These parameters support [Vercel Postgres Templates](https://vercel.com/templates/vercel-postgres), which you can now use with Neon Postgres.
+- There are several variables provided for constructing your own connection settings.
+- The integration sets variables that were previously used by Vercel Postgres. These variables support [Vercel Postgres Templates](https://vercel.com/templates/vercel-postgres), which you can now use with Neon Postgres.
 
 ```bash
 # Recommended for most uses

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-11-12T11:01:29.511Z'
+updatedOn: '2024-11-21T12:46:49.520Z'
 ---
 
 ## access token
@@ -303,6 +303,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 ## Neon Free Plan
 
 A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
+
+## Neon Proxy
+
+A component of the Neon platform that acts as an intermediary between connecting clients and compute nodes where Postgres runs. The Neon Proxy is responsible for tasks such as connection routing, authentication, and metrics collection. From a security perspective, it helps protect the integrity of the Neon platform through a combination of authentication, authorization, and other security measures.
 
 ## Neon user
 

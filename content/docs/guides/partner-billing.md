@@ -3,7 +3,7 @@ title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-18T18:50:56.384Z'
+updatedOn: '2024-11-19T09:18:06.591Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -76,17 +76,7 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. The Neon Free Plan branch size limit is 512 MiB (0.5 GiB). The Launch, Scale, and Business plans have a "failsafe" logical data size limit of 200 GiB to prevent runaway branch size growth due to possible issues with your application. If you require larger limits, you can request it via your Partner contact at Neon.
-
-The Neon Free Plan logical data size limit per branch is approximately 512 MiB:
-
-- `branch_logical_size_limit`: 512
-- `branch_logical_size_limit_bytes`: 536870912
-
-The Neon Launch, Scale, and Business plan logical data size limit per branch is 200 GiB:
-
-- `branch_logical_size_limit`: 204800
-- `branch_logical_size_limit_bytes`: 214748364800
+These limits are not directly configurable. You can query the limits by running the [Get project details](https://api-docs.neon.tech/reference/getproject) or [Get project list](https://api-docs.neon.tech/reference/listprojects) endpoints.
 
 ## Suspending active computes
 
