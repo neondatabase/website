@@ -20,7 +20,7 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Default branch
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. 
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
 The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
