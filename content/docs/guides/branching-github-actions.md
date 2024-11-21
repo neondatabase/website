@@ -13,15 +13,15 @@ Neon provides the following GitHub Actions for working with Neon branches, which
 - [Schema Diff action](#schema-diff-action)
 
 <Admonition type="tip">
-Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's [Create branch](#create-branch-action) and [Delete branch](#delete-branch-action) actions. See [Neon GitHub integration](/docs/guides/neon-github-integration) for more.
+Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's GitHub Actions. See [Neon GitHub integration](/docs/guides/neon-github-integration) for more.
 </Admonition>
 
 ## Create branch action
 
 This GitHub Action creates a new branch in your Neon project.
 
-<Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/create-branch-action).
+<Admonition type="tip" title="GitHub Actions Marketplace">
+You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-database-create-branch-action).
 </Admonition>
 
 ### Prerequisites
@@ -122,8 +122,8 @@ outputs:
 
 This GitHub Action deletes a branch from your Neon project.
 
-<Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action).
+<Admonition type="tip" title="GitHub Actions Marketplace">
+You can find this action on the **GitHub Actions Marketplace**: [Neon Database Delete Branch](https://github.com/marketplace/actions/neon-database-delete-branch).
 </Admonition>
 
 ### Prerequisites
@@ -178,8 +178,8 @@ This Action has no outputs.
 
 This GitHub Action resets a child branch with the latest data from its parent branch.
 
-<Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
+<Admonition type="tip" title="GitHub Actions Marketplace">
+You can find this action on the **GitHub Actions Marketplace**: [Neon Database Reset Branch Action](https://github.com/marketplace/actions/neon-database-reset-branch-action).
 </Admonition>
 
 ### Prerequisites
@@ -289,9 +289,13 @@ outputs:
 
 ## Schema Diff action
 
-This action performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request in GitHub highlighting the schema differences.
+This action performs a database schema diff on specified Neon branches for each pull request and writes a **Neon Schema Diff summary** comment to the pull request in GitHub highlighting the schema differences.
 
 It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including the schema diff as a comment in the pull request, reviewers can easily assess the changes directly within the pull request.
+
+<Admonition type="tip" title="GitHub Actions Marketplace">
+You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Diff GitHub Action](https://github.com/marketplace/actions/neon-schema-diff-github-action).
+</Admonition>
 
 ### Prerequisites
 
@@ -306,7 +310,7 @@ Alternatively, the **Neon GitHub Integration** can perform the API key setup for
 
 ### Example
 
-The following example performs schema diff on a database named `mydatabase` between the `compare_branch` and the `base_branch` branch. The `compare_branch` is typically the branch created by the [Create branch](#create-branch-action) action. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project. The `username` is the name of the role that owns the database.
+The following example performs a schema diff on a database named `mydatabase` between the `compare_branch` and the `base_branch` branch.
 
 ```yaml
 steps:
@@ -319,6 +323,46 @@ steps:
       database: mydatabase
       username: myrole
 ```
+
+Here's an example workflow that incorporates the action:
+
+```yaml
+name: Schema Diff for Pull Requests
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  schema_diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Schema Diff
+        uses: neondatabase/schema-diff-action@v1
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          compare_branch: preview/pr-${{ github.event.number }}
+          base_branch: main
+          api_key: ${{ secrets.NEON_API_KEY }}
+          database: mydatabase
+          username: myrole
+```
+
+In this workflow, the action is triggered by pull request events such as `opened`, `reopened`, or `synchronize` (when new commits are pushed to an existing PR).
+
+When setting up the action in your GitHub workflow, you will specify the branches to compare using the `compare_branch` and `base_branch` inputs: 
+- The `compare_branch` is the branch linked to the pull request, i.e. the "downstream" dev branch that contains your proposed schema changes. It's  typically the branch created by the [Create branch](#create-branch-action) action, defined by `preview/pr-${{ github.event.number }}` in the example above.
+- The `base_branch` is the branch you are merging into, i.e. the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
+- The `database` is the name of the database containing the schema to be compared.
+- The `username` is the name of the role that owns the database.
+
+After performing the schema diff comparison:
+- The action generates an SQL patch summarizing the changes if there are schema differences between the branches 
+- The action then posts a single comment to the pull request containing the details of the schema diff 
+- Instead of spamming the PR with multiple comments, the action updates the same comment to reflect any changes as new commits are pushed. 
+- If there are no schema differences between the branches, the action doesn't add or update a comment, keeping your PR clean.
 
 ### Input variables
 
@@ -365,6 +409,12 @@ diff:
 comment_url:
   description: The url of the comment containing the schema diff
 ```
+
+A schema diff SQL patch is posted as a **Neon Schema Diff Summary** comment in a pull request will look similar to this:
+
+![A schema diff action comment as appears in a pull request](/docs/guides/schema_diff_comment.png)
+
+The `comment_url` allows you to easily share the schema diff for review. It also allows developers or scripts to access the comment programmatically for use in other automations.
 
 ## Example applications
 
