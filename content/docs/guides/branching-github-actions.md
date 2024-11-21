@@ -352,19 +352,19 @@ jobs:
 
 In this workflow, the action is triggered by pull request events such as `opened`, `reopened`, or `synchronize` (when new commits are pushed to an existing PR).
 
-When setting up the action in your GitHub workflow, you will specify the branches to compare using the `compare_branch` and `base_branch` inputs:
+The branches to compare are specified by the `compare_branch` and `base_branch` inputs.
 
-- The `compare_branch` is the branch linked to the pull request, i.e. the "downstream" dev branch that contains your proposed schema changes. It's typically the branch created by the [Create branch](#create-branch-action) action, defined by `preview/pr-${{ github.event.number }}` in the example above.
-- The `base_branch` is the branch you are merging into, i.e. the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
+- The `compare_branch` is the branch linked to the pull request — it's the "downstream" dev branch that contains your proposed schema changes, and is typically created by the [Create branch](#create-branch-action) action and defined by `preview/pr-${{ github.event.number }}` in the example above.
+- The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
-- The `username` is the name of the role that owns the database.
+- The `username` is the name of the Postgres role that owns the database.
 
 After performing the schema diff comparison:
 
-- The action generates an SQL patch summarizing the changes if there are schema differences between the branches
-- The action then posts a single comment to the pull request containing the details of the schema diff
+- The action generates an SQL patch summarizing the changes if there are schema differences between the branches.
+- The action then posts a comment to the pull request containing the details of the schema diff.
 - Instead of spamming the PR with multiple comments, the action updates the same comment to reflect any changes as new commits are pushed.
-- If there are no schema differences between the branches, the action doesn't add or update a comment, keeping your PR clean.
+- If there are no schema differences between the `compare_branch` and the `base_branch`, the action doesn't add or update a comment, keeping your PR clean.
 
 ### Input variables
 
