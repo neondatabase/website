@@ -88,33 +88,33 @@ const Hero = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   return (
-    <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16">
+    <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] xl:py-32 lg:py-28 md:pb-20 md:pt-[100px]">
       <Container className="xl:px-8 md:px-5" size="1152">
-        <div className="flex gap-[90px] xl:gap-12 lg:flex-col lg:gap-10">
-          <div className="w-[480px] pt-7 xl:w-[400px] lg:w-full">
+        <div className="flex gap-[90px] xl:gap-8 lg:mx-auto lg:max-w-xl lg:flex-col lg:gap-14 sm:gap-10">
+          <div className="w-[480px] pt-8 xl:w-96 lg:w-full lg:pt-0 lg:text-center">
             <Heading
-              className="font-title text-[68px] font-medium leading-none tracking-tight text-white 2xl:text-[56px] md:text-[36px]"
+              className="font-title text-[68px] font-medium leading-none tracking-tight text-white xl:text-[56px] lg:text-[48px] md:text-[40px]"
               tag="h1"
               theme="white"
             >
               Let&apos;s Connect
             </Heading>
-            <p className="mt-4 text-xl tracking-tight text-gray-new-80 md:text-base">
+            <p className="mt-4 text-xl tracking-tight text-gray-new-80 lg:mt-3 lg:text-lg md:text-base">
               We&apos;re happy to assist you with any questions about our tech, pricing plans,
               custom contract options, and&nbsp;migrations assistance.
             </p>
-            <div className="mt-6 space-y-4">
+            <div className="mt-5 flex flex-col gap-3.5 lg:mt-[18px] lg:flex-row lg:justify-center lg:gap-8 md:flex-wrap md:gap-x-4 md:gap-y-2.5">
               {CERTIFICATES.map(({ title, description, icon }) => (
-                <div className="flex items-center gap-4" key={title}>
+                <div className="flex items-center gap-4 lg:gap-2" key={title}>
                   <Image src={icon} alt={title} width={24} height={24} />
-                  <p className="flex gap-2 text-lg leading-none tracking-tight text-gray-new-80">
+                  <p className="flex gap-2 text-lg leading-none tracking-tight text-gray-new-80 lg:text-base">
                     {title} <span className="text-gray-new-40">{description}</span>
                   </p>
                 </div>
               ))}
             </div>
             <Link
-              className="mt-9 text-lg font-medium tracking-tight"
+              className="mt-9 text-lg font-medium leading-none tracking-tight lg:mx-auto lg:mt-8 sm:mt-7 sm:text-base"
               theme="green"
               to={LINKS.contactSales}
               withArrow
@@ -126,14 +126,18 @@ const Hero = () => {
             <ContactForm formState={formState} setFormState={setFormState} />
           </div>
         </div>
-        <div className="mt-[88px] grid grid-cols-4 gap-8 xl:gap-6 lg:grid-cols-2 md:mt-20 sm:mt-16 sm:grid-cols-1">
+        <div className="mt-[88px] grid grid-cols-4 gap-8 xl:mt-20 xl:gap-5 lg:grid-cols-2 md:mt-20 sm:mt-16 sm:grid-cols-1">
           {CASE_STUDIES.map(({ title, description, logo, link }, index) => (
             <Link
-              className="group relative flex h-44 flex-col justify-between rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact"
+              className={clsx(
+                'group relative h-44 rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact xl:h-[168px] xl:p-[18px] lg:h-[134px] md:h-32 md:p-4',
+                index === 0 && 'lg:-order-1',
+                index === 3 && 'lg:-order-1 sm:-order-2'
+              )}
               to={link}
               key={title}
             >
-              <div className="relative z-10">
+              <div className="relative z-10 flex h-full flex-col justify-between">
                 <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
                   {title}{' '}
                   <span

@@ -109,7 +109,7 @@ const ContactForm = ({ formState, setFormState }) => {
   return (
     <form
       className={clsx(
-        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact sm:p-5',
+        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] md:gap-y-6 sm:p-5',
         'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
       )}
       method="POST"
@@ -138,7 +138,7 @@ const ContactForm = ({ formState, setFormState }) => {
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex gap-5 md:flex-col">
+      <div className="flex gap-5 xl:gap-4 md:flex-col sm:contents sm:flex-col">
         <Field
           className="shrink-0 basis-[60%]"
           name="companyWebsite"
@@ -181,8 +181,8 @@ const ContactForm = ({ formState, setFormState }) => {
         {...register('message')}
       />
 
-      <div className="relative flex items-center justify-between gap-6 md:flex-col md:items-start">
-        <p className="text-light text-sm leading-tight text-gray-new-70">
+      <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
+        <p className="text-light font-ibm-plex-sans text-sm leading-tight text-gray-new-70">
           By submitting you agree to the{' '}
           <Link className="text-white" to={LINKS.terms} theme="white-underlined">
             Terms Service
@@ -194,7 +194,7 @@ const ContactForm = ({ formState, setFormState }) => {
           .
         </p>
         <Button
-          className="min-w-[182px] py-[15px] font-medium"
+          className="min-w-[182px] py-[15px] font-medium xl:min-w-[170px] sm:w-full sm:py-[13px]"
           type="submit"
           theme="primary"
           size="xs"
