@@ -44,18 +44,12 @@ A RAG pipeline includes a number of steps, as illustrated in the following diagr
 
 The steps outlined above can be organized into two main stages:
 
-1. **Preparing and indexing the information**: 
+1. **Preparing and indexing the information**:
    1. Load documents and extract text
    2. Split documents into chunks
    3. Generate embeddings for chunks
    4. Store the embeddings alongside chunks
-2. **Handling incoming questions**:
-   5. Vectorize question
-   6. Use question embedding to find relevant document chunks
-   7. Retrieve document chunks from database
-   8. Rerank and take only best-match chunks to answer question
-   9. Prompt with question + relevant document chunks to answer question
-   10. Generated answer
+2. **Handling incoming questions**: 5. Vectorize question 6. Use question embedding to find relevant document chunks 7. Retrieve document chunks from database 8. Rerank and take only best-match chunks to answer question 9. Prompt with question + relevant document chunks to answer question 10. Generated answer
 
 ---
 
