@@ -410,7 +410,7 @@ comment_url:
   description: The url of the comment containing the schema diff
 ```
 
-A schema diff SQL patch is posted as a **Neon Schema Diff Summary** comment in a pull request will look similar to this:
+The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to this example:
 
 ![A schema diff action comment as appears in a pull request](/docs/guides/schema_diff_comment.png)
 
