@@ -38,26 +38,24 @@ The `pgrag` extension is experimental and actively being developed. Use it with 
 
 ## What's included in a RAG pipeline?
 
-There are two main stages in a RAG pipeline:
+A RAG pipeline includes a number of steps, as illustrated in the following diagram.
 
-1. **Preparing and indexing the information**: This stage involves:
-   - Loading documents and extracting text
-   - Splitting the documents into chunks
-   - Generating embeddings for the chunks
-   - Storing the embeddings alongside chunks in your vector database
-2. **Handling incoming questions**: This second stage involves:
-   - Vectorizing the question to create an embedding
-   - Using the question embedding to find relevant document chunks based on the shortest vector distances
-   - Retrieving document chunks from the database
-   - Reranking the chunks for the best-matching ones
-   - Prompting the generative AI chat model with the question and relevant document chunks
-   - Generating the answer
+![The steps in a RAG pipeline](/docs/extensions/rag_pipeline.jpg)
+
+The steps outlined above can be organized into two main stages:
+
+1. **Preparing and indexing the information**:
+   1. Load documents and extract text
+   2. Split documents into chunks
+   3. Generate embeddings for chunks
+   4. Store the embeddings alongside chunks
+2. **Handling incoming questions**: 5. Vectorize question 6. Use question embedding to find relevant document chunks 7. Retrieve document chunks from database 8. Rerank and take only best-match chunks to answer question 9. Prompt with question + relevant document chunks to answer question 10. Generated answer
 
 ---
 
 ## What does pgrag support?
 
-With the exception of storing and retrieving embeddings, which is supported by Postgres with `pgvector`, `pgrag` supports all of the steps listed above. Specifically, `pgrag` supports:
+With the exception of (4) storing embeddings in the database and (7) Retrieve document chunks from database, which is supported by Postgres with `pgvector`, `pgrag` supports all of the steps listed above. Specifically, `pgrag` supports:
 
 - **Text extraction and conversion**
 

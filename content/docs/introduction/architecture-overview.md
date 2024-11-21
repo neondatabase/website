@@ -10,7 +10,7 @@ Neon architecture is based on the separation of compute and storage and is orche
 
 A Neon compute runs Postgres, and storage is a multi-tenant key-value store for Postgres pages that is custom-built for the cloud.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
+![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Neon storage consists of three main components: Safekeepers, Pageservers, and cloud object storage.
 
