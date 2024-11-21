@@ -81,10 +81,6 @@ const CASE_STUDIES = [
       height: 24,
     },
     link: `${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`,
-    className:
-      'border-0 bg-gray-new-10 bg-[radial-gradient(85.43%_58.72%_at_70.83%_0%,#1D2930,#151E2300)] hover:bg-gray-new-50 hover:bg-none ' +
-      'before:pointer-events-none before:absolute before:inset-px before:rounded-[inherit] ' +
-      'before:bg-[#0A0A0C] before:bg-[radial-gradient(100%_132%_at_63%_-27%,#0E171BE6,#0E171B00)]',
   },
 ];
 
@@ -101,11 +97,11 @@ const Hero = () => {
               tag="h1"
               theme="white"
             >
-              Let's Connect
+              Let&apos;s Connect
             </Heading>
             <p className="mt-4 text-xl tracking-tight text-gray-new-80 md:text-base">
-              We're happy to assist you with any questions about our tech, pricing plans, custom
-              contract options, and&nbsp;migrations assistance.
+              We&apos;re happy to assist you with any questions about our tech, pricing plans,
+              custom contract options, and&nbsp;migrations assistance.
             </p>
             <div className="mt-6 space-y-4">
               {CERTIFICATES.map(({ title, description, icon }) => (
@@ -131,29 +127,45 @@ const Hero = () => {
           </div>
         </div>
         <div className="mt-[88px] grid grid-cols-4 gap-8 xl:gap-6 lg:grid-cols-2 md:mt-20 sm:mt-16 sm:grid-cols-1">
-          {CASE_STUDIES.map(({ title, description, logo, link, className }) => (
+          {CASE_STUDIES.map(({ title, description, logo, link }, index) => (
             <Link
-              className={clsx(
-                'group relative flex h-44 flex-col justify-between rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact',
-                'transition-colors hover:border-gray-new-50',
-                className
-              )}
+              className="group relative flex h-44 flex-col justify-between rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact"
               to={link}
               key={title}
             >
-              <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
-                {title}{' '}
-                <span
-                  className="font-light text-gray-new-60"
-                  dangerouslySetInnerHTML={{ __html: description }}
+              <div className="relative z-10">
+                <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
+                  {title}{' '}
+                  <span
+                    className="font-light text-gray-new-60"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                </p>
+                <Image
+                  className="relative"
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
                 />
-              </p>
-              <Image
-                className="relative"
-                src={logo.src}
-                alt={logo.alt}
-                width={logo.width}
-                height={logo.height}
+              </div>
+              {index === 3 && (
+                <div
+                  className={clsx(
+                    'pointer-events-none absolute -inset-px rounded-[inherit] bg-[radial-gradient(85%_58%_at_70%_0%,rgba(14,23,27,.9),#151E2300)]',
+                    'transition-opacity duration-300 group-hover:opacity-0',
+                    'before:absolute before:inset-px before:rounded-[inherit] before:bg-[#0A0A0C] before:bg-[radial-gradient(100%_132%_at_63%_-27%,#0E171BE6,#0E171B00)]'
+                  )}
+                  aria-hidden
+                />
+              )}
+              <div
+                className={clsx(
+                  'pointer-events-none absolute -inset-px rounded-[inherit] bg-[linear-gradient(67deg,rgba(82,156,160,.14)_16%,rgba(82,156,160,.7))]',
+                  'opacity-0 transition-opacity duration-300 group-hover:opacity-100',
+                  'before:absolute before:inset-px before:rounded-[inherit] before:bg-[radial-gradient(75%_95%_at_84%_0%,rgba(24,62,65,.8),rgba(10,18,18,.9))]'
+                )}
+                aria-hidden
               />
             </Link>
           ))}
