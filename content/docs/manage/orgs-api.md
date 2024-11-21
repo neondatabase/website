@@ -157,6 +157,7 @@ curl --request PATCH \
 ```
 
 Example response:
+
 ```json
 {
   "id": "abc123de-4567-8fab-9012-3cdef4567890",
