@@ -119,11 +119,16 @@ jobs:
   # as a comment on your GitHub pull request, making it easy to review changes.
   #
   # steps:
-  #   - uses: neondatabase/schema-diff-action@v1
+  #   - name: Schema Diff
+  #     if: |
+  #       github.event_name == 'pull_request' && (
+  #       github.event.action == 'synchronize'
+  #       || github.event.action == 'opened'
+  #       || github.event.action == 'reopened')
+  #     uses: neondatabase/schema-diff-action@v1
   #     with:
   #       project_id: ${{ vars.NEON_PROJECT_ID }}
-  #       compare_branch:
-  #         preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+  #       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
   #       base_branch: main
   #       api_key: ${{ secrets.NEON_API_KEY }}
   #       database: mydatabase
