@@ -23,16 +23,16 @@ const items = [
   },
   {
     icon: performanceIcon,
-    text: 'You get a boost in performance when you need it, without overpaying.',
+    text: 'You get a performance boost when you need it. ',
   },
   {
     icon: resizeIcon,
-    text: 'No need to waste time on manual resizes or to experience downtime. ',
+    text: 'No need to worry about manual resizes or downtime. ',
   },
   {
     icon: databaseIcon,
     text: 'Your non-prod databases scale to zero when inactive, saving you money.',
-  }
+  },
 ];
 
 const Efficiency = ({ title }) => (
