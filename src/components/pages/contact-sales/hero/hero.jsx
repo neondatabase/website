@@ -117,7 +117,9 @@ const Hero = () => (
           <Link
             className="mt-9 text-lg font-medium leading-none tracking-tight lg:mx-auto lg:mt-8 sm:mt-7 sm:text-base"
             theme="green"
-            to={LINKS.contactSales}
+            to="https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering"
+            rel="noopener noreferrer"
+            target="_blank"
             withArrow
           >
             Book a meeting directly
