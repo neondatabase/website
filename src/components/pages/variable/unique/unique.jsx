@@ -9,10 +9,7 @@ import Section from '../section';
 
 const items = [
   {
-    text: 'Neon compute costs are <a href="https://www.outerbase.com/blog/the-evolution-of-serverless-postgres/" target="_blank" rel="noopener noreferrer">up to 75% cheaper</a> vs Aurora&nbsp;Serverless&nbsp;v2.',
-  },
-  {
-    text: 'Neon scales to zero, Aurora Serverless does not.',
+    text: 'Neon compute costs are <a href="https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon/" target="_blank" rel="noopener noreferrer">up to 80% cheaper</a> vs Aurora&nbsp;Serverless&nbsp;v2.',
   },
   {
     text: 'Neon provisions instances in < 1 s, compared to Aurora&apos;s up to&nbsp;20&nbsp;min.',
