@@ -71,7 +71,7 @@ It’ll prompt you to enter a password for the `ed` user. Input the valid passwo
 
 Second, create a stored procedure in PostgreSQL, which enrolls a student in a course and creates a corresponding invoice:
 
-```pgsql
+```sql
 create function get_student_count(begin_date date, end_date date)
 returns int
 language plpgsql as $$

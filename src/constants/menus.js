@@ -111,9 +111,9 @@ export default {
             light: consoleIcon,
             dark: consoleDarkIcon,
           },
-          text: 'Console',
-          description: 'UI for data management',
-          to: LINKS.consoleTables,
+          text: 'Authorize',
+          description: 'Row-level security',
+          to: LINKS.authorize,
         },
         {
           icon: {
@@ -143,7 +143,7 @@ export default {
             dark: caseSaasDarkIcon,
           },
           text: 'Postgres for SaaS',
-          description: 'Build Apps faster on Neon',
+          description: 'Build faster with Neon',
           to: `${LINKS.useCases}/postgres-for-saas`,
         },
         {
@@ -170,7 +170,7 @@ export default {
             dark: caseDatabaseDarkIcon,
           },
           text: 'Database per Tenant',
-          description: 'DB-per-User Archictectures',
+          description: 'Create one project per user',
           to: `${LINKS.useCases}/database-per-tenant`,
         },
         {
@@ -179,7 +179,7 @@ export default {
             dark: caseDevDarkIcon,
           },
           text: 'Dev/Test',
-          description: 'Non-prod environments',
+          description: 'For non-prod environments',
           to: `${LINKS.useCases}/dev-test`,
         },
         {
@@ -188,7 +188,7 @@ export default {
             dark: aiAgentsDarkIcon,
           },
           text: 'AI Agents',
-          description: 'Postgres for agents',
+          description: 'A backend for agents',
           to: `${LINKS.useCases}/ai-agents`,
         },
         // {
@@ -297,7 +297,7 @@ export default {
   footer: [
     {
       heading: 'Company',
-      links: [
+      items: [
         {
           text: 'About',
           to: LINKS.aboutUs,
@@ -322,11 +322,44 @@ export default {
           text: 'Security',
           to: LINKS.security,
         },
+        {
+          text: 'Legal',
+          links: [
+            {
+              text: 'Privacy Policy',
+              to: LINKS.privacy,
+            },
+            {
+              text: 'Terms of Service',
+              to: LINKS.terms,
+            },
+            {
+              text: 'DPA',
+              to: LINKS.dpa,
+            },
+            {
+              text: 'Subprocessors List',
+              to: LINKS.subprocessors,
+            },
+            {
+              text: 'Privacy Guide',
+              to: LINKS.privacyGuide,
+            },
+            {
+              text: 'Cookie Policy',
+              to: LINKS.cookiePolicy,
+            },
+            {
+              text: 'Business Information',
+              to: LINKS.businessInformation,
+            },
+          ],
+        },
       ],
     },
     {
       heading: 'Resources',
-      links: [
+      items: [
         {
           text: 'Docs',
           to: LINKS.docs,
@@ -355,7 +388,7 @@ export default {
     },
     {
       heading: 'Social',
-      links: [
+      items: [
         {
           text: 'Discord',
           to: LINKS.discord,
@@ -384,35 +417,47 @@ export default {
       ],
     },
     {
-      heading: 'Legal',
-      links: [
+      heading: 'Compliance',
+      items: [
         {
-          text: 'Privacy Policy',
-          to: LINKS.privacy,
+          text: 'CCPA',
+          description: 'Compliant',
+          icon: 'check-icon',
+          to: LINKS.certCCPA,
         },
         {
-          text: 'Terms of Service',
-          to: LINKS.terms,
+          text: 'GDPR',
+          description: 'Compliant',
+          icon: 'check-icon',
+          to: LINKS.certGDPR,
         },
         {
-          text: 'DPA',
-          to: LINKS.dpa,
+          text: 'ISO 27001',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certISO27001,
         },
         {
-          text: 'Subprocessors List',
-          to: LINKS.subprocessors,
+          text: 'ISO 27701',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certISO27701,
         },
         {
-          text: 'Privacy Guide',
-          to: LINKS.privacyGuide,
+          text: 'SOC 2',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certSOC2,
         },
         {
-          text: 'Cookie Policy',
-          to: LINKS.cookiePolicy,
+          text: 'HIPAA',
+          description: 'In progress',
+          icon: 'wip-icon',
+          to: LINKS.certHIPAA,
         },
         {
-          text: 'Business Information',
-          to: LINKS.businessInformation,
+          text: 'Trust Center',
+          to: LINKS.trust,
         },
       ],
     },

@@ -53,7 +53,7 @@ SELECT JUSTIFY_INTERVAL('35 days');
 
 Output:
 
-```sql
+```text
  justify_interval
 ------------------
  1 mon 5 days
@@ -85,7 +85,7 @@ SELECT JUSTIFY_INTERVAL('-2 days 5 hours');
 
 Output:
 
-```sql
+```text
  justify_interval
 -------------------
  -1 days -19:00:00

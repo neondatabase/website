@@ -68,7 +68,7 @@ sudo rm -rf /etc/postgresql/
 
 Typically, the PostgreSQL installer creates a system user `postgres` during the installation. To remove it, you can run the following command:
 
-```sql
+```bash
 sudo deluser postgres
 ```
 

@@ -83,7 +83,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  position |                                                   description
 ----------+-----------------------------------------------------------------------------------------------------------------
         3 | A Fateful Reflection of a Moose And a Husband who must Overcome a Monkey in Nigeria

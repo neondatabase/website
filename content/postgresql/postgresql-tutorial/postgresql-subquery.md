@@ -72,7 +72,7 @@ where
 
 It returns the following output:
 
-```sql
+```text
  country_id
 ------------
         103
@@ -94,7 +94,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
          city
 -------------------------
  Akron
@@ -159,7 +159,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  film_id
 ---------
       19

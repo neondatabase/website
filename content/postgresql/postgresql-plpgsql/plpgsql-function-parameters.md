@@ -117,7 +117,7 @@ select get_film_stat();
 
 Output:
 
-```sql
+```text
  get_film_stat
 ----------------
  (46,185,115.3)
@@ -132,7 +132,7 @@ select * from get_film_stat();
 
 Output:
 
-```sql
+```text
  min_len | max_len | avg_len
 ---------+---------+---------
       46 |     185 |   115.3
@@ -147,7 +147,7 @@ It means that the caller can pass an argument to a function. The function change
 
 The following `swap` function accepts two integers and swap their values:
 
-```
+```sql
 create or replace function swap(
 	inout x int,
 	inout y int

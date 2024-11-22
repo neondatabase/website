@@ -3,7 +3,7 @@ title: The Neon Datadog integration
 subtitle: Send metrics and events from Neon Postgres to Datadog
 enableTableOfContents: true
 tag: new
-updatedOn: '2024-10-23T06:56:25.981Z'
+updatedOn: '2024-11-22T10:01:08.293Z'
 ---
 
 <InfoBlock>
@@ -20,7 +20,9 @@ updatedOn: '2024-10-23T06:56:25.981Z'
 
 Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
-<ComingSoon/>
+<Admonition type="note" title="beta">
+This feature is currently in Beta for Scale and Business plan users. It will remain free of charge for those users during the Beta period.
+</Admonition>
 
 ## How it works
 

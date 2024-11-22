@@ -1,215 +1,137 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import GradientCard from 'components/shared/gradient-card';
 import Link from 'components/shared/link/link';
-import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-sm.inline.svg';
+import getLinkProps from 'utils/get-link-props';
 
-function getLinkProps({ externalUrl, isInternal, post, isFeatured }) {
-  const linkUrl = isInternal && post?.slug ? `${LINKS.blog}/${post.slug}` : externalUrl;
+import { CardPropTypes } from '../cards';
 
-  if (!linkUrl) return {};
+import сardBg1 from './images/card-bg-1.jpg';
+import сardBg4 from './images/card-bg-4.jpg';
 
-  return {
-    to: linkUrl,
-    as: !isFeatured ? Link : undefined,
-    target: isInternal ? undefined : '_blank',
-    rel: isInternal ? undefined : 'noopener noreferrer',
-  };
-}
+const cardBgImages = {
+  1: сardBg1,
+  4: сardBg4,
+};
 
 const FeaturedCard = ({
+  index,
   title,
-  image,
+  logo,
   quote,
   author,
   externalUrl = '',
   isInternal,
   post = null,
 }) => {
-  const linkProps = getLinkProps({ externalUrl, isInternal, post, isFeatured: true });
+  const linkProps = getLinkProps({ externalUrl, isInternal, post });
+  const indexInGrid = index % 4;
 
   return (
-    <div className="flex items-center gap-10 lg:gap-5 md:flex-col md:gap-6 sm:gap-3.5">
+    <li
+      className={clsx('h-[315px] sm:w-full', {
+        'w-[60%] lg:w-full': indexInGrid === 0 || indexInGrid === 3,
+        'lg:flex-1/2 flex-[30%] flex-grow sm:flex-none': indexInGrid === 1 || indexInGrid === 2,
+      })}
+    >
       <Link
-        className="w-1/2 max-w-[496px] shrink-0 overflow-hidden rounded-xl border border-transparent transition-colors duration-200 hover:border-green-45 xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full"
+        className={clsx(
+          'group relative z-10 flex h-full w-full flex-col justify-between overflow-hidden',
+          'rounded-xl border border-gray-new-15 bg-[#0A0A0A] px-6 py-5',
+          'xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full'
+        )}
         {...linkProps}
       >
         <Image
-          className="h-auto w-full"
-          src={image.mediaItemUrl}
+          className="h-8 w-fit"
+          src={logo.mediaItemUrl}
           alt={title}
-          width={image.mediaDetails.width / 2}
-          height={image.mediaDetails.height / 2}
-          quality={95}
+          width={logo.mediaDetails.width}
+          height={logo.mediaDetails.height}
           priority
         />
-      </Link>
-      <figure className="w-1/2 max-w-[598px] md:w-full md:max-w-full">
-        <blockquote>
-          <p
-            className="text-[26px] font-light leading-snug tracking-tighter text-white xl:text-2xl lg:text-lg"
-            dangerouslySetInnerHTML={{ __html: quote }}
-          />
-        </blockquote>
-        {author && author.name && (
-          <figcaption className="mt-3 font-light leading-tight -tracking-extra-tight lg:text-[13px]">
-            {author.name}{' '}
-            <cite>
-              {author?.post && <span className="text-gray-new-70">– {author?.post}</span>}
-            </cite>
-          </figcaption>
-        )}
-        {!!linkProps && (
-          <Link
-            className="mt-9 inline-flex items-baseline text-[15px] leading-none tracking-[-0.05em] text-green-45 transition-colors duration-200 hover:text-[#00FFAA] lg:mt-7 lg:text-sm"
+        <figure className="w-full">
+          {quote && (
+            <>
+              <blockquote>
+                <p
+                  className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
+                  dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
+                />
+              </blockquote>
+              {author && author.name && (
+                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
+                  {author.name}{' '}
+                  <cite>
+                    {author?.post && <span className="not-italic">— {author?.post}</span>}
+                  </cite>
+                </figcaption>
+              )}
+            </>
+          )}
+          <div
+            className={clsx(
+              'mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight lg:mt-4',
+              'text-white transition-colors duration-200 group-hover:text-green-45'
+            )}
             {...linkProps}
           >
-            Read case study
-            <ArrowIcon className="ml-1" />
-          </Link>
-        )}
-      </figure>
-    </div>
-  );
-};
-
-FeaturedCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  image: PropTypes.shape({
-    mediaItemUrl: PropTypes.string.isRequired,
-    mediaDetails: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
-  quote: PropTypes.string,
-  author: PropTypes.shape({
-    name: PropTypes.string,
-    post: PropTypes.string,
-  }),
-  isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
-  externalUrl: PropTypes.string,
-  post: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }),
-  index: PropTypes.number,
-};
-
-const CardItem = ({
-  title,
-  logo,
-  description,
-  externalUrl = '',
-  isInternal,
-  post = null,
-  index,
-}) => {
-  const linkProps = getLinkProps({ externalUrl, isInternal, post });
-
-  return (
-    <li>
-      <GradientCard className="p-8 lg:rounded-lg lg:p-6 sm:p-5" {...linkProps}>
-        <div className="flex h-full flex-col">
+            Read story
+            <ArrowIcon className="ml-1.5" />
+          </div>
+        </figure>
+        {(index % 4 === 0 || index % 4 === 3) && (
           <Image
-            className="h-10 w-fit lg:h-8"
-            src={logo.mediaItemUrl}
-            alt={title}
-            width={logo.mediaDetails.width}
-            height={logo.mediaDetails.height}
-            priority={index < 6}
+            className={clsx(
+              'pointer-events-none absolute inset-0 -z-10 size-full object-cover object-left',
+              index % 4 === 3 && 'lg:object-center'
+            )}
+            src={cardBgImages[(index % 4) + 1]}
+            width={704}
+            height={315}
+            alt=""
+            priority
+            aria-hidden
           />
-          <p className="mb-4 mt-[60px] line-clamp-3 font-light leading-snug text-gray-new-60 xl:mt-10 lg:mt-10 md:mt-6">
-            <span className="font-normal text-white">{title}</span>. {description}
-          </p>
-          {!!linkProps && (
-            <div className="mt-auto inline-flex items-baseline text-[15px] leading-none tracking-extra-tight text-green-45 transition-colors duration-200 group-hover:text-[#00FFAA] lg:text-sm">
-              Read case study
-              <ArrowIcon className="ml-1" />
-            </div>
-          )}
-        </div>
-      </GradientCard>
+        )}
+      </Link>
     </li>
   );
 };
 
-CardItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  logo: PropTypes.shape({
-    mediaItemUrl: PropTypes.string.isRequired,
-    mediaDetails: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
-  description: PropTypes.string,
-  isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
-  externalUrl: PropTypes.string,
-  post: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }),
-  index: PropTypes.number,
-};
+FeaturedCard.propTypes = CardPropTypes;
 
 const Hero = ({ items }) => {
-  const featuredItem = items.find((item) => item.caseStudyPost.isFeatured === true);
-  const otherItems = items.filter((item) => item !== featuredItem);
+  const featuredItems = items.filter(
+    (item) =>
+      item.caseStudyPost.isFeatured === true ||
+      // TODO: remove before release
+      item.title === 'Vercel'
+  );
 
   return (
-    <section className="hero safe-paddings pt-36 xl:pt-[120px] lg:pt-11 md:pt-8">
-      <Container className="flex flex-col items-center" size="1220">
-        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-extra-tight 2xl:text-6xl xl:text-[56px] lg:text-[44px]">
-          Explore <span className="text-green-45">success stories</span>
+    <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">
+      <Container className="flex flex-col items-center lg:!max-w-3xl md:px-5" size="960">
+        <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl sm:text-[32px]">
+          Explore success stories
         </h1>
-        <p className="mx-auto mt-5 max-w-[635px] text-center text-xl font-light leading-snug tracking-extra-tight lg:text-lg md:text-base">
-          Learn how others are using Neon
-        </p>
-        <div className="mt-20 w-full lg:mt-14 md:mt-10">
-          {!!featuredItem && (
-            <>
-              <div className="mb-16 lg:mb-14">
-                <FeaturedCard {...featuredItem.caseStudyPost} title={featuredItem.title} />
-              </div>
-              <h2 className="mb-7 text-2xl leading-none tracking-tight lg:text-xl md:text-lg">
-                More customer stories
-              </h2>
-            </>
-          )}
-          <ul className="col-span-10 col-start-2 grid grid-cols-3 gap-x-[34px] gap-y-9 xl:col-span-full xl:col-start-1 xl:gap-x-8 lg:grid-cols-2 md:gap-8 sm:grid-cols-1 sm:gap-y-5">
-            {otherItems.map(({ title, caseStudyPost }, index) => (
-              <CardItem {...caseStudyPost} title={title} key={index} index={index} />
+        {!!featuredItems.length && (
+          <ul className="mt-12 flex w-full flex-wrap gap-8 xl:mt-10 lg:mt-8 lg:gap-7 sm:mt-7 sm:flex-col sm:gap-5">
+            {featuredItems.map(({ title, caseStudyPost }, index) => (
+              <FeaturedCard {...caseStudyPost} title={title} index={index} key={index} />
             ))}
           </ul>
-        </div>
+        )}
       </Container>
     </section>
   );
 };
 
 Hero.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      caseStudyPost: PropTypes.shape({
-        description: PropTypes.string.isRequired,
-        logo: PropTypes.shape({
-          mediaItemUrl: PropTypes.string.isRequired,
-          mediaDetails: PropTypes.shape({
-            width: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
-          }).isRequired,
-        }).isRequired,
-        isInternal: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
-        externalUrl: PropTypes.string,
-        post: PropTypes.shape({
-          slug: PropTypes.string.isRequired,
-        }),
-      }).isRequired,
-    })
-  ).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape(CardPropTypes)).isRequired,
 };
 
 export default Hero;

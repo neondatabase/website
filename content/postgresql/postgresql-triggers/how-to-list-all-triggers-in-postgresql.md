@@ -70,7 +70,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  table_name |         trigger_name
 ------------+-------------------------------
  employees  | after_delete_employee_trigger
@@ -179,7 +179,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
          trigger_name
 -------------------------------
  after_delete_employee_trigger
@@ -190,25 +190,25 @@ Output:
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using psql:
 
-```sql
+```bash
 psql -U postgres
 ```
 
 Second, use the `\dS` command with a table name to list all the triggers associated with the table:
 
-```sql
+```text
 \dS table_name;
 ```
 
 For example, the following command displays the `employees` table with its triggers:
 
-```sql
+```text
 \dS employees
 ```
 
 Output:
 
-```sql
+```text
                                     Table "public.employees"
  Column |          Type          | Collation | Nullable |                Default
 --------+------------------------+-----------+----------+---------------------------------------

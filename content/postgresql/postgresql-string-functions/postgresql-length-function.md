@@ -51,7 +51,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  length
 --------
      19
@@ -67,7 +67,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  length
 --------
    null

@@ -73,7 +73,7 @@ SELECT
 
 The output is:
 
-```sql
+```text
  to_number
 -----------
   -12345.6
@@ -139,7 +139,7 @@ SELECT
 
 It returned `1234567` instead of `1234567.89` as follows:
 
-```sql
+```text
  to_number
 -----------
    1234567

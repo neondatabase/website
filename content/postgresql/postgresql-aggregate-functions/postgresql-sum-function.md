@@ -64,7 +64,7 @@ Output:
 
 The following statement uses the `SUM()` function to calculate the total payment of the customer id 2000\.
 
-```pgsql
+```sql
 SELECT
   SUM (amount)
 FROM
@@ -92,7 +92,7 @@ The `COALESCE()` function returns the first non\-null argument. In other words, 
 
 The following query illustrates how to use the `SUM()` function with the `COALESCE()` function:
 
-```pgsql
+```sql
 SELECT
   COALESCE(SUM(amount), 0 ) total
 FROM
@@ -116,7 +116,7 @@ To calculate the summary of every group, you use the [`GROUP BY`](../postgresql-
 
 The following example uses the `SUM()` function with the `GROUP BY` clause to calculate the total amount paid by each customer:
 
-```pgsql
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -130,7 +130,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
  customer_id | total
 -------------+--------
          318 |  27.93
@@ -158,7 +158,7 @@ LIMIT
 
 Output:
 
-```sql
+```text
  customer_id | total
 -------------+--------
          148 | 211.55

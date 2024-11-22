@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-10-23T14:34:44.517Z'
+updatedOn: '2024-11-22T10:01:08.295Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
@@ -204,7 +204,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Configure IP Allow
 
-Available to Neon [Business](/docs/introduction/plans#business) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
+Available to Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
 Optionally, you can allow unrestricted access to your project's [non-default branches](/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
 

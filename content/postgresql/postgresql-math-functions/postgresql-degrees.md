@@ -44,7 +44,7 @@ SELECT DEGREES(1);
 
 Output:
 
-```sql
+```text
       degrees
 -------------------
  57.29577951308232
@@ -59,7 +59,7 @@ SELECT DEGREES(PI());
 
 Output:
 
-```sql
+```text
  degrees
 ---------
      180
@@ -104,7 +104,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id |  angle_radians   | angle_degrees
 ----+------------------+---------------
   1 | 6.28318530717959 |           360

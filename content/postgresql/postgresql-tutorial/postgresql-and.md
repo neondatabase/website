@@ -30,7 +30,7 @@ SELECT 1 = 1 AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -75,7 +75,7 @@ SELECT true AND true AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  t
@@ -90,7 +90,7 @@ SELECT true AND false AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -105,7 +105,7 @@ SELECT true AND null AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  null
@@ -120,7 +120,7 @@ SELECT false AND false AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -135,7 +135,7 @@ SELECT false AND null AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  f
@@ -177,7 +177,7 @@ WHERE
 
 Output:
 
-```sql
+```text
        title        | length | rental_rate
 --------------------+--------+-------------
  Catch Amistad      |    183 |        0.99

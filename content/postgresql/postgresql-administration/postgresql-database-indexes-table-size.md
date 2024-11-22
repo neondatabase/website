@@ -44,7 +44,7 @@ SELECT
 
 The following is the output in kB
 
-```sql
+```text
  size
 -------
  16 kB
@@ -64,7 +64,7 @@ SELECT
 
 The following shows the output:
 
-```sql
+```text
  size
 -------
  72 kB
@@ -98,7 +98,7 @@ LIMIT 5;
 
 Here is the output:
 
-```sql
+```text
   relation  | total_size
 ------------+------------
  rental     | 2352 kB
@@ -122,7 +122,7 @@ SELECT
 
 The statement returns the following result:
 
-```sql
+```text
  size
 -------
  15 MB
@@ -141,7 +141,7 @@ FROM pg_database;
 
 Output:
 
-```sql
+```text
   datname  |  size
 -----------+---------
  postgres  | 8452 kB
@@ -166,7 +166,7 @@ SELECT
 
 Here is the output:
 
-```sql
+```text
  size
 -------
  32 kB
@@ -188,7 +188,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  size
 -------
  48 MB
@@ -208,7 +208,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  smallint_size | int_size | bigint_size
 ---------------+----------+-------------
              2 |        4 |           8

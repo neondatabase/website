@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-10-10T12:46:18.182Z'
+updatedOn: '2024-11-14T13:15:10.565Z'
 ---
 
 ## Monitor
@@ -20,7 +20,7 @@ updatedOn: '2024-10-10T12:46:18.182Z'
 
 <TechnologyNavigation open>
 
-<a href="/docs/guides/vercel" title="Vercel" description="Connect with the Neon Vercel Integration" icon="vercel"></a>
+<a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
 
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 

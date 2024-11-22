@@ -92,7 +92,7 @@ ORDER BY title;
 ![PostgreSQL CREATE TABLE AS data verification](/postgresqltutorial/PostgreSQL-CREATE-TABLE-AS-data-verification.png)
 To check the structure of the `action_film`, you can use the following command in the psql tool:
 
-```sql
+```text
 \d action_film;
 ```
 
@@ -119,7 +119,7 @@ This example statement created a new table `film_rating` and filled it with the 
 
 To check the structure of the `film_rating` table, you use the following command in psql tool:
 
-```sql
+```text
 \d film_rating
 ```
 

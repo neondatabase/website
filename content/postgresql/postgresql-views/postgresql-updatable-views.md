@@ -121,7 +121,7 @@ WHERE name = 'San Jose';
 
 Output:
 
-```sql
+```text
  id |   name   | population | country
 ----+----------+------------+---------
  21 | San Jose |     983459 | US
@@ -145,7 +145,7 @@ WHERE name = 'New York';
 
 Output:
 
-```sql
+```text
  id |   name   | population | country
 ----+----------+------------+---------
   1 | New York |    1000000 | US

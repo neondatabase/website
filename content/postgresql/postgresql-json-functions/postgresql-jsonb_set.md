@@ -50,13 +50,13 @@ Let’s explore some examples of using the PostgreSQL `jsonb_set()` function
 
 The following example uses the `jsonb_set()` function to update an existing element in a JSON array:
 
-```sql
+```text
  SELECT jsonb_set('[1,2,3]', '{0}', '-1');
 ```
 
 Output:
 
-```sql
+```text
  jsonb_set
 ------------
  [-1, 2, 3]
@@ -73,13 +73,13 @@ The `jsonb_set()` function sets the first element of the array to \-1 and return
 
 To insert the number 4 after the 3rd element, you use a non\-existing path to the 4th element as follows:
 
-```sql
+```text
  SELECT jsonb_set('[1,2,3]', '{4}', '4');
 ```
 
 Output:
 
-```sql
+```text
   jsonb_set
 --------------
  [1, 2, 3, 4]
@@ -99,7 +99,7 @@ SELECT
 
 Output:
 
-```sql
+```text
      jsonb_set
 -------------------
  [1, 2, [3, 5], 6]
@@ -126,7 +126,7 @@ SELECT
 
 Output:
 
-```sql
+```text
        jsonb_set
 ------------------------
  {"name": "Jane Smith"}
@@ -150,7 +150,7 @@ SELECT jsonb_set('{"name": "Jane Doe"}', '{age}', '25');
 
 Output:
 
-```sql
+```text
             jsonb_set
 ---------------------------------
  {"age": 25, "name": "Jane Doe"}
@@ -171,7 +171,7 @@ SELECT
 
 Output:
 
-```sql
+```text
       jsonb_set
 ----------------------
  {"name": "Jane Doe"}
@@ -193,7 +193,7 @@ SELECT
 
 Output:
 
-```sql
+```text
                        jsonb_set
 -------------------------------------------------------
  {"name": "John Doe", "address": {"city": "San Jose"}}
@@ -223,7 +223,7 @@ SELECT
 
 Output:
 
-```sql
+```text
                        jsonb_set
 -------------------------------------------------------
  {"name": "John", "skills": ["PostgreSQL", "Web Dev"]}
@@ -264,7 +264,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                       data
 ----+---------------------------------------------------
   1 | {"name": "John", "skills": ["PostgreSQL", "API"]}
@@ -288,7 +288,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |                      data
 ----+------------------------------------------------
   1 | {"name": "John", "skills": ["Web Dev", "API"]}

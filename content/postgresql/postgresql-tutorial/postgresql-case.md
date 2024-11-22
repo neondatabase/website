@@ -118,7 +118,7 @@ FROM
 
 The result of the query is as follows:
 
-```sql
+```text
  Economy | Mass | Premium
 ---------+------+---------
      341 |  323 |     336

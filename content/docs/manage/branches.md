@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-09-28T10:31:46.952Z'
+updatedOn: '2024-11-21T21:25:22.056Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -20,10 +20,9 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Default branch
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
-- Neon Free Plan users 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute with 1 GB of RAM 24/7; up to 5 of those compute hours can be used for non-default branch computes.
-- For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
+The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 ## Non-default branch
 
@@ -57,17 +56,17 @@ To create a branch:
 5. Select a parent branch. You can branch from your Neon project's [default branch](#default-branch) or a [non-default branch](#non-default-branch).
 6. Select an **Include data up to** option to specify the data to be included in your branch.
 
-    <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-    </Admonition>
-
-   <Admonition type="note">
-   The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occured after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-   </Admonition>
+<Admonition type="note">
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+</Admonition>
 
 7. Click **Create new branch** to create your branch.
 
 You are directed to the **Branch** overview page where you are shown the details for your new branch.
+
+<Admonition type="note" title="Postgres role passwords on branches">
+When creating a new branch, the branch will have the same Postgres role passwords as the parent branch. If you want your branch created with new Postgres role passwords, you can enable [branch protection](/docs/guides/protected-branches).
+</Admonition>
 
 ## View branches
 
@@ -93,6 +92,7 @@ To view the branches in a Neon project:
 
    Branch details shown on the branch page include:
 
+   - **Archive status**: When the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created**: The date and time the branch was created.
    - **Compute hours**: The compute hours used by the branch in the current billing period.
@@ -109,6 +109,10 @@ The branch details page also includes details about the **Computes**, **Roles & 
 - [Manage databases](/docs/manage/databases)
 - [View branches](#view-branches)
 
+## Branch archiving
+
+On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
+
 ## Rename a branch
 
 Neon permits renaming a branch, including your project's default branch. To rename a branch:
@@ -121,7 +125,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The benefit of the default branch is that the compute associated with the default branch remains accessible if you exceed project limits, ensuring uninterrupted access to data on the default branch. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 

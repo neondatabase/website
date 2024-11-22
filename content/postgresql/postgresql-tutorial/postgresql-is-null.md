@@ -28,7 +28,7 @@ SELECT null = null AS result;
 
 Output:
 
-```sql
+```text
  result
 --------
  null

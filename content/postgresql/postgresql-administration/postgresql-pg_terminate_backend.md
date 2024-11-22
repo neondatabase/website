@@ -43,7 +43,7 @@ The steps for killing a process by the process `ID` are as follows:
 
 First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using `psql`:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -67,7 +67,7 @@ SELECT pg_terminate_backend(2600);
 
 Output:
 
-```sql
+```text
  pg_terminate_backend
 ----------------------
  t

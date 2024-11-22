@@ -95,7 +95,7 @@ SELECT * FROM contacts;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |          email
 ----+------------+-----------+-------------------------
   1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)
@@ -119,7 +119,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |           email
 ----+------------+-----------+---------------------------
   4 | Alice      | Johnson   | [[email protected]](../cdn-cgi/l/email-protection.html)

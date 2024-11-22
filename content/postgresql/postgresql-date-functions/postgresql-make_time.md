@@ -50,7 +50,7 @@ SELECT MAKE_TIME(22,30,45);
 
 Output:
 
-```sql
+```text
  make_time
 -----------
  22:30:45
@@ -81,7 +81,7 @@ SELECT MAKE_TIME('8', '30', '59.999999');
 
 Output:
 
-```sql
+```text
     make_time
 -----------------
  08:30:59.999999

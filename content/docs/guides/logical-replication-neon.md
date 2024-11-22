@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-14T09:37:02.884Z'
+updatedOn: '2024-11-17T17:56:04.061Z'
 ---
 
 <LRBeta/>
@@ -145,15 +145,15 @@ For example, on the publisher database, you would create the publication and the
 
 ```sql
 CREATE PUBLICATION my_publication FOR ALL TABLES;
-SELECT pg_create_logical_replication_slot('my_publication', 'pgoutput');
+SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 
-Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to false`:
+Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role create created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can copy the connection string from the **Connection Details** widget on your Neon Project Dashboard. Be sure to select the correct role and database before copying the connection string.
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-    CONNECTION '<...>'
-    PUBLICATION my_publication with (create_slot = false);
+    CONNECTION 'connection_string'
+    PUBLICATION my_publication with (create_slot = false, slot_name = 'my_replication_slot');
 ```
 
 <NeedHelp/>

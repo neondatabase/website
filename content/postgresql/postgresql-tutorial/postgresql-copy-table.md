@@ -76,7 +76,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | first_name | last_name |                email
 ----+------------+-----------+--------------------------------------
   1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)
@@ -113,7 +113,7 @@ It returns two rows as expected.
 
 Fifth, examine the structure of the `contact_backup` table:
 
-```sql
+```text
 \d contact_backup;
 ```
 
@@ -140,7 +140,7 @@ ALTER TABLE contact_backup ADD UNIQUE(email);
 
 Finally, view the structure of the `contact_backup` table:
 
-```sql
+```text
 \d contact_backup;
 ```
 

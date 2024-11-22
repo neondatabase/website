@@ -16,6 +16,8 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL row\-level security to control access to individual rows in a table.
 
+<CTA title="Looking to use Postgres RLS?" description="<a href='/docs/guides/neon-authorize'>Neon Authorize</a> uses the open-source <a href='https://github.com/neondatabase/pg_session_jwt'>pg_session_jwt</a> extension to help you write RLS policies that map to your app's or service's auth." buttonText="Learn More" buttonUrl="/docs/guides/neon-authorize" />
+
 ## Introduction to the PostgreSQL Row\-Level Security
 
 Row\-level security (RLS) is a feature that allows you to restrict rows returned by a query based on the user executing the query.
@@ -61,7 +63,7 @@ create database hr;
 
 2\) Change the current database to the `hr` database:
 
-```sql
+```text
 \c hr
 ```
 
@@ -129,7 +131,7 @@ USING (manager = current_user);
 
 10\) Connect to the `hr` database using the `alice` role in a separate session:
 
-```sql
+```bash
 psql -U alice -d hr
 ```
 
@@ -141,7 +143,7 @@ SELECT * FROM departments;
 
 Output:
 
-```sql
+```text
  id | name  | manager
 ----+-------+---------
   1 | Sales | alice
@@ -152,7 +154,7 @@ The query returns the rows whose manager column is `alice`.
 
 12\) Connect to the `hr` database using the `bob` role in a separate session:
 
-```sql
+```bash
 psql -U bob -d hr
 ```
 
@@ -164,7 +166,7 @@ SELECT * FROM departments;
 
 Output:
 
-```sql
+```text
  id |   name    | manager
 ----+-----------+---------
   2 | Marketing | bob

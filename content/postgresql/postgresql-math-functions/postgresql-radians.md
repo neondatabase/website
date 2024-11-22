@@ -44,7 +44,7 @@ SELECT RADIANS(180);
 
 Output:
 
-```sql
+```text
       radians
 -------------------
  3.141592653589793
@@ -78,7 +78,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | angle_degrees
 ----+---------------
   1 |            45
@@ -101,7 +101,7 @@ FROM
 
 Output:
 
-```sql
+```text
  id | angle_degrees |   angle_radians
 ----+---------------+--------------------
   1 |            45 | 0.7853981633974483

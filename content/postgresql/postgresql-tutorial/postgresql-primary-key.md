@@ -150,7 +150,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
    name
 -----------
  Microsoft
@@ -180,7 +180,7 @@ FROM
 
 Output:
 
-```sql
+```text
  vendor_id |   name
 -----------+-----------
          1 | Microsoft
@@ -208,7 +208,7 @@ Let’s take an example of removing the primary key constraint from the `vendors
 
 First, display the structure of the `vendors` table using the \\d command:
 
-```sql
+```text
 \d vendors
 ```
 

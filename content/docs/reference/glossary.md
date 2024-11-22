@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-10-01T16:52:01.972Z'
+updatedOn: '2024-11-22T10:01:08.296Z'
 ---
 
 ## access token
@@ -32,6 +32,10 @@ A unique identifier used to authenticate a user or a calling program to an API. 
 ## apply_config
 
 A Neon Control Plane operation that applies a new configuration to a Neon object or resource. For example, creating, deleting, or updating Postgres users and databases initiates this operation. See [System operations](/docs/manage/operations) for more information.
+
+## Archive storage
+
+Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
 ## Autosuspend
 
@@ -64,6 +68,10 @@ Each Neon project is created with a main line of data referred to as the [root b
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
 Connecting to a database on a branch requires connecting via a compute attached to the branch. See [Connect to a branch](/docs/manage/branches#connect-to-a-branch).
+
+## branch archiving
+
+The automatic archiving of inactive branches in cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 ## Branching
 
@@ -226,7 +234,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Business](/docs/introduction/plans#business) plan feature that can be used to control access to the branch where your database resides. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan feature that can be used to control access to the branch where your database resides. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -296,6 +304,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
 
+## Neon Proxy
+
+A component of the Neon platform that acts as an intermediary between connecting clients and compute nodes where Postgres runs. The Neon Proxy is responsible for tasks such as connection routing, authentication, and metrics collection. From a security perspective, it helps protect the integrity of the Neon platform through a combination of authentication, authorization, and other security measures.
+
 ## Neon user
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
@@ -364,7 +376,7 @@ Older projects may have a `web-access` system role, used by the [SQL Editor](#sq
 
 A designation that is given to a single [branch](#branch) in a Neon project. Each Neon project is created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
 
-The compute associated with a default branch remains available if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch.
+The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 

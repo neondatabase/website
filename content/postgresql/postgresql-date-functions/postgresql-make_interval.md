@@ -67,7 +67,7 @@ SELECT
 
 Output:
 
-```sql
+```text
           make_interval
 ---------------------------------
  3 years 6 mons 15 days 04:00:00
@@ -84,7 +84,7 @@ SELECT MAKE_INTERVAL();
 
 Output:
 
-```sql
+```text
  make_interval
 ---------------
  00:00:00
@@ -120,7 +120,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | year | month | day | hour | minute | second
 ----+------+-------+-----+------+--------+--------
   1 |    1 |     3 |  25 |   10 |      0 |      0

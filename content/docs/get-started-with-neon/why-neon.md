@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2024-10-09T10:24:30.495Z'
+updatedOn: '2024-11-20T12:37:42.220Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
@@ -47,6 +47,10 @@ Separating compute from storage refers to an architecture where the database com
 Separation of compute and storage enables scalability as these resources can be scaled independently. You can adjust for processing power or storage capacity as needed without affecting the other. This approach is also cost-efficient. The ability to scale resources independently means you can benefit from the lower cost of storage compared to compute or avoid paying for additional storage when you only require extra processing power. Decoupling compute and storage also improves availability and durability, as data remains accessible and safe even if a compute fails.
 
 [Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, and database branching workflows.
+
+<Admonition type="tip" title="Did you know?">
+Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
+</Admonition>
 
 ## Neon is fully managed
 

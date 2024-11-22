@@ -47,7 +47,7 @@ SELECT version();
 
 The query will return a text that includes the PostgreSQL version. For example:
 
-```sql
+```text
                           version
 ------------------------------------------------------------
  PostgreSQL 16.1, compiled by Visual C++ build 1937, 64-bit

@@ -100,7 +100,7 @@ PostgreSQL inserted two rows into the `fruits` table with the values for the `id
 SELECT * FROM fruits;
 ```
 
-```sql
+```text
  id |  name
 ----+--------
   1 | Apple

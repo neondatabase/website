@@ -91,7 +91,7 @@ FROM
 
 Output:
 
-```sql
+```text
      name     |              phones
 --------------+----------------------------------
  John Doe     | {(408)-589-5846,(408)-589-5555}
@@ -116,7 +116,7 @@ FROM
 
 Output:
 
-```sql
+```text
      name     |     phones
 --------------+----------------
  John Doe     | (408)-589-5846
@@ -140,7 +140,7 @@ WHERE
 
 Output:
 
-```sql
+```text
      name
 --------------
  William Gate
@@ -162,7 +162,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |     name     |             phones
 ----+--------------+---------------------------------
   3 | William Gate | {(408)-589-5842,(408)-589-5843}
@@ -183,7 +183,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id |     name     |      phones
 ----+--------------+------------------
   3 | William Gate | {(408)-589-5843}
@@ -206,7 +206,7 @@ WHERE
 
 Output:
 
-```sql
+```text
    name   |             phones
 ----------+---------------------------------
  John Doe | {(408)-589-5846,(408)-589-5555}

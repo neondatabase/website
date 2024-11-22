@@ -77,7 +77,7 @@ RETURNING *;
 
 The `teams` table:
 
-```sql
+```text
  team_id | team_name
 ---------+-----------
        1 | Team A
@@ -88,7 +88,7 @@ The `teams` table:
 
 The `members` table:
 
-```sql
+```text
  member_id | member_name | active | team_id
 -----------+-------------+--------+---------
          1 | Alice       | t      |       1
@@ -113,7 +113,7 @@ FROM
 
 Output:
 
-```sql
+```text
  active_member_exists
 ----------------------
  t
@@ -139,7 +139,7 @@ GROUP BY
 
 Output:
 
-```sql
+```text
  team_name | active_member_exists
 -----------+----------------------
  Team A    | t

@@ -66,7 +66,7 @@ WHERE
 
 Output:
 
-```sql
+```text
  customer_id | first_name | last_name
 -------------+------------+-----------
          333 | Andrew     | Purdy
@@ -91,7 +91,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                                   QUERY PLAN
 -------------------------------------------------------------------------------
  Index Scan using idx_last_name on customer  (cost=0.28..8.29 rows=1 width=17)
@@ -117,7 +117,7 @@ WHERE
 
 Output:
 
-```sql
+```text
                         QUERY PLAN
 ----------------------------------------------------------
  Seq Scan on customer  (cost=0.00..17.98 rows=3 width=17)

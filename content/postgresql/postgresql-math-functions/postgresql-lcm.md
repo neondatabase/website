@@ -48,7 +48,7 @@ SELECT lcm(12, 18) result;
 
 Output:
 
-```sql
+```text
  result
 --------
      36
@@ -65,7 +65,7 @@ SELECT lcm(lcm(12,18),24) result
 
 Output:
 
-```sql
+```text
  result
 --------
      72
@@ -98,7 +98,7 @@ RETURNING *;
 
 Output:
 
-```sql
+```text
  id | value
 ----+-------
   1 |    12
@@ -129,7 +129,7 @@ WHERE rn = (SELECT COUNT(*) FROM numbers);
 
 Output:
 
-```sql
+```text
  lcm_value
 -----------
        144
@@ -156,7 +156,7 @@ FROM numbers;
 
 Output:
 
-```sql
+```text
  lcm_agg
 ---------
      144

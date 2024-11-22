@@ -70,7 +70,7 @@ We will use the following `customer` table in the `dvdrental` [sampledatabase]
 
 ![customer table](/postgresqltutorial/customer.png)First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using the `postgres` user:
 
-```sql
+```bash
 psql -U postgres
 ```
 
@@ -98,7 +98,7 @@ SELECT first_name FROM customer;
 
 Here is the partial output:
 
-```sql
+```text
  first_name
 -------------
  Jared
@@ -126,7 +126,7 @@ FROM
 
 Partial output:
 
-```sql
+```text
  first_name  |  last_name   |                  email
 -------------+--------------+------------------------------------------
  Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)
@@ -147,7 +147,7 @@ SELECT * FROM customer;
 
 Partial output:
 
-```sql
+```text
  customer_id | store_id | first_name  |  last_name   |                  email                   | address_id | activebool | create_date |       last_update       | active
 -------------+----------+-------------+--------------+------------------------------------------+------------+------------+-------------+-------------------------+--------
          524 |        1 | Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)             |        530 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1

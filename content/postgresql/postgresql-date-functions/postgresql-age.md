@@ -36,7 +36,7 @@ SELECT AGE('2017-01-01','2011-06-24');
 
 Output:
 
-```sql
+```text
    age
 -----------------------
  5 years 6 mons 7 days
@@ -58,7 +58,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  current_date |       age
 --------------+------------------
  2024-01-26   | 24 years 25 days
@@ -89,7 +89,7 @@ LIMIT
 
 Output:
 
-```sql
+```text
  rental_id | customer_id |    duration
 -----------+-------------+-----------------
       2412 |         127 | 9 days 05:59:00

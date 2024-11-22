@@ -1,11 +1,10 @@
-import CTA from 'components/pages/pricing/cta';
 import Faq from 'components/pages/pricing/faq';
-import Features from 'components/pages/pricing/features';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
+import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
-import Testimonials from 'components/shared/testimonials';
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -27,36 +26,19 @@ const logos = [
   'wordware',
 ];
 
-const sliderItems = [
-  {
-    text: 'Branching is as useful as we hoped it would be. Our testers can now play with features earlier, since we can now stage features, requiring different database migrations, in parallel.',
-    authorName: 'Lynn Smeria',
-    authorTitle: 'Principal Engineer at Proposales',
-  },
-  {
-    text: 'Using Neon has meant our developers can continue to spend their time on things that meaningfully drive the business forward, instead of babysitting infrastructure.',
-    authorName: 'Adithya Reddy',
-    authorTitle: 'Developer at Branch',
-  },
-  {
-    text: 'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer.',
-    authorName: 'Lincoln Bergeson',
-    authorTitle: 'Infrastructure Engineer at Replit',
-  },
-];
-
 const PricingPage = () => (
   <Layout>
     <Hero />
-    <Logos className="mt-36 pt-2.5 lg:mt-28 lg:pt-0 md:mt-20" logos={logos} />
-    <Features />
-    <Plans className="mt-[200px] scroll-mt-5 px-safe 2xl:mt-[156px] xl:mt-32 lg:mt-28 md:mt-20" />
-    <Testimonials
-      className="my-40 min-h-[312px] 2xl:my-32 xl:my-28 xl:min-h-[290px] lg:my-24 lg:min-h-[257px] md:my-20 md:min-h-[225px] sm:min-h-[310px]"
-      items={sliderItems}
-    />
+    <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
+    <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
     <Faq />
-    <CTA />
+    <CTA
+      className="pb-[350px] pt-[445px] xl:pb-[200px] xl:pt-[260px] lg:pb-[150px] lg:pt-[220px] sm:pb-[100px] sm:pt-[160px]"
+      title="Still have a question?"
+      description="Complete the form below to get in touch with our Sales team."
+      buttonText="Talk to Sales"
+      buttonUrl={LINKS.contactSales}
+    />
   </Layout>
 );
 

@@ -20,7 +20,7 @@ nextLink:
 
 The following illustrates the syntax of the `for` loop statement that iterates over integers of a range:
 
-```pgsql
+```sql
 [ <<label>> ]
 for loop_counter in [ reverse ] from.. to [ by step ] loop
     statements
@@ -37,7 +37,7 @@ The following flowchart illustrates the `for` loop statement:
 
 ![PL/pgSQL FOR loop](/postgresqltutorial/plpgsql-FOR-loop.png)The following example uses the `for` loop statement to iterate over five numbers from 1 to 5 and display each of them in each iteration:
 
-```pgsql
+```sql
 do
 $$
 begin
@@ -60,7 +60,7 @@ NOTICE:  Counter: 5
 
 The following example iterates over 5 numbers from 5 to 1 and shows each of them in each iteration:
 
-```pgsql
+```sql
 do $$
 begin
    for counter in reverse 5..1 loop
@@ -81,7 +81,7 @@ NOTICE:  Counter: 1
 
 The following example uses the `for` loop statement to iterate over six numbers from 1 to 6\. It adds 2 to the counter after each iteration:
 
-```pgsql
+```sql
 do $$
 begin
   for counter in 1..6 by 2 loop
@@ -102,7 +102,7 @@ NOTICE:  Counter 5
 
 The following statement shows how to use the `for` loop statement to iterate over a result set of a query:
 
-```pgsql
+```sql
 [ <<label>> ]
 for target in query loop
     statements
@@ -111,7 +111,7 @@ end loop [ label ];
 
 The following statement uses the `for` loop to display the titles of the top 10 longest films.
 
-```pgsql
+```sql
 do
 $$
 declare
@@ -145,7 +145,7 @@ NOTICE:  Worst Banger(185 mins)
 
 The following form of the `for` loop statement allows you to execute a dynamic query and iterate over its result set:
 
-```pgsql
+```sql
 [ <<label>> ]
 for row in execute query_expression [ using query_param [, ... ] ]
 loop
@@ -165,7 +165,7 @@ The following block shows how to use the `for` loop statement to loop through a 
 
 This [anonymous block](plpgsql-block-structure) composes the query based on the `sort_type` variable and uses the for loop to iterate over the row of the result set.
 
-```pgsql
+```sql
 do $$
 declare
     -- sort by 1: title, 2: release year

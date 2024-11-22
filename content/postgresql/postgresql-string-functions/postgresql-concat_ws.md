@@ -51,7 +51,7 @@ SELECT CONCAT_WS(' ', 'PostgreSQL', 'Tutorial') title;
 
 Output:
 
-```sql
+```text
         title
 ---------------------
  PostgreSQL Tutorial
@@ -77,7 +77,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
        full_name
 -----------------------
  Aaron Selby

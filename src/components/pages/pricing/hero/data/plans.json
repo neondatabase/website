@@ -1,0 +1,205 @@
+[
+  {
+    "type": "Free Plan",
+    "price": 0,
+    "headerLink": null,
+    "description": "To kickstart your projects, no credit card required.",
+    "features": [
+      {
+        "icon": "projects",
+        "title": "10 projects",
+        "info": "10 branches per project"
+      },
+      {
+        "icon": "storage",
+        "title": "0.5 GB storage"
+      },
+      {
+        "icon": "clock",
+        "title": [
+          "190 ",
+          {
+            "type": "link",
+            "text": "compute hours",
+            "href": "#compute-hour"
+          }
+        ]
+      },
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 2 CU",
+        "info": "2 CU = 2 vCPU, 8 GB RAM"
+      }
+    ],
+    "otherFeatures": {
+      "features": [{ "title": "Read replicas" }, { "title": "90+ Postgres extensions" }]
+    },
+    "button": {
+      "url": "https://console.neon.tech/signup",
+      "text": "Start for free",
+      "theme": "white-outline",
+      "event": "Hero Free Tier Panel"
+    }
+  },
+  {
+    "type": "Launch",
+    "highlighted": true,
+    "price": 19,
+    "priceFrom": true,
+    "headerLink": {
+      "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
+      "text": "Pay via AWS marketplace"
+    },
+    "description": "The resources, features, and support you need to launch.",
+    "features": [
+      {
+        "icon": "projects",
+        "title": "100 projects",
+        "info": "500 branches per project"
+      },
+      {
+        "icon": "storage",
+        "title": "10 GB storage",
+        "info": "Additional storage: $3.5 per 2 GB"
+      },
+      {
+        "icon": "clock",
+        "title": [
+          "300 ",
+          {
+            "type": "link",
+            "text": "compute hours",
+            "href": "#compute-hour"
+          }
+        ],
+        "info": "Additional usage: $0.16 per compute hour"
+      },
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 4 CU",
+        "info": "4 CU = 4 vCPU, 16 GB RAM"
+      }
+    ],
+    "otherFeatures": {
+      "title": "Everything in Free, plus...",
+      "features": [{ "title": "Organization accounts" }, { "title": "Standard Support" }]
+    },
+    "button": {
+      "url": "https://console.neon.tech/app/billing#plans",
+      "text": "Get started",
+      "theme": "primary",
+      "event": "Hero Launch Panel"
+    }
+  },
+  {
+    "type": "Scale",
+    "price": 69,
+    "priceFrom": true,
+    "headerLink": {
+      "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
+      "text": "Pay via AWS marketplace"
+    },
+    "description": "More capacity and functionality for scaling production workloads.",
+    "features": [
+      {
+        "icon": "projects",
+        "title": "1000 projects",
+        "info": "$50 per 1000 extra projects"
+      },
+      {
+        "icon": "storage",
+        "title": "50 GB storage",
+        "info": "Additional storage: $15 per 10 GB"
+      },
+      {
+        "icon": "clock",
+        "title": [
+          "750 ",
+          {
+            "type": "link",
+            "text": "compute hours",
+            "href": "#compute-hour"
+          }
+        ],
+        "info": "Additional usage: $0.16 per compute hour"
+      },
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 8 CU",
+        "info": "8 CU = 8 vCPU, 32 GB RAM"
+      }
+    ],
+    "otherFeatures": {
+      "title": "Everything in Launch, plus...",
+      "features": [
+        { "title": "IP Allow Rules" },
+        { "title": "Datadog integration" }
+      ]
+    },
+    "button": {
+      "url": "https://console.neon.tech/app/billing#plans",
+      "text": "Get started",
+      "theme": "white-outline",
+      "event": "Hero Scale Panel"
+    }
+  },
+  {
+    "type": "Business",
+    "price": 700,
+    "priceFrom": true,
+    "headerLink": {
+      "url": "/migration-assistance",
+      "text": "Get migration help"
+    },
+    "description": "For larger workloads, with best compliance and security. ",
+    "features": [
+      {
+        "icon": "projects",
+        "title": "5,000 projects",
+        "info": "$50 per 5,000 extra projects"
+      },
+      {
+        "icon": "storage",
+        "title": "500 GB storage",
+        "info": "Additional storage: $5 per 10 GB"
+      },
+      {
+        "icon": "clock",
+        "title": [
+          "1000 ",
+          {
+            "type": "link",
+            "text": "compute hours",
+            "href": "#compute-hour"
+          }
+        ],
+        "info": "Additional usage: $0.16 per compute hour"
+      },
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 10+ CU",
+        "info": "Ask us about larger computes"
+      }
+    ],
+    "otherFeatures": {
+      "title": "Everything in Scale, plus...",
+      "features": [
+        { "title": "Compliance (SOC 2, ISO)" },
+        { "title": "99.95% SLA" },
+        { "title": "Priority Support" },
+        { "title": "Private Link" },
+        {
+          "title": "Migration assistance",
+          "info": "With 0 migration fees—we will waive them"
+        },
+        { "title": "PITR (30 days)" }
+      ]
+    },
+    "button": {
+      "url": "https://console.neon.tech/app/billing#plans",
+      "text": "Get started",
+      "theme": "white-outline",
+      "event": "Hero Enterprise Panel"
+    }
+  }
+]

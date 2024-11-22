@@ -44,7 +44,7 @@ SELECT jsonb_build_array(10, null, 'Hi', true) result;
 
 Output:
 
-```sql
+```text
          result
 ------------------------
  [10, null, "Hi", true]
@@ -68,7 +68,7 @@ ORDER BY
 
 Output:
 
-```sql
+```text
           jsonb_build_array
 --------------------------------------
  ["Academy Dinosaur", 86]

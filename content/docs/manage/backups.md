@@ -1,7 +1,7 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2024-10-21T14:14:21.659Z'
+updatedOn: '2024-11-15T15:55:44.079Z'
 ---
 
 Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
@@ -22,7 +22,18 @@ Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/con
 
 This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
 
-To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate from Postgres](/docs/import/migrate-from-postgres) guide.
+To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
+
+<Admonition type="tip">
+When restoring a database dumped from Neon, you may encounter `ALTER OWNER` errors related to a `cloud_admin` role; for example:
+
+```bash
+pg_restore: error: could not execute query: ERROR: permission denied to change default privileges
+Command was: ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;
+```
+
+This is a protected role in Neon that cannot be modified. To avoid this issue, you can add a `-O` or `--no-owner` option to your `pg_restore` command, as described [Database object ownership consideration](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
+</Admonition>
 
 ## Automate Postgres Backups with a GitHub Action
 

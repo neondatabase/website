@@ -118,7 +118,7 @@ select (find_film_by_id(100)).title;
 
 Output:
 
-```sql
+```text
       title
 -----------------
  Brooklyn Desert

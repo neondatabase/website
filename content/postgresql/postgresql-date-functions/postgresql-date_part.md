@@ -67,7 +67,7 @@ SELECT date_part('century',TIMESTAMP '2017-01-01');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
         21
@@ -84,7 +84,7 @@ SELECT date_part('year',TIMESTAMP '2017-01-01');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
       2017
@@ -101,7 +101,7 @@ SELECT date_part('quarter',TIMESTAMP '2017-01-01');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
          1
@@ -118,7 +118,7 @@ SELECT date_part('month',TIMESTAMP '2017-09-30');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
          9
@@ -129,13 +129,13 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the decade from a timestamp:
 
-```sql
+```text
  SELECT date_part('decade',TIMESTAMP '2017-09-30');
 ```
 
 Output:
 
-```sql
+```text
  date_part
 -----------
        201
@@ -152,7 +152,7 @@ SELECT date_part('week',TIMESTAMP '2017-09-30');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
         39
@@ -169,7 +169,7 @@ SELECT date_part('millennium',now());
 
 Output:
 
-```sql
+```text
  date_part
 -----------
          3
@@ -186,7 +186,7 @@ SELECT date_part('day',TIMESTAMP '2017-03-18 10:20:30');
 
 Output:
 
-```sql
+```text
  date_part
 -----------
         18

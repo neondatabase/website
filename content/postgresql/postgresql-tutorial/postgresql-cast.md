@@ -67,7 +67,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  int4
 ------
   100
@@ -98,7 +98,7 @@ SELECT
 
 Output:
 
-```sql
+```text
     date    |    date
 ------------+------------
  2015-01-01 | 2015-10-01
@@ -132,7 +132,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  float8
 --------
    10.2
@@ -153,7 +153,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  bool | bool | bool | bool
 ------+------+------+------
  t    | f    | t    | f
@@ -171,7 +171,7 @@ SELECT '2019-06-15 14:30:20'::timestamp;
 
 Output:
 
-```sql
+```text
       timestamp
 ---------------------
  2019-06-15 14:30:20
@@ -193,7 +193,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  interval | interval | interval | interval | interval
 ----------+----------+----------+----------+----------
  00:15:00 | 02:00:00 | 1 day    | 14 days  | 3 mons
@@ -210,7 +210,7 @@ SELECT CAST('2024-02-01 12:34:56' AS DATE);
 
 Output:
 
-```sql
+```text
     date
 ------------
  2024-02-01
@@ -227,7 +227,7 @@ SELECT CAST('30 days' AS TEXT);
 
 Output:
 
-```sql
+```text
   text
 ---------
  30 days
@@ -244,7 +244,7 @@ SELECT CAST('{"name": "John"}' AS JSONB);
 
 Output:
 
-```sql
+```text
       jsonb
 ------------------
  {"name": "John"}
@@ -261,7 +261,7 @@ SELECT CAST(9.99 AS INTEGER);
 
 Output:
 
-```sql
+```text
  int4
 ------
    10
@@ -341,7 +341,7 @@ SELECT * FROM ratings;
 
 Output:
 
-```sql
+```text
  id | rating
 ----+--------
   1 | A

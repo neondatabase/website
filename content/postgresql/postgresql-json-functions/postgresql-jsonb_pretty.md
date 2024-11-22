@@ -49,7 +49,7 @@ SELECT
 
 Output:
 
-```sql
+```text
       jsonb_pretty
 -------------------------
  {                      +

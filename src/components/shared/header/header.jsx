@@ -192,6 +192,7 @@ const Header = async ({
   showSearchInput = false,
   isDocPage = false,
   withBorder = false,
+  searchIndexName = null,
   customType = null,
 }) => {
   const isDarkTheme = theme === 'dark';
@@ -209,7 +210,7 @@ const Header = async ({
           <div className="flex">
             <span className="hidden w-[350px] shrink-0 3xl:block xl:w-[302px] lg:hidden" />
             <Container
-              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-32 md:pr-24"
               size="1408"
             >
               <div className="hidden lg:flex lg:items-center lg:gap-x-7">
@@ -253,7 +254,12 @@ const Header = async ({
           </Container>
         )}
       </HeaderWrapper>
-      <MobileMenu isDarkTheme={isDarkTheme} showSearchInput={showSearchInput} />
+      <MobileMenu
+        isDarkTheme={isDarkTheme}
+        showSearchInput={showSearchInput}
+        isDocPage={isDocPage}
+        searchIndexName={searchIndexName}
+      />
     </>
   );
 };
@@ -266,6 +272,7 @@ Header.propTypes = {
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   withBorder: PropTypes.bool,
+  searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

@@ -53,7 +53,7 @@ SELECT
 
 Output:
 
-```sql
+```text
  jsonb_object_keys
 -------------------
  age
@@ -94,7 +94,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
  jsonb_object_keys
 -------------------
  age
@@ -116,7 +116,7 @@ FROM person;
 
 Output:
 
-```sql
+```text
  jsonb_object_keys
 -------------------
  age

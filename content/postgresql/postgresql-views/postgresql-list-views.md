@@ -93,7 +93,7 @@ ORDER BY
 
 The output will display the schema and the name of the views:
 
-```sql
+```text
  table_schema |         table_name
 --------------+----------------------------
  public       | actor_info
@@ -120,7 +120,7 @@ SELECT * FROM pg_matviews\G
 
 Output:
 
-```sql
+```text
  schemaname |    matviewname     | matviewowner | tablespace | hasindexes | ispopulated |                          definition
 ------------+--------------------+--------------+------------+------------+-------------+---------------------------------------------------------------
  public     | rental_by_category | postgres     | null       | t          | t           |  SELECT c.name AS category,                                  +

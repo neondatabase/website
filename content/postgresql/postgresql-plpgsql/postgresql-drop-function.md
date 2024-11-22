@@ -22,7 +22,7 @@ To remove a user\-defined function, you use the `drop function` statement.
 
 Here’s the syntax of the `drop function` statement:
 
-```pgsql
+```sql
 drop function [if exists] function_name(argument_list)
 [cascade | restrict]
 ```
@@ -41,7 +41,7 @@ By default, the `drop function` statement uses the `restrict` option that reject
 
 To drop multiple functions using a single `drop function` statement, you specify a comma\-separated list of function names after the `drop function` keyword like this:
 
-```pgsql
+```sql
 drop function [if exists] function1, function2, ...;
 ```
 
@@ -49,7 +49,7 @@ drop function [if exists] function1, function2, ...;
 
 The following statement uses the [`create function`](postgresql-create-function) statement to define a function that returns a set of films including `film_id`, `title`, and `actor`:
 
-```pgsql
+```sql
 create or replace function get_film_actors()
 	returns setof record
 as $$
@@ -76,7 +76,7 @@ language plpgsql;
 
 The following statement defines a function with the same name `get_film_actors`. However, it accepts a film id as the argument:
 
-```pgsql
+```sql
 create or replace function get_film_actors(p_fiml_id int)
 	returns setof record
 as $$
@@ -104,7 +104,7 @@ language plpgsql;
 
 The following statement attempts to drop the `get_film_actors` function:
 
-```pgsql
+```sql
 drop function get_film_actors;
 ```
 
@@ -120,19 +120,19 @@ Since the `get_film_actors` stored procedure is not unique, you need to specify 
 
 The following statement drops the `get_film_actors` function that has zero parameters:
 
-```pgsql
+```sql
 drop function get_film_actors();
 ```
 
 Now, there is only one `get_film_actors` function left. Since it is unique in the database, you can drop it without specifying its argument list like this:
 
-```pgsql
+```sql
 drop function get_film_actors;
 ```
 
 Alternatively, if you want to specify the exact function, you can use the function name with the argument list:
 
-```pgsql
+```sql
 drop function get_film_actors(int);
 ```
 

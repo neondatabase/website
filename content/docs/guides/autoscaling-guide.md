@@ -1,7 +1,7 @@
 ---
 title: Enable Autoscaling in Neon
 enableTableOfContents: true
-updatedOn: '2024-08-19T14:50:59.584Z'
+updatedOn: '2024-11-20T12:37:42.223Z'
 ---
 
 <InfoBlock>
@@ -17,6 +17,10 @@ updatedOn: '2024-08-19T14:50:59.584Z'
 </InfoBlock>
 
 This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
+
+<Admonition type="tip" title="Did you know?">
+Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
+</Admonition>
 
 ## Enable autoscaling for a compute
 
