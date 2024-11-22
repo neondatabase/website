@@ -101,7 +101,7 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
           animate={hasToggler && !isOpen ? 'closed' : 'open'}
           variants={variantsAnimation}
           transition={{ duration: 0.5 }}
-          className={clsx('space-y-3', hasToggler && 'overflow-hidden')}
+          className={clsx('space-y-3 pb-0.5', hasToggler && 'overflow-hidden')}
         >
           {features.map((feature, index) => (
             <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
