@@ -46,7 +46,7 @@ https://api.stack-auth.com/api/v1/projects/{YOUR_PROJECT_ID}/.well-known/jwks.js
 Replace `{YOUR_PROJECT_ID}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
 
 ```plaintext shouldWrap
-https://api.stack-auth.com/v1/projects/my-awesome-project/.well-known/jwks.json
+https://api.stack-auth.com/api/v1/projects/my-awesome-project/.well-known/jwks.json
 ```
 
 ### 2. Add Stack Auth as an authorization provider in the Neon Console
