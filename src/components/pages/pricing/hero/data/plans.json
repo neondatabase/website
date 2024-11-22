@@ -131,7 +131,12 @@
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
-      "features": [{ "title": "Branch protection" }, { "title": "PITR (14 days)" }]
+      "features": [
+        { "title": "Branch protection" },
+        { "title": "PITR (14 days)" },
+        { "title": "IP Allow Rules" },
+        { "title": "Datadog integration" }
+      ]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
@@ -184,7 +189,6 @@
         { "title": "Compliance (SOC 2, ISO)" },
         { "title": "99.95% SLA" },
         { "title": "Priority Support" },
-        { "title": "Datadog integration" },
         { "title": "Private Link" },
         {
           "title": "Migration assistance",
