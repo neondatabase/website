@@ -183,7 +183,7 @@ Postgres ignores the timezone information for the first column and returns the s
 ## Additional considerations
 
 - **Indexing**: Date/time values often involve range queries and sorting. Indexing date/time columns can thus significantly improve query performance.
-- **Daylight Saving Time**: Working with time zones can be tricky, especially when dealing with daylight savings time. For additional details, refer to the [PostgreSQL Date/Time Types documentation](https://www.postgresql.org/docs/current/datatype-datetime.html).
+- **Daylight Saving Time**: Working with time zones can be tricky, especially when dealing with daylight savings time. For additional details, refer to the [PostgreSQL Date/Time Types documentation](https://www.postgresql.org/docs/current/datatype-datetime.html)  as well as The Well Resource Guide we refer [How to Use the PostgreSQL Date Data Type](https://docs.vultr.com/how-to-use-the-postgresql-date-data-type)
 
 ## Resources
 
