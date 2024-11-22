@@ -120,369 +120,412 @@ After creating the database, make sure to copy the connection details (such as *
 
 ## Step 2: Create an Azure Function to Manage Products
 
-1. **Sign in to Azure**
+1.  **Sign in to Azure**
 
-   If you don't already have an account, sign up on the Microsoft [Azure](https://portal.azure.com/) portal.
+    If you don't already have an account, sign up on the Microsoft [Azure](https://portal.azure.com/) portal.
 
-   We will initialize an Azure Functions project where we will create an **HTTP Trigger function** in Visual Studio Code (VS Code) using the **Azure Functions extension**.
+    We will initialize an Azure Functions project where we will create an **HTTP Trigger function** in Visual Studio Code (VS Code) using the **Azure Functions extension**.
 
-2. **Install the Azure Functions extension**:
+2.  **Install the Azure Functions extension**:
 
-   - Open VS Code, or install [Visual Studio Code](https://code.visualstudio.com/) if it's not yet installed.
-   - Go to the extensions tab or press `Ctrl+Shift+X`.
-   - Search for "Azure Functions" and install the official extension.
+    - Open VS Code, or install [Visual Studio Code](https://code.visualstudio.com/) if it's not yet installed.
+    - Go to the extensions tab or press `Ctrl+Shift+X`.
+    - Search for "Azure Functions" and install the official extension.
 
-3. **Create an Azure Functions Project**
+3.  **Create an Azure Functions Project**
 
-   Open the command palette or press `Ctrl+Shift+P` to open the command palette.
+    Open the command palette or press `Ctrl+Shift+P` to open the command palette.
 
-   - Type `Azure Functions: Create New Project...` and select that option.
-   - Choose a directory where you want to create the project.
-   - Select the programming language (`JavaScript` in our case).
-   - Choose a JavaScript programming model (`Model V4`).
-   - Choose a function template, and select `HTTP trigger`.
-   - Give your function a name, for example, `manageClients`.
+    - Type `Azure Functions: Create New Project...` and select that option.
+    - Choose a directory where you want to create the project.
+    - Select the programming language (`JavaScript` in our case).
+    - Choose a JavaScript programming model (`Model V4`).
+    - Choose a function template, and select `HTTP trigger`.
+    - Give your function a name, for example, `manageClients`.
 
-   Once confirmed, the project will be created with some default code.
+    Once confirmed, the project will be created with some default code.
 
-4. **Install the Postgres client**
+4.  **Install the Postgres client**
 
-   In the terminal of your Azure Functions project, install the **pg** package, which will be used to connect to Postgres:
+    In the terminal of your Azure Functions project, install the **pg** package, which will be used to connect to Postgres:
 
-   ```bash
-   npm install pg
-   ```
+    ```bash
+    npm install pg
+    ```
 
-5. **Azure Functions Core Tools**
+5.  **Azure Functions Core Tools**
 
-   Install Azure Functions Core Tools to run functions locally.
+    Install Azure Functions Core Tools to run functions locally.
 
-   ```bash
-   npm install -g azure-functions-core-tools@4 --unsafe-perm true
-   ```
+    ```bash
+    npm install -g azure-functions-core-tools@4 --unsafe-perm true
+    ```
 
-   <Admonition type="note" title="suggested folder structure">
+    <Admonition type="note" title="suggested folder structure">
 
-   Since there are three tables in the database (`Clients`, `Hotels`, and `Reservations`), using a separate file for each feature or interaction with the database is a good practice to maintain clear and organized code.
+    Since there are three tables in the database (`Clients`, `Hotels`, and `Reservations`), using a separate file for each feature or interaction with the database is a good practice to maintain clear and organized code.
 
-   ```
-   src/
-     ├──index.js
-     ├──functions/
-     │   ├──manageClients.js
-     │   ├──manageHotels.js
-     │   └──manageReservations.js
-     └──database/
-         ├──client.js
-         ├──hotel.js
-         └──reservation.js
-   ```
+    ```
+    src/
+      ├──index.js
+      ├──functions/
+      │   ├──manageClients.js
+      │   ├──manageHotels.js
+      │   └──manageReservations.js
+      └──database/
+          ├──client.js
+          ├──hotel.js
+          └──reservation.js
+    ```
 
-   </Admonition>
+    </Admonition>
 
-6. **Configure Environment Variables**
+6.  **Configure Environment Variables**
 
-   On the Neon dashboard, go to `Connection string`, select `Node.js`, and click `.env`. Then, click `show password` and copy the database connection string. If you don't click `show password`, you'll copy a connection string without the password (which is masked).
+    On the Neon dashboard, go to `Connection string`, select `Node.js`, and click `.env`. Then, click `show password` and copy the database connection string. If you don't click `show password`, you'll copy a connection string without the password (which is masked).
 
-   Create a `.env` file at the root of the project to store your database connection information from the Neon.
+    Create a `.env` file at the root of the project to store your database connection information from the Neon.
 
-   Here's an example of the connection string you'll copy:
+    Here's an example of the connection string you'll copy:
 
-   ```bash shouldWrap
-   DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require'
-   ```
-
-   For clarity, you can break this connection string down like this:
-
-   ```bash
-   DB_USER=neondb_owner
-   DB_HOST=ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech
-   DB_NAME=neondb
-   DB_PASSWORD=your_db_password
-   DB_PORT=5432
-   ```
-
-7. **Modify the `local.settings.json` file**
-
-   The `local.settings.json` file is used by Azure Functions for **local executions**. Azure Functions does not directly read the `.env` file. Instead, it relies on `local.settings.json` to inject environment variable values during local execution. In production, you will define the same settings through `App Settings` in the Azure portal.
-
-   Here's an example of the `local.settings.json` file :
-
-   ```JSON
-   {
-     "IsEncrypted": false,
-     "Values": {
-       "AzureWebJobsStorage": "",
-       "FUNCTIONS_WORKER_RUNTIME": "node",
-       "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require"
-     }
-   }
-   ```
-
-   For clarity, you can break this connection string down like this:
-
-   ```JSON
-   {
-     "IsEncrypted": false,
-     "Values": {
-       "AzureWebJobsStorage": "",
-       "FUNCTIONS_WORKER_RUNTIME": "node",
-       "DB_USER": "neondb_owner",
-       "DB_HOST": "ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech",
-       "DB_NAME": "neondb",
-       "DB_PASSWORD": "your_db_password",
-       "DB_PORT": "5432"
-     }
-   }
-   ```
-
-   Install the `dotenv` package by opening the terminal in your Azure Functions project. This package will allow you to load environment variables from the `.env` file:
-
-   ```bash
-   npm install dotenv
-   ```
-
-8. **Manage Each Table**
-
-   a. Create a separate file for each table in the `database/` folder.
-
-   **Example code for `client.js`**
-
-   ```javascript
-   // src/database/client.js
-   const { Client } = require('pg');
-   require('dotenv').config();
-
-   const client = new Client({
-     user: process.env.DB_USER,
-     host: process.env.DB_HOST,
-     database: process.env.DB_NAME,
-     password: process.env.DB_PASSWORD,
-     port: process.env.DB_PORT || 5432,
-     ssl: true,
-   });
-
-   const connectDB = async () => {
-     if (!client._connected) {
-       await client.connect();
-     }
-   };
-
-   const getAllClients = async () => {
-     await connectDB();
-     const result = await client.query('SELECT * FROM clients');
-     return result.rows;
-   };
-
-   const addClient = async (first_name, last_name, email, phone_number) => {
-     await connectDB();
-     const result = await client.query(
-       `INSERT INTO clients (first_name, last_name, email, phone_number)
-       VALUES ($1, $2, $3, $4)
-       RETURNING *`,
-       [first_name, last_name, email, phone_number]
-     );
-     return result.rows[0];
-   };
-
-   module.exports = {
-     getAllClients,
-     addClient,
-     client, // Optional if you need to close the connection elsewhere
-   };
-   ```
-
-   **Example code for `hotel.js`**
-
-   ```javascript
-   // src/database/hotel.js
-   const { Client } = require('pg');
-   require('dotenv').config();
-
-   const client = new Client({
-     user: process.env.DB_USER,
-     host: process.env.DB_HOST,
-     database: process.env.DB_NAME,
-     password: process.env.DB_PASSWORD,
-     port: process.env.DB_PORT || 5432,
-     ssl: true,
-   });
-
-   const connectDB = async () => {
-     if (!client._connected) {
-       await client.connect();
-     }
-   };
-
-   const getAllHotels = async () => {
-     await connectDB();
-     const result = await client.query('SELECT * FROM hotels');
-     return result.rows;
-   };
-
-   module.exports = {
-     getAllHotels,
-     client,
-   };
-   ```
-
-   **Example code for `reservation.js`**
-
-   ```javascript
-   // src/database/reservation.js
-   const { Client } = require('pg');
-   require('dotenv').config();
-
-   const client = new Client({
-     user: process.env.DB_USER,
-     host: process.env.DB_HOST,
-     database: process.env.DB_NAME,
-     password: process.env.DB_PASSWORD,
-     port: process.env.DB_PORT || 5432,
-     ssl: true,
-   });
-
-   const connectDB = async () => {
-     if (!client._connected) {
-       await client.connect();
-     }
-   };
-
-   const getAvailableReservations = async () => {
-     await connectDB();
-     const result = await client.query('SELECT * FROM reservations WHERE status = $1', [
-       'available',
-     ]);
-     return result.rows;
-   };
-
-   module.exports = {
-     getAvailableReservations,
-     client,
-   };
-   ```
-
-   b. Modify the `functions/` folder by adding the function files:
-
-   In the `functions/` folder, remove the default file, and then add three function management files (`manageClients.js`, `manageHotels.js`, and `manageReservations.js`).
-
-   **Example for `manageClients.js`**
-
-   ```javascript
-   // src/functions/manageClients.js
-   const { app } = require('@azure/functions');
-   const { getAllClients, addClient } = require('../database/client');
-
-   app.http('manageClients', {
-     methods: ['GET', 'POST'],
-     authLevel: 'anonymous',
-     handler: async (request, context) => {
-       context.log(`HTTP function processed request for url "${request.url}"`);
-
-       if (request.method === 'GET') {
-         try {
-           const clients = await getAllClients();
-           console.table(clients);
-           return {
-             body: clients,
-           };
-         } catch (error) {
-           context.log('Error fetching clients:', error);
-           return {
-             status: 500,
-             body: 'Error retrieving clients.',
-           };
-         }
-       }
-
-       if (request.method === 'POST') {
-         try {
-           const { first_name, last_name, email, phone_number } = await request.json();
-
-           if (!first_name || !last_name || !email || !phone_number) {
-             return {
-               status: 400,
-               body: 'Missing required fields: first_name, last_name, email, phone_number.',
-             };
-           }
-
-           const newClient = await addClient(first_name, last_name, email, phone_number);
-           console.table(newClient);
-           return {
-             status: 201,
-             body: newClient,
-           };
-         } catch (error) {
-           context.log('Error adding client:', error);
-           return {
-             status: 500,
-             body: 'Error adding client.',
-           };
-         }
-       }
-     },
-   });
-   ```
-
-   **Example for `manageHotels.js`**
-
-   ```javascript
-   // src/functions/manageHotels.js
-   const { app } = require('@azure/functions');
-   const { getAllHotels } = require('../database/hotel');
-
-   app.http('manageHotels', {
-     methods: ['GET'],
-     authLevel: 'anonymous',
-     handler: async (request, context) => {
-       context.log(`HTTP function processed request for url "${request.url}"`);
-
-       try {
-         const hotels = await getAllHotels();
-         return {
-           body: hotels,
-         };
-       } catch (error) {
-         context.log('Error fetching hotels:', error);
-         return {
-           status: 500,
-           body: 'Error retrieving hotels.',
-         };
-       }
-     },
-   });
-   ```
-
-   **Example for `manageReservations.js`**
-
-   ```javascript
-   // src/functions/manageReservations.js
-   const { app } = require('@azure/functions');
-   const { getAvailableReservations } = require('../database/reservation');
-
-   app.http('manageReservations', {
-     methods: ['GET'],
-     authLevel: 'anonymous',
-     handler: async (request, context) => {
-       context.log(`HTTP function processed request for url "${request.url}"`);
-
-       try {
-         const reservations = await getAvailableReservations();
-         return {
-           body: reservations,
-         };
-       } catch (error) {
-         context.log('Error fetching reservations:', error);
-         return {
-           status: 500,
-           body: 'Error retrieving available reservations.',
-         };
-       }
-     },
-   });
-   ```
-
-   Feel free to extend this structure to include features such as adding new clients, creating new reservations, or even updating and deleting data, each with **its own file** and **its own logic**.
+    ```bash shouldWrap
+    DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require'
+    ```
+
+7.  **Modify the `local.settings.json` file**
+
+    The `local.settings.json` file is used by Azure Functions for **local executions**. Azure Functions does not directly read the `.env` file. Instead, it relies on `local.settings.json` to inject environment variable values during local execution. In production, you will define the same settings through `App Settings` in the Azure portal.
+
+    Here's an example of the `local.settings.json` file :
+
+    ```JSON
+    {
+      "IsEncrypted": false,
+      "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require"
+      }
+    }
+    ```
+
+    For clarity, you can break this connection string down like this:
+
+    ```JSON
+    {
+      "IsEncrypted": false,
+      "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "DB_USER": "neondb_owner",
+        "DB_HOST": "ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech",
+        "DB_NAME": "neondb",
+        "DB_PASSWORD": "your_db_password",
+        "DB_PORT": "5432"
+      }
+    }
+    ```
+
+    Install the `dotenv` package by opening the terminal in your Azure Functions project. This package will allow you to load environment variables from the `.env` file:
+
+    ```bash
+    npm install dotenv
+    ```
+
+8.  **Manage Each Table**
+
+    a. Create a separate file for each table in the `database/` folder.
+
+    Here, you can use either the `neon` package or the `pg` package to connect to the database.
+
+    **Example code for `client.js`**
+
+    <CodeTabs labels={["neon", "pg"]}>
+
+    ```javascript
+    import { neon } from '@neondatabase/serverless';
+    import dotenv from 'dotenv';
+
+    dotenv.config();
+
+    const sql = neon(process.env.DATABASE_URL);
+
+    const getAllClients = async () => {
+      const rows = await sql`SELECT * FROM clients`;
+      return rows;
+    };
+
+    const addClient = async (first_name, last_name, email, phone_number) => {
+      const [newClient] = await sql`
+        INSERT INTO clients (first_name, last_name, email, phone_number)
+        VALUES (${first_name}, ${last_name}, ${email}, ${phone_number})
+        RETURNING *`;
+      return newClient;
+    };
+
+    export { getAllClients, addClient };
+    ```
+
+    ```javascript
+    const { Client } = require('pg');
+    require('dotenv').config();
+
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    const connectDB = async () => {
+      if (!client._connected) {
+        await client.connect();
+      }
+    };
+
+    const getAllClients = async () => {
+      await connectDB();
+      const result = await client.query('SELECT * FROM clients');
+      return result.rows;
+    };
+
+    const addClient = async (first_name, last_name, email, phone_number) => {
+      await connectDB();
+      const result = await client.query(
+        `INSERT INTO clients (first_name, last_name, email, phone_number)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *`,
+        [first_name, last_name, email, phone_number]
+      );
+      return result.rows[0];
+    };
+
+    module.exports = {
+      getAllClients,
+      addClient,
+    };
+    ```
+
+    </CodeTabs>
+
+    **Example code for `hotel.js`**
+
+    <CodeTabs labels={["neon", "pg"]}>
+
+    ```javascript
+    import { neon } from '@neondatabase/serverless';
+    import dotenv from 'dotenv';
+
+    dotenv.config();
+
+    const sql = neon(process.env.DATABASE_URL);
+
+    const getAllHotels = async () => {
+      const rows = await sql`SELECT * FROM hotels`;
+      return rows;
+    };
+
+    export { getAllHotels };
+    ```
+
+    ```javascript
+    const { Client } = require('pg');
+    require('dotenv').config();
+
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+    });
+
+    const connectDB = async () => {
+        if (!client.\_connected) {
+            await client.connect();
+        }
+    };
+
+    const getAllHotels = async () => {
+        await connectDB();
+        const result = await client.query('SELECT \* FROM hotels');
+        return result.rows;
+    };
+
+    module.exports = {
+        getAllHotels,
+        client,
+    };
+    ```
+
+    </CodeTabs>
+
+    **Example code for `reservation.js`**
+
+    <CodeTabs labels={["neon", "pg"]}>
+
+    ```javascript
+    import { neon } from '@neondatabase/serverless';
+    import dotenv from 'dotenv';
+
+    dotenv.config();
+
+    const sql = neon(process.env.DATABASE_URL);
+
+    const getAvailableReservations = async () => {
+      const rows = await sql`
+            SELECT * FROM reservations WHERE status = ${'available'}
+        `;
+      return rows;
+    };
+
+    export { getAvailableReservations };
+    ```
+
+    ```javascript
+    const { Client } = require('pg');
+    require('dotenv').config();
+
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    const connectDB = async () => {
+      if (!client._connected) {
+        await client.connect();
+      }
+    };
+
+    const getAvailableReservations = async () => {
+      await connectDB();
+      const result = await client.query('SELECT * FROM reservations WHERE status = $1', [
+        'available',
+      ]);
+      return result.rows;
+    };
+
+    module.exports = {
+      getAvailableReservations,
+      client,
+    };
+    ```
+
+    </CodeTabs>
+
+    b. Modify the `functions/` folder by adding the function files:
+
+    In the `functions/` folder, remove the default file, and then add three function management files (`manageClients.js`, `manageHotels.js`, and `manageReservations.js`).
+
+    **Example for `manageClients.js`**
+
+    ```javascript
+    // src/functions/manageClients.js
+    const { app } = require('@azure/functions');
+    const { getAllClients, addClient } = require('../database/client');
+
+    app.http('manageClients', {
+      methods: ['GET', 'POST'],
+      authLevel: 'anonymous',
+      handler: async (request, context) => {
+        context.log(`HTTP function processed request for url "${request.url}"`);
+
+        if (request.method === 'GET') {
+          try {
+            const clients = await getAllClients();
+            console.table(clients);
+            return {
+              body: clients,
+            };
+          } catch (error) {
+            context.log('Error fetching clients:', error);
+            return {
+              status: 500,
+              body: 'Error retrieving clients.',
+            };
+          }
+        }
+
+        if (request.method === 'POST') {
+          try {
+            const { first_name, last_name, email, phone_number } = await request.json();
+
+            if (!first_name || !last_name || !email || !phone_number) {
+              return {
+                status: 400,
+                body: 'Missing required fields: first_name, last_name, email, phone_number.',
+              };
+            }
+
+            const newClient = await addClient(first_name, last_name, email, phone_number);
+            console.table(newClient);
+            return {
+              status: 201,
+              body: newClient,
+            };
+          } catch (error) {
+            context.log('Error adding client:', error);
+            return {
+              status: 500,
+              body: 'Error adding client.',
+            };
+          }
+        }
+      },
+    });
+    ```
+
+    **Example for `manageHotels.js`**
+
+    ```javascript
+    // src/functions/manageHotels.js
+    const { app } = require('@azure/functions');
+    const { getAllHotels } = require('../database/hotel');
+
+    app.http('manageHotels', {
+      methods: ['GET'],
+      authLevel: 'anonymous',
+      handler: async (request, context) => {
+        context.log(`HTTP function processed request for url "${request.url}"`);
+
+        try {
+          const hotels = await getAllHotels();
+          return {
+            body: hotels,
+          };
+        } catch (error) {
+          context.log('Error fetching hotels:', error);
+          return {
+            status: 500,
+            body: 'Error retrieving hotels.',
+          };
+        }
+      },
+    });
+    ```
+
+    **Example for `manageReservations.js`**
+
+    ```javascript
+    // src/functions/manageReservations.js
+    const { app } = require('@azure/functions');
+    const { getAvailableReservations } = require('../database/reservation');
+
+    app.http('manageReservations', {
+      methods: ['GET'],
+      authLevel: 'anonymous',
+      handler: async (request, context) => {
+        context.log(`HTTP function processed request for url "${request.url}"`);
+
+        try {
+          const reservations = await getAvailableReservations();
+          return {
+            body: reservations,
+          };
+        } catch (error) {
+          context.log('Error fetching reservations:', error);
+          return {
+            status: 500,
+            body: 'Error retrieving available reservations.',
+          };
+        }
+      },
+    });
+    ```
+
+    Feel free to extend this structure to include features such as adding new clients, creating new reservations, or even updating and deleting data, each with **its own file** and **its own logic**.
 
 ## Step 3: Test the Function Locally
 
