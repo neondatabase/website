@@ -1,3 +1,5 @@
+'use client';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -26,8 +28,11 @@ const schema = yup
   .required();
 
 const labelClassName = 'text-sm text-gray-new-90';
+const errorClassName = '!top-0';
 
-const ContactForm = ({ formState, setFormState }) => {
+const ContactForm = () => {
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+
   const {
     register,
     reset,
@@ -122,6 +127,7 @@ const ContactForm = ({ formState, setFormState }) => {
         placeholder="Marques Hansen"
         theme="transparent"
         labelClassName={labelClassName}
+        errorClassName={errorClassName}
         error={errors.name?.message}
         isDisabled={isDisabled}
         {...register('name')}
@@ -134,6 +140,7 @@ const ContactForm = ({ formState, setFormState }) => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
+        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
@@ -145,17 +152,19 @@ const ContactForm = ({ formState, setFormState }) => {
           label="Company Website"
           theme="transparent"
           labelClassName={labelClassName}
+          errorClassName={errorClassName}
           isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
         <Field
           className="grow"
           name="companySize"
-          label="Company Size *"
+          label="Company Size"
           tag="select"
           defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
+          errorClassName={errorClassName}
           isDisabled={isDisabled}
           {...register('companySize')}
         >
@@ -176,6 +185,7 @@ const ContactForm = ({ formState, setFormState }) => {
         theme="transparent"
         labelClassName={labelClassName}
         textareaClassName="min-h-[148px]"
+        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}
