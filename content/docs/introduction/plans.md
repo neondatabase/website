@@ -105,7 +105,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
 - Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
-- Branch protection (up to 5 branches)
+- Branch protection (up to 2 branches)
 - Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
