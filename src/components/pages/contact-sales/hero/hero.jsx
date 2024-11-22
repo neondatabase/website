@@ -163,6 +163,7 @@ const Hero = () => (
                   alt={logo.alt}
                   width={logo.width}
                   height={logo.height}
+                  priority
                 />
               </div>
               {index === 3 && (
