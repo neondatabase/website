@@ -249,7 +249,7 @@ The following examples use the **Organization API key** method.
 
 Creates a new project within your organization. You can specify:
 
-- PostgreSQL version
+- Postgres version
 - Project name (optional)
 - Region (optional)
 
