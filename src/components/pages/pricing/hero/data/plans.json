@@ -132,8 +132,6 @@
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
       "features": [
-        { "title": "Branch protection" },
-        { "title": "PITR (14 days)" },
         { "title": "IP Allow Rules" },
         { "title": "Datadog integration" }
       ]
