@@ -147,11 +147,19 @@ After creating the database, make sure to copy the connection details (such as *
 
 4.  **Install the Postgres client**
 
-    In the terminal of your Azure Functions project, install the **pg** package, which will be used to connect to Postgres:
+    In the terminal of your Azure Functions project, install either **neon** postgres driver or the **pg** package, which will be used to connect to Postgres:
+
+    <CodeTabs labels={["neon", "pg"]}>
+
+    ```bash
+    npm install @neondatabase/serverless
+    ```
 
     ```bash
     npm install pg
     ```
+
+    </CodeTabs>
 
 5.  **Azure Functions Core Tools**
 
