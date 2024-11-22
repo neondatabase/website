@@ -25,17 +25,9 @@ const items = [
 const Budget = ({ title }) => (
   <Section className="budget" title={title}>
     <Example />
-    <div className="prose-variable">
-      <p>
-        Provisioning for peak load is highly inefficient cost-wise, especially taking into
-        consideration that you will most likely be running not only one database instance,
-        but&nbsp;many.
-      </p>
-      <List items={items} />
-    </div>
     <CtaBlock
-      title="Want a price estimation for your particular use case?"
-      buttonText="Reach out to us"
+      title="Get a price estimation"
+      buttonText="Contact us"
       buttonUrl={LINKS.contactSales}
     />
   </Section>
