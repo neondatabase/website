@@ -4,7 +4,7 @@ const Hero = () => (
       Scale With Traffic
     </h1>
     <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:mt-3 md:text-lg">
-      Neon scales up and down automatically, matching your workload.    
+      Neon scales up and down automatically, matching your workload. Get performance when you need it.    
     </p>
   </section>
 );
