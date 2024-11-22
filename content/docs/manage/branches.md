@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-11-12T11:01:29.510Z'
+updatedOn: '2024-11-21T21:25:22.056Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
@@ -20,10 +20,9 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Default branch
 
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project. The advantage of the default branch is that its compute remains accessible if you exceed your project's limits, ensuring uninterrupted access to data that resides on the default branch, which is typically the branch used in production.
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
-- Neon Free Plan users 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute with 1 GB of RAM 24/7; up to 5 of those compute hours can be used for non-default branch computes.
-- For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage.
+The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 ## Non-default branch
 

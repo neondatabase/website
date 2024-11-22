@@ -3,14 +3,14 @@ title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
-updatedOn: '2024-11-12T11:01:29.509Z'
+updatedOn: '2024-11-21T16:16:13.439Z'
 ---
 
 Neon architecture is based on the separation of compute and storage and is orchestrated by the Neon Control Plane, which manages cloud resources across both storage and compute.
 
 A Neon compute runs Postgres, and storage is a multi-tenant key-value store for Postgres pages that is custom-built for the cloud.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
+![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Neon storage consists of three main components: Safekeepers, Pageservers, and cloud object storage.
 

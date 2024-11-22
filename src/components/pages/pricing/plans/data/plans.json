@@ -228,7 +228,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": false,
+      "scale": true,
       "business": true
     },
     {
@@ -333,7 +333,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": false,
+      "scale": true,
       "business": true
     },
     {

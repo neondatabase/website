@@ -87,7 +87,7 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                             className={clsx(
                               icon,
                               'inline-block dark:bg-gray-new-70',
-                              to ? 'mr-2.5 size-4' : 'mr-1.5 size-3',
+                              heading === 'Compliance' ? 'mr-1.5 size-3' : 'mr-2.5 size-4',
                               isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30',
                               to && 'transition-colors duration-200 group-hover/link:bg-green-45'
                             )}

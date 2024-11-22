@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-11-12T11:01:29.511Z'
+updatedOn: '2024-11-22T10:01:08.296Z'
 ---
 
 ## access token
@@ -234,7 +234,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Business](/docs/introduction/plans#business) plan feature that can be used to control access to the branch where your database resides. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan feature that can be used to control access to the branch where your database resides. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -303,6 +303,10 @@ A browser-based graphical interface for managing Neon projects and resources.
 ## Neon Free Plan
 
 A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
+
+## Neon Proxy
+
+A component of the Neon platform that acts as an intermediary between connecting clients and compute nodes where Postgres runs. The Neon Proxy is responsible for tasks such as connection routing, authentication, and metrics collection. From a security perspective, it helps protect the integrity of the Neon platform through a combination of authentication, authorization, and other security measures.
 
 ## Neon user
 

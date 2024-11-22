@@ -3,7 +3,7 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 enableTableOfContents: true
-updatedOn: '2024-11-13T17:23:45.819Z'
+updatedOn: '2024-11-20T11:29:39.736Z'
 ---
 
 <Admonition type="note" title="Only enabled on the Free Plan">
@@ -80,7 +80,7 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 
 ## Is automatic branch archiving configurable?
 
-Branch archiving is not configurable. Arching and unarchiving happen automatically, as described above.
+Branch archiving is not configurable. Archiving and unarchiving happen automatically, as described above.
 
 ## Monitoring branch archiving
 
