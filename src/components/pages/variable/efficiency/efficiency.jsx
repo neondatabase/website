@@ -15,23 +15,27 @@ import Section from '../section';
 const items = [
   {
     icon: autoscaleIcon,
-    text: 'Neon autoscales according to traffic, dynamically adjusting CPU/memory as needed.',
+    text: 'Neon autoscales according to traffic, dynamically adjusting CPU and memory as needed.',
   },
   {
     icon: costIcon,
-    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>.',
+    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>, avoiding unexpected charges.',
   },
   {
     icon: performanceIcon,
-    text: 'You get a performance boost when you need it. ',
+    text: 'Fast performance in production without overpaying. In a typical compute bill, <a href="https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20" target="_blank" rel="noopener noreferrer">60% of costs go towards unused resources</a>. ',
   },
   {
     icon: resizeIcon,
-    text: 'No need to worry about manual resizes or downtime. ',
+    text: 'No manual resizes or downtimes. Neon scales up and down smoothly and immediately. ',
   },
   {
     icon: databaseIcon,
-    text: 'Your non-prod databases scale to zero when inactive, saving you money.',
+    text: 'Non-prod databases scale to zero when inactive. Instead of paying for compute 24/7, you skim the costs of your supporting databases to a minimum.',
+  },
+  {
+    icon: openSourceIcon,
+    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;GitHub</a>.',
   },
 ];
 
