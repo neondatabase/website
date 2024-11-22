@@ -182,19 +182,23 @@ const ContactForm = ({ formState, setFormState }) => {
       />
 
       <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
-        <p className="text-light font-ibm-plex-sans text-sm leading-tight text-gray-new-70">
+        <p className="text-light text-sm leading-tight text-gray-new-70">
           By submitting you agree to the{' '}
-          <Link className="text-white" to={LINKS.terms} theme="white-underlined">
+          <Link className="text-nowrap text-white" to={LINKS.terms} theme="white-underlined">
             Terms Service
           </Link>{' '}
           and acknowledge the{' '}
-          <Link className="text-white" to={LINKS.privacyPolicy} theme="white-underlined">
+          <Link
+            className="text-nowrap text-white"
+            to={LINKS.privacyPolicy}
+            theme="white-underlined"
+          >
             Privacy Policy
           </Link>
           .
         </p>
         <Button
-          className="min-w-[182px] py-[15px] font-medium xl:min-w-[170px] sm:w-full sm:py-[13px]"
+          className="min-w-[182px] py-[15px] font-medium xl:min-w-[160px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
           type="submit"
           theme="primary"
           size="xs"
