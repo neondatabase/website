@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-11-12T11:01:29.510Z'
+updatedOn: '2024-11-22T10:01:08.294Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, what we delivered recently, and a peek at some of the upcoming features we'll be taking on next.
