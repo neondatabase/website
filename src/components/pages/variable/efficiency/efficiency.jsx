@@ -38,14 +38,6 @@ const items = [
 const Efficiency = ({ title }) => (
   <Section className="efficiency" title={title}>
     <div className="prose-variable">
-    <Testimonial
-      text="Our database traffic peaks at nights and on weekends. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes."
-      author={{
-        name: 'Lex Nasser',
-        company: '222',
-      }}
-      url="blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand"
-    />
       <p>
         Neon solves this inefficiency via a serverless architecture. By{' '}
         <a href="/blog/architecture-decisions-in-neon">natively separating storage and compute</a>,
