@@ -9,27 +9,30 @@ redirectFrom:
 updatedOn: '2024-11-22T10:01:08.294Z'
 ---
 
-Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features that we're working on right now, what we delivered recently, and a peek at some of the upcoming features we'll be taking on next.
+Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
 
 ## What we're working on now
 
 Here's a snapshot of what we're working on now:
 
-- **Neon in the Azure Marketplace**: We already support [creating Neon databases on Azure, starting with the East US 2 region](https://neon.tech/blog/first-azure-region-available-in-neon). Now, we’re working on support for more Azure regions and a tighter integration of Neon in the Azure Marketplace. If this sounds interesting to you, [let us know](https://neon.tech/azure-marketplace).
-- **Neon in the Vercel Marketplace**: We're working on first-party Neon integration for the Vercel Marketplace. [Read the announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
-- **Larger computes**: We are working on adding support for ever-larger compute sizes.
-- **Support for exporting metrics to more monitoring platforms**: We currently support [metrics export to Datadog](/docs/guides/datadog). We'd like to expand support to other monitoring platforms and services.
-- **Private network access**: Private and secure network access to your compute resources without traversing public networks.
-- **Archive branches**: To help minimize storage costs, we would like to add support for automatically archiving inactive branches (snapshots of your data) in cost-efficient object storage like Amazon S3 or Azure Blob Storage, depending on your chosen cloud provider.
+- **Neon in the Azure Marketplace**: We already support [creating Neon databases on Azure, starting with the East US 2 region](https://neon.tech/blog/first-azure-region-available-in-neon). Now, we’re working on support for more Azure regions and an Azure Marketplace integration. If this sounds interesting to you, [let us know](https://neon.tech/azure-marketplace).
+- **Larger computes**: Coming soon to a region near you.
+- **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is currently in [Private Preview](/docs/guides/neon-private-networking).
+- **Schema Diff GitHub Action**: This action leverages our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It will be supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
+- **Archive storage on paid plans**: To minimize storage costs on paid plans, we plan to add support for automatically archiving inactive branches (snapshots of your data) in cost-efficient object storage. We've already launched a Free Plan version of this feature. See [Branch archiving](/docs/guides/branch-archiving).
 - **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
-- **Data migration assistance**: We’re working on a streamlined data migration process to make it easy for users to bring their data to Neon with minimal downtime.
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
 
 ## What we've just launched
 
+- **Migration Assistant**: Helps you migrate data to Neon from other Postgres databases. All you need to get started is a connection string for your existing database. See [Neon Migration Assistant](https://neon.tech/docs/import/migration-assistant) for instructions.
+- **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing you to manage the Neon platform directly from your Python applications.
+- **Neon in the Vercel Marketplace**: Neon is now a first-party native integration in the Vercel Marketplace. This integration lets Vercel users add Postgres to their projects and manage billing directly through Vercel. For details, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
+- **Archive Storage on the Free Plan**: Archive storage is now available on the Free Plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free Plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
 - **Neon Authorize**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-authorize).
+- **Datadog support**: You can now [export Neon metrics to Datadog](/docs/guides/datadog).
 - **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](https://neon.tech/blog/first-azure-region-available-in-neon).
 - **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](https://neon.tech/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
 - **Support for Analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://mooncake.dev/blog/3).
@@ -55,7 +58,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable Postgres logs and traces.
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
-- **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability
+- **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability.
 
 ## Join the Neon Early Access Program
 
