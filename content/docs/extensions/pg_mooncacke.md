@@ -23,7 +23,6 @@ updatedOn: '2024-10-30'
 </DocsList>
 </InfoBlock>
 
-
 The `pg_mooncake` extension introduces native columnstore tables to Postgres, enabling high-performance analytics through DuckDB execution. Columnstore tables are stored as Iceberg or Delta Lake tables in object storage, providing a simple and powerful way to handle analytic workloads directly in Postgres.
 
 The extension is maintained by Mooncake Labs and is available for Neon Postgres users.
@@ -107,7 +106,7 @@ SET duration = 150
 WHERE user_id = 1 AND activity_type = 'login';
 ```
 
-***Delete rows:**
+**\*Delete rows:**
 
 ```sql
 DELETE FROM user_activity
