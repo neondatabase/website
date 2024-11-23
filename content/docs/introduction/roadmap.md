@@ -62,7 +62,6 @@ And here's a quick list of what we'll be taking on in the near future:
 - **An email app service**: This service will provide support for email verification and password recovery workflows.
 - **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability.
 
-
 ## Join the Neon Early Access Program
 
 If you would like to get a little more involved, consider signing up for the **Neon Early Access Program**.
