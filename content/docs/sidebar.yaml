@@ -460,6 +460,8 @@
               slug: guides/neon-authorize-stytch
             - title: AWS Cognito
               slug: guides/neon-authorize-aws-cognito
+            - title: Descope
+              slug: guides/neon-authorize-descope
     - title: Integrations
       icon: integrations
       slug: guides/integrations

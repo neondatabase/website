@@ -1,14 +1,13 @@
 ---
-title: Secure your data with Auth0 and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
-  Authorize
+title: Secure your data with Descope and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Descope and Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-08T14:53:37.497Z'
+updatedOn: '2024-11-23T00:00:00.000Z'
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize">Auth0 + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-authorize">Descope + Neon Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -16,48 +15,52 @@ updatedOn: '2024-11-08T14:53:37.497Z'
 </DocsList>
 </InfoBlock>
 
-Use Auth0 with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Auth0 for user authentication. It shows you how to integrate Auth0 with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Descope with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Descope for user authentication. It shows you how to integrate Descope with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Auth0 handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Descope handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- An [Auth0](https://auth0.com/) account with an existing application (e.g., a **todos** app) that uses Auth0 for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize) for similar schema and policies in action.
+- A [Descope](https://www.descope.com/) account with an existing application (e.g., a **todos** app) that uses Descope for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize) for similar schema and policies in action.
 
-## Integrate Auth0 with Neon Authorize
+## Integrate Descope with Neon Authorize
 
-In this first set of steps, we'll integrate Auth0 as an authorization provider in Neon. When these steps are complete, Auth0 will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we’ll integrate Descope as an authorization provider in Neon. When these steps are complete, Descope will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Auth0 JWKS URL
+### 1. Get your Descope JWKS URL
 
-To integrate Auth0 with Neon, you'll need to provide your Auth0 JWKS (JSON Web Key Set) URL. This URL provides the public keys needed to verify the signatures of JWTs issued by your Auth0 application. The URL follows this format.
+When integrating Descope with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-```bash shouldWrap
-https://{YOUR_AUTH0_DOMAIN}/.well-known/jwks.json
+The Descope JWKS URL follows this format:
+
+```
+https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json
 ```
 
-First, open the **Settings** for your application in the Auth0 dashboard:
+You can locate your Descope Project ID in the Project Settings page.
 
-![find your Auth0 settings under applications - settings](/docs/guides/auth0_settings.png)
+![Find your Descope Project ID](/docs/guides/descope_project_id.png)
 
-Copy your **Domain** and use that to form your JWKS URL. For example, here's the Auth0 default domain (automatically assigned to your Auth0 tenant when you create an account).
+Replace `{YOUR_DESCOPE_PROJECT_ID}` with your actual Descope Project ID to get the JWKS URL. For example, if your Descope Project ID is `1234`, the JWKS URL would be:
 
-![find your Auth0 domain for JWKS URL](/docs/guides/auth0_neon_jwt.png)
+```
+https://api.descope.com/1234/.well-known/jwks.json
+```
 
-### 2. Add Auth0 as an authorization provider in the Neon Console
+### 2. Add Descope as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console** and add Auth0 as an authentication provider under the **Authorize** page. Paste your copied URL and Auth0 will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console** and add Descope as an authentication provider under the **Authorize** page. Paste your copied URL and Descope will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/auth0_neon_add_jwks.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/descope_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the **Authorize** page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
@@ -104,7 +107,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access Neon's HTTP API without using our driver, we recommend using the driver for best performance. The driver supports connecting over both WebSockets and HTTP, so make sure you use the [HTTP connection method](/docs/serverless/serverless-driver#use-the-driver-over-http) when working with Neon Authorize.
+Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
 
 Install it using the following command:
 
@@ -137,11 +140,11 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Auth0 with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated Descope with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
-Below are examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
+Here are examples of implementing RLS policies for a todos table – the Drizzle example leverages the simplified crudPolicy function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
@@ -149,8 +152,10 @@ Below are examples of RLS policies for a **todos** table, designed to restrict a
 
 ```typescript shouldWrap
 import { InferSelectModel, sql } from 'drizzle-orm';
-import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
 
+// schema for TODOs table
 export const todos = pgTable(
   'todos',
   {
@@ -162,31 +167,14 @@ export const todos = pgTable(
     isComplete: boolean('is_complete').notNull().default(false),
     insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (t) => ({
-    p1: pgPolicy('create todos', {
-      for: 'insert',
-      to: 'authenticated',
-      withCheck: sql`(select auth.user_id() = user_id)`,
+  // Create RLS policy for the table
+  (table) => [
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
     }),
-
-    p2: pgPolicy('view todos', {
-      for: 'select',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p3: pgPolicy('update todos', {
-      for: 'update',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p4: pgPolicy('delete todos', {
-      for: 'delete',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-  })
+  ]
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -231,9 +219,11 @@ USING ((select auth.user_id()) = user_id);
 </TabItem>
 </Tabs>
 
+The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
+
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Auth0 , restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Descope, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -243,16 +233,22 @@ With RLS policies in place, you can now query the database using JWTs from Auth0
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { getAccessToken } from '@auth0/nextjs-auth0';
+import { session } from '@descope/nextjs-sdk/server';
 
 export async function TodoList() {
+    const sessionRes = session(); // [!code highlight]
+    if (!sessionRes) {
+        throw new Error('No session found');
+    }
+
+    const { jwt } = sessionRes; // [!code highlight]
+
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            const { accessToken } = await getAccessToken(); // [!code highlight]
-            if (!accessToken) {
-                throw new Error('No access token');
+            if (!jwt) {
+                throw new Error('No JWT token available');
             }
-            return accessToken;
+            return jwt;
         },
     });
 
@@ -280,7 +276,7 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useSession } from '@descope/nextjs-sdk/client';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -289,18 +285,16 @@ const getDb = (token: string) =>
     });
 
 export function TodoList() {
-    const { getAccessTokenSilently } = useAuth0();
+    const { sessionToken } = useSession(); // [!code highlight]
     const [todos, setTodos] = useState<Array<Todo>>();
 
     useEffect(() => {
         async function loadTodos() {
-            const authToken = await getAccessTokenSilently(); // [!code highlight]
-
-            if (!authToken) {
+            if (!sessionToken) {
                 return;
             }
 
-            const sql = getDb(authToken);
+            const sql = getDb(sessionToken);
 
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
@@ -311,7 +305,7 @@ export function TodoList() {
         }
 
         loadTodos();
-    }, [getAccessTokenSilently]);
+    }, [sessionToken]);
 
     return (
         <ul>
@@ -342,5 +336,3 @@ NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 </TabItem>
 </Tabs>
-
-<NeedHelp/>
