@@ -458,6 +458,8 @@
               slug: guides/neon-authorize-auth0
             - title: Stytch
               slug: guides/neon-authorize-stytch
+            - title: AWS Cognito
+              slug: guides/neon-authorize-aws-cognito
     - title: Integrations
       icon: integrations
       slug: guides/integrations

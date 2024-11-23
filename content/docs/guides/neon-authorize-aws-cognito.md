@@ -1,13 +1,13 @@
 ---
-title: Secure your data with Stytch and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stytch and Neon Authorize
+title: Secure your data with AWS Cognito and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon Authorize
 enableTableOfContents: true
 updatedOn: '2024-11-22T00:00:00.000Z'
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize">Stytch + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-authorize">AWS Cognito + Neon Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -15,49 +15,49 @@ updatedOn: '2024-11-22T00:00:00.000Z'
 </DocsList>
 </InfoBlock>
 
-Use Stytch with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stytch for user authentication. It shows you how to integrate Stytch with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use AWS Cognito with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using AWS Cognito for user authentication. It shows you how to integrate AWS Cognito with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Stytch handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+AWS Cognito handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stytch](https://stytch.com/) account with an existing application (e.g., a **todos** app) that uses Stytch for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize) for similar schema and policies in action.
+- A [AWS Cognito](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses AWS Cognito for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize) for similar schema and policies in action.
 
-## Integrate Stytch with Neon Authorize
+## Integrate AWS Cognito with Neon Authorize
 
-In this first set of steps, we’ll integrate Stytch as an authorization provider in Neon. When these steps are complete, Stytch will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we’ll integrate AWS Cognito as an authorization provider in Neon. When these steps are complete, AWS Cognito will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Stytch JWKS URL
+### 1. Get your AWS Cognito JWKS URL
 
-When integrating Stytch with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating AWS Cognito with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The Stytch JWKS URL follows this format:
+The AWS Cognito JWKS URL follows this format:
 
-```plaintext shouldWrap
-https://test.stytch.com/v1/sessions/jwks/{YOUR_PROJECT_ID}
+```
+https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_USER_POOL_ID}/.well-known/jwks.json
 ```
 
-Replace `{YOUR_PROJECT_ID}` with your actual Stytch project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
+You can locate your JWKS URL in the AWS Cognito console under User Pools, labeled as Token Signing Key URL.
+
+![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
+
+Replace `{YOUR_AWS_COGNITO_REGION}` and `{YOUR_AWS_COGNITO_USER_POOL_ID}` with your actual AWS Cognito region and user pool ID. For example, if your region is `us-east-1` and your user pool ID is `us-east-1_XXXXXXXXX`, your JWKS URL would be:
 
 ```plaintext shouldWrap
-https://test.stytch.com/v1/sessions/jwks/my-awesome-project
+https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks.json
 ```
 
-<Admonition type="note">
-The Stytch URL provided here corresponds to a test environment and should be updated to the production URL when you're ready to deploy your application.
-</Admonition>
+### 2. Add AWS Cognito as an authorization provider in the Neon Console
 
-### 2. Add Stytch as an authorization provider in the Neon Console
-
-Once you have the JWKS URL, go to the **Neon Console** and add Stytch as an authentication provider under the **Authorize** page. Paste your copied URL and Stytch will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console** and add AWS Cognito as an authentication provider under the **Authorize** page. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/stytch_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/aws_cognito_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
@@ -140,7 +140,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Stytch with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated AWS Cognito with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -223,59 +223,60 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Stytch, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from AWS Cognito, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
 <TabItem>
 
 ```typescript shouldWrap
-'use server';
+"use server";
 
 import { neon } from '@neondatabase/serverless';
 import { cookies } from 'next/headers';
-import { Client } from 'stytch';
+import { fetchAuthSession } from "aws-amplify/auth/server";
+import { runWithAmplifyServerContext } from "@/app/utils/amplify-server-util";
 
-const client = new Client({
-    project_id: process.env.STYTCH_PROJECT_ID as string,
-    secret: process.env.STYTCH_SECRET as string,
-});
+async function getCognitoSession() {
+    try {
+        const session = await runWithAmplifyServerContext({
+            nextServerContext: { cookies },
+            operation: (contextSpec) => fetchAuthSession(contextSpec),
+        });
 
-async function getStytchSession() {
-    const cookieStore = cookies();
-    const sessionToken = cookieStore.get('stytch_session');
-    if (!sessionToken?.value) {
-        throw new Error('No session token found');
+        if (!session?.tokens?.accessToken) {
+            throw new Error('No valid session found');
+        }
+
+        return session.tokens.accessToken.toString();
+    } catch (error) {
+        console.error("Error fetching session:", error);
+        throw new Error('Failed to authenticate session');
     }
-    const response = await client.sessions.authenticate({
-        session_token: sessionToken.value,
-    });
-    return response.session_jwt;
 }
 
 export default async function TodoList() {
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            const sessionJWT = await getStytchSession(); // [!code highlight]
-            if (!sessionJWT) {
-                throw new Error('No session JWT available');
+            const sessionToken = await getCognitoSession(); // [!code highlight]
+            if (!sessionToken) {
+                throw new Error('No session token available');
             }
-            return sessionJWT;
+            return sessionToken;
         },
     });
 
-    // WHERE filter is optional because of RLS
-    // But we send it anyway for performance reasons
-    const todos = await
-      sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+        // WHERE filter is optional because of RLS.
+        // But we send it anyway for performance reasons.
+        const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-    return (
-        <ul>
+        return (
+          <ul>
             {todos.map((todo) => (
-                <li key={todo.id}>{todo.task}</li>
+              <li key={todo.id}>{todo.task}</li>
             ))}
-        </ul>
-    );
+          </ul>
+        );
 }
 ```
 
@@ -288,7 +289,7 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useStytch, useStytchUser } from "@stytch/nextjs";
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -297,33 +298,30 @@ const getDb = (token: string) =>
     });
 
 export default function TodoList() {
-    const stytch = useStytch();
-    const { user } = useStytchUser();
     const [todos, setTodos] = useState<Array<Todo>>();
 
     useEffect(() => {
         async function fetchTodos() {
-            const tokens = stytch.session.getTokens(); // [!code highlight]
-            if (!tokens) {
-                throw new Error("No tokens");
+            const session = await fetchAuthSession(); // [!code highlight]
+            const user = await getCurrentUser();
+
+            if (!session?.tokens?.accessToken || !user) {
+                return;
             }
-            if (!user) {
-                throw new Error("No user");
-            }
-            const { session_jwt: authToken } = tokens;
+
+            const authToken = session.tokens.accessToken.toString();
             const sql = getDb(authToken);
 
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-              sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+                sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
-        };
-        if (user) {
-            fetchTodos();
         }
-    }, [user]);
+
+        fetchTodos();
+    }, []);
 
     return (
         <ul>
