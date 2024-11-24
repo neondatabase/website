@@ -222,16 +222,17 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { auth } from '@stackauth/nextjs/server';
+import { stackServerApp } from "@/stack";
 
 export async function TodoList() {
+  const user = await stackServerApp.getUser();
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const token = await auth().getToken(); // [!code highlight]
-      if (!token) {
+      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
+      if (!authToken) {
         throw new Error('No token');
       }
-      return token;
+      return authToken;
     },
   });
 
@@ -258,7 +259,7 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useAuth } from '@stackauth/nextjs';
+import { useUser } from '@stackframe/stack';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -267,12 +268,12 @@ const getDb = (token: string) =>
     });
 
 export function TodoList() {
-    const { getToken } = useAuth();
+    const user = useUser();
     const [todos, setTodos] = useState<Array<Todo>>();
 
     useEffect(() => {
         async function loadTodos() {
-            const authToken = await getToken(); // [!code highlight]
+            const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
 
             if (!authToken) {
                 return;
@@ -289,7 +290,7 @@ export function TodoList() {
         }
 
         loadTodos();
-    }, [getToken]);
+    }, [user]);
 
     return (
         <ul>
