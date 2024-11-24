@@ -149,7 +149,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     In the terminal of your Azure Functions project, install either **neon** postgres driver or the **pg** package, which will be used to connect to Postgres:
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "pg"]}>
 
     ```bash
     npm install @neondatabase/serverless
@@ -231,7 +231,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `client.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "pg"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';
@@ -298,7 +298,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `hotel.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "pg"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';
@@ -346,7 +346,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `reservation.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "pg"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';
