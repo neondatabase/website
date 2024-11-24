@@ -1,6 +1,6 @@
 ---
 title: Local Development with Neon
-subtitle: Learn how to efficiently develop applications locally with Neon
+subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
@@ -10,12 +10,12 @@ updatedOn: '2024-11-05T00:00:00.000Z'
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
 
 <Admonition type="note">
-The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon. To learn more, see [The Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver).
+The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon over HTTP or WebSockets. To learn more, see [The Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver).
 </Admonition>
 
 ## Two ways to develop
 
-When working with Neon, you can choose between:
+When setting up a development environment with Neon, there are a couple of different approaches you can take:
 
 1. **Database branching**
 2. **Local PostgreSQL**
@@ -29,12 +29,12 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 ### Why use it?
 
 - **Fast setup**: Create new environments in ~1 second
-- **Zero cnfiguration**: No local PostgreSQL installation required
+- **Zero configuration**: No local PostgreSQL installation required
 - **True isolation**: Test changes without fear of breaking production
 - **Cost-efficient**: Pay only for unique data and actual compute usage
 - **Team-friendly**: Share database branches as easily as sharing Git branches
 - **Autoscaling**: Resources scale to zero when you're not coding
-- **Data reset**: Fresh start? Reset your branch to match production in seconds
+- **Data reset**: Need a fresh start or a do-over? Reset your branch to match production in seconds
 
 ### Quickstart
 
@@ -68,7 +68,11 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 5. **Install dependencies**
 
-   Dependencies includes [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+   Dependencies include [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+
+   <Admonition type="note">
+   The Neon serverless driver supports connections over HTTP and WebSockets, depending on your requirements. This setup assumes that you could be using either. For the differences, refer to the [Neon's serverless driver docs](https://neon.tech/docs/serverless/serverless-driver).
+   </Admonition>
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -113,9 +117,16 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 ## Local PostgreSQL
 
-Sometimes you need to work offline or want full control over your database. Here's how to set up a local instance that works perfectly with Neon.
+Sometimes you need to work offline or want full control over your database. Here's how to set up a local PostgreSQL instance that works perfectly with the Neon. This method uses:
 
-### Why use it?
+- The [Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to your local database (same as the database branching setup described above)
+- A Docker compose file that installs a local instance of PostgreSQL 17 and the Neon Proxy. The Neon Proxy lets you to connect to your local PostgreSQL database using the Neon serverless driver.
+
+<Admonition type="note" title="kudos">
+The Neon Proxy setup uses the [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile, developed by [TimoWilhelm](https://github.com/TimoWilhelm).
+</Admonition>
+
+### Why use this method?
 
 - **Full control**: Your own PostgreSQL instance
 - **Offline work**: Code without internet dependency
@@ -202,7 +213,7 @@ Sometimes you need to work offline or want full control over your database. Here
    export const sql = neon(connectionString);
    ```
 
-## Choosing your development approach
+## Which development approach should you use?
 
 Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach.
 
