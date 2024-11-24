@@ -68,8 +68,8 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 5. **Install dependencies**
 
-   Dependencies include [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library. 
-   
+   Dependencies include [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+
    <Admonition type="note">
    The Neon serverless driver supports connections over HTTP and WebSockets, depending on your requirements. This setup assumes that you could be using either. For the differences, refer to the [Neon's serverless driver docs](https://neon.tech/docs/serverless/serverless-driver).
    </Admonition>
@@ -118,6 +118,7 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 ## Local PostgreSQL
 
 Sometimes you need to work offline or want full control over your database. Here's how to set up a local PostgreSQL instance that works perfectly with the Neon. This method uses:
+
 - The [Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to your local database (same as the database branching setup described above)
 - A Docker compose file that installs a local instance of PostgreSQL 17 and the Neon Proxy. The Neon Proxy lets you to connect to your local PostgreSQL database using the Neon serverless driver.
 
