@@ -54,6 +54,12 @@ The tables have some common fruits such as `apple` and `orange`.
 
 The following statement returns data from the `basket_a` table:
 
+```sql
+SELECT * FROM basket_a;
+```
+
+Output:
+
 ```text
  a | fruit_a
 ---+----------
@@ -65,6 +71,12 @@ The following statement returns data from the `basket_a` table:
 ```
 
 The following statement returns data from the `basket_b` table:
+
+```sql
+SELECT * FROM basket_a;
+```
+
+Output:
 
 ```
  b |  fruit_b
