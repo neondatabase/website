@@ -74,8 +74,29 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
 ```sql shouldWrap
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous;
+-- For existing tables
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+  IN SCHEMA public
+  to authenticated;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+  IN SCHEMA public
+  to anonymous;
+
+-- For future tables
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+  TO authenticated;
+
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+  TO anonymous;
+
+-- Grant USAGE on "public" schema
+GRANT USAGE ON SCHEMA public TO authenticated;
+GRANT USAGE ON SCHEMA public TO anonymous;
 ```
 
 - **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
@@ -120,7 +141,7 @@ Now that you’ve integrated Stack Auth with Neon Authorize, you can securely pa
 
 ### 1. Add Row-Level Security policies
 
-Below are examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
+Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
@@ -128,8 +149,10 @@ Below are examples of RLS policies for a **todos** table, designed to restrict a
 
 ```typescript shouldWrap
 import { InferSelectModel, sql } from 'drizzle-orm';
-import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
 
+// schema for TODOs table
 export const todos = pgTable(
   'todos',
   {
@@ -141,31 +164,14 @@ export const todos = pgTable(
     isComplete: boolean('is_complete').notNull().default(false),
     insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (t) => ({
-    p1: pgPolicy('create todos', {
-      for: 'insert',
-      to: 'authenticated',
-      withCheck: sql`(select auth.user_id() = user_id)`,
+  // Create RLS policy for the table
+  (table) => [
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
     }),
-
-    p2: pgPolicy('view todos', {
-      for: 'select',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p3: pgPolicy('update todos', {
-      for: 'update',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p4: pgPolicy('delete todos', {
-      for: 'delete',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-  })
+  ]
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -209,6 +215,8 @@ USING ((select auth.user_id()) = user_id);
 
 </TabItem>
 </Tabs>
+
+The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
