@@ -1,14 +1,13 @@
 ---
-title: Secure your data with Stack Auth and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
-  Authorize
+title: Secure your data with Stytch and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Stytch and Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-25T13:56:23.959Z'
+updatedOn: '2024-11-22T00:00:00.000Z'
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize">Stytch + Neon Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -16,45 +15,49 @@ updatedOn: '2024-11-25T13:56:23.959Z'
 </DocsList>
 </InfoBlock>
 
-Use Stack Auth with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Stytch with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stytch for user authentication. It shows you how to integrate Stytch with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Stytch handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-authorize) for similar schema and policies in action.
+- A [Stytch](https://stytch.com/) account with an existing application (e.g., a **todos** app) that uses Stytch for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize) for similar schema and policies in action.
 
-## Integrate Stack Auth with Neon Authorize
+## Integrate Stytch with Neon Authorize
 
-In this first set of steps, we’ll integrate Stack Auth as an authorization provider in Neon. When these steps are complete, Stack Auth will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we’ll integrate Stytch as an authorization provider in Neon. When these steps are complete, Stytch will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Stack Auth JWKS URL
+### 1. Get your Stytch JWKS URL
 
-When integrating Stack Auth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating Stytch with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The Stack Auth JWKS URL follows this format:
-
-```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/{YOUR_PROJECT_ID}/.well-known/jwks.json
-```
-
-Replace `{YOUR_PROJECT_ID}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
+The Stytch JWKS URL follows this format:
 
 ```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/my-awesome-project/.well-known/jwks.json
+https://test.stytch.com/v1/sessions/jwks/{YOUR_PROJECT_ID}
 ```
 
-### 2. Add Stack Auth as an authorization provider in the Neon Console
+Replace `{YOUR_PROJECT_ID}` with your actual Stytch project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
 
-Once you have the JWKS URL, go to the **Neon Console** and add Stack Auth as an authentication provider under the **Authorize** page. Paste your copied URL and Stack Auth will be automatically recognized and selected.
+```plaintext shouldWrap
+https://test.stytch.com/v1/sessions/jwks/my-awesome-project
+```
+
+<Admonition type="note">
+The Stytch URL provided here corresponds to a test environment and should be updated to the production URL when you're ready to deploy your application.
+</Admonition>
+
+### 2. Add Stytch as an authorization provider in the Neon Console
+
+Once you have the JWKS URL, go to the **Neon Console** and add Stytch as an authentication provider under the **Authorize** page. Paste your copied URL and Stytch will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/stack_auth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/stytch_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
@@ -137,7 +140,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Stack Auth with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated Stytch with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -188,7 +191,7 @@ CREATE TABLE todos (
   user_id text not null default (auth.user_id()),
   task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null default now()
+  inserted_at timestamptz not null default now()
 );
 
 -- 1st enable row level security for your table
@@ -220,7 +223,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Stytch, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -230,24 +233,41 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { stackServerApp } from "@/stack";
+import { cookies } from 'next/headers';
+import { Client } from 'stytch';
 
-export async function TodoList() {
-  const user = await stackServerApp.getUser();
+const client = new Client({
+  project_id: process.env.STYTCH_PROJECT_ID as string,
+  secret: process.env.STYTCH_SECRET as string,
+});
+
+async function getStytchSession() {
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('stytch_session');
+  if (!sessionToken?.value) {
+    throw new Error('No session token found');
+  }
+  const response = await client.sessions.authenticate({
+    session_token: sessionToken.value,
+  });
+  return response.session_jwt;
+}
+
+export default async function TodoList() {
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
-      if (!authToken) {
-        throw new Error('No token');
+      const sessionJWT = await getStytchSession(); // [!code highlight]
+      if (!sessionJWT) {
+        throw new Error('No session JWT available');
       }
-      return authToken;
+      return sessionJWT;
     },
   });
 
-  // WHERE filter is optional because of RLS.
-  // But we send it anyway for performance reasons.
-  const todos = await 
-    sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+  // WHERE filter is optional because of RLS
+  // But we send it anyway for performance reasons
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -268,7 +288,7 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useUser } from '@stackframe/stack';
+import { useStytch, useStytchUser } from "@stytch/nextjs";
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -276,18 +296,21 @@ const getDb = (token: string) =>
     authToken: token, // [!code highlight]
   });
 
-export function TodoList() {
-  const user = useUser();
+export default function TodoList() {
+  const stytch = useStytch();
+  const { user } = useStytchUser();
   const [todos, setTodos] = useState<Array<Todo>>();
 
   useEffect(() => {
-    async function loadTodos() {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
-
-      if (!authToken) {
-        return;
+    async function fetchTodos() {
+      const tokens = stytch.session.getTokens(); // [!code highlight]
+      if (!tokens) {
+        throw new Error("No tokens");
       }
-
+      if (!user) {
+        throw new Error("No user");
+      }
+      const { session_jwt: authToken } = tokens;
       const sql = getDb(authToken);
 
       // WHERE filter is optional because of RLS.
@@ -296,9 +319,10 @@ export function TodoList() {
         sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
       setTodos(todosResponse as Array<Todo>);
+    };
+    if (user) {
+      fetchTodos();
     }
-
-    loadTodos();
   }, [user]);
 
   return (

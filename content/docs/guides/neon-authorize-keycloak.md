@@ -1,63 +1,58 @@
 ---
-title: Secure your data with Auth0 and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
-  Authorize
+title: Secure your data with Keycloak and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-25T13:56:23.955Z'
+updatedOn: '2024-11-23T00:00:00.000Z'
 ---
 
 <InfoBlock>
-<DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize">Auth0 + Neon Authorize</a>
-</DocsList>
-
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
 </DocsList>
 </InfoBlock>
 
-Use Auth0 with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Auth0 for user authentication. It shows you how to integrate Auth0 with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Keycloak with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Keycloak for user authentication. It shows you how to integrate Keycloak with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Auth0 handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Keycloak handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- An [Auth0](https://auth0.com/) account with an existing application (e.g., a **todos** app) that uses Auth0 for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize) for similar schema and policies in action.
+- A [Keycloak](https://www.keycloak.org/) instance with an existing application (e.g., a todos app) that uses Keycloak for user authentication.
 
-## Integrate Auth0 with Neon Authorize
+## Integrate Keycloak with Neon Authorize
 
-In this first set of steps, we'll integrate Auth0 as an authorization provider in Neon. When these steps are complete, Auth0 will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we’ll integrate Keycloak as an authorization provider in Neon. When these steps are complete, Keycloak will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Auth0 JWKS URL
+### 1. Get your Keycloak JWKS
 
-To integrate Auth0 with Neon, you'll need to provide your Auth0 JWKS (JSON Web Key Set) URL. This URL provides the public keys needed to verify the signatures of JWTs issued by your Auth0 application. The URL follows this format.
+<Admonition type="note">
+  To ensure compatibility with Neon Authorize, configure Keycloak to use only one signing algorithm (RS256 or ES256). You can verify this by opening the JWKS URL and checking the keys manually.
+</Admonition>
 
-```bash shouldWrap
-https://{YOUR_AUTH0_DOMAIN}/.well-known/jwks.json
+When integrating Keycloak with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+
+The Keycloak JWKS URL follows this format:
+
+```
+https://{YOUR_KEYCLOAK_DOMAIN}/auth/realms/{YOUR_REALM}/protocol/openid-connect/certs
 ```
 
-First, open the **Settings** for your application in the Auth0 dashboard:
+Replace `{YOUR_KEYCLOAK_DOMAIN}` with your Keycloak domain and `{YOUR_REALM}` with your Keycloak realm.
 
-![find your Auth0 settings under applications - settings](/docs/guides/auth0_settings.png)
+### 2. Add Keycloak as an authorization provider in the Neon Console
 
-Copy your **Domain** and use that to form your JWKS URL. For example, here's the Auth0 default domain (automatically assigned to your Auth0 tenant when you create an account).
-
-![find your Auth0 domain for JWKS URL](/docs/guides/auth0_neon_jwt.png)
-
-### 2. Add Auth0 as an authorization provider in the Neon Console
-
-Once you have the JWKS URL, go to the **Neon Console** and add Auth0 as an authentication provider under the **Authorize** page. Paste your copied URL and Auth0 will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console** and add Keycloak as an authentication provider under the **Authorize** page. Paste your copied URL and Keycloak will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/auth0_neon_add_jwks.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/keycloak_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the **Authorize** page in Neon to complete the setup — this guide is modelled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
@@ -104,7 +99,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access Neon's HTTP API without using our driver, we recommend using the driver for best performance. The driver supports connecting over both WebSockets and HTTP, so make sure you use the [HTTP connection method](/docs/serverless/serverless-driver#use-the-driver-over-http) when working with Neon Authorize.
+Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
 
 Install it using the following command:
 
@@ -137,7 +132,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Auth0 with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated Keycloak with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -188,7 +183,7 @@ CREATE TABLE todos (
   user_id text not null default (auth.user_id()),
   task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null default now()
+  inserted_at timestamptz not null default now()
 );
 
 -- 1st enable row level security for your table
@@ -220,7 +215,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Auth0 , restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Keycloak, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -230,31 +225,36 @@ With RLS policies in place, you can now query the database using JWTs from Auth0
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { getAccessToken } from '@auth0/nextjs-auth0';
+import { getUserInfo } from '@/lib/auth'
 
-export async function TodoList() {
-    const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-        authToken: async () => {
-            const { accessToken } = await getAccessToken(); // [!code highlight]
-            if (!accessToken) {
-                throw new Error('No access token');
-            }
-            return accessToken;
-        },
-    });
+export default async function TodoList() {
+  const userInfo = await getUserInfo() // [!code highlight]
+  if (!userInfo) {
+    throw new Error('No user info available');
+  }
 
-    // WHERE filter is optional because of RLS.
-    // But we send it anyway for performance reasons.
-    const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: async () => {
+      const jwt = userInfo.token; // [!code highlight]
+      if (!jwt) {
+        throw new Error('No JWT token available');
+      }
+      return jwt;
+    },
+  });
 
-    return (
-        <ul>
-            {todos.map((todo) => (
-                <li key={todo.id}>{todo.task}</li>
-            ))}
-        </ul>
-    );
+  // WHERE filter is optional because of RLS.
+  // But we send it anyway for performance reasons.
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -267,48 +267,46 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useKeycloak } from '@react-keycloak/web';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
-    });
+  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+    authToken: token, // [!code highlight]
+  });
 
-export function TodoList() {
-    const { getAccessTokenSilently } = useAuth0();
-    const [todos, setTodos] = useState<Array<Todo>>();
+export default function TodoList() {
+  const { keycloak, initialized } = useKeycloak();
+  const [todos, setTodos] = useState<Array<Todo>>();
 
-    useEffect(() => {
-        async function loadTodos() {
-            const authToken = await getAccessTokenSilently(); // [!code highlight]
+  useEffect(() => {
+    async function loadTodos() {
+      const sessionToken = keycloak.token; // [!code highlight]
+      if (!sessionToken) {
+        return;
+      }
+      const sql = getDb(sessionToken);
 
-            if (!authToken) {
-                return;
-            }
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
+      const todosResponse = await
+        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-            const sql = getDb(authToken);
+      setTodos(todosResponse as Array<Todo>);
+    }
 
-            // WHERE filter is optional because of RLS.
-            // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+    loadTodos();
+  }, [initialized, keycloak.authenticated]);
 
-            setTodos(todosResponse as Array<Todo>);
-        }
-
-        loadTodos();
-    }, [getAccessTokenSilently]);
-
-    return (
-        <ul>
-            {todos?.map((todo) => (
-                <li key={todo.id}>
-                    {todo.task}
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          {todo.task}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -329,5 +327,3 @@ NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 </TabItem>
 </Tabs>
-
-<NeedHelp/>
