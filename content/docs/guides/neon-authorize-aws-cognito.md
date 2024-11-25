@@ -42,7 +42,7 @@ The AWS Cognito JWKS URL follows this format:
 https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_USER_POOL_ID}/.well-known/jwks.json
 ```
 
-You can locate your JWKS URL in the AWS Cognito console under User Pools, labeled as Token Signing Key URL.
+You can locate your JWKS URL in the AWS Cognito console under User pools, labeled as Token signing key URL.
 
 ![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
 
@@ -202,7 +202,7 @@ CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
 
-CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+CREATE POLICY "Individuals can view their own todos." ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
 

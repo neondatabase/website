@@ -198,7 +198,7 @@ CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
 
-CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+CREATE POLICY "Individuals can view their own todos." ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
 
