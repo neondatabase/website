@@ -41,7 +41,7 @@ The Free Plan includes the following usage allowances:
 | **Projects**               | 10 Neon projects                                                                                                                                         |
 | **Branches**               | 10 branches per project                                                                                                                                  |
 | **Databases**              | 500 per branch                                                                                                                                           |
-| **Storage**                | 0.5 GiB                                                                                                                                                  |
+| **Storage**                | 0.5 GiB months (includes archive storage)                                                                                                                                               |
 | **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
 
@@ -88,17 +88,19 @@ The Launch plan includes the following usage allowances:
 | **Projects**  | 100 Neon projects                                                |
 | **Branches**  | 500 per project                                                  |
 | **Databases** | 500 per branch                                                   |
-| **Storage**   | 10 GiB of data storage                                           |
+| **Storage**   | 10 GiB months                                                    |
+| **Archive Storage**   | 50 GiB months                                            |
 | **Compute**   | 300 compute hours per month for all computes across all projects |
 
 ### Launch plan extra usage
 
 Launch plan users have access to [extra compute and storage](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
 
-| Extra usage type  | Cost                                                                   |
-| ----------------- | ---------------------------------------------------------------------- |
-| **Extra Storage** | Billed for in units of 2 GiB at $3.50 per unit, prorated for the month |
-| **Extra Compute** | Billed by compute hour at $0.16 per hour                               |
+| Extra usage type  | Cost                          |
+| ----------------- | ----------------------------- |
+| **Extra Storage** | $1.75 per GiB-month           |
+| **Extra Archive Storage** | $0.10 per GiB-month   |
+| **Extra Compute** | $0.16 per compute hour        |
 
 ### Launch plan features
 
@@ -125,6 +127,7 @@ The Scale plan includes the following usage allowances:
 | **Branches**  | 500 per project                                                  |
 | **Databases** | 500 per branch                                                   |
 | **Storage**   | 50 GiB of data storage                                           |
+| **Archive Storage**   | 250 GiB months                                           |
 | **Compute**   | 750 compute hours per month for all computes across all projects |
 
 ### Scale plan extra usage
@@ -134,6 +137,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 | Extra usage type   | Cost                                                              |
 | ------------------ | ----------------------------------------------------------------- |
 | **Extra Storage**  | Billed in units of 10 GiB at $15 per unit, prorated for the month |
+| **Extra Archive Storage** | $0.10 per GiB-month                                        |
 | **Extra Compute**  | Billed by compute hour at $0.16 per hour                          |
 | **Extra Projects** | Billed for in units of 10 at $50 per unit                         |
 
