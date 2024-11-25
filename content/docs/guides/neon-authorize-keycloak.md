@@ -28,7 +28,11 @@ To follow along with this guide, you will need:
 
 In this first set of steps, we’ll integrate Keycloak as an authorization provider in Neon. When these steps are complete, Keycloak will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Keycloak JWKS URL
+### 1. Get your Keycloak JWKS
+
+<Admonition type="note">
+  To ensure compatibility with Neon Authorize, configure Keycloak to use only one signing algorithm (RS256 or ES256). You can verify this by opening the JWKS URL and checking the keys manually.
+</Admonition>
 
 When integrating Keycloak with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
@@ -132,7 +136,7 @@ Now that you’ve integrated Keycloak with Neon Authorize, you can securely pass
 
 ### 1. Add Row-Level Security policies
 
-Here are examples of implementing RLS policies for a todos table – the Drizzle example leverages the simplified crudPolicy function, while the SQL example demonstrates the use of individual RLS policies.
+Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
