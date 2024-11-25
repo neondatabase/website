@@ -26,12 +26,8 @@ You can find this action on the **GitHub Actions Marketplace**: [Neon Database C
 
 ### Prerequisites
 
-- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-  4. Click **Add Secret**.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -128,12 +124,8 @@ You can find this action on the **GitHub Actions Marketplace**: [Neon Database D
 
 ### Prerequisites
 
-- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-  4. Click **Add Secret**.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -184,12 +176,8 @@ You can find this action on the **GitHub Actions Marketplace**: [Neon Database R
 
 ### Prerequisites
 
-- Using this action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
-  4. Click **Add Secret**.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -299,14 +287,8 @@ You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Dif
 
 ### Prerequisites
 
-Using the action requires adding a Neon API key to your GitHub Secrets. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-
-1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-2. Click **Actions** > **New Repository Secret**.
-3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-4. Click **Add Secret**.
-
-Alternatively, the **Neon GitHub Integration** can perform the API key setup for you. See [Neon GitHub integration](/docs/guides/neon-github-integration).
+- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -337,6 +319,7 @@ on:
 
 jobs:
   schema_diff:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Schema Diff
@@ -358,6 +341,13 @@ The branches to compare are specified by the `compare_branch` and `base_branch` 
 - The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
+- `permissions: write-all` allows comments to be written on pull requests in public or private repositories. Alternatively, to be less permissive, you could use:
+  
+    ```yaml
+    permissions
+      pull-requests: write
+      contents: write
+    ```
 
 After performing the schema diff comparison:
 
@@ -417,6 +407,30 @@ The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in
 ![A schema diff action comment as appears in a pull request](/docs/guides/schema_diff_comment.png)
 
 The `comment_url` allows you to easily share the schema diff for review. It also allows developers or scripts to access the comment programmatically for use in other automations.
+
+## Add a Neon API key to your GitHub repository secrets
+
+Using Neon's GitHub Actions requires adding a Neon API key to your GitHub repository secrets. There
+are two ways you can perform this setup:
+
+- **Using the Neon GitHub Integration** (recommended) — this integration
+  connects your Neon project to your GitHub repository, creates an API key, and
+  sets the API key in your GitHub repository for you. See
+  [Neon GitHub Integration](/docs/guides/neon-github-integration) for
+  instructions.
+
+- **Manual setup** — this method requires obtaining a Neon API key and
+  configuring it manually in your GitHub repository.
+
+  1. Obtain a Neon API key. See
+     [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key)
+     for instructions.
+  1. In your GitHub repository, go to **Project settings** and locate
+     **Secrets** at the bottom of the left sidebar.
+  1. Click **Actions** > **New Repository Secret**.
+  1. Name the secret `NEON_API_KEY` and paste your API key in the **Secret**
+     field
+  1. Click **Add Secret**.
 
 ## Example applications
 
