@@ -1,8 +1,9 @@
 ---
 title: Secure your data with Azure Active Directory and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory
+  and Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-23T00:00:00.000Z'
+updatedOn: '2024-11-25T21:28:12.839Z'
 ---
 
 <InfoBlock>
