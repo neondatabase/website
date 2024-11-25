@@ -342,12 +342,12 @@ The branches to compare are specified by the `compare_branch` and `base_branch` 
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
 - `permissions: write-all` allows comments to be written on pull requests in public or private repositories. Alternatively, to be less permissive, you could use:
-  
-    ```yaml
-    permissions
-      pull-requests: write
-      contents: write
-    ```
+
+  ```yaml
+  permissions
+    pull-requests: write
+    contents: write
+  ```
 
 After performing the schema diff comparison:
 
