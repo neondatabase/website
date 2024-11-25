@@ -8,13 +8,15 @@ redirectFrom:
 updatedOn: '2024-10-11T17:41:59.146Z'
 ---
 
-The Neon GitHub integration connects your Neon projects to corresponding GitHub repositories, helping you incorporate your database into your developer workflow. For example, create a database branch for each pull request using GitHub Actions. We’ll provide you with a sample GitHub Actions workflow to help you get started.
+The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
 
 ## How it works
 
-The integration installs the GitHub App, letting you select which repositories you want to make accessible to Neon. When you connect a particular project to an available repository in GitHub, the integration uses the GitHub App to set a Neon API key secret and a Neon project ID variable in the selected repository. Your project is now connected, and you can use GitHub Actions to include this project’s database in your workflow.
+The integration installs the GitHub App, letting you select which repositories you want to make accessible to Neon. When you connect a Neon project to a GitHub repository, the integration sets a Neon API key secret and Neon project ID variable in your repository, which are used by your GitHub Actions workflow to interact with your Neon project.
 
-The sample workflow is intended as a basic template you can expand on or customize to build your own workflows.
+<Admonition type="note">
+The [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository) we provide is intended as a basic template you can expand on or customize to build your own workflows.
+</Admonition>
 
 This guide walks you through the following steps:
 
@@ -24,10 +26,8 @@ This guide walks you through the following steps:
 
 ## Prerequisites
 
-The steps described below assume the following:
-
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
-- You have a GitHub account and a repository that you want to connect to your Neon project.
+- You have a GitHub account with an application repository that you want to connect to your Neon project.
 
 ## Install the GitHub App and connect your Neon project
 
@@ -49,9 +49,10 @@ To get started:
 
 The sample GitHub Actions workflow includes:
 
-- A `Create Neon Branch` action that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
+- A [Create branch action](/docs/guides/branching-github-actions#create-branch-action) that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - Code that you can uncomment to add a database migration command to your workflow.
-- A `Delete Neon Branch` action that deletes the Neon branch from your Neon project when you close the pull request.
+- Code that you can uncomment to add a [Schema diff action](/docs/guides/branching-github-actions#schema-diff-action) that diffs database schemas and posts the diff as a comment in your pull request.
+- A [Delete branch action](/docs/guides/branching-github-actions#delete-branch-action) that deletes the Neon branch from your Neon project when you close the pull request.
 
 ```yaml
 name: Create/Delete Branch for Pull Request
@@ -106,11 +107,32 @@ jobs:
   # "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}".
   # It's important you don't log the DATABASE_URL as output as it contains a username and
   # password for your database.
+  #
   # For example, you can uncomment the lines below to run a database migration command:
   #      - name: Run Migrations
   #        run: npm run db:migrate
   #        env:
   #          DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}"
+  #
+  # You can also add a Schema Diff action to compare the database schema on the new
+  # branch with the base branch. This action automatically writes the schema differences
+  # as a comment on your GitHub pull request, making it easy to review changes.
+  #
+  # steps:
+  #   - name: Schema Diff
+  #     if: |
+  #       github.event_name == 'pull_request' && (
+  #       github.event.action == 'synchronize'
+  #       || github.event.action == 'opened'
+  #       || github.event.action == 'reopened')
+  #     uses: neondatabase/schema-diff-action@v1
+  #     with:
+  #       project_id: ${{ vars.NEON_PROJECT_ID }}
+  #       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+  #       base_branch: main
+  #       api_key: ${{ secrets.NEON_API_KEY }}
+  #       database: mydatabase
+  #       username: myrole
 
   delete_neon_branch:
     name: Delete Neon Branch

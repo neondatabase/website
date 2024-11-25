@@ -75,7 +75,7 @@ name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
   Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v4
+    uses: neondatabase/create-branch-action@v5
     with:
       project_id: rapid-haze-373089
       parent_id: br-long-forest-224191
