@@ -141,7 +141,7 @@ Now that you’ve integrated Stack Auth with Neon Authorize, you can securely pa
 
 ### 1. Add Row-Level Security policies
 
-Here are examples of implementing RLS policies for a todos table – the Drizzle example leverages the simplified crudPolicy function, while the SQL example demonstrates the use of individual RLS policies.
+Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
