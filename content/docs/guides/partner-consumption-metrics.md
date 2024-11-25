@@ -2,7 +2,7 @@
 title: Querying consumption metrics
 subtitle: Learn how to get a variety of consumption metrics using the Neon API
 redirectFrom:
-  - /docs/guides/partner-consumption-metrics
+  - /docs/guides/metrics-api
 enableTableOfContents: true
 updatedOn: '2024-11-25T14:44:05.633Z'
 ---
