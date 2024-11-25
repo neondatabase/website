@@ -36,7 +36,7 @@ This setup simply involves setting environment variables in Vercel to connect yo
 
 <DetailIconCards>
 
-<a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project to Neon manually (no integration)" icon="vercel">Connect Vercel and Neon manually</a>
+<a href="/docs/guides/vercel-manual" description="Connect your Vercel project to Neon manually (no integration)" icon="vercel">Connect Vercel and Neon manually</a>
 
 </DetailIconCards>
 
