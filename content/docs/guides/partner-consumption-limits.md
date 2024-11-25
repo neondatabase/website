@@ -3,7 +3,7 @@ title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 enableTableOfContents: true
 redirectFrom:
-  - /docs/guides/partner-consumption-limits
+  - /docs/guides/partner-billing
 isDraft: false
 updatedOn: '2024-11-25T14:44:05.630Z'
 ---
