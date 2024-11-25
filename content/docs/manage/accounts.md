@@ -8,7 +8,7 @@ updatedOn: '2024-09-26T21:28:36.972Z'
 Neon offers two account types for you to choose from:
 
 - **Personal account**
-- **Organization account** (beta)
+- **Organization account**
 
 ## Personal accounts
 
@@ -24,8 +24,6 @@ If you want to work with other people on this project, your options are:
 - [Transfer](/docs/manage/orgs-project-transfer) the project from a personal to an Organization-level project, where you can then invite other users
 
 ## Organization accounts
-
-<FeatureBeta/>
 
 Any Neon paid account user can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows you to share projects with your team members. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to.
 

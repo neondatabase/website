@@ -4,8 +4,6 @@ enableTableOfContents: true
 updatedOn: '2024-09-19T14:13:04.118Z'
 ---
 
-<FeatureBeta/>
-
 When creating an organization as an Admin &#8212; or as a member of an organization that's already up and running &#8212; you may need to transfer existing projects from your personal account to your target organization.
 
 ## Guidelines

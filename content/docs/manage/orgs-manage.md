@@ -4,8 +4,6 @@ enableTableOfContents: true
 updatedOn: '2024-11-01T10:14:56.350Z'
 ---
 
-<FeatureBeta/>
-
 Learn how to manage your organization's projects, invite Members and Collaborators, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
 <div style={{ display: 'flex' }}>
