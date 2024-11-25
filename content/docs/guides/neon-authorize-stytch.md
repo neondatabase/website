@@ -237,45 +237,45 @@ import { cookies } from 'next/headers';
 import { Client } from 'stytch';
 
 const client = new Client({
-    project_id: process.env.STYTCH_PROJECT_ID as string,
-    secret: process.env.STYTCH_SECRET as string,
+  project_id: process.env.STYTCH_PROJECT_ID as string,
+  secret: process.env.STYTCH_SECRET as string,
 });
 
 async function getStytchSession() {
-    const cookieStore = cookies();
-    const sessionToken = cookieStore.get('stytch_session');
-    if (!sessionToken?.value) {
-        throw new Error('No session token found');
-    }
-    const response = await client.sessions.authenticate({
-        session_token: sessionToken.value,
-    });
-    return response.session_jwt;
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('stytch_session');
+  if (!sessionToken?.value) {
+    throw new Error('No session token found');
+  }
+  const response = await client.sessions.authenticate({
+    session_token: sessionToken.value,
+  });
+  return response.session_jwt;
 }
 
 export default async function TodoList() {
-    const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-        authToken: async () => {
-            const sessionJWT = await getStytchSession(); // [!code highlight]
-            if (!sessionJWT) {
-                throw new Error('No session JWT available');
-            }
-            return sessionJWT;
-        },
-    });
+  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: async () => {
+      const sessionJWT = await getStytchSession(); // [!code highlight]
+      if (!sessionJWT) {
+        throw new Error('No session JWT available');
+      }
+      return sessionJWT;
+    },
+  });
 
-    // WHERE filter is optional because of RLS
-    // But we send it anyway for performance reasons
-    const todos = await
-      sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  // WHERE filter is optional because of RLS
+  // But we send it anyway for performance reasons
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-    return (
-        <ul>
-            {todos.map((todo) => (
-                <li key={todo.id}>{todo.task}</li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -292,48 +292,48 @@ import { useStytch, useStytchUser } from "@stytch/nextjs";
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
-    });
+  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+    authToken: token, // [!code highlight]
+  });
 
 export default function TodoList() {
-    const stytch = useStytch();
-    const { user } = useStytchUser();
-    const [todos, setTodos] = useState<Array<Todo>>();
+  const stytch = useStytch();
+  const { user } = useStytchUser();
+  const [todos, setTodos] = useState<Array<Todo>>();
 
-    useEffect(() => {
-        async function fetchTodos() {
-            const tokens = stytch.session.getTokens(); // [!code highlight]
-            if (!tokens) {
-                throw new Error("No tokens");
-            }
-            if (!user) {
-                throw new Error("No user");
-            }
-            const { session_jwt: authToken } = tokens;
-            const sql = getDb(authToken);
+  useEffect(() => {
+    async function fetchTodos() {
+      const tokens = stytch.session.getTokens(); // [!code highlight]
+      if (!tokens) {
+        throw new Error("No tokens");
+      }
+      if (!user) {
+        throw new Error("No user");
+      }
+      const { session_jwt: authToken } = tokens;
+      const sql = getDb(authToken);
 
-            // WHERE filter is optional because of RLS.
-            // But we send it anyway for performance reasons.
-            const todosResponse = await
-              sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
+      const todosResponse = await
+        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-            setTodos(todosResponse as Array<Todo>);
-        };
-        if (user) {
-            fetchTodos();
-        }
-    }, [user]);
+      setTodos(todosResponse as Array<Todo>);
+    };
+    if (user) {
+      fetchTodos();
+    }
+  }, [user]);
 
-    return (
-        <ul>
-            {todos?.map((todo) => (
-                <li key={todo.id}>
-                    {todo.task}
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          {todo.task}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 

@@ -238,45 +238,45 @@ import { fetchAuthSession } from "aws-amplify/auth/server";
 import { runWithAmplifyServerContext } from "@/app/utils/amplify-server-util";
 
 async function getCognitoSession() {
-    try {
-        const session = await runWithAmplifyServerContext({
-            nextServerContext: { cookies },
-            operation: (contextSpec) => fetchAuthSession(contextSpec),
-        });
+  try {
+    const session = await runWithAmplifyServerContext({
+      nextServerContext: { cookies },
+      operation: (contextSpec) => fetchAuthSession(contextSpec),
+    });
 
-        if (!session?.tokens?.accessToken) {
-            throw new Error('No valid session found');
-        }
-
-        return session.tokens.accessToken.toString();
-    } catch (error) {
-        console.error("Error fetching session:", error);
-        throw new Error('Failed to authenticate session');
+    if (!session?.tokens?.accessToken) {
+      throw new Error('No valid session found');
     }
+
+    return session.tokens.accessToken.toString();
+  } catch (error) {
+    console.error("Error fetching session:", error);
+    throw new Error('Failed to authenticate session');
+  }
 }
 
 export default async function TodoList() {
-    const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-        authToken: async () => {
-            const sessionToken = await getCognitoSession(); // [!code highlight]
-            if (!sessionToken) {
-                throw new Error('No session token available');
-            }
-            return sessionToken;
-        },
-    });
+  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: async () => {
+      const sessionToken = await getCognitoSession(); // [!code highlight]
+      if (!sessionToken) {
+        throw new Error('No session token available');
+      }
+      return sessionToken;
+    },
+  });
 
-        // WHERE filter is optional because of RLS.
-        // But we send it anyway for performance reasons.
-        const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  // WHERE filter is optional because of RLS.
+  // But we send it anyway for performance reasons.
+  const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-        return (
-          <ul>
-            {todos.map((todo) => (
-              <li key={todo.id}>{todo.task}</li>
-            ))}
-          </ul>
-        );
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -293,45 +293,45 @@ import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
-    });
+  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+    authToken: token, // [!code highlight]
+  });
 
 export default function TodoList() {
-    const [todos, setTodos] = useState<Array<Todo>>();
+  const [todos, setTodos] = useState<Array<Todo>>();
 
-    useEffect(() => {
-        async function fetchTodos() {
-            const session = await fetchAuthSession(); // [!code highlight]
-            const user = await getCurrentUser();
+  useEffect(() => {
+    async function fetchTodos() {
+      const session = await fetchAuthSession(); // [!code highlight]
+      const user = await getCurrentUser();
 
-            if (!session?.tokens?.accessToken || !user) {
-                return;
-            }
+      if (!session?.tokens?.accessToken || !user) {
+        return;
+      }
 
-            const authToken = session.tokens.accessToken.toString();
-            const sql = getDb(authToken);
+      const authToken = session.tokens.accessToken.toString();
+      const sql = getDb(authToken);
 
-            // WHERE filter is optional because of RLS.
-            // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
+      const todosResponse = await
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-            setTodos(todosResponse as Array<Todo>);
-        }
+      setTodos(todosResponse as Array<Todo>);
+    }
 
-        fetchTodos();
-    }, []);
+    fetchTodos();
+  }, []);
 
-    return (
-        <ul>
-            {todos?.map((todo) => (
-                <li key={todo.id}>
-                    {todo.task}
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          {todo.task}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 

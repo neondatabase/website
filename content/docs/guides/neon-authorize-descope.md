@@ -236,34 +236,34 @@ import { neon } from '@neondatabase/serverless';
 import { session } from '@descope/nextjs-sdk/server';
 
 export async function TodoList() {
-    const sessionRes = session(); // [!code highlight]
-    if (!sessionRes) {
-        throw new Error('No session found');
-    }
+  const sessionRes = session(); // [!code highlight]
+  if (!sessionRes) {
+    throw new Error('No session found');
+  }
 
-    const { jwt } = sessionRes; // [!code highlight]
+  const { jwt } = sessionRes; // [!code highlight]
 
-    const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-        authToken: async () => {
-            if (!jwt) {
-                throw new Error('No JWT token available');
-            }
-            return jwt;
-        },
-    });
+  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: async () => {
+      if (!jwt) {
+        throw new Error('No JWT token available');
+      }
+      return jwt;
+    },
+  });
 
-    // WHERE filter is optional because of RLS.
-    // But we send it anyway for performance reasons.
-    const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  // WHERE filter is optional because of RLS.
+  // But we send it anyway for performance reasons.
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-    return (
-        <ul>
-            {todos.map((todo) => (
-                <li key={todo.id}>{todo.task}</li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -280,42 +280,42 @@ import { useSession } from '@descope/nextjs-sdk/client';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
-    });
+  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+    authToken: token, // [!code highlight]
+  });
 
 export function TodoList() {
-    const { sessionToken } = useSession(); // [!code highlight]
-    const [todos, setTodos] = useState<Array<Todo>>();
+  const { sessionToken } = useSession(); // [!code highlight]
+  const [todos, setTodos] = useState<Array<Todo>>();
 
-    useEffect(() => {
-        async function loadTodos() {
-            if (!sessionToken) {
-                return;
-            }
+  useEffect(() => {
+    async function loadTodos() {
+      if (!sessionToken) {
+        return;
+      }
 
-            const sql = getDb(sessionToken);
+      const sql = getDb(sessionToken);
 
-            // WHERE filter is optional because of RLS.
-            // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
+      const todosResponse = await
+        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-            setTodos(todosResponse as Array<Todo>);
-        }
+      setTodos(todosResponse as Array<Todo>);
+    }
 
-        loadTodos();
-    }, [sessionToken]);
+    loadTodos();
+  }, [sessionToken]);
 
-    return (
-        <ul>
-            {todos?.map((todo) => (
-                <li key={todo.id}>
-                    {todo.task}
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          {todo.task}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 

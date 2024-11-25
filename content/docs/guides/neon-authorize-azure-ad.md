@@ -221,7 +221,48 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 With RLS policies in place, you can now query the database using JWTs from Azure Active Directory, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
-<Tabs labels={["client-component.tsx",".env"]}>
+<Tabs labels={["server-component.tsx", "client-component.tsx",".env"]}>
+
+<TabItem>
+
+```typescript shouldWrap
+'use server';
+
+import { neon } from '@neondatabase/serverless';
+import { getUserInfo } from '@/lib/auth'
+
+export default async function TodoList() {
+  const userInfo = await getUserInfo(); // [!code highlight]
+  if (!userInfo) {
+    throw new Error('No user info available');
+  }
+
+  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: async () => {
+      const jwt = userInfo.token; // [!code highlight]
+      if (!jwt) {
+        throw new Error('No JWT token available');
+      }
+      return jwt;
+    },
+  });
+
+  // WHERE filter is optional because of RLS.
+  // But we send it anyway for performance reasons.
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+</TabItem>
 
 <TabItem>
 
@@ -235,7 +276,7 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
   neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-    authToken: token,
+    authToken: token, // [!code highlight]
   });
 
 export default function TodoList() {
@@ -254,13 +295,13 @@ export default function TodoList() {
         return;
       }
 
-      const authToken = activeAccount.idToken;
+      const authToken = activeAccount.idToken; // [!code highlight]
       const sql = getDb(authToken);
 
       // WHERE filter is optional because of RLS.
       // But we send it anyway for performance reasons.
       const todosResponse = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
       setTodos(todosResponse as Array<Todo>);
     }
@@ -287,6 +328,9 @@ export default function TodoList() {
 ```bash shouldWrap
 # Used for database migrations
 DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
+
+# Used for server-side fetching
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Used for client-side fetching
 NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
