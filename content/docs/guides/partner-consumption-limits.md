@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2024-11-19T09:18:06.591Z'
+updatedOn: '2024-11-25T14:44:05.630Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
