@@ -913,9 +913,9 @@
         - title: OAuth integration
           slug: guides/oauth-integration
         - title: Configure consumption limits
-          slug: guides/partner-billing
+          slug: guides/partner-consumption-limits
         - title: Query consumption metrics
-          slug: guides/metrics-api
+          slug: guides/partner-consumption-metrics
     - title: Glossary
       slug: reference/glossary
       icon: glossary

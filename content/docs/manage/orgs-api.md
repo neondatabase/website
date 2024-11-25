@@ -220,7 +220,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-billing#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
 
 ## List all organizations you belong to
 

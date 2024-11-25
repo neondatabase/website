@@ -188,4 +188,4 @@ curl --request GET \
 }
 ```
 
-For related information, see [Retrieving details about a project](/docs/guides/partner-billing#retrieving-details-about-a-project).
+For related information, see [Retrieving details about a project](/docs/guides/partner-consumption-limits#retrieving-details-about-a-project).
