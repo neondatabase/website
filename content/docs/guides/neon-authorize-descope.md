@@ -191,7 +191,7 @@ CREATE TABLE todos (
   user_id text not null default (auth.user_id()),
   task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null default now()
+  inserted_at timestamptz not null default now()
 );
 
 -- 1st enable row level security for your table
