@@ -246,7 +246,7 @@ export async function TodoList() {
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await 
+  const todos = await
     sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
   return (
