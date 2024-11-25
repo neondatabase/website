@@ -3,7 +3,7 @@ title: Secure your data with Auth0 and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-08T14:53:37.497Z'
+updatedOn: '2024-11-25T13:56:23.955Z'
 ---
 
 <InfoBlock>
