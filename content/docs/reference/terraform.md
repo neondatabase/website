@@ -1,23 +1,23 @@
 ---
-title: Neon Terraform providers
+title: Neon Terraform provider
 enableTableOfContents: true
 tag: community
 updatedOn: '2024-10-25T16:07:48.665Z'
 ---
 
-Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources.
+Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:
 
-<Admonition type="note">
-This provider is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
-</Admonition>
-
-**Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
+**Terraform Provider Neon — Maintainer: Dmitry Kisler**
 
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
 - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
 - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
 
-## Important usage notes
+<Admonition type="note">
+This provider is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
+</Admonition>
+
+## Provider usage notes
 
 - **Provider upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
 
