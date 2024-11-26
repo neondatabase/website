@@ -29,6 +29,8 @@ const aiChatSettings = {
   botAvatarSrcUrl: '/inkeep/images/example.svg',
   botAvatarDarkSrcUrl: '/inkeep/images/example.svg',
   userAvatarSrcUrl: '/inkeep/images/user.svg',
+  isChatSharingEnabled: true,
+  shareChatUrlBasePath: 'https://neon.tech/docs/introduction',
 };
 
 export { baseSettings, searchSettings, aiChatSettings };
