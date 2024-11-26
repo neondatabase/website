@@ -112,10 +112,10 @@ If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting 
 
 ### Invite collaborators to a project
 
-Neon's project collaboration feature allows you to invite other Neon accounts to collaborate on a Neon project.
+Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
 
 <Admonition type="note">
-Organization members cannot be added as collaborators to organization-owned projects. Organization members already have access to all projects owned by the organization.
+Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
 </Admonition>
 
 To invite collaborators to a Neon project:
@@ -242,7 +242,7 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ default branch Only │
-├───────────────────��─┼─────────────────────┼──────────────┼─────────────────────┤
+├─────────────────────���─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘

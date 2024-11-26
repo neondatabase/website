@@ -79,7 +79,7 @@ Converting your personal account transfers all of your projects and billing to t
 After conversion, you can:
 
 - [Invite](/docs/manage/orgs-manage#invite-members) team members to collaborate on transferred projects
-- Promote [collaborators](/docs/manage/orgs-manage#manage-collaborators) to full members or leave them on specific projects
+- Promote collaborators to organization members (their project-specific collaborator permissions will be replaced with full organization access)
 - Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
 
 #### Create a new organization
