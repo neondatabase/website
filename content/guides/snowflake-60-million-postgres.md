@@ -78,7 +78,7 @@ try:
     conn = psycopg2.connect(**db_params)
     conn.autocommit = False  # Enable manual transaction management
     cur = conn.cursor()
-    
+
     for chunk in chunk_files:
         with open(chunk, 'r') as f:
             print(f"Processing {chunk}...")
@@ -92,7 +92,7 @@ try:
                 conn.rollback()
                 print(f"Error processing {chunk}: {e}")
                 break  # Stop processing on first error
-    
+
     cur.close()
     conn.close()
     print("All chunks processed.")
@@ -106,7 +106,7 @@ except DatabaseError as db_err:
 
 The script above does the following:
 
-- Uses glob to read all files in the current directory that match the pattern "chunk_*".
+- Uses glob to read all files in the current directory that match the pattern "chunk\_\*".
 - Establishes a connection to the PostgreSQL database with manual transaction management enabled.
 - Iterates over each chunk file, opening it for reading, and then uses the COPY command to load data from each chunk file into the specified table in the database.
 - Commits the transaction after successfully processing each chunk; if an error occurs, it rolls back the transaction and stops further processing.
