@@ -160,13 +160,13 @@ npm install -D @types/ws
 Update your Prisma Client instance:
 
 ```javascript
-import 'dotenv/config'
-import { PrismaClient } from '@prisma/client'
-import { PrismaNeon } from '@prisma/adapter-neon'
-import { Pool, neonConfig } from '@neondatabase/serverless'
+import 'dotenv/config';
+import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { Pool, neonConfig } from '@neondatabase/serverless';
 
-import ws from 'ws'
-neonConfig.webSocketConstructor = ws
+import ws from 'ws';
+neonConfig.webSocketConstructor = ws;
 
 // To work in edge environments (Cloudflare Workers, Vercel Edge, etc.), enable querying over fetch
 // neonConfig.poolQueryViaFetch = true
@@ -176,15 +176,15 @@ neonConfig.webSocketConstructor = ws
 //   var prisma: PrismaClient | undefined
 // }
 
-const connectionString = `${process.env.DATABASE_URL}`
+const connectionString = `${process.env.DATABASE_URL}`;
 
-const pool = new Pool({ connectionString })
-const adapter = new PrismaNeon(pool)
-const prisma = global.prisma || new PrismaClient({ adapter })
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = global.prisma || new PrismaClient({ adapter });
 
-if (process.env.NODE_ENV === 'development') global.prisma = prisma
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
-export default prisma
+export default prisma;
 ```
 
 You can now use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined by the `DATABASE_URL` variable in your `schema.prisma` file.
