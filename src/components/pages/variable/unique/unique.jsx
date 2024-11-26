@@ -34,7 +34,7 @@ const Unique = ({ title }) => (
       <List items={items} />
     </div>
     <Testimonial
-      text="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS"
+      text="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS."
       author={{
         name: 'Cody Jenkins',
         company: 'Head of Engineering at Invenco',
