@@ -48,4 +48,6 @@ Find information about invoices, payment methods, changing your plan, monitoring
 
 <a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 
+<a href="/docs/introduction/billing-azure-marketplace" description="Use Neon as an Azure Native Integration with billing through Azure Marketplace" icon="aws">Azure Marketplace</a>
+
 </DetailIconCards>
