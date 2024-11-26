@@ -20,13 +20,14 @@ First, select a plan that best fits your requirements. Look closely at monthly f
 
 This table provides an overview of plan fees with allowances for storage, compute, and projects:
 
-| Plan       | Monthly Fee | Storage Allowance | Compute Allowance                                                            | Project Allowance |
-| ---------- | ----------- | ----------------- | ---------------------------------------------------------------------------- | ----------------- |
-| Free Plan  | $0          | 0.5 GiB           | Always-available default branch compute, 5 compute hours for branch computes | 10 projects       |
-| Launch     | $19         | 10 GiB            | 300 compute hours per month                                                  | 100 projects      |
-| Scale      | $69         | 50 GiB            | 750 compute hours per month                                                  | 1000 projects     |
-| Business   | $700        | 500 GiB           | 1000 compute hours per month                                                 | 5000 projects     |
-| Enterprise | Custom      | Custom            | Custom                                                                       | Custom            |
+| Plan       | Monthly Fee | Storage | Archive Storage | Compute                                                            | Projects |
+| :--------- | :---------- | :---------------- | :-------------------------| :--------------------------------------------------------------------------- | :---------------- |
+| Free Plan  | $0          | 0.5 GiB-months    | included in Storage       | 191.9 compute hours                                                          | 10 projects       |
+| Launch     | $19         | 10 GiB-months     | 50 GiB-months             | 300 compute hours per month                                                  | 100 projects      |
+| Scale      | $69         | 50 GiB-months     | 250 GiB-months            | 750 compute hours per month                                                  | 1000 projects     |
+| Business   | $700        | 500 GiB-months    | 2500 GiB-months           | 1000 compute hours per month                                                | 5000 projects     |
+| Enterprise | Custom      | Custom            | Custom                    | Custom                                                                       | Custom            |
+
 
 <Admonition type="note" title="Notes">
 For the Enterprise plan, please contact our [Sales](/contact-sales) team for an estimate based on your custom needs.
@@ -36,7 +37,8 @@ For the Enterprise plan, please contact our [Sales](/contact-sales) team for an 
 
 Estimate your monthly usage to see if any "extra usage" is required beyond the storage, compute, or project allowances included in your plan.
 
-- **Storage (GiB)**: How much storage do you expect to use? Storage includes the size of your data and change history. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
+- **Storage (GiB-months)**: How much storage do you expect to use actively? Storage includes the size of your data and change history. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
+- **Archive Storage (GiB-months)**: How much archive storage do you expect to use? Storage includes the size of your data and change history. For more information, see [Storage](/docs/introduction/usage-metrics#storage).
 - **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 10 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
 - **Projects**: How many projects do you need? Neon recommends a project per application.
 
