@@ -22,10 +22,18 @@ const InkeepTrigger = ({
   isDarkTheme = false,
   topOffset,
   showAIButton = false,
+  isPostgresPage = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
   const [defaultModalView, setDefaultModalView] = useState('SEARCH');
+
+  // Override searchSettings with tabSettings
+  searchSettings.tabSettings = {
+    tabOrderByLabel: isPostgresPage
+      ? ['Postgres', 'Neon Docs', 'All']
+      : ['Neon Docs', 'Postgres', 'All'],
+  };
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -99,6 +107,7 @@ InkeepTrigger.propTypes = {
   showAIButton: PropTypes.bool,
   isNotFoundPage: PropTypes.bool,
   isDarkTheme: PropTypes.bool,
+  isPostgresPage: PropTypes.bool,
 };
 
 export default InkeepTrigger;
