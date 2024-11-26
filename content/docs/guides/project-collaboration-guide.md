@@ -9,11 +9,13 @@ updatedOn: '2024-11-05T20:46:38.516Z'
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
-<Admonition type="note">Project collaboration lets people not on your team work on a project with you. If you're inviting team members, consider creating an [Organization](/docs/manage/organizations) instead. Organizations can also use project collaboration &#8212; for example, to allow an external contractor to contribute to a single project without making them a full Organization Member.</Admonition>
+<Admonition type="note">
+Project collaboration is designed for working with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead, as organization members automatically have access to all projects within that organization. Organizations can still use project collaboration when needed — for example, to allow an external contractor to contribute to a specific project without making them a full organization member.
+</Admonition>
 
 ## Set up Neon accounts
 
-You can invite anyone to join you in collaborating on your Neon project. To collaborate on a project, the user must have a Neon account, which can be a Neon Free Plan or a paid plan account.
+You can invite anyone outside your organization to collaborate on your Neon project. To collaborate on a project, the user must have a Neon account, which can be a Neon Free Plan or a paid plan account.
 
 1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
 2. Request the email address the user signed up with. If the user signed up using Google or GitHub, request the email address associated with that account.
@@ -44,7 +46,7 @@ If invite emails aren’t received, they may be in spam or quarantined. Recipien
 
 ## Project collaboration limits
 
-When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For an overview of plan limits, see [Neon plans](/docs/introduction/plans#neon-plans).
+When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For teams working together frequently across multiple projects, [organization](/docs/manage/organizations) membership offers a better collaboration experience.
 
 ### Access for collaborators via the Neon API or CLI
 
