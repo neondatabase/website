@@ -1,28 +1,23 @@
 ---
-title: Neon Terraform providers
+title: Neon Terraform provider
 enableTableOfContents: true
 tag: community
 updatedOn: '2024-10-25T16:07:48.665Z'
 ---
 
-The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
+Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:
+
+**Terraform Provider Neon — Maintainer: Dmitry Kisler**
+
+- [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
+- [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
+- [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
 
 <Admonition type="note">
-Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the project maintainers.
+This provider is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
 </Admonition>
 
-- **Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
-
-  - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
-  - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
-  - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
-
-- **Terraform Neon Provider — Maintainer: Pavan Kumar Sunkara**
-  - [GitHub repository](https://github.com/terraform-community-providers/terraform-provider-neon)
-  - [Terraform Registry](https://registry.terraform.io/providers/terraform-community-providers/neon/latest)
-  - [Terraform Registry Documentation](https://registry.terraform.io/providers/terraform-community-providers/neon/latest/docs)
-
-## Important usage notes
+## Provider usage notes
 
 - **Provider upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
 
