@@ -5,7 +5,6 @@ import Budget from 'components/pages/variable/budget';
 import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
-import RelevantArticles from 'components/pages/variable/relevant-articles';
 import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
 import Cta from 'components/shared/cta';
@@ -20,8 +19,8 @@ export const metadata = getMetadata(SEO_DATA.variable);
 const titles = [
   'Variable traffic, fixed costs?',
   'Pay only for what you use with Neon',
-  'How much money are you wasting on&nbsp;unused compute?',
   'Why Neon vs Aurora Serverless',
+  'How much money are you wasting on&nbsp;unused compute?',
 ];
 
 const VariableLoadPage = async () => {
@@ -46,8 +45,8 @@ const VariableLoadPage = async () => {
               <Hero />
               <Load title={tableOfContents[0]} />
               <Efficiency title={tableOfContents[1]} />
-              <Budget title={tableOfContents[2]} />
-              <Unique title={tableOfContents[3]} />
+              <Unique title={tableOfContents[2]} />
+              <Budget title={tableOfContents[3]} />
             </article>
           </div>
           <div className="col-start-10 col-end-13 ml-[50px] h-full xl:hidden">
@@ -61,14 +60,13 @@ const VariableLoadPage = async () => {
             </nav>
           </div>
         </Container>
-        <RelevantArticles />
         <Cta
-          className="pb-[290px] pt-[285px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]"
-          title="Try it yourself"
-          description="You can experiment with autoscaling for free during 14 days"
+          className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
+          title="Ask us for a<br> price estimation"
+          description="Start saving with Neon"
           buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
-          buttonText="Request a Scale trial"
-          buttonUrl={LINKS.scaleTrial}
+          buttonText="Contact us"
+          buttonUrl={LINKS.contactSales}
         />
       </div>
     </Layout>
