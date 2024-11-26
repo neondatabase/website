@@ -5,7 +5,7 @@ subtitle: Neon as an Azure Native Service with unified billing through Azure Mar
 updatedOn: '2024-10-14T11:46:51.927Z'
 ---
 
-Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
+Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
 
 ## Prerequisites for setting up the Neon integration
 
