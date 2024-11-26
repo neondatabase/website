@@ -5,22 +5,17 @@ tag: community
 updatedOn: '2024-10-25T16:07:48.665Z'
 ---
 
-The following is a list of community-created Terraform providers for managing Neon Postgres platform resources.
+Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources.
 
 <Admonition type="note">
-Community Terraform providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about the providers, please contact the project maintainers.
+Community-developed providers are not maintained or officially supported by Neon. Use these providers at your own discretion. If you have questions about a provider, please contact the project maintainer.
 </Admonition>
 
-- **Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
+**Terraform Provider Neon — Maintainer: Dmitry Kisler** (sponsored by Neon)
 
-  - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
-  - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
-  - [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
-
-- **Terraform Neon Provider — Maintainer: Pavan Kumar Sunkara**
-  - [GitHub repository](https://github.com/terraform-community-providers/terraform-provider-neon)
-  - [Terraform Registry](https://registry.terraform.io/providers/terraform-community-providers/neon/latest)
-  - [Terraform Registry Documentation](https://registry.terraform.io/providers/terraform-community-providers/neon/latest/docs)
+- [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
+- [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
+- [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
 
 ## Important usage notes
 
