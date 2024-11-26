@@ -39,7 +39,7 @@ The `WHERE` clause uses the `condition` to filter the rows returned from the `SE
 
 The `condition` is a boolean expression that evaluates to true, false, or unknown.
 
-The query returns only rows that satisfy the `condition` in the `WHERE` clause. In other words, the query will include only rows that cause the `condition` evaluates to true in the result set.
+The query returns only rows that satisfy the `condition` in the `WHERE` clause. In other words, the query will include only rows that cause the `condition` to evaluate to true in the result set.
 
 PostgreSQL evaluates the `WHERE` clause after the `FROM` clause but before the `SELECT` and `ORDER BY` clause:
 
