@@ -2,17 +2,13 @@ import { PropTypes } from 'prop-types';
 
 import Testimonial from 'components/pages/use-case/testimonial';
 import LINKS from 'constants/links';
-import andreaLevingeAvatar from 'images/pages/variable-load/testimonials/andrea-levinge.jpg';
 
 import List from '../list';
 import Section from '../section';
 
 const items = [
   {
-    text: 'Neon compute costs are <a href="https://www.outerbase.com/blog/the-evolution-of-serverless-postgres/" target="_blank" rel="noopener noreferrer">up to 75% cheaper</a> vs Aurora&nbsp;Serverless&nbsp;v2.',
-  },
-  {
-    text: 'Neon scales to zero, Aurora Serverless does not.',
+    text: 'Neon compute costs are <a href="/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon/">up to 80% cheaper</a> vs Aurora&nbsp;Serverless&nbsp;v2.',
   },
   {
     text: 'Neon provisions instances in < 1 s, compared to Aurora&apos;s up to&nbsp;20&nbsp;min.',
@@ -33,19 +29,18 @@ const items = [
 
 const Unique = ({ title }) => (
   <Section className="unique" title={title}>
-    <Testimonial
-      text="Before choosing Neon, we also considered Aurora, but the opacity of&nbsp;the pricing model did not convince us and costs seemed to&nbsp;rise&nbsp;quickly."
-      author={{
-        name: 'Andrea Levinge',
-        company: 'White Widget',
-        avatar: andreaLevingeAvatar,
-      }}
-      url={`${LINKS.blog}/white-widgets-secret-to-scalable-postgres-neon`}
-    />
     <div className="prose-variable">
       <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
       <List items={items} />
     </div>
+    <Testimonial
+      text="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS"
+      author={{
+        name: 'Cody Jenkins',
+        company: 'Head of Engineering at Invenco',
+      }}
+      url={`${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`}
+    />
   </Section>
 );
 
