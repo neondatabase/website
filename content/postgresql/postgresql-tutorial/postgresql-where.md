@@ -243,7 +243,7 @@ first_name | name_length
 ...
 ```
 
-In this example, we use the [`LENGTH()`](../postgresql-string-functions/postgresql-length-function) function gets the number of characters of an input string.
+In this example, we use the [`LENGTH()`](../postgresql-string-functions/postgresql-length-function) function to get the number of characters of an input string.
 
 ### 7\) Using the WHERE clause with the not equal operator (\<\>) example
 
