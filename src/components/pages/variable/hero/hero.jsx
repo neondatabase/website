@@ -34,7 +34,7 @@ const Hero = () => (
       </Admonition>
     </div>
     <Testimonial
-      text="Our database traffic peaks at nights and on weekends. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes"
+      text="Our database traffic peaks at nights and on weekends. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes."
       author={{
         name: 'Lex Nasser',
         company: 'Founding Engineer at 222',
