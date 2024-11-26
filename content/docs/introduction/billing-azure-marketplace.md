@@ -1,11 +1,11 @@
 ---
 title: Azure Marketplace
 enableTableOfContents: true
-subtitle: Neon as an Azure Native ISV Service with unified billing through Azure Marketplace
+subtitle: Neon as an Azure Native Service with unified billing through Azure Marketplace
 updatedOn: '2024-10-14T11:46:51.927Z'
 ---
 
-Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon in the same way you would work with solutions from Microsoft. As an Azure native service, billing for Neon is managed in Azure. Neon offers free and paid plans that you can choose from when setting up the integration.
+Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
 
 ## Prerequisites for setting up the Neon integration
 
@@ -39,7 +39,7 @@ After subscribing, you will be directed to the [Create a Neon Resource](#create-
 
 ## Overages
 
-Neon plans comes with allowances of compute, storage, and projects. For allowances included with each plan, see [Neon Plans](/docs/introduction/plans). If you go over your allowances on a paid plan, overage charges will be applied.
+Neon plans comes with allowances of compute, storage, and projects. For the allowances included with each plan, see [Neon Plans](/docs/introduction/plans). If you go over your allowances on a paid plan, overage charges are applied.
 
 TBD
 
@@ -51,7 +51,7 @@ TBD
 
 ## Enterprise Plan
 
-Neon's **Enterprise Plan** is a custom plan intended for large teams, enterprises requiring database fleets, or SaaS vendors interested in reselling Neon or integrating Neon into their service. It's not available for selection in the Azure Marketplace by default. For more about this plan, see [Enterprise Plan](/docs/introduction/plans#enterprise). If you're interested in discussing an Enterprise Plan, please contact our [Sales](https://neon.tech/contact-sales) team.
+Neon's **Enterprise Plan** is a custom plan intended for large teams, enterprises requiring database fleets, or SaaS vendors interested in integrating Neon into their service. It's not available for selection in the Azure Marketplace by default. For more about this plan, see [Enterprise Plan](/docs/introduction/plans#enterprise). If you're interested in discussing an Enterprise Plan, please contact our [Sales](https://neon.tech/contact-sales) team.
 
 ## Questions?
 
