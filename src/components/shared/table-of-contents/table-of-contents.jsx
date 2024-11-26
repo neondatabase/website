@@ -65,7 +65,7 @@ const TableOfContents = ({ items, isUseCase }) => {
   if (items.length === 0) return null;
 
   return (
-    <>
+    <nav>
       <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
         <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
         <span>On this page</span>
@@ -83,7 +83,7 @@ const TableOfContents = ({ items, isUseCase }) => {
           </li>
         ))}
       </ul>
-    </>
+    </nav>
   );
 };
 
