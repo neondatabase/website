@@ -39,19 +39,15 @@ After subscribing, you will be directed to the [Create a Neon Resource](#create-
 
 ## Overages
 
-Neon plans comes with allowances of compute, storage, and projects. For the allowances included with each plan, see [Neon Plans](/docs/introduction/plans). If you go over your allowances on a paid plan, overage charges are applied.
+Neon plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
-TBD
+## Changing your pricing plan
 
-## Changing your billing plan
-
-You can change your Neon Plan at any time. To do so ...
-
-TBD
+To change your Neon pricing plan, you can cancel your current subscription and create a new one. However, this approach does not preserve your existing Neon projects. If you want to keep your projects while changing plans, please open a [support ticket](https://console.neon.tech/app/projects?modal=support). The Neon Support team will help you update your plan and migrate your projects to the new plan.
 
 ## Enterprise Plan
 
-Neon's **Enterprise Plan** is a custom plan intended for large teams, enterprises requiring database fleets, or SaaS vendors interested in integrating Neon into their service. It's not available for selection in the Azure Marketplace by default. For more about this plan, see [Enterprise Plan](/docs/introduction/plans#enterprise). If you're interested in discussing an Enterprise Plan, please contact our [Sales](https://neon.tech/contact-sales) team.
+Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For more details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this plan, contact our [Sales](https://neon.tech/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
 
 ## Questions?
 
