@@ -20,7 +20,8 @@ If you have a security concern or believe you have found a vulnerability in any 
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
 
-Neon does not have a bug bounty program and does not pay financial bonuses or bounties for reporting bugs or vulnerability issues.
+## Neon's Private Bugbounty Program with Hackerone
+Neon now has a private bug bounty program! If you identify a vulnerability, you can report it using our submission [form](https://hackerone.com/8777433c-7051-4c92-aed4-430278521656/embedded_submissions/new).
 
 ## How to disclose vulnerabilities
 
