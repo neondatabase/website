@@ -30,7 +30,8 @@ To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Mark
 
 ## Create Neon projects in Azure regions (no integration)
 
-If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project. You might consider this option if: 
+If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project. You might consider this option if:
+
 - Part of your infrastructure runs on Azure but you don't need the native integration
 - Azure regions are closer to your applications than Neon's AWS regions
 - You want to manage billing through Neon rather than Azure.
