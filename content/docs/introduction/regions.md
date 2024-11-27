@@ -21,6 +21,8 @@ Neon supports project deployment in several regions. We recommended that you sel
 ## Azure regions
 
 - Azure East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
+- Azure Germany West Central region &mdash; `azure-gwc` (**Beta**)
+- Azure West US 3 region (Arizona) &mdash; `azure-westus3` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
 The Neon on Azure Beta is limited to the Azure East US 2 region and is not currently recommended for business-critical workloads. As a Beta release, occasional updates may require downtime.
@@ -73,8 +75,10 @@ If you are unsure of your project's region, you can find this information in the
 ### Azure NAT Gateway IP Addresses
 
 | Region                                     | NAT Gateway IP Addresses                       |
-| :----------------------------------------- | :--------------------------------------------- |
+|:-------------------------------------------|:-----------------------------------------------|
 | Azure East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
+| Azure Germany West Central - azure-gwc     | 20.52.100.129, 20.52.100.208, 20.52.187.150    |
+| Azure West US 3 (Arizona) - azure-westus3  | 20.38.38.171, 20.168.0.32, 20.168.0.77         |
 
 ## Move project data to a new region
 
