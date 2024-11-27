@@ -5,6 +5,7 @@ import ReleaseNoteList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
+import MigrateModal from 'components/pages/doc/migrate-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -115,7 +116,7 @@ const Post = ({
 
       <div
         className={clsx(
-          'col-span-2 col-start-11 -ml-12 max-w-64 xl:hidden',
+          'relative col-span-2 col-start-11 -ml-12 max-w-64 xl:hidden',
           isUseCase
             ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
             : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
@@ -123,15 +124,17 @@ const Post = ({
       >
         <div
           className={clsx(
-            'sticky top-[104px] flex max-h-[calc(100vh-100px)] flex-col',
-            'before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-2 before:bg-gradient-to-b before:from-black-pure before:to-transparent',
-            isMigratePost && 'h-full'
+            'sticky top-[104px] flex flex-col',
+            isMigratePost && 'h-full',
+            isUseCase ? 'max-h-[calc(100vh-100px)]' : 'max-h-[calc(100vh-150px)]',
+            'before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-2',
+            'before:bg-gradient-to-b before:from-white before:to-transparent dark:before:from-black-pure'
           )}
         >
           <div
             className={clsx(
               'no-scrollbars flex h-full flex-col overflow-y-auto overflow-x-hidden',
-              isUseCase ? '-mb-[100px] pb-[100px]' : '-mb-[50px] pb-[50px]'
+              isUseCase && '-mb-20 pb-20'
             )}
           >
             {enableTableOfContents && (
@@ -145,7 +148,9 @@ const Post = ({
             >
               {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
             </div>
+            {isMigratePost && <div className="mt-5 h-32" />}
           </div>
+          {isMigratePost && <MigrateModal />}
         </div>
       </div>
     </>
