@@ -2,8 +2,11 @@
 title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service with unified billing through Azure Marketplace
+tag: new
 updatedOn: '2024-10-14T11:46:51.927Z'
 ---
+
+<PublicPreview/>
 
 Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
 
@@ -32,6 +35,10 @@ After subscribing, you will be directed to the [Create a Neon Resource](#create-
    | **Region**                 | Select a region to deploy your resource. Neon Serverless Postgres will let you choose a region while creating a project.                                                                                                                                                                                           |
    | **Neon Organization name** | Corresponds to the name of your company, usually.                                                                                                                                                                                                                                                                  |
    | **Pricing Plan**           | Choose a plan of your choice. For information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. Neon offers a Free Plan and paid plans (**Scale**, and **Business**) that you can choose from.                                                                                  |
+
+    <Admonition type="note">
+    The Neon **Launch Plan** is currently not supported.
+    </Admonition>
 
 2. After specifying the details above, select the **Next: Review + Create** to navigate to the final step for resource creation. When you get to the **Review + Create** page, review your selections and the Neon and Azure Marketplace terms and conditions.
 3. Select **Overview** in the **Resource** menu to see information on the deployed resource.
