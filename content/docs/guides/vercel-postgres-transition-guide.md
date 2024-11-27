@@ -168,4 +168,4 @@ Yes, Neon supports any ORM that is compatible with Vercel Postgres, including:
 
 ## More questions?
 
-There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel [#vercel-postgres-transition](https://discord.com/channels/1176467419317940276/1306544611157868544), which we will be monitoring leading up to and through the transition period.
+There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up discord channel [#vercel-postgres-transition](https://discord.com/channels/1176467419317940276/1306544611157868544), which we will be monitoring leading up to and through the transition period.
