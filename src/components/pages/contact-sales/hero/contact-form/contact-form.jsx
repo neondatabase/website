@@ -23,6 +23,7 @@ const schema = yup
       .string()
       .email('Please enter a valid email')
       .required('Email address is a required field'),
+    companySize: yup.string().notOneOf(['hidden'], 'Required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
@@ -147,7 +148,7 @@ const ContactForm = () => {
       />
       <div className="flex gap-5 xl:gap-4 md:flex-col sm:contents sm:flex-col">
         <Field
-          className="shrink-0 basis-[60%]"
+          className="shrink-0 basis-[55%]"
           name="companyWebsite"
           label="Company Website"
           theme="transparent"
@@ -159,19 +160,21 @@ const ContactForm = () => {
         <Field
           className="grow"
           name="companySize"
-          label="Company Size"
+          label="Company Size *"
           tag="select"
           defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
           errorClassName={errorClassName}
           isDisabled={isDisabled}
+          error={errors.companySize?.message}
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
             &nbsp;
           </option>
-          <option value="1_4">1-4 employees</option>
+          <option value="0_1">0-1 employees</option>
+          <option value="2_4">2-4 employees</option>
           <option value="5_19">5-19 employees</option>
           <option value="20_99">20-99 employees</option>
           <option value="100_499">100-499 employees</option>
