@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import CloseIcon from 'icons/close-small.inline.svg';
 
 const MigrateModal = () => {
@@ -38,7 +39,7 @@ const MigrateModal = () => {
       </p>
       <Link
         className="mt-6 font-medium"
-        to="/migration-assistance"
+        to={LINKS.migrationAssistance}
         theme="blue-green"
         size="2xs"
         withArrow
