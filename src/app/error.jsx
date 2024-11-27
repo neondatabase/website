@@ -8,7 +8,6 @@ import SEO_DATA from 'constants/seo-data';
 const ErrorPage = () => (
   <>
     <title>{SEO_DATA.error.title}</title>
-    {/* <p>Error: {error.message || 'Something went wrong'}</p> */}
     <Topbar />
     <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
       <main className="flex flex-1 flex-col">
