@@ -35,7 +35,7 @@ const CERTIFICATES = [
 
 const CASE_STUDIES = [
   {
-    title: '5x faster to spin upficient',
+    title: '5x faster to spin up',
     description: 'environments via branching',
     logo: {
       src: mindvalley,
