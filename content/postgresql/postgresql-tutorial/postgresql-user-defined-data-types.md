@@ -7,10 +7,10 @@ ogImage: '/postgresqltutorial/PostgreSQL-User-defined-Type-Example.png'
 updatedOn: '2020-07-10T01:18:36+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON'
-  slug: 'postgresql-tutorial/postgresql-json'
+  title: 'PostgreSQL Array'
+  slug: 'postgresql-tutorial/postgresql-array'
 nextLink:
-  title: 'PostgreSQL enum'
+  title: 'PostgreSQL Enum'
   slug: 'postgresql-tutorial/postgresql-enum'
 ---
 
