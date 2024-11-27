@@ -7,11 +7,13 @@ import Link from 'components/shared/link';
 import CloseIcon from 'icons/close-small.inline.svg';
 
 const MigrateModal = () => {
-  const [showModal, setShowModal] = useState(localStorage.getItem('migrateModalClosed') !== 'true');
+  const [showModal, setShowModal] = useState(
+    window.localStorage.getItem('migrateModalClosed') !== 'true'
+  );
 
   const handleClose = () => {
     setShowModal(false);
-    localStorage.setItem('migrateModalClosed', 'true');
+    window.localStorage.setItem('migrateModalClosed', 'true');
   };
 
   if (!showModal) return null;
