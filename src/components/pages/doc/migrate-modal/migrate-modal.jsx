@@ -1,22 +1,24 @@
 'use client';
 
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import CloseIcon from 'icons/close-small.inline.svg';
 
 const MigrateModal = () => {
-  const [showModal, setShowModal] = useState(
-    window.localStorage.getItem('migrateModalClosed') !== 'true'
-  );
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(localStorage.getItem('migrateModalClosed') !== 'true');
+  }, []);
 
   const handleClose = () => {
-    setShowModal(false);
-    window.localStorage.setItem('migrateModalClosed', 'true');
+    setIsOpen(false);
+    localStorage.setItem('migrateModalClosed', 'true');
   };
 
-  if (!showModal) return null;
+  if (!isOpen) return null;
 
   return (
     <div
