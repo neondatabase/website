@@ -38,7 +38,7 @@ const Skeleton = () => (
   </div>
 );
 
-const Hero = () => {
+const Hero = ({ title, text }) => {
   const pathname = usePathname();
   const [isDocsPage, setIsDocsPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,12 +54,10 @@ const Hero = () => {
         <div className="col-start-2 col-end-6 flex flex-col pt-48 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full md:pt-0">
           <h1 className="font-title text-[58px] font-medium leading-none xl:text-5xl xl:leading-none md:text-4xl">
             Ooops!
-            <br /> Page not found...
+            <br />
+            {title}
           </h1>
-          <p className="t-xl mt-7 lg:mt-8">
-            Sorry, the page you are looking for doesn’t exist or has been moved.
-          </p>
-
+          <p className="t-xl mt-7 max-w-md lg:mt-8">{text}</p>
           {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} />}
         </div>
 
@@ -77,6 +75,11 @@ const Hero = () => {
       </Container>
     </section>
   );
+};
+
+Hero.propTypes = {
+  title: PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default Hero;
