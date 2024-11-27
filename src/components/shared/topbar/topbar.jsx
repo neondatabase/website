@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-     Automate schema migrations using DizzleORM and GitHub Actions - Manage thousands of tenants with this workflow      
+     Automate schema migrations using DrizzleORM and GitHub Actions - Manage thousands of tenants with this workflow      
     </span>
     <ChevronIcon
       className={clsx(
