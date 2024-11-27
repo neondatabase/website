@@ -50,7 +50,7 @@ Neon plans include allowances for compute, storage, and projects. For details on
 
 ## Changing your pricing plan
 
-To change your Neon pricing plan, you can cancel your current subscription and create a new one. However, this approach does not preserve your existing Neon projects. If you want to keep your projects while changing plans, please open a [support ticket](https://console.neon.tech/app/projects?modal=support). The Neon Support team will help you update your plan and migrate your projects to the new plan.
+Changing your Neon pricing plan requires [creating a new Neon Resource](#create-a-neon-resource) with the desired pricing plan and opening a [support ticket](https://console.neon.tech/app/projects?modal=support) with Neon to have your existing Neon projects transferred to the new Neon Resource — creating a Neon Resources creates an organization in Neon. The Neon Support team will transfer your Neon projects from your existing organization to your new Neon organization. The plan change process will be improved in a future release.
 
 ## Enterprise Plan
 
