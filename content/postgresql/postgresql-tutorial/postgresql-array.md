@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-01T12:38:39+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UUID Data Type'
-  slug: 'postgresql-tutorial/postgresql-uuid'
-nextLink:
   title: 'PostgreSQL hstore'
   slug: 'postgresql-tutorial/postgresql-hstore'
+nextLink:
+  title: 'User-defined Data Types'
+  slug: 'postgresql-tutorial/postgresql-user-defined-data-types'
 ---
 
 **Summary**: in this tutorial, you will learn how to work with **PostgreSQL array** and how to use some handy functions for array manipulation.
