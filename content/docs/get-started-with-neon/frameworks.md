@@ -45,4 +45,6 @@ updatedOn: '2024-11-19T20:27:25.087Z'
 
 <a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solid"></a>
 
+<a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+
 </TechnologyNavigation>

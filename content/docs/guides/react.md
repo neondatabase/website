@@ -19,6 +19,8 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 
 <a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
+<a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+
 </TechnologyNavigation>
 
 <NeedHelp/>

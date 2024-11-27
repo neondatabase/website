@@ -84,6 +84,9 @@
               slug: guides/solid-start
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: Sveltekit
+              slug: guides/sveltekit
+              tag: new
             - title: Symfony
               slug: guides/symfony
     - title: Connect
@@ -416,6 +419,9 @@
           slug: guides/solid-start
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+        - title: Sveltekit
+          slug: guides/sveltekit
+          tag: new
         - title: Symfony
           slug: guides/symfony
     - title: Languages
