@@ -345,7 +345,7 @@ The branches to compare are specified by the `compare_branch` and `base_branch` 
 - The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
-- `permissions` allows comments to be written on pull requests and repository contents to be read, this is needed, if, for instance, you need to checkout your branch to run migrations.
+- `permissions` allows comments to be written on pull requests and repository contents to be read. These permissions are necessary if, for example, you need to check out your branch to run migrations.
 
   ```yaml
   permissions:
