@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/postgresql-hstore-query.jpg'
 updatedOn: '2024-02-01T12:53:20+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Array'
-  slug: 'postgresql-tutorial/postgresql-array'
-nextLink:
   title: 'PostgreSQL JSON'
   slug: 'postgresql-tutorial/postgresql-json'
+nextLink:
+  title: 'PostgreSQL Array'
+  slug: 'postgresql-tutorial/postgresql-array'
 ---
 
 **Summary**: in this tutorial, you’ll learn how to work with **PostgreSQL hstore** data type.
