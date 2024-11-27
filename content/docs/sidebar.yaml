@@ -375,6 +375,9 @@
           slug: introduction/manage-billing
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
+    - title: Neon on Azure
+      slug: manage/azure
+      icon: architecture
 - section: Develop
   items:
     - title: Frameworks
