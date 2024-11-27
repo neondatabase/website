@@ -36,11 +36,6 @@ To configure the autosuspend default setting when you first create your project:
 1. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
 1. Specify a name, a Postgres version, and a region.
 1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period. Deselecting **Suspend compute after a period of inactivity** disables autosuspend, meaning the compute is always active.
-
-<Admonition type="note">
-You can configure default **Compute size** settings at the same time.
-</Admonition>
-
 1. Click **Save**.
 1. Click **Create Project**. Your initial compute is created with the specified setting.
 
@@ -54,11 +49,6 @@ To configure the autosuspend default for an existing project:
 1. On the Neon **Dashboard**, select **Project settings**.
 1. Select **Compute** and click **Change**.
 1. Select **Suspend compute after a period of inactivity** and specify your delay period. Deselecting **Suspend compute after a period of inactivity** disables autosuspend, meaning the compute is always active.
-
-<Admonition type="note">
-You can configure default **Compute size** settings at the same time.
-</Admonition>
-
 1. Click **Save**.
 
 ## Configure autosuspend for a compute
@@ -70,11 +60,6 @@ To configure the autosuspend setting for an individual compute:
 1. Click the menu in the **Computes** table, and select **Edit**.
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
 1. Under **Compute size**, select **Suspend compute after a period of inactivity** and specify your delay period. The maximum setting is 7 days. Deselecting **Suspend compute after a period of inactivity** means the compute is always active.
-
-<Admonition type="note">
-You can configure **Compute size** settings for your compute at the same time.
-</Admonition>
-
 1. Click **Save**.
 
 ## Monitor autosuspend
