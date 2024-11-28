@@ -59,27 +59,18 @@ In a traditional setup, you might handle authorization for a function directly i
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
   const { userId } = auth(); // Gets the user's ID from the JWT or session
+  const authToken = getToken();
 
   if (!userId) throw new Error('No user logged in'); // No user authenticated
   if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
 
-  // Inserts the new todo, linking it to the authenticated user
-  const db = drizzle(
-    neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-      authToken: authToken,
-    }),
-    {
-      schema,
-    }
-  );
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
-  await db.insert(schema.todos).values({
+  return db.$withAuth(authToken).insert(schema.todos).values({
     task: newTodo.newTodo,
     isComplete: false,
     userId, // Explicitly ties todo to the user
   });
-
-  revalidatePath('/');
 }
 ```
 
@@ -90,7 +81,7 @@ In this case, you have to:
 
 ### After Neon Authorize (RLS in the database):
 
-With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies. Here's an example of applying authorization for creating new todo items, where only authenticated users can insert data:
+With Neon Authorize, you only need to pass the JWT to the database - authorization checks happen automatically through RLS policies:
 
 <Tabs labels={["Drizzle", "SQL"]}>
 
@@ -121,19 +112,14 @@ CREATE POLICY "create todos" ON "todos"
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
-export async function insertTodo(newTodo: { newTodo: string }) {
+export async function insertTodo({ newTodo }: { newTodo: string }) {
   const authToken = getToken();
-  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, {
-    schema,
-  });
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
   return db.$withAuth(authToken).insert(schema.todos).values({
     task: newTodo.newTodo,
     isComplete: false,
-    userId, // Explicitly ties todo to the user
   });
-
-  revalidatePath('/');
 }
 ```
 
