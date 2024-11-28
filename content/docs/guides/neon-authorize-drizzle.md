@@ -65,7 +65,30 @@ With each new feature or role, the number of policies grows. This complexity can
 
 ## How crudPolicy simplifies RLS
 
-Drizzle's `crudPolicy` simplifies RLS by consolidating rules into a single configuration:
+Drizzle's `crudPolicy` simplifies RLS by replacing multiple SQL statements with a single configuration:
+
+```typescript
+import { crudPolicy, authenticatedRole, authUid } from "drizzle-orm/neon";
+
+export const todos = pgTable(
+  "todos",
+  {
+    id: bigint().primaryKey(),
+    userId: text().notNull().default(sql`(auth.user_id())`),
+    task: text().notNull(),
+    isComplete: boolean().notNull().default(false),
+  },
+  (table) => [
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),    // users can only read their own todos
+      modify: authUid(table.userId),   // users can only modify their own todos
+    }),
+  ]
+);
+```
+
+The `crudPolicy` function accepts three key parameters:
 
 - `role`: The Postgres role(s) to apply the policy to. Can be a single role or an array of roles
 - `read`: Controls SELECT operations:
@@ -79,16 +102,22 @@ Drizzle's `crudPolicy` simplifies RLS by consolidating rules into a single confi
   - A custom SQL expression
   - `null` to prevent policy generation
 
-It returns an array of Postgres RLSpolicy definitions, one for each operation (select, insert, update, delete).
+It returns an array of RLS policy definitions, one for each operation (select, insert, update, delete).
+
+Notice that `authUid` is a wrapper around Neon Authorize's `auth.user_id()` function. While `auth.user_id()` comes from the [pg_session_jwt](/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works) Postgres extension, Drizzle provides this wrapper to make it easier to use in your schema:
+
+```typescript
+export const authUid = (userIdColumn: AnyPgColumn) => sql`(select auth.user_id() = ${userIdColumn})`;
+```
+
+This wrapper:
+
+- Integrates smoothly with Drizzle schemas
+- Simplifies comparing the authenticated user ID with your table's user column
 
 ## Common patterns
 
-Before looking at patterns, let's understand the `authUid` function. It provides a simple way to connect `auth.user_id()` to a column in your table:
-
-```typescript
-export const authUid = (userIdColumn: AnyPgColumn) =>
-  sql`(select auth.user_id() = ${userIdColumn})`;
-```
+Here are two typical ways to use `crudPolicy` for securing your tables:
 
 ### Basic access control
 
@@ -138,7 +167,7 @@ export const posts = pgTable(
   (table) => [
     // Public read access
     crudPolicy({
-      role: anonymous,
+      role: anonymousRole,
       read: true, // anyone can read posts
       modify: false, // no modifications allowed
     }),
