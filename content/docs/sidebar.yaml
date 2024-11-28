@@ -434,6 +434,8 @@
           slug: guides/drizzle
         - title: Laravel (Eloquent)
           slug: guides/laravel
+        - title: Prisma
+          slug: guides/prisma
         - title: Ruby on Rails (ActiveRecord)
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
