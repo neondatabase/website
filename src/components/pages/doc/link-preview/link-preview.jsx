@@ -25,8 +25,8 @@ const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
         </Tooltip.Trigger>
         <Tooltip.Portal className="TooltipPortal">
           <Tooltip.Content className="TooltipContent">
-            <h4 className="text-sm font-medium leading-tight tracking-tight">{title}</h4>
-            <p className="mt-1 text-xs leading-snug tracking-tight text-gray-new-50 dark:text-gray-new-80">
+            <h4 className="font-medium tracking-tight">{title}</h4>
+            <p className="mt-1 text-sm leading-snug tracking-tight text-gray-new-20 dark:text-gray-new-80">
               {preview}
             </p>
             <Tooltip.Arrow className="TooltipArrow" />

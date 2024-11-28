@@ -3,7 +3,7 @@
 }
 
 .TooltipContent {
-  @apply max-w-[268px] rounded border border-gray-new-94 bg-white p-2.5 pt-2 dark:border-gray-new-15 dark:bg-black-pure;
+  @apply max-w-xs rounded border border-gray-new-94 bg-white p-4 dark:border-gray-new-15 dark:bg-black-pure;
   @apply shadow-[0_8px_20px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.6)];
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
