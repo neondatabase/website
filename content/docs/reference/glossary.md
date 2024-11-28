@@ -320,6 +320,14 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 Any branch in a Neon project that is not designated as the [default branch](#default-branch). For more information, see [Non-default branch](/docs/manage/branches#non-default-branch).
 
+## organization
+
+A feature in Neon that enables teams to collaborate on projects under a shared account. Organizations provide centralized management for billing, user roles, and project collaboration. Members can be invited to join, and roles such as Admin, Member, and Collaborator determine access and permissions within the organization.
+
+Admins oversee all aspects of the organization, including managing members, permissions, billing, and projects. Members have access to all organizational projects but cannot manage billing or members. Collaborators have limited access to specific projects shared with them and do not have access to the organization dashboard.
+
+Organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
+
 ## Page
 
 An 8KB unit of data, which is the smallest unit that Postgres uses for storing relations and indexes on disk. In Neon, a page is also the smallest unit of data that resides on a Pageserver. For information about Postgres page format, see [Database Page Layout](https://www.postgresql.org/docs/14/storage-page-layout.html), in the _PostgreSQL Documentation_.
