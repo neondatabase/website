@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2024-11-21T12:46:49.523Z'
+updatedOn: '2024-11-22T15:30:06.809Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -27,7 +27,7 @@ Neon supports a variety of protections related to database connections:
 
 ## IP allowlist support
 
-Neon's IP Allow feature, available with the Neon [Business](/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Protected branches
 
@@ -58,37 +58,37 @@ The Microsoft cloud data centers that power Azure focus on high reliability, ope
 
 At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations. To learn more about these standards and regulations, see [Compliance](/docs/security/compliance).
 
-All systems are hosted on AWS, where we have implemented specific security measures to protect data. Below is a detailed breakdown of these compliance-relevant security measures for access control, encryption, network security, event logging, vulnerability management, backups, data deletion and retention:
+All systems are hosted on AWS and Azure, where we have implemented specific security measures to protect data. Below is a detailed breakdown of these compliance-relevant security measures for access control, encryption, network security, event logging, vulnerability management, backups, data deletion and retention:
 
-- **Customer and Sensitive Data Encryption (AWS KMS)**
+- **Customer and Sensitive Data Encryption (AWS KMS and Azure Key Vault)**
 
-  All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail for auditing and compliance purposes.
+  All customer and sensitive data is encrypted using AES-256 encryption at rest. For data in transit, encryption is enforced using TLS 1.2/1.3 protocols across various services. Encryption keys are managed using AWS Key Management Service (KMS) and Azure Key Vault with key rotation policies in place. Only services and users with specific IAM roles can access the decryption keys, and all access is logged via AWS CloudTrail and Azure Monitor for auditing and compliance purposes.
 
 - **Fine-Grained Access Control via IAM**
 
-  Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
+  Access to PII and customer or sensitive data is controlled through AWS Identity and Access Management (IAM) policies and Microsoft Entra ID permissions. Broad access is limited to the infrastructure and security teams, while other roles operate under least-privilege principles. When additional access needed, access requests to production systems are received via Teleport, where all sessions are recorded. Only managers and on-call personnel are permitted to access production or approve production access requests.
 
   Additionally, all infrastructure is managed through Terraform, ensuring that any changes to access controls or resources are fully auditable and version-controlled. Regular access reviews and audits are conducted to verify that access rights remain aligned with security best practices.
 
 - **Data Segmentation and Isolation Using VPCs and Security Groups**
 
-  In our AWS environment, workloads are segmented using Virtual Private Clouds (VPCs) to separate sensitive data environments from other systems. We control network access between services by using security groups and Network Access Control Lists (NACLs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
+  In our AWS and Azure environments, workloads are segmented using Virtual Private Clouds (VPCs) and Azure Virtual Networks (VNets) to separate sensitive data environments from other systems. We control network access between services by using security groups, Network Access Control Lists (NACLs) and Azure Network Security Groups (NSGs), restricting access to only the necessary traffic. This ensures a clear separation of environments, minimizing the risk of unauthorized access or lateral movement between services.
 
 - **Event-Based Data Anomaly Detection via AWS GuardDuty and Logz.io**
 
-  Customer data access attempts and other anomalies are continuously monitored using AWS GuardDuty. All GuardDuty alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
+  Customer data access attempts and other anomalies are continuously monitored via Logzio integration on both infrastructures. All alerts are ingested into our Logz.io SIEM for centralized logging, analysis, and correlation with other security data. This allows our Security Operations Center (SOC) to quickly detect, investigate, and respond to potential security threats.
 
 - **Data Access Logging and Auditing (AWS CloudTrail & Logz.io)**
 
-  All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
+  All data access actions, including those involving sensitive operations, are logged using AWS CloudTrail and Azure Monitor, and forwarded to Logz.io for centralized logging and analysis. This provides full traceability of who accessed which resources, when, and from where. Logs are secured and retained for audit purposes, while any anomalies or suspicious activity trigger real-time alerts through our Security Operations Center (SOC) for immediate investigation and response.
 
 - **PII Backup, Retention, and Deletion Policies with S3 Versioning**
 
-  Customer data backups are stored in cloud object storage, such as Amazon S3, with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
+  Customer data backups are stored in cloud object storage, such as Amazon S3 and Azure Blob Storage, with versioning enabled, allowing recovery from accidental deletions or modifications. Data is encrypted using server-side encryption (SSE) and is retained for 30 days. Data deletion is followed to ensure compliance with SOC2, ISO, GDPR and CCPA requirements, including data subject requests.
 
 - **Vulnerability Management with Orca and Oligo**
 
-  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS and Azure environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
 - **Annual Audits and Continuous Penetration Testing**
 

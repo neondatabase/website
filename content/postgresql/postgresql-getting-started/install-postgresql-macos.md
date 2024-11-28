@@ -16,6 +16,8 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to download the PostgreSQL, install PostgreSQL on macOS, and restore the sample database.
 
+<CTA title="Run PostgreSQL in the Cloud, Free" description="As an alternative to installing Postgres locally, you can get cloud Postgres in seconds on Neon with a generous free plan. No credit card required." buttonText="Get Cloud Postgres" buttonUrl="/signup?ref=pgt-install-cta" />
+
 ## Download PostgreSQL installer for macOS
 
 To download the PostgreSQL installer, you follow these steps:

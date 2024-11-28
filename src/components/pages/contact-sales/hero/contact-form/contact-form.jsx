@@ -1,4 +1,7 @@
+'use client';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,17 +23,20 @@ const schema = yup
       .string()
       .email('Please enter a valid email')
       .required('Email address is a required field'),
-    companySize: yup
-      .string()
-      .notOneOf(['hidden'], 'Please select a company size')
-      .required('Company size is a required field'),
+    companySize: yup.string().notOneOf(['hidden'], 'Required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
 
-const ContactForm = ({ formState, setFormState }) => {
+const labelClassName = 'text-sm text-gray-new-90';
+const errorClassName = '!top-0';
+
+const ContactForm = () => {
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -88,6 +94,7 @@ const ContactForm = ({ formState, setFormState }) => {
       if (response.ok) {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
+          reset();
           setFormError('');
         }, loadingAnimationStartedTime);
       } else {
@@ -102,10 +109,15 @@ const ContactForm = ({ formState, setFormState }) => {
       }
     }
   };
+
+  const isDisabled = formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS;
+
   return (
     <form
-      className="relative z-10 grid gap-y-10 rounded-[20px] bg-black-new p-12 pb-14 2xl:gap-y-9 2xl:p-10 2xl:pb-10 md:gap-y-5 md:p-6 md:pb-6"
-      style={{ boxShadow: '0px 20px 40px rgba(26, 26, 26, 0.4)' }}
+      className={clsx(
+        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] md:gap-y-6 sm:p-5',
+        'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
+      )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -113,41 +125,56 @@ const ContactForm = ({ formState, setFormState }) => {
         name="name"
         label="Your name *"
         autoComplete="name"
+        placeholder="Marques Hansen"
+        theme="transparent"
+        labelClassName={labelClassName}
+        errorClassName={errorClassName}
         error={errors.name?.message}
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         {...register('name')}
       />
       <Field
         name="email"
-        label="Email address *"
+        label="Email *"
         type="email"
         autoComplete="email"
-        isDisabled={formState === FORM_STATES.LOADING}
+        placeholder="info@acme.com"
+        theme="transparent"
+        labelClassName={labelClassName}
+        errorClassName={errorClassName}
+        isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex space-x-10 2xl:space-x-6 md:grid md:gap-y-5 md:space-x-0">
+      <div className="flex gap-5 xl:gap-4 md:flex-col sm:contents sm:flex-col">
         <Field
-          className="shrink-0 basis-[54%] 2xl:basis-[45%] lg:basis-[49%]"
+          className="shrink-0 basis-[55%]"
           name="companyWebsite"
-          label="Company website"
-          isDisabled={formState === FORM_STATES.LOADING}
+          label="Company Website"
+          theme="transparent"
+          labelClassName={labelClassName}
+          errorClassName={errorClassName}
+          isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
         <Field
           className="grow"
           name="companySize"
-          label="Company size *"
+          label="Company Size *"
           tag="select"
           defaultValue="hidden"
-          isDisabled={formState === FORM_STATES.LOADING}
+          theme="transparent"
+          labelClassName={labelClassName}
+          errorClassName={errorClassName}
+          isDisabled={isDisabled}
           error={errors.companySize?.message}
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
             &nbsp;
           </option>
-          <option value="1_4">1-4 employees</option>
+          <option value="0_1">0-1 employees</option>
+          <option value="2_4">2-4 employees</option>
           <option value="5_19">5-19 employees</option>
           <option value="20_99">20-99 employees</option>
           <option value="100_499">100-499 employees</option>
@@ -158,33 +185,40 @@ const ContactForm = ({ formState, setFormState }) => {
         name="message"
         label="Message *"
         tag="textarea"
-        isDisabled={formState === FORM_STATES.LOADING}
+        theme="transparent"
+        labelClassName={labelClassName}
+        textareaClassName="min-h-[148px]"
+        errorClassName={errorClassName}
+        isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}
       />
 
-      <div className="relative mt-2 flex items-center 2xl:mt-1 md:mt-0 md:flex-col md:items-start">
+      <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
+        <p className="text-light text-sm leading-tight text-gray-new-70">
+          By submitting you agree to the{' '}
+          <Link className="text-nowrap text-white" to={LINKS.terms} theme="white-underlined">
+            Terms Service
+          </Link>{' '}
+          and acknowledge the{' '}
+          <Link
+            className="text-nowrap text-white"
+            to={LINKS.privacyPolicy}
+            theme="white-underlined"
+          >
+            Privacy Policy
+          </Link>
+          .
+        </p>
         <Button
-          className="w-[194px] shrink-0 !px-9 !py-6 !text-lg md:order-1 md:mt-6 md:w-full"
+          className="min-w-[182px] py-[15px] font-medium xl:min-w-[160px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
           type="submit"
           theme="primary"
           size="xs"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
-          {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Send message'}
+          {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
-        <p className="ml-7 text-left leading-tight md:ml-0">
-          By submitting, you agree to{' '}
-          <Link
-            className="pb-1 !text-base 2xl:!text-base md:!inline"
-            to={LINKS.privacyPolicy}
-            theme="underline-primary-1"
-            size="xs"
-          >
-            Neon’s Privacy Policy
-          </Link>
-          .
-        </p>
         {formError && (
           <span
             className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1"

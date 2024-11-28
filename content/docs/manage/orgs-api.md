@@ -1,7 +1,7 @@
 ---
 title: Manage Organizations using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-09-19T14:13:04.117Z'
+updatedOn: '2024-11-25T14:44:05.635Z'
 ---
 
 <FeatureBeta/>
@@ -458,7 +458,7 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-billing#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
 
 ## List all organizations you belong to
 

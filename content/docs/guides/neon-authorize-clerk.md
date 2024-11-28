@@ -3,7 +3,7 @@ title: Secure your data with Clerk and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-08T14:53:37.500Z'
+updatedOn: '2024-11-25T13:56:23.958Z'
 ---
 
 <InfoBlock>
@@ -77,8 +77,29 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
 ```sql
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO anonymous;
+-- For existing tables
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+  IN SCHEMA public
+  to authenticated;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+  IN SCHEMA public
+  to anonymous;
+
+-- For future tables
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+  TO authenticated;
+
+ALTER DEFAULT PRIVILEGES
+  IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+  TO anonymous;
+
+-- Grant USAGE on "public" schema
+GRANT USAGE ON SCHEMA public TO authenticated;
+GRANT USAGE ON SCHEMA public TO anonymous;
 ```
 
 - **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
@@ -123,7 +144,7 @@ Now that you’ve integrated Clerk with Neon Authorize, you can securely pass JW
 
 ### 1. Add Row-Level Security policies
 
-Here are some examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
+Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
@@ -131,7 +152,8 @@ Here are some examples of RLS policies for a **todos** table, designed to restri
 
 ```typescript
 import { InferSelectModel, sql } from 'drizzle-orm';
-import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
 
 // schema for TODOs table
 export const todos = pgTable(
@@ -145,32 +167,14 @@ export const todos = pgTable(
     isComplete: boolean('is_complete').notNull().default(false),
     insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  // Create policies for your table
-  (t) => ({
-    p1: pgPolicy('create todos', {
-      for: 'insert',
-      to: 'authenticated',
-      withCheck: sql`(select auth.user_id() = user_id)`,
+  // Create RLS policy for the table
+  (table) => [
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
     }),
-
-    p2: pgPolicy('view todos', {
-      for: 'select',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p3: pgPolicy('update todos', {
-      for: 'update',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p4: pgPolicy('delete todos', {
-      for: 'delete',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-  })
+  ]
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -210,6 +214,8 @@ create policy "Individuals can delete their own todos." on todos for
 </TabItem>
 
 </Tabs>
+
+The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
@@ -257,51 +263,50 @@ export async function TodoList() {
 ```typescript shouldWrap
 'use client';
 
-  import type { Todo } from '@/app/schema';
-  import { neon } from '@neondatabase/serverless';
-  import { useAuth } from '@clerk/nextjs';
-  import { useEffect, useState } from 'react';
+import type { Todo } from '@/app/schema';
+import { neon } from '@neondatabase/serverless';
+import { useAuth } from '@clerk/nextjs';
+import { useEffect, useState } from 'react';
 
-  const getDb = (token: string) =>
-      neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-          authToken: token, // [!code highlight]
-      });
+const getDb = (token: string) =>
+    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+        authToken: token, // [!code highlight]
+    });
 
-  export function TodoList() {
-      const { getToken } = useAuth();
-      const [todos, setTodos] = useState<Array<Todo>>();
+export function TodoList() {
+    const { getToken } = useAuth();
+    const [todos, setTodos] = useState<Array<Todo>>();
 
-      useEffect(() => {
-          async function loadTodos() {
-              const authToken = await getToken(); // [!code highlight]
+    useEffect(() => {
+        async function loadTodos() {
+            const authToken = await getToken(); // [!code highlight]
 
-              if (!authToken) {
-                  return;
-              }
+            if (!authToken) {
+                return;
+            }
 
-              const sql = getDb(authToken);
+            const sql = getDb(authToken);
 
-              // WHERE filter is optional because of RLS.
-              // But we send it anyway for performance reasons.
-              const todosResponse = await
-                  sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+            // WHERE filter is optional because of RLS.
+            // But we send it anyway for performance reasons.
+            const todosResponse = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-              setTodos(todosResponse as Array<Todo>);
-          }
+            setTodos(todosResponse as Array<Todo>);
+        }
 
-          loadTodos();
-      }, [getToken]);
+        loadTodos();
+    }, [getToken]);
 
-      return (
-          <ul>
-              {todos?.map((todo) => (
-                  <li key={todo.id}>
-                      {todo.task}
-                  </li>
-              ))}
-          </ul>
-      );
-  }
+    return (
+        <ul>
+            {todos?.map((todo) => (
+                <li key={todo.id}>
+                    {todo.task}
+                </li>
+            ))}
+        </ul>
+    );
+}
 ```
 
 </TabItem>

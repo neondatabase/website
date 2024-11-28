@@ -24,6 +24,7 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 <TestimonialsWrapper>
 
 <Testimonial
+className="!mt-0"
 text="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
 author={{
   name: 'Jonathan Reyes',
@@ -33,6 +34,7 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 />
 
 <Testimonial
+className="!mt-0"
 text="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
 author={{
   name: 'Léonard Henriquez',
@@ -42,6 +44,7 @@ url="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
 />
 
 <Testimonial
+className="!mt-0"
 text="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
 author={{
   name: 'Joey Teunissen',

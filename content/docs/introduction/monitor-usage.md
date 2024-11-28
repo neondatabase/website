@@ -5,7 +5,7 @@ subtitle: Monitor billing and usage metrics for your account and projects from t
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2024-10-08T10:58:34.749Z'
+updatedOn: '2024-11-25T14:44:05.635Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
@@ -188,4 +188,4 @@ curl --request GET \
 }
 ```
 
-For related information, see [Retrieving details about a project](/docs/guides/partner-billing#retrieving-details-about-a-project).
+For related information, see [Retrieving details about a project](/docs/guides/partner-consumption-limits#retrieving-details-about-a-project).

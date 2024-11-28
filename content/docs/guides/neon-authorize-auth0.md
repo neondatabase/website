@@ -3,7 +3,7 @@ title: Secure your data with Auth0 and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-08T14:53:37.497Z'
+updatedOn: '2024-11-25T21:28:12.834Z'
 ---
 
 <InfoBlock>
@@ -141,7 +141,7 @@ Now that you’ve integrated Auth0 with Neon Authorize, you can securely pass JW
 
 ### 1. Add Row-Level Security policies
 
-Below are examples of RLS policies for a **todos** table, designed to restrict access so that users can only create, view, update, or delete their own todos.
+Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
 <Tabs labels={["Drizzle","SQL"]}>
 
@@ -149,8 +149,10 @@ Below are examples of RLS policies for a **todos** table, designed to restrict a
 
 ```typescript shouldWrap
 import { InferSelectModel, sql } from 'drizzle-orm';
-import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
 
+// schema for TODOs table
 export const todos = pgTable(
   'todos',
   {
@@ -162,31 +164,14 @@ export const todos = pgTable(
     isComplete: boolean('is_complete').notNull().default(false),
     insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (t) => ({
-    p1: pgPolicy('create todos', {
-      for: 'insert',
-      to: 'authenticated',
-      withCheck: sql`(select auth.user_id() = user_id)`,
+  // Create RLS policy for the table
+  (table) => [
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
     }),
-
-    p2: pgPolicy('view todos', {
-      for: 'select',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p3: pgPolicy('update todos', {
-      for: 'update',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-
-    p4: pgPolicy('delete todos', {
-      for: 'delete',
-      to: 'authenticated',
-      using: sql`(select auth.user_id() = user_id)`,
-    }),
-  })
+  ]
 );
 
 export type Todo = InferSelectModel<typeof todos>;
@@ -214,7 +199,7 @@ CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
 
-CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+CREATE POLICY "Individuals can view their own todos." ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
 
@@ -230,6 +215,8 @@ USING ((select auth.user_id()) = user_id);
 
 </TabItem>
 </Tabs>
+
+The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
@@ -248,7 +235,7 @@ import { getAccessToken } from '@auth0/nextjs-auth0';
 export async function TodoList() {
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            const { accessToken } = await getAccessToken();
+            const { accessToken } = await getAccessToken(); // [!code highlight]
             if (!accessToken) {
                 throw new Error('No access token');
             }
@@ -259,7 +246,7 @@ export async function TodoList() {
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
     const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
     return (
         <ul>
@@ -285,7 +272,7 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
     neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token,
+        authToken: token, // [!code highlight]
     });
 
 export function TodoList() {
@@ -294,7 +281,7 @@ export function TodoList() {
 
     useEffect(() => {
         async function loadTodos() {
-            const authToken = await getAccessTokenSilently();
+            const authToken = await getAccessTokenSilently(); // [!code highlight]
 
             if (!authToken) {
                 return;
@@ -305,7 +292,7 @@ export function TodoList() {
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()');
+                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }
