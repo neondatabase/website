@@ -3,7 +3,7 @@ title: Simplify RLS with Drizzle
 subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon Authorize
 enableTableOfContents: true
 ---
-  
+
 <InfoBlock>
 <DocsList title="What you'll learn">
 <p>How to simplify Row-Level Security using crudPolicy</p>
@@ -33,7 +33,7 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 Here's how these clauses apply to each operation:
 
 | Operation | USING clause               | WITH CHECK clause          |
-|-----------|----------------------------|----------------------------|
+| --------- | -------------------------- | -------------------------- |
 | Select    | `auth.user_id() = user_id` |                            |
 | Insert    |                            | `auth.user_id() = user_id` |
 | Update    | `auth.user_id() = user_id` | `auth.user_id() = user_id` |
@@ -86,7 +86,8 @@ It returns an array of Postgres RLSpolicy definitions, one for each operation (s
 Before looking at patterns, let's understand the `authUid` function. It provides a simple way to connect `auth.user_id()` to a column in your table:
 
 ```typescript
-export const authUid = (userIdColumn: AnyPgColumn) => sql`(select auth.user_id() = ${userIdColumn})`;
+export const authUid = (userIdColumn: AnyPgColumn) =>
+  sql`(select auth.user_id() = ${userIdColumn})`;
 ```
 
 ### Basic access control
@@ -94,10 +95,10 @@ export const authUid = (userIdColumn: AnyPgColumn) => sql`(select auth.user_id()
 The most common pattern is restricting users to their own data:
 
 ```typescript shouldWrap
-import { crudPolicy, authenticatedRole, authUid } from "drizzle-orm/neon";
+import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
 export const todos = pgTable(
-  "todos",
+  'todos',
   {
     id: bigint().primaryKey(),
     userId: text()
@@ -105,17 +106,15 @@ export const todos = pgTable(
       .default(sql`(auth.user_id())`),
     task: text().notNull(),
     isComplete: boolean().notNull().default(false),
-    insertedAt: timestamp({ withTimezone: true })
-      .defaultNow()
-      .notNull(),
+    insertedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
   },
   (table) => [
     crudPolicy({
       role: authenticatedRole,
-      read: authUid(table.userId),    // users can only read their own todos
-      modify: authUid(table.userId),   // users can only modify their own todos
+      read: authUid(table.userId), // users can only read their own todos
+      modify: authUid(table.userId), // users can only modify their own todos
     }),
-  ],
+  ]
 );
 ```
 
@@ -124,29 +123,31 @@ export const todos = pgTable(
 For more complex scenarios, you might want different permissions for different roles:
 
 ```typescript shouldWrap
-import { crudPolicy, authenticatedRole, anonymousRole } from "drizzle-orm/neon";
+import { crudPolicy, authenticatedRole, anonymousRole } from 'drizzle-orm/neon';
 
 export const posts = pgTable(
-  "posts",
+  'posts',
   {
     id: bigint().primaryKey(),
-    userId: text().notNull().default(sql`(auth.user_id())`),
+    userId: text()
+      .notNull()
+      .default(sql`(auth.user_id())`),
     content: text().notNull(),
     published: boolean().notNull().default(false),
   },
   (table) => [
     // Public read access
-    crudPolicy({ 
+    crudPolicy({
       role: anonymous,
-      read: true,     // anyone can read posts
-      modify: false   // no modifications allowed
+      read: true, // anyone can read posts
+      modify: false, // no modifications allowed
     }),
     // Authenticated user access
-    crudPolicy({ 
+    crudPolicy({
       role: authenticatedRole,
-      read: true,                    // can read all posts
-      modify: authUid(table.userId)  // can only modify own posts
-    })
+      read: true, // can read all posts
+      modify: authUid(table.userId), // can only modify own posts
+    }),
   ]
 );
 ```
