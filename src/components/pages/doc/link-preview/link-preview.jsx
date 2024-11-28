@@ -10,7 +10,7 @@ const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
   const isExternal = href?.startsWith('http');
 
   return (
-    <Tooltip.Provider delayDuration={500}>
+    <Tooltip.Provider delayDuration={300}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <Link
