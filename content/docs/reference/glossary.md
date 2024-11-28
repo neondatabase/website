@@ -297,6 +297,7 @@ Least Recently Used policy, an algorithm for cache replacement that evicts the l
 A feature of the Neon Console that provides several graphs to help you monitor system and database metrics, updated in real time based on your usage data.
 
 ## Member
+
 An [Organizations](#organization) role in Neon with access to all projects within the organization. Members cannot manage billing, members, or permissions. They must be invited to the organization by an [Admin](#admin).
 
 ## Neon
