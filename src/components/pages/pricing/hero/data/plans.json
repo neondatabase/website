@@ -60,7 +60,7 @@
       {
         "icon": "storage",
         "title": "10 GB storage",
-        "info": "Additional at $1.75 per GB / Archive storage: $0.1 per GB"
+        "info": "Extra: $1.75 per GB"
       },
       {
         "icon": "clock",
@@ -109,7 +109,7 @@
       {
         "icon": "storage",
         "title": "50 GB storage",
-        "info": "Additional at $1.5 per GB / Archive storage: $0.1 per GB"
+        "info": "Extra: $1.5 per GB"
       },
       {
         "icon": "clock",
@@ -158,7 +158,7 @@
       {
         "icon": "storage",
         "title": "500 GB storage",
-        "info": "Additional at $0.5 per GB / Archive storage: $0.1 per GB"
+        "info": "Extra: $0.5 per GB"
       },
       {
         "icon": "clock",
