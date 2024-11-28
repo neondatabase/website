@@ -112,7 +112,11 @@ If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting 
 
 ### Invite collaborators to a project
 
-Neon's project collaboration feature allows you to invite other Neon accounts to collaborate on a Neon project.
+Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
+
+<Admonition type="note">
+Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+</Admonition>
 
 To invite collaborators to a Neon project:
 
@@ -122,9 +126,9 @@ To invite collaborators to a Neon project:
 1. Select **Invite** and enter the email address of the account you want to collaborate with.
 1. Click **Invite**.
 
-The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also invite other Neon users to a project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page, under **Shared with you**.
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project, with the exception of privileges required to delete the project. This account can also invite other Neon users to the project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page under **Shared with you**.
 
-The costs associated with a projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
@@ -238,7 +242,7 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ default branch Only │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘

@@ -392,7 +392,7 @@ A string that identifies your Neon project. Neon Project IDs are generated Herok
 
 ## Project Collaboration
 
-A feature that allows you to invite other Neon users to collaborate on your Neon projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
+A feature that lets you invite other Neon users to work on a project together. Note that organization members don't need to be added as collaborators since they automatically get access to all organization projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
 
 ## Project storage
 

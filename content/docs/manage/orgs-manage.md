@@ -63,19 +63,23 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 All members can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
 
+<Admonition type="note">
+Organization members don't need Collaborator invites as they already have full project access. When projects are transferred to an organization, existing collaborator permissions for organization members are automatically removed.
+</Admonition>
+
 ![organization collaborators](/docs/manage/org_collaborators.png)
 
 To invite new Collaborators, click **Invite collaborators** and select the project you want to share, then add a comma-separated list of emails for anyone you want to give access to. These users will receive an email inviting them to the project.
 
 <Admonition type="note" title="Invites not received?">
-If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
 
 ### Manage Collaborators
 
 Click the More Options menu next to the row in the **Collaborators** table to manage Collaborator access. You have two options:
 
-- **Convert to member** — Admins can promote the Collaborator to a full Member, granting access to all projects in the organization.
+- **Convert to member** — Admins can promote an external Collaborator to a full Member. When promoted, their collaborator permissions will be automatically removed since they'll have access to all projects as a Member.
 - **Remove from project** — All members can revoke the Collaborator's access to the shared project.
 
   ![collaborators more options menu](/docs/manage/orgs_collaborators_kebab.png 'no-border')
