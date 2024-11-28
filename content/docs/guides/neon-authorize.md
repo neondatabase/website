@@ -61,16 +61,19 @@ export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
   const { userId } = auth(); // Gets the user's ID from the JWT or session
 
   if (!userId) throw new Error('No user logged in'); // No user authenticated
-
   if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
 
   // Inserts the new todo, linking it to the authenticated user
-  await fetchWithDrizzle(async (db) => {
-    return db.insert(schema.todos).values({
-      task: newTodo.newTodo,
-      isComplete: false,
-      userId, // Explicitly ties todo to the user
-    });
+  const db = drizzle(neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+    authToken: authToken,
+  }), {
+    schema,
+  });
+
+  await db.insert(schema.todos).values({
+    task: newTodo.newTodo,
+    isComplete: false,
+    userId, // Explicitly ties todo to the user
   });
 
   revalidatePath('/');
@@ -86,17 +89,7 @@ In this case, you have to:
 
 With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies. Here's an example of applying authorization for creating new todo items, where only authenticated users can insert data:
 
-<Tabs labels={["SQL", "Drizzle"]}>
-<TabItem>
-
-```sql
-CREATE POLICY "create todos" ON "todos"
-    AS PERMISSIVE FOR INSERT
-    TO authenticated
-    WITH CHECK (auth.user_id() = user_id);
-```
-
-</TabItem>
+<Tabs labels={["Drizzle", "SQL"]}>
 
 <TabItem>
 
@@ -109,40 +102,45 @@ pgPolicy('create todos', {
 ```
 
 </TabItem>
+
+<TabItem>
+
+```sql
+CREATE POLICY "create todos" ON "todos"
+    AS PERMISSIVE FOR INSERT
+    TO authenticated
+    WITH CHECK (auth.user_id() = user_id);
+```
+
+</TabItem>
 </Tabs>
 
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string }) {
-  await fetchWithDrizzle(async (db) => {
-    return db.insert(schema.todos).values({
-      task: newTodo.newTodo,
-      isComplete: false,
-    });
+  const authToken = getToken();
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, {
+    schema,
+  });
+
+  return db.$withAuth(authToken).insert(schema.todos).values({
+    task: newTodo.newTodo,
+    isComplete: false,
+    userId, // Explicitly ties todo to the user
   });
 
   revalidatePath('/');
 }
 ```
 
-This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
+This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM like Drizzleto centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
 Let's break down the RLS policy controlling who can **view todos** to see what Neon Authorize is actually doing:
 
-<Tabs labels={["SQL", "Drizzle"]}>
-
-<TabItem>
-
-```sql
-CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
-  FOR SELECT TO authenticated
-  USING ((select auth.user_id() = user_id));
-```
-
-</TabItem>
+<Tabs labels={["Drizzle", "SQL"]}>
 
 <TabItem>
 
@@ -152,6 +150,16 @@ pgPolicy('view todos', {
   to: 'authenticated',
   using: sql`(select auth.user_id() = user_id)`,
 });
+```
+
+</TabItem>
+
+<TabItem>
+
+```sql
+CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
+  FOR SELECT TO authenticated
+  USING ((select auth.user_id() = user_id));
 ```
 
 </TabItem>
