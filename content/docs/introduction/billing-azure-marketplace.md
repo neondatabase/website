@@ -21,28 +21,31 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
 2. Alternatively, go to the [Azure Marketplace](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home) and search for **Neon Serverless Postgres**.
 3. Subscribe to the service.
 
-After subscribing, you will be directed to the [Create a Neon Resource](#create-a-neon-resource) page.
+After subscribing, you will be directed to the [Create a Neon Serverless Postgres Resource](#create-a-neon-resource) page.
 
 ## Create a Neon Resource
 
-1. On the **Create a Neon Resource** page, set the following values in the **Create Neon Resource** section.
+1. On the **Create a Neon Serverless Postgres Resource** page, enter values for the following properties:
 
    | Property                   | Description                                                                                                                                                                                                                                                                                                                           |
-   | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Subscription**           | From the drop-down, select your Azure subscription where you have Owner or Contributor access.                                                                                                                                                                                                                                        |
-   | **Resource group**         | Specify whether you want to create a new Azure resource group or use an existing one. A resource group is like a container or a folder used to organize and manage resources in Azure. For more information, see [Azure Resource Group overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview). |
-   | **Resource Name**          | Enter a name for Neon resource. This name is used only in Azure.                                                                                                                                                                                                                                                                      |
-   | **Region**                 | Select a region to deploy your resource. Neon Serverless Postgres will let you choose a region while creating a project.                                                                                                                                                                                                              |
-   | **Neon Organization name** | The name you assign to your [Neon Organization](/docs/reference/glossary#organization), such as a team name or company name. The name you specify appears as your [Organization](/docs/reference/glossary#organization) name in the Neon Console.                                                                                     |
-   | **Pricing Plan**           | Select a plan. For information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. Neon offers a Free Plan and paid plans (**Scale** and **Business**) you can choose from.                                                                                                                          |
+   | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **Subscription**           | From the drop-down, select an Azure subscription where you have Owner or Contributor access.                                                                                                                                                                                                                                        |
+   | **Resource group**         | Select an existing Azure resource group or create a new one. A resource group is like a container or a folder used to organize and manage resources in Azure. For more information, see [Azure Resource Group overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview). |
+   | **Resource Name**          | Enter a name for the Azure resource representing your Neon organization. This name is used only in Azure.                                                                                                                                                                                                                                                                    |
+   | **Region**                 | Select a region to deploy your Azure resource. This is the region for your Azure resource, not for your Neon projects and data. Neon will let you select from [supported regions](/docs/introduction/regions#azure-regions) when you create a Neon project, which you'll do after setting up the Neon resource in Azure. For example, you can create a Neon resource is the (US) West US 3 region and create a Neon project (Europe) Germany West Central.in                                                                                                                                                                                                               |
+   | **Neon Organization name** | Provide a name for your [Neon Organization](/docs/reference/glossary#organization), such as a team name or company name. The name you specify will be your [Organization](/docs/reference/glossary#organization) name in the Neon Console. Your Neon projects will reside in this named organization.                                                                                    |
+   | **Plan**           | Select a plan. You have three to choose from: **Free**, **Scale**, and **Business**. Select **Change Plan** to view details about each plan. For more information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. The Neon **Launch Plan** is currently not available in the Azure Marketplace. 
+   | **Billing term**           | Select a billing term for the selected plan. You can choose from a **1-Month** or a **1-Year** billing term (monthly or yearly billing).
+   
+1. After reviewing your **Price + Payment options** and **Subtotal**, select **Next** to optionally specify tags for your resource. For more about tags, see [Use tags to organize your Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
+1. Select **Review + Create** to navigate to the final step for resource creation. On the **Review + Create** page, review your selections, the [Azure Marketplace Terms](https://learn.microsoft.com/en-us/legal/marketplace/marketplace-terms), and the Neon [Terms of Use](https://neon.tech/terms-of-service) and [Privacy Policy](https://neon.tech/privacy-policy).
+1. Select **Create** to initiate the resource deployment, which may take a few moments.
+1. Under **Next steps**, click the **Go to resource** button.
+1. Select the **Neon Console** or **Go to Neon link**. You will be directed to the **Create project page** in the Neon Console, in your newly created Neon Organization.
 
-    <Admonition type="note">
-    The Neon **Launch Plan** is currently not available in the Azure Marketplace.
-    </Admonition>
+    ![Create project dialog for Azure](/docs/introduction/azure_create_project.png)
 
-2. After specifying the details above, select the **Next: Review + Create** to navigate to the final step for resource creation. When you get to the **Review + Create** page, review your selections and the Neon and Azure Marketplace terms and conditions.
-3. Select **Overview** in the **Resource** menu to see information on the deployed resource.
-4. Select the **Single-Sign-On** URL to redirect to the newly created Neon Organization.
+1. From here, you can follow the Neon Getting Started, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
 
 ## Overages
 
