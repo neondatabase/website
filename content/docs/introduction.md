@@ -67,6 +67,8 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
+<a href="/docs/guides/sveltekit" title="Svelte" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+
 <a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
 </TechnologyNavigation>
