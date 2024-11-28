@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2024-11-19T20:27:25.090Z'
+updatedOn: '2024-11-28T11:18:12.623Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
@@ -21,11 +21,11 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 </DetailIconCards>
 
-## Framework and language quickstarts
+## Quickstarts
 
 <TechnologyNavigation>
 
-<a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
+<a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
 
 <a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database" icon="react"></a>
 
@@ -52,8 +52,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <a href="/docs/guides/java" title="Java" description="Connect a Java application to Neon" icon="java"></a>
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect from Laravel to Neon" icon="laravel"></a>
-
-<a href="/docs/guides/prisma" title="Prisma" description="Learn how to connect from Prisma ORM to your Neon Postgres database" icon="prisma"></a>
 
 <a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
 
