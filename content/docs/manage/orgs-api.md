@@ -174,11 +174,13 @@ Example response:
 
 If using your personal API key, you need to be an admin in the organization to perform this action.
 
+<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+
 ```bash shouldWrap
 curl --request DELETE \
-     --url 'https://console.neon.tech/api/v2/organizations/members/{member_id}' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header 'authorization: Bearer $PERSONAL_API_KEY'
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/removeorganizationmember)
@@ -221,11 +223,13 @@ Creates invitations for new organization members. Each invited user:
 - If they have an existing Neon account, they automatically join as a member
 - If they don't have an account yet, the email invites them to create one
 
+<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+
 ```bash shouldWrap
 curl --request POST \
-     --url 'https://console.neon.tech/api/v2/organizations/invitations' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' \
      --header 'content-type: application/json' \
      --data '{
        "invitations": [
