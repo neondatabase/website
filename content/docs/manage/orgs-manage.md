@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-11-01T10:14:56.350Z'
+updatedOn: '2024-11-28T17:16:46.410Z'
 ---
 
 <FeatureBeta/>
