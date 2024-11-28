@@ -5,6 +5,23 @@ enableTableOfContents: true
 updatedOn: '2024-11-26T00:00:00.000Z'
 ---
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to connect from Drizzle</p>
+<p>How to use the Neon serverless driver with Drizzle</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
+  <a href="https://neon.tech/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
+</DocsList>
+
+<DocsList title="Source code" theme="repo">
+  <a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
+</DocsList>
+
+</InfoBlock>
+
 Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide covers the following topics:
 
 - [Connect to Neon from Drizzle](#connect-to-neon-from-drizzle)
