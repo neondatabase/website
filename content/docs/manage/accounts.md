@@ -20,7 +20,7 @@ You can always access your personal account settings from your **Profile** dropd
 
 If you want to work with other people on this project, your options are:
 
-- [Invite collaborators](/docs/guides/project-collaboration-guide) (external Neon users) to the project
+- [Invite collaborators](/docs/guides/project-collaboration-guide) (other Neon users) to the project
 - [Transfer](/docs/manage/orgs-project-transfer) the project from a personal to an Organization-level project, where you can then invite other users
 
 ## Organization accounts
