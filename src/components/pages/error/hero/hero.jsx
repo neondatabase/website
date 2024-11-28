@@ -12,7 +12,7 @@ import Link from 'components/shared/link';
 
 import illustration from './images/illustration.png';
 
-const CTA = ({ isDocsPage = false }) =>
+const CTA = ({ isDocsPage = false, reset }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
       <InkeepTrigger className="my-8 w-full" isNotFoundPage />
@@ -21,13 +21,21 @@ const CTA = ({ isDocsPage = false }) =>
       </Link>
     </div>
   ) : (
-    <Button className="mt-11 self-start lg:mt-8 sm:w-full" size="md" theme="primary" to="/">
-      Back to Home
-    </Button>
+    <div className="mt-11 flex gap-8 lg:mt-8 lg:gap-4">
+      {reset && (
+        <Button className="sm:w-full" size="md" theme="primary" onClick={reset}>
+          Try again
+        </Button>
+      )}
+      <Button className="sm:w-full" size="md" theme="primary" to="/">
+        Back to Home
+      </Button>
+    </div>
   );
 
 CTA.propTypes = {
   isDocsPage: PropTypes.bool,
+  reset: PropTypes.func,
 };
 
 const Skeleton = () => (
@@ -38,7 +46,7 @@ const Skeleton = () => (
   </div>
 );
 
-const Hero = ({ title, text }) => {
+const Hero = ({ title, text, reset }) => {
   const pathname = usePathname();
   const [isDocsPage, setIsDocsPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,15 +58,18 @@ const Hero = ({ title, text }) => {
 
   return (
     <section className="grow pb-24 pt-16 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
-      <Container className="grid grid-cols-12 items-start gap-x-8 md:gap-x-0 md:gap-y-4" size="md">
-        <div className="col-start-2 col-end-6 flex flex-col pt-48 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full md:pt-0">
+      <Container
+        className="grid grid-cols-12 items-start items-center gap-x-8 md:gap-x-0 md:gap-y-4"
+        size="md"
+      >
+        <div className="col-start-2 col-end-6 flex flex-col 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full">
           <h1 className="font-title text-[58px] font-medium leading-none xl:text-5xl xl:leading-none md:text-4xl">
             Ooops!
             <br />
             {title}
           </h1>
           <p className="t-xl mt-7 max-w-md lg:mt-8">{text}</p>
-          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} />}
+          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} reset={reset} />}
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
@@ -80,6 +91,7 @@ const Hero = ({ title, text }) => {
 Hero.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
+  reset: PropTypes.func,
 };
 
 export default Hero;

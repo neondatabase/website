@@ -1,24 +1,40 @@
 'use client';
 
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+
 import Hero from 'components/pages/error/hero';
-import Footer from 'components/shared/footer';
-import Topbar from 'components/shared/topbar';
+import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 
-const ErrorPage = () => (
-  <>
-    <title>{SEO_DATA.error.title}</title>
-    <Topbar />
-    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
-      <main className="flex flex-1 flex-col">
+/* 
+  NOTE: 
+  This page is needed to handle unexpected errors and display fallback UI.
+*/
+const ErrorPage = ({ error, reset }) => {
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }, [error]);
+
+  return (
+    <>
+      <title>{SEO_DATA.error.title}</title>
+
+      <Layout isClient>
         <Hero
           title="Page is broken..."
           text="Sorry, the page you are looking for is broken. Please try again later, we'll fix it soon!"
+          reset={reset}
         />
-      </main>
-      <Footer />
-    </div>
-  </>
-);
+      </Layout>
+    </>
+  );
+};
+
+ErrorPage.propTypes = {
+  error: PropTypes.object,
+  reset: PropTypes.func,
+};
 
 export default ErrorPage;
