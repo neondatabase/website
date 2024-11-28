@@ -45,7 +45,7 @@ After subscribing, you will be directed to the [Create a Neon Serverless Postgre
 
    ![Create project dialog for Azure](/docs/introduction/azure_create_project.png)
 
-1. From here, you can follow the Neon Getting Started, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+1. From here, you can follow the Neon **Getting Started**, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
 
 ## Overages
 

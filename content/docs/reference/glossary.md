@@ -21,6 +21,10 @@ Also see [Compute hours](#compute-hours).
 
 A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
 
+## Admin
+
+An [Organizations](#organization) role in Neon with full access to all projects, permissions, invitations, and billing for an organization. Admins can manage members, assign roles, set permissions, and delete the organization.
+
 ## API
 
 See [Neon API](#neon-api).
@@ -97,6 +101,10 @@ CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges
 
 Control groups, a Linux kernel feature that allows the organization, prioritization, and accounting of system resources for groups of processes.
 
+## Collaborator
+
+A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in their personal account.
+
 ## Compute
 
 A service that provides virtualized computing resources, including CPU, memory, and storage, for running applications. In the context of Neon, a compute runs Postgres.
@@ -106,22 +114,6 @@ Neon creates a primary read-write compute for the project's default branch. Neon
 ## compute endpoint
 
 The access point through which users connect to a Neon compute. In the context of Neon, the compute endpoint is represented by a connection string, which includes necessary credentials and connection parameters. This connection string enables clients, such as applications or users, to securely connect to a Postgres database running on a Neon compute. See [connection string](#connection-string).
-
-## connection pooling
-
-A method of creating a pool of connections and caching those connections for reuse. Neon supports `PgBouncer` in `transaction mode` for connection pooling. For more information, see [Connection pooling](/docs/connect/connection-pooling).
-
-## connection string
-
-A string containing details for connecting to a Neon Postgres database. The details include a user name (role), compute hostname, and database name; for example:
-
-```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-```
-
-The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
-
-Connection strings for a Neon databases can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## compute size
 
@@ -159,6 +151,22 @@ compute hours = compute size * active hours
 For more information, see [Compute](/docs/introduction/usage-metrics#compute).
 
 Also see [Active hours](#active-hours).
+
+## connection pooling
+
+A method of creating a pool of connections and caching those connections for reuse. Neon supports `PgBouncer` in `transaction mode` for connection pooling. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
+## connection string
+
+A string containing details for connecting to a Neon Postgres database. The details include a user name (role), compute hostname, and database name; for example:
+
+```bash shouldWrap
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+```
+
+The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`).
+
+Connection strings for a Neon databases can be obtained from the **Connection Details** widget on the Neon **Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## console
 
@@ -287,6 +295,9 @@ Least Recently Used policy, an algorithm for cache replacement that evicts the l
 ## Monitoring Dashboard
 
 A feature of the Neon Console that provides several graphs to help you monitor system and database metrics, updated in real time based on your usage data.
+
+## Member
+An [Organizations](#organization) role in Neon with access to all projects within the organization. Members cannot manage billing, members, or permissions. They must be invited to the organization by an [Admin](#admin).
 
 ## Neon
 
