@@ -59,7 +59,7 @@ const Item = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
-        {externalSlug && <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15" />}
+        {externalSlug && <ArrowExternalIcon />}
       </LinkTag>
       {children}
     </li>

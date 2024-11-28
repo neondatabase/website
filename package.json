@@ -38,6 +38,7 @@
     "@prisma/client": "^5.19.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-toast": "^1.2.2",
+    "@radix-ui/react-tooltip": "^1.1.4",
     "@react-hook/throttle": "^2.2.0",
     "@react-hook/window-scroll": "^1.3.0",
     "@rive-app/react-canvas": "^4.9.5",
