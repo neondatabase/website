@@ -68,21 +68,23 @@ With each new feature or role, the number of policies grows. This complexity can
 Drizzle's `crudPolicy` simplifies RLS by replacing multiple SQL statements with a single configuration:
 
 ```typescript
-import { crudPolicy, authenticatedRole, authUid } from "drizzle-orm/neon";
+import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
 export const todos = pgTable(
-  "todos",
+  'todos',
   {
     id: bigint().primaryKey(),
-    userId: text().notNull().default(sql`(auth.user_id())`),
+    userId: text()
+      .notNull()
+      .default(sql`(auth.user_id())`),
     task: text().notNull(),
     isComplete: boolean().notNull().default(false),
   },
   (table) => [
     crudPolicy({
       role: authenticatedRole,
-      read: authUid(table.userId),    // users can only read their own todos
-      modify: authUid(table.userId),   // users can only modify their own todos
+      read: authUid(table.userId), // users can only read their own todos
+      modify: authUid(table.userId), // users can only modify their own todos
     }),
   ]
 );
@@ -107,7 +109,8 @@ It returns an array of RLS policy definitions, one for each operation (select, i
 Notice that `authUid` is a wrapper around Neon Authorize's `auth.user_id()` function. While `auth.user_id()` comes from the [pg_session_jwt](/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works) Postgres extension, Drizzle provides this wrapper to make it easier to use in your schema:
 
 ```typescript
-export const authUid = (userIdColumn: AnyPgColumn) => sql`(select auth.user_id() = ${userIdColumn})`;
+export const authUid = (userIdColumn: AnyPgColumn) =>
+  sql`(select auth.user_id() = ${userIdColumn})`;
 ```
 
 This wrapper:
