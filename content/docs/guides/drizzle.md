@@ -2,7 +2,7 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 enableTableOfContents: true
-updatedOn: '2024-11-26T00:00:00.000Z'
+updatedOn: '2024-11-28T11:18:12.622Z'
 ---
 
 <InfoBlock>
