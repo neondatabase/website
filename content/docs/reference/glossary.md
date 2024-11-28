@@ -320,7 +320,7 @@ A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes clus
 
 Any branch in a Neon project that is not designated as the [default branch](#default-branch). For more information, see [Non-default branch](/docs/manage/branches#non-default-branch).
 
-## organization
+## Organization
 
 A feature in Neon that enables teams to collaborate on projects under a shared account. Organizations provide centralized management for billing, user roles, and project collaboration. Members can be invited to join, and roles such as Admin, Member, and Collaborator determine access and permissions within the organization.
 
