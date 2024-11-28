@@ -64,11 +64,14 @@ export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
   if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
 
   // Inserts the new todo, linking it to the authenticated user
-  const db = drizzle(neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-    authToken: authToken,
-  }), {
-    schema,
-  });
+  const db = drizzle(
+    neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+      authToken: authToken,
+    }),
+    {
+      schema,
+    }
+  );
 
   await db.insert(schema.todos).values({
     task: newTodo.newTodo,
