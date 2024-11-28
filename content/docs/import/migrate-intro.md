@@ -14,7 +14,7 @@ Find instructions for migrating data from Postgres, CSV, other Neon projects, an
 If you're planning to migrate a production workload to Neon, let us know&#8212;we'll connect you with an expert from our team. You can reach out to us [here](https://neon.tech/migration-assistance).
 </Admonition>
 
-## Data import guides
+## Data migration guides
 
 <DetailIconCards>
 
