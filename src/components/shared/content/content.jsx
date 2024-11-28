@@ -78,50 +78,53 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   },
   img: (props) => {
     const { className, title, src, ...rest } = props;
-    return isPostgres ? (
-      // No zoom on PostgreSQLTutorial Images
-      src.includes('?') ? (
-        // Authors can use anchor tags to make images float right/left
-        <Image
-          className={clsx(
-            className,
-            {
-              'no-border':
-                title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
-            },
-            { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
-            { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
-          )}
-          src={src.split('?')[0]}
-          width={100}
-          height={100}
-          style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
-          title={title !== 'no-border' ? title : undefined}
-          {...rest}
-        />
-      ) : (
-        <Image
-          className={clsx(className, { 'no-border': title === 'no-border' })}
-          src={src}
-          width={200}
-          height={100}
-          style={{ width: 'auto', height: 'auto' }}
-          title={title !== 'no-border' ? title : undefined}
-          {...rest}
-        />
-      )
+
+    // No zoom on PostgreSQLTutorial Images
+    if (!isPostgres) {
+      return (
+        <ImageZoom src={src}>
+          <Image
+            className={clsx(className, { 'no-border': title === 'no-border' })}
+            src={src}
+            width={isReleaseNote ? 762 : 796}
+            height={isReleaseNote ? 428 : 447}
+            style={{ width: '100%', height: '100%' }}
+            title={title !== 'no-border' ? title : undefined}
+            {...rest}
+          />
+        </ImageZoom>
+      );
+    }
+
+    return src.includes('?') ? (
+      // Authors can use anchor tags to make images float right/left
+      <Image
+        className={clsx(
+          className,
+          {
+            'no-border':
+              title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+          },
+          { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
+          { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
+        )}
+        src={src.split('?')[0]}
+        width={100}
+        height={100}
+        style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
     ) : (
-      <ImageZoom src={src}>
-        <Image
-          className={clsx(className, { 'no-border': title === 'no-border' })}
-          src={src}
-          width={isReleaseNote ? 762 : 796}
-          height={isReleaseNote ? 428 : 447}
-          style={{ width: '100%', height: '100%' }}
-          title={title !== 'no-border' ? title : undefined}
-          {...rest}
-        />
-      </ImageZoom>
+      <Image
+        className={clsx(className, { 'no-border': title === 'no-border' })}
+        src={src}
+        width={200}
+        height={100}
+        style={{ width: 'auto', height: 'auto' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
     );
   },
   YoutubeIframe,
