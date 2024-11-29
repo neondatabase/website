@@ -65,7 +65,6 @@ As you add new features, you'll need to add more policies to match. This growing
 
 The `crudPolicy` function generates RLS policies by accepting a simple configuration object. Let's break down its usage:
 
-
 ```typescript
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
@@ -119,6 +118,7 @@ export const authUid = (userIdColumn: AnyPgColumn) =>
 ```
 
 This helper:
+
 1. Wraps Neon Authorize's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works) extension)
 2. Compares the authenticated user's ID with a table column
 3. Returns a SQL expression suitable for use in `read` and `modify` parameters
