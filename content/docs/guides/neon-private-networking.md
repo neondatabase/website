@@ -4,10 +4,13 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
+tag: beta
 updatedOn: '2024-11-20T13:07:05.193Z'
 ---
 
-<PrivatePreview />
+<Admonition type="note" title="Public Beta">
+This feature is in Public Beta. Any member of a Neon Organization account can apply to participate in this Public Beta by requesting access via the **Organization Settings** page in the Console.
+</Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
 
@@ -18,8 +21,6 @@ In a standard setup, the client application connects to a Neon database over the
 With **Neon Private Networking**, you can connect to your database via AWS PrivateLink instead of the open internet. In this setup, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon proxy instance that is not accessible from the public internet. This endpoint service is available only within the same AWS region as your client application and is restricted to Neon-authorized customers. With **Neon Private Networking**, all traffic between the client application and the Neon database stays within AWS's private network, rather than crossing the public internet.
 
 ![Neon Private Networking diagram](/docs/guides/neon_private_access.jpg)
-
-## Prerequisites
 
 ## Prerequisites
 
