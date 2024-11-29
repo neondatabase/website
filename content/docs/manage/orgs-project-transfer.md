@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2024-09-19T14:13:04.118Z'
+updatedOn: '2024-11-28T17:16:46.410Z'
 ---
 
 <FeatureBeta/>
@@ -17,6 +17,7 @@ A few important points to keep in mind:
 - You must be at least a Member of the selected Organization to transfer projects to it.
 - The number of projects you can transfer is limited by the target Organization plan's allowance.
 - Projects can't be transferred between incompatible plans due to differences in usage allowances. For example, attempting to transfer projects from a Scale plan personal account to a Launch plan Organization will result in an error.
+- If any organization members were already collaborators on the projects being transferred, we'll remove their collaborator access since they'll get full access as org members anyway.
 
 ## Transfer from the Neon Console
 

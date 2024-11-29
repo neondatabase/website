@@ -5,7 +5,7 @@ subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2024-11-25T14:30:10.287Z'
+updatedOn: '2024-11-27T14:58:45.560Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
@@ -117,22 +117,26 @@ jobs:
   # You can also add a Schema Diff action to compare the database schema on the new
   # branch with the base branch. This action automatically writes the schema differences
   # as a comment on your GitHub pull request, making it easy to review changes.
+
+  # Following the step above, which runs database migrations, you may want to check
+  # for schema changes in your database. We recommend using the following action to
+  # post a comment to your pull request with the schema diff. For this action to work,
+  # you also need to give permissions to the workflow job to be able to post comments
+  # and read your repository contents. Add the following permissions to the workflow job:
   #
-  # steps:
-  #   - name: Schema Diff
-  #     if: |
-  #       github.event_name == 'pull_request' && (
-  #       github.event.action == 'synchronize'
-  #       || github.event.action == 'opened'
-  #       || github.event.action == 'reopened')
-  #     uses: neondatabase/schema-diff-action@v1
-  #     with:
-  #       project_id: ${{ vars.NEON_PROJECT_ID }}
-  #       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
-  #       base_branch: main
-  #       api_key: ${{ secrets.NEON_API_KEY }}
-  #       database: mydatabase
-  #       username: myrole
+  # permissions:
+  #   contents: read
+  #   pull-requests: write
+  #
+  # You can also check out https://github.com/neondatabase/schema-diff-action for more
+  # information on how to use the schema diff action.
+  # You can uncomment the lines below to enable the schema diff action.
+  #      - name: Post Schema Diff Comment to PR
+  #        uses: neondatabase/schema-diff-action@v1
+  #        with:
+  #          project_id: \${{ vars.NEON_PROJECT_ID }}
+  #          compare_branch: preview/pr-\${{ github.event.number }}-\${{ needs.setup.outputs.branch }}
+  #          api_key: \${{ secrets.NEON_API_KEY }}
 
   delete_neon_branch:
     name: Delete Neon Branch
