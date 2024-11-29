@@ -44,7 +44,7 @@ Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the va
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
-## Database Roles
+## Database roles
 
 Neon Authorize works with two primary database roles:
 
