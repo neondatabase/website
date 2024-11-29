@@ -4,8 +4,6 @@ enableTableOfContents: true
 updatedOn: '2024-11-29T17:26:14.039Z'
 ---
 
-<FeatureBeta/>
-
 Learn how to manage Neon Organizations using the Neon API, including creating and using organization-specific API keys, creating projects, transferring projects, and retrieving consumption metrics.
 
 You can authenticate your API requests using either of these methods:
