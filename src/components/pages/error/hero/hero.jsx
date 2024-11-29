@@ -16,12 +16,12 @@ const CTA = ({ isDocsPage = false, reset }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
       <InkeepTrigger className="my-8 w-full" isNotFoundPage />
-      <Link size="xs" theme="black-primary-1" to="/">
-        Back to home
+      <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>
+        Back to Home
       </Link>
     </div>
   ) : (
-    <div className="mt-11 flex items-center gap-6 lg:mt-8 lg:gap-4">
+    <div className="mt-11 flex items-center gap-6 lg:mt-8 lg:gap-4 sm:mt-6">
       {reset ? (
         <>
           <Button size="xs" theme="primary" withArrow onClick={reset}>
@@ -74,7 +74,7 @@ const Hero = ({ title, text, reset }) => {
             <br />
             {title}
           </h1>
-          <p className="t-xl mt-7 max-w-md lg:mt-8">{text}</p>
+          <p className="t-xl mt-7 max-w-md sm:mt-4">{text}</p>
           {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} reset={reset} />}
         </div>
 
