@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
 tag: beta
-updatedOn: '2024-11-20T13:07:05.193Z'
+updatedOn: '2024-11-29T18:24:31.958Z'
 ---
 
 <Admonition type="note" title="Public Beta">
