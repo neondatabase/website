@@ -25,8 +25,6 @@ pgAdmin4 is a powerful web-based administration tool for managing PostgreSQL dat
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
-You will then be presented with a dialog that provides a connecting string of your database. Make sure to **uncheck** the **Pooled connection checkbox** on the top right of the dialog and the connecting string automatically updates in the box below it.
-
 ![](/guides/images/pg-notify/index.png)
 
 All Neon connection strings have the following format:
