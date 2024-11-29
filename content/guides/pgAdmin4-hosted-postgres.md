@@ -50,10 +50,12 @@ You will be using these connecting string components further in the guide. Proce
 1. **Open pgAdmin4**: Once pgAdmin4 is running, you will see the dashboard.
 
 2. **Create a New Server Connection**:
+
    - Right-click on "Servers" in the left sidebar and select "Create" > "Server...".
    - In the "Create - Server" dialog, enter a name for your server connection.
 
 3. **Configure Connection Settings**:
+
    - Go to the "Connection" tab.
    - Enter the following details:
      - **Host**: The endpoint of your hosted Postgres database (e.g., `ep-...us-east-2.aws.neon.tech`).
