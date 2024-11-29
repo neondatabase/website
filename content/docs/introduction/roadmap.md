@@ -17,8 +17,6 @@ Here's a snapshot of what we're working on now:
 
 - **Neon in the Azure Marketplace**: We already support [creating Neon databases on Azure, starting with the East US 2 region](https://neon.tech/blog/first-azure-region-available-in-neon). Now, we’re working on support for more Azure regions and an Azure Marketplace integration. If this sounds interesting to you, [let us know](https://neon.tech/azure-marketplace).
 - **Larger computes**: Coming soon to a region near you.
-- **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is currently in [Private Preview](/docs/guides/neon-private-networking).
-- **Schema Diff GitHub Action**: This action leverages our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It will be supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
 - **Archive storage on paid plans**: To minimize storage costs on paid plans, we plan to add support for automatically archiving inactive branches (snapshots of your data) in cost-efficient object storage. We've already launched a Free Plan version of this feature. See [Branch archiving](/docs/guides/branch-archiving).
 - **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
@@ -28,6 +26,8 @@ If you have other feature ideas, [let us know](#share-your-thoughts).
 ## What we've just launched
 
 - **Organizations GA**: Organization Accounts are now generally available. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
+- **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [Public Beta](/docs/guides/neon-private-networking).
+- **Schema Diff GitHub Action**: This action leverages our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It's also supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
 - **Migration Assistant**: Helps you migrate data to Neon from other Postgres databases. All you need to get started is a connection string for your existing database. See [Neon Migration Assistant](https://neon.tech/docs/import/migration-assistant) for instructions.
 - **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing you to manage the Neon platform directly from your Python applications.
 - **Neon in the Vercel Marketplace**: Neon is now a first-party native integration in the Vercel Marketplace. This integration lets Vercel users add Postgres to their projects and manage billing directly through Vercel. For details, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
