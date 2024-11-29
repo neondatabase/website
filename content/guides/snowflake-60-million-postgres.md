@@ -15,7 +15,6 @@ Transferring large datasets can be challenging, especially when dealing with mem
 - [Proposed Solution](#proposed-solution)
 - [When to Upsert or Copy](#when-to-upsert-or-copy)
 - [Implementation steps for Chunking](#implementation-steps-for-chunking)
-- [Conclusion](#conclusion)
 
 ## Challenges with the easiest approach
 
