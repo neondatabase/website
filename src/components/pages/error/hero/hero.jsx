@@ -16,20 +16,26 @@ const CTA = ({ isDocsPage = false, reset }) =>
   isDocsPage ? (
     <div className="flex w-full flex-col">
       <InkeepTrigger className="my-8 w-full" isNotFoundPage />
-      <Link className="mt-8 self-start" size="lg" theme="black-primary-1" to="/">
+      <Link className="mt-8 !py-5 px-10" size="xs" theme="black-primary-1" to="/">
         Back to home
       </Link>
     </div>
   ) : (
-    <div className="mt-11 flex gap-8 lg:mt-8 lg:gap-4">
-      {reset && (
-        <Button className="sm:w-full" size="md" theme="primary" onClick={reset}>
-          Try again
+    <div className="mt-11 flex items-center gap-6 lg:mt-8 lg:gap-4">
+      {reset ? (
+        <>
+          <Button className="!py-5 px-10" size="xs" theme="primary" withArrow onClick={reset}>
+            Try again
+          </Button>
+          <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>
+            Back to Home
+          </Link>
+        </>
+      ) : (
+        <Button className="!py-5 px-10" size="xs" theme="primary" to="/">
+          Back to Home
         </Button>
       )}
-      <Button className="sm:w-full" size="md" theme="primary" to="/">
-        Back to Home
-      </Button>
     </div>
   );
 
@@ -57,13 +63,13 @@ const Hero = ({ title, text, reset }) => {
   }, [pathname]);
 
   return (
-    <section className="grow pb-24 pt-16 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
+    <section className="flex grow flex-col pb-24 pt-16 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
       <Container
-        className="grid grid-cols-12 items-start items-center gap-x-8 md:gap-x-0 md:gap-y-4"
+        className="grid grow grid-cols-12 items-center gap-x-8 md:gap-x-0 md:gap-y-4"
         size="md"
       >
-        <div className="col-start-2 col-end-6 flex flex-col 2xl:col-start-1 xl:pt-20 lg:pt-10 md:col-span-full">
-          <h1 className="font-title text-[58px] font-medium leading-none xl:text-5xl xl:leading-none md:text-4xl">
+        <div className="col-start-2 col-end-6 flex flex-col 2xl:col-start-1 lg:col-end-7 md:col-span-full">
+          <h1 className="font-title text-[58px] font-medium leading-none xl:text-5xl xl:leading-none lg:text-4xl">
             Ooops!
             <br />
             {title}
@@ -72,7 +78,7 @@ const Hero = ({ title, text, reset }) => {
           {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} reset={reset} />}
         </div>
 
-        <div className="col-start-6 col-end-12 2xl:col-end-13 md:col-span-full">
+        <div className="col-start-6 col-end-12 2xl:col-end-13 lg:col-start-7 md:col-span-full">
           <Image
             className="w-full md:mx-auto md:max-w-xl"
             width={860}
