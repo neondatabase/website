@@ -52,7 +52,7 @@ const Hero = () => (
                 highlighted = false,
                 price,
                 priceFrom = false,
-                headerLink,
+                headerLinks,
                 description,
                 features,
                 otherFeatures,
@@ -76,18 +76,15 @@ const Hero = () => (
                   >
                     {type}
                   </h3>
-                  {headerLink && (
-                    <a
+                  {headerLinks && (
+                    <p
                       className={clsx(
-                        'border-b border-[#85888E]/50 pb-0.5 text-sm font-light leading-none tracking-tighter text-gray-new-50',
-                        'transition-colors duration-200 hover:border-transparent hover:text-gray-new-80'
+                        'text-sm font-light leading-none text-gray-new-50',
+                        '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
+                        '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
                       )}
-                      href={headerLink.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {headerLink.text}
-                    </a>
+                      dangerouslySetInnerHTML={{ __html: headerLinks }}
+                    />
                   )}
                 </div>
                 <p className="relative mt-16 ">
