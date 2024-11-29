@@ -19,9 +19,7 @@ enableTableOfContents: true
 
 ## Why simplify RLS policies?
 
-Using Row-Level Security (RLS) policies in your database schema is a best practice in application development. While it may not be your only security measure, RLS acts as a reliable last line of defense, protecting your data from unauthorized access where it lives: at the database level.
-
-However, implementing RLS comes with a few challenges. Writing and maintaining SQL for each CRUD operation (Create, Read, Update, Delete) can lead to repetitive code and increased complexity: both tedious and prone to errors.
+Row-Level Security (RLS) is an important last line of defense for protecting your data at the database level. However, implementing RLS requires writing and maintaining separate SQL policies for each CRUD operation (Create, Read, Update, Delete), which can be both tedious and error-prone.
 
 ### For example
 
@@ -61,15 +59,17 @@ CREATE POLICY "crud-authenticated-policy-update" ON "todos" AS PERMISSIVE FOR UP
 CREATE POLICY "delete todos" ON "todos" AS PERMISSIVE FOR DELETE TO "authenticated" USING ((select auth.user_id() = user_id));
 ```
 
-With each new feature or role, the number of policies grows. This complexity can lead to subtle bugs, like accidentally allowing a user to update todos they can't read, or forgetting to apply a policy to a new table. These issues can be hard to spot in a large schema file filled with SQL statements.
+As you add new features, you'll need to add more policies to match. This growing complexity can lead to subtle bugs that can be hard to spot in a large schema file filled with SQL statements.
 
-## How crudPolicy simplifies RLS
+## Simplifying RLS with crudPolicy
 
-Drizzle's `crudPolicy` simplifies RLS by replacing multiple SQL statements with a single configuration:
+The `crudPolicy` function generates RLS policies by accepting a simple configuration object. Let's break down its usage:
+
 
 ```typescript
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
+// Define a table with RLS policies
 export const todos = pgTable(
   'todos',
   {
@@ -81,16 +81,19 @@ export const todos = pgTable(
     isComplete: boolean().notNull().default(false),
   },
   (table) => [
+    // Apply RLS policy
     crudPolicy({
       role: authenticatedRole,
-      read: authUid(table.userId), // users can only read their own todos
-      modify: authUid(table.userId), // users can only modify their own todos
+      read: authUid(table.userId),
+      modify: authUid(table.userId),
     }),
   ]
 );
 ```
 
-The `crudPolicy` function accepts three key parameters:
+### Configuration parameters
+
+The `crudPolicy` function accepts these parameters:
 
 - `role`: The Postgres role(s) to apply the policy to. Can be a single role or an array of roles
 - `read`: Controls SELECT operations:
@@ -104,23 +107,25 @@ The `crudPolicy` function accepts three key parameters:
   - A custom SQL expression
   - `null` to prevent policy generation
 
-It returns an array of RLS policy definitions, one for each operation (select, insert, update, delete).
+When executed, `crudPolicy` generates an array of RLS policy definitions covering all CRUD operations (select, insert, update, delete).
 
-Notice that `authUid` is a wrapper around Neon Authorize's `auth.user_id()` function. While `auth.user_id()` comes from the [pg_session_jwt](/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works) Postgres extension, Drizzle provides this wrapper to make it easier to use in your schema:
+### The authUid Helper
+
+For user-specific policies, Drizzle provides the `authUid` helper function:
 
 ```typescript
 export const authUid = (userIdColumn: AnyPgColumn) =>
   sql`(select auth.user_id() = ${userIdColumn})`;
 ```
 
-This wrapper:
-
-- Integrates smoothly with Drizzle schemas
-- Simplifies comparing the authenticated user ID with your table's user column
+This helper:
+1. Wraps Neon Authorize's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works) extension)
+2. Compares the authenticated user's ID with a table column
+3. Returns a SQL expression suitable for use in `read` and `modify` parameters
 
 ## Common patterns
 
-Here are two typical ways to use `crudPolicy` for securing your tables:
+Now that we understand how `crudPolicy` works, let's look at two typical ways to secure your tables:
 
 ### Basic access control
 

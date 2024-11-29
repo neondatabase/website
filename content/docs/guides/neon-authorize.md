@@ -44,6 +44,17 @@ Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the va
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
+## Database Roles
+
+Neon Authorize works with two primary database roles:
+
+- **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
+- **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
+
+<Admonition type="note">
+Some authentication providers, like Firebase, support "anonymous authentication" where a unique user ID is automatically generated for visitors who haven't explicitly logged in. This is useful for features like shopping carts, where you want to track a user's actions before they create an account. These anonymous users will still have a valid JWT and can use the anonymous role, making it possible to track their actions while maintaining security.
+</Admonition>
+
 ### Using Neon Authorize with custom JWTs
 
 If you don’t want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here’s a sample application that demonstrates this approach: [See demo](https://github.com/neondatabase/authorize-demo-custom-jwt)
@@ -195,7 +206,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Supabase Auth**      | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
 | **Amazon Cognito**     | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`</span>         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
 | **Azure AD**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                      | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
-| **GCP Cloud Identity** | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
+| **GCP Cloud Identity** | ��         | N/A                                                                                                                                                            | N/A                                                                                                                           |
 | **Descope Auth**       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>               | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
 
 ## Sample applications
