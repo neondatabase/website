@@ -14,7 +14,6 @@ pgAdmin4 is a powerful web-based administration tool for managing PostgreSQL dat
 - [Setting Up pgAdmin4](#setting-up-pgadmin4)
 - [Connecting to Your Hosted Postgres Database](#connecting-to-your-hosted-postgres-database)
 - [Basic Operations in pgAdmin4](#basic-operations-in-pgadmin4)
-- [Conclusion](#conclusion)
 
 ## Setting Up pgAdmin4
 
