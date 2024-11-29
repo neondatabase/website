@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2024-08-07T21:36:52.661Z'
+updatedOn: '2024-11-26T11:42:06.487Z'
 ---
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -153,26 +153,38 @@ npx prisma generate
 Install the Prisma adapter for Neon, the Neon serverless driver, and `ws` packages:
 
 ```bash
-npm install @prisma/adapter-neon @neondatabase/serverless ws
-npm install --save-dev @types/ws
+npm install ws @prisma/adapter-neon @neondatabase/serverless
+npm install -D @types/ws
 ```
 
 Update your Prisma Client instance:
 
 ```javascript
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
-import dotenv from 'dotenv';
-import ws from 'ws';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { Pool, neonConfig } from '@neondatabase/serverless';
 
-dotenv.config();
+import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
+
+// To work in edge environments (Cloudflare Workers, Vercel Edge, etc.), enable querying over fetch
+// neonConfig.poolQueryViaFetch = true
+
+// Type definitions
+// declare global {
+//   var prisma: PrismaClient | undefined
+// }
+
 const connectionString = `${process.env.DATABASE_URL}`;
 
 const pool = new Pool({ connectionString });
 const adapter = new PrismaNeon(pool);
-const prisma = new PrismaClient({ adapter });
+const prisma = global.prisma || new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+
+export default prisma;
 ```
 
 You can now use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined by the `DATABASE_URL` variable in your `schema.prisma` file.
@@ -181,7 +193,7 @@ You can now use Prisma Client as you normally would with full type-safety. Prism
 If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing dependency that the `ws` module requires when using `Client` and `Pool` constructs. You can address this requirement by installing the `bufferutil` package:
 
 ```shell
-npm i bufferutil --save-dev
+npm i -D bufferutil
 ```
 
 </Admonition>

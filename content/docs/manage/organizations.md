@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-11-08T16:53:31.641Z'
+updatedOn: '2024-11-28T17:16:46.409Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
@@ -77,7 +77,7 @@ Converting your personal account transfers all of your projects and billing to t
 After conversion, you can:
 
 - [Invite](/docs/manage/orgs-manage#invite-members) team members to collaborate on transferred projects
-- Promote [collaborators](/docs/manage/orgs-manage#manage-collaborators) to full members or leave them on specific projects
+- Promote collaborators to organization members (their project-specific collaborator permissions will be replaced with full organization access)
 - Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
 
 #### Create a new organization

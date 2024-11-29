@@ -4,6 +4,7 @@ import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
 import ApiIcon from 'icons/docs/sidebar/api.inline.svg';
 import ArchitectureIcon from 'icons/docs/sidebar/architecture.inline.svg';
 import AuthIcon from 'icons/docs/sidebar/auth.inline.svg';
+import AzureIcon from 'icons/docs/sidebar/azure.inline.svg';
 import BillingIcon from 'icons/docs/sidebar/billing.inline.svg';
 import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
@@ -37,6 +38,7 @@ const icons = {
   api: ApiIcon,
   architecture: ArchitectureIcon,
   auth: AuthIcon,
+  azure: AzureIcon,
   billing: BillingIcon,
   changelog: ChangelogIcon,
   cli: CliIcon,

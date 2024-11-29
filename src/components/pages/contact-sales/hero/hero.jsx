@@ -1,153 +1,197 @@
-'use client';
-
 import clsx from 'clsx';
-import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import Image from 'next/image';
-import React, { useState } from 'react';
 
-import Button from 'components/shared/button';
+import Container from 'components/shared/container/container';
 import Heading from 'components/shared/heading';
-import { FORM_STATES } from 'constants/forms';
+import Link from 'components/shared/link/link';
+import LINKS from 'constants/links';
+import certGDPRIcon from 'images/pages/contact-sales/cert-gdpr.svg';
+import certISOIcon from 'images/pages/contact-sales/cert-iso.svg';
+import certSOC2Icon from 'images/pages/contact-sales/cert-soc2.svg';
+import invenco from 'images/pages/contact-sales/invenco.svg';
+import mindvalley from 'images/pages/contact-sales/mindvalley.svg';
+import retool from 'images/pages/contact-sales/retool.svg';
+import wordware from 'images/pages/contact-sales/wordware.svg';
 
 import ContactForm from './contact-form';
-import illustrationPricing from './images/illustration-pricing.png';
-import illustrationSuccess from './images/illustration-success.png';
 
-const APPEAR_AND_EXIT_ANIMATION_DURATION = 0.3;
+const CERTIFICATES = [
+  {
+    title: 'SOC 2',
+    description: 'Certified',
+    icon: certSOC2Icon,
+  },
+  {
+    title: 'GDPR',
+    description: 'Compliant',
+    icon: certGDPRIcon,
+  },
+  {
+    title: 'ISO 27001',
+    description: 'Compliant',
+    icon: certISOIcon,
+  },
+];
 
-const NoiseFilter = () => (
-  <svg className="absolute opacity-0" aria-hidden="true">
-    <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="6" stitchTiles="stitch" />
-    </filter>
-    <rect x="0" y="0" width="100%" height="100%" fill="#000" />
-    <rect x="0" y="0" width="100%" height="100%" fill="#ffffff" filter="url(#noiseFilter)" />
-  </svg>
-);
+const CASE_STUDIES = [
+  {
+    title: '5x faster to spin up',
+    description: 'environments via branching',
+    logo: {
+      src: mindvalley,
+      alt: 'Mindvalley',
+      width: 118,
+      height: 24,
+    },
+    link: `${LINKS.blog}/how-mindvalley-minimizes-time-to-launch-with-neon-branches`,
+  },
+  {
+    title: '300k+ databases',
+    description: 'managed by 1 engineer',
+    logo: {
+      src: retool,
+      alt: 'Retool',
+      width: 100,
+      height: 24,
+    },
+    link: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
+  },
+  {
+    title: '95% fewer migration issues',
+    description: 'thanks to preview branches',
+    logo: {
+      src: wordware,
+      alt: 'Wordware',
+      width: 125,
+      height: 24,
+    },
+    link: `${LINKS.blog}/building-ai-agents-just-got-faster-with-wordware-and-neon`,
+  },
+  {
+    title: '80% savings',
+    description: 'in&nbsp;database costs',
+    logo: {
+      src: invenco,
+      alt: 'Invenco',
+      width: 98,
+      height: 24,
+    },
+    link: `${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`,
+  },
+];
 
-const Hero = () => {
-  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
-
-  return (
-    <LazyMotion features={domAnimation}>
-      <section className="relative grow overflow-hidden bg-black-pure pb-40 pt-44 text-white 2xl:pb-36 2xl:pt-[136px] lg:pb-28 lg:pt-9 md:pb-24">
-        <AnimatePresence>
-          <m.div
-            className="mx-auto min-h-[653px] max-w-[1216px] text-center xl:max-w-[936px] lg:max-w-none lg:px-8 md:min-h-[500px] md:px-4"
-            animate={{
-              opacity: formState === FORM_STATES.SUCCESS ? 0 : 1,
-              height: formState === FORM_STATES.SUCCESS ? 0 : 'auto',
-              pointerEvents: formState === FORM_STATES.SUCCESS ? 'none' : 'auto',
-              transition: { duration: APPEAR_AND_EXIT_ANIMATION_DURATION },
-            }}
+const Hero = () => (
+  <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] xl:py-32 lg:py-28 md:pb-20 md:pt-[100px]">
+    <Container className="xl:px-8 md:px-5" size="1152">
+      <div className="flex justify-between gap-[90px] xl:gap-8 lg:mx-auto lg:max-w-xl lg:flex-col lg:gap-14 sm:gap-10">
+        <div className="flex max-w-[480px] flex-1 flex-col pt-8 lg:max-w-full lg:items-center lg:pt-0 lg:text-center">
+          <Heading
+            className="relative w-fit font-title text-[68px] font-medium leading-none tracking-tight text-white xl:text-[56px] lg:text-[48px] md:text-[40px]"
+            tag="h1"
+            theme="white"
           >
-            <h1 className="font-title text-[72px] font-medium leading-tight 2xl:text-[56px] 2xl:leading-dense md:text-[36px]">
-              Talk to our Sales team
-            </h1>
-            <p className="mx-auto mt-1.5 max-w-[660px] text-xl 2xl:max-w-[550px] 2xl:text-base md:mt-2">
-              Interested in learning more about our plans and pricing? Complete the form below to
-              get in touch with our Sales team.
-            </p>
-            <div className="mx-auto mt-16 flex 2xl:mt-12 2xl:max-w-5xl lg:mt-9 lg:max-w-[583px] lg:flex-col lg:space-y-9 md:mt-6 md:space-y-6">
-              <div
-                className={clsx(
-                  'relative w-full max-w-[696px] shrink-0 rounded-[20px] shadow-[0_0_60px_30px_rgb(0_230_153/30%)] 2xl:max-w-[535px] lg:max-w-none sm:shadow-none'
-                  // 'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-lg.svg")] xl:after:hidden'
-                )}
-              >
-                <ContactForm formState={formState} setFormState={setFormState} />
-              </div>
-              <div
-                className={clsx(
-                  'relative my-9 flex-1 rounded-[20px] font-mono text-black shadow-[0_0_60px_30px_rgb(240_240_117/30%)] lg:my-0 sm:shadow-none'
-                  // 'after:pointer-events-none after:absolute after:-inset-40 after:rounded-[22px] after:opacity-10 after:[-webkit-mask-position:center_center] after:[-webkit-mask-repeat:no-repeat] after:[-webkit-mask-size:100%_100%] after:[filter:url("#noiseFilter")] after:[mask-image:url("/images/mask-md.svg")] xl:after:hidden'
-                )}
-              >
-                <div className="relative z-10 flex h-full w-full flex-col overflow-hidden rounded-r-[20px] bg-secondary-2 pt-10 lg:flex-row lg:rounded-[20px] lg:pt-0 md:flex-col md:items-center">
-                  <div className="px-11 lg:order-1 lg:self-center lg:pl-[18px] lg:pr-8 lg:text-left md:order-none md:px-8 md:pl-4 md:pr-4 md:pt-5 md:text-center">
-                    <h2
-                      className="font-title text-[56px] font-medium leading-none 2xl:text-5xl lg:text-[36px]"
-                      style={{
-                        background:
-                          'linear-gradient(180deg, #1A1A1A 0%, rgba(26, 26, 26, 0.8) 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        textFillColor: 'transparent',
-                      }}
-                    >
-                      On Demand!
-                    </h2>
-                    <p className="mt-2.5 text-[23px] font-bold leading-snug text-[#3E3E29] 2xl:text-xl lg:max-w-[208px] md:max-w-none">
-                      Only pay for what you use.
-                    </p>
-                  </div>
-                  <div className="absolute bottom-0 left-1/2 w-[620px] -translate-x-1/2 2xl:w-[554px] lg:static lg:-mb-3 lg:-ml-2.5 lg:w-[320px] lg:translate-x-0 lg:pt-2.5 md:-mb-4 md:ml-0 md:mt-4 md:w-[334px] md:pt-0">
-                    <Image
-                      src={illustrationPricing}
-                      alt="Illustration"
-                      loading="eager"
-                      width={620}
-                      height={485}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </m.div>
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {formState === FORM_STATES.SUCCESS && (
-            <m.div
+            Let&apos;s Connect
+            <span
               className={clsx(
-                'absolute top-28 mb-28 flex w-full flex-col items-center text-center lg:top-0 lg:px-8 md:px-4'
+                'pointer-events-none absolute left-0 top-0 -z-10 size-[706px] translate-x-[-45%] translate-y-[-40%]',
+                'bg-[radial-gradient(50%_50%_at_50%_50%,rgba(30,41,62,.55),rgba(30,41,62,0))]',
+                'xl:size-[596px] lg:size-[596px] sm:size-[466px]'
               )}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { delay: APPEAR_AND_EXIT_ANIMATION_DURATION },
-              }}
-              data-test="success-message"
-              aria-hidden={formState !== FORM_STATES.SUCCESS}
+              aria-hidden
+            />
+          </Heading>
+          <p className="mt-4 text-pretty text-xl tracking-tight text-gray-new-80 lg:mt-3 lg:text-lg md:text-base">
+            We&apos;re happy to assist you with any questions about our technology, pricing plans,
+            custom contract options, and&nbsp;migrations assistance.
+          </p>
+          <ul className="mt-5 flex flex-col gap-3.5 lg:mt-[18px] lg:flex-row lg:justify-center lg:gap-8 md:flex-wrap md:gap-x-4 md:gap-y-2.5">
+            {CERTIFICATES.map(({ title, description, icon }) => (
+              <li className="flex items-center gap-4 lg:gap-2" key={title}>
+                <Image src={icon} alt={title} width={24} height={24} priority />
+                <p className="flex gap-2 text-lg leading-none tracking-tight text-gray-new-80 lg:text-base">
+                  {title} <span className="text-gray-new-40">{description}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+          <Link
+            className="mt-9 text-lg font-medium leading-none tracking-tight lg:mx-auto lg:mt-8 sm:mt-7 sm:text-base"
+            theme="green"
+            to="https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering"
+            rel="noopener noreferrer"
+            target="_blank"
+            withArrow
+          >
+            Book a meeting directly
+          </Link>
+        </div>
+        <div className="relative w-[582px] xl:w-[544px] lg:w-full">
+          <ContactForm />
+          <span
+            className={clsx(
+              'pointer-events-none absolute bottom-0 right-0 size-[725px] translate-x-[30%] translate-y-[35%]',
+              'bg-[radial-gradient(50%_50%_at_50%_50%,rgba(30,52,62,.4)_20%,rgba(30,52,62,0))]',
+              'xl:size-[580px] sm:size-[464px]'
+            )}
+            aria-hidden
+          />
+        </div>
+      </div>
+      <ul className="mt-[88px] grid grid-cols-4 gap-8 xl:mt-20 xl:gap-5 lg:grid-cols-2 md:mt-20 sm:mt-16 sm:grid-cols-1">
+        {CASE_STUDIES.map(({ title, description, logo, link }, index) => (
+          <li
+            className={clsx(
+              'flex',
+              index === 0 && 'lg:-order-1',
+              index === 3 && 'lg:-order-1 sm:-order-2'
+            )}
+            key={title}
+          >
+            <Link
+              className="group relative h-44 w-full rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 shadow-contact xl:h-[168px] xl:p-[18px] lg:h-[134px] md:h-32 md:p-4"
+              to={link}
             >
-              <Image
-                className="sm:w-1/2"
-                src={illustrationSuccess}
-                width={330}
-                height={372}
-                loading="lazy"
-                alt=""
+              <div className="relative z-10 flex h-full flex-col justify-between">
+                <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
+                  {title}{' '}
+                  <span
+                    className="font-light text-gray-new-60 lg:block"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                </p>
+                <Image
+                  className="relative h-6 w-fit xl:h-5 sm:h-[18px]"
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
+                  priority
+                />
+              </div>
+              {index === 3 && (
+                <div
+                  className={clsx(
+                    'pointer-events-none absolute -inset-px rounded-[inherit] bg-[radial-gradient(85%_58%_at_70%_0%,rgba(14,23,27,.9),#151E2300)]',
+                    'transition-opacity duration-300 group-hover:opacity-0',
+                    'before:absolute before:inset-px before:rounded-[inherit] before:bg-[#0A0A0C] before:bg-[radial-gradient(100%_132%_at_63%_-27%,#0E171BE6,#0E171B00)]'
+                  )}
+                  aria-hidden
+                />
+              )}
+              <div
+                className={clsx(
+                  'pointer-events-none absolute -inset-px rounded-[inherit] bg-[linear-gradient(67deg,rgba(82,156,160,.14)_16%,rgba(82,156,160,.7))]',
+                  'opacity-0 transition-opacity duration-300 group-hover:opacity-100',
+                  'before:absolute before:inset-px before:rounded-[inherit] before:bg-[radial-gradient(75%_95%_at_84%_0%,rgba(24,62,65,.8),rgba(10,18,18,.9))]'
+                )}
                 aria-hidden
               />
-              <Heading size="md" tag="h2">
-                Your message has been sent
-              </Heading>
-              <p className="mt-5 text-xl md:text-lg">
-                Thank you for contacting us. We will be in touch shortly.
-              </p>
-              <Button
-                className="relative mt-9 px-9 py-6 !text-lg xl:!text-base"
-                theme="primary"
-                size="sm"
-                to="/"
-              >
-                <span
-                  className="pointer-events-none absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px] lg:h-[146px] sm:h-[92px]"
-                  style={{
-                    background: 'linear-gradient(180deg, #00E599 0%, rgba(0, 229, 153, 0) 100%)',
-                  }}
-                />
-                <span className="relative z-10">Back to Home</span>
-              </Button>
-            </m.div>
-          )}
-        </AnimatePresence>
-
-        <NoiseFilter />
-      </section>
-    </LazyMotion>
-  );
-};
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </section>
+);
 
 export default Hero;
