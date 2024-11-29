@@ -24,7 +24,7 @@ const CTA = ({ isDocsPage = false, reset }) =>
     <div className="mt-11 flex items-center gap-6 lg:mt-8 lg:gap-4">
       {reset ? (
         <>
-          <Button className="!py-5 px-10" size="xs" theme="primary" withArrow onClick={reset}>
+          <Button className="!px-10 !py-5" size="xs" theme="primary" withArrow onClick={reset}>
             Try again
           </Button>
           <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>
@@ -32,7 +32,7 @@ const CTA = ({ isDocsPage = false, reset }) =>
           </Link>
         </>
       ) : (
-        <Button className="!py-5 px-10" size="xs" theme="primary" to="/">
+        <Button className="!px-10 !py-5" size="xs" theme="primary" to="/">
           Back to Home
         </Button>
       )}
