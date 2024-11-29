@@ -1,7 +1,7 @@
 ---
 title: Manage Organizations using the Neon API
 enableTableOfContents: true
-updatedOn: '2024-11-25T14:44:05.635Z'
+updatedOn: '2024-11-29T17:26:14.039Z'
 ---
 
 <FeatureBeta/>
