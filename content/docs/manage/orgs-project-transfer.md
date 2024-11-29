@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2024-11-28T17:16:46.410Z'
+updatedOn: '2024-11-29T18:50:41.471Z'
 ---
 
 When creating an organization as an Admin &#8212; or as a member of an organization that's already up and running &#8212; you may need to transfer existing projects from your personal account to your target organization.

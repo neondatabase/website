@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-11-28T17:16:46.410Z'
+updatedOn: '2024-11-29T18:50:41.470Z'
 ---
 
 Learn how to manage your organization's projects, invite Members and Collaborators, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
