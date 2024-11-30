@@ -15,7 +15,7 @@ updatedOn: '2024-11-19T20:20:15.583Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/reference/typescript-sdk">TypeScript SDK for the Neon API</a>
-  <a href="https://neon.tech/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api-reference">Neon API Reference</a>
   <a href="https://neon.tech/blog/why-neondatabase-toolkit">Why we built @neondatabase/toolkit</a>
 </DocsList>
 

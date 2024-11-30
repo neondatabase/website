@@ -52,7 +52,7 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 Neon AI chat is available to all Neon users. You can access Neon AI chat from the following locations:
 
 - The **Search** bar at the top of the [Neon Console](https://console.neon.tech/app/projects)
-- The **Search** bar in the [Neon Documentation](https://neon.tech/docs/introduction)
+- The **Search** bar in the [Neon Documentation](/docs/introduction)
 - The **#gpt-help** channel on the [Neon Discord Server](https://discord.gg/92vNTzKDGp)
 
 ![Ask Neon AI](/docs/introduction/ask_neon_ai.png)

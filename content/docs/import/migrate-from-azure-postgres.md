@@ -280,6 +280,6 @@ For more information about logical replication and Postgres client utilities, re
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [psql](https://www.postgresql.org/docs/current/app-psql.html)
 - [Postgres - Logical replication](https://www.postgresql.org/docs/current/logical-replication.html)
-- [Neon logical replication guide](https://neon.tech/docs/guides/logical-replication-guide)
+- [Neon logical replication guide](/docs/guides/logical-replication-guide)
 
 <NeedHelp/>

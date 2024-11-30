@@ -14,7 +14,7 @@ This serverless character also makes Neon databases highly agile and well-suited
 
 ![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
 
-Read our [Architecture](https://neon.tech/docs/introduction/architecture-overview) section for more information on how Neon is built.
+Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 
 ## What “serverless” means to us
 

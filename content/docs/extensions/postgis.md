@@ -19,7 +19,7 @@ This guide introduces you to the `postgis` extension - how to enable it, store a
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 Currently, Neon uses version `3.3.3` of the `postgis` extension for all Postgres versions.
 

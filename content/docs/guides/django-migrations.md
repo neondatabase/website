@@ -371,6 +371,6 @@ You can find the source code for the application described in this guide on GitH
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Django Documentation](https://docs.djangoproject.com/)
-- [Neon Postgres](https://neon.tech/docs/introduction)
+- [Neon Postgres](/docs/introduction)
 
 <NeedHelp/>

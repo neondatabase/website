@@ -227,6 +227,6 @@ For complex migrations or when you need more control over the migration process,
 For more information on `pgloader` and database migration, refer to the following resources:
 
 - [pgloader documentation - MSSQL to Postgres](https://pgloader.readthedocs.io/en/latest/ref/mssql.html)
-- [Neon documentation](https://neon.tech/docs/introduction)
+- [Neon documentation](/docs/introduction)
 
 <NeedHelp/>

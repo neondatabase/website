@@ -9,7 +9,7 @@ Stay updated with the latest information and announcements from Neon by subscrib
 
 ## Changelog
 
-Keep track of new features, improvements, and fixes by subscribing to the [Neon Changelog](https://neon.tech/docs/changelog) RSS feed.
+Keep track of new features, improvements, and fixes by subscribing to the [Neon Changelog](/docs/changelog) RSS feed.
 
 ```bash
 https://neon.tech/docs/changelog/rss.xml

@@ -55,7 +55,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
 
 - **Use a project-per-user model**: When setting up your integration, we recommend a **project-per-user** model rather than branch-per-user or database-per-user models.
 
-  **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. When a user signs up with Neon, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration. You can learn more about Neon's project-based structure here: [Neon object hierarchy](https://neon.tech/docs/manage/overview).
+  **What do we mean by project-per-user?** In Neon, resources such as branches, databases, roles, and computes are organized within a Neon project. When a user signs up with Neon, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration. You can learn more about Neon's project-based structure here: [Neon object hierarchy](/docs/manage/overview).
 
   **Why we recommend the project-per-user model**:
 
@@ -82,4 +82,4 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
 
 ## Integration support
 
-We’re here to support you through every step of your integration. If you have any questions, feel free to reach out to our [Support team](https://neon.tech/docs/introduction/support). If you’ve set up a partnership arrangement with Neon, you can also contact your Neon Partnership representative.
+We’re here to support you through every step of your integration. If you have any questions, feel free to reach out to our [Support team](/docs/introduction/support). If you’ve set up a partnership arrangement with Neon, you can also contact your Neon Partnership representative.

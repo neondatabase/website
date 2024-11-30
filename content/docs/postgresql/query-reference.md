@@ -866,10 +866,10 @@ Get the maximum number of connections for your Postgres instance.
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
+The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 
 <Admonition type="tip">
-You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
+You can use [connection pooling](/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
 </Admonition>
 
 ### Get the percentage of maximum connections in use
@@ -879,7 +879,7 @@ SELECT (SELECT SUM(numbackends) FROM pg_stat_database) / (SELECT
 setting::float FROM pg_settings WHERE name = 'max_connections');
 ```
 
-This query only considers your `max_connections` setting. It does not account for [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling).
+This query only considers your `max_connections` setting. It does not account for [connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 ### Get the current number of connections for a database
 

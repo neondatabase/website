@@ -135,7 +135,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```
 
     <Admonition type="tip">
-    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.

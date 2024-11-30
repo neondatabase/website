@@ -257,7 +257,7 @@ npm install postgres
 </CodeTabs>
 ````
 
-To view this example in the Neon documentation, see [Create a Next.js project and add dependencies](https://neon.tech/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
+To view this example in the Neon documentation, see [Create a Next.js project and add dependencies](/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
 
 ## Admonitions
 

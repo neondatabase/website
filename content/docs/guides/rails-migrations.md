@@ -367,6 +367,6 @@ For more information on the tools and concepts used in this guide, refer to the 
 
 - [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 - [Active Record Migrations](https://guides.rubyonrails.org/active_record_migrations.html)
-- [Neon Postgres](https://neon.tech/docs/introduction)
+- [Neon Postgres](/docs/introduction)
 
 <NeedHelp/>

@@ -256,7 +256,7 @@ When connecting a Neon project to a GitHub repository, the GitHub integration pe
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](https://neon.tech/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
+The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
 
 The `NEON_PROJECT_ID` variable defines the Neon project that is connected to the repository. Operations run on Neon via the Neon API or CLI typically require specifying the Neon project ID, as a Neon account may have more than one Neon project.
 

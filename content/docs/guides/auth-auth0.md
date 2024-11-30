@@ -440,7 +440,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information on the tools used in this guide, refer to the following documentation:
 
-- [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver)
+- [Neon Serverless Driver](/docs/serverless/serverless-driver)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Auth0 Next.js SDK](https://auth0.com/docs/quickstart/webapp/nextjs)

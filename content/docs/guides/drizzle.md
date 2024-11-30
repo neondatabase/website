@@ -13,7 +13,7 @@ updatedOn: '2024-11-28T11:18:12.622Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
-  <a href="https://neon.tech/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
+  <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
