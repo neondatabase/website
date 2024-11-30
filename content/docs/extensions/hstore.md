@@ -2,7 +2,7 @@
 title: The hstore extension
 subtitle: Manage key-value pairs in Postgres using hstore
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.368Z'
+updatedOn: '2024-11-30T11:53:56.049Z'
 ---
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.

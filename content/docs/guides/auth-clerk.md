@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2024-11-02T14:20:11.974Z'
+updatedOn: '2024-11-30T11:53:56.056Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.

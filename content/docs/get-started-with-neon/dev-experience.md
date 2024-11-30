@@ -2,7 +2,7 @@
 title: Developer experience with Neon
 subtitle: Enhancing development workflows with Neon
 enableTableOfContents: true
-updatedOn: '2024-11-14T13:15:10.562Z'
+updatedOn: '2024-11-30T11:53:56.052Z'
 ---
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.

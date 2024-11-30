@@ -3,7 +3,7 @@ title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
 enableTableOfContents: true
-updatedOn: '2024-10-23T14:34:44.516Z'
+updatedOn: '2024-11-30T11:53:56.071Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.

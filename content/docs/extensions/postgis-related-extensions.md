@@ -2,7 +2,7 @@
 title: PostGIS-related extensions
 subtitle: Improve geospatial functionality with additional PostGIS extensions
 enableTableOfContents: true
-updatedOn: '2024-07-23T13:01:46.234Z'
+updatedOn: '2024-11-30T11:53:56.051Z'
 ---
 
 PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:

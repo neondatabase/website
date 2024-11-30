@@ -3,7 +3,7 @@ title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
 enableTableOfContents: true
-updatedOn: '2024-11-19T20:20:15.583Z'
+updatedOn: '2024-11-30T11:53:56.079Z'
 ---
 
 <InfoBlock>

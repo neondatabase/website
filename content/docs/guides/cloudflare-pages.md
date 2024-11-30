@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Pages
 subtitle: Connect a Neon Postgres database to your Cloudflare Pages web application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.649Z'
+updatedOn: '2024-11-30T11:53:56.058Z'
 ---
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.

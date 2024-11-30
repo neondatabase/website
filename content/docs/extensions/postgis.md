@@ -2,7 +2,7 @@
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
 enableTableOfContents: true
-updatedOn: '2024-07-23T13:01:46.234Z'
+updatedOn: '2024-11-30T11:53:56.052Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.

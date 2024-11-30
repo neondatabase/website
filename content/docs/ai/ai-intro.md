@@ -2,7 +2,7 @@
 title: AI & Embeddings
 subtitle: Build AI applications with Neon Postgres as your vector database
 enableTableOfContents: true
-updatedOn: '2024-11-21T12:45:44.960Z'
+updatedOn: '2024-11-30T11:53:56.043Z'
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).

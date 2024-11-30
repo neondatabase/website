@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.646Z'
+updatedOn: '2024-11-30T11:53:56.055Z'
 ---
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.

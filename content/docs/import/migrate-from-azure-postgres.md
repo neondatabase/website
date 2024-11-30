@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.588Z'
+updatedOn: '2024-11-30T11:53:56.066Z'
 ---
 
 <LRBeta/>

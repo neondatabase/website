@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-16T12:49:16.154Z'
+updatedOn: '2024-11-30T11:53:56.077Z'
 ---
 
 ## Before you begin
