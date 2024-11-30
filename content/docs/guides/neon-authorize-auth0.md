@@ -3,7 +3,7 @@ title: Secure your data with Auth0 and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-25T13:56:23.955Z'
+updatedOn: '2024-11-25T21:28:12.834Z'
 ---
 
 <InfoBlock>
@@ -199,7 +199,7 @@ CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
 
-CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+CREATE POLICY "Individuals can view their own todos." ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
 
@@ -235,7 +235,7 @@ import { getAccessToken } from '@auth0/nextjs-auth0';
 export async function TodoList() {
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            const { accessToken } = await getAccessToken();
+            const { accessToken } = await getAccessToken(); // [!code highlight]
             if (!accessToken) {
                 throw new Error('No access token');
             }
@@ -246,7 +246,7 @@ export async function TodoList() {
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
     const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
     return (
         <ul>
@@ -272,7 +272,7 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
     neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token,
+        authToken: token, // [!code highlight]
     });
 
 export function TodoList() {
@@ -281,7 +281,7 @@ export function TodoList() {
 
     useEffect(() => {
         async function loadTodos() {
-            const authToken = await getAccessTokenSilently();
+            const authToken = await getAccessTokenSilently(); // [!code highlight]
 
             if (!authToken) {
                 return;
@@ -292,7 +292,7 @@ export function TodoList() {
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()');
+                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }

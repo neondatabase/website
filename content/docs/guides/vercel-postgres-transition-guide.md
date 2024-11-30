@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-20T10:57:13.786Z'
+updatedOn: '2024-11-27T14:15:01.760Z'
 ---
 
 <Admonition type="warning">
@@ -168,4 +168,4 @@ Yes, Neon supports any ORM that is compatible with Vercel Postgres, including:
 
 ## More questions?
 
-There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up slack channel [#vercel-postgres-transition](https://discord.com/channels/1176467419317940276/1306544611157868544), which we will be monitoring leading up to and through the transition period.
+There are likely many more questions we haven't thought of. To get you those answers as quickly as possible, we've set up discord channel [#vercel-postgres-transition](https://discord.com/channels/1176467419317940276/1306544611157868544), which we will be monitoring leading up to and through the transition period.

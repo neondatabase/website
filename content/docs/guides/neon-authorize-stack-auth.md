@@ -3,7 +3,7 @@ title: Secure your data with Stack Auth and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-25T13:56:23.959Z'
+updatedOn: '2024-11-25T21:31:32.559Z'
 ---
 
 <InfoBlock>
@@ -199,7 +199,7 @@ CREATE POLICY "Individuals can create todos." ON todos FOR INSERT
 TO authenticated
 WITH CHECK ((select auth.user_id()) = user_id);
 
-CREATE POLICY "Individuals can view their own todos. " ON todos FOR SELECT
+CREATE POLICY "Individuals can view their own todos." ON todos FOR SELECT
 TO authenticated
 USING ((select auth.user_id()) = user_id);
 
@@ -230,22 +230,24 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { auth } from '@stackauth/nextjs/server';
+import { stackServerApp } from "@/stack";
 
 export async function TodoList() {
+  const user = await stackServerApp.getUser();
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const token = await auth().getToken(); // [!code highlight]
-      if (!token) {
+      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
+      if (!authToken) {
         throw new Error('No token');
       }
-      return token;
+      return authToken;
     },
   });
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+  const todos = await
+    sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -266,48 +268,48 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useAuth } from '@stackauth/nextjs';
+import { useUser } from '@stackframe/stack';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
-    });
+  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+    authToken: token, // [!code highlight]
+  });
 
 export function TodoList() {
-    const { getToken } = useAuth();
-    const [todos, setTodos] = useState<Array<Todo>>();
+  const user = useUser();
+  const [todos, setTodos] = useState<Array<Todo>>();
 
-    useEffect(() => {
-        async function loadTodos() {
-            const authToken = await getToken(); // [!code highlight]
+  useEffect(() => {
+    async function loadTodos() {
+      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
 
-            if (!authToken) {
-                return;
-            }
+      if (!authToken) {
+        return;
+      }
 
-            const sql = getDb(authToken);
+      const sql = getDb(authToken);
 
-            // WHERE filter is optional because of RLS.
-            // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
+      const todosResponse = await
+        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-            setTodos(todosResponse as Array<Todo>);
-        }
+      setTodos(todosResponse as Array<Todo>);
+    }
 
-        loadTodos();
-    }, [getToken]);
+    loadTodos();
+  }, [user]);
 
-    return (
-        <ul>
-            {todos?.map((todo) => (
-                <li key={todo.id}>
-                    {todo.task}
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>
+          {todo.task}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 
