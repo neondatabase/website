@@ -132,8 +132,6 @@ end
 conn.close
 ```
 
-
-
 ```rust
 // Rust example
 use postgres::Client;
