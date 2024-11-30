@@ -73,7 +73,7 @@ Output:
 The following statement returns data from the `basket_b` table:
 
 ```sql
-SELECT * FROM basket_a;
+SELECT * FROM basket_b;
 ```
 
 Output:
