@@ -102,7 +102,7 @@ Neon has tested the following drivers for SNI support:
 | Driver            | Language   | SNI Support | Notes                                                                                                                                             |
 | ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | npgsql            | C#         | &check;     |                                                                                                                                                   |
-| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                         |
+| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                                          |
 | github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
 | pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
 | go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
