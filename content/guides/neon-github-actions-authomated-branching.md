@@ -103,6 +103,8 @@ By the end of this guide, you'll have a system where database changes are as sea
    DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
    ```
 
+5. Push your code to a Github repository.
+
 ## Set up the Neon GitHub integration
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
@@ -159,9 +161,6 @@ jobs:
       || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Create Neon Branch
         id: create_neon_branch
         uses: neondatabase/create-branch-action@v5
@@ -170,7 +169,10 @@ jobs:
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
-      - name: Run Migrations
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Migrations on Preview Branch
         run: npm install && npm run db:generate && npm run db:migrate
         env:
           DATABASE_URL: '${{ steps.create_neon_branch.outputs.db_url }}'
@@ -183,9 +185,11 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 
   delete_neon_branch:
-    name: Delete Neon Branch
+    name: Delete Neon Branch and Apply Migrations on Production Database
     needs: setup
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Delete Neon Branch
@@ -196,10 +200,15 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 
       - name: Checkout
+        if: github.event.pull_request.merged == true
         uses: actions/checkout@v4
 
-      - name: Apply migrations
-        run: npm install && npm run db:generate && npm run db:migrate
+      - name: Apply migrations to production
+        if: github.event.pull_request.merged == true
+        run: |
+          npm install
+          npm run db:generate
+          npm run db:migrate
         env:
           DATABASE_URL: '${{ secrets.DATABASE_URL }}'
 ```
