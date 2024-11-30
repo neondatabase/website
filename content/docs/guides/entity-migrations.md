@@ -359,6 +359,6 @@ In this guide, we demonstrated how to set up an Entity Framework project with Ne
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Entity Framework Core Documentation](https://learn.microsoft.com/en-us/ef/core/)
-- [Neon Postgres](https://neon.tech/docs/introduction)
+- [Neon Postgres](/docs/introduction)
 
 <NeedHelp/>

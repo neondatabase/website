@@ -30,7 +30,7 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 This section describes how to prepare your Supabase database for exporting data.
 
-To illustrate the migration workflow, we use the [LEGO Database](https://neon.tech/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
+To illustrate the migration workflow, we use the [LEGO Database](/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
 
 ### Retrieve Supabase connection details
 
@@ -193,6 +193,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Migrating data to Neon](https://neon.tech/docs/import/migrate-from-postgres)
+- [Migrating data to Neon](/docs/import/migrate-from-postgres)
 
 <NeedHelp/>

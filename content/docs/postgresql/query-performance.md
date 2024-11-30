@@ -311,7 +311,7 @@ EXECUTE user_fetch_plan('dana');
 ```
 
 <Admonition type="note">
-If you are using a pooled connection for your Neon database, only protocol-level prepared statements are supported. See [Optimize queries with PgBouncer and prepared statements](https://neon.tech/docs/connect/connection-pooling#optimize-queries-with-pgbouncer-and-prepared-statements).
+If you are using a pooled connection for your Neon database, only protocol-level prepared statements are supported. See [Optimize queries with PgBouncer and prepared statements](/docs/connect/connection-pooling#optimize-queries-with-pgbouncer-and-prepared-statements).
 </Admonition>
 
 ### Limit your result sets

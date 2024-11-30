@@ -230,7 +230,7 @@ LIMIT 10;
 When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics.
 
 <Admonition type="note">
-In Neon, only [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.
+In Neon, only [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.
 </Admonition>
 
 ```sql

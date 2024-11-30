@@ -15,7 +15,7 @@ Neon's AI Starter Kit provides resources, starter apps, and examples to help get
 
 The **Neon AI Starter Kit** includes:
 
-- Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
+- Neon Postgres with the latest version of the Postgres [pgvector](/docs/extensions/pgvector) extension for storing vector embeddings
 - A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
   - AI chat
   - RAG chat

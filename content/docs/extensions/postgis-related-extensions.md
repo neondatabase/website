@@ -22,7 +22,7 @@ These extensions offer specialized functionality for routing, hierarchical geosp
 
 **Version availability:**
 
-For up-to-date information on supported versions for each extension, refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon.
+For up-to-date information on supported versions for each extension, refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon.
 
 ## Enable the PostGIS extension
 

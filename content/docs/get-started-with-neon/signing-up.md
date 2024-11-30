@@ -18,7 +18,7 @@ updatedOn: '2024-10-22T15:41:04.370Z'
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="https://neon.tech/docs/introduction/branching">About branching</a>
+<a href="/docs/introduction/branching">About branching</a>
 <a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
 <a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
 </DocsList>

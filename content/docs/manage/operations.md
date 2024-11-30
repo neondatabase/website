@@ -25,7 +25,7 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 
 ## View operations
 
-You can view system operations via the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view system operations via the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 

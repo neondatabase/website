@@ -373,6 +373,6 @@ For more information on the tools and concepts used in this guide, refer to the 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
 - [Alembic Documentation](https://alembic.sqlalchemy.org/)
-- [Neon Postgres](https://neon.tech/docs/introduction)
+- [Neon Postgres](/docs/introduction)
 
 <NeedHelp/>

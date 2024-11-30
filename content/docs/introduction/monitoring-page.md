@@ -84,7 +84,7 @@ Idle connections are those that are open but not currently being used. While a f
 
 **TOTAL**: The sum of active and idle connections for the selected compute.
 
-The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
+The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
 
 ### Database size
 

@@ -17,7 +17,7 @@ The `pg_prewarm` extension is open-source and can be installed on any Postgres s
 
 **Version availability**
 
-Please refer to the [list of extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for information about the version of `pg_prewarm` that Neon supports.
+Please refer to the [list of extensions](/docs/extensions/pg-extensions) available in Neon for information about the version of `pg_prewarm` that Neon supports.
 
 ## Enable the `pg_prewarm` extension
 

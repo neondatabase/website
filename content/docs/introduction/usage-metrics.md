@@ -71,7 +71,7 @@ Here are some strategies to consider:
 
 - **Optimize your history retention**
 
-  Your history retention setting controls how much change history your project retains. Decreasing history reduces the window available for things like point-in-time restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced history retention configuration; one that supports the features you need but does not consume too much storage. See [History retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) for how to configure your retention period.
+  Your history retention setting controls how much change history your project retains. Decreasing history reduces the window available for things like point-in-time restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced history retention configuration; one that supports the features you need but does not consume too much storage. See [History retention](/docs/introduction/point-in-time-restore#history-retention) for how to configure your retention period.
 
 - **Use branches instead of duplicating data**
 
@@ -105,7 +105,7 @@ These factors could be contributing to your high storage consumption:
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
 - **History retention:** The length of your history retention window plays a significant role. If you perform many data modifications daily and your history retention window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
 
-To mitigate this issue, consider adjusting your [history retention](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) setting. Perhaps you can do with a shorter window for point-in-time restore, for example. Retaining less history should reduce your future storage consumption.
+To mitigate this issue, consider adjusting your [history retention](/docs/introduction/point-in-time-restore#history-retention) setting. Perhaps you can do with a shorter window for point-in-time restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your history retention window, that could also explain why your storage is so large.
 
@@ -154,7 +154,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
   VACUUM (VERBOSE, ANALYZE) playing_with_neon;
   ```
 
-  See [VACUUM and ANALYZE statistic](https://neon.tech/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
+  See [VACUUM and ANALYZE statistic](/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
 
 </details>
 
@@ -291,7 +291,7 @@ Each of [Neon's plans](/docs/introduction/plans) includes a certain number of co
 <details>
 <summary>**Where can I monitor compute hour usage?**</summary>
 
-You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](https://neon.tech/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
+You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
 
 </details>
 

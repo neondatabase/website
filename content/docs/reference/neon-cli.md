@@ -221,7 +221,7 @@ Global options are supported with any Neon CLI command.
 
 - <a id="api-key"></a>`--api-key`
 
-  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash
   neon <command> --api-key <neon_api_key>

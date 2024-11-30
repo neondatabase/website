@@ -138,7 +138,7 @@ If you have a lot of products and sales, this query might impact performance on 
 When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica when you need one.
 
 <Admonition type="tip">
-Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature will suspend the compute until the next time you access it. The default autosuspend setting is 5 minutes, meaning that the read replica compute will automatically suspend after 5 minutes of inactivity.
+Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Autosuspend](/docs/introduction/auto-suspend) feature will suspend the compute until the next time you access it. The default autosuspend setting is 5 minutes, meaning that the read replica compute will automatically suspend after 5 minutes of inactivity.
 </Admonition>
 
 To delete a read replica:

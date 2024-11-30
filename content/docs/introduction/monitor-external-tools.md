@@ -84,7 +84,7 @@ Pre-compiled and configured installation packages for pgAdmin 4 are available fo
 
 Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard, as described [above](#how-to-connect-to-your-database-from-pghero).
 
-Enter your connection details as shown [here](https://neon.tech/docs/connect/connect-postgres-gui#connect-to-the-database).
+Enter your connection details as shown [here](/docs/connect/connect-postgres-gui#connect-to-the-database).
 
 Neon uses the default Postgres port: `5432`
 

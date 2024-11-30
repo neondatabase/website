@@ -19,7 +19,7 @@ In this guide, we'll explore the `pg_trgm` extension, covering how to enable it,
 
 **Version availability**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 Currently, Neon uses version `1.6` of the `pg_trgm` extension for all Postgres versions.
 

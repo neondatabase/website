@@ -43,14 +43,14 @@ Given the potential impact on application responsiveness, it's important to have
 Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="important">
-If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](https://neon.tech/docs/manage/endpoints#restart-a-compute). 
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
 ![Connection warmup autosuspend and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-For autoscaling configuration instructions, see [Compute size and autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ### Place your application and database in the same region
 

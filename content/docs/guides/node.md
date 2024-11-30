@@ -225,7 +225,7 @@ Run `node app.js` to view the result.
 
 ## Endpoint ID variable
 
-For older clients that do not support Server Name Indication (SNI), the `postgres.js` example below shows how to include the `ENDPOINT_ID` variable in your application's connection configuration. This is a workaround that is not required if you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client. For more information about this workaround and when it is required, see [The endpoint ID is not specified](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) in our [connection errors](/docs/connect/connection-errors) documentation.
+For older clients that do not support Server Name Indication (SNI), the `postgres.js` example below shows how to include the `ENDPOINT_ID` variable in your application's connection configuration. This is a workaround that is not required if you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client. For more information about this workaround and when it is required, see [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) in our [connection errors](/docs/connect/connection-errors) documentation.
 
 ```javascript
 // app.js

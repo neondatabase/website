@@ -82,7 +82,7 @@ inputs:
   suspend_timeout:
     description: >
       Duration of inactivity in seconds after which the compute endpoint is
-      For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
+      For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
     default: '0'
   ssl:
     description: >
@@ -427,7 +427,7 @@ are two ways you can perform this setup:
   configuring it manually in your GitHub repository.
 
   1. Obtain a Neon API key. See
-     [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key)
+     [Create an API key](/docs/manage/api-keys#create-an-api-key)
      for instructions.
   1. In your GitHub repository, go to **Project settings** and locate
      **Secrets** at the bottom of the left sidebar.

@@ -17,7 +17,7 @@ This guide describes the `wal2json` plugin &#8212; how to enable it in Neon, con
 
 **Version availability:**
 
-The `wal2json` plugin is available in all Postgres versions supported by Neon. For the most up-to-date information on supported versions, please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon.
+The `wal2json` plugin is available in all Postgres versions supported by Neon. For the most up-to-date information on supported versions, please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon.
 
 ## Enable logical replication
 

@@ -14,7 +14,7 @@ updatedOn: '2024-11-21T16:16:13.436Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="https://neon.tech/docs/extensions/pgvector">The pgvector extension</a>
+  <a href="/docs/extensions/pgvector">The pgvector extension</a>
   <a href="https://www.youtube.com/watch?v=QDNsxw_3ris&t=1356s">YouTube: pgrag video demonstration</a>
 </DocsList>
 

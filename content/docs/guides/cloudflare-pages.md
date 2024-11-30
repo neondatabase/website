@@ -9,7 +9,7 @@ updatedOn: '2024-08-07T21:36:52.649Z'
 
 This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Pages application. We'll create a simple web application using `React` that tracks our reading list using the database and provides a form to add new books to it.
 
-We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
+We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
@@ -176,7 +176,7 @@ The `App` component fetches the list of books from the server and displays them.
 
 ### Implement the serverless functions
 
-We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so we first need to install it as a dependency:
+We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the Neon database, so we first need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
