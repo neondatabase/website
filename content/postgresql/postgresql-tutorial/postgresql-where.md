@@ -75,7 +75,7 @@ We will use the `customer` table from the [sample database](../postgresql-getti
 
 ### 1\)  Using WHERE clause with the equal (\=) operator example
 
-The following statement uses the `WHERE` clause to find customers with the first name is `Jamie`:
+The following statement uses the `WHERE` clause to find customers whose first name is `Jamie`:
 
 ```sql
 SELECT
