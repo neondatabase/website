@@ -21,7 +21,7 @@ You can build your database branching workflows using the Neon CLI, Neon API, or
 neon branches create --name dev/alex
 ```
 
-Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GiB or 1 TiB, [it only takes seconds to create a branch](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies, not partial or schema-only.
+Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GB or 1 TiB, [it only takes seconds to create a branch](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies, not partial or schema-only.
 
 Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
