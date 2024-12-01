@@ -26,7 +26,7 @@ To minimize storage costs, Neon automatically archives branches that are:
 - Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
-Both conditions must be true for a branch to be archived. 
+Both conditions must be true for a branch to be archived.
 
 Additionally, these conditions apply:
 
