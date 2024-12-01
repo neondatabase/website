@@ -95,16 +95,16 @@ conn.close()
 # .NET example
 
 ## Connection string
-"Host=ep-royal-flower-abc123.us-east-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=password"
+"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf"
 
 ## with SSL
-"Host=ep-royal-flower-abc123.us-east-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=password;SSL Mode=Require;Trust Server Certificate=true"
+"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
 
 ## Entity Framework (appsettings.json)
 {
   ...
   "ConnectionStrings": {
-    "DefaultConnection": "Host=ep-royal-flower-abc123.us-east-2.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=password;SSL Mode=Require;Trust Server Certificate=true"
+    "DefaultConnection": "Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
   },
   ...
 }
