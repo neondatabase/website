@@ -39,15 +39,15 @@
       "free": "0.5 GiB",
       "launch": {
         "title": "10 GiB",
-        "info": "Extra at $3.50 per 2 GiB"
+        "info": "Additional at $1.75 per GB / Archive storage: $0.1 per GB"
       },
       "scale": {
         "title": "50 GiB",
-        "info": "Extra at $15 per 10 GiB"
+        "info": "Additional at $1.5 per GB / Archive storage: $0.1 per GB"
       },
       "business": {
         "title": "500 GiB",
-        "info": "Extra at $0.5 per GiB"
+        "info": "Additional at $0.5 per GB / Archive storage: $0.1 per GB"
       }
     },
     {
@@ -62,15 +62,15 @@
       },
       "launch": {
         "title": "300 /month",
-        "info": "Extra usage at $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       },
       "scale": {
         "title": "750 /month",
-        "info": "Extra usage at $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       },
       "business": {
         "title": "1,000 /month",
-        "info": "Extra usage at $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       }
     },
     {
@@ -82,11 +82,11 @@
       "launch": "100",
       "scale": {
         "title": "1,000",
-        "info": "$50 per 1,000 projects"
+        "info": "Additional at $50 per 1,000 projects"
       },
       "business": {
         "title": "5,000",
-        "info": "Extra at $50 per 5,000 projects"
+        "info": "Additional at $50 per 5,000 projects"
       }
     },
     {

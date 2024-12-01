@@ -3,7 +3,7 @@ title: Partner guide
 subtitle: Learn how to integrate your platform or service with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-24T10:48:39.465Z'
+updatedOn: '2024-11-25T14:44:05.634Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
@@ -46,8 +46,8 @@ Learn how to set limits for your customers and track usage.
 
 <DetailIconCards>
 
-<a href="/docs/guides/partner-billing" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
+<a href="/docs/guides/partner-consumption-limits" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
 
-<a href="/docs/guides/metrics-api" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
+<a href="/docs/guides/partner-consumption-metrics" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
 
 </DetailIconCards>

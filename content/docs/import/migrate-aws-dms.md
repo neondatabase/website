@@ -1,7 +1,7 @@
 ---
 title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
-updatedOn: '2024-10-26T08:44:49.114Z'
+updatedOn: '2024-11-30T11:53:56.066Z'
 ---
 
 This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database server. AWS DMS supports a variety of database migration sources including PostgreSQL, MySQL, Oracle, and Microsoft SQL Server. For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
@@ -40,7 +40,7 @@ Complete the following steps before you begin:
      endpoint=ep-curly-term-54009904$AbC123dEf
      ```
 
-     You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-curly-term-54009904`. For information about why this password format is required, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
+     You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-curly-term-54009904`. For information about why this password format is required, see [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
 
    - **Secure Sockets Layer (SSL) mode**: Select `require`.
    - **Database name**: The name of your Neon database. In this example, we use a database named `neondb`

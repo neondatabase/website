@@ -60,7 +60,7 @@
       {
         "icon": "storage",
         "title": "10 GB storage",
-        "info": "Additional storage: $3.5 per 2 GB"
+        "info": "Extra: $1.75 per GB"
       },
       {
         "icon": "clock",
@@ -72,7 +72,7 @@
             "href": "#compute-hour"
           }
         ],
-        "info": "Additional usage: $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       },
       {
         "icon": "autoscale",
@@ -109,7 +109,7 @@
       {
         "icon": "storage",
         "title": "50 GB storage",
-        "info": "Additional storage: $15 per 10 GB"
+        "info": "Extra: $1.5 per GB"
       },
       {
         "icon": "clock",
@@ -121,7 +121,7 @@
             "href": "#compute-hour"
           }
         ],
-        "info": "Additional usage: $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       },
       {
         "icon": "autoscale",
@@ -161,7 +161,7 @@
       {
         "icon": "storage",
         "title": "500 GB storage",
-        "info": "Additional storage: $5 per 10 GB"
+        "info": "Extra: $0.5 per GB"
       },
       {
         "icon": "clock",
@@ -173,7 +173,7 @@
             "href": "#compute-hour"
           }
         ],
-        "info": "Additional usage: $0.16 per compute hour"
+        "info": "Additional at $0.16 per compute hour"
       },
       {
         "icon": "autoscale",

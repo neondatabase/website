@@ -2,8 +2,10 @@
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/partner-billing
 isDraft: false
-updatedOn: '2024-11-19T09:18:06.591Z'
+updatedOn: '2024-11-25T17:33:22.605Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -155,11 +157,11 @@ curl --request PATCH \
 
 You can use the Neon API to retrieve consumption metrics for your organization and projects through various endpoints:
 
-| Endpoint                                                                                             | Description                                                                                                              | Plan Availability            | Docs                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](metrics-api#get-account-level-aggregated-metrics)                              |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](metrics-api#get-granular-project-level-metrics-for-your-account) |
-| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                            | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    | [Get metrics for a single specified project](metrics-api#get-metrics-for-a-single-specified-project)                  |
+| Endpoint                                                                                             | Description                                                                                                              | Plan Availability            | Docs                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](partner-consumption-metrics#get-account-level-aggregated-metrics)                              |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](partner-consumption-metrics#get-granular-project-level-metrics-for-your-account) |
+| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                            | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    | [Get metrics for a single specified project](partner-consumption-metrics#get-metrics-for-a-single-specified-project)                  |
 
 ## Resetting a project after suspend
 

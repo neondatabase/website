@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Entity Framework
 subtitle: Set up Neon Postgres and run migrations for your Entity Framework project
 enableTableOfContents: true
-updatedOn: '2024-09-24T08:34:04.214Z'
+updatedOn: '2024-11-30T11:53:56.060Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
@@ -359,6 +359,6 @@ In this guide, we demonstrated how to set up an Entity Framework project with Ne
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Entity Framework Core Documentation](https://learn.microsoft.com/en-us/ef/core/)
-- [Neon Postgres](https://neon.tech/docs/introduction)
+- [Neon Postgres](/docs/introduction)
 
 <NeedHelp/>
