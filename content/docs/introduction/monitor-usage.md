@@ -86,11 +86,11 @@ You can select a branch from the table to view additional details about the bran
 
 ## Retrieve usage metrics with the Neon API
 
-Using the Neon API, you can retrieve a variety of usage metrics, which are highlighted in the [Get branch details](#get-branch-details) and [Get project details](#get-project-details) examples below. 
+Using the Neon API, you can retrieve a variety of usage metrics, which are highlighted in the [Get branch details](#get-branch-details) and [Get project details](#get-project-details) examples below.
 
 <Admonition type="note">
 Scale and Business plan users can use our more advanced `consumption` endpoints to monitor usage. See [Querying consumption metrics](/docs/guides/partner-consumption-metrics). These endpoints are recommended when monitoring usage for a large number of projects.
-</Admonition> 
+</Admonition>
 
 ### Get branch details
 

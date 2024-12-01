@@ -58,11 +58,11 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 | -------------------- | -------------------------------- | ------------------------------------------------- |
 | active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                               |
 | compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active hours for 4 vCPUs) |
-| written_data_bytes   | 1,000,000,000 (approx. 1 GB)    | 50,000,000,000 (approx. 50 GB)                   |
-| data_transfer_bytes  | 500,000,000 (approx. 500 MB)    | 10,000,000,000 (approx. 10 GB)                   |
+| written_data_bytes   | 1,000,000,000 (approx. 1 GB)     | 50,000,000,000 (approx. 50 GB)                    |
+| data_transfer_bytes  | 500,000,000 (approx. 500 MB)     | 10,000,000,000 (approx. 10 GB)                    |
 
-| Parameter (branch) | Trial                         | Pro                             |
-| ------------------ | ----------------------------- | ------------------------------- |
+| Parameter (branch) | Trial                         | Pro                            |
+| ------------------ | ----------------------------- | ------------------------------ |
 | logical_size_bytes | 100,000,000 (approx. 100 MiB) | 10,000,000,000 (approx. 10 GB) |
 
 ### Guidelines
