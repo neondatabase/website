@@ -13,14 +13,13 @@ Neon plans are structured around **Allowances** and **Extra usage**. Allowances 
 
 This table provides an overview of plan fees with allowances for storage, compute, and projects:
 
-| Plan       | Monthly Fee | Storage Allowance | Archive Storage Allowance | Compute Allowance                                                                                                                                        | Project Allowance |
-| :--------- | :---------- | :---------------- | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Plan       | Monthly Fee | Storage Allowance | Archive Storage Allowance         | Compute Allowance                                                                                                                                        | Project Allowance |
+| :--------- | :---------- | :---------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | Free Plan  | $0          | 0.5 GB-month      | Included in **Storage Allowance** | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes | 10 projects       |
-| Launch     | $19         | 10 GB-month       | 50 GB-month               | 300 compute hours per month                                                                                                                              | 100 projects      |
-| Scale      | $69         | 50 GB-month       | 250 GB-month              | 750 compute hours per month                                                                                                                              | 1000 projects     |
-| Business   | $700        | 500 GB-month      | 2500 GB-month             | 1000 compute hours per month                                                                                                                             | 5000 projects     |
-| Enterprise | Custom      | Custom            | Custom                    | Custom                                                                                                                                                   | Custom            |
-
+| Launch     | $19         | 10 GB-month       | 50 GB-month                       | 300 compute hours per month                                                                                                                              | 100 projects      |
+| Scale      | $69         | 50 GB-month       | 250 GB-month                      | 750 compute hours per month                                                                                                                              | 1000 projects     |
+| Business   | $700        | 500 GB-month      | 2500 GB-month                     | 1000 compute hours per month                                                                                                                             | 5000 projects     |
+| Enterprise | Custom      | Custom            | Custom                            | Custom                                                                                                                                                   | Custom            |
 
 The [Enterprise](/docs/introduction/plans#enterprise) plan is fully customizable with respect to allowances. Please contact [Sales](/contact-sales) for more information.
 
@@ -48,11 +47,11 @@ The Launch plan supports extra **Storage**, **Archive Storage**, and **Compute**
 - **Extra Archive Storage**: If you exceed x GB, extra storage is $0.10 per GB-month.
 - **Extra Compute**: If you exceed 300 compute hours, extra compute is billed at $0.16 per compute hour.
 
-| Resource      | Unit         | Price |
-| :------------ | :----------- | :---- |
-| Extra Storage | GB-month     | $1.75 |
+| Resource              | Unit         | Price |
+| :-------------------- | :----------- | :---- |
+| Extra Storage         | GB-month     | $1.75 |
 | Extra Archive Storage | GB-month     | $0.10 |
-| Extra Compute | Compute hour | $0.16 |
+| Extra Compute         | Compute hour | $0.16 |
 
 ### Scale plan
 
@@ -60,15 +59,15 @@ The Scale plan supports extra **Storage**, **Archive Storage**, **Compute**, and
 
 - **Extra Storage**: If you exceed 50 GB, extra storage is $1.50 per GB-month.
 - **Extra Archive Storage**: If you exceed x GB, extra storage is $0.10 per GB-month.
-- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16  per compute hour.
+- **Extra Compute**: If you exceed 750 compute hours, extra compute is billed at $0.16 per compute hour.
 - **Extra Projects**: If you exceed 50 projects, extra projects are allocated in units of 500 projects at $50 per unit.
 
-| Resource       | Unit         | Price  |
-| :------------- | :----------- | :----- |
-| Extra Storage  | GB-month     | $1.50  |
-| Extra Archive Storage | GB-month     | $0.10 |
-| Extra Compute  | Compute hour | $0.16  |
-| Extra Projects | 1000         | $50.00 |
+| Resource              | Unit         | Price  |
+| :-------------------- | :----------- | :----- |
+| Extra Storage         | GB-month     | $1.50  |
+| Extra Archive Storage | GB-month     | $0.10  |
+| Extra Compute         | Compute hour | $0.16  |
+| Extra Projects        | 1000         | $50.00 |
 
 ### Business plan
 
@@ -79,12 +78,12 @@ The Business plan supports extra **Storage**, **Archive Storage**, **Compute**, 
 - **Extra Compute**: If you exceed 1,000 compute hours, extra compute is billed at $0.16 per compute hour.
 - **Extra Projects**: If you exceed 5000 projects, extra projects are allocated in units of 5000 projects at $50 per unit.
 
-| Resource       | Unit         | Price  |
-| :------------- | :----------- | :----- |
-| Extra Storage  | GB-month     | $0.50  |
-| Extra Archive Storage | GB-month     | $0.10 |
-| Extra Compute  | Compute hour | $0.16  |
-| Extra Projects | 5000         | $50.00 |
+| Resource              | Unit         | Price  |
+| :-------------------- | :----------- | :----- |
+| Extra Storage         | GB-month     | $0.50  |
+| Extra Archive Storage | GB-month     | $0.10  |
+| Extra Compute         | Compute hour | $0.16  |
+| Extra Projects        | 5000         | $50.00 |
 
 ## How does extra usage work?
 
