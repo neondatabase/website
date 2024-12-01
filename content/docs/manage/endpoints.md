@@ -495,7 +495,7 @@ You may encounter an error similar to the following when your compute's local di
 ERROR: could not write to file "base/pgsql_tmp/pgsql_tmp1234.56.fileset/o12of34.p1.0": No space left on device (SQLSTATE 53100)
 ```
 
-Neon computes allocate approximately 20 GiB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
+Neon computes allocate approximately 20 GB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
 
 To resolve this issue, you can try the following strategies:
 

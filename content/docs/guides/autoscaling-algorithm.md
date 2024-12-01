@@ -68,7 +68,7 @@ An important part of the scaling algorithm is estimating your current working se
 Every 20 seconds, the autoscaler-agent checks the working set size across a variety of time windows, ranging from 1 to 60 minutes. The goal is to fit your working set within 75% of the compute’s RAM allocated to the LFC. If your working set exceeds this threshold, the algorithm increases compute size to expand the LFC, keeping frequently accessed data in memory for faster access. To learn more about how we do this, see [Dynamically estimating and scaling Postgres’ working set size](https://neon.tech/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 
 <Admonition type="note">
-If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GiB database can comfortably fit within a compute size of 2 vCPU with 8 GB of RAM (where the LFC can use up to 80% of the available RAM).
+If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GB database can comfortably fit within a compute size of 2 vCPU with 8 GB of RAM (where the LFC can use up to 80% of the available RAM).
 </Admonition>
 
 ## How often the metrics are polled

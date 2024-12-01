@@ -32,7 +32,7 @@ To optimize `pgvector` index build time, you can increase the `maintenance_work_
 SET maintenance_work_mem='10 GB';
 ```
 
-The recommended `maintenance_work_mem` setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GiB is less than 50% of the RAM available for that compute size.
+The recommended `maintenance_work_mem` setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GB is less than 50% of the RAM available for that compute size.
 
 ## Autoscaling
 

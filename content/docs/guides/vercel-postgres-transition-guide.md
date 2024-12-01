@@ -93,7 +93,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 | Compute Time  | 100 Hours             | 300 Hours                        |
 | Data Transfer | 256 MB                | Reasonable usage (no hard limit) |
 | Database      | First Database        | 1000                             |
-| Storage       | First 256 MB          | Up to 10 GiB                     |
+| Storage       | First 256 MB          | Up to 10 GB                      |
 
 Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 

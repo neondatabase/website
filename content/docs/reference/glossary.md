@@ -396,7 +396,7 @@ A feature that lets you invite other Neon users to work on a project together. N
 
 ## Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
 ## prorate
 
@@ -579,4 +579,4 @@ In logical replication, the WAL records all changes to the data, serving as the 
 
 ## Written data
 
-A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data.
+A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigabytes (GB). Writing data from compute to storage ensures the durability and integrity of your data.

@@ -7,7 +7,7 @@ updatedOn: '2024-08-12T11:07:15.292Z'
 
 ## Generative AI example
 
-To give you a clearer sense of how billing works, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication details as well as records of image generation per user. Analyzing this usage over a monthly billing period can help you understand the nuances of Neon billing based on actual scenarios and choose the right pricing plan.
+To give you a clearer sense of how billing works, let's explore a real-world example. Consider a simple image generation app that leverages Neon as the serverless database for storing user authentication details as well as records of image generation per user. Analyzing this usage over a monthly billing period can help you understand Neon billing based on actual scenarios and choose the right pricing plan.
 
 ## Overview: Costs by usage
 
@@ -35,7 +35,7 @@ Given the high number of connections used by this application, [connection pooli
 ### Compute hours and storage:
 
 - **Compute hours.** This is the metric Neon uses to track compute usage. 1 compute hour is equal to 1 active hour for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you do in this sample scenario, it takes 4 active hours to use 1 compute hour. You can use this formula to calculate compute hour usage: `compute hours = compute size * active hours`. The average daily number of active hours is 23.94, totaling 718.35 active hours for the sample month. This indicates steady but low-intensity database usage.
-- **Storage.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus a history of database changes. The amount of history retained is defined by your chosen [history retention period](/docs/manage/projects#configure-history-retention). The storage size in this sample scenario is now over 25 GiB and growing steadily with new written data as the user base grows.
+- **Storage.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus a history of database changes. The amount of history retained is defined by your chosen [history retention period](/docs/manage/projects#configure-history-retention). The storage size in this sample scenario is now over 25 GB and growing steadily with new written data as the user base grows.
 
 ## Usage breakdown for the month
 
@@ -51,7 +51,7 @@ A daily average of 23.94 active hours amounts to 713.35 active hours for the mon
 
 ### Storage
 
-Project storage grew 4.4 GiB over the month, from 23.6 GiB to 28 GiB.
+Project storage grew 4.4 GB over the month, from 23.6 GB to 28 GB.
 
 ![Sample storage graph](/docs/introduction/billing_storage_graph.png)
 
@@ -65,30 +65,30 @@ Here are the monthly totals for compute and storage usage.
 
 | Metric  | Start of the month | End of the month |
 | :------ | :----------------- | :--------------- |
-| Storage | 23.6 GiB           | 28 GiB           |
+| Storage | 23.6 GB-month      | 28 GB-month      |
 
 ### Which Neon pricing plan fits best?
 
-At roughly 718 active hours for the month with a compute size of 0.25 vCPU, this application is well under the 300 compute hours (1,200 active hours)/month allowance for the [Launch](/docs/introduction/plans##launch) plan and 750 compute hours (3000 active hours)/month for the [Scale](/docs/introduction/plans#scale) plan. However, with a storage size of 25 GiB, the storage requirements for the application are over the Launch plan allowance of 10 GiB. You could go with the Launch plan which offers 10 GiB of storage plus extra storage at $3.50 per 2 GiB unit or the Scale plan which offers 50 GiB storage. Let's do that math to compare monthly bills:
+At roughly 718 active hours for the month with a compute size of 0.25 vCPU, this application is well under the 300 compute hours (1,200 active hours)/month allowance for the [Launch](/docs/introduction/plans##launch) plan and 750 compute hours (3000 active hours)/month for the [Scale](/docs/introduction/plans#scale) plan. However, with a storage size of 25 GB, the storage requirements for the application are over the Launch plan allowance of 10 GB-month. You could go with the Launch plan which offers 10 GB-month of storage plus extra storage at $1.75 per GB-month or the Scale plan which offers 50 GB-month storage. Let's do that math to compare monthly bills:
 
 **Launch plan**:
 
 - Base fee: $19
-- Storage usage: 25 GiB (15 GiB over the allowance)
+- Storage usage: 25 GB-month (15 GB-month over the allowance)
 - Compute usage: 718 active hours (within the 300 compute hour/1200 active hour allowance)
-- Extra storage fee: 8 \* $3.50 = $28
+- Extra storage fee: 15 \* $1.75 = $26.25
 - Extra compute fee: $0
 
-_Total estimate_: $19 + $28 = $47 per month
+**Total estimate**: $19 + $26.25 = **$45.25 per month**
 
 **Scale plan**:
 
 - Base fee: $69
-- Storage usage: 25 GiB (within the 50 GiB allowance)
+- Storage usage: 25 GB-month (within the 50 GB-month allowance)
 - Compute usage: 718 active hours (within the 750 compute hour/3000 active hour allowance)
 - Extra storage fee: $0
 - Extra compute fee: $0
 
 _Total estimate_: $69 per month
 
-The Launch plan is more economical in the short term, but you might consider upgrading to the [Scale](/docs/introduction/plans#scale) plan when purchasing extra storage on the Launch plan is no longer cheaper than moving up to the $69 per month Scale plan. The Scale plan has a higher monthly storage allowance (50 GiB) and a cheaper per-unit extra storage cost (10 GiB at $15 vs. 2 GiB at $3.5). The Scale plan also offers additional features and more projects, which may factor into your decision about when to upgrade.
+The Launch plan is more economical in the short term, but you might consider upgrading to the [Scale](/docs/introduction/plans#scale) plan when purchasing extra storage on the Launch plan is no longer cheaper than moving up to the $69 per month Scale plan. The Scale plan has a higher monthly storage allowance (50 GB-month) and a cheaper per-unit extra storage cost (1 GB-month at $1.50 on Scale vs. 1 GB-month at $1.75 on Launch). The Scale plan also offers additional features and more projects, which may factor into your decision about when to upgrade.

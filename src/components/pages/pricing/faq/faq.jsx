@@ -30,11 +30,11 @@ const items = [
     question: 'How is storage charged in Neon?',
     answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
   },
-   {
+  {
     question: 'What do I get for the "regular" cost per-GB in Neon?',
     answer: `Neon's storage model is unique: our "per-GB" metric truly stretches. You can create hundreds of database copies (via branching) or replicas without increasing storage costs. High availability is also included in this price. For maximum storage scalability, consider the Business plan—our most cost-efficient option.`,
   },
-   {
+  {
     question: 'What is "archive storage"?',
     answer: `To save you costs, branches that are idle for at least a day and that are older than 2 weeks are considered archived storage, and billed at a reduced rate. This has no implications for you, it happens automatically. <a href="https://neon.tech/blog/cutting-storage-costs">More context here.</a> `,
   },
