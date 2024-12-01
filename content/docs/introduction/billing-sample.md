@@ -65,7 +65,7 @@ Here are the monthly totals for compute and storage usage.
 
 | Metric  | Start of the month | End of the month |
 | :------ | :----------------- | :--------------- |
-| Storage | 23.6 GB-month      | 28 GB-month           |
+| Storage | 23.6 GB-month      | 28 GB-month      |
 
 ### Which Neon pricing plan fits best?
 
@@ -73,14 +73,13 @@ At roughly 718 active hours for the month with a compute size of 0.25 vCPU, this
 
 **Launch plan**:
 
-- Base fee: $19  
-- Storage usage: 25 GB-month (15 GB-month over the allowance)  
-- Compute usage: 718 active hours (within the 300 compute hour/1200 active hour allowance)  
-- Extra storage fee: 15 * $1.75 = $26.25  
-- Extra compute fee: $0  
+- Base fee: $19
+- Storage usage: 25 GB-month (15 GB-month over the allowance)
+- Compute usage: 718 active hours (within the 300 compute hour/1200 active hour allowance)
+- Extra storage fee: 15 \* $1.75 = $26.25
+- Extra compute fee: $0
 
-**Total estimate**: $19 + $26.25 = **$45.25 per month**  
-
+**Total estimate**: $19 + $26.25 = **$45.25 per month**
 
 **Scale plan**:
 

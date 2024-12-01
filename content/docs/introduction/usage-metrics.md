@@ -161,7 +161,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 
 ## Archive storage
 
-To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for the past 24 hours**. Both conditions must be true for a branch to be archived. 
+To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for the past 24 hours**. Both conditions must be true for a branch to be archived.
 
 Additionally, these conditions apply:
 
