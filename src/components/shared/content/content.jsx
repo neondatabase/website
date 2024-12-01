@@ -30,6 +30,7 @@ import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import Link from 'components/shared/link';
 import getCodeProps from 'lib/rehype-code-props';
+import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import DocCta from '../doc-cta';
@@ -67,18 +68,32 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   a: (props) => {
     const { href, children, ...otherProps } = props;
     const isExternal = href?.startsWith('http');
+    const isGlossary = href?.startsWith('/docs/reference/glossary');
+    const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
 
     if (children === '#id') {
       const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
       return <span id={id} />;
     }
 
+    if (isGlossary) {
+      const glossaryItem = getGlossaryItem(href);
+      if (glossaryItem) {
+        const { title, preview } = glossaryItem;
+        return (
+          <LinkPreview href={href} title={title} preview={preview} {...otherProps}>
+            {children}
+          </LinkPreview>
+        );
+      }
+    }
+
     return (
       <Link
         to={href}
-        withExternalIcon={isExternal}
-        target={isExternal && '_blank'}
-        rel={isExternal && 'noopener noreferrer'}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        icon={icon}
         {...otherProps}
       >
         {children}

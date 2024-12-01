@@ -8,6 +8,8 @@ import Link from 'components/shared/link';
 
 const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
   const isExternal = href?.startsWith('http');
+  const isGlossary = href?.startsWith('/docs/reference/glossary');
+  const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
 
   return (
     <Tooltip.Provider delayDuration={300}>
@@ -15,9 +17,9 @@ const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
         <Tooltip.Trigger asChild>
           <Link
             to={href}
-            withExternalIcon={isExternal}
-            target={isExternal && '_blank'}
-            rel={isExternal && 'noopener noreferrer'}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+            icon={icon}
             {...otherProps}
           >
             {children}

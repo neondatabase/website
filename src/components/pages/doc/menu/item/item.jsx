@@ -3,7 +3,6 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import ArrowExternalIcon from 'icons/docs/arrow-external.inline.svg';
 
 import Tag from '../../tag';
 import Icon from '../icon';
@@ -49,6 +48,7 @@ const Item = ({
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
+        icon={externalSlug && 'external'}
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
@@ -59,7 +59,6 @@ const Item = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
-        {externalSlug && <ArrowExternalIcon />}
       </LinkTag>
       {children}
     </li>
