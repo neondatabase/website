@@ -22,7 +22,7 @@ This table provides an overview of plan fees with allowances for storage, archiv
 
 | Plan       | Monthly Fee | Storage | Archive Storage | Compute                                                            | Projects |
 | :--------- | :---------- | :---------------- | :-------------------------| :--------------------------------------------------------------------------- | :---------------- |
-| Free Plan  | $0          | 0.5 GB-month     | included in **Storage**   | 191.9 compute hours                                                          | 10 projects       |
+| Free Plan  | $0          | 0.5 GB-month     | Included in **Storage**   | 191.9 compute hours                                                          | 10 projects       |
 | Launch     | $19         | 10 GB-month      | 50 GB-month              | 300 compute hours per month                                                  | 100 projects      |
 | Scale      | $69         | 50 GB-month      | 250 GB-month             | 750 compute hours per month                                                  | 1000 projects     |
 | Business   | $700        | 500 GB-month     | 2500 GB-month            | 1000 compute hours per month                                                 | 5000 projects     |
@@ -80,7 +80,7 @@ The Scale plan supports extra **Storage**, **Archive Storage**, **Compute**, and
 - **Extra Projects**: If you exceed 50 projects, extra projects are allocated in units of 500 projects at $50 per unit.
 
 | Resource       | Unit         | Price  |
-| -------------- | ------------ | ------ |
+| :------------- | :----------- | :----- |
 | Extra Storage  | GB-month     | $1.50  |
 | Extra Archive Storage | GB-month     | $0.10 |
 | Extra Compute  | Compute hour | $0.16  |
@@ -96,7 +96,7 @@ The Business plan supports extra **Storage**, **Archive Storage**, **Compute**, 
 - **Extra Projects**: If you exceed 5000 projects, extra projects are allocated in units of 5000 projects at $50 per unit.
 
 | Resource       | Unit         | Price  |
-| -------------- | ------------ | ------ |
+| :------------- | :----------- | :----- |
 | Extra Storage  | GB-month     | $0.50  |
 | Extra Archive Storage | GB-month     | $0.10 |
 | Extra Compute  | Compute hour | $0.16  |
@@ -113,7 +113,7 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Archive Storage Fee + Extr
 ### Launch plan example
 
 | Item               | Details                             |
-| ------------------ | ----------------------------------- |
+| :----------------- | :---------------------------------- |
 | Plan Fee           | $19                                 |
 | Storage Usage      | 14 GB (4 GB over, $7 extra)         |
 | Archive Storage Usage  | 40 GB (within the plan allowance, $0) |
@@ -123,7 +123,7 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Archive Storage Fee + Extr
 ### Scale plan example
 
 | Item               | Details                                        |
-| ------------------ | ---------------------------------------------- |
+| :----------------- | :--------------------------------------------- |
 | Plan Fee           | $69                                            |
 | Storage Usage      | 60 GB (10 GB over, $15 extra)                  |
 | Archive Storage Usage  | 100 GB  (50 GB over, $5 extra)             |
@@ -134,7 +134,7 @@ Total Estimate = Plan Fee + Extra Storage Fee + Extra Archive Storage Fee + Extr
 ### Business plan example
 
 | Item               | Details                                           |
-| ------------------ | ------------------------------------------------- |
+| :----------------- | :------------------------------------------------ |
 | Plan Fee           | $700                                              |
 | Storage Usage      | 510 GB (20 GB over, $15 extra)                    |
 | Archive Storage Usage  | 300 GB (within the plan allowance, $0)                                         |
