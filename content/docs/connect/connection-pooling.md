@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-09-24T09:39:48.633Z'
+updatedOn: '2024-11-30T11:53:56.048Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -75,7 +75,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
@@ -136,7 +136,7 @@ For the official list of limitations, refer to the "_SQL feature map for pooling
 
 ## Connection pooling with schema migration tools
 
-We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
+We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
 
 ## Optimize queries with PgBouncer and prepared statements
 

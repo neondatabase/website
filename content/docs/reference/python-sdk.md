@@ -1,7 +1,7 @@
 ---
 title: Python SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2024-11-21T21:02:43.360Z'
+updatedOn: '2024-11-30T11:53:56.079Z'
 ---
 
 <InfoBlock>
@@ -14,7 +14,7 @@ updatedOn: '2024-11-21T21:02:43.360Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="https://neon.tech/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api-reference">Neon API Reference</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">

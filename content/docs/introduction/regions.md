@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-11-27T12:18:12.739Z'
+updatedOn: '2024-11-30T11:53:56.072Z'
 ---
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
@@ -30,7 +30,7 @@ The Neon on Azure Beta is limited to the Azure East US 2 region and is not curre
 During this Beta period:
 
 - Anyone can create a Neon project in the Azure region.
-- The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
+- The [Free Plan usage allowances](/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
 - For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will become billable as of **Dec 1, 2024**. [Extra project units](/docs/introduction/extra-usage) are currently billable and will remain so.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
 
