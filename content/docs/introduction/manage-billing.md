@@ -31,7 +31,7 @@ A Neon account can view and manage billing from the **Billing** page in the Neon
 To access your **Billing** page:
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 
 On the **Billing** page, you will find a summary outlining current charges and the details of your plan, information about your current usage, upgrade and downgrade options, your payment information, and your monthly invoices.
@@ -41,7 +41,7 @@ On the **Billing** page, you will find a summary outlining current charges and t
 To update your payment method:
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 1. Navigate to the **Payment info** section of the page.
 1. Locate **Payment method** and click **Edit**.
@@ -63,7 +63,7 @@ Neon’s billing system, powered by Stripe, currently lacks support for e-Mandat
 To update your billing email:
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 1. Navigate to the **Payment info** section of the page.
 1. Locate **Billing email** and click **Edit**.
@@ -79,7 +79,7 @@ A Neon invoice includes the amount due for the billing period.
 To download an invoice:
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 1. Navigate to the **Invoices** section of the page.
 1. Find the invoice you want to download and select **Download** from the menu.
@@ -93,7 +93,7 @@ When an invoice is paid, Neon's billing system sends a payment confirmation emai
 If you find an issue with your invoice, you can request a refund. The request will be reviewed by the Neon billing team.
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 1. Navigate to the **Invoices** section of the page.
 1. Find the invoice you want to request a refund for, and select **Request refund** from the menu. Enter a problem description explaining the reason for the request.
@@ -103,7 +103,7 @@ If you find an issue with your invoice, you can request a refund. The request wi
 To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
+1. Select your Account (Personal account or Organization) from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
 1. Navigate to the **Change plan** section of the page and select the desired plan.
 
@@ -115,7 +115,7 @@ To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, ple
 
 ## How to prevent further monthly charges to your account
 
-If you are on any of Neon's paid plans, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects from your account will not stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free. For example, if you are on the [Launch](/docs/introduction/plans#launch) plan, which has a base monthly fee of $19 per month, you will continue to be charged $19 per month until you downgrade to the Free plan.
+If you are on any of Neon's paid plans, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects from your account will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free. For example, if you are on the [Launch](/docs/introduction/plans#launch) plan, which has a base monthly fee of $19 per month, you will continue to be charged $19 per month until you downgrade to the Free plan.
 
 ## Delete your account
 
