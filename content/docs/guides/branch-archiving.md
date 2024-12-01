@@ -6,10 +6,6 @@ enableTableOfContents: true
 updatedOn: '2024-11-20T11:29:39.736Z'
 ---
 
-<Admonition type="note" title="Only enabled on the Free Plan">
-Automatic archiving of inactive branches is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
-</Admonition>
-
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How Neon archives inactive branches</p>
@@ -30,10 +26,13 @@ To minimize storage costs, Neon automatically archives branches that are:
 - Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
-Both conditions must be true for a branch to be archived. Additionally, these conditions apply:
+Both conditions must be true for a branch to be archived. 
+
+Additionally, these conditions apply:
 
 - A branch cannot be archived if it has an unarchived child branch.
 - A child branch must be archived before a parent branch can be archived.
+- Protected branches cannot be archived.
 
 <Admonition type="note">
 If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above are not tracked until the next time you access branches in your project.
@@ -43,7 +42,7 @@ If your Neon project was inactive for more than a week before the introduction o
 
 **No action is required to unarchive a branch. It happens automatically.**
 
-Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is in the process of being unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
 <Admonition type="note">
 When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
