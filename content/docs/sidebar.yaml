@@ -382,6 +382,7 @@
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
+      tag: new
 - section: Develop
   items:
     - title: Frameworks
@@ -533,6 +534,9 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Azure Functions
+              slug: https://neon.tech/guides/query-postgres-azure-functions
+              tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
         - section: Query

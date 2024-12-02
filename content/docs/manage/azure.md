@@ -26,6 +26,8 @@ This option integrates Neon natively into Azure, letting you manage your Neon or
     Management of Neon projects, databases, and branches is supported through the Neon Console, CLI, and API. However, this public preview lays the groundwork for further deeper between Neon and Azure, including integration with other Azure native services.
     </Admonition>
 
+### Get started
+
 To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions.
 
 ## Create Neon projects in Azure regions (no integration)
