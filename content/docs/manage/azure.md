@@ -28,7 +28,7 @@ This option integrates Neon natively into Azure, letting you manage your Neon or
 
 ### Get started
 
-To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions.
+To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions. After you setup the integration, familiarize yourself with Neon by stepping through Neon's [Get started](https://neon.tech/docs/introduction#get-started) docs.
 
 ## Create Neon projects in Azure regions (no integration)
 
@@ -88,3 +88,25 @@ For Azure `region_id` values, see [Regions](/docs/introduction/regions).
 ## Azure region support
 
 For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions. To request support for other Azure regions, see [Request a region](/docs/introduction/regions#request-a-region).
+
+## Related resources
+
+<TechnologyNavigation open>
+
+<a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
+
+<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+
+<a href="/docs/guides/dotnet-entity-framework" title="Connect from Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="entity"></a>
+
+<a href="/docs/guides/entity-migrations" title="Entity Framework Schema Migrations" description="Schema migration with Neon and Entity Framework" icon="entity"></a>
+
+<a href="/docs/import/migrate-from-azure-postgres" title="Replicate data from Azure PostgreSQL" description="Replicate data from Azure PostgreSQL to Neon" icon="azure"></a>
+
+<a href="https://neon.tech/guides/dotnet-neon-entity-framework" title="ASP.NET with Neon and Entity Framework" description="Building ASP.NET Core Applications with Neon and Entity Framework Core" icon="entity"></a>
+
+<a href="https://neon.tech/guides/aspnet-core-api-neon" title="ASP.NET Core, Swagger, and Neon" description="Building a RESTful API with ASP.NET Core, Swagger, and Neon" icon="entity"></a>
+
+<a href="https://neon.tech/guides/read-replica-entity-framework" title="Neon Read Replicas with Entity Framework" description="Scale your .NET application with Entity Framework and Neon Postgres Read Replicas" icon="entity"></a>
+
+</TechnologyNavigation>
