@@ -48,8 +48,8 @@ const getGlossaryItem = (href) => {
         .replace(/\s{2,}/g, ' ') // Remove multiple spaces
         .trim(); // Clean up whitespace
 
-      // Truncate the text text to 64 characters and add ellipsis if it's longer
-      const preview = formattedText.slice(0, 64) + (formattedText.length > 64 ? '…' : '');
+      // Truncate the text text to 160 characters
+      const preview = formattedText.slice(0, 160);
       result = { title, preview };
       return true;
     }
