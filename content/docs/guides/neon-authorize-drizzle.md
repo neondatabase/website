@@ -133,7 +133,7 @@ Now that we understand how `crudPolicy` works, let's look at two typical ways to
 
 The most common pattern is restricting users to their own data:
 
-```typescript {15-19} shouldWrap 
+```typescript {15-19} shouldWrap
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
 export const todos = pgTable(
