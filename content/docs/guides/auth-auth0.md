@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.646Z'
+updatedOn: '2024-11-30T11:53:56.055Z'
 ---
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
@@ -440,7 +440,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information on the tools used in this guide, refer to the following documentation:
 
-- [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver)
+- [Neon Serverless Driver](/docs/serverless/serverless-driver)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Auth0 Next.js SDK](https://auth0.com/docs/quickstart/webapp/nextjs)

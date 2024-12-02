@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-billing
 isDraft: false
-updatedOn: '2024-11-25T17:33:22.605Z'
+updatedOn: '2024-12-01T21:48:07.692Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -60,12 +60,12 @@ Let's say you want to set limits for an application with two tiers, Trial and Pr
 | -------------------- | -------------------------------- | ------------------------------------------------- |
 | active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                               |
 | compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active hours for 4 vCPUs) |
-| written_data_bytes   | 1,000,000,000 (approx. 1 GiB)    | 50,000,000,000 (approx. 50 GiB)                   |
-| data_transfer_bytes  | 500,000,000 (approx. 500 MiB)    | 10,000,000,000 (approx. 10 GiB)                   |
+| written_data_bytes   | 1,000,000,000 (approx. 1 GB)     | 50,000,000,000 (approx. 50 GB)                    |
+| data_transfer_bytes  | 500,000,000 (approx. 500 MB)     | 10,000,000,000 (approx. 10 GB)                    |
 
-| Parameter (branch) | Trial                         | Pro                             |
-| ------------------ | ----------------------------- | ------------------------------- |
-| logical_size_bytes | 100,000,000 (approx. 100 MiB) | 10,000,000,000 (approx. 10 GiB) |
+| Parameter (branch) | Trial                         | Pro                            |
+| ------------------ | ----------------------------- | ------------------------------ |
+| logical_size_bytes | 100,000,000 (approx. 100 MiB) | 10,000,000,000 (approx. 10 GB) |
 
 ### Guidelines
 

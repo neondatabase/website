@@ -53,8 +53,6 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
-            - title: Entity Framework
-              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Laravel
@@ -84,6 +82,9 @@
               slug: guides/solid-start
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: Sveltekit
+              slug: guides/sveltekit
+              tag: new
             - title: Symfony
               slug: guides/symfony
     - title: Connect
@@ -275,6 +276,9 @@
           slug: introduction/ip-allow
         - title: Protected branches
           slug: guides/protected-branches
+        - title: Private Networking
+          slug: guides/neon-private-networking
+          tag: beta
     - title: Platform
       icon: management
       slug: manage/platform
@@ -386,12 +390,8 @@
       items:
         - title: Astro
           slug: guides/astro
-        - title: Django
-          slug: guides/django
         - title: Express
           slug: guides/express
-        - title: Laravel
-          slug: guides/laravel
         - title: NestJS
           slug: guides/nestjs
         - title: Next.js
@@ -413,12 +413,11 @@
           slug: guides/reflex
         - title: Remix
           slug: guides/remix
-        - title: Ruby on Rails
-          slug: guides/ruby-on-rails
         - title: SolidStart
           slug: guides/solid-start
-        - title: SQLAlchemy
-          slug: guides/sqlalchemy
+        - title: Sveltekit
+          slug: guides/sveltekit
+          tag: new
         - title: Symfony
           slug: guides/symfony
     - title: Languages
@@ -437,6 +436,22 @@
           slug: guides/python
         - title: Rust
           slug: guides/rust
+    - title: ORMs
+      slug: get-started-with-neon/orms
+      icon: use-cases
+      items:
+        - title: Django (Django ORM)
+          slug: guides/django
+        - title: Drizzle
+          slug: guides/drizzle
+        - title: Laravel (Eloquent)
+          slug: guides/laravel
+        - title: Prisma
+          slug: guides/prisma
+        - title: Ruby on Rails (ActiveRecord)
+          slug: guides/ruby-on-rails
+        - title: SQLAlchemy
+          slug: guides/sqlalchemy
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth

@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-11-25T14:30:10.287Z'
+updatedOn: '2024-11-30T11:53:56.057Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -82,7 +82,7 @@ inputs:
   suspend_timeout:
     description: >
       Duration of inactivity in seconds after which the compute endpoint is
-      For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
+      For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
     default: '0'
   ssl:
     description: >
@@ -277,9 +277,9 @@ outputs:
 
 ## Schema Diff action
 
-This action performs a database schema diff on specified Neon branches for each pull request and writes a **Neon Schema Diff summary** comment to the pull request in GitHub highlighting the schema differences.
+This action performs a database schema diff on specified Neon branches for each pull request and writes comment to the pull request in GitHub highlighting the schema differences.
 
-It supports workflows where schema changes are made on a development branch, and pull requests are created for review before merging the changes back into the main branch. By including the schema diff as a comment in the pull request, reviewers can easily assess the changes directly within the pull request.
+It supports workflows where schema changes are made on a branch. When you create or update a pull request containing schema changes, the action automatically generates a comment within the pull request. By including the schema diff as part of the comment, reviewers can easily assess the changes directly within the pull request.
 
 <Admonition type="tip" title="GitHub Actions Marketplace">
 You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Diff GitHub Action](https://github.com/marketplace/actions/neon-schema-diff-github-action).
@@ -289,6 +289,8 @@ You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Dif
 
 - A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 - You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
+
+You can easily set up the prerequisites mentioned above using our [GitHub integration](/docs/guides/neon-github-integration), which takes care of the entire process and automatically.
 
 ### Example
 
@@ -319,7 +321,9 @@ on:
 
 jobs:
   schema_diff:
-    permissions: write-all
+    permissions:
+      pull-requests: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Schema Diff
@@ -341,13 +345,15 @@ The branches to compare are specified by the `compare_branch` and `base_branch` 
 - The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
-- `permissions: write-all` allows comments to be written on pull requests in public or private repositories. Alternatively, to be less permissive, you could use:
+- `permissions` allows comments to be written on pull requests and repository contents to be read. These permissions are necessary if, for example, you need to check out your branch to run migrations.
 
   ```yaml
-  permissions
+  permissions:
     pull-requests: write
-    contents: write
+    contents: read
   ```
+
+With the permissions above you will only allow read access to repository contents (needed to checkout the current branch, for example) and write access to pull requests.
 
 After performing the schema diff comparison:
 
@@ -402,9 +408,7 @@ comment_url:
   description: The url of the comment containing the schema diff
 ```
 
-The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to this example:
-
-![A schema diff action comment as appears in a pull request](/docs/guides/schema_diff_comment.png)
+The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to [this example](https://github.com/neondatabase/schema-diff-action/blob/main/docs/pr_comment.md).
 
 The `comment_url` allows you to easily share the schema diff for review. It also allows developers or scripts to access the comment programmatically for use in other automations.
 
@@ -423,7 +427,7 @@ are two ways you can perform this setup:
   configuring it manually in your GitHub repository.
 
   1. Obtain a Neon API key. See
-     [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key)
+     [Create an API key](/docs/manage/api-keys#create-an-api-key)
      for instructions.
   1. In your GitHub repository, go to **Project settings** and locate
      **Secrets** at the bottom of the left sidebar.

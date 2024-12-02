@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-01T10:14:56.349Z'
+updatedOn: '2024-12-01T21:48:07.698Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -163,7 +163,7 @@ Neon's _Autosuspend_ feature automatically transitions a compute into an `Idle` 
 The maximum **Suspend compute after a period of inactivity** setting is 7 days. To disable autosuspend, which results in an always-active compute, deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
 
 <Admonition type="important">
-If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](https://neon.tech/docs/manage/endpoints#restart-a-compute). 
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
 
 ## Restart a compute
@@ -495,7 +495,7 @@ You may encounter an error similar to the following when your compute's local di
 ERROR: could not write to file "base/pgsql_tmp/pgsql_tmp1234.56.fileset/o12of34.p1.0": No space left on device (SQLSTATE 53100)
 ```
 
-Neon computes allocate approximately 20 GiB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
+Neon computes allocate approximately 20 GB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
 
 To resolve this issue, you can try the following strategies:
 
@@ -503,7 +503,7 @@ To resolve this issue, you can try the following strategies:
 - **Optimize queries to reduce temporary file usage**.
 - **Adjust pipeline settings for third-party sync or replication**: If you're syncing or replicating data with an external service, modify the pipeline settings to control disk space usage.
 
-If the issue persists, refer to our [Neon Support channels](https://neon.tech/docs/introduction/support#support-channels).
+If the issue persists, refer to our [Neon Support channels](/docs/introduction/support#support-channels).
 
 ### Compute is not suspending
 

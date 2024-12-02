@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-11-20T11:45:48.589Z'
+updatedOn: '2024-11-30T11:53:56.078Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -127,7 +127,7 @@ Unlogged tables are maintained on Neon compute local storage. These tables do no
 
 ## Memory
 
-SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute).
+SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Temporary tables
 
@@ -221,7 +221,7 @@ Neon does not yet support Foreign Data Wrappers (FDW) or Postgres extensions suc
 
 ## PostgreSQL documentation
 
-Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](https://neon.tech/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:
+Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:
 
 - As a managed Postgres service, certain aspects of the official PostgreSQL documentation like installation procedures do not apply to Neon.
 - Some features detailed in the official PostgreSQL documentation may not be relevant for Neon, such as those mentioned on this Postgres compatibility page.

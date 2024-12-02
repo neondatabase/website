@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.894Z'
+updatedOn: '2024-11-30T11:53:56.077Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -198,7 +198,7 @@ To avoid including the `--api-key` option with each CLI command, you can export 
 export NEON_API_KEY=<neon_api_key>
 ```
 
-For information about obtaining an Neon API key, see [Create an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key).
+For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 ## Configure autocompletion
 

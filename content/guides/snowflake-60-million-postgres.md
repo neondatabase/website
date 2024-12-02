@@ -9,13 +9,14 @@ updatedOn: '2024-11-26T00:00:00.000Z'
 
 Transferring large datasets can be challenging, especially when dealing with memory constraints and the need for atomic operations. This guide will provide a structured approach to efficiently sync data from Snowflake to Postgres, ensuring minimal memory usage and the ability to rollback in case of errors. In this guide, we will explore an efficient method to sync a large dataset (60 million rows) from Snowflake to Postgres on a nightly basis. We will discuss the challenges faced with the traditional `COPY INTO` method and provide a robust solution using chunking and upsert strategies.
 
+A common scenario for synchronizing data from Snowflake to Postgres involves integrating third-party datasets sourced from the Snowflake Marketplace that necessitate transformation. This data can subsequently be loaded into Neon, facilitating the creation of relationships between the Snowflake tables and the Postgres tables. Such an integration enables application-facing data to be queried through a unified Object-Relational Mapping (ORM) framework.
+
 ## Table of Contents
 
 - [Challenges with the easiest approach](#challenges-with-the-easiest-approach)
 - [Proposed Solution](#proposed-solution)
 - [When to Upsert or Copy](#when-to-upsert-or-copy)
 - [Implementation steps for Chunking](#implementation-steps-for-chunking)
-- [Conclusion](#conclusion)
 
 ## Challenges with the easiest approach
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-10-30T22:44:11.656Z'
+updatedOn: '2024-12-02T18:21:11.984Z'
 ---
 
 Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
@@ -21,6 +21,8 @@ Neon supports project deployment in several regions. We recommended that you sel
 ## Azure regions
 
 - Azure East US 2 region (Virginia) &mdash; `azure-eastus2` (**Beta**)
+- Azure Germany West Central region &mdash; `azure-gwc` (**Beta**)
+- Azure West US 3 region (Arizona) &mdash; `azure-westus3` (**Beta**)
 
 <Admonition type="note" title="About the Neon on Azure Beta">
 The Neon on Azure Beta is limited to the Azure East US 2 region and is not currently recommended for business-critical workloads. As a Beta release, occasional updates may require downtime.
@@ -28,7 +30,7 @@ The Neon on Azure Beta is limited to the Azure East US 2 region and is not curre
 During this Beta period:
 
 - Anyone can create a Neon project in the Azure region.
-- The [Free Plan usage allowances](https://neon.tech/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
+- The [Free Plan usage allowances](/docs/introduction/plans#free-plan) are the same as for Free Plan projects created on AWS.
 - For Launch, Scale, and Business plan users, compute and storage usage for Azure-hosted projects will become billable as of **Dec 1, 2024**. [Extra project units](/docs/introduction/extra-usage) are currently billable and will remain so.
 - [Support](/docs/introduction/support) is available for Neon projects on Azure, but Business plan SLAs are not yet offered.
 
@@ -72,9 +74,11 @@ If you are unsure of your project's region, you can find this information in the
 
 ### Azure NAT Gateway IP Addresses
 
-| Region                                     | NAT Gateway IP Addresses                       |
-| :----------------------------------------- | :--------------------------------------------- |
-| Azure East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
+| Region                                                | NAT Gateway IP Addresses                       |
+| :---------------------------------------------------- | :--------------------------------------------- |
+| Azure East US 2 (Virginia) — azure-eastus2 (**Beta**) | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
+| Azure Germany West Central - azure-gwc (**Beta**)     | 20.52.100.129, 20.52.100.208, 20.52.187.150    |
+| Azure West US 3 (Arizona) - azure-westus3 (**Beta**)  | 20.38.38.171, 20.168.0.32, 20.168.0.77         |
 
 ## Move project data to a new region
 

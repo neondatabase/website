@@ -62,7 +62,7 @@ const Link = forwardRef(
       styles.size[size],
       styles.theme[theme],
       additionalClassName,
-      withArrow && 'group'
+      withArrow && 'group flex w-fit items-center'
     );
 
     const content = (

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-11-22T10:01:08.296Z'
+updatedOn: '2024-12-01T21:48:07.698Z'
 ---
 
 ## access token
@@ -412,11 +412,11 @@ A string that identifies your Neon project. Neon Project IDs are generated Herok
 
 ## Project Collaboration
 
-A feature that allows you to invite other Neon users to collaborate on your Neon projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
+A feature that lets you invite other Neon users to work on a project together. Note that organization members don't need to be added as collaborators since they automatically get access to all organization projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
 
 ## Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
 ## prorate
 
@@ -599,4 +599,4 @@ In logical replication, the WAL records all changes to the data, serving as the 
 
 ## Written data
 
-A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data.
+A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigabytes (GB). Writing data from compute to storage ensures the durability and integrity of your data.

@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-11-22T10:01:08.289Z'
+updatedOn: '2024-11-30T11:53:56.053Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -95,7 +95,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](https://neon.tech/docs/introduction/plans#scale) and [Business](https://neon.tech/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
