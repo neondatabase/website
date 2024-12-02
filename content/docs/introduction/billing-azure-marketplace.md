@@ -13,19 +13,20 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
 ## Prerequisites for setting up the Neon integration
 
 - **Azure account**: If you don't have an active Azure subscription, [create a free account](https://azure.microsoft.com/free).
-- **Access level**: Only users with **Owner** or **Contributor** access on the Azure subscription can set up the Azure integration. Ensure you have the appropriate access before proceeding.
+- **Access level**: Only users with **Owner** or **Contributor** access roles on the Azure subscription can set up the integration. Ensure you have the appropriate access before proceeding. For information about assigning roles in Azure, see [Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps).
 
 ## Find Neon on Azure and subscribe
 
-1. Use the search in the [Azure portal](https://portal.azure.com/) to find the **Neon Serverless Postgres** offering.
-2. Alternatively, go to the [Azure Marketplace](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home) and search for **Neon Serverless Postgres**.
-3. Subscribe to the service.
+1. Use the search bar at the top of the [Azure portal](https://portal.azure.com/) to find the **Neon Serverless Postgres** offering.
 
-After subscribing, you will be directed to the [Create a Neon Serverless Postgres Resource](#create-a-neon-resource) page.
+   ![Search for Neon in the Azure Portal](/docs/introduction/azure_search_neon.png)
+
+   Alternatively, go to the [Azure Marketplace](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home) and search for **Neon Serverless Postgres**.
+3. Subscribe to the service. You will be directed to the [Create a Neon Serverless Postgres Resource](#create-a-neon-resource) page.
 
 ## Create a Neon Resource
 
-1. On the **Create a Neon Serverless Postgres Resource** page, enter values for the following properties:
+1. On the **Create a Neon Serverless Postgres Resource** page, enter values for the properties described below.
 
    | Property                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
    | :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,15 +38,24 @@ After subscribing, you will be directed to the [Create a Neon Serverless Postgre
    | **Plan**                   | Select a plan. You have three to choose from: **Free**, **Scale**, and **Business**. Select **Change Plan** to view details about each plan. For more information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. The Neon **Launch Plan** is currently not available in the Azure Marketplace.                                                                                                                         |
    | **Billing term**           | Select a billing term for the selected plan. You can choose from a **1-Month** or a **1-Year** billing term (monthly or yearly billing).                                                                                                                                                                                                                                                                                                                     |
 
-1. After reviewing your **Price + Payment options** and **Subtotal**, select **Next** to optionally specify tags for your resource. For more about tags, see [Use tags to organize your Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
-1. Select **Review + Create** to navigate to the final step for resource creation. On the **Review + Create** page, review your selections, the [Azure Marketplace Terms](https://learn.microsoft.com/en-us/legal/marketplace/marketplace-terms), and the Neon [Terms of Use](https://neon.tech/terms-of-service) and [Privacy Policy](https://neon.tech/privacy-policy).
+   ![Create a resource group](/docs/introduction/azure_create_resource_group.png)
+
+1. Review your **Price + Payment options** and **Subtotal**, select **Next** to optionally specify tags for your resource. For more about tags, see [Use tags to organize your Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
+1. Select **Review + Create** to navigate to the final step for resource creation. Review your selections, the [Azure Marketplace Terms](https://learn.microsoft.com/en-us/legal/marketplace/marketplace-terms), and the Neon [Terms of Use](https://neon.tech/terms-of-service) and [Privacy Policy](https://neon.tech/privacy-policy).
 1. Select **Create** to initiate the resource deployment, which may take a few moments.
-1. Under **Next steps**, click the **Go to resource** button.
-1. Select the **Neon Console** or **Go to Neon link**. You will be directed to the **Create project page** in the Neon Console, in your newly created Neon Organization.
+1. When your deployment is complete, click the **Go to resource** button under **Next steps** to view your new Neon resource.
+
+   ![Go to resource button](/docs/introduction/azure_go_to_resource.png)
+
+1. Select the **Go to Neon link** under **Getting started** to open the Neon Console. 
+
+   ![Azure get started](/docs/introduction/azure_get_started.png)
+   
+   You will be directed to the **Create project page** in the Neon Console, in your newly created Neon Organization.
 
    ![Create project dialog for Azure](/docs/introduction/azure_create_project.png)
 
-1. From here, you can follow the Neon **Getting Started**, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+1. From here, you can follow the **Neon Getting Started**, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
 
 ## Overages
 
@@ -53,15 +63,33 @@ Neon plans include allowances for compute, storage, and projects. For details on
 
 ## Changing your pricing plan
 
-Changing your Neon pricing plan requires [creating a new Neon Resource](#create-a-neon-resource) with the desired pricing plan and opening a [support ticket](https://console.neon.tech/app/projects?modal=support) with Neon to have your existing Neon projects transferred to the new Neon Resource — creating a Neon Resources creates an Organization in Neon. The Neon Support team will transfer your Neon projects from your existing Neon Organization to your new Neon Organization.
+Changing your Neon pricing plan requires [creating a new Neon Resource](#create-a-neon-resource) with the desired pricing plan and opening a [support ticket](https://console.neon.tech/app/projects?modal=support) with Neon to have your existing Neon projects transferred to the new Neon Resource — creating a Neon Resources creates an Organization in Neon. The Neon Support team will transfer your Neon projects from your existing Neon Organization to your new Neon Organization. Afterward, you can delete your old Neon resource. If your old resource was on a paid plan, deleting it will stop billing.
 
 <Admonition type="important">
-Removing a Neon resource from Azure removes the Neon Organization and all Neon projects and data associated with that resource. When changing a Neon plan, do not remove your old Neon resource from Azure before you have verified that your Neon projects and data were transferred successfully to the Neon Organization associated with your new Neon resource.
+Deleting a Neon resource from Azure removes the Neon Organization and all Neon projects and data associated with that resource. When changing a Neon plan, do not delete your old Neon resource from Azure before you have verified that your Neon projects and data have transferred successfully to the Neon Organization associated with your new Neon resource.
 </Admonition>
 
 ## Enterprise Plan
 
 Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](https://neon.tech/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
+
+### Deleting a Neon Resource in Azure
+
+If you no longer need your Neon resource, you can delete it to stop all associated billing through the Azure Marketplace.
+
+<Admonition type="important">
+Deleting a Neon resource from Azure removes the Neon Organization and all Neon projects and data associated with that resource.
+</Admonition>
+
+Follow these steps to delete the resource:
+
+1. In the Azure portal, select the Neon resource you want to delete.
+2. On the **Overview** page, select **Delete**.
+3. Confirm the deletion by entering the resource's name.
+4. Choose the reason for deleting the resource.
+5. Select **Delete** to finalize.
+
+Once the resource is deleted, billing will stop immediately, and the Neon Organization and all Neon projects and data associated with that resource will be removed.
 
 ## Questions?
 
