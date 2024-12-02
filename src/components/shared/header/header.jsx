@@ -22,7 +22,7 @@ const themePropTypes = {
   isDarkTheme: PropTypes.bool,
 };
 
-const Navigation = ({ isDarkTheme }) => (
+const Navigation = async ({ isDarkTheme }) => (
   <nav>
     <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
       {MENUS.header.map(({ to, text, items }, index) => {
@@ -156,45 +156,35 @@ const Navigation = ({ isDarkTheme }) => (
 
 Navigation.propTypes = themePropTypes;
 
-const GithubStars = async ({ isDarkTheme }) => {
+const Sidebar = async ({ isDarkTheme }) => {
   const starsCount = await getGithubStars();
   return (
-    <Suspense>
-      <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
-    </Suspense>
+    <div className="flex items-center gap-x-6 lg:hidden">
+      <Suspense>
+        <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
+      </Suspense>
+      <Link
+        className="text-[13px] leading-none tracking-extra-tight lg:hidden"
+        to={LINKS.login}
+        theme={isDarkTheme ? 'white' : 'black'}
+      >
+        Log In
+      </Link>
+
+      <Button
+        className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
+        to={LINKS.signup}
+        theme="primary"
+        tag_name="Header"
+      >
+        Sign Up
+      </Button>
+    </div>
   );
 };
+Sidebar.propTypes = themePropTypes;
 
-GithubStars.propTypes = themePropTypes;
-
-const Sidebar = ({ isDarkTheme, isClient }) => (
-  <div className="flex items-center gap-x-6 lg:hidden">
-    {!isClient && <GithubStars />}
-    <Link
-      className="text-[13px] leading-none tracking-extra-tight lg:hidden"
-      to={LINKS.login}
-      theme={isDarkTheme ? 'white' : 'black'}
-    >
-      Log In
-    </Link>
-
-    <Button
-      className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
-      to={LINKS.signup}
-      theme="primary"
-      tag_name="Header"
-    >
-      Sign Up
-    </Button>
-  </div>
-);
-
-Sidebar.propTypes = {
-  ...themePropTypes,
-  isClient: PropTypes.bool,
-};
-
-const Header = ({
+const Header = async ({
   className = null,
   theme = null,
   isSticky = false,
@@ -204,7 +194,6 @@ const Header = ({
   withBorder = false,
   searchIndexName = null,
   customType = null,
-  isClient = false,
 }) => {
   const isDarkTheme = theme === 'dark';
 
@@ -244,7 +233,7 @@ const Header = ({
                 <InkeepTrigger className="w-[272px]" showAIButton />
               </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
-                <Sidebar isClient={isClient} />
+                <Sidebar />
               </div>
             </Container>
           </div>
@@ -261,6 +250,7 @@ const Header = ({
               />
               <Navigation isDarkTheme={isDarkTheme} />
             </div>
+            <Sidebar isDarkTheme={isDarkTheme} />
           </Container>
         )}
       </HeaderWrapper>
@@ -287,7 +277,6 @@ Header.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
-  isClient: PropTypes.bool,
 };
 
 export default Header;
