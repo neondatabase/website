@@ -28,6 +28,8 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 - `USING` clause — controls which existing rows can be accessed
 - `WITH CHECK` clause — controls what new or modified data can be written
 
+<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](https://neon.tech/docs/guides/neon-authorize#how-neon-authorize-gets-authuserid-from-the-jwt).</Admonition>
+
 Here's how these clauses apply to each operation:
 
 | Operation | USING clause               | WITH CHECK clause          |
@@ -65,7 +67,7 @@ As you add new features, you'll need to add more policies to match. This growing
 
 The `crudPolicy` function generates RLS policies by accepting a simple configuration object. Let's break down its usage:
 
-```typescript
+```typescript {16-20}
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
 // Define a table with RLS policies
@@ -131,7 +133,7 @@ Now that we understand how `crudPolicy` works, let's look at two typical ways to
 
 The most common pattern is restricting users to their own data:
 
-```typescript shouldWrap
+```typescript {15-19} shouldWrap 
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
 
 export const todos = pgTable(
@@ -159,7 +161,7 @@ export const todos = pgTable(
 
 For more complex scenarios, you might want different permissions for different roles:
 
-```typescript shouldWrap
+```typescript {15-19,21-25} shouldWrap
 import { crudPolicy, authenticatedRole, anonymousRole } from 'drizzle-orm/neon';
 
 export const posts = pgTable(
