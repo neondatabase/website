@@ -22,7 +22,8 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
    ![Search for Neon in the Azure Portal](/docs/introduction/azure_search_neon.png)
 
    Alternatively, go to the [Azure Marketplace](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home) and search for **Neon Serverless Postgres**.
-3. Subscribe to the service. You will be directed to the [Create a Neon Serverless Postgres Resource](#create-a-neon-resource) page.
+
+2. Subscribe to the service. You will be directed to the [Create a Neon Serverless Postgres Resource](#create-a-neon-resource) page.
 
 ## Create a Neon Resource
 
@@ -47,10 +48,10 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
 
    ![Go to resource button](/docs/introduction/azure_go_to_resource.png)
 
-1. Select the **Go to Neon link** under **Getting started** to open the Neon Console. 
+1. Select the **Go to Neon link** under **Getting started** to open the Neon Console.
 
    ![Azure get started](/docs/introduction/azure_get_started.png)
-   
+
    You will be directed to the **Create project page** in the Neon Console, in your newly created Neon Organization.
 
    ![Create project dialog for Azure](/docs/introduction/azure_create_project.png)
