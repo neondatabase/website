@@ -33,18 +33,33 @@ To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Mark
 If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project. You might consider this option if:
 
 - Part of your infrastructure runs on Azure but you don't need the native integration
-- Azure regions are closer to your applications than Neon's AWS regions
-- You want to manage billing through Neon rather than Azure.
+- An Azure region is closer to your application than a Neon AWS region
+- You want to manage billing through Neon rather than Azure
 
-To create a Neon project in an Azure region without using the **Azure Native ISV Service**, follow the usual [Create project](https://neon.tech/docs/manage/projects#create-a-project) steps, selecting the desired Azure region form the **Region** drop-down menu. Project creation is also support via the Neon API and CLI, where you would specify an Azure `region_id` value (see [Regions](/docs/introduction/regions)).
+Creating a Neon project in an Azure region without using the **Azure Native ISV Service** is supported via the Neon Console, CLI, and API.
 
-Neon CLI:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+To create a Neon project from the console, follow the [Create project](https://neon.tech/docs/manage/projects#create-a-project) steps. Select **Azure** as the **Cloud Service Provider**, and choose one of the available [Azure regions](/docs/introduction/regions).
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project using the Neon CLI, use the [neon projects create](/docs/reference/cli-projects#create) command:
 
 ```bash
 neon projects create --name mynewproject --region-id azure-eastus2
 ```
 
-Neon API:
+For Azure `region-id` values, see [Regions](/docs/introduction/regions).
+</TabItem>
+
+<TabItem>
+
+To create a Neon project using the Neon API, use the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint:
 
 ```bash
 curl --request POST \
@@ -62,6 +77,12 @@ curl --request POST \
 '
 ```
 
+For Azure `region_id` values, see [Regions](/docs/introduction/regions).
+
+</TabItem>
+
+</Tabs>
+
 ## Azure region support
 
-For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions, but more will be added. To request support for a particular Azure region, see [Request a region](/docs/introduction/regions#request-a-region).
+For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions. To request support for other Azure regions, see [Request a region](/docs/introduction/regions#request-a-region).
