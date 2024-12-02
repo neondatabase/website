@@ -28,13 +28,18 @@ This option integrates Neon natively into Azure, letting you manage your Neon or
 
 ### Get started
 
-To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions. After you setup the integration, familiarize yourself with Neon by stepping through Neon's [Getting started](https://neon.tech/docs/introduction#get-started) guides.
+To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions. After you setup the integration, familiarize yourself with Neon by stepping through Neon's [Getting started](https://neon.tech/docs/introduction#get-started) guides. You can also manage your Neon Postgres Resource using the Azure CLI or SDK for .NET.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/billing-azure-marketplace" description="Deploy Neon Postgres as a Neon as an Azure Native ISV Service from the Azure Marketplace" icon="enable">Deploy Neon from Azure Marketplace</a>
+<a href="/docs/introduction/billing-azure-marketplace" description="Deploy Neon Postgres as Native ISV Service from the Azure Marketplace" icon="enable">Deploy Neon from Azure Marketplace</a>
 
 <a href="https://neon.tech/docs/introduction#get-started" description="Familiarize yourself with Neon by stepping through our Getting started guides" icon="trend-up">Getting started with Neon</a>
+
+
+<a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" description="Manage your Neon Resource with the Azure CLI" icon="cli">Azure CLI — az neon</a>
+
+<a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview" description="Manage your Neon Resource with the Azure SDK for .NET" icon="code">Azure SDK for .NET</a>
 
 </DetailIconCards>
 
@@ -100,10 +105,6 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 ## Related resources
 
 <TechnologyNavigation open>
-
-<a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" title="Azure CLI — az neon (Native Integration)" description="Manage the your Neon Resource with the Azure CLI" icon="azure"></a>
-
-<a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview" title="Azure SDK for .NET (Native Integration)" description="Manage the your Neon Resource with the Azure Neon Postgres SDK for .NET" icon="azure"></a>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
