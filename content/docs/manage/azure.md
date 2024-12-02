@@ -36,7 +36,6 @@ To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Mark
 
 <a href="https://neon.tech/docs/introduction#get-started" description="Familiarize yourself with Neon by stepping through our Getting started guides" icon="trend-up">Getting started with Neon</a>
 
-
 <a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" description="Manage your Neon Resource with the Azure CLI" icon="cli">Azure CLI — az neon</a>
 
 <a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview" description="Manage your Neon Resource with the Azure SDK for .NET" icon="code">Azure SDK for .NET</a>
