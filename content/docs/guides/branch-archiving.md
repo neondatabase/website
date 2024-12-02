@@ -79,7 +79,7 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 
 ## Is automatic branch archiving configurable?
 
-Branch archiving is not configurable. Archiving and unarchiving happen automatically, as described above.
+Branch archiving is not configurable. Archiving and unarchiving happen automatically. However, you can prevent a branch from being archived by setting it as a **protected branch**. For instructions, see [Set a branch as protected](/docs/manage/branches#set-a-branch-as-protected).
 
 ## Monitoring branch archiving
 
