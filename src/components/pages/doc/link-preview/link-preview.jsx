@@ -7,8 +7,11 @@ import React from 'react';
 import Link from 'components/shared/link';
 
 const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
-  const isExternal = href?.startsWith('http');
-  const isGlossary = href?.startsWith('/docs/reference/glossary');
+  const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+  const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
+  const isGlossary =
+    href?.startsWith('/docs/reference/glossary') ||
+    href?.startsWith(`${baseUrl}/docs/reference/glossary`);
   const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
 
   return (
@@ -28,7 +31,7 @@ const LinkPreview = ({ href, title, preview, children, ...otherProps }) => {
         <Tooltip.Portal className="TooltipPortal">
           <Tooltip.Content className="TooltipContent">
             <h4 className="font-medium tracking-tight">{title}</h4>
-            <p className="mt-1 text-sm leading-snug tracking-tight text-gray-new-20 dark:text-gray-new-80">
+            <p className="mt-1 line-clamp-3 text-sm leading-snug tracking-tight text-gray-new-20 dark:text-gray-new-80">
               {preview}
             </p>
             <Tooltip.Arrow className="TooltipArrow" />

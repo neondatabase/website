@@ -67,8 +67,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => {
     const { href, children, ...otherProps } = props;
-    const isExternal = href?.startsWith('http');
-    const isGlossary = href?.startsWith('/docs/reference/glossary');
+    const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+    const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
+    const isGlossary =
+      href?.startsWith('/docs/reference/glossary') ||
+      href?.startsWith(`${baseUrl}/docs/reference/glossary`);
     const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
 
     if (children === '#id') {
@@ -76,6 +79,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       return <span id={id} />;
     }
 
+    // Automatically generate previews for glossary links
     if (isGlossary) {
       const glossaryItem = getGlossaryItem(href);
       if (glossaryItem) {
