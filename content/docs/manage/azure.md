@@ -10,10 +10,10 @@ updatedOn: '2024-01-12T16:49:12.349Z'
 
 Neon offers the following deployment options on Azure:
 
-1. **Deploy Neon as an Azure Native ISV Service** — use Neon as a native Azure service, integrated with the [Azure portal](https://portal.azure.com/#home), [CLI](https://learn.microsoft.com/en-us/cli/azure/), and [SDKs](https://azure.microsoft.com/en-us/downloads/). This option enables you to manage Neon as part of your Azure infrastructure with unified billing in Azure.
-2. **Create Neon projects in Azure regions (no integration)** — create a Neon project in an Azure region without using the native Azure integration. Project creation and billing is managed through Neon. There is no difference from a Neon project created in an AWS region — your Neon project simply resides in an Azure region instead of AWS region.
+- **Option 1: Deploy Neon as an Azure Native ISV Service** — use Neon as a native Azure service, integrated with the [Azure portal](https://portal.azure.com/#home), [CLI](https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest), and [SDKs](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview). This option enables you to manage Neon as part of your Azure infrastructure with unified billing in Azure.
+- **Option 2: Create Neon projects in Azure regions (no integration)** — create a Neon project in an Azure region without using the native Azure integration. Project creation and billing is managed through Neon. There is no difference from a Neon project created in an AWS region — your Neon project simply resides in an Azure region instead of AWS region.
 
-## Deploy Neon as an Azure Native ISV Service
+## Option 1: Deploy Neon as an Azure Native ISV Service
 
 This option integrates Neon natively into Azure, letting you manage your Neon organization alongside the rest of your Azure infrastructure. Key benefits include:
 
@@ -28,9 +28,17 @@ This option integrates Neon natively into Azure, letting you manage your Neon or
 
 ### Get started
 
-To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions. After you setup the integration, familiarize yourself with Neon by stepping through Neon's [Get started](https://neon.tech/docs/introduction#get-started) docs.
+To begin using **Neon as an Azure Native ISV Service**, refer to our [Azure Marketplace](/docs/introduction/billing-azure-marketplace) instructions. After you setup the integration, familiarize yourself with Neon by stepping through Neon's [Getting started](https://neon.tech/docs/introduction#get-started) guides.
 
-## Create Neon projects in Azure regions (no integration)
+<DetailIconCards>
+
+<a href="/docs/introduction/billing-azure-marketplace" description="Deploy Neon Postgres as a Neon as an Azure Native ISV Service from the Azure Marketplace" icon="enable">Deploy Neon from Azure Marketplace</a>
+
+<a href="https://neon.tech/docs/introduction#get-started" description="Familiarize yourself with Neon by stepping through our Getting started guides" icon="trend-up">Getting started with Neon</a>
+
+</DetailIconCards>
+
+## Option 2: Create Neon projects in Azure regions (no integration)
 
 If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project. You might consider this option if:
 
@@ -92,6 +100,10 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 ## Related resources
 
 <TechnologyNavigation open>
+
+<a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" title="Azure CLI — az neon (Native Integration)" description="Manage the your Neon Resource with the Azure CLI" icon="azure"></a>
+
+<a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview" title="Azure SDK for .NET (Native Integration)" description="Manage the your Neon Resource with the Azure Neon Postgres SDK for .NET" icon="azure"></a>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
