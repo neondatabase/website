@@ -5,7 +5,9 @@ const slugify = require('slugify');
 /**
  * Get a glossary item preview by heading ID.
  * @param {string} href - The href of the glossary item.
- * @returns {Object} - The glossary item preview.
+ * @returns {Object} item - The glossary item preview.
+ * @returns {string} item.title - The title of the glossary item.
+ * @returns {string} item.preview - The preview text of the glossary item.
  */
 const getGlossaryItem = (href) => {
   const glossaryFilePath = 'content/docs/reference/glossary.md';
@@ -46,7 +48,7 @@ const getGlossaryItem = (href) => {
         .replace(/\s{2,}/g, ' ') // Remove multiple spaces
         .trim(); // Clean up whitespace
 
-      // Add ellipsis at the end if the text is longer than 64 chars
+      // Truncate the text text to 64 characters and add ellipsis if it's longer
       const preview = formattedText.slice(0, 64) + (formattedText.length > 64 ? '…' : '');
       result = { title, preview };
       return true;
