@@ -240,6 +240,11 @@ const defaultConfig = {
         destination: '/stage',
         permanent: true,
       },
+      {
+        source: '/changelog',
+        destination: '/docs/changelog',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
