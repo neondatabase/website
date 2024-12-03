@@ -3,7 +3,7 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 enableTableOfContents: true
-updatedOn: '2024-12-02T23:14:56.367Z'
+updatedOn: '2024-12-03T11:41:28.735Z'
 ---
 
 <InfoBlock>
