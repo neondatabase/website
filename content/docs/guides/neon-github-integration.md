@@ -178,10 +178,11 @@ To view workflow results in GitHub, follow the instructions in [Viewing your wor
 
 ## Building your own GitHub Actions workflow
 
-The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
+The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create branch, delete branch, and schema diff GitHub Actions, which you can find here:
 
 - [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
 - [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
+- [Schema Diff](https://github.com/neondatabase/schema-diff-action)
 
 Neon also offers a [Reset a Neon Branch](https://github.com/neondatabase/reset-branch-action) action that allows you to reset a database branch to match the current state of its parent branch. This action is useful in a feature-development workflow, where you may need to reset a development branch to the current state of your production branch before beginning work on a new feature.
 
@@ -209,7 +210,7 @@ reset_neon_branch:
         api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The possibilities are endless. You can integrate Neon's GitHub Actions into your workflow, develop custom actions, or combine Neon's actions with those from other platforms or services.
+You can integrate Neon's GitHub Actions into your workflow, develop custom actions, or combine Neon's actions with those from other platforms or services.
 
 If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) is a good place to start.
 
@@ -222,6 +223,8 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 </Admonition>
 
 <DetailIconCards>
+
+<a href="https://neon.tech/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
