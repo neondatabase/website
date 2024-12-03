@@ -3,7 +3,7 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 enableTableOfContents: true
-updatedOn: '2024-11-20T12:37:42.224Z'
+updatedOn: '2024-11-30T11:53:56.073Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
@@ -14,7 +14,7 @@ This serverless character also makes Neon databases highly agile and well-suited
 
 ![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
 
-Read our [Architecture](https://neon.tech/docs/introduction/architecture-overview) section for more information on how Neon is built.
+Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 
 ## What “serverless” means to us
 

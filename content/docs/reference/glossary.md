@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-11-22T10:01:08.296Z'
+updatedOn: '2024-12-03T11:41:28.740Z'
 ---
 
 ## access token
@@ -392,11 +392,11 @@ A string that identifies your Neon project. Neon Project IDs are generated Herok
 
 ## Project Collaboration
 
-A feature that allows you to invite other Neon users to collaborate on your Neon projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
+A feature that lets you invite other Neon users to work on a project together. Note that organization members don't need to be added as collaborators since they automatically get access to all organization projects. See [Invite collaborators](/docs/manage/projects#invite-collaborators-to-a-project) for more information.
 
 ## Project storage
 
-The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GiB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
+The total volume of data stored in your Neon project. Also, a billing metric that measures the total volume of data and history, in GB-hours, stored in your Neon project. See [Storage](/docs/introduction/usage-metrics#storage).
 
 ## prorate
 
@@ -414,8 +414,9 @@ You can designate any Neon branch as a "protected branch", which implements a se
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP restrictions to protected branches only. The IP Allow feature is only available on Neon's [Business](/docs/introduction/plans#business) plan.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
@@ -579,4 +580,4 @@ In logical replication, the WAL records all changes to the data, serving as the 
 
 ## Written data
 
-A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigibytes (GiB). Writing data from compute to storage ensures the durability and integrity of your data.
+A usage metric that measures the total volume of data written from compute to storage within a given billing period, measured in gigabytes (GB). Writing data from compute to storage ensures the durability and integrity of your data.

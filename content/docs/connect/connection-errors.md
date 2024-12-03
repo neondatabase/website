@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-10-04T11:51:33.066Z'
+updatedOn: '2024-11-30T11:53:56.047Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -102,7 +102,7 @@ Neon has tested the following drivers for SNI support:
 | Driver            | Language   | SNI Support | Notes                                                                                                                                             |
 | ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | npgsql            | C#         | &check;     |                                                                                                                                                   |
-| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
+| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                                          |
 | github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
 | pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
 | go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
@@ -147,10 +147,10 @@ Consider these recommended steps:
 
 - Visit the [Neon status page](https://neonstatus.com/) to ensure there are no ongoing issues.
 - Pause for a short period to allow your compute to restart, then try reconnecting.
-- Try [connecting with psql](https://neon.tech/docs/connect/query-with-psql-editor) to see if a connection can be established.
-- Review the strategies in [Connection latency and timeouts](https://neon.tech/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
+- Try [connecting with psql](/docs/connect/query-with-psql-editor) to see if a connection can be established.
+- Review the strategies in [Connection latency and timeouts](/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
 
-If the connection issue persists, please reach out to [Support](https://neon.tech/docs/introduction/support).
+If the connection issue persists, please reach out to [Support](/docs/introduction/support).
 
 ## Can't reach database server
 
@@ -211,7 +211,7 @@ To resolve this issue, you have several options:
 
 - Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
 - Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
-- Enable [connection pooling](https://neon.tech/docs/connect/connection-pooling).
+- Enable [connection pooling](/docs/connect/connection-pooling).
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
 

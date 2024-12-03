@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-10-26T08:44:49.115Z'
+updatedOn: '2024-12-01T21:48:07.695Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -46,7 +46,7 @@ This graph shows allocated RAM and usage over time for the selected compute.
 
 **ALLOCATED**: The amount of allocated RAM.
 
-RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is always 1 (GiB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
+RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is always 1 (GB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [autosuspend](/docs/guides/auto-suspend-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
 
 **Used**: The amount of RAM used.
 
@@ -84,7 +84,7 @@ Idle connections are those that are open but not currently being used. While a f
 
 **TOTAL**: The sum of active and idle connections for the selected compute.
 
-The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
+The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
 
 ### Database size
 
