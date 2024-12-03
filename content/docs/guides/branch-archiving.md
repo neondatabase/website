@@ -79,7 +79,7 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 
 ## Is branch archiving configurable?
 
-Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above. 
+Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
 
 ## Disabling branch archiving
 
