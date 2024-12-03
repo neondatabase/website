@@ -169,7 +169,7 @@ GithubStars.propTypes = themePropTypes;
 
 const Sidebar = ({ isDarkTheme, isClient }) => (
   <div className="flex items-center gap-x-6 lg:hidden">
-    {!isClient && <GithubStars />}
+    {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
     <Link
       className="text-[13px] leading-none tracking-extra-tight lg:hidden"
       to={LINKS.login}
