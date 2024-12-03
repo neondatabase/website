@@ -7,9 +7,14 @@ const SITE_URL =
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
+const extractHandleFromPath = (pathname) => pathname.split('/').slice(-2)[0];
+
+const generateEditPageURL = (handle) => `${SITE_URL}/tickets/${handle}/edit`;
+
 export async function middleware(req) {
   const { pathname } = req.nextUrl;
-  // Add any assets or page that you don't want to run middleware on
+
+  // Exclude static files and API routes
   if (
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/favicon.ico') ||
@@ -18,24 +23,34 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  const token = await getToken({ req });
-  // if token exists, user is authorized
-  if (token?.githubHandle) {
-    // authorized user should be moved to his ticket edit page from anywhere
-    if (pathname === '/generate-ticket' || pathname.endsWith(`/tickets/${token.githubHandle}`)) {
-      return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${token.githubHandle}/edit`));
+  // Define protected routes
+  const protectedRoutes = ['/generate-ticket', '/tickets'];
+
+  if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+    const token = await getToken({ req });
+    const isAuthenticated = !!token?.githubHandle;
+
+    if (isAuthenticated) {
+      const userHandle = token.githubHandle;
+
+      // Redirect authorized user to their edit page
+      if (pathname === '/generate-ticket' || pathname.endsWith(`/tickets/${userHandle}`)) {
+        return NextResponse.redirect(generateEditPageURL(userHandle));
+      }
+
+      // Prevent access to another user's edit page
+      if (pathname.endsWith(`/edit`)) {
+        const handleInPath = extractHandleFromPath(pathname);
+        if (userHandle !== handleInPath) {
+          return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${handleInPath}`));
+        }
+      }
     }
-    // if user is authorized but tries to access another user's edit page, redirect to /tickets/:handle
-    if (pathname.endsWith(`/edit`) && token?.githubHandle !== pathname.split('/').slice(-2)[0]) {
-      return NextResponse.redirect(
-        new URL(`${SITE_URL}${pathname.split('/').slice(0, -1).join('/')}`)
-      );
-    }
-  } else if (pathname.endsWith(`/edit`)) {
-    if (!token?.githubHandle) {
-      return NextResponse.redirect(
-        new URL(`${SITE_URL}${pathname.split('/').slice(0, -1).join('/')}`)
-      );
+
+    // Redirect unauthorized user trying to access an edit page
+    if (pathname.endsWith(`/edit`)) {
+      const handleInPath = extractHandleFromPath(pathname);
+      return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${handleInPath}`));
     }
   }
 
