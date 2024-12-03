@@ -17,7 +17,7 @@ updatedOn: '2024-01-12T16:49:12.349Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/introduction/billing-azure-marketplace">Neon in the Azure Marketplace (Neon Docs)</a>
-  <a href="/docs/introduction/regions#azure-regions">Supported Azure Regions (Neon Docs)</a>
+  <a href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview">Neon Azure Marketplace Listing</a>
   <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/overview">What is Neon Serverless Postgres? (Azure Docs)</a>
   <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/create">Create a Neon Serverless Postgres resource (Azure Docs)</a>
 </DocsList>

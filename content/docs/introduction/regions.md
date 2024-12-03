@@ -21,8 +21,12 @@ Neon offers project deployment in multiple AWS and Azure regions. To minimize la
 ## Azure regions
 
 - Azure East US 2 region (Virginia) &mdash; `azure-eastus2`
-- Azure Germany West Central region &mdash; `azure-gwc`
+- Azure Germany West Central region (Frankfurt) &mdash; `azure-gwc`
 - Azure West US 3 region (Arizona) &mdash; `azure-westus3`
+
+<Admonition type="note" title="Deployment options on azure">
+For information about Neon deployment options on Azure, see [Neon on Azure](/docs/manage/azure).
+</Admonition>
 
 ## Request a region
 
