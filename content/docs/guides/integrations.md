@@ -48,6 +48,8 @@ updatedOn: '2024-11-14T13:15:10.565Z'
 
 <a href="/docs/guides/aws-lambda" title="AWS Lambda" description="Connect from AWS Lambda to Neon" icon="aws-lambda"></a>
 
+<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+
 </TechnologyNavigation>
 
 ## Query
