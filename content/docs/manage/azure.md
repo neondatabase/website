@@ -3,7 +3,7 @@ title: Neon on Azure
 enableTableOfContents: true
 tag: new
 isDraft: false
-updatedOn: '2024-12-03T14:38:16.505Z'
+updatedOn: '2024-12-03T15:29:17.189Z'
 ---
 
 <PublicPreview/>
