@@ -219,11 +219,10 @@ jobs:
 To set up GitHub Actions correctly:
 
 1. **Enable Workflow Permissions**:
-  Go to your repository's GitHub Actions settings, navigate to **Actions** > **General**,  and set **Workflow permissions** to **Read and write permissions**.
+   Go to your repository's GitHub Actions settings, navigate to **Actions** > **General**, and set **Workflow permissions** to **Read and write permissions**.
 
 2. **Add Database Connection String**:
-  Add a `DATABASE_URL` secret to your repository under **Settings** > **Secrets and variables** > **Actions**, using the connection string for your production database that you noted earlier. While you're here, you should see the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable that have already been set by the Neon GitHub integration.
-  
+   Add a `DATABASE_URL` secret to your repository under **Settings** > **Secrets and variables** > **Actions**, using the connection string for your production database that you noted earlier. While you're here, you should see the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable that have already been set by the Neon GitHub integration.
 
 </Admonition>
 
