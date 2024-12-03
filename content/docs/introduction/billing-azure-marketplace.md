@@ -54,9 +54,13 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
 
    You will be directed to the **Create project page** in the Neon Console, in your newly created Neon Organization.
 
+   <Admonition type="note">
+   A Neon Organization created via the Azure portal supports creating Neon projects in Azure regions only.
+   </Admonition>
+
    ![Create project dialog for Azure](/docs/introduction/azure_create_project.png)
 
-1. From here, you can follow the **Neon Getting Started**, beginning at [Step 2 - Onboarding in the Neon Console](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+1. From here, you can follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) to create your first Neon project and familiarize yourself with the Neon platform.
 
 ## Overages
 
