@@ -261,6 +261,7 @@ const Header = ({
               />
               <Navigation isDarkTheme={isDarkTheme} />
             </div>
+            <Sidebar isDarkTheme={isDarkTheme} isClient={isClient} />
           </Container>
         )}
       </HeaderWrapper>
