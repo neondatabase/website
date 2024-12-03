@@ -22,7 +22,6 @@ These notices apply when replicating data from Neon:
 - **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
 - **Branch restore removes replication slots**: Restoring a branch that hosts a publishing database will delete all replication slots on that branch. Replication slots are not recreated during the restore process. For more details, see [Branch restore](/docs/guides/branch-restore).
 
-
 ### Neon as a subscriber
 
 This notice applies when replicating data to Neon:
