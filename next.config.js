@@ -245,6 +245,12 @@ const defaultConfig = {
         destination: '/docs/changelog',
         permanent: false,
       },
+      {
+        source: '/home',
+        missing: [{ type: 'cookie', key: 'neon_login_indicator' }],
+        destination: '/',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
