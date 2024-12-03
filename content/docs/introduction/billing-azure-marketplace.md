@@ -8,6 +8,22 @@ updatedOn: '2024-10-14T11:46:51.927Z'
 
 <PublicPreview/>
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to set up the Neon native integration on Azure</p>
+<p>About Neon pricing plans and overages</p>
+<p>How to change your plan</p>
+<p>How to delete a Neon resource on Azure</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/manage/azure">Neon on Azure (Neon Docs)</a>
+  <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/overview">What is Neon Serverless Postgres? (Azure Docs)</a>
+  <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/create">Create a Neon Serverless Postgres resource (Azure Docs)</a>
+</DocsList>
+
+</InfoBlock>
+
 Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
 
 ## Prerequisites for setting up the Neon integration
@@ -62,9 +78,9 @@ Neon is available as an [Azure Native ISV Service](https://learn.microsoft.com/e
 
 1. From here, you can follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) to create your first Neon project and familiarize yourself with the Neon platform.
 
-## Overages
+## Neon pricing plans and overages
 
-Neon plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
+Neon pricing plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
 ## Changing your pricing plan
 
