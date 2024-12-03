@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-12-02T18:21:11.984Z'
 ---
 
-Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
+Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
 ## AWS regions
 
@@ -62,23 +62,23 @@ If you are unsure of your project's region, you can find this information in the
 | Region                                     | NAT Gateway IP Addresses                       |
 | :----------------------------------------- | :--------------------------------------------- |
 | Azure East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
-| Azure Germany West Central - azure-gwc     | 20.52.100.129, 20.52.100.208, 20.52.187.150    |
-| Azure West US 3 (Arizona) - azure-westus3  | 20.38.38.171, 20.168.0.32, 20.168.0.77         |
+| Azure Germany West Central — azure-gwc     | 20.52.100.129, 20.52.100.208, 20.52.187.150    |
+| Azure West US 3 (Arizona) — azure-westus3  | 20.38.38.171, 20.168.0.32, 20.168.0.77         |
 
 ## Move project data to a new region
 
-Moving a project to a differ region requires moving your data using one of the following methods:
+Moving a project to a different region requires moving your data using one of the following options:
 
-### Dump and restore
+### Option 1: Dump and restore
 
 Using the dump and restore method involves the following steps:
 
-1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
-1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/migrate-from-postgres).
+1. Creating a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
+1. Moving your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/migrate-from-postgres).
 
 Moving data to a new Neon project using this method may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
 
-### Logical replication
+### Option 2: Logical replication
 
 As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
