@@ -36,6 +36,9 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
+
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
