@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2024-11-22T15:30:06.809Z'
+updatedOn: '2024-12-03T11:41:28.740Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -37,8 +37,9 @@ You can designate any branch as a "protected branch", which implements a series 
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The IP Allow feature is only available on Neon's [Business](/docs/introduction/plans#business) plan.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
 

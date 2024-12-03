@@ -379,6 +379,9 @@
           slug: introduction/manage-billing
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
+        - title: Azure Marketplace
+          slug: introduction/billing-azure-marketplace
+          tag: new
     - title: Neon on Azure
       slug: manage/azure
       icon: azure

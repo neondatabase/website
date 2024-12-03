@@ -1,14 +1,14 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.074Z'
+updatedOn: '2024-12-01T21:48:07.698Z'
 ---
 
-This topic describes [Storage](#storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
+This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
 
 ## Storage
 
-Neon's storage engine is designed to support a serverless architecture and enable features such as [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). Consequently, storage in Neon differs somewhat from other database services.
+Neon's storage engine is designed to support a serverless architecture and enable features such as [point-in-time restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
 
 In Neon, storage consists of your total **data size** and **history**.
 
@@ -23,20 +23,21 @@ In Neon, storage consists of your total **data size** and **history**.
   The size of your history depends on a couple of factors:
 
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
-  - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention), which can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you might imagine, retaining 1 day of history would generally require much less storage than retaining 30 days, but less history limits the features that depend on it. For example, 1 day of history means that your maximum restore point is only 1 day in the past.
+  - **How much history you keep** &#8212; referred to as [history retention](/docs/introduction/point-in-time-restore#history-retention), which can be an hour, a day, a week, or even a month. History retention is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum point-in-time restore point is only 1 day in the past.
 
 ### How branching affects storage
 
 If you use Neon's branching feature, you should be aware that it can also affect storage. Here are some rules of thumb when it comes to branching:
 
 1. **Creating a branch does not add to storage immediately.** At creation time, a branch is a copy-on-write clone of its parent branch and shares its parent's data. Shared data is not counted more than once.
-2. **A branch shares data with its parent if it's within the history retention window.** For example, a Neon project has 7-day history retention window, a child branch shares data with its parent branch for 7 days. However, as soon as the child branch ages out of that window, data is no longer shared &#8212; the child branch's data stands on its own and is counted toward storage.
+2. **A branch shares data with its parent if it's within the history retention window.** For example, a Neon project has 7-day history retention window, a child branch shares data with its parent branch for 7 days. However, as soon as the child branch ages out of that window, data is no longer shared &#8212; the child branch's data stands on its own.
 3. **Making changes to a branch adds to storage.** Data changes on a branch are unique to that branch and counted toward storage. For example, an insert operation on the branch adds a record to the branch's history.
+4. **Branches older than 14 days and not accessed in the past 24-hours are automatically moved to cost-efficient [Archive storage](#archive-storage)**.
 
-The storage amount you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account.
+The **Storage** and **Archive storage** amounts you see under **Usage** on the **Billing** page in the Neon Console takes all of these factors into account.
 
 <Admonition type="note">
-Remember that each Neon plan comes with an allowance of storage that's already included in your plan's monthly fee. The Launch plan includes 10 GiB of storage, the Scale plan has an allowance of 50 GiB, while the Business plan supports up to 500 GiB. You are only billed for extra storage if you go over your plan allowance. To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
+Each Neon plan comes with an allowance of **Storage** and **Archive storage** that's included in your plan's monthly fee. See [Neon plans](/docs/introduction/plans). To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
 </Admonition>
 
 ### Storage FAQs
@@ -92,8 +93,8 @@ Here are some strategies to consider:
 
 Your storage limit varies depending on your Neon plan.
 
-- **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GiB), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
-- **Launch, Scale, and Business Plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage). The amount of extra usage is based on the maximum size your storage reaches. Charges are prorated based on when in the month your storage size increased.
+- **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GB-month), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
+- **Launch, Scale, and Business Plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage).
 
 </details>
 
@@ -137,7 +138,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-usage). If the table is large, this could push you over your plan's limit, trigging extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-usage). If the table is large, this could push you over your plan's limit, triggering extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
 
@@ -145,7 +146,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 
 - **Set a reasonable history window** &#8212; We recommend setting your history retention period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
 - **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
-  \_ **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
+- **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
 - **Manual VACUUM for autosuspend users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
 
   To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
@@ -157,6 +158,23 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
   See [VACUUM and ANALYZE statistic](/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
 
 </details>
+
+## Archive storage
+
+To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for the past 24 hours**. Both conditions must be true for a branch to be archived.
+
+Additionally, these conditions apply:
+
+- A branch cannot be archived if it has an unarchived child branch.
+- A child branch must be archived before a parent branch can be archived.
+
+No action is required to unarchive a branch. It happens automatically. Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. It's important to note that when a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
+
+<Admonition type="note">
+Each Neon plan comes with an allowance of **Archive storage** that's included in your plan's monthly fee. See [Neon plans](/docs/introduction/plans). Extra archive storage is billed per GB-month. To learn how extra archive storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
+</Admonition>
+
+For more about how Neon automatically archives inactive branches, see [Branch archiving](/docs/guides/branch-archiving). To understand how archive storage is implemented in Neon's architecture, refer to [Archive storage](/docs/introduction/architecture-overview#archive-storage) in our architecture documentation.
 
 ## Compute
 
@@ -351,7 +369,7 @@ In Neon, everything starts with a project. A project is a container for your bra
 The following table outlines project allowances for each Neon plan.
 
 | Plan       | Projects  |
-| ---------- | --------- |
+| :--------- | :-------- |
 | Free Plan  | 1         |
 | Launch     | 100       |
 | Scale      | 1000      |

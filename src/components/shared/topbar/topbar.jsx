@@ -70,7 +70,8 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-     Use Neon branches for schema migrations: Test with production-like data and automatically track schema changes in your PRs      
+      Use Neon branches for schema migrations: Test with production-like data and automatically
+      track schema changes in your PRs
     </span>
     <ChevronIcon
       className={clsx(
