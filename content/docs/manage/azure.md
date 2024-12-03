@@ -8,6 +8,24 @@ updatedOn: '2024-01-12T16:49:12.349Z'
 
 <PublicPreview/>
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Options for using Neon on Azure</p>
+<p>About deploying Neon as an Azure Native ISV Service</p>
+<p>About creating Neon projects in Azure regions</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/introduction/billing-azure-marketplace">Neon in the Azure Marketplace (Neon Docs)</a>
+  <a href="/docs/introduction/regions#azure-regions">Supported Azure Regions (Neon Docs)</a>
+  <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/overview">What is Neon Serverless Postgres? (Azure Docs)</a>
+  <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/create">Create a Neon Serverless Postgres resource (Azure Docs)</a>
+</DocsList>
+
+</InfoBlock>
+
+## Deployment options on Azure
+
 Neon offers the following deployment options on Azure:
 
 - **Option 1: Deploy Neon as an Azure Native ISV Service** — use Neon as a native Azure service, integrated with the [Azure portal](https://portal.azure.com/#home), [CLI](https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest), and [SDKs](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview). This option enables you to manage Neon as part of your Azure infrastructure with unified billing in Azure.
