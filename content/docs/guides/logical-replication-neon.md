@@ -20,7 +20,7 @@ These notices apply when replicating data from Neon:
 
 - **Autosuspend**: Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
 - **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
-- **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) that hosts a publishing database will delete all replication slots on that branch. Replication slots are not recreated during the restore process.
+- **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 
