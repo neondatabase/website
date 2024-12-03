@@ -25,10 +25,6 @@ We aim to introduce custom roles for Neon Authorize, in addition to the "authent
 
 The `pg_session_jwt` extension is required for Neon Authorize to work. We're exploring the idea of automatically installing the extension and setting up the role grants for the `authenticated` and `anonymous` roles.
 
-## JWT audience checks
-
-The `aud` field in a JWT typically defines the token's intended recipients. In the future, we want to allow users to customize the expected `aud` field in the JWTs they use with Neon Authorize, providing greater flexibility and control.
-
 ## Multi-tenancy through Neon Authorize
 
 We've discussed supporting multi-tenancy via Neon Authorize, allowing users to configure how their JWTs should trigger Neon to route database requests to different Neon instances.
