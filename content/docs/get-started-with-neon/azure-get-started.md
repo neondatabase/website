@@ -2,7 +2,7 @@
 title: Get started with Neon on Azure
 subtitle: Learn how to deploy Neon as a native service on Azure
 enableTableOfContents: true
-updatedOn: '2024-10-22T15:41:04.370Z'
+updatedOn: '2024-12-03T14:38:16.500Z'
 ---
 
 ## Find Neon on Azure and subscribe
