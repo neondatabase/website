@@ -1,6 +1,6 @@
 ---
 title: Automated Database Branching with GitHub Actions
-subtitle: Learn how to implement automated database branching for your applications using Neon and GitHub Actions
+subtitle: Learn how to automate database branching for your application using Neon and GitHub Actions
 enableTableOfContents: true
 author: dhanush-reddy
 createdAt: '2024-11-29T00:00:00.000Z'
@@ -9,26 +9,26 @@ createdAt: '2024-11-29T00:00:00.000Z'
 Database changes can be one of the trickiest parts of application development. When multiple developers work on features that require database modifications, they often face challenges like conflicting schema changes, difficulty in testing migrations, and the risk of breaking the production database.
 
 Database branching solves these problems by allowing developers to create isolated database environments for each feature branch, just like they do with code.
-This guide demonstrates how to implement automated database branching using Neon and GitHub Actions, where each pull request gets its own database branch, complete with the necessary schema changes. You'll build a Next.js Todo application that showcases this workflow, which automates several critical database operations:
+This guide demonstrates how to implement automated database branching using Neon and GitHub Actions, where each pull request gets its own database branch, complete with the necessary schema changes. You'll build a Next.js Todo application that showcases this workflow, which automates several critical database operations, including:
 
-- Creates a new database branch when a pull request is opened
-- Automatically applies schema migrations to the new branch
-- Shows schema diffs directly in your pull request
-- Syncs changes to production when the PR is merged
+- Creating a new database branch when a pull request is opened
+- Automatically applying schema migrations to the new branch
+- Showing schema diffs directly in your pull request
+- Syncing schema changes to production when the PR is merged
 
 By the end of this guide, you'll have a system where database changes are as seamless as code changes, with each feature safely isolated in its own environment until it's ready for production. This approach not only makes database changes safer but also gives developers the confidence to experiment with schema changes without fear of breaking the production environment.
 
 ## Prerequisites
 
 - A [Neon account](https://console.neon.tech)
-- A GitHub account
+- A [GitHub account](https://github.com/)
 - Node.js installed on your machine
 - Basic familiarity with Next.js and TypeScript
 
 ## Setting Up Your Neon Database
 
-1. Create a new Neon project from the [Neon Console](https://console.neon.tech)
-2. Note your connection string from the connection details page
+1. Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
+2. Note your connection string from the connection details page.
 
    Your connection string will look similar to this:
 
@@ -40,7 +40,7 @@ By the end of this guide, you'll have a system where database changes are as sea
 
 1. Create a new Next.js project with TypeScript:
 
-   ```bash
+   ```bash shouldWrap
    npx create-next-app@14 todo-app --typescript --tailwind --use-npm --eslint --app --no-src-dir --import-alias "@/*"
    cd todo-app
    ```
@@ -99,7 +99,7 @@ By the end of this guide, you'll have a system where database changes are as sea
 
 4. Create a `.env` file in your project root:
 
-   ```bash
+   ```bash shouldWrap
    DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
    ```
 
@@ -107,18 +107,20 @@ By the end of this guide, you'll have a system where database changes are as sea
 
 ## Set up the Neon GitHub integration
 
+The [Neon GitHub integration](/docs/guides/neon-github-integration) connects your Neon project to your application repository and automatically sets a `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable for you. These variables will support the GitHub Actions workflow we'll create in a later step.
+
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** card and click **Add**.
    ![GitHub App card](/docs/guides/github_card.png)
 3. On the **GitHub** drawer, click **Install GitHub App**.
 4. If you have more than one GitHub account, select the account where you want to install the GitHub app.
-5. Select the GitHub repository to connect to the current Neon project, and click **Connect**.
+5. Select the GitHub repository to connect to your Neon project, and click **Connect**.
 
-   Ignore the final page of the setup on the console, where a sample GitHub Actions workflow is provided, as we'll be creating a custom workflow in the next steps.
+   The final page of the GitHub integration setup provides a sample GitHub Actions workflow. With this workflow as a example, we'll create a custom GitHub Actions workflow in the next steps.
 
 ## Create the GitHub Actions workflow
 
-Create `.github/workflows/neon_workflow.yaml`:
+Create `.github/workflows/neon_workflow.yaml` file and add the following code:
 
 ```yaml
 name: Create/Delete Branch for Pull Request
@@ -216,11 +218,12 @@ jobs:
 <Admonition type="note" title="Note">
 To set up GitHub Actions correctly:
 
-- **Enable Workflow Permissions**:
-  Go to your repository's GitHub Actions settings and set Workflow permissions to Read & write.
+1. **Enable Workflow Permissions**:
+  Go to your repository's GitHub Actions settings, navigate to **Actions** > **General**,  and set **Workflow permissions** to **Read and write permissions**.
 
-- **Add Database Connection String**:
-  Add a `DATABASE_URL` secret to your repository under Settings > Secrets and variables > Actions, using the connection string for your production database.
+2. **Add Database Connection String**:
+  Add a `DATABASE_URL` secret to your repository under **Settings** > **Secrets and variables** > **Actions**, using the connection string for your production database that you noted earlier. While you're here, you should see the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable that have already been set by the Neon GitHub integration.
+  
 
 </Admonition>
 
@@ -288,13 +291,15 @@ Here's how the entire process works from start to finish:
 This automated workflow ensures that:
 
 1. Every feature gets its own isolated database environment
-2. Schema changes are automatically tracked and documented
+2. Schema changes are automatically tracked and documented in the pull request
 3. Migrations are consistently applied across environments
 4. Production database stays in sync with merged code
 5. Database resources are efficiently managed
 6. The risk of manual migration errors is minimized
 
 ## Test the workflow
+
+To test the workflow, perform the following steps:
 
 1. Create a new feature branch:
 
