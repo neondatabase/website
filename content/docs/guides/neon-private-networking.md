@@ -8,11 +8,13 @@ tag: beta
 updatedOn: '2024-11-29T18:24:31.958Z'
 ---
 
-<Admonition type="note" title="Public Beta">
-This feature is in Public Beta. Any member of a Neon Organization account can apply to participate in this Public Beta by requesting access via the **Organization Settings** page in the Console.
-</Admonition>
-
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
+
+<Admonition type="note" title="Public Beta">
+This feature is in Public Beta. Any member of a Neon Organization account can apply to participate in this Public Beta by requesting access via the **Organization Settings** page in the Console. Please note that Neon will enable billing for the feature at the end of the Public Beta period.
+
+![Requesting Private Networking Access](/docs/guides/private_networking_request_access.png)
+</Admonition>
 
 ## Overview
 
@@ -111,4 +113,8 @@ To configure Neon Private Networking, perform the following steps:
      Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version of this feature, there will be a dedicated option in the Neon Console for this purpose.
     </Admonition>
 
-    <NeedHelp />
+## Limits
+
+The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed in the preceding section.
+
+<NeedHelp />
