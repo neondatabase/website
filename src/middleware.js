@@ -10,47 +10,77 @@ const SITE_URL =
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
+const protectedRoutes = ['/generate-ticket', '/tickets'];
+
+const extractHandleFromPath = (pathname) => pathname.split('/').slice(-2)[0];
+
+const generateEditPageURL = (handle) => `${SITE_URL}/tickets/${handle}/edit`;
+
 export async function middleware(req) {
-  const { pathname } = req.nextUrl;
+  try {
+    const { pathname } = req.nextUrl;
 
-  if (
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/favicon.ico') ||
-    pathname.startsWith('/api/')
-  ) {
-    return NextResponse.next();
-  }
-
-  const token = await getToken({ req });
-  const isLoggedIn = await checkCookie('neon_login_indicator', req);
-  const referer = await getReferer(req);
-
-  if (process.env.NODE_ENV === 'production' && isLoggedIn) {
+    // Exclude static files and API routes
     if (
-      referer.includes(process.env.VERCEL_BRANCH_URL) ||
-      referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
+      pathname.startsWith('/_next/') ||
+      pathname.startsWith('/favicon.ico') ||
+      pathname.startsWith('/api/')
     ) {
-      return NextResponse.redirect(new URL(`${SITE_URL}/home`));
+      return NextResponse.next();
     }
-    return NextResponse.redirect(new URL(LINKS.console));
-  }
 
-  if (token?.githubHandle) {
-    if (pathname === '/generate-ticket' || pathname.endsWith(`/tickets/${token.githubHandle}`)) {
-      return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${token.githubHandle}/edit`));
-    }
-    if (pathname.endsWith(`/edit`) && token?.githubHandle !== pathname.split('/').slice(-2)[0]) {
-      return NextResponse.redirect(
-        new URL(`${SITE_URL}${pathname.split('/').slice(0, -1).join('/')}`)
-      );
-    }
-  } else if (pathname.endsWith(`/edit`)) {
-    if (!token?.githubHandle) {
-      return NextResponse.redirect(
-        new URL(`${SITE_URL}${pathname.split('/').slice(0, -1).join('/')}`)
-      );
-    }
-  }
+    // Check if user is logged in
+    const is_logged_in = await checkCookie('neon_login_indicator');
+    if (process.env.NODE_ENV === 'production' && is_logged_in) {
+      const referer = await getReferer();
+      if (
+        referer.includes(process.env.VERCEL_BRANCH_URL) ||
+        referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
+      ) {
+        return NextResponse.redirect('/home');
+      }
 
-  return NextResponse.next();
+      return NextResponse.redirect(LINKS.console);
+    }
+
+    if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+      try {
+        const token = await getToken({ req });
+        const isAuthenticated = !!token?.githubHandle;
+
+        if (isAuthenticated) {
+          const userHandle = token.githubHandle;
+
+          // Redirect authorized user to their edit page
+          if (pathname === '/generate-ticket' || pathname.endsWith(`/tickets/${userHandle}`)) {
+            return NextResponse.redirect(generateEditPageURL(userHandle));
+          }
+
+          // Prevent access to another user's edit page
+          if (pathname.endsWith(`/edit`)) {
+            const handleInPath = extractHandleFromPath(pathname);
+            if (userHandle !== handleInPath) {
+              return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${handleInPath}`));
+            }
+          }
+        }
+
+        // Redirect unauthorized user trying to access an edit page
+        if (pathname.endsWith(`/edit`)) {
+          const handleInPath = extractHandleFromPath(pathname);
+          return NextResponse.redirect(new URL(`${SITE_URL}/tickets/${handleInPath}`));
+        }
+      } catch (error) {
+        console.error('Error during token processing:', error);
+        // Fallback for token-related errors
+        return NextResponse.redirect(new URL(SITE_URL));
+      }
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Middleware execution error:', error);
+    // General error fallback
+    return NextResponse.redirect(new URL(SITE_URL));
+  }
 }
