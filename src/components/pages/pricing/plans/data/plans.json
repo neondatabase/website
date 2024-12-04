@@ -6,28 +6,28 @@
       "price": "<span>$0/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free",
-      "analyticEvent": "pricing_page_get_started_with_free_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_free_plan_clicked"
     },
     "launch": {
       "label": "Launch",
       "price": "<span>From</span> $19<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started",
-      "analyticEvent": "pricing_page_get_started_with_launch_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_launch_plan_clicked"
     },
     "scale": {
       "label": "Scale",
       "price": "<span>From</span> $69<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started",
-      "analyticEvent": "pricing_page_get_started_with_scale_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     },
     "business": {
       "label": "Business",
       "price": "<span>From</span> $700<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started",
-      "analyticEvent": "pricing_page_get_started_with_business_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }
   },
   "cols": [

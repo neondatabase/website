@@ -39,7 +39,7 @@
       "text": "Start for free",
       "theme": "white-outline",
       "event": "Hero Free Tier Panel",
-      "analyticEvent": "pricing_page_get_started_with_free_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_free_plan_clicked"
     }
   },
   {
@@ -91,7 +91,7 @@
       "text": "Get started",
       "theme": "primary",
       "event": "Hero Launch Panel",
-      "analyticEvent": "pricing_page_get_started_with_launch_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_launch_plan_clicked"
     }
   },
   {
@@ -144,7 +144,7 @@
       "text": "Get started",
       "theme": "white-outline",
       "event": "Hero Scale Panel",
-      "analyticEvent": "pricing_page_get_started_with_scale_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
   },
   {
@@ -204,7 +204,7 @@
       "text": "Get started",
       "theme": "white-outline",
       "event": "Hero Enterprise Panel",
-      "analyticEvent": "pricing_page_get_started_with_business_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }
   }
 ]

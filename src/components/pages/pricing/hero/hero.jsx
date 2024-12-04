@@ -140,8 +140,8 @@ const Hero = () => {
                     to={button.url}
                     tag_name={button.event}
                     onClick={() => {
-                      if (button.analyticEvent) {
-                        posthog.capture(button.analyticEvent);
+                      if (button.analyticsEvent) {
+                        posthog.capture(button.analyticsEvent);
                       }
                     }}
                   >

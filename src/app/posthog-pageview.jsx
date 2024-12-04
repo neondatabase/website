@@ -11,7 +11,7 @@ const PostHogPageView = () => {
 
   useEffect(() => {
     // Track pageviews
-    if (pathname && posthog && searchParams) {
+    if (pathname && posthog) {
       let url = window.origin + pathname;
       if (searchParams.toString()) {
         url += `?${searchParams.toString()}`;

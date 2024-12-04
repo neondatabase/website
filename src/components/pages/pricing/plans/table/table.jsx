@@ -28,7 +28,7 @@ const TableHeading = ({
   price,
   buttonUrl,
   buttonText,
-  analyticEvent,
+  analyticsEvent,
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
@@ -63,8 +63,8 @@ const TableHeading = ({
         to={buttonUrl}
         tag_name={`Details Table Top > ${label}`}
         onClick={() => {
-          if (analyticEvent) {
-            posthog.capture(analyticEvent);
+          if (analyticsEvent) {
+            posthog.capture(analyticsEvent);
           }
         }}
       >
@@ -80,7 +80,7 @@ TableHeading.propTypes = {
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
-  analyticEvent: PropTypes.string,
+  analyticsEvent: PropTypes.string,
   isLabelsColumn: PropTypes.bool.isRequired,
   isFeaturedPlan: PropTypes.bool.isRequired,
 };
@@ -337,8 +337,8 @@ const Table = () => {
                   to={labelList[key].buttonUrl}
                   tag_name={`Details Table Bottom > ${labelList[key].label}`}
                   onClick={() => {
-                    const event = labelList[key].analyticEvent;
-                    if (event.analyticEvent) {
+                    const event = labelList[key].analyticsEvent;
+                    if (event) {
                       posthog.capture(event);
                     }
                   }}
