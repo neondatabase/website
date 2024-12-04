@@ -340,7 +340,7 @@ The workflow will:
 You can find the complete source code for this example on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/neon-github-actions-integration" description="Get started with automated database branching using Neon and GitHub Actions" icon="github">Get started with automated database branching</a>
+<a href="https://github.com/neondatabase-labs/neon-github-actions-integration" description="Get started with automated database branching using Neon and GitHub Actions" icon="github">Get started with automated database branching</a>
 </DetailIconCards>
 
 ## Resources

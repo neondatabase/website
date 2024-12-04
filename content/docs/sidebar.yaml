@@ -852,6 +852,9 @@
               items:
                 - title: array_to_json
                   slug: functions/array_to_json
+                - title: json
+                  slug: functions/json
+                  tag: new
                 - title: json_agg
                   slug: functions/json_agg
                 - title: json_array_elements
@@ -862,6 +865,15 @@
                   slug: functions/json_build_object
                 - title: json_each
                   slug: functions/json_each
+                - title: json_exists
+                  slug: functions/json_exists
+                  tag: new
+                - title: json_scalar
+                  slug: functions/json_scalar
+                  tag: new
+                - title: json_serialize
+                  slug: functions/json_serialize
+                  tag: new
                 - title: jsonb_each
                   slug: functions/jsonb_each
                 - title: json_extract_path
@@ -878,6 +890,12 @@
                   slug: functions/jsonb_object
                 - title: json_populate_record
                   slug: functions/json_populate_record
+                - title: json_query
+                  slug: functions/json_query
+                  tag: new
+                - title: json_value
+                  slug: functions/json_value
+                  tag: new
                 - title: jsonb_populate_record
                   slug: functions/jsonb_populate_record
                 - title: json_to_record
