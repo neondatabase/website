@@ -145,7 +145,7 @@ Protect your production or sensitive data.
 
 ### Private Networking
 
-Protect your production or sensitive data.
+Secure your database connections with private access.
 
 <DetailIconCards>
 
