@@ -23,11 +23,11 @@ Neon supports a variety of protections related to database connections:
 
 - **IP Allow** — For additional connection security, the Neon Scale and Business plans offer [IP allowlist support](#ip-allowlist-support), which lets you to limit access to trusted IPs.
 
-- **Private Networking** — This feature is currently under development. It will enable connections to your Neon databases via AWS PrivateLink and similar services, bypassing the open internet entirely.
+- **Private Networking** — This feature enables connections to your Neon databases via AWS PrivateLink, bypassing the open internet entirely. See [Private Networking](/docs/guides/neon-private-networking).
 
 ## IP allowlist support
 
-Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+Neon's [IP Allow](/docs/introduction/ip-allow) feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## Protected branches
 
@@ -42,6 +42,10 @@ You can designate any branch as a "protected branch", which implements a series 
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
+## Private Networking
+
+The [Neon Private Networking](/docs/guides/neon-private-networking) feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security. This feature is available to Neon [Organization](/docs/manage/organizations) accounts. It's not accessible to Personal Neon accounts.
 
 ## Data-at-rest encryption
 
@@ -100,6 +104,8 @@ To learn more about how we protect your data and uphold the highest standards of
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
+
+Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#neons-private-bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 
