@@ -69,7 +69,7 @@ Neon read replicas are asynchronous, which means they are _eventually consistent
 
 ## Cross-region support
 
-Neon only supports creating read replicas **in the same region** as your database. However, a cross-region replica setup can be achieved by creating a Neon project created in a different region and replicating data to that project via [logical replication](/docs/guides/logical-replication-guide). For example, you could replicate data from a Neon project in a US region to a Neon project in a European region following our [Neon-to-Neon logical replication instructions](/docs/guides/logical-replication-neon-to-neon). Read-only access to the database in an other-region Neon project can be managed at the application level.
+Neon only supports creating read replicas **in the same region** as your database. However, a cross-region replica setup can be achieved by creating a Neon project in a different region and replicating data to that project via [logical replication](/docs/guides/logical-replication-guide). For example, you can replicate data from a Neon project in a US region to a Neon project in a European region following our [Neon-to-Neon logical replication guide](/docs/guides/logical-replication-neon-to-neon). Read-only access to the replicated database can be managed at the application level.
 
 ## Use cases
 
