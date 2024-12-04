@@ -70,6 +70,7 @@
     "next-mdx-remote": "^4.4.1",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
+    "posthog-js": "^1.194.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-calendly": "^4.3.0",
