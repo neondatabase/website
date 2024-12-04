@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { useFeatureFlagVariantKey } from 'posthog-js/react';
+import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -28,9 +28,12 @@ const TableHeading = ({
   price,
   buttonUrl,
   buttonText,
+  analyticEvent,
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
+  const posthog = usePostHog();
+
   // placeholder for the labels column
   if (isLabelsColumn) {
     return <div className="invisible h-[120px]" aria-hidden />;
@@ -59,6 +62,11 @@ const TableHeading = ({
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
         tag_name={`Details Table Top > ${label}`}
+        onClick={() => {
+          if (analyticEvent) {
+            posthog.capture(analyticEvent);
+          }
+        }}
       >
         {buttonText}
       </Button>
@@ -72,6 +80,7 @@ TableHeading.propTypes = {
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
+  analyticEvent: PropTypes.string,
   isLabelsColumn: PropTypes.bool.isRequired,
   isFeaturedPlan: PropTypes.bool.isRequired,
 };
@@ -86,6 +95,7 @@ const getColumnAlignment = (item) => {
 };
 
 const Table = () => {
+  const posthog = usePostHog();
   const isComputePriceRaised =
     useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
 
@@ -326,6 +336,12 @@ const Table = () => {
                   theme={isHighlightedColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
                   tag_name={`Details Table Bottom > ${labelList[key].label}`}
+                  onClick={() => {
+                    const event = labelList[key].analyticEvent;
+                    if (event.analyticEvent) {
+                      posthog.capture(event);
+                    }
+                  }}
                 >
                   {labelList[key].buttonText}
                 </Button>

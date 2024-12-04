@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey } from 'posthog-js/react';
+import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
 import { useMemo } from 'react';
 
 import Button from 'components/shared/button';
@@ -32,6 +32,7 @@ const scaleCardBorderVariants = {
 };
 
 const Hero = () => {
+  const posthog = usePostHog();
   const isComputePriceRaised =
     useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
 
@@ -138,6 +139,11 @@ const Hero = () => {
                     size="sm"
                     to={button.url}
                     tag_name={button.event}
+                    onClick={() => {
+                      if (button.analyticEvent) {
+                        posthog.capture(button.analyticEvent);
+                      }
+                    }}
                   >
                     {button.text}
                   </Button>
