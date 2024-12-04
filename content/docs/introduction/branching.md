@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
-updatedOn: '2024-11-14T13:15:10.568Z'
+updatedOn: '2024-12-04T13:30:28.566Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.

@@ -1,7 +1,7 @@
 ---
 title: Security reporting
 enableTableOfContents: true
-updatedOn: '2024-11-26T10:31:31.494Z'
+updatedOn: '2024-12-04T13:30:28.568Z'
 ---
 
 We have established the following security reporting procedure to address security issues quickly.

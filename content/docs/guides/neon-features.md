@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: false
-updatedOn: '2024-10-26T08:44:49.113Z'
+updatedOn: '2024-12-04T13:30:28.562Z'
 ---
 
 ### Autoscaling
