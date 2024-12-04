@@ -45,7 +45,7 @@
     "highlighted": true,
     "price": 19,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>,
+    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
     "description": "The resources, features, and support you need to launch.",
     "features": [
       {
