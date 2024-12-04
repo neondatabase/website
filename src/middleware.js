@@ -30,8 +30,8 @@ export async function middleware(req) {
     }
 
     // Check if user is logged in
-    const is_logged_in = await checkCookie('neon_login_indicator');
-    if (process.env.NODE_ENV === 'production' && is_logged_in) {
+    const isLoggedIn = await checkCookie('neon_login_indicator');
+    if (process.env.NODE_ENV === 'production' && isLoggedIn) {
       const referer = await getReferer();
       if (
         referer.includes(process.env.VERCEL_BRANCH_URL) ||
