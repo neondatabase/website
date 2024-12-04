@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import ArrowExternalIcon from 'icons/docs/arrow-external.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 
 const EditOnGithub = ({ fileOriginPath }) => (
@@ -14,10 +13,10 @@ const EditOnGithub = ({ fileOriginPath }) => (
     to={fileOriginPath}
     target="_blank"
     rel="noopener noreferrer"
+    icon="external"
   >
     <GitHubIcon className="h-3.5 w-3.5" />
     <span className="text-sm leading-tight tracking-tight">Edit this page on GitHub</span>
-    <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15 lg:hidden" />
   </Link>
 );
 
