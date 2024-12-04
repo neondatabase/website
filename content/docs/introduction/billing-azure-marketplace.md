@@ -20,6 +20,7 @@ updatedOn: '2024-12-03T15:29:17.185Z'
   <a href="/docs/manage/azure">Neon on Azure (Neon Docs)</a>
   <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/overview">What is Neon Serverless Postgres? (Azure Docs)</a>
   <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/create">Create a Neon Serverless Postgres resource (Azure Docs)</a>
+  <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/neon/troubleshoot">Troubleshoot (Azure Docs)</a>
 </DocsList>
 
 </InfoBlock>
@@ -94,7 +95,11 @@ Deleting a Neon resource from Azure removes the Neon Organization and all Neon p
 
 Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](https://neon.tech/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
 
-### Deleting a Neon Resource in Azure
+## Troubleshooting
+
+If you encounter issues, check the documentation in Azure's troubleshooting guide for Neon: [Troubleshoot Neon Serverless Postgres](https://learn.microsoft.com/en-us/azure/partner-solutions/neon/troubleshoot). If you still need help, contact [Neon Support](/docs/introduction/support).
+
+## Deleting a Neon Resource in Azure
 
 If you no longer need your Neon resource, you can delete it to stop all associated billing through the Azure Marketplace.
 
