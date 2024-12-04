@@ -12,8 +12,9 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-import plans from './data/plans.json';
+import plansOriginal from './data/plans.json';
 import Features from './features';
+
 
 const scaleCardBorderVariants = {
   from: {
@@ -36,9 +37,9 @@ const Hero = () => {
   const isComputePriceRaised =
     useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
 
-  const customizedPlans = useMemo(() => {
+  const plans = useMemo(() => {
     if (isComputePriceRaised) {
-      return plans.map((plan) => ({
+      return plansOriginal.map((plan) => ({
         ...plan,
         features: plan.features.map((feature) => {
           if (feature.id === 'compute_time') {
@@ -71,14 +72,14 @@ const Hero = () => {
         <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {customizedPlans.map(
+            {plans.map(
               (
                 {
                   type,
                   highlighted = false,
                   price,
                   priceFrom = false,
-                  headerLink,
+                  headerLinks,
                   description,
                   features,
                   otherFeatures,
@@ -102,18 +103,15 @@ const Hero = () => {
                     >
                       {type}
                     </h3>
-                    {headerLink && (
-                      <a
+                    {headerLinks && (
+                      <p
                         className={clsx(
-                          'border-b border-[#85888E]/50 pb-0.5 text-sm font-light leading-none tracking-tighter text-gray-new-50',
-                          'transition-colors duration-200 hover:border-transparent hover:text-gray-new-80'
+                          'text-sm font-light leading-none text-gray-new-50',
+                          '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
+                          '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
                         )}
-                        href={headerLink.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {headerLink.text}
-                      </a>
+                        dangerouslySetInnerHTML={{ __html: headerLinks }}
+                      />
                     )}
                   </div>
                   <p className="relative mt-16 ">
