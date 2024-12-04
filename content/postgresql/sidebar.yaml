@@ -113,6 +113,7 @@
        title: "Upsert"
      - slug: "postgresql-tutorial/postgresql-merge"
        title: "MERGE"
+       tag: new
    - section: Transactions
      items:
      - slug: "postgresql-tutorial/postgresql-transaction"
