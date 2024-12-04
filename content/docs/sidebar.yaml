@@ -865,9 +865,6 @@
                   slug: functions/json_build_object
                 - title: json_each
                   slug: functions/json_each
-                - title: json_exists
-                  slug: functions/json_exists
-                  tag: new
                 - title: json_scalar
                   slug: functions/json_scalar
                   tag: new
@@ -890,20 +887,24 @@
                   slug: functions/jsonb_object
                 - title: json_populate_record
                   slug: functions/json_populate_record
-                - title: json_query
-                  slug: functions/json_query
-                  tag: new
-                - title: json_value
-                  slug: functions/json_value
-                  tag: new
                 - title: jsonb_populate_record
                   slug: functions/jsonb_populate_record
                 - title: json_to_record
                   slug: functions/json_to_record
                 - title: jsonb_to_record
                   slug: functions/jsonb_to_record
+                - title: JSON_EXISTS
+                  slug: functions/json_exists
+                  tag: new
+                - title: JSON_QUERY
+                  slug: functions/json_query
+                  tag: new
                 - title: JSON_TABLE
                   slug: functions/json_table
+                - title: JSON_VALUE
+                  slug: functions/json_value
+                  tag: new
+
             - title: Window functions
               items:
                 - title: dense_rank
