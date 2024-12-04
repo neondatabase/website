@@ -23,7 +23,7 @@ To generate an API key:
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
 
-Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Account settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
+Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Account settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/) or [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault). If you lose an API key, revoke it and generate a new one.
 
 ## Revoke an API key
 
