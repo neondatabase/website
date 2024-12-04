@@ -5,23 +5,44 @@ enableTableOfContents: true
 updatedOn: '2024-06-28T21:32:11.566Z'
 ---
 
-The Postgres `random()` function generates random floating point values between 0.0 and 1.0.
+The Postgres `random()` function generates random floating point values between 0.0 and 1.0. Starting from Postgres 17, it also supports generating random integers within a specified range using the `random(min, max)` syntax.
 
 It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms.
 
 <CTA />
 
-## Function signature
+## Function signatures
 
-The `random()` function has a simple form:
+The `random()` function has two forms:
 
 ```sql
 random() -> double precision
+random(min integer, max integer) -> integer      -- Added in Postgres 17
+random(min bigint, max bigint) -> bigint        -- Added in Postgres 17
+random(min numeric, max numeric) -> numeric      -- Added in Postgres 17
 ```
 
-It returns a uniformly distributed random value between 0.0 (inclusive) and 1.0 (exclusive).
+The first form returns a uniformly distributed random value between 0.0 (inclusive) and 1.0 (exclusive).
+
+Starting from Postgres 17, the function also accepts range parameters:
+
+- For integer types, it returns a random integer between min and max (inclusive)
+- For numeric types, it returns a random decimal number between min and max (inclusive). The result will have the same number of decimal places as the input parameter with the highest precision.
 
 ## Example usage
+
+```sql
+
+SELECT random(); -- Generates a random floating point number between 0.0 and 1.0
+-- 0.555470146570157
+
+SELECT random(1, 6); -- Generates a random integer between 1 and 6
+-- 4
+
+SELECT random(1.5, 3.54); -- Generates a random decimal number between 1.5 and 3.54 with 2 decimal places precision
+-- 2.66
+
+```
 
 ### Basic random number generation
 
@@ -61,7 +82,7 @@ The `generate_series()` function is used to generate a series of integers from 1
 
 ### Random integer within a range
 
-To generate random integers within a specific range, we can use the `random()` function in combination with other operations. Here's an example simulating a dice rolling game where players roll two six-sided dice:
+Let's simulate a dice game where each player rolls two dice, and we calculate the total:
 
 ```sql
 CREATE TABLE dice_rolls (
@@ -75,8 +96,8 @@ CREATE TABLE dice_rolls (
 INSERT INTO dice_rolls (player_name, die1, die2, total)
 SELECT
   'Player-' || generate_series,
-  1 + floor(random() * 6)::INTEGER,  -- Random integer between 1 and 6
-  1 + floor(random() * 6)::INTEGER,  -- Random integer between 1 and 6
+  random(1, 6),  -- Random integer between 1 and 6
+  random(1, 6),  -- Random integer between 1 and 6
   0  -- We'll update this next
 FROM generate_series(1, 5);
 
@@ -86,7 +107,7 @@ SET total = die1 + die2;
 SELECT * FROM dice_rolls;
 ```
 
-This simulates 5 players each rolling two dice, with random values between 1 and 6 for each die.
+This simulates 5 players each rolling two dice, with random values between 1 and 6 for each die. Notice how we can now use the simpler `random(1, 6)` syntax instead of the more complex `1 + floor(random() * 6)::INTEGER` typically used in earlier versions of Postgres.
 
 ```text
  roll_id | player_name | die1 | die2 | total
@@ -156,8 +177,8 @@ CREATE TABLE random_events (
 
 INSERT INTO random_events (event_type, severity, timestamp)
 SELECT
-  (ARRAY['Error', 'Warning', 'Info'])[1 + floor(random() * 3)::INTEGER],
-  1 + floor(random() * 5)::INTEGER,
+  (ARRAY['Error', 'Warning', 'Info'])[random(1, 3)],
+  random(1, 5),
   NOW() - (random() * INTERVAL '24 hours')
 FROM generate_series(1, 100);
 
@@ -171,10 +192,10 @@ This creates 100 random events with different types, severities, and timestamps 
 ```text
  id | event_type | severity |         timestamp
 ----+------------+----------+----------------------------
- 26 | Error      |        3 | 2024-06-23 10:33:15.164475
- 69 | Warning    |        5 | 2024-06-23 10:29:38.926118
- 72 | Warning    |        4 | 2024-06-23 10:13:55.993455
- 68 | Warning    |        3 | 2024-06-23 09:56:44.098039
+ 10 | Error	     |        1 | 2024-12-04 09:44:39.651498
+ 47	| Info	     |        1 | 2024-12-04 09:41:50.372958
+ 88 | Info	     |        3 | 2024-12-04 09:40:21.689072
+ 74 | Warning    |        2 | 2024-12-04 09:05:22.546381
 (4 rows)
 ```
 
@@ -202,4 +223,4 @@ The `random()` function is generally fast, but excessive use in large datasets o
 ## Resources
 
 - [PostgreSQL documentation: Mathematical Functions and Operators](https://www.postgresql.org/docs/current/functions-math.html)
-- [PostgreSQL documentation: Random Functions](https://www.postgresql.org/docs/current/functions-random.html)
+- [PostgreSQL documentation: Random Functions](https://www.postgresql.org/docs/devel/functions-math.html#FUNCTIONS-MATH-RANDOM-TABLE)
