@@ -19,7 +19,7 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 The scale to zero limits differ by [Neon plan](/docs/introduction/plans). The limits for each plan are outlined below. The initial default setting for all plans is 5 minutes.
 
-| Plan       | Scale to zero delay      | Can be disabled? |
+| Plan       | Scale to zero delay    | Can be disabled? |
 | :--------- | :--------------------- | :--------------- |
 | Free Plan  | 5 minutes              |                  |
 | Launch     | 5 minutes to 7 days    | &check;          |
