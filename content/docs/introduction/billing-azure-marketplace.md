@@ -3,7 +3,7 @@ title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service with unified billing through Azure Marketplace
 tag: new
-updatedOn: '2024-12-03T15:29:17.185Z'
+updatedOn: '2024-12-05T09:54:07.974Z'
 ---
 
 <PublicPreview/>
