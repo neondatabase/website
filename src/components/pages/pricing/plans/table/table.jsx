@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
+// import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -32,7 +32,7 @@ const TableHeading = ({
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
-  const posthog = usePostHog();
+  // const posthog = usePostHog();
 
   // placeholder for the labels column
   if (isLabelsColumn) {
@@ -64,7 +64,8 @@ const TableHeading = ({
         tag_name={`Details Table Top > ${label}`}
         onClick={() => {
           if (analyticsEvent) {
-            posthog.capture(analyticsEvent);
+            console.log('[posthog] capture event:', analyticsEvent);
+            // posthog.capture(analyticsEvent);
           }
         }}
       >
@@ -95,9 +96,10 @@ const getColumnAlignment = (item) => {
 };
 
 const Table = () => {
-  const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+  // const posthog = usePostHog();
+  // const isComputePriceRaised =
+  //   useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+  const isComputePriceRaised = true;
 
   const tableData = useMemo(() => {
     if (isComputePriceRaised) {
@@ -339,7 +341,8 @@ const Table = () => {
                   onClick={() => {
                     const event = labelList[key].analyticsEvent;
                     if (event) {
-                      posthog.capture(event);
+                      console.log('[posthog] capture event:', event);
+                      // posthog.capture(event);
                     }
                   }}
                 >

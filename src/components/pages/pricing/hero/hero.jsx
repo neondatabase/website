@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
+// import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
 import { useMemo } from 'react';
 
 import Button from 'components/shared/button';
@@ -14,7 +14,6 @@ import LINKS from 'constants/links';
 
 import plansOriginal from './data/plans.json';
 import Features from './features';
-
 
 const scaleCardBorderVariants = {
   from: {
@@ -33,9 +32,10 @@ const scaleCardBorderVariants = {
 };
 
 const Hero = () => {
-  const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+  // const posthog = usePostHog();
+  // const isComputePriceRaised =
+  //   useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+  const isComputePriceRaised = true;
 
   const plans = useMemo(() => {
     if (isComputePriceRaised) {
@@ -139,7 +139,8 @@ const Hero = () => {
                     tag_name={button.event}
                     onClick={() => {
                       if (button.analyticsEvent) {
-                        posthog.capture(button.analyticsEvent);
+                        console.log('[posthog] capture event:', button.analyticsEvent);
+                        // posthog.capture(button.analyticsEvent);
                       }
                     }}
                   >
