@@ -205,11 +205,11 @@
               slug: guides/autoscaling-guide
             - title: How the algorithm works
               slug: guides/autoscaling-algorithm
-        - title: Autosuspend
-          slug: introduction/auto-suspend
+        - title: Scale to zero
+          slug: introduction/scale-to-zero
           items:
-            - title: Autosuspend guide
-              slug: guides/auto-suspend-guide
+            - title: Scale to zero guide
+              slug: guides/scale-to-zero-guide
         - title: Branching
           slug: guides/branching-intro
           items:

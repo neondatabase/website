@@ -34,7 +34,7 @@ At this time, you may also also want to apply any specific configurations to you
 
 - [Compute size](/docs/manage/endpoints#edit-a-compute)
 - [Autoscaling](/docs/guides/autoscaling-guide)
-- [Autosuspend](/docs/guides/auto-suspend-guide)
+- [Scale to zero](/docs/guides/scale-to-zero-guide)
 - [Protected branches](/docs/guides/protected-branches)
 - [IP Allow](/docs/introduction/ip-allow)
 

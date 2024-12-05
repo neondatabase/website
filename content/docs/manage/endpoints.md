@@ -45,11 +45,11 @@ To create an endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
-1. On the **Add new compute** dialog, specify your compute settings, including compute type, size, autoscaling, and autosuspend settings, and click **Create**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
+1. On the **Add new compute** dialog, specify your compute settings, including compute type, size, autoscaling, and scale to zero settings, and click **Create**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute
 
-You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [Autosuspend](#auto-suspend-configuration) configuration.
+You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [Scale to zero](#scale-to-zero-configuration) configuration.
 
 To edit a compute:
 
@@ -57,7 +57,7 @@ To edit a compute:
 1. Select a branch.
 1. From the **Compute** tab, select **Edit** for the compute you want to edit.
 
-   The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your autosuspend setting.
+   The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
@@ -73,8 +73,8 @@ Some key points to understand about how your endpoint responds when you make cha
   </Admonition>
 
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-* Changes to autosuspend settings do not require an endpoint restart; existing connections are unaffected.
-* If you disable autosuspend entirely, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute](#restart-a-compute).
+* Changes to scale to zero settings do not require an endpoint restart; existing connections are unaffected.
+* If you disable scale to zero entirely, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute](#restart-a-compute).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 
@@ -156,11 +156,11 @@ Consider this scenario: If your data size is approximately 6 GB, starting with a
 
 As mentioned above, your `max_connections` setting is based on the minimum compute size in your autoscaling configuration and does not scale along with your compute. To avoid this `max_connections` constraint, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
 
-### Autosuspend configuration
+### Scale to zero configuration
 
-Neon's _Autosuspend_ feature automatically transitions a compute into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable autosuspend completely to maintain an "always-active" compute. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute but is likely to increase your compute time usage.
+Neon's _Scale to zero_ feature automatically transitions a compute into an idle state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable scale to zero completely to maintain an "always-active" compute. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute but is likely to increase your compute time usage.
 
-The maximum **Suspend compute after a period of inactivity** setting is 7 days. To disable autosuspend, which results in an always-active compute, deselect **Suspend compute after a period of inactivity**. For more information, refer to [Configuring autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+The maximum scale to zero setting is 7 days. For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 <Admonition type="important">
 If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
@@ -184,7 +184,7 @@ You can restart a compute using one of the following methods:
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
   ```
-- Users on paid plans can temporarily set a compute's **Suspend compute after a period of inactivity** to a low value to initiate a suspension (the default setting is 5 minutes). See [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
+- Users on paid plans can temporarily set a compute's scale to zero setting to a low value to initiate a suspension (the default setting is 5 minutes). See [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
 
 ## Delete a compute
 
@@ -509,7 +509,7 @@ If the issue persists, refer to our [Neon Support channels](/docs/introduction/s
 
 In some cases, you may observe that your compute remains constantly active for no apparent reason. Possible causes for a constantly active compute when not expected include:
 
-- **Connection requests**: Frequent connection requests from clients, applications, or integrations can prevent a compute from suspending automatically. Each connection resets the autosuspend timer.
+- **Connection requests**: Frequent connection requests from clients, applications, or integrations can prevent a compute from suspending automatically. Each connection resets the scale to zero timer.
 - **Background processes**: Some applications or background jobs may run periodic tasks that keep the connection active.
 
 Possible steps you can take to identify the issues include:
@@ -542,6 +542,6 @@ Possible steps you can take to identify the issues include:
 
 3. **Optimize any background jobs**
 
-   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's autosuspend feature to activate after the defined period of inactivity (the default is 5 minutes). For more information, refer to our [Autosuspend guide](/docs/guides/auto-suspend-guide).
+   If background jobs are needed, reduce their frequency or adjust their timing to allow Neon's scale to zero feature to activate after the defined period of inactivity (the default is 5 minutes). For more information, refer to our [Scale to zero guide](/docs/guides/scale-to-zero-guide).
 
 <NeedHelp/>

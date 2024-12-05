@@ -19,7 +19,7 @@ Also see [Compute hours](#compute-hours).
 
 ## Activity Monitor
 
-A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
+A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an idle state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
 
 ## Admin
 
@@ -41,9 +41,9 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
-## Autosuspend
+## Scale to zero
 
-A feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an `Idle` state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Scale to zero_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable scale to zero to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
@@ -477,10 +477,6 @@ The primary line of data for every Neon project, initially named `main`. The roo
 ## Safekeeper
 
 A Neon architecture component responsible for the durability of database changes. Postgres streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
-
-## scale-to-zero
-
-Scale-to-zero refers to Neon's Autosuspend feature, which places a compute into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default. See [Autosuspend](#autosuspend).
 
 ## Scale plan
 

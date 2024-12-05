@@ -17,15 +17,15 @@ Automatically scale compute resources up and down based on demand.
 
 </DetailIconCards>
 
-### Autosuspend
+### Scale to zero
 
 Control when Neon compute resources scale to zero.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Autosuspend</a>
+<a href="/docs/introduction/scale-to-zero" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Scale to zero</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Configure autosuspend to control when your compute scales to zero" icon="setup">Configure Autosuspend</a>
+<a href="/docs/guides/sale-to-zero-guide" description="Configure scale to zero to control when your compute suspends due to inactivity" icon="setup">Configure Scale to zero</a>
 
 </DetailIconCards>
 

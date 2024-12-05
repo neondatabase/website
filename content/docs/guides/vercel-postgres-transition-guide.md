@@ -119,7 +119,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [The Neon Console](https://console.neon.tech/app/projects) &#8212; manage all your projects and databases from a dedicated console
 - [Database branching](/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings
-- [Autosuspend](/docs/introduction/auto-suspend) &#8212; configure scale-to-zero behavior
+- [Scale to zero](/docs/introduction/scale-to-zero) &#8212; configure scale-to-zero behavior
 - [Branch Restore](/docs/guides/branch-restore) &#8212; instant point-in-time recovery
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line

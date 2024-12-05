@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-11-30T11:53:56.048Z'
 ---
 
-Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
+Neon's _Scale to zero_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
 
 <Admonition type="note">
 Services you integrate with Neon may also have startup times, which can add to connection latencies. This topic does not address latencies of other vendors, but if your application connects to Neon via another service, remember to consider startup times for those services as well.
@@ -32,23 +32,23 @@ You can try any of these methods and watch the status of your compute as it chan
 
 Given the potential impact on application responsiveness, it's important to have strategies in place to manage connection latencies and timeouts. Here are some methods you can implement:
 
-- [Adjust your Autosuspend (scale to zero) configuration](#adjust-your-auto-suspend-scale-to-zero-configuration)
+- [Adjust your Scale to zero configuration](#adjust-your-scale-to-zero-configuration)
 - [Place your application and database in the same region](#place-your-application-and-database-in-the-same-region)
 - [Increase your connection timeout](#increase-your-connection-timeout)
 - [Build connection timeout handling into your application](#build-connection-timeout-handling-into-your-application)
 - [Use application-level caching](#use-application-level-caching)
 
-### Adjust your Autosuspend (scale to zero) configuration
+### Adjust your scale to zero configuration
 
-Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can disable scale to zero entirely or set a custom period up to a maximum of 7 days. Limiting or disabling scale to zero can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="important">
 If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
 
-Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
+Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
-![Connection warmup autosuspend and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
+![Connection warmup scale to zero and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
@@ -170,7 +170,7 @@ However, this example is a simplification. In a production application, you migh
 ### Connection retry references
 
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
-- [Fast API blog post: Recycling connections for Neon's autosuspend](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
+- [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
 ### Use application-level caching
 

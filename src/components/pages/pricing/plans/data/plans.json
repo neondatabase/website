@@ -157,7 +157,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Autosuspend"
+        "title": "Scale to zero"
       },
       "free": "Fixed <span>5 minutes</span>",
       "launch": "Configurable <span>5 min+ or never</span>",

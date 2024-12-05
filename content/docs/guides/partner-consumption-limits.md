@@ -41,7 +41,7 @@ You can set quotas for these consumption metrics per project using the `quota` s
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
-- `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an `Idle` state due to [auto-suspension](/docs/reference/glossary#autosuspend).
+- `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an idle state due to [scale to zero](/docs/reference/glossary#scale-to-zero).
 - `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's computes. This includes any computes deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 vCPU costs .25 compute seconds, while 1 second at 4 vCPU costs 4 compute seconds.
   | vCPUs | active_time_seconds | compute_time_seconds |
   |:-------|:----------------------|:-----------------------|
@@ -84,7 +84,7 @@ These limits are not directly configurable. You can query the limits by running 
 
 _**What happens when a quota is met?**_
 
-When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [autosuspend](/docs/guides/auto-suspend-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
+When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
 See [Querying metrics and quotas](#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
 
@@ -179,7 +179,7 @@ In addition to setting quota limits against the project as a whole, there are ot
 
 - `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The default minimum is .25 vCPU but can be increased if your user's project could benefit from a larger compute start size.
 - `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
-- `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Autosuspend](/docs/guides/auto-suspend-guide).
+- `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Scale to zero](/docs/guides/scale-to-zero-guide).
 
 There are several ways you can set these endpoint settings using the Neon API: you can set project-level defaults that apply for any new computes created in the project, you can define the endpoint settings when creating a new branch, or you can adjust these settings when creating or updating an endpoint for an existing branch.
 

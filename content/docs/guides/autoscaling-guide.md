@@ -38,7 +38,7 @@ To edit a compute:
    Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 10 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
    <Admonition type="note">
-   You can configure the autosuspend setting for your compute at the same time. The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute scales to zero. For more, see [Autosuspend](/docs/introduction/auto-suspend).
+   You can configure the scale to zero setting for your compute at the same time. The scale to zero setting defines the period of inactivity after which a compute is automatically suspended. For more, see [Scale to zero](/docs/introduction/scale-to-zero).
    </Admonition>
 
 1. Click **Save**.
