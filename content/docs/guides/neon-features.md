@@ -25,7 +25,7 @@ Control when Neon compute resources scale to zero.
 
 <a href="/docs/introduction/scale-to-zero" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Scale to zero</a>
 
-<a href="/docs/guides/sale-to-zero-guide" description="Configure scale to zero to control when your compute suspends due to inactivity" icon="setup">Configure Scale to zero</a>
+<a href="/docs/guides/scale-to-zero-guide" description="Configure scale to zero to control when your compute suspends due to inactivity" icon="setup">Configure Scale to zero</a>
 
 </DetailIconCards>
 
