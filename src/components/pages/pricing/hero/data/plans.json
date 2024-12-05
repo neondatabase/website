@@ -108,6 +108,7 @@
         "info": "Extra: $1.5 per GB"
       },
       {
+        "id": "compute_time",
         "icon": "clock",
         "title": [
           "750 ",
@@ -155,6 +156,7 @@
         "info": "Extra: $0.5 per GB"
       },
       {
+        "id": "compute_time",
         "icon": "clock",
         "title": [
           "1000 ",
