@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-06-28T21:32:11.566Z'
 ---
 
-The Postgres `random()` function generates random floating point values between 0.0 and 1.0. Starting from Postgres 17, it also supports generating random integers within a specified range using the `random(min, max)` syntax.
+The Postgres `random()` function generates random floating point values between 0.0 and 1.0. Starting with Postgres 17, it also supports generating random integers or decimals within a specified range using `random(min, max)` syntax.
 
 It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms.
 
@@ -13,7 +13,7 @@ It's particularly useful for creating some sample data, usage in simulations, or
 
 ## Function signatures
 
-The `random()` function has two forms:
+The `random()` function has the following signatures:
 
 ```sql
 random() -> double precision
@@ -223,4 +223,4 @@ The `random()` function is generally fast, but excessive use in large datasets o
 ## Resources
 
 - [PostgreSQL documentation: Mathematical Functions and Operators](https://www.postgresql.org/docs/current/functions-math.html)
-- [PostgreSQL documentation: Random Functions](https://www.postgresql.org/docs/devel/functions-math.html#FUNCTIONS-MATH-RANDOM-TABLE)
+- [PostgreSQL documentation: Random Functions](https://www.postgresql.org/docs/current/functions-math.html#FUNCTIONS-MATH-RANDOM-TABLE)
