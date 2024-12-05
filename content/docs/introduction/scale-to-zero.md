@@ -2,7 +2,7 @@
 title: Scale to zero
 subtitle: Scale computes to zero when not in use
 redirectFrom:
-  - /docs/introduction/scale-to-zero
+  - /docs/introduction/auto-suspend
 enableTableOfContents: true
 updatedOn: '2024-08-06T15:23:10.952Z'
 ---
