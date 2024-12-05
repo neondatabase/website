@@ -58,6 +58,10 @@ A Neon project is the logical equivalent of an "instance" but without the manage
 - You'll be able to run independent PITRs without affecting your entire fleet.
 - You can create different projects in different regions to match your customers' locations.
 
+<Admonition type="note" title="Tip">
+[Learn how to migrate schemas across thousands of Neon projects automatically.](https://neon.tech/blog/migrating-schemas)
+</Admonition>
+
 Management is simplified vs other Postgres services because,
 
 - There’s no need to provision infrastructure in advance.
