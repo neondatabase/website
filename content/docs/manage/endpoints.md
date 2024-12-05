@@ -49,7 +49,7 @@ To create an endpoint:
 
 ## Edit a compute
 
-You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [Scale to zero](#scale-to-zero-configuration) configuration.
+You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [scale to zero](#scale-to-zero-configuration) configuration.
 
 To edit a compute:
 
@@ -158,7 +158,7 @@ As mentioned above, your `max_connections` setting is based on the minimum compu
 
 ### Scale to zero configuration
 
-Neon's _Scale to zero_ feature automatically transitions a compute into an idle state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable scale to zero completely to maintain an "always-active" compute. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute but is likely to increase your compute time usage.
+Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable scale to zero completely to maintain an "always-active" compute. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute but is likely to increase your compute time usage.
 
 The maximum scale to zero setting is 7 days. For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 

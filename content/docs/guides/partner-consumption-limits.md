@@ -179,7 +179,7 @@ In addition to setting quota limits against the project as a whole, there are ot
 
 - `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The default minimum is .25 vCPU but can be increased if your user's project could benefit from a larger compute start size.
 - `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
-- `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Scale to zero](/docs/guides/scale-to-zero-guide).
+- `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Scale to Zero](/docs/guides/scale-to-zero-guide).
 
 There are several ways you can set these endpoint settings using the Neon API: you can set project-level defaults that apply for any new computes created in the project, you can define the endpoint settings when creating a new branch, or you can adjust these settings when creating or updating an endpoint for an existing branch.
 

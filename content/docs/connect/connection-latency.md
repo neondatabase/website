@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2024-11-30T11:53:56.048Z'
 ---
 
-Neon's _Scale to zero_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
+Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
 
 <Admonition type="note">
 Services you integrate with Neon may also have startup times, which can add to connection latencies. This topic does not address latencies of other vendors, but if your application connects to Neon via another service, remember to consider startup times for those services as well.

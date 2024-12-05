@@ -19,7 +19,7 @@ If there are no active queries for 5 minutes, which is the default scale to zero
 For information about configuring this setting, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="note">
-Neon's _Scale to zero_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
+Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
 </Admonition>
 
 ## Compute activation

@@ -339,7 +339,7 @@ To automatically run this deletion periodically, you can setup a cron task. For 
 ```
 
 <Admonition type="note">
-Please be aware that Neon's [Scale to zero](/docs/guides/scale-to-zero-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job.
+Please be aware that Neon's [Scale to Zero](/docs/guides/scale-to-zero-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job.
 </Admonition>
 
 This will help ensure the hypertable size is managed by deleting old unneeded data. Tune the interval passed to drop_chunks and the cron schedule based on your data retention needs.

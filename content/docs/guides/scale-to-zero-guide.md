@@ -7,7 +7,7 @@ enableTableOfContents: true
 updatedOn: '2024-11-30T11:53:56.056Z'
 ---
 
-Neon's [Scale to zero](/docs/introduction/scale-to-zero) feature controls when a Neon compute transitions to an idle state due to inactivity. For example, if your scale to zero setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable scale to zero entirely, depending on your requirements.
+Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls when a Neon compute transitions to an idle state due to inactivity. For example, if your scale to zero setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable scale to zero entirely, depending on your requirements.
 
 <Admonition type="important">
 If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 

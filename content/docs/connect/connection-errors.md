@@ -141,7 +141,7 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Scale to zero](/docs/reference/glossary#scale-to-zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [scale to zero](/docs/reference/glossary#scale-to-zero). Currently, the transition from an idle state to an active one takes a few seconds.
 
 Consider these recommended steps:
 

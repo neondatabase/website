@@ -38,7 +38,7 @@ This guide walks you through creating a read replica, connecting to it, running 
 [Metabase](https://www.metabase.com/) is an open-source business intelligence (BI) company that provides a platform for visualizing and analyzing data. With Metabase and Neon, you can:
 - Create a read replica in Neon
 - Configure [Autoscaling](/docs/introduction/autoscaling) to define minimum and maximum limits for compute resources
-- Configure [Scale to zero](/docs/introduction/scale-to-zero) to define how soon the read replica scales to zero when not being used
+- Configure [scale to zero](/docs/introduction/scale-to-zero) to define how soon the read replica scales to zero when not being used
 - Configure a connection to the read replica from Metabase.
 
 With this setup, your read replica only wakes up when Metabase connects, scales to sync job requirements without affecting your production database, and scales back to zero after the job sync is finished.
@@ -138,7 +138,7 @@ If you have a lot of products and sales, this query might impact performance on 
 When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica when you need one.
 
 <Admonition type="tip">
-Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Scale to zero](/docs/introduction/scale-to-zero) feature will suspend the compute until the next time you access it. The default scale to zero setting is 5 minutes, meaning that the read replica compute will automatically suspend after 5 minutes of inactivity.
+Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature will suspend the compute until the next time you access it. The default scale to zero setting is 5 minutes, meaning that the read replica compute will automatically suspend after 5 minutes of inactivity.
 </Admonition>
 
 To delete a read replica:
