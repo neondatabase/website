@@ -6,14 +6,14 @@ updatedOn: '2024-12-04T00:00:00.000Z'
 tag: new
 ---
 
-The `json_scalar()` function in PostgreSQL 17 provides a straightforward way to convert SQL scalar values into their JSON equivalents. This function is particularly useful when you need to ensure proper type conversion and formatting of individual values for JSON output.
+The `json_scalar()` function in PostgreSQL 17 provides a straightforward way to convert `SQL` scalar values into their `JSON` equivalents. This function is particularly useful when you need to ensure proper type conversion and formatting of individual values for `JSON` output.
 
 Use `json_scalar()` when you need to:
 
-- Convert SQL numbers to JSON numbers
+- Convert `SQL` numbers to `JSON` numbers
 - Format timestamps as JSON strings
-- Convert SQL booleans to JSON booleans
-- Ensure proper null handling in JSON context
+- Convert `SQL` booleans to `JSON` booleans
+- Ensure proper null handling in `JSON` context
 
 <CTA />
 
@@ -27,7 +27,7 @@ json_scalar(expression) → json
 
 Parameters:
 
-- `expression`: Any SQL scalar value to be converted to a JSON scalar value
+- `expression`: Any `SQL` scalar value to be converted to a `JSON` scalar value
 
 ## Example usage
 
@@ -174,7 +174,7 @@ SELECT json_build_array(
 
 The function follows these conversion rules:
 
-1. NULL -> SQL NULL
+1. `NULL` -> `SQL NULL`
 2. Numbers → JSON numbers (preserving exact value)
 3. Booleans → JSON booleans
 4. All other types → JSON strings with appropriate formatting:

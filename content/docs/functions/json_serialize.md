@@ -6,14 +6,14 @@ updatedOn: '2024-12-04T00:00:00.000Z'
 tag: new
 ---
 
-The `json_serialize()` function in PostgreSQL 17 provides a flexible way to convert JSON values into text or binary format. This function is particularly useful when you need to control the output format of JSON data or prepare it for transmission or storage in specific formats.
+The `json_serialize()` function in PostgreSQL 17 provides a flexible way to convert `JSON` values into text or binary format. This function is particularly useful when you need to control the output format of `JSON` data or prepare it for transmission or storage in specific formats.
 
 Use `json_serialize()` when you need to:
 
-- Convert JSON values to specific text formats
-- Transform JSON into binary representation
-- Ensure consistent JSON string formatting
-- Prepare JSON data for external systems or storage
+- Convert `JSON` values to specific text formats
+- Transform `JSON` into binary representation
+- Ensure consistent `JSON` string formatting
+- Prepare `JSON` data for external systems or storage
 
 <CTA />
 
@@ -32,9 +32,9 @@ json_serialize(
 
 Parameters:
 
-- `expression`: Input JSON value or expression to serialize
-- `FORMAT JSON`: Explicitly specifies JSON format for input (optional)
-- `ENCODING UTF8`: Specifies UTF8 encoding for input/output (optional)
+- `expression`: Input `JSON` value or expression to serialize
+- `FORMAT JSON`: Explicitly specifies `JSON` format for input (optional)
+- `ENCODING UTF8`: Specifies `UTF8` encoding for input/output (optional)
 - `RETURNING data_type`: Specifies the desired output type (optional, defaults to text)
 
 ## Example usage
@@ -105,11 +105,11 @@ SELECT json_serialize('{
 
 ## Comparison with `json()` function
 
-While both `json_serialize()` and `json()` work with JSON data, they serve different purposes:
+While both `json_serialize()` and `json()` work with `JSON` data, they serve different purposes:
 
-- `json()` converts text or binary data INTO JSON values
-- `json_serialize()` converts JSON values INTO text or binary format
-- `json()` focuses on input validation (e.g., WITH UNIQUE keys)
+- `json()` converts text or binary data into `JSON` values
+- `json_serialize()` converts `JSON` values into text or binary format
+- `json()` focuses on input validation (e.g., `WITH UNIQUE` keys)
 - `json_serialize()` focuses on output format control
 
 Think of them as complementary functions:

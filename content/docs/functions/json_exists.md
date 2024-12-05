@@ -6,14 +6,14 @@ updatedOn: '2024-12-04T00:00:00.000Z'
 tag: new
 ---
 
-The `JSON_EXISTS()` function in PostgreSQL 17 provides a powerful way to check for the existence of values within JSON data using SQL/JSON path expressions. This function is particularly useful for validating JSON structure and implementing conditional logic based on the presence of specific JSON elements.
+The `JSON_EXISTS()` function in PostgreSQL 17 provides a powerful way to check for the existence of values within `JSON` data using `SQL/JSON` path expressions. This function is particularly useful for validating `JSON` structure and implementing conditional logic based on the presence of specific `JSON` elements.
 
 Use `JSON_EXISTS()` when you need to:
 
-- Validate the presence of specific JSON paths
-- Implement conditional logic based on JSON content
-- Filter JSON data based on complex conditions
-- Verify JSON structure before processing
+- Validate the presence of specific `JSON` paths
+- Implement conditional logic based on `JSON` content
+- Filter `JSON` data based on complex conditions
+- Verify `JSON` structure before processing
 
 <CTA />
 
@@ -32,10 +32,10 @@ JSON_EXISTS(
 
 Parameters:
 
-- `context_item`: JSON or JSONB input to evaluate
-- `path_expression`: SQL/JSON path expression to check
+- `context_item`: `JSON` or `JSONB` input to evaluate
+- `path_expression`: `SQL/JSON` path expression to check
 - `PASSING`: Optional clause to pass variables for use in the path expression
-- `ON ERROR`: Controls behavior when path evaluation fails (defaults to FALSE)
+- `ON ERROR`: Controls behavior when path evaluation fails (defaults to `FALSE`)
 
 ## Example usage
 
@@ -215,19 +215,19 @@ WHERE JSON_EXISTS(
 
 1. Error handling:
 
-   - Use appropriate ON ERROR clauses based on your requirements
-   - Consider UNKNOWN ON ERROR for nullable conditions
-   - Use ERROR ON ERROR when validation is critical
+   - Use appropriate `ON ERROR` clauses based on your requirements
+   - Consider `UNKNOWN ON ERROR` for nullable conditions
+   - Use `ERROR ON ERROR` when validation is critical
 
 2. Performance optimization:
 
-   - Create GIN indexes on JSONB columns for better performance
+   - Create *GIN* indexes on `JSONB` columns for better performance
    - Use strict mode when path is guaranteed to exist
-   - Combine with other JSON functions for complex operations
+   - Combine with other `JSON` functions for complex operations
 
 3. Path expressions:
-   - Use 'lax' mode (default) for optional paths
-   - Leverage path variables with PASSING clause for dynamic checks
+   - Use *lax* mode (default) for optional paths
+   - Leverage path variables with `PASSING` clause for dynamic checks
 
 ## Learn more
 

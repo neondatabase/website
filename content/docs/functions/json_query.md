@@ -6,13 +6,13 @@ updatedOn: '2024-12-04T00:00:00.000Z'
 tag: new
 ---
 
-The `JSON_QUERY()` function in PostgreSQL 17 provides a powerful way to extract and transform JSON values using SQL/JSON path expressions. This function offers fine-grained control over how JSON values are extracted and formatted in the results.
+The `JSON_QUERY()` function in PostgreSQL 17 provides a powerful way to extract and transform `JSON` values using `SQL/JSON` path expressions. This function offers fine-grained control over how `JSON` values are extracted and formatted in the results.
 
 Use `JSON_QUERY()` when you need to:
 
-- Extract specific values from complex JSON structures
+- Extract specific values from complex `JSON` structures
 - Handle multiple values in results
-- Control JSON string formatting
+- Control `JSON` string formatting
 - Handle empty results and errors gracefully
 
 <CTA />
@@ -54,7 +54,7 @@ By default, `JSON_QUERY()` does not wrap results (equivalent to `WITHOUT WRAPPER
 
 For scalar string results:
 
-- By default, values are surrounded by quotes (making them valid JSON)
+- By default, values are surrounded by quotes (making them valid `JSON`)
 - `KEEP QUOTES`: Explicitly keeps quotes (same as default)
 - `OMIT QUOTES`: Removes quotes from the result
 - Cannot use `OMIT QUOTES` with any `WITH WRAPPER` option
@@ -332,7 +332,7 @@ FROM events;
    - Consider using `DEFAULT` expressions for better error recovery
 
 2. Optimization tips:
-   - Create indexes on frequently queried JSON paths
+   - Create indexes on frequently queried `JSON` paths
    - Use specific path expressions instead of wildcards when possible
 
 ## Learn more

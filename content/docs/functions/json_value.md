@@ -6,14 +6,14 @@ updatedOn: '2024-12-04T00:00:00.000Z'
 tag: new
 ---
 
-The `JSON_VALUE()` function in PostgreSQL 17 provides a specialized way to extract single scalar values from JSON data with type conversion capabilities. This function is particularly useful when you need to extract and potentially convert individual values from JSON structures while ensuring type safety and proper error handling.
+The `JSON_VALUE()` function in PostgreSQL 17 provides a specialized way to extract single scalar values from `JSON` data with type conversion capabilities. This function is particularly useful when you need to extract and potentially convert individual values from `JSON` structures while ensuring type safety and proper error handling.
 
 Use `JSON_VALUE()` when you need to:
 
-- Extract single scalar values from JSON
-- Convert JSON values to specific PostgreSQL data types
-- Ensure strict type safety when working with JSON data
-- Handle missing or invalid JSON values gracefully
+- Extract single scalar values from `JSON`
+- Convert `JSON` values to specific PostgreSQL data types
+- Ensure strict type safety when working with `JSON` data
+- Handle missing or invalid `JSON` values gracefully
 
 <CTA />
 
@@ -34,8 +34,8 @@ JSON_VALUE(
 
 Parameters:
 
-- `context_item`: JSON/JSONB input to process
-- `path_expression`: SQL/JSON path expression that identifies the value to extract
+- `context_item`: `JSON/JSONB` input to process
+- `path_expression`: `SQL/JSON` path expression that identifies the value to extract
 - `PASSING`: Optional clause to pass variables into the path expression
 - `RETURNING`: Specifies the desired output data type (defaults to text)
 - `ON EMPTY`: Handles cases where no value is found
@@ -209,17 +209,17 @@ The function provides several ways to handle errors:
 1. Using `ON EMPTY`:
 
    - `ERROR`: Raises an error (default)
-   - `NULL`: Returns NULL
+   - `NULL`: Returns `NULL`
    - `DEFAULT expression`: Returns specified value
 
 2. Using `ON ERROR`:
    - `ERROR`: Raises an error (default)
-   - `NULL`: Returns NULL
+   - `NULL`: Returns `NULL`
    - `DEFAULT expression`: Returns specified value
 
 ## JSON_VALUE vs JSON_QUERY
 
-The `JSON_VALUE()` function is designed for extracting scalar values from JSON data, while `JSON_QUERY()` is used for extracting JSON structures (objects, arrays, or scalar values). Here's a comparison of the two functions:
+The `JSON_VALUE()` function is designed for extracting scalar values from `JSON` data, while `JSON_QUERY()` is used for extracting `JSON` structures (objects, arrays, or scalar values). Here's a comparison of the two functions:
 
 ### Purpose and Return Types
 
@@ -232,8 +232,8 @@ The `JSON_VALUE()` function is designed for extracting scalar values from JSON d
 
 `JSON_QUERY()`:
 
-- Designed for extracting JSON structures (objects, arrays, or scalar values)
-- Returns valid JSON/JSONB output
+- Designed for extracting `JSON` structures (objects, arrays, or scalar values)
+- Returns valid `JSON/JSONB` output
 - Preserves quotes on string values by default
 - Can handle multiple values using wrapper options
 
@@ -274,7 +274,7 @@ SELECT
 
 2. Performance considerations:
 
-   - Use indexes on frequently queried JSON paths
+   - Use indexes on frequently queried `JSON` paths
 
 ## Learn more
 

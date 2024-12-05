@@ -31,7 +31,7 @@ Before we dive into `MERGE`, let's understand some basic terms:
 
 ## Basic MERGE Syntax
 
-Here's the basic structure of a MERGE command:
+Here's the basic structure of a `MERGE` command:
 
 ```sql
 MERGE INTO target_table
@@ -100,7 +100,7 @@ INSERT INTO product_updates VALUES
 
 ## Using MERGE with RETURNING
 
-Now let's see how PostgreSQL 17's enhanced MERGE command can handle all three operations (INSERT, UPDATE, DELETE) while providing detailed feedback through the RETURNING clause:
+Now let's see how PostgreSQL 17's enhanced `MERGE` command can handle all three operations (`INSERT`, `UPDATE`, `DELETE`) while providing detailed feedback through the RETURNING clause:
 
 ```sql
 MERGE INTO products p
@@ -129,7 +129,7 @@ RETURNING
 
 ## Understanding the Output
 
-The RETURNING clause will provide detailed information about each operation:
+The `RETURNING` clause will provide detailed information about each operation:
 
 ```
  action  | product_id |    name    |  price   | stock |   status    |      last_updated
@@ -142,9 +142,9 @@ The RETURNING clause will provide detailed information about each operation:
 
 Let's break down what happened:
 
-1. **UPDATE**: The Laptop's price and stock were updated
-2. **DELETE**: The Keyboard is deleted from the products table
-3. **INSERT**: New Monitor and Headphones products were added
+1. **`UPDATE`**: The Laptop's price and stock were updated
+2. **`DELETE`**: The Keyboard is deleted from the products table
+3. **`INSERT`**: New Monitor and Headphones products were added
 
 We can confirm the changes by querying the products table:
 
@@ -164,7 +164,7 @@ ORDER BY product_id;
 
 ## Advanced Usage with Conditions
 
-You can add more complex conditions to your MERGE statement:
+You can add more complex conditions to your `MERGE` statement:
 
 ```sql
 MERGE INTO products p
