@@ -74,6 +74,7 @@ const Hero = () => {
             {plans.map(
               (
                 {
+                  planId,
                   type,
                   highlighted = false,
                   price,
@@ -137,9 +138,11 @@ const Hero = () => {
                     to={button.url}
                     tag_name={button.event}
                     onClick={() => {
-                      if (button.analyticsEvent) {
-                        posthog.capture(button.analyticsEvent);
-                      }
+                      posthog.capture('ui_interaction', {
+                        action: 'pricing_page_get_started_clicked',
+                        plan: planId,
+                        place: 'hero',
+                      });
                     }}
                   >
                     {button.text}

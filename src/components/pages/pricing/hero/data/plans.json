@@ -1,5 +1,6 @@
 [
   {
+    "planId": "free",
     "type": "Free Plan",
     "price": 0,
     "description": "To kickstart your projects, no credit card required.",
@@ -42,6 +43,7 @@
     }
   },
   {
+    "planId": "launch",
     "type": "Launch",
     "highlighted": true,
     "price": 19,
@@ -91,6 +93,7 @@
     }
   },
   {
+    "planId": "scale",
     "type": "Scale",
     "price": 69,
     "priceFrom": true,
@@ -139,6 +142,7 @@
     }
   },
   {
+    "planId": "business",
     "type": "Business",
     "price": 700,
     "priceFrom": true,

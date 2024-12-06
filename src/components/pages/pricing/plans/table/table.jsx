@@ -24,11 +24,11 @@ const DEFAULT_ROWS_TO_SHOW = 8;
 
 const TableHeading = ({
   className,
+  planId,
   label,
   price,
   buttonUrl,
   buttonText,
-  analyticsEvent,
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
@@ -63,9 +63,11 @@ const TableHeading = ({
         to={buttonUrl}
         tag_name={`Details Table Top > ${label}`}
         onClick={() => {
-          if (analyticsEvent) {
-            posthog.capture(analyticsEvent);
-          }
+          posthog.capture('ui_interaction', {
+            action: 'pricing_page_get_started_clicked',
+            plan: planId,
+            place: 'table_heading',
+          });
         }}
       >
         {buttonText}
@@ -76,11 +78,11 @@ const TableHeading = ({
 
 TableHeading.propTypes = {
   className: PropTypes.string,
+  planId: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
-  analyticsEvent: PropTypes.string,
   isLabelsColumn: PropTypes.bool.isRequired,
   isFeaturedPlan: PropTypes.bool.isRequired,
 };
@@ -192,6 +194,7 @@ const Table = () => {
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:ml-5')}
+                planId={key}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isHighlightedColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
@@ -337,10 +340,11 @@ const Table = () => {
                   to={labelList[key].buttonUrl}
                   tag_name={`Details Table Bottom > ${labelList[key].label}`}
                   onClick={() => {
-                    const { analyticsEvent } = labelList[key];
-                    if (analyticsEvent) {
-                      posthog.capture(analyticsEvent);
-                    }
+                    posthog.capture('ui_interaction', {
+                      action: 'pricing_page_get_started_clicked',
+                      plan: key,
+                      place: 'table_footer',
+                    });
                   }}
                 >
                   {labelList[key].buttonText}
