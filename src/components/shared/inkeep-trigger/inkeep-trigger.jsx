@@ -75,8 +75,8 @@ const InkeepTrigger = ({
     searchSettings: {
       tabSettings: {
         tabOrderByLabel: isPostgresPage
-          ? ['Postgres', 'Neon Docs', 'All']
-          : ['Neon Docs', 'Postgres', 'All'],
+          ? ['PostgreSQL Tutorial', 'Neon Docs', 'All']
+          : ['Neon Docs', 'PostgreSQL Tutorial', 'All'],
       },
     },
     aiChatSettings,

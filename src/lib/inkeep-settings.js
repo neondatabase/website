@@ -26,7 +26,7 @@ const baseSettings = {
           partialUrl: 'https://neon.tech/postgresql',
         },
       },
-      searchTabLabel: 'Postgres',
+      searchTabLabel: 'PostgreSQL Tutorial',
     },
   ],
 };
