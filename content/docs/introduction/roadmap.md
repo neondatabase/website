@@ -63,7 +63,6 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
 - **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable Postgres logs and traces.
-- **An email app service**: This service will provide support for email verification and password recovery workflows.
 - **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability.
 
 ## Join the Neon Early Access Program
