@@ -2,7 +2,7 @@
 title: Postgres json() Function
 subtitle: Convert Text and Binary Data to JSON Values
 enableTableOfContents: true
-updatedOn: '2024-12-04T00:00:00.000Z'
+updatedOn: '2024-12-06T20:43:48.686Z'
 tag: new
 ---
 

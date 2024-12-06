@@ -2,7 +2,7 @@
 title: Postgres JSON_QUERY() Function
 subtitle: Extract and Transform JSON Values with SQL/JSON Path Expressions
 enableTableOfContents: true
-updatedOn: '2024-12-04T00:00:00.000Z'
+updatedOn: '2024-12-06T20:43:48.687Z'
 tag: new
 ---
 

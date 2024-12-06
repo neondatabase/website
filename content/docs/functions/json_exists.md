@@ -2,7 +2,7 @@
 title: Postgres JSON_EXISTS() Function
 subtitle: Check for Values in JSON Data Using SQL/JSON Path Expressions
 enableTableOfContents: true
-updatedOn: '2024-12-04T00:00:00.000Z'
+updatedOn: '2024-12-06T20:43:48.687Z'
 tag: new
 ---
 

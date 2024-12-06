@@ -2,7 +2,7 @@
 title: Postgres json_scalar() Function
 subtitle: Convert SQL Scalar Values to JSON Scalar Values
 enableTableOfContents: true
-updatedOn: '2024-12-04T00:00:00.000Z'
+updatedOn: '2024-12-06T20:43:48.688Z'
 tag: new
 ---
 

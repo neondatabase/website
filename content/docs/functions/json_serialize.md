@@ -2,7 +2,7 @@
 title: Postgres json_serialize() Function
 subtitle: Convert JSON Values to Text or Binary Format
 enableTableOfContents: true
-updatedOn: '2024-12-04T00:00:00.000Z'
+updatedOn: '2024-12-06T20:43:48.688Z'
 tag: new
 ---
 
