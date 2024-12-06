@@ -221,12 +221,12 @@ WHERE JSON_EXISTS(
 
 2. Performance optimization:
 
-   - Create *GIN* indexes on `JSONB` columns for better performance
+   - Create _GIN_ indexes on `JSONB` columns for better performance
    - Use strict mode when path is guaranteed to exist
    - Combine with other `JSON` functions for complex operations
 
 3. Path expressions:
-   - Use *lax* mode (default) for optional paths
+   - Use _lax_ mode (default) for optional paths
    - Leverage path variables with `PASSING` clause for dynamic checks
 
 ## Learn more
