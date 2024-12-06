@@ -15,7 +15,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 <Admonition type="stay tuned for 2025">
 As 2024 comes to a close, our "working on now" list is winding down. But don't worry — exciting plans for the new year are just around the corner. Stay tuned for updates!
-</Admonition> 
+</Admonition>
 
 Here's a snapshot of what we're working on now:
 
