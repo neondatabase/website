@@ -211,7 +211,7 @@ node send.js
 ```
 
 <Admonition type="note" title="Note">
-As by default, [Neon's Autosuspend](/docs/introduction/auto-suspend) scales to zero after 5 minutes of inactivity, the NOTIFY/LISTEN command(s) only exist for the duration of the current session, and are lost when the session ends.
+By default, Neon scales to zero after 5 minutes of inactivity, which ends any running sessions. As a result, `NOTIFY` and `LISTEN` commands only persist for the duration of the current session and are lost when the session ends.
 </Admonition>
 
 ## Summary

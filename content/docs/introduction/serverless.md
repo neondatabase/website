@@ -40,7 +40,7 @@ _That you’ll get unpredictable costs due to traffic spikes_. We provide transp
 ## Learn more
 
 - [Autoscaling](/docs/introduction/autoscaling)
-- [Autosuspend](/docs/introduction/auto-suspend)
+- [Scale to Zero](/docs/introduction/scale-to-zero)
 - [Plans and billing](/docs/introduction/about-billing)
 - [Database-per-tenant use cases](https://neon.tech/use-cases/database-per-tenant)
 - [Variable workload use cases](https://neon.tech/variable-load)

@@ -29,7 +29,7 @@ const Integration = () => (
           title="Large fleet, small bill"
           description="With Neon’s scale-to-zero, you only pay for the resources your customers actually use."
           linkText="Learn more"
-          linkUrl={`${LINKS.docs}/introduction/auto-suspend`}
+          linkUrl={`${LINKS.docs}/introduction/scale-to-zero`}
           image={autoscalingChart}
           imagePosition="left"
         />

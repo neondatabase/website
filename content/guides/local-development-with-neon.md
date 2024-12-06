@@ -222,7 +222,7 @@ Cloud-hosted branches offer several compelling advantages:
 ### Cost-efficient development
 
 - **Minimal storage costs**: Branches are extremely cost-effective as you only pay for unique data changes
-- **Smart compute usage**: Development happens on small, autosuspending computes (0.25 vCPU)
+- **Smart compute usage**: Development happens on small computes (0.25 vCPU) that scale to zero by default
 - **Free Plan benefits**: Even the Free Plan includes 5 compute hours on dev branches
   - This translates to 20 hours of development time on a 0.25 vCPU compute
   - One compute hour at 1 vCPU equals four hours at 0.25 vCPU
@@ -277,7 +277,7 @@ Cloud-hosted branches offer several compelling advantages:
 
 ### Resource tips
 
-- Use auto-suspend for development branches
+- Use scale to zero for development branches
 - Clean up unused branches
 - Reset branches to match production when needed
 

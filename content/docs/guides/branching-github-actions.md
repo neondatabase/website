@@ -82,7 +82,7 @@ inputs:
   suspend_timeout:
     description: >
       Duration of inactivity in seconds after which the compute endpoint is
-      For more information, see [Auto-suspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+      For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
     default: '0'
   ssl:
     description: >

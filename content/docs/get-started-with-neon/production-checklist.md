@@ -11,7 +11,7 @@ updatedOn: '2024-11-30T11:53:56.053Z'
     <p>
       <a href="#select-the-right-compute-size">Select the right compute size</a><br />
       <a href="#configure-autoscaling">Configure Autoscaling</a><br />
-      <a href="#configure-autosuspend">Configure Autosuspend</a><br />
+      <a href="#configure-scale-to-zero">Configure Scale to zero</a><br />
       <a href="#use-a-pooled-connection">Use a pooled connection</a>
     </p>
   </div>
@@ -63,13 +63,13 @@ To get started with Autoscaling, read:
 - [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
 - [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/endpoints#autoscaling-considerations) section.
 
-## Configure Autosuspend
+## Configure Scale to zero
 
-Neon's Autosuspend feature automatically transitions a compute into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
+Neon's Scale to zero feature automatically transitions a compute into an idle state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
 
-![Autosuspend control](/docs/get-started-with-neon/autosuspend_control.png)
+![Scale to zero control](/docs/get-started-with-neon/autosuspend_control.png)
 
-For a busy production system that is always active, this setting may not matter much, as your compute will not remain idle long enough for autosuspension to occur. But if your application has any idle periods or inconsistent usage patterns, a proper setting can help minimize cost or optimize responsiveness. To learn more about configuring Autosuspend, [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+For a busy production system that is always active, this setting may not matter much, as your compute will not remain idle long enough for scale to zero to occur. But if your application has any idle periods or inconsistent usage patterns, a proper setting can help minimize cost or optimize responsiveness. To learn more about configuring Scale to zero, [Configuring Scale to Zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 ## Use a pooled connection
 

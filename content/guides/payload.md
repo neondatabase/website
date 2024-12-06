@@ -114,7 +114,7 @@ Congratulations! You have now completed creating your own e-commerce store ✨
 
 ## Scale-to-zero with Postgres (powered by Neon)
 
-Interestingly, during the entire process of setting up this app, you were using Neon's **Scale-to-zero** feature, which places your Postgres compute endpoint into an `Idle` state when the database is inactive for more than 5 minutes. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+Interestingly, during the entire process of setting up this app, you were using Neon's **Scale-to-zero** feature, which places your Postgres compute endpoint into an idle state when the database is inactive for more than 5 minutes. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
 
 ![Neon Monitoring page](/guides/images/payload/74a2aa54-6d28-4f47-b181-077957df6779.png)
 
