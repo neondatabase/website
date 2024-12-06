@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
-import { aiChatSettings, baseSettings, searchSettings } from 'lib/inkeep-settings';
+import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
 
 import InkeepAIButton from '../inkeep-ai-button';
 import InkeepSearch from '../inkeep-search';
@@ -27,13 +27,6 @@ const InkeepTrigger = ({
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
   const [defaultModalView, setDefaultModalView] = useState('SEARCH');
-
-  // Override searchSettings with tabSettings
-  searchSettings.tabSettings = {
-    tabOrderByLabel: isPostgresPage
-      ? ['Postgres', 'Neon Docs', 'All']
-      : ['Neon Docs', 'Postgres', 'All'],
-  };
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -79,7 +72,13 @@ const InkeepTrigger = ({
       defaultView: defaultModalView,
       askAILabel: 'Ask Neon AI',
     },
-    searchSettings,
+    searchSettings: {
+      tabSettings: {
+        tabOrderByLabel: isPostgresPage
+          ? ['Postgres', 'Neon Docs', 'All']
+          : ['Neon Docs', 'Postgres', 'All'],
+      },
+    },
     aiChatSettings,
   };
 
