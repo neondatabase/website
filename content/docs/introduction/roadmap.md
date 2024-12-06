@@ -13,18 +13,23 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 ## What we're working on now
 
+<Admonition type="stay tuned for 2025">
+As 2024 comes to a close, our "working on now" list is winding down. But don't worry — exciting plans for the new year are just around the corner. Stay tuned for updates!
+</Admonition> 
+
 Here's a snapshot of what we're working on now:
 
-- **Neon in the Azure Marketplace**: We already support [creating Neon databases on Azure, starting with the East US 2 region](https://neon.tech/blog/first-azure-region-available-in-neon). Now, we’re working on support for more Azure regions and an Azure Marketplace integration. If this sounds interesting to you, [let us know](https://neon.tech/azure-marketplace).
 - **Larger computes**: Coming soon to a region near you.
-- **Archive storage on paid plans**: To minimize storage costs on paid plans, we plan to add support for automatically archiving inactive branches (snapshots of your data) in cost-efficient object storage. We've already launched a Free Plan version of this feature. See [Branch archiving](/docs/guides/branch-archiving).
-- **Schema-only branches**: A feature that lets you to create branches that only include your database schema—useful for workflows involving sensitive data.
+- **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
 
 ## What we've just launched
 
+- **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon’s API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post to learn more: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
+- **Neon in the Azure Marketplace**: Neon is now available an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Neon Postgres databases directly from the Azure portal. [Read the announcement](https://neon.tech/blog/neon-is-now-available-as-an-azure-native-integration).
+- **Archive storage on paid plans**: To minimize storage costs on paid plans, we now support automatic archiving of inactive branches (snapshots of your data) in cost-efficient object storage. For more about this feature, see [Branch archiving](/docs/guides/branch-archiving).
 - **Organizations GA**: Organization Accounts are now generally available. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
 - **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [Public Beta](/docs/guides/neon-private-networking).
 - **Schema Diff GitHub Action**: This action leverages our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It's also supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
