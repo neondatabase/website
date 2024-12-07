@@ -750,6 +750,12 @@
       slug: reference/terraform
       tag: community
       icon: management
+    - title: Find your template
+      slug: https://neon.tech/templates
+      icon: languages
+    - title: Examples repo
+      slug: https://github.com/neondatabase/examples
+      icon: cli
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
