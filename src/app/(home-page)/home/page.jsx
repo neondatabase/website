@@ -1,6 +1,3 @@
-import { redirect } from 'next/navigation';
-
-import { checkCookie } from 'app/actions';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import Hero from 'components/pages/home/hero';
@@ -19,27 +16,20 @@ export const metadata = getMetadata({
   robotsNoindex: 'noindex',
 });
 
-const HomePage = async () => {
-  const is_logged_in = await checkCookie('neon_login_indicator');
-  if (!is_logged_in) {
-    return redirect('/');
-  }
-
-  return (
-    <>
-      <Hero />
-      <Logos />
-      <InstantProvisioning />
-      <Lightning />
-      <Bento />
-      <AiIndex />
-      <Multitenancy />
-      <Industry />
-      <Trusted />
-      <Cta />
-    </>
-  );
-};
+const HomePage = async () => (
+  <>
+    <Hero />
+    <Logos />
+    <InstantProvisioning />
+    <Lightning />
+    <Bento />
+    <AiIndex />
+    <Multitenancy />
+    <Industry />
+    <Trusted />
+    <Cta />
+  </>
+);
 
 export default HomePage;
 

@@ -245,6 +245,40 @@ const defaultConfig = {
         destination: '/docs/changelog',
         permanent: false,
       },
+      {
+        source: '/',
+        has: [
+          { type: 'cookie', key: 'neon_login_indicator' },
+          { type: 'header', key: 'referer' },
+        ],
+        destination: '/home',
+        permanent: false,
+      },
+      {
+        source: '/',
+        has: [
+          { type: 'cookie', key: 'neon_login_indicator' },
+          { type: 'header', key: 'referrer' },
+        ],
+        destination: '/home',
+        permanent: false,
+      },
+      {
+        source: '/',
+        has: [{ type: 'cookie', key: 'neon_login_indicator' }],
+        missing: [
+          { type: 'header', key: 'referer' },
+          { type: 'header', key: 'referrer' },
+        ],
+        destination: 'https://console.neon.tech',
+        permanent: false,
+      },
+      {
+        source: '/home',
+        missing: [{ type: 'cookie', key: 'neon_login_indicator' }],
+        destination: '/',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
