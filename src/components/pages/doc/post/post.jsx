@@ -5,7 +5,7 @@ import ReleaseNoteList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
-import MigrateModal from 'components/pages/doc/migrate-modal';
+import Modal from 'components/pages/doc/modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -40,6 +40,16 @@ Changelog.propTypes = {
   ).isRequired,
 };
 
+const modalTypes = {
+  'Migrate to Neon': 'migrate',
+  Support: 'support',
+};
+
+const getModalPostType = (breadcrumbs) => {
+  const breadcrumb = breadcrumbs.find((breadcrumb) => modalTypes[breadcrumb.title]);
+  return breadcrumb ? modalTypes[breadcrumb.title] : null;
+};
+
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
   content,
@@ -54,9 +64,7 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const isMigratePost = breadcrumbs.some((breadcrumb) =>
-    breadcrumb.title.includes('Migrate to Neon')
-  );
+  const modalPostType = getModalPostType(breadcrumbs);
 
   return (
     <>
@@ -144,7 +152,7 @@ const Post = ({
         </div>
       </div>
 
-      {isMigratePost && <MigrateModal />}
+      {modalPostType && <Modal type={modalPostType} />}
     </>
   );
 };
