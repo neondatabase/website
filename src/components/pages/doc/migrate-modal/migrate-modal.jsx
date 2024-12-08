@@ -24,7 +24,7 @@ const MigrateModal = () => {
   return (
     <div
       className={clsx(
-        'absolute bottom-0 left-0 z-10 flex w-80 shrink-0 flex-col rounded-lg border p-5 3xl:w-full',
+        'fixed bottom-4 right-4 z-[100] w-80 rounded-lg border p-5 xs:inset-x-3 xs:bottom-3 xs:w-auto',
         'border-gray-new-90 bg-gray-new-98 bg-[radial-gradient(73%_69%_at_100%_100%,rgba(217,238,242,0.5),rgba(217,238,242,0.1))]',
         'shadow-[0px_4px_10px_0px_rgba(0,0,0,.08),0px_4px_30px_0px_rgba(0,0,0,.06)]',
         'dark:border-[#1D1E20] dark:bg-[#101013] dark:bg-[radial-gradient(89%_63%_at_100%_100%,#1D2930,transparent)]',
@@ -47,7 +47,7 @@ const MigrateModal = () => {
         Get migration assistance
       </Link>
       <button
-        className="absolute right-2 top-2 p-1 text-gray-new-40 transition-colors duration-300 hover:text-black hover:dark:text-white"
+        className="absolute right-1 top-1 p-2 text-gray-new-40 transition-colors duration-300 hover:text-black hover:dark:text-white"
         type="button"
         aria-label="Close"
         onClick={handleClose}

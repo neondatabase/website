@@ -150,9 +150,10 @@ const Post = ({
             </div>
             {isMigratePost && <div className="mt-5 h-32 shrink-0 3xl:h-36" />}
           </div>
-          {isMigratePost && <MigrateModal />}
         </div>
       </div>
+
+      {isMigratePost && <MigrateModal />}
     </>
   );
 };
