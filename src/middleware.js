@@ -1,13 +1,18 @@
 /* eslint-disable import/prefer-default-export */
+/* eslint-disable no-console */
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+
+import { checkCookie, getReferer } from 'app/actions';
+import LINKS from 'constants/links';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
-const protectedRoutes = ['/generate-ticket', '/tickets'];
+const homeProtectedRoutes = ['/', '/home'];
+const ticketsProtectedRoutes = ['/generate-ticket', '/tickets'];
 
 const extractHandleFromPath = (pathname) => pathname.split('/').slice(-2)[0];
 
@@ -26,7 +31,36 @@ export async function middleware(req) {
       return NextResponse.next();
     }
 
-    if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+    // Check for home protected routes
+    if (homeProtectedRoutes.includes(pathname)) {
+      try {
+        const isLoggedIn = await checkCookie('neon_login_indicator');
+
+        if (pathname === '/' && isLoggedIn) {
+          try {
+            const referer = await getReferer();
+            if (
+              referer.includes(process.env.VERCEL_BRANCH_URL) ||
+              referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
+            ) {
+              return NextResponse.redirect(new URL(`${SITE_URL}/home`));
+            }
+          } catch (error) {
+            console.error('Error getting referer:', error);
+          }
+          return NextResponse.redirect(new URL(LINKS.console));
+        }
+
+        if (pathname === '/home' && !isLoggedIn) {
+          return NextResponse.redirect(new URL(SITE_URL));
+        }
+      } catch (error) {
+        console.error('Error checking login indicator:', error);
+      }
+    }
+
+    // Check for tickets protected routes
+    if (ticketsProtectedRoutes.some((route) => pathname.startsWith(route))) {
       try {
         const token = await getToken({ req });
         const isAuthenticated = !!token?.githubHandle;
