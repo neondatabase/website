@@ -9,6 +9,7 @@ import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
 import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
+import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -50,14 +51,17 @@ const VariableLoadPage = async () => {
             </article>
           </div>
           <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px] xl:hidden">
-            <nav
+            <div
               className={clsx(
-                'no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)]',
+                'sticky top-[104px]',
                 'before:absolute before:-inset-5 before:-z-10 before:rounded-xl before:bg-black-pure/50 before:backdrop-blur'
               )}
             >
               <TableOfContents items={tableOfContents} />
-            </nav>
+              <div className="mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70">
+                <SidebarCta />
+              </div>
+            </div>
           </div>
         </Container>
         <Cta
