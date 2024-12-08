@@ -124,31 +124,22 @@ const Post = ({
       >
         <div
           className={clsx(
-            'sticky top-[104px] flex flex-col',
-            isMigratePost && 'h-full',
-            isUseCase ? 'max-h-[calc(100vh-100px)]' : 'max-h-[calc(100vh-150px)]',
-            'before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-2',
-            'before:bg-gradient-to-b before:from-white before:to-transparent dark:before:from-black-pure'
+            'sticky flex flex-col pb-5',
+            isUseCase
+              ? 'top-[188px] max-h-[calc(100vh-188px)]'
+              : 'top-[136px] max-h-[calc(100vh-136px)]'
           )}
         >
+          {enableTableOfContents && (
+            <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
+          )}
           <div
             className={clsx(
-              'no-scrollbars flex h-full flex-col overflow-y-auto overflow-x-hidden',
-              isUseCase && '-mb-20 pb-20'
+              enableTableOfContents &&
+                'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
             )}
           >
-            {enableTableOfContents && (
-              <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
-            )}
-            <div
-              className={clsx(
-                enableTableOfContents &&
-                  'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-              )}
-            >
-              {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
-            </div>
-            {isMigratePost && <div className="mt-5 h-32 shrink-0 3xl:h-36" />}
+            {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
           </div>
         </div>
       </div>

@@ -46,29 +46,21 @@ const Post = ({
     </div>
 
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
-      <div
-        className={clsx(
-          'sticky top-[104px] flex max-h-[calc(100vh-150px)] flex-col',
-          'before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-2',
-          'before:bg-gradient-to-b before:from-white before:to-transparent dark:before:from-black-pure'
-        )}
-      >
-        <div className="no-scrollbars -mb-[50px] flex h-full flex-col overflow-y-auto overflow-x-hidden pb-[50px]">
-          {enableTableOfContents && <TableOfContents items={tableOfContents} />}
-          <div
-            className={clsx(
-              enableTableOfContents &&
-                'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-            )}
-          >
-            <EditOnGithub fileOriginPath={fileOriginPath} />
-          </div>
-          {author && (
-            <div className="mt-4 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:hidden">
-              <Author data={author} />
-            </div>
+      <div className="sticky top-[148px] flex max-h-[calc(100vh-150px)] flex-col pb-5">
+        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
+        <div
+          className={clsx(
+            enableTableOfContents &&
+              'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
           )}
+        >
+          <EditOnGithub fileOriginPath={fileOriginPath} />
         </div>
+        {author && (
+          <div className="mt-4 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:hidden">
+            <Author data={author} />
+          </div>
+        )}
       </div>
     </div>
   </>
