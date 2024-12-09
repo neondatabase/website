@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.647Z'
+updatedOn: '2024-11-30T11:53:56.056Z'
 ---
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Indentity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
@@ -440,7 +440,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information on the tools used in this guide, refer to the following documentation:
 
-- [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver)
+- [Neon Serverless Driver](/docs/serverless/serverless-driver)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Auth.js Documentation](https://authjs.dev/getting-started/installation)

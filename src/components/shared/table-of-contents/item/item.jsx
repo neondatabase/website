@@ -38,7 +38,7 @@ const Item = ({
     // eslint-disable-next-line no-restricted-globals
     if (history.pushState) {
       // eslint-disable-next-line no-restricted-globals
-      history.pushState(false, false, anchor);
+      history.pushState({}, '', anchor);
     } else {
       // old browser support
       window.location.hash = anchor;
@@ -59,7 +59,7 @@ const Item = ({
           marginLeft: level === 1 ? '' : `${(level - 1) * 0.5}rem`,
         }}
         href={href}
-        dangerouslySetInnerHTML={{ __html: title }}
+        dangerouslySetInnerHTML={{ __html: title.split('\\').join('') }}
         onClick={(e) => handleAnchorClick(e, href, id)}
       />
       <AnimatePresence initial={false}>

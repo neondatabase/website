@@ -2,12 +2,12 @@
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.649Z'
+updatedOn: '2024-11-30T11:53:56.058Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
 
-This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Workers application. We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
+This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Workers application. We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full work
 
 ### Implement the Worker script
 
-We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
+We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless

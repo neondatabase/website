@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.426Z'
+updatedOn: '2024-11-30T11:53:56.061Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -201,7 +201,7 @@ After you run the migration commands, your database should be consistent across 
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
 
 ## References
 

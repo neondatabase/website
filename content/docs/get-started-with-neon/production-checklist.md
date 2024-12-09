@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-09-23T19:07:35.840Z'
+updatedOn: '2024-11-30T11:53:56.053Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -95,7 +95,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
@@ -109,7 +109,7 @@ Neon's protected branches feature allows you to apply IP restrictions more preci
 
 Monitoring is an important consideration as you prepare for production. Neon offers several monitoring resources and metrics, including a **Monitoring Dashboard** in Neon Console, where you can view graphs for system and database metrics like CPU, RAM, and connections.
 
-![Monitoring page connections graph](/docs/introduction/monitor_connections.jpg)
+![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
 For query performance and statistics in Postgres, we also recommend installing the [pg_stat_statements extension](/docs/extensions/pg_stat_statements).
 

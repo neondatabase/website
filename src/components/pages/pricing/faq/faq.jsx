@@ -12,7 +12,7 @@ const items = [
   },
   {
     question: 'How does billing work?',
-    answer: `In Neon, you are charged a monthly fee (corresponding to your pricing plan) plus any additional compute and/or storage usage over the limits included in your plan. For example, the Launch plan includes 300 compute-hours of compute usage;  if you consume 320 compute-hours in a month, you will be billed additionally for 20 compute-hours.`,
+    answer: `In Neon, you are charged a monthly fee plus any additional compute and/or storage usage over what's included in your plan. For example, the Launch plan includes 300 compute-hours of compute usage;  if you consume 320 compute-hours in a month, your will see extra 20 compute-hours in your monthly bill.`,
   },
   {
     question: 'When will I be billed?',
@@ -28,20 +28,35 @@ const items = [
   },
   {
     question: 'How is storage charged in Neon?',
-    answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. Since Neon retains database history, the size of storage for a Neon project will be calculated as the size of your tables plus the WAL up to the configurable history retention period. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
+    answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
+  },
+  {
+    question: 'What do I get for the "regular" cost per-GB in Neon?',
+    answer: `Neon's storage model is unique: our "per-GB" metric truly stretches. You can create hundreds of database copies (via branching) or replicas without increasing storage costs. High availability is also included in this price. For maximum storage scalability, consider the Business plan—our most cost-efficient option.`,
+  },
+  {
+    question: 'What is "archive storage"?',
+    answer: `To save you costs, branches that are idle for at least a day and that are older than 2 weeks are considered archived storage, and billed at a reduced rate. This has no implications for you, it happens automatically. <a href="https://neon.tech/blog/cutting-storage-costs">More context here.</a> `,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
-    answer: `Yes, we display your usage consumption in the Neon admin console and we will also email you when you’re getting close.`,
+    answer: `Yes, we display your usage consumption in the Neon admin console, and we will also email you when you’re getting close.`,
   },
   {
-    question: 'Why are we limited to 500 branches per project?',
-    answer: `Neon implements usage limits for branching in order to prevent potential abuse of the service which can negatively impact other users. For customers seeking higher limits please contact <a href="mailto:customer-success@neon.tech">customer-success@neon.tech</a>.`,
+    question: 'Can I use Neon for database-per-user architectures?',
+    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="https://neon.tech/use-cases/database-per-tenant">Read more</a>.`,
   },
   {
-    question: 'Who needs the Business plan?',
-    answer: `The Business plan is our most affordable and feature-complete option for teams with existing production workloads. This plan is designed to fit all the production use cases that are popular among our customers, including large production applications with variable traffic, SaaS with database-per-user at scale, developer/BaaS platforms, dev/test workflows, and AI Agents. Explore our <a href="/case-studies">Case Studies</a> to learn more. We also do Enterprise contracts to accomodate unique requirements—<a href="/contact-sales">reach out to us</a> to inquire about it.`,
-    id: 'business-plan',
+    question: 'Is Neon compliant?',
+    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance will come very soon.`,
+  },
+  {
+    question: 'Which level of uptime can I expect with Neon?',
+    answer: `Neon offers a 99.95% uptime SLA for Business and Enterprise customers, ensuring consistent availability and performance for mission-critical applications.`,
+  },
+  {
+    question: 'Can Neon help with migrations?',
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process, waiving any migration-related fees to ensure a smooth transition. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
   },
 ];
 

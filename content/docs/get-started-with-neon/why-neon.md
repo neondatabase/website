@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2024-10-09T10:24:30.495Z'
+updatedOn: '2024-11-30T11:53:56.054Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
@@ -48,6 +48,10 @@ Separation of compute and storage enables scalability as these resources can be 
 
 [Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, and database branching workflows.
 
+<Admonition type="tip" title="Did you know?">
+Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
+</Admonition>
+
 ## Neon is fully managed
 
 **Leave the database administrative, maintenance, and scaling burdens to us.**
@@ -66,7 +70,7 @@ We believe we have an opportunity to define the standard for cloud Postgres. We 
 
 **As a true Postgres platform, there's no lock-in with Neon.**
 
-Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](https://neon.tech/docs/import/import-intro) and [connect](https://neon.tech/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy.
+Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](/docs/import/import-intro) and [connect](/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy.
 
 If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding collection of [framework](/docs/get-started-with-neon/frameworks), [language](/docs/get-started-with-neon/languages), and [integration](/docs/guides/integrations) guides.
 

@@ -4,7 +4,7 @@ subtitle: Learn about strategies for optimizing Postgres query performance
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2024-08-07T21:36:52.673Z'
+updatedOn: '2024-11-30T11:53:56.076Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -183,7 +183,7 @@ There are numerous other resources you can draw upon to learn more about leverag
 
 - [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
 - [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN).
-- [PostgreSQL EXPLAIN tutorial](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/)
+- [PostgreSQL EXPLAIN tutorial](/postgresql/postgresql-tutorial/postgresql-explain)
 
 <Admonition type="tip" title="Tips">
 - The Neon SQL Editor provides a visual `EXPLAIN` and `ANALYZE` capability, providing query plans in a visual form. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
@@ -311,7 +311,7 @@ EXECUTE user_fetch_plan('dana');
 ```
 
 <Admonition type="note">
-If you are using a pooled connection for your Neon database, only protocol-level prepared statements are supported. See [Optimize queries with PgBouncer and prepared statements](https://neon.tech/docs/connect/connection-pooling#optimize-queries-with-pgbouncer-and-prepared-statements).
+If you are using a pooled connection for your Neon database, only protocol-level prepared statements are supported. See [Optimize queries with PgBouncer and prepared statements](/docs/connect/connection-pooling#optimize-queries-with-pgbouncer-and-prepared-statements).
 </Admonition>
 
 ### Limit your result sets

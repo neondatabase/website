@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-09-24T15:13:52.995Z'
+updatedOn: '2024-12-03T11:41:28.738Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -13,13 +13,14 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Business](/docs/introduction/plans#business) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans.
 
 ## Set a branch as protected
 
-This example sets a single branch as protected, but you can have up to 5 protected branches.
+This example sets a single branch as protected, but you can have up to 2 protected branches on the Launch plan and 5 on the Scale plan.
 
 To set a branch as protected:
 
@@ -158,6 +159,6 @@ After you've selected the protected branches option, click **Save changes** to a
 
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **Actions** menu on the branch page.
 
 <NeedHelp/>

@@ -26,6 +26,7 @@ import Data from './images/data.inline.svg';
 import Database from './images/database.inline.svg';
 import Discord from './images/discord.inline.svg';
 import Download from './images/download.inline.svg';
+import Drizzle from './images/drizzle.inline.svg';
 import Enable from './images/enable.inline.svg';
 import Filter from './images/filter.inline.svg';
 import FindReplace from './images/find-replace.inline.svg';
@@ -102,6 +103,7 @@ const icons = {
   database: Database,
   discord: Discord,
   download: Download,
+  drizzle: Drizzle,
   enable: Enable,
   filter: Filter,
   'find-replace': FindReplace,

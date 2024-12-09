@@ -114,6 +114,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/postgresql',
+        destination: '/postgresql/tutorial',
+        permanent: true,
+      },
+      {
         source: '/blog/the-non-obviousness-of-postgres-roles',
         destination: '/blog/postgres-roles',
         permanent: true,
@@ -224,6 +229,21 @@ const defaultConfig = {
         source: '/ai',
         destination: '/docs/ai/ai-intro',
         permanent: true,
+      },
+      {
+        source: '/deploy',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/generate-ticket',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/changelog',
+        destination: '/docs/changelog',
+        permanent: false,
       },
       ...docsRedirects,
       ...changelogRedirects,

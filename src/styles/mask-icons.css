@@ -1,0 +1,96 @@
+@layer components {
+  /* Allows changing color of and svg without inserting inline svg */
+  .mask-styles {
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+  }
+
+  /* Used in a /src/components/pages/doc/sidebar/item/item.jsx  */
+  .arrow-mask {
+    -webkit-mask-image: url('/images/chevron-right.svg');
+    -webkit-mask-size: 6px 10px;
+    @apply mask-styles;
+  }
+
+  /* Used in a /src/components/pages/pricing/hero/features/features.jsx  */
+  .pricing-icon-size {
+    -webkit-mask-size: 14px 15px;
+  }
+
+  .pricing-check-icon {
+    -webkit-mask-image: url('/images/check.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  .pricing-autoscale-icon {
+    -webkit-mask-image: url('/images/pricing/autoscale.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  .pricing-clock-icon {
+    -webkit-mask-image: url('/images/pricing/clock.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  .pricing-projects-icon {
+    -webkit-mask-image: url('/images/pricing/projects.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  .pricing-storage-icon {
+    -webkit-mask-image: url('/images/pricing/storage.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  /* Used in a /src/components/shared/footer/footer.jsx  */
+  .footer-icon-size {
+    -webkit-mask-size: 16px 16px;
+  }
+
+  .github-icon {
+    -webkit-mask-image: url('/images/footer/github.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .discord-icon {
+    -webkit-mask-image: url('/images/footer/discord.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .discourse-icon {
+    -webkit-mask-image: url('/images/footer/discourse.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .linkedin-icon {
+    -webkit-mask-image: url('/images/footer/linkedin.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .x-icon {
+    -webkit-mask-image: url('/images/footer/x.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .youtube-icon {
+    -webkit-mask-image: url('/images/footer/youtube.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .creators-icon {
+    -webkit-mask-image: url('/images/footer/creators.svg');
+    @apply mask-styles footer-icon-size;
+  }
+
+  .check-icon {
+    -webkit-mask-image: url('/images/check.svg');
+    -webkit-mask-size: 12px 12px;
+    @apply mask-styles;
+  }
+
+  .wip-icon {
+    -webkit-mask-image: url('/images/refresh.svg');
+    -webkit-mask-size: 12px 12px;
+    @apply mask-styles;
+  }
+}

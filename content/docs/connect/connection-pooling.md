@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-09-24T09:39:48.633Z'
+updatedOn: '2024-11-30T11:53:56.048Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -75,7 +75,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
@@ -103,10 +103,40 @@ The following list describes each setting. For a full explanation of each parame
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
 - `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 
-## Connection pooling notes
+## Connection pooling in transaction mode
 
-- Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-- We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs). With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
+As mentioned above, Neon uses PgBouncer in _transaction mode_ (`pool_mode=transaction`), which limits some functionality in Postgres. Functionality **NOT supported** in transaction mode includes:
+
+- `SET`/`RESET`
+- `LISTEN`
+- `WITH HOLD CURSOR`
+- `PREPARE / DEALLOCATE`
+- `PRESERVE` / `DELETE ROWS` temp tables
+- `LOAD` statement
+- Session-level advisory locks
+
+These session-level features are not supported _transaction mode_ because:
+
+1. In this mode, database connections are allocated from the pool on a per-transaction basis
+2. Session states are not persisted across transactions
+
+<Admonition type="warning" title="Avoid using SET statements over a pooled connection">
+Due to the transaction mode limitation described above, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. As a result, a session variable like `search_path` will not remain set for subsequent transactions.
+
+This particular `search_path` issue often shows up as a `relation does not exist` error. To avoid this error, you can:
+
+- Use a direct connection string when you need to set the search path and have it persist across multiple transactions.
+- Explicitly specify the schema in your queries so that you don’t need to set the search path.
+- Use an `ALTER ROLE your_role_name SET search_path TO <schema1>, <schema2>, <schema3>;` command to set a persistent search path for the role executing queries. See the [ALTER ROLE](https://www.postgresql.org/docs/current/sql-alterrole.html).
+
+Similar issues can occur when attempting to use `pg_dump` over a pooled connection. A `pg_dump` operation typically executes several `SET` statements during data ingestion, and these settings will not persist over a pool connection. For these reasons, we recommend using `pg_dump` only over a direct connection.
+</Admonition>
+
+For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+
+## Connection pooling with schema migration tools
+
+We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
 
 ## Optimize queries with PgBouncer and prepared statements
 

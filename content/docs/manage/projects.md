@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-10-10T14:49:19.609Z'
+updatedOn: '2024-11-28T17:16:46.411Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
@@ -61,7 +61,7 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
-   - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
    - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
 
 4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
@@ -112,7 +112,11 @@ If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting 
 
 ### Invite collaborators to a project
 
-Neon's project collaboration feature allows you to invite other Neon accounts to collaborate on a Neon project.
+Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
+
+<Admonition type="note">
+Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+</Admonition>
 
 To invite collaborators to a Neon project:
 
@@ -122,9 +126,9 @@ To invite collaborators to a Neon project:
 1. Select **Invite** and enter the email address of the account you want to collaborate with.
 1. Click **Invite**.
 
-The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also invite other Neon users to a project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page, under **Shared with you**.
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project, with the exception of privileges required to delete the project. This account can also invite other Neon users to the project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page under **Shared with you**.
 
-The costs associated with a projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+The costs associated with projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
 
 For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
@@ -204,7 +208,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Configure IP Allow
 
-Available to Neon [Business](/docs/introduction/plans#business) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
+Available to Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
 Optionally, you can allow unrestricted access to your project's [non-default branches](/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
@@ -238,7 +242,7 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
 │ Id                  │ Name                │ IP Addresses │ default branch Only │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘

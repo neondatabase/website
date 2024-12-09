@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
 
 import Testimonial from 'components/pages/use-case/testimonial';
+import LINKS from 'constants/links';
 import autoscaleIcon from 'icons/variable/autoscale.svg';
 import costIcon from 'icons/variable/cost.svg';
 import databaseIcon from 'icons/variable/database.svg';
@@ -15,19 +16,19 @@ import Section from '../section';
 const items = [
   {
     icon: autoscaleIcon,
-    text: 'Neon autoscales according to traffic, dynamically adjusting CPU and memory as needed.',
+    text: 'Neon adjusts CPU and memory up and down automatically.',
   },
   {
     icon: costIcon,
-    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>, avoiding unexpected charges.',
+    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>',
   },
   {
     icon: performanceIcon,
-    text: 'Fast performance in production without overpaying. In a typical compute bill, <a href="https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20" target="_blank" rel="noopener noreferrer">60% of costs go towards unused resources</a>. ',
+    text: 'You get a performance boost when you need it.',
   },
   {
     icon: resizeIcon,
-    text: 'No manual resizes or downtimes. Neon scales up and down smoothly and immediately. ',
+    text: 'No manual resizes or downtimes. Neon scales up and down smoothly and immediately.',
   },
   {
     icon: databaseIcon,
@@ -35,7 +36,7 @@ const items = [
   },
   {
     icon: openSourceIcon,
-    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;Github</a>.',
+    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;GitHub</a>.',
   },
 ];
 
@@ -58,7 +59,7 @@ const Efficiency = ({ title }) => (
         company: 'Recrowd',
         avatar: pieralbertoColonboAvatar,
       }}
-      url="/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand"
+      url={`${LINKS.blog}/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand`}
     />
   </Section>
 );

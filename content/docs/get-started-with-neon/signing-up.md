@@ -7,13 +7,24 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-08-06T15:23:10.945Z'
+updatedOn: '2024-12-05T09:28:49.009Z'
 ---
 
-This tutorial guides you through your first steps using Neon as your Postgres database. You'll get familiar with the following concepts:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to view and modify data in the console</p>
+<p>Create an isolated database copy per developer</p>
+<p>Reset your branch to main when ready to start new work</p>
+</DocsList>
 
-- How the Neon [object hierarchy](/docs/manage/overview) works, starting with the **Project**.
-- How [branching](https://neon.tech/docs/introduction/branching) keeps your data isolated from production, and how easy it is to reset development branches when ready to start on new work.
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/introduction/branching">About branching</a>
+<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+</DocsList>
+</InfoBlock>
+
+This tutorial walks you through your first steps using Neon as your Postgres database. You’ll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
 ## About branching
 
@@ -25,11 +36,14 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
+
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
 
-    Sign up with your email, Github, Google, or other partner account.
+    Sign up with your email, GitHub, Google, or other partner account.
 
     For information about what's included with the free plan, see
     [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
@@ -126,7 +140,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 1. **Authenticate with Neon**
 
-   Launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
    neon auth
@@ -152,7 +166,7 @@ There are other branch creation options available when using the CLI. See [Creat
 
 With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
 
-You can use the **SQL Editor** for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+You can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
 <Tabs labels={["Mac", "Linux", "Windows"]}>
 
@@ -244,7 +258,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
 
 ## Step 7 - Check your changes with Schema Diff
 
-After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a Github-style code-comparison tool used to visualize differences between different branch's databases.
+After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a GitHub-style code-comparison tool used to visualize differences between different branch's databases.
 
 For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the main branch.
 
@@ -257,7 +271,7 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
 ## Step 8 - Reset your dev branch to main
 

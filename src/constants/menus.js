@@ -1,7 +1,7 @@
-import CalendarIcon from 'icons/calendar.inline.svg';
-import ConsoleIcon from 'icons/console.inline.svg';
 import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
 import aboutUsIcon from 'icons/header/about-us.svg';
+import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
+import aiAgentsIcon from 'icons/header/ai-agents.svg';
 import aiDarkIcon from 'icons/header/ai-dark.svg';
 import aiIcon from 'icons/header/ai.svg';
 import apiDarkIcon from 'icons/header/api-dark.svg';
@@ -44,8 +44,6 @@ import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
 import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
 import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
 import serverlessIcon from 'icons/header/serverless.svg';
-import PostgresDocsIcon from 'icons/postgres.inline.svg';
-import TransactionsIcon from 'icons/transactions.inline.svg';
 
 import LINKS from './links';
 
@@ -113,9 +111,9 @@ export default {
             light: consoleIcon,
             dark: consoleDarkIcon,
           },
-          text: 'Console',
-          description: 'UI for data management',
-          to: LINKS.consoleTables,
+          text: 'Authorize',
+          description: 'Row-level security',
+          to: LINKS.authorize,
         },
         {
           icon: {
@@ -145,7 +143,7 @@ export default {
             dark: caseSaasDarkIcon,
           },
           text: 'Postgres for SaaS',
-          description: 'Build Apps faster on Neon',
+          description: 'Build faster with Neon',
           to: `${LINKS.useCases}/postgres-for-saas`,
         },
         {
@@ -172,7 +170,7 @@ export default {
             dark: caseDatabaseDarkIcon,
           },
           text: 'Database per Tenant',
-          description: 'DB-per-User Archictectures',
+          description: 'Create one project per user',
           to: `${LINKS.useCases}/database-per-tenant`,
         },
         {
@@ -181,8 +179,17 @@ export default {
             dark: caseDevDarkIcon,
           },
           text: 'Dev/Test',
-          description: 'Non-prod environments',
+          description: 'For non-prod environments',
           to: `${LINKS.useCases}/dev-test`,
+        },
+        {
+          icon: {
+            light: aiAgentsIcon,
+            dark: aiAgentsDarkIcon,
+          },
+          text: 'AI Agents',
+          description: 'A backend for agents',
+          to: `${LINKS.useCases}/ai-agents`,
         },
         // {
         //   icon: {
@@ -290,85 +297,108 @@ export default {
   footer: [
     {
       heading: 'Company',
-      links: [
+      items: [
         {
-          text: 'About us',
+          text: 'About',
           to: LINKS.aboutUs,
-        },
-        {
-          text: 'Careers',
-          to: LINKS.careers,
-        },
-        {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
-          text: 'Case Studies',
-          to: LINKS.caseStudies,
-        },
-        {
-          text: 'Trust',
-          to: LINKS.trust,
-        },
-        {
-          text: 'Pricing',
-          to: LINKS.pricing,
-        },
-        {
-          text: 'Contact Sales',
-          to: LINKS.contactSales,
-        },
-        {
-          text: 'Early Access',
-          to: LINKS.earlyAccess,
-        },
-      ],
-    },
-    {
-      heading: 'Resources',
-      links: [
-        {
-          text: 'AI',
-          to: LINKS.ai,
         },
         {
           text: 'Blog',
           to: LINKS.blog,
         },
         {
-          text: 'Brand',
-          to: LINKS.brand,
+          text: 'Careers',
+          to: LINKS.careers,
         },
+        {
+          text: 'Contact Sales',
+          to: LINKS.contactSales,
+        },
+        {
+          text: 'Partners',
+          to: LINKS.partners,
+        },
+        {
+          text: 'Security',
+          to: LINKS.security,
+        },
+        {
+          text: 'Legal',
+          links: [
+            {
+              text: 'Privacy Policy',
+              to: LINKS.privacy,
+            },
+            {
+              text: 'Terms of Service',
+              to: LINKS.terms,
+            },
+            {
+              text: 'DPA',
+              to: LINKS.dpa,
+            },
+            {
+              text: 'Subprocessors List',
+              to: LINKS.subprocessors,
+            },
+            {
+              text: 'Privacy Guide',
+              to: LINKS.privacyGuide,
+            },
+            {
+              text: 'Cookie Policy',
+              to: LINKS.cookiePolicy,
+            },
+            {
+              text: 'Business Information',
+              to: LINKS.businessInformation,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      heading: 'Resources',
+      items: [
         {
           text: 'Docs',
           to: LINKS.docs,
-        },
-        {
-          text: 'Community Guides',
-          to: LINKS.guides,
         },
         {
           text: 'Changelog',
           to: LINKS.changelog,
         },
         {
-          text: 'Demos',
-          to: LINKS.demos,
-        },
-        {
           text: 'Support',
           to: LINKS.support,
         },
         {
-          text: 'Security',
-          to: LINKS.security,
+          text: 'Community Guides',
+          to: LINKS.guides,
+        },
+        {
+          text: 'PostgreSQL Tutorial',
+          to: LINKS.postgresqltutorial,
+        },
+        {
+          text: 'Creators',
+          to: LINKS.creators,
         },
       ],
     },
     {
-      heading: 'Community',
-      links: [
+      heading: 'Social',
+      items: [
+        {
+          text: 'Discord',
+          to: LINKS.discord,
+          icon: 'discord-icon',
+        },
+        {
+          text: 'GitHub',
+          to: LINKS.github,
+          icon: 'github-icon',
+        },
         {
           text: 'x.com',
           to: LINKS.twitter,
@@ -380,93 +410,56 @@ export default {
           icon: 'linkedin-icon',
         },
         {
-          text: 'GitHub',
-          to: LINKS.github,
-          icon: 'github-icon',
-        },
-        {
-          text: 'Discord',
-          to: LINKS.discord,
-          icon: 'discord-icon',
-        },
-        {
-          text: 'Discourse',
-          to: LINKS.discourse,
-          icon: 'discourse-icon',
-        },
-        {
           text: 'YouTube',
           to: LINKS.youtube,
           icon: 'youtube-icon',
         },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
-          icon: 'creators-icon',
-        },
       ],
     },
     {
-      heading: 'Legal',
-      links: [
+      heading: 'Compliance',
+      items: [
         {
-          text: 'Privacy Policy',
-          to: LINKS.privacy,
+          text: 'CCPA',
+          description: 'Compliant',
+          icon: 'check-icon',
+          to: LINKS.certCCPA,
         },
         {
-          text: 'Terms of Service',
-          to: LINKS.terms,
+          text: 'GDPR',
+          description: 'Compliant',
+          icon: 'check-icon',
+          to: LINKS.certGDPR,
         },
         {
-          text: 'DPA',
-          to: LINKS.dpa,
+          text: 'ISO 27001',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certISO27001,
         },
         {
-          text: 'Subprocessors List',
-          to: LINKS.subprocessors,
+          text: 'ISO 27701',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certISO27701,
         },
         {
-          text: 'Privacy Guide',
-          to: LINKS.privacyGuide,
+          text: 'SOC 2',
+          description: 'Certified',
+          icon: 'check-icon',
+          to: LINKS.certSOC2,
         },
         {
-          text: 'Cookie Policy',
-          to: LINKS.cookiePolicy,
+          text: 'HIPAA',
+          description: 'In progress',
+          icon: 'wip-icon',
+          to: LINKS.certHIPAA,
         },
         {
-          text: 'Business Information',
-          to: LINKS.businessInformation,
+          text: 'Trust Center',
+          to: LINKS.trust,
         },
       ],
-    },
-  ],
-  docSidebar: [
-    {
-      icon: TransactionsIcon,
-      title: 'API Reference',
-      slug: LINKS.apiReference,
-    },
-    {
-      icon: ConsoleIcon,
-      title: 'CLI Reference',
-      slug: LINKS.cliReference,
-    },
-    {
-      icon: CalendarIcon,
-      title: 'Changelog',
-      slug: LINKS.changelog,
-    },
-    {
-      icon: PostgresDocsIcon,
-      title: 'PostgreSQL Docs',
-      slug: LINKS.postgres,
-    },
-  ],
-  postgresSidebar: [
-    {
-      icon: PostgresDocsIcon,
-      title: 'Neon Docs',
-      slug: LINKS.docs,
     },
   ],
 };

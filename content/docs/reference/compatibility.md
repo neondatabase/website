@@ -4,14 +4,14 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2024-09-26T13:33:08.732Z'
+updatedOn: '2024-11-30T11:53:56.078Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you want to use when creating a Neon project. Postgres 16 is selected by default. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 ## Postgres extensions
 
@@ -127,7 +127,7 @@ Unlogged tables are maintained on Neon compute local storage. These tables do no
 
 ## Memory
 
-SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute).
+SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Temporary tables
 
@@ -171,17 +171,9 @@ In Postgres, you cannot change a database's encoding or collation after it has b
 
 ## Collation support
 
-A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. A common standard provider, `libc`, uses locales provided by the operating system C library. By default, Neon uses the `C` collation provided by `libc`, which offers a simple binary sorting order based on the byte values of characters.
+A collation is an SQL schema object that maps an SQL name to locales provided by libraries installed in the operating system. A collation has a provider that specifies which library supplies the locale data. For example, a common standard provider, `libc`, uses locales provided by the operating system C library.
 
-The `C.UTF-8` collation is also available. While the `C` collation is strictly binary and limited to ASCII characters, `C.UTF-8` supports the full range of UTF-8 encoded characters. To create a database with that collation, you can use the following syntax:
-
-```sql
-CREATE DATABASE my_database
-ENCODING 'UTF8'
-LC_COLLATE 'C.UTF-8'
-LC_CTYPE 'C.UTF-8'
-template template0;
-```
+By default, Neon uses the `C.UTF-8` collation. `C.UTF-8` supports the full range of UTF-8 encoded characters.
 
 Another provider supported by Neon is `icu`, which uses the external [ICU](https://icu.unicode.org/) library. In Neon, support for standard `libc` locales is limited compared to what you might find in a locally installed Postgres instance where there's typically a wider range of locales provided by libraries installed on your operating system. For this reason, Neon provides a full series of [predefined icu locales](https://www.postgresql.org/docs/current/collation.html#COLLATION-MANAGING-PREDEFINED-ICU) in case you require locale-specific sorting or case conversions.
 
@@ -229,7 +221,7 @@ Neon does not yet support Foreign Data Wrappers (FDW) or Postgres extensions suc
 
 ## PostgreSQL documentation
 
-Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](https://neon.tech/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:
+Neon provides a mirror of the official PostgreSQL documentation on the [Neon documentation site](/docs/introduction) for the convenience of our users. As Neon is built on standard PostgreSQL, most information from the official PostgreSQL documentation applies to our platform. However, there are a few key differences to consider when referencing the official PostgreSQL docs:
 
 - As a managed Postgres service, certain aspects of the official PostgreSQL documentation like installation procedures do not apply to Neon.
 - Some features detailed in the official PostgreSQL documentation may not be relevant for Neon, such as those mentioned on this Postgres compatibility page.

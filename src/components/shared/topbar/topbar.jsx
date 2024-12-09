@@ -5,7 +5,6 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -19,7 +18,7 @@ const TopBar = ({ isDarkTheme }) => (
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to={LINKS.deploy}
+    to="https://neon.tech/aurora"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -71,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Neon Deploy: Learn how Neon helps developers ship faster with Postgres. Grab your ticket
+      Learn how Neon compares to Aurora Serverless v2 - TL;DR: faster cold starts, responsive autoscaling, 80% lower costs
     </span>
     <ChevronIcon
       className={clsx(

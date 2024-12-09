@@ -1,24 +1,23 @@
 ---
-title: Working with Neon read replicas
-subtitle: Learn how to create and and manage read replicas in Neon
+title: Create and manage Read Replicas
+subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2024-10-08T10:58:34.745Z'
+updatedOn: '2024-10-23T14:34:44.515Z'
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. This guide will lead you through the process of creating and managing read replicas.
+[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. This guide steps you through the process of creating and managing read replicas.
 
-The general methodology of using read replicas to segregate read-only work from your production database operations can be applied to a variety of uses cases, such as:
+The general purpose of read replicas is to segregate read-only work from your production database operations. This can be applied to different uses cases, such as:
 
-- Offloading analytics or reporting queries
-- Distributing read requests to achieve higher throughput
-- Providing read-only data access to specific users or applications who do not need to modify data
-- Configuring different CPU and memory resources for each read replica for different users and applications
+- **Horizontal scaling**: Distributing read requests across replicas to improve performance and increase throughput
+- **Analytics queries**: Offloading resource-intensive analytics and reporting workloads to reduce load on the primary compute
+- **Read-only access**: Granting read-only access to users or applications that don't require write permissions
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over compute usage.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over read replica compute usage.
 
 ## Prerequisites
 
-- A Neon paid plan account
+- A Neon account
 - A [Neon project](/docs/manage/projects#create-a-project)
 
 ## Create a read replica
@@ -83,17 +82,19 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select a **Replica**.
-1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from you client or application.
+1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from your client or application.
 
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
    ```
 
    If you expect a high number of connections, select **Pooled connection** to add the `-pooler` flag to the connection string or example.
 
-   No write operations are permitted on a connection to a read replica.
+   <Admonition type="note">
+   Write operations are not permitted on a read replica connection.
+   </Admonition>
 
 ## View read replicas
 
@@ -102,7 +103,7 @@ You can view read replicas using the Neon Console or [Neon API](https://api-docs
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
-To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Under the **Computes** heading, the **Type** field identifies your read replicas. Read replicas have a `R/O` value instead of `R/W`.
+To view read replicas for a branch, select **Branches** in the Neon Console, and select a branch. Read replicas are listed on the **Computes** tab.
 
 ![View read replicas](/docs/guides/view_read_replica.png)
 </TabItem>
@@ -136,7 +137,7 @@ To edit a read replica compute using the Neon Console:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Under **Computes**, identify the read replica compute you want to modify, and click **Edit**.
-1. Specify your settings click **Save**.
+1. Make the changes to your compute settings, and click **Save**.
 
 </TabItem>
 
@@ -199,14 +200,32 @@ Computes are identified by their `project_id` and `endpoint_id`. For information
 
 </Tabs>
 
-## Default and read replica compute setting synchronization
+## Monitoring read replicas
 
-In a Postgres primary-standby configuration, certain settings should be no smaller on a standby than on the primary in order to ensure that the standby does not run out of shared memory during recovery, as described in the [PostgreSQL hot standby documentation](https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-ADMIN). For Neon [read replicas](/docs/introduction/read-replicas), it's no different. The same settings should be no smaller on a read replica compute (the "standby") than on your primary read-write compute (the "primary"). For this reason, the following settings on read replica computes are synchronized with the settings on the primary read-write compute when the read replica compute is started:
+You can monitor replication delay between the primary compute and your read replica computes from the **Monitoring** page in the Neon Console. Two graphs are provided:
+
+**Replication delay bytes**
+
+![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
+
+The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+
+**Replication delay seconds**
+
+![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)
+
+The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
+
+## Read replica compute setting synchronization
+
+For Neon [read replicas](/docs/introduction/read-replicas), certain Postgres settings should not have lower values than your primary read-write compute. For this reason, the following settings on read replica computes are synchronized with the settings on the primary read-write compute when the read replica compute is started:
 
 - `max_connections`
 - `max_prepared_transactions`
 - `max_locks_per_transaction`
 - `max_wal_senders`
 - `max_worker_processes`
+
+No users action is required. The settings are synchronized automatically.
 
 <NeedHelp/>

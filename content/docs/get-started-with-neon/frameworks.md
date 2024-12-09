@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
-updatedOn: '2024-08-15T17:23:10.552Z'
+updatedOn: '2024-11-28T11:50:49.801Z'
 ---
 
 <TechnologyNavigation open>
@@ -15,9 +15,9 @@ updatedOn: '2024-08-15T17:23:10.552Z'
 
 <a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
-<a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
+<a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
-<a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
+<a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
 
 <a href="/docs/guides/oauth-integration" title="OAuth" description="Integrate with Neon using OAuth" icon="oauth"></a>
 
@@ -27,18 +27,16 @@ updatedOn: '2024-08-15T17:23:10.552Z'
 
 <a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
 
-<a href="/docs/guides/ruby-on-rails" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
-
 <a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
 
 <a href="/docs/guides/reflex" title="Reflex" description="Build Python Apps with Reflex and Neon" icon="reflex"></a>
 
 <a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
 
-<a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
-
 <a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
 <a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solid"></a>
+
+<a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
 </TechnologyNavigation>

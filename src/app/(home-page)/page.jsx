@@ -16,10 +16,21 @@ import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.index);
+getMetadata({
+  ...SEO_DATA.index,
+  robotsNoindex: 'noindex',
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Neon Postgres',
+  url: 'https://neon.tech/',
+};
 
 const HomePage = async () => {
   const is_logged_in = await checkCookie('neon_login_indicator');
-  if (is_logged_in) {
+  if (process.env.NODE_ENV === 'production' && is_logged_in) {
     const referer = await getReferer();
     if (
       referer.includes(process.env.VERCEL_BRANCH_URL) ||
@@ -33,6 +44,10 @@ const HomePage = async () => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <Logos />
       <InstantProvisioning />

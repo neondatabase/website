@@ -2,7 +2,7 @@
 title: AI & Embeddings
 subtitle: Build AI applications with Neon Postgres as your vector database
 enableTableOfContents: true
-updatedOn: '2024-08-16T14:55:52.653Z'
+updatedOn: '2024-11-30T11:53:56.043Z'
 ---
 
 Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
@@ -15,7 +15,7 @@ Neon's AI Starter Kit provides resources, starter apps, and examples to help get
 
 The **Neon AI Starter Kit** includes:
 
-- Neon Postgres with the latest version of the Postgres [pgvector](https://neon.tech/docs/extensions/pgvector) extension for storing vector embeddings
+- Neon Postgres with the latest version of the Postgres [pgvector](/docs/extensions/pgvector) extension for storing vector embeddings
 - A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
   - AI chat
   - RAG chat
@@ -42,9 +42,9 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A Netx.js AI chatbot starter app built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A Next.js AI chatbot starter app built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A Netx.js AI chatbot starter app built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A Next.js AI chatbot starter app built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="A Next.js RAG chatbot starter app built with OpenAI and LlamaIndex" icon="github">RAG chatbot (OpenAI + LlamaIndex)</a>
 

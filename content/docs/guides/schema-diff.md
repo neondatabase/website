@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2024-09-27T18:08:38.285Z'
+updatedOn: '2024-11-27T14:58:45.561Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -93,6 +93,14 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 
 - **+ Green Highlight**: Indicates additions or new elements in the schema.
 - **- Red Highlight**: Marks deletions or removed elements from the schema.
+
+## Schema Diff GitHub Action
+
+Neon supports a [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action) that performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request highlighting the schema differences.
+
+This action supports workflows where schema changes are made on a branch. When you create or update a pull request containing schema changes, the action automatically generates a comment within the pull request. By including the schema diff as part of the comment, reviewers can easily assess the changes directly within the pull request.
+
+To learn more, see the [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action).
 
 ## Tutorial
 

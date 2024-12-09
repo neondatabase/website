@@ -4,7 +4,7 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
   Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-12T11:16:13.587Z'
+updatedOn: '2024-10-14T09:37:02.880Z'
 ---
 
 <LRBeta/>
@@ -16,6 +16,10 @@ Neon's logical replication feature allows you to replicate data from one Neon pr
 - **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account.
 
 These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
+
+<Admonition type="info" title="Replicating between databases on the same Neon project branch">
+**The procedure in this guide does not work for replicating between databases on the same Neon project branch**. That setup requires a slightly different publication and subscription configuration. For details, see [Replicating between databases on the same Neon project branch](/docs/guides/logical-replication-neon#replicating-between-databases-on-the-same-neon-project-branch).
+</Admonition>
 
 ## Prerequisites
 

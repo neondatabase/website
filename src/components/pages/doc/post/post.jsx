@@ -44,8 +44,10 @@ const Post = ({
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
+  navigationLinksPrefix,
   isChangelog = false,
   isUseCase = false,
+  isPostgres = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -61,7 +63,11 @@ const Post = ({
       )}
     >
       {breadcrumbs.length > 0 && (
-        <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
+        <Breadcrumbs
+          breadcrumbs={breadcrumbs}
+          currentSlug={currentSlug}
+          isPostgresPost={isPostgres}
+        />
       )}
       {isChangelog ? (
         <Changelog currentSlug={currentSlug} items={changelogPosts} />
@@ -83,7 +89,12 @@ const Post = ({
               {subtitle}
             </p>
           )}
-          <Content className="mt-5" content={content} isUseCase={isUseCase} />
+          <Content
+            className="mt-5"
+            content={content}
+            isUseCase={isUseCase}
+            isPostgres={isPostgres}
+          />
         </article>
       )}
 
@@ -91,7 +102,7 @@ const Post = ({
         <NavigationLinks
           previousLink={previousLink}
           nextLink={nextLink}
-          basePath={DOCS_BASE_PATH}
+          basePath={navigationLinksPrefix || DOCS_BASE_PATH}
         />
       )}
       <DocFooter updatedOn={updatedOn} slug={currentSlug} />
@@ -134,8 +145,10 @@ Post.propTypes = {
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
+  navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
+  isPostgres: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

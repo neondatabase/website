@@ -1,197 +1,19 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
+import { useMemo } from 'react';
 
-import AnimatedButton from 'components/shared/animated-button';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
-import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import CheckIcon from 'icons/check.inline.svg';
-import CrossIcon from 'icons/cross.inline.svg';
 
-const smoothScroll = (e, id) => {
-  e.preventDefault();
-  document?.getElementById(id)?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  });
-
-  // changing hash without default jumps to anchor
-  // eslint-disable-next-line no-restricted-globals
-  if (history.pushState) {
-    // eslint-disable-next-line no-restricted-globals
-    history.pushState(null, '', `#${id}`);
-  } else {
-    // old browser support
-    window.location.hash = `#${id}`;
-  }
-};
-
-const items = [
-  {
-    type: 'Free Plan',
-    price: 0,
-    headerLink: undefined,
-    description: 'Always-available free tier, no credit card required.',
-    features: [
-      {
-        title: '10 projects',
-        info: '10 branches per project',
-      },
-      { title: '0.5 GiB storage' },
-      { title: 'Autoscaling up to 2 CU', info: '2 CU = 2 vCPU, 8 GB RAM' },
-      { title: 'Community Support' },
-    ],
-    button: {
-      url: LINKS.signup,
-      text: 'Start for free',
-      theme: 'white-outline',
-      event: 'Hero Free Tier Panel',
-    },
-  },
-  {
-    type: 'Launch',
-    highlighted: true,
-    price: 19,
-    priceFrom: true,
-    headerLink: {
-      url: 'https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa',
-      text: 'Pay via marketplace AWS',
-    },
-    description: 'The resources, features, and support you need to launch.',
-    features: [
-      {
-        title: '100 projects',
-        info: '500 branches per project',
-      },
-      {
-        title: '10 GiB storage included',
-        info: 'Additional storage: $3.5 per 2 GiB',
-      },
-      {
-        title: [
-          '300 ',
-          {
-            type: 'link',
-            text: 'compute hours',
-            href: '#compute-hour',
-            onClick: (e) => {
-              smoothScroll(e, 'compute-hour');
-            },
-          },
-          ' included',
-        ],
-        info: 'Additional usage: $0.16 per compute hour',
-      },
-      { title: 'Autoscaling up to 4 CU', info: '4 CU = 4 vCPU, 16 GB RAM' },
-      { title: 'Point-in-time restore (7 days)' },
-      { title: 'Standard Support' },
-    ],
-    button: {
-      url: `${LINKS.console}/?upgrade=launch`,
-      text: 'Get started',
-      theme: 'primary',
-      event: 'Hero Launch Panel',
-    },
-  },
-  {
-    type: 'Scale',
-    price: 69,
-    priceFrom: true,
-    headerLink: {
-      url: 'https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa',
-      text: 'Pay via marketplace AWS',
-    },
-    description: 'More capacity and functionality for scaling production workloads.',
-    features: [
-      {
-        title: '1,000 projects',
-        info: '$50 per 1,000 extra projects',
-      },
-      { title: '50 GiB storage included', info: 'Additional storage: $15 per 10 GiB' },
-      {
-        title: [
-          '750 ',
-          {
-            type: 'link',
-            text: 'compute hours',
-            href: '#compute-hour',
-            onClick: (e) => {
-              smoothScroll(e, 'compute-hour');
-            },
-          },
-          ' included',
-        ],
-        info: 'Additional usage: $0.16 per compute hour',
-      },
-      { title: 'Autoscaling up to 8 CU', info: '8 CU = 8 vCPU, 32 GB RAM' },
-      { title: 'Point-in-time restore (14 days)' },
-      { title: 'Standard support' },
-    ],
-    button: {
-      url: `${LINKS.console}/?upgrade=scale`,
-      text: 'Get started',
-      theme: 'white-outline',
-      event: 'Hero Scale Panel',
-    },
-  },
-  {
-    type: 'Business',
-    price: 700,
-    priceFrom: true,
-    headerLink: {
-      url: '/migration-assistance',
-      text: 'Get migration help',
-    },
-    description: 'For larger workloads, partners, and best compliance/security. ',
-    features: [
-      {
-        title: '5,000 projects',
-        info: '$50 per 5,000 extra projects',
-      },
-      { title: '500 GiB storage included', info: 'Additional storage: $5 per 10 GiB' },
-      {
-        title: [
-          '1000 ',
-          {
-            type: 'link',
-            text: 'compute hours',
-            href: '#compute-hour',
-            onClick: (e) => {
-              smoothScroll(e, 'compute-hour');
-            },
-          },
-          ' included',
-        ],
-        info: 'Additional usage: $0.16 per compute hour',
-      },
-      { title: 'Higher compute capacity', info: 'Autoscaling up to 10 CU, larger fixed computes' },
-      { title: 'Point-in-time restore (30 days)' },
-      { title: 'Private Link' },
-      { title: 'Datadog integration' },
-      {
-        title: 'Migration assistance',
-        info: 'With 0 migration fees—we will waive them',
-      },
-      { title: 'Compliance (GDPR, SOC 2, ISO)' },
-      { title: '99.95% SLA' },
-      { title: 'Priority support' },
-    ],
-    button: {
-      url: `${LINKS.console}/?upgrade=business`,
-      text: 'Get started',
-      theme: 'white-outline',
-      event: 'Hero Enterprise Panel',
-    },
-  },
-];
+import plansOriginal from './data/plans.json';
+import Features from './features';
 
 const scaleCardBorderVariants = {
   from: {
@@ -209,232 +31,175 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Feature = ({ title, info, disabled, type, highlighted, index }) => (
-  <li
-    className={clsx(
-      disabled ? 'text-gray-new-30 opacity-80' : 'text-gray-new-70',
-      !disabled && highlighted && 'text-white',
-      'relative pl-6 leading-tight tracking-tight'
-    )}
-  >
-    {disabled ? (
-      <CrossIcon className={clsx('absolute left-0 top-0.5 h-4 w-4 text-gray-new-30')} aria-hidden />
-    ) : (
-      <CheckIcon
-        className={clsx(
-          highlighted ? 'text-green-45' : 'text-gray-new-70',
-          'absolute left-0 top-0.5 h-4 w-4'
-        )}
-        aria-hidden
-      />
-    )}
-    <span className="with-link-primary">
-      {Array.isArray(title)
-        ? title.map((part, i) =>
-            typeof part === 'string' ? (
-              part
-            ) : (
-              <Link key={i} to={part.href} onClick={part.onClick}>
-                {part.text}
-              </Link>
-            )
-          )
-        : title}
-    </span>
-    {info && (
-      <span className="whitespace-nowrap">
-        &nbsp;
-        <InfoIcon
-          className="relative top-0.5 ml-0.5 inline-block"
-          tooltip={info}
-          tooltipId={`${type}_tooltip_${index}`}
-        />
-      </span>
-    )}
-  </li>
-);
-
-Feature.propTypes = {
-  title: PropTypes.string.isRequired,
-  info: PropTypes.string,
-  disabled: PropTypes.bool,
-  type: PropTypes.string,
-  highlighted: PropTypes.bool,
-  index: PropTypes.number,
-};
-
 const Hero = () => {
-  const [isLoad, setIsLoad] = useState(false);
-  const controls = useAnimation();
+  const posthog = usePostHog();
+  const isComputePriceRaised =
+    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
 
-  useEffect(() => {
-    controls.start('to');
-  }, [controls]);
+  const plans = useMemo(() => {
+    if (isComputePriceRaised) {
+      return plansOriginal.map((plan) => ({
+        ...plan,
+        features: plan.features.map((feature) => {
+          if (feature.id === 'compute_time') {
+            return {
+              ...feature,
+              info: 'Additional at $0.24 per compute hour',
+            };
+          }
+          return feature;
+        }),
+      }));
+    }
 
-  useEffect(() => {
-    setIsLoad(true);
-  }, []);
+    return plansOriginal;
+  }, [isComputePriceRaised]);
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
-      <Container className="flex flex-col items-center" size="1472">
+      <Container className="flex flex-col items-center" size="1344">
         <Heading
-          className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
+          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
           tag="h1"
           size="lg"
         >
           <span>Neon Pricing</span>
         </Heading>
-        <p className="mx-auto mt-5 max-w-[680px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
+        <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
           Pricing plans that grow with you. From prototype to Enterprise.
         </p>
-        <div className="relative mx-auto mt-20 xl:mt-12 lg:w-full lg:max-w-[704px] md:mt-9">
+        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-10 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {items.map(
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+            {plans.map(
               (
                 {
+                  planId,
                   type,
                   highlighted = false,
                   price,
                   priceFrom = false,
-                  headerLink,
+                  headerLinks,
                   description,
                   features,
+                  otherFeatures,
                   button,
                 },
                 index
               ) => (
                 <li
                   className={clsx(
-                    'group relative flex min-h-full flex-col rounded-[10px] px-7 pb-9 pt-5 xl:px-6 xl:py-5 sm:p-5',
-                    !highlighted && 'border border-transparent bg-black-new'
+                    'group relative flex min-h-full flex-col rounded-[10px] p-6 pt-5',
+                    !highlighted && 'bg-black-new'
                   )}
                   key={index}
-                  onPointerEnter={() => {
-                    if (highlighted) {
-                      controls.start('to');
-                    }
-                  }}
                 >
-                  {headerLink && (
-                    <a
-                      className="group/aws absolute right-[18px] top-5 flex items-center gap-x-2"
-                      href={headerLink.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="border-b border-gray-new-40 pb-0.5 text-sm font-light leading-none tracking-extra-tight text-gray-new-70 opacity-90 transition-colors duration-200 group-hover/aws:border-transparent group-hover/aws:text-gray-new-80">
-                        {headerLink.text}
-                      </span>
-                    </a>
-                  )}
-                  <div className="mb-6 flex flex-col border-b border-dashed border-gray-new-20 pb-5 xl:mb-5">
+                  <div className="flex items-center justify-between">
                     <h3
                       className={clsx(
-                        highlighted && 'text-green-45',
-                        'text-xl font-medium leading-none tracking-tight text-gray-new-70 xl:text-lg'
+                        'text-xl font-medium leading-none tracking-extra-tight',
+                        highlighted ? 'text-green-45' : 'text-white'
                       )}
                     >
                       {type}
                     </h3>
-                    <p className="relative mt-[51px] text-[36px] leading-none tracking-tighter xl:mt-9 xl:text-[32px] md:mt-4">
-                      {priceFrom && (
-                        <em className="absolute -top-5 block text-base font-light not-italic tracking-tight text-gray-new-50 xl:relative xl:-top-1 xl:-mt-4 md:mt-0">
-                          From
-                        </em>
-                      )}
-                      ${price}{' '}
-                      <span className="text-[28px] font-light -tracking-[0.06em] text-gray-new-50">
-                        /month
-                      </span>
-                    </p>
-                    {highlighted ? (
-                      <AnimatedButton
-                        className="mt-7 w-full !bg-green-45 !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[#00ffaa] xl:mt-7 sm:max-w-none"
-                        animationColor="#00e599"
-                        theme="primary"
-                        size="sm"
-                        to={button.url}
-                        tag_name={button.event}
-                        isAnimated
-                      >
-                        {button.text}
-                      </AnimatedButton>
-                    ) : (
-                      <Button
-                        className="mt-7 w-full bg-gray-new-15 bg-opacity-80 !py-4 !text-lg !font-medium tracking-tight transition-colors duration-500 hover:bg-gray-new-30 xl:mt-7 sm:max-w-none"
-                        size="sm"
-                        to={button.url}
-                        tag_name={button.event}
-                      >
-                        {button.text}
-                      </Button>
+                    {headerLinks && (
+                      <p
+                        className={clsx(
+                          'text-sm font-light leading-none text-gray-new-50',
+                          '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
+                          '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
+                        )}
+                        dangerouslySetInnerHTML={{ __html: headerLinks }}
+                      />
                     )}
-                    <p className="mt-9 font-light leading-snug tracking-tighter text-gray-new-50 2xl:min-h-[66px] xl:mt-8 xl:min-h-11 lg:min-h-max [&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent">
-                      {Array.isArray(description)
-                        ? description.map((part, i) =>
-                            typeof part === 'string' ? (
-                              part
-                            ) : (
-                              <Link key={i} to={part.href} onClick={part.onClick}>
-                                {part.text}
-                              </Link>
-                            )
-                          )
-                        : description}
-                    </p>
                   </div>
+                  <p className="relative mt-16 ">
+                    {priceFrom && (
+                      <em className="absolute -top-5 block text-sm font-light not-italic leading-none tracking-extra-tight text-gray-new-50">
+                        From
+                      </em>
+                    )}
+                    <span className="text-[40px] font-medium leading-none tracking-tighter">
+                      ${price}
+                    </span>{' '}
+                    <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
+                      /month
+                    </span>
+                  </p>
+                  <Button
+                    className={clsx(
+                      'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      highlighted
+                        ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
+                        : 'bg-gray-new-15 hover:bg-gray-new-30'
+                    )}
+                    size="sm"
+                    to={button.url}
+                    tag_name={button.event}
+                    onClick={() => {
+                      posthog.capture('ui_interaction', {
+                        action: 'pricing_page_get_started_clicked',
+                        plan: planId,
+                        place: 'hero',
+                      });
+                    }}
+                  >
+                    {button.text}
+                  </Button>
+                  <p
+                    className={clsx(
+                      'mt-5 leading-snug tracking-extra-tight text-gray-new-60',
+                      '[&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent'
+                    )}
+                  >
+                    {Array.isArray(description)
+                      ? description.map((part, i) =>
+                          typeof part === 'string' ? (
+                            part
+                          ) : (
+                            <Link key={i} to={part.href} onClick={part.onClick}>
+                              {part.text}
+                            </Link>
+                          )
+                        )
+                      : description}
+                  </p>
+                  <Features features={features} type={type} highlighted={highlighted} />
+                  {otherFeatures && (
+                    <Features
+                      title={otherFeatures.title}
+                      features={otherFeatures.features}
+                      type={type}
+                      highlighted={highlighted}
+                      hasToggler
+                    />
+                  )}
                   {highlighted && (
                     <LazyMotion features={domAnimation}>
                       <m.span
-                        className={clsx(
-                          'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45 transition-colors duration-300 md:!opacity-100',
-                          isLoad && '!opacity-100'
-                        )}
+                        className="pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45/70 md:!opacity-100"
                         initial="from"
                         exit="exit"
                         variants={scaleCardBorderVariants}
-                        animate={controls}
+                        animate="to"
                         aria-hidden
                       />
                     </LazyMotion>
                   )}
-                  <div className="mt-auto flex grow flex-col">
-                    <ul className="flex flex-col flex-wrap gap-y-4">
-                      {features.map((feature, index) => (
-                        <Feature
-                          {...feature}
-                          type={type}
-                          highlighted={highlighted}
-                          index={index}
-                          key={index}
-                        />
-                      ))}
-                    </ul>
-                  </div>
                 </li>
               )
             )}
           </ul>
         </div>
-        <p className="mb-10 mt-16 text-center text-lg font-light leading-snug text-gray-new-80 sm:mb-4">
-          <br />
-          Explore the{' '}
-          <Button
-            className="inline-block !font-light text-green-45 transition-colors duration-200 hover:text-[#00FFAA]"
-            onClick={(e) => smoothScroll(e, 'plans')}
-          >
-            detailed plan comparison
-          </Button>
-          .
-        </p>
         <CtaBlock
-          className="max-w-[716px]"
+          className="max-w-[656px]"
           title="Custom Enterprise Plans"
           description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
+          size="sm"
+          hasDecor={false}
         />
       </Container>
     </section>

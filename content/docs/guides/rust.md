@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Rust application
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2024-08-07T21:36:52.664Z'
+updatedOn: '2024-11-20T18:52:04.758Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
@@ -25,7 +25,7 @@ To create a Neon project:
 ## Configure the connection
 
 <Admonition type="note">
-To run the Rust solution below you have to install the required dependencies. You can do this by running `cargo add postgres postgres_openssl openssl`.
+To run the Rust solution below you have to install the required dependencies. You can do this by running `cargo add postgres postgres_openssl openssl`. Also, the example provided uses the synchronous `postgres` crate. If your application is asynchronous and uses `tokio`, we recommend using the `tokio-postgres` crate for compatibility with async runtimes.
 </Admonition>
 
 Add the Neon connection details to your `main.rs` file, as in the following example:

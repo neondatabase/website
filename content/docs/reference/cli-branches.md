@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-08T16:51:37.142Z'
+updatedOn: '2024-11-30T11:53:56.077Z'
 ---
 
 ## Before you begin
@@ -131,6 +131,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
 
 <Admonition type="note">
@@ -163,7 +164,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   ```
 
     <Admonition type="note">
-    If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
@@ -239,6 +240,18 @@ When creating a branch from a protected parent branch, role passwords on the chi
 
   ```bash
   neon branches create --name mybranch
+  ```
+
+- Set the compute size when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 2
+  ```
+
+- Set the compute's autoscaling range when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 0.5-3
   ```
 
 - Create a branch with a [read replica](/docs/introduction/read-replicas) compute.
@@ -614,13 +627,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   └─────────────────────┴──────────────────────────────────────────────────┘
   ```
 
-- Set the compute size when creating a branch:
+- Set the compute size when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 2
   ```
 
-- Set the compute's autoscaling range when creating a branch:
+- Set the compute's autoscaling range when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 0.5-3

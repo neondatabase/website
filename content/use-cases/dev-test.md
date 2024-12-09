@@ -1,46 +1,40 @@
 ---
-title: 'Postgres for Dev/Test'
-subtitle: Migrate your non-prod environments to Neon. Start shipping faster with up to 75% lower costs.
+title: 'Optimize Dev/Test'
+subtitle: Migrate your non-prod environments to Neon and start shipping faster with +75% lower costs.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
+image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
 
-**TL:DR**
-
+<Admonition type="note" title="TL;DR">
 - [Neon](/) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
 - Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
-  - You can keep your production DB in your current Postgres, e.g. RDS;
+  - You can keep your production DB in your current Postgres;
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily);
   - To build / test / debug in Neon.
   - Once the changes are tested, you apply them back to prod.
-- What you get: more developer velocity with up to 75% less costs.
+- What you get: more developer velocity with +75% less costs.
 - You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
+</Admonition>
 
-## AWS RDS is fine for prod, but terrible for dev
+## RDS/Aurora are inefficient for dev/test
 
 ---
 
 <TestimonialsWrapper>
 
 <Testimonial
-text="The RDS developer experience is not quite there. The AWS console and APIs are quite convoluted and require extensive setup and configuration to achieve even basic tasks."
+className="!mt-0"
+text="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
 author={{
-  name: 'Guido Marucci',
-  company: 'Co-founder at Cedalio',
+  name: 'Jonathan Reyes',
+  company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow"
+url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
 />
 
 <Testimonial
-text="When we used a shared RDS instance for development, it was hard to properly test new features and changes without impacting the work of other teammates."
-author={{
-  name: 'Camelia Smeria',
-  company: 'Lead Engineer at Proposales',
-}}
-url="/blog/frictionless-development-experience-with-neon-branching"
-/>
-
-<Testimonial
+className="!mt-0"
 text="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
 author={{
   name: 'Léonard Henriquez',
@@ -50,6 +44,7 @@ url="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
 />
 
 <Testimonial
+className="!mt-0"
 text="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
 author={{
   name: 'Joey Teunissen',
@@ -60,41 +55,65 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 </TestimonialsWrapper>
 
-Databases like AWS RDS are widely used for a reason: they’re robust, reliable, and offer many instance types in all regions… But in terms of developer experience, they are decades behind. They also use resources inefficiently, which leads to high bills.
+**Provisioning instances is slow. Once they're live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
 
-**Provisioning RDS instances is slow, and once live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
+**You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running.
 
-**You pay for them 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for development instances. In RDS, unless you manually pause them, you’ll pay for them even if you’re not running. These inefficient non-prod costs quickly bloat your cloud bill.
+**It's hard to keep data in sync across environments**. Syncing data across many instances requires repetitive, manual work. This leads to discrepancies that compromise test reliability and slow down deployments.
 
-**Developer collaboration is hard**. RDS is simply not built to support team workflows where multiple developers need to interact with the same dataset at the same time. It’s easy to quickly run into problems involving shared infrastructure, “noisy neighbors,” and data consistency.
+**These problems get worse over time, not better**. As your number of instances grows, the manual setup and configuration work grows too.
 
-**It takes work to keep data in sync across non-prod environments**. If you’re using many separate RDS instances for development, staging, and testing, maintaining data across all these environments will be time-consuming and prone to errors in RDS.
-
-**These problems get worse over time, not better**. As your fleet of RDS instances grows, the manual setup and configuration work grows too, as do the cost inefficiencies. It just gets worse.
-
-<CTA title="Build a Neon Twin" description="Set up a GitHub action that automatically syncs your data from RDS to Neon." buttonText="Read more" buttonUrl="/dev-for-rds" />
-
-## How Neon can help: FAQ
+## Use Neon for dev/test
 
 ---
 
-Migrating a production database is a big project: even when your current Postgres provider doesn’t spark joy, your team might not be ready for a full production migration just yet. However, you can enjoy a better experience for your development workflows by moving your non-prod environments to Neon.
+<TestimonialsWrapper>
 
-### What do I gain by moving my dev databases to Neon?
+<Testimonial
+text="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away"
+author={{
+  name: 'Alex Co',
+  company: 'Head of Platform Engineering at Mindvalley',
+}}
+url="/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches"
+/>
 
-Neon is a Postgres provider that offers a much more modern developer experience than databases like RDS. We’ve built a serverless platform for Postgres focused on helping you ship faster instead of being held back by database management. And as the cherry on top, you’ll save money—since Neon’s pricing is much more efficient compared to RDS.
+<Testimonial
+text="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments."
+author={{
+  name: 'Jonathan Reyes',
+  company: 'Principal Engineer at Dispatch',
+}}
+url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+/>
 
-### Why it’s faster (and more affordable) to build with Neon vs. RDS?
+</TestimonialsWrapper>
 
-1. **Instant provisioning**. Neon is serverless Postgres: it takes seconds to spin up new Postgres instances. Developers can start coding and testing immediately.
-2. **Intuitive DX**. Neon's modern interface and APIs minimize all database management tasks. Developers on your team can focus on building and testing features, fixing bugs, and staging changes—not navigating AWS obscurities.
-3. **Database branching**. Neon comes with a powerful branching feature that allows you to create full copies of your database instantly using copy-on-write technology without consuming extra storage. This not only eliminates the "works on my machine" problem and streamlines collaboration—it’s also very affordable. All developers access a single development dataset without interfering with each other.
-4. **Automatic scaling down to zero**. Neon automatically scales your compute resources based on demand. If a database is idle, Neon pauses it automatically to save costs and resumes it when needed—all without manual intervention.
-5. **Seamless CI/CD integration**. You can add Neon to your CI/CD pipelines to automate database provisioning and teardown for testing. This ensures consistent, isolated environments for each test run, reducing flakiness and increasing confidence in your deployments.
+We get it—migrating a production database is a big project, but you can still improve your non-pod experience by moving your dev/test environments to Neon.
 
-### How much savings are we talking about?
+### Why should I move my dev databases to Neon?
 
-By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs up to 75%**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
+Neon is a Postgres provider that offers a much more modern developer experience than databases like RDS. We’ve built a serverless platform for Postgres focused on helping you ship faster instead of being held back by database management. As the cherry on top, you’ll save money.
+
+### Why it’s faster (and more affordable) to do dev/test in Neon?
+
+1. **Instant provisioning**. In Neon, it takes seconds to spin up new Postgres instances. Developers can start coding and testing immediately, no waiting time.
+2. **Database branching for ephemeral environments**. Neon's copy-on-write branching allows devs to create full copies of their testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: In Neon, you can sync data with parent in one click. Branches are also extremely affordable.
+3. **Non-prod environments are automatically paused when unused**. If a database branch is idle, Neon pauses it automatically to save costs (and management work).
+4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation /deletion.
+
+### How does it work?
+
+Here's how you'll go about it:
+
+1. **Set up a single Neon Project for dev/test**. Many non-prod instances can be substituted by a single Neon project.
+2. **Sync testing data to the main branch**. Load data from your staging database / testing data into the main branch within the Neon project. This main branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
+3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
+4. **Automatic branch cleanup and autosuspend**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's autosuspend automatically pauses these environments when unused, so you don't have to worry too much about them.
+
+### How much cost savings have you seen vs RDS/Aurora?
+
+By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs by 75% or more**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
 
 ### Show me a real use case example
 
@@ -109,14 +128,14 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 **Equivalent non-prod deployment in Neon:**
 
 - [Scale pricing plan](/pricing): $69 /month
-- Includes 50 GB of shared storage between 10 branches - equivalent to the 10 instances in RDS
-- Includes 750 compute hours, additional compute hours billed at $0.16 per CU
+- Includes 50 GB of storage - 1,000 projects - 500 branches per project
+- Plus 750 compute hours, additional compute hours billed at $0.16 per CU
 - **Neon monthly costs: $338.12**
   - Compute hours per branch per month: 2 CU \* 4 hours \* 30.4 days/month = 243.2
   - Total compute hours: 243.2 \* 10 branches = 2432
   - Cost of additional compute hours: [2432 - 750] \* $0.16 = $269.12 /month
 
-In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings, together with streamlined development workflows, improved collaboration, and fewer operational complexities.
+In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings.
 
 <ComputeCalculator
 className="mt-10"
@@ -188,12 +207,31 @@ textSize="md"
 
 Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling), and don’t hesitate to ask us about the migration assistance we offer. **We not only help you move production safely but also waive all migration-related fees.**
 
+<TestimonialsWrapper>
+  
+<Testimonial
+text="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS."
+author={{
+  name: 'Cody Jenkins',
+  company: 'Head of Engineering at Invenco',
+}}
+/>
+
+<Testimonial
+text="We had to overprovision Aurora to handle our spiky traffic, and even then, the writer database would get overwhelmed. We provision 10x more than we need on average to keep things running smoothly."
+author={{
+  name: 'Jonathan Reyes',
+  company: 'Principal Engineer at Dispatch',
+}}
+url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+/>
+
+</TestimonialsWrapper>
+
 ## Getting started
 
 We’ve built tutorials that teach you **how to run a nightly dump from RDS to Neon** so you can sync your non-prod environment. We also cover how to apply changes back to production once you’ve tested them in Neon.
 
 - [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
-- [Learn how to deploy a change tested in Neon to prod in RDS](/blog/neon-twin-deploy-workflow)
-- [Use this app to easily build your dump/restore workflows](/dev-for-rds) (click and scroll down until you see `Neon Twin`)
 
-<CTA title="Get 1:1 help" description="We’re also running a pilot program where we offer close assistance to help you set up your non-prod environments in Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
+<CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Contact us" buttonUrl="/contact-sales" />

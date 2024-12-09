@@ -5,7 +5,7 @@ const CHANGELOG_BASE_PATH = `${DOCS_BASE_PATH}${CHANGELOG_SLUG}/`;
 const CHANGELOG_DIR_PATH = `content/${CHANGELOG_SLUG}`;
 const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}/;
 
-const POSTGRES_DOCS_BASE_PATH = '/docs/postgres/';
+const POSTGRESQL_BASE_PATH = '/postgresql/';
 
 const VERCEL_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -25,7 +25,7 @@ module.exports = {
   CHANGELOG_BASE_PATH,
   CHANGELOG_DIR_PATH,
   CHANGELOG_SLUG_REGEX,
-  POSTGRES_DOCS_BASE_PATH,
+  POSTGRESQL_BASE_PATH,
   VERCEL_URL,
   MAX_TITLE_LENGTH,
   HOME_MENU_ITEM,
