@@ -40,7 +40,7 @@ author={{
 
 ### Database Branching
 
-![Database Branching](/use-cases/branching.jpg?branching)
+![Database Branching](/use-cases/branching.jpg)
 
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them like git branches, for development, testing, and preview environments.
 

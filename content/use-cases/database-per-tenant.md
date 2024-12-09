@@ -50,6 +50,8 @@ author={{
 
 Neon is Postgres with serverless architecture. With rapid provisioning, scale-to-zero, and robust API support, you can scale database-per-user architectures without management overhead or big budgets. Just create **one project per customer** via the Neon API.
 
+![Database-per-user](/use-cases/database-per-user.jpg)
+
 ### One project per customer
 
 A Neon project is the logical equivalent of an "instance" but without the management heaviness:
@@ -76,6 +78,8 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 - Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
+
+![A dedicated project for dev/test](/use-cases/dev-test.jpg)
 
 ## Neon for B2B SaaS: Data isolation with easy scalability
 
