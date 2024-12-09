@@ -488,6 +488,12 @@
               slug: guides/neon-authorize-azure-ad
             - title: Descope
               slug: guides/neon-authorize-descope
+            - title: Firebase
+              slug: guides/neon-authorize-firebase
+            - title: GCP Identity Platform
+              slug: guides/neon-authorize-gcp-cloud-identity-platform
+            - title: Google Identity
+              slug: guides/neon-authorize-google-identity
     - title: Integrations
       icon: integrations
       slug: guides/integrations
