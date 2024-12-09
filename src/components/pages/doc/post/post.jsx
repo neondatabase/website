@@ -14,6 +14,7 @@ import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import LINKS from 'constants/links';
 
 import Tag from '../tag';
 
@@ -40,15 +41,28 @@ Changelog.propTypes = {
   ).isRequired,
 };
 
-const modalTypes = {
-  'Migrate to Neon': 'migrate',
-  Support: 'support',
-};
-
-const getModalPostType = (breadcrumbs) => {
-  const breadcrumb = breadcrumbs.find((breadcrumb) => modalTypes[breadcrumb.title]);
-  return breadcrumb ? modalTypes[breadcrumb.title] : null;
-};
+const MODALS = [
+  {
+    type: 'migrate',
+    breadcrumb: 'Migrate to Neon',
+    title: 'Migrating to Neon?',
+    description: 'Our team can help minimize downtime.',
+    link: {
+      title: 'Get migration assistance',
+      url: LINKS.migrationAssistance,
+    },
+  },
+  {
+    type: 'support',
+    breadcrumb: 'Support',
+    title: 'Need help now?',
+    description: 'Our team is here to assist you anytime!',
+    link: {
+      title: 'Get support',
+      url: LINKS.consoleSupport,
+    },
+  },
+];
 
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
@@ -64,7 +78,9 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modalPostType = getModalPostType(breadcrumbs);
+  const modal = MODALS.find((modal) =>
+    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+  );
 
   return (
     <>
@@ -152,7 +168,7 @@ const Post = ({
         </div>
       </div>
 
-      {modalPostType && <Modal type={modalPostType} />}
+      {modal && <Modal {...modal} />}
     </>
   );
 };
