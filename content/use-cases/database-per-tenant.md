@@ -65,6 +65,10 @@ Management is simplified vs other Postgres services because,
 - New projects are ready in milliseconds, and you can manage everything programmatically via the API.
 - You only pay for the projects that are active thanks to scale-to-zero.
 
+<Admonition type="note" title="Tip">
+You can also migrate schemas across thousands of projects [automatically.](https://neon.tech/blog/migrating-schemas)
+</Admonition>
+
 ### A dedicated project for dev/test
 
 To take advantage of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:

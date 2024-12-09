@@ -4,12 +4,17 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2024-11-20T13:07:05.193Z'
+tag: beta
+updatedOn: '2024-12-04T13:30:28.565Z'
 ---
 
-<PrivatePreview />
-
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
+
+<Admonition type="note" title="Public Beta">
+This feature is in Public Beta. Any member of a Neon Organization account can apply to participate in this Public Beta by requesting access via the **Organization Settings** page in the Console. Please note that Neon will enable billing for the feature at the end of the Public Beta period.
+
+![Requesting Private Networking Access](/docs/guides/private_networking_request_access.png)
+</Admonition>
 
 ## Overview
 
@@ -18,8 +23,6 @@ In a standard setup, the client application connects to a Neon database over the
 With **Neon Private Networking**, you can connect to your database via AWS PrivateLink instead of the open internet. In this setup, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon proxy instance that is not accessible from the public internet. This endpoint service is available only within the same AWS region as your client application and is restricted to Neon-authorized customers. With **Neon Private Networking**, all traffic between the client application and the Neon database stays within AWS's private network, rather than crossing the public internet.
 
 ![Neon Private Networking diagram](/docs/guides/neon_private_access.jpg)
-
-## Prerequisites
 
 ## Prerequisites
 
@@ -110,4 +113,8 @@ To configure Neon Private Networking, perform the following steps:
      Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version of this feature, there will be a dedicated option in the Neon Console for this purpose.
     </Admonition>
 
-    <NeedHelp />
+## Limits
+
+The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed in the preceding section.
+
+<NeedHelp />

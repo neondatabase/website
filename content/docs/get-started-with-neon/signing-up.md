@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-10-22T15:41:04.370Z'
+updatedOn: '2024-12-05T09:28:49.009Z'
 ---
 
 <InfoBlock>
@@ -18,7 +18,7 @@ updatedOn: '2024-10-22T15:41:04.370Z'
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="https://neon.tech/docs/introduction/branching">About branching</a>
+<a href="/docs/introduction/branching">About branching</a>
 <a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
 <a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
 </DocsList>
@@ -36,6 +36,9 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
+
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
@@ -137,7 +140,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 1. **Authenticate with Neon**
 
-   Launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
    neon auth
@@ -163,7 +166,7 @@ There are other branch creation options available when using the CLI. See [Creat
 
 With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
 
-You can use the **SQL Editor** for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+You can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
 <Tabs labels={["Mac", "Linux", "Windows"]}>
 
@@ -268,7 +271,7 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
 ## Step 8 - Reset your dev branch to main
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/using-api-keys
   - /docs/get-started-with-neon/api-keys
-updatedOn: '2024-08-13T15:31:30.507Z'
+updatedOn: '2024-12-04T16:09:42.523Z'
 ---
 
 Most actions performed in the Neon Console can be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
@@ -23,7 +23,7 @@ To generate an API key:
 4. Enter a name for the API key.
 5. Click **Create** and copy the generated key.
 
-Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Account settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/). If you lose an API key, revoke it and generate a new one.
+Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Account settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/) or [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault). If you lose an API key, revoke it and generate a new one.
 
 ## Revoke an API key
 

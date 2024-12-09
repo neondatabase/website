@@ -3,7 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2024-11-19T13:09:02.037Z'
+updatedOn: '2024-12-03T17:00:08.182Z'
 ---
 
 <InfoBlock>
@@ -199,19 +199,27 @@ RLS can also act as a backstop or final guarantee to prevent data leaks. Even if
 
 Here is a non-exhaustive list of authentication providers. The table shows which providers Neon Authorize supports, links out to provider documentation for details, and the discovery URL pattern each provider typically uses.
 
-| Provider               | Supported? | JWKS URL                                                                                                                                                       | Documentation                                                                                                                 |
-| ---------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Clerk**              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourClerkDomain}/.well-known/jwks.json`</span>                                       | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
-| **Stack Auth**         | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`</span>         | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
-| **Auth0**              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourDomain}/.well-known/jwks.json`</span>                                            | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
-| **Firebase Auth**      | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
-| **Stytch**             | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{live_or_test}.stytch.com/v1/sessions/jwks/{project-id}`</span>                       | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
-| **Keycloak**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`</span> | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
-| **Supabase Auth**      | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
-| **Amazon Cognito**     | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`</span>         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
-| **Azure AD**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                      | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
-| **GCP Cloud Identity** | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
-| **Descope Auth**       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>               | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
+| Provider               | Supported? | JWKS URL                                                                                                                                                           | Documentation                                                                                                                 |
+| ---------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Clerk**              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourClerkDomain}/.well-known/jwks.json`</span>                                           | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
+| **Stack Auth**         | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`</span>             | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
+| **Auth0**              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourDomain}/.well-known/jwks.json`</span>                                                | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
+| **Firebase Auth**      | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com`</span> | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               |
+| **Stytch**             | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{live_or_test}.stytch.com/v1/sessions/jwks/{project-id}`</span>                           | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
+| **Keycloak**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`</span>     | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
+| **Supabase Auth**      | ❌         | Not supported until Supabase [supports asymmetric keys](https://github.com/orgs/supabase/discussions/29289).                                                       | N/A                                                                                                                           |
+| **Amazon Cognito**     | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`</span>             | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
+| **Azure AD**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
+| **GCP Cloud Identity** | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/oauth2/v3/certs`</span>                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
+| **Descope Auth**       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
+
+### JWT Audience Checks
+
+Neon Authorize can also verify the `aud` claim in the JWT. This is useful if you want to restrict access to a specific application or service.
+
+For authentication providers such as Firebase Auth and GCP Cloud Identity, Neon Authorize **mandates** the definition of an expected audience. This is because these providers share the same JWKS URL for all of their projects.
+
+The configuration of the expected audience can be done via the Neon Authorize UI or via the [Neon Authorize API](https://api-docs.neon.tech/reference/addprojectjwks).
 
 ## Sample applications
 

@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-20T21:33:15.906Z'
+updatedOn: '2024-11-30T11:53:56.065Z'
 ---
 
 <InfoBlock>
@@ -16,7 +16,7 @@ updatedOn: '2024-11-20T21:33:15.906Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/guides/vercel-previews-integration">Neon Postgres Previews Integration</a>
-<a href="https://neon.tech/docs/introduction/plans">Neon plans</a>
+<a href="/docs/introduction/plans">Neon plans</a>
 </DocsList>
 </InfoBlock>
 
@@ -28,7 +28,7 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 
 - Installing the integration creates a Neon account for you if you do not have one already.
 - Billing for Neon Postgres is managed in Vercel, not Neon.
-- You get access to the same features and [Neon pricing plans](https://neon.tech/docs/introduction/plans) as users who register with Neon directly, including access to your database from the Neon Console.
+- You get access to the same features and [Neon pricing plans](/docs/introduction/plans) as users who register with Neon directly, including access to your database from the Neon Console.
 
 <Admonition type="note">
 The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a first-party native integration.
@@ -53,12 +53,12 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    <Admonition type="note">
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-   | Plan     | Compute Size    | Suspend after ([Autosuspend](https://neon.tech/docs/introduction/auto-suspend)) |
-   | :------- | :-------------- | :------------------------------------------------------------------------------ |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                                             |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                                      |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                                       |
-   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                                       |
+   | Plan     | Compute Size    | Suspend after ([Autosuspend](/docs/introduction/auto-suspend)) |
+   | :------- | :-------------- | :------------------------------------------------------------- |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                            |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                     |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                      |
+   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                      |
 
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
@@ -104,8 +104,8 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
-  - [Project transfer](https://neon.tech/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
-  - [Project collaborators](https://neon.tech/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
+  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
+  - [Project collaborators](/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
 

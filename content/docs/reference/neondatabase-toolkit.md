@@ -3,7 +3,7 @@ title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
 enableTableOfContents: true
-updatedOn: '2024-11-19T20:20:15.583Z'
+updatedOn: '2024-11-30T11:53:56.079Z'
 ---
 
 <InfoBlock>
@@ -15,7 +15,7 @@ updatedOn: '2024-11-19T20:20:15.583Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/reference/typescript-sdk">TypeScript SDK for the Neon API</a>
-  <a href="https://neon.tech/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api-reference">Neon API Reference</a>
   <a href="https://neon.tech/blog/why-neondatabase-toolkit">Why we built @neondatabase/toolkit</a>
 </DocsList>
 
