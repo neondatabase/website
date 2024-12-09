@@ -176,6 +176,7 @@ const Sidebar = async ({ isDarkTheme }) => {
         to={LINKS.signup}
         theme="primary"
         tag_name="Header"
+        analyticsEvent="header_sign_up_clicked"
       >
         Sign Up
       </Button>
