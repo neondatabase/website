@@ -11,11 +11,11 @@ updatedOn: '2024-12-03T10:00:00.000Z'
 </DocsList>
 </InfoBlock>
 
-GCP Identity Platform handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the Row-Level Security policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension pg_session_jwt, which you'll install as part of this guide.
+Use GCP Identity Platform with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using GCP Identity Platform for user authentication. It shows you how to integrate GCP Identity Platform with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-GCP Identity Platform Authentication handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt).
+GCP Identity Platform handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt).
 
 ## Prerequisites
 
@@ -219,7 +219,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-Here's how to run authenticated queries using Firebase Auth tokens:
+With RLS policies in place, you can now query the database using JWTs from Firebase, restricting access based on the user's identity. Here's how to run authenticated queries from both the backend and the frontend of our application using Firebase Auth Tokens. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 

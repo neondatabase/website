@@ -492,6 +492,8 @@
               slug: guides/neon-authorize-firebase
             - title: GCP Identity Platform
               slug: guides/neon-authorize-gcp-cloud-identity-platform
+            - title: Google Identity
+              slug: guides/neon-authorize-google-identity
     - title: Integrations
       icon: integrations
       slug: guides/integrations
