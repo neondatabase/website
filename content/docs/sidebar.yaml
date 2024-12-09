@@ -679,6 +679,8 @@
               slug: ai/langchain
             - title: LlamaIndex
               slug: ai/llamaindex
+            - title: Inngest
+              slug: ai/inngest
         - title: Prepare your AI app for production
           items:
             - title: Optimize pgvector search
