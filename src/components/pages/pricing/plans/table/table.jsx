@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -10,7 +11,7 @@ import Tooltip from 'components/shared/tooltip';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/check.svg';
 
-import tableData from '../data/plans.json';
+import tableDataOriginal from '../data/plans.json';
 
 // Styles to set fixed height for table cells
 const rowClass = {
@@ -23,6 +24,7 @@ const DEFAULT_ROWS_TO_SHOW = 8;
 
 const TableHeading = ({
   className,
+  planId,
   label,
   price,
   buttonUrl,
@@ -30,6 +32,8 @@ const TableHeading = ({
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
+  const posthog = usePostHog();
+
   // placeholder for the labels column
   if (isLabelsColumn) {
     return <div className="invisible h-[120px]" aria-hidden />;
@@ -58,6 +62,13 @@ const TableHeading = ({
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
         tag_name={`Details Table Top > ${label}`}
+        onClick={() => {
+          posthog.capture('ui_interaction', {
+            action: 'pricing_page_get_started_clicked',
+            plan: planId,
+            place: 'table_heading',
+          });
+        }}
       >
         {buttonText}
       </Button>
@@ -67,6 +78,7 @@ const TableHeading = ({
 
 TableHeading.propTypes = {
   className: PropTypes.string,
+  planId: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
@@ -85,6 +97,37 @@ const getColumnAlignment = (item) => {
 };
 
 const Table = () => {
+  const posthog = usePostHog();
+  const isComputePriceRaised =
+    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+
+  const tableData = useMemo(() => {
+    if (isComputePriceRaised) {
+      return {
+        ...tableDataOriginal,
+        cols: tableDataOriginal.cols.map((col) => {
+          if (col.feature.title === 'Compute hours') {
+            const updatedCol = { ...col };
+
+            for (const [key, value] of Object.entries(col)) {
+              if (value.info === 'Additional at $0.16 per compute hour') {
+                updatedCol[key] = {
+                  ...value,
+                  info: 'Additional at $0.24 per compute hour',
+                };
+              }
+            }
+
+            return updatedCol;
+          }
+          return col;
+        }),
+      };
+    }
+
+    return tableDataOriginal;
+  }, [isComputePriceRaised]);
+
   const labelList = tableData.headings;
   const [currentRow, setCurrentRow] = useState('');
   const [tableRows, setTableRows] = useState(tableData.cols.slice(0, DEFAULT_ROWS_TO_SHOW));
@@ -93,7 +136,7 @@ const Table = () => {
     if (window.location.hash === '#plans') {
       setTableRows(tableData.cols);
     }
-  }, []);
+  }, [tableData.cols]);
 
   useEffect(() => {
     const cells = document.querySelectorAll(`[data-row-id]`);
@@ -126,7 +169,7 @@ const Table = () => {
         }
         return acc;
       }, []),
-    []
+    [tableData.cols]
   );
 
   return (
@@ -151,6 +194,7 @@ const Table = () => {
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:ml-5')}
+                planId={key}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isHighlightedColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
@@ -295,6 +339,13 @@ const Table = () => {
                   theme={isHighlightedColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
                   tag_name={`Details Table Bottom > ${labelList[key].label}`}
+                  onClick={() => {
+                    posthog.capture('ui_interaction', {
+                      action: 'pricing_page_get_started_clicked',
+                      plan: key,
+                      place: 'table_footer',
+                    });
+                  }}
                 >
                   {labelList[key].buttonText}
                 </Button>

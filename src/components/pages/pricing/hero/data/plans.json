@@ -1,8 +1,8 @@
 [
   {
+    "planId": "free",
     "type": "Free Plan",
     "price": 0,
-    "headerLink": null,
     "description": "To kickstart your projects, no credit card required.",
     "features": [
       {
@@ -38,18 +38,17 @@
       "url": "https://console.neon.tech/signup",
       "text": "Start for free",
       "theme": "white-outline",
-      "event": "Hero Free Tier Panel"
+      "event": "Hero Free Tier Panel",
+      "analyticsEvent": "pricing_page_get_started_with_free_plan_clicked"
     }
   },
   {
+    "planId": "launch",
     "type": "Launch",
     "highlighted": true,
     "price": 19,
     "priceFrom": true,
-    "headerLink": {
-      "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
-      "text": "Pay via AWS marketplace"
-    },
+    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
     "description": "The resources, features, and support you need to launch.",
     "features": [
       {
@@ -63,6 +62,7 @@
         "info": "Extra: $1.75 per GB"
       },
       {
+        "id": "compute_time",
         "icon": "clock",
         "title": [
           "300 ",
@@ -88,17 +88,16 @@
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "primary",
-      "event": "Hero Launch Panel"
+      "event": "Hero Launch Panel",
+      "analyticsEvent": "pricing_page_get_started_with_launch_plan_clicked"
     }
   },
   {
+    "planId": "scale",
     "type": "Scale",
     "price": 69,
     "priceFrom": true,
-    "headerLink": {
-      "url": "https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa",
-      "text": "Pay via AWS marketplace"
-    },
+    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
     "description": "More capacity and functionality for scaling production workloads.",
     "features": [
       {
@@ -112,6 +111,7 @@
         "info": "Extra: $1.5 per GB"
       },
       {
+        "id": "compute_time",
         "icon": "clock",
         "title": [
           "750 ",
@@ -131,26 +131,22 @@
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
-      "features": [
-        { "title": "IP Allow Rules" },
-        { "title": "Datadog integration" }
-      ]
+      "features": [{ "title": "IP Allow Rules" }, { "title": "Datadog integration" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "white-outline",
-      "event": "Hero Scale Panel"
+      "event": "Hero Scale Panel",
+      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
   },
   {
+    "planId": "business",
     "type": "Business",
     "price": 700,
     "priceFrom": true,
-    "headerLink": {
-      "url": "/migration-assistance",
-      "text": "Get migration help"
-    },
+    "headerLinks": "<a href='/migration-assistance'>Get migration help</a>",
     "description": "For larger workloads, with best compliance and security. ",
     "features": [
       {
@@ -164,6 +160,7 @@
         "info": "Extra: $0.5 per GB"
       },
       {
+        "id": "compute_time",
         "icon": "clock",
         "title": [
           "1000 ",
@@ -199,7 +196,8 @@
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
       "theme": "white-outline",
-      "event": "Hero Enterprise Panel"
+      "event": "Hero Enterprise Panel",
+      "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }
   }
 ]

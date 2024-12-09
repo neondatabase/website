@@ -3,7 +3,7 @@ title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.071Z'
+updatedOn: '2024-12-04T15:33:06.650Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
@@ -67,7 +67,9 @@ The following diagram shows how your primary compute and read replicas send read
 
 Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the most recent changes to maintain data consistency.
 
-Neon supports creating read replicas in the same region as your database. Cross-region read replicas are currently not supported.
+## Cross-region support
+
+Neon only supports creating read replicas **in the same region** as your database. However, a cross-region replica setup can be achieved by creating a Neon project in a different region and replicating data to that project via [logical replication](/docs/guides/logical-replication-guide). For example, you can replicate data from a Neon project in a US region to a Neon project in a European region following our [Neon-to-Neon logical replication guide](/docs/guides/logical-replication-neon-to-neon). Read-only access to the replicated database can be managed at the application level.
 
 ## Use cases
 

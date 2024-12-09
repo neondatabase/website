@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: false
-updatedOn: '2024-10-26T08:44:49.113Z'
+updatedOn: '2024-12-04T13:30:28.562Z'
 ---
 
 ### Autoscaling
@@ -140,5 +140,15 @@ Protect your production or sensitive data.
 <DetailIconCards>
 
 <a href="/docs/guides/protected-branches" description="Learn how to use Neon's protected branches feature to secure access to critical data" icon="respond-arrow">Configure protected branches</a>
+
+</DetailIconCards>
+
+### Private Networking
+
+Secure your database connections with private access.
+
+<DetailIconCards>
+
+<a href="/docs/guides/private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
 
 </DetailIconCards>
