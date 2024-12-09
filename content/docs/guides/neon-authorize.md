@@ -69,8 +69,8 @@ In a traditional setup, you might handle authorization for a function directly i
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
-  const { userId } = auth(); // Gets the user's ID from the JWT or session
-  const authToken = getToken();
+  const { userId, getToken } = auth(); // Gets the user's ID and getToken from the JWT or session
+  const authToken = await getToken(); // Await the getToken function
 
   if (!userId) throw new Error('No user logged in'); // No user authenticated
   if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
@@ -123,18 +123,22 @@ CREATE POLICY "create todos" ON "todos"
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
-export async function insertTodo({ newTodo }: { newTodo: string }) {
-  const authToken = getToken();
-  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
+export async function insertTodo(newTodo: { newTodo: string }) {
+  const { getToken } = auth();
+  const authToken = await getToken();
 
-  return db.$withAuth(authToken).insert(schema.todos).values({
-    task: newTodo.newTodo,
-    isComplete: false,
+  await fetchWithDrizzle(async (db) => {
+    return db.insert(schema.todos).values({
+      task: newTodo.newTodo,
+      isComplete: false,
+    });
   });
+
+  revalidatePath('/');
 }
 ```
 
-This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM like Drizzleto centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
+This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM like Drizzle to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
@@ -206,7 +210,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Supabase Auth**      | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
 | **Amazon Cognito**     | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`</span>         | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
 | **Azure AD**           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                      | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
-| **GCP Cloud Identity** | ��         | N/A                                                                                                                                                            | N/A                                                                                                                           |
+| **GCP Cloud Identity** | ❌         | N/A                                                                                                                                                            | N/A                                                                                                                           |
 | **Descope Auth**       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>               | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
 
 ## Sample applications

@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 <InfoBlock>
 <DocsList title="What you'll learn">
-<p>How to simplify Row-Level Security using crudPolicy</p>
+<p>How to simplify Row-Level Security using `crudPolicy`</p>
 <p>Common RLS patterns with Drizzle</p>
 </DocsList>
 
