@@ -2,7 +2,7 @@
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
-updatedOn: '2024-10-01T16:52:01.969Z'
+updatedOn: '2024-12-01T12:02:34.710Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
@@ -11,7 +11,7 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-<CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", "Ruby", "Rust", "Go"]}>
+<CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", ".NET", "Ruby", "Rust", "Go"]}>
 
 ```bash
 # psql example connection string
@@ -89,6 +89,25 @@ with conn.cursor() as cur:
 
 # Close the connection
 conn.close()
+```
+
+```.NET
+# .NET example
+
+## Connection string
+"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf"
+
+## with SSL
+"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
+
+## Entity Framework (appsettings.json)
+{
+  ...
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
+  },
+  ...
+}
 ```
 
 ```ruby

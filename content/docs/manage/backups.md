@@ -1,10 +1,22 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2024-11-15T15:55:44.079Z'
+updatedOn: '2024-12-06T12:16:56.091Z'
 ---
 
-Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>About built-in backups with point-in-time restore</p>
+<p>Creating backups using pg_dump</p>
+<p>How to automate backups with GitHub Actions</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/introduction/point-in-time-restore">Branch reset and restore</a>
+  <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
+</DocsList>
+
+</InfoBlock>
 
 ## Built-in backups with Neon's point-in-time restore feature
 
@@ -17,7 +29,7 @@ For information about creating a point-in-time restore branch, see [Branching â€
 You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instance.
 
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
+Avoid using `pg_dump` over a [pooled Neon connection](/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
 </Admonition>
 
 This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.

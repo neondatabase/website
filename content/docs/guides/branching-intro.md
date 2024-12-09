@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2024-11-14T13:15:10.565Z'
+updatedOn: '2024-11-30T11:53:56.057Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -43,7 +43,7 @@ Create a branch for each preview deployment with the Neon Postgres Previews Inte
 
 <DetailIconCards>
 
-<a href="https://neon.tech/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
+<a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
 
 <a href="https://neon.tech/blog/neon-vercel-integration" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="vercel">Preview deployments with Vercel</a>
 

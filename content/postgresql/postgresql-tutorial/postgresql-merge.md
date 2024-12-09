@@ -12,297 +12,216 @@ previousLink:
 nextLink:
   title: 'PostgreSQL Transaction'
   slug: 'postgresql-tutorial/postgresql-transaction'
+tag: new
 ---
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `MERGE` statement to conditionally insert, update, and delete rows of a table.
+**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MERGE` statement to conditionally insert, update, and delete rows of a table.
 
 ## Introduction to the PostgreSQL MERGE statement
 
-PostgreSQL 15 introduced the `MERGE` statement that simplifies data manipulation by combining [`INSERT`](postgresql-insert), [`UPDATE`](postgresql-update), and [`DELETE`](postgresql-delete) operations into a single statement. The `MERGE` statement is often referred to as [`UPSERT`](postgresql-upsert) statement.
+Have you ever needed to update a table but weren't sure whether to insert new records or update existing ones? PostgreSQL's `MERGE` command solves this common problem. Think of `MERGE` as a smart helper that can look at your data and decide whether to add new records, update existing ones, or even delete records, all in a single command.
 
-If you use an earlier version, you should consider the `INSERT... ON CONFLICT` statement
+## Basic Concepts
 
-Here’s the syntax of the `MERGE` statement:
+Before we dive into `MERGE`, let's understand some basic terms:
+
+- **Target Table**: The table you want to modify
+- **Source Table**: The table containing your new or updated data
+- **Match Condition**: The rule that determines if records match between your tables
+
+## Basic MERGE Syntax
+
+Here's the basic structure of a `MERGE` command:
 
 ```sql
 MERGE INTO target_table
-USING source_query
-ON merge_condition
-WHEN MATCH [AND condition] THEN {merge_update | merge_delete | DO NOTHING }
-WHEN NOT MATCHED [AND condition] THEN { merge_insert | DO NOTHING };
-```
-
-In this syntax:
-
-- `target_table` is the table you want to modify data (`INSERT`, `UPDATE`, and `DELETE`).
-- `source_query` is a source table or a [SELECT](postgresql-select) statement that provides the data for the merge operation.
-- `ON merge_condition`: This clause specifies the conditions for matching rows between the source and target tables.
-- `WHEN MATCHED THEN`: This clause defines the statement on rows that match the merge condition. The condition provides additional conditions for performing either update or delete statements. If you don’t want to do anything for the matching rows, you can use the `DO` `NOTHING` option.
-- `WHEN NOT MATCHED THEN`: This clause defines a statement on rows that don’t match the merge condition. You can specify either insert statement to add a new row to the target table or use `DO` `NOTHING` to ignore the matching rows.
-
-Please note that `merge_insert`, `merg_update`, and `merge_delete` statements are slightly different from the regular `INSERT`, `UPDATE`, and `DELETE` statements.
-
-The `merge_insert` is the `INSERT` statement without the table name:
-
-```sql
-INSERT (column1, ...)
-VALUES(value1,...);
-```
-
-The `merge_update` statement is the `UPDATE` statement without the table name and `WHERE` clause:
-
-```sql
-UPDATE SET
-   column1 = value1,
-   column2 =value2,
-   ...;
-```
-
-The `merge_delete` statement is the only `DELETE` keyword:
-
-```sql
-DELETE
-```
-
-Once completed successfully, the `MERGE` statement returns the following command tag:
-
-```sql
-MERGE total_count
-```
-
-In this tag, the `total_acount` is the total number of rows inserted, updated, or deleted. If the `total_count` is zero, it means that no rows were changed.
-
-The `MERGE` statement can be useful for synchronizing data between tables, allowing you to efficiently keep a target table up\-to\-date with changes in a source table.
-
-## PostgreSQL MERGE statement examples
-
-Let’s explore some examples of using the `MERGE` statement.
-
-### 0\) Setting up sample tables
-
-First, [create two tables](postgresql-create-table) called `leads` and `customers`:
-
-```sql
-CREATE TABLE leads(
-    lead_id serial PRIMARY key,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    active bool NOT NULL DEFAULT TRUE
-);
-CREATE TABLE customers(
-    customer_id serial PRIMARY key,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    active bool NOT NULL DEFAULT TRUE
-);
-```
-
-We’ll use the `MERGE` statement to merge the data of the two tables.
-
-### 1\) Using the PostgreSQL MERGE statement to insert rows from the source table into the table
-
-First, [insert two rows](postgresql-insert-multiple-rows) into the `leads` table:
-
-```sql
-INSERT INTO leads(name, email)
-VALUES
-   ('John Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-   ('Jane Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)')
-RETURNING *;
-```
-
-Output:
-
-```text
- lead_id |   name   |       email        | active
----------+----------+--------------------+--------
-       1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-       2 | Jane Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-(2 rows)
-```
-
-Second, insert rows from the `leads` table into the `customers` table using the `MERGE` statement:
-
-```sql
-MERGE INTO customers c
-USING leads l ON c.email = l.email
+USING source_table
+ON match_condition
+WHEN MATCHED AND condition THEN
+    UPDATE SET column1 = value1, column2 = value2
+WHEN MATCHED AND NOT condition THEN
+    DELETE
 WHEN NOT MATCHED THEN
-   INSERT (name, email)
-   VALUES(l.name, l.email);
+    INSERT (column1, column2) VALUES (value1, value2)
+RETURNING merge_action(), target_table.*;
 ```
 
-In this statement, we use the `email` columns of the `leads` and `customers` tables for the merge condition.
+This `MERGE` statement performs three conditional actions on `target_table` based on rows from `source_table`:
 
-If the `email` in the `leads` table does not match the `email` in `customers` table, the `MERGE` statement inserts a new row into the `customers` table.
+1. **Update rows**: If a match is found (`ON match_condition`) and `condition` is true, it updates `column1` and `column2` in `target_table`.
+2. **Delete rows**: If a match is found but `condition` is false, it deletes the matching rows in `target_table`.
+3. **Insert rows**: If no match is found, it inserts new rows into `target_table` using values from `source_table`.
+4. The `RETURNING` clause provides details of the operation (`merge_action()`) and the affected rows.
 
-Output:
+## Key Features in PostgreSQL 17
+
+The new RETURNING clause support in PostgreSQL 17 offers several advantages:
+
+1. **Action Tracking**: The `merge_action()` function tells you exactly what happened to each row
+2. **Complete Row Access**: You can return both old and new values for affected rows
+3. **Immediate Feedback**: No need for separate queries to verify the results
+
+## Setting Up Our Example
+
+Let's create a sample database tracking a company's products and their inventory status:
 
 ```sql
-MERGE 2
+-- Create the main products table
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE,
+    price DECIMAL(10,2),
+    stock INTEGER,
+    status TEXT,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert some initial data
+INSERT INTO products (name, price, stock, status) VALUES
+    ('Laptop', 999.99, 50, 'active'),
+    ('Keyboard', 79.99, 100, 'active'),
+    ('Mouse', 29.99, 200, 'active');
+
+-- Create a table for our updates
+CREATE TABLE product_updates (
+    name TEXT,
+    price DECIMAL(10,2),
+    stock INTEGER,
+    status TEXT
+);
+
+-- Insert mixed update data (new products, updates, and discontinuations)
+INSERT INTO product_updates VALUES
+    ('Laptop', 1099.99, 75, 'active'),      -- Update: price and stock change
+    ('Monitor', 299.99, 30, 'active'),      -- Insert: new product
+    ('Keyboard', NULL, 0, 'discontinued'),  -- Delete: mark as discontinued
+    ('Headphones', 89.99, 50, 'active');    -- Insert: another new product
 ```
 
-The output indicates that two rows have been inserted successfully.
+## Using MERGE with RETURNING
 
-Third, retrieve data from the `customers` table:
+Now let's see how PostgreSQL 17's enhanced `MERGE` command can handle all three operations (`INSERT`, `UPDATE`, `DELETE`) while providing detailed feedback through the RETURNING clause:
 
 ```sql
-SELECT * FROM customers;
+MERGE INTO products p
+USING product_updates u
+ON p.name = u.name
+WHEN MATCHED AND u.status = 'discontinued' THEN
+    DELETE
+WHEN MATCHED AND u.status = 'active' THEN
+    UPDATE SET
+        price = COALESCE(u.price, p.price),
+        stock = u.stock,
+        status = u.status,
+        last_updated = CURRENT_TIMESTAMP
+WHEN NOT MATCHED AND u.status = 'active' THEN
+    INSERT (name, price, stock, status)
+    VALUES (u.name, u.price, u.stock, u.status)
+RETURNING
+    merge_action() as action,
+    p.product_id,
+    p.name,
+    p.price,
+    p.stock,
+    p.status,
+    p.last_updated;
 ```
 
-Output:
+## Understanding the Output
 
-```text
- customer_id |   name   |       email        | active
--------------+----------+--------------------+--------
-           1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-           2 | Jane Doe | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-(2 rows)
+The `RETURNING` clause will provide detailed information about each operation:
+
+```
+ action  | product_id |    name    |  price   | stock |   status    |      last_updated
+---------+------------+------------+----------+-------+-------------+------------------------
+ UPDATE  |     1      | Laptop     | 1099.99  |   75  | active      | 2024-12-04 17:41:58.226807
+ INSERT  |     4      | Monitor    |  299.99  |   30  | active      | 2024-12-04 17:41:58.226807
+ DELETE  |     2      | Keyboard   |   79.99  |  100  | active      | 2024-12-04 17:41:47.816064
+ INSERT  |     5      | Headphones |   89.99  |   50  | active      | 2024-12-04 17:41:58.226807
 ```
 
-### 2\) Using the MERGE statement to update and insert rows from the source table into the table
+Let's break down what happened:
 
-First, [insert a new row](postgresql-insert) into the `leads` table and [update](postgresql-update) the `name` of the row with id 2:
+1. **`UPDATE`**: The Laptop's price and stock were updated
+2. **`DELETE`**: The Keyboard is deleted from the products table
+3. **`INSERT`**: New Monitor and Headphones products were added
+
+We can confirm the changes by querying the products table:
 
 ```sql
-INSERT INTO leads(name, email)
-VALUES('Alice Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)');
-
-UPDATE leads
-SET name = 'Jane Gate'
-WHERE lead_id = 2;
+SELECT * FROM products
+ORDER BY product_id;
 ```
 
-Second, retrieve data from the `leads` table:
+```
+ product_id |    name    |  price   | stock |   status    |      last_updated
+------------+------------+----------+-------+-------------+------------------------
+          1 | Laptop     | 1099.99  |   75  | active      | 2024-12-04 17:41:58.226807
+          3 | Mouse      |   29.99  |  200  | active      | 2024-12-04 17:41:47.816064
+          4 | Monitor    |  299.99  |   30  | active      | 2024-12-04 17:41:58.226807
+          5 | Headphones |   89.99  |   50  | active      | 2024-12-04 17:41:58.226807
+```
+
+## Advanced Usage with Conditions
+
+You can add more complex conditions to your `MERGE` statement:
 
 ```sql
-SELECT * FROM leads
-ORDER BY id;
-```
-
-Output:
-
-```text
- lead_id |    name     |          email          | active
----------+-------------+-------------------------+--------
-       1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)      | t
-       2 | Jane Gate   | [[email protected]](../cdn-cgi/l/email-protection.html)      | t
-       3 | Alice Smith | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-(3 rows)
-```
-
-The `leads` table has a modified row with id 2 and a new row with id 3\.
-
-Third, add the new row from `leads` table to the `customers` table and update the `name` and `email` for the updated row:
-
-```sql
-MERGE INTO customers c
-USING leads l ON c.email = l.email
-WHEN NOT MATCHED THEN
-   INSERT (name, email)
-   VALUES(l.name, l.email)
+MERGE INTO products p
+USING (
+    SELECT
+        name,
+        price,
+        stock,
+        status,
+        CASE
+            WHEN price IS NULL AND status = 'discontinued' THEN 'DELETE'
+            WHEN stock = 0 THEN 'OUT_OF_STOCK'
+            ELSE status
+        END as action_type
+    FROM product_updates
+) u
+ON p.name = u.name
+WHEN MATCHED AND u.action_type = 'DELETE' THEN
+    DELETE
+WHEN MATCHED AND u.action_type = 'OUT_OF_STOCK' THEN
+    UPDATE SET
+        status = 'inactive',
+        stock = 0,
+        last_updated = CURRENT_TIMESTAMP
 WHEN MATCHED THEN
-   UPDATE SET
-      name = l.name,
-      email = l.email;
+    UPDATE SET
+        price = COALESCE(u.price, p.price),
+        stock = u.stock,
+        status = u.status,
+        last_updated = CURRENT_TIMESTAMP
+WHEN NOT MATCHED AND u.action_type != 'DELETE' THEN
+    INSERT (name, price, stock, status)
+    VALUES (u.name, u.price, u.stock, u.status)
+RETURNING
+    merge_action() as action,
+    p.*,
+    u.action_type;
 ```
 
-This `MERGE` statement matches the `email` column, insert a new row into to the `customers` table, and updates existing rows in the `customers` table based on data from the `leads` table.
+## Best Practices
 
-Output:
+1. **Handle Source Data Carefully**:
 
-```sql
-MERGE 3
-```
+   - Validate input data before the `MERGE`
+   - Use subqueries to transform or clean data
+   - Consider using CTEs for complex data preparation
 
-The output indicates that three rows have been modified:
+2. **Leverage RETURNING for Validation**:
+   - Include the `merge_action()` for operation tracking
+   - Consider returning both old and new values for logging purposes and validation
 
-- Insert a new row.
-- Update two matching rows.
+## Common Pitfalls to Avoid
 
-### 3\) Using the MERGE statement to update, insert, and delete rows
+1. **Ambiguous Matches**: Ensure your `ON` clause creates unique matches
+2. **NULL Handling**: Use `COALESCE` or `IS NOT DISTINCT FROM` for `NULL` values
+3. **Missing Conditions**: Always handle all possible cases in your `WHEN` clauses
 
-First, insert a new row into the `leads` table:
+## Conclusion
 
-```sql
-INSERT INTO leads(name, email)
-VALUES('Bob Climo', '[[email protected]](../cdn-cgi/l/email-protection.html)');
-```
-
-Second, set the `active` of the lead id 2 to `false`:
-
-```sql
-UPDATE leads
-SET active = false
-WHERE lead_id = 2;
-```
-
-Third, change the email of the lead id 1 to ‘`[[email protected]](../cdn-cgi/l/email-protection.html)`‘:
-
-```sql
-UPDATE leads
-SET email = '[[email protected]](../cdn-cgi/l/email-protection.html)'
-WHERE lead_id = 1;
-```
-
-Fourth, retrieve data from the `leads` table:
-
-```sql
-SELECT * FROM leads
-ORDER BY lead_id;
-```
-
-Output:
-
-```text
- lead_id |    name     |          email          | active
----------+-------------+-------------------------+--------
-       1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)    | t
-       2 | Jane Gate   | [[email protected]](../cdn-cgi/l/email-protection.html)      | f
-       3 | Alice Smith | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-       4 | Bob Climo   | [[email protected]](../cdn-cgi/l/email-protection.html)    | t
-(4 rows)
-```
-
-Fifth, insert the new row from the `leads` table into the `customers` table, delete a row whose active is false from the `customers` table, and update the `name` and `email` for the row whose `active` is true:
-
-```sql
-MERGE INTO customers c
-USING leads l ON c.email = l.email
-WHEN NOT MATCHED THEN
-   INSERT (name, email)
-   VALUES(l.name, l.email)
-WHEN MATCHED AND l.active = false THEN
-   DELETE
-WHEN MATCHED AND l.active = true THEN
-   UPDATE SET
-      name = l.name,
-      email = l.email;
-```
-
-Output:
-
-```sql
-MERGE 4
-```
-
-Finally, retrieve rows from the `customers` table:
-
-```sql
-SELECT * FROM customers;
-```
-
-Output:
-
-```text
- customer_id |    name     |          email          | active
--------------+-------------+-------------------------+--------
-           1 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)      | t
-           3 | Alice Smith | [[email protected]](../cdn-cgi/l/email-protection.html) | t
-           4 | Bob Climo   | [[email protected]](../cdn-cgi/l/email-protection.html)    | t
-           5 | John Doe    | [[email protected]](../cdn-cgi/l/email-protection.html)    | t
-(4 rows)
-```
-
-## Summary
-
-- Use the `MERGE` statement to conditionally insert, update, and delete rows of a table.
+PostgreSQL 17's enhanced `MERGE` command with `RETURNING` clause support provides a powerful tool for data synchronization and maintenance. The ability to perform multiple operations in a single statement while getting immediate feedback makes it an invaluable feature for modern applications.

@@ -5,7 +5,7 @@ subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2024-11-25T14:30:10.287Z'
+updatedOn: '2024-12-03T21:31:16.325Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
@@ -117,22 +117,26 @@ jobs:
   # You can also add a Schema Diff action to compare the database schema on the new
   # branch with the base branch. This action automatically writes the schema differences
   # as a comment on your GitHub pull request, making it easy to review changes.
+
+  # Following the step above, which runs database migrations, you may want to check
+  # for schema changes in your database. We recommend using the following action to
+  # post a comment to your pull request with the schema diff. For this action to work,
+  # you also need to give permissions to the workflow job to be able to post comments
+  # and read your repository contents. Add the following permissions to the workflow job:
   #
-  # steps:
-  #   - name: Schema Diff
-  #     if: |
-  #       github.event_name == 'pull_request' && (
-  #       github.event.action == 'synchronize'
-  #       || github.event.action == 'opened'
-  #       || github.event.action == 'reopened')
-  #     uses: neondatabase/schema-diff-action@v1
-  #     with:
-  #       project_id: ${{ vars.NEON_PROJECT_ID }}
-  #       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
-  #       base_branch: main
-  #       api_key: ${{ secrets.NEON_API_KEY }}
-  #       database: mydatabase
-  #       username: myrole
+  # permissions:
+  #   contents: read
+  #   pull-requests: write
+  #
+  # You can also check out https://github.com/neondatabase/schema-diff-action for more
+  # information on how to use the schema diff action.
+  # You can uncomment the lines below to enable the schema diff action.
+  #      - name: Post Schema Diff Comment to PR
+  #        uses: neondatabase/schema-diff-action@v1
+  #        with:
+  #          project_id: \${{ vars.NEON_PROJECT_ID }}
+  #          compare_branch: preview/pr-\${{ github.event.number }}-\${{ needs.setup.outputs.branch }}
+  #          api_key: \${{ secrets.NEON_API_KEY }}
 
   delete_neon_branch:
     name: Delete Neon Branch
@@ -174,10 +178,11 @@ To view workflow results in GitHub, follow the instructions in [Viewing your wor
 
 ## Building your own GitHub Actions workflow
 
-The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create and delete branch GitHub Actions, which you can find here:
+The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create branch, delete branch, and schema diff GitHub Actions, which you can find here:
 
 - [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
 - [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
+- [Schema Diff](https://github.com/neondatabase/schema-diff-action)
 
 Neon also offers a [Reset a Neon Branch](https://github.com/neondatabase/reset-branch-action) action that allows you to reset a database branch to match the current state of its parent branch. This action is useful in a feature-development workflow, where you may need to reset a development branch to the current state of your production branch before beginning work on a new feature.
 
@@ -205,7 +210,7 @@ reset_neon_branch:
         api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The possibilities are endless. You can integrate Neon's GitHub Actions into your workflow, develop custom actions, or combine Neon's actions with those from other platforms or services.
+You can integrate Neon's GitHub Actions into your workflow, develop custom actions, or combine Neon's actions with those from other platforms or services.
 
 If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart) is a good place to start.
 
@@ -218,6 +223,8 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 </Admonition>
 
 <DetailIconCards>
+
+<a href="https://neon.tech/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
@@ -252,7 +259,7 @@ When connecting a Neon project to a GitHub repository, the GitHub integration pe
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](https://neon.tech/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
+The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
 
 The `NEON_PROJECT_ID` variable defines the Neon project that is connected to the repository. Operations run on Neon via the Neon API or CLI typically require specifying the Neon project ID, as a Neon account may have more than one Neon project.
 

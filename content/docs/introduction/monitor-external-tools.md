@@ -3,7 +3,7 @@ title: Monitoring Neon with external tools
 subtitle: Monitor your Neon Postgres database with external tools such as PgAdmin or
   PgHero
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.413Z'
+updatedOn: '2024-11-30T11:53:56.070Z'
 ---
 
 There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
@@ -84,7 +84,7 @@ Pre-compiled and configured installation packages for pgAdmin 4 are available fo
 
 Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard, as described [above](#how-to-connect-to-your-database-from-pghero).
 
-Enter your connection details as shown [here](https://neon.tech/docs/connect/connect-postgres-gui#connect-to-the-database).
+Enter your connection details as shown [here](/docs/connect/connect-postgres-gui#connect-to-the-database).
 
 Neon uses the default Postgres port: `5432`
 

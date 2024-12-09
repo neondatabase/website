@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
+import ExternalIcon from 'icons/external.inline.svg';
+import GlossaryIcon from 'icons/glossary.inline.svg';
 
 const underlineCommonStyles =
   'relative transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0 before:pointer-events-none';
@@ -45,6 +47,11 @@ const styles = {
   },
 };
 
+const icons = {
+  external: ExternalIcon,
+  glossary: GlossaryIcon,
+};
+
 const Link = forwardRef(
   (
     {
@@ -53,6 +60,7 @@ const Link = forwardRef(
       theme = null,
       to = null,
       withArrow = false,
+      icon = null,
       children,
       prefetch = undefined,
       ...props
@@ -64,15 +72,18 @@ const Link = forwardRef(
       styles.size[size],
       styles.theme[theme],
       additionalClassName,
-      withArrow && 'group'
+      (withArrow || icon) && 'group inline-flex w-fit items-center gap-1'
     );
+
+    const Icon = icons[icon];
 
     const content = (
       <>
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
-          <ArrowRightIcon className="-mb-px ml-1.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          <ArrowRightIcon className="-mb-px shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
         )}
+        {Icon && <Icon className="-mb-px shrink-0" />}
       </>
     );
     // TODO: remove this when we upgrade to latest version of Next.js
@@ -107,6 +118,7 @@ Link.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   withArrow: PropTypes.bool,
+  icon: PropTypes.oneOf(Object.keys(icons)),
   prefetch: PropTypes.bool,
 };
 

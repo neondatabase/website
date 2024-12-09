@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-12T09:31:33.883Z'
+updatedOn: '2024-12-06T19:56:24.868Z'
 ---
 
 Neon's _Autosuspend_ feature ('scale to zero') is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -43,14 +43,14 @@ Given the potential impact on application responsiveness, it's important to have
 Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The **Suspend compute after a period of inactivity** setting is set to 5 minutes by default. You can disable autosuspend entirely or set a custom period up to a maximum of 7 days. Limiting or disabling autosuspend can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="important">
-If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](https://neon.tech/docs/manage/endpoints#restart-a-compute). 
+If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the **Suspend compute after a period of inactivity** is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
 ![Connection warmup autosuspend and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
-For autoscaling configuration instructions, see [Compute size and autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ### Place your application and database in the same region
 
@@ -167,7 +167,7 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
-### Connection retry references
+#### Connection retry references
 
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's autosuspend](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
@@ -175,6 +175,48 @@ However, this example is a simplification. In a production application, you migh
 ### Use application-level caching
 
 Implement a caching system like [Redis](https://redis.io/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
+
+### Optimizing connection latency with sslnegotiation
+
+Starting with PostgreSQL 17, you can use the `sslnegotiation` connection parameter to control how SSL negotiation is handled when establishing a connection. The `sslnegotiation=direct` option reduces connection latency by skipping unnecessary negotiation steps.
+
+Neon has implemented support for `sslnegotiation=direct` in our proxy layer, allowing you to benefit from faster connection times even if your database runs on an older PostgreSQL version. You just need a PostgreSQL 17 client to use this feature.
+
+Here's a comparison of connection times with and without the `sslnegotiation=direct` parameter:
+
+**Without sslnegotiation=direct:**
+
+```bash
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+                                                version
+---------------------------------------------------------------------------------------------------------
+PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+(1 row)
+
+real    0m0.872s
+user    0m0.019s
+sys     0m0.000s
+```
+
+**With sslnegotiation=direct:**
+
+```bash
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&sslnegotiation=direct" -c "SELECT version();"
+                                                version
+---------------------------------------------------------------------------------------------------------
+PostgreSQL 17.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+(1 row)
+
+real    0m0.753s
+user    0m0.016s
+sys     0m0.005s
+```
+
+As shown in the example above, using `sslnegotiation=direct` reduces the connection time by skipping the initial SSL negotiation step. To use this optimization, simply append `sslnegotiation=direct` to your connection string:
+
+```text shouldWrap
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&sslnegotiation=direct
+```
 
 ## Conclusion
 
