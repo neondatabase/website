@@ -3,8 +3,6 @@ import 'styles/globals.css';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-import 'swiper/css';
-
 import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';

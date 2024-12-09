@@ -5,6 +5,7 @@ import ReleaseNoteList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
+import Modal from 'components/pages/doc/modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -13,6 +14,7 @@ import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import LINKS from 'constants/links';
 
 import Tag from '../tag';
 
@@ -39,6 +41,29 @@ Changelog.propTypes = {
   ).isRequired,
 };
 
+const MODALS = [
+  {
+    type: 'migrate',
+    breadcrumb: 'Migrate to Neon',
+    title: 'Migrating to Neon?',
+    description: 'Our team can help minimize downtime.',
+    link: {
+      title: 'Get migration assistance',
+      url: LINKS.migrationAssistance,
+    },
+  },
+  {
+    type: 'support',
+    breadcrumb: 'Support',
+    title: 'Need help now?',
+    description: 'Our team is here to assist you anytime!',
+    link: {
+      title: 'Get support',
+      url: LINKS.consoleSupport,
+    },
+  },
+];
+
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
   content,
@@ -52,84 +77,101 @@ const Post = ({
   currentSlug,
   fileOriginPath,
   tableOfContents,
-}) => (
-  <>
-    <div
-      className={clsx(
-        'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-        isUseCase
-          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
-          : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
-      )}
-    >
-      {breadcrumbs.length > 0 && (
-        <Breadcrumbs
-          breadcrumbs={breadcrumbs}
-          currentSlug={currentSlug}
-          isPostgresPost={isPostgres}
-        />
-      )}
-      {isChangelog ? (
-        <Changelog currentSlug={currentSlug} items={changelogPosts} />
-      ) : (
-        <article>
-          <h1
-            className={clsx(
-              isUseCase
-                ? 'text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
-                : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
-              tag && 'inline'
-            )}
-          >
-            {title}
-          </h1>
-          {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-          {subtitle && (
-            <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
-              {subtitle}
-            </p>
-          )}
-          <Content
-            className="mt-5"
-            content={content}
-            isUseCase={isUseCase}
-            isPostgres={isPostgres}
+}) => {
+  const modal = MODALS.find((modal) =>
+    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+  );
+
+  return (
+    <>
+      <div
+        className={clsx(
+          'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
+          isUseCase
+            ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
+            : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
+        )}
+      >
+        {breadcrumbs.length > 0 && (
+          <Breadcrumbs
+            breadcrumbs={breadcrumbs}
+            currentSlug={currentSlug}
+            isPostgresPost={isPostgres}
           />
-        </article>
-      )}
+        )}
+        {isChangelog ? (
+          <Changelog currentSlug={currentSlug} items={changelogPosts} />
+        ) : (
+          <article>
+            <h1
+              className={clsx(
+                isUseCase
+                  ? 'text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                  : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
+                tag && 'inline'
+              )}
+            >
+              {title}
+            </h1>
+            {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+            {subtitle && (
+              <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
+                {subtitle}
+              </p>
+            )}
+            <Content
+              className="mt-5"
+              content={content}
+              isUseCase={isUseCase}
+              isPostgres={isPostgres}
+            />
+          </article>
+        )}
 
-      {!isChangelog && (
-        <NavigationLinks
-          previousLink={previousLink}
-          nextLink={nextLink}
-          basePath={navigationLinksPrefix || DOCS_BASE_PATH}
-        />
-      )}
-      <DocFooter updatedOn={updatedOn} slug={currentSlug} />
-    </div>
+        {!isChangelog && (
+          <NavigationLinks
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={navigationLinksPrefix || DOCS_BASE_PATH}
+          />
+        )}
+        <DocFooter updatedOn={updatedOn} slug={currentSlug} />
+      </div>
 
-    <div
-      className={clsx(
-        'col-span-2 col-start-11 -ml-12 h-full max-w-64 xl:hidden',
-        isUseCase
-          ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-          : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
-      )}
-    >
-      <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-        {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
+      <div
+        className={clsx(
+          'relative col-span-2 col-start-11 -ml-12 max-w-64 xl:hidden',
+          isUseCase
+            ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+            : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+        )}
+      >
         <div
           className={clsx(
-            enableTableOfContents &&
-              'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+            'sticky flex flex-col pb-5',
+            isUseCase
+              ? 'top-[188px] max-h-[calc(100vh-188px)]'
+              : 'top-[136px] max-h-[calc(100vh-136px)]'
           )}
         >
-          {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
+          {enableTableOfContents && (
+            <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
+          )}
+          <div
+            className={clsx(
+              enableTableOfContents &&
+                'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+            )}
+          >
+            {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
+          </div>
         </div>
-      </nav>
-    </div>
-  </>
-);
+      </div>
+
+      {modal && <Modal {...modal} />}
+    </>
+  );
+};
 
 Post.propTypes = {
   data: PropTypes.shape({

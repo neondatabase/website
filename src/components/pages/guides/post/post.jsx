@@ -46,7 +46,7 @@ const Post = ({
     </div>
 
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
-      <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+      <div className="sticky top-[148px] flex max-h-[calc(100vh-150px)] flex-col pb-5">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
         <div
           className={clsx(
@@ -61,7 +61,7 @@ const Post = ({
             <Author data={author} />
           </div>
         )}
-      </nav>
+      </div>
     </div>
   </>
 );
