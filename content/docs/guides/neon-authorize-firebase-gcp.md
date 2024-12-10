@@ -1,52 +1,75 @@
 ---
-title: Secure your data with Firebase and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Firebase and Neon Authorize
+title: Secure Your Data with Neon Authorize and Firebase or GCP Identity Platform
+subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity Platform
 enableTableOfContents: true
 updatedOn: '2024-12-03T10:00:00.000Z'
 ---
 
 <InfoBlock>
+<DocsList title="What You'll Learn">
+  <p>Firebase/GCP Identity Platform integration</p>
+  <p>JWT authentication setup</p>
+  <p>Row-Level Security policies</p>
+</DocsList>
+
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
+  <a href="https://firebase.google.com/docs/auth">Firebase Authentication documentation</a>
+  <a href="https://cloud.google.com/identity-platform/docs/sign-in-user-email">GCP Identity Platform Quickstart</a>
 </DocsList>
 </InfoBlock>
 
-Use Firebase with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Firebase for user authentication. It shows you how to integrate Firebase with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Firebase or Google Cloud Identity Platform with Neon Authorize to add secure, database-level authorization to your application.
+
+This guide assumes you already have an application using Firebase or GCP Identity Platform for user authentication. It shows you how to integrate with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Firebase handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt).
+Firebase and Google Cloud Platform Identity share the same underlying authentication infrastructure, but focus on different use cases: Firebase for mobile and web application developers, and GCP Identity Platform for enterprise-level identity management (leveraging Firebase in its implementation).
+
+Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon Authorize. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
+
+When you make a database request, Neon Authorize validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Firebase](https://firebase.google.com) project with Authentication enabled. If you haven't set up Firebase Auth yet, follow the [Firebase Authentication documentation](https://firebase.google.com/docs/auth).
+- A [Firebase](https://firebase.google.com) or [GCP Identity Platform](https://cloud.google.com/security/products/identity-platform) project with Authentication enabled:
+  - [Set up Firebase Authentication](https://firebase.google.com/docs/auth)
+  - [Set up Identity Platform](https://cloud.google.com/identity-platform/docs/sign-in-user-email)
 
-## Integrate Firebase with Neon Authorize
+## Integrate Firebase/GCP Identity Platform with Neon Authorize
 
-In this first set of steps, we'll integrate Firebase as an authorization provider in Neon. When these steps are complete, Firebase will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate Firebase/GCP Identity Platform as an authorization provider in Neon. When these steps are complete, your authentication service (whether Firebase or GCP Identity Platform) will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Firebase JWKS URL
+### 1. Get the JWKS URL and Project ID
 
-When integrating Firebase with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+You'll need two pieces of information:
 
-The Firebase JWKS URL is always in the format:
+1. **JWKS URL** - This is the same for all projects:
 
-```
-https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com
-```
+   ```plaintext
+   https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com
+   ```
 
-To use Firebase, you'll need the JWT Audience value, which is your Firebase project's `project_id`. Find this under **Project settings** > **General** > **Project ID** in the Firebase Console.
+2. **Project ID** - This serves as your JWT Audience value:
 
-<div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/firebase_project_id.png" alt="Firebase Project Id" style={{ width: '100%', maxWidth: '900px', height: 'auto' }} />
-</div>
+   - Go to the [Firebase Console](https://console.firebase.google.com)
+   - Navigate to **Project settings** > **General** > **Project ID**
 
-### 2. Add Firebase as an authorization provider in the Neon Console
+   <Admonition type="note" title="Note">
+   Every GCP Identity Platform project automatically creates a corresponding Firebase project, which is why we use the Firebase Console to get the Project ID.
+   </Admonition>
 
-Once you have the JWKS URL, go to the **Neon Console** and add Firebase as an authentication provider under the **Authorize** page. Paste your copied URL and Firebase will be automatically recognized and selected. Add the JWT Audience value (your Firebase project's `project_id`) and click **Set Up**.
+   <div style={{ display: 'flex', justifyContent: 'center'}}>
+     <img src="/docs/guides/firebase_project_id.png" alt="Firebase Project Id" style={{ width: '100%', maxWidth: '900px', height: 'auto' }} />
+   </div>
+
+### 2. Add Firebase/GCP Identity Platform as an authorization provider in the Neon Console
+
+Once you have the JWKS URL, go to the **Neon Console** and add the authentication provider under the **Authorize** page. Paste your copied URL and click **Set Up**.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/firebase_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
@@ -215,7 +238,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Firebase, restricting access based on the user's identity. Here's how to run authenticated queries from both the backend and the frontend of our application using Firebase Auth Tokens. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from your authentication provider, restricting access based on the user's identity. Here's how to run authenticated queries from both the backend and the frontend of your application using authentication tokens. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
