@@ -168,12 +168,11 @@ Usage-Based Billing
 : Paid plans start at $19 for an allotment of Compute and Storage resources, and scale up predictably as your workload grows.
 
 Pay via AWS Marketplace
-: If your business is already active on AWS, you may be able to save hassle and budgets by [paying for Neon via AWS Marketplace](https://neon.tech/docs/introduction/billing-aws-marketplace). 
+: If your business is already active on AWS, you may be able to save hassle and budgets by [paying for Neon via AWS Marketplace](https://neon.tech/docs/introduction/billing-aws-marketplace).
 
 Pay via Azure Marketplace
-: If your business runs on Azure, Neon is available as a [native Azure integration](/docs/introduction/billing-azure-marketplace) with billing through Azure. 
+: If your business runs on Azure, Neon is available as a [native Azure integration](/docs/introduction/billing-azure-marketplace) with billing through Azure.
 
 </DefinitionList>
 
 <CTA title="Have any questions or need more&nbsp;information?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
-

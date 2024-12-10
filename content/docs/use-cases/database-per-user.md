@@ -13,13 +13,13 @@ This guide will help you get started with implementing this architecture.
 
 In a multi-tenant architecture, a single system supports multiple users (tenants), each with access to manage their own data. In a database like Postgres, this setup requires careful structuring to keep each tenant’s data private, secure, and isolated—all while remaining efficient to manage and scale.
 
-Following these principles, there are three primary routes you could follow to implement multi-tenant architectures in Postgres:  
+Following these principles, there are three primary routes you could follow to implement multi-tenant architectures in Postgres:
 
-- Creating one separate database per user (the focus of this guide); 
-- Creating one schema-per-user, within the same database; 
-- And keeping your tenants separate within a shared schema. 
+- Creating one separate database per user (the focus of this guide);
+- Creating one schema-per-user, within the same database;
+- And keeping your tenants separate within a shared schema.
 
-To better situate our use case, let’s briefly outline the differences between these architectures: 
+To better situate our use case, let’s briefly outline the differences between these architectures:
 
 ### Database-per-user
 
@@ -31,7 +31,7 @@ In a database-per-user design, each user’s data is fully isolated in its own d
 
 2. **Handling multiple instances, each hosting a single production database.** In this scenario, each instance scales independently, preventing resource competition between users and minimizing the risk of widespread failures. This is a much simpler design from the perspective of the database layer, but managing hundreds of instances in AWS can get very costly and complex. As the number of instances grows into the thousands, management becomes nearly impossible.
 
-As we’ll see later throughout this guide, Neon offers a third alternative by providing a logical equivalent to the instance-per-customer model with near-infinite scalability, without the heavy DevOps overhead. This solution involves creating one Neon project per customer. 
+As we’ll see later throughout this guide, Neon offers a third alternative by providing a logical equivalent to the instance-per-customer model with near-infinite scalability, without the heavy DevOps overhead. This solution involves creating one Neon project per customer.
 
 ### Schema-per-user
 
@@ -39,7 +39,7 @@ As we’ll see later throughout this guide, Neon offers a third alternative by p
 
 But before focusing on database-per-user, let’s briefly cover another multi-tenancy approach in Postgres: the schema-per-user model. Instead of isolating data by database, this design places all users in a single database, with a unique schema for each.
 
-In Neon, we generally don’t recommend this approach for SaaS applications, unless this is a design you’re already experienced with. This approach doesn’t reduce operational complexity or costs if compared to the many-databases approach, but it does introduce additional risks; it also limits the potential of Neon features like instant Point-in-Time Recovery (PITR), which in a project-per-customer model allows you to restore customer databases independently without impacting the entire fleet’s operations. More about this later. 
+In Neon, we generally don’t recommend this approach for SaaS applications, unless this is a design you’re already experienced with. This approach doesn’t reduce operational complexity or costs if compared to the many-databases approach, but it does introduce additional risks; it also limits the potential of Neon features like instant Point-in-Time Recovery (PITR), which in a project-per-customer model allows you to restore customer databases independently without impacting the entire fleet’s operations. More about this later.
 
 ### Shared schema
 
@@ -47,11 +47,11 @@ In Neon, we generally don’t recommend this approach for SaaS applications, unl
 
 Lastly, Postgres’s robustness actually makes it possible to ensure tenant isolation within a shared schema. In this model, all users' data resides within the same tables, with isolation enforced through foreign keys and row-level security.
 
-While this is a common choice—and can be a good starting point if you’re just beginning to build your app—we still recommend the project-per-user route if possible. Over time, as your app scales, meeting requirements within a shared schema setup becomes increasingly challenging. Enforcing compliance and managing access restrictions at the schema level grows more complex as you add more users. 
+While this is a common choice—and can be a good starting point if you’re just beginning to build your app—we still recommend the project-per-user route if possible. Over time, as your app scales, meeting requirements within a shared schema setup becomes increasingly challenging. Enforcing compliance and managing access restrictions at the schema level grows more complex as you add more users.
 
-You’ll also need to manage very large Postgres tables, as all customer data is stored in the same tables. As these tables grow, additional Postgres fine-tuning will be required to maintain performance. 
+You’ll also need to manage very large Postgres tables, as all customer data is stored in the same tables. As these tables grow, additional Postgres fine-tuning will be required to maintain performance.
 
-## Setting up Neon for Database-per-user 
+## Setting up Neon for Database-per-user
 
 Now that we’ve reviewed your options, let’s focus on the design choice we recommend for multi-tenancy in Neon: creating isolated databases for each user, with each database hosted on its own project.
 
@@ -75,7 +75,6 @@ We recommend setting up one project per user, rather than, for example, using a 
 
 - **Per-customer PITR**  
   Setting up a project per customer allows you to run [PITR on individual customers](/docs/guides/branch-restore) instantly, without risking disruption to your entire fleet.
-
 
 ## Managing many projects
 
@@ -103,10 +102,10 @@ In Neon, [database branching](/docs/introduction/branching) is a powerful featur
 To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
 
 The methodology:
+
 - **Within the non-prod project, load your testing data into the main branch.** This main branch will serve as the primary source for all dev/test environments.
 - **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the main branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
 - **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the main branch as needed, maintaining data consistency across your dev/test environments.
-
 
 ## Designing a Control Plane
 
@@ -119,6 +118,7 @@ Once you have everything set up, as your number of projects grows, you might wan
 The catalog database is a centralized repository that tracks and manages all Neon projects and databases. It holds records for every Neon project your system creates. You can also use it to keep track of tenant-specific configurations, such as database names, regions, schema versions, and so on.
 
 You can set up your catalog database as a separate Neon project. When it's time to design its schema, consider these tips:
+
 - Use foreign keys to link tables like `project` and `payment` to `customer`.
 - Choose data types carefully: `citext` for case-insensitive text, `uuid` for unique identifiers to obscure sequence data, and `timestamptz` for tracking real-world time.
 - Track key operational data, like `schema_version`, in the `project` table.
@@ -154,58 +154,59 @@ Both approaches are viable, each with its own pros and cons.
 
 #### Pros of shared environments
 
-- Managing a single application instance minimizes operational complexity.  
-- Updates and new features are easy to implement since changes apply universally.  
-- Operating one environment reduces infrastructure and maintenance costs.  
+- Managing a single application instance minimizes operational complexity.
+- Updates and new features are easy to implement since changes apply universally.
+- Operating one environment reduces infrastructure and maintenance costs.
 
 #### Cons of shared environments
 
-- A single application environment makes it difficult to offer tailored experiences for individual customers.  
-- Compliance becomes challenging when users' databases span multiple regions.  
-- Updates apply to all users simultaneously, which can be problematic for those needing specific software versions.  
-- A single environment heightens the risk of data breaches, as vulnerabilities can impact all users.  
+- A single application environment makes it difficult to offer tailored experiences for individual customers.
+- Compliance becomes challenging when users' databases span multiple regions.
+- Updates apply to all users simultaneously, which can be problematic for those needing specific software versions.
+- A single environment heightens the risk of data breaches, as vulnerabilities can impact all users.
 
 #### Advice
 
 - **Implement robust authorization**  
-  Ensure secure access as all users share the same application environment.  
+  Ensure secure access as all users share the same application environment.
 
-- **Define user authentication and data routing**  
-  - Users provide their organization details during login.  
-  - Users access the application via an organization-specific subdomain.  
-  - The system identifies the user's organization based on their credentials.  
+- **Define user authentication and data routing**
+
+  - Users provide their organization details during login.
+  - Users access the application via an organization-specific subdomain.
+  - The system identifies the user's organization based on their credentials.
 
 - **Monitor usage and performance**  
-  Regularly track application usage to prevent performance bottlenecks.  
+  Regularly track application usage to prevent performance bottlenecks.
 
 - **Plan maintenance windows carefully**  
-  Minimize disruptions for all users by scheduling maintenance during low-usage periods.  
+  Minimize disruptions for all users by scheduling maintenance during low-usage periods.
 
 ### Isolated application environments
 
 ![isolated application environments](/docs/use-cases/isolated_application_environments.png)
 
-In this architecture, each customer has instead a dedicated application environment alongside their own database. Similar to the shared environment option, this design has pros and cons: 
+In this architecture, each customer has instead a dedicated application environment alongside their own database. Similar to the shared environment option, this design has pros and cons:
 
 #### Pros of isolated environments
 
-- Since each customer can now have a unique application environment, it’s easier to implement personalized features and configurations, to keep separate versions for particular customers, and so on.  
-- Compliance is also simpler if you’re handling multiple regions. Deploying the application in multiple regions can also help with latency.  
-- This design also opens the door for customers to control their own upgrade schedules, e.g., via defining their own maintenance windows.  
+- Since each customer can now have a unique application environment, it’s easier to implement personalized features and configurations, to keep separate versions for particular customers, and so on.
+- Compliance is also simpler if you’re handling multiple regions. Deploying the application in multiple regions can also help with latency.
+- This design also opens the door for customers to control their own upgrade schedules, e.g., via defining their own maintenance windows.
 
 #### Cons of isolated environments
 
-- This design has an obvious tradeoff: it comes with higher complexity of deployment, monitoring, and maintenance.  
-- You’ll need to think about how to route optimal resource utilization across multiple environments, and how to keep observability on-point to diagnose issues.  
-- Operating separate environments for each customer might also lead to higher costs.  
+- This design has an obvious tradeoff: it comes with higher complexity of deployment, monitoring, and maintenance.
+- You’ll need to think about how to route optimal resource utilization across multiple environments, and how to keep observability on-point to diagnose issues.
+- Operating separate environments for each customer might also lead to higher costs.
 
 #### Advice
 
-If you decide to implement isolated environments, here’s some advice to consider:  
-- Design your architecture to accommodate growth, even if your setup is small today.  
-- Similarly as you’re doing with Neon projects, take advantage of automation tools to streamline the creation and management of your application environments.  
-- Set up proper monitoring to track key metrics across all environments.  
+If you decide to implement isolated environments, here’s some advice to consider:
 
+- Design your architecture to accommodate growth, even if your setup is small today.
+- Similarly as you’re doing with Neon projects, take advantage of automation tools to streamline the creation and management of your application environments.
+- Set up proper monitoring to track key metrics across all environments.
 
 ## Migrating Schemas
 
@@ -213,10 +214,9 @@ Is database-per-user design, it is common to have the same schema for all users/
 
 ### Example app
 
-To walk you through it, we’ve created example code [in this repository](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle). The example includes 4 Neon databases, all using Postgres 16 and all deployed to AWS us-east-1. 
+To walk you through it, we’ve created example code [in this repository](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle). The example includes 4 Neon databases, all using Postgres 16 and all deployed to AWS us-east-1.
 
-The schema consists of three tables, `users`, `projects` and `tasks`. You can see the schema here: [schema.ts](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/src/db/schema.ts), and for good measure, here’s the raw SQL equivalent: [schema.sql](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/schema.sql). This default schema is referenced by each of the `drizzle.config.ts` files that have been created for each customer. 
-
+The schema consists of three tables, `users`, `projects` and `tasks`. You can see the schema here: [schema.ts](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/src/db/schema.ts), and for good measure, here’s the raw SQL equivalent: [schema.sql](https://github.com/PaulieScanlon/neon-database-per-tenant-drizzle/blob/main/schema.sql). This default schema is referenced by each of the `drizzle.config.ts` files that have been created for each customer.
 
 ### Workflow using Drizzle ORM and GitHub Actions
 
@@ -314,49 +314,55 @@ let secrets = [];
   );
 
   // List all Neon projects
-  const { data: { projects } } = await neonApi.listProjects();
+  const {
+    data: { projects },
+  } = await neonApi.listProjects();
 
-  await Promise.all(projects.map(async (project) => {
-    const { id, name } = project;
+  await Promise.all(
+    projects.map(async (project) => {
+      const { id, name } = project;
 
-    // Fetch database connection URI
-    const { data: { uri } } = await neonApi.getConnectionUri({
-      projectId: id,
-      database_name: 'neondb',
-      role_name: 'neondb_owner',
-    });
+      // Fetch database connection URI
+      const {
+        data: { uri },
+      } = await neonApi.getConnectionUri({
+        projectId: id,
+        database_name: 'neondb',
+        role_name: 'neondb_owner',
+      });
 
-    // Prepare variables
-    const safeName = name.replace(/\s+/g, '-').toLowerCase();
-    const path = `configs/${safeName}`;
-    const file = 'drizzle.config.ts';
-    const envVarName = `${safeName.replace(/-/g, '_').toUpperCase()}_DATABASE_URL`;
-    const encryptedValue = await encryptSecret(publicKeyData.key, uri);
+      // Prepare variables
+      const safeName = name.replace(/\s+/g, '-').toLowerCase();
+      const path = `configs/${safeName}`;
+      const file = 'drizzle.config.ts';
+      const envVarName = `${safeName.replace(/-/g, '_').toUpperCase()}_DATABASE_URL`;
+      const encryptedValue = await encryptSecret(publicKeyData.key, uri);
 
-    // Store environment variable name for later use
-    secrets.push(envVarName);
+      // Store environment variable name for later use
+      secrets.push(envVarName);
 
-    // Create project directory and config file if not present
-    if (!existsSync(path)) mkdirSync(path);
-    if (!existsSync(`${path}/${file}`)) {
-      writeFileSync(`${path}/${file}`, drizzleConfig(safeName, envVarName));
-      console.log(`Created drizzle.config for: ${safeName}`);
-    }
+      // Create project directory and config file if not present
+      if (!existsSync(path)) mkdirSync(path);
+      if (!existsSync(`${path}/${file}`)) {
+        writeFileSync(`${path}/${file}`, drizzleConfig(safeName, envVarName));
+        console.log(`Created drizzle.config for: ${safeName}`);
+      }
 
-    // Add encrypted secret to GitHub
-    await octokit.request(`PUT /repos/${repoOwner}/${repoName}/actions/secrets/${envVarName}`, {
-      owner: repoOwner,
-      repo: repoName,
-      secret_name: envVarName,
-      encrypted_value: encryptedValue,
-      key_id: publicKeyData.key_id,
-      headers: { 'X-GitHub-Api-Version': '2022-11-28' },
-    });
+      // Add encrypted secret to GitHub
+      await octokit.request(`PUT /repos/${repoOwner}/${repoName}/actions/secrets/${envVarName}`, {
+        owner: repoOwner,
+        repo: repoName,
+        secret_name: envVarName,
+        encrypted_value: encryptedValue,
+        key_id: publicKeyData.key_id,
+        headers: { 'X-GitHub-Api-Version': '2022-11-28' },
+      });
 
-    // Generate migrations using drizzle-kit
-    execSync(`drizzle-kit generate --config=${path}/${file}`, { encoding: 'utf-8' });
-    console.log(`Ran drizzle-kit generate for: ${safeName}`);
-  }));
+      // Generate migrations using drizzle-kit
+      execSync(`drizzle-kit generate --config=${path}/${file}`, { encoding: 'utf-8' });
+      console.log(`Ran drizzle-kit generate for: ${safeName}`);
+    })
+  );
 
   // Ensure GitHub Actions workflow directories exist
   if (!existsSync('.github')) mkdirSync('.github');
@@ -375,17 +381,17 @@ The script above goes through these steps:
 2. Retrieves the GitHub public key for encrypting secrets.
 3. Lists all projects in your Neon account.
 4. For each project:
-    - Retrieves the connection URI from Neon.
-    - Sanitizes project names for safe usage in directory names and environment variables.
-    - Creates DrizzleORM config files.
-    - Encrypts secrets and adds them to the GitHub repository.
-    - Generates migrations using `drizzle-kit`.
+   - Retrieves the connection URI from Neon.
+   - Sanitizes project names for safe usage in directory names and environment variables.
+   - Creates DrizzleORM config files.
+   - Encrypts secrets and adds them to the GitHub repository.
+   - Generates migrations using `drizzle-kit`.
 5. Finally, it generates GitHub Actions workflow that includes all generated environment variables for running migrations.
 6. To run the script, use the following command:
 
-    ```bash
-    npm run generate
-    ```
+   ```bash
+   npm run generate
+   ```
 
 Ensure the following environment variables are set:
 
@@ -394,7 +400,7 @@ Ensure the following environment variables are set:
 
 And update `repoOwner` and `repoName` to match your repository details.
 
-Here’s an example output for the Drizzle configuration: 
+Here’s an example output for the Drizzle configuration:
 
 ```javascript
 // src/configs/acme-corp/drizzle.config.ts
@@ -412,7 +418,7 @@ export default defineConfig({
 });
 ```
 
-And for the GitHub workflow: 
+And for the GitHub workflow:
 
 ```yaml
 // .github/workflows/run-migrations.yml
@@ -455,7 +461,7 @@ jobs:
 
 #### Running migrations
 
-Now, we’re ready to run migrations: 
+Now, we’re ready to run migrations:
 
 ```javascript
 // src/scripts/migrate.js
@@ -487,7 +493,7 @@ import { fileURLToPath } from 'url';
 })();
 ```
 
-This script: 
+This script:
 
 - Only runs after a pull request (PR) has been merged. It reads through the configs directory and applies the migrations defined in each `drizzle.config.ts` file for every project or customer, ensuring that all databases are using the same schema.
 - Uses `npx` to run the `drizzle-kit migrate` command against each `drizzle.config.ts` file, ensuring that the schema is applied to all databases.
@@ -499,13 +505,12 @@ The source code for this migration script is located at: `src/scripts/migrate.js
 Here’s an overview of the workflow:
 
 - We used a script to automate the creation of DrizzleORM configuration files (`drizzle.config.ts`) and securely store database connection strings as GitHub secrets.management.
-- We used a migration script to iterate through the configs directory and apply schema changes to all databases via `drizzle-kit migrate`. 
+- We used a migration script to iterate through the configs directory and apply schema changes to all databases via `drizzle-kit migrate`.
 - The GitHub Actions workflow triggers migrations automatically when a PR is merged. Environment variables for each project are explicitly injected into the workflow, giving DrizzleORM access to the connection strings needed for schema updates.
 
 ## Backing up Projects to Your Own S3
 
-As a manage database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), [Part 2](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects). 
-
+As a manage database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), [Part 2](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects).
 
 ### AWS IAM configuration
 
@@ -526,45 +531,41 @@ On the next screen you can create a Trusted Identity for the Role. Select **Trus
 
 ![S3 backup select trusted entity](/docs/use-cases/s3_select_trusted_entity.png)
 
-Once you select the Identity Provider, you’ll be shown a number of fields to fill out. Select `sts.amazonaws.com` from the **Audience** dropdown menu, then fill out the GitHub repository details as per your requirements. When you’re ready, click **Next**. For reference, the options shown in the image below are for this repository. 
+Once you select the Identity Provider, you’ll be shown a number of fields to fill out. Select `sts.amazonaws.com` from the **Audience** dropdown menu, then fill out the GitHub repository details as per your requirements. When you’re ready, click **Next**. For reference, the options shown in the image below are for this repository.
 
 ![S3 backup web identity](/docs/use-cases/s3_web_identity.png)
 
 You can skip selecting anything from the Add Permissions screen and click **Next** to continue.
 
-On this screen give the **Role** a name and description. You’ll use the Role name in the code for the GitHub Action. When you’re ready click **Create role**. 
+On this screen give the **Role** a name and description. You’ll use the Role name in the code for the GitHub Action. When you’re ready click **Create role**.
 
 ### S3 bucket policy
 
-This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to [this blog post](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups). 
+This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to [this blog post](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups).
 
 To ensure the Role being used in the GitHub Action can perform actions on the S3 bucket, you’ll need to update the bucket policy. Select your bucket then select the Permissions tab and click **Edit**.
 
 ![S3 backup web identity](/docs/use-cases/s3_bucket_policy.png)
 
-You can now add the following policy which grants the Role you created earlier access to perform S3 List, Get, Put and Delete actions.  Replace the Role name (`neon-multiple-db-s3-backups-github-action`) with your Role name and replace the S3 bucket name (`neon-multiple-db-s3-backups`) with your S3 bucket name.
+You can now add the following policy which grants the Role you created earlier access to perform S3 List, Get, Put and Delete actions. Replace the Role name (`neon-multiple-db-s3-backups-github-action`) with your Role name and replace the S3 bucket name (`neon-multiple-db-s3-backups`) with your S3 bucket name.
 
 ```yaml
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Principal": {
-				"AWS": "arn:aws:iam::627917386332:role/neon-multiple-db-s3-backups-github-action"
-			},
-			"Action": [
-				"s3:ListBucket",
-				"s3:GetObject",
-				"s3:PutObject",
-				"s3:DeleteObject"
-			],
-			"Resource": [
-				"arn:aws:s3:::neon-multiple-db-s3-backups",
-				"arn:aws:s3:::neon-multiple-db-s3-backups/*"
-			]
-		}
-	]
+  'Version': '2012-10-17',
+  'Statement':
+    [
+      {
+        'Effect': 'Allow',
+        'Principal':
+          { 'AWS': 'arn:aws:iam::627917386332:role/neon-multiple-db-s3-backups-github-action' },
+        'Action': ['s3:ListBucket', 's3:GetObject', 's3:PutObject', 's3:DeleteObject'],
+        'Resource':
+          [
+            'arn:aws:s3:::neon-multiple-db-s3-backups',
+            'arn:aws:s3:::neon-multiple-db-s3-backups/*',
+          ],
+      },
+    ],
 }
 ```
 
@@ -572,8 +573,9 @@ When you’re ready click **Save** changes.
 
 ### GitHub secrets
 
-Create the following GitHub Secrets to hold various values that you likely won’t want to expose or repeat in code: 
-- `AWS_ACCOUNT_ID`: This can be found by clicking on your user name in the AWS console. 
+Create the following GitHub Secrets to hold various values that you likely won’t want to expose or repeat in code:
+
+- `AWS_ACCOUNT_ID`: This can be found by clicking on your user name in the AWS console.
 - `S3_BUCKET_NAME`: In my case, this would be, neon-multiple-db-s3-backups
 - `IAM_ROLE`: In my case this would be, neon-multiple-db-s3-backups-github-action
 
@@ -583,15 +585,16 @@ Before diving into the code, here’s a look at this example in the Neon console
 
 ![S3 backup three databases](/docs/use-cases/s3_backup_three_databases.png)
 
-Using the same naming conventions, there are three new files in the ``.github/workflows` folder in the repository: 
+Using the same naming conventions, there are three new files in the ``.github/workflows` folder in the repository:
 
 1. `paycorp-payments-prod.yml`
 2. `acme-analytics-prod.yml`
 3. `paycorp-payments-prod.yml`
 
-All the Actions are technically the same, (besides the name of the file), but there are several areas where they differ. 
+All the Actions are technically the same, (besides the name of the file), but there are several areas where they differ.
 
 These are:
+
 1. The workflow name
 2. The `DATABASE_URL`
 3. The `RETENTION` period
@@ -692,14 +695,14 @@ on:
 
 ```yaml
 env:
-      RETENTION: 7
-      DATABASE_URL: ${{ secrets.ACME_ANALYTICS_PROD }}
+  RETENTION: 7
+  DATABASE_URL: ${{ secrets.ACME_ANALYTICS_PROD }}
 
-      IAM_ROLE: ${{ secrets.IAM_ROLE }}
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
-      AWS_REGION: 'us-east-1'
-      PG_VERSION: '16'
+  IAM_ROLE: ${{ secrets.IAM_ROLE }}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+  AWS_REGION: 'us-east-1'
+  PG_VERSION: '16'
 ```
 
 - `RETENTION`: This determines how long a backup file should remain in the S3 bucket before it’s deleted.
@@ -712,7 +715,7 @@ env:
 
 #### GitHub Secrets
 
-As we mentioned above, several of the above environment variables are defined using secrets. These variables can be added to **Settings > Secrets and variables > Actions**. 
+As we mentioned above, several of the above environment variables are defined using secrets. These variables can be added to **Settings > Secrets and variables > Actions**.
 
 Here’s a screenshot of the GitHub repository secrets including the connection string for the fictional ACME Analytics Prod database.
 
@@ -761,19 +764,19 @@ In this step I’ve created three variables that are all output to `GITHUB_ENV`.
 ```
 
 The three variables are as follows:
+
 1. `GZIP_NAME`: The name of the `.gz` file derived from the date which would produce a file name similar to, `October-21-2024@07:53:02.gz`
 2. `FOLDER_NAME`: The folder where the `.gz` files are to be uploaded
-3. `UPLOAD_PATH`: This is the full path that includes the S3 bucket name, folder name and `.gz` file 
+3. `UPLOAD_PATH`: This is the full path that includes the S3 bucket name, folder name and `.gz` file
 
 **Create folder if it doesn’t exist**
 
 This step creates a new folder (if one doesn’t already exist) inside the S3 bucket using the `FOLDER_NAME` as defined in the previous step.
 
-
 ## Final remarks
 
-You can create as many of these Actions as you need. Just be careful to double check the `DATABASE_URL` to avoid backing up a database to the wrong folder. 
+You can create as many of these Actions as you need. Just be careful to double check the `DATABASE_URL` to avoid backing up a database to the wrong folder.
 
 <Admonition type="important">
 GitHub Actions will timeout after ~6 hours. The size of your database is and how you’ve configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
-</Admonition> 
+</Admonition>
