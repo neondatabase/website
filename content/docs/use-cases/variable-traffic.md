@@ -5,30 +5,35 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Neon dynamically scales with traffic, optimizing performance during peak times without overprovisioning. Modern applications experience variable traffic patterns, from productivity apps surging during work hours to gaming platforms peaking in the evening.
+No real-world database has constant demand. To some extent, all modern applications experience variable traffic patterns; for some applications, demand is clearly variable. For example:
 
-Traditional databases require provisioning for peak demand, leading to 24/7 costs for resources that are often idle. Neon's serverless architecture solves this by separating storage and compute, offering autoscaling and the ability to scale to zero. This means you only pay for the compute you use, with no manual resizing and controlled costs. For production, Neon ensures fast performance without overpaying, while non-prod databases minimize costs by scaling down when inactive.
+- A productivity application might have increased demand during working hours as teams collaborate and complete tasks.
+- An AI analytics startup could face heavy processing loads during off-peak hours when batch data jobs are run.
+- A gaming platform might experience surges in user activity during evenings when players are most active.
+- Online shops might see spikes when certain sales are run… and so on.
 
-## Learn more
+Variable load patterns are common, but traditional managed databases require provisioning a fixed amount of CPU and memory. To avoid degraded performance or even outages, it is standard practice to provision for peak traffic, which means paying for peak capacity 24/7 — even though it's needed only a fraction of the time.
 
-<DetailIconCards>
+## Pay only for what you use with Neon
 
-<a href="/docs/use-cases/about-variable-traffic" description="Learn more about how you can optimize for variable traffic workloads with Neon" icon="gui">Learn more about this use case</a>
+Neon solves this inefficiency via a serverless architecture. By [natively separating storage and compute](https://neon.tech/blog/architecture-decisions-in-neon), Neon implements two features that allow you to pay only for the compute you use without investing any manual work: [Autoscaling](https://neon.tech/blog/scaling-serverless-postgres) and [Scale to Zero](https://neon.tech/docs/introduction/auto-suspend).
 
-<a href="/docs/introduction/autoscaling" description="Neon is a serverless platform—it scales your CPU and memory up and down automatically" icon="chart-bar">About autoscaling</a>
+- Neon adjusts CPU and memory up and down automatically.
+- Costs are controlled by setting a [max autoscaling limit](https://neon.tech/docs/introduction/autoscaling).
+- You get a performance boost when you need it.
+- No manual resizes or downtimes. Neon scales up and down smoothly and immediately.
+- Non-prod databases scale to zero when inactive. Instead of paying for compute 24/7, you reduce the costs of your supporting databases to a minimum.
+- Transparency with open-source architecture. [Explore our code in GitHub](https://github.com/neondatabase/neon).
 
-<a href="/docs/introduction/auto-suspend" description="For your non-production workloads, Neon scales all the way down to zero, so you only pay for dev databases when you use them" icon="database">About scale-to-zero</a>
+---
 
-<a href="https://neon.tech/variable-load#why-neon-vs-aurora-serverless" description="Learn the main differences between both platforms" icon="openai">Compare it with Aurora Serverless</a>
+## Why Neon vs Aurora Serverless
 
-<a href="/docs/introduction/usage-metrics#compute" description="Get details on how Neon will bill your variable usage based on compute hours" icon="filter">How compute usage is billed</a>
+The Neon architecture is inspired by Amazon Aurora, but with some key differences:
 
-</DetailIconCards>
-
-## Get started
-
-<DetailIconCards>
-
-<a href="/docs/import/migrate-intro" description="Follow our guides to move your data from Azure Postgres, AWS RDS, Amazon Aurora, and others" icon="import">Migration guides</a>
-
-</DetailIconCards>
+- Neon compute costs are **up to 80% cheaper** vs Aurora Serverless v2.
+- Neon provisions instances in < 1 s, compared to Aurora's up to 20 min.
+- Neon uses transparent compute units, vs the ACU abstraction in Aurora Serverless.
+- Neon supports [database branching](/docs/introduction/branching) with data and schema via copy-on-write, improving development workflows.
+- Neon's [read replicas](/docs/introduction/read-replicas) don't require storage redundancy, differently than Aurora's.
+- [Connection pooling](/docs/connect/connection-pooling) is built-in in Neon, vs Aurora's RDS Proxy.

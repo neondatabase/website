@@ -358,8 +358,8 @@
           slug: use-cases/saas-apps
         - title: Variable traffic
           slug: use-cases/variable-traffic
-        - title: Database-per-tenant
-          slug: use-cases/database-per-tenant
+        - title: Database-per-user
+          slug: use-cases/database-per-user
         - title: AI Agents
           slug: use-cases/ai-agents
         - title: Platforms
