@@ -2,6 +2,7 @@
 title: Simplify RLS with Drizzle
 subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon Authorize
 enableTableOfContents: true
+updatedOn: '2024-12-10T19:01:34.075Z'
 ---
 
 <InfoBlock>

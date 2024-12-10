@@ -1,8 +1,9 @@
 ---
 title: Secure your data with Stytch and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stytch and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Stytch and Neon
+  Authorize
 enableTableOfContents: true
-updatedOn: '2024-11-25T21:28:12.841Z'
+updatedOn: '2024-12-10T19:01:34.076Z'
 ---
 
 <InfoBlock>
