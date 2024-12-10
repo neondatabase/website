@@ -1,6 +1,6 @@
 ---
 title: Neon use cases
-subtitle: Explore popular use cases that leverage Neon's unique capabilities
+subtitle: Explore popular Neon use cases
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
