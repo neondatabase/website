@@ -11,7 +11,6 @@ const SITE_URL =
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
-const homeProtectedRoutes = ['/', '/home'];
 const ticketsProtectedRoutes = ['/generate-ticket', '/tickets'];
 
 const extractHandleFromPath = (pathname) => pathname.split('/').slice(-2)[0];
@@ -21,42 +20,26 @@ const generateEditPageURL = (handle) => `${SITE_URL}/tickets/${handle}/edit`;
 export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
-
-    // Exclude static files and API routes
-    if (
-      pathname.startsWith('/_next/') ||
-      pathname.startsWith('/favicon.ico') ||
-      pathname.startsWith('/api/')
-    ) {
-      return NextResponse.next();
-    }
-
-    // Check for home protected routes
-    if (homeProtectedRoutes.includes(pathname)) {
-      try {
-        const isLoggedIn = await checkCookie('neon_login_indicator');
-
-        if (pathname === '/' && isLoggedIn) {
-          try {
-            const referer = await getReferer();
-            if (
-              referer.includes(process.env.VERCEL_BRANCH_URL) ||
-              referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
-            ) {
-              return NextResponse.redirect(new URL(`${SITE_URL}/home`));
-            }
-          } catch (error) {
-            console.error('Error getting referer:', error);
+    
+    try {
+      const isLoggedIn = await checkCookie('neon_login_indicator');
+      if (pathname === '/' && isLoggedIn) {
+        try {
+          const referer = await getReferer();
+          if (
+            referer.includes(process.env.VERCEL_BRANCH_URL) ||
+            referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
+          ) {
+            return NextResponse.redirect(new URL(`${SITE_URL}/home`));
           }
-          return NextResponse.redirect(new URL(LINKS.console));
+        } catch (error) {
+          console.error('Error getting referer:', error);
         }
-
-        if (pathname === '/home' && !isLoggedIn) {
-          return NextResponse.redirect(new URL(SITE_URL));
-        }
-      } catch (error) {
-        console.error('Error checking login indicator:', error);
+        return NextResponse.redirect(new URL(LINKS.console));
       }
+      if (pathname === '/home' && !isLoggedIn) return NextResponse.redirect(new URL(SITE_URL));
+    } catch (error) {
+      console.error('Error checking login indicator:', error);
     }
 
     // Check for tickets protected routes
