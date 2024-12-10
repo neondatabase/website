@@ -15,7 +15,8 @@ updatedOn: '2024-12-03T17:00:08.182Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
+  <a href="/docs/postgresql/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
+  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 
 </InfoBlock>
@@ -44,6 +45,17 @@ Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the va
 
 ![neon authorize architecture](/docs/guides/neon_authorize_architecture.png)
 
+## Database roles
+
+Neon Authorize works with two primary database roles:
+
+- **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
+- **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
+
+<Admonition type="note">
+Some authentication providers, like Firebase, support "anonymous authentication" where a unique user ID is automatically generated for visitors who haven't explicitly logged in. This is useful for features like shopping carts, where you want to track a user's actions before they create an account. These anonymous users will still have a valid JWT and can use the anonymous role, making it possible to track their actions while maintaining security.
+</Admonition>
+
 ### Using Neon Authorize with custom JWTs
 
 If you don’t want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here’s a sample application that demonstrates this approach: [See demo](https://github.com/neondatabase/authorize-demo-custom-jwt)
@@ -58,22 +70,19 @@ In a traditional setup, you might handle authorization for a function directly i
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string; userId: string }) {
-  const { userId } = auth(); // Gets the user's ID from the JWT or session
+  const { userId, getToken } = auth(); // Gets the user's ID and getToken from the JWT or session
+  const authToken = await getToken(); // Await the getToken function
 
   if (!userId) throw new Error('No user logged in'); // No user authenticated
-
   if (newTodo.userId !== userId) throw new Error('Unauthorized'); // User mismatch
 
-  // Inserts the new todo, linking it to the authenticated user
-  await fetchWithDrizzle(async (db) => {
-    return db.insert(schema.todos).values({
-      task: newTodo.newTodo,
-      isComplete: false,
-      userId, // Explicitly ties todo to the user
-    });
-  });
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
-  revalidatePath('/');
+  return db.$withAuth(authToken).insert(schema.todos).values({
+    task: newTodo.newTodo,
+    isComplete: false,
+    userId, // Explicitly ties todo to the user
+  });
 }
 ```
 
@@ -84,19 +93,9 @@ In this case, you have to:
 
 ### After Neon Authorize (RLS in the database):
 
-With Neon Authorize, you can let the database handle the authorization through **Row-Level Security** (RLS) policies. Here's an example of applying authorization for creating new todo items, where only authenticated users can insert data:
+With Neon Authorize, you only need to pass the JWT to the database - authorization checks happen automatically through RLS policies:
 
-<Tabs labels={["SQL", "Drizzle"]}>
-<TabItem>
-
-```sql
-CREATE POLICY "create todos" ON "todos"
-    AS PERMISSIVE FOR INSERT
-    TO authenticated
-    WITH CHECK (auth.user_id() = user_id);
-```
-
-</TabItem>
+<Tabs labels={["Drizzle", "SQL"]}>
 
 <TabItem>
 
@@ -109,12 +108,26 @@ pgPolicy('create todos', {
 ```
 
 </TabItem>
+
+<TabItem>
+
+```sql
+CREATE POLICY "create todos" ON "todos"
+    AS PERMISSIVE FOR INSERT
+    TO authenticated
+    WITH CHECK (auth.user_id() = user_id);
+```
+
+</TabItem>
 </Tabs>
 
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
 export async function insertTodo(newTodo: { newTodo: string }) {
+  const { getToken } = auth();
+  const authToken = await getToken();
+
   await fetchWithDrizzle(async (db) => {
     return db.insert(schema.todos).values({
       task: newTodo.newTodo,
@@ -126,23 +139,13 @@ export async function insertTodo(newTodo: { newTodo: string }) {
 }
 ```
 
-This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
+This approach is flexible: you can manage RLS policies directly in SQL, or use an ORM like Drizzle to centralize them within your schema. Keeping both schema and authorization in one place can make it easier to maintain security. Some ORMs like [Drizzle](https://orm.drizzle.team/docs/rls#using-with-neon) are adding support for declaritive RLS, which makes the logic easier to scan and scale.
 
 ## How Neon Authorize gets `auth.user_id()` from the JWT
 
 Let's break down the RLS policy controlling who can **view todos** to see what Neon Authorize is actually doing:
 
-<Tabs labels={["SQL", "Drizzle"]}>
-
-<TabItem>
-
-```sql
-CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
-  FOR SELECT TO authenticated
-  USING ((select auth.user_id() = user_id));
-```
-
-</TabItem>
+<Tabs labels={["Drizzle", "SQL"]}>
 
 <TabItem>
 
@@ -152,6 +155,16 @@ pgPolicy('view todos', {
   to: 'authenticated',
   using: sql`(select auth.user_id() = user_id)`,
 });
+```
+
+</TabItem>
+
+<TabItem>
+
+```sql
+CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
+  FOR SELECT TO authenticated
+  USING ((select auth.user_id() = user_id));
 ```
 
 </TabItem>

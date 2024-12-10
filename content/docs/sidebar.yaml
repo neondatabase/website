@@ -466,6 +466,8 @@
               slug: guides/neon-authorize
             - title: Tutorial
               slug: guides/neon-authorize-tutorial
+            - title: Drizzle RLS
+              slug: guides/neon-authorize-drizzle
             - title: Troubleshooting
               slug: guides/neon-authorize-troubleshooting
             - title: What's next
