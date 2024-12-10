@@ -11,7 +11,7 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 
 <a href="/docs/use-cases/variable-traffic" description="Optimize for performance without over-provisioning with Neon's Autoscaling feature" icon="chart-bar">Variable traffic</a>
 
-<a href="/docs/use-cases/database-per-tenant" description="Learn how you can build database-per-tenant architectures easily and cost-effectively" icon="database">Database-per-tenant</a>
+<a href="/docs/use-cases/database-per-user" description="Learn how you can build database-per-user architectures easily and cost-effectively" icon="database">Database-per-user</a>
 
 <a href="/docs/use-cases/ai-agents" description="Leverage Neon's instant Postgres database provisioning for AI agent development" icon="openai">AI Agents</a>
 
