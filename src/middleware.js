@@ -101,3 +101,7 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL(SITE_URL));
   }
 }
+
+export const config = {
+  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*'],
+};
