@@ -9,8 +9,8 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 
 - [Neon](https://neon.tech/home) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
 - Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
-  - You can keep your production DB in your current Postgres, e.g. RDS;
-  - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily);
+  - You can keep your production DB in your current Postgres, e.g. RDS.
+  - You "move" your non-prod environments to Neon (i.e., by syncing a subset of data daily).
   - To build / test / debug in Neon.
   - Once the changes are tested, you apply them back to prod.
 - What you get: more developer velocity with up to 75% less costs.
