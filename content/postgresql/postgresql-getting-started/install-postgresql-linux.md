@@ -161,19 +161,19 @@ Fifth, quit the `psql` by using the `\q` command:
 \q
 ```
 
-Seventh, use the [pg_restore tool to restore](../postgresql-administration/postgresql-restore-database) the `dvdrental` database:
+Sixth, use the [pg_restore tool to restore](../postgresql-administration/postgresql-restore-database) the `dvdrental` database:
 
 ```shell
 pg_restore -U postgres --dbname=dvdrental --verbose dvdrental.tar
 ```
 
-Eighth, access the PostgreSQL database server again using `psql`:
+Seventh, access the PostgreSQL database server again using `psql`:
 
 ```shell
 psql
 ```
 
-Ninth, switch to the `dvdental` database:
+Eighth, switch to the `dvdental` database:
 
 ```shell
 \c dvdrental
