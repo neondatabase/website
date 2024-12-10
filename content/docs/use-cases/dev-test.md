@@ -28,7 +28,6 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 
 - **These problems get worse over time, not better.** As your number of instances grows, the manual setup and configuration work grows too.
 
-
 ## Why should I move my dev databases to Neon?
 
 Neon is a Postgres provider that offers a much more modern developer experience than databases like RDS. We’ve built a serverless platform for Postgres focused on helping you ship faster instead of being held back by database management. As the cherry on top, you’ll save money.
@@ -49,7 +48,7 @@ Here's how you'll go about it:
 3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
 4. **Automatic branch cleanup and autosuspend**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's autosuspend automatically pauses these environments when unused, so you don't have to worry too much about them.
 
-### How much cost savings have you seen vs RDS/Aurora? 
+### How much cost savings have you seen vs RDS/Aurora?
 
 By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see customers lowering their non-production database costs by 75% or more. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
 

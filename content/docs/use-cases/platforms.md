@@ -5,13 +5,13 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Neon enables database-per-user architectures, allowing platforms to manage large fleets of databases with ease. 
+Neon enables database-per-user architectures, allowing platforms to manage large fleets of databases with ease.
 
 Three features make database-per-user architectures on Neon possible to the extent that today, companies are able to manage fleets of hundreds of thousands of databases with a single engineer.
 
 <DefinitionList bulletType="check">
 Management API
-: Use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics. 
+: Use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics.
 
 Instant Provisioning
 : P99 database provisioning time is less than 1 second.

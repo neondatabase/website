@@ -72,7 +72,3 @@ await toolkit.deleteProject(project);
 The most-loved database by developers worldwide is also the best choice for AI agents, thanks to its versatility (it works for almost any app) and the vast amount of resources, examples, and training datasets available.
 
 Neon is simply Postgres. Everything an agent knows about Postgres is available in Neon, from extensions to full SQL syntax.
-
-
-
-
