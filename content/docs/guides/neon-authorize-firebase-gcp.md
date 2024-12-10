@@ -25,7 +25,7 @@ This guide assumes you already have an application using Firebase or GCP Identit
 
 ## How it works
 
-Firebase and Google Cloud Platform Identity share the same underlying authentication infrastructure, but focus on different use cases: Firebase for mobile and web application developers, and GCP Identity Platform for enterprise-level identity management (leveraging Firebase in its implementation).
+Firebase and Google Cloud Identity Platform share the same underlying authentication infrastructure, but focus on different use cases: Firebase for mobile and web application developers, and GCP Identity Platform for enterprise-level identity management (leveraging Firebase in its implementation).
 
 Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon Authorize. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
 
