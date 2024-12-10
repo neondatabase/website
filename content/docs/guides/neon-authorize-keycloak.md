@@ -1,7 +1,6 @@
 ---
 title: Secure your data with Keycloak and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon
-  Authorize
+subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon Authorize
 enableTableOfContents: true
 updatedOn: '2024-11-25T21:28:12.841Z'
 ---
@@ -9,6 +8,7 @@ updatedOn: '2024-11-25T21:28:12.841Z'
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
+  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 

@@ -1,7 +1,6 @@
 ---
 title: Secure your data with Auth0 and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon
-  Authorize
+subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon Authorize
 enableTableOfContents: true
 updatedOn: '2024-11-25T21:28:12.834Z'
 ---
@@ -13,6 +12,7 @@ updatedOn: '2024-11-25T21:28:12.834Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
+  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
