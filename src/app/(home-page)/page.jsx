@@ -24,8 +24,8 @@ const jsonLd = {
   url: 'https://neon.tech/',
 };
 
-const HomePage = async () => (
-  <>
+const Homepage = () => {
+  return <>
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -41,8 +41,6 @@ const HomePage = async () => (
     <Trusted />
     <Cta />
   </>
-);
+}
 
-export default HomePage;
-
-export const revalidate = 60;
+export default Homepage;
