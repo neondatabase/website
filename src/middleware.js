@@ -3,9 +3,6 @@
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { checkCookie, getReferer } from 'app/actions';
-import LINKS from 'constants/links';
-
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
