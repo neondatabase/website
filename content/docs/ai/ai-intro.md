@@ -3,7 +3,7 @@ title: AI & Embeddings
 subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
   as your vector database
 enableTableOfContents: true
-updatedOn: '2024-12-11T13:29:14.045Z'
+updatedOn: '2024-12-11T19:49:53.132Z'
 ---
 
 Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly Neon API interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
