@@ -35,20 +35,21 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Storage"
+        "title": "Storage",
+        "subtitle": "@MIKE WHAT SHOULD WE PUT HERE?"
       },
-      "free": "0.5 GiB",
+      "free": "0.5 GB-month",
       "launch": {
-        "title": "10 GiB",
-        "info": "Additional at $1.75 per GB / Archive storage: $0.1 per GB"
+        "title": "10 GB-month",
+        "info": "Additional at $1.75 per GB-month / Archive storage: $0.1 per GB-month"
       },
       "scale": {
-        "title": "50 GiB",
-        "info": "Additional at $1.5 per GB / Archive storage: $0.1 per GB"
+        "title": "50 GB-month",
+        "info": "Additional at $1.5 per GB-month / Archive storage: $0.1 per GB-month"
       },
       "business": {
-        "title": "500 GiB",
-        "info": "Additional at $0.5 per GB / Archive storage: $0.1 per GB"
+        "title": "500 GB-month",
+        "info": "Additional at $0.5 per GB-month / Archive storage: $0.1 per GB-month"
       }
     },
     {
