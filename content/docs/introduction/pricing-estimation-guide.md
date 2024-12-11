@@ -42,7 +42,7 @@ Estimate your monthly usage to see if any "extra usage" is required beyond the s
 - **Archive Storage (GB-month)**: How much archive storage do you expect to use?
   - Branches **older than 14 days** and **not accessed for the past 24 hours** are moved to cost-efficient archive storage automatically. For more, see [Branch archiving](/docs/guides/branch-archiving).
   - This will only apply if you have branches that are not accessed regularly.
-- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 10 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
+- **Compute (Hours)**: How many compute hours will you require? A compute hour is 1 active hour on a compute with 1 vCPU. Neon supports compute sizes ranging from .25 vCPU to 56 vCPU. See [Compute](/docs/introduction/usage-metrics#compute) for a compute hour formula you can use to estimate your compute usage.
 - **Projects**: How many projects do you need? Neon recommends a project per application. Most users do no exceed Neon's project allowances.
 
 ## Step 3: Calculate extra usage fees

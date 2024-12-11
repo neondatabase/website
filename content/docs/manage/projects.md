@@ -143,7 +143,7 @@ From the **Project settings** page, you can also set defaults or apply bulk chan
 
 ### Reset the default compute size
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 10 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
 
 By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 
@@ -151,8 +151,8 @@ To reset the default compute size, go to **Project settings** > **Compute**.
 
 Using the slider, you can configure a fixed-size compute or enable autoscaling.
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 10 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 10 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 _Example: default minimum and maximum autoscale settings_
 
@@ -163,7 +163,7 @@ _Example: default minimum and maximum autoscale settings_
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
 - [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
-- [Time Travel](/docs/guides/time-travel-assist) queries for investingating data issues
+- [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
 The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 
