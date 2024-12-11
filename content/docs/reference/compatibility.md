@@ -15,7 +15,7 @@ Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you w
 
 ## Postgres extensions
 
-Neon supports numerous Postgres extensions, and we regularly add support for more. For the extensions that Neon supports, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.gg/92vNTzKDGp). Please keep in mind that privilege requirements, local file system access, and functionality that is incompatible with Neon features such as Autoscaling and Autosuspend may prevent Neon from being able to offer support for certain extensions.
+Neon supports numerous Postgres extensions, and we regularly add support for more. For the extensions that Neon supports, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.gg/92vNTzKDGp). Please keep in mind that privilege requirements, local file system access, and functionality that is incompatible with Neon features such as Autoscaling and Scale to zero may prevent Neon from being able to offer support for certain extensions.
 
 ## Roles and permissions
 
@@ -123,7 +123,7 @@ Currently, Postgres server logs can only be accessed Neon Support team. Should y
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an `Idle` state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
+Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
 
 ## Memory
 
@@ -135,11 +135,11 @@ Temporary tables, which are stored in compute local storage, are limited by comp
 
 ## Session context
 
-The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, parameters set for a specific session, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/current/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/current/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends. To avoid losing session-level contexts in Neon, you can disable Neon's [autosuspend](/docs/guides/auto-suspend-guide) feature, which is possible on any of Neon's paid plans. However, disabling autosuspend also means that your compute will run 24/7. You can't disable autosuspend on Neon's Free plan, where your compute always autosuspends after 5 minutes of inactivity.
+The Neon cloud service automatically closes idle connections after a period of inactivity, as described in [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). When connections are closed, anything that exists within a session context is forgotten and must be recreated before being used again. For example, parameters set for a specific session, in-memory statistics, temporary tables, prepared statements, advisory locks, and notifications and listeners defined using [NOTIFY](https://www.postgresql.org/docs/current/sql-notify.html)/[LISTEN](https://www.postgresql.org/docs/current/sql-listen.html) commands only exist for the duration of the current session and are lost when the session ends. To avoid losing session-level contexts in Neon, you can disable Neon's [Scale to Zero](/docs/guides/scale-to-zero-guide) feature, which is possible on any of Neon's paid plans. However, disabling scale to zero also means that your compute will run 24/7. You can't disable scale to zero on Neon's Free plan, where your compute always suspends after 5 minutes of inactivity.
 
 ## Statistics collection
 
-Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are not saved when a Neon compute (where Postgres runs) is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's autosuspend behavior, see [Autosuspend](/docs/introduction/auto-suspend).
+Statistics collected by the Postgres [cumulative statistics system](https://www.postgresql.org/docs/current/monitoring-stats.html) are not saved when a Neon compute (where Postgres runs) is suspended due to inactivity or restarted. For information about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
 
 ## Database encoding
 

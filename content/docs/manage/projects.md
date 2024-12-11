@@ -36,7 +36,7 @@ Once you open a project, you can use the **Project settings** page to manage tha
 You can tab between these sections:
 
 - **General** &#8212; Change the name of your project or copy the project ID.
-- **Compute** &#8212; Set the autosuspend and sizing defaults for any new computes you create when branching.
+- **Compute** &#8212; Set the scale to zero and sizing defaults for any new computes you create when branching.
 - **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
 - **Sharing** &#8212; Let other users access your project's databases.
 - **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
@@ -62,7 +62,7 @@ To create a Neon project:
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
    - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-   - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
+   - The scale to zero setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
 
 4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
 5. Click **Create Project**.

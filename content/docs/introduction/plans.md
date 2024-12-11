@@ -60,7 +60,7 @@ The Free Plan includes the following usage allowances:
 ### Free Plan features
 
 - Autoscaling up to 2 vCPU
-- Autosuspend (after 5 minutes of inactivity)
+- Scale to zero (after 5 minutes of inactivity)
 - Monitoring with 1 day of historical data
 - All supported regions
 - Project collaboration
@@ -105,7 +105,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 
 ### Launch plan features
 
-- Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Autosuspend_ (**5 minutes+** to **7 days**)
+- Autoscaling compute size up to 4 vCPUs and 16 GB RAM, _Scale to zero_ (**5 minutes+** to **7 days**)
 - Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Branch protection (up to 2 branches)
@@ -144,7 +144,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 
 ### Scale plan features
 
-- Autoscaling compute up to 8 vCPUs and 32 GB RAM, _Autosuspend_ (**1 minute+** to **7 days**)
+- Autoscaling compute up to 8 vCPUs and 32 GB RAM, _Scale to zero_ (**1 minute+** to **7 days**)
 - Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions (on AWS-provisioned projects only)
 - Branch protection (up to 5 branches)
@@ -213,7 +213,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, archive storage, and compute
-- _Autosuspend_ (disabled entirely or up to **7 days**)
+- _Scale to zero_ (disabled entirely or up to **7 days**)
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus Enterprise-level SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 

@@ -11,7 +11,7 @@ This is where **Neon Read Replicas** come in handy. With read replicas, you can 
 
 - You can add a fully functional read replica in seconds.
 - There's no additional storage cost or data replication, as the replica uses the same storage as your primary compute.
-- The read replica compute automatically scales to zero based on your [autosuspend](/docs/introduction/auto-suspend) settings. By default, a compute suspends due to inactivity after 5 minutes of inactivity.
+- The read replica compute automatically scales to zero based on your [scale to zero](/docs/introduction/scale-to-zero) settings. By default, a compute suspends due to inactivity after 5 minutes of inactivity.
 - You can remove a read replica as quickly as you created it or just leave it for next time. The compute will remain suspended until you run your next query.
 
 ## What is an ad-hoc query?
@@ -41,7 +41,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings**. You can configure a fixed-size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure an **Autosuspend time** setting, which is the amount of idle time after which a compute suspends due to inactivity. The default setting is 5 minutes.
+5. Specify the **Compute size settings**. You can configure a fixed-size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure a **Scale to zero time** setting, which is the amount of idle time after which a compute suspends due to inactivity. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
    </Admonition>
