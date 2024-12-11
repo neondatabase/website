@@ -4,7 +4,7 @@ enableTableOfContents: true
 subtitle: Estimate your monthly bill with Neon
 redirectFrom:
   - /docs/introduction/how-billing-works#neon-pricing-estimation-guide
-updatedOn: '2024-12-01T21:48:07.696Z'
+updatedOn: '2024-12-11T21:23:33.088Z'
 ---
 
 You can use this guide to estimate your monthly bill with Neon based on your selected plan and estimated usage.

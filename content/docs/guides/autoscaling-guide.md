@@ -1,7 +1,7 @@
 ---
 title: Enable Autoscaling in Neon
 enableTableOfContents: true
-updatedOn: '2024-11-20T12:37:42.223Z'
+updatedOn: '2024-12-11T21:23:33.086Z'
 ---
 
 <InfoBlock>
