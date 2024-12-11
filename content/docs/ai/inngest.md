@@ -106,10 +106,10 @@ Hackable, fully-featured, pre-built [starter apps](https://github.com/neondataba
 
 <DetailIconCards>
 
-<a href="https://github.com/inngest/neon-inngest-rag-starter" description="A Next.js RAG starter app built with OpenAI and Inngest" icon="github">RAG starter (OpenAI + Inngest)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/inngest/rag-starter-nextjs" description="A Next.js RAG starter app built with OpenAI and Inngest" icon="github">RAG starter (OpenAI + Inngest)</a>
 
 <a href="https://github.com/inngest/multi-tenant-rag-example" description="A Next.js contacts importer multi-tenant RAG built with OpenAI and Inngest" icon="github">multi-tenant RAG (OpenAI + Inngest)</a>
 
-<a href="https://github.com/inngest/neon-auto-embeddings-example" description="A Next.js app example of auto-embedding with Inngest" icon="github">Auto-embedding (OpenAI + Inngest)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/inngest/auto-embeddings-nextjs" description="A Next.js app example of auto-embedding with Inngest" icon="github">Auto-embedding (OpenAI + Inngest)</a>
 
 </DetailIconCards>
