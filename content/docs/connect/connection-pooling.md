@@ -27,7 +27,7 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 ## Connection limits without connection pooling
 
-Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
+Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
 
 | Compute Size (CU) | vCPU | RAM   | max_connections |
 | :---------------- | :--- | :---- | :-------------- |
@@ -67,8 +67,8 @@ Some applications open numerous connections, with most eventually becoming inact
 
 The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal Postgres endpoint, so they still consume some connections to the main Postgres instance.
 
-To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
-At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough minimum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.
+To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [`default_pool_size`](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, if `default_pool_size` is 64, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
+At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough maximum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.
 
 Similarly, even if role `alex` has 64 concurrently active transactions through the pooler to the `neondb` database, that role can still start up to 64 concurrent transactions in the `alex_db` database (a different database) when connected through the pooler; but again, only if the Postgres `max_connections` limit can support the number of connections managed by the pooler.
 
@@ -90,16 +90,18 @@ Neon's PgBouncer configuration is shown below. The settings are not user-configu
 [pgbouncer]
 pool_mode=transaction
 max_client_conn=10000
-default_pool_size=64
+default_pool_size=0.9 * max_connections
 max_prepared_statements=0
 query_wait_timeout=120
 ```
+
+where `max_connections` is a Postgres setting.
 
 The following list describes each setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
 
 - `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
 - `max_client_conn=10000`: Maximum number of client connections allowed.
-- `default_pool_size=64`: Default number of server connections to allow per user/database pair.
+- `default_pool_size`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
 - `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 
