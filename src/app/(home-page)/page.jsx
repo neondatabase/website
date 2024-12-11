@@ -24,7 +24,7 @@ const jsonLd = {
   url: 'https://neon.tech/',
 };
 
-export default function () {
+const Homepage = () => {
   return <>
     <script
       type="application/ld+json"
@@ -42,3 +42,5 @@ export default function () {
     <Cta />
   </>
 }
+
+export default Homepage;
