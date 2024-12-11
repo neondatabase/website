@@ -196,7 +196,7 @@ A usage metric that measures the total volume of data transferred out of Neon (k
 
 ## Database
 
-A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Noen project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
+A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Neon project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
 
 ## database branching
 
