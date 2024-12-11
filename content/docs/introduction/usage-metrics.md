@@ -233,7 +233,6 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 | 54            | 54   | 216 GB |
 | 56            | 56   | 224 GB |
 
-
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
 ### How Neon compute features affect usage

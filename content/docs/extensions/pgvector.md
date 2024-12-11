@@ -454,14 +454,13 @@ Like other index types, it’s faster to create an index after loading your init
 | 54                 | 54   | 216 GB | 3620 MB              |
 | 56                 | 56   | 224 GB | 3754 MB              |
 
+To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-  To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+```sql
+SET maintenance_work_mem='10 GB';
+```
 
-  ```sql
-  SET maintenance_work_mem='10 GB';
-  ```
-
-  The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GB is less than 50% of the RAM available for that compute size.
+The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GB is less than 50% of the RAM available for that compute size.
 
 - `max_parallel_maintenance_workers`
 
