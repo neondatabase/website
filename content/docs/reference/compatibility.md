@@ -59,7 +59,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `max_worker_processes`                | 26            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                              |
 | `password_encryption`                 | scram-sha-256 |                                                                                                                                                                               |
 | `restart_after_crash`                 | off           |                                                                                                                                                                               |
-| `shared_buffers`                      | 128MB         | Neon uses a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) in addition to `shared_buffers` to extend cache memory to 80% of your compute's RAM. |
+| `shared_buffers`                      | 128MB         | Neon uses a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) in addition to `shared_buffers` to extend cache memory to 80% of your compute's RAM. The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
 | `superuser_reserved_connections`      | 4             |                                                                                                                                                                               |
 | `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                               |
 | `wal_level`                           | replica       | Support for `wal_level=logical` is coming soon. See [logical replication](/docs/introduction/logical-replication).                                                            |
@@ -68,22 +68,46 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 
 ### Parameter settings that differ by compute size
 
-Of the parameter settings listed above, the `maintenance_work_mem`, `max_connections`, and `max_worker_processes` differ by compute size, which is defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu). The following table shows values for each compute size.
+Of the parameter settings listed above, the `max_connections`, `maintenance_work_mem`,
+`shared_buffers`, and `max_worker_processes` differ by compute size, which is defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
+The following table shows values for each compute size. If autoscaling is turned on, the following
+numbers are valid for maximum CU size.
 
-| Compute Size (CU) | `max_connections` | `maintenance_work_mem` | `max_worker_processes` |
-| :---------------- | :---------------- | :--------------------- | :--------------------- |
-| 0.25              | 112               | 64 MB                  | 10                     |
-| 0.50              | 225               | 64 MB                  | 11                     |
-| 1                 | 450               | 67 MB                  | 12                     |
-| 2                 | 901               | 134 MB                 | 14                     |
-| 3                 | 1351              | 201 MB                 | 16                     |
-| 4                 | 1802              | 268 MB                 | 18                     |
-| 5                 | 2253              | 335 MB                 | 20                     |
-| 6                 | 2703              | 402 MB                 | 22                     |
-| 7                 | 3154              | 470 MB                 | 24                     |
-| 8                 | 3604              | 537 MB                 | 26                     |
-| 9                 | 4000              | 604 MB                 | 28                     |
-| 10                | 4000              | 671 MB                 | 30                     |
+| Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
+| :----------- | :---------------- | :--------------------- | :--------------------- | :--------------- |
+| 0.25         | 112               | 64 MB                  | 12                     | 128 MB           |
+| 0.50         | 225               | 64 MB                  | 13                     | 128 MB           |
+| 1            | 450               | 67 MB                  | 14                     | 128 MB           |
+| 2            | 901               | 134 MB                 | 16                     | 230 MB           |
+| 3            | 1351              | 201 MB                 | 18                     | 343 MB           |
+| 4            | 1802              | 268 MB                 | 20                     | 456 MB           |
+| 5            | 2253              | 335 MB                 | 22                     | 569 MB           |
+| 6            | 2703              | 402 MB                 | 24                     | 682 MB           |
+| 7            | 3154              | 470 MB                 | 26                     | 796 MB           |
+| 8            | 3604              | 537 MB                 | 28                     | 909 MB           |
+| 9            | 4000              | 604 MB                 | 30                     | 1008 MB          |
+| 10           | 4000              | 671 MB                 | 32                     | 1009 MB          |
+| 16           | 4000              | 671 MB                 | 44                     | 1012 MB          |
+
+The formula for `max_connections` is
+
+```go
+compute_size = min(max_compute_size, 8 * min_compute_size)
+max_connections = max(100, min(4000, 450.5 * compute_size))
+```
+
+The formula for `max_worker_processes` is
+
+```go
+max_worker_processes := 12 + floor(2 * max_compute_size)
+```
+
+The formula for `shared_buffers` is
+
+```go
+backends = 1 + max_connections + max_worker_processes
+shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
+```
 
 <Admonition type="note">
 You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
