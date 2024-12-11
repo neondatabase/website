@@ -2,7 +2,7 @@
 title: LangChain
 subtitle: Build AI applications faster with LangChain and Postgres
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.616Z'
+updatedOn: '2024-12-11T08:48:36.316Z'
 ---
 
 LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.
