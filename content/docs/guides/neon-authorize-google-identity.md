@@ -22,7 +22,7 @@ Use Google Identity with Neon Authorize to add secure, database-level authorizat
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- To use Google Cloud Platform services, you'll need OAuth credentials. If you haven't set them up, follow the [quickstart](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) or these steps.
+- To use Google Cloud Platform services, you'll need OAuth credentials. If you haven't set them up, follow the [quickstart](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) or these steps:
   1. Go to [Google Cloud Console](https://console.cloud.google.com/) and create a new project if needed
   2. Navigate to **APIs & Services > Credentials**
   <div style={{ display: 'flex', justifyContent: 'center'}}>
