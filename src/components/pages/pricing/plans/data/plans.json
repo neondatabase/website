@@ -35,8 +35,7 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Storage",
-        "subtitle": "@MIKE WHAT SHOULD WE PUT HERE?"
+        "title": "Storage"
       },
       "free": "0.5 GB-month",
       "launch": {
