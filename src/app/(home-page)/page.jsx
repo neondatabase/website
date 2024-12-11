@@ -24,7 +24,7 @@ const jsonLd = {
   url: 'https://neon.tech/',
 };
 
-export default async function () {
+export default function () {
   return <>
     <script
       type="application/ld+json"
