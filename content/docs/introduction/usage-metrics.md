@@ -190,22 +190,49 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 - A single **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it would take 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it would only take 15 minutes to use 1 compute hour.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
-- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 10 CUs, as outlined below:
+- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-  | Compute Units | vCPU | RAM   |
-  | :------------ | :--- | :---- |
-  | .25           | .25  | 1 GB  |
-  | .5            | .5   | 2 GB  |
-  | 1             | 1    | 4 GB  |
-  | 2             | 2    | 8 GB  |
-  | 3             | 3    | 12 GB |
-  | 4             | 4    | 16 GB |
-  | 5             | 5    | 20 GB |
-  | 6             | 6    | 24 GB |
-  | 7             | 7    | 28 GB |
-  | 8             | 8    | 32 GB |
-  | 9             | 9    | 36 GB |
-  | 10            | 10   | 40 GB |
+| Compute Units | vCPU | RAM    |
+| :------------ | :--- | :----- |
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+| 9             | 9    | 36 GB  |
+| 10            | 10   | 40 GB  |
+| 11            | 11   | 44 GB  |
+| 12            | 12   | 48 GB  |
+| 13            | 13   | 52 GB  |
+| 14            | 14   | 56 GB  |
+| 15            | 15   | 60 GB  |
+| 16            | 16   | 64 GB  |
+| 18            | 18   | 72 GB  |
+| 20            | 20   | 80 GB  |
+| 22            | 22   | 88 GB  |
+| 24            | 24   | 96 GB  |
+| 26            | 26   | 104 GB |
+| 28            | 28   | 112 GB |
+| 30            | 30   | 120 GB |
+| 32            | 32   | 128 GB |
+| 34            | 34   | 136 GB |
+| 36            | 36   | 144 GB |
+| 38            | 38   | 152 GB |
+| 40            | 40   | 160 GB |
+| 42            | 42   | 168 GB |
+| 44            | 44   | 176 GB |
+| 46            | 46   | 184 GB |
+| 48            | 48   | 192 GB |
+| 50            | 50   | 200 GB |
+| 52            | 52   | 208 GB |
+| 54            | 54   | 216 GB |
+| 56            | 56   | 224 GB |
+
 
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
@@ -272,7 +299,7 @@ compute hours = compute size * active hours
 
 If you're noticing an unexpectedly high number of compute hours, consider the following steps:
 
-- **Check your compute size:** Compute sizes range from 0.25 CU to 10 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
+- **Check your compute size:** Compute sizes range from 0.25 CU to 56 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
 - **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from scaling to zero. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
 
   To investigate database activity, you can run the following query to check connections:

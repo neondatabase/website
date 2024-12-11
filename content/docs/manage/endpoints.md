@@ -84,20 +84,46 @@ Users on paid plans can change compute size settings when [editing a compute](#e
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
 
-| Compute size (in CUs) | vCPU | RAM   |
-| :-------------------- | :--- | :---- |
-| .25                   | .25  | 1 GB  |
-| .5                    | .5   | 2 GB  |
-| 1                     | 1    | 4 GB  |
-| 2                     | 2    | 8 GB  |
-| 3                     | 3    | 12 GB |
-| 4                     | 4    | 16 GB |
-| 5                     | 5    | 20 GB |
-| 6                     | 6    | 24 GB |
-| 7                     | 7    | 28 GB |
-| 8                     | 8    | 32 GB |
-| 9                     | 9    | 36 GB |
-| 10                    | 10   | 40 GB |
+| Compute Units | vCPU | RAM    |
+| :------------ | :--- | :----- |
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+| 9             | 9    | 36 GB  |
+| 10            | 10   | 40 GB  |
+| 11            | 11   | 44 GB  |
+| 12            | 12   | 48 GB  |
+| 13            | 13   | 52 GB  |
+| 14            | 14   | 56 GB  |
+| 15            | 15   | 60 GB  |
+| 16            | 16   | 64 GB  |
+| 18            | 18   | 72 GB  |
+| 20            | 20   | 80 GB  |
+| 22            | 22   | 88 GB  |
+| 24            | 24   | 96 GB  |
+| 26            | 26   | 104 GB |
+| 28            | 28   | 112 GB |
+| 30            | 30   | 120 GB |
+| 32            | 32   | 128 GB |
+| 34            | 34   | 136 GB |
+| 36            | 36   | 144 GB |
+| 38            | 38   | 152 GB |
+| 40            | 40   | 160 GB |
+| 42            | 42   | 168 GB |
+| 44            | 44   | 176 GB |
+| 46            | 46   | 184 GB |
+| 48            | 48   | 192 GB |
+| 50            | 50   | 200 GB |
+| 52            | 52   | 208 GB |
+| 54            | 54   | 216 GB |
+| 56            | 56   | 224 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
