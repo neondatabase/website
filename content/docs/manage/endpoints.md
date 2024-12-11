@@ -118,6 +118,10 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 
 The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
+<Admonition type="note">
+Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+</Admonition>
+
 | Min. Compute Size (CU) | vCPU | RAM   | LFC size | max_connections |
 | ---------------------- | ---- | ----- | -------- | --------------- |
 | 0.25                   | 0.25 | 1 GB  | 0.8 GB   | 112             |
@@ -132,6 +136,32 @@ The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_
 | 8                      | 8    | 32 GB | 25.6 GB  | 3604            |
 | 9                      | 9    | 36 GB | 28.8 GB  | 4000            |
 | 10                     | 10   | 40 GB | 32 GB    | 4000            |
+| 11                     | 11   | 44 GB | 35.2 GB  | 4000            |
+| 12                     | 12   | 48 GB | 38.4 GB  | 4000            |
+| 13                     | 13   | 52 GB | 41.6 GB  | 4000            |
+| 14                     | 14   | 56 GB | 44.8 GB  | 4000            |
+| 15                     | 15   | 60 GB | 48 GB    | 4000            |
+| 16                     | 16   | 64 GB | 51.2 GB  | 4000            |
+| 18                     | 18   | 72 GB | 57.6 GB  | 4000            |
+| 20                     | 20   | 80 GB | 64 GB    | 4000            |
+| 22                     | 22   | 88 GB | 70.4 GB  | 4000            |
+| 24                     | 24   | 96 GB | 76.8 GB  | 4000            |
+| 26                     | 26   | 104 GB| 83.2 GB  | 4000            |
+| 28                     | 28   | 112 GB| 89.6 GB  | 4000            |
+| 30                     | 30   | 120 GB| 96 GB    | 4000            |
+| 32                     | 32   | 128 GB| 102.4 GB | 4000            |
+| 34                     | 34   | 136 GB| 108.8 GB | 4000            |
+| 36                     | 36   | 144 GB| 115.2 GB | 4000            |
+| 38                     | 38   | 152 GB| 121.6 GB | 4000            |
+| 40                     | 40   | 160 GB| 128 GB   | 4000            |
+| 42                     | 42   | 168 GB| 134.4 GB | 4000            |
+| 44                     | 44   | 176 GB| 140.8 GB | 4000            |
+| 46                     | 46   | 184 GB| 147.2 GB | 4000            |
+| 48                     | 48   | 192 GB| 153.6 GB | 4000            |
+| 50                     | 50   | 200 GB| 160 GB   | 4000            |
+| 52                     | 52   | 208 GB| 166.4 GB | 4000            |
+| 54                     | 54   | 216 GB| 172.8 GB | 4000            |
+| 56                     | 56   | 224 GB| 179.2 GB | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 

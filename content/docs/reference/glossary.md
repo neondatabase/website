@@ -115,26 +115,11 @@ The access point through which users connect to a Neon compute. In the context o
 
 ## compute size
 
-The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 10 CU. The number of units determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 56 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 10 CUs. The following table shows the vCPU and RAM for each CU:
-
-| Compute Unit (CU) | vCPU | RAM   |
-| :---------------- | :--- | :---- |
-| .25               | .25  | 1 GB  |
-| .5                | .5   | 2 GB  |
-| 1                 | 1    | 4 GB  |
-| 2                 | 2    | 8 GB  |
-| 3                 | 3    | 12 GB |
-| 4                 | 4    | 16 GB |
-| 5                 | 5    | 20 GB |
-| 6                 | 6    | 24 GB |
-| 7                 | 7    | 28 GB |
-| 8                 | 8    | 32 GB |
-| 9                 | 9    | 36 GB |
-| 10                | 10   | 40 GB |
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 

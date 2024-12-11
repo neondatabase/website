@@ -184,7 +184,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 
 ### Business plan features
 
-- Autoscaling compute up to 10 vCPUs and 40 GB RAM
+- Autoscaling compute up to 16 vCPUs and 40 GB RAM
 - Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more

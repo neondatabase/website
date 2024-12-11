@@ -43,7 +43,7 @@ In Neon, your compute size determines the amount of vCPU and memory your databas
 - **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
 - **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
-- **Business**: Up to 10 CUs (10 vCPU, 40 GB RAM)
+- **Business**: Up to 56 CUs (56 vCPU, 64 GB RAM)
 - **Enterprise**: Larger sizes
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
