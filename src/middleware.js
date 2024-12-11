@@ -35,7 +35,7 @@ export async function middleware(req) {
         } catch (error) {
           console.error('Error getting referer:', error);
         }
-        return NextResponse.redirect(new URL(LINKS.console));
+        return NextResponse.redirect(LINKS.console);
       }
       if (pathname === '/home' && !isLoggedIn) return NextResponse.redirect(new URL(SITE_URL));
     } catch (error) {
