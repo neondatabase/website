@@ -1,15 +1,33 @@
 ---
 title: AI & Embeddings
-subtitle: Build AI applications with Neon Postgres as your vector database
+subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
+  as your vector database
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.043Z'
+updatedOn: '2024-12-11T13:29:14.045Z'
 ---
 
-Vector databases enable efficient storage and retrieval of vector data, which is an essential component in building AI applications that leverage Large Language Models (LLMs).
+Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly Neon API interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
 
-Neon supports the `pgvector` open-source extension, which enables Postgres as a vector database for storing and querying embeddings. This means you can leverage the open-source database that you trust as your vector store and forget about migrating data or adding a third-party vector storage solution.
+Neon also supports vector data, a key component for AI applications. With the **pgvector** open-source extension, you can use Neon as a vector database for storing and querying embeddings. This allows you to Postgres as your vector store, eliminating the need for data migration or third-party solutions.
 
-Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started.
+## Neon for AI Agents
+
+Neon supports Postgres for AI agents with the following interfaces:
+
+- **@neondatabase/toolkit** — a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an perfect choice for AI agents that need to quickly set up an SQL database. [Learn more](/docs/reference/neondatabase-toolkit).
+- **Neon Model Context Protocol (MCP) server** — enables any MCP Client to interact with Neon’s API using natural language. AI agents can use Neon's MCP server to perform actions such as creating databases, running SQL queries, and managing database migrations. [Read the announcement](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+
+</DetailIconCards>
+
+## Neon for AI Apps
+
+Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started with Neon as your vector database.
 
 <CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application. Our starter apps and resources will help you get up and running." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
@@ -27,7 +45,7 @@ The **Neon AI Starter Kit** includes:
 - A [scaling guide](/docs/ai/ai-scale-with-neon) for scaling your app with Neon's Autoscaling and Read Replica features
 - A collection of [AI apps built with Neon](#ai-apps-built-with-neon) that you can reference while building your own app
 
-## AI basics
+### AI basics
 
 <DetailIconCards>
 <a href="/docs/ai/ai-concepts" description="Learn how embeddings are used to build AI applications" icon="openai">AI concepts</a>
@@ -36,7 +54,7 @@ The **Neon AI Starter Kit** includes:
 
 </DetailIconCards>
 
-## AI starter apps
+### AI starter apps
 
 Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you up and running.
 
@@ -64,7 +82,7 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 </DetailIconCards>
 
-## AI integrations
+### AI integrations
 
 Learn how to integrate Neon Postgres with LLMs and AI platforms.
 
@@ -76,7 +94,7 @@ Learn how to integrate Neon Postgres with LLMs and AI platforms.
 
 </DetailIconCards>
 
-## Preparing your AI app for production
+### Preparing your AI app for production
 
 <DetailIconCards>
 
@@ -86,7 +104,7 @@ Learn how to integrate Neon Postgres with LLMs and AI platforms.
 
 </DetailIconCards>
 
-## AI apps built with Neon
+### AI apps built with Neon
 
 AI applications built with Neon Postgres that you can reference as code examples or inspiration.
 

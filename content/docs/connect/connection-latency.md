@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.048Z'
+updatedOn: '2024-12-06T19:56:24.868Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -167,7 +167,7 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
-### Connection retry references
+#### Connection retry references
 
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
@@ -175,6 +175,48 @@ However, this example is a simplification. In a production application, you migh
 ### Use application-level caching
 
 Implement a caching system like [Redis](https://redis.io/) to store frequently accessed data, which can be rapidly served to users. This approach can help reduce occurrences of latency, but only if the data requested is available in the cache. Challenges with this strategy include cache invalidation due to frequently changing data, and cache misses when queries request uncached data. This strategy will not avoid latency entirely, but you may be able to combine it with other strategies to improve application responsiveness overall.
+
+### Optimizing connection latency with sslnegotiation
+
+Starting with PostgreSQL 17, you can use the `sslnegotiation` connection parameter to control how SSL negotiation is handled when establishing a connection. The `sslnegotiation=direct` option reduces connection latency by skipping unnecessary negotiation steps.
+
+Neon has implemented support for `sslnegotiation=direct` in our proxy layer, allowing you to benefit from faster connection times even if your database runs on an older PostgreSQL version. You just need a PostgreSQL 17 client to use this feature.
+
+Here's a comparison of connection times with and without the `sslnegotiation=direct` parameter:
+
+**Without sslnegotiation=direct:**
+
+```bash
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+                                                version
+---------------------------------------------------------------------------------------------------------
+PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+(1 row)
+
+real    0m0.872s
+user    0m0.019s
+sys     0m0.000s
+```
+
+**With sslnegotiation=direct:**
+
+```bash
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&sslnegotiation=direct" -c "SELECT version();"
+                                                version
+---------------------------------------------------------------------------------------------------------
+PostgreSQL 17.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+(1 row)
+
+real    0m0.753s
+user    0m0.016s
+sys     0m0.005s
+```
+
+As shown in the example above, using `sslnegotiation=direct` reduces the connection time by skipping the initial SSL negotiation step. To use this optimization, simply append `sslnegotiation=direct` to your connection string:
+
+```text shouldWrap
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&sslnegotiation=direct
+```
 
 ## Conclusion
 
