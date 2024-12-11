@@ -30,7 +30,7 @@ export async function middleware(req) {
             referer.includes(process.env.VERCEL_BRANCH_URL) ||
             referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
           ) {
-            return NextResponse.redirect(new URL(`${SITE_URL}/home`));
+            return NextResponse.redirect(new URL('/home', req.url));
           }
         } catch (error) {
           console.error('Error getting referer:', error);
