@@ -33,9 +33,10 @@
       "feature": "Included"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "Storage"
+        "title": "Storage (monthly)",
+        "subtitle": "GB-month = 1GB of storage for 1 month"
       },
       "free": "0.5 GB-month",
       "launch": {
@@ -54,24 +55,24 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Compute hours",
+        "title": "Compute (monthly)",
         "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "190 /month",
+        "title": "190 compute hrs",
         "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       "launch": {
-        "title": "300 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "300 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       },
       "scale": {
-        "title": "750 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "750 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       },
       "business": {
-        "title": "1,000 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "1,000 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       }
     },
     {
