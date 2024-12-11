@@ -6,8 +6,15 @@ updatedOn: '2024-12-09T10:00:00.000Z'
 ---
 
 <InfoBlock>
+<DocsList title="What You'll Learn">
+  <p>Google Identity integration</p>
+  <p>JWT authentication setup</p>
+  <p>Row-Level Security policies</p>
+</DocsList>
+
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
+  <a href="https://developers.google.com/identity/openid-connect/openid-connect">Google Identity Quickstart</a>
 </DocsList>
 </InfoBlock>
 
@@ -51,12 +58,12 @@ https://www.googleapis.com/oauth2/v3/certs
 ```
 
 <Admonition type="note" title="Note">
-For the JWT Audience value required by Neon Authorize, you'll use the OAuth client ID which was saved earlier.
+For the JWT Audience value required by Neon Authorize, you'll use the **OAuth 2.0 Client ID** which was saved earlier.
 </Admonition>
 
 ### 2. Add Google Identity as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console** and add Google Identity as an authentication provider under the **Authorize** page. Paste the JWKS URL and Google Identity will be automatically recognized and selected. Add your Google Cloud project ID as the JWT Audience value and click **Set Up**.
+Once you have the JWKS URL, go to the **Neon Console** and add Google Identity as an authentication provider under the **Authorize** page. Paste the JWKS URL and Google Identity will be automatically recognized and selected. Add your **OAuth 2.0 Client ID** as the JWT Audience value and click **Set Up**.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/google_identity_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
