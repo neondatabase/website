@@ -44,3 +44,5 @@ const Homepage = () => (
 );
 
 export default Homepage;
+
+export const revalidate = false;
