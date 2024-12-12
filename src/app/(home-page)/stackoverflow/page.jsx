@@ -32,3 +32,5 @@ const StackOverflowPage = () => (
 );
 
 export default StackOverflowPage;
+
+export const revalidate = false;
