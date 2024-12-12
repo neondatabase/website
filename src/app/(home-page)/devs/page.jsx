@@ -33,4 +33,4 @@ const CodingForEntrepreuneursPage = () => (
 
 export default CodingForEntrepreuneursPage;
 
-export const revalidate = 60;
+export const revalidate = false;
