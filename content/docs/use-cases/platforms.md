@@ -19,7 +19,7 @@ What all these platforms had in common:
 - Everything had to be programmable via API
 - The cost of idle instances had to be negligible
 
-The solution: **they're creating a database per customer, scaling up to hundreds of thousands of databases**. 
+The solution: **they're creating a database per customer, scaling up to hundreds of thousands of databases**.
 
 <CTA title="Want to know more?" description="Our database-per-user guide walks you through how to set up a database-per user model in Neon" buttonText="Database-per-user guide" buttonUrl="/docs/use-cases/database-per-user" />
 

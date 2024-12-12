@@ -72,7 +72,6 @@ Minimized outage risk
 : Setting a high autoscaling limit helps prevent database downtime during unexpected traffic surges.
 </DefinitionList>
 
-
 ---
 
 ### Serverless operating model
