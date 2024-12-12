@@ -20,6 +20,15 @@ const defaultConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Vercel-CDN-Cache-Control',
+            value: 'max-age=31536000',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
@@ -113,6 +122,11 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
       {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
