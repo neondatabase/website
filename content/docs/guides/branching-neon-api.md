@@ -2,7 +2,7 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.425Z'
+updatedOn: '2024-12-12T15:31:10.126Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).

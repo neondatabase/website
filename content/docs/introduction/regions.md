@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-12-03T15:29:17.188Z'
+updatedOn: '2024-12-12T15:31:10.131Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.

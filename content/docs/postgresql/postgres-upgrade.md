@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2024-10-20T13:26:53.494Z'
+updatedOn: '2024-12-12T15:31:10.133Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
