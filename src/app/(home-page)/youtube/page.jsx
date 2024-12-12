@@ -32,3 +32,5 @@ const YoutubePage = () => (
 );
 
 export default YoutubePage;
+
+export const revalidate = false;
