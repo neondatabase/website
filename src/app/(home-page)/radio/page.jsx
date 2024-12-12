@@ -32,3 +32,5 @@ const RadioPage = () => (
 );
 
 export default RadioPage;
+
+export const revalidate = false;
