@@ -351,6 +351,22 @@
           items:
             - title: Backups
               slug: manage/backups
+    - title: Use cases
+      slug: use-cases/use-cases-overview
+      icon: docs
+      items:
+        - title: SaaS apps
+          slug: use-cases/saas-apps
+        - title: Variable traffic
+          slug: use-cases/variable-traffic
+        - title: Database-per-user
+          slug: use-cases/database-per-user
+        - title: AI Agents
+          slug: use-cases/ai-agents
+        - title: Platforms
+          slug: use-cases/platforms
+        - title: Dev/Test
+          slug: use-cases/dev-test
     - title: Regions
       slug: introduction/regions
       icon: regions

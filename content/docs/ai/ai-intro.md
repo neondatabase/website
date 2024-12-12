@@ -48,6 +48,7 @@ The **Neon AI Starter Kit** includes:
 ### AI basics
 
 <DetailIconCards>
+
 <a href="/docs/ai/ai-concepts" description="Learn how embeddings are used to build AI applications" icon="openai">AI concepts</a>
 
 <a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
