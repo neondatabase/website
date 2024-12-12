@@ -61,7 +61,7 @@ First, create a new database called `people` on the `main` branch and add some s
    neon set-context --project-id empty-glade-66712572
    ```
 
-   You can find your project ID on the **Project settings** page in the Neon Console.
+   You can find your project ID on the **Settings** page in the Neon Console.
 
    </Admonition>
 

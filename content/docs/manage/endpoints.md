@@ -55,7 +55,7 @@ To edit a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, select **Edit** for the compute you want to edit.
+1. From the **Computes** tab, select **Edit** for the compute you want to edit.
 
    The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
 
@@ -127,8 +127,8 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. 
 
 Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** You can use the slider to select a fixed compute size. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** You can also use the slider to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info">
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
@@ -250,8 +250,8 @@ To delete a compute :
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, click **Edit** for the compute you want to delete.
-1. At the bottom of the **Edit compute settings** drawer, click **Delete compute**.
+1. On the **Computes** tab, click **Edit** for the compute you want to delete.
+1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
 
 ## Manage computes with the Neon API
 

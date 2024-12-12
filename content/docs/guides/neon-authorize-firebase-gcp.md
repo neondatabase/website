@@ -57,7 +57,7 @@ You'll need two pieces of information:
 2. **Project ID** - This serves as your JWT Audience value:
 
    - Go to the [Firebase Console](https://console.firebase.google.com)
-   - Navigate to **Project settings** > **General** > **Project ID**
+   - Navigate to **Settings** > **General** > **Project ID**
 
    <Admonition type="note" title="Note">
    Every GCP Identity Platform project automatically creates a corresponding Firebase project, which is why we use the Firebase Console to get the Project ID.

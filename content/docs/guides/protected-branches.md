@@ -80,9 +80,8 @@ To configure an allowlist:
 
 1. Select a project in the Neon Console.
 2. On the Project Dashboard, select **Settings**.
-3. Select **IP Allow**.
-   ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
+3. Select **Network Security**.
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>

@@ -24,7 +24,7 @@ Neon's Autoscaling feature offers the following benefits:
 
 ## Configuring autoscaling
 
-You can enable autoscaling for any compute instance, whether it's a primary compute or a read replica. Simply open **Edit compute settings** ([learn how](/docs/guides/autoscaling-guide)) for your compute and set the autoscaling range. This range defines the minimum and maximum compute sizes within which your compute will automatically scale. For example, you might set the minimum to 2 vCPUs with 8 GB of RAM and the maximum to 8 vCPUs with 32 GB of RAM. Your compute resources will dynamically adjust within these limits, never dropping below the minimum or exceeding the maximum, regardless of demand. We recommend regularly [monitoring](/docs/introduction/monitoring-page) your usage from the **Monitoring Dashboard** to determine if adjustments to this range are needed.
+You can enable autoscaling for any compute instance, whether it's a primary compute or a read replica. Simply open the **Edit compute** drawer ([learn how](/docs/guides/autoscaling-guide)) for your compute and set the autoscaling range. This range defines the minimum and maximum compute sizes within which your compute will automatically scale. For example, you might set the minimum to 2 vCPUs with 8 GB of RAM and the maximum to 8 vCPUs with 32 GB of RAM. Your compute resources will dynamically adjust within these limits, never dropping below the minimum or exceeding the maximum, regardless of demand. We recommend regularly [monitoring](/docs/introduction/monitoring-page) your usage from the **Monitoring Dashboard** to determine if adjustments to this range are needed.
 
 ![autoscaling configuration](/docs/introduction/autoscaling_config.png)
 

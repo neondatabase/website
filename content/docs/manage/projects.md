@@ -29,7 +29,7 @@ When you add a new project, Neon creates the following resources by default:
 
 ## About the Settings page
 
-Once you open a project, you can use the **Project settings** page to manage that particular project and configure any defaults.
+Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
 
 ![Project Settings page](/docs/manage/settings_page.png)
 
@@ -89,7 +89,7 @@ To edit a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
-3. Select **Project settings**.
+3. Select **Settings**.
 4. Select **General**.
 5. Make your changes and click **Save**.
 
@@ -147,9 +147,9 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. 
 
 By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 
-To reset the default compute size, go to **Project settings** > **Compute**.
+To reset the default compute size, go to **Settings** > **Compute**.
 
-Using the slider, you can configure a fixed-size compute or enable autoscaling.
+Neon supports fixed-size and autoscaling compute configurations.
 
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
@@ -172,7 +172,7 @@ Also note that adjusting the history retention period affects _all_ branches in 
 To configure the history retention period for a project:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
    ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
@@ -225,11 +225,11 @@ Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wi
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **IP Allow**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Network Security**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Allow unrestricted access to non-default branches** to allow full access to your [no default branches](/docs/manage/branches#non-default-branch).
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
 6. Click **Save changes**.
 
 </TabItem>
@@ -349,7 +349,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the Neon **Dashboard**, select **Settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
 5. If applicable, clear the **Apply to default branch only** checkbox.
