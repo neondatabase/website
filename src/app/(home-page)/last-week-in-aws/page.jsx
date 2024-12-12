@@ -32,3 +32,5 @@ const LastWeekInAWSPage = () => (
 );
 
 export default LastWeekInAWSPage;
+
+export const revalidate = false;
