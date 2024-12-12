@@ -59,13 +59,13 @@ A Neon Twin is a synchronized copy of your production or staging database within
 
 - **Set up the initial data import.** Use `pg_dump` to create a dump of your production or staging database.
 
-  ```sql
+  ```sql shouldWrap
   pg_dump -Fc -v -d postgresql://[user]:[password]@[source_host]/[database] -f source_dump.bak
   ```
 
 - **Import data into Neon.** Use `pg_restore` to load the dump into your Neon main_dev branch:
 
-  ```sql
+  ```sql shouldWrap
   pg_restore -v -d postgresql://[user]:[password]@[neon_host]/[database] source_dump.bak
   ```
 

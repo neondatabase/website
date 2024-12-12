@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-AI agents can now provision infrastructure, including databases. With AI Agents already spinning up databases every few seconds, chances are they’re going to manage a big part of the web’s infrastructure in the future—and, just like developers, AI agents love working with Neon: **Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases per day**.
+AI agents can now provision infrastructure, including databases. With AI agents already creating databases every few seconds, they are poised to manage a significant portion of the web's infrastructure in the future — and, like developers, AI agents love working with Neon: **Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases per day**. [Learn more](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases).
 
 ## What makes Neon a good database for AI Agents
 

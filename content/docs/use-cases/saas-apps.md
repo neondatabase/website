@@ -1,57 +1,54 @@
 ---
 title: Neon for SaaS apps
-subtitle: Teams build SaaS faster on Neon with autoscaling, database branching and the serverless operating model.
+subtitle: Build SaaS apps faster on Neon with autoscaling, database branching, and the serverless operating model
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Teams building SaaS applications can accelerate development workflows and reduce operational overhead with Neon features like database branching, autoscaling, and a serverless operating model.
+Teams are accelerating development workflows and reducing operational overhead with Neon’s database branching, autoscaling, and serverless operating model. Learn how you can do the same.
 
 ## Summary
 
-Three features make Postgres on Neon a solid foundation for teams building SaaS applications:
+There are three key features that are helping teams develop SaaS applications faster and more efficiently with Postgres on Neon:
 
 <DefinitionList bulletType="check">
 Database Branching
 : Create isolated environments with production-like copies of your data and schema for testing, development, and CI/CD workflows.
 
 Autoscaling
-: CPU, Memory, and Storage scale up and down to match your workload. No more paying for resources you dont need.
+: CPU, memory, and storage automatically scale up or down to match your workload. Avoid paying for unused resources.
 
-Serverless Operating Model
-: Never touch a `pg_hba.conf`, or SSH into anywhere. In Neon, operational work is either abstracted away or presented in an intuitive UI + API.
+Neon's Serverless Operating Model
+: Skip managing `pg_hba.conf` files or SSH access. Neon simplifies operational tasks with an intuitive UI and API.
 </DefinitionList>
 
-**The result:**
-Teams ship faster, more efficiently, with less risk of outage during times that matter most.
-
-## Key Features
+## Key features
 
 ---
 
-### Database Branching
+### Database branching
 
 ![Database Branching](/use-cases/branching.jpg?branching)
 
-A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them like git branches, for development, testing, and preview environments.
+A branch in Neon is a copy-on-write clone of your database, including both schema and data. Branches function like Git branches, enabling development, testing, and preview environments.
 
-- **Branch Creation is instant** - Independent of DB size. Storage is not duplicated for each branch.
-- **Branches are cost-efficient** - One customer has a team of five developers running all dev/test/preview work through branches and pays ~$150/month.
-- **Branch compute can scale to zero when idle** - to further reduce cost.
+- **Instant branch creation**: Independent of database size, with no duplicated storage.
+- **Cost-efficient branches**: One customer with a team of five developers handles all dev, test, and preview work through branches, spending ~$150/month.
+- **Idle branch computes scale to zero**: Further reducing costs.
 
-How branches can be used to increase development velocity:
+How branches boost development velocity:
+
 <DefinitionList bulletType="check">
-Onboard Faster, Keep Collaboration in Sync
-: Give each developer on your team their own branch for local development. They can use [branch reset](/docs/introduction/point-in-time-restore) to instantly restore and catch up with the latest changes.
+Onboard faster and keep in sync
+: You can give each developer their own branch for local development. Developers can use [branch reset](/docs/introduction/point-in-time-restore) to instantly restore and sync with the latest changes.
 
-Faster feature Development and code review
-: Use automation to give each git branch or Pull Request a corresponding database branch. This can be done with automation tools like GitHub Actions, or more easily as part of an integration:
-: - [Neon GitHub integration](/docs/guides/neon-github-integration) - An easier way to create a branch for every PR.
-: - [Neon Vercel Integration](/docs/guides/vercel) - Create and integrate a branch into every Vercel Preview deployment.
+Accelerate feature development and code reviews
+: Automate branch creation for each Git branch or pull request. Use tools like GitHub Actions or Neon's integrations:
+: - [Neon GitHub Integration](/docs/guides/neon-github-integration): Easily create a branch for every PR.
+: - [Neon Vercel Integration](/docs/guides/vercel): Create and integrate a branch into every Vercel preview deployment.
 
-Better Testing and CI/CD
-: Deploy confidently by using branches to run your test suite on an exact copy of your production database. Shave minutes off every test run with instant branch creation.
-
+Enhance testing and CI/CD
+: Run test suites on exact copies of your production database using branches. Save time with instant branch creation, shaving minutes off every test run.
 </DefinitionList>
 
 ---
@@ -60,35 +57,36 @@ Better Testing and CI/CD
 
 ![Neon Autoscaling](/use-cases/autoscaling.jpg)
 
-Neon's Autoscaling feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention.
+Neon's autoscaling dynamically adjusts compute resources based on current load, removing the need for manual intervention.
 
-For team's building SaaS on Neon, autoscaling has a few benefits:
+For teams building SaaS on Neon, autoscaling offers several benefits:
 
 <DefinitionList bulletType="check">
-Performance and Cost-Efficiency
-: Get performance without over-provisioning. In a typical compute bill, [60% of costs go towards unused resources.](https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20)
+Performance and cost-efficiency
+: Get performance without over-provisioning. On average, [60% of database costs come from unused resources.](https://medium.com/@carlotasotos/database-economics-an-amazon-rds-reflection-5d7a35638b20)
 
-No manual resizes
-: Other platforms let you size up but not down, require downtime for resizes, or limit the frequency of resizes. On Neon everything is automated and instant.
+No manual resizing
+: Unlike other platforms that limit resizing, require downtime, or only allow scaling up, Neon automates scaling both up and down instantly.
 
-Reduce chance of database outages
-: Setting a high autoscaling limit reduces the chance of having your database go down from an unexpected surge of activity.
+Minimized outage risk
+: Setting a high autoscaling limit helps prevent database downtime during unexpected traffic surges.
 </DefinitionList>
+
 
 ---
 
-### Serverless Operating Model
+### Serverless operating model
 
 Neon abstracts away the concept of servers so that customers can focus on building their SaaS application, not managing their database:
 
-- No server management: You don’t need to provision, maintain, administer servers.
-- Managed infrastructure: Neon handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
-- Built-in availability and fault tolerance: Neon is designed to minimize customer-facing impact in event of hardware failure.
-- Focus on business logic: You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
+- **No server management**: You don’t need to provision, maintain, administer servers.
+- **Managed infrastructure**: Neon handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
+- **Built-in availability and fault tolerance**: Neon is designed to minimize customer-facing impact in event of hardware failure.
+- **Focus on business logic**: You can concentrate on writing code for your application's core functionality rather than dealing with infrastructure concerns.
 
 ---
 
-## Database-per-user Architectures
+## Database-per-user architectures
 
 If your SaaS project could benefit from multitenancy, Neon makes it simple to create a dedicated database for each user:
 
@@ -98,7 +96,7 @@ If your SaaS project could benefit from multitenancy, Neon makes it simple to cr
 
 [More info on Database per Tenant](/docs/use-cases/database-per-user)
 
-## Table Stakes
+## Table stakes
 
 Differentiated features are great, but what about the basics... Does Neon meet the requirements for your use case?
 
@@ -123,7 +121,7 @@ Serverless (HTTP) Driver
 : Unlock access from serverless environments like AWS Lambda and Cloudflare Workers with the [Neon serverless driver](/docs/serverless/serverless-driver). It uses an HTTP API to query from edge/serverless with lower latency.
 </DefinitionList>
 
-### Performance and Scale
+### Performance and scale
 
 ---
 
@@ -142,14 +140,14 @@ Serverless (HTTP) Driver
 - **Instant Read Replicas**
   Read replicas on Neon are faster to create, and only add compute (not storage) making them a cost efficient means of separating workloads.
 
-### Security and Compliance
+### Security and compliance
 
 ---
 
 <DefinitionList >
 
 IP Allow List
-: Scale Plan accounts can lock down database access to specific IP addresses or ranges.
+: Scale and Business Plan accounts can lock down database access to specific IP addresses or ranges.
 
 SOC 2 Type 2 Compliant
 : Neon has been SOC 2 Type 2 Compliant since Dec 2, 2023. View full compliance details in the [Trust Center](https://trust.neon.tech/).
@@ -171,7 +169,7 @@ Pay via AWS Marketplace
 : If your business is already active on AWS, you may be able to save hassle and budgets by [paying for Neon via AWS Marketplace](https://neon.tech/docs/introduction/billing-aws-marketplace).
 
 Pay via Azure Marketplace
-: If your business runs on Azure, Neon is available as a [native Azure integration](/docs/introduction/billing-azure-marketplace) with billing through Azure.
+: If your business runs on Azure, Neon is available as a [native Azure integration](/docs/introduction/billing-azure-marketplace), with billing through Azure.
 
 </DefinitionList>
 

@@ -8,7 +8,7 @@ updatedOn: '2024-09-08T12:44:00.894Z'
 Due to its severless nature, Neon makes it possible for companies to manage huge fleets of Postgres databases (= Neon projects) even with small teams and budgets. Examples include:
 
 - Retool ([read the case study](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases))
-- Replit and Replit Agent
+- Replit and Replit Agent ([Learn more](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases))
 - Vercel
 - Koyeb, Genezio, and many other IaaS
 
@@ -19,9 +19,9 @@ What all these platforms had in common:
 - Everything had to be programmable via API
 - The cost of idle instances had to be negligible
 
-The solution: **they're creating a Neon project per customer, scaling up to hundreds of thousands of projects**. [Explore our Partners page to learn more](https://neon.tech/partners).
+The solution: **they're creating a database per customer, scaling up to hundreds of thousands of databases**. 
 
-To get started with the implementation, navigate to the [Database-per-user guide](https://neon.tech/docs/use-cases/database-per-user).
+<CTA title="Want to know more?" description="Our database-per-user guide walks you through how to set up a database-per user model in Neon" buttonText="Database-per-user guide" buttonUrl="/docs/use-cases/database-per-user" />
 
 ## Neon features that make this possible
 
@@ -31,28 +31,4 @@ To get started with the implementation, navigate to the [Database-per-user guide
 
 ## Getting started
 
-### How to integrate with Neon
-
-Find details about the different ways you can integrate with Neon.
-
-<DetailIconCards>
-
-<a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
-
-<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">API</a>
-
-<a href="https://neon-experimental.vercel.app/" description="See a sample application using OAuth" icon="lock-landscape">Sample OAuth</a>
-
-</DetailIconCards>
-
-### How to set up billing
-
-Learn how to set up quotas and track key consumption metrics.
-
-<DetailIconCards>
-
-<a href="/docs/guides/partner-consumption-limits" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
-
-<a href="/docs/guides/partner-consumption-metrics" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
-
-</DetailIconCards>
+When you're ready to get started, you can learn how to integrate your platform or service with Neon by reading our [Partner guide](https://neon.tech/docs/guides/partner-intro), which covers how to become a Neon partner, how to integrate your platform or service with Neon, how to set usage limits for your users, and more.
