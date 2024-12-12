@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-23T10:29:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL hstore'
-  slug: 'postgresql-tutorial/postgresql-hstore'
+  title: 'UUID'
+  slug: 'postgresql-tutorial/postgresql-uuid'
 nextLink:
-  title: 'A Look at PostgreSQL User-defined Data Types'
-  slug: 'postgresql-tutorial/postgresql-user-defined-data-types'
+ title: 'PostgreSQL hstore'
+ slug: 'postgresql-tutorial/postgresql-hstore'
 ---
 
 **Summary**: in this tutorial, you will learn about JSON and how to work with JSON data in PostgreSQL using the PostgreSQL JSON and JSONB data types.
