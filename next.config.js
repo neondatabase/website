@@ -23,8 +23,8 @@ const defaultConfig = {
         source: '/',
         headers: [
           {
-            key: 'Vercel-CDN-Cache-Control',
-            value: 'max-age=31536000',
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
           },
         ],
       },
