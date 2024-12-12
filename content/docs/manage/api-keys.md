@@ -7,37 +7,200 @@ redirectFrom:
 updatedOn: '2024-12-04T16:09:42.523Z'
 ---
 
-Most actions performed in the Neon Console can be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Using the Neon API requires an API key. This topic describes how to generate, revoke, and use API keys.
+Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
 
-API keys are global and belong to your Neon account. They can be used with any project that belongs to your Neon account. While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
+## Types of API keys
 
-## Create an API key
+Neon supports these types of API keys:
 
-An API key (or token) is a randomly-generated 64-bit key that you must provide when calling Neon API methods. An API key remains valid until it is revoked.
+- **Personal API key** — These keys are tied to your individual Neon account. They can access your personal projects by default, and organization projects if you specify the organization ID in your API requests.
+- **Organization API key** — These keys are scoped to a specific organization. They allow full [admin-level access](/docs/manage/organizations#user-roles-and-permissions) to all projects within that organization.
+- **Project-scoped organization API key** — These keys are scoped to a specific project within an organization. They provide [member-level access](/docs/manage/organizations#user-roles-and-permissions) to the specified project, and only that project, and cannot perform destructive actions like project deletion.
 
-To generate an API key:
+While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
-1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click your account in the top right corner of the Neon Console, and select **Account settings**.
-3. Select **API keys** and click **Create new API Key**.
-4. Enter a name for the API key.
-5. Click **Create** and copy the generated key.
+## Create a personal API key
 
-Store your key in a safe location. You will not be able to view or copy the key again after leaving the **Account settings** page. You can safely store an API key in a locally installed credential manager or in a credential management service such as the [AWS Key Management Service](https://aws.amazon.com/kms/) or [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault). If you lose an API key, revoke it and generate a new one.
+You can create a personal API key in the Neon Console or using the Neon API.
+<Tabs labels={["Console", "API"]}>
 
-## Revoke an API key
+<TabItem>
+In the Neon Console, select **Account settings** > **API keys**. You'll see a list of existing keys. Click **Create key** to create a new key.
 
-An API key that is no longer needed can be revoked. This action cannot be reversed.
+<Admonition type="note">Make sure you copy the key immediately. You won't be able to view it again after leaving the page.</Admonition>
 
-To revoke an API key:
+![Creating a personal API key in the Neon Console](/docs/manage/personal_api_key.png)
 
-1. Click your account in the top right corner of the Neon Console and select **Account settings**.
-2. Select **API keys** to see a list of API keys.
-3. To revoke a key, click **Revoke**. The key is immediately revoked. Any request that uses the key now fails.
+</TabItem>
+
+<TabItem>
+
+You'll need an existing personal key (create one from the Neon Console) in order to create new keys using the API. If you've got a key ready, you can use the following request to generate new keys:
+
+```bash shouldWrap
+curl https://console.neon.tech/api/v2/api_keys \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $PERSONAL_API_KEY" \
+  -d '{"key_name": "my-key"}'
+```
+
+**Parameters:**
+- `key_name`: A descriptive name for the API key (e.g., "development", "staging", "ci-pipeline")
+
+**Response:**
+```json
+{
+  "id": 177630,
+  "key": "neon_api_key_1234567890abcdef1234567890abcdef"
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Create an organization API key
+
+Organization API keys provide admin-level access to all organization resources. Only admins can create these keys. When creating an organization API key, Neon verifies that your personal API key belongs to a user with admin permissions in the specified organization. 
+
+For more detail about organization-related methods, see [Organization API Keys](/docs/manage/orgs-api#api-keys).
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+Navigate to your organization's **Settings** > **API keys** to create a new key.
+
+Make sure you copy the key immediately. You won't be able to view it again after leaving the page.
+
+![creating an api key from the console](/docs/manage/org_api_keys.png)
+</TabItem>
+
+<TabItem>
+
+To create an organization API key via the API, you need to use your personal API key and have admin permissions in the specified organization.
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $PERSONAL_API_KEY' \
+     --data '{"key_name": "orgkey"}'
+```
+
+**Response:**
+```json
+{
+    "id": 165434,
+    "key": "neon_org_key_1234567890abcdef1234567890abcdef",
+    "name": "orgkey",
+    "created_at": "2022-11-15T20:13:35Z",
+    "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4"
+}
+```
+</TabItem>
+
+</Tabs>
+
+## Create a project-scoped organization API key
+
+Organization API keys can be scoped to individual projects within that organization. Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with.
+
+<Admonition type="note">Creating project-scoped keys requires using a personal API key. Organization API keys cannot be used to create additional API keys.</Admonition>
+
+To create an API key scoped to a specific project:
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $PERSONAL_API_KEY' \
+     --data '{"key_name":"only-this-project", "project_id": "some-project-123"}'
+```
+
+**Parameters:**
+
+- `org_id`: The ID of your organization
+- `key_name`: A descriptive name for the API key
+- `project_id`: The ID of the project to which the API key will be scoped
+
+**Example Response:**
+
+```json
+{
+  "id": 1904821,
+  "key": "neon_project_key_1234567890abcdef1234567890abcdef",
+  "name": "test-project-scope",
+  "created_at": "2024-12-11T21:34:58Z",
+  "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4",
+  "project_id": "project-id-123"
+}
+```
+
+**Usage:**
+
+API keys scoped to a project will have permissions limited to the specified project. This enhances security by ensuring that the API key cannot access other projects within the organization.
+
+**Member-Level Access Restrictions:**
+
+- **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
+  
+  ```bash
+  curl --request DELETE \
+       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
+       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
+  ```
+  
+  **Response:**
+  
+  ```json
+  {
+    "error": "Not Found",
+    "message": "Project not found or access denied."
+  }
+  ```
+
+### Using API keys
+
+When using an **Organization API Key**:
+
+- **Without Project Scope**: Automatically scoped to the entire organization
+  
+  ```bash shouldWrap
+  curl --request GET \
+       --url 'https://console.neon.tech/api/v2/projects' \
+       --header 'authorization: Bearer $ORG_API_KEY'
+  ```
+
+- **With Project Scope**: Scoped to the specified project
+  
+  ```bash shouldWrap
+  curl --request GET \
+       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
+       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
+  ```
+
+### Member-level access restrictions
+
+Project-scoped API keys have member-level access, which means they:
+- **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
+  
+  ```bash shouldWrap
+  curl --request DELETE \
+       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
+       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
+  ```
+  
+  **Response:**
+  ```json
+  {
+    "error": "Not Found",
+    "message": "Project not found or access denied."
+  }
+  ```
 
 ## Make an API call
 
-The following `cURL` example uses the `/projects` endpoint to retrieve projects that belong to your Neon account.
+The following example demonstrates how to use your API key to retrieve projects:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
@@ -115,7 +278,7 @@ The response body includes an `id` for the key and a generated 64-bit `key` valu
 ```json
 {
   "id": 177630,
-  "key": "pgh66qptg0cdbzk9jmu4qpvn65jhvwkpfzc6qzi57z814ispmhfu7q4q85r44zv8"
+  "key": "neon_api_key_1234567890abcdef1234567890abcdef"
 }
 ```
 
@@ -199,5 +362,93 @@ curl -X DELETE \
 ```
 
 </details>
+
+## List API keys
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+1. Click your account in the top right corner of the Neon Console and select **Account settings**
+2. Select **API keys** to see a list of API keys
+</TabItem>
+
+<TabItem>
+```bash
+curl "https://console.neon.tech/api/v2/organizations/{org_id}/api_keys" \
+ -H "Authorization: Bearer $PERSONAL_API_KEY" \
+ -H "Accept: application/json"
+```
+
+**Response:**
+```json
+[
+  {
+    "id": 165432,
+    "name": "orgkey_1",
+    "key": "neon_org_key_abcdef1234567890abcdef1234567890",
+    "created_at": "2022-11-15T20:13:35Z",
+    "created_by": {
+      "id": "user_01h84bfr2npa81rn8h8jzz8mx4",
+      "name": "John Smith",
+      "image": "http://link.to.image"
+    },
+    "last_used_at": "2022-11-15T20:22:51Z",
+    "last_used_from_addr": "192.0.2.255"
+  }
+]
+```
+</TabItem>
+
+</Tabs>
+
+## Revoke API Keys
+
+You should revoke API keys that are no longer needed or if you suspect a key may have been compromised. Key details:
+
+- The action is immediate and permanent
+- All API requests using the revoked key will fail with a 401 Unauthorized error
+- The key cannot be reactivated - you'll need to create a new key if access is needed again
+
+### Who can revoke keys
+
+- Personal API keys can only be revoked by the account owner
+- Organization API keys can be revoked by organization admins
+- Project-scoped keys can be revoked by organization admins
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+In the Neon Console, navigate to **Account settings** > **API keys** and click **Revoke** next to the key you want to revoke. The key will be immediately revoked. Any request that uses this key will now fail.
+
+![Revoking an API key in the Neon Console](/docs/manage/revoke_api_key.png)
+
+</TabItem>
+
+<TabItem>
+```bash
+curl -X DELETE \
+  'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys/{key_id}' \
+  -H "Accept: application/json"  \
+  -H "Authorization: Bearer $PERSONAL_API_KEY"
+```
+
+**Response:**
+```json
+{
+  "id": 165435,
+  "name": "orgkey",
+  "created_at": "2022-11-15T20:13:35Z",
+  "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4",
+  "last_used_at": "2022-11-15T20:15:04Z",
+  "last_used_from_addr": "192.0.2.255",
+  "revoked": true
+}
+```
+
+You can obtain `key_id` values by listing the API keys for an organization.
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>
