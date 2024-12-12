@@ -148,7 +148,7 @@ Serverless (HTTP) Driver
 
   Prisma recently published <a href="https://benchmarks.prisma.io/?dbprovider=pg-rds" target="_blank">performance benchmarks</a> showing similar latency between AWS RDS and Neon.
 
-- **Self-Serve Autoscaling from zero to 10 CU**
+- **Self-Serve Autoscaling from zero to 16 CU**
 
   Configure Neon to autoscale up to 10 CPU, 40GB RAM. [Contact our team](/contact-sales) to unlock larger computes.
 
