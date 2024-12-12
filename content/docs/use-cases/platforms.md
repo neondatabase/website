@@ -28,13 +28,6 @@ To get started with the implementation, navigate to the [Database-per-user guide
 - **Management API**. Use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics.
 - **Instant provisioning**. Neon databases provision in less than 1 second.
 - **Scale-to-zero**. You don't pay for inactive databases in Neon, meaning you're not paying a fixed cost for every database you onboard.
-  </DefinitionList>
-
-<DetailIconCards>
-
-<a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="handshake">Partner page</a>
-
-</DetailIconCards>
 
 ## Getting started
 
