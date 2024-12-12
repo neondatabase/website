@@ -1,8 +1,9 @@
 ---
 title: Neon for Platforms
-subtitle: Let your users create their own isolated Postgres databases by integrating Neon into your platform
+subtitle: Let your users create their own isolated Postgres databases by integrating
+  Neon into your platform
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.894Z'
+updatedOn: '2024-12-12T19:49:26.798Z'
 ---
 
 Due to its severless nature, Neon makes it possible for companies to manage huge fleets of Postgres databases (= Neon projects) even with small teams and budgets. Examples include:

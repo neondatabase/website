@@ -1,8 +1,9 @@
 ---
 title: Neon for variable traffic
-subtitle: Optimize for performance during traffic peaks without over-provisioning with Neon Autoscaling
+subtitle: Optimize for performance during traffic peaks without over-provisioning with
+  Neon Autoscaling
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.894Z'
+updatedOn: '2024-12-12T19:49:26.800Z'
 ---
 
 Variable traffic patterns are common, but traditional managed databases require provisioning a fixed amount of CPU and memory. It is common practice to provision for peak traffic, which means paying for peak capacity 24/7 — even though it's needed only a fraction of the time.

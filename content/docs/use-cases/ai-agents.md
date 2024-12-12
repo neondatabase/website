@@ -2,7 +2,7 @@
 title: Neon for AI Agents
 subtitle: Use Neon as the Postgres backend for your agents
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.894Z'
+updatedOn: '2024-12-12T19:49:26.796Z'
 ---
 
 AI agents can now provision infrastructure, including databases. With AI agents already creating databases every few seconds, they are poised to manage a significant portion of the web's infrastructure in the future — and, like developers, AI agents love working with Neon: **Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases per day**. [Learn more](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases).
