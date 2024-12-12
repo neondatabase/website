@@ -32,3 +32,5 @@ const GithubPage = () => (
 );
 
 export default GithubPage;
+
+export const revalidate = false;
