@@ -1,5 +1,5 @@
 ---
-title: Database-per-user
+title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'

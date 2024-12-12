@@ -17,31 +17,50 @@ AI agents can now provision infrastructure, including databases. With AI Agents 
 
 - **Neon is 100% Postgres**. The most-loved database by developers worldwide is also the best choice for AI agents, thanks to its versatility (it works for almost any app) and the vast amount of resources, examples, and training datasets available.
 
-```javascript
-import { NeonToolkit } from "@neondatabase/toolkit";
+## Tools for AI Agents
 
-const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
-const project = await toolkit.createProject();
+We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit" target="_blank" rel="noopener noreferrer">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>.
 
-await toolkit.sql(
-  project,
-  `
-    CREATE TABLE IF NOT EXISTS
-      users (
-          id UUID PRIMARY KEY,
-          name VARCHAR(255) NOT NULL
-      );
-  `,
-);
-await toolkit.sql(
-  project,
-  `INSERT INTO users (id, name) VALUES (gen_random_uuid(), 'Sam Smith')`,
-);
+With a few lines of code, AI agents can use the **Neon toolkit** to create a Postgres database on Neon, run SQL queries, and tear down the database. Here's a quick look:
 
-console.log(await toolkit.sql(project, `SELECT name FROM users`));
+  ```javascript
+  import { NeonToolkit } from "@neondatabase/toolkit";
 
-await toolkit.deleteProject(project);
+  const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
+  const project = await toolkit.createProject();
 
-```
+  await toolkit.sql(
+    project,
+    `
+      CREATE TABLE IF NOT EXISTS
+        users (
+            id UUID PRIMARY KEY,
+            name VARCHAR(255) NOT NULL
+        );
+    `,
+  );
+  await toolkit.sql(
+    project,
+    `INSERT INTO users (id, name) VALUES (gen_random_uuid(), 'Sam Smith')`,
+  );
 
-<p className="text-sm tracking-extra-tight text-center text-gray-new-50 mt-3.5">We recently published a package on NPM called <a href="https://github.com/neondatabase/toolkit" target="_blank" rel="noopener noreferrer">@neondatabase/toolkit</a>, merging the already existing packages into a single SDK that is easier for AI agents to consume. <a href="/blog/why-neondatabase-toolkit">Read more</a>. Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon).</p>
+  console.log(await toolkit.sql(project, `SELECT name FROM users`));
+
+  await toolkit.deleteProject(project);
+  ```
+
+Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon) that lets you use any MCP Client, such as Claude Desktop, to manage Postgres databases with Neon using natural language; for example:
+
+- `Create a new Postgres database, and call it "my-database". Let's then create a table called users with the following columns: id, name, email, and password.`
+- `I want to run a migration on my project called "my-project" that alters the users table to add a new column called "created_at".`
+- `Can you give me a summary of all of my Neon projects and what data is in each one?`
+
+Both tools are open source. You can find them on GitHub.
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+
+</DetailIconCards>
