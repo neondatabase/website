@@ -228,7 +228,7 @@ This subcommand allows you to update a Neon project.
 neon projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -260,7 +260,7 @@ This subcommand allows you to delete a Neon project.
 neon projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -289,7 +289,7 @@ This subcommand allows you to retrieve details about a Neon project.
 neon projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
