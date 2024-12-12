@@ -32,3 +32,5 @@ const AllThingsOpenPage = () => (
 );
 
 export default AllThingsOpenPage;
+
+export const revalidate = false;
