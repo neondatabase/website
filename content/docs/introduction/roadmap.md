@@ -19,7 +19,6 @@ As 2024 comes to a close, you might have noticed that our "working on now" list 
 
 Here's a snapshot of what we're working on now:
 
-
 - **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 
