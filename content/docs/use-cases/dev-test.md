@@ -1,87 +1,133 @@
 ---
-title: Neon for Dev/Test
-subtitle: Migrate your non-prod environments to Neon to ship faster with lower costs
+title: Dev/Test Environments on Neon
+subtitle: Speed up time-to-launch by running your non-prod workflows on Neon
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-**TL:DR**
+What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its exceptional developer experience. Teams often experience a boost in developer velocity when switching to Neon. In Neon, it takes less time to create and synchronize environments, run tests, and tedious database tasks are suddenly automated—all of which accelerate software lifecycles.
 
-- [Neon](https://neon.tech/home) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
-- Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
-  - You can keep your production DB in your current Postgres, e.g. RDS.
-  - You "move" your non-prod environments to Neon (i.e., by syncing a subset of data daily).
-  - To build / test / debug in Neon.
-  - Once the changes are tested, you apply them back to prod.
-- What you get: more developer velocity with up to 75% less costs.
-- You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
+However, not every team is ready for a full database migration. Moving a production database to a new vendor is a significant project that requires careful planning—but even if teams aren't ready to migrate their production databases, they can still get more efficiency by moving their non-production environments to Neon. As a cherry on top, this also significantly saves non-production costs (up to 80%).
 
-## RDS/Aurora are inefficient for dev/test
+In this guide, we’ll walk you through the steps needed to set up Neon for development and testing, including how to move data from your current Postgres provider to Neon, keep it in sync, and set up ephemeral environments as Neon branches for optimal cost-efficiency and productivity.
 
----
+## Benefits of running Dev/Test on Neon 
 
-- **Provisioning instances is slow.** Once they're live, you have to babysit them. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
+- **New ephemeral environments are provisioned instantly, with an updated copy of the testing dataset.** 
+In Neon, each ephemeral dev/test environment is a database branch. Database branches in Neon include a full copy of the dataset, and they’re created instantly. Ephemeral environments are available for immediate use, and they can be programmatically created and deleted via CI/CD without delays. When there’s an update in the testing dataset, ephemeral environments can be reset in one click. 
 
-- **You pay for non-prod instances 24/7 even if you only use them for a few hours.** Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running.
+- **You only pay for storage once, across all your environments—and when environments are not being used, you aren’t billed for compute.** 
+Ephemeral environments in Neon are also extremely affordable. Neon branches autosuspend when they’re not being used, saving compute costs in idle hours. And since all branches within a Neon project share the same storage, storage is only billed once across all dev/test environments, avoiding the costs and work of duplicating storage for each setup. 
 
-- **It's hard to keep data in sync across environments.** Syncing data across many instances requires repetitive, manual work. This leads to discrepancies that compromise test reliability and slow down deployments.
+## Methodology
+Most teams running dev/test workloads on Neon while keeping production on another Postgres platform implement a workflow similar to this:
+1. **Set up a single Neon Project for dev/test ephemeral environments** 
 
-- **These problems get worse over time, not better.** As your number of instances grows, the manual setup and configuration work grows too.
+Teams start by creating a single Neon project to host multiple dev/test environments. In Neon, a project is the logical equivalent of an “instance.” Thanks to Neon branching, many non-production instances in RDS or Aurora can be replaced with a single Neon project, as we'll see next.
 
-## Why should I move my dev databases to Neon?
+2. **Create a Neon Twin**
 
-Neon is a Postgres provider that offers a much more modern developer experience than databases like RDS. We’ve built a serverless platform for Postgres focused on helping you ship faster instead of being held back by database management. As the cherry on top, you’ll save money.
+Next, teams create a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) —a copy of their production or staging dataset from the other platform (or a subset of this dataset) that remains automatically synchronized. There are various methods to keep the dataset in sync, which we’ll cover in this guide, but the process generally looks like this:
+    1. The testing dataset is loaded into the main branch within the Neon project.
+    2. Automation is set up so that data in the main branch is refreshed periodically, such as nightly.
 
-### Why it’s faster (and more affordable) to build with Neon vs. RDS?
+This main branch serves as the primary source for all dev/test environments, and it's the only location that needs to be updated with new data or schema changes, as we’ll see later.
 
-1. **Instant provisioning**. In Neon, it takes seconds to spin up new Postgres instances. Developers can start coding and testing immediately, no waiting time.
-2. **Database branching for ephemeral environments**. Neon's copy-on-write branching allows devs to create full copies of their testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: In Neon, you can sync data with parent in one click. Branches are also extremely affordable.
-3. **Non-prod environments are automatically paused when unused**. If a database branch is idle, Neon pauses it automatically to save costs (and management work).
-4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation /deletion.
+3. **Set up ephemeral environments as child branches**
 
-### How much cost savings have you seen vs RDS/Aurora?
+Once the Neon Twin is set up within the main branch, teams can instantly create ephemeral environments by deriving child branches from this main branch. These branches are fully isolated and provide teams with a complete copy of the testing dataset immediately.
 
-Here's how you'll go about it:
+After the main branch is refreshed (e.g., nightly), all environments can be synced in one click. Neon includes a reset from parent feature, which instantly resets all child branches with data from the main branch. This allows teams to get the latest testing data (including schema changes) without needing to reload testing datasets in every single environment.
 
-1. **Set up a single Neon Project for dev/test**. Many non-prod instances can be substituted by a single Neon project.
-2. **Sync testing data to the main branch**. Load data from your staging database / testing data into the main branch within the Neon project. This main branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
-3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
-4. **Automatic branch cleanup and autosuspend**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's autosuspend automatically pauses these environments when unused, so you don't have to worry too much about them.
+Teams configure their workflows so that after development or testing is complete (e.g., a PR is closed), child branches are deleted automatically via the API. But since Neon's autosuspend automatically pauses these environments when unused, teams don’t have to worry too much about inactive branches.
 
-### How much cost savings have you seen vs RDS/Aurora?
+## Step 1: Set up a Neon project for Dev/Test
 
-By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see customers lowering their non-production database costs by 75% or more. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
+1. [Sign up to Neon](https://console.neon.tech/signup) if you haven’t already. 
+2. Provide a descriptive name for your project, such as `Dev/Test Environments`
+3. Select your desired Postgres version, cloud service provider, and region.
+4. Click Create Project
+5. Once inside the Neon console: 
+    1. By default, Neon creates a branch named `main`
+    2. To distinguish it as your primary development branch, rename it to `main_dev` or similar by navigating to the Branches screen, clicking on the options menu (three dots), and selecting Rename
 
-### Show me a real use case example
+## Step 2: Create a Neon Twin 
+### Using dump/restore with GitHub Actions
+A Neon Twin is a synchronized copy of your production or staging database within your main_dev branch, which will serve as the source for your development and testing environments. One of the methods to build a Neon Twin is automating nightly data synchronization using `pg_dump`, `pg_restore`, and GitHub Actions. [Detailed instructions can be found in this blog post series](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon).
+- **Set up the initial data import.** Use `pg_dump` to create a dump of your production or staging database.
+```sql
+pg_dump -Fc -v -d postgresql://[user]:[password]@[source_host]/[database] -f source_dump.bak
+```
+- **Import data into Neon.** Use `pg_restore` to load the dump into your Neon main_dev branch:
+```sql
+pg_restore -v -d postgresql://[user]:[password]@[neon_host]/[database] source_dump.bak
+```
+- **Automate nightly synchronization with GitHub Actions**.
+  - Prerequisites:
+      -  Ensure you have a GitHub repository to host the workflow.
+      -  Store your database credentials securely using GitHub Secrets.
+  - Steps:
+      - In your GitHub repository, navigate to .github/workflows/ and create a file named neon_twin_sync.yml.
+      - Insert the following content into neon_twin_sync.yml:
+ ```yaml
+name: Neon Twin Sync
 
-**Non-prod deployment in AWS RDS (us-east-1):**
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight
 
-- 10 development and test instances (db.m5.large: 2 vCPUs, 8 GB RAM) with 50 GB storage allocated in each instance
-- They’re active 4 hours/day on average
-- RDS monthly costs: $1,356.90
-  - Compute costs: $0.178/hour \* 730 hours \* 10 instances = $1,299.40 /month
-  - Storage costs: 50 GB \* $0.115 GB-month \* 10 instances = $57.50
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-**Equivalent non-prod deployment in Neon:**
+      - name: Set up PostgreSQL
+        uses: postgres-actions/setup-postgresql@v2
+        with:
+          postgresql-version: '17'
 
-- [Scale pricing plan](/pricing): $69 /month
-- Includes 50 GB of shared storage between 10 branches - equivalent to the 10 instances in RDS
-- Includes 750 compute hours, additional compute hours billed at $0.16 per CU
-- **Neon monthly costs: $338.12**
-  - Compute hours per branch per month: 2 CU \* 4 hours \* 30.4 days/month = 243.2
-  - Total compute hours: 243.2 \* 10 branches = 2432
-  - Cost of additional compute hours: [2432 - 750] \* $0.16 = $269.12 /month
+      - name: Dump source database
+        run: |
+          pg_dump -Fc -v -d ${{ secrets.SOURCE_DB_URL }} -f source_dump.bak
 
-In this case, migrating non-production environments from AWS RDS to Neon meant 75% cost savings, together with streamlined development workflows, improved collaboration, and fewer operational complexities.
+      - name: Restore to Neon
+        run: |
+          pg_restore -v -d ${{ secrets.NEON_DB_URL }} source_dump.bak
+```
+- In your GitHub repository, navigate to Settings > Secrets and variables > Actions.
+- Add the following secrets:
+    - `SOURCE_DB_URL`: Connection string for your source database.
+    - `NEON_DB_UR`L: Connection string for your Neon main_dev branch.
+- Commit the `neon_twin_sync.yml` file to your repository.
+GitHub Actions will execute this workflow nightly, synchronizing your Neon Twin with the source database.
 
-### Can Neon also help lower the costs of my production database?
+### Using AWS DMS
+If your source database lives in Amazon RDS or Aurora, you can also use AWS Database Migration Service (DMS) to build a Neon Twin. AWS DMS is a service that allows you to migrate data between platforms. 
 
-Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling), and don’t hesitate to ask us about the migration assistance we offer. **We not only help you move production safely but also waive all migration-related fees.**
+For instructions on setting up AWS DMS with Neon, [refer to this guide](https://neon.tech/docs/import/migrate-aws-dms). 
+### Using logical replication
+If you’d like to ensure a more continuous and real-time synchronization between your source dataset and Neon, you could implement logical replication in your Neon Twin. This method will replicate all data changes as they occur; however, you must remember that logical replication won’t reflect changes in schema between your source database and the Neon Twin. You’ll still have to implement a method that makes sure schema stays in sync. 
 
-## Getting started
+For more instructions on logical replication, [refer to this guide](https://neon.tech/docs/guides/logical-replication-concepts). 
 
-We’ve built tutorials that teach you **how to run a nightly dump from RDS to Neon** so you can sync your non-prod environment. We also cover how to apply changes back to production once you’ve tested them in Neon.
+## Step 3: Set up ephemeral environments as child branches 
+With your Neon Twin setup, you’re ready to set up isolated development and testing environments within your Neon project by creating database branches off the primary branch, main_dev. This process is often automated via the Neon API. 
 
-- [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
+In the Neon Console, navigate to the Branches tab within your project to manage and view existing branches. 
+- **Creating child branches manually**  
+    - To create a new environment manually, select "New Branch"
+    - You can name each branch to reflect its purpose, such as `feature_xyz` for branches related to specific feature development or `test_xyz` for testing environments 
+    - Select "main_dev" as the parent branch so that the new branch inherits the latest data from the primary dataset.
+- **Automating branch creation via Neon API and GitHub Actions**  
+    - Most likely, you’ll want to use the Neon API to automate branch creation as part of your CI/CD pipeline.
+    - For example: Create a new branch in Neon when a new PR is opened in GitHub. This can be done using GitHub Actions to trigger the API call when a pull request is opened. [Naviagate to our documentation on the GitHub Integration](https://neon.tech/docs/guides/neon-github-integration). 
+    - Similarly, you automate the deletion of branches when a pull request is closed or merged, which removes unused environments and keeps your project clean.
+- **Synchronize branches with parent updates**  
+    - Neon's [Reset from Parent](https://neon.tech/docs/guides/reset-from-parent) feature allows for easy syncing of each child branch with the latest data from `main`. 
+    - To do this manually, select the child branch in the Branches section and choose "Reset from Parent" to bring it up-to-date with the latest state of main_dev.
+    - Most likely, you might want to schedule this as a nightly task in your CI/CD pipeline to reset all child branches, ensuring all environments are consistently aligned with the main dataset after updates, such as schema changes.
+
 
 <CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Contact us" buttonUrl="/contact-sales" />
