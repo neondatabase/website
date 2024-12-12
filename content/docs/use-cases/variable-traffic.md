@@ -13,6 +13,8 @@ Variable traffic patterns are common, but traditional managed databases require 
 
 Two key features are behind Neon's efficiency for variable traffic patterns: [Autoscaling](https://neon.tech/blog/scaling-serverless-postgres) and [Scale to Zero](https://neon.tech/docs/introduction/auto-suspend).
 
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
+
 For production databases that stay on 24/7:
 
 - Via autoscaling, Neon adjusts CPU/memory up and down automatically. This scaling is very responsive and it happens nearly instantly. [Read about our autoscaling algorithm](https://neon.tech/docs/guides/autoscaling-algorithm).

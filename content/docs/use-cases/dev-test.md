@@ -25,21 +25,21 @@ Most teams running dev/test workloads on Neon while keeping production on anothe
 
 1. **Set up a single Neon Project for dev/test ephemeral environments**
 
-Teams start by creating a single Neon project to host multiple dev/test environments. In Neon, a project is the logical equivalent of an “instance.” Thanks to Neon branching, many non-production instances in RDS or Aurora can be replaced with a single Neon project, as we'll see next.
+    Teams start by creating a single Neon project to host multiple dev/test environments. In Neon, a project is the logical equivalent of an “instance.” Thanks to Neon branching, many non-production instances in RDS or Aurora can be replaced with a single Neon project, as we'll see next.
 
 2. **Create a Neon Twin**
 
-Next, teams create a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) —a copy of their production or staging dataset from the other platform (or a subset of this dataset) that remains automatically synchronized. There are various methods to keep the dataset in sync, which we’ll cover in this guide, but the process generally looks like this: 1. The testing dataset is loaded into the main branch within the Neon project. 2. Automation is set up so that data in the main branch is refreshed periodically, such as nightly.
+    Next, teams create a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) —a copy of their production or staging dataset from the other platform (or a subset of this dataset) that remains automatically synchronized. There are various methods to keep the dataset in sync, which we’ll cover in this guide, but the process generally looks like this: 1. The testing dataset is loaded into the main branch within the Neon project. 2. Automation is set up so that data in the main branch is refreshed periodically, such as nightly.
 
-This main branch serves as the primary source for all dev/test environments, and it's the only location that needs to be updated with new data or schema changes, as we’ll see later.
+    This main branch serves as the primary source for all dev/test environments, and it's the only location that needs to be updated with new data or schema changes, as we’ll see later.
 
 3. **Set up ephemeral environments as child branches**
 
-Once the Neon Twin is set up within the main branch, teams can instantly create ephemeral environments by deriving child branches from this main branch. These branches are fully isolated and provide teams with a complete copy of the testing dataset immediately.
+    Once the Neon Twin is set up within the main branch, teams can instantly create ephemeral environments by deriving child branches from this main branch. These branches are fully isolated and provide teams with a complete copy of the testing dataset immediately.
 
-After the main branch is refreshed (e.g., nightly), all environments can be synced in one click. Neon includes a reset from parent feature, which instantly resets all child branches with data from the main branch. This allows teams to get the latest testing data (including schema changes) without needing to reload testing datasets in every single environment.
+    After the main branch is refreshed (e.g., nightly), all environments can be synced in one click. Neon includes a reset from parent feature, which instantly resets all child branches with data from the main branch. This allows teams to get the latest testing data (including schema changes) without needing to reload testing datasets in every single environment.
 
-Teams configure their workflows so that after development or testing is complete (e.g., a PR is closed), child branches are deleted automatically via the API. But since Neon's autosuspend automatically pauses these environments when unused, teams don’t have to worry too much about inactive branches.
+    Teams configure their workflows so that after development or testing is complete (e.g., a PR is closed), child branches are deleted automatically via the API. But since Neon's autosuspend automatically pauses these environments when unused, teams don’t have to worry too much about inactive branches.
 
 ## Step 1: Set up a Neon project for Dev/Test
 
@@ -59,57 +59,57 @@ A Neon Twin is a synchronized copy of your production or staging database within
 
 - **Set up the initial data import.** Use `pg_dump` to create a dump of your production or staging database.
 
-```sql
-pg_dump -Fc -v -d postgresql://[user]:[password]@[source_host]/[database] -f source_dump.bak
-```
+  ```sql
+  pg_dump -Fc -v -d postgresql://[user]:[password]@[source_host]/[database] -f source_dump.bak
+  ```
 
 - **Import data into Neon.** Use `pg_restore` to load the dump into your Neon main_dev branch:
 
-```sql
-pg_restore -v -d postgresql://[user]:[password]@[neon_host]/[database] source_dump.bak
-```
+  ```sql
+  pg_restore -v -d postgresql://[user]:[password]@[neon_host]/[database] source_dump.bak
+  ```
 
 - **Automate nightly synchronization with GitHub Actions**.
-  - Prerequisites:
+  - **Prerequisites**:
     - Ensure you have a GitHub repository to host the workflow.
     - Store your database credentials securely using GitHub Secrets.
-  - Steps:
-    - In your GitHub repository, navigate to .github/workflows/ and create a file named neon_twin_sync.yml.
-    - Insert the following content into neon_twin_sync.yml:
+  - **Steps**:
+    1. In your GitHub repository, navigate to .github/workflows/ and create a file named neon_twin_sync.yml.
+    2. Insert the following content into  `neon_twin_sync.yml`:
 
-```yaml
-name: Neon Twin Sync
+        ```yaml
+        name: Neon Twin Sync
 
-on:
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight
+        on:
+          schedule:
+            - cron: '0 0 * * *' # Runs daily at midnight
 
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+        jobs:
+          sync:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout repository
+                uses: actions/checkout@v3
 
-      - name: Set up PostgreSQL
-        uses: postgres-actions/setup-postgresql@v2
-        with:
-          postgresql-version: '17'
+              - name: Set up PostgreSQL
+                uses: postgres-actions/setup-postgresql@v2
+                with:
+                  postgresql-version: '17'
 
-      - name: Dump source database
-        run: |
-          pg_dump -Fc -v -d ${{ secrets.SOURCE_DB_URL }} -f source_dump.bak
+              - name: Dump source database
+                run: |
+                  pg_dump -Fc -v -d ${{ secrets.SOURCE_DB_URL }} -f source_dump.bak
 
-      - name: Restore to Neon
-        run: |
-          pg_restore -v -d ${{ secrets.NEON_DB_URL }} source_dump.bak
-```
+              - name: Restore to Neon
+                run: |
+                  pg_restore -v -d ${{ secrets.NEON_DB_URL }} source_dump.bak
+        ```
 
-- In your GitHub repository, navigate to Settings > Secrets and variables > Actions.
-- Add the following secrets:
-  - `SOURCE_DB_URL`: Connection string for your source database.
-  - `NEON_DB_UR`L: Connection string for your Neon main_dev branch.
-- Commit the `neon_twin_sync.yml` file to your repository.
+    3. In your GitHub repository, navigate to Settings > Secrets and variables > Actions.
+    4. Add the following secrets:
+        - `SOURCE_DB_URL`: Connection string for your source database.
+        - `NEON_DB_UR`L: Connection string for your Neon main_dev branch.
+    5. Commit the `neon_twin_sync.yml` file to your repository.
   GitHub Actions will execute this workflow nightly, synchronizing your Neon Twin with the source database.
 
 ### Using AWS DMS

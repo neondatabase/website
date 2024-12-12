@@ -21,7 +21,7 @@ What all these platforms had in common:
 
 The solution: **they're creating a Neon project per customer, scaling up to hundreds of thousands of projects**. [Explore our Partners page to learn more](https://neon.tech/partners).
 
-To get started with the implementation, navigate to the [Database-per-user guide](https://neon.tech/docs/use-cases/database-per-user)
+To get started with the implementation, navigate to the [Database-per-user guide](https://neon.tech/docs/use-cases/database-per-user).
 
 ## Neon features that make this possible
 
