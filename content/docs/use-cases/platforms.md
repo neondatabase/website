@@ -1,57 +1,41 @@
 ---
 title: Neon for Platforms
-subtitle: Integrate Neon and enable your users to create their own isolated Postgres databases
+subtitle: Let your users create their own isolated Postgres databases by integrating Neon into your platform
 enableTableOfContents: true
 updatedOn: '2024-09-08T12:44:00.894Z'
 ---
 
-Neon enables database-per-user architectures, allowing platforms to manage large fleets of databases with ease.
+Due to its severless nature, Neon makes it possible for companies to manage huge fleets of Postgres databases (= Neon projects) even with small teams and budgets. Examples include: 
+  - Retool ([read the case study](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases))
+  - Replit and Replit Agent
+  - Vercel 
+  - Koyeb, Genezio, and many other IaaS 
 
-Three features make database-per-user architectures on Neon possible to the extent that today, companies are able to manage fleets of hundreds of thousands of databases with a single engineer.
+What all these platforms had in common: 
+- They needed to create one database per user
+- They needed deployment to be nearly instantaneous, to not make their users wait
+- Everything had to be programmable via API
+- The cost of idle instances had to be negligible 
 
-<DefinitionList bulletType="check">
-Management API
-: Use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics.
+The solution: **they're creating a Neon project per customer, scaling up to hundreds of thousands of projects**. [Explore our Partners page to learn more](https://neon.tech/partners). 
 
-Instant Provisioning
-: P99 database provisioning time is less than 1 second.
+To get started with the implementation, navigate to the [Database-per-user guide](https://neon.tech/docs/use-cases/database-per-user) 
 
-Scale to Zero
-: Idle databases scale compute to zero automatically, and instantly come back online when needed. This means you're not paying a fixed cost for every database you onboard.
+## Neon features that make this possible 
+- **Management API**. Use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to provision new databases of any size, in any region, set up usage quotes, even pass through costs to end-users with detailed per-database metrics.
+- **Instant provisioning**. Neon databases provision in less than 1 second.
+- **Scale-to-zero**. You don't pay for inactive databases in Neon, meaning you're not paying a fixed cost for every database you onboard.
 </DefinitionList>
 
-**The result:** Small teams can build flexible database-per-tenant architectures on Neon without operational burden or infra cost overhead.
-
-- **Level up your platform**
-
-  - Start offering managed Postgres, the most-loved database by developers.
-
-- **Budget-friendly**
-
-  - Thanks to scale-to-zero, empty databases cost you pennies. Pay for what you use.
-
-- **On your terms**
-
-  - Integrate Neon as a third-party via OAuth or build your own product on top of it.
-
-- **Let us do the work**
-  - We host Postgres, you build.
-
-With Neon's serverless Postgres, you can offer budget-friendly, managed databases on your platform without the infrastructure overhead. Integrate Neon as a third-party service or build your product on top of Neon &#8212;we handle the database hosting.
-
-## Partner with Neon
-
-Learn about the benefits of integrating with Neon and how to become a partner.
 
 <DetailIconCards>
 
 <a href="https://neon.tech/partners" description="Discover the benefits of partnering with Neon for serverless Postgres" icon="handshake">Partner page</a>
 
-<a href="https://neon.tech/partners#partners-apply" description="Request partnership online" icon="todo">Apply</a>
-
 </DetailIconCards>
 
-## Integrate with Neon
+## Getting started
+### How to integrate with Neon
 
 Find details about the different ways you can integrate with Neon.
 
@@ -65,7 +49,7 @@ Find details about the different ways you can integrate with Neon.
 
 </DetailIconCards>
 
-## How to set up billing
+### How to set up billing
 
 Learn how to set up quotas and track key consumption metrics.
 
