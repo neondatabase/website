@@ -48,7 +48,7 @@ const Efficiency = ({ title }) => (
         <a href="/blog/architecture-decisions-in-neon">natively separating storage and compute</a>,
         Neon implements two features that allows you to pay only for the compute you use without
         investing any manual work: <a href="/blog/scaling-serverless-postgres">autoscaling</a> and{' '}
-        <a href="/docs/introduction/auto-suspend">scale to zero</a>.
+        <a href="/docs/introduction/scale-to-zero">scale to zero</a>.
       </p>
       <List items={items} />
     </div>

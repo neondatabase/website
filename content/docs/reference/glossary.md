@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-12-04T13:30:28.567Z'
+updatedOn: '2024-12-11T21:23:33.091Z'
 ---
 
 ## access token
@@ -19,7 +19,7 @@ Also see [Compute hours](#compute-hours).
 
 ## Activity Monitor
 
-A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an `Idle` state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
+A process that monitors a Neon compute for activity. During periods of inactivity, the Activity Monitor gracefully places the compute into an idle state to save energy and resources. The Activity Monitor closes idle connections after 5 minutes of inactivity. When a connection is made to an idle compute, the Activity Monitor reactivates the compute.
 
 ## Admin
 
@@ -41,9 +41,9 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
-## Autosuspend
+## Scale to Zero
 
-A feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an `Idle` state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Autosuspend_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable autosuspend to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes, by default) to minimize compute usage. This feature is also referred to as "scale to zero". When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can configure the _Scale to Zero_ feature. For example, you can increase the delay period to reduce the frequency of suspensions, or you can disable scale to zero to maintain an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
@@ -115,26 +115,11 @@ The access point through which users connect to a Neon compute. In the context o
 
 ## compute size
 
-The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 10 CU. The number of units determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 56 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 10 CUs. The following table shows the vCPU and RAM for each CU:
-
-| Compute Unit (CU) | vCPU | RAM   |
-| :---------------- | :--- | :---- |
-| .25               | .25  | 1 GB  |
-| .5                | .5   | 2 GB  |
-| 1                 | 1    | 4 GB  |
-| 2                 | 2    | 8 GB  |
-| 3                 | 3    | 12 GB |
-| 4                 | 4    | 16 GB |
-| 5                 | 5    | 20 GB |
-| 6                 | 6    | 24 GB |
-| 7                 | 7    | 28 GB |
-| 8                 | 8    | 32 GB |
-| 9                 | 9    | 36 GB |
-| 10                | 10   | 40 GB |
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 
@@ -196,7 +181,7 @@ A usage metric that measures the total volume of data transferred out of Neon (k
 
 ## Database
 
-A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Noen project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
+A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Neon project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
 
 ## database branching
 
@@ -477,10 +462,6 @@ The primary line of data for every Neon project, initially named `main`. The roo
 ## Safekeeper
 
 A Neon architecture component responsible for the durability of database changes. Postgres streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
-
-## scale-to-zero
-
-Scale-to-zero refers to Neon's Autosuspend feature, which places a compute into an `Idle` state when it is not being used. Neon suspends a compute after five minutes of inactivity, by default. See [Autosuspend](#autosuspend).
 
 ## Scale plan
 

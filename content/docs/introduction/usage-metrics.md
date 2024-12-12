@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2024-12-01T21:48:07.698Z'
+updatedOn: '2024-12-11T21:23:33.089Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -147,7 +147,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 - **Set a reasonable history window** &#8212; We recommend setting your history retention period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
 - **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
 - **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
-- **Manual VACUUM for autosuspend users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [autosuspend](/docs/guides/auto-suspend-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
+- **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
 
   To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
 
@@ -190,32 +190,58 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 - A single **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it would take 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it would only take 15 minutes to use 1 compute hour.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
-- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 10 CUs, as outlined below:
+- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-  | Compute Units | vCPU | RAM   |
-  | :------------ | :--- | :---- |
-  | .25           | .25  | 1 GB  |
-  | .5            | .5   | 2 GB  |
-  | 1             | 1    | 4 GB  |
-  | 2             | 2    | 8 GB  |
-  | 3             | 3    | 12 GB |
-  | 4             | 4    | 16 GB |
-  | 5             | 5    | 20 GB |
-  | 6             | 6    | 24 GB |
-  | 7             | 7    | 28 GB |
-  | 8             | 8    | 32 GB |
-  | 9             | 9    | 36 GB |
-  | 10            | 10   | 40 GB |
+| Compute Units | vCPU | RAM    |
+| :------------ | :--- | :----- |
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+| 9             | 9    | 36 GB  |
+| 10            | 10   | 40 GB  |
+| 11            | 11   | 44 GB  |
+| 12            | 12   | 48 GB  |
+| 13            | 13   | 52 GB  |
+| 14            | 14   | 56 GB  |
+| 15            | 15   | 60 GB  |
+| 16            | 16   | 64 GB  |
+| 18            | 18   | 72 GB  |
+| 20            | 20   | 80 GB  |
+| 22            | 22   | 88 GB  |
+| 24            | 24   | 96 GB  |
+| 26            | 26   | 104 GB |
+| 28            | 28   | 112 GB |
+| 30            | 30   | 120 GB |
+| 32            | 32   | 128 GB |
+| 34            | 34   | 136 GB |
+| 36            | 36   | 144 GB |
+| 38            | 38   | 152 GB |
+| 40            | 40   | 160 GB |
+| 42            | 42   | 168 GB |
+| 44            | 44   | 176 GB |
+| 46            | 46   | 184 GB |
+| 48            | 48   | 192 GB |
+| 50            | 50   | 200 GB |
+| 52            | 52   | 208 GB |
+| 54            | 54   | 216 GB |
+| 56            | 56   | 224 GB |
 
-- A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an `Idle` state.
+- A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
 ### How Neon compute features affect usage
 
-Compute-hour usage in Neon is affected by [autosuspend](/docs/guides/auto-suspend-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
+Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 
-You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With autosuspend, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
+You can see how compute size scales between your minimum and maximum CPU settings, increasing and decreasing compute usage: compute size never rises above your max level, and it never drops below your minimum setting. With scale to zero, no compute time at all accrues during inactive periods. For projects with inconsistent demand, this can save significant compute usage.
 
 <Admonition type="note">
 Neon uses a small amount of compute time, included in your billed compute hours, to perform periodic checks to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information. Availability checks take a few seconds are typically performed a few days apart. You can monitor these checks, how long they take, and how often they occur, on the **Systems operations** tab on the **Monitoring** page in the Neon Console. 
@@ -272,8 +298,8 @@ compute hours = compute size * active hours
 
 If you're noticing an unexpectedly high number of compute hours, consider the following steps:
 
-- **Check your compute size:** Compute sizes range from 0.25 CU to 10 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
-- **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from auto-suspending. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
+- **Check your compute size:** Compute sizes range from 0.25 CU to 56 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
+- **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from scaling to zero. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
 
   To investigate database activity, you can run the following query to check connections:
 
@@ -344,9 +370,9 @@ The formula for compute hour usage is: `compute hours = compute size * active ho
 </details>
 
 <details>
-<summary>**How does autosuspend (scale to zero) affect my compute hour usage?**</summary>
+<summary>**How does scale to zero affect my compute hour usage?**</summary>
 
-Autosuspend places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust autosuspend behavior to have it suspend computes more or less quickly after compute activity ceases. See [Autosuspend](/docs/introduction/auto-suspend).
+Scale to zero places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust scale to zero behavior to have it suspend computes more or less quickly after compute activity ceases. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 </details>
 

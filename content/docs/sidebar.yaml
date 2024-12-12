@@ -40,6 +40,7 @@
             - title: Javascript
               slug: guides/javascript
             - title: Python
+              slug: guides/python
               items:
                 - title: Psycopg
                   slug: guides/python
@@ -205,11 +206,11 @@
               slug: guides/autoscaling-guide
             - title: How the algorithm works
               slug: guides/autoscaling-algorithm
-        - title: Autosuspend
-          slug: introduction/auto-suspend
+        - title: Scale to zero
+          slug: introduction/scale-to-zero
           items:
-            - title: Autosuspend guide
-              slug: guides/auto-suspend-guide
+            - title: Scale to zero guide
+              slug: guides/scale-to-zero-guide
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -482,6 +483,8 @@
               slug: guides/neon-authorize
             - title: Tutorial
               slug: guides/neon-authorize-tutorial
+            - title: Drizzle RLS
+              slug: guides/neon-authorize-drizzle
             - title: Troubleshooting
               slug: guides/neon-authorize-troubleshooting
             - title: What's next
@@ -504,6 +507,10 @@
               slug: guides/neon-authorize-azure-ad
             - title: Descope
               slug: guides/neon-authorize-descope
+            - title: Firebase / GCP Identity Platform
+              slug: guides/neon-authorize-firebase-gcp
+            - title: Google Identity
+              slug: guides/neon-authorize-google-identity
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -690,18 +697,23 @@
         - title: The pgvector extension
           slug: extensions/pgvector
         - title: AI integrations
+          slug: ai/langchain
           items:
             - title: LangChain
               slug: ai/langchain
             - title: LlamaIndex
               slug: ai/llamaindex
+            - title: Inngest
+              slug: ai/inngest
         - title: Prepare your AI app for production
+          slug: ai/ai-vector-search-optimization
           items:
             - title: Optimize pgvector search
               slug: ai/ai-vector-search-optimization
             - title: Scale with Neon
               slug: ai/ai-scale-with-neon
         - title: AI tools
+          slug: ai/ai-google-colab
           items:
             - title: Google Colab
               slug: ai/ai-google-colab
@@ -843,6 +855,7 @@
           slug: functions/introduction
           items:
             - title: Aggregate functions
+              slug: functions/array_agg
               items:
                 - title: array_agg
                   slug: functions/array_agg
@@ -855,10 +868,12 @@
                 - title: sum
                   slug: functions/sum
             - title: Array functions
+              slug: functions/array_length
               items:
                 - title: array_length
                   slug: functions/array_length
             - title: Date / Time functions
+              slug: functions/age
               items:
                 - title: age
                   slug: functions/age
@@ -871,6 +886,7 @@
                 - title: now
                   slug: functions/now
             - title: JSON functions
+              slug: functions/array_to_json
               items:
                 - title: array_to_json
                   slug: functions/array_to_json
@@ -927,6 +943,7 @@
                 - title: jsonb_to_record
                   slug: functions/jsonb_to_record
             - title: Window functions
+              slug: functions/dense_rank
               items:
                 - title: dense_rank
                   slug: functions/dense_rank
@@ -937,6 +954,7 @@
                 - title: rank
                   slug: functions/window-rank
             - title: String functions
+              slug: functions/concat
               items:
                 - title: concat
                   slug: functions/concat
@@ -953,6 +971,7 @@
                 - title: trim
                   slug: functions/trim
             - title: Math functions
+              slug: functions/math-abs
               items:
                 - title: abs
                   slug: functions/math-abs

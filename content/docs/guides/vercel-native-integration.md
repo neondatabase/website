@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.065Z'
+updatedOn: '2024-12-11T21:23:33.087Z'
 ---
 
 <InfoBlock>
@@ -48,17 +48,17 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
 5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
-6. On the **Create Database** modal, select a region, specify your compute size and autosuspend settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
+6. On the **Create Database** modal, select a region, specify your compute size and scale to zero settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
 
    <Admonition type="note">
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-   | Plan     | Compute Size    | Suspend after ([Autosuspend](/docs/introduction/auto-suspend)) |
-   | :------- | :-------------- | :------------------------------------------------------------- |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                            |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                     |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                      |
-   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                      |
+   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero)) After |
+   | :------- | :-------------- | :------------------------------------------------------- |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                      |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)               |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                |
+   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)                |
 
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
@@ -109,7 +109,7 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
 - **Compute Settings**:
 
-  - Compute settings like size, autoscaling, and autosuspend are managed in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
+  - Compute settings like size, autoscaling, and scale to zero are managed in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
 
 - **Project Naming**:
 
@@ -124,7 +124,7 @@ Configuration changes you can make include:
 
 - Changing the **Database Name** (Project name in Neon)
 - Changing the **Compute size**
-- Changing **Suspend after period of inactivity** setting (Autosuspend)
+- Changing the scale to zero setting
 - Changing your **Installation Level Plan** (your Neon plan)
 
 To change your configuration:

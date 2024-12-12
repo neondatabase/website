@@ -13,7 +13,7 @@ The general purpose of read replicas is to segregate read-only work from your pr
 - **Analytics queries**: Offloading resource-intensive analytics and reporting workloads to reduce load on the primary compute
 - **Read-only access**: Granting read-only access to users or applications that don't require write permissions
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Autosuspend_ features are also supported, providing you with control over read replica compute usage.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Scale to Zero_ features are also supported, providing you with control over read replica compute usage.
 
 ## Prerequisites
 
@@ -127,7 +127,7 @@ In the response body for this method, read replica computes are identified by th
 
 ## Edit a read replica
 
-You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Autosuspend](/docs/manage/endpoints#auto-suspend-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/endpoints#scale-to-zero-configuration) configuration.
 
 <Tabs labels={["Console", "API"]}>
 

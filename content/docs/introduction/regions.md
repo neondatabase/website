@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-12-03T15:29:17.188Z'
+updatedOn: '2024-12-12T15:31:10.131Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -48,7 +48,7 @@ After you select a region for a Neon project, it cannot be changed for that proj
 
 A NAT gateway has a public IP address that external systems see when private resources initiate outbound connections. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. To ensure proper connectivity for setups such as replicating data to Neon, you should allow access to all the NAT gateway IP addresses associated with your Neon project's region.
 
-If you are unsure of your project's region, you can find this information in the **Project settings** widget on the **Project Dashboard**.
+If you are unsure of your project's region, you can find this information in the **Settings** widget on the **Project Dashboard**.
 
 ### AWS NAT Gateway IP Addresses
 
