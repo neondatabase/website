@@ -174,8 +174,8 @@
       },
       {
         "icon": "autoscale",
-        "title": "Autoscaling up to 10+ CU",
-        "info": "Ask us about larger computes"
+        "title": "Autoscaling up to 16+ CU",
+        "info": "Ask us about larger compute sizes"
       }
     ],
     "otherFeatures": {
