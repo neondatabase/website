@@ -32,3 +32,5 @@ const PgtPage = () => (
 );
 
 export default PgtPage;
+
+export const revalidate = false;
