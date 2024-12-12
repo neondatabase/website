@@ -180,8 +180,6 @@ export async function generateMetadata({ params }) {
       twitterImage,
     },
   } = page;
-  // eslint-disable-next-line no-console
-  console.log('[WP]', params.slug);
 
   return getMetadata({
     title: opengraphTitle || title,
