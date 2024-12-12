@@ -45,9 +45,11 @@ curl https://console.neon.tech/api/v2/api_keys \
 ```
 
 **Parameters:**
+
 - `key_name`: A descriptive name for the API key (e.g., "development", "staging", "ci-pipeline")
 
 **Response:**
+
 ```json
 {
   "id": 177630,
@@ -60,7 +62,7 @@ curl https://console.neon.tech/api/v2/api_keys \
 
 ## Create an organization API key
 
-Organization API keys provide admin-level access to all organization resources. Only admins can create these keys. When creating an organization API key, Neon verifies that your personal API key belongs to a user with admin permissions in the specified organization. 
+Organization API keys provide admin-level access to all organization resources. Only admins can create these keys. When creating an organization API key, Neon verifies that your personal API key belongs to a user with admin permissions in the specified organization.
 
 For more detail about organization-related methods, see [Organization API Keys](/docs/manage/orgs-api#api-keys).
 
@@ -88,15 +90,17 @@ curl --request POST \
 ```
 
 **Response:**
+
 ```json
 {
-    "id": 165434,
-    "key": "neon_org_key_1234567890abcdef1234567890abcdef",
-    "name": "orgkey",
-    "created_at": "2022-11-15T20:13:35Z",
-    "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4"
+  "id": 165434,
+  "key": "neon_org_key_1234567890abcdef1234567890abcdef",
+  "name": "orgkey",
+  "created_at": "2022-11-15T20:13:35Z",
+  "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4"
 }
 ```
+
 </TabItem>
 
 </Tabs>
@@ -143,15 +147,15 @@ API keys scoped to a project will have permissions limited to the specified proj
 **Member-Level Access Restrictions:**
 
 - **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
-  
+
   ```bash
   curl --request DELETE \
        --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
        --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
   ```
-  
+
   **Response:**
-  
+
   ```json
   {
     "error": "Not Found",
@@ -164,7 +168,7 @@ API keys scoped to a project will have permissions limited to the specified proj
 When using an **Organization API Key**:
 
 - **Without Project Scope**: Automatically scoped to the entire organization
-  
+
   ```bash shouldWrap
   curl --request GET \
        --url 'https://console.neon.tech/api/v2/projects' \
@@ -172,7 +176,7 @@ When using an **Organization API Key**:
   ```
 
 - **With Project Scope**: Scoped to the specified project
-  
+
   ```bash shouldWrap
   curl --request GET \
        --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
@@ -182,15 +186,17 @@ When using an **Organization API Key**:
 ### Member-level access restrictions
 
 Project-scoped API keys have member-level access, which means they:
+
 - **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
-  
+
   ```bash shouldWrap
   curl --request DELETE \
        --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
        --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
   ```
-  
+
   **Response:**
+
   ```json
   {
     "error": "Not Found",
@@ -380,6 +386,7 @@ curl "https://console.neon.tech/api/v2/organizations/{org_id}/api_keys" \
 ```
 
 **Response:**
+
 ```json
 [
   {
@@ -397,6 +404,7 @@ curl "https://console.neon.tech/api/v2/organizations/{org_id}/api_keys" \
   }
 ]
 ```
+
 </TabItem>
 
 </Tabs>
@@ -434,6 +442,7 @@ curl -X DELETE \
 ```
 
 **Response:**
+
 ```json
 {
   "id": 165435,
