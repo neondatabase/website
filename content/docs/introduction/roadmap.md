@@ -19,7 +19,6 @@ As 2024 comes to a close, you might have noticed that our "working on now" list 
 
 Here's a snapshot of what we're working on now:
 
-- **Larger computes**: Coming soon to a region near you.
 - **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 
@@ -27,6 +26,7 @@ If you have other feature ideas, [let us know](#share-your-thoughts).
 
 ## What we've just launched
 
+- **Larger computes**: Autoscaling now supports up to 16 vCPUs, and fixed compute sizes up to 56 vCPUs are available in Beta.
 - **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon’s API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
 - **Neon in the Azure Marketplace**: Neon is now available as an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Neon Postgres databases directly from the Azure portal. [Read the announcement](https://neon.tech/blog/neon-is-now-available-as-an-azure-native-integration).
 - **Archive storage on paid plans**: To minimize storage costs on paid plans, we now support automatic archiving of inactive branches (snapshots of your data) in cost-efficient object storage. For more about this feature, see [Branch archiving](/docs/guides/branch-archiving).
