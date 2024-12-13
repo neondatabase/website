@@ -2,7 +2,7 @@
 title: Run ad-hoc queries with Read Replicas
 subtitle: Leverage read replicas for running ad-hoc queries
 enableTableOfContents: true
-updatedOn: '2024-10-23T15:36:08.744Z'
+updatedOn: '2024-12-13T20:52:57.585Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries are particularly useful for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
