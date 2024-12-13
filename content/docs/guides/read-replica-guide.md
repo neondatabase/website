@@ -236,11 +236,12 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    Refer to [Monitoring Read Replicas](https://neon.tech/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
 
 2. **Verify Configuration Alignment**  
-   If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:  
-   - `max_connections`  
-   - `max_prepared_transactions`  
-   - `max_locks_per_transaction`  
-   - `max_wal_senders`  
+   If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
+
+   - `max_connections`
+   - `max_prepared_transactions`
+   - `max_locks_per_transaction`
+   - `max_wal_senders`
    - `max_worker_processes`
 
 3. **Restart Read-Replica Computes if Configurations are Misaligned**  
