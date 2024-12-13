@@ -84,7 +84,7 @@ In Neon, the maximum number of concurrent connections is defined according to th
 
 ## Scale to zero considerations
 
-By default, Neon suspends a compute after five minutes of inactivity. This behavior is configurable on Neon's paid plans. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+Neon suspends a compute after five minutes (300 seconds) of inactivity. This behavior can be disabled on Neon's paid plans. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 If you rely on Neon's scale to zero feature to minimize database usage, note that certain Hasura configuration options can keep your Neon compute in an active state:
 

@@ -62,7 +62,7 @@ To create a Neon project:
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
    - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-   - The scale to zero setting defines the period of inactivity after which a compute is automatically suspended. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
+   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
 
 4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
 5. Click **Create Project**.

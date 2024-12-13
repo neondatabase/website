@@ -8,11 +8,11 @@ updatedOn: '2024-08-19T15:59:15.069Z'
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
 
-Generally, an idle compute has been suspended by Neon's scale to zero feature due to inactivity, while an `Active` compute has been activated by a connection, indicating that Postgres is currently running.
+Generally, an idle compute has been suspended by Neon's scale to zero feature due to inactivity, while an `Active` compute has been activated by a connection or operation, indicating that Postgres is currently running.
 
 ## Scale to zero
 
-If there are no active queries for 5 minutes, which is the default scale to zero setting in Neon, your compute is automatically placed into an idle state. If you are on a paid plan, you can disable this scale to zero behavior so that a compute always remains active, or you can increase or decrease the amount of time after which a compute is placed into an idle state. This behavior is controlled by your compute's **Scale to zero** setting.
+If there are no active queries for 5 minutes, which is the scale to zero setting in Neon, your compute is automatically placed into an idle state. If you are on a paid plan, you can disable the scale to zero behavior so that a compute always remains active. This behavior is controlled by your compute's **Scale to zero** setting.
 
 ![Scale to zero configuration dialog](/docs/introduction/autosuspend_config.png)
 

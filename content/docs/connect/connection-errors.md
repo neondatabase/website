@@ -143,7 +143,7 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [scale to zero](/docs/reference/glossary#scale-to-zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [scale to zero](/docs/reference/glossary#scale-to-zero). The transition from an idle to an active state only takes a few hundred milliseconds.
 
 Consider these recommended steps:
 
@@ -183,7 +183,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable scale to zero or configure a different suspension period. For instructions, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot modify the default 5 minute scale to zero setting.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable scale to zero. For instructions, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot disable scale to zero.
 
 ## Unsupported startup parameter
 

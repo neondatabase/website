@@ -372,7 +372,7 @@ The formula for compute hour usage is: `compute hours = compute size * active ho
 <details>
 <summary>**How does scale to zero affect my compute hour usage?**</summary>
 
-Scale to zero places your compute into an idle state when it's not being used, which helps minimize compute hour usage. Computes are suspended after 5 minutes of inactivity by default. On Neon's paid plans, you can adjust scale to zero behavior to have it suspend computes more or less quickly after compute activity ceases. See [Scale to Zero](/docs/introduction/scale-to-zero).
+Scale to zero places your compute into an idle state when it's not being used, which helps minimize compute hour usage. When enabled, computes are suspended after 5 minutes of inactivity. On Neon's paid plans, you can disable scale to zero. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 </details>
 
