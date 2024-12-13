@@ -24,7 +24,7 @@ While there is no strict limit on the number of API keys you can create, we reco
 You'll need to create your first API key from the Neon Console, where you are already authenticated. You can then use that key to generate new keys from the API.
 
 <Admonition type="note">
-When creating API keys from the Neon Console, the secret token will be displayed only once. Copy it immediately and store it securely in a credential manager (like AWS Key Management Service or Azure Key Vault) - you won't be able to retrieve it later. If you lose an API key, you'll need to revoke it and create a new one.
+When creating API keys from the Neon Console, the secret token will be displayed only once. Copy it immediately and store it securely in a credential manager (like AWS Key Management Service or Azure Key Vault) — you won't be able to retrieve it later. If you lose an API key, you'll need to revoke it and create a new one.
 </Admonition>
 
 ### Create a personal API key
