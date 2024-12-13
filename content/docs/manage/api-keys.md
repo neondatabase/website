@@ -227,7 +227,7 @@ You should revoke API keys that are no longer needed or if you suspect a key may
 
 - The action is immediate and permanent
 - All API requests using the revoked key will fail with a 401 Unauthorized error
-- The key cannot be reactivated - you'll need to create a new key if access is needed again
+- The key cannot be reactivated — you'll need to create a new key if access is needed again
 
 ### Who can revoke keys
 
