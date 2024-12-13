@@ -160,10 +160,10 @@
       "feature": {
         "title": "Scale to zero"
       },
-      "free": "Always enabled",
-      "launch": "Configurable",
-      "scale": "Configurable",
-      "business": "Configurable"
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
     },
     {
       "rows": "1",
