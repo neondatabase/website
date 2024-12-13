@@ -25,9 +25,9 @@ You can create a personal API key in the Neon Console or using the Neon API.
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
-In the Neon Console, select **Account settings** > **API keys**. You'll see a list of existing keys. Click **Create key** to create a new key.
+In the Neon Console, select **Account settings** > **API keys**. You'll see a list of any existing keys, along with the button to create a new key.
 
-<Admonition type="note">Make sure you copy the key immediately. You won't be able to view it again after leaving the page.</Admonition>
+When your new key is generated, the secret token will be displayed only once. Copy it immediately and store it securely — you won't be able to retrieve it later if you lose it.
 
 ![Creating a personal API key in the Neon Console](/docs/manage/personal_api_key.png)
 
@@ -38,9 +38,9 @@ In the Neon Console, select **Account settings** > **API keys**. You'll see a li
 You'll need an existing personal key (create one from the Neon Console) in order to create new keys using the API. If you've got a key ready, you can use the following request to generate new keys:
 
 ```bash shouldWrap
-curl https://console.neon.tech/api/v2/api_keys \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PERSONAL_API_KEY" \
+curl https://console.neon.tech/api/v2/api_keys 
+  -H "Content-Type: application/json" 
+  -H "Authorization: Bearer $PERSONAL_API_KEY" 
   -d '{"key_name": "my-key"}'
 ```
 
@@ -62,7 +62,7 @@ curl https://console.neon.tech/api/v2/api_keys \
 
 ## Create an organization API key
 
-Organization API keys provide admin-level access to all organization resources. Only admins can create these keys. When creating an organization API key, Neon verifies that your personal API key belongs to a user with admin permissions in the specified organization.
+Organization API keys provide admin-level access to all organization resources. Only organization admins can create these keys. To create an organization API key, you must use your personal API key and be an administrator in the organization. Neon will verify your admin status before allowing the key creation.
 
 For more detail about organization-related methods, see [Organization API Keys](/docs/manage/orgs-api#api-keys).
 
@@ -70,16 +70,16 @@ For more detail about organization-related methods, see [Organization API Keys](
 
 <TabItem>
 
-Navigate to your organization's **Settings** > **API keys** to create a new key.
+Navigate to your organization's **Settings** > **API keys** to view a list of existing keys and the button to create a new key.
 
-Make sure you copy the key immediately. You won't be able to view it again after leaving the page.
+When your new key is generated, the secret token will be displayed only once. Copy it immediately and store it securely - you won't be able to retrieve it later if you lose it.
 
 ![creating an api key from the console](/docs/manage/org_api_keys.png)
 </TabItem>
 
 <TabItem>
 
-To create an organization API key via the API, you need to use your personal API key and have admin permissions in the specified organization.
+To create an organization API key via the API, you need to use your personal API key. You also need to have admin-level permissions in the specified organization.
 
 ```bash shouldWrap
 curl --request POST \
@@ -107,7 +107,11 @@ curl --request POST \
 
 ## Create a project-scoped organization API key
 
-Organization API keys can be scoped to individual projects within that organization. Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with.
+Organization API keys can be scoped to individual projects within that organization. Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
+
+- Can only access and manage their specified project
+- Cannot perform organization-related actions or create new projects
+- Will lose access if the project is transferred out of the organization
 
 <Admonition type="note">Creating project-scoped keys requires using a personal API key. Organization API keys cannot be used to create additional API keys.</Admonition>
 
@@ -139,70 +143,6 @@ curl --request POST \
   "project_id": "project-id-123"
 }
 ```
-
-**Usage:**
-
-API keys scoped to a project will have permissions limited to the specified project. This enhances security by ensuring that the API key cannot access other projects within the organization.
-
-**Member-Level Access Restrictions:**
-
-- **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
-
-  ```bash
-  curl --request DELETE \
-       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
-       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
-  ```
-
-  **Response:**
-
-  ```json
-  {
-    "error": "Not Found",
-    "message": "Project not found or access denied."
-  }
-  ```
-
-### Using API keys
-
-When using an **Organization API Key**:
-
-- **Without Project Scope**: Automatically scoped to the entire organization
-
-  ```bash shouldWrap
-  curl --request GET \
-       --url 'https://console.neon.tech/api/v2/projects' \
-       --header 'authorization: Bearer $ORG_API_KEY'
-  ```
-
-- **With Project Scope**: Scoped to the specified project
-
-  ```bash shouldWrap
-  curl --request GET \
-       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
-       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
-  ```
-
-### Member-level access restrictions
-
-Project-scoped API keys have member-level access, which means they:
-
-- **Cannot Delete Scoped Project**: Project-scoped API keys are restricted from deleting the project they are associated with.
-
-  ```bash shouldWrap
-  curl --request DELETE \
-       --url 'https://console.neon.tech/api/v2/projects/some-project-123' \
-       --header 'authorization: Bearer $ONLY_THIS_PROJECT_API_KEY'
-  ```
-
-  **Response:**
-
-  ```json
-  {
-    "error": "Not Found",
-    "message": "Project not found or access denied."
-  }
-  ```
 
 ## Make an API call
 
