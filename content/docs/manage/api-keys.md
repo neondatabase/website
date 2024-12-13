@@ -110,7 +110,7 @@ curl --request POST \
 
 </Tabs>
 
-### Create a project-scoped organization API key
+### Create project-scoped organization API keys
 
 Organization API keys can be scoped to individual projects within that organization. Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
 
