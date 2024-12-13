@@ -2,7 +2,7 @@
 title: AWS Marketplace
 enableTableOfContents: true
 subtitle: Pay for Neon via your AWS Billing account
-updatedOn: '2024-10-14T11:46:51.927Z'
+updatedOn: '2024-12-13T15:21:21.699Z'
 ---
 
 Neon offers a convenient way to manage your subscription and billing through the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa). This option can help you consolidate your cloud expenses: it allows you to manage your Neon subscription alongside other AWS services, simplifying procurement by leveraging existing AWS agreements and processes.
