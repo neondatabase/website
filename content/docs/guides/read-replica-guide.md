@@ -226,6 +226,28 @@ For Neon [read replicas](/docs/introduction/read-replicas), certain Postgres set
 - `max_wal_senders`
 - `max_worker_processes`
 
-No users action is required. The settings are synchronized automatically.
+No users action is required. The settings are synchronized automatically when you create a read replica. However, if you change the compute size configuration on the primary read-write compute, you will need to restart your read replica computes to ensure that settings remain synchronized, as described in the next section.
+
+### Replication delay issues
+
+If your read replicas are falling behind, follow these steps to diagnose and resolve the issue:
+
+1. **Check Your Replication Lag Metrics**  
+   Refer to [Monitoring Read Replicas](https://neon.tech/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
+
+2. **Verify Configuration Alignment**  
+   If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:  
+   - `max_connections`  
+   - `max_prepared_transactions`  
+   - `max_locks_per_transaction`  
+   - `max_wal_senders`  
+   - `max_worker_processes`
+
+3. **Restart Read-Replica Computes if Configurations are Misaligned**  
+   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](https://neon.tech/docs/manage/endpoints#restart-a-compute).
+
+   <Admonition type="tip">
+   When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.
+   </Admonition>
 
 <NeedHelp/>
