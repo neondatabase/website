@@ -28,7 +28,7 @@ Neon's _Scale to zero_ feature automatically transitions a Neon compute (where P
 **Why do you need a database that scales to zero?** Combined with Neon's branching capability, scale to zero allows you to instantly spin up databases for development, experimentation, or testing without the typical costs associated with "always-running" databases with relatively little usage. This approach is ideal for various scenarios:
 
 - **Non-production databases**: Development, staging, and testing environments benefit as developers can work on multiple instances without cost concerns since these databases only use resources when active.
-- **Internal apps**: These apps often experience downtime during off-hours or holidays. Scale to zero ensures their supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
+- **Internal apps**: These apps often experience downtime during off-hours or holidays. Scale to zero ensures that supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
 - **Small projects**: Implementing scale to zero for these projects' databases enhances cost efficiency without significantly impacting user experience.
 
 Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).

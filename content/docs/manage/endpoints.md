@@ -45,7 +45,7 @@ To create an endpoint:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
-1. On the **Add new compute** dialog, specify your compute settings, including compute type, size, autoscaling, and scale to zero settings, and click **Create**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
+1. On the **Add new compute** dialog, specify your compute settings, including compute type, size, autoscaling, and scale to zero, and click **Create**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute
 
@@ -73,8 +73,7 @@ Some key points to understand about how your endpoint responds when you make cha
   </Admonition>
 
 * Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-* Changes to scale to zero settings do not require an endpoint restart; existing connections are unaffected.
-* If you disable scale to zero entirely, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute](#restart-a-compute).
+* If you disable scale to zero, you will need to restart your compute manually to get the latest compute-related release updates from Neon. See [Restart a compute](#restart-a-compute).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 
@@ -214,12 +213,12 @@ As mentioned above, your `max_connections` setting is based on the minimum compu
 
 ### Scale to zero configuration
 
-Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted. For instance, you can increase the delay to reduce the frequency of suspensions, or you can disable scale to zero completely to maintain an "always-active" compute. An "always-active" configuration eliminates the few seconds of latency required to reactivate a compute but is likely to increase your compute time usage.
+Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after 5 minutes of inactivity. You can disable scale to zero to maintain an "always-active" compute. An "always-active" configuration eliminates the few hundred milliseconds seconds of latency required to reactivate a compute but is likely to increase your compute time usage on systems where the database is not always active.
 
-The maximum scale to zero setting is 7 days. For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 <Admonition type="important">
-If you disable autosuspension entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
+If you disable scale to zero or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
 
 ## Restart a compute

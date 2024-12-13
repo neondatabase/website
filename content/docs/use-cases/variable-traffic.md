@@ -25,7 +25,7 @@ For production databases that stay on 24/7:
 For databases that are only used a few hours per day, for example, dev/test databases:
 
 - Your databases will automatically scale to zero when inactive. Instead of paying for compute 24/7, you reduce the costs of your supporting databases to a minimum, without manual work.
-- Once you query them again, Neon databases reactivate in less than a second (500 ms on average).
+- Once you query them again, Neon databases reactivate in less than a second (a few hundred ms on average).
 
 ---
 
