@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 import Layout from 'components/shared/layout';
 
 // eslint-disable-next-line react/prop-types
