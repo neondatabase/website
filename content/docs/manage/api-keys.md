@@ -38,9 +38,9 @@ When your new key is generated, the secret token will be displayed only once. Co
 You'll need an existing personal key (create one from the Neon Console) in order to create new keys using the API. If you've got a key ready, you can use the following request to generate new keys:
 
 ```bash shouldWrap
-curl https://console.neon.tech/api/v2/api_keys 
-  -H "Content-Type: application/json" 
-  -H "Authorization: Bearer $PERSONAL_API_KEY" 
+curl https://console.neon.tech/api/v2/api_keys
+  -H "Content-Type: application/json"
+  -H "Authorization: Bearer $PERSONAL_API_KEY"
   -d '{"key_name": "my-key"}'
 ```
 
