@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-01T21:48:07.698Z'
+updatedOn: '2024-12-12T15:31:10.133Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -55,7 +55,7 @@ To edit a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, select **Edit** for the compute you want to edit.
+1. From the **Computes** tab, select **Edit** for the compute you want to edit.
 
    The **Edit** window opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
 
@@ -84,25 +84,51 @@ Users on paid plans can change compute size settings when [editing a compute](#e
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
 
-| Compute size (in CUs) | vCPU | RAM   |
-| :-------------------- | :--- | :---- |
-| .25                   | .25  | 1 GB  |
-| .5                    | .5   | 2 GB  |
-| 1                     | 1    | 4 GB  |
-| 2                     | 2    | 8 GB  |
-| 3                     | 3    | 12 GB |
-| 4                     | 4    | 16 GB |
-| 5                     | 5    | 20 GB |
-| 6                     | 6    | 24 GB |
-| 7                     | 7    | 28 GB |
-| 8                     | 8    | 32 GB |
-| 9                     | 9    | 36 GB |
-| 10                    | 10   | 40 GB |
+| Compute Units | vCPU | RAM    |
+| :------------ | :--- | :----- |
+| .25           | .25  | 1 GB   |
+| .5            | .5   | 2 GB   |
+| 1             | 1    | 4 GB   |
+| 2             | 2    | 8 GB   |
+| 3             | 3    | 12 GB  |
+| 4             | 4    | 16 GB  |
+| 5             | 5    | 20 GB  |
+| 6             | 6    | 24 GB  |
+| 7             | 7    | 28 GB  |
+| 8             | 8    | 32 GB  |
+| 9             | 9    | 36 GB  |
+| 10            | 10   | 40 GB  |
+| 11            | 11   | 44 GB  |
+| 12            | 12   | 48 GB  |
+| 13            | 13   | 52 GB  |
+| 14            | 14   | 56 GB  |
+| 15            | 15   | 60 GB  |
+| 16            | 16   | 64 GB  |
+| 18            | 18   | 72 GB  |
+| 20            | 20   | 80 GB  |
+| 22            | 22   | 88 GB  |
+| 24            | 24   | 96 GB  |
+| 26            | 26   | 104 GB |
+| 28            | 28   | 112 GB |
+| 30            | 30   | 120 GB |
+| 32            | 32   | 128 GB |
+| 34            | 34   | 136 GB |
+| 36            | 36   | 144 GB |
+| 38            | 38   | 152 GB |
+| 40            | 40   | 160 GB |
+| 42            | 42   | 168 GB |
+| 44            | 44   | 176 GB |
+| 46            | 46   | 184 GB |
+| 48            | 48   | 192 GB |
+| 50            | 50   | 200 GB |
+| 52            | 52   | 208 GB |
+| 54            | 54   | 216 GB |
+| 56            | 56   | 224 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** You can use the slider to select a fixed compute size. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** You can also use the slider to specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries to meet workload demand. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info">
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
@@ -118,20 +144,50 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 
 The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
 
-| Min. Compute Size (CU) | vCPU | RAM   | LFC size | max_connections |
-| ---------------------- | ---- | ----- | -------- | --------------- |
-| 0.25                   | 0.25 | 1 GB  | 0.8 GB   | 112             |
-| 0.50                   | 0.50 | 2 GB  | 1.6 GB   | 225             |
-| 1                      | 1    | 4 GB  | 3.2 GB   | 450             |
-| 2                      | 2    | 8 GB  | 6.4 GB   | 901             |
-| 3                      | 3    | 12 GB | 9.6 GB   | 1351            |
-| 4                      | 4    | 16 GB | 12.8 GB  | 1802            |
-| 5                      | 5    | 20 GB | 16 GB    | 2253            |
-| 6                      | 6    | 24 GB | 19.2 GB  | 2703            |
-| 7                      | 7    | 28 GB | 22.4 GB  | 3154            |
-| 8                      | 8    | 32 GB | 25.6 GB  | 3604            |
-| 9                      | 9    | 36 GB | 28.8 GB  | 4000            |
-| 10                     | 10   | 40 GB | 32 GB    | 4000            |
+<Admonition type="note">
+Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+</Admonition>
+
+| Min. Compute Size (CU) | vCPU | RAM    | LFC size | max_connections |
+| ---------------------- | ---- | ------ | -------- | --------------- |
+| 0.25                   | 0.25 | 1 GB   | 0.8 GB   | 112             |
+| 0.50                   | 0.50 | 2 GB   | 1.6 GB   | 225             |
+| 1                      | 1    | 4 GB   | 3.2 GB   | 450             |
+| 2                      | 2    | 8 GB   | 6.4 GB   | 901             |
+| 3                      | 3    | 12 GB  | 9.6 GB   | 1351            |
+| 4                      | 4    | 16 GB  | 12.8 GB  | 1802            |
+| 5                      | 5    | 20 GB  | 16 GB    | 2253            |
+| 6                      | 6    | 24 GB  | 19.2 GB  | 2703            |
+| 7                      | 7    | 28 GB  | 22.4 GB  | 3154            |
+| 8                      | 8    | 32 GB  | 25.6 GB  | 3604            |
+| 9                      | 9    | 36 GB  | 28.8 GB  | 4000            |
+| 10                     | 10   | 40 GB  | 32 GB    | 4000            |
+| 11                     | 11   | 44 GB  | 35.2 GB  | 4000            |
+| 12                     | 12   | 48 GB  | 38.4 GB  | 4000            |
+| 13                     | 13   | 52 GB  | 41.6 GB  | 4000            |
+| 14                     | 14   | 56 GB  | 44.8 GB  | 4000            |
+| 15                     | 15   | 60 GB  | 48 GB    | 4000            |
+| 16                     | 16   | 64 GB  | 51.2 GB  | 4000            |
+| 18                     | 18   | 72 GB  | 57.6 GB  | 4000            |
+| 20                     | 20   | 80 GB  | 64 GB    | 4000            |
+| 22                     | 22   | 88 GB  | 70.4 GB  | 4000            |
+| 24                     | 24   | 96 GB  | 76.8 GB  | 4000            |
+| 26                     | 26   | 104 GB | 83.2 GB  | 4000            |
+| 28                     | 28   | 112 GB | 89.6 GB  | 4000            |
+| 30                     | 30   | 120 GB | 96 GB    | 4000            |
+| 32                     | 32   | 128 GB | 102.4 GB | 4000            |
+| 34                     | 34   | 136 GB | 108.8 GB | 4000            |
+| 36                     | 36   | 144 GB | 115.2 GB | 4000            |
+| 38                     | 38   | 152 GB | 121.6 GB | 4000            |
+| 40                     | 40   | 160 GB | 128 GB   | 4000            |
+| 42                     | 42   | 168 GB | 134.4 GB | 4000            |
+| 44                     | 44   | 176 GB | 140.8 GB | 4000            |
+| 46                     | 46   | 184 GB | 147.2 GB | 4000            |
+| 48                     | 48   | 192 GB | 153.6 GB | 4000            |
+| 50                     | 50   | 200 GB | 160 GB   | 4000            |
+| 52                     | 52   | 208 GB | 166.4 GB | 4000            |
+| 54                     | 54   | 216 GB | 172.8 GB | 4000            |
+| 56                     | 56   | 224 GB | 179.2 GB | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
@@ -194,8 +250,8 @@ To delete a compute :
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. From the **Compute** tab, click **Edit** for the compute you want to delete.
-1. At the bottom of the **Edit compute settings** drawer, click **Delete compute**.
+1. On the **Computes** tab, click **Edit** for the compute you want to delete.
+1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
 
 ## Manage computes with the Neon API
 

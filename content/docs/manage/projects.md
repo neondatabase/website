@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2024-11-28T17:16:46.411Z'
+updatedOn: '2024-12-12T15:31:10.133Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
@@ -29,7 +29,7 @@ When you add a new project, Neon creates the following resources by default:
 
 ## About the Settings page
 
-Once you open a project, you can use the **Project settings** page to manage that particular project and configure any defaults.
+Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
 
 ![Project Settings page](/docs/manage/settings_page.png)
 
@@ -89,7 +89,7 @@ To edit a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to edit.
-3. Select **Project settings**.
+3. Select **Settings**.
 4. Select **General**.
 5. Make your changes and click **Save**.
 
@@ -143,16 +143,16 @@ From the **Project settings** page, you can also set defaults or apply bulk chan
 
 ### Reset the default compute size
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 10 CUs. Larger compute sizes will be supported in a future release.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
 
 By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
 
-To reset the default compute size, go to **Project settings** > **Compute**.
+To reset the default compute size, go to **Settings** > **Compute**.
 
-Using the slider, you can configure a fixed-size compute or enable autoscaling.
+Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 10 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 10 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 _Example: default minimum and maximum autoscale settings_
 
@@ -163,7 +163,7 @@ _Example: default minimum and maximum autoscale settings_
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
 - [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
-- [Time Travel](/docs/guides/time-travel-assist) queries for investingating data issues
+- [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
 The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 
@@ -172,7 +172,7 @@ Also note that adjusting the history retention period affects _all_ branches in 
 To configure the history retention period for a project:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
    ![History retention configuration](/docs/manage/history_retention.png)
 4. Use the slider to select the history retention period.
@@ -225,11 +225,11 @@ Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wi
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **IP Allow**.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Network Security**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Allow unrestricted access to non-default branches** to allow full access to your [no default branches](/docs/manage/branches#non-default-branch).
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
 6. Click **Save changes**.
 
 </TabItem>
@@ -349,7 +349,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the Neon **Dashboard**, select **Settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
 5. If applicable, clear the **Apply to default branch only** checkbox.

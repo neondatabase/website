@@ -2,7 +2,7 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.425Z'
+updatedOn: '2024-12-12T15:31:10.126Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -48,7 +48,7 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
 }' | jq
 ```
 
-- The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API. It is a generated value that looks something like this: `autumn-disk-484331`.
+- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API. It is a generated value that looks something like this: `autumn-disk-484331`.
 - The `endpoints` attribute creates a compute, which is required to connect to the branch. Neon supports `read_write` and `read_only` compute types. A branch can be created with or without a compute. You can specify `read_only` to create a [read replica](/docs/guides/read-replica-guide).
 - The `branch` attribute specifies the parent branch.
 - The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `parent_id` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a non-default branch.
@@ -135,7 +135,7 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
+The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 
 The response lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
 
@@ -186,7 +186,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-- The `project_id` for a Neon project is found on the **Project settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
+- The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 - The `branch_id` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
 
 The response shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.

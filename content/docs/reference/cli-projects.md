@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.078Z'
+updatedOn: '2024-12-12T15:31:10.134Z'
 ---
 
 ## Before you begin
@@ -228,7 +228,7 @@ This subcommand allows you to update a Neon project.
 neon projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -260,7 +260,7 @@ This subcommand allows you to delete a Neon project.
 neon projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -289,7 +289,7 @@ This subcommand allows you to retrieve details about a Neon project.
 neon projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 

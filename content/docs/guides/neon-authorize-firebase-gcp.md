@@ -1,8 +1,9 @@
 ---
 title: Secure Your Data with Neon Authorize and Firebase or GCP Identity Platform
-subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity Platform
+subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
+  Platform
 enableTableOfContents: true
-updatedOn: '2024-12-03T10:00:00.000Z'
+updatedOn: '2024-12-12T15:31:10.128Z'
 ---
 
 <InfoBlock>
@@ -57,7 +58,7 @@ You'll need two pieces of information:
 2. **Project ID** - This serves as your JWT Audience value:
 
    - Go to the [Firebase Console](https://console.firebase.google.com)
-   - Navigate to **Project settings** > **General** > **Project ID**
+   - Navigate to **Settings** > **General** > **Project ID**
 
    <Admonition type="note" title="Note">
    Every GCP Identity Platform project automatically creates a corresponding Firebase project, which is why we use the Firebase Console to get the Project ID.

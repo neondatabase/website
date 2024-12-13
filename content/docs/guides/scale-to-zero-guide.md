@@ -4,7 +4,7 @@ subtitle: Learn how to configure Neon's Scale to zero feature
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.056Z'
+updatedOn: '2024-12-12T15:31:10.129Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls when a Neon compute transitions to an idle state due to inactivity. For example, if your scale to zero setting is 5 minutes, your compute will "scale to zero" after it's been inactive for 5 minutes. Neon's paid plans allow you to configure this time period to keep your compute active for longer, suspend it more quickly, or disable scale to zero entirely, depending on your requirements.
@@ -27,40 +27,26 @@ The scale to zero limits differ by [Neon plan](/docs/introduction/plans). The li
 | Business   | 1 minute to 7 days     | &check;          |
 | Enterprise | 0 seconds up to 7 days | &check;          |
 
-### Configure the scale to zero setting for a new project
-
-Configuring the scale to zero setting for a new project sets the project's default, which is applied to all computes created from that point forward. You can adjust this scale to zero default at any time, or configure the setting for individual computes later, as necessary.
-
-To configure the scale to zero default setting when you first create your project:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. If you are creating your very first project, click **Create a project**. Otherwise, click **New Project**.
-1. Specify a name, a Postgres version, and a region.
-1. Under **Compute size**, configure your scale to zero setting.
-1. Click **Save**.
-1. Click **Create Project**. Your initial compute is created with the specified setting.
-
-### Configure the scale to zero setting for an existing project
-
-Configuring the scale to zero setting for an existing project sets the project's default, which is applied to all computes created from that point forward. Existing computes are unaffected. You can adjust the scale to zero default or configure the setting for individual computes later, as necessary.
-
-To configure the scale to zero default for an existing project:
-
-1. Select a project in the Neon Console.
-1. On the Neon **Dashboard**, select **Project settings**.
-1. Select **Compute** and click **Change**.
-1. Specify your scale to zero setting.
-1. Click **Save**.
-
 ## Configure scale to zero for a compute
 
 To configure the scale to zero setting for an individual compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
-1. Click the menu in the **Computes** table, and select **Edit**.
-   ![Edit compute menu](/docs/guides/autoscaling_edit.png)
-1. Under **Compute size**, specify your scale to zero setting. The maximum setting is 7 days.
+1. On the **Computes** tab, click **Edit**.
+1. Specify your scale to zero setting. The maximum setting is 7 days.
+1. Click **Save**.
+
+### Configure the scale to zero default
+
+Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected.
+
+To configure the scale to zero default for an existing project:
+
+1. Select a project in the Neon Console.
+1. On the Neon **Dashboard**, select **Settings**.
+1. Select **Compute** and click **Change**.
+1. Specify your scale to zero setting.
 1. Click **Save**.
 
 ## Monitor scale to zero

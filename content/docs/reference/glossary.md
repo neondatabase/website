@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-12-04T13:30:28.567Z'
+updatedOn: '2024-12-11T21:23:33.091Z'
 ---
 
 ## access token
@@ -115,26 +115,11 @@ The access point through which users connect to a Neon compute. In the context o
 
 ## compute size
 
-The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 10 CU. The number of units determines the processing capacity of the compute.
+The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can have anywhere from .25 to 56 CU. The number of units determines the processing capacity of the compute.
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 10 CUs. The following table shows the vCPU and RAM for each CU:
-
-| Compute Unit (CU) | vCPU | RAM   |
-| :---------------- | :--- | :---- |
-| .25               | .25  | 1 GB  |
-| .5                | .5   | 2 GB  |
-| 1                 | 1    | 4 GB  |
-| 2                 | 2    | 8 GB  |
-| 3                 | 3    | 12 GB |
-| 4                 | 4    | 16 GB |
-| 5                 | 5    | 20 GB |
-| 6                 | 6    | 24 GB |
-| 7                 | 7    | 28 GB |
-| 8                 | 8    | 32 GB |
-| 9                 | 9    | 36 GB |
-| 10                | 10   | 40 GB |
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 
@@ -196,7 +181,7 @@ A usage metric that measures the total volume of data transferred out of Neon (k
 
 ## Database
 
-A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Noen project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
+A named collection of database objects. A Neon project is created with a database that resides in the default `public` schema. If you do not specify a name for the database when creating a Neon project, it's created with the name `neondb`. A Neon project can contain multiple databases. Users cannot manipulate system databases, such as the `postgres`, `template0`, or `template1` databases.
 
 ## database branching
 

@@ -131,8 +131,8 @@
         "info": "8 CU = 8 vCPU, 32 GB RAM"
       },
       "business": {
-        "title": "10 CU",
-        "info": "10 CU = 10 vCPU, 40 GB RAM"
+        "title": "56 CU",
+        "info": "56 CU = 56 vCPU, 224 GB RAM"
       }
     },
     {
@@ -153,17 +153,17 @@
       "free": "Up to 2 CU",
       "launch": "Up to 4 CU",
       "scale": "Up to 8 CU",
-      "business": "Up to 10 CU"
+      "business": "Up to 16 CU"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Scale to zero"
       },
-      "free": "Fixed <span>5 minutes</span>",
-      "launch": "Configurable <span>5 min+ or never</span>",
-      "scale": "Configurable <span>1 min+ or never</span>",
-      "business": "Configurable <span>1 min+ or never</span>"
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
     },
     {
       "rows": "1",
