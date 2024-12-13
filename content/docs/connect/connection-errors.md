@@ -20,7 +20,8 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
-- [query_wait_timeout SSL connection has been closed unexpectedly](#query_wait_timeout-ssl-connection-has-been-closed-unexpectedly)
+- [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
+- [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -227,5 +228,9 @@ The `query_wait_timeout` setting is a PgBouncer configuration option that determ
 To avoid this error, we recommend reviewing your workload. If it includes batch processing with `UPDATE` or `INSERT` statements, review their performance. Slow queries may be the root cause. Try optimizing these queries to reduce execution time, which can help prevent them from exceeding the timeout.
 
 Alternatively, Neon can increase the `query_wait_timeout` value for you, but this is not typically recommended, as increasing the timeout can lead to higher latency or blocked queries under heavy workloads.
+
+## The request could not be authorized due to an internal error
+
+This error page in the Neon Console is most often the result of attempting to access a Neon project in one browser window after you've have logged in under a different Neon user account from another browser window. The error occurs because the currently logged in Neon user account does not have access to the Neon project. To avoid this issue, ensure that you're logged in with a Neon user account that has access to the Neon project you're trying to access.
 
 <NeedHelp/>
