@@ -29,6 +29,15 @@ const defaultConfig = {
         ],
       },
       {
+        source: '/home',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
@@ -122,11 +131,6 @@ const defaultConfig = {
     }, []);
 
     return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
       {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
