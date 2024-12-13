@@ -20,6 +20,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
+- [query_wait_timeout SSL connection has been closed unexpectedly](#query_wait_timeout-ssl-connection-has-been-closed-unexpectedly)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -218,5 +219,13 @@ If you are already using connection pooling, you may need to reach out to Neon S
 ## Relation not found
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
+
+## query_wait_timeout SSL connection has been closed unexpectedly
+
+The `query_wait_timeout` setting is a PgBouncer configuration option that determines the maximum time a query can wait in the queue before being executed. Neon’s default value for this setting is **120 seconds**. If a query exceeds this timeout while in the queue, it will not be executed. For more details about this setting, refer to [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
+
+To avoid this error, we recommend reviewing your workload. If it includes batch processing with `UPDATE` or `INSERT` statements, review their performance. Slow queries may be the root cause. Try optimizing these queries to reduce execution time, which can help prevent them from exceeding the timeout.
+
+Alternatively, Neon can increase the `query_wait_timeout` value for you, but this is not typically recommended, as increasing the timeout can lead to higher latency or blocked queries under heavy workloads.
 
 <NeedHelp/>
