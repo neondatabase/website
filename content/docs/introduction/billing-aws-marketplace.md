@@ -23,3 +23,26 @@ Neon offers a convenient way to manage your subscription and billing through the
    ![AWS setup account link](/docs/introduction/aws_marketplace_setup_link.png)
 
 If you have questions or need further guidance on purchasing Neon through AWS Marketplace, please don't hesitate to [reach out to us](https://neon.tech/contact-sales).
+
+## Converting billing from Neon to AWS
+
+Converting billing for a Neon Organization account from Neon to AWS requires the following:
+
+1. Setting up a new AWS subscription. Be sure to note the following details:
+
+   - Your **AWS Account ID**
+   - The **Agreement ID** for the new subscription.
+
+2. Opening [Neon Support](https://console.neon.tech/app/projects?modal=support) ticket with these details:
+
+   - Your AWS Account ID.
+   - The Agreement ID for the new subscription.
+   - Your organization’s name and ID. For example:
+     - **Organization Name**: `my_org_name`
+     - **Organization ID**: `org-empty-sea-12345678`
+
+   You can find your Organization details by selecting your Organization in the Neon Console. See [witch to your Organization account](/docs/manage/orgs-manage#switch-to-your-organization-account).
+
+3. Neon Support will suspend your current subscription and manually attach the new AWS subscription to your organization.
+
+If you have any questions or require assistance during this process, please feel free to contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
