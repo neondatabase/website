@@ -43,9 +43,9 @@ In the Neon Console, select **Account settings** > **API keys**. You'll see a li
 You'll need an existing personal key (create one from the Neon Console) in order to create new keys using the API. If you've got a key ready, you can use the following request to generate new keys:
 
 ```bash shouldWrap
-curl https://console.neon.tech/api/v2/api_keys 
-  -H "Content-Type: application/json" 
-  -H "Authorization: Bearer $PERSONAL_API_KEY" 
+curl https://console.neon.tech/api/v2/api_keys
+  -H "Content-Type: application/json"
+  -H "Authorization: Bearer $PERSONAL_API_KEY"
   -d '{"key_name": "my-key"}'
 ```
 
