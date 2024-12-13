@@ -61,6 +61,7 @@ curl https://console.neon.tech/api/v2/api_keys
   "key": "neon_api_key_1234567890abcdef1234567890abcdef"
 }
 ```
+
 To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
 
 </TabItem>
@@ -264,6 +265,7 @@ curl -X DELETE \
   "last_used_from_addr": "192.0.2.21"
 }
 ```
+
 </details>
 </TabItem>
 </Tabs>
