@@ -156,14 +156,14 @@
       "business": "Up to 16 CU"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
         "title": "Scale to zero"
       },
-      "free": "Fixed <span>5 minutes</span>",
-      "launch": "Configurable <span>5 min+ or never</span>",
-      "scale": "Configurable <span>1 min+ or never</span>",
-      "business": "Configurable <span>1 min+ or never</span>"
+      "free": "Always enabled",
+      "launch": "Configurable",
+      "scale": "Configurable",
+      "business": "Configurable"
     },
     {
       "rows": "1",
