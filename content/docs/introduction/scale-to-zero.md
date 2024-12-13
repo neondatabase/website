@@ -1,18 +1,21 @@
 ---
 title: Scale to Zero
-subtitle: Scale computes to zero when not in use
+subtitle: Minimize costs by automatically scaling inactive databases to zero
 redirectFrom:
   - /docs/introduction/auto-suspend
 enableTableOfContents: true
 updatedOn: '2024-08-06T15:23:10.952Z'
 ---
 
-Neon's *Scale to Zero* feature transitions Neon compute to an idle state after periods of inactivity, helping reduce costs for databases that aren’t always active, such as development or test environments.
+Neon's *Scale to Zero* feature suspends the Neon compute that runs your Postgres database after a period of inactivity, which minimizes costs for databases that aren’t always active, such as the databases you use in development or test environments — and even production databases that aren't used 24/7.
 
-- When your database is inactive, it automatically scales to zero. This means you pay only for active time instead of 24/7 compute usage, minimizing costs without manual intervention.
-- Once you query the database again, it reactivates within a few hundred milliseconds.
+- When your database is inactive, it automatically scales to zero after 5 minutes. This means you pay only for active time instead of 24/7 compute usage. No manual intervention is required.
+- Once you query the database again, it reactivates automatically within a few hundred milliseconds.
 
-Neon compute scales to zero after 300 seconds (5 minutes) of inactivity. For [Neon Free Plan](/docs/introduction/plans#free-plan) users, this setting is fixed. Paid plan users can disable the scale-to-zero setting to keep their compute always active.
+The diagram below illustrates the *Scale to Zero* behavior alongside Neon's *Autoscaling* feature. The compute usage line highlights an _inactive_ period, followed by a period where the compute is automatically suspended until it's accessed again.
 
-Configure the scale-to-zero setting for an existing project involves editing your compute settings. For detailed instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 
+Neon compute scales to zero after an inactive period of 5 minutes. For [Neon Free Plan](/docs/introduction/plans#free-plan) users, this setting is fixed. Paid plan users can disable the scale-to-zero setting to maintain an always-active compute.
+
+You can enable or disable the scale-to-zero setting by editing your compute settings. For detailed instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
