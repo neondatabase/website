@@ -47,19 +47,17 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: postgres
-    POSTGRES_DB: postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
   pg_proxy:
-    image: ghcr.io/neondatabase/wsproxy:latest
+    image: ghcr.io/timowilhelm/local-neon-http-proxy:main
     environment:
-    APPEND_PORT: 'postgres:5432'
-    ALLOW_ADDR_REGEX: '.*'
-    LOG_TRAFFIC: 'true'
+      - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/postgres
     ports:
-      - '5433:80'
+      - '4444:5433'
     depends_on:
       - postgres
 ```
