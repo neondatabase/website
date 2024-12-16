@@ -33,4 +33,4 @@ const FireshipPage = () => (
 
 export default FireshipPage;
 
-export const revalidate = 60;
+export const revalidate = false;

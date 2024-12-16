@@ -9,6 +9,26 @@ const baseSettings = {
   customIcons: {
     close: { custom: closeIcon },
   },
+  customCardSettings: [
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: 'https://neon.tech/docs',
+        },
+      },
+      searchTabLabel: 'Neon Docs',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: 'https://neon.tech/postgresql',
+        },
+      },
+      searchTabLabel: 'PostgreSQL Tutorial',
+    },
+  ],
 };
 
 const searchSettings = {

@@ -56,19 +56,13 @@ const Load = ({ title }) => (
       />
     </div>
     <div className="prose-variable">
-      <p>
-        No real-world database has constant demand. To some extent, all modern applications
-        experience variable traffic patterns; for some applications, demand is clearly variable. For
-        example:
-      </p>
+      <p>Many applications have variable traffic patterns:</p>
       <List items={items} />
       <p>
-        Variable load patterns are common, but <strong>traditional managed databases</strong>{' '}
-        require provisioning a fixed amount of CPU and memory. To avoid degraded performance or even
-        outages, it is standard practice to provision for peak traffic, which means{' '}
-        <strong>
-          paying for peak capacity 24/7 — even though it&apos;s needed only a fraction of the time.
-        </strong>
+        Variable load patterns are common, but traditional managed databases require provisioning a
+        fixed amount of CPU and memory. To avoid degraded performance or even outages, it is
+        standard practice to provision for peak traffic, which means paying for peak capacity 24/7 —
+        even though it&apos;s needed only a fraction of the time.
       </p>
     </div>
   </Section>

@@ -19,6 +19,9 @@ const Layout = ({
   hasThemesSupport = false,
   showSearchInput = false,
   isDocPage = false,
+  isPostgresPage = false,
+  searchIndexName = null,
+  customType = null,
 }) => (
   <>
     <Topbar isDarkTheme={headerTheme === 'dark'} />
@@ -33,7 +36,10 @@ const Layout = ({
         hasThemesSupport={hasThemesSupport}
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
+        isPostgresPage={isPostgresPage}
         withBorder={headerWithBorder}
+        searchIndexName={searchIndexName}
+        customType={customType}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
@@ -58,7 +64,13 @@ Layout.propTypes = {
   headerWithBorder: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isPostgresPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
+  searchIndexName: PropTypes.string,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Layout;

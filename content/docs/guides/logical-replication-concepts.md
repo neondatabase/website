@@ -3,7 +3,7 @@ title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-22T02:18:02.648Z'
+updatedOn: '2024-12-12T15:31:10.127Z'
 ---
 
 <LRBeta/>
@@ -29,7 +29,7 @@ In Neon, you can enable logical replication from the Neon Console. This only nec
 To enable logical replication:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Replication**.
 4. Click **Enable**.
 

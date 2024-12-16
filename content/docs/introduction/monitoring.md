@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2024-02-22T14:29:54.385Z'
+updatedOn: '2024-10-02T11:13:24.658Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -20,6 +20,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with the pg_stat_statements extension" icon="metrics">pg_stat_statements</a>
 
 <a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party client tools like PgHero and PgAdmin" icon="wrench">External tools</a>
+
+<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Export metrics to Datadog</a>
 
 </DetailIconCards>
 

@@ -1,10 +1,22 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2024-09-05T17:14:45.246Z'
+updatedOn: '2024-12-06T12:16:56.091Z'
 ---
 
-Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>About built-in backups with point-in-time restore</p>
+<p>Creating backups using pg_dump</p>
+<p>How to automate backups with GitHub Actions</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/introduction/point-in-time-restore">Branch reset and restore</a>
+  <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
+</DocsList>
+
+</InfoBlock>
 
 ## Built-in backups with Neon's point-in-time restore feature
 
@@ -17,30 +29,29 @@ For information about creating a point-in-time restore branch, see [Branching â€
 You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instance.
 
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled Neon connection](https://neon.tech/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
+Avoid using `pg_dump` over a [pooled Neon connection](/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
 </Admonition>
 
 This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
 
-To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate from Postgres](/docs/import/migrate-from-postgres) guide.
+To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
 
-## Backups with @neondatabase/pg-import
+<Admonition type="tip">
+When restoring a database dumped from Neon, you may encounter `ALTER OWNER` errors related to a `cloud_admin` role; for example:
 
-Export your data from the source database with `@neondatabase/pg-import`:
-
-```bash shouldWrap
-npx @neondatabase/pg-import --source <source_database_connection_string> --backup-file-path <dump_file_name>
+```bash
+pg_restore: error: could not execute query: ERROR: permission denied to change default privileges
+Command was: ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;
 ```
 
-The `@neondatabase/pg-import` command above includes these arguments:
-
-- `--source`: Specifies the source database name or [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
-- `--backup-file-path`: The dump file name. It can be any name you choose (`./mydumpfile.bak`, for example).
-
-For more command options, see [all @neondatabase/pg-import options](https://github.com/neondatabase/pg-import?tab=readme-ov-file#flags-and-options).
+This is a protected role in Neon that cannot be modified. To avoid this issue, you can add a `-O` or `--no-owner` option to your `pg_restore` command, as described [Database object ownership consideration](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
+</Admonition>
 
 ## Automate Postgres Backups with a GitHub Action
 
-This blog post from a Neon community member describes how to set up a nightly backup to an AWS S3 storage bucket using a GitHub Action: [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/).
+These blog posts from Neon community members describe how you can schedule a backup to an Amazon S3 storage bucket using a GitHub Action:
+
+- [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://thenewstack.io/how-to-schedule-postgresql-backups-with-github-actions/)
+- [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/)
 
 <NeedHelp/>

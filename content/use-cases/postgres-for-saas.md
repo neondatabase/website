@@ -3,7 +3,7 @@ title: 'Postgres for SaaS'
 subtitle: Teams build SaaS faster on Neon with autoscaling, database branching and the serverless operating model.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
-image: '/images/social-previews/postgres-for-saas.jpg'
+image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 ---
 
 <UseCaseContext />
@@ -40,7 +40,7 @@ author={{
 
 ### Database Branching
 
-![Database Branching](/use-cases/branching.jpg?branching)
+![Database Branching](/use-cases/branching.jpg)
 
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them like git branches, for development, testing, and preview environments.
 
@@ -125,7 +125,7 @@ Differentiated features are great, but what about the basics... Does Neon meet t
 
 <DefinitionList bulletType="check">
 It's Just Postgres
-: Deploy Postgres 14, 15, 16 on Neon. There is no lock-in, no proprietary syntax to learn.
+: Deploy Postgres 14, 15, 16, and 17 on Neon. There is no lock-in and no proprietary syntax to learn.
 
 Integrates with any language/framework
 : Anything that has a Postgres driver or integration works with Neon.
@@ -148,7 +148,7 @@ Serverless (HTTP) Driver
 
   Prisma recently published <a href="https://benchmarks.prisma.io/?dbprovider=pg-rds" target="_blank">performance benchmarks</a> showing similar latency between AWS RDS and Neon.
 
-- **Self-Serve Autoscaling from zero to 10 CU**
+- **Self-Serve Autoscaling from zero to 16 CU**
 
   Configure Neon to autoscale up to 10 CPU, 40GB RAM. [Contact our team](/contact-sales) to unlock larger computes.
 

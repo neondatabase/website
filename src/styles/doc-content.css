@@ -19,21 +19,6 @@
       @apply overflow-x-auto;
     }
   }
-  .postgres-heading {
-    > a {
-      @apply border-b-0 text-green-45 opacity-0 transition-opacity duration-200 ease-in-out;
-    }
-
-    &:hover > a {
-      @apply opacity-100;
-    }
-  }
-
-  .postgres-paragraph {
-    > a {
-      @apply border-b-0 text-secondary-8 dark:text-green-45;
-    }
-  }
 
   .table-wrapper {
     @apply md:-mx-4 md:overflow-x-auto md:px-4;
@@ -132,6 +117,17 @@
 
       ol {
         list-style-type: lower-alpha;
+      }
+    }
+
+    hr {
+      @apply my-8;
+    }
+
+    h2,
+    h3 {
+      & + hr {
+        @apply mt-0;
       }
     }
 

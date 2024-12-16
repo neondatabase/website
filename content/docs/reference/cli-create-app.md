@@ -2,7 +2,7 @@
 title: Neon CLI commands — create-app
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-08-02T11:06:47.749Z'
+updatedOn: '2024-10-07T13:55:51.300Z'
 ---
 
 ## Before you begin
@@ -54,11 +54,11 @@ Project
 └────────────────────────┴────────────────┴───────────────┴──────────────────────┘
 
 Branch
-┌───────────────────────────┬────────────────┬─────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                        │ Name           │ Primary │ Default │ Created At           │ Updated At           │
-├───────────────────────────┼────────────────┼─────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-crimson-sound-a5t7emzs │ dev-62SVOKgaFW │ false   │ false   │ 2024-07-26T12:52:22Z │ 2024-07-26T12:52:22Z │
-└───────────────────────────┴────────────────┴─────────┴─────────┴──────────────────────┴──────────────────────┘
+┌───────────────────────────┬────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                        │ Name           │ Default │ Created At           │ Updated At           │
+├───────────────────────────┼────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-crimson-sound-a5t7emzs │ dev-62SVOKgaFW │ false   │ 2024-07-26T12:52:22Z │ 2024-07-26T12:52:22Z │
+└───────────────────────────┴────────────────┴─────────┴──────────────────────┴──────────────────────┘
 Creating a new Next.js app in /Users/user_name/my-app.
 
 Downloading files from repo https://github.com/neondatabase/neonctl-create-app-templates/tree/main/next-drizzle-authjs. This might take a moment.

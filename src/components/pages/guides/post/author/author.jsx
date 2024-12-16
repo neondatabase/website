@@ -20,7 +20,7 @@ const Author = ({ data, className = null }) => (
         />
       )}
       <div>
-        <span className="block leading-tight">{data.name}</span>
+        <span className="post-author block leading-tight">{data.name}</span>
         {data.position && (
           <span className="mt-1 block text-[14px] leading-none text-gray-new-50 dark:text-gray-new-60">
             {data.position}

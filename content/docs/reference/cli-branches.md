@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-09-27T18:08:38.286Z'
+updatedOn: '2024-11-30T11:53:56.077Z'
 ---
 
 ## Before you begin
@@ -28,7 +28,6 @@ neon branches <subcommand> [options]
 | [restore](#restore)         | Restore a branch to a selected point in time |
 | [rename](#rename)           | Rename a branch                              |
 | [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-primary](#set-primary) | Set a default branch (Deprecated)            |
 | [set-default](#set-default) | Set a default branch                         |
 | [add-compute](#add-compute) | Add replica to a branch                      |
 | [delete](#delete)           | Delete a branch                              |
@@ -132,6 +131,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
 
 <Admonition type="note">
@@ -145,7 +145,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   ```bash
   neon branches create
   ┌─────────────────────────┬─────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-  │ Id                      │ Name                    │ Primary │ Created At           │ Updated At           │
+  │ Id                      │ Name                    │ Default │ Created At           │ Updated At           │
   ├─────────────────────────┼─────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
   │ br-mute-sunset-67218628 │ br-mute-sunset-67218628 │ false   │ 2023-08-03T20:07:27Z │ 2023-08-03T20:07:27Z │
   └─────────────────────────┴─────────────────────────┴─────────┴──────────────────────┴──────────────────────┘
@@ -163,8 +163,8 @@ When creating a branch from a protected parent branch, role passwords on the chi
   └──────────────────────────────────────────────────────────────────────────────────────────┘
   ```
 
-    <Admonition type="tip">
-    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    <Admonition type="note">
+    If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
@@ -242,6 +242,18 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name mybranch
   ```
 
+- Set the compute size when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 2
+  ```
+
+- Set the compute's autoscaling range when creating a branch:
+
+  ```bash
+  neon branches create --name mybranch --cu 0.5-3
+  ```
+
 - Create a branch with a [read replica](/docs/introduction/read-replicas) compute.
 
   ```bash
@@ -310,7 +322,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 ```bash
 neon branches reset dev/alex --parent
 ┌──────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                   │ Name     │ Primary │ Created At           │ Last Reset At        │
+│ Id                   │ Name     │ Default │ Created At           │ Last Reset At        │
 ├──────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
 │ br-aged-sun-a5qowy01 │ dev/alex │ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
 └──────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
@@ -547,42 +559,6 @@ This command compares the schema of the `main` branch to the state of the `dev/j
 neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
 ```
 
-## set-primary
-
-<Admonition type="warning">
-The `set-primary` subcommand is deprecated. It will be removed in a future release. Use [set-default](#set-default) instead.
-</Admonition>
-
-This subcommand allows you to set a branch as the default branch in your Neon project.
-
-#### Usage
-
-```bash
-neon branches set-primary <id|name> [options]
-```
-
-`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
-
-#### Options
-
-In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-primary` subcommand supports this option:
-
-| Option           | Description                                                                                   | Type   |                      Required                       |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
-| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
-
-#### Example
-
-```bash
-neon branches set-primary mybranch
-┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                 │ Name     │ Primary │ Created At           │ Updated At           │
-├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
-└────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
-```
-
 ## set-default
 
 This subcommand allows you to set a branch as the default branch in your Neon project.
@@ -651,13 +627,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   └─────────────────────┴──────────────────────────────────────────────────┘
   ```
 
-- Set the compute size when creating a branch:
+- Set the compute size when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 2
   ```
 
-- Set the compute's autoscaling range when creating a branch:
+- Set the compute's autoscaling range when adding a compute to a branch:
 
   ```bash
   neon branches add-compute main --cu 0.5-3

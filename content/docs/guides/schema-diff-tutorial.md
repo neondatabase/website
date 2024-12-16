@@ -3,10 +3,10 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.665Z'
+updatedOn: '2024-12-12T15:31:10.129Z'
 ---
 
-In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, Github-style visual comparison between the `dev/jordan` development branch and `main`.
+In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `dev/jordan` development branch and `main`.
 
 ## Before you start
 
@@ -61,7 +61,7 @@ First, create a new database called `people` on the `main` branch and add some s
    neon set-context --project-id empty-glade-66712572
    ```
 
-   You can find your project ID on the **Project settings** page in the Neon Console.
+   You can find your project ID on the **Settings** page in the Neon Console.
 
    </Admonition>
 

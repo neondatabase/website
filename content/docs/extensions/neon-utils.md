@@ -2,12 +2,12 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.642Z'
+updatedOn: '2024-12-11T21:23:33.084Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
 
-For information about Neon's _Autoscaling_ feature, see [Autoscaling](https://neon.tech/docs/introduction/autoscaling).
+For information about Neon's _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ## Install the `neon_utils` extension
 
@@ -21,7 +21,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 10 CU.
+In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 56 CU, but _Autoscaling_ is only supported up to 16 CU.
 
 Defining a minimum and maximum compute size for your compute, as shown below, enables autoscaling.
 
@@ -40,7 +40,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 The following limitations apply:
 
 - The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
-- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed size compute does not return a correct value.
+- The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed-size compute does not return a correct value.
 
 ## Observe autoscaling with `neon_utils` and `pgbench`
 

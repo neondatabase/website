@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-09-24T09:39:48.633Z'
+updatedOn: '2024-12-11T21:23:33.083Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -29,20 +29,46 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
 
-| Compute Size (CU) | vCPU | RAM   | max_connections |
-| :---------------- | :--- | :---- | :-------------- |
-| 0.25              | 0.25 | 1 GB  | 112             |
-| 0.50              | 0.50 | 2 GB  | 225             |
-| 1                 | 1    | 4 GB  | 450             |
-| 2                 | 2    | 8 GB  | 901             |
-| 3                 | 3    | 12 GB | 1351            |
-| 4                 | 4    | 16 GB | 1802            |
-| 5                 | 5    | 20 GB | 2253            |
-| 6                 | 6    | 24 GB | 2703            |
-| 7                 | 7    | 28 GB | 3154            |
-| 8                 | 8    | 32 GB | 3604            |
-| 9                 | 9    | 36 GB | 4000            |
-| 10                | 10   | 40 GB | 4000            |
+| Compute Size (CU) | vCPU | RAM    | max_connections |
+| :---------------- | :--- | :----- | :-------------- |
+| 0.25              | 0.25 | 1 GB   | 112             |
+| 0.50              | 0.50 | 2 GB   | 225             |
+| 1                 | 1    | 4 GB   | 450             |
+| 2                 | 2    | 8 GB   | 901             |
+| 3                 | 3    | 12 GB  | 1351            |
+| 4                 | 4    | 16 GB  | 1802            |
+| 5                 | 5    | 20 GB  | 2253            |
+| 6                 | 6    | 24 GB  | 2703            |
+| 7                 | 7    | 28 GB  | 3154            |
+| 8                 | 8    | 32 GB  | 3604            |
+| 9                 | 9    | 36 GB  | 4000            |
+| 10                | 10   | 40 GB  | 4000            |
+| 11                | 11   | 44 GB  | 4000            |
+| 12                | 12   | 48 GB  | 4000            |
+| 13                | 13   | 52 GB  | 4000            |
+| 14                | 14   | 56 GB  | 4000            |
+| 15                | 15   | 60 GB  | 4000            |
+| 16                | 16   | 64 GB  | 4000            |
+| 18                | 18   | 72 GB  | 4000            |
+| 20                | 20   | 80 GB  | 4000            |
+| 22                | 22   | 88 GB  | 4000            |
+| 24                | 24   | 96 GB  | 4000            |
+| 26                | 26   | 104 GB | 4000            |
+| 28                | 28   | 112 GB | 4000            |
+| 30                | 30   | 120 GB | 4000            |
+| 32                | 32   | 128 GB | 4000            |
+| 34                | 34   | 136 GB | 4000            |
+| 36                | 36   | 144 GB | 4000            |
+| 38                | 38   | 152 GB | 4000            |
+| 40                | 40   | 160 GB | 4000            |
+| 42                | 42   | 168 GB | 4000            |
+| 44                | 44   | 176 GB | 4000            |
+| 46                | 46   | 184 GB | 4000            |
+| 48                | 48   | 192 GB | 4000            |
+| 50                | 50   | 200 GB | 4000            |
+| 52                | 52   | 208 GB | 4000            |
+| 54                | 54   | 216 GB | 4000            |
+| 56                | 56   | 224 GB | 4000            |
 
 The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
@@ -75,7 +101,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](https://neon.tech/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
@@ -103,10 +129,40 @@ The following list describes each setting. For a full explanation of each parame
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
 - `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 
-## Connection pooling notes
+## Connection pooling in transaction mode
 
-- Neon uses PgBouncer in _transaction mode_, which limits some functionality in Postgres. For a complete list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
-- We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs). With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](https://neon.tech/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations can be prone to errors.
+As mentioned above, Neon uses PgBouncer in _transaction mode_ (`pool_mode=transaction`), which limits some functionality in Postgres. Functionality **NOT supported** in transaction mode includes:
+
+- `SET`/`RESET`
+- `LISTEN`
+- `WITH HOLD CURSOR`
+- `PREPARE / DEALLOCATE`
+- `PRESERVE` / `DELETE ROWS` temp tables
+- `LOAD` statement
+- Session-level advisory locks
+
+These session-level features are not supported _transaction mode_ because:
+
+1. In this mode, database connections are allocated from the pool on a per-transaction basis
+2. Session states are not persisted across transactions
+
+<Admonition type="warning" title="Avoid using SET statements over a pooled connection">
+Due to the transaction mode limitation described above, users often encounter issues when running `SET` statements over a pooled connection. For example, if you set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection, the setting is only valid for the duration of the transaction. As a result, a session variable like `search_path` will not remain set for subsequent transactions.
+
+This particular `search_path` issue often shows up as a `relation does not exist` error. To avoid this error, you can:
+
+- Use a direct connection string when you need to set the search path and have it persist across multiple transactions.
+- Explicitly specify the schema in your queries so that you don’t need to set the search path.
+- Use an `ALTER ROLE your_role_name SET search_path TO <schema1>, <schema2>, <schema3>;` command to set a persistent search path for the role executing queries. See the [ALTER ROLE](https://www.postgresql.org/docs/current/sql-alterrole.html).
+
+Similar issues can occur when attempting to use `pg_dump` over a pooled connection. A `pg_dump` operation typically executes several `SET` statements during data ingestion, and these settings will not persist over a pool connection. For these reasons, we recommend using `pg_dump` only over a direct connection.
+</Admonition>
+
+For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
+
+## Connection pooling with schema migration tools
+
+We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
 
 ## Optimize queries with PgBouncer and prepared statements
 

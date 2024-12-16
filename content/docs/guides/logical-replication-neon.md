@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-25T13:03:45.130Z'
+updatedOn: '2024-12-13T20:52:57.583Z'
 ---
 
 <LRBeta/>
@@ -18,8 +18,9 @@ To avoid potential issues, please review the following notices carefully before 
 
 These notices apply when replicating data from Neon:
 
-- **Autosuspend**: Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and autosuspend](/docs/guides/logical-replication-neon#logical-replication-and-autosuspend).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
+- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 
@@ -39,9 +40,9 @@ This notice applies when replicating data to Neon:
 
   This issue will be addressed in an upcoming release.
 
-## Logical replication and autosuspend
+## Logical replication and scale to zero
 
-By default, Neon's [Autosuspend](/docs/introduction/auto-suspend) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not autosuspend a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
+Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
 
 ```sql
 SELECT *
@@ -53,19 +54,19 @@ If the count is greater than 0, a Neon compute where the publishing Postgres ins
 
 ## Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after 75 minutes if there are other _active_ replication slots**.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**.
 
 If you have only one replication slot, and that slot becomes inactive, it will not be dropped because a single replication slot does not cause storage bloat.
 
-An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for more than 75 minutes. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
+An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for more than approximately 40 hours. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 
 An _inactive_ replication slot can be the result of a dead subscriber, where the replication slot has not been removed after a subscriber is deactivated or becomes unavailable. An inactive replication slot can also result from a long replication delay configured on the subscriber. For example, subscribers like Fivetran or Airbyte let you to configure the replication frequency or set a replication delay to minimize usage.
 
 ### How to avoid removal of replication slots
 
-- If replication frequency configured on the subscriber is more than 75 minutes, you can prevent replication slots from being dropped by changing the replication frequency to every 60 minutes, for example.
+- If replication frequency configured on the subscriber is more than 40 hours, you can prevent replication slots from being dropped by changing the replication frequency to less than 40 hours.
 
-  This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 75 minutes. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
+  This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 40 hours. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
 
 - If using Debezium, set [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) to `true` to ensure that `flush_lsn` progress is being reported. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
@@ -132,5 +133,28 @@ max_replication_slots = 10
 - The `max_replication_slots` defines the maximum number of replication slots used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 
 If you require different values for these parameters, please contact Neon support.
+
+## Replicating between databases on the same Neon project branch
+
+Each branch in a Neon project has its own Postgres instance, and a Postgres instance is a database cluster, capable of supporting multiple databases. If your use case requires replicating data between two databases in the same database cluster, i.e., on the same Neon project branch, the setup is slightly different than configuring replication between separate Postgres instances. As described in the official PostgreSQL [CREATE SUBSCRIPTION Notes documentation](https://www.postgresql.org/docs/current/sql-createsubscription.html):
+
+```text shouldWrap
+Creating a subscription that connects to the same database cluster (for example, to replicate between databases in the same cluster or to replicate within the same database) will only succeed if the replication slot is not created as part of the same command. Otherwise, the `CREATE SUBSCRIPTION` call will hang. To make this work, create the replication slot separately (using the function `pg_create_logical_replication_slot` with the plugin name `pgoutput`) and create the subscription using the parameter `create_slot = false`. This is an implementation restriction that might be lifted in a future release.
+```
+
+For example, on the publisher database, you would create the publication and the replication slot, as shown:
+
+```sql
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
+```
+
+Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role create created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can copy the connection string from the **Connection Details** widget on your Neon Project Dashboard. Be sure to select the correct role and database before copying the connection string.
+
+```sql
+CREATE SUBSCRIPTION my_subscription
+    CONNECTION 'connection_string'
+    PUBLICATION my_publication with (create_slot = false, slot_name = 'my_replication_slot');
+```
 
 <NeedHelp/>

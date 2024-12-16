@@ -21,6 +21,7 @@ module.exports = {
     '/blog-sitemap.xml',
     '/blog/*',
     '/guides/rss.xml',
+    '/postgresql/rss.xml',
     '/enterprise',
   ],
   generateRobotsTxt: true,
@@ -50,6 +51,9 @@ module.exports = {
         ],
       },
     ],
-    additionalSitemaps: [`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`],
+    additionalSitemaps: [
+      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql-sitemap.xml`,
+    ],
   },
 };

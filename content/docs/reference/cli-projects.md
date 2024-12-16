@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-09-27T18:08:38.287Z'
+updatedOn: '2024-12-12T15:31:10.134Z'
 ---
 
 ## Before you begin
@@ -65,7 +65,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
   │ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
   └────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
-  Shared with me
+  Shared with you
   ┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
   │ Id                │ Name               │ Region Id        │ Created At           │
   ├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
@@ -93,8 +93,6 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 This subcommand allows you to create a Neon project.
 
-The [Neon Free Plan](/docs/introduction/plans#free-plan) supports creating a single project. Paid plans allow multiple projects.
-
 #### Usage
 
 ```bash
@@ -105,17 +103,17 @@ neon projects create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                                                      | Type    | Required |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                   | string  |          |
-| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                             | string  |          |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`. Defaults to `aws-us-east-2` if not specified. | string  |          |
-| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                  | string  |          |
-| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                               | boolean |          |
-| `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                     | string  |          |
-| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                             | string  |          |
-| `--set-context`  | Set the current context to the new project.                                                                                                                                                      | boolean |          |
-| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                     | string  |          |
+| Option           | Description                                                                                                                                                                                                       | Type    | Required |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                                    | string  |          |
+| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
+| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                                   | string  |          |
+| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
+| `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
+| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
+| `--set-context`  | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
+| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
 #### Examples
 
@@ -137,7 +135,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```
 
     <Admonition type="tip">
-    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
@@ -230,18 +228,16 @@ This subcommand allows you to update a Neon project.
 neon projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option              | Description                                                                                   | Type    | Required |
-| ------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
-| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
-| `--name`            | The project name. The value cannot be empty.                                                  | string  | &check;  |
-| `--ip-allow`        | A list of IP addresses that are allowed to connect to the endpoint                            | string  |          |
-| `--ip-primary-only` | If true, the list will be applied only to the default branch. The deafault value is `false`.  | boolean |          |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| `--name`         | The project name. The value cannot be empty.                                                  | string | &check;  |
 
 #### Examples
 
@@ -256,28 +252,6 @@ neon projects update muddy-wood-859533 --name dev_project_1
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
-Update the IP allowlist. Multiple values are specified as a list without a delimiter.
-
-```bash
-neon projects update withered-dream-91802149 --ip-allow 192.0.2.1 192.0.2.2
-┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                      │ Name      │ Region Id     │ Created At           │
-├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
-└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
-```
-
-Apply the IP allowlist to the default branch only:
-
-```bash
-neon projects update withered-dream-91802149 --ip-only-primary
-┌─────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                      │ Name      │ Region Id     │ Created At           │
-├─────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ withered-dream-91802149 │ myproject │ aws-us-east-2 │ 2024-01-07T11:41:52Z │
-└─────────────────────────┴───────────┴───────────────┴──────────────────────┘
-```
-
 ### delete
 
 This subcommand allows you to delete a Neon project.
@@ -286,7 +260,7 @@ This subcommand allows you to delete a Neon project.
 neon projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -315,7 +289,7 @@ This subcommand allows you to retrieve details about a Neon project.
 neon projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 

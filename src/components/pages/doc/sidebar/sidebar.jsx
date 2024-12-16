@@ -51,7 +51,7 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   }, result);
 };
 
-const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
+const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -89,23 +89,20 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
           'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
         )}
       >
-        <div className="flex items-center gap-x-7 px-[52px] xl:px-8" to="/">
-          <Link to="/">
-            <span className="sr-only">Neon</span>
-            <Logo className="h-7" width={102} height={28} priority />
-          </Link>
+        <div className="flex items-center gap-x-7 pl-[52px] pr-6 xl:pl-8">
+          <Logo className="h-7" width={102} height={28} priority isHeader />
           <Link
             className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
-            to={LINKS.docs}
+            to={customType ? customType.link : LINKS.docs}
           >
-            Docs
+            {customType?.title || 'Docs'}
           </Link>
         </div>
         <nav
-          className="no-scrollbars z-10 mt-5 h-[calc(100vh-70px)] overflow-y-scroll pt-10"
+          className="no-scrollbars z-10 mt-5 h-[calc(100vh-100px)] overflow-y-scroll pt-10"
           ref={menuWrapperRef}
         >
-          <div className="relative w-full" style={{ height: menuHeight }}>
+          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
               basePath={basePath}
@@ -115,6 +112,14 @@ const Sidebar = ({ className = null, sidebar, slug, basePath }) => {
               menuWrapperRef={menuWrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
+              customType={
+                customType
+                  ? {
+                      title: `Back to ${customType.title}`,
+                      link: customType.link,
+                    }
+                  : null
+              }
             />
           </div>
         </nav>
@@ -128,6 +133,10 @@ Sidebar.propTypes = {
   sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default Sidebar;

@@ -5,10 +5,12 @@ redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2024-08-07T21:36:52.668Z'
+updatedOn: '2024-11-15T20:32:35.030Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
+
+<MigrationAssistant/>
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 

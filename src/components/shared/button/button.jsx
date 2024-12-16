@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
@@ -43,6 +44,8 @@ const styles = {
     'gray-94-filled': 'bg-gray-new-94 text-black hover:bg-gray-6',
     'gray-15-outline':
       'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
+    'with-icon':
+      'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
   },
 };
 
@@ -52,9 +55,11 @@ const Button = ({
   size = null,
   theme = null,
   tag_name = null,
+  analyticsEvent = null,
   children,
   ...otherProps
 }) => {
+  const posthog = usePostHog();
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
   const Tag = to ? Link : 'button';
@@ -69,6 +74,11 @@ const Button = ({
           text: getNodeText(children),
           tag_name,
         });
+        if (analyticsEvent) {
+          posthog.capture('ui_interaction', {
+            action: analyticsEvent,
+          });
+        }
       }}
       {...otherProps}
     >
@@ -84,6 +94,7 @@ Button.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   tag_name: PropTypes.string,
+  analyticsEvent: PropTypes.string,
 };
 
 export default Button;

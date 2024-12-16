@@ -9,7 +9,7 @@ import Item from './item';
 
 const CURRENT_ANCHOR_GAP_PX = 100;
 
-const TableOfContents = ({ items }) => {
+const TableOfContents = ({ items, isUseCase }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
   const [isUserScrolling, setIsUserScrolling] = useState(true);
@@ -70,13 +70,14 @@ const TableOfContents = ({ items }) => {
         <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
         <span>On this page</span>
       </h3>
-      <ul className="mt-2.5">
+      <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
           <li key={index}>
             <Item
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
+              isUseCase={isUseCase}
               {...item}
             />
           </li>
@@ -94,6 +95,7 @@ TableOfContents.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isUseCase: PropTypes.bool,
 };
 
 export default TableOfContents;
