@@ -247,7 +247,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
 
 </DetailIconCards>
 
