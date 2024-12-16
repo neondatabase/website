@@ -57,7 +57,6 @@ As your application grows, the Scale Plan offers substantial increases in resour
 - IP Allow Rules for enhanced security
 - [Datadog integration](/docs/guides/datadog) for advanced monitoring
 
-
 ### Business plan: Enterprise-ready features
 
 For organizations requiring enterprise-grade features, the Business Plan provides everything on the Scale plan plus more resources and features:
@@ -144,7 +143,7 @@ For more about connecting your application to Neon, see [Connect to Neon](https:
 
 ### Azure Portal: Your Administrative hub
 
-The Azure portal provides a unified management experience for your Neon resources, serving as the primary entry point within the Azure ecosystem. It allows you to create and manage Neon organizations, which can then be accessed through the dedicated Neon Console. The Azure portal also centralizes your Neon financial management, providing  cost views, allowing application of your [Microsoft Azure Consumption Commitment](https://learn.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit), and enabling unified billing reports.
+The Azure portal provides a unified management experience for your Neon resources, serving as the primary entry point within the Azure ecosystem. It allows you to create and manage Neon organizations, which can then be accessed through the dedicated Neon Console. The Azure portal also centralizes your Neon financial management, providing cost views, allowing application of your [Microsoft Azure Consumption Commitment](https://learn.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit), and enabling unified billing reports.
 
 Additionally, accessing Neon via the Azure portal enables SSO, which simplifies access to the Neon Console, and lets you manage Neon organization access via Azure RBAC.
 
