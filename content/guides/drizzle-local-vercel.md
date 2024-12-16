@@ -55,7 +55,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=main
     healthcheck:
-      test: [ 'CMD-SHELL', 'pg_isready -U postgres' ]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -112,25 +112,28 @@ Then, create a file named `drizzle.server.ts` with the following code:
 ```typescript
 // File: drizzle.server.ts
 
-import { WebSocket } from 'ws'
-import { drizzle } from 'drizzle-orm/neon-serverless'
-import { neonConfig, Pool } from '@neondatabase/serverless'
+import { WebSocket } from 'ws';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { neonConfig, Pool } from '@neondatabase/serverless';
 
-const connectionString = process.env.VERCEL_ENV === 'production' ? process.env.POSTGRES_URL : process.env.LOCAL_POSTGRES_URL
+const connectionString =
+  process.env.VERCEL_ENV === 'production'
+    ? process.env.POSTGRES_URL
+    : process.env.LOCAL_POSTGRES_URL;
 
 if (process.env.VERCEL_ENV === 'production') {
-  neonConfig.poolQueryViaFetch = true
-  neonConfig.webSocketConstructor = WebSocket
+  neonConfig.poolQueryViaFetch = true;
+  neonConfig.webSocketConstructor = WebSocket;
 } else {
-  neonConfig.pipelineTLS = false
-  neonConfig.pipelineConnect = false
-  neonConfig.useSecureWebSocket = false
-  neonConfig.wsProxy = (host) => `${host}:4444/v1`
+  neonConfig.pipelineTLS = false;
+  neonConfig.pipelineConnect = false;
+  neonConfig.useSecureWebSocket = false;
+  neonConfig.wsProxy = (host) => `${host}:4444/v1`;
 }
 
-const pool = new Pool({ connectionString })
+const pool = new Pool({ connectionString });
 
-export default drizzle(pool)
+export default drizzle(pool);
 ```
 
 The code above determines the connection string based on the environment variable (production or local). In production, it configures WebSocket settings for Neon, while in local development, it sets up a WebSocket proxy. Finally, it creates a connection pool and exports a Drizzle instance for database interactions.
@@ -140,16 +143,22 @@ Next, create a file named `drizzle.config.ts` with the following code:
 ```typescript
 // File: drizzle.config.ts
 
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from 'drizzle-kit';
 
-const url = process.env.VERCEL_ENV === 'production' ? process.env.POSTGRES_URL : process.env.LOCAL_POSTGRES_URL
-if (!url) throw new Error(`Connection string to ${process.env.VERCEL_ENV ? 'Neon' : 'local'} Postgres not found.`)
+const url =
+  process.env.VERCEL_ENV === 'production'
+    ? process.env.POSTGRES_URL
+    : process.env.LOCAL_POSTGRES_URL;
+if (!url)
+  throw new Error(
+    `Connection string to ${process.env.VERCEL_ENV ? 'Neon' : 'local'} Postgres not found.`
+  );
 
 export default defineConfig({
   dialect: 'postgresql',
   dbCredentials: { url },
   schema: './lib/schema.ts',
-})
+});
 ```
 
 The code above determines the Postgres connection string to be used based on the environment (production or local) for database operations, such as running schema migrations.
