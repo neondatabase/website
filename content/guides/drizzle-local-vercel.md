@@ -82,7 +82,7 @@ Next, spin up the services in Docker via the following command:
 docker-compose up -d
 ```
 
-Use the connection string (`postgres://postgres:postgres@localhost:5432/postgres`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
+Use the connection string (`postgres://postgres:postgres@db.localtest.me:5432/main`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
 
 ## Setting Up a Serverless Postgres
 
