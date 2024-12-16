@@ -297,10 +297,16 @@
                   slug: manage/orgs-manage
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
-                - title: API actions
-                  slug: manage/orgs-api
-                - title: CLI actions
-                  slug: manage/orgs-cli
+                - section: Organizations API
+                  items:
+                    - title: Manage organizations via API
+                      slug: manage/orgs-api
+                    - title: Query organization metrics via API
+                      slug: manage/orgs-api-consumption
+                - section: CLI
+                  items:
+                    - title: CLI actions
+                      slug: manage/orgs-cli
             - title: Project collaboration
               slug: guides/project-collaboration-guide
             - title: Database access

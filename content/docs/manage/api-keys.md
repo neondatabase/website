@@ -13,9 +13,22 @@ Most actions performed in the Neon Console can also be performed using the [Neon
 
 Neon supports these types of API keys:
 
-- **Personal API key** — These keys are tied to your individual Neon account. They can access your personal projects by default, and organization projects if you specify the organization ID in your API requests.
-- **Organization API key** — These keys are scoped to a specific organization. They allow full [admin-level access](/docs/manage/organizations#user-roles-and-permissions) to all projects within that organization.
-- **Project-scoped organization API key** — These keys are scoped to a specific project within an organization. They provide [member-level access](/docs/manage/organizations#user-roles-and-permissions) to the specified project, and only that project. They cannot perform organization-related actions or destructive project operations like project deletion.
+- **Personal API key** — These keys are tied to your individual Neon account. They can:
+
+  - Access all your personal projects
+  - Access organization projects when including an `org_id` parameter and you are a member of that organization
+
+- **Organization API key** — These keys are scoped to a specific organization. They:
+
+  - Full [admin-level access](/docs/manage/organizations#user-roles-and-permissions) to all projects within that organization
+  - Do not required an `org_id` parameter
+  - Cannot be used for personal projects
+
+- **Project-scoped organization API key** — These keys are scoped to a specific project within an organization. They:
+
+  - Provide [member-level access](/docs/manage/organizations#user-roles-and-permissions) to the specified project only
+  - Cannot perform organization-related actions
+  - Cannot perform destructive project operations like deletion
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
