@@ -24,8 +24,8 @@ const jsonLd = {
   url: 'https://neon.tech/',
 };
 
-const Homepage = () => (
-  <>
+const Homepage = () => {
+  return <>
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -41,7 +41,7 @@ const Homepage = () => (
     <Trusted />
     <Cta />
   </>
-);
+}
 
 export default Homepage;
 
