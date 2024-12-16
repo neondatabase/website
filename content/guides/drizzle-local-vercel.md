@@ -45,33 +45,23 @@ You will use Docker to run your instance of local Postgres. First, create a `doc
 ```yaml
 services:
   postgres:
-    image: postgres:latest
-    volumes:
-      - db_data:/var/lib/postgresql/data
+    image: 'postgres:latest'
+    environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_DB: postgres
     ports:
       - '5432:5432'
+  pg_proxy:
+    image: ghcr.io/neondatabase/wsproxy:latest
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=main
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  neon-proxy:
-    image: ghcr.io/timowilhelm/local-neon-http-proxy:main
-    environment:
-      - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/main
+    APPEND_PORT: 'postgres:5432'
+    ALLOW_ADDR_REGEX: '.*'
+    LOG_TRAFFIC: 'true'
     ports:
-      - '4444:4444'
+      - '5433:80'
     depends_on:
-      postgres:
-        condition: service_healthy
-
-volumes:
-  db_data:
+      - postgres
 ```
 
 In the YAML configuration file above, you have set up two services using Docker: a PostgreSQL database and a WebSocket proxy for Neon. The `postgres` service uses the latest PostgreSQL image and configures the necessary environment variables for the database user, password, and database name. It exposes port 5432 for database connections. The `pg_proxy` service uses a WebSocket proxy image, allowing connections to the PostgreSQL service through port `5433`.
@@ -82,7 +72,7 @@ Next, spin up the services in Docker via the following command:
 docker-compose up -d
 ```
 
-Use the connection string (`postgres://postgres:postgres@db.localtest.me:5432/main`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
+Use the connection string (`postgres://postgres:postgres@localhost:5432/postgres`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
 
 ## Setting Up a Serverless Postgres
 
@@ -112,23 +102,21 @@ Then, create a file named `drizzle.server.ts` with the following code:
 ```typescript
 // File: drizzle.server.ts
 
-import { WebSocket } from 'ws';
-import { drizzle } from 'drizzle-orm/neon-serverless';
 import { neonConfig, Pool } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { WebSocket } from 'ws';
 
 const connectionString =
-  process.env.VERCEL_ENV === 'production'
-    ? process.env.POSTGRES_URL
-    : process.env.LOCAL_POSTGRES_URL;
+  process.env.NODE_ENV === 'production' ? process.env.POSTGRES_URL : process.env.LOCAL_POSTGRES_URL;
 
-if (process.env.VERCEL_ENV === 'production') {
-  neonConfig.poolQueryViaFetch = true;
+if (process.env.NODE_ENV === 'production') {
   neonConfig.webSocketConstructor = WebSocket;
+  neonConfig.poolQueryViaFetch = true;
 } else {
+  neonConfig.wsProxy = (host) => `${host}:5433/v1`;
+  neonConfig.useSecureWebSocket = false;
   neonConfig.pipelineTLS = false;
   neonConfig.pipelineConnect = false;
-  neonConfig.useSecureWebSocket = false;
-  neonConfig.wsProxy = (host) => `${host}:4444/v1`;
 }
 
 const pool = new Pool({ connectionString });
@@ -146,12 +134,10 @@ Next, create a file named `drizzle.config.ts` with the following code:
 import { defineConfig } from 'drizzle-kit';
 
 const url =
-  process.env.VERCEL_ENV === 'production'
-    ? process.env.POSTGRES_URL
-    : process.env.LOCAL_POSTGRES_URL;
+  process.env.NODE_ENV === 'production' ? process.env.POSTGRES_URL : process.env.LOCAL_POSTGRES_URL;
 if (!url)
   throw new Error(
-    `Connection string to ${process.env.VERCEL_ENV ? 'Neon' : 'local'} Postgres not found.`
+    `Connection string to ${process.env.NODE_ENV ? 'Neon' : 'local'} Postgres not found.`
   );
 
 export default defineConfig({
