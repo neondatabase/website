@@ -20,6 +20,24 @@ const defaultConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
+        source: '/home',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
