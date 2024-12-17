@@ -87,8 +87,8 @@ Neon pricing plans include allowances for compute, storage, and projects. For de
 
 Changing your Neon pricing plan involves the following steps:
 
-1. [Create a new Neon resource](#create-a-neon-resource) with the desired pricing plan.  
-2. Open a [support ticket](https://console.neon.tech/app/projects?modal=support) to request transferring your existing Neon projects to the new Neon resource. If you're a Free Tier user upgrading to a paid plan and can't open a support ticket, email Neon support at `support@neon.tech`.  
+1. [Create a new Neon resource](#create-a-neon-resource) with the desired pricing plan.
+2. Open a [support ticket](https://console.neon.tech/app/projects?modal=support) to request transferring your existing Neon projects to the new Neon resource. If you're a Free Tier user upgrading to a paid plan and can't open a support ticket, email Neon support at `support@neon.tech`.
 3. The Neon support team will transfer your projects from the old Neon organization to the new one. Once the transfer is complete, you can delete your old Neon resource. If the old resource was on a paid plan, deleting it will stop billing.
 
 <Admonition type="important" title="Do not delete your old Neon resource until the transfer is completed">
