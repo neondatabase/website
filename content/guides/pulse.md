@@ -401,19 +401,19 @@ The code above defines two endpoint handlers on `/api/c`:
 ## Frontend
 
 ```tsx
-'use client'
+'use client';
 
-import Message from '@/components/Message'
-import { type Role, useConversation } from '@11labs/react'
-import { useParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { toast } from 'sonner'
+import Message from '@/components/Message';
+import { type Role, useConversation } from '@11labs/react';
+import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function () {
-  const { slug } = useParams()
-  const [currentText, setCurrentText] = useState('')
-  const [messages, setMessages] = useState<any[]>([])
-  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false)
+  const { slug } = useParams();
+  const [currentText, setCurrentText] = useState('');
+  const [messages, setMessages] = useState<any[]>([]);
+  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
   const loadConversation = () => {
     fetch(`/api/c?id=${slug}`)
       .then((res) => res.json())
@@ -426,17 +426,21 @@ export default function () {
                 text: i.content_transcript,
                 transcript: i.content_transcript,
               },
-            })),
-          )
+            }))
+          );
         }
-      })
-  }
+      });
+  };
   const conversation = useConversation({
-    onError: (error: string) => { toast(error) },
-    onConnect: () => { toast('Connected to ElevenLabs.') },
+    onError: (error: string) => {
+      toast(error);
+    },
+    onConnect: () => {
+      toast('Connected to ElevenLabs.');
+    },
     onMessage: (props: { message: string; source: Role }) => {
-      const { message, source } = props
-      if (source === 'ai') setCurrentText(message)
+      const { message, source } = props;
+      if (source === 'ai') setCurrentText(message);
       fetch('/api/c', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -451,55 +455,60 @@ export default function () {
             content: [{ type: 'text', transcript: message }],
           },
         }),
-      }).then(loadConversation)
+      }).then(loadConversation);
     },
-  })
+  });
   const connectConversation = useCallback(async () => {
-    toast('Setting up ElevenLabs...')
+    toast('Setting up ElevenLabs...');
     try {
-      await navigator.mediaDevices.getUserMedia({ audio: true })
+      await navigator.mediaDevices.getUserMedia({ audio: true });
       const response = await fetch('/api/i', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-      })
-      const data = await response.json()
-      if (data.error) return toast(data.error)
-      await conversation.startSession({ signedUrl: data.apiKey })
+      });
+      const data = await response.json();
+      if (data.error) return toast(data.error);
+      await conversation.startSession({ signedUrl: data.apiKey });
     } catch (error) {
-      toast('Failed to set up ElevenLabs client :/')
+      toast('Failed to set up ElevenLabs client :/');
     }
-  }, [conversation])
+  }, [conversation]);
   const disconnectConversation = useCallback(async () => {
-    await conversation.endSession()
-  }, [conversation])
+    await conversation.endSession();
+  }, [conversation]);
   const handleStartListening = () => {
-    if (conversation.status !== 'connected') connectConversation()
-  }
+    if (conversation.status !== 'connected') connectConversation();
+  };
   const handleStopListening = () => {
-    if (conversation.status === 'connected') disconnectConversation()
-  }
+    if (conversation.status === 'connected') disconnectConversation();
+  };
   useEffect(() => {
     return () => {
-      disconnectConversation()
-    }
-  }, [slug])
-  return <></>
+      disconnectConversation();
+    };
+  }, [slug]);
+  return <></>;
 }
 ```
 
 ```tsx ins={4}
-'use client'
+'use client';
 
 // ... Existing imports ...
-import TextAnimation from '@/components/TextAnimation'
+import TextAnimation from '@/components/TextAnimation';
 
 export default function () {
   // ... Existing code ...
   return (
     <>
-      <TextAnimation currentText={currentText} isAudioPlaying={conversation.isSpeaking} onStopListening={handleStopListening} onStartListening={handleStartListening} />
+      <TextAnimation
+        currentText={currentText}
+        isAudioPlaying={conversation.isSpeaking}
+        onStopListening={handleStopListening}
+        onStartListening={handleStartListening}
+      />
     </>
-  )
+  );
 }
 ```
 
