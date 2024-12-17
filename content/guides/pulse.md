@@ -98,6 +98,162 @@ createMessagesTable()
 
 The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
 
+## TODO
+
+### Typing Effect
+
+```tsx
+// File: lib/useTypingEffect.ts
+
+import { useEffect, useState } from 'react'
+
+export const useTypingEffect = (text: string, duration: number = 50, isTypeByLetter = false) => {
+  const [currentPosition, setCurrentPosition] = useState(0)
+  const items = isTypeByLetter ? text.split('') : text.split(' ')
+  useEffect(() => {
+    setCurrentPosition(0)
+  }, [text])
+  useEffect(() => {
+    if (currentPosition >= items.length) return
+    const intervalId = setInterval(() => {
+      setCurrentPosition((prevPosition) => prevPosition + 1)
+    }, duration)
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [currentPosition, items, duration])
+  return items.slice(0, currentPosition).join(isTypeByLetter ? '' : ' ')
+}
+```
+
+TODO - describe
+
+### Types
+
+```tsx
+// File: lib/types.ts
+
+export type AIState = 'idle' | 'listening' | 'speaking'
+
+export interface Props {
+  onStartListening?: () => void
+  onStopListening?: () => void
+  isAudioPlaying?: boolean
+  currentText: string
+}
+```
+
+TODO - describe
+
+### Message
+
+```tsx
+// File: components/Message.tsx
+
+import { Cpu, User } from 'react-feather'
+
+export default function ({ conversationItem }: { conversationItem: { role: string; formatted: { transcript: string } } }) {
+  return (
+    <div className="flex flex-row items-start gap-x-3 flex-wrap max-w-full">
+      <div className="rounded border p-2 max-w-max">{conversationItem.role === 'user' ? <User /> : <Cpu />}</div>
+      <div className="flex flex-col gap-y-2">{conversationItem.formatted.transcript}</div>
+    </div>
+  )
+}
+```
+
+TODO - describe
+
+### TextAnimation
+
+```tsx
+// File: components/TextAnimation.tsx
+
+'use client'
+
+import { AIState, Props } from '@/lib/types'
+import { useTypingEffect } from '@/lib/useTypingEffect'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+
+export default function AiTalkingAnimation({ onStartListening, onStopListening, isAudioPlaying, currentText }: Props) {
+  const [aiState, setAiState] = useState<AIState>('idle')
+  const animatedCurrentText = useTypingEffect(currentText, 20)
+  const displayedText = useTypingEffect('Click the circle to start the conversation', 20)
+
+  const handleCircleClick = () => {
+    if (aiState === 'listening' || aiState === 'speaking') {
+      onStopListening?.()
+      setAiState('idle')
+    } else if (!isAudioPlaying) {
+      onStartListening?.()
+      setAiState('listening')
+    }
+  }
+
+  useEffect(() => {
+    if (isAudioPlaying) setAiState('speaking')
+    else if (aiState === 'speaking' && currentText) setAiState('listening')
+  }, [isAudioPlaying])
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="relative mb-8 cursor-pointer" onClick={handleCircleClick} role="button" aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}>
+        <motion.div
+          className="w-20 h-20 bg-gradient-to-br from-pink-500 to-violet-600 rounded-full flex items-center justify-center shadow-lg"
+          animate={aiState === 'idle' ? { scale: [1, 1.1, 1] } : aiState === 'speaking' ? { scale: [1, 1.2, 0.8, 1.2, 1] } : {}}
+          transition={{
+            repeat: Infinity,
+            ease: 'easeInOut',
+            duration: aiState === 'speaking' ? 0.8 : 1.5,
+          }}
+        />
+        {aiState === 'listening' && (
+          <svg className="absolute top-1/2 left-1/2 w-24 h-24 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 100 100">
+            <motion.circle
+              cx="50"
+              cy="50"
+              r="48"
+              fill="none"
+              strokeWidth="4"
+              stroke="#8B5CF6"
+              transition={{
+                duration: 10,
+                ease: 'linear',
+                repeat: Infinity,
+              }}
+              strokeLinecap="round"
+              initial={{ pathLength: 0, rotate: -90 }}
+              animate={{ pathLength: 1, rotate: 270 }}
+            />
+          </svg>
+        )}
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <p className="text-gray-800 text-lg font-mono" aria-live="polite">
+          {aiState === 'listening' ? 'Listening...' : aiState === 'speaking' ? animatedCurrentText : displayedText}
+        </p>
+        {aiState === 'idle' && (
+          <motion.div
+            animate={{
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 0.8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="h-5 w-2 bg-violet-600 mt-2"
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+TODO - describe
+
 ## Deploy to Vercel
 
 The repository is now ready to deploy to Vercel. Use the following steps to deploy:
