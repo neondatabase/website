@@ -411,6 +411,7 @@ import { type Role, useConversation } from '@11labs/react';
 export default function () {
   const { slug } = useParams();
   const [currentText, setCurrentText] = useState('');
+  const [messages, setMessages] = useState<any[]>([]);
   const loadConversation = () => {
     fetch(`/api/c?id=${slug}`)
       .then((res) => res.json())
@@ -511,7 +512,7 @@ export default function () {
 
 TODO
 
-```tsx ins={4,5,9,10,14-38}
+```tsx ins={4,5,9,13-37}
 'use client';
 
 // ... Existing imports ...
@@ -520,7 +521,6 @@ import Message from '@/components/Message';
 
 export default function () {
   // ... Existing code ...
-  const [messages, setMessages] = useState<any[]>([]);
   const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
   return (
     <>
