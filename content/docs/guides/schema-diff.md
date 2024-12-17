@@ -107,13 +107,13 @@ url -X GET \
   -H "Authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
-| Parameter        | Description                                | Required | Example                    |
-|------------------|--------------------------------------------|----------|----------------------------|
-| `<project_id>`   | The ID of your Neon project.              | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`    | The ID of the target branch to compare.   | Yes      | `br-rough-boat-a54bs9yb`   |
-| `base_branch_id` | The ID of the base branch for comparison. | Yes      | `br-royal-star-a54kykl2`   |
+| Parameter        | Description                                    | Required | Example                    |
+| ---------------- | ---------------------------------------------- | -------- | -------------------------- |
+| `<project_id>`   | The ID of your Neon project.                   | Yes      | `wispy-butterfly-25042691` |
+| `<branch_id>`    | The ID of the target branch to compare.        | Yes      | `br-rough-boat-a54bs9yb`   |
+| `base_branch_id` | The ID of the base branch for comparison.      | Yes      | `br-royal-star-a54kykl2`   |
 | `db_name`        | The name of the database in the target branch. | Yes      | `neondb`                   |
-| `Authorization`  | Bearer token for API access.              | Yes      | `$NEON_API_KEY`            |
+| `Authorization`  | Bearer token for API access.                   | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note">
 The `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read.
