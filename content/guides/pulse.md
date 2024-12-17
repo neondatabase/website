@@ -326,9 +326,9 @@ export async function POST(request: Request) {
 
 The code above defines an API route that generates a signed URL using ElevenLabs API. You will want to use signed URL instead of connecting to a fixed point server so as to allow connection to your personalized, private agents created in ElevenLabs.
 
-## Manage conversations using Postgres
+## Managing Conversations in Postgres
 
-Create a file named ... - TODO
+Create a file named `route.ts` in the `app/api/c` directory with the following code:
 
 ```tsx
 // File: app/api/c/route.ts
@@ -375,7 +375,11 @@ export async function GET(request: Request) {
 }
 ```
 
-TODO - describe
+The code above defines two endpoint handlers on `/api/c`:
+
+- A `POST` endpoint that allows you to insert a new message into the `messages` table. It expects a JSON payload containing the `id` of the session and the `item` to be inserted. If the session ID or item is missing, it returns a 400 status code.
+
+- A `GET` endpoint that retrieves all messages associated with a specific session ID. It extracts the session ID from the request URL and queries the `messages` table, returning the results as a JSON response. If the session ID is not provided, it returns an empty array.
 
 ## Deploy to Vercel
 
