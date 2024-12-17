@@ -37,19 +37,18 @@ Both examples retrieve a list of projects, but notice how the personal API key r
 
 Some operations require a personal API key from an organization admin and cannot be performed using organization API keys. These operations are marked with ❌ in the matrix below.
 
-| Action                                     | Personal API Key | Organization API Key |
-|--------------------------------------------|------------------|----------------------|
-| [Create an organization API key](#create-an-organization-api-key) | ✅               | ❌                   |
-| [Get a list of organization API keys](#list-organization-api-keys) | ✅               | ✅                   |
-| [Revoke an organization API key](#revoke-an-organization-api-key) | ✅               | ✅                   |
-| [Get organization details](#get-organization-details) | ✅               | ✅                   |
-| [Get organization members details](#get-details-about-all-members) | ✅               | ✅                   |
-| [Get organization member details](#get-details-about-an-individual-member) | ✅               | ✅                   |
+| Action                                                                                    | Personal API Key | Organization API Key |
+| ----------------------------------------------------------------------------------------- | ---------------- | -------------------- |
+| [Create an organization API key](#create-an-organization-api-key)                         | ✅               | ❌                   |
+| [Get a list of organization API keys](#list-organization-api-keys)                        | ✅               | ✅                   |
+| [Revoke an organization API key](#revoke-an-organization-api-key)                         | ✅               | ✅                   |
+| [Get organization details](#get-organization-details)                                     | ✅               | ✅                   |
+| [Get organization members details](#get-details-about-all-members)                        | ✅               | ✅                   |
+| [Get organization member details](#get-details-about-an-individual-member)                | ✅               | ✅                   |
 | [Update the role for an organization member](#update-the-role-for-an-organization-member) | ✅               | ✅                   |
-| [Remove member from the organization](#remove-member-from-the-organization) | ✅               | ❌                   |
-| [Get organization invitation details](#get-organization-invitation-details) | ✅               | ✅                   |
-| [Create organization invitations](#create-organization-invitations) | ✅               | ❌                   |
-
+| [Remove member from the organization](#remove-member-from-the-organization)               | ✅               | ❌                   |
+| [Get organization invitation details](#get-organization-invitation-details)               | ✅               | ✅                   |
+| [Create organization invitations](#create-organization-invitations)                       | ✅               | ❌                   |
 
 ## Finding your org_id
 
@@ -79,6 +78,7 @@ curl --request GET \
 ```
 
 Example response:
+
 ```json
 [
   {
@@ -110,15 +110,16 @@ curl --request DELETE \
 ```
 
 Example response:
+
 ```json
 {
-    "id": 123456,
-    "name": "my-key-name",
-    "created_at": "2024-01-01T12:00:00Z",
-    "created_by": "user-abc123de-4567-8fab-9012-3cdef4567890",
-    "last_used_at": "2024-01-01T12:30:00Z",
-    "last_used_from_addr": "192.0.2.1,192.0.2.2",
-    "revoked": true
+  "id": 123456,
+  "name": "my-key-name",
+  "created_at": "2024-01-01T12:00:00Z",
+  "created_by": "user-abc123de-4567-8fab-9012-3cdef4567890",
+  "last_used_at": "2024-01-01T12:30:00Z",
+  "last_used_from_addr": "192.0.2.1,192.0.2.2",
+  "revoked": true
 }
 ```
 
