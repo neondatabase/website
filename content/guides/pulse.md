@@ -126,6 +126,8 @@ To run the migrations, execute the following command:
 npx tsx schema.tsx
 ```
 
+If it runs succesfully, you should see `Setup schema succesfully.` in the terminal.
+
 ## TODO
 
 ### Typing Effect
@@ -395,6 +397,111 @@ The code above defines two endpoint handlers on `/api/c`:
 - A `POST` endpoint that allows you to insert a new message into the `messages` table. It expects a JSON payload containing the `id` of the session and the `item` to be inserted. If the session ID or item is missing, it returns a 400 status code.
 
 - A `GET` endpoint that retrieves all messages associated with a specific session ID. It extracts the session ID from the request URL and queries the `messages` table, returning the results as a JSON response. If the session ID is not provided, it returns an empty array.
+
+## Frontend
+
+```tsx
+'use client'
+
+import Message from '@/components/Message'
+import { type Role, useConversation } from '@11labs/react'
+import { useParams } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
+import { toast } from 'sonner'
+
+export default function () {
+  const { slug } = useParams()
+  const [currentText, setCurrentText] = useState('')
+  const [messages, setMessages] = useState<any[]>([])
+  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false)
+  const loadConversation = () => {
+    fetch(`/api/c?id=${slug}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.length > 0) {
+          setMessages(
+            res.map((i: any) => ({
+              ...i,
+              formatted: {
+                text: i.content_transcript,
+                transcript: i.content_transcript,
+              },
+            })),
+          )
+        }
+      })
+  }
+  const conversation = useConversation({
+    onError: (error: string) => { toast(error) },
+    onConnect: () => { toast('Connected to ElevenLabs.') },
+    onMessage: (props: { message: string; source: Role }) => {
+      const { message, source } = props
+      if (source === 'ai') setCurrentText(message)
+      fetch('/api/c', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: slug,
+          item: {
+            type: 'message',
+            status: 'completed',
+            object: 'realtime.item',
+            id: 'item_' + Math.random(),
+            role: source === 'ai' ? 'assistant' : 'user',
+            content: [{ type: 'text', transcript: message }],
+          },
+        }),
+      }).then(loadConversation)
+    },
+  })
+  const connectConversation = useCallback(async () => {
+    toast('Setting up ElevenLabs...')
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true })
+      const response = await fetch('/api/i', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      const data = await response.json()
+      if (data.error) return toast(data.error)
+      await conversation.startSession({ signedUrl: data.apiKey })
+    } catch (error) {
+      toast('Failed to set up ElevenLabs client :/')
+    }
+  }, [conversation])
+  const disconnectConversation = useCallback(async () => {
+    await conversation.endSession()
+  }, [conversation])
+  const handleStartListening = () => {
+    if (conversation.status !== 'connected') connectConversation()
+  }
+  const handleStopListening = () => {
+    if (conversation.status === 'connected') disconnectConversation()
+  }
+  useEffect(() => {
+    return () => {
+      disconnectConversation()
+    }
+  }, [slug])
+  return <></>
+}
+```
+
+```tsx ins={4}
+'use client'
+
+// ... Existing imports ...
+import TextAnimation from '@/components/TextAnimation'
+
+export default function () {
+  // ... Existing code ...
+  return (
+    <>
+      <TextAnimation currentText={currentText} isAudioPlaying={conversation.isSpeaking} onStopListening={handleStopListening} onStartListening={handleStartListening} />
+    </>
+  )
+}
+```
 
 ## Deploy to Vercel
 
