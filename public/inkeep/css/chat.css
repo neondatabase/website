@@ -1,0 +1,13 @@
+.ikp-message-header{
+  display: none;
+}
+
+.chat-title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: -0.04em;
+}

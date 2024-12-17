@@ -30,6 +30,7 @@ export default {
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
+  docsChat: '/docs/chat',
   ai: '/docs/ai/ai-intro',
   api: '/docs/reference/api-reference',
   authorize: '/docs/guides/neon-authorize',

@@ -34,7 +34,7 @@ const NeonDocsLayout = async ({ children }) => {
           basePath={DOCS_BASE_PATH}
         />
 
-        <div className="-ml-[350px] w-full 3xl:ml-0">
+        <div className="w-full">
           <Container
             className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-4"
             size="1408"

@@ -61,11 +61,13 @@ const InkeepTrigger = ({
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
-    stylesheetUrls: ['/inkeep/css/inkeep-chat.css'],
     baseSettings: {
       ...baseSettings,
       colorMode: {
         forcedColorMode: themeMode,
+      },
+      theme: {
+        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
       },
     },
     modalSettings: {
