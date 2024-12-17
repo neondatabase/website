@@ -287,9 +287,9 @@ export default function AiTalkingAnimation({
 
 TODO - describe
 
-## Obtain short-lived signed URL for conversations using ElevenLabs
+## Generating a Signed URL for ElevenLabs Conversationss
 
-Create a file named ... - TODO
+To create a secure access between user and AI (powered by ElevenLabs), create a new file named `route.ts` in the `app/api/i` directory with the following code:
 
 ```tsx
 // File: app/api/i/route.ts
@@ -324,7 +324,7 @@ export async function POST(request: Request) {
 }
 ```
 
-TODO - describe
+The code above defines an API route that generates a signed URL using ElevenLabs API. You will want to use signed URL instead of connecting to a fixed point server so as to allow connection to your personalized, private agents created in ElevenLabs.
 
 ## Manage conversations using Postgres
 
