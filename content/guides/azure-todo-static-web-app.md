@@ -7,40 +7,37 @@ createdAt: '2024-12-14T00:00:00.000Z'
 updatedOn: '2024-12-14T00:00:00.000Z'
 ---
 
-If you've been looking for a modern approach to deploying web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be exactly what you need. At its core, it's a service optimized for hosting static assets with global distribution, but its true power lies in the seamless integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
+If you’re looking for a modern way to deploy web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be just what you need. It’s a service optimized for hosting static assets with global distribution, but its real strength lies in seamless integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
 
-What makes Azure Static Web Apps particularly compelling for developers is its built-in CI/CD pipeline powered by [Github Actions](https://github.com/features/actions). When you connect your repository, Azure automatically configures the necessary Github workflows – push your code and watch as Github Actions builds, optimizes, and deploys your entire application across a global network
+One of the most compelling features of Azure Static Web Apps is its built-in CI/CD pipeline powered by [GitHub Actions](https://github.com/features/actions). When you connect your repository, Azure configures the required GitHub workflows automatically. You only need to push your code, and GitHub Actions will build, optimize, and deploy your entire application across a global network.
 
-In this guide, we'll show you how to build a simple todo application using Azure Static Web Apps. You'll learn the basics of getting your website online and creating your first API endpoint with Azure Functions. By the end of this tutorial, you'll understand how to combine static web content with dynamic features to create a fully functional web application.
+In this guide, you’ll learn how to build a simple to-do application using Azure Static Web Apps. You’ll cover the basics of getting your website online and creating your first API endpoint with Azure Functions. By the end, you’ll understand how to combine static web content with dynamic features to build a fully functional web application.
 
 ## Prerequisites
 
-Before we begin, make sure you have:
+Before you begin, make sure you have:
 
 - [Node.js](https://nodejs.org/) 18.x or later installed
-- [Visual Studio Code](https://code.visualstudio.com/) with the [Azure Static Web Apps](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) and [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) extensions installed
+- [Visual Studio Code](https://code.visualstudio.com/)
 - An [Azure account](https://azure.microsoft.com/free/) with an active subscription
-- A [Neon account](https://console.neon.tech/signup) and project
-- [Azure Functions Core Tools version 4.x](https://learn.microsoft.com/en-gb/azure/azure-functions/create-first-function-vs-code-node?pivots=nodejs-model-v4#install-or-update-core-tools)
-- [Azure Static Web Apps CLI](https://www.npmjs.com/package/@azure/static-web-apps-cli)
 
 ## Create a Neon Project
 
 Neon is now available in Azure! You can create serverless Postgres databases that run on Azure infrastructure. To learn more about Neon's Azure launch, check out the [announcement post](/blog/neon-is-coming-to-azure).
 
-To create Neon project on Azure, follow our [Getting Started with Neon on Azure guide](/guides/neon-azure-integration).
+To create your Neon project on Azure, follow our [Getting Started with Neon on Azure guide](/guides/neon-azure-integration).
 
 Once created, save your database connection string, which you'll need to connect to your Neon Postgres database from Azure Functions.
 
 ## Database Schema
 
-For our todo application, we'll need a simple database schema to store todo items. We'll create a `todos` table with the following fields:
+For your todo application, you'll need a simple database schema to store todo items. You'll create a `todos` table with the following fields:
 
 - `id`: Auto-incrementing unique identifier (Primary Key)
 - `text`: Required text field to store the task description
 - `completed`: Boolean field with a default value of false to track task completion status
 
-\*We will be creating the table via Azure Functions later in the guide.
+\*You'll be creating the table via Azure Functions later in the guide.
 
 ## Setting up your development environment
 
@@ -50,10 +47,10 @@ To begin building your Azure Static Web App with Neon Postgres, you'll need to s
 
 1. Install the **Azure Static Web Apps** and **Azure Functions** extensions for Visual Studio Code:
 
-   - Open VS Code
-   - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`
-   - Search for "Azure Static Web Apps" and "Azure Functions" extensions
-   - Install both of the extensions from Microsoft
+   - Open VS Code.
+   - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`.
+   - Search for "Azure Static Web Apps" and "Azure Functions" extensions.
+   - Install both of the extensions from Microsoft.
 
    ![Extensions to Download](/docs/guides/swa-extensions-to-download.png)
 
@@ -73,9 +70,9 @@ To begin building your Azure Static Web App with Neon Postgres, you'll need to s
 
 ### Project setup
 
-With the required Azure tools installed, we can now create a new Azure Static Web App.
+With the Azure tools installed, you can now create your new Azure Static Web App.
 
-Open a terminal and navigate to the directory where you want to create your project.
+Open a terminal and navigate to the directory where you want to create your project:
 
 ```bash
 mkdir swa-todo
@@ -84,14 +81,14 @@ cd swa-todo && code .
 
 ## Creating the Static Web App
 
-We'll start by creating the frontend of our todo application. The frontend will be a simple HTML, CSS, and JavaScript application that allows users to add, update, and delete todo items. For the backend, we'll use Azure Functions to handle API requests and interact with the Neon Postgres database.
+You'll start by creating the frontend of your todo application. The frontend will be a simple HTML, CSS, and JavaScript application that allows you to add, update, and delete todo items. For the backend, you'll use Azure Functions to handle API requests and interact with the Neon Postgres database.
 
 Architecture overview:
 
-- Frontend: A web application built with HTML, CSS, and JavaScript
-- Backend: Serverless API endpoints using Azure Functions
-- Hosting: Azure Static Web Apps for reliable and scalable web hosting
-- Database: Neon serverless Postgres for storing todo data
+- Frontend: A web application built with HTML, CSS, and JavaScript.
+- Backend: Serverless API endpoints using Azure Functions.
+- Hosting: Azure Static Web Apps for reliable and scalable web hosting.
+- Database: Neon serverless Postgres for storing todo data.
 
 Project structure:
 
@@ -229,7 +226,7 @@ button:hover {
 }
 ```
 
-The CSS file contains styles for the todo app, including the layout, input fields, buttons, and todo list items. You can customize the styles to match your design preferences. We have kept it very simple for this example.
+The CSS file contains styles for the todo app, including the layout, input fields, buttons, and todo list items. You can customize the styles to match your design preferences. The example uses a simple design to help you get started.
 
 Create a new file named `app.js` in the root directory of your project and add the following JavaScript code:
 
@@ -245,8 +242,8 @@ async function loadTodos() {
   try {
     showLoading();
     const response = await fetch('/api/todos');
-    if (!response.ok) throw new Error('Failed to load todos');
     todos = await response.json();
+    if (!response.ok) throw new Error('Failed to load todos');
   } catch (error) {
     showError(error.message);
   } finally {
@@ -269,8 +266,8 @@ async function addTodo() {
       body: JSON.stringify({ text, completed: false }),
     });
 
-    if (!response.ok) throw new Error('Failed to add todo');
     const todo = await response.json();
+    if (!response.ok) throw new Error('Failed to add todo');
     const todoId = todo?.[0]?.id;
 
     todos.push({ id: todoId, text, completed: false });
@@ -405,35 +402,35 @@ Core Functions:
 UI Management:
 
 1. `renderTodos()`
-   - Dynamically generates DOM elements for each todo
-   - Handles todo item styling based on completion status
-   - Creates interactive elements (checkboxes, delete buttons)
+   - Dynamically generates DOM elements for each todo.
+   - Handles todo item styling based on completion status.
+   - Creates interactive elements (checkboxes, delete buttons).
 
 Utility Functions:
 
 1. `showLoading()`
 
-   - Displays loading indicator during API operations
-   - Provides visual feedback for better user experience
+   - Displays loading indicator during API operations.
+   - Provides visual feedback for better user experience.
 
 2. `hideLoading()`
 
-   - Removes loading indicator after operations complete
-   - Prepares UI for content display
+   - Removes loading indicator after operations complete.
+   - Prepares UI for content display.
 
 3. `showError(message)`
-   - Displays error messages to users
-   - Implements auto-dismissing notifications (3-second timeout)
-   - Provides clear feedback for error conditions
+   - Displays error messages to users.
+   - Implements auto-dismissing notifications (3-second timeout).
+   - Provides clear feedback for error conditions.
 
 State Management:
 
-- All todo items are stored in the `todos` array
+- All todo items are stored in the `todos` array.
 
 Error Handling:
 
-- Comprehensive try-catch blocks around API operations
-- Detailed error messages for debugging
+- Comprehensive try-catch blocks around API operations.
+- Detailed error messages for debugging.
 
 ### Testing the Frontend locally
 
@@ -447,7 +444,7 @@ This will start a local server on [`http://localhost:4280`](http://localhost:428
 
 ![Todo App Initial State](/docs/guides/swa-todo-app-intial.png)
 
-\*Note that full functionality will be available once we set up the Azure Functions backend API.
+\*Note that full functionality will be available once you set up the Azure Functions backend API.
 
 ### Creating Azure Functions
 
@@ -463,7 +460,7 @@ Press F1 in VS Code to open the command palette and run the command `Azure Stati
 
 This will create a new Azure Function in the `api` directory, which will serve as the backend API for our todo application with an api endpoint `/api/todos`.
 
-We will be using the [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) package to connect to the Neon Postgres database. Install the package by running the following command in the `api` directory:
+You'll need the [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) package to connect to the Neon Postgres database. Install the package by running the following command in the `api` directory:
 
 ```bash
 npm install @neondatabase/serverless
@@ -486,11 +483,11 @@ const getTodos = async () => {
     if (error.code === '42P01') {
       // Table does not exist, so create it
       await sql`
-                CREATE TABLE todos (
-                    id SERIAL PRIMARY KEY,
-                    text TEXT NOT NULL,
-                    completed BOOLEAN NOT NULL
-                )`;
+        CREATE TABLE todos (
+          id SERIAL PRIMARY KEY,
+          text TEXT NOT NULL,
+          completed BOOLEAN NOT NULL
+        )`;
       return [];
     }
     throw error;
@@ -522,10 +519,10 @@ app.http('todos', {
           }
 
           const createdTodo = await sql`
-                        INSERT INTO todos (text, completed)
-                        VALUES (${newTodo.text}, ${newTodo.completed || false})
-                        RETURNING *
-                    `;
+            INSERT INTO todos (text, completed)
+            VALUES (${newTodo.text}, ${newTodo.completed || false})
+            RETURNING *
+          `;
           return { status: 201, jsonBody: createdTodo };
 
         case 'put':
@@ -540,11 +537,11 @@ app.http('todos', {
           }
 
           const todo = await sql`
-                        UPDATE todos
-                        SET completed = ${updatedTodo.completed}
-                        WHERE id = ${updatedTodo.id}
-                        RETURNING *
-                    `;
+            UPDATE todos
+            SET completed = ${updatedTodo.completed}
+            WHERE id = ${updatedTodo.id}
+            RETURNING *
+          `;
 
           if (todo.length === 0) {
             return {
@@ -566,10 +563,10 @@ app.http('todos', {
           }
 
           const deletedTodo = await sql`
-                        DELETE FROM todos
-                        WHERE id = ${id}
-                        RETURNING *
-                    `;
+            DELETE FROM todos
+            WHERE id = ${id}
+            RETURNING *
+          `;
 
           if (deletedTodo.length === 0) {
             return {
@@ -639,31 +636,31 @@ Core Components:
 
    1. `GET`: Retrieves all todos
 
-      - Automatically creates table on first request
-      - Returns array of todo items
+      - Automatically creates table on first request.
+      - Returns array of todo items.
 
    2. `POST`: Creates new todo
 
-      - Requires: `text` field
-      - Returns: newly created todo
+      - Requires: `text` field.
+      - Returns: newly created todo.
 
    3. `PUT`: Updates todo completion status
 
-      - Requires: `id` and `completed` status
-      - Returns: updated todo or `404` if not found
+      - Requires: `id` and `completed` status.
+      - Returns: updated todo or `404` if not found.
 
    4. `DELETE`: Removes a todo
 
-      - Requires: todo `id`
-      - Returns: success message or `404` if not found
+      - Requires: todo `id`.
+      - Returns: success message or `404` if not found.
 
 Error Handling:
 
-- Input validation for required fields
-- Database error handling
-- Proper `HTTP` status codes
-- Detailed error messages for debugging
-- Logging via `context.log` for monitoring
+- Input validation for required fields.
+- Database error handling.
+- Proper `HTTP` status codes.
+- Detailed error messages for debugging.
+- Logging via `context.log` for monitoring.
 
 ### Adding Neon Postgres connection string
 
@@ -706,8 +703,8 @@ To deploy your Azure Static Web App, follow these steps:
 3. Sign in to your Azure account if prompted.
 4. When prompted, commit your changes to a Git repository.
 5. Enter name for your Static Web App, for example `swa-todo`.
-6. Enter repo name for your GitHub repository if prompted.
-7. Chose the region to deploy your app, for example `East US 2`.
+6. Enter repo name for your GitHub repository to push the code.
+7. Choose the region to deploy your app, for example `East US 2`.
 8. Select `HTML` for the build preset.
 9. Enter `/` for the app location and build output path.
 
@@ -726,16 +723,16 @@ Now that your Azure Static Web App is deployed, you will need to add the Neon Po
 
 ## Summary
 
-In this guide, we've built a simple todo application using Azure Static Web Apps and Neon Postgres. We've covered the following key steps:
+In this guide, you've built a simple todo application using Azure Static Web Apps and Neon Postgres. You've covered the following key steps:
 
-1. Setting up the development environment with Azure Static Web Apps and Neon Postgres
-2. Creating the frontend of the todo app with HTML, CSS, and JavaScript
-3. Setting up Azure Functions to handle API requests and interact with the Neon Postgres database
-4. Testing the app locally and deploying it to Azure
+1. Setting up your development environment with Azure Static Web Apps and Neon Postgres.
+2. Creating the frontend of your todo app with HTML, CSS, and JavaScript.
+3. Setting up Azure Functions to handle API requests and interact with the Neon Postgres database.
+4. Testing your app locally and deploying it to Azure.
 
 By combining Azure Static Web Apps with Neon Postgres, you can build powerful data-driven applications that are fast, reliable, and scalable. Azure Static Web Apps provides a robust hosting platform for static assets and serverless APIs, while Neon Postgres offers a serverless database solution that scales with your application. Together, they provide a seamless development experience for building modern web applications.
 
-We hope this guide has been helpful in getting you started with Azure Static Web Apps and Neon Postgres. As a next step, you can look at [Neon Authorize](/docs/guides/neon-authorize) to add authentication and authorization to your app, allowing users to securely log in and manage their own todo lists.
+This guide should have helped you get started with Azure Static Web Apps and Neon Postgres. As a next step, you can look at [Neon Authorize](/docs/guides/neon-authorize) to add authentication and authorization to your app, allowing users to securely log in and manage their own todo lists.
 
 ## Additional Resources
 
