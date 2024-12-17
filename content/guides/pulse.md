@@ -131,43 +131,26 @@ npx tsx schema.tsx
 ### Typing Effect
 
 ```tsx
-// File: lib/useTypingEffect.ts
+// File: components/useTypingEffect.ts
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 export const useTypingEffect = (text: string, duration: number = 50, isTypeByLetter = false) => {
-  const [currentPosition, setCurrentPosition] = useState(0);
-  const items = isTypeByLetter ? text.split('') : text.split(' ');
+  const [currentPosition, setCurrentPosition] = useState(0)
+  const items = isTypeByLetter ? text.split('') : text.split(' ')
   useEffect(() => {
-    setCurrentPosition(0);
-  }, [text]);
+    setCurrentPosition(0)
+  }, [text])
   useEffect(() => {
-    if (currentPosition >= items.length) return;
+    if (currentPosition >= items.length) return
     const intervalId = setInterval(() => {
-      setCurrentPosition((prevPosition) => prevPosition + 1);
-    }, duration);
+      setCurrentPosition((prevPosition) => prevPosition + 1)
+    }, duration)
     return () => {
-      clearInterval(intervalId);
-    };
-  }, [currentPosition, items, duration]);
-  return items.slice(0, currentPosition).join(isTypeByLetter ? '' : ' ');
-};
-```
-
-TODO - describe
-
-### Types
-
-```tsx
-// File: lib/types.ts
-
-export type AIState = 'idle' | 'listening' | 'speaking';
-
-export interface Props {
-  onStartListening?: () => void;
-  onStopListening?: () => void;
-  isAudioPlaying?: boolean;
-  currentText: string;
+      clearInterval(intervalId)
+    }
+  }, [currentPosition, items, duration])
+  return items.slice(0, currentPosition).join(isTypeByLetter ? '' : ' ')
 }
 ```
 
@@ -178,21 +161,15 @@ TODO - describe
 ```tsx
 // File: components/Message.tsx
 
-import { Cpu, User } from 'react-feather';
+import { Cpu, User } from 'react-feather'
 
-export default function ({
-  conversationItem,
-}: {
-  conversationItem: { role: string; formatted: { transcript: string } };
-}) {
+export default function ({ conversationItem }: { conversationItem: { role: string; formatted: { transcript: string } } }) {
   return (
-    <div className="flex max-w-full flex-row flex-wrap items-start gap-x-3">
-      <div className="max-w-max rounded border p-2">
-        {conversationItem.role === 'user' ? <User /> : <Cpu />}
-      </div>
+    <div className="flex flex-row items-start gap-x-3 flex-wrap max-w-full">
+      <div className="rounded border p-2 max-w-max">{conversationItem.role === 'user' ? <User /> : <Cpu />}</div>
       <div className="flex flex-col gap-y-2">{conversationItem.formatted.transcript}</div>
     </div>
-  );
+  )
 }
 ```
 
@@ -203,55 +180,47 @@ TODO - describe
 ```tsx
 // File: components/TextAnimation.tsx
 
-'use client';
+'use client'
 
-import { AIState, Props } from '@/lib/types';
-import { useTypingEffect } from '@/lib/useTypingEffect';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useTypingEffect } from '@/components/useTypingEffect'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
-export default function AiTalkingAnimation({
-  onStartListening,
-  onStopListening,
-  isAudioPlaying,
-  currentText,
-}: Props) {
-  const [aiState, setAiState] = useState<AIState>('idle');
-  const animatedCurrentText = useTypingEffect(currentText, 20);
-  const displayedText = useTypingEffect('Click the circle to start the conversation', 20);
+type AIState = 'idle' | 'listening' | 'speaking'
+
+interface Props {
+  onStartListening?: () => void
+  onStopListening?: () => void
+  isAudioPlaying?: boolean
+  currentText: string
+}
+
+export default function AiTalkingAnimation({ onStartListening, onStopListening, isAudioPlaying, currentText }: Props) {
+  const [aiState, setAiState] = useState<AIState>('idle')
+  const animatedCurrentText = useTypingEffect(currentText, 20)
+  const displayedText = useTypingEffect('Click the circle to start the conversation', 20)
 
   const handleCircleClick = () => {
     if (aiState === 'listening' || aiState === 'speaking') {
-      onStopListening?.();
-      setAiState('idle');
+      onStopListening?.()
+      setAiState('idle')
     } else if (!isAudioPlaying) {
-      onStartListening?.();
-      setAiState('listening');
+      onStartListening?.()
+      setAiState('listening')
     }
-  };
+  }
 
   useEffect(() => {
-    if (isAudioPlaying) setAiState('speaking');
-    else if (aiState === 'speaking' && currentText) setAiState('listening');
-  }, [isAudioPlaying]);
+    if (isAudioPlaying) setAiState('speaking')
+    else if (aiState === 'speaking' && currentText) setAiState('listening')
+  }, [isAudioPlaying])
 
   return (
-    <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center p-4">
-      <div
-        className="relative mb-8 cursor-pointer"
-        onClick={handleCircleClick}
-        role="button"
-        aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}
-      >
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="relative mb-8 cursor-pointer" onClick={handleCircleClick} role="button" aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}>
         <motion.div
-          className="from-pink-500 to-violet-600 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br shadow-lg"
-          animate={
-            aiState === 'idle'
-              ? { scale: [1, 1.1, 1] }
-              : aiState === 'speaking'
-                ? { scale: [1, 1.2, 0.8, 1.2, 1] }
-                : {}
-          }
+          className="w-20 h-20 bg-gradient-to-br from-pink-500 to-violet-600 rounded-full flex items-center justify-center shadow-lg"
+          animate={aiState === 'idle' ? { scale: [1, 1.1, 1] } : aiState === 'speaking' ? { scale: [1, 1.2, 0.8, 1.2, 1] } : {}}
           transition={{
             repeat: Infinity,
             ease: 'easeInOut',
@@ -259,10 +228,7 @@ export default function AiTalkingAnimation({
           }}
         />
         {aiState === 'listening' && (
-          <svg
-            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2"
-            viewBox="0 0 100 100"
-          >
+          <svg className="absolute top-1/2 left-1/2 w-24 h-24 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 100 100">
             <motion.circle
               cx="50"
               cy="50"
@@ -282,13 +248,9 @@ export default function AiTalkingAnimation({
           </svg>
         )}
       </div>
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <p className="text-gray-800 font-mono text-lg" aria-live="polite">
-          {aiState === 'listening'
-            ? 'Listening...'
-            : aiState === 'speaking'
-              ? animatedCurrentText
-              : displayedText}
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <p className="text-gray-800 text-lg font-mono" aria-live="polite">
+          {aiState === 'listening' ? 'Listening...' : aiState === 'speaking' ? animatedCurrentText : displayedText}
         </p>
         {aiState === 'idle' && (
           <motion.div
@@ -300,12 +262,12 @@ export default function AiTalkingAnimation({
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="bg-violet-600 mt-2 h-5 w-2"
+            className="h-5 w-2 bg-violet-600 mt-2"
           />
         )}
       </div>
     </div>
-  );
+  )
 }
 ```
 
