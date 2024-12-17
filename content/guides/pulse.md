@@ -287,7 +287,7 @@ export default function AiTalkingAnimation({
 
 TODO - describe
 
-## Generating a Signed URL for ElevenLabs Conversationss
+## Generating a Signed URL for ElevenLabs Conversations
 
 To create a secure access between user and AI (powered by ElevenLabs), create a new file named `route.ts` in the `app/api/i` directory with the following code:
 
