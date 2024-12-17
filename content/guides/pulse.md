@@ -304,7 +304,7 @@ export default function AiTalkingAnimation({
 
 TODO - describe
 
-## Generating a Signed URL for ElevenLabs Conversations
+## Generate a Signed URL for private conversations with ElevenLabs
 
 To create a secure access between user and AI (powered by ElevenLabs), create a new file named `route.ts` in the `app/api/i` directory with the following code:
 
@@ -343,7 +343,7 @@ export async function POST(request: Request) {
 
 The code above defines an API route that generates a signed URL using ElevenLabs API. You will want to use signed URL instead of connecting to a fixed point server so as to allow connection to your personalized, private agents created in ElevenLabs.
 
-## Managing Conversations in Postgres
+## Sync Conversations to a Postgres database
 
 Create a file named `route.ts` in the `app/api/c` directory with the following code:
 
@@ -403,17 +403,14 @@ The code above defines two endpoint handlers on `/api/c`:
 ```tsx
 'use client';
 
-import Message from '@/components/Message';
-import { type Role, useConversation } from '@11labs/react';
+import { toast } from 'sonner';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { toast } from 'sonner';
+import { type Role, useConversation } from '@11labs/react';
 
 export default function () {
   const { slug } = useParams();
   const [currentText, setCurrentText] = useState('');
-  const [messages, setMessages] = useState<any[]>([]);
-  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
   const loadConversation = () => {
     fetch(`/api/c?id=${slug}`)
       .then((res) => res.json())
@@ -491,7 +488,7 @@ export default function () {
 }
 ```
 
-```tsx ins={4}
+```tsx ins={4,10-15}
 'use client';
 
 // ... Existing imports ...
@@ -511,6 +508,50 @@ export default function () {
   );
 }
 ```
+
+TODO
+
+```tsx ins={4,8,9,13-34}
+'use client';
+
+// ... Existing imports ...
+import Message from '@/components/Message';
+
+export default function () {
+  // ... Existing code ...
+  const [messages, setMessages] = useState<any[]>([]);
+  const [isTranscriptOpen, setIsTranscriptOpen] = useState(false);
+  return (
+    <>
+      {/* Existing code */}
+      {messages.length > 0 && (
+        <button className="text-sm fixed top-2 right-4 underline" onClick={() => setIsTranscriptOpen(!isTranscriptOpen)}>
+          Show Transcript
+        </button>
+      )}
+      {isTranscriptOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white text-black p-4 rounded shadow-lg max-w-[90%] max-h-[90%] overflow-y-scroll">
+            <div className="flex flex-row items-center justify-between">
+              <span>Transcript</span>
+              <button onClick={() => setIsTranscriptOpen(false)}>
+                <X />
+              </button>
+            </div>
+            <div className="border-t py-4 mt-4 flex flex-col gap-y-4">
+              {messages.map((conversationItem) => (
+                <Message key={conversationItem.id} conversationItem={conversationItem} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+```
+
+TODO
 
 ## Deploy to Vercel
 
