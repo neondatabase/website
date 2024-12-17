@@ -85,7 +85,7 @@ Neon pricing plans include allowances for compute, storage, and projects. For de
 
 ## Changing your pricing plan
 
-Changing your Neon pricing plan involves the following steps:
+Changing the Neon pricing plan for an Azure subscription involves the following steps:
 
 1. [Creating a new Neon resource](#create-a-neon-resource) with the desired pricing plan.  
 2. Opening a [support ticket](https://console.neon.tech/app/projects?modal=support) to request transferring your existing Neon projects to the new Neon resource. The Neon support team will transfer your projects from the "old" Neon organization to the new one. If you're a Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`. 
