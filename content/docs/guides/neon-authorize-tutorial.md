@@ -94,7 +94,8 @@ export async function getTodos(): Promise<Array<Todo>> {
 
   // WHERE filter is optional because of RLS. But we send it anyway for
   // performance reasons.
-  return db.$withAuth(authToken)
+  return db
+    .$withAuth(authToken)
     .select()
     .from(schema.todos)
     .where(eq(schema.todos.userId, sql`auth.user_id()`))
@@ -170,7 +171,8 @@ export async function getTodos(): Promise<Array<Todo>> {
   const authToken = await getToken();
   const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
-  const todos = await db.$withAuth(authToken)
+  const todos = await db
+    .$withAuth(authToken)
     .select()
     .from(schema.todos)
     .where(eq(schema.todos.userId, schema.todos.userId)) // Woops // [!code highlight]
@@ -205,7 +207,8 @@ export async function getTodos(): Promise<Array<Todo>> {
   const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
   // WHERE filter is optional because of RLS. But we send it anyway for
   // performance reasons.
-  return db.$withAuth(authToken)
+  return db
+    .$withAuth(authToken)
     .select()
     .from(schema.todos)
     .where(eq(schema.todos.userId, sql`auth.user_id()`))
