@@ -39,18 +39,18 @@ Once that is done, move into the project directory and install the necessary dep
 
 ```shell
 cd pulse
-npm add @11labs/react @neondatabase/serverless motion framer-motion react-feather sonner
-npm add -D tsx
+npm install @11labs/react @neondatabase/serverless motion framer-motion react-feather sonner
+npm install -D tsx
 ```
 
 The libraries installed include:
 
-- `@11labs/react`: A React library to interact with [ElevenLabs API](https://elevenlabs.io/api).
-- `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
-- `motion`: A library to create animations in React applications.
 - `framer-motion`: A library for animations in React.
 - `react-feather`: A collection of open-source icons for React.
+- `motion`: A library to create animations in React applications.
 - `sonner`: A notification library for React to display toast notifications.
+- `@11labs/react`: A React library to interact with [ElevenLabs API](https://elevenlabs.io/api).
+- `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
 
 The development-specific libraries include:
 
@@ -400,6 +400,8 @@ The code above defines two endpoint handlers on `/api/c`:
 
 ## Frontend
 
+Create a file named `page.tsx` in the `app/c/[slug]` directory with the following code:
+
 ```tsx
 'use client';
 
@@ -489,6 +491,16 @@ export default function () {
 }
 ```
 
+The code above does the following:
+
+- Defines a `loadConversation` function which calls the `/api/c` route to fetch the conversation history based on the particular slug (i.e. the conversation ID).
+- Uses the `useConversation` hook by ElevenLabs to display the toast when the instance is connected, and to sync the real-time message to Postgres using the `onMessage` callback.
+- Defines a `connectConversation` function that instantiates a private conversation with the agent after obtaining a signed URL using the `/api/i` route.
+- Defines a `disconnectConversation` function that disconnects the ongoing conversation with the agent.
+- Creates a `useEffect` handler which on unmount, ends the ongoing conversation with the agent.
+
+Next, import the `TextAnimation` component which displays different state of the conversation, whether AI is listening or speaking (and what if so).
+
 ```tsx ins={4,10-15}
 'use client';
 
@@ -501,22 +513,22 @@ export default function () {
     <>
       <TextAnimation
         currentText={currentText}
-        isAudioPlaying={conversation.isSpeaking}
         onStopListening={handleStopListening}
         onStartListening={handleStartListening}
+        isAudioPlaying={conversation.isSpeaking}
       />
     </>
   );
 }
 ```
 
-TODO
+Finally, add a `Show Transcript` button that displays the conversation history stored in Neon to the user.
 
 ```tsx ins={4,5,9,13-37}
 'use client';
 
 // ... Existing imports ...
-import { GitHub, X } from 'react-feather';
+import { X } from 'react-feather';
 import Message from '@/components/Message';
 
 export default function () {
@@ -555,7 +567,7 @@ export default function () {
 }
 ```
 
-TODO
+Now, let's move on to deploying the application to Vercel.
 
 ## Deploy to Vercel
 
