@@ -77,23 +77,27 @@ Create a file named `schema.tsx` at the root of your project directory with the 
 ```tsx
 // File: schema.tsx
 
-import { neon } from '@neondatabase/serverless'
-import 'dotenv/config'
+import { neon } from '@neondatabase/serverless';
+import 'dotenv/config';
 
 const createMessagesTable = async () => {
-  if (!process.env.DATABASE_URL) throw new Error(`DATABASE_URL environment variable not found.`)
-  const sql = neon(process.env.DATABASE_URL)
+  if (!process.env.DATABASE_URL) throw new Error(`DATABASE_URL environment variable not found.`);
+  const sql = neon(process.env.DATABASE_URL);
   try {
-    await sql(`CREATE TABLE IF NOT EXISTS messages (created_at SERIAL, id TEXT PRIMARY KEY, session_id TEXT, content_type TEXT, content_transcript TEXT, object TEXT, role TEXT, status TEXT, type TEXT);`)
-    await sql(`CREATE INDEX IF NOT EXISTS idx_session_created_at ON messages (session_id, created_at);`)
-    console.log('Setup schema succesfully.')
+    await sql(
+      `CREATE TABLE IF NOT EXISTS messages (created_at SERIAL, id TEXT PRIMARY KEY, session_id TEXT, content_type TEXT, content_transcript TEXT, object TEXT, role TEXT, status TEXT, type TEXT);`
+    );
+    await sql(
+      `CREATE INDEX IF NOT EXISTS idx_session_created_at ON messages (session_id, created_at);`
+    );
+    console.log('Setup schema succesfully.');
   } catch (error) {
-    console.error(error)
-    console.log('Failed to set up schema.')
+    console.error(error);
+    console.log('Failed to set up schema.');
   }
-}
+};
 
-createMessagesTable()
+createMessagesTable();
 ```
 
 The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
@@ -105,25 +109,25 @@ The code above defines an asynchronous function `createMessagesTable` that conne
 ```tsx
 // File: lib/useTypingEffect.ts
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export const useTypingEffect = (text: string, duration: number = 50, isTypeByLetter = false) => {
-  const [currentPosition, setCurrentPosition] = useState(0)
-  const items = isTypeByLetter ? text.split('') : text.split(' ')
+  const [currentPosition, setCurrentPosition] = useState(0);
+  const items = isTypeByLetter ? text.split('') : text.split(' ');
   useEffect(() => {
-    setCurrentPosition(0)
-  }, [text])
+    setCurrentPosition(0);
+  }, [text]);
   useEffect(() => {
-    if (currentPosition >= items.length) return
+    if (currentPosition >= items.length) return;
     const intervalId = setInterval(() => {
-      setCurrentPosition((prevPosition) => prevPosition + 1)
-    }, duration)
+      setCurrentPosition((prevPosition) => prevPosition + 1);
+    }, duration);
     return () => {
-      clearInterval(intervalId)
-    }
-  }, [currentPosition, items, duration])
-  return items.slice(0, currentPosition).join(isTypeByLetter ? '' : ' ')
-}
+      clearInterval(intervalId);
+    };
+  }, [currentPosition, items, duration]);
+  return items.slice(0, currentPosition).join(isTypeByLetter ? '' : ' ');
+};
 ```
 
 TODO - describe
@@ -133,13 +137,13 @@ TODO - describe
 ```tsx
 // File: lib/types.ts
 
-export type AIState = 'idle' | 'listening' | 'speaking'
+export type AIState = 'idle' | 'listening' | 'speaking';
 
 export interface Props {
-  onStartListening?: () => void
-  onStopListening?: () => void
-  isAudioPlaying?: boolean
-  currentText: string
+  onStartListening?: () => void;
+  onStopListening?: () => void;
+  isAudioPlaying?: boolean;
+  currentText: string;
 }
 ```
 
@@ -150,15 +154,21 @@ TODO - describe
 ```tsx
 // File: components/Message.tsx
 
-import { Cpu, User } from 'react-feather'
+import { Cpu, User } from 'react-feather';
 
-export default function ({ conversationItem }: { conversationItem: { role: string; formatted: { transcript: string } } }) {
+export default function ({
+  conversationItem,
+}: {
+  conversationItem: { role: string; formatted: { transcript: string } };
+}) {
   return (
-    <div className="flex flex-row items-start gap-x-3 flex-wrap max-w-full">
-      <div className="rounded border p-2 max-w-max">{conversationItem.role === 'user' ? <User /> : <Cpu />}</div>
+    <div className="flex max-w-full flex-row flex-wrap items-start gap-x-3">
+      <div className="max-w-max rounded border p-2">
+        {conversationItem.role === 'user' ? <User /> : <Cpu />}
+      </div>
       <div className="flex flex-col gap-y-2">{conversationItem.formatted.transcript}</div>
     </div>
-  )
+  );
 }
 ```
 
@@ -169,39 +179,55 @@ TODO - describe
 ```tsx
 // File: components/TextAnimation.tsx
 
-'use client'
+'use client';
 
-import { AIState, Props } from '@/lib/types'
-import { useTypingEffect } from '@/lib/useTypingEffect'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { AIState, Props } from '@/lib/types';
+import { useTypingEffect } from '@/lib/useTypingEffect';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-export default function AiTalkingAnimation({ onStartListening, onStopListening, isAudioPlaying, currentText }: Props) {
-  const [aiState, setAiState] = useState<AIState>('idle')
-  const animatedCurrentText = useTypingEffect(currentText, 20)
-  const displayedText = useTypingEffect('Click the circle to start the conversation', 20)
+export default function AiTalkingAnimation({
+  onStartListening,
+  onStopListening,
+  isAudioPlaying,
+  currentText,
+}: Props) {
+  const [aiState, setAiState] = useState<AIState>('idle');
+  const animatedCurrentText = useTypingEffect(currentText, 20);
+  const displayedText = useTypingEffect('Click the circle to start the conversation', 20);
 
   const handleCircleClick = () => {
     if (aiState === 'listening' || aiState === 'speaking') {
-      onStopListening?.()
-      setAiState('idle')
+      onStopListening?.();
+      setAiState('idle');
     } else if (!isAudioPlaying) {
-      onStartListening?.()
-      setAiState('listening')
+      onStartListening?.();
+      setAiState('listening');
     }
-  }
+  };
 
   useEffect(() => {
-    if (isAudioPlaying) setAiState('speaking')
-    else if (aiState === 'speaking' && currentText) setAiState('listening')
-  }, [isAudioPlaying])
+    if (isAudioPlaying) setAiState('speaking');
+    else if (aiState === 'speaking' && currentText) setAiState('listening');
+  }, [isAudioPlaying]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="relative mb-8 cursor-pointer" onClick={handleCircleClick} role="button" aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}>
+    <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center p-4">
+      <div
+        className="relative mb-8 cursor-pointer"
+        onClick={handleCircleClick}
+        role="button"
+        aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}
+      >
         <motion.div
-          className="w-20 h-20 bg-gradient-to-br from-pink-500 to-violet-600 rounded-full flex items-center justify-center shadow-lg"
-          animate={aiState === 'idle' ? { scale: [1, 1.1, 1] } : aiState === 'speaking' ? { scale: [1, 1.2, 0.8, 1.2, 1] } : {}}
+          className="from-pink-500 to-violet-600 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br shadow-lg"
+          animate={
+            aiState === 'idle'
+              ? { scale: [1, 1.1, 1] }
+              : aiState === 'speaking'
+                ? { scale: [1, 1.2, 0.8, 1.2, 1] }
+                : {}
+          }
           transition={{
             repeat: Infinity,
             ease: 'easeInOut',
@@ -209,7 +235,10 @@ export default function AiTalkingAnimation({ onStartListening, onStopListening, 
           }}
         />
         {aiState === 'listening' && (
-          <svg className="absolute top-1/2 left-1/2 w-24 h-24 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 100 100">
+          <svg
+            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2"
+            viewBox="0 0 100 100"
+          >
             <motion.circle
               cx="50"
               cy="50"
@@ -229,9 +258,13 @@ export default function AiTalkingAnimation({ onStartListening, onStopListening, 
           </svg>
         )}
       </div>
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <p className="text-gray-800 text-lg font-mono" aria-live="polite">
-          {aiState === 'listening' ? 'Listening...' : aiState === 'speaking' ? animatedCurrentText : displayedText}
+      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <p className="text-gray-800 font-mono text-lg" aria-live="polite">
+          {aiState === 'listening'
+            ? 'Listening...'
+            : aiState === 'speaking'
+              ? animatedCurrentText
+              : displayedText}
         </p>
         {aiState === 'idle' && (
           <motion.div
@@ -243,12 +276,12 @@ export default function AiTalkingAnimation({ onStartListening, onStopListening, 
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="h-5 w-2 bg-violet-600 mt-2"
+            className="bg-violet-600 mt-2 h-5 w-2"
           />
         )}
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -261,32 +294,32 @@ Create a file named ... - TODO
 ```tsx
 // File: app/api/i/route.ts
 
-export const runtime = 'edge'
+export const runtime = 'edge';
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export const fetchCache = 'force-no-store'
+export const fetchCache = 'force-no-store';
 
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const agentId = process.env.AGENT_ID
-  if (!agentId) throw Error('AGENT_ID is not set or received.')
-  const apiKey = process.env.XI_API_KEY
-  if (!apiKey) throw Error('XI_API_KEY is not set or received.')
+  const agentId = process.env.AGENT_ID;
+  if (!agentId) throw Error('AGENT_ID is not set or received.');
+  const apiKey = process.env.XI_API_KEY;
+  if (!apiKey) throw Error('XI_API_KEY is not set or received.');
   try {
-    const apiUrl = new URL('https://api.elevenlabs.io/v1/convai/conversation/get_signed_url')
-    apiUrl.searchParams.set('agent_id', agentId)
+    const apiUrl = new URL('https://api.elevenlabs.io/v1/convai/conversation/get_signed_url');
+    apiUrl.searchParams.set('agent_id', agentId);
     const response = await fetch(apiUrl.toString(), {
       headers: { 'xi-api-key': apiKey },
-    })
-    if (!response.ok) throw new Error(response.statusText)
-    const data = await response.json()
-    return NextResponse.json({ apiKey: data.signed_url })
+    });
+    if (!response.ok) throw new Error(response.statusText);
+    const data = await response.json();
+    return NextResponse.json({ apiKey: data.signed_url });
   } catch (error) {
     // @ts-ignore
-    const message = error.message || error.toString()
-    return NextResponse.json({ error: message }, { status: 500 })
+    const message = error.message || error.toString();
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 ```
@@ -300,42 +333,45 @@ Create a file named ... - TODO
 ```tsx
 // File: app/api/c/route.ts
 
-export const runtime = 'edge'
+export const runtime = 'edge';
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export const fetchCache = 'force-no-store'
+export const fetchCache = 'force-no-store';
 
-import { neon, neonConfig } from '@neondatabase/serverless'
-import { NextResponse } from 'next/server'
+import { neon, neonConfig } from '@neondatabase/serverless';
+import { NextResponse } from 'next/server';
 
-neonConfig.poolQueryViaFetch = true
+neonConfig.poolQueryViaFetch = true;
 
 export async function POST(request: Request) {
-  const { id, item } = await request.json()
-  if (!id || !item || !process.env.DATABASE_URL) return NextResponse.json({}, { status: 400 })
-  const sql = neon(process.env.DATABASE_URL)
-  const rows = await sql('SELECT COUNT(*) from messages WHERE session_id = $1', [id])
-  await sql('INSERT INTO messages (created_at, id, session_id, content_type, content_transcript, object, role, status, type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT DO NOTHING', [
-    rows[0].count,
-    item.id,
-    id,
-    item.content[0].type,
-    item.content[0].transcript,
-    item.object,
-    item.role,
-    item.status,
-    item.type,
-  ])
-  return NextResponse.json({})
+  const { id, item } = await request.json();
+  if (!id || !item || !process.env.DATABASE_URL) return NextResponse.json({}, { status: 400 });
+  const sql = neon(process.env.DATABASE_URL);
+  const rows = await sql('SELECT COUNT(*) from messages WHERE session_id = $1', [id]);
+  await sql(
+    'INSERT INTO messages (created_at, id, session_id, content_type, content_transcript, object, role, status, type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT DO NOTHING',
+    [
+      rows[0].count,
+      item.id,
+      id,
+      item.content[0].type,
+      item.content[0].transcript,
+      item.object,
+      item.role,
+      item.status,
+      item.type,
+    ]
+  );
+  return NextResponse.json({});
 }
 
 export async function GET(request: Request) {
-  const id = new URL(request.url).searchParams.get('id')
-  if (!id || !process.env.DATABASE_URL) return NextResponse.json([])
-  const sql = neon(process.env.DATABASE_URL)
-  const rows = await sql('SELECT * from messages WHERE session_id = $1', [id])
-  return NextResponse.json(rows)
+  const id = new URL(request.url).searchParams.get('id');
+  if (!id || !process.env.DATABASE_URL) return NextResponse.json([]);
+  const sql = neon(process.env.DATABASE_URL);
+  const rows = await sql('SELECT * from messages WHERE session_id = $1', [id]);
+  return NextResponse.json(rows);
 }
 ```
 
