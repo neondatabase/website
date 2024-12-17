@@ -39,13 +39,13 @@ Once that is done, move into the project directory and install the necessary dep
 
 ```shell
 cd pulse
-pnpm add @11labs/client @neondatabase/serverless motion framer-motion react-feather sonner
+pnpm add @11labs/react @neondatabase/serverless motion framer-motion react-feather sonner
 pnpm add -D tsx
 ```
 
 The libraries installed include:
 
-- `@11labs/client`: A client library to interact with [ElevenLabs API](https://elevenlabs.io/api).
+- `@11labs/react`: A React library to interact with [ElevenLabs API](https://elevenlabs.io/api).
 - `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
 - `motion`: A library to create animations in React applications.
 - `framer-motion`: A library for animations in React.
