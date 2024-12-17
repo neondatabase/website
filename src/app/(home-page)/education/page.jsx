@@ -33,4 +33,4 @@ const EducationPage = () => (
 
 export default EducationPage;
 
-export const revalidate = 60;
+export const revalidate = false;

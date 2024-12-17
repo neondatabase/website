@@ -33,4 +33,4 @@ const PgtPage = () => (
 
 export default PgtPage;
 
-export const revalidate = 60;
+export const revalidate = false;

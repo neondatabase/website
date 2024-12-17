@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2024-12-01T21:48:07.695Z'
+updatedOn: '2024-12-17T16:08:33.021Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -34,8 +34,8 @@ If your compute was idle or there has not been much activity, graphs may display
 
 All time values displayed in graphs are in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
-<Admonition type="note">
-The values and plotted lines in your graphs display `0` during periods when your compute is inactive. For example, **RAM**, **CPU**, and **Database size** values lines go to `0` when a compute suspends due to inactivity. The information displayed when hovering over a graph will indicate that the endpoint is inactive, meaning there was no activity on the compute. Inactive periods are also represented in a graph by a background with a diagonal line pattern.
+<Admonition type="note" title="Endpoint Inactive: What does it mean?">
+The values and plotted lines in your graphs will drop to `0` when your compute is inactive because a compute must be active to report data. These inactive periods are also shown as a diagonal line pattern in the graph.
 </Admonition>
 
 ### RAM

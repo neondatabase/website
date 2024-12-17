@@ -3,7 +3,7 @@ title: Use Neon with Cloudflare Hyperdrive
 subtitle: Connect Cloudflare Hyperdrive to your Neon Postgres database for faster
   queries
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.648Z'
+updatedOn: '2024-12-16T18:24:29.546Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.
@@ -36,9 +36,9 @@ To follow along with this guide, you require:
 
    ```sql
    CREATE TABLE books_to_read (
-       id SERIAL PRIMARY KEY,
-       title TEXT,
-       author TEXT
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    author TEXT
    );
    ```
 
@@ -58,7 +58,7 @@ To follow along with this guide, you require:
 Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
 ```
 
 Keep your connection string handy for later use.
@@ -83,7 +83,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ type "Hello World" Worker
 │
 ├ Do you want to use TypeScript?
-│ no typescript
+│ Yes typescript
 ```
 
 When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to the Cloudflare Workers platform.
@@ -91,18 +91,33 @@ When asked if you want to deploy your application, select `no`. We'll develop an
 The `create-cloudflare` CLI also installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications. To emulate the Node environment in the Workers runtime, we need to add the following entry to the `wrangler.toml` file.
 
 ```toml
-node_compat=true
+#:schema node_modules/wrangler/config-schema.json
+name = "with-hyperdrive"
+main = "src/index.ts"
+compatibility_date = "2024-12-05"
+compatibility_flags = ["nodejs_compat"]
 ```
 
 ### Implement the Worker script
 
-We'll use the `node-postgres` library to connect to the Postgres database (directly to Neon first, later we will connect to the Hyperdrive service), so you need to install it as a dependency. Navigate to the project directory and run the following command:
+Navigate to the project directory and run the following command:
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js"]}>
 
 ```bash
 npm install pg
+npm install -D @types/pg
 ```
 
+```bash
+npm install postgres
+```
+
+</CodeTabs>
+
 Now, you can update the `src/index.js` file in the project directory with the following code:
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js"]}>
 
 ```javascript
 import pkg from 'pg';
@@ -113,11 +128,25 @@ export default {
   async fetch(request, env, ctx) {
     const client = new Client({ connectionString: env.DATABASE_URL });
     await client.connect();
-    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    const { rows } = await client.query('SELECT * FROM books_to_read');
     return new Response(JSON.stringify(rows));
   },
 };
 ```
+
+```javascript
+import postgres from 'postgres';
+
+export default {
+  async fetch(request, env, ctx) {
+    const sql = postgres(env.DATABASE_URL);
+    const rows = await sql`SELECT * FROM books_to_read`;
+    return new Response(JSON.stringify(rows));
+  },
+};
+```
+
+</CodeTabs>
 
 The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.
 
@@ -167,6 +196,8 @@ id = $id-from-previous-step
 
 Now, you can update the `src/index.js` file in the project directory to query the Neon database, through the Hyperdrive service.
 
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js"]}>
+
 ```javascript
 import pkg from 'pg';
 
@@ -174,14 +205,27 @@ const { Client } = pkg;
 
 export default {
   async fetch(request, env, ctx) {
-    // We replace the direct database connection with the Hyperdrive service
     const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
     await client.connect();
-    const { rows } = await client.query('SELECT * FROM books_to_read;');
+    const { rows } = await client.query('SELECT * FROM books_to_read');
     return new Response(JSON.stringify(rows));
   },
 };
 ```
+
+```javascript
+import postgres from 'postgres';
+
+export default {
+  async fetch(request, env, ctx) {
+    const sql = postgres(env.HYPERDRIVE.connectionString);
+    const rows = await sql`SELECT * FROM books_to_read`;
+    return new Response(JSON.stringify(rows));
+  },
+};
+```
+
+</CodeTabs>
 
 ### Deploy the updated Worker
 
@@ -203,7 +247,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/neon-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-hyperdrive" description="Demonstrates using Cloudflare's Hyperdrive to access your Neon database from Cloudflare Workers" icon="github">Neon + Cloudflare Hyperdrive</a>
 
 </DetailIconCards>
 
