@@ -58,7 +58,7 @@ The development-specific libraries include:
 
 - `tsx`: To execute and rebuild TypeScript efficiently.
 
-## Setting Up a Serverless Postgres
+## Provision a Serverless Postgres
 
 To set up a serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
 
@@ -69,6 +69,26 @@ postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?ssl
 Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your specific details.
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
+
+## Create an AI Agent with ElevenLabs
+
+To create a customizable agent, go to ElevenLabs' [AI Agents](https://elevenlabs.io/app/conversational-ai) and then click on `Create an AI agent` button.
+
+![](/guides/images/pulse/agent-1.png)
+
+Next, give it a personalized name and select the kind of Agent you would want. For demonstration purposes, let's start with a `Blank template`.
+
+![](/guides/images/pulse/agent-2.png)
+
+Next, copy the Agent ID displayed just below the customized name of your agent (here, `Custom`). You will use this Agent ID as the `AGENT_ID` environment variable in your application.
+
+![](/guides/images/pulse/agent-3.png)
+
+Next, go to `Advanced > Client Events` in your Agent settings, and add two events named `agent_response` and `user_transcript`.
+
+![](/guides/images/pulse/agent-4.png)
+
+Finally, go to [API Keys](https://elevenlabs.io/app/settings/api-keys), create an API key and use the value obtained as `XI_API_KEY` enviroment variable in your application.
 
 ## Database Schema Setup
 
