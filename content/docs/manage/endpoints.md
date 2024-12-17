@@ -148,7 +148,7 @@ Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/
 </Admonition>
 
 | Compute Size (CU) | vCPU | RAM    | LFC size | max_connections |
-| ------------------| ---- | ------ | -------- | --------------- |
+| ----------------- | ---- | ------ | -------- | --------------- |
 | 0.25              | 0.25 | 1 GB   | 0.8 GB   | 112             |
 | 0.50              | 0.50 | 2 GB   | 1.6 GB   | 225             |
 | 1                 | 1    | 4 GB   | 3.2 GB   | 450             |
