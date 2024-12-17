@@ -525,20 +525,23 @@ export default function () {
     <>
       {/* Existing code */}
       {messages.length > 0 && (
-        <button className="text-sm fixed top-2 right-4 underline" onClick={() => setIsTranscriptOpen(!isTranscriptOpen)}>
+        <button
+          className="fixed right-4 top-2 text-sm underline"
+          onClick={() => setIsTranscriptOpen(!isTranscriptOpen)}
+        >
           Show Transcript
         </button>
       )}
       {isTranscriptOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white text-black p-4 rounded shadow-lg max-w-[90%] max-h-[90%] overflow-y-scroll">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="max-h-[90%] max-w-[90%] overflow-y-scroll rounded bg-white p-4 text-black shadow-lg">
             <div className="flex flex-row items-center justify-between">
               <span>Transcript</span>
               <button onClick={() => setIsTranscriptOpen(false)}>
                 <X />
               </button>
             </div>
-            <div className="border-t py-4 mt-4 flex flex-col gap-y-4">
+            <div className="mt-4 flex flex-col gap-y-4 border-t py-4">
               {messages.map((conversationItem) => (
                 <Message key={conversationItem.id} conversationItem={conversationItem} />
               ))}
