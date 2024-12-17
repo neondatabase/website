@@ -89,6 +89,58 @@ neon branch sd dev/alex@0/123456 --db people
 
 To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/reference/cli-branches#schema-diff) for full documentation of the command.
 
+### Using the Neon API
+
+The `compare_schema` endpoint lets you compare schemas between Neon branches programmatically and track schema changes. The response highlights differences in a `diff` format, making it useful for automating schema migrations and integrating schema checks into CI/CD workflows.
+
+Another use case for the this API is AI agents, which automate workflows like environment setup and running schema migrations. Th`compare_schema` endpoint API enables these agents to retrieve schema differences programmatically by comparing two branches.
+
+To compare schemas between two branches, you can use a curl command similar to the following:
+
+```bash
+url -X GET \
+  "https://console.neon.tech/api/v2/projects/wispy-butterfly-25042691/branches/br-rough-boat-a54bs9yb/compare_schema" \
+  -G \
+  --data-urlencode "base_branch_id=br-royal-star-a54kykl2" \
+  --data-urlencode "db_name=neondb" \
+  -H "accept: application/json" \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
+```
+
+| Parameter        | Description                                | Required | Example                    |
+|------------------|--------------------------------------------|----------|----------------------------|
+| `<project_id>`   | The ID of your Neon project.              | Yes      | `wispy-butterfly-25042691` |
+| `<branch_id>`    | The ID of the target branch to compare.   | Yes      | `br-rough-boat-a54bs9yb`   |
+| `base_branch_id` | The ID of the base branch for comparison. | Yes      | `br-royal-star-a54kykl2`   |
+| `db_name`        | The name of the database in the target branch. | Yes      | `neondb`                   |
+| `Authorization`  | Bearer token for API access.              | Yes      | `$NEON_API_KEY`            |
+
+<Admonition type="note">
+The `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read.
+</Admonition>
+
+Here’s an example diff for the `neondb` database after comparing `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`, where a new column was added to the target branch.
+
+```diff
+--- a/neondb
++++ b/neondb
+@@ -27,7 +27,8 @@
+ CREATE TABLE public.playing_with_neon (
+     id integer NOT NULL,
+     name text NOT NULL,
+-    value real
++    value real,
++    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+ );
+```
+
+**Response explanation:**
+
+- `-` (minus): Lines that were removed from the base branch schema.
+- `+` (plus): Lines that were added in the target branch schema.
+
+In the example above, the `created_at` column was added to the `public.playing_with_neon` table.
+
 ### Understanding the Output
 
 - **+ Green Highlight**: Indicates additions or new elements in the schema.
