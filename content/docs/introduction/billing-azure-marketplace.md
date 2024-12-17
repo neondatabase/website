@@ -85,11 +85,17 @@ Neon pricing plans include allowances for compute, storage, and projects. For de
 
 ## Changing your pricing plan
 
-Changing your Neon pricing plan requires [creating a new Neon Resource](#create-a-neon-resource) with the desired pricing plan and opening a [support ticket](https://console.neon.tech/app/projects?modal=support) with Neon to have your existing Neon projects transferred to the new Neon Resource — creating a Neon Resources creates an Organization in Neon. The Neon Support team will transfer your Neon projects from your existing Neon Organization to your new Neon Organization. Afterward, you can delete your old Neon resource. If your old resource was on a paid plan, deleting it will stop billing.
+Changing your Neon pricing plan involves the following steps:
 
-<Admonition type="important">
-Deleting a Neon resource from Azure removes the Neon Organization and all Neon projects and data associated with that resource. When changing a Neon plan, do not delete your old Neon resource from Azure before you have verified that your Neon projects and data have transferred successfully to the Neon Organization associated with your new Neon resource.
+1. [Create a new Neon resource](#create-a-neon-resource) with the desired pricing plan.  
+2. Open a [support ticket](https://console.neon.tech/app/projects?modal=support) to request transferring your existing Neon projects to the new Neon resource. If you're a Free Tier user upgrading to a paid plan and can't open a support ticket, email Neon support at `support@neon.tech`.  
+3. The Neon support team will transfer your projects from the old Neon organization to the new one. Once the transfer is complete, you can delete your old Neon resource. If the old resource was on a paid plan, deleting it will stop billing.
+
+<Admonition type="important" title="Do not delete your old Neon resource until the transfer is completed">
+Deleting a Neon resource from Azure removes the Neon organization and all associated projects and data. Before deleting your old resource, ensure your projects and data have been successfully transferred to the new organization.
 </Admonition>
+
+Alternatively, you can perform the migration to the new Neon resource yourself. First, create a new Neon resource as described above. This will create a new organization in Neon. Add a Neon project to the new organization, then migrate your data from the project in your old organization to the project in the new organization using `pg_dump` and `pg_restore`. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions.
 
 ## Enterprise Plan
 
