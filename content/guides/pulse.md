@@ -393,7 +393,7 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase-labs/pulse" description="A Real-Time AI Voice Assistant" icon="github">Pulse</a>
+<a target="_blank" href="https://github.com/neondatabase-labs/pulse" description="A Real-Time AI Voice Assistant" icon="github">Pulse</a>
 
 </DetailIconCards>
 
