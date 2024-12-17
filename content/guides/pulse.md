@@ -22,7 +22,7 @@ To follow along this guide, you will need the following:
 Let’s get started by creating a new Next.js project with the following command:
 
 ```shell shouldWrap
-pnpx create-next-app@latest pulse
+npx create-next-app@latest pulse
 ```
 
 When prompted, choose:
@@ -39,8 +39,8 @@ Once that is done, move into the project directory and install the necessary dep
 
 ```shell
 cd pulse
-pnpm add @11labs/react @neondatabase/serverless motion framer-motion react-feather sonner
-pnpm add -D tsx
+npm add @11labs/react @neondatabase/serverless motion framer-motion react-feather sonner
+npm add -D tsx
 ```
 
 The libraries installed include:
@@ -119,6 +119,12 @@ createMessagesTable();
 ```
 
 The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
+
+To run the migrations, execute the following command:
+
+```
+npx tsx schema.tsx
+```
 
 ## TODO
 
