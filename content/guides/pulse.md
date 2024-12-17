@@ -511,10 +511,11 @@ export default function () {
 
 TODO
 
-```tsx ins={4,8,9,13-34}
+```tsx ins={4,5,9,10,14-38}
 'use client';
 
 // ... Existing imports ...
+import { GitHub, X } from 'react-feather';
 import Message from '@/components/Message';
 
 export default function () {
