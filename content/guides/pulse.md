@@ -128,9 +128,11 @@ npx tsx schema.tsx
 
 If it runs succesfully, you should see `Setup schema succesfully.` in the terminal.
 
-## TODO
+## Build Reusable React Components and Hooks
 
-### Typing Effect
+### 1. Typing Effect Animation
+
+To enhance the user experience by simulating real-time interactions, implement a typing effect in the UI to render AI responses incrementally. Create a file named `useTypingEffect.ts` in the `components` directory with the following code:
 
 ```tsx
 // File: components/useTypingEffect.ts
@@ -156,9 +158,11 @@ export const useTypingEffect = (text: string, duration: number = 50, isTypeByLet
 };
 ```
 
-TODO - describe
+The provided code exports a custom React hook called `useTypingEffect`. This hook simulates a typing effect for a specified text over a given duration, enhancing the user interface by rendering text incrementally.
 
-### Message
+### 2. Conversation Message
+
+To render each message in the conversation history, you need to dynamically indicate whether the message is from the User or the AI. Create a file named `Message.tsx` in the `components` directory with the following code:
 
 ```tsx
 // File: components/Message.tsx
@@ -181,9 +185,11 @@ export default function ({
 }
 ```
 
-TODO - describe
+The code above exports a React component that renders a message. It conditionally displays a `Cpu` icon for messages from the AI and a `User` icon for messages from the user, along with the message content.
 
-### TextAnimation
+### 3. Various States During AI Interaction
+
+Create a file named `TextAnimation.tsx` in the `components` directory with the following code:
 
 ```tsx
 // File: components/TextAnimation.tsx
@@ -231,9 +237,9 @@ export default function AiTalkingAnimation({
   return (
     <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center p-4">
       <div
-        className="relative mb-8 cursor-pointer"
-        onClick={handleCircleClick}
         role="button"
+        onClick={handleCircleClick}
+        className="relative mb-8 cursor-pointer"
         aria-label={aiState === 'listening' ? 'Stop listening' : 'Start listening'}
       >
         <motion.div
@@ -253,8 +259,8 @@ export default function AiTalkingAnimation({
         />
         {aiState === 'listening' && (
           <svg
-            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2"
             viewBox="0 0 100 100"
+            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2"
           >
             <motion.circle
               cx="50"
@@ -302,7 +308,7 @@ export default function AiTalkingAnimation({
 }
 ```
 
-TODO - describe
+The code above exports a React component that creates an interactive UI for the AI voice assistant. It utilizes the `useTypingEffect` hook to simulate a typing effect for the AI's responses and displays different states of interaction, such as "idle," "listening," and "speaking." The component also includes a clickable circle that toggles between starting and stopping the listening state, providing visual feedback through animations.
 
 ## Generate a Signed URL for private conversations with ElevenLabs
 
@@ -398,11 +404,13 @@ The code above defines two endpoint handlers on `/api/c`:
 
 - A `GET` endpoint that retrieves all messages associated with a specific session ID. It extracts the session ID from the request URL and queries the `messages` table, returning the results as a JSON response. If the session ID is not provided, it returns an empty array.
 
-## Frontend
+## Create the UI for Starting Conversations and Synchronizing Chat History
 
 Create a file named `page.tsx` in the `app/c/[slug]` directory with the following code:
 
 ```tsx
+// File: app/c/[slug]/page.tsx
+
 'use client';
 
 import { toast } from 'sonner';
@@ -587,6 +595,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-TODO - In this guide, you learned how to build a real-time AI voice assistant using ElevenLabs and store conversations in a Postgres database.
+In this guide, you learned how to build a real-time AI voice assistant using ElevenLabs and Next.js, integrating it with a Postgres database to store and retrieve conversation histories. You learnt the process of setting up a serverless database, creating a customizable AI agent, and implementing a user-friendly interface with animations and message handling. By the end, you gained hands-on experience in connecting various technologies to create a fully functional AI voice assistant application.
 
 <NeedHelp />
