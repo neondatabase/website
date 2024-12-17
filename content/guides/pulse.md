@@ -22,7 +22,7 @@ To follow along this guide, you will need the following:
 Let’s get started by creating a new Next.js project with the following command:
 
 ```shell shouldWrap
-npx create-next-app@latest pulse
+pnpx create-next-app@latest pulse
 ```
 
 When prompted, choose:
@@ -32,13 +32,31 @@ When prompted, choose:
 - `Yes` when prompted to use Tailwind CSS.
 - `No` when prompted to use `src/` directory.
 - `Yes` when prompted to use App Router.
+- `No` when prompted to use Turbopack for `next dev`.
 - `No` when prompted to customize the default import alias (`@/*`).
 
-Once that is done, move into the project directory with the following command:
+Once that is done, move into the project directory and install the necessary dependencies with the following command:
 
 ```shell
 cd pulse
+pnpm add @11labs/client @neondatabase/serverless motion framer-motion react-feather sonner tailwind-merge tailwind-animate
+pnpm add -D tsx
 ```
+
+The libraries installed include:
+
+- `@11labs/client`: A client library to interact with [ElevenLabs API](https://elevenlabs.io/api).
+- `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
+- `motion`: A library to create animations in React applications.
+- `framer-motion`: A library for animations in React.
+- `react-feather`: A collection of open-source icons for React.
+- `sonner`: A notification library for React to display toast notifications.
+- `tailwind-merge`: A utility for merging Tailwind CSS class names.
+- `tailwind-animate`: A library that provides pre-defined animations for Tailwind CSS.
+
+The development-specific libraries include:
+
+- `tsx`: To execute and rebuild TypeScript efficiently.
 
 ## Setting Up a Serverless Postgres
 
@@ -51,6 +69,30 @@ postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?ssl
 Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your specific details.
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
+
+## TODO - Schema
+
+```tsx
+// File: schema.tsx
+
+import { neon } from '@neondatabase/serverless'
+import 'dotenv/config'
+
+const createMessagesTable = async () => {
+  if (!process.env.DATABASE_URL) throw new Error(`DATABASE_URL environment variable not found.`)
+  const sql = neon(process.env.DATABASE_URL)
+  try {
+    await sql(`CREATE TABLE IF NOT EXISTS messages (created_at SERIAL, id TEXT PRIMARY KEY, session_id TEXT, content_type TEXT, content_transcript TEXT, object TEXT, role TEXT, status TEXT, type TEXT);`)
+    await sql(`CREATE INDEX IF NOT EXISTS idx_session_created_at ON messages (session_id, created_at);`)
+    console.log('Setup schema succesfully.')
+  } catch (error) {
+    console.error(error)
+    console.log('Failed to set up schema.')
+  }
+}
+
+createMessagesTable()
+```
 
 ## Deploy to Vercel
 
