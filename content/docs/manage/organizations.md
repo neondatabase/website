@@ -53,7 +53,7 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
     You'll be prompted to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
-  ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
+  ![convert personal account to an organization](/docs/manage/orgs_create_with_billing.png)
   </div>
 </div>
 
