@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2024-12-13T21:17:10.767Z'
 ---
 
-Learn how to manage Neon Organizations using the Neon API, including creating and using organization-specific API keys, creating projects, transferring projects, and retrieving consumption metrics.
+Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
 
 ## Personal vs organization API keys
 
@@ -245,9 +245,7 @@ Example response:
 
 ## Remove member
 
-If using your personal API key, you need to be an admin in the organization to perform this action.
-
-<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
 
 ```bash shouldWrap
 curl --request DELETE \
@@ -296,7 +294,7 @@ Creates invitations for new organization members. Each invited user:
 - If they have an existing Neon account, they automatically join as a member
 - If they don't have an account yet, the email invites them to create one
 
-<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
 
 ```bash shouldWrap
 curl --request POST \
