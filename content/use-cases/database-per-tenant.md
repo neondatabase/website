@@ -8,6 +8,7 @@ image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 
 <UseCaseContext />
 
+<Video name="db-per-user" width={1536} height={864}/>
 <Admonition type="note" title="TL;DR">
 Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
 
