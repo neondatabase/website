@@ -39,7 +39,7 @@ Once that is done, move into the project directory and install the necessary dep
 
 ```shell
 cd pulse
-pnpm add @11labs/client @neondatabase/serverless motion framer-motion react-feather sonner tailwind-merge tailwind-animate
+pnpm add @11labs/client @neondatabase/serverless motion framer-motion react-feather sonner
 pnpm add -D tsx
 ```
 
@@ -51,8 +51,6 @@ The libraries installed include:
 - `framer-motion`: A library for animations in React.
 - `react-feather`: A collection of open-source icons for React.
 - `sonner`: A notification library for React to display toast notifications.
-- `tailwind-merge`: A utility for merging Tailwind CSS class names.
-- `tailwind-animate`: A library that provides pre-defined animations for Tailwind CSS.
 
 The development-specific libraries include:
 
