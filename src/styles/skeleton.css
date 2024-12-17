@@ -23,8 +23,6 @@
 
     &::after {
       @apply white-line dark:black-line absolute inset-0 -translate-x-full content-[''];
-
-      background-image: ;
       animation: shimmer 2s infinite;
     }
   }

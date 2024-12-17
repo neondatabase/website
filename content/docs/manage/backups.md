@@ -1,10 +1,22 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.074Z'
+updatedOn: '2024-12-06T12:16:56.091Z'
 ---
 
-Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>About built-in backups with point-in-time restore</p>
+<p>Creating backups using pg_dump</p>
+<p>How to automate backups with GitHub Actions</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/introduction/point-in-time-restore">Branch reset and restore</a>
+  <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
+</DocsList>
+
+</InfoBlock>
 
 ## Built-in backups with Neon's point-in-time restore feature
 

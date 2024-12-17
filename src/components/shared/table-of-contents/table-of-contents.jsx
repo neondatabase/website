@@ -70,7 +70,7 @@ const TableOfContents = ({ items, isUseCase }) => {
         <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
         <span>On this page</span>
       </h3>
-      <ul className="mt-2.5">
+      <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
           <li key={index}>
             <Item

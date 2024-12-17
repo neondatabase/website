@@ -8,5 +8,3 @@ const HomeLayout = ({ children }) => (
 );
 
 export default HomeLayout;
-
-export const revalidate = 60;

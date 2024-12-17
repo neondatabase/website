@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
-import { aiChatSettings, baseSettings, searchSettings } from 'lib/inkeep-settings';
+import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
 
 import InkeepAIButton from '../inkeep-ai-button';
 import InkeepSearch from '../inkeep-search';
@@ -22,6 +22,7 @@ const InkeepTrigger = ({
   isDarkTheme = false,
   topOffset,
   showAIButton = false,
+  isPostgresPage = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
@@ -71,7 +72,13 @@ const InkeepTrigger = ({
       defaultView: defaultModalView,
       askAILabel: 'Ask Neon AI',
     },
-    searchSettings,
+    searchSettings: {
+      tabSettings: {
+        tabOrderByLabel: isPostgresPage
+          ? ['PostgreSQL Tutorial', 'Neon Docs', 'All']
+          : ['Neon Docs', 'PostgreSQL Tutorial', 'All'],
+      },
+    },
     aiChatSettings,
   };
 
@@ -99,6 +106,7 @@ InkeepTrigger.propTypes = {
   showAIButton: PropTypes.bool,
   isNotFoundPage: PropTypes.bool,
   isDarkTheme: PropTypes.bool,
+  isPostgresPage: PropTypes.bool,
 };
 
 export default InkeepTrigger;

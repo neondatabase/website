@@ -15,7 +15,7 @@ const PricePerf = () => (
         Neon is serverless Postgres: you never pay for compute that's not being actively used.{' '}
         <Link
           className="border-b border-transparent text-green-45 no-underline transition-[border-color] duration-200 ease-in-out hover:border-green-45 sm:break-words"
-          to="/docs/introduction/auto-suspend"
+          to="/docs/introduction/scale-to-zero"
         >
           Scale to zero
         </Link>{' '}

@@ -151,8 +151,8 @@ export default {
             light: caseVariableIcon,
             dark: caseVariableDarkIcon,
           },
-          text: 'Variable Workloads',
-          description: 'Autoscale according to load',
+          text: 'Variable Traffic',
+          description: 'Scale up/down automatically',
           to: LINKS.variableLoad,
         },
         // {

@@ -23,7 +23,8 @@
       "label": "Business",
       "price": "<span>From</span> $700<span>/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
-      "buttonText": "Get started"
+      "buttonText": "Get started",
+      "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }
   },
   "cols": [
@@ -32,45 +33,46 @@
       "feature": "Included"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "Storage"
+        "title": "Storage (monthly)",
+        "subtitle": "GB-month = 1GB of storage for 1 month"
       },
-      "free": "0.5 GiB",
+      "free": "0.5 GB-month",
       "launch": {
-        "title": "10 GiB",
-        "info": "Additional at $1.75 per GB / Archive storage: $0.1 per GB"
+        "title": "10 GB-month",
+        "info": "Additional at $1.75 per GB-month / Archive storage: $0.1 per GB-month"
       },
       "scale": {
-        "title": "50 GiB",
-        "info": "Additional at $1.5 per GB / Archive storage: $0.1 per GB"
+        "title": "50 GB-month",
+        "info": "Additional at $1.5 per GB-month / Archive storage: $0.1 per GB-month"
       },
       "business": {
-        "title": "500 GiB",
-        "info": "Additional at $0.5 per GB / Archive storage: $0.1 per GB"
+        "title": "500 GB-month",
+        "info": "Additional at $0.5 per GB-month / Archive storage: $0.1 per GB-month"
       }
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute hours",
+        "title": "Compute (monthly)",
         "subtitle": "Compute hours = CU size x active hrs"
       },
       "free": {
-        "title": "190 /month",
+        "title": "190 compute hrs",
         "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       "launch": {
-        "title": "300 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "300 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       },
       "scale": {
-        "title": "750 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "750 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       },
       "business": {
-        "title": "1,000 /month",
-        "info": "Additional at $0.16 per compute hour"
+        "title": "1,000 compute hrs",
+        "info": "Additional at $0.16 per compute hr"
       }
     },
     {
@@ -130,8 +132,8 @@
         "info": "8 CU = 8 vCPU, 32 GB RAM"
       },
       "business": {
-        "title": "10 CU",
-        "info": "10 CU = 10 vCPU, 40 GB RAM"
+        "title": "56 CU",
+        "info": "56 CU = 56 vCPU, 224 GB RAM"
       }
     },
     {
@@ -152,17 +154,17 @@
       "free": "Up to 2 CU",
       "launch": "Up to 4 CU",
       "scale": "Up to 8 CU",
-      "business": "Up to 10 CU"
+      "business": "Up to 16 CU"
     },
     {
-      "rows": "2",
+      "rows": "1",
       "feature": {
-        "title": "Autosuspend"
+        "title": "Scale to zero"
       },
-      "free": "Fixed <span>5 minutes</span>",
-      "launch": "Configurable <span>5 min+ or never</span>",
-      "scale": "Configurable <span>1 min+ or never</span>",
-      "business": "Configurable <span>1 min+ or never</span>"
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
     },
     {
       "rows": "1",

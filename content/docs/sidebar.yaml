@@ -40,6 +40,7 @@
             - title: Javascript
               slug: guides/javascript
             - title: Python
+              slug: guides/python
               items:
                 - title: Psycopg
                   slug: guides/python
@@ -205,11 +206,11 @@
               slug: guides/autoscaling-guide
             - title: How the algorithm works
               slug: guides/autoscaling-algorithm
-        - title: Autosuspend
-          slug: introduction/auto-suspend
+        - title: Scale to zero
+          slug: introduction/scale-to-zero
           items:
-            - title: Autosuspend guide
-              slug: guides/auto-suspend-guide
+            - title: Scale to zero guide
+              slug: guides/scale-to-zero-guide
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -350,6 +351,22 @@
           items:
             - title: Backups
               slug: manage/backups
+    - title: Use cases
+      slug: use-cases/use-cases-overview
+      icon: docs
+      items:
+        - title: SaaS apps
+          slug: use-cases/saas-apps
+        - title: Variable traffic
+          slug: use-cases/variable-traffic
+        - title: Database-per-user
+          slug: use-cases/database-per-user
+        - title: AI Agents
+          slug: use-cases/ai-agents
+        - title: Platforms
+          slug: use-cases/platforms
+        - title: Dev/Test
+          slug: use-cases/dev-test
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -379,6 +396,13 @@
           slug: introduction/manage-billing
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
+        - title: Azure Marketplace
+          slug: introduction/billing-azure-marketplace
+          tag: new
+    - title: Neon on Azure
+      slug: manage/azure
+      icon: azure
+      tag: new
 - section: Develop
   items:
     - title: Frameworks
@@ -459,6 +483,8 @@
               slug: guides/neon-authorize
             - title: Tutorial
               slug: guides/neon-authorize-tutorial
+            - title: Drizzle RLS
+              slug: guides/neon-authorize-drizzle
             - title: Troubleshooting
               slug: guides/neon-authorize-troubleshooting
             - title: What's next
@@ -481,6 +507,10 @@
               slug: guides/neon-authorize-azure-ad
             - title: Descope
               slug: guides/neon-authorize-descope
+            - title: Firebase / GCP Identity Platform
+              slug: guides/neon-authorize-firebase-gcp
+            - title: Google Identity
+              slug: guides/neon-authorize-google-identity
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -530,6 +560,9 @@
               slug: serverless/serverless-driver
             - title: AWS Lambda
               slug: guides/aws-lambda
+            - title: Azure Functions
+              slug: https://neon.tech/guides/query-postgres-azure-functions
+              tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
         - section: Query
@@ -576,9 +609,6 @@
               slug: guides/bemi
             - title: ClickHouse
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
-            - title: DoubleCloud
-              slug: guides/logical-replication-clickhouse
-              tag: deprecated
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
             - title: Decodable
@@ -664,18 +694,23 @@
         - title: The pgvector extension
           slug: extensions/pgvector
         - title: AI integrations
+          slug: ai/langchain
           items:
             - title: LangChain
               slug: ai/langchain
             - title: LlamaIndex
               slug: ai/llamaindex
+            - title: Inngest
+              slug: ai/inngest
         - title: Prepare your AI app for production
+          slug: ai/ai-vector-search-optimization
           items:
             - title: Optimize pgvector search
               slug: ai/ai-vector-search-optimization
             - title: Scale with Neon
               slug: ai/ai-scale-with-neon
         - title: AI tools
+          slug: ai/ai-google-colab
           items:
             - title: Google Colab
               slug: ai/ai-google-colab
@@ -740,6 +775,12 @@
       slug: reference/terraform
       tag: community
       icon: management
+    - title: Find your template
+      slug: https://neon.tech/templates
+      icon: languages
+    - title: Examples repo
+      slug: https://github.com/neondatabase/examples
+      icon: cli
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
@@ -811,6 +852,7 @@
           slug: functions/introduction
           items:
             - title: Aggregate functions
+              slug: functions/array_agg
               items:
                 - title: array_agg
                   slug: functions/array_agg
@@ -823,10 +865,12 @@
                 - title: sum
                   slug: functions/sum
             - title: Array functions
+              slug: functions/array_length
               items:
                 - title: array_length
                   slug: functions/array_length
             - title: Date / Time functions
+              slug: functions/age
               items:
                 - title: age
                   slug: functions/age
@@ -839,44 +883,64 @@
                 - title: now
                   slug: functions/now
             - title: JSON functions
+              slug: functions/array_to_json
               items:
                 - title: array_to_json
                   slug: functions/array_to_json
+                - title: json
+                  slug: functions/json
+                  tag: new
                 - title: json_agg
                   slug: functions/json_agg
                 - title: json_array_elements
                   slug: functions/json_array_elements
-                - title: jsonb_array_elements
-                  slug: functions/jsonb_array_elements
                 - title: json_build_object
                   slug: functions/json_build_object
                 - title: json_each
                   slug: functions/json_each
-                - title: jsonb_each
-                  slug: functions/jsonb_each
+                - title: json_exists
+                  slug: functions/json_exists
+                  tag: new
                 - title: json_extract_path
                   slug: functions/json_extract_path
-                - title: jsonb_extract_path
-                  slug: functions/jsonb_extract_path
                 - title: json_extract_path_text
                   slug: functions/json_extract_path_text
-                - title: jsonb_extract_path_text
-                  slug: functions/jsonb_extract_path_text
                 - title: json_object
                   slug: functions/json_object
-                - title: jsonb_object
-                  slug: functions/jsonb_object
                 - title: json_populate_record
                   slug: functions/json_populate_record
-                - title: jsonb_populate_record
-                  slug: functions/jsonb_populate_record
+                - title: json_query
+                  slug: functions/json_query
+                  tag: new
+                - title: json_scalar
+                  slug: functions/json_scalar
+                  tag: new
+                - title: json_serialize
+                  slug: functions/json_serialize
+                  tag: new
+                - title: json_table
+                  slug: functions/json_table
                 - title: json_to_record
                   slug: functions/json_to_record
+                - title: json_value
+                  slug: functions/json_value
+                  tag: new
+                - title: jsonb_array_elements
+                  slug: functions/jsonb_array_elements
+                - title: jsonb_each
+                  slug: functions/jsonb_each
+                - title: jsonb_extract_path
+                  slug: functions/jsonb_extract_path
+                - title: jsonb_extract_path_text
+                  slug: functions/jsonb_extract_path_text
+                - title: jsonb_object
+                  slug: functions/jsonb_object
+                - title: jsonb_populate_record
+                  slug: functions/jsonb_populate_record
                 - title: jsonb_to_record
                   slug: functions/jsonb_to_record
-                - title: JSON_TABLE
-                  slug: functions/json_table
             - title: Window functions
+              slug: functions/dense_rank
               items:
                 - title: dense_rank
                   slug: functions/dense_rank
@@ -887,6 +951,7 @@
                 - title: rank
                   slug: functions/window-rank
             - title: String functions
+              slug: functions/concat
               items:
                 - title: concat
                   slug: functions/concat
@@ -903,6 +968,7 @@
                 - title: trim
                   slug: functions/trim
             - title: Math functions
+              slug: functions/math-abs
               items:
                 - title: abs
                   slug: functions/math-abs

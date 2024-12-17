@@ -33,4 +33,4 @@ const StackOverflowPage = () => (
 
 export default StackOverflowPage;
 
-export const revalidate = 60;
+export const revalidate = false;

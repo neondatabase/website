@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-12-03T11:41:28.738Z'
+updatedOn: '2024-12-12T15:31:10.128Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -80,9 +80,8 @@ To configure an allowlist:
 
 1. Select a project in the Neon Console.
 2. On the Project Dashboard, select **Settings**.
-3. Select **IP Allow**.
-   ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
+3. Select **Network Security**.
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>
