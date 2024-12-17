@@ -70,7 +70,9 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
-## TODO - Schema
+## Database Schema Setup
+
+Create a file named `schema.tsx` at the root of your project directory with the following code:
 
 ```tsx
 // File: schema.tsx
@@ -93,6 +95,8 @@ const createMessagesTable = async () => {
 
 createMessagesTable()
 ```
+
+The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
 
 ## Deploy to Vercel
 
