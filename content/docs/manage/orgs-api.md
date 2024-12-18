@@ -1,12 +1,14 @@
 ---
-title: Manage Organizations using the Neon API
+title: Manage organizations using the Neon API
 enableTableOfContents: true
 updatedOn: '2024-12-17T13:59:40.784Z'
 ---
 
-Learn how to manage Neon Organizations using the Neon API, including creating and using organization-specific API keys, creating projects, transferring projects, and retrieving consumption metrics.
+Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
 
-You can authenticate your API requests using either of these methods:
+## Personal vs organization API keys
+
+You can authorize your API requests using either of these methods:
 
 - **Organization API key**: Automatically scopes all requests to your organization
 - **Personal API key**: Requires including an `org_id` parameter to specify which organization you're working with
@@ -31,34 +33,106 @@ curl --request GET \
 
 Both examples retrieve a list of projects, but notice how the personal API key request includes `org_id=org-example-12345678` to specify which organization's projects to list. With an organization API key, this parameter isn't needed because the key itself is already tied to a specific organization.
 
+### Matrix of operations and key types
+
+Some operations require a personal API key from an organization admin and cannot be performed using organization API keys. These operations are marked with ❌ in the matrix below.
+
+| Action                                                                                    | Personal API Key | Organization API Key |
+| ----------------------------------------------------------------------------------------- | ---------------- | -------------------- |
+| [Create an organization API key](#create-an-organization-api-key)                         | ✅               | ❌                   |
+| [Get a list of organization API keys](#list-organization-api-keys)                        | ✅               | ✅                   |
+| [Revoke an organization API key](#revoke-an-organization-api-key)                         | ✅               | ✅                   |
+| [Get organization details](#get-organization-details)                                     | ✅               | ✅                   |
+| [Get organization members details](#get-details-about-all-members)                        | ✅               | ✅                   |
+| [Get organization member details](#get-details-about-an-individual-member)                | ✅               | ✅                   |
+| [Update the role for an organization member](#update-the-role-for-an-organization-member) | ✅               | ✅                   |
+| [Remove member from the organization](#remove-member-from-the-organization)               | ✅               | ❌                   |
+| [Get organization invitation details](#get-organization-invitation-details)               | ✅               | ✅                   |
+| [Create organization invitations](#create-organization-invitations)                       | ✅               | ❌                   |
+
 ## Finding your org_id
 
 To find your organization's `org_id`, navigate to your Organization's **Settings** page, where you'll find it under the **General information** section. Copy and use this ID in your API requests.
 
 ![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
 
-## Creating API keys
+## Create API keys
 
-Only admins can create API keys for the organization. These keys provide admin-level access to all organization resources, including projects, members, and billing information. These are **user-independent** — they are not tied to a specific user. If any user leaves the organization, including the admin who created the API key, the API key remains active.
+There are two types of organization API keys:
 
-You can also create project-scoped organization API keys, which provide member-level access to a specific project within the organization. This allows for more granular access control when needed.
+- **Organization API keys** — These keys provide admin-level access to all organization resources, including projects, members, and settings
+- **Project-scoped organization API keys** — These keys provide limited, member-level access to specific projects within the organization
 
-<Admonition type="note">Creating any type of API key (organization-wide or project-scoped) requires using a personal API key. Organization API keys cannot be used to create additional keys.</Admonition>
+Only organization admins can create these keys, and the key token is only displayed once at creation time. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
-For detailed instructions on creating and managing organization API keys, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createorgapikey)
 
-## Organization management actions
+## List API keys
 
-The following examples use the **organization API key** for authentication. If you're using a **personal API key**, you'll need to include the `org_id` parameter to specify which organization you're working with.
+Lists all API keys for your organization. The response does not include the actual key tokens, as these are only provided when creating a new key.
 
-### Get organization details
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+```
+
+Example response:
+
+```json
+[
+  {
+    "id": 123456,
+    "name": "my-key-name",
+    "created_at": "2024-01-01T12:00:00Z",
+    "created_by": {
+      "id": "user-abc123de-4567-8fab-9012-3cdef4567890",
+      "name": "John Smith",
+      "image": "https://avatar.example.com/user.jpg"
+    },
+    "last_used_at": "2024-01-01T12:30:00Z",
+    "last_used_from_addr": "192.0.2.1,192.0.2.2"
+  }
+]
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listorgapikeys)
+
+## Revoke an API key
+
+Revokes the specified organization API key. This action cannot be reversed. You can obtain the `key_id` by listing the API keys for your organization.
+
+```bash
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys/{key_id}' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "id": 123456,
+  "name": "my-key-name",
+  "created_at": "2024-01-01T12:00:00Z",
+  "created_by": "user-abc123de-4567-8fab-9012-3cdef4567890",
+  "last_used_at": "2024-01-01T12:30:00Z",
+  "last_used_from_addr": "192.0.2.1,192.0.2.2",
+  "revoked": true
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/revokeorgapikey)
+
+## Get organization details
 
 Retrieves information about your organization, including its name, plan, and creation date.
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/organizations' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
 ```
 
 Example response:
@@ -77,7 +151,7 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganization)
 
-### Get details about all members
+## List members
 
 Lists all members in your organization. Each entry includes:
 
@@ -90,7 +164,7 @@ Lists all members in your organization. Each entry includes:
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
 ```
 
 Example response:
@@ -118,7 +192,7 @@ Example response:
 
 <Admonition type="note">The member ID (`id`) from this response is needed for operations like updating roles or removing members.</Admonition>
 
-### Get details about an individual member
+## Get member details
 
 Retrieves information about a specific member using their member ID (obtained from the [Get all members](#get-details-about-all-members) endpoint).
 
@@ -143,7 +217,7 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationmember)
 
-### Update the role for an organization member
+## Update member role
 
 Changes a member's current role in the organization. If using your personal API key, you need to be an admin in the organization to perform this action. Note: you cannot downgrade the role of the organization's only admin.
 
@@ -153,7 +227,7 @@ curl --request PATCH \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY' \
      --header 'content-type: application/json' \
-     --data '{"role": "admin"}'
+     --data '{"role": "admin"}' | jq
 ```
 
 Example response:
@@ -170,11 +244,9 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateorganizationmember)
 
-### Remove member from the organization
+## Remove member
 
-If using your personal API key, you need to be an admin in the organization to perform this action.
-
-<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
 
 ```bash shouldWrap
 curl --request DELETE \
@@ -185,7 +257,7 @@ curl --request DELETE \
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/removeorganizationmember)
 
-### Get organization invitation details
+## List invitations
 
 Retrieves a list of all pending invitations for the organization.
 
@@ -193,7 +265,7 @@ Retrieves a list of all pending invitations for the organization.
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/organizations/invitations' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
 ```
 
 Example response:
@@ -215,7 +287,7 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationinvitations)
 
-### Create organization invitations
+## Create invitations
 
 Creates invitations for new organization members. Each invited user:
 
@@ -223,7 +295,7 @@ Creates invitations for new organization members. Each invited user:
 - If they have an existing Neon account, they automatically join as a member
 - If they don't have an account yet, the email invites them to create one
 
-<Admonition type="note">Organization API keys are not currently supported with this endpoint. Use your personal API key instead.</Admonition>
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
 
 ```bash shouldWrap
 curl --request POST \
@@ -238,253 +310,7 @@ curl --request POST \
            "role": "member"
          }
        ]
-     }'
+     }' | jq
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/createorganizationinvitations)
-
-## General project actions
-
-These endpoints support both Organization API key and Personal API key authentication. If using a Personal API key, you need to include the `org_id` parameter to specify which organization you're working with.
-
-The following examples use the **Organization API key** method.
-
-### Creating projects
-
-Creates a new project within your organization. You can specify:
-
-- Postgres version
-- Project name (optional)
-- Region (optional)
-
-```bash shouldWrap
-curl --request POST \
-     --url https://console.neon.tech/api/v2/projects \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "project": {
-    "pg_version": 16
-  }
-}
-'
-```
-
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createproject)
-
-### Listing projects
-
-Lists all projects belonging to your organization, with a default limit of 10 projects per return:
-
-```bash
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects?limit=10' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-### Transfer projects
-
-The Project Transfer API allows you to transfer projects from your personal Neon account to a specified organization account. See [Transfer projects via API](/docs/manage/orgs-project-transfer#transfer-projects-via-api) for details.
-
-## Consumption metrics
-
-You can use the Neon API to retrieve three types of consumption metrics for your organization:
-
-<Admonition type="note">
-Some metrics are only available on specific plans. Check the "Plan Availability" column for details.
-</Admonition>
-
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans         |
-
-### Account-level metrics
-
-To get global totals for all projects in the organization `org-ocean-art-12345678`, include the `org_id` in the `GET /consumption/projects` request. We also need to include:
-
-- A start date
-- An end date
-- A level of granularity
-
-In this case, we're asking for hourly metrics between June 30th and July 2nd, 2024.
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-The response will provide aggregated hourly consumption metrics, including active time, compute time, written data, and synthetic storage size, for each hour between June 30 and July 2.
-
-<details>
-<summary>Response</summary>
-
-```json
-{
-  "periods": [
-    {
-      "period_id": "random-period-abcdef",
-      "consumption": [
-        {
-          "timeframe_start": "2024-06-30T15:00:00Z",
-          "timeframe_end": "2024-06-30T16:00:00Z",
-          "active_time_seconds": 147452,
-          "compute_time_seconds": 43215,
-          "written_data_bytes": 111777920,
-          "synthetic_storage_size_bytes": 41371988928
-        },
-        {
-          "timeframe_start": "2024-06-30T16:00:00Z",
-          "timeframe_end": "2024-06-30T17:00:00Z",
-          "active_time_seconds": 147468,
-          "compute_time_seconds": 43223,
-          "written_data_bytes": 110483584,
-          "synthetic_storage_size_bytes": 41467955616
-        }
-        // ... More consumption data
-      ]
-    },
-    {
-      "period_id": "random-period-ghijkl",
-      "consumption": [
-        {
-          "timeframe_start": "2024-07-01T00:00:00Z",
-          "timeframe_end": "2024-07-01T01:00:00Z",
-          "active_time_seconds": 145672,
-          "compute_time_seconds": 42691,
-          "written_data_bytes": 115110912,
-          "synthetic_storage_size_bytes": 42194712672
-        },
-        {
-          "timeframe_start": "2024-07-01T01:00:00Z",
-          "timeframe_end": "2024-07-01T02:00:00Z",
-          "active_time_seconds": 147464,
-          "compute_time_seconds": 43193,
-          "written_data_bytes": 110078200,
-          "synthetic_storage_size_bytes": 42291858520
-        }
-        // ... More consumption data
-      ]
-    }
-    // ... More periods
-  ]
-}
-```
-
-</details>
-
-### Project-level metrics (granular)
-
-You can also get similar daily, hourly, or monthly metrics across a selected time period, but broken out for each individual project that belongs to your organization.
-
-Using the endpoint `GET /consumption_history/projects`, let's use the same start date, end date, and level of granularity as our account-level request: hourly metrics between June 30th and July 2nd, 2024.
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-<details>
-<summary>Response</summary>
-
-```json shouldWrap
-{
-  "projects": [
-    {
-      "project_id": "random-project-123456",
-      "periods": [
-        {
-          "period_id": "random-period-abcdef",
-          "consumption": [
-            {
-              "timeframe_start": "2024-06-30T00:00:00Z",
-              "timeframe_end": "2024-06-30T01:00:00Z",
-              "active_time_seconds": 147472,
-              "compute_time_seconds": 43222,
-              "written_data_bytes": 112730864,
-              "synthetic_storage_size_bytes": 37000959232
-            },
-            {
-              "timeframe_start": "2024-07-01T00:00:00Z",
-              "timeframe_end": "2024-07-01T01:00:00Z",
-              "active_time_seconds": 1792,
-              "compute_time_seconds": 533,
-              "written_data_bytes": 0,
-              "synthetic_storage_size_bytes": 0
-            }
-            // ... More consumption data
-          ]
-        },
-        {
-          "period_id": "random-period-ghijkl",
-          "consumption": [
-            {
-              "timeframe_start": "2024-07-01T09:00:00Z",
-              "timeframe_end": "2024-07-01T10:00:00Z",
-              "active_time_seconds": 150924,
-              "compute_time_seconds": 44108,
-              "written_data_bytes": 114912552,
-              "synthetic_storage_size_bytes": 36593552376
-            }
-            // ... More consumption data
-          ]
-        }
-        // ... More periods
-      ]
-    }
-    // ... More projects
-  ]
-}
-```
-
-</details>
-
-### Project-level metrics (for the current billing period)
-
-To get basic billing period-based consumption metrics for each project in the organization `org-ocean-art-12345678`, include `org_id` in the `GET /projects` request for consumption metrics:
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects?org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-See more details about using this endpoint on the [Querying consumption metrics](/docs/guides/partner-consumption-metrics#get-metrics-for-a-single-specified-project) page in our Partner Guide.
-
-## List all organizations you belong to
-
-You can use the `GET /users/me/organizations` request to retrieve a list of all organizations associated with your personal account.
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/users/me/organizations' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-The response will include details about each organization, including the `org_id`, name, and creation date.
-
-### Example Response
-
-```json
-{
-  "organizations": [
-    {
-      "id": "org-morning-bread-81040908",
-      "name": "Morning Bread Organization",
-      "created_at": "2022-11-23T17:42:25Z",
-      "updated_at": "2022-12-04T02:39:25Z"
-    },
-    ...
-  ]
-}
-```
