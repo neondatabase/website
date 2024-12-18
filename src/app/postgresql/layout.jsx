@@ -26,10 +26,7 @@ const NeonPostgresLayout = async ({ children }) => {
       headerWithBorder
       hasThemesSupport
     >
-      <div
-        data-oh="hai"
-        className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block"
-      >
+      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
