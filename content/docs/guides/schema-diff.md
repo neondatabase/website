@@ -34,7 +34,7 @@ You can use the Neon CLI to compare a branch to any point in its own or any othe
 - **Audit Changes**: Historically compare schema changes to understand the evolution of your database structure.
 - **Consistency Checks**: Ensure environment consistency by comparing schemas across development, staging, and production branches.
 - **Automation**: Integrate schema-diff into CI/CD pipelines to automatically compare schemas during deployments.
-- **AI Agents**: Enable AI agents to retrieve schema differences programmatically to support agent-driven database migrations. 
+- **AI Agents**: Enable AI agents to retrieve schema differences programmatically to support agent-driven database migrations.
 
 ## How to Use Schema Diff
 
@@ -108,13 +108,13 @@ url -X GET \
   -H "Authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
-| Parameter          | Description                                    | Required | Example                    |
-| ------------------ | ---------------------------------------------- | -------- | -------------------------- |
-| `<project_id>`     | The ID of your Neon project.                   | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`      | The ID of the target branch to compare.        | Yes      | `br-rough-boat-a54bs9yb`   |
-| `<base_branch_id>` | The ID of the base branch for comparison.      | Yes      | `br-royal-star-a54kykl2`   |
-| `<db_name>`        | The name of the database in the target branch. | Yes      | `neondb`                   |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys))| Yes      | `$NEON_API_KEY`            |
+| Parameter          | Description                                                                               | Required | Example                    |
+| ------------------ | ----------------------------------------------------------------------------------------- | -------- | -------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `wispy-butterfly-25042691` |
+| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-rough-boat-a54bs9yb`   |
+| `<base_branch_id>` | The ID of the base branch for comparison.                                                 | Yes      | `br-royal-star-a54kykl2`   |
+| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `neondb`                   |
+| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note">
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
