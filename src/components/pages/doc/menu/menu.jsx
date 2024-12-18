@@ -4,7 +4,6 @@ import { useRef, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import LINKS from 'constants/links';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 
 import Item from './item';
@@ -107,11 +106,6 @@ const Menu = ({
   const isLastActive =
     activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
 
-  const backLinkPath = basePath === DOCS_BASE_PATH ? '/' : LINKS.docs;
-  const docsHomePath = LINKS.docsHome;
-  const postgresHomePath = LINKS.postgresqltutorial;
-  const homePath = basePath === DOCS_BASE_PATH ? docsHomePath : postgresHomePath;
-
   // update menu height and scroll menu to top
   useEffect(() => {
     if (isLastActive && menuRef.current && menuRef.current.scrollHeight > 0 && setMenuHeight) {
@@ -129,7 +123,7 @@ const Menu = ({
   return (
     <div
       className={clsx(
-        'absolute left-0 top-0 w-full px-[52px] pb-8 xl:px-8',
+        'absolute left-0 top-0 w-full',
         !isActive && 'pointer-events-none',
         !isRootMenu && 'translate-x-full',
         'lg:px-8 lg:pt-4 md:px-5',
@@ -198,18 +192,18 @@ const Menu = ({
         )}
       </ul>
 
-      {/* back to docs link */}
-      {isRootMenu && basePath !== DOCS_BASE_PATH && (
+      {/* back to Docs link */}
+      {isRootMenu && customType && (
         <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
           <Link
             className={clsx(
               'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
               'text-gray-new-60 hover:text-black-new dark:hover:text-white'
             )}
-            to={customType?.link || (isRootMenu ? backLinkPath : homePath)}
+            to={DOCS_BASE_PATH}
           >
             <ArrowBackIcon className="size-4.5" />
-            {customType?.title || 'Back to Docs'}
+            Back to Docs
           </Link>
         </div>
       )}
