@@ -93,19 +93,19 @@ First, create a new database called `people` on the `main` branch and add some s
 
 1. Use the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) API to create the `people` database, specifying the `project_id`, `branch_id`, database `name`, and database `owner_name` in the API call.
 
-      ```bash
-      curl --request POST \
-      --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-bitter-bird-a56n6lh4/databases \
-      --header 'accept: application/json' \
-      --header 'authorization: Bearer $NEON_API_KEY' \
-      --header 'content-type: application/json' \
-      --data '{
-         "database": {
-            "name": "people",
-            "owner_name": "alex"
-         }
-      }'
-      ```
+   ```bash
+   curl --request POST \
+   --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-bitter-bird-a56n6lh4/databases \
+   --header 'accept: application/json' \
+   --header 'authorization: Bearer $NEON_API_KEY' \
+   --header 'content-type: application/json' \
+   --data '{
+      "database": {
+         "name": "people",
+         "owner_name": "alex"
+      }
+   }'
+   ```
 
 2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and  `role_name` parameters.
 
@@ -138,6 +138,7 @@ First, create a new database called `people` on the `main` branch and add some s
        name TEXT NOT NULL,
        email TEXT UNIQUE NOT NULL
    );
+   ```
 
 </TabItem>
 
@@ -230,24 +231,24 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
 Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `dev/jordan`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute endpoint — you need a compute endpoint to connection the branch.
 
-   ```bash
-   curl --request POST \
-   --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches \
-   --header 'accept: application/json' \
-   --header 'authorization: Bearer $NEON_API_KEY' \
-   --header 'content-type: application/json' \
-   --data '{
-      "branch": {
-         "name": "dev/jordan",
-         "parent_id": "br-bitter-bird-a56n6lh4"
-      },
-      "endpoints": [
-         {
-         "type": "read_write"
-         }
-      ]
-   }'
-   ```
+```bash
+curl --request POST \
+--url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches \
+--header 'accept: application/json' \
+--header 'authorization: Bearer $NEON_API_KEY' \
+--header 'content-type: application/json' \
+--data '{
+   "branch": {
+      "name": "dev/jordan",
+      "parent_id": "br-bitter-bird-a56n6lh4"
+   },
+   "endpoints": [
+      {
+      "type": "read_write"
+      }
+   ]
+}'
+```
 
 </TabItem>
 
@@ -352,6 +353,7 @@ CREATE TABLE address (
        zip_code TEXT NOT NULL,
        FOREIGN KEY (person_id) REFERENCES person(id)
    );
+   ```
 
 </TabItem>
 
@@ -431,13 +433,13 @@ curl -X GET \
   -H "Authorization: Bearer $NEON_API_KEY" | jq -r '.diff'
 ```
 
-| Parameter          | Description                                    | Required | Example                    |
-| ------------------ | ---------------------------------------------- | -------- | -------------------------- |
-| `<project_id>`     | The ID of your Neon project.                   | Yes      | `royal-band-06902338` |
-| `<branch_id>`      | The ID of the target branch to compare.        | Yes      | `br-mute-dew-a5930esi`   |
-| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.      | Yes      | `br-bitter-bird-a56n6lh4`   |
-| `<db_name>`        | The name of the database in the target branch. | Yes      | `people`                   |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys))| Yes      | `$NEON_API_KEY`            |
+| Parameter          | Description                                                                               | Required | Example                   |
+| ------------------ | ----------------------------------------------------------------------------------------- | -------- | ------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `royal-band-06902338`     |
+| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
+| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
+| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
+| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
 
 <Admonition type="note">
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
@@ -450,7 +452,7 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 +++ b/people
 @@ -21,6 +21,44 @@
  SET default_table_access_method = heap;
- 
+
  --
 +-- Name: address; Type: TABLE; Schema: public; Owner: alex
 +--
@@ -492,10 +494,10 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 +--
  -- Name: person; Type: TABLE; Schema: public; Owner: alex
  --
- 
+
 @@ -56,6 +94,13 @@
- 
- 
+
+
  --
 +-- Name: address id; Type: DEFAULT; Schema: public; Owner: alex
 +--
@@ -506,10 +508,10 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 +--
  -- Name: person id; Type: DEFAULT; Schema: public; Owner: alex
  --
- 
+
 @@ -63,6 +108,14 @@
- 
- 
+
+
  --
 +-- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: alex
 +--
@@ -521,10 +523,10 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 +--
  -- Name: person person_email_key; Type: CONSTRAINT; Schema: public; Owner: alex
  --
- 
+
 @@ -79,6 +132,14 @@
- 
- 
+
+
  --
 +-- Name: address address_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: alex
 +--
@@ -537,6 +539,7 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
  -- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin
  --
 ```
+
 </TabItem>
 
 </Tabs>
