@@ -18,9 +18,6 @@ const Hero = () => (
         <ul>
           <li>Databases autoscale. CPU and memory scale up and down automatically. When you see traffic spikes, your database provisions more compute automatically; when traffic dies, it scales down.</li>
           <li>You pay only for the compute you use. No downtime, no manual work.</li>
-          <li>
-            Databases scale to zero. In your dev/test environments, you pay for compute only when you're actively using them—no need to manually pause anything. 
-          </li>
         </ul>
         <p>
           We have a Free Plan -{' '}
