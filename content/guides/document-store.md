@@ -8,7 +8,7 @@ updatedOn: '2024-12-17T13:24:36.612Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.
-JSONB allows you to store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
+With JSONB, you can to store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
 You can even use GIN indexes to index nested properties within JSONB objects.
 
 ## Steps
@@ -24,8 +24,8 @@ You can even use GIN indexes to index nested properties within JSONB objects.
 
 ## Set up a table with a JSONB column
 
-To use Postgres as a document store, you can create a table with 2 columns: an `id` and a `data` property that is of type `JSONB`.
-You can run the following CREATE TABLE statement in the Neon SQL Editor or from a client such as psql that is connected to Neon.
+To use Postgres as a document store, you can create a table with two columns: an `id` and a `data` property that is of type `JSONB`.
+You can run the following `CREATE TABLE` statement in the Neon SQL Editor or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE TABLE documents (
@@ -38,7 +38,7 @@ JSONB columns can store any JSON object, including objects, arrays, and even nes
 
 ## Insert and retrieve JSONB data
 
-Next, run the following SQL to insert 2 new rows into the `documents` table. These rows will have `data` columns with slightly different properties: the first row has a `steps` property, and the second row has a nested object property `author`.
+Run the following SQL to insert two new rows into the `documents` table. These rows will have `data` columns with slightly different properties: the first row has a `steps` property, and the second row has a nested object property, `author`.
 
 ```sql
 INSERT INTO documents (data)
@@ -60,7 +60,7 @@ VALUES (
 );
 ```
 
-You can then load rows from the `documents` collection by id. For example, you can load the "Neon and JSONB" row using the following.
+You can then load rows from the `documents` collection by `id`. For example, you can load the "Neon and JSONB" row using the following query.
 
 ```sql
 SELECT * FROM documents WHERE id = 1
@@ -149,9 +149,9 @@ For example, the following query returns all documents whose `author` property h
 SELECT * FROM documents WHERE data->'author' @> '{"name":"John Smith","age":30}'
 ```
 
-The above query is equivalent to the following query.
+The query above is equivalent to this query:
 
-```sql
+```sql shouldWrap
 SELECT * FROM documents WHERE data->'author'->>'name' = 'John Smith' AND data->'author'->>'age' = '30'
 ```
 
@@ -159,7 +159,7 @@ SELECT * FROM documents WHERE data->'author'->>'name' = 'John Smith' AND data->'
 
 Operators like `=` and `@>` are fairly easy to work with: they don't throw any errors if the JSONB property has the wrong type.
 However, things get a bit more tricky if you want to find all documents whose `author`'s `age` property is greater than 25.
-For example, the following query throws a "operator does not exist" error.
+For example, this query throws an "operator does not exist" error:
 
 ```sql
 SELECT * 
@@ -167,7 +167,7 @@ FROM documents
 WHERE (data -> 'author' ->> 'age') > 29;
 ```
 
-You need to explicitly cast `age` to an int for the above query to run as follows.
+You need to explicitly cast `age` to an `int` type for the above query to run, as shown here:
 
 ```sql
 SELECT * 
@@ -176,7 +176,7 @@ WHERE (data -> 'author' ->> 'age')::int > 29;
 ```
 
 Depending on your data, you may need to add extra checks to avoid throwing an error if a document has an `age` property that can't be casted to an int.
-The following query explicitly checks if `age` is a numeric string before attempting to cast to an int.
+The following query explicitly checks if `age` is a numeric string before attempting to cast to an `int`.
 
 ```sql
 SELECT * 
@@ -196,17 +196,17 @@ SET data = jsonb_set(data, '{author,age}', '35'::jsonb)
 WHERE data->'author'->>'name' = 'John Smith';
 ```
 
-Note that `jsonb_set()` expects the nested property name separated by commas `,`, not dots `.`.
+Note that `jsonb_set()` expects the nested property name separated by commas (`,`), not dots (`.`).
 
 ## Index JSONB fields using GIN indexes
 
-[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) allow you to index JSONB properties, which can make your queries faster as your data grows. Below is how you can create a GIN index on the `data` property.
+[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) allow you to index JSONB properties, which can make your queries faster as your data grows. This query shows how you can create a GIN index on the `data` property:
 
 ```sql
 CREATE INDEX content_idx ON documents USING GIN (data);
 ```
 
-To test out the GIN index, let's first insert 100 documents, 1 of which has `author.name` set to "John Smith", and 99 which do not. Sometimes Postgres decides to skip using indexes and use a sequential scan instead when a query matches most of the table.
+To test out the GIN index, let's first insert 100 documents, 1 of which has `author.name` set to "John Smith", and 99 that do not. Sometimes Postgres decides to skip using indexes and use a sequential scan instead when a query matches most of the table.
 
 ```sql
 DO $$
@@ -248,7 +248,7 @@ FROM documents
 WHERE data @> '{"author": {"name": "John Smith"}}'::jsonb;
 ```
 
-Note that the above query uses the containment operator `@>`, **not** `WHERE data->'author'->>'name' = 'John Smith'`. [GIN indexes only support certain operators with JSONB data](https://www.postgresql.org/docs/current/datatype-json.html#JSON-INDEXING), including `@>`.
+Note that the query above uses the containment operator `@>`, **not** `WHERE data->'author'->>'name' = 'John Smith'`. [GIN indexes only support certain operators with JSONB data](https://www.postgresql.org/docs/current/datatype-json.html#JSON-INDEXING), including `@>`.
 
 The `EXPLAIN ANALYZE` query should produce output that resembles the following. The Bitmap Index Scan means that Postgres is using a GIN index rather than a sequential scan to answer the query.
 
