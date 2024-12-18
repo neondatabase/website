@@ -11,9 +11,9 @@ const Load = ({ title }) => (
     <div className="prose-variable">
       <p>
       Variable load patterns are common, but traditional managed databases require provisioning a fixed amount of CPU and memory.
-        
+      </p>
+      <p>        
       To avoid performance issues during traffic spikes, you’re likely provisioning a larger machine than you need most of the time. Scaling up must be done manually. Scaling down may require downtime.
-
       </p>
     </div>    <div className="flex items-center justify-center gap-5 lg:flex-col md:gap-3.5">
       <Image
