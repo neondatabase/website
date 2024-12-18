@@ -13,14 +13,14 @@ You can even use GIN indexes to index nested properties within JSONB objects.
 
 ## Steps
 
-* Set up a table with a JSONB column
-* Insert and retrieve JSONB data
-* Query based on JSONB fields
-* Document store using Sequelize ORM
-* Query arrays and objects in JSONB
-* Type casting in JSONB queries
-* Update and modify JSONB data
-* Index JSONB fields using GIN indexes
+- Set up a table with a JSONB column
+- Insert and retrieve JSONB data
+- Query based on JSONB fields
+- Document store using Sequelize ORM
+- Query arrays and objects in JSONB
+- Type casting in JSONB queries
+- Update and modify JSONB data
+- Index JSONB fields using GIN indexes
 
 ## Set up a table with a JSONB column
 
@@ -91,15 +91,19 @@ For example, the following Node.js code shows how you can connect to the existin
 
 ```javascript
 import Sequelize from 'sequelize';
-  
+
 const sequelize = new Sequelize(process.env.POSTGRES_CONNECTION_STRING);
 
-const Document = sequelize.define('Document', {
-  data: {
-    type: Sequelize.DataTypes.JSONB,
-    allowNull: false,
-  }
-}, { tableName: 'documents', timestamps: false });
+const Document = sequelize.define(
+  'Document',
+  {
+    data: {
+      type: Sequelize.DataTypes.JSONB,
+      allowNull: false,
+    },
+  },
+  { tableName: 'documents', timestamps: false }
+);
 ```
 
 You can then create rows in the `documents` collection using the following:
@@ -108,12 +112,12 @@ You can then create rows in the `documents` collection using the following:
 await Document.bulkCreate([
   {
     data: {
-      title: "Neon and JSONB",
-      body: "Using JSONB to store flexible data structures in Postgres.",
-      tags: ["Postgres", "Neon", "JSONB"],
-      author: { name: "John Smith", age: 30 },
-    }
-  }
+      title: 'Neon and JSONB',
+      body: 'Using JSONB to store flexible data structures in Postgres.',
+      tags: ['Postgres', 'Neon', 'JSONB'],
+      author: { name: 'John Smith', age: 30 },
+    },
+  },
 ]);
 ```
 
@@ -124,7 +128,7 @@ Note that Sequelize takes care of converting `data.author.name` to `data->'autho
 const documents = await Document.findAll({
   where: {
     'data.author.name': 'John Smith',
-  }
+  },
 });
 ```
 
@@ -162,16 +166,16 @@ However, things get a bit more tricky if you want to find all documents whose `a
 For example, this query throws an "operator does not exist" error:
 
 ```sql
-SELECT * 
-FROM documents 
+SELECT *
+FROM documents
 WHERE (data -> 'author' ->> 'age') > 29;
 ```
 
 You need to explicitly cast `age` to an `int` type for the above query to run, as shown here:
 
 ```sql
-SELECT * 
-FROM documents 
+SELECT *
+FROM documents
 WHERE (data -> 'author' ->> 'age')::int > 29;
 ```
 
@@ -179,8 +183,8 @@ Depending on your data, you may need to add extra checks to avoid throwing an er
 The following query explicitly checks if `age` is a numeric string before attempting to cast to an `int`.
 
 ```sql
-SELECT * 
-FROM documents 
+SELECT *
+FROM documents
 WHERE (data -> 'author' ->> 'age') ~ '^\d+$'
   AND (data -> 'author' ->> 'age')::int > 29;
 ```
