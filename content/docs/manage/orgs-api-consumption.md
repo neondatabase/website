@@ -1,6 +1,7 @@
 ---
 title: Query organization usage metrics with the Neon API
 enableTableOfContents: true
+updatedOn: '2024-12-18T18:37:32.360Z'
 ---
 
 You can use the Neon API to retrieve three types of consumption metrics for your organization:
