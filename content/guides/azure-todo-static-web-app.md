@@ -7,7 +7,7 @@ createdAt: '2024-12-14T00:00:00.000Z'
 updatedOn: '2024-12-14T00:00:00.000Z'
 ---
 
-If you've been looking for a modern approach to deploying web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be exactly what you need. At its core, it's a service optimized for hosting static assets with global distribution, but its true power lies in the seamless integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
+If you've been looking for a modern approach to deploying web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be exactly what you need. At its core, it's a service optimized for hosting static assets with global distribution, but its true power lies in its integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
 
 What makes Azure Static Web Apps particularly compelling for developers is its built-in CI/CD pipeline powered by [Github Actions](https://github.com/features/actions). When you connect your repository, Azure automatically configures the necessary Github workflows – push your code and watch as Github Actions builds, optimizes, and deploys your entire application across a global network
 
@@ -603,7 +603,7 @@ This Azure Function (`todos.js`) serves as our API endpoint and handles all data
 
 Core Components:
 
-1. Database Setup
+1. Database setup
 
    ```javascript
    const { neon } = require('@neondatabase/serverless');
@@ -612,7 +612,7 @@ Core Components:
 
    Establishes connection to our Postgres using the Neon serverless driver.
 
-2. Auto-initialization of `todos` Table
+2. Auto-initialization of the `todos` table
 
    ```javascript
    const getTodos = async () => {
@@ -623,7 +623,7 @@ Core Components:
 
    Handles first-time setup and retrieves todos.
 
-3. Main API Handler
+3. Main API handler
 
    ```javascript
    app.http('todos', {
@@ -635,7 +635,7 @@ Core Components:
    });
    ```
 
-   Supported Operations:
+   Supported operations:
 
    1. `GET`: Retrieves all todos
 
