@@ -15,7 +15,7 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) or [reach out to us](/contact-sales) for 1:1 guidance.
+In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
 </Admonition>
 
 <Testimonial
@@ -80,6 +80,10 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
 
 ![A dedicated project for dev/test](/use-cases/dev-test.jpg)
+
+<Admonition type="note" title="Tip">
+Check the [Database Per User Guide](https://neon.tech/use-cases/database-per-tenant) in our documentation for step by step instructions on how to set this up. 
+</Admonition>
 
 ## Neon for B2B SaaS: Data isolation with easy scalability
 
