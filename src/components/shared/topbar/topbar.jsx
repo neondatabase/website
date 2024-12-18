@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Is your RDS bill bloated? Cut up to 75% in compute costs with autoscaling and scale-to-zero 
+      Is your RDS bill bloated? Cut up to 75% in compute costs with autoscaling and scale-to-zero
     </span>
     <ChevronIcon
       className={clsx(
