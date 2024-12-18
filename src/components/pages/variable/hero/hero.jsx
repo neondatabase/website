@@ -16,10 +16,10 @@ const Hero = () => (
          If your app has variable traffic, here's how Neon can save you time and money: 
         </p>
         <ul>
-          <li><strong>Databases autoscale.<strong> CPU and memory scale up and down automatically. When you see traffic spikes, your database provisions more compute automatically; when traffic dies, it scales down.</li>
-          <li><strong>You pay only for the compute you use.<strong> No downtime, no manual work.</li>
+          <li><b>Databases autoscale.<b> CPU and memory scale up and down automatically. When you see traffic spikes, your database provisions more compute automatically; when traffic dies, it scales down.</li>
+          <li><b>You pay only for the compute you use.<b> No downtime, no manual work.</li>
           <li>
-            <strong>Databases scale to zero.<strong> In your dev/test environments, you pay for compute only when you're actively using them—no need to manually pause anything. 
+            <b>Databases scale to zero.<b> In your dev/test environments, you pay for compute only when you're actively using them—no need to manually pause anything. 
           </li>
         </ul>
         <p>
