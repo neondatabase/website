@@ -9,6 +9,10 @@ subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next
 
 Imagine having an AI voice assistant like Iron Man's [J.A.R.V.I.S.](https://en.wikipedia.org/wiki/J.A.R.V.I.S.), capable of understanding and responding to your needs in real-time. In this guide, you will learn how to build your very own real-time AI voice assistant using ElevenLabs, store each conversation in a Postgres database, and index them for faster retrieval.
 
+<Admonition type="note" title="Deal alert">
+Take advantage of the [AI Engineer Starter Pack](https://www.aiengineerpack.com) by ElevenLabs to get discounts for the tools used in this guide.
+</Admonition>
+
 ## Prerequisites
 
 To follow this guide, you’ll need the following:
