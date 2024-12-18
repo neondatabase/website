@@ -3,9 +3,6 @@ import { PropTypes } from 'prop-types';
 import Testimonial from 'components/pages/use-case/testimonial';
 import LINKS from 'constants/links';
 import autoscaleIcon from 'icons/variable/autoscale.svg';
-import costIcon from 'icons/variable/cost.svg';
-import databaseIcon from 'icons/variable/database.svg';
-import openSourceIcon from 'icons/variable/open-source.svg';
 import performanceIcon from 'icons/variable/performance.svg';
 import resizeIcon from 'icons/variable/resize.svg';
 import pieralbertoColonboAvatar from 'images/pages/variable-load/testimonials/pieralberto-colonbo.jpg';
@@ -24,7 +21,7 @@ const items = [
   },
   {
     icon: resizeIcon,
-    text: 'Autoscaling is nearly instantaneous, without downtime. Read about [our autoscaling algorithm](https://neon.tech/docs/guides/autoscaling-algorithm) and [how it compares to Aurora’s](https://neon.tech/blog/postgres-autoscaling-aurora-serverless-v2-vs-neon).',
+    text: 'Autoscaling is nearly instantaneous, without downtime. Read about <a href="https://neon.tech/docs/guides/autoscaling-algorithm">our autoscaling algorithm</a> and <a href="https://neon.tech/blog/postgres-autoscaling-aurora-serverless-v2-vs-neon">how it compares to Aurora’s</a>.',
   }
 ];
 
