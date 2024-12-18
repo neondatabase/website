@@ -7,16 +7,16 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
 
 <Admonition type="note" title="TL;DR">
-- Database branching is a game-changer for dev/test environments: there's no need to manage seed data, keep environments in sync, or wait for instances to be available. In one click, you can create an isolated database copy with production-like data. What you get: more developer velocity with +75% less costs.
+Database branching is a game-changer for dev/test environments: there's no need to manage seed data, keep environments in sync, or wait for instances to be available. What you get: more developer velocity with +75% less costs.
 - You can use Neon for your ephemeral environments even when production lives somewhere else:  
   - You keep your production DB in your current Postgres
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
   - To build / test / debug in Neon
   - Once the changes are tested, you apply them back to prod
-- You can sign up for Neon to experiment with this workflow right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
+Try this workflow in Neon right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
 
-# Ephemeral Environments Are Inefficient in Traditional Postgres
+## Ephemeral Environments Are Inefficient in Traditional Postgres
 
 ---
 
@@ -62,7 +62,7 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 **These problems get worse over time, not better**. As your number of instances grows, the manual setup and configuration work grows too.
 
-# Use Neon Branches For Your Dev/Test Workflows
+## Use Neon Branches For Your Dev/Test Workflows
 
 ---
 
@@ -227,7 +227,7 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 
 </TestimonialsWrapper>
 
-# Get Started in Two Steps
+## Get Started in Two Steps
 
 - **1. Create a Neon account**. Sign up for our Free Plan (here)[https://console.neon.tech/signup] (no credit card required).
 - **2. Explore our guide in docs.** (Follow these steps)[https://neon.tech/docs/use-cases/dev-test] help you get started.
