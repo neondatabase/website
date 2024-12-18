@@ -94,6 +94,7 @@ You can transfer existing Neon projects to an Azure-created organization, but th
 For transfer instructions, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
 
 If the restrictions listed above prevent you from transferring your project, you have a couple of options:
+
 - Open a [support ticket](https://console.neon.tech/app/projects?modal=support) to request assistance transferring your Neon project (only supported for projects residing in an [Azure region](/docs/introduction/regions#azure-region)).
 - Migrate your data from the existing Neon project to a Neon project in your Azure-created region using `pg_dump` and `pg_restore`. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions.
 
