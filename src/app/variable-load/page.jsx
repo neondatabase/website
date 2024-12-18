@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import slugify from 'slugify';
 
-import Budget from 'components/pages/variable/budget';
 import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
@@ -18,10 +17,9 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.variable);
 
 const titles = [
-  'Variable traffic, fixed costs?',
-  'Pay only for what you use with Neon',
-  'Why Neon vs Aurora Serverless',
-  'How much money are you wasting on&nbsp;unused compute?',
+  'Fixed Compute = Manual Resizes, Extra Costs',
+  'Neon Autoscaling Fixes This Problem',
+  'Neon vs Aurora Serverless v2',
 ];
 
 const VariableLoadPage = async () => {
@@ -47,7 +45,6 @@ const VariableLoadPage = async () => {
               <Load title={tableOfContents[0]} />
               <Efficiency title={tableOfContents[1]} />
               <Unique title={tableOfContents[2]} />
-              <Budget title={tableOfContents[3]} />
             </article>
           </div>
           <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px] xl:hidden">
