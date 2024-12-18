@@ -221,7 +221,7 @@ docker-compose up -d
      };
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
-     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
    }
    neonConfig.webSocketConstructor = ws;
 
@@ -282,7 +282,7 @@ docker-compose up -d
      };
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
-     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
    }
    neonConfig.webSocketConstructor = ws;
 
@@ -380,7 +380,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
      };
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
-     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
    }
    neonConfig.webSocketConstructor = ws;
 
