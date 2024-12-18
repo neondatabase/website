@@ -45,7 +45,7 @@ const AnchorHeading =
         )}
       >
         <a
-          className="anchor absolute -right-16 top-1/2 flex h-full -translate-x-full -translate-y-[calc(50%-0.15rem)] items-center justify-center px-2.5 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
+          className="anchor absolute right-0 top-1/2 flex h-full -translate-y-[calc(50%-0.15rem)] translate-x-full items-center justify-center px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
           tabIndex="-1"
           aria-hidden
