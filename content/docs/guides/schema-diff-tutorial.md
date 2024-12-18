@@ -107,7 +107,7 @@ First, create a new database called `people` on the `main` branch and add some s
    }'
    ```
 
-2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and  `role_name` parameters.
+2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and `role_name` parameters.
 
    ```bash
    curl --request GET \
