@@ -8,27 +8,22 @@ const Hero = () => (
       Scale With Traffic
     </h1>
     <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:mt-3 md:text-lg">
-      Neon scales up and down automatically, matching your workload. Get performance when you need
-      it.
+        Neon scales CPU and memory automatically to match your app
     </p>
     <div className="prose-doc">
       <Admonition type="note" title="TL;DR">
         <p>
-          Many applications have variable traffic, i.e. compute requirements fluctuate. This is a
-          common source of "bill bloating" in managed databases; if this is you, you're probably
-          provisioning a larger machine to accommodate these traffic spikes. Neon saves you the
-          trouble:
+         If your app has variable traffic, here's how Neon can save you time and money: 
         </p>
         <ul>
-          <li>Databases autoscale up and down automatically according to load.</li>
-          <li>You pay only for the compute you use, without downtime or manual work.</li>
+          <li>**Databases autoscale.** CPU and memory scale up and down automatically. When you see traffic spikes, your database provisions more compute automatically; when traffic dies, it scales down.</li>
+          <li>**You pay only for the compute you use.** No downtime, no manual work.</li>
           <li>
-            You only pay for active databases: your dev/test instances automatically pause when
-            idle.
+            **Databases scale to zero.** In your dev/test environments, you pay for compute only when you're actively using them—no need to manually pause anything. 
           </li>
         </ul>
         <p>
-          Neon is serverless Postgres. We have a generous Free Plan -{' '}
+          We have a Free Plan -{' '}
           <a href={LINKS.signup}>Get started here</a>
         </p>
       </Admonition>
