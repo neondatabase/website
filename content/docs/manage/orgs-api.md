@@ -8,7 +8,7 @@ Learn how to manage Neon Organizations using the Neon API, including managing or
 
 ## Personal vs organization API keys
 
-You can authenticate your API requests using either of these methods:
+You can authorize your API requests using either of these methods:
 
 - **Organization API key**: Automatically scopes all requests to your organization
 - **Personal API key**: Requires including an `org_id` parameter to specify which organization you're working with
