@@ -10,12 +10,16 @@ const Load = ({ title }) => (
   <Section className="load" title={title}>
     <div className="prose-variable">
       <p>
-      Variable load patterns are common, but traditional managed databases require provisioning a fixed amount of CPU and memory.
+        Variable load patterns are common, but traditional managed databases require provisioning a
+        fixed amount of CPU and memory.
       </p>
-      <p>        
-      To avoid performance issues during traffic spikes, you’re likely provisioning a larger machine than you need most of the time. Scaling up must be done manually. Scaling down may require downtime.
+      <p>
+        To avoid performance issues during traffic spikes, you’re likely provisioning a larger
+        machine than you need most of the time. Scaling up must be done manually. Scaling down may
+        require downtime.
       </p>
-    </div>    <div className="flex items-center justify-center gap-5 lg:flex-col md:gap-3.5">
+    </div>
+    <div className="mt-7 flex items-center justify-center gap-5 xl:mt-6 lg:mt-5 lg:flex-col md:gap-3.5 sm:mt-4">
       <Image
         className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicAWS}
