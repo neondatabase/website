@@ -91,9 +91,7 @@ First, create a new database called `people` on the `main` branch and add some s
 
 <TabItem>
 
-1. Create the database.
-
-   Use the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) API to create the `people` database.
+1. Use the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) API to create the `people` database, specifying the `project_id`, `branch_id`, database `name`, and database `owner_name` in the API call.
 
       ```bash
       curl --request POST \
@@ -109,7 +107,7 @@ First, create a new database called `people` on the `main` branch and add some s
       }'
       ```
 
-2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
+2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and  `role_name` parameters.
 
    ```bash
    curl --request GET \
@@ -230,7 +228,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
 <TabItem>
 
-Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `dev/jordan`.
+Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `dev/jordan`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute endpoint — you need a compute endpoint to connection the branch.
 
    ```bash
    curl --request POST \
@@ -319,7 +317,7 @@ CREATE TABLE address (
 
 <TabItem>
 
-1. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
+1. Retrieve the database connection string for the `dev/jordan` branch using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
 
    ```bash
    curl --request GET \
@@ -336,13 +334,13 @@ CREATE TABLE address (
    }
    ```
 
-1. Connect to the people database with `psql`:
+1. Connect to the `people` database on the `dev/jordan` branch with `psql`:
 
    ```bash
    psql 'postgresql://alex:JZb5eKPpg0vD@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 
-1. Add a new address table
+1. Add a new `address` table.
 
    ```sql
    CREATE TABLE address (
@@ -421,7 +419,7 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 
 <TabItem>
 
-Compare the schema of `dev/jordan` to its parent branch using the `compare-schema` API.
+Compare the schema of the `dev/jordan` branch to its parent branch using the `compare-schema` API.
 
 ```bash
 curl -X GET \
