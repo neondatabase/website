@@ -53,7 +53,7 @@ Step 4\. Select software components to install:
 - **Stack Builder** provides a GUI that allows you to download and install drivers that work with PostgreSQL.
 - **Command Line Tools** option allows you to install command\-line tools such as `psql`, `pg_restore`, and so on. These tools allow you to interact with the PostgreSQL database server using the command\-line interface.
 
-For tutorials on this website, you can skill installing Stack Builder. Feel free to uncheck it and click the Next button to proceed to the data directory selection:
+For tutorials on this website, you can skip installing Stack Builder. Feel free to uncheck it and click the Next button to proceed to the data directory selection:
 
 ![](/postgresqltutorial/Install-PostgreSQL-Windows-Step-3.png)
 Step 5\. Choose the database directory to store the data, or accept the default directory. Click the Next button to proceed to the next step:
