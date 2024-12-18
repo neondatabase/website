@@ -16,7 +16,7 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 - You can sign up for Neon to experiment with this workflow right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
 
-# Ephemeral Environments Are Inefficient in Traditional Postgres 
+# Ephemeral Environments Are Inefficient in Traditional Postgres
 
 ---
 
@@ -227,8 +227,9 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 
 </TestimonialsWrapper>
 
-# Get Started in Two Steps 
-- **1. Create a Neon account**. Sign up for our Free Plan (here)[https://console.neon.tech/signup] (no credit card required). 
-- **2. Explore our guide in docs.** (Follow these steps)[https://neon.tech/docs/use-cases/dev-test] help you get started. 
+# Get Started in Two Steps
+
+- **1. Create a Neon account**. Sign up for our Free Plan (here)[https://console.neon.tech/signup] (no credit card required).
+- **2. Explore our guide in docs.** (Follow these steps)[https://neon.tech/docs/use-cases/dev-test] help you get started.
 
 <CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we’re here to help you set things up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" />
