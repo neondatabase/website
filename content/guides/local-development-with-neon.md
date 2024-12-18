@@ -222,8 +222,8 @@ docker-compose up -d
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
      neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
-     neonConfig.webSocketConstructor = ws;
    }
+   neonConfig.webSocketConstructor = ws;
 
    // Neon supports both HTTP and WebSocket clients. Choose the one that fits your needs:
 
@@ -283,8 +283,8 @@ docker-compose up -d
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
      neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
-     neonConfig.webSocketConstructor = ws;
    }
+   neonConfig.webSocketConstructor = ws;
 
    const sql = neon(connectionString);
    const pool = new Pool({ connectionString });
@@ -381,8 +381,8 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
      neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : host + '/v2');
-     neonConfig.webSocketConstructor = ws;
    }
+   neonConfig.webSocketConstructor = ws;
 
    const sql = neon(connectionString);
    const pool = new Pool({ connectionString });
