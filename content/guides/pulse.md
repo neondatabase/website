@@ -15,6 +15,7 @@ To follow this guide, you’ll need the following:
 
 - [Node.js 18](https://nodejs.org/en) or later
 - A [Neon](https://console.neon.tech/signup) account
+- A [ElevenLabs](https://elevenlabs.io/) account
 - A [Vercel](https://vercel.com) account
 
 ## Create a new Next.js application
