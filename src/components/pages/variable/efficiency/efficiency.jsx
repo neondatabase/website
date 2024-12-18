@@ -25,7 +25,7 @@ const items = [
   {
     icon: resizeIcon,
     text: 'Autoscaling is nearly instantaneous, without downtime. Read about [our autoscaling algorithm](https://neon.tech/docs/guides/autoscaling-algorithm) and [how it compares to Aurora’s](https://neon.tech/blog/postgres-autoscaling-aurora-serverless-v2-vs-neon).',
-  },
+  }
 ];
 
 const Efficiency = ({ title }) => (
