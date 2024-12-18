@@ -11,7 +11,7 @@ Imagine having an AI voice assistant like Iron Man's [J.A.R.V.I.S.](https://en.w
 
 ## Prerequisites
 
-To follow along this guide, you will need the following:
+To follow this guide, you’ll need the following:
 
 - [Node.js 18](https://nodejs.org/en) or later
 - A [Neon](https://console.neon.tech/signup) account
