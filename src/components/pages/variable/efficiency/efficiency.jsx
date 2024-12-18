@@ -16,40 +16,21 @@ import Section from '../section';
 const items = [
   {
     icon: autoscaleIcon,
-    text: 'Neon adjusts CPU and memory up and down automatically.',
-  },
-  {
-    icon: costIcon,
-    text: 'Costs are controlled by setting a <a href="/docs/introduction/autoscaling">max autoscaling limit</a>',
+    text: 'Neon is serverless Postgres. Instead of provisioning a fixed CPU/memory, you specify an autoscaling range. ',
   },
   {
     icon: performanceIcon,
-    text: 'You get a performance boost when you need it.',
+    text: 'Your database will autoscale up and down automatically between those limits, matching your app’s traffic.',
   },
   {
     icon: resizeIcon,
-    text: 'No manual resizes or downtimes. Neon scales up and down smoothly and immediately.',
-  },
-  {
-    icon: databaseIcon,
-    text: 'Non-prod databases scale to zero when inactive. Instead of paying for compute 24/7, you skim the costs of your supporting databases to a minimum.',
-  },
-  {
-    icon: openSourceIcon,
-    text: 'Transparency with open-source architecture. <a href="https://github.com/neondatabase/neon" target="_blank" rel="noopener noreferrer">Explore our code in&nbsp;GitHub</a>.',
+    text: 'Autoscaling is nearly instantaneous, without downtime. Read about [our autoscaling algorithm](https://neon.tech/docs/guides/autoscaling-algorithm) and [how it compares to Aurora’s](https://neon.tech/blog/postgres-autoscaling-aurora-serverless-v2-vs-neon).',
   },
 ];
 
 const Efficiency = ({ title }) => (
   <Section className="efficiency" title={title}>
     <div className="prose-variable">
-      <p>
-        Neon solves this inefficiency via a serverless architecture. By{' '}
-        <a href="/blog/architecture-decisions-in-neon">natively separating storage and compute</a>,
-        Neon implements two features that allows you to pay only for the compute you use without
-        investing any manual work: <a href="/blog/scaling-serverless-postgres">autoscaling</a> and{' '}
-        <a href="/docs/introduction/scale-to-zero">scale to zero</a>.
-      </p>
       <List items={items} />
     </div>
     <Testimonial
