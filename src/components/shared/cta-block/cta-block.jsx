@@ -23,6 +23,16 @@ const sizeClassNames = {
   },
 };
 
+const themeClassNames = {
+  row: {
+    container: 'items-center justify-between sm:flex-col',
+    content: 'max-w-sm',
+  },
+  column: {
+    container: 'flex-col items-start',
+  },
+};
+
 const CtaBlock = ({
   className,
   title,
@@ -30,6 +40,7 @@ const CtaBlock = ({
   buttonText,
   buttonUrl,
   size = 'md',
+  theme = 'row',
   hasDecor = true,
 }) => (
   <div
@@ -40,8 +51,10 @@ const CtaBlock = ({
       className
     )}
   >
-    <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
-      <div className="max-w-sm sm:text-center">
+    <div
+      className={clsx('relative z-10 flex gap-6 sm:gap-[18px]', themeClassNames[theme].container)}
+    >
+      <div className={clsx('sm:text-center', themeClassNames[theme].content)}>
         <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
         {description && (
           <p
@@ -104,7 +117,8 @@ CtaBlock.propTypes = {
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['sm', 'md']),
+  size: PropTypes.oneOf(Object.keys(sizeClassNames)),
+  theme: PropTypes.oneOf(Object.keys(themeClassNames)),
   hasDecor: PropTypes.bool,
 };
 
