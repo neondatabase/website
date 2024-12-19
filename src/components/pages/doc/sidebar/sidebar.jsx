@@ -111,7 +111,7 @@ const Sidebar = ({
             )}
           >
             <nav
-              className="no-scrollbars z-10 h-[calc(100vh-180px)] overflow-y-scroll py-8"
+              className="no-scrollbars z-10 h-[calc(100vh-183px)] overflow-y-scroll py-8"
               ref={menuWrapperRef}
             >
               <div className="relative w-full" style={{ height: menuHeight }}>

@@ -63,7 +63,7 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
     },
     aiChatSettings: {
       ...aiChatSettings,
-      introMessage: "<span class='chat-title'>What do you want to know?</span>",
+      introMessage: "<span class='intro-title'>What do you want to know?</span>",
     },
   };
 

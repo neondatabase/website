@@ -215,7 +215,7 @@ const Header = async ({
   isStickyOverlay = false,
   showSearchInput = false,
   isDocPage = false,
-  isDocChatPage = false,
+  isAiChatPage = false,
   withBorder = false,
   searchIndexName = null,
   customType = null,
@@ -256,8 +256,8 @@ const Header = async ({
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
                 <div className="flex gap-x-0.5 rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15">
-                  <DocNavButton src={LINKS.docsHome} title="Docs Home" isActive={!isDocChatPage} />
-                  <DocNavButton src={LINKS.docsChat} title="Neon AI" isActive={isDocChatPage} />
+                  <DocNavButton src={LINKS.docsHome} title="Docs Home" isActive={!isAiChatPage} />
+                  <DocNavButton src={LINKS.aiChat} title="Neon AI" isActive={isAiChatPage} />
                 </div>
               </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
@@ -299,7 +299,7 @@ Header.propTypes = {
   isStickyOverlay: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isDocChatPage: PropTypes.bool,
+  isAiChatPage: PropTypes.bool,
   withBorder: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({

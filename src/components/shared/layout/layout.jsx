@@ -19,8 +19,9 @@ const Layout = ({
   hasThemesSupport = false,
   showSearchInput = false,
   isDocPage = false,
-  isDocChatPage = false,
+  isAiChatPage = false,
   searchIndexName = null,
+  hideFooter = false,
   customType = null,
 }) => (
   <>
@@ -36,7 +37,7 @@ const Layout = ({
         hasThemesSupport={hasThemesSupport}
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
-        isDocChatPage={isDocChatPage}
+        isAiChatPage={isAiChatPage}
         withBorder={headerWithBorder}
         searchIndexName={searchIndexName}
         customType={customType}
@@ -46,7 +47,7 @@ const Layout = ({
       >
         {children}
       </main>
-      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
+      {!hideFooter && <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />}
       <CookieConsent />
     </div>
   </>
@@ -64,8 +65,9 @@ Layout.propTypes = {
   headerWithBorder: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isDocChatPage: PropTypes.bool,
+  isAiChatPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
+  hideFooter: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,

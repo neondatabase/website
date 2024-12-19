@@ -1,8 +1,5 @@
-.ikp-message-header{
-  display: none;
-}
-
-.chat-title {
+/* intro title */
+.intro-title {
   display: block;
   width: 100%;
   text-align: center;
@@ -12,20 +9,38 @@
   letter-spacing: -0.04em;
 }
 
-.ikp-fs_2xs {
+/* header icon */
+.ikp-message-header{
   display: none;
 }
+.ikp-chat-bubble__wrapper .ikp-message-header{
+  display: flex;
+}
 
+/* header */
 .ikp-d_flex.ikp-flex_column.ikp-justify_flex-end.ikp-grow_2.ikp-overflow_visible.ikp-pr_3 {
   padding: 0;
 }
 
+/* examples grid */
 .ikp-d_flex.ikp-flex_row.ikp-gap_0.ikp-flex-wrap_wrap {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 12px;
 }
 
+/* examples title */
 .ikp-mr_2.ikp-mb_2 {
   margin: 0;
 }
+
+/* examples title */
+.ikp-fs_2xs {
+  display: none;
+}
+
+/* inner scroll */
+.ikp-d_flex.ikp-touch_none.ikp-select_none.ikp-w_10px.ikp-border-l_1px_solid_transparent.ikp-border-t_none.ikp-p_1px {
+  display: none;
+}
+
