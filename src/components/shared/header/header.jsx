@@ -184,6 +184,27 @@ const Sidebar = async ({ isDarkTheme }) => {
 };
 Sidebar.propTypes = themePropTypes;
 
+const DocNavButton = ({ src, title, isActive }) => (
+  <Link
+    to={src}
+    className={clsx(
+      'rounded-sm border px-[11px] py-[5px] leading-none tracking-tight',
+      'transition-colors duration-200',
+      isActive
+        ? 'border-gray-new-80 bg-[#F1F2F3] font-medium'
+        : 'border-transparent text-gray-new-40 hover:text-black-new'
+    )}
+  >
+    {title}
+  </Link>
+);
+
+DocNavButton.propTypes = {
+  src: PropTypes.string,
+  title: PropTypes.string,
+  isActive: PropTypes.bool,
+};
+
 const Header = async ({
   className = null,
   theme = null,
@@ -191,6 +212,7 @@ const Header = async ({
   isStickyOverlay = false,
   showSearchInput = false,
   isDocPage = false,
+  isDocChatPage = false,
   withBorder = false,
   searchIndexName = null,
   customType = null,
@@ -229,7 +251,12 @@ const Header = async ({
                   {customType?.title || 'Docs'}
                 </Link>
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden" />
+              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
+                <div className="flex gap-x-0.5 rounded border border-gray-new-90 p-[3px]">
+                  <DocNavButton src={LINKS.docsHome} title="Docs Home" isActive={!isDocChatPage} />
+                  <DocNavButton src={LINKS.docsChat} title="Neon AI" isActive={isDocChatPage} />
+                </div>
+              </div>
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar />
               </div>
@@ -269,6 +296,7 @@ Header.propTypes = {
   isStickyOverlay: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  isDocChatPage: PropTypes.bool,
   withBorder: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({

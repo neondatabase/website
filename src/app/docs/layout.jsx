@@ -6,8 +6,9 @@ import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { getSidebar } from 'utils/api-docs';
 
-const NeonDocsLayout = async ({ children }) => {
+const NeonDocsLayout = async ({ children, currentPath }) => {
   const sidebar = await getSidebar();
+  console.log(currentPath);
 
   return (
     <Layout

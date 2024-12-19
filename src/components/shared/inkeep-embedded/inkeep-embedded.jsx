@@ -6,9 +6,18 @@ import { PropTypes } from 'prop-types';
 
 import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
 
+const Skeleton = () => (
+  <div className="w-full flex-col justify-center pt-4">
+    <span className="skeleton h-14 w-full" />
+    <span className="skeleton mt-4 h-[120px] w-full" />
+    <span className="skeleton mt-6 h-14 w-full" />
+    <span className="skeleton mt-4 h-6 w-full" />
+  </div>
+);
+
 const InkeepEmbeddedChat = dynamic(
   () => import('@inkeep/uikit').then((mod) => mod.InkeepEmbeddedChat),
-  { ssr: false }
+  { ssr: false, loading: () => <Skeleton /> }
 );
 
 const InkeepEmbedded = ({ isDarkTheme = false }) => {
@@ -37,8 +46,8 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
         components: {
           AIChatPageWrapper: {
             defaultProps: {
-              size: 'expand',
-              variant: 'no-shadow',
+              size: 'expand', // 'shrink-vertically' 'expand', 'default', 'full-viewport'
+              variant: 'no-shadow', // 'no-shadow' or 'container-with-shadow'
             },
           },
         },
@@ -59,7 +68,8 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
   };
 
   return (
-    <div>
+    <div className="w-full max-w-[704px] overflow-hidden">
+      {/* <Skeleton /> */}
       <InkeepEmbeddedChat {...inkeepEmbeddedChatProps} />
     </div>
   );
