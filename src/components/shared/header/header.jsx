@@ -5,15 +5,15 @@ import { Suspense } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
+import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
-
-import Logo from '../logo';
 
 import HeaderWrapper from './header-wrapper';
 
@@ -188,14 +188,17 @@ const DocNavButton = ({ src, title, isActive }) => (
   <Link
     to={src}
     className={clsx(
-      'rounded-sm border px-[11px] py-[5px] leading-none tracking-tight',
+      'relative rounded-sm border px-[11px] py-[5px] leading-none tracking-tight',
       'transition-colors duration-200',
       isActive
-        ? 'border-gray-new-80 bg-[#F1F2F3] font-medium'
-        : 'border-transparent text-gray-new-40 hover:text-black-new'
+        ? 'border-gray-new-80 bg-[#F1F2F3] font-medium dark:border-0 dark:bg-gray-new-15 dark:bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,rgba(255,255,255,0.2),transparent)]'
+        : 'border-transparent text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
     )}
   >
     {title}
+    {isActive && (
+      <GradientBorder className="hidden dark:block dark:border-image-header-docs-button-border" />
+    )}
   </Link>
 );
 
@@ -252,7 +255,7 @@ const Header = async ({
                 </Link>
               </div>
               <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <div className="flex gap-x-0.5 rounded border border-gray-new-90 p-[3px]">
+                <div className="flex gap-x-0.5 rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15">
                   <DocNavButton src={LINKS.docsHome} title="Docs Home" isActive={!isDocChatPage} />
                   <DocNavButton src={LINKS.docsChat} title="Neon AI" isActive={isDocChatPage} />
                 </div>

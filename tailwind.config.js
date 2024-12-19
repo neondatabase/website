@@ -134,6 +134,9 @@ module.exports = {
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
+        'header-docs-button-border':
+          'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
+          'linear-gradient(0deg, #303236, #303236)',
         'subscribe-sm':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
