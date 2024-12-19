@@ -11,3 +11,21 @@
   line-height: 125%;
   letter-spacing: -0.04em;
 }
+
+.ikp-fs_2xs {
+  display: none;
+}
+
+.ikp-d_flex.ikp-flex_column.ikp-justify_flex-end.ikp-grow_2.ikp-overflow_visible.ikp-pr_3 {
+  padding: 0;
+}
+
+.ikp-d_flex.ikp-flex_row.ikp-gap_0.ikp-flex-wrap_wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 12px;
+}
+
+.ikp-mr_2.ikp-mb_2 {
+  margin: 0;
+}
