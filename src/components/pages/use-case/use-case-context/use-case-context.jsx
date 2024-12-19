@@ -6,7 +6,7 @@ import { useHomepageVisit } from 'app/homepage-visit-context';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-const UseCaseContext = ({}) => {
+const UseCaseContext = () => {
   const [showContext, setShowContext] = useState(false);
   const hasVisitedHomepage = useHomepageVisit();
 
