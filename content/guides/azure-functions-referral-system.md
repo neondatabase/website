@@ -27,13 +27,13 @@ Neon is now available in Azure! You can create serverless Postgres databases tha
 
 To create your Neon project on Azure:
 
-1. Navigate to the [Neon Console](https://console.neon.tech)
-2. Click **Create Project**
-3. Give your project a name
-4. Under **Cloud Service Provider**, select **Azure**
-5. Currently, Neon is available in the East US 2 region on Azure but more regions will be added soon
-6. Select the **Compute size** for your Neon database
-7. Click **Create Project**
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Click **Create Project**.
+3. Give your project a name.
+4. Under **Cloud Service Provider**, select **Azure**.
+5. Select a **Region** for your project.
+6. Select the **Compute size** for your Neon database.
+7. Click **Create Project**.
 
 Once created, save your connection details - you'll need these to configure your Azure Functions connection to Neon Postgres.
 
