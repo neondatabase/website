@@ -156,6 +156,8 @@ Commands:
   neonctl set-context                 Set the current context
   neonctl create-app                  Initialize a new Neon project   [aliases: bootstrap]
   neonctl completion                  generate completion script
+  neonctl vpc endpoint
+  neonctl vpc project
 
 Global options:
   -o, --output      Set output format
@@ -188,6 +190,8 @@ Options:
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session       |
 | [create-app](/docs/reference/cli-create-app)               |                                                                                                              | Initialize a new Neon project |
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script  |
+| [vpc endpoint](/docs/reference/vpc-endpoint)               |                                                                                                              | Manage VPC endpoints          |
+| [vpc project](/docs/reference/vpc-project)                 |                                                                                                              | Manage VPC endpoint restrictions |
 
 ## Global options
 
