@@ -1,10 +1,15 @@
 'use client';
 
-import { InkeepEmbeddedChat } from '@inkeep/uikit';
+import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import { PropTypes } from 'prop-types';
 
 import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
+
+const InkeepEmbeddedChat = dynamic(
+  () => import('@inkeep/uikit').then((mod) => mod.InkeepEmbeddedChat),
+  { ssr: false }
+);
 
 const InkeepEmbedded = ({ isDarkTheme = false }) => {
   const { theme, systemTheme } = useTheme();
@@ -32,8 +37,8 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
         components: {
           AIChatPageWrapper: {
             defaultProps: {
-              size: 'expand', // 'shrink-vertically' 'expand', 'default', 'full-viewport'
-              variant: 'no-shadow', // 'no-shadow' or 'container-with-shadow'
+              size: 'expand',
+              variant: 'no-shadow',
             },
           },
         },
