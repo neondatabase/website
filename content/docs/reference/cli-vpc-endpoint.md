@@ -18,23 +18,22 @@ The `vpc endpoint` command enables management of VPC endpoints for [Neon Private
 
 The `vpc endpoint` command allows you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
 
-| Subcommand        | Description                                                                                      |
-| ----------------- | ------------------------------------------------------------------------------------------------ |
-| [list](#list)     | List configured VPC endpoints for this organization.                                             |
-| [assign](#assign) | Add or update a VPC endpoint for this organization.                                              |
-|                   | **Note:** Azure regions are not yet supported. [Aliases: `update`, `add`]                        |
-| [remove](#remove) | Remove a VPC endpoint from this organization.                                                    |
-| [status](#status) | Get the status of a VPC endpoint for this organization.                                          |
-
+| Subcommand        | Description                                                               |
+| ----------------- | ------------------------------------------------------------------------- |
+| [list](#list)     | List configured VPC endpoints for this organization.                      |
+| [assign](#assign) | Add or update a VPC endpoint for this organization.                       |
+|                   | **Note:** Azure regions are not yet supported. [Aliases: `update`, `add`] |
+| [remove](#remove) | Remove a VPC endpoint from this organization.                             |
+| [status](#status) | Get the status of a VPC endpoint for this organization.                   |
 
 ### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc endpoint` subcommand supports these options:
 
-| Option        | Description                                                                                       | Type   | Required |
-| ------------- | ------------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--org-id`    | Organization ID                                                                                   | string | Only if the user has more than on organization. If not specified, and the user has only one organization, that `org_id` is used.       |
-| `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string |   yes   |
+| Option        | Description                                                                                                                                                        | Type   |                                                             Required                                                             |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | :------------------------------------------------------------------------------------------------------------------------------: |
+| `--org-id`    | Organization ID                                                                                                                                                    | string | Only if the user has more than on organization. If not specified, and the user has only one organization, that `org_id` is used. |
+| `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string |                                                               yes                                                                |
 
 ### Examples
 
@@ -45,14 +44,15 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```bash
   neonctl vpc endpoint list --org-id my-org-id
   ```
-  
+
 - **Assign a VPC endpoint**
 
   Add or update a VPC endpoint for a specific organization and region.
 
-    ```bash
-    neonctl vpc endpoint assign vpc-12345678 --org-id my-org-id --region-id aws-us-east-1
-    ```
+  ```bash
+  neonctl vpc endpoint assign vpc-12345678 --org-id my-org-id --region-id aws-us-east-1
+  ```
+
 - **Remove a VPC endpoint**
 
   Delete an existing VPC endpoint from a specific organization.

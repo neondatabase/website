@@ -18,19 +18,19 @@ The `vpc project` command allows you to manage project-level VPC endpoint restri
 
 The `vpc project` command enables you to list, configure, update, or remove VPC endpoint restrictions for specific Neon projects.
 
-| Subcommand            | Description                                                                          |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| [list](#list)         | List all VPC endpoint restrictions for a specific project.                          |
-| [restrict](#restrict) | Configure or update a VPC endpoint restriction for a project. [Alias: `update`]     |
-| [remove](#remove)     | Remove a VPC endpoint restriction from a project.                                   |
+| Subcommand            | Description                                                                     |
+| --------------------- | ------------------------------------------------------------------------------- |
+| [list](#list)         | List all VPC endpoint restrictions for a specific project.                      |
+| [restrict](#restrict) | Configure or update a VPC endpoint restriction for a project. [Alias: `update`] |
+| [remove](#remove)     | Remove a VPC endpoint restriction from a project.                               |
 
 ### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc project` subcommand supports these options:
 
-| Option          | Description                  | Type   | Required |
-| --------------- | ---------------------------- | ------ | :------: |
-| `--project-id`  | The Project ID.              | string |   yes    |
+| Option         | Description     | Type   | Required |
+| -------------- | --------------- | ------ | :------: |
+| `--project-id` | The Project ID. | string |   yes    |
 
 ### Examples
 
@@ -41,12 +41,16 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```bash
   neonctl vpc project list --project-id my-project-id
 
+  ```
+
 - **Restrict connections to a specific VPC**
 
   Configure or update a VPC endpoint restriction for a project.
 
   ```bash
   neonctl vpc project restrict vpc-12345678 --project-id my-project-id
+
+  ```
 
 - **Remove a VPC endpoint restriction**
   Remove a VPC endpoint restriction from a specific project.
