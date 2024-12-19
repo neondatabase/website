@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
+import ModeToggler from 'components/pages/doc/mode-toggler';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
-import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
@@ -184,30 +184,6 @@ const Sidebar = async ({ isDarkTheme }) => {
 };
 Sidebar.propTypes = themePropTypes;
 
-const DocNavButton = ({ src, title, isActive }) => (
-  <Link
-    to={src}
-    className={clsx(
-      'relative rounded-sm border px-[11px] py-[5px] leading-none tracking-tight',
-      'transition-colors duration-200',
-      isActive
-        ? 'border-gray-new-80 bg-[#F1F2F3] font-medium dark:border-0 dark:bg-gray-new-15 dark:bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,rgba(255,255,255,0.2),transparent)]'
-        : 'border-transparent text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
-    )}
-  >
-    {title}
-    {isActive && (
-      <GradientBorder className="hidden dark:block dark:border-image-header-docs-button-border" />
-    )}
-  </Link>
-);
-
-DocNavButton.propTypes = {
-  src: PropTypes.string,
-  title: PropTypes.string,
-  isActive: PropTypes.bool,
-};
-
 const Header = async ({
   className = null,
   theme = null,
@@ -232,10 +208,10 @@ const Header = async ({
         withBorder={withBorder}
       >
         {isDocPage ? (
-          <div className="flex">
+          <div className="flex w-full items-center">
             <span className="w-[350px] shrink-0 xl:w-[302px] lg:hidden" />
             <Container
-              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-32 md:pr-24"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-36 md:pr-24"
               size="1408"
             >
               <div className="hidden lg:flex lg:items-center lg:gap-x-7">
@@ -248,25 +224,22 @@ const Header = async ({
                   isHeader
                 />
                 <Link
-                  className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
+                  className="relative text-[15px] font-medium leading-tight tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
                   to={customType?.link || LINKS.docs}
                 >
                   {customType?.title || 'Docs'}
                 </Link>
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <div className="flex gap-x-0.5 rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15">
-                  <DocNavButton src={LINKS.docsHome} title="Docs Home" isActive={!isAiChatPage} />
-                  <DocNavButton src={LINKS.aiChat} title="Neon AI" isActive={isAiChatPage} />
-                </div>
+              <div className="col-span-7 col-start-2 -ml-6 flex max-w-[832px] gap-3.5 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none md:hidden">
+                <ModeToggler isAiChatPage={isAiChatPage} />
               </div>
-              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
+              <div className="col-span-2 col-start-10 -ml-12 h-full max-w-64 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar />
               </div>
             </Container>
           </div>
         ) : (
-          <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
+          <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
               <Logo
                 className="h-7"

@@ -7,11 +7,11 @@ import { PropTypes } from 'prop-types';
 import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
 
 const Skeleton = () => (
-  <div className="mx-auto w-full max-w-[640px] flex-col justify-center overflow-hidden pt-4">
-    <span className="skeleton h-11 w-full" />
-    <span className="skeleton mt-7 h-[90px] w-full" />
-    <span className="skeleton mt-10 h-14 w-full" />
-    <span className="skeleton mt-4 h-6 w-full" />
+  <div className="w-full flex-col justify-center overflow-hidden">
+    <span className="skeleton h-[45px] w-full" />
+    <span className="skeleton mt-10 h-24 w-full" />
+    <span className="skeleton mt-6 h-[120px] w-full" />
+    <span className="skeleton my-4 h-6 w-full" />
   </div>
 );
 
@@ -68,7 +68,7 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
   };
 
   return (
-    <div className="w-full max-w-[704px]">
+    <div className="w-full max-w-[640px]">
       <InkeepEmbeddedChat {...inkeepEmbeddedChatProps} />
     </div>
   );

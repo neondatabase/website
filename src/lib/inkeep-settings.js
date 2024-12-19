@@ -38,8 +38,7 @@ const searchSettings = {
 
 const aiChatSettings = {
   botName: 'Neon AI',
-  placeholder: 'How can I help you?',
-  quickQuestionsLabel: 'Examples',
+  placeholder: 'Ask anything...',
   quickQuestions: [
     'What’s Neon?',
     'How do I sign up for Neon?',
@@ -51,6 +50,20 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   isChatSharingEnabled: true,
   shareChatUrlBasePath: 'https://neon.tech/docs/introduction',
+  getHelpCallToActions: [
+    {
+      type: 'OPEN_LINK',
+      icon: { builtIn: 'FaDiscord' },
+      name: 'Discord',
+      url: 'https://discord.gg/92vNTzKDGp',
+    },
+    {
+      type: 'OPEN_LINK',
+      icon: { builtIn: 'FaGithub' },
+      name: 'GitHub',
+      url: 'https://github.com/neondatabase/neon',
+    },
+  ],
 };
 
 export { baseSettings, searchSettings, aiChatSettings };

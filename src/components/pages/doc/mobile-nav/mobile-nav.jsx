@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -153,7 +152,6 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
           variants={variants}
           style={{ height: wrapperHeight }}
         >
-          <InkeepTrigger className="lg:hidden" topOffset={wrapperHeight || menuHeight} />
           <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
@@ -166,14 +164,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
               menuWrapperRef={wrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
-              customType={
-                customType
-                  ? {
-                      title: `Back to ${customType.title}`,
-                      link: customType.link,
-                    }
-                  : null
-              }
+              customType={customType}
             />
           </div>
         </m.div>

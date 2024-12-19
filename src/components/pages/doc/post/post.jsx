@@ -89,7 +89,7 @@ const Post = ({
           'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
           isUseCase
             ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
-            : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
+            : 'col-span-7 col-start-2 -ml-6 max-w-[832px] 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
         )}
       >
         {breadcrumbs.length > 0 && (
@@ -140,9 +140,9 @@ const Post = ({
 
       <div
         className={clsx(
-          'relative col-span-2 col-start-11 -ml-12 max-w-64 xl:hidden',
+          'relative col-span-2 col-start-10 -ml-12 max-w-64 xl:hidden',
           isUseCase
-            ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+            ? '2xl:col-span-3 2xl:ml-auto 2xl:max-w-[238px]'
             : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
         )}
       >

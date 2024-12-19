@@ -1,4 +1,5 @@
 import MobileNav from 'components/pages/doc/mobile-nav';
+import ModeToggler from 'components/pages/doc/mode-toggler';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
@@ -25,7 +26,7 @@ const AiChatPage = async () => {
       hasThemesSupport
       hideFooter
     >
-      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
+      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
@@ -40,9 +41,12 @@ const AiChatPage = async () => {
           basePath={DOCS_BASE_PATH}
         />
 
-        <Container className="flex w-full items-center justify-center" size="1408">
+        <Container className="flex w-full flex-1 flex-col pb-20 pt-9 lg:pt-5 md:pt-4" size="1408">
+          <ModeToggler className="mb-7 hidden md:flex" isAiChatPage />
           <h1 className="sr-only">Neon AI Chat</h1>
-          <InkeepEmbedded />
+          <div className="flex w-full flex-1 items-center justify-center">
+            <InkeepEmbedded />
+          </div>
         </Container>
       </div>
     </Layout>

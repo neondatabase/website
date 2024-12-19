@@ -124,14 +124,7 @@ const Sidebar = ({
                   menuWrapperRef={menuWrapperRef}
                   activeMenuList={activeMenuList}
                   setActiveMenuList={setActiveMenuList}
-                  customType={
-                    customType
-                      ? {
-                          title: `Back to ${customType.title}`,
-                          link: customType.link,
-                        }
-                      : null
-                  }
+                  customType={customType}
                 />
               </div>
             </nav>
