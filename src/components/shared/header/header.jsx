@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
@@ -202,7 +201,6 @@ const Header = ({
   isStickyOverlay = false,
   showSearchInput = false,
   isDocPage = false,
-  isPostgresPage = false,
   withBorder = false,
   searchIndexName = null,
   customType = null,
@@ -221,7 +219,7 @@ const Header = ({
       >
         {isDocPage ? (
           <div className="flex">
-            <span className="hidden w-[350px] shrink-0 3xl:block xl:w-[302px] lg:hidden" />
+            <span className="w-[350px] shrink-0 xl:w-[302px] lg:hidden" />
             <Container
               className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-32 md:pr-24"
               size="1408"
@@ -242,9 +240,7 @@ const Header = ({
                   {customType?.title || 'Docs'}
                 </Link>
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <InkeepTrigger className="w-[272px]" isPostgresPage={isPostgresPage} showAIButton />
-              </div>
+              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden" />
               <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar isClient={isClient} />
               </div>
@@ -284,7 +280,6 @@ Header.propTypes = {
   isStickyOverlay: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
   withBorder: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({

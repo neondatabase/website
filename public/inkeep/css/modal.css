@@ -1,0 +1,33 @@
+:where(.inkeep-widget-vars){
+  font-family: inherit;
+}
+
+.ikp-modal__backdrop {
+  backdrop-filter: blur(0px);
+  background: rgba(12, 13, 13, 0.3);
+}
+
+.ikp-modal-widget__content{
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E4E5E7;
+  background: #FAFAFA;
+  border-radius: 10px;
+}
+
+[data-theme='dark'] {
+  .ikp-modal__backdrop {
+    background: rgba(12, 13, 13, 0.8);
+  }
+
+  .ikp-modal-widget__content{
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.5);
+    border: 1px solid #303236;
+    background: #131415;
+  }
+}
+
+@media (max-width: 528px) {
+  .ikp-modal__closeTrigger:hover{
+    background: transparent;
+  }
+}
