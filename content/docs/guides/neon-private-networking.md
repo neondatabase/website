@@ -35,13 +35,13 @@ To configure Neon Private Networking, perform the following steps:
 
 1.  **Create an AWS VPC endpoint**
 
-    1. Go to the **AWS VPC Dashboard** and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
+    1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
        ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
 
     1. Optionally, enter a **Name tag** for the endpoint (e.g., `My Neon Private Networking test`).
-    1. For **Service category**, select **Other endpoint services**.
-    1. Specify the **Service name**. It must be one of the following names, depending on your region:
+    1. For **Type**, select the **Endpoint services that use NLBs and GWLBs** category.
+    1. Under **Service settings**, specify the **Service name**. It must be one of the following names, depending on your region:
 
        - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
        - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
@@ -49,8 +49,6 @@ To configure Neon Private Networking, perform the following steps:
        - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
        - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
        - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
-
-       ![Select the endpoint service](/docs/guides/pl_select_endpoint_service.png)
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
     1. Select the VPC where your application is deployed.
@@ -62,7 +60,7 @@ To configure Neon Private Networking, perform the following steps:
     Note the **VPC Endpoint ID** and provide it to Neon. Neon will authorize this VPC Endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
 
     <Admonition type="note">
-     Please note that you must provide the **VPC Endpoint ID**, not the VPC ID. This step is specific to the Private Preview. In the final version, the allowed VPC Endpoint will be configured through the Neon Console without any manual involvement by Neon.
+     Please note that you must provide the **VPC Endpoint ID**, not the VPC ID. This step is specific to the Private Preview. In the final version, the allowed VPC Endpoint will be configured through the Neon Console or Neon CLI without any manual involvement by Neon.
     </Admonition>
 
 3.  **Enable Private DNS**
