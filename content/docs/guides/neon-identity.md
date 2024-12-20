@@ -42,9 +42,9 @@ Here is the basic flow:
    SELECT * FROM neon_identity.users_sync;
    ```
 
-   | id | name | email | created_at | raw_json |
-   |----|------|-------|------------|----------|
-   | 21373f88... | Sarah Chen | sarah@acme.dev | 2024-12-17... | \{"id": "21373f88-...", ...\} |
+   | id          | name       | email             | created_at    | raw_json                      |
+   | ----------- | ---------- | ----------------- | ------------- | ----------------------------- |
+   | 21373f88... | Sarah Chen | sarah@acme.dev    | 2024-12-17... | \{"id": "21373f88-...", ...\} |
    | 0310a9a5... | Alex Kumar | alex@startmeup.co | 2024-12-17... | \{"id": "0310a9a5-...", ...\} |
 
 ### Table structure
@@ -73,20 +73,26 @@ You need to handle user data synchronization manually:
 async function createTodo(userId: string, task: string) {
   // 1. Verify user exists and get latest profile
   const userProfile = await authProvider.getUser(userId);
-  
+
   // 2. Ensure user data is in sync
-  await db.query(`
+  await db.query(
+    `
     INSERT INTO my_app_users (id, email, name)
     VALUES ($1, $2, $3)
     ON CONFLICT (id) DO UPDATE 
     SET email = $2, name = $3
-  `, [userProfile.id, userProfile.email, userProfile.name]);
-  
+  `,
+    [userProfile.id, userProfile.email, userProfile.name]
+  );
+
   // 3. Finally create the todo
-  return db.query(`
+  return db.query(
+    `
     INSERT INTO todos (task, user_id) 
     VALUES ($1, $2)
-  `, [task, userId]);
+  `,
+    [task, userId]
+  );
 }
 ```
 
@@ -96,10 +102,13 @@ Since user data is automatically synced, you can just create the todo:
 
 ```typescript
 async function createTodo(userId: string, task: string) {
-  return db.query(`
+  return db.query(
+    `
     INSERT INTO todos (task, user_id) 
     VALUES ($1, $2)
-  `, [task, userId]);
+  `,
+    [task, userId]
+  );
 }
 ```
 
