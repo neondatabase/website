@@ -1,181 +1,113 @@
 ---
-title: 'Database Branching Workflows'
-subtitle: Boost development velocity by adding data to your existing GitHub workflows
+title: 'Mastering Database Branching Workflows'
+subtitle: No more seed data, data inconsistencies, and concurrency issues. Ship software faster using Neon branches as ephemeral environments.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 ---
 
-Git revolutionized how we develop software, but the story is quite different when databases are involved. Rapid development cycles that include databases remain elusive as they continue to stubbornly resist the agile tooling that has become standard in other parts of our tech stack.
+Modern developer tooling keeps shortening the software lifecycle—but the database is still the bottleneck for many teams. Way too much engineering time is wasted in these tasks still today:
 
-## Bringing Branching to Databases
+- **Maintaining seed files.** Keeping seed data up to date across all environments is a pain that every production team has experienced. Any schema change or new production data requirement forces manual updates to seed files. This maintenance overhead increasingly grows, distracting engineers from the actual release.
+- **Manually setting up and resetting environments.** End-to-end testing requires clean, isolated environments. Traditional workflows—i.e. spinning up new database instances, manually importing seed data into all of them—create delays in the testing pipeline. 
+- **Managing shared development instances.** Multiple developers share the same instance for dev cause concurrency issues. Productivity is slowed down due to conflicting changes or overwritten test data. The larger the team, the more of a time sink this is. To avoid this, some teams end up creating many, many dev databases. 
 
-To change this, Neon proposes adopting [database branching](/docs/introduction/branching) that includes both data and schema. Database branches enable instantaneous access to full database copies for developers, who can then modify those copies without impacting the production database &#8212; effectively extending the Git concept of code branching to your data.
+## Reimagining database workflows 
+In Neon, we’re proposing a different workflow. 
 
-<Admonition type="tip" title="Branching data and schema">
-The integration of databases within development practices isn’t a new idea. Modern teams already use tools to manage schema changes, and an increasing number of database providers are embracing *schema branching*. But for development workflows involving databases to be effectively unblocked, developers require the ability to not only modify schemas but also work with and modify isolated copies of data across different environments, similar to how code can be safely modified in Git branches.
+Instead of using separate instances as independent development environments, we rely on the concept of **ephemeral environments**—environments that are by default short-lived, instantly deployable, active only when being used, and programmatically created or deleted.
 
-Git enables collaboration and rapid development by maintaining a detailed history of commits. [Neon mirrors this concept via a custom-built, log-structured storage system, which treats the database as a record of transactions](/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal). Neon captures a comprehensive history of data snapshots, ensuring that developers can manage and revert changes in data states with the same ease as they do with code versions.
-</Admonition>
+These ephemeral environments replicate an exact copy of both the schema and data from a parent environment. This allows teams to focus on maintaining a single parent environment while spinning up as many ephemeral environments as needed, without manual maintenance.
 
-## Adopting Branch-based Deployments
+How do you do it? With [Neon branches](https://neon.tech/docs/introduction/branching).
 
-Traditionally, database deployments are _instance-based_, with each environment represented as a separate, self-contained instance. By shifting our perspective to view these as _branch-based_ deployments, we can align more closely with familiar Git workflows. In this model, each environment has a database branch, which functions similarly to a code branch. For example:
+## Turning Neon branches into ephemeral environments
 
-- **Production database branch**: The main branch where the live data resides.
-- **Preview database branches**: Temporary branches for reviewing new features or updates.
-- **Testing branches**: Temporary branches dedicated to automated testing.
-- **Development branches**: Where developers experiment and iterate on new features.
+A Neon branch is a lightweight, copy-on-write clone of your database. It acts as an isolated, fully functional replica of the parent, including both schema and data, without requiring a full duplication of the underlying storage.  
 
-![Adopting branch-based deployments](/flow/deployments.jpg)
+Here’s how branches work:  
 
-## Database Branching Workflows
+- **Copy-on-write.** When developers create a branch, Neon doesn’t duplicate the entire database. Instead, it references the same data pages as the parent environment. Only when a modification is made to the branch does Neon write a new copy of the changed data. 
+- **Instant.** Because branches leverage the copy-on-write mechanism, they can be spun up in seconds, even for very large datasets. There’s no need to wait for lengthy data exports, imports, or replication setups. 
+- **Ephemeral by design.** Neon branches are designed to be temporary. They can be created for a specific purpose—such as a development task, a test run, or staging for a deployment—and deleted once the task is complete. By default, the compute endpoint attached to them scales to zero.  
+- **One-click reset.** Branches can be reset to match the parent environment instantaneously. With just a single click (or an API call), the branch discards all changes and reverts to the exact state of the parent. Having a clean slate for testing or development takes no effort. Only the parent needs to be maintained. 
 
-To illustrate how a branch-based deployment model can be achieved in practice, we’ll cover two key workflows:
 
-1. **Preview Environment Workflow (one database branch per PR)**
+<Testimonial text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day— to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this." author={{ name: 'Avi Romanoff', company: 'Founder at Magic Circle', }} />
 
-   1. In this workflow, we automatically create a [preview environment for every pull request](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file) with its own Neon database branch. We use Fly.io as the deployment platform and Drizzle as the ORM.
-   2. The preview database branch gives the developer access to an isolated “copy” of the database. Any code modifications will be tested against this database.
-   3. Once the PR is merged, the preview environment and its database branch will be automatically deleted.
+<Testimonial text="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments." author={{ name: 'Jonathan Reyes', company: 'Principal Engineer at Dispatch', }} />
 
-2. **Local Development Environment Workflow (one database branch per developer)**
-   1. This workflow showcases how to use database branching to create personalized development environments for every developer on a team.
-   2. Each developer gets instant access to an isolated “copy” of production-like data.
-   3. When the work is done, a developer can reset their development environment to the current state of `main` (both data and schema).
+<Testimonial text="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away" author={{ name: 'Alex Co', company: 'Head of Platform Engineer at Mindvalley', }} />
 
-![Database branching workflows](/flow/branching-workflows.jpg)
+## Examples of database branching workflows you can implement
 
-### Preview Environment Workflow
+The concept of database branching is new, and it takes a while to get used to. To help you visualize how it can be achieved in practice, we’ll cover three initial workflows:
 
-**One database branch per pull request**
+**1. Preview Environment Workflow: One Database Branch per Preview**
+Each time a developer creates a pull request, Neon can generate a database branch that pairs with your preview deployment automatically, for example with Vercel previews. 
 
-The code for this workflow is provided in [this repo](https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file), and also described in the following video:
+How it works: 
+- The preview environment uses this branch, reflecting the same state as production at the moment the branch was created. 
+- When the PR is closed, the branch is discarded.  
 
-<YoutubeIframe embedId="6XezQQJGdjI" />
+Why it’s better than the traditional workflow: 
+- You get isolated and consistent testing environments for each pull request
+- Any schema changes in production can be reflected in a new preview without the need to manually updating any database 
+- Bugs and errors are catched early because you’re testing on real data, not a mock
 
-### The Tech Stack
+**2. Dev/Test Workflow (or Neon Twin)**
+In this workflow, you use Neon branches to create isolated environments for development and testing, mirroring a production-like state from a production database hosted outside of Neon (e.g., Amazon RDS).
 
-- Database: [Neon](/)
-- Hosting: [Fly.io](http://fly.io)
-- App: [Fastify](https://fastify.dev/)
-- Node Package Management: [pnpm](https://pnpm.io/)
-- ORM: [Drizzle](https://orm.drizzle.team/)
+How it works: 
+- Teams regularly sync a subset of production data or a testing dataset into a Neon main branch (e.g. via nightly dump/restores) 
+- From this one branch, they create as many ephemeral environments as they need—e.g. to test features, run integration tests, or stage deployments
+- Once the task is completed, branches are discarded
 
-### How it Works
+Why it’s better than the traditional workflow: 
+- Hundreds of ephemeral environments can be created instantaneously, complete with schema and data
+- Everything can be automated via API, adding to existing CI/CD pipelines 
+- If environments need to be reset, it takes one click 
 
-This is a [GitHub Actions workflow](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/deploy-preview.yml) that automatically deploys preview applications associated with PRs using Fly.io. Each preview environment is deployed with its own Neon database branch:
+**3. Local Development Workflow: One Database Branch per Developer**
+In this workflow, you use database branching to create personalized development environments for every developer on a team.
 
-```yaml
-name: Preview Deployment
-on: [pull_request]
+How it works: 
+- Each developer gets their own database branch, which is essentially a isolated copy of the main dataset
 
-env:
-  NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID }} # You can find this in your Neon project settings
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }} # You can generate a Fly API token in your account settings
-  GH_TOKEN: ${{ secrets.GH_TOKEN }} # Required for commenting on pull requests for private repos
+Why it’s better than the traditional workflow: 
+- Developers can work with realistic data sets instead of mocked or outdated seed files
+- Every developer has a fully independent environment, free from concurrency issues or conflicts, without needing to spin up a separate instance 
+- Once the work is done or if a developer needs to start fresh, they reset their branch to the current state of the main database in a single click or API call
 
-jobs:
-  deploy-preview:
-    runs-on: ubuntu-latest
+## Preview Environment Workflow
+To implement this workflow, follow the steps [in this guide.](https://neon.tech/docs/guides/vercel-previews-integration) The process looks like this: 
+1. Install the Neon <> Vercel integration
+      - In the Neon Console, navigate to the Integrations section and select the Vercel integration
+      - Click Add from Vercel to initiate the installation process
+      - Follow the prompts to link your Neon account with your Vercel project
+2. Configure the integration
+      - During setup, choose the Neon project, database, and role that Vercel will use to connect
+      - Enable the creation of a development branch for your Vercel development environment
+      - Enable automatic deletion of Neon branches when the corresponding Git branches are merged or deleted
+3. Deploy preview environments 
+      - With the integration configured, each time you push commits to a new branch in your source code repository, Vercel triggers a preview deployment
+      - The integration automatically creates a corresponding database branch in Neon, named with the prefix `preview/` followed by your Git branch name
+      - Vercel sets environment variables (`DATABASE_URL` and `DATABASE_URL_UNPOOLED`) to connect the preview deployment to the new Neon branch
+  
+## Dev/Test Workflow (Neon Twin) 
+[This guide](https://neon.tech/docs/use-cases/dev-test) will give you information on how to implement the Dev/Test workflow. The process changes slightly from team to team, but it looks like this:
+1. Set up a Neon Project for your dev/test environments
+      - Create a new project in the Neon Console, and name it appropriately (e.g., "Dev/Test Environments")
+2. Create a Neon Twin
+      - Establish a synchronized copy of your production or staging database (or a subset of it) within Neon’s main branch—which we call Neon Twin. This serves as the primary source for all your development and testing environments
+      - Automate data synchronization using tools like `pg_dump/restore` or AWS DMS, scheduling regular updates (e.g., nightly) to keep the Neon Twin current.
+3. Set up ephemeral environments as child branches 
+      - Create isolated child branches from the main branch for every individual development or testing tasks. This can be automated into your CI/CD pipelines via the Neon API. 
+4. Delete/reset branches
+      - After completing development or testing, delete the child branches to conserve resources. This can be automatically set up. Environments can also be sync with the latest data and schema from the main branch instantaneously via an API call
 
-    # Only run one deployment at a time per PR.
-    concurrency:
-      group: pr-${{ github.event.number }}
+## Local Development Workflow
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - run: pnpm install
-
-      - name: Get git branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v8
-
-      - id: create-branch
-        uses: neondatabase/create-branch-action@v5
-        with:
-          project_id: ${{ env.NEON_PROJECT_ID }}
-          username: 'neondb_owner' # Change this to the role you use to connect to your database
-          # parent: dev # optional (defaults to your project's default branch)
-          branch_name: preview/${{ steps.branch-name.outputs.current_branch }}
-          api_key: ${{ secrets.NEON_API_KEY }} # Generate a an API key in your Neon account settings
-
-      - run: |
-          echo "DATABASE_URL=${{ steps.create-branch.outputs.db_url_with_pooler }}" >> "$GITHUB_ENV"
-
-      - run: pnpm run db:migrate
-
-      - id: deploy
-        uses: superfly/fly-pr-review-apps@1.2.1
-        with:
-          secrets: DATABASE_URL=$DATABASE_URL
-
-      - name: Comment on Pull Request
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          GITHUB_TOKEN: ${{ env.GH_TOKEN }} # Required for commenting on pull requests for private repos
-          message: |
-            Fly Preview URL :balloon: : ${{ steps.deploy.outputs.url }}
-            Neon branch :elephant: : https://console.neon.tech/app/projects/${{ env.NEON_PROJECT_ID }}/branches/${{ steps.create-branch.outputs.branch_id }}
-```
-
-Let’s break down the steps in this preview environment workflow where we have one database branch for each pull request:
-
-1. **Checkout code:** Checks out the code of the PR to the runner.
-2. **Setup Node.js:** Sets up a Node.js environment, using version 4 of the actions/setup-node action.
-3. **Install dependencies:** Runs `pnpm install` to install necessary Node.js packages.
-4. **Get the git branch name:** Uses the `tj-actions/branch-names@v8` action to get the name of the current branch.
-5. **Set up the Neon database branch:** Uses the `neondatabase/create-branch-action@v5` action to set up a preview database branch and exports a `DATABASE_URL` environment variable for further use.
-6. **Perform schema migrations:** Executes `pnpm run db:migrate` to apply database migrations using the `DATABASE_URL` from the previous step.
-7. **Deploy:** Uses the `superfly/fly-pr-review-apps@1.2.0` action to deploy the application to Fly.io. This action takes the `DATABASE_URL` as input under `secrets`, ensuring the app connects to the correct Neon database branch.
-
-To automatically delete a preview environment when a PR is closed, including the associated Neon database branch, we use this [Clean up Preview Deployment](https://github.com/neondatabase/preview-branches-with-fly/blob/main/.github/workflows/cleanup-preview.yml) GitHub Actions workflow:
-
-```yaml
-name: Clean up Preview Deployment
-on:
-  pull_request:
-    types: [closed]
-
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }} # You can generate a Fly API token in your account settings
-
-jobs:
-  delete-preview:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete Fly app
-        uses: superfly/fly-pr-review-apps@1.2.0
-
-      - name: Delete Neon Branch
-        uses: neondatabase/delete-branch-action@v3.1.3
-        with:
-          project_id: ${{ var.NEON_PROJECT_ID }}
-          branch: preview/${{ github.event.pull_request.head.ref }}
-          api_key: ${{ secrets.NEON_API_KEY }}
-```
-
-The `superfly/fly-pr-review-apps@1.2.0` action deletes the preview environment associated with the PR, while the `neondatabase/delete-branch-action@v3.1.3` action deletes the associated database branch.
-
-## Local Development Environment Workflow
-
-**One database branch per developer**
-
-### The Tech Stack
-
-- Database: [Neon](/)
-- CLI Tool: [Neon CLI](/docs/reference/neon-cli)
-
-### Workflow Steps
-
-These are the basic steps to implement a local development workflow with a database branch per developer:
+To  implement a local development workflow with a database branch per developer, follow these steps: 
 
 1. [Download the Neon CLI](/docs/reference/neon-cli#install).
 2. Connect your Neon account:
@@ -204,15 +136,7 @@ These are the basic steps to implement a local development workflow with a datab
 
    This step is useful when you want to discard the changes in your existing dev branch and start fresh with dev branch that reflects the current state of the parent's data and schema.
 
-## Upcoming Improvements
+## This is only the beginning 
+The workflows described here are examples already popular among our users. We have ambitious plans to expand on them, such as incorporating anonymization of Personally Identifiable Information (PII). If you’d like to participate by providing feedback or testing a prototype, [reach out to us](https://neon.tech/contact-sales).
 
-The workflows described above are basic examples. We’ll keep expanding on them to provide complete production deployments with staging environments and handling of Personal Identifiable Information (PII). This work is ongoing.
-
-## Additional Resources
-
-- [Using Vercel for your preview deployments](/docs/guides/vercel)
-- [A Postgres database for every Fly.io preview](https://www.youtube.com/watch?v=EOVa68Uviks)
-- [A Postgres database for every Vercel preview](https://www.youtube.com/watch?v=s4vIMI9rXeg)
-- Guides for [Prisma](/docs/guides/prisma-migrations), [Django](/docs/guides/django-migrations), [Liquibase](/docs/guides/liquibase), [Flyway](/docs/guides/flyway), and [more](/docs/guides/guides-intro)
-- [About Branch Reset](/blog/announcing-branch-reset)
-- [About the Neon CLI](/blog/cli)
+[See more branching workflows in the wild  →](https://neon.tech/case-studies)
