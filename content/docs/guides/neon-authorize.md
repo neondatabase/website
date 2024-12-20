@@ -3,7 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2024-12-11T13:08:18.288Z'
+updatedOn: '2024-12-18T08:02:08.145Z'
 ---
 
 <InfoBlock>
@@ -124,18 +124,15 @@ CREATE POLICY "create todos" ON "todos"
 Now, in your backend, you can simplify the logic, removing the user authentication checks and explicit authorization handling.
 
 ```typescript shouldWrap
-export async function insertTodo(newTodo: { newTodo: string }) {
+export async function insertTodo({ newTodo }: { newTodo: string }) {
   const { getToken } = auth();
   const authToken = await getToken();
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
-  await fetchWithDrizzle(async (db) => {
-    return db.insert(schema.todos).values({
-      task: newTodo.newTodo,
-      isComplete: false,
-    });
+  return db.$withAuth(authToken).insert(schema.todos).values({
+    task: newTodo,
+    isComplete: false,
   });
-
-  revalidatePath('/');
 }
 ```
 

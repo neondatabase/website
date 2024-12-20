@@ -24,24 +24,24 @@ const jsonLd = {
   url: 'https://neon.tech/',
 };
 
-const Homepage = () => {
-  return <>
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-    <Hero />
-    <Logos />
-    <InstantProvisioning />
-    <Lightning />
-    <Bento />
-    <AiIndex />
-    <Multitenancy />
-    <Industry />
-    <Trusted />
-    <Cta />
-  </>
-}
+const Homepage = () => (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Hero />
+      <Logos />
+      <InstantProvisioning />
+      <Lightning />
+      <Bento />
+      <AiIndex />
+      <Multitenancy />
+      <Industry />
+      <Trusted />
+      <Cta />
+    </>
+  );
 
 export default Homepage;
 

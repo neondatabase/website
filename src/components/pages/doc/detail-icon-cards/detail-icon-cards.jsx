@@ -166,7 +166,7 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
   return (
     <ListComponent className="not-prose !my-10 grid auto-rows-fr grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
       {React.Children.map(children, (child, index) => {
-        const { children, href, description, icon } = child.props ?? {};
+        const { children, href, description, icon, target } = child.props ?? {};
         const Icon = icons[icon];
 
         return (
@@ -180,6 +180,7 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
                 'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
               )}
               to={href}
+              {...(target && { target })}
             >
               <div
                 className={clsx(

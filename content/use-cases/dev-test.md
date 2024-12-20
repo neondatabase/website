@@ -1,23 +1,22 @@
 ---
 title: 'Optimize Dev/Test'
-subtitle: Migrate your non-prod environments to Neon and start shipping faster with +75% lower costs.
+subtitle: Use Neon for your ephemeral environments
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'
 ---
 
 <Admonition type="note" title="TL;DR">
-- [Neon](/) is a Postgres database provider. We take the world’s most loved database and deliver it as a serverless platform designed to help teams ship reliable and scalable applications faster with features like instant provisioning, autoscaling, and database branching.
-- Even if you can't migrate production from your current Postgres provider yet, there’s no reason why you can’t enjoy the Neon DX in your dev/test workflows.
-  - You can keep your production DB in your current Postgres;
-  - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily);
-  - To build / test / debug in Neon.
-  - Once the changes are tested, you apply them back to prod.
-- What you get: more developer velocity with +75% less costs.
-- You can sign up for Neon to experiment right away ([we have a Free plan](https://console.neon.tech/signup)) or [reach out to us](/contact-sales) if you want to know more.
+Database branching is a game-changer for dev/test environments: there's no need to manage seed data, keep environments in sync, or wait for instances to be available. What you get: more developer velocity with +75% less costs.
+- You can use Neon for your ephemeral environments even when production lives somewhere else:  
+  - You keep your production DB in your current Postgres
+  - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
+  - To build / test / debug in Neon
+  - Once the changes are tested, you apply them back to prod
+Try this workflow in Neon right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
 
-## RDS/Aurora are inefficient for dev/test
+## Ephemeral Environments Are Inefficient in Traditional Postgres
 
 ---
 
@@ -63,7 +62,7 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 **These problems get worse over time, not better**. As your number of instances grows, the manual setup and configuration work grows too.
 
-## Use Neon for dev/test
+## Use Neon Branches For Your Dev/Test Workflows
 
 ---
 
@@ -228,10 +227,9 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 
 </TestimonialsWrapper>
 
-## Getting started
+## Get Started in Two Steps
 
-We’ve built tutorials that teach you **how to run a nightly dump from RDS to Neon** so you can sync your non-prod environment. We also cover how to apply changes back to production once you’ve tested them in Neon.
+- **1. Create a Neon account**. Sign up for our Free Plan [here](https://console.neon.tech/signup) (no credit card required).
+- **2. Explore our guide in docs.** [Follow these steps](https://neon.tech/docs/use-cases/dev-test) help you get started.
 
-- [Learn how to use pg_dump/restore with GitHub Actions for nightly sync](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
-
-<CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Contact us" buttonUrl="/contact-sales" />
+<CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we’re here to help you set things up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />

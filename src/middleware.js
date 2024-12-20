@@ -20,7 +20,7 @@ const generateEditPageURL = (handle) => `${SITE_URL}/tickets/${handle}/edit`;
 export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
-    
+
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
