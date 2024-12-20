@@ -16,10 +16,10 @@ The `vpc` command is the primary command for managing Virtual Private Cloud (VPC
 
 The `vpc` command includes subcommands for both organization-level and project-level VPC management:
 
-| Subcommand         | Description                                                         |
-| ------------------ | ------------------------------------------------------------------- |
-| [endpoint](#the-vpc-endpoint-command) | Manage VPC endpoints for Neon Private Networking.|
-| [project](#the-vpc-project-command)  | Manage VPC endpoint restrictions at the project level.|
+| Subcommand                            | Description                                            |
+| ------------------------------------- | ------------------------------------------------------ |
+| [endpoint](#the-vpc-endpoint-command) | Manage VPC endpoints for Neon Private Networking.      |
+| [project](#the-vpc-project-command)   | Manage VPC endpoint restrictions at the project level. |
 
 ## The `vpc endpoint` subcommand
 
