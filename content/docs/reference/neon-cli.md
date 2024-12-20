@@ -148,6 +148,7 @@ Commands:
   neonctl orgs                        Manage organizations                [aliases: org]
   neonctl projects                    Manage projects                 [aliases: project]
   neonctl ip-allow                    Manage IP Allow
+  neonctl vpc                         Manage VPC
   neonctl branches                    Manage branches                   [aliases: branch]
   neonctl databases                   Manage databases            [aliases: database, db]
   neonctl roles                       Manage roles                        [aliases: role]
@@ -156,8 +157,6 @@ Commands:
   neonctl set-context                 Set the current context
   neonctl create-app                  Initialize a new Neon project   [aliases: bootstrap]
   neonctl completion                  generate completion script
-  neonctl vpc endpoint
-  neonctl vpc project
 
 Global options:
   -o, --output      Set output format
@@ -182,6 +181,7 @@ Options:
 | [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations             |
 | [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                  |
 | [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                  |
+| [vpc](/docs/reference/vpc)                                 |                                                                                                              | Manage VPC endpoints and project VPC restrictions |
 | [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                  |
 | [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                 |
 | [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                     |
@@ -190,8 +190,7 @@ Options:
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session          |
 | [create-app](/docs/reference/cli-create-app)               |                                                                                                              | Initialize a new Neon project    |
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script     |
-| [vpc endpoint](/docs/reference/vpc-endpoint)               |                                                                                                              | Manage VPC endpoints             |
-| [vpc project](/docs/reference/vpc-project)                 |                                                                                                              | Manage VPC endpoint restrictions |
+
 
 ## Global options
 
