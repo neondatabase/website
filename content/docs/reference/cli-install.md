@@ -170,7 +170,7 @@ To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version,
 
 </Tabs>
 
-If you're using the Neon CLI in CI/CD tools like GitHub Actions, you can safely pin the Neon CLI to `latest`, as we prioritize stability for CI/CD processes. 
+If you're using the Neon CLI in CI/CD tools like GitHub Actions, you can safely pin the Neon CLI to `latest`, as we prioritize stability for CI/CD processes.
 
 <Tabs labels={["npm", "Homebrew", "Binary"]}>
 
