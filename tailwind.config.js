@@ -135,6 +135,9 @@ module.exports = {
       },
       backgroundImage: ({ theme }) => ({
         'header-docs-button-border':
+          'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
+          'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
+        'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
         'subscribe-sm':

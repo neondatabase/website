@@ -34,7 +34,6 @@
 @media (max-width: 1023px) {
   .intro-title {
     font-size: 32px;
-    margin-bottom: 4px;
   }
 }
 @media (max-width: 767px) {
@@ -77,6 +76,17 @@
   display: none;
 }
 
+/* content */
+.ikp-content-parser__ul {
+  padding-left: 28px;
+  padding-bottom: 12px;
+}
+
+/* messages wrapper */
+.ikp-messages__wrapper {
+  max-height: calc(100vh - 420px);
+}
+
 /* message box */
 .ikp-ai-chat__message-box {
   height: 120px;
@@ -90,7 +100,80 @@
   border-color: #303236;
 }
 
-/* footer */
+/* content */
+.ikp-message__wrapper > div:first-child {
+  padding: 24px 40px;
+}
+.ikp-chat-bubble__message-content-wrapper > .ikp-h_48px {
+  height: auto;
+}
+.ikp-chat-bubble__user-message-content {
+  margin: 0;
+}
+.ikp-chat-bubble__user-message {
+  justify-content: flex-end;
+}
+.ikp-chat-bubble__user-message .ikp-message-header {
+  padding: 0 12px;
+  height: 24px;
+}
+.ikp-chat-bubble__bot-message .ikp-message-header {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  padding: 0;
+}
+.ikp-message-header__avatar-box,
+.ikp-bot-avatar__box {
+  width: 28px;
+  height: 28px;
+}
+.ikp-chat-bubble__message-content-wrapper {
+  padding: 0;
+}
+/* first title */
+.ikp-chat-bubble__message-content-wrapper > div:first-child > p:first-child strong {
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: -0.02em;
+}
+/* content text */
+.ikp-chat-bubble__message-content-wrapper > div:first-child {
+  font-size: 16px;
+}
+.ikp-content-parser__li {
+  list-style-position: outside;
+}
 .ikp-ai-chat-footer__content {
   padding: 0;
 }
+
+/* sources */
+.ikp-citation-sources-header {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: -0.02em;
+  color: white;
+}
+.ikp-result-card:hover .ikp-result-card__container {
+  background: rgba(0, 229, 153, 0.06);
+  border-color: rgba(0, 229, 153, 0.25);
+}
+
+/* footer buttons */
+.ikp-btn--size_xs {
+  padding: 0 10px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #242628;
+  background: #0C0D0D;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+}
+
