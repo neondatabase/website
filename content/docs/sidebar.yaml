@@ -473,6 +473,9 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+    - title: Neon Identity
+      slug: guides/neon-identity
+      icon: partner-guide
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth
