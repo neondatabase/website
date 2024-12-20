@@ -90,6 +90,7 @@ You can transfer existing Neon projects to an Azure-created organization, but no
 - The Neon project must belong to a personal Neon account, not an organization. Transfers between organizations are not yet supported.
 - The Neon project must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
 - The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account. For example, transferring from a Free account to a Scale account is allowed, but not Scale to Free.
+- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Free plan organization will result in an error.
 
 For detailed transfer steps, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
 
