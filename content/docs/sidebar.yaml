@@ -741,6 +741,8 @@
           slug: reference/cli-projects
         - title: ip-allow
           slug: reference/cli-ip-allow
+        - title: vpc
+          slug: reference/cli-vpc
         - title: branches
           slug: reference/cli-branches
         - title: databases
