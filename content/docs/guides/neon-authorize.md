@@ -210,6 +210,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Azure AD**                              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
 | **Google Identity**                       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/oauth2/v3/certs`</span>                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
 | **Descope Auth**                          | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
+| **PropelAuth**                            | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{PROPEL_AUTH_URL}/.well-known/jwks.json`</span>                                           | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
 
 ### JWT Audience Checks
 

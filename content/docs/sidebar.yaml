@@ -517,6 +517,8 @@
               slug: guides/neon-authorize-firebase-gcp
             - title: Google Identity
               slug: guides/neon-authorize-google-identity
+            - title: PropelAuth
+              slug: guides/neon-authorize-propelauth
     - title: Integrations
       icon: integrations
       slug: guides/integrations
