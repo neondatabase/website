@@ -21,7 +21,7 @@ Here's a snapshot of what we're working on now:
 
 - **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
-- **Auth provider integration***: Automatically sync user profiles from your auth provider directly to your database
+- **Auth provider integration\***: Automatically sync user profiles from your auth provider directly to your database
 - **More regions**: London and São Paulo are locked in for Q1. If you’re a Brazilian developer, please reach out to via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We’d love to sponsor meetups and get better connected.
 - **A GitHub Copilot extension**: This new extension will make it easier to configure Neon for your repository by providing chat-based access to the latest Neon documentation with repository context.
 
