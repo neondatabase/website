@@ -1,8 +1,8 @@
 ---
 title: 'Mastering Database Branching Workflows'
-subtitle: 'Eliminate seed data, data inconsistencies, and concurrency issues. Ship software faster using Neon branches as ephemeral environments.'
+subtitle: Ship software faster using Neon branches as ephemeral environments
 enableTableOfContents: true
-updatedOn: '2024-08-23T09:00:00.000Z'
+updatedOn: '2024-12-21T09:00:00.000Z'
 ---
 
 Modern developer tooling keeps shortening the software lifecycle—but the database is still the bottleneck for many teams. Way too much engineering time is wasted in these tasks still today:
