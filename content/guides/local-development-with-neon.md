@@ -180,6 +180,16 @@ Run the following command to start local PostgreSQL and the Neon Proxy, which he
 docker-compose up -d
 ```
 
+<Admonition type="important">
+Before proceeding, you need to add an entry to your system's hosts file to map `db.localtest.me` to your localhost:
+
+```bash
+127.0.0.1 db.localtest.me
+```
+
+For detailed instructions on how to edit your hosts file on different operating systems, you can refer to [this guide on editing host files](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
+</Admonition>
+
 ### Connect your app
 
 <Tabs labels={["Using neondatabase/serverless", "Using drizzle", "Using prisma"]}>
