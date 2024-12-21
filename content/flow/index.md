@@ -56,7 +56,6 @@ author={{
   }}
 />
 
-
 ## Examples of database branching workflows you can implement
 
 The concept of database branching is new, and it takes a while to get used to. To help you visualize how it can be achieved in practice, we’ll cover three initial workflows:
