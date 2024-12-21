@@ -22,7 +22,7 @@ Here's a snapshot of what we're working on now:
 - **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
 - **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
 - **Auth provider integration**: Automatically sync user profiles from your auth provider directly to your database.
-- **More regions**: London and São Paulo are locked in for Q1. If you’re a Brazilian developer, please reach out to via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We’d love to sponsor meetups and get better connected.
+- **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1. If you’re a Brazilian developer, please reach out to via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We’d love to sponsor meetups and get better connected. If there are other regions you'd like to see us support, please [submit a request](/docs/introduction/regions#request-a-region).
 - **A GitHub Copilot extension**: This new extension will make it easier to configure Neon for your repository by providing chat-based access to the latest Neon documentation with repository context.
 
 If you have other feature ideas, [let us know](#share-your-thoughts).
@@ -61,7 +61,6 @@ For more of the latest features and fixes, check our [Changelog](/docs/changelog
 
 And here's a quick list of what we'll be taking on in the near future:
 
-- **More regions**: Let's us know where you would like to see Neon next: [Request a region](/docs/introduction/regions#request-a-region).
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d like to connect with you](https://neon.tech/agent-design-partner) — we’re looking for design partners in this space. For more, see [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents).
 - **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
 - **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
