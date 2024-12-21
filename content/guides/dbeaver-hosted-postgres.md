@@ -52,7 +52,7 @@ You will be using these connection string components in the following steps to c
    - In the "Connect to Database" wizard, select "PostgreSQL" from the list of database types and click "Next".
 
 3. **Enter Connection Details**:
-   
+
    ![](/guides/images/dbeaver/conn-1.png)
 
    - Fill in the required fields based on your Neon connection string:
@@ -62,16 +62,15 @@ You will be using these connection string components in the following steps to c
      - **Username**: Your database username.
      - **Password**: Your database password.
    - Enable "Show all databases" to ensure all databases in your Neon project are listed.
-   
+
    ![](/guides/images/dbeaver/conn-2.png)
-   
+
    - Click "Edit Driver Settings" if needed to ensure SSL is enabled. Under the "Driver Properties" tab, set `sslmode` to `require`.
 
 4. **Test the Connection**:
 
    - Click the "Test Connection" button to verify the connection details.
    - If successful, click "Finish" to save the connection. Your new database connection will appear in the left sidebar.
-
 
 ## Basic Operations in DBeaver
 
