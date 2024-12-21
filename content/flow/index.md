@@ -66,7 +66,7 @@ Each time a developer creates a pull request, Neon can generate a database branc
 
 How it works:
 
-- The preview environment uses this branch, reflecting the same state as production at the moment the branch was created.
+- The preview environment uses the preview branch, reflecting the same state as production at the moment the branch was created.
 - When the PR is closed, the branch is discarded.
 
 Why it’s better than the traditional workflow:
@@ -89,7 +89,7 @@ Why it’s better than the traditional workflow:
 
 - Hundreds of ephemeral environments can be created instantaneously, complete with schema and data
 - Everything can be automated via API, adding to existing CI/CD pipelines
-- If environments need to be reset, it takes one click
+- If environments need to be reset, it takes one API call
 
 ### Local Development Workflow: One Database Branch per Developer
 
@@ -103,7 +103,6 @@ Why it’s better than the traditional workflow:
 
 - Developers can work with realistic data sets instead of mocked or outdated seed files
 - Every developer has a fully independent environment, free from concurrency issues or conflicts, without needing to spin up a separate instance
-- Once the work is done or if a developer needs to start fresh, they reset their branch to the current state of the main database in a single click or API call
 
 ## Preview Environment Workflow
 
