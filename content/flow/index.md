@@ -4,6 +4,7 @@ subtitle: Ship software faster using Neon branches as ephemeral environments
 enableTableOfContents: true
 updatedOn: '2024-12-21T09:00:00.000Z'
 ---
+
 ## Traditional database workflows are broken
 
 Modern developer tooling keeps shortening the software lifecycle—but the database is still the bottleneck for many teams. Way too much engineering time is wasted in these tasks still today:
@@ -60,6 +61,7 @@ author={{
 The concept of database branching is new, and it takes a while to get used to. To help you visualize how it can be achieved in practice, we’ll cover three initial workflows:
 
 ### Preview Environment Workflow: One Database Branch per Preview
+
 Each time a developer creates a pull request, Neon can generate a database branch that pairs with your preview deployment automatically, for example with Vercel previews.
 
 How it works:
@@ -74,6 +76,7 @@ Why it’s better than the traditional workflow:
 - Bugs and errors are catched early because you’re testing on real data, not a mock
 
 ### Dev/Test Workflow (or Neon Twin)
+
 In this workflow, you use Neon branches to create isolated environments for development and testing, mirroring a production-like state from a production database hosted outside of Neon (e.g., Amazon RDS).
 
 How it works:
@@ -89,6 +92,7 @@ Why it’s better than the traditional workflow:
 - If environments need to be reset, it takes one click
 
 ### Local Development Workflow: One Database Branch per Developer
+
 In this workflow, you use database branching to create personalized development environments for every developer on a team.
 
 How it works:
