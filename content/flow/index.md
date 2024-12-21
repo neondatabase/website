@@ -106,7 +106,7 @@ Why it’s better than the traditional workflow:
 
 To implement this workflow, follow the steps [in this guide.](https://neon.tech/docs/guides/vercel-previews-integration) The process looks like this:
 
-1. Install the Neon <> Vercel integration
+1. Install the `Neon <> Vercel` integration
    - In the Neon Console, navigate to the Integrations section and select the Vercel integration
    - Click Add from Vercel to initiate the installation process
    - Follow the prompts to link your Neon account with your Vercel project
