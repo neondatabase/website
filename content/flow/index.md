@@ -1,6 +1,6 @@
 ---
 title: 'Mastering Database Branching Workflows'
-subtitle: Eliminae seed data, data inconsistencies, and concurrency issues. Ship software faster using Neon branches as ephemeral environments.
+subtitle: 'Eliminate seed data, data inconsistencies, and concurrency issues. Ship software faster using Neon branches as ephemeral environments.'
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 ---
@@ -31,6 +31,30 @@ Here’s how branches work:
 - **Instant.** Because branches leverage the copy-on-write mechanism, they can be spun up in seconds, even for very large datasets. There’s no need to wait for lengthy data exports, imports, or replication setups.
 - **Ephemeral by design.** Neon branches are designed to be temporary. They can be created for a specific purpose—such as a development task, a test run, or staging for a deployment—and deleted once the task is complete. By default, the compute endpoint attached to them scales to zero.
 - **One-click reset.** Branches can be reset to match the parent environment instantaneously. With just a single click (or an API call), the branch discards all changes and reverts to the exact state of the parent. Having a clean slate for testing or development takes no effort. Only the parent needs to be maintained.
+
+<Testimonial
+text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
+author={{
+  name: 'Avi Romanoff',
+  company: 'Founder at Magic Circle',
+  }}
+/>
+
+<Testimonial
+text="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments."
+author={{
+  name: 'Jonathan Reyes',
+  company: 'Principal Engineer at Dispatch',
+  }}
+/>
+
+<Testimonial
+text="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away."
+author={{
+  name: 'Alex Co',
+  company: 'Head of Platform Engineering at Mindvalley',
+  }}
+/>
 
 ## Examples of database branching workflows you can implement
 
