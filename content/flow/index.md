@@ -4,6 +4,7 @@ subtitle: Ship software faster using Neon branches as ephemeral environments
 enableTableOfContents: true
 updatedOn: '2024-12-21T09:00:00.000Z'
 ---
+## Traditional database workflows are broken
 
 Modern developer tooling keeps shortening the software lifecycle—but the database is still the bottleneck for many teams. Way too much engineering time is wasted in these tasks still today:
 
@@ -11,11 +12,9 @@ Modern developer tooling keeps shortening the software lifecycle—but the datab
 - **Manually setting up and resetting environments.** End-to-end testing requires clean, isolated environments. Traditional workflows—i.e. spinning up new database instances, manually importing seed data into all of them—create delays in the testing pipeline.
 - **Managing shared development instances.** Multiple developers share the same instance for dev cause concurrency issues. Productivity is slowed down due to conflicting changes or overwritten test data. The larger the team, the more of a time sink this is. To avoid this, some teams end up creating many, many dev databases.
 
-## Reimagining database workflows
+## How Neon reimagines them
 
-In Neon, we’re proposing a different workflow.
-
-Instead of using separate instances as independent development environments, we rely on the concept of **ephemeral environments**—environments that are by default short-lived, instantly deployable, active only when being used, and programmatically created or deleted.
+To fix this broken system, we propose rethinking database workflows. Instead of using separate instances as independent development environments, we embrace the concept of **ephemeral environments**—environments that are by default short-lived, instantly deployable, active only when being used, and programmatically created or deleted.
 
 These ephemeral environments replicate an exact copy of both the schema and data from a parent environment. This allows teams to focus on maintaining a single parent environment while spinning up as many ephemeral environments as needed, without manual maintenance.
 
@@ -60,7 +59,7 @@ author={{
 
 The concept of database branching is new, and it takes a while to get used to. To help you visualize how it can be achieved in practice, we’ll cover three initial workflows:
 
-**1. Preview Environment Workflow: One Database Branch per Preview**
+### Preview Environment Workflow: One Database Branch per Preview
 Each time a developer creates a pull request, Neon can generate a database branch that pairs with your preview deployment automatically, for example with Vercel previews.
 
 How it works:
@@ -74,7 +73,7 @@ Why it’s better than the traditional workflow:
 - Any schema changes in production can be reflected in a new preview without the need to manually updating any database
 - Bugs and errors are catched early because you’re testing on real data, not a mock
 
-**2. Dev/Test Workflow (or Neon Twin)**
+### Dev/Test Workflow (or Neon Twin)
 In this workflow, you use Neon branches to create isolated environments for development and testing, mirroring a production-like state from a production database hosted outside of Neon (e.g., Amazon RDS).
 
 How it works:
@@ -89,7 +88,7 @@ Why it’s better than the traditional workflow:
 - Everything can be automated via API, adding to existing CI/CD pipelines
 - If environments need to be reset, it takes one click
 
-**3. Local Development Workflow: One Database Branch per Developer**
+### Local Development Workflow: One Database Branch per Developer
 In this workflow, you use database branching to create personalized development environments for every developer on a team.
 
 How it works:
