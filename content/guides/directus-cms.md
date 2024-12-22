@@ -45,15 +45,15 @@ services:
       - ./uploads:/directus/uploads
       - ./extensions:/directus/extensions
     environment:
-      SECRET: "replace-with-secure-random-value"
-      ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "d1r3ctu5"
-      DB_CLIENT: "pg"
-      DB_CONNECTION_STRING: "postgresql://neondb_owner:...@ep-...us-east-1.aws.neon.tech/neondb?sslmode=require"
-      DB_SSL__REJECT_UNAUTHORIZED: "true"
-      WEBSOCKETS_ENABLED: "true"
-      CORS_ENABLED: "true"
-      CORS_ORIGIN: "*"
+      SECRET: 'replace-with-secure-random-value'
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'd1r3ctu5'
+      DB_CLIENT: 'pg'
+      DB_CONNECTION_STRING: 'postgresql://neondb_owner:...@ep-...us-east-1.aws.neon.tech/neondb?sslmode=require'
+      DB_SSL__REJECT_UNAUTHORIZED: 'true'
+      WEBSOCKETS_ENABLED: 'true'
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: '*'
 ```
 
 Now, update the `DB_CONNECTION_STRING` value to be the connection string obtained in the step earlier. Finally, run the following command to start the local Directus CMS instance:
@@ -68,7 +68,7 @@ Once the migrations are ran succesfully, the Directus CMS instance would be acce
 
 Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) view, and click the `+` icon to start creating a new data model.
 
-Set the **Name** field to be **authors**, press the next arrow icon, and save by clicking the tick icon. 
+Set the **Name** field to be **authors**, press the next arrow icon, and save by clicking the tick icon.
 
 ![](/guides/images/directus-cms/author-1.png)
 
