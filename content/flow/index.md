@@ -9,9 +9,9 @@ updatedOn: '2024-12-21T09:00:00.000Z'
 
 Modern developer tooling keeps shortening the software lifecycle—but the database is still the bottleneck for many teams. Way too much engineering time is wasted in these tasks still today:
 
-- **Maintaining seed files.** Keeping seed data up to date across all environments is a pain that every production team has experienced. Any schema change or new production data requirement forces manual updates to seed files. This maintenance overhead increasingly grows, distracting engineers from the actual release.
+- **Maintaining seed files.** Keeping seed data up to date across all environments is a pain that every production team has experienced. Any schema or data change forces manual updates to seed files. This maintenance overhead increasingly grows, distracting engineers from the actual release.
 - **Manually setting up and resetting environments.** End-to-end testing requires clean, isolated environments. Traditional workflows—i.e. spinning up new database instances, manually importing seed data into all of them—create delays in the testing pipeline.
-- **Managing shared development instances.** Multiple developers share the same instance for dev cause concurrency issues. Productivity is slowed down due to conflicting changes or overwritten test data. The larger the team, the more of a time sink this is. To avoid this, some teams end up creating many, many dev databases.
+- **Managing shared development instances.** Having multiple developers share the same instance for dev is problematic due to conflicting changes or overwritten test data. To avoid this, teams end up creating many dev instances. The larger the team, the more of a time sink it is to manage this growing deployment. 
 
 ## How Neon reimagines them
 
@@ -55,6 +55,8 @@ author={{
   company: 'Head of Platform Engineering at Mindvalley',
   }}
 />
+
+<CTA title="Launch a branching demo" description="See how it takes <500 ms to create environments preloaded with 1 TB " buttonText="Start" buttonUrl="https://fyi.neon.tech/branching" />
 
 ## Examples of database branching workflows you can implement
 
