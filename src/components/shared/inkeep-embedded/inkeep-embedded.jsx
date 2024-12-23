@@ -8,10 +8,10 @@ import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
 
 const Skeleton = () => (
   <div className="w-full flex-col justify-center overflow-hidden">
-    <span className="skeleton h-[45px] w-full" />
-    <span className="skeleton mt-10 h-24 w-full" />
+    <span className="skeleton mt-6 h-[45px] w-full sm:h-[30px]" />
+    <span className="skeleton mt-10 h-24 w-full sm:h-[200px]" />
     <span className="skeleton mt-6 h-[120px] w-full" />
-    <span className="skeleton my-4 h-6 w-full" />
+    <span className="skeleton mt-4 h-[30px] w-full" />
   </div>
 );
 

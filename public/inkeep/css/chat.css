@@ -29,7 +29,7 @@
   font-weight: 500;
   line-height: 125%;
   letter-spacing: -0.04em;
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 @media (max-width: 1023px) {
   .intro-title {
@@ -88,7 +88,12 @@
 
 /* messages wrapper */
 .ikp-messages__wrapper {
-  max-height: calc(100vh - 420px);
+  max-height: calc(100vh - 400px);
+}
+@media (max-width: 767px) {
+  .ikp-messages__wrapper {
+    max-height: calc(100vh - 460px);
+  }
 }
 
 /* message box */
@@ -103,10 +108,48 @@
   background: #131415;
   border-color: #303236;
 }
+/* send button */
+.ikp-ai-chat__send-button {
+  background: #E4E5E7;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+}
+.ikp-ai-chat__send-button:hover {
+  background: #D4D5D7;
+}
+.ikp-ai-chat__send-button svg {
+  color: #94979E;
+  margin-top: -2px;
+  margin-right: -2px;
+}
+[data-theme='dark'] .ikp-ai-chat__send-button {
+  background: #242628;
+}
+[data-theme='dark'] .ikp-ai-chat__send-button:hover {
+  background: #303236;
+}
+[data-theme='dark'] .ikp-ai-chat__send-button svg {
+  color: #E4E5E7;
+}
 
 /* content */
 .ikp-message__wrapper > div:first-child {
   padding: 24px 40px;
+}
+@media (max-width: 612px) {
+  .ikp-message__wrapper > div:first-child {
+    padding: 24px 0;
+  }
+}
+.ikp-message__divider-wrapper {
+  padding-inline: 40px;
+}
+@media (max-width: 612px) {
+  .ikp-message__divider-wrapper {
+    padding-inline: 0;
+  }
 }
 .ikp-chat-bubble__message-content-wrapper > .ikp-h_48px {
   height: auto;
@@ -118,7 +161,8 @@
   justify-content: flex-end;
 }
 .ikp-chat-bubble__user-message .ikp-message-header {
-  padding: 0 12px;
+  padding: 0;
+  margin-right: 12px;
   height: 24px;
   overflow: visible;
 }
@@ -128,18 +172,62 @@
   top: 20px;
   padding: 0;
 }
+@media (max-width: 612px) {
+  .ikp-message-header {
+    margin-bottom: 16px;
+  }
+  .ikp-chat-bubble__bot-message .ikp-message-header {
+    position: unset;
+  }
+}
 .ikp-message-header__avatar-box,
+.ikp-message-header__avatar-user,
 .ikp-bot-avatar__box {
   width: 28px;
   height: 28px;
 }
+@media (max-width: 612px) {
+  .ikp-message-header__avatar-box {
+    width: auto;
+  }
+}
+.ikp-message-header__avatar-user {
+  margin-top: -3px;
+}
+.ikp-message-header__avatar-user,
+.ikp-bot-avatar__box {
+  background-image: none;
+  background-size: contain;
+}
+.ikp-message-header__avatar-user {
+  background-image: url('/inkeep/images/user.svg');
+}
+.ikp-bot-avatar__box {
+  background-image: url('/inkeep/images/bot.svg');
+}
+[data-theme='dark'] .ikp-message-header__avatar-user {
+  background-image: url('/inkeep/images/user-dark.svg');
+}
+[data-theme='dark'] .ikp-bot-avatar__box {
+  background-image: url('/inkeep/images/bot-dark.svg');
+}
+.ikp-message-header__avatar-user img,
+.ikp-bot-avatar__box svg {
+  display: none;
+}
 .ikp-chat-bubble__message-content-wrapper {
   padding: 0;
 }
+.ikp-message-header__name {
+  color: #0055FF;
+  background-color: #0055ff33;
+}
+[data-theme='dark'] .ikp-message-header__name {
+  color: #00E599;
+  background-color: #00e59933;
+}
 /* first title */
 .ikp-chat-bubble__message-content-wrapper > div:first-child > p:first-child strong {
-  display: block;
-  margin-bottom: -16px;
   font-size: 20px;
   font-weight: 600;
   line-height: 125%;
@@ -185,11 +273,11 @@
 [data-theme='dark'] .ikp-citation-sources-header {
   color: white;
 }
-.ikp-result-card:hover .ikp-result-card__container {
+.ikp-result-card:is(:focus,:hover,[data-focus]) .ikp-result-card__container {
   background: #0055FF0f;
   border-color: #0055FF40;
 }
-[data-theme='dark'] .ikp-result-card:hover .ikp-result-card__container {
+[data-theme='dark'] .ikp-result-card:is(:focus,:hover,[data-focus]) .ikp-result-card__container {
   background: #00e5990f;
   border-color: #00e59940;
 }
@@ -202,6 +290,20 @@
   color: #00E599;
 }
 
+/* footer */
+.ikp-ai-chat-footer__content-wrapper {
+  padding-bottom: 0;
+}
+.ikp-ai-chat-footer__footer {
+  height: auto;
+}
+@media (max-width: 612px) {
+  .ikp-ai-chat-footer__footer {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
 /* footer buttons */
 .ikp-btn--size_xs {
   padding: 0 10px;
