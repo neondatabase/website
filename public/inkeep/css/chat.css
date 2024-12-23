@@ -39,6 +39,7 @@
 @media (max-width: 767px) {
   .intro-title {
     font-size: 24px;
+    margin: 0 0 12px;
   }
 }
 
@@ -88,12 +89,7 @@
 
 /* messages wrapper */
 .ikp-messages__wrapper {
-  max-height: calc(100dvh - 400px);
-}
-@media (max-width: 767px) {
-  .ikp-messages__wrapper {
-    max-height: calc(100dvh - 460px);
-  }
+  max-height: calc(100svh - 400px);
 }
 
 /* message box */
@@ -107,6 +103,11 @@
 [data-theme='dark'] .ikp-ai-chat__message-box {
   background: #131415;
   border-color: #303236;
+}
+@media (max-width: 612px) {
+  .ikp-ai-chat__message-box {
+    height: 64px;
+  }
 }
 /* send button */
 .ikp-ai-chat__send-button {

@@ -37,7 +37,7 @@ ToggleButton.propTypes = {
 const ModeToggler = ({ className, isAiChatPage = false }) => (
   <div
     className={clsx(
-      'flex gap-x-0.5 overflow-hidden rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15 md:w-full',
+      'relative z-10 flex gap-x-0.5 overflow-hidden rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15 md:w-full',
       className
     )}
   >
