@@ -88,11 +88,11 @@
 
 /* messages wrapper */
 .ikp-messages__wrapper {
-  max-height: calc(100vh - 400px);
+  max-height: calc(100dvh - 400px);
 }
 @media (max-width: 767px) {
   .ikp-messages__wrapper {
-    max-height: calc(100vh - 460px);
+    max-height: calc(100dvh - 460px);
   }
 }
 
