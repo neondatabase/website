@@ -181,9 +181,9 @@ docker-compose up -d
 ```
 
 <Admonition type="tip" title="Working offline?">
-The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`. 
+The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
 
-However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost: 
+However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
 
 ```bash
 127.0.0.1 db.localtest.me
