@@ -64,6 +64,10 @@
 .ikp-quick-question-button {
   justify-content: flex-start;
   font-size: 16px;
+  color: #494B50;
+}
+[data-theme='dark'] .ikp-quick-question-button {
+  color: #C9CBCF;
 }
 
 /* quick questions title */
@@ -116,6 +120,7 @@
 .ikp-chat-bubble__user-message .ikp-message-header {
   padding: 0 12px;
   height: 24px;
+  overflow: visible;
 }
 .ikp-chat-bubble__bot-message .ikp-message-header {
   position: absolute;
@@ -133,7 +138,8 @@
 }
 /* first title */
 .ikp-chat-bubble__message-content-wrapper > div:first-child > p:first-child strong {
-  margin-bottom: 12px;
+  display: block;
+  margin-bottom: -16px;
   font-size: 20px;
   font-weight: 600;
   line-height: 125%;
@@ -149,6 +155,23 @@
 .ikp-ai-chat-footer__content {
   padding: 0;
 }
+/* source links */
+.ikp-content-parser__sup a {
+  color: #0055FF;
+  background-color: #0055ff33;
+}
+[data-theme='dark'] .ikp-content-parser__sup a {
+  color: #00E599;
+  background-color: #00e59933;
+}
+
+/* copy, like, dislike buttons */
+.ikp-btn--variant_iconButton:hover {
+  color: #0055FF;
+}
+[data-theme='dark'] .ikp-btn--variant_iconButton:hover {
+  color: #00E599;
+}
 
 /* sources */
 .ikp-citation-sources-header {
@@ -157,11 +180,26 @@
   font-weight: 600;
   line-height: 125%;
   letter-spacing: -0.02em;
+  color: #0C0D0D;
+}
+[data-theme='dark'] .ikp-citation-sources-header {
   color: white;
 }
 .ikp-result-card:hover .ikp-result-card__container {
-  background: rgba(0, 229, 153, 0.06);
-  border-color: rgba(0, 229, 153, 0.25);
+  background: #0055FF0f;
+  border-color: #0055FF40;
+}
+[data-theme='dark'] .ikp-result-card:hover .ikp-result-card__container {
+  background: #00e5990f;
+  border-color: #00e59940;
+}
+.ikp-result-card__icon,
+.ikp-result-card__hover-icon {
+  color: #0055FF;
+}
+[data-theme='dark'] .ikp-result-card__icon,
+[data-theme='dark'] .ikp-result-card__hover-icon {
+  color: #00E599;
 }
 
 /* footer buttons */
@@ -170,14 +208,25 @@
   height: 30px;
   border-radius: 4px;
   border: 1px solid #E4E5E7;
-  background: #FFFFFF;
+  background-color: #FFFFFF;
   font-size: 14px;
   font-weight: 400;
   line-height: 100%;
   letter-spacing: -0.02em;
+  color: #494B50;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+.ikp-btn--size_xs:hover {
+  background: var(--ikp-colors-gray-alpha-50);
 }
 [data-theme='dark'] .ikp-btn--size_xs {
   border-color: #242628;
-  background: #0C0D0D;
+  background-color: #0d0d0d;
+  color: #C9CBCF;
+}
+[data-theme='dark'] .ikp-btn--size_xs:hover {
+  border-color: var(--ikp-colors-white-alpha-300);
+  background-color: #262626;
+  color: #C9CBCF;
 }
 
