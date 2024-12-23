@@ -105,6 +105,7 @@
 
 /* messages wrapper */
 .ikp-messages__wrapper {
+  min-height: 200px;
   max-height: calc(100svh - 400px);
 }
 @media (max-width: 1023px) {
