@@ -140,10 +140,10 @@ const Post = ({
 
       <div
         className={clsx(
-          'relative col-span-2 col-start-10 -ml-12 max-w-64 xl:hidden',
+          'relative col-span-2 -ml-12 max-w-64 xl:hidden',
           isUseCase
-            ? '2xl:col-span-3 2xl:ml-auto 2xl:max-w-[238px]'
-            : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+            ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+            : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
         )}
       >
         <div
