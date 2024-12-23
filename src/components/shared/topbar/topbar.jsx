@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-     RDS can create serious bottlenecks in engineering productivity — is this you? Identify common signs of danger and see how Neon can help
+     RDS can create serious bottlenecks in engineering productivity — is this you? See how Neon can help
     </span>
     <ChevronIcon
       className={clsx(
