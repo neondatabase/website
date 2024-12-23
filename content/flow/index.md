@@ -11,7 +11,7 @@ Modern developer tooling keeps shortening the software lifecycle—but the datab
 
 - **Maintaining seed files.** Keeping seed data up to date across all environments is a pain that every production team has experienced. Any schema or data change forces manual updates to seed files. This maintenance overhead increasingly grows, distracting engineers from the actual release.
 - **Manually setting up and resetting environments.** End-to-end testing requires clean, isolated environments. Traditional workflows—i.e. spinning up new database instances, manually importing seed data into all of them—create delays in the testing pipeline.
-- **Managing shared development instances.** Having multiple developers share the same instance for dev is problematic due to conflicting changes or overwritten test data. To avoid this, teams end up creating many dev instances. The larger the team, the more of a time sink it is to manage this growing deployment. 
+- **Managing shared development instances.** Having multiple developers share the same instance for dev is problematic due to conflicting changes or overwritten test data. To avoid this, teams end up creating many dev instances. The larger the team, the more of a time sink it is to manage this growing deployment.
 
 ## How Neon reimagines them
 
