@@ -56,7 +56,7 @@ const MODALS = [
     type: 'support',
     breadcrumb: 'Support',
     title: 'Need help now?',
-    description: 'Our team is here to assist you anytime!',
+    description: 'Please reach out to our Support team!',
     link: {
       title: 'Get support',
       url: LINKS.consoleSupport,

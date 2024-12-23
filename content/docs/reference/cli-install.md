@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.077Z'
+updatedOn: '2024-12-20T19:12:43.516Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -164,7 +164,48 @@ brew upgrade neonctl
 
 <TabItem>
 
-To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the latest binary as described in the install instructions above, and replace your old binary with the new one.
+To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
+
+</TabItem>
+
+</Tabs>
+
+If you're using the Neon CLI in CI/CD tools like GitHub Actions, you can safely pin the Neon CLI to `latest`, as we prioritize stability for CI/CD processes.
+
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
+
+<TabItem>
+
+In your GitHub Actions workflow, you can use the `latest` tag with `npm`:
+
+```yaml
+- name: Install Neon CLI
+  run: npm install -g neonctl@latest
+```
+
+</TabItem>
+
+<TabItem>
+
+Homebrew automatically fetches the latest version when running the `install` or `upgrade` command. You can include the following in your workflow:
+
+```yaml
+- name: Install Neon CLI
+  run: brew install neonctl || brew upgrade neonctl
+```
+
+</TabItem>
+
+<TabItem>
+
+If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/neondatabase/neonctl/releases). For example, you can use `curl` or `wget` in your workflow:
+
+```yaml
+- name: Install Neon CLI
+  run: |
+    curl -L https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-amd64 -o /usr/local/bin/neon
+    chmod +x /usr/local/bin/neon
+```
 
 </TabItem>
 
