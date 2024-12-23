@@ -15,9 +15,9 @@ Modern developer tooling keeps shortening the software lifecycle—but the datab
 
 ## How Neon reimagines them
 
-To fix this broken system, we propose rethinking database workflows. Instead of using separate instances as independent development environments, we embrace the concept of **ephemeral environments**—environments that are by default short-lived, instantly deployable, active only when being used, and programmatically created or deleted.
+To fix this broken system, we propose rethinking database workflows. Instead of using separate, long-lived development instances, we embrace the concept of **ephemeral environments**—environments that are by default short-lived, instantly deployable, active only when being used, and programmatically created or deleted.
 
-These ephemeral environments replicate an exact copy of both the schema and data from a parent environment. This allows teams to focus on maintaining a single parent environment while spinning up as many ephemeral environments as needed, without manual maintenance.
+These ephemeral environments replicate an exact copy of both the schema and data from a parent environment. Teams can concentrate on managing this single parent environment while easily spinning up many ephemeral environments from it, without needing manual maintenance.
 
 How do you do it? With [Neon branches](https://neon.tech/docs/introduction/branching).
 
