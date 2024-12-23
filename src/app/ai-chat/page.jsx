@@ -24,7 +24,6 @@ const AiChatPage = async () => {
       isHeaderSticky
       headerWithBorder
       hasThemesSupport
-      // hideFooter
     >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
         <MobileNav

@@ -21,7 +21,6 @@ const Layout = ({
   isDocPage = false,
   isAiChatPage = false,
   searchIndexName = null,
-  hideFooter = false,
   customType = null,
 }) => (
   <>
@@ -47,7 +46,7 @@ const Layout = ({
       >
         {children}
       </main>
-      {!hideFooter && <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />}
+      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
       <CookieConsent />
     </div>
   </>
@@ -67,7 +66,6 @@ Layout.propTypes = {
   isDocPage: PropTypes.bool,
   isAiChatPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
-  hideFooter: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
