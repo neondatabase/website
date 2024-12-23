@@ -482,6 +482,7 @@
     - title: Neon Identity
       slug: guides/neon-identity
       icon: partner-guide
+      tag: beta
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth
