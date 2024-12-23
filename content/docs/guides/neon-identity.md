@@ -76,27 +76,30 @@ Without Neon Identity, keeping user data in sync often involves:
 Here's how you'd typically sync user data without Neon Identity:
 
 ```typescript
-import { AuthProvider } from "@auth/sdk";
-import { BackgroundJobs } from "@jobs/sdk";
-import { db } from "@/db";
+import { AuthProvider } from '@auth/sdk';
+import { BackgroundJobs } from '@jobs/sdk';
+import { db } from '@/db';
 
 // Set up sync handling
 const jobs = new BackgroundJobs();
 
-jobs.on("user.updated", async (event) => {
+jobs.on('user.updated', async (event) => {
   const { userId } = event;
-  
+
   // Fetch user data from auth provider
   const auth = new AuthProvider();
   const user = await auth.getUser(userId);
-  
+
   // Update database
-  await db.query(`
+  await db.query(
+    `
     INSERT INTO users (id, email, name)
     VALUES ($1, $2, $3)
     ON CONFLICT (id) DO UPDATE 
     SET email = $2, name = $3
-  `, [user.id, user.email, user.name]);
+  `,
+    [user.id, user.email, user.name]
+  );
 });
 ```
 
