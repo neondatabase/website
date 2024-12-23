@@ -6,8 +6,6 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
-<UseCaseContext />
-
 <Video
 sources={[
 {
