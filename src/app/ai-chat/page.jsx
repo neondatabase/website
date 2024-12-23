@@ -42,10 +42,10 @@ const AiChatPage = async () => {
         />
 
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:h-[calc(100svh-144px)] lg:flex-none lg:pb-12 lg:pt-5 md:pb-5 md:pt-4"
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:min-h-[calc(100svh-144px)] lg:flex-none lg:pb-12 lg:pt-0 md:pb-5 md:pt-4"
           size="1408"
         >
-          <ModeToggler className="mb-7 hidden md:flex" isAiChatPage />
+          <ModeToggler className="hidden shrink-0 md:flex" isAiChatPage />
           <h1 className="sr-only">Neon AI Chat</h1>
           <div className="col-span-7 col-start-2 -ml-6 flex w-full max-w-[832px] flex-1 items-center justify-center 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none">
             <InkeepEmbedded />
