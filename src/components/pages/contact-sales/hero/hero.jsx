@@ -82,7 +82,7 @@ const CASE_STUDIES = [
 ];
 
 const Hero = () => (
-  <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[136px] xl:py-32 lg:py-28 md:pb-20 md:pt-[100px]">
+  <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[168px] xl:pb-20 xl:pt-32 lg:py-28 md:py-[100px]">
     <Container className="xl:max-w-5xl lg:max-w-3xl md:px-5" size="1216">
       <div className="flex justify-between lg:mx-auto lg:max-w-xl lg:flex-col lg:gap-14">
         <div className="flex max-w-xl flex-1 flex-col pt-8 xl:max-w-[448px] lg:max-w-full lg:items-center lg:pt-0 lg:text-center">
