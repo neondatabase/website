@@ -1,0 +1,38 @@
+.swiper {
+  @apply relative pb-7 lg:w-screen sm:pb-6;
+
+  &:before,
+  &:after {
+    @apply pointer-events-none absolute inset-y-0 z-10 w-[225px] content-[''];
+    @apply bg-gradient-to-r from-transparent to-black-pure;
+    @apply xl:w-[153px] lg:w-[185px] sm:hidden;
+  }
+
+  &:before {
+    @apply left-0 hidden bg-gradient-to-l lg:block sm:hidden;
+  }
+
+  &:after {
+    @apply right-0 bg-gradient-to-r;
+  }
+}
+
+.swiper-slide {
+  @apply flex w-[278px] sm:w-[calc(100vw-40px)];
+}
+
+.swiper-pagination {
+  @apply !bottom-0 flex gap-3.5;
+  @apply lg:justify-center;
+
+  &-bullet {
+    @apply relative !m-0 h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100;
+    @apply transition-colors duration-300 hover:bg-gray-new-15;
+    @apply before:absolute before:-inset-y-2 before:inset-x-0;
+    @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
+
+    &-active {
+      @apply after:animate-slide-in;
+    }
+  }
+}
