@@ -43,7 +43,7 @@ author={{
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them to create ephemeral environments for development, testing, and preview environments.
 
 - **Branch creation is instant** - Independent of DB size. Storage is not duplicated for each branch.
-- **Branches are cost-efficient** - You can deploy thousands of branches for $19 /month. 
+- **Branches are cost-efficient** - You can deploy thousands of branches for $19 /month.
 - **Branch compute can scale to zero when idle** - to further reduce cost.
 
 How branches can be used to increase development velocity:
@@ -58,8 +58,8 @@ One Branch per PR
 
 Ephemeral Environments for Dev/Test
 : Deploy confidently by using branches to run your test suite on an exact copy of your production database. No handling of seed data, no manual work keeping environments in sync.
-: - [See guide in docs](/docs/use-cases/dev-test) 
-: - [Read how others do it](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle) 
+: - [See guide in docs](/docs/use-cases/dev-test)
+: - [Read how others do it](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
 
 </DefinitionList>
 
@@ -71,7 +71,7 @@ Neon dynamically adjusts the amount of resources allocated to your database in r
 
 <DefinitionList bulletType="check">
 Performance w/ cost-efficiency
-: Your CPU/memory automatically scale up during traffic spikes. When you no longer need the extra resources, your database scales down.  
+: Your CPU/memory automatically scale up during traffic spikes. When you no longer need the extra resources, your database scales down.
 
 No manual resizes for compute or storage
 : Other platforms require downtime for resizes, limit the frequency of resizes, and don't let you scale storage down. On Neon everything is automated and instant.
@@ -88,7 +88,7 @@ Neon abstracts away the concept of servers so that you can focus on building you
 
 - No compute/storage management: With Neon you don’t need to provision, maintain, resize, or administer servers.
 - Managed infrastructure: Neon handles all underlying infrastructure, including security patches, load balancing, and capacity planning.
-- Built-in availability and fault tolerance: Neon has multi-AZ storage redundancy and rapid recovery built-in. 
+- Built-in availability and fault tolerance: Neon has multi-AZ storage redundancy and rapid recovery built-in.
 
 ---
 
@@ -96,7 +96,7 @@ Neon abstracts away the concept of servers so that you can focus on building you
 
 If your SaaS project could benefit from multitenancy, Neon makes it simple to create a dedicated database for each user:
 
-- **Instant deployment**: Neon projects are created in milliseconds via APIs. 
+- **Instant deployment**: Neon projects are created in milliseconds via APIs.
 - **No pre-provisioning**: You can scale your architecture progressively, from a few tenants to thousands.
 - **Pay per usage**: You only pay for the tenants that are actively running.
 
@@ -133,7 +133,6 @@ Serverless (HTTP) Driver
 : Unlock access from serverless environments like AWS Lambda and Cloudflare Workers with the Neon serverless driver. It uses an HTTP API to query from edge/serverless with lower latency.
 </DefinitionList>
 
-
 ### Security and Compliance
 
 ---
@@ -141,7 +140,7 @@ Serverless (HTTP) Driver
 <DefinitionList >
 
 Data regulations
-: Neon complies with CCPA, GDPR, ISO 27001, ISO 27701, SOC 2, SOC 3, and HIPAA. 
+: Neon complies with CCPA, GDPR, ISO 27001, ISO 27701, SOC 2, SOC 3, and HIPAA.
 
 99.95% SLA
 : For Business and Enterprise customers.
