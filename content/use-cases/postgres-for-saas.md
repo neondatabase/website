@@ -1,6 +1,6 @@
 ---
 title: 'Postgres for SaaS'
-subtitle: Teams build SaaS faster on Neon with autoscaling, database branching, and the serverless operating model.
+subtitle: Build and scale your SaaS faster thanks to autoscaling, database branching, and the serverless operating model.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
@@ -162,5 +162,14 @@ Pay via AWS/Azure Marketplace
 : You can subscribe to Neon via the marketplaces to consolidate billing. Click [here](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for AWS, and [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice) for Azure.
 
 </DefinitionList>
+
+---
+
+<Admonition type="note" title="Get $100 in credits">
+Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
+</Admonition>
+
+---
+
 
 <CTA title="Need more&nbsp;information?" buttonText="Book time with our team" buttonUrl="/contact-sales" />
