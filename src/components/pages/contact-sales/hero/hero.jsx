@@ -137,7 +137,7 @@ const Hero = () => (
             className={clsx(
               'pointer-events-none absolute bottom-0 right-0 size-[725px] translate-x-[30%] translate-y-[35%]',
               'bg-[radial-gradient(50%_50%_at_50%_50%,rgba(30,52,62,.4)_20%,rgba(30,52,62,0))]',
-              'xl:size-[580px] sm:size-[464px]'
+              'xl:size-[580px] lg:translate-y-0 sm:size-[464px]'
             )}
             aria-hidden
           />

@@ -1,5 +1,5 @@
 .swiper {
-  @apply relative pb-7 lg:w-screen;
+  @apply relative pb-7 lg:w-screen sm:pb-6;
 
   &:before,
   &:after {
