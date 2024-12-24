@@ -84,7 +84,7 @@ Finally, click `Save` to finish adding the `name` field to the `authors` schema.
 
 ![](/guides/images/directus-cms/author-4.png)
 
-Now, let's move on to creating the post schema in Directus CMS.
+Now, let's move on to creating the `post` schema in Directus CMS.
 
 ## Configure the posts schema in Directus CMS
 
