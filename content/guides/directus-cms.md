@@ -62,7 +62,7 @@ Now, update the `DB_CONNECTION_STRING` value to be the connection string obtaine
 docker-compose up -d
 ```
 
-Once the migrations are ran succesfully, the Directus CMS instance would be accessible at [localhost:8055/admin](http://localhost:8055/admin/). Sign in with the credentials set in the `docker-compose.yml` file.
+Once the migrations are run successfully, the Directus CMS instance will be accessible at [localhost:8055/admin](http://localhost:8055/admin/). Sign in with the credentials set in the `docker-compose.yml` file.
 
 ## Configure the authors schema in Directus CMS
 
