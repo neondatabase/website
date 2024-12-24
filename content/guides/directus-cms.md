@@ -92,7 +92,7 @@ Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) vi
 
 Enter **posts** in the **Name** field, press the next arrow icon, and save by clicking the `+` icon.
 
-Then, follow the process as earlier to add the following fields to the `posts` schema:
+Then, follow the same process as earlier to add the following fields to the `posts` schema:
 
 - An **Input** field called **title**.
 - A **WYSIWYG** field called **content**.
