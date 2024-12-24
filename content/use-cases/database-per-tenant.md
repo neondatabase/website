@@ -6,7 +6,20 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
-<UseCaseContext />
+<Video
+sources={[
+{
+src: "/videos/pages/doc/db-per-user.mp4",
+type: "video/mp4",
+},
+{
+src: "/videos/pages/doc/db-per-user.webm",
+type: "video/webm",
+}
+]}
+width={768}
+height={432}
+/>
 
 <Admonition type="note" title="TL;DR">
 Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
