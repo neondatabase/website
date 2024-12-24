@@ -123,7 +123,7 @@ const ContactForm = () => {
     >
       <Field
         name="name"
-        label="Your name *"
+        label="Your Name *"
         autoComplete="name"
         placeholder="Marques Hansen"
         theme="transparent"

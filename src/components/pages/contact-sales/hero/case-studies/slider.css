@@ -17,6 +17,10 @@
   }
 }
 
+.swiper-slide {
+  @apply flex w-[278px] sm:w-[calc(100vw-40px)];
+}
+
 .swiper-pagination {
   @apply !bottom-0 flex gap-3.5;
   @apply lg:justify-center;

@@ -11,7 +11,7 @@ import Link from 'components/shared/link/link';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import './style.css';
+import './slider.css';
 
 const CaseStudies = ({ items }) => (
   <Swiper
@@ -31,7 +31,7 @@ const CaseStudies = ({ items }) => (
     centeredSlides
   >
     {items.map(({ title, description, logo, link }, index) => (
-      <SwiperSlide className="!flex !w-[278px] sm:!w-[calc(100vw-40px)]" tag="li" key={index}>
+      <SwiperSlide tag="li" key={index}>
         <Link
           className="group relative h-44 w-full rounded-xl border border-gray-new-10 bg-[#0A0A0C] p-5 text-left shadow-contact xl:h-[134px] xl:p-[18px] md:h-32 md:p-4"
           to={link}
