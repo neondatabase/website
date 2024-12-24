@@ -90,7 +90,7 @@ Now, let's move on to creating the `post` schema in Directus CMS.
 
 Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) view, and click the `+` icon to start creating a new data model.
 
-Set the **Name** field to be **posts**, press the next arrow icon, and save by clicking the `+` icon.
+Enter **posts** in the **Name** field, press the next arrow icon, and save by clicking the `+` icon.
 
 Then, follow the process as earlier to add the following fields to the `posts` schema:
 
