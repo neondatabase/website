@@ -171,5 +171,4 @@ Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice 
 
 ---
 
-
 <CTA title="Need more&nbsp;information?" buttonText="Book time with our team" buttonUrl="/contact-sales" />
