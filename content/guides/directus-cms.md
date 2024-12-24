@@ -21,7 +21,7 @@ To follow the steps in this guide, you will need the following:
 
 Using a serverless Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project. You will then be presented with a dialog that provides a connection string of your database. You will be using the connection string to connect Directus CMS instance to your Postgres database.
+To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project. You will then be presented with a dialog that provides a connection string for your database. You will be using the connection string to connect the Directus CMS instance to your Postgres database.
 
 ## Setting up Directus locally with Postgres
 
