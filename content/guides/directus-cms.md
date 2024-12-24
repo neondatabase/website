@@ -76,7 +76,7 @@ Once that's done, click on `Create Field` to add a field to the `authors` schema
 
 ![](/guides/images/directus-cms/author-2.png)
 
-Select the field type as `Input` and set the `Key` as **name** to signify the field to be representative of author's name.
+Select `Input` as the field type and set the `Key` as **name** to indicate that the field represents the author's name.
 
 ![](/guides/images/directus-cms/author-3.png)
 
