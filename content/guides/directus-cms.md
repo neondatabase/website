@@ -56,7 +56,7 @@ services:
       CORS_ORIGIN: '*'
 ```
 
-Now, update the `DB_CONNECTION_STRING` value to be the connection string obtained in the step earlier. Finally, run the following command to start the local Directus CMS instance:
+Now, set the `DB_CONNECTION_STRING` value to the connection string you obtained previously. Finally, run the following command to start the local Directus CMS instance:
 
 ```shell
 docker-compose up -d
