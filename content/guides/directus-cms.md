@@ -68,7 +68,7 @@ Once the migrations are run successfully, the Directus CMS instance will be acce
 
 Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) view, and click the `+` icon to create a new data model.
 
-Set the **Name** field to be **authors**, press the next arrow icon, and save by clicking the tick icon.
+Set the **Name** field to **authors**, press the next arrow icon, and save by clicking the tick icon.
 
 ![](/guides/images/directus-cms/author-1.png)
 
