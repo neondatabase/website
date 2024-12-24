@@ -66,7 +66,7 @@ Once the migrations are run successfully, the Directus CMS instance will be acce
 
 ## Configure the authors schema in Directus CMS
 
-Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) view, and click the `+` icon to start creating a new data model.
+Navigate to the [Data Model](http://localhost:8055/admin/settings/data-model) view, and click the `+` icon to create a new data model.
 
 Set the **Name** field to be **authors**, press the next arrow icon, and save by clicking the tick icon.
 
