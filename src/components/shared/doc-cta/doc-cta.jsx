@@ -25,7 +25,7 @@ const DocCta = ({
       'doc-cta not-prose rounded-[10px]',
       isIntro
         ? 'my-12 px-6 py-5 md:my-8'
-        : 'my-5 flex items-end gap-x-16 px-7 py-6 md:flex-col md:items-start',
+        : 'my-5 flex items-end justify-between gap-x-16 px-7 py-6 md:flex-col md:items-start',
       'border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)]',
       'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]'
     )}
