@@ -120,4 +120,12 @@ author={{
 [Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
 </div>
 
+---
+
+<Admonition type="note" title="Get $100 in credits">
+Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
+</Admonition>
+
+---
+
 <CTA title="Have questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
