@@ -639,6 +639,8 @@
               slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
+            - title: Inngest
+              slug: guides/logical-replication-inngest
         - section: Replicate to Neon
           items:
             - title: AlloyDB
