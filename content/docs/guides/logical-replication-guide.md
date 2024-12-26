@@ -6,7 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
-updatedOn: '2024-10-02T13:57:11.420Z'
+updatedOn: '2024-12-26T17:57:49.404Z'
 ---
 
 <LRBeta/>
