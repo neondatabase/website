@@ -32,7 +32,7 @@
       }
     ],
     "otherFeatures": {
-      "features": [{ "title": "Read replicas" }, { "title": "90+ Postgres extensions" }]
+      "features": [{ "title": "Read replicas" }, { "title": "90+ Postgres extensions" }, { "title": "Built-in HA" }]
     },
     "button": {
       "url": "https://console.neon.tech/signup",
