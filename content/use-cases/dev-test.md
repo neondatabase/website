@@ -232,4 +232,12 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 - **1. Create a Neon account**. Sign up for our Free Plan [here](https://console.neon.tech/signup) (no credit card required).
 - **2. Explore our guide in docs.** [Follow these steps](https://neon.tech/docs/use-cases/dev-test) help you get started.
 
+---
+
+<Admonition type="note" title="Get $100 in credits">
+Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
+</Admonition>
+
+---
+
 <CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we’re here to help you set things up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />
