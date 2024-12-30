@@ -186,9 +186,9 @@ if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in enviro
 export default {
   schema: './app/db/schema.ts',
   out: './drizzle',
-  driver: 'pg',
+  dialect: 'postgresql',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL,
   },
   strict: true,
 } satisfies Config;
@@ -197,13 +197,13 @@ export default {
 Now, generate the migration files by running the following command:
 
 ```bash
-npx drizzle-kit generate:pg
+npx drizzle-kit generate
 ```
 
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:
 
 ```bash
-npx drizzle-kit push:pg
+npx drizzle-kit push
 ```
 
 The `user_messages` table will now be visible in the Neon console.
