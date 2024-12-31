@@ -36,7 +36,7 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <a href="/docs/import/migrate-from-azure-postgres" description="Migrate from an Azure Database for PostgreSQL to Neon Postgres" icon="import">Migrate from Azure</a>
 
-<a href="/docs/import/migrate-from-digital-ocean" description="Migrate data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore" icon="aws">Migrate from Digital Ocean</a>
+<a href="/docs/import/migrate-from-digital-ocean" description="Migrate data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore" icon="import">Migrate from Digital Ocean</a>
 
 <a href="/docs/import/import-sample-data" description="Import one of several sample datasets for exploration and testing" icon="download">Import sample data</a>
 
