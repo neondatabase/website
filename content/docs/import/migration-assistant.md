@@ -42,8 +42,8 @@ Neon will check the availability and configuration of your source database to he
 
 - **Postgres version** — Verifies that your source database uses a version of Postgres that Neon supports (Postgres 14 to 17).
 - **Region** — Checks the hosting region of your source database.
-- **Supported extensions** — Identifies whether your extensions are supported by Neon. Unsupported extensions are listed, but you are not blocked from continuing the migration. Use your discretion.
-- **Compatible extensions** — Checks that your extension versions match Neon's current support. See [Supported Postgres extensions](/docs/extensions/pg-extensions) for a matrix of extensions to Postgres versions in Neon.
+- **Supported Postgres extensions** — Identifies whether your extensions are supported by Neon. Unsupported extensions are listed, but you are not blocked from continuing the migration. Use your discretion.
+- **Compatible Postgres extension versions** — Checks that your extension versions match Neon's current support. See [Supported Postgres extensions](/docs/extensions/pg-extensions) for a matrix of extensions to Postgres versions in Neon.
 
 ## Step 2 — Create a Neon project
 
@@ -94,3 +94,7 @@ For more detailed instructions about using these commands, see [Migrate data usi
 
 1. **Verify data integrity** by running some queries and checking that tables and data are present as expected in Neon.
 2. **Switch over your application** by updating your connection string to point to Neon. You can find your connection details on your project Dashboard. See [Connect from any application](/docs/connect/connect-from-any-app) for more information.
+
+## It didn't work. What can I do?
+
+If your database migration failed because of an incompatibility, a connection issue, or another problem, contact us for [migration assistance](https://neon.tech/migration-assistance). We're here to help you get up and running.
