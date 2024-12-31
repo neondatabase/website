@@ -23,3 +23,16 @@ Connect with the community and share your insights on our Discord Server and X (
 - [Neon Discord Server](https://discord.gg/92vNTzKDGp)
 - [X (Twitter)](https://twitter.com/neondatabase)
 - [Neon YouTube](https://www.youtube.com/@neondatabase)
+
+## Join the Neon Creator Program
+
+Are you a developer using Postgres to teach, build, or create content for others? The Neon Creator program offers unique opportunities to collaborate, grow, and connect with the Neon team and community.
+
+**Why join?**
+
+- Get early access to new features.
+- Participate in feedback sessions with the Neon team.
+- Collaborate on videos, blog posts, or talks.
+- Join an exclusive Discord channel for Creators.
+
+[Apply to become a Neon Creator](https://neon.tech/creators)
