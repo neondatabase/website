@@ -2,7 +2,7 @@
 title: Neon Migration Assistant
 subtitle: Move your existing database to Neon using our guided tool
 enableTableOfContents: true
-updatedOn: '2024-11-22T19:06:16.922Z'
+updatedOn: '2024-12-31T13:01:35.403Z'
 ---
 
 When you're ready to move your data to Neon, our Migration Assistant can help. You need only the connection string to your existing database to get started.
