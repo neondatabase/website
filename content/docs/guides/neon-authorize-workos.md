@@ -224,9 +224,9 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from WorkOS, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from WorkOS, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
-<Tabs labels={["server-component.tsx",".env"]}>
+<Tabs labels={["server-component.tsx", "client-component.tsx" ,".env"]}>
 
 <TabItem>
 
@@ -237,7 +237,7 @@ import { neon } from '@neondatabase/serverless';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 
 export default async function TodoList() {
-    const { user, accessToken } = await withAuth({ ensureSignedIn: true });
+    const { user, accessToken } = await withAuth({ ensureSignedIn: true }); // [!code highlight]
      if (!user) {
         throw new Error('No user');
     }
@@ -249,19 +249,72 @@ export default async function TodoList() {
             if (!jwt) {
                 throw new Error('No JWT token available');
             }
-            return jwt;
+            return jwt; // [!code highlight]
         },
     });
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
     const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
     return (
         <ul>
             {todos.map((todo) => (
                 <li key={todo.id}>{todo.task}</li>
+            ))}
+        </ul>
+    );
+}
+```
+
+</TabItem>
+
+<TabItem>
+
+```typescript shouldWrap
+'use client';
+
+import type { Todo } from '@/app/schema';
+import { neon } from '@neondatabase/serverless';
+import { withAuth } from '@workos-inc/authkit-nextjs';
+import { useEffect, useState } from 'react';
+
+const getDb = (token: string) =>
+    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+        authToken: token, // [!code highlight]
+    });
+
+export default function TodoList() {
+    const [todos, setTodos] = useState<Array<Todo>>();
+    const auth = withAuth();
+
+    useEffect(() => {
+        async function loadTodos() {
+            const { accessToken } = await auth; // [!code highlight]
+            if (!accessToken) {
+                return;
+            }
+
+            const sql = getDb(accessToken);
+
+            // WHERE filter is optional because of RLS.
+            // But we send it anyway for performance reasons.
+            const todosResponse = await
+                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+
+            setTodos(todosResponse as Array<Todo>);
+        }
+
+        loadTodos();
+    }, [auth]);
+
+    return (
+        <ul>
+            {todos?.map((todo) => (
+                <li key={todo.id}>
+                    {todo.task}
+                </li>
             ))}
         </ul>
     );
