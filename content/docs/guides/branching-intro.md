@@ -75,16 +75,6 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 </DetailIconCards>
 
-## Branching guides
-
-Learn how to promote a branch to become your default branch.
-
-<DetailIconCards>
-
-<a href="/docs/guides/branch-promote" description="Promote a branch to the default branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
-
-</DetailIconCards>
-
 ## Example applications
 
 Explore example applications that use Neon's branching feature.
