@@ -81,7 +81,7 @@ begin
 
 	-- insert first & last name into the actor table
 	insert into actor(first_name, last_name)
-	values('John','Doe');
+	values(fname, lname);
 end;
 $$;
 ```
