@@ -63,13 +63,12 @@ const CtaBlock = ({
         {description && (
           <p
             className={clsx(
-              'mt-2.5',
+              'mt-2.5 [&>a:hover]:underline [&>a]:text-primary-2',
               sizeClassNames[size].description,
               hasDecor ? 'text-gray-new-70' : 'text-gray-new-60'
             )}
-          >
-            {description}
-          </p>
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         )}
       </div>
       <Button

@@ -163,12 +163,4 @@ Pay via AWS/Azure Marketplace
 
 </DefinitionList>
 
----
-
-<Admonition type="note" title="Get $100 in credits">
-Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
-</Admonition>
-
----
-
-<CTA title="Need more&nbsp;information?" buttonText="Book time with our team" buttonUrl="/contact-sales" />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
