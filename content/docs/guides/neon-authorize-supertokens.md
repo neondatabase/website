@@ -1,13 +1,13 @@
 ---
-title: Secure your data with WorkOS and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using WorkOS and Neon Authorize
+title: Secure your data with SuperTokens and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using SuperTokens and Neon Authorize
 enableTableOfContents: true
 updatedOn: '2025-01-02T00:00:00.000Z'
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-authorize">WorkOS + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-authorize">SuperTokens + Neon Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -16,49 +16,49 @@ updatedOn: '2025-01-02T00:00:00.000Z'
 </DocsList>
 </InfoBlock>
 
-Use WorkOS with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using WorkOS for user authentication. It shows you how to integrate WorkOS with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use SuperTokens with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using SuperTokens for user authentication. It shows you how to integrate SuperTokens with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-WorkOS handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [WorkOS](https://www.workos.com) Workspace with an existing application (e.g., a **todos** app) that uses WorkOS for user authentication.
+- A [SuperTokens](https://www.supertokens.com) service either managed/self-hosted with an existing application (e.g., a todos app) that uses SuperTokens for user authentication.
 
-## Integrate WorkOS with Neon Authorize
+## Integrate SuperTokens with Neon Authorize
 
-In this first set of steps, we’ll integrate WorkOS as an authorization provider in Neon. When these steps are complete, WorkOS will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we’ll integrate SuperTokens as an authorization provider in Neon. When these steps are complete, SuperTokens will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your WorkOS JWKS URL
+### 1. Get your SuperTokens JWKS URL
 
-When integrating WorkOS with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating SuperTokens with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The WorkOS JWKS URL follows this format:
-
-```
-https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}
-```
-
-You can locate your WorkOS Client Id by navigating to the **Overview** page in the WorkOS dashboard.
-
-![WorkOS Overview Page](/docs/guides/workos_overview_page.png)
-
-Replace `{YOUR_CLIENT_ID}` with your WorkOS URL. For example, if your Client Id is `client_12345`, your JWKS URL would be:
+The SuperTokens JWKS URL follows this format:
 
 ```
-https://api.workos.com/sso/jwks/client_12345
+{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json
 ```
 
-### 2. Add WorkOS as an authorization provider in the Neon Console
+You can locate your SuperTokens Core connection URI in the SuperTokens Dashboard under **Core Management**.
 
-Once you have the JWKS URL, go to the **Neon Console** and add WorkOS as an authentication provider under the **Authorize** page. Paste your copied URL into the **Json Web Key Set (JWKS) URL** field.
+![SuperTokens Dashboard](/docs/guides/supertokens_dashboard.png)
+
+Replace `{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}` with your actual connection URI. For example, if your connection URI is `https://try.supertokens.io`, your JWKS URL would be:
+
+```bash
+https://try.supertokens.io/.well-known/jwks.json
+```
+
+### 2. Add SuperTokens as an authorization provider in the Neon Console
+
+Once you have the JWKS URL, go to the **Neon Console** and add SuperTokens as an authentication provider under the **Authorize** page. Paste your copied URL into the **Json Web Key Set (JWKS) URL** field.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/workos_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/supertokens_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
@@ -141,7 +141,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated WorkOS with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated SuperTokens with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -224,7 +224,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from WorkOS, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from SuperTokens, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx", "client-component.tsx" ,".env"]}>
 
@@ -234,29 +234,25 @@ With RLS policies in place, you can now query the database using JWTs from WorkO
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import { cookies } from "next/headers";
 
 export default async function TodoList() {
-    const { user, accessToken } = await withAuth({ ensureSignedIn: true }); // [!code highlight]
-     if (!user) {
-        throw new Error('No user');
-    }
-
-    const jwt = accessToken;
-
+    const parsed_cookies = await cookies();
+    const accessToken = parsed_cookies.get("sAccessToken")?.value; // [!code highlight]
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            if (!jwt) {
-                throw new Error('No JWT token available');
+            const token = accessToken;
+            if (!token) {
+                throw new Error('No token found');
             }
-            return jwt; // [!code highlight]
+            return token; // [!code highlight]
         },
     });
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
-    const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+    const todos = await 
+      sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
     return (
         <ul>
@@ -277,7 +273,7 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import Session from 'supertokens-web-js/recipe/session';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -287,12 +283,13 @@ const getDb = (token: string) =>
 
 export default function TodoList() {
     const [todos, setTodos] = useState<Array<Todo>>();
-    const auth = withAuth();
+    const session = Session;
 
     useEffect(() => {
         async function loadTodos() {
-            const { accessToken } = await auth; // [!code highlight]
+            const accessToken = await session.getAccessToken(); // [!code highlight]
             if (!accessToken) {
+                console.error('No access token available');
                 return;
             }
 
@@ -301,13 +298,13 @@ export default function TodoList() {
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+              sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }
 
         loadTodos();
-    }, [auth]);
+    }, [session]);
 
     return (
         <ul>

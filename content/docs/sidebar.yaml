@@ -523,6 +523,8 @@
               slug: guides/neon-authorize-google-identity
             - title: PropelAuth
               slug: guides/neon-authorize-propelauth
+            - title: SuperTokens
+              slug: guides/neon-authorize-supertokens
             - title: WorkOS
               slug: guides/neon-authorize-workos
     - title: Integrations
