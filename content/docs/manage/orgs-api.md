@@ -60,8 +60,12 @@ To find your organization's `org_id`, navigate to your Organization's **Settings
 
 There are two types of organization API keys:
 
-- **Organization API keys** — These keys provide admin-level access to all organization resources, including projects, members, and settings
-- **Project-scoped organization API keys** — These keys provide limited, member-level access to specific projects within the organization
+- **Organization API keys** — Provide admin-level access to all organization resources, including projects, members, and settings. Only organization admins can create these keys.
+- **Project-scoped organization API keys** — Provide limited, member-level access to specific projects within the organization. Any member of a project can create a key for that project.
+
+The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one.
+
+For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
 Only organization admins can create these keys, and the key token is only displayed once at creation time. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
