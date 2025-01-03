@@ -73,7 +73,7 @@ First, create a new database called `people` on the `main` branch and add some s
 
 1. Connect to the `people` database with psql:
 
-   ```bash
+   ```bash shouldWrap
    psql 'postgresql://neondb_owner:*********@ep-crimson-frost-a5i6p18z.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 

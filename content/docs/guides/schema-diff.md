@@ -94,12 +94,12 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 
 The `compare_schema` endpoint lets you compare schemas between Neon branches programmatically and track schema changes. The endpoint response highlights differences in a `diff` format, making it useful for automating schema migrations and integrating schema checks into CI/CD workflows.
 
-Another use case for schema diff via the Neon API is AI agent-driven workflows, such as environment setup and schema migrations. The `compare_schema` endpoint allows AI agents to programmatically retrieve schema differences by comparing two branches.
+Another use case for schema diff via the Neon API is AI agent-driven workflows, such as environment setup and schema migrations. The `compare_schema` endpoint allows AI agents to programmatically retrieve schema differences by comparing two Neon branches.
 
 To compare schemas between two branches, use a cURL command similar to the following:
 
 ```bash
-url -X GET \
+curl -X GET \
   "https://console.neon.tech/api/v2/projects/wispy-butterfly-25042691/branches/br-rough-boat-a54bs9yb/compare_schema" \
   -G \
   --data-urlencode "base_branch_id=br-royal-star-a54kykl2" \
@@ -111,7 +111,7 @@ url -X GET \
 | Parameter          | Description                                                                               | Required | Example                    |
 | ------------------ | ----------------------------------------------------------------------------------------- | -------- | -------------------------- |
 | `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-rough-boat-a54bs9yb`   |
+| `<branch_id>`      | The ID of the target branch to compare — the branch with the modified schema.             | Yes      | `br-rough-boat-a54bs9yb`   |
 | `<base_branch_id>` | The ID of the base branch for comparison.                                                 | Yes      | `br-royal-star-a54kykl2`   |
 | `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `neondb`                   |
 | `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
@@ -120,7 +120,7 @@ url -X GET \
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
 </Admonition>
 
-Here’s an example of the `compare_schema` diff output for the `neondb` database after comparing `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`, where a new column was added to the target branch.
+Here’s an example of the `compare_schema` diff output for the `neondb` database after comparing target branch `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`.
 
 ```diff
 --- a/neondb
