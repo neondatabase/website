@@ -13,11 +13,11 @@ Most actions performed in the Neon Console can also be performed using the [Neon
 
 Neon supports three types of API keys:
 
-| Key Type              | Who Can Create              | Scope                                                       | Validity                                    |
-|----------------------|-----------------------------|-------------------------------------------------------------|---------------------------------------------|
-| Personal API Key     | Any user                    | User's personal projects and any organization projects where they are a member | Valid until revoked; org project access ends if user leaves organization |
-| Organization API Key | Organization administrators | All projects within the organization                        | Valid until revoked |
-| Project-scoped API Key | Organization members      | Single specified project                                    | Valid until revoked or project leaves organization |
+| Key Type               | Who Can Create              | Scope                                                                          | Validity                                                                 |
+| ---------------------- | --------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Personal API Key       | Any user                    | User's personal projects and any organization projects where they are a member | Valid until revoked; org project access ends if user leaves organization |
+| Organization API Key   | Organization administrators | All projects within the organization                                           | Valid until revoked                                                      |
+| Project-scoped API Key | Organization members        | Single specified project                                                       | Valid until revoked or project leaves organization                       |
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
