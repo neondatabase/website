@@ -13,11 +13,11 @@ Most actions performed in the Neon Console can also be performed using the [Neon
 
 Neon supports three types of API keys:
 
-| Key Type                       | Who Can Create              | Scope                                                       | Access Level                                |
-|--------------------------------|-----------------------------|-------------------------------------------------------------|---------------------------------------------|
-| Personal API Key               | Any user                    | User's personal projects and any organization projects where they are a member | Matches user's permissions; access ends if user leaves org |
-| Organization API Key           | Organization administrators | All projects within the organization                        | Full administrative access                  |
-| Project-scoped API Key         | Any project member          | Single specified project                                    | Member-level access; tied to project's organization |
+| Key Type               | Who Can Create              | Scope                                                                          | Access Level                                               |
+| ---------------------- | --------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| Personal API Key       | Any user                    | User's personal projects and any organization projects where they are a member | Matches user's permissions; access ends if user leaves org |
+| Organization API Key   | Organization administrators | All projects within the organization                                           | Full administrative access                                 |
+| Project-scoped API Key | Any project member          | Single specified project                                                       | Member-level access; tied to project's organization        |
 
 Key characteristics:
 
