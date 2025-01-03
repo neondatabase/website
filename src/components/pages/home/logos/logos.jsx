@@ -2,8 +2,8 @@ import clsx from 'clsx';
 
 import Container from 'components/shared/container';
 import bcgIcon from 'icons/home/logos/bcg.svg';
-import mistralIcon from 'icons/home/logos/mistral.svg';
 import nerdwalletIcon from 'icons/home/logos/nerdwallet.svg';
+import outfrontIcon from 'icons/home/logos/outfront7.svg';
 import retoolIcon from 'icons/home/logos/retool.svg';
 import v0Icon from 'icons/home/logos/v0.svg';
 import zimmerBiometIcon from 'icons/home/logos/zimmer-biomet.svg';
@@ -35,9 +35,9 @@ const logos = [
     width: 123,
   },
   {
-    logo: mistralIcon,
-    alt: 'mistral AI',
-    width: 58,
+    logo: outfrontIcon,
+    alt: 'Outfront Media',
+    width: 123,
   },
 ];
 
