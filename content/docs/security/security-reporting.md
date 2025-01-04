@@ -20,9 +20,9 @@ If you have a security concern or believe you have found a vulnerability in any 
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
 
-## Neon's Private Bug Bounty Program with Hackerone
+## Bug bounty program with HackerOne
 
-Neon now has a private bug bounty program! If you identify a vulnerability, you can report it using our submission [form](https://hackerone.com/8777433c-7051-4c92-aed4-430278521656/embedded_submissions/new).
+Neon offers a private bug bounty program. If you discover a vulnerability, report it using our submission [form](https://hackerone.com/8777433c-7051-4c92-aed4-430278521656/embedded_submissions/new).
 
 ## How to disclose vulnerabilities
 

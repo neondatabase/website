@@ -105,7 +105,7 @@ To learn more about how we protect your data and uphold the highest standards of
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
 
-Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#neons-private-bug-bounty-program-with-hackerone).
+Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 
