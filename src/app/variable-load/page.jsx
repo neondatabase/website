@@ -63,8 +63,8 @@ const VariableLoadPage = async () => {
         </Container>
         <Cta
           className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
-          title="Get $100 in credits"
-          description="Start in the Free Plan, get $100 credit once you upgrade"
+          title="Get 100 credits"
+          description="Start in the Free Plan, get 100 credit once you upgrade"
           buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
           buttonText="Sign up"
           buttonUrl="https://console.neon.tech/signup"
