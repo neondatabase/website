@@ -76,4 +76,4 @@ The most-loved database by developers worldwide is also the best choice for AI a
 
 Neon is simply Postgres. Everything an agent knows about Postgres is available in Neon, from extensions to full SQL syntax.
 
-<SubscriptionForm title="If you’re building an AI agent, let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
