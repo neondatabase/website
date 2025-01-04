@@ -116,8 +116,4 @@ author={{
 }}
 />
 
-<div align="center">
-[Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
-</div>
-
-<CTA title="Have questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
