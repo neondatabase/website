@@ -67,7 +67,7 @@ const VariableLoadPage = async () => {
           description="Start in the Free Plan, get $100 credit once you upgrade"
           buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
           buttonText="Sign up"
-          buttonUrl={https://console.neon.tech/signup}
+          buttonUrl="https://console.neon.tech/signup"
         />
       </div>
     </Layout>
