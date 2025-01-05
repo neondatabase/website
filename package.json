@@ -32,6 +32,7 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",
     "@inkeep/uikit": "^0.3.8",
+    "@marsidev/react-turnstile": "^1.1.0",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@next/bundle-analyzer": "^14.2.2",
     "@octokit/core": "^6.1.2",
@@ -92,6 +93,7 @@
     "swiper": "^11.1.5",
     "tailwindcss-safe-area": "^0.5.1",
     "unist-util-visit": "^5.0.0",
+    "use-scramble": "^2.2.15",
     "yup": "^1.4.0"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 ---
-title: 'Database Per User at Scale'
+title: 'Database per tenant at scale'
 subtitle: Manage thousands of Postgres databases with minimal effort and costs.
 enableTableOfContents: true
-updatedOn: '2024-08-23T09:00:00.000Z'
+updatedOn: '2025-01-01T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
@@ -21,35 +21,66 @@ width={768}
 height={432}
 />
 
-<Admonition type="note" title="TL;DR">
-Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
+A multi-tenant architecture enables multiple user groups (tenants) to share one application while keeping their data and access separate.
 
-1. **API-first**: Devs can provision databases, set usage quotas, and manage costs with ease through Neon's API.
-2. **Instant provisioning**: Databases are ready in under a second.
-3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
+![Multi-tenant app](/use-cases/multitenant-application.jpg)
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
+This architecture is typically implemented in one of two ways:
+
+1. A single Postgres instance is shared by all tenants and foreign key constraints are used to enforce data isolation (e.g. having a `tenant_id`/`organization_id` column). This approach is the simplest and is recommended for most use cases.
+2. Separate databases or schemas are used to enforce data isolation within a single Postgres instance.
+
+This guide focuses on the _second_ approach - managing separate databases per tenant. We'll examine why you might need this strategy and discuss its potential challenges. More importantly, we'll introduce a streamlined architecture that leverages Neon to provision individual Postgres instances for each tenant, rather than managing multiple databases within a single Postgres instance.
+
+<Admonition type="note">
+A Postgres instance acts as a container that can hold many databases (each database is created with the `CREATE DATABASE <database_name>` command). When we mention "Postgres instance" in this guide, we're referring to this top-level container.
 </Admonition>
 
-<Testimonial
-text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
-author={{
-  name: 'Himanshu Bandoth',
-  company: 'Software Engineer at Retool',
-}}
-/>
+## Why you might need separate databases per tenant
 
-## Why database-per-user?
+When tenants require stricter data isolation or if the platform you're building needs to support database provisioning, you might need to implement a database per tenant architecture. Some examples include:
 
-One of the first design decisions you’ll face when building an application with Postgres is how to organize your multitenancy. For certain use cases, adopting a database-per-user approach is the most beneficial. Consider the following scenarios:
+- E-commerce platforms needing per-store databases
+- AI agent platforms with individual agent memory/context stores ([Replit Agent](https://neon.tech/use-cases/ai-agents))
+- Developer tools featuring built-in database provisioning ([Retool](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases))
+- CMSs providing dedicated databases per website
+- SaaS platforms with strict data isolation and compliance requirements
+- CRM platforms with customer-specific databases
+- Knowledge bases offering separate org-level document storage
+- ERP platforms maintaining company-specific databases ([OpusFlow](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers))
 
-- **Offering a managed database to end users**: If you’re building a developer platform, low-code/no-code platform, or backend-as-a-service, you may want to provide each end user with a dedicated database, complete with a unique URL. This ensures that users have their own isolated database environment.
-- **Meeting strict data privacy requirements**: If you’re operating a B2B SaaS platform with customers in regulated industries, they may require maximum data isolation at the instance level. A database-per-user approach allows you to meet these stringent data privacy demands by offering each customer their own isolated database.
-- **Complying with regional data regulations**: In cases where data regulations require customer data to be stored within specific regions, creating separate databases in each region provides a straightforward path to compliance.
+One approach is to deploy a large Postgres instance containing many databases.
 
-## Scaling database-per-user architectures in AWS is not a good idea
+![Multi-tenant Postgres instance for all tenants](/use-cases/multitenant-single-postgres-instance.jpg)
 
-Scaling database per tenant architectures in managed Postgres solutions (e.g. Amazon RDS) is hard. If you fit thousands of databases inside a single RDS instance, this instance becomes a single point of failure, and it gets slow and hard to maintain. If you try to manage thousands of small instances in AWS, you start needing a dedicated DevOps team to handle the logistics. Plus, costs skyrocket.
+You'll maintain a mapping of tenant IDs to database names and build custom tooling for database management:
+
+- Provisioning
+- Backup/restore strategy
+- Connection management/routing
+- Resource monitoring
+- User permissions and access controls
+
+If you have data residency requirements, you'll likely need to duplicate your setup in more than one region. You'll notice that while this architecture is possible, it introduces a series of challenges once your tenant's usage grows.
+
+## Challenges when doing a database per tenant in a shared Postgres instance
+
+When you're managing multiple databases within a single Postgres instance, you'll encounter several challenges:
+
+1. To maintain performance, you must overprovision resources, keeping utilization below 80% to accommodate customer growth. This also doesn't take into account the actual database usage patterns, so you're likely paying for more resources than you need.
+2. Resource-intensive queries from one tenant can impact others sharing the instance.
+3. In the event of technical issues, all tenants are impacted.
+4. Scaling becomes complex, as upgrading to a larger instance requires manual tenant migration.
+
+You'll notice that a lot of the issues arise from the fact that you're sharing a single Postgres instance across tenants who likely have different resource requirements.
+
+Ideally, you'd have a dedicated Postgres instance for each tenant.
+
+![Postgres instance per tenant](/use-cases/multitenant-postgres-instance-per-tenant.jpg)
+
+This would allow each tenant's resources to scale independently and avoids problems where one tenant can impact the other. However, this approach typically introduces its own set of challenges around cost, operational complexity, and resource overhead.
+
+Fortunately, Neon makes it possible to get all of the benefits of doing a Postgres instance per tenant architecture without the drawbacks.
 
 <Testimonial
 text="Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive"
@@ -59,54 +90,148 @@ author={{
 }}
 />
 
-## Database-per-user in Neon
+## How Neon enables a Postgres instance per tenant architecture
 
-Neon is Postgres with serverless architecture. With rapid provisioning, scale-to-zero, and robust API support, you can scale database-per-user architectures without management overhead or big budgets. Just create **one project per customer** via the Neon API.
+Neon offers fully managed Postgres with a serverless architecture built for performance, reliability, manageability, and cost efficiency. It supports features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [scale to zero](/docs/get-started-with-neon/production-readiness#scale-to-zero), instant point-in-time restore, automatic storage archiving and more, making it ideal for managing thousands of Postgres instances.
 
-![Database-per-user](/use-cases/database-per-user.jpg)
+### 1-second provisioning
 
-### One project per customer
+A Postgres instance on Neon provisions in a second. You can try out how fast it is by clicking the button below, which will provision a real Postgres instance.
 
-A Neon project is the logical equivalent of an "instance" but without the management heaviness:
+<DeployPostgres />
 
-- By creating one project per customer, each customer's data will be completely isolated.
-- You'll be able to run independent PITRs without affecting your entire fleet.
-- You can create different projects in different regions to match your customers' locations.
+You'll notice that the instance provisioned in under a second (this excludes network latency and round-trip time). This means you can create a new Postgres instance for each tenant on-demand, without worrying about resource overhead or impacting the user experience.
 
-Management is simplified vs other Postgres services because,
+### Autoscaling & scale-to-zero
 
-- There’s no need to provision infrastructure in advance.
-- You can scale your architecture progressively, from a few tenants to hundreds of thousands, without breaking the bank — our pricing plans include a generous number of projects within the monthly fee.
-- New projects are ready in milliseconds, and you can manage everything programmatically via the API.
-- You only pay for the projects that are active thanks to scale-to-zero.
+Neon automatically scales compute resources up and down based on demand. You can set a minimum and a maximum compute size and resources will be dynamically allocated. No need to worry about overprovisioning or manual resizing.
 
-<Admonition type="note" title="Tip">
-You can also migrate schemas across thousands of projects [automatically.](https://neon.tech/blog/migrating-schemas)
+When there are no incoming queries, Postgres on Neon can automatically scale to zero and suspend compute resources. This significantly reduces your compute costs, since you pay only for active time instead of 24/7 compute usage. Once your instance is queried again compute resources are ready in about ~500ms.
+
+![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
+
+<Admonition type="note">
+By default, Neon suspends compute resources after 5 minutes of inactivity. You can adjust this setting (or disable it completely) based on your application's requirements. Check out the [suspend compute](/docs/introduction/suspend-compute) documentation for more information.
 </Admonition>
 
-### A dedicated project for dev/test
+### Custom storage layer
 
-To take advantage of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:
+Neon implements its own custom storage layer, which makes it possible to support features such as:
 
-- Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
-- To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
-- Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
+- Database branching:
+- Instant point-in-time recovery:
+- Automatic storage-level archiving:
 
-![A dedicated project for dev/test](/use-cases/dev-test.jpg)
+While database branching is typically used as part of the software development lifecycle to provide a database for every environment (e.g. staging, testing, development, etc.), it's important to understand this feature since it's the foundation for instant point-in-time recovery and storage-level archiving.
 
-<Admonition type="note" title="Tip">
-Check the [Database Per User Guide](https://neon.tech/use-cases/database-per-tenant) in our documentation for step by step instructions on how to set this up. 
+#### Database branching and instant point-in-time recovery
+
+Neon makes it possible to create copies of your data, known as branches. When a Postgres instance on Neon is provisioned, a root branch called `main` is created along with it.
+
+![development environment branch](/docs/introduction/branching_dev_env.png)
+
+Each branch has three key elements:
+
+- A primary compute for read-write operations
+- A default role
+- A default database
+
+To access a branch's database (where data will be stored), you must connect through that branch's compute. In the context of Neon, a compute runs Postgres.
+
+```text
+Postgres instance on Neon
+    |
+    └── Branch(es)
+        |
+        └── R/W compute
+        |
+        └── Role(s)
+        |
+        └── Database(s)
+```
+
+Neon retains a history of all changes made to your branch's database over time (writes, updates, deletes, etc.), allowing you to create a branch from a current or past state. Creating a branch is a near-instant operation, regardless of the size of your database. This is because a branch is a copy-on-write clone of your data.
+
+This eliminates the need for complex backup and restore strategies and allows you to restore any of your tenant's data to a previous state when needed. Check out the [history retention](/docs/introduction/branching#history-retention) documentation for more information about configuring your history retention window.
+
+#### Automatic storage-level archiving
+
+Neon automatically archives branches that are older than 14 days and have not been accessed for the past 24 hours. These branches are [charged at a reduced per-GB rate](/pricing#storage-pricing), which minimizes storage costs.
+
+Connecting to an archived branch, querying it, or performing some other action that accesses will automaticaly trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
+
+## High-level implementation overview
+
+For an in-depth overview of how to implement a Postgres instance per tenant architecture, check out the [integration guide](/docs/guides/implementing-a-postgres-instance-per-tenant-architecture).
+
+### Managing Postgres instances
+
+In Neon, a Postgres instance is referred to as a "Project". A Project contains many branches, each of which has its own compute and storage resources. A Neon Project also defines the region where project resources reside. You can create a new Project for each tenant, allowing you to manage thousands of Postgres instances with minimal effort.
+
+```text
+Account/Organization
+    |
+    └── Project(s)
+        |
+        └── Branch(es)
+            |
+            └── R/W compute
+            |
+            └── Read replica(s)
+            |
+            └── Role(s)
+            |
+            └── Database(s)
+```
+
+Each Project has a unique ID, which is used to identify the project in the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You will need to map this ID to your tenant's ID in your database.
+
+There are [several SDKs available for use with Neon](https://api-docs.neon.tech/reference/getting-started-with-neon-api), all of which are wrappers around the Neon API, providing methods to programmatically manage Neon projects, branches, databases, endpoints, roles, and more.
+
+We recommend creating a dedicated Neon account for managing your tenants' projects. For staging and development environments, you can create a separate Neon account. This ensures that your production data is isolated from your development and staging environments.
+
+<Testimonial
+text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
+author={{
+  name: 'Himanshu Bandoth',
+  company: 'Software Engineer at Retool',
+}}
+/>
+
+### Billing and monitoring APIs
+
+The Neon API lets you configure limits and monitor usage, enabling billing features, such as:
+
+- **Usage limits**: Define limits on consumption metrics like **storage**, **compute time**, and **data transfer**.
+- **Pricing Plans**: Create different pricing plans for your platform or service. For example, you can set limits on consumption metrics to define your own Free, Pro, and Enterprise plans:
+
+  - **storage**: Define maximum allowed storage for each plan.
+  - **compute time**: Cap CPU usage based on the plan your customers choose.
+  - **data transfer**: Set limits for data transfer (egress) on each usage plan.
+
+<Admonition type="tip" title="partner example">
+For an example of how a Neon partner defined usage limits based on _database instance types_, see [Koyeb Database Instance Types](https://www.koyeb.com/docs/databases#database-instance-types). You will see limits defined on compute size, compute time, stored data, written data, and egress.
 </Admonition>
 
-## Neon for B2B SaaS: Data isolation with easy scalability
+As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
 
-If you’re building a B2B SaaS platform, a database-per-tenant design can simplify your architecture while preserving scalability. With Neon, when you place its tenant on its own project, you offer complete data privacy to your customers via instance-level isolation. This approach also makes it easy to comply with data regulations across different regions, as projects can be created in specific locations to meet local requirements.
+To learn more about setting limits, see [Configure consumption limits](#/docs/guides/partner-consumption-limits).
 
-Each tenant can be scaled independently, optimizing both performance and costs while reducing operational risk. And in the event of an issue or a customer request, you can [run point-in-time recovery (PITR) instantaneously for a specific tenant, without impacting the rest of the fleet](https://neon.tech/docs/guides/branch-restore).
+Neon also provides a range of consumption APIs, which let you query a range of account and project-level metrics to monitor usage. Here are the different endpoints to retrieve these metrics, depending on how you want them aggregated or broken down:
 
-## Neon for dev platforms: Join Vercel, Replit, Koyeb, and others
+| Endpoint                                                                                                 | Description                                                                                                              | Plan Availability            |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only |
+| [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)   | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only |
+| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    |
 
-If you’re instead building a developer platform including a backend, or an [AI Agent](https://neon.tech/use-cases/ai-agents), you can start offering Neon databases to your users by becoming a [Partner](https://neon.tech/partners). Neon is a cost-effective solution that can support your hobby plan and Enterprise customers at the same time. Companies like [Vercel](https://neon.tech/blog/neon-postgres-on-vercel), [Replit](https://neon.tech/blog/neon-replit-integration), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview) are already using Neon to offer Postgres to their end-users.
+For example, you can:
+
+- Query the total usage across all projects, providing a comprehensive view of usage for the billing period or a specific time range spanning multiple billing periods.
+- Get daily, hourly, or monthly metrics across a selected time period, broken out for each individual project.
+- Get usage metrics for individual projects.
+
+To learn how, see [Querying consumption metrics with the API](/docs/guides/partner-consumption-metrics).
 
 <Testimonial
 text="Neon's serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering"
@@ -116,8 +241,36 @@ author={{
 }}
 />
 
-<div align="center">
-[Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
-</div>
+## How much does it cost?
 
-<CTA title="Have questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<PostgresForPlatformsCalculator />
+
+## How it all works under the hood
+
+In contrast to traditional Postgres architectures where compute (CPU and RAM) and storage (disk) are on the same server, Neon's architecture decouples compute from storage.
+
+The database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). In Neon, Postgres runs on a compute, and data (except for what's cached in memory) resides on Neon's storage layer.
+
+This architecture enables Neon to offer features that are simply not possible with traditional Postgres architectures.
+
+![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
+
+You can learn more about Neon's architecture in the [Neon Architecture](/docs/introduction/architecture) overview.
+
+## Conclusion
+
+Managing separate databases per tenant within a Postgres instance can be complex and costly, especially as your tenant base grows. Neon simplifies this process by enabling you to provision individual Postgres instances for each tenant, without the overhead of managing multiple databases within a single Postgres instance.
+
+Each Postgres instance on Neon supports the following features:
+
+- Instant provisioning
+- Autoscaling
+- Scale-to-zero
+- Instant point-in-time recovery
+- Automatic storage archiving
+
+This architecture allows you to manage thousands of Postgres instances with minimal effort and costs, making it ideal for SaaS platforms, developer tools, and other applications requiring strict data isolation and compliance.
+
+If you're interested in learning more about how Neon can help you manage thousands of Postgres databases, feel free to reach out on the Neon Discord or share your email below.
+
+<SubscriptionForm title="Need to provision thousands of databases? Let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />

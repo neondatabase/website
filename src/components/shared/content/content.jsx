@@ -19,6 +19,8 @@ import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import DeployPostgres from 'components/pages/use-case/deploy-postgres';
+import PostgresForPlatformsCalculator from 'components/pages/use-case/postgres-for-platforms-calculator';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
@@ -177,6 +179,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   ComputeCalculator,
   SubscriptionForm,
   Video,
+  DeployPostgres,
+  PostgresForPlatformsCalculator,
   ...sharedComponents,
 });
 
