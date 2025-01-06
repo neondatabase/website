@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
-import CheckIcon from 'icons/subscription-form-.svg';
+import CheckIcon from 'icons/subscription-form-check.svg';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
