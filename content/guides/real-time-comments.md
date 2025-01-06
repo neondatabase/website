@@ -1,10 +1,10 @@
 ---
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2024-01-07T00:00:00.000Z'
-updatedOn: '2024-01-07T00:00:00.000Z'
+createdAt: '2025-01-07T00:00:00.000Z'
+updatedOn: '2025-01-07T00:00:00.000Z'
 title: Building Real-Time Comments with a Serverless Postgres
-subtitle: A step-by-step guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres
+subtitle: A step-by-step guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
 
 Can a serverless Postgres database really handle the demands of a real-time application? The answer lies in pairing it with the right publish-subscribe model. In this guide, you will learn how to combine the real-time capabilities of Ably LiveSync with the structured power of Neon Postgres to build a optimistic and scalable comment system in your Next.js application.
@@ -35,17 +35,17 @@ npm install
 
 The libraries installed include:
 
-- `@ably-labs/models`: A library for working with data models and real-time updates in Ably.
-- `@neondatabase/serverless`: A serverless Postgres client designed for Neon.
-- `@prisma/adapter-neon`: A Prisma adapter for connecting with Neon serverless Postgres.
-- `@prisma/client`: Prisma’s auto-generated client for interacting with your database.
-- `ably`: A real-time messaging and data synchronization library.
 - `ws`: A WebSocket library for Node.js.
+- `ably`: A real-time messaging and data synchronization library.
+- `@neondatabase/serverless`: A serverless Postgres client designed for Neon.
+- `@prisma/client`: Prisma’s auto-generated client for interacting with your database.
+- `@prisma/adapter-neon`: A Prisma adapter for connecting with Neon serverless Postgres.
+- `@ably-labs/models`: A library for working with data models and real-time updates in Ably.
 
 The development-specific libraries include:
 
-- `prisma`: A toolkit for Prisma schema management, migrations, and generating clients.
 - `tsx`: A fast TypeScript runtime for development and rebuilding.
+- `prisma`: A toolkit for Prisma schema management, migrations, and generating clients.
 
 Once that's done, copy the `.env.example` to `.env` via the following command:
 
