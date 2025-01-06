@@ -3,7 +3,8 @@ title: About Neon Identity
 subtitle: Automatically sync user profiles from your auth provider directly to your
   database
 enableTableOfContents: true
-updatedOn: '2024-12-23T17:04:27.879Z'
+tag: beta
+updatedOn: '2024-12-31T18:05:26.275Z'
 ---
 
 <ComingSoon />

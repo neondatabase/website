@@ -6,28 +6,44 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2024-12-21T11:24:04.133Z'
+updatedOn: '2024-12-30T21:13:29.490Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
 
 ## What we're working on now
 
-<Admonition type="tip" title="stay tuned for 2025">
-As 2024 comes to a close, you might have noticed that our "working on now" list is winding down. But don't worry — exciting plans for the new year are just around the corner. Stay tuned for updates!
-</Admonition>
-
 Here's a snapshot of what we're working on now:
 
-- **Schema-only branches**: A feature that lets you create branches that only include your database schema—useful for workflows involving sensitive data.
-- **HIPAA compliance**: We are actively working toward achieving HIPAA readiness, with a target completion by the end of Q2 2025. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
-- **Auth provider integration**: Automatically sync user profiles from your auth provider directly to your database.
-- **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1. If you’re a Brazilian developer, please reach out to via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We’d love to sponsor meetups and get better connected. If there are other regions you'd like to see us support, please [submit a request](/docs/introduction/regions#request-a-region).
-- **A GitHub Copilot extension**: This new extension will make it easier to configure Neon for your repository by providing chat-based access to the latest Neon documentation with repository context.
+- **Schema-only branches**: Create branches that include only your database schema—ideal for workflows involving sensitive data.
+- **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
+- **Neon Identity**: Automatically sync user profiles from your auth provider to your database. Currently in Early Access. See [Neon Identity](/docs/guides/neon-identity) for details.
+- **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1 2025. Brazilian developers: we’d love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
+- **A GitHub Copilot extension**: This new extension provides chat-based access to the latest Neon documentation with repository context, making it easier to configure Neon for your project.
+- **Schema Diff API**: Neon already supports [Schema Diff](https://neon.tech/docs/guides/schema-diff) via the console and CLI. A new schema diff API endpoint is coming soon to support automation and AI integrations.
+- **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data migration to Neon even easier and faster.
+- **Inbound logical replication GA**: Neon supports Postgres logical replication for inbound and outbound data. Outbound replication (from Neon) is GA. In 2025, inbound replication (to Neon) will also reach GA.
 
-If you have other feature ideas, [let us know](#share-your-thoughts).
+Have other feature ideas? [Let us know](#share-your-thoughts).
 
-## What we've just launched
+## What's on the horizon
+
+And here's a quick list of what we'll be taking on in the near future:
+
+- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents that interact with infrastructure, [connect with us](https://neon.tech/agent-design-partner) as we seek design partners. Learn more in [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents).
+- **Staging environments**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
+- **Scheduled backups**: Regular backups with point-in-time recovery.
+- **Exportable logs and traces**: We're exploring features to integrate Neon with monitoring platforms via Postgres log and trace exports.
+- **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional platforms.
+- **Foreign Data Wrapper (FDW) support**: Introducing cross-database querying capabilities.
+- **Neon on Azure GA**: Currently in public preview, we're targeting a GA release with deeper Azure integration.
+- **Larger computes GA**: Autoscaling up to 16 vCPUs and fixed compute sizes up to 56 vCPUs are currently in Beta; GA support is planned for 2025.
+- **Private Networking on Azure**: Following on [AWS PrivateLink support](/docs/guides/neon-private-networking), Azure Private Link is next.
+- **Maintenance management**: Adding user-managed maintenance windows for updates, patches, and Postgres minor upgrades.
+- **Vercel preview deployment support**: Expanding the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) to support preview deployments in the [Neon Native Vercel Integration](/docs/guides/vercel-native-integration).
+- **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
+
+## What we've launched recently
 
 - **Larger computes**: Autoscaling now supports up to 16 vCPUs, and fixed compute sizes up to 56 vCPUs are available in Beta.
 - **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon’s API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
@@ -56,16 +72,6 @@ If you have other feature ideas, [let us know](#share-your-thoughts).
 - **Data migration support with inbound logical replication**: We've introduced inbound logical replication as the first step toward enabling seamless, low-downtime migrations from your current database provider to Neon. This feature allows you to use Neon as your development environment, taking advantage of developer-friendly tools like branching and our [GitHub integration](/docs/guides/neon-github-integration), even if you keep production with your existing provider. To get started, explore our guides for replicating data from AlloyDB, Aurora, CloudSQL, and RDS. See [Replicate data to Neon](/docs/guides/logical-replication-guide#replicate-data-to-neon). Inbound logical replication also supports migrating data between Neon projects, useful for version, region, or account migrations. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 For more of the latest features and fixes, check our [Changelog](/docs/changelog), published weekly. Or watch for our Changelog email, also sent out weekly. You can also subscribe to updates using our [RSS feed](/docs/changelog/rss.xml).
-
-## What's on the horizon
-
-And here's a quick list of what we'll be taking on in the near future:
-
-- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d like to connect with you](https://neon.tech/agent-design-partner) — we’re looking for design partners in this space. For more, see [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents).
-- **Staging Environments**: A critical part of making it easy for you to use Neon as the staging environment for your team's app development &#8212; simple, robust anonymization of PII data. We're working on it.
-- **Snapshots**: Create regularly scheduled snapshots as a way to archive your database &#8212; a cost-effective alternative to long-lived branches.
-- **Support for exporting logs and traces**: We'd like to help users further integrate Neon into their monitoring platforms and services with exportable Postgres logs and traces.
-- **Foreign Data Wrapper (FDW) support**: Add functionality to enable cross-database querying capability.
 
 ## Join the Neon Early Access Program
 

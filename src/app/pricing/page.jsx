@@ -19,7 +19,7 @@ const logos = [
   'genomics',
   'nerdwallet',
   'retool',
-  'mistral',
+  'albertsons',
   'akqa',
   'vercel',
   'bcg',

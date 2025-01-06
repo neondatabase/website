@@ -233,8 +233,6 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -521,6 +519,8 @@
               slug: guides/neon-authorize-firebase-gcp
             - title: Google Identity
               slug: guides/neon-authorize-google-identity
+            - title: PropelAuth
+              slug: guides/neon-authorize-propelauth
     - title: Integrations
       icon: integrations
       slug: guides/integrations
