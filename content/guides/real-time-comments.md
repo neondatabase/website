@@ -104,7 +104,7 @@ npm run db
 
 If it runs succesfully, you should see `Database schema set up succesfully.` in the terminal.
 
-## TODO
+## Setting Up Prisma for Neon Postgres
 
 TODO
 
@@ -304,7 +304,7 @@ The code above interacts with the Postgres database using Prisma to manage comme
 
 - `deleteComment()`: Deletes a comment. It takes in the transaction client (`tx`), mutation ID, and the comment ID to be deleted. Like the other mutation functions, it returns an outbox entry, but with the event name `deleteComment`.
 
-## TODO
+## Building a Real-Time Data Model Client with Ably
 
 TODO
 
@@ -487,7 +487,7 @@ In the code above, the following function and hook are defined:
    - Synchronizes the model with the latest data when the `id` changes.
    - Subscribes to real-time updates from the model, updating the component state accordingly.
 
-## TODO
+## API Routes for Comments and Real-Time Synchronization
 
 TODO
 
