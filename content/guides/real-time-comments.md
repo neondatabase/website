@@ -106,6 +106,154 @@ If it runs succesfully, you should see `Database schema set up succesfully.` in 
 
 ## TODO
 
+```tsx
+import { Prisma, PrismaClient } from '@prisma/client'
+import * as runtime from '@prisma/client/runtime/library'
+import prisma from '@/lib/prisma'
+
+export type Author = {
+  id: number
+  username: string
+  image: string
+}
+
+export type Comment = {
+  id: number
+  postId: number
+  author: Author
+  content: string
+  optimistic?: boolean
+  createdAt: Date
+}
+
+export type Post = {
+  id: number
+  title: string
+  content: string
+  comments: Comment[]
+}
+
+export async function getPosts(): Promise<Post[]> {
+  return await prisma.post.findMany({
+    include: {
+      comments: {
+        include: {
+          author: true,
+        },
+      },
+    },
+  })
+}
+
+export async function getPost(id: number): Promise<[Post, number]> {
+  return await prisma.$transaction(async (tx) => {
+    const post = await getPostTx(tx, id)
+    type r = { nextval: number }
+    const [{ nextval }] = await tx.$queryRaw<r[]>`SELECT nextval('outbox_sequence_id_seq')::integer`
+    return [post, nextval]
+  })
+}
+
+async function getPostTx(tx: TxClient, id: number) {
+  return await tx.post.findUniqueOrThrow({
+    where: { id },
+    include: {
+      comments: {
+        include: {
+          author: true,
+        },
+        orderBy: {
+          createdAt: 'asc',
+        },
+      },
+    },
+  })
+}
+
+export async function getRandomUser() {
+  const count = await prisma.user.count()
+  return await prisma.user.findFirstOrThrow({
+    skip: Math.floor(Math.random() * count),
+  })
+}
+
+export type TxClient = Omit<PrismaClient, runtime.ITXClientDenyList>
+
+export async function addComment(tx: TxClient, mutationId: string, postId: number, authorId: number, content: string): Promise<Prisma.outboxCreateInput> {
+  const comment = await tx.comment.create({
+    data: { postId, authorId, content },
+    include: { author: true },
+  })
+  return {
+    mutation_id: mutationId,
+    channel: `post:${comment.postId}`,
+    name: 'addComment',
+    data: comment,
+    headers: {},
+  }
+}
+
+export async function editComment(tx: TxClient, mutationId: string, id: number, content: string): Promise<Prisma.outboxCreateInput> {
+  await tx.comment.findUniqueOrThrow({ where: { id } })
+  const comment = await tx.comment.update({
+    where: { id },
+    data: { content },
+    include: { author: true },
+  })
+  return {
+    mutation_id: mutationId,
+    channel: `post:${comment.postId}`,
+    name: 'editComment',
+    data: comment,
+    headers: {},
+  }
+}
+
+export async function deleteComment(tx: TxClient, mutationId: string, id: number): Promise<Prisma.outboxCreateInput> {
+  const comment = await tx.comment.delete({
+    where: { id },
+  })
+  return {
+    mutation_id: mutationId,
+    channel: `post:${comment.postId}`,
+    name: 'deleteComment',
+    data: comment,
+    headers: {},
+  }
+}
+
+export async function withOutboxWrite(op: (tx: TxClient, ...args: any[]) => Promise<Prisma.outboxCreateInput>, ...args: any[]) {
+  return await prisma.$transaction(async (tx) => {
+    const { mutation_id, channel, name, data, headers } = await op(tx, ...args)
+    await tx.outbox.create({
+      data: { mutation_id, channel, name, data, headers },
+    })
+  })
+}
+```
+
+The code above interacts with the Postgres database using Prisma to manage comments. It implements operations like fetching, adding, editing, and deleting comments, with an emphasis on ensuring these operations are recorded in the `outbox` table for the event-driven system to capturing changes and reflect them in rest of the web clients. Let's understand each function in the code above:
+
+- `withOutboxWrite()`: **This higher-order function wraps any operation that modifies the database (such as adding, editing, or deleting a comment) and ensures that the change is also written to the outbox table.** It first performs the operation, retrieves the necessary outbox details, and then writes the entry to the outbox table within the same transaction.
+
+- `getPosts()`: Fetches all posts from the database, along with their associated comments and the authors of those comments. The function returns a list of posts, each containing its comments and authors.
+
+- `getPost(id: number): Promise<[Post, number]>`: Fetches a single post by its ID, along with the associated comments and authors. Additionally, it executes a raw SQL query within a transaction to get the next value from a PostgreSQL sequence (`outbox_sequence_id_seq`), returning this value alongside the post. This ensures that the operation has both the requested post and sequence number, which may be used in event-driven systems for ordering.
+
+- `getPostTx(tx: TxClient, id: number)`: A helper function used by `getPost()` to retrieve a post within a transaction (`tx`). It ensures the post's comments are fetched in ascending order of their creation timestamp.
+
+- `getRandomUser()`: Retrieves a random user from the database. The function first counts the total number of users and then selects one randomly based on the count.
+
+- `TxClient`: This type represents a transaction client, which is essentially a modified version of the PrismaClient excluding certain methods that are restricted during transactions (`ITXClientDenyList`).
+
+- `addComment()`: Adds a new comment to a post within a transaction. The function takes in several parameters, such as the transaction client (`tx`), mutation ID, post ID, author ID, and comment content. It returns an `outbox` entry that can be used in an event-driven system for tracking the mutation. The outbox entry includes details like the mutation ID, channel (based on the post), event name (`addComment`), and the newly created comment.
+
+- `editComment()`: Edits an existing comment. It accepts the transaction client (`tx`), mutation ID, comment ID, and new content. After updating the comment, it returns an outbox entry similar to `addComment()`, but with the event name `editComment`.
+
+- `deleteComment()`: Deletes a comment. It takes in the transaction client (`tx`), mutation ID, and the comment ID to be deleted. Like the other mutation functions, it returns an outbox entry, but with the event name `deleteComment`.
+
+## TODO
+
 TODO
 
 ```tsx
