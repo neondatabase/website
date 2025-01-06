@@ -65,6 +65,17 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
+## TODO
+
+![](/guides/images/real-time-comments/create.png)
+![](/guides/images/real-time-comments/name.png)
+![](/guides/images/real-time-comments/rule.png)
+![](/guides/images/real-time-comments/postgres.png)
+![](/guides/images/real-time-comments/values.png)
+![](/guides/images/real-time-comments/api_keys.png)
+
+Use this API key as an environment variable designated as `NEXT_PUBLIC_ABLY_API_KEY` in the `.env` file.
+
 ## Set up Database Schema
 
 In the file named `schema.tsx`, you would see the following code:
