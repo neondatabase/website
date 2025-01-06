@@ -18,7 +18,7 @@ To complete this tutorial, you'll need:
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
-## Step 1: Create the Initial Schema
+<NumberedStep number={1} title="Step 1: Create the Initial Schema">
 
 First, create a new database called `people` on the `main` branch and add some sample data to it.
 
@@ -90,7 +90,9 @@ First, create a new database called `people` on the `main` branch and add some s
 </TabItem>
 </Tabs>
 
-## Step 2: Create a development branch
+</NumberedStep>
+
+<NumberedStep number={2} title="Step 2: Create a development branch">
 
 Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
 
@@ -174,7 +176,9 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 </TabItem>
 </Tabs>
 
-## Step 3: Update schema on a dev branch
+</NumberedStep>
+
+<NumberedStep number={3} title="Step 3: Update schema on a dev branch">
 
 Let's introduce some differences between the two branches. Add a new table to store addresses on the `dev/jordan` branch.
 
@@ -237,7 +241,9 @@ CREATE TABLE address (
 </TabItem>
 </Tabs>
 
-## Step 4: View the schema differences
+</NumberedStep>
+
+<NumberedStep number={4} title="Step 4: View the schema differences">
 
 Now that you have some differences between your branches, you can view the schema differences.
 
@@ -270,8 +276,8 @@ neon branches schema-diff main dev/jordan --database people
 The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
 
 ```diff
---- Database: people	(Branch: br-falling-dust-a5bakdqt) // [!code --]
-+++ Database: people	(Branch: br-morning-heart-a5ltt10i) // [!code ++]
+--- Database: people (Branch: br-falling-dust-a5bakdqt) // [!code --]
++++ Database: people (Branch: br-morning-heart-a5ltt10i) // [!code ++]
 @@ -20,8 +20,46 @@
 
  SET default_table_access_method = heap;
@@ -298,3 +304,5 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 </TabItem>
 
 </Tabs>
+
+</NumberedStep>

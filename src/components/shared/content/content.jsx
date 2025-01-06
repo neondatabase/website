@@ -14,6 +14,7 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import NumberedStep from 'components/pages/doc/numbered-step';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -177,6 +178,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   ComputeCalculator,
   SubscriptionForm,
   Video,
+  NumberedStep,
   ...sharedComponents,
 });
 
