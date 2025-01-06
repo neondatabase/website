@@ -222,25 +222,12 @@
 .ikp-message-header__avatar-user {
   margin-top: -3px;
 }
-.ikp-message-header__avatar-user,
-.ikp-bot-avatar__box {
+[data-theme='dark'] .ikp-message-header__avatar-user {
   background-image: none;
   background-size: contain;
-}
-.ikp-message-header__avatar-user {
-  background-image: url('/inkeep/images/user.svg');
-}
-.ikp-bot-avatar__box {
-  background-image: url('/inkeep/images/bot.svg');
-}
-[data-theme='dark'] .ikp-message-header__avatar-user {
   background-image: url('/inkeep/images/user-dark.svg');
 }
-[data-theme='dark'] .ikp-bot-avatar__box {
-  background-image: url('/inkeep/images/bot-dark.svg');
-}
-.ikp-message-header__avatar-user img,
-.ikp-bot-avatar__box svg {
+[data-theme='dark'] .ikp-message-header__avatar-user img {
   display: none;
 }
 .ikp-chat-bubble__message-content-wrapper {

@@ -45,9 +45,10 @@ const aiChatSettings = {
     'How to create a project?',
     'How to get started with the Neon API?',
   ],
-  botAvatarSrcUrl: '/inkeep/images/example.svg',
-  botAvatarDarkSrcUrl: '/inkeep/images/example.svg',
+  botAvatarSrcUrl: '/inkeep/images/bot.svg',
+  botAvatarDarkSrcUrl: '/inkeep/images/bot-dark.svg',
   userAvatarSrcUrl: '/inkeep/images/user.svg',
+  userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
   shareChatUrlBasePath:
     'https://neon-next-git-docs-perplexity-mode-neondatabase.vercel.app/ai-chat',
@@ -60,7 +61,7 @@ const aiChatSettings = {
     },
     {
       type: 'OPEN_LINK',
-      icon: { builtIn: 'FaPhone' },
+      icon: { builtIn: 'IoChatbubblesOutline' },
       name: 'Neon Support',
       url: 'https://console.neon.tech/app/projects?modal=support',
     },
