@@ -111,27 +111,27 @@ TODO
 ```tsx
 // File: lib/prisma/index.ts
 
-import { neonConfig, Pool } from '@neondatabase/serverless'
-import { PrismaNeon } from '@prisma/adapter-neon'
-import { PrismaClient } from '@prisma/client'
-import { WebSocket } from 'ws'
+import { neonConfig, Pool } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import { WebSocket } from 'ws';
 
 declare global {
-  var prisma: PrismaClient | undefined
+  var prisma: PrismaClient | undefined;
 }
 
-const connectionString = `${process.env.DATABASE_URL}`
+const connectionString = `${process.env.DATABASE_URL}`;
 
-neonConfig.webSocketConstructor = WebSocket
-neonConfig.poolQueryViaFetch = true
+neonConfig.webSocketConstructor = WebSocket;
+neonConfig.poolQueryViaFetch = true;
 
-const pool = new Pool({ connectionString })
-const adapter = new PrismaNeon(pool)
-const prisma = global.prisma || new PrismaClient({ adapter })
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = global.prisma || new PrismaClient({ adapter });
 
-if (process.env.NODE_ENV === 'development') global.prisma = prisma
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
-export default prisma
+export default prisma;
 ```
 
 TODO
