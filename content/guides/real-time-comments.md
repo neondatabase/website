@@ -406,6 +406,168 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
 
 In the code above, the endpoint parses the `id` param in the request and returns the `sequenceId` and the comment details associated with that ID in Postgres.
 
+## TODO
+
+TODO
+
+```tsx
+import ModelsClient from '@ably-labs/models'
+import { Realtime } from 'ably'
+
+let client: ModelsClient
+
+export const modelsClient = () => {
+  const ably = new Realtime({ key: process.env.NEXT_PUBLIC_ABLY_API_KEY })
+  if (!client) client = new ModelsClient({ ably })
+  return client
+}
+```
+
+This function initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
+
+```tsx
+import { ConfirmedEvent, OptimisticEvent } from '@ably-labs/models'
+import cloneDeep from 'lodash/cloneDeep'
+import type { Post as PostType } from '@/lib/prisma/api'
+import type { Author as AuthorType } from '@/lib/prisma/api'
+import { Comment } from '@/lib/prisma/api'
+
+export async function addComment(mutationId: string, author: AuthorType, postId: number, content: string) {
+  const response = await fetch('/api/comments', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mutationId, authorId: author.id, postId, content }),
+  })
+  if (!response.ok) throw new Error(`POST /api/comments: ${response.status} ${JSON.stringify(await response.json())}`)
+  return response.json()
+}
+
+export async function editComment(mutationId: string, id: number, content: string) {
+  const response = await fetch(`/api/comments/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mutationId, content }),
+  })
+  if (!response.ok) throw new Error(`PUT /api/comments/:id: ${response.status} ${JSON.stringify(await response.json())}`)
+  return response.json()
+}
+
+export async function deleteComment(mutationId: string, id: number) {
+  const response = await fetch(`/api/comments/${id}`, {
+    method: 'DELETE',
+    headers: { 'x-mutation-id': mutationId },
+  })
+  if (!response.ok) throw new Error(`DELETE /api/comments/:id: ${response.status} ${JSON.stringify(await response.json())}`)
+  return response.json()
+}
+
+export function merge(existingState: PostType, event: OptimisticEvent | ConfirmedEvent): PostType {
+  // Optimistic and confirmed events use the same merge function logic.
+  // The models function keeps track of the state before events are applied
+  // to make sure the rollback of unconfirmed events works, we need to clone
+  // the state here. Our state contains an array of objects so we don't use
+  // the regular object spread operator.
+  const state = cloneDeep(existingState)
+  switch (event.name) {
+    case 'addComment':
+      const newComment = event.data! as Comment
+      state.comments.push(newComment)
+      break
+    case 'editComment':
+      const editComment = event.data! as Comment
+      const editIdx = state.comments.findIndex((c) => c.id === editComment.id)
+      state.comments[editIdx] = editComment
+      break
+    case 'deleteComment':
+      const { id } = event.data! as { id: number }
+      const deleteIdx = state.comments.findIndex((c) => c.id === id)
+      state.comments.splice(deleteIdx, 1)
+      break
+    default:
+      console.error('unknown event', event)
+  }
+  state.comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+  return state
+}
+```
+
+This block defines three asynchronous functions to handle CRUD operations for comments:
+
+1. **addComment**: Sends a POST request to add a new comment, including the author's details and content, identified by a `mutationId`.
+2. **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
+3. **deleteComment**: Sends a DELETE request to remove a comment by its `id`.
+
+Each function validates the server response and throws an error for unsuccessful requests. Additionally, the `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
+
+```tsx
+'use client'
+
+import { useEffect, useState } from 'react'
+import { Model, SyncReturnType } from '@ably-labs/models'
+import { modelsClient } from './modelsClient'
+import { merge } from '@/lib/models/mutations'
+import type { Post as PostType } from '@/lib/prisma/api'
+
+export type ModelType = Model<(id: number) => SyncReturnType<PostType>>
+
+export async function getPost(id: number) {
+  const response = await fetch(`/api/posts/${id}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+  if (!response.ok) throw new Error(`GET /api/posts/:id: ${response.status} ${JSON.stringify(await response.json())}`)
+  const { sequenceId, data } = (await response.json()) as {
+    sequenceId: string
+    data: PostType
+  }
+  return { sequenceId, data }
+}
+
+export const useModel = (id: number | null): [PostType | undefined, ModelType | undefined] => {
+  const [postData, setPostData] = useState<PostType>()
+  const [model, setModel] = useState<ModelType>()
+
+  useEffect(() => {
+    if (!id) return
+    const model: ModelType = modelsClient().models.get({
+      channelName: `post:${id}`,
+      sync: async () => getPost(id),
+      merge,
+    })
+    setModel(model)
+  }, [id])
+
+  useEffect(() => {
+    if (!id || !model) return
+    const getPost = async (id: number) => await model.sync(id)
+    getPost(id)
+  }, [id, model])
+
+  useEffect(() => {
+    if (!model) return
+    const subscribe = (err: Error | null, data?: PostType | undefined) => {
+      if (err) return console.error(err)
+      setPostData(data)
+    }
+    model.subscribe(subscribe)
+
+    return () => model.unsubscribe(subscribe)
+  }, [model])
+
+  return [postData, model]
+}
+```
+
+This React hook manages the state and synchronization of a post model using the `@ably-labs/models` library:
+
+1. **getPost**: Fetches the initial post data and its sequence ID from an API endpoint.
+2. **useModel Hook**: Manages a model instance and its associated state. It:
+   - Initializes the model with a channel name, `sync` function (to fetch data), and merge logic.
+   - Synchronizes the model with the latest data when the `id` changes.
+   - Subscribes to real-time updates from the model, updating the component state accordingly.
+
+The hook returns the synchronized post data and model instance for use in components.
+
 ## Deploy to Vercel
 
 The repository is now ready to deploy to Vercel. Use the following steps to deploy:
