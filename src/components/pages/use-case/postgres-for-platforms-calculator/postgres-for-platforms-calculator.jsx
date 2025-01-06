@@ -8,23 +8,6 @@ import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 
-// TODO: make labels horizontal to the number input, add animation using motion number and also add glow effect to the card, include pricing comparison to RDS, double check maths, add more details to the breakdown, make the layout less compact. add form validation and error handling. add title for basic configuration.
-
-// write down the list of assumptions made. Perhaps, no need to configure archive percentage.
-
-const DashedBorder = () => (
-  <>
-    <span
-      className="pointer-events-none relative z-20 block h-px w-full bg-[url('/images/pages/variable-load/dashed-border.png')] bg-[8px,1px] bg-repeat-x mix-blend-overlay"
-      aria-hidden
-    />
-    <span
-      className="pointer-events-none relative z-10 -mt-px block h-px w-full bg-[url('/images/pages/variable-load/dashed-border.png')] bg-[8px,1px] bg-repeat-x opacity-50 mix-blend-overlay"
-      aria-hidden
-    />
-  </>
-);
-
 const ComputeSizes = [
   { value: 0.25, label: '0.25 CU (0.25 vCPU, 1GB RAM)' },
   { value: 0.5, label: '0.5 CU (0.5 vCPU, 2GB RAM)' },
@@ -89,6 +72,9 @@ const PostgresForPlatformsCalculator = () => {
   const COMPUTE_HOUR_PRICE = 0.16;
   const STORAGE_PRICE = 0.5;
   const ARCHIVE_STORAGE_PRICE = 0.1;
+  const PROJECTS_UNIT_SIZE = 5000;
+  const PROJECTS_UNIT_PRICE = 50;
+  const BASE_PROJECT_ALLOWANCE = 5000;
 
   // Calculate costs based on form values
   const calculateCosts = () => {
@@ -103,6 +89,12 @@ const PostgresForPlatformsCalculator = () => {
       largeDB,
       archivePercentage,
     } = formValues;
+
+    // Project units calculation
+    const extraProjectUnits = Math.ceil(
+      Math.max(0, numProjects - BASE_PROJECT_ALLOWANCE) / PROJECTS_UNIT_SIZE
+    );
+    const projectsCost = extraProjectUnits * PROJECTS_UNIT_PRICE;
 
     // Compute hours calculation
     const lowHours = 5;
@@ -136,10 +128,12 @@ const PostgresForPlatformsCalculator = () => {
       basePrice: BUSINESS_BASE_PRICE,
       computeCost,
       storageCost,
-      totalCost: BUSINESS_BASE_PRICE + computeCost + storageCost,
+      projectsCost,
+      totalCost: BUSINESS_BASE_PRICE + computeCost + storageCost + projectsCost,
       totalComputeHours,
       regularStorage,
       archiveStorage,
+      extraProjectUnits,
     };
   };
 
@@ -381,8 +375,6 @@ const PostgresForPlatformsCalculator = () => {
               />
             </div>
 
-            <DashedBorder />
-
             <p className="mt-4 text-xl font-bold">
               Total Monthly Cost: {numberFormatter.format(costs.totalCost)}
             </p>
@@ -392,9 +384,16 @@ const PostgresForPlatformsCalculator = () => {
               <div className="mt-4">
                 <h2 className="mb-4 text-xl font-semibold">Cost Breakdown</h2>
                 <ul className="list-disc space-y-2 pl-5">
-                  <li>Base Price: {numberFormatter.format(costs.basePrice)}/month</li>
+                  <li>Base plan price: {numberFormatter.format(costs.basePrice)}/month</li>
                   <li>Extra Compute Cost: {numberFormatter.format(costs.computeCost)}/month</li>
                   <li>Extra Storage Cost: {numberFormatter.format(costs.storageCost)}/month</li>
+                  {costs.extraProjectUnits > 0 && (
+                    <li>
+                      Extra Projects Cost: {numberFormatter.format(costs.projectsCost)} (
+                      {costs.extraProjectUnits} units of {PROJECTS_UNIT_SIZE} projects at $
+                      {PROJECTS_UNIT_PRICE} per unit)
+                    </li>
+                  )}
                 </ul>
 
                 <h2 className="mb-4 text-xl font-semibold">Usage Details</h2>
