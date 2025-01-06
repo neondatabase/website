@@ -59,9 +59,9 @@ const aiChatSettings = {
     },
     {
       type: 'OPEN_LINK',
-      icon: { builtIn: 'FaGithub' },
-      name: 'GitHub',
-      url: 'https://github.com/neondatabase/neon',
+      icon: { builtIn: 'FaPhone' },
+      name: 'Neon Support',
+      url: 'https://console.neon.tech/app/projects?modal=support',
     },
   ],
 };
