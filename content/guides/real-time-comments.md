@@ -518,6 +518,8 @@ In the code above, three asynchronous functions to handle CRUD operations for co
 Each function validates the server response and throws an error for unsuccessful requests. Additionally, the `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
 
 ```tsx
+// File: lib/models/hook.ts
+
 'use client';
 
 import { useEffect, useState } from 'react';
