@@ -92,11 +92,11 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 
 ### Using the Neon API
 
-The [compare_schema](https://api-docs.neon.tech/reference/getprojectbranchschemacomparison) endpoint lets you compare schemas between Neon branches programmatically and track schema changes. The endpoint response highlights differences in a `diff` format, making it useful for automating schema migrations and integrating schema checks into CI/CD workflows.
+The [compare_schema](https://api-docs.neon.tech/reference/getprojectbranchschemacomparison) endpoint lets you compare schemas between Neon branches to track schema changes. The response highlights differences in a `diff` format, making it a useful tool for integrating schema checks into CI/CD workflows.
 
-Another use case for schema diff via the Neon API is AI agent-driven workflows, such as environment setup and schema migrations. The `compare_schema` endpoint allows AI agents to programmatically retrieve schema differences by comparing two Neon branches.
+Another use case for schema diff via the Neon API is AI agent-driven workflows. The `compare_schema` endpoint allows AI agents to programmatically retrieve schema differences by comparing two branches.
 
-To compare schemas between two branches, use a cURL command similar to the following:
+To compare schemas between two branches, you can cURL command similar to the one below, which compares the schema of a target branch to the schema of a base branch. For example, the target branch could be a development branch where a schema change was applied, and the base branch could be the parent of the development branch. By comparing the two, you can inspect the changes that have been made on the development branch.
 
 ```bash
 curl --request GET \
@@ -104,6 +104,8 @@ curl --request GET \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
 ```
+
+The `compare_schema` endpoint supports the following parameters:
 
 | Parameter          | Description                                                                               | Required | Example                    |
 | ------------------ | ----------------------------------------------------------------------------------------- | -------- | -------------------------- |
@@ -119,7 +121,7 @@ curl --request GET \
 
 
 <Admonition type="note" title="notes">
-- The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
+- The optional `jq -r '.diff'` command APPENDED TO THE EXAMPLE ABOVE extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.
 - `timestamp` or `lsn` / `base_timestamp` or `base_lsn` values can be used to compare schemas as they existed as a precise time or [LSN](/docs/reference/glossary#lsn).  
 - `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://en.wikipedia.org/wiki/ISO_8601" title="ISO 8601" preview="An international standard covering the worldwide exchange and communication of date and time-related data.">ISO 8601 format</LinkPreview>.
 </Admonition>
@@ -141,10 +143,10 @@ Here’s an example of the `compare_schema` diff output for the `neondb` databas
 
 **Output explanation:**
 
-- `-` (minus): Lines that were removed from the base branch schema.
-- `+` (plus): Lines that were added in the target branch schema.
+- `-` (minus) identifies Lines that were removed from the base branch schema.
+- `+` (plus) identifies lines that were added in the target branch schema.
 
-In the example above, the `created_at` column was added to the `public.playing_with_neon` table.
+In the example above, the `created_at` column was added to the `public.playing_with_neon` table on the target branch.
 
 ## Schema Diff GitHub Action
 
