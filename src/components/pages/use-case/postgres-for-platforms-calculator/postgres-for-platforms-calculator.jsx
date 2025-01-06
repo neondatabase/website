@@ -1,14 +1,18 @@
 'use client';
 
+// TODO: add comparison with RDS
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as SliderPrimitive from '@radix-ui/react-slider';
 import clsx from 'clsx';
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Field from 'components/shared/field';
 
-const ComputeSizes = [
+const COMPUTE_SIZES = [
   { value: 0.25, label: '0.25 CU (0.25 vCPU, 1GB RAM)' },
   { value: 0.5, label: '0.5 CU (0.5 vCPU, 2GB RAM)' },
   { value: 1, label: '1 CU (1 vCPU, 4GB RAM)' },
@@ -16,6 +20,117 @@ const ComputeSizes = [
   { value: 4, label: '4 CU (4 vCPU, 16GB RAM)' },
   { value: 8, label: '8 CU (8 vCPU, 32GB RAM)' },
   { value: 16, label: '16 CU (16 vCPU, 64GB RAM)' },
+];
+
+const PLANS = {
+  FREE: {
+    name: 'Free',
+    basePrice: 0,
+    computeHours: 191.9,
+    storage: 0.5,
+    archiveStorage: 0,
+    projectLimit: 10,
+    maxComputeSize: 2,
+    computePrice: 0,
+    storagePrice: 0,
+    archiveStoragePrice: 0,
+  },
+  LAUNCH: {
+    name: 'Launch',
+    basePrice: 19,
+    computeHours: 300,
+    storage: 10,
+    archiveStorage: 50,
+    projectLimit: 100,
+    maxComputeSize: 4,
+    computePrice: 0.16,
+    storagePrice: 1.75,
+    archiveStoragePrice: 0.1,
+  },
+  SCALE: {
+    name: 'Scale',
+    basePrice: 69,
+    computeHours: 750,
+    storage: 50,
+    archiveStorage: 250,
+    projectLimit: 1000,
+    maxComputeSize: 8,
+    computePrice: 0.16,
+    storagePrice: 1.5,
+    archiveStoragePrice: 0.1,
+    projectUnitSize: 1000,
+    projectUnitPrice: 50,
+  },
+  BUSINESS: {
+    name: 'Business',
+    basePrice: 700,
+    computeHours: 1000,
+    storage: 500,
+    archiveStorage: 2500,
+    projectLimit: 5000,
+    maxComputeSize: 16,
+    computePrice: 0.16,
+    storagePrice: 0.5,
+    archiveStoragePrice: 0.1,
+    projectUnitSize: 5000,
+    projectUnitPrice: 50,
+  },
+};
+
+const DEFAULT_VALUES = {
+  numProjects: 100,
+  computeSize: 0.25,
+  archivePercentage: 95,
+  // The slider values represent percentages that divide usage into 3 tiers
+  // For example, computeSliderValues: [95, 99] means:
+  // - 0-95%: Testing usage
+  // - 95-99%: Business hours usage  (difference between the 95 and 99)
+  // - 99-100%: Always on usage (difference between the 99 and 100)
+  computeSliderValues: [95, 99],
+  storageSliderValues: [95, 99],
+  computeHours: {
+    low: 5,
+    moderate: 160,
+    high: 730,
+  },
+  storageGB: {
+    small: 1,
+    medium: 10,
+    large: 100,
+  },
+};
+
+const computeValueData = [
+  {
+    title: 'Testing',
+    description: `(${DEFAULT_VALUES.computeHours.low} active hours/month)`,
+    color: 'bg-primary-1',
+  },
+  {
+    title: 'Business hours',
+    description: `(${DEFAULT_VALUES.computeHours.moderate} active hours/month)`,
+    color: 'bg-secondary-2',
+  },
+  {
+    title: 'Always on',
+    description: `(${DEFAULT_VALUES.computeHours.high} active hours/month)`,
+    color: 'bg-secondary-3',
+  },
+];
+
+const storageValueData = [
+  {
+    title: `${DEFAULT_VALUES.storageGB.small} GB`,
+    color: 'bg-primary-1',
+  },
+  {
+    title: `${DEFAULT_VALUES.storageGB.medium} GB`,
+    color: 'bg-secondary-2',
+  },
+  {
+    title: `${DEFAULT_VALUES.storageGB.large} GB`,
+    color: 'bg-secondary-3',
+  },
 ];
 
 const numberFormatter = new Intl.NumberFormat('en-US', {
@@ -31,21 +146,95 @@ const schema = yup
     computeSize: yup
       .number()
       .required()
-      .oneOf(ComputeSizes.map((size) => size.value)),
-    lowUsage: yup.number().required().min(0).max(100),
-    moderateUsage: yup.number().required().min(0).max(100),
-    highUsage: yup.number().required().min(0).max(100),
-    smallDB: yup.number().required().min(0).max(100),
-    mediumDB: yup.number().required().min(0).max(100),
-    largeDB: yup.number().required().min(0).max(100),
+      .oneOf(COMPUTE_SIZES.map((size) => size.value)),
     archivePercentage: yup.number().required().min(0).max(100),
   })
   .required();
 
-const labelClassName = 'text-sm text-gray-new-90';
-const errorClassName = '!top-0';
+const UsageSlider = ({ values, setValues, valueData }) => {
+  const handleSliderChange = (newValues) => {
+    setValues(newValues);
+  };
+
+  const calculateProportions = (values) => {
+    const sortedValues = [...values].sort((a, b) => a - b);
+    return [sortedValues[0], sortedValues[1] - sortedValues[0], 100 - sortedValues[1]];
+  };
+
+  const proportions = calculateProportions(values);
+
+  return (
+    <div className="w-full">
+      <div className="relative pb-10">
+        <SliderPrimitive.Root
+          className="relative flex h-10 w-full touch-none select-none items-center"
+          value={values}
+          min={0}
+          max={100}
+          step={1}
+          aria-label="Usage Proportion Slider"
+          onValueChange={handleSliderChange}
+        >
+          <SliderPrimitive.Track className="relative h-2 grow overflow-hidden rounded-full bg-gray-1">
+            {valueData.map((data, index) => (
+              <div
+                key={index}
+                className={`absolute bottom-0 top-0 ${data.color}`}
+                style={{
+                  left: index === 0 ? '0%' : `${values[index - 1]}%`,
+                  right: index === valueData.length - 1 ? '0%' : `${100 - values[index]}%`,
+                }}
+              />
+            ))}
+          </SliderPrimitive.Track>
+          {values.map((value, index) => (
+            <SliderPrimitive.Thumb
+              key={index}
+              className="block size-4 rounded-sm border-2 border-white bg-white focus:outline-none focus-visible:ring focus-visible:ring-primary-2 focus-visible:ring-opacity-75"
+              aria-label={`Thumb ${index + 1}`}
+            />
+          ))}
+        </SliderPrimitive.Root>
+        <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs font-medium">
+          {valueData.map((data, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <span className={`rounded px-2 py-1 ${data.color} mb-1 text-black-new`}>
+                {data.title}
+              </span>
+              <span className="text-center">{proportions[index]}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+UsageSlider.propTypes = {
+  values: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setValues: PropTypes.func.isRequired,
+  valueData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      color: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 const PostgresForPlatformsCalculator = () => {
+  const [computeValues, setComputeValues] = useState(DEFAULT_VALUES.computeSliderValues);
+  const [storageValues, setStorageValues] = useState(DEFAULT_VALUES.storageSliderValues);
+
+  // Takes an array of 2 slider values (0-100) and calculates 3 proportions that add up to 100%:
+  // - First proportion is the first slider value
+  // - Second proportion is the difference between the two slider values
+  // - Third proportion is the remaining percentage up to 100%
+  const calculateProportions = (values) => {
+    const sortedValues = [...values].sort((a, b) => a - b);
+    return [sortedValues[0], sortedValues[1] - sortedValues[0], 100 - sortedValues[1]];
+  };
+
   const {
     register,
     watch,
@@ -53,87 +242,100 @@ const PostgresForPlatformsCalculator = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      numProjects: 1000,
-      computeSize: 0.25,
-      lowUsage: 95,
-      moderateUsage: 3,
-      highUsage: 2,
-      smallDB: 95,
-      mediumDB: 3,
-      largeDB: 2,
-      archivePercentage: 50,
+      numProjects: DEFAULT_VALUES.numProjects,
+      computeSize: DEFAULT_VALUES.computeSize,
+      archivePercentage: DEFAULT_VALUES.archivePercentage,
     },
   });
 
   const formValues = watch();
+  const computeProportions = calculateProportions(computeValues);
+  const storageProportions = calculateProportions(storageValues);
 
-  // Constants
-  const BUSINESS_BASE_PRICE = 700;
-  const COMPUTE_HOUR_PRICE = 0.16;
-  const STORAGE_PRICE = 0.5;
-  const ARCHIVE_STORAGE_PRICE = 0.1;
-  const PROJECTS_UNIT_SIZE = 5000;
-  const PROJECTS_UNIT_PRICE = 50;
-  const BASE_PROJECT_ALLOWANCE = 5000;
+  // Determine which plan is needed based on requirements
+  const determinePlan = (requirements) => {
+    const { numProjects, computeSize, totalComputeHours, regularStorage, archiveStorage } =
+      requirements;
+
+    if (
+      numProjects <= PLANS.FREE.projectLimit &&
+      computeSize <= PLANS.FREE.maxComputeSize &&
+      totalComputeHours <= PLANS.FREE.computeHours &&
+      regularStorage + archiveStorage <= PLANS.FREE.storage
+    ) {
+      return PLANS.FREE;
+    }
+
+    if (numProjects <= PLANS.LAUNCH.projectLimit && computeSize <= PLANS.LAUNCH.maxComputeSize) {
+      return PLANS.LAUNCH;
+    }
+
+    if (numProjects <= PLANS.SCALE.projectLimit && computeSize <= PLANS.SCALE.maxComputeSize) {
+      return PLANS.SCALE;
+    }
+
+    return PLANS.BUSINESS;
+  };
 
   // Calculate costs based on form values
   const calculateCosts = () => {
-    const {
-      numProjects,
-      computeSize,
-      lowUsage,
-      moderateUsage,
-      highUsage,
-      smallDB,
-      mediumDB,
-      largeDB,
-      archivePercentage,
-    } = formValues;
+    const { numProjects, computeSize, archivePercentage } = formValues;
 
-    // Project units calculation
-    const extraProjectUnits = Math.ceil(
-      Math.max(0, numProjects - BASE_PROJECT_ALLOWANCE) / PROJECTS_UNIT_SIZE
-    );
-    const projectsCost = extraProjectUnits * PROJECTS_UNIT_PRICE;
-
-    // Compute hours calculation
-    const lowHours = 5;
-    const moderateHours = 160;
-    const highHours = 730;
-
+    // Calculate total compute hours
     const totalComputeHours =
       numProjects *
-      ((lowUsage / 100) * lowHours +
-        (moderateUsage / 100) * moderateHours +
-        (highUsage / 100) * highHours) *
+      ((computeProportions[0] / 100) * DEFAULT_VALUES.computeHours.low +
+        (computeProportions[1] / 100) * DEFAULT_VALUES.computeHours.moderate +
+        (computeProportions[2] / 100) * DEFAULT_VALUES.computeHours.high) *
       computeSize;
 
-    const extraComputeHours = Math.max(0, totalComputeHours - 1000);
-    const computeCost = extraComputeHours * COMPUTE_HOUR_PRICE;
-
-    // Storage calculation
+    // Calculate storage
     const avgStorage =
-      numProjects * ((smallDB / 100) * 1 + (mediumDB / 100) * 10 + (largeDB / 100) * 100);
+      numProjects *
+      ((storageProportions[0] / 100) * DEFAULT_VALUES.storageGB.small +
+        (storageProportions[1] / 100) * DEFAULT_VALUES.storageGB.medium +
+        (storageProportions[2] / 100) * DEFAULT_VALUES.storageGB.large);
 
     const regularStorage = avgStorage * (1 - archivePercentage / 100);
     const archiveStorage = avgStorage * (archivePercentage / 100);
 
-    const extraRegularStorage = Math.max(0, regularStorage - 500);
-    const extraArchiveStorage = Math.max(0, archiveStorage - 2500);
-
-    const storageCost =
-      extraRegularStorage * STORAGE_PRICE + extraArchiveStorage * ARCHIVE_STORAGE_PRICE;
-
-    return {
-      basePrice: BUSINESS_BASE_PRICE,
-      computeCost,
-      storageCost,
-      projectsCost,
-      totalCost: BUSINESS_BASE_PRICE + computeCost + storageCost + projectsCost,
+    // Determine appropriate plan
+    const plan = determinePlan({
+      numProjects,
+      computeSize,
       totalComputeHours,
       regularStorage,
       archiveStorage,
-      extraProjectUnits,
+    });
+
+    // Calculate extra costs based on plan limits
+    const extraComputeHours = Math.max(0, totalComputeHours - plan.computeHours);
+    const extraRegularStorage = Math.max(0, regularStorage - plan.storage);
+    const extraArchiveStorage = Math.max(0, archiveStorage - plan.archiveStorage);
+
+    const computeCost = extraComputeHours * plan.computePrice;
+    const storageCost =
+      extraRegularStorage * plan.storagePrice + extraArchiveStorage * plan.archiveStoragePrice;
+
+    // Calculate extra projects cost if applicable
+    let projectsCost = 0;
+    if (plan.projectUnitSize && plan.projectUnitPrice) {
+      const extraProjectUnits = Math.ceil(
+        Math.max(0, numProjects - plan.projectLimit) / plan.projectUnitSize
+      );
+      projectsCost = extraProjectUnits * plan.projectUnitPrice;
+    }
+
+    return {
+      plan: plan.name,
+      basePrice: plan.basePrice,
+      computeCost,
+      storageCost,
+      projectsCost,
+      totalCost: plan.basePrice + computeCost + storageCost + projectsCost,
+      totalComputeHours,
+      regularStorage,
+      archiveStorage,
     };
   };
 
@@ -143,7 +345,6 @@ const PostgresForPlatformsCalculator = () => {
     <div className="bg-gray-900 text-white">
       <div className="mx-auto max-w-4xl">
         <form className="space-y-8">
-          {/* Basic Configuration */}
           <div
             className={clsx(
               'relative z-10 rounded-xl border border-gray-new-10 bg-[#020203] p-8',
@@ -156,8 +357,8 @@ const PostgresForPlatformsCalculator = () => {
                 label="Number of Projects"
                 type="number"
                 theme="transparent"
-                labelClassName={labelClassName}
-                errorClassName={errorClassName}
+                labelClassName="text-sm text-gray-new-90"
+                errorClassName="!top-0"
                 error={errors.numProjects?.message}
                 {...register('numProjects')}
               />
@@ -167,12 +368,12 @@ const PostgresForPlatformsCalculator = () => {
                 label="Average compute size"
                 tag="select"
                 theme="transparent"
-                labelClassName={labelClassName}
-                errorClassName={errorClassName}
+                labelClassName="text-sm text-gray-new-90"
+                errorClassName="!top-0"
                 error={errors.computeSize?.message}
                 {...register('computeSize')}
               >
-                {ComputeSizes.map((size) => (
+                {COMPUTE_SIZES.map((size) => (
                   <option key={size.value} value={size.value}>
                     {size.label}
                   </option>
@@ -180,203 +381,66 @@ const PostgresForPlatformsCalculator = () => {
               </Field>
             </div>
 
-            <h2 className="text-xl font-semibold">Compute usage distribution across projects</h2>
-            <p className="text-sm text-gray-new-80">
-              The compute usage distribution across projects is used to calculate the total compute
-              hours for the month.
-            </p>
-            <div className="mt-8 grid grid-cols-3 gap-4">
-              <div>
-                <div className="flex items-end gap-x-2">
-                  <Field
-                    name="lowUsage"
-                    label="Low - Testing"
-                    type="number"
-                    theme="transparent"
-                    labelClassName={labelClassName}
-                    errorClassName={errorClassName}
-                    error={errors.lowUsage?.message}
-                    {...register('lowUsage')}
-                  />
-                  <span className="pb-2 text-gray-new-80">%</span>
-                </div>
-                <span className="text-xs text-gray-new-80"> 5 active hours/month</span>
-              </div>
-              <div>
-                <div className="flex items-end gap-x-2">
-                  <Field
-                    name="moderateUsage"
-                    label="Moderate - Business hours"
-                    type="number"
-                    theme="transparent"
-                    labelClassName={labelClassName}
-                    errorClassName={errorClassName}
-                    error={errors.moderateUsage?.message}
-                    {...register('moderateUsage')}
-                  />
-                  <span className="pb-2 text-gray-new-80">%</span>
-                </div>
-                <span className="text-xs text-gray-new-80"> 160 active hours/month</span>
-              </div>
-              <div>
-                <div className="flex items-end gap-x-2">
-                  <Field
-                    name="highUsage"
-                    label="High - Always on"
-                    type="number"
-                    theme="transparent"
-                    labelClassName={labelClassName}
-                    errorClassName={errorClassName}
-                    error={errors.highUsage?.message}
-                    {...register('highUsage')}
-                  />
-                  <span className="pb-2 text-gray-new-80">%</span>
-                </div>
-                <span className="text-xs text-gray-new-80"> 730 active hours/month</span>
-              </div>
-            </div>
-
-            <div className="mb-8 mt-8">
-              <div className="flex h-4 w-full overflow-hidden rounded bg-gray-new-10">
-                <div
-                  className="bg-primary-1 transition-all duration-200"
-                  style={{ width: `${watch('lowUsage')}%` }}
-                  title={`Low Usage: ${watch('lowUsage')}%`}
-                />
-                <div
-                  className="bg-secondary-2 transition-all duration-200"
-                  style={{ width: `${watch('moderateUsage')}%` }}
-                  title={`Moderate Usage: ${watch('moderateUsage')}%`}
-                />
-                <div
-                  className="bg-secondary-3 transition-all duration-200"
-                  style={{ width: `${watch('highUsage')}%` }}
-                  title={`High Usage: ${watch('highUsage')}%`}
-                />
-              </div>
-              <div className="mt-2 flex flex-wrap gap-4">
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-sm bg-primary-1" />
-                  <span className="text-sm text-gray-new-80">Low Usage</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-sm bg-secondary-2" />
-                  <span className="text-sm text-gray-new-80">Moderate Usage</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-sm bg-secondary-3" />
-                  <span className="text-sm text-gray-new-80">High Usage</span>
-                </div>
-              </div>
-            </div>
-
-            <h2 className="mb-4 text-xl font-semibold">Storage usage distribution</h2>
-            <p className="text-sm text-gray-new-80">
-              The storage usage distribution across projects is used to calculate the total storage
-              for the month.
-            </p>
-            <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <div className="flex items-end gap-x-2">
-                    <Field
-                      name="smallDB"
-                      label="Small"
-                      type="number"
-                      theme="transparent"
-                      labelClassName={labelClassName}
-                      errorClassName={errorClassName}
-                      error={errors.smallDB?.message}
-                      {...register('smallDB')}
-                    />
-                    <span className="pb-2 text-gray-new-80">%</span>
-                  </div>
-                  <span className="text-xs text-gray-new-80"> 1 GB of storage</span>
-                </div>
-                <div>
-                  <div className="flex items-end gap-x-2">
-                    <Field
-                      name="mediumDB"
-                      label="Medium"
-                      type="number"
-                      theme="transparent"
-                      labelClassName={labelClassName}
-                      errorClassName={errorClassName}
-                      error={errors.mediumDB?.message}
-                      {...register('mediumDB')}
-                    />
-                    <span className="pb-2 text-gray-new-80">%</span>
-                  </div>
-                  <span className="text-xs text-gray-new-80">10 GB of storage</span>
-                </div>
-                <div>
-                  <div className="flex items-end gap-x-2">
-                    <Field
-                      name="largeDB"
-                      label="Large"
-                      type="number"
-                      theme="transparent"
-                      labelClassName={labelClassName}
-                      errorClassName={errorClassName}
-                      error={errors.largeDB?.message}
-                      {...register('largeDB')}
-                    />
-                    <span className="pb-2 text-gray-new-80">%</span>
-                  </div>
-                  <span className="text-xs text-gray-new-80">100 GB of storage</span>
-                </div>
-              </div>
-
-              <div className="mb-8 mt-8">
-                <div className="flex h-4 w-full overflow-hidden rounded bg-gray-new-10">
-                  <div
-                    className="bg-primary-1 transition-all duration-200"
-                    style={{ width: `${watch('smallDB')}%` }}
-                    title={`Small DB: ${watch('smallDB')}%`}
-                  />
-                  <div
-                    className="bg-secondary-2 transition-all duration-200"
-                    style={{ width: `${watch('mediumDB')}%` }}
-                    title={`Medium DB: ${watch('mediumDB')}%`}
-                  />
-                  <div
-                    className="bg-secondary-3 transition-all duration-200"
-                    style={{ width: `${watch('largeDB')}%` }}
-                    title={`Large DB: ${watch('largeDB')}%`}
-                  />
-                </div>
-                <div className="mt-2 flex flex-wrap gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-sm bg-primary-1" />
-                    <span className="text-sm text-gray-new-80">Small (1 GB)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-sm bg-secondary-2" />
-                    <span className="text-sm text-gray-new-80">Medium (10 GB)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-sm bg-secondary-3" />
-                    <span className="text-sm text-gray-new-80">Large (100 GB)</span>
-                  </div>
-                </div>
-              </div>
-
-              <Field
-                name="archivePercentage"
-                label="Archive Storage %"
-                type="number"
-                theme="transparent"
-                labelClassName={labelClassName}
-                errorClassName={errorClassName}
-                error={errors.archivePercentage?.message}
-                helperText="Percentage of storage that will be archived"
-                className="w-32 pt-4"
-                {...register('archivePercentage')}
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold">Compute Usage</h2>
+              <UsageSlider
+                values={computeValues}
+                setValues={setComputeValues}
+                valueData={computeValueData}
               />
             </div>
 
-            <p className="mt-4 text-xl font-bold">
-              Total Monthly Cost: {numberFormatter.format(costs.totalCost)}
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold">Storage Usage</h2>
+              <UsageSlider
+                values={storageValues}
+                setValues={setStorageValues}
+                valueData={storageValueData}
+              />
+            </div>
+
+            <div className="pt-4">
+              <div className="mt-2 flex justify-between text-sm">
+                <span>Archive Storage</span>
+                <span className="text-gray-new-80">
+                  {formValues.archivePercentage}% of storage that will be archived
+                </span>
+              </div>
+              <SliderPrimitive.Root
+                className="relative flex h-10 w-full touch-none select-none items-center"
+                value={[formValues.archivePercentage]}
+                min={0}
+                max={100}
+                step={1}
+                aria-label="Archive Storage Percentage"
+                onValueChange={([value]) => {
+                  register('archivePercentage').onChange({
+                    target: { value, name: 'archivePercentage' },
+                  });
+                }}
+              >
+                <SliderPrimitive.Track className="relative h-2 grow overflow-hidden rounded-full bg-gray-1">
+                  <div
+                    className="absolute bottom-0 top-0 bg-primary-1"
+                    style={{
+                      left: '0%',
+                      right: `${100 - formValues.archivePercentage}%`,
+                    }}
+                  />
+                </SliderPrimitive.Track>
+                <SliderPrimitive.Thumb
+                  className="border-slate-900 block h-5 w-5 rounded-md border-2 bg-white focus:outline-none focus-visible:ring focus-visible:ring-primary-2 focus-visible:ring-opacity-75"
+                  aria-label="Archive Storage Percentage"
+                />
+              </SliderPrimitive.Root>
+
+              {errors.archivePercentage?.message && (
+                <span className="text-red-500 text-sm">{errors.archivePercentage.message}</span>
+              )}
+            </div>
+
+            <p className="mt-10 text-right text-xl font-bold text-white">
+              Total: {numberFormatter.format(costs.totalCost)} / month
             </p>
 
             <details className="mt-4">
@@ -384,26 +448,131 @@ const PostgresForPlatformsCalculator = () => {
               <div className="mt-4">
                 <h2 className="mb-4 text-xl font-semibold">Cost Breakdown</h2>
                 <ul className="list-disc space-y-2 pl-5">
-                  <li>Base plan price: {numberFormatter.format(costs.basePrice)}/month</li>
-                  <li>Extra Compute Cost: {numberFormatter.format(costs.computeCost)}/month</li>
-                  <li>Extra Storage Cost: {numberFormatter.format(costs.storageCost)}/month</li>
-                  {costs.extraProjectUnits > 0 && (
+                  <li>
+                    Base plan price: {costs.plan} - {numberFormatter.format(costs.basePrice)}/month
+                    <div className="mt-1 text-sm text-gray-new-80">
+                      Your usage requires the {costs.plan} plan which has a base price of{' '}
+                      {numberFormatter.format(costs.basePrice)}/month
+                    </div>
+                  </li>
+                  <li>
+                    Extra Compute Cost: {numberFormatter.format(costs.computeCost)}/month
+                    <div className="mt-1 text-sm text-gray-new-80">
+                      Your plan includes{' '}
+                      {costs.plan === 'Free'
+                        ? '191.9'
+                        : costs.plan === 'Launch'
+                          ? '300'
+                          : costs.plan === 'Scale'
+                            ? '750'
+                            : '1000'}{' '}
+                      compute hours. You are using {Math.round(costs.totalComputeHours)} hours, so
+                      the extra{' '}
+                      {Math.round(
+                        costs.totalComputeHours -
+                          (costs.plan === 'Free'
+                            ? 191.9
+                            : costs.plan === 'Launch'
+                              ? 300
+                              : costs.plan === 'Scale'
+                                ? 750
+                                : 1000)
+                      )}{' '}
+                      hours are charged at ${costs.plan === 'Free' ? '0' : '0.16'}/hour
+                    </div>
+                  </li>
+                  <li>
+                    Extra Storage Cost: {numberFormatter.format(costs.storageCost)}/month
+                    <div className="mt-1 text-sm text-gray-new-80">
+                      Your plan includes{' '}
+                      {costs.plan === 'Free'
+                        ? '0.5'
+                        : costs.plan === 'Launch'
+                          ? '10'
+                          : costs.plan === 'Scale'
+                            ? '50'
+                            : '500'}{' '}
+                      GB regular storage and
+                      {costs.plan === 'Free'
+                        ? ' 0'
+                        : costs.plan === 'Launch'
+                          ? ' 50'
+                          : costs.plan === 'Scale'
+                            ? ' 250'
+                            : ' 2500'}{' '}
+                      GB archive storage. Extra regular storage is charged at $
+                      {costs.plan === 'Free'
+                        ? '0'
+                        : costs.plan === 'Launch'
+                          ? '1.75'
+                          : costs.plan === 'Scale'
+                            ? '1.50'
+                            : '0.50'}
+                      /GB and extra archive storage at ${costs.plan === 'Free' ? '0' : '0.10'}/GB
+                    </div>
+                  </li>
+                  {costs.projectsCost > 0 && (
                     <li>
-                      Extra Projects Cost: {numberFormatter.format(costs.projectsCost)} (
-                      {costs.extraProjectUnits} units of {PROJECTS_UNIT_SIZE} projects at $
-                      {PROJECTS_UNIT_PRICE} per unit)
+                      Extra Projects Cost: {numberFormatter.format(costs.projectsCost)}/month
+                      <div className="mt-1 text-sm text-gray-new-80">
+                        Your plan includes {costs.plan === 'Scale' ? '1,000' : '5,000'} projects.
+                        Additional projects are charged in units of{' '}
+                        {costs.plan === 'Scale' ? '1,000' : '5,000'} at $
+                        {costs.plan === 'Scale' ? '50' : '50'}/unit
+                      </div>
                     </li>
                   )}
                 </ul>
 
-                <h2 className="mb-4 text-xl font-semibold">Usage Details</h2>
+                <h2 className="mb-4 mt-6 text-xl font-semibold">Usage Details</h2>
                 <ul className="list-disc space-y-2 pl-5">
-                  <li>Total Compute Hours: {numberFormatter.format(costs.totalComputeHours)}</li>
+                  <li>
+                    Total Compute Hours: {Math.round(costs.totalComputeHours)}
+                    <div className="mt-1 text-sm text-gray-new-80">
+                      Based on {formValues.numProjects} projects using a {formValues.computeSize} CU
+                      instance with:
+                      <ul className="mt-1 list-disc pl-5">
+                        <li>
+                          {computeProportions[0]}% testing usage ({DEFAULT_VALUES.computeHours.low}{' '}
+                          hours/month)
+                        </li>
+                        <li>
+                          {computeProportions[1]}% business hours (
+                          {DEFAULT_VALUES.computeHours.moderate} hours/month)
+                        </li>
+                        <li>
+                          {computeProportions[2]}% always on ({DEFAULT_VALUES.computeHours.high}{' '}
+                          hours/month)
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
                   <li>
                     Storage
                     <ul className="mt-2 list-disc space-y-2 pl-5">
-                      <li>Regular: {numberFormatter.format(costs.regularStorage)} GB</li>
-                      <li>Archive: {numberFormatter.format(costs.archiveStorage)} GB</li>
+                      <li>
+                        Regular: {Math.round(costs.regularStorage)} GB
+                        <div className="mt-1 text-sm text-gray-new-80">
+                          {100 - formValues.archivePercentage}% of total storage, distributed as:
+                          <ul className="mt-1 list-disc pl-5">
+                            <li>
+                              {storageProportions[0]}% small ({DEFAULT_VALUES.storageGB.small} GB)
+                            </li>
+                            <li>
+                              {storageProportions[1]}% medium ({DEFAULT_VALUES.storageGB.medium} GB)
+                            </li>
+                            <li>
+                              {storageProportions[2]}% large ({DEFAULT_VALUES.storageGB.large} GB)
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        Archive: {Math.round(costs.archiveStorage)} GB
+                        <div className="mt-1 text-sm text-gray-new-80">
+                          {formValues.archivePercentage}% of total storage
+                        </div>
+                      </li>
                     </ul>
                   </li>
                 </ul>
