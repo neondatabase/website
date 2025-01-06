@@ -9,7 +9,7 @@ import Modal from 'components/pages/doc/modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
-import SidebarCta from 'components/shared/sidebar-cta';
+// import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
@@ -163,7 +163,7 @@ const Post = ({
                 'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
             )}
           >
-            {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
+            {!isUseCase && <EditOnGithub fileOriginPath={fileOriginPath} />}
           </div>
         </div>
       </div>

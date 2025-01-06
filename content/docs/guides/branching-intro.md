@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.057Z'
+updatedOn: '2025-01-02T20:14:18.099Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -72,16 +72,6 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 <a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 
 <a href="/docs/guides/schema-diff" description="Visualize schema differences between branches to help with troubleshooting" icon="invert">Schema diff</a>
-
-</DetailIconCards>
-
-## Branching guides
-
-Learn how to promote a branch to become your default branch.
-
-<DetailIconCards>
-
-<a href="/docs/guides/branch-promote" description="Promote a branch to the default branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
 
 </DetailIconCards>
 

@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2024-12-20T09:39:37.649Z'
+updatedOn: '2025-01-03T18:42:57.517Z'
 ---
 
 When creating an organization as an Admin &#8212; or as a member of an organization that's already up and running &#8212; you may need to transfer existing projects from your personal account to your target organization.
@@ -16,6 +16,7 @@ A few important points to keep in mind:
 - The number of projects you can transfer is limited by the target Organization plan's allowance.
 - The billing plan of the organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Launch plan organization will result in an error.
 - If any organization members were already collaborators on the projects being transferred, we'll remove their collaborator access since they'll get full access as org members anyway.
+- Transferring projects between Organizations is currently not supported. You can only transfer projects from a personal Neon account to an Organization. If you need to move projects between Organizations, please contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
 
 ## Transfer from the Neon Console
 

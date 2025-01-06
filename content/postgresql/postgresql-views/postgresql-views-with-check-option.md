@@ -118,14 +118,14 @@ SELECT * FROM fte;
 Output:
 
 ```
- id | first_name | last_name | department_id
-----+------------+-----------+---------------
-  1 | John       | Doe       |             1
-  2 | Jane       | Smith     |             2
-  4 | Alice      | Williams  |             3
-  6 | Eva        | Jones     |             1
-  7 | Frank      | Miller    |             3
-  9 | Henry      | Clark     |             1
+ id | first_name | last_name | department_id  |  employee_type
+----+------------+-----------+----------------+-------------
+  1 | John       | Doe       |             1  |  FTE
+  2 | Jane       | Smith     |             2  |  FTE
+  4 | Alice      | Williams  |             3  |  FTE
+  6 | Eva        | Jones     |             1  |  FTE
+  7 | Frank      | Miller    |             3  |  FTE
+  9 | Henry      | Clark     |             1  |  FTE
 (6 rows)
 ```
 
