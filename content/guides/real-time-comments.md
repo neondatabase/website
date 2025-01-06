@@ -426,6 +426,8 @@ export const modelsClient = () => {
 In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
 
 ```tsx
+// File: lib/models/mutations.ts
+
 import { ConfirmedEvent, OptimisticEvent } from '@ably-labs/models';
 import cloneDeep from 'lodash/cloneDeep';
 import type { Post as PostType } from '@/lib/prisma/api';
@@ -507,9 +509,9 @@ export function merge(existingState: PostType, event: OptimisticEvent | Confirme
 
 In the code above, three asynchronous functions to handle CRUD operations for comments are defined:
 
-1. **addComment**: Sends a POST request to add a new comment, including the author's details and content, identified by a `mutationId`.
-2. **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
-3. **deleteComment**: Sends a DELETE request to remove a comment by its `id`.
+- **addComment**: Sends a POST request to add a new comment, including the author's details and content, identified by a `mutationId`.
+- **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
+- **deleteComment**: Sends a DELETE request to remove a comment by its `id`.
 
 Each function validates the server response and throws an error for unsuccessful requests. Additionally, the `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
 
