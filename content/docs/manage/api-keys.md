@@ -116,7 +116,7 @@ curl --request POST \
 
 Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
 
-- Can only access and manage their specified project
+- Can only access and manage the specified project
 - Cannot perform organization-related actions or create new projects
 - Will stop working if the project is transferred out of the organization
 
