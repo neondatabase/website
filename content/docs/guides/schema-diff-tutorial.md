@@ -126,7 +126,7 @@ First, create a new database called `people` on the `main` branch and add some s
 
 3. Connect to the `people` database with `psql`:
 
-   ```bash
+   ```bash shouldWrap
    psql 'postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 
@@ -331,14 +331,14 @@ CREATE TABLE address (
 
    ```json
    {
-     "uri": "postgresql://alex:JZb5eKPpg0vD@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require"
+     "uri": "postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require"
    }
    ```
 
 1. Connect to the `people` database on the `dev/jordan` branch with `psql`:
 
-   ```bash
-   psql 'postgresql://alex:JZb5eKPpg0vD@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
+   ```bash shouldWrap
+   psql 'postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 
 1. Add a new `address` table.
