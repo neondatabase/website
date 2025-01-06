@@ -111,34 +111,37 @@ TODO
 ```tsx
 // File: app/api/comments/[id]/route.ts
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export const fetchCache = 'force-no-store'
+export const fetchCache = 'force-no-store';
 
-import { NextRequest, NextResponse } from 'next/server'
-import { withOutboxWrite, editComment, deleteComment } from '@/lib/prisma/api'
+import { NextRequest, NextResponse } from 'next/server';
+import { withOutboxWrite, editComment, deleteComment } from '@/lib/prisma/api';
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = Number((await params).id)
-    const comment: { mutationId: string; content: string } = await request.json()
-    const data = await withOutboxWrite(editComment, comment.mutationId, id, comment.content)
-    return NextResponse.json({ data })
+    const id = Number((await params).id);
+    const comment: { mutationId: string; content: string } = await request.json();
+    const data = await withOutboxWrite(editComment, comment.mutationId, id, comment.content);
+    return NextResponse.json({ data });
   } catch (error) {
-    console.error('failed to update comment', error)
-    return NextResponse.json({ message: 'failed to update comment', error }, { status: 500 })
+    console.error('failed to update comment', error);
+    return NextResponse.json({ message: 'failed to update comment', error }, { status: 500 });
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = Number((await params).id)
-    const mutationId = request.headers.get('x-mutation-id') || 'missing'
-    const data = await withOutboxWrite(deleteComment, mutationId, id)
-    return NextResponse.json({ data })
+    const id = Number((await params).id);
+    const mutationId = request.headers.get('x-mutation-id') || 'missing';
+    const data = await withOutboxWrite(deleteComment, mutationId, id);
+    return NextResponse.json({ data });
   } catch (error) {
-    console.error('failed to delete comment', error)
-    return NextResponse.json({ message: 'failed to delete comment', error }, { status: 500 })
+    console.error('failed to delete comment', error);
+    return NextResponse.json({ message: 'failed to delete comment', error }, { status: 500 });
   }
 }
 ```
@@ -148,26 +151,32 @@ In the code above, there are two endpoints, `PUT` and `DELETE`, both of which pa
 ```tsx
 // File: app/api/comments/route.ts
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export const fetchCache = 'force-no-store'
+export const fetchCache = 'force-no-store';
 
-import { NextRequest, NextResponse } from 'next/server'
-import { withOutboxWrite, addComment } from '@/lib/prisma/api'
+import { NextRequest, NextResponse } from 'next/server';
+import { withOutboxWrite, addComment } from '@/lib/prisma/api';
 
 export async function POST(request: NextRequest) {
   try {
     const comment: {
-      mutationId: string
-      postId: number
-      authorId: number
-      content: string
-    } = await request.json()
-    const data = await withOutboxWrite(addComment, comment.mutationId, comment.postId, comment.authorId, comment.content)
-    return NextResponse.json({ data })
+      mutationId: string;
+      postId: number;
+      authorId: number;
+      content: string;
+    } = await request.json();
+    const data = await withOutboxWrite(
+      addComment,
+      comment.mutationId,
+      comment.postId,
+      comment.authorId,
+      comment.content
+    );
+    return NextResponse.json({ data });
   } catch (error) {
-    console.error('failed to add comment', error)
-    return NextResponse.json({ message: 'failed to add comment', error }, { status: 500 })
+    console.error('failed to add comment', error);
+    return NextResponse.json({ message: 'failed to add comment', error }, { status: 500 });
   }
 }
 ```
@@ -177,20 +186,20 @@ In the code above, the endpoint parses the request's body to extract the comment
 ```tsx
 // File: app/api/posts/[id]/route.ts
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-export const fetchCache = 'force-no-store'
+export const fetchCache = 'force-no-store';
 
-import { NextRequest, NextResponse } from 'next/server'
-import { getPost } from '@/lib/prisma/api'
+import { NextRequest, NextResponse } from 'next/server';
+import { getPost } from '@/lib/prisma/api';
 
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = Number((await params).id)
-    const [data, sequenceId] = await getPost(id)
-    return NextResponse.json({ sequenceId, data })
+    const id = Number((await params).id);
+    const [data, sequenceId] = await getPost(id);
+    return NextResponse.json({ sequenceId, data });
   } catch (error) {
-    return NextResponse.json({ message: 'failed to get post', error }, { status: 500 })
+    return NextResponse.json({ message: 'failed to get post', error }, { status: 500 });
   }
 }
 ```
