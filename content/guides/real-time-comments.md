@@ -423,7 +423,7 @@ export const modelsClient = () => {
 };
 ```
 
-This function initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
+In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
 
 ```tsx
 import { ConfirmedEvent, OptimisticEvent } from '@ably-labs/models';
