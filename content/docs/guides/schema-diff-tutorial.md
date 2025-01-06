@@ -436,10 +436,10 @@ curl --request GET \
 | `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
 | `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
 | `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `lsn`              | The LSN on the target branch for which the schema is retrieved.                           | No       | `0/1EC5378`                |
-| `timestamp`        | The point in time on the target branch for which the schema is retrieved.                 | No       | `2022-11-30T20:09:48Z`     |
-| `base_lsn`         | The LSN for the base branch schema.                                                       | No       | `0/2FC6321`                |
-| `base_timestamp`   | The point in time for the base branch schema.                                             | No       | `2022-11-30T20:09:48Z`     |
+| `lsn`              | The LSN on the target branch for which the schema is retrieved.                           | No       | `0/1EC5378`               |
+| `timestamp`        | The point in time on the target branch for which the schema is retrieved.                 | No       | `2022-11-30T20:09:48Z`    |
+| `base_lsn`         | The LSN for the base branch schema.                                                       | No       | `0/2FC6321`               |
+| `base_timestamp`   | The point in time for the base branch schema.                                             | No       | `2022-11-30T20:09:48Z`    |
 | `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
 
 <Admonition type="note" title="notes">
