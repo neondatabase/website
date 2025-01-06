@@ -65,16 +65,33 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
-## TODO
+## Set up Ably LiveSync with Neon Postgres
+
+Sign in into the [Ably Dashboard](https://ably.com/login), and click on `+ Create new app`.
 
 ![](/guides/images/real-time-comments/create.png)
+
+Next, name the application and select `Data Sync` as the type of application you are building.
+
 ![](/guides/images/real-time-comments/name.png)
+
+Next, go to the **Integrations** tab and click on `+ New integration rule`.
+
 ![](/guides/images/real-time-comments/rule.png)
+
+Next, click the `Choose` button in the **Postgres (Alpha)** card.
+
 ![](/guides/images/real-time-comments/postgres.png)
+
+Next, in the integration rule, enter the `DATABASE_URL` environment variable value obtained and proceed.
+
 ![](/guides/images/real-time-comments/values.png)
+
+Finally, go to the **API Keys** tab and copy the API Key which has the capabilities as `channel metadata, history, presence, privileged headers, publish, push admin, push subscribe, statistics, subscribe`.
+
 ![](/guides/images/real-time-comments/api_keys.png)
 
-Use this API key as an environment variable designated as `NEXT_PUBLIC_ABLY_API_KEY` in the `.env` file.
+Use this API Key as an environment variable designated as `NEXT_PUBLIC_ABLY_API_KEY` in the `.env` file.
 
 ## Set up Database Schema
 
