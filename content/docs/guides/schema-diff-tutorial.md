@@ -425,7 +425,7 @@ Compare the schema of the `dev/jordan` branch to its parent branch using the `co
 
 ```bash
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects/wispy-butterfly-25042691/branches/br-rough-boat-a54bs9yb/compare_schema?base_branch_id=br-royal-star-a54kykl2&db_name=neondb' \
+     --url 'https://console.neon.tech/api/v2/projects/royal-band-06902338/branches/br-mute-dew-a5930esi/compare_schema?base_branch_id=br-bitter-bird-a56n6lh4&db_name=neondb' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
 ```
