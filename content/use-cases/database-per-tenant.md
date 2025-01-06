@@ -241,7 +241,6 @@ author={{
 }}
 />
 
-
 ## How much does it cost?
 
 <PostgresForPlatformsCalculator />
@@ -274,7 +273,6 @@ This architecture allows you to manage thousands of Postgres instances with mini
 
 If you're interested in learning more about how Neon can help you manage thousands of Postgres databases, feel free to reach out on the Neon Discord or share your email below.
 
-<SubscriptionForm title="Need to provision thousands of databases? Let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
-=======
-<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
+# <SubscriptionForm title="Need to provision thousands of databases? Let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
 
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
