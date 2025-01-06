@@ -558,15 +558,13 @@ export const useModel = (id: number | null): [PostType | undefined, ModelType | 
 }
 ```
 
-This React hook manages the state and synchronization of a post model using the `@ably-labs/models` library:
+In the code above, the following function and hook are defined:
 
 1. **getPost**: Fetches the initial post data and its sequence ID from an API endpoint.
-2. **useModel Hook**: Manages a model instance and its associated state. It:
+2. **useModel**: Manages a model instance and its associated state. The hook returns the synchronized post data and model instance for use in components. It:
    - Initializes the model with a channel name, `sync` function (to fetch data), and merge logic.
    - Synchronizes the model with the latest data when the `id` changes.
    - Subscribes to real-time updates from the model, updating the component state accordingly.
-
-The hook returns the synchronized post data and model instance for use in components.
 
 ## Deploy to Vercel
 
