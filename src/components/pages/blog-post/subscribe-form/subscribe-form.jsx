@@ -2,7 +2,6 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
-import CheckIcon from 'icons/subscription-form-check.svg';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -12,6 +11,7 @@ import useLocation from 'react-use/lib/useLocation';
 import LinesIllustration from 'components/shared/lines-illustration';
 import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
 import useLocalStorage from 'hooks/use-local-storage';
+import CheckIcon from 'icons/check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 import SendIcon from './images/send.inline.svg';
