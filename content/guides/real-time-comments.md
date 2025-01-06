@@ -106,15 +106,47 @@ If it runs succesfully, you should see `Database schema set up succesfully.` in 
 
 ## TODO
 
+TODO
+
 ```tsx
+// File: lib/prisma/index.ts
+
+import { neonConfig, Pool } from '@neondatabase/serverless'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import { PrismaClient } from '@prisma/client'
+import { WebSocket } from 'ws'
+
+declare global {
+  var prisma: PrismaClient | undefined
+}
+
+const connectionString = `${process.env.DATABASE_URL}`
+
+neonConfig.webSocketConstructor = WebSocket
+neonConfig.poolQueryViaFetch = true
+
+const pool = new Pool({ connectionString })
+const adapter = new PrismaNeon(pool)
+const prisma = global.prisma || new PrismaClient({ adapter })
+
+if (process.env.NODE_ENV === 'development') global.prisma = prisma
+
+export default prisma
+```
+
+TODO
+
+```tsx
+// File: lib/prisma/api.ts
+
+import prisma from '@/lib/prisma';
 import { Prisma, PrismaClient } from '@prisma/client';
 import * as runtime from '@prisma/client/runtime/library';
-import prisma from '@/lib/prisma';
 
 export type Author = {
   id: number;
-  username: string;
   image: string;
+  username: string;
 };
 
 export type Comment = {
@@ -122,8 +154,8 @@ export type Comment = {
   postId: number;
   author: Author;
   content: string;
-  optimistic?: boolean;
   createdAt: Date;
+  optimistic?: boolean;
 };
 
 export type Post = {
