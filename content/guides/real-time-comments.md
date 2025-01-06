@@ -505,7 +505,7 @@ export function merge(existingState: PostType, event: OptimisticEvent | Confirme
 }
 ```
 
-This block defines three asynchronous functions to handle CRUD operations for comments:
+In the code above, three asynchronous functions to handle CRUD operations for comments are defined:
 
 1. **addComment**: Sends a POST request to add a new comment, including the author's details and content, identified by a `mutationId`.
 2. **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
