@@ -4,7 +4,7 @@ enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
 updatedOn: '2025-01-07T00:00:00.000Z'
 title: Building Real-Time Comments with a Serverless Postgres
-subtitle: A step-by-step guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
+subtitle: A guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
 
 Can a serverless Postgres database really handle the demands of a real-time application? The answer lies in pairing it with the right publish-subscribe model. In this guide, you will learn how to combine the real-time capabilities of Ably LiveSync with the structured power of Neon Postgres to build a optimistic and scalable comment system in your Next.js application.
