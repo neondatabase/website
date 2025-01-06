@@ -2,7 +2,7 @@
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 enableTableOfContents: true
-updatedOn: '2024-10-23T14:34:44.510Z'
+updatedOn: '2025-01-06T23:37:50.186Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
