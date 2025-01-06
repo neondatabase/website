@@ -134,7 +134,7 @@ if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 export default prisma;
 ```
 
-TODO
+The code above sets up a Prisma client for Neon Postgres. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
 
 ```tsx
 // File: lib/prisma/api.ts
