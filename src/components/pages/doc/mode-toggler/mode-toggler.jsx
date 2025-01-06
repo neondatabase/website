@@ -42,7 +42,7 @@ const ModeToggler = ({ className, isAiChatPage = false }) => (
     )}
   >
     <ToggleButton src={LINKS.docsHome} title="Neon Docs" isActive={!isAiChatPage} />
-    <ToggleButton src={LINKS.aiChat} title="Neon AI" isActive={isAiChatPage} />
+    <ToggleButton src={LINKS.aiChat} title="Ask Neon AI" isActive={isAiChatPage} />
   </div>
 );
 
