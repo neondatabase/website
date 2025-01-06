@@ -411,6 +411,8 @@ In the code above, the endpoint parses the `id` param in the request and returns
 TODO
 
 ```tsx
+// File: lib/models/modelsClient.ts
+
 import ModelsClient from '@ably-labs/models';
 import { Realtime } from 'ably';
 
