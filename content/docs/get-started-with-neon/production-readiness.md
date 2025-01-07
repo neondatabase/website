@@ -17,7 +17,7 @@ Neon's autoscaling feature automatically and transparently scales up compute res
 - **You can stop paying for compute resources that you only use sometimes**. You no longer have to run a maximum potential load configuration at all times.
 - **No more manual scaling disruptions**. With autoscaling, you can focus more on your application and less on managing infrastructure.
 
-To learn more, see our [Autoscaling](/docs/introduction/autoscaling-guide) guide.
+To learn more, see our [Autoscaling](/docs/introduction/autoscaling) guide.
 
 ## Scale to zero
 
