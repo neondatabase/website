@@ -18,7 +18,7 @@ import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
 import MasterSchoolLogo from './images/masterschool.inline.svg';
-import NerdwalletLogo from './images/nerdwallet.inline.svg';
+// import NerdwalletLogo from './images/nerdwallet.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
 import OpenAILogo from './images/openai.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
@@ -61,7 +61,7 @@ const allLogos = {
   openai: OpenAILogo,
   albertsons: AlbertsonsLogo,
   adobe: AdobeLogo,
-  nerdwallet: NerdwalletLogo,
+  // nerdwallet: NerdwalletLogo,
   wordware: WordwareLogo,
   akqa: AKQALogo,
   bcg: BCGLogo,

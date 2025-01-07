@@ -17,7 +17,7 @@ const logos = [
   'outfront',
   'adobe',
   'genomics',
-  'nerdwallet',
+  'replit',
   'retool',
   'albertsons',
   'akqa',
