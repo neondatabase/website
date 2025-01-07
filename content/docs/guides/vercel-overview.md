@@ -62,6 +62,4 @@ If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're
 
 <a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="vercel">Vercel Postgres Transition Guide</a>
 
-<a href="https://neon.tech/guides/vercel-sdk-migration" description="Learn how to migrate from the Vercel SDK to the Neon serverless driver" icon="vercel">Migrating from the Vercel SDK</a>
-
 </DetailIconCards>
