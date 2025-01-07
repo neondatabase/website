@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
@@ -6,8 +7,13 @@ const NumberedStep = ({ number, title, children, tag: Tag = 'h2' }) => {
   return (
     <div className="relative mb-3 mt-10 flex items-start gap-3">
       <div
-        className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-sm leading-snug tracking-extra-tight text-white after:absolute after:top-[30px] 
-    after:h-full after:w-px after:bg-gray-new-80 dark:bg-gray-new-94 dark:text-black-new dark:after:bg-gray-new-15"
+        className={clsx(
+          'flex size-6 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-sm leading-snug tracking-extra-tight text-white after:absolute after:top-[30px] after:h-full after:w-px after:bg-gray-new-80 dark:bg-gray-new-94 dark:text-black-new dark:after:bg-gray-new-15',
+          {
+            'mt-1': Tag === 'h2',
+            'mt-0.5': Tag === 'h3',
+          }
+        )}
       >
         {number}
       </div>
