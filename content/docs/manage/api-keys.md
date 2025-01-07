@@ -17,7 +17,7 @@ Neon supports three types of API keys:
 | ---------------------- | --------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | Personal API Key       | Any user                    | User's personal projects and any organization projects where they are a member | Valid until revoked; org project access ends if user leaves organization |
 | Organization API Key   | Organization administrators | All projects within the organization                                           | Valid until revoked                                                      |
-| Project-scoped API Key | Organization members        | Single specified project                                                       | Valid until revoked or project leaves organization                       |
+| Project-scoped API Key | Any organization member     | Single specified project                                                       | Valid until revoked or project leaves organization                       |
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
@@ -116,11 +116,11 @@ curl --request POST \
 
 Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
 
-- Can only access and manage their specified project
+- Can only access and manage the specified project
 - Cannot perform organization-related actions or create new projects
 - Will stop working if the project is transferred out of the organization
 
-Any project member can create an API key for their project using the following command:
+Any organization member can create an API key for any organization-owned project using the following command:
 
 ```bash shouldWrap
 curl --request POST \
