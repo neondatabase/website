@@ -243,6 +243,36 @@ author={{
 
 ## How much does it cost?
 
+To get a sense of how much it would cost to provision a Postgres instance per tenant, you can use the below calculator.
+
+You can specify:
+
+- The number of Projects
+- The average compute size of each Postgres instance
+- The distribution of compute and storage usage across your Postgres instances
+
+### Compute usage distribution
+
+Neon uses compute hours to measure compute usage. A compute hour is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+
+An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
+
+To keep things simple when estimating costs, we've grouped compute usage patterns into 3 categories:
+
+- Testing: compute runs for a total of 5 hours/month
+- Business hours: compute runs for a total of 160 hours/month (9am-5pm, Mon-Fri)
+- Always-on: compute runs for a total of 730 hours/month (24/7)
+
+### Storage usage distribution
+
+Neon uses GB-month to measure storage usage.
+
+To keep things simple when estimating costs, we've grouped storage usage into 3 categories:
+
+- 1GB: small database size
+- 10GB: medium database size
+- 100GB: large database size
+
 <PostgresForPlatformsCalculator />
 
 ## How it all works under the hood

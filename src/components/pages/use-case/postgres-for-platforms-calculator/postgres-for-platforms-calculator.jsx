@@ -342,7 +342,7 @@ const PostgresForPlatformsCalculator = () => {
   const costs = calculateCosts();
 
   return (
-    <div className="bg-gray-900 text-white">
+    <div className="bg-gray-900 my-10 text-white">
       <div className="mx-auto max-w-4xl">
         <form className="space-y-8">
           <div
