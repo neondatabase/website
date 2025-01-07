@@ -34,14 +34,21 @@ Usage metrics on the **Billing page** include:
 
 - **Storage**: Storage is the total volume of data and history stored in Neon, measured in gigabyte months (GB-month). Data is your logical data size. History is your data’s change history that is used to enable branching-related features, which you can configure for each project via the [history retention](/docs/manage/projects#configure-history-retention) setting. The displayed storage value reflects your current usage.
 - **Compute**: The total number of compute hours used during the current billing period. Compute usage is reset to zero at the beginning of each month. The monthly compute hour allowance differs by [plan](/docs/introduction/plans).
-- **Branch compute**: The total number of compute hours used by non-default branches during the current billing period. Compute usage is reset to zero at the beginning of each month. This metric only applies to the Free Plan.
-- **Archive storage**: The total number of gigabyte-months (GB-month) used for [archived branches](/docs/guides/branch-archiving). The displayed storage value reflects your current usage.
-- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your [plan allowance](/docs/introduction/plans).
+- **Archive storage**: The total number of gigabyte-months (GB-month) used for [archived branches](/docs/guides/branch-archiving). Branches that are older than 14 days and have not been accessed for the past 24 hours are stored in cost-efficient archive storage. The displayed storage value reflects your current usage.
+- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your [plan allowance](/docs/introduction/plans). 
+  
+  The **Peak usage** value is the highest number of projects used during the current billing period. When you exceed your plan's project allowance, extra project units are automatically allocated and billed based on the number of additional units needed to cover your extra usage, prorated from the date the extra was allocated. Project units and their cost are defined according to your [Neon plan](/docs/introduction/plans). Peak usage resets at the beginning of the next billing period.
 - **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free Plan.
 
-On paid plan **Billing** pages, **Peak usage** is the highest usage level reached for projects during the current billing period. When you exceed your plan's project allowances, extra units are automatically allocated and billed based on the number of additional units needed to cover your extra usage, prorated from the date the extra was allocated.
+  <Admonition type="note" title="note: billing metrics for pre-2025 custom contract customers">
+  If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: 
+  - **Storage** is measured in GB instead of GB-Months, and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
+  - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB).
 
-![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
+  If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
+  </Admonition>
+
+  ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
 
 #### Interpreting usage metrics
 
