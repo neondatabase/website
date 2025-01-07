@@ -132,9 +132,9 @@ npm run db
 
 If it runs succesfully, you should see `Database schema set up succesfully.` in the terminal.
 
-## Setting Up Prisma for Neon Postgres
+## Set up Prisma for Neon Postgres
 
-TODO
+In the directory `lib/prisma`, you would see the following code in `index.ts` file:
 
 ```tsx
 // File: lib/prisma/index.ts
@@ -163,6 +163,8 @@ export default prisma;
 ```
 
 The code above sets up a Prisma client for Neon Postgres. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
+
+In the same directory, you would see the following code in the `api.ts` file:
 
 ```tsx
 // File: lib/prisma/api.ts
@@ -332,9 +334,9 @@ The code above interacts with the Postgres database using Prisma to manage comme
 
 - `deleteComment()`: Deletes a comment. It takes in the transaction client (`tx`), mutation ID, and the comment ID to be deleted. Like the other mutation functions, it returns an outbox entry, but with the event name `deleteComment`.
 
-## Building a Real-Time Data Model Client with Ably
+## Create a Real-Time Data Model Client with Ably
 
-TODO
+In the directory `lib/models`, you would see the following code in `modelsClient.ts` file:
 
 ```tsx
 // File: lib/models/modelsClient.ts
@@ -352,6 +354,8 @@ export const modelsClient = () => {
 ```
 
 In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
+
+In the same directory, you would see the following code in the `mutations.ts` file:
 
 ```tsx
 // File: lib/models/mutations.ts
@@ -443,6 +447,8 @@ In the code above, three asynchronous functions to handle CRUD operations for co
 
 Each function validates the server response and throws an error for unsuccessful requests. Additionally, the `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
 
+In the same directory, you would see the following code in the `hook.ts` file:
+
 ```tsx
 // File: lib/models/hook.ts
 
@@ -517,7 +523,9 @@ In the code above, the following function and hook are defined:
 
 ## API Routes for Comments and Real-Time Synchronization
 
-TODO
+To perform server-side operations as a result of user interaction on the webpage, a common pattern is to use API routes. In Next.js, API Routes (aka Endpoint Handlers) can be created by creating a file named `route.ts` in any directory in the `app` directory.
+
+To allow dynamic updates and the ability to delete comments, you would see the following code in `route.ts` file in the `app/api/comments/[id]` directory:
 
 ```tsx
 // File: app/api/comments/[id]/route.ts
@@ -559,6 +567,8 @@ export async function DELETE(
 
 In the code above, there are two endpoints, `PUT` and `DELETE`, both of which parse the `id` param in the request. The `PUT` endpoint extracts the comment properties (`mutationId`, `content`) to edit the comment in Postgres and sync the changes to the rest of the web clients that are actively looking to stream comment changes in real-time.
 
+To allow the ability to insert comments, you would see the following code in `route.ts` file in the `app/api/comments` directory:
+
 ```tsx
 // File: app/api/comments/route.ts
 
@@ -593,6 +603,8 @@ export async function POST(request: NextRequest) {
 ```
 
 In the code above, the endpoint parses the request's body to extract the comment properties (`mutationID`, `postId`, `authorId`, `content`). Further, it inserts into Postgres using the `withOutboxWrite` helper function which makes sure to sync it in Postgres and rest of the web clients that are actively looking to stream comments in real-time.
+
+Similarly, you would see the following code in `route.ts` file in the `app/api/posts/[id]` directory:
 
 ```tsx
 // File: app/api/posts/[id]/route.ts
