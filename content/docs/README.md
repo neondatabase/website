@@ -409,6 +409,30 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 <CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
 
+## Numbered Steps
+
+To display numbered steps, wrap the content with `<NumberedStep>` component.
+
+```md
+<NumberedStep number={1} title="Step 1">
+
+Create a new database called `people` on the `main` branch and add some sample data to it.
+
+</NumberedStep>
+
+<NumberedStep number={2} title="Step 2">
+
+Create a new development branch called `dev/jordan`.
+
+</NumberedStep>
+
+<NumberedStep number={3} title="Step 3">
+
+Use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `dev/jordan` development branch and `main`.
+
+</NumberedStep>
+```
+
 ## Images
 
 The images should be sourced in `public/docs` directory and be used in `.md` with the relative path, that begins with a `/` slash
