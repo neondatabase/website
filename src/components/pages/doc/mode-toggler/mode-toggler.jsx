@@ -13,12 +13,9 @@ const ToggleButton = ({ src, title, isActive }) => (
       'text-center text-sm leading-none tracking-tight ',
       'transition-colors duration-200',
       isActive
-        ? `bg-[#D6D8DB] bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,#FFF,transparent)]
-          font-medium text-gray-new-20 shadow-[0_2px_5px_0px_rgba(15,24,54,0.20)]
-          dark:bg-gray-new-15 dark:bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,rgba(255,255,255,0.2),transparent)]
-          dark:text-white dark:shadow-none`
-        : `text-gray-new-30 hover:text-gray-new-20
-          dark:text-gray-new-80 dark:hover:text-white`
+        ? 'bg-[#D6D8DB] bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,#FFF,transparent)] font-medium text-gray-new-20 shadow-[0_2px_5px_0px_rgba(15,24,54,0.20)]' +
+            'dark:bg-gray-new-15 dark:bg-[radial-gradient(54.19%_83.93%_at_50%_3.57%,rgba(255,255,255,0.2),transparent)] dark:text-white dark:shadow-none'
+        : 'text-gray-new-30 hover:text-gray-new-20 dark:text-gray-new-80 dark:hover:text-white'
     )}
   >
     {title}
