@@ -70,6 +70,8 @@ In addition to managing data, you can manage your database schema directly from 
 - Creating enums
 - Refreshing the database schema
 
+![Drizzle Studio Schema Management UI](/docs/relnotes/drizzle_schema_mgmt.png)
+
 ## Limitations
 
 The Drizzle Studio integration that powers the **Tables** page currently does not support partitioned tables. Partitioned tables are not displayed on the **Tables** page.
