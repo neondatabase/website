@@ -70,7 +70,7 @@ const InkeepTrigger = ({
     modalSettings: {
       defaultView: 'SEARCH',
       forceInitialDefaultView: true,
-      isModeSwitchingEnabled: false,
+      isModeSwitchingEnabled: true,
     },
     searchSettings: {
       tabSettings: {
