@@ -23,7 +23,6 @@ const InkeepTrigger = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-  const [defaultModalView, setDefaultModalView] = useState('SEARCH');
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -66,9 +65,11 @@ const InkeepTrigger = ({
       theme: {
         stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
       },
+      optOutFunctionalCookies: true,
     },
     modalSettings: {
-      defaultView: defaultModalView,
+      defaultView: 'SEARCH',
+      forceInitialDefaultView: true,
       isModeSwitchingEnabled: false,
     },
     searchSettings: {
@@ -80,16 +81,11 @@ const InkeepTrigger = ({
     },
   };
 
-  const handleClick = (type) => {
-    setDefaultModalView(type);
-    setIsOpen(!isOpen);
-  };
-
   return (
     <>
       <InkeepSearch
         className={clsx('lg:w-auto', className)}
-        handleClick={handleClick}
+        handleClick={() => setIsOpen(!isOpen)}
         isNotFoundPage={isNotFoundPage}
       />
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
