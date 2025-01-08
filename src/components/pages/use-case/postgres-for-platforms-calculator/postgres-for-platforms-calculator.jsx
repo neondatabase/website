@@ -257,23 +257,38 @@ const PostgresForPlatformsCalculator = () => {
     const { numProjects, computeSize, totalComputeHours, regularStorage, archiveStorage } =
       requirements;
 
+    // Check Free Plan requirements first
     if (
       numProjects <= PLANS.FREE.projectLimit &&
       computeSize <= PLANS.FREE.maxComputeSize &&
       totalComputeHours <= PLANS.FREE.computeHours &&
-      regularStorage + archiveStorage <= PLANS.FREE.storage
+      regularStorage <= PLANS.FREE.storage && // Check regular storage
+      archiveStorage === 0 // Free plan has no separate archive storage
     ) {
       return PLANS.FREE;
     }
 
-    if (numProjects <= PLANS.LAUNCH.projectLimit && computeSize <= PLANS.LAUNCH.maxComputeSize) {
+    // Check Launch Plan requirements
+    if (
+      numProjects <= PLANS.LAUNCH.projectLimit &&
+      computeSize <= PLANS.LAUNCH.maxComputeSize &&
+      regularStorage <= PLANS.LAUNCH.storage &&
+      archiveStorage <= PLANS.LAUNCH.archiveStorage
+    ) {
       return PLANS.LAUNCH;
     }
 
-    if (numProjects <= PLANS.SCALE.projectLimit && computeSize <= PLANS.SCALE.maxComputeSize) {
+    // Check Scale Plan requirements
+    if (
+      numProjects <= PLANS.SCALE.projectLimit &&
+      computeSize <= PLANS.SCALE.maxComputeSize &&
+      regularStorage <= PLANS.SCALE.storage &&
+      archiveStorage <= PLANS.SCALE.archiveStorage
+    ) {
       return PLANS.SCALE;
     }
 
+    // Default to Business Plan if requirements exceed Scale Plan limits
     return PLANS.BUSINESS;
   };
 

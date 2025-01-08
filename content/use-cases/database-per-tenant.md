@@ -186,11 +186,17 @@ Account/Organization
 
 Each Project has a unique ID, which is used to identify the project in the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You will need to map this ID to your tenant's ID in your database.
 
-You can then use this ID to fetch the connection string for each tenant's database. Neon provides a pooled connection string which supports up to 10,000 concurrent connections as well as a non-pooled connection, for more information see [connection strings](/docs/connect/choose-connection#next-choose-your-connection-type-direct-or-pooled). We recommend storing an encrypted record of the connection string(s) in your database, which you can then fetch when needed.
+You can then use this ID to fetch the connection string for each tenant's database. Neon provides a pooled connection string which supports up to 10,000 concurrent connections as well as a non-pooled connection, for more information see [choose your connection type](/docs/connect/choose-connection#next-choose-your-connection-type-direct-or-pooled).
+
+<Admonition type="tip">
+We recommend storing an encrypted record of the connection string(s) in your database, which you can then fetch when needed.
+</Admonition>
 
 There are [several SDKs available for use with Neon](https://api-docs.neon.tech/reference/getting-started-with-neon-api), all of which are wrappers around the Neon API, providing methods to programmatically manage Neon projects, branches, databases, endpoints, roles, and more.
 
+<Admonition type="tip">
 We recommend creating a dedicated Neon account for managing your tenants' projects. For staging and development environments, you can create a separate Neon account. This ensures that your production data is isolated from your development and staging environments.
+</Admonition>
 
 <Testimonial
 text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
@@ -251,8 +257,6 @@ You can specify:
 - The average compute size of each Project
 - The distribution of compute and storage usage across your Projects
 
-### Compute usage distribution
-
 Neon uses compute hours to measure compute usage. A compute hour is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 
 An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
@@ -263,9 +267,7 @@ To keep things simple when estimating costs, we've grouped compute usage pattern
 - Business hours: compute runs for a total of 160 hours/month (9am-5pm, Mon-Fri)
 - Always-on: compute runs for a total of 730 hours/month (24/7)
 
-### Storage usage distribution
-
-Neon uses GB-month to measure storage usage. To keep things simple when estimating costs, we've grouped storage usage patterns into small (1GB), medium (10GB), and large (100GB) databases.
+As for storage, Neon uses GB-month to measure usage. To keep things simple when estimating costs, we've grouped storage usage patterns into small (1GB), medium (10GB), and large (100GB) databases.
 
 <PostgresForPlatformsCalculator />
 
