@@ -41,7 +41,7 @@ const AiChatPage = async () => {
         />
 
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:min-h-[calc(100svh-144px)] lg:flex-none lg:pb-12 lg:pt-0 md:pb-5 md:pt-4"
+          className="grid min-h-[calc(100vh-100px)] w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:min-h-[calc(100svh-144px)] lg:flex-none lg:pb-12 lg:pt-0 md:pb-5 md:pt-4"
           size="1408"
         >
           <ModeToggler className="hidden shrink-0 md:flex" isAiChatPage />
