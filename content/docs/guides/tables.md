@@ -1,6 +1,6 @@
 ---
-title: Managing your data with interactive tables
-subtitle: 'Use the Tables page to easily view, edit, and manage your database entries'
+title: Managing your data and schemas in the Neon Console
+subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 enableTableOfContents: true
 updatedOn: '2024-10-07T15:22:34.955Z'
 ---
