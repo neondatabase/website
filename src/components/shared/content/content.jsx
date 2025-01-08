@@ -15,6 +15,7 @@ import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import NumberedStep from 'components/pages/doc/numbered-step';
+import NumberedSteps from 'components/pages/doc/numbered-steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -179,6 +180,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   SubscriptionForm,
   Video,
   NumberedStep,
+  NumberedSteps,
   ...sharedComponents,
 });
 

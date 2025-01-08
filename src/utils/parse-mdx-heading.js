@@ -2,7 +2,7 @@ function parseMDXHeading(line) {
   const match = line.match(/^#+\s*\[(.*?)\]\((.*?)\)$/);
   const matchWithoutLink = line.match(/^#+\s*(.*?)$/);
   const matchCustomComponent = line.match(
-    /<NumberedStep[^>]*(?:number=\{(\d+)\})[^>]*(?:title="([^"]+)")[^>]*(?:tag="h(\d)")?[^>]*/
+    /<NumberedStep[^>]*(?:title="([^"]+)")[^>]*(?:tag="h(\d)")?[^>]*/
   );
 
   if (match) {
@@ -23,14 +23,14 @@ function parseMDXHeading(line) {
   }
 
   if (matchCustomComponent) {
-    const number = matchCustomComponent[1];
-    const title = matchCustomComponent[2];
-    const depth = parseInt(matchCustomComponent[3], 10) - 1 || 1;
+    const title = matchCustomComponent[1];
+    const depth = parseInt(matchCustomComponent[2], 10) - 1 || 1;
+    const isNumberedStep = true;
 
-    return [depth, title, null, number];
+    return [depth, title, null, isNumberedStep];
   }
 
-  return [null, null, null, null];
+  return [null, null, null];
 }
 
 module.exports = parseMDXHeading;
