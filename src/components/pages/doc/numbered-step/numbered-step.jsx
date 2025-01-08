@@ -9,7 +9,7 @@ const NumberedStep = ({ title, children, tag: Tag = 'h2' }) => {
       className={clsx(
         'relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',
         'before:flex before:size-6 before:items-center before:justify-center before:rounded-full before:bg-gray-new-15 before:text-sm before:leading-snug before:tracking-extra-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
-        'after:absolute after:left-3 after:top-[34px] after:h-[calc(100%+16px)] after:w-px after:bg-gray-new-80',
+        'after:absolute after:left-3 after:top-[34px] after:h-[calc(100%+4px)] after:w-px after:bg-gray-new-80',
         'first:!mt-7 last:overflow-hidden',
         'dark:before:bg-gray-new-94 dark:before:text-black-new dark:after:bg-gray-new-15',
         {
