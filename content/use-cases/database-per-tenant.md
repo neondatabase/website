@@ -2,7 +2,7 @@
 title: 'Database per tenant at scale'
 subtitle: Manage thousands of Postgres databases with minimal effort and costs.
 enableTableOfContents: true
-updatedOn: '2025-01-01T09:00:00.000Z'
+updatedOn: '2025-01-08T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
@@ -30,7 +30,9 @@ This architecture is typically implemented in one of two ways:
 1. A single Postgres instance is shared by all tenants and foreign key constraints are used to enforce data isolation (e.g. having a `tenant_id`/`organization_id` column). This approach is the simplest and is recommended for most use cases.
 2. Separate databases or schemas are used to enforce data isolation within a single Postgres instance.
 
-This guide focuses on the _second_ approach - managing separate databases per tenant. We'll examine why you might need this strategy and discuss its potential challenges. More importantly, we'll introduce a streamlined architecture that leverages Neon to provision individual Postgres instances for each tenant, rather than managing multiple databases within a single Postgres instance.
+This guide focuses on the _second_ approach - managing separate databases per tenant. We'll go over why you might need this architecture and discuss its potential challenges.
+
+More importantly, we'll introduce a streamlined architecture that leverages Neon to provision individual Postgres instances for each tenant, rather than managing multiple databases within a single Postgres instance.
 
 <Admonition type="note">
 A Postgres instance acts as a container that can hold many databases (each database is created with the `CREATE DATABASE <database_name>` command). When we mention "Postgres instance" in this guide, we're referring to this top-level container.
@@ -61,7 +63,9 @@ You'll maintain a mapping of tenant IDs to database names and build custom tooli
 - Resource monitoring
 - User permissions and access controls
 
-If you have data residency requirements, you'll likely need to duplicate your setup in more than one region. You'll notice that while this architecture is possible, it introduces a series of challenges once your tenant's usage grows.
+If you have data residency requirements, you'll likely need to duplicate your setup in more than one region.
+
+You'll notice that while this architecture is possible, it introduces a series of challenges once your tenant's usage grows.
 
 ## Challenges when doing a database per tenant in a shared Postgres instance
 
@@ -92,7 +96,7 @@ author={{
 
 ## How Neon enables a Postgres instance per tenant architecture
 
-Neon offers fully managed Postgres with a serverless architecture built for performance, reliability, manageability, and cost efficiency. It supports features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [scale to zero](/docs/get-started-with-neon/production-readiness#scale-to-zero), instant point-in-time restore, automatic storage archiving and more, making it ideal for managing thousands of Postgres instances.
+Neon offers fully managed Postgres with a serverless architecture built for performance, reliability, manageability, and cost efficiency. It supports features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [scale to zero](/docs/get-started-with-neon/production-readiness#scale-to-zero), [instant point-in-time restore](/docs/guides/branch-restore), [automatic storage archiving](/docs/guides/branch-archiving) and more, making it ideal for managing thousands of Postgres instances.
 
 ### 1-second provisioning
 
@@ -116,17 +120,11 @@ By default, Neon suspends compute resources after 5 minutes of inactivity. You c
 
 ### Custom storage layer
 
-Neon implements its own custom storage layer, which makes it possible to support features such as:
+Neon implements its own custom storage layer, which makes it possible to support features such as [database branching](/docs/introduction/branching), [instant point-in-time recovery](/docs/guides/branch-restore), and [automatic storage-level archiving](/docs/guides/branch-archiving).
 
-- Database branching:
-- Instant point-in-time recovery:
-- Automatic storage-level archiving:
+#### Instant point-in-time recovery
 
-While database branching is typically used as part of the software development lifecycle to provide a database for every environment (e.g. staging, testing, development, etc.), it's important to understand this feature since it's the foundation for instant point-in-time recovery and storage-level archiving.
-
-#### Database branching and instant point-in-time recovery
-
-Neon makes it possible to create copies of your data, known as branches. When a Postgres instance on Neon is provisioned, a root branch called `main` is created along with it.
+Postgres on Neon relies on a branching model. When a Postgres instance is provisioned, a root branch called `main` is created along with it.
 
 ![development environment branch](/docs/introduction/branching_dev_env.png)
 
@@ -152,13 +150,15 @@ Postgres instance on Neon
 
 Neon retains a history of all changes made to your branch's database over time (writes, updates, deletes, etc.), allowing you to create a branch from a current or past state. Creating a branch is a near-instant operation, regardless of the size of your database. This is because a branch is a copy-on-write clone of your data.
 
-This eliminates the need for complex backup and restore strategies and allows you to restore any of your tenant's data to a previous state when needed. Check out the [history retention](/docs/introduction/branching#history-retention) documentation for more information about configuring your history retention window.
+This is also the foundation for [instant point-in-time recovery](/docs/guides/branch-restore), which allows you to restore any of your tenant's data to a previous state when needed. This eliminates the need for setting up a backup and restore strategy.
+
+Check out the [history retention](/docs/introduction/branching#history-retention) documentation for more information about configuring your history retention window.
 
 #### Automatic storage-level archiving
 
 Neon automatically archives branches that are older than 14 days and have not been accessed for the past 24 hours. These branches are [charged at a reduced per-GB rate](/pricing#storage-pricing), which minimizes storage costs.
 
-Connecting to an archived branch, querying it, or performing some other action that accesses will automaticaly trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses will automaticaly trigger the unarchiving process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
 ## High-level implementation overview
 
@@ -186,6 +186,8 @@ Account/Organization
 
 Each Project has a unique ID, which is used to identify the project in the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You will need to map this ID to your tenant's ID in your database.
 
+You can then use this ID to fetch the connection string for each tenant's database. Neon provides a pooled connection string which supports up to 10,000 concurrent connections as well as a non-pooled connection, for more information see [connection strings](/docs/connect/choose-connection#next-choose-your-connection-type-direct-or-pooled). We recommend storing an encrypted record of the connection string(s) in your database, which you can then fetch when needed.
+
 There are [several SDKs available for use with Neon](https://api-docs.neon.tech/reference/getting-started-with-neon-api), all of which are wrappers around the Neon API, providing methods to programmatically manage Neon projects, branches, databases, endpoints, roles, and more.
 
 We recommend creating a dedicated Neon account for managing your tenants' projects. For staging and development environments, you can create a separate Neon account. This ensures that your production data is isolated from your development and staging environments.
@@ -198,7 +200,7 @@ author={{
 }}
 />
 
-### Billing and monitoring APIs
+### Billing and management APIs
 
 The Neon API lets you configure limits and monitor usage, enabling billing features, such as:
 
@@ -213,9 +215,7 @@ The Neon API lets you configure limits and monitor usage, enabling billing featu
 For an example of how a Neon partner defined usage limits based on _database instance types_, see [Koyeb Database Instance Types](https://www.koyeb.com/docs/databases#database-instance-types). You will see limits defined on compute size, compute time, stored data, written data, and egress.
 </Admonition>
 
-As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
-
-To learn more about setting limits, see [Configure consumption limits](#/docs/guides/partner-consumption-limits).
+As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience. To learn more about setting limits, see [Configure consumption limits](#/docs/guides/partner-consumption-limits).
 
 Neon also provides a range of consumption APIs, which let you query a range of account and project-level metrics to monitor usage. Here are the different endpoints to retrieve these metrics, depending on how you want them aggregated or broken down:
 
@@ -248,8 +248,8 @@ To get a sense of how much it would cost to provision a Postgres instance per te
 You can specify:
 
 - The number of Projects
-- The average compute size of each Postgres instance
-- The distribution of compute and storage usage across your Postgres instances
+- The average compute size of each Project
+- The distribution of compute and storage usage across your Projects
 
 ### Compute usage distribution
 
@@ -265,13 +265,7 @@ To keep things simple when estimating costs, we've grouped compute usage pattern
 
 ### Storage usage distribution
 
-Neon uses GB-month to measure storage usage.
-
-To keep things simple when estimating costs, we've grouped storage usage into 3 categories:
-
-- 1GB: small database size
-- 10GB: medium database size
-- 100GB: large database size
+Neon uses GB-month to measure storage usage. To keep things simple when estimating costs, we've grouped storage usage patterns into small (1GB), medium (10GB), and large (100GB) databases.
 
 <PostgresForPlatformsCalculator />
 
