@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.581Z'
+updatedOn: '2025-01-08T15:53:54.574Z'
 ---
 
 <Admonition type="tip" title="Did you know?">
