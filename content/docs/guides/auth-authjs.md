@@ -6,6 +6,10 @@ enableTableOfContents: true
 updatedOn: '2024-10-12T11:16:13.581Z'
 ---
 
+<Admonition type="tip" title="Did you know?">
+We recently introduced an Auth.js adapter for Neon. For installation and setup instructions, see: [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
+</Admonition>
+
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (e.g., Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
 
 For example, passwordless authentication methods like magic links require secure storage of temporary tokens. Magic link login has become increasingly popular since it eliminates the need for users to remember complex passwords, reducing the risk of credential-based attacks.
