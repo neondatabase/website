@@ -17,7 +17,7 @@ const NumberedStep = ({ number, title, children, tag: Tag = 'h2' }) => {
       >
         {number}
       </div>
-      <div>
+      <div className="w-[calc(100%-100px)] flex-1">
         <Tag className="!my-0 scroll-mt-20 lg:scroll-mt-5" id={id}>
           {title}
         </Tag>
