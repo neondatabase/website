@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-10-07T15:22:34.955Z'
 ---
 
-The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, as well as export data in both .json and .csv formats.
+The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
 
 <Admonition type="note">
 The **Tables** page is powered by Drizzle Studio. For new features and updates, please refer to the [Neon Drizzle Studio Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md).
@@ -59,3 +59,17 @@ Or just choose `Export all..` to download the entire contents of the table.
 You can export to either JSON or CSV.
 
 ![export data from table](/docs/manage/export_drizzle.png)
+
+## Manage schemas
+
+In addition to managing data, you can manage your database schema directly from the **Tables** page. Schema management options include:
+
+- Creating, altering, and dropping schemas
+- Creating and altering tables
+- Creating and altering views
+- Creating enums
+- Refreshing the database schema
+
+## Limitations
+
+The Drizzle Studio integration that powers the **Tables** page currently does not support partitioned tables. Partitioned tables are not displayed on the **Tables** page.
