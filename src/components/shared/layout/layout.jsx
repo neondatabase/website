@@ -22,6 +22,7 @@ const Layout = ({
   isAiChatPage = false,
   searchIndexName = null,
   customType = null,
+  isClient = false,
 }) => (
   <>
     <Topbar isDarkTheme={headerTheme === 'dark'} />
@@ -40,6 +41,7 @@ const Layout = ({
         withBorder={headerWithBorder}
         searchIndexName={searchIndexName}
         customType={customType}
+        isClient={isClient}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
@@ -71,6 +73,7 @@ Layout.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
+  isClient: PropTypes.bool,
 };
 
 export default Layout;

@@ -314,6 +314,14 @@ module.exports = {
             opacity: 0,
           },
         },
+        slideIn: {
+          '0%': {
+            width: 0,
+          },
+          '100%': {
+            width: '100%',
+          },
+        },
         dialogShow: {
           '0%': {
             opacity: 0,
@@ -347,6 +355,7 @@ module.exports = {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         'fade-in-overlay': 'fadeInOverlay 0.2s',
         'fade-out-overlay': 'fadeOutOverlay 0.2s',
+        'slide-in': 'slideIn 5s cubic-bezier(0.4, 0, 0.6, 1) forwards',
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
         'logo-move': 'logoMove 1s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate',

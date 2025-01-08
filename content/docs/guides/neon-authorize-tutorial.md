@@ -2,7 +2,7 @@
 title: Neon Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2024-11-05T18:30:25.431Z'
+updatedOn: '2024-12-18T08:02:08.142Z'
 ---
 
 <InfoBlock>
@@ -88,15 +88,18 @@ Let's take a look at the `getTodos` function in the `actions.tsx` file:
 
 ```typescript shouldWrap
 export async function getTodos(): Promise<Array<Todo>> {
-  return fetchWithDrizzle(async (db, { userId }) => {
-    // WHERE filter is optional because of RLS. But we send it anyway for
-    // performance reasons.
-    return db
-      .select()
-      .from(schema.todos)
-      .where(eq(schema.todos.userId, sql`auth.user_id()`)) // [!code highlight]
-      .orderBy(asc(schema.todos.insertedAt));
-  });
+  const { getToken } = auth();
+  const authToken = await getToken();
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
+
+  // WHERE filter is optional because of RLS. But we send it anyway for
+  // performance reasons.
+  return db
+    .$withAuth(authToken)
+    .select()
+    .from(schema.todos)
+    .where(eq(schema.todos.userId, sql`auth.user_id()`))
+    .orderBy(asc(schema.todos.insertedAt));
 }
 ```
 
@@ -164,15 +167,18 @@ Another scenario, imagine a team member writes the `getTodos` function like this
 
 ```typescript shouldWrap
 export async function getTodos(): Promise<Array<Todo>> {
-  return fetchWithDrizzle(async (db) => {
-    const todos = await db
-      .select()
-      .from(schema.todos)
-      .where(eq(schema.todos.userId, schema.todos.userId)) // Woops // [!code highlight]
-      .orderBy(asc(schema.todos.insertedAt));
+  const { getToken } = auth();
+  const authToken = await getToken();
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
 
-    return todos;
-  });
+  const todos = await db
+    .$withAuth(authToken)
+    .select()
+    .from(schema.todos)
+    .where(eq(schema.todos.userId, schema.todos.userId)) // Woops // [!code highlight]
+    .orderBy(asc(schema.todos.insertedAt));
+
+  return todos;
 }
 ```
 
@@ -196,15 +202,17 @@ Order is restored, thanks to RLS. Now go fix your app before you forget:
 
 ```typescript shouldWrap
 export async function getTodos(): Promise<Array<Todo>> {
-  return fetchWithDrizzle(async (db, { userId }) => {
-    // WHERE filter is optional because of RLS. But we send it anyway for
-    // performance reasons.
-    return db
-      .select()
-      .from(schema.todos)
-      .where(eq(schema.todos.userId, sql`auth.user_id()`))
-      .orderBy(asc(schema.todos.insertedAt));
-  });
+  const { getToken } = auth();
+  const authToken = await getToken();
+  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
+  // WHERE filter is optional because of RLS. But we send it anyway for
+  // performance reasons.
+  return db
+    .$withAuth(authToken)
+    .select()
+    .from(schema.todos)
+    .where(eq(schema.todos.userId, sql`auth.user_id()`))
+    .orderBy(asc(schema.todos.insertedAt));
 }
 ```
 

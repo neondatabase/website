@@ -233,8 +233,6 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -297,10 +295,16 @@
                   slug: manage/orgs-manage
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
-                - title: API actions
-                  slug: manage/orgs-api
-                - title: CLI actions
-                  slug: manage/orgs-cli
+                - section: Organizations API
+                  items:
+                    - title: Manage organizations via API
+                      slug: manage/orgs-api
+                    - title: Query organization metrics via API
+                      slug: manage/orgs-api-consumption
+                - section: CLI
+                  items:
+                    - title: CLI actions
+                      slug: manage/orgs-cli
             - title: Project collaboration
               slug: guides/project-collaboration-guide
             - title: Database access
@@ -473,6 +477,10 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+    - title: Neon Identity
+      slug: guides/neon-identity
+      icon: partner-guide
+      tag: beta
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth
@@ -511,6 +519,8 @@
               slug: guides/neon-authorize-firebase-gcp
             - title: Google Identity
               slug: guides/neon-authorize-google-identity
+            - title: PropelAuth
+              slug: guides/neon-authorize-propelauth
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -629,6 +639,8 @@
               slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
+            - title: Inngest
+              slug: guides/logical-replication-inngest
         - section: Replicate to Neon
           items:
             - title: AlloyDB

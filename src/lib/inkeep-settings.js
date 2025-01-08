@@ -50,8 +50,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath:
-    'https://neon-next-git-docs-perplexity-mode-neondatabase.vercel.app/ai-chat',
+  shareChatUrlBasePath: 'https://neon.tech/ai-chat',
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',

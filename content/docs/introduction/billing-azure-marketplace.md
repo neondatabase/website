@@ -3,7 +3,7 @@ title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service with unified billing through Azure Marketplace
 tag: new
-updatedOn: '2024-12-05T09:54:07.974Z'
+updatedOn: '2024-12-20T16:15:17.131Z'
 ---
 
 <PublicPreview/>
@@ -83,13 +83,34 @@ updatedOn: '2024-12-05T09:54:07.974Z'
 
 Neon pricing plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
+## Transfer existing Neon projects to an Azure-created Neon organization
+
+You can transfer existing Neon projects to an Azure-created organization, but note these restrictions:
+
+- The Neon project must belong to a personal Neon account, not an organization. Transfers between organizations are not yet supported.
+- The Neon project must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
+- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Free plan organization will result in an error.
+
+For detailed transfer steps, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
+
+If the restrictions above prevent you from transferring your project, consider these options:
+
+- Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](/docs/introduction/regions#azure-regions)). If you're on the Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
+- Migrate your data to the Azure organization project using `pg_dump` and `pg_restore`. Refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions.
+
 ## Changing your pricing plan
 
-Changing your Neon pricing plan requires [creating a new Neon Resource](#create-a-neon-resource) with the desired pricing plan and opening a [support ticket](https://console.neon.tech/app/projects?modal=support) with Neon to have your existing Neon projects transferred to the new Neon Resource — creating a Neon Resources creates an Organization in Neon. The Neon Support team will transfer your Neon projects from your existing Neon Organization to your new Neon Organization. Afterward, you can delete your old Neon resource. If your old resource was on a paid plan, deleting it will stop billing.
+Changing the Neon pricing plan for an Azure subscription involves the following steps:
 
-<Admonition type="important">
-Deleting a Neon resource from Azure removes the Neon Organization and all Neon projects and data associated with that resource. When changing a Neon plan, do not delete your old Neon resource from Azure before you have verified that your Neon projects and data have transferred successfully to the Neon Organization associated with your new Neon resource.
-</Admonition>
+1. [Creating a new Neon resource](#create-a-neon-resource) with the desired pricing plan.
+2. Opening a [support ticket](https://console.neon.tech/app/projects?modal=support) to request assistance transferring your existing Neon projects to the new Neon resource. The Neon support team will transfer your projects from the "old" Neon organization to the new one. If you're on the Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
+3. Once the project transfer is complete, you can [delete your old Neon resource](#deleting-a-neon-resource-in-azure). If the old resource was on a paid plan, deleting it will stop billing.
+
+   <Admonition type="important" title="Do not delete your old Neon resource until the transfer is completed">
+   Deleting a Neon resource from Azure removes the Neon organization and all associated projects and data. Before deleting your old resource, ensure your projects and data have been successfully transferred to the new organization.
+   </Admonition>
+
+Alternatively, you can perform the migration to the new Neon resource yourself. First, create a new Neon resource as described above. This will create a new organization in Neon. Add a Neon project to the new organization, then migrate your data from the project in your old organization to the project in the new organization using `pg_dump` and `pg_restore`. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions. You can [delete your old Neon resource](#deleting-a-neon-resource-in-azure) after you've migrated your data.
 
 ## Enterprise Plan
 

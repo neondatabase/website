@@ -6,6 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
+  - /docs/guides/branch-promote
 updatedOn: '2024-10-22T15:41:04.374Z'
 ---
 

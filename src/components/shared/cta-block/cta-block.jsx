@@ -23,13 +23,25 @@ const sizeClassNames = {
   },
 };
 
+const themeClassNames = {
+  row: {
+    container: 'items-center justify-between',
+    content: 'max-w-sm',
+  },
+  column: {
+    container: 'flex-col items-start',
+  },
+};
+
 const CtaBlock = ({
   className,
   title,
   description,
   buttonText,
   buttonUrl,
+  buttonClassName,
   size = 'md',
+  theme = 'row',
   hasDecor = true,
 }) => (
   <div
@@ -40,23 +52,30 @@ const CtaBlock = ({
       className
     )}
   >
-    <div className="relative z-10 flex items-center justify-between sm:flex-col sm:gap-[18px]">
-      <div className="max-w-sm sm:text-center">
+    <div
+      className={clsx(
+        'sm:gap-[18px sm:flex-col] relative z-10 flex gap-6 sm:items-center',
+        themeClassNames[theme].container
+      )}
+    >
+      <div className={clsx('sm:text-center', themeClassNames[theme].content)}>
         <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
         {description && (
           <p
             className={clsx(
-              'mt-2.5',
+              'mt-2.5 [&>a:hover]:underline [&>a]:text-primary-2',
               sizeClassNames[size].description,
               hasDecor ? 'text-gray-new-70' : 'text-gray-new-60'
             )}
-          >
-            {description}
-          </p>
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         )}
       </div>
       <Button
-        className="h-10 px-7 text-base !font-semibold tracking-tighter lg:text-sm"
+        className={clsx(
+          'h-10 px-7 text-base !font-semibold tracking-tighter lg:text-sm',
+          buttonClassName
+        )}
         theme="primary"
         to={buttonUrl}
       >
@@ -104,7 +123,9 @@ CtaBlock.propTypes = {
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['sm', 'md']),
+  buttonClassName: PropTypes.string,
+  size: PropTypes.oneOf(Object.keys(sizeClassNames)),
+  theme: PropTypes.oneOf(Object.keys(themeClassNames)),
   hasDecor: PropTypes.bool,
 };
 

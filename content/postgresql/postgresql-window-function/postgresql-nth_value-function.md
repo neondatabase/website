@@ -62,7 +62,7 @@ We will use the `products` table created in the window functions tutorial for th
 
 ### 1\) Using PostgreSQL NTH_VALUE() function over the result set example
 
-This example uses the `NTH_VALUE()` function to return all products together with the most expensive product:
+This example uses the `NTH_VALUE()` function to return all products together with the second most expensive product:
 
 ```sql
 SELECT

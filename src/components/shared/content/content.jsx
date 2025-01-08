@@ -17,6 +17,7 @@ import LinkPreview from 'components/pages/doc/link-preview';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
@@ -177,6 +178,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   ComputeCalculator,
   SubscriptionForm,
   InkeepEmbedded,
+  Video,
   ...sharedComponents,
 });
 

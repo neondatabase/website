@@ -6,7 +6,20 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
-<UseCaseContext />
+<Video
+sources={[
+{
+src: "/videos/pages/doc/db-per-user.mp4",
+type: "video/mp4",
+},
+{
+src: "/videos/pages/doc/db-per-user.webm",
+type: "video/webm",
+}
+]}
+width={768}
+height={432}
+/>
 
 <Admonition type="note" title="TL;DR">
 Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
@@ -15,7 +28,7 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) or [reach out to us](/contact-sales) for 1:1 guidance.
+In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
 </Admonition>
 
 <Testimonial
@@ -81,6 +94,10 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 
 ![A dedicated project for dev/test](/use-cases/dev-test.jpg)
 
+<Admonition type="note" title="Tip">
+Check the [Database Per User Guide](https://neon.tech/use-cases/database-per-tenant) in our documentation for step by step instructions on how to set this up. 
+</Admonition>
+
 ## Neon for B2B SaaS: Data isolation with easy scalability
 
 If you’re building a B2B SaaS platform, a database-per-tenant design can simplify your architecture while preserving scalability. With Neon, when you place its tenant on its own project, you offer complete data privacy to your customers via instance-level isolation. This approach also makes it easy to comply with data regulations across different regions, as projects can be created in specific locations to meet local requirements.
@@ -99,8 +116,4 @@ author={{
 }}
 />
 
-<div align="center">
-[Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
-</div>
-
-<CTA title="Have questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />

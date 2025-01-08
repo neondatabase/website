@@ -115,7 +115,7 @@ The output will display the schema and the name of the views:
 To retrieve all [materialized views](postgresql-materialized-views), you can query them from the `pg_matviews` view:
 
 ```php
-SELECT * FROM pg_matviews\G
+SELECT * FROM pg_matviews;
 ```
 
 Output:

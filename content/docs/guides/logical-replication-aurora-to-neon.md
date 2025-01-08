@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
 1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
-2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
+2. Create the subscription using a `CREATE SUBSCRIPTION` statement.
 
    ```sql shouldWrap
    CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
