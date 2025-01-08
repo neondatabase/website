@@ -29,7 +29,7 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
 
-| Compute Size (CU) | vCPU | RAM    | max_connections |
+| Max. Compute Size (CU) | vCPU | RAM    | max_connections |
 | :---------------- | :--- | :----- | :-------------- |
 | 0.25              | 0.25 | 1 GB   | 112             |
 | 0.50              | 0.50 | 2 GB   | 225             |
