@@ -29,6 +29,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import Link from 'components/shared/link';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
@@ -176,6 +177,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   UseCaseContext,
   ComputeCalculator,
   SubscriptionForm,
+  InkeepEmbedded,
   Video,
   ...sharedComponents,
 });

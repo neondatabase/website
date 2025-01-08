@@ -6,9 +6,8 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
-import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
+import { baseSettings } from 'lib/inkeep-settings';
 
-import InkeepAIButton from '../inkeep-ai-button';
 import InkeepSearch from '../inkeep-search';
 
 const InkeepCustomTrigger = dynamic(
@@ -20,8 +19,6 @@ const InkeepTrigger = ({
   className = null,
   isNotFoundPage = false,
   isDarkTheme = false,
-  topOffset,
-  showAIButton = false,
   isPostgresPage = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,16 +58,18 @@ const InkeepTrigger = ({
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
-    stylesheetUrls: ['/inkeep/css/inkeep-chat.css'],
     baseSettings: {
       ...baseSettings,
       colorMode: {
         forcedColorMode: themeMode,
       },
+      theme: {
+        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
+      },
     },
     modalSettings: {
       defaultView: defaultModalView,
-      askAILabel: 'Ask Neon AI',
+      isModeSwitchingEnabled: false,
     },
     searchSettings: {
       tabSettings: {
@@ -79,7 +78,6 @@ const InkeepTrigger = ({
           : ['Neon Docs', 'PostgreSQL Tutorial', 'All'],
       },
     },
-    aiChatSettings,
   };
 
   const handleClick = (type) => {
@@ -94,7 +92,6 @@ const InkeepTrigger = ({
         handleClick={handleClick}
         isNotFoundPage={isNotFoundPage}
       />
-      {showAIButton && <InkeepAIButton handleClick={handleClick} topOffset={topOffset} />}
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
@@ -103,7 +100,6 @@ const InkeepTrigger = ({
 InkeepTrigger.propTypes = {
   className: PropTypes.string,
   topOffset: PropTypes.number,
-  showAIButton: PropTypes.bool,
   isNotFoundPage: PropTypes.bool,
   isDarkTheme: PropTypes.bool,
   isPostgresPage: PropTypes.bool,

@@ -571,7 +571,7 @@
             - title: AWS Lambda
               slug: guides/aws-lambda
             - title: Azure Functions
-              slug: https://neon.tech/guides/query-postgres-azure-functions
+              slug: guides/query-postgres-azure-functions
               tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
@@ -788,7 +788,7 @@
       tag: community
       icon: management
     - title: Find your template
-      slug: https://neon.tech/templates
+      slug: /templates
       icon: languages
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
@@ -796,7 +796,7 @@
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
-      slug: https://neon.tech/postgresql/tutorial
+      slug: /postgresql/tutorial
       icon: get-started
     - title: Neon Postgres guides
       slug: postgresql/introduction

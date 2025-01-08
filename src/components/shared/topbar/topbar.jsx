@@ -70,7 +70,8 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-        You can instantly copy 1TB+ datasets via Neon branches, e.g. for ephemeral environments - Learn how they compare to other "branching" features      
+      You can instantly copy 1TB+ datasets via Neon branches, e.g. for ephemeral environments -
+      Learn how they compare to other "branching" features
     </span>
     <ChevronIcon
       className={clsx(

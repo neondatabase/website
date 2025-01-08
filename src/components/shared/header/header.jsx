@@ -2,19 +2,18 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
+import ModeToggler from 'components/pages/doc/mode-toggler';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
+import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
-
-import Logo from '../logo';
 
 import HeaderWrapper from './header-wrapper';
 
@@ -202,7 +201,7 @@ const Header = ({
   isStickyOverlay = false,
   showSearchInput = false,
   isDocPage = false,
-  isPostgresPage = false,
+  isAiChatPage = false,
   withBorder = false,
   searchIndexName = null,
   customType = null,
@@ -220,10 +219,10 @@ const Header = ({
         withBorder={withBorder}
       >
         {isDocPage ? (
-          <div className="flex">
-            <span className="hidden w-[350px] shrink-0 3xl:block xl:w-[302px] lg:hidden" />
+          <div className="flex w-full items-center">
+            <span className="w-[350px] shrink-0 xl:w-[302px] lg:hidden" />
             <Container
-              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-32 md:pr-24"
+              className="z-10 grid w-full grid-cols-12 items-center gap-x-8 xl:flex xl:justify-between xl:gap-x-5 lg:pr-36 md:pr-24"
               size="1408"
             >
               <div className="hidden lg:flex lg:items-center lg:gap-x-7">
@@ -236,22 +235,22 @@ const Header = ({
                   isHeader
                 />
                 <Link
-                  className="relative text-[15px] font-medium leading-none tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
+                  className="relative text-[15px] font-medium leading-tight tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
                   to={customType?.link || LINKS.docs}
                 >
                   {customType?.title || 'Docs'}
                 </Link>
               </div>
-              <div className="col-span-7 col-start-3 -ml-6 flex max-w-[832px] gap-3.5 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none lg:hidden">
-                <InkeepTrigger className="w-[272px]" isPostgresPage={isPostgresPage} showAIButton />
+              <div className="col-span-7 col-start-2 -ml-6 flex max-w-[832px] gap-3.5 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none md:hidden">
+                <ModeToggler isAiChatPage={isAiChatPage} />
               </div>
-              <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 3xl:col-start-11 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
+              <div className="col-span-2 col-start-10 -ml-12 h-full max-w-64 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
                 <Sidebar isClient={isClient} />
               </div>
             </Container>
           </div>
         ) : (
-          <Container className="z-10 flex items-center justify-between md:!px-5" size="1344">
+          <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
             <div className="flex items-center gap-x-[90px] xl:gap-x-16">
               <Logo
                 className="h-7"
@@ -284,7 +283,7 @@ Header.propTypes = {
   isStickyOverlay: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
+  isAiChatPage: PropTypes.bool,
   withBorder: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
