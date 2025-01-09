@@ -41,7 +41,7 @@ ToggleButton.propTypes = {
 
 const ModeToggler = ({ className, isAiChatPage = false }) => {
   const previousPage = usePreviousPage();
-  const isPreviousDocPage = previousPage?.includes('/docs/');
+  const isPreviousDocPage = previousPage && previousPage.includes('/docs/');
 
   return (
     <div
