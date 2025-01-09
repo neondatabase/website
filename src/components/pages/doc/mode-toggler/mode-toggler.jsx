@@ -1,13 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
-import useLocation from 'react-use/lib/useLocation';
 
 import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import useLocalStorage from 'hooks/use-local-storage';
 
 const ToggleButton = ({ src, title, isActive, onClick }) => (
   <Link
@@ -44,13 +45,13 @@ ToggleButton.propTypes = {
 
 const ModeToggler = ({ className }) => {
   const [isAiChatPage, setIsAiChatPage] = useState(false);
-  const [previousPage, setPreviousPage] = useState(null);
+  const [previousPage, setPreviousPage] = useLocalStorage('previousDocPage', null);
 
-  const { href } = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
-    setIsAiChatPage(href.includes(LINKS.aiChat));
-  }, [href]);
+    setIsAiChatPage(pathname.includes(LINKS.aiChat));
+  }, [pathname]);
 
   return (
     <div
@@ -69,7 +70,7 @@ const ModeToggler = ({ className }) => {
         src={LINKS.aiChat}
         title="Ask Neon AI"
         isActive={isAiChatPage}
-        onClick={() => setPreviousPage(href)}
+        onClick={() => setPreviousPage(pathname)}
       />
     </div>
   );
