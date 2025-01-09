@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-01-06T23:37:50.191Z'
+updatedOn: '2025-01-09T14:12:22.673Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
