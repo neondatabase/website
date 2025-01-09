@@ -87,7 +87,9 @@ const DocPost = async ({ params }) => {
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const fileOriginPath = `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
+  const fileOriginPath = isChangelogIndex
+    ? process.env.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH
+    : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   if (!isChangelogIndex && !post) return notFound();
