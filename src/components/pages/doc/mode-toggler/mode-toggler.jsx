@@ -9,7 +9,7 @@ const ToggleButton = ({ src, title, isActive }) => (
   <Link
     to={src}
     className={clsx(
-      'relative min-w-[90px] rounded-sm px-2.5 py-1 md:w-1/2',
+      'relative min-w-[104px] rounded-sm px-2.5 py-1 md:w-1/2',
       'text-center text-sm leading-none tracking-tight ',
       'transition-colors duration-200',
       isActive
