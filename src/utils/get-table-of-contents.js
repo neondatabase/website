@@ -78,8 +78,6 @@ const getTableOfContents = (content) => {
 
   const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
 
-  console.log(arr);
-
   return buildNestedToc(arr, 1);
 };
 
