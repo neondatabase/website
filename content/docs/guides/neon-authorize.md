@@ -15,7 +15,7 @@ updatedOn: '2025-01-09T13:39:07.036Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="/docs/postgresql/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
+  <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
   <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 
