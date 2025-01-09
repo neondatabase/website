@@ -1,6 +1,9 @@
+'use client';
+
 import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
 
+import { usePreviousPage } from 'app/previous-page-context';
 import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
@@ -36,7 +39,8 @@ ToggleButton.propTypes = {
   isActive: PropTypes.bool,
 };
 
-const ModeToggler = async ({ className, isAiChatPage = false, previousPage = null }) => {
+const ModeToggler = ({ className, isAiChatPage = false }) => {
+  const previousPage = usePreviousPage();
   const isPreviousDocPage = previousPage?.includes('/docs/');
 
   return (
@@ -59,7 +63,6 @@ const ModeToggler = async ({ className, isAiChatPage = false, previousPage = nul
 ModeToggler.propTypes = {
   className: PropTypes.string,
   isAiChatPage: PropTypes.bool,
-  previousPage: PropTypes.string,
 };
 
 export default ModeToggler;

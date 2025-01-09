@@ -8,6 +8,7 @@ import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsCont
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import PostHogProvider from './posthog-provider';
+import { PreviousPageProvider } from './previous-page-context';
 import ThemeProvider from './provider';
 import SessionProvider from './session-provider';
 
@@ -38,9 +39,11 @@ const RootLayout = ({ children }) => (
         <PostHogProvider>
           <PostHogPageView />
           <ThemeProvider>
-            <HomepageVisitProvider>
-              <ActiveLabelProvider>{children}</ActiveLabelProvider>
-            </HomepageVisitProvider>
+            <PreviousPageProvider>
+              <HomepageVisitProvider>
+                <ActiveLabelProvider>{children}</ActiveLabelProvider>
+              </HomepageVisitProvider>
+            </PreviousPageProvider>
           </ThemeProvider>
         </PostHogProvider>
       </SessionProvider>
