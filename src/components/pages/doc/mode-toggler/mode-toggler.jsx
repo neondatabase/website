@@ -36,21 +36,30 @@ ToggleButton.propTypes = {
   isActive: PropTypes.bool,
 };
 
-const ModeToggler = ({ className, isAiChatPage = false }) => (
-  <div
-    className={clsx(
-      'relative z-10 flex gap-x-0.5 overflow-hidden rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15 md:w-full',
-      className
-    )}
-  >
-    <ToggleButton src={LINKS.docsHome} title="Neon Docs" isActive={!isAiChatPage} />
-    <ToggleButton src={LINKS.aiChat} title="Ask Neon AI" isActive={isAiChatPage} />
-  </div>
-);
+const ModeToggler = async ({ className, isAiChatPage = false, previousPage = null }) => {
+  const isPreviousDocPage = previousPage?.includes('/docs/');
+
+  return (
+    <div
+      className={clsx(
+        'relative z-10 flex gap-x-0.5 overflow-hidden rounded border border-gray-new-90 p-[3px] dark:border-gray-new-15 md:w-full',
+        className
+      )}
+    >
+      <ToggleButton
+        src={isAiChatPage && isPreviousDocPage ? previousPage : LINKS.docsHome}
+        title="Neon Docs"
+        isActive={!isAiChatPage}
+      />
+      <ToggleButton src={LINKS.aiChat} title="Ask Neon AI" isActive={isAiChatPage} />
+    </div>
+  );
+};
 
 ModeToggler.propTypes = {
   className: PropTypes.string,
   isAiChatPage: PropTypes.bool,
+  previousPage: PropTypes.string,
 };
 
 export default ModeToggler;

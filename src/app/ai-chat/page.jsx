@@ -1,3 +1,5 @@
+import { headers } from 'next/headers';
+
 import MobileNav from 'components/pages/doc/mobile-nav';
 import ModeToggler from 'components/pages/doc/mode-toggler';
 import Sidebar from 'components/pages/doc/sidebar';
@@ -13,10 +15,13 @@ export const metadata = getMetadata(SEO_DATA.aiChat);
 
 const AiChatPage = async () => {
   const sidebar = await getSidebar();
+  const headersList = await headers();
+  const previousPage = headersList.get('referer');
 
   return (
     <Layout
       headerClassName="lg:border-none"
+      previousPage={previousPage}
       burgerWithoutBorder
       showSearchInput
       isDocPage
@@ -44,7 +49,11 @@ const AiChatPage = async () => {
           className="grid min-h-[calc(100vh-100px)] w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:min-h-[calc(100svh-144px)] lg:flex-none lg:pb-12 lg:pt-0 md:pb-5 md:pt-4"
           size="1408"
         >
-          <ModeToggler className="hidden shrink-0 md:flex" isAiChatPage />
+          <ModeToggler
+            className="hidden shrink-0 md:flex"
+            previousPage={previousPage}
+            isAiChatPage
+          />
           <h1 className="sr-only">Neon AI Chat</h1>
           <div className="col-span-7 col-start-2 -ml-6 flex w-full max-w-[832px] flex-1 items-center justify-center 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none">
             <InkeepEmbedded />
