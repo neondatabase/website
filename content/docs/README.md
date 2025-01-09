@@ -411,7 +411,7 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 
 ## Numbered Steps
 
-To display numbered steps, wrap the content with `<NumberedStep>` component.
+To display numbered steps, wrap the content with `NumberedSteps` and `NumberedStep` components.
 
 ```md
 <NumberedSteps>
