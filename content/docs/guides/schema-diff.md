@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2025-01-06T23:39:35.459Z'
+updatedOn: '2025-01-09T14:34:13.460Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -120,7 +120,7 @@ The `compare_schema` endpoint supports the following parameters:
 | `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note" title="notes">
-- The optional `jq -r '.diff'` command APPENDED TO THE EXAMPLE ABOVE extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.
+- The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.
 - `timestamp` or `lsn` / `base_timestamp` or `base_lsn` values can be used to compare schemas as they existed as a precise time or [LSN](/docs/reference/glossary#lsn).  
 - `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://en.wikipedia.org/wiki/ISO_8601" title="ISO 8601" preview="An international standard covering the worldwide exchange and communication of date and time-related data.">ISO 8601 format</LinkPreview>.
 </Admonition>

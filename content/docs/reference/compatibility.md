@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-01-06T23:37:50.191Z'
+updatedOn: '2025-01-09T14:12:22.673Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -73,21 +73,21 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 The following table shows values for each compute size. If autoscaling is turned on, the following
 numbers are valid for maximum CU size.
 
-| Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
-| :----------- | :---------------- | :--------------------- | :--------------------- | :--------------- |
-| 0.25         | 112               | 64 MB                  | 12                     | 128 MB           |
-| 0.50         | 225               | 64 MB                  | 13                     | 128 MB           |
-| 1            | 450               | 67 MB                  | 14                     | 128 MB           |
-| 2            | 901               | 134 MB                 | 16                     | 230 MB           |
-| 3            | 1351              | 201 MB                 | 18                     | 343 MB           |
-| 4            | 1802              | 268 MB                 | 20                     | 456 MB           |
-| 5            | 2253              | 335 MB                 | 22                     | 569 MB           |
-| 6            | 2703              | 402 MB                 | 24                     | 682 MB           |
-| 7            | 3154              | 470 MB                 | 26                     | 796 MB           |
-| 8            | 3604              | 537 MB                 | 28                     | 909 MB           |
-| 9            | 4000              | 604 MB                 | 30                     | 1008 MB          |
-| 10           | 4000              | 671 MB                 | 32                     | 1009 MB          |
-| 16           | 4000              | 671 MB                 | 44                     | 1012 MB          |
+| Max. Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
+| :---------------- | :---------------- | :--------------------- | :--------------------- | :--------------- |
+| 0.25              | 112               | 64 MB                  | 12                     | 128 MB           |
+| 0.50              | 225               | 64 MB                  | 13                     | 128 MB           |
+| 1                 | 450               | 67 MB                  | 14                     | 128 MB           |
+| 2                 | 901               | 134 MB                 | 16                     | 230 MB           |
+| 3                 | 1351              | 201 MB                 | 18                     | 343 MB           |
+| 4                 | 1802              | 268 MB                 | 20                     | 456 MB           |
+| 5                 | 2253              | 335 MB                 | 22                     | 569 MB           |
+| 6                 | 2703              | 402 MB                 | 24                     | 682 MB           |
+| 7                 | 3154              | 470 MB                 | 26                     | 796 MB           |
+| 8                 | 3604              | 537 MB                 | 28                     | 909 MB           |
+| 9                 | 4000              | 604 MB                 | 30                     | 1008 MB          |
+| 10                | 4000              | 671 MB                 | 32                     | 1009 MB          |
+| 16                | 4000              | 671 MB                 | 44                     | 1012 MB          |
 
 The formula for `max_connections` is
 
