@@ -342,7 +342,7 @@ You can monitor compute hour usage for a Neon project on the [Project Dashboard]
 <details>
 <summary>**What happens when I go over my plan's compute hour allowance?**</summary>
 
-On the Free Plan, if you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
+On the Free Plan, if you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 
 On our paid plans (Launch, Scale, and Business), you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
 
