@@ -29,46 +29,46 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
 
-| Compute Size (CU) | vCPU | RAM    | max_connections |
-| :---------------- | :--- | :----- | :-------------- |
-| 0.25              | 0.25 | 1 GB   | 112             |
-| 0.50              | 0.50 | 2 GB   | 225             |
-| 1                 | 1    | 4 GB   | 450             |
-| 2                 | 2    | 8 GB   | 901             |
-| 3                 | 3    | 12 GB  | 1351            |
-| 4                 | 4    | 16 GB  | 1802            |
-| 5                 | 5    | 20 GB  | 2253            |
-| 6                 | 6    | 24 GB  | 2703            |
-| 7                 | 7    | 28 GB  | 3154            |
-| 8                 | 8    | 32 GB  | 3604            |
-| 9                 | 9    | 36 GB  | 4000            |
-| 10                | 10   | 40 GB  | 4000            |
-| 11                | 11   | 44 GB  | 4000            |
-| 12                | 12   | 48 GB  | 4000            |
-| 13                | 13   | 52 GB  | 4000            |
-| 14                | 14   | 56 GB  | 4000            |
-| 15                | 15   | 60 GB  | 4000            |
-| 16                | 16   | 64 GB  | 4000            |
-| 18                | 18   | 72 GB  | 4000            |
-| 20                | 20   | 80 GB  | 4000            |
-| 22                | 22   | 88 GB  | 4000            |
-| 24                | 24   | 96 GB  | 4000            |
-| 26                | 26   | 104 GB | 4000            |
-| 28                | 28   | 112 GB | 4000            |
-| 30                | 30   | 120 GB | 4000            |
-| 32                | 32   | 128 GB | 4000            |
-| 34                | 34   | 136 GB | 4000            |
-| 36                | 36   | 144 GB | 4000            |
-| 38                | 38   | 152 GB | 4000            |
-| 40                | 40   | 160 GB | 4000            |
-| 42                | 42   | 168 GB | 4000            |
-| 44                | 44   | 176 GB | 4000            |
-| 46                | 46   | 184 GB | 4000            |
-| 48                | 48   | 192 GB | 4000            |
-| 50                | 50   | 200 GB | 4000            |
-| 52                | 52   | 208 GB | 4000            |
-| 54                | 54   | 216 GB | 4000            |
-| 56                | 56   | 224 GB | 4000            |
+| Max. Compute Size (CU) | vCPU | RAM    | max_connections |
+| :--------------------- | :--- | :----- | :-------------- |
+| 0.25                   | 0.25 | 1 GB   | 112             |
+| 0.50                   | 0.50 | 2 GB   | 225             |
+| 1                      | 1    | 4 GB   | 450             |
+| 2                      | 2    | 8 GB   | 901             |
+| 3                      | 3    | 12 GB  | 1351            |
+| 4                      | 4    | 16 GB  | 1802            |
+| 5                      | 5    | 20 GB  | 2253            |
+| 6                      | 6    | 24 GB  | 2703            |
+| 7                      | 7    | 28 GB  | 3154            |
+| 8                      | 8    | 32 GB  | 3604            |
+| 9                      | 9    | 36 GB  | 4000            |
+| 10                     | 10   | 40 GB  | 4000            |
+| 11                     | 11   | 44 GB  | 4000            |
+| 12                     | 12   | 48 GB  | 4000            |
+| 13                     | 13   | 52 GB  | 4000            |
+| 14                     | 14   | 56 GB  | 4000            |
+| 15                     | 15   | 60 GB  | 4000            |
+| 16                     | 16   | 64 GB  | 4000            |
+| 18                     | 18   | 72 GB  | 4000            |
+| 20                     | 20   | 80 GB  | 4000            |
+| 22                     | 22   | 88 GB  | 4000            |
+| 24                     | 24   | 96 GB  | 4000            |
+| 26                     | 26   | 104 GB | 4000            |
+| 28                     | 28   | 112 GB | 4000            |
+| 30                     | 30   | 120 GB | 4000            |
+| 32                     | 32   | 128 GB | 4000            |
+| 34                     | 34   | 136 GB | 4000            |
+| 36                     | 36   | 144 GB | 4000            |
+| 38                     | 38   | 152 GB | 4000            |
+| 40                     | 40   | 160 GB | 4000            |
+| 42                     | 42   | 168 GB | 4000            |
+| 44                     | 44   | 176 GB | 4000            |
+| 46                     | 46   | 184 GB | 4000            |
+| 48                     | 48   | 192 GB | 4000            |
+| 50                     | 50   | 200 GB | 4000            |
+| 52                     | 52   | 208 GB | 4000            |
+| 54                     | 54   | 216 GB | 4000            |
+| 56                     | 56   | 224 GB | 4000            |
 
 The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
