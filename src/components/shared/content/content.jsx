@@ -17,6 +17,7 @@ import LinkPreview from 'components/pages/doc/link-preview';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
@@ -28,6 +29,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import Link from 'components/shared/link';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
@@ -175,6 +177,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   UseCaseContext,
   ComputeCalculator,
   SubscriptionForm,
+  InkeepEmbedded,
+  Video,
   ...sharedComponents,
 });
 

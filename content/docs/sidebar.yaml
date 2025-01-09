@@ -233,8 +233,6 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -479,6 +477,10 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+    - title: Neon Identity
+      slug: guides/neon-identity
+      icon: partner-guide
+      tag: beta
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth
@@ -517,6 +519,8 @@
               slug: guides/neon-authorize-firebase-gcp
             - title: Google Identity
               slug: guides/neon-authorize-google-identity
+            - title: PropelAuth
+              slug: guides/neon-authorize-propelauth
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -567,7 +571,7 @@
             - title: AWS Lambda
               slug: guides/aws-lambda
             - title: Azure Functions
-              slug: https://neon.tech/guides/query-postgres-azure-functions
+              slug: guides/query-postgres-azure-functions
               tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
@@ -635,6 +639,8 @@
               slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
+            - title: Inngest
+              slug: guides/logical-replication-inngest
         - section: Replicate to Neon
           items:
             - title: AlloyDB
@@ -782,7 +788,7 @@
       tag: community
       icon: management
     - title: Find your template
-      slug: https://neon.tech/templates
+      slug: /templates
       icon: languages
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
@@ -790,7 +796,7 @@
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
-      slug: https://neon.tech/postgresql/tutorial
+      slug: /postgresql/tutorial
       icon: get-started
     - title: Neon Postgres guides
       slug: postgresql/introduction

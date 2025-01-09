@@ -115,7 +115,7 @@ const ContactForm = () => {
   return (
     <form
       className={clsx(
-        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] md:gap-y-6 sm:p-5',
+        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
         'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
       )}
       method="POST"
@@ -123,7 +123,7 @@ const ContactForm = () => {
     >
       <Field
         name="name"
-        label="Your name *"
+        label="Your Name *"
         autoComplete="name"
         placeholder="Marques Hansen"
         theme="transparent"
@@ -187,7 +187,7 @@ const ContactForm = () => {
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}
-        textareaClassName="min-h-[148px]"
+        textareaClassName="min-h-[170px] xl:min-h-[148px]"
         errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
@@ -195,7 +195,7 @@ const ContactForm = () => {
       />
 
       <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
-        <p className="text-light text-sm leading-tight text-gray-new-70">
+        <p className="text-light text-sm leading-snug text-gray-new-70 xl:tracking-tighter">
           By submitting you agree to the{' '}
           <Link className="text-nowrap text-white" to={LINKS.terms} theme="white-underlined">
             Terms Service
@@ -211,7 +211,7 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="min-w-[182px] py-[15px] font-medium xl:min-w-[160px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
+          className="min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
           type="submit"
           theme="primary"
           size="xs"

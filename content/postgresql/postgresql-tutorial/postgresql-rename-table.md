@@ -185,7 +185,7 @@ View definition:
      JOIN groups g ON g.id = c.group_id;
 ```
 
-The output shows that the `supplier_groups` table in the [`SELECT`](postgresql-select) statement of the view was also updated to `groups` table.
+The output shows that the `customer_groups` table in the [`SELECT`](postgresql-select) statement of the view was also updated to `groups` table.
 
 ## Summary
 

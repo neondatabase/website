@@ -9,7 +9,7 @@ import Modal from 'components/pages/doc/modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
-import SidebarCta from 'components/shared/sidebar-cta';
+// import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 // import Pagination from 'components/pages/changelog/pagination';
 // import ChangelogFilter from 'components/pages/changelog/changelog-filter';
@@ -56,7 +56,7 @@ const MODALS = [
     type: 'support',
     breadcrumb: 'Support',
     title: 'Need help now?',
-    description: 'Our team is here to assist you anytime!',
+    description: 'Please reach out to our Support team!',
     link: {
       title: 'Get support',
       url: LINKS.consoleSupport,
@@ -89,7 +89,7 @@ const Post = ({
           'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
           isUseCase
             ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
-            : 'col-span-7 col-start-3 -ml-6 max-w-[832px] 3xl:col-span-8 3xl:col-start-2 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
+            : 'col-span-7 col-start-2 -ml-6 max-w-[832px] 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none'
         )}
       >
         {breadcrumbs.length > 0 && (
@@ -105,9 +105,10 @@ const Post = ({
           <article>
             <h1
               className={clsx(
+                'font-semibold leading-tight tracking-extra-tight',
                 isUseCase
-                  ? 'text-[56px] font-semibold leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
-                  : 'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
+                  ? 'text-[56px] xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                  : 'text-[36px] xl:text-3xl',
                 tag && 'inline'
               )}
             >
@@ -140,10 +141,10 @@ const Post = ({
 
       <div
         className={clsx(
-          'relative col-span-2 col-start-11 -ml-12 max-w-64 xl:hidden',
+          'relative col-span-2 -ml-12 max-w-64 xl:hidden',
           isUseCase
-            ? '2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-            : '3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+            ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+            : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
         )}
       >
         <div
@@ -163,7 +164,7 @@ const Post = ({
                 'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
             )}
           >
-            {isUseCase ? <SidebarCta /> : <EditOnGithub fileOriginPath={fileOriginPath} />}
+            {!isUseCase && <EditOnGithub fileOriginPath={fileOriginPath} />}
           </div>
         </div>
       </div>

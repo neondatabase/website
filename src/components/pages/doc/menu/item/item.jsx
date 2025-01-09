@@ -24,7 +24,8 @@ const Item = ({
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
-  const externalSlug = slug && slug.startsWith('http') ? slug : null;
+  const externalSlug = slug?.startsWith('http') ? slug : null;
+  const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
   const docSlug = root ? slug : `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
@@ -46,8 +47,8 @@ const Item = ({
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
         )}
         type={slug ? undefined : 'button'}
-        to={slug ? externalSlug || docSlug : undefined}
-        target={externalSlug ? '_blank' : '_self'}
+        to={slug ? externalSlug || websiteSlug || docSlug : undefined}
+        target={externalSlug || websiteSlug ? '_blank' : '_self'}
         icon={externalSlug && 'external'}
         onClick={handleClick}
       >

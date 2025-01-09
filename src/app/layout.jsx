@@ -3,7 +3,7 @@ import 'styles/globals.css';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-import { ActiveLabelProvider } from '../components/pages/doc/code-tabs/CodeTabsContext';
+import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';

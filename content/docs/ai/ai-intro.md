@@ -3,7 +3,7 @@ title: AI & Embeddings
 subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
   as your vector database
 enableTableOfContents: true
-updatedOn: '2024-12-12T19:49:26.793Z'
+updatedOn: '2024-12-31T18:05:26.272Z'
 ---
 
 Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly Neon API interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
@@ -16,12 +16,15 @@ Neon supports Postgres for AI agents with the following interfaces:
 
 - **@neondatabase/toolkit** — a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an perfect choice for AI agents that need to quickly set up an SQL database. [Learn more](/docs/reference/neondatabase-toolkit).
 - **Neon Model Context Protocol (MCP) server** — enables any MCP Client to interact with Neon’s API using natural language. AI agents can use Neon's MCP server to perform actions such as creating databases, running SQL queries, and managing database migrations. [Read the announcement](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
+- **Model Context Protocol (MCP) Client CLI** — a CLI client that can be used to interact with any MCP server. [Read the blog post](https://neon.tech/blog/building-a-cli-client-for-model-context-protocol-servers).
 
 <DetailIconCards>
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
 
 <a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+
+<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">MCP Client CLI</a>
 
 </DetailIconCards>
 

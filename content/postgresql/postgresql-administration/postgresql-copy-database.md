@@ -61,7 +61,7 @@ FROM pg_stat_activity
 WHERE datname = 'dvdrental';
 ```
 
-After that, you can execute the `CREATE TABLE WITH TEMPLATE` statement again to copy the `dvdrental` database to `dvdrental_test` database.
+After that, you can execute the `CREATE DATABASE WITH TEMPLATE` statement again to copy the `dvdrental` database to `dvdrental_test` database.
 
 ## PostgreSQL copy database from one server to another
 

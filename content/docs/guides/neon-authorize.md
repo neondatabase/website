@@ -3,7 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2024-12-18T08:02:08.145Z'
+updatedOn: '2025-01-09T13:39:07.036Z'
 ---
 
 <InfoBlock>
@@ -47,13 +47,13 @@ Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the va
 
 ## Database roles
 
-Neon Authorize works with two primary database roles:
+Neon Authorize works with two database roles, identified by connection string prefixes:
 
-- **Authenticated role**: This role is intended for users who are logged in. Your application should send the authorization token when connecting using this role.
-- **Anonymous role**: This role is intended for users who are not logged in. It should allow limited access, such as reading public content (e.g., blog posts) without authentication.
+- **Authenticated role** (`authenticated@`): For users who are logged in. Requires a valid JWT token from your authentication provider.
+- **Anonymous role** (`anonymous@`): Currently requires authentication similar to the authenticated role. This implementation is under review and may change in the future to better support unauthenticated access.
 
 <Admonition type="note">
-Some authentication providers, like Firebase, support "anonymous authentication" where a unique user ID is automatically generated for visitors who haven't explicitly logged in. This is useful for features like shopping carts, where you want to track a user's actions before they create an account. These anonymous users will still have a valid JWT and can use the anonymous role, making it possible to track their actions while maintaining security.
+For now, if you need to implement public access in your application, we recommend creating a separate database role with a password. This provides a simpler alternative to using the anonymous role while we work on improving anonymous access support.
 </Admonition>
 
 ### Using Neon Authorize with custom JWTs
@@ -210,6 +210,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Azure AD**                              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`</span>                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
 | **Google Identity**                       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/oauth2/v3/certs`</span>                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
 | **Descope Auth**                          | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
+| **PropelAuth**                            | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{PROPEL_AUTH_URL}/.well-known/jwks.json`</span>                                           | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
 
 ### JWT Audience Checks
 
@@ -230,6 +231,7 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 <a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize" description="A Todo List built with Stytch, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Stytch + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-authorize" description="A Todo list built with Descope, Next.js, and Neon Authorize (SQL from the frontend)" icon="github">Descope + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-authorize" description="A Todo list built with PropelAuth, Next.js, and Neon Authorize (SQL from Frontend and Backend)" icon="github">PropelAuth + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon Authorize with custom generated JWTs" icon="github">Neon Authorize with custom JWTs</a>
 </DetailIconCards>
 

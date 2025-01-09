@@ -12,14 +12,14 @@
   .black-line {
     background-image: linear-gradient(
       90deg,
-      rgba(26, 26, 26, 0) 0,
-      rgba(26, 26, 26, 0.3) 20%,
-      rgba(26, 26, 26, 0.7) 60%,
-      rgba(26, 26, 26, 0)
+      rgba(48, 50, 54, 0) 0,
+      rgba(48, 50, 54, 0.3) 20%,
+      rgba(48, 50, 54, 0.7) 60%,
+      rgba(48, 50, 54, 0)
     );
   }
   .skeleton {
-    @apply relative h-5 w-full rounded-[70px] bg-[#f5f5f5] dark:bg-gray-3;
+    @apply relative block min-h-5 w-full rounded-lg bg-[#f5f5f5] dark:bg-gray-new-10;
 
     &::after {
       @apply white-line dark:black-line absolute inset-0 -translate-x-full content-[''];
