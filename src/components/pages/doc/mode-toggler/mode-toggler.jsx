@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useLocation from 'react-use/lib/useLocation';
 
 import GradientBorder from 'components/shared/gradient-border';
@@ -43,9 +43,14 @@ ToggleButton.propTypes = {
 };
 
 const ModeToggler = ({ className }) => {
-  const { href } = useLocation();
-  const isAiChatPage = href ? href.includes(LINKS.aiChat) : false;
+  const [isAiChatPage, setIsAiChatPage] = useState(false);
   const [previousPage, setPreviousPage] = useState(null);
+
+  const { href } = useLocation();
+
+  useEffect(() => {
+    setIsAiChatPage(href.includes(LINKS.aiChat));
+  }, [href]);
 
   return (
     <div
