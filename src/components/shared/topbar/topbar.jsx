@@ -18,7 +18,7 @@ const TopBar = ({ isDarkTheme }) => (
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write"
+    to="https://neon.tech/blog/api-track-schema-changes"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,8 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      You can instantly copy 1TB+ datasets via Neon branches, e.g. for ephemeral environments -
-      Learn how they compare to other "branching" features
+      Learn how to use our compare_schema API to monitor database schema changes in CI/CD pipelines and agentic systems
     </span>
     <ChevronIcon
       className={clsx(
