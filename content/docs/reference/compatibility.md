@@ -73,7 +73,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 The following table shows values for each compute size. If autoscaling is turned on, the following
 numbers are valid for maximum CU size.
 
-| Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
+| Max. Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
 | :----------- | :---------------- | :--------------------- | :--------------------- | :--------------- |
 | 0.25         | 112               | 64 MB                  | 12                     | 128 MB           |
 | 0.50         | 225               | 64 MB                  | 13                     | 128 MB           |
