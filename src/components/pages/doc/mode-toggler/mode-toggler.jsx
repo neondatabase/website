@@ -48,7 +48,7 @@ const ModeToggler = async ({ className, isAiChatPage = false, previousPage = nul
     >
       <ToggleButton
         src={isAiChatPage && isPreviousDocPage ? previousPage : LINKS.docsHome}
-        title="Neon Docs"
+        title={isAiChatPage && isPreviousDocPage ? 'Back to Docs' : 'Neon Docs'}
         isActive={!isAiChatPage}
       />
       <ToggleButton src={LINKS.aiChat} title="Ask Neon AI" isActive={isAiChatPage} />
