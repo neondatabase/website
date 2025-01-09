@@ -88,7 +88,7 @@ mydumpfile.bak
 
 ## Pipe pg_dump to pg_restore
 
-For small databases, the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
+For small databases where the source and target Postgres instances and databases are presumed to be compatible, the standard output of `pg_dump` can be piped directly into a `pg_restore` command to minimize migration downtime:
 
 ```bash
 pg_dump [args] | pg_restore [args]
@@ -100,7 +100,7 @@ For example:
 pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
 ```
 
-Piping is not recommended for large databases, as it is susceptible to failures during lengthy migration operations.
+Piping is not recommended for large databases because it can fail during lengthy migration operations. Incompatibilities between the source and target Postgres instances or databases may also cause a piping operation to fail. If you're importing from another Postgres instance, review Neon's [compatibility](/docs/reference/compatibility) page to ensure that Neon Postgres is compatible with your source Postgres instance. If you're unsure or encounter issues, consider using separate dump and restore operations. This approach lets you adjust dump and restore options or modify the dump file directly to resolve migration challenges.
 
 When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
 
