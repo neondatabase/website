@@ -50,6 +50,7 @@ const ModeToggler = ({ className, isAiChatPage = false }) => {
         className
       )}
     >
+      {/* Checks if previous page is Docs page and leads user back to it */}
       <ToggleButton
         src={isAiChatPage && isPreviousDocPage ? previousPage : LINKS.docsHome}
         title={isAiChatPage && isPreviousDocPage ? 'Back to Docs' : 'Neon Docs'}
