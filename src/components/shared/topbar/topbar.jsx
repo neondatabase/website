@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Learn how to use our compare_schema API to monitor database schema changes in CI/CD pipelines and agentic systems
+      Use the compare_schema API to monitor database schema changes in CI/CD pipelines and agentic systems
     </span>
     <ChevronIcon
       className={clsx(
