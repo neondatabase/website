@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { PropTypes } from 'prop-types';
-import { useState, useEffect } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
@@ -43,15 +42,10 @@ ToggleButton.propTypes = {
   onClick: PropTypes.func,
 };
 
-const ModeToggler = ({ className }) => {
-  const [isAiChatPage, setIsAiChatPage] = useState(false);
+const ModeToggler = ({ className, isAiChatPage }) => {
   const [previousPage, setPreviousPage] = useLocalStorage('previousDocPage', null);
 
   const pathname = usePathname();
-
-  useEffect(() => {
-    setIsAiChatPage(pathname.includes(LINKS.aiChat));
-  }, [pathname]);
 
   return (
     <div
@@ -79,6 +73,7 @@ const ModeToggler = ({ className }) => {
 
 ModeToggler.propTypes = {
   className: PropTypes.string,
+  isAiChatPage: PropTypes.bool,
 };
 
 export default ModeToggler;
