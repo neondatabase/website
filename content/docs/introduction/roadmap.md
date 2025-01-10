@@ -43,14 +43,14 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've launched recently
 
-- **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.  
-- **Neon Identity (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Identity](/docs/guides/neon-identity) for details.  
-- **Postgres 17**: Now the default version for all newly created projects.  
-- **Support for `pg_cron`**: Schedule and manage periodic jobs directly in your Postgres database with this extension.  
-- **Neon on AgentStack**: Integrate Neon with AgentStack to enable AI agents to create ephemeral or long-lived Postgres instances for structured data storage. Explore the [Neon tool](https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py) in AgentStack's repo.  
-- **Neon on Composio**: Integrate Neon's API with LLMs and AI agents via Composio. Check out the [Composio integration](https://composio.dev/tools?search=neon).  
-- **Higher connection limits for autoscaling configurations**: Postgres `max_connections` now scales with your maximum compute size. [Learn more](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).  
-- **PgBouncer `default_pool_size` scaling**: The `default_pool_size` setting now scales according to your compute's `max_connections` setting. Previously, it was fixed at `64`. [Learn more](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).  
+- **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.
+- **Neon Identity (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Identity](/docs/guides/neon-identity) for details.
+- **Postgres 17**: Now the default version for all newly created projects.
+- **Support for `pg_cron`**: Schedule and manage periodic jobs directly in your Postgres database with this extension.
+- **Neon on AgentStack**: Integrate Neon with AgentStack to enable AI agents to create ephemeral or long-lived Postgres instances for structured data storage. Explore the [Neon tool](https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py) in AgentStack's repo.
+- **Neon on Composio**: Integrate Neon's API with LLMs and AI agents via Composio. Check out the [Composio integration](https://composio.dev/tools?search=neon).
+- **Higher connection limits for autoscaling configurations**: Postgres `max_connections` now scales with your maximum compute size. [Learn more](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
+- **PgBouncer `default_pool_size` scaling**: The `default_pool_size` setting now scales according to your compute's `max_connections` setting. Previously, it was fixed at `64`. [Learn more](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
 - **Neon Auth.js Adapter**: Simplify authentication with the new [Auth.js Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
 
 <details>
