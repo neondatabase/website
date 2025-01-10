@@ -29,7 +29,7 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 - `USING` clause — controls which existing rows can be accessed
 - `WITH CHECK` clause — controls what new or modified data can be written
 
-<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](https://neon.tech/docs/guides/neon-authorize#how-neon-authorize-gets-authuserid-from-the-jwt).</Admonition>
+<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-authorize#how-neon-authorize-gets-authuserid-from-the-jwt).</Admonition>
 
 Here's how these clauses apply to each operation:
 

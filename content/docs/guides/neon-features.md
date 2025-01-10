@@ -147,6 +147,6 @@ Secure your database connections with private access.
 
 <DetailIconCards>
 
-<a href="/docs/guides/private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
+<a href="/docs/guides/neon-private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
 
 </DetailIconCards>
