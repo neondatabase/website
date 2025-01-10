@@ -1,3 +1,3 @@
-import NumberedStepsWrapper from './numbered-steps';
+import NumberedSteps from './numbered-steps';
 
-export default NumberedStepsWrapper;
+export default NumberedSteps;
