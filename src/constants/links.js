@@ -1,5 +1,6 @@
 export default {
   aboutUs: '/about-us',
+  aiChat: '/ai-chat',
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
@@ -31,7 +32,6 @@ export default {
   docs: '/docs',
   docsHome: '/docs/introduction',
   ai: '/docs/ai/ai-intro',
-  aiChat: '/docs/ai-chat',
   api: '/docs/reference/api-reference',
   authorize: '/docs/guides/neon-authorize',
   autoscaling: '/docs/introduction/autoscaling',
