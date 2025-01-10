@@ -43,8 +43,7 @@ ToggleButton.propTypes = {
 };
 
 const ModeToggler = ({ className, isAiChatPage }) => {
-  const [previousPage, setPreviousPage] = useLocalStorage('previousDocPage', null);
-
+  const [previousPage, setPreviousPage] = useLocalStorage('previousDocPage', LINKS.docsHome);
   const pathname = usePathname();
 
   return (
@@ -57,8 +56,8 @@ const ModeToggler = ({ className, isAiChatPage }) => {
     >
       {/* Checks if previous page is Docs page and leads user back to it */}
       <ToggleButton
-        src={isAiChatPage && previousPage ? previousPage : LINKS.docsHome}
-        title={isAiChatPage && previousPage ? 'Back to Docs' : 'Neon Docs'}
+        src={isAiChatPage ? previousPage : LINKS.docsHome}
+        title={isAiChatPage ? 'Back to Docs' : 'Neon Docs'}
         isActive={!isAiChatPage}
       />
       <ToggleButton
