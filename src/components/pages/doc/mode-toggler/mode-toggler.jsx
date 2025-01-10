@@ -76,8 +76,4 @@ ModeToggler.propTypes = {
   isAiChatPage: PropTypes.bool,
 };
 
-ModeToggler.defaultProps = {
-  isAiChatPage: false,
-};
-
 export default ModeToggler;
