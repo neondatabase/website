@@ -12,11 +12,7 @@ Neon also supports vector data, a key component for AI applications. With the **
 
 ## Neon for AI Agents
 
-Neon supports Postgres for AI agents with the following interfaces:
-
-- **@neondatabase/toolkit** — a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an perfect choice for AI agents that need to quickly set up an SQL database. [Learn more](/docs/reference/neondatabase-toolkit).
-- **Neon Model Context Protocol (MCP) server** — enables any MCP Client to interact with Neon’s API using natural language. AI agents can use Neon's MCP server to perform actions such as creating databases, running SQL queries, and managing database migrations. [Read the announcement](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
-- **Model Context Protocol (MCP) Client CLI** — a CLI client that can be used to interact with any MCP server. [Read the blog post](https://neon.tech/blog/building-a-cli-client-for-model-context-protocol-servers).
+Neon supports Postgres for AI agents with the following tools and interfaces:
 
 <DetailIconCards>
 
@@ -24,7 +20,11 @@ Neon supports Postgres for AI agents with the following interfaces:
 
 <a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">MCP Client CLI</a>
+<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">Neon MCP Client CLI</a>
+
+<a href="https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py" description="A Neon tool for AgentStack that allows agents to create ephemeral or long-lived Postgres instances for structured data storage" icon="github">Neon tool for AgentStack</a>
+
+<a href="https://composio.dev/tools?search=neon" description="A full integration between LLMs and AI agents and Neon's API" icon="openai">Neon tool for Composio</a>
 
 </DetailIconCards>
 
