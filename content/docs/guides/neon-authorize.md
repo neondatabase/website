@@ -3,7 +3,7 @@ title: About Neon Authorize
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2025-01-09T13:39:07.036Z'
+updatedOn: '2025-01-10T00:37:35.164Z'
 ---
 
 <InfoBlock>
