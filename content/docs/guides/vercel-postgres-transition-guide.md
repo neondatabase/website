@@ -77,7 +77,7 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 
 | **Resource**      | **Vercel Hobby (Included)** | **Neon Free Plan (Included)** |
 | :---------------- | :-------------------------- | :---------------------------- |
-| **Compute hours** | 60 Hours                    | 191.9 Hours                   |
+| **Compute hours** | 60                          | 191.9                         |
 | **Data transfer** | N/A                         | Up to 5 GBs per month         |
 | **Database**      | First Database              | 10                            |
 | **Storage**       | First 256 MB Included       | Up to 512 MB                  |
@@ -90,7 +90,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 
 | **Resource**        | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
 | :------------------ | :------------------------ | :------------------------------- |
-| **Compute hours**   | 100 hours                 | 300 hours                        |
+| **Compute hours**   | 100                       | 300                              |
 | **Data transfer**   | 256 MB                    | Reasonable usage (no hard limit) |
 | **Databases**       | First database            | 100                              |
 | **Branches**        | -                         | 500                              |
