@@ -18,7 +18,7 @@ const NavigationLinks = ({ previousLink = null, nextLink = null, basePath }) => 
   const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
 
   return (
-    <div className="mt-10 flex w-full space-x-10 sm:mt-7 sm:space-x-0">
+    <div className="mt-16 flex w-full space-x-10 sm:mt-[50px] sm:space-x-0">
       {previousLink?.title && previousLink?.slug && (
         <Link
           to={previousLinkUrl}

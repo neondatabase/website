@@ -12,6 +12,7 @@ const CURRENT_ANCHOR_GAP_PX = 100;
 const TableOfContents = ({ items, isUseCase }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const [isUserScrolling, setIsUserScrolling] = useState(true);
 
   const flatItems = useMemo(
@@ -45,10 +46,11 @@ const TableOfContents = ({ items, isUseCase }) => {
     const currentTitle = titles.current[idx];
 
     setCurrentAnchor(currentTitle?.id);
-
+    setCurrentIndex(idx);
     if (isUserScrolling) {
       // Open sub-items only if it's user-initiated scrolling
       setCurrentAnchor(currentTitle?.id);
+      setCurrentIndex(idx);
     }
   }, [isUserScrolling]);
 
@@ -72,8 +74,10 @@ const TableOfContents = ({ items, isUseCase }) => {
       </h3>
       <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
-          <li key={index}>
+          <li className="group/item" key={index}>
             <Item
+              index={index}
+              currentIndex={currentIndex}
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
