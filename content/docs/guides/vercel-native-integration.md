@@ -41,7 +41,7 @@ The **Neon Postgres Native Integration** is intended for Vercel users who want t
 
 To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 
-1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
+1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace).
 2. Locate the **Neon** integration.
 3. Click **Install**.
 4. On the **Install Neon** modal, you are presented with two options. Select **Create New Neon Account**, and click **Continue**.
@@ -84,7 +84,7 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 To open your Database / Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Database.
-2. On your Database page, select **Open in Neon Postgres**.
+2. On your Database page, select **Open in Neon**.
 3. In the Neon Console, you are directed the projects page for your Organization. It will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
 
 <Admonition type="note">
@@ -117,6 +117,25 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
 - **Billing & Payments**:
   - Invoices, payments, and plan changes (upgrades/downgrades) are managed in Vercel.
+
+## Connect your Neon database to a Vercel project
+
+If you would like to connect your database to a Vercel project, you can do so by following these steps:
+
+1. From the **Storage** tab in the Vercel Dashboard, select your Database.
+2. On your Database page, select **Connect Project**.
+
+  ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
+
+3. Select the Vercel project you want to connect to and the environments you want to make the database available to.
+
+  ![Select a Vercel Project](/docs/guides/vercel_native_select_project.png)
+
+4. Optionally, you can create a database branch for your deployments. Here, we enable **Required** and select **Preview** to create a database branch for each preview deployment in Vercel. We've also set the Environment Variables Prefix to DATABASE so that all environment variables are prefixed with DATABASE.
+
+  ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
+
+5. Click **Connect** to finish the setup.
 
 ## Changing your Database configuration
 
