@@ -184,7 +184,7 @@ Since we use the `config.py` module, we can pass the configuration to the `conne
 with psycopg2.connect(**config) as conn:
 ```
 
-The `with` statement doesn't automatically close the database connection see: https://www.psycopg.org/docs/usage.html#with-statement
+In `psycopg2`, the `with` statement doesn't automatically close the database connection — only the transaction is closed. However, in `psycopg3`, using `with connection` will close the connection at the end of the `with` block. See [with connection](https://www.psycopg.org/docs/usage.html#with-statement) in the `psycopg` documentation for details.
 
 ### Executing the connect.py module
 
