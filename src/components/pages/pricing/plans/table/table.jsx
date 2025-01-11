@@ -99,7 +99,7 @@ const getColumnAlignment = (item) => {
 const Table = () => {
   const posthog = usePostHog();
   const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
 
   const tableData = useMemo(() => {
     if (isComputePriceRaised) {

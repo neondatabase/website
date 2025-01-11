@@ -34,7 +34,7 @@ const scaleCardBorderVariants = {
 const Hero = () => {
   const posthog = usePostHog();
   const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24';
+    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
 
   const plans = useMemo(() => {
     if (isComputePriceRaised) {
