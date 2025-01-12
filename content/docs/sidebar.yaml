@@ -521,6 +521,8 @@
               slug: guides/neon-authorize-google-identity
             - title: PropelAuth
               slug: guides/neon-authorize-propelauth
+            - title: Custom JWT
+              slug: guides/neon-authorize-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
