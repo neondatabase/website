@@ -21,6 +21,7 @@ const NeonPostgresLayout = async ({ children }) => {
       burgerWithoutBorder
       showSearchInput
       isDocPage
+      isPostgresPage
       isHeaderSticky
       headerWithBorder
       hasThemesSupport

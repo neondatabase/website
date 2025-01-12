@@ -39,6 +39,7 @@
 @media (max-width: 767px) {
   .intro-title {
     font-size: 24px;
+    margin-bottom: 12px;
   }
 }
 
@@ -65,6 +66,7 @@
   justify-content: flex-start;
   font-size: 16px;
   color: #494B50;
+  white-space: nowrap;
 }
 [data-theme='dark'] .ikp-quick-question-button {
   color: #C9CBCF;
@@ -126,6 +128,9 @@
   border: 1px solid #C9CBCF;
   border-radius: 8px;
   box-shadow: none;
+}
+.ikp-ai-chat__message-box .ikp-textarea + div {
+  justify-content: center;
 }
 [data-theme='dark'] .ikp-ai-chat__message-box {
   background: #131415;

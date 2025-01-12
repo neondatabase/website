@@ -36,7 +36,7 @@ const NeonDocsLayout = async ({ children }) => {
         />
 
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-5 md:pt-4"
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:flex-col lg:pt-5 md:pt-4"
           size="1408"
         >
           <ModeToggler className="mb-7 hidden md:flex" />
