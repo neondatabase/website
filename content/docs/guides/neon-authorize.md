@@ -211,6 +211,8 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **Google Identity**                       | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/oauth2/v3/certs`</span>                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
 | **Descope Auth**                          | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`</span>                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
 | **PropelAuth**                            | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{PROPEL_AUTH_URL}/.well-known/jwks.json`</span>                                           | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
+| **SuperTokens** | ✅ | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json`</span> | [docs](https://supertokens.com/docs/quickstart/integrations/aws-lambda/session-verification/using-jwt-authorizer) |
+| **WorkOS**                                | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}`</span>                                          | [docs](https://workos.com/docs/reference/user-management/session-tokens/jwks)                                                 |
 
 ### JWT Audience Checks
 
@@ -232,6 +234,8 @@ You can use these sample ToDo applications to get started using Neon Authorize w
 <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-authorize" description="A Todo list built with Descope, Next.js, and Neon Authorize (SQL from the frontend)" icon="github">Descope + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-authorize" description="A Todo list built with PropelAuth, Next.js, and Neon Authorize (SQL from Frontend and Backend)" icon="github">PropelAuth + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-authorize" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon Authorize (SQL from the Backend)" icon="github">SuperTokens + Neon Authorize</a>
+<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-authorize" description="A Demo Post App built with WorkOS, SvelteKit, Neon Authorize (SQL from the Backend)" icon="github">WorkOS + Neon Authorize</a>
 <a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon Authorize with custom generated JWTs" icon="github">Neon Authorize with custom JWTs</a>
 </DetailIconCards>
 
