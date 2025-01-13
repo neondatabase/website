@@ -51,9 +51,9 @@ export async function generateMetadata({ params }) {
   if (!isChangelog && !post) return notFound();
 
   const title = post?.data?.title || 'Changelog';
-  const shortenedTitle =
-    title.length < MAX_TITLE_LENGTH ? title : `${title.slice(0, MAX_TITLE_LENGTH)}...`;
-  const encodedTitle = Buffer.from(shortenedTitle).toString('base64');
+  const encodedTitle = Buffer.from(
+    `${title.slice(0, MAX_TITLE_LENGTH)}${title.length > MAX_TITLE_LENGTH && '...'}`
+  ).toString('base64');
 
   const sidebar = getSidebar();
   const flatSidebar = await getFlatSidebar(sidebar);
