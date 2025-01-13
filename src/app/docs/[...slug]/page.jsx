@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
+import { VERCEL_URL } from 'constants/docs';
 import LINKS from 'constants/links';
 import {
   DOCS_DIR_PATH,
@@ -51,9 +51,7 @@ export async function generateMetadata({ params }) {
   if (!isChangelog && !post) return notFound();
 
   const title = post?.data?.title || 'Changelog';
-  const encodedTitle = Buffer.from(
-    `${title.slice(0, MAX_TITLE_LENGTH)}${title.length > MAX_TITLE_LENGTH && '...'}`
-  ).toString('base64');
+  const encodedTitle = Buffer.from(title).toString('base64');
 
   const sidebar = getSidebar();
   const flatSidebar = await getFlatSidebar(sidebar);

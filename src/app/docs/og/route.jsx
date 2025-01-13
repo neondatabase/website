@@ -86,15 +86,20 @@ export async function GET(request) {
             </div>
             <div
               style={{
+                display: '-webkit-box',
+                overflow: 'hidden',
+                whiteSpace: 'pre-wrap',
+                textOverflow: 'ellipsis',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 3,
+                marginTop: 10,
                 fontFamily: 'ESBuild',
                 fontStyle: 'normal',
-                fontSize: 88,
                 fontWeight: 500,
+                fontSize: 88,
                 lineHeight: 1,
-                color: 'white',
                 letterSpacing: '-0.04em',
-                whiteSpace: 'pre-wrap',
-                marginTop: 10,
+                color: 'white',
               }}
             >
               {ogTitle}
