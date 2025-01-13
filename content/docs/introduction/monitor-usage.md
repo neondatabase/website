@@ -106,7 +106,7 @@ Scale and Business plan users can Neon's advanced `consumption` endpoints to mon
 
 - [Get account-level aggregated metrics](/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics)
 - [Get granular project-level metrics for your account](/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account)
-</Admonition>
+  </Admonition>
 
 ### Get branch details
 
