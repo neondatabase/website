@@ -1,4 +1,4 @@
-import closeIcon from '../icons/close.svg';
+import closeIcon from 'icons/close.svg';
 
 const baseSettings = {
   apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
@@ -27,6 +27,15 @@ const baseSettings = {
         },
       },
       searchTabLabel: 'PostgreSQL Tutorial',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: 'https://neon.tech/docs/changelog',
+        },
+      },
+      searchTabLabel: 'Changelog',
     },
   ],
 };
