@@ -8,7 +8,7 @@ updatedOn: '2024-01-13T18:45:00.000Z'
 
 Columnstore tables improve analytical queries by storing data vertically, enabling compression and efficient column-specific retrieval with vectorized execution. 
 
-`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in object store as parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
+`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
 
 Queries on `pg_mooncake` columnstore tables are executed by DuckDB. 
 
@@ -30,7 +30,7 @@ In addition, you can:
 
 `pg_mooncake` is supported on the following versions of Postgres.
 
-- Postgres 14 - not supported yet.
+- Postgres 14 - `pg_mooncake` 0.1.0
 - Postgres 15 - `pg_mooncake` 0.1.0
 - Postgres 16 - `pg_mooncake` 0.1.0
 - Postgres 17 -`pg_mooncake` 0.1.0
@@ -40,7 +40,7 @@ In addition, you can:
 </Admonition>
 
 ## Use-cases
-1. Analytics on PostgreSQL data
+1. Analytics on Postgres data
 2. Time Series & Log Analytics
 3. Exporting Postgre Tables to Your Lake or Lakehouse.
 4. Query and update existing Lakehouse tables and Parquet files directly in PostgreSQL.
@@ -71,11 +71,11 @@ SET mooncake.default_bucket = 's3://<bucket>';
 ```
 
 <Admonition type="note">
-In v0.2, you will not have to bring your own buckets. 
+In the future, you will not have to bring your own buckets. 
 </Admonition>
 
 
-## Create a columnstore table with `using columnstore`
+## Create a columnstore table with `USING columnstore`
 ```sql
 CREATE TABLE reddit_comments (
     author TEXT,
@@ -87,7 +87,7 @@ CREATE TABLE reddit_comments (
     subreddit TEXT,
     subreddit_id TEXT,
     id TEXT
-) using columnstore;
+) USING columnstore;
 ```
 ## Load data
 Read the full list of sources [here](https://pgmooncake.com/docs/load-data).
