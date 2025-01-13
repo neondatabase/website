@@ -129,7 +129,6 @@ To control pagination (number of results per response), you can include these qu
 
 See [Details on pagination](#details-on-pagination) for more info.
 
-
 ## Details on setting a date range
 
 This section applies to the following metrics output types: [Account-level aggregated metrics](#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account).
