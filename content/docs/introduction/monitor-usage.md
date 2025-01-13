@@ -102,11 +102,13 @@ Any user can query usage metrics for a branch or a project, as described below. 
 - [Get project details](#get-project-details)
 
 <Admonition type="tip" title="monitoring usage for many projects">
+
 Scale and Business plan users can Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See:
 
 - [Get account-level aggregated metrics](/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics)
 - [Get granular project-level metrics for your account](/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account)
-  </Admonition>
+
+</Admonition>
 
 ### Get branch details
 
