@@ -177,7 +177,7 @@
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
+        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
       }
     }
 
