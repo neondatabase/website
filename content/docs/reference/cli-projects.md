@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.134Z'
+updatedOn: '2025-01-13T13:18:32.342Z'
 ---
 
 ## Before you begin
