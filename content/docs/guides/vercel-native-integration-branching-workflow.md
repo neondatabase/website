@@ -1,7 +1,6 @@
 ---
-title: Install the Neon Postgres Native Integration on Vercel
-subtitle: Add Neon Postgres storage to your Vercel project as a first-party native
-  integration
+title: Set up a database branching workflow with the Vercel Native Integration
+subtitle: Create a database branch for every preview deployment with the Neon's native Vercel integration 
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-12-11T21:23:33.087Z'
