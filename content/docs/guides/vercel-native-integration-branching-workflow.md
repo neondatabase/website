@@ -19,6 +19,8 @@ updatedOn: '2024-12-11T21:23:33.087Z'
 </DocsList>
 </InfoBlock>
 
+This guide describes how to connect your Vercel project to a Neon database and enable database branching for Vercel preview deployments.
+
 ## Connect your a Vercel project to your Neon database
 
 You can connect your a Vercel project to a Neon database and optionally create a database branch for each Vercel preview deployment.
@@ -50,5 +52,8 @@ To connect your Vercel project to your Neon database:
 
     For more about this setup, refer to our detailed guide: [Set up a database branching workflow with the Vercel Native Integration](tbd).
 
+
+
+## Disconnecting a database
 
 <NeedHelp/>
