@@ -118,7 +118,7 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 - **Billing & Payments**:
   - Invoices, payments, and plan changes (upgrades/downgrades) are managed in Vercel.
 
-## Connect your a Vercel project to your Neon database
+## Connect a Vercel project to a Neon database
 
 You can connect your a Vercel project to a Neon database and optionally create a database branch for each Vercel preview deployment.
 
@@ -126,13 +126,7 @@ To connect your Vercel project to your Neon database:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Database.
 2. On your Database page, select **Connect Project**.
-
-    ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
-
-3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**). 
-
-    ![Select a Vercel Project](/docs/guides/vercel_native_select_project.png)
-
+3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**).
 4. Optionally, under **Advanced Options**, you can:
    - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
    - Under **Deployments Configuration**, you can toggle the **Required** option and select **Preview** to create a Neon branch with every preview deployment (the **Deployment** and **Production** options here do not do anything — you can ignore them). Enabling the **Required** option means that a database branch must be created for each preview deployment.
@@ -140,14 +134,11 @@ To connect your Vercel project to your Neon database:
    <Admonition type="note" title="A database branch for every preview deployment">
    A Neon branch with every Vercel preview deployment creates an isolated copy of your database that you can modify without affecting your production database. This means you can preview both application and database changes together.
    </Admonition>
-
-    ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
-
 5. Click **Connect** to finish the setup.
 
     If you enabled database branching for preview deployments, each commit to a new branch in GitHub creates a database branch in Neon.
 
-    For more about this setup, refer to our detailed guide: [Set up a database branching workflow with the Vercel Native Integration](tbd).
+    For more about this database branching setup, refer to our detailed guide: [Vercel Native Integration Previews](/docs/guides/vercel-native-integration-previews).
 
 ## Changing your Database configuration
 
@@ -259,6 +250,6 @@ POSTGRES_PRISMA_URL
 
 ## Limitations
 
-When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported. However, the Neon Postgres Native Integration also supports database branches for preview deployments. See [Vercel Native Integration Previews](/docs/guides/vercel-native-integration-previews).
 
 <NeedHelp/>

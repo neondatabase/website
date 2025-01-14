@@ -18,6 +18,8 @@ This integration is intended for Vercel users who want to add Neon Postgres to t
 
 <a href="/docs/guides/vercel-native-integration" description="Learn how to install the Neon Postgres Native Integration from the Vercel Marketplace" icon="vercel">Vercel Native Integration</a>
 
+<a href="/docs/guides/vercel-native-integration-previews" description="Create a database branch for every preview deployment with the Neon Postgres Native Integration" icon="vercel">Database branches for preview deployments</a>
+
 </DetailIconCards>
 
 ## Option 2: Add the Postgres Previews Integration

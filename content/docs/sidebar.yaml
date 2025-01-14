@@ -539,6 +539,8 @@
                   slug: guides/vercel-overview
                 - title: Vercel Native Integration
                   slug: guides/vercel-native-integration
+                - title: Vercel Native Integration Previews
+                  slug: guides/vercel-native-integration-previews
                 - title: Neon Previews Integration
                   slug: guides/vercel-previews-integration
                 - title: Connect manually
