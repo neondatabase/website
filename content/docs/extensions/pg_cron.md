@@ -103,6 +103,31 @@ Here's a breakdown of the command:
 
 This example demonstrates how to automate a common database maintenance task, ensuring your main tables remain manageable and performant.
 
+### Purging cron job logs
+
+The `cron.job_run_details` table keeps a record of your scheduled job executions. Over time, this table can grow and consume storage. Regularly purging older entries is a good practice to keep its size manageable.
+
+You can schedule a job using `pg_cron` itself to automatically delete old records from `cron.job_run_details`. Here's how you can schedule a job to purge entries older than seven days, running every day at midnight UTC:
+
+```sql
+SELECT cron.schedule(
+    'purge-cron-history',
+    '0 0 * * *',  -- Runs every day at midnight UTC
+    $$
+        DELETE FROM cron.job_run_details
+        WHERE end_time < NOW() - INTERVAL '7 days';
+    $$
+);
+```
+
+Here's a breakdown of the command:
+
+- **purge-cron-history**: The name of the scheduled job for purging history.
+
+- '0 0 * * *': The cron schedule, set to run at minute 0, hour 0 (midnight), every day of the month, every month, and every day of the week (all in UTC).
+
+- `DELETE FROM cron.job_run_details WHERE end_time < NOW() - INTERVAL '7 days'`: This is the SQL command that will be executed. It deletes all records from the `cron.job_run_details` table where the end_time is older than seven days from the current time.
+
 ### Running jobs every `n` seconds
 
 `pg_cron` also allows you to schedule a job every `n` seconds, which is not possible with traditional cron jobs. Here `n` can be any value between 1 and 59 inclusive.
@@ -152,16 +177,6 @@ SELECT * FROM cron.job_run_details ORDER BY start_time DESC LIMIT 5;
 ```
 
 This table includes details like the job ID, run ID, execution status, start and end times, and any return messages.
-
-<Admonition type="note">
-The `cron.job_run_details` table can accumulate data over time. It's recommended to periodically clear older entries to manage storage. You can schedule a job for this purpose:
-
-```sql
-SELECT cron.schedule('cleanup-cron-logs', '0 0 * * *', $$DELETE FROM cron.job_run_details WHERE end_time < now() - interval '30 days'$$);
-```
-
-This example schedules a job to delete log entries older than 30 days every day at midnight UTC.
-</Admonition>
 
 ## Conclusion
 
