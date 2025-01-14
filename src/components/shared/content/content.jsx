@@ -29,15 +29,15 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DocCta from 'components/shared/doc-cta';
+import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import Link from 'components/shared/link';
+import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DocCta from '../doc-cta';
-import ImageZoom from '../image-zoom';
-import RegionRequest from '../region-request';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });

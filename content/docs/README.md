@@ -522,7 +522,7 @@ Create a [markdown file](https://github.com/neondatabase/website/blob/main/conte
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component (not including content/docs/)
+  // ConponentName: 'shared-content/component-filename'
   NeedHelp: 'shared-content/need-help',
 };
 
