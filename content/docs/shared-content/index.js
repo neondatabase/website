@@ -11,6 +11,8 @@ const sharedMdxComponents = {
   FeatureBeta: 'shared-content/feature-beta',
   MigrationAssistant: 'shared-content/migration-assistant',
   LinkAPIKey: 'shared-content/manage-api-keys',
+  // TODO: Remove this test component for demo before release
+  ComponentWithProps: 'shared-content/component-with-props',
 };
 
 module.exports = sharedMdxComponents;
