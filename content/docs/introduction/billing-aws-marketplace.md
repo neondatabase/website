@@ -37,11 +37,12 @@ Converting billing for a Neon Organization account from Neon to AWS requires the
 
    - Your AWS Account ID.
    - The Agreement ID for the new subscription.
+   - The AWS Entitlement ID
    - Your organization’s name and ID. For example:
      - **Organization Name**: `my_org_name`
      - **Organization ID**: `org-empty-sea-12345678`
 
-   You can find your Organization details by selecting your Organization in the Neon Console. See [witch to your Organization account](/docs/manage/orgs-manage#switch-to-your-organization-account).
+   You can find your Organization details by selecting your Organization in the Neon Console. See [Switch to your Organization account](/docs/manage/orgs-manage#switch-to-your-organization-account).
 
 3. Neon Support will suspend your current subscription and manually attach the new AWS subscription to your organization.
 

@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: false
-updatedOn: '2025-01-02T20:14:18.102Z'
+updatedOn: '2025-01-10T00:37:35.166Z'
 ---
 
 ### Autoscaling
@@ -147,6 +147,6 @@ Secure your database connections with private access.
 
 <DetailIconCards>
 
-<a href="/docs/guides/private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
+<a href="/docs/guides/neon-private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
 
 </DetailIconCards>

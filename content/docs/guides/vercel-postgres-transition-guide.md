@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-07T21:29:43.646Z'
+updatedOn: '2025-01-10T19:39:03.481Z'
 ---
 
 <Admonition type="warning">
@@ -77,7 +77,7 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 
 | **Resource**      | **Vercel Hobby (Included)** | **Neon Free Plan (Included)** |
 | :---------------- | :-------------------------- | :---------------------------- |
-| **Compute time**  | 60 Hours                    | 191.9 Hours                   |
+| **Compute hours** | 60                          | 191.9                         |
 | **Data transfer** | N/A                         | Up to 5 GBs per month         |
 | **Database**      | First Database              | 10                            |
 | **Storage**       | First 256 MB Included       | Up to 512 MB                  |
@@ -90,7 +90,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 
 | **Resource**        | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
 | :------------------ | :------------------------ | :------------------------------- |
-| **Compute time**    | 100 hours                 | 300 hours                        |
+| **Compute hours**   | 100                       | 300                              |
 | **Data transfer**   | 256 MB                    | Reasonable usage (no hard limit) |
 | **Databases**       | First database            | 100                              |
 | **Branches**        | -                         | 500                              |
@@ -101,7 +101,7 @@ Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra us
 
 | **Resource**      | **Vercel Pro (Additional)** | **Neon Launch Plan (Extra usage)**            |
 | :---------------- | :-------------------------- | :-------------------------------------------- |
-| **Compute time**  | $0.10 per compute hour      | $0.16 per compute hour                        |
+| **Compute hours** | $0.10 per compute hour      | $0.16 per compute hour                        |
 | **Data transfer** | $0.10 - 1 GB                | No additional cost                            |
 | **Database**      | $1.00 - Per 1 Database      | No additional cost for the first 100          |
 | **Storage**       | $0.12 - 1 GB                | First 10 GB included; afterwards $1.75 per-GB |

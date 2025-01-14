@@ -41,7 +41,7 @@ Easily switch between your personal account and any organization you are a Membe
 
 ## Deleting your account
 
-After deleting your account, it is suspended for 180 days; if you log back within this period your account will be reactivated. After 180 days, your account and related information is permanently purged and cannot be recovered.
+After deleting your account, you'll have a brief window to reactivate it if you change your mind. Just log back in to restore your account. Once this window closes, however, your account and related information will be permanently purged and cannot be recovered.
 
 Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
 

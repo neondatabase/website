@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-13T20:52:57.583Z'
+updatedOn: '2025-01-10T15:44:20.072Z'
 ---
 
 <LRBeta/>
@@ -39,6 +39,8 @@ This notice applies when replicating data to Neon:
   Even with this workaround, the replication gap issue can still occur if the parent branch is suspended before the duplicate subscription on a child branch is disabled. Therefore, we encourage you to take this action promptly on newly created, restored, or reset child branches.
 
   This issue will be addressed in an upcoming release.
+
+- Before dropping a database in response to a user issued `DROP DATABASE` command or operation, Neon will drop any logical replication subscriptions defined in the database.
 
 ## Logical replication and scale to zero
 

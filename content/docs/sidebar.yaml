@@ -571,7 +571,7 @@
             - title: AWS Lambda
               slug: guides/aws-lambda
             - title: Azure Functions
-              slug: guides/query-postgres-azure-functions
+              slug: https://neon.tech/guides/query-postgres-azure-functions
               tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
