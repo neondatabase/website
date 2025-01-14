@@ -22,19 +22,13 @@ The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on V
 <details>
 <summary>Why create a database branch with each preview deployment?</summary>
 
-- **Each preview deployment gets its own database**: Every Vercel preview deployment has its own dedicated database branch, keeping environments isolated and avoiding interference from other deployments.
+- **Each preview deployment gets its own database**: Every Vercel preview deployment has its own dedicated database branch, keeping environments isolated.
 
-- **No shared database problems**: Using a single shared database can lead to issues across all preview deployments if something goes wrong. With branches, each preview has its own independent database.
+- **No more shared database problems**: Using a single shared database can lead to issues across all preview deployments if something goes wrong. With branches, each preview has its own independent database.
 
-- **Avoid schema version conflicts**: Changes to a shared database schema can break older preview deployments. With branches, each deployment uses its own schema version without affecting others.
+- **Easier debugging and testing**: Database branches let you preview schema changes and migrations in isolation, so issues don’t spill over into other environments.
 
-- **Easier debugging and testing**: Database branches let you test schema changes and migrations in isolation, so issues don’t spill over into other environments.
-
-- **No need to set up preview databases manually**: Neon branches are created instantly as copies of the parent database, saving you the hassle of preparing dummy data or setting up databases from scratch.
-
-- **Quickly reset testing environments**: If something goes wrong during testing, you can delete and recreate the branch in seconds for a fresh start.
-
-- **Clean up unused resources automatically**: When a Vercel preview deployment is removed, you can delete the associated database branch.
+- **No need to set up preview databases manually**: Neon branches are created instantly as copies of the parent database, saving you the hassle of seeding data or setting up databases from scratch.
 
 - **Works automatically with Vercel**: The integration connects Neon database branches to Vercel preview deployments and sets the environment variables for you.
 
