@@ -8,8 +8,8 @@ updatedOn: '2024-12-11T21:23:33.087Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>How to configure database branching for preview deployments</p>
-<p>Why create a database branch with each preview deployment?</p>
+<p>How to create a database branch for each preview deployment</p>
+<p>Why create a database branch for each preview deployment?</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
@@ -17,7 +17,7 @@ updatedOn: '2024-12-11T21:23:33.087Z'
 </DocsList>
 </InfoBlock>
 
-The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on Vercel allows you to add a Postgres database to your Vercel project. Optionally, you can create a database branch with each preview deployment. This guide describes how to perform that setup.
+The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on Vercel lets you to add a Postgres database to your Vercel project. Optionally, you can create a database branch with each Vercel preview deployment. This guide describes how to perform that setup.
 
 <details>
 <summary>Why create a database branch with each preview deployment?</summary>
@@ -34,7 +34,7 @@ The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on V
 
 - **Great for teams**: Isolated branches let team members test their changes independently without stepping on each other’s toes.
 
-- **Keep deployments consistent**: Add database migration commands to your Vercel deployment setup to ensure schema changes are applied automatically for every preview deployment.
+- **Automatic schema migrations**: Add database migration commands to your Vercel deployment setup to apply schema changes to your database branch automatically with each preview deployment.
 
 </details>
 
@@ -60,17 +60,17 @@ To connect your Vercel project to your Neon database:
 
 4. Under **Advanced Options**:
     1. Enable the **Required** option under "Deployments Configuration". This setting ensures that a database branch is created for each preview deployment; otherwise, the preview deployment fails.
-    1. Select **Preview**. This setting creates a database branch for **preview** deployments only. Leave the **Deployment** and **Production** options unchecked — they do not do anything.
+    1. Under **Create a database branch for deployment**, select **Preview**. This setting creates a database branch for **preview** deployments only. Leave the **Deployment** and **Production** options unchecked — they do not do anything, and you don't need to create database branches for those environments.
 
     ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
 5. Click **Connect** to finish the setup.
 
-    Now, with each commit to a branch in your application's GitHub repository, a preview deployment will be created in Vercel, each with its own database branch.
+    Now, with each commit to a branch in your application's GitHub repository, a preview deployment will be created in Vercel, each with its own isolated database branch. To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches). 
 
 ## Testing the database branching setup
 
-After enabling database branches for preview deployments, a branch is created when you push commits made on your local git branch to your application's source code repository. To see the integration in action, follow these steps:
+After enabling database branches for preview deployments, a database branch is created when you push commits on your local git branch to your application's source code repository. To see the integration in action, follow these steps:
 
 1. Create a branch in your local source code repository.
 
@@ -94,37 +94,37 @@ After enabling database branches for preview deployments, a branch is created wh
 
    Pushing the commit triggers the following actions:
 
-   - The commit triggers a Preview deployment in Vercel, as would occur without the Neon integration, which you can view on the **Deployments** tab on the Vercel Dashboard.
-   - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix, which you can view in the Neon Console, on your Neon project's **Branches** page.
+   - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration, which you can view on the **Deployments** tab on the Vercel Dashboard.
+   - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.
 
 ## Applying schema changes to database branches
 
-If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add  build commands including a schema migration command to your Vercel deployment configuration to apply schema changes to your database branch. This way, you can deploy application and database changes together in your preview.
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands, including a schema migration command, to your Vercel deployment configuration. This way, you can deploy application and database changes together in your preview.
 
 To add build commands to your Vercel project previews:
 
 1. On the Vercel Dashboard, open your Vercel project.
 2. Navigate to the **Settings** tab.
 3. On the **General** page, navigate to the **Build & Development Settings** section.
-4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate your Prisma Client, and run your build:
+4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate the Prisma Client, and run your build:
 
     ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
 This setup applies any schema changes in your commits to the database branch created for your preview deployment.
 
-## Disconnecting a Database
+## Disconnecting a database
 
 To disconnect a Neon database from a Vercel project:
 
 1. On the Vercel Dashboard, open your Vercel project. 
 2. Navigate to the **Storage** tab and select your Database.
-3. In the left-hand nav on your database page, select **Projects**.
+3. In the left-hand navigation on your database page, select **Projects**.
 4. Under **Projects**, select your project, and select **Remove Project Connection** from the menu.
 
-This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. Database branching previews, which depend on those variables, are disabled when a disconnecting a database. However, any database branches created in Neon for preview environments are not deleted. You'll have to remove those branches manually if you no longer want them.
+This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. After disconnecting a database, branches will no longer be created with each preview deployment. However, any previously created database branches will not not deleted. You have to remove those branches manually if you no longer want them.
 
-## Manage preview branches created by the integration
+## Manage branches created by the integration
 
 The integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](https://neon.tech/docs/manage/branches#delete-a-branch-with-the-api).
 
