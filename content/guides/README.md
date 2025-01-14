@@ -416,6 +416,20 @@ Insert a shared markdown and render inline.
 <NeedHelp/>
 ```
 
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+component-with-props.md
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
+```
+
 ## Author data
 
 Your author's data should be sourced in `content/guides/authors/data.json` file.

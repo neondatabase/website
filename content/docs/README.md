@@ -540,6 +540,20 @@ Insert a shared markdown and render inline.
 <NeedHelp/>
 ```
 
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+component-with-props.md
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
+```
+
 ## Contributing
 
 For small changes and spelling fixes, we recommend using the GitHub UI because Markdown files are relatively easy to edit.
