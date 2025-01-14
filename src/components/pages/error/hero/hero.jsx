@@ -12,32 +12,19 @@ import Link from 'components/shared/link';
 
 import illustration from './images/illustration.png';
 
-const CTA = ({ isDocsPage = false, reset }) =>
-  isDocsPage ? (
-    <div className="flex w-full flex-col">
-      <InkeepTrigger className="my-8 w-full" isNotFoundPage />
+const CTA = ({ isDocsPage = false, reset }) => (
+  <>
+    {isDocsPage && <InkeepTrigger className="mb-11 w-full sm:mb-6" isNotFoundPage />}
+    <div className="flex items-center gap-6 lg:gap-4">
+      <Button size="xs" theme="primary" withArrow onClick={reset}>
+        Try again
+      </Button>
       <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>
         Back to Home
       </Link>
     </div>
-  ) : (
-    <div className="mt-11 flex items-center gap-6 lg:mt-8 lg:gap-4 sm:mt-6">
-      {reset ? (
-        <>
-          <Button size="xs" theme="primary" withArrow onClick={reset}>
-            Try again
-          </Button>
-          <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>
-            Back to Home
-          </Link>
-        </>
-      ) : (
-        <Button size="xs" theme="primary" to="/">
-          Back to Home
-        </Button>
-      )}
-    </div>
-  );
+  </>
+);
 
 CTA.propTypes = {
   isDocsPage: PropTypes.bool,
@@ -45,10 +32,8 @@ CTA.propTypes = {
 };
 
 const Skeleton = () => (
-  <div className="mt-6 flex w-full flex-col items-start justify-center space-y-4">
-    <span className="skeleton max-w-[410px]" />
-    <span className="skeleton max-w-[260px]" />
-    <span className="skeleton max-w-[410px]" />
+  <div className="flex w-full flex-col overflow-hidden">
+    <span className="skeleton h-11 max-w-72" />
   </div>
 );
 
@@ -75,7 +60,9 @@ const Hero = ({ title, text, reset }) => {
             {title}
           </h1>
           <p className="t-xl mt-7 max-w-md sm:mt-4">{text}</p>
-          {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} reset={reset} />}
+          <div className="mt-11 w-full lg:mt-8 sm:mt-6">
+            {isLoading ? <Skeleton /> : <CTA isDocsPage={isDocsPage} reset={reset} />}
+          </div>
         </div>
 
         <div className="col-start-6 col-end-12 2xl:col-end-13 lg:col-start-7 md:col-span-full">
@@ -85,8 +72,8 @@ const Hero = ({ title, text, reset }) => {
             height={862}
             src={illustration}
             alt="Illustration"
-            loading="eager"
             quality={75}
+            priority
           />
         </div>
       </Container>
