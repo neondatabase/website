@@ -227,7 +227,7 @@ WHERE
     SELECT
       salary
     FROM
-      employees
+      managers
   );
 ```
 
