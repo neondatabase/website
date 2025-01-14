@@ -131,7 +131,7 @@ When Neon releases a new extension or new extension version, a compute restart i
 
 ## Request extension support
 
-To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the **feedback** channel on our [Discord Server](https://discord.gg/92vNTzKDGp).
+<ExtensionRequest />
 
 ### Custom-built extensions
 
