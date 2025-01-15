@@ -161,6 +161,21 @@ After you add the integration to a Vercel project, Neon creates a database branc
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
+## Applying schema changes to database branches
+
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add  build commands including a schema migration command to your Vercel deployment configuration to apply schema changes to your database branch. This way, you can deploy application and database changes together in your preview.
+
+To add build commands to your Vercel project previews:
+
+1. On the Vercel Dashboard, open your Vercel project.
+2. Navigate to the **Settings** tab.
+3. On the **General** page, navigate to the **Build & Development Settings** section.
+4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate your Prisma Client, and run your build:
+
+![Vercel build commands](/docs/guides/vercel_build_command.png)
+
+This setup apply any schema changes in your commits to the database branch created for your preview deployment.
+
 ## Manage branches created by the integration
 
 The Neon Postgres Previews Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete branches that are no longer required. Different options are supported for branch deletion.
