@@ -9,7 +9,7 @@ updatedOn: '2024-12-11T21:23:33.087Z'
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to create a database branch for each preview deployment</p>
-<p>Why create a database branch for each preview deployment?</p>
+<p>The benefits of a branch for every preview deployment</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
