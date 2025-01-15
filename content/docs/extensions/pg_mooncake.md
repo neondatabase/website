@@ -1,30 +1,31 @@
 ---
 title: The pg_mooncake extension
-subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution.
+subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 enableTableOfContents: true
 updatedOn: '2024-01-13T18:45:00.000Z'
 ---
-[`pg_mooncake`](https://github.com/Mooncake-Labs/pg_mooncake) enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB). 
+
+The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB). 
 
 Columnstore tables improve analytical queries by storing data vertically, enabling compression and efficient column-specific retrieval with vectorized execution. 
 
-`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
+`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in an object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
 
 Queries on `pg_mooncake` columnstore tables are executed by DuckDB. 
 
 <CTA />
 
-You can create and use `pg_mooncake` columnstore tables like regular Postgres heap tables and run: 
+You can create and use `pg_mooncake` columnstore tables like regular Postgres heap tables to run: 
 
-- Transactional INSERT, SELECT, UPDATE, DELETE, and COPY.
-- Joins with regular Postgres tables.
+- Transactional `INSERT`, `SELECT`, `UPDATE`, `DELETE`, and `COPY` operations
+- Joins with regular Postgres tables
 
 In addition, you can:
-- Load Parquet, CSV, and JSON files into columnstore tables.
-- Load Hugging Face datasets.
-- Run DuckDB specific aggregate functions like `approx_count_distinct`.
-- Read existing Iceberg and Delta Lake tables.
-- Write Delta Lake tables from Postgres tables.
+- Load Parquet, CSV, and JSON files into columnstore tables
+- Load Hugging Face datasets
+- Run DuckDB specific aggregate functions like `approx_count_distinct`
+- Read existing Iceberg and Delta Lake tables
+- Write Delta Lake tables from Postgres tables
 
 **Version availability:**
 
@@ -39,43 +40,58 @@ In addition, you can:
 `pg_mooncake` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
 </Admonition>
 
-## Use-cases
+## Use cases for pg_mooncake
+
+`pg_mooncake` supports several use case, including:
+
 1. Analytics on Postgres data
 2. Time Series & Log Analytics
-3. Exporting Postgre Tables to Your Lake or Lakehouse.
-4. Query and update existing Lakehouse tables and Parquet files directly in PostgreSQL.
+3. Exporting Postgres tables to your Lake or Lakehouse
+4. Querying and updating existing Lakehouse tables and Parquet files directly in Postgres
 
 This guide provides a quickstart to the `pg_mooncake` extension. 
 
 ## Enable the extension
-While the extension is in beta, run:
-```sql
-SET neon.allow_unstable_extensions='true';
-```
-Install the extension:
-```sql
-CREATE EXTENSION pg_mooncake;
-```
 
-## Set up your object store. 
-Get a free S3 express bucket [here](https://s3.pgmooncake.com/). 
+1. While the extension is in beta, you need to enable the following option in Neon before you can install it:
 
-First, add your object storage credentials. In this case, S3:
-```sql
-SELECT mooncake.create_secret('<name>', 'S3', '<key_id>', 
-          '<secret>', '{"REGION": "<s3-region>"}');
-```
-Next, set your default bucket:
-```sql
-SET mooncake.default_bucket = 's3://<bucket>';
-```
+    ```sql
+    SET neon.allow_unstable_extensions='true';
+    ```
+
+2. Install the extension:
+
+    ```sql
+    CREATE EXTENSION pg_mooncake;
+    ```
+
+## Set up your object store 
+
+<Admonition type="tip">
+If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/).
+</Admonition>  
+
+1. Add your object storage credentials. In this case, S3:
+
+    ```sql
+    SELECT mooncake.create_secret('<name>', 'S3', '<key_id>', 
+            '<secret>', '{"REGION": "<s3-region>"}');
+    ```
+
+2. Set your default bucket:
+
+    ```sql
+    SET mooncake.default_bucket = 's3://<bucket>';
+    ```
 
 <Admonition type="note">
-In the future, you will not have to bring your own buckets. 
+In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
 </Admonition>
 
-
 ## Create a columnstore table with `USING columnstore`
+
+Run the following SQL statement from a connected SQL client or the Neon SQL Editor to create a columnstore table:
+
 ```sql
 CREATE TABLE reddit_comments (
     author TEXT,
@@ -90,16 +106,20 @@ CREATE TABLE reddit_comments (
 ) USING columnstore;
 ```
 ## Load data
-Read the full list of sources [here](https://pgmooncake.com/docs/load-data).
+
+You can find a list of data sources [here](https://pgmooncake.com/docs/load-data).
 
 In this case, we load Hugging Face [dataset](https://huggingface.co/datasets/fddemarco/pushshift-reddit-comments) into the table. 
-This dataset has 13 million rows, and will take a couple minutes to load. 
-```sql
+This dataset has 13 million rows and may take a few minutes to load.
+
+```sql shouldWrap
 COPY reddit_comments FROM 'hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet';
 ```
 
 ## Query the table
-Queries on columnstore tables will be executed by DuckDB. This aggregate query runs in ~200 milliseconds on 13 million rows. 
+
+Queries on columnstore tables are executed by DuckDB. This aggregate query runs in ~200 milliseconds on 13 million rows:
+
 ```sql
 -- Top commenters (excluding [deleted] users)
 SELECT 
