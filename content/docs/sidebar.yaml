@@ -842,6 +842,8 @@
               slug: extensions/pgvector
             - title: pgrag
               slug: extensions/pgrag
+            - title: pg_mooncake
+              slug: extensions/pg_mooncake
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
