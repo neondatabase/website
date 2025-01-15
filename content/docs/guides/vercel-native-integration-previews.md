@@ -102,7 +102,7 @@ After enabling database branches for preview deployments, a database branch is c
    - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.
         <Admonition type="info" title="How are database variables set for preview deployments?">
-        Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The preview environment variables visible in Vercel remain unchanged across preview deployments.
+        Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The environment variables visible in Vercel remain unchanged across preview deployments.
         </Admonition>
 
 ## Applying schema changes to database branches
