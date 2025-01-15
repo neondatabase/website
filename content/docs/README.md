@@ -411,28 +411,18 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 
 ## Numbered Steps
 
-To display numbered steps, wrap the content with `NumberedSteps` and `NumberedStep` components.
+To display numbered steps, wrap the content with `NumberedSteps` component.
 
 ```md
 <NumberedSteps>
 
-<NumberedStep title="Step 1">
+## Step 1: Create the Initial Schema
 
-Create a new database called `people` on the `main` branch and add some sample data to it.
+First, create a new database called `people` on the `main` branch and add some sample data to it.
 
-</NumberedStep>
+## Step 2: Create a development branch
 
-<NumberedStep title="Step 2">
-
-Create a new development branch called `dev/jordan`.
-
-</NumberedStep>
-
-<NumberedStep title="Step 3">
-
-Use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `dev/jordan` development branch and `main`.
-
-</NumberedStep>
+Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
 
 </NumberedSteps>
 ```

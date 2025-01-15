@@ -12,7 +12,7 @@ const buildNestedToc = (headings, currentLevel) => {
   let numberedStep = 0;
 
   while (headings.length > 0) {
-    const [depth, title, , isNumberedStep] = parseMDXHeading(headings[0]);
+    const [depth, title, isNumberedStep] = parseMDXHeading(headings[0]);
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
@@ -65,16 +65,14 @@ const getTableOfContents = (content) => {
 
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
+  const stepRegex = /<NumberedStep[^>]*title="([^"]+)"[^>]*(?:tag="h(\d)")?[^>]*>/g;
 
   const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
-  const standardHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
+  const defaultHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
+  const customHeadings = contentWithoutCodeBlocks.match(stepRegex) || [];
+  console.log(customHeadings);
 
-  const customHeadings =
-    contentWithoutCodeBlocks.match(
-      /<NumberedStep[^>]*title="([^"]+)"[^>]*(?:tag="h(\d)")?[^>]*>/g
-    ) || [];
-
-  const headings = [...standardHeadings, ...customHeadings];
+  const headings = [...defaultHeadings, ...customHeadings];
 
   const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
 
