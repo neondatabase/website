@@ -52,14 +52,7 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   }, result);
 };
 
-const Sidebar = ({
-  className = null,
-  sidebar,
-  slug,
-  basePath,
-  customType,
-  isPostgresPage = false,
-}) => {
+const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPageType = null }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -102,7 +95,7 @@ const Sidebar = ({
           </Link>
         </div>
         <div className="mt-[54px] px-[52px] xl:px-8">
-          <InkeepTrigger isPostgresPage={isPostgresPage} />
+          <InkeepTrigger docPageType={docPageType} />
           <div
             className={clsx(
               'relative',
@@ -144,7 +137,7 @@ Sidebar.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
-  isPostgresPage: PropTypes.bool,
+  docPageType: PropTypes.string,
 };
 
 export default Sidebar;
