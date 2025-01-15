@@ -17,7 +17,7 @@ updatedOn: '2024-12-11T21:23:33.087Z'
 </DocsList>
 </InfoBlock>
 
-The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on Vercel lets you to add a Postgres database to your Vercel project. Optionally, you can create a database branch with each Vercel preview deployment. This guide describes how to perform that setup.
+The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
 <details>
 <summary>Why create a database branch with each preview deployment?</summary>
@@ -34,7 +34,7 @@ The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon) on V
 
 - **Great for teams**: Isolated branches let team members test their changes independently without stepping on each other’s toes.
 
-- **Automatic schema migrations**: Add database migration commands to your Vercel deployment setup to apply schema changes to your database branch automatically with each preview deployment.
+- **Automatic schema migrations**: You can add database migration commands to your Vercel deployment setup to apply schema changes to your database branch automatically with each preview deployment.
 
 </details>
 
@@ -66,11 +66,15 @@ To connect your Vercel project to your Neon database:
 
 5. Click **Connect** to finish the setup.
 
-    Now, with each commit to a branch in your application's GitHub repository, a preview deployment will be created in Vercel, each with its own isolated database branch. To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches). 
+    Now, with each commit to a branch in your application's GitHub repository, preview deployments will be created with their own isolated database branch. You can follow the steps in the next section to test the setup.
+    
+    <Admonition type="tip">
+    To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches). 
+    </Admonition> 
 
 ## Testing the database branching setup
 
-After enabling database branches for preview deployments, a database branch is created when you push commits on your local git branch to your application's source code repository. To see the integration in action, follow these steps:
+After enabling database branches for preview deployments, a database branch is created when you push commits on your local git branch to your source code repository. To see the integration in action, follow these steps:
 
 1. Create a branch in your local source code repository.
 
@@ -79,7 +83,7 @@ After enabling database branches for preview deployments, a database branch is c
    git checkout -b patch-1
    ```
 
-2. Make changes to your application code on the local branch.
+2. Make changes to your application code on the local branch. This could be any change to your application or database schema, assuming your database schema is managed in code (see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches).
 3. Commit the changes. For example:
 
    ```bash
@@ -97,10 +101,13 @@ After enabling database branches for preview deployments, a database branch is c
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration, which you can view on the **Deployments** tab on the Vercel Dashboard.
    - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.
+        <Admonition type="info" title="How are database variables set for preview deployments?">
+        Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The preview environment variables visible in Vercel remain unchanged across preview deployments.
+        </Admonition>
 
 ## Applying schema changes to database branches
 
-If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands, including a schema migration command, to your Vercel deployment configuration. This way, you can deploy application and database changes together in your preview.
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands, including a schema migration command, to your Vercel deployment configuration. This way, you can preview application and database changes together, which is one of the key advantages of this configuration.
 
 To add build commands to your Vercel project previews:
 
@@ -109,9 +116,15 @@ To add build commands to your Vercel project previews:
 3. On the **General** page, navigate to the **Build & Development Settings** section.
 4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate the Prisma Client, and run your build:
 
+    ```text
+    npx prisma migrate deploy && npx prosma generate && next build
+    ```
+
+    As shown below:
+
     ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
-This setup applies any schema changes in your commits to the database branch created for your preview deployment.
+    This setup applies any schema changes in your commits to the database branch created for your preview deployment.
 
 ## Disconnecting a database
 
@@ -126,6 +139,10 @@ This will disconnect the database from your Vercel project by removing all of th
 
 ## Manage branches created by the integration
 
-The integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](https://neon.tech/docs/manage/branches#delete-a-branch-with-the-api).
+The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](https://neon.tech/docs/manage/branches#delete-a-branch-with-the-api).
+
+<Admonition type="note" title="What happens to branches if you don't remove them?">
+Unused branches are eventually archived, consuming space in archive storage. For more information, see [Branch archiving](/docs/guides/branch-archiving).
+</Admonition>
 
 <NeedHelp/>
