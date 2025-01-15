@@ -60,7 +60,7 @@ To connect your Vercel project to your Neon database:
 
 4. Under **Advanced Options**:
     1. Enable the **Required** option under "Deployments Configuration". This setting ensures that a database branch is created for each preview deployment; otherwise, the preview deployment fails.
-    1. Under **Create a database branch for deployment**, select **Preview**. This setting creates a database branch for **preview** deployments only. Leave the **Deployment** and **Production** options unchecked — they do not do anything, and you don't need to create database branches for those environments.
+    1. Under **Create a database branch for deployment**, select **Preview**. This setting creates a database branch for **preview** deployments only. Leave the **Development** and **Production** options unchecked — they do not do anything, and you don't need to create database branches for those environments.
 
     ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
