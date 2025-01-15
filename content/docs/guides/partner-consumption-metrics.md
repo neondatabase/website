@@ -17,7 +17,6 @@ Here are the different ways to retrieve these metrics, depending on how you want
 | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
 | [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only |
 | [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)   | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only |
-| [Single project metrics](https://api-docs.neon.tech/reference/getproject)                                | Retrieves detailed metrics and quota information for a specific project                                                  | All plans                    |
 
 ## Get account-level aggregated metrics
 
@@ -129,89 +128,6 @@ To control pagination (number of results per response), you can include these qu
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
 See [Details on pagination](#details-on-pagination) for more info.
-
-## Get metrics for a single specified project
-
-Using a `GET` request from the Neon API (see [Get project details](https://api-docs.neon.tech/reference/getproject)), you can find the following consumption details for a given project:
-
-- Current consumption metrics accumulated for the billing period
-- Start and end dates for the billing period
-- Current usage quotas (max limits) configured for the project
-
-Using these details, you can set up the logic for when to send notification warnings, when to reset a quota, and other possible actions related to the pending or current suspension of a project's active computes.
-
-Here is an example a `GET` request for an individual project.
-
-```bash
-curl --request GET \
-     --url https://console.neon.tech/api/v2/projects/[project_ID] \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-And here is what the response might look like.
-
-<details>
-<summary>Response body</summary>
-
-```json
-{
-  "project": {
-    "data_storage_bytes_hour": 1040,
-    "data_transfer_bytes": 680000000,
-    "written_data_bytes": 68544000,
-    "compute_time_seconds": 68400,
-    "active_time_seconds": 75000,
-    "cpu_used_sec": 7200,
-    "id": "[project_ID]",
-    "platform_id": "aws",
-    "region_id": "aws-us-east-2",
-    "name": "UserProject",
-    "provisioner": "k8s-pod",
-    "default_endpoint_settings": {
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "suspend_timeout_seconds": 0
-    },
-    "settings": {
-      "quota": {
-        "active_time_seconds": 108000,
-        "compute_time_seconds": 72000
-      }
-    },
-    "pg_version": 15,
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 204800,
-    "branch_logical_size_limit_bytes": 214748364800,
-    "store_passwords": true,
-    "creation_source": "console",
-    "history_retention_seconds": 604800,
-    "created_at": "2023-10-29T16:48:31Z",
-    "updated_at": "2023-10-29T16:48:31Z",
-    "synthetic_storage_size": 0,
-    "consumption_period_start": "2023-10-01T00:00:00Z",
-    "consumption_period_end": "2023-11-01T00:00:00Z",
-    "owner_id": "1232111",
-    "owner": {
-      "email": "some@email.com",
-      "branches_limit": -1,
-      "subscription_type": "free"
-    }
-  }
-}
-```
-
-</details>
-
-Looking at this response, here are some conclusions we can draw:
-
-- **This project is _1 hour away_ from being suspended.**
-
-  With current `compute_time_seconds` at _68,400_ (19 hours) and the quota for that metric set at _72,000_ (20 hours), the project is only _1 hour_ of compute time away from being suspended.
-
-- **This project is _1 day away_ from a quota refresh.**
-
-  If today's date is _October 31st, 2023_, and the `consumption_period_end` parameter is _2023-11-01T00:00:00Z_ (November 1st, 2023), then the project has _1 day_ left before all quota parameters (except for `logical_byte_size`) are refreshed.
 
 ## Details on setting a date range
 
