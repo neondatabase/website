@@ -862,6 +862,8 @@
               slug: extensions/wal2json
             - title: pg_cron
               slug: extensions/pg_cron
+            - title: dblink
+              slug: extensions/dblink
         - title: Functions
           slug: functions/introduction
           items:
