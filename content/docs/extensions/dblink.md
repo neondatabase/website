@@ -212,7 +212,7 @@ The `dblink` extension provides additional functions to help manage and interact
 
 ## Better alternatives: Foreign Data Wrappers
 
-While `dblink` provides direct connectivity, PostgreSQL's Foreign Data Wrappers (FDW) offer a more integrated and often more manageable approach for accessing external data. The `postgres_fdw` allows you to define a _foreign server_ and _foreign tables_ that represent tables in the remote database. You can learn more about FDWs in our [postgres_fdw](/docs/extensions/postgres-fdw) guide.
+While `dblink` provides direct connectivity, PostgreSQL's Foreign Data Wrappers (FDW) offer a more integrated and often more manageable approach for accessing external data. The `postgres_fdw` allows you to define a _foreign server_ and _foreign tables_ that represent tables in the remote database. You can learn more about FDWs in our [postgres_fdw](/docs/extensions/postgres_fdw) guide.
 
 ## Conclusion
 
