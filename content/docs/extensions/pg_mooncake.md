@@ -42,7 +42,7 @@ In addition, you can:
 
 ## Use cases for pg_mooncake
 
-`pg_mooncake` supports several use case, including:
+`pg_mooncake` supports several use cases, including:
 
 1. Analytics on Postgres data
 2. Time Series & Log Analytics
@@ -53,7 +53,11 @@ This guide provides a quickstart to the `pg_mooncake` extension.
 
 ## Enable the extension
 
-1. While the extension is in beta, you need to enable the following option in Neon before you can install it:
+<Admonition type="note">
+The `pg_mooncake` extension is currently in beta. A separate, dedicated Neon project is recommended when using an extension that is still in Beta.
+</Admonition>
+
+1. While the `pg_mooncake` extension is in Beta, you need to explicitly allow it to be used on Neon before you can install it. To do so, connect to your Neon database via an SQL client like [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run the `SET` command shown below.
 
     ```sql
     SET neon.allow_unstable_extensions='true';
@@ -65,10 +69,12 @@ This guide provides a quickstart to the `pg_mooncake` extension.
     CREATE EXTENSION pg_mooncake;
     ```
 
-## Set up your object store 
+## Set up your object store
+
+Run the commands outlined in the following steps on your Neon database to setup your object store.
 
 <Admonition type="tip">
-If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/).
+If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT`` and `SET` statements defined in the following below are generated for you, which you can quickly copy and run.
 </Admonition>  
 
 1. Add your object storage credentials. In this case, S3:
@@ -90,7 +96,7 @@ In the future, you will not have to bring your own bucket to use `pg_mooncake` w
 
 ## Create a columnstore table with `USING columnstore`
 
-Run the following SQL statement from a connected SQL client or the Neon SQL Editor to create a columnstore table:
+Run the following SQL statement on your Neon database to create a columnstore table:
 
 ```sql
 CREATE TABLE reddit_comments (
