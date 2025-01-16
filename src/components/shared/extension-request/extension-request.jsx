@@ -92,7 +92,7 @@ const DEFAULT_DATA = {
     'passwordcheck',
     'basebackup_to_shell',
     'test_decoding',
-    'anon',
+    'pg_anon',
   ],
 };
 
