@@ -2,11 +2,12 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 const Steps = ({ children }) => {
-  // Split content to
+  // Split content to steps by 'Step #: ...' headings
   const steps = children.reduce((acc, child) => {
     if (
       acc.currentStep === null ||
-      (typeof child.props.children === 'string' && child.props.children.startsWith('Step'))
+      (typeof child.props.children === 'string' &&
+        /^(Step\s\d+:\s*.*?)$/.test(child.props.children))
     ) {
       if (acc.currentStep) {
         acc.push(acc.currentStep);
