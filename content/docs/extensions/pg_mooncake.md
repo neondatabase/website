@@ -99,17 +99,16 @@ In the future, you will not have to bring your own bucket to use `pg_mooncake` w
 Run the following SQL statement on your Neon database to create a columnstore table:
 
 ```sql
-CREATE TABLE reddit_comments (
-    author TEXT,
-    body TEXT,
-    controversiality BIGINT,
-    created_utc BIGINT,
-    link_id TEXT,
-    score BIGINT,
-    subreddit TEXT,
-    subreddit_id TEXT,
-    id TEXT
-) USING columnstore;
+CREATE TABLE reddit_comments 
+(created_utc BIGINT, 
+controversiality BIGINT, 
+body TEXT, 
+subreddit_id TEXT, 
+id TEXT, 
+score BIGINT, 
+author TEXT, 
+subreddit TEXT, 
+link_id TEXT) USING columnstore;
 ```
 ## Load data
 
