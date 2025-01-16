@@ -65,15 +65,9 @@ const getTableOfContents = (content) => {
 
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
-  const stepRegex = /<NumberedStep[^>]*title="([^"]+)"[^>]*(?:tag="h(\d)")?[^>]*>/g;
 
   const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
-  const defaultHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
-  const customHeadings = contentWithoutCodeBlocks.match(stepRegex) || [];
-  console.log(customHeadings);
-
-  const headings = [...defaultHeadings, ...customHeadings];
-
+  const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
   const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
 
   return buildNestedToc(arr, 1);

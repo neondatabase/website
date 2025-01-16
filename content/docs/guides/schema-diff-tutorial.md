@@ -18,7 +18,7 @@ To complete this tutorial, you'll need:
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
-<NumberedSteps>
+<Steps>
 
 ## Step 1: Create the Initial Schema
 
@@ -32,7 +32,7 @@ First, create a new database called `people` on the `main` branch and add some s
 
    In the **Neon Console**, go to **Databases** &#8594; **New Database**. Make sure your `main` branch is selected, then create the new database called `people`.
 
-1. Add the schema.
+2. Add the schema.
 
    Go to the **SQL Editor**, enter the following SQL statement and click **Run** to apply.
 
@@ -301,4 +301,4 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 
 </Tabs>
 
-</NumberedSteps>
+</Steps>

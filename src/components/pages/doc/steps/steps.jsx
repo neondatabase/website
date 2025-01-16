@@ -1,30 +1,29 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-const NumberedSteps = ({ children }) => {
-  const steps = [];
-  let step = null;
-
-  // Split the children into steps
-  children.forEach((child) => {
+const Steps = ({ children }) => {
+  // Split content to
+  const steps = children.reduce((acc, child) => {
     if (
-      step === null ||
+      acc.currentStep === null ||
       (typeof child.props.children === 'string' && child.props.children.startsWith('Step'))
     ) {
-      if (step) {
-        steps.push(step);
+      if (acc.currentStep) {
+        acc.push(acc.currentStep);
       }
-      step = [];
+      acc.currentStep = [];
     }
-    step.push(child);
-  });
-  if (step) {
-    steps.push(step);
+    acc.currentStep.push(child);
+    return acc;
+  }, []);
+
+  if (steps.currentStep) {
+    steps.push(steps.currentStep);
   }
 
   return (
     <ol
-      className="!mt-0 inline-flex w-full flex-col !pl-0"
+      className="numbered-steps !mt-0 inline-flex w-full flex-col !pl-0"
       style={{
         counterReset: 'section',
       }}
@@ -32,11 +31,12 @@ const NumberedSteps = ({ children }) => {
       {steps.map((step, index) => (
         <li
           className={clsx(
-            'relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',
+            'numbered-step relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',
             'before:mt-1 before:flex before:size-6 before:items-center before:justify-center before:rounded-full before:bg-gray-new-15 before:text-sm before:leading-snug before:tracking-extra-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
             'after:absolute after:left-3 after:top-[34px] after:h-[calc(100%+4px)] after:w-px after:bg-gray-new-80',
             'first:!mt-7 last:overflow-hidden',
-            'dark:before:bg-gray-new-94 dark:before:text-black-new dark:after:bg-gray-new-15'
+            'dark:before:bg-gray-new-94 dark:before:text-black-new dark:after:bg-gray-new-15',
+            '[&_ol]:!list-decimal'
           )}
           key={index}
         >
@@ -49,8 +49,8 @@ const NumberedSteps = ({ children }) => {
   );
 };
 
-export default NumberedSteps;
+export default Steps;
 
-NumberedSteps.propTypes = {
+Steps.propTypes = {
   children: PropTypes.node.isRequired,
 };
