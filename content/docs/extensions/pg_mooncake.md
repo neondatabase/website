@@ -81,7 +81,7 @@ If you don't have an object storage bucket, you can get a free S3 express bucket
 2. Set your default bucket:
 
     ```sql
-    SET mooncake.default_bucket = 's3://<bucket>';
+    ALTER DATABASE <database> SET mooncake.default_bucket = 's3://<bucket>';
     ```
 
 <Admonition type="note">
