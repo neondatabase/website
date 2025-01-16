@@ -20,7 +20,7 @@ To complete this tutorial, you'll need:
 
 <Steps>
 
-## Step 1: Create the Initial Schema
+## Create the Initial Schema
 
 First, create a new database called `people` on the `main` branch and add some sample data to it.
 
@@ -92,7 +92,7 @@ First, create a new database called `people` on the `main` branch and add some s
 </TabItem>
 </Tabs>
 
-## Step 2: Create a development branch
+### Create a development branch
 
 Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
 
@@ -176,7 +176,7 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 </TabItem>
 </Tabs>
 
-## Step 3: Update schema on a dev branch
+## Update schema on a dev branch
 
 Let's introduce some differences between the two branches. Add a new table to store addresses on the `dev/jordan` branch.
 
@@ -239,7 +239,7 @@ CREATE TABLE address (
 </TabItem>
 </Tabs>
 
-## Step 4: View the schema differences
+## View the schema differences
 
 Now that you have some differences between your branches, you can view the schema differences.
 

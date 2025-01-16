@@ -1,7 +1,11 @@
 function parseMDXHeading(line) {
+  if (typeof line !== 'string') {
+    console.error('Invalid input to parseMDXHeading:', line);
+    return [];
+  }
+
   const match = line.match(/^#+\s*\[(.*?)\]\((.*?)\)$/);
   const matchWithoutLink = line.match(/^#+\s*(.*?)$/);
-  const matchStep = line.match(/^#+\s*(Step\s\d+:\s*.*?)$/);
 
   if (match) {
     const len = match[0]?.match(/^#+/)?.[0]?.length;
@@ -16,15 +20,7 @@ function parseMDXHeading(line) {
     const depth = len ? len - 1 : null;
     const title = matchWithoutLink[1];
 
-    return [depth, title, matchStep];
-  }
-
-  if (matchStep) {
-    const title = matchStep[1];
-    const depth = parseInt(matchStep[2], 10) - 1 || 1;
-    const isNumberedStep = true;
-
-    return [depth, title, isNumberedStep];
+    return [depth, title];
   }
 
   return [];

@@ -1,25 +1,34 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const Steps = ({ children }) => {
-  // Split content to steps by 'Step #: ...' headings
-  const steps = children.reduce((acc, child) => {
-    if (
-      acc.currentStep === null ||
-      (typeof child.props.children === 'string' &&
-        /^(Step\s\d+:\s*.*?)$/.test(child.props.children))
-    ) {
-      if (acc.currentStep) {
-        acc.push(acc.currentStep);
+  // Split content into steps by headings
+  const steps = React.Children.toArray(children).reduce(
+    (acc, child) => {
+      // Determine if the child is a heading
+      const isHeading =
+        (typeof child.type === 'string' && ['h2', 'h3', 'h4'].includes(child.type)) || // Native HTML tags
+        (typeof child.type === 'function' &&
+          child.type.displayName &&
+          child.type.displayName.startsWith('AnchorHeading'));
+
+      // Start a new step if the current child is a heading
+      if (acc.currentStep === null || isHeading) {
+        if (acc.currentStep) {
+          acc.steps.push(acc.currentStep);
+        }
+        acc.currentStep = [];
       }
-      acc.currentStep = [];
-    }
-    acc.currentStep.push(child);
-    return acc;
-  }, []);
+
+      acc.currentStep.push(child);
+      return acc;
+    },
+    { steps: [], currentStep: null }
+  );
 
   if (steps.currentStep) {
-    steps.push(steps.currentStep);
+    steps.steps.push(steps.currentStep);
   }
 
   return (
@@ -29,7 +38,7 @@ const Steps = ({ children }) => {
         counterReset: 'section',
       }}
     >
-      {steps.map((step, index) => (
+      {steps.steps.map((step, index) => (
         <li
           className={clsx(
             'numbered-step relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',

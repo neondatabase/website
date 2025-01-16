@@ -14,22 +14,20 @@ const extractText = (children) => {
   }
 
   if (Array.isArray(children)) {
-    const text = children.reduce((acc, child) => {
+    return children.reduce((acc, child) => {
       if (typeof child === 'string') {
         return acc + child;
       }
       return acc + extractText(child.props.children);
     }, '');
-    return text;
   }
 
   return '';
 };
 
-const AnchorHeading =
-  (Tag) =>
+const AnchorHeading = (Tag) => {
   // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => {
+  const Component = ({ children, className = null }) => {
     const id = slugify(extractText(children), {
       lower: true,
       strict: true,
@@ -58,6 +56,12 @@ const AnchorHeading =
       </Tag>
     );
   };
+
+  // Assign a displayName for easier debugging
+  Component.displayName = `AnchorHeading(${Tag})`;
+
+  return Component;
+};
 
 AnchorHeading.propTypes = {
   children: PropTypes.node.isRequired,

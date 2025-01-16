@@ -8,11 +8,24 @@ const parseMDXHeading = require('./parse-mdx-heading');
 
 const buildNestedToc = (headings, currentLevel) => {
   const toc = [];
-
   let numberedStep = 0;
 
   while (headings.length > 0) {
-    const [depth, title, isNumberedStep] = parseMDXHeading(headings[0]);
+    const currentHeading = headings[0];
+    let depth;
+    let title;
+    let isNumberedStep;
+
+    if (typeof currentHeading === 'string') {
+      [depth, title] = parseMDXHeading(currentHeading);
+      isNumberedStep = false;
+    } else {
+      // Handle object format
+      depth = currentHeading.title.match(/^#+/)?.[0]?.length - 1 || 1;
+      title = currentHeading.title;
+      isNumberedStep = currentHeading.isNumbered;
+    }
+
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
@@ -27,18 +40,23 @@ const buildNestedToc = (headings, currentLevel) => {
         numberedStep += 1;
       }
 
-      headings.shift(); // remove the current heading
+      headings.shift();
 
-      if (headings.length > 0 && parseMDXHeading(headings[0])[0] > currentLevel) {
-        tocItem.items = buildNestedToc(headings, currentLevel + 1);
+      if (headings.length > 0) {
+        const nextDepth =
+          typeof headings[0] === 'string'
+            ? parseMDXHeading(headings[0])[0]
+            : headings[0].title.match(/^#+/)?.[0]?.length - 1 || 1;
+
+        if (nextDepth > currentLevel) {
+          tocItem.items = buildNestedToc(headings, currentLevel + 1);
+        }
       }
 
       toc.push(tocItem);
     } else if (depth < currentLevel) {
-      // Return toc if heading is of shallower level
       return toc;
     } else {
-      // Skip headings of deeper levels
       headings.shift();
     }
   }
@@ -66,9 +84,30 @@ const getTableOfContents = (content) => {
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
 
+  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
+  const steps = content.match(stepsRegex);
+  let stepHeadings = [];
+
+  if (steps) {
+    stepHeadings = steps
+      .flatMap((step) => step.match(headingRegex))
+      .filter(Boolean)
+      .map((heading) => ({
+        title: heading.replace(/(#+)\s/, ''),
+        isNumbered: true,
+      }));
+  }
+
   const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
   const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
-  const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
+  const regularHeadings = headings
+    .filter((heading) => !stepHeadings.some((step) => step.title === heading.replace(/(#+)\s/, '')))
+    .map((item) => ({
+      title: item.replace(/(#+)\s/, ''),
+      isNumbered: false,
+    }));
+
+  const arr = regularHeadings.concat(stepHeadings);
 
   return buildNestedToc(arr, 1);
 };
