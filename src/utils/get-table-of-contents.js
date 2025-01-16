@@ -9,8 +9,10 @@ const parseMDXHeading = require('./parse-mdx-heading');
 const buildNestedToc = (headings, currentLevel) => {
   const toc = [];
 
+  let numberedStep = 0;
+
   while (headings.length > 0) {
-    const [depth, title] = parseMDXHeading(headings[0]);
+    const [depth, title, isNumberedStep] = parseMDXHeading(headings[0]);
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
@@ -18,7 +20,12 @@ const buildNestedToc = (headings, currentLevel) => {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
+        numberedStep: isNumberedStep ? numberedStep + 1 : null,
       };
+
+      if (isNumberedStep) {
+        numberedStep += 1;
+      }
 
       headings.shift(); // remove the current heading
 
@@ -61,7 +68,6 @@ const getTableOfContents = (content) => {
 
   const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
   const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
-
   const arr = headings.map((item) => item.replace(/(#+)\s/, '$1 '));
 
   return buildNestedToc(arr, 1);
