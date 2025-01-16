@@ -17,7 +17,7 @@ This guide will walk you through the fundamentals of using the `dblink` extensio
 
 **Version availability:**
 
-To be added Post confirmation
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 ## Enable the `dblink` extension
 

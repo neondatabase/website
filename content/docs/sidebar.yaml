@@ -864,6 +864,8 @@
               slug: extensions/pg_cron
             - title: dblink
               slug: extensions/dblink
+            - title: postgres_fdw
+              slug: extensions/postgres_fdw
         - title: Functions
           slug: functions/introduction
           items:

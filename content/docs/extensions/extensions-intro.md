@@ -287,4 +287,6 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/dblink" description="Provides functions for accessing and manipulating data in remote databases from within Postgres" icon="queries">dblink</a>
 
+<a href="/docs/extensions/postgres_fdw" description="Access data in remote Postgres databases as local tables" icon="queries">postgres_fdw</a>
+
 </DetailIconCards>
