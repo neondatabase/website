@@ -25,7 +25,7 @@ The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans
 | Launch     | 5 minutes           | &check;          |
 | Scale      | 5 minutes           | &check;          |
 | Business   | 5 minutes           | &check;          |
-| Enterprise | 5 minutes           | &check;          |
+| Enterprise | custom time period           | &check;          |
 
 ## Configure scale to zero for a compute
 
