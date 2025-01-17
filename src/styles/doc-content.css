@@ -227,6 +227,10 @@
         }
       }
     }
+
+    details summary {
+      @apply cursor-pointer;
+    }
   }
 
   .prose-chat {
