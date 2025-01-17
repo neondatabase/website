@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-12-12T19:49:26.798Z'
 ---
 
-![Dev/Test workflow](/docs/use-cases/664.png)
+![Dev test workflow](/docs/use-cases/664.png)
 
 What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its exceptional developer experience. Teams often experience a boost in developer velocity when switching to Neon. In Neon, it takes less time to create and synchronize environments, run tests, and tedious database tasks are suddenly automated—all of which accelerate software lifecycles.
 
@@ -29,19 +29,25 @@ Most teams running dev/test workloads on Neon while keeping production on anothe
 
    Teams start by creating a single Neon project to host multiple dev/test environments. In Neon, a project is the logical equivalent of an “instance.” Thanks to Neon branching, many non-production instances in RDS or Aurora can be replaced with a single Neon project, as we'll see next.
 
-2. **Create a Neon Twin**
+3. **Create a Neon Twin**
 
    Next, teams create a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) —a copy of their production or staging dataset from the other platform (or a subset of this dataset) that remains automatically synchronized. There are various methods to keep the dataset in sync, which we’ll cover in this guide, but the process generally looks like this: 1. The testing dataset is loaded into the main branch within the Neon project. 2. Automation is set up so that data in the main branch is refreshed periodically, such as nightly.
 
    This main branch serves as the primary source for all dev/test environments, and it's the only location that needs to be updated with new data or schema changes, as we’ll see later.
 
-3. **Set up ephemeral environments as child branches**
+   ![Neon twin](/docs/use-cases/neon-twin.png)
+
+
+5. **Set up ephemeral environments as child branches**
 
    Once the Neon Twin is set up within the main branch, teams can instantly create ephemeral environments by deriving child branches from this main branch. These branches are fully isolated and provide teams with a complete copy of the testing dataset immediately.
 
    After the main branch is refreshed (e.g., nightly), all environments can be synced in one click. Neon includes a reset from parent feature, which instantly resets all child branches with data from the main branch. This allows teams to get the latest testing data (including schema changes) without needing to reload testing datasets in every single environment.
 
    Teams configure their workflows so that after development or testing is complete (e.g., a PR is closed), child branches are deleted automatically via the API. But since Neon's autosuspend automatically pauses these environments when unused, teams don’t have to worry too much about inactive branches.
+
+   ![Neon project for dev test](/docs/use-cases/667.png)
+
 
 ## Step 1: Set up a Neon project for Dev/Test
 
