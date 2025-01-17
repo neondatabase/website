@@ -1,4 +1,9 @@
 function parseMDXHeading(line) {
+  if (typeof line !== 'string') {
+    console.error('Invalid input to parseMDXHeading:', line);
+    return [];
+  }
+
   const match = line.match(/^#+\s*\[(.*?)\]\((.*?)\)$/);
   const matchWithoutLink = line.match(/^#+\s*(.*?)$/);
 
@@ -6,9 +11,8 @@ function parseMDXHeading(line) {
     const len = match[0]?.match(/^#+/)?.[0]?.length;
     const depth = len ? len - 1 : null;
     const title = match[1];
-    const url = match[2];
 
-    return [depth, title, url];
+    return [depth, title];
   }
 
   if (matchWithoutLink) {
@@ -16,9 +20,10 @@ function parseMDXHeading(line) {
     const depth = len ? len - 1 : null;
     const title = matchWithoutLink[1];
 
-    return [depth, title, null];
+    return [depth, title];
   }
-  return [null, null, null];
+
+  return [];
 }
 
 module.exports = parseMDXHeading;
