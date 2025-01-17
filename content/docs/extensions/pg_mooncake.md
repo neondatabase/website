@@ -90,6 +90,10 @@ If you don't have an object storage bucket, you can get a free S3 express bucket
     ALTER DATABASE <database> SET mooncake.default_bucket = 's3://<bucket>';
     ```
 
+    <Admonition type="note">
+    If you're Neon compute scales to zero (the default), session settings are lost, so you will be required to set your default bucket again 
+    </Admonition>
+
 <Admonition type="note">
 In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
 </Admonition>
@@ -123,7 +127,7 @@ COPY reddit_comments FROM 'hf://datasets/fddemarco/pushshift-reddit-comments/dat
 
 ## Query the table
 
-Queries on columnstore tables are executed by DuckDB. This aggregate query runs in ~200 milliseconds on 13 million rows:
+Queries on columnstore tables are executed by DuckDB. For example, this aggregate query runs in ~200 milliseconds on 13 million rows:
 
 ```sql
 -- Top commenters (excluding [deleted] users)
@@ -137,6 +141,25 @@ WHERE author != '[deleted]'
 GROUP BY author
 ORDER BY comment_count DESC
 LIMIT 10;
+```
+
+Results:
+
+```sql
+      author      | comment_count |     avg_score      | total_score 
+------------------+---------------+--------------------+-------------
+ qkme_transcriber |         10805 |   2.77325312355391 |       29965
+ andrewsmith1986  |          5017 |  26.36037472593183 |      132250
+ jigby61          |          4701 |  1.885556264624548 |        8864
+ original-finder  |          4383 |  4.445357061373488 |       19484
+ NinjaDiscoJesus  |          4346 | 3.0460193281178096 |       13238
+ karmasters       |          3987 |  1.038625532982192 |        4141
+ Lots42           |          3800 |  3.477894736842105 |       13216
+ Aspel            |          3062 | 3.0610711952971914 |        9373
+ Bornhuetter      |          2854 |  1.374562018220042 |        3923
+ Simmerian        |          2743 |  6.431644185198688 |       17642
+(10 rows)
+
 ```
 
 ## References
