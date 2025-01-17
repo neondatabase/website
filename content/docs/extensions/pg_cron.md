@@ -5,31 +5,29 @@ enableTableOfContents: true
 updatedOn: '2024-11-01T10:00:00.000Z'
 ---
 
-The `pg_cron` extension provides a simple, cron-based job scheduler for PostgreSQL. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
+The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
 
 <CTA />
 
-This guide provides an introduction to the `pg_cron` extension. You'll learn how to enable the extension, schedule jobs, understand the cron syntax, manage and monitor your scheduled tasks, and be aware of considerations specific to the Neon environment.
+This guide provides an introduction to the `pg_cron` extension. You'll learn how to enable the extension, schedule jobs, understand the cron syntax, manage and monitor your scheduled tasks, and about considerations specific to the Neon environment.
 
-<Admonition type="warning" title="Important consideration for Neon">
+<Admonition type="warning" title="Key details about using pg_cron with Neon">
 Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](https://neon.tech/docs/introduction/scale-to-zero).
 </Admonition>
 
 ## Enable the `pg_cron` extension
 
-`pg_cron` is available only on paid Neon plans. To install `pg_cron`, it must first be enabled by Neon Support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/endpoints#restart-a-compute) to apply the changes.
+`pg_cron` is currently available only on paid Neon plans. To install `pg_cron`, it must first be enabled by Neon Support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/endpoints#restart-a-compute) to apply the changes.
 
-You can then enable the extension by running the following `CREATE EXTENSION` statement in the Neon SQL Editor or from a client such as psql that is connected to Neon.
+You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the psql client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
-
 **Version availability:**
 
-Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## Cron schedule syntax
 
@@ -130,7 +128,7 @@ Here's a breakdown of the command:
 
 ### Running jobs every `n` seconds
 
-`pg_cron` also allows you to schedule a job every `n` seconds, which is not possible with traditional cron jobs. Here `n` can be any value between 1 and 59 inclusive.
+`pg_cron` also lets you to schedule a job every `n` seconds, which is not possible with traditional cron jobs. Here `n` can be any value between 1 and 59 inclusive.
 
 For example, to run a job every 10 seconds, you can use the following command:
 
