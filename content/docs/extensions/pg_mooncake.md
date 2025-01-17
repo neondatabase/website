@@ -87,7 +87,7 @@ SELECT mooncake.create_secret('<name>', 'S3', '<key_id>',
 Set your default bucket:
 
 ```sql
-ALTER DATABASE <database> SET mooncake.default_bucket = 's3://<bucket>';
+SET mooncake.default_bucket = 's3://<bucket>';
 ```
 
 <Admonition type="note">
@@ -118,7 +118,7 @@ You can find a list of data sources [here](https://pgmooncake.com/docs/load-data
 This dataset has 13 million rows and may take a few minutes to load.
 
 ```sql
-INSERT INTO reddit_comments_columnar 
+INSERT INTO reddit_comments
 (SELECT author, body, controversiality, created_utc, link_id, score, subreddit, subreddit_id, id 
 FROM mooncake.read_parquet('hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet') 
 AS (author TEXT, body TEXT, controversiality BIGINT, created_utc BIGINT, link_id TEXT, score BIGINT, subreddit TEXT, subreddit_id TEXT, id TEXT));
