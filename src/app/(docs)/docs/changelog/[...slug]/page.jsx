@@ -4,13 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import {
-  CHANGELOG_BASE_PATH,
-  CHANGELOG_SLUG_REGEX,
-  VERCEL_URL,
-  MAX_TITLE_LENGTH,
-} from 'constants/docs';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX, VERCEL_URL } from 'constants/docs';
 import { getAllChangelogPosts, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 import getExcerpt from 'utils/get-excerpt';
@@ -54,10 +48,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${CHANGELOG_BASE_PATH}${currentSlug}`,
-    imagePath:
-      label.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedLabel}`
-        : DEFAULT_IMAGE_PATH,
+    imagePath: `${VERCEL_URL}/docs/og?title=${encodedLabel}`,
     type: 'article',
   });
 }
