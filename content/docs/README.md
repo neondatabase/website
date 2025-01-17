@@ -292,7 +292,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](images/code-tabs-example.jpg)
 
 </details>
 
@@ -382,7 +382,7 @@ Example:
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](images/admonition-example.jpg)
 
 </details>
 
@@ -399,7 +399,7 @@ Check the example for default data of CTA block
 <details>
 <summary>Example</summary>
 
-![CTA example](cta-example.jpg)
+![CTA example](images/cta-example.jpg)
 
 </details>
 
@@ -427,6 +427,13 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 
 </Steps>
 ```
+
+<details>
+<summary>Example</summary>
+
+![Steps example](images/steps-example.jpg)
+
+</details>
 
 ## Images
 
@@ -515,7 +522,7 @@ Another term for smoke test
 <details>
 <summary>Examples</summary>
 
-![Definition list example](definition-list-example.jpg)
+![Definition list example](images/definition-list-example.jpg)
 
 </details>
 
