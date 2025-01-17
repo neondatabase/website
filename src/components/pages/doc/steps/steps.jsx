@@ -3,32 +3,29 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Steps = ({ children }) => {
-  // Split content into steps by headings
-  const steps = React.Children.toArray(children).reduce(
-    (acc, child) => {
-      // Determine if the child is a heading
-      const isHeading =
-        (typeof child.type === 'string' && ['h2', 'h3', 'h4'].includes(child.type)) || // Native HTML tags
-        (typeof child.type === 'function' &&
-          child.type.displayName &&
-          child.type.displayName.startsWith('AnchorHeading'));
+  // Split content into steps by h2 headings
+  const steps = [];
+  let currentStep = [];
 
-      // Start a new step if the current child is a heading
-      if (acc.currentStep === null || isHeading) {
-        if (acc.currentStep) {
-          acc.steps.push(acc.currentStep);
-        }
-        acc.currentStep = [];
+  React.Children.toArray(children).forEach((child) => {
+    // Determine if the child is a h2 heading
+    const isHeading =
+      (typeof child.type === 'string' && child.type === 'h2') ||
+      (typeof child.type === 'function' && child.type.displayName === 'h2');
+
+    // Start a new step if the current child is a h2 heading
+    if (isHeading) {
+      if (currentStep.length > 0) {
+        steps.push(currentStep);
       }
+      currentStep = [];
+    }
 
-      acc.currentStep.push(child);
-      return acc;
-    },
-    { steps: [], currentStep: null }
-  );
+    currentStep.push(child);
+  });
 
-  if (steps.currentStep) {
-    steps.steps.push(steps.currentStep);
+  if (currentStep.length > 0) {
+    steps.push(currentStep);
   }
 
   return (
@@ -38,7 +35,7 @@ const Steps = ({ children }) => {
         counterReset: 'section',
       }}
     >
-      {steps.steps.map((step, index) => (
+      {steps.map((step, index) => (
         <li
           className={clsx(
             'numbered-step relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',

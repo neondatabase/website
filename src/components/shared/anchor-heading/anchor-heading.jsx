@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
@@ -57,15 +56,10 @@ const AnchorHeading = (Tag) => {
     );
   };
 
-  // Assign a displayName for easier debugging
-  Component.displayName = `AnchorHeading(${Tag})`;
+  // Assign a displayName for parsing headings
+  Component.displayName = Tag;
 
   return Component;
-};
-
-AnchorHeading.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
 };
 
 export default AnchorHeading;
