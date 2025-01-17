@@ -90,29 +90,31 @@ In the future, you will not have to bring your own bucket to use `pg_mooncake` w
 
 ## Create a columnstore table with `USING columnstore`
 
-Run the following SQL statement from a connected SQL client or the Neon SQL Editor to create a columnstore table:
+For example, run the following SQL statement from a connected SQL client or the Neon SQL Editor to create a columnstore table:
 
 ```sql
-CREATE TABLE reddit_comments 
-(created_utc BIGINT, 
-controversiality BIGINT, 
-body TEXT, 
-subreddit_id TEXT, 
-id TEXT, 
-score BIGINT, 
-author TEXT, 
-subreddit TEXT, 
-link_id TEXT) USING columnstore;
+CREATE TABLE reddit_comments(
+    author TEXT,
+    body TEXT,
+    controversiality BIGINT,
+    created_utc BIGINT,
+    link_id TEXT,
+    score BIGINT,
+    subreddit TEXT,
+    subreddit_id TEXT,
+    id TEXT
+) using columnstore;
 ```
 ## Load data
 
 You can find a list of data sources [here](https://pgmooncake.com/docs/load-data).
-
-In this case, we load Hugging Face [dataset](https://huggingface.co/datasets/fddemarco/pushshift-reddit-comments) into the table. 
 This dataset has 13 million rows and may take a few minutes to load.
 
-```sql shouldWrap
-COPY reddit_comments FROM 'hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet';
+```sql
+INSERT INTO reddit_comments_columnar 
+(SELECT author, body, controversiality, created_utc, link_id, score, subreddit, subreddit_id, id 
+FROM mooncake.read_parquet('hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet') 
+AS (author TEXT, body TEXT, controversiality BIGINT, created_utc BIGINT, link_id TEXT, score BIGINT, subreddit TEXT, subreddit_id TEXT, id TEXT));
 ```
 
 ## Query the table
