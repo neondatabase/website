@@ -69,7 +69,7 @@ const TableOfContents = ({ items, isUseCase }) => {
       </h3>
       <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
-          <li className="group/item relative" key={index}>
+          <li className="group relative" key={index}>
             <Item
               index={item.index}
               currentIndex={currentIndex}

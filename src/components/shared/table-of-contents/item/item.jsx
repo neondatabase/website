@@ -69,9 +69,7 @@ const Item = ({
             </span>
             <span
               className={clsx(
-                'absolute left-2 top-[3px] h-full w-px transition-colors duration-200',
-                level === 1 && 'group-last/item:hidden',
-                level === 2 && 'group-last/child:hidden',
+                'absolute left-2 top-[3px] h-full w-px transition-colors duration-200 group-last:hidden',
                 currentAnchor === id || index < currentIndex
                   ? 'bg-gray-new-40 dark:bg-gray-new-60'
                   : 'bg-gray-new-80 dark:bg-gray-new-15'
@@ -91,7 +89,7 @@ const Item = ({
             transition={{ duration: 0.2 }}
           >
             {items.map((item, subIndex) => (
-              <li className="group/child relative" key={subIndex}>
+              <li className="relative" key={subIndex}>
                 <Item
                   index={item.index}
                   currentIndex={currentIndex}
