@@ -92,7 +92,7 @@ First, create a new database called `people` on the `main` branch and add some s
 </TabItem>
 </Tabs>
 
-### Create a development branch
+## Create a development branch
 
 Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
 

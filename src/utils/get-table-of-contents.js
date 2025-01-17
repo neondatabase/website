@@ -12,19 +12,11 @@ const buildNestedToc = (headings, currentLevel) => {
 
   while (headings.length > 0) {
     const currentHeading = headings[0];
-    let depth;
-    let title;
-    let isNumberedStep;
 
-    if (typeof currentHeading === 'string') {
-      [depth, title] = parseMDXHeading(currentHeading);
-      isNumberedStep = false;
-    } else {
-      // Handle object format
-      depth = currentHeading.title.match(/^#+/)?.[0]?.length - 1 || 1;
-      title = currentHeading.title;
-      isNumberedStep = currentHeading.isNumbered;
-    }
+    // Handle object format
+    const { isNumbered } = currentHeading;
+    const depth = currentHeading.title.match(/^#+/)?.[0]?.length - 1 || 1;
+    const title = currentHeading.title.replace(/(#+)\s/, '');
 
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
@@ -33,10 +25,10 @@ const buildNestedToc = (headings, currentLevel) => {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
-        numberedStep: isNumberedStep ? numberedStep + 1 : null,
+        numberedStep: isNumbered ? numberedStep + 1 : null,
       };
 
-      if (isNumberedStep) {
+      if (isNumbered) {
         numberedStep += 1;
       }
 
@@ -83,31 +75,28 @@ const getTableOfContents = (content) => {
 
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
-
-  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
-  const steps = content.match(stepsRegex);
-  let stepHeadings = [];
-
-  if (steps) {
-    stepHeadings = steps
-      .flatMap((step) => step.match(headingRegex))
-      .filter(Boolean)
-      .map((heading) => ({
-        title: heading.replace(/(#+)\s/, ''),
-        isNumbered: true,
-      }));
-  }
-
   const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
-  const headings = contentWithoutCodeBlocks.match(headingRegex) || [];
-  const regularHeadings = headings
-    .filter((heading) => !stepHeadings.some((step) => step.title === heading.replace(/(#+)\s/, '')))
-    .map((item) => ({
-      title: item.replace(/(#+)\s/, ''),
-      isNumbered: false,
-    }));
 
-  const arr = regularHeadings.concat(stepHeadings);
+  // Get all headings first
+  const allHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
+
+  // Find steps sections
+  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
+  const stepsMatches = [...content.matchAll(stepsRegex)];
+
+  // Convert headings to objects while preserving order
+  const arr = allHeadings.map((heading) => {
+    // Check if this heading is inside any Steps section and is h2
+    const isInSteps = stepsMatches.some((match) => {
+      const stepsContent = match[0];
+      return stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading);
+    });
+
+    return {
+      title: heading,
+      isNumbered: isInSteps,
+    };
+  });
 
   return buildNestedToc(arr, 1);
 };
