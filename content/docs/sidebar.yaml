@@ -862,6 +862,8 @@
               slug: extensions/timescaledb
             - title: wal2json
               slug: extensions/wal2json
+            - title: pg_cron
+              slug: extensions/pg_cron
         - title: Functions
           slug: functions/introduction
           items:
