@@ -14,6 +14,7 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
@@ -45,21 +46,17 @@ const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   return acc;
 }, {});
 
-const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
+const getHeadingComponent = (heading, withoutAnchorHeading) => {
   if (withoutAnchorHeading) {
     return heading;
   }
-  if (isPostgres) {
-    return AnchorHeading(heading);
-  }
-
   return AnchorHeading(heading);
 };
 
 const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
-  h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
-  h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
-  h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
+  h2: getHeadingComponent('h2', withoutAnchorHeading),
+  h3: getHeadingComponent('h3', withoutAnchorHeading),
+  h4: getHeadingComponent('h4', withoutAnchorHeading),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -181,6 +178,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   SubscriptionForm,
   InkeepEmbedded,
   Video,
+  Steps,
   ...sharedComponents,
 });
 
