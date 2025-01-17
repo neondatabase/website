@@ -6,16 +6,18 @@ const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
-const buildNestedToc = (headings, currentLevel) => {
+const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
   let numberedStep = 0;
+  let localIndex = currentIndex;
 
   while (headings.length > 0) {
     const currentHeading = headings[0];
 
     // Handle object format
     const { isNumbered } = currentHeading;
-    const depth = currentHeading.title.match(/^#+/)?.[0]?.length - 1 || 1;
+    const depthMatch = currentHeading.title.match(/^#+/);
+    const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
 
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -26,7 +28,10 @@ const buildNestedToc = (headings, currentLevel) => {
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
         numberedStep: isNumbered ? numberedStep + 1 : null,
+        index: localIndex,
       };
+
+      localIndex += 1;
 
       if (isNumbered) {
         numberedStep += 1;
@@ -41,7 +46,8 @@ const buildNestedToc = (headings, currentLevel) => {
             : headings[0].title.match(/^#+/)?.[0]?.length - 1 || 1;
 
         if (nextDepth > currentLevel) {
-          tocItem.items = buildNestedToc(headings, currentLevel + 1);
+          tocItem.items = buildNestedToc(headings, currentLevel + 1, localIndex);
+          localIndex += tocItem.items.length;
         }
       }
 

@@ -3,7 +3,7 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 const linkClassName =
-  'relative py-1.5 flex items-start gap-[11px] text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
+  'py-1.5 flex items-start gap-2.5 text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
 
 const Item = ({
   title,
@@ -19,12 +19,8 @@ const Item = ({
   currentIndex,
 }) => {
   const href = `#${id}`;
-  const shouldRenderSubItems =
-    !!items?.length &&
-    (isUseCase ||
-      ((currentAnchor === id || items.some(({ id }) => currentAnchor === id)) &&
-        isUserScrolling &&
-        level < 2)); // render only 1 level of sub-items
+  const isActive = currentAnchor === id || items?.some(({ id }) => currentAnchor === id);
+  const shouldRenderSubItems = !!items?.length && (isUseCase || (isActive && level < 2));
 
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
@@ -55,12 +51,7 @@ const Item = ({
   return (
     <LazyMotion features={domAnimation}>
       <a
-        className={clsx(linkClassName, {
-          'font-medium text-black-new dark:text-white': currentAnchor === id,
-        })}
-        style={{
-          marginLeft: level === 1 ? '' : `${(level - 1) * 0.5}rem`,
-        }}
+        className={clsx(linkClassName, isActive && 'font-medium text-black-new dark:text-white')}
         href={href}
         onClick={(e) => handleAnchorClick(e, href, id)}
       >
@@ -68,7 +59,7 @@ const Item = ({
           <>
             <span
               className={clsx(
-                'flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-[10px] font-medium leading-none tracking-extra-tight transition-colors duration-200',
+                'z-10 flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-[10px] font-medium leading-none tracking-extra-tight outline outline-[3px] outline-white transition-colors duration-200 dark:outline-black-new',
                 currentAnchor === id || index < currentIndex
                   ? 'bg-gray-new-15 text-white dark:bg-gray-new-94 dark:text-black-new'
                   : 'bg-gray-new-90 text-black-new dark:bg-gray-new-20 dark:text-gray-new-98'
@@ -78,7 +69,7 @@ const Item = ({
             </span>
             <span
               className={clsx(
-                'absolute left-2 top-[25px] h-[calc(100%-22px)] w-px transition-colors duration-200',
+                'absolute left-2 top-[3px] h-full w-px transition-colors duration-200',
                 level === 1 && 'group-last/item:hidden',
                 level === 2 && 'group-last/child:hidden',
                 currentAnchor === id || index < currentIndex
@@ -93,18 +84,18 @@ const Item = ({
       <AnimatePresence initial={false}>
         {shouldRenderSubItems && (
           <m.ul
+            className={clsx(numberedStep ? 'ml-[34px]' : 'ml-2')}
             initial={{ opacity: 0, maxHeight: 0 }}
             animate={{ opacity: 1, maxHeight: 1000 }}
             exit={{ opacity: 0, maxHeight: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {items.map((item, index) => (
-              <li className="group/child" key={index}>
+            {items.map((item, subIndex) => (
+              <li className="group/child relative" key={subIndex}>
                 <Item
-                  index={index}
+                  index={item.index}
                   currentIndex={currentIndex}
                   currentAnchor={currentAnchor}
-                  numberedStep={numberedStep}
                   isUserScrolling={isUserScrolling}
                   setIsUserScrolling={setIsUserScrolling}
                   {...item}
@@ -123,8 +114,9 @@ Item.propTypes = {
   level: PropTypes.number.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
+      index: PropTypes.number.isRequired,
       id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
       level: PropTypes.number.isRequired,
     })
   ),

@@ -47,12 +47,7 @@ const TableOfContents = ({ items, isUseCase }) => {
 
     setCurrentAnchor(currentTitle?.id);
     setCurrentIndex(idx);
-    if (isUserScrolling) {
-      // Open sub-items only if it's user-initiated scrolling
-      setCurrentAnchor(currentTitle?.id);
-      setCurrentIndex(idx);
-    }
-  }, [isUserScrolling]);
+  }, []);
 
   const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
 
@@ -74,9 +69,9 @@ const TableOfContents = ({ items, isUseCase }) => {
       </h3>
       <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
-          <li className="group/item" key={index}>
+          <li className="group/item relative" key={index}>
             <Item
-              index={index}
+              index={item.index}
               currentIndex={currentIndex}
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
@@ -94,6 +89,7 @@ const TableOfContents = ({ items, isUseCase }) => {
 TableOfContents.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      index: PropTypes.number,
       id: PropTypes.string.isRequired,
       level: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
