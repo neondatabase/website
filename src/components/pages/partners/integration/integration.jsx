@@ -11,7 +11,7 @@ const Integration = () => (
   <section className="integration safe-paddings mt-48 2xl:mt-36 lg:mt-28 md:mt-20">
     <Container className="flex flex-col items-center" size="medium">
       <GradientLabel>Features</GradientLabel>
-      <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
+      <h2 className="mt-4 text-center font-title text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
         Why Neon
       </h2>
       <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">

@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-10-30T23:12:55.612Z'
+updatedOn: '2025-01-10T15:44:20.070Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -272,6 +272,8 @@ Explore supported Postgres extensions by category. Also see:
 <a href="https://www.postgresql.org/docs/16/lo.html" description="Provides support for managing large objects (LOBs) in Postgres, including a data type lo and a trigger lo_manage" icon="wrench">lo</a>
 
 <a href="/docs/extensions/neon-utils" description="Provides a function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="wrench">neon_utils</a>
+
+<a href="https://github.com/citusdata/pg_cron" description="Lets you schedule and manage periodic jobs directly in your Postgres database" icon="wrench">pg_cron</a>
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="wrench">pgtap</a>
 

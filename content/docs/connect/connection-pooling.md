@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2024-12-11T21:23:33.083Z'
+updatedOn: '2025-01-09T10:35:15.969Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -27,48 +27,48 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 ## Connection limits without connection pooling
 
-Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **minimum** compute size.
+Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
 
-| Compute Size (CU) | vCPU | RAM    | max_connections |
-| :---------------- | :--- | :----- | :-------------- |
-| 0.25              | 0.25 | 1 GB   | 112             |
-| 0.50              | 0.50 | 2 GB   | 225             |
-| 1                 | 1    | 4 GB   | 450             |
-| 2                 | 2    | 8 GB   | 901             |
-| 3                 | 3    | 12 GB  | 1351            |
-| 4                 | 4    | 16 GB  | 1802            |
-| 5                 | 5    | 20 GB  | 2253            |
-| 6                 | 6    | 24 GB  | 2703            |
-| 7                 | 7    | 28 GB  | 3154            |
-| 8                 | 8    | 32 GB  | 3604            |
-| 9                 | 9    | 36 GB  | 4000            |
-| 10                | 10   | 40 GB  | 4000            |
-| 11                | 11   | 44 GB  | 4000            |
-| 12                | 12   | 48 GB  | 4000            |
-| 13                | 13   | 52 GB  | 4000            |
-| 14                | 14   | 56 GB  | 4000            |
-| 15                | 15   | 60 GB  | 4000            |
-| 16                | 16   | 64 GB  | 4000            |
-| 18                | 18   | 72 GB  | 4000            |
-| 20                | 20   | 80 GB  | 4000            |
-| 22                | 22   | 88 GB  | 4000            |
-| 24                | 24   | 96 GB  | 4000            |
-| 26                | 26   | 104 GB | 4000            |
-| 28                | 28   | 112 GB | 4000            |
-| 30                | 30   | 120 GB | 4000            |
-| 32                | 32   | 128 GB | 4000            |
-| 34                | 34   | 136 GB | 4000            |
-| 36                | 36   | 144 GB | 4000            |
-| 38                | 38   | 152 GB | 4000            |
-| 40                | 40   | 160 GB | 4000            |
-| 42                | 42   | 168 GB | 4000            |
-| 44                | 44   | 176 GB | 4000            |
-| 46                | 46   | 184 GB | 4000            |
-| 48                | 48   | 192 GB | 4000            |
-| 50                | 50   | 200 GB | 4000            |
-| 52                | 52   | 208 GB | 4000            |
-| 54                | 54   | 216 GB | 4000            |
-| 56                | 56   | 224 GB | 4000            |
+| Max. Compute Size (CU) | vCPU | RAM    | max_connections |
+| :--------------------- | :--- | :----- | :-------------- |
+| 0.25                   | 0.25 | 1 GB   | 112             |
+| 0.50                   | 0.50 | 2 GB   | 225             |
+| 1                      | 1    | 4 GB   | 450             |
+| 2                      | 2    | 8 GB   | 901             |
+| 3                      | 3    | 12 GB  | 1351            |
+| 4                      | 4    | 16 GB  | 1802            |
+| 5                      | 5    | 20 GB  | 2253            |
+| 6                      | 6    | 24 GB  | 2703            |
+| 7                      | 7    | 28 GB  | 3154            |
+| 8                      | 8    | 32 GB  | 3604            |
+| 9                      | 9    | 36 GB  | 4000            |
+| 10                     | 10   | 40 GB  | 4000            |
+| 11                     | 11   | 44 GB  | 4000            |
+| 12                     | 12   | 48 GB  | 4000            |
+| 13                     | 13   | 52 GB  | 4000            |
+| 14                     | 14   | 56 GB  | 4000            |
+| 15                     | 15   | 60 GB  | 4000            |
+| 16                     | 16   | 64 GB  | 4000            |
+| 18                     | 18   | 72 GB  | 4000            |
+| 20                     | 20   | 80 GB  | 4000            |
+| 22                     | 22   | 88 GB  | 4000            |
+| 24                     | 24   | 96 GB  | 4000            |
+| 26                     | 26   | 104 GB | 4000            |
+| 28                     | 28   | 112 GB | 4000            |
+| 30                     | 30   | 120 GB | 4000            |
+| 32                     | 32   | 128 GB | 4000            |
+| 34                     | 34   | 136 GB | 4000            |
+| 36                     | 36   | 144 GB | 4000            |
+| 38                     | 38   | 152 GB | 4000            |
+| 40                     | 40   | 160 GB | 4000            |
+| 42                     | 42   | 168 GB | 4000            |
+| 44                     | 44   | 176 GB | 4000            |
+| 46                     | 46   | 184 GB | 4000            |
+| 48                     | 48   | 192 GB | 4000            |
+| 50                     | 50   | 200 GB | 4000            |
+| 52                     | 52   | 208 GB | 4000            |
+| 54                     | 54   | 216 GB | 4000            |
+| 56                     | 56   | 224 GB | 4000            |
 
 The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
@@ -93,8 +93,8 @@ Some applications open numerous connections, with most eventually becoming inact
 
 The use of connection pooling, however, is not a magic bullet: As the name implies, connections to the pooler endpoint together share a pool of connections to the normal Postgres endpoint, so they still consume some connections to the main Postgres instance.
 
-To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [64 connections](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
-At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough minimum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.
+To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up to [`default_pool_size`](#neon-pgbouncer-configuration-settings) to Postgres for each user to each database. For example, if `default_pool_size` is 64, there can be only 64 active connections from role `alex` to the `neondb` database through the pooler. All other connections by `alex` to the `neondb` database will have to wait for one of those 64 active connections to complete their transactions before the next connection's work is started.  
+At the same time, role `dana` will also be able to connect to the `neondb` database through the pooler and have up to 64 concurrent active transactions across 64 connections, assuming the endpoint started with a high enough maximum Neon compute size to have a high enough `max_connections` setting to support those 128 concurrent connections from the two roles.
 
 Similarly, even if role `alex` has 64 concurrently active transactions through the pooler to the `neondb` database, that role can still start up to 64 concurrent transactions in the `alex_db` database (a different database) when connected through the pooler; but again, only if the Postgres `max_connections` limit can support the number of connections managed by the pooler.
 
@@ -116,16 +116,18 @@ Neon's PgBouncer configuration is shown below. The settings are not user-configu
 [pgbouncer]
 pool_mode=transaction
 max_client_conn=10000
-default_pool_size=64
+default_pool_size=0.9 * max_connections
 max_prepared_statements=0
 query_wait_timeout=120
 ```
+
+where `max_connections` is a Postgres setting.
 
 The following list describes each setting. For a full explanation of each parameter, please refer to the official [PgBouncer documentation](https://www.pgbouncer.org/config.html).
 
 - `pool_mode=transaction`: The pooling mode PgBouncer uses, set to `transaction` pooling.
 - `max_client_conn=10000`: Maximum number of client connections allowed.
-- `default_pool_size=64`: Default number of server connections to allow per user/database pair.
+- `default_pool_size`: Default number of server connections to allow per user/database pair.
 - `max_prepared_statements=0`: Maximum number of prepared statements a connection is allowed to have at the same time. `0` means prepared statements are disabled.
 - `query_wait_timeout=120`: Maximum time queries are allowed to spend waiting for execution. Neon uses the default setting of `120` seconds.
 

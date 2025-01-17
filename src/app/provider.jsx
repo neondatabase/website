@@ -17,7 +17,7 @@ const whiteThemePages = [
   '/business-info',
 ];
 
-const themesSupportPages = ['/docs', '/guides', '/templates', '/postgresql'];
+const themesSupportPages = ['/docs', '/guides', '/templates', '/postgresql', '/ai-chat'];
 
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();

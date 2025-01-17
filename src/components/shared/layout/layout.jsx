@@ -20,6 +20,7 @@ const Layout = ({
   showSearchInput = false,
   isDocPage = false,
   isPostgresPage = false,
+  isAiChatPage = false,
   searchIndexName = null,
   customType = null,
   isClient = false,
@@ -38,6 +39,7 @@ const Layout = ({
         showSearchInput={showSearchInput}
         isDocPage={isDocPage}
         isPostgresPage={isPostgresPage}
+        isAiChatPage={isAiChatPage}
         withBorder={headerWithBorder}
         searchIndexName={searchIndexName}
         customType={customType}
@@ -67,6 +69,7 @@ Layout.propTypes = {
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isPostgresPage: PropTypes.bool,
+  isAiChatPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
   searchIndexName: PropTypes.string,
   customType: PropTypes.shape({

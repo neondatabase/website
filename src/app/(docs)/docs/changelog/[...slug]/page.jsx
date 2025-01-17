@@ -4,13 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import {
-  CHANGELOG_BASE_PATH,
-  CHANGELOG_SLUG_REGEX,
-  VERCEL_URL,
-  MAX_TITLE_LENGTH,
-} from 'constants/docs';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX, VERCEL_URL } from 'constants/docs';
 import { getAllChangelogPosts, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 import getExcerpt from 'utils/get-excerpt';
@@ -54,10 +48,7 @@ export async function generateMetadata({ params }) {
     title: `${label} - Neon`,
     description,
     pathname: `${CHANGELOG_BASE_PATH}${currentSlug}`,
-    imagePath:
-      label.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedLabel}`
-        : DEFAULT_IMAGE_PATH,
+    imagePath: `${VERCEL_URL}/docs/og?title=${encodedLabel}`,
     type: 'article',
   });
 }
@@ -101,7 +92,7 @@ const ChangelogPost = async ({ currentSlug }) => {
         />
       )}
 
-      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col 3xl:col-span-10 3xl:col-start-2 3xl:ml-0 2xl:col-span-11 2xl:col-start-1 xl:max-w-[calc(100vw-366px)] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col 3xl:col-span-10 3xl:col-start-2 3xl:ml-0 2xl:col-span-11 2xl:col-start-1 xl:max-w-[calc(100vw-366px)] lg:ml-0 lg:max-w-full lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
         <Hero
           className="flex justify-center lg:pt-16 md:py-10 sm:py-7"
           date={label}

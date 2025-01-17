@@ -53,7 +53,7 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    <Admonition type="note">
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero)) After |
+   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
    | :------- | :-------------- | :------------------------------------------------------- |
    | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                      |
    | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)               |

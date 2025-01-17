@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState, useRef, useEffect } from 'react';
 
+import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import { HOME_MENU_ITEM } from 'constants/docs';
@@ -51,7 +52,14 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   }, result);
 };
 
-const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
+const Sidebar = ({
+  className = null,
+  sidebar,
+  slug,
+  basePath,
+  customType,
+  isPostgresPage = false,
+}) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -83,12 +91,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
         className
       )}
     >
-      <div
-        className={clsx(
-          'sticky top-0 pt-[18px]',
-          'after:pointer-events-none after:absolute after:inset-x-0 after:top-14 after:h-10 after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
-        )}
-      >
+      <div className="sticky top-0 pt-[18px]">
         <div className="flex items-center gap-x-7 pl-[52px] pr-6 xl:pl-8">
           <Logo className="h-7" width={102} height={28} priority isHeader />
           <Link
@@ -98,31 +101,35 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType }) => {
             {customType?.title || 'Docs'}
           </Link>
         </div>
-        <nav
-          className="no-scrollbars z-10 mt-5 h-[calc(100vh-100px)] overflow-y-scroll pt-10"
-          ref={menuWrapperRef}
-        >
-          <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
-            <Menu
-              depth={0}
-              basePath={basePath}
-              slug={slug}
-              items={sidebar}
-              setMenuHeight={setMenuHeight}
-              menuWrapperRef={menuWrapperRef}
-              activeMenuList={activeMenuList}
-              setActiveMenuList={setActiveMenuList}
-              customType={
-                customType
-                  ? {
-                      title: `Back to ${customType.title}`,
-                      link: customType.link,
-                    }
-                  : null
-              }
-            />
+        <div className="mt-[54px] px-[52px] xl:px-8">
+          <InkeepTrigger isPostgresPage={isPostgresPage} />
+          <div
+            className={clsx(
+              'relative',
+              'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
+              'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+            )}
+          >
+            <nav
+              className="no-scrollbars z-10 h-[calc(100vh-166px)] overflow-y-scroll py-8"
+              ref={menuWrapperRef}
+            >
+              <div className="relative w-full" style={{ height: menuHeight }}>
+                <Menu
+                  depth={0}
+                  basePath={basePath}
+                  slug={slug}
+                  items={sidebar}
+                  setMenuHeight={setMenuHeight}
+                  menuWrapperRef={menuWrapperRef}
+                  activeMenuList={activeMenuList}
+                  setActiveMenuList={setActiveMenuList}
+                  customType={customType}
+                />
+              </div>
+            </nav>
           </div>
-        </nav>
+        </div>
       </div>
     </aside>
   );
@@ -137,6 +144,7 @@ Sidebar.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
+  isPostgresPage: PropTypes.bool,
 };
 
 export default Sidebar;

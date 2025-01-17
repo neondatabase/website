@@ -37,7 +37,7 @@ const AnchorHeading = (Tag) => {
       <Tag
         id={id}
         className={clsx(
-          'group relative w-fit scroll-mt-20 font-title font-medium tracking-tighter lg:scroll-mt-5',
+          'group relative w-fit scroll-mt-20 font-semibold tracking-extra-tight lg:scroll-mt-5',
           className
         )}
       >
