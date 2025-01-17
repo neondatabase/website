@@ -232,7 +232,7 @@ const ExtensionRequest = ({
                   if (!isRecognized && email) {
                     window.zaraz.track('identify', { email });
                   }
-                  window.zaraz.track('Extension Requested', selected);
+                  window.zaraz.track('Extension Requested', {"extension_name": selected});
                 }
                 setRequestComplete(true);
               }
