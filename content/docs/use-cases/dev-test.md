@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2024-12-12T19:49:26.798Z'
 ---
 
+![Dev/Test workflow](/docs/use-cases/664.png)
+
 What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its exceptional developer experience. Teams often experience a boost in developer velocity when switching to Neon. In Neon, it takes less time to create and synchronize environments, run tests, and tedious database tasks are suddenly automated—all of which accelerate software lifecycles.
 
 However, not every team is ready for a full database migration. Moving a production database to a new vendor is a significant project that requires careful planning—but even if teams aren't ready to migrate their production databases, they can still get more efficiency by moving their non-production environments to Neon. As a cherry on top, this also significantly saves non-production costs (up to 80%).
