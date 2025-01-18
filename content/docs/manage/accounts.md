@@ -12,7 +12,7 @@ Neon offers two account types for you to choose from:
 
 ## Personal accounts
 
-When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
+When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
 
 You can always access your personal account settings from your **Profile** dropdown.
 

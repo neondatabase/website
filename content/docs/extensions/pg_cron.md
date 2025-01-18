@@ -1,6 +1,7 @@
 ---
 title: The pg_cron extension
 subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-11-01T10:00:00.000Z'
 ---

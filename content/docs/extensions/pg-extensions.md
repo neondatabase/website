@@ -6,11 +6,9 @@ redirectFrom:
 updatedOn: '2025-01-11T12:43:45.592Z'
 ---
 
-Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
+Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported. 
 
-<Admonition type="note" title="Postgres 17 extension support">
-Postgres 17, released in September 2024, currently lacks support for a few extensions. These extensions will become available once maintainers add Postgres 17 compatibility and after Neon completes validation testing. Newly supported extensions are announced in the [Neon Changelog](/docs/changelog), which is published weekly.
-</Admonition>
+Do you need an extension we don’t support yet? [Let us know](#request-extension-support).
 
 <a id="default-extensions/"></a>
 
@@ -119,7 +117,7 @@ ALTER EXTENSION vector UPDATE TO '0.7.0';
 ```
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled Scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
 </Admonition>
 
 ## Extension support notes
@@ -127,7 +125,6 @@ When Neon releases a new extension or new extension version, a compute restart i
 - Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
 - The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
-- The `pg_search` extension is not supported. The extension's storage and change management is built on [Tantivy](https://github.com/quickwit-oss/tantivy), which is currently not supported by Neon.
 
 ## Request extension support
 
