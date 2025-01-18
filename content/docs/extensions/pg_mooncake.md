@@ -1,6 +1,7 @@
 ---
 title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
+tag: new
 enableTableOfContents: true
 updatedOn: '2024-01-13T18:45:00.000Z'
 ---
@@ -49,7 +50,9 @@ In addition, you can:
 3. Exporting Postgres tables to your Lake or Lakehouse
 4. Querying and updating existing Lakehouse tables and Parquet files directly in Postgres
 
-This guide provides a quickstart to the `pg_mooncake` extension. 
+This guide provides a quickstart to the `pg_mooncake` extension.
+
+<Steps>
 
 ## Enable the extension
 
@@ -141,6 +144,8 @@ GROUP BY author
 ORDER BY comment_count DESC
 LIMIT 10;
 ```
+
+</Steps>
 
 ## References
 
