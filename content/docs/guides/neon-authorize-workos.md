@@ -277,7 +277,7 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { withAuth } from '@workos-inc/authkit-nextjs';
+import { useAuth } from '@workos-inc/authkit-nextjs/components';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -287,11 +287,10 @@ const getDb = (token: string) =>
 
 export default function TodoList() {
     const [todos, setTodos] = useState<Array<Todo>>();
-    const auth = withAuth();
+    const { accessToken } = useAuth({ ensureSignedIn: true });
 
     useEffect(() => {
         async function loadTodos() {
-            const { accessToken } = await auth; // [!code highlight]
             if (!accessToken) {
                 return;
             }
@@ -307,7 +306,7 @@ export default function TodoList() {
         }
 
         loadTodos();
-    }, [auth]);
+    }, [accessToken]);
 
     return (
         <ul>
