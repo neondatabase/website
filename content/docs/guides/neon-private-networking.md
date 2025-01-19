@@ -43,12 +43,12 @@ To configure Neon Private Networking, perform the following steps:
     1. For **Type**, select the **Endpoint services that use NLBs and GWLBs** category.
     1. Under **Service settings**, specify the **Service name**. It must be one of the following names, depending on your region:
 
-       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
-       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
-       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
-       - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
-       - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
-       - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
+       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
+       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
+       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+       - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
+       - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
+       - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
     1. Select the VPC where your application is deployed.
@@ -73,23 +73,11 @@ To configure Neon Private Networking, perform the following steps:
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-4.  **Update the connection string**
+4.  **Check connection string**
 
-    To connect to your Neon database using AWS PrivateLink, modify your Neon database connection string to use the private endpoint.
+    The connection string will remain unchanged.
 
-    For example, if your original Neon database connection string is:
-
-    ```
-    postgresql://user:password@ep-testing-bush-12345.us-east-1.aws.neon.tech
-    ```
-
-    Update it to:
-
-    ```
-    postgresql://user:password@ep-testing-bush-12345.vpce.us-east-1.aws.neon.tech
-    ```
-
-    Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
+    You can conduct additional DNS lookup checks on the endpoint to determine if the IP address from your VPC and external sources should differ.
 
 5.  **Restrict public internet access**
 
