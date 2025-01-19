@@ -30,6 +30,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | :-------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
 | [Neon Discord Server](#neon-discord-server) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
 | [Neon AI Chat](#neon-ai-chat) (not an official channel)               |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon GitHub Copilot Extension](#neon-github-copilot-extension) (not an official channel)    |  &check;  | &check;  | &check;  |  &check;   |
 | [Support tickets](#support-tickets)                                   |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)           |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                             |     -     |    -     |    \*    |     \*     |
@@ -62,6 +63,25 @@ Neon AI Chat sources include the Neon Discord Server, the Neon Documentation, th
 <Admonition type="important">
 Neon AI chat is not an official Neon Support channel.
 </Admonition>
+
+### Neon GitHub Copilot Extension
+
+The [Neon Database Copilot Extension](https://github.com/marketplace/neon-database) is available in the GitHub Marketplace. This extension lets you chat with the latest Neon documentation within the context of your repository.
+
+![GitHub Copilot Extension](/docs/relnotes/github_copilot_extension.png)
+
+Get answers to common questions like:
+
+- _How to create a project?_
+- _How can I get started with the Neon API?_
+- _How do I integrate the Neon API into my GitHub repository._
+
+**Setup instructions:**
+
+1. Install the extension
+2. Type `@neondatabase` in the chat to start interacting (participant setup may take a few minutes)
+
+Coming soon, you'll be able to directly interact with Neon endpoints by simply asking questions. Additionally, new tools will enable you to create Neon databases directly from the chat interface.
 
 ### Support tickets
 
