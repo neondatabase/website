@@ -79,7 +79,7 @@ Get answers to common questions like:
 **Setup instructions:**
 
 1. Install the extension
-2. Type `@neondatabase` in the chat to start interacting (participant setup may take a few minutes)
+2. Type `@neondatabase` in the chat to start interacting
 
 ### Support tickets
 
