@@ -17,9 +17,9 @@ To use connection pooling with Neon, use a pooled connection string instead of a
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string for you. You can copy a pooled connection string from the **Dashboard** or manually add the `-pooler` option to the endpoint ID in an existing connection string.
+The **Connection Details** widget on the Neon **Dashboard** provides **Connection pooling** toggle that adds the `-pooler` option to a connection string for you. You can copy a pooled connection string from the **Dashboard** or manually add the `-pooler` option to the endpoint ID in an existing connection string.
 
-![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
+![Connection Details pooled connection string](/docs/connect/connection_details.png)
 
 <Admonition type="info">
 The `-pooler` option routes the connection to a connection pooling port at the Neon Proxy.
