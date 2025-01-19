@@ -81,8 +81,6 @@ Get answers to common questions like:
 1. Install the extension
 2. Type `@neondatabase` in the chat to start interacting (participant setup may take a few minutes)
 
-Coming soon, you'll be able to directly interact with Neon endpoints by simply asking questions. Additionally, new tools will enable you to create Neon databases directly from the chat interface.
-
 ### Support tickets
 
 Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
