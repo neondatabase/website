@@ -1,6 +1,6 @@
 ---
 title: Using Custom JWTs with Neon Authorize
-subtitle: A Step-by-step guide for using custom JWTs with Neon Authorize
+subtitle: A step-by-step guide for using custom JWTs with Neon Authorize
 enableTableOfContents: true
 updatedOn: '2025-01-10T00:00:00.000Z'
 ---
