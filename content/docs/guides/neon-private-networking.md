@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
 tag: beta
-updatedOn: '2024-12-19T23:43:30.029Z'
+updatedOn: '2025-01-20T17:06:10.800Z'
 ---
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
