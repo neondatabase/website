@@ -316,5 +316,4 @@ Depending on your development workflow, you can use branch reset:
 
 Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
 
-
 <NeedHelp/>

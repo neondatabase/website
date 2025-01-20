@@ -6,22 +6,23 @@ enableTableOfContents: true
 updatedOn: '2024-01-13T18:45:00.000Z'
 ---
 
-The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB). 
+The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
 
-Columnstore tables improve analytical queries by storing data vertically, enabling compression and efficient column-specific retrieval with vectorized execution. 
+Columnstore tables improve analytical queries by storing data vertically, enabling compression and efficient column-specific retrieval with vectorized execution.
 
 `pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in an object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
 
-Queries on `pg_mooncake` columnstore tables are executed by DuckDB. 
+Queries on `pg_mooncake` columnstore tables are executed by DuckDB.
 
 <CTA />
 
-You can create and use `pg_mooncake` columnstore tables like regular Postgres heap tables to run: 
+You can create and use `pg_mooncake` columnstore tables like regular Postgres heap tables to run:
 
 - Transactional `INSERT`, `SELECT`, `UPDATE`, `DELETE`, and `COPY` operations
 - Joins with regular Postgres tables
 
 In addition, you can:
+
 - Load Parquet, CSV, and JSON files into columnstore tables
 - Load Hugging Face datasets
 - Run DuckDB specific aggregate functions like `approx_count_distinct`
@@ -78,12 +79,12 @@ Run the commands outlined in the following steps on your Neon database to setup 
 
 <Admonition type="tip">
 If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT` and `SET` statements defined below are generated for you, which you can copy and run.
-</Admonition>  
+</Admonition>
 
 Add your object storage credentials. In this case, S3:
 
 ```sql
-SELECT mooncake.create_secret('<name>', 'S3', '<key_id>', 
+SELECT mooncake.create_secret('<name>', 'S3', '<key_id>',
         '<secret>', '{"REGION": "<s3-region>"}');
 ```
 
@@ -122,8 +123,8 @@ This dataset has 13 million rows and may take a few minutes to load.
 
 ```sql
 INSERT INTO reddit_comments
-(SELECT author, body, controversiality, created_utc, link_id, score, subreddit, subreddit_id, id 
-FROM mooncake.read_parquet('hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet') 
+(SELECT author, body, controversiality, created_utc, link_id, score, subreddit, subreddit_id, id
+FROM mooncake.read_parquet('hf://datasets/fddemarco/pushshift-reddit-comments/data/RC_2012-01.parquet')
 AS (author TEXT, body TEXT, controversiality BIGINT, created_utc BIGINT, link_id TEXT, score BIGINT, subreddit TEXT, subreddit_id TEXT, id TEXT));
 ```
 
@@ -133,7 +134,7 @@ Queries on columnstore tables are executed by DuckDB. For example, this aggregat
 
 ```sql
 -- Top commenters (excluding [deleted] users)
-SELECT 
+SELECT
     author,
     COUNT(*) as comment_count,
     AVG(score) as avg_score,
