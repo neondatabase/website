@@ -33,7 +33,9 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 To configure Neon Private Networking, perform the following steps:
 
-1.  **Create an AWS VPC endpoint**
+<Steps>
+
+##  Create an AWS VPC endpoint
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
@@ -55,7 +57,7 @@ To configure Neon Private Networking, perform the following steps:
     1. Add the availability zones and associated subnets you want to support.
     1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-2.  **Provide the VPC Endpoint ID to Neon**
+##  Provide the VPC Endpoint ID to Neon
 
     Note the **VPC Endpoint ID** and provide it to Neon. Neon will authorize this VPC Endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
 
@@ -63,7 +65,7 @@ To configure Neon Private Networking, perform the following steps:
      Please note that you must provide the **VPC Endpoint ID**, not the VPC ID. This step is specific to the Private Preview. In the final version, the allowed VPC Endpoint will be configured through the Neon Console or Neon CLI without any manual involvement by Neon.
     </Admonition>
 
-3.  **Enable Private DNS**
+##  Enable Private DNS
 
     After Neon authorizes your endpoint (wait for confirmation from Neon), enable private DNS lookup for the endpoint.
 
@@ -73,13 +75,13 @@ To configure Neon Private Networking, perform the following steps:
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-4.  **Check connection string**
+##  Check connection string
 
     The connection string will remain unchanged.
 
     You can conduct additional DNS lookup checks on the endpoint to determine if the IP address from your VPC and external sources should differ.
 
-5.  **Restrict public internet access**
+##  Restrict public internet access
 
     At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
@@ -98,6 +100,8 @@ To configure Neon Private Networking, perform the following steps:
     <Admonition type="note">
      Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version of this feature, there will be a dedicated option in the Neon Console for this purpose.
     </Admonition>
+
+</Steps>
 
 ## Limits
 
