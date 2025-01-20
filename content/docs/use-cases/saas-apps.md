@@ -29,7 +29,7 @@ Neon's Serverless Operating Model
 
 ### Database branching
 
-![Database Branching](/use-cases/branching.jpg?branching)
+![Database Branching](/docs/use-cases/branching.jpg)
 
 A branch in Neon is a copy-on-write clone of your database, including both schema and data. Branches function like Git branches, enabling development, testing, and preview environments.
 
@@ -56,7 +56,7 @@ Enhance testing and CI/CD
 
 ### Autoscaling
 
-![Neon Autoscaling](/use-cases/autoscaling.jpg)
+![Neon Autoscaling](/docs/use-cases/autoscaling.jpg)
 
 Neon's autoscaling dynamically adjusts compute resources based on current load, removing the need for manual intervention.
 
