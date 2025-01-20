@@ -3,12 +3,13 @@ title: Neon Slack App
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
 ---
+
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
 
-<img 
-  src="/docs/manage/slack_app_overview.png" 
-  alt="Neon Slack App showing authentication and usage commands in action"
-  style={{ display: "block", margin: "2em auto", width: "80%" }}
+<img
+src="/docs/manage/slack_app_overview.png"
+alt="Neon Slack App showing authentication and usage commands in action"
+style={{ display: "block", margin: "2em auto", width: "80%" }}
 />
 
 ## Setup
@@ -38,20 +39,20 @@ Once authenticated, you're ready to use all available commands.
 
 ## Available commands
 
-| **Command**                 | **Description**                                                |
-|-----------------------------|---------------------------------------------------------------|
-| `/neon auth`                | Log in to your Neon account                                   |
-| `/neon projects`            | List all your accessible projects                             |
-| `/neon usage`               | View your overall resource usage (compute, storage, transfer)  |
-| `/neon help`                | Show all available commands                                   |
-| `/neon status`              | Check Neon's system status                                   |
-| `/neon feedback`            | Share your thoughts to improve the Neon Slack App             |
-| `/neon projects usage`      | View resource usage for a specific project                    |
-| `/neon projects shared`     | See projects others have shared with you                      |
-| `/neon set org`             | Set which organization's data you want to view in subsequent commands |
-| `/neon find org`        | Display which organization is currently set as your active context |
-| `/neon clear org`      | Reset your context back to your personal account view   |
-| `/neon invite user`         | Invite a user to your organization.                           |
+| **Command**             | **Description**                                                       |
+| ----------------------- | --------------------------------------------------------------------- |
+| `/neon auth`            | Log in to your Neon account                                           |
+| `/neon projects`        | List all your accessible projects                                     |
+| `/neon usage`           | View your overall resource usage (compute, storage, transfer)         |
+| `/neon help`            | Show all available commands                                           |
+| `/neon status`          | Check Neon's system status                                            |
+| `/neon feedback`        | Share your thoughts to improve the Neon Slack App                     |
+| `/neon projects usage`  | View resource usage for a specific project                            |
+| `/neon projects shared` | See projects others have shared with you                              |
+| `/neon set org`         | Set which organization's data you want to view in subsequent commands |
+| `/neon find org`        | Display which organization is currently set as your active context    |
+| `/neon clear org`       | Reset your context back to your personal account view                 |
+| `/neon invite user`     | Invite a user to your organization.                                   |
 
 ## Example workflows
 
