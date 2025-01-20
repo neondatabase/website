@@ -17,6 +17,7 @@ A few important points to keep in mind:
 - The billing plan of the organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Launch plan organization will result in an error.
 - If any organization members were already collaborators on the projects being transferred, we'll remove their collaborator access since they'll get full access as org members anyway.
 - Transferring projects between Organizations is currently not supported. You can only transfer projects from a personal Neon account to an Organization. If you need to move projects between Organizations, please contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
+- Project transfers are not yet supported to or from Vercel-managed orgs.
 
 ## Transfer from the Neon Console
 
