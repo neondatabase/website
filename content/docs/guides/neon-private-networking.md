@@ -75,10 +75,10 @@ To configure Neon Private Networking, perform the following steps:
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-##  Check your database connection string
+## Check your database connection string
 
-    Your Neon database connection string does not change when using Private Networking. 
-    
+    Your Neon database connection string does not change when using Private Networking.
+
     To verify that your connection is working correctly, you can perform a DNS lookup on your Neon endpoint hostname from within your AWS VPC. It should resolve to the private IP address of the VPC endpoint.
 
 ## Restrict public internet access
