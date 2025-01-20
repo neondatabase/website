@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-12-05T09:28:49.009Z'
+updatedOn: '2025-01-20T13:01:32.029Z'
 ---
 
 <InfoBlock>
@@ -315,6 +315,5 @@ Depending on your development workflow, you can use branch reset:
 </Steps>
 
 Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
-
 
 <NeedHelp/>

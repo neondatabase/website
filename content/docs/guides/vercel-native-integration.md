@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-11T21:23:33.087Z'
+updatedOn: '2025-01-20T13:01:32.030Z'
 ---
 
 <InfoBlock>
@@ -54,11 +54,11 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
    | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
-   | :------- | :-------------- | :------------------------------------------------------- |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                      |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)               |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                |
-   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)                |
+   | :------- | :-------------- | :------------------------------------------------------ |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                     |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)              |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)               |
+   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)               |
 
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
