@@ -238,7 +238,7 @@ This error page in the Neon Console is most often the result of attempting to ac
 
 This error occurs when a session remains idle within an open transaction for longer than the specified timeout period. By default, the `idle_in_transaction_session_timeout` setting is set to `5min` (300,000 milliseconds). This timeout helps prevent idle sessions from holding locks or contributing to table bloat.
 
-If you encounter this error, you can adjust the `idle_in_transaction_session_timeout` setting to a higher value or disable it entirely by setting it to `0`). Below are ways to change this setting:
+If you encounter this error, you can adjust the `idle_in_transaction_session_timeout` setting to a higher value or disable it entirely by setting it to `0`. Below are ways to change this setting:
 
 1. Change at the session level: `SET idle_in_transaction_session_timeout = 0;`
 
