@@ -175,6 +175,7 @@ const MobileMenu = ({
   isDarkTheme,
   showSearchInput = false,
   isDocPage = false,
+  docPageType = null,
   searchIndexName = null,
 }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
@@ -184,7 +185,7 @@ const MobileMenu = ({
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
         {showSearchInput &&
           (isDocPage ? (
-            <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />
+            <InkeepTrigger className="mobile-search" docPageType={docPageType} />
           ) : (
             <AlgoliaSearch
               className="mobile-search"
@@ -259,6 +260,7 @@ MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
   showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  docPageType: PropTypes.string,
   searchIndexName: PropTypes.string,
 };
 
