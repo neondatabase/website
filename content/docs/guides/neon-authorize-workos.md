@@ -1,8 +1,9 @@
 ---
 title: Secure your data with WorkOS and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using WorkOS and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using WorkOS and Neon
+  Authorize
 enableTableOfContents: true
-updatedOn: '2025-01-02T00:00:00.000Z'
+updatedOn: '2025-01-21T01:45:23.283Z'
 ---
 
 <InfoBlock>
