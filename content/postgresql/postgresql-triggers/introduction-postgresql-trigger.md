@@ -39,7 +39,7 @@ You can specify whether the trigger is invoked before or after an event. If the 
 
 ## When to use triggers
 
-Triggers are useful in case the database is accessed by various applications, and you want to keep the cross\-functionality within the database that runs automatically whenever the data of the table is modified. For example, if you want to keep the history of data without requiring the application to have logic to check for every event such as `INSERT` or `UDPATE`.
+Triggers are useful in case the database is accessed by various applications, and you want to keep the cross\-functionality within the database that runs automatically whenever the data of the table is modified. For example, if you want to keep the history of data without requiring the application to have logic to check for every event such as `INSERT` or `UPDATE`.
 
 Also, you can use triggers to maintain complex data integrity rules which cannot implement elsewhere except at the database level. For example, when a new row is added into the `customer` table, other rows must be also created in tables of banks and credits.
 
