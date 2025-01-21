@@ -38,7 +38,7 @@ const BlogPage = async () => {
 
   return (
     <>
-      <h1 className="sr-only">Blog</h1>
+      <h2 className="sr-only">Blog</h2>
       <FeaturedPostsList posts={featuredPosts} />
       <PostsList title="Workflows" posts={workflowsFeaturedPosts} alignment="right" />
       <PostsList title="Community" posts={communityFeaturedPosts} alignment="left" />

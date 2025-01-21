@@ -24,7 +24,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
 
   return (
     <>
-      <h1 className="sr-only">{generateBlogTitle(category)}</h1>
+      <h2 className="sr-only">{generateBlogTitle(category)}</h2>
       <div className="dark grid grid-cols-3 gap-x-7 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-10 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
         {category.slug === 'all-posts' ? (
           <LoadMorePosts defaultCountPosts={13} countToAdd={12}>
