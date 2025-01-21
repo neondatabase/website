@@ -12,10 +12,22 @@ const baseSettings = {
   customCardSettings: [
     {
       filters: {
-        UrlMatch: {
-          ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.tech/docs',
-        },
+        AND: [
+          {
+            UrlMatch: {
+              ruleType: 'PartialUrl',
+              partialUrl: 'https://neon.tech/docs',
+            },
+          },
+          {
+            NOT: {
+              UrlMatch: {
+                ruleType: 'PartialUrl',
+                partialUrl: 'https://neon.tech/docs/changelog',
+              },
+            },
+          },
+        ],
       },
       searchTabLabel: 'Neon Docs',
     },
