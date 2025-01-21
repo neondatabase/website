@@ -8,15 +8,7 @@ redirectFrom:
 updatedOn: '2024-12-13T21:17:10.767Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [plan limits](/docs/introduction/plans) define how many projects you can create.
-
-Learn more about projects and how to manage them in these sections:
-
-- [Default resources](#default-resources)
-- [Project Settings](#about-the-settings-page)
-- [Basic actions](#basic-actions)
-- [Advanced settings](#advanced-settings)
-- [Manage projects from the API](#manage-projects-with-the-neon-api)
+With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many branches, databases, and roles as your application or workflow needs. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and resource limits within those projects.
 
 ## Default resources
 
@@ -24,139 +16,71 @@ When you add a new project, Neon creates the following resources by default:
 
 - A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A Postgres database that resides on the project's default branch. If you ddid not specify your own database name when creating the project, the database created is named `neondb`.
+- A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
 
-## About the Settings page
+## Create a project
 
-Once you open a project, you can use the **Settings** page to manage that particular project and configure any defaults.
-
-![Project Settings page](/docs/manage/settings_page.png)
-
-You can tab between these sections:
-
-- **General** &#8212; Change the name of your project or copy the project ID.
-- **Compute** &#8212; Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
-- **Sharing** &#8212; Let other users access your project's databases.
-- **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
-
-## Basic actions
-
-Here are some basic actions you can take to add or manage projects:
-
-- [Create a project](#create-a-project)
-- [View projects](#view-projects)
-- [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
-- [Delete a project](#delete-a-project)
-- [Invite collaborators to a project](#invite-collaborators-to-a-project)
-
-### Create a project
-
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up).
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started-with-neon/signing-up).
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
+3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
    - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
    - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
 
-4. Optionally, select **More options** to specify a name for your default branch. The default name is `main`.
-5. Click **Create Project**.
+4. Click **Create Project**.
 
-After creating a project, you are presented with a dialog that provides your connection details for your database. The connection details include your password.
+After creating a project, you are directed to the Neon Quickstart.
 
 <Admonition type="tip">
-Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken straight to the **Create project** page where you can create your new project.
+Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
-### View projects
+## View projects
 
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select **Home** or the Neon logo at the top left of the Console.
+1. From the breadcrumb navigation menu at the top-left of the console, select your personal or organization account.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
-### Change the name or copy the ID of your project
+## Project settings
 
-You are permitted to change the name of your project at any point. The project ID is permanent.
+Once you open a project, you can use the **Settings** page to manage your project and configure any defaults.
 
-To edit a Neon project:
+![Project Settings page](/docs/manage/settings_page.png)
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select the project that you want to edit.
-3. Select **Settings**.
-4. Select **General**.
-5. Make your changes and click **Save**.
+The **Settings** page includes these sub-pages:
 
-### Delete a project
+- **General** — Change the name of your project or copy the project ID.
+- **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
+- **Storage** — Choose how long Neon maintains a history of changes for all branches.
+- **Collaborators** — Let other users access your project's databases.
+- **Network Security** — Configure Neon's IP and Private Networking features for secure access.
+- **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
+- **Transfer** — Transfer your project from a personal account to a Neon organization you are a member of.
+- **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
-Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+### General project settings
 
-To delete a project:
+On the **General** page, you are permitted to change the name of your project or copy the project ID. The project ID is permanent and cannot be changed.
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select the project that you want to delete.
-3. Select **Project settings**.
-4. Select **Delete**.
-5. Click **Delete project.**
-6. On the confirmation dialog, click **Delete**.
+### Change your project's default compute settings
 
-<Admonition type="important">
-If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
-</Admonition>
-
-### Invite collaborators to a project
-
-Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
-
-<Admonition type="note">
-Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
-</Admonition>
-
-To invite collaborators to a Neon project:
-
-1. In the Neon Console, select a project.
-1. Select **Project settings**.
-1. Select **Collaborators**.
-1. Select **Invite** and enter the email address of the account you want to collaborate with.
-1. Click **Invite**.
-
-The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project, with the exception of privileges required to delete the project. This account can also invite other Neon users to the project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page under **Shared with you**.
-
-The costs associated with projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
-
-For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
-
-## Advanced settings
-
-From the **Project settings** page, you can also set defaults or apply bulk changes across your Neon objects:
-
-- [Reset default compute size](#reset-the-default-compute-size)
-- [Configure history retention range](#configure-history-retention)
-- [Enable logical replication](#enable-logical-replication)
-- [Configure IP Allow](#configure-ip-allow)
-
-### Reset the default compute size
+You can change your project's default compute settings on the **Compute** page.
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
 
-By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create read replica computes, where each replica requires less compute per branch.
-
-To reset the default compute size, go to **Settings** > **Compute**.
+By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to configure this default.
 
 Neon supports fixed-size and autoscaling compute configurations.
 
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
-
-_Example: default minimum and maximum autoscale settings_
-
-![Default autoscaling min and max](/docs/manage/default_autoscale.png)
 
 ### Configure history retention
 
@@ -180,31 +104,31 @@ To configure the history retention period for a project:
 
 For more information about available plan limits, see [Neon plans](/docs/introduction/plans).
 
-## Enable logical replication
-
-Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
-
-<Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+<Admonition type="note">
+The Storage page also outlines Neon **Archive storage**** policy, if applicable to your Neon plan. For more information on this topic, see [Branch archiving](/docs/guides/branch-archiving).
 </Admonition>
 
-To enable logical replication in Neon:
+### Invite collaborators to a project
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
-4. Click **Enable** to enable logical replication.
+Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
 
-You can verify that logical replication is enabled by running the following query:
+<Admonition type="note">
+Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+</Admonition>
 
-```sql
-SHOW wal_level;
-wal_level
------------
-logical
-```
+To invite collaborators to a Neon project:
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
+1. In the Neon Console, select a project.
+1. Select **Project settings**.
+1. Select **Collaborators**.
+1. Select **Invite** and enter the email address of the account you want to collaborate with.
+1. Click **Invite**.
+
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project, with the exception of privileges required to delete the project. This account can also invite other Neon users to the project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page under **Shared with you**.
+
+The costs associated with projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+
+For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
 ### Configure IP Allow
 
@@ -394,6 +318,49 @@ curl -X PATCH \
 </TabItem>
 
 </Tabs>
+
+### Enable logical replication
+
+Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+
+<Admonition type="important">
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+</Admonition>
+
+To enable logical replication in Neon:
+
+1. Select your project in the Neon Console.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
+
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+wal_level
+-----------
+logical
+```
+
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
+
+### Delete a project
+
+Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+
+To delete a project:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select the project that you want to delete.
+3. Select **Project settings**.
+4. Select **Delete**.
+5. Click **Delete project.**
+6. On the confirmation dialog, click **Delete**.
+
+<Admonition type="important">
+If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+</Admonition>
 
 ## Manage projects with the Neon API
 
