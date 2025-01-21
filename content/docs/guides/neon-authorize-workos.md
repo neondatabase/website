@@ -224,7 +224,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from WorkOS, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from WorkOS, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from the backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx", "client-component.tsx" ,".env"]}>
 
