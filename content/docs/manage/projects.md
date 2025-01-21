@@ -71,7 +71,7 @@ On the **General** page, you are permitted to change the name of your project or
 
 ### Change your project's default compute settings
 
-You can change your project's default compute settings on the **Compute** page. 
+You can change your project's default compute settings on the **Compute** page.
 
 _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
 
