@@ -3,7 +3,7 @@ title: Neon for SaaS apps
 subtitle: Build SaaS apps faster on Neon with autoscaling, database branching, and the
   serverless operating model
 enableTableOfContents: true
-updatedOn: '2024-12-12T20:55:53.201Z'
+updatedOn: '2025-01-22T08:45:40.806Z'
 ---
 
 Teams are accelerating development workflows and reducing operational overhead with Neon’s database branching, autoscaling, and serverless operating model. Learn how you can do the same.
