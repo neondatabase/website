@@ -225,6 +225,10 @@ neonctl auth
 
 The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
 
+<Admonition type="note">
+If you use Neon through the [Native Integration on Vercel](/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+</Admonition>
+
 ### API key
 
 To authenticate with a Neon API key, you can specify the `--api-key` option when running a Neon CLI command. For example, the following `neon projects list` command authenticates to Neon using the `--api-key` option:

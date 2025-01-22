@@ -26,7 +26,7 @@ The command launches a browser window where you can authorize the Neon CLI to ac
 ```
 
 <Admonition type="note">
-If you use Neon through the Postgres Native Integration on Vercel, you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+If you use Neon through the [Native Integration on Vercel](/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
 </Admonition>
 
 An alternative to authenticating using `neon auth` is to provide an API key when running a CLI command. You can do this using the global `--api-key` option or by setting the `NEON_API_KEY` variable. See [Global options](/docs/reference/neon-cli#global-options) for instructions.
