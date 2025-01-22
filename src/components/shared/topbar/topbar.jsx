@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Switch from AWS RDS to Neon for simplified environment management, seamless scaling, and reduced maintenance — Compare both tools
+      Switch from AWS RDS to Neon for simplified environment management, seamless scaling, and reduced maintenance
     </span>
     <ChevronIcon
       className={clsx(
