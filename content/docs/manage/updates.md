@@ -34,3 +34,4 @@ You can manage your project's update schedule in the settings:
 2. Select **Settings** > **Updates**.
 3. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 
+<NeedHelp/>
