@@ -870,6 +870,9 @@
             - title: pg_cron
               slug: extensions/pg_cron
               tag: new
+            - title: PostgreSQL Anonymizer
+              slug: extensions/postgresql-anonymizer
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:

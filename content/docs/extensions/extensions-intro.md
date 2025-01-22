@@ -99,6 +99,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/current/xml2.html" description="Enables XPath queries and XSLT functionality directly within Postgres, enabling XML data processing" icon="data">xml2</a>
 
+<a href="/docs/extensions/postgresql-anonymizer" description="Anonymize data in Postgres using the PostgreSQL Anonymizer extension" icon="data">postgresql-anonymizer</a>
+
 </DetailIconCards>
 
 ## Debugging
