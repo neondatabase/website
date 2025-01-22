@@ -111,7 +111,7 @@ The Storage page also outlines Neon **Archive storage**** policy, if applicable 
 
 ### Schedule updates for your project
 
-To keep your Postgres instances up to date, Neon applies updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart and typically occur weekly for active computes or those used within the last 30 days. 
+To keep your Postgres instances up to date, Neon applies updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart and typically occur weekly for active computes or those used within the last 30 days.
 
 On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
 
