@@ -159,6 +159,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="table">pg_prewarm</a>
 
+<a href="https://github.com/reorg/pg_repack" description="Lets you remove bloat from tables and indexes, and optionally restore the physical order of clustered indexes" icon="table">pg_repack</a>
+
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets" icon="table">pg_roaringbitmap</a>
 
 <a href="https://github.com/postgrespro/rum" description="Provides an access method to work with a RUM index, designed to speed up full-text searches" icon="table">rum</a>
