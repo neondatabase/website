@@ -9,7 +9,8 @@ Explore supported Postgres extensions by category. Also see:
 - [List view of supported extensions and versions](/docs/extensions/pg-extensions)
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
-- [Request extension support](/docs/extensions/pg-extensions#request-extension-support)
+
+Do you need an extension we don’t support yet? [Let us know](/docs/extensions/pg-extensions#request-extension-support).
 
 ## AI / Machine Learning
 
