@@ -2,31 +2,37 @@
 
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
-import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
-
-import InkeepAIButton from '../inkeep-ai-button';
-import InkeepSearch from '../inkeep-search';
+import InkeepSearch from 'components/shared/inkeep-search';
+import LINKS from 'constants/links';
+import { baseSettings } from 'lib/inkeep-settings';
 
 const InkeepCustomTrigger = dynamic(
   () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
   { ssr: false }
 );
 
-const InkeepTrigger = ({
-  className = null,
-  isNotFoundPage = false,
-  isDarkTheme = false,
-  topOffset,
-  showAIButton = false,
-  isPostgresPage = false,
-}) => {
+const tabsOrder = {
+  default: ['Neon Docs', 'PostgreSQL Tutorial', 'Changelog', 'All'],
+  postgres: ['PostgreSQL Tutorial', 'Neon Docs', 'Changelog', 'All'],
+  changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'All'],
+};
+
+const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-  const [defaultModalView, setDefaultModalView] = useState('SEARCH');
+  const pathname = usePathname();
+  const [pageType, setPageType] = useState(docPageType);
+
+  useEffect(() => {
+    if (pathname === LINKS.changelog) {
+      setPageType('changelog');
+    }
+  }, [pathname]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -34,9 +40,6 @@ const InkeepTrigger = ({
 
   let themeMode;
   switch (true) {
-    case isDarkTheme:
-      themeMode = 'dark';
-      break;
     case theme === 'system':
       themeMode = systemTheme;
       break;
@@ -61,40 +64,35 @@ const InkeepTrigger = ({
   const inkeepCustomTriggerProps = {
     isOpen,
     onClose: handleClose,
-    stylesheetUrls: ['/inkeep/css/inkeep-chat.css'],
     baseSettings: {
       ...baseSettings,
       colorMode: {
         forcedColorMode: themeMode,
       },
+      theme: {
+        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
+      },
+      optOutFunctionalCookies: true,
     },
     modalSettings: {
-      defaultView: defaultModalView,
-      askAILabel: 'Ask Neon AI',
+      defaultView: 'SEARCH',
+      forceInitialDefaultView: true,
+      isModeSwitchingEnabled: false,
     },
     searchSettings: {
       tabSettings: {
-        tabOrderByLabel: isPostgresPage
-          ? ['PostgreSQL Tutorial', 'Neon Docs', 'All']
-          : ['Neon Docs', 'PostgreSQL Tutorial', 'All'],
+        tabOrderByLabel: pageType ? tabsOrder[pageType] : tabsOrder.default,
       },
     },
-    aiChatSettings,
-  };
-
-  const handleClick = (type) => {
-    setDefaultModalView(type);
-    setIsOpen(!isOpen);
   };
 
   return (
     <>
       <InkeepSearch
         className={clsx('lg:w-auto', className)}
-        handleClick={handleClick}
+        handleClick={() => setIsOpen(!isOpen)}
         isNotFoundPage={isNotFoundPage}
       />
-      {showAIButton && <InkeepAIButton handleClick={handleClick} topOffset={topOffset} />}
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );
@@ -103,10 +101,8 @@ const InkeepTrigger = ({
 InkeepTrigger.propTypes = {
   className: PropTypes.string,
   topOffset: PropTypes.number,
-  showAIButton: PropTypes.bool,
   isNotFoundPage: PropTypes.bool,
-  isDarkTheme: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
+  docPageType: PropTypes.string,
 };
 
 export default InkeepTrigger;

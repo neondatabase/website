@@ -12,7 +12,7 @@ Neon offers two account types for you to choose from:
 
 ## Personal accounts
 
-When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
+When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
 
 You can always access your personal account settings from your **Profile** dropdown.
 
@@ -41,7 +41,7 @@ Easily switch between your personal account and any organization you are a Membe
 
 ## Deleting your account
 
-After deleting your account, it is suspended for 180 days; if you log back within this period your account will be reactivated. After 180 days, your account and related information is permanently purged and cannot be recovered.
+After deleting your account, you'll have a brief window to reactivate it if you change your mind. Just log back in to restore your account. Once this window closes, however, your account and related information will be permanently purged and cannot be recovered.
 
 Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
 

@@ -1,0 +1,55 @@
+.ikp-ai-chat-footer__footer {
+  align-items: center;
+}
+
+.ikp-tagline {
+  align-items: center;
+  position: relative;
+}
+
+.ikp-tagline > div {
+  display: none;
+}
+
+.ikp-tagline > a > div:before {
+  content: 'Powered by';
+  font-weight: normal;
+}
+
+.ikp-tagline:after {
+  content: '';
+  margin-left: 1.5rem;
+  width: 64px;
+  height: 18px;
+  background: url('/inkeep/images/neon-logo.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+}
+
+.ikp-tagline:before {
+  content: '&';
+  position: absolute;
+  right: 64px;
+  color: #889096;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+[data-theme='dark'] {
+  .ikp-tagline:before {
+    color: #ffffff7a;
+  }
+
+  .ikp-tagline:after {
+    background: url('/inkeep/images/neon-white-logo.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(1);
+    opacity: 0.48;
+  }
+}

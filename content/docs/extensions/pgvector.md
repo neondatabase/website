@@ -2,6 +2,8 @@
 title: The pgvector extension
 subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/pg_embedding
 updatedOn: '2024-12-11T21:23:33.085Z'
 ---
 

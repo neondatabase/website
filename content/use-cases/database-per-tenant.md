@@ -298,3 +298,4 @@ Each Postgres instance on Neon supports the following features:
 This architecture allows you to manage thousands of Postgres instances with minimal effort and costs, making it ideal for SaaS platforms, developer tools, and other applications requiring strict data isolation and compliance.
 
 If you're interested in learning more about how Neon can help you manage thousands of Postgres databases, feel free to reach out on the [Neon Discord](https://neon.tech/discord).
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />

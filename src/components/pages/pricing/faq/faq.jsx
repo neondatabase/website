@@ -56,7 +56,7 @@ const items = [
   },
   {
     question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process, waiving any migration-related fees to ensure a smooth transition. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
   },
 ];
 

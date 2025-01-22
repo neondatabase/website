@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-11T21:23:33.087Z'
+updatedOn: '2025-01-20T20:22:35.264Z'
 ---
 
 <InfoBlock>
@@ -53,12 +53,12 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    <Admonition type="note">
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero)) After |
-   | :------- | :-------------- | :------------------------------------------------------- |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                      |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)               |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                |
-   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)                |
+   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
+   | :------- | :-------------- | :------------------------------------------------------ |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                     |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)              |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)               |
+   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)               |
 
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
@@ -104,7 +104,7 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
-  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
+  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported to or from a Neon organization created by the native integration.
   - [Project collaborators](/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2024-12-13T20:52:57.589Z'
+updatedOn: '2025-01-06T23:37:50.191Z'
 ---
 
 ## access token
@@ -261,7 +261,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 80% of your compute's RAM.
 
 ### logical data size
 
@@ -367,7 +367,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
@@ -477,7 +477,7 @@ A cloud-based development model that enables developing and running applications
 
 ## shared buffers
 
-A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` setting is always 128 MB, regardless of compute size. The LFC extends cache memory up to 80% of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 80% of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
 
 ## SNI
 
@@ -537,7 +537,7 @@ An unpooled connection string connects to your Neon database directly. It does n
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
-You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Pooled connection** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Time Travel
 
