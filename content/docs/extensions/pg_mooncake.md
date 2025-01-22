@@ -153,4 +153,4 @@ LIMIT 10;
 - [Repository](https://github.com/Mooncake-Labs/pg_mooncake)
 - [Documentation](https://pgmooncake.com/docs)
 - [Architecture](https://www.mooncake.dev/blog/how-we-built-pgmooncake)
-- [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048) 
+- [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048)
