@@ -59,6 +59,7 @@ The **Settings** page includes these sub-pages:
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
 - **Storage** — Choose how long Neon maintains a history of changes for all branches.
+- **Updates** — Schedule a time for Postgres and Neon updates
 - **Collaborators** — Let other users access your project's databases.
 - **Network Security** — Configure Neon's IP and Private Networking features for secure access.
 - **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
@@ -107,6 +108,19 @@ For more information about available plan limits, see [Neon plans](/docs/introdu
 <Admonition type="note">
 The Storage page also outlines Neon **Archive storage**** policy, if applicable to your Neon plan. For more information on this topic, see [Branch archiving](/docs/guides/branch-archiving).
 </Admonition>
+
+### Schedule updates for your project
+
+To keep your Postgres instances up to date, Neon applies updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart and typically occur weekly for active computes or those used within the last 30 days. 
+
+On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
+
+To set your updates schedule:
+
+1. Go to **Settings** > **Updates**.
+1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
+
+For more information, see [Updates](/docs/manage/updates).
 
 ### Invite collaborators to a project
 

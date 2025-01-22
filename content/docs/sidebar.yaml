@@ -355,6 +355,10 @@
           items:
             - title: Backups
               slug: manage/backups
+        - section: Updates
+          items:
+            - title: Updates
+              slug: manage/updates
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: docs
