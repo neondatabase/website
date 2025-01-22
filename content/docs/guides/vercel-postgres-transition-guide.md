@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-10T19:39:03.481Z'
+updatedOn: '2025-01-22T18:43:21.518Z'
 ---
 
 <Admonition type="warning">
