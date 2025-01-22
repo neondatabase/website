@@ -3,8 +3,6 @@ title: Neon documentation
 updatedOn: '2024-11-28T11:50:49.805Z'
 ---
 
-<ComponentWithProps title="The pgvector extension" param1="Postgres" param2="pgvector extension" param3="performing vector search" />
-
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
 
 <CTA title="Did you know?" description="Neon's database branching can help you integrate Postgres into your development workflow. Branch your data like code. <a href='/docs/get-started-with-neon/workflow-primer'>Read our primer</a> to learn&nbsp;how." isIntro></CTA>

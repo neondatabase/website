@@ -422,7 +422,7 @@ You can pass props to the shared component:
 <ComponentWithProps text="The pgvector extension" />
 ```
 
-component-with-props.md
+`component-with-props.md`
 
 ```md
 <Admonition type="note" title="Test component with props">
