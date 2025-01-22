@@ -27,7 +27,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
-<a href="https://github.com/Mooncake-Labs/pg_mooncake" description="An experimental Postgres extension that adds native columnstore tables with DuckDB execution" icon="a-chart">pg_mooncake</a>
+<a href="/docs/extensions/pg_mooncake" description="Adds columnstore tables and DuckDB execution for fast analytics in Postgres." icon="a-chart">pg_mooncake</a>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="a-chart">hll</a>
 
@@ -273,7 +273,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/neon-utils" description="Provides a function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="wrench">neon_utils</a>
 
-<a href="https://github.com/citusdata/pg_cron" description="Lets you schedule and manage periodic jobs directly in your Postgres database" icon="wrench">pg_cron</a>
+<a href="/docs/extensions/pg_cron" description="Lets you schedule and manage periodic jobs directly in your Postgres database" icon="wrench">pg_cron</a>
 
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="wrench">pgtap</a>
 

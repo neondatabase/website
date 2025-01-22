@@ -292,7 +292,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](images/code-tabs-example.jpg)
 
 </details>
 
@@ -382,7 +382,7 @@ Example:
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](images/admonition-example.jpg)
 
 </details>
 
@@ -399,7 +399,7 @@ Check the example for default data of CTA block
 <details>
 <summary>Example</summary>
 
-![CTA example](cta-example.jpg)
+![CTA example](images/cta-example.jpg)
 
 </details>
 
@@ -408,6 +408,32 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 ```md
 <CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
+
+## Steps
+
+To display numbered steps, wrap the content with `Steps` component.  
+Steps will be splitted by `h2` headings.
+
+```md
+<Steps>
+
+## Step 1: Create the Initial Schema
+
+First, create a new database called `people` on the `main` branch and add some sample data to it.
+
+## Step 2: Create a development branch
+
+Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
+
+</Steps>
+```
+
+<details>
+<summary>Example</summary>
+
+![Steps example](images/steps-example.jpg)
+
+</details>
 
 ## Images
 
@@ -496,7 +522,7 @@ Another term for smoke test
 <details>
 <summary>Examples</summary>
 
-![Definition list example](definition-list-example.jpg)
+![Definition list example](images/definition-list-example.jpg)
 
 </details>
 

@@ -16,11 +16,17 @@ Our development teams are focused on helping you ship faster with Postgres. This
 Here's a snapshot of what we're working on now:
 
 - **Schema-only branches**: Create branches that include only your database schema—ideal for workflows involving sensitive data.
+- **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
 - **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 - **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1 2025. Brazilian developers: we’d love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
-- **A GitHub Copilot extension**: This new extension provides chat-based access to the latest Neon documentation with repository context, making it easier to configure Neon for your project.
 - **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data migration to Neon even easier and faster.
 - **Inbound logical replication GA**: Neon supports Postgres logical replication for inbound and outbound data. Outbound replication (from Neon) is GA. In 2025, inbound replication (to Neon) will also reach GA.
+- **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
+- **Foreign Data Wrapper (FDW) support**: We're working on adding support for the [dblink](https://www.postgresql.org/docs/current/contrib-dblink-function.html) and [postgres_fdw](https://www.postgresql.org/docs/current/postgres-fdw.html) extensions.
+- **Update management**: Adding user-managed maintenance windows for updates, patches, and Postgres minor upgrades.
+- **Neon on Azure GA**: Currently in public preview, we're targeting a GA release with deeper Azure integration.
+- **Scheduled backups**: Regular backups with point-in-time recovery.
+- **Vercel preview deployment support**: Adding support for preview deployments to our [Native Vercel Integration](/docs/guides/vercel-native-integration).
 
 Have other feature ideas? [Let us know](#share-your-thoughts).
 
@@ -29,20 +35,15 @@ Have other feature ideas? [Let us know](#share-your-thoughts).
 And here's a quick list of what we'll be taking on in the near future:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents that interact with infrastructure, [connect with us](https://neon.tech/agent-design-partner) as we seek design partners. Learn more in [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents).
-- **Staging environments**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
-- **Scheduled backups**: Regular backups with point-in-time recovery.
 - **Exportable logs and traces**: We're exploring features to integrate Neon with monitoring platforms via Postgres log and trace exports.
 - **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional platforms.
-- **Foreign Data Wrapper (FDW) support**: Introducing cross-database querying capabilities.
-- **Neon on Azure GA**: Currently in public preview, we're targeting a GA release with deeper Azure integration.
 - **Larger computes GA**: Autoscaling up to 16 vCPUs and fixed compute sizes up to 56 vCPUs are currently in Beta; GA support is planned for 2025.
 - **Private Networking on Azure**: Following on [AWS PrivateLink support](/docs/guides/neon-private-networking), Azure Private Link is next.
-- **Maintenance management**: Adding user-managed maintenance windows for updates, patches, and Postgres minor upgrades.
-- **Vercel preview deployment support**: Expanding the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) to support preview deployments in the [Neon Native Vercel Integration](/docs/guides/vercel-native-integration).
 - **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 
 ## What we've launched recently
 
+- **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation with repository context, making it easier to configure Neon for your project. You can find it here: [Neon Database Copilot Extension](https://github.com/marketplace/neon-database)
 - **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.
 - **Neon Identity (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Identity](/docs/guides/neon-identity) for details.
 - **Postgres 17**: Now the default version for all newly created projects.

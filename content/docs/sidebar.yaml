@@ -521,6 +521,10 @@
               slug: guides/neon-authorize-google-identity
             - title: PropelAuth
               slug: guides/neon-authorize-propelauth
+            - title: SuperTokens
+              slug: guides/neon-authorize-supertokens
+            - title: WorkOS
+              slug: guides/neon-authorize-workos
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -842,6 +846,9 @@
               slug: extensions/pgvector
             - title: pgrag
               slug: extensions/pgrag
+            - title: pg_mooncake
+              slug: extensions/pg_mooncake
+              tag: new
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
@@ -860,6 +867,9 @@
               slug: extensions/timescaledb
             - title: wal2json
               slug: extensions/wal2json
+            - title: pg_cron
+              slug: extensions/pg_cron
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:

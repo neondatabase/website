@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.073Z'
+updatedOn: '2025-01-20T13:01:32.031Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -26,14 +26,15 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                      | Community | Standard | Priority | Enterprise |
-| :-------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon AI Chat](#neon-ai-chat) (not an official channel)               |  &check;  | &check;  | &check;  |  &check;   |
-| [Support tickets](#support-tickets)                                   |     -     | &check;  | &check;  |  &check;   |
-| [Prioritized support tickets](#prioritized-support-tickets)           |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                                             |     -     |    -     |    \*    |     \*     |
-| [SLAs](#slas)                                                         |     -     |    -     | &check;  |  &check;   |
+| Support channels                                                                          | Community | Standard | Priority | Enterprise |
+| :---------------------------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)                     |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon AI Chat](#neon-ai-chat) (not an official channel)                                   |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon GitHub Copilot Extension](#neon-github-copilot-extension) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
+| [Support tickets](#support-tickets)                                                       |     -     | &check;  | &check;  |  &check;   |
+| [Prioritized support tickets](#prioritized-support-tickets)                               |     -     |    -     | &check;  |  &check;   |
+| [Video chat](#video-chat)                                                                 |     -     |    -     |    \*    |     \*     |
+| [SLAs](#slas)                                                                             |     -     |    -     | &check;  |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
@@ -62,6 +63,23 @@ Neon AI Chat sources include the Neon Discord Server, the Neon Documentation, th
 <Admonition type="important">
 Neon AI chat is not an official Neon Support channel.
 </Admonition>
+
+### Neon GitHub Copilot Extension
+
+The [Neon Database Copilot Extension](https://github.com/marketplace/neon-database) is available in the GitHub Marketplace. This extension lets you chat with the latest Neon documentation within the context of your repository.
+
+![GitHub Copilot Extension](/docs/relnotes/github_copilot_extension.png)
+
+Get answers to common questions like:
+
+- _How to create a project?_
+- _How can I get started with the Neon API?_
+- _How do I integrate the Neon API into my GitHub repository._
+
+**Setup instructions:**
+
+1. Install the extension
+2. Type `@neondatabase` in the chat to start interacting
 
 ### Support tickets
 
