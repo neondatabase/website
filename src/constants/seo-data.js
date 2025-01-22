@@ -175,8 +175,6 @@ export const getBlogCategoryDescription = (category) => {
       return 'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.';
     case 'community':
       return 'Join the vibrant serverless Postgres community. Engage in discussions, tutorials, and success stories. Connect with developers and industry experts.';
-    case 'all-posts':
-      return 'Get a complete overview of the Neon blog posts history in chronological order.';
     default:
       return 'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.';
   }
