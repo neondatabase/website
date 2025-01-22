@@ -5,7 +5,7 @@ subtitle: Track your Neon projects and organizations from Slack
 ---
 
 <Admonition type="comingSoon">
-The Neon Slack App is coming soon! If you've already expressed interest, we'll email you as soon as it's ready. Otherwise, watch for it in our weekly [Changelog](/docs/changelog) (subscribe [here](https://neon.tech/docs/changelog/rss.xml) for RSS updates).
+The Neon Slack App is coming soon! If you've already expressed interest, we'll email you as soon as it's ready. Otherwise, watch for it in our weekly [Changelog](/docs/changelog).
 </Admonition>
 
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
