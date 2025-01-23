@@ -8,6 +8,8 @@ const CATEGORY_COLORS = {
   ai: 'text-blue-80',
   'case-study': 'text-pink-90',
   workflows: 'text-blue-80',
+  guides: 'text-green-45',
+  changelog: 'text-blue-80',
 };
 
 const CATEGORY_BG_COLORS = {

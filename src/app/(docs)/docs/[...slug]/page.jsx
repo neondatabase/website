@@ -7,7 +7,7 @@ import LINKS from 'constants/links';
 import {
   DOCS_DIR_PATH,
   getAllPosts,
-  getAllChangelogPosts,
+  getAllChangelogs,
   getNavigationLinks,
   getPostBySlug,
   getSidebar,
@@ -79,7 +79,7 @@ const DocPost = async ({ params }) => {
   const flatSidebar = await getFlatSidebar(sidebar);
 
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);

@@ -1,3 +1,5 @@
+import { format, parseISO } from 'date-fns';
+
 const fs = require('fs');
 
 const { glob } = require('glob');
@@ -29,7 +31,7 @@ const getPostBySlug = (slug, pathname) => {
   try {
     const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
     const { data, content } = matter(source);
-    const excerpt = getExcerpt(content, 200);
+    const excerpt = getExcerpt(content, 240);
 
     return { data, content, excerpt };
   } catch (e) {
@@ -72,20 +74,39 @@ const getNavigationLinks = (slug, flatSidebar) => {
   };
 };
 
-const getAllChangelogPosts = async () => {
+const getChangelogDateFromSlug = (slug) => {
+  const slugDatePiece = slug.slice(0, 10);
+
+  return {
+    title: format(parseISO(slugDatePiece), 'MMM dd, yyyy'),
+    date: slugDatePiece,
+  };
+};
+
+const getAllChangelogs = async () => {
   const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
 
   return slugs
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
-      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
-      const { data, content } = post;
+      const {
+        data: { title, isDraft, isFeatured, redirectFrom },
+        content,
+        excerpt,
+      } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      const slugWithoutFirstSlash = slug.slice(1);
+      const { date } = getChangelogDateFromSlug(slugWithoutFirstSlash);
 
       return {
-        slug: slug.replace('/', ''),
-        isDraft: data?.isDraft,
+        type: 'changelog',
+        title,
+        excerpt,
+        date,
+        slug: slugWithoutFirstSlash,
+        isDraft,
         content,
-        redirectFrom: data?.redirectFrom,
+        redirectFrom,
+        isFeatured,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
@@ -96,7 +117,8 @@ module.exports = {
   getPostBySlug,
   getSidebar,
   getNavigationLinks,
-  getAllChangelogPosts,
+  getAllChangelogs,
+  getChangelogDateFromSlug,
   getAllPosts,
   DOCS_DIR_PATH,
   USE_CASES_DIR_PATH,

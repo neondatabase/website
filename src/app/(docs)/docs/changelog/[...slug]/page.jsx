@@ -5,13 +5,13 @@ import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX, VERCEL_URL } from 'constants/docs';
-import { getAllChangelogPosts, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
+import { getAllChangelogs, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 import getExcerpt from 'utils/get-excerpt';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateStaticParams() {
-  const changelogPosts = await getAllChangelogPosts();
+  const changelogPosts = await getAllChangelogs();
 
   return changelogPosts.map(({ slug }) => {
     const slugsArray = slug.split('/');

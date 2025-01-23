@@ -2,13 +2,13 @@
 import Rss from 'rss';
 
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import { CHANGELOG_DIR_PATH, getAllChangelogPosts, getPostBySlug } from 'utils/api-docs';
+import { CHANGELOG_DIR_PATH, getAllChangelogs, getPostBySlug } from 'utils/api-docs';
 import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const feed = new Rss({
     id: CHANGELOG_BASE_PATH,

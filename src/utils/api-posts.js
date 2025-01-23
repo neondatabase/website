@@ -130,6 +130,7 @@ const fetchAllWpPosts = async (after) => {
           date
           content(format: RENDERED)
           pageBlogPost {
+            isFeatured
             largeCover {
               altText
               mediaItemUrl
@@ -150,7 +151,6 @@ const fetchAllWpPosts = async (after) => {
                 }
               }
             }
-            isFeatured
           }
         }
         pageInfo {
@@ -182,12 +182,6 @@ const getAllWpPosts = cache(async () => {
   }
 
   return allPosts;
-});
-
-const getFeaturedSortedWpPosts = cache(async () => {
-  const posts = await getAllWpPosts();
-  const featuredPosts = posts.sort((a, b) => b.pageBlogPost.isFeatured - a.pageBlogPost.isFeatured);
-  return featuredPosts;
 });
 
 const getWpPostBySlug = cache(async (slug) => {
@@ -576,15 +570,51 @@ const getAllWpCaseStudiesCategories = cache(async () => {
   return [{ name: 'All', slug: 'all' }, ...updatedCategories];
 });
 
+const sortPosts = (posts) => {
+  // Separate featured wp posts, guides and changelogs and all other
+  const topWpPosts = [];
+  const topGuides = [];
+  const topChangelogs = [];
+  const otherPosts = [];
+
+  // Find 2 most recent featured posts for each category
+  posts.forEach((item) => {
+    const isWpPost = item.pageBlogPost;
+    const isGuide = item.type === 'guide';
+    const isChangelog = item.type === 'changelog';
+    const isFeatured = isWpPost ? item.pageBlogPost.isFeatured : item.isFeatured;
+
+    if (isFeatured) {
+      if (isWpPost && topWpPosts.length < 2) {
+        topWpPosts.push(item);
+      } else if (isGuide && topGuides.length < 2) {
+        topGuides.push(item);
+      } else if (isChangelog && topChangelogs.length < 2) {
+        topChangelogs.push(item);
+      } else {
+        otherPosts.push(item);
+      }
+    } else {
+      otherPosts.push(item);
+    }
+  });
+
+  // Sort the rest posts by date, newest first
+  otherPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Combine the results
+  return [...topWpPosts, ...topGuides, ...topChangelogs, ...otherPosts];
+};
+
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
   getAllWpCaseStudiesPosts,
   getAllWpCaseStudiesCategories,
   getAllWpPosts,
-  getFeaturedSortedWpPosts,
   getWpPostBySlug,
   getWpPostsByCategorySlug,
   getWpPreviewPost,
   getWpPreviewPostData,
+  sortPosts,
 };

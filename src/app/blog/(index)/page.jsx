@@ -5,25 +5,18 @@ import BlogPostCard from 'components/pages/blog/blog-post-card';
 import LoadMorePosts from 'components/shared/load-more-posts/load-more-posts';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
-// import { getAllWpPosts } from 'utils/api-posts';
-import { getFeaturedSortedWpPosts } from 'utils/api-posts';
+import { getAllChangelogs } from 'utils/api-docs';
+import { getAllGuides } from 'utils/api-guides';
+import { getAllWpPosts, sortPosts } from 'utils/api-posts';
 import getMetadata from 'utils/get-metadata';
-
-// async function getChangelogData() {
-//   const res = await fetch(process.env.NEXT_PUBLIC_RELEASE_NOTES_API_URL);
-
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-
-//   return res.json();
-// }
 
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
 
 const BlogPage = async () => {
-  // const posts = await getAllWpPosts();
-  const posts = await getFeaturedSortedWpPosts();
+  const wpPosts = await getAllWpPosts();
+  const guides = await getAllGuides();
+  const changelogs = await getAllChangelogs();
+  const posts = sortPosts([...wpPosts, ...guides, ...changelogs]);
 
   if (!posts) return notFound();
 
@@ -38,8 +31,8 @@ const BlogPage = async () => {
             <BlogPostCard
               className={clsx(
                 isFeatured
-                  ? ''
-                  : 'col-span-full border-b border-gray-new-15 py-8 first:pt-0 last:border-b-0 last:pb-0'
+                  ? 'pb-11'
+                  : 'col-span-full border-t border-gray-new-15 py-8 first:pt-0 last:pb-0'
               )}
               key={post.slug}
               fullSize={!isFeatured}

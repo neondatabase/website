@@ -6,12 +6,12 @@ import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { VERCEL_URL } from 'constants/guides';
 import LINKS from 'constants/links';
-import { GUIDES_DIR_PATH, getAllPosts, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
+import { GUIDES_DIR_PATH, getAllGuides, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getAllGuides();
   if (!posts) return notFound();
   return posts.map((post) => ({
     slug: post.slug,
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
 
 const GuidePost = async ({ params }) => {
   const { slug } = params;
-  const posts = await getAllPosts();
+  const posts = await getAllGuides();
   const navigationLinks = getNavigationLinks(slug, posts);
   const fileOriginPath = `${`${process.env.NEXT_PUBLIC_GUIDES_GITHUB_PATH}${slug}`}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);

@@ -5,7 +5,7 @@ import Sidebar from 'components/pages/guides/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { GUIDES_BASE_PATH } from 'constants/guides';
-import { getAllPosts } from 'utils/api-guides';
+import { getAllGuides } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata() {
@@ -19,7 +19,7 @@ export async function generateMetadata() {
 }
 
 const GuidesPage = async () => {
-  const posts = await getAllPosts();
+  const posts = await getAllGuides();
   // TO-DO: Update text here
   if (!posts) return <div className="text-18">No guides yet</div>;
 

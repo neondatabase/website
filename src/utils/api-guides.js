@@ -54,7 +54,7 @@ const getPostBySlug = (slug, pathname) => {
   }
 };
 
-const getAllPosts = async () => {
+const getAllGuides = async () => {
   const slugs = await getPostSlugs(GUIDES_DIR_PATH);
   return slugs
     .map((slug) => {
@@ -68,6 +68,7 @@ const getAllPosts = async () => {
         author,
       } = data;
       return {
+        type: 'guide',
         slug: slugWithoutFirstSlash,
         title,
         subtitle,
@@ -77,6 +78,7 @@ const getAllPosts = async () => {
         isDraft,
         content,
         redirectFrom,
+        date: createdAt,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
@@ -99,6 +101,6 @@ module.exports = {
   getPostSlugs,
   getPostBySlug,
   getNavigationLinks,
-  getAllPosts,
+  getAllGuides,
   GUIDES_DIR_PATH,
 };
