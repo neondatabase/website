@@ -548,7 +548,7 @@ Create a [markdown file](https://github.com/neondatabase/website/blob/main/conte
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component (not including content/docs/)
+  // ConponentName: 'shared-content/component-filename'
   NeedHelp: 'shared-content/need-help',
 };
 
@@ -564,6 +564,20 @@ Insert a shared markdown and render inline.
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
+```
+
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+`component-with-props.md`
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
 ```
 
 ## Contributing
