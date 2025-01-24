@@ -4,16 +4,13 @@ enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
 ---
 
-<Admonition type="comingSoon">
-The Neon Slack App is coming soon! If you've already expressed interest, we'll email you as soon as it's ready. Otherwise, watch for it in our weekly [Changelog](/docs/changelog).
-</Admonition>
 
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
 
 <img
 src="/docs/manage/slack_app_overview.png"
 alt="Neon Slack App showing authentication and usage commands in action"
-style={{ display: "block", margin: "2em auto", width: "80%" }}
+style={{ width: "75%", display: "block", margin: "40px auto" }}
 />
 
 ## Setup
@@ -22,11 +19,20 @@ style={{ display: "block", margin: "2em auto", width: "80%" }}
 
 ## Install the Neon Slack App
 
-1. Open Slack and navigate to the **Apps** section in the left sidebar.
-2. Click **Add apps** and search for **Neon**.
-3. Select the Neon Slack App and follow the prompts to install it.
+Click the **Add to Slack** button and follow the prompts.
 
-Once the app is installed, open a direct message with the Neon Slack App and type `/neon auth` to connect your Neon account.
+<a
+href="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read"
+>
+<img
+    src="https://platform.slack-edge.com/img/add_to_slack.png"
+    alt="Add to Slack"
+/>
+</a>
+
+OR
+
+Open Slack and navigate from there: you can find the **Apps** section at the bottom of the sidebar. Click **Add apps**, search for **Neon**, and follow the prompts to install.
 
 <Admonition type="tip">
 If your Slack workspace is company-managed and doesn't allow third-party apps, you may need to request admin approval to install the Neon Slack App. Slack will notify you if admin approval is required.
@@ -34,8 +40,7 @@ If your Slack workspace is company-managed and doesn't allow third-party apps, y
 
 ## Authenticate with Neon
 
-1. Open a DM with the Neon Slack App in Slack.
-2. Type `/neon auth` and follow the prompts to log in to your Neon account.
+The first thing you need to do is authorize — open a DM with your new app and type `/neon auth`. Follow the login flow that opens in your browser, and you're in.
 
 Once authenticated, you're ready to use all available commands.
 
