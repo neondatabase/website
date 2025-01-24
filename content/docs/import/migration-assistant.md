@@ -19,6 +19,8 @@ Enter your current database connection string, and the Assistant will:
 
 Future versions will add more automation to these steps, and also add support for **logical replication** to help minimize downtime during larger transfers.
 
+<Steps>
+
 ## Before you start
 
 You'll need the following to get started:
@@ -30,7 +32,9 @@ You'll need the following to get started:
 
 - **Admin privileges** or appropriate Postgres privileges on your source databases to perform the migration tasks. Using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges is recommended.
 
-## Step 1 — Check compatibility
+
+
+## Check compatibility
 
 Enter the connection string from your source database.
 
@@ -45,7 +49,7 @@ Neon will check the availability and configuration of your source database to he
 - **Supported Postgres extensions** — Identifies whether your extensions are supported by Neon. Unsupported extensions are listed, but you are not blocked from continuing the migration. Use your discretion.
 - **Compatible Postgres extension versions** — Checks that your extension versions match Neon's current support. See [Supported Postgres extensions](/docs/extensions/pg-extensions) for a matrix of extensions to Postgres versions in Neon.
 
-## Step 2 — Create a Neon project
+## Create a Neon project
 
 <div style={{ display: 'flex', alignItems: 'top' }}>
   <div style={{ flex: '0 0 55%', paddingRight: '20px' }}>
@@ -68,7 +72,7 @@ Neon will check the availability and configuration of your source database to he
   </div>
 </div>
 
-## Step 3 — Move data to Neon
+## Move data to Neon
 
 Next, we'll send you to the command line. We generate the `pg_dump` and `pg_store` commands, pre-populated with the correct connection strings and required parameters.
 
@@ -94,6 +98,8 @@ For more detailed instructions about using these commands, see [Migrate data usi
 
 1. **Verify data integrity** by running some queries and checking that tables and data are present as expected in Neon.
 2. **Switch over your application** by updating your connection string to point to Neon. You can find your connection details on your project Dashboard. See [Connect from any application](/docs/connect/connect-from-any-app) for more information.
+
+</Steps>
 
 ## It didn't work. What can I do?
 
