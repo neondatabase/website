@@ -81,7 +81,7 @@ const BlogPostCard = ({
         >
           <Image
             className={clsx(
-              'w-full rounded-md transition-transform duration-200',
+              'w-full rounded-lg transition-transform duration-200',
               withImageHover && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
@@ -140,7 +140,7 @@ const BlogPostCard = ({
           {fullSize && (
             <div
               className={clsx(
-                'mt-2 text-lg tracking-extra-tight text-gray-new-94',
+                'mt-2 text-lg font-light tracking-extra-tight text-gray-new-94',
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >
@@ -148,10 +148,12 @@ const BlogPostCard = ({
             </div>
           )}
           {/* authors */}
-          {authorsData && (
-            <Authors className={clsx(fullSize ? 'mt-4' : 'mt-2.5')} authors={authorsData} />
-          )}
-          {author && <Authors className={clsx(fullSize ? 'mt-4' : 'mt-2.5')} authors={[author]} />}
+          {authorsData || author ? (
+            <Authors
+              className={clsx(fullSize ? 'mt-4' : 'mt-2.5')}
+              authors={authorsData || [author]}
+            />
+          ) : null}
         </Link>
       </div>
     </article>

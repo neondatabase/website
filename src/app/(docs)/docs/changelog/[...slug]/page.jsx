@@ -4,7 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import { VERCEL_URL } from 'constants/content';
+import VERCEL_URL from 'constants/base';
 import { CHANGELOG_BASE_PATH, CHANGELOG_DIR_PATH, CHANGELOG_SLUG_REGEX } from 'constants/docs';
 import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';

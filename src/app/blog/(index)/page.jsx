@@ -20,7 +20,7 @@ const BlogPage = async () => {
   ]);
   const posts = sortPosts([...wpPosts, ...guides, ...changelogs]);
 
-  if (!wpPosts) return notFound();
+  if (!posts) return notFound();
 
   return (
     <>

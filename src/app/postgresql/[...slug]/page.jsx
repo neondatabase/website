@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { VERCEL_URL } from 'constants/content';
+import VERCEL_URL from 'constants/base';
 import { getSidebar } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';

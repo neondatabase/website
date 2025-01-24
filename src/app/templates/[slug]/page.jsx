@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
-import { VERCEL_URL } from 'constants/content';
+import VERCEL_URL from 'constants/base';
 import LINKS from 'constants/links';
 import BackIcon from 'images/pages/templates/back.inline.svg';
 import GitHubIcon from 'images/pages/templates/github.inline.svg';
