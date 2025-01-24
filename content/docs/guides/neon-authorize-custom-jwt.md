@@ -44,7 +44,7 @@ Before starting, make sure you have:
 JWTs are digitally signed to ensure they're authentic and haven't been tampered with. You'll need a public/private key pair for this:
 
 - **Private Key:** Used to sign your JWTs. Keep this secret!
-- **Public Key:** Used by Neon Authorize to verify the signatures.
+- **Public key:** Used by Neon Authorize to verify the signatures.
 
 We'll use the `jose` library in TypeScript to generate an RSA key pair. Here's a simple way to do it:
 
