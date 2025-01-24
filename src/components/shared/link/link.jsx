@@ -87,7 +87,7 @@ const Link = forwardRef(
       </>
     );
     // TODO: remove this when we upgrade to latest version of Next.js
-    if (to.includes('#')) {
+    if (to?.includes('#')) {
       return (
         <a className={className} href={to} ref={ref} {...props}>
           {content}
@@ -95,7 +95,7 @@ const Link = forwardRef(
       );
     }
 
-    if (to.startsWith('/')) {
+    if (to?.startsWith('/')) {
       return (
         <NextLink className={className} href={to} ref={ref} prefetch={prefetch} {...props}>
           {content}

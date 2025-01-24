@@ -5,16 +5,16 @@ export const preferredRegion = 'auto';
 
 export async function GET(request) {
   const fontTitle = fetch(
-    new URL('../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
+    new URL('../../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const fontText = fetch(new URL('../../../fonts/inter/Inter-Regular.ttf', import.meta.url)).then(
-    (res) => res.arrayBuffer()
-  );
-  const logo = fetch(new URL('../../../../public/images/og-image/logo.png', import.meta.url)).then(
-    (res) => res.arrayBuffer()
-  );
+  const fontText = fetch(
+    new URL('../../../../fonts/inter/Inter-Regular.ttf', import.meta.url)
+  ).then((res) => res.arrayBuffer());
+  const logo = fetch(
+    new URL('../../../../../public/images/og-image/logo.png', import.meta.url)
+  ).then((res) => res.arrayBuffer());
   const background = fetch(
-    new URL('../../../../public/images/og-image/docs-background.jpg', import.meta.url)
+    new URL('../../../../../public/images/og-image/docs-background.jpg', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const [fontDataTitle, fontDataText, logoData, backgroundData] = await Promise.all([
@@ -86,15 +86,20 @@ export async function GET(request) {
             </div>
             <div
               style={{
+                display: '-webkit-box',
+                overflow: 'hidden',
+                whiteSpace: 'pre-wrap',
+                textOverflow: 'ellipsis',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 3,
+                marginTop: 10,
                 fontFamily: 'ESBuild',
                 fontStyle: 'normal',
-                fontSize: 88,
                 fontWeight: 500,
+                fontSize: 88,
                 lineHeight: 1,
-                color: 'white',
                 letterSpacing: '-0.04em',
-                whiteSpace: 'pre-wrap',
-                marginTop: 10,
+                color: 'white',
               }}
             >
               {ogTitle}

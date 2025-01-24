@@ -164,7 +164,7 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
   return (
-    <ListComponent className="not-prose !my-10 grid auto-rows-fr grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+    <ListComponent className="not-prose !my-10 grid grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
       {React.Children.map(children, (child, index) => {
         const { children, href, description, icon, target } = child.props ?? {};
         const Icon = icons[icon];

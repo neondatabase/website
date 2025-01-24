@@ -17,10 +17,10 @@ const AiChatPage = async () => {
   return (
     <Layout
       headerClassName="lg:border-none"
+      docPageType="aiChat"
       burgerWithoutBorder
       showSearchInput
       isDocPage
-      isAiChatPage
       isHeaderSticky
       headerWithBorder
       hasThemesSupport
@@ -46,7 +46,7 @@ const AiChatPage = async () => {
         >
           <ModeToggler className="hidden shrink-0 md:flex" isAiChatPage />
           <h1 className="sr-only">Neon AI Chat</h1>
-          <div className="col-span-7 col-start-2 -ml-6 flex w-full max-w-[832px] flex-1 items-center justify-center 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-none">
+          <div className="col-span-7 col-start-2 -ml-6 flex w-full max-w-[832px] flex-1 items-center justify-center 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-full">
             <InkeepEmbedded />
           </div>
         </Container>

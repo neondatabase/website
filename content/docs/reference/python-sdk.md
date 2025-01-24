@@ -18,7 +18,8 @@ updatedOn: '2024-11-30T11:53:56.079Z'
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
-  <a href="https://pypi.org/project/neon-api/">Python wrapper for the Neon API</a>
+  <a href="https://github.com/neondatabase/neon-api-python">Python wrapper for the Neon API (GitHub)</a>
+  <a href="https://pypi.org/project/neon-api/">Python wrapper for the Neon API (Python Package Index)</a>
 </DocsList>
 
 </InfoBlock>

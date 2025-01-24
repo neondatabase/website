@@ -18,6 +18,7 @@ const NeonPostgresLayout = async ({ children }) => {
     <Layout
       customType={customType}
       headerClassName="lg:border-none"
+      docPageType="postgres"
       burgerWithoutBorder
       showSearchInput
       isDocPage
@@ -41,17 +42,14 @@ const NeonPostgresLayout = async ({ children }) => {
           slug="index"
           basePath={POSTGRESQL_BASE_PATH}
           customType={customType}
-          isPostgresPage
+          docPageType="postgres"
         />
-
-        <div className="w-full">
-          <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-4"
-            size="1408"
-          >
-            {children}
-          </Container>
-        </div>
+        <Container
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-7"
+          size="1408"
+        >
+          {children}
+        </Container>
       </div>
     </Layout>
   );

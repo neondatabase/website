@@ -2,9 +2,8 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/docs';
+import { VERCEL_URL } from 'constants/docs';
 import LINKS from 'constants/links';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import {
   DOCS_DIR_PATH,
   getAllPosts,
@@ -63,10 +62,7 @@ export async function generateMetadata({ params }) {
   return getMetadata({
     title: `${title} - Neon Docs`,
     description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
-    imagePath:
-      title.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`
-        : DEFAULT_IMAGE_PATH,
+    imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     type: 'article',
