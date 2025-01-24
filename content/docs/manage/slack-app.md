@@ -5,7 +5,6 @@ subtitle: Track your Neon projects and organizations from Slack
 updatedOn: '2025-01-22T02:36:07.648Z'
 ---
 
-
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
 
 <img
@@ -24,10 +23,12 @@ Click the **Add to Slack** button and follow the prompts.
 
 <a
 href="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read"
->
-<img
+
+> <img
+
     src="https://platform.slack-edge.com/img/add_to_slack.png"
     alt="Add to Slack"
+
 />
 </a>
 
