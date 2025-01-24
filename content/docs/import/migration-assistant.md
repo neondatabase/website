@@ -32,8 +32,6 @@ You'll need the following to get started:
 
 - **Admin privileges** or appropriate Postgres privileges on your source databases to perform the migration tasks. Using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges is recommended.
 
-
-
 ## Check compatibility
 
 Enter the connection string from your source database.
