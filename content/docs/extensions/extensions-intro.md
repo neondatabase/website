@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2025-01-22T18:34:11.797Z'
+updatedOn: '2025-01-24T19:33:03.062Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -281,5 +281,15 @@ Do you need an extension we don’t support yet? [Let us know](/docs/extensions/
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="wrench">pgtap</a>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="wrench">refint</a>
+
+</DetailIconCards>
+
+## Remote data access
+
+<DetailIconCards>
+
+<a href="/docs/extensions/dblink" description="Provides functions for accessing and manipulating data in remote databases from within Postgres" icon="queries">dblink</a>
+
+<a href="/docs/extensions/postgres_fdw" description="Access data in remote Postgres databases as local tables" icon="queries">postgres_fdw</a>
 
 </DetailIconCards>
