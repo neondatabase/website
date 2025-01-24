@@ -13,12 +13,14 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
 
 const BlogPage = async () => {
-  const wpPosts = await getAllWpPosts();
-  const guides = await getAllGuides();
-  const changelogs = await getAllChangelogs();
+  const [wpPosts, guides, changelogs] = await Promise.all([
+    getAllWpPosts(),
+    getAllGuides(),
+    getAllChangelogs(),
+  ]);
   const posts = sortPosts([...wpPosts, ...guides, ...changelogs]);
 
-  if (!posts) return notFound();
+  if (!wpPosts) return notFound();
 
   return (
     <>
