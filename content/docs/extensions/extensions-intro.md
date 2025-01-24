@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2025-01-10T15:44:20.070Z'
+updatedOn: '2025-01-22T18:34:11.797Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -9,7 +9,8 @@ Explore supported Postgres extensions by category. Also see:
 - [List view of supported extensions and versions](/docs/extensions/pg-extensions)
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
-- [Request extension support](/docs/extensions/pg-extensions#request-extension-support)
+
+Do you need an extension we don’t support yet? [Let us know](/docs/extensions/pg-extensions#request-extension-support).
 
 ## AI / Machine Learning
 
@@ -158,6 +159,8 @@ Explore supported Postgres extensions by category. Also see:
 <a href="https://github.com/pgpartman/pg_partman" description="A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres" icon="table">pg_partman</a>
 
 <a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="table">pg_prewarm</a>
+
+<a href="https://github.com/reorg/pg_repack" description="Lets you remove bloat from tables and indexes, and optionally restore the physical order of clustered indexes" icon="table">pg_repack</a>
 
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets" icon="table">pg_roaringbitmap</a>
 

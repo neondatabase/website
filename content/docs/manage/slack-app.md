@@ -2,6 +2,7 @@
 title: Neon Slack App
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
+updatedOn: '2025-01-22T02:36:07.648Z'
 ---
 
 

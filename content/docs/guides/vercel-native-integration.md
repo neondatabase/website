@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-20T13:01:32.030Z'
+updatedOn: '2025-01-22T18:43:21.515Z'
 ---
 
 <InfoBlock>
@@ -104,7 +104,7 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
-  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
+  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported to or from a Neon organization created by the native integration.
   - [Project collaborators](/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
@@ -228,6 +228,7 @@ POSTGRES_PRISMA_URL
 
 ## Limitations
 
-When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+- When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+- To use the Neon CLI with the Neon Postgres Native Integration, you must authenticate connections from the CLI client using a Neon API key. Please see [Neon CLI — API keys](/docs/reference/cli-install#api-key). The `neon auth` command requires an account registered through Neon rather than Vercel.
 
 <NeedHelp/>
