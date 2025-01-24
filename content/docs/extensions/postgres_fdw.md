@@ -12,10 +12,10 @@ Support for the `postgres_fdw` extension is coming to Neon soon. Please check th
 
 The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
 
-This guide will walk you through the essentials of using the `postgres_fdw` extension in Neon. You'll learn how to enable the extension, establish connections to remote PostgreSQL servers, define foreign tables that map to tables on those servers, and execute queries that span across your Neon database and remote instances. We will also cover important considerations for performance and security when working with `postgres_fdw`.
+This guide will walk you through the essentials of using the `postgres_fdw` extension in Neon. You'll learn how to enable the extension, establish connections to remote Postgres servers, define foreign tables that map to tables on those servers, and execute queries that span across your Neon database and remote instances. We will also cover important considerations for performance and security when working with `postgres_fdw`.
 
 <Admonition type="note">
-`postgres_fdw` is a core PostgreSQL extension that can be installed on any Neon project using the instructions below. It provides a standardized way to access external Postgres databases and is widely used for data integration and cross-database querying.
+`postgres_fdw` is a core Postgres extension that can be installed on any Neon project using the instructions below. It provides a standardized way to access external Postgres databases and is widely used for data integration and cross-database querying.
 </Admonition>
 
 **Version availability:**
@@ -34,7 +34,7 @@ CREATE EXTENSION IF NOT EXISTS postgres_fdw;
 
 Before diving into the practical steps, let's understand the key components involved in using `postgres_fdw`:
 
-- **Foreign server:** Represents the connection details to the external PostgreSQL server. This includes information like the host, port, and database name of the remote server.
+- **Foreign server:** Represents the connection details to the external Postgres server. This includes information like the host, port, and database name of the remote server.
 - **User mapping:** Defines the authentication credentials used to connect to the foreign server. This maps a local Neon user to a user on the remote server.
 - **Foreign table:** A locally defined object in your Neon database that represents a table located on the foreign server. Queries against the foreign table are transparently executed on the remote server.
 
@@ -44,7 +44,7 @@ The process of connecting to a remote Postgres database involves two main steps:
 
 ### Create a foreign server
 
-The `CREATE SERVER` command is used to define the connection parameters for the remote PostgreSQL server.
+The `CREATE SERVER` command is used to define the connection parameters for the remote Postgres server.
 
 ```sql
 CREATE SERVER my_remote_server
@@ -52,10 +52,10 @@ FOREIGN DATA WRAPPER postgres_fdw
 OPTIONS (host '<remote_host>', port '<remote_port>', dbname '<remote_database>');
 ```
 
-Replace the placeholders with the actual details of your remote PostgreSQL server:
+Replace the placeholders with the actual details of your remote Postgres server:
 
 - `<remote_host>`: The hostname or IP address of the remote server.
-- `<remote_port>`: The port number the remote PostgreSQL server is listening on (usually 5432).
+- `<remote_port>`: The port number the remote Postgres server is listening on (usually 5432).
 - `<remote_database>`: The name of the database on the remote server you want to access.
 
 For example:
@@ -80,7 +80,7 @@ Replace the placeholders with the appropriate values:
 
 - `<neon_user>`: The username of the user in your Neon database that will be accessing the foreign server. Use `PUBLIC` if you want to allow all users to access the foreign server with the same credentials.
 - `my_remote_server`: The name of the foreign server you created in the previous step.
-- `<remote_user>`: The username on the remote PostgreSQL server.
+- `<remote_user>`: The username on the remote Postgres server.
 - `<remote_password>`: The password for the remote user.
 
 For example, to map the current Neon user to the `read_only_user` user on the `production_db` server:
@@ -183,7 +183,7 @@ To select all the users from the `remote_users` table:
 SELECT * FROM remote_users WHERE created_at > NOW() - INTERVAL '1 week';
 ```
 
-You can perform joins between local tables and foreign tables, aggregate data from remote sources, and use any other SQL features supported by PostgreSQL.
+You can perform joins between local tables and foreign tables, aggregate data from remote sources, and use any other SQL features supported by Postgres.
 
 ```sql
 SELECT r.username, o.order_id, o.order_date
@@ -248,7 +248,7 @@ Querying foreign tables can sometimes be slower than querying local tables due t
 
 ## Advanced `postgres_fdw` functions
 
-The `postgres_fdw` extension provides several utility functions to manage connections established with remote PostgreSQL servers. These functions allow you to monitor active connections and explicitly disconnect from foreign servers.
+The `postgres_fdw` extension provides several utility functions to manage connections established with remote Postgres servers. These functions allow you to monitor active connections and explicitly disconnect from foreign servers.
 
 - **`postgres_fdw_get_connections()`:** This function provides insights into the active connections established by `postgres_fdw` from your current Neon session to remote servers. It returns a set of records, with each record containing the foreign server name and a boolean indicating the validity of the connection. A connection is considered invalid if the foreign server or user mapping associated with it has been changed or dropped while the connection is being used in the current transaction. Invalid connections will be closed at the end of the transaction.
 
@@ -291,9 +291,9 @@ These functions offer greater control over `postgres_fdw` connections, allowing 
 
 When working with `postgres_fdw`, security is paramount. Keep the following points in mind:
 
-- **Network security:** Ensure that network access is properly configured to allow connections between your Neon project and the remote PostgreSQL server. Firewalls and security groups might need adjustments.
+- **Network security:** Ensure that network access is properly configured to allow connections between your Neon project and the remote Postgres server. Firewalls and security groups might need adjustments.
 - **Principle of Least Privilege:** Grant only the necessary permissions to the user mapped to the remote database. Avoid using superuser accounts for `postgres_fdw` connections.
-- **SSL encryption:** Ensure that the connection to the remote PostgreSQL server is encrypted using SSL. This is often the default behavior for PostgreSQL connections, but it's worth verifying the configuration.
+- **SSL encryption:** Ensure that the connection to the remote Postgres server is encrypted using SSL. This is often the default behavior for Postgres connections, but it's worth verifying the configuration.
 
 ## `postgres_fdw` vs. `dblink`
 

@@ -836,6 +836,7 @@
               slug: extensions/pg-extensions
             - title: dblink
               slug: extensions/dblink
+              tag: new
             - title: citext
               slug: extensions/citext
             - title: hstore
@@ -850,6 +851,7 @@
               slug: extensions/pgrag
             - title: pg_cron
               slug: extensions/pg_cron
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
@@ -865,10 +867,11 @@
               slug: extensions/pg_trgm
             - title: postgis
               slug: extensions/postgis
-            - title: postgres_fdw
-              slug: extensions/postgres_fdw
             - title: postgis-related
               slug: extensions/postgis-related-extensions
+            - title: postgres_fdw
+              slug: extensions/postgres_fdw
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: wal2json
