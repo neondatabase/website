@@ -870,6 +870,9 @@
             - title: pg_cron
               slug: extensions/pg_cron
               tag: new
+            - title: pg_repack
+              slug: extensions/pg_repack
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:
