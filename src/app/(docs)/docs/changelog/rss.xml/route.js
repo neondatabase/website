@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
-import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import { CHANGELOG_DIR_PATH, getAllChangelogs, getPostBySlug } from 'utils/api-docs';
+import { CHANGELOG_DIR_PATH, CHANGELOG_BASE_PATH } from 'constants/docs';
+import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
