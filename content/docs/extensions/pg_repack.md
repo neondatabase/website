@@ -6,7 +6,7 @@ tag: new
 updatedOn: '2025-01-24T00:00:00.000Z'
 ---
 
-PostgreSQL, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful PostgreSQL extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
+Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
 
 <CTA />
 
@@ -32,7 +32,7 @@ Before using `pg_repack`, it's helpful to understand what causes bloat and how `
 
 ### What is Bloat?
 
-In PostgreSQL, when rows in a table are updated or deleted, the space they occupied isn't immediately reclaimed. Instead, Postgres uses a mechanism called Multi-Version Concurrency Control (MVCC). While MVCC is essential for concurrency and transactional integrity, it can lead to **dead tuples** – outdated row versions that are no longer needed but still occupy space. Indexes also become bloated as they point to these dead tuples or become fragmented over time. This unused space is known as bloat.
+In Postgres, when rows in a table are updated or deleted, the space they occupied isn't immediately reclaimed. Instead, Postgres uses a mechanism called Multi-Version Concurrency Control (MVCC). While MVCC is essential for concurrency and transactional integrity, it can lead to **dead tuples** – outdated row versions that are no longer needed but still occupy space. Indexes also become bloated as they point to these dead tuples or become fragmented over time. This unused space is known as bloat.
 
 ### Why remove bloat?
 
@@ -49,7 +49,7 @@ Bloat can negatively impact your database in several ways:
 Key features of `pg_repack` include:
 
 - **Online operation:** It operates without requiring exclusive locks for most of the process, minimizing downtime.
-- **Minimal locking:** Only short ACCESS EXCLUSIVE locks are needed at the beginning and end of the repack process.
+- **Minimal locking:** Only short `ACCESS EXCLUSIVE` locks are needed at the beginning and end of the repack process.
 - **Bloat removal:** Effectively removes bloat from both tables and indexes, reclaiming disk space and improving performance.
 - **Reordering options:** Allows you to optionally reorder table rows based on a clustered index or specified columns, further optimizing data access.
 - **Index repack:** You can repack indexes independently of the table, which can be useful for index-specific bloat issues.
@@ -74,7 +74,7 @@ Let's break down the key components:
 
 - **`pg_repack`**: This is the command itself, invoking the `pg_repack` executable. Ensure that `pg_repack` is installed and accessible in your system's `PATH`.
 - **`[OPTIONS]...`**: These are command-line options that modify the behavior of `pg_repack`. Options are typically provided in the format `--option-name=value` or `-short-option value`. You can specify multiple options to customize the repack operation.
-- **`[DBNAME]`**: This is the name of the PostgreSQL database you want to connect to. You can also specify the database connection details using connection options (see below), in which case you might omit `DBNAME` here.
+- **`[DBNAME]`**: This is the name of the Postgres database you want to connect to. You can also specify the database connection details using connection options (see below), in which case you might omit `DBNAME` here.
 
 ### Common `pg_repack` options
 
@@ -92,7 +92,7 @@ Let's break down the key components:
 - **`-j NUM`, `--jobs=NUM`**: Uses multiple parallel jobs (connections) to speed up index rebuilding. Useful for servers with multiple CPU cores and sufficient I/O capacity.
 - **`-N`, `--dry-run`**: Performs a "dry run," listing the actions `pg_repack` _would_ take without actually executing them. Useful for previewing the operation.
 - **`-Z`, `--no-analyze`**: Skips running `ANALYZE` on the repacked table(s) at the end of the process. By default, `pg_repack` runs `ANALYZE`.
-- **`-k`, `--no-superuser-check`**: **Crucially important for Neon!** Skips the superuser check. You must use this option when running `pg_repack` against Neon as Neon users are not superusers.
+- **`-k`, `--no-superuser-check`**: **Crucially important for Neon!** Skips the superuser check. You must use this option when running `pg_repack` against Neon, as Neon users are not superusers.
 
 ### Connection options
 
@@ -119,7 +119,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 
     Over time, tables can accumulate bloat from updates and deletes, wasting storage and impacting performance. `pg_repack` rewrites tables to remove dead rows and reclaim unused space, similar to `VACUUM FULL`, but crucially, **without blocking write operations**. This is essential for maintaining application availability.
 
-    ```sql
+    ```bash
     -- Repack a single table (performs online VACUUM FULL)
     pg_repack --no-order --table orders;
     ```
@@ -128,7 +128,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 
     If you frequently query your data based on a specific index, physically reordering the table rows according to that index can significantly improve query performance. This is similar to the `CLUSTER` command, but `pg_repack` performs this reordering **online**, minimizing disruption.
 
-    ```sql
+    ```bash
     -- Reorder the 'orders' table by 'order_date' in descending order
     pg_repack --table orders --order-by "order_date DESC";
     ```
@@ -137,7 +137,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 
     Indexes can become fragmented over time, leading to less efficient index scans. `pg_repack` can rebuild indexes **online**, creating fresh, optimized indexes to improve query performance without locking the table for writes.
 
-    ```sql
+    ```bash
     -- Rebuild all indexes of the 'orders' table
     pg_repack --table orders --only-indexes;
     ```
