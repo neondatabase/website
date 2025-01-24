@@ -4,10 +4,11 @@ import { notFound, redirect } from 'next/navigation';
 import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
-import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX, VERCEL_URL } from 'constants/docs';
-import { getAllChangelogs, getPostBySlug, CHANGELOG_DIR_PATH } from 'utils/api-docs';
-import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
+import { VERCEL_URL } from 'constants/content';
+import { CHANGELOG_BASE_PATH, CHANGELOG_DIR_PATH, CHANGELOG_SLUG_REGEX } from 'constants/docs';
+import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
+import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateStaticParams() {
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }) {
 
   if (isChangelogPage) {
     if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
-    const { label: date } = getChangelogDateFromSlug(currentSlug);
+    const date = getFormattedDate(currentSlug);
     const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
     label = `Changelog ${date}`;
     socialPreviewTitle = `Changelog - ${date}`;
@@ -65,8 +66,7 @@ const ChangelogPost = async ({ currentSlug }) => {
     redirect('/docs/changelog');
 
   if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
-
-  const { datetime, label } = getChangelogDateFromSlug(currentSlug);
+  const date = getFormattedDate(currentSlug);
 
   const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
 
@@ -75,8 +75,8 @@ const ChangelogPost = async ({ currentSlug }) => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Changelog ${label}`,
-    datePublished: datetime,
+    headline: `Changelog ${date}`,
+    datePublished: date,
     author: {
       '@type': 'Organization',
       name: 'Neon',
@@ -93,18 +93,14 @@ const ChangelogPost = async ({ currentSlug }) => {
       )}
 
       <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col 3xl:col-span-10 3xl:col-start-2 3xl:ml-0 2xl:col-span-11 2xl:col-start-1 xl:max-w-[calc(100vw-366px)] lg:ml-0 lg:max-w-full lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
-        <Hero
-          className="flex justify-center lg:pt-16 md:py-10 sm:py-7"
-          date={label}
-          withContainer
-        />
+        <Hero className="flex justify-center lg:pt-16 md:py-10 sm:py-7" date={date} withContainer />
         <article className="relative flex w-full max-w-full flex-col items-start">
           <h2>
             <time
               className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
-              dateTime={datetime}
+              dateTime={currentSlug}
             >
-              {label}
+              {date}
             </time>
           </h2>
           <Content className="mt-8 w-full max-w-full prose-h3:text-xl" content={content} />

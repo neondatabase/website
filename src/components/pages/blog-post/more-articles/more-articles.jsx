@@ -13,7 +13,7 @@ const MoreArticles = ({ className = null, posts }) => (
     <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1 md:gap-y-6">
       {posts.map((post, index) => (
         <li key={index} className="flex flex-col">
-          <BlogPostCard {...post} size="md" imageWidth={380} imageHeight={214} withAuthorPhoto />
+          <BlogPostCard {...post} imageWidth={380} imageHeight={214} />
         </li>
       ))}
     </ul>

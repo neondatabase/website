@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/guides/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { VERCEL_URL } from 'constants/guides';
+import { VERCEL_URL } from 'constants/content';
 import LINKS from 'constants/links';
 import { GUIDES_DIR_PATH, getAllGuides, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';

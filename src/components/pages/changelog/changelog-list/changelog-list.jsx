@@ -5,14 +5,14 @@ import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import LoadMorePosts from 'components/shared/load-more-posts';
 import generateChangelogPath from 'utils/generate-changelog-path';
-import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
+import getFormattedDate from 'utils/get-formatted-date';
 
 const ChangelogList = ({ className, items }) => (
   <div className={clsx('sm:space-y-7', className)}>
     <LoadMorePosts className="mt-14" defaultCountPosts={10} countToAdd={10} isChangelog>
-      {items.map(({ slug, content }, index) => {
-        const { datetime, label } = getChangelogDateFromSlug(slug);
+      {items.map(({ slug, date, content }, index) => {
         const changelogPath = generateChangelogPath(slug);
+        const dateLabel = getFormattedDate(date);
 
         return (
           <article className="group flex first:mt-0 lg:flex-col lg:space-y-3" key={index}>
@@ -26,7 +26,7 @@ const ChangelogList = ({ className, items }) => (
                 to={changelogPath}
               >
                 <h2 className="whitespace-nowrap font-title text-xl font-medium leading-normal">
-                  <time dateTime={datetime}>{label}</time>
+                  <time dateTime={date}>{dateLabel}</time>
                 </h2>
               </Link>
 

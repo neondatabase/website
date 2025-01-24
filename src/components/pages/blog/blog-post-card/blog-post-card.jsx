@@ -5,13 +5,18 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link/link';
 import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS } from 'constants/blog';
 import LINKS from 'constants/links';
+import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
+
+import Authors from '../authors';
 
 const BlogPostCard = ({
   className,
   type,
   title,
+  subtitle,
   excerpt,
+  content,
   slug,
   date,
   categories,
@@ -24,7 +29,11 @@ const BlogPostCard = ({
   isPriority = false,
 }) => {
   const { largeCover, authors } = pageBlogPost || {};
-  const postAuthor = authors?.[0]?.author || author;
+  const authorsData = authors?.map(({ author: { title, postAuthor } }) => ({
+    name: title,
+    photo: postAuthor?.image?.mediaItemUrl,
+  }));
+  const text = excerpt || subtitle || (content && getExcerpt(content, 160));
 
   const formattedDate = getFormattedDate(date);
 
@@ -91,7 +100,13 @@ const BlogPostCard = ({
           fullSize && largeCover ? 'w-[408px] shrink-0 md:w-full' : 'w-full'
         )}
       >
-        <div className="flex gap-2 text-[13px] leading-none tracking-extra-tight">
+        <div
+          className={clsx(
+            'flex gap-2 text-[13px] leading-none tracking-extra-tight',
+            fullSize ? 'mb-4' : 'mb-2'
+          )}
+        >
+          {/* category */}
           <Link
             className={clsx('font-medium', CATEGORY_COLORS[category.slug] || 'text-green-45')}
             to={category.slug}
@@ -112,62 +127,31 @@ const BlogPostCard = ({
           </time>
         </div>
         <Link className="group flex flex-col" to={link}>
+          {/* title */}
           <h1
             className={clsx(
-              'line-clamp-2 font-title font-medium leading-dense transition-colors duration-200 group-hover:text-green-45',
-              fullSize
-                ? 'text-2xl tracking-tighter xl:text-3xl md:text-2xl'
-                : 'text-xl tracking-tighter lg:text-2xl xs:text-base',
-              category ? 'mt-2 md:mt-1.5' : 'mt-5 md:mt-4'
+              'font-title font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45',
+              fullSize ? 'line-clamp-2 text-2xl' : 'line-clamp-3 text-xl'
             )}
           >
             {title}
           </h1>
-          {fullSize && excerpt && (
-            <p
+          {/* excerpt */}
+          {fullSize && (
+            <div
               className={clsx(
                 'mt-2 text-lg tracking-extra-tight text-gray-new-94',
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
-              dangerouslySetInnerHTML={{ __html: excerpt }}
-            />
-          )}
-          <div className={clsx('flex items-center', fullSize ? 'mt-4' : 'mt-2.5')}>
-            {/* avatar */}
-            {postAuthor && (
-              <Image
-                className={clsx(
-                  'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
-                  fullSize ? 'mr-2 block' : 'hidden'
-                )}
-                src={postAuthor.postAuthor?.image?.mediaItemUrl}
-                alt={postAuthor.title}
-                quality={85}
-                width={28}
-                height={28}
-              />
-            )}
-
-            <div
-              className={clsx(
-                'flex items-center xl:flex-col xl:items-start md:flex-row md:items-center'
-              )}
             >
-              {/* author */}
-              {postAuthor && (
-                <span
-                  className={clsx(
-                    'leading-none tracking-extra-tight',
-                    fullSize ? 'text-gray-new-90' : 'text-gray-new-80',
-                    'text-[15px] lg:text-sm xs:text-[13px]',
-                    'text-sm leading-none lg:text-[13px]'
-                  )}
-                >
-                  {postAuthor.title}
-                </span>
-              )}
+              {text}
             </div>
-          </div>
+          )}
+          {/* authors */}
+          {authorsData && (
+            <Authors className={clsx(fullSize ? 'mt-4' : 'mt-2.5')} authors={authorsData} />
+          )}
+          {author && <Authors className={clsx(fullSize ? 'mt-4' : 'mt-2.5')} authors={[author]} />}
         </Link>
       </div>
     </article>
@@ -178,7 +162,9 @@ BlogPostCard.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   excerpt: PropTypes.string,
+  content: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   categories: PropTypes.shape({
@@ -208,7 +194,8 @@ BlogPostCard.propTypes = {
     ),
   }),
   author: PropTypes.shape({
-    title: PropTypes.string,
+    name: PropTypes.string,
+    photo: PropTypes.string,
   }),
   fullSize: PropTypes.bool,
   withImageHover: PropTypes.bool,

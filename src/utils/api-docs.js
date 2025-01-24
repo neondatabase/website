@@ -1,18 +1,12 @@
-import { format, parseISO } from 'date-fns';
-
 const fs = require('fs');
 
 const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
-const { CHANGELOG_DIR_PATH } = require('../constants/docs');
+const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/docs');
 
 const getExcerpt = require('./get-excerpt');
-
-const DOCS_DIR_PATH = 'content/docs';
-const USE_CASES_DIR_PATH = 'content/use-cases';
-const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -31,7 +25,7 @@ const getPostBySlug = (slug, pathname) => {
   try {
     const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
     const { data, content } = matter(source);
-    const excerpt = getExcerpt(content, 240);
+    const excerpt = getExcerpt(content, 200);
 
     return { data, content, excerpt };
   } catch (e) {
@@ -74,15 +68,6 @@ const getNavigationLinks = (slug, flatSidebar) => {
   };
 };
 
-const getChangelogDateFromSlug = (slug) => {
-  const slugDatePiece = slug.slice(0, 10);
-
-  return {
-    title: format(parseISO(slugDatePiece), 'MMM dd, yyyy'),
-    date: slugDatePiece,
-  };
-};
-
 const getAllChangelogs = async () => {
   const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
 
@@ -90,23 +75,27 @@ const getAllChangelogs = async () => {
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
-        data: { title, isDraft, isFeatured, redirectFrom },
+        data: { isDraft, isFeatured, redirectFrom },
         content,
-        excerpt,
       } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const slugWithoutFirstSlash = slug.slice(1);
-      const { date } = getChangelogDateFromSlug(slugWithoutFirstSlash);
+      const date = slugWithoutFirstSlash;
+      const titleMatch = content.match(/# (.*)/);
+      const title = titleMatch?.[1];
+      // Remove title from excerpt
+      const excerpt = getExcerpt(content.replace(titleMatch?.[0], ''), 280);
 
+      // eslint-disable-next-line consistent-return
       return {
         type: 'changelog',
         title,
         excerpt,
         date,
         slug: slugWithoutFirstSlash,
-        isDraft,
         content,
-        redirectFrom,
+        isDraft,
         isFeatured,
+        redirectFrom,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
@@ -118,10 +107,5 @@ module.exports = {
   getSidebar,
   getNavigationLinks,
   getAllChangelogs,
-  getChangelogDateFromSlug,
   getAllPosts,
-  DOCS_DIR_PATH,
-  USE_CASES_DIR_PATH,
-  FLOW_DIR_PATH,
-  CHANGELOG_DIR_PATH,
 };

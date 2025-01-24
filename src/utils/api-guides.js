@@ -1,7 +1,7 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const { glob } = require('glob');
-const matter = require('gray-matter');
+import { glob } from 'glob';
+import matter from 'gray-matter';
 
 const GUIDES_DIR_PATH = 'content/guides';
 
@@ -63,10 +63,12 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom },
+        data: { title, subtitle, createdAt, updatedOn, isDraft, isFeatured, redirectFrom },
         content,
         author,
       } = data;
+
+      // eslint-disable-next-line consistent-return
       return {
         type: 'guide',
         slug: slugWithoutFirstSlash,
@@ -75,10 +77,11 @@ const getAllGuides = async () => {
         author,
         createdAt,
         updatedOn,
-        isDraft,
-        content,
-        redirectFrom,
         date: createdAt,
+        content,
+        isDraft,
+        isFeatured,
+        redirectFrom,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
@@ -97,10 +100,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-module.exports = {
-  getPostSlugs,
-  getPostBySlug,
-  getNavigationLinks,
-  getAllGuides,
-  GUIDES_DIR_PATH,
-};
+export { getPostSlugs, getPostBySlug, getNavigationLinks, getAllGuides, GUIDES_DIR_PATH };

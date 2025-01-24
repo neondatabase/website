@@ -124,7 +124,6 @@ const fetchAllWpPosts = async (after) => {
             }
           }
           modifiedGmt
-          excerpt
           slug
           title(format: RENDERED)
           date
