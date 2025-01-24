@@ -16,7 +16,7 @@ updatedOn: '2025-01-10T00:00:00.000Z'
 </DocsList>
 </InfoBlock>
 
-[Neon Authorize](/docs/guides/neon-authorize) lets you implement authorization directly within your Postgres database using Row-Level Security (RLS). While it works seamlessly with authentication providers like [Auth0](https://auth0.com) and [Clerk](https://clerk.com), you can also use your own custom-generated JSON Web Tokens (JWTs). This gives you fine-grained control over how tokens are created and validated, ideal for specific application needs or when you prefer to manage authentication independently.
+[Neon Authorize](/docs/guides/neon-authorize) lets you implement authorization directly within your Postgres database using Row-Level Security (RLS). While it works well with authentication providers like [Auth0](https://auth0.com) and [Clerk](https://clerk.com), you can also use your own custom-generated JSON Web Tokens (JWTs). This gives you fine-grained control over how tokens are created and validated, ideal for specific application needs or when you prefer to manage authentication independently.
 
 This guide walks you through using custom JWTs with Neon Authorize, covering:
 
