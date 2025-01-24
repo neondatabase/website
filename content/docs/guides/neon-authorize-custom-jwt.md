@@ -29,7 +29,7 @@ This guide walks you through using custom JWTs with Neon Authorize, covering:
 
 - **Full control:** You control your JWTs' structure, claims, and signing process, which is useful when standard providers don't meet your needs.
 - **Reduced External Dependencies:** Custom JWTs can reduce reliance on external services, especially for internal tools.
-- **Tailored Security Policies**: Align JWT generation and validation precisely with your application's unique security requirements
+- **Tailored security policies**: Align JWT generation and validation precisely with your application's unique security requirements
 - **Simplified Architecture in Specific Cases**: For some applications, particularly internal tools or those with existing authentication mechanisms, using custom JWTs can eliminate the need for integrating a separate, full-featured authentication service
 
 ## Prerequisites
