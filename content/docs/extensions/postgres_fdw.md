@@ -5,9 +5,11 @@ enableTableOfContents: true
 updatedOn: '2024-11-08T10:00:00.000Z'
 ---
 
-The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
+<Admonition type="important" title="coming soon">
+Support for the `postgres_fdw` extension is coming to Neon soon. Please check the [Neon Changelog](https://neon.tech/docs/changelog) for updates.
+</Admonition>
 
-<CTA />
+The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
 
 This guide will walk you through the essentials of using the `postgres_fdw` extension in Neon. You'll learn how to enable the extension, establish connections to remote PostgreSQL servers, define foreign tables that map to tables on those servers, and execute queries that span across your Neon database and remote instances. We will also cover important considerations for performance and security when working with `postgres_fdw`.
 
