@@ -367,7 +367,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Pooled connection** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
+You can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
@@ -537,7 +537,7 @@ An unpooled connection string connects to your Neon database directly. It does n
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 ```
 
-You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Pooled connection** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+You can obtain an unpooled connection string for your database from the **Connection Details** widget on the Neon Dashboard. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Time Travel
 

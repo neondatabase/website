@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
 tag: beta
-updatedOn: '2024-12-19T23:43:30.029Z'
+updatedOn: '2025-01-20T19:57:47.361Z'
 ---
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
@@ -33,7 +33,9 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 To configure Neon Private Networking, perform the following steps:
 
-1.  **Create an AWS VPC endpoint**
+<Steps>
+
+## Create an AWS VPC endpoint
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
@@ -43,19 +45,19 @@ To configure Neon Private Networking, perform the following steps:
     1. For **Type**, select the **Endpoint services that use NLBs and GWLBs** category.
     1. Under **Service settings**, specify the **Service name**. It must be one of the following names, depending on your region:
 
-       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0ccf08d7888526333`
-       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-0fa555394e26593be`
-       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-0fa74d33d011f0803`
-       - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-05948d7514bcd0733`
-       - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-045649a6862891b1e`
-       - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-08e19a71d9651bde1`
+       - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
+       - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
+       - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+       - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
+       - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
+       - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
     1. Select the VPC where your application is deployed.
     1. Add the availability zones and associated subnets you want to support.
     1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-2.  **Provide the VPC Endpoint ID to Neon**
+## Provide the VPC Endpoint ID to Neon
 
     Note the **VPC Endpoint ID** and provide it to Neon. Neon will authorize this VPC Endpoint to access the Neon Private Networking service and will notify you once authorization is complete.
 
@@ -63,7 +65,7 @@ To configure Neon Private Networking, perform the following steps:
      Please note that you must provide the **VPC Endpoint ID**, not the VPC ID. This step is specific to the Private Preview. In the final version, the allowed VPC Endpoint will be configured through the Neon Console or Neon CLI without any manual involvement by Neon.
     </Admonition>
 
-3.  **Enable Private DNS**
+## Enable Private DNS
 
     After Neon authorizes your endpoint (wait for confirmation from Neon), enable private DNS lookup for the endpoint.
 
@@ -73,25 +75,13 @@ To configure Neon Private Networking, perform the following steps:
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
 
-4.  **Update the connection string**
+## Check your database connection string
 
-    To connect to your Neon database using AWS PrivateLink, modify your Neon database connection string to use the private endpoint.
+    Your Neon database connection string does not change when using Private Networking.
 
-    For example, if your original Neon database connection string is:
+    To verify that your connection is working correctly, you can perform a DNS lookup on your Neon endpoint hostname from within your AWS VPC. It should resolve to the private IP address of the VPC endpoint.
 
-    ```
-    postgresql://user:password@ep-testing-bush-12345.us-east-1.aws.neon.tech
-    ```
-
-    Update it to:
-
-    ```
-    postgresql://user:password@ep-testing-bush-12345.vpce.us-east-1.aws.neon.tech
-    ```
-
-    Notice that the updated connection string includes `vpce` in the hostname. This change will route database connections over AWS PrivateLink.
-
-5.  **Restrict public internet access**
+## Restrict public internet access
 
     At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
@@ -110,6 +100,8 @@ To configure Neon Private Networking, perform the following steps:
     <Admonition type="note">
      Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version of this feature, there will be a dedicated option in the Neon Console for this purpose.
     </Admonition>
+
+</Steps>
 
 ## Limits
 

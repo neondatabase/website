@@ -16,7 +16,9 @@ To follow this tutorial, you'll need:
 - A Neon account. [Sign up here](/docs/get-started-with-neon/signing-up).
 - A [history retention](/docs/manage/projects#configure-history-retention) period that covers the timeframe of interest, allowing for effective use of Time Travel.
 
-## Step 1: Preparing Your Database
+<Steps>
+
+## Preparing Your Database
 
 To simulate this scenario, create a `feature_flags` table used for controlling new feature availability.
 
@@ -46,7 +48,7 @@ To simulate this scenario, create a `feature_flags` table used for controlling n
 
 This setup reflects a typical development stage: the feature is integrated and deployment-ready but remains inactive, awaiting activation.
 
-## Step 2: Simulating Feature Flag Activation
+## Simulating Feature Flag Activation
 
 Now, we'll simulate the process of enabling this feature flag to release the feature.
 
@@ -60,7 +62,7 @@ UPDATE feature_flags SET enabled = TRUE WHERE feature_name = 'new_checkout_proce
 
 This action mirrors enabling a new feature in your production environment, typically managed as part of your CI/CD pipeline.
 
-## Step 3: Determine exactly when the feature was enabled
+## Determine exactly when the feature was enabled
 
 Since user complaints started coming in right after the feature was enabled, our first debug step is to confirm the exact moment the `new_checkout_process` feature flag was activated. Assume we've checked the deployment logs or CI/CD pipeline history and found the activation timestamp to be `2023-04-09 at 6:11 PM EST`.
 
@@ -72,7 +74,7 @@ For this tutorial, locate the timestamp of the `UPDATE` operation in the **Histo
 Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot converts from `2023-04-09 at 6:11:00:00 PM EST` to `2023-04-09 at 10:11:00 PM UTC`.
 </Admonition>
 
-## Step 4: Verifying Feature Flag Pre-Activation Status
+## Verifying Feature Flag Pre-Activation Status
 
 Let's confirm that the feature was indeed disabled just before the feature flag's activation.
 
@@ -90,7 +92,7 @@ Let's confirm that the feature was indeed disabled just before the feature flag'
 
    ![check pre-activation](/docs/guides/time_travel_tutorial_before.png)
 
-## Step 5: Analyzing Post-Activation State
+## Analyzing Post-Activation State
 
 With the pre-activation state confirmed, now check the feature flag's status immediately after activation.
 
@@ -105,3 +107,5 @@ SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
 ![check post-activation](/docs/guides/time_travel_tutorial_after.png)
 
 Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.
+
+</Steps>
