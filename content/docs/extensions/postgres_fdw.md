@@ -3,7 +3,7 @@ title: The postgres_fdw extension
 subtitle: Access data in remote Postgres databases from Neon using postgres_fdw
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-11-08T10:00:00.000Z'
+updatedOn: '2025-01-24T19:33:03.064Z'
 ---
 
 <Admonition type="important" title="coming soon">
