@@ -1,11 +1,11 @@
-import { getAllCategories, getAllPosts } from 'utils/api-posts';
+import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-posts';
 
 export async function GET() {
   const headers = new Headers();
   headers.set('Content-Type', 'application/xml');
 
-  const posts = await getAllPosts();
-  const categories = await getAllCategories();
+  const posts = await getAllWpPosts();
+  const categories = await getAllWpBlogCategories();
 
   return new Response(
     `<?xml version="1.0" encoding="UTF-8" ?>
