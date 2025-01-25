@@ -11,13 +11,7 @@ This guide describes how to create a Neon project and connect to it from a Bun a
 The same configuration steps can be used for [Hono](https://hono.dev/docs/getting-started/bun), [Elysia](https://elysiajs.com), and other Bun-based web frameworks.
 </Admonition>
 
-To connect to Neon from a Bun application:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Bun project and add dependencies](#create-a-bun-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run index.ts](#run-indexts)
+<Steps>
 
 ## Create a Neon project
 
@@ -29,27 +23,27 @@ If you do not have one already, create a Neon project.
 
 ## Create a Bun project and add dependencies
 
-1. Create a Bun project and change to the newly created directory.
+Create a Bun project and change to the newly created directory:
 
-   ```shell
-   mkdir bun-neon-example
-   cd bun-neon-example
-   bun init -y
-   ```
+```shell
+mkdir bun-neon-example
+cd bun-neon-example
+bun init -y
+```
 
-2. Add project dependencies if you intend to use the Neon serverless driver. Otherwise, Bun's built-in `sql` client is readily available.
+Next, add project dependencies if you intend to use the Neon serverless driver. Otherwise, Bun's built-in `sql` client is readily available.
 
-   <CodeTabs labels={["Bun.sql", "Neon serverless driver"]}>
+<CodeTabs labels={["Bun.sql", "Neon serverless driver"]}>
 
-   ```shell
-   # No dependencies needed for Bun's built-in SQL client
-   ```
+```shell
+# No dependencies needed for Bun's built-in SQL client
+```
 
-   ```shell
-   bun add @neondatabase/serverless
-   ```
+```shell
+bun add @neondatabase/serverless
+```
 
-   </CodeTabs>
+</CodeTabs>
 
 ## Store your Neon credentials
 
@@ -109,6 +103,8 @@ $ bun run index.ts
   version: "PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit",
 }
 ```
+
+</Steps>
 
 ## Source code
 
