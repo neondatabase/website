@@ -17,6 +17,8 @@ Find detailed instructions for connecting to Neon from various JavaScript framew
 
 <a href="/docs/guides/deno" title="Deno" description="Connect a Deno application to Neon" icon="deno"></a>
 
+<a href="/docs/guides/bun" title="Bun" description="Connect a Bun application to Neon" icon="bun"></a>
+
 </TechnologyNavigation>
 
 <NeedHelp/>
