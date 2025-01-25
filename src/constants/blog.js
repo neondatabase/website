@@ -21,10 +21,16 @@ const CATEGORY_BG_COLORS = {
   workflows: 'bg-blue-80/10',
 };
 
+const EXTRA_CATEGORIES = [
+  { slug: 'guides', name: 'Guides' },
+  { slug: 'changelog', name: 'Changelog' },
+];
+
 export {
   BLOG_BASE_PATH,
   BLOG_POSTS_PER_PAGE,
   CATEGORY_COLORS,
   CATEGORY_BG_COLORS,
   BLOG_CATEGORY_BASE_PATH,
+  EXTRA_CATEGORIES,
 };

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS } from 'constants/blog';
+import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS, EXTRA_CATEGORIES } from 'constants/blog';
 import LINKS from 'constants/links';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
@@ -12,13 +12,12 @@ import Authors from '../authors';
 
 const BlogPostCard = ({
   className,
-  type,
   title,
   subtitle,
-  excerpt,
   content,
   slug,
   date,
+  category,
   categories,
   pageBlogPost,
   author,
@@ -33,41 +32,40 @@ const BlogPostCard = ({
     name: title,
     photo: postAuthor?.image?.mediaItemUrl,
   }));
-  const text = excerpt || subtitle || (content && getExcerpt(content, 160));
+  const excerpt = subtitle || (content && getExcerpt(content, 280));
 
   const formattedDate = getFormattedDate(date);
 
   const link = (() => {
-    switch (type) {
-      case 'guide':
-        return `${LINKS.guides}/${slug}`;
-      case 'changelog':
-        return `${LINKS.changelog}/${slug}`;
-      default:
-        return `${LINKS.blog}/${slug}`;
+    if (category) {
+      const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === category);
+      if (extraCategory) return `${extraCategory.slug}/${slug}`;
     }
+
+    return `${LINKS.blog}/${slug}`;
   })();
 
-  const wpCategory = categories?.nodes[0];
-  const category = (() => {
-    switch (type) {
-      case 'guide':
-        return { slug: LINKS.guides, name: 'Guides' };
-      case 'changelog':
-        return { slug: LINKS.changelog, name: 'Changelog' };
-      default:
-        return {
-          slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
-          name: wpCategory?.name,
-        };
+  const cat = (() => {
+    if (category) {
+      return EXTRA_CATEGORIES.find((cat) => cat.slug === category);
     }
+
+    if (categories) {
+      const wpCategory = categories?.nodes[0];
+      return {
+        slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
+        name: wpCategory?.name,
+      };
+    }
+
+    return null;
   })();
 
   return (
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'flex-row-reverse gap-6' : 'flex-col gap-4',
+        fullSize ? 'flex-row-reverse gap-6 xl:gap-5 md:flex-col-reverse' : 'flex-col gap-4',
         className
       )}
     >
@@ -107,18 +105,20 @@ const BlogPostCard = ({
           )}
         >
           {/* category */}
-          <Link
-            className={clsx('font-medium', CATEGORY_COLORS[category.slug] || 'text-green-45')}
-            to={category.slug}
-          >
-            {category.name}
-          </Link>
+          {cat && (
+            <Link
+              className={clsx('font-medium', CATEGORY_COLORS[cat.slug] || 'text-green-45')}
+              to={cat.slug}
+            >
+              {cat.name}
+            </Link>
+          )}
 
           {/* date */}
           <time
             className={clsx(
               'relative block shrink-0 uppercase leading-none tracking-extra-tight text-gray-new-60',
-              category &&
+              cat &&
                 'pl-[11px] before:absolute before:left-0 before:top-1/2 before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
             )}
             dateTime={date}
@@ -144,7 +144,7 @@ const BlogPostCard = ({
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >
-              {text}
+              {excerpt}
             </div>
           )}
           {/* authors */}
@@ -162,13 +162,12 @@ const BlogPostCard = ({
 
 BlogPostCard.propTypes = {
   className: PropTypes.string,
-  type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  excerpt: PropTypes.string,
   content: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  category: PropTypes.string,
   categories: PropTypes.shape({
     nodes: PropTypes.arrayOf(
       PropTypes.shape({

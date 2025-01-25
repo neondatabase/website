@@ -1,16 +1,16 @@
-import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-posts';
+import { getAllCategories, getAllPosts } from 'utils/api-posts';
 
 export async function GET() {
   const headers = new Headers();
   headers.set('Content-Type', 'application/xml');
 
-  const wpPosts = await getAllWpPosts();
-  const wpCategories = await getAllWpBlogCategories();
+  const posts = await getAllPosts();
+  const categories = await getAllCategories();
 
   return new Response(
     `<?xml version="1.0" encoding="UTF-8" ?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-          ${wpPosts
+          ${posts
             .map(
               (post) => `
               <url>
@@ -22,7 +22,7 @@ export async function GET() {
           `
             )
             .join('')}
-          ${wpCategories
+          ${categories
             .map(
               (category) => `
               <url>

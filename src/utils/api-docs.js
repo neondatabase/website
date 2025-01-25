@@ -75,23 +75,18 @@ const getAllChangelogs = async () => {
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
-        data: { isDraft, isFeatured, redirectFrom },
+        data: { description, isDraft, isFeatured, redirectFrom },
         content,
       } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
-      const titleMatch = content.match(/# (.*)/);
-      const title = titleMatch?.[1];
-      // Remove title from excerpt
-      const excerpt = getExcerpt(content.replace(titleMatch?.[0], ''), 280);
 
       // eslint-disable-next-line consistent-return
       return {
-        type: 'changelog',
-        title,
-        excerpt,
-        date,
+        title: description,
         slug: slugWithoutFirstSlash,
+        category: 'changelog',
+        date,
         content,
         isDraft,
         isFeatured,

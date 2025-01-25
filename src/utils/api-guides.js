@@ -70,10 +70,10 @@ const getAllGuides = async () => {
 
       // eslint-disable-next-line consistent-return
       return {
-        type: 'guide',
-        slug: slugWithoutFirstSlash,
         title,
         subtitle,
+        slug: slugWithoutFirstSlash,
+        category: 'guides',
         author,
         createdAt,
         updatedOn,

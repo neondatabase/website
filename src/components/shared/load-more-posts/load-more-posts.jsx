@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 const ChangelogWrapper = ({ children, countPosts }) => {
   const [allPostsShown, setAllPostsShown] = useState(false);
@@ -43,11 +44,13 @@ const LoadMorePosts = ({
       {countPosts < children.length && (
         <div className={clsx('col-span-full text-center', className)}>
           <Button
-            theme="gray-outline"
+            className="h-[38px] gap-3 !px-5 text-[15px] font-medium"
+            theme="gray-10"
             size="xs"
             onClick={() => setCountPosts((prev) => prev + countToAdd)}
           >
-            Load More
+            Show more
+            <ChevronIcon className="-mb-px w-2.5 text-white [&_path]:stroke-2" />
           </Button>
         </div>
       )}

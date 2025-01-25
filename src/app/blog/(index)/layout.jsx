@@ -1,11 +1,11 @@
 import Sidebar from 'components/pages/blog/sidebar';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Container from 'components/shared/container';
-import { getAllWpBlogCategories } from 'utils/api-posts';
+import { getAllCategories } from 'utils/api-posts';
 
 // eslint-disable-next-line react/prop-types
 const BlogPageLayout = async ({ children }) => {
-  const categories = await getAllWpBlogCategories();
+  const categories = await getAllCategories();
 
   return (
     <div className="safe-paddings py-16 lg:py-12 sm:py-10">
@@ -20,9 +20,7 @@ const BlogPageLayout = async ({ children }) => {
         </div>
         <div className="flex gap-24 xl:gap-6 lg:flex-col lg:gap-0">
           <Sidebar categories={categories} />
-          <div className="relative grid max-w-3xl grid-cols-2 gap-x-6 md:grid-cols-1">
-            {children}
-          </div>
+          <div className="relative max-w-3xl lg:max-w-full">{children}</div>
         </div>
         <SubscribeForm
           className="mt-[120px] xl:mt-[104px] lg:mt-[88px] md:mt-20"

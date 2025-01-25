@@ -1,7 +1,9 @@
 import { cache } from 'react';
 
-import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
+import { BLOG_POSTS_PER_PAGE, EXTRA_CATEGORIES } from 'constants/blog';
 import { gql, graphQLClientAdmin, fetchGraphQL, graphQLClient } from 'lib/graphQLClient';
+import { getAllChangelogs } from 'utils/api-docs';
+import { getAllGuides } from 'utils/api-guides';
 
 import getAuthToken from './api-auth';
 
@@ -42,6 +44,20 @@ const getAllWpBlogCategories = cache(async () => {
 
   return filteredCategories;
 });
+
+const getAllCategories = async () => {
+  const wpCategories = await getAllWpBlogCategories();
+  return [...wpCategories, ...EXTRA_CATEGORIES];
+};
+
+const getCategoryBySlug = async (slug) => {
+  const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === slug);
+  if (extraCategory) return extraCategory;
+
+  const wpCategories = await getAllWpBlogCategories();
+  const wpCategory = wpCategories.find((cat) => cat.slug === slug);
+  return wpCategory;
+};
 
 const fetchWpPostsByCategorySlug = async (slug, after) => {
   const postsQuery = gql`
@@ -111,6 +127,18 @@ const getWpPostsByCategorySlug = cache(async (slug) => {
 
   return allPosts;
 });
+
+const getPostsByCategorySlug = async (slug) => {
+  if (slug === 'guides') {
+    return getAllGuides();
+  }
+
+  if (slug === 'changelog') {
+    return getAllChangelogs();
+  }
+
+  return getWpPostsByCategorySlug(slug);
+};
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
@@ -182,6 +210,57 @@ const getAllWpPosts = cache(async () => {
 
   return allPosts;
 });
+
+const getAllPosts = async () => {
+  const [wpPosts, guides, changelogs] = await Promise.all([
+    getAllWpPosts(),
+    getAllGuides(),
+    getAllChangelogs(),
+  ]);
+  const allPosts = [...wpPosts, ...guides, ...changelogs];
+
+  // Separate featured wp posts, guides and changelogs and all other
+  const categories = {
+    wpPosts: [],
+    guides: [],
+    changelogs: [],
+    others: [],
+  };
+
+  // Find 2 most recent featured posts for each category
+  allPosts.forEach((item) => {
+    const { pageBlogPost, category, isFeatured } = item;
+    const isWpPost = !!pageBlogPost;
+    const isGuide = category === 'guides';
+    const isChangelog = category === 'changelog';
+    const featured = isWpPost ? pageBlogPost.isFeatured : isFeatured;
+
+    if (featured) {
+      if (isWpPost && categories.wpPosts.length < 2) {
+        categories.wpPosts.push(item);
+      } else if (isGuide && categories.guides.length < 2) {
+        categories.guides.push(item);
+      } else if (isChangelog && categories.changelogs.length < 2) {
+        categories.changelogs.push(item);
+      } else {
+        categories.others.push(item);
+      }
+    } else {
+      categories.others.push(item);
+    }
+  });
+
+  // Sort the rest posts by date, newest first
+  categories.others.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Combine the results
+  return [
+    ...categories.wpPosts,
+    ...categories.guides,
+    ...categories.changelogs,
+    ...categories.others,
+  ];
+};
 
 const getWpPostBySlug = cache(async (slug) => {
   const postBySlugQuery = gql`
@@ -569,51 +648,17 @@ const getAllWpCaseStudiesCategories = cache(async () => {
   return [{ name: 'All', slug: 'all' }, ...updatedCategories];
 });
 
-const sortPosts = (posts) => {
-  // Separate featured wp posts, guides and changelogs and all other
-  const topWpPosts = [];
-  const topGuides = [];
-  const topChangelogs = [];
-  const otherPosts = [];
-
-  // Find 2 most recent featured posts for each category
-  posts.forEach((item) => {
-    const isWpPost = item.pageBlogPost;
-    const isGuide = item.type === 'guide';
-    const isChangelog = item.type === 'changelog';
-    const isFeatured = isWpPost ? item.pageBlogPost.isFeatured : item.isFeatured;
-
-    if (isFeatured) {
-      if (isWpPost && topWpPosts.length < 2) {
-        topWpPosts.push(item);
-      } else if (isGuide && topGuides.length < 2) {
-        topGuides.push(item);
-      } else if (isChangelog && topChangelogs.length < 2) {
-        topChangelogs.push(item);
-      } else {
-        otherPosts.push(item);
-      }
-    } else {
-      otherPosts.push(item);
-    }
-  });
-
-  // Sort the rest posts by date, newest first
-  otherPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  // Combine the results
-  return [...topWpPosts, ...topGuides, ...topChangelogs, ...otherPosts];
-};
-
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
+  getAllCategories,
   getAllWpCaseStudiesPosts,
   getAllWpCaseStudiesCategories,
   getAllWpPosts,
+  getAllPosts,
+  getCategoryBySlug,
   getWpPostBySlug,
-  getWpPostsByCategorySlug,
+  getPostsByCategorySlug,
   getWpPreviewPost,
   getWpPreviewPostData,
-  sortPosts,
 };
