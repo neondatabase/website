@@ -24,7 +24,6 @@ const BlogPageLayout = async ({ children }) => {
         </div>
         <SubscribeForm
           className="mt-[120px] xl:mt-[104px] lg:mt-[88px] md:mt-20"
-          size="md"
           dataTest="blog-subscribe-form"
         />
       </Container>

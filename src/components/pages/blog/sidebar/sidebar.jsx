@@ -32,7 +32,7 @@ const Sidebar = ({ categories }) => {
           </ul>
         </nav>
       </div>
-      <div className="sticky bottom-10 mt-auto shrink-0 leading-none lg:hidden">
+      <div className="sticky bottom-0 mt-auto shrink-0 bg-black-pure pb-10 pt-5 leading-none lg:hidden">
         <Socials />
       </div>
     </aside>

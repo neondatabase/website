@@ -39,7 +39,7 @@ const BlogPostCard = ({
   const link = (() => {
     if (category) {
       const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === category);
-      if (extraCategory) return `${extraCategory.postSlug}/${slug}`;
+      if (extraCategory) return `${extraCategory.slug}/${slug}`;
     }
 
     return `${LINKS.blog}/${slug}`;
@@ -130,8 +130,8 @@ const BlogPostCard = ({
           {/* title */}
           <h1
             className={clsx(
-              'font-title font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45',
-              fullSize ? 'line-clamp-2 text-2xl' : 'line-clamp-3 text-xl'
+              'font-title font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
+              fullSize ? 'line-clamp-2 text-2xl lg:text-xl' : 'line-clamp-3 text-xl'
             )}
           >
             {title}
@@ -140,7 +140,7 @@ const BlogPostCard = ({
           {fullSize && (
             <div
               className={clsx(
-                'mt-2 text-lg font-light tracking-extra-tight text-gray-new-94',
+                'mt-2 text-lg font-light tracking-extra-tight text-gray-new-94 lg:text-base md:text-[15px]',
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >

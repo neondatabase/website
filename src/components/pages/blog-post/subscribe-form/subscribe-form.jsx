@@ -30,7 +30,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
+const SubscribeForm = ({ className = null, size = 'md', dataTest }) => {
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
@@ -106,9 +106,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
     >
       <div
         className={clsx('overflow-hidden', {
-          'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
-            size === 'lg',
-          'mt:pt-7 -mx-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
+          'mt:pt-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
           'relative overflow-hidden rounded-md px-7 py-6': size === 'sm',
           'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-subscribe-sm after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
@@ -127,10 +125,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
         <div
           className={clsx(
             'mx-auto flex items-center justify-between',
-            size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col',
-            {
-              'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
-            }
+            size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col'
           )}
         >
           <div className="relative z-20 lg:text-center">
@@ -151,7 +146,6 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
           </div>
           <form
             className={clsx('relative w-full md:mt-7', {
-              'max-w-[518px] xl:max-w-[456px] lg:mt-5': size === 'lg',
               'max-w-[518px] 2xl:max-w-[400px] xl:max-w-[350px] lt:mt-0 lt:max-w-[416px] lg:mt-5 lg:max-w-[464px] sm:mt-6':
                 size === 'md',
               'max-w-[350px]': size === 'sm',
@@ -276,7 +270,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
 
 SubscribeForm.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['lg', 'md', 'sm']),
+  size: PropTypes.oneOf(['md', 'sm']),
   dataTest: PropTypes.string,
 };
 
