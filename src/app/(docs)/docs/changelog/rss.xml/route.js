@@ -22,7 +22,7 @@ export async function GET() {
     const { slug, label, date } = post;
     const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
 
-    const heading = content.match(/# (.*)/)?.[1];
+    const heading = data.title || content.match(/# (.*)/)?.[1];
 
     const description =
       data.description ||
