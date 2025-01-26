@@ -22,7 +22,7 @@ const CATEGORY_BG_COLORS = {
 };
 
 const EXTRA_CATEGORIES = [
-  { name: 'Guides', slug: 'guides', postSlug: 'guides' },
+  { name: 'Guides', slug: 'guides', postSlug: 'guidess' },
   { name: 'Changelog', slug: 'changelog', postSlug: 'docs/changelog' },
 ];
 
