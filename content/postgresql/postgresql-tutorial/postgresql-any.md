@@ -108,10 +108,7 @@ Output:
  10 | Kate       | Hill      | 44000.00
  11 | Liam       | Clark     | 59000.00
  12 | Mia        | Parker    | 42000.00
- 13 | John       | Doe       | 60000.00
- 14 | Jane       | Smith     | 55000.00
- 15 | Alice      | Johnson   | 58000.00
-(15 rows)
+(12 rows)
 ```
 
 Third, retrieve the data from the `managers` table:
