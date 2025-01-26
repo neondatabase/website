@@ -7,6 +7,9 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 <CTA title="Did you know?" description="Neon's database branching can help you integrate Postgres into your development workflow. Branch your data like code. <a href='/docs/get-started-with-neon/workflow-primer'>Read our primer</a> to learn&nbsp;how." isIntro></CTA>
 
+✨ Have you tried Neon AI chat? Find out [how to access it](/docs/introduction/support#neon-ai-chat-assistance).  
+
+
 ## Get started
 
 <DetailIconCards withNumbers>

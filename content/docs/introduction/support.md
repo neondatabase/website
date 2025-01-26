@@ -29,8 +29,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | Support channels                                                                          | Community | Standard | Priority | Enterprise |
 | :---------------------------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
 | [Neon Discord Server](#neon-discord-server) (not an official channel)                     |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon AI Chat](#neon-ai-chat) (not an official channel)                                   |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon GitHub Copilot Extension](#neon-github-copilot-extension) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel)             |  &check;  | &check;  | &check;  |  &check;   |
 | [Support tickets](#support-tickets)                                                       |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)                               |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                                                 |     -     |    -     |    \*    |     \*     |
@@ -48,38 +47,23 @@ All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNT
 The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon Support channel.
 </Admonition>
 
-### Neon AI Chat
+### Neon AI chat assistance
 
-Neon AI chat is available to all Neon users. You can access Neon AI chat from the following locations:
+Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- The **Search** bar at the top of the [Neon Console](https://console.neon.tech/app/projects)
-- The **Search** bar in the [Neon Documentation](/docs/introduction)
-- The **#gpt-help** channel on the [Neon Discord Server](https://discord.gg/92vNTzKDGp)
+- **Neon Console**: Use the **Search Docs** field above the sidebar in the [Neon console](https://console.neon.tech/app/projects)
+- **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
+- **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
+- **GitHub**: Install the [Neon Database Copilot extension](https://github.com/marketplace/neon-database)
+- **Visual Studio**: Use the [Neon chat for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N) extension
 
-![Ask Neon AI](/docs/introduction/ask_neon_ai.png)
+![Ask Neon AI](/docs/relnotes/perplexity_mode.png)
 
-Neon AI Chat sources include the Neon Discord Server, the Neon Documentation, the Neon Blog, the Neon API Reference, PostgreSQL documentation, and GitHub repositories for Neon, the Neon CLI, and the Neon Serverless driver. Neon AI chat sources are updated daily to ensure that responses reflect the latest information.
+Neon AI Chat assistants are updated regularly and built on various sources the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
 
 <Admonition type="important">
 Neon AI chat is not an official Neon Support channel.
 </Admonition>
-
-### Neon GitHub Copilot Extension
-
-The [Neon Database Copilot Extension](https://github.com/marketplace/neon-database) is available in the GitHub Marketplace. This extension lets you chat with the latest Neon documentation within the context of your repository.
-
-![GitHub Copilot Extension](/docs/relnotes/github_copilot_extension.png)
-
-Get answers to common questions like:
-
-- _How to create a project?_
-- _How can I get started with the Neon API?_
-- _How do I integrate the Neon API into my GitHub repository._
-
-**Setup instructions:**
-
-1. Install the extension
-2. Type `@neondatabase` in the chat to start interacting
 
 ### Support tickets
 
