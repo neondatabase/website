@@ -39,7 +39,7 @@ const BlogPostCard = ({
   const link = (() => {
     if (category) {
       const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === category);
-      if (extraCategory) return `${extraCategory.slug}/${slug}`;
+      if (extraCategory) return `/${extraCategory.postSlug}/${slug}`;
     }
 
     return `${LINKS.blog}/${slug}`;
