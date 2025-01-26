@@ -21,17 +21,18 @@ To connect using Neon's `psql` passwordless auth feature:
 
    ```bash
    NOTICE:  Welcome to Neon!
-   Authenticate by visiting:
-       https://console.neon.tech/psql_session/6d32af5ef8215b62
+   Authenticate by visiting (will expire in 2m):
+    https://console.neon.tech/psql_session/cd6aebdc9fda9928
    ```
 
-2. In your browser, navigate to the provided link. Log in to Neon if you are not already logged in. You are asked to select a Neon project to connect to. If your project has more than one compute, you are also asked to select one.
+2. In your browser, navigate to the provided link. Log in to Neon if you are not already logged in. You are asked to select a Neon account and project (if you have multiple). If your project has more than one compute, you are also asked to select one.
 
-   After making your selections, you are advised that you can return to your terminal or command window where information similar to the following is displayed:
+   After confirming your selections, you are advised that you can return to your terminal or command window where information similar to the following is displayed:
 
    ```bash
    NOTICE:  Connecting to database.
-   psql (15.0 (Ubuntu 15.0-1.pgdg22.04+1))
+   psql (17.2)
+   SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)
    Type "help" for help.
 
    casey=>
@@ -50,7 +51,7 @@ To connect using Neon's `psql` passwordless auth feature:
 
 ## Running queries
 
-After establishing a connection, try running the following queries:
+After establishing a connection, try running the following queries to validate your database connection:
 
 ```sql
 CREATE TABLE my_table AS SELECT now();
