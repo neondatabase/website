@@ -9,7 +9,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 ✨ Have you tried Neon AI chat? Find out [how to access it](/docs/introduction/support#neon-ai-chat-assistance).  
 
-
 ## Get started
 
 <DetailIconCards withNumbers>
