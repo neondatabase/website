@@ -49,7 +49,7 @@ Therefore, it’s recommended to use the indexes on expressions when prioritizin
 We’ll use the `customer` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
 ![customer table](/postgresqltutorial/customer-table.png)
-The `customer` table has a b\-tree index defined for the `first_name` column.
+The `customer` table has a b\-tree index defined for the `last_name` column.
 
 First, retrieve the customers with the last names are `Purdy`:
 
