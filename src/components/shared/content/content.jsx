@@ -44,7 +44,7 @@ import getGlossaryItem from 'utils/get-glossary-item';
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
-  acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
+  acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
   return acc;
 }, {});
 
