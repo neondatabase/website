@@ -26,14 +26,14 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                                          | Community | Standard | Priority | Enterprise |
-| :---------------------------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)                     |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel)             |  &check;  | &check;  | &check;  |  &check;   |
-| [Support tickets](#support-tickets)                                                       |     -     | &check;  | &check;  |  &check;   |
-| [Prioritized support tickets](#prioritized-support-tickets)                               |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                                                                 |     -     |    -     |    \*    |     \*     |
-| [SLAs](#slas)                                                                             |     -     |    -     | &check;  |  &check;   |
+| Support channels                                                              | Community | Standard | Priority | Enterprise |
+| :---------------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check;  | &check;  |  &check;   |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
+| [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
+| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
+| [Video chat](#video-chat)                                                     |     -     |    -     |    \*    |     \*     |
+| [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
