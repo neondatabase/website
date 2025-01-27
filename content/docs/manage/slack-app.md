@@ -40,20 +40,20 @@ Once authenticated, you're ready to use all available commands.
 
 ## Available commands
 
-| **Command**             | **Description**                                                       |
-| ----------------------- | --------------------------------------------------------------------- |
-| `/neon auth`            | Log in to your Neon account                                           |
-| `/neon projects`        | List all your accessible projects                                     |
-| `/neon usage`           | View your overall resource usage (compute, storage, transfer)         |
-| `/neon help`            | Show all available commands                                           |
-| `/neon status`          | Check Neon's system status                                            |
-| `/neon feedback`        | Share your thoughts to improve the Neon Slack App                     |
-| `/neon projects usage`  | View resource usage for a specific project                            |
-| `/neon projects shared` | See projects others have shared with you                              |
-| `/neon set org`         | Set which organization's data you want to view in subsequent commands |
-| `/neon find org`        | Display which organization is currently set as your active context    |
-| `/neon clear org`       | Reset your context back to your personal account view                 |
-| `/neon invite user`     | Invite a user to your organization.                                   |
+| **Command**             | **Description**                                   |
+| ----------------------- | ------------------------------------------------- |
+| `/neon auth`            | Log in to your Neon account                       |
+| `/neon projects`        | List your projects (with IDs)                     |
+| `/neon usage`           | View your overall resource usage                  |
+| `/neon help`            | Show all available commands                       |
+| `/neon status`          | Check Neon's system status                        |
+| `/neon feedback`        | Share your thoughts to improve the Neon Slack App |
+| `/neon projects usage`  | View resource usage for a specific project        |
+| `/neon projects shared` | See projects others have shared with you          |
+| `/neon org set`         | Set your active organization                      |
+| `/neon org`             | View your active organization                     |
+| `/neon org clear`       | Clear your active organization                    |
+| `/neon invite user`     | Invite a user to your organization                |
 
 ## Example workflows
 
@@ -72,13 +72,13 @@ Open a DM with the Neon Slack App and run the following command to instantly vie
 To take actions on behalf of a specific organization, set your context using the following command:
 
 ```bash
-/neon set org
+/neon org set
 ```
 
 When finished, you can return to your personal view by clearing your defaults:
 
 ```bash
-/neon clear org
+/neon org clear
 ```
 
 ### Usage notifications
