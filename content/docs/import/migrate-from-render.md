@@ -26,6 +26,8 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 - Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
+<Steps>
+
 ## Prepare your Render database
 
 This section describes how to prepare your Render database for exporting data.
@@ -160,6 +162,8 @@ After the restore process completes, you should verify that your data has been s
 ## Clean up
 
 After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Render database dump file (`render_dump.bak`) as a backup until you've verified that the migration was successful.
+
+</Steps>
 
 ## Other migration options
 

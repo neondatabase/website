@@ -24,6 +24,8 @@ Logical replication for Postgres transfers data from a source Postgres database 
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
+<Steps>
+
 ## Prepare your Azure PostgreSQL database
 
 This section describes how to prepare your Azure PostgreSQL database (the publisher) for replicating data to your destination Neon database (the subscriber).
@@ -255,6 +257,8 @@ After successfully migrating and verifying your data on Neon, you can:
    ```
 
 3. Consider backing up your Azure PostgreSQL database before decommissioning it.
+
+</Steps>
 
 ## Other migration options
 

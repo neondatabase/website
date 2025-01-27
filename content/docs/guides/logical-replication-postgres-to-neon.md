@@ -25,6 +25,8 @@ Neon's logical replication feature allows you to replicate data from a local Pos
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
+<Steps>
+
 ## Prepare your source Postgres database
 
 This section describes how to prepare your source Postgres database (the publisher) for replicating data to your destination Neon database (the subscriber).
@@ -178,4 +180,4 @@ After the replication operation is complete, you can switch your application ove
 
 You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-<NeedHelp/>
+</Steps>

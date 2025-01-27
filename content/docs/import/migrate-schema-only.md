@@ -11,6 +11,8 @@ This topic shows how to perform a schema-only migration using the `pg_dump` and 
 
 A schema-only migration may be necessary in certain scenarios. For example, when replicating data between two Postgres instances, the tables defined in your publication on the source database must also exist in the destination database, and they must have the same table names and columns. A schema dump and reload in this case may be faster than trying to manually create the required schema on the destination database.
 
+<Steps>
+
 ## Dump the schema
 
 To dump only the schema from a database, you can run a `pg_dump` command similar to the following to create an `.sql` dump file with the schema only:
@@ -73,3 +75,5 @@ After you've loaded the schema, you can view the result with this `psql` command
 ```sql
 \dt
 ```
+
+</Steps>

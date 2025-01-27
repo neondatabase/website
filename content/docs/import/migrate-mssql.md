@@ -26,6 +26,8 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - See [Pgloader configuration](#pgloader-configuration) for a `pgloader` configuration file update that may be required to connect to MSSQL from `pgloader`.
 
+<Steps>
+
 ## Prepare your MSSQL database
 
 ### Retrieve Your MSSQL database credentials
@@ -190,6 +192,8 @@ After successfully migrating and verifying your data on Neon:
 2. Update your application code to make SQL queries using the Postgres dialect.
 
 3. Update your application's connection strings to point to your new Neon database.
+
+</Steps>
 
 ## Other migration options
 

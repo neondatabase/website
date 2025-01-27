@@ -21,6 +21,8 @@ Complete the following steps before you begin:
 - Set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions.
 - If you are migrating from a database other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export the schema from the source database to the target database. Perform this step after creating the target endpoint for the Neon database but before the data migration. If migrating from a Postgres database, schema conversion is not required.
 
+<Steps>
+
 ## Create a target endpoint for your Neon database
 
 1. In the AWS Console, select **Database Migration Service**.
@@ -102,6 +104,8 @@ To verify that data was migrated to your Neon database:
 2. Select **Tables** from the side bar.
 3. Select the **Branch**, **Database**, and **Schema** where you imported the data.
    ![Neon Tables view showing imported data](/docs/import/dms_neon_table_data.png).
+
+</Steps>
 
 ## Migration notes
 
