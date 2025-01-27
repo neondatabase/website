@@ -29,10 +29,10 @@ const socialLinks = [
 
 const Socials = () => (
   <>
-    <span className="text-xs font-semibold uppercase -tracking-extra-tight text-gray-new-70">
+    <span className="text-[15px] font-medium -tracking-extra-tight text-gray-new-70">
       Follow us
     </span>
-    <ul className="mt-4 flex flex-wrap gap-4">
+    <ul className="mt-3 flex flex-wrap gap-4">
       {socialLinks.map(({ name, url, icon: Icon }, index) => (
         <li className="flex items-center" key={index}>
           <a
