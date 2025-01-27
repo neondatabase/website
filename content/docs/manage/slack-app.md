@@ -22,13 +22,13 @@ style={{ width: "75%", display: "block", margin: "40px auto" }}
 Click the **Add to Slack** button and follow the prompts.
 <a target="_blank" href="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
 
-OR
+<!-- OR
 
 Open Slack and navigate from there: you can find the **Apps** section at the bottom of the sidebar. Click **Add apps**, search for **Neon**, and follow the prompts to install.
 
 <Admonition type="tip">
 If your Slack workspace is company-managed and doesn't allow third-party apps, you may need to request admin approval to install the Neon Slack App. Slack will notify you if admin approval is required.
-</Admonition>
+</Admonition> -->
 
 ## Authenticate with Neon
 
